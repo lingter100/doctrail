@@ -10,6 +10,31 @@ concurrency:
   group: checks-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  java-service:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: server/pom.xml
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
+        with:
+          version: '0.11.32'
+          enable-cache: true
+      - run: npm ci && npm run build
+        working-directory: web
+      - run: ./server/mvnw -B -q -f server/pom.xml verify
+      - run: uv sync --frozen --python 3.11
+      - name: Verify actual Java HTTP and copied Python database compatibility
+        run: uv run python -m scripts.verify_java_service --output .local/java-ci.json
   backend:
     runs-on: ubuntu-latest
     steps:
