@@ -137,3 +137,9 @@ uv run --group retrieval python -m scripts.verify_java_service --full-corpus --o
 ```
 
 PDFBox와 pypdf의 일반적인 PDF 텍스트 출력은 동일하다고 주장하지 않는다. 저장된 예전 청크를 시작 시 자동 재처리하지 않는다. JAR의 UI 제공은 HTTP로 확인했지만 이번 전환에서 새 브라우저 시연이나 사용자 검수는 기록하지 않았다. 공개 서비스 배포·새 모델 추론·학습·생성 답변은 별도 후속 작업이다. 다음 자동 실행은 [M3 실패 분석](M3-ANALYSIS.md)에 따른 후보 진단과 Java 서비스의 모델 연결을 이어간다.
+
+## Java 전환의 원격 검사
+
+[PR #4](https://github.com/lingter100/doctrail/pull/4)의 코드·결과·문서 커밋 `09a25e9`에서 `java-service`·`backend`·`web` 모두 [원격 CI 통과](https://github.com/lingter100/doctrail/actions/runs/38206010313)를 확인했다. Linux/Temurin Java 21에서 Java 테스트·JAR 패키징과 실제 HTTP 11개 검증 묶음이 성공했다. 기존 Python 검사는 127 passed/2 skipped이며 공개 313문서 재현과 질문 검증도 통과했다. Java 전체 79질문 순위 대조는 위 로컬 보고서의 결과로 구분한다.
+
+`main` 보호 규칙에 `java-service` 검사를 추가했고 기존 `backend`·`web`, strict, Actions 앱 ID 제한을 유지했다. 마지막 상태 기록 커밋도 필수 검사를 통과한 뒤 사용자 작성자·커미터를 유지하는 fast-forward로 통합한다. 최종 SHA의 통합·검사 상태는 PR에서 확인한다.
