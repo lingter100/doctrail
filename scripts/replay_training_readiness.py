@@ -66,6 +66,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--download-tokenizer-only", action="store_true")
     parser.add_argument("--e5-snapshot", type=Path, default=ROOT / "models/e5")
+    parser.add_argument("--version", choices=("v1", "all"), default="v1")
     args = parser.parse_args()
     snapshot = args.e5_snapshot.resolve()
     if args.download_tokenizer_only:
@@ -80,6 +81,22 @@ def main() -> None:
     print(json.dumps({"saved_v1_readiness_replayed": True, "data_ready": manifest["data_ready"],
                       "actual_tokenization_rerun": False, "model_weights_loaded": False,
                       "training_executed": False}))
+    if args.version == "all":
+        from scripts import prepare_training_ready_v2 as v2
+
+        options.v1_manifest = options.output
+        options.v1_token_receipt = options.token_receipt
+        options.readiness_plan = ROOT / "data/training/m4-readiness-plan-v2.json"
+        options.token_receipt = ROOT / "data/training/m4-tokenizer-receipt-v2.json"
+        options.output = ROOT / "data/training/m4-training-manifest-v2.json"
+        context = v2.load_context(options)
+        path = ROOT / context["v2_plan"]["supplemental_negative_review"]["pack_path"]
+        pilot.write_or_verify(path, pilot.json_bytes(context["supplement_pack"]), verify=path.exists())
+        manifest, _ = v2.replay_manifest(options, context)
+        pilot.write_or_verify(options.output, pilot.json_bytes(manifest), verify=True)
+        print(json.dumps({"saved_v2_readiness_replayed": True, "data_ready": manifest["data_ready"],
+                          "actual_tokenization_rerun": False, "model_weights_loaded": False,
+                          "training_executed": False}))
 
 
 if __name__ == "__main__":
