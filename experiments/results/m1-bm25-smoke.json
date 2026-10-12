@@ -1,0 +1,383 @@
+{
+  "status": "measured_smoke_only",
+  "created_at": "2026-10-12T02:22:27.262234+00:00",
+  "purpose": "Integration/small-corpus failure discovery. Not held-out retrieval quality, QA accuracy or production performance.",
+  "git_commit": "aa5701e7d4b05f2c0b5f2cb09b9e05e1f75063e0",
+  "git_dirty": true,
+  "source_sha256": {
+    "src/doctrail/__init__.py": "5a97f0d9f1932ccb8226c49ad4b84ea55503300b360c040fbd60d381877370cc",
+    "src/doctrail/app.py": "5b3d51daa91460fc94d1463e224e45a9f02826e7506223257687d39d0ebaf3d6",
+    "src/doctrail/db.py": "34cd843011b93219d0a7c46727082cf81254eba6a4d8428d334ba6b918532961",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "scripts/evaluate_pilot.py": "a5e95bbbc36e74b55d54d6edc3cfbf79e8f801835a832511688bb63b4567d084",
+    "scripts/prepare_pilot.py": "617160de7c00811f42e4e648eeb94cd82c1b8b046f3f5623f328c58c95e34ed0",
+    "scripts/validate_splits.py": "459109379543ebb5c161b061a98edeb366daf5051a1a255afc19db67f4f25ef4",
+    "uv.lock": "ccd499ff4f128122998d4a52c1d797802ca2e4b723603e7e26e83a2102d47770",
+    "data/manifests/kubernetes-pilot.json": "7abf21157e7f8cb976934d278c3dac1d4c7f6dac3bc3891ceaf05dbd38a72d03",
+    "data/evaluation/pilot-smoke.jsonl": "b5444c284a6d8bd02c9bf70e29a86e212f31325869223e95837acc17ec3232af"
+  },
+  "python": "3.11.15",
+  "platform": "Windows",
+  "dataset": {
+    "documents": 8,
+    "questions": 12,
+    "human_reviewed_questions": 0,
+    "split": "smoke",
+    "split_check": {
+      "documents": 8,
+      "questions": 12,
+      "checks": "passed",
+      "limitations": "Near-duplicate/topic/version group assignment must be prepared upstream."
+    }
+  },
+  "config": {
+    "method": "bm25",
+    "k1": 1.5,
+    "b": 0.75,
+    "chunk_characters": 1000,
+    "overlap_characters": 150,
+    "ranking_unit": "chunk",
+    "retrieved_chunks": 10,
+    "tokenizer": "ascii-word-korean-bigram-v1",
+    "normalizer": "hugo-light-v2"
+  },
+  "metrics": {
+    "document_hit_at_5": 1.0,
+    "document_mrr_at_10": 1.0,
+    "annotated_evidence_hit_at_5": 1.0,
+    "no_evidence_empty_result_rate": 0.0,
+    "source_offsets_match": true,
+    "server_latency_p50_ms": 21.1,
+    "server_latency_p95_ms": 25.98
+  },
+  "cost": {
+    "external_api_requests": 0,
+    "external_api_cost_usd": 0,
+    "local_electricity_and_hardware_cost": "not_measured"
+  },
+  "limitations": [
+    "10 answerable and 2 AI-authored no-evidence questions; all lack human review.",
+    "Bilingual translations are near duplicates. No training/dev/test comparison.",
+    "Document hit does not prove the answer-bearing span was found.",
+    "Partial BM25 match on absent-answer questions is not abstention or answerability.",
+    "Latency is serial in-process TestClient, no internet/TLS/load/GPU measurement.",
+    "Unresolved Hugo content includes need review before dataset expansion."
+  ],
+  "questions": [
+    {
+      "id": "smoke-01",
+      "category": "single_document",
+      "query": "What is the maximum size of data stored in a ConfigMap?",
+      "relevant_document_ids": [
+        "k8s-configmap-en",
+        "k8s-configmap-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-configmap-en",
+        "k8s-secrets-en",
+        "k8s-configmap-en",
+        "k8s-configmap-en",
+        "k8s-configmap-en",
+        "k8s-configmap-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-configmap-en"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 22.07,
+      "in_process_roundtrip_ms": 33.844
+    },
+    {
+      "id": "smoke-02",
+      "category": "single_document",
+      "query": "컨피그맵에 저장할 수 있는 데이터 크기 제한은?",
+      "relevant_document_ids": [
+        "k8s-configmap-en",
+        "k8s-configmap-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-configmap-ko",
+        "k8s-configmap-ko",
+        "k8s-configmap-ko",
+        "k8s-configmap-ko",
+        "k8s-configmap-ko",
+        "k8s-configmap-ko",
+        "k8s-configmap-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 21.47,
+      "in_process_roundtrip_ms": 30.844
+    },
+    {
+      "id": "smoke-03",
+      "category": "single_document",
+      "query": "What is the smallest deployable computing unit in Kubernetes?",
+      "relevant_document_ids": [
+        "k8s-pods-en",
+        "k8s-pods-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-pods-en",
+        "k8s-pods-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-configmap-en",
+        "k8s-pods-en",
+        "k8s-pods-en",
+        "k8s-pods-en",
+        "k8s-secrets-en",
+        "k8s-pods-en"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 20.27,
+      "in_process_roundtrip_ms": 29.315
+    },
+    {
+      "id": "smoke-04",
+      "category": "single_document",
+      "query": "쿠버네티스에서 생성하고 관리하는 가장 작은 배포 단위는?",
+      "relevant_document_ids": [
+        "k8s-pods-en",
+        "k8s-pods-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-pods-ko",
+        "k8s-pods-ko",
+        "k8s-pods-ko",
+        "k8s-pods-ko",
+        "k8s-namespaces-ko",
+        "k8s-namespaces-ko",
+        "k8s-namespaces-ko",
+        "k8s-secrets-ko",
+        "k8s-pods-ko",
+        "k8s-pods-ko"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 22.18,
+      "in_process_roundtrip_ms": 30.942
+    },
+    {
+      "id": "smoke-05",
+      "category": "single_document",
+      "query": "Do resource names need to be unique across namespaces?",
+      "relevant_document_ids": [
+        "k8s-namespaces-en",
+        "k8s-namespaces-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-namespaces-en",
+        "k8s-namespaces-en",
+        "k8s-namespaces-en",
+        "k8s-namespaces-en",
+        "k8s-configmap-en",
+        "k8s-pods-en",
+        "k8s-configmap-en",
+        "k8s-configmap-en",
+        "k8s-secrets-en",
+        "k8s-namespaces-en"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 21.1,
+      "in_process_roundtrip_ms": 30.353
+    },
+    {
+      "id": "smoke-06",
+      "category": "single_document",
+      "query": "리소스 이름은 다른 네임스페이스 사이에서도 유일해야 하나?",
+      "relevant_document_ids": [
+        "k8s-namespaces-en",
+        "k8s-namespaces-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-namespaces-ko",
+        "k8s-namespaces-ko",
+        "k8s-namespaces-ko",
+        "k8s-namespaces-ko",
+        "k8s-namespaces-ko",
+        "k8s-configmap-ko",
+        "k8s-pods-ko",
+        "k8s-pods-ko",
+        "k8s-secrets-ko",
+        "k8s-configmap-ko"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 22.06,
+      "in_process_roundtrip_ms": 31.435
+    },
+    {
+      "id": "smoke-07",
+      "category": "single_document",
+      "query": "Are Kubernetes Secrets encrypted by default in etcd?",
+      "relevant_document_ids": [
+        "k8s-secrets-en",
+        "k8s-secrets-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-configmap-en",
+        "k8s-secrets-en"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 20.56,
+      "in_process_roundtrip_ms": 29.892
+    },
+    {
+      "id": "smoke-08",
+      "category": "single_document",
+      "query": "쿠버네티스 시크릿은 etcd에 기본적으로 암호화되어 저장되는가?",
+      "relevant_document_ids": [
+        "k8s-secrets-en",
+        "k8s-secrets-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-pods-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 20.64,
+      "in_process_roundtrip_ms": 29.278
+    },
+    {
+      "id": "smoke-09",
+      "category": "single_document",
+      "query": "Does ConfigMap provide secrecy or encryption?",
+      "relevant_document_ids": [
+        "k8s-configmap-en",
+        "k8s-configmap-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-configmap-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-namespaces-en",
+        "k8s-secrets-en",
+        "k8s-configmap-en"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 20.53,
+      "in_process_roundtrip_ms": 31.09
+    },
+    {
+      "id": "smoke-10",
+      "category": "single_document",
+      "query": "시크릿의 auth 값을 base64로 인코딩하면 암호화가 되는가?",
+      "relevant_document_ids": [
+        "k8s-secrets-en",
+        "k8s-secrets-ko"
+      ],
+      "ranked_document_ids": [
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko",
+        "k8s-secrets-ko"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_hit_at_5": true,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 21.1,
+      "in_process_roundtrip_ms": 30.67
+    },
+    {
+      "id": "smoke-11",
+      "category": "no_evidence",
+      "query": "What is our company parental leave policy?",
+      "relevant_document_ids": [],
+      "ranked_document_ids": [
+        "k8s-pods-en",
+        "k8s-secrets-en",
+        "k8s-pods-en",
+        "k8s-secrets-en",
+        "k8s-secrets-en",
+        "k8s-namespaces-en",
+        "k8s-configmap-en",
+        "k8s-pods-en",
+        "k8s-secrets-en",
+        "k8s-pods-en"
+      ],
+      "first_relevant_rank": null,
+      "evidence_hit_at_5": false,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 25.98,
+      "in_process_roundtrip_ms": 36.325
+    },
+    {
+      "id": "smoke-12",
+      "category": "no_evidence",
+      "query": "우리 회사의 점심 식대 지원 한도는 얼마인가?",
+      "relevant_document_ids": [],
+      "ranked_document_ids": [
+        "k8s-pods-ko",
+        "k8s-secrets-ko",
+        "k8s-pods-ko",
+        "k8s-pods-ko",
+        "k8s-pods-ko",
+        "k8s-pods-ko"
+      ],
+      "first_relevant_rank": null,
+      "evidence_hit_at_5": false,
+      "source_offsets_match": true,
+      "empty_result": false,
+      "server_elapsed_ms": 22.2,
+      "in_process_roundtrip_ms": 32.576
+    }
+  ]
+}
