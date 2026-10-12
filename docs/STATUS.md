@@ -2,7 +2,7 @@
 
 기준일: 2026-10-12 (Asia/Seoul).
 
-현재 단계: **사용자 승인에 따라 화면을 React + TypeScript + Vite로 전환하고 실제 Java 서비스와 브라우저 흐름을 검증했다. 백엔드는 Java 21 + Spring Boot, Python은 데이터·학습·오프라인 평가와 이전 서비스 참조용으로 보존한다.** M3 첫 비교·후속 후보 실험은 완료했지만 새 모델의 서비스 연동은 아직이다. 전체 프로젝트 완료나 검색 품질 달성을 의미하지 않는다. 사용자 질문 검수는 0개이며 학습·생성 답변은 아직 없다. 원격 CI 상태는 각 단계의 실행 기록을 따른다.
+현재 단계: **Java 21 + Spring Boot와 React + TypeScript + Vite 서비스에 선택적 E5·혼합·BGE 검색을 연결하고 실제 로컬 CUDA·HTTP·브라우저 흐름을 검증했다.** Python은 모델 추론·데이터·학습·오프라인 평가에 사용하며 이전 서비스와 동결 실험을 보존한다. 다음은 train 계열의 데이터 품질·후보 누락 분석과 도메인 미세조정 설계다. 전체 프로젝트 완료나 검색 품질 달성을 의미하지 않는다. 사용자 질문 검수는0이며 학습·생성 답변은 아직 없다. 원격 CI 상태는 각 단계의 실행 기록을 따른다.
 
 선행 확인: 빈 작업 폴더, 별도 상위 프로젝트 지침 없음, GitHub 사용자 인증 확인, Python 3.11·Node·uv 사용 가능, RAM 약 32GB·RTX 4050 6GB 확인. Docker 명령은 설치되어 있으나 엔진은 실행 중이지 않음. 첫 단계는 Docker 없이 실행한다.
 
@@ -219,3 +219,9 @@ uv run --locked --group retrieval --no-sync python -m scripts.verify_model_servi
 ```
 
 **다음 작업:** train 계열에서 후보 누락과 청크 경계 문제를 분리하고, train 전용 학습쌍·hard negative 품질을 검증한 뒤 임베딩/리랭커 학습 대상을 근거로 확정한다. 최종 test를 열거나 dev에서 계속 후보 정책을 바꾸지 않는다. 사용자 검수0·학습0·생성 답변0·공개 서비스 배포0이다. 모델 검색은 현재4,096청크 상한과 직렬 추론이므로 대규모 운영 검증이 남아 있다. 외관·사용성도 최종 기준에 포함하지만 로드맵 순서를 바꾸지 않는다.
+
+## M3 모델 연결 · 원격 검사
+
+구현 커밋 `1a7babb`의 [PR #7](https://github.com/lingter100/doctrail/pull/7)에서 `java-service`·`backend`·`web` 모두 성공했다. [실제 head push 검사](https://github.com/lingter100/doctrail/actions/runs/38213876293)와 [PR 검사](https://github.com/lingter100/doctrail/actions/runs/38213907700)를 확인했다. Ubuntu/Temurin Java21의 실제 HTTP11묶음과 Chromium18개, Python216passed/4skipped, 코퍼스·질문 재현과 모델 없는 후보 결과 재생이 통과했다. 원격은 GPU 모델을 실행하지 않았으며 로컬220개 검사·실제 CUDA 추론과 구분한다.
+
+GitHub API에서 구현 커밋의 작성자와 커미터가 모두 `lingter100`임을 확인했다. 이 진행 기록도 별도 Conventional Commit으로 필수 CI를 통과한 뒤 사용자 계정을 유지하는 fast-forward로 main에 통합한다. 최종 통합 SHA·상태는 PR에서 확인한다. 다음 실행은 완료한 모델 연결을 반복하지 않고 train180문서·128계열의 검토와 학습 설계를 시작한다.

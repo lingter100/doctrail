@@ -2,7 +2,7 @@
 
 ## Scope and truthfulness
 - Build for a solo junior AI Engineer portfolio: data quality, retrieval experiments and operational correctness take priority over feature count.
-- Current milestone: Java 21 / Spring Boot migration and React + TypeScript + Vite migration are verified; continue optional retrieval model integration with ACL and revision/delete correctness before training and grounded QA. Preserve the document/search/evidence/session workflows. Keep Python for data preparation, training and offline evaluation, and retain the previous service as a reference. Preserve frozen M2/M3 inputs and results; never reinterpret Python experiment measurements as Java service performance.
+- Current milestone: Java 21 / Spring Boot, React + TypeScript + Vite and optional E5/BGE model integration are locally verified; check STATUS and PR CI before integration. Next, analyze train-only data and candidate recall failures to choose justified domain fine-tuning before grounded QA. Preserve ACL, revision/delete, document/search/evidence/session workflows. Keep Python for model inference, data preparation, training and offline evaluation, and retain the previous service as a reference. Preserve frozen M2/M3 inputs and results; never reinterpret Python experiment measurements as Java service performance.
 - Preserve provenance. Mark synthetic examples, AI-authored questions, automated checks and user review separately.
 - Paid APIs/GPU/cloud and public service deployment require the user's approval. Public GitHub source repository creation and push to the authenticated user's account are explicitly authorized.
 - Do not commit secrets, local databases, uploaded documents, model weights, cached corpora or personal environment paths.

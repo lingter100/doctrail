@@ -154,4 +154,10 @@ E5 문서38/3,588(1.06%), BGE query-passage803/3,950(20.33%)가512토큰 한도�
 
 진단 보고서 SHA-256은 `4dd0fb39e98034695dac98f4c43fd7cff1dfa0b39d9a0b3807d9e7d81a39bc0f`, BGE 비교 보고서는 `beb3a7b68d0a9fae4dfbb2a68b3f2057756af431787f1767982a9f1e44dd9cc5`다. 각각 완료 journal과 일치하며 보고한 소스·설계·입력 해시는 실행 커밋의 Git blob과 대조했다. 결과 생성 중 `git_dirty=true`를 그대로 기록했다. 재현 명령은 [runbook](../docs/M3-RUNBOOK.md)의 후속 비교 절을 따른다.
 
+## Java 모델 서비스 연결 · 별도 운영 검증
+
+[실제 로컬 실행](results/m3-model-service-v1.json)은 선택적 E5/BGE worker와 Java·React를 연결한12개 합성 운영 검사 묶음이다. 사용자 권한·정확한 원문·수정·재처리·삭제·cache·모델 장애·이력·피드백을 검사했다. 실제 CUDA E5 FP32/BGE FP16과 브라우저6개 흐름이 포함된다. 사용자 검수와 의미 품질 평가는 수행하지 않았다.
+
+합성2문서의 방식별2회 HTTP 시간만 기록했으며 공유 cache·모델 상주 상태이고 별도 BM25 브라우저 프로세스가 함께 실행됐다. 이 수치는 위 동결 dev 결과를 대체하거나 서비스 부하/SLO를 증명하지 않는다. source/JAR 해시·작업 트리 미커밋 상태·실행 UTC를 보존했다. Windows 원본 JSON의 줄 끝만 Git의 LF로 정규화했으며 값은 변경하지 않았다. 저장소 보고서 SHA-256은 `85581ee3c4ba164172a6de55673b63e9a5848bf5253d564af631522635825fcf`이고 원본/정규화 hash는 [검증 기록](../docs/verification/model-service.json)에 있다. [실행·복구와 한계](../docs/MODEL-SERVING.md)를 참고한다.
+
 로컬 Python177·Java20·프런트엔드 타입/build 통과. 구현 커밋의 [원격 CI](https://github.com/lingter100/doctrail/actions/runs/38207832080)는 Java 실제 HTTP 검증, Python173passed/4skipped, 코퍼스·질문 재현, 모델 없는 후보 분석과 원래 결과 재생을 통과했다. 원격CI가 CUDA 실험을 재현한 것은 아니다. GPU·API 임대는 없고 로컬 장비/전력·개발 보조 비용은 미측정이다.
