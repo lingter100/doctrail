@@ -1,0 +1,36 @@
+{
+  "questions": 239,
+  "documents": 313,
+  "checks": "passed",
+  "validation_scope": "verified_source_spans",
+  "splits": {
+    "dev": 79,
+    "test": 160
+  },
+  "categories": {
+    "ambiguous": 24,
+    "multi_document": 23,
+    "no_evidence": 36,
+    "single_document": 156
+  },
+  "languages": {
+    "en": 80,
+    "ko": 159
+  },
+  "ai_authored": 239,
+  "human_reviewed": 0,
+  "limitations": [
+    "Exact offsets do not establish semantic correctness or complete relevance labels.",
+    "Negative/ambiguous labels require human assessment of the entire indexed scope.",
+    "AI question authoring is not reproducible inference; committed labels and prompt hashes are replayable."
+  ],
+  "checked_at": "2026-10-12T03:29:10.030154+00:00",
+  "manifest_sha256": "e4d33997b5589bd8d9cc5c56691da5940eba3a7b6554c671b8c39b78910fe69a",
+  "question_files": {
+    "m2-dev-v1.1.jsonl": "9cce5a304f3f430c626aae2c1c0f267e0f3abc2dba16ccd7f9ec2f3989d28cb2",
+    "m2-test-a.jsonl": "dd894ff7e3f6d8dba574235fb51d17959ba0c8eac24e23b5d21622577367b5ab",
+    "m2-test-b.jsonl": "b146119da888082742a6daec3b32bcc08e4cea07f27697e3f918ecb5101608a8"
+  },
+  "validator_sha256": "37806c6c0a33cbfd057a5ead3209e331ee5d8478703e5d4d456d5722f92f855b",
+  "split_validator_sha256": "81fa8bfb482c6a149a7e6445e81319d7069b270b745ed4c7b0a35c7f2233a3ce"
+}

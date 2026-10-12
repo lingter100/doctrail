@@ -1,0 +1,684 @@
+{
+  "status": "derived_development_diagnostics_not_semantic_ground_truth",
+  "questions": 79,
+  "counts": {
+    "all_annotated_required_groups_found": 30,
+    "required_span_missing_from_top5_despite_document_candidates": 2,
+    "required_group_document_absent_from_top10_chunks": 24,
+    "required_span_unrepresentable_in_current_chunks": 3,
+    "non_answerable_result_is_not_abstention": 20
+  },
+  "cross_language_only_counts": {
+    "required_group_document_absent_from_top10_chunks": 20,
+    "required_span_unrepresentable_in_current_chunks": 2,
+    "all_annotated_required_groups_found": 1
+  },
+  "details": [
+    {
+      "id": "m2-dev-001",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-002",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-003",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "required_span_missing_from_top5_despite_document_candidates",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-004",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-005",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-006",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-007",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-008",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-009",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-010",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-011",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_span_unrepresentable_in_current_chunks",
+      "unrepresentable_groups": [
+        "fact"
+      ],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-012",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-013",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-014",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-015",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-016",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-017",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "saved",
+        "retry"
+      ]
+    },
+    {
+      "id": "m2-dev-018",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-019",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-020",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-021",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-022",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-023",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-024",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-025",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-026",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-027",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-028",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-029",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-030",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_span_unrepresentable_in_current_chunks",
+      "unrepresentable_groups": [
+        "fact"
+      ],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-031",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-032",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "required_span_unrepresentable_in_current_chunks",
+      "unrepresentable_groups": [
+        "fact"
+      ],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-033",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-034",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-035",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-036",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-037",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-038",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-039",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-040",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "required_span_missing_from_top5_despite_document_candidates",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-041",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-042",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-043",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-044",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-045",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-046",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-047",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-048",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-049",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-050",
+      "category": "single_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "fact"
+      ]
+    },
+    {
+      "id": "m2-dev-051",
+      "category": "single_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-052",
+      "category": "single_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-053",
+      "category": "multi_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "hook-order"
+      ]
+    },
+    {
+      "id": "m2-dev-054",
+      "category": "multi_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "creation",
+        "protection"
+      ]
+    },
+    {
+      "id": "m2-dev-056",
+      "category": "multi_document",
+      "cross_language": "mixed_language_required_or_alternative",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "metrics-rule",
+        "check-command"
+      ]
+    },
+    {
+      "id": "m2-dev-057",
+      "category": "multi_document",
+      "cross_language": "cross_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "static-owner",
+        "force-completion"
+      ]
+    },
+    {
+      "id": "m2-dev-058",
+      "category": "multi_document",
+      "cross_language": "same_language_only",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "apply"
+      ]
+    },
+    {
+      "id": "m2-dev-059",
+      "category": "multi_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "required_group_document_absent_from_top10_chunks",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": [
+        "ceiling"
+      ]
+    },
+    {
+      "id": "m2-dev-060",
+      "category": "multi_document",
+      "cross_language": "same_language_sufficient_with_cross_language_alternatives",
+      "diagnosis": "all_annotated_required_groups_found",
+      "unrepresentable_groups": [],
+      "groups_without_annotated_document_in_top10": []
+    },
+    {
+      "id": "m2-dev-061",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-062",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-063",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-064",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-065",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-066",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-067",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-068",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-069",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-070",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-071",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-072",
+      "category": "no_evidence",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-073",
+      "category": "ambiguous",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-074",
+      "category": "ambiguous",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-075",
+      "category": "ambiguous",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-076",
+      "category": "ambiguous",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-077",
+      "category": "ambiguous",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-078",
+      "category": "ambiguous",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-079",
+      "category": "ambiguous",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    },
+    {
+      "id": "m2-dev-080",
+      "category": "ambiguous",
+      "diagnosis": "non_answerable_result_is_not_abstention",
+      "empty_result": false
+    }
+  ],
+  "limitations": [
+    "Diagnoses use incomplete AI annotations; unannotated results may be sufficient.",
+    "Priority buckets identify observable missing coverage, not experimentally proven causal explanations.",
+    "Unrepresentable span means no existing chunk contains a whole alternative span for a required fact group.",
+    "No retrieval is rerun and no test result is inspected. Source labels remain unchanged."
+  ],
+  "input_sha256": {
+    "manifest": "e4d33997b5589bd8d9cc5c56691da5940eba3a7b6554c671b8c39b78910fe69a",
+    "questions": "9cce5a304f3f430c626aae2c1c0f267e0f3abc2dba16ccd7f9ec2f3989d28cb2",
+    "report": "007f14e50bfd9ebdd0f0d155496c7cd965d00745b420ff1c708e86992ae55c9c",
+    "analysis_script": "464e16b4a9d5e9acf075a71017d9916c2d209d7d8f3201dc2828f457a9d693fd"
+  }
+}
