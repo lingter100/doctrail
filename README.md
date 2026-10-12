@@ -48,6 +48,7 @@ npm run build
 - [Git 협업 규칙](CONTRIBUTING.md), [AI와 사용자 기여 기록](docs/CONTRIBUTIONS.md)
 - [실험 실행·실패 분석](experiments/README.md), [운영·복구](docs/OPERATIONS.md), [시연·면접 준비](docs/DEMO.md)
 - [M2 평가 계약](docs/M2-EVALUATION.md), [직접 검수와 면접 설명](docs/M2-LEARNING.md)
+- [M3 비교 설계](docs/M3-DESIGN.md), [자동 후속 실행과 승인 경계](docs/AUTONOMY.md)
 
 ## 라이선스와 사실 구분
 

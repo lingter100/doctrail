@@ -2,7 +2,7 @@
 
 ## Scope and truthfulness
 - Build for a solo junior AI Engineer portfolio: data quality, retrieval experiments and operational correctness take priority over feature count.
-- Current milestone: reproducible public corpus, isolated data splits, reviewable AI-authored questions and measured BM25 development baseline. Keep the verified upload/search/evidence service working. Do not claim embeddings, generated answers, training, human review or production deployment until measured.
+- Current milestone: M3 frozen-data comparison of multilingual embeddings, reciprocal-rank fusion and reranking, followed by permission-aware service integration. Keep M2 inputs/reports and the verified upload/search/evidence service intact. Do not claim model improvements, service integration, generated answers, training, human review or production deployment until measured.
 - Preserve provenance. Mark synthetic examples, AI-authored questions, automated checks and user review separately.
 - Paid APIs/GPU/cloud and public service deployment require the user's approval. Public GitHub source repository creation and push to the authenticated user's account are explicitly authorized.
 - Do not commit secrets, local databases, uploaded documents, model weights, cached corpora or personal environment paths.
@@ -12,8 +12,10 @@
 - Use main for verified integration; short feature branches feat/<topic>, fix/<topic>, docs/<topic>; open PRs with purpose, checks and limitations. No permanent develop branch for this solo project.
 - Use the repository-local verified user identity for author and committer. Never invent a human review or remove AI contribution disclosures.
 - Each milestone updates docs/STATUS.md, docs/DECISIONS.md and docs/CONTRIBUTIONS.md with verified results, commands, limitations and next steps.
+- The user authorizes autonomous continuation through the existing roadmap without repeated proceed questions. A thread heartbeat resumes work hourly. Follow docs/AUTONOMY.md, preserve user review and paid/public-deployment approval boundaries, and do not duplicate running jobs.
 - Keep changes narrowly staged. Never modify a sibling agent's owned files without coordinating.
 - Use uv with Python 3.11, locked dependencies, TypeScript frontend; run relevant tests and a production frontend build before integration.
+- Local model commands use `uv run --group retrieval ...`; normal CI and BM25 do not require the heavy retrieval group. Do not run dependency synchronization concurrently with active model inference.
 
 ## Models and delegation
 - User authorizes subagents. Design/data/evaluation/major architecture: gpt-6-astra xhigh. Implementation/tests/fixes: gpt-6-astra high. Repetitive cost-conscious implementation: gpt-6.1-sol high. Complex unresolved comparison only: gpt-6-astra max.
