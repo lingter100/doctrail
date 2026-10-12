@@ -1,0 +1,93 @@
+{
+  "ai_authored_questions": 78,
+  "author_pack_sha256": [
+    "92a710c9c60957478fd6195394799214421922750a1c0f6aae79582e015e43bc",
+    "99ca0ae454d680364fdcac0fe5addf7300c6a1cf07f318007c249f4ee180be53"
+  ],
+  "confirmed_negative_labels": 0,
+  "counts": {
+    "calibration": {
+      "cross_language": 9,
+      "families": 4,
+      "languages": {
+        "en": 5,
+        "ko": 9
+      },
+      "positive_pairs": 15,
+      "quarantined_questions": 0,
+      "query_types": {
+        "cross_lingual": 9,
+        "exact_term": 2,
+        "semantic": 3
+      },
+      "questions": 14,
+      "unique_intents": 14
+    },
+    "fit": {
+      "cross_language": 42,
+      "families": 16,
+      "languages": {
+        "en": 14,
+        "ko": 50
+      },
+      "positive_pairs": 65,
+      "quarantined_questions": 0,
+      "query_types": {
+        "cross_lingual": 42,
+        "exact_term": 6,
+        "semantic": 16
+      },
+      "questions": 64,
+      "unique_intents": 64
+    }
+  },
+  "draft_sha256": {
+    "m4-calibration.draft.jsonl": "59511a2cf38db381307939e88a4a04603442a52f33bb74b0dbf65696e387341f",
+    "m4-fit.draft.jsonl": "5d095cda4710c05fc84f2844c03802aa817a244b0fee3111725bb62fa3ca3f4f"
+  },
+  "human_reviewed_questions": 0,
+  "inventory_sha256": "97b5d40df918df27ad4864a7b545d12a60cf949674fc264d77df03949667e2bc",
+  "limitations": [
+    "AI authorship and automatic span checks do not establish semantic correctness.",
+    "Candidates are unreviewed or quarantined; none are labelled negative.",
+    "Positive pairs are provisional and no training recipe is authorized by this artifact.",
+    "Lexical duplicate screening does not prove semantic independence.",
+    "Calibration originates inside old train and is not a new blind test."
+  ],
+  "near_duplicate_flags": [],
+  "negative_candidate_statuses": {
+    "quarantined_false_negative_risk": 328,
+    "unreviewed": 1232
+  },
+  "outstanding_training_gates": [
+    "independent_positive_semantic_review",
+    "e5_token_retention",
+    "two_reviewed_negatives_per_fit_query",
+    "resource_probe"
+  ],
+  "pilot_data_gates": {
+    "calibration_family_target": true,
+    "calibration_query_target": false,
+    "english_queries": true,
+    "fit_family_target": true,
+    "fit_query_target": true,
+    "korean_queries_with_english_evidence": true,
+    "max_queries_per_family": true,
+    "no_quarantined_questions": true,
+    "topic_coverage": true
+  },
+  "plan_sha256": "579e8ce0c6efbdc6aafe7906e873dbf051e0fecd0266e2f6cacefcda70c3e8ba",
+  "schema_version": 1,
+  "source_sha256_lf": {
+    "scripts/prepare_corpus.py": "181de3ed388f76ec66e13d851b267ddf7dded0046829a816cf03b8afc28bce57",
+    "scripts/prepare_training.py": "9a1497d292e82df5a74ca6984c5d44497f57199a35ed15828ca529f1d97408de",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56"
+  },
+  "training_executed": false,
+  "training_ready": false,
+  "unmet_pilot_data_gates": [
+    "calibration_query_target"
+  ],
+  "validation": "verified_hashes_exact_spans_train_partition_and_provenance_passed"
+}

@@ -2,7 +2,7 @@
 
 기준일: 2026-10-12 (Asia/Seoul).
 
-현재 단계: **Java 21 + Spring Boot와 React + TypeScript + Vite 서비스에 선택적 E5·혼합·BGE 검색을 연결하고 실제 로컬 CUDA·HTTP·브라우저 흐름을 검증했다.** Python은 모델 추론·데이터·학습·오프라인 평가에 사용하며 이전 서비스와 동결 실험을 보존한다. 다음은 train 계열의 데이터 품질·후보 누락 분석과 도메인 미세조정 설계다. 전체 프로젝트 완료나 검색 품질 달성을 의미하지 않는다. 사용자 질문 검수는0이며 학습·생성 답변은 아직 없다. 원격 CI 상태는 각 단계의 실행 기록을 따른다.
+현재 단계: **M4 train 전용 자료 pilot을 만들고, AI 질문78개(학습64·내부 검증14)의 원문·분할·독립 AI 의미 검토와 결정적 재현을 확인했다.** E5 학습을 첫 가설로 정했지만 아직 학습하지 않았다. 검증 질문2개 부족, 미검토 음성 후보, tokenizer 근거 보존 검사와 실제 자원 probe가 남아 있다. Java 21/Spring Boot·React/TypeScript/Vite의 선택적 모델 검색은 이전 단계에서 검증했다. Python은 추론·데이터·학습·오프라인 평가를 맡고 동결 M2/M3와 이전 서비스를 보존한다. 사용자 질문 검수0·생성 답변0이며 전체 프로젝트 완료나 검색 품질 달성을 뜻하지 않는다. 원격 CI 상태는 각 단계의 실행 기록을 따른다.
 
 선행 확인: 빈 작업 폴더, 별도 상위 프로젝트 지침 없음, GitHub 사용자 인증 확인, Python 3.11·Node·uv 사용 가능, RAM 약 32GB·RTX 4050 6GB 확인. Docker 명령은 설치되어 있으나 엔진은 실행 중이지 않음. 첫 단계는 Docker 없이 실행한다.
 
@@ -225,3 +225,42 @@ uv run --locked --group retrieval --no-sync python -m scripts.verify_model_servi
 구현 커밋 `1a7babb`의 [PR #7](https://github.com/lingter100/doctrail/pull/7)에서 `java-service`·`backend`·`web` 모두 성공했다. [실제 head push 검사](https://github.com/lingter100/doctrail/actions/runs/38213876293)와 [PR 검사](https://github.com/lingter100/doctrail/actions/runs/38213907700)를 확인했다. Ubuntu/Temurin Java21의 실제 HTTP11묶음과 Chromium18개, Python216passed/4skipped, 코퍼스·질문 재현과 모델 없는 후보 결과 재생이 통과했다. 원격은 GPU 모델을 실행하지 않았으며 로컬220개 검사·실제 CUDA 추론과 구분한다.
 
 GitHub API에서 구현 커밋의 작성자와 커미터가 모두 `lingter100`임을 확인했다. 이 진행 기록도 별도 Conventional Commit으로 필수 CI를 통과한 뒤 사용자 계정을 유지하는 fast-forward로 main에 통합한다. 최종 통합 SHA·상태는 PR에서 확인한다. 다음 실행은 완료한 모델 연결을 반복하지 않고 train180문서·128계열의 검토와 학습 설계를 시작한다.
+
+## M4 train 자료 pilot · 실제 수행
+
+2026-10-12 06:49:58 UTC heartbeat에서 저장소 지침·상태·Git·프로세스를 확인하고 시작했다. Main `f01d8f3`와 PR#7 통합·필수 CI 성공을 확인했으며 실행 중 모델/학습 작업은 없었다. 새 `feat/train-data`에서 설계와 자료를 준비했다.
+
+[M4 설계](M4-DESIGN.md)는 저장된 후보 실패21개/순위 실패1개 집계를 근거로 E5 후보 생성 모델을 조건부 학습 대상으로 정했다. BGE·청크·후보 정책은 고정한다. 이 단계는 원래 train180문서·128연결 그룹만 사용하고 dev/test 질문을 학습 설계에 다시 열지 않는다. 기존 로더가 전체 코퍼스 무결성을 확인한 후 train만 남기는 것과 평가 질문을 읽는 작업을 구분한다.
+
+| 확인 항목 | 실제 결과 |
+|---|---|
+| Train 내부 분할 | Fit150문서/103계열/1,643청크, calibration30문서/25계열/553청크 |
+| AI 작성 질문 | Fit64/16계열, calibration14/4계열; KO59·EN19, 주석상 한국어 질문/영어 근거51 |
+| 자동 원문 검사 | 78/78 인용·Unicode 오프셋·동결 청크 전체 포함, 질문 자동 격리0 |
+| 양성 후보 | 80쌍; 중첩 청크2개에 든 질문2개가 있어 독립 질문 수78과 다름 |
+| 독립 AI 의미 검토 | 별도 역할이78개 모두 accept; 원문·질문·답안 직접성 확인, 사용자 검수0 |
+| BM25 음성 후보 | 1,560개 중 알려진 양성/동계열/중복 위험328개 격리, 나머지1,232개 미검토 |
+| 확인한 음성·학습 | 음성 라벨0, 학습0, 모든 후보 training eligibility=false |
+| 데이터 부족 | Calibration 목표16 대비2개 부족; 링크 모음에 독립 사실을 억지로 추가하지 않음 |
+| 재현 | 저장 초안에서4개 compiler 산출물 byte-for-byte replay와 독립 검토 영수증 replay 통과 |
+
+원본 초안은 AI 작성·semantic pending 상태를 보존하고 독립 의미 검토를 별도 파일로 연결했다. 검수자는 작성자와 다르며, 질문 canonical hash·원문 hash·author pack hash가 바뀌면 영수증 검증이 실패한다. 자동 검증은 의미적 진실이나 사람 승인을 대신하지 않는다. 전체 코퍼스의 대체 정답 관련성은 아직 확인하지 않았다.
+
+계획·작성 지침을 `611a66a`에 고정했고 최종 초안 전에 public selection을 기록했다. 초기 pack의 계획 바인딩 및 Windows CRLF/Git LF 해시 차이는 실제 컴파일 전에 해결했다. V1/V3의 전체 문서·허용 ID 일치를 부모와 작성자가 확인했고, 최종 V3 pack 해시만 최종 행에 연결했다. 오래된 inventory/pack은 로컬에 보존하며 게시 자료에는 포함하지 않는다. 변경 이력은 [생성 영수증](../data/training/generation/receipt-v1.json)에 남겼다.
+
+[데이터·재현 안내](../data/training/README.md), [자동 보고서](../data/training/m4-pilot-v1/report.json), [별도 AI 검토 보고서](../data/training/reviews/m4-semantic-report-v1.json)를 참조한다. Compiler 보고서는 의미 검토 전 snapshot이므로 후속 검토 결과를 소급 반영하지 않는다.
+
+실행한 검증은 Java59개, React 타입 검사·production build, 실제 Java 기반 Chromium18개, Python 전체264개와 Ruff다. Python은 기존 Starlette/httpx 사용 중단 경고1건이 있다. 신규 데이터/영수증 검사44개를 포함하며 원격 PR CI 결과는 별도 통합 기록에서 확정한다. 기존 Java/M3 모델 동작은 변경하지 않았으므로 CUDA·동결 dev 비교를 다시 실행하지 않았다. 서비스 회귀 통과와 모델 품질은 별개다.
+
+주요 실행 명령은 다음과 같다. 입력 생성·replay 전체 명령은 데이터 안내에 있다.
+
+```powershell
+uv run --locked --no-sync ruff check src tests scripts
+uv run --locked --no-sync pytest -q
+npm --prefix web run typecheck
+npm --prefix web run build
+./server/mvnw.cmd -B -q -f server/pom.xml verify
+npm --prefix web run test:e2e
+```
+
+다음은 기존 pilot을 덮어쓰지 않는 보정 문서 추가 선택, 명시적 음성 검토, E5 tokenizer 근거 보존과 질문당 단일 양성 선택 규칙 동결이다. 조건 통과 후에만 실제1 optimizer step 자원 probe와 제한 학습·동일 calibration 비교를 진행한다. 유료 자원·공개 서비스 배포·최종 test 개방은 수행하지 않았다. UI 완성도는 기존 최종 기준을 유지한다.

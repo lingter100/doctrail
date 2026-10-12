@@ -86,3 +86,13 @@ AI가 Java 검색·권한/버전 스냅샷, Python 모델 worker와 cache, 합�
 실제 GPU E5/BGE·Java HTTP·React 시연 검사를 실행했으며 모든 문서·질문·계정·피드백은 명시적인 합성 자료다. 첫 브라우저 검사에서는 disabled option의 테스트 판정이 실패해 실제 DOM의 `disabled` property를 검사하도록 수정했다. 실제 앱의 모델 선택 제한과 별도로 검사 코드 문제를 기록한다. 최종 실행 증거는 STATUS와 모델 서비스 보고서에 보존한다.
 
 사용자 질문 검수·직접 UI 검토·실사용 만족도·학습 수행은 각각0이다. AI 시각 확인은 사용자 검수로 집계하지 않는다. 유료 API/GPU 임대·클라우드와 서비스 외부 공개는 수행하지 않았다. Git 작성자·커미터는 사용자가 승인한 본인 계정을 유지하고 AI 기여를 숨기지 않는다.
+
+## M4 train 자료 설계·작성·검토
+
+2026-10-12 06:49:58 UTC heartbeat에서 기존 자율 진행 승인에 따라 시작했다. 실제 도구가 수락한 설정은 `train_design`: gpt-6-astra/xhigh, `train_author`: gpt-6-astra/xhigh, `train_pipeline`: gpt-6-astra/high, `cal_review`: gpt-6-astra/xhigh다. 부모 채팅 설정은 변경하지 않았으며 서비스 학습 후보 E5와 개발 보조 모델을 구분한다.
+
+`train_design`은 설계·출처 조사·calibration14개 작성과 작성 종료 후 fit 독립 검토, `train_author`는 fit16문서의64개 질문 작성, `train_pipeline`은 분할·pack·정확 인용·음성 후보·replay 구현과 테스트를 맡았다. `cal_review`는 calibration만 읽고 독립 의미 검토를 수행했다. Fit 작성자는 calibration/dev/test를 읽지 않았고 calibration 독립 검수자도 fit/dev/test를 읽지 않았다. 부모는 선택 목록·사전등록·hash 바인딩 수리·별도 검토 영수증 검사 코드·CI·검증·문서 통합을 맡았다.
+
+초기 계획/pack 바인딩과 CRLF 해시 차이를 최종 컴파일 전에 해결했다. 부모와 작성자가 초기/최종 pack의 실제 문서·ID가 동일함을 확인했으며 그 변경을 생성 영수증에 남겼다. 별도 코드 리뷰에서 검토 입력을 두 번 읽으면 검증한 내용과 보고한 hash가 달라질 수 있음을 찾아 단일 bytes snapshot으로 바꾸고 회귀 검사를 추가했다.
+
+AI가 작성한 질문78개에 자동 span 검사와 별도 AI 의미 검토가 모두 기록됐지만 실제 사용자 질문 검수는0개다. 음성 후보의 의미 라벨은 아직0개다. 데이터 수량 미달과 미검증 조건을 숨기지 않았고 모델 학습을 실행하지 않았다. 로컬 서비스 회귀·Python 검사·데이터 replay는 자동 검증이며 실사용자 피드백이나 모델 품질 점수가 아니다. Git에는 승인된 사용자의 author/committer를 사용하되 AI의 작성·검토 범위는 이 문서로 명시한다.

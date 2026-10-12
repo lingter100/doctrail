@@ -1,0 +1,47 @@
+{
+  "ai_reviewed_questions": 78,
+  "all_ai_accepted": true,
+  "author_pack_sha256": [
+    "92a710c9c60957478fd6195394799214421922750a1c0f6aae79582e015e43bc",
+    "99ca0ae454d680364fdcac0fe5addf7300c6a1cf07f318007c249f4ee180be53"
+  ],
+  "decisions": {
+    "accept": 78
+  },
+  "draft_sha256": {
+    "m4-calibration.draft.jsonl": "59511a2cf38db381307939e88a4a04603442a52f33bb74b0dbf65696e387341f",
+    "m4-fit.draft.jsonl": "5d095cda4710c05fc84f2844c03802aa817a244b0fee3111725bb62fa3ca3f4f"
+  },
+  "human_reviewed_questions": 0,
+  "limitations": [
+    "Receipt validation checks bindings and role assignments, not semantic truth.",
+    "AI acceptance is not human review or training readiness.",
+    "Original drafts and their pending review fields remain immutable."
+  ],
+  "needs_revision": [],
+  "partitions": {
+    "calibration": {
+      "accept": 14
+    },
+    "fit": {
+      "accept": 64
+    }
+  },
+  "review_sha256": {
+    "m4-calibration-semantic-v1.jsonl": "d86d8205c74d546ad964fbc05ffbe6cc761cce42ac38f7ddd487424a61e2a842",
+    "m4-fit-semantic-v1.jsonl": "cd0287af12bb4e27cac7f33435120877e1d69de01a8e961896398c51b8a2f5b3"
+  },
+  "role_assignments": {
+    "calibration": {
+      "author": "train_design",
+      "reviewer": "cal_review"
+    },
+    "fit": {
+      "author": "train_author",
+      "reviewer": "train_design"
+    }
+  },
+  "schema_version": 1,
+  "scope": "independent_ai_semantic_review_receipt_validation",
+  "training_ready": false
+}

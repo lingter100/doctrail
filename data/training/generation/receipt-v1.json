@@ -1,0 +1,72 @@
+{
+  "author_packs": {
+    ".local/m4-author-calibration-v3.json": "99ca0ae454d680364fdcac0fe5addf7300c6a1cf07f318007c249f4ee180be53",
+    ".local/m4-author-fit-v3.json": "92a710c9c60957478fd6195394799214421922750a1c0f6aae79582e015e43bc"
+  },
+  "authorship": {
+    "documents": "public_real",
+    "human_reviewed_questions": 0,
+    "questions_and_expected_answers": "ai_authored",
+    "synthetic_automatic_test_fixtures": "separate_from_public_pilot"
+  },
+  "created_at": "2026-10-12",
+  "generation_reproducibility": "Saved final drafts and downstream compilation replay exactly; model re-generation is not claimed deterministic.",
+  "inputs_sha256": {
+    "data/training/generation/m4-calibration.draft.jsonl": "59511a2cf38db381307939e88a4a04603442a52f33bb74b0dbf65696e387341f",
+    "data/training/generation/m4-fit.draft.jsonl": "5d095cda4710c05fc84f2844c03802aa817a244b0fee3111725bb62fa3ca3f4f",
+    "data/training/generation/protocol-v1.md": "a3f821667a54662e57487a49e28a97b65643d3f2d701eb6b9be21b5ef0add49c",
+    "data/training/generation/selection-v1.json": "9550aa3817a45f7843d31a833d768ea3c0c7e43b6969f4d50318c2e342079bdd",
+    "data/training/m4-inventory-v3.json": "97b5d40df918df27ad4864a7b545d12a60cf949674fc264d77df03949667e2bc",
+    "data/training/m4-plan-v1.json": "579e8ce0c6efbdc6aafe7906e873dbf051e0fecd0266e2f6cacefcda70c3e8ba"
+  },
+  "limitations": [
+    "Author pack verification is not semantic correctness.",
+    "Independent AI reviews are recorded separately; they are not user approval.",
+    "No paid API, GPU rental, cloud or public service deployment."
+  ],
+  "outcomes": {
+    "calibration_questions": 14,
+    "calibration_shortfall": 2,
+    "calibration_target": 16,
+    "confirmed_negative_labels": 0,
+    "fit_questions": 64,
+    "training_executed": false
+  },
+  "pack_binding_repair": {
+    "content_or_selection_changed": false,
+    "preservation": "Old inventories and packs remain local; no training used them.",
+    "reason": "Provisional plan/protocol binding and Windows CRLF versus Git LF produced stale V1/V2 inventories; final V3 uses canonical Git plan bytes.",
+    "status": "resolved_before_real_compilation",
+    "verification": "Parent and authors independently compared V1/V3 documents and allowed_document_ids: exact equality. Final rows bind final V3 hashes."
+  },
+  "parent_model_setting_changed": false,
+  "plan_commit_before_final_drafts": "611a66af320d9079219748fd3f687561169c8c06",
+  "schema_version": 1,
+  "stage": "train_only_ai_authored_pilot_not_training_result",
+  "tool_accepted_settings": [
+    {
+      "agent": "train_design",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "role": "design_and_calibration_author_then_independent_fit_review"
+    },
+    {
+      "agent": "train_author",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "role": "fit_author"
+    },
+    {
+      "agent": "train_pipeline",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "role": "data_pipeline_and_tests_then_receipt_validator_code_review"
+    },
+    {
+      "agent": "cal_review",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "role": "independent_calibration_review"
+    }
+  ]
+}
