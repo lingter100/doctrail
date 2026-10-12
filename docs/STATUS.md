@@ -143,3 +143,26 @@ PDFBox와 pypdf의 일반적인 PDF 텍스트 출력은 동일하다고 주장�
 [PR #4](https://github.com/lingter100/doctrail/pull/4)의 코드·결과·문서 커밋 `09a25e9`에서 `java-service`·`backend`·`web` 모두 [원격 CI 통과](https://github.com/lingter100/doctrail/actions/runs/38206010313)를 확인했다. Linux/Temurin Java 21에서 Java 테스트·JAR 패키징과 실제 HTTP 11개 검증 묶음이 성공했다. 기존 Python 검사는 127 passed/2 skipped이며 공개 313문서 재현과 질문 검증도 통과했다. Java 전체 79질문 순위 대조는 위 로컬 보고서의 결과로 구분한다.
 
 `main` 보호 규칙에 `java-service` 검사를 추가했고 기존 `backend`·`web`, strict, Actions 앱 ID 제한을 유지했다. 마지막 상태 기록 커밋도 필수 검사를 통과한 뒤 사용자 작성자·커미터를 유지하는 fast-forward로 통합한다. 최종 SHA의 통합·검사 상태는 PR에서 확인한다.
+
+## 첫 heartbeat · 후보 선택과 토큰 근거 진단 완료
+
+2026-10-12 05:06:57 UTC에 실제 예약 메시지를 받아 작업을 시작했다. 당시 main `7166c80`은 clean이고 실행 중인 서비스·모델 실험은 없었다. Java 전환과 기존 M3 전체 비교를 반복하지 않고 [사전 설계](M3-CANDIDATE-DESIGN.md)를 `2a6ffa8`에 고정한 뒤 구현을 `52549f7`에 커밋했다.
+
+- [후보·tokenizer 진단](../experiments/results/m3-candidate-diagnostic-dev-v1.json): B/D 합집합의 완전 근거는 40/59, 기존 H50은 37/59. 양성 59문항에는 필수 근거 그룹 72개가 있다. 원래 HR top-5의 전체 근거 회수 36/59와 관련 근거 토큰 보존 36/59가 같았다. 엄격한 문자 offset 합집합은 잘림 전후 모두 27/59로, 이 차이를 잘림 실패 9개라고 읽으면 안 된다. AI 주석·토큰 위치의 자동 진단이며 의미 이해 측정은 아니다.
+- [새 후보 선택 실측](../experiments/results/m3-candidates-dev-v1.json): 저장 B50·D50을 번갈아 읽어 중복 없이 50개를 선택했다. 모든 근거를 가진 후보는 **37/59 → 38/59**, 같은 BGE의 최종 top-5는 **36/59 → 37/59**. `m2-dev-017`을 회복했고 완전 근거 지표의 추가 퇴보는 없다. 기존 BM25 대비 8개 회복·1개 퇴보(`060`)로 순증7개다. 교차언어는 6/23 → 7/23이고 다중 문서는 1/7로 남았다. 회복 근거는 사전 고정한 B 우선 순서의 마지막 50번째 자리에 들어왔으므로 분기 순서를 바꿔도 유지되는 이득이라고 주장하지 않는다.
+- 기존 다섯 방법의 79문항 결과·집계·paired 비교를 정확히 재계산한 뒤 새 정책을 실행했다. E5/BM25는 재추론하지 않았다. CUDA FP16·batch1로 3,950쌍을 실제 BGE 추론했고 전체 점수·토큰·입력 해시를 저장했다. 이전 top-10과 겹치는 778쌍의 raw 점수가 모두 같았다. 전체 과거 3,950쌍의 동등성을 확인한 것은 아니다.
+- 새 BGE 구간만의 p50/p95는 **1,855.325/2,488.538ms**, 입력 잘림은 804/3,950쌍이었다. 이전 검색 시간을 더해 새 HTTP 응답 시간으로 표시하지 않는다. 단일 순회·캐시/전원/부하 미통제이므로 이전 실행보다 빨라졌다는 인과 결론도 내리지 않는다. OOM·묵시적 fallback·유료 API 사용은 없었다.
+- 두 보고서 모두 실행 커밋 `52549f7`의 코드·설계·의존성 해시와 일치하고 완료 journal의 출력 hash가 실제 파일과 같다. 결과/journal 생성으로 `git_dirty=true`인 상태를 보존했다. 기존 M2/M3 결과·라벨·test 잠금은 변경하지 않았다.
+
+실제 명령:
+
+```powershell
+uv run --locked --group retrieval --no-sync python -m scripts.analyze_candidates --tokenizer-visibility --output experiments/results/m3-candidate-diagnostic-dev-v1.json
+uv run --locked --group retrieval --no-sync python -m scripts.evaluate_candidates --output experiments/results/m3-candidates-dev-v1.json
+```
+
+로컬 Python **177 passed**, Ruff, Java **20 tests**, 프런트엔드 타입 검사·production build가 통과했다. 새 synthetic 테스트 48개 중 2개는 검증한 로컬 tokenizer 파일을 사용한다. 원격 기본 CI는 GPU 모델을 실행하지 않으며 기존 tensor 검사와 이 tokenizer 검사 총4개를 선택적으로 skip한다. CI에 모델 없는 후보 진단과 기존 다섯 방법의 정확 재생을 추가했다. 테스트를 품질 향상의 증거로 대신하지 않고 위 실제 dev 비교를 별도로 남긴다.
+
+사용자 검수0·test 검색 평가0·학습0·생성 답변0이다. 다음은 Java 서비스에 선택적 모델 추론을 연결하는 구조·토크나이저 호환을 검토하고 ACL 선필터, revision/cache, 수정·삭제 회귀를 검증하는 작업이다. 연구 측면에서는 합집합부터 누락된 근거와 3개 청크 경계 문제를 별도 실험으로 다룬다. 지금 dev에서 후보 정책을 계속 조정하지 않으며 Java 기본 검색은 BM25를 유지한다. [해석과 면접 설명](M3-CANDIDATE-ANALYSIS.md)을 참고한다.
+
+구현 커밋 `52549f7`의 [원격 CI](https://github.com/lingter100/doctrail/actions/runs/38207832080)는 `java-service`·`backend`·`web` 모두 성공했다. Python173passed/4skipped, Java 테스트·실제 HTTP11묶음, 코퍼스 재현·활성 질문 검증과 모델 없는 후보 분석·기존 결과 정확 재생이 통과했다. 실제 GPU 실험은 위 로컬 기록으로 구분한다. 결과·분석 커밋도 실제 PR head에서 세 필수 검사를 통과한 뒤 사용자 작성자/커미터를 보존해 main에 통합하며 최종 상태는 PR에서 확인한다.
