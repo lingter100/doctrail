@@ -1,0 +1,54 @@
+# React 화면 구조와 검증
+
+사용자가 기존 TypeScript 화면의 React 전환을 승인했다. 화면은 React + TypeScript + Vite, 서비스는 Java 21 + Spring Boot, 데이터 준비·학습·오프라인 평가는 Python을 사용한다. UI 프레임워크 전환은 검색 모델의 품질 개선이나 모델 서비스 연결 완료를 뜻하지 않는다. [ADR-0003](decisions/0003-react-frontend.md)에 대안과 판단을 기록한다.
+
+## 화면의 책임
+
+계정 폼, 작업공간 탐색, 문서 목록, 검색 결과와 피드백, 검색 이력, 원문 패널, 업로드·편집 모달을 컴포넌트로 분리한다. 상태와 요청 조정은 `web/src/useDocTrail.ts`, HTTP 요청은 `api.ts`, 계약 타입은 `types.ts`, 발췌·검색어 강조·원문 위치 검증은 `helpers.ts`에 둔다. 기존 CSS와 한국어 문구를 유지한다.
+
+React는 문서 텍스트를 JSX 텍스트 노드로 표시한다. 업로드한 HTML을 실행하지 않으며 Markdown도 현재는 추출된 텍스트로 보여준다. 원문 근거는 현재 문서 버전·청크 식별자를 확인하고, Unicode codepoint 위치의 문자열이 실제 청크와 일치할 때만 강조한다. 이모지 때문에 JavaScript 문자열 인덱스와 서비스의 원문 위치가 달라질 수 있어 `Array.from`으로 검사한다.
+
+API의 cookie 세션과 서버 ACL은 그대로 유지한다. 화면에서 편집 버튼을 숨기는 것만으로 접근 권한을 구현했다고 보지 않는다. 서버가 목록·검색·원문·변경·피드백마다 권한을 확인한다. 클라이언트의 오래된 응답은 세션·작업공간·요청·모달 식별자를 대조해 걸러낸다. 모달을 닫는 동작과 이미 서버에서 성공한 업로드·수정·삭제의 반영은 구분한다.
+
+## 실행
+
+Node.js 22.12 이상과 Java 21이 필요하며 CI는 Node.js 24를 사용한다. React·타입·Vite 플러그인·Playwright의 정확한 버전은 `web/package.json`과 잠금 파일에 고정한다.
+
+일반 실행은 저장소 루트에서 `./scripts/start.ps1`이다. 개발할 때 Java를 실행한 뒤 `web/`에서 `npm run dev`를 사용하면 Vite가 `/api`를 로컬 Java 8000번 포트로 전달한다. 빌드한 화면은 Java가 같은 출처에서 제공한다. SSR·Next.js·클라이언트 라우터는 현재 사용하지 않는다.
+
+## 재현 가능한 브라우저 회귀 검사
+
+저장소 루트에서 다음 순서로 실행한다.
+
+```powershell
+npm --prefix web ci
+npm --prefix web run typecheck
+npm --prefix web run build
+./server/mvnw.cmd -B -q -f server/pom.xml verify
+cd web
+npx playwright install chromium
+npm run test:e2e
+```
+
+macOS/Linux에서는 `mvnw.cmd` 대신 `mvnw`를 사용한다. CI는 Chromium 설치에 `--with-deps`를 추가한다. 일부 사례만 다시 확인할 때 `npm run test:e2e -- --grep "workspace switch"`처럼 Playwright 인자를 전달할 수 있다.
+
+`web/scripts/test-java.mjs`가 실제 JDK 실행 파일을 찾아 Java JAR을 실행한다. 매 실행은 `.local/web-e2e-*/`의 새 합성 DB와 임시 localhost 포트를 사용하며 기존 DB·사용자 문서를 읽거나 바꾸지 않는다. 정적 파일 경로를 비워 JAR에 포함된 화면을 검증하고, JAR의 index와 현재 `web/dist/index.html`이 다르면 재패키징을 요구한다. 따라서 프런트엔드를 수정한 뒤 Java JAR도 다시 빌드해야 한다.
+
+검사를 마치면 이 실행이 시작한 JVM을 종료하고 `run.json`에 종료 여부를 남긴다. `report.json`, 실패 trace·스크린샷, 성공 시연 스크린샷과 서버 로그는 같은 무시 디렉터리에 저장된다. 이 파일과 합성 DB를 공개 저장소에 자동 커밋하지 않는다. 개인정보가 있는 실제 계정을 테스트에 사용하지 않는다.
+
+## 증거를 읽는 방법
+
+- `real Java` 사례는 실제 인증·문서 저장·파싱·검색·ACL API와 production React 번들을 연결한다. 합성 MD/TXT/PDF와 합성 계정으로 수행한 기능 회귀 검사다.
+- `real responses` 경합 사례는 실제 서버 응답을 브라우저에서 잠시 보류했다가 순서를 바꿔 전달한다. 지연은 시험용으로 통제했고 운영 부하·지연 실측이 아니다.
+- `synthetic failure` 사례는 실패 또는 경합을 의도적으로 만든다. 특히 이전 세션의 늦은 401은 합성 오류 응답으로 구분한다.
+- helper 검사는 문자열·오프셋·강조의 경계 조건을 확인한다. 브라우저나 서비스의 전체 동작을 대신 입증하지 않는다.
+
+실제 성공·실패 수와 수정 후 결과는 [STATUS](STATUS.md)에 기록한다. 자동 브라우저 검사와 AI의 스크린샷 확인은 사용자 직접 시연·사용성 검수가 아니다. Chromium 중심 검사이며 Safari/Firefox·화면 읽기 도구·실제 다중 사용자 부하를 검증했다고 주장하지 않는다. 변경된 권한으로 이미 내려받은 텍스트를 실시간 회수하는 기능, 생성형 답변, 학습 모델의 온라인 검색 연결과 공개 서비스 배포는 별도 작업이다.
+
+2026-10-12 최종 로컬 실행은 [17개 통과 기록](verification/react-frontend.json)을 남겼다. [데스크톱 근거 화면](images/react-desktop.png)과 [모바일 목록](images/react-mobile.png)은 실제 production 번들의 합성 점검 화면이다. 질문 검수나 사용자 만족도 자료가 아니다.
+
+## 면접에서 설명할 내용
+
+해결하려던 문제는 문서·검색·원문 패널이 같은 화면에서 바뀔 때 상태와 응답 순서를 안전하게 유지하는 일이었다. React 컴포넌트로 화면 책임을 나누되 서버 권한과 근거 식별 계약을 유지했다. 기존 vanilla TypeScript보다 의존성·번들 부담이 늘며, React만 도입한다고 요청 경합이 해결되지는 않는다.
+
+예를 들어 검색 A가 느린 사이 검색 B를 제출하면 A가 나중에 도착해도 B를 덮어쓰면 안 된다. 또 삭제 요청을 보낸 뒤 모달을 닫아도 서버에서 삭제가 끝났다면 이전 원문을 계속 보여주면 안 된다. 실제 서버 응답을 보류해 이런 순서를 의도적으로 재현하는 검사를 추가한다. 사용자는 화면 조작과 원문 대조를 직접 해 보고, 무엇이 자동 검증이고 무엇을 본인이 확인했는지 구분해 설명할 수 있어야 한다.

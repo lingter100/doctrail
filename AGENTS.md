@@ -2,7 +2,7 @@
 
 ## Scope and truthfulness
 - Build for a solo junior AI Engineer portfolio: data quality, retrieval experiments and operational correctness take priority over feature count.
-- Current milestone: migrate the service backend to Java 21 / Spring Boot at the user's request, preserve existing contracts and prove upload/session/ACL/search/evidence/update/delete parity before integrating retrieval models. Keep Python for data preparation, training and offline evaluation, and retain the previous service as a reference. Preserve frozen M2/M3 inputs and results; never reinterpret Python experiment measurements as Java service performance.
+- Current milestone: migrate the frontend to React + TypeScript + Vite at the user's request, preserving the verified Java 21 / Spring Boot backend contracts and document/search/evidence/session/ACL workflows. Then continue optional retrieval model integration. Keep Python for data preparation, training and offline evaluation, and retain the previous service as a reference. Preserve frozen M2/M3 inputs and results; never reinterpret Python experiment measurements as Java service performance.
 - Preserve provenance. Mark synthetic examples, AI-authored questions, automated checks and user review separately.
 - Paid APIs/GPU/cloud and public service deployment require the user's approval. Public GitHub source repository creation and push to the authenticated user's account are explicitly authorized.
 - Do not commit secrets, local databases, uploaded documents, model weights, cached corpora or personal environment paths.
@@ -14,7 +14,7 @@
 - Each milestone updates docs/STATUS.md, docs/DECISIONS.md and docs/CONTRIBUTIONS.md with verified results, commands, limitations and next steps.
 - The user authorizes autonomous continuation through the existing roadmap without repeated proceed questions. A thread heartbeat resumes work hourly. Follow docs/AUTONOMY.md, preserve user review and paid/public-deployment approval boundaries, and do not duplicate running jobs.
 - Keep changes narrowly staged. Never modify a sibling agent's owned files without coordinating.
-- Use Java 21 and the pinned Maven wrapper for the service, uv with Python 3.11 and locked dependencies for AI/data experiments, and TypeScript frontend. Run relevant Java/Python checks and a production frontend build before integration. Do not add Python subprocesses behind a Java facade for core service behavior.
+- Use Java 21 and the pinned Maven wrapper for the service, uv with Python 3.11 and locked dependencies for AI/data experiments, and React + TypeScript + Vite frontend. Run relevant Java/Python checks, a production frontend build and browser regression checks before integration. Do not add Python subprocesses behind a Java facade for core service behavior.
 - Local model commands use `uv run --group retrieval ...`; normal CI and BM25 do not require the heavy retrieval group. Do not run dependency synchronization concurrently with active model inference.
 
 ## Models and delegation

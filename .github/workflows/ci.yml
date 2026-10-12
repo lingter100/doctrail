@@ -35,6 +35,12 @@ jobs:
       - run: uv sync --frozen --python 3.11
       - name: Verify actual Java HTTP and copied Python database compatibility
         run: uv run python -m scripts.verify_java_service --output .local/java-ci.json
+      - name: Install browser for the packaged React UI
+        run: npx playwright install --with-deps chromium
+        working-directory: web
+      - name: Verify browser workflows against isolated Java service
+        run: npm run test:e2e
+        working-directory: web
   backend:
     runs-on: ubuntu-latest
     steps:

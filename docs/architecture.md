@@ -6,7 +6,7 @@
 
 | 계층 | 현재 선택 | 이유 |
 |---|---|---|
-| 화면 | Vite + TypeScript, 한국어 UI | 업로드·검색·원문 확인 흐름에 집중한다. |
+| 화면 | React + TypeScript + Vite, 한국어 UI | 폼·문서·검색·근거 패널을 나누고 기존 Java API 계약을 유지한다. [화면 구조](FRONTEND.md) |
 | API | Java 21 + Spring Boot MVC, 명시적 JDBC 트랜잭션 | 사용자 요청을 반영하고 기존 API·권한·저장 계약을 유지한다. |
 | AI 연구 | Python 3.11 + uv, 기존 FastAPI는 비교용 보존 | 데이터 준비·학습·평가 자산을 다시 쓰지 않고 Java 서비스와 검증 범위를 구분한다. |
 | 영속 저장 | SQLite | 단일 로컬 실행에서 계정·권한·문서·청크를 함께 관리한다. |

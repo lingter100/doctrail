@@ -2,7 +2,7 @@
 
 기준일: 2026-10-12 (Asia/Seoul).
 
-현재 단계: **사용자 요청에 따라 서비스 백엔드를 Java 21 + Spring Boot로 전환했다. Python은 데이터·학습·오프라인 평가와 이전 서비스 참조용으로 보존한다.** M3 첫 로컬 GPU 비교는 완료했지만 새 모델의 서비스 연동은 아직이다. 전체 프로젝트 완료나 검색 품질 달성을 의미하지 않는다. 사용자 질문 검수는 0개이며 학습·생성 답변은 아직 없다. 원격 CI 상태는 각 단계의 실행 기록을 따른다.
+현재 단계: **사용자 승인에 따라 화면을 React + TypeScript + Vite로 전환하고 실제 Java 서비스와 브라우저 흐름을 검증했다. 백엔드는 Java 21 + Spring Boot, Python은 데이터·학습·오프라인 평가와 이전 서비스 참조용으로 보존한다.** M3 첫 비교·후속 후보 실험은 완료했지만 새 모델의 서비스 연동은 아직이다. 전체 프로젝트 완료나 검색 품질 달성을 의미하지 않는다. 사용자 질문 검수는 0개이며 학습·생성 답변은 아직 없다. 원격 CI 상태는 각 단계의 실행 기록을 따른다.
 
 선행 확인: 빈 작업 폴더, 별도 상위 프로젝트 지침 없음, GitHub 사용자 인증 확인, Python 3.11·Node·uv 사용 가능, RAM 약 32GB·RTX 4050 6GB 확인. Docker 명령은 설치되어 있으나 엔진은 실행 중이지 않음. 첫 단계는 Docker 없이 실행한다.
 
@@ -166,3 +166,19 @@ uv run --locked --group retrieval --no-sync python -m scripts.evaluate_candidate
 사용자 검수0·test 검색 평가0·학습0·생성 답변0이다. 다음은 Java 서비스에 선택적 모델 추론을 연결하는 구조·토크나이저 호환을 검토하고 ACL 선필터, revision/cache, 수정·삭제 회귀를 검증하는 작업이다. 연구 측면에서는 합집합부터 누락된 근거와 3개 청크 경계 문제를 별도 실험으로 다룬다. 지금 dev에서 후보 정책을 계속 조정하지 않으며 Java 기본 검색은 BM25를 유지한다. [해석과 면접 설명](M3-CANDIDATE-ANALYSIS.md)을 참고한다.
 
 구현 커밋 `52549f7`의 [원격 CI](https://github.com/lingter100/doctrail/actions/runs/38207832080)는 `java-service`·`backend`·`web` 모두 성공했다. Python173passed/4skipped, Java 테스트·실제 HTTP11묶음, 코퍼스 재현·활성 질문 검증과 모델 없는 후보 분석·기존 결과 정확 재생이 통과했다. 실제 GPU 실험은 위 로컬 기록으로 구분한다. 결과·분석 커밋도 실제 PR head에서 세 필수 검사를 통과한 뒤 사용자 작성자/커미터를 보존해 main에 통합하며 최종 상태는 PR에서 확인한다.
+
+## React 전환 · 로컬 검증 완료
+
+사용자의 React 전환 승인을 반영해 `feat/react-frontend`에서 구현했다. 기존 main `d25f623`은 시작 당시 clean이었다. 기존 CSS·한국어 UI, Java API와 Python 연구·동결 데이터는 보존했다. `App`, 계정·목록·검색/이력·원문·모달 컴포넌트, 상태 조정 hook, API·타입·원문 helper로 나눴다. [선택 이유](decisions/0003-react-frontend.md), [구조·실행법](FRONTEND.md)을 제공한다.
+
+- React/React DOM **19.2.8**, Vite **7.3.7**, React 플러그인 **5.2.0**, Playwright **1.64.0**을 잠금 파일에 고정했다. 설치 시 npm audit 0 vulnerabilities를 확인했으며 포괄적인 보안 감사 완료를 뜻하지 않는다.
+- 브라우저에서 실제 Java JAR과 production React 번들을 연결했다. 가입·로그인·로그아웃, MD/TXT/PDF 업로드, 검색·Unicode 원문 위치, HTML을 텍스트로 표시, 피드백·이력, 수정·삭제, 작업공간 생성·전환, 별도 회원 권한, 실패 PDF 재처리와 파일 크기 검사를 확인했다.
+- 첫 15개 검사를 통과한 뒤 리뷰에서 발견한 초기 목록과 검색 경합, 역순 수정 응답 문제에 검사를 추가했다. 최종 **17 passed / 0 failed / 0 skipped**(브라우저 흐름14·순수 helper3), 자동 재시도0이다. 실제 서버 응답을 보류해 오래된 검색·상세·작업공간·모달 응답, 수정v2 뒤 v3, 수정 응답 뒤 삭제를 재현했다. 새 세션 뒤 이전401은 명시적인 합성 오류로 검사했다.
+- 별도 Java 회귀 **20 tests**, 기존 Python **177 passed**, Ruff, 프런트엔드·검사 코드 타입 검사와 production build를 통과했다. Python GPU 실험이나 동결 평가를 반복한 것이 아니다. 기존 Python 참조 의존성에서 Starlette/httpx 사용 중단 예고 경고1건은 남아 있다.
+- 최종 [자동 검사 기록](verification/react-frontend.json)에 실제 실행 UTC, 원본 보고서 hash, LF 정규화 소스 hash, 개별 검사명, 결과와 번들 크기를 저장했다. JS 번들233,162bytes/gzip73,096bytes는 빌드 산출물 크기이며 HTTP 지연이나 이전 화면 대비 속도 향상 수치가 아니다.
+- [데스크톱](images/react-desktop.png)·[390px 모바일](images/react-mobile.png)을 AI가 확인했다. 합성 계정·문서·피드백이며 사용자 직접 시연이 아니다. 원문 태그가 그대로 보이는 화면은 HTML 실행 방지 검사 자료다.
+- 각 실행은 새 합성 DB·임시 localhost 포트를 사용했다. JAR 화면과 현재 빌드 index 일치, 검사 종료 후 소유 JVM 종료를 확인했다. 기존 사용자 DB는 사용하지 않았다. 서비스 인터넷 공개·유료 자원 사용은 없다.
+
+실행 순서는 `npm --prefix web run typecheck`, `npm --prefix web run build`, `./server/mvnw.cmd -B -q -f server/pom.xml verify`, `npm --prefix web run test:e2e`다. 마지막 상태 수정 후 프런트엔드를 다시 빌드하고 Java를 `-DskipTests package`로 재패키징해 최종17개를 수행했다. Java 소스는 이번 작업에서 변경하지 않았다. Python은 `uv run --locked --group retrieval --no-sync pytest -q`와 Ruff로 검증했다.
+
+CI의 기존 필수 `java-service` 작업에 실제 Chromium 검사를 추가했다. 이 로컬 기록 작성 시점에는 새 PR의 원격 검사가 아직이며, 통과·통합은 별도 기록한다. 사용자 검수0·학습0·생성 답변0은 유지한다. 다음 개발은 Java 서비스의 선택적 검색 모델 연결과 ACL·문서 변경 반영 검증이며, 유료 사용·공개 서비스 배포 승인 조건은 유지한다.
