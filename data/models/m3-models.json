@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "purpose": "M3 local retrieval experiment; no training or generated answers",
+  "metadata_verified_date": "2026-10-12",
+  "models": {
+    "e5": {
+      "repo_id": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "license": "MIT",
+      "source_url": "https://huggingface.co/intfloat/multilingual-e5-small/tree/614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "pooling": "attention-masked mean then L2 normalization",
+      "query_prefix": "query: ",
+      "passage_prefix": "passage: ",
+      "max_length": 512,
+      "dtype": "float32",
+      "files": {
+        "config.json": {"size_bytes": 655, "sha256": "69137736cab8b8903a07fe8afaafdda25aac55415a12a55d1bffa9f581abf959"},
+        "model.safetensors": {"size_bytes": 470641600, "sha256": "1a55775f53449dac10a2bcbc312469fac40b96d53198c407081a831f81c98477"},
+        "tokenizer.json": {"size_bytes": 17082730, "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"},
+        "special_tokens_map.json": {"size_bytes": 167, "sha256": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"},
+        "tokenizer_config.json": {"size_bytes": 443, "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"}
+      }
+    },
+    "reranker": {
+      "repo_id": "BAAI/bge-reranker-v2-m3",
+      "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "license": "Apache-2.0",
+      "source_url": "https://huggingface.co/BAAI/bge-reranker-v2-m3/tree/953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "scoring": "raw single classification logit; no sigmoid",
+      "pair_order": ["query", "passage"],
+      "truncation": "only_second; reject query with no passage token budget",
+      "max_length": 512,
+      "cuda_dtype": "float16",
+      "cpu_dtype": "float32",
+      "files": {
+        "config.json": {"size_bytes": 795, "sha256": "13dcd6c31d9fec9d1d8e158702072f62d7fa7d312a64b9fe057bec9a08cfe41a"},
+        "model.safetensors": {"size_bytes": 2271071852, "sha256": "d9e3e081faff1eefb84019509b2f5558fd74c1a05a2c7db22f74174fcedb5286"},
+        "tokenizer.json": {"size_bytes": 17098273, "sha256": "69564b696052886ed0ac63fa393e928384e0f8caada38c1f4864a9bfbf379c15"},
+        "special_tokens_map.json": {"size_bytes": 964, "sha256": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835"},
+        "tokenizer_config.json": {"size_bytes": 1173, "sha256": "7e4c1cc848840aeccdd763458c18dd525eb0f795c992e00ebe9c28554e7db2d4"}
+      }
+    }
+  }
+}
