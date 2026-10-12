@@ -182,3 +182,9 @@ uv run --locked --group retrieval --no-sync python -m scripts.evaluate_candidate
 실행 순서는 `npm --prefix web run typecheck`, `npm --prefix web run build`, `./server/mvnw.cmd -B -q -f server/pom.xml verify`, `npm --prefix web run test:e2e`다. 마지막 상태 수정 후 프런트엔드를 다시 빌드하고 Java를 `-DskipTests package`로 재패키징해 최종17개를 수행했다. Java 소스는 이번 작업에서 변경하지 않았다. Python은 `uv run --locked --group retrieval --no-sync pytest -q`와 Ruff로 검증했다.
 
 CI의 기존 필수 `java-service` 작업에 실제 Chromium 검사를 추가했다. 이 로컬 기록 작성 시점에는 새 PR의 원격 검사가 아직이며, 통과·통합은 별도 기록한다. 사용자 검수0·학습0·생성 답변0은 유지한다. 다음 개발은 Java 서비스의 선택적 검색 모델 연결과 ACL·문서 변경 반영 검증이며, 유료 사용·공개 서비스 배포 승인 조건은 유지한다.
+
+## React 전환 · 원격 검사
+
+구현 커밋 `c52cb39`의 [PR #6](https://github.com/lingter100/doctrail/pull/6)에서 `java-service`·`backend`·`web` 모두 [원격 CI 성공](https://github.com/lingter100/doctrail/actions/runs/38211284184)을 확인했다. Ubuntu/Temurin Java 21의 실제 JAR·Chromium 검사가 로컬과 동일한17개를 통과했다. 기존 Python 기본 CI는173passed/4skipped이며 모델 없는 동결 데이터·질문·후보 결과 재현과 Java HTTP11묶음도 통과했다. 로컬 GPU 의존성의 선택적 검사4개와 원격 skip을 구분한다.
+
+이 기록 커밋 역시 실제 PR head에서 세 필수 검사를 통과한 뒤 사용자 작성자·커미터를 유지하는 fast-forward로 main에 통합한다. 최종 통합 SHA·상태는 PR을 기준으로 확인한다. 후속 실행은 React를 다시 전환하지 않고 Java의 검색 모델 연결 단계로 돌아간다.
