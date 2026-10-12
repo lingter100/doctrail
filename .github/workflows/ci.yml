@@ -73,7 +73,7 @@ jobs:
           uv run python -m scripts.prepare_training replay --inventory data/training/m4-inventory-v3.json --author-packs .local/m4-author-fit-v3.json .local/m4-author-calibration-v3.json --drafts data/training/generation/m4-fit.draft.jsonl data/training/generation/m4-calibration.draft.jsonl --output-dir data/training/m4-pilot-v1
           uv run python -m scripts.validate_training_reviews --drafts data/training/generation/m4-fit.draft.jsonl data/training/generation/m4-calibration.draft.jsonl --reviews data/training/reviews/m4-fit-semantic-v1.jsonl data/training/reviews/m4-calibration-semantic-v1.jsonl --author-packs .local/m4-author-fit-v3.json .local/m4-author-calibration-v3.json --output data/training/reviews/m4-semantic-report-v1.json --verify
       - name: Replay saved training readiness evidence without model weights or inference
-        run: uv run python -m scripts.replay_training_readiness --download-tokenizer-only
+        run: uv run python -m scripts.replay_training_readiness --download-tokenizer-only --version all
   web:
     runs-on: ubuntu-latest
     defaults:
