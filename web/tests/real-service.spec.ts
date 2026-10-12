@@ -13,6 +13,10 @@ test('real Java: registration, MD/TXT/PDF, Unicode evidence, feedback, revisions
   await expect(page.locator('#workspace-select')).toBeVisible();
   await expect(page.locator('.loading')).toHaveCount(0);
 
+  await expect(page.locator('#search-method')).toHaveValue('bm25');
+  await expect(page.locator('#search-method option[value="dense"]')).toHaveJSProperty('disabled', true);
+  await expect(page.locator('.search-caption')).toContainText('현재 키워드 검색 사용 가능');
+
   // Astral Unicode before the matching chunk detects UTF-16/codepoint confusion.
   const content = `${'😀 앞부분 synthetic introductory text.\n'.repeat(42)}\n유니코드근거 oldmarker é 👩‍💻 끝.\n<img src=x onerror="window.__uploadedHtmlExecuted=true">\n<script>window.__uploadedHtmlExecuted=true</script>`;
   const doc = await uiUpload(page, 'synthetic-guide.md', Buffer.from(content), 'text/markdown', 'Synthetic Unicode guide');
@@ -38,6 +42,7 @@ test('real Java: registration, MD/TXT/PDF, Unicode evidence, feedback, revisions
 
   await page.locator('[data-view="history"]').click();
   await expect(page.locator('.history-row').filter({ hasText: 'oldmarker' })).toHaveCount(1);
+  await expect(page.locator('.history-row').filter({ hasText: 'oldmarker' })).toContainText('키워드 검색');
   await page.locator('.history-row').filter({ hasText: 'oldmarker' }).click();
   await expect(page.locator('.result-card')).toHaveCount(1);
   // Real concurrent edit outside the page makes the existing result stale.

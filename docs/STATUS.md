@@ -188,3 +188,34 @@ CI의 기존 필수 `java-service` 작업에 실제 Chromium 검사를 추가했
 구현 커밋 `c52cb39`의 [PR #6](https://github.com/lingter100/doctrail/pull/6)에서 `java-service`·`backend`·`web` 모두 [원격 CI 성공](https://github.com/lingter100/doctrail/actions/runs/38211284184)을 확인했다. Ubuntu/Temurin Java 21의 실제 JAR·Chromium 검사가 로컬과 동일한17개를 통과했다. 기존 Python 기본 CI는173passed/4skipped이며 모델 없는 동결 데이터·질문·후보 결과 재현과 Java HTTP11묶음도 통과했다. 로컬 GPU 의존성의 선택적 검사4개와 원격 skip을 구분한다.
 
 이 기록 커밋 역시 실제 PR head에서 세 필수 검사를 통과한 뒤 사용자 작성자·커미터를 유지하는 fast-forward로 main에 통합한다. 최종 통합 SHA·상태는 PR을 기준으로 확인한다. 후속 실행은 React를 다시 전환하지 않고 Java의 검색 모델 연결 단계로 돌아간다.
+
+## M3 · Java 선택적 검색 모델 연결 · 로컬 검증 완료
+
+`feat/model-search`는 clean main `e7b8cf7`에서 시작했다. 기존 실행 중 작업이 없는 것을 확인했다. React 전환과 동결 M2/M3를 보존하고 Java 서비스에 `dense`, `hybrid`, `hybrid_rerank`를 추가했다. 기본 검색은 BM25다. Python은 고정 E5/BGE 추론만 처리하며 Java가 세션·ACL·문서·cosine/RRF·후보 선택·최종 순위·기록을 관리한다. [ADR](decisions/0004-model-serving.md), [실행·복구·면접 설명](MODEL-SERVING.md).
+
+- Java는 현재 허용 청크만 모델에 보내고 추론 중 DB 트랜잭션을 해제한다. 완료 후 쓰기 트랜잭션에서 세션·membership·전체 가시 문서 스냅샷을 다시 확인한다. 수정·삭제·비공개 변경·새 문서·membership 삭제·로그아웃 경합에서 오래된 결과/이력을 거부했다.
+- Worker는 고정 revision/hash의 E5 FP32, BGE CUDA FP16을 상주시킨다. 인증된 loopback만 사용하고 cache는 본문 hash·encoder 설정 기반의 메모리 LRU다. 원문/질문·사용자 세션·문서 목록을 cache에 보존하지 않는다. 두 모델의 기존 offline telemetry 누적 배열은 wrapper에서 비운다.
+- React에서 검색 방식과 실제 결과 방법을 표시하고 이력 재검색도 원래 방법을 사용한다. Worker 미연결/실패 안내와 명시적인 BM25 선택을 제공한다. 모델 실패를 조용히 키워드 검색으로 바꾸지 않는다. 문서 탐색 디자인은 유지했다.
+
+**실제 로컬 GPU·HTTP:** [보고서](../experiments/results/m3-model-service-v1.json)는 2026-10-12 06:35:30–06:35:56 UTC의 실제 실행이다. 합성 계정·문서로12개 운영 검사 묶음을 통과했고, 그 안의 실제 Chromium 모델 흐름6개에서 가입·업로드·세 모델 방식·원문·피드백·방법별 이력·390px 폭을 확인했다. 모든 모델 요청에서 실제 `cuda`, E5 `torch.float32`, BGE `torch.float16`을 확인했다. 원문 codepoint 위치·revision·private ACL·수정·동일 본문 재처리·삭제를 대조했고, 모델 중단 후503/no fallback/no history 및 기본 BM25 동작을 확인했다. 로그 표식·비밀번호·세션/worker token 미노출 검사도 통과했다.
+
+HTTP 실측은 짧은 합성 문서2개·청크2개에서 방식당2회만 측정했다. E5 첫 요청498.692ms, 반복57.277ms; 재정렬 첫310.724ms, 반복115.201ms였다. 모델 상주 준비19,135.831ms는 요청 시간과 별개다. Passage cache가 빈 시점은 첫 E5뿐이며 이후 방식은 cache를 공유했다. 다른 BM25 브라우저 회귀 프로세스가 동시에 실행되었고, 전원/부하를 통제하지 않았다. 따라서 이 작은 값으로 전체 코퍼스 p95·서비스 SLO·이전 실험 대비 속도 향상·확정 품질을 주장하지 않는다. 별도 cache witness에서 최초 miss1 → 동일 본문 hit1 → 변경 본문 miss1을 실제 관측했다.
+
+**자동 회귀:** Java **59 tests**, Python **220 passed**, Ruff, TypeScript 검사·production build, 실제 Java HTTP 기본/복사 DB 호환 **11묶음**, 모델 없는 Chromium **18 passed / 0 failed / 0 skipped / 0 retry**(브라우저15·helper3)를 통과했다. 첫 브라우저 실행의 disabled option 판정1건은 실제 DOM에 disabled가 있었으므로 속성 검사로 바꾼 뒤 다시 검증했다. Python Starlette/httpx 사용 중단 경고1건은 기존 상태로 남는다. 가벼운 원격 CI에는 모델 가중치를 설치하지 않으며 이 기록 작성 시점의 새 PR CI는 아직이다.
+
+[통합 검증 기록](verification/model-service.json)에 개별 browser 검사, Java 집계, report hash와 LF 정규화 화면 source hash를 남겼다. 실제 모델 보고서의24개 source hash와 JAR hash가 실행 파일과 일치하고 동결 source/input/results가 base와 변경 없음을 확인했다. 모델 보고서는 실행 당시 미커밋 상태(`git_dirty=true`)를 정직하게 보존했다. [데스크톱](images/model-desktop.png)·[모바일](images/model-mobile.png)은 실제 합성 시연 자동 캡처이며, AI가 가독성·가로 넘침·근거 패널을 확인했다. 잠깐 보이는 업로드 알림도 실제 화면 상태다. 사용자 검수는 아니다. 검증 종료 후 소유한 Java/Python 프로세스가 남지 않은 것을 확인했다.
+
+실행 명령:
+
+```powershell
+npm --prefix web run typecheck
+npm --prefix web run build
+./server/mvnw.cmd -B -q -f server/pom.xml verify
+uv run --locked --group retrieval --no-sync pytest -q
+uv run --locked --no-sync ruff check src tests scripts
+npm --prefix web run test:e2e
+uv run --locked --no-sync python -m scripts.verify_java_service --output .local/java-model-search-baseline.json
+uv run --locked --group retrieval --no-sync python -m scripts.verify_model_service --device cuda --browser --output experiments/results/m3-model-service-v1.json
+```
+
+**다음 작업:** train 계열에서 후보 누락과 청크 경계 문제를 분리하고, train 전용 학습쌍·hard negative 품질을 검증한 뒤 임베딩/리랭커 학습 대상을 근거로 확정한다. 최종 test를 열거나 dev에서 계속 후보 정책을 바꾸지 않는다. 사용자 검수0·학습0·생성 답변0·공개 서비스 배포0이다. 모델 검색은 현재4,096청크 상한과 직렬 추론이므로 대규모 운영 검증이 남아 있다. 외관·사용성도 최종 기준에 포함하지만 로드맵 순서를 바꾸지 않는다.

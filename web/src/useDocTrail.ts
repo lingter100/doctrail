@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, errorMessage } from './api';
-import type { Auth, AuthMode, Detail, Doc, History, Hit, Modal, Search, View, Workspace } from './types';
+import type { Auth, AuthMode, Capabilities, Detail, Doc, History, Hit, Modal, Search, SearchMethod, View, Workspace } from './types';
 
 type State = {
   booting: boolean; auth: Auth | null; authMode: AuthMode; authBusy: boolean; authError: string;
@@ -9,18 +9,19 @@ type State = {
   loading: boolean; workspaceLoading: boolean; pageError: string; modal: Modal | null; modalBusy: boolean; modalError: string;
   feedback: Record<string, 'busy' | 'saved'>; retryBusy: boolean; logoutBusy: boolean;
   toast: { id: number; message: string } | null;
+  searchMethod: SearchMethod; capabilities: Capabilities | null; capabilitiesBusy: boolean;
 };
 const emptyWorkspace = {
   documents: [] as Doc[], history: [] as History[], view: 'library' as View, search: null,
   selected: null, selectedHit: null, selectedIndex: 0, query: '', filter: '', loading: false, workspaceLoading: false,
   pageError: '', modal: null, modalBusy: false, modalError: '', feedback: {}, retryBusy: false,
 };
-const initial: State = { ...emptyWorkspace, booting: true, auth: null, authMode: 'register', authBusy: false, authError: '', workspaceId: '', logoutBusy: false, toast: null };
+const initial: State = { ...emptyWorkspace, booting: true, auth: null, authMode: 'register', authBusy: false, authError: '', workspaceId: '', logoutBusy: false, toast: null, searchMethod: 'bm25', capabilities: null, capabilitiesBusy: false };
 
 export function useDocTrail() {
   const [state, setState] = useState<State>(initial);
   const live = useRef(state);
-  const tokens = useRef({ epoch: 0, auth: 0, load: 0, search: 0, detail: 0, modal: 0, toast: 0 });
+  const tokens = useRef({ epoch: 0, auth: 0, load: 0, search: 0, detail: 0, modal: 0, toast: 0, capabilities: 0 });
   const documentVersions = useRef(new Map<string, number>());
   const deletedDocuments = useRef(new Set<string>());
   function update(patch: Partial<State> | ((current: State) => Partial<State>)) {
@@ -66,10 +67,25 @@ export function useDocTrail() {
       if (valid() && !sessionExpired(error)) { if (live.current.view === 'search') toast(errorMessage(error)); else update({ pageError: errorMessage(error) }); }
     } finally { if (valid()) update(current => ({ workspaceLoading: false, loading: current.view === 'search' ? current.loading : false })); }
   }
+  async function loadCapabilities() {
+    const session = tokens.current.auth, request = ++tokens.current.capabilities;
+    const valid = () => session === tokens.current.auth && request === tokens.current.capabilities;
+    update({ capabilitiesBusy: true });
+    try {
+      const capabilities = await api<Capabilities>('/search/capabilities');
+      if (valid()) update({ capabilities });
+    } catch (error) {
+      if (valid() && !sessionExpired(error)) update({ capabilities: null });
+    } finally { if (valid()) update({ capabilitiesBusy: false }); }
+  }
+  function setSearchMethod(searchMethod: SearchMethod) {
+    tokens.current.search++; tokens.current.detail++;
+    update({ searchMethod, search: null, selected: null, selectedHit: null, feedback: {}, pageError: '', loading: live.current.view === 'search' ? false : live.current.loading });
+  }
   function acceptAuth(auth: Auth) {
     resetWorkspace();
-    update({ auth, workspaceId: auth.workspaces[0]?.id || '', authBusy: false, authError: '', booting: false });
-    void loadWorkspace();
+    update({ auth, workspaceId: auth.workspaces[0]?.id || '', authBusy: false, authError: '', booting: false, searchMethod: 'bm25', capabilities: null });
+    void loadWorkspace(); void loadCapabilities();
   }
   useEffect(() => {
     const abort = new AbortController();
@@ -127,16 +143,16 @@ export function useDocTrail() {
       if (session === tokens.current.auth && !sessionExpired(error)) { update({ logoutBusy: false }); toast(errorMessage(error)); }
     }
   }
-  async function runSearch(rawQuery: string) {
+  async function runSearch(rawQuery: string, method = live.current.searchMethod) {
     const query = rawQuery.trim(), id = live.current.workspaceId;
     if (!query || !id) return;
     const epoch = tokens.current.epoch, request = ++tokens.current.search;
     tokens.current.detail++;
     const valid = () => epoch === tokens.current.epoch && request === tokens.current.search;
-    update({ view: 'search', query, selected: null, selectedHit: null, search: null, loading: true, pageError: '', feedback: {}, retryBusy: false });
+    update({ view: 'search', query, searchMethod: method, selected: null, selectedHit: null, search: null, loading: true, pageError: '', feedback: {}, retryBusy: false });
     try {
-      const result = await api<Search>(`/workspaces/${id}/search?q=${encodeURIComponent(query)}&limit=10`);
-      if (valid()) update(current => ({ search: result, history: [{ id: result.search_id, query, created_at: new Date().toISOString(), result_count: result.results.length }, ...current.history.filter(item => item.id !== result.search_id)].slice(0, 50) }));
+      const result = await api<Search>(`/workspaces/${id}/search?q=${encodeURIComponent(query)}&limit=10&method=${encodeURIComponent(method)}`);
+      if (valid()) update(current => ({ search: result, history: [{ id: result.search_id, query, method: result.method, created_at: new Date().toISOString(), result_count: result.results.length }, ...current.history.filter(item => item.id !== result.search_id)].slice(0, 50) }));
     } catch (error) {
       if (valid() && !sessionExpired(error)) update({ pageError: errorMessage(error) });
     } finally { if (valid()) update({ loading: false }); }
@@ -268,7 +284,7 @@ export function useDocTrail() {
   }
   return { state, workspace: state.auth?.workspaces.find(workspace => workspace.id === state.workspaceId),
     setQuery: (query: string) => update({ query }), setFilter: (filter: string) => update({ filter }),
-    setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch,
+    setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, loadCapabilities, setSearchMethod,
     openDocument, closeSource, feedback, openModal, closeModal, submitModal, reprocess };
 }
 export type DocTrail = ReturnType<typeof useDocTrail>;

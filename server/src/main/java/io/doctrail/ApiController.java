@@ -11,10 +11,12 @@ import static io.doctrail.DocumentService.strip;
     private final Store store;
     private final Auth auth;
     private final DocumentService docs;
-    ApiController(Store store,Auth auth,DocumentService docs) {
+    private final LearnedSearch learned;
+    ApiController(Store store,Auth auth,DocumentService docs,LearnedSearch learned) {
         this.store=store;
         this.auth=auth;
         this.docs=docs;
+        this.learned=learned;
     }
     private static void fields(Map<String,Object> body,String... required) {
         if(body==null||!body.keySet().equals(Set.of(required)))throw new ApiError(422,"invalid_request");
@@ -147,9 +149,12 @@ import static io.doctrail.DocumentService.strip;
             return null;
         });
     }
-    @GetMapping("/workspaces/{workspace_id}/search") Map<String,Object> search(@PathVariable("workspace_id") String workspace,@RequestParam String q,@RequestParam(defaultValue="10") int limit,HttpServletRequest request) {
+    @GetMapping("/search/capabilities") Map<String,Object> capabilities(HttpServletRequest request) {return learned.capabilities(request);}
+    @GetMapping("/workspaces/{workspace_id}/search") Map<String,Object> search(@PathVariable("workspace_id") String workspace,@RequestParam String q,@RequestParam(defaultValue="10") int limit,@RequestParam(defaultValue="bm25") String method,HttpServletRequest request) {
+        if(!LearnedSearch.METHODS.contains(method))throw new ApiError(422,"invalid_request");
         if(length(q)<1||length(q)>500||limit<1||limit>50)throw new ApiError(422,"invalid_request");
         if(Ingest.isBlank(q))throw new ApiError(422,"query_required");
+        if(!method.equals("bm25"))return learned.search(workspace,q,limit,method,request);
         long started=System.nanoTime();
         String searchId=Auth.uid();
         return store.write(c-> {
@@ -166,7 +171,7 @@ import static io.doctrail.DocumentService.strip;
         return store.read(c-> {
             Object user=auth.user(c,request).get("id");
             docs.membership(c,workspace,user,false);
-            return Map.of("items",rows(c,"SELECT s.id,s.query,s.created_at,(SELECT COUNT(*) FROM search_results r JOIN documents d ON d.id=r.document_id WHERE r.search_id=s.id AND d.status='ready' AND d.revision=r.revision AND (d.visibility='workspace' OR d.owner_id=?)) AS result_count FROM searches s WHERE s.workspace_id=? AND s.user_id=? ORDER BY s.created_at DESC,s.id LIMIT 100",user,workspace,user));
+            return Map.of("items",rows(c,"SELECT s.id,s.query,s.created_at,COALESCE(m.method,'bm25') AS method,(SELECT COUNT(*) FROM search_results r JOIN documents d ON d.id=r.document_id WHERE r.search_id=s.id AND d.status='ready' AND d.revision=r.revision AND (d.visibility='workspace' OR d.owner_id=?)) AS result_count FROM searches s LEFT JOIN search_metadata m ON m.search_id=s.id WHERE s.workspace_id=? AND s.user_id=? ORDER BY s.created_at DESC,s.id LIMIT 100",user,workspace,user));
         });
     }
     @PostMapping("/searches/{search_id}/feedback") Map<String,Object> feedback(@PathVariable("search_id") String search,@RequestBody Map<String,Object> body,HttpServletRequest request) {

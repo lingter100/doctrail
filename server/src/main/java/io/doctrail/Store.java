@@ -25,6 +25,8 @@ public class Store {
                         execute(c, "COMMIT");
                     } catch (Exception e) { execute(c, "ROLLBACK"); throw e; }
                 } else if (version != 1) throw new IllegalStateException("unsupported_database_schema_version");
+                // Additive extension: legacy schema-v1 readers safely ignore this table.
+                execute(c, "CREATE TABLE IF NOT EXISTS search_metadata (search_id TEXT PRIMARY KEY REFERENCES searches(id) ON DELETE CASCADE,method TEXT NOT NULL CHECK(method IN ('bm25','dense','hybrid','hybrid_rerank')))");
                 execute(c, "PRAGMA journal_mode=WAL");
             }
         } catch (Exception e) { throw new IllegalStateException("database_initialization_failed"); }

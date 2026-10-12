@@ -1,0 +1,211 @@
+{
+  "kind": "automated-synthetic-model-service-verification",
+  "completed_utc": "2026-10-12T06:35:56.543297+00:00",
+  "base_commit": "e7b8cf74d508d6ee38355057ffce1c8bdf584b70",
+  "source_was_uncommitted": true,
+  "model_report_sha256": "85581ee3c4ba164172a6de55673b63e9a5848bf5253d564af631522635825fcf",
+  "browser_report_sha256": "50a341424102da672f5c6e57f6e72faffca34e7a2b20774f4f92eaa8ff119de8",
+  "browser_stats": {
+    "startTime": "2026-10-12T06:35:34.964Z",
+    "duration": 21297.813,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browser_tests": [
+    {
+      "title": "pure citation helper: exact Unicode codepoint spans only; unsafe or mismatched offsets fall back",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "pure highlight helper: regex metacharacters are literal and HTML text is preserved",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "pure excerpt helper: emoji remain whole at both excerpt boundaries",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "synthetic model outage: selected method stays explicit and BM25 requires user selection",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real Java: registration, MD/TXT/PDF, Unicode evidence, feedback, revisions, deletion and login",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real Java: failed PDF retry, oversized validation, keyboard focus and current-session expiry",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real Java: separate member session cannot see private documents or owner controls",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real responses: initial list load survives search and return to the library",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real responses: an older search and document detail cannot replace newer results",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real responses: workspace switch discards pending search",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real responses: workspace switch discards pending detail",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real responses: workspace switch discards pending load",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "synthetic failure: delayed expired 401 from an old session cannot log out the new session",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real response: closing a pending upload and opening another modal preserves the new form",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real responses: dismissed edit cannot resurrect a later deletion or overwrite a replacement modal",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real responses: dismissed older edit cannot replace a later accepted revision",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "real response: delayed logout still ends the session after switching workspace",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    },
+    {
+      "title": "synthetic failure: late error from a closed modal does not appear in the replacement modal",
+      "ok": true,
+      "outcomes": [
+        "expected"
+      ]
+    }
+  ],
+  "packaged_ui": true,
+  "owned_java_server_stopped": true,
+  "java_tests": {
+    "io.doctrail.ApiIntegrationTest": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "io.doctrail.IngestTest": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "io.doctrail.LearnedSearchTest": {
+      "tests": 38,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "io.doctrail.RetrievalTest": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "python_tests": {
+    "passed": 220,
+    "skipped": 0,
+    "warnings": 1,
+    "heavy_group_installed": true
+  },
+  "web_source_lf_sha256": {
+    "web/src/api.ts": "78cbb14db40a99c650d06846b3b2d77e206ca01c539de9c647bca460da3f4a96",
+    "web/src/helpers.ts": "33617eb6b5dea6dc8008d05ef2d9e5bbd43e656b7e083d01d3137e04a70d16c8",
+    "web/src/searchMethods.ts": "77ac8209da2b83c9c8bf9b89039ec839fe1ebe62de7827e748a224128049c51f",
+    "web/src/types.ts": "232538f7b1725af8a16edccef588738fa674c569c50055de9b32a891e0a6d81f",
+    "web/src/useDocTrail.ts": "572539d1a768824a023fa60102f134524b234e3a00bb28f478970373bc3bde7b",
+    "web/src/App.tsx": "9c5c3244101250ceb5482db325d5f0d7fd3ddaf57fb6ccb32736303672525987",
+    "web/src/main.tsx": "a652694e8d73dc296aa16039868125dcc10ceadf31ed867be71095b5f7b3f966",
+    "web/src/components/AuthScreen.tsx": "8f6f7fc363d0d7c5c81397b8b39a138567037b00229a7f66342a3890a6a2612b",
+    "web/src/components/ContentViews.tsx": "53edd2a3ca00ab6ac5a2ea813b7ac9fa2239d3c47f8142caf339786b76a0e128",
+    "web/src/components/Icon.tsx": "1f87f5310f245a52ce16fadbd898d98a0cdffc3a1a72c3af87e98dc380e7c523",
+    "web/src/components/Modal.tsx": "ef372fd35839a4f38ed0ec7c72931d75f45c442e00e7b279e45a4f6eec14f87d",
+    "web/src/components/SourcePane.tsx": "0af49d373e5493d07e31f174560ab214b7d915a3b895177bbfdd1d827f89fc54",
+    "web/src/style.css": "12fb54175ca18536b2469b57576b9018e91c382e62192c29f4c24d7893336d41",
+    "web/tests/helpers.spec.ts": "b9449210a87606ef6115de8bca49d3356ede7d8f7ec2af3f4a5a58253ad39a86",
+    "web/tests/model-errors.spec.ts": "3ae966813079f34a12ff32943b4325e50bd01d6feb40f995e10f91537f1fd28d",
+    "web/tests/real-service.spec.ts": "0aabc0cebc96fc79431ec44419fe8c55c6739d1fea7b5ac125ba1024f2f557b1",
+    "web/tests/request-races.spec.ts": "9b33b3cc72657467f7ff429529bbc460aa631c8e91a58d3e3091fe5d3c5fb8d2",
+    "web/tests/support.ts": "755489619ce4268bf51acf0a1835458eb1fc8d1d1f4abec6bd8d7479349e8dad",
+    "web/scripts/test-java.mjs": "9af2326d59cf95e0c5268c170a62711d5c982871ef524c997c42cac3acaa33c8",
+    "web/scripts/verify-model-browser.mjs": "cadc4fe5b86667fe6fbcca7070308d099504a6f428218bdbdfc172644f2a6be7",
+    "web/package-lock.json": "a1f39601f87b499e11c98577909a8c34068f0199d9b4c99401a74e651dc04ff2",
+    "web/package.json": "e5325a51fabed68935ca48fa317bb5b2f45cca26c182219132a18c946498a22b"
+  },
+  "frozen_sources_and_inputs_unchanged_from_base": true,
+  "user_review": false,
+  "limits": [
+    "Synthetic operating checks, not model quality or load evidence.",
+    "Current GPU HTTP timing overlapped an independent BM25 browser regression process.",
+    "No actual service deployment, training, final test evaluation or paid resource use."
+  ],
+  "model_report_original_windows_sha256": "b1678bb50410cb0f255265341c42c5957eedaf592c850d170ec4df2f4e63fc5c",
+  "model_report_normalization": "LF line endings for Git; JSON values unchanged from original Windows output."
+}

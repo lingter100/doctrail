@@ -46,6 +46,19 @@ class ApiIntegrationTest {
     JsonNode search(Account account,String workspace,String query)throws Exception{return tree(mvc.perform(get("/api/workspaces/"+workspace+"/search").param("q",query).cookie(account.cookie)).andExpect(status().isOk()).andReturn());}
     JsonNode edit(Account account,String id,String content,String visibility)throws Exception{return tree(mvc.perform(put("/api/documents/"+id).cookie(account.cookie).contentType("application/json").content(json.writeValueAsBytes(Map.of("title","edited","content",content,"visibility",visibility)))).andExpect(status().isOk()).andReturn());}
     void member(Account owner,Account member)throws Exception{mvc.perform(post("/api/workspaces/"+owner.workspace+"/members").cookie(owner.cookie).contentType("application/json").content(json.writeValueAsBytes(Map.of("email",member.email)))).andExpect(status().isCreated());}
+    @Test void defaultBm25AndOptionalMethodContractRemainCompatible()throws Exception{
+        Account account=register();upload(account,"refund policy evidence","workspace");
+        var baseline=search(account,account.workspace,"refund");
+        var explicit=tree(mvc.perform(get("/api/workspaces/"+account.workspace+"/search").param("q","refund").param("method","bm25").cookie(account.cookie)).andExpect(status().isOk()).andReturn());
+        assertThat(explicit.get("results")).isEqualTo(baseline.get("results"));
+        mvc.perform(get("/api/search/capabilities")).andExpect(status().isUnauthorized());
+        mvc.perform(get("/api/search/capabilities").cookie(account.cookie)).andExpect(status().isOk()).andExpect(jsonPath("$.default_method").value("bm25")).andExpect(jsonPath("$.status").value("disabled")).andExpect(jsonPath("$.available_methods[0]").value("bm25"));
+        mvc.perform(get("/api/workspaces/"+account.workspace+"/search").param("q","refund").param("method","dense").cookie(account.cookie)).andExpect(status().isServiceUnavailable()).andExpect(jsonPath("$.detail").value("inference_disabled"));
+        mvc.perform(get("/api/workspaces/"+account.workspace+"/search").param("q","refund").param("method","unknown").cookie(account.cookie)).andExpect(status().isUnprocessableEntity());
+        mvc.perform(get("/api/workspaces/"+account.workspace+"/search").param("q","refund").param("method"," dense ").cookie(account.cookie)).andExpect(status().isUnprocessableEntity());
+        mvc.perform(get("/api/workspaces/"+account.workspace+"/search").param("q"," \t\n").param("method","dense").cookie(account.cookie)).andExpect(status().isUnprocessableEntity()).andExpect(jsonPath("$.detail").value("query_required"));
+        mvc.perform(get("/api/workspaces/"+account.workspace+"/history").cookie(account.cookie)).andExpect(jsonPath("$.items.length()").value(2)).andExpect(jsonPath("$.items[0].method").value("bm25"));
+    }
     @Test void sessionsPersistAreOpaqueAndRotate()throws Exception{
         Account account=register();
         assertThat(account.cookie.isHttpOnly()).isTrue();assertThat(account.cookie.getAttribute("SameSite")).isEqualTo("Strict");

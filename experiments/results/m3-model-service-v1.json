@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-10-12T06:35:30.864681+00:00",
+  "provenance": {
+    "fixtures": "AI-authored synthetic documents and queries",
+    "checks": "automated real Java HTTP and actual local model inference",
+    "human_review": false,
+    "semantic_quality_evaluated": false,
+    "frozen_m2_m3_modified": false
+  },
+  "checks": [
+    "real_worker_health_requires_shared_authentication",
+    "authenticated_capabilities_all_four_methods_ready",
+    "all_methods_real_inference_exact_evidence_and_method_history",
+    "workspace_and_private_document_acl_all_methods",
+    "method_specific_owner_feedback_and_cross_user_denial",
+    "atomic_edit_removes_old_chunk_evidence_and_rejects_stale_feedback",
+    "reprocess_invalidates_revision_and_chunks_despite_identical_text_cache",
+    "delete_excludes_cached_document_from_every_method_and_feedback",
+    "actual_worker_cache_hit_and_changed_content_miss",
+    "real_browser_model_method_workflows",
+    "worker_outage_explicit_503_no_fallback_no_history_and_default_bm25_survives",
+    "no_document_sentinels_session_cookies_passwords_or_worker_token_in_logs"
+  ],
+  "timings": [
+    {
+      "method": "bm25",
+      "phase": "first_request",
+      "passage_cache_state": "not_used",
+      "http_elapsed_ms": 28.625,
+      "java_elapsed_ms": 8.85,
+      "visible_documents": 2,
+      "result_count": 2
+    },
+    {
+      "method": "bm25",
+      "phase": "repeated_request",
+      "passage_cache_state": "not_used",
+      "http_elapsed_ms": 23.766,
+      "java_elapsed_ms": 4.21,
+      "visible_documents": 2,
+      "result_count": 2
+    },
+    {
+      "method": "dense",
+      "phase": "first_request",
+      "passage_cache_state": "cold",
+      "http_elapsed_ms": 498.692,
+      "java_elapsed_ms": 480.2,
+      "visible_documents": 2,
+      "result_count": 2
+    },
+    {
+      "method": "dense",
+      "phase": "repeated_request",
+      "passage_cache_state": "warm_shared_across_methods",
+      "http_elapsed_ms": 57.277,
+      "java_elapsed_ms": 37.53,
+      "visible_documents": 2,
+      "result_count": 2
+    },
+    {
+      "method": "hybrid",
+      "phase": "first_request",
+      "passage_cache_state": "warm_shared_across_methods",
+      "http_elapsed_ms": 50.472,
+      "java_elapsed_ms": 30.1,
+      "visible_documents": 2,
+      "result_count": 2
+    },
+    {
+      "method": "hybrid",
+      "phase": "repeated_request",
+      "passage_cache_state": "warm_shared_across_methods",
+      "http_elapsed_ms": 54.527,
+      "java_elapsed_ms": 35.52,
+      "visible_documents": 2,
+      "result_count": 2
+    },
+    {
+      "method": "hybrid_rerank",
+      "phase": "first_request",
+      "passage_cache_state": "warm_shared_across_methods",
+      "http_elapsed_ms": 310.724,
+      "java_elapsed_ms": 291.06,
+      "visible_documents": 2,
+      "result_count": 2
+    },
+    {
+      "method": "hybrid_rerank",
+      "phase": "repeated_request",
+      "passage_cache_state": "warm_shared_across_methods",
+      "http_elapsed_ms": 115.201,
+      "java_elapsed_ms": 94.28,
+      "visible_documents": 2,
+      "result_count": 2
+    }
+  ],
+  "runtime": {
+    "python": "3.11.15",
+    "os": "Windows",
+    "requested_device": "cuda"
+  },
+  "jar_sha256": "d7c011afb0fe832a644d63b3d37cc42c2f5bcb83e211d8a8ba80a6e4a966e974",
+  "git_commit": "e7b8cf74d508d6ee38355057ffce1c8bdf584b70",
+  "git_dirty": true,
+  "source_sha256": {
+    "server/src/main/java/io/doctrail/ApiController.java": "f949f7de92535f48b41ca73581cc03ce4c3cd6a745cae40435864df731d5024c",
+    "server/src/main/java/io/doctrail/ApiError.java": "0fc30aa8140a6b28b44a8a8986aa7e4f243cde6971e134298612dab4afb2f103",
+    "server/src/main/java/io/doctrail/ApiErrors.java": "2d25063362709c8aec8ed0ed03c69193c36b54f3126b47beec416d38099763eb",
+    "server/src/main/java/io/doctrail/Auth.java": "4595bd0dfb079c792fc836032291edcbb1605952ec4f5a60806b11927b923ab8",
+    "server/src/main/java/io/doctrail/DocTrailApplication.java": "9c0a201ca1230abc169c7fc49754360847db0d8ec77e017b41c5fa7d57f6c226",
+    "server/src/main/java/io/doctrail/DocumentService.java": "9ed196ceeeeee1c0fc294df634c032f9e09367a242d3cc45859142382804659b",
+    "server/src/main/java/io/doctrail/FrontendController.java": "c675845e45482abd99c91e375b471bb96228661f6a239f4ff90fec3cefd8cd76",
+    "server/src/main/java/io/doctrail/InferenceClient.java": "1763eb23d4626735800b58d019ba2ce0b86f84266aba84df7122cc2b8cb1e56e",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/LearnedSearch.java": "6c281aba4131b4107bce4b436389cbbb8912215b8cc5f1db3b29fda6cba62c75",
+    "server/src/main/java/io/doctrail/RequestGuard.java": "bc025143500ff8a4f9a5707b0e90c4ef60bcb024fac19b6cc49e0220f24dad98",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/main/java/io/doctrail/Store.java": "e2d6f9472957a2586931ae4c96da1f200c5201813122407f95b5b8ee939d2f35",
+    "server/src/test/java/io/doctrail/ApiIntegrationTest.java": "563747aba44d4114b14d8d1251b556896718e8d871ef60fc79530f9d81af4427",
+    "server/src/test/java/io/doctrail/IngestTest.java": "a44c680528a26c8e80d815ad40ffb3024f3eae861f6612d5bfc3bc68edcf45dc",
+    "server/src/test/java/io/doctrail/LearnedSearchTest.java": "c6bd2be67cc3edda3fc67310a5fa23f5d39a4d70cbcb9bb76f9463926f026ded",
+    "server/src/test/java/io/doctrail/RetrievalTest.java": "7b40c47847b0a5022be139aa07d00a6dfa0e1e7274820d59819ffc130a482cef",
+    "server/src/main/resources/application.properties": "b0aeef560e4b357c00fd703de8d8eacea49054316586de0b4b28d8c7fa8da75d",
+    "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+    "src/doctrail/model_retrieval.py": "0b1f60e3f38daa8f6dc85642c17832a82c6ea32ec87f3733aa8aa3fbc63dd5b4",
+    "data/models/m3-models.json": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1",
+    "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+    "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+    "scripts/verify_model_service.py": "6b002014fa31f4d4ae1fe3aa833a369454266d888303759ae63d840f27a0f45d"
+  },
+  "worker_health": {
+    "schema_version": 1,
+    "status": "ready",
+    "embedding": {
+      "model": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "dimension": 384,
+      "max_length": 512
+    },
+    "reranker": {
+      "model": "BAAI/bge-reranker-v2-m3",
+      "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "max_length": 512
+    },
+    "limits": {
+      "max_embed_items": 64,
+      "max_rerank_items": 50
+    },
+    "runtime": {
+      "device": "cuda",
+      "embedding_dtype": "torch.float32",
+      "reranker_dtype": "torch.float16"
+    }
+  },
+  "startup_ms": 19135.831,
+  "worker_cache_witness": [
+    {
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "truncated_inputs": 0,
+      "elapsed_ms": 11.905
+    },
+    {
+      "cache_hits": 1,
+      "cache_misses": 0,
+      "truncated_inputs": 0,
+      "elapsed_ms": 0.079
+    },
+    {
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "truncated_inputs": 0,
+      "elapsed_ms": 16.442
+    }
+  ],
+  "browser": {
+    "schema_version": 1,
+    "status": "passed",
+    "synthetic": true,
+    "actual_model_http": true,
+    "user_review": false,
+    "completed_at": "2026-10-12T06:35:56.154Z",
+    "checks": [
+      "real_ui_registration_and_upload",
+      "real_dense_search_and_evidence",
+      "real_hybrid_search_and_evidence",
+      "real_hybrid_rerank_search_and_evidence",
+      "feedback_and_original_method_history_rerun",
+      "mobile_controls_without_horizontal_overflow"
+    ],
+    "uncaught_errors": []
+  },
+  "browser_artifacts": {
+    "directory": ".local/model-browser-da20ae222dc83720",
+    "sha256": {
+      "browser.json": "0244246e0ac8972f1c42d7ec64ed8c09dd5a557028b7f9086719d5d0ff7ba3fe",
+      "model-desktop.png": "15f4bf689e7d5bb979f049d2026bca2be21a79ac98aa7a0e4118996e31cd6cd7",
+      "model-mobile.png": "8fc40c7232bff04bff79bffb53da0843a6f31cdc0f2435a4f4610433bd9c1d63"
+    }
+  },
+  "status": "passed",
+  "completed_at": "2026-10-12T06:35:56.543297+00:00",
+  "limitations": [
+    "Synthetic operational integration checks; no real-user or human quality judgment.",
+    "First/repeated request timings are sequential local Java HTTP samples, not a load benchmark.",
+    "Models are resident before timings; cache state is shared across methods and explicitly not reset.",
+    "No training, grounded QA, frozen test evaluation, paid API, or public deployment."
+  ]
+}
