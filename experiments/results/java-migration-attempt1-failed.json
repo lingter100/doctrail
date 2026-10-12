@@ -1,0 +1,10 @@
+{
+  "status": "failed_verification_cleanup",
+  "date": "2026-10-12",
+  "scope": "First local Java migration HTTP smoke, not a performance result",
+  "safe_error_code": "windows_java_launcher_child_retained_log_handle",
+  "observed": "HTTP assertions reached restart/readback, but disposable cleanup failed with Windows file-in-use error. No complete success report was emitted.",
+  "diagnosis": "The java executable on PATH was an Oracle javapath launcher. After the subprocess handle exited, two actual JDK JVM child processes were still running and retaining the log file.",
+  "repair": "Resolve java.home from runtime properties and invoke that JDK executable directly so shutdown waits for the actual JVM. The two verified task-owned JVM processes were stopped and the checked disposable directory was cleaned.",
+  "quality_or_latency_claim": false
+}
