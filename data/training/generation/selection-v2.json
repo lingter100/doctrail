@@ -1,0 +1,182 @@
+{
+  "inventory_path": "data/training/m4-inventory-v3.json",
+  "inventory_sha256": "97b5d40df918df27ad4864a7b545d12a60cf949674fc264d77df03949667e2bc",
+  "parent_selection_path": "data/training/generation/selection-v1.json",
+  "parent_selection_sha256": "9550aa3817a45f7843d31a833d768ea3c0c7e43b6969f4d50318c2e342079bdd",
+  "ranked_eligible_families": [
+    {
+      "characters": 9393,
+      "document_id": "k8s-ko-05261080c1ab2828",
+      "family_id": "k8s-family-85e09e3d503ba9b4",
+      "family_selection_sha256": "acde29ced59352d17f96670abf84d3c34b355be956362783990c03721fe36184",
+      "language": "ko",
+      "topic": "concepts"
+    },
+    {
+      "characters": 2758,
+      "document_id": "k8s-en-a981a87c2d984055",
+      "family_id": "k8s-family-6874c05a551ef7d6",
+      "family_selection_sha256": "fddf7e06e860adb4773ea30ea3f6983dbe7afa0ccc599b95124133761a952653",
+      "language": "en",
+      "topic": "concepts"
+    },
+    {
+      "characters": 17500,
+      "document_id": "k8s-en-4a9a9ec0b9a1d8e7",
+      "family_id": "k8s-family-653702edbef5a98e",
+      "family_selection_sha256": "361683794a8a5bb7d3c6fa464549b2c14beb63d7589041a8302e9c6a8f7e01fa",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 16622,
+      "document_id": "k8s-en-3ed550d2997a62aa",
+      "family_id": "k8s-family-45cf538f5f3a7961",
+      "family_selection_sha256": "3c925a791d9da9236da5a6c0645131e909663fedfa8f0c01b64d4c028bed1146",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 11555,
+      "document_id": "k8s-en-6fb27556557dcbe0",
+      "family_id": "k8s-family-f169174f3b3467de",
+      "family_selection_sha256": "448e9ce113be9c96ab5f7380f5fada3ae03628e09bba080adf19d43079f36321",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 13092,
+      "document_id": "k8s-en-038f620ecab3db46",
+      "family_id": "k8s-family-f7e9e60b8aa4a303",
+      "family_selection_sha256": "6e594c872b04a67e4a37eb6865a5d5078d0781242987416796dc7a703fdd1d72",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 10724,
+      "document_id": "k8s-en-3894ae068d814c44",
+      "family_id": "k8s-family-de9bde560e973c87",
+      "family_selection_sha256": "8cf5b7f5fc88d92334d0c64e6ab387e5a486d244d313c21abe909b399b757595",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 10816,
+      "document_id": "k8s-en-88587c476cc87a93",
+      "family_id": "k8s-family-58ca6f9c5e16509d",
+      "family_selection_sha256": "8ec32e9fa6386731a517a216f10895759f04df338befc3e61692f6d66609d366",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 4220,
+      "document_id": "k8s-en-c32ccbf8cc175c21",
+      "family_id": "k8s-family-ff6b7f5f3d89b13a",
+      "family_selection_sha256": "b0f7ea048b430e041a7b103e16448b1a91caeac658a941d879d82984b08611f7",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 12308,
+      "document_id": "k8s-en-42d19d6e535642ec",
+      "family_id": "k8s-family-f1d1b99347e82d0a",
+      "family_selection_sha256": "c0b0923de7dcad59f1cc13082eab11d06de019a9fc0704eb5b7fc98a3917feb0",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 17124,
+      "document_id": "k8s-en-2ac9cfb3b8260598",
+      "family_id": "k8s-family-6a373262156cef78",
+      "family_selection_sha256": "da53185cf3ecda7037ba212008f7c84cab50351bd1ea24dab74cab361bc7c777",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 6545,
+      "document_id": "k8s-en-7e250594b04c5db4",
+      "family_id": "k8s-family-86aef480349230b9",
+      "family_selection_sha256": "e64cca381d086f9d183107d7243707bf4bb4504e68f983baa7cbf7a43ff9ab98",
+      "language": "en",
+      "topic": "reference"
+    },
+    {
+      "characters": 14605,
+      "document_id": "k8s-en-3bfbf6ad1120ed18",
+      "family_id": "k8s-family-a724ef9f05cd599d",
+      "family_selection_sha256": "eeaaba4b60bd1def611d4f1269ad71cae6373ba45afd2ef3cb519159151f88c9",
+      "language": "en",
+      "topic": "reference"
+    }
+  ],
+  "rule": {
+    "automatic_fallback": false,
+    "eligible_characters_inclusive": [
+      2000,
+      20000
+    ],
+    "eligible_topics": [
+      "concepts",
+      "tasks",
+      "reference"
+    ],
+    "exclude_families": "all family IDs of selection-v1 calibration document IDs",
+    "family_order": [
+      "topic concepts, tasks, reference",
+      "sha256(UTF8(selection_seed + : + family_id)) ascending",
+      "family_id ascending"
+    ],
+    "partition": "calibration",
+    "representative_order": [
+      "language == en first",
+      "document_id ascending"
+    ],
+    "selected_additional_families": 1,
+    "target_supplemental_questions": 2
+  },
+  "schema_version": 2,
+  "selected": {
+    "calibration": [
+      "k8s-en-7e1da47fcbb52ee0",
+      "k8s-en-03468ff4ebcb29fe",
+      "k8s-en-7375d5fe28a8752e",
+      "k8s-en-3161ebe6b588b5f0",
+      "k8s-ko-05261080c1ab2828"
+    ],
+    "fit": [
+      "k8s-en-36454f14c65972a0",
+      "k8s-en-8a45afb6cd3eebe6",
+      "k8s-en-a26943f2bc214345",
+      "k8s-en-b9954c11f6e84ee5",
+      "k8s-ko-040b443d2631eb89",
+      "k8s-en-1d55f47bde46fc34",
+      "k8s-en-0f3cce204fab5392",
+      "k8s-en-1adfc193fdb2f292",
+      "k8s-en-881deb6fc72a8e33",
+      "k8s-en-3a7ff8c422e375bb",
+      "k8s-en-430c9712bd8ad0ba",
+      "k8s-en-c2c7059ed1a16137",
+      "k8s-ko-1bd7acee89068453",
+      "k8s-en-e5aad649004c75cb",
+      "k8s-en-9ed4d912b483c549",
+      "k8s-en-e13e033134e5843e"
+    ]
+  },
+  "selected_family": {
+    "characters": 9393,
+    "document_id": "k8s-ko-05261080c1ab2828",
+    "family_id": "k8s-family-85e09e3d503ba9b4",
+    "family_selection_sha256": "acde29ced59352d17f96670abf84d3c34b355be956362783990c03721fe36184",
+    "language": "ko",
+    "topic": "concepts"
+  },
+  "selection_basis": "Inventory metadata only; frozen before supplementary document text, question authoring, candidate review or new retrieval scores. Topic priority extends conceptual coverage and does not estimate model benefit.",
+  "selection_id": "m4-calibration-supplement-v1",
+  "selection_seed": "doctrail-m4-calibration-supplement-v1",
+  "shortfall_policy": "Preserve original 64 fit + 14 calibration. If selected document cannot yield two independently answerable distinct intents, keep shortfall and data_ready=false. Do not fall through to a later family without a new versioned selection.",
+  "supplemental_selected": {
+    "calibration": [
+      "k8s-ko-05261080c1ab2828"
+    ]
+  }
+}

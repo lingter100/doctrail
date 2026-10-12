@@ -1,0 +1,283 @@
+{
+  "created_at": "2026-10-12",
+  "execution_boundaries": {
+    "dependency_sync_during_active_inference": false,
+    "evaluation_or_service_adoption_claimed": false,
+    "new_hyperparameter_tuning": false,
+    "paid_api_gpu_cloud": false,
+    "public_service_deployment": false,
+    "resource_probe_or_training_run_by_data_readiness_script": false,
+    "tokenizer_check_requires_model_forward": false
+  },
+  "frozen_input_sha256": {
+    "data/manifests/kubernetes-v1.json": "e4d33997b5589bd8d9cc5c56691da5940eba3a7b6554c671b8c39b78910fe69a",
+    "data/models/m3-models.json": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1",
+    "data/training/generation/m4-calibration.draft.jsonl": "59511a2cf38db381307939e88a4a04603442a52f33bb74b0dbf65696e387341f",
+    "data/training/generation/m4-fit.draft.jsonl": "5d095cda4710c05fc84f2844c03802aa817a244b0fee3111725bb62fa3ca3f4f",
+    "data/training/generation/protocol-v1.md": "a3f821667a54662e57487a49e28a97b65643d3f2d701eb6b9be21b5ef0add49c",
+    "data/training/generation/receipt-v1.json": "d8ed786e3455f5d069a82e26d336a844b030c3f2aa913128b97dcf20da5bea97",
+    "data/training/generation/selection-v1.json": "9550aa3817a45f7843d31a833d768ea3c0c7e43b6969f4d50318c2e342079bdd",
+    "data/training/generation/selection-v2.json": "e7446e20b1fbbf2f684dd44c28daa651491032474e55818cc7c1a1e389e8a828",
+    "data/training/m4-inventory-v3.json": "97b5d40df918df27ad4864a7b545d12a60cf949674fc264d77df03949667e2bc",
+    "data/training/m4-pilot-v1/negative-candidates.jsonl": "c9f7e49450e9539a6de34b4ca554e0def49c87074352be8b67d16459347f0d5e",
+    "data/training/m4-pilot-v1/positive-pairs.jsonl": "8b24e225dc7a8dd4fa6b79b6ab620e37f7a4c454862429c5b9a155a639beb2c3",
+    "data/training/m4-pilot-v1/questions.jsonl": "a39271f57ebded58e2f6d57819e30fa2b3c0b10ede095362c39ca22089cd1a67",
+    "data/training/m4-pilot-v1/report.json": "d16c352c41f5ea78b4b82d3ccd3fc5b8cffeffcab9897804d9e05ca1733e3541",
+    "data/training/m4-plan-v1.json": "579e8ce0c6efbdc6aafe7906e873dbf051e0fecd0266e2f6cacefcda70c3e8ba",
+    "data/training/reviews/m4-calibration-semantic-v1.jsonl": "d86d8205c74d546ad964fbc05ffbe6cc761cce42ac38f7ddd487424a61e2a842",
+    "data/training/reviews/m4-fit-semantic-v1.jsonl": "cd0287af12bb4e27cac7f33435120877e1d69de01a8e961896398c51b8a2f5b3",
+    "data/training/reviews/m4-semantic-report-v1.json": "54964c3881cd778e985761a32d83bccef9b1a0b9988418f90bf18277833532a2",
+    "uv.lock": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+  },
+  "frozen_source_sha256_lf": {
+    "scripts/prepare_corpus.py": "181de3ed388f76ec66e13d851b267ddf7dded0046829a816cf03b8afc28bce57",
+    "scripts/prepare_training.py": "9a1497d292e82df5a74ca6984c5d44497f57199a35ed15828ca529f1d97408de",
+    "scripts/validate_training_reviews.py": "224a49ce9b6de7c9c48a5a48b010e97c833f4bb352217d500db88a924e9cba03",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56"
+  },
+  "hash_contract": {
+    "chunk_text": "SHA256 exact UTF-8 text",
+    "files": "SHA256 exact UTF-8 LF file bytes; no JSON semantic normalization of file hashes",
+    "positive_context_and_packs": "prepare_training.fingerprint: sorted-key JSON indent=2, ensure_ascii=False, one final LF; positive context is ordered compact_chunk references without text",
+    "question_and_candidate_rows": "sha256(json.dumps(row,ensure_ascii=False,sort_keys=True,separators=(comma,colon)).encode(UTF-8)); no final newline; reuse validate_training_reviews.question_hash",
+    "source_files": "SHA256 UTF-8 bytes after CRLF to LF only"
+  },
+  "negative_review": {
+    "ambiguous_definition": "Possible alternative answer, missing condition, contradiction, translation or version relation cannot be resolved; exclude from loss.",
+    "candidate_eligibility": {
+      "partition": "fit",
+      "quarantine_reasons": [],
+      "status": "unreviewed"
+    },
+    "candidate_order": [
+      "rank ascending",
+      "chunk_id ascending"
+    ],
+    "candidate_source": "data/training/m4-pilot-v1/negative-candidates.jsonl",
+    "expected_review_count": 256,
+    "in_batch_negatives": false,
+    "labels": [
+      "negative",
+      "relevant",
+      "ambiguous",
+      "unknown"
+    ],
+    "negative_definition": "The complete candidate does not support the specific requested fact. Same topic or absence from positive annotations is not sufficient. Explain the requested fact and why this candidate does not support it.",
+    "positive_context": "all original known positive chunks ordered document_id then numeric chunk ordinal; each full text is in local pack and compact reference with text hash is bound",
+    "question_source": "original 64 fit questions only",
+    "receipt_fields": [
+      "question_id",
+      "candidate_chunk_id",
+      "question_sha256",
+      "compiled_question_sha256",
+      "positive_context_sha256",
+      "candidate_sha256",
+      "candidate_text_sha256",
+      "review_pack_sha256",
+      "readiness_plan_sha256",
+      "label",
+      "reason",
+      "reviewer",
+      "human_review"
+    ],
+    "relevant_definition": "Candidate supports the requested fact or supplies a valid alternative answer; exclude from loss, preserve as unresolved relevance discovery; do not silently add to gold labels.",
+    "review_every_selected_candidate_exactly_once": true,
+    "review_per_query": 4,
+    "roles": {
+      "A": {
+        "first_question_id": "m4-fit-001",
+        "last_question_id": "m4-fit-032",
+        "output_path": "data/training/reviews/m4-negative-a-v1.jsonl",
+        "reviewer": {
+          "agent": "m4_gate_design",
+          "model": "gpt-6-astra",
+          "reasoning": "xhigh",
+          "review_kind": "independent_ai"
+        }
+      },
+      "B": {
+        "first_question_id": "m4-fit-033",
+        "last_question_id": "m4-fit-064",
+        "output_path": "data/training/reviews/m4-negative-b-v1.jsonl",
+        "reviewer": {
+          "agent": "m4_supp_author",
+          "model": "gpt-6-astra",
+          "reasoning": "xhigh",
+          "review_kind": "independent_ai"
+        }
+      }
+    },
+    "shortfall_policy": "Any fit query with fewer than two negative labels blocks whole data_ready; preserve all64 and all receipts; extending review beyond four requires a new plan/pack version.",
+    "training_negative_count_per_fit_query": 2,
+    "training_negative_selection": "first two label=negative by frozen candidate rank then chunk_id; distinct chunk IDs; no distinct-document requirement; no score/token-length selection",
+    "unknown_definition": "Not enough review evidence or review incomplete; exclude from loss."
+  },
+  "parent_plan_path": "data/training/m4-plan-v1.json",
+  "parent_plan_sha256": "579e8ce0c6efbdc6aafe7906e873dbf051e0fecd0266e2f6cacefcda70c3e8ba",
+  "plan_id": "m4-readiness-plan-v1",
+  "provenance": {
+    "automatic_validation": "separate_from_semantic_review",
+    "design_agent": "m4_gate_design",
+    "human_review": "pending",
+    "model": "gpt-6-astra",
+    "negative_review": "independent_ai",
+    "question_authorship": "ai_authored",
+    "reasoning": "xhigh",
+    "settings_evidence": "Parent confirmed successful spawn_agent call with explicit model and reasoning on 2026-10-12; parent chat model unchanged."
+  },
+  "readiness": {
+    "data_ready_required": [
+      "frozen_inputs_and_sources_match",
+      "original_64_fit_and_14_calibration_preserved",
+      "exactly_two_new_independent_calibration_intents",
+      "original_plan_count_language_topic_family_and_duplicate_gates_pass",
+      "all_original_and_supplemental_positive_reviews_accept_with_valid_bindings",
+      "all256_frozen_negative_candidates_reviewed_with_valid_bindings",
+      "every_fit_query_has_two_reviewed_negative_chunks",
+      "all80_queries_and_selected_positive_quotes_survive_actual_e5_tokenizer",
+      "tokenizer_snapshot_and_receipt_hashes_match",
+      "both_fixed_negatives_per_fit_query_fully_survive_actual_e5_tokenizer",
+      "no_question_silently_removed_or_replaced",
+      "deterministic_replay_passes"
+    ],
+    "expected_calibration_questions": 16,
+    "expected_fit_questions": 64,
+    "expected_total_questions": 80,
+    "human_review_pending_allowed_only_with_provisional_ai_label_disclosure": true,
+    "human_reviewed_questions": 0,
+    "resource_probe_allowed": "data_ready == true and no conflicting model job; does not require resource_probe already passed",
+    "resource_probe_result_initial": "not_run",
+    "result_dimensions": [
+      "data_ready",
+      "resource_probe_result",
+      "training_ready",
+      "training_executed"
+    ],
+    "training_executed_initial": false,
+    "training_ready": "data_ready == true and resource_probe_result == passed; resource probe preserves original m4-plan-v1 contract and resets base weights/optimizer/seed before training"
+  },
+  "runtime_receipt_required_input_hashes": [
+    "readiness_plan",
+    "selection_v2",
+    "supplement_draft",
+    "supplement_author_pack",
+    "supplement_semantic_review",
+    "combined_compiled_questions",
+    "combined_positive_pairs",
+    "negative_review_pack_A",
+    "negative_review_pack_B",
+    "negative_reviews_A",
+    "negative_reviews_B",
+    "tokenizer_receipt"
+  ],
+  "runtime_receipt_required_source_hashes": [
+    "scripts/prepare_training_ready.py",
+    "scripts/prepare_training.py",
+    "scripts/validate_training_reviews.py",
+    "scripts/prepare_corpus.py",
+    "src/doctrail/ingest.py",
+    "src/doctrail/retrieval.py"
+  ],
+  "schema_version": 1,
+  "scope": {
+    "change_training_proposal": false,
+    "full_corpus_integrity_before_train_filter": "unchanged existing corpus loader",
+    "original_train_only": true,
+    "preserve_frozen_m2_m3_and_m4_pilot": true,
+    "read_dev_test_smoke_questions": false,
+    "training_execution_in_this_readiness_command": false
+  },
+  "status": "preregistered_additive_readiness_contract_not_result",
+  "supplement": {
+    "author_pack_scope": "selected supplemental document only; use unchanged build_author_pack and original inventory/plan hashes",
+    "document_ids": [
+      "k8s-ko-05261080c1ab2828"
+    ],
+    "draft_path": "data/training/generation/m4-calibration-supplement-v1.draft.jsonl",
+    "family_ids": [
+      "k8s-family-85e09e3d503ba9b4"
+    ],
+    "final_calibration_families": 5,
+    "final_calibration_questions": 16,
+    "final_fit_questions": 64,
+    "original_questions_must_remain_byte_identical": true,
+    "partition": "calibration",
+    "protocol": "inherit protocol-v1 without weakening independent intent, whole exact quote, author provenance or pending human review",
+    "question_ids": [
+      "m4-cal-015",
+      "m4-cal-016"
+    ],
+    "review_path": "data/training/reviews/m4-calibration-supplement-semantic-v1.jsonl",
+    "selection_path": "data/training/generation/selection-v2.json",
+    "selection_sha256": "e7446e20b1fbbf2f684dd44c28daa651491032474e55818cc7c1a1e389e8a828",
+    "shortfall": "stop without fallback or quota reduction",
+    "target_new_questions": 2
+  },
+  "supplemental_review": {
+    "all_existing_review_receipts_revalidated": true,
+    "author": {
+      "agent": "m4_supp_author",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh"
+    },
+    "human_review": "pending",
+    "required_decision": "accept",
+    "reviewer": {
+      "agent": "m4_gate_design",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "review_kind": "independent_ai"
+    }
+  },
+  "tokenizer": {
+    "add_special_tokens": true,
+    "all_questions_in_scope": 80,
+    "failure_policy": "Missing retained positive, truncated query, missing tokenizer snapshot or fewer than two reviewed fit negatives excludes the row from a hypothetical loss, retains it in the original denominator and blocks all data_ready. No question deletion, alternate quote, shorter chunk, alternate max_length or silent substitution.",
+    "local_files_only": true,
+    "manifest_path": "data/models/m3-models.json",
+    "max_length": 512,
+    "model_key": "e5",
+    "negative_retention_policy": "Freeze first two reviewed-negative chunks by original rank before token checks. Require each complete prefixed candidate untruncated input_ids to equal max512 truncated input_ids. Any loss is negative_truncation and blocks data_ready; never substitute a later candidate. Reviewing an actual truncated model input requires a new plan/pack version.",
+    "padding_for_retention_check": false,
+    "passage_prefix": "passage: ",
+    "positive_order": [
+      "document_id ascending",
+      "numeric chunk ordinal ascending",
+      "chunk_id ascending"
+    ],
+    "positive_selection": "First known positive in that order whose entire exact quote survives actual prefixed passage tokenization; no query duplication for overlapping positives.",
+    "query_prefix": "query: ",
+    "query_retention": "Require prefixed query complete untruncated input_ids to equal truncated input_ids for every fit/calibration question.",
+    "quote_retention": "Compare untruncated and max512 truncated fast-tokenizer input_ids and offset_mapping. Translate exact document quote offsets to passage-local offsets including prefix. At least one non-special token must overlap the nonempty quote; every untruncated token overlapping the entire quote interval must remain with identical token id and offsets after truncation. A partial final quote token fails. Never infer retention from character count or decoded substring alone.",
+    "receipt_requires": [
+      "readiness_plan_sha256",
+      "input_artifact_sha256",
+      "source_sha256_lf",
+      "model_revision",
+      "actual_tokenizer_file_sha256",
+      "tokenizer_class",
+      "transformers_version",
+      "tokenizers_version",
+      "settings",
+      "query_token_lengths",
+      "all_positive_candidate_retention",
+      "selected_positive_chunk_id",
+      "selected_positive_text_sha256",
+      "selected_negative_chunk_ids",
+      "selected_negative_token_lengths",
+      "excluded_rows_and_reasons"
+    ],
+    "repo_id": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "tokenizer_files": [
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "special_tokens_map.json",
+      "config.json"
+    ],
+    "truncation": true,
+    "use_fast": true,
+    "verify_actual_local_file_hashes_against_manifest": true
+  }
+}
