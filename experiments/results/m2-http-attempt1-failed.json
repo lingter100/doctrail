@@ -1,0 +1,19 @@
+{
+  "status": "failed_no_performance_report_retained",
+  "observed_at": "2026-10-12",
+  "code_commit": "65338f2",
+  "corpus": "kubernetes-v1",
+  "questions": "m2-dev-v1.1",
+  "stage": "temporary_directory_cleanup_after_searches_and_logout",
+  "observed_error": "PermissionError WinError 32: benchmark.sqlite3 still locked during TemporaryDirectory cleanup",
+  "safe_server_log_observations": {
+    "document_upload_records": 313,
+    "search_records_including_warmups": 34,
+    "logout_status": 204,
+    "server_process_absent_on_followup_check": true
+  },
+  "latency_metrics": null,
+  "interpretation": "Requests were logged but the runner failed before saving its report. Do not cite this attempt as a successful benchmark or reconstruct metrics from selected log lines.",
+  "remediation": "Add bounded PermissionError retries after server termination, with an absolute-path check restricting cleanup to the runner's own named temporary directory. Retry a fresh complete run.",
+  "root_cause_limit": "A Windows file lock was observed. The exact handle owner and reason were not identified; delayed release after child termination is a hypothesis."
+}

@@ -8,11 +8,13 @@ import math
 import os
 import platform
 import secrets
+import shutil
 import socket
 import subprocess
 import sys
 import tempfile
 import time
+from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -24,6 +26,33 @@ from scripts.prepare_corpus import load_verified_corpus
 from scripts.question_dataset import read_questions, validate_questions
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def cleanup_task_directory(path: Path, parent: Path) -> None:
+    """Windows may release the terminated child's handles slightly after wait()."""
+    target = path.resolve()
+    if target.parent != parent.resolve() or not target.name.startswith("doctrail-http-"):
+        raise ValueError("Refusing cleanup outside the benchmark's named temporary directory")
+    for attempt in range(6):
+        try:
+            shutil.rmtree(target)
+            return
+        except FileNotFoundError:
+            return
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(0.1 * 2**attempt)
+
+
+@contextmanager
+def disposable_database_directory():
+    parent = Path(tempfile.gettempdir()).resolve()
+    path = Path(tempfile.mkdtemp(prefix="doctrail-http-", dir=parent))
+    try:
+        yield path
+    finally:
+        cleanup_task_directory(path, parent)
 
 
 def select_queries(rows: list[dict]) -> list[dict]:
@@ -93,7 +122,7 @@ def run(manifest: Path, questions: Path) -> dict:
             "local_electricity_and_hardware_cost": "not_measured",
         },
     }
-    with tempfile.TemporaryDirectory(prefix="doctrail-http-") as folder:
+    with disposable_database_directory() as folder:
         temporary = Path(folder)
         database = temporary / "benchmark.sqlite3"
         environment = dict(
