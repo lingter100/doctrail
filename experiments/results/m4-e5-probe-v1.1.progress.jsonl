@@ -1,0 +1,10 @@
+{"command":"probe","event":"run_started","sequence":1}
+{"event":"all_selected_negative_model_inputs_verified","sequence":2}
+{"event":"fresh_base_model_loaded","sequence":3}
+{"epoch":0,"event":"optimizer_group_started","optimizer_step":1,"sequence":4}
+{"event":"microbatch_backward_completed","loss":1.37548828125,"microbatch":1,"optimizer_step":1,"sequence":5}
+{"event":"microbatch_backward_completed","loss":0.42852783203125,"microbatch":2,"optimizer_step":1,"sequence":6}
+{"event":"microbatch_backward_completed","loss":0.8563232421875,"microbatch":3,"optimizer_step":1,"sequence":7}
+{"event":"microbatch_backward_completed","loss":0.17413330078125,"microbatch":4,"optimizer_step":1,"sequence":8}
+{"event":"optimizer_group_failed","optimizer_step":1,"sequence":9,"update_verified":false}
+{"event":"run_failed","failure_code":"runtime_failed_stop_no_automatic_retry","sequence":10}

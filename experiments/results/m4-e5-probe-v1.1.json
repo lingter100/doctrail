@@ -1,0 +1,268 @@
+{
+  "base_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "command": "probe",
+  "cpu_rss_peak_sampled_bytes": 1738481664,
+  "current_optimizer_weight_update_status": "not_observed",
+  "device": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "device_free_bytes_before_load": 5321523200,
+  "elapsed_ms": 1891.9255998916924,
+  "events": [
+    {
+      "command": "probe",
+      "event": "run_started",
+      "sequence": 1
+    },
+    {
+      "event": "all_selected_negative_model_inputs_verified",
+      "sequence": 2
+    },
+    {
+      "event": "fresh_base_model_loaded",
+      "sequence": 3
+    },
+    {
+      "epoch": 0,
+      "event": "optimizer_group_started",
+      "optimizer_step": 1,
+      "sequence": 4
+    },
+    {
+      "event": "microbatch_backward_completed",
+      "loss": 1.37548828125,
+      "microbatch": 1,
+      "optimizer_step": 1,
+      "sequence": 5
+    },
+    {
+      "event": "microbatch_backward_completed",
+      "loss": 0.42852783203125,
+      "microbatch": 2,
+      "optimizer_step": 1,
+      "sequence": 6
+    },
+    {
+      "event": "microbatch_backward_completed",
+      "loss": 0.8563232421875,
+      "microbatch": 3,
+      "optimizer_step": 1,
+      "sequence": 7
+    },
+    {
+      "event": "microbatch_backward_completed",
+      "loss": 0.17413330078125,
+      "microbatch": 4,
+      "optimizer_step": 1,
+      "sequence": 8
+    },
+    {
+      "event": "optimizer_group_failed",
+      "optimizer_step": 1,
+      "sequence": 9,
+      "update_verified": false
+    },
+    {
+      "event": "run_failed",
+      "failure_code": "runtime_failed_stop_no_automatic_retry",
+      "sequence": 10
+    }
+  ],
+  "execution_flag_definition": "training_executed means the optimizer was entered; partial failures retain separate completed, verified and observed-weight counts",
+  "execution_plan_sha256": "0f4c5f2d1b1d4de1ac12c8822adb57fb2d671b70466e87e586d72d4a20ee84f3",
+  "failure_code": "runtime_failed_stop_no_automatic_retry",
+  "failure_type": "RuntimeError",
+  "financial_cost": "not_measured",
+  "human_review": "pending",
+  "optimizer_groups_started": 1,
+  "optimizer_step_calls": 0,
+  "optimizer_steps": 0,
+  "optimizer_steps_attempted": 0,
+  "optimizer_steps_completed": 0,
+  "optimizer_steps_verified": 0,
+  "paid_api_requests": 0,
+  "peak_allocated_mib": 1523.45849609375,
+  "peak_reserved_mib": 1982.0,
+  "precision": "fp16_autocast_fp32_parameters_and_optimizer_with_grad_scaler",
+  "probe_optimizer_executed": false,
+  "probe_selection": [
+    {
+      "question_id": "m4-fit-005",
+      "raw_input_token_lengths": [
+        39,
+        293,
+        414,
+        522
+      ]
+    },
+    {
+      "question_id": "m4-fit-015",
+      "raw_input_token_lengths": [
+        40,
+        262,
+        548,
+        502
+      ]
+    },
+    {
+      "question_id": "m4-fit-021",
+      "raw_input_token_lengths": [
+        31,
+        304,
+        474,
+        516
+      ]
+    },
+    {
+      "question_id": "m4-fit-025",
+      "raw_input_token_lengths": [
+        34,
+        340,
+        482,
+        521
+      ]
+    },
+    {
+      "question_id": "m4-fit-026",
+      "raw_input_token_lengths": [
+        30,
+        340,
+        513,
+        492
+      ]
+    },
+    {
+      "question_id": "m4-fit-027",
+      "raw_input_token_lengths": [
+        30,
+        349,
+        513,
+        488
+      ]
+    },
+    {
+      "question_id": "m4-fit-030",
+      "raw_input_token_lengths": [
+        33,
+        291,
+        525,
+        429
+      ]
+    },
+    {
+      "question_id": "m4-fit-049",
+      "raw_input_token_lengths": [
+        56,
+        358,
+        525,
+        456
+      ]
+    }
+  ],
+  "probe_weight_update_executed": false,
+  "quality_evaluation_executed": false,
+  "ready_manifest_sha256": "0a902c6cde10082bc722620c0d33ec402c953a28dd4256bb6cbfe7d0e2eeb1ce",
+  "recipe": {
+    "base_model": "intfloat/multilingual-e5-small",
+    "base_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "chunking": "frozen_m2",
+    "dependency_lock_path": "uv.lock",
+    "dependency_lock_sha256": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499",
+    "epochs": 2,
+    "evaluation_dtype": "float32_as_frozen_e5_baseline",
+    "gradient_accumulation_steps": 4,
+    "gradient_checkpointing": true,
+    "hypothesis": "adapt E5 candidate retrieval because frozen M3 aggregate has 21 candidate-limited failures and 1 ranking-only failure",
+    "in_batch_negatives": false,
+    "learning_rate": 1e-05,
+    "loss": "per_query_InfoNCE_one_positive_two_explicit_reviewed_negatives",
+    "max_grad_norm": 1.0,
+    "max_length": 512,
+    "max_optimizer_steps": 16,
+    "microbatch_queries": 2,
+    "mixed_precision": "fp16_autocast_fp32_parameters_and_optimizer_with_grad_scaler",
+    "model_manifest_path": "data/models/m3-models.json",
+    "model_manifest_sha256": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1",
+    "oom_policy": "record_failure_stop_no_cpu_or_cloud_fallback_no_silent_batch_or_length_change",
+    "passage_prefix": "passage: ",
+    "peft_policy": "LoRA is a separate deferred experiment requiring a new versioned plan and dependency lock; do not sweep or silently switch",
+    "pooling": "attention_masked_mean_then_l2",
+    "query_prefix": "query: ",
+    "reranker": "frozen",
+    "resource_peak_allocated_limit_mib": 5376,
+    "resource_probe_optimizer_steps": 1,
+    "resource_probe_reset_to_base_before_training": true,
+    "seed": 20261012,
+    "status": "conditional_not_run",
+    "strategy": "full_weight_adamw_first_bounded_feasibility_pilot",
+    "temperature": 0.01,
+    "warmup_optimizer_steps": 1,
+    "weight_decay": 0.01
+  },
+  "runtime": {
+    "tokenizers": "0.22.2",
+    "torch": "2.10.0+cu128",
+    "transformers": "4.57.6"
+  },
+  "schema_version": 1,
+  "status": "failed",
+  "steps": [
+    {
+      "elapsed_ms": 1891.453200019896,
+      "epoch": 0,
+      "learning_rate": 1e-05,
+      "losses": [
+        1.37548828125,
+        0.42852783203125,
+        0.8563232421875,
+        0.17413330078125
+      ],
+      "microbatch_tensor_shapes": [
+        [
+          8,
+          512
+        ],
+        [
+          8,
+          512
+        ],
+        [
+          8,
+          512
+        ],
+        [
+          8,
+          512
+        ]
+      ],
+      "optimizer_step": 1,
+      "optimizer_update_verified": false,
+      "question_count": 8,
+      "question_ids": [
+        "m4-fit-005",
+        "m4-fit-015",
+        "m4-fit-021",
+        "m4-fit-025",
+        "m4-fit-026",
+        "m4-fit-027",
+        "m4-fit-030",
+        "m4-fit-049"
+      ],
+      "status": "failed",
+      "weight_change_observed": false
+    }
+  ],
+  "terminal_checkpoint_saved": false,
+  "total_device_bytes": 6438846464,
+  "total_elapsed_ms": 11413.015400059521,
+  "trainable_parameters": 117653760,
+  "training_attempted": false,
+  "training_executed": false,
+  "verified_base_files": {
+    "config.json": "69137736cab8b8903a07fe8afaafdda25aac55415a12a55d1bffa9f581abf959",
+    "model.safetensors": "1a55775f53449dac10a2bcbc312469fac40b96d53198c407081a831f81c98477",
+    "special_tokens_map.json": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7",
+    "tokenizer.json": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+    "tokenizer_config.json": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+  },
+  "weight_update_status": "not_observed",
+  "weight_updates_observed": 0
+}

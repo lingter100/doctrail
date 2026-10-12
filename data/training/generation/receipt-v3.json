@@ -1,0 +1,67 @@
+{
+  "created_at": "2026-10-12",
+  "inputs_sha256": {
+    "data/training/m4-readiness-plan-v2.json": "aa6464441d7c02b14977ab79656b3c48d57a1a4a0af5a29f9186a520d7a5405c",
+    "data/training/m4-tokenizer-receipt-v2.json": "407094ba73db9ecffbd4b427966556e23529c40aa3292bdc5bedc76323594701",
+    "data/training/m4-training-manifest-v2.json": "0a902c6cde10082bc722620c0d33ec402c953a28dd4256bb6cbfe7d0e2eeb1ce",
+    "data/training/reviews/m4-negative-048-supplement-v2.jsonl": "808d79811698c267efdfe16d2a5060a5747fd7c7fb27d10077adb39edcbdf64f",
+    "data/training/reviews/m4-truncated-negative-v2.jsonl": "8aba0d2c5027cf2991f770ef255bdce392098fcaa7e2afcc6432f7dc47cdf79a"
+  },
+  "limitations": [
+    "v1 failed strict whole-negative retention remains failed; v2 uses separate actual-input semantic review.",
+    "Same reviewer may read full and truncated context but is different from original fit author.",
+    "CI verifies saved evidence bindings, not fresh tokenization or semantic truth.",
+    "Data readiness does not establish memory feasibility, training completion, retrieval gain or service adoption."
+  ],
+  "local_pack_sha256": {
+    ".local/m4-negative-048-supplement-v2.json": "d7196d6cc6797e4f64e006cff486fd2b41d96072c5c725f0c710388493253bb6",
+    ".local/m4-truncated-negative-review-v2.json": "a433e3b40def1f660297c88614a66d542ab5f978bfc3180ee73b2246f08db88e"
+  },
+  "outcomes": {
+    "actual_cpu_tokenization": true,
+    "actual_tokenization_byte_verify": true,
+    "actual_truncated_negative": 12,
+    "actual_truncated_pair_reviews": 12,
+    "deterministic_v1_v2_saved_evidence_replay": true,
+    "resource_probe_at_readiness_compilation": "not_run",
+    "selected_negative_pairs": 128,
+    "supplemental_ambiguous": 1,
+    "supplemental_full_context_candidates": 4,
+    "supplemental_negative": 3,
+    "training_at_readiness_compilation": false,
+    "unique_selected_negative_chunks": 93,
+    "v1_data_ready": false,
+    "v2_data_ready": true
+  },
+  "parent_model_setting_changed": false,
+  "plan_commit_before_supplement_review": "5e6400c",
+  "provenance": {
+    "full_context_and_actual_input_reviews": "independent_ai",
+    "human_review": "pending",
+    "human_reviewed_questions": 0,
+    "question_authorship": "ai_authored"
+  },
+  "schema_version": 1,
+  "source_commit_before_actual_tokenization": "51726f2",
+  "stage": "versioned_data_readiness_followup_not_training_result",
+  "tool_accepted_settings": [
+    {
+      "agent": "m4_gate_design",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "role": "v2_design_code_review_and_actual_input_semantic_review"
+    },
+    {
+      "agent": "m4_supp_author",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "role": "four_supplemental_full_context_negative_reviews"
+    },
+    {
+      "agent": "m4_readiness_v2",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "role": "additive_readiness_implementation_and_tests"
+    }
+  ]
+}
