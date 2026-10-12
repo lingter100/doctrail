@@ -8,6 +8,8 @@
 
 첫 마일스톤의 문서 등록 → BM25 키워드 검색 → 원문 근거 확인을 로컬에서 구현·검증했다. 로그인·작업공간·나만 보기 권한, 수정·삭제·재처리, 검색 기록·피드백도 실제 API에 연결했다. 현재 검증 상태와 다음 작업은 [STATUS](docs/STATUS.md)에 기록한다. 임베딩 검색, 생성형 질의응답, 모델 학습 및 서비스 배포는 후속 단계이며 성과로 주장하지 않는다.
 
+M2에서는 공개 한·영 문서 313개, AI 질문 초안 240개와 리비전 후 활성 질문 239개를 준비했다. 개발용 양성 질문 59개에서 top-5 청크의 필수 근거 완전 회수는 **30/59**, 주석상 교차 언어 질문은 **1/23**이었다. 사용자 검수는 0개이고 test 질문 성능은 열지 않았다. 이 실패를 출발점으로 검색 모델을 비교한다. [실측·실패 분석](experiments/README.md), [데이터 재현](data/README.md), [데이터 카드](docs/DATA-CARD.md)를 제공한다.
+
 ![로컬 검증 화면: 합성 온보딩 문서 검색과 원문 근거](docs/images/m1-desktop.jpg)
 
 ## 시작하기
@@ -45,6 +47,7 @@ npm run build
 - [API 계약](docs/API-CONTRACT.md), [결정 기록](docs/DECISIONS.md)
 - [Git 협업 규칙](CONTRIBUTING.md), [AI와 사용자 기여 기록](docs/CONTRIBUTIONS.md)
 - [실험 실행·실패 분석](experiments/README.md), [운영·복구](docs/OPERATIONS.md), [시연·면접 준비](docs/DEMO.md)
+- [M2 평가 계약](docs/M2-EVALUATION.md), [직접 검수와 면접 설명](docs/M2-LEARNING.md)
 
 ## 라이선스와 사실 구분
 
