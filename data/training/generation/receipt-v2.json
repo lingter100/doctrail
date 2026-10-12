@@ -1,0 +1,80 @@
+{
+  "authorship": {
+    "documents": "public_real",
+    "human_review": "pending",
+    "human_reviewed_questions": 0,
+    "questions": "ai_authored",
+    "semantic_reviews": "independent_ai"
+  },
+  "created_at": "2026-10-12",
+  "inputs_sha256": {
+    "data/training/generation/m4-calibration-supplement-v1.draft.jsonl": "f1f84411ddea79a29df0b0aad65e0dbf7cf483fa5cf90601713f53f177df98cd",
+    "data/training/generation/selection-v2.json": "e7446e20b1fbbf2f684dd44c28daa651491032474e55818cc7c1a1e389e8a828",
+    "data/training/m4-pilot-v2/negative-candidates.jsonl": "02ee442212a3088ed305e8ea274067636af7a83f77af4198a6d6a48d2925c709",
+    "data/training/m4-pilot-v2/positive-pairs.jsonl": "c37541f4d0dbff868350fa088a12b204cb8cebadbff9c59319047914d2f64963",
+    "data/training/m4-pilot-v2/questions.jsonl": "c5fd67f3740c88a2cff11360d911358351a87e0772f674c04684af5971d9fe91",
+    "data/training/m4-pilot-v2/report.json": "aff2f16703dc5229037d33b8bf76a60d2be04f5deac0ce2257569a1a2e3300d8",
+    "data/training/m4-readiness-plan-v1.json": "8ef8dbe2a5e16f167c55e060ea5aa9207f00d91de6d03fa70712a2f910483b66",
+    "data/training/m4-tokenizer-receipt-v1.json": "10a9695e553ed2690822ec58bd8638898cc534f83a828be80433db7513a7b2b5",
+    "data/training/m4-training-manifest-v1.json": "3b303325b0785f79e4410ef335822ecef19997966f32cd333ea5feb934c798b0",
+    "data/training/reviews/m4-calibration-supplement-semantic-v1.jsonl": "5a49917fa7e9c45fb42a158d51266d7061ac3a4d4ce929f3e9bc8d9019b988f7",
+    "data/training/reviews/m4-negative-a-v1.jsonl": "ff1ee4239e14658ffc5c86c9db514d52acc9f03f53aad8be504c9ec946fa40a9",
+    "data/training/reviews/m4-negative-b-v1.jsonl": "746d8e1be513c071aac67485fe1cadd930bc52a248d01df5522d24f03ac46e92"
+  },
+  "limits": [
+    "Public source license CC-BY-4.0 preserved; full corpus and local review packs excluded from Git.",
+    "All labels remain provisional AI reviews; no user approval produced.",
+    "No dev/test retrieval evaluation, model training, paid API/GPU/cloud or public service deployment."
+  ],
+  "local_packs_sha256": {
+    ".local/m4-author-calibration-supplement-v1.json": "fa7197270b2d3c748f9d9d4d3ebf4efe54863bf0f8a8109d086664d58ffacd1f",
+    ".local/m4-negative-review-a-v1.json": "3ffa36ebc840f6cf55da7866374f99f915661e7186dc260230efc3b5de863b03",
+    ".local/m4-negative-review-b-v1.json": "f0ceed75f09baa191c8a77422ddccc45c821f37910179bdb8d147c423f27381e"
+  },
+  "outcomes": {
+    "actual_cpu_tokenized_questions": 80,
+    "ambiguous_labels": 8,
+    "calibration_questions": 16,
+    "data_ready": false,
+    "fit_questions": 64,
+    "insufficient_negative_questions": [
+      "m4-fit-048"
+    ],
+    "negative_labels": 244,
+    "negative_reviewed_candidates": 256,
+    "original_questions_preserved": 78,
+    "positive_reviews_accept": 80,
+    "query_and_selected_positive_token_failures": 0,
+    "relevant_labels": 4,
+    "resource_probe_result": "not_run",
+    "selected_negative_truncated_questions": 12,
+    "supplemental_calibration_questions": 2,
+    "training_executed": false
+  },
+  "parent_model_setting_changed": false,
+  "plan_commit_before_supplement_authoring": "aeed064",
+  "reproducibility": "Saved drafts, review bindings, compilation and token-receipt structural replay verified. No deterministic AI re-generation or semantic truth claimed. Actual tokenization is separately recorded.",
+  "schema_version": 1,
+  "source_commit_before_actual_tokenization": "0660faa",
+  "stage": "supplement_and_independent_negative_review_then_actual_tokenization",
+  "tool_accepted_settings": [
+    {
+      "agent": "m4_gate_design",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "role": "readiness_design_supplement_positive_review_and_negative_shard_a"
+    },
+    {
+      "agent": "m4_supp_author",
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "role": "supplement_author_then_negative_shard_b_after_draft_freeze"
+    },
+    {
+      "agent": "m4_readiness_code",
+      "model": "gpt-6-astra",
+      "reasoning": "high",
+      "role": "readiness_implementation_and_tests"
+    }
+  ]
+}

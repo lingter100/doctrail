@@ -1,6 +1,8 @@
-# M4 학습 자료 pilot
+# M4 학습 자료와 준비 검증
 
-현재 산출물은 **Kubernetes 원래 train 문서에서 만든 AI 질문 78개와 검토 전 음성 후보**다. 모델 가중치를 학습하거나 검색 품질이 개선됐다는 결과가 아니다. 학습 대상과 한 번의 제한된 실험 조건은 [M4-DESIGN](../../docs/M4-DESIGN.md)에 있다.
+현재는 원래78개를 보존한 새 `m4-pilot-v2`에 **AI 질문80개(fit64·calibration16)**가 있다. 독립 AI가 음성 후보256개를 검토했고 실제 E5 tokenizer를 실행했다. 한 질문의 음성 부족과12질문의 음성 잘림으로 v1 학습 준비가 차단됐다. 결과·해석·간단한 재현은 [M4 준비 결과](../../docs/M4-READINESS-RESULTS.md), 기준은 [v1 설계](../../docs/M4-READINESS-DESIGN.md)와 [v2 보완 설계](../../docs/M4-READINESS-V2-DESIGN.md)를 따른다. 아직 모델 학습 결과가 아니며 사용자 검수는0개다.
+
+아래 원래 pilot의 수치와 생성 이력은 과거 snapshot으로 보존한다. 원본의 pending 상태를 나중의 검토 결과로 덮어쓰지 않는다. 학습 가설·조건은 [M4-DESIGN](../../docs/M4-DESIGN.md)에 있다.
 
 ## 자료와 구분
 
