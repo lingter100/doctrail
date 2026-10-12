@@ -1,0 +1,20 @@
+{
+  "attempt": "m4-calibration-v1-preflight",
+  "cause": "The parent plan bound the byte-identical public train/probe reports in experiments/results; the evaluator path allowlist accepted data/training, data/models and .local only.",
+  "execution_claim_created": false,
+  "execution_plan_path": "data/training/m4-calibration-evaluation-v1.json",
+  "execution_plan_sha256": "55622972a53c4e70aff392766e448ea342f435d0cb39f3aad7aa218d4d69cbb3",
+  "failure_code": "evaluation_input_outside_train_artifacts",
+  "failure_stage": "load_evaluation_input_path_check",
+  "failure_type": "ValueError",
+  "human_review": "pending",
+  "inference_executed": false,
+  "model_loaded": false,
+  "observation_provenance": "parent_exec_exit1_traceback",
+  "output_directory_created": false,
+  "plan_commit": "ecd7eb6",
+  "resolution_plan": "Narrowly admit canonical public training reports with unchanged hashes/validation, then freeze amended evaluation plan before first model run.",
+  "schema_version": 1,
+  "source_commit": "9ba9afe",
+  "status": "failed_preflight"
+}
