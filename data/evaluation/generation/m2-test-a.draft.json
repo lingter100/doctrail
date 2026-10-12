@@ -1,0 +1,1456 @@
+{
+  "job_id": "m2-test-a",
+  "questions": [
+    {
+      "id": "m2-test-a-001",
+      "question_family_id": "m2-test-a-application-build",
+      "query": "쿠버네티스를 도입하면 애플리케이션 소스 빌드와 CI/CD 방식도 자동으로 정해지는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "아니다. 쿠버네티스는 소스 코드를 배포하거나 애플리케이션을 빌드하지 않으며 CI/CD 방식은 조직의 요구와 문화에 따라 결정한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-aef3838c05cf0657",
+          "quote": "Does not deploy source code and does not build your application. Continuous Integration,\n  Delivery, and Deployment (CI/CD) workflows are determined by organization cultures and\n  preferences as well as technical requirements.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-04a2b917a53c58ec",
+          "quote": "소스 코드를 배포하지 않으며 애플리케이션을 빌드하지 않는다. 지속적인 통합과 전달과 배포,\n  곧 CI/CD 워크플로우는 기술적인 요구사항뿐만 아니라 조직 문화와 취향에 따라\n  결정된다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-002",
+      "question_family_id": "m2-test-a-container-os-sharing",
+      "query": "컨테이너가 VM보다 가볍다고 설명하는 운영체제 격리상의 차이는 무엇인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "컨테이너는 격리를 완화하여 애플리케이션 사이에 운영체제를 공유한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-aef3838c05cf0657",
+          "quote": "Containers are similar to VMs, but they have relaxed\nisolation properties to share the Operating System (OS) among the applications.\nTherefore, containers are considered lightweight.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-04a2b917a53c58ec",
+          "quote": "컨테이너는 VM과 유사하지만 격리 속성을 완화하여\n애플리케이션 간에 운영체제(OS)를 공유한다. 그러므로 컨테이너는\n가볍다고 여겨진다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-003",
+      "question_family_id": "m2-test-a-selector-conjunction",
+      "query": "레이블 셀렉터에 환경과 계층 조건을 쉼표로 함께 쓰면 둘 중 하나만 맞아도 선택되는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "아니다. 쉼표로 나열한 요구사항은 모두 만족해야 하는 AND 조건이다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-c41323506c26d011",
+          "quote": "The API currently supports two types of selectors: _equality-based_ and _set-based_.\nA label selector can be made of multiple _requirements_ which are comma-separated.\nIn the case of multiple requirements, all must be satisfied so the comma separator\nacts as a logical _AND_ (`&&`) operator.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-e867515cea18c802",
+          "quote": "API는 현재 _일치성 기준_ 과 _집합성 기준_ 이라는 두 종류의 셀렉터를 지원한다.\n레이블 셀렉터는 쉼표로 구분된 다양한 _요구사항_ 에 따라 만들 수 있다. \n다양한 요구사항이 있는 경우 쉼표 기호가 AND(`&&`) 연산자로 \n구분되는 역할을 하도록 해야 한다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-004",
+      "question_family_id": "m2-test-a-replicaset-selector-overlap",
+      "query": "같은 네임스페이스에서 두 ReplicaSet의 레이블 셀렉터가 겹치면 어떤 문제가 생길 수 있는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "컨트롤러가 충돌하는 지시로 해석하여 필요한 복제본 수를 결정하지 못할 수 있다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-c41323506c26d011",
+          "quote": "For some API types, such as ReplicaSets, the label selectors of two instances must\nnot overlap within a namespace, or the controller can see that as conflicting\ninstructions and fail to determine how many replicas should be present.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-e867515cea18c802",
+          "quote": "레플리카셋(ReplicaSet)과 같은 일부 API 유형에서 두 인스턴스의 레이블 셀렉터는 \n네임스페이스 내에서 겹치지 않아야 한다. 그렇지 않으면 컨트롤러는 상충하는 \n명령으로 보고, 얼마나 많은 복제본이 필요한지 알 수 없다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-005",
+      "question_family_id": "m2-test-a-cross-namespace-owner",
+      "query": "종속 오브젝트가 다른 네임스페이스의 namespaced owner를 참조하면 유효한 소유 관계인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "아니다. 다른 네임스페이스 소유 참조는 금지되며 owner는 같은 네임스페이스에 있어야 한다. 그렇지 않으면 owner 참조가 없는 것으로 처리한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-7dca8eb86c0590a1",
+          "quote": "Cross-namespace owner references are disallowed by design.\nNamespaced dependents can specify cluster-scoped or namespaced owners.\nA namespaced owner **must** exist in the same namespace as the dependent.\nIf it does not, the owner reference is treated as absent, and the dependent\nis subject to deletion once all owners are verified absent.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-006",
+      "question_family_id": "m2-test-a-owner-invalid-event",
+      "query": "잘못된 네임스페이스 ownerReference를 일괄 조사하려면 어떤 경고 이벤트 reason으로 조회할 수 있는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "OwnerRefInvalidNamespace를 사용한다. 문서의 조회 예는 kubectl get events -A --field-selector=reason=OwnerRefInvalidNamespace 이다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-7dca8eb86c0590a1",
+          "quote": "In v1.20+, if the garbage collector detects an invalid cross-namespace `ownerReference`,\nor a cluster-scoped dependent with an `ownerReference` referencing a namespaced kind, a warning Event \nwith a reason of `OwnerRefInvalidNamespace` and an `involvedObject` of the invalid dependent is reported.\nYou can check for that kind of Event by running\n`kubectl get events -A --field-selector=reason=OwnerRefInvalidNamespace`.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-007",
+      "question_family_id": "m2-test-a-audit-auth-sources",
+      "query": "클러스터 사용자 접근을 감사할 때 내장 사용자 DB 하나만 확인하면 충분한가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "내장 사용자 DB가 없으므로 구성된 모든 인증 소스의 자격 증명을 검토해야 한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-655231f00333af45",
+          "quote": "It is important to note that Kubernetes does not have an in-built user database within the cluster.\nInstead, it takes user information from the configured authentication system and uses that to make\nauthorization decisions. Therefore, to audit user access, you need to review credentials from every\nconfigured authentication source.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-008",
+      "question_family_id": "m2-test-a-static-token-rotation",
+      "query": "정적 토큰 파일의 인증 정보를 바꿨는데 바로 반영되지 않는 이유와 적용에 필요한 작업은 무엇인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "정적 토큰 자격 증명 변경은 API 서버 프로세스를 재시작해야 적용된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-655231f00333af45",
+          "quote": "Changing any credential requires a restart of the API server process to take effect, which can\n  impact availability.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-009",
+      "question_family_id": "m2-test-a-snapshot-retain",
+      "query": "VolumeSnapshot을 지워도 실제 스냅샷과 VolumeSnapshotContent를 유지하려면 삭제 정책을 어떻게 정해야 하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "deletionPolicy를 Retain으로 정한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-9ea53e80e897527b",
+          "quote": "If the deletionPolicy is `Delete`, then the underlying storage snapshot will be\ndeleted along with the VolumeSnapshotContent object. If the deletionPolicy is `Retain`,\nthen both the underlying snapshot and VolumeSnapshotContent remain.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-7336163d91d0fd33",
+          "quote": "삭제정책이 `Delete` 인 경우 기본 스토리지 스냅샷이 VolumeSnapshotContent 오브젝트와 함께 삭제된다. 삭제정책이 `Retain` 인 경우 기본 스냅샷과 VolumeSnapshotContent 모두 유지된다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-010",
+      "question_family_id": "m2-test-a-snapshot-default-collision",
+      "query": "같은 CSI 드라이버에 기본 VolumeSnapshotClass 두 개를 지정하면 새 스냅샷 생성에 어떤 문제가 생기는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "사용할 기본 클래스를 결정하지 못하므로 VolumeSnapshot 생성이 실패한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-9ea53e80e897527b",
+          "quote": "Always ensure that there is only one default VolumeSnapshotClass for each CSI driver. If\nmultiple default VolumeSnapshotClass objects are created using the same CSI driver,\na VolumeSnapshot creation will fail because Kubernetes cannot determine which one to use.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-011",
+      "question_family_id": "m2-test-a-event-burst-refill",
+      "query": "EventRateLimit에서 burst=10, qps=3이면 처음 허용되는 요청 수와 이후 초당 보충량은 각각 얼마인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "처음에는 10개를 허용하고 이후 매초 3개씩 허용량을 보충하며 최대 10개까지 쌓인다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-3cbb410313d05cca",
+          "quote": "For example, if the burst\nis 10 and the qps is 3, then the admission control will accept 10 queries\nbefore blocking any queries. Every second, 3 more queries will be allowed.\nIf some of that allowance is not used, then it will roll over to the next\nsecond, until the maximum allowance of 10 is reached.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-012",
+      "question_family_id": "m2-test-a-event-cache-eviction",
+      "query": "EventRateLimit의 LRU 캐시에서 bucket이 제거된 뒤 다시 요청이 오면 이전 사용량 제한이 계속 유지되는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "아니다. 다시 캐시에 들어오면 burst 전체 허용량으로 초기화된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-3cbb410313d05cca",
+          "quote": "cacheSize is the size of the LRU cache for this type of limit. If a bucket\nis evicted from the cache, then the allowance for that bucket is reset. If\nmore queries are later received for an evicted bucket, then that bucket\nwill re-enter the cache with a clean slate, giving that bucket a full\nallowance of burst queries.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-013",
+      "question_family_id": "m2-test-a-credential-plugin-invocation",
+      "query": "kubelet의 exec 이미지 자격 증명 플러그인은 모든 이미지 pull마다 무조건 실행되는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "아니다. 당겨오는 이미지가 플러그인이 처리하는 matchImages 조건에 일치할 때만 호출한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ff460b3283a6f7db",
+          "quote": "CredentialProvider represents an exec plugin to be invoked by the kubelet. The plugin is only\ninvoked when an image being pulled matches the images handled by the plugin (see matchImages).",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-014",
+      "question_family_id": "m2-test-a-credential-cache-default",
+      "query": "이미지 자격 증명 플러그인 응답이 캐시 기간을 생략하면 어느 설정으로 메모리 캐시 유효기간을 정하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "필수 설정인 defaultCacheDuration을 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ff460b3283a6f7db",
+          "quote": "defaultCacheDuration is the default duration the plugin will cache credentials in-memory\nif a cache duration is not provided in the plugin response. This field is required.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-015",
+      "question_family_id": "m2-test-a-kyaml-parser-compatibility",
+      "query": "KYAML 설정을 쓰려면 기존 YAML 파서와 도구를 모두 바꿔야 하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "문서는 기존 YAML 파서 및 도구와의 완전한 호환성을 유지한다고 설명한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-c9ebb2930e277b61",
+          "quote": "**KYAML** is a safer and less ambiguous subset of YAML. Designed specifically for Kubernetes, KYAML addresses common YAML pitfalls such as whitespace sensitivity and implicit type coercion while maintaining full compatibility with existing YAML parsers and tooling.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-016",
+      "question_family_id": "m2-test-a-kyaml-explicit-structure",
+      "query": "들여쓰기와 암묵적 형 변환 실수를 줄이려는 KYAML에서 객체·배열·문자열은 어떤 표기 규칙을 따르는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "객체는 {}, 배열은 []인 flow style을 사용하고 모든 문자열 값은 큰따옴표로 감싼다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-c9ebb2930e277b61",
+          "quote": "KYAML uses *flow style* syntax with `{}` for objects and `[]` for arrays. All string values must be **double-quoted**.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-017",
+      "question_family_id": "m2-test-a-security-disclosure-route",
+      "query": "쿠버네티스의 보안 취약점을 발견했다면 일반 공개 이슈 등록과 구분해 어떤 절차를 따라야 하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "Kubernetes security disclosure process를 따라 보안 이슈를 신고한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-c75acf169e40884c",
+          "quote": "To report a security issue, please follow the [Kubernetes security disclosure process](/docs/reference/issues-security/security/#report-a-vulnerability).",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-018",
+      "question_family_id": "m2-test-a-security-announcement-channel",
+      "query": "쿠버네티스 보안 관련 공지를 받아보려면 문서가 안내하는 메일링 리스트는 무엇인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "kubernetes-security-announce@googlegroups.com 메일링 리스트다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-c75acf169e40884c",
+          "quote": "Security-related announcements are sent to the [kubernetes-security-announce@googlegroups.com](https://groups.google.com/forum/#!forum/kubernetes-security-announce) mailing list.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-019",
+      "question_family_id": "m2-test-a-kubectl-resources-versus-versions",
+      "query": "서버가 지원하는 API 리소스 목록과 group/version 형식의 API 버전 목록을 확인하는 kubectl 하위 명령은 각각 무엇인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "리소스 목록은 kubectl api-resources, API 버전 목록은 kubectl api-versions다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-595b7209b315cd95",
+          "quote": "* [kubectl api-resources](../kubectl_api-resources/)\t - Print the supported API resources on the server\n* [kubectl api-versions](../kubectl_api-versions/)\t - Print the supported API versions on the server, in the form of \"group/version\"",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-020",
+      "question_family_id": "m2-test-a-kubectl-config-versus-info",
+      "query": "kubeconfig 파일을 수정하는 명령과 클러스터 정보를 표시하는 명령을 구분하면 각각 무엇인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "kubeconfig 수정은 kubectl config, 클러스터 정보 표시는 kubectl cluster-info다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-595b7209b315cd95",
+          "quote": "* [kubectl config](../kubectl_config/)\t - Modify kubeconfig files",
+          "evidence_group_id": "config",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-595b7209b315cd95",
+          "quote": "* [kubectl cluster-info](../kubectl_cluster-info/)\t - Display cluster information",
+          "evidence_group_id": "info",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-021",
+      "question_family_id": "m2-test-a-whoami-json",
+      "query": "OIDC 등 동적 인증을 쓰는 클러스터에서 현재 사용자 속성을 JSON으로 확인하려면 어떤 명령을 쓰는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "kubectl auth whoami -o json을 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-bb8c025251a82755",
+          "quote": "# Get your subject attributes in JSON format\n  kubectl auth whoami -o json",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-022",
+      "question_family_id": "m2-test-a-kuberc-specific-file",
+      "query": "기본 설정 대신 특정 kuberc 파일 내용을 확인하려면 kubectl kuberc view에 어떤 옵션을 붙이는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "--kuberc /path/to/kuberc로 대상 파일을 지정한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5c16d14ec8b75751",
+          "quote": "# View a specific kuberc file\n  kubectl kuberc view --kuberc /path/to/kuberc",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-023",
+      "question_family_id": "m2-test-a-csr-approval-security",
+      "query": "CSR을 승인하기 전에 요청 속성을 읽어야 하는 이유는 무엇인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "발급된 인증서가 클러스터 자원 접근이나 특정 신원 인증 권한을 줄 수 있으므로 인증서가 할 수 있는 일을 이해해야 한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-3455e27a3efe16f4",
+          "quote": "SECURITY NOTICE: Depending on the requested attributes, the issued certificate can potentially grant a requester access to cluster resources or to authenticate as a requested identity. Before approving a CSR, ensure you understand what the signed certificate can do.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-024",
+      "question_family_id": "m2-test-a-csr-denial-result",
+      "query": "kubectl certificate deny는 인증서 서명 컨트롤러에 무엇을 지시하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "요청자에게 인증서를 발급하지 않도록 지시한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-bd8d9a83fa597ca0",
+          "quote": "kubectl certificate deny allows a cluster admin to deny a certificate signing request (CSR). This action tells a certificate signing controller to not to issue a certificate to the requester.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-025",
+      "question_family_id": "m2-test-a-priority-never-preempt",
+      "query": "값이 높은 PriorityClass를 만들되 더 낮은 우선순위 파드를 선점하지 못하게 하려면 어떤 옵션을 사용하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "kubectl create priorityclass에 --preemption-policy=\"Never\"를 지정한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5211765f36eb90f0",
+          "quote": "# Create a priority class named high-priority that cannot preempt pods with lower priority\n  kubectl create priorityclass high-priority --value=1000 --description=\"high priority\" --preemption-policy=\"Never\"",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-026",
+      "question_family_id": "m2-test-a-priority-global-default",
+      "query": "새 PriorityClass를 전역 기본 우선순위로 만들려면 어떤 생성 옵션이 필요한가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "--global-default=true를 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5211765f36eb90f0",
+          "quote": "# Create a priority class named default-priority that is considered as the global default priority\n  kubectl create priorityclass default-priority --value=1000 --global-default=true --description=\"default priority\"",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-027",
+      "question_family_id": "m2-test-a-rollout-pin-revision",
+      "query": "배포 감시 도중 새 롤아웃이 시작되면 최신 버전을 따라가지 않고 지정한 리비전이 밀려났을 때 중단하려면 어떻게 하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "kubectl rollout status에 --revision=N을 지정하여 관찰할 리비전을 고정한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-bf69548c25018e3f",
+          "quote": "Note that if a new rollout starts in-between, then 'rollout status' will continue watching the latest revision. If you want to pin to a specific revision and abort if it is rolled over by another revision, use --revision=N where N is the revision you need to watch for.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-028",
+      "question_family_id": "m2-test-a-rollout-no-wait",
+      "query": "kubectl rollout status가 완료될 때까지 계속 기다리지 않고 현재 상태만 보고 끝내려면 어떻게 하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "--watch=false를 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-bf69548c25018e3f",
+          "quote": "By default 'rollout status' will watch the status of the latest rollout until it's done. If you don't want to wait for the rollout to finish then you can use --watch=false.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-029",
+      "question_family_id": "m2-test-a-run-client-dry-run",
+      "query": "테스트 파드를 실제 생성하지 않고 kubectl run이 만들 API 오브젝트만 확인하려면 어떤 실행 방법을 사용하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "kubectl run nginx --image=nginx --dry-run=client와 같이 client dry-run을 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-13d4034d3fec4cfa",
+          "quote": "# Dry run; print the corresponding API objects without creating them\n  kubectl run nginx --image=nginx --dry-run=client",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-030",
+      "question_family_id": "m2-test-a-run-command-versus-args",
+      "query": "kubectl run에서 이미지의 기본 명령에 인자를 덧붙이는 대신 실행 명령 자체를 바꾸려면 어떤 플래그가 필요한가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "--command를 사용하면 추가 인자를 기본 args 대신 컨테이너 command 필드에 넣는다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-13d4034d3fec4cfa",
+          "quote": "--command</td>\n</tr>\n<tr>\n<td></td><td style=\"line-height: 130%; word-wrap: break-word;\"><p>If true and extra arguments are present, use them as the 'command' field in the container, rather than the 'args' field which is the default.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-031",
+      "question_family_id": "m2-test-a-top-node-capacity",
+      "query": "kubectl top node의 자원 표시 기준을 기본 Allocatable 대신 전체 Capacity로 바꾸는 옵션은 무엇인가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "--show-capacity다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-39aad8b53fce0dc5",
+          "quote": "--show-capacity</td>\n</tr>\n<tr>\n<td></td><td style=\"line-height: 130%; word-wrap: break-word;\"><p>Print node resources based on Capacity instead of Allocatable(default) of the nodes.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-032",
+      "question_family_id": "m2-test-a-top-node-swap",
+      "query": "kubectl top node에서 swap 메모리 관련 자원을 함께 표시하려면 어떤 옵션을 사용하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "--show-swap을 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-39aad8b53fce0dc5",
+          "quote": "--show-swap</td>\n</tr>\n<tr>\n<td></td><td style=\"line-height: 130%; word-wrap: break-word;\"><p>Print node resources related to swap memory.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-033",
+      "question_family_id": "m2-test-a-top-pod-metrics-delay",
+      "query": "새 파드를 만든 직후 kubectl top pod에 메트릭이 없으면 반드시 파드 장애라고 봐야 하는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "아니다. 메트릭 파이프라인 지연으로 생성 뒤 몇 분 동안 메트릭을 볼 수 없을 수 있다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-20c9a62427956016",
+          "quote": "Due to the metrics pipeline delay, they may be unavailable for a few minutes since pod creation.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-034",
+      "question_family_id": "m2-test-a-top-pod-container-breakdown",
+      "query": "파드 하나의 사용량을 컨테이너별로 나누어 보려면 kubectl top pod 명령을 어떻게 쓰는가?",
+      "language": "ko",
+      "category": "single_document",
+      "reference_answer": "kubectl top pod POD_NAME --containers를 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-20c9a62427956016",
+          "quote": "# Show metrics for a given pod and its containers\n  kubectl top pod POD_NAME --containers",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-035",
+      "question_family_id": "m2-test-a-nodeport-udp",
+      "query": "Which default port range and protocol must a firewall allow for UDP NodePort Services?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "Inbound UDP ports 30000–32767 are the documented default.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-e0700ba0e30db7a8",
+          "quote": "| UDP      | Inbound   | 30000-32767 | NodePort Services†    | All                     |",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-036",
+      "question_family_id": "m2-test-a-custom-ports",
+      "query": "If a cluster overrides a component default port, should the firewall still open only the documented default?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "No. Open the actual custom port instead of the default.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-e0700ba0e30db7a8",
+          "quote": "All default port numbers can be overridden. When custom ports are used those \nports need to be open instead of defaults mentioned here.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-6b81b3acd1b44d31",
+          "quote": "모든 기본 포트 번호를 재정의할 수 있다. 사용자 지정 포트를 사용하는 경우 \n여기에 언급된 기본값 대신 해당 포트를 열어야 한다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-037",
+      "question_family_id": "m2-test-a-dra-numa-set-intersection",
+      "query": "How does a DRA matchAttribute constraint decide whether two list-valued NUMA attributes match?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "Their NUMA-node lists must share at least one value; the scheduler uses set intersection.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-be82a71673c3277a",
+          "quote": "Use `matchAttribute` with this attribute to co-locate devices from different\ndrivers on the same NUMA node. When list-type values are used, the scheduler\nperforms set intersection: two devices match as long as their NUMA node\nlists share at least one value.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-038",
+      "question_family_id": "m2-test-a-dra-no-numa-affinity",
+      "query": "Should a device with sysfs numa_node = -1 publish the standard NUMA node attribute?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "No. Devices without NUMA affinity must not publish that attribute.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-be82a71673c3277a",
+          "quote": "Devices with no NUMA affinity (`numa_node = -1` in sysfs) must not publish\nthis attribute.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-039",
+      "question_family_id": "m2-test-a-noswap-system-processes",
+      "query": "Does NoSwap prohibit the kubelet and other system daemons from using swap as well as Pods?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "No. Pods cannot use swap, but processes outside Kubernetes workload scope, including the kubelet, can.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-9ff63f9bb8956125",
+          "quote": "`NoSwap`\n: (default) Workloads running as Pods on this node do not and cannot use swap. However, processes\n  outside of Kubernetes' scope, such as system daemons (including the kubelet itself!) **can** utilize swap.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-040",
+      "question_family_id": "m2-test-a-limitedswap-prerequisites",
+      "query": "What two configuration changes are required to allow Linux Kubernetes workloads to use swap?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "Disable the kubelet default failure when swap is detected and select LimitedSwap behavior.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-9ff63f9bb8956125",
+          "quote": "To allow Kubernetes workloads to use swap, on a Linux node,\nyou must disable the kubelet's default behavior of failing when swap is detected,\nand specify memory-swap behavior as `LimitedSwap`:",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-041",
+      "question_family_id": "m2-test-a-critical-not-eviction-immunity",
+      "query": "Does marking a non-static Pod as critical make it impossible to evict?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "No. The aim is to prevent permanent unavailability; non-static critical Pods are rescheduled, while critical static Pods cannot be evicted.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-b450b837eabb787c",
+          "quote": "Note that marking a pod as critical is not meant to prevent evictions entirely; it only prevents the pod from becoming permanently unavailable.\nA static pod marked as critical can't be evicted. However, non-static pods marked as critical are always rescheduled.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ed87a0f821246487",
+          "quote": "유의할 점은, 파드를 중요(critical)로 표시하는 것은 축출을 완전히 방지하기 위함이 아니다. 이것은 단지 파드가 영구적으로 사용할 수 없게 되는 것만을 방지하기 위함이다.\n중요로 표시한 스태틱(static) 파드는 축출될 수 없다. 반면, 중요로 표시한 일반적인(non-static) 파드의 경우 항상 다시 스케줄링된다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-042",
+      "question_family_id": "m2-test-a-critical-priority-order",
+      "query": "Which of system-node-critical and system-cluster-critical has the higher scheduling priority?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "system-node-critical is the highest and exceeds system-cluster-critical.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-b450b837eabb787c",
+          "quote": "To mark a Pod as critical, set priorityClassName for that Pod to `system-cluster-critical` or `system-node-critical`. `system-node-critical` is the highest available priority, even higher than `system-cluster-critical`.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ed87a0f821246487",
+          "quote": "파드를 중요로 표시하기 위해서는, 해당 파드에 대해 priorityClassName을 `system-cluster-critical`이나 `system-node-critical`로 설정한다. `system-node-critical`은 가장 높은 우선 순위를 가지며, 심지어 `system-cluster-critical`보다도 우선 순위가 높다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-043",
+      "question_family_id": "m2-test-a-dockershim-removal",
+      "query": "At which Kubernetes release was dockershim removed?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "It was removed in v1.24.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ab8747af26c4a5ec",
+          "quote": "Dockershim was removed from Kubernetes with the release of v1.24.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-91699a1a3fb1cbc3",
+          "quote": "도커심은 쿠버네티스 릴리스 v1.24부터 제거되었다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-044",
+      "question_family_id": "m2-test-a-dockershim-upgrade-options",
+      "query": "For a Docker Engine cluster using dockershim, what runtime choices does the migration guide recommend before upgrading to v1.24?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "Migrate to another runtime or obtain Docker Engine support through an alternative integration.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ab8747af26c4a5ec",
+          "quote": "If you use Docker Engine via dockershim as your container runtime and wish to upgrade to v1.24,\nit is recommended that you either migrate to another runtime or find an alternative means to obtain Docker Engine support.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-91699a1a3fb1cbc3",
+          "quote": "컨테이너 런타임으로 도커 엔진을 통한 도커심을 사용하는 상황에서 v1.24로\n업그레이드하려는 경우, 다른 런타임으로 마이그레이션하거나 다른 방법을 찾아 도커 엔진 지원을 받는 것이 좋다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-045",
+      "question_family_id": "m2-test-a-drain-daemonset-skip",
+      "query": "Does kubectl drain --ignore-daemonsets remove DaemonSet Pods from a node?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "No. It skips them so drain can finish; DaemonSet Pods remain running during maintenance and disappear when the node is removed.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-fd3c0fd79bfcaa2f",
+          "quote": "`--ignore-daemonsets` skips them so that drain can\ncomplete; the Pods continue to run while you perform maintenance and are removed\nwhen the node is removed from the cluster.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-046",
+      "question_family_id": "m2-test-a-drain-nodename-bypass",
+      "query": "Can a new Pod still run on a drained unschedulable node when its nodeName is set directly?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "Yes. Setting nodeName bypasses the scheduler and binds the Pod to that node.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-fd3c0fd79bfcaa2f",
+          "quote": "If you or another API user directly set the [`nodeName`](/docs/concepts/scheduling-eviction/assign-pod-node/#nodename)\nfield for a Pod (bypassing the scheduler), then the Pod is bound to the specified node\nand will run there, even though you have drained that node and marked it unschedulable.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-047",
+      "question_family_id": "m2-test-a-gmsa-webhook-roles",
+      "query": "Which GMSA webhook expands a credential reference, and which verifies permission to use it?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "The mutating webhook expands the reference into the full credential spec; the validating webhook checks authorization for the Pod service account.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ea0f6ef73bfac16d",
+          "quote": "1. A mutating webhook that expands references to GMSAs (by name from a Pod specification)\n   into the full credential spec in JSON form within the Pod spec.",
+          "evidence_group_id": "expand",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-ea0f6ef73bfac16d",
+          "quote": "1. A validating webhook ensures all references to GMSAs are authorized to be used by the Pod service account.",
+          "evidence_group_id": "authorize",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d39091653e3d2337",
+          "quote": "1. 변형(mutating) 웹훅은 (파드 사양의 이름별로) GMSA에 대한 참조를 파드 사양 내 JSON 형식의 전체 자격 증명 사양으로 확장한다.",
+          "evidence_group_id": "expand",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d39091653e3d2337",
+          "quote": "1. 검증(validating) 웹훅은 GMSA에 대한 모든 참조가 파드 서비스 어카운트에서 사용하도록 승인되었는지 확인한다.",
+          "evidence_group_id": "authorize",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-048",
+      "question_family_id": "m2-test-a-gmsa-spec-secrets",
+      "query": "Does a GMSACredentialSpec itself contain secret or sensitive data?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "No. It describes the desired GMSA to Windows for the container runtime.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ea0f6ef73bfac16d",
+          "quote": "The GMSA credential spec does\nnot contain secret or sensitive data. It is information that a container runtime\ncan use to describe the desired GMSA of a container to Windows.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d39091653e3d2337",
+          "quote": "GMSA 자격 증명 사양에는 시크릿 또는 민감한 데이터가 포함되어 있지 않다. 이것은 컨테이너 런타임이 원하는 윈도우 컨테이너 GMSA를 설명하는 데 사용할 수 있는 정보이다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-049",
+      "question_family_id": "m2-test-a-stateful-label-list",
+      "query": "How can I list StatefulSet Pods whose app.kubernetes.io/name label is MyApp?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "Run kubectl get pods -l app.kubernetes.io/name=MyApp.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-45fc446f23600c02",
+          "quote": "In order to list all the pods which belong to a StatefulSet, which have a label `app.kubernetes.io/name=MyApp` set on them,\nyou can use the following:\n\n```shell\nkubectl get pods -l app.kubernetes.io/name=MyApp",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ab8a81418b85b21e",
+          "quote": "레이블이 `app.kubernetes.io/name=MyApp`으로 지정된 스테이트풀셋 파드를 전부 나열하기 위해서는\n다음의 명령을 사용할 수 있다.\n\n```shell\nkubectl get pods -l app.kubernetes.io/name=MyApp",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-050",
+      "question_family_id": "m2-test-a-stateful-stuck-pods",
+      "query": "Which task does the StatefulSet debugging guide point to when Pods remain Unknown or Terminating for a long time?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "It points to the Deleting StatefulSet Pods task.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-45fc446f23600c02",
+          "quote": "If you find that any Pods listed are in `Unknown` or `Terminating` state for an extended period of time,\nrefer to the [Deleting StatefulSet Pods](/docs/tasks/run-application/delete-stateful-set/) task for\ninstructions on how to deal with them.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ab8a81418b85b21e",
+          "quote": "만약 오랜 시간동안 `Unknown`이나 `Terminating` 상태에 있는\n파드들을 발견하였다면, 이러한 파드들을 어떻게 다루는지 알아보기 위해 \n[스테이트풀셋 파드 삭제하기](/ko/docs/tasks/run-application/delete-stateful-set/)를 참고하길 바란다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-051",
+      "question_family_id": "m2-test-a-kubelet-trace-parent-sampling",
+      "query": "In the pinned Korean tracing guide, does the configured kubelet sampling rate override a parent span sampling decision?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "No. The parent sampling decision is always applied; the configured rate is the default for spans without parents.",
+      "evidence": [
+        {
+          "document_id": "k8s-ko-995a14a44a65591f",
+          "quote": "상위 스팬(span)의 샘플링 설정이 항상 적용된다.\n제공되는 설정의 샘플링률은 상위가 없는 스팬(span)에 기본 적용된다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-052",
+      "question_family_id": "m2-test-a-trace-stability",
+      "query": "Does the pinned Korean tracing guide guarantee backward compatibility for span names and attributes before tracing instrumentation becomes stable?",
+      "language": "en",
+      "category": "single_document",
+      "reference_answer": "No. Span names, attributes and instrumented endpoints may change, and backward compatibility is not guaranteed before stability.",
+      "evidence": [
+        {
+          "document_id": "k8s-ko-995a14a44a65591f",
+          "quote": "추적의 계측화(tracing instrumentation)는 여전히 활발히 개발되는 중이어서 다양한 형태로 변경될 수 있다. \n스팬(span)의 이름, 첨부되는 속성, 계측될 엔드포인트(instrumented endpoints)들 등이 그렇다. \n이 속성이 안정화(graduates to stable)되기 전까지는 \n이전 버전과의 호환성은 보장되지 않는다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-053",
+      "question_family_id": "m2-test-a-labels-versus-owner-boundary",
+      "query": "app과 environment 레이블 조건을 쉼표로 결합해 대상을 고르고 다른 네임스페이스의 namespaced owner에 연결하려 한다. 셀렉터 조건 결합 방식과 소유 참조의 허용 여부를 각각 확인해줘.",
+      "language": "ko",
+      "category": "multi_document",
+      "reference_answer": "쉼표로 결합한 레이블 조건은 모두 만족해야 한다. namespaced owner는 종속 오브젝트와 같은 네임스페이스에 있어야 하므로 다른 네임스페이스 연결은 유효하지 않다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-c41323506c26d011",
+          "quote": "The API currently supports two types of selectors: _equality-based_ and _set-based_.\nA label selector can be made of multiple _requirements_ which are comma-separated.\nIn the case of multiple requirements, all must be satisfied so the comma separator\nacts as a logical _AND_ (`&&`) operator.",
+          "evidence_group_id": "selector",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-e867515cea18c802",
+          "quote": "API는 현재 _일치성 기준_ 과 _집합성 기준_ 이라는 두 종류의 셀렉터를 지원한다.\n레이블 셀렉터는 쉼표로 구분된 다양한 _요구사항_ 에 따라 만들 수 있다. \n다양한 요구사항이 있는 경우 쉼표 기호가 AND(`&&`) 연산자로 \n구분되는 역할을 하도록 해야 한다.",
+          "evidence_group_id": "selector",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-7dca8eb86c0590a1",
+          "quote": "Cross-namespace owner references are disallowed by design.\nNamespaced dependents can specify cluster-scoped or namespaced owners.\nA namespaced owner **must** exist in the same namespace as the dependent.\nIf it does not, the owner reference is treated as absent, and the dependent\nis subject to deletion once all owners are verified absent.",
+          "evidence_group_id": "ownership",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-054",
+      "question_family_id": "m2-test-a-auth-audit-and-self-check",
+      "query": "여러 인증 소스를 쓰는 클러스터의 접근 감사를 준비한다. 어떤 인증 자료를 검토해야 하며 현재 요청자의 속성을 JSON으로 확인하는 명령은 무엇인가?",
+      "language": "ko",
+      "category": "multi_document",
+      "reference_answer": "내장 사용자 DB가 없으므로 구성된 모든 인증 소스의 자격 증명을 검토한다. 현재 사용자 속성은 kubectl auth whoami -o json으로 확인한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-655231f00333af45",
+          "quote": "It is important to note that Kubernetes does not have an in-built user database within the cluster.\nInstead, it takes user information from the configured authentication system and uses that to make\nauthorization decisions. Therefore, to audit user access, you need to review credentials from every\nconfigured authentication source.",
+          "evidence_group_id": "audit_scope",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-bb8c025251a82755",
+          "quote": "# Get your subject attributes in JSON format\n  kubectl auth whoami -o json",
+          "evidence_group_id": "current_identity",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-055",
+      "question_family_id": "m2-test-a-csr-approve-deny-workflow",
+      "query": "CSR 검토 결과에 따라 인증서 발급을 허용하거나 막아야 한다. 두 kubectl 하위 명령은 서명 컨트롤러에 각각 어떤 동작을 요청하는가?",
+      "language": "ko",
+      "category": "multi_document",
+      "reference_answer": "kubectl certificate approve는 요청된 속성의 인증서를 발급하도록 알리고, kubectl certificate deny는 인증서를 발급하지 않도록 알린다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-3455e27a3efe16f4",
+          "quote": "kubectl certificate approve allows a cluster admin to approve a certificate signing request (CSR). This action tells a certificate signing controller to issue a certificate to the requester with the attributes requested in the CSR.",
+          "evidence_group_id": "approve",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-bd8d9a83fa597ca0",
+          "quote": "kubectl certificate deny allows a cluster admin to deny a certificate signing request (CSR). This action tells a certificate signing controller to not to issue a certificate to the requester.",
+          "evidence_group_id": "deny",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-056",
+      "question_family_id": "m2-test-a-critical-versus-batch-priority",
+      "query": "핵심 DNS 파드에는 system 계열의 가장 높은 우선순위를 주고, 일반 배치 작업에는 높은 우선순위지만 다른 파드를 선점하지 못하는 클래스를 주려 한다. 각 경우에 필요한 클래스명과 생성 옵션은 무엇인가?",
+      "language": "ko",
+      "category": "multi_document",
+      "reference_answer": "핵심 파드는 system-node-critical을 사용한다. 비선점 일반 PriorityClass를 만들 때는 --preemption-policy=\"Never\"를 지정한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-b450b837eabb787c",
+          "quote": "To mark a Pod as critical, set priorityClassName for that Pod to `system-cluster-critical` or `system-node-critical`. `system-node-critical` is the highest available priority, even higher than `system-cluster-critical`.",
+          "evidence_group_id": "critical",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ed87a0f821246487",
+          "quote": "파드를 중요로 표시하기 위해서는, 해당 파드에 대해 priorityClassName을 `system-cluster-critical`이나 `system-node-critical`로 설정한다. `system-node-critical`은 가장 높은 우선 순위를 가지며, 심지어 `system-cluster-critical`보다도 우선 순위가 높다.",
+          "evidence_group_id": "critical",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-5211765f36eb90f0",
+          "quote": "# Create a priority class named high-priority that cannot preempt pods with lower priority\n  kubectl create priorityclass high-priority --value=1000 --description=\"high priority\" --preemption-policy=\"Never\"",
+          "evidence_group_id": "batch_nonpreemption",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-057",
+      "question_family_id": "m2-test-a-metrics-triage-workflow",
+      "query": "자원 사용량을 먼저 노드 단위로, 다음에는 특정 파드의 컨테이너별로 확인하려 한다. 사용할 명령 두 가지와 새 파드의 메트릭이 즉시 없을 수 있는 이유를 알려줘.",
+      "language": "ko",
+      "category": "multi_document",
+      "reference_answer": "노드는 kubectl top node, 특정 파드의 컨테이너별 사용량은 kubectl top pod POD_NAME --containers로 본다. 새 파드는 메트릭 파이프라인 지연 때문에 몇 분 동안 메트릭이 없을 수 있다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-39aad8b53fce0dc5",
+          "quote": "Display resource (CPU/memory) usage of nodes.\n\n The top-node command allows you to see the resource consumption of nodes.\n\n```\nkubectl top node [NAME | -l label]",
+          "evidence_group_id": "node",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-20c9a62427956016",
+          "quote": "# Show metrics for a given pod and its containers\n  kubectl top pod POD_NAME --containers",
+          "evidence_group_id": "containers",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-20c9a62427956016",
+          "quote": "Due to the metrics pipeline delay, they may be unavailable for a few minutes since pod creation.",
+          "evidence_group_id": "metrics_delay",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-058",
+      "question_family_id": "m2-test-a-runtime-upgrade-maintenance",
+      "query": "A node uses Docker Engine through dockershim and is being prepared for Kubernetes v1.24. What runtime change is needed, and which maintenance command safely evicts workloads while respecting their disruption budgets?",
+      "language": "en",
+      "category": "multi_document",
+      "reference_answer": "Migrate to another runtime or an alternative Docker Engine integration. Use kubectl drain for safe eviction that respects graceful termination and configured PodDisruptionBudgets.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ab8747af26c4a5ec",
+          "quote": "If you use Docker Engine via dockershim as your container runtime and wish to upgrade to v1.24,\nit is recommended that you either migrate to another runtime or find an alternative means to obtain Docker Engine support.",
+          "evidence_group_id": "runtime",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-91699a1a3fb1cbc3",
+          "quote": "컨테이너 런타임으로 도커 엔진을 통한 도커심을 사용하는 상황에서 v1.24로\n업그레이드하려는 경우, 다른 런타임으로 마이그레이션하거나 다른 방법을 찾아 도커 엔진 지원을 받는 것이 좋다.",
+          "evidence_group_id": "runtime",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-fd3c0fd79bfcaa2f",
+          "quote": "You can use `kubectl drain` to safely evict all of your pods from a\nnode before you perform maintenance on the node (e.g. kernel upgrade,\nhardware maintenance, etc.). Safe evictions allow the pod's containers\nto [gracefully terminate](/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination)\nand will respect the PodDisruptionBudgets you have specified.",
+          "evidence_group_id": "maintenance",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-059",
+      "question_family_id": "m2-test-a-api-versus-trace-ports",
+      "query": "A firewall separates Kubernetes API clients and an OpenTelemetry trace collector. What default destination port does each need according to the pinned API port table and Korean system-tracing guide?",
+      "language": "en",
+      "category": "multi_document",
+      "reference_answer": "API clients use the Kubernetes API server default port 6443. Component OTLP gRPC trace exports use port 4317.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-e0700ba0e30db7a8",
+          "quote": "| TCP      | Inbound   | 6443       | Kubernetes API server   | All                       |",
+          "evidence_group_id": "api",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-6b81b3acd1b44d31",
+          "quote": "| TCP      | 인바운드    | 6443       | 쿠버네티스 API 서버         | 전부                       |",
+          "evidence_group_id": "api",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-995a14a44a65591f",
+          "quote": "기본적으로, 쿠버네티스 컴포넌트들은 [IANA OpenTelemetry 포트](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=opentelemetry)인\n4317 포트로 OTLP에 대한 grpc exporter를 이용하여 추적를 내보낸다.",
+          "evidence_group_id": "collector",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-060",
+      "question_family_id": "m2-test-a-statefulset-parallel-drain",
+      "query": "Before draining nodes for a three-replica StatefulSet, how can I list Pods labeled app.kubernetes.io/name=MyApp, and with minAvailable: 2 and all replicas healthy, how many may concurrent drains make unavailable at once?",
+      "language": "en",
+      "category": "multi_document",
+      "reference_answer": "List them with kubectl get pods -l app.kubernetes.io/name=MyApp. Concurrent drains respect the budget, so only one replica may be unavailable at a time.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-45fc446f23600c02",
+          "quote": "In order to list all the pods which belong to a StatefulSet, which have a label `app.kubernetes.io/name=MyApp` set on them,\nyou can use the following:\n\n```shell\nkubectl get pods -l app.kubernetes.io/name=MyApp",
+          "evidence_group_id": "identify_pods",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ab8a81418b85b21e",
+          "quote": "레이블이 `app.kubernetes.io/name=MyApp`으로 지정된 스테이트풀셋 파드를 전부 나열하기 위해서는\n다음의 명령을 사용할 수 있다.\n\n```shell\nkubectl get pods -l app.kubernetes.io/name=MyApp",
+          "evidence_group_id": "identify_pods",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-fd3c0fd79bfcaa2f",
+          "quote": "For example, if you have a StatefulSet with three replicas and have\nset a PodDisruptionBudget for that set specifying `minAvailable: 2`,\n`kubectl drain` only evicts a pod from the StatefulSet if all three\nreplicas pods are [healthy](/docs/tasks/run-application/configure-pdb/#healthiness-of-a-pod);\nif then you issue multiple drain commands in parallel,\nKubernetes respects the PodDisruptionBudget and ensures that\nonly 1 (calculated as `replicas - minAvailable`) Pod is unavailable\nat any given time.",
+          "evidence_group_id": "budget",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-test-a-061",
+      "question_family_id": "m2-test-a-actual-api-port",
+      "query": "우리 운영 클러스터의 API 서버가 현재 수신하는 실제 사용자 지정 포트 번호는 무엇인가?",
+      "language": "ko",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "기본 API 포트와 변경 가능성은 설명되어 있지만 조직의 실제 kube-apiserver 실행 설정은 없다. 기본값 6443이나 예시 443을 실제 값으로 단정할 수 없으며 현장 설정 자료가 필요한 음성 후보다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "custom ports": 1
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-062",
+      "question_family_id": "m2-test-a-lb-idle-timeout",
+      "query": "우리 외부 API 로드밸런서에 현재 설정된 연결 유휴 타임아웃은 몇 초인가?",
+      "language": "ko",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "일반 네트워크·연결 설명은 조직 로드밸런서의 실제 설정값을 제공하지 않는다. 전체 고정 corpus에서 idle timeout을 확인했지만 특정 조직 장비의 설정이라는 근거는 없어 별도 네트워크 구성 자료가 필요하다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "idle timeout": 0
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-063",
+      "question_family_id": "m2-test-a-trace-egress-policy",
+      "query": "우리 사내 방화벽 정책에서 컨트롤 플레인에서 추적 수집기로 나가는 연결에 허용한 프로토콜과 목적지 포트 목록은 무엇인가?",
+      "language": "ko",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "OTLP gRPC 기본 포트 설명과 사내에 실제 적용된 방화벽 규칙은 다르다. Kubernetes 공개 원천에는 이 가상 조직의 네트워크 정책 목록이 없으므로 4317 기본값만으로 실제 허용 규칙을 답할 수 없다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "4317": 5
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-064",
+      "question_family_id": "m2-test-a-enabled-authenticators",
+      "query": "우리 운영 API 서버가 현재 동시에 활성화한 인증 메커니즘의 전체 목록은 무엇인가?",
+      "language": "ko",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "인증 방식의 종류와 하드닝 권장은 있지만 특정 조직의 현재 API 서버 플래그와 인증 설정은 없다. 지원하는 인증 메커니즘 목록을 실제 활성화 목록으로 대체하지 않는다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "authentication mechanisms": 2
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-065",
+      "question_family_id": "m2-test-a-oidc-configured-lifetime",
+      "query": "우리 OIDC 제공자가 Kubernetes 로그인 토큰에 현재 적용하는 최대 유효기간은 몇 분인가?",
+      "language": "ko",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "OIDC 토큰을 짧게 유지하라는 지침은 조직 신원 제공자의 실제 토큰 수명 설정값을 결정하지 않는다. 관련 public 문서와 corpus 범위를 확인했지만 이 환경 설정이 없으며 사람 검토는 대기다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "OIDC": 7
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-066",
+      "question_family_id": "m2-test-a-automation-certificate-expiry",
+      "query": "우리 운영 자동화에 현재 배포된 Kubernetes 클라이언트 인증서의 정확한 만료 시각은 언제인가?",
+      "language": "ko",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "클라이언트 인증서의 수명과 폐기 한계는 설명하지만 가상 환경에서 실제 발급·배포한 인증서 메타데이터는 없다. 인증서 비밀키를 요구하지 않는 요청이며 실제 공개 인증서 메타데이터 확인이 필요하다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "expiry": 7
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-067",
+      "question_family_id": "m2-test-a-gmsa-current-rbac-grants",
+      "query": "우리 운영 네임스페이스에서 현재 어떤 서비스 어카운트와 GMSA credential spec의 조합에 use 권한이 부여되어 있는가?",
+      "language": "ko",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "GMSA의 use 동사와 역할 바인딩 예제는 있지만 조직의 실제 RBAC 리소스는 수록하지 않는다. 예제 default 서비스 어카운트와 gmsa-WebApp1을 현장 권한 목록으로 간주할 수 없다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "GMSA": 5
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-068",
+      "question_family_id": "m2-test-a-credential-provider-current-cache",
+      "query": "우리 노드의 이미지 자격 증명 플러그인 설정에 적용한 defaultCacheDuration의 실제 값은 얼마인가?",
+      "language": "ko",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "defaultCacheDuration 필드 의미는 있지만 조직의 실제 CredentialProviderConfig 파일은 없다. 필드 정의는 구성값의 근거가 아니며 현장 설정 확인이 필요한 요청이다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "defaultCacheDuration": 4
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-069",
+      "question_family_id": "m2-test-a-migrated-runtime-version",
+      "query": "What exact cri-dockerd version is installed on our production node after the dockershim migration?",
+      "language": "en",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The corpus contains migration guidance, not the fictional node software inventory. References to cri-dockerd cannot establish which binary release that environment installed; runtime inventory is needed.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "cri-dockerd": 3
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-070",
+      "question_family_id": "m2-test-a-proxy-negotiated-tls",
+      "query": "Which TLS version did our authenticating proxy actually negotiate with the API server on its most recent connection?",
+      "language": "en",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The hardening guide requires securely configured TLS but does not contain this environment's connection capture or handshake telemetry. A supported or recommended protocol cannot substitute for the actual negotiated version.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "TLS": 144
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-071",
+      "question_family_id": "m2-test-a-cilium-vendor-compatibility",
+      "query": "Does the Cilium 1.16.5 vendor compatibility matrix certify Kubernetes v1.34?",
+      "language": "en",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "This asks for a version-specific vendor support claim. The fixed Kubernetes corpus contains no Cilium 1.16.5 compatibility matrix; whole-corpus literal checks challenge that absence but do not replace vendor evidence or human review.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "Cilium": 0,
+          "1.16.5": 0
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-072",
+      "question_family_id": "m2-test-a-proxy-ca-bundle-revision",
+      "query": "Which CA bundle revision is our production authenticating proxy currently using to validate the Kubernetes API server?",
+      "language": "en",
+      "category": "no_evidence",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The public corpus explains certificate authority configuration and proxy TLS requirements, but contains no fictional deployment's trust-bundle version inventory. The request concerns a non-secret configuration revision, not certificate private keys.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query",
+      "negative_scope_check": {
+        "method": "whole_word_case_insensitive_literal_search_over_all_313_verified_documents_and_public_source_inventory_review",
+        "terms_document_counts": {
+          "certificate authority": 125
+        },
+        "limitation": "Automatic lexical challenge and source-scope inspection do not establish exhaustive semantic absence; human review pending."
+      }
+    },
+    {
+      "id": "m2-test-a-073",
+      "question_family_id": "m2-test-a-selector-target-context",
+      "query": "이 레이블 셀렉터를 사용하면 될까?",
+      "language": "ko",
+      "category": "ambiguous",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "실제 셀렉터 식, 대상 리소스 유형과 선택하려는 오브젝트 조건이 없다. 문법 유효성과 원하는 대상 선택 여부를 판단하려면 이 정보와 현재 레이블을 먼저 확인해야 한다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query"
+    },
+    {
+      "id": "m2-test-a-074",
+      "question_family_id": "m2-test-a-owner-gc-context",
+      "query": "소유자 참조가 있는데 왜 오브젝트가 정리되지 않는 거야?",
+      "language": "ko",
+      "category": "ambiguous",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "소유자와 종속 오브젝트의 범위·네임스페이스, 실제 ownerReferences와 finalizer·삭제 상태가 없다. 잘못된 참조인지 정상적인 삭제 대기인지 구별할 수 없으므로 해당 상태를 먼저 요청해야 한다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query"
+    },
+    {
+      "id": "m2-test-a-075",
+      "question_family_id": "m2-test-a-csr-approval-context",
+      "query": "이 CSR을 승인해도 될까?",
+      "language": "ko",
+      "category": "ambiguous",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "CSR의 요청 신원·속성·signer·용도와 검증 결과가 주어지지 않았다. 승인 시 부여될 권한을 판단하려면 요청 내용과 승인 정책을 먼저 확인해야 한다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query"
+    },
+    {
+      "id": "m2-test-a-076",
+      "question_family_id": "m2-test-a-api-firewall-context",
+      "query": "외부에서 Kubernetes API에 접속하려면 방화벽의 어느 포트를 열면 돼?",
+      "language": "ko",
+      "category": "ambiguous",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "API 서버 기본값 사용 여부, 사용자 지정 포트와 앞단 로드밸런서 구성이 빠져 있다. 6443 또는 443을 일률적으로 권장하기 전에 실제 수신 경로와 포트 설정을 확인해야 한다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query"
+    },
+    {
+      "id": "m2-test-a-077",
+      "question_family_id": "m2-test-a-authentication-choice-context",
+      "query": "우리 클러스터에서는 어떤 인증 방식을 켜야 할까?",
+      "language": "ko",
+      "category": "ambiguous",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "사람의 API 접근인지 워크로드 인증인지, 외부 신원 제공자·관리형 서비스 제약과 운영 요구가 명시되지 않았다. 단일 방식을 고르기 전에 접근 주체와 사용 환경을 물어야 한다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query"
+    },
+    {
+      "id": "m2-test-a-078",
+      "question_family_id": "m2-test-a-trace-sampling-context",
+      "query": "추적 샘플링 비율은 얼마로 정하면 돼?",
+      "language": "ko",
+      "category": "ambiguous",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "추적할 컴포넌트, 요청량, 추적 목적, 저장 비용과 성능 허용 범위가 없다. 예제 비율을 무조건 권장값으로 사용할 수 없으므로 이 조건들을 먼저 확인해야 한다.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query"
+    },
+    {
+      "id": "m2-test-a-079",
+      "question_family_id": "m2-test-a-gmsa-fix-context",
+      "query": "Which fix should I apply to get my GMSA Pod working?",
+      "language": "en",
+      "category": "ambiguous",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The symptom, credential-spec delivery, domain connectivity, DNS and secure-channel test results are missing. Ask which check fails and for the relevant non-secret diagnostic result before choosing a specific fix.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query"
+    },
+    {
+      "id": "m2-test-a-080",
+      "question_family_id": "m2-test-a-docker-upgrade-context",
+      "query": "Do I need to replace Docker before upgrading Kubernetes?",
+      "language": "en",
+      "category": "ambiguous",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The current and target Kubernetes versions and whether Docker is connected through dockershim or another runtime integration are unspecified. Clarify those conditions before concluding which migration, if any, is required.",
+      "scenario_provenance": "synthetic_internal_document_request_not_observed_user_query"
+    }
+  ]
+}

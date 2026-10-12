@@ -40,7 +40,7 @@ def validate(documents: list[dict], questions: list[dict]) -> dict:
             if (
                 doc_id not in ids
                 or ids[doc_id]["split"] != row["split"]
-                or doc_id not in row["relevant_document_ids"]
+                or (doc_id not in row["relevant_document_ids"] and item.get("grade") != 1)
             ):
                 raise ValueError("evidence annotation missing, irrelevant or crosses splits")
         if row.get("category") == "no_evidence" and (evidence or row["relevant_document_ids"]):

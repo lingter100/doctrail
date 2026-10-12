@@ -1,0 +1,1355 @@
+{
+  "job_id": "m2-dev",
+  "questions": [
+    {
+      "id": "m2-dev-001",
+      "question_family_id": "m2-dev-proxy-transport",
+      "language": "ko",
+      "category": "single_document",
+      "query": "개발 PC에서 kubectl proxy를 켰을 때 로컬 클라이언트 연결과 API 서버로 가는 연결은 각각 어떤 프로토콜을 쓰나?",
+      "reference_answer": "클라이언트에서 프록시까지는 HTTP, 프록시에서 API 서버까지는 HTTPS를 쓴다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ed1cbf7dba7ffd9b",
+          "quote": "- client to proxy uses HTTP\n    - proxy to apiserver uses HTTPS",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-154dff2453a53f0f",
+          "quote": "- 클라이언트로 프락시는 HTTP를 사용한다.\n    - API 서버로 프락시는 HTTPS를 사용한다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-002",
+      "question_family_id": "m2-dev-prestop-budget",
+      "language": "ko",
+      "category": "single_document",
+      "query": "종료 유예 시간을 정할 때 PreStop 실행 시간은 앱의 정상 종료 시간과 별도로 더 주어지는가?",
+      "reference_answer": "별도 시간이 아니다. 유예 시간은 PreStop 훅 실행과 컨테이너 정상 종료에 걸리는 총 시간에 적용된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-db7d68386819ee82",
+          "quote": "This grace period applies to the total time it takes for\nboth the `PreStop` hook to execute and for the Container to stop normally.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d5b253b248318297",
+          "quote": "이 유예 기간은 `PreStop` 훅이\n실행되고 컨테이너가 정상적으로 중지되는 데 걸리는 총 시간에 적용된다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-003",
+      "question_family_id": "m2-dev-hook-repeat-delivery",
+      "language": "en",
+      "category": "single_document",
+      "query": "Can a lifecycle hook handler assume one invocation per event, or must it tolerate repeated calls?",
+      "reference_answer": "It must tolerate repeated calls: hook delivery is intended to be at least once, and the hook implementation must handle this.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-db7d68386819ee82",
+          "quote": "Hook delivery is intended to be *at least once*,\nwhich means that a hook may be called multiple times for any given event,\nsuch as for `PostStart` or `PreStop`.\nIt is up to the hook implementation to handle this correctly.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d5b253b248318297",
+          "quote": "훅 전달은 *한 번 이상* 으로 의도되어 있는데,\n이는 `PostStart` 또는 `PreStop`와 같은 특정 이벤트에 대해서,\n훅이 여러 번 호출될 수 있다는 것을 의미한다.\n이것을 올바르게 처리하는 것은 훅의 구현에 달려 있다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-004",
+      "question_family_id": "m2-dev-mostallocated-preference",
+      "language": "ko",
+      "category": "single_document",
+      "query": "할당이 적은 노드부터 채울 거라고 생각하고 MostAllocated를 골랐다. 실제 노드 선호 방향과 리소스별 영향 조절 방법은 무엇인가?",
+      "reference_answer": "MostAllocated는 할당량이 많은 노드를 선호한다. 리소스 유형별 가중치로 점수에 미치는 영향을 조절한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ef3d14255a7157cb",
+          "quote": "The `MostAllocated` strategy scores the nodes based on the utilization of resources, favoring the ones with higher allocation.\nFor each resource type, you can set a weight to modify its influence in the node score.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d9369e0fca6a14af",
+          "quote": "`MostAllocated` 전략은 리소스 사용량을 기반으로 할당량이 많은 노드를 높게 평가하여 노드에 점수를 매긴다.\n각 리소스 유형별로 가중치를 설정하여 노드 점수에 미치는 영향을 조정할 수 있다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-005",
+      "question_family_id": "m2-dev-resource-weight-default",
+      "language": "en",
+      "category": "single_document",
+      "query": "For RequestedToCapacityRatio resource weights, what happens if a weight is omitted, and can a negative weight be used?",
+      "reference_answer": "An omitted weight defaults to 1, and negative weights are not allowed.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ef3d14255a7157cb",
+          "quote": "The `weight` parameter is optional and is set to 1 if not specified. Also, the\n`weight` cannot be set to a negative value.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d9369e0fca6a14af",
+          "quote": "`weight` 파라미터는 선택 사항이며 지정되지 않은 경우 1로 설정 된다. 또한,\n`weight` 는 음수로 설정할 수 없다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-006",
+      "question_family_id": "m2-dev-authentication-unauthorized",
+      "language": "ko",
+      "category": "single_document",
+      "query": "API 요청의 인증 자체가 실패했다는 것을 나타내는 HTTP 상태 코드는 무엇인가?",
+      "reference_answer": "인증할 수 없는 요청은 HTTP 401로 거부된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5f27aa187f601888",
+          "quote": "If the request cannot be authenticated, it is rejected with HTTP status code 401.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ee167903598d2e70",
+          "quote": "요청을 인증할 수 없는 경우 HTTP 상태 코드 401과 함께 거부된다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-007",
+      "question_family_id": "m2-dev-admission-read-requests",
+      "language": "en",
+      "category": "single_document",
+      "query": "Will admission controllers inspect a request that only reads an existing object?",
+      "reference_answer": "No. Admission controllers act on create, modify, delete, or connect requests, but not requests that merely read objects.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5f27aa187f601888",
+          "quote": "Admission controllers act on requests that create, modify, delete, or connect to (proxy) an object.\nAdmission controllers do not act on requests that merely read objects.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ee167903598d2e70",
+          "quote": "어드미션 컨트롤러는 오브젝트를 생성, 수정, 삭제 또는 연결(프록시)하는 요청에 대해 작동한다.\n어드미션 컨트롤러는 단순히 오브젝트를 읽는 요청에는 작동하지 않는다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-008",
+      "question_family_id": "m2-dev-system-masters-breakglass",
+      "language": "ko",
+      "category": "single_document",
+      "query": "클러스터 부트스트랩이 끝난 뒤 일상적인 관리자 계정을 system:masters로 운영해도 되는가? 체크리스트가 권고하는 용도는 무엇인가?",
+      "reference_answer": "일상적인 관리자 용도로 쓰지 말고 비상 접근 수단으로만 사용하도록 권고한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-67a6cac385437476",
+          "quote": "In fact,\n`system:masters` should only be used as a break-glass mechanism, as opposed to\nan admin user.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-009",
+      "question_family_id": "m2-dev-static-mirror-delete",
+      "language": "ko",
+      "category": "single_document",
+      "query": "kube-system의 static Pod에 대응하는 미러 Pod를 kubectl로 지웠는데 다시 나타난다. 왜 그런가?",
+      "reference_answer": "미러 Pod를 삭제해도 kubelet은 static Pod를 제거하지 않고 미러 Pod를 다시 만든다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5b28d26f42e3ae09",
+          "quote": "If you try to use `kubectl` to delete the mirror Pod from the API server,\nthe kubelet _does not_ remove the static Pod. The kubelet will recreate\nthe mirror Pod.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-010",
+      "question_family_id": "m2-dev-static-api-references",
+      "language": "en",
+      "category": "single_document",
+      "query": "Can a static Pod specification reference a ServiceAccount, ConfigMap, or Secret from the API?",
+      "reference_answer": "No. A static Pod specification cannot refer to other API objects, including those three kinds.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5b28d26f42e3ae09",
+          "quote": "The spec of a static Pod cannot refer to other API objects,\nsuch as ServiceAccount,\nConfigMap, or\nSecret.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-011",
+      "question_family_id": "m2-dev-exec-cluster-info",
+      "language": "ko",
+      "category": "single_document",
+      "query": "ExecCredential v1 기반 인증 플러그인이 cluster 정보를 받지 못한다. exec provider 설정에서 어떤 조건이 충족되어야 cluster가 전달되는가?",
+      "reference_answer": "exec provider 설정의 provideClusterInfo가 true여야 Cluster가 non-nil로 전달된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-011e8526a8b2693f",
+          "quote": "Cluster contains information to allow an exec plugin to communicate with the\nkubernetes cluster being authenticated to. Note that Cluster is non-nil only\nwhen provideClusterInfo is set to true in the exec provider config (i.e.,\nExecConfig.ProvideClusterInfo).",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ],
+      "annotation_notes": "The assigned v1beta1 reference was inspected and contains the same field behavior, but this query explicitly targets v1; the v1 reference remains the annotated authority."
+    },
+    {
+      "id": "m2-dev-012",
+      "question_family_id": "m2-dev-exec-tls-name",
+      "language": "en",
+      "category": "single_document",
+      "query": "In the ExecCredential v1 Cluster data, what name is used to verify the server certificate if tls-server-name is empty?",
+      "reference_answer": "The hostname used to contact the server is used.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-011e8526a8b2693f",
+          "quote": "TLSServerName is passed to the server for SNI and is used in the client to\ncheck server certificates against. If ServerName is empty, the hostname\nused to contact the server is used.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ],
+      "annotation_notes": "The assigned v1beta1 reference was inspected and contains the same field behavior, but this query explicitly targets v1; the v1 reference remains the annotated authority."
+    },
+    {
+      "id": "m2-dev-013",
+      "question_family_id": "m2-dev-deployment-sync-concurrency",
+      "language": "ko",
+      "category": "single_document",
+      "query": "배포 컨트롤러의 ConcurrentDeploymentSyncs를 높이면 무엇이 더 빨라지고 어떤 부하가 늘어날 수 있는가?",
+      "reference_answer": "동시에 동기화할 수 있는 Deployment 수가 늘어 응답성이 좋아지지만 CPU와 네트워크 부하가 증가한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-a74613f9005a7ab1",
+          "quote": "concurrentDeploymentSyncs is the number of deployment objects that are\nallowed to sync concurrently. Larger number = more responsive deployments,\nbut more CPU (and network) load.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-014",
+      "question_family_id": "m2-dev-csr-shorter-duration",
+      "language": "en",
+      "category": "single_document",
+      "query": "Does ClusterSigningDuration force every signed certificate to have the same lifetime, or can an individual CSR ask for less?",
+      "reference_answer": "It is a maximum duration. An individual CSR can request a shorter certificate through spec.expirationSeconds.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-a74613f9005a7ab1",
+          "quote": "clusterSigningDuration is the max length of duration signed certificates will be given.\nIndividual CSRs may request shorter certs by setting spec.expirationSeconds.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-015",
+      "question_family_id": "m2-dev-apply-initial-creation",
+      "language": "ko",
+      "category": "single_document",
+      "query": "이후 kubectl apply로 관리할 리소스를 처음 만들 때 권장되는 생성 방식은 무엇인가?",
+      "reference_answer": "처음부터 apply 또는 create --save-config로 생성한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-841226a32d3b5bf9",
+          "quote": "To use 'apply', always create the resource initially with either 'apply' or 'create --save-config'.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-016",
+      "question_family_id": "m2-dev-apply-stdin",
+      "language": "en",
+      "category": "single_document",
+      "query": "A build step emits a Pod JSON document on stdout. How can kubectl apply consume it without an intermediate manifest file?",
+      "reference_answer": "Pipe it to kubectl apply -f -, as in cat pod.json | kubectl apply -f -.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-841226a32d3b5bf9",
+          "quote": "# Apply the JSON passed into stdin to a pod\n  cat pod.json | kubectl apply -f -",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-017",
+      "question_family_id": "m2-dev-last-applied-error-recovery",
+      "language": "ko",
+      "category": "single_document",
+      "query": "edit-last-applied 편집 도중 서버의 리소스가 다른 편집기에 의해 바뀌어 갱신이 실패했다. 작성한 변경은 어디에 남고 어떻게 다시 반영해야 하는가?",
+      "reference_answer": "적용되지 않은 변경은 디스크 임시 파일에 남는다. 새 리소스 버전에 변경을 적용하거나 저장된 임시 사본에 최신 리소스 버전을 반영해야 한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-bfca65299376df40",
+          "quote": "In the event an error occurs while updating, a temporary file will be created on disk that contains your unapplied changes.",
+          "evidence_group_id": "saved",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-bfca65299376df40",
+          "quote": "When this occurs, you will have to apply your changes to the newer version of the resource, or update your temporary saved copy to include the latest resource version.",
+          "evidence_group_id": "retry",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-018",
+      "question_family_id": "m2-dev-cani-serviceaccount",
+      "language": "ko",
+      "category": "single_document",
+      "query": "dev 네임스페이스의 서비스어카운트 foo가 prod의 파드를 조회할 수 있는지 대신 검사하려면 어떤 명령을 쓰며, 실행자에게 어떤 권한이 필요한가?",
+      "reference_answer": "kubectl auth can-i list pods --as=system:serviceaccount:dev:foo -n prod를 사용한다. 실행자는 --as를 사용하는 impersonation 권한이 있어야 한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-8c1f236e774c6ea2",
+          "quote": "# You must be allowed to use impersonation for the global option \"--as\"\n  kubectl auth can-i list pods --as=system:serviceaccount:dev:foo -n prod",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-019",
+      "question_family_id": "m2-dev-cani-pod-logs",
+      "language": "en",
+      "category": "single_document",
+      "query": "How can I check permission to read Pod logs rather than just permission to read the Pod object?",
+      "reference_answer": "Use kubectl auth can-i get pods --subresource=log.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-8c1f236e774c6ea2",
+          "quote": "# Check to see if I can read pod logs\n  kubectl auth can-i get pods --subresource=log",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-020",
+      "question_family_id": "m2-dev-kubeconfig-explicit-file",
+      "language": "ko",
+      "category": "single_document",
+      "query": "KUBECONFIG에 여러 경로가 있어도 --kubeconfig를 명시하면 다른 파일과 합쳐지는가?",
+      "reference_answer": "아니다. --kubeconfig가 설정되면 그 파일만 로드하며 병합하지 않는다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5c8222f9d1abb739",
+          "quote": "If the --kubeconfig flag is set, then only that file is loaded. The flag may only be set once and no merging takes place.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-021",
+      "question_family_id": "m2-dev-configmap-directory-files",
+      "language": "ko",
+      "category": "single_document",
+      "query": "설정 디렉터리를 통째로 ConfigMap으로 만들 때 하위 디렉터리와 심볼릭 링크도 포함되는가?",
+      "reference_answer": "일반 파일 중 basename이 유효한 키인 파일만 포함된다. 하위 디렉터리, 심볼릭 링크 등 일반 파일이 아닌 항목은 무시된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-dd924473f2a6fc45",
+          "quote": "When creating a config map based on a directory, each file whose basename is a valid key in the directory will be packaged into the config map.  Any directory entries except regular files are ignored (e.g. subdirectories, symlinks, devices, pipes, etc).",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-022",
+      "question_family_id": "m2-dev-secret-file-key",
+      "language": "en",
+      "category": "single_document",
+      "query": "When creating a generic Secret from a file, must the Secret key equal the filename, or can I choose a different key?",
+      "reference_answer": "The key defaults to the file basename, but an alternate key can be specified.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5321ab1af3d24e16",
+          "quote": "When creating a secret based on a file, the key will default to the basename of the file, and the value will default to the file content. If the basename is an invalid key or you wish to chose your own, you may specify an alternate key.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-023",
+      "question_family_id": "m2-dev-delete-concurrent-update",
+      "language": "ko",
+      "category": "single_document",
+      "query": "kubectl delete를 실행하는 순간 다른 사람이 같은 리소스를 수정하면 리소스 버전 충돌로 삭제가 보호되는가?",
+      "reference_answer": "아니다. delete는 리소스 버전을 검사하지 않으므로 동시 수정 내용도 리소스와 함께 사라질 수 있다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-75e23183754e6f49",
+          "quote": "Note that the delete command does NOT do resource version checks, so if someone submits an update to a resource right when you submit a delete, their update will be lost along with the rest of the resource.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-024",
+      "question_family_id": "m2-dev-force-delete-processes",
+      "language": "en",
+      "category": "single_document",
+      "query": "After force-deleting a Pod, can I assume its processes have already stopped on the node?",
+      "reference_answer": "No. Force deletion does not wait for confirmation of process termination, so processes may keep running until the node detects the deletion and completes graceful deletion.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-75e23183754e6f49",
+          "quote": "Force deleting pods does not wait for confirmation that the pod's processes have been terminated, which can leave those processes running until the node detects the deletion and completes graceful deletion.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-025",
+      "question_family_id": "m2-dev-diff-exit-contract",
+      "language": "ko",
+      "category": "single_document",
+      "query": "CI에서 kubectl diff의 종료 코드 1을 무조건 실행 오류로 처리하고 있다. 문서상 0, 1, 1보다 큰 값은 각각 무엇을 뜻하는가?",
+      "reference_answer": "0은 차이가 없음, 1은 차이가 있음, 1보다 큰 값은 kubectl 또는 diff 실행 오류를 뜻한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-1054f8d43f934bf4",
+          "quote": "Exit status: 0 No differences were found. 1 Differences were found. &gt;1 Kubectl or diff failed with an error.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-026",
+      "question_family_id": "m2-dev-expose-selector-constraint",
+      "language": "en",
+      "category": "single_document",
+      "query": "Why can kubectl expose reject a Deployment whose selector contains matchExpressions?",
+      "reference_answer": "A Deployment or ReplicaSet can be exposed only if its selector can be converted to a Service selector, meaning the selector contains only matchLabels.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-0e13e12a6929ca85",
+          "quote": "A deployment or replica set will be exposed as a service only if its selector is convertible to a selector that service supports, i.e. when the selector contains only the matchLabels component.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-027",
+      "question_family_id": "m2-dev-kuberc-resource-alias",
+      "language": "ko",
+      "category": "single_document",
+      "query": "kubectl get nodes -o wide를 getn 별칭으로 저장하려면 kuberc set에서 리소스 이름을 어디에 넣어야 하는가?",
+      "reference_answer": "aliases 섹션에서 --command get과 --prependarg nodes를 사용한다. 예: kubectl kuberc set --section aliases --name getn --command get --prependarg nodes --option output=wide.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-f224aebec3f75421",
+          "quote": "# Create an alias 'getn' for 'get' command with prepended 'nodes' resource\n  kubectl kuberc set --section aliases --name getn --command get --prependarg nodes --option output=wide",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-028",
+      "question_family_id": "m2-dev-port-forward-pod-restart",
+      "language": "ko",
+      "category": "single_document",
+      "query": "Deployment를 대상으로 port-forward를 실행했는데 선택된 파드가 종료되었다. 다른 파드로 자동 연결이 이어지는가?",
+      "reference_answer": "선택된 파드가 종료되면 포워딩 세션도 끝난다. 다시 포워딩하려면 명령을 재실행해야 한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-24608d068e5a4828",
+          "quote": "If there are multiple pods matching the criteria, a pod will be selected automatically. The forwarding session ends when the selected pod terminates, and a rerun of the command is needed to resume forwarding.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-029",
+      "question_family_id": "m2-dev-replace-complete-spec",
+      "language": "en",
+      "category": "single_document",
+      "query": "Can I pass just the changed fields to kubectl replace for an existing resource? What input does it require?",
+      "reference_answer": "Replace requires the complete resource specification. It can be obtained using kubectl get TYPE NAME -o yaml.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-da9992f5fd2cbf51",
+          "quote": "JSON and YAML formats are accepted. If replacing an existing resource, the complete resource spec must be provided. This can be obtained by\n\n        $ kubectl get TYPE NAME -o yaml",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-030",
+      "question_family_id": "m2-dev-set-image-offline",
+      "language": "ko",
+      "category": "single_document",
+      "query": "API 서버에 접속하지 않고 로컬 매니페스트의 nginx 이미지 태그만 바꿔 YAML로 출력하려면 어떤 set image 옵션 조합을 쓰는가?",
+      "reference_answer": "--local과 -o yaml을 사용한다. 예: kubectl set image -f path/to/file.yaml nginx=nginx:1.9.1 --local -o yaml.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-bd958dde67616da2",
+          "quote": "# Print result (in yaml format) of updating nginx container image from local file, without hitting the server\n  kubectl set image -f path/to/file.yaml nginx=nginx:1.9.1 --local -o yaml",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-031",
+      "question_family_id": "m2-dev-kubelet-dropin-list",
+      "language": "ko",
+      "category": "single_document",
+      "query": "kubelet drop-in 파일에 clusterDNS 목록을 적으면 기본 파일의 DNS 목록에 추가되는가, 교체되는가?",
+      "reference_answer": "목록 전체가 교체된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-9d93b13d88a57199",
+          "quote": "You can override the slices/lists values of the kubelet configuration.\nHowever, the entire list gets overridden during the merging process.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-032",
+      "question_family_id": "m2-dev-kubelet-map-list-merge",
+      "language": "en",
+      "category": "single_document",
+      "query": "How does kubelet drop-in merging treat ordinary map fields versus a list stored as one map value?",
+      "reference_answer": "Map fields can be selectively overridden, but for map[string][]string the entire list associated with an overridden field is replaced.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-9d93b13d88a57199",
+          "quote": "Individual fields in maps, regardless of their value types (boolean, string, etc.), can be selectively overridden.\nHowever, for `map[string][]string`, the entire list associated with a specific field gets overridden.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-033",
+      "question_family_id": "m2-dev-kubelet-relative-path",
+      "language": "ko",
+      "category": "single_document",
+      "query": "동일한 상대 경로를 kubelet 구성 파일과 명령줄 플래그에 각각 넣으면 어느 디렉터리를 기준으로 해석하는가?",
+      "reference_answer": "구성 파일의 상대 경로는 구성 파일 위치 기준이고, 명령줄 플래그의 상대 경로는 kubelet의 현재 작업 디렉터리 기준이다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-2c7101c149c7b03d",
+          "quote": "Note that relative file paths in the kubelet config file are resolved relative to the\nlocation of the kubelet config file, whereas relative paths in command line flags are resolved\nrelative to the kubelet's current working directory.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-df665782749ca91c",
+          "quote": "Kubelet 구성 파일의 상대 파일 경로는\nKubelet 구성 파일의 위치를 기준으로 확인되는 반면, 커맨드 라인 플래그의 상대 경로는\nKubelet의 현재 작업 디렉터리를 기준으로 확인된다는 점에 유의한다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-034",
+      "question_family_id": "m2-dev-kubelet-dropin-extension-order",
+      "language": "en",
+      "category": "single_document",
+      "query": "What filename extension must kubelet drop-ins use, and in what order are the files processed?",
+      "reference_answer": "They must end in .conf. Kubelet sorts the entire filenames alphanumerically, so 01-kubelet.conf overrides 00-kubelet.conf.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-2c7101c149c7b03d",
+          "quote": "The suffix of a valid kubelet drop-in configuration file **must** be `.conf`. For instance: `99-kubelet-address.conf`",
+          "evidence_group_id": "extension",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-2c7101c149c7b03d",
+          "quote": "The kubelet processes files in its config drop-in directory by sorting the **entire file name** alphanumerically.\nFor instance, `00-kubelet.conf` is processed first, and then overridden with a file named `01-kubelet.conf`.",
+          "evidence_group_id": "order",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-035",
+      "question_family_id": "m2-dev-windows-ping-limits",
+      "language": "ko",
+      "category": "single_document",
+      "query": "Windows 파드에서 외부 IP로 ping이 안 된다는 이유만으로 TCP 연결도 끊겼다고 볼 수 있는가? 연결 확인은 어떻게 바꾸는가?",
+      "reference_answer": "문서상 Windows 파드는 ICMP 아웃바운드 규칙이 없지만 TCP/UDP는 지원한다. 외부 연결 확인은 ping 대신 대응되는 curl 명령을 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-44bfbf890126fa84",
+          "quote": "Windows Pods do not have outbound rules programmed for the ICMP protocol. However,\n   TCP/UDP is supported. When trying to demonstrate connectivity to resources\n   outside of the cluster, substitute `ping <IP>` with corresponding\n   `curl <IP>` commands.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-3a31a7af2aaf3467",
+          "quote": "윈도우 파드에는 현재 ICMP 프로토콜용으로 프로그래밍된 아웃바운드 규칙이 없다. \n   그러나 TCP/UDP는 지원된다. \n   클러스터 외부 리소스에 대한 연결을 시연하려는 경우, \n   `ping <IP>`를 대응되는 `curl <IP>`명령으로 대체한다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-036",
+      "question_family_id": "m2-dev-plugin-built-in-priority",
+      "language": "ko",
+      "category": "single_document",
+      "query": "PATH에 실행 가능한 kubectl-version 파일을 넣었는데 kubectl version이 내 플러그인을 실행하지 않는다. 무엇이 우선되는가?",
+      "reference_answer": "기존 kubectl version 명령이 항상 우선하므로 같은 이름의 플러그인은 실행되지 않는다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-b3941b87e44b8046",
+          "quote": "For example, creating a plugin `kubectl-version` will cause that plugin to never be executed, as the existing `kubectl version`\ncommand will always take precedence over it.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-82f7e0d822b2f946",
+          "quote": "예를 들어, 플러그인 `kubectl-version` 을 만들면 기존의 `kubectl version` 명령이 항상 우선하므로, 플러그인이 실행되지 않는다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-037",
+      "question_family_id": "m2-dev-plugin-install-discovery",
+      "language": "en",
+      "category": "single_document",
+      "query": "What filename convention and installation location make a standalone executable discoverable as a kubectl plugin?",
+      "reference_answer": "Its filename must begin with kubectl-, and its executable file must be placed somewhere on PATH.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-b3941b87e44b8046",
+          "quote": "A plugin is a standalone executable file, whose name begins with `kubectl-`. To install a plugin, move its executable file to anywhere on your `PATH`.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-82f7e0d822b2f946",
+          "quote": "플러그인은 이름이 `kubectl-` 로 시작되는 독립형 실행 파일이다. 플러그인을 설치하려면, 실행 파일을 `PATH` 에 지정된 디렉터리로 옮기면 된다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-038",
+      "question_family_id": "m2-dev-kubelet-renewal-window",
+      "language": "ko",
+      "category": "single_document",
+      "query": "자동 갱신이 켜진 kubelet은 인증서가 완전히 만료된 후에야 CSR을 다시 보내는가? 문서의 갱신 시점 범위는 무엇인가?",
+      "reference_answer": "만료 전에 새 CSR을 보낸다. 인증서 유효 시간이 30%에서 10% 남은 사이의 어느 시점에 실행될 수 있다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-26b376d77775e0af",
+          "quote": "As the expiration of the signed certificate approaches, the kubelet will\nautomatically issue a new certificate signing request, using the Kubernetes API. \nThis can happen at any point between 30% and 10% of the time remaining on the \ncertificate.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-1d13911fd0cca551",
+          "quote": "서명된 인증서의 만료가 다가오면 kubelet은 쿠버네티스 API를 사용하여\n새로운 인증서 서명 요청을 자동으로 발행한다.\n이는 인증서 유효 기간이 30%-10% 남은 시점에 언제든지 실행될 수 있다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-039",
+      "question_family_id": "m2-dev-cluster-info-dump",
+      "language": "ko",
+      "category": "single_document",
+      "query": "kubectl cluster-info가 URL을 반환했는데도 클러스터 접근 문제가 남는다. 설치 검증 문서는 어떤 추가 명령으로 구성을 확인하라고 하는가?",
+      "reference_answer": "kubectl cluster-info dump로 구성을 확인한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-bff6579ea2d172d1",
+          "quote": "If `kubectl cluster-info` returns the url response, but you can't access your cluster,\ncheck whether it is configured properly using the following command:\n\n```shell\nkubectl cluster-info dump\n```",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-0f4c9a9748ae6da1",
+          "quote": "`kubectl cluster-info`가 URL 응답을 반환했지만 클러스터에 접근할 수 없다면\n다음 명령으로 구성이 올바른지 확인한다.\n\n```shell\nkubectl cluster-info dump\n```",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-040",
+      "question_family_id": "m2-dev-metrics-nonresource-access",
+      "language": "ko",
+      "category": "single_document",
+      "query": "RBAC을 사용하는 클러스터에서 시스템 컴포넌트의 /metrics를 수집하려면 어떤 종류의 접근 권한이 필요한가?",
+      "reference_answer": "/metrics 접근을 허용하는 ClusterRole을 통해 사용자, 그룹 또는 서비스어카운트에 권한이 있어야 한다. 예시 규칙은 nonResourceURLs의 /metrics에 get을 허용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-ko-8c4d6b7258357dc1",
+          "quote": "클러스터가 RBAC을 사용하는 경우, 메트릭을 읽으려면\n`/metrics` 에 접근을 허용하는 클러스터롤(ClusterRole)을 가지는 사용자, 그룹 또는 서비스어카운트(ServiceAccount)를 통한 권한이 필요하다.",
+          "evidence_group_id": "role",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-8c4d6b7258357dc1",
+          "quote": "rules:\n  - nonResourceURLs:\n      - \"/metrics\"\n    verbs:\n      - get",
+          "evidence_group_id": "rule",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-041",
+      "question_family_id": "m2-dev-startup-probe-gating",
+      "language": "ko",
+      "category": "single_document",
+      "query": "시작이 느린 컨테이너에 startup probe를 추가하면 그 프로브가 성공하기 전 liveness와 readiness 검사는 어떻게 되는가?",
+      "reference_answer": "시작 프로브가 성공할 때까지 활성 및 준비성 프로브는 비활성화된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-ko-ac9fff89924d08ab",
+          "quote": "시작 프로브가 설정된 경우, 성공할 때까지 활성 및 준비성 프로브는 비활성화된다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-042",
+      "question_family_id": "m2-dev-volume-health-metric",
+      "language": "ko",
+      "category": "single_document",
+      "query": "CSI 볼륨 헬스의 kubelet_volume_stats_health_status_abnormal 값 1과 0은 각각 무엇을 뜻하며 어느 레이블로 볼륨을 구분하는가?",
+      "reference_answer": "1은 비정상, 0은 정상이다. namespace와 persistentvolumeclaim 레이블을 사용한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-ko-0d823d640f9219fb",
+          "quote": "새로운 kubelet_volume_stats_health_status_abnormal 메트릭이 추가되었다. 이 메트릭은 `namespace` 및 `persistentvolumeclaim` 2개의 레이블을 포함한다. 카운터는 1 또는 0이다. 카운터가 1이면 볼륨이 정상적이지 않음을, 0이면 정상적임을 의미한다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-043",
+      "question_family_id": "m2-dev-unneeded-serviceaccount-token",
+      "language": "ko",
+      "category": "single_document",
+      "query": "Kubernetes API 자격증명이 필요 없는 파드에 서비스어카운트 토큰이 자동 마운트되지 않도록 하려면 무엇을 설정하는가?",
+      "reference_answer": "automountServiceAccountToken을 false로 설정한다. 서비스어카운트 또는 개별 파드에서 설정할 수 있다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-67a6cac385437476",
+          "quote": "This can be configured by setting\n[`automountServiceAccountToken`](/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server)\nto `false` either within the service account to apply throughout the namespace\nor specifically for a pod.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-044",
+      "question_family_id": "m2-dev-binpacking-shared-shape",
+      "language": "ko",
+      "category": "single_document",
+      "query": "RequestedToCapacityRatio에서 확장 리소스용 resources 목록에 CPU와 memory를 추가하면 각기 별도의 shape 곡선을 지정할 수 있는가?",
+      "reference_answer": "목록의 모든 리소스는 같은 shape 함수를 공유하므로 CPU와 memory에도 같은 빈 패킹 곡선이 적용된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-ef3d14255a7157cb",
+          "quote": "To include CPU and memory in this scoring strategy, add them to the `resources` list. Note that all\nresources in the list share the same `shape` function, so doing so will apply the same bin-packing\ncurve to those resources as well.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ],
+      "annotation_notes": "The assigned Korean resource-bin-packing page was inspected. It shows resource and shape configuration but does not directly state the shared-shape constraint selected here; no Korean alternate span was added."
+    },
+    {
+      "id": "m2-dev-045",
+      "question_family_id": "m2-dev-apply-kustomize-exclusive",
+      "language": "ko",
+      "category": "single_document",
+      "query": "kubectl apply에서 kustomization 디렉터리를 처리하면서 -f 또는 -R도 함께 줄 수 있는가?",
+      "reference_answer": "-k/--kustomize는 -f나 -R과 함께 사용할 수 없다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-841226a32d3b5bf9",
+          "quote": "-k, --kustomize string</td>\n</tr>\n<tr>\n<td></td><td style=\"line-height: 130%; word-wrap: break-word;\"><p>Process a kustomization directory. This flag can't be used together with -f or -R.</p>",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-046",
+      "question_family_id": "m2-dev-kuberc-command-default",
+      "language": "en",
+      "category": "single_document",
+      "query": "When saving default flags using kuberc set, should --command include a resource, such as get pods?",
+      "reference_answer": "No. For defaults, --command should contain only the command, such as get, create, or set env, without resources.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-f224aebec3f75421",
+          "quote": "For defaults: Sets default flag values for kubectl commands. The --command flag should specify only the command (e.g., \"get\", \"create\", \"set env\"), not resources.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-047",
+      "question_family_id": "m2-dev-port-forward-localhost-bind",
+      "language": "ko",
+      "category": "single_document",
+      "query": "port-forward에 localhost를 지정했을 때 IPv4 루프백이 바인딩되지 않으면 바로 실패하는가? 어떤 주소들을 시도하는가?",
+      "reference_answer": "127.0.0.1과 ::1을 모두 시도하며 둘 다 바인딩할 수 없을 때 실패한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-24608d068e5a4828",
+          "quote": "When localhost is supplied, kubectl will try to bind on both 127.0.0.1 and ::1 and will fail if neither of these addresses are available to bind.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-048",
+      "question_family_id": "m2-dev-eviction-partial-defaults",
+      "language": "en",
+      "category": "single_document",
+      "query": "I changed just one evictionHard threshold in the kubelet config. How can I keep the defaults for thresholds I did not specify?",
+      "reference_answer": "Set MergeDefaultEvictionSettings to true, or explicitly supply all threshold values. Otherwise changing one threshold leaves the others at zero rather than inheriting their defaults.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-2c7101c149c7b03d",
+          "quote": "In the example, by changing the default value of only one parameter for\nevictionHard, the default values of other parameters will not be inherited and\nwill be set to zero. In order to provide custom values, you should provide all\nthe threshold values respectively.",
+          "evidence_group_id": "default",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-2c7101c149c7b03d",
+          "quote": "Alternatively, you can set the MergeDefaultEvictionSettings to true in the kubelet\nconfiguration file, if any parameter is changed then the other parameters will inherit\ntheir default values instead of 0.",
+          "evidence_group_id": "merge",
+          "grade": 2
+        }
+      ],
+      "annotation_notes": "The assigned Korean kubelet-config page was inspected. Its short older example does not include the English page's MergeDefaultEvictionSettings guidance; it was not labeled as a sufficient alternate. Translation completeness and drift remain review concerns."
+    },
+    {
+      "id": "m2-dev-049",
+      "question_family_id": "m2-dev-set-image-container-wildcard",
+      "language": "ko",
+      "category": "single_document",
+      "query": "DaemonSet abc의 컨테이너 이름을 하나씩 열거하지 않고 전부 같은 이미지로 바꾸는 set image 문법은 무엇인가?",
+      "reference_answer": "컨테이너 이름 자리에 *를 쓴다. 문서 예시는 kubectl set image daemonset abc *=nginx:1.9.1이다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-bd958dde67616da2",
+          "quote": "# Update image of all containers of daemonset abc to 'nginx:1.9.1'\n  kubectl set image daemonset abc *=nginx:1.9.1",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-050",
+      "question_family_id": "m2-dev-configmap-file-key",
+      "language": "ko",
+      "category": "single_document",
+      "query": "단일 파일로 ConfigMap을 만들면 기본 키와 값은 어디에서 가져오며, 파일 이름이 유효한 키가 아니면 어떻게 하는가?",
+      "reference_answer": "키는 파일 basename, 값은 파일 내용이 기본값이다. basename이 잘못된 키라면 다른 키를 지정할 수 있다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-dd924473f2a6fc45",
+          "quote": "When creating a config map based on a file, the key will default to the basename of the file, and the value will default to the file content.  If the basename is an invalid key, you may specify an alternate key.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-051",
+      "question_family_id": "m2-dev-volume-controller-node-events",
+      "language": "ko",
+      "category": "single_document",
+      "query": "CSI 드라이버가 지원하는 볼륨 헬스 감지 위치가 컨트롤러 측인지 노드 측인지에 따라 비정상 이벤트는 어디에 보고되는가?",
+      "reference_answer": "컨트롤러 측 지원이면 관련 PVC에, 노드 측 지원이면 해당 PVC를 사용하는 모든 파드에 이벤트가 보고된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-ko-0d823d640f9219fb",
+          "quote": "CSI 드라이버가 컨트롤러 측의 볼륨 헬스 모니터링 기능을 지원하는 경우, CSI 볼륨에서 비정상적인 볼륨 상태가 감지될 때 관련 퍼시스턴트볼륨클레임(PersistentVolumeClaim, PVC) 이벤트가 보고된다.",
+          "evidence_group_id": "controller",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-0d823d640f9219fb",
+          "quote": "CSI 드라이버가 노드 측에서 볼륨 헬스 모니터링 기능을 지원하는 경우, CSI 볼륨에서 비정상적인 볼륨 상태가 감지되면 PVC를 사용하는 모든 파드에서 이벤트가 보고된다.",
+          "evidence_group_id": "node",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-052",
+      "question_family_id": "m2-dev-hook-failure-events",
+      "language": "ko",
+      "category": "single_document",
+      "query": "라이프사이클 훅 실패를 조사할 때 Pod 이벤트에서 핸들러 로그 전체를 볼 수 있는가? PostStart와 PreStop 실패는 어떤 이벤트로 구분하는가?",
+      "reference_answer": "핸들러 로그는 Pod 이벤트에 노출되지 않는다. 실패 이벤트는 각각 FailedPostStartHook와 FailedPreStopHook이다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-db7d68386819ee82",
+          "quote": "The logs for a Hook handler are not exposed in Pod events.\nIf a handler fails for some reason, it broadcasts an event.\nFor `PostStart`, this is the `FailedPostStartHook` event,\nand for `PreStop`, this is the `FailedPreStopHook` event.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d5b253b248318297",
+          "quote": "훅 핸들러의 로그는 파드 이벤트로 노출되지 않는다.\n만약 핸들러가 어떠한 이유로 실패하면, 핸들러는 이벤트를 방송한다.\n`PostStart`의 경우 `FailedPostStartHook` 이벤트이며,\n`PreStop`의 경우 `FailedPreStopHook` 이벤트이다.",
+          "evidence_group_id": "fact",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-053",
+      "question_family_id": "m2-dev-startup-hook-and-probe",
+      "language": "ko",
+      "category": "multi_document",
+      "query": "앱의 준비 작업을 PostStart에 넣고 느린 시작을 보호할 startup probe도 설정했다. PostStart가 메인 프로세스보다 먼저 끝난다고 보장할 수 있는가? startup probe가 성공하기 전 다른 프로브는 어떻게 되는가?",
+      "reference_answer": "PostStart는 메인 프로세스보다 먼저 실행된다고 보장되지 않는다. startup probe가 성공할 때까지 liveness와 readiness 프로브는 비활성화된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-db7d68386819ee82",
+          "quote": "This hook is executed immediately after a container is created.\nIt runs **concurrently** with the container's `ENTRYPOINT` (main process),\nmeaning the hook may run before, during, or after the main process starts.",
+          "evidence_group_id": "hook-order",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-d5b253b248318297",
+          "quote": "이 훅은 컨테이너가 생성된 직후에 실행된다.\n그러나, 훅이 컨테이너 엔트리포인트에 앞서서 실행된다는 보장은 없다.",
+          "evidence_group_id": "hook-order",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-ac9fff89924d08ab",
+          "quote": "시작 프로브가 설정된 경우, 성공할 때까지 활성 및 준비성 프로브는 비활성화된다.",
+          "evidence_group_id": "probe-gate",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-054",
+      "question_family_id": "m2-dev-secret-file-storage-protection",
+      "language": "ko",
+      "category": "multi_document",
+      "query": "기밀 설정 파일을 클러스터에 등록하면서 파일명과 다른 키를 쓰려 한다. 어떤 리소스를 선택하고 --from-file에서 키를 어떻게 지정하며, etcd 저장 데이터에는 어떤 보호 조치가 필요한가?",
+      "reference_answer": "ConfigMap 대신 Secret을 사용한다. generic Secret의 --from-file=키=파일경로 문법으로 키를 지정할 수 있다. etcd에 저장된 Secret은 저장 시 암호화를 구성해야 한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5321ab1af3d24e16",
+          "quote": "kubectl create secret generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1] [--dry-run=server|client|none]",
+          "evidence_group_id": "creation",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-67a6cac385437476",
+          "quote": "Secrets required for pods should be stored within Kubernetes Secrets as opposed\nto alternatives such as ConfigMap. Secret resources stored within etcd should\nbe [encrypted at rest](/docs/tasks/administer-cluster/encrypt-data/).",
+          "evidence_group_id": "protection",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-055",
+      "question_family_id": "m2-dev-dropin-order-list-replacement",
+      "language": "ko",
+      "category": "multi_document",
+      "query": "kubelet의 00-kubelet.conf와 01-kubelet.conf에 서로 다른 clusterDNS 목록이 있다. 어느 파일을 나중에 적용하고 두 목록은 합쳐지는가?",
+      "reference_answer": "전체 파일명을 영숫자순으로 정렬하므로 01-kubelet.conf가 나중에 적용된다. 목록은 병합되지 않고 전체 교체된다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-2c7101c149c7b03d",
+          "quote": "The kubelet processes files in its config drop-in directory by sorting the **entire file name** alphanumerically.\nFor instance, `00-kubelet.conf` is processed first, and then overridden with a file named `01-kubelet.conf`.",
+          "evidence_group_id": "order",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-9d93b13d88a57199",
+          "quote": "You can override the slices/lists values of the kubelet configuration.\nHowever, the entire list gets overridden during the merging process.",
+          "evidence_group_id": "list",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-056",
+      "question_family_id": "m2-dev-metrics-auth-preflight",
+      "language": "ko",
+      "category": "multi_document",
+      "query": "수집 계정으로 로그인한 상태에서 /metrics 접근 권한을 먼저 확인하고 싶다. RBAC 규칙의 대상과 verb는 무엇이며 kubectl auth can-i로는 어떻게 검사하는가?",
+      "reference_answer": "ClusterRole 규칙에서 nonResourceURLs의 /metrics에 get을 허용한다. 현재 계정으로 kubectl auth can-i get /metrics를 실행해 접근 가능 여부를 검사한다.",
+      "evidence": [
+        {
+          "document_id": "k8s-ko-8c4d6b7258357dc1",
+          "quote": "apiVersion: rbac.authorization.k8s.io/v1\nkind: ClusterRole\nmetadata:\n  name: prometheus\nrules:\n  - nonResourceURLs:\n      - \"/metrics\"\n    verbs:\n      - get",
+          "evidence_group_id": "metrics-rule",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-8c1f236e774c6ea2",
+          "quote": "kubectl auth can-i VERB [TYPE | TYPE/NAME | NONRESOURCEURL]",
+          "evidence_group_id": "check-command",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-057",
+      "question_family_id": "m2-dev-static-force-delete-safety",
+      "language": "ko",
+      "category": "multi_document",
+      "query": "static Pod의 미러 객체를 강제 삭제한 뒤 노드 프로세스가 중지됐다고 판단해도 되는가? 미러 객체의 수명 관리와 force 삭제의 완료 의미를 함께 설명해 달라.",
+      "reference_answer": "그렇게 판단할 수 없다. kubelet은 미러 Pod 삭제 시 static Pod를 제거하지 않고 미러 객체를 다시 만든다. 또한 일반적인 Pod 강제 삭제도 노드 프로세스가 끝났다는 확인을 기다리지 않는다.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-5b28d26f42e3ae09",
+          "quote": "If you try to use `kubectl` to delete the mirror Pod from the API server,\nthe kubelet _does not_ remove the static Pod. The kubelet will recreate\nthe mirror Pod.",
+          "evidence_group_id": "static-owner",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-75e23183754e6f49",
+          "quote": "Force deleting pods does not wait for confirmation that the pod's processes have been terminated, which can leave those processes running until the node detects the deletion and completes graceful deletion.",
+          "evidence_group_id": "force-completion",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-058",
+      "question_family_id": "m2-dev-diff-before-apply",
+      "language": "en",
+      "category": "multi_document",
+      "query": "A deployment script must preview the live-versus-proposed manifest changes, then apply the manifest even if its resource is new. Which commands serve these roles, and how should a diff exit code of 1 be interpreted?",
+      "reference_answer": "Use kubectl diff to compare the online configuration with the would-be-applied configuration; exit code 1 means differences were found. Then use kubectl apply, which creates the named resource if it does not exist.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-1054f8d43f934bf4",
+          "quote": "Diff configurations specified by file name or stdin between the current online configuration, and the configuration as it would be if applied.",
+          "evidence_group_id": "preview",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-1054f8d43f934bf4",
+          "quote": "Exit status: 0 No differences were found. 1 Differences were found. &gt;1 Kubectl or diff failed with an error.",
+          "evidence_group_id": "exit-code",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-841226a32d3b5bf9",
+          "quote": "Apply a configuration to a resource by file name or stdin. The resource name must be specified. This resource will be created if it doesn't exist yet.",
+          "evidence_group_id": "apply",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-059",
+      "question_family_id": "m2-dev-rotation-and-signing-cap",
+      "language": "en",
+      "category": "multi_document",
+      "query": "I want kubelets to renew client certificates automatically while treating the controller signing duration as a ceiling. Which kubelet flag enables renewal, and how can an individual CSR request a shorter lifetime?",
+      "reference_answer": "Enable --rotate-certificates on the kubelet. ClusterSigningDuration is a maximum; individual CSRs can ask for shorter certificates using spec.expirationSeconds.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-26b376d77775e0af",
+          "quote": "The `kubelet` process accepts an argument `--rotate-certificates` that controls\nif the kubelet will automatically request a new certificate as the expiration of\nthe certificate currently in use approaches.",
+          "evidence_group_id": "rotation",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-1d13911fd0cca551",
+          "quote": "`kubelet` 프로세스는 현재 사용 중인 인증서의 만료 시한이 다가옴에 따라\nkubelet이 자동으로 새 인증서를 요청할지 여부를 제어하는\n`--rotate-certificates` 인자를 허용한다.",
+          "evidence_group_id": "rotation",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-a74613f9005a7ab1",
+          "quote": "clusterSigningDuration is the max length of duration signed certificates will be given.\nIndividual CSRs may request shorter certs by setting spec.expirationSeconds.",
+          "evidence_group_id": "ceiling",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-060",
+      "question_family_id": "m2-dev-windows-forward-two-failures",
+      "language": "en",
+      "category": "multi_document",
+      "query": "Port forwarding to a Windows workload first fails with \"wincat not found\". After that is fixed, the tunnel stops when the selected Pod terminates. What image component should be checked for the first failure, and what is required for the second?",
+      "reference_answer": "Check that the Windows pause infrastructure container includes wincat.exe. When the selected Pod terminates, the forwarding session ends and the port-forward command must be rerun.",
+      "evidence": [
+        {
+          "document_id": "k8s-en-44bfbf890126fa84",
+          "quote": "This was implemented in Kubernetes 1.15 by including `wincat.exe` in the pause infrastructure container\n   `mcr.microsoft.com/oss/kubernetes/pause:3.6`.\n   Be sure to use a supported version of Kubernetes.",
+          "evidence_group_id": "windows-component",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-ko-3a31a7af2aaf3467",
+          "quote": "이 기능은 퍼즈 인프라 컨테이너 `mcr.microsoft.com/oss/kubernetes/pause:3.6`에 \n   `wincat.exe`를 포함시킴으로써 쿠버네티스 1.15에서 구현되었다. \n   지원되는 쿠버네티스 버전을 사용하고 있는지 확인한다.",
+          "evidence_group_id": "windows-component",
+          "grade": 2
+        },
+        {
+          "document_id": "k8s-en-24608d068e5a4828",
+          "quote": "If there are multiple pods matching the criteria, a pod will be selected automatically. The forwarding session ends when the selected pod terminates, and a rerun of the command is needed to resume forwarding.",
+          "evidence_group_id": "session-end",
+          "grade": 2
+        }
+      ]
+    },
+    {
+      "id": "m2-dev-061",
+      "question_family_id": "m2-dev-internal-maintenance-approval",
+      "language": "ko",
+      "category": "no_evidence",
+      "query": "우리 운영 클러스터의 노드 정기 점검은 어느 역할의 승인을 받아야 하고 최소 며칠 전에 신청해야 하는가?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "전 split의 고정 코퍼스 313개 문서 인벤토리는 모두 kubernetes/website의 공개 문서다. 요청한 사내 점검 승인 역할과 신청 기한을 담은 운영 정책은 없다. 모든 문서 내용에서 maintenance approval, runbook, 승인자 검색은 0건이었다. 로컬 자동 문자열 검색과 인벤토리 점검에 근거한 잠정 라벨이며 전체 의미를 사람이 검증한 결과는 아니다."
+    },
+    {
+      "id": "m2-dev-062",
+      "question_family_id": "m2-dev-internal-api-incident",
+      "language": "ko",
+      "category": "no_evidence",
+      "query": "지난 분기 우리 API 서버 접속 장애의 최종 원인과 재발 방지 조치는 장애 보고서에 어떻게 확정되었는가?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "전 split의 고정 코퍼스 313개 문서 인벤토리는 모두 kubernetes/website의 공개 문서다. 일반적인 API 접근 문서는 사내 특정 장애의 확정 원인이나 후속 조치를 제공하지 않는다. incident report, postmortem, post-mortem, 장애 보고를 모든 문서에서 검색해 일치 문서를 찾지 못했다. 로컬 자동 문자열 검색과 인벤토리 점검에 근거한 잠정 라벨이며 전체 의미를 사람이 검증한 결과는 아니다."
+    },
+    {
+      "id": "m2-dev-063",
+      "question_family_id": "m2-dev-internal-metrics-retention",
+      "language": "ko",
+      "category": "no_evidence",
+      "query": "우리 플랫폼팀이 시스템 컴포넌트 메트릭에 적용하기로 결정한 보존 기간은 며칠인가?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "전 split의 고정 코퍼스 313개 문서 인벤토리는 모두 kubernetes/website의 공개 문서다. 메트릭 수집 설명은 있지만 우리 팀이 선택한 보존 일수는 없다. retention과 runbook을 코퍼스 전체에서 검색한 결과 모두 0건이었다. 로컬 자동 문자열 검색과 인벤토리 점검에 근거한 잠정 라벨이며 전체 의미를 사람이 검증한 결과는 아니다."
+    },
+    {
+      "id": "m2-dev-064",
+      "question_family_id": "m2-dev-internal-rotation-oncall",
+      "language": "ko",
+      "category": "no_evidence",
+      "query": "운영 kubelet 인증서 갱신 경보가 발생했을 때 우리 조직에서 1차 대응을 맡는 팀과 에스컬레이션 기한은 무엇인가?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "전 split의 고정 코퍼스 313개 문서 인벤토리는 모두 kubernetes/website의 공개 문서다. 인증서 자동 갱신 동작과 사내 경보 대응 책임 및 기한은 다른 정보다. runbook, 운영 절차, 승인자를 전체 문서에서 검색했으나 사내 대응 문서를 찾지 못했다. 로컬 자동 문자열 검색과 인벤토리 점검에 근거한 잠정 라벨이며 전체 의미를 사람이 검증한 결과는 아니다."
+    },
+    {
+      "id": "m2-dev-065",
+      "question_family_id": "m2-dev-internal-quota-exception",
+      "language": "ko",
+      "category": "no_evidence",
+      "query": "우리 조직에서 네임스페이스 리소스 할당량 예외를 신청할 때 사용하는 양식 이름과 최종 승인 역할은 무엇인가?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "전 split의 고정 코퍼스 313개 문서 인벤토리는 모두 kubernetes/website의 공개 문서다. 공개 quota 기능 설명으로 사내 신청 양식과 승인 체계를 알 수 없다. quota exception, 승인자, runbook의 전체 문서 검색은 0건이었다. 로컬 자동 문자열 검색과 인벤토리 점검에 근거한 잠정 라벨이며 전체 의미를 사람이 검증한 결과는 아니다."
+    },
+    {
+      "id": "m2-dev-066",
+      "question_family_id": "m2-dev-internal-windows-image-policy",
+      "language": "ko",
+      "category": "no_evidence",
+      "query": "우리 Windows 운영 노드에 배포하도록 최종 승인된 pause 이미지의 다이제스트는 변경 관리 기록에 무엇으로 남아 있는가?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "전 split의 고정 코퍼스 313개 문서 인벤토리는 모두 kubernetes/website의 공개 문서다. Windows 문제 해결 문서의 공개 이미지 예시는 사내 배포 승인 기록이 아니다. 인벤토리에 조직 변경 기록이 없고 runbook 및 maintenance approval의 전체 검색도 0건이다. 로컬 자동 문자열 검색과 인벤토리 점검에 근거한 잠정 라벨이며 전체 의미를 사람이 검증한 결과는 아니다."
+    },
+    {
+      "id": "m2-dev-067",
+      "question_family_id": "m2-dev-internal-deployment-concurrency-test",
+      "language": "ko",
+      "category": "no_evidence",
+      "query": "우리 팀의 최근 배포 컨트롤러 부하 시험에서 ConcurrentDeploymentSyncs를 올렸을 때 측정된 최대 처리량과 CPU 사용률은 얼마였는가?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "전 split의 고정 코퍼스 313개 문서 인벤토리는 모두 kubernetes/website의 공개 문서다. 컨트롤러 설정의 일반적인 응답성·부하 설명은 있지만 팀 측정 결과는 없다. benchmark, load test, 부하 테스트를 전체 문서에서 검색했으나 일치 문서를 찾지 못했다. 로컬 자동 문자열 검색과 인벤토리 점검에 근거한 잠정 라벨이며 전체 의미를 사람이 검증한 결과는 아니다."
+    },
+    {
+      "id": "m2-dev-068",
+      "question_family_id": "m2-dev-internal-controlplane-drill",
+      "language": "ko",
+      "category": "no_evidence",
+      "query": "우리 운영 클러스터의 마지막 컨트롤 플레인 복구 훈련에서 실제 복구 완료까지 걸린 시간은 얼마였는가?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "전 split의 고정 코퍼스 313개 문서 인벤토리는 모두 kubernetes/website의 공개 문서다. 조직의 복구 훈련 결과 문서는 인벤토리에 없다. disaster recovery와 runbook 전체 검색은 0건이었고 RTO 부분 문자열의 유일한 일치 문서는 HorizontalPodAutoscalerTolerance 필드명으로 복구 기록이 아니었다. 로컬 자동 문자열 검색과 인벤토리 점검에 근거한 잠정 라벨이며 전체 의미를 사람이 검증한 결과는 아니다."
+    },
+    {
+      "id": "m2-dev-069",
+      "question_family_id": "m2-dev-internal-static-manifest-ownership",
+      "language": "en",
+      "category": "no_evidence",
+      "query": "Which internal team owns approval of production static-Pod manifest changes, and what rollback revision did they approve for the latest change?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The full 313-document inventory contains public kubernetes/website material, not our internal ownership or change-approval records. Whole-corpus literal searches for maintenance approval and runbook returned zero documents. Static-Pod mechanics cannot supply an approved rollback revision. This is an automated inventory/text challenge, not exhaustive human verification."
+    },
+    {
+      "id": "m2-dev-070",
+      "question_family_id": "m2-dev-internal-plugin-catalog",
+      "language": "en",
+      "category": "no_evidence",
+      "query": "Which kubectl plugins and versions are currently on our organization-approved installation catalog?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "Public plugin discovery and Krew guidance do not specify our organization-approved plugin/version list. The complete 313-document inventory is public Kubernetes documentation; whole-corpus searches for approved plugin and runbook returned no matching document. This provisional no-evidence label still requires human review of the fixed scope."
+    },
+    {
+      "id": "m2-dev-071",
+      "question_family_id": "m2-dev-internal-binpacking-benchmark",
+      "language": "en",
+      "category": "no_evidence",
+      "query": "In our latest internal comparison of MostAllocated and RequestedToCapacityRatio, which strategy reduced the node count more for our production workload mix?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The corpus explains scoring strategies, but it contains no measurement for our production workload mix. All 313 inventory entries are public Kubernetes docs. Whole-corpus searches for benchmark and load test returned zero matching documents. This automatic challenge does not establish exhaustive human-reviewed absence."
+    },
+    {
+      "id": "m2-dev-072",
+      "question_family_id": "m2-dev-internal-force-delete-exception",
+      "language": "en",
+      "category": "no_evidence",
+      "query": "What approved exception permits our production deployment automation to force-delete Pods, and when does that exception expire?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "Generic force-deletion warnings do not contain an organization-specific policy exception or its expiry. The full fixed 313-document public-source inventory has no internal exception register; whole-corpus searches for runbook and maintenance approval returned zero documents. The no-evidence classification is provisional and not human-verified."
+    },
+    {
+      "id": "m2-dev-073",
+      "question_family_id": "m2-dev-unclear-kubeconfig-source",
+      "language": "ko",
+      "category": "ambiguous",
+      "query": "kubectl config로 값을 바꿨는데 다른 파일에는 반영이 안 됐어. 어느 파일이 잘못된 거야?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "실제 실행 명령의 --kubeconfig 사용 여부, KUBECONFIG 경로 목록, 수정한 stanza와 이를 정의한 파일이 없다. 로드·수정 우선순위에 따라 결과가 달라지므로 관련 명령과 비밀값을 제외한 파일 구성을 먼저 확인해야 한다."
+    },
+    {
+      "id": "m2-dev-074",
+      "question_family_id": "m2-dev-unclear-proxy-path",
+      "language": "ko",
+      "category": "ambiguous",
+      "query": "클러스터 프록시를 켰는데 요청이 안 통해. 어떤 프록시 설정을 바꿔야 해?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "kubectl proxy, API 서버 내장 프록시, kube-proxy 또는 외부 로드밸런서 중 무엇인지 지정되지 않았다. 요청 출발지·대상·프로토콜·오류와 어느 구간에서 실패하는지 확인해야 수정할 설정을 정할 수 있다."
+    },
+    {
+      "id": "m2-dev-075",
+      "question_family_id": "m2-dev-unclear-dropin-final-dns",
+      "language": "ko",
+      "category": "ambiguous",
+      "query": "kubelet 설정 파일들을 합치면 최종 clusterDNS 값이 뭐야?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "기본 구성의 목록, 모든 drop-in 파일 내용과 파일명 순서, 실행 플래그가 누락되어 최종 값을 계산할 수 없다. 파일 병합 규칙만으로 특정 클러스터의 결과를 결정할 수 없으므로 실제 적용 입력을 확인해야 한다."
+    },
+    {
+      "id": "m2-dev-076",
+      "question_family_id": "m2-dev-unclear-force-delete-safety",
+      "language": "ko",
+      "category": "ambiguous",
+      "query": "이 파드는 지금 강제로 삭제해도 안전할까?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "파드 프로세스의 실제 종료 여부, 노드와 API 연결 상태, 공유 저장소나 외부 시스템에서 동일 식별자를 쓰는지, 복제 실행 허용 여부가 없다. 이런 조건과 소유 컨트롤러를 확인해야 중복 프로세스 위험을 판단할 수 있다."
+    },
+    {
+      "id": "m2-dev-077",
+      "question_family_id": "m2-dev-unclear-permission-target",
+      "language": "ko",
+      "category": "ambiguous",
+      "query": "팀원에게 필요한 Kubernetes 접근 권한을 주려면 어떤 Role을 만들면 돼?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "필요한 작업의 verb, 리소스와 하위 리소스, 네임스페이스 또는 클러스터 범위, 권한을 받을 인증 주체가 없다. 업무에 필요한 작업 범위를 먼저 구체화해야 최소 권한 Role과 바인딩을 정할 수 있다."
+    },
+    {
+      "id": "m2-dev-078",
+      "question_family_id": "m2-dev-unclear-config-object-choice",
+      "language": "ko",
+      "category": "ambiguous",
+      "query": "앱 설정은 ConfigMap에 넣어야 해, Secret에 넣어야 해?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "설정 내용의 기밀성, 값의 용도와 소비 방식이 설명되지 않았다. 비밀값 자체를 요청할 필요 없이 자격증명 등 기밀 데이터인지와 비기밀 설정을 함께 분리할 필요가 있는지 확인해야 객체 선택을 결정할 수 있다."
+    },
+    {
+      "id": "m2-dev-079",
+      "question_family_id": "m2-dev-unclear-renewed-certificate-duration",
+      "language": "en",
+      "category": "ambiguous",
+      "query": "Our kubelet certificate is about to renew. How long will the replacement certificate remain valid?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The effective controller signing-duration configuration and any requested CSR expirationSeconds are missing, so a particular replacement lifetime cannot be determined from general renewal rules. Clarify the signing configuration and CSR duration request; do not infer an organization-specific value from the documented default."
+    },
+    {
+      "id": "m2-dev-080",
+      "question_family_id": "m2-dev-unclear-diff-pipeline-failure",
+      "language": "en",
+      "category": "ambiguous",
+      "query": "Why did the pipeline mark my kubectl diff step as failed?",
+      "reference_answer": "",
+      "evidence": [],
+      "negative_reason": "The exit status, stderr, pipeline success-code policy, and any KUBECTL_EXTERNAL_DIFF command are missing. Exit 1 can mean differences while values greater than 1 indicate an error; the actual result and pipeline policy must be checked before choosing a cause."
+    }
+  ]
+}

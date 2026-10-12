@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "revision_id": "m2-dev-v1.1",
+  "decision_actor": "ai",
+  "reviewer_model": "gpt-6-astra",
+  "reviewer_reasoning_effort": "high",
+  "decision_date": "2026-10-12",
+  "timing": "before any development ranking or benchmark result was inspected",
+  "base_question_file": "data/evaluation/m2-dev.jsonl",
+  "base_question_sha256": "806752ac6582a70284394beb1dc855515e96958e2734f4570241e3a099dd1faa",
+  "manifest_sha256": "e4d33997b5589bd8d9cc5c56691da5940eba3a7b6554c671b8c39b78910fe69a",
+  "output_question_file": "data/evaluation/m2-dev-v1.1.jsonl",
+  "independently_ai_reviewed_ids": [
+    "m2-dev-053",
+    "m2-dev-054",
+    "m2-dev-055",
+    "m2-dev-056",
+    "m2-dev-057",
+    "m2-dev-058",
+    "m2-dev-059",
+    "m2-dev-060"
+  ],
+  "excluded_questions": [
+    {
+      "id": "m2-dev-055",
+      "reason": "The question was labeled multi_document, but kubelet-config-file.md itself provides file ordering and a broad replace-every-field statement. A single-source answer may therefore be sufficient, so forcing a second source may falsely penalize retrieval. The source also refers to type-specific merge rules; exclude pending careful semantic adjudication rather than silently relabeling it as a confirmed single-source fact.",
+      "source_document_id": "k8s-en-2c7101c149c7b03d",
+      "source_path": "content/en/docs/tasks/administer-cluster/kubelet-config-file.md",
+      "future_action": "Human review can clarify the requested facts and sufficient source set in a new label version."
+    }
+  ],
+  "human_reviewed": 0,
+  "limitations": "Independent AI review of eight multi-document candidates is not complete semantic validation, human review, or proof that remaining labels are correct. Initial 80-question draft and JSONL are preserved."
+}

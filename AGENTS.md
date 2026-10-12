@@ -2,7 +2,7 @@
 
 ## Scope and truthfulness
 - Build for a solo junior AI Engineer portfolio: data quality, retrieval experiments and operational correctness take priority over feature count.
-- Current milestone: real document upload, persistent permission-aware BM25 search, original evidence navigation. Do not claim embeddings, generated answers, training, human review or production deployment until measured.
+- Current milestone: reproducible public corpus, isolated data splits, reviewable AI-authored questions and measured BM25 development baseline. Keep the verified upload/search/evidence service working. Do not claim embeddings, generated answers, training, human review or production deployment until measured.
 - Preserve provenance. Mark synthetic examples, AI-authored questions, automated checks and user review separately.
 - Paid APIs/GPU/cloud and public service deployment require the user's approval. Public GitHub source repository creation and push to the authenticated user's account are explicitly authorized.
 - Do not commit secrets, local databases, uploaded documents, model weights, cached corpora or personal environment paths.
