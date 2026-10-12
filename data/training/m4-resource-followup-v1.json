@@ -1,0 +1,295 @@
+{
+  "conditional_training": {
+    "allowed_only_after_this_exact_execution_plan_probe_passes": true,
+    "discard_probe_weights_and_optimizer_state": true,
+    "failed_training_policy": "preserve_partial_update_counts_and_stop_no_automatic_resume_or_numerical_sweep",
+    "fresh_base_optimizer_scaler_and_reseed": true,
+    "grad_scaler_init_scale": 1024,
+    "max_optimizer_steps": 16,
+    "new_output_dir": ".local/m4-e5-train-v2",
+    "quality_evaluation": "separate_frozen_followup_not_this_probe",
+    "service_adoption": false,
+    "unchanged_original_recipe": true
+  },
+  "created_at": "2026-10-12",
+  "designer": {
+    "agent": "m4_gate_design",
+    "model": "gpt-6-astra",
+    "reasoning": "xhigh"
+  },
+  "execution_boundaries": {
+    "designer_mutates_git": false,
+    "designer_runs_model": false,
+    "existing_v1_and_M2_M3_artifacts_preserved": true,
+    "paid_api_gpu_cloud": false,
+    "public_service_deployment": false
+  },
+  "failure_evidence": {
+    "baseline_scale_evidence": {
+      "actual_scale_recorded_in_failed_report": false,
+      "configured_init_scale": 65536,
+      "installed_constructor_default": 65536,
+      "pinned_runtime": "torch 2.10.0+cu128",
+      "runner_call": "torch.amp.GradScaler('cuda')"
+    },
+    "conclusion": "Forward losses were finite and four backward calls completed, but the reported non-finite gradient norm blocked the optimizer. This neither proves a loss-scaling cause nor excludes model, objective, backward, or numerical implementation defects.",
+    "local_original_progress_path": ".local/m4-e5-probe-v1.1/progress.jsonl",
+    "local_original_report_path": ".local/m4-e5-probe-v1.1/report.json",
+    "local_originals_required_for_fresh_ci": false,
+    "memory": {
+      "full_optimizer_memory_feasibility": "unverified_no_optimizer_step_or_AdamW_moment_allocation_observed",
+      "oom_reported": false,
+      "peak_allocated_mib": 1523.45849609375,
+      "peak_reserved_mib": 1982
+    },
+    "observed_forward_backward": {
+      "all_reported_losses_finite": true,
+      "completed_microbatch_backwards": 4,
+      "microbatch_tensor_shapes": [
+        [
+          8,
+          512
+        ],
+        [
+          8,
+          512
+        ],
+        [
+          8,
+          512
+        ],
+        [
+          8,
+          512
+        ]
+      ],
+      "optimizer_step_calls": 0,
+      "optimizer_steps_attempted": 0,
+      "optimizer_steps_completed": 0,
+      "optimizer_steps_verified": 0,
+      "weight_updates_observed": 0,
+      "weighted_microbatch_losses": [
+        1.37548828125,
+        0.42852783203125,
+        0.8563232421875,
+        0.17413330078125
+      ]
+    },
+    "parent_observed_traceback": {
+      "exact_excerpt": "The total norm of order 2.0 for gradients from `parameters` is non-finite, so it cannot be clipped.",
+      "included_in_report_fields": false,
+      "independently_reexecuted_by_designer": false,
+      "location": "scripts/train_embedding.py::run_updates after scaler.unscale_ at clip_grad_norm_",
+      "provenance": "parent_observed_exec_tool_session_45501_exit_1",
+      "saved_stderr_file": false
+    },
+    "public_copies": "byte_identical_to_local_originals_verified_before_this_plan",
+    "public_progress_path": "experiments/results/m4-e5-probe-v1.1.progress.jsonl",
+    "public_report_path": "experiments/results/m4-e5-probe-v1.1.json",
+    "report_failure_code": "runtime_failed_stop_no_automatic_retry",
+    "report_failure_type": "RuntimeError",
+    "report_status": "failed"
+  },
+  "fixed_implementation": {
+    "accumulation_weight": "microbatch_query_count_divided_by_optimizer_group_query_count",
+    "adamw_foreach": false,
+    "attention_implementation": "eager",
+    "deterministic_algorithms": true,
+    "grad_scaler_backoff_factor": 0.5,
+    "grad_scaler_growth_factor": 2,
+    "grad_scaler_growth_interval": 2000,
+    "gradient_checkpointing": true,
+    "scheduler": "linear_warmup_then_constant",
+    "shuffle": "sorted_question_ids_then_python_random_seed_plus_epoch",
+    "stop_on_skipped_update": true,
+    "tf32": false
+  },
+  "fixed_probe": {
+    "expected_tensor_shapes": [
+      [
+        8,
+        512
+      ],
+      [
+        8,
+        512
+      ],
+      [
+        8,
+        512
+      ],
+      [
+        8,
+        512
+      ]
+    ],
+    "fresh_base": true,
+    "fresh_optimizer": true,
+    "fresh_scaler": true,
+    "gradient_accumulation_steps": 4,
+    "max_new_probe_runs": 1,
+    "microbatch_queries": 2,
+    "output_dir": ".local/m4-e5-probe-v2",
+    "question_count": 8,
+    "question_ids": [
+      "m4-fit-005",
+      "m4-fit-015",
+      "m4-fit-021",
+      "m4-fit-025",
+      "m4-fit-026",
+      "m4-fit-027",
+      "m4-fit-030",
+      "m4-fit-049"
+    ],
+    "rerun_baseline": false,
+    "reseed_before_load": 20261012,
+    "reset_cuda_peak_statistics": true,
+    "selection": "same_v1.1_max_retained_input_tokens_desc_then_question_id",
+    "verified_optimizer_updates": 1
+  },
+  "frozen_input_sha256": {
+    "data/models/m3-models.json": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1",
+    "data/training/m4-e5-execution-v1.1.json": "0f4c5f2d1b1d4de1ac12c8822adb57fb2d671b70466e87e586d72d4a20ee84f3",
+    "data/training/m4-e5-execution-v1.json": "278a930de2eb46461c685345cdbfbf94cd7921e5ac8ceeaa62f681956db9f16a",
+    "data/training/m4-plan-v1.json": "579e8ce0c6efbdc6aafe7906e873dbf051e0fecd0266e2f6cacefcda70c3e8ba",
+    "data/training/m4-readiness-plan-v2.json": "aa6464441d7c02b14977ab79656b3c48d57a1a4a0af5a29f9186a520d7a5405c",
+    "data/training/m4-tokenizer-receipt-v2.json": "407094ba73db9ecffbd4b427966556e23529c40aa3292bdc5bedc76323594701",
+    "data/training/m4-training-manifest-v2.json": "0a902c6cde10082bc722620c0d33ec402c953a28dd4256bb6cbfe7d0e2eeb1ce",
+    "data/training/reviews/m4-truncated-negative-v2.jsonl": "8aba0d2c5027cf2991f770ef255bdce392098fcaa7e2afcc6432f7dc47cdf79a",
+    "experiments/results/m4-e5-probe-v1.1.json": "357544f9053a84423967864e605c081f7af1334cd029151a75f664ee7d7c8e1d",
+    "experiments/results/m4-e5-probe-v1.1.progress.jsonl": "d97406432c47bccdff92aae10377cc6e43fbe9cac74d12b2757c8f9f92ee6e26",
+    "uv.lock": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+  },
+  "frozen_source_sha256_lf": {
+    "scripts/analyze_candidates.py": "6575783c12fe0d243d9cd17251244276c12d0a6a746e7df88d8a9677e4197c5d",
+    "scripts/prepare_corpus.py": "181de3ed388f76ec66e13d851b267ddf7dded0046829a816cf03b8afc28bce57",
+    "scripts/prepare_training.py": "9a1497d292e82df5a74ca6984c5d44497f57199a35ed15828ca529f1d97408de",
+    "scripts/prepare_training_ready.py": "89090f664010fc0181bf11fc8967fba8dedd87c8238cf81bd36083880cb5ac2a",
+    "scripts/prepare_training_ready_v2.py": "d5c242f9deebc0e9ab87c1de3799906cbd70231138cbe4c0b0734d5432b7a319",
+    "scripts/train_embedding.py": "1bc7f71c60012fbfc17e6aaa793302a89826a07acb775bdaae806e5d4a9a0df5",
+    "scripts/validate_training_reviews.py": "224a49ce9b6de7c9c48a5a48b010e97c833f4bb352217d500db88a924e9cba03",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/model_retrieval.py": "0b1f60e3f38daa8f6dc85642c17832a82c6ea32ec87f3733aa8aa3fbc63dd5b4",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "src/doctrail/training.py": "9d0e6913f77b7f28114e7cad737afdc66dc786edc6620f97481f0cdeeaabd3aa"
+  },
+  "human_review": "pending",
+  "hypothesis": {
+    "claim_status": "unproven",
+    "failure_interpretation": "Persist the new failure and stop. Analyze the stage and numerical evidence before proposing any further version; do not sweep scales or silently change precision/objective.",
+    "name": "initial_loss_scale_overflow_hypothesis",
+    "rationale": "A smaller explicit initial loss scale is one bounded diagnostic intervention on the failed FP16 path. Finite forward loss does not establish finite backward gradients. No conclusion is drawn about which tensor or operation first became non-finite.",
+    "success_interpretation": "One successful matched probe is consistent with scale sensitivity and demonstrates that one tested update passed; it does not prove the root cause or every training batch fits."
+  },
+  "implementation_contract": {
+    "execution_id": "m4-e5-execution-v2",
+    "hash_dependency_order": [
+      "existing_failed_evidence_and_original_sources",
+      "this_followup_plan",
+      "additive_runner_and_execution_plan_binding_followup_sha_and_all_runtime_source_sha",
+      "new_probe_report",
+      "conditional_training_report"
+    ],
+    "new_execution_plan_path": "data/training/m4-e5-execution-v2.json",
+    "new_output_directories_only": true,
+    "new_runner_hash_frozen_in_execution_plan_before_model_execution": true,
+    "new_runner_path": "scripts/train_embedding_v2.py",
+    "no_monkeypatch_of_original_runtime": true,
+    "preserve_original_runner_and_training_primitives": true,
+    "required_execution_fields": [
+      "resource_followup_plan_path",
+      "resource_followup_plan_sha256",
+      "numerical_override",
+      "source_sha256_lf"
+    ],
+    "required_followup_plan_path": "data/training/m4-resource-followup-v1.json",
+    "required_numerical_override": {
+      "grad_scaler_init_scale": 1024
+    },
+    "runtime_input_gate": "Replay immutable readiness v2; require the actual local review pack; verify each selected negative unpadded input IDs and attention masks against the frozen token evidence before model loading and each forward.",
+    "source_changes_limited_to": "explicit_scale_constructor_and_additive_plan_validation_and_safe_numerical_stage_reporting; keep_original_math_selection_optimizer_and_schedule"
+  },
+  "numeric_override": {
+    "allowed_numeric_change_count": 1,
+    "application": "explicit_GradScaler_constructor_argument_in_fresh_probe_and_conditional_fresh_training",
+    "baseline_to_followup_ratio": 64,
+    "baseline_value": 65536,
+    "parameter": "grad_scaler_init_scale",
+    "value": 1024
+  },
+  "original_training_plan_path": "data/training/m4-plan-v1.json",
+  "parent_execution_plan_path": "data/training/m4-e5-execution-v1.1.json",
+  "pass_gate": [
+    "All immutable input/source/runtime checks pass and matched eight-question order and shapes are verified.",
+    "Configured and actual initial GradScaler scale equal 1024 before the first backward.",
+    "All four weighted losses are finite and all four backward calls complete.",
+    "Unscale completes and clip_grad_norm(error_if_nonfinite=True) returns a finite norm.",
+    "Exactly one actual AdamW step is entered, completed and verified; optimizer state advances and a finite nonzero-gradient weight witness changes.",
+    "No scaler-skipped update, OOM, input mismatch or post-run integrity failure occurs.",
+    "Observed full tested-update peak allocated memory is at most 5376 MiB."
+  ],
+  "plan_id": "m4-resource-followup-v1",
+  "required_diagnostics": {
+    "assert_actual_initial_scale_equals_override_before_first_backward": true,
+    "exception_without_specific_evidence": "preserve_unknown_cause_do_not_label_every_RuntimeError_as_overflow",
+    "no_additional_forward_backward_or_probe_retry_for_diagnostics": true,
+    "no_raw_document_or_question_text_in_logs": true,
+    "record_configured_and_actual_initial_scale": true,
+    "record_gradient_norm_before_clip_when_available": true,
+    "record_last_completed_phase_and_failure_phase": true,
+    "record_nonfinite_norm_as_safe_code_only_when_observed": true,
+    "record_peak_allocated_and_reserved_even_on_failure": true,
+    "record_scale_before_and_after_step_when_reached": true,
+    "record_scale_before_unscale_and_before_clip": true,
+    "record_started_attempted_entered_completed_verified_updates_separately": true,
+    "record_weight_change_witness_and_unknown_after_partial_failure": true
+  },
+  "schema_version": 1,
+  "scope": "one_preregistered_local_numeric_resource_probe_then_original_conditional_bounded_training",
+  "state_contract": {
+    "baseline_resource_probe_result": "failed",
+    "data_ready": "unchanged_frozen_readiness_v2_result",
+    "followup_resource_probe_result": "not_run",
+    "interpretation": "Do not conflate data readiness, a successful tested update, bounded training execution, retrieval quality, or Java service performance.",
+    "training_executed": false,
+    "training_ready": false
+  },
+  "status": "preregistered_not_run",
+  "stop_policy": {
+    "another_comparison_requires": "new_evidence_based_versioned_plan_before_any_further_model_run",
+    "any_failure": "persist_actual_partial_execution_and_stop_before_training",
+    "automatic_retry": false,
+    "cpu_or_cloud_fallback": false,
+    "precision_fallback": false,
+    "scale_sweep": false,
+    "silent_batch_length_objective_or_model_change": false,
+    "skipped_update_retry": false
+  },
+  "unchanged_training_contract": {
+    "base_model": "intfloat/multilingual-e5-small",
+    "base_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "calibration_questions": 16,
+    "dev_question_access": false,
+    "epochs": 2,
+    "fit_questions": 64,
+    "in_batch_negatives": false,
+    "learning_rate": 1e-05,
+    "loss": "per_query_InfoNCE_one_positive_two_explicit_reviewed_negatives",
+    "max_grad_norm": 1,
+    "max_length": 512,
+    "max_optimizer_steps": 16,
+    "mixed_precision": "fp16_autocast_fp32_parameters_and_optimizer_with_grad_scaler",
+    "new_data_curation": false,
+    "new_token_length_candidate_selection": false,
+    "quality_hyperparameter_tuning": false,
+    "question_removal_or_replacement": false,
+    "recipe_must_match_exactly": true,
+    "recipe_reference": "experiments/results/m4-e5-probe-v1.1.json#/recipe",
+    "resource_peak_allocated_limit_mib": 5376,
+    "seed": 20261012,
+    "temperature": 0.01,
+    "test_question_access": false,
+    "warmup_optimizer_steps": 1,
+    "weight_decay": 0.01
+  }
+}
