@@ -14,6 +14,8 @@ uv run python -m scripts.evaluate_pilot --output experiments/results/my-new-run.
 
 기준 실행은 [m1-bm25-verified.json](results/m1-bm25-verified.json)이다. 실행 코드 커밋은 `357be1a`이며, 당시 결과·설명 문서를 정리 중이어서 `git_dirty=true`다. 코드와 데이터의 실제 해시를 보고서에서 확인할 수 있다. [초기 진단 실행](results/m1-bm25-smoke.json)은 평가 입력 검증을 보강하기 전 개발 과정의 결과다. 초기 보고서에는 실제 가공 입력 해시가 빠져 있으므로 기준 비교에 사용하지 않는다.
 
+기준 실행에 기록된 모든 코드·manifest·질문 해시가 `357be1a`의 Git blob과 일치함을 추가 확인했다. 이후 Git 텍스트 파일의 줄바꿈을 LF로 통일했으므로 과거 실행의 바이트 단위 재현은 보고서에 기록된 해당 커밋을 기준으로 한다. 결과를 좋게 보이게 하려고 과거 수치를 덮어쓰지 않는다.
+
 | 항목 | 실제 관찰 | 해석 범위 |
 | --- | --- | --- |
 | 공개 문서 | 8개, 4개 주제의 한·영 쌍 | 작고 번역 중복이 많은 smoke corpus |

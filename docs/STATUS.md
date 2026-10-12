@@ -13,12 +13,14 @@
 - 자동 테스트 36개 통과. 로그인·권한·변경·삭제·재처리·Unicode/PDF 근거·내용 없는 로그·백업 복구·평가 입력 드리프트·분할 누출 거부를 포함한다.
 - 프런트엔드 타입 검사·빌드 통과. 실행 시점 npm audit 0 vulnerabilities.
 - 브라우저에서 로컬 검증용 계정 생성 → 합성 문서 업로드 → 검색 → 원문 확인 → v2 수정 → 새 내용 검색 → 피드백을 실제 수행했다. 데스크톱과 390px 화면을 확인했고 모바일 가로 넘침은 없었다. AI가 수행한 점검이며 사용자 검수는 아니다.
+- 실제 로컬 서버를 중지·재시작한 뒤 브라우저에서 v2 문서와 개인 검색 기록의 유지를 확인했다.
 - 공개 Kubernetes 문서 8개와 AI 작성 smoke 질문 12개를 처리·평가했다. [실측·실패 분석](../experiments/README.md)을 참고한다. 사용자 검수 질문은 0개다.
 
 ## 원격·공개 상태
 
 - [공개 저장소](https://github.com/lingter100/doctrail), [M1 PR](https://github.com/lingter100/doctrail/pull/1).
 - GitHub API에서 커밋 작성자·커미터 계정이 모두 `lingter100`에 연결되는 것을 확인했다.
+- main 필수 검사·선형 이력·강제 푸시/삭제 금지를 설정했다. 통합 규칙은 CONTRIBUTING을 따른다.
 - GitHub Actions: 구현 커밋 `357be1a`의 backend/web 검사 모두 [원격 통과](https://github.com/lingter100/doctrail/actions/runs/38196203926). 이후 문서 커밋과 main 통합 상태는 GitHub의 해당 SHA 검사 결과를 기준으로 확인한다.
 - 서비스는 로컬에서만 검증했다. 외부 서비스 배포·유료 API·클라우드·GPU 임대는 하지 않았다.
 
