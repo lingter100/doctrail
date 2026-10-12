@@ -1,0 +1,38 @@
+{
+  "base_repo_id": "intfloat/multilingual-e5-small",
+  "base_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "checkpoint_kind": "sole_terminal_after_16_verified_updates",
+  "checkpoint_path": ".local/m4-e5-train-v2/terminal",
+  "files": {
+    "config.json": {
+      "sha256": "533ccc63e3d75f47f9c9beb603286bcb686cb9faeb870063f6398af7b2878f43",
+      "size_bytes": 647
+    },
+    "model.safetensors": {
+      "sha256": "cfbb2be999370a594f36ceffefaaf9696b865e8f4a46df77841853b5a3a907c7",
+      "size_bytes": 470637416
+    },
+    "special_tokens_map.json": {
+      "sha256": "edd71739099fe63dc2f70815facad5253c70ded0e0d4df49ef883ce4511af365",
+      "size_bytes": 1016
+    },
+    "tokenizer.json": {
+      "sha256": "ef04f2b385d1514f500e779207ace0f53e30895ce37563179e29f4022d28ca38",
+      "size_bytes": 17083053
+    },
+    "tokenizer_config.json": {
+      "sha256": "df5ad8bcc8e0dbc840a54817cf051af86c7bb108d9e35c4ccdcdebbccfdd11d9",
+      "size_bytes": 1263
+    }
+  },
+  "human_review": "pending",
+  "inference_tokenizer": "original_verified_base_snapshot",
+  "inputs_sha256": {
+    "data/training/m4-e5-execution-v2.json": "488220676c91bfbe0237d771c22fe5523f675942c30163bcb585ca81e523ffab",
+    "data/training/m4-training-manifest-v2.json": "0a902c6cde10082bc722620c0d33ec402c953a28dd4256bb6cbfe7d0e2eeb1ce",
+    "experiments/results/m4-e5-probe-v2.json": "2f08716fa1d6f233d4eb7deca1f59f2b9e9e49e2922a2063801c84f0a3a1be00",
+    "experiments/results/m4-e5-train-v2.json": "917feb7fd7c6d634ca8b7203bd7d3e500136721110268677400ca9253ffc21d9"
+  },
+  "retrieval_improvement_claimed": false,
+  "schema_version": 1
+}
