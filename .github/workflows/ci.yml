@@ -56,6 +56,10 @@ jobs:
           uv run python -m scripts.question_dataset --manifest data/manifests/kubernetes-v1.json --questions data/evaluation/m2-dev.jsonl data/evaluation/m2-test-a.jsonl data/evaluation/m2-test-b.jsonl
           uv run python -m scripts.revise_questions --revision data/evaluation/revisions/m2-dev-v1.1.json
           uv run python -m scripts.question_dataset --manifest data/manifests/kubernetes-v1.json --questions data/evaluation/m2-dev-v1.1.jsonl data/evaluation/m2-test-a.jsonl data/evaluation/m2-test-b.jsonl
+      - name: Replay frozen retrieval results and candidate diagnostics without models
+        run: |
+          uv run python -m scripts.analyze_candidates --output .local/candidate-diagnostics-ci.json
+          uv run python -m scripts.evaluate_candidates --candidate-only --output .local/candidate-selection-ci.json
   web:
     runs-on: ubuntu-latest
     defaults:

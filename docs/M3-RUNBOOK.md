@@ -48,3 +48,23 @@ uv run --group retrieval pytest -q
 ```
 
 모델 그룹이 없는 일반 CI에서는 NumPy cosine·Torch tensor pooling 검사 2개가 skip될 수 있다. 나머지 합성 테스트는 입력 계약·RRF·평가·오류 처리를 검사하며 모델 의미 품질을 증명하지 않는다. 실제 GPU 실행과 CI 결과를 별도로 기록한다. 사용한 Transformers가 `torch_dtype` 인자의 deprecation 경고를 출력할 수 있으며 현재 고정 버전에서 실제 로딩 가능 여부는 실행으로 확인한다.
+
+## 저장 후보 진단과 단일 후속 비교
+
+[후속 설계](M3-CANDIDATE-DESIGN.md)는 기존 결과의 B50·D50을 재사용한다. 같은 전체 실험을 다시 실행할 필요는 없다. 코퍼스와 원래 M3 보고서가 필요하며 기존 보고서·코드·라벨 해시가 달라지면 실패한다. 출력 파일과 journal은 새 이름을 사용한다.
+
+```powershell
+# 모델이나 GPU 없이 후보 누락 원인과 원래 결과 재현 검사
+uv run --group retrieval python -m scripts.analyze_candidates --output .local/my-candidate-diagnostics.json
+uv run --group retrieval python -m scripts.evaluate_candidates --candidate-only --output .local/my-candidate-replay.json
+
+# CPU tokenizer만 사용해 원래 E5 3,588입력·BGE 3,950쌍의 근거 보존 확인
+uv run --group retrieval python -m scripts.analyze_candidates --tokenizer-visibility --output experiments/results/my-candidate-visibility.json
+
+# 저장 B/D 후보에서 균등 깊이 정책 하나를 선택하고 BGE만 실제 CUDA 추론
+uv run --group retrieval python -m scripts.evaluate_candidates --output experiments/results/my-candidate-rerank.json
+```
+
+첫 두 명령은 기본 의존성만 있는 CI에서는 `--group retrieval` 없이 실행한다. 이미 모델 환경을 설치한 로컬에서는 그룹을 유지해 불필요한 제거·재설치를 피한다. `--candidate-only`에는 새 모델 추론 결과가 없으며 CPU 선택 시간을 서비스 응답 시간으로 읽지 않는다. tokenizer 진단은 공백·정규화로 offset이 덮지 않는 구간을 숨기지 않고, 전체 문자 구간 포함과 근거에 겹친 토큰 보존을 따로 기록한다.
+
+실제 BGE 비교는 원래 고정 장치·라이브러리·정밀도 조건을 요구하며 조용히 대체하지 않는다. 새 후보 50개 전체의 raw 점수와 입력 식별자를 보존하고, 이전 top-10 중 공통 쌍의 점수 차이를 진단한다. 동일 dev의 후속 탐색이므로 최종 test 검증이나 Java 서비스 모델 연결과 구분한다. 저장소의 실제 측정 결과와 후속 판단은 STATUS와 experiments에서 확인한다.
