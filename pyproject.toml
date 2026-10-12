@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pytest>=8,<9", "httpx>=0.28,<1", "ruff>=0.11,<1"]
+dev = ["pytest>=8,<9", "httpx>=0.28,<1", "ruff>=0.11,<1", "editables>=0.5,<1"]
 
 [build-system]
 requires = ["hatchling"]
@@ -20,9 +20,12 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/doctrail"]
 
+[tool.hatch.build]
+dev-mode-exact = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 
 [tool.ruff]
 target-version = "py311"
