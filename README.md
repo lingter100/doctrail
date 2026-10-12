@@ -2,6 +2,8 @@
 
 **소규모 개발 조직을 위한 권한 기반 문서 검색과 근거 확인 서비스.**
 
+서비스 백엔드는 **Java 21 + Spring Boot**, 화면은 TypeScript다. Python은 데이터 준비·학습·오프라인 검색 평가에 사용한다. 기존 Python 서비스와 동결 실험은 보존한다. [Java 전환 범위와 검증](docs/JAVA-MIGRATION.md), [선택 이유](docs/decisions/0002-java-service.md)를 참고한다.
+
 새 팀원이 온보딩·운영 문서에서 정보를 찾을 때, 볼 수 있는 문서의 어느 부분이 근거인지 확인하는 흐름을 만든다. 한국어·영어 문서를 대상으로 검색 기준선부터 임베딩·하이브리드·리랭킹·미세조정까지 비교하는 개인 AI Engineer 포트폴리오 프로젝트다.
 
 ## 현재 범위
@@ -16,27 +18,31 @@ M3 첫 로컬 GPU 비교는 같은 입력에서 **BM25 30/59 → E5 임베딩 29
 
 ## 시작하기
 
-Python 3.11, [uv](https://docs.astral.sh/uv/), Node.js 22 이상이 필요하다.
+서비스 실행에는 Java 21과 Node.js 22 이상이 필요하다. Maven 3.9.16은 저장소 wrapper가 내려받아 체크섬을 확인한다. AI 데이터·실험과 이전 Python 구현의 검증에는 Python 3.11과 [uv](https://docs.astral.sh/uv/)를 사용한다.
 
 Windows에서는 저장소 루트에서 `./scripts/start.ps1` 한 번으로 설치·빌드·실행할 수 있다. 수동 실행은 다음과 같다.
 
 ```powershell
-uv sync --frozen
 cd web
 npm ci
 npm run build
 cd ..
-uv run uvicorn doctrail.app:app --host 127.0.0.1 --port 8000
+./server/mvnw.cmd -B -f server/pom.xml verify
+java -jar server/target/doctrail-server-0.1.0.jar
 ```
 
-브라우저에서 `http://127.0.0.1:8000`을 열고 계정과 작업공간을 만든다. Markdown, UTF-8 텍스트, 텍스트가 포함된 PDF를 등록하고 검색한다. 로컬 DB는 `var/`에 저장되며 Git에 포함되지 않는다. 기본 계정이나 고정 비밀번호는 없다.
+브라우저에서 `http://127.0.0.1:8000`을 열고 계정과 작업공간을 만든다. Markdown, UTF-8 텍스트, 텍스트가 포함된 PDF를 등록하고 검색한다. Java 기본 DB는 `var/doctrail-java.sqlite3`이며 기존 Python DB를 자동으로 옮기거나 덮어쓰지 않는다. 기본 계정이나 고정 비밀번호는 없다. macOS/Linux에서는 위의 `mvnw.cmd` 대신 `mvnw`를 사용한다.
+
+이전 구현은 `./scripts/start.ps1 -Backend Python`으로 실행한다. AI 실험 실행법은 [M3-RUNBOOK](docs/M3-RUNBOOK.md)을 따른다. 두 서비스를 같은 포트·같은 DB에 동시에 실행하지 않는다.
 
 개발 중에는 API 서버와 별도로 `web/`에서 `npm run dev`를 실행한다. 프런트엔드 개발 서버가 `/api`를 로컬 API 서버로 전달한다.
 
 ## 검증
 
 ```powershell
-uv run pytest
+./server/mvnw.cmd -B -f server/pom.xml verify
+uv run --group retrieval pytest
+uv run --group retrieval python -m scripts.verify_java_service --output .local/java-check.json
 cd web
 npm run typecheck
 npm run build
@@ -51,6 +57,7 @@ npm run build
 - [실험 실행·실패 분석](experiments/README.md), [운영·복구](docs/OPERATIONS.md), [시연·면접 준비](docs/DEMO.md)
 - [M2 평가 계약](docs/M2-EVALUATION.md), [직접 검수와 면접 설명](docs/M2-LEARNING.md)
 - [M3 비교 설계](docs/M3-DESIGN.md), [실측과 실패 분석](docs/M3-ANALYSIS.md), [모델 실행](docs/M3-RUNBOOK.md)
+- [Java 서비스 전환](docs/JAVA-MIGRATION.md), [Java 선택 ADR](docs/decisions/0002-java-service.md)
 - [자동 후속 실행과 승인 경계](docs/AUTONOMY.md)
 
 ## 라이선스와 사실 구분

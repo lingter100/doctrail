@@ -2,7 +2,7 @@
 
 기준일: 2026-10-12 (Asia/Seoul).
 
-현재 단계: **M1 서비스·M2 기준선을 유지하며 M3 첫 로컬 GPU 비교를 완료했다. M3 서비스 연동은 아직이다.** 전체 프로젝트 완료나 검색 품질 달성을 의미하지 않는다. 사용자 질문 검수는 0개이며 학습·생성 답변은 아직 없다. M3 원격 CI 상태는 아래 실행 기록을 따른다.
+현재 단계: **사용자 요청에 따라 서비스 백엔드를 Java 21 + Spring Boot로 전환했다. Python은 데이터·학습·오프라인 평가와 이전 서비스 참조용으로 보존한다.** M3 첫 로컬 GPU 비교는 완료했지만 새 모델의 서비스 연동은 아직이다. 전체 프로젝트 완료나 검색 품질 달성을 의미하지 않는다. 사용자 질문 검수는 0개이며 학습·생성 답변은 아직 없다. 원격 CI 상태는 각 단계의 실행 기록을 따른다.
 
 선행 확인: 빈 작업 폴더, 별도 상위 프로젝트 지침 없음, GitHub 사용자 인증 확인, Python 3.11·Node·uv 사용 가능, RAM 약 32GB·RTX 4050 6GB 확인. Docker 명령은 설치되어 있으나 엔진은 실행 중이지 않음. 첫 단계는 Docker 없이 실행한다.
 
@@ -116,3 +116,24 @@ E5 문서 준비의 GPU allocator peak allocated/reserved는 794/1,808MiB, 리�
 [M3 PR #3](https://github.com/lingter100/doctrail/pull/3)의 구현·결과·분석 커밋 `0241e4b`에서 backend/web 모두 [원격 CI 통과](https://github.com/lingter100/doctrail/actions/runs/38203764861)를 확인했다. 기본 의존성 Linux 환경에서 **127 passed, 2 skipped**였고 Ruff·프런트엔드 타입 검사·빌드, 313문서 재수집·해시 검증, 최초 240/활성 239질문의 재컴파일·검증이 성공했다. 두 skip은 선택적 NumPy/Torch 검사이며 이 CI가 GPU 모델 추론이나 품질 결과를 재현한 것은 아니다. 실제 모델 실행은 위의 로컬 CUDA 기록으로 구분한다.
 
 이 확인 기록을 추가한 뒤에도 실제 PR head의 필수 검사를 기다리고 사용자 작성자·커미터를 유지해 main에 통합한다. 현재 SHA의 최종 통합·검사 상태는 PR과 GitHub 검사에서 확인한다.
+
+## Java 서비스 전환 · 로컬 검증
+
+사용자의 Java 요청으로 `server/`에 실제 Java 서비스를 구현했다. Spring Boot MVC·JDBC·SQLite, PDFBox 파싱, Java BM25를 사용하며 계정·권한·문서 요청을 Python에 넘기는 구조가 아니다. 기본 실행 `./scripts/start.ps1`은 Java이며 이전 구현은 `-Backend Python`으로 남겼다. Java 기본 DB를 `var/doctrail-java.sqlite3`로 분리해 기존 DB를 자동으로 옮기거나 덮어쓰지 않는다. 실제 사용자 DB 이전은 수행하지 않았다.
+
+- JDK 21.0.12.1, 체크섬 고정 Maven 3.9.16에서 Java 테스트 **20개 통과**. 로그인·세션 회전·만료·제한, 권한 선필터와 숨긴 문서의 점수 불변, 변경·삭제·재처리·피드백, 오류 롤백, 동시 검색, Unicode 원문 위치, PDF 경계를 검사했다.
+- Python 회귀 **129개 통과**, Ruff, 프런트엔드 타입 검사·production build 통과. Python TestClient deprecation 경고는 남아 있다.
+- [실제 Java HTTP 검증 보고서](../experiments/results/java-migration-v1.json): Python 합성 DB의 복사본으로 기존 계정·세션·문서 호환, Java 변경의 Python 역방향 읽기, Java 재시작 후 데이터 유지, 삭제 반영 등 **11개 검증 묶음** 통과. 이 숫자를 단위 테스트 11개나 사용자 검수로 소개하지 않는다.
+- 같은 보고서에서 공개 문서 **313개를 Java API로 등록**, **3,588청크와 dev 79질문의 top10 문서·청크·점수·오프셋**이 기존 동결 Python BM25 결과와 일치했다. 검색 품질 개선이나 Java/Python 성능 우열을 측정한 실험이 아니다. Test 160질문은 검색 평가하지 않았다.
+- 길이 헤더가 없는 JSON·multipart 초과 요청, 잘못된 HTTP target·쿠키, 운영 로그의 합성 비밀 표식 미포함을 실제 HTTP·소켓으로 확인했다. 정적 검토에서 발견한 Tomcat의 필터 이전 로거 노출을 설정에서 막았다.
+
+첫 Java HTTP 검증은 Windows Oracle javapath 실행기가 남긴 자식 JVM의 로그 파일 잠금으로 정리 단계에서 실패했다. [실패 기록](../experiments/results/java-migration-attempt1-failed.json)을 보존하고 실제 JDK 실행 파일을 직접 시작·종료하도록 수정했다. 두 작업 전용 잔여 JVM과 검증용 임시 디렉터리는 정리했다. 이후 성공 실행은 종료·정리까지 포함한다.
+
+명령은 아래와 같다. 공개 문서 원문이 없으면 [데이터 재현](../data/README.md)을 먼저 실행한다. 결과 파일은 기존 파일을 덮어쓰지 않는다.
+
+```powershell
+./server/mvnw.cmd -B -f server/pom.xml verify
+uv run --group retrieval python -m scripts.verify_java_service --full-corpus --output .local/my-java-check.json
+```
+
+PDFBox와 pypdf의 일반적인 PDF 텍스트 출력은 동일하다고 주장하지 않는다. 저장된 예전 청크를 시작 시 자동 재처리하지 않는다. JAR의 UI 제공은 HTTP로 확인했지만 이번 전환에서 새 브라우저 시연이나 사용자 검수는 기록하지 않았다. 공개 서비스 배포·새 모델 추론·학습·생성 답변은 별도 후속 작업이다. 다음 자동 실행은 [M3 실패 분석](M3-ANALYSIS.md)에 따른 후보 진단과 Java 서비스의 모델 연결을 이어간다.

@@ -1,5 +1,7 @@
 # Milestone 1 API contract
 
+The Java service preserves this wire contract. Offsets remain Unicode codepoints, not Java UTF-16 indices. The previous Python service is retained as a reference. Migration evidence and parser differences are in JAVA-MIGRATION.md.
+
 Prefix `/api`; JSON errors use `detail`. Opaque string IDs. Cookie sessions, browser `credentials: include`, same origin through Vite `/api` proxy to 127.0.0.1:8000. No client-chosen identity. Backend serves built web/dist at `/` when present.
 
 User: `{id,email,name}`. Workspace: `{id,name,role}`. Auth response: `{user,workspaces}`.
