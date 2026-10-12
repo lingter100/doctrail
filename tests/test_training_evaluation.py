@@ -345,3 +345,54 @@ def test_followup_actual_scale_proof_cannot_contradict_declared_override(field):
         report["steps"][-1][field] = 65536.0
     with pytest.raises(ValueError, match="actual_scale_or_binding_mismatch"):
         evaluation.validate_numerical_receipt(execution, report)
+
+
+def test_public_plan_paths_reach_training_validation_without_model_loading(monkeypatch):
+    plan_path = evaluation.ROOT / "data/training/m4-calibration-evaluation-v1.json"
+    plan = json.loads(plan_path.read_bytes())
+    # An in-memory source amendment exercises the saved plan's actual input paths;
+    # the immutable original plan must still fail its old evaluator source hash.
+    plan["source_sha256_lf"] = {
+        name: pilot.sha256((evaluation.ROOT / name).read_bytes().replace(b"\r\n", b"\n"))
+        for name in plan["source_sha256_lf"]}
+    bound_json = evaluation.bound_json
+
+    def amended_plan(path, expected=None):
+        return (plan, "a" * 64) if path == plan_path else bound_json(path, expected)
+
+    def stop_before_training_validation(paths, hashes):
+        for key, name in evaluation.PUBLIC_REPORT_PATHS.items():
+            assert evaluation.ready.relative(paths[key]) == name
+            assert hashes[key] == plan["inputs"][key]["sha256"]
+        raise RuntimeError("reached_training_validation_without_models")
+
+    monkeypatch.setattr(evaluation, "bound_json", amended_plan)
+    monkeypatch.setattr(evaluation, "validated_training", stop_before_training_validation)
+    with pytest.raises(RuntimeError, match="reached_training_validation_without_models"):
+        evaluation.load_evaluation(plan_path)
+
+
+@pytest.mark.parametrize("key,path", [
+    ("train_report", "experiments/results/m4-e5-probe-v2.json"),
+    ("probe_report", "experiments/results/m4-e5-train-v2.json"),
+    ("checkpoint_manifest", "experiments/results/m4-e5-train-v2.json"),
+    ("execution_plan", "experiments/results/m4-e5-train-v2.json"),
+    ("ready_manifest", "experiments/results/m4-e5-train-v2.json"),
+    ("train_report", "experiments/results/m4-e5-train-v3.json"),
+    ("probe_report", "experiments/results/m3-retrieval-dev-v1.json"),
+    ("train_report", "data/evaluation/test.json"),
+])
+def test_public_report_exception_is_exact_and_role_bound(key, path):
+    with pytest.raises(ValueError, match="outside_train_artifacts"):
+        evaluation.validate_input_paths({key: evaluation.ROOT / path})
+
+
+def test_public_report_exception_does_not_bypass_content_hashes(tmp_path):
+    path = tmp_path / "report.json"
+    path.write_bytes(b'{"status":"passed"}')
+    # Path containment is separate; test the unchanged byte-binding check directly.
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(evaluation.ready, "relative", lambda path: "experiments/results/m4-e5-train-v2.json")
+        evaluation.validate_input_paths({"train_report": path})
+        with pytest.raises(ValueError, match="input_checksum_mismatch"):
+            evaluation.bound_json(path, "0" * 64)

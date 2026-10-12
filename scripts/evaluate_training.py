@@ -55,6 +55,10 @@ REQUIRED_SOURCES = {
     "src/doctrail/ingest.py", "src/doctrail/retrieval.py",
 }
 INPUT_KEYS = {"execution_plan", "ready_manifest", "train_report", "probe_report", "checkpoint_manifest"}
+PUBLIC_REPORT_PATHS = {
+    "train_report": "experiments/results/m4-e5-train-v2.json",
+    "probe_report": "experiments/results/m4-e5-probe-v2.json",
+}
 METRICS = ("evidence_all_at_50_chunks", "evidence_all_at_5_chunks", "evidence_mrr_at_10_chunks",
            "document_hit_at_5_within_10_chunks", "document_reciprocal_rank_within_10_chunks")
 CHECKPOINT_FILES = {"config.json", "model.safetensors", "tokenizer.json", "tokenizer_config.json",
@@ -225,6 +229,14 @@ def validated_training(paths: dict[str, Path], hashes: dict[str, str] | None = N
             "questions": questions}
 
 
+def validate_input_paths(paths: dict[str, Path]) -> None:
+    for key, path in paths.items():
+        name = ready.relative(path)
+        if (not name.startswith(("data/training/", "data/models/", ".local/"))
+                and PUBLIC_REPORT_PATHS.get(key) != name):
+            raise ValueError("evaluation_input_outside_train_artifacts")
+
+
 def load_evaluation(plan_path: Path) -> dict:
     plan, digest = bound_json(plan_path)
     if (plan.get("schema_version") != 1 or plan.get("evaluation_id") != "m4-calibration-v1"
@@ -240,10 +252,7 @@ def load_evaluation(plan_path: Path) -> dict:
             raise ValueError("evaluation_source_checksum_mismatch")
     paths = {key: ROOT / item["path"] for key, item in plan["inputs"].items()}
     hashes = {key: item["sha256"] for key, item in plan["inputs"].items()}
-    for path in paths.values():
-        name = ready.relative(path)
-        if not name.startswith(("data/training/", "data/models/", ".local/")):
-            raise ValueError("evaluation_input_outside_train_artifacts")
+    validate_input_paths(paths)
     execution, _ = bound_json(paths["execution_plan"], hashes["execution_plan"])
     if runner_source(execution) not in plan["source_sha256_lf"]:
         raise ValueError("selected_execution_runner_source_not_frozen")
