@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "plan_id": "m4-plan-v1",
+  "created_at": "2026-10-12",
+  "status": "preregistered_data_pilot_not_training_result",
+  "corpus": {
+    "manifest_path": "data/manifests/kubernetes-v1.json",
+    "manifest_sha256": "e4d33997b5589bd8d9cc5c56691da5940eba3a7b6554c671b8c39b78910fe69a",
+    "corpus_id": "kubernetes-v1",
+    "source_revision": "4b10551a8c6f0a3f100356d8fc3c6fb5cfde1448",
+    "source_kind": "public_real",
+    "license": "CC-BY-4.0",
+    "source_split": "train",
+    "integrity_scope": "existing loader verifies all frozen corpus bytes and groups, then filters train before authoring, chunking or mining; evaluation question files are never opened"
+  },
+  "split": {
+    "seed": "doctrail-m4-train-v1",
+    "hash_algorithm": "sha256",
+    "hash_input": "{seed}:{family_id}",
+    "hash_prefix_hex_chars": 16,
+    "bucket_modulus": 100,
+    "fit_buckets": [
+      0,
+      79
+    ],
+    "calibration_buckets": [
+      80,
+      99
+    ],
+    "group_field": "family_id",
+    "source_split": "train",
+    "freeze_before_authoring": true,
+    "fit_negative_pool": "fit_only",
+    "calibration_use": "no_gradients_no_fit_negatives_no_label_changes_after_retrieval_results"
+  },
+  "pilot": {
+    "target_fit_queries": 64,
+    "target_calibration_queries": 16,
+    "min_fit_families": 16,
+    "min_calibration_families": 4,
+    "max_queries_per_family": 4,
+    "min_korean_queries_with_english_evidence": 16,
+    "min_english_queries": 8,
+    "coverage": [
+      "concepts",
+      "tasks",
+      "reference"
+    ],
+    "selection": "freeze deterministic topic-stratified family selection before authoring; export partition-specific train-only local packs",
+    "shortfall_policy": "report shortfall and remain data_not_ready; never fill quotas with paraphrase duplicates or unsupported questions"
+  },
+  "draft_contract": {
+    "format": "jsonl",
+    "required_fields": [
+      "id",
+      "partition",
+      "question",
+      "language",
+      "query_type",
+      "question_family_id",
+      "evidence",
+      "expected_answer",
+      "rationale",
+      "author_pack_sha256",
+      "provenance",
+      "semantic_review"
+    ],
+    "partitions": [
+      "fit",
+      "calibration"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "query_types": [
+      "semantic",
+      "exact_term",
+      "cross_lingual"
+    ],
+    "evidence_fields": [
+      "document_id",
+      "quote",
+      "occurrence"
+    ],
+    "evidence_rule": "single required fact; multiple evidence entries are reviewed alternative support for that same fact, never implicit multi-hop",
+    "question_family_rule": "one intent identifier groups translations and paraphrases; count unique intents separately from rows and corpus families",
+    "provenance_fields": [
+      "authorship",
+      "source_kind",
+      "author_model",
+      "author_reasoning",
+      "human_review"
+    ],
+    "provenance_values": {
+      "authorship": "ai_authored",
+      "source_kind": "public_real",
+      "human_review": "pending"
+    },
+    "authoring_record": "preserve author instructions and accepted model/reasoning settings; generation receipt hashes instructions, local author pack and final draft; recompilation is reproducible, generative inference is not",
+    "semantic_review_states": [
+      "pending",
+      "ai_checked"
+    ],
+    "human_approval_by_ai_forbidden": true,
+    "protocol_path": "data/training/generation/protocol-v1.md",
+    "protocol_sha256": "a3f821667a54662e57487a49e28a97b65643d3f2d701eb6b9be21b5ef0add49c"
+  },
+  "positive_gates": {
+    "exact_quote_occurrence_required": true,
+    "immutable_document_hash_required": true,
+    "same_partition_required": true,
+    "existing_chunk_contains_whole_span_required": true,
+    "e5_token_retention_required_before_training": true,
+    "independent_ai_semantic_review_required_before_training": true,
+    "all_known_positive_chunks_excluded_from_negatives": true,
+    "question_duplicate_method": "casefolded normalized character trigram Jaccard",
+    "question_duplicate_threshold": 0.8,
+    "duplicate_action": "quarantine_for_review_not_automatic_delete"
+  },
+  "negative_mining": {
+    "method": "bm25",
+    "top_k": 20,
+    "near_duplicate_threshold": 0.8,
+    "pool": "same_partition_only",
+    "selection": "existing BM25 rank order with stable chunk tie order, no dense or reranker score threshold",
+    "reject": [
+      "positive_chunk",
+      "positive_evidence_overlap",
+      "same_corpus_family",
+      "exact_positive_text",
+      "near_duplicate_positive_text"
+    ],
+    "default_label": "unknown",
+    "review_labels": [
+      "negative",
+      "relevant",
+      "ambiguous",
+      "unknown"
+    ],
+    "training_label": "negative",
+    "negative_definition": "candidate full chunk does not support the specific requested fact; mere absence from positive annotations is insufficient",
+    "required_review": "independent AI review of question, positive evidence and complete candidate chunk; record reason, reviewer and candidate text hash; human review remains pending",
+    "accepted_per_query": 2,
+    "unreviewed_or_ambiguous_use": "exclude_from_loss",
+    "in_batch_negatives": "disabled_in_first_experiment"
+  },
+  "training_proposal": {
+    "status": "conditional_not_run",
+    "hypothesis": "adapt E5 candidate retrieval because frozen M3 aggregate has 21 candidate-limited failures and 1 ranking-only failure",
+    "model_manifest_path": "data/models/m3-models.json",
+    "model_manifest_sha256": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1",
+    "base_model": "intfloat/multilingual-e5-small",
+    "base_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "strategy": "full_weight_adamw_first_bounded_feasibility_pilot",
+    "reranker": "frozen",
+    "chunking": "frozen_m2",
+    "pooling": "attention_masked_mean_then_l2",
+    "query_prefix": "query: ",
+    "passage_prefix": "passage: ",
+    "max_length": 512,
+    "loss": "per_query_InfoNCE_one_positive_two_explicit_reviewed_negatives",
+    "temperature": 0.01,
+    "in_batch_negatives": false,
+    "seed": 20261012,
+    "epochs": 2,
+    "microbatch_queries": 2,
+    "gradient_accumulation_steps": 4,
+    "max_optimizer_steps": 16,
+    "learning_rate": 1E-05,
+    "weight_decay": 0.01,
+    "warmup_optimizer_steps": 1,
+    "max_grad_norm": 1.0,
+    "mixed_precision": "fp16_autocast_fp32_parameters_and_optimizer_with_grad_scaler",
+    "gradient_checkpointing": true,
+    "evaluation_dtype": "float32_as_frozen_e5_baseline",
+    "resource_probe_optimizer_steps": 1,
+    "resource_probe_reset_to_base_before_training": true,
+    "resource_peak_allocated_limit_mib": 5376,
+    "oom_policy": "record_failure_stop_no_cpu_or_cloud_fallback_no_silent_batch_or_length_change",
+    "peft_policy": "LoRA is a separate deferred experiment requiring a new versioned plan and dependency lock; do not sweep or silently switch",
+    "dependency_lock_path": "uv.lock",
+    "dependency_lock_sha256": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+  },
+  "training_readiness": {
+    "all_pilot_counts_and_coverage_pass": true,
+    "all_positive_gates_pass": true,
+    "every_fit_query_has_two_reviewed_negatives": true,
+    "no_pending_or_ambiguous_negatives_in_loss": true,
+    "all_checks_and_frozen_input_hashes_pass": true,
+    "resource_probe_passes": true,
+    "human_review_pending_allowed_only_with_provisional_ai_label_disclosure": true,
+    "if_any_gate_fails": "do_not_train; preserve validated data and explicit outstanding gate report"
+  },
+  "evaluation": {
+    "this_data_pilot": "train_only_BM25_mining_and_diagnostics; no_main_dev_or_test_question_access",
+    "calibration_corpus": "all_original_train_documents_with_frozen_chunks",
+    "primary": "full_annotated_evidence_recall_at_50_for_E5_candidate_retrieval",
+    "secondary": [
+      "evidence_recall_at_5",
+      "MRR_at_10",
+      "document_hit_at_5",
+      "language_and_cross_lingual_counts",
+      "paired_gains_losses",
+      "latency",
+      "memory",
+      "truncation"
+    ],
+    "bounded_comparison": "one frozen base checkpoint versus one terminal checkpoint; no best-epoch selection or calibration sweep",
+    "promotion_gate": "calibration primary must increase by at least one question with no decrease in evidence recall at5; a pilot tie or failure keeps the original model",
+    "main_dev": "only once after data, code, terminal checkpoint and evaluation config are frozen; report all gains and regressions without retuning this run",
+    "test": "locked; existing explicit final evaluation gate unchanged",
+    "service": "no automatic adoption; Java security and browser regression gate remain separate",
+    "ablation": "data-size/negative-quality ablations remain roadmap work; not claimed by this single run"
+  },
+  "sources": [
+    {
+      "id": "e5-report",
+      "url": "https://arxiv.org/html/2402.05672v1",
+      "use": "contrastive pretraining and supervised fine-tuning with mined negatives; does not establish DocTrail GPU feasibility"
+    },
+    {
+      "id": "e5-card",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small/blob/614241f622f53c4eeff9890bdc4f31cfecc418b3/README.md",
+      "use": "query/passsage prefixes, masked mean pooling, normalization, 512 token limit, InfoNCE temperature"
+    },
+    {
+      "id": "sbert-losses",
+      "url": "https://sbert.net/docs/package_reference/sentence_transformer/losses.html",
+      "use": "ordinary gradient accumulation does not increase the shared in-batch negative pool; GradCache is a distinct deferred option"
+    },
+    {
+      "id": "peft-lora",
+      "url": "https://huggingface.co/docs/peft/en/package_reference/lora",
+      "use": "low rank adaptation is an alternative requiring explicit supported target modules, not evidence of quality or measured local memory"
+    }
+  ]
+}
