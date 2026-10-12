@@ -62,10 +62,11 @@ def verified_data(execution: dict, manifest_path: Path) -> tuple[dict, dict]:
         raise ValueError("readiness_arguments_missing_or_extra")
     kwargs = {key: [ROOT / item for item in value] if isinstance(value, list)
               else ROOT / value for key, value in settings.items()}
-    for value in kwargs.values():
+    for key, value in kwargs.items():
         for path in value if isinstance(value, list) else [value]:
             name = ready.relative(path)
-            if not name.startswith(("data/training/", ".local/", "models/")):
+            if (not name.startswith(("data/training/", ".local/", "models/"))
+                    and not (key == "review_pack_dir" and name == ".local")):
                 raise ValueError("readiness_input_outside_train_artifacts")
     args = SimpleNamespace(command="replay", output=manifest_path, **kwargs)
     context = readiness_module(execution).load_ready_data(args)

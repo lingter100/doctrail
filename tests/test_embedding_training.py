@@ -299,6 +299,48 @@ def test_readiness_calls_frozen_helper_before_any_model_loading(tmp_path, monkey
     assert called[0].output == path and called[0].command == "replay"
 
 
+@pytest.mark.parametrize("field,value,accepted", [
+    ("review_pack_dir", ".local", True),
+    ("review_pack_dir", "./.local/", True),
+    ("review_pack_dir", ".local-sibling", False),
+    ("review_pack_dir", "../outside", False),
+    ("review_pack_dir", "absolute-outside", False),
+    ("review_pack_dir", ".", False),
+    ("e5_snapshot", ".local", False),
+    ("token_receipt", ".local", False),
+])
+def test_actual_readiness_paths_allow_local_root_only_for_review_pack_dir(
+        tmp_path, monkeypatch, field, value, accepted):
+    execution = json.loads((runner.ROOT / "data/training/m4-e5-execution-v1.json").read_bytes())
+    raw = pilot.json_bytes({"synthetic": True})
+    path = tmp_path / "data/training/manifest.json"
+    path.parent.mkdir(parents=True)
+    path.write_bytes(raw)
+    execution["ready_manifest_sha256"] = pilot.sha256(raw)
+    execution["readiness_arguments"][field] = (
+        str(tmp_path.parent / "outside") if value == "absolute-outside" else value)
+    relative = runner.ready.relative
+    monkeypatch.setattr(runner, "ROOT", tmp_path)
+    monkeypatch.setattr(runner.ready, "relative", lambda p: relative(p, tmp_path))
+    calls = []
+    expected = {"triplets": [{}] * 64, "calibration": [{}] * 16}
+
+    def verified(args):
+        calls.append(args)
+        assert args.review_pack_dir.resolve() == tmp_path / ".local"
+        return {"manifest": expected}
+
+    monkeypatch.setattr(runner, "readiness_module", lambda _: SimpleNamespace(load_ready_data=verified))
+    if accepted:
+        manifest, context = runner.verified_data(execution, path)
+        assert manifest == expected and context["readiness_contract"] == "m4-readiness-plan-v2"
+        assert len(calls) == 1 and calls[0].command == "replay"
+    else:
+        with pytest.raises(ValueError):
+            runner.verified_data(execution, path)
+        assert not calls
+
+
 def test_execution_plan_requires_frozen_source_and_evaluation_contract(monkeypatch):
     original = json.loads((runner.ROOT / "data/training/m4-plan-v1.json").read_bytes())
     execution = {"schema_version": 1, "execution_id": "m4-e5-execution-v1",

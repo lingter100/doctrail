@@ -1,0 +1,22 @@
+{
+  "cause": "The normalized review_pack_dir .local is legitimate but a prefix-only path allowlist accepts .local/ descendants and rejects the directory itself.",
+  "command": "probe",
+  "evidence": "CLI exit1 in verified_data before execution_guard and execute_run; requested output directory and execution-lock directory are absent.",
+  "execution": "actual_cli_preflight_failure",
+  "execution_claim_created": false,
+  "execution_plan_path": "data/training/m4-e5-execution-v1.json",
+  "execution_plan_sha256": "278a930de2eb46461c685345cdbfbf94cd7921e5ac8ceeaa62f681956db9f16a",
+  "failure_code": "readiness_input_outside_train_artifacts",
+  "failure_type": "ValueError",
+  "gpu_probe_started": false,
+  "human_review": "pending",
+  "model_weights_loaded": false,
+  "next_action": "Narrow path validation fix and source-hash-only execution-plan amendment; preserve this plan and failure, keep data and all training hyperparameters unchanged.",
+  "optimizer_steps": 0,
+  "output_directory_created": false,
+  "paid_api_gpu_cloud": false,
+  "schema_version": 1,
+  "source_commit": "8823124",
+  "status": "failed",
+  "training_executed": false
+}
