@@ -264,3 +264,11 @@ npm --prefix web run test:e2e
 ```
 
 다음은 기존 pilot을 덮어쓰지 않는 보정 문서 추가 선택, 명시적 음성 검토, E5 tokenizer 근거 보존과 질문당 단일 양성 선택 규칙 동결이다. 조건 통과 후에만 실제1 optimizer step 자원 probe와 제한 학습·동일 calibration 비교를 진행한다. 유료 자원·공개 서비스 배포·최종 test 개방은 수행하지 않았다. UI 완성도는 기존 최종 기준을 유지한다.
+
+## M4 자료 pilot · 원격 검사
+
+구현 커밋 `a29618e`의 [head push 검사](https://github.com/lingter100/doctrail/actions/runs/38216813028)에서 `java-service`·`backend`·`web`이 모두 성공했다. Ubuntu의 Python260passed/4skipped, Java HTTP11묶음, Chromium18개, frozen M2/M3 검사와 새 train 자료·독립 AI 검토 영수증의 byte-for-byte replay가 통과했다. 원격에는 heavy 모델 의존성이 없어4개를 건너뛰었으며 로컬264개 통과와 구분한다. 학습·모델 추론은 이 CI에서 수행하지 않았다.
+
+[PR #8](https://github.com/lingter100/doctrail/pull/8)의 마지막 head에 대한 필수 검사를 확인한 뒤 main에 fast-forward로 통합한다. GitHub API에서 구현 커밋의 author와 committer가 모두 `lingter100` 계정에 연결됨을 확인했다. 최종 통합 SHA·상태는 PR 기록을 기준으로 확인한다. 다음 실행은 이미 끝난 pilot을 재작성하지 않고 보정 질문 보완·음성 검수·토큰 보존 조건을 진행한다.
+
+후속 검수 범위 확인: 격리 후 미검토 후보는 fit 질문마다6~20개, calibration 질문마다11~20개다. 후보 개수가 충분하다는 사실이 질문당 필요한2개의 실제 음성이 존재한다는 뜻은 아니다. 검토에서 대체 정답·모호성을 찾으면 그대로 제외 사유를 남긴다.
