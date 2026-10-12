@@ -110,3 +110,9 @@ E5 문서 준비의 GPU allocator peak allocated/reserved는 794/1,808MiB, 리�
 로컬 **129 tests passed**, Ruff, 프런트엔드 타입 검사·production build 통과. 기본 의존성만 있는 CI에서는 NumPy/Torch에 의존하는 검사 2개를 skip하며 GPU 모델 품질은 검증하지 않는다. 상세 명령은 [M3-RUNBOOK](M3-RUNBOOK.md). Starlette TestClient와 모델의 `torch_dtype` 인자 deprecation 경고가 남지만 실제 실행은 완료했다. 토큰 길이 진단에서 출력된 길이 경고는 실제 forward 전에 512로 자르는 경로와 구분한다.
 
 다음 자동 실행에서는 실패 분석을 바탕으로 후보 회수·잘림의 후속 실험을 제한적으로 설계하고, 새 검색 방법을 명시적으로 선택할 수 있는 서비스 연결을 구현한다. 기본 BM25를 유지하며 ACL 선적용, 벡터의 revision·청크 해시, 수정·삭제·재처리·warm cache 회귀를 확인한다. 이것을 마치기 전 M3 전체 완료로 표시하지 않는다. Train 학습·생성 답변·유료 API·공개 서비스 배포는 하지 않았다.
+
+## M3 첫 비교의 원격 코드·데이터 검사
+
+[M3 PR #3](https://github.com/lingter100/doctrail/pull/3)의 구현·결과·분석 커밋 `0241e4b`에서 backend/web 모두 [원격 CI 통과](https://github.com/lingter100/doctrail/actions/runs/38203764861)를 확인했다. 기본 의존성 Linux 환경에서 **127 passed, 2 skipped**였고 Ruff·프런트엔드 타입 검사·빌드, 313문서 재수집·해시 검증, 최초 240/활성 239질문의 재컴파일·검증이 성공했다. 두 skip은 선택적 NumPy/Torch 검사이며 이 CI가 GPU 모델 추론이나 품질 결과를 재현한 것은 아니다. 실제 모델 실행은 위의 로컬 CUDA 기록으로 구분한다.
+
+이 확인 기록을 추가한 뒤에도 실제 PR head의 필수 검사를 기다리고 사용자 작성자·커미터를 유지해 main에 통합한다. 현재 SHA의 최종 통합·검사 상태는 PR과 GitHub 검사에서 확인한다.
