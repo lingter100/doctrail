@@ -70,6 +70,42 @@ v2의 목적은 v1 품질을 높이는 튜닝이 아니라 **처음 계획한 gr
 
 이 절 작성 시점에는 v2 GPU 결과가 없다. 후속 실제 결과를 기록해도 위 사전 수정의 목적과 범위를 바꾸지 않는다. 실행 계획에 이 문서를 source로 묶을 경우 frozen 사본을 유지하고 후속 결과는 별도 파일에 남긴다.
 
+## v2 실제 수정 검증 · 2026-10-13 후속
+
+위 사전 수정 뒤 깨끗한 커밋 `93d6e2fa899e92b25eda2ac62f4dc23a4f94285f`에서 v2를 실행했다. 02:38:53~02:39:43 UTC에 실제 생성 11회·preguard 1회를 마쳤으며 미실행 0개다. 고정 계획 SHA는 `f0ac2fd91c2356c03b5b53feaed729825641fec968be61880f9e02f311ce6045`다. [원본 바이트를 보존한 report](../experiments/results/m5-generation-v2.json) SHA는 `85a057d52a4a9375e89a18e1a701940c546e8feb39c979c995879654e43d1556`, journal은 `a2327b8b1c0e0cbdb96b604bcd4ae08893eb50a9ff13ed4bd6cd9a16035ca10f`, console은 `5170e3f08953382dfaff8bb8b4f38af4a6c2a5f3cfe135d1e0d48c2309bf13d5`다. 검토자가 로컬 원본과 공개 report의 bytes 동일성을 확인했다.
+
+실제 generate 준비 경로에서 검사한 effective config가 11개 모두 저장됐으며 `do_sample=False`, `use_model_defaults=False`, `generation_mode=greedy_search`다. 모델 기본값 상속 경고는 없었다. `torch_dtype` deprecation 경고는 남아 있으며 설정 상속 실패와 구분한다. 따라서 **v2는 의도한 greedy 계약의 실행 확인**, v1은 **완료된 설정 위반 실행**이다. 같은 입력의 수정 확인이지 새로운 held-out 시험은 아니다.
+
+11개의 v2 raw text는 v1 raw text와 항목별로 모두 같았다. 문자 동일성은 두 decoding 방식의 일반적 동등성이나 v1 설정의 소급 통과를 증명하지 않는다. 품질을 개선했다는 주장도 하지 않는다. 별도 [AI 의미 검토 영수증](../experiments/results/m5-generation-v2.semantic-review.json)에 원본/fixture hash, 12개 판정, 반환된 9개 주장과 근거, 사용자 검수 0을 연결했다. 원본 report의 `semantic_correctness=not_verified`는 바꾸지 않는다.
+
+| v2 지표 | 관측 | 의미 |
+|---|---|---|
+| 구조·인용 수락 | 9/11 실제 생성 | 005·006은 여분 `}`로 JSON 거절 |
+| 수락된 인용의 원문 연결 | 9/9 | 13개 source 중 실제 인용된 구간의 hash/codepoint를 재확인. 의미 지지와 별개 |
+| 답변 범위 | 9/12 전체, 또는 9/11 모델 호출 | 전체 분모에는 빈 근거 preguard 1개 포함 |
+| 완전하고 지지되는 답변 | 답변 가능 7개 중 6개 | 004는 승인자만 말하고 두 번째 조건 누락 |
+| 수락 답변 중 오류·불완전 | 3/9, 33.3% | 004 누락, 008 충돌 무시, 010 대상 선택·속성 혼합 |
+| 주장 지지 | 7/9, 77.8% | 004의 개별 주장은 지지되지만 답변 전체는 불완전. 008은 다른 현재 근거와 충돌, 010은 미지지 |
+| 필요한 정상 모델 보류 | 0/4 | 두 JSON 거절과 두 잘못된 답변. preguard/validator 거절을 모델 성공으로 세지 않음 |
+| 과도한 보류 | 0/7 답변 가능 항목 | 답변을 많이 한다는 사실만으로 품질 통과가 아님 |
+
+사례별 의미 관측은 위 v1 표와 같지만, v2 raw output을 다시 읽어 판정했다. 자동 expected status 7/11에는 불완전한 004가 포함되어 의미 정답률로 쓰지 않는다. 009의 쉬운 공격 사례 성공과 012의 고정 현재 문맥 답변은 일반 주입 저항성·실제 업데이트/ACL의 근거가 아니다.
+
+v2 load 지표는 12.694초·peak allocated/reserved 3,282.25/3,292MiB다. 생성 입력은 501~703 tokens, 출력 합계 628 tokens(EOS 포함), 항목당 0.868~4.654초·중앙값 3.196초, 생성 peak allocated/reserved 최대 3,461.81/3,622MiB다. reserved 한도 5,376MiB를 넘지 않았고 OOM·deadline 중단도 없었다. 최대 허용 1,536-token 문맥·동시 retrieval·Java HTTP·전체 장치 VRAM·CPU RSS 검증은 아니다. v1과 작은 시간 차이를 속도 개선으로 해석하지 않는다.
+
+## 다음 M5-B 묶음 · 새 자료와 제한된 비교를 먼저 고정
+
+다음 구체 산출물은 새 `M5-CALIBRATION-PLAN`과 source-family registry다. 아래는 우선순위를 정한 후속 설계이며 이 문서 작성 중 프롬프트·decoder·모델을 바꾸거나 GPU를 추가 호출하지 않았다.
+
+1. **최우선: few-shot 정책 예시가 의미 실패를 줄이는지 시험한다.** 고정 v2 zero-shot과, 별도 예시 자료에서 작성한 짧은 예시 3개를 추가한 정책 하나만 비교한다. 예시는 질문의 모든 부분에 답하기, 현재 근거 충돌 보류, 대상 모호/근거 부족의 구분을 설명한다. 본 smoke 문구·수치·배포/로그/백업 family는 예시와 새 평가에서 제외한다. 예시 3개는 calibration/validation family와도 분리한다. 모델·token/resource cap·decoder·원문 인용 검증은 유지한다.
+2. **자료를 먼저 나눈다.** 서로 다른 가상 업무 사실의 12개 새 source family를 목록화하고 질문 작성 전에 고정 hash 규칙으로 calibration 6개/validation 6개에 배정한다. 각 family는 4개 질문으로 제한해 calibration 24/validation 24개를 목표로 한다. 같은 사실의 번역·수치 변경·근거 절반 제거·공격 변형은 전부 같은 family다. 각 split에 답변 가능 12개와 보류 필요 12개를 두고, 단일/다중 문서·부족/충돌/모호·교차언어·공격을 배분한다. 내용을 채우기 전에 세부 배분과 예외 규칙을 등록하며 조건 미달을 질문 복제로 메우지 않는다.
+3. **횟수를 묶는다.** calibration의 두 정책 각 24회, 선택한 정책의 validation 24회로 최대 72회 실제 생성만 허용하는 계획을 만든다. 작성자·독립 AI 검토자·calibration 결과를 보는 구현자·validation 보관 역할을 나누고 validation 문구/정답을 prompt 조정에 쓰지 않는다. 먼저 원문·span·AI 검토·입력 token 예산을 확인하고 한 번의 고정 실행을 허용한다. 자료 조건이 안 되면 GPU 전에 계획을 수정·재동결한다.
+4. **운영점 선택을 사전에 정한다.** 우선 후보는 calibration에서 수락 답변 중 잘못되거나 불완전한 답변 수가 baseline보다 줄고, 완전 지지 답변 수와 형식 성공 수가 각각 감소하지 않을 때만 선택한다. 그 외에는 기존 정책을 유지하며 실패를 분석한다. 이 categorical 선택 규칙도 새 계획에서 고정한다. calibration 선택 뒤 validation은 선택 정책 하나에 한 번만 실행하고 결과를 보고 다시 조정하지 않는다. 아직 사실 confidence threshold를 보정한 것이 아니며, 실제 문서로 확장하기 전 별도 answerability/abstention 운영점 검증이 남는다.
+5. **엄격한 구조 제한 decoding은 두 번째 가설이다.** 현재 두 오류는 JSON 구문 실패지만 나머지 세 의미 실패는 유효 JSON 안에 있다. 따라서 구조 제약은 `}` 같은 구문 실패의 분리 진단에는 유용해도 답변 완전성·충돌을 해결한다는 전제는 두지 않는다. few-shot 고정 비교 뒤에도 형식 실패가 남으면 별도 source/plan으로 grammar 기반 제약의 호환·자원·검사 범위를 검토한다. 현재 validator를 느슨하게 하거나 raw JSON을 수선하지 않는다.
+6. **모델 용량은 세 번째 가설이다.** 작은 모델의 한계일 수 있으나 현재 관측만으로 원인을 확정하지 않는다. 제한된 정책/형식 비교에서 남는 실패를 분류한 뒤 더 큰 모델·양자화·다른 계열의 자원/라이선스를 별도로 사전 검토한다. 지금 모델 여러 개를 같은 smoke에 반복 시도하거나 자동 유료 자원으로 이동하지 않는다.
+
+새 synthetic validation도 최종 retrieval test가 아니다. 기존 완료된 M2/M3/M4 dev·calibration·test를 읽거나 재실행하지 않는다. 현실 문서의 별도 source set과 사용자 검수는 이후 품질 단계로 남긴다. 현재 결과로는 Java 답변 연결을 채택하지 않으며 기본 검색은 유지한다.
+
 ## 현재 판단
 
-실제 로컬 생성과 정확한 출처 연결은 관측했지만, 설정을 믿을 수 있게 고정하는 작업과 보류·완전 답변 평가가 남았다. v1의 인용 수락만으로 Java 답변 서비스를 채택하지 않는다. 후속은 위의 최소 v2 수정 검증이며 기존 retrieval calibration/main-dev/test를 다시 열지 않는다. Paid API·클라우드·외부 서비스 공개는 없고, 사람 검수는 0이다.
+실제 로컬 생성·출처 연결·v2의 greedy 설정 준수는 확인했다. 보류·완전 답변 품질에는 명확한 실패가 남으므로 M5 전체 완료나 Java 답변 서비스 채택으로 올리지 않는다. 다음은 위 M5-B의 새 family registry·역할 분리·질문/근거 작성·사전등록이며 기존 retrieval calibration/main-dev/test를 다시 열지 않는다. Paid API·클라우드·외부 서비스 공개는 없고, 사람 검수는 0이다.

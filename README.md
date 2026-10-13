@@ -22,6 +22,8 @@ M4에서는 원래 train 안에서 학습64·내부 검증16개의 AI 질문과 
 
 이 학습 저장본을 명시적 실험 실행기로 연결해 실제 Java·React·로컬 GPU 운영 검사16묶음도 통과했다. 모델별 검색 이력, 권한 회수, 문서 갱신·삭제, worker 장애와 기존 모델 복구를 확인했다. [운영 결과](docs/M4-OPERATIONS-RESULTS.md)를 보존하며 기본 BM25/base는 유지한다. 이 검증은 합성 자료를 사용했으며 새로운 검색 품질 평가나 사용자 검수를 뜻하지 않는다.
 
+M5의 첫 로컬 생성 실험에서는 Qwen3-1.7B로 합성11질문을 실제 처리하고 빈 근거1개를 사전 차단했다. 첫 실행의 라이브러리 설정 덮어쓰기를 발견·보존한 뒤, 새 버전에서 실제 적용된 greedy 설정을 확인했다. **인용 검사를 통과한9답변 중3개는 질문 일부 누락·충돌 무시·모호한 대상 선택 문제**가 있었고 정상 모델 보류는0/4였다. [설정 실패와 답변 분석](docs/M5-GENERATION-ANALYSIS.md)을 공개하며, 이를 Java Q&A 기능 완료나 실사용 품질로 주장하지 않는다. [실행·재생 방법](docs/M5-RUNBOOK.md)을 참고한다.
+
 ![로컬 검증 화면: 합성 온보딩 문서 검색과 원문 근거](docs/images/m1-desktop.jpg)
 
 ## 시작하기
@@ -72,6 +74,7 @@ npm run build
 - [React 화면 구조·검증](docs/FRONTEND.md), [React 선택 ADR](docs/decisions/0003-react-frontend.md)
 - [Java·Python 모델 연결과 실행](docs/MODEL-SERVING.md), [추론 경계 ADR](docs/decisions/0004-model-serving.md), [실제 로컬 GPU 운영 검사](experiments/results/m3-model-service-v1.json)
 - [M4 학습 가설·데이터 기준](docs/M4-DESIGN.md), [train 자료와 재현 방법](data/training/README.md)
+- [M5 답변·보류 설계](docs/M5-DESIGN.md), [생성 실측·실패 분석](docs/M5-GENERATION-ANALYSIS.md), [실행·재생](docs/M5-RUNBOOK.md)
 - [자동 후속 실행과 승인 경계](docs/AUTONOMY.md)
 
 ## 라이선스와 사실 구분

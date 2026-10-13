@@ -2,6 +2,12 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
+**M5 첫 로컬 생성 검증 완료, 답변 품질은 미달.** 깨끗한 `93d6e2f`에서 수정 v2의 실제 GPU11회와 빈 근거 사전 차단1개를 완료했다. 실제 적용 설정16개 필드와 `greedy_search`를 매 요청 검사했고 한·영 기본 실행 조건과 메모리 한도를 통과했다. 그러나 JSON 거절2개, 정상 모델 보류0/4이며 인용이 유효한9답변 중3개는 누락·충돌 무시·대상 혼동 문제가 있다. 두 실행의 raw 출력11개는 동일해서 설정 오류 수정으로 품질이 좋아졌다고 말하지 않는다. [실패·의미 분석](M5-GENERATION-ANALYSIS.md)을 따라 새 문서 family를 분리한 M5-B calibration/validation과 제한된 보류·완전성 개선을 별도 설계한다. Java Q&A 연결·기본 채택·최종 test 개방은 아직 하지 않는다.
+
+[v2 원본 보고서](../experiments/results/m5-generation-v2.json)의 SHA는 `85a057d52a4a9375e89a18e1a701940c546e8feb39c979c995879654e43d1556`, [journal](../experiments/results/m5-generation-v2.progress.jsonl)은 `a2327b8b1c0e0cbdb96b604bcd4ae08893eb50a9ff13ed4bd6cd9a16035ca10f`다. 공개 사본은 원본 바이트 그대로이며 모델 없는 재생이 통과했다. 입력501~703 tokens, 출력 총628 tokens, Python 순차 생성 중앙값3.196초(0.868~4.654초), 최대 reserved3622MiB다. Java HTTP·동시 검색 모델·최대 길이·실사용 부하 수치가 아니다. 사용자 검수0·유료API/GPU/클라우드0·외부 서비스 배포0이다. 원격 CI·PR 통합은 후속 기록에 남긴다.
+
+[별도 AI 의미 검토](../experiments/results/m5-generation-v2.semantic-review.json)는 실제12사례·9주장을 원본 report/fixture hash에 연결한다. 로컬 재생은 Torch·Transformers·NumPy·safetensors import와 모델 파일·최종 test 질문·학습 pack 접근을 막은 별도 프로세스에서도 통과했다. 구현 head `93d6e2f`의 [원격 CI](https://github.com/lingter100/doctrail/actions/runs/38337916124)는 Python665passed/21skipped, 실제 Java HTTP11묶음·브라우저22개를 포함해 성공했다. 로컬686개와 원격의 선택 의존성 skip을 구분한다. 결과 문서·재생 CI까지 포함한 PR 최종 head는 통합 전에 별도로 확인한다.
+
 **M5 v1 실행 완료, 생성 설정 위반으로 기준 결과 무효.** 실제 GPU11요청과 빈 근거 사전 차단1개는 끝났으나 Transformers4.57.6이 요청한 `do_sample=False`를 모델 기본값 `True`로 바꾼 경고를 발견했다. 중단을 시도했을 때는 이미 모든 요청이 끝났고 실제 종료시킨 프로세스는 없다. `completed`를 등록한 greedy 설정 준수로 해석하지 않는다. [원본 보고서](../experiments/results/m5-generation-v1.json)·[진행 기록](../experiments/results/m5-generation-v1.progress.jsonl)과 [설정 감사](../experiments/results/m5-generation-v1.protocol-audit.json)를 보존한다. 기존 v1 소스를 바꾸지 않고 새 v2에서 실제 적용 설정을 검사하며, 프롬프트·질문·모델을 고쳐 점수를 튜닝하지 않는다.
 
 수정 v2 실행 전 전체 Python686개·Ruff를 통과했다. 실제 설치 라이브러리의 설정 준비 함수에서 v1 오류와 v2 greedy 적용을 모델 없는 CPU 검사로 재현했다. [v2 계획](../data/evaluation/m5-generation-plan-v2.json) SHA `f0ac2fd91c2356c03b5b53feaed729825641fec968be61880f9e02f311ce6045`에12개 소스/설계와 동일 입력을 고정한다. [v1 실패 분석·v2 사전 수정 범위](M5-GENERATION-ANALYSIS.md)를 기록한 뒤 새 실행을 한 번 수행한다.

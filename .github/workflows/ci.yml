@@ -76,6 +76,10 @@ jobs:
         run: uv run python -m scripts.replay_training_readiness --download-tokenizer-only --version all
       - name: Replay frozen main-dev ranking and quality decision without models
         run: uv run python -m scripts.evaluate_main_dev replay --report experiments/results/m4-main-dev-v1.json --journal experiments/results/m4-main-dev-v1.progress.jsonl
+      - name: Replay preserved generation failure and corrected greedy artifacts without models
+        run: |
+          uv run python -m scripts.evaluate_generation_smoke --replay experiments/results/m5-generation-v1.json
+          uv run python -m scripts.evaluate_generation_smoke_v2 --replay experiments/results/m5-generation-v2.json
   web:
     runs-on: ubuntu-latest
     defaults:
