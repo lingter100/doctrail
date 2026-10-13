@@ -4,6 +4,10 @@
 
 **사용자 요청으로 재개.** 2026-10-13 “진행해” 요청을 받아 중단 기록·Git 상태·진행 중인 프로세스를 확인했다. 중복 GPU 작업은 없고 기존 파일을 보존한다. `doctrail` 예약은 기존 한글 설명·이름·주기를 보존한 ACTIVE 상태로 재개·검증했다. 아래 일시중지는 과거 이력이며 현재 재개 승인을 대신하지 않는다.
 
+재개 후 통합: [PR #9](https://github.com/lingter100/doctrail/pull/9)는 `66d2406`으로 main에 병합됐다. 정확한 head의 [push CI](https://github.com/lingter100/doctrail/actions/runs/38325419320)와 [PR CI](https://github.com/lingter100/doctrail/actions/runs/38325423268)에서 java-service·backend·web이 모두 성공했다. 원격 Python429passed/20skipped(선택 모델 의존성 없음)·Chromium18passed·모델 없는 readiness v1/v2 재생을 확인했다. 로컬449개 통과와 원격 모델 미실행을 구분한다. GitHub API에서 작성자·커미터 모두 lingter100임을 확인했고 feature 브랜치를 정리했다. 새 `feat/main-dev-evaluation`에서는 기존 학습 저장본의 별도 dev 비교를 준비하며 아직 새 dev 추론은 실행하지 않았다.
+
+동일 통합 SHA의 [main CI](https://github.com/lingter100/doctrail/actions/runs/38325650456)도 성공했다.
+
 **사용자 요청으로 일시중지.** “일단 멈춰 나중에 다시 시작할게” 요청에 따라 작업과 서브에이전트를 중단하고 `doctrail` 예약을 PAUSED로 확인했다. 예약 설명 저장 중 생긴 한글 인코딩 오류도 정상 한글로 복구·검증했으며 예약은 재개하지 않았다. 사용자가 명시적으로 다시 시작하기 전에는 개발을 이어가지 않는다.
 
 중단 시점: `feat/train-readiness`, 마지막 커밋 `8a9d3eb`. 실제 학습·calibration·replay 및 로컬 검증은 완료됐지만 문서 변경은 일부 미커밋이고 PR 생성·push·원격 CI·main 통합은 아직 하지 않았다. GPU 작업은 끝났고 분석 에이전트는 중단했다. 재개하면 Git 상태부터 확인하고 `docs/M4-CALIBRATION-ANALYSIS.md`의 존재·완성 여부를 확인해 사례 분석을 마친 뒤 문서·PR·필수 CI 통합을 완료한다. 저장된 학습이나 calibration을 다시 실행하지 않는다. 주요 분석 단서: 001은 base의 한국어 대체 근거, 002는 다른 설명 청크가 있어 주석 지표와 답변 가능성을 구분해야 한다. @5 퇴보010·014·015, MRR 추가 퇴보003, 계속 누락016도 보존한다.

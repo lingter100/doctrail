@@ -119,3 +119,5 @@ AI가 작성한 질문78개에 자동 span 검사와 별도 AI 의미 검토가 
 사용자가 “진행해”라고 재개를 요청했다. 부모가 중단 기록·기존 파일·Git·작업 프로세스를 확인했고, 기존 학습·calibration 추론을 다시 실행하지 않았다. 예약을 ACTIVE로 복원한 뒤 한글 설명이 바뀌거나 깨지지 않았음을 저장값과 비교했다.
 
 실제 도구 수락 설정은 `calibration_analysis_resume`과 `main_dev_design` 모두 gpt-6-astra/xhigh다. 전자는 중단됐던 calibration 사례 분석을 저장 순위와 train 원문으로 완성하고, 후자는 다음 독립 dev 비교의 설계를 준비한다. 부모는 문서 통합과 로컬·원격 검증 및 GitHub Flow를 맡는다. 설계·분석·자동 검사는 AI 기여이며 사용자 검수나 사람의 PR 승인으로 기록하지 않는다.
+
+PR #9의 필수 CI 성공과 사용자 author/committer 연결을 확인한 뒤 main으로 fast-forward하고 GitHub merged 상태를 확인했다. 다음 실행기 구현·테스트 담당 `main_dev_runner`에 실제 수락된 설정은 gpt-6-astra/high다. 설계 에이전트와 구현 에이전트의 파일 소유권을 나누고 새 모델 실행은 부모가 사전 고정 이후 수행한다.
