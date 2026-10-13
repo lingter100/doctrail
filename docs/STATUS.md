@@ -2,6 +2,10 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
+**M5 첫 생성 계약 구현·실행 준비 중.** [PR #11](https://github.com/lingter100/doctrail/pull/11)은 `be896c3`으로 통합됐고 [main CI](https://github.com/lingter100/doctrail/actions/runs/38332721238)가 성공했다. 새 `feat/grounded-generation`에서 고정 Qwen3-1.7B 로컬 런타임, 엄격한 답변/보류·인용 검사와 합성12항목의 실행 계획을 준비한다. 원문 인용 일치와 의미 정확도를 분리하며 아직 생성 성공·Java 질의응답 연결을 주장하지 않는다. 기존 학습·calibration/main-dev를 반복하지 않았다.
+
+GPU 실행 전 검증: 전체 Python669개, Java82개, Playwright22개(Chromium19·순수 helper3), 프런트 타입·production build·Ruff 통과. Python 경고1개는 기존 Starlette/httpx deprecation이다. 새 watchdog은 fake 검사와 별도로 실제 CPU child process의 제한시간 초과·강제 종료를 확인했다. [동결 계획](../data/evaluation/m5-generation-plan-v1.json)의10개 소스/설계 바인딩·합성12개 입력 검증을 마쳤다. 계획 SHA는 `6adf2fda8837d2d6df54070a5c3fa583b8168c0b1430364719ed7ab01c4849b6`이며 결과를 보기 전에 커밋한다.
+
 [PR #10](https://github.com/lingter100/doctrail/pull/10)은 `1051af7`로 main에 통합됐고 [main CI](https://github.com/lingter100/doctrail/actions/runs/38327502543)는 성공했다. 완료된 모델 비교는 재실행하지 않았다.
 
 **M4 학습 저장본 로컬 운영 검증 완료.** `61285dd`의 깨끗한 작업 트리에서 실제 CUDA·Java·React의16검사 묶음을 통과했다. 권한 회수·문서 갱신/재처리/삭제·원문 근거·모델 identity·이력·worker 장애·base 복구와 실제 데스크톱/모바일 흐름을 확인했다. [결과·실패·한계](M4-OPERATIONS-RESULTS.md), [원본 보고서](../experiments/results/m4-terminal-service-v1.json), [실행 안내](MODEL-SERVING.md)를 따른다. 기본 BM25·base는 유지하고 학습 모델은 명시적 실험 경로다. 운영 통과를 새로운 검색 품질이나 기본 모델 채택으로 해석하지 않는다.
