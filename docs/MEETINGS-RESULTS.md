@@ -1,5 +1,32 @@
 # 회의록 확장: 실제 실행과 실패 기록
 
+## 9B 비교: 실행 가능성과 답변 품질을 분리한 결과
+
+`f81fd8b`에 고정한 [계획](MEETINGS-QWEN35-PLAN.md)으로 Qwen3.5-9B Q5_K_M를 GPU 24개 layer와 CPU에 나누어 실행했다. 원 모델 revision, GGUF SHA, native build, 같은 v2 prompt·JSON 문법·입출력 한도·실제 greedy 설정을 결과에 기록했다. 모델 크기만 분리한 인과 비교는 아니다.
+
+- [중립 readiness 원본](../experiments/results/meetings-qwen35-readiness-v1.json): 사실 질문 없는 짧은 입력 37 tokens와 긴 입력 3,034 tokens를 각각 한 번 실행했다. 1.25초·6.86초, 정상 종료와 설정·소스 보존을 확인했다. 답변 품질 검사는 아니다.
+- 로드 이후 0.5초 간격 16표본의 native RSS 최대는 6,355.8125MiB, 전체 GPU 최대는 4,619MiB다. 시작 구간 전체와 순간 peak, 모델만의 GPU 할당은 측정하지 않았다.
+- [알려진 질문 4건 원본](../experiments/results/meetings-qwen35-known-v1.json): 구조 검사 2통과·2실패. Python 어댑터 지연은 순서대로 13.128·4.249·9.634·11.598초다. Java HTTP·동시 요청 지연이 아니다.
+- [별도 AI 의미 검토](../experiments/results/meetings-qwen35-known-v1.semantic-review.json): 전체 기준 1통과·3실패. 원본 report SHA에 연결하고 사용자 검수는 0이다.
+
+| 사례 | 관측 결과 | 판정 |
+|---|---|---|
+| 여러 공개 회의 | beta 예정과 후속 출시 보고는 구분했지만, 인용에서 Markdown 표식을 제거했다 | 서버의 정확 인용 검사에서 거절 |
+| 근거 없는 예산 | 보류 출력 | 통과 |
+| 진행자 안내 | 곡선 따옴표를 일반 따옴표로 바꾸었고 채팅 공유 항목을 빠뜨렸다 | 인용·완전성 실패 |
+| 한국어·영어 복합 | 변경 날짜·보관 기간·로그 금지는 답했지만, 추가한 개인정보 이유가 선택된 인용에는 없다 | 전체 원문에는 이유가 있어도 주장별 인용 지지는 부족 |
+
+후처리로 표식이나 따옴표를 고쳐 통과시키지 않았다. 자연어 답변 readiness는 false이며 기존 네 사례에 프롬프트를 더 맞추지 않는다. 새 격리 검증 12건은 실행하지 않았고, 모델 호출은 중립 2회+알려진 질문 4회뿐이다. 9B를 실제 Java 기본 답변 모델로 채택하지 않는다.
+
+재현 명령은 아래와 같다. 이미 완료한 실행을 다시 수행하라는 지시가 아니며, 각 출력 경로는 새 경로여야 한다. 가중치와 runtime은 ignored 모델 디렉터리에 별도로 준비해야 한다.
+
+```text
+uv run --locked --group retrieval --no-sync python -m scripts.probe_meeting_qwen35_readiness --plan data/evaluation/meetings-qwen35-candidate-plan-v1.json --output .local/meeting-qwen35-readiness-v1
+uv run --locked --group retrieval --no-sync python -m scripts.probe_meeting_qwen35 --plan data/evaluation/meetings-qwen35-candidate-plan-v1.json --output .local/meeting-qwen35-known-v1
+```
+
+새 `evaluate_meeting_answer_candidate`는 참인 독립 gate·report hash·소스 바인딩을 먼저 요구한다. 현재 false gate에서는 모델을 시작하지 않는다. 합성 모의 테스트 통과를 새 검증 자료에서의 모델 성공으로 기록하지 않는다. [무료 구조 개선](MEETINGS-CITATION-ARCHITECTURE-PROPOSAL.md)과 [승인이 필요한 유료 비교](MEETINGS-API-COMPARISON-PROPOSAL.md)는 모두 후속 계획이며 이번 실측에 섞지 않는다.
+
 2026-10-13. 이 기능은 기존 Java 문서 서비스를 확장한다. 회의 원문·권한·청크·리비전은 기존 저장을 재사용하고 React 화면과 로컬 Qwen worker를 연결한다. 공개 Jupyter 회의록과 별도의 AI 작성 한국어 사례를 사용한 **개발·운영 검증**이다. 독립 benchmark, 사용자 검수 또는 배포 완료를 뜻하지 않는다.
 
 ## 구현한 경계
