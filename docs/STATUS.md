@@ -2,6 +2,10 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
+**최신 사용자 요청: 회의록 지능형 관리 1차 확장 구현 중.** 기존 `main`의 `3d39c5a`에서 깨끗한 상태와 중복 모델 작업·잠금 부재를 확인하고 `feat/meeting-intelligence`를 시작했다. [공통 설계](MEETINGS-DESIGN.md)를 따라 문서·권한·리비전 저장을 재사용한다. Java 서비스, React 화면, 별도 로컬 AI worker를 구현하며 아직 기능 완료나 모델 품질 통과를 주장하지 않는다. 녹음·STT·실시간·외부 회의 도구 연동은 2차 범위로 보류한다.
+
+M5-B 준비 결과와 18개 동결 파일을 보존하고 예정된 비교 실행은 이 새 사용자 우선순위 뒤로 미룬다. 기존 validation 질문·정답에 접근하거나 기존 모델 실험을 반복하지 않는다. 새 회의 기능의 개발·통합 검증 자료는 별도이며 일반화 성능 평가가 아니다. 실제 공개 Jupyter 회의록 2건·진행자 운영 문서 1건은 `data/manifests/meeting-public-v1.json`의 고정 revision·BSD-3-Clause·원문/처리본 hash를 따른다. 소량의 공개 검증 fixture만 저장하며 접속·연락처 행 제거를 명시한다. AI 작성 한국어 회의 2건·영어 운영 문서 1건은 별도 synthetic 파일이다. 사용자 검수는 0이다.
+
 **M5-B 자료·정책 사전 준비 완료, 새 생성은 0회.** [사전등록](M5-CALIBRATION-PLAN.md)과 [준비 결과·실패·재현법](M5B-PREPARATION.md)을 따른다. Registry를 질문보다 먼저 `2de1487`에 고정하고 calibration 24·validation 24·별도 예시 3개를 작성했다. 합성 원문은 81개(38/38/5)다. 서로 다른 작성·검토 역할로 51개 항목의 의미를 검토했고 초안 결함 7개를 수정·재검토했다. Validation을 읽기 전에 예시는 `f7e9692`로 고정했다. 부모·prompt 작성자는 validation 문구·정답·검토 본문을 읽지 않고 hash·집계만 확인했다. 사용자 검수는 0이다.
 
 고정 tokenizer로 양쪽 정책 각각 48입력, 총 96개의 전체 prompt를 확인했다. 최대 입력은 baseline 753, few-shot 1,039 tokens로 cap 1,536 아래이며 잘림 0·초과 0이다. 실제 Torch import·가중치 열기·기존 평가 자료 접근을 차단한 별도 프로세스에서 통과했고 모델 호출은 없다. 계열 간 정확 중복과 0.85 문자열 유사도 경고는 각각 0개지만 이를 의미 독립성의 자동 증명으로 쓰지 않는다. [준비 영수증](../experiments/results/m5b-preparation-v1.json) SHA는 `95cdd2f70139f0bb08f331909aedc97a67e1debc17fa790c9ff42836f04dc5ad`, [18파일 동결](../data/evaluation/m5b-preparation-freeze-v1.json) SHA는 `09e055bc9928efab2f479ff86a8ba7114aad7818d19dba12adac30f21dc1ddfb`다. `generation_ready=false`이며 실제 생성 완료·성능 개선·서비스 채택을 뜻하지 않는다.

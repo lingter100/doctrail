@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-13 회의록 지능형 관리 확장
+
+사용자가 1차·2차 범위와 실제 기능 연결·기존 호환성·실제 데이터 검증을 지정했다. AI가 사용자 검수나 승인을 생성하지 않는다. 실제 도구가 수락한 설정은 `meetings_design=gpt-6-astra/xhigh`, `meetings_backend=gpt-6-astra/high`, `meetings_frontend=gpt-6-astra/high`, `meetings_ai=gpt-6-astra/high`다. 부모 채팅 자체의 설정을 변경했다고 주장하지 않는다. 설계 담당은 공통 계약, backend는 Java 저장·권한·검색·HTTP 검증, frontend는 React 화면·브라우저 회귀, AI 담당은 새 Python worker·로컬 모델 연결을 맡는다.
+
+부모는 기존 상태 보존, 출처·이용 조건이 확인된 공개 자료와 재현 코드 준비, 별도 합성 운영 사례, 실제 서비스 통합 검증·품질 실패 분석·문서·Git 통합을 맡는다. 공개 회의록의 원 저자는 Project Jupyter 기여자들이며 AI가 원본을 작성한 것이 아니다. 합성 회의록·질문과 AI 검토·자동 검사는 실제 사용자 자료나 사용자 검수로 표시하지 않는다. 개발 중인 범위와 완료 증거는 STATUS의 최신 기록을 따른다.
+
 ## 2026-10-13 M5-B 자료 준비
 
 도구가 수락한 설정은 설계 `m5b_design=gpt-6-astra/xhigh`, calibration·예시 작성 `m5b_cal_author=gpt-6-astra/xhigh`, 검증 코드 구현 `m5b_preflight=gpt-6-astra/high`다. 부모 채팅의 모델을 변경하지 않았다. 문서 계열·문항 배정을 먼저 커밋하고 이후 작성자에게 시작을 알렸으며, 구현자와 부모는 validation 질문·정답 내용을 읽어 정책을 조정하지 않는다. 프로그램은 원문/span·hash·분포·입력 길이를 검사하고 내용을 출력하지 않는다.
