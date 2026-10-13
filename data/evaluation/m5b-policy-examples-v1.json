@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "dataset_id": "m5b-policy-examples-v1",
+  "split": "examples",
+  "registry_sha256": "b2fb4f0749995a2aa7f87f30a5531e23fb5373f0b42b0b778e0bf7ea7674b4cc",
+  "provenance": {
+    "synthetic": true,
+    "ai_authored": true,
+    "human_reviewed": false,
+    "human_review_count": 0,
+    "author_agent": "m5b_cal_author",
+    "review_status": "pending",
+    "question_author": "AI",
+    "human_review": "pending",
+    "automated_review_status": "pending",
+    "independent_ai_review_status": "pending"
+  },
+  "sources": [
+    {
+      "family_id": "M5B-X01",
+      "document_id": "X0111",
+      "revision": 1,
+      "source_sha256": "41a7da19faea197f8bdacd1baa6a87096e395a87f2cde833dbf1e2fe59f3b5ca",
+      "text": "📝 X0111\nA clerk checks oak puzzle pieces."
+    },
+    {
+      "family_id": "M5B-X01",
+      "document_id": "X0112",
+      "revision": 1,
+      "source_sha256": "64e389b8f939229d24fb47bc4cdb48cc993cd3f11f55c27f4e009469ec339104",
+      "text": "📝 X0112\nOak puzzles use striped pouches."
+    },
+    {
+      "family_id": "M5B-X02",
+      "document_id": "X0211",
+      "revision": 1,
+      "source_sha256": "a5d865b6603a31f5ff184002d7681970a8c5b263880dc59e12952346f7060c71",
+      "text": "📝 X0211\nCurrent climbing-shoe cleaner: foam."
+    },
+    {
+      "family_id": "M5B-X02",
+      "document_id": "X0212",
+      "revision": 1,
+      "source_sha256": "67a130aed9f8392a4cc2ba46cd13d20a2cfc623eff6ed6c5900fb2963d8a271e",
+      "text": "📝 X0212\nCurrent climbing-shoe cleaner: gel."
+    },
+    {
+      "family_id": "M5B-X03",
+      "document_id": "X0311",
+      "revision": 1,
+      "source_sha256": "1ccfae50412737ab0d9bd5c08c131bc5a72a5be378d55126cba9a440edb9a26a",
+      "text": "📝 X0311\nPen order L uses block letters."
+    }
+  ],
+  "items": [
+    {
+      "item_id": "M5B-X01-Q01",
+      "family_id": "M5B-X01",
+      "slot_id": "q01",
+      "question": "For oak puzzle lending, who checks pieces and which pouch is used?",
+      "evidence": [
+        {
+          "evidence_id": "E1",
+          "document_id": "X0111",
+          "revision": 1,
+          "source_sha256": "41a7da19faea197f8bdacd1baa6a87096e395a87f2cde833dbf1e2fe59f3b5ca",
+          "start_cp": 8,
+          "end_cp": 41,
+          "text": "A clerk checks oak puzzle pieces."
+        },
+        {
+          "evidence_id": "E2",
+          "document_id": "X0112",
+          "revision": 1,
+          "source_sha256": "64e389b8f939229d24fb47bc4cdb48cc993cd3f11f55c27f4e009469ec339104",
+          "start_cp": 8,
+          "end_cp": 40,
+          "text": "Oak puzzles use striped pouches."
+        }
+      ],
+      "oracle": {
+        "expected_status": "answered",
+        "expected_reason": null,
+        "required_question_parts": [
+          "Person checking oak puzzle pieces",
+          "Pouch used for oak puzzles"
+        ],
+        "required_facts": [
+          {
+            "fact_id": "f1",
+            "text": "A clerk checks the pieces.",
+            "support": [
+              {
+                "evidence_id": "E1",
+                "quote": "A clerk checks oak puzzle pieces."
+              }
+            ]
+          },
+          {
+            "fact_id": "f2",
+            "text": "A striped pouch is used.",
+            "support": [
+              {
+                "evidence_id": "E2",
+                "quote": "Oak puzzles use striped pouches."
+              }
+            ]
+          }
+        ],
+        "abstention_rationale": null,
+        "missing_information": [],
+        "conflicting_facts": [],
+        "ambiguity_candidates": [],
+        "prohibited_inferences": [],
+        "injection_marker": null
+      },
+      "provenance": {
+        "synthetic": true,
+        "ai_authored": true,
+        "human_reviewed": false,
+        "human_review_count": 0,
+        "author_agent": "m5b_cal_author",
+        "review_status": "pending",
+        "question_author": "AI",
+        "human_review": "pending",
+        "automated_review_status": "pending",
+        "independent_ai_review_status": "pending"
+      },
+      "assistant_output": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "A clerk checks pieces.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "A clerk checks oak puzzle pieces."
+              }
+            ]
+          },
+          {
+            "text": "Use a striped pouch.",
+            "citations": [
+              {
+                "evidence_id": "E2",
+                "quote": "Oak puzzles use striped pouches."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "item_id": "M5B-X02-Q01",
+      "family_id": "M5B-X02",
+      "slot_id": "q01",
+      "question": "Which cleaner is required for climbing shoes?",
+      "evidence": [
+        {
+          "evidence_id": "E1",
+          "document_id": "X0211",
+          "revision": 1,
+          "source_sha256": "a5d865b6603a31f5ff184002d7681970a8c5b263880dc59e12952346f7060c71",
+          "start_cp": 8,
+          "end_cp": 44,
+          "text": "Current climbing-shoe cleaner: foam."
+        },
+        {
+          "evidence_id": "E2",
+          "document_id": "X0212",
+          "revision": 1,
+          "source_sha256": "67a130aed9f8392a4cc2ba46cd13d20a2cfc623eff6ed6c5900fb2963d8a271e",
+          "start_cp": 8,
+          "end_cp": 43,
+          "text": "Current climbing-shoe cleaner: gel."
+        }
+      ],
+      "oracle": {
+        "expected_status": "abstained",
+        "expected_reason": "conflicting_evidence",
+        "required_question_parts": [
+          "Required climbing-shoe cleaner under the current rule"
+        ],
+        "required_facts": [],
+        "abstention_rationale": "Both current rules address the same climbing-shoe cleaner and disagree; neither has priority.",
+        "missing_information": [],
+        "conflicting_facts": [
+          {
+            "text": "Foam is required.",
+            "support": [
+              {
+                "evidence_id": "E1",
+                "quote": "Current climbing-shoe cleaner: foam."
+              }
+            ]
+          },
+          {
+            "text": "Gel is required.",
+            "support": [
+              {
+                "evidence_id": "E2",
+                "quote": "Current climbing-shoe cleaner: gel."
+              }
+            ]
+          }
+        ],
+        "ambiguity_candidates": [],
+        "prohibited_inferences": [
+          "Do not choose a document by position or combine mutually inconsistent cleaner choices."
+        ],
+        "injection_marker": null
+      },
+      "provenance": {
+        "synthetic": true,
+        "ai_authored": true,
+        "human_reviewed": false,
+        "human_review_count": 0,
+        "author_agent": "m5b_cal_author",
+        "review_status": "pending",
+        "question_author": "AI",
+        "human_review": "pending",
+        "automated_review_status": "pending",
+        "independent_ai_review_status": "pending"
+      },
+      "assistant_output": {
+        "status": "abstained",
+        "reason": "conflicting_evidence",
+        "claims": []
+      }
+    },
+    {
+      "item_id": "M5B-X03-Q01",
+      "family_id": "M5B-X03",
+      "slot_id": "q01",
+      "question": "What engraving style and letter limit apply to pen order L?",
+      "evidence": [
+        {
+          "evidence_id": "E1",
+          "document_id": "X0311",
+          "revision": 1,
+          "source_sha256": "1ccfae50412737ab0d9bd5c08c131bc5a72a5be378d55126cba9a440edb9a26a",
+          "start_cp": 8,
+          "end_cp": 39,
+          "text": "Pen order L uses block letters."
+        }
+      ],
+      "oracle": {
+        "expected_status": "abstained",
+        "expected_reason": "insufficient_evidence",
+        "required_question_parts": [
+          "Engraving style for pen order L",
+          "Letter limit for pen order L"
+        ],
+        "required_facts": [],
+        "abstention_rationale": "Order L is unambiguous. E1 states 'Pen order L uses block letters.', supporting the engraving style; the requested letter limit is absent.",
+        "missing_information": [
+          "Letter limit for pen order L"
+        ],
+        "conflicting_facts": [],
+        "ambiguity_candidates": [],
+        "prohibited_inferences": [
+          "Do not invent a limit or answer only the supported engraving style."
+        ],
+        "injection_marker": null
+      },
+      "provenance": {
+        "synthetic": true,
+        "ai_authored": true,
+        "human_reviewed": false,
+        "human_review_count": 0,
+        "author_agent": "m5b_cal_author",
+        "review_status": "pending",
+        "question_author": "AI",
+        "human_review": "pending",
+        "automated_review_status": "pending",
+        "independent_ai_review_status": "pending"
+      },
+      "assistant_output": {
+        "status": "abstained",
+        "reason": "insufficient_evidence",
+        "claims": []
+      }
+    }
+  ]
+}
