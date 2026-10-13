@@ -177,3 +177,6 @@ PR#11의 자동 Codex 코드 리뷰가 실행 lock의 교체 소유권 문제를
 ## 2026-10-13 · 근거 우선 및 구조 제한 답변 비교
 
 실제 수락 설정 meetings_ai=Astra high는 새 v2 정책과 decoder 모듈·검사를, meetings_local_model=Astra xhigh는 별도 설계 판단을, meetings_review=Astra high는 네 답변 의미와 코드의 독립 AI 검토를 맡았다. 부모는 새 실행기·계획/소스 hash 고정·실제 로컬 실행·원본 보존·CI 확인을 수행했다. v2 실패는 유지하며 JSON·인용·의미를 따로 판단한다. 사람 검수0, 유료 자원0이며 부모 채팅 모델을 변경했다고 주장하지 않는다.
+
+
+같은 수락 설정의 meetings_ai(Astra high)는 새 실험 worker/launcher와15개 검사를 추가했다. meetings_review(Astra high)는 decoder 네 답변을 검토했고 운영 검사에서 이미 숨겨진 작업의 삭제 검사, AI 원본 단순 불일치 검사, 검색 양성 대조 부재를 찾아냈다. 부모는 원본 사본 동일성·삭제 전 ready 작업 노출·수정 원문 소유자 검색을 실제 검증하도록 보완했다. 이는 AI가 수행하는 자동 운영 검사이며 사용자 승인·검수가 아니다.

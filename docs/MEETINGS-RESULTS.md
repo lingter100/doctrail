@@ -12,6 +12,12 @@
 
 ## 실제 실패를 보존한 이유
 
+### 출력 구조 제한 비교
+
+`730ea0c`에서 같은 네 답변을 각각1회 실행했다. [원본](../experiments/results/meetings-answer-decoder-v1.json), [별도 AI 의미 검토](../experiments/results/meetings-answer-decoder-v1.semantic-review.json)를 보존한다. JSON 파싱4/4, 엄격한 원문/형식 검사3/4, 별도 의미 기준2/4다. 진행자 답변은 잘못된 ID와 존재하지 않는 합성 인용으로 차단됐다. 공개 답변은 출시 시점 과장이 남았다. 세 답변 raw는 v2와 정확히 같으며 이 실패를 개선으로 보고하지 않는다. 네 건의 Python 시간은6.391·1.169·5.651·6.266초로 Java 응답 시간과 구분한다.
+
+다음 실제 운영 검사는 AI 분석·결정 연결·작업 편집·권한·문서 생명주기만 대상으로 한다. 자연어 답변 검사0이며 별도 실패를 취소하지 않는다. 같은 프롬프트 추가 튜닝은 중단하고 모델/설계 후속 판단을 별도로 한다.
+
 ### 원문 인용 우선 v2의 네 답변
 
 `38d02a9`에 새 정책·실행 계획을 먼저 고정하고 답변4건만 각1회 수행했다. [원본](../experiments/results/meetings-answer-development-v2.json)과 [별도 AI 의미 검토](../experiments/results/meetings-answer-development-v2.semantic-review.json)를 보존한다. 한국어 복합 답변은2026-10-08의30일→7일 변경과 원문 질문 로그 금지를 한국어로 정확히 인용했다. 없는 예산은 실제 보류했다.
