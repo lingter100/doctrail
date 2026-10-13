@@ -2,6 +2,8 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
+Main-dev 실행 준비: `scripts/evaluate_main_dev.py`와 별도 고정 계획·설계를 추가했다. 모델 없는 사전 검사에서 원 corpus·질문·과거 M3 순위·학습 receipt chain을 확인했다. 전체 Python477개(최종 추가 실패 주입 검사는 별도29개 통과), Java59개, Chromium18개와 프런트 타입·빌드를 로컬 검증했다. 실행 중 오류·강제 종료에도 안전한 후보 순위 기록을 보존하며 재시도 claim을 거부한다. 다음 커밋으로 소스·계획을 동결한 뒤 한 번의 base/terminal 비교를 실행한다. 이 문단 작성 시 새 dev 추론은 아직 미실행이다.
+
 **사용자 요청으로 재개.** 2026-10-13 “진행해” 요청을 받아 중단 기록·Git 상태·진행 중인 프로세스를 확인했다. 중복 GPU 작업은 없고 기존 파일을 보존한다. `doctrail` 예약은 기존 한글 설명·이름·주기를 보존한 ACTIVE 상태로 재개·검증했다. 아래 일시중지는 과거 이력이며 현재 재개 승인을 대신하지 않는다.
 
 재개 후 통합: [PR #9](https://github.com/lingter100/doctrail/pull/9)는 `66d2406`으로 main에 병합됐다. 정확한 head의 [push CI](https://github.com/lingter100/doctrail/actions/runs/38325419320)와 [PR CI](https://github.com/lingter100/doctrail/actions/runs/38325423268)에서 java-service·backend·web이 모두 성공했다. 원격 Python429passed/20skipped(선택 모델 의존성 없음)·Chromium18passed·모델 없는 readiness v1/v2 재생을 확인했다. 로컬449개 통과와 원격 모델 미실행을 구분한다. GitHub API에서 작성자·커미터 모두 lingter100임을 확인했고 feature 브랜치를 정리했다. 새 `feat/main-dev-evaluation`에서는 기존 학습 저장본의 별도 dev 비교를 준비하며 아직 새 dev 추론은 실행하지 않았다.

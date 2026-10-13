@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "evaluation_id": "m4-main-dev-v1",
+  "plan_revision": "1",
+  "status": "preregistered_not_run",
+  "input_bindings": {
+    "manifest": {
+      "path": "data/manifests/kubernetes-v1.json",
+      "sha256": "e4d33997b5589bd8d9cc5c56691da5940eba3a7b6554c671b8c39b78910fe69a"
+    },
+    "questions": {
+      "path": "data/evaluation/m2-dev-v1.1.jsonl",
+      "sha256": "9cce5a304f3f430c626aae2c1c0f267e0f3abc2dba16ccd7f9ec2f3989d28cb2"
+    },
+    "historical": {
+      "path": "experiments/results/m3-retrieval-dev-v1.json",
+      "sha256": "76aa4bbc0f827fc4022dbab289eb730072ded56122b8ed8107f72f67ee32a63f"
+    },
+    "model_manifest": {
+      "path": "data/models/m3-models.json",
+      "sha256": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1"
+    },
+    "checkpoint": {
+      "path": "data/models/m4-terminal-v1.json",
+      "sha256": "62e530d3094e98b336d039f10956c8e0e2a39d24d66b07818e92a46f0aac10fb"
+    },
+    "calibration_plan": {
+      "path": "data/training/m4-calibration-evaluation-v1.1.json",
+      "sha256": "3b57c5b2bb2a256b19340edcfbec20943bd7bf39c1d56296dbdbe5959f88e4f4"
+    },
+    "calibration_report": {
+      "path": "experiments/results/m4-calibration-v1.json",
+      "sha256": "bc322c0b3767a617c26bf67fefc41bc7f43d6af3e5c024538a4ae5f485cc55ee"
+    },
+    "execution_plan": {
+      "path": "data/training/m4-e5-execution-v2.json",
+      "sha256": "488220676c91bfbe0237d771c22fe5523f675942c30163bcb585ca81e523ffab"
+    },
+    "ready_manifest": {
+      "path": "data/training/m4-training-manifest-v2.json",
+      "sha256": "0a902c6cde10082bc722620c0d33ec402c953a28dd4256bb6cbfe7d0e2eeb1ce"
+    },
+    "train_report": {
+      "path": "experiments/results/m4-e5-train-v2.json",
+      "sha256": "917feb7fd7c6d634ca8b7203bd7d3e500136721110268677400ca9253ffc21d9"
+    },
+    "probe_report": {
+      "path": "experiments/results/m4-e5-probe-v2.json",
+      "sha256": "2f08716fa1d6f233d4eb7deca1f59f2b9e9e49e2922a2063801c84f0a3a1be00"
+    },
+    "training_plan": {
+      "path": "data/training/m4-plan-v1.json",
+      "sha256": "579e8ce0c6efbdc6aafe7906e873dbf051e0fecd0266e2f6cacefcda70c3e8ba"
+    },
+    "resource_followup": {
+      "path": "data/training/m4-resource-followup-v1.json",
+      "sha256": "7d3d5b8c1e66b7831a84c3f461a110ad1fee1023c69837da3ab17e925c474ad6"
+    },
+    "calibration_analysis": {
+      "path": "docs/M4-CALIBRATION-ANALYSIS.md",
+      "sha256": "8b7ee997ba4160a247a2097c153dc2a1fea0769e1df0e88ab3b3cc6673d7dbf9"
+    },
+    "lock": {
+      "path": "uv.lock",
+      "sha256": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+    },
+    "project": {
+      "path": "pyproject.toml",
+      "sha256": "db45870df5b6d4fd543e14b9d837d25614033f9049692cead50e1a366a72308d"
+    }
+  },
+  "source_sha256_lf": {
+    "scripts/analyze_candidates.py": "6575783c12fe0d243d9cd17251244276c12d0a6a746e7df88d8a9677e4197c5d",
+    "scripts/evaluate_candidates.py": "21efbe7614dbbd7881632fd0e60aa5a55950285aaf7b799dfbe2ce2fe36d3f57",
+    "scripts/evaluate_dataset.py": "4de523c5b46415e6ec105e102efa30ee9146b4ec0ed0f2c18705f3c9f00c40fe",
+    "scripts/evaluate_main_dev.py": "7f65c0710027b9be5bd129e8c072a71649c037df6c096de35ac7d1d3b13906fb",
+    "scripts/evaluate_retrieval.py": "0cbc82179ee1218ac2c1bd038fe986789d4b0526f5abb2f3f019a460ff28d037",
+    "scripts/evaluate_training.py": "f513466f80db0022804b13e25907dbb018eb315363e4a3c141582aebdbcb5d4f",
+    "scripts/prepare_corpus.py": "181de3ed388f76ec66e13d851b267ddf7dded0046829a816cf03b8afc28bce57",
+    "scripts/prepare_training.py": "9a1497d292e82df5a74ca6984c5d44497f57199a35ed15828ca529f1d97408de",
+    "scripts/prepare_training_ready.py": "89090f664010fc0181bf11fc8967fba8dedd87c8238cf81bd36083880cb5ac2a",
+    "scripts/question_dataset.py": "37806c6c0a33cbfd057a5ead3209e331ee5d8478703e5d4d456d5722f92f855b",
+    "scripts/train_embedding.py": "1bc7f71c60012fbfc17e6aaa793302a89826a07acb775bdaae806e5d4a9a0df5",
+    "scripts/train_embedding_v2.py": "555b63c47dfedd7c78fb582446402004dc7b4fb8bb71e9beefdfa1dc96a9f0a4",
+    "scripts/validate_splits.py": "81fa8bfb482c6a149a7e6445e81319d7069b270b745ed4c7b0a35c7f2233a3ce",
+    "scripts/validate_training_reviews.py": "224a49ce9b6de7c9c48a5a48b010e97c833f4bb352217d500db88a924e9cba03",
+    "src/doctrail/__init__.py": "5a97f0d9f1932ccb8226c49ad4b84ea55503300b360c040fbd60d381877370cc",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/model_retrieval.py": "0b1f60e3f38daa8f6dc85642c17832a82c6ea32ec87f3733aa8aa3fbc63dd5b4",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "src/doctrail/training.py": "9d0e6913f77b7f28114e7cad737afdc66dc786edc6620f97481f0cdeeaabd3aa",
+    "tests/test_main_dev_evaluation.py": "fb3c3dfb0c5619fed3f472de2ef50654fef9b494d0c404186b21770784f7a90e"
+  },
+  "design_binding": {
+    "path": "docs/M4-MAIN-DEV-DESIGN.md",
+    "sha256": "48aae413aef7dce71431e45c4ec12b88fa86bb02125dfdd0125ba8c0c5fa0fe5"
+  },
+  "configuration": {
+    "methods": [
+      "base_fresh",
+      "terminal_fresh"
+    ],
+    "questions": 79,
+    "positive_questions": 59,
+    "documents": 313,
+    "chunks": 3588,
+    "required_groups": 72,
+    "candidate_count": 50,
+    "final_chunks": 10,
+    "evidence_chunks": 5,
+    "device": "cuda",
+    "dtype": "float32",
+    "attention_implementation": "eager",
+    "passage_batch_size": 8,
+    "query_batch_size": 1,
+    "max_length": 512,
+    "query_prefix": "query: ",
+    "passage_prefix": "passage: ",
+    "pooling": "attention_masked_mean_then_l2",
+    "truncation_side": "right",
+    "tokenizer": "same_frozen_base_tokenizer",
+    "seed": 42,
+    "warmup_repetitions": 2,
+    "warmup_query": "What is a Kubernetes Pod?",
+    "warmup_passage": "A Pod is the smallest deployable unit of computing in Kubernetes.",
+    "measured_passes": 1,
+    "concurrency": 1,
+    "tie_break": "original_corpus_order",
+    "torch_cuda_matmul_allow_tf32": false,
+    "torch_cudnn_allow_tf32": true,
+    "torch_deterministic_algorithms": false,
+    "torch_cudnn_deterministic": false,
+    "torch_cudnn_benchmark": false
+  },
+  "primary_comparator": "base_fresh",
+  "historical_bridge": "m3_dense_saved",
+  "quality_gate": {
+    "denominator": 59,
+    "minimum_at50_count_gain": 1,
+    "minimum_at5_count_gain": 0,
+    "pass": "eligible_for_separate_operational_validation",
+    "fail": "retain_base"
+  },
+  "failure_policy": {
+    "automatic_retry": false,
+    "fallback": false,
+    "partial_quality_decision": false,
+    "after_scoring_attempt_consumed": true
+  },
+  "test": "locked",
+  "service_adoption": false,
+  "human_review": "pending"
+}

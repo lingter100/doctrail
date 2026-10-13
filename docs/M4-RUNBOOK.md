@@ -65,7 +65,35 @@ uv run --locked --group retrieval --no-sync python -m scripts.evaluate_training 
 uv run --locked --no-sync python -m scripts.evaluate_training replay --evaluation-plan data/training/m4-calibration-evaluation-v1.1.json --report experiments/results/m4-calibration-v1.json
 ```
 
-## 실패와 복구
+## 별도 main-dev 비교와 모델 없는 재생
+
+[고정 설계](M4-MAIN-DEV-DESIGN.md)는 전체 공개 코퍼스313문서·3,588청크와 기존 dev79질문을 사용한다. 원래 base와 마지막 학습 저장본을 각각 새로 실행하며, 저장 M3 순위는 과거 비교 확인에만 쓴다. 양성59질문의 전체 근거 @50이1개 이상 증가하고 @5 수가 줄지 않아야 별도 운영 검증 후보가 된다. Test는 열지 않는다.
+
+```powershell
+uv run --locked --no-sync python -m scripts.evaluate_main_dev preflight
+```
+
+이 사전 검사는 공개 corpus와 receipt chain, 고정 입력·소스·과거 순위를 확인한다. 모델 가중치·로컬 학습 pack·Torch가 필요 없다. 실제 비교 전에는 계획·소스·설계를 커밋하고, 동시에 실행 중인 모델 작업이 없는지 확인한다. 실제 `run`은 원 base와 manifest에 연결된 마지막 저장본 모두가 있어야 한다. 이 명령을 일상 확인용으로 다시 실행하지 않는다.
+
+```powershell
+$freezeCommit = git rev-parse HEAD
+uv run --locked --group retrieval --no-sync python -m scripts.evaluate_main_dev run `
+  --evaluation-plan data/evaluation/m4-main-dev-evaluation-v1.json `
+  --output-dir .local/m4-main-dev-v1 --freeze-commit $freezeCommit
+```
+
+`freeze-commit`의 Git blob도 파일 해시와 일치해야 한다. 이미 사용한 계획의 claim과 출력 디렉터리를 보존하고, 오류 뒤 자동 재시도하거나 설정을 바꾸지 않는다. 성공 보고서와 journal을 공개 결과에 보존한 뒤 사용하는 검증 명령은 다음과 같다.
+
+```powershell
+uv run --locked --no-sync python -m scripts.evaluate_main_dev replay `
+  --evaluation-plan data/evaluation/m4-main-dev-evaluation-v1.json `
+  --report experiments/results/m4-main-dev-v1.json `
+  --journal experiments/results/m4-main-dev-v1.progress.jsonl
+```
+
+이 재생은 저장 순위·지표·판정·기록의 일관성 검사다. 실제 모델 파일·tokenization·GPU 점수·시간을 새로 확인했다는 뜻이 아니다. 결과와 운영 채택 여부는 [STATUS](STATUS.md)를 확인한다.
+
+## 실패와 복구 원칙
 
 - 준비 v1의 음성 부족·잘림 실패는 v2 성공으로 지우지 않는다.
 - `.local` 경로 사전 검사 실패는 모델 로드 전 오류다. v1.1의 비유한 gradient norm 실패는 backward 뒤 optimizer 전 오류다.
