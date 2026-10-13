@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "C1CAL-01",
+      "operation": "answer",
+      "payload": {
+        "schema_version": 1,
+        "query": "PEP 작성자가 내용 검토와 최종 결정을 정식 요청하려면 언제 어디에서 시작해야 해? PEP 13에 따르면 Council의 권한 행사 투표에서 회원의 참여 의무, 이해상충 처리, 가결 기준은 각각 무엇이야?",
+        "contexts": [
+          {
+            "document_id": "C1-PY-PEP1",
+            "revision": 1,
+            "chunk_id": "C1-PY-PEP1-review",
+            "title": "PEP 1 - PEP Purpose and Guidelines — PEP Review & Resolution",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 14991,
+            "end_offset": 15730,
+            "text": "PEP Review & Resolution\n-----------------------\n\nOnce the authors have completed a PEP, they may request a review for\nstyle and consistency from the PEP editors.\nHowever, content review and acceptance of the PEP is ultimately the\nresponsibility of the Steering Council, which is formally initiated by\nopening a `Steering Council issue`_ once the authors (and sponsor, if any)\ndetermine the PEP is ready for final review and resolution.\n\nTo expedite the process in selected cases (e.g. when a change is clearly\nbeneficial and ready to be accepted, but the PEP hasn't been formally submitted\nfor review yet), the Steering Council may also initiate a PEP review, first\nnotifying the PEP author(s) and giving them a chance to make revisions.\n\n"
+          },
+          {
+            "document_id": "C1-PY-PEP13",
+            "revision": 1,
+            "chunk_id": "C1-PY-PEP13-powers",
+            "title": "PEP 13 - Python Language Governance — Powers",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 1524,
+            "end_offset": 2679,
+            "text": "Powers\n~~~~~~\n\nThe council has broad authority to make decisions about the project.\nFor example, they can:\n\n* Accept or reject PEPs\n* Enforce or update the project's code of conduct\n* Work with the PSF to manage any project assets\n* Delegate parts of their authority to other subcommittees or\n  processes\n\nHowever, they cannot modify this PEP, or affect the membership of the\ncore team, except via the mechanisms specified in this PEP.\n\nThe council should look for ways to use these powers as little as\npossible. Instead of voting, it's better to seek consensus. Instead of\nruling on individual PEPs, it's better to define a standard process\nfor PEP decision making (for example, by accepting one of the other\n801x series of PEPs). It's better to establish a Code of Conduct\ncommittee than to rule on individual cases. And so on.\n\nTo use its powers, the council votes. Every council member must either\nvote or explicitly abstain. Members with conflicts of interest on a\nparticular vote must abstain. Passing requires a strict majority of\nnon-abstaining council members.\n\nWhenever possible, the council's deliberations and votes shall be held\nin public.\n\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C1CAL-02",
+      "operation": "answer",
+      "payload": {
+        "schema_version": 1,
+        "query": "Which two amendments are recorded for 2024-12-10 in PEP 13? Under the supplied no-confidence procedure, how soon must a proposal be seconded, how long does voting last, and what support is required for it to succeed?",
+        "contexts": [
+          {
+            "document_id": "C1-PY-PEP13",
+            "revision": 1,
+            "chunk_id": "C1-PY-PEP13-amendments",
+            "title": "PEP 13 - Python Language Governance — History of amendments",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 12608,
+            "end_offset": 13129,
+            "text": "History of amendments\n---------------------\n\n* 2019-04-17: Added the vote length for core devs and changes to this document.\n* `2024-12-10 <https://discuss.python.org/t/64971>`__:\n  Adopted Multi-winner Bloc STAR voting for council elections.\n* `2024-12-10 <https://discuss.python.org/t/72293/4>`__:\n  Added a one-week deadline for seconding a vote of no confidence.\n* `2025-11-12 <https://discuss.python.org/t/104607>`__:\n  Clarified that the software used for elections may resolve ties\n  automatically if possible.\n\n\n\n"
+          },
+          {
+            "document_id": "C1-PY-PEP13",
+            "revision": 1,
+            "chunk_id": "C1-PY-PEP13-confidence",
+            "title": "PEP 13 - Python Language Governance — Vote of no confidence",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 6143,
+            "end_offset": 7129,
+            "text": "Vote of no confidence\n~~~~~~~~~~~~~~~~~~~~~\n\nIn exceptional circumstances, the core team may remove a sitting\ncouncil member, or the entire council, via a vote of no confidence.\n\nA no-confidence vote is triggered when a core team member calls for\none publicly on an appropriate project communication channel, and\nanother core team member seconds the proposal within one week.\n\nThe vote lasts for two weeks. Core team members vote for or against.\nIf at least two thirds of voters express a lack of confidence, then\nthe vote succeeds.\n\nThere are two forms of no-confidence votes: those targeting a single\nmember, and those targeting the council as a whole. The initial call\nfor a no-confidence vote must specify which type is intended. If a\nsingle-member vote succeeds, then that member is removed from the\ncouncil and the resulting vacancy can be handled in the usual way. If\na whole-council vote succeeds, the council is dissolved and a new\ncouncil election is triggered immediately.\n\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C1CAL-03",
+      "operation": "answer",
+      "payload": {
+        "schema_version": 1,
+        "query": "NEP 50에서 Python의 int·float·complex는 어떤 방식으로 타입을 취급하고, 값은 승격과 새 타입 변환에서 각각 어떻게 쓰여? NEP 51이 바꾸려는 스칼라 표현은 무엇이며 일반 print 출력과 배열 표현도 변경 범위에 들어가?",
+        "contexts": [
+          {
+            "document_id": "C1-NP-NEP50",
+            "revision": 1,
+            "chunk_id": "C1-NP-NEP50-weak",
+            "title": "NEP 50 - Promotion rules for Python scalars — Proposed weak promotion",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 24133,
+            "end_offset": 25086,
+            "text": "Proposed weak promotion\n-----------------------\n\nThis proposal uses a \"weak scalar\" logic.  This means that Python ``int``, ``float``,\nand ``complex`` are not assigned one of the typical dtypes, such as float64 or int64.\nRather, they are assigned a special abstract DType, similar to the \"scalar\" hierarchy\nnames: Integral, Floating, ComplexFloating.\n\nWhen promotion occurs (as it does for ufuncs if no exact loop matches),\nthe other DType is able to decide how to regard the Python\nscalar.  E.g. a ``UInt16`` promoting with an ``Integral`` will give ``UInt16``.\n\n.. note::\n\n    A default will most likely be provided in the future for user-defined DTypes.\n    Most likely this will end up being the default integer/float, but in principle\n    more complex schemes could be implemented.\n\nAt no time is the value used to decide the result of this promotion.  The value is only\nconsidered when it is converted to the new dtype; this may raise an error.\n\n\n"
+          },
+          {
+            "document_id": "C1-NP-NEP51",
+            "revision": 1,
+            "chunk_id": "C1-NP-NEP51-scope",
+            "title": "NEP 51 - Changing the representation of NumPy scalars — Motivation and scope",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 1175,
+            "end_offset": 3170,
+            "text": "Motivation and scope\n====================\n\nThis NEP proposes to change the representation of the following\nNumPy scalars types to distinguish them from the Python scalars:\n\n* ``np.bool_``\n* ``np.uint8``, ``np.int8``, and all other integer scalars\n* ``np.float16``, ``np.float32``, ``np.float64``, ``np.longdouble``\n* ``np.complex64``, ``np.complex128``, ``np.clongdouble``\n* ``np.str_``, ``np.bytes_``\n* ``np.void``  (structured dtypes)\n\nAdditionally, the representation of the remaining NumPy scalars will be\nadapted to print as ``np.`` rather than ``numpy.``:\n\n* ``np.datetime64`` and ``np.timedelta64``\n* ``np.void``  (unstructured version)\n\nThe NEP does not propose to change how these scalars print – only\ntheir representation (``__repr__``) will be changed.\nFurther, array representation will not be affected since it already\nincludes the ``dtype=`` when necessary.\n\nThe main motivation behind the change is that the Python numerical types\nbehave differently from the NumPy scalars.\nFor example numbers with lower precision (e.g. ``uint8`` or ``float16``)\nshould be used with care and users should be aware when they are working\nwith them.  All NumPy integers can experience overflow which Python integers\ndo not.\nThese differences will be exacerbated when adopting :ref:`NEP 50 <NEP50>`\nbecause the lower precision NumPy scalar will be preserved more often.\nEven ``np.float64``, which is very similar to Python's ``float`` and inherits\nfrom it, does behave differently for example when dividing by zero.\n\nAnother common source of confusion are the NumPy booleans.  Python programmers\nsometimes write ``obj is True`` and will surprised when an object that shows\nas ``True`` fails to pass the test.\nIt is much easier to understand this behavior when the value is\nshown as ``np.True_``.\n\nNot only do we expect the change to help users better understand and be\nreminded of the differences between NumPy and Python scalars, but we also\nbelieve that the awareness will greatly help debugging.\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C1CAL-04",
+      "operation": "answer",
+      "payload": {
+        "schema_version": 1,
+        "query": "What representation does NEP 51 propose for np.float32(3.0), and how many downstream packages had completed their doctest adaptations by the time the supplied document was written?",
+        "contexts": [
+          {
+            "document_id": "C1-NP-NEP51",
+            "revision": 1,
+            "chunk_id": "C1-NP-NEP51-abstract",
+            "title": "NEP 51 - Changing the representation of NumPy scalars — Header and Abstract",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1175,
+            "text": ".. _NEP51:\n\n=====================================================\nNEP 51 — Changing the representation of NumPy scalars\n=====================================================\n:Author: Sebastian Berg\n:Status: Accepted\n:Type: Standards Track\n:Created: 2022-09-13\n:Resolution: https://mail.python.org/archives/list/numpy-discussion@python.org/message/U2A4RCJSXMK7GG23MA5QMRG4KQYFMO2S/\n\nAbstract\n========\n\nNumPy has scalar objects (\"NumPy scalar\") representing a single value\ncorresponding to a NumPy DType.  The representation of these currently\nmatches that of the Python builtins, giving::\n\n    >>> np.float32(3.0)\n    3.0\n\nIn this NEP we propose to change the representation to include the\nNumPy scalar type information.  Changing the above example to::\n\n    >>> np.float32(3.0)\n    np.float32(3.0)\n\nWe expect that this change will help users distinguish the NumPy scalars\nfrom the Python builtin types and clarify their behavior.\n\nThe distinction between NumPy scalars and Python builtins will further become\nmore important for users once :ref:`NEP 50 <NEP50>` is adopted.\n\nThese changes do lead to smaller incompatible and infrastructure changes\nrelated to array printing.\n\n"
+          },
+          {
+            "document_id": "C1-NP-NEP51",
+            "revision": 1,
+            "chunk_id": "C1-NP-NEP51-backward",
+            "title": "NEP 51 - Changing the representation of NumPy scalars — Backward compatibility",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 3769,
+            "end_offset": 4574,
+            "text": "Backward compatibility\n======================\n\nWe expect that most workflows will not be affected as only printing\nchanges.  In general we believe that informing users about the type\nthey are working with outweighs the need for adapting printing in\nsome instances.\n\nThe NumPy test suite includes code such as ``decimal.Decimal(repr(scalar))``.\nThis code needs to be modified to use the ``str()``.\n\nAn exception to this are downstream libraries with documentation and\nespecially documentation testing.\nSince the representation of many values will change, in many cases\nthe documentation will have to be updated.\nThis is expected to require larger documentation fixups in the mid-term.\n\nIt may be necessary to adopt tools for doctest testing to\nallow approximate value checking for the new representation.\n\n"
+          },
+          {
+            "document_id": "C1-NP-NEP50",
+            "revision": 1,
+            "chunk_id": "C1-NP-NEP50-weak",
+            "title": "NEP 50 - Promotion rules for Python scalars — Proposed weak promotion",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 24133,
+            "end_offset": 25086,
+            "text": "Proposed weak promotion\n-----------------------\n\nThis proposal uses a \"weak scalar\" logic.  This means that Python ``int``, ``float``,\nand ``complex`` are not assigned one of the typical dtypes, such as float64 or int64.\nRather, they are assigned a special abstract DType, similar to the \"scalar\" hierarchy\nnames: Integral, Floating, ComplexFloating.\n\nWhen promotion occurs (as it does for ufuncs if no exact loop matches),\nthe other DType is able to decide how to regard the Python\nscalar.  E.g. a ``UInt16`` promoting with an ``Integral`` will give ``UInt16``.\n\n.. note::\n\n    A default will most likely be provided in the future for user-defined DTypes.\n    Most likely this will end up being the default integer/float, but in principle\n    more complex schemes could be implemented.\n\nAt no time is the value used to decide the result of this promotion.  The value is only\nconsidered when it is converted to the new dtype; this may raise an error.\n\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C1CAL-05",
+      "operation": "answer",
+      "payload": {
+        "schema_version": 1,
+        "query": "4월 3일 회의는 C3의 중복 기록을 몇 마리로 정정하기로 했고 원래 값 18은 어떻게 남기기로 했어? 개정 2에서는 무리 일부가 가려졌을 때 count 열과 일일 합계를 어떻게 처리해?",
+        "contexts": [
+          {
+            "document_id": "C1-BIRD-MEETING",
+            "revision": 1,
+            "chunk_id": "C1-BIRD-MEETING-whole",
+            "title": "해솔만 물새 정점조사 운영회의 — Complete preserved source",
+            "meeting_date": "2026-04-03",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 561,
+            "text": "# 해솔만 물새 정점조사 운영회의\nAI 작성 허구 자료. 기관·인물·관측값은 가상이며 실제 연구 기록이나 생태 조사 지침이 아니다.\n회의일: 2026-04-03\n참석: 라온, 보미, 건우\n\n## C3 관측 기록 검토\n4월 2일 C3 지점의 18마리는 두 관측자가 같은 9마리 무리를 각각 적은 뒤 합산한 중복으로 판정했다. 회의는 공식 정정값을 9마리로 정했다. 원래 값 18을 삭제하지 않고 정정 사유와 확인자를 연결한 정정 행을 추가하기로 했다. 수정된 기록표가 실제 반영됐는지는 이번 회의에서 확인하지 않았다.\n\n## 조건부 인계\n북측 정점의 담당자는 계속 라온이다. 4월 6일 현장 진입로 안전확인서가 접수된 경우에만 보미에게 담당을 인계한다. 일정표에 4월 6일이 적혀 있다는 사실만으로 인계가 성립하지 않는다. 건우는 확인서 접수 여부를 두 사람에게 알리는 연락 담당이다.\n\n## 문서 개정\n시야가 가려진 관측을 추정 수치로 합계에 넣는 문제를 줄이기 위해 관측 프로토콜 개정 2를 4월 4일부터 적용하기로 했다. 조사 위치 자체를 추가하거나 과거 기록을 일괄 삭제하는 결정은 하지 않았다.\n"
+          },
+          {
+            "document_id": "C1-BIRD-PROTOCOL-V2",
+            "revision": 1,
+            "chunk_id": "C1-BIRD-PROTOCOL-V2-whole",
+            "title": "해솔만 관측 프로토콜 — 개정 2 — Complete preserved source",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 393,
+            "text": "# 해솔만 관측 프로토콜 — 개정 2\nAI 작성 허구 자료. 실제 연구 기록이나 생태 조사 지침이 아니다.\n적용일: 2026-04-04. 개정 1의 가시성에 따른 기입 조항을 대체한다.\n\n## 가시성에 따른 기입\n관측 무리 일부가 가려졌을 때에는 전체 수를 추정하지 않고 count 열에 결측 표식 M을 적는다. 보이는 개체 수는 자유 메모에 남길 수 있지만 일일 합계에 넣지 않는다. 시야가 모두 확보된 경우에는 직접 센 수치를 적는다.\n\n## 정정과 확인\n이전 행을 지우지 않고 정정 행을 연결한다. 정정 행에는 이전 행 식별자, 변경 사유, 확인자를 기입한다. 문서가 개정됐다는 사실만으로 기존 현장 표의 정정이 완료됐다고 간주하지 않는다. 지점 코드와 관측 시각의 기록 방식은 개정 1과 같다.\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C1CAL-06",
+      "operation": "answer",
+      "payload": {
+        "schema_version": 1,
+        "query": "What changed from revision 1 to revision 2 when a flock is partly obscured, including treatment in the daily total? Under what condition may Bomi take over the north-point assignment from Raon?",
+        "contexts": [
+          {
+            "document_id": "C1-BIRD-PROTOCOL-V1",
+            "revision": 1,
+            "chunk_id": "C1-BIRD-PROTOCOL-V1-whole",
+            "title": "해솔만 관측 프로토콜 — 개정 1 기록 — Complete preserved source",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 319,
+            "text": "# 해솔만 관측 프로토콜 — 개정 1\nAI 작성 허구 자료. 실제 연구 기록이나 생태 조사 지침이 아니다.\n문서일: 2026-03-28. 과거 개정판 보존본.\n\n## 가시성에 따른 기입\n관측 무리 일부가 가려졌을 때에는 조사자가 전체 수를 추정하여 count 열에 숫자로 적는다. 이 추정 수치도 일일 합계에 포함한다. 시야가 모두 확보된 경우에는 직접 센 수치를 적는다.\n\n## 기록 표식\n각 행에는 지점 코드, 관측 시각과 관측자 이름을 함께 남긴다. 관측자의 자유 메모는 별도 칸에 기록한다. 이 보존본은 당시 규칙을 보여주며 이후 개정의 효력을 결정하지 않는다.\n"
+          },
+          {
+            "document_id": "C1-BIRD-PROTOCOL-V2",
+            "revision": 1,
+            "chunk_id": "C1-BIRD-PROTOCOL-V2-whole",
+            "title": "해솔만 관측 프로토콜 — 개정 2 — Complete preserved source",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 393,
+            "text": "# 해솔만 관측 프로토콜 — 개정 2\nAI 작성 허구 자료. 실제 연구 기록이나 생태 조사 지침이 아니다.\n적용일: 2026-04-04. 개정 1의 가시성에 따른 기입 조항을 대체한다.\n\n## 가시성에 따른 기입\n관측 무리 일부가 가려졌을 때에는 전체 수를 추정하지 않고 count 열에 결측 표식 M을 적는다. 보이는 개체 수는 자유 메모에 남길 수 있지만 일일 합계에 넣지 않는다. 시야가 모두 확보된 경우에는 직접 센 수치를 적는다.\n\n## 정정과 확인\n이전 행을 지우지 않고 정정 행을 연결한다. 정정 행에는 이전 행 식별자, 변경 사유, 확인자를 기입한다. 문서가 개정됐다는 사실만으로 기존 현장 표의 정정이 완료됐다고 간주하지 않는다. 지점 코드와 관측 시각의 기록 방식은 개정 1과 같다.\n"
+          },
+          {
+            "document_id": "C1-BIRD-MEETING",
+            "revision": 1,
+            "chunk_id": "C1-BIRD-MEETING-whole",
+            "title": "해솔만 물새 정점조사 운영회의 — Complete preserved source",
+            "meeting_date": "2026-04-03",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 561,
+            "text": "# 해솔만 물새 정점조사 운영회의\nAI 작성 허구 자료. 기관·인물·관측값은 가상이며 실제 연구 기록이나 생태 조사 지침이 아니다.\n회의일: 2026-04-03\n참석: 라온, 보미, 건우\n\n## C3 관측 기록 검토\n4월 2일 C3 지점의 18마리는 두 관측자가 같은 9마리 무리를 각각 적은 뒤 합산한 중복으로 판정했다. 회의는 공식 정정값을 9마리로 정했다. 원래 값 18을 삭제하지 않고 정정 사유와 확인자를 연결한 정정 행을 추가하기로 했다. 수정된 기록표가 실제 반영됐는지는 이번 회의에서 확인하지 않았다.\n\n## 조건부 인계\n북측 정점의 담당자는 계속 라온이다. 4월 6일 현장 진입로 안전확인서가 접수된 경우에만 보미에게 담당을 인계한다. 일정표에 4월 6일이 적혀 있다는 사실만으로 인계가 성립하지 않는다. 건우는 확인서 접수 여부를 두 사람에게 알리는 연락 담당이다.\n\n## 문서 개정\n시야가 가려진 관측을 추정 수치로 합계에 넣는 문제를 줄이기 위해 관측 프로토콜 개정 2를 4월 4일부터 적용하기로 했다. 조사 위치 자체를 추가하거나 과거 기록을 일괄 삭제하는 결정은 하지 않았다.\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C1CAL-07",
+      "operation": "answer",
+      "payload": {
+        "schema_version": 1,
+        "query": "How did authorization to replace a pairing sheet change from revision 1 to revision 2? State the approval and timing conditions for posting under revision 2, and identify who the meeting assigned to post an authorized replacement.",
+        "contexts": [
+          {
+            "document_id": "C1-CHESS-PROCEDURE-V1",
+            "revision": 1,
+            "chunk_id": "C1-CHESS-PROCEDURE-V1-whole",
+            "title": "Harbor Lantern pairing correction procedure — revision 1 archive — Complete preserved source",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 612,
+            "text": "# Harbor Lantern pairing correction procedure — revision 1\nAI-authored fiction, not federation rules. Historical procedure snapshot dated 2026-05-02.\n\n## Authorization and posting\nThe head adjudicator alone may authorize a replacement pairing sheet. A desk volunteer may post it after that authorization. A player must describe the disputed pairing in writing so that the original and replacement can be connected in the register.\n\n## Scope\nThis procedure concerns correcting a posted pairing. It does not decide game results, membership or entry eligibility. Keep the original sheet with the correction record.\n"
+          },
+          {
+            "document_id": "C1-CHESS-MEETING",
+            "revision": 1,
+            "chunk_id": "C1-CHESS-MEETING-whole",
+            "title": "Harbor Lantern chess event committee minutes — Complete preserved source",
+            "meeting_date": "2026-05-12",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 783,
+            "text": "# Harbor Lantern chess event committee minutes\nAI-authored fiction. This event, people and rules are invented; these are not federation rules or a real event record.\nMeeting date: 2026-05-12. Present: Jonah, Amina, Farah and Eli.\n\n## Pairing administration\nThe committee approved correction-procedure revision 2 for round 2. Farah will maintain the written pairing-dispute register. Eli will post any authorized replacement pairing sheet; the posting assignment does not itself authorize a correction.\n\n## Evidence available at the meeting\nRound 2 has not yet begun. No completed correction approvals or round-2 dispute totals were presented at this meeting. The committee will review the event records afterward. The meeting did not change game-scoring or player eligibility rules.\n"
+          },
+          {
+            "document_id": "C1-CHESS-PROCEDURE-V2",
+            "revision": 1,
+            "chunk_id": "C1-CHESS-PROCEDURE-V2-whole",
+            "title": "Harbor Lantern pairing correction procedure — revision 2 — Complete preserved source",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 923,
+            "text": "# Harbor Lantern pairing correction procedure — revision 2\nAI-authored fiction, not federation rules. Approved procedure dated 2026-05-12; replaces revision 1's authorization and posting section for round 2.\n\n## Authorization and posting\nA replacement pairing sheet requires written approval from both the head adjudicator and the deputy adjudicator before the first game clock of the round starts. It may be posted only once both approvals are recorded while that time condition still holds. If either approval is missing or the first clock has started, keep the current sheet and refer the dispute to the committee; there is no automatic replacement.\n\n## Record linkage\nKeep the original pairing sheet and link the written dispute and approvals to the replacement. This rule describes authorization conditions, not the number of corrections actually approved. Game-scoring and entry eligibility remain outside its scope.\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C1CAL-08",
+      "operation": "answer",
+      "payload": {
+        "schema_version": 1,
+        "query": "개정 2에서 교체 대진표를 게시할 수 있는 승인·시간 조건은 무엇이고, 실제 2라운드에서 그 조건에 따라 승인된 정정은 총 몇 건이야?",
+        "contexts": [
+          {
+            "document_id": "C1-CHESS-PROCEDURE-V2",
+            "revision": 1,
+            "chunk_id": "C1-CHESS-PROCEDURE-V2-whole",
+            "title": "Harbor Lantern pairing correction procedure — revision 2 — Complete preserved source",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 923,
+            "text": "# Harbor Lantern pairing correction procedure — revision 2\nAI-authored fiction, not federation rules. Approved procedure dated 2026-05-12; replaces revision 1's authorization and posting section for round 2.\n\n## Authorization and posting\nA replacement pairing sheet requires written approval from both the head adjudicator and the deputy adjudicator before the first game clock of the round starts. It may be posted only once both approvals are recorded while that time condition still holds. If either approval is missing or the first clock has started, keep the current sheet and refer the dispute to the committee; there is no automatic replacement.\n\n## Record linkage\nKeep the original pairing sheet and link the written dispute and approvals to the replacement. This rule describes authorization conditions, not the number of corrections actually approved. Game-scoring and entry eligibility remain outside its scope.\n"
+          },
+          {
+            "document_id": "C1-CHESS-MEETING",
+            "revision": 1,
+            "chunk_id": "C1-CHESS-MEETING-whole",
+            "title": "Harbor Lantern chess event committee minutes — Complete preserved source",
+            "meeting_date": "2026-05-12",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 783,
+            "text": "# Harbor Lantern chess event committee minutes\nAI-authored fiction. This event, people and rules are invented; these are not federation rules or a real event record.\nMeeting date: 2026-05-12. Present: Jonah, Amina, Farah and Eli.\n\n## Pairing administration\nThe committee approved correction-procedure revision 2 for round 2. Farah will maintain the written pairing-dispute register. Eli will post any authorized replacement pairing sheet; the posting assignment does not itself authorize a correction.\n\n## Evidence available at the meeting\nRound 2 has not yet begun. No completed correction approvals or round-2 dispute totals were presented at this meeting. The committee will review the event records afterward. The meeting did not change game-scoring or player eligibility rules.\n"
+          }
+        ]
+      }
+    }
+  ]
+}

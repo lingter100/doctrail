@@ -1,0 +1,852 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "82b0fff79761c0da86f4d8c5614aa20f9b12e7e5",
+  "rubric": {
+    "complete_answer": "All mandatory facts and requested facets must be correct, properly qualified, in the question language and supported by their selected citations. Faithful translation and paraphrase are allowed.",
+    "citation_alternatives": "Exact oracle quotes identify support, not required citation lengths. A longer or overlapping preserved source span is acceptable if it supports the full claim. Explicit alternative citations may also support a fact; unsupported clauses cannot be rescued by a different uncited paragraph.",
+    "insufficiency": "A useful partial fact is intentionally available in both insufficient-evidence items. The missing requested fact must not be guessed. Correct status is abstained with insufficient_evidence, not semantic_rejected or an incomplete answered result.",
+    "evaluation": "Schema/quote exactness are separate from full semantic correctness. C1 verifier output is not an oracle. AI self-review is not independent review or human review.",
+    "scope": "8 items from 4 families; within-family pairs are correlated. Synthetic statements are fiction, not real research records or official rules."
+  },
+  "cases": [
+    {
+      "id": "C1CAL-01",
+      "family_id": "C1-F01",
+      "origin": "public",
+      "question_language": "ko",
+      "source_languages": [
+        "en"
+      ],
+      "answerability": "answerable",
+      "expected_status": "answered",
+      "expected_reason": null,
+      "required_dimensions": [
+        "multifacet",
+        "multisource",
+        "status_and_conditions"
+      ],
+      "required_facts": [
+        {
+          "statement": "When the authors and sponsor, if any, determine the PEP is ready for final review/resolution, they formally initiate it by opening a Steering Council issue.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-PY-PEP1",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP1-review",
+              "source_raw_sha256": "e3a9cba0eb60610eac8d27a00d9ace467a2f8c4e213b3037d66d1b8d04a00290",
+              "processed_sha256": "20577109d4ddb29fda80bdd96e91a310967629914aafd9c4346727a288254c09",
+              "quote": "However, content review and acceptance of the PEP is ultimately the\nresponsibility of the Steering Council, which is formally initiated by\nopening a `Steering Council issue`_ once the authors (and sponsor, if any)\ndetermine the PEP is ready for final review and resolution.",
+              "start_offset": 15153,
+              "end_offset": 15426
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-01-F1"
+        },
+        {
+          "statement": "Every council member must vote or explicitly abstain.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-PY-PEP13",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP13-powers",
+              "source_raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+              "processed_sha256": "fcd330ea54e37a7d4a3bf35571467a9151bdb6b4b55da5c7bd4908d00fe8f12c",
+              "quote": "Every council member must either\nvote or explicitly abstain.",
+              "start_offset": 2393,
+              "end_offset": 2453
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-01-F2"
+        },
+        {
+          "statement": "Members with conflicts of interest on the particular vote must abstain.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-PY-PEP13",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP13-powers",
+              "source_raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+              "processed_sha256": "fcd330ea54e37a7d4a3bf35571467a9151bdb6b4b55da5c7bd4908d00fe8f12c",
+              "quote": "Members with conflicts of interest on a\nparticular vote must abstain.",
+              "start_offset": 2454,
+              "end_offset": 2523
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-01-F3"
+        },
+        {
+          "statement": "Passing requires a strict majority of non-abstaining council members.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-PY-PEP13",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP13-powers",
+              "source_raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+              "processed_sha256": "fcd330ea54e37a7d4a3bf35571467a9151bdb6b4b55da5c7bd4908d00fe8f12c",
+              "quote": "Passing requires a strict majority of\nnon-abstaining council members.",
+              "start_offset": 2524,
+              "end_offset": 2593
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-01-F4"
+        }
+      ],
+      "answerable_parts_when_incomplete": [],
+      "missing_required_parts": [],
+      "forbidden_inference": [
+        "PEP editor publication approval is substantive acceptance.",
+        "Abstaining members are counted in the required majority denominator.",
+        "The ordinary council vote always requires two thirds."
+      ],
+      "context_chunk_ids": [
+        "C1-PY-PEP1-review",
+        "C1-PY-PEP13-powers"
+      ],
+      "source_binding": [
+        {
+          "chunk_id": "C1-PY-PEP1-review",
+          "document_id": "C1-PY-PEP1",
+          "revision": 1,
+          "processed_sha256": "20577109d4ddb29fda80bdd96e91a310967629914aafd9c4346727a288254c09"
+        },
+        {
+          "chunk_id": "C1-PY-PEP13-powers",
+          "document_id": "C1-PY-PEP13",
+          "revision": 1,
+          "processed_sha256": "fcd330ea54e37a7d4a3bf35571467a9151bdb6b4b55da5c7bd4908d00fe8f12c"
+        }
+      ],
+      "review_notes": "Two documents are necessary: author-initiated formal request mechanics come from PEP 1, while voting participation/conflicts/threshold come from PEP 13. The separate council-initiated review paragraph does not negate the explicitly author-initiated question.",
+      "ai_authored_question": true,
+      "ai_author_self_review": true,
+      "independent_prereview_count": 0,
+      "human_review_count": 0
+    },
+    {
+      "id": "C1CAL-02",
+      "family_id": "C1-F01",
+      "origin": "public",
+      "question_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "answerability": "answerable",
+      "expected_status": "answered",
+      "expected_reason": null,
+      "required_dimensions": [
+        "multifacet",
+        "document_changes",
+        "status_and_conditions"
+      ],
+      "required_facts": [
+        {
+          "statement": "The December 10, 2024 amendments adopted Multi-winner Bloc STAR council elections and added a one-week deadline for seconding a no-confidence vote.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-PY-PEP13",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP13-amendments",
+              "source_raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+              "processed_sha256": "c70ab513c5345f781c3e58cf3e6a0fb30d990a4c163467ce2110fc2f677ead64",
+              "quote": "* `2024-12-10 <https://discuss.python.org/t/64971>`__:\n  Adopted Multi-winner Bloc STAR voting for council elections.\n* `2024-12-10 <https://discuss.python.org/t/72293/4>`__:\n  Added a one-week deadline for seconding a vote of no confidence.",
+              "start_offset": 12733,
+              "end_offset": 12974
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-02-F1"
+        },
+        {
+          "statement": "The seconding deadline is one week.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-PY-PEP13",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP13-confidence",
+              "source_raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+              "processed_sha256": "c5e5b9844fdc0444287882c7631c22087c1d83bef2daaeb3b4c1dab70d158a66",
+              "quote": "A no-confidence vote is triggered when a core team member calls for\none publicly on an appropriate project communication channel, and\nanother core team member seconds the proposal within one week.",
+              "start_offset": 6322,
+              "end_offset": 6518
+            }
+          ],
+          "allowed_alternative_citations": [
+            {
+              "document_id": "C1-PY-PEP13",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP13-amendments",
+              "source_raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+              "processed_sha256": "c70ab513c5345f781c3e58cf3e6a0fb30d990a4c163467ce2110fc2f677ead64",
+              "quote": "Added a one-week deadline for seconding a vote of no confidence.",
+              "start_offset": 12910,
+              "end_offset": 12974
+            }
+          ],
+          "fact_id": "C1CAL-02-F2"
+        },
+        {
+          "statement": "The vote lasts two weeks.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-PY-PEP13",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP13-confidence",
+              "source_raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+              "processed_sha256": "c5e5b9844fdc0444287882c7631c22087c1d83bef2daaeb3b4c1dab70d158a66",
+              "quote": "The vote lasts for two weeks.",
+              "start_offset": 6520,
+              "end_offset": 6549
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-02-F3"
+        },
+        {
+          "statement": "The vote succeeds if at least two thirds of voters express a lack of confidence.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-PY-PEP13",
+              "revision": 1,
+              "chunk_id": "C1-PY-PEP13-confidence",
+              "source_raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+              "processed_sha256": "c5e5b9844fdc0444287882c7631c22087c1d83bef2daaeb3b4c1dab70d158a66",
+              "quote": "If at least two thirds of voters express a lack of confidence, then\nthe vote succeeds.",
+              "start_offset": 6589,
+              "end_offset": 6675
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-02-F4"
+        }
+      ],
+      "answerable_parts_when_incomplete": [],
+      "missing_required_parts": [],
+      "forbidden_inference": [
+        "The one-week seconding deadline is the voting duration.",
+        "These amendments prove that any particular no-confidence vote occurred or succeeded.",
+        "A simple majority is enough for a successful no-confidence vote."
+      ],
+      "context_chunk_ids": [
+        "C1-PY-PEP13-amendments",
+        "C1-PY-PEP13-confidence"
+      ],
+      "source_binding": [
+        {
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "document_id": "C1-PY-PEP13",
+          "revision": 1,
+          "processed_sha256": "c70ab513c5345f781c3e58cf3e6a0fb30d990a4c163467ce2110fc2f677ead64"
+        },
+        {
+          "chunk_id": "C1-PY-PEP13-confidence",
+          "document_id": "C1-PY-PEP13",
+          "revision": 1,
+          "processed_sha256": "c5e5b9844fdc0444287882c7631c22087c1d83bef2daaeb3b4c1dab70d158a66"
+        }
+      ],
+      "review_notes": null,
+      "ai_authored_question": true,
+      "ai_author_self_review": true,
+      "independent_prereview_count": 0,
+      "human_review_count": 0
+    },
+    {
+      "id": "C1CAL-03",
+      "family_id": "C1-F02",
+      "origin": "public",
+      "question_language": "ko",
+      "source_languages": [
+        "en"
+      ],
+      "answerability": "answerable",
+      "expected_status": "answered",
+      "expected_reason": null,
+      "required_dimensions": [
+        "multifacet",
+        "multisource",
+        "status_and_conditions"
+      ],
+      "required_facts": [
+        {
+          "statement": "Python int, float and complex use weak-scalar logic and special abstract DTypes such as Integral, Floating and ComplexFloating, rather than typical concrete dtypes such as int64 or float64.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-NP-NEP50",
+              "revision": 1,
+              "chunk_id": "C1-NP-NEP50-weak",
+              "source_raw_sha256": "9068c2e6ff03105aef9b8347975c9b37abf6d333ecee0f05d100ddfcf67e3fa5",
+              "processed_sha256": "5543889bcab58b4cfaf8f7121a551fa8fd75e1b69faa9ea0f7c89a391b37a65b",
+              "quote": "This proposal uses a \"weak scalar\" logic.  This means that Python ``int``, ``float``,\nand ``complex`` are not assigned one of the typical dtypes, such as float64 or int64.\nRather, they are assigned a special abstract DType, similar to the \"scalar\" hierarchy\nnames: Integral, Floating, ComplexFloating.",
+              "start_offset": 24182,
+              "end_offset": 24483
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-03-F1"
+        },
+        {
+          "statement": "The value never determines the promotion result; it is considered during conversion to the new dtype.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-NP-NEP50",
+              "revision": 1,
+              "chunk_id": "C1-NP-NEP50-weak",
+              "source_raw_sha256": "9068c2e6ff03105aef9b8347975c9b37abf6d333ecee0f05d100ddfcf67e3fa5",
+              "processed_sha256": "5543889bcab58b4cfaf8f7121a551fa8fd75e1b69faa9ea0f7c89a391b37a65b",
+              "quote": "At no time is the value used to decide the result of this promotion.  The value is only\nconsidered when it is converted to the new dtype; this may raise an error.",
+              "start_offset": 24921,
+              "end_offset": 25083
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-03-F2"
+        },
+        {
+          "statement": "NEP 51 changes scalar representation, __repr__, not how the scalars print; array representation is also unaffected.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-NP-NEP51",
+              "revision": 1,
+              "chunk_id": "C1-NP-NEP51-scope",
+              "source_raw_sha256": "3b6e592a1a26416c159b4ee481f2637cb56a6b258f6f830de984f051fe33e17c",
+              "processed_sha256": "31bd9cb1438775331e9ddc2789093d2cc742ef2c871333ce20c6182e6b40c149",
+              "quote": "The NEP does not propose to change how these scalars print – only\ntheir representation (``__repr__``) will be changed.\nFurther, array representation will not be affected since it already\nincludes the ``dtype=`` when necessary.",
+              "start_offset": 1820,
+              "end_offset": 2046
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-03-F3"
+        }
+      ],
+      "answerable_parts_when_incomplete": [],
+      "missing_required_parts": [],
+      "forbidden_inference": [
+        "Python scalar values select the promoted dtype under the proposed weak rules.",
+        "NEP 51 changes all print output or array representation.",
+        "Either document establishes a deployment date for a particular user's environment."
+      ],
+      "context_chunk_ids": [
+        "C1-NP-NEP50-weak",
+        "C1-NP-NEP51-scope"
+      ],
+      "source_binding": [
+        {
+          "chunk_id": "C1-NP-NEP50-weak",
+          "document_id": "C1-NP-NEP50",
+          "revision": 1,
+          "processed_sha256": "5543889bcab58b4cfaf8f7121a551fa8fd75e1b69faa9ea0f7c89a391b37a65b"
+        },
+        {
+          "chunk_id": "C1-NP-NEP51-scope",
+          "document_id": "C1-NP-NEP51",
+          "revision": 1,
+          "processed_sha256": "31bd9cb1438775331e9ddc2789093d2cc742ef2c871333ce20c6182e6b40c149"
+        }
+      ],
+      "review_notes": "Ask about the supplied design text, not installed NumPy behavior or the current release. Both sources are necessary. Exact abstract class-name examples are not independently required if the weak abstract-versus-concrete distinction is clear; mentioning possible conversion errors is optional supported detail.",
+      "ai_authored_question": true,
+      "ai_author_self_review": true,
+      "independent_prereview_count": 0,
+      "human_review_count": 0
+    },
+    {
+      "id": "C1CAL-04",
+      "family_id": "C1-F02",
+      "origin": "public",
+      "question_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "answerability": "insufficient_evidence",
+      "expected_status": "abstained",
+      "expected_reason": "insufficient_evidence",
+      "required_dimensions": [
+        "multifacet",
+        "insufficient_evidence"
+      ],
+      "required_facts": [],
+      "answerable_parts_when_incomplete": [
+        {
+          "statement": "The proposed representation is np.float32(3.0).",
+          "mandatory": false,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-NP-NEP51",
+              "revision": 1,
+              "chunk_id": "C1-NP-NEP51-abstract",
+              "source_raw_sha256": "3b6e592a1a26416c159b4ee481f2637cb56a6b258f6f830de984f051fe33e17c",
+              "processed_sha256": "d3f56ca894e74951f50da990006ac8089eecd2260650616096cfe114fe8ebff0",
+              "quote": "In this NEP we propose to change the representation to include the\nNumPy scalar type information.  Changing the above example to::\n\n    >>> np.float32(3.0)\n    np.float32(3.0)",
+              "start_offset": 622,
+              "end_offset": 797
+            }
+          ],
+          "allowed_alternative_citations": []
+        }
+      ],
+      "missing_required_parts": [
+        "The number of downstream packages that had actually finished adapting doctests is not supplied."
+      ],
+      "forbidden_inference": [
+        "Any invented count, including zero, of downstream packages that completed adaptations.",
+        "Expected future documentation fixups prove actual completed migrations.",
+        "The proposal's Accepted status proves all downstream doctests were fixed."
+      ],
+      "context_chunk_ids": [
+        "C1-NP-NEP51-abstract",
+        "C1-NP-NEP51-backward",
+        "C1-NP-NEP50-weak"
+      ],
+      "source_binding": [
+        {
+          "chunk_id": "C1-NP-NEP51-abstract",
+          "document_id": "C1-NP-NEP51",
+          "revision": 1,
+          "processed_sha256": "d3f56ca894e74951f50da990006ac8089eecd2260650616096cfe114fe8ebff0"
+        },
+        {
+          "chunk_id": "C1-NP-NEP51-backward",
+          "document_id": "C1-NP-NEP51",
+          "revision": 1,
+          "processed_sha256": "48464a787201cbd989e3c9c429827969437855a5c4a09b65e631839c0cefc4db"
+        },
+        {
+          "chunk_id": "C1-NP-NEP50-weak",
+          "document_id": "C1-NP-NEP50",
+          "revision": 1,
+          "processed_sha256": "5543889bcab58b4cfaf8f7121a551fa8fd75e1b69faa9ea0f7c89a391b37a65b"
+        }
+      ],
+      "review_notes": "Useful representation and compatibility evidence is present, but the completion-count part is unanswerable. A partial representation answer is not a complete answer to the item; correct status is insufficient-evidence abstention.",
+      "ai_authored_question": true,
+      "ai_author_self_review": true,
+      "independent_prereview_count": 0,
+      "human_review_count": 0
+    },
+    {
+      "id": "C1CAL-05",
+      "family_id": "C1-F03",
+      "origin": "synthetic",
+      "question_language": "ko",
+      "source_languages": [
+        "ko"
+      ],
+      "answerability": "answerable",
+      "expected_status": "answered",
+      "expected_reason": null,
+      "required_dimensions": [
+        "multifacet",
+        "multisource",
+        "status_and_conditions"
+      ],
+      "required_facts": [
+        {
+          "statement": "The meeting decided on a corrected count of 9 birds for C3.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-BIRD-MEETING",
+              "revision": 1,
+              "chunk_id": "C1-BIRD-MEETING-whole",
+              "source_raw_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+              "processed_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+              "quote": "회의는 공식 정정값을 9마리로 정했다.",
+              "start_offset": 181,
+              "end_offset": 202
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-05-F1"
+        },
+        {
+          "statement": "Keep the original 18 and add a linked correction row with the reason and verifier, rather than delete it.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-BIRD-MEETING",
+              "revision": 1,
+              "chunk_id": "C1-BIRD-MEETING-whole",
+              "source_raw_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+              "processed_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+              "quote": "원래 값 18을 삭제하지 않고 정정 사유와 확인자를 연결한 정정 행을 추가하기로 했다.",
+              "start_offset": 203,
+              "end_offset": 251
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-05-F2"
+        },
+        {
+          "statement": "Revision 2 uses missing marker M in count without estimating the total; visible partial counts are excluded from the daily total.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-BIRD-PROTOCOL-V2",
+              "revision": 1,
+              "chunk_id": "C1-BIRD-PROTOCOL-V2-whole",
+              "source_raw_sha256": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364",
+              "processed_sha256": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364",
+              "quote": "관측 무리 일부가 가려졌을 때에는 전체 수를 추정하지 않고 count 열에 결측 표식 M을 적는다. 보이는 개체 수는 자유 메모에 남길 수 있지만 일일 합계에 넣지 않는다.",
+              "start_offset": 119,
+              "end_offset": 215
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-05-F3"
+        }
+      ],
+      "answerable_parts_when_incomplete": [],
+      "missing_required_parts": [],
+      "forbidden_inference": [
+        "The actual field table correction was confirmed complete at the meeting.",
+        "Delete the original 18 without retaining a correction trail.",
+        "Treat M as zero birds or add visible partial counts to the total."
+      ],
+      "context_chunk_ids": [
+        "C1-BIRD-MEETING-whole",
+        "C1-BIRD-PROTOCOL-V2-whole"
+      ],
+      "source_binding": [
+        {
+          "chunk_id": "C1-BIRD-MEETING-whole",
+          "document_id": "C1-BIRD-MEETING",
+          "revision": 1,
+          "processed_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf"
+        },
+        {
+          "chunk_id": "C1-BIRD-PROTOCOL-V2-whole",
+          "document_id": "C1-BIRD-PROTOCOL-V2",
+          "revision": 1,
+          "processed_sha256": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364"
+        }
+      ],
+      "review_notes": "Meeting decision and revised observation protocol are independently necessary. Mentioning that visible partial counts may be recorded in a separate free-text note is optional supported detail; omitting that possibility does not make the answer incomplete. Fictional rules are not ecological advice.",
+      "ai_authored_question": true,
+      "ai_author_self_review": true,
+      "independent_prereview_count": 0,
+      "human_review_count": 0
+    },
+    {
+      "id": "C1CAL-06",
+      "family_id": "C1-F03",
+      "origin": "synthetic",
+      "question_language": "en",
+      "source_languages": [
+        "ko"
+      ],
+      "answerability": "answerable",
+      "expected_status": "answered",
+      "expected_reason": null,
+      "required_dimensions": [
+        "multifacet",
+        "document_changes",
+        "status_and_conditions"
+      ],
+      "required_facts": [
+        {
+          "statement": "Revision 1 required an estimated total in count and included that estimate in the daily total.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-BIRD-PROTOCOL-V1",
+              "revision": 1,
+              "chunk_id": "C1-BIRD-PROTOCOL-V1-whole",
+              "source_raw_sha256": "2c36efe2d4d3138f2c5f371288c5453a527c6e477a2d09e07d9053c3f38b732e",
+              "processed_sha256": "2c36efe2d4d3138f2c5f371288c5453a527c6e477a2d09e07d9053c3f38b732e",
+              "quote": "관측 무리 일부가 가려졌을 때에는 조사자가 전체 수를 추정하여 count 열에 숫자로 적는다. 이 추정 수치도 일일 합계에 포함한다.",
+              "start_offset": 104,
+              "end_offset": 178
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-06-F1"
+        },
+        {
+          "statement": "Revision 2 replaces the estimate with M; visible partial counts may go in a note but not in the daily total.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-BIRD-PROTOCOL-V2",
+              "revision": 1,
+              "chunk_id": "C1-BIRD-PROTOCOL-V2-whole",
+              "source_raw_sha256": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364",
+              "processed_sha256": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364",
+              "quote": "관측 무리 일부가 가려졌을 때에는 전체 수를 추정하지 않고 count 열에 결측 표식 M을 적는다. 보이는 개체 수는 자유 메모에 남길 수 있지만 일일 합계에 넣지 않는다.",
+              "start_offset": 119,
+              "end_offset": 215
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-06-F2"
+        },
+        {
+          "statement": "Transfer requires receipt of the site-access safety confirmation; the scheduled date alone does not effect a transfer.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-BIRD-MEETING",
+              "revision": 1,
+              "chunk_id": "C1-BIRD-MEETING-whole",
+              "source_raw_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+              "processed_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+              "quote": "4월 6일 현장 진입로 안전확인서가 접수된 경우에만 보미에게 담당을 인계한다. 일정표에 4월 6일이 적혀 있다는 사실만으로 인계가 성립하지 않는다.",
+              "start_offset": 321,
+              "end_offset": 403
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-06-F3"
+        }
+      ],
+      "answerable_parts_when_incomplete": [],
+      "missing_required_parts": [],
+      "forbidden_inference": [
+        "The handoff has already happened merely because April 6 is on the calendar.",
+        "Geonwoo is the receiving observer because he sends the notification.",
+        "Revision 1 and 2 have identical treatment of partial visibility."
+      ],
+      "context_chunk_ids": [
+        "C1-BIRD-PROTOCOL-V1-whole",
+        "C1-BIRD-PROTOCOL-V2-whole",
+        "C1-BIRD-MEETING-whole"
+      ],
+      "source_binding": [
+        {
+          "chunk_id": "C1-BIRD-PROTOCOL-V1-whole",
+          "document_id": "C1-BIRD-PROTOCOL-V1",
+          "revision": 1,
+          "processed_sha256": "2c36efe2d4d3138f2c5f371288c5453a527c6e477a2d09e07d9053c3f38b732e"
+        },
+        {
+          "chunk_id": "C1-BIRD-PROTOCOL-V2-whole",
+          "document_id": "C1-BIRD-PROTOCOL-V2",
+          "revision": 1,
+          "processed_sha256": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364"
+        },
+        {
+          "chunk_id": "C1-BIRD-MEETING-whole",
+          "document_id": "C1-BIRD-MEETING",
+          "revision": 1,
+          "processed_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf"
+        }
+      ],
+      "review_notes": "English answer required despite Korean evidence. This is three distinct preserved documents within one family, not three independent families.",
+      "ai_authored_question": true,
+      "ai_author_self_review": true,
+      "independent_prereview_count": 0,
+      "human_review_count": 0
+    },
+    {
+      "id": "C1CAL-07",
+      "family_id": "C1-F04",
+      "origin": "synthetic",
+      "question_language": "en",
+      "source_languages": [
+        "en"
+      ],
+      "answerability": "answerable",
+      "expected_status": "answered",
+      "expected_reason": null,
+      "required_dimensions": [
+        "multifacet",
+        "multisource",
+        "document_changes",
+        "status_and_conditions"
+      ],
+      "required_facts": [
+        {
+          "statement": "Revision 1 allowed the head adjudicator alone to authorize a replacement.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-CHESS-PROCEDURE-V1",
+              "revision": 1,
+              "chunk_id": "C1-CHESS-PROCEDURE-V1-whole",
+              "source_raw_sha256": "6d6237ae185de8c25b622259ed29ea09a1a799007892169ef11d15ec64001642",
+              "processed_sha256": "6d6237ae185de8c25b622259ed29ea09a1a799007892169ef11d15ec64001642",
+              "quote": "The head adjudicator alone may authorize a replacement pairing sheet.",
+              "start_offset": 180,
+              "end_offset": 249
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-07-F1"
+        },
+        {
+          "statement": "Revision 2 requires written approval by both the head and deputy adjudicators.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-CHESS-PROCEDURE-V2",
+              "revision": 1,
+              "chunk_id": "C1-CHESS-PROCEDURE-V2-whole",
+              "source_raw_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+              "processed_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+              "quote": "A replacement pairing sheet requires written approval from both the head adjudicator and the deputy adjudicator before the first game clock of the round starts.",
+              "start_offset": 238,
+              "end_offset": 398
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-07-F2"
+        },
+        {
+          "statement": "Both approvals must be recorded and posting must still occur before the round's first game clock starts; missing either condition prevents posting a replacement.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-CHESS-PROCEDURE-V2",
+              "revision": 1,
+              "chunk_id": "C1-CHESS-PROCEDURE-V2-whole",
+              "source_raw_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+              "processed_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+              "quote": "A replacement pairing sheet requires written approval from both the head adjudicator and the deputy adjudicator before the first game clock of the round starts. It may be posted only once both approvals are recorded while that time condition still holds. If either approval is missing or the first clock has started, keep the current sheet and refer the dispute to the committee; there is no automatic replacement.",
+              "start_offset": 238,
+              "end_offset": 652
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-07-F3"
+        },
+        {
+          "statement": "The meeting assigned Eli to post an authorized replacement sheet.",
+          "mandatory": true,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-CHESS-MEETING",
+              "revision": 1,
+              "chunk_id": "C1-CHESS-MEETING-whole",
+              "source_raw_sha256": "63866f69156e5fdbca2d0484f15ed433b6671b907ac64531d3b0379df94059b9",
+              "processed_sha256": "63866f69156e5fdbca2d0484f15ed433b6671b907ac64531d3b0379df94059b9",
+              "quote": "Eli will post any authorized replacement pairing sheet; the posting assignment does not itself authorize a correction.",
+              "start_offset": 383,
+              "end_offset": 501
+            }
+          ],
+          "allowed_alternative_citations": [],
+          "fact_id": "C1CAL-07-F4"
+        }
+      ],
+      "answerable_parts_when_incomplete": [],
+      "missing_required_parts": [],
+      "forbidden_inference": [
+        "Eli's posting assignment itself grants authority to approve the correction.",
+        "The head alone remains sufficient under revision 2.",
+        "A replacement may be automatically posted after play has begun."
+      ],
+      "context_chunk_ids": [
+        "C1-CHESS-PROCEDURE-V1-whole",
+        "C1-CHESS-MEETING-whole",
+        "C1-CHESS-PROCEDURE-V2-whole"
+      ],
+      "source_binding": [
+        {
+          "chunk_id": "C1-CHESS-PROCEDURE-V1-whole",
+          "document_id": "C1-CHESS-PROCEDURE-V1",
+          "revision": 1,
+          "processed_sha256": "6d6237ae185de8c25b622259ed29ea09a1a799007892169ef11d15ec64001642"
+        },
+        {
+          "chunk_id": "C1-CHESS-MEETING-whole",
+          "document_id": "C1-CHESS-MEETING",
+          "revision": 1,
+          "processed_sha256": "63866f69156e5fdbca2d0484f15ed433b6671b907ac64531d3b0379df94059b9"
+        },
+        {
+          "chunk_id": "C1-CHESS-PROCEDURE-V2-whole",
+          "document_id": "C1-CHESS-PROCEDURE-V2",
+          "revision": 1,
+          "processed_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126"
+        }
+      ],
+      "review_notes": "Historical rule, revised conditions and named task assignment come from three documents. These are invented event rules, not federation rules.",
+      "ai_authored_question": true,
+      "ai_author_self_review": true,
+      "independent_prereview_count": 0,
+      "human_review_count": 0
+    },
+    {
+      "id": "C1CAL-08",
+      "family_id": "C1-F04",
+      "origin": "synthetic",
+      "question_language": "ko",
+      "source_languages": [
+        "en"
+      ],
+      "answerability": "insufficient_evidence",
+      "expected_status": "abstained",
+      "expected_reason": "insufficient_evidence",
+      "required_dimensions": [
+        "multifacet",
+        "insufficient_evidence"
+      ],
+      "required_facts": [],
+      "answerable_parts_when_incomplete": [
+        {
+          "statement": "Posting needs recorded written approval from both adjudicators before the first game clock starts.",
+          "mandatory": false,
+          "supporting_evidence": [
+            {
+              "document_id": "C1-CHESS-PROCEDURE-V2",
+              "revision": 1,
+              "chunk_id": "C1-CHESS-PROCEDURE-V2-whole",
+              "source_raw_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+              "processed_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+              "quote": "A replacement pairing sheet requires written approval from both the head adjudicator and the deputy adjudicator before the first game clock of the round starts. It may be posted only once both approvals are recorded while that time condition still holds.",
+              "start_offset": 238,
+              "end_offset": 492
+            }
+          ],
+          "allowed_alternative_citations": []
+        }
+      ],
+      "missing_required_parts": [
+        "Actual approved corrections in round 2 have not been reported in the supplied evidence."
+      ],
+      "forbidden_inference": [
+        "Any actual round-2 approved-correction count, including zero.",
+        "A meeting held before round 2 establishes the final event's correction total.",
+        "Approval of procedure revision 2 is approval of a particular pairing correction."
+      ],
+      "context_chunk_ids": [
+        "C1-CHESS-PROCEDURE-V2-whole",
+        "C1-CHESS-MEETING-whole"
+      ],
+      "source_binding": [
+        {
+          "chunk_id": "C1-CHESS-PROCEDURE-V2-whole",
+          "document_id": "C1-CHESS-PROCEDURE-V2",
+          "revision": 1,
+          "processed_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126"
+        },
+        {
+          "chunk_id": "C1-CHESS-MEETING-whole",
+          "document_id": "C1-CHESS-MEETING",
+          "revision": 1,
+          "processed_sha256": "63866f69156e5fdbca2d0484f15ed433b6671b907ac64531d3b0379df94059b9"
+        }
+      ],
+      "review_notes": "The conditions are present, but the actual event count is absent. The pre-round meeting is not proof of a final count of zero; incomplete evidence requires abstention.",
+      "ai_authored_question": true,
+      "ai_author_self_review": true,
+      "independent_prereview_count": 0,
+      "human_review_count": 0
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
-**연속 개발 목표를 활성화했다.** 사용자의 “계속 목표 설정해서 진행해” 요청에 따라 회의 1차 확장 완료 목표를 실제 goal 도구로 등록했다. C1 어댑터·단계 실행기·새 calibration 가족 등록을 병행 구현 중이며, 계획만 전달하고 다음 지시를 기다리지 않는다. 기존 동결 비교는 재실행하지 않는다. `178f6ed`의 push/PR CI는 모두 통과했고 현재 PR #14는 draft다.
+**연속 개발 목표가 활성 상태다.** 사용자의 “계속 목표 설정해서 진행해” 요청에 따라 회의 1차 확장 완료 목표를 실제 goal 도구로 등록했다. C1 어댑터·단계 실행기·자료 가족은 `82b0fff`에서 고정했고 해당 push/PR 필수 CI가 모두 통과했다. 계획만 전달하고 다음 지시를 기다리지 않는다. 기존 동결 비교는 재실행하지 않으며 PR #14는 draft다.
 
 C1 코드·가족 등록을 [새 source freeze](../data/evaluation/meetings-c1-source-freeze-v1.json)로 고정한다. 전체 Python 1,194·Java 125·회의 브라우저 회귀 5·프런트 타입/빌드·Ruff가 통과했다. 독립 코드 검토의 요청별 telemetry 경합과 watchdog 시작 실패 시 native 정리 누락을 수정하고 각각 합성 회귀로 확인했다. Windows 파일 교체의 일시적 잠금에는 같은 바이트의 저장만 최대 3회 시도하며 모델 재시도는 0이다. 고정 native의 `--no-warmup` 지원을 도움말로 확인했고 실제 C1 생성은 아직 0이다. 다음은 고정 코드 이후 새 calibration 8항목 작성·사전 검토와 중립/실제 비교다.
 
@@ -10,7 +10,9 @@ C1 코드·가족 등록을 [새 source freeze](../data/evaluation/meetings-c1-s
 
 **C0 실제 비교도 의미 기준 실패로 종료했다.** `7c59042`에서 중립 2회는 정상 답변/보류를 확인했고, 알려진 4회는 모두 구조 검사를 통과했다. 인용 9개는 원문·codepoint 위치와 정확히 일치했다. 별도 AI 검토의 전체 의미 기준은 2/4다. 진행자 안내 누락은 회복했지만 데모 의제를 완료 사실로 바꾼 주장과 선택한 인용 밖의 개인정보 이유가 남았다. [원본·독립 검토](../experiments/results/meetings-spans-c0-known-v1.semantic-review.json)를 보존한다. 같은 네 사례의 수정·재실행은 종료하고, 새 검증 12건 호출은 0으로 유지한다. Python 전체 1,077개·Ruff와 해당 head의 push/PR 필수 CI 3종이 통과했지만 자연어 답변 기능 완료나 main 통합은 아니다.
 
-현재 [무료 답변 개선 설계](MEETINGS-FREE-ANSWER-PLAN.md)의 코드와 [자료 가족 등록](MEETINGS-C1-DATA.md)을 준비했다. 새 calibration 질문·후속 모델 호출은 아직 0이며 중립 합성 protocol 입력 2개만 준비했다. 기존 4B 분석·회의 관리의 검증 범위는 유지한다.
+새 calibration은 8문항(공개4·합성4, KO4·EN4, 답변가능6·근거부족2) 작성과 별도 AI 사전검토 8건을 마쳤다. 채점 기준 명확화 1건을 수정·재확인했고 질문·원문은 바꾸지 않았다. 공개 원문4개의 고정 바이트·이용 조건, 원문 구간19개·인용24개 검사가 통과했다. 작성 시점 summary의 독립검토0과 이후 별도 prereview receipt의8을 구분하며 사용자 검수는0이다.
+
+[92파일 실행 계획](../data/evaluation/meetings-c1-execution-plan-v1.json)에 입력·oracle·검토·토큰 준비·익명화 seed hash를 고정했다. 공식 tokenizer의 계획 여유 포함 최대는 calibration3,621·중립2,138 tokens로4,096 아래다. 실제 native 토큰과 동일함이나 최악 상한의 증명은 아니다. 새 도구의 합성19·전체 Python1,213·Ruff가 통과했고 기존46파일 동결을 확인했다. [검토 절차](MEETINGS-C1-EXECUTION.md)의 입력 snapshot 경합도 수정·독립 재검토했다. 다음은 중립2개와 calibration8개의 실제 로컬 실행이다. 현재 C1 native/model 호출0, validation작성0이며 자연어 답변 완료가 아니다.
 
 ## 이전 진행 기록
 

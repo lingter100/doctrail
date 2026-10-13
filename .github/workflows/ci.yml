@@ -58,6 +58,8 @@ jobs:
         run: uv run python -m scripts.prepare_meeting_fixtures
       - name: Verify sealed meeting data preparation without network or models
         run: uv run python data/evaluation/meetings-qwen35-validation-v1/verify.py
+      - name: Verify fresh meeting calibration provenance without network or models
+        run: uv run python data/evaluation/meetings-c1-calibration-v1/verify.py
       - run: uv run python scripts/validate_splits.py data/manifests/kubernetes-pilot.json data/evaluation/pilot-smoke.jsonl
       - name: Replay frozen public corpus and verify candidate provenance
         run: |
