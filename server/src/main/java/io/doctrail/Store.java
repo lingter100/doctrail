@@ -27,6 +27,7 @@ public class Store {
                 } else if (version != 1) throw new IllegalStateException("unsupported_database_schema_version");
                 // Additive extension: legacy schema-v1 readers safely ignore this table.
                 execute(c, "CREATE TABLE IF NOT EXISTS search_metadata (search_id TEXT PRIMARY KEY REFERENCES searches(id) ON DELETE CASCADE,method TEXT NOT NULL CHECK(method IN ('bm25','dense','hybrid','hybrid_rerank')))");
+                execute(c, "CREATE TABLE IF NOT EXISTS search_model_metadata (search_id TEXT PRIMARY KEY REFERENCES searches(id) ON DELETE CASCADE,profile_id TEXT NOT NULL,model TEXT NOT NULL,revision TEXT NOT NULL)");
                 execute(c, "PRAGMA journal_mode=WAL");
             }
         } catch (Exception e) { throw new IllegalStateException("database_initialization_failed"); }

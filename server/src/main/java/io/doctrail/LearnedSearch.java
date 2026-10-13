@@ -20,15 +20,19 @@ public class LearnedSearch {
         store.read(c->auth.user(c,request));
         String status=inference.enabled()?"ready":"disabled";
         if(inference.enabled())try{inference.health(System.nanoTime()+TimeUnit.SECONDS.toNanos(2));}catch(ApiError e){status="unavailable";}
-        return Map.of("default_method","bm25","model_enabled",inference.enabled(),"status",status,"methods",METHODS,"available_methods",status.equals("ready")?METHODS:List.of("bm25"));
+        return Map.of("default_method","bm25","model_enabled",inference.enabled(),"status",status,"methods",METHODS,"available_methods",status.equals("ready")?METHODS:List.of("bm25"),"embedding_profile",inference.embeddingProfile());
     }
     private record Snapshot(Object user,Map<String,Object> membership,List<Map<String,Object>> rows){}
     private List<Map<String,Object>> visible(Connection c,String workspace,Object user)throws Exception{
         return rows(c,"SELECT d.id AS document_id,d.title,d.filename,d.revision,d.owner_id,d.visibility,d.updated_at,c.id AS chunk_id,c.text,c.page,c.start_offset,c.end_offset,c.ordinal FROM chunks c JOIN documents d ON c.document_id=d.id WHERE d.workspace_id=? AND d.status='ready' AND (d.visibility='workspace' OR d.owner_id=?) ORDER BY d.id,c.ordinal,c.id LIMIT 4097",workspace,user);
     }
     Map<String,Object> search(String workspace,String query,int limit,String method,HttpServletRequest request){
+        return search(workspace,query,limit,method,null,request);
+    }
+    Map<String,Object> search(String workspace,String query,int limit,String method,String expectedProfile,HttpServletRequest request){
         // Authenticate before reporting local admission status. Never queue unbounded model work.
         store.read(c->{Object user=auth.user(c,request).get("id");docs.membership(c,workspace,user,false);return null;});
+        if(expectedProfile!=null&&!expectedProfile.equals(inference.embeddingProfile().get("id")))throw new ApiError(409,"embedding_profile_changed");
         if(!activeSearch.tryAcquire())throw new ApiError(503,"inference_busy");
         try{return searchAdmitted(workspace,query,limit,method,request);}finally{activeSearch.release();}
     }
@@ -51,8 +55,11 @@ public class LearnedSearch {
             String searchId=Auth.uid();
             execute(c,"INSERT INTO searches VALUES (?,?,?,?,?)",searchId,workspace,user,query,Auth.now());
             execute(c,"INSERT INTO search_metadata VALUES (?,?)",searchId,method);
+            var profile=inference.embeddingProfile();
+            execute(c,"INSERT INTO search_model_metadata VALUES (?,?,?,?)",searchId,profile.get("id"),profile.get("model"),profile.get("revision"));
             for(var result:results)execute(c,"INSERT INTO search_results VALUES (?,?,?,?)",searchId,result.get("document_id"),result.get("chunk_id"),result.get("revision"));
             Map<String,Object> response=new LinkedHashMap<>(Map.of("query",query,"method",method,"elapsed_ms",Math.round((System.nanoTime()-started)/10_000.0)/100.0,"search_id",searchId,"results",results));
+            response.put("embedding_profile",profile);
             if(method.equals("hybrid_rerank"))response.put("candidate_policy","balanced_depth_rrf50_v1");
             return response;
         });

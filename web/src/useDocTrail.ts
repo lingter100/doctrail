@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, errorMessage } from './api';
+import { profileLabel } from './searchMethods';
 import type { Auth, AuthMode, Capabilities, Detail, Doc, History, Hit, Modal, Search, SearchMethod, View, Workspace } from './types';
 
 type State = {
@@ -10,11 +11,13 @@ type State = {
   feedback: Record<string, 'busy' | 'saved'>; retryBusy: boolean; logoutBusy: boolean;
   toast: { id: number; message: string } | null;
   searchMethod: SearchMethod; capabilities: Capabilities | null; capabilitiesBusy: boolean;
+  historyNotice: string;
 };
 const emptyWorkspace = {
   documents: [] as Doc[], history: [] as History[], view: 'library' as View, search: null,
   selected: null, selectedHit: null, selectedIndex: 0, query: '', filter: '', loading: false, workspaceLoading: false,
   pageError: '', modal: null, modalBusy: false, modalError: '', feedback: {}, retryBusy: false,
+  historyNotice: '',
 };
 const initial: State = { ...emptyWorkspace, booting: true, auth: null, authMode: 'register', authBusy: false, authError: '', workspaceId: '', logoutBusy: false, toast: null, searchMethod: 'bm25', capabilities: null, capabilitiesBusy: false };
 
@@ -80,7 +83,7 @@ export function useDocTrail() {
   }
   function setSearchMethod(searchMethod: SearchMethod) {
     tokens.current.search++; tokens.current.detail++;
-    update({ searchMethod, search: null, selected: null, selectedHit: null, feedback: {}, pageError: '', loading: live.current.view === 'search' ? false : live.current.loading });
+    update({ searchMethod, search: null, selected: null, selectedHit: null, feedback: {}, pageError: '', historyNotice: '', loading: live.current.view === 'search' ? false : live.current.loading });
   }
   function acceptAuth(auth: Auth) {
     resetWorkspace();
@@ -128,7 +131,7 @@ export function useDocTrail() {
   }
   function changeView(view: View) {
     // A search that finishes after navigating away must not reclaim the view.
-    tokens.current.search++; update({ view, pageError: '', loading: view === 'search' ? false : live.current.workspaceLoading });
+    tokens.current.search++; update({ view, pageError: '', historyNotice: '', loading: view === 'search' ? false : live.current.workspaceLoading });
   }
   async function logout() {
     if (live.current.logoutBusy) return;
@@ -143,18 +146,35 @@ export function useDocTrail() {
       if (session === tokens.current.auth && !sessionExpired(error)) { update({ logoutBusy: false }); toast(errorMessage(error)); }
     }
   }
-  async function runSearch(rawQuery: string, method = live.current.searchMethod) {
+  function rerunHistory(item: History) {
+    const method = item.method || 'bm25';
+    const previous = item.embedding_profile, current = live.current.capabilities?.embedding_profile;
+    if (method !== 'bm25' && (!previous || !current || previous.id !== current.id || previous.model !== current.model || previous.revision !== current.revision)) {
+      tokens.current.search++; tokens.current.detail++;
+      update({ view: 'search', query: item.query, searchMethod: method, search: null, selected: null, selectedHit: null, loading: false, pageError: '', feedback: {},
+        historyNotice: `${previous ? `이 기록은 ${profileLabel(previous)}로 검색했어요. 현재 모델과 달라요.` : '이 기록에는 사용한 모델 정보가 없어 같은 모델인지 확인할 수 없어요.'} 위 검색창에서 검색을 누르면 현재 연결된 모델로 새로 검색해요.` });
+      return;
+    }
+    void runSearch(item.query, method, previous?.id);
+  }
+  async function runSearch(rawQuery: string, method = live.current.searchMethod, expectedProfile = live.current.capabilities?.embedding_profile?.id) {
     const query = rawQuery.trim(), id = live.current.workspaceId;
     if (!query || !id) return;
     const epoch = tokens.current.epoch, request = ++tokens.current.search;
     tokens.current.detail++;
     const valid = () => epoch === tokens.current.epoch && request === tokens.current.search;
-    update({ view: 'search', query, searchMethod: method, selected: null, selectedHit: null, search: null, loading: true, pageError: '', feedback: {}, retryBusy: false });
+    update({ view: 'search', query, searchMethod: method, selected: null, selectedHit: null, search: null, loading: true, pageError: '', historyNotice: '', feedback: {}, retryBusy: false });
     try {
-      const result = await api<Search>(`/workspaces/${id}/search?q=${encodeURIComponent(query)}&limit=10&method=${encodeURIComponent(method)}`);
-      if (valid()) update(current => ({ search: result, history: [{ id: result.search_id, query, method: result.method, created_at: new Date().toISOString(), result_count: result.results.length }, ...current.history.filter(item => item.id !== result.search_id)].slice(0, 50) }));
+      const guard = method !== 'bm25' && expectedProfile ? `&expected_embedding_profile=${encodeURIComponent(expectedProfile)}` : '';
+      const result = await api<Search>(`/workspaces/${id}/search?q=${encodeURIComponent(query)}&limit=10&method=${encodeURIComponent(method)}${guard}`);
+      if (valid()) update(current => ({ search: result, history: [{ id: result.search_id, query, method: result.method, embedding_profile: result.embedding_profile, created_at: new Date().toISOString(), result_count: result.results.length }, ...current.history.filter(item => item.id !== result.search_id)].slice(0, 50) }));
     } catch (error) {
-      if (valid() && !sessionExpired(error)) update({ pageError: errorMessage(error) });
+      if (valid() && !sessionExpired(error)) {
+        if (error instanceof ApiError && error.code === 'embedding_profile_changed') {
+          update({ historyNotice: '연결된 모델이 변경되어 검색을 멈췄어요. 모델 표시를 확인한 뒤 위 검색창에서 새로 검색해 주세요.' });
+          void loadCapabilities();
+        } else update({ pageError: errorMessage(error) });
+      }
     } finally { if (valid()) update({ loading: false }); }
   }
   async function openDocument(id: string, hit?: Hit, selectedIndex = 0) {
@@ -284,7 +304,7 @@ export function useDocTrail() {
   }
   return { state, workspace: state.auth?.workspaces.find(workspace => workspace.id === state.workspaceId),
     setQuery: (query: string) => update({ query }), setFilter: (filter: string) => update({ filter }),
-    setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, loadCapabilities, setSearchMethod,
+    setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, rerunHistory, loadCapabilities, setSearchMethod,
     openDocument, closeSource, feedback, openModal, closeModal, submitModal, reprocess };
 }
 export type DocTrail = ReturnType<typeof useDocTrail>;

@@ -6,6 +6,7 @@ if (!process.env.DOCTRAIL_E2E_URL || !process.env.DOCTRAIL_E2E_OUTPUT) {
 }
 export default defineConfig({
   testDir: './tests',
+  testMatch: process.env.DOCTRAIL_E2E_SPEC ? `**/${process.env.DOCTRAIL_E2E_SPEC.replaceAll('\\', '/')}` : undefined,
   timeout: 45_000,
   expect: { timeout: 8000 },
   fullyParallel: false,

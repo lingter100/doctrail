@@ -2,7 +2,9 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
-이번 비교·재생·분석은 [PR #10](https://github.com/lingter100/doctrail/pull/10)으로 제출했다. 정확한 최종 head의 원격 검사와 병합 여부는 해당 PR에서 확인한다. 필수 java-service/backend/web 통과 후 사용자 계정의 fast-forward 방식으로 통합하며, 모델 재실행은 하지 않는다.
+[PR #10](https://github.com/lingter100/doctrail/pull/10)은 `1051af7`로 main에 통합됐고 [main CI](https://github.com/lingter100/doctrail/actions/runs/38327502543)는 성공했다. 완료된 모델 비교는 재실행하지 않았다.
+
+**M4 로컬 운영 연결 준비.** 새 `feat/terminal-operations`에서 [별도 설계](M4-OPERATIONS-DESIGN.md)에 따라 checkpoint manifest를 검증하는 실험 실행기, Java 모델 식별 검사·이력 저장, React 모델 표시·과거 이력 보호를 구현했다. 기본 BM25와 base 실행은 유지한다. 실제 GPU 운영 검증 결과는 실행 후 별도 기록하며 모의 응답 검사를 실제 추론으로 표시하지 않는다.
 
 **M4 main-dev 실제 비교 완료.** 실행 전 `6938c3c`에 고정한 계획·코드·설계로 새 base/terminal을 한 번 비교했다. 양성59질문의 전체 근거 @50은34→47, @5는29→37로 통과했다. @50 회복15·퇴보2, @5 회복14·퇴보6이며 다중 문서 @5는1→0/7이다. [분석](M4-MAIN-DEV-ANALYSIS.md)과 [보고서](../experiments/results/m4-main-dev-v1.json)를 따른다. 새 base는 과거 M3 dense의79질문 후보 순위·점수와 정확히 같았다. 원본 보고서·journal을 바이트 그대로 보존했고, 모델·로컬 학습 pack·test 질문 접근을 차단한 상태에서도 공개 자료 재생이 통과했다. 다음은 저장본을 명시적으로 연결하는 별도 로컬 운영 검증이다. 기본 서비스 모델·검색 정책을 바꾸지 않았으며 calibration/main-dev 재튜닝·test 개방은 하지 않는다.
 
@@ -318,3 +320,5 @@ PR #8은 `42e682d`로 main 통합됐고 [main CI](https://github.com/lingter100/
 최종 로컬 Python449개·Ruff 통과, 기존 Starlette deprecation warning1개가 남는다. 같은 작업 묶음에서 Java59개(실패0), React 타입 검사·production build, 실제 Java 대상 Chromium18개도 통과했다. 서비스 코드는 이번 연구 작업에서 바뀌지 않았으며 동결 M3/dev나 Java CUDA 동작을 불필요하게 다시 실행하지 않았다. 원격 CI·통합 상태는 아래 또는 PR의 최종 head를 기준으로 확인한다.
 
 다음 작업: 학습 저장본·청크·평가 정책을 먼저 동결한 한 번의 main-dev 비교를 설계하고 기존 결과 대비 회복·퇴보를 확인한다. 지금 얻은 calibration 결과로 추가 학습 설정을 탐색하지 않는다. 그 뒤 근거 기반 답변·보류, 운영 검증·화면 완성도·포트폴리오를 이어간다. 최종 test·유료 사용·공개 서비스 배포·사용자 검수는 아직 수행하지 않았다.
+
+운영 실행 전 검증: 전체 Python513개·Java82개·프런트 타입/production build·Ruff, 실제 Java HTTP11묶음, Chromium22개가 통과했다. 최초 전체 브라우저 실행은20통과/2실패였다. 검사 수 증가로 공유 서버/IP의 정상 인증 제한20회에 걸렸으므로, 보안 제한을 바꾸지 않고 검사 파일마다 Java/DB를 분리했다. 모든22개 통과와 선택 파일+grep1개 통과, 소유 JVM 종료를 확인했다. 최초 실패 증거는 `.local/web-e2e-iR3MHQ`, 성공은 `.local/web-e2e-batch-xPAxoJ`, 선택 실행은 `.local/web-e2e-batch-lK1lNC`에 보존한다. 기존 main-dev의 모델 없는 순위/판정 재생과 terminal/base/BGE 파일 사전 검증도 통과했다. 아직 이 기록은 실제 terminal GPU HTTP 성공을 주장하지 않는다.

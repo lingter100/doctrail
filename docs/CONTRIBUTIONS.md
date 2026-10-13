@@ -129,3 +129,11 @@ AI가 작성한 질문78개에 자동 span 검사와 별도 AI 의미 검토가 
 실제 도구 수락 설정은 `calibration_analysis_resume`과 `main_dev_design` 모두 gpt-6-astra/xhigh다. 전자는 중단됐던 calibration 사례 분석을 저장 순위와 train 원문으로 완성하고, 후자는 다음 독립 dev 비교의 설계를 준비한다. 부모는 문서 통합과 로컬·원격 검증 및 GitHub Flow를 맡는다. 설계·분석·자동 검사는 AI 기여이며 사용자 검수나 사람의 PR 승인으로 기록하지 않는다.
 
 PR #9의 필수 CI 성공과 사용자 author/committer 연결을 확인한 뒤 main으로 fast-forward하고 GitHub merged 상태를 확인했다. 다음 실행기 구현·테스트 담당 `main_dev_runner`에 실제 수락된 설정은 gpt-6-astra/high다. 설계 에이전트와 구현 에이전트의 파일 소유권을 나누고 새 모델 실행은 부모가 사전 고정 이후 수행한다.
+
+## 2026-10-13 · M4 terminal 운영 연결
+
+도구가 실제 수락한 설정은 설계·독립 코드 검토 terminal_ops_design=gpt-6-astra/xhigh, Java·React·회귀 구현 terminal_java=gpt-6-astra/high, 모델 worker·실행기·회귀 구현 terminal_worker=gpt-6-astra/high다. 부모 채팅 설정을 변경했다고 기록하지 않는다.
+
+부모는 작업 상태·기존 CI 확인, 파일 소유권 조정, 실제 서비스 검증기·브라우저 시나리오, 결과·소스 바인딩, 전체 검사와 Git 통합을 맡는다. 독립 AI 검토로 영수증 읽기와 hash 검사 사이의 파일 교체, 모델 로드 중 파일 교체, base 복귀 환경변수, 배포 번들 기록을 보강했다. 학습·calibration/main-dev 비교는 다시 수행하지 않는다. 모든 합성 계정·피드백·브라우저 확인은 AI 자동 검사이며 사용자 검수는0이다. 실제 GPU 운영 결과는 STATUS에 별도로 기록한다.
+
+전체 브라우저 검사에서 가입 요청 제한에 따른2실패를 발견했다. terminal_java가 기존 보안 제한과 테스트를 보존하며 실행기를 spec별 Java/DB로 격리했고 부모가 전체22통과·선택1통과 및 프로세스 정리 보고를 확인했다. 첫 실패를 삭제하거나 단순 재시도로 통과 처리하지 않았다.

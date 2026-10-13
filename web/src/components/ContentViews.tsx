@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { date, excerpt, fullDate, highlightParts, statusLabel, visibilityLabel } from '../helpers';
 import type { DocTrail } from '../useDocTrail';
 import { Icon } from './Icon';
-import { searchMethods } from '../searchMethods';
+import { profileLabel, searchMethods } from '../searchMethods';
 
 export function Highlight({ text, query }: { text: string; query: string }) {
   return <>{highlightParts(text, query).map((part, index) => part.marked ? <mark key={index}>{part.text}</mark> : <Fragment key={index}>{part.text}</Fragment>)}</>;
@@ -28,13 +28,13 @@ export function Library({ app }: { app: DocTrail }) {
 export function HistoryView({ app }: { app: DocTrail }) {
   const { history } = app.state;
   return <><div className="section-bar"><h2>최근 검색 <span className="count">{history.length}</span></h2><span className="muted">내 검색 기록만 표시됩니다</span></div>
-    {history.length ? <div className="history-list">{history.map((item, index) => <button key={item.id} className="history-row" data-history={index} onClick={() => void app.runSearch(item.query, item.method || 'bm25')}><span className="history-icon"><Icon name="clock"/></span><span><strong>{item.query}</strong><small>{fullDate(item.created_at)} · {searchMethods[item.method || 'bm25'].label}</small></span><span className="history-count">근거 {item.result_count}개</span><Icon name="arrow"/></button>)}</div> : <div className="empty-state compact"><Icon name="clock" className="empty-icon"/><h2>아직 검색 기록이 없어요.</h2><p>궁금한 키워드를 검색하면, 이곳에서 다시 찾을 수 있어요.</p></div>}
+    {history.length ? <div className="history-list">{history.map((item, index) => <button key={item.id} className="history-row" data-history={index} onClick={() => app.rerunHistory(item)}><span className="history-icon"><Icon name="clock"/></span><span><strong>{item.query}</strong><small>{fullDate(item.created_at)} · {searchMethods[item.method || 'bm25'].label}{item.method && item.method !== 'bm25' ? ` · ${profileLabel(item.embedding_profile)}` : ''}</small></span><span className="history-count">근거 {item.result_count}개</span><Icon name="arrow"/></button>)}</div> : <div className="empty-state compact"><Icon name="clock" className="empty-icon"/><h2>아직 검색 기록이 없어요.</h2><p>궁금한 키워드를 검색하면, 이곳에서 다시 찾을 수 있어요.</p></div>}
   </>;
 }
 export function SearchView({ app }: { app: DocTrail }) {
   const { search, selectedHit, feedback } = app.state;
   if (!search) return <div className="empty-state compact"><Icon name="search" className="empty-icon"/><h2>찾고 싶은 문서 속 표현이 있나요?</h2><p>위 검색창에 키워드를 입력하면 관련 구절을 찾아드려요.</p></div>;
-  return <><div className="section-bar"><h2>검색된 근거 <span className="count">{search.results.length}</span></h2><span className="muted">{searchMethods[search.method].label} · {Math.round(search.elapsed_ms)}ms · 관련도순</span></div>
+  return <><div className="section-bar"><h2>검색된 근거 <span className="count">{search.results.length}</span></h2><span className="muted">{searchMethods[search.method].label}{search.method !== 'bm25' ? ` · ${profileLabel(search.embedding_profile)}` : ''} · {Math.round(search.elapsed_ms)}ms · 관련도순</span></div>
     {search.results.length ? <><div className="results">{search.results.map((hit, index) => <article key={hit.chunk_id} className={`result-card ${selectedHit?.chunk_id === hit.chunk_id ? 'selected' : ''}`}>
       <button className="result-open" data-hit={index} onClick={() => void app.openDocument(hit.document_id, hit, index)}><div className="result-meta"><span className="citation-number">{index + 1}</span><span>{hit.filename}</span><span>v{hit.revision}{hit.page ? ` · ${hit.page}페이지` : ''}</span></div><h2>{hit.title}</h2><p className="result-excerpt"><Highlight text={excerpt(hit.text, search.query)} query={search.query}/></p><span className="result-link">원문에서 근거 확인 <Icon name="arrow"/></span></button>
       <div className="result-bottom"><span>검색된 원문 구절</span><div className="feedback">{feedback[hit.chunk_id] === 'saved' ? '피드백이 저장됐어요. 고마워요!' : <><span>도움이 됐나요?</span><button data-feedback={index} data-relevant="true" aria-label={`${index + 1}번 결과 관련 있음`} disabled={feedback[hit.chunk_id] === 'busy'} onClick={() => void app.feedback(index, true)}>관련 있어요</button><button data-feedback={index} data-relevant="false" aria-label={`${index + 1}번 결과 관련 없음`} disabled={feedback[hit.chunk_id] === 'busy'} onClick={() => void app.feedback(index, false)}>관련 없어요</button></>}</div></div>

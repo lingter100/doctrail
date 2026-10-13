@@ -28,3 +28,10 @@ Learned search snapshots current visible chunks, releases its read transaction d
 Optional inference errors: `503 inference_disabled|inference_unavailable|inference_invalid_response|inference_busy`, `504 inference_timeout`. These never trigger a silent BM25/CPU fallback. Clients may explicitly choose BM25 in a new request. Model error responses do not expose raw upstream payloads. See [model boundary ADR](decisions/0004-model-serving.md) and [local operations](MODEL-SERVING.md).
 
 UI target: DocTrail, Korean light neutral sidebar/library/search/evidence viewer, account onboarding, uploads/processing feedback, document list/detail, title/content edit, private/workspace toggle, deletion, failure/retry, history and feedback. Empty states explain actual actions. Do not seed fabricated docs or quality numbers automatically.
+
+## Additive embedding profile contract (M4 operations)
+
+- `GET /api/search/capabilities` includes configured `embedding_profile:{id,model,revision}` separately from readiness. Allowlisted server profiles: `base` (default), `m4-terminal-v1` (explicit experiment). Clients cannot select the worker model.
+- Successful learned search and its history row include the verified profile at search time. BM25 has absent/null metadata. Legacy learned history without metadata remains null, never inferred from the current server setting.
+- Learned search accepts optional `expected_embedding_profile` as an identity guard. After session/membership checks, a mismatch returns `409 embedding_profile_changed`, before model execution and history insertion. The UI sends this guard and asks for a new explicit search when historical and current profiles differ or history metadata is unknown.
+- Java validates allowlisted model/revision at health and every embedding response. Terminal revision is the frozen checkpoint manifest SHA-256; base revision remains the pinned upstream commit. See [operational design](M4-OPERATIONS-DESIGN.md) for identities, rollback and provenance.

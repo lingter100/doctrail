@@ -55,3 +55,30 @@ ONNX를 Java에서 직접 실행하는 대안도 있다. 지금은 이미 실측
 한계는 명확하다. 전체 가시 청크를 매 검색 인코딩/cache 조회한 뒤 Java에서 정확 cosine을 계산한다. 4,096청크 상한, 메모리 cache 4,096개, 직렬 추론이므로 대규모·고동시성 서비스가 아니다. 벡터 DB·비동기 인덱스·캐시 영속화는 아직 도입하지 않았다. Dense top-k가 나왔다는 이유로 답할 근거가 충분하다고 판단하지 않는다. 답변 생성·보류·상충 문서 판단은 다음 단계다.
 
 사용자는 실제 화면의 문서 탐색과 근거 읽기 편의성을 직접 검토할 수 있다. 이 검토가 끝나기 전에는 사용성 검증이나 사용자 만족도로 기록하지 않는다. 현재 AI/자동 검사와 사용자 검수는 [CONTRIBUTIONS](CONTRIBUTIONS.md)에 구분한다.
+
+## 고정 M4 학습 모델의 명시적 실험 실행
+
+이 경로는 마지막 학습 저장본 하나를 연결하는 별도 로컬 실험이다. 기본 모델 채택이 아니다. [설계와 검사 범위](M4-OPERATIONS-DESIGN.md)를 따른다. 기존 모델 설치와 `.local/m4-e5-train-v2/terminal`의 동일 가중치가 필요하며 자동 다운로드·학습을 하지 않는다. 가중치 없는 공개 저장소에서는 무거운 모델 없이 계약 검사만 실행할 수 있다.
+
+```powershell
+uv run --locked --group retrieval --no-sync python -m scripts.serve_terminal_models --device cuda
+```
+
+기본 DB는 `var/doctrail-terminal-experimental.sqlite3`다. 일반 DB와 구분되며 `--database`로 명시할 수 있다. 실행기는 Java profile을 `m4-terminal-v1`으로 설정하고 원래 tokenizer와 고정 checkpoint 파일·영수증을 시작 전후 검증한다. 화면은 “학습 실험 모델”을 표시한다. 모델 없는 기본 검색은 계속 BM25다.
+
+기존 base로 복귀하려면 먼저 실험 실행기를 종료하고 같은 DB를 지정하되 서버 기대 profile도 base로 명시한다. 파일을 삭제하거나 학습을 다시 하지 않는다.
+
+```powershell
+$env:DOCTRAIL_EMBEDDING_PROFILE = 'base'
+uv run --locked --group retrieval --no-sync python -m scripts.serve_models --device cuda --database var/doctrail-terminal-experimental.sqlite3
+```
+
+추가 `search_model_metadata` 테이블은 성공한 검색 당시의 모델 식별자를 보존한다. 모델 정보가 없는 과거 이력은 추정하지 않는다. 다른 모델의 이력은 화면 안내를 확인한 뒤 새 검색으로 실행한다. 서버는 `expected_embedding_profile` 불일치를409 `embedding_profile_changed`로 거부하며, 이 실패로 새 검색 이력을 만들지 않는다.
+
+실제 로컬 GPU 운영 검증은 새 출력 폴더를 요구하며 임시 합성 DB를 정리한다. 실패도 report·단계 journal을 보존한다. Raw 자식 프로세스 로그는 개인 경로가 포함될 수 있어 `.local`에만 남기며 공개 보고서와 구분한다.
+
+```powershell
+uv run --locked --group retrieval --no-sync python -m scripts.verify_terminal_service --browser --output-dir .local/m4-terminal-service-v1
+```
+
+보고서는 worker+Java 준비 시간과 HTTP 요청 시간을 구분한다. 소수의 순차 요청은 cache를 공유하므로 속도 우위나 부하 성능의 근거로 사용하지 않는다. 실제 결과·실패·시도 이름은 STATUS를 따른다. 완료된 calibration/main-dev와 최종 test는 이 명령으로 실행하지 않는다.

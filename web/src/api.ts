@@ -10,6 +10,7 @@ export function errorMessage(error: unknown): string {
   if (code.includes('member') || code.includes('user_not_found')) return '먼저 가입한 사용자의 이메일을 입력해 주세요.';
   if (error.status === 404) return '문서를 찾을 수 없거나 접근 권한이 변경되었어요.';
   if (code === 'search_context_changed') return '검색 중 문서나 접근 권한이 변경되었어요. 다시 검색해 주세요.';
+  if (code === 'embedding_profile_changed') return '연결된 모델이 변경되었어요. 현재 모델을 확인한 뒤 새로 검색해 주세요.';
   if (code === 'visible_corpus_too_large') return '현재 모델 검색에서 처리할 수 있는 문서 분량을 넘었어요. 키워드 검색을 선택해 주세요.';
   if (code === 'query_too_long') return '모델이 처리할 수 있도록 검색어를 조금 줄여 주세요.';
   if (code === 'inference_timeout') return '모델 검색 시간이 초과됐어요. 잠시 후 다시 검색하거나 키워드 검색을 선택해 주세요.';

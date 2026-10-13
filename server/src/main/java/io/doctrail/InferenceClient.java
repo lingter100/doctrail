@@ -3,6 +3,7 @@ package io.doctrail;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.io.ByteArrayOutputStream;
 import java.net.URI;
@@ -18,6 +19,8 @@ import java.util.concurrent.Flow;
 @Component
 public class InferenceClient {
     static final String EMBEDDING="intfloat/multilingual-e5-small", EMBEDDING_REVISION="614241f622f53c4eeff9890bdc4f31cfecc418b3";
+    static final String TERMINAL_EMBEDDING="doctrail/multilingual-e5-small-m4-terminal-v1", TERMINAL_REVISION="62e530d3094e98b336d039f10956c8e0e2a39d24d66b07818e92a46f0aac10fb";
+    private final Map<String,String> embeddingProfile;
     static final String RERANKER="BAAI/bge-reranker-v2-m3", RERANKER_REVISION="953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e";
     static final int DIMENSION=384, MAX_RESPONSE=4*1024*1024;
     private final URI base;
@@ -26,9 +29,17 @@ public class InferenceClient {
     private final HttpClient http=HttpClient.newBuilder().proxy(ProxySelector.of(null)).connectTimeout(Duration.ofSeconds(2)).followRedirects(HttpClient.Redirect.NEVER).build();
     final long timeoutMillis;
 
+    InferenceClient(String url,String token,long timeoutMillis,ObjectMapper json){this(url,token,timeoutMillis,"base",json);}
+    @Autowired
     public InferenceClient(@Value("${doctrail.inference-url:}") String url,
             @Value("${doctrail.inference-token:}") String token,
-            @Value("${doctrail.inference-timeout-ms:120000}") long timeoutMillis,ObjectMapper json) {
+            @Value("${doctrail.inference-timeout-ms:120000}") long timeoutMillis,
+            @Value("${doctrail.embedding-profile:base}") String profile,ObjectMapper json) {
+        embeddingProfile=switch(profile){
+            case "base"->Map.of("id","base","model",EMBEDDING,"revision",EMBEDDING_REVISION);
+            case "m4-terminal-v1"->Map.of("id","m4-terminal-v1","model",TERMINAL_EMBEDDING,"revision",TERMINAL_REVISION);
+            default->throw new IllegalArgumentException("invalid_embedding_profile");
+        };
         this.json=json; this.token=token; this.timeoutMillis=timeoutMillis;
         if(timeoutMillis<1||timeoutMillis>120000)throw new IllegalArgumentException("invalid_inference_configuration");
         if(url.isBlank()){base=null;return;}
@@ -41,11 +52,12 @@ public class InferenceClient {
         } catch(IllegalArgumentException e){throw new IllegalArgumentException("invalid_inference_configuration");}
     }
     boolean enabled(){return base!=null;}
+    Map<String,String> embeddingProfile(){return embeddingProfile;}
     long deadline(){return System.nanoTime()+TimeUnit.MILLISECONDS.toNanos(timeoutMillis);}
     void health(long deadline){
         JsonNode root=call("/health",null,deadline);
         require(integer(root,"schema_version",1)&&"ready".equals(root.path("status").asText()));
-        model(root.path("embedding"),EMBEDDING,EMBEDDING_REVISION);
+        model(root.path("embedding"),embeddingProfile.get("model"),embeddingProfile.get("revision"));
         model(root.path("reranker"),RERANKER,RERANKER_REVISION);
         require(integer(root.path("embedding"),"dimension",DIMENSION)&&integer(root.path("embedding"),"max_length",512)
                 &&integer(root.path("reranker"),"max_length",512)&&integer(root.path("limits"),"max_embed_items",64)&&integer(root.path("limits"),"max_rerank_items",50));
@@ -53,7 +65,7 @@ public class InferenceClient {
     private static boolean integer(JsonNode root,String key,int value){return root.path(key).isIntegralNumber()&&root.path(key).canConvertToInt()&&root.path(key).asInt()==value;}
     Map<String,double[]> embed(String kind,List<Map<String,String>> items,long deadline){
         JsonNode root=call("/embed",Map.of("schema_version",1,"kind",kind,"items",items),deadline);
-        validate(root,EMBEDDING,EMBEDDING_REVISION,items);
+        validate(root,embeddingProfile.get("model"),embeddingProfile.get("revision"),items);
         require(integer(root,"dimension",DIMENSION));
         Map<String,double[]> result=new HashMap<>();
         for(JsonNode item:root.path("items")){

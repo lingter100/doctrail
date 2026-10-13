@@ -5,7 +5,7 @@ import { Brand, Icon } from './components/Icon';
 import { Library, HistoryView, SearchView } from './components/ContentViews';
 import { SourcePane } from './components/SourcePane';
 import { Modal } from './components/Modal';
-import { searchMethods } from './searchMethods';
+import { profileLabel, searchMethods } from './searchMethods';
 import type { SearchMethod } from './types';
 
 export function App() {
@@ -38,7 +38,8 @@ export function App() {
           <main className="main-content"><div className="page-top"><div><span className="eyebrow">{view === 'library' ? 'YOUR KNOWLEDGE, IN ONE PLACE' : view === 'history' ? 'PICK UP WHERE YOU LEFT OFF' : 'FOLLOW THE EVIDENCE'}</span><h1>{title}</h1><p>{view === 'library' ? '흩어진 기록을 모아, 필요할 때 근거와 함께 찾아보세요.' : view === 'history' ? '이전에 찾았던 키워드로 탐색을 이어가세요.' : '문서 속 표현을 찾고, 인용된 원문을 직접 확인하세요.'}</p></div><button className="button primary" id="upload" disabled={!workspace} onClick={() => app.openModal('upload')}><Icon name="plus"/> 문서 추가</button></div>
             <form className="global-search" id="search-form" onSubmit={event => { event.preventDefault(); void app.runSearch(state.query); }}><Icon name="search"/><input ref={input} id="search-input" name="query" value={state.query} onChange={event => app.setQuery(event.currentTarget.value)} placeholder="어떤 내용을 찾고 있나요? 문서 속 키워드를 입력하세요" autoComplete="off" maxLength={500} required aria-label="문서 검색어"/><button type="submit" className="search-submit" disabled={!workspace}>검색 <Icon name="arrow"/></button></form>
             <div className="search-options"><label htmlFor="search-method">검색 방식<select id="search-method" value={state.searchMethod} onChange={event => app.setSearchMethod(event.currentTarget.value as SearchMethod)}>{(Object.keys(searchMethods) as SearchMethod[]).map(method => <option key={method} value={method} disabled={method !== 'bm25' && !state.capabilities?.available_methods.includes(method)}>{searchMethods[method].label}</option>)}</select></label><span>{searchMethods[state.searchMethod].description}</span>{state.capabilities?.status !== 'ready' && <button className="text-button" type="button" disabled={state.capabilitiesBusy} onClick={() => void app.loadCapabilities()}>{state.capabilitiesBusy ? '연결 확인 중…' : '모델 연결 확인'}</button>}</div>
-            <div className="search-caption"><span>{state.capabilities?.status === 'ready' ? '모델 검색 연결됨' : '현재 키워드 검색 사용 가능'}</span><span>내가 볼 수 있는 문서에서만 검색해요</span></div>
+            <div className="search-caption"><span>{state.capabilities?.status === 'ready' ? `모델 검색 연결됨${state.capabilities.embedding_profile ? ` · ${profileLabel(state.capabilities.embedding_profile)}` : ''}` : '현재 키워드 검색 사용 가능'}</span><span>내가 볼 수 있는 문서에서만 검색해요</span></div>
+            {state.historyNotice && <div className="error-banner" role="status" data-testid="history-model-notice">{state.historyNotice}</div>}
             {state.pageError && <div className="error-banner" role="alert">{state.pageError}<button id="reload" className="text-button" onClick={() => void (view === 'search' ? app.runSearch(state.query) : app.loadWorkspace())}>다시 불러오기</button></div>}
             <section className="content-section" aria-live="polite">{state.loading ? <div className="loading"><span className="spinner"/>문서를 불러오는 중이에요…</div> : view === 'library' ? <Library app={app}/> : view === 'history' ? <HistoryView app={app}/> : <SearchView app={app}/>}</section>
             <footer className="main-footer"><span>문서에서 시작해, 근거로 도착하다.</span><span>DOCTRAIL</span></footer>

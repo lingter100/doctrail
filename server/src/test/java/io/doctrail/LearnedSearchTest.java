@@ -6,6 +6,8 @@ import jakarta.servlet.http.Cookie;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.api.io.TempDir;
 import org.springframework.mock.web.MockHttpServletRequest;
 import java.net.InetSocketAddress;
@@ -22,6 +24,9 @@ class LearnedSearchTest {
     Store store;Auth auth;DocumentService docs=new DocumentService();MockHttpServletRequest request;
     String owner="owner",user="member",workspace="workspace",session="synthetic-session",token="synthetic-local-worker-token-1234567890";
     List<JsonNode> received=new CopyOnWriteArrayList<>();String mode="ready";volatile Runnable duringPassage=()->{};
+    volatile String workerEmbedding=InferenceClient.EMBEDDING,workerRevision=InferenceClient.EMBEDDING_REVISION;
+    volatile Runnable duringQuery=()->{};
+    String configuredProfile="base";
     @BeforeEach void setup()throws Exception{
         store=new Store(temporary.resolve("test.sqlite3").toString());auth=new Auth("0");
         store.write(c->{for(String id:List.of(owner,user))execute(c,"INSERT INTO users VALUES (?,?,?,?)",id,id+"@example.test",id,"unused");execute(c,"INSERT INTO workspaces VALUES (?,?)",workspace,"synthetic");for(String id:List.of(owner,user))execute(c,"INSERT INTO memberships VALUES (?,?,?)",workspace,id,id.equals(owner)?"owner":"member");execute(c,"INSERT INTO sessions VALUES (?,?,?)",Auth.hash(session),user,System.currentTimeMillis()/1000.0+60);return null;});
@@ -31,9 +36,10 @@ class LearnedSearchTest {
             try{
                 if(!("Bearer "+token).equals(exchange.getRequestHeaders().getFirst("Authorization"))){exchange.sendResponseHeaders(401,-1);return;}
                 Object output;
-                if(exchange.getRequestURI().getPath().equals("/health"))output=Map.of("schema_version",1,"status","ready","embedding",Map.of("model",InferenceClient.EMBEDDING,"revision",InferenceClient.EMBEDDING_REVISION,"dimension",384,"max_length",512),"reranker",Map.of("model",InferenceClient.RERANKER,"revision",InferenceClient.RERANKER_REVISION,"max_length",512),"limits",Map.of("max_embed_items",64,"max_rerank_items",50));
+                if(exchange.getRequestURI().getPath().equals("/health"))output=Map.of("schema_version",1,"status","ready","embedding",Map.of("model",workerEmbedding,"revision",workerRevision,"dimension",384,"max_length",512),"reranker",Map.of("model",InferenceClient.RERANKER,"revision",InferenceClient.RERANKER_REVISION,"max_length",512),"limits",Map.of("max_embed_items",64,"max_rerank_items",50));
                 else{
                     JsonNode input=json.readTree(exchange.getRequestBody());received.add(input);
+                    if(input.path("kind").asText().equals("query"))duringQuery.run();
                     if(input.path("kind").asText().equals("passage"))duringPassage.run();
                     if(mode.startsWith("error_")){
                         int status=switch(mode){case "error_query_too_long","error_invalid_request","error_unknown","error_malformed"->422;case "error_unauthorized"->401;default->503;};
@@ -50,18 +56,24 @@ class LearnedSearchTest {
                         else{Double[] vector=new Double[mode.equals("dimension")?383:384];Arrays.fill(vector,0.0);vector[0]=mode.equals("zero")?0.0:1.0;result.put("vector",vector);}
                         items.add(result);
                     }
-                    output=Map.of("schema_version",mode.equals("huge_schema")?4294967297L:mode.equals("schema")?2:1,"model",rerank?InferenceClient.RERANKER:InferenceClient.EMBEDDING,"revision",mode.equals("revision")?"wrong-revision":rerank?InferenceClient.RERANKER_REVISION:InferenceClient.EMBEDDING_REVISION,"dimension",384,"items",items);
+                    output=Map.of("schema_version",mode.equals("huge_schema")?4294967297L:mode.equals("schema")?2:1,"model",rerank?InferenceClient.RERANKER:workerEmbedding,"revision",mode.equals("revision")?"wrong-revision":rerank?InferenceClient.RERANKER_REVISION:workerRevision,"dimension",384,"items",items);
                 }
                 byte[] bytes=json.writeValueAsBytes(output);exchange.getResponseHeaders().set("Content-Type","application/json");exchange.sendResponseHeaders(200,bytes.length);exchange.getResponseBody().write(bytes);
             }catch(Exception ignored){}finally{exchange.close();}
         });worker.start();
     }
     @AfterEach void stop(){worker.stop(0);executor.shutdownNow();}
-    InferenceClient client(long timeout){return new InferenceClient("http://127.0.0.1:"+worker.getAddress().getPort(),token,timeout,json);}
+    InferenceClient client(long timeout){return new InferenceClient("http://127.0.0.1:"+worker.getAddress().getPort(),token,timeout,configuredProfile,json);}
     LearnedSearch service(){return new LearnedSearch(store,auth,docs,client(5000));}
+    InferenceClient profileClient(String profile){return new InferenceClient("http://127.0.0.1:"+worker.getAddress().getPort(),token,5000,profile,json);}
+    LearnedSearch profileService(String profile){return new LearnedSearch(store,auth,docs,profileClient(profile));}
+    void terminalWorker(){workerEmbedding=InferenceClient.TERMINAL_EMBEDDING;workerRevision=InferenceClient.TERMINAL_REVISION;}
+    void selectProfile(String profile){configuredProfile=profile;if(profile.equals("m4-terminal-v1"))terminalWorker();}
     String document(String content,String visibility){return store.write(c->(String)docs.upload(c,workspace,owner,"guide.txt",content.getBytes(java.nio.charset.StandardCharsets.UTF_8),null,visibility).get("id"));}
     int historyCount(){return store.read(c->((Number)one(c,"SELECT COUNT(*) AS n FROM searches").get("n")).intValue());}
-    @Test void aclPrefilterPersistsMethodsAndOnlyPublicResultFields(){
+    @ParameterizedTest @ValueSource(strings={"base","m4-terminal-v1"})
+    void aclPrefilterPersistsMethodsAndOnlyPublicResultFields(String profile){
+        selectProfile(profile);
         String visible=document("refund visible evidence","workspace");document("PRIVATE_NEVER_SEND","private");
         var service=service();assertThat(service.capabilities(request)).containsEntry("status","ready").containsEntry("model_enabled",true);
         for(String method:List.of("dense","hybrid","hybrid_rerank")){
@@ -86,8 +98,12 @@ class LearnedSearchTest {
             assertThat(e.getMessage()).isEqualTo(switch(fault){case "error_query_too_long"->"query_too_long";case "error_model_busy"->"inference_busy";default->"inference_unavailable";});
         });assertThat(historyCount()).isZero();
     }
-    @ParameterizedTest @ValueSource(strings={"edit","delete","private","new_document","new_visible","membership","logout"})
-    void mutationDuringInferenceFinishesWithoutLockAndRejectsStaleSearch(String change)throws Exception{
+    static java.util.stream.Stream<Arguments> mutationProfiles(){
+        return List.of("base","m4-terminal-v1").stream().flatMap(profile->List.of("edit","delete","private","new_document","new_visible","membership","logout").stream().map(change->Arguments.of(profile,change)));
+    }
+    @ParameterizedTest @MethodSource("mutationProfiles")
+    void mutationDuringInferenceFinishesWithoutLockAndRejectsStaleSearch(String profile,String change)throws Exception{
+        selectProfile(profile);
         String id=document("refund original","workspace"),privateId=document("private prior","private");
         CountDownLatch arrived=new CountDownLatch(1),release=new CountDownLatch(1);
         duringPassage=()->{arrived.countDown();try{if(!release.await(5,TimeUnit.SECONDS))throw new IllegalStateException();}catch(InterruptedException e){Thread.currentThread().interrupt();}};
@@ -108,7 +124,9 @@ class LearnedSearchTest {
         assertThatThrownBy(()->future.get(5,TimeUnit.SECONDS)).isInstanceOf(ExecutionException.class).cause().isInstanceOfSatisfying(ApiError.class,e->{assertThat(e.status).isEqualTo(change.equals("logout")?401:409);assertThat(e.getMessage()).isEqualTo(change.equals("logout")?"authentication_required":"search_context_changed");});
         assertThat(historyCount()).isZero();
     }
-    @Test void totalDeadlineAndWorkerDownHaveSafeErrors(){
+    @ParameterizedTest @ValueSource(strings={"base","m4-terminal-v1"})
+    void totalDeadlineAndWorkerDownHaveSafeErrors(String profile){
+        selectProfile(profile);
         document("refund evidence","workspace");duringPassage=()->{try{Thread.sleep(700);}catch(InterruptedException e){Thread.currentThread().interrupt();}};
         var shortService=new LearnedSearch(store,auth,docs,client(250));
         assertThatThrownBy(()->shortService.search(workspace,"refund",10,"dense",request)).isInstanceOfSatisfying(ApiError.class,e->assertThat(e.status).isEqualTo(504));
@@ -146,12 +164,70 @@ class LearnedSearchTest {
         var second=Map.<String,Object>of("document_id","a","chunk_id","second","ordinal",0);
         assertThat(LearnedSearch.rerankScores(List.of(first,second),Map.of("first",-2.0,"second",-2.0),10).stream().map(r->r.get("chunk_id"))).containsExactly("first","second");
     }
-    @Test void singleFlightRejectsConcurrentSearchAndReleasesAfterCompletion()throws Exception{
+    @ParameterizedTest @ValueSource(strings={"base","m4-terminal-v1"})
+    void singleFlightRejectsConcurrentSearchAndReleasesAfterCompletion(String profile)throws Exception{
+        selectProfile(profile);
         document("refund evidence","workspace");var service=service();CountDownLatch arrived=new CountDownLatch(1),release=new CountDownLatch(1);
         duringPassage=()->{arrived.countDown();try{release.await(5,TimeUnit.SECONDS);}catch(InterruptedException e){Thread.currentThread().interrupt();}};
         Future<?> active=executor.submit(()->service.search(workspace,"refund",10,"dense",request));assertThat(arrived.await(5,TimeUnit.SECONDS)).isTrue();
         try{assertThatThrownBy(()->service.search(workspace,"refund",10,"dense",request)).isInstanceOfSatisfying(ApiError.class,e->{assertThat(e.status).isEqualTo(503);assertThat(e.getMessage()).isEqualTo("inference_busy");});}
         finally{release.countDown();}
         active.get(5,TimeUnit.SECONDS);service.search(workspace,"refund",10,"dense",request);assertThat(historyCount()).isEqualTo(2);
+    }
+    @ParameterizedTest @ValueSource(strings={"base","m4-terminal-v1"})
+    void expectedProfileRejectsOppositeWorkerAtHealthWithoutHistory(String profile){
+        document("synthetic evidence","workspace");
+        if(profile.equals("base"))terminalWorker();
+        var service=profileService(profile);
+        assertThat(service.capabilities(request)).containsEntry("status","unavailable").containsEntry("embedding_profile",profileClient(profile).embeddingProfile());
+        assertThatThrownBy(()->service.search(workspace,"evidence",10,"dense",request)).isInstanceOfSatisfying(ApiError.class,e->{assertThat(e.status).isEqualTo(503);assertThat(e.getMessage()).isEqualTo("inference_invalid_response");});
+        assertThat(received).isEmpty();assertThat(historyCount()).isZero();
+    }
+    @ParameterizedTest @ValueSource(strings={"query","first_passage","later_passage"})
+    void terminalIdentityDriftAtEveryEmbeddingResponseFailsClosed(String stage){
+        terminalWorker();String id=document("synthetic evidence","workspace");
+        store.write(c->{for(int i=1;i<66;i++)execute(c,"INSERT INTO chunks VALUES (?,?,?,?,?,?,?)","extra"+i,id,"synthetic evidence",null,i*10,i*10+5,i);return null;});
+        Runnable drift=()->{workerEmbedding=InferenceClient.EMBEDDING;workerRevision=InferenceClient.EMBEDDING_REVISION;};
+        if(stage.equals("query"))duringQuery=drift;
+        else duringPassage=()->{if(stage.equals("first_passage")||received.stream().filter(r->r.path("kind").asText().equals("passage")).count()==2)drift.run();};
+        assertThatThrownBy(()->profileService("m4-terminal-v1").search(workspace,"evidence",10,"hybrid_rerank",request)).isInstanceOfSatisfying(ApiError.class,e->assertThat(e.getMessage()).isEqualTo("inference_invalid_response"));
+        assertThat(historyCount()).isZero();
+        assertThat(received).hasSize(stage.equals("query")?1:stage.equals("first_passage")?2:3);
+    }
+    @Test void successfulTerminalProfileSurvivesRestartAndBaseRollbackWithoutRelabelingLegacy(){
+        terminalWorker();document("synthetic evidence","workspace");var terminal=profileService("m4-terminal-v1");
+        var result=terminal.search(workspace,"evidence",10,"hybrid_rerank","m4-terminal-v1",request);
+        assertThat(result.get("embedding_profile")).isEqualTo(profileClient("m4-terminal-v1").embeddingProfile());
+        store.write(c->{
+            execute(c,"INSERT INTO searches VALUES ('legacy-learned',?,?,?,?)",workspace,user,"legacy learned",Auth.now());
+            execute(c,"INSERT INTO search_metadata VALUES ('legacy-learned','dense')");
+            execute(c,"INSERT INTO searches VALUES ('legacy-bm25',?,?,?,?)",workspace,user,"legacy lexical",Auth.now());return null;
+        });
+        store=new Store(temporary.resolve("test.sqlite3").toString());
+        workerEmbedding=InferenceClient.EMBEDDING;workerRevision=InferenceClient.EMBEDDING_REVISION;
+        var base=service();var controller=new ApiController(store,auth,docs,base);
+        assertThat(base.capabilities(request)).containsEntry("embedding_profile",client(5000).embeddingProfile());
+        var history=(List<Map<String,Object>>)controller.history(workspace,request).get("items");
+        assertThat(history.stream().filter(h->h.get("id").equals(result.get("search_id"))).findFirst().orElseThrow()).containsEntry("embedding_profile",result.get("embedding_profile"));
+        assertThat(history.stream().filter(h->h.get("id").toString().startsWith("legacy")).toList()).hasSize(2).allSatisfy(h->assertThat(h).containsEntry("embedding_profile",null));
+        received.clear();
+        assertThatThrownBy(()->controller.search(workspace,"evidence",10,"dense","m4-terminal-v1",request)).isInstanceOfSatisfying(ApiError.class,e->{assertThat(e.status).isEqualTo(409);assertThat(e.getMessage()).isEqualTo("embedding_profile_changed");});
+        assertThat(historyCount()).isEqualTo(3);assertThat(received).isEmpty();
+        var lexical=controller.search(workspace,"evidence",10,"bm25",null,request);assertThat(lexical).doesNotContainKey("embedding_profile");
+        assertThat((List<Map<String,Object>>)controller.history(workspace,request).get("items")).filteredOn(h->h.get("id").equals(lexical.get("search_id"))).allSatisfy(h->assertThat(h).containsEntry("embedding_profile",null));
+        var fresh=base.search(workspace,"evidence",10,"dense","base",request);assertThat(fresh.get("embedding_profile")).isEqualTo(client(5000).embeddingProfile());
+    }
+    @Test void profileMigrationIsAdditiveAndPreservesExistingLearnedRows(){
+        store.write(c->{execute(c,"DROP TABLE search_model_metadata");execute(c,"INSERT INTO searches VALUES ('prior',?,?,?,?)",workspace,user,"synthetic prior",Auth.now());execute(c,"INSERT INTO search_metadata VALUES ('prior','dense')");return null;});
+        store=new Store(temporary.resolve("test.sqlite3").toString());
+        assertThat((Object)store.read(c->one(c,"SELECT COUNT(*) AS n FROM search_model_metadata").get("n"))).isEqualTo(0);
+        var history=(List<Map<String,Object>>)new ApiController(store,auth,docs,service()).history(workspace,request).get("items");
+        assertThat(history).hasSize(1);assertThat(history.getFirst()).containsEntry("method","dense").containsEntry("embedding_profile",null);
+    }
+    @ParameterizedTest @ValueSource(strings={"","terminal","BASE","../checkpoint","arbitrary/model"})
+    void onlyAllowlistedServerProfilesCanStart(String profile){assertThatThrownBy(()->profileClient(profile)).isInstanceOf(IllegalArgumentException.class).hasMessage("invalid_embedding_profile");}
+    @Test void expectedProfileGuardStillAuthenticatesBeforeDisclosingMismatch(){
+        request.setCookies();assertThatThrownBy(()->service().search(workspace,"evidence",10,"dense","m4-terminal-v1",request)).isInstanceOfSatisfying(ApiError.class,e->assertThat(e.status).isEqualTo(401));
+        assertThat(historyCount()).isZero();
     }
 }
