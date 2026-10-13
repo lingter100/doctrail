@@ -44,7 +44,7 @@
 
 전체 브라우저 회귀의 첫 실행은20통과/2실패였다. 같은 임시 서버에 추가 테스트의 가입이 누적되어 정상 인증 제한20회/분에 걸렸다. 보안 제한을 완화하거나 재시도로 숨기지 않고, 검사 파일마다 별도 Java·DB를 사용하도록 고쳤다. 이후22개가 통과했고 파일+grep 선택 검사1개도 통과했다. 실패·성공 trace와 실행 로그는 `.local`에 보존한다.
 
-최종 로컬 검증은 Python513개, Java82개, Chromium22개, 실제 기본 Java HTTP11묶음, 타입 검사·production build·Ruff 통과다. 신규 Python 계약35개는 모델 없는 합성 검사다. 기존 Starlette/httpx 사용 중단 경고1개와 Java 테스트 도구 경고가 남는다. 원격 CI는 무거운 모델을 실행하지 않으며 별도 상태로 기록한다.
+최종 로컬 검증은 Python513개, Java82개, Playwright22개(Chromium19·순수 helper3), 실제 기본 Java HTTP11묶음, 타입 검사·production build·Ruff 통과다. 신규 Python 계약35개는 모델 없는 합성 검사다. 기존 Starlette/httpx 사용 중단 경고1개와 Java 테스트 도구 경고가 남는다. 원격 CI는 무거운 모델을 실행하지 않으며 별도 상태로 기록한다.
 
 Main-dev의 다중 문서 @5 퇴보1→0/7과 전체 @5 퇴보6개는 그대로 남아 있다. 이번 합성 시나리오 통과로 그 문제가 해결된 것은 아니다. Terminal을 연결한 hybrid/rerank의 새로운 품질 평가도 하지 않았다. 규모 상한4096청크, 직렬 모델 요청, 메모리 cache, 질문/화면 사용자 검수0, 생성 답변 미구현, 최종 test 잠금, 공개 서비스 배포0이다.
 
@@ -53,7 +53,7 @@ Main-dev의 다중 문서 @5 퇴보1→0/7과 전체 @5 퇴보6개는 그대로 
 [실행 안내](MODEL-SERVING.md)의 설치·빌드 후 새 출력 폴더로 실행한다. 이미 있는 폴더는 거부하고 실패도 report/journal을 남긴다. 실제 검증은 임시 DB만 사용한다. 모델 재학습이나 완료 평가 재실행은 이 명령의 일부가 아니다.
 
 ```powershell
-uv run --locked --group retrieval --no-sync python -m scripts.verify_terminal_service --browser --output-dir .local/m4-terminal-service-v1
+uv run --locked --group retrieval --no-sync python -m scripts.verify_terminal_service --browser --output-dir .local/m4-terminal-service-new-attempt
 ```
 
 Public report SHA-256: `bf99571b9dd547b8a26be6646c1866daae80546cc889144df5abca3ab4c66054`. Journal SHA-256: `0acac1d0369849111f28684338aaadf40db17479dcb5426c5dc1b07f1f887a77`. Raw 로그·임시 데이터·모델 가중치·cache는 커밋하지 않았다.

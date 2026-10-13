@@ -78,7 +78,7 @@ uv run --locked --group retrieval --no-sync python -m scripts.serve_models --dev
 실제 로컬 GPU 운영 검증은 새 출력 폴더를 요구하며 임시 합성 DB를 정리한다. 실패도 report·단계 journal을 보존한다. Raw 자식 프로세스 로그는 개인 경로가 포함될 수 있어 `.local`에만 남기며 공개 보고서와 구분한다.
 
 ```powershell
-uv run --locked --group retrieval --no-sync python -m scripts.verify_terminal_service --browser --output-dir .local/m4-terminal-service-v1
+uv run --locked --group retrieval --no-sync python -m scripts.verify_terminal_service --browser --output-dir .local/m4-terminal-service-new-attempt
 ```
 
 보고서는 worker+Java 준비 시간과 HTTP 요청 시간을 구분한다. 소수의 순차 요청은 cache를 공유하므로 속도 우위나 부하 성능의 근거로 사용하지 않는다. 실제 결과·실패·시도 이름은 STATUS를 따른다. 완료된 calibration/main-dev와 최종 test는 이 명령으로 실행하지 않는다.

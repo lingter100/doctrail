@@ -6,11 +6,11 @@
 
 **M4 학습 저장본 로컬 운영 검증 완료.** `61285dd`의 깨끗한 작업 트리에서 실제 CUDA·Java·React의16검사 묶음을 통과했다. 권한 회수·문서 갱신/재처리/삭제·원문 근거·모델 identity·이력·worker 장애·base 복구와 실제 데스크톱/모바일 흐름을 확인했다. [결과·실패·한계](M4-OPERATIONS-RESULTS.md), [원본 보고서](../experiments/results/m4-terminal-service-v1.json), [실행 안내](MODEL-SERVING.md)를 따른다. 기본 BM25·base는 유지하고 학습 모델은 명시적 실험 경로다. 운영 통과를 새로운 검색 품질이나 기본 모델 채택으로 해석하지 않는다.
 
-현재 묶음의 로컬 검증: Python513개·Java82개·Chromium22개, 실제 기본 Java HTTP11묶음, 타입·production build·Ruff, 기존 main-dev의 모델 없는 저장 순위 재생 통과. 브라우저 첫20통과/2실패는 공유 서버의 정상 인증 제한이 원인이었고 spec별 서비스/DB 격리로 해결했다. 최초 실패와 성공을 모두 보존했다. 새 GPU 추론은 합성 운영 자료에만 실행했고 완료된 calibration/main-dev는 반복하지 않았다. 다음은 M5 근거 기반 답변·보류의 별도 설계와 로컬 생성 모델 자원·라이선스 확인이다. Test 잠금·사용자 검수0·유료 사용0·외부 서비스 배포0을 유지한다. 이 브랜치의 원격 CI·PR 통합은 아래 후속 기록을 따른다.
+현재 묶음의 로컬 검증: Python513개·Java82개·Playwright22개(Chromium19·순수 helper3), 실제 기본 Java HTTP11묶음, 타입·production build·Ruff, 기존 main-dev의 모델 없는 저장 순위 재생 통과. 브라우저 첫20통과/2실패는 공유 서버의 정상 인증 제한이 원인이었고 spec별 서비스/DB 격리로 해결했다. 최초 실패와 성공을 모두 보존했다. 새 GPU 추론은 합성 운영 자료에만 실행했고 완료된 calibration/main-dev는 반복하지 않았다. 다음은 M5 근거 기반 답변·보류의 별도 설계와 로컬 생성 모델 자원·라이선스 확인이다. Test 잠금·사용자 검수0·유료 사용0·외부 서비스 배포0을 유지한다. 이 브랜치의 원격 CI·PR 통합은 아래 후속 기록을 따른다.
 
-**M4 main-dev 실제 비교 완료.** 실행 전 `6938c3c`에 고정한 계획·코드·설계로 새 base/terminal을 한 번 비교했다. 양성59질문의 전체 근거 @50은34→47, @5는29→37로 통과했다. @50 회복15·퇴보2, @5 회복14·퇴보6이며 다중 문서 @5는1→0/7이다. [분석](M4-MAIN-DEV-ANALYSIS.md)과 [보고서](../experiments/results/m4-main-dev-v1.json)를 따른다. 새 base는 과거 M3 dense의79질문 후보 순위·점수와 정확히 같았다. 원본 보고서·journal을 바이트 그대로 보존했고, 모델·로컬 학습 pack·test 질문 접근을 차단한 상태에서도 공개 자료 재생이 통과했다. 다음은 저장본을 명시적으로 연결하는 별도 로컬 운영 검증이다. 기본 서비스 모델·검색 정책을 바꾸지 않았으며 calibration/main-dev 재튜닝·test 개방은 하지 않는다.
+**M4 main-dev 실제 비교 완료.** 실행 전 `6938c3c`에 고정한 계획·코드·설계로 새 base/terminal을 한 번 비교했다. 양성59질문의 전체 근거 @50은34→47, @5는29→37로 통과했다. @50 회복15·퇴보2, @5 회복14·퇴보6이며 다중 문서 @5는1→0/7이다. [분석](M4-MAIN-DEV-ANALYSIS.md)과 [보고서](../experiments/results/m4-main-dev-v1.json)를 따른다. 새 base는 과거 M3 dense의79질문 후보 순위·점수와 정확히 같았다. 원본 보고서·journal을 바이트 그대로 보존했고, 모델·로컬 학습 pack·test 질문 접근을 차단한 상태에서도 공개 자료 재생이 통과했다. 후속 로컬 운영 검증은 위 최신 기록에 완료 결과가 있다. 기본 서비스 모델·검색 정책을 바꾸지 않았으며 calibration/main-dev 재튜닝·test 개방은 하지 않는다.
 
-현재 묶음의 최종 로컬 검증: 전체 Python478개(새 실행기29개 포함), Java59개, Chromium18개, 프런트 타입·production build, Ruff 통과. 기존 Starlette/httpx deprecation warning1개는 남아 있다. 원격 검증·통합 상태는 아래 후속 기록을 따른다. Python 시간은 HTTP가 아니다. 사용자 검수0·외부 서비스 배포0·유료 GPU/API 사용0이며 전력·개발 보조 비용은 미측정이다.
+Main-dev 비교 묶음 당시 로컬 검증: 전체 Python478개(새 실행기29개 포함), Java59개, Chromium18개, 프런트 타입·production build, Ruff 통과. 기존 Starlette/httpx deprecation warning1개는 남아 있다. 원격 검증·통합 상태는 아래 후속 기록을 따른다. Python 시간은 HTTP가 아니다. 사용자 검수0·외부 서비스 배포0·유료 GPU/API 사용0이며 전력·개발 보조 비용은 미측정이다.
 
 **사용자 요청으로 재개.** 2026-10-13 “진행해” 요청을 받아 중단 기록·Git 상태·진행 중인 프로세스를 확인했다. 중복 GPU 작업은 없고 기존 파일을 보존한다. `doctrail` 예약은 기존 한글 설명·이름·주기를 보존한 ACTIVE 상태로 재개·검증했다. 아래 일시중지는 과거 이력이며 현재 재개 승인을 대신하지 않는다.
 
@@ -323,4 +323,10 @@ PR #8은 `42e682d`로 main 통합됐고 [main CI](https://github.com/lingter100/
 
 다음 작업: 학습 저장본·청크·평가 정책을 먼저 동결한 한 번의 main-dev 비교를 설계하고 기존 결과 대비 회복·퇴보를 확인한다. 지금 얻은 calibration 결과로 추가 학습 설정을 탐색하지 않는다. 그 뒤 근거 기반 답변·보류, 운영 검증·화면 완성도·포트폴리오를 이어간다. 최종 test·유료 사용·공개 서비스 배포·사용자 검수는 아직 수행하지 않았다.
 
-운영 실행 전 검증: 전체 Python513개·Java82개·프런트 타입/production build·Ruff, 실제 Java HTTP11묶음, Chromium22개가 통과했다. 최초 전체 브라우저 실행은20통과/2실패였다. 검사 수 증가로 공유 서버/IP의 정상 인증 제한20회에 걸렸으므로, 보안 제한을 바꾸지 않고 검사 파일마다 Java/DB를 분리했다. 모든22개 통과와 선택 파일+grep1개 통과, 소유 JVM 종료를 확인했다. 최초 실패 증거는 `.local/web-e2e-iR3MHQ`, 성공은 `.local/web-e2e-batch-xPAxoJ`, 선택 실행은 `.local/web-e2e-batch-lK1lNC`에 보존한다. 기존 main-dev의 모델 없는 순위/판정 재생과 terminal/base/BGE 파일 사전 검증도 통과했다. 아직 이 기록은 실제 terminal GPU HTTP 성공을 주장하지 않는다.
+운영 실행 전 검증: 전체 Python513개·Java82개·프런트 타입/production build·Ruff, 실제 Java HTTP11묶음, Playwright22개(Chromium19·순수 helper3)가 통과했다. 최초 전체 브라우저 실행은20통과/2실패였다. 검사 수 증가로 공유 서버/IP의 정상 인증 제한20회에 걸렸으므로, 보안 제한을 바꾸지 않고 검사 파일마다 Java/DB를 분리했다. 모든22개 통과와 선택 파일+grep1개 통과, 소유 JVM 종료를 확인했다. 최초 실패 증거는 `.local/web-e2e-iR3MHQ`, 성공은 `.local/web-e2e-batch-xPAxoJ`, 선택 실행은 `.local/web-e2e-batch-lK1lNC`에 보존한다. 기존 main-dev의 모델 없는 순위/판정 재생과 terminal/base/BGE 파일 사전 검증도 통과했다. 아직 이 기록은 실제 terminal GPU HTTP 성공을 주장하지 않는다.
+
+## M4 terminal 운영 · 원격 검사와 통합 경로
+
+[PR #11](https://github.com/lingter100/doctrail/pull/11)의 구현·결과 커밋6974cf1에 대한 [head push CI](https://github.com/lingter100/doctrail/actions/runs/38331783889)는 java-service/backend/web 모두 성공했다. 원격 Python493passed/20skipped(선택 모델 의존성 없음), 프런트 회귀22개(Chromium19·순수 helper3), 실제 Java HTTP11묶음, 동결 코퍼스·학습 준비 및 main-dev 저장 결과 재생을 확인했다. 로컬513개·실제 CUDA 운영16묶음과 원격 모델 미실행을 구분한다.
+
+GitHub API에서61285dd와6974cf1의 author/committer가 모두 lingter100에 연결됨을 확인했다. 독립 AI 결과 감사는 report/journal 원본 일치, source42개와 실행 커밋 일치, 운영/품질 주장 구분을 확인했다. 재현 예시는 새 출력 이름으로 보정하고 Playwright22개 중 순수 helper3개를 명시했다. 최종 문서 head도 필수 CI 후 fast-forward로 통합하며, 정확한 최종 SHA·CI·병합 상태는 PR 기록을 따른다. 모델 실행은 반복하지 않는다.
