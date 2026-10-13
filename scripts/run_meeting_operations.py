@@ -15,7 +15,12 @@ from scripts.verify_meeting_service import ROOT, sha
 
 
 def artifact_snapshot(jar):
-    paths = [*ROOT.glob('src/doctrail/meeting_*.py'),
+    # Bind only this 4B candidate and its dependencies; unrelated 9B preparation
+    # can proceed independently without being misreported as a loaded-code change.
+    plan = json.loads((ROOT / 'data/evaluation/meetings-answer-decoder-plan-v1.json').read_text(
+        encoding='utf-8'))
+    paths = [*(ROOT / name for name in plan['bound_files']),
+             ROOT / 'src/doctrail/meeting_worker_grammar.py',
              *ROOT.glob('server/src/main/java/io/doctrail/*.java'),
              *ROOT.glob('web/dist/assets/*'), Path(jar).resolve(),
              ROOT / 'scripts/run_meeting_operations.py',
