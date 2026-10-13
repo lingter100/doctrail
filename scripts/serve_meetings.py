@@ -29,7 +29,7 @@ class Services:
 @contextmanager
 def start_services(*, jar, database, model_root, device="cuda", token=None, log_dir,
                    java_port=0, worker_port=0, retrieval=False, retrieval_model_root=None,
-                   retrieval_port=0):
+                   retrieval_port=0, llama_url=None, llama_token=None, llama_manifest=None):
     """Only the exact children created here are stopped; never build or download."""
     token = token or secrets.token_urlsafe(48)
     if device != "cuda" or len(token) < 32 or any(not 33 <= ord(c) <= 126 for c in token):
@@ -53,13 +53,22 @@ def start_services(*, jar, database, model_root, device="cuda", token=None, log_
     environment.pop("DOCTRAIL_INFERENCE_URL", None)
     environment.pop("DOCTRAIL_INFERENCE_TOKEN", None)
     environment["DOCTRAIL_EMBEDDING_PROFILE"] = "base"
+    worker_arguments = ["--model-root", str(Path(model_root).resolve())]
+    if llama_url:
+        if not llama_token or llama_manifest is None:
+            raise ValueError("invalid_llama_configuration")
+        environment["DOCTRAIL_LLAMA_TOKEN"] = llama_token
+        worker_arguments = ["--llama-url", llama_url, "--llama-manifest",
+                            str(Path(llama_manifest).resolve())]
+    else:
+        environment.pop("DOCTRAIL_LLAMA_TOKEN", None)
     started = time.perf_counter()
     with ExitStack() as stack:
         worker_log = stack.enter_context((log_dir / "generation.log").open("ab"))
         java_log = stack.enter_context((log_dir / "java.log").open("ab"))
         worker = subprocess.Popen(
             [sys.executable, "-m", "doctrail.meeting_worker", "--port", str(worker_port),
-             "--model-root", str(Path(model_root).resolve())], cwd=ROOT, env=environment,
+             *worker_arguments], cwd=ROOT, env=environment,
             stdout=worker_log, stderr=subprocess.STDOUT,
             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         stack.callback(stop_process, worker)

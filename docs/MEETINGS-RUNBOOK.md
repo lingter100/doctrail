@@ -16,6 +16,16 @@ Q&A는 검색한 원문을 바탕으로 짧은 답변 문장과 인용을 실제
 
 저장소 루트에서 Java 21, 고정 Maven wrapper, Node.js, Python 3.11·잠금 의존성을 사용한다. 기존 로컬 Qwen 파일과 retrieval dependency group이 준비되어 있어야 한다. 다른 모델 작업·GPU 점유·실험 lock을 먼저 확인하고, 진행 중 추론과 의존성 동기화를 겹치지 않는다. 잠금을 삭제하거나 기존 작업을 강제 종료해 실행 공간을 만들지 않는다.
 
+처음 설치하는 환경은 CUDA/BF16을 지원하는 NVIDIA GPU와 해당 PyTorch 환경이 필요하다. 현재 생성 경로에는 CPU 자동 대체가 없다. 고정 공개 모델 약 4.08GB를 받는 준비 과정은 아래와 같으며, 이미 파일이 있다면 마지막 명령으로 검증한다. 이전 M5 실험을 다시 실행할 필요는 없다. 인터넷 다운로드와 로컬 디스크·전력은 필요하지만 이 경로는 유료 모델 API를 호출하지 않는다.
+
+```powershell
+uv sync --locked --python 3.11 --group retrieval
+uv run --locked --group retrieval --no-sync python -m scripts.prepare_generation_model --snapshot models/generation-m5-qwen3-1.7b --download
+uv run --locked --group retrieval --no-sync python -m scripts.prepare_generation_model --snapshot models/generation-m5-qwen3-1.7b
+```
+
+선택적 E5/BGE 검색은 별도로 `uv run --locked --group retrieval --no-sync python -m scripts.prepare_models --model all --output-dir models`로 고정 가중치를 준비한다. 서비스 실행기가 가중치를 자동으로 내려받지는 않는다. GPU 없이 기본 Java를 실행하면 문서·BM25·회의 원문은 사용할 수 있지만 AI 분석/답변은 미연결 상태다.
+
 ```powershell
 npm --prefix web ci
 npm --prefix web run typecheck

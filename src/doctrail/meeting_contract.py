@@ -9,7 +9,6 @@ from typing import Annotated, Literal
 from pydantic import Field, ValidationError, field_validator, model_validator
 
 from doctrail.inference import StrictModel, VersionedRequest, WorkerError
-from doctrail.retrieval import rank_chunks
 
 Text = Annotated[str, Field(min_length=1, max_length=24000)]
 Id = Annotated[str, Field(min_length=1, max_length=128)]
@@ -86,10 +85,10 @@ def selected_fields(kind, quote):
     assignee = due_date = priority = None
     if kind == "action":
         # Named subject plus explicit future/assignment grammar, not a speaker label.
-        match = re.search(r"(?:^|[:：]\s*)([가-힣A-Za-z][가-힣A-Za-z .'-]{0,40}?)(?:이|가|은|는)\s+"
+        match = re.search(r"(?:^|[:：]\s*)([가-힣]{2,5}?)(?:이|가|은|는)\s+"
                           r"(?:\d{4}-\d{2}-\d{2}까지\s+)?", quote)
-        english = re.search(r"(?:^|[:：]\s*)([A-Z][A-Za-z .'-]{0,40}?) will\s+", quote)
-        if match:
+        english = re.search(r"(?:^|[:：]\s*)([A-Z][a-z]+(?: [A-Z][a-z]+){0,2}) will\s+", quote)
+        if match and match.group(1) not in {"담당자", "작업자", "기한", "마감일", "일정"}:
             assignee = match.group(1)
         elif english:
             assignee = english.group(1)
@@ -197,43 +196,21 @@ def meeting_units(source):
     return result
 
 
-def answer_evidence(contexts, query=None):
-    """Finite source IDs refer to exact chunk-local lines, including duplicate text."""
-    sources, mapping, candidates = [], {}, []
-    seen = set()
-    for context in contexts:
-        for unit in lines(context.text):
-            identity = (context.document_id, context.revision,
-                        context.start_offset + unit["start_offset"],
-                        context.start_offset + unit["end_offset"])
-            if identity in seen:
-                continue
-            seen.add(identity)
-            if len(candidates) >= 160:
-                raise WorkerError("generation_input_limit", 422)
-            candidates.append({"chunk_id": str(len(candidates)), "text": unit["quote"],
-                "document_id": context.document_id, "revision": context.revision,
-                "source_chunk_id": context.chunk_id, "title": context.title,
-                "meeting_date": context.meeting_date,
-                "start_offset": context.start_offset + unit["start_offset"],
-                "end_offset": context.start_offset + unit["end_offset"]})
-    if query is not None:
-        # Question boilerplate is not evidence relevance; Korean/numeric terms are preserved.
-        query = re.sub(r"\b(?:what|does|the|say|about|in|and|was|reported|is|to|how|when|"
-                       r"a|an|of|for|it|were|did|do|can|you|please)\b", " ", query,
-                       flags=re.IGNORECASE)
-        candidates = rank_chunks(query, candidates, limit=12)
+def answer_evidence(contexts):
+    """One finite ID per full received chunk; no hidden filtering or text changes."""
+    if len(contexts) > 10:
+        raise WorkerError("generation_input_limit", 422)
+    sources, mapping = [], {}
     by_document = {}
-    for row in candidates:
-        identity = len(mapping)
-        mapping[identity] = {"chunk_id": row["source_chunk_id"], "quote": row["text"],
-                            "start_offset": row["start_offset"], "end_offset": row["end_offset"]}
-        document = (row["document_id"], row["revision"])
+    for identity, context in enumerate(contexts):
+        mapping[identity] = {"chunk_id": context.chunk_id, "quote": context.text,
+                            "start_offset": context.start_offset, "end_offset": context.end_offset}
+        document = (context.document_id, context.revision)
         if document not in by_document:
-            by_document[document] = {"title": row["title"], "meeting_date": row["meeting_date"],
-                                     "passages": []}
+            by_document[document] = {"title": context.title, "meeting_date": context.meeting_date,
+                                    "passages": []}
             sources.append(by_document[document])
-        by_document[document]["passages"].append({"id": identity, "text": row["text"]})
+        by_document[document]["passages"].append({"id": identity, "text": context.text})
     return sources, mapping
 
 

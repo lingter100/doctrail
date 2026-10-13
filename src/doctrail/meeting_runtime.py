@@ -7,7 +7,7 @@ import time
 from doctrail.generation_runtime import MIB, GenerationError, GenerationResult
 from doctrail.generation_runtime_v2 import EXPECTED_CONFIG, LocalGenerator
 
-PROTOCOL = "meeting-classifier-evidence-v4"
+PROTOCOL = "meeting-full-chunk-evidence-v5"
 MAX_INPUT_TOKENS = 4096
 MAX_NEW_TOKENS = 768
 DEADLINE_SECONDS = 120

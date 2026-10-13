@@ -182,9 +182,10 @@ class Verification:
         a, b = first["meeting"]["analysis"], later["meeting"]["analysis"]
         self.check("synthetic_meeting_dates", a["meeting_date"] == "2026-10-01"
                    and b["meeting_date"] == "2026-10-08")
-        self.check("proposal_not_confirmed", not any(
-            i["type"] == "decision" and i["status"] == "confirmed" and "90일" in i["quote"]
-            for i in a["items"]))
+        self.check("proposal_not_confirmed", any(
+            i["type"] == "proposal" and i["status"] == "needs_confirmation" and "90일" in i["quote"]
+            for i in a["items"]) and not any(
+                i["type"] == "decision" and "90일" in i["quote"] for i in a["items"]))
         actions = [i for i in a["items"] if i["type"] == "action"]
         self.check("assigned_and_unassigned_actions", any(i["assignee"] == "민지" for i in actions)
                    and any(i["assignee"] is None and i["due_date"] is None for i in actions))

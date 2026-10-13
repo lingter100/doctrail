@@ -2,6 +2,8 @@
 
 ## 2026-10-13 회의록 지능형 관리 확장
 
+반복된 1.7B 의미 오류의 제한 비교로 `meetings_answer_diagnosis=gpt-6-astra/max`가 제안한 전체 청크 인용 방식도 실제 v11에서 실패했다. 해당 결과를 보존하고, `meetings_local_model=gpt-6-astra/xhigh`가 무료 로컬 4B 양자화 후보의 공식 원본·별도 양자화 출처·라이선스·runtime 배포를 조사했다. `meetings_gguf_setup=gpt-6-astra/high`는 명시적 다운로드·해시 검증·실행기, 기존 `meetings_ai=gpt-6-astra/high`는 새 추론 어댑터를 구현한다. 부모는 알려진 실패5개 입력과 실행 전 소스 고정, 실제 제한 비교를 맡는다. 개발자에게 공개된 실패 사례이므로 독립 평가 점수나 사용자 검수로 집계하지 않는다.
+
 사용자가 1차·2차 범위와 실제 기능 연결·기존 호환성·실제 데이터 검증을 지정했다. AI가 사용자 검수나 승인을 생성하지 않는다. 실제 도구가 수락한 설정은 `meetings_design=gpt-6-astra/xhigh`, `meetings_backend=gpt-6-astra/high`, `meetings_frontend=gpt-6-astra/high`, `meetings_ai=gpt-6-astra/high`다. 부모 채팅 자체의 설정을 변경했다고 주장하지 않는다. 설계 담당은 공통 계약, backend는 Java 저장·권한·검색·HTTP 검증, frontend는 React 화면·브라우저 회귀, AI 담당은 새 Python worker·로컬 모델 연결을 맡는다.
 
 부모는 기존 상태 보존, 출처·이용 조건이 확인된 공개 자료와 재현 코드 준비, 별도 합성 운영 사례, 실제 서비스 통합 검증·품질 실패 분석·문서·Git 통합을 맡는다. 공개 회의록의 원 저자는 Project Jupyter 기여자들이며 AI가 원본을 작성한 것이 아니다. 합성 회의록·질문과 AI 검토·자동 검사는 실제 사용자 자료나 사용자 검수로 표시하지 않는다. 개발 중인 범위와 완료 증거는 STATUS의 최신 기록을 따른다.

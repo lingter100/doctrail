@@ -21,7 +21,14 @@ from doctrail.meeting_contract import (
     selected_fields,
     strict_json,
 )
-from doctrail.meeting_worker import MeetingRuntime, create_app, messages, partitions, worker_lease
+from doctrail.meeting_worker import (
+    MeetingRuntime,
+    create_app,
+    messages,
+    partitions,
+    worker_admission,
+    worker_lease,
+)
 
 TOKEN = "meeting-test-credential-" + "x" * 32
 AUTH = {"Authorization": "Bearer " + TOKEN}
@@ -34,7 +41,7 @@ class Generator:
         self.calls = 0
 
     def public_metadata(self):
-        return {"experimental": True}
+        return {"experimental": True, "repo_id": "synthetic/test-model", "revision": "test-revision"}
 
     def count_tokens(self, messages):
         return sum(len(m["content"]) for m in messages) // 3
@@ -81,6 +88,40 @@ def test_duplicate_auth_rejected():
     with TestClient(create_app(TOKEN, lambda: MeetingRuntime(Generator()))) as client:
         result = client.get("/health", headers=[("Authorization", "Bearer " + TOKEN)] * 2)
         assert result.status_code == 401
+
+
+def test_runtime_identity_is_generator_identity_in_health_and_answers():
+    generator = Generator('{"status":"abstained","claims":[]}')
+    runtime = MeetingRuntime(generator)
+    empty = AnswerRequest(schema_version=1, query="question", contexts=[])
+    answer = AnswerRequest(schema_version=1, query="question", contexts=[context()])
+    for result in (runtime.health(), runtime.answer(empty), runtime.answer(answer)):
+        assert result["model"] == "synthetic/test-model"
+        assert result["revision"] == "test-revision"
+
+
+def test_runtime_rejects_missing_generator_identity():
+    from doctrail.generation_runtime import GenerationError
+    generator = Generator()
+    generator.public_metadata = lambda: {"experimental": True}
+    with pytest.raises(GenerationError, match="generation_identity_mismatch"):
+        MeetingRuntime(generator)
+
+
+def test_native_result_has_no_fake_torch_telemetry_and_request_cache_is_cleared():
+    generator = Generator()
+    lifecycle = []
+    generator.begin_request = lambda deadline: lifecycle.append("begin")
+    generator.end_request = lambda: lifecycle.append("end")
+    generator.generate_bounded = lambda messages, deadline: SimpleNamespace(
+        text='{"status":"abstained","claims":[]}',
+        finish_reason="eos", input_tokens=3, output_tokens=2, elapsed_seconds=0.1,
+        telemetry={"backend": "llama.cpp"})
+    runtime = MeetingRuntime(generator)
+    result = runtime.answer(AnswerRequest(schema_version=1, query="question", contexts=[context()]))
+    assert lifecycle == ["begin", "end"]
+    assert result["telemetry"]["calls"][-1]["backend"] == "llama.cpp"
+    assert "peak_allocated_mib" not in result["telemetry"]["calls"][-1]
 
 
 @pytest.mark.parametrize("change", [{"schema_version": True}, {"revision": True},
@@ -221,6 +262,41 @@ def test_worker_lease_excludes_concurrent_workers_and_releases(tmp_path):
         assert path.exists()
 
 
+def test_torch_admission_holds_both_leases_and_releases_after_failure(tmp_path):
+    worker = tmp_path / ".local/meeting-generation.worker.lock"
+    gpu = tmp_path / ".local/meeting-generation.gpu.lock"
+    with pytest.raises(RuntimeError, match="synthetic load failure"), worker_admission(tmp_path):
+        for path in (worker, gpu):
+            with pytest.raises(WorkerError, match="already_running"), worker_lease(path):
+                pass
+        raise RuntimeError("synthetic load failure")
+    with worker_lease(worker), worker_lease(gpu):
+        pass
+
+
+def test_native_gpu_owner_blocks_torch_before_model_load(tmp_path):
+    worker = tmp_path / ".local/meeting-generation.worker.lock"
+    gpu = tmp_path / ".local/meeting-generation.gpu.lock"
+    with worker_lease(gpu):
+        with pytest.raises(WorkerError, match="already_running"), worker_admission(tmp_path):
+            pytest.fail("model must not load while native process owns GPU")
+        with worker_lease(worker):
+            pass  # failed GPU admission must release the worker lease
+
+
+def test_gguf_worker_keeps_worker_lease_without_reacquiring_launcher_gpu(tmp_path):
+    worker = tmp_path / ".local/meeting-generation.worker.lock"
+    gpu = tmp_path / ".local/meeting-generation.gpu.lock"
+    with worker_lease(gpu):
+        with (worker_admission(tmp_path, external_gpu_owner=True),
+              pytest.raises(WorkerError, match="already_running"), worker_lease(worker)):
+            pass
+        with worker_lease(worker):
+            pass
+        with pytest.raises(WorkerError, match="already_running"), worker_lease(gpu):
+            pass  # worker exit must not release its launcher's lock
+
+
 def test_classification_failure_does_not_return_partial_analysis():
     generator = Generator()
 
@@ -243,17 +319,20 @@ def test_summary_display_filter_preserves_items_and_selects_content():
     assert len(result["analysis"]["items"]) == 3
 
 
-def test_integer_evidence_refs_preserve_markdown_and_absolute_offsets():
+def test_integer_evidence_refs_preserve_full_chunks_and_absolute_offsets():
     source = "😀 intro\n* **Alex** Version 2.0 released.\nsame\nsame"
-    sources, mapping = answer_evidence([context(source, start=80)])
-    assert sources[0]["passages"][1]["text"] == "* **Alex** Version 2.0 released."
+    first_context = context(source, start=80)
+    second_context = Context(**{**context(source, start=180).model_dump(), "chunk_id": "second"})
+    sources, mapping = answer_evidence([first_context, second_context])
+    assert sources[0]["passages"][0]["text"] == source
+    assert len(mapping) == 2
     result = grounded_answer_refs(json.dumps({"status": "answered", "claims": [
-        {"text": "Version 2.0 was released.", "evidence": [1]},
-        {"text": "The last line repeats.", "evidence": [3]}]}), mapping)
+        {"text": "Version 2.0 was released.", "evidence": [0]},
+        {"text": "The source is repeated elsewhere.", "evidence": [1]}]}), mapping)
     first = result["claims"][0]["citations"][0]
-    assert first["start_offset"] == 88
+    assert first["start_offset"] == 80
     assert source[first["start_offset"] - 80:first["end_offset"] - 80] == first["quote"]
-    assert result["claims"][1]["citations"][0]["start_offset"] > mapping[2]["start_offset"]
+    assert result["claims"][1]["citations"][0]["start_offset"] == 180
 
 
 @pytest.mark.parametrize("references", [[True], ["0"], [-1], [99], [0, 0], []])
@@ -274,3 +353,46 @@ def test_purpose_section_is_one_exact_span_and_extracts_paragraph():
         "metadata": [[1, "purpose"]]}), units)
     assert result["purpose"] == "Share project progress and discuss open questions."
     assert result["metadata_evidence"][0]["quote"].startswith("## Purpose\n\n")
+
+
+def test_korean_question_keeps_english_context_and_every_received_id():
+    received = []
+    for index in range(10):
+        text = "Raw question text must not be logged." if index == 9 else f"로그 자료 {index}"
+        received.append(Context(**{**context(text, start=index * 100).model_dump(),
+                                   "document_id": f"doc-{index}", "chunk_id": f"chunk-{index}"}))
+    sources, mapping = answer_evidence(received)
+    assert list(mapping) == list(range(10))
+    assert {entry["chunk_id"] for entry in mapping.values()} == {r.chunk_id for r in received}
+    assert mapping[9]["quote"] == "Raw question text must not be logged."
+    generator = Generator('{"status":"abstained","claims":[]}')
+    seen = []
+    original = generator.generate_bounded
+
+    def capture(messages, deadline):
+        seen.append(messages)
+        return original(messages, deadline)
+
+    generator.generate_bounded = capture
+    result = MeetingRuntime(generator).answer(AnswerRequest(
+        schema_version=1, query="원문 질문을 로그에 남겨도 되나요?", contexts=received))
+    assert "Raw question text must not be logged." in seen[0][-1]["content"]
+    assert result["telemetry"]["calls"][0]["supplied_chunks"] == 10
+    assert sum(len(source["passages"]) for source in sources) == 10
+
+
+def test_full_context_token_overflow_never_prunes_or_calls_model():
+    generator = Generator()
+    received = [context("evidence " * 2200)]
+    with pytest.raises(WorkerError, match="generation_input_limit"):
+        MeetingRuntime(generator).answer(AnswerRequest(schema_version=1, query="q", contexts=received))
+    assert generator.calls == 0
+
+
+def test_unassigned_concrete_task_fields_stay_null():
+    quote = "작업: 새 이용 안내서를 검토한다. 담당자와 마감일은 추후 정한다."
+    analysis = extraction_analysis(json.dumps({"summary_lines": [0], "items": [[0, "action"]],
+                                               "metadata": []}), lines(quote))
+    assert analysis["items"][0]["type"] == "action"
+    assert analysis["items"][0]["assignee"] is None
+    assert analysis["items"][0]["due_date"] is None
