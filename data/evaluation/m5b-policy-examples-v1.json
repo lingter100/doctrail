@@ -34,15 +34,15 @@
       "family_id": "M5B-X02",
       "document_id": "X0211",
       "revision": 1,
-      "source_sha256": "a5d865b6603a31f5ff184002d7681970a8c5b263880dc59e12952346f7060c71",
-      "text": "📝 X0211\nCurrent climbing-shoe cleaner: foam."
+      "source_sha256": "ec300d880c5cbb29efab055dffc6f13d9914409f1cd91b3f61ed02a97278fe70",
+      "text": "📝 X0211\nFor current climbing-shoe cleaning, use only foam."
     },
     {
       "family_id": "M5B-X02",
       "document_id": "X0212",
       "revision": 1,
-      "source_sha256": "67a130aed9f8392a4cc2ba46cd13d20a2cfc623eff6ed6c5900fb2963d8a271e",
-      "text": "📝 X0212\nCurrent climbing-shoe cleaner: gel."
+      "source_sha256": "73f1ce3d50b87e485e46c50db3c8a16a8b352277ca94f1d08e50dbde2c669f35",
+      "text": "📝 X0212\nFor current climbing-shoe cleaning, use only gel."
     },
     {
       "family_id": "M5B-X03",
@@ -161,19 +161,19 @@
           "evidence_id": "E1",
           "document_id": "X0211",
           "revision": 1,
-          "source_sha256": "a5d865b6603a31f5ff184002d7681970a8c5b263880dc59e12952346f7060c71",
+          "source_sha256": "ec300d880c5cbb29efab055dffc6f13d9914409f1cd91b3f61ed02a97278fe70",
           "start_cp": 8,
-          "end_cp": 44,
-          "text": "Current climbing-shoe cleaner: foam."
+          "end_cp": 58,
+          "text": "For current climbing-shoe cleaning, use only foam."
         },
         {
           "evidence_id": "E2",
           "document_id": "X0212",
           "revision": 1,
-          "source_sha256": "67a130aed9f8392a4cc2ba46cd13d20a2cfc623eff6ed6c5900fb2963d8a271e",
+          "source_sha256": "73f1ce3d50b87e485e46c50db3c8a16a8b352277ca94f1d08e50dbde2c669f35",
           "start_cp": 8,
-          "end_cp": 43,
-          "text": "Current climbing-shoe cleaner: gel."
+          "end_cp": 57,
+          "text": "For current climbing-shoe cleaning, use only gel."
         }
       ],
       "oracle": {
@@ -183,24 +183,24 @@
           "Required climbing-shoe cleaner under the current rule"
         ],
         "required_facts": [],
-        "abstention_rationale": "Both current rules address the same climbing-shoe cleaner and disagree; neither has priority.",
+        "abstention_rationale": "Both current climbing-shoe cleaning rules restrict the cleaner to one exclusive choice, foam only versus gel only; neither has priority.",
         "missing_information": [],
         "conflicting_facts": [
           {
-            "text": "Foam is required.",
+            "text": "Foam alone is required.",
             "support": [
               {
                 "evidence_id": "E1",
-                "quote": "Current climbing-shoe cleaner: foam."
+                "quote": "For current climbing-shoe cleaning, use only foam."
               }
             ]
           },
           {
-            "text": "Gel is required.",
+            "text": "Gel alone is required.",
             "support": [
               {
                 "evidence_id": "E2",
-                "quote": "Current climbing-shoe cleaner: gel."
+                "quote": "For current climbing-shoe cleaning, use only gel."
               }
             ]
           }
