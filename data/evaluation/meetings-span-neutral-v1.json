@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "c0_neutral_protocol_controls",
+  "human_review_count": 0,
+  "cases": [
+    {
+      "id": "neutral-supported",
+      "operation": "answer",
+      "provenance": "AI-authored neutral protocol control; not evaluation data",
+      "payload": {
+        "schema_version": 1,
+        "query": "Which code identifies this sample?",
+        "contexts": [
+          {
+            "document_id": "neutral-sample",
+            "revision": 1,
+            "chunk_id": "neutral-chunk",
+            "title": "Neutral protocol sample",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 58,
+            "text": "Reference sample\nSample code: R7.\nThe label is **green**.\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "neutral-insufficient",
+      "operation": "answer",
+      "provenance": "AI-authored neutral protocol control; not evaluation data",
+      "payload": {
+        "schema_version": 1,
+        "query": "In which country was this sample manufactured?",
+        "contexts": [
+          {
+            "document_id": "neutral-sample",
+            "revision": 1,
+            "chunk_id": "neutral-chunk",
+            "title": "Neutral protocol sample",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 58,
+            "text": "Reference sample\nSample code: R7.\nThe label is **green**.\n"
+          }
+        ]
+      }
+    }
+  ],
+  "purpose": "Check the new decoder and response contract once; not a quality benchmark. No case or wording taken from the sealed validation pool.",
+  "expected_controls": {
+    "neutral-supported": "answer the R7 code with its exact span",
+    "neutral-insufficient": "abstain for missing country"
+  }
+}
