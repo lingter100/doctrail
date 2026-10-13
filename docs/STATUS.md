@@ -2,6 +2,8 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
+이번 비교·재생·분석은 [PR #10](https://github.com/lingter100/doctrail/pull/10)으로 제출했다. 정확한 최종 head의 원격 검사와 병합 여부는 해당 PR에서 확인한다. 필수 java-service/backend/web 통과 후 사용자 계정의 fast-forward 방식으로 통합하며, 모델 재실행은 하지 않는다.
+
 **M4 main-dev 실제 비교 완료.** 실행 전 `6938c3c`에 고정한 계획·코드·설계로 새 base/terminal을 한 번 비교했다. 양성59질문의 전체 근거 @50은34→47, @5는29→37로 통과했다. @50 회복15·퇴보2, @5 회복14·퇴보6이며 다중 문서 @5는1→0/7이다. [분석](M4-MAIN-DEV-ANALYSIS.md)과 [보고서](../experiments/results/m4-main-dev-v1.json)를 따른다. 새 base는 과거 M3 dense의79질문 후보 순위·점수와 정확히 같았다. 원본 보고서·journal을 바이트 그대로 보존했고, 모델·로컬 학습 pack·test 질문 접근을 차단한 상태에서도 공개 자료 재생이 통과했다. 다음은 저장본을 명시적으로 연결하는 별도 로컬 운영 검증이다. 기본 서비스 모델·검색 정책을 바꾸지 않았으며 calibration/main-dev 재튜닝·test 개방은 하지 않는다.
 
 현재 묶음의 최종 로컬 검증: 전체 Python478개(새 실행기29개 포함), Java59개, Chromium18개, 프런트 타입·production build, Ruff 통과. 기존 Starlette/httpx deprecation warning1개는 남아 있다. 원격 검증·통합 상태는 아래 후속 기록을 따른다. Python 시간은 HTTP가 아니다. 사용자 검수0·외부 서비스 배포0·유료 GPU/API 사용0이며 전력·개발 보조 비용은 미측정이다.

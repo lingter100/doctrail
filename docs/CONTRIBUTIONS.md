@@ -2,7 +2,7 @@
 
 ## 2026-10-13 main-dev 실제 실행·재생
 
-부모 에이전트가 실행 전 `6938c3c`의 Git blob과 입력·소스 바인딩을 검증하고 로컬 RTX4050에서 base/terminal 각각 한 번의79질문 비교를 실행했다. @50 34→47/59·@5 29→37/59와 모든 퇴보를 원본 보고서·journal로 저장했다. Torch/Transformers/NumPy import와 모델·로컬 학습 pack·test 질문 파일 접근을 차단한 별도 프로세스에서 저장 결과 재생을 확인했다. 최종 소스의 전체 Python478개도 통과했다(기존 warning1개). 설계 담당 Astra xhigh 에이전트가 실패·집단별 결과와 한계를 분석한다. 이는 AI 검토이며 사용자 검수·답변 정확도 검증·서비스 채택·최종 test 평가가 아니다.
+부모 에이전트가 실행 전 `6938c3c`의 Git blob과 입력·소스 바인딩을 검증하고 로컬 RTX4050에서 base/terminal 각각 한 번의79질문 비교를 실행했다. @50 34→47/59·@5 29→37/59와 모든 퇴보를 원본 보고서·journal로 저장했다. Torch/Transformers/NumPy import와 모델·로컬 학습 pack·test 질문 파일 접근을 차단한 별도 프로세스에서 저장 결과 재생을 확인했다. 최종 소스의 전체 Python478개도 통과했다(기존 warning1개). 설계 담당 Astra xhigh 에이전트가 실패·집단별 결과·한계와 면접 설명을 분석 문서로 마쳤다. [PR #10](https://github.com/lingter100/doctrail/pull/10)에 검증과 채택 경계를 함께 제출했다. 이는 AI 검토이며 사용자 검수·답변 정확도 검증·서비스 채택·최종 test 평가가 아니다.
 
 ## 2026-10-13 main-dev 실행 준비
 
