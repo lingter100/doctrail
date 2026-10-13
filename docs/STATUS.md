@@ -12,6 +12,8 @@
 
 선행 [PR #12](https://github.com/lingter100/doctrail/pull/12)는 `f4d4b8d`로 main에 통합됐고 동일 SHA의 [main CI](https://github.com/lingter100/doctrail/actions/runs/38338891892)가 성공했다. 새 묶음을 시작할 때 기존 GPU 작업·잠금이 없음을 확인했다.
 
+M5-B 원격 증거: [PR #13](https://github.com/lingter100/doctrail/pull/13)의 구현·자료 head `8bb2b91`에서 [push CI](https://github.com/lingter100/doctrail/actions/runs/38345095633)와 [PR CI](https://github.com/lingter100/doctrail/actions/runs/38345133958)의 java-service·backend·web이 모두 통과했다. 원격 Python은 **690passed/21skipped**이며 선택적 모델 의존성 부재로 인한 skip을 로컬711개와 구분한다. 브라우저22개와 새 모델 없는 자료·검토·18파일 동결 확인도 통과했다. GitHub API에서 작성자·커미터가 모두 lingter100으로 연결되고 미해결 review thread0을 확인했다. 이 증거 문서 커밋까지 포함한 최종 head와 main 통합은 같은 PR·GitHub Actions의 정확한 SHA로 확인한다.
+
 **M5 첫 로컬 생성 검증 완료, 답변 품질은 미달.** 깨끗한 `93d6e2f`에서 수정 v2의 실제 GPU11회와 빈 근거 사전 차단1개를 완료했다. 실제 적용 설정16개 필드와 `greedy_search`를 매 요청 검사했고 한·영 기본 실행 조건과 메모리 한도를 통과했다. 그러나 JSON 거절2개, 정상 모델 보류0/4이며 인용이 유효한9답변 중3개는 누락·충돌 무시·대상 혼동 문제가 있다. 두 실행의 raw 출력11개는 동일해서 설정 오류 수정으로 품질이 좋아졌다고 말하지 않는다. [실패·의미 분석](M5-GENERATION-ANALYSIS.md)을 따라 새 문서 family를 분리한 M5-B calibration/validation과 제한된 보류·완전성 개선을 별도 설계한다. Java Q&A 연결·기본 채택·최종 test 개방은 아직 하지 않는다.
 
 [v2 원본 보고서](../experiments/results/m5-generation-v2.json)의 SHA는 `85a057d52a4a9375e89a18e1a701940c546e8feb39c979c995879654e43d1556`, [journal](../experiments/results/m5-generation-v2.progress.jsonl)은 `a2327b8b1c0e0cbdb96b604bcd4ae08893eb50a9ff13ed4bd6cd9a16035ca10f`다. 공개 사본은 원본 바이트 그대로이며 모델 없는 재생이 통과했다. 입력501~703 tokens, 출력 총628 tokens, Python 순차 생성 중앙값3.196초(0.868~4.654초), 최대 reserved3622MiB다. Java HTTP·동시 검색 모델·최대 길이·실사용 부하 수치가 아니다. 사용자 검수0·유료API/GPU/클라우드0·외부 서비스 배포0이다. 원격 CI·PR 통합은 후속 기록에 남긴다.
