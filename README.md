@@ -75,6 +75,7 @@ npm run build
 - [Java·Python 모델 연결과 실행](docs/MODEL-SERVING.md), [추론 경계 ADR](docs/decisions/0004-model-serving.md), [실제 로컬 GPU 운영 검사](experiments/results/m3-model-service-v1.json)
 - [M4 학습 가설·데이터 기준](docs/M4-DESIGN.md), [train 자료와 재현 방법](data/training/README.md)
 - [M5 답변·보류 설계](docs/M5-DESIGN.md), [생성 실측·실패 분석](docs/M5-GENERATION-ANALYSIS.md), [실행·재생](docs/M5-RUNBOOK.md)
+- [M5-B 새 자료·정책 비교 사전등록](docs/M5-CALIBRATION-PLAN.md), [자료 준비 검증·한계](docs/M5B-PREPARATION.md)
 - [자동 후속 실행과 승인 경계](docs/AUTONOMY.md)
 
 ## 라이선스와 사실 구분

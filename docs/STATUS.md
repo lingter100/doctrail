@@ -2,6 +2,16 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
+**M5-B 자료·정책 사전 준비 완료, 새 생성은 0회.** [사전등록](M5-CALIBRATION-PLAN.md)과 [준비 결과·실패·재현법](M5B-PREPARATION.md)을 따른다. Registry를 질문보다 먼저 `2de1487`에 고정하고 calibration 24·validation 24·별도 예시 3개를 작성했다. 합성 원문은 81개(38/38/5)다. 서로 다른 작성·검토 역할로 51개 항목의 의미를 검토했고 초안 결함 7개를 수정·재검토했다. Validation을 읽기 전에 예시는 `f7e9692`로 고정했다. 부모·prompt 작성자는 validation 문구·정답·검토 본문을 읽지 않고 hash·집계만 확인했다. 사용자 검수는 0이다.
+
+고정 tokenizer로 양쪽 정책 각각 48입력, 총 96개의 전체 prompt를 확인했다. 최대 입력은 baseline 753, few-shot 1,039 tokens로 cap 1,536 아래이며 잘림 0·초과 0이다. 실제 Torch import·가중치 열기·기존 평가 자료 접근을 차단한 별도 프로세스에서 통과했고 모델 호출은 없다. 계열 간 정확 중복과 0.85 문자열 유사도 경고는 각각 0개지만 이를 의미 독립성의 자동 증명으로 쓰지 않는다. [준비 영수증](../experiments/results/m5b-preparation-v1.json) SHA는 `95cdd2f70139f0bb08f331909aedc97a67e1debc17fa790c9ff42836f04dc5ad`, [18파일 동결](../data/evaluation/m5b-preparation-freeze-v1.json) SHA는 `09e055bc9928efab2f479ff86a8ba7114aad7818d19dba12adac30f21dc1ddfb`다. `generation_ready=false`이며 실제 생성 완료·성능 개선·서비스 채택을 뜻하지 않는다.
+
+이 묶음의 로컬 검증: Python **711passed**(새 의미 있는 검사 25개, 기존 deprecation warning1), Java **82passed**, Playwright **22passed**(Chromium19·순수 helper3), 프런트 타입·production build·Ruff 통과. 별도 코드 검토에서 준비 범위의 blocker는 없었다. 모델 없는 자료·검토 재검사와18파일 hash 검증, 기존 M5 v1/v2 동결 바인딩 보존을 확인했다. CI는 tokenizer를 새로 측정하지 않고 자료·검토·저장 hash를 확인한다. 정확한 PR head 및 main의 원격 검사 상태는 GitHub 기록과 구분한다.
+
+다음은 **새 실행기·형식/인용 판정 분리·익명화 의미 검토·사전 W/C/F 선택 규칙**을 구현하고 실행 계획을 동결한 뒤 calibration 두 정책 각24회, 선택 정책 validation24회를 한 번씩 수행하는 것이다. 기존 M5-A나 M4 평가를 반복하지 않는다. Validation의 질문·정답·의미 검토 설명은 격리된 검토 역할만 읽는다. 이미 고정한 예시를 validation에 맞춰 고치지 않는다. Java Q&A 연결·기본 채택·최종 test 개방·유료 사용·외부 서비스 배포는 아직 아니다.
+
+선행 [PR #12](https://github.com/lingter100/doctrail/pull/12)는 `f4d4b8d`로 main에 통합됐고 동일 SHA의 [main CI](https://github.com/lingter100/doctrail/actions/runs/38338891892)가 성공했다. 새 묶음을 시작할 때 기존 GPU 작업·잠금이 없음을 확인했다.
+
 **M5 첫 로컬 생성 검증 완료, 답변 품질은 미달.** 깨끗한 `93d6e2f`에서 수정 v2의 실제 GPU11회와 빈 근거 사전 차단1개를 완료했다. 실제 적용 설정16개 필드와 `greedy_search`를 매 요청 검사했고 한·영 기본 실행 조건과 메모리 한도를 통과했다. 그러나 JSON 거절2개, 정상 모델 보류0/4이며 인용이 유효한9답변 중3개는 누락·충돌 무시·대상 혼동 문제가 있다. 두 실행의 raw 출력11개는 동일해서 설정 오류 수정으로 품질이 좋아졌다고 말하지 않는다. [실패·의미 분석](M5-GENERATION-ANALYSIS.md)을 따라 새 문서 family를 분리한 M5-B calibration/validation과 제한된 보류·완전성 개선을 별도 설계한다. Java Q&A 연결·기본 채택·최종 test 개방은 아직 하지 않는다.
 
 [v2 원본 보고서](../experiments/results/m5-generation-v2.json)의 SHA는 `85a057d52a4a9375e89a18e1a701940c546e8feb39c979c995879654e43d1556`, [journal](../experiments/results/m5-generation-v2.progress.jsonl)은 `a2327b8b1c0e0cbdb96b604bcd4ae08893eb50a9ff13ed4bd6cd9a16035ca10f`다. 공개 사본은 원본 바이트 그대로이며 모델 없는 재생이 통과했다. 입력501~703 tokens, 출력 총628 tokens, Python 순차 생성 중앙값3.196초(0.868~4.654초), 최대 reserved3622MiB다. Java HTTP·동시 검색 모델·최대 길이·실사용 부하 수치가 아니다. 사용자 검수0·유료API/GPU/클라우드0·외부 서비스 배포0이다. 원격 CI·PR 통합은 후속 기록에 남긴다.

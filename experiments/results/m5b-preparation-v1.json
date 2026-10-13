@@ -1,0 +1,1131 @@
+{
+  "schema_version": 1,
+  "phase": "model_free_data_preparation",
+  "status": "data_prepared",
+  "generation_ready": false,
+  "generation_calls": 0,
+  "human_review_count": 0,
+  "human_review": "pending",
+  "final_test": "locked",
+  "bindings": {
+    "data/evaluation/m5b-family-registry-v1.json": "b2fb4f0749995a2aa7f87f30a5531e23fb5373f0b42b0b778e0bf7ea7674b4cc",
+    "data/evaluation/m5b-calibration-v1.json": "eeef1721e03ce708f75248f0de87e4c71f28de50c117f36b3e2a9ddb1d474d55",
+    "data/evaluation/m5b-validation-v1.json": "dee6997691628e3ab9aac91d390bc7f6b4dc186b24b99bc93aebef28480ab307",
+    "data/evaluation/m5b-policy-examples-v1.json": "eeff461002705980b34ef728f70c42fb5f2eefa8c5b5ec4e27a9a2c4a7552998"
+  },
+  "registry": {
+    "evaluation_families": 12,
+    "example_families": 3,
+    "calibration_items": 24,
+    "validation_items": 24,
+    "deterministic_split_verified": true
+  },
+  "datasets": [
+    {
+      "split": "calibration",
+      "item_count": 24,
+      "family_count": 6,
+      "source_count": 38,
+      "expected_status_counts": {
+        "abstained": 12,
+        "answered": 12
+      }
+    },
+    {
+      "split": "validation",
+      "item_count": 24,
+      "family_count": 6,
+      "source_count": 38,
+      "expected_status_counts": {
+        "abstained": 12,
+        "answered": 12
+      }
+    },
+    {
+      "split": "examples",
+      "item_count": 3,
+      "family_count": 3,
+      "source_count": 5,
+      "expected_status_counts": {
+        "abstained": 2,
+        "answered": 1
+      }
+    }
+  ],
+  "prompt_message_hashes": [
+    {
+      "item_id": "M5B-F03-Q01",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "a4c0c07afa69387f1c9de05a3a8b710410ccab28beb0ab0494ee5bf72ee5793a",
+        "fewshot3": "eada1b8d2d6445b00dae77268d66c3f5751926e62f2e7d771b509e4d84692f9a"
+      }
+    },
+    {
+      "item_id": "M5B-F03-Q02",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "413409152b73debebff2aa255ab41233d285e6a5474c65005601f4585ad1c7ec",
+        "fewshot3": "329f509cfd9565105bf3423053ec49f7d52f3dbb65e85f0046873f8e134b8b15"
+      }
+    },
+    {
+      "item_id": "M5B-F03-Q03",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "276f35bcfaa6b1b84776b3a40916d60c0ffcce4d67a80ea9c1bcd86823321924",
+        "fewshot3": "dfba7233cda5600b7512d218e5585ae28907f3507f011e45979dc5a8109a79d0"
+      }
+    },
+    {
+      "item_id": "M5B-F03-Q04",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "0d33c421b4ce3299bb0801b4a4723a55f03f45cea0c8e1aeed56f06c5dc4b94e",
+        "fewshot3": "bef2e6c398f356603c9f46542a02b1f0b52c8b3feedae69cc794b0e5132cbe9a"
+      }
+    },
+    {
+      "item_id": "M5B-F04-Q01",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "46547307616270398a95b3f9e34a080ada1e815c9dd93fc6c5e924679ff090a8",
+        "fewshot3": "e1e719e9a0ead94ec861ea89d60e50fe34850968e50fe75f5fdb6e06a5ebf2a1"
+      }
+    },
+    {
+      "item_id": "M5B-F04-Q02",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "3fa143b2af8313fee61d3337b1015cdc9d37f216ce666000a71634677844d5b1",
+        "fewshot3": "f8c3d0bb2550ae60a869c6500e3ba9530abf8e94c9d38f865697dc25631d0ab6"
+      }
+    },
+    {
+      "item_id": "M5B-F04-Q03",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "f3533b1eaf3919910b4ab8c4eed2989a433cc358f6b448f88d3622d8eb3f292a",
+        "fewshot3": "18704d7849daec202da3e483aae5c434ede8ab14a0b8e05eaf3ab1bba9bde3c6"
+      }
+    },
+    {
+      "item_id": "M5B-F04-Q04",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "78d0590d8f467ecb8a4891134d9b63b0581cf123ccb7c95c076ac9ac3be4d829",
+        "fewshot3": "5863810d21d85d6a431660dbc5bb8229eb44f9e066a7eb803c1a055dc253f150"
+      }
+    },
+    {
+      "item_id": "M5B-F11-Q01",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "b1e06c661f93872e5d8b0afdcc25b9bc1d413e45f457e3c444689e3557b0d859",
+        "fewshot3": "ae8f0b002674ffca597351d7acc375f71c35d1a7bbb41706e49000c4abda2592"
+      }
+    },
+    {
+      "item_id": "M5B-F11-Q02",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "9a4dc86b455db5bf6add1a1778823f2c5e38d28a668b1b6af924633ba4ded7bd",
+        "fewshot3": "5ab822527a2fb452215e39dc906e0ea707e90cee5745841da5dbe0f27a713ba4"
+      }
+    },
+    {
+      "item_id": "M5B-F11-Q03",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "5c1a322295e48538d64c4d02697737cdab85497e16018e025ba459f1c70c708d",
+        "fewshot3": "4cd4b51a145743358fa7692324494b29b4e7c6d16535ddc4c5f767eb3d23c5a7"
+      }
+    },
+    {
+      "item_id": "M5B-F11-Q04",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "6841e5c8c1ba390ab0b7882b44ac2ff9b42470773deace9d2fa386434cbb418c",
+        "fewshot3": "6c4c5211a6f807e1ed1e4a5c1e0c6cf990d8e8ec82d5f9cada4d9ba74167716e"
+      }
+    },
+    {
+      "item_id": "M5B-F02-Q01",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "0355e5d0333e96e28a462cd0a70648183768da3410f11af8e7c16f1af43312e1",
+        "fewshot3": "3f1acff5aaf4cb4e4a8782ab410d3a276cc1b2418a698b3c8e9223df7285ec9e"
+      }
+    },
+    {
+      "item_id": "M5B-F02-Q02",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "8db8e3aa9b71f9b2be9d656422ad211163b4e470cddeb6d72568d09970051caa",
+        "fewshot3": "0ec35135b914e92801b9534b2c52e516f9961d709c5f728ce31c048d46ff61af"
+      }
+    },
+    {
+      "item_id": "M5B-F02-Q03",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "71b7920a351813a52a6544a18a17c60ab38c245e032c31269e8786c1e66923ed",
+        "fewshot3": "69abbeecf750b892cf44cb5328a1fbc482420e80003a041ed32097df3220a0d9"
+      }
+    },
+    {
+      "item_id": "M5B-F02-Q04",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "fa4a4cd856b2901a18cea0425b83b711ebedb8273399771ee7c6c19ed2c83c2d",
+        "fewshot3": "6c9351fb7906d0bc403829af1cd50a36ceb6385f2f0d0a51f6ea28fe1f49907f"
+      }
+    },
+    {
+      "item_id": "M5B-F09-Q01",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "fc75e03ee6a7363e94717de2c0819159e6341b029c194ba9dbbd4ae47fde5f22",
+        "fewshot3": "eca69e9d0f25857897b5c55324e0d4c49f734db7de7930df02e3587f09a0a6a3"
+      }
+    },
+    {
+      "item_id": "M5B-F09-Q02",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "008bf90ab16758eec7c7c91db0e4054827f030a76d0eb8eca6817f06d9b21b7a",
+        "fewshot3": "e7f484017d47285dda255d7d232bd6e0c049cf0bc08e826e44335ce1dbebbddf"
+      }
+    },
+    {
+      "item_id": "M5B-F09-Q03",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "705619f4744336d2b7695c8f0d250e780912e65797e4e614a5920761767de75a",
+        "fewshot3": "d438a3654c84741d77b3543c110759b6d8eea885d4f74e1145b2720e380f1b4c"
+      }
+    },
+    {
+      "item_id": "M5B-F09-Q04",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "7a20fb1dcace7303faa9d10f3d478aa6f908d3f65ebab0918852e7d4a45a6198",
+        "fewshot3": "c780a5d4decda43c7644da21acb34026d2b459dea7c1a3d13dc57760db6a25d5"
+      }
+    },
+    {
+      "item_id": "M5B-F05-Q01",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "725f797c38a7d6ebcd930ccbdf411a6a0d006a7a8e3e2c4c39a0236cef1360f2",
+        "fewshot3": "02db17561e3d94066ec9ffbfe121e256ac9bfb1d89c88ae810cde9e7c83497b1"
+      }
+    },
+    {
+      "item_id": "M5B-F05-Q02",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "a2a60cf6f7c5ba3cddf0c2d12fb2d8cc32db599d27e7d5711ffc5086a8e4adf3",
+        "fewshot3": "c7ad76fa72a0cfcc059bd49924eabe5f2d49ed57fd40a78f02981f9e14980e2b"
+      }
+    },
+    {
+      "item_id": "M5B-F05-Q03",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "3aaebfc9047591e23fb37a7e8e91323b6ea24e475bd909cf76e8cf14d88eccb5",
+        "fewshot3": "6a86e8c36f6f213d8800a159f61a8651f73d3ae56162680161ca1f825ab836ba"
+      }
+    },
+    {
+      "item_id": "M5B-F05-Q04",
+      "split": "calibration",
+      "canonical_messages_sha256": {
+        "baseline": "0619aaa9791bd673603aab59622531e34d07876c56427e2b65fe6e07216f0299",
+        "fewshot3": "4314b6e88608dc692dac2b16376779f96b6194387551a1ca41b7bd6552f8bab0"
+      }
+    },
+    {
+      "item_id": "M5B-F06-Q01",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "0602fbb004abe3c401a97b136aaf7ed85b9f450fd1a71a6ab9bf27d61ed52427",
+        "fewshot3": "2f6eda830ad0f9d1bd6cf1f86c8a167cb0ec997d15777d4c637bd8765b365edf"
+      }
+    },
+    {
+      "item_id": "M5B-F06-Q02",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "313820caf86af7e5127bee275d5cb88e0261e1f0a752e5651a17c55861be0e89",
+        "fewshot3": "eec2f91475f8361f5678b864b499ccd995ce5e8b05c68492d487033e1388f191"
+      }
+    },
+    {
+      "item_id": "M5B-F06-Q03",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "5cce78102718795928dbe2096575bc763dd2591e72fe4daf73193937e7bce9af",
+        "fewshot3": "2b86a61c5196984fd9df8a5e233cb0e380055631a8e5e4a83c7213c24b25da8c"
+      }
+    },
+    {
+      "item_id": "M5B-F06-Q04",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "0ed1b3dd046c0acbc2a79a9df8641233186702772d912200bfd3ee0e43652d20",
+        "fewshot3": "0b6fe0db1aa29fdb773657a27060f68b5de33af4c2c0b23989ba0362638d04db"
+      }
+    },
+    {
+      "item_id": "M5B-F12-Q01",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "6f257d7e7683f4e4ba84679d1f0925170a10799a53452591d9955736aedcc525",
+        "fewshot3": "7a94cc046704135709c4bb3c8ba8bd24c82c1a20c2dc30d3228f8d7d126f0305"
+      }
+    },
+    {
+      "item_id": "M5B-F12-Q02",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "051e24998916d42629d0c701796b5a006bb42e49c497690080d589a32f066dda",
+        "fewshot3": "1f3cdeb170803b329c8c43830bb534bb431b59a5387db0311257b85ef5ecfef0"
+      }
+    },
+    {
+      "item_id": "M5B-F12-Q03",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "c5c2117f8c75155a9f67ae53bf7a6f6a20499226ccc092135571622c79b67acc",
+        "fewshot3": "5b631fa43f22243d0bb297da0022a5699ff3d6feac1e2cd2900c441f7f8049a3"
+      }
+    },
+    {
+      "item_id": "M5B-F12-Q04",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "2b02f4deec54b8c8c837c60ccb1426aee9f7a90eabd51df8cbed3506ef438255",
+        "fewshot3": "a98b9bbf72e35e31554de1fb6729b52ad20fac8f59a896e383844d63d459af6f"
+      }
+    },
+    {
+      "item_id": "M5B-F10-Q01",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "51db014b20609cfc6f6f218f852278557d3226a1bb47a95b5eed890275e6b567",
+        "fewshot3": "55c2ababe0097616d32aa92b472d5d7e747b3090439478e46086c2bf45045ec3"
+      }
+    },
+    {
+      "item_id": "M5B-F10-Q02",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "af80f3045fdd7b2715f83a456ed76bd10e95fc7cc99e7f16ddb72ed45b7072fd",
+        "fewshot3": "f360c290251268b3eb057073bfcd4cc6d56cacfea7170737b468b27b5708e04b"
+      }
+    },
+    {
+      "item_id": "M5B-F10-Q03",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "f7ddb8acce5f4ce6fd60447df9680bae79165ecf53edcd1e02cec1e3cfd29964",
+        "fewshot3": "c56e1d7247f3e7254b072b7cf660a0c720409054125a25ecb3fae92ad866cb6b"
+      }
+    },
+    {
+      "item_id": "M5B-F10-Q04",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "fc008edd0c430e57da31bcf96b01d95fb50e6b3fb28ab00e41a0c293ad803730",
+        "fewshot3": "2c4284f537ab13d40d7884e9f0f664d8b4f5045971988fb9f2899385f2a4a22b"
+      }
+    },
+    {
+      "item_id": "M5B-F07-Q01",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "1340837f40fbb963f32c6a82cb453173dc3701401eb65faf20adffa42267a1bc",
+        "fewshot3": "31225c9516ed0f96829af91b602ef0291ac1f3c773f4a543effed1f1f3b71c31"
+      }
+    },
+    {
+      "item_id": "M5B-F07-Q02",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "0399e8c2bb85bf761a91b81fdf3efef45f6b986a217d03983c1681756d3ec990",
+        "fewshot3": "4c9e2a39856cd9c0f706cbebc7223c85d4fbb99750d16739bc1ac19223ff38ff"
+      }
+    },
+    {
+      "item_id": "M5B-F07-Q03",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "cdfe38a7dc00c9d3729c09a14c6d0557314ce8b2c333b0c12584293b1305b054",
+        "fewshot3": "01af8730f5a6875036551273ad00c6e38ffa6d496631ed67b06d8c7ee462fd0e"
+      }
+    },
+    {
+      "item_id": "M5B-F07-Q04",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "1801f11f7fecab1fe868f2b0596c3026fa184c8519cbaf1658f092ee6a44609b",
+        "fewshot3": "221762c97b63657beb46ab406339aecb6cea0ccfce98bd90be7430b6e68ec412"
+      }
+    },
+    {
+      "item_id": "M5B-F01-Q01",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "4b87c61b5dd5b14d7ea9ffb87ddd3eed93028625b0f63f27e227bca4c52a869b",
+        "fewshot3": "a9f1f9fa8c562eadd392023e09215fbbc2c1f0630c5ad09df2bc12a05a599793"
+      }
+    },
+    {
+      "item_id": "M5B-F01-Q02",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "de8880064a4da55d518bb73fa3e417c16034422e98811133c886dc0756944d1b",
+        "fewshot3": "162d3de3fa066c9551eeba24b6f14a96216b199e3fee520cc64b4f6a887766b9"
+      }
+    },
+    {
+      "item_id": "M5B-F01-Q03",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "daf315f26718239446fa12dbc9d4e0e88d98c2c43094736de80125adc05f8e8d",
+        "fewshot3": "a09f106bb21b1f251cb6dcc8af30e725e53e9fb28f647937a558c8179ff3d6ee"
+      }
+    },
+    {
+      "item_id": "M5B-F01-Q04",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "c5882c3a85e335c8b8450b9c4991cb63df07a9c585b8f39df5c25e4112e88b6c",
+        "fewshot3": "530d8a2ac143a456fdb920588c3357935305b1a37a325b6fbe849d3547bd6ccd"
+      }
+    },
+    {
+      "item_id": "M5B-F08-Q01",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "a559941ebbd41743f3f3ee85b6594c813a20a3433f75480f4a79c94567ea80f7",
+        "fewshot3": "c98e8163dd191d03e5011e95c6a35c2a0bdbfb53117fb31f6b3801028c417fa3"
+      }
+    },
+    {
+      "item_id": "M5B-F08-Q02",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "b3a993b9fb1bfc0f3b2ba7a24b90fd3381e790367bc5fd23319627e00711c1bc",
+        "fewshot3": "cfa777a4fd48baeb9bed3357d07c0a16cb178c1fd7b66f9c201b5d2ad53a0182"
+      }
+    },
+    {
+      "item_id": "M5B-F08-Q03",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "d6090507fc24c97d2922b8cbbf11ba00db6d4014a6081d08ea3bb2591c412f02",
+        "fewshot3": "f7a1b7ddccb62bd8a5673646119d21503c54558ffef6f46421c149b31d29d9a0"
+      }
+    },
+    {
+      "item_id": "M5B-F08-Q04",
+      "split": "validation",
+      "canonical_messages_sha256": {
+        "baseline": "4c5d4f9efbab9f02cc90b2f5c0da810cb7f280b84824b22efa56c53d30eb56a2",
+        "fewshot3": "8e28eddcf05d461ec9d7d25c64ae9db8f91ee0d411be0628ba65ac27094e6cc0"
+      }
+    }
+  ],
+  "model_free_prerequisites_passed": true,
+  "duplicate_diagnostics": {
+    "cross_family_duplicate_questions": [],
+    "cross_family_near_questions": [],
+    "cross_family_duplicate_sources": [],
+    "cross_family_near_sources": [],
+    "near_clone_threshold": 0.85,
+    "semantic_independence": "requires_independent_review"
+  },
+  "reviews": [
+    {
+      "status": "accepted_with_limitations",
+      "reviewed_item_count": 27,
+      "human_review_count": 0,
+      "human_review": "pending",
+      "reviewer_agent": "m5b_design",
+      "semantic_review": "AI_only",
+      "receipt_sha256": "6e90088087eaa475d6fa6a55a5aaa6c6cbae269b72736cfa280be590bdb85a28",
+      "reviewed_item_ids": [
+        "M5B-F03-Q01",
+        "M5B-F03-Q02",
+        "M5B-F03-Q03",
+        "M5B-F03-Q04",
+        "M5B-F04-Q01",
+        "M5B-F04-Q02",
+        "M5B-F04-Q03",
+        "M5B-F04-Q04",
+        "M5B-F11-Q01",
+        "M5B-F11-Q02",
+        "M5B-F11-Q03",
+        "M5B-F11-Q04",
+        "M5B-F02-Q01",
+        "M5B-F02-Q02",
+        "M5B-F02-Q03",
+        "M5B-F02-Q04",
+        "M5B-F09-Q01",
+        "M5B-F09-Q02",
+        "M5B-F09-Q03",
+        "M5B-F09-Q04",
+        "M5B-F05-Q01",
+        "M5B-F05-Q02",
+        "M5B-F05-Q03",
+        "M5B-F05-Q04",
+        "M5B-X01-Q01",
+        "M5B-X02-Q01",
+        "M5B-X03-Q01"
+      ]
+    },
+    {
+      "status": "accepted_with_limitations",
+      "reviewed_item_count": 24,
+      "human_review_count": 0,
+      "human_review": "pending",
+      "reviewer_agent": "m5b_design",
+      "semantic_review": "AI_only",
+      "receipt_sha256": "7f733b1e20cef9940df86f5710ad0c17cfff970800108ec83ae8a01ea226391e",
+      "reviewed_item_ids": [
+        "M5B-F06-Q01",
+        "M5B-F06-Q02",
+        "M5B-F06-Q03",
+        "M5B-F06-Q04",
+        "M5B-F12-Q01",
+        "M5B-F12-Q02",
+        "M5B-F12-Q03",
+        "M5B-F12-Q04",
+        "M5B-F10-Q01",
+        "M5B-F10-Q02",
+        "M5B-F10-Q03",
+        "M5B-F10-Q04",
+        "M5B-F07-Q01",
+        "M5B-F07-Q02",
+        "M5B-F07-Q03",
+        "M5B-F07-Q04",
+        "M5B-F01-Q01",
+        "M5B-F01-Q02",
+        "M5B-F01-Q03",
+        "M5B-F01-Q04",
+        "M5B-F08-Q01",
+        "M5B-F08-Q02",
+        "M5B-F08-Q03",
+        "M5B-F08-Q04"
+      ]
+    }
+  ],
+  "independent_ai_review_complete": true,
+  "prompt_budget": {
+    "status": "passed",
+    "max_input_tokens": 1536,
+    "enable_thinking": false,
+    "truncation": false,
+    "rows": [
+      {
+        "item_id": "M5B-F03-Q01",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 514,
+          "fewshot3": 800
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e7f71f1eb8f75127e321604e70047ae5181b6fa9a048f5b5ec73abad175fd389",
+          "fewshot3": "5f626877ed97603cfe046abecc754f27e8f343d6c9406e49758958702faab830"
+        }
+      },
+      {
+        "item_id": "M5B-F03-Q02",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 666,
+          "fewshot3": 952
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "573763db08a1f661a2e67185c925dd5d27108924a4e9765c26394d1039d53d8c",
+          "fewshot3": "a42f49d57004795f2b26ba2c9c730212664bbac76bc14463a3ec574507bd719d"
+        }
+      },
+      {
+        "item_id": "M5B-F03-Q03",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 526,
+          "fewshot3": 812
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "49f78298c01bc45288b132d650c5b597eb3493dae9e10708dc339d3f7e68449e",
+          "fewshot3": "03804cdaa111ed2464bdb67071131cdfa8d7cfb912e9a2bef4bb5ede6a792575"
+        }
+      },
+      {
+        "item_id": "M5B-F03-Q04",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 661,
+          "fewshot3": 947
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "dc5f4df1c37276997293b26adcb4b8adfc84cc4a7c56862ddd073849bbfe06ba",
+          "fewshot3": "5ca3d6e19eaa5b766fb7f3b93504c8e477388fb5dbda40f89e9aeeed08b06e47"
+        }
+      },
+      {
+        "item_id": "M5B-F04-Q01",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 559,
+          "fewshot3": 845
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "33ba924922e9a25eb7fd1cc8ebb64b651938d3361459c327adef063a45c6e68a",
+          "fewshot3": "b8b9a54969e64bc8012357c72d4454699a3f0afcecb0ff0febe72e6055a769ef"
+        }
+      },
+      {
+        "item_id": "M5B-F04-Q02",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 658,
+          "fewshot3": 944
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e33ff287a7e7eb5777484fc9f9382ee6a69c2c6ef4030ef51e80a6adb859d199",
+          "fewshot3": "73e731e58674c9e57f42eadf338c269a62ac1346c04c068da7905b0df18e1f3a"
+        }
+      },
+      {
+        "item_id": "M5B-F04-Q03",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 526,
+          "fewshot3": 812
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "6ba03780753b07ea13fcb6d4cb0a58179d36870b6c545c3b8ddce7a736cb6539",
+          "fewshot3": "4020da541e3eb085fea1bd3d9e3556db594c91a281b020e6b2c9008e81221ab2"
+        }
+      },
+      {
+        "item_id": "M5B-F04-Q04",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 657,
+          "fewshot3": 943
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "4ebc8e63e356c0d5c0dafa802ca8a9de6960d313a9fbf0811505cd0a99b840c0",
+          "fewshot3": "c25e157700623bf863a54bf2dbed8f8d7ce40272fd79b7682ba3305efd66ea6c"
+        }
+      },
+      {
+        "item_id": "M5B-F11-Q01",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 505,
+          "fewshot3": 791
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "301cdba32452188444f5f888cd4a9e7e301829a328486b9aabad9d21f2310b27",
+          "fewshot3": "f61f6b21349cf913107cfdf53e3f0931643a42c0b1184ba35431acff19ae8fc4"
+        }
+      },
+      {
+        "item_id": "M5B-F11-Q02",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 705,
+          "fewshot3": 991
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "d15a1751b7b5dbed7854d2876375103e64bcf865cf97372c2950fa18cb13e517",
+          "fewshot3": "5700c062fc40eb263ab936ba2c09df4b4faaf691ca08075c9d395669bd55ec29"
+        }
+      },
+      {
+        "item_id": "M5B-F11-Q03",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 668,
+          "fewshot3": 954
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e01ed3646847d3b47b5817662d1a5a78c178bef3b089c1cfc7fa66148b416603",
+          "fewshot3": "db533366629e5b5c2998f606ee96687143ec8642b011b7839b5b6db74e53b9f4"
+        }
+      },
+      {
+        "item_id": "M5B-F11-Q04",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 645,
+          "fewshot3": 931
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "853d4e72675a87d7758f2551f0e726ae056273f73768e802cbbe236d8778fe36",
+          "fewshot3": "e6d01b015815086a71eceafa0f695d96c1f9c090372563d547c6754ebd737b63"
+        }
+      },
+      {
+        "item_id": "M5B-F02-Q01",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 514,
+          "fewshot3": 800
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "298b5f7c10326e8441d179130e2febf2df294ee0c52664a562ce2be75f3b6c49",
+          "fewshot3": "d21fd32f73bed255b499741c575fed229536cf12389d0ad9bbb1763726d36336"
+        }
+      },
+      {
+        "item_id": "M5B-F02-Q02",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 670,
+          "fewshot3": 956
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e642b0ff93f8978f3cdc2e463042ead50ee8b6157ce34ecfa45f2437afb24dee",
+          "fewshot3": "198c75fcb29a6b79d74bee905b50d9fcd7acbc40d482d10c5e0843e65cf629b9"
+        }
+      },
+      {
+        "item_id": "M5B-F02-Q03",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 535,
+          "fewshot3": 821
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "8f5a25fafbb45de2c42cc9bf1b370b5d333f2f9f03d3cf132e3736fcbda3df13",
+          "fewshot3": "6088169aeaf6f6d64f5b42bfb5a4f871a82044f5f5adbb791e129447ef2b289e"
+        }
+      },
+      {
+        "item_id": "M5B-F02-Q04",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 661,
+          "fewshot3": 947
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "4e98f8357327b7a8636d7f0beac9224641caa69cde92418a035e08b43f2b5b95",
+          "fewshot3": "2131f09aca8ce72215a4b5bba94b8b950aa7a88cf1de69a85c685929cde8ce9e"
+        }
+      },
+      {
+        "item_id": "M5B-F09-Q01",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 569,
+          "fewshot3": 855
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "a860dfc3e0286b2e3cf713db7152d71b487ffebf2cd056063b6dfa599a2a8523",
+          "fewshot3": "e2bae7736014d8d14e18cbdf6381c6b97893d2a0e92617aa95fe9adc73f680fe"
+        }
+      },
+      {
+        "item_id": "M5B-F09-Q02",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 667,
+          "fewshot3": 953
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "031e447e19d0260ccf17df487edefc3d89d458248002cd46c50ceee511c66e3f",
+          "fewshot3": "31224948a521f9b258d335507b483afaa622f6c0c52d6b29eb237777d4b46911"
+        }
+      },
+      {
+        "item_id": "M5B-F09-Q03",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 525,
+          "fewshot3": 811
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "1d4261908e4eb44830ef43dc9946257a6074d6e024c7dcff2e512e350b94058a",
+          "fewshot3": "08760f6a568a60ca1ec897b1229b52ba64031e46a5beb426e40b8c2c39a22526"
+        }
+      },
+      {
+        "item_id": "M5B-F09-Q04",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 653,
+          "fewshot3": 939
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "81609f4ab4147f0e9d7ddd4f91241d0f39ce50963519a20f37da78d61f43dcee",
+          "fewshot3": "1d74349ac9c0434d20301873b8f7fdb3723507abcd1e03b460c7806618d1a85d"
+        }
+      },
+      {
+        "item_id": "M5B-F05-Q01",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 522,
+          "fewshot3": 808
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e844b89ec9fd97d7bc12351c98bd8d62d40e526c62bb8ab1b25510f499dca898",
+          "fewshot3": "66a45e5b3b02d6b5a98f8ea77cf5ba0aff1bfafacd85641dd7f93d996c9f1b84"
+        }
+      },
+      {
+        "item_id": "M5B-F05-Q02",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 699,
+          "fewshot3": 985
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "6c8a21dd2c7a38aa97bf6a3432f3d251cf91927915dd954db7cbcb31035c5d5b",
+          "fewshot3": "a85829a81551aa297dc91dd44b054e501f0c5108283d8fbe19382e1d514d72fc"
+        }
+      },
+      {
+        "item_id": "M5B-F05-Q03",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 674,
+          "fewshot3": 960
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "fda86538b7e3d384f9e741709a95db86babada01154c0ba15a7223280d7adcb7",
+          "fewshot3": "60391681b65c02dc914c80bab1a26df6b01ce30378d57287b6b33eb78052e1f3"
+        }
+      },
+      {
+        "item_id": "M5B-F05-Q04",
+        "split": "calibration",
+        "input_tokens": {
+          "baseline": 628,
+          "fewshot3": 914
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "7d8a6f742fbbf5c37611edc2637292cc9c5fbeee36d1703d93c445aa77ac0394",
+          "fewshot3": "b12631a989c7cf5510597de7c10536ac6a00da852cdff240a58086e9f7dfe794"
+        }
+      },
+      {
+        "item_id": "M5B-F06-Q01",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 520,
+          "fewshot3": 806
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e37b619d6eafa22aad4537d28cd347854c448a5db8ca83297177435413094dd7",
+          "fewshot3": "3cf1cf3ed8b55cf75ae666579c203a849062e20656207d0b3f9cebc363e1d4d5"
+        }
+      },
+      {
+        "item_id": "M5B-F06-Q02",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 688,
+          "fewshot3": 974
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "84f065766a5b6d7f8346235fc0bc2a31ea6dac6a75080f3247c9b237a9f8d5b8",
+          "fewshot3": "85bf0e1ce569f6779bd844462bdd30c59eddac2e84c410ab457ff36632505a13"
+        }
+      },
+      {
+        "item_id": "M5B-F06-Q03",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 544,
+          "fewshot3": 830
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "25a5ee80dc1bdc31b06e0eeab9d491296bd4aecb8beb03508dcc2a957d42f7b3",
+          "fewshot3": "12c0703719325f034e8b9dbb07f6d6b6a47ae020cea8039ca976971fcb7a6e6e"
+        }
+      },
+      {
+        "item_id": "M5B-F06-Q04",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 693,
+          "fewshot3": 979
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "c0cfd2de13cbc02e53d8151236d313fd535a6e1ef83bb64c4c9b0d74e88fa7dd",
+          "fewshot3": "e4348ebd4d1774dfcfed8f712c5ede6a4781fb29e7fa1ff568a73f03a6bebcfb"
+        }
+      },
+      {
+        "item_id": "M5B-F12-Q01",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 563,
+          "fewshot3": 849
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "1c72700d37896576c206d801354638e5ade8187c2db45abf03112aace6be3d7e",
+          "fewshot3": "9998691b9071c58740ee497b5fd725ce367b2d151aa489f9f67786732c88ade8"
+        }
+      },
+      {
+        "item_id": "M5B-F12-Q02",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 676,
+          "fewshot3": 962
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e74a6b595bdd42d0ab4afed93ac3374cb3cc11d4ad6bee13ab6b6cc85277de8d",
+          "fewshot3": "b9074257a4af4845aa052457331cf32c8b7ea9fa81cf700c7c47eeedcb72410f"
+        }
+      },
+      {
+        "item_id": "M5B-F12-Q03",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 530,
+          "fewshot3": 816
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "847692251cd7fd638120403f99658b806acbb77c58afb40bd57cd873640057fb",
+          "fewshot3": "bfa6e92f471a59d3d23f3e269c22ee6fedea71c7f96a171760ed012d4b9e7725"
+        }
+      },
+      {
+        "item_id": "M5B-F12-Q04",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 668,
+          "fewshot3": 954
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "c5d8878d0e278ac071fff11b83f3279ee97fe4b9f4482b05b42a766ac1575d34",
+          "fewshot3": "c620e219301bf80bce569994f2e10877ddc9f6796e8d44002f0298cb26f308f2"
+        }
+      },
+      {
+        "item_id": "M5B-F10-Q01",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 519,
+          "fewshot3": 805
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "7644fa56ae244f487b16496a1d48bc3fab445a72af3c91aad8d465d69798127f",
+          "fewshot3": "1c97f7892cfad94ffa38e62961cce3c05b9fcb5f3b3509723fa6fb60c786ec52"
+        }
+      },
+      {
+        "item_id": "M5B-F10-Q02",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 753,
+          "fewshot3": 1039
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "148cbc3b9aa809d04a17b124617351efcf1ca9b9a886db9cdd7a7c0b31bf74bc",
+          "fewshot3": "27635d3877a76b286129ac7fcbbc583323a0ff3d937287caf0cf620c1921cc65"
+        }
+      },
+      {
+        "item_id": "M5B-F10-Q03",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 701,
+          "fewshot3": 987
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "0fd09c873b5d89b632dc8e45069fdfe94882eebf8393aed5a1844e0fd22d9555",
+          "fewshot3": "58c46f53f09c9d5dba77abf620b8b7afc8b3eeef96d1ff6abd82f089de2e7743"
+        }
+      },
+      {
+        "item_id": "M5B-F10-Q04",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 681,
+          "fewshot3": 967
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e8d233126f0594b8c84ff4a6f2d36842da04054aab4a833f5ee4ce929599a7af",
+          "fewshot3": "789d17e7834c6aab310ab4241a8dcbfeb76e357c7724c1967fd8adae98e30960"
+        }
+      },
+      {
+        "item_id": "M5B-F07-Q01",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 529,
+          "fewshot3": 815
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "6a46e57484f5843dccd4368e596c1009c152fb08e44a4fb2bc7c2a5b579e9323",
+          "fewshot3": "e2714e783f58addd6f5680833b318420eda712d381e1e0bb395e8e626f2593f1"
+        }
+      },
+      {
+        "item_id": "M5B-F07-Q02",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 681,
+          "fewshot3": 967
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "432283eb52856871242fb3e0d029cb5a91224a84e631f0381bd1724a3674279c",
+          "fewshot3": "cc19218da895de3cd13d4712c5c7ccbae0a0a6018553987700dcc5d8d4cdadc5"
+        }
+      },
+      {
+        "item_id": "M5B-F07-Q03",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 541,
+          "fewshot3": 827
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "6544b7cd066d3b4e38c6603de99cf4b162568e9605d1e866ac982557ca0769b2",
+          "fewshot3": "d27d7b4ef8efae0c53b197a50e5dd18e3d5f855b7fc719d3849d663148c36d28"
+        }
+      },
+      {
+        "item_id": "M5B-F07-Q04",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 680,
+          "fewshot3": 966
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "813bfa8ab423917a53a9fa7a2a6258cbc85f8634a9b54095c998538e542430b5",
+          "fewshot3": "bca30990a4cff1e5ed49b3a8972014fc74d51aae51c6a83ea32dc280eece33fb"
+        }
+      },
+      {
+        "item_id": "M5B-F01-Q01",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 565,
+          "fewshot3": 851
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "37a388a2494a37112dbeb77a822782f458c736220d111fe0a1ff1e9714e27047",
+          "fewshot3": "0271fbfb4367e1fc5efd15dbfb78d34a1b678a09ef8f778768969d2f1df6ff4b"
+        }
+      },
+      {
+        "item_id": "M5B-F01-Q02",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 699,
+          "fewshot3": 985
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "08e632f87fed6636e094119da52d4c1082d87bff369a414078803846e5b3099a",
+          "fewshot3": "fabc12b9fef08cb69d7f44a47682c01d710a601ee02cc3c169cd43abda051c74"
+        }
+      },
+      {
+        "item_id": "M5B-F01-Q03",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 532,
+          "fewshot3": 818
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "a393c863389067db5fcb1f2365afc09405298d68d23ea1e8c56aeab2ecd06764",
+          "fewshot3": "1d6f35bd0fa40fbe5e83f8c345f9479d4331a3cf3b7fe53266db7d6e41a5e7d3"
+        }
+      },
+      {
+        "item_id": "M5B-F01-Q04",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 682,
+          "fewshot3": 968
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "a0dd0b1ce533fc182408158829904ffa6c11f389558be1f9a1f9148d738f7a5f",
+          "fewshot3": "bd2e82c771a2d8f561c9fdd2811b53ff24fd20f3922da1814b00fc640c435212"
+        }
+      },
+      {
+        "item_id": "M5B-F08-Q01",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 532,
+          "fewshot3": 818
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "c69c2403ebc21c1e1c127cf7ec3665e7df61f1be93ddd27a3a64f7e7c40eb66c",
+          "fewshot3": "c715e26191ec0c5cf6f4c11b9bd990cdb580be0fa3bb234d2582296b5715e0a5"
+        }
+      },
+      {
+        "item_id": "M5B-F08-Q02",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 728,
+          "fewshot3": 1014
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "7888303bf13d70354b3a19d6fde79ebd25bc9ee4c5f5d4c25cbf7cb98e5ee963",
+          "fewshot3": "73ee8b75beea80afb908e5dd0fa3c31858405d1f69e999594f7383c7682daeed"
+        }
+      },
+      {
+        "item_id": "M5B-F08-Q03",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 687,
+          "fewshot3": 973
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "e6cdc41bb55102f84984b451f71a1aca4930d5cb7a5e212f2c51b3e471ec417b",
+          "fewshot3": "84d25325967a53a9cf6a982428cd8c29138890b9358d900e6c7de72efc7df1d3"
+        }
+      },
+      {
+        "item_id": "M5B-F08-Q04",
+        "split": "validation",
+        "input_tokens": {
+          "baseline": 642,
+          "fewshot3": 928
+        },
+        "rendered_prompt_sha256": {
+          "baseline": "5d1c07bd009586a72e13c8324208d228cf98a8a7274c2650a4334d9c2df2178e",
+          "fewshot3": "175e2df478d1f46f3b2b5f9cf3067596949eebc6d71d404e942c2f40d3ccc8fe"
+        }
+      }
+    ],
+    "overflow_item_ids": [],
+    "policy_counts": {
+      "baseline": 48,
+      "fewshot3": 48
+    },
+    "max_tokens_by_policy": {
+      "baseline": 753,
+      "fewshot3": 1039
+    },
+    "verified_tokenizer_files": {
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    "manifest_sha256": "04ffa1bb70bd7fb853efebb11e13455647c0182c2960be8e197d758cb0198fa1"
+  },
+  "limitations": [
+    "Synthetic AI-authored development data; not held-out quality.",
+    "No model outputs, GPU run, or service adoption in this milestone.",
+    "Generation requires a separately frozen execution plan and quota."
+  ]
+}

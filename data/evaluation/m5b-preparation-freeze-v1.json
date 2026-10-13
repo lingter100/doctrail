@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "phase": "preparation_snapshot",
+  "bindings": {
+    "data/evaluation/m5b-family-registry-v1.json": "b2fb4f0749995a2aa7f87f30a5531e23fb5373f0b42b0b778e0bf7ea7674b4cc",
+    "data/evaluation/m5b-calibration-v1.json": "eeef1721e03ce708f75248f0de87e4c71f28de50c117f36b3e2a9ddb1d474d55",
+    "data/evaluation/m5b-validation-v1.json": "dee6997691628e3ab9aac91d390bc7f6b4dc186b24b99bc93aebef28480ab307",
+    "data/evaluation/m5b-policy-examples-v1.json": "eeff461002705980b34ef728f70c42fb5f2eefa8c5b5ec4e27a9a2c4a7552998",
+    "data/evaluation/reviews/m5b-calibration-review-v1.json": "6e90088087eaa475d6fa6a55a5aaa6c6cbae269b72736cfa280be590bdb85a28",
+    "data/evaluation/reviews/m5b-validation-review-v1.json": "7f733b1e20cef9940df86f5710ad0c17cfff970800108ec83ae8a01ea226391e",
+    "experiments/results/m5b-preparation-v1.json": "95cdd2f70139f0bb08f331909aedc97a67e1debc17fa790c9ff42836f04dc5ad",
+    "src/doctrail/generation_calibration.py": "b4320e85df496ed0829a23eaadca72187ad7b9b9f639f916148fe5acdb2213f8",
+    "scripts/prepare_generation_calibration.py": "5a4ac34295639d6447879e64c5a3471a60e5cffc8bf3322bd07af2b4dd125829",
+    "tests/test_generation_calibration.py": "18889ac5de61cbbe7b0466fe017a344a9c6a2e72959da5ebff7f893e66fc6f82",
+    "docs/M5-CALIBRATION-PLAN.md": "2007ff4e9a52d75563d22e2e6c0532369bae3f16c422cf30f7edb7f96bb5208c",
+    "data/models/m5-generation-v1.json": "04ffa1bb70bd7fb853efebb11e13455647c0182c2960be8e197d758cb0198fa1",
+    "data/prompts/m5-grounded-answer-v1.txt": "67953f8b11e992df10d3c17ce88d62b5f6c7efd48ce329389c32f641e6d76809",
+    "src/doctrail/grounded_answer.py": "adec8b638a78b01aa30e415326b6dcb36d1fbd35e35728666653f77dee3dbe8f",
+    "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+    "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+    "pyproject.toml": "db45870df5b6d4fd543e14b9d837d25614033f9049692cead50e1a366a72308d",
+    "uv.lock": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+  },
+  "preparation_status": "data_prepared",
+  "generation_ready": false,
+  "model_calls_authorized_by_this_manifest": 0,
+  "human_review": "pending",
+  "registry_registration_commit": "2de1487",
+  "policy_freeze_commit": "f7e9692",
+  "purpose": "Preparation snapshot only; future bounded execution needs a separate runner and plan."
+}

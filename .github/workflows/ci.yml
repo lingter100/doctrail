@@ -80,6 +80,10 @@ jobs:
         run: |
           uv run python -m scripts.evaluate_generation_smoke --replay experiments/results/m5-generation-v1.json
           uv run python -m scripts.evaluate_generation_smoke_v2 --replay experiments/results/m5-generation-v2.json
+      - name: Verify isolated answer policy data and preparation bindings without models
+        run: |
+          uv run python -m scripts.prepare_generation_calibration --require-reviewed --review data/evaluation/reviews/m5b-calibration-review-v1.json --review data/evaluation/reviews/m5b-validation-review-v1.json --output .local/m5b-ci-preparation.json
+          uv run python -m scripts.prepare_generation_calibration --verify-freeze data/evaluation/m5b-preparation-freeze-v1.json
   web:
     runs-on: ubuntu-latest
     defaults:
