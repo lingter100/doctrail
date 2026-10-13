@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "run_id": "m5-generation-v1",
+  "execution_status": "completed_11_generations_and_1_preguard",
+  "protocol_status": "invalid_for_preregistered_greedy_baseline",
+  "artifacts_sha256": {
+    "m5-generation-v1.json": "de79bce24c051e273d1d627dc78ab560be01881b4cb776a2cd723f720ccb8cad",
+    "m5-generation-v1.progress.jsonl": "cc86696e31259fe201233aa12a72fa35354808e622c658e5c26afdbaaa1327b2"
+  },
+  "intended_do_sample": false,
+  "observed_model_default_override": true,
+  "runtime_warning": "`generation_config` default values have been modified to match model-specific defaults: {'do_sample': True, 'temperature': 0.6, 'top_k': 20, 'top_p': 0.95, 'bos_token_id': 151643}. If this is not desired, please set these values explicitly.",
+  "diagnosis": "Transformers 4.57.6 GenerationMixin._prepare_generation_config treats values equal to global defaults as eligible for model defaults when use_model_defaults is None and the model config version is >=4.50.0. do_sample=False was changed to True.",
+  "evidence_scope": "Actual runtime warning plus inspection of installed pinned library source; no claim that the original receipt captured effective decoding settings.",
+  "abort_attempt": "Parent sought to terminate the owned worker after detecting the warning, but all 11 requests had completed and no owned live worker remained. No process was terminated by that attempt.",
+  "original_receipt_preserved": true,
+  "interpretation": "Original status=completed denotes execution completion only. Its runtime metadata contains requested settings, not the effective sampling configuration. Do not cite its structural/semantic scores as the registered greedy result.",
+  "correction_scope": "A separately frozen v2 will only enforce intended greedy decoding and verify effective settings. Same model, prompt, fixtures and resource budgets; not an independent held-out experiment.",
+  "human_review_count": 0,
+  "paid_api_requests": 0
+}

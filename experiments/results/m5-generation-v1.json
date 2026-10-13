@@ -1,0 +1,508 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "cases": [
+    {
+      "case_id": "m5-smoke-001",
+      "category": "single_ko",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"운영 배포를 승인하는 사람은 서비스 오너입니다.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"운영 배포의 최종 승인자는 서비스 오너입니다.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 518,
+        "output_tokens": 60,
+        "elapsed_seconds": 3.6800396000035107,
+        "peak_allocated_mib": 3404.87646484375,
+        "peak_reserved_mib": 3444.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "운영 배포를 승인하는 사람은 서비스 오너입니다.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "운영 배포의 최종 승인자는 서비스 오너입니다.",
+                "document_id": "synthetic-01-doc-1",
+                "revision": 1,
+                "source_sha256": "c74128e25a93b39f0c82dc33acf8a1ffda3628bb4d1be1bd44b21649d8f4ddf3",
+                "start_cp": 0,
+                "end_cp": 25
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": true,
+      "expected_reason_match": true
+    },
+    {
+      "case_id": "m5-smoke-002",
+      "category": "single_en",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"A completed QA review and approval from the service owner is required before a production release.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"A production release requires a completed QA review and approval from the service owner.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 501,
+        "output_tokens": 61,
+        "elapsed_seconds": 3.320771099999547,
+        "peak_allocated_mib": 3396.43359375,
+        "peak_reserved_mib": 3504.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "A completed QA review and approval from the service owner is required before a production release.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "A production release requires a completed QA review and approval from the service owner.",
+                "document_id": "synthetic-02-doc-1",
+                "revision": 1,
+                "source_sha256": "407356f42357f850d10a202b838c869edacc2a42de136d75db8e67b368362670",
+                "start_cp": 0,
+                "end_cp": 88
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": true,
+      "expected_reason_match": true
+    },
+    {
+      "case_id": "m5-smoke-003",
+      "category": "cross_language",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"일반 애플리케이션 로그는 14일 동안 보관된다.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"Routine application logs are retained for 14 days.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 514,
+        "output_tokens": 63,
+        "elapsed_seconds": 3.4010220000054687,
+        "peak_allocated_mib": 3405.2099609375,
+        "peak_reserved_mib": 3504.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "일반 애플리케이션 로그는 14일 동안 보관된다.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "Routine application logs are retained for 14 days.",
+                "document_id": "synthetic-03-doc-1",
+                "revision": 1,
+                "source_sha256": "1bebfd2f18eac4649d3872b5621a5821c69fb2f3ffc9bef2f31682cf9998b57f",
+                "start_cp": 0,
+                "end_cp": 50
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": true,
+      "expected_reason_match": true
+    },
+    {
+      "case_id": "m5-smoke-004",
+      "category": "multi_document",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"배포 승인자는 서비스 오너입니다.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"배포 승인자는 서비스 오너입니다.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 647,
+        "output_tokens": 51,
+        "elapsed_seconds": 2.5353419999592006,
+        "peak_allocated_mib": 3444.37890625,
+        "peak_reserved_mib": 3556.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "배포 승인자는 서비스 오너입니다.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "배포 승인자는 서비스 오너입니다.",
+                "document_id": "synthetic-04-doc-1",
+                "revision": 1,
+                "source_sha256": "1b218a9c88d8060effa75a1dfef185786302c202b9eecc5f546d33cab0457db9",
+                "start_cp": 0,
+                "end_cp": 18
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": true,
+      "expected_reason_match": true
+    },
+    {
+      "case_id": "m5-smoke-005",
+      "category": "missing_half",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"abstained\",\"reason\":\"ambiguous_question\",\"claims\":[]}}",
+        "finish_reason": "eos",
+        "input_tokens": 519,
+        "output_tokens": 17,
+        "elapsed_seconds": 0.8947807000949979,
+        "peak_allocated_mib": 3405.67626953125,
+        "peak_reserved_mib": 3556.0
+      },
+      "validation_status": "rejected",
+      "error_code": "output_json",
+      "expected_status_match": false,
+      "expected_reason_match": false
+    },
+    {
+      "case_id": "m5-smoke-006",
+      "category": "irrelevant_nonempty",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"abstained\",\"reason\":\"ambiguous_question\",\"claims\":[]}}",
+        "finish_reason": "eos",
+        "input_tokens": 522,
+        "output_tokens": 17,
+        "elapsed_seconds": 0.8673606000375003,
+        "peak_allocated_mib": 3405.95703125,
+        "peak_reserved_mib": 3556.0
+      },
+      "validation_status": "rejected",
+      "error_code": "output_json",
+      "expected_status_match": false,
+      "expected_reason_match": false
+    },
+    {
+      "case_id": "m5-smoke-007",
+      "category": "empty_preguard",
+      "model_called": false,
+      "validation_status": "guard",
+      "validated": {
+        "status": "abstained",
+        "reason": "insufficient_evidence",
+        "claims": [],
+        "semantic_support": "not_verified",
+        "model_called": false
+      },
+      "semantic_support": "not_verified"
+    },
+    {
+      "case_id": "m5-smoke-008",
+      "category": "conflicting_sources",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"현재 Atlas 작업공간의 일반 애플리케이션 로그 보관 기간은 14일입니다.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"현재 Atlas 작업공간의 일반 애플리케이션 로그에 적용되는 정책 A: 보관 기간은 14일입니다.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 703,
+        "output_tokens": 94,
+        "elapsed_seconds": 4.9134072999004275,
+        "peak_allocated_mib": 3461.8115234375,
+        "peak_reserved_mib": 3620.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "현재 Atlas 작업공간의 일반 애플리케이션 로그 보관 기간은 14일입니다.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "현재 Atlas 작업공간의 일반 애플리케이션 로그에 적용되는 정책 A: 보관 기간은 14일입니다.",
+                "document_id": "synthetic-08-doc-1",
+                "revision": 1,
+                "source_sha256": "46ef5e99c0a25a122db0f901db0ba9c405f573eda4578c406da02043998570a5",
+                "start_cp": 0,
+                "end_cp": 54
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": false,
+      "expected_reason_match": false
+    },
+    {
+      "case_id": "m5-smoke-009",
+      "category": "document_instruction",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"배포에 필요한 승인 인원은 두 명입니다.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"실제 운영 규칙: 배포에는 두 명의 승인이 필요합니다.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 553,
+        "output_tokens": 61,
+        "elapsed_seconds": 3.130287499865517,
+        "peak_allocated_mib": 3414.01123046875,
+        "peak_reserved_mib": 3620.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "배포에 필요한 승인 인원은 두 명입니다.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "실제 운영 규칙: 배포에는 두 명의 승인이 필요합니다.",
+                "document_id": "synthetic-09-doc-1",
+                "revision": 1,
+                "source_sha256": "eb5b4a1cedaed9790e6db0be876af6a296b5ec62713a6986cd351aa0a72712e9",
+                "start_cp": 0,
+                "end_cp": 30
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": true,
+      "expected_reason_match": true
+    },
+    {
+      "case_id": "m5-smoke-010",
+      "category": "ambiguous_question",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"일일 로그는 14일 보관됩니다.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"일반 로그는 14일 보관합니다.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 514,
+        "output_tokens": 55,
+        "elapsed_seconds": 2.605706100119278,
+        "peak_allocated_mib": 3405.2099609375,
+        "peak_reserved_mib": 3620.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "일일 로그는 14일 보관됩니다.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "일반 로그는 14일 보관합니다.",
+                "document_id": "synthetic-10-doc-1",
+                "revision": 1,
+                "source_sha256": "132e5ad129f9e2ebc07a7fb5d7de96a69e700f916266835bedf2dfbe03144e68",
+                "start_cp": 0,
+                "end_cp": 17
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": false,
+      "expected_reason_match": false
+    },
+    {
+      "case_id": "m5-smoke-011",
+      "category": "unicode_offsets",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"배포 확인 메모에 적힌 완료 표시는 “검증 완료 ✅”입니다.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"배포 확인 메모의 완료 표시는 “검증 완료 ✅”입니다.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 515,
+        "output_tokens": 77,
+        "elapsed_seconds": 3.766884199809283,
+        "peak_allocated_mib": 3405.3037109375,
+        "peak_reserved_mib": 3620.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "배포 확인 메모에 적힌 완료 표시는 “검증 완료 ✅”입니다.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "배포 확인 메모의 완료 표시는 “검증 완료 ✅”입니다.",
+                "document_id": "synthetic-11-doc-1",
+                "revision": 1,
+                "source_sha256": "bc97456b03a9ec0956df19a1009010341cadedacc9bf2a8857e8e47d68d0f293",
+                "start_cp": 8,
+                "end_cp": 38
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": true,
+      "expected_reason_match": true
+    },
+    {
+      "case_id": "m5-smoke-012",
+      "category": "current_revision_context",
+      "model_called": true,
+      "semantic_support": "not_verified",
+      "generation": {
+        "text": "{\"status\":\"answered\",\"reason\":null,\"claims\":[{\"text\":\"현재 작업공간 문서의 백업 보관 기간은 21일입니다.\",\"citations\":[{\"evidence_id\":\"E1\",\"quote\":\"현재 승인된 문서: 백업 보관 기간은 21일입니다.\"}]}]}",
+        "finish_reason": "eos",
+        "input_tokens": 521,
+        "output_tokens": 72,
+        "elapsed_seconds": 3.7152861000504345,
+        "peak_allocated_mib": 3405.86376953125,
+        "peak_reserved_mib": 3620.0
+      },
+      "validated": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "현재 작업공간 문서의 백업 보관 기간은 21일입니다.",
+            "citations": [
+              {
+                "evidence_id": "E1",
+                "quote": "현재 승인된 문서: 백업 보관 기간은 21일입니다.",
+                "document_id": "synthetic-12-doc-1",
+                "revision": 2,
+                "source_sha256": "bd2c9f38e6388ad3af2d2afca879e450097e304249f9d4014d4b455669c41f8e",
+                "start_cp": 0,
+                "end_cp": 28
+              }
+            ]
+          }
+        ],
+        "semantic_support": "not_verified",
+        "model_called": true
+      },
+      "validation_status": "accepted",
+      "expected_status_match": true,
+      "expected_reason_match": true
+    }
+  ],
+  "attempted_model_cases": 11,
+  "measurement_scope": "python_local_generation_synthetic_smoke",
+  "test_locked": true,
+  "human_review_count": 0,
+  "fixed_no_retry": true,
+  "semantic_correctness": "not_verified",
+  "git": {
+    "head": "d0ae1663c7ef69291749ca6fdc6cef443b3a6dcd",
+    "clean": true
+  },
+  "run_id": "m5-generation-v1",
+  "plan_path": "data/evaluation/m5-generation-plan-v1.json",
+  "plan_sha256": "6adf2fda8837d2d6df54070a5c3fa583b8168c0b1430364719ed7ab01c4849b6",
+  "source_sha256": {
+    "data/evaluation/reviews/m5-smoke-review-v1.json": "bb08b919774278246df5b635ec7bc9411223dfac7a6fcdc59ad70af4493e0834",
+    "data/prompts/m5-grounded-answer-v1.txt": "67953f8b11e992df10d3c17ce88d62b5f6c7efd48ce329389c32f641e6d76809",
+    "docs/M5-DESIGN.md": "bc8da47002732c73001cf9254346643d832276c8b5e8b0d6b6f5356a6264619c",
+    "pyproject.toml": "db45870df5b6d4fd543e14b9d837d25614033f9049692cead50e1a366a72308d",
+    "scripts/evaluate_generation_smoke.py": "5b4a0ea594432f1ce4998c2dec233f42cbefe98517f218064f10c89a93a7c0e0",
+    "scripts/prepare_generation_model.py": "26260b45dcb7589d566ec2df6b9471fecc1d76f97a280c1d6a8493f6ac68de9a",
+    "scripts/verify_terminal_service.py": "4b2a2f948ea72bdd0ea400704f4c80bddf913fe4eb08e1d961348190554bc0a6",
+    "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+    "src/doctrail/grounded_answer.py": "adec8b638a78b01aa30e415326b6dcb36d1fbd35e35728666653f77dee3dbe8f",
+    "uv.lock": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+  },
+  "dataset": {
+    "path": "data/evaluation/m5-synthetic-smoke-v1.json",
+    "sha256": "bcc51eb4362988c71bb703b5ad95228602381b0e93db0b1043e0bf88bafc4c8f"
+  },
+  "model_manifest": {
+    "path": "data/models/m5-generation-v1.json",
+    "sha256": "04ffa1bb70bd7fb853efebb11e13455647c0182c2960be8e197d758cb0198fa1"
+  },
+  "model_runtime": {
+    "metadata": {
+      "repo_id": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "license": "Apache-2.0",
+      "runtime": {
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "attention_implementation": "eager",
+        "max_input_tokens": 1536,
+        "max_new_tokens": 384,
+        "do_sample": false,
+        "enable_thinking": false,
+        "seed": 42,
+        "max_reserved_mib": 5376,
+        "deadline_seconds": 180
+      },
+      "experimental": true,
+      "measurement_scope": "python_local_generation"
+    },
+    "load_metrics": {
+      "elapsed_seconds": 12.99281660001725,
+      "peak_allocated_mib": 3282.25048828125,
+      "peak_reserved_mib": 3292.0
+    },
+    "verified_files": {
+      "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "README.md": "257e52c419dac2258852643f18af6c974f21f8c6c1b6f371b6cca6201cf29091",
+      "config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+      "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "model-00001-of-00002.safetensors": "169ad53ec313c3a34b06c0809216e4fc072cce444a5d4ff2b59690d064130ed5",
+      "model-00002-of-00002.safetensors": "912becff8d60672aa8628ef08c05898d9adf17c2ad4ae3caf99b065622fdeff9",
+      "model.safetensors.index.json": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "active_case_id": null,
+  "summary": {
+    "planned_cases": 12,
+    "planned_model_cases": 11,
+    "planned_guard_cases": 1,
+    "completed_cases": 12,
+    "completed_model_cases": 11,
+    "completed_guard_cases": 1,
+    "unfinished_cases": 0,
+    "unfinished_model_cases": 0,
+    "unfinished_guard_cases": 0,
+    "structurally_accepted_model_cases": 9,
+    "rejected_model_cases": 2,
+    "accepted_model_abstentions": 0,
+    "expected_status_matches": 7,
+    "semantic_correctness": "not_verified",
+    "human_review_count": 0
+  }
+}

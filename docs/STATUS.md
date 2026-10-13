@@ -2,6 +2,12 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
+**M5 v1 실행 완료, 생성 설정 위반으로 기준 결과 무효.** 실제 GPU11요청과 빈 근거 사전 차단1개는 끝났으나 Transformers4.57.6이 요청한 `do_sample=False`를 모델 기본값 `True`로 바꾼 경고를 발견했다. 중단을 시도했을 때는 이미 모든 요청이 끝났고 실제 종료시킨 프로세스는 없다. `completed`를 등록한 greedy 설정 준수로 해석하지 않는다. [원본 보고서](../experiments/results/m5-generation-v1.json)·[진행 기록](../experiments/results/m5-generation-v1.progress.jsonl)과 [설정 감사](../experiments/results/m5-generation-v1.protocol-audit.json)를 보존한다. 기존 v1 소스를 바꾸지 않고 새 v2에서 실제 적용 설정을 검사하며, 프롬프트·질문·모델을 고쳐 점수를 튜닝하지 않는다.
+
+수정 v2 실행 전 전체 Python686개·Ruff를 통과했다. 실제 설치 라이브러리의 설정 준비 함수에서 v1 오류와 v2 greedy 적용을 모델 없는 CPU 검사로 재현했다. [v2 계획](../data/evaluation/m5-generation-plan-v2.json) SHA `f0ac2fd91c2356c03b5b53feaed729825641fec968be61880f9e02f311ce6045`에12개 소스/설계와 동일 입력을 고정한다. [v1 실패 분석·v2 사전 수정 범위](M5-GENERATION-ANALYSIS.md)를 기록한 뒤 새 실행을 한 번 수행한다.
+
+모델 준비에서도 디렉터리 목록의0바이트 표시만으로 전송을 중단한 판단 오류가 있었다. 닫힌 partial은 실제3,355,443,200바이트였으므로 네트워크 정지로 확정하지 않는다. 받은 바이트 수를 직접 알리는 기능을 추가했고 동일 고정 snapshot의11개 파일·총4,079,448,540바이트를 다시 검증했다. [준비 과정 기록](../experiments/results/m5-generation-preparation-v1.json)을 남긴다. GPU 실행과 분리된 준비 실패이며 유료 사용은0이다.
+
 **M5 첫 생성 계약 구현·실행 준비 중.** [PR #11](https://github.com/lingter100/doctrail/pull/11)은 `be896c3`으로 통합됐고 [main CI](https://github.com/lingter100/doctrail/actions/runs/38332721238)가 성공했다. 새 `feat/grounded-generation`에서 고정 Qwen3-1.7B 로컬 런타임, 엄격한 답변/보류·인용 검사와 합성12항목의 실행 계획을 준비한다. 원문 인용 일치와 의미 정확도를 분리하며 아직 생성 성공·Java 질의응답 연결을 주장하지 않는다. 기존 학습·calibration/main-dev를 반복하지 않았다.
 
 GPU 실행 전 검증: 전체 Python669개, Java82개, Playwright22개(Chromium19·순수 helper3), 프런트 타입·production build·Ruff 통과. Python 경고1개는 기존 Starlette/httpx deprecation이다. 새 watchdog은 fake 검사와 별도로 실제 CPU child process의 제한시간 초과·강제 종료를 확인했다. [동결 계획](../data/evaluation/m5-generation-plan-v1.json)의10개 소스/설계 바인딩·합성12개 입력 검증을 마쳤다. 계획 SHA는 `6adf2fda8837d2d6df54070a5c3fa583b8168c0b1430364719ed7ab01c4849b6`이며 결과를 보기 전에 커밋한다.

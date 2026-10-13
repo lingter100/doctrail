@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "run_id": "m5-generation-v2",
+  "created_at_utc": "2026-10-13T02:37:29.208415+00:00",
+  "purpose": "Once-only local generation resource and structural smoke on controlled synthetic evidence; not held-out quality or Java HTTP.",
+  "test_locked": true,
+  "human_review_count": 0,
+  "fixed_no_retry": true,
+  "dataset": {
+    "path": "data/evaluation/m5-synthetic-smoke-v1.json",
+    "sha256": "bcc51eb4362988c71bb703b5ad95228602381b0e93db0b1043e0bf88bafc4c8f"
+  },
+  "model_manifest": {
+    "path": "data/models/m5-generation-v1.json",
+    "sha256": "04ffa1bb70bd7fb853efebb11e13455647c0182c2960be8e197d758cb0198fa1"
+  },
+  "source_sha256": {
+    "data/evaluation/reviews/m5-smoke-review-v1.json": "bb08b919774278246df5b635ec7bc9411223dfac7a6fcdc59ad70af4493e0834",
+    "data/prompts/m5-grounded-answer-v1.txt": "67953f8b11e992df10d3c17ce88d62b5f6c7efd48ce329389c32f641e6d76809",
+    "docs/M5-DESIGN.md": "bc8da47002732c73001cf9254346643d832276c8b5e8b0d6b6f5356a6264619c",
+    "pyproject.toml": "db45870df5b6d4fd543e14b9d837d25614033f9049692cead50e1a366a72308d",
+    "scripts/evaluate_generation_smoke.py": "5b4a0ea594432f1ce4998c2dec233f42cbefe98517f218064f10c89a93a7c0e0",
+    "scripts/evaluate_generation_smoke_v2.py": "d2b57e9c332b8773cc3337cd59e0ffd167a11d963369b03997d8e9b5bfdf6119",
+    "scripts/prepare_generation_model.py": "26260b45dcb7589d566ec2df6b9471fecc1d76f97a280c1d6a8493f6ac68de9a",
+    "scripts/verify_terminal_service.py": "4b2a2f948ea72bdd0ea400704f4c80bddf913fe4eb08e1d961348190554bc0a6",
+    "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+    "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+    "src/doctrail/grounded_answer.py": "adec8b638a78b01aa30e415326b6dcb36d1fbd35e35728666653f77dee3dbe8f",
+    "uv.lock": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+  },
+  "source_hash_encoding": "UTF-8 bytes with CRLF normalized to LF",
+  "watchdog": {
+    "load_seconds": 300,
+    "generation_seconds": 195
+  },
+  "readiness_gate": {
+    "cuda_bfloat16_load": true,
+    "reserved_memory_max_mib": 5376,
+    "require_structurally_accepted_answer_case_ids": [
+      "m5-smoke-001",
+      "m5-smoke-002"
+    ],
+    "on_structural_or_semantic_case_failure": "record and continue remaining planned cases",
+    "on_runtime_or_resource_failure": "abort, preserve attempted and unfinished counts"
+  },
+  "interpretation": {
+    "generation_cases": 11,
+    "preguard_cases": 1,
+    "semantic_review": "separate AI receipt after execution",
+    "failed_outputs": "preserve raw synthetic text; no repair or regeneration",
+    "source_quality": "synthetic, AI-authored, independently AI-reviewed, human0",
+    "known_limitations": [
+      "no retrieval model loaded alongside generation",
+      "no Java authorization or update-race test",
+      "exact citation validation does not establish entailment",
+      "greedy differs from provider sampling recommendations"
+    ]
+  },
+  "execution_cost_scope": {
+    "paid_api_requests": 0,
+    "rented_gpu": false,
+    "cloud_resources": false,
+    "electricity_and_development_assistant_cost": "not_measured"
+  },
+  "protocol_id": "corrected_greedy_v2",
+  "corrective_amendment": {
+    "predecessor_run": "m5-generation-v1",
+    "predecessor_plan_sha256": "6adf2fda8837d2d6df54070a5c3fa583b8168c0b1430364719ed7ab01c4849b6",
+    "predecessor_report_sha256": "de79bce24c051e273d1d627dc78ab560be01881b4cb776a2cd723f720ccb8cad",
+    "predecessor_audit_sha256": "3ecd2fcfa00468095e2db78c905e5886ca680a528728d7dbd7fa43acbf7007ad",
+    "cause": "Pinned Transformers merged Qwen sampling defaults into the explicitly constructed global-default-valued greedy config.",
+    "change": "Disable use_model_defaults; verify the effective config returned by the actual generate preparation hook before any forward pass; preserve per-request effective settings.",
+    "unchanged": [
+      "model revision and files",
+      "prompt",
+      "synthetic cases and oracles",
+      "input/output token limits",
+      "memory/time budgets",
+      "seed",
+      "intended greedy setting"
+    ],
+    "not_claimed": [
+      "independent held-out validation",
+      "sampling-versus-greedy quality superiority",
+      "Java HTTP or service integration"
+    ],
+    "predecessor_completed_not_aborted": true,
+    "predecessor_quality_observations_not_used_for_tuning": true,
+    "automatic_retry": false
+  }
+}
