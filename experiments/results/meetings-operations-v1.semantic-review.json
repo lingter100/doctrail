@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "kind": "independent_ai_evidence_and_semantic_review_of_analysis_lifecycle_only",
+  "reviewed_at": "2026-10-13T06:29:54.617751+00:00",
+  "report": {
+    "path": "experiments/results/meetings-operations-v1.json",
+    "sha256": "69cfba95511ebbf05e0204b65b10e6fb59e636295c8adb96527f4c2b5a88520b",
+    "byte_identical_to_private_operations_copy": true,
+    "status": "passed_analysis_lifecycle_only"
+  },
+  "ui_report": {
+    "path": "experiments/results/meetings-operations-v1.ui.json",
+    "sha256": "33f6b49bf469e5ea70109ccc8568f7af2324dcca12e80320dcad1ad59976fd72",
+    "byte_identical_to_private_ui_report": true,
+    "status": "passed"
+  },
+  "reviewer": {
+    "type": "AI",
+    "agent": "meetings_review",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "settings_evidence": "Parent-reported tool-accepted spawn; no independent model-setting introspection exposed.",
+    "human_review_count": 0,
+    "model_calls_by_reviewer": 0,
+    "tests_or_service_runs_by_reviewer": 0,
+    "screenshots_viewed_by_this_reviewer": false,
+    "screenshot_review_context": "Parent reported viewing screenshots; this receipt audits UI assertions, not independent visual design approval."
+  },
+  "scope": {
+    "analysis_requests": 4,
+    "native_completion_count": "Not derivable as four; each analysis uses multiple native classifier completions. No exact native total claimed from this report.",
+    "answer_calls": 0,
+    "answers_recorded": 0,
+    "natural_answer_readiness": false,
+    "paid_service_calls": 0,
+    "external_deployment": false,
+    "human_review_count": 0,
+    "source_kind": "Two public Jupyter meeting notes plus two explicitly AI-authored synthetic meeting fixtures; host guide and synthetic runbook support lifecycle retrieval. Known development fixtures, not held-out evaluation."
+  },
+  "model_health_as_recorded": {
+    "schema_version": 1,
+    "status": "ready",
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "gguf-sha256:5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+    "experimental": true,
+    "protocol": "meeting-full-chunk-evidence-v5",
+    "limits": {
+      "input_tokens": 4096,
+      "output_tokens": 768,
+      "partitions": 6,
+      "deadline_seconds": 120
+    },
+    "runtime": {
+      "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "gguf-sha256:5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+      "original_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "experimental": true,
+      "generation_protocol": "meeting-full-chunk-evidence-v5",
+      "artifact": {
+        "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+        "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+        "filename": "Qwen3-4B-Instruct-2507-Q5_K_M.gguf",
+        "sha256": "5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+        "size_bytes": 2889514080
+      },
+      "runtime": {
+        "backend": "llama.cpp",
+        "tag": "b11429",
+        "commit": "d81235049384534c167caea52b85a694f6103d14",
+        "observed_build": "b11429-d81235049",
+        "identity_check": "local_gguf_sha256_and_server_alias",
+        "context_tokens": 6144,
+        "max_input_tokens": 4096,
+        "max_new_tokens": 768,
+        "deadline_seconds": 120,
+        "memory_telemetry": "not_measured"
+      },
+      "answer_decoder": {
+        "policy": "meeting-answer-json-grammar-v1",
+        "answer_policy": "meeting-evidence-first-answer-v2",
+        "grammar_sha256": "8eee0bee59560b67b1361a0d08ce91b6bf16e8554970cd600b778b47f367d5a3",
+        "guarantee_scope": "json_structure_only"
+      }
+    },
+    "answer_policy": "meeting-evidence-first-answer-v2"
+  },
+  "provenance_audit": {
+    "git_head": "453bd5f923d7367f2653cd5cf1ae82beb47c27d4",
+    "working_tree_dirty": true,
+    "clean_checkout_claim": false,
+    "prelaunch_text_files_verified_against_commit": [
+      "data/evaluation/meetings-gguf-development-v1.json",
+      "data/models/meetings-generation-gguf-v1.json",
+      "docs/MEETINGS-GGUF-CANDIDATE.md",
+      "scripts/prepare_meeting_gguf.py",
+      "scripts/probe_meeting_gguf.py",
+      "scripts/serve_meetings.py",
+      "scripts/serve_meetings_gguf.py",
+      "src/doctrail/generation_runtime.py",
+      "src/doctrail/generation_runtime_v2.py",
+      "src/doctrail/meeting_contract.py",
+      "src/doctrail/meeting_gguf.py",
+      "src/doctrail/meeting_runtime.py",
+      "src/doctrail/meeting_worker.py",
+      "scripts/serve_models.py",
+      "scripts/verify_java_service.py",
+      "src/doctrail/inference.py",
+      "src/doctrail/meeting_answer_v2.py",
+      "scripts/probe_meeting_answer_v2.py",
+      "docs/MEETINGS-ANSWER-V2-PLAN.md",
+      "src/doctrail/meeting_answer_grammar.py",
+      "tests/test_meeting_answer_grammar.py",
+      "scripts/probe_meeting_answer_grammar.py",
+      "tests/test_probe_meeting_answer_grammar.py",
+      "docs/MEETINGS-ANSWER-DECODER-PLAN.md",
+      "src/doctrail/meeting_worker_grammar.py",
+      "server/src/main/java/io/doctrail/ApiController.java",
+      "server/src/main/java/io/doctrail/ApiError.java",
+      "server/src/main/java/io/doctrail/ApiErrors.java",
+      "server/src/main/java/io/doctrail/Auth.java",
+      "server/src/main/java/io/doctrail/DocTrailApplication.java",
+      "server/src/main/java/io/doctrail/DocumentService.java",
+      "server/src/main/java/io/doctrail/FrontendController.java",
+      "server/src/main/java/io/doctrail/GenerationClient.java",
+      "server/src/main/java/io/doctrail/InferenceClient.java",
+      "server/src/main/java/io/doctrail/Ingest.java",
+      "server/src/main/java/io/doctrail/KnowledgeService.java",
+      "server/src/main/java/io/doctrail/LearnedSearch.java",
+      "server/src/main/java/io/doctrail/MeetingAnalysis.java",
+      "server/src/main/java/io/doctrail/MeetingController.java",
+      "server/src/main/java/io/doctrail/MeetingService.java",
+      "server/src/main/java/io/doctrail/RequestGuard.java",
+      "server/src/main/java/io/doctrail/Retrieval.java",
+      "server/src/main/java/io/doctrail/Store.java",
+      "scripts/run_meeting_operations.py",
+      "scripts/verify_meeting_operations.py",
+      "scripts/verify_meeting_service.py",
+      "scripts/serve_meetings_candidate.py",
+      "web/scripts/verify-live-meeting-operations.mjs"
+    ],
+    "current_prelaunch_artifacts_all_still_match": true,
+    "binary_artifacts_verified": [
+      {
+        "path": "web/dist/assets/index-Cg9NvQLO.js",
+        "sha256": "522f60aac39dcb85a262ca4d8537474fca294e9530507b166d431bc6f75c8deb",
+        "current_bytes_equal_prelaunch": true
+      },
+      {
+        "path": "web/dist/assets/index-Du-A5LDn.css",
+        "sha256": "8ff4cc26a870bff6c0f4fd2c25bde18dd42f2a0b1c47f22d6ef46d3289a29e6b",
+        "current_bytes_equal_prelaunch": true
+      },
+      {
+        "path": "server/target/doctrail-server-0.1.0.jar",
+        "sha256": "4813d86d80c3143873c453cc8f3075011923380fc700d27bce8ba3b319717cc7",
+        "current_bytes_equal_prelaunch": true
+      }
+    ],
+    "frontend_assets_inside_jar_match_snapshot": [
+      "BOOT-INF/classes/static/assets/index-Cg9NvQLO.js",
+      "BOOT-INF/classes/static/assets/index-Du-A5LDn.css"
+    ],
+    "loaded_sources_unchanged_during_run_as_reported": true,
+    "source_hash_entries_outside_prelaunch_set": {
+      "src/doctrail/meeting_qwen35.py": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b"
+    },
+    "dirty_tree_explanation": "Parent reports concurrent pending 9B code/manifest work. Independently verified that meeting_qwen35.py is recorded by the broad source glob but absent from the run commit and absent from the prelaunch 4B binding. All bound text sources match run commit; health identifies 4B. This supports scoped artifact integrity, not a clean-tree claim or a historical full working-tree inventory.",
+    "fixture_sha256": {
+      "tests/fixtures/meetings/synthetic-release-followup.md": "0f2e3bf13e65c8a6593b257dda36aed94873d0fdf4a9697380d87325e12c398a",
+      "tests/fixtures/meetings/synthetic-release-planning.md": "606678b791ad6b3e1dde1e1bb0189cf064d8152cbb6ccba405663d36500e5138",
+      "tests/fixtures/meetings/synthetic-runbook.md": "1e95de236f46967b54c8cef312fc305f206f5698ba9d38c288ee37c9b3582d4c",
+      "tests/fixtures/meetings/public/jupyter-february-2025.md": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+      "tests/fixtures/meetings/public/jupyter-host-guide.md": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f",
+      "tests/fixtures/meetings/public/jupyter-june-2025.md": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+      "tests/fixtures/meetings/public/jupyter-license.txt": "1b9f3955dcf9c235b10c168cca09b88c1f2adf992a0dc13120482d93037602ac"
+    },
+    "all_fixture_hashes_currently_verified": true
+  },
+  "mechanical_analysis_evidence_checks": [
+    {
+      "fixture": "tests/fixtures/meetings/public/jupyter-february-2025.md",
+      "document_id": "57a3510de1c94256b5e4b7604536f804",
+      "span_count": 45,
+      "summary_exact_evidence_join": true,
+      "item_texts_equal_source_quotes": true,
+      "all_ai_item_statuses_needs_confirmation": true
+    },
+    {
+      "fixture": "tests/fixtures/meetings/public/jupyter-june-2025.md",
+      "document_id": "62700d1bf43b4efe97df56bbf32913a5",
+      "span_count": 39,
+      "summary_exact_evidence_join": true,
+      "item_texts_equal_source_quotes": true,
+      "all_ai_item_statuses_needs_confirmation": true
+    },
+    {
+      "fixture": "tests/fixtures/meetings/synthetic-release-planning.md",
+      "document_id": "893404e2b87d4b69841f79d2d3746f03",
+      "span_count": 17,
+      "summary_exact_evidence_join": true,
+      "item_texts_equal_source_quotes": true,
+      "all_ai_item_statuses_needs_confirmation": true
+    },
+    {
+      "fixture": "tests/fixtures/meetings/synthetic-release-followup.md",
+      "document_id": "02b960e6f7fc4a54a9582f461681eef9",
+      "span_count": 14,
+      "summary_exact_evidence_join": true,
+      "item_texts_equal_source_quotes": true,
+      "all_ai_item_statuses_needs_confirmation": true
+    }
+  ],
+  "analysis_reviews": [
+    {
+      "fixture": "tests/fixtures/meetings/public/jupyter-february-2025.md",
+      "verdict": "supported_with_scope_notes",
+      "metadata": "Title, February 19 date, 23 attendance names and stated community-sharing purpose match source. Attendance rows are preserved rather than inferred from speakers.",
+      "summary": "Four extractive announcement lines preserve GeoJupyter nonofficial status, planned beta wording, Turing Way update and Binder cost report. No claim that the beta release completed.",
+      "classification": "All 15 retained items are topics/updates. Governance election is reported history, not a new meeting decision. Demo and speakers are not invented assigned tasks.",
+      "coverage": "Key announcements and agenda topics are retained; summary selects the first four announcements and is not a comprehensive abstractive summary. A few standalone reference links appear as topics, which is low-value noise rather than a false decision or task."
+    },
+    {
+      "fixture": "tests/fixtures/meetings/public/jupyter-june-2025.md",
+      "verdict": "supported_with_scope_notes",
+      "metadata": "Title, June 11 date, 16 attendance names and explicit purpose match source. A named presenter need not be an attendance-table participant; no invented attendees are required.",
+      "summary": "Exact announcement/agenda extracts preserve versions already out, a planned August call, November conference dates and workshop announcement. No transfer of June meeting date to the release event.",
+      "classification": "All 16 retained entries are topics, with no invented decisions or assignees. Planned conference dates and retrospective retreat dates do not become task deadlines.",
+      "coverage": "Main agenda entries retained; summary is four selected extracts. Some resource links are retained as topics. Invitations to volunteer/submit are not firm task commitments."
+    },
+    {
+      "fixture": "tests/fixtures/meetings/synthetic-release-planning.md",
+      "verdict": "pass",
+      "metadata": "Explicit title/date 2026-10-01/three participants/purpose correct.",
+      "summary": "Both confirmed decisions and both tasks retained in four exact excerpts.",
+      "classification": "Seven substantive items correctly categorized: one topic, one rejected 90-day proposal, two adopted decisions, two actions, one unresolved issue. Proposal retains rejection; 30 days remains decision.",
+      "task_fields": "Minji has explicit 2026-10-05 due date and high priority. Evidence-screen review remains action with null assignee, due_date and priority.",
+      "coverage": "All seven substantive source items preserved. Missing proposal/open issue from concise summary does not remove their item records.",
+      "record_caveat": "Assess ai_analysis only for untouched model output; mutable analysis contains later test-client confirmation."
+    },
+    {
+      "fixture": "tests/fixtures/meetings/synthetic-release-followup.md",
+      "verdict": "pass",
+      "metadata": "Explicit title/date 2026-10-08/three participants/purpose correct.",
+      "summary": "All four substantive lines retained exactly.",
+      "classification": "Superseding 30-day policy with seven days is decision, privacy-exposure rationale is topic, Junho implementation is action, unconfirmed external-release date is unresolved. No automatic relation is claimed by analysis alone.",
+      "task_fields": "Junho, due_date 2026-10-12 and high priority are explicit; historical 2026-10-01 decision date is not substituted as task deadline.",
+      "record_caveat": "Assess ai_analysis only for untouched model output; mutable analysis contains later test-client confirmation."
+    }
+  ],
+  "report_integrity_caveat": {
+    "severity": "snapshot_provenance_limitation",
+    "affected_records": [
+      {
+        "fixture": "tests/fixtures/meetings/synthetic-release-planning.md",
+        "item_index": 2,
+        "changed_fields": {
+          "status": {
+            "ai_analysis": "needs_confirmation",
+            "analysis": "confirmed"
+          }
+        },
+        "recorded_version": 1,
+        "recorded_provenance": "ai"
+      },
+      {
+        "fixture": "tests/fixtures/meetings/synthetic-release-followup.md",
+        "item_index": 0,
+        "changed_fields": {
+          "status": {
+            "ai_analysis": "needs_confirmation",
+            "analysis": "confirmed"
+          }
+        },
+        "recorded_version": 1,
+        "recorded_provenance": "ai"
+      }
+    ],
+    "finding": "The shared Verification.meeting helper stores result[meeting] by reference. The operations runner later changes selected decision status in the same analysis object to confirmed before invoking explicit edit APIs. Consequently two saved synthetic meeting.analysis values contain client confirmation alongside initial version=1/provenance=ai. They are not immutable initial API snapshots.",
+    "untouched_evidence": "Both corresponding ai_analysis objects retain needs_confirmation for all items, source-consistent contents and initial model fields. Model semantic review uses ai_analysis.",
+    "interpretation": "The confirmed values are automated client mutations, not model decisions and not human review. They do not negate the separately checked edit/CAS/link operations, but the mutable analysis snapshot must not be presented as an untouched response.",
+    "disposition": "Preserve original report bytes and annotate; no retrospective repair or model rerun."
+  },
+  "operations_evidence": {
+    "reported_checks": 33,
+    "reported_passes": 33,
+    "reviewed_script_scope": [
+      "Real automatic analysis and exact source spans",
+      "Mixed document/meeting retrieval and outsider exclusion",
+      "Explicit client-confirmed decision linking",
+      "Stale edit CAS rejection and exact AI-original preservation",
+      "Assignee/status task management and unaffected decision history",
+      "Date filtering and base hybrid retrieval",
+      "Revision replacement, stale analysis and current owner retrieval",
+      "Private access/search exclusion and source-link invalidation",
+      "Deleted meeting absence and deletion of a previously visible ready task",
+      "Ordinary document preservation",
+      "Actual browser script and stable loaded artifacts"
+    ],
+    "limitations": [
+      "Most checks are assertion booleans, not complete retained HTTP response transcripts; this is a source-audited operational receipt, not an independent replay.",
+      "date_filter_before_retrieval observes eligible returned results; the ordering claim depends on implementation review, not this black-box assertion alone.",
+      "A single operational run does not establish reliability or general performance."
+    ]
+  },
+  "ui_evidence": {
+    "reported_checks": 9,
+    "reported_passes": 9,
+    "transport_mock": false,
+    "scope": "Actual local Java page read flow: open February analysis, inspect summary and exact source/document, filter saved task owner/date/status, open original meeting, inspect a source, and check mobile horizontal overflow/page errors.",
+    "limits": "API performs edits before UI observation. This run does not demonstrate UI registration, editing, decision-link creation, every responsive layout, accessibility or answer quality. Screenshots are not human acceptance."
+  },
+  "aggregate": {
+    "scoped_result": "analysis_lifecycle_supported_with_report_snapshot_caveat",
+    "analysis_semantic_blockers_found": 0,
+    "natural_answer_gate": "still_failed_not_exercised_here",
+    "phase1_complete": false,
+    "automatic_service_adoption": false,
+    "conclusion": "Four preserved AI analyses are source-grounded and fit the tested extraction scope; reported 33 API/lifecycle checks and 9 real-browser checks support that limited operational result. Preserve dirty-tree and mutable-snapshot caveats. Earlier natural-language answer failures remain unchanged.",
+    "excluded_materials_read": false,
+    "exclusion_note": "No new custodian validation files, M5-B validation or locked test material read."
+  }
+}

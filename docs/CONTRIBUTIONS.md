@@ -180,3 +180,6 @@ PR#11의 자동 Codex 코드 리뷰가 실행 lock의 교체 소유권 문제를
 
 
 같은 수락 설정의 meetings_ai(Astra high)는 새 실험 worker/launcher와15개 검사를 추가했다. meetings_review(Astra high)는 decoder 네 답변을 검토했고 운영 검사에서 이미 숨겨진 작업의 삭제 검사, AI 원본 단순 불일치 검사, 검색 양성 대조 부재를 찾아냈다. 부모는 원본 사본 동일성·삭제 전 ready 작업 노출·수정 원문 소유자 검색을 실제 검증하도록 보완했다. 이는 AI가 수행하는 자동 운영 검사이며 사용자 승인·검수가 아니다.
+
+
+실제4B Java/React운영은 부모가 실행하고 원본을 바이트복사했다. 별도 meetings_review(Astra high)가4분석115인용과48소스/커밋을 확인하고 공유객체로 인한 두 스냅샷 오염을 발견했다. 부모는원본을보존하고 후속깊은복사 회귀를구현했다. 사용자검수로집계하지않는다. 이후 후보선정 meetings_local_model(Astra xhigh), 비사고형연결 meetings_ai(Astra high), 별도코드검토 meetings_review(Astra high)를 사용했다. 새문항관리 meetings_validation_custodian은 실제도구수락 gpt-6-astra/xhigh로 격리해 후보동결전에는출처조사만하게했다. 부모채팅설정변경은없다.

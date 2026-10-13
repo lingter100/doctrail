@@ -2,6 +2,10 @@
 
 기준일: 2026-10-13 (Asia/Seoul).
 
+실제 회의 관리 검증 `453bd5f`: Java·4B GGUF·CPU 검색·React를 연결해 분석4건과라이프사이클33검사를 통과했다. 전송 대역 없는 브라우저9검사, 원문 근거·저장된 작업·모바일 화면을 확인했다. [원본](../experiments/results/meetings-operations-v1.json), [UI](../experiments/results/meetings-operations-v1.ui.json), [독립 AI 검토](../experiments/results/meetings-operations-v1.semantic-review.json)를 보존한다. 자연어 답변 호출0이며 전체1차 완료가 아니다. 실제 사용된48개 소스는 해당 커밋과 일치했고 실행 중 변경이 없었다. 별도9B 준비 파일 때문에 dirty=true였음을 유지한다.
+
+운영 보고서 한계: 테스트 클라이언트가 반환 객체를 편집하면서 두 합성 회의의 저장된 `analysis`에도 이후 확정 상태가 반영됐다. 원본보고서는 수정하지 않는다. 별도 `ai_analysis`는 처음의 확인 필요 상태를 그대로 보존하고115개 인용이 원문에 맞는다. 후속 실행에서 깊은 복사로 이 기록 오류를 막는 새 검증 기반과 회귀 검사를 추가했다. 기존GPU실행을 반복하지 않는다.
+
 출력 구조 비교 `730ea0c`도 완료됐다. 네 raw 출력의 JSON은 모두 유효하지만 진행자 인용은 여전히 거절됐고 공개 답변의 출시 시점 합성이 남아 의미 gate2/4로 실패했다. 다른 세 출력은 v2와 동일하다. [원본·별도 AI 검토](../experiments/results/meetings-answer-decoder-v1.semantic-review.json)를 보존한다. 같은 사례에 추가 프롬프트 수정을 하지 않는다. 새 실험용 launcher와 별도 분석·라이프사이클 운영 검증기를 준비하며, 이 검증은 자연어 답변 readiness를 포함하지 않는다.
 
 최신 후속: `38d02a9`의 원문 인용 우선 v2 답변4건을 한 번 실행했다. 3건 형식 통과·진행자 답변 JSON 실패이며, 별도 AI 검토에서 진행자 인용 불일치와 공개 답변의 출시 시점 합성도 확인했다. 한국어 날짜·로그 금지는 회복했지만 의미 gate는 실패했다. 원본과 검토를 보존하고 [출력 구조만 제한하는 비교](MEETINGS-ANSWER-DECODER-PLAN.md)를 별도 고정한다. 같은 질문/프롬프트·모델로4건1회, 분석0·재시도0이다. 정확한 인용·의미·완전성 검사는 완화하지 않는다. 해당 head의 push·PR CI3종은 모두 통과했으며 기능은 여전히 draft PR에 있다.
