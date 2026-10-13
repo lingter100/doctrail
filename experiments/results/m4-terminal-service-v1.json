@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "started_at": "2026-10-13T01:17:49.679249+00:00",
+  "checks": [
+    "actual_terminal_served_frontend_bytes_match_build",
+    "authenticated_actual_terminal_worker_identity",
+    "four_methods_acl_exact_evidence_profile_and_feedback",
+    "successful_search_identity_persisted_in_history",
+    "private_source_edit_reprocess_delete_denied",
+    "visibility_revocation_hides_cached_source_results_history_and_feedback",
+    "revision_replaces_exact_chunks_and_rejects_old_feedback",
+    "reprocess_reuses_content_safely_without_old_revision_identity",
+    "deleted_cached_document_absent_from_all_methods_and_feedback",
+    "actual_terminal_cache_miss_hit_and_content_change_miss",
+    "real_terminal_browser_profile_search_evidence_feedback_history_mobile",
+    "worker_stop_fails_without_fallback_or_history_default_bm25_survives",
+    "rollback_base_identity_terminal_history_preserved_mismatched_rerun_rejected",
+    "raw_sentinels_query_password_session_and_worker_token_absent_from_logs",
+    "owned_terminal_base_processes_stopped_and_disposable_database_removed",
+    "source_packaged_jar_and_served_frontend_unchanged_during_validation"
+  ],
+  "http_samples": [
+    {
+      "method": "bm25",
+      "phase": "first_request",
+      "http_elapsed_ms": 39.414,
+      "java_elapsed_ms": 12.78,
+      "visible_documents": 2,
+      "result_count": 2,
+      "cache": "shared_sequential_not_reset"
+    },
+    {
+      "method": "bm25",
+      "phase": "repeated_request",
+      "http_elapsed_ms": 24.646,
+      "java_elapsed_ms": 6.06,
+      "visible_documents": 2,
+      "result_count": 2,
+      "cache": "shared_sequential_not_reset"
+    },
+    {
+      "method": "dense",
+      "phase": "first_request",
+      "http_elapsed_ms": 624.795,
+      "java_elapsed_ms": 585.0,
+      "visible_documents": 2,
+      "result_count": 2,
+      "cache": "shared_sequential_not_reset"
+    },
+    {
+      "method": "dense",
+      "phase": "repeated_request",
+      "http_elapsed_ms": 97.174,
+      "java_elapsed_ms": 66.06,
+      "visible_documents": 2,
+      "result_count": 2,
+      "cache": "shared_sequential_not_reset"
+    },
+    {
+      "method": "hybrid",
+      "phase": "first_request",
+      "http_elapsed_ms": 99.134,
+      "java_elapsed_ms": 73.48,
+      "visible_documents": 2,
+      "result_count": 2,
+      "cache": "shared_sequential_not_reset"
+    },
+    {
+      "method": "hybrid",
+      "phase": "repeated_request",
+      "http_elapsed_ms": 96.427,
+      "java_elapsed_ms": 62.53,
+      "visible_documents": 2,
+      "result_count": 2,
+      "cache": "shared_sequential_not_reset"
+    },
+    {
+      "method": "hybrid_rerank",
+      "phase": "first_request",
+      "http_elapsed_ms": 631.49,
+      "java_elapsed_ms": 596.48,
+      "visible_documents": 2,
+      "result_count": 2,
+      "cache": "shared_sequential_not_reset"
+    },
+    {
+      "method": "hybrid_rerank",
+      "phase": "repeated_request",
+      "http_elapsed_ms": 206.4,
+      "java_elapsed_ms": 184.53,
+      "visible_documents": 2,
+      "result_count": 2,
+      "cache": "shared_sequential_not_reset"
+    }
+  ],
+  "synthetic": true,
+  "human_review": false,
+  "quality_evaluated": false,
+  "test_accessed": false,
+  "service_adoption": false,
+  "git_commit": "61285dd20801a3beb1976adb6142a4218304fa14",
+  "git_dirty": false,
+  "python": "3.11.15",
+  "os": "Windows",
+  "limitations": [
+    "Synthetic local operations, not semantic quality or real-user validation.",
+    "Sequential resident-model HTTP samples share cache; not load/SLO or comparative speed.",
+    "No calibration/main-dev rerun, final test, paid API, or public deployment."
+  ],
+  "source_sha256_lf": {
+    "docs/M4-OPERATIONS-DESIGN.md": "9267067d7648a70e29e96d1c66aaf147e8b430719bdaf6e7be50aee966399d39",
+    "scripts/benchmark_api.py": "488d36d124cd7cf8ec53c2bce42a17912717ec8787c97d814b1488c8d8192f0f",
+    "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+    "scripts/serve_terminal_models.py": "94378750636c25b987ac998f59a2a0f78efb555fafb4734e43cc8a309f512484",
+    "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+    "scripts/verify_model_service.py": "6b002014fa31f4d4ae1fe3aa833a369454266d888303759ae63d840f27a0f45d",
+    "scripts/verify_terminal_service.py": "69a2a05630fbbd0df260776899caaa0201a92707a68682105401d07f57eacd55",
+    "server/src/main/java/io/doctrail/ApiController.java": "896b44d40979a0492fc92dcf5e01d746993bf40650262d810369296b76284517",
+    "server/src/main/java/io/doctrail/ApiError.java": "0fc30aa8140a6b28b44a8a8986aa7e4f243cde6971e134298612dab4afb2f103",
+    "server/src/main/java/io/doctrail/ApiErrors.java": "2d25063362709c8aec8ed0ed03c69193c36b54f3126b47beec416d38099763eb",
+    "server/src/main/java/io/doctrail/Auth.java": "4595bd0dfb079c792fc836032291edcbb1605952ec4f5a60806b11927b923ab8",
+    "server/src/main/java/io/doctrail/DocTrailApplication.java": "9c0a201ca1230abc169c7fc49754360847db0d8ec77e017b41c5fa7d57f6c226",
+    "server/src/main/java/io/doctrail/DocumentService.java": "9ed196ceeeeee1c0fc294df634c032f9e09367a242d3cc45859142382804659b",
+    "server/src/main/java/io/doctrail/FrontendController.java": "c675845e45482abd99c91e375b471bb96228661f6a239f4ff90fec3cefd8cd76",
+    "server/src/main/java/io/doctrail/InferenceClient.java": "c313e1ed48e83c6a94234dcb44d8465c2121df947637cde4a1212abf88e8c64f",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/LearnedSearch.java": "1ed5c62d1707bed84676ba4359f5a177e98acbc0e9bfb7b306e7c23360ba9d18",
+    "server/src/main/java/io/doctrail/RequestGuard.java": "bc025143500ff8a4f9a5707b0e90c4ef60bcb024fac19b6cc49e0220f24dad98",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/main/java/io/doctrail/Store.java": "f4afbf513aa2f9a3afb73147b62e39e5281d77c961644dcaca85cdf3e1b08fb6",
+    "server/src/main/resources/application.properties": "02544982b63875d8c778e824c7e99e8af82050f92f1928e6836dd6f94090715a",
+    "server/src/test/java/io/doctrail/ApiIntegrationTest.java": "563747aba44d4114b14d8d1251b556896718e8d871ef60fc79530f9d81af4427",
+    "server/src/test/java/io/doctrail/IngestTest.java": "a44c680528a26c8e80d815ad40ffb3024f3eae861f6612d5bfc3bc68edcf45dc",
+    "server/src/test/java/io/doctrail/LearnedSearchTest.java": "0e43936e57038eab84586e578970617ee4eeb099665cb05b57df9418e7c86359",
+    "server/src/test/java/io/doctrail/RetrievalTest.java": "7b40c47847b0a5022be139aa07d00a6dfa0e1e7274820d59819ffc130a482cef",
+    "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+    "src/doctrail/model_retrieval.py": "0b1f60e3f38daa8f6dc85642c17832a82c6ea32ec87f3733aa8aa3fbc63dd5b4",
+    "src/doctrail/terminal_inference.py": "17e68317d85dec3ef0ba333cc258db49c545517c13b3b3d80a4fdc98cd2182ef",
+    "web/scripts/verify-terminal-browser.mjs": "f918c601ffe3b266a68bb8cbe0954e726885de3dc175e43591f4daf5b2735acd",
+    "web/src/api.ts": "ebc4eec4df51c5dff51e06f49850634cf6cca4d18cda279c6b1977a1b537a261",
+    "web/src/App.tsx": "da9244fee8ccfc6505bf74cc74a5af011b9a87f47316c4dccc4549b8f29240ec",
+    "web/src/components/AuthScreen.tsx": "8f6f7fc363d0d7c5c81397b8b39a138567037b00229a7f66342a3890a6a2612b",
+    "web/src/components/ContentViews.tsx": "8a62470dc18bf5437d5f8b8d51beb2231310c1aba5fd262ae71fe1123fdc7c66",
+    "web/src/components/Icon.tsx": "1f87f5310f245a52ce16fadbd898d98a0cdffc3a1a72c3af87e98dc380e7c523",
+    "web/src/components/Modal.tsx": "ef372fd35839a4f38ed0ec7c72931d75f45c442e00e7b279e45a4f6eec14f87d",
+    "web/src/components/SourcePane.tsx": "0af49d373e5493d07e31f174560ab214b7d915a3b895177bbfdd1d827f89fc54",
+    "web/src/helpers.ts": "33617eb6b5dea6dc8008d05ef2d9e5bbd43e656b7e083d01d3137e04a70d16c8",
+    "web/src/main.tsx": "a652694e8d73dc296aa16039868125dcc10ceadf31ed867be71095b5f7b3f966",
+    "web/src/searchMethods.ts": "a60fd5e9d5fdb478c3dc05abae63cbba2efab25fd4b1029c56aeaa3334d5083a",
+    "web/src/style.css": "12fb54175ca18536b2469b57576b9018e91c382e62192c29f4c24d7893336d41",
+    "web/src/types.ts": "63875c65d7f27435c3d1409d5b05ce45af1672938dea6b14d1ff1e9500ec60cb",
+    "web/src/useDocTrail.ts": "30a18f75395aa98ef5c304362ac0b4ec3c54ca7bdc00ec25f685e02b02898606"
+  },
+  "jar_sha256": "e7f9add302cb6e29ed12ac06897e70a195f4be4b37ba889bae8b5a6f9d955dc8",
+  "frontend_artifact_sha256": {
+    "web/dist/assets/index-BlUlBISI.js": "42f7aa8705d31dcb23d45c400d55d7e75ea696bd1c1136723c8c84a1854e114a",
+    "web/dist/assets/index-DtiGNmrF.css": "b6adec4f170cb9c7dfaf6db13aee365a6b18bca23d29b864efd120a4fc3acca9",
+    "web/dist/favicon.svg": "fa0d5fc5405923ccd729a6b711036dce29bc09cb35492ac94d01aef6e057067c",
+    "web/dist/index.html": "63b8a0ee089a85a8a8d92cd1413f3ddfae117973eb60cfee37e8422e4f5eca7a"
+  },
+  "checkpoint_manifest_sha256": "62e530d3094e98b336d039f10956c8e0e2a39d24d66b07818e92a46f0aac10fb",
+  "main_dev_receipt_sha256": "03898eeab53b2c3e166b92dd62138a55f315c560fb2d3ad26c238ce1573be5f8",
+  "terminal_worker_plus_java_startup_ms_excluding_preflight": 32776.238,
+  "terminal_worker_health": {
+    "schema_version": 1,
+    "status": "ready",
+    "embedding": {
+      "model": "doctrail/multilingual-e5-small-m4-terminal-v1",
+      "revision": "62e530d3094e98b336d039f10956c8e0e2a39d24d66b07818e92a46f0aac10fb",
+      "dimension": 384,
+      "max_length": 512
+    },
+    "reranker": {
+      "model": "BAAI/bge-reranker-v2-m3",
+      "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "max_length": 512
+    },
+    "limits": {
+      "max_embed_items": 64,
+      "max_rerank_items": 50
+    },
+    "runtime": {
+      "device": "cuda",
+      "embedding_dtype": "torch.float32",
+      "reranker_dtype": "torch.float16"
+    }
+  },
+  "terminal_cache_observations": [
+    {
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "truncated_inputs": 0,
+      "elapsed_ms": 17.377
+    },
+    {
+      "cache_hits": 1,
+      "cache_misses": 0,
+      "truncated_inputs": 0,
+      "elapsed_ms": 0.075
+    },
+    {
+      "cache_hits": 0,
+      "cache_misses": 1,
+      "truncated_inputs": 0,
+      "elapsed_ms": 19.897
+    }
+  ],
+  "browser": {
+    "schema_version": 1,
+    "status": "passed",
+    "synthetic": true,
+    "embedding_profile": {
+      "id": "m4-terminal-v1",
+      "model": "doctrail/multilingual-e5-small-m4-terminal-v1",
+      "revision": "62e530d3094e98b336d039f10956c8e0e2a39d24d66b07818e92a46f0aac10fb"
+    },
+    "actual_model_http": true,
+    "user_review": false,
+    "completed_at": "2026-10-13T01:18:33.704Z",
+    "checks": [
+      "authenticated_terminal_profile_with_bm25_default",
+      "real_ui_registration_and_upload",
+      "real_dense_search_and_evidence",
+      "real_hybrid_search_and_evidence",
+      "real_hybrid_rerank_search_and_evidence",
+      "feedback_and_original_method_history_rerun",
+      "mobile_controls_without_horizontal_overflow"
+    ],
+    "uncaught_errors": []
+  },
+  "browser_artifact_sha256": {
+    "browser.json": "c31122e2c3871c01a64166252613701ffa8d159f76ac4d10b7c92d8c99f66d63",
+    "model-desktop.png": "7d227ab7d5e77c99444b765e1c3d67ef11691aabeab586ffb77e33272999a578",
+    "model-mobile.png": "f5689cbcf3511d7ffaa08aed554d1b5387ad45d9f5db753695656b958d7b63aa"
+  },
+  "base_worker_plus_java_startup_ms": 21236.735,
+  "rollback_worker_health": {
+    "schema_version": 1,
+    "status": "ready",
+    "embedding": {
+      "model": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "dimension": 384,
+      "max_length": 512
+    },
+    "reranker": {
+      "model": "BAAI/bge-reranker-v2-m3",
+      "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "max_length": 512
+    },
+    "limits": {
+      "max_embed_items": 64,
+      "max_rerank_items": 50
+    },
+    "runtime": {
+      "device": "cuda",
+      "embedding_dtype": "torch.float32",
+      "reranker_dtype": "torch.float16"
+    }
+  },
+  "completed_at": "2026-10-13T01:18:56.251911+00:00",
+  "journal_sha256": "0acac1d0369849111f28684338aaadf40db17479dcb5426c5dc1b07f1f887a77"
+}

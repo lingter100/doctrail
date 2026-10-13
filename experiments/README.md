@@ -187,3 +187,7 @@ E5 문서38/3,588(1.06%), BGE query-passage803/3,950(20.33%)가512토큰 한도�
 각 모델의 문서 준비는45.548/46.471초였고 query 시간에서 제외했다. 문서38/3,588개가512토큰을 넘었으며 실제 두 모델의 입력 IDs/mask digest·길이는 같았다. 질문은 잘리지 않았다. GPU allocator peak allocated는794.122/794.685MiB, reserved는1808/1812MiB다. 이 단일 Python 순회는 HTTP·동시 사용자 성능이나 속도 우위의 증거가 아니다. API/GPU 임대 사용은0이며 전력·개발 보조 비용은 미측정이다.
 
 보고서 SHA256 `03898eeab53b2c3e166b92dd62138a55f315c560fb2d3ad26c238ce1573be5f8`, journal SHA256 `5dd4e75b740da3301b66266ea6c88fb6ec1806ab9c1a15e609eef3a12c6af217`이다. 원본을 바이트 그대로 복사했다. 무거운 모델 import·가중치·로컬 학습 pack·test 질문 접근을 차단해도 공개 결과 재생이 통과했으며 CI에 같은 구조 재생을 추가했다. 실행 명령과 재생의 한계는 [runbook](../docs/M4-RUNBOOK.md)에 있다.
+
+## M4 학습 저장본 운영 실측
+
+[실제 로컬 운영 결과](../docs/M4-OPERATIONS-RESULTS.md): `61285dd`에서 terminal CUDA+Java+React와 base 복귀16검사 묶음 통과. `m4-terminal-service-v1.json` 및 같은 이름의 progress journal은 실제 원본 바이트다. 별도 합성 운영 자료이며 완료된 calibration/main-dev·test를 다시 실행하지 않았다. HTTP 시간은 두 합성 청크의 순차 cache 공유 관측으로 부하/품질 평가가 아니다. 기본 모델은 자동 교체하지 않았다.

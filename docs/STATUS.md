@@ -4,7 +4,9 @@
 
 [PR #10](https://github.com/lingter100/doctrail/pull/10)은 `1051af7`로 main에 통합됐고 [main CI](https://github.com/lingter100/doctrail/actions/runs/38327502543)는 성공했다. 완료된 모델 비교는 재실행하지 않았다.
 
-**M4 로컬 운영 연결 준비.** 새 `feat/terminal-operations`에서 [별도 설계](M4-OPERATIONS-DESIGN.md)에 따라 checkpoint manifest를 검증하는 실험 실행기, Java 모델 식별 검사·이력 저장, React 모델 표시·과거 이력 보호를 구현했다. 기본 BM25와 base 실행은 유지한다. 실제 GPU 운영 검증 결과는 실행 후 별도 기록하며 모의 응답 검사를 실제 추론으로 표시하지 않는다.
+**M4 학습 저장본 로컬 운영 검증 완료.** `61285dd`의 깨끗한 작업 트리에서 실제 CUDA·Java·React의16검사 묶음을 통과했다. 권한 회수·문서 갱신/재처리/삭제·원문 근거·모델 identity·이력·worker 장애·base 복구와 실제 데스크톱/모바일 흐름을 확인했다. [결과·실패·한계](M4-OPERATIONS-RESULTS.md), [원본 보고서](../experiments/results/m4-terminal-service-v1.json), [실행 안내](MODEL-SERVING.md)를 따른다. 기본 BM25·base는 유지하고 학습 모델은 명시적 실험 경로다. 운영 통과를 새로운 검색 품질이나 기본 모델 채택으로 해석하지 않는다.
+
+현재 묶음의 로컬 검증: Python513개·Java82개·Chromium22개, 실제 기본 Java HTTP11묶음, 타입·production build·Ruff, 기존 main-dev의 모델 없는 저장 순위 재생 통과. 브라우저 첫20통과/2실패는 공유 서버의 정상 인증 제한이 원인이었고 spec별 서비스/DB 격리로 해결했다. 최초 실패와 성공을 모두 보존했다. 새 GPU 추론은 합성 운영 자료에만 실행했고 완료된 calibration/main-dev는 반복하지 않았다. 다음은 M5 근거 기반 답변·보류의 별도 설계와 로컬 생성 모델 자원·라이선스 확인이다. Test 잠금·사용자 검수0·유료 사용0·외부 서비스 배포0을 유지한다. 이 브랜치의 원격 CI·PR 통합은 아래 후속 기록을 따른다.
 
 **M4 main-dev 실제 비교 완료.** 실행 전 `6938c3c`에 고정한 계획·코드·설계로 새 base/terminal을 한 번 비교했다. 양성59질문의 전체 근거 @50은34→47, @5는29→37로 통과했다. @50 회복15·퇴보2, @5 회복14·퇴보6이며 다중 문서 @5는1→0/7이다. [분석](M4-MAIN-DEV-ANALYSIS.md)과 [보고서](../experiments/results/m4-main-dev-v1.json)를 따른다. 새 base는 과거 M3 dense의79질문 후보 순위·점수와 정확히 같았다. 원본 보고서·journal을 바이트 그대로 보존했고, 모델·로컬 학습 pack·test 질문 접근을 차단한 상태에서도 공개 자료 재생이 통과했다. 다음은 저장본을 명시적으로 연결하는 별도 로컬 운영 검증이다. 기본 서비스 모델·검색 정책을 바꾸지 않았으며 calibration/main-dev 재튜닝·test 개방은 하지 않는다.
 
