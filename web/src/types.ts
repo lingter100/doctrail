@@ -1,6 +1,6 @@
 export type User = { id: string; email: string; name: string };
 export type Workspace = { id: string; name: string; role: string };
-export type Doc = { id: string; workspace_id: string; title: string; filename: string; media_type: string; visibility: 'workspace' | 'private'; owner_id: string; status: string; error: string | null; revision: number; chunk_count: number; created_at: string; updated_at: string };
+export type Doc = { id: string; workspace_id: string; title: string; filename: string; media_type: string; visibility: 'workspace' | 'private'; owner_id: string; status: string; error: string | null; revision: number; chunk_count: number; created_at: string; updated_at: string; document_kind?: 'meeting' | 'document' };
 export type Chunk = { id: string; text: string; page: number | null; start_offset: number; end_offset: number; ordinal: number };
 export type Detail = Doc & { content: string; chunks: Chunk[] };
 export type Hit = { document_id: string; title: string; filename: string; revision: number; chunk_id: string; text: string; page: number | null; score: number };
@@ -10,6 +10,6 @@ export type Capabilities = { default_method: SearchMethod; model_enabled: boolea
 export type Search = { query: string; method: SearchMethod; elapsed_ms: number; search_id: string; results: Hit[]; embedding_profile?: EmbeddingProfile | null };
 export type History = { id: string; query: string; created_at: string; result_count: number; method?: SearchMethod; embedding_profile?: EmbeddingProfile | null };
 export type Auth = { user: User; workspaces: Workspace[] };
-export type View = 'library' | 'search' | 'history';
+export type View = 'library' | 'search' | 'history' | 'meetings' | 'actions' | 'knowledge';
 export type AuthMode = 'login' | 'register';
 export type Modal = { id: number; kind: 'upload' } | { id: number; kind: 'workspace' } | { id: number; kind: 'member' } | { id: number; kind: 'edit'; doc: Detail } | { id: number; kind: 'delete'; doc: Detail };
