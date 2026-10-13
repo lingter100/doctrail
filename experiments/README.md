@@ -169,3 +169,21 @@ E5 문서38/3,588(1.06%), BGE query-passage803/3,950(20.33%)가512토큰 한도�
 [동일 내부 검증 비교](results/m4-calibration-v1.json)에서 주석 전체 근거 @50은13→15/16, @5는8→11/16이었다. @5 회복6·퇴보3이며 작은 AI 표본의 사전 게이트 통과로만 해석한다. 원래 main dev/test는 이번 학습 평가에서 열지 않았다. query encode+dense rank의 p50/p95는 base12.419/15.861ms, terminal13.513/18.907ms이며 문서 prefill·HTTP가 제외된 단일 관측이다.
 
 보고서 SHA256 `bc322c0b3767a617c26bf67fefc41bc7f43d6af3e5c024538a4ae5f485cc55ee`, journal SHA256 `3bf6de4b1ef119146bb34c78d784fd2e4b4c1893bd72c3d04c6dfce43d143aa7`이며 원본과 동일하다. 원 모델과 terminal의 실제 파일·소스·입력을 평가 전에 묶었다. [사례·한계](../docs/M4-CALIBRATION-ANALYSIS.md), [준비 실패부터 실제 실행까지](../docs/M4-READINESS-RESULTS.md), [재현 명령](../docs/M4-RUNBOOK.md)을 제공한다. 서비스 채택·사용자 검수·일반화 성능·실제 비용 검증은 아니다.
+
+## M4 별도 main-dev 비교 · 2026-10-13
+
+`6938c3c`에 [설계](../docs/M4-MAIN-DEV-DESIGN.md)·소스·계획을 고정한 뒤 새 base와 terminal을 전체313문서·3,588청크·dev79질문에서 각각 한 번 측정했다. 기존 calibration/test로 재튜닝하지 않았다. [실제 보고서](results/m4-main-dev-v1.json), [완료 journal](results/m4-main-dev-v1.progress.jsonl), [사례 분석](../docs/M4-MAIN-DEV-ANALYSIS.md)을 보존한다.
+
+| 지표 | 새 base | 학습 terminal |
+|---|---:|---:|
+| 모든 필수 근거 @50 /59 |34|47|
+| 모든 필수 근거 @5 /59 |29|37|
+| 교차 언어만 가능한 주석 @5 /23 |1|15|
+| 다중 문서 @5 /7 |1|0|
+| 질문 encode+dense rank p50/p95 ms |26.490/36.020|26.907/35.694|
+
+@50 회복15·퇴보2, @5 회복14·퇴보6이다. 사전 조건은 통과했지만 다중 문서 회수는 나빠졌으며 새 학습·서비스 채택을 자동으로 결정하지 않는다. 새 base는 저장 M3 dense의79질문 전체 후보 순위·공통 점수와 정확히 같았다. 근거 없음12개·조건 불명확8개는 여전히 결과를 반환하며 보류·답변 생성 품질을 측정하지 않았다. 사용자 검수0·최종 test 잠금이다.
+
+각 모델의 문서 준비는45.548/46.471초였고 query 시간에서 제외했다. 문서38/3,588개가512토큰을 넘었으며 실제 두 모델의 입력 IDs/mask digest·길이는 같았다. 질문은 잘리지 않았다. GPU allocator peak allocated는794.122/794.685MiB, reserved는1808/1812MiB다. 이 단일 Python 순회는 HTTP·동시 사용자 성능이나 속도 우위의 증거가 아니다. API/GPU 임대 사용은0이며 전력·개발 보조 비용은 미측정이다.
+
+보고서 SHA256 `03898eeab53b2c3e166b92dd62138a55f315c560fb2d3ad26c238ce1573be5f8`, journal SHA256 `5dd4e75b740da3301b66266ea6c88fb6ec1806ab9c1a15e609eef3a12c6af217`이다. 원본을 바이트 그대로 복사했다. 무거운 모델 import·가중치·로컬 학습 pack·test 질문 접근을 차단해도 공개 결과 재생이 통과했으며 CI에 같은 구조 재생을 추가했다. 실행 명령과 재생의 한계는 [runbook](../docs/M4-RUNBOOK.md)에 있다.
