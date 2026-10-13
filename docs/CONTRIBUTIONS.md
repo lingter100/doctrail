@@ -173,3 +173,7 @@ PR #9의 필수 CI 성공과 사용자 author/committer 연결을 확인한 뒤 
 terminal_ops_design(Astra xhigh)의 결과 감사는 원본·공개 영수증,16완료 단계,8HTTP 관측,42소스와 실행 커밋, Java82개와 프런트 검사 집계를 대조했다. 지적에 따라 재현 출력 이름과 Playwright22개 중 순수 helper3개를 구분해 적었다. 원격493passed/20skipped와 로컬513개·CUDA16묶음은 같은 실행 결과로 합산하지 않는다.
 
 PR#11의 자동 Codex 코드 리뷰가 실행 lock의 교체 소유권 문제를 지적했다. 부모가 GitHub의 미해결 검토로 main push가 거부된 사실을 확인하고 보호 설정을 유지했다. terminal_worker(Astra high)가 token·file identity 확인과 추가5회귀 검사를 구현했다. 부모는 검증 후 해당 자동 검토 항목을 해결 처리한다. 이는 AI의 수정·자동 검토 반영이며 사람 승인 리뷰가 아니다. 실측 GPU report/journal은 변경하지 않는다.
+
+## 2026-10-13 · 근거 우선 및 구조 제한 답변 비교
+
+실제 수락 설정 meetings_ai=Astra high는 새 v2 정책과 decoder 모듈·검사를, meetings_local_model=Astra xhigh는 별도 설계 판단을, meetings_review=Astra high는 네 답변 의미와 코드의 독립 AI 검토를 맡았다. 부모는 새 실행기·계획/소스 hash 고정·실제 로컬 실행·원본 보존·CI 확인을 수행했다. v2 실패는 유지하며 JSON·인용·의미를 따로 판단한다. 사람 검수0, 유료 자원0이며 부모 채팅 모델을 변경했다고 주장하지 않는다.

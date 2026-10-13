@@ -12,6 +12,12 @@
 
 ## 실제 실패를 보존한 이유
 
+### 원문 인용 우선 v2의 네 답변
+
+`38d02a9`에 새 정책·실행 계획을 먼저 고정하고 답변4건만 각1회 수행했다. [원본](../experiments/results/meetings-answer-development-v2.json)과 [별도 AI 의미 검토](../experiments/results/meetings-answer-development-v2.semantic-review.json)를 보존한다. 한국어 복합 답변은2026-10-08의30일→7일 변경과 원문 질문 로그 금지를 한국어로 정확히 인용했다. 없는 예산은 실제 보류했다.
+
+공개 답변은 February beta 출시 예정은 유지했지만 June 회의에서 출시됐다는 시점을 합성했다. 진행자 답변은 JSON 키 오류로 차단됐고, raw 내용에서도 다른 청크의 인용과 원문에 없는 합성 인용이 확인됐다. 따라서3/4형식 통과를3/4정확도로 쓰지 않으며 자연어 답변 gate는 실패다. 같은 v2 프롬프트를 유지한 JSON 구조 제한 비교를 한 번 사전등록한다. 분석12회는 반복하지 않는다.
+
 ### 4B 양자화 후보의 첫 실제 비교
 
 `1b01139`에 입력·실행기16개 파일을 고정하고 Qwen3-4B-Instruct-2507/Unsloth Q5_K_M와 llama.cpp를 한 번 비교했다. [실제 보고서](../experiments/results/meetings-gguf-development-v1.json)는 원본 바이트를 그대로 복사했다. 요청5건 내부에서 분류12회·답변4회로 총16번의 native completion을 실행했다. 모든 형식 검사가 통과했지만 의미 gate는 통과하지 못했다.
