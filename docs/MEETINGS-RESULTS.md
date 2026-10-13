@@ -1,5 +1,29 @@
 # 회의록 확장: 실제 실행과 실패 기록
 
+## C0 구간 ID 비교: 정확 인용은 회복, 의미 품질은 미달
+
+`7c59042`의 깨끗한 작업 트리에서 [38파일 고정 계획](../data/evaluation/meetings-span-c0-plan-v1.json)을 실행했다. 모델·가중치·양자화·native·greedy 설정은 같은 9B이며, 모델 출력의 quote 문자열을 요청별 정확한 구간 ID로 바꿨다. Python 어댑터가 그 구간의 원문과 절대 codepoint 위치를 복사하고 기존 Java 응답 계약을 유지한다. 일부 공개 원문의 우발 노출 때문에 현재 계획은 중립 2회·알려진 4회만 포함하며 새 검증은 실행하지 않는다.
+
+[중립 확인](../experiments/results/meetings-spans-c0-neutral-v1.json) 2회는 원문에 있는 표본 코드의 정확 인용과 없는 제조국의 보류를 각각 확인했다. 이는 protocol 확인이며 품질 점수에 합산하지 않는다. [알려진 4건 원본](../experiments/results/meetings-spans-c0-known-v1.json)은 모두 구조 검사를 통과했고 인용 9개는 정확했다. [독립 의미 검토](../experiments/results/meetings-spans-c0-known-v1.semantic-review.json)는 2통과·2실패다.
+
+| 사례 | C0 관측 | 전체 판정 |
+|---|---|---|
+| 공개 회의 연결 | 인용 표식은 보존됐지만 데모 안건을 실제 발표 완료로 서술 | 실패: 완료 사실을 원문이 확정하지 않음 |
+| 근거 없는 예산 | 보류 | 통과 |
+| 진행자 안내 | 일정 설명과 채팅 공유를 각각 정확히 인용 | 통과: 이전 누락 회복 |
+| 한국어 복합 | 날짜·기간·로그 금지는 답했지만 선택 인용 밖의 개인정보 이유 추가 | 실패: 전체 원문에 있는 정보도 현재 주장에 올바른 근거 연결이 필요 |
+
+Python 요청 지연은 순서대로 12.351·6.281·8.808·9.222초다. Java HTTP 지연이나 사용자 동시성 수치가 아니다. 입력·38파일·실행 설정은 끝까지 보존됐고 추가 생성·재시도는 0이다. 새 12문항과 기존 M5-B/final test도 모델 호출 0을 유지한다. 현재 결과를 작은 알려진 사례 밖으로 일반화하지 않는다.
+
+```text
+uv run --locked --group retrieval --no-sync python -m scripts.probe_meeting_answer_spans --phase neutral --plan data/evaluation/meetings-span-c0-plan-v1.json --output .local/meeting-spans-c0-neutral-v1
+uv run --locked --group retrieval --no-sync python -m scripts.probe_meeting_answer_spans --phase known --plan data/evaluation/meetings-span-c0-plan-v1.json --output .local/meeting-spans-c0-known-v1
+```
+
+위 경로는 이미 실행했다. 실행기는 계획의 고정 출력 경로가 존재하면 거절하므로 반복 실행하거나 출력 디렉터리를 지우지 않는다. 결과 사본은 원본 바이트 그대로 보존하며 CRLF도 해당 파일의 Git 속성으로 보존한다. 저장된 결과·검토·hash 확인에는 모델 재실행이 필요하지 않다.
+
+로컬 전체 Python 1,077개·Ruff가 통과했고 [7c59042 push CI](https://github.com/lingter100/doctrail/actions/runs/38361638939)와 [PR CI](https://github.com/lingter100/doctrail/actions/runs/38361648062)의 backend/java-service/web이 성공했다. Java/React 소스는 기존 운영 검증과 동일하다. Draft PR 상태를 유지하며 기능 전체 완료·자동 채택·main 통합으로 기록하지 않는다. 사용자는 유료 대안을 보류하고 무료 전용 진행을 결정했다. API 호출·키 접근·사용료는 0이다.
+
 ## 9B 비교: 실행 가능성과 답변 품질을 분리한 결과
 
 `f81fd8b`에 고정한 [계획](MEETINGS-QWEN35-PLAN.md)으로 Qwen3.5-9B Q5_K_M를 GPU 24개 layer와 CPU에 나누어 실행했다. 원 모델 revision, GGUF SHA, native build, 같은 v2 prompt·JSON 문법·입출력 한도·실제 greedy 설정을 결과에 기록했다. 모델 크기만 분리한 인과 비교는 아니다.
@@ -25,7 +49,7 @@ uv run --locked --group retrieval --no-sync python -m scripts.probe_meeting_qwen
 uv run --locked --group retrieval --no-sync python -m scripts.probe_meeting_qwen35 --plan data/evaluation/meetings-qwen35-candidate-plan-v1.json --output .local/meeting-qwen35-known-v1
 ```
 
-새 `evaluate_meeting_answer_candidate`는 참인 독립 gate·report hash·소스 바인딩을 먼저 요구한다. 현재 false gate에서는 모델을 시작하지 않는다. 합성 모의 테스트 통과를 새 검증 자료에서의 모델 성공으로 기록하지 않는다. [무료 구조 개선](MEETINGS-CITATION-ARCHITECTURE-PROPOSAL.md)과 [승인이 필요한 유료 비교](MEETINGS-API-COMPARISON-PROPOSAL.md)는 모두 후속 계획이며 이번 실측에 섞지 않는다.
+새 `evaluate_meeting_answer_candidate`는 참인 독립 gate·report hash·소스 바인딩을 먼저 요구한다. 현재 false gate에서는 모델을 시작하지 않는다. 합성 모의 테스트 통과를 새 검증 자료에서의 모델 성공으로 기록하지 않는다. 당시 작성한 [무료 구조 개선](MEETINGS-CITATION-ARCHITECTURE-PROPOSAL.md)은 위 C0 결과로 종료됐고 [유료 비교](MEETINGS-API-COMPARISON-PROPOSAL.md)는 사용자 요청으로 보류했다. 새로운 [무료 후속 계획](MEETINGS-FREE-ANSWER-PLAN.md)의 구현·실행 결과는 아직 없다.
 
 2026-10-13. 이 기능은 기존 Java 문서 서비스를 확장한다. 회의 원문·권한·청크·리비전은 기존 저장을 재사용하고 React 화면과 로컬 Qwen worker를 연결한다. 공개 Jupyter 회의록과 별도의 AI 작성 한국어 사례를 사용한 **개발·운영 검증**이다. 독립 benchmark, 사용자 검수 또는 배포 완료를 뜻하지 않는다.
 

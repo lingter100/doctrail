@@ -2,6 +2,17 @@
 
 Phase 1의 로컬 운영 절차다. 실행 명령이 준비되어 있다는 사실과 실제 모델·서비스 검증 성공을 구분한다. 최종 실행 결과와 실패, 실제 모델 호출, 합성 회귀, 의미 검토는 [MEETINGS-RESULTS](MEETINGS-RESULTS.md)를 따른다. 이 문서는 검증 통과나 생성 품질을 선언하지 않는다.
 
+## 현재 검증한 회의 관리 실행 경로
+
+실제 분석·회의 관리·화면 검증을 통과한 별도 실험 경로는 **4B GGUF 후보**다. 아래의 의존성·프런트·Java 빌드를 먼저 마친 뒤, 고정 모델/runtime이 준비된 환경에서 실행한다. `--retrieval`은 별도로 준비된 base 검색 모델을 CPU에서 사용한다. 생략하면 BM25로 실행한다.
+
+```text
+uv run --locked --group retrieval --no-sync python -m scripts.prepare_meeting_gguf --download
+uv run --locked --group retrieval --no-sync python -m scripts.serve_meetings_candidate --retrieval
+```
+
+첫 명령은 고정 공개 모델과 runtime을 로컬에 내려받아 해시를 검증한다. 이미 준비된 환경은 `--download` 없이 검증할 수 있다. 기본 실험 DB는 `var/meetings-experimental.sqlite3`, 로그는 `var/meeting-candidate-logs`다. `http://127.0.0.1:8000`에서 계정·작업공간을 만든 뒤 회의를 등록한다. 이 경로에서 실제 분석 4건·운영 33개·브라우저 9개 검사를 통과했다. 자연어 답변 품질은 여전히 미승인이며 이 실행 명령을 전체 1차 완료로 해석하지 않는다. 아래 1.7B 경로는 이전 구현 비교를 위해 보존한다. 새 9B/C0 코드는 현재 오프라인 후보 비교에 한정되며 이 launcher를 자동 교체하지 않는다.
+
 ## 기능과 AI의 역할
 
 회의 원문은 기존 문서 저장·파싱·청크·권한 체계를 사용한다. UTF-8 TXT·MD·텍스트 PDF 또는 직접 입력을 등록하면 원문 저장 후 비동기 분석을 요청한다. 파일 저장 성공과 분석 성공은 별개다. 분석에 실패해도 텍스트 추출이 성공한 원문은 조회·키워드 검색할 수 있다.
