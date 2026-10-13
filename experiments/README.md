@@ -161,3 +161,11 @@ E5 문서38/3,588(1.06%), BGE query-passage803/3,950(20.33%)가512토큰 한도�
 합성2문서의 방식별2회 HTTP 시간만 기록했으며 공유 cache·모델 상주 상태이고 별도 BM25 브라우저 프로세스가 함께 실행됐다. 이 수치는 위 동결 dev 결과를 대체하거나 서비스 부하/SLO를 증명하지 않는다. source/JAR 해시·작업 트리 미커밋 상태·실행 UTC를 보존했다. Windows 원본 JSON의 줄 끝만 Git의 LF로 정규화했으며 값은 변경하지 않았다. 저장소 보고서 SHA-256은 `85581ee3c4ba164172a6de55673b63e9a5848bf5253d564af631522635825fcf`이고 원본/정규화 hash는 [검증 기록](../docs/verification/model-service.json)에 있다. [실행·복구와 한계](../docs/MODEL-SERVING.md)를 참고한다.
 
 로컬 Python177·Java20·프런트엔드 타입/build 통과. 구현 커밋의 [원격 CI](https://github.com/lingter100/doctrail/actions/runs/38207832080)는 Java 실제 HTTP 검증, Python173passed/4skipped, 코퍼스·질문 재현, 모델 없는 후보 분석과 원래 결과 재생을 통과했다. 원격CI가 CUDA 실험을 재현한 것은 아니다. GPU·API 임대는 없고 로컬 장비/전력·개발 보조 비용은 미측정이다.
+
+## M4 실제 학습과 내부 calibration · 2026-10-12
+
+원래 train 안의 fit64/calibration16을 사용했다. 미검토 검색 후보를 바로 음성으로 쓰지 않고 대체 정답·모호한 문맥·잘린 입력을 검토했다. 준비 v1의 실패와 첫 GPU의 비유한 norm 실패를 보존한 뒤, 별도 계획의 고정 loss scale1024 probe가 통과했다. [실제 학습](results/m4-e5-train-v2.json)은16회 가중치 갱신·마지막 저장본1개,43.71초·peak allocated2789.22MiB였다.
+
+[동일 내부 검증 비교](results/m4-calibration-v1.json)에서 주석 전체 근거 @50은13→15/16, @5는8→11/16이었다. @5 회복6·퇴보3이며 작은 AI 표본의 사전 게이트 통과로만 해석한다. 원래 main dev/test는 이번 학습 평가에서 열지 않았다. query encode+dense rank의 p50/p95는 base12.419/15.861ms, terminal13.513/18.907ms이며 문서 prefill·HTTP가 제외된 단일 관측이다.
+
+보고서 SHA256 `bc322c0b3767a617c26bf67fefc41bc7f43d6af3e5c024538a4ae5f485cc55ee`, journal SHA256 `3bf6de4b1ef119146bb34c78d784fd2e4b4c1893bd72c3d04c6dfce43d143aa7`이며 원본과 동일하다. 원 모델과 terminal의 실제 파일·소스·입력을 평가 전에 묶었다. [사례·한계](../docs/M4-CALIBRATION-ANALYSIS.md), [준비 실패부터 실제 실행까지](../docs/M4-READINESS-RESULTS.md), [재현 명령](../docs/M4-RUNBOOK.md)을 제공한다. 서비스 채택·사용자 검수·일반화 성능·실제 비용 검증은 아니다.

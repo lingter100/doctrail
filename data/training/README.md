@@ -1,6 +1,6 @@
 # M4 학습 자료와 준비 검증
 
-현재는 원래78개를 보존한 새 `m4-pilot-v2`에 **AI 질문80개(fit64·calibration16)**가 있다. 독립 AI가 음성 후보256개를 검토했고 실제 E5 tokenizer를 실행했다. 한 질문의 음성 부족과12질문의 음성 잘림으로 v1 학습 준비가 차단됐다. 결과·해석·간단한 재현은 [M4 준비 결과](../../docs/M4-READINESS-RESULTS.md), 기준은 [v1 설계](../../docs/M4-READINESS-DESIGN.md)와 [v2 보완 설계](../../docs/M4-READINESS-V2-DESIGN.md)를 따른다. 아직 모델 학습 결과가 아니며 사용자 검수는0개다.
+현재는 원래78개를 보존한 새 `m4-pilot-v2`에 **AI 질문80개(fit64·calibration16)**가 있다. v1 음성 부족·잘림 실패를 보존하고 추가4후보·잘린12입력의 독립 AI 검토와 실제 tokenizer 검사로 v2 준비를 통과했다. 첫 GPU 수치 실패와 고정 배율 후속 성공을 기록한 뒤 실제16회 가중치 갱신을 완료했다. 사용자 검수는0개다. [결과·해석](../../docs/M4-READINESS-RESULTS.md), [재현·복구](../../docs/M4-RUNBOOK.md), [v1 설계](../../docs/M4-READINESS-DESIGN.md), [v2 설계](../../docs/M4-READINESS-V2-DESIGN.md)를 따른다.
 
 아래 원래 pilot의 수치와 생성 이력은 과거 snapshot으로 보존한다. 원본의 pending 상태를 나중의 검토 결과로 덮어쓰지 않는다. 학습 가설·조건은 [M4-DESIGN](../../docs/M4-DESIGN.md)에 있다.
 

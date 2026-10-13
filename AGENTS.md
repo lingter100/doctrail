@@ -1,9 +1,11 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- User explicitly resumed this project on 2026-10-13 with "진행해". Heartbeat doctrail is ACTIVE again; the prior pause handoff remains in docs/STATUS.md for provenance. Preserve completed work and do not duplicate model jobs.
 - Build for a solo junior AI Engineer portfolio: data quality, retrieval experiments and operational correctness take priority over feature count.
-- Current milestone: Java/React model integration is verified. M4 preserves the original 78-question pilot and adds 2 independently AI-reviewed calibration questions in m4-pilot-v2. Readiness v1 actually reviewed 256 negatives and tokenized all80 questions: fit048 has no accepted negative; 12 fixed negative pairs truncate; data_ready=false. Preserve v1 evidence. Follow additive m4-readiness-plan-v2 for next4 fit048 candidates and independent actual truncated-input review; no easier-candidate substitution or question removal. Probe/training have not run. Check STATUS and active jobs/PR CI before resuming. Python remains inference/data/training/evaluation; never reinterpret Python experiment measurements as Java service performance.
+- Current milestone: M4 readiness v2, bounded E5 training and internal calibration are complete. Fit64/calibration16, 128 reviewed negatives and 12 truncated-input reviews; human0. Preserve failed readiness v1, failed GPU v1.1 and successful fixed-scale1024 v2 probe/train (16 real updates). Calibration @50 13→15/16 and @5 8→11/16 passed preregistered gate but has 3 @5 regressions. Follow M4-CALIBRATION-ANALYSIS and STATUS: freeze a separate once-only main-dev comparison before running it; no more calibration tuning, test locked, no automatic service adoption. Check active jobs/PR CI. Python remains inference/data/training/evaluation; never reinterpret Python measurements as Java service performance.
 - Preserve provenance. Mark synthetic examples, AI-authored questions, automated checks and user review separately.
+- Add new experiment entrypoints for follow-up work; preserve all source files bound by completed M2/M3/M4 execution/evaluation plans so saved result replay stays valid.
 - Paid APIs/GPU/cloud and public service deployment require the user's approval. Public GitHub source repository creation and push to the authenticated user's account are explicitly authorized.
 - Do not commit secrets, local databases, uploaded documents, model weights, cached corpora or personal environment paths.
 
