@@ -51,7 +51,9 @@ jobs:
           enable-cache: true
       - run: uv sync --frozen --python 3.11
       - run: uv run ruff check src tests scripts
-      - run: uv run pytest -q
+      - name: Install hash-pinned lightweight resource test dependency
+        run: uv pip install --no-deps --require-hashes -r .github/test-runtime-requirements.txt
+      - run: uv run --no-sync pytest -q
       - name: Verify licensed meeting fixture provenance without network or models
         run: uv run python -m scripts.prepare_meeting_fixtures
       - run: uv run python scripts/validate_splits.py data/manifests/kubernetes-pilot.json data/evaluation/pilot-smoke.jsonl
