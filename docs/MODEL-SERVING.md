@@ -82,3 +82,5 @@ uv run --locked --group retrieval --no-sync python -m scripts.verify_terminal_se
 ```
 
 보고서는 worker+Java 준비 시간과 HTTP 요청 시간을 구분한다. 소수의 순차 요청은 cache를 공유하므로 속도 우위나 부하 성능의 근거로 사용하지 않는다. 실제 결과·실패·시도 이름은 STATUS를 따른다. 완료된 calibration/main-dev와 최종 test는 이 명령으로 실행하지 않는다.
+
+실행 lock은 협력적 파일 표식이다. 시작은 배타적 생성, 종료는 소유권 token과 파일 identity를 확인한다. 다른 실행이 만든 교체 파일은 지우지 않는다. 실행 중인 프로세스의 lock을 수동 삭제하면 중복 진입을 허용할 수 있으며 OS 수준의 강제 잠금으로 간주하면 안 된다. 오래된 lock으로 추정하더라도 PID·프로세스 상태를 확인하기 전 제거하지 않는다.

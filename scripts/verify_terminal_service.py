@@ -12,6 +12,7 @@ import os
 import platform
 import secrets
 import shutil
+import stat
 import subprocess
 import traceback
 from contextlib import contextmanager
@@ -61,15 +62,34 @@ def exclusive_model_check(root=ROOT):
     directory = root / ".local/m4-execution"
     directory.mkdir(parents=True, exist_ok=True)
     lock = directory / "active.lock"
-    # Never remove a lock owned by another run.
+    payload = json.dumps({"pid": os.getpid(), "command": "terminal-operations",
+                          "owner_token": secrets.token_hex(32)}).encode()
+    # Exclusive creation remains fail-closed, including for stale locks.
     with lock.open("xb") as stream:
-        stream.write(json.dumps({"pid": os.getpid(), "command": "terminal-operations"}).encode())
+        stream.write(payload)
         stream.flush()
         os.fsync(stream.fileno())
+        owned = os.fstat(stream.fileno())
+        identity = (owned.st_dev, owned.st_ino)
     try:
         yield
     finally:
-        lock.unlink()
+        # Cooperating runs never replace a live lock. External deletion/replacement
+        # must not make this run clean up somebody else's lock. This is not an OS
+        # lock: hostile replacement after the final check still requires external
+        # filesystem access controls; deletion can also permit overlapping runs.
+        try:
+            current = lock.lstat()
+            if stat.S_ISREG(current.st_mode) and (current.st_dev, current.st_ino) == identity:
+                with lock.open("rb") as stream:
+                    opened = os.fstat(stream.fileno())
+                    ours = (opened.st_dev, opened.st_ino) == identity and stream.read() == payload
+                latest = lock.lstat()
+                if (ours and stat.S_ISREG(latest.st_mode)
+                        and (latest.st_dev, latest.st_ino) == identity):
+                    lock.unlink()
+        except FileNotFoundError:
+            pass  # A missing lock is not ours to recreate or remove.
 
 
 @contextmanager

@@ -18,6 +18,66 @@ def test_model_lock_does_not_remove_another_run_lock(tmp_path):
     assert not lock.exists()
 
 
+def test_model_lock_keeps_replacement_run_lock(tmp_path):
+    lock = tmp_path / ".local/m4-execution/active.lock"
+    replacement = operations.exclusive_model_check(tmp_path)
+    entered = False
+    try:
+        with operations.exclusive_model_check(tmp_path):
+            original = json.loads(lock.read_bytes())
+            lock.unlink()
+            replacement.__enter__()
+            entered = True
+            replacement_bytes = lock.read_bytes()
+            assert json.loads(replacement_bytes)["owner_token"] != original["owner_token"]
+        assert lock.read_bytes() == replacement_bytes
+        with pytest.raises(FileExistsError), operations.exclusive_model_check(tmp_path):
+            pytest.fail("replacement lock must still exclude another run")
+    finally:
+        if entered:
+            replacement.__exit__(None, None, None)
+    assert not lock.exists()
+
+
+def test_model_lock_keeps_modified_owner_token_on_same_file(tmp_path):
+    lock = tmp_path / ".local/m4-execution/active.lock"
+    with operations.exclusive_model_check(tmp_path):
+        changed = json.loads(lock.read_bytes())
+        changed["owner_token"] = "another-owner"
+        lock.write_text(json.dumps(changed), encoding="utf-8")
+    assert json.loads(lock.read_bytes()) == changed
+
+
+def test_model_lock_keeps_replacement_file_even_with_copied_token(tmp_path):
+    lock = tmp_path / ".local/m4-execution/active.lock"
+    with operations.exclusive_model_check(tmp_path):
+        original = lock.read_bytes()
+        identity = lock.stat().st_ino
+        # Retain the old inode so the replacement cannot reuse it.
+        lock.rename(lock.with_name("retired.lock"))
+        lock.write_bytes(original)
+        assert lock.stat().st_ino != identity
+    assert lock.read_bytes() == original
+
+
+@pytest.mark.parametrize("fail_body", [False, True])
+def test_model_lock_missing_at_exit_does_not_mask_body_result(tmp_path, fail_body):
+    lock = tmp_path / ".local/m4-execution/active.lock"
+
+    def run():
+        with operations.exclusive_model_check(tmp_path):
+            lock.unlink()
+            if fail_body:
+                raise RuntimeError("synthetic original failure")
+
+    if fail_body:
+        with pytest.raises(RuntimeError, match="synthetic original failure"):
+            run()
+    else:
+        run()
+    assert not lock.exists()
+
+
 @pytest.mark.parametrize("prior", [None, "m4-terminal-v1"])
 def test_explicit_base_environment_is_restored_on_failure(monkeypatch, prior):
     if prior is None:

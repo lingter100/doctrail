@@ -6,7 +6,7 @@
 
 **M4 학습 저장본 로컬 운영 검증 완료.** `61285dd`의 깨끗한 작업 트리에서 실제 CUDA·Java·React의16검사 묶음을 통과했다. 권한 회수·문서 갱신/재처리/삭제·원문 근거·모델 identity·이력·worker 장애·base 복구와 실제 데스크톱/모바일 흐름을 확인했다. [결과·실패·한계](M4-OPERATIONS-RESULTS.md), [원본 보고서](../experiments/results/m4-terminal-service-v1.json), [실행 안내](MODEL-SERVING.md)를 따른다. 기본 BM25·base는 유지하고 학습 모델은 명시적 실험 경로다. 운영 통과를 새로운 검색 품질이나 기본 모델 채택으로 해석하지 않는다.
 
-현재 묶음의 로컬 검증: Python513개·Java82개·Playwright22개(Chromium19·순수 helper3), 실제 기본 Java HTTP11묶음, 타입·production build·Ruff, 기존 main-dev의 모델 없는 저장 순위 재생 통과. 브라우저 첫20통과/2실패는 공유 서버의 정상 인증 제한이 원인이었고 spec별 서비스/DB 격리로 해결했다. 최초 실패와 성공을 모두 보존했다. 새 GPU 추론은 합성 운영 자료에만 실행했고 완료된 calibration/main-dev는 반복하지 않았다. 다음은 M5 근거 기반 답변·보류의 별도 설계와 로컬 생성 모델 자원·라이선스 확인이다. Test 잠금·사용자 검수0·유료 사용0·외부 서비스 배포0을 유지한다. 이 브랜치의 원격 CI·PR 통합은 아래 후속 기록을 따른다.
+현재 묶음의 로컬 검증: Python518개(잠금 후속 수정 포함)·Java82개·Playwright22개(Chromium19·순수 helper3), 실제 기본 Java HTTP11묶음, 타입·production build·Ruff, 기존 main-dev의 모델 없는 저장 순위 재생 통과. 브라우저 첫20통과/2실패는 공유 서버의 정상 인증 제한이 원인이었고 spec별 서비스/DB 격리로 해결했다. 최초 실패와 성공을 모두 보존했다. 새 GPU 추론은 합성 운영 자료에만 실행했고 완료된 calibration/main-dev는 반복하지 않았다. 다음은 M5 근거 기반 답변·보류의 별도 설계와 로컬 생성 모델 자원·라이선스 확인이다. Test 잠금·사용자 검수0·유료 사용0·외부 서비스 배포0을 유지한다. 이 브랜치의 원격 CI·PR 통합은 아래 후속 기록을 따른다.
 
 **M4 main-dev 실제 비교 완료.** 실행 전 `6938c3c`에 고정한 계획·코드·설계로 새 base/terminal을 한 번 비교했다. 양성59질문의 전체 근거 @50은34→47, @5는29→37로 통과했다. @50 회복15·퇴보2, @5 회복14·퇴보6이며 다중 문서 @5는1→0/7이다. [분석](M4-MAIN-DEV-ANALYSIS.md)과 [보고서](../experiments/results/m4-main-dev-v1.json)를 따른다. 새 base는 과거 M3 dense의79질문 후보 순위·점수와 정확히 같았다. 원본 보고서·journal을 바이트 그대로 보존했고, 모델·로컬 학습 pack·test 질문 접근을 차단한 상태에서도 공개 자료 재생이 통과했다. 후속 로컬 운영 검증은 위 최신 기록에 완료 결과가 있다. 기본 서비스 모델·검색 정책을 바꾸지 않았으며 calibration/main-dev 재튜닝·test 개방은 하지 않는다.
 
@@ -330,3 +330,5 @@ PR #8은 `42e682d`로 main 통합됐고 [main CI](https://github.com/lingter100/
 [PR #11](https://github.com/lingter100/doctrail/pull/11)의 구현·결과 커밋6974cf1에 대한 [head push CI](https://github.com/lingter100/doctrail/actions/runs/38331783889)는 java-service/backend/web 모두 성공했다. 원격 Python493passed/20skipped(선택 모델 의존성 없음), 프런트 회귀22개(Chromium19·순수 helper3), 실제 Java HTTP11묶음, 동결 코퍼스·학습 준비 및 main-dev 저장 결과 재생을 확인했다. 로컬513개·실제 CUDA 운영16묶음과 원격 모델 미실행을 구분한다.
 
 GitHub API에서61285dd와6974cf1의 author/committer가 모두 lingter100에 연결됨을 확인했다. 독립 AI 결과 감사는 report/journal 원본 일치, source42개와 실행 커밋 일치, 운영/품질 주장 구분을 확인했다. 재현 예시는 새 출력 이름으로 보정하고 Playwright22개 중 순수 helper3개를 명시했다. 최종 문서 head도 필수 CI 후 fast-forward로 통합하며, 정확한 최종 SHA·CI·병합 상태는 PR 기록을 따른다. 모델 실행은 반복하지 않는다.
+
+PR 자동 검토 후 잠금 cleanup을 보완했다. 기존 실행 도중 lock이 외부에서 교체되는 경우 소유권 token과 file identity가 다른 파일을 삭제하지 않으며, 누락된 lock이 원래 예외를 가리지 않는다. 추가5개를 포함한 전체 Python518passed·Ruff가 통과했다. 기존 Java/React/모델은 바뀌지 않았으므로 GPU 실측은 반복하지 않는다. 실제 운영 보고서는61285dd 바이트를 보존한다. main의 미해결 검토 보호로 첫 push가 거부됐으며 보호 규칙을 해제하지 않고 수정·자동 검토 항목 해결·새 head 필수 CI 후 통합한다. 최신 원격 검사·최종 병합 상태는 PR#11을 기준으로 확인한다.

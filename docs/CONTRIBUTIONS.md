@@ -141,3 +141,5 @@ PR #9의 필수 CI 성공과 사용자 author/committer 연결을 확인한 뒤 
 실제 terminal/base 두 프로필의 로컬 실행을 커밋61285dd에서 순차 검증했다. 모델 실행·Java HTTP·React 화면을 잇는16검사 묶음 통과, source/JAR/dist 동일성, 원본 report/journal의 바이트 복사를 부모가 확인했다. 실제 screenshot은 AI가 확인했다. 사람 피드백·사용자 검수로 기록하지 않는다. 다음 M5에서 생성 모델과 답변 가능성 판단을 별도로 설계하며, 이번 운영 통과로 남은 다중 문서 검색 퇴보가 해결됐다고 주장하지 않는다.
 
 terminal_ops_design(Astra xhigh)의 결과 감사는 원본·공개 영수증,16완료 단계,8HTTP 관측,42소스와 실행 커밋, Java82개와 프런트 검사 집계를 대조했다. 지적에 따라 재현 출력 이름과 Playwright22개 중 순수 helper3개를 구분해 적었다. 원격493passed/20skipped와 로컬513개·CUDA16묶음은 같은 실행 결과로 합산하지 않는다.
+
+PR#11의 자동 Codex 코드 리뷰가 실행 lock의 교체 소유권 문제를 지적했다. 부모가 GitHub의 미해결 검토로 main push가 거부된 사실을 확인하고 보호 설정을 유지했다. terminal_worker(Astra high)가 token·file identity 확인과 추가5회귀 검사를 구현했다. 부모는 검증 후 해당 자동 검토 항목을 해결 처리한다. 이는 AI의 수정·자동 검토 반영이며 사람 승인 리뷰가 아니다. 실측 GPU report/journal은 변경하지 않는다.
