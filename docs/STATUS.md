@@ -2,6 +2,16 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+## C2 원문 처리 구현·실제 Java/Python 대조
+
+새 source inventory helper를 구현하고 공개 전체2문서에서49청크(18+31)를 생성했다. 실제 Java21 처리 결과와 원문·위치·순서·ID·hash가 **49/49 일치**했고 Java 전체 **127passed/0skip**, 새 Python helper **45passed/1Windows-link-skip**, Ruff가 통과했다. [재현·원본 영수증](MEETINGS-C2-SOURCE-PROCESSING.md)을 따른다. 새 품질 질문·합성 평가 본문·tokenizer·모델 호출은0이다.
+
+첫 전체 Python 실행은1,523passed/2skip/2failed다. 변경하지 않은 기존 C0 runner의 임시 `report.tmp` 교체에서 Windows PermissionError가 발생했고, 하나는 실패 상태 때문에 gate가 거부됐다. 원본 로그를 `.local/c2-source-inventory-python-tests.log`에 보존한다. 해당2검사 재확인은2passed이며 전체 재검사 결과는 따로 기록한다. 동결 코드를 수정하거나 실패를 지우지 않았다.
+
+같은 코드의 전체 재검사는 **1,525passed/2skipped**(121.88초, 기존 deprecation warning1)로 통과했다. 두 skip은 Windows에서 symlink 생성 권한이 없는 검사다. 첫 실패를 지우거나 실제 모델 재실행으로 대신하지 않았다. 자료 처리 소스13파일을 `meetings-c2-source-processing-freeze-v1.json`에 고정한다. 검증 자료 채택 과정에서 등록된 RST 원문3개의 명시적 plain-text 처리 필요성을 확인했으며, 현재 공개 calibration용 처리 결과를 보존한 뒤 질문 작성 전에 별도 후속 버전으로 해결한다.
+
+공개 출처 등록 `a5cd9d5`의 push38494460795·PR38494467474 CI는 모두 성공했다. 구현 역할이 작업을 마친 뒤 새 격리 validation source 역할 생성도 실제 수락됐으며, 아직 source 채택만 진행하고 질문은 작성하지 않는다. 처리 helper/영수증 고정 후 calibration 합성 원문 작성과 일관성 검토로 이어간다. 전체 목표는 active이며 PR14는 draft다.
+
 ## C2 calibration 공개 출처 채택·처리 규칙 등록
 
 고정된 OpenTelemetry community의 공개 절차 문서2개를 전체 본문·Apache-2.0·별도 고지 여부와 함께 검토했다. [채택·처리 규칙](MEETINGS-C2-CALIBRATION-SOURCES.md)과 [manifest](../data/evaluation/meetings-c2-calibration-v1/source-manifest.json)에 원본/처리본 SHA, Git blob, 원본 수집 영수증, 기존 Java/Python 처리 소스 hash를 기록했고 부모가 다시 대조했다. 실제 회의 발생이나 완료 기록으로 해석하지 않는다.

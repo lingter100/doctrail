@@ -1,5 +1,13 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · source inventory와 Java 실제 대조
+
+기존 gpt-6-astra/high 역할 `c2_comparison_runner`가 새 whole-document inventory helper/합성45검사를 구현하고 부모 Java 대조 코드를 읽기 전용 검토했다. 부모는 Java 대조 테스트를 구현하고 검토의 metadata hash/길이·출력 경로 보강2건을 반영한 뒤 공개2문서·49청크의 실제 교차 언어 대조와 Java127개를 실행했다. 기존 Python/Java 서비스의 분할 코드는 바꾸지 않았다.
+
+부모의 같은 코드 전체 Python 재검사는1,525passed/2Windows-link-skip로 통과했다. 사용자 검수와 모델 호출은0이다. 검증 담당자가 실제 원문 노출 없이 RST3개/Markdown1개라는 형식과 명시적 txt ingest 필요성을 전달했다. source41 정책을 바꾸지 않는 자료 처리 호환성 보완으로 별도 기록한다.
+
+첫 전체 Python의 기존 임시 파일 교체 실패2건과 재확인2passed를 구분한다. 후속 격리 자료 역할 `c2_validation_source_b`에는 도구가 실제 gpt-6-astra/xhigh를 수락했다. 앞선 역할 생성/재개 거절을 작업 실행으로 세지 않으며 새 역할은 calibration 본문·정책 작성·모델 출력에서 분리한다. 부모 채팅 설정 변경·모델 품질 통과·사용자 검수를 주장하지 않는다.
+
 ## 2026-10-14 · calibration 출처 확인
 
 실제 수락된 gpt-6-astra/xhigh 역할 `c2_calibration_source`가 새 공개2문서와 고정 LICENSE/tree를 확인하고 source manifest·처리 규칙을 작성했다. 부모는 원본/정규화/Git blob/수집 영수증/기존 처리 소스 hash와 작성 수량0을 별도로 대조했다. 첫 부모 확인 스크립트에서 Git blob의 SHA-1을 SHA-256으로 잘못 비교해 assertion이 발생했으며 확인식만 바로잡아 원본과 manifest 일치를 확인했다. 원본 변경은 없었다. 자료 작성자는 후속 독립 의미 scorer와 격리 validation 작성자에서 제외한다. 사용자 검수0·새 모델 호출0이다.
