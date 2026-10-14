@@ -1,5 +1,9 @@
 # 진행 상태
 
+## C3 구현 시작 · 새 자료 계열 metadata 고정
+
+requirements_candidate는 도구가 실제 gpt-6-astra/high를 수락했으며 새 후보 모듈2개/검사2개만 구현 중이다. 부모는 [새 자료 계열](MEETINGS-C3-DATA.md)을 질문 전에 등록했다. 공개FastAPI/MkDocs 고정commit/파일metadata/LICENSE Git blob을 확인하고 원본 이용고지를 보존했다. Calibration 공개 검색 snippet 노출은 기록했고 격리validation 문서본문은 미열람이다. 개별본문 채택은 아직HOLD, 합성원문·문항·oracle·tokenizer·native0이다. 코드 검증·고정 후 source 작성/별도검토를 진행한다.
+
 ## C3 다음 후보 설계 등록 · 운영 복구 CI 완료
 
 [C3 설계](MEETINGS-C3-PLAN.md)는 요구사항별 근거 계획→모두 지원될 때만 자연어 답변의 최대2단계다. 단계별5120입력/384출력과 요청 전체90초를 유지한다. 새cal6/격리val8, 중립 포함최대32native이며 아직 자료·코드·실제 호출은0이다. C2의14정상출력은11~126tokens/EOS이므로384 상한의 실제 잘림으로 누락을 설명하지 않는다. 설계 원본 SHA5159b098ba93a40dd87e6c3e2ab6592e29831f40e969a7705f916b172c40d021을 보존한다. 다음은 새 후보 모듈·합성 검사이며 기존 평가 소스는 바꾸지 않는다.
