@@ -4,6 +4,12 @@
 
 ## C2 별도 공통5,120 입력 예산 후속 등록
 
+새 backend/두 arm runtime/입력 조사4파일을 구현하고 부모의 별도 재검사도 **92 passed / 1 Windows 링크 권한 skip**, Ruff 통과로 마쳤다. 원래 Qwen3.5 신원·nonthinking preamble·native 요청 바이트 제한을 유지하며 두 arm 모두5,120 상한을 적용한다. 입력 조사는 첫 초과 뒤에도 나머지 측정 가능한 arm을 기록하고 실패 영수증과 미측정 수를 남긴다. 실제 tokenizer/native 실행은0이다. 구현자의 초기83검사81통과/2fixture 기대값 오류와 수정 후93검사를 구분한다.
+
+다음 NEW 비교 runner/audit 구현을 같은 실제 Astra high 역할이 진행한다. NEW 중립 자원4회 도구와 전체 코드 고정도 남아 있으므로 전체24길이 조사나 실제 생성은 아직 시작하지 않는다. 기존 source41/processing18 hash 일치를 구현자가 확인했으며, 준비 도구의 검증 범위는 code/draft/freeze metadata다. 참조된 모든 oracle/원문 바이트까지 읽었다고 주장하지 않는다.
+
+등록a230044의 push38505283010·PR38505287760 필수3job은 성공했다. 기존 실제 Astra high 구현 역할이 새 backend/두arm runtime/입력 조사 및 합성 검사4파일을 구현 중이다. 부모와 구현자가 Qwen3.5의 원래 신원/비생각 preamble 확인 경로 보존 필요를 확인해 새 경로에 유지하고 있다. 아직 이 구현의 검증/commit이나 전체 길이 조사·native 호출을 완료하지 않았다. 별도 resource 구현의 병렬 역할 생성은 동시 역할 제한으로 거절돼 실행된 기여로 세지 않는다.
+
 새 설계 역할이 [후속 설계](MEETINGS-C2-INPUT-BUDGET-FOLLOWUP.md)를 마쳤고 [기계 판독 프로토콜](../data/evaluation/meetings-c2-input-budget-protocol-v1.json)을 만들었다. 기존 C2는4,096 준비 실패·품질 생성0으로 남긴다. 새로운 후속은 두 arm 공통5,120 / native context6,144 / output384를 고정하며 질문·원문·정답·prompt·분할·품질 기준은 유지한다. 길이 노출 후 변경이므로 원래 계획의 성공이나 pristine validation으로 부르지 않는다.
 
 이 상한을 먼저 commit한 뒤 새 예산 경로/합성검사/source freeze를 구현하고 격리 담당자가 전체24길이를 확인한다. 하나라도 초과하면 추가 상향·자료교체 없이 종료한다. 입력이 맞을 때만 새 정상/부하×두arm의 중립 native4회를 실행하고, 통과하면 calibration16/조건부validation12로 이어간다. 새 최대32회·기존 자원2 포함 계보34회이며 현재 새 호출0이다. 구현·학습·품질 결과가 아닌 등록 단계다.

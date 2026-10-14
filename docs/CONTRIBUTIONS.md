@@ -2,6 +2,10 @@
 
 ## 2026-10-14 · 입력 예산 후속 설계 등록
 
+같은 실제 Astra high 구현자가 첫4파일을 반환했다. 신규 합성 검사92통과/1Windows skip 및 source41/processing18 hash 일치를 보고했고 부모도4파일 읽기 검토·같은93개 검사·Ruff를 별도로 통과했다. 초기81통과/2fixture 오류는 실제 모델 실패가 아니며 수정·추가 후 결과와 구분한다. 실제 tokenizer/native/네트워크0, 사용자 검수0이다. 다음 runner/audit4파일만 같은 역할에 이어 맡겼다.
+
+등록commit 뒤 기존 실제 Astra high `c2_comparison_runner`가 새 명시적5120 backend/두arm runtime/prepare와 대응 검사를 구현하고 있다. 부모가 작성 중인 새 모듈을 읽기 전용 검토해 원래 Qwen35 신원·terminal preamble·effective metadata를 보존하도록 전달했고 구현자도 같은 차이를 확인했다. 별도 Astra high resource 구현 병렬 생성은 thread limit으로 거절됐으므로 실제 실행/모델 사용으로 기록하지 않는다. 새 길이 조사와 자원 호출은 아직0이다.
+
 실제 수락 gpt-6-astra/xhigh `c2_budget_followup`이 검증 본문을 열지 않고 고정 코드/계약·길이 metadata로 공통5120 후속을 설계했다. 부모가 source/입력의 hash와 고정 수치만 담은 protocol JSON을 추가했다. 새로운 설계자도 독립 출력 판정에서 제외한다. 모델/토크나이저 추가실행0이며 새 코드/중립4/비교16/조건부12는 아직 남아 있다. 같은 문항 재사용과 길이 노출을 명시하고 사용자 검수로 표시하지 않는다.
 
 ## 2026-10-14 · 격리 입력 실패 진단과 기록 복구
