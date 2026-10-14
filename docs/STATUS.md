@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C2 공통5,120 품질 실행 실패 · 재실행 금지
+
+봉인67490fd 이후 calibration을 한 번 실행했다. 계획16중 실제 native15, 앞14개 구조 통과 뒤15번째 C2-CAL-08/C2가 영어 요청에 한국어 claim을 반환해 `generation_language_mismatch`로 종료됐다. 마지막 L0 1회는 미실행, validation0이다. 원본 SHA `c4acac4ce4c3af9c6a77988e86400ed6f31d7b4b0c7dd59e9d251b8041ab3486`/788,359bytes를 `experiments/results/meetings-c2-input-budget-calibration-v1.json`에 바이트 복사했다. 전체8쌍 선택 기준은 이미 실패이며 남은1회를 이어서 실행하지 않는다.
+
+실패 호출은3,730in/126out/EOS/18.063s로 token/time 초과가 아니었다. 마지막 정리1.218s·요청부터 정리19.328s·source72동일·소유 프로세스 종료·로그0bytes를 확인했다. 새 프로토콜 native는 중립4+품질15=19, 기존 닫힌 중립2 포함21이다. 시도15/반환 유효14/미실행1을 구분하며 사용자 검수/유료/재시도0이다.
+
+**다음은 실패 후보의 재시작이 아니다.** 원본과 기존 full16 audit를 유지하고, 별도의 사후 진단에서 반환된14개(7쌍)만 독립 익명 의미 검토한다. 언어 실패1·미실행1은 별도로 보고하며14개의 점수로8쌍 선택 조건을 통과시키지 않는다. 독립 c2_calibration_judge(Astra xhigh)는 schema만 읽고 대기 중이다. 새 설계 역할이 최소 사후 진단 절차를 정리 중이며 아직 판정/결과는 없다. 목표 active, phase1/PR14 미완료/draft 유지. 67490fd push38510193967/PR38510197393 필수3job 성공, author/committer lingter100 확인.
+
 ## C2 새 중립4회 완료 · 품질 비교 계획 봉인
 
 입력/중립계획 커밋0c78c03의 push38509819754/PR38509823204 필수3job은 성공했다. 이후 새 중립4회를 정확히 한 번 실행했다. 정상 L0 400in/24out/3.781s, C2 468in/24out/4.015s 모두 EOS다. 부하 C2 5,001in/384out/39.875s, L0 4,923in/384out/43.516s 모두 등록된 length 종료다. 부하는 답변 품질 검사가 아니다.
