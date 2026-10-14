@@ -1,12 +1,30 @@
 # 진행 상태
 
+## C3 원문 노출 이탈 등록 · calibration6 문항 고정
+
+커밋 전 whitespace 검사 출력에 validation 공개 본문1줄·합성 머리말9줄이 부모에게 노출됐다. 아래의 원문 미열람 문장과 부모 검증 영수증은 **사건 전 상태**이며 이후 비노출 증거가 아니다. 실제 source 내용 노출이고 향후 oracle 중첩·영향은 미확인이다. [이탈 판단](MEETINGS-C3-SOURCE-EXPOSURE.md), `meetings-c3-source-exposure-v1.json`에 원래 격리조건 위반을 보존했다. 별도 Astra xhigh 판단에 따라 원문·후보66·기존 gate를 바꾸지 않고 독립 작성/채점을 유지하는 공개된 이탈 평가로 계속한다. 부모는 검증 문항의 내용 선택·수정·의미 판정에 참여하지 않는다. 이후 diff 출력은 로컬 파일로만 저장하고 내용 없는 상태만 확인한다. 원본 Markdown의 의도된 공백을 제거하지 않는다.
+
+Calibration6 문항은 별도 Astra xhigh 검토에서6승인/0거절/수정0이다. 필수정보28개 중 지원26·전체 가족 원문에도 없는 정보2, 필수 복수문서3건·양방향 언어교차를 검토자가 확인했다. 부모는 구조·역할·23개 whole-context 선택과 원본 hash를 재검증했고 `item-freeze-v1.json`의6바인딩/SHA `3c772de421bd3cb8f42abb73fb1528af92099af604b3e352e2ba79e7988583bd`로 고정했다. 작성 당시 pending 영수증은 그대로다. 일회용 부모 검사 첫 실행은 import 경로 누락으로 자료 읽기 전에 실패했고 PYTHONPATH 설정 후 통과했다. 공식 tokenizer/native0·human0이며 의미 품질 결과는 아직 없다.
+
+다음은 이탈 기록·validation source9·calibration item6을 사용자 명의 커밋/CI로 등록한 뒤, 격리 작성자의 validation8 문항 작성과 calibration 공식 offline tokenizer 준비다. Validation 원문은 공개2/합성2·38청크·Java2통과·별도 source4승인을 보존한다. 전체 goal active, phase1/PR14 미완료/draft다.
+
+## C3 격리 원문4개 고정 · calibration6 문항 별도 검토 중
+
+격리 validation 공개 MkDocs2개·새 한국어 합성2개, 전체38청크의 source-only 준비를 완료했다. 실제 Java 최종2통과/0skip 뒤 별도 Astra xhigh source 검토가4승인/0거절/변경0·metadata오류0을 보고했다. Source freeze9는 `meetings-c3-validation-v1/source-freeze-v1.json`, SHA `abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733`이다. 부모는전용freeze/요약metadata만읽고9바인딩/hash·공개Gitblob2를대조했다. 실제원문/전체manifest/inventory/의미검토JSON은부모가decode/열람하지않았다. 부모 검증과 격리 역할의 의미 검토를 `experiments/results/meetings-c3-validation-source-verification-v1.json`에서 구분한다.
+
+등록부의BSD-2-Clause는채택한공개2문서에도적용됨을별도검토자가확인했다. documentation-license 보존본은보조권리자료이며추가평가문서가아니다. Java 최초2실패(goal누락/receipt경로guard)를최종2통과로덮어쓰지않는다. 공개전byte pattern검사는 inventory에서JSON개행escape를개인경로로오탐했고, 격리담당자가decode한경로일치0을확인했다. 원문수정0·기존15파일불변, Java원본CRLF40보존이다.
+
+Calibration source 고정d02697e의양CI필수3job은모두성공했다. 그뒤새문항6개와oracle/whole-chunk선택을작성했고별도Astra xhigh item검토가진행중이다(KO3/EN3,답변4/부족2는작성자보고이며독립의미통과전). Validation8문항은이source고정커밋후격리저자가작성한다. 전체공식tokenizer/native0·human0, 전체goal active·phase1/PR14 미완료/draft다.
+
 ## C3 calibration 원문4개 고정 · 질문 작성 다음
+
+Source 고정 커밋 `d02697e171e575533fb81fd651b007a9fc87499b`을 사용자 author/committer로 푸시했다. push `38528252318` / PR `38528261466`에서 backend/java-service/web 필수3job이 각각 모두 성공했다. Source 원본과 인덱스9파일 SHA가 같으며 원본 CRLF를 보존하는 diff 검사는 `core.whitespace=cr-at-eol`로 수행했다. 고정 이후 기존 Astra xhigh 작성자가 새cal6 질문/oracle/whole-chunk 선택을 작성 중이고, 별도 item 검토 전에는 준비/추론을 실행하지 않는다.
 
 공개 FastAPI2개와 새 한국어 가상 도서관 원문2개를 전체20청크로 처리했다. 실제 Java21 대조2통과/0skip으로 내용·좌표·ID가 모두 같고, 별도 실제 Astra xhigh source 검토가4승인/0거절/변경0이다. 부모도 고정 준비기의 원문 재구성·처리/Java 영수증·별도 검토·등록된 Git blob2개를 재확인했다. 원문과 source 단계5역할을 `meetings-c3-calibration-v1/source-freeze-v1.json`의9바인딩/SHA `e423804942438acfa38c8bb77095905761a9c9098ce743d33b289048cc6b3676`으로 고정했다. Java 원본 CRLF는 새하위.gitattributes로 보존하고 인덱스 바이트를 커밋 전에 대조한다.
 
 새 공개 원문은 실제 기술 문서이며 가상 회의록2개는 AI 합성으로 분리한다. 원래 source-manifest의 검토대기 상태는 작성 당시 기록으로 보존하고 별도 사전검토/고정 파일이 이후 상태를 증명한다. [출처 설명](MEETINGS-C3-CALIBRATION-SOURCES.md)과 작성/독립검토/부모재검증 영수증을 따른다. 원문 고정 커밋 뒤 새cal6 질문/oracle/전체청크 선택을 작성하고 다시 별도 검토한다. 현재 C3 질문/공식tokenizer/native0·human0, 서비스 품질 통과 아님.
 
-격리 validation은 별도 작성자가4문서/38청크를 보고했고 실제 Java 대조와 별도 source 검토를 진행 중이다. 부모는 그 원문·전체manifest·inventory·의미 검토를 열지 않는다. 전체goal active, phase1/PR14 미완료/draft 유지.
+격리 validation은 별도 작성자가4문서/38청크와 실제 Java2통과를 보고했고 source-adoption-summary의metadata를 부모가 확인했다. 최초Maven goal누락/영수증경로guard 실패2건을 원본과 분리 보존했다. 별도 Astra xhigh source 검토가4승인/0거절/변경0·metadata오류0을 보고했고, 격리 작성자가 새source freeze9와부모용metadata 영수증만 작성 중이다. 공개2문서의BSD-2-Clause 조건은 등록부와 일치함을 검토자가 확인했다. 부모는 그 원문·전체manifest·inventory·의미 검토를 열지 않는다. 전체goal active, phase1/PR14 미완료/draft 유지.
 
 ## C3 전체 실행 도구 고정 · 새 출처 준비 다음
 

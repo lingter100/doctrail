@@ -1,5 +1,17 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 문항 검토와 실제 노출 기록
+
+기존 c2_calibration_source(Astra xhigh)가 새cal6을 작성했고 새 c3_calibration_source_review(실제 도구 수락 gpt-6-astra/xhigh)가6승인·수정0의 별도 의미 검토를 완료했다. 부모는23개 전체 청크 선택·역할·schema와 source9/toolchain66 바이트를 검증하고 itemfreeze6을 작성했다. 작성자와 두 사전검토 역할은 최종 출력 judge에서 제외한다. 인간 검수0이며 부모 모델 변경을 주장하지 않는다.
+
+부모는 공백 검사 출력을 직접 받아 validation source 일부에 노출된 오류를 보고했다. 기존 c2_budget_followup(Astra xhigh)는 실제 문자열을 받지 않고 범주·건수 자기보고만으로 별도 이탈 판단/영수증2파일을 작성했다. 이는 원래 격리조건 준수나 독립 사건범위 확인이 아니다. 후속 조건·영향 미확인·원문 변경0을 기록하며 완전 비노출로 보고하지 않는다. 문항 freeze 일회용 검사 첫 import 경로 오류는 자료 읽기 전 실패, 환경경로 설정 후 성공으로 구분한다.
+
+## 2026-10-14 · 격리 validation 원문 준비와 고정
+
+기존 실제 Astra xhigh c2_validation_source_b가고정공개2원문권리·전체bytes와새합성2원문을준비하고실제Java21전체대조를수행했다. Maven첫goal누락,후속영수증경로guard실패를보존한뒤최종2통과/4문서38청크일치를확인했다. 기존실제Astra xhigh c2_validation_source_review가별도4승인/변경0을기록했고원문/작성영수증15파일불변과권리조건을확인했다. 원래source-authoring기록의검토대기0은당시상태로보존한다.
+
+격리custodian이검토이후9파일sourcefreeze와부모용metadata요약을생성했다. 부모는본문/의미검토를열지않고metadata·바이트hash·공개Gitblob2만검증했다. byte regex의개인경로의심은부모에본문을보내지않고격리역할이JSONescape오탐으로분류했다. 실제개인경로노출/원문변경0이다. 작성자/출처검토자는C3독립출력채점에서제외한다. 새검증문항/공식tokenizer/native/human0,부모모델변경0이다.
+
 ## 2026-10-14 · 새 calibration 출처 작성과 별도 검토
 
 기존 Astra xhigh c2_calibration_source가 고정 공개 FastAPI2원문의 권리·전체bytes/blob를 확인하고 새 한국어 가상 도서관2원문을 작성했다. 전체20청크 처리와 실제 Java21 parity2검사를 수행했다. 초기 임시 조립 스크립트 import 실패는 파일 생성 전이며 경로를 고쳐 성공한 기록을 보존했다. 새 질문이나 모델 입력 상한에 맞춰 원문을 수정하지 않았다.
