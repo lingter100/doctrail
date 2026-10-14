@@ -41,7 +41,7 @@ public class GenerationClient {
             if(status==422&&Set.of("invalid_request","generation_input_limit","generation_partition_limit").contains(code))return new ApiError(422,code.equals("invalid_request")?"generation_invalid_request":code);
             if(status==503&&Set.of("model_busy","generation_failed").contains(code))return new ApiError(503,code.equals("model_busy")?"generation_busy":code);
             if(status==504&&code.equals("generation_deadline_exceeded"))return new ApiError(504,"generation_timeout");
-            if(status==502&&Set.of("generation_invalid_json","generation_invalid_schema","generation_invalid_evidence","generation_duplicate_item","generation_unsupported_field","generation_unsupported_metadata","generation_conflicting_metadata","generation_output_truncated").contains(code))return new ApiError(503,code);
+            if(status==502&&Set.of("generation_invalid_json","generation_invalid_schema","generation_invalid_evidence","generation_duplicate_item","generation_unsupported_field","generation_unsupported_metadata","generation_conflicting_metadata","generation_output_truncated","generation_language_mismatch").contains(code))return new ApiError(503,code);
         }catch(Exception ignored){}return new ApiError(503,"generation_unavailable");
     }
 }

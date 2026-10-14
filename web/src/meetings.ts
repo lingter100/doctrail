@@ -18,6 +18,7 @@ export const analysisLabels = { queued: '분석 대기', running: 'AI 분석 중
 export function meetingError(error: unknown): string {
   if (!(error instanceof ApiError)) return errorMessage(error);
   if (error.status === 409) return '원문이나 분석이 변경되어 저장하지 않았어요. 새로 불러온 뒤 수정 내용을 다시 확인해 주세요.';
+  if (error.code === 'generation_language_mismatch') return 'AI 응답이 요청한 언어와 달라 답변으로 사용하지 않았어요. 원문 검색으로 근거를 확인할 수 있어요.';
   if (error.code.includes('not_configured') || error.code.includes('disabled')) return 'AI 모델이 연결되지 않았어요. 원문 등록과 키워드 검색은 계속 사용할 수 있어요.';
   if (error.code.includes('invalid_response') || error.code.includes('generation_failed')) return 'AI 응답의 형식이나 근거를 검증하지 못했어요. 답변으로 사용하지 않았으니 다시 시도해 주세요.';
   if (error.status === 503) return 'AI 모델이 준비되지 않았거나 사용할 수 없어요. 잠시 후 다시 시도해 주세요.';
