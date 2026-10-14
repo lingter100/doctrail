@@ -1,5 +1,13 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 새 calibration 출처 작성과 별도 검토
+
+기존 Astra xhigh c2_calibration_source가 고정 공개 FastAPI2원문의 권리·전체bytes/blob를 확인하고 새 한국어 가상 도서관2원문을 작성했다. 전체20청크 처리와 실제 Java21 parity2검사를 수행했다. 초기 임시 조립 스크립트 import 실패는 파일 생성 전이며 경로를 고쳐 성공한 기록을 보존했다. 새 질문이나 모델 입력 상한에 맞춰 원문을 수정하지 않았다.
+
+새 c3_calibration_source_review는 spawn 도구가 실제 gpt-6-astra/xhigh를 수락했다. 원문 작성과 분리해4승인/0변경을 기록했고 후보 metadata 노출과 source 검토 참여에 따른 향후 출력 채점 제외를 명시했다. 부모는 원문 재구성·Git blob·Java/처리 영수증·역할/검토 계약을 재확인하고9파일 source freeze를 만들었다. 실제 사용자 검수0, 새 C3 질문/공식tokenizer/native0이다. 별도 validation 재개 첫1회는 모델 capacity 오류로 작업 전 종료됐고 같은 역할 재개 후 실제 source-only 작성이 진행됐다.
+
+2f3e9e9의 양 원격 CI 필수3job 모두 성공했다. Linux 전체 Python2154통과/21환경skip/기존경고1(76.54초)와 Java HTTP·DB 및 브라우저 회귀를 로컬 합성 검사와 구분해 meetings-c3-toolchain-ci-v1.json에 보존했다. 부모 모델 설정 변경은 없다.
+
 ## 2026-10-14 · C3 호출 전 검증 수정과 전체 도구 고정
 
 실제 Astra high c2_comparison_runner가 양 split seed·attestation의 원래 바이트·hash·32..128 길이·역할·노출·현재UTC를 호출 전에 확인하고 각 전송 직전에 재검증하도록 수정했다. 신규41합성 검사 중 첫39통과/2실패는 malformed JSON의 frozen WorkerError를 ValueError로 예상한 검사 오류였다. 기대형 수정 후 해당2통과이며 구현을 느슨하게 하지 않았다.

@@ -1,6 +1,18 @@
 # 진행 상태
 
+## C3 calibration 원문4개 고정 · 질문 작성 다음
+
+공개 FastAPI2개와 새 한국어 가상 도서관 원문2개를 전체20청크로 처리했다. 실제 Java21 대조2통과/0skip으로 내용·좌표·ID가 모두 같고, 별도 실제 Astra xhigh source 검토가4승인/0거절/변경0이다. 부모도 고정 준비기의 원문 재구성·처리/Java 영수증·별도 검토·등록된 Git blob2개를 재확인했다. 원문과 source 단계5역할을 `meetings-c3-calibration-v1/source-freeze-v1.json`의9바인딩/SHA `e423804942438acfa38c8bb77095905761a9c9098ce743d33b289048cc6b3676`으로 고정했다. Java 원본 CRLF는 새하위.gitattributes로 보존하고 인덱스 바이트를 커밋 전에 대조한다.
+
+새 공개 원문은 실제 기술 문서이며 가상 회의록2개는 AI 합성으로 분리한다. 원래 source-manifest의 검토대기 상태는 작성 당시 기록으로 보존하고 별도 사전검토/고정 파일이 이후 상태를 증명한다. [출처 설명](MEETINGS-C3-CALIBRATION-SOURCES.md)과 작성/독립검토/부모재검증 영수증을 따른다. 원문 고정 커밋 뒤 새cal6 질문/oracle/전체청크 선택을 작성하고 다시 별도 검토한다. 현재 C3 질문/공식tokenizer/native0·human0, 서비스 품질 통과 아님.
+
+격리 validation은 별도 작성자가4문서/38청크를 보고했고 실제 Java 대조와 별도 source 검토를 진행 중이다. 부모는 그 원문·전체manifest·inventory·의미 검토를 열지 않는다. 전체goal active, phase1/PR14 미완료/draft 유지.
+
 ## C3 전체 실행 도구 고정 · 새 출처 준비 다음
+
+현재 새 source-only 작업: 기존 Astra xhigh `c2_calibration_source`와 격리 `c2_validation_source_b`가 각각 진행 중이다. Validation 재개 첫1회는 모델 capacity 오류로 시작 전 종료됐고 같은 역할 재개 후 running을 확인했다. Java parity는 공유 build 출력 충돌을 피하려고 calibration 먼저, validation은 파일 준비 뒤 별도 실행한다. 부모는 validation 원문·의미 설명을 열지 않는다.
+
+고정 커밋 `2f3e9e9514de2d0d87935c43d6f1e510575c2e06`을 푸시했고 GitHub author/committer 모두 `lingter100`을 확인했다. push `38526167405` / PR `38526173249`에서 backend/java-service/web 필수3job이 각각 모두 성공했다. 새 source-only 채택을 split별 역할로 시작했으며 질문·공식tokenizer·native 실행은 아직 하지 않는다.
 
 수정 후 prepare/review/probe/audit 결합 검사 **224통과/2Windows 링크권한skip, 400.23초**와 전체 Ruff가 통과했다. 독립 Astra high 재검토가 같은 변조 재현을 다시 실행해 의미 자료 열람·모델 전송 전에 `c3_hash_changed`로 거절됨을 확인했다. 새 확정 미해결 결함0은 이 검토 범위의 결과다. 앞선2126/8skip 전체 실행은 수정 전 기준으로 보존하며 수정 후 전체 검사로 바꾸지 않는다.
 

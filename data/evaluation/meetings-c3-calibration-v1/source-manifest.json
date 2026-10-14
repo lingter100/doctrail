@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "manifest_id": "meetings-c3-calibration-source-manifest-v1",
+  "authored_at_utc": "2026-10-14T07:17:47.788308+00:00",
+  "adoption_author_role": "/root/c2_calibration_source",
+  "status": "source_author_adopted_independent_prereview_pending",
+  "family_registry": {
+    "path": "data/evaluation/meetings-c3-family-registry-v1.json",
+    "sha256": "597db7e4d1792fc6bdc96af21cfc86f767a272b4156dc7607bbd71a077a36682"
+  },
+  "active_comparison_source_freeze": {
+    "path": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+    "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3"
+  },
+  "legacy_reference_key_notice": "active_comparison_source_freeze is the frozen generic helper field name; it binds the current C3 whole-toolchain freeze, not a closed comparison pool.",
+  "processing_protocol": {
+    "id": "meetings-c3-calibration-literal-service-source-v1",
+    "existing_service_reference_sha256": {
+      "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+      "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+      "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+      "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56"
+    },
+    "chunk_algorithm": {
+      "max_codepoints": 1000,
+      "boundary_search_min_codepoints": 500,
+      "overlap_codepoints": 150,
+      "boundary_characters": [
+        "LF",
+        "ASCII SPACE"
+      ]
+    },
+    "chunk_id_format": "{document_id}-r1-c{ordinal:04d}",
+    "literal_input": "Complete UTF-8 Markdown bytes; use existing service extraction only (BOM removal if present, CRLF/CR to LF, NFC). No rendering or include expansion.",
+    "selection_rule": "This inventory includes every adopted source and every service chunk, in registered document order and original source offsets. No questions, selected contexts, crop, merge, evidence-unit resizing, tokenizer calls or budget-directed rewriting.",
+    "candidate_independence": "No tailoring paragraphs or lines to C3 evidence-unit limits. Existing generic 1000/150 chunking is applied after source authorship; sources are not revised from resulting chunks or token feedback.",
+    "future_item_rule": "Only after separate source prereview and parent source freeze may a later authorized author select unchanged whole chunks by semantic relevance; tokenizer feedback cannot authorize reselection.",
+    "observations": "All four raw files are already LF and NFC; normalization is byte-identical after UTF-8 encoding, verified per source."
+  },
+  "families": [
+    {
+      "family_id": "C3-F01",
+      "origin": "public",
+      "source_language": "en",
+      "split": "calibration",
+      "topic": "FastAPI request-background work and application lifecycle",
+      "repository": "fastapi/fastapi",
+      "immutable_commit": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+      "license": {
+        "path": "LICENSE",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+        "size": 1086,
+        "url": "https://api.github.com/repos/fastapi/fastapi/git/blobs/3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+        "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e",
+        "pinned_license_checked": true,
+        "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/LICENSE",
+        "preserved_file": "data/evaluation/meetings-c3-source-licenses/fastapi-LICENSE",
+        "dataset_preserved_file": "data/evaluation/meetings-c3-calibration-v1/licenses/FastAPI-LICENSE"
+      },
+      "source_suitability": {
+        "verdict": "ADOPTED",
+        "scope": "Complete registered Markdown sources, with unresolved includes retained literally.",
+        "semantic_basis": "Complementary request-background work and app-lifecycle guidance. The prose states scope, timing, resource sharing, alternatives and qualifications without requiring linked examples. A coherent comparison can require both independent documents.",
+        "limits": [
+          "Two purposively selected documentation pages, not real meeting records.",
+          "Linked code and external pages are outside the adopted corpus.",
+          "Adoption does not certify future questions, answers or model performance."
+        ]
+      },
+      "sources": [
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "revision": 1,
+          "origin": "public",
+          "path": "docs/en/docs/tutorial/background-tasks.md",
+          "local_raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/public/fastapi/docs/en/docs/tutorial/background-tasks.md",
+          "title": "FastAPI — Background Tasks",
+          "page": null,
+          "meeting_date": null,
+          "ingestion_kind": "md",
+          "adoption_author_role": "/root/c2_calibration_source",
+          "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+          "raw_encoding": "UTF-8",
+          "raw_size_bytes": 4786,
+          "raw_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+          "processed_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+          "processed_codepoints": 4786,
+          "git_blob_sha1": "18c9bb6fe5db9f51769bb771f48b9fee4f4aab13",
+          "bom": false,
+          "lf_count": 86,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/tutorial/background-tasks.md",
+          "raw_url": "https://raw.githubusercontent.com/fastapi/fastapi/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/tutorial/background-tasks.md",
+          "license_id": "MIT",
+          "original_registered_bytes": 4786,
+          "per_file_rights_review": {
+            "verdict": "ADOPTED_UNDER_PINNED_REPOSITORY_MIT",
+            "full_raw_body_read": true,
+            "separate_inline_license_or_copyright_notice_found": false,
+            "ancestor_license_notice_files": [
+              "LICENSE"
+            ],
+            "ancestor_tree_metadata_receipt": {
+              "path": "data/evaluation/meetings-c3-calibration-v1/public-fetch-receipt.json",
+              "sha256": "e3f9e3d921d8105a6ddb1df01813d1ade1c359d82b5463b6eadc1cb13d3bc559"
+            },
+            "license_preserved": {
+              "path": "data/evaluation/meetings-c3-calibration-v1/licenses/FastAPI-LICENSE",
+              "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+            },
+            "attribution": {
+              "path": "data/evaluation/meetings-c3-calibration-v1/ATTRIBUTION.md",
+              "sha256": "47db1f3cd2d058c3087ca8803a038d07a5dfbed2a6ff8fdf0638029fb6f30200"
+            },
+            "inline_code_review": "Original short explanatory code/identifiers in FastAPI documentation; no separately attributed external code block or incompatible notice found.",
+            "external_includes": [
+              "../../docs_src/background_tasks/tutorial001_py310.py hl[1,13]",
+              "../../docs_src/background_tasks/tutorial001_py310.py hl[6:9]",
+              "../../docs_src/background_tasks/tutorial001_py310.py hl[14]",
+              "../../docs_src/background_tasks/tutorial002_an_py310.py hl[13,15,22,25]"
+            ],
+            "external_links": [
+              "https://docs.celeryq.dev",
+              "https://starlette.dev/background/"
+            ],
+            "linked_or_included_target_bodies_fetched": 0,
+            "include_handling": "Literal markers preserved; no expansion, rendering, execution, missing snippet reconstruction or inferred target content.",
+            "rights_scope": "Repository MIT expressly includes associated documentation. This is a file-and-ancestor audit of this pinned snapshot, not a claim about the licenses or contents of linked targets."
+          }
+        },
+        {
+          "source_id": "C3-F01-S02",
+          "document_id": "c3-cal-fastapi-lifespan-events",
+          "registration_ordinal": 1,
+          "revision": 1,
+          "origin": "public",
+          "path": "docs/en/docs/advanced/events.md",
+          "local_raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/public/fastapi/docs/en/docs/advanced/events.md",
+          "title": "FastAPI — Lifespan Events",
+          "page": null,
+          "meeting_date": null,
+          "ingestion_kind": "md",
+          "adoption_author_role": "/root/c2_calibration_source",
+          "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+          "raw_encoding": "UTF-8",
+          "raw_size_bytes": 7985,
+          "raw_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+          "processed_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+          "processed_codepoints": 7970,
+          "git_blob_sha1": "485340afe2067c8ca2a03d70e4830a240ea085f5",
+          "bom": false,
+          "lf_count": 165,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/advanced/events.md",
+          "raw_url": "https://raw.githubusercontent.com/fastapi/fastapi/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/advanced/events.md",
+          "license_id": "MIT",
+          "original_registered_bytes": 7985,
+          "per_file_rights_review": {
+            "verdict": "ADOPTED_UNDER_PINNED_REPOSITORY_MIT",
+            "full_raw_body_read": true,
+            "separate_inline_license_or_copyright_notice_found": false,
+            "ancestor_license_notice_files": [
+              "LICENSE"
+            ],
+            "ancestor_tree_metadata_receipt": {
+              "path": "data/evaluation/meetings-c3-calibration-v1/public-fetch-receipt.json",
+              "sha256": "e3f9e3d921d8105a6ddb1df01813d1ade1c359d82b5463b6eadc1cb13d3bc559"
+            },
+            "license_preserved": {
+              "path": "data/evaluation/meetings-c3-calibration-v1/licenses/FastAPI-LICENSE",
+              "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+            },
+            "attribution": {
+              "path": "data/evaluation/meetings-c3-calibration-v1/ATTRIBUTION.md",
+              "sha256": "47db1f3cd2d058c3087ca8803a038d07a5dfbed2a6ff8fdf0638029fb6f30200"
+            },
+            "inline_code_review": "Original short explanatory code/identifiers in FastAPI documentation; no separately attributed external code block or incompatible notice found.",
+            "external_includes": [
+              "../../docs_src/events/tutorial003_py310.py hl[16,19]",
+              "../../docs_src/events/tutorial003_py310.py hl[14:19]",
+              "../../docs_src/events/tutorial003_py310.py hl[1,13]",
+              "../../docs_src/events/tutorial003_py310.py hl[22]",
+              "../../docs_src/events/tutorial001_py310.py hl[8]",
+              "../../docs_src/events/tutorial002_py310.py hl[6]"
+            ],
+            "external_links": [
+              "https://asgi.readthedocs.io/en/latest/specs/lifespan.html",
+              "https://starlette.dev/lifespan/"
+            ],
+            "linked_or_included_target_bodies_fetched": 0,
+            "include_handling": "Literal markers preserved; no expansion, rendering, execution, missing snippet reconstruction or inferred target content.",
+            "rights_scope": "Repository MIT expressly includes associated documentation. This is a file-and-ancestor audit of this pinned snapshot, not a claim about the licenses or contents of linked targets."
+          }
+        }
+      ]
+    },
+    {
+      "family_id": "C3-F02",
+      "origin": "synthetic",
+      "source_language": "ko",
+      "split": "calibration",
+      "topic": "Fictional community library movable shelving reorganization",
+      "source_suitability": {
+        "verdict": "ADOPTED",
+        "scope": "New Korean fictional meeting and operational handover; two documents total.",
+        "semantic_basis": "The meeting records purpose, scope, decisions and delegated work. The later handover records actions, a local adjustment, checks and remaining trial status. Policy and subsequent execution are complementary rather than duplicate accounts.",
+        "limits": [
+          "AI-authored fictional records with shared-author bias.",
+          "No human/user review or observed library outcomes.",
+          "Source author is excluded from independent output scoring."
+        ]
+      },
+      "sources": [
+        {
+          "source_id": "C3-F02-S01",
+          "document_id": "c3-cal-library-relocation-meeting",
+          "registration_ordinal": 2,
+          "revision": 1,
+          "origin": "synthetic",
+          "path": "sources/synthetic/library-relocation-meeting.md",
+          "local_raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/synthetic/library-relocation-meeting.md",
+          "title": "솔그늘도서관 이동서가 재배치 회의 기록",
+          "page": null,
+          "meeting_date": "2026-04-07",
+          "ingestion_kind": "md",
+          "adoption_author_role": "/root/c2_calibration_source",
+          "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+          "raw_encoding": "UTF-8",
+          "raw_size_bytes": 3279,
+          "raw_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+          "processed_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+          "processed_codepoints": 1414,
+          "git_blob_sha1": null,
+          "bom": false,
+          "lf_count": 31,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "synthetic_provenance": {
+            "ai_authored": true,
+            "fictional": true,
+            "author_role": "/root/c2_calibration_source",
+            "notice": "이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.",
+            "new_original_for_this_family": true,
+            "human_authorship_count": 0,
+            "human_review_count": 0,
+            "prior_pool_bodies_read_or_reused_in_this_task": false,
+            "purpose": "Two internally coherent fictional organizational records; not a service-output demonstration or an oracle.",
+            "document_date": "2026-04-07",
+            "meeting_date_rule": "Only the explicit meeting record has meeting_date; work/report/reference dates do not become meeting metadata."
+          }
+        },
+        {
+          "source_id": "C3-F02-S02",
+          "document_id": "c3-cal-library-relocation-handover",
+          "registration_ordinal": 3,
+          "revision": 1,
+          "origin": "synthetic",
+          "path": "sources/synthetic/library-relocation-handover.md",
+          "local_raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/synthetic/library-relocation-handover.md",
+          "title": "솔그늘도서관 서가 이동 작업 및 개관 인계장",
+          "page": null,
+          "meeting_date": null,
+          "ingestion_kind": "md",
+          "adoption_author_role": "/root/c2_calibration_source",
+          "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+          "raw_encoding": "UTF-8",
+          "raw_size_bytes": 3159,
+          "raw_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+          "processed_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+          "processed_codepoints": 1392,
+          "git_blob_sha1": null,
+          "bom": false,
+          "lf_count": 29,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "synthetic_provenance": {
+            "ai_authored": true,
+            "fictional": true,
+            "author_role": "/root/c2_calibration_source",
+            "notice": "이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.",
+            "new_original_for_this_family": true,
+            "human_authorship_count": 0,
+            "human_review_count": 0,
+            "prior_pool_bodies_read_or_reused_in_this_task": false,
+            "purpose": "Two internally coherent fictional organizational records; not a service-output demonstration or an oracle.",
+            "document_date": "2026-04-14",
+            "meeting_date_rule": "Only the explicit meeting record has meeting_date; work/report/reference dates do not become meeting metadata."
+          }
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "families": 2,
+    "public_sources": 2,
+    "synthetic_sources": 2,
+    "synthetic_bodies_authored": 2,
+    "questions": 0,
+    "oracles": 0,
+    "selected_contexts": 0,
+    "official_tokenizer_runs": 0,
+    "model_calls": 0,
+    "paid_usage": 0,
+    "human_reviews": 0,
+    "independent_source_prereviews": 0
+  },
+  "independent_source_prereview": {
+    "status": "pending",
+    "completed_count": 0
+  },
+  "author_exposure": {
+    "role": "/root/c2_calibration_source",
+    "prior_role": "C2 calibration source/question author; closed pools were not reopened or reused for this task.",
+    "current_reads": [
+      "C3 plan including its embedded closed-C2 diagnostic examples",
+      "C3 data registration and family metadata",
+      "Frozen generic source/preparation/parity contracts",
+      "These new calibration sources"
+    ],
+    "limitations": "Not candidate-blind: plan/policy description and prior calibration authorship are known. No current candidate adapter/prompt implementation or generated candidate output was inspected for source design; no validation body/oracle was read.",
+    "excluded_roles": [
+      "independent_final_output_scorer",
+      "validation_author"
+    ]
+  }
+}
