@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · C3 실제 calibration tokenizer 준비
+
+부모가57981ca 고정 뒤 공식 offline tokenizer6입력을 한 번 검사했다. 모두통과1704..3118, 모델/native/download0이며 원본·공개사본 바이트/모든snapshot/원래payload/survey contract를 대조했다. 새 모델 호출이나 답변 의미 판정이 아니다. 격리 자료 작성자는 source커밋 뒤 validation8 문항을 작성하고 별도 사전검토를 받는다. 인간 검수0·무료 로컬·부모 설정 변경 없음.
+
 ## 2026-10-14 · 문항 검토와 실제 노출 기록
 
 기존 c2_calibration_source(Astra xhigh)가 새cal6을 작성했고 새 c3_calibration_source_review(실제 도구 수락 gpt-6-astra/xhigh)가6승인·수정0의 별도 의미 검토를 완료했다. 부모는23개 전체 청크 선택·역할·schema와 source9/toolchain66 바이트를 검증하고 itemfreeze6을 작성했다. 작성자와 두 사전검토 역할은 최종 출력 judge에서 제외한다. 인간 검수0이며 부모 모델 변경을 주장하지 않는다.

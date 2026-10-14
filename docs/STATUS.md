@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C3 calibration 공식 입력6개 통과 · 격리 문항 작성 중
+
+`57981ca7690c46d5c6d81a85acf6939392d8ef59`에서 calibration item6·validation source9·실제 source 노출 이탈 기록을 커밋/푸시했고 GitHub author/committer 모두lingter100을 확인했다. push38530352554/PR38530359486에서 backend/java-service/web 필수3job이 각각 모두 성공했다. CI는 모델 답변을 생성하지 않는다.
+
+고정 뒤 calibration 공식 offline tokenizer6개를 한 번 실행해6통과/실패0/미측정0,1704..3118≤5120을 확인했다. 원래 payload/전체 청크/순서를 유지했고 input/receipt 원본을 공개 사본에 그대로 보존했다. Input SHA3a21aa717aee74e0247ad9ee62418edfc7d02a988ff664da3b9b9a181d3b4da1, receipt0260c6ee24b658742398025f1f2f8219c37867b28204fdf3ec8e558b3c8aeb74. Snapshot hash·payload·동결 survey contract 재생은 통과했다. [준비 방법](MEETINGS-C3-PREPARATION.md)을 따른다. Stage2는dynamic_unmeasured·native0·download0·human0이다.
+
+격리 c2_validation_source_b가 기존4원문에서 새8문항/oracle/whole-chunk 선택을 작성 중이며 별도 item 사전검토 전 준비/추론을 하지 않는다. 부모는 내용 피드백을 주지 않는다. 아래 실제 source 노출을 없었던 것으로 취급하지 않고 후속 평가에 연결한다. 전체goal active·phase1/PR14 미완료/draft, next는 validation item review/freeze/격리tokenizer 다음 neutral4다.
+
 ## C3 원문 노출 이탈 등록 · calibration6 문항 고정
 
 커밋 전 whitespace 검사 출력에 validation 공개 본문1줄·합성 머리말9줄이 부모에게 노출됐다. 아래의 원문 미열람 문장과 부모 검증 영수증은 **사건 전 상태**이며 이후 비노출 증거가 아니다. 실제 source 내용 노출이고 향후 oracle 중첩·영향은 미확인이다. [이탈 판단](MEETINGS-C3-SOURCE-EXPOSURE.md), `meetings-c3-source-exposure-v1.json`에 원래 격리조건 위반을 보존했다. 별도 Astra xhigh 판단에 따라 원문·후보66·기존 gate를 바꾸지 않고 독립 작성/채점을 유지하는 공개된 이탈 평가로 계속한다. 부모는 검증 문항의 내용 선택·수정·의미 판정에 참여하지 않는다. 이후 diff 출력은 로컬 파일로만 저장하고 내용 없는 상태만 확인한다. 원본 Markdown의 의도된 공백을 제거하지 않는다.
