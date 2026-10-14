@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · C3 후보 구현 검증과 실행 기록 수정
+
+실제 수락 설정 requirements_candidate=gpt-6-astra/high가 새 모듈/검사4개를 작성하고 요청 초기화 문제를 고쳤다. knowledge_recovery_review=gpt-6-astra/high는 독립 읽기 검토로 해당 문제1개를 찾았고 후속 수정에 추가 지적0을 보고했다. 부모는 기존 실패 원본 보존·사후hash 대조·기존40검사/전체1,943통과/Ruff 확인·28source 고정·문서/Git 통합을 수행했다. 첫 전체 검사1실패를 지우지 않았으며 사용자 검수·모델 추론은0이다.
+
+기존 c2_budget_followup의 실제 Astra xhigh 설정으로 다음 실행/판정 계약 설계를 이어간다. 이 역할은 C3 출력 의미 판정자에서 제외한다. 부모 채팅 모델 변경은 없다.
+
 ## 2026-10-14 · C3 구현 위임과 출처 metadata 확인
 
 requirements_candidate의 실제 도구 수락 설정은 gpt-6-astra/high다. 새4파일 구현만 맡고 기존 고정소스/격리validation/모델실행은 건드리지 않는다. 부모는 공식 저장소 metadata와 고정LICENSE 원본을 직접 조회해 blob/크기/hash를 확인했다. 자료계열 등록은 AI 설계이며 원문·문항 사전검토나 사람검수 완료가 아니다. 생성모델 호출0이다.

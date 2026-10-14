@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C3 후보 구현·전체 회귀 완료 · 실행 도구 준비
+
+요구사항 계획과 자연어 실현을 새 모듈2개/검사2개로 구현했다. 독립 검토에서 이전 요청의 grammar/template 정보가 다음 요청 기록에 남는 문제1개를 찾아 초기화 순서를 고치고 연속 요청 회귀를 추가했다. 새101개 검사와 Ruff, 최종 전체 Python **1,943 passed / 6 skipped / 기존경고1 (154.34초)**가 통과했다. 첫 전체 실행의 기존 C0 합성 검사 PermissionError(1,941통과/1실패/6skip)는 원본과 함께 보존했다. 계획·소스·입력 hash는 사후 동일했고 기존40개 별도 재확인도 통과했다. 상세 파일 접근 실패 위치·원인은 미확정이다.
+
+[구현·검증 범위](MEETINGS-C3-IMPLEMENTATION.md)와 `experiments/results/meetings-c3-implementation-v1/verification.json`을 따른다. 후보 source freeze는28바인딩/SHA `6ce55cb17d264f8da7c587c685947da8d95ff1199ef65f7f34de7d1a275798c6`이며 기존 C2의72/41/18바인딩은 모두 동일하다. 이 고정은 후보 코드·prompt에 한정한다. 실제 모델/공식tokenizer/새원문·질문0, 서비스 연결/품질 통과 아님. 다음 실행·판정 도구와 계약까지 검증·고정한 뒤 자료 채택/검토를 시작한다. 기존 Astra xhigh 설계 역할이 최소 실행 계약을 준비 중이다. 전체 목표 active, phase1/PR14 미완료/draft 유지.
+
+자료 계열 등록748947c의 push38514210691/PR38514215883와 설계등록c7f7a96의 push38513802026/PR38513808461 모두 CI 성공을 확인했다. 이번 후보 구현 커밋의 CI는 push 후 별도 확인한다.
+
 ## C3 구현 시작 · 새 자료 계열 metadata 고정
 
 requirements_candidate는 도구가 실제 gpt-6-astra/high를 수락했으며 새 후보 모듈2개/검사2개만 구현 중이다. 부모는 [새 자료 계열](MEETINGS-C3-DATA.md)을 질문 전에 등록했다. 공개FastAPI/MkDocs 고정commit/파일metadata/LICENSE Git blob을 확인하고 원본 이용고지를 보존했다. Calibration 공개 검색 snippet 노출은 기록했고 격리validation 문서본문은 미열람이다. 개별본문 채택은 아직HOLD, 합성원문·문항·oracle·tokenizer·native0이다. 코드 검증·고정 후 source 작성/별도검토를 진행한다.

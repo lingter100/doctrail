@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-spans-c0",
+  "phase": "known",
+  "started_at": "2026-10-14T05:04:43.060471+00:00",
+  "plan_sha256": "910e69d5520f4e49d7741a024081deb5553d61de77d78c9a2c25f0e93bd33191",
+  "bound_files": {
+    "implementation.py": "6f42153b8f5b13b771e45fa91e4303cad5e0f333b9d81aa1c63b4c50f8ebb91c"
+  },
+  "phase_inputs": {
+    "neutral": {
+      "input_file": "neutral.json",
+      "input_sha256": "48fe10f96daa4c9938ded40564b031d6c6063c7793569968d58693bbccd48954",
+      "case_ids": [
+        "synthetic-neutral-0",
+        "synthetic-neutral-1"
+      ],
+      "output_dir": "out-neutral"
+    },
+    "known": {
+      "input_file": "known.json",
+      "input_sha256": "cb39dbbf6594be5dde213eafb1aa40f00f943a39de16c0e2eee1c5f7967a727b",
+      "case_ids": [
+        "synthetic-known-0",
+        "synthetic-known-1",
+        "synthetic-known-2",
+        "synthetic-known-3"
+      ],
+      "output_dir": "out-known"
+    },
+    "validation": {
+      "input_file": "validation.json",
+      "input_sha256": "299f45b184b84172c30354fdd13a290a22608a0468b9be3965ca5aa9fd842d9d",
+      "case_ids": [
+        "synthetic-validation-0",
+        "synthetic-validation-1",
+        "synthetic-validation-2",
+        "synthetic-validation-3",
+        "synthetic-validation-4",
+        "synthetic-validation-5",
+        "synthetic-validation-6",
+        "synthetic-validation-7",
+        "synthetic-validation-8",
+        "synthetic-validation-9",
+        "synthetic-validation-10",
+        "synthetic-validation-11"
+      ],
+      "output_dir": "out-validation"
+    }
+  },
+  "known_gate": null,
+  "status": "failed",
+  "sources_unchanged": false,
+  "model_runtime": {
+    "repo_id": "synthetic/model",
+    "revision": "synthetic-revision"
+  },
+  "human_review_count": 0,
+  "paid_service_calls": 0,
+  "analysis_calls": 0,
+  "retries": 0,
+  "semantic_review": "pending",
+  "calls": [
+    {
+      "case_id": "synthetic-known-0",
+      "kind": "answer",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is open?"
+        }
+      ],
+      "output": {
+        "text": "{\"status\":\"abstained\",\"claims\":[]}",
+        "finish_reason": "eos",
+        "input_tokens": 10,
+        "output_tokens": 11,
+        "elapsed_seconds": 0.01
+      },
+      "effective_config": {
+        "temperature": 0,
+        "grammar": "synthetic"
+      },
+      "runtime_identity": {
+        "repo_id": "synthetic/model",
+        "revision": "synthetic-revision"
+      },
+      "elapsed_ms": 0.035
+    }
+  ],
+  "results": [
+    {
+      "id": "synthetic-known-0",
+      "result": {
+        "status": "abstained",
+        "claims": []
+      },
+      "structural_status": "passed",
+      "elapsed_ms": 8.435
+    }
+  ],
+  "failure": "PermissionError",
+  "completed_at": "2026-10-14T05:04:43.083840+00:00"
+}
