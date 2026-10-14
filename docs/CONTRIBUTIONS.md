@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 새 중립 실측과 비교 실행 봉인
+
+부모가 코드72·계획0c78c03에 고정된 실제 Qwen3.5-9B 로컬 native4회를 실행하고 원본238,343bytes를 그대로 보존했다. 4회와 metadata 재시작/정리가 통과했으며 의미 품질 검증으로 세지 않는다. 실제 Astra high c2_comparison_runner는 양 split 실행계획 metadata 초안을 작성했다(원래 val 의미 본문 접근0). 부모가 성공 자원 SHA·추가 제외 역할·sealed 상태를 확정하고 커밋한다. 부모 채팅 설정 변경 없음, 사용자 검수0·유료0이다.
+
 ## 2026-10-14 · 새 전수 준비 실측
 
 부모는 bc03326의 push/PR 필수 CI 성공을 확인하고 calibration 준비1회와91바인딩 전후 byte hash 대조를 수행했다. 기존 실제 Astra xhigh인 c2_validation_source_b가 격리 validation 준비1회, 원문6·동결13/12/41/18/72 대조를 수행했다. 전수40/40 성공·원문/payload 보존을 확인했고 부모에는 validation 집계/hash만 반환했다. 부모는 원본 영수증을 수정하지 않고 바이트 복사로 보존하고 새 중립 fixture/계획을 등록했다. 새 모델/native/다운로드0, 사용자 검수0이다.

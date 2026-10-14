@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C2 새 중립4회 완료 · 품질 비교 계획 봉인
+
+입력/중립계획 커밋0c78c03의 push38509819754/PR38509823204 필수3job은 성공했다. 이후 새 중립4회를 정확히 한 번 실행했다. 정상 L0 400in/24out/3.781s, C2 468in/24out/4.015s 모두 EOS다. 부하 C2 5,001in/384out/39.875s, L0 4,923in/384out/43.516s 모두 등록된 length 종료다. 부하는 답변 품질 검사가 아니다.
+
+원본 `experiments/results/meetings-c2-input-budget-resources-v1.json`의 SHA는 `ace78622c1fc0f506af9e6d34d7c3c22c9b08ebbf78b406b46fe1509fa300c24`다. 전체191.219s, 소유 프로세스 정리1.032s/metadata 재시작 정리0.813s, source72 동일·공식/native count 일치·로그0bytes·유료/추가생성/재시도0을 확인했다. 실제 timeout/OOM은 없었으므로 그 상황의 복구를 실측했다고 하지 않는다. CPU RSS 최대 표본은6.61GiB, 시스템 가용RAM 최소 표본3.13GiB다. 장치 전체 VRAM 요청 전후는4,579–4,623/6,141MiB이며 peak/프로세스 전용 측정이 아니다.
+
+`meetings-c2-input-budget-execution-plan-v1.json`에 양 split input/원래 oracle/새 준비 영수증/성공 자원 원본/72 source/설정·seed·독립 역할·출력 경로를 모두 봉인했다(SHA845554b865d6b3fbf362b6834e98b5323cf5c366cc01ea8cf01f3c870bd251db). 기존 미사용 seed는 carryforward 이유를 기록했으며 판정 역할은 아직 예약 상태다. 이 계획 커밋 뒤 calibration16회와 새로운 독립 익명 의미 판정을 실행한다. 선택 기준 통과 전 validation은 열지 않는다. 품질 호출0인 봉인 상태, 사용자 검수0, phase1/PR14 미완료다.
+
 ## C2 새 전수 입력 준비 완료 · 중립4회 실행 대기
 
 `bc03326`의 push38509000972/PR38509004896에서 backend/java-service/web가 모두 통과한 뒤 새 준비를 split별 한 번 실행했다. Calibration16/16, 격리 validation24/24가5,120 이하이며 오류·미측정0이다. Calibration L0 1,180–3,140 / C2 1,290–3,730, validation L0 753–3,631 / C2 807–4,572다. 기존4,096에서는 validation의1개 arm만 실패한다. 원래 실패 기록은 유지하며 새 프로토콜의 길이 통과를 답변 품질로 해석하지 않는다.
