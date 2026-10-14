@@ -2,6 +2,14 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+## C2 공개 원문 복구 도구와 전체 회귀
+
+새 checkout의 `.local` 공개 snapshot 누락을 해결하는 별도 [복구 도구·재현 안내](MEETINGS-C2-SOURCE-REPLAY.md)를 추가했다. 고정 GitHub commit/URL·크기·SHA256·Git blob SHA1을 확인하고 새 캐시만 쓰며 기존 파일은 덮어쓰지 않는다. 원래 source 처리/모델 정책/문항을 변경하지 않았다.
+
+실제 calibration 공개2파일의 원격 바이트 검증2회가 모두 일치했고 기존 캐시는 보존했다. [원본 metadata 영수증](../experiments/results/meetings-c2-source-download-calibration-v1.json)은 새 복구 검증이며 과거 수집 영수증을 대체하지 않는다. 새 합성 검사20passed/1Windows-link-skip, 관련 helper 합계78passed/2skip, 전체Python **1,558passed/3skip**(125.34초) 및 Ruff가 통과했다. skip3은 Windows 링크 권한 제한이며 기존 deprecation warning1을 보존한다. 모델 생성0·유료0이다. 새 도구의 독립 코드 검토와 원격 CI는 아직 남아 있다.
+
+앞선 calibration token 준비 `76b0ec8`의 push38499935035·PR38499940108, 격리 source 고정 `ed88108`의 push38500294499·PR38500299211 CI는 성공했다. Validation12 문항 작성은 source 고정 후 격리 역할에서 진행 중이며 부모는 본문을 읽지 않는다.
+
 ## C2 격리 validation 전체 원문 검토·고정
 
 별도 작성 역할이 공개4+합성2의6문서/77청크를 준비하고 actual Java2검사를 통과했다. 이어 새 격리 검토 역할이 전체6원문의 출처·내용 일관성을 별도로 검토해6승인·0거절·변경요구0을 보고했다. 부모는 본문·전체 manifest·의미 검토 설명을 읽지 않고 전달된 수량과 바이트 hash만 확인했다. [source 고정](../data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json)과 [실제 Java 영수증](../experiments/results/meetings-c2-source-parity-validation-full-v1.json)을 보존한다.

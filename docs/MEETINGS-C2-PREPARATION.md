@@ -32,6 +32,8 @@
 
 누락 정보는 선택한 몇 청크뿐 아니라 채택한 전체 계열 원문에서 확인했다. 질문에 답이 있는데 일부러 해당 청크를 숨겨 보류 문제를 만들지 않았다. 여러 청크를 같은 문서의 여러 source로 세지 않았다. 다만 목적에 맞춰 고른 작은 표본, 공개 문서의 사전학습 가능성, 합성 문서의 명확한 상태 표현과 AI 간 공통 편향은 남는다.
 
+Calibration의 전체 질문 언어는4/4이지만 보류2문항은 모두 영어다. 한국어 답변가능4·영어 답변가능2·영어 보류2의 구성으로, 한국어 보류 성능을 이 표본에서 측정했다고 할 수 없다. 사전 가족/언어/답변가능성 할당은 충족하나 교차 유형까지 균형인 것은 아니다. 이미 고정한 문항을 사후 교체하지 않고 결과 해석의 한계로 남긴다.
+
 ## 모델을 실행하지 않는 재현
 
 저장소 루트에서 잠긴 Python3.11 환경과 이미 준비한 공식 tokenizer cache를 사용한다. 출력 폴더는 존재하지 않는 새 경로여야 한다. 다운로드나 생성 모델 호출을 허용하는 명령이 아니다.
@@ -42,7 +44,7 @@ uv run --locked --group retrieval --no-sync python -m scripts.prepare_meeting_bl
 
 [저장 입력](../data/evaluation/meetings-c2-calibration-v1/input.json)과 [token 영수증](../data/evaluation/meetings-c2-calibration-v1/token-receipt.json)은 실제 준비 원본의 바이트 사본이다. 원문·질문·metadata·순서를 고치지 않고 input/receipt hash와 pinned tokenizer 식별을 대조한다. 입력 상한에 실패하면 청크를 자르거나 문항을 교체하지 않는다.
 
-원문 수집·정규화·전체 Java 대조는 [source 처리](MEETINGS-C2-SOURCE-PROCESSING.md), [literal RST 처리](MEETINGS-C2-PLAINTEXT-SOURCES.md), split별 manifest와 출처 고지를 따른다. 원래 helper receipt의 미검증 flag를 사후 수정하지 않고 별도 실제 Java receipt를 연결한다.
+새 checkout에서 원본 캐시가 없으면 [고정 공개 snapshot 복구](MEETINGS-C2-SOURCE-REPLAY.md)를 먼저 수행한다. 원문 정규화·전체 Java 대조는 [source 처리](MEETINGS-C2-SOURCE-PROCESSING.md), [literal RST 처리](MEETINGS-C2-PLAINTEXT-SOURCES.md), split별 manifest와 출처 고지를 따른다. 원래 helper receipt의 미검증 flag를 사후 수정하지 않고 별도 실제 Java receipt를 연결한다.
 
 ## 남은 실행 조건
 
