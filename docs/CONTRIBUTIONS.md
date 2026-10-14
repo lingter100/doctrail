@@ -1,5 +1,15 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · C2 비교 runner·입력 준비·익명 audit
+
+새 `c2_comparison_runner`에 실제 도구가 수락한 설정은 gpt-6-astra/high다. 이 역할은 새 runner/합성 검사, 이후 review 계약의 family별 구성·엄격 타입 보완/검사, 모델 없는 입력 준비 도구를 구현했다. 부모가 예산 일치 대조군과 새 schema·audit 초안을 작성하고 역할간 API를 정리했으며 원본 대조·경로 선검사·검토 잠금·선택 재생·추가 합성 검사를 통합했다. 같은 역할이 부모 audit와 L0/C2 runtime을 읽기 전용 코드 검토했다. 이는 독립 의미 판정이 아니며 앞으로의 C2 출력 scorer로 사용하지 않는다.
+
+별도의 `c2_review_schema` Astra xhigh 생성은 thread limit으로 거절됐다. 실행되지 않은 역할의 기여나 부모 모델 변경을 주장하지 않는다. 비교 방향·평가 기준은 앞서 실제 수행한 Astra xhigh 설계와 registry를 유지했다. 테스트와 코드 검토는 AI 작업이며 실제 사용자 검수0이다.
+
+새 합성145개 통과·Windows symlink 권한 관련1skip·Ruff와 동결28/92파일 hash를 부모가 확인했다. 전체 파일 연결의 합성8/8·12/12는 가짜 native 기록으로 만든 검사 조건이며 실제 모델 결과가 아니다. 공개/합성 새 품질 질문 작성·실제 새 tokenizer 준비·native 비교·인간 판정·유료 호출은 각각0이다. 기존 서비스와 실패 기록을 보존한다.
+
+최종 전체 Python1,480passed/1skipped도 부모가 실제 실행했다. 기존 Starlette/httpx 경고1개와 Windows 권한 관련skip을 남겼다. 운영 service 소스가 그대로이므로 Java/React의 과거 검증을 새 모델 운영 결과로 집계하지 않는다.
+
 ## 2026-10-14 · C2 실제 자원 확인과 대조군
 
 부모가 커밋662965d의28파일 고정 계획으로 실제2native호출을 수행하고 원본 바이트 사본·token/시간/RSS표본·종료/재시작을 확인했다. 실제timeout은 일어나지 않았고 합성watchdog검사를 실제취소경험으로 바꾸어 쓰지 않는다. GitHub필수CI와 사용자author/committer연결을 확인했다. 사용자검수0·품질질문0이다.

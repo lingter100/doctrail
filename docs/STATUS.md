@@ -2,6 +2,20 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+## C2 비교 실행·독립 검토 도구 구현
+
+새 비교 runner, 공식 tokenizer 입력 준비, 엄격 oracle/판정 schema와 익명 audit를 실제 구현했다. [실행 계약](MEETINGS-C2-REVIEW-CONTRACT.md)을 따른다. 두 방식의 같은 DTO·교대 순서·calibration16/선택 후 validation12 호출 상한·실행 전 기록·한 번만 쓰는 출력 경로·90초 제한을 강제한다. 검토 판정을 먼저 잠근 뒤 대응표를 열고 전체 근거를 재생해 선택한다. 새 품질 질문·oracle·실제 비교 호출은 여전히0이다.
+
+새 합성 검사145passed/1skipped와 Ruff가 통과했다. Windows에서 symlink 생성 권한이 없어 건너뛴1개는 별도 표시하며 실제 alias 차단 검증으로 세지 않는다. 성공 선택→별도12검증의 전체 파일 연결도 합성 데이터/가짜 native 기록으로 확인했다. 테스트 안의8/8·12/12는 모델 성능이 아니다. 실제 품질 검토·인간 검수·유료 사용0이다.
+
+부모가 전체 Python도 실행해 **1,480passed/1skipped**를 확인했다(`.local/c2-comparison-full-tests.log`,105.46초). 기존 Starlette/httpx 사용 중단 경고1개가 있다. 이 변경은 Java/React 서비스 코드를 수정하지 않았으며 이전 Java125·타입/빌드·회의 브라우저5 결과를 새 측정으로 세지 않는다. 새 source 커밋의 원격 CI 상태는 PR에서 별도로 확인한다.
+
+독립 코드 검토에서 artifact/gate 경로를 확인하기 전에 읽는 문제, 원본 native 메타데이터와 요약의 대조 누락, family별 구성 검사 부족, 시간/flag의 느슨한 타입을 찾아 수정했다. 입력·oracle·seed·출력 경로를 호출 전 등록하고 잘못된 경로는 파일을 읽기 전에 거부한다. Native 원본을 동결 mapper로 재생하고 설정·인용·토큰·시간·모델 식별을 별도로 대조한다. 수정 전 실제 품질 실행은 없었다.
+
+이전 등록 커밋 `8a424be`의 push/PR CI는 모두 성공했다. C2 자원 계획28파일과 C1 실행 계획92파일의 hash도 그대로다. 현재 작업은 기존 Java/React API와 기본 모델을 바꾸지 않은 오프라인 비교 준비이며 phase1/PR14는 미완료/draft다.
+
+**다음 실행:** 검증된 비교 소스41파일을 고정한 커밋에서 split별 자료 작성자가 공개 파일 이용 조건·본문 적합성·처리 규칙/원본 hash를 먼저 기록한다. 그 다음 새 calibration8/격리validation12를 작성·별도 사전 검토·tokenizer 준비하고 실행 계획을 봉인한다. 실제 비교 전에 질문을 보며 정책을 바꾸지 않는다. 전체 목표는 active이며 사용자 진행 지시를 다시 기다리지 않는다.
+
 
 **C2-P0 실제 자원 확인은 통과했다.** `662965d`로 고정한 문단·목록·표·코드 보존 후보를 새 합성 중립 자료2개에 한 번씩 실행했다. 정상3.079초(474입력/27출력/EOS), 강제 부하31.953초(3881입력/384출력/length)이며 source28해시·native로그0바이트·소유 프로세스 정리·metadata만 재시작을 확인했다. [실측 원본과 한계](MEETINGS-C2-RESOURCES.md)를 따른다. **native2·품질 질문/평가0이며 서비스 채택이 아니다.** 같은 중립 검사를 다시 실행하지 않는다.
 
@@ -15,7 +29,7 @@ C2 고정 전 전체 Python1,325개·Ruff가 통과했고 C1 실행 계획의92�
 
 대조군·실측 보존 커밋 `ddae7bb`의 push/PR 필수 CI도 모두 성공했다. [새 비교 계획](MEETINGS-C2-COMPARISON-PLAN.md)과 [4계열 registry](../data/evaluation/meetings-c2-family-registry-v1.json)를 질문보다 먼저 등록한다. Calibration8/validation12의 출처·언어·답변 가능성 구성과 선택 조건을 고정했지만 실제 질문·oracle·context는0이다. 공개2계열의 고정 commit·경로·LICENSE/NOTICE 메타데이터를 확인했고 개별 문서 이용 조건·본문 적합성은 자료 작성자가 확인해야 하므로 source 채택은 HOLD다. 사용자 승인 대기가 아니다.
 
-**바로 이어 할 작업:** 새 `scripts/probe_meeting_blocks_comparison.py`와 합성 회귀를 구현한다. L0/C2의 교대 순서·단일 호출·384/90 예산·실행 전 dispatch·안전 중단·자원 보고서 연결·validation 선행 게이트를 강제한다. 새 익명 감사 도구와 metric/review schema까지 코드로 고정한 뒤 자료 작성자가 split별 source를 채택하고 새 문항을 만든다. 현재 비교 실행기·새 질문 작성·품질 호출은 미완성이며 기존 실험의 재실행으로 대신하지 않는다.
+등록 당시 남은 작업이었던 비교 runner·익명 audit·metric/review schema는 위 최신 묶음에서 구현했다. 새 질문 작성·실제 품질 호출은 아직 미완성이며 기존 실험의 재실행으로 대신하지 않는다.
 
 **C1 실제 비교는 구조 오류로 종료했다.** `45810d2`에서 중립2건/native4회는 통과했고 calibration8계획 중4건/native8회를 실행했다. 네 번째 V0가 초안 주장2개 중1개만 검토해 `generation_invalid_review`로 차단됐다. 나머지4건과 validation은 실행하지 않는다. [원본·실측·원인](MEETINGS-C1-RESULTS.md)을 보존하며 처음3건의 구조 수용을 의미 정답으로 세지 않는다. 사후 부분 의미 검토도 완료했으며 [문단 보존 후속 설계](MEETINGS-C1-FAILURE-FOLLOWUP.md)에 따라 새 단일 생성 후보와 자원 진단을 구현한다. 전체 목표는 활성 상태이며 사용자 진행 지시를 기다리지 않는다.
 
