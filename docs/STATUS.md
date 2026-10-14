@@ -2,17 +2,17 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
-## C2 별도 공통5,120 입력 예산 후속 등록
+## C2 공통5,120 후속 코드 검증
 
-새 backend/두 arm runtime/입력 조사4파일을 구현하고 부모의 별도 재검사도 **92 passed / 1 Windows 링크 권한 skip**, Ruff 통과로 마쳤다. 원래 Qwen3.5 신원·nonthinking preamble·native 요청 바이트 제한을 유지하며 두 arm 모두5,120 상한을 적용한다. 입력 조사는 첫 초과 뒤에도 나머지 측정 가능한 arm을 기록하고 실패 영수증과 미측정 수를 남긴다. 실제 tokenizer/native 실행은0이다. 구현자의 초기83검사81통과/2fixture 기대값 오류와 수정 후93검사를 구분한다.
+새 backend/두 arm runtime/전수 입력 조사/비교 runner/익명 audit/중립 자원4회 도구를 구현했다. 전체 Python **1,788 passed / 5 Windows 링크 권한 skip / 기존 Starlette 경고1**, Ruff가 통과했다(129.85초, `.local/c2-budget-python-tests-v1.log`). 새 runtime/준비92검사, 비교/audit110검사, 자원28검사도 각각 통과했다. 실제 새 tokenizer 조사·native 생성은0, phase1/PR14는 미완료/draft다.
 
-다음 NEW 비교 runner/audit 구현을 같은 실제 Astra high 역할이 진행한다. NEW 중립 자원4회 도구와 전체 코드 고정도 남아 있으므로 전체24길이 조사나 실제 생성은 아직 시작하지 않는다. 기존 source41/processing18 hash 일치를 구현자가 확인했으며, 준비 도구의 검증 범위는 code/draft/freeze metadata다. 참조된 모든 oracle/원문 바이트까지 읽었다고 주장하지 않는다.
+부모와 구현자의 상호 검토에서 원래 Qwen 신원·nonthinking preamble 보존, source freeze 전체 동일성, 준비 개별 길이/오류 재생, 원래 draft/item/oracle hash 연결과 노출 역할 제외를 확인·보완했다. 코드72개를 새 `meetings-c2-input-budget-source-freeze-v1.json`에 바인딩했고 commit/전체 검증 후에만 격리 전수 조사를 시작한다. 기존 source41/processing18은 전부 동일하다. Baseline input은 코드 목록과 별도 metadata에 둔다.
 
-등록a230044의 push38505283010·PR38505287760 필수3job은 성공했다. 기존 실제 Astra high 구현 역할이 새 backend/두arm runtime/입력 조사 및 합성 검사4파일을 구현 중이다. 부모와 구현자가 Qwen3.5의 원래 신원/비생각 preamble 확인 경로 보존 필요를 확인해 새 경로에 유지하고 있다. 아직 이 구현의 검증/commit이나 전체 길이 조사·native 호출을 완료하지 않았다. 별도 resource 구현의 병렬 역할 생성은 동시 역할 제한으로 거절돼 실행된 기여로 세지 않는다.
+[실행 안내](MEETINGS-C2-BUDGET-EXECUTION.md)를 따른다. 다음은 검증된 코드 고정 → calibration16길이/격리 validation24길이 준비 → 새 중립 plan/최대4 native → 새 실행계획 → calibration16회와 독립 판정 → 선택 시에만 validation12회다. 한 입력이라도5,120을 초과하면 추가 상향·자료 교체 없이 이 후속을 닫는다. 준비 도구의 참조 원문/oracle 바이트 검증 범위와 공식 count/실제 native 바이트 측정을 구분한다.
 
-새 설계 역할이 [후속 설계](MEETINGS-C2-INPUT-BUDGET-FOLLOWUP.md)를 마쳤고 [기계 판독 프로토콜](../data/evaluation/meetings-c2-input-budget-protocol-v1.json)을 만들었다. 기존 C2는4,096 준비 실패·품질 생성0으로 남긴다. 새로운 후속은 두 arm 공통5,120 / native context6,144 / output384를 고정하며 질문·원문·정답·prompt·분할·품질 기준은 유지한다. 길이 노출 후 변경이므로 원래 계획의 성공이나 pristine validation으로 부르지 않는다.
+등록a230044의 push38505283010/PR38505287760, 첫 구현76187b3의 push38506759205/PR38506763269는 각각 필수3job 성공이다. 첫 구현의 초기83검사81통과/2fixture 기대값 오류, 자원 초기54통과/1skip/2개 작성 중 계약 불일치, 비교 초기 validation 합성 fixture 준비 영수증 누락은 수정 뒤 결과와 분리해 보존한다. 병렬 resource 역할 생성은 slot 제한으로 거절됐으므로 실제 역할 기여가 아니다.
 
-이 상한을 먼저 commit한 뒤 새 예산 경로/합성검사/source freeze를 구현하고 격리 담당자가 전체24길이를 확인한다. 하나라도 초과하면 추가 상향·자료교체 없이 종료한다. 입력이 맞을 때만 새 정상/부하×두arm의 중립 native4회를 실행하고, 통과하면 calibration16/조건부validation12로 이어간다. 새 최대32회·기존 자원2 포함 계보34회이며 현재 새 호출0이다. 구현·학습·품질 결과가 아닌 등록 단계다.
+원래 C2는4,096 준비 실패·품질0으로 보존한다. [별도 후속 설계](MEETINGS-C2-INPUT-BUDGET-FOLLOWUP.md)는 동일8/12 항목과 prompt/oracle을 유지하고 공통5,120/context6,144/output384만 등록했다. 길이 노출 후 계약 변경이므로 원래 계획 성공이나 pristine validation으로 부르지 않는다. 새로운 최대32회·기존 중립2 포함 계보34회, 유료0·사용자 검수0·공개 배포0이다.
 
 ## C2 입력 준비 실패 · 품질 생성0
 

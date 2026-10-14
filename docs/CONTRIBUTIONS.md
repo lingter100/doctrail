@@ -2,6 +2,12 @@
 
 ## 2026-10-14 · 입력 예산 후속 설계 등록
 
+같은 실제 Astra high 역할이 NEW 비교/audit4파일을 반환했고110통과/1skip을 보고했다. 부모의 최종 원본 draft/item/oracle 직접 바인딩 검토를 반영했으며 부모가 전체 Python1,788통과/5skip·Ruff를 확인했다. 부모가 source72 동결 JSON과 실행 안내를 작성했다. 새 실제 tokenizer/native·네트워크·유료0이다. 코드 준비 완료가 자원/의미 품질 준비 완료를 뜻하지 않는다.
+
+구현 역할이 부모의 자원2파일을 읽기 전용 검토해 source freeze 전체 동일성 및 준비 영수증의 개별 row 재검증2건을 지적했다. 부모가 두 항목과 양 split의 tokenizer 동일성 확인을 반영했고 새 자원28검사/Ruff가 통과했다. 실제 실행 전에 잡은 구현 결함이며 모델 실험 실패/사용자 검수로 세지 않는다. 부모는 새 runner/audit의 metadata→gate→validation 입력 순서와 raw 응답 재생을 읽기 검토하고 노출 역할 전원 제외를 강제하도록 요청했다.
+
+부모가 새 중립 자원4회 도구와 합성 검사를 구현했다. 초기 합동검사54통과/1skip/2실패는 작성 중인 validator와 새 stress 문법이 일치하지 않아 발생했으며 계약을 맞춘 뒤56통과/1skip, 추가 경로와 runtime을 포함한119통과/1skip을 확인했다. 기존 원본 예산/실험 소스는 수정하지 않았다. Calibration baseline input은 코드 바인딩과 별도 `baseline_inputs` metadata로 분리해 실제 검증 입력 접근 경계를 유지했다. 공식 tokenizer/native0이다.
+
 같은 실제 Astra high 구현자가 첫4파일을 반환했다. 신규 합성 검사92통과/1Windows skip 및 source41/processing18 hash 일치를 보고했고 부모도4파일 읽기 검토·같은93개 검사·Ruff를 별도로 통과했다. 초기81통과/2fixture 오류는 실제 모델 실패가 아니며 수정·추가 후 결과와 구분한다. 실제 tokenizer/native/네트워크0, 사용자 검수0이다. 다음 runner/audit4파일만 같은 역할에 이어 맡겼다.
 
 등록commit 뒤 기존 실제 Astra high `c2_comparison_runner`가 새 명시적5120 backend/두arm runtime/prepare와 대응 검사를 구현하고 있다. 부모가 작성 중인 새 모듈을 읽기 전용 검토해 원래 Qwen35 신원·terminal preamble·effective metadata를 보존하도록 전달했고 구현자도 같은 차이를 확인했다. 별도 Astra high resource 구현 병렬 생성은 thread limit으로 거절됐으므로 실제 실행/모델 사용으로 기록하지 않는다. 새 길이 조사와 자원 호출은 아직0이다.

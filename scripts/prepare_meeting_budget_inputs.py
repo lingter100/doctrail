@@ -262,9 +262,10 @@ def prepare(draft_path, output, phase, *, item_freeze_path, source_freeze_path,
         baseline = None
         if "baseline_input" in paths:
             name = _name(paths["baseline_input"])
-            if name not in bindings:
+            baseline_bindings = freeze.get("baseline_inputs", {})
+            if not isinstance(baseline_bindings, dict) or not _digest(baseline_bindings.get(name)):
                 raise PreparationError("preparation_baseline_unregistered")
-            baseline = bound(paths["baseline_input"], bindings[name])
+            baseline = bound(paths["baseline_input"], baseline_bindings[name])
             if (type(baseline.get("schema_version")) is not int or baseline["schema_version"] != 1
                     or baseline.get("phase") != phase or not isinstance(baseline.get("cases"), list)
                     or [{"id": c.get("id"), "payload": c.get("payload")}

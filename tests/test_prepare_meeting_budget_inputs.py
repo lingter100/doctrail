@@ -57,8 +57,9 @@ def factory(tmp_path, monkeypatch):
                 item_path.relative_to(tmp_path).as_posix(): item_sha}})
             monkeypatch.setattr(prep, "PROTOCOL_SHA256", protocol_sha)
             write(freeze_path, {"bound_files": {**legacy, prep.PROTOCOL_FILE: protocol_sha,
-                **{n: prep.sha((tmp_path / n).read_bytes()) for n in prep.FILES},
-                baseline.relative_to(tmp_path).as_posix(): prep.sha(baseline.read_bytes())}})
+                **{n: prep.sha((tmp_path / n).read_bytes()) for n in prep.FILES}},
+                "baseline_inputs": {
+                    baseline.relative_to(tmp_path).as_posix(): prep.sha(baseline.read_bytes())}})
         source.seal = seal
         seal()
 
