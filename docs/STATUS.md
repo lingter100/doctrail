@@ -1,5 +1,11 @@
 # 진행 상태
 
+## C3 후보 CI 성공 · 다음 실행/판정 계약 등록
+
+f67beb3의 push38515642163/PR38515646517에서 backend/java-service/web 필수3job이 각각 모두 통과했다. GitHub author/committer 모두lingter100이다. [새 실행·판정 계약](MEETINGS-C3-EXECUTION-CONTRACT.md)을 SHA `25258b88f8cfba96a70ff24f5803d113ede7c405fe5b41238d685ffb863758b7`로 먼저 등록한다. 다음 구현은 준비/실행/audit3진입점과 C3 review 모듈·대응검사에 한정하며 기존 후보28/이전 실험은 그대로다.
+
+정상 중립검사의 두 번째 prompt는 실제 첫 출력에 의존하므로 미리 측정했다고 하지 않는다. 준비된 첫 입력과 고정 builder를 바인딩하고 실제 두 번째 입력은 실행 중 검사/재생한다. 답변 판정을 먼저 잠근 뒤 계획을 공개해 별도 실패 진단하며, metadata 노출은 그대로 기록한다. 자료 작성·공식tokenizer·native0, phase1/PR14 미완료/draft, 목표 active다.
+
 ## C3 후보 구현·전체 회귀 완료 · 실행 도구 준비
 
 요구사항 계획과 자연어 실현을 새 모듈2개/검사2개로 구현했다. 독립 검토에서 이전 요청의 grammar/template 정보가 다음 요청 기록에 남는 문제1개를 찾아 초기화 순서를 고치고 연속 요청 회귀를 추가했다. 새101개 검사와 Ruff, 최종 전체 Python **1,943 passed / 6 skipped / 기존경고1 (154.34초)**가 통과했다. 첫 전체 실행의 기존 C0 합성 검사 PermissionError(1,941통과/1실패/6skip)는 원본과 함께 보존했다. 계획·소스·입력 hash는 사후 동일했고 기존40개 별도 재확인도 통과했다. 상세 파일 접근 실패 위치·원인은 미확정이다.

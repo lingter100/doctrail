@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · C3 실행 계약 사전 등록
+
+기존 실제 Astra xhigh c2_budget_followup이 새 실행/준비/판정 계약만 작성했다. 부모가 정상 두 번째 입력의 사전 측정 불가와 validation 사전 준비/품질 gate의 서로 다른 권한을 지적했고 설계자가 두 문단을 명확히 한 최종 bytes를 보존했다. 모델·tokenizer·새 자료0, 사용자 검수0이다. 부모는 후보 f67beb3의 양 CI 전체 성공과 GitHub 사용자 author/committer 연결을 확인했다.
+
 ## 2026-10-14 · C3 후보 구현 검증과 실행 기록 수정
 
 실제 수락 설정 requirements_candidate=gpt-6-astra/high가 새 모듈/검사4개를 작성하고 요청 초기화 문제를 고쳤다. knowledge_recovery_review=gpt-6-astra/high는 독립 읽기 검토로 해당 문제1개를 찾았고 후속 수정에 추가 지적0을 보고했다. 부모는 기존 실패 원본 보존·사후hash 대조·기존40검사/전체1,943통과/Ruff 확인·28source 고정·문서/Git 통합을 수행했다. 첫 전체 검사1실패를 지우지 않았으며 사용자 검수·모델 추론은0이다.
