@@ -2,6 +2,14 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+## C2 두 split의 출처 채택과 plain-text 후속 처리
+
+격리 역할이 검증용 공개4문서와 LICENSE/NOTICE를 확인했고 source manifest를 작성했다. 부모는 원문·의미 설명을 열지 않고 전달된 hash·수량·처리 계약만 대조했다. 공개 총6문서(cal2/val4)의 채택 단계이며 합성 평가 본문·질문·oracle·선택 context는0이다.
+
+원래 등록한 검증 자료의 RST3개를 처리하기 위해 새 literal-text 진입점을 구현했다. `.rst` 원래 출처와 본문을 보존하고 `ingestion_kind=txt`를 명시한다. [변경·재현·실패 기록](MEETINGS-C2-PLAINTEXT-SOURCES.md)을 따른다. 새13+기존45검사, 총58passed/1skip와 Ruff, 실제 calibration Java 대조49/49가 통과했다. 다음은 source-processing-v2 commit 이후 격리 검증 corpus 대조와 새 합성 source 작성이다.
+
+`c0751cd` 원격 CI backend는 Windows 경로를 고정한 fixture1개에서 실패했고 Java/web은 통과했다. 외부 절대경로를 해당 운영체제에서 생성하도록 테스트1줄을 수정했다. v1 freeze/원본 helper/실패CI는 보존하며 v2에서 바뀐 테스트와 신규 진입점만 추가 고정한다. 실제 모델 비교·phase1 완료는 아직 아니다.
+
 ## C2 원문 처리 구현·실제 Java/Python 대조
 
 새 source inventory helper를 구현하고 공개 전체2문서에서49청크(18+31)를 생성했다. 실제 Java21 처리 결과와 원문·위치·순서·ID·hash가 **49/49 일치**했고 Java 전체 **127passed/0skip**, 새 Python helper **45passed/1Windows-link-skip**, Ruff가 통과했다. [재현·원본 영수증](MEETINGS-C2-SOURCE-PROCESSING.md)을 따른다. 새 품질 질문·합성 평가 본문·tokenizer·모델 호출은0이다.

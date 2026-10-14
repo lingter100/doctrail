@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 격리 validation source와 RST 호환 처리
+
+`c2_validation_source_b`(도구 수락 gpt-6-astra/xhigh)가 검증 source4개·LICENSE/NOTICE·파일별 고지를 확인하고 별도 manifest/문서를 작성했다. 부모에게는 원문 없이 형식·hash·수량·한계만 전달했다. 부모가 새 literal-text 처리 진입점과 합성13검사를 구현했고 `c2_comparison_runner`(기존 Astra high)가 읽기 전용 검토했다. 첫 구현 위임 재개는 thread limit으로 거절됐으므로 그 구현을 해당 역할의 기여로 쓰지 않는다.
+
+부모는 모듈 호출 방식 오류와 후속 입력 부재 오류를 확인한 뒤 올바른 명령으로 calibration49청크 Java 대조를 완료했다. 원격 Linux 실패는 실제 절대경로를 만드는 fixture로 수정했다. 기존 모델 정책·원문·평가 기준은 바꾸지 않았고 사용자 검수·모델 호출은0이다.
+
 ## 2026-10-14 · source inventory와 Java 실제 대조
 
 기존 gpt-6-astra/high 역할 `c2_comparison_runner`가 새 whole-document inventory helper/합성45검사를 구현하고 부모 Java 대조 코드를 읽기 전용 검토했다. 부모는 Java 대조 테스트를 구현하고 검토의 metadata hash/길이·출력 경로 보강2건을 반영한 뒤 공개2문서·49청크의 실제 교차 언어 대조와 Java127개를 실행했다. 기존 Python/Java 서비스의 분할 코드는 바꾸지 않았다.

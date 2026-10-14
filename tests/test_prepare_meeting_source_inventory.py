@@ -176,7 +176,7 @@ def test_raw_processed_git_blob_and_observation_tampering_fails(source, field, v
     lambda s: s.manifest["families"][0]["source_suitability"].update(verdict="HOLD"),
     lambda s: s.manifest["processing_protocol"]["chunk_algorithm"].update(overlap_codepoints=149),
     lambda s: s.records[0].update(local_raw_snapshot="../outside.md"),
-    lambda s: s.records[0].update(local_raw_snapshot="C:/outside.md"),
+    lambda s: s.records[0].update(local_raw_snapshot=str(s.root.parent / "outside.md")),
     lambda s: s.records[0].update(path="source.html")])
 def test_invalid_registration_protocol_or_source_paths_fail_closed(source, change):
     change(source)
