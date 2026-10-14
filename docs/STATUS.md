@@ -1,12 +1,20 @@
 # 진행 상태
 
+## C2 사후 진단 도구 완료 · 실제14응답 준비 다음
+
+새 `audit_meeting_budget_partial`과 합성 검사54개가 통과했다(Windows 링크 권한1skip, 부모19.27s/구현자23.68s, Ruff통과). 고정된 닫힌 report/plan만 허용하고 첫14개의 raw/native/원래 mapper를 재생한다. 실패15번째는 원래 영어 언어 인자를 유지해 같은 guard 오류가 발생하는지 별도 확인한다. 기존 full16 audit는 수정하지 않는다. 이 코드 커밋 뒤 한 번 prepare하여 독립 c2_calibration_judge에 익명 pack만 전달한다. 실제 prepare·의미 판정은 이 기록 시점0이다.
+
+도구 source SHA a18489e03ab85484528046dfc5ff2aad336f9a896878de8d8967a4c47fa465f5, 검사0706be8f7b6df3540e52bf646efaf7882dd1ecd6cdf1011dfa146077cdff16fd. `lock --reviewer-model gpt-6-astra --reviewer-effort xhigh` 뒤에만 mapping을 결합하며7쌍/14응답 진단을 출력한다. 항상 selected/validation_eligible=false, 원래 full gate 실패다. 새로운 source72 변경·모델/토크나이저/네트워크 호출0. 다음 모델 후보를 정할 의미 근거를 확보하는 작업이며 전체 목표 active, phase1/PR14 미완료다.
+
 ## C2 공통5,120 품질 실행 실패 · 재실행 금지
 
 봉인67490fd 이후 calibration을 한 번 실행했다. 계획16중 실제 native15, 앞14개 구조 통과 뒤15번째 C2-CAL-08/C2가 영어 요청에 한국어 claim을 반환해 `generation_language_mismatch`로 종료됐다. 마지막 L0 1회는 미실행, validation0이다. 원본 SHA `c4acac4ce4c3af9c6a77988e86400ed6f31d7b4b0c7dd59e9d251b8041ab3486`/788,359bytes를 `experiments/results/meetings-c2-input-budget-calibration-v1.json`에 바이트 복사했다. 전체8쌍 선택 기준은 이미 실패이며 남은1회를 이어서 실행하지 않는다.
 
 실패 호출은3,730in/126out/EOS/18.063s로 token/time 초과가 아니었다. 마지막 정리1.218s·요청부터 정리19.328s·source72동일·소유 프로세스 종료·로그0bytes를 확인했다. 새 프로토콜 native는 중립4+품질15=19, 기존 닫힌 중립2 포함21이다. 시도15/반환 유효14/미실행1을 구분하며 사용자 검수/유료/재시도0이다.
 
-**다음은 실패 후보의 재시작이 아니다.** 원본과 기존 full16 audit를 유지하고, 별도의 사후 진단에서 반환된14개(7쌍)만 독립 익명 의미 검토한다. 언어 실패1·미실행1은 별도로 보고하며14개의 점수로8쌍 선택 조건을 통과시키지 않는다. 독립 c2_calibration_judge(Astra xhigh)는 schema만 읽고 대기 중이다. 최소 [사후 진단 설계](MEETINGS-C2-BUDGET-PARTIAL-AUDIT.md)를 동결했으며 실제 Astra high 구현 역할이 새 진단 도구/합성 검사 두 파일을 작성 중이다. 아직 의미 판정/결과는 없다. 목표 active, phase1/PR14 미완료/draft 유지. 67490fd push38510193967/PR38510197393 필수3job 성공, author/committer lingter100 확인.
+**다음은 실패 후보의 재시작이 아니다.** 원본과 기존 full16 audit를 유지하고, 별도의 사후 진단에서 반환된14개(7쌍)만 독립 익명 의미 검토한다. 언어 실패1·미실행1은 별도로 보고하며14개의 점수로8쌍 선택 조건을 통과시키지 않는다. 독립 c2_calibration_judge(Astra xhigh)는 schema만 읽고 대기 중이다. 최소 [사후 진단 설계](MEETINGS-C2-BUDGET-PARTIAL-AUDIT.md)를 동결했으며 실제 Astra high 구현 역할이 새 진단 도구/합성 검사 두 파일을 작성 중이다. 아직 의미 판정/결과는 없다. 목표 active, phase1/PR14 미완료/draft 유지. 67490fd push38510193967/PR38510197393 필수3job 성공, author/committer lingter100 확인. 원본 보존70ccd34 CI는 후속9254eca 푸시로 Java job이 자동 취소됐으며, 후속9254eca의 push38510992587/PR38510997252에서 필수3job 모두 성공했다.
+
+운영 후속 관찰(읽기 검토, 아직 미구현): Java GenerationClient가 `generation_language_mismatch`를 알 수 없는 오류로 처리해 `generation_unavailable`로 축약하고, React는 일반 모델 사용 불가 안내를 표시한다. 원문/질문은 보존되지만 Q&A 오류 배너는 재시도만 직접 제공한다. 새 안전한 오류 분류와 질문·필터를 유지하는 원문 검색 전환을 Java HTTP/브라우저 회귀로 개선할 수 있다. 실패 후보 채택이나 의미검증 성공으로 해석하지 않는다.
 
 ## C2 새 중립4회 완료 · 품질 비교 계획 봉인
 
