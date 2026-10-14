@@ -40,4 +40,26 @@ uv run --locked --no-sync pytest -q tests/test_meeting_requirements_review.py te
 uv run --locked --no-sync pytest -q
 ```
 
-모델·질문을 실행하는 명령은 아직 제공하지 않는다. 다음은 새 단일 후보의 중립 자원 검사·품질 실행·판정 잠금 도구를 구현하고 전체 toolchain을 고정하는 것이다. 그 후 등록한 새 자료 계열의 원문 채택과 별도 검토, 질문 작성·검토·고정, 공식 입력 길이 검사 순서로 진행한다. 격리 검증 본문은 부모/설계자/구현자가 열지 않는다. 이전 C0/C1/C2 평가를 재실행하지 않는다.
+새 `probe_meeting_requirements.py`와 `audit_meeting_requirements.py` 및 대응 검사를 구현했다. 모델·질문 실행은 전체 toolchain 고정과 새 자료 사전검토 이후에만 연다. 그 후 등록한 새 자료 계열의 원문 채택과 별도 검토, 질문 작성·검토·고정, 공식 입력 길이 검사 순서로 진행한다. 격리 검증 본문은 부모/설계자/구현자가 열지 않는다. 이전 C0/C1/C2 평가를 재실행하지 않는다.
+
+운영 연결도 별도 남아 있다. 현재 `serve_meetings_candidate.py`는 이전 grammar worker를 시작하며 C3 runtime을 선택하지 않는다. 기존 GGUF 서비스 launcher의 GPU 설정도 이번 평가의24층 설정과 다르다. 오프라인 통과만으로 이 명령을 C3 서비스 실행법으로 안내하지 않는다. 품질 기준을 통과한 경우 새 명시적 worker/launcher와 Java·React 실제 운영 회귀를 연결하고 기존 동결 launcher는 보존해야 한다.
+
+## 실행·감사 도구의 검증 범위
+
+새 실행기는 호출 직전 영수증과 전체 호출 장부를 저장하고, 실제 전송과 wrapper 시도를 따로 센다. 첫 단계 원본으로 두 번째 prompt를 재구성하며 입력 상한 초과는 두 번째 전송 전에 거절한다. 실패한 출력 디렉터리도 다시 사용하지 않는다. 원본 모델 응답·설정·토큰·시간·정리 기록을 보존하고, 실제 측정하지 않은 GPU 메모리는 미측정으로 적는다.
+
+감사 도구는 최종 답변만 먼저 익명화해 판정·잠금한 뒤 모델의 요구 계획을 공개한다. 계획 진단으로 잠긴 답변 점수를 고칠 수 없다. Validation은 calibration 원본 전체와 6/6 기준을 재생한 뒤에만 열린다. 현재 split 잠금과 calibration gate 재생, 마지막 요청의 process 정리 시간은 [계약 명확화](MEETINGS-C3-EXECUTION-CLARIFICATIONS.md)를 따른다. 원래 계약과 후보28 바이트는 보존한다.
+
+구현자 최종 묶음69통과/Windows 링크권한1skip(324.02초), 마지막 준비 영수증 동일성 검사1통과(8.30초)로 고유70통과/1skip이다. 전부 새 합성 자료와 HTTP MockTransport이며 실제 추론 결과가 아니다. 첫 임시파일 suffix 구현 오류와 합성 fixture의 판단 필드/예외형 오류는 별도 실패 이력으로 남긴다. 부모가 CLI 도움말2개와 Ruff를 확인했고, 전체 Python 회귀·독립 검토와 최종 source freeze는 STATUS에서 후속 상태를 확인한다.
+
+```powershell
+uv run --locked --no-sync pytest -q tests/test_probe_meeting_requirements.py tests/test_audit_meeting_requirements.py
+uv run --locked --no-sync python -m scripts.probe_meeting_requirements --help
+uv run --locked --no-sync python -m scripts.audit_meeting_requirements --help
+```
+
+## 전체 도구 고정 결과
+
+수정 후 준비·판정·실행·감사 결합 합성 검사 224통과/2Windows 링크권한skip(400.23초)와 Ruff를 확인했다. 독립 검토가 발견한 seed/attestation 지연 검증은 호출 전과 매 전송 전에 실제 바이트를 확인하도록 고쳤고 같은 재현으로 거절을 재확인했다. 이전 전체2126/8skip은 수정 전 기준이다.
+
+전체66바인딩은 `data/evaluation/meetings-c3-toolchain-source-freeze-v1.json` (SHA `0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3`)이다. 코드/원계약/새 명확화/의존성을 고정했으며 실제 `verify_code` 검증도 통과했다. `experiments/results/meetings-c3-execution-tooling-v1.json`에 실제 역할·초기 실패·최종 검사·보존 hash를 기록한다. 새 커밋/CI 상태는 STATUS를 따른다. 현재 실제 C3 원문·문항·공식 tokenizer·native0이며 다음은 새 split별 출처 채택이다.

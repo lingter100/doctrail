@@ -1,6 +1,24 @@
 # 진행 상태
 
+## C3 전체 실행 도구 고정 · 새 출처 준비 다음
+
+수정 후 prepare/review/probe/audit 결합 검사 **224통과/2Windows 링크권한skip, 400.23초**와 전체 Ruff가 통과했다. 독립 Astra high 재검토가 같은 변조 재현을 다시 실행해 의미 자료 열람·모델 전송 전에 `c3_hash_changed`로 거절됨을 확인했다. 새 확정 미해결 결함0은 이 검토 범위의 결과다. 앞선2126/8skip 전체 실행은 수정 전 기준으로 보존하며 수정 후 전체 검사로 바꾸지 않는다.
+
+`data/evaluation/meetings-c3-toolchain-source-freeze-v1.json`에 전체66파일을 고정했다(SHA `0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3`). 후보28/닫힌 C2 72·41·18 바인딩과 원래 실행 계약은 그대로다. 새 고정 파일을 실제 `verify_code`로 재검증했다. 상세 검사·실패·역할은 `experiments/results/meetings-c3-execution-tooling-v1.json`에 보존한다. Git 인덱스 바이트도 커밋 전에 대조하며 새 커밋의 원격 CI는 별도로 확인한다.
+
+다음은 이 고정 커밋과 필수 CI 통과 후 새 calibration/격리 validation의 원문 채택·합성 원문 작성·전체 Java 처리 대조와 별도 source 사전검토다. Source를 먼저 고정한 뒤 질문을 작성한다. 현재 실제 C3 새 원문/문항/공식 tokenizer/native0·human0, 서비스 채택/phase1 미완료, PR14 draft·전체 목표 active다. 부모는 격리 validation 의미 자료를 열지 않는다.
+
+## C3 실행·감사 구현 완료 · 독립 검토 수정 및 전체 회귀 진행
+
+새 probe/audit와 검사4파일은 구현자 기준 고유70통과/Windows 링크권한1skip이다(최종69/1skip 324.02초 + 준비 receipt 동일성1통과 8.30초). 실제 HTTP 경로를 MockTransport로 연결한 합성 검사이며 공식 tokenizer/native0이다. 부모가 CLI 도움말2개, 전체 Ruff, candidate28 및 C2 72/41/18 바이트 동일성, import closure43을 확인했다. 전체 toolchain 예정 집합은66개이며 아직 freeze는 생성하지 않았다.
+
+별도 Astra high 검토가 seed/attestation의 실제 hash·내용 검사가 audit 때까지 늦춰지는 결함1개를 합성 재현했다. 부모가 결과를 보존했고 기존 Astra high c2_comparison_runner가 새 probe와 대응 검사2파일만 수정 중이다. 양 split metadata를 호출 전에 검증하고 이후 변경도 추가 호출 전에 거절해야 한다. 부모 전체 Python은 수정 전 기준 **2126통과/8skip/기존경고1,646.97초**로 완료했다. 뒤의 수정 후 전체 실행으로 해석하지 않는다. 추가 확정 결함0은 이 독립 검토의 범위이며 실제 품질 성공이 아니다.
+
+Astra xhigh 원 설계자가 [잠금·정리 명확화](MEETINGS-C3-EXECUTION-CLARIFICATIONS.md)를 SHA `32fe70d00c701370b53064ac8a4dc0deee27e6b91682b5505991cd3200c41dc4`로 작성했다. 원 계약·모델·상한·선택 기준은 변경하지 않는다. 새 자료/문항/공식 tokenizer/native0, 사용자 검수0, 목표 active, phase1/PR14 미완료/draft다. 최종 수정 검증·전체 freeze·사용자 명의 커밋/CI 후 새 source 채택을 계속한다.
+
 ## C3 입력 준비·판정 규약 검증 완료 · 실행기 구현 계속
+
+준비/review 커밋3590021의 push38518697261/PR38518701153에서 backend/java-service/web 필수3job이 각각 모두 통과했다. GitHub author/committer는 모두lingter100이다. 아래의 합성 검사와 실제 모델 품질은 계속 구분한다.
 
 새 준비/review와 대응 검사4파일을 구현했다. 기존 답변 채점 계산은 유지하고 C3 6/8 구성, 실제 출처 작성·채택자와 별도 검토자, 원문에서 재구성한 전체 청크, 원본 Python 처리/Java 대조 영수증을 검증한다. 모든 body 경로와 code-freeze 전용 경로를 읽기 전에 제한한다. 독립 검토가 찾은 code-freeze 인자 우회는 새 합성 파일3종의 읽기0 회귀로 수정했다. 실제 격리 자료 노출은 없다.
 

@@ -69,7 +69,14 @@ JAVA_PARITY_FILES = {"server/src/main/java/io/doctrail/Ingest.java",
 REUSED_FILES = {"src/doctrail/meeting_comparison_review.py", "src/doctrail/meeting_answer_review.py",
     "scripts/prepare_meeting_budget_inputs.py", "scripts/check_meeting_review_token_budget.py",
     "scripts/prepare_meeting_source_inventory.py", "scripts/prepare_meeting_plaintext_source_inventory.py",
-    "src/doctrail/ingest.py", "src/doctrail/retrieval.py"} | SERVICE_FILES | HELPER_FILES | JAVA_PARITY_FILES
+    "scripts/probe_meeting_answer_review.py", "scripts/probe_meeting_blocks_resources.py",
+    "scripts/prepare_meeting_gguf.py", "scripts/serve_meetings_gguf.py", "scripts/serve_models.py",
+    "scripts/serve_meetings.py", "scripts/backup_db.py", "scripts/benchmark_api.py",
+    "scripts/evaluate_dataset.py", "scripts/prepare_corpus.py", "scripts/question_dataset.py",
+    "scripts/validate_splits.py", "scripts/verify_java_service.py", "src/doctrail/app.py",
+    "src/doctrail/ingest.py", "src/doctrail/retrieval.py",
+    "docs/MEETINGS-C3-EXECUTION-CLARIFICATIONS.md"} | SERVICE_FILES | HELPER_FILES | JAVA_PARITY_FILES
+# Bind transitive imports too; this does not execute their experiment entrypoints.
 ROLES = {"source": {"manifest", "inventory", "processing_receipt", "prereview", "java_parity"},
          "item": {"draft", "oracle", "context_selection", "prereview", "source_freeze", "code_freeze"}}
 

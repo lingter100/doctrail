@@ -1,5 +1,19 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · C3 호출 전 검증 수정과 전체 도구 고정
+
+실제 Astra high c2_comparison_runner가 양 split seed·attestation의 원래 바이트·hash·32..128 길이·역할·노출·현재UTC를 호출 전에 확인하고 각 전송 직전에 재검증하도록 수정했다. 신규41합성 검사 중 첫39통과/2실패는 malformed JSON의 frozen WorkerError를 ValueError로 예상한 검사 오류였다. 기대형 수정 후 해당2통과이며 구현을 느슨하게 하지 않았다.
+
+실제 Astra high knowledge_recovery_review가 최종 두 파일 SHA와 같은 합성 재현을 독립 재확인해 의미 자료 열람 전 거절을 확인했다. 부모는 수정 후 네 모듈/검사 결합 224통과/2skip(400.23초), Ruff, 원래 freeze 바이트와66개 정확한 binding 집합을 검증하고 고정/검증 영수증을 작성했다. 수정 전 전체 Python 결과·초기 실패·이전 준비 영수증은 그대로 보존한다. 모두 합성 검사이며 실제 C3 모델·공식 tokenizer·새 질문·사람 검수0, 부모 모델 설정 변경0이다.
+
+## 2026-10-14 · C3 실행·답변 잠금 구현
+
+기존 실제 Astra high c2_comparison_runner가 새 probe/audit와 검사4파일을 구현하고 고유70통과/Windows 링크권한1skip을 보고했다. 실제 모델·공식 tokenizer·자료 작성·사용자 검수0이다. 최초 구현 suffix 오류와 합성 fixture 필드/예외형 오류는 숨기지 않고 후속 성공과 구분한다. 부모는 전용 metadata 경로와 제외 역할 누락을 지적하고, 최종4파일 SHA/LF·기존28/72/41/18 고정파일·재귀 import43개를 대조했다. 이전 준비/review 영수증은 당시 파일의 기록으로 보존하며 확장된 binding 목록은 새 검증에 연결한다.
+
+기존 실제 Astra xhigh c2_budget_followup이 원래 계약 바이트를 보존한 채 잠금 및 process 정리 경계만 별도 명확화했다. 재개 요청1회는 동시 역할 제한으로 거절됐고 구현 역할 종료 후 실제 수락돼 수행했다. 부모 모델 변경은 없다. 기존 실제 Astra high knowledge_recovery_review는 seed·attestation을 바꾼 새 합성 재현으로 호출 전 실제 metadata 검증 누락1개를 확인했다. 구현자가 새 probe/검사2파일에서 수정하며 기존 도구·실제 자료는 건드리지 않는다.
+
+부모 전체 Python 기준 실행은2126통과/8skip/기존경고1,646.97초다. 실행 중 뒤의 독립 지적 수정이 시작됐으므로 이 결과를 수정 후 전체 실행으로 바꾸어 쓰지 않는다. 후속 표적·통합 검사와 원격 CI는 별도 기록한다.
+
 ## 2026-10-14 · C3 준비·판정 도구와 격리 오류 수정
 
 기존 실제 gpt-6-astra/high requirements_candidate가 새 prepare/review와 검사4파일을 구현했다. 부모가 진단 근거 누락·사실 연결 모순·작성자/처리 증거 연결 누락을 찾아 수정 요청했고 합성 회귀로 보강했다. 기존 실제 Astra high knowledge_recovery_review는 독립 읽기 검토와 새 합성 sentinel 재현으로 code-freeze 인자의 읽기 우회1개를 찾았다. 구현자가 전용 경로 guard와 읽기0 회귀3개로 고쳤다.
