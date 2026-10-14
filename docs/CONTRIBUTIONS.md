@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 실제 C3 neutral4와 품질 계획
+
+부모가 d9273c8의 고정 neutral을 한 번 실행했다. 실제4native·정상8.063초/부하85.547초·소유정리/metadata재시작/로그0을 확인했고 원본 공개사본 및 동결 재생을 검증했다. 결과 보고와 양split/독립judge/원문노출을 연결한 새 품질 실행계획도 부모가 작성해 모델 없는calibration check를 통과했다. 아직품질생성/사람검수0이며 자원통과를 답변정확성이나사용자승인으로기록하지않는다.
+
 ## 2026-10-14 · 격리 validation tokenizer와 neutral 등록
 
 기존c2_validation_source_b(Astra xhigh)가v2고정커밋뒤공식offline입력8개를한번측정해1088..3450tokens/8통과를보고했다. 원본공개사본/139보호파일/전체payload보존을대조했다. 부모는metadata/hash와동결neutral등록을담당하고검증문항의의미를열람하지않았다. 등록시normal360·stress5081/5081이며둘째normal은미측정이다. 이때native0·human0이고이후실측과구분한다.

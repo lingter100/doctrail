@@ -1,5 +1,15 @@
 # 진행 상태
 
+## C3 실제 neutral4 통과 · 단발 품질 실행계획 고정
+
+d9273c8 고정 뒤 새 neutral4를 한 번 실행해 모두 통과했다. 정상 두 단계 입력360/383·출력32/24tokens/EOS, 요청8.063초다. 부하 두 단계는 각각5081입력/384출력/length, 공유 요청85.547초로90초 안이다. 최초 소유 process 정리1.015초·재시작1회 식별 복구·추가 생성0·재시작 정리0.984초·소스66불변·로그0bytes를 확인했다. 전체191.859초는 startup/recovery 포함이며 요청 지연과 다르다. RSS 표본 최대 정상6408.61/부하6921.80MiB, GPU peak/전력비 미측정이다. 부하의 약4.45초 여유와 단발 관측 한계도 기록한다.
+
+[자원 결과](MEETINGS-C3-RESOURCES.md), 원본 바이트 사본 `meetings-c3-resources-v1.json` SHA f15669fb55f131e077f7650092a4680c4a80ac65a099b522b78230bfabad0132 및 별도 reporting 영수증을 따른다. 동결 원본 재생 검증은 통과했다. 이4호출은 자원 검사이고 calibration/validation 품질 생성은 아직0이다. 같은 자원 검사는 재실행하지 않는다.
+
+실제 자원·양쪽 입력·독립judge2·원래source 노출을 연결한 `meetings-c3-quality-plan-v1.json` SHA c5e3f11479e9f240befe1ffcaf83aed0ddcf2288ea294a10bfe0432574def24b을 등록했고 calibration 모델 없는check가통과했다. 이 계획 커밋 뒤 cal6 단발 실행→독립 최종답변 잠금→계획 진단 순서다.6/6 gate 전val8 생성은금지하며 부모는검증의미자료를열지않는다. 누적native4/최대32·human0·유료0, goal active·phase1/PR14 미완료/draft다.
+
+d9273c8의 push38534131400/PR38534137855에서 필수3job이 각각 모두 성공했다. 새 결과/계획 head의 CI는 후속 기록으로 구분한다.
+
 ## C3 양 split 공식 입력14개 통과 · 새 neutral4 실행 등록
 
 Validation item v2 고정272f867의 push38533328294/PR38533336903 필수3job이각각모두성공했다. 그커밋뒤격리담당자가공식offline준비를1회실행해8/8통과·실패/미측정0·1088..3450≤5120을확인했다. Input/receipt 원본을 `meetings-c3-validation-inputs-v1`에바이트그대로복사했고139개보호파일/원래payload/whole-context/survey계약불변을확인했다. Input SHA42722cb2dcd0de88d84c4384f7862b6b02757c0c7ed5dbfa5179a0f6617ec6f3, receipt23ddd4d6c2d924405a2d524b39df031dccb202ba737e564f83a108e928ac7668. 부모는metadata/hash만사용한다.
