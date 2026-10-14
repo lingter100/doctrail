@@ -2,6 +2,12 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+## C2 calibration 공개 출처 채택·처리 규칙 등록
+
+고정된 OpenTelemetry community의 공개 절차 문서2개를 전체 본문·Apache-2.0·별도 고지 여부와 함께 검토했다. [채택·처리 규칙](MEETINGS-C2-CALIBRATION-SOURCES.md)과 [manifest](../data/evaluation/meetings-c2-calibration-v1/source-manifest.json)에 원본/처리본 SHA, Git blob, 원본 수집 영수증, 기존 Java/Python 처리 소스 hash를 기록했고 부모가 다시 대조했다. 실제 회의 발생이나 완료 기록으로 해석하지 않는다.
+
+공개 calibration source2개만 채택됐으며 합성 본문·질문·oracle·선택 context·tokenizer·품질 모델 호출은0이다. 다음은 **새 처리 helper와 두 공개 전체 문서의 실제 Java/Python 청크 동등성 확인·동결**이다. 그 뒤 합성 원문을 작성·고정하고 새 질문을 준비한다. Validation 자료 채택은 아직 시작하지 않았고 역할 분리 후 별도로 진행한다. 사용자 승인 대기가 아니며 목표는 active다.
+
 ## C2 비교 실행·독립 검토 도구 구현
 
 새 비교 runner, 공식 tokenizer 입력 준비, 엄격 oracle/판정 schema와 익명 audit를 실제 구현했다. [실행 계약](MEETINGS-C2-REVIEW-CONTRACT.md)을 따른다. 두 방식의 같은 DTO·교대 순서·calibration16/선택 후 validation12 호출 상한·실행 전 기록·한 번만 쓰는 출력 경로·90초 제한을 강제한다. 검토 판정을 먼저 잠근 뒤 대응표를 열고 전체 근거를 재생해 선택한다. 새 품질 질문·oracle·실제 비교 호출은 여전히0이다.
@@ -21,6 +27,8 @@
 구현 `48aa4f6`은 사용자 계정lingter100이 author/committer로 연결됐지만 원격 push/PR CI의 backend에서1실패가 났다(1,459passed/21skipped). Java-service와web은 성공했다. 합성 보류 fixture가 가짜 native 처리 시간을10ms로 고정해 Linux의 더 짧은 전체 요청 시간과 모순됐기 때문이다. 실제 시간 검사·모델·prompt·지표를 느슨하게 바꾸지 않고 fake backend의 시간값을 보류/잘림 fixture가 그대로 쓰도록 수정했다.
 
 수정 후 해당 runner/audit75passed/1Windows-symlink-skip와 Ruff를 확인했다. `meetings-c2-comparison-source-freeze-v1.json`과 실패한 CI는 보존하고, 질문 작성 전 테스트1파일만 다른 **source-freeze-v2**를 등록한다. 새 품질 질문·모델 호출은0이다. 별도 Astra xhigh 역할이 calibration 공개 source 이용 조건/처리 manifest를 준비 중이며, 아직 질문/합성 원문을 작성하지 않는다. 새 validation 역할 생성은 thread limit으로 거절됐고 시작으로 집계하지 않는다.
+
+수정 고정 커밋 `8582e60`의 [push38493453786](https://github.com/lingter100/doctrail/actions/runs/38493453786)와 [PR38493457841](https://github.com/lingter100/doctrail/actions/runs/38493457841)에서 backend·java-service·web이 모두 성공했다. source41파일이 실제 디스크·Git index의 hash와 같은지 확인했고 GitHub author/committer도 각각lingter100이다. CI 성공은 실제 모델 품질 또는 phase1 완료가 아니다.
 
 
 **C2-P0 실제 자원 확인은 통과했다.** `662965d`로 고정한 문단·목록·표·코드 보존 후보를 새 합성 중립 자료2개에 한 번씩 실행했다. 정상3.079초(474입력/27출력/EOS), 강제 부하31.953초(3881입력/384출력/length)이며 source28해시·native로그0바이트·소유 프로세스 정리·metadata만 재시작을 확인했다. [실측 원본과 한계](MEETINGS-C2-RESOURCES.md)를 따른다. **native2·품질 질문/평가0이며 서비스 채택이 아니다.** 같은 중립 검사를 다시 실행하지 않는다.

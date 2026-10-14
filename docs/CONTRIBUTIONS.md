@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · calibration 출처 확인
+
+실제 수락된 gpt-6-astra/xhigh 역할 `c2_calibration_source`가 새 공개2문서와 고정 LICENSE/tree를 확인하고 source manifest·처리 규칙을 작성했다. 부모는 원본/정규화/Git blob/수집 영수증/기존 처리 소스 hash와 작성 수량0을 별도로 대조했다. 첫 부모 확인 스크립트에서 Git blob의 SHA-1을 SHA-256으로 잘못 비교해 assertion이 발생했으며 확인식만 바로잡아 원본과 manifest 일치를 확인했다. 원본 변경은 없었다. 자료 작성자는 후속 독립 의미 scorer와 격리 validation 작성자에서 제외한다. 사용자 검수0·새 모델 호출0이다.
+
 ## 2026-10-14 · C2 비교 runner·입력 준비·익명 audit
 
 새 `c2_comparison_runner`에 실제 도구가 수락한 설정은 gpt-6-astra/high다. 이 역할은 새 runner/합성 검사, 이후 review 계약의 family별 구성·엄격 타입 보완/검사, 모델 없는 입력 준비 도구를 구현했다. 부모가 예산 일치 대조군과 새 schema·audit 초안을 작성하고 역할간 API를 정리했으며 원본 대조·경로 선검사·검토 잠금·선택 재생·추가 합성 검사를 통합했다. 같은 역할이 부모 audit와 L0/C2 runtime을 읽기 전용 코드 검토했다. 이는 독립 의미 판정이 아니며 앞으로의 C2 출력 scorer로 사용하지 않는다.
@@ -13,6 +17,8 @@
 부모가48aa4f6 Linux CI의1실패를 확인해 합성 보류 fixture의 고정10ms와 빠른 실제 테스트 실행 시간 사이의 모순으로 추적했다. 서비스/모델 제한을 유지하고 fixture 시간 전달만 고쳤으며 관련75passed/1skip·Ruff를 확인했다. source-freeze-v1은 보존하고 v2를 질문 작성 전에 고정한다.
 
 새 calibration source 채택 역할 `c2_calibration_source`는 도구가 실제 gpt-6-astra/xhigh로 수락했다. 원문 이용 조건과 처리/선택 규칙 등록을 맡고 질문 작성은 manifest 고정 이후로 남긴다. 별도 `c2_validation_source` Astra xhigh 생성은 thread limit으로 거절됐으며 수행됐다고 기록하지 않는다.
+
+부모가8582e60의 push/PR 필수3job 모두success와 사용자author/committer연결을 확인했다. 수정 전48aa4f6의 실패를 지우거나 최신 성공으로 소급 대체하지 않는다.
 
 ## 2026-10-14 · C2 실제 자원 확인과 대조군
 

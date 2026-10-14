@@ -1,0 +1,385 @@
+{
+  "schema_version": 1,
+  "manifest_id": "meetings-c2-calibration-source-manifest-v1",
+  "kind": "source_adoption_and_processing_registration_before_question_authoring",
+  "created_at": "2026-10-14T01:05:20+00:00",
+  "status": "public_sources_adopted_processing_registered_pending_parent_commit_and_new_helper_freeze",
+  "phase": "calibration",
+  "family_registry": {
+    "path": "data/evaluation/meetings-c2-family-registry-v1.json",
+    "sha256": "0fe710907f10dfc407997970ed176c0a657aa6d1e24a0ca95f4da07f8dd9c76c",
+    "registration_commit_parent_reported": "8a424be"
+  },
+  "active_comparison_source_freeze": {
+    "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+    "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+    "commit_parent_reported": "8582e602906d465a43684bef20b69ded0aaa46b1",
+    "remote_ci_status": "parent_reported_push_and_pr_backend_web_java_service_all_success",
+    "superseded_v1_preserved": true,
+    "v1_commit_parent_reported": "48aa4f6",
+    "scope_of_v2_change_parent_reported": "synthetic timing fixture only; no model, prompt, runtime or semantic policy change"
+  },
+  "documentation": "docs/MEETINGS-C2-CALIBRATION-SOURCES.md",
+  "counts": {
+    "questions_authored": 0,
+    "oracles_authored": 0,
+    "evaluation_contexts_selected": 0,
+    "synthetic_source_bodies_authored": 0,
+    "tokenizer_runs": 0,
+    "quality_model_calls": 0,
+    "native_calls": 0,
+    "model_downloads": 0,
+    "paid_calls": 0,
+    "human_reviews": 0
+  },
+  "families": [
+    {
+      "family_id": "C2-F01",
+      "origin": "public",
+      "planned_slots": {
+        "items": 4,
+        "language": {
+          "ko": 2,
+          "en": 2
+        },
+        "answerability": {
+          "answerable": 3,
+          "insufficient_evidence": 1
+        }
+      },
+      "source_language": "en",
+      "repository": "open-telemetry/community",
+      "repository_url": "https://github.com/open-telemetry/community",
+      "immutable_commit": "df3343ccbecb84a6e25dcd9610cb9a93ad377a93",
+      "committed_at": "2026-10-13T17:29:25Z",
+      "resolved_tree_sha1": "53a78862176b9fe860aff208d28f2ab27a3062c4",
+      "tree_entries": 260,
+      "tree_truncated": false,
+      "license": {
+        "spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "raw_url": "https://raw.githubusercontent.com/open-telemetry/community/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/LICENSE",
+        "immutable_url": "https://github.com/open-telemetry/community/blob/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+        "per_source_body_checked": true,
+        "legal_notice_paths_in_entire_pinned_tree": [
+          "LICENSE"
+        ],
+        "notice_file_present": false,
+        "file_specific_overrides_found": false,
+        "external_linked_content_adopted": false,
+        "license_audit_scope": "Pinned tree path inventory, root LICENSE text and both complete selected file bodies; no assertion about rights to linked external content."
+      },
+      "source_suitability": {
+        "verdict": "ADOPTED",
+        "basis": [
+          "Procedural prose with qualifications, multiple requirements, roles and permissions.",
+          "Two distinct registered documents can support genuinely necessary multi-document evidence.",
+          "Native headings, paragraphs, lists, nested lists, links and summary table remain intact."
+        ],
+        "constraints": [
+          "Policy documents do not establish that a specific meeting, appointment, vote or completed task occurred.",
+          "Respect role scope, exceptions, discretionary language and SIG-specific qualifications.",
+          "Do not silently equate broad membership voting wording with charter Members of Standing criteria.",
+          "Repository commit time and last-updated month are not a meeting or event date.",
+          "An abstention facet must be absent from adopted source bodies, not hidden by deliberately dropping available evidence.",
+          "Question-level correctness and budget feasibility are not established by source adoption."
+        ]
+      },
+      "sources": [
+        {
+          "source_id": "c2-cal-f01-governance-charter",
+          "document_id": "c2-cal-f01-governance-charter",
+          "revision": 1,
+          "registration_ordinal": 0,
+          "origin": "public",
+          "source_kind": "policy_document",
+          "title": "OpenTelemetry Governance Committee Charter",
+          "path": "governance-charter.md",
+          "immutable_url": "https://github.com/open-telemetry/community/blob/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/governance-charter.md",
+          "raw_url": "https://raw.githubusercontent.com/open-telemetry/community/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/governance-charter.md",
+          "git_blob_sha1": "c756e99bdeb90fa21b12af315a820acf865157a7",
+          "raw_sha256": "ccb43c8d7c0b27797c5202f14e7767f692dbf0869f31688cbe5c02a50f0e17de",
+          "processed_sha256": "ccb43c8d7c0b27797c5202f14e7767f692dbf0869f31688cbe5c02a50f0e17de",
+          "raw_size_bytes": 15223,
+          "processed_codepoints": 15215,
+          "raw_encoding": "UTF-8",
+          "bom": false,
+          "lf_count": 307,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "file_specific_license_notice_found": false,
+          "third_party_adaptation_notice_found": false,
+          "license_id": "Apache-2.0",
+          "page": null,
+          "meeting_date": null,
+          "source_updated_month_literal": "2026-02",
+          "source_updated_month_is_not_meeting_date": true,
+          "local_raw_snapshot": ".local/c2-source-adoption/calibration/raw/governance-charter.md",
+          "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS"
+        },
+        {
+          "source_id": "c2-cal-f01-membership",
+          "document_id": "c2-cal-f01-membership",
+          "revision": 1,
+          "registration_ordinal": 1,
+          "origin": "public",
+          "source_kind": "policy_document",
+          "title": "Membership, Roles, and Responsibilities",
+          "path": "guides/contributor/membership.md",
+          "immutable_url": "https://github.com/open-telemetry/community/blob/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/guides/contributor/membership.md",
+          "raw_url": "https://raw.githubusercontent.com/open-telemetry/community/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/guides/contributor/membership.md",
+          "git_blob_sha1": "f18f974f0859d8fe45267e50c571c1a46f121484",
+          "raw_sha256": "5a55a6a7a8a83e1c4c1b73fefbf4d71ed7adca400fc3c558c9e342ff6c00042f",
+          "processed_sha256": "5a55a6a7a8a83e1c4c1b73fefbf4d71ed7adca400fc3c558c9e342ff6c00042f",
+          "raw_size_bytes": 25854,
+          "processed_codepoints": 25854,
+          "raw_encoding": "UTF-8",
+          "bom": false,
+          "lf_count": 449,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "file_specific_license_notice_found": false,
+          "third_party_adaptation_notice_found": false,
+          "license_id": "Apache-2.0",
+          "page": null,
+          "meeting_date": null,
+          "source_updated_month_literal": null,
+          "source_updated_month_is_not_meeting_date": true,
+          "local_raw_snapshot": ".local/c2-source-adoption/calibration/raw/guides/contributor/membership.md",
+          "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS"
+        }
+      ]
+    },
+    {
+      "family_id": "C2-F02",
+      "origin": "synthetic",
+      "planned_slots": {
+        "items": 4,
+        "language": {
+          "ko": 2,
+          "en": 2
+        },
+        "answerability": {
+          "answerable": 3,
+          "insufficient_evidence": 1
+        }
+      },
+      "source_language": "ko",
+      "topic": "One new fictional indoor ice-rink resurfacing and session-coordination organization",
+      "status": "CONSTRAINTS_REGISTERED_BODY_NOT_AUTHORED",
+      "sources": [
+        {
+          "source_id": "c2-cal-f02-rink-rules",
+          "document_id": "c2-cal-f02-rink-rules",
+          "revision": 1,
+          "registration_ordinal": 2,
+          "source_kind": "operating_rules",
+          "meeting_date": null,
+          "date_rule": "Future source distinguishes document date from rule effective date.",
+          "raw_sha256": null,
+          "processed_sha256": null
+        },
+        {
+          "source_id": "c2-cal-f02-rink-coordination",
+          "document_id": "c2-cal-f02-rink-coordination",
+          "revision": 1,
+          "registration_ordinal": 3,
+          "source_kind": "coordination_meeting",
+          "meeting_date_assignment": "Only a meeting date explicitly stated in the future synthetic body; no date authored now.",
+          "date_rule": "Document creation, meeting, due and execution dates must not be substituted for each other.",
+          "raw_sha256": null,
+          "processed_sha256": null
+        },
+        {
+          "source_id": "c2-cal-f02-rink-handoff",
+          "document_id": "c2-cal-f02-rink-handoff",
+          "revision": 1,
+          "registration_ordinal": 4,
+          "source_kind": "handoff_status_record",
+          "meeting_date": null,
+          "date_rule": "Future source distinguishes record date, planned action date and actual action date.",
+          "raw_sha256": null,
+          "processed_sha256": null
+        }
+      ],
+      "authoring_constraints": [
+        "No scene, organization name, person, date, number, question or answer before parent commits this protocol and new helper freeze.",
+        "Clearly mark each future raw document as AI-authored synthetic evaluation data about a fictional organization.",
+        "Use one newly invented organization; do not reuse previous pool wording, events, facts or numeric answers.",
+        "No real personal data, private uploads or facts copied from the validation family.",
+        "Write natural Korean paragraphs and lists; use tables only where natural. Do not adjust source line or paragraph length to candidate segmentation.",
+        "Distribute policy and decision/execution evidence across documents without duplicating every sufficient fact in each source.",
+        "Distinguish proposals, decisions, unresolved matters, assigned actions and completed actions explicitly.",
+        "If rules or decisions change or are cancelled, state target and ordering; assignment does not imply completion.",
+        "Author raw UTF-8/LF/NFC text and verify service normalization identity.",
+        "Review source coherence and freeze complete source bodies/hashes before writing calibration questions and oracles."
+      ]
+    }
+  ],
+  "processing_protocol": {
+    "id": "c2-cal-source-processing-v1",
+    "scope": "Full adopted documents before context selection; no policy adapter or frozen source41 edits.",
+    "raw_policy": "Retain exact upstream bytes, LF, final newline, BOM/CR observations and SHA256 in ignored raw snapshots.",
+    "decode": "Strict UTF-8; follow existing service ingest removal of a leading UTF-8 BOM.",
+    "normalization": "Existing service ingest only: CRLF/CR to LF then Unicode NFC. Both adopted public sources verified identity.",
+    "prohibited_transformations": [
+      "strip or whitespace compaction",
+      "line wrapping or joining",
+      "Markdown rendering",
+      "link resolution",
+      "translation",
+      "summarization",
+      "paragraph splitting or merging to fit C2",
+      "candidate-output-driven edits"
+    ],
+    "pages": "One page (0, full processed codepoint length, null) per Markdown or synthetic text source.",
+    "existing_service_reference_sha256": {
+      "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+      "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+      "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+      "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56"
+    },
+    "reusable_python_functions": [
+      "doctrail.ingest.extract",
+      "doctrail.ingest.normalize",
+      "doctrail.retrieval.chunk_content"
+    ],
+    "authoritative_java_functions": [
+      "io.doctrail.Ingest.extract",
+      "io.doctrail.Ingest.normalize",
+      "io.doctrail.Retrieval.chunkContent"
+    ],
+    "chunk_algorithm": {
+      "max_codepoints": 1000,
+      "boundary_search_min_codepoints": 500,
+      "overlap_codepoints": 150,
+      "boundary_characters": [
+        "LF",
+        "ASCII SPACE"
+      ],
+      "pseudocode": [
+        "start = page.start",
+        "end = min(start + 1000, page.end)",
+        "if end < page.end: find greatest index in [start + 500, end) whose character is LF or ASCII SPACE; if present set end = index + 1",
+        "register source[start:end] unchanged when nonblank with ordinal equal to prior registered chunk count",
+        "if end == page.end stop, else start = max(start + 1, end - 150)"
+      ],
+      "parameter_origin": "Existing Java/Python service code, not C2 block-cap tuning."
+    },
+    "new_helper_status": "not_implemented_in_this_source_adoption_task",
+    "required_before_question_authoring": [
+      "Implement a NEW helper reusing existing ingest/chunk functions without modifying frozen policy files.",
+      "Verify full adopted documents against actual Java text, offset and ordinal results, including Unicode codepoints.",
+      "Freeze helper source/check receipt before synthetic source-body and question authorship."
+    ],
+    "parity_execution_performed": false,
+    "coordinate_system": "Unicode codepoints in full processed document; zero-based half-open [start,end).",
+    "revision_semantics": "Evaluation snapshot revision1, not upstream Git commit count.",
+    "chunk_id_format": "{document_id}-r1-c{ordinal:04d}",
+    "source_record_publication_policy": "Current tracked artifacts contain metadata only. Future committed verbatim excerpts must be deliberate reproducible evaluation source records with source URLs, immutable commit, full pinned LICENSE copy and prominent excerpt/structuring notice outside raw text. Raw snapshot caches remain ignored."
+  },
+  "context_selection_protocol": {
+    "selected_contexts_now": 0,
+    "selection_time": "After protocol/helper freeze and source-body inventory freeze, before tokenizer preparation and either arm output.",
+    "allowed_units": "Whole unmodified service chunks from full-document inventory; never sentence/paragraph resegmentation.",
+    "semantic_rule": "Choose source scope on task relevance; include service chunks needed for actor, condition, temporal and status qualifications. Record scope and semantic reason independent of either adapter.",
+    "records_required": [
+      "source_id",
+      "document_id",
+      "revision",
+      "chunk_id",
+      "ordinal",
+      "start_offset",
+      "end_offset",
+      "UTF-8 text SHA256",
+      "semantic selection reason"
+    ],
+    "order": "source registration_ordinal ascending, then chunk ordinal ascending",
+    "maximum_contexts": 10,
+    "both_arms_identical": [
+      "query",
+      "contexts.text",
+      "contexts.order",
+      "contexts.document_id",
+      "contexts.revision",
+      "contexts.chunk_id",
+      "contexts.title",
+      "contexts.meeting_date",
+      "contexts.page",
+      "contexts.start_offset",
+      "contexts.end_offset"
+    ],
+    "preserve": [
+      "inherent overlaps",
+      "original headings/lists/tables and natural syntax",
+      "context edges inside sentences/paragraphs/structures"
+    ],
+    "forbid": [
+      "merging adjacent chunks into one context",
+      "cropping a chunk",
+      "deduplicating repeated or overlapping text",
+      "injecting headings or attribution into evidence text",
+      "selecting/reselecting by C2 block size or line/block ID count",
+      "selecting/reselecting after official token preparation or model output",
+      "omitting source-available essential evidence to manufacture abstention",
+      "replacing preparation failures or lowering registered counts"
+    ],
+    "failure_rule": "If either arm fails source/grammar/context/token preparation, preserve preparation failure; do not trim, rewrite, swap contexts or silently replace a case.",
+    "multi_source_rule": "Every sufficient allowed evidence combination must require two distinct (document_id, revision) pairs; two chunks of one document do not qualify.",
+    "source_syntax_rule": "Retain complete raw/processed corpus including its table; preserve naturally mixed prose/list/structural syntax without adapter-driven selection."
+  },
+  "evidence_receipts": {
+    "raw_fetch_receipt": {
+      "path": ".local/c2-source-adoption/calibration/fetch-receipt.json",
+      "sha256": "985bc0bee83d503dc8f608ccc0794042f201a4a14fae0c8adaf3182d6a4c5561"
+    },
+    "commit_api": {
+      "url": "https://api.github.com/repos/open-telemetry/community/commits/df3343ccbecb84a6e25dcd9610cb9a93ad377a93",
+      "local_path": ".local/c2-source-adoption/calibration/commit.json",
+      "sha256": "f5256b51183eff6649788ba8d3f8ece7c9ed8b32d697957a895ad5ac6a77b9d5"
+    },
+    "resolved_tree_api": {
+      "url": "https://api.github.com/repos/open-telemetry/community/git/trees/53a78862176b9fe860aff208d28f2ab27a3062c4?recursive=1",
+      "local_path": ".local/c2-source-adoption/calibration/tree-resolved.json",
+      "sha256": "054eb62e07371140f2641065bbc6c35a5ae1ef3cba8d74cdf1e04663586ebbff"
+    },
+    "operational_log_policy": "No source/question text in application operational logs; public raw adoption snapshots are isolated evaluation artifacts."
+  },
+  "role_and_exposure": {
+    "source_author_role": "/root/c2_calibration_source",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "xhigh",
+    "actual_spawn_setting_evidence_owner": "parent spawn receipt",
+    "public_calibration_bodies_read": true,
+    "synthetic_bodies_authored": false,
+    "validation_body_or_oracle_read": false,
+    "prior_question_pools_or_raw_outputs_read": false,
+    "validation_metadata_only_seen": true,
+    "future_independent_semantic_scorer_eligible": false,
+    "future_isolated_validation_author_eligible": false,
+    "independent_prereview_performed": false,
+    "human_review_count": 0
+  },
+  "next_gates": [
+    "Parent commits source adoption/processing registration.",
+    "Parent confirms active comparison source-freeze v2 and required checks.",
+    "New source helper and actual Java parity check are frozen.",
+    "Synthetic bodies/source inventories are authored, reviewed and frozen.",
+    "Fresh calibration questions/oracles and separate prereview.",
+    "Official offline tokenizer preparation for both arms without generation.",
+    "Separate sealed execution plan; this manifest does not authorize an inference run."
+  ],
+  "limitations": [
+    "Source suitability does not establish question quality, semantic correctness, token fit or operational readiness.",
+    "Public procedural documents may overlap model pretraining.",
+    "Purposive small sample, English public sources and AI-authored synthetic sources carry domain/shared-author bias.",
+    "No real meeting history or Java/React service evaluation is established.",
+    "Phase1 remains incomplete and PR14 remains draft; no automatic adoption."
+  ]
+}
