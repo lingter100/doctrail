@@ -1,5 +1,9 @@
 # C3 원문·문항·실제 입력 준비
 
+## 후속: validation item v2 동결
+
+격리validation8의첫사전검토는7승인/1거절이었다. 원본은4e621cc에서보존했고, 검토자가지적한한oracle의사실설명/근거만새v2로보완했다. 질문및context-selection파일은byte동일,다른7oracle사례canonical동일이다. 별도재검토8승인/0거절/남은수정0과strict6파일동결이완료됐다. `meetings-c3-validation-v1/item-freeze-v2.json` SHA854305b8eda2f0044db6751c6542d97237c653c8395124b24f8def8f335227f4. 공식입력준비는동결커밋후에실행하며이기록시점validation tokenizer/native0이다. 상세의미검토는부모에게노출하지않고별도summary/hash만전달했다.
+
 2026-10-14 현재 calibration6의 공식 offline 입력 검사를 완료했다. 모델 답변 생성·의미 품질·서비스 채택은 아직0이다. 검증 원문의 부모 일부 노출은 [별도 이탈 기록](MEETINGS-C3-SOURCE-EXPOSURE.md)에 보존하며 완전 비노출 평가라고 하지 않는다.
 
 ## 원문과 문항 고정

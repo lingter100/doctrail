@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 격리 v2 보정과 재검토
+
+c2_validation_source_b(Astra xhigh)가oracle1사실의완전성/근거만새v2에서보완했고 c2_validation_source_review(Astra xhigh)가독립재검토8승인/수정0을보고했다. 질문/문맥전체byte동일·다른7oracle canonical동일·기존31파일보존을검토자가확인하고itemfreeze6도작성했다. 부모는summary/hash/index와커밋을담당하며의미판정에참여하지않았다. 인간/모델호출0이며기존7/1실패·부모source노출을그대로보존한다.
+
 ## 2026-10-14 · Validation item 검토의 실제 거절
 
 기존c2_validation_source_review(Astra xhigh)가원문전체와8문항을대조해7승인/1거절·수정1을판정했다. 원문/질문저자와다른역할이나source사전검토에도참여했으므로출력judge에서는제외한다. 부모는거절ID·완전성/근거충분성일반범주·metadata summary/hash만받았다. 원래초안과구체적지적은그대로보존하고격리저자가새v2보정한다. 사용자검수나답변품질결과는아니며검증tokenizer/native0이다.

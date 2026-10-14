@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C3 validation v2 8승인 · item6 고정 완료
+
+격리저자가 C3-VAL-05 oracle의 필수사실1개 설명과근거만 NEW v2에보완했고, 별도Astra xhigh 재검토가8승인/0거절/남은수정0이다. 질문파일·context-selection은원본과byte-identical이고 나머지7oracle사례는canonical-identical임을검토자가확인했다. 다른필드/source9/toolchain66/기존31파일과원래7/1거절기록은유지한다. 부모는전용summary와바이트hash만받고내용피드백을하지않았다.
+
+검토자가strict prereview와전체8문항/whole-context/원문부재조건을확인한뒤 `item-freeze-v2.json`의정확한6바인딩/SHA `854305b8eda2f0044db6751c6542d97237c653c8395124b24f8def8f335227f4`을생성했다. 부모는index/원본hash를검증하고커밋뒤격리공식tokenizer를진행한다. 아직validation tokenizer/native0, cal6은이미통과한입력을재실행하지않는다. 최초초안·저자pending·수정pending·각별도검토를소급변경하지않는다.
+
+원본거절/최종judge등록커밋4e621cc의 push38532303461/PR38532308543에서필수3job이각각모두성공했다. GitHub author/committer모두lingter100이다. 전체goal active·phase1/PR14 미완료/draft이며, 실제원문노출이탈은계속유효하다.
+
 ## C3 validation 사전검토7승인/1거절 · 원본 보존 후 새 v2 보정
 
 별도 Astra xhigh item 검토가8문항 중7승인/1거절(C3-VAL-05), 문항단위수정1을 보고했다. 일반 원인은 필수정보 완전성/근거 충분성이며 구체 의미 설명은 격리 notes에만 보존한다. 기계적schema·좌표·whole-context·등록구성은 통과했고 source9와기존23파일은 그대로다. 부모는 전용 summary와hash만 확인하며 원문/문항/의미설명을 읽거나 내용수정을 지시하지 않는다.

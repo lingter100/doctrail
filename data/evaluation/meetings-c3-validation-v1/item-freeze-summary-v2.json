@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "phase": "validation",
+  "kind": "parent_safe_item_freeze_summary",
+  "version": 2,
+  "created_at": "2026-10-14T08:09:12.426713+00:00",
+  "parent_safe_metadata_only": true,
+  "freeze": {
+    "path": "data/evaluation/meetings-c3-validation-v1/item-freeze-v2.json",
+    "sha256": "854305b8eda2f0044db6751c6542d97237c653c8395124b24f8def8f335227f4",
+    "size_bytes": 1482
+  },
+  "exact_binding_count": 6,
+  "roles": {
+    "draft": "data/evaluation/meetings-c3-validation-v1/draft-v2.json",
+    "oracle": "data/evaluation/meetings-c3-validation-v1/oracle-v2.json",
+    "context_selection": "data/evaluation/meetings-c3-validation-v1/context-selection-v2.json",
+    "prereview": "data/evaluation/meetings-c3-validation-v1/item-prereview-v2.json",
+    "source_freeze": "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json",
+    "code_freeze": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json"
+  },
+  "bound_files": {
+    "data/evaluation/meetings-c3-validation-v1/draft-v2.json": "4e1df398d993143568156eb374d8a319b1da3af9235c21d06be51cd4fb29ccdd",
+    "data/evaluation/meetings-c3-validation-v1/oracle-v2.json": "40320e4fbad00a9ebe164bddefdc6dccdebfeec7e314674ef73a0e135621edc3",
+    "data/evaluation/meetings-c3-validation-v1/context-selection-v2.json": "6ddb4c9a743dec332d14c3a1608b0c15306925a6f2fd19840527fbcaa0937735",
+    "data/evaluation/meetings-c3-validation-v1/item-prereview-v2.json": "190a3029dc73b787d38c50a03377256376c3fcfbea9e158a4b72af117727b33e",
+    "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json": "abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733",
+    "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3"
+  },
+  "accepted_items": 8,
+  "rejected_items": 0,
+  "remaining_change_requests": 0,
+  "case_ids": [
+    "C3-VAL-01",
+    "C3-VAL-02",
+    "C3-VAL-03",
+    "C3-VAL-04",
+    "C3-VAL-05",
+    "C3-VAL-06",
+    "C3-VAL-07",
+    "C3-VAL-08"
+  ],
+  "counts": {
+    "reviewed": 8,
+    "accepted": 8,
+    "rejected": 0,
+    "remaining_change_requests": 0,
+    "original_review_accepted": 7,
+    "original_review_rejected": 1,
+    "corrected_items": 1,
+    "unchanged_other_items": 7,
+    "changed_questions": 0,
+    "changed_context_selections": 0,
+    "ko": 4,
+    "en": 4,
+    "public": 4,
+    "synthetic": 4,
+    "answered": 4,
+    "abstained": 4,
+    "required_facts": 33,
+    "supported_facts": 28,
+    "missing_facts": 5,
+    "answered_facts_min": 5,
+    "answered_facts_max": 5,
+    "necessary_multidocument_answered": 4,
+    "cross_language_answered_en_to_ko": 1,
+    "cross_language_answered_ko_to_en": 1,
+    "partial_known_missing_abstained": 4,
+    "evidence_occurrences": 50,
+    "unique_whole_evidence_units": 24,
+    "selected_context_occurrences": 28,
+    "unique_selected_chunks": 14,
+    "human_reviews": 0
+  },
+  "reviewer_id": "/root/c2_validation_source_review",
+  "author_ids": [
+    "/root/c2_validation_source_b"
+  ],
+  "review_files": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-v2.json",
+      "sha256": "190a3029dc73b787d38c50a03377256376c3fcfbea9e158a4b72af117727b33e",
+      "size_bytes": 412
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-notes-v2.md",
+      "sha256": "80d7507ecb099dd883c4f84d5a0edb6dae8f6d342f9c1be1364fdfb2ecf60d7f",
+      "size_bytes": 7445
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-summary-v2.json",
+      "sha256": "2755e4f98b62a6ae9c4e67789f6a07a7cc88a1afa0ca309e7b3e95f7f2b1edc3",
+      "size_bytes": 4777
+    }
+  ],
+  "author_correction_receipt": {
+    "path": "data/evaluation/meetings-c3-validation-v1/item-correction-receipt-v2.json",
+    "sha256": "8ee596f5e3001759cfae39da9fb752ef46998cf831feeeccb249cfc12faedd4c",
+    "size_bytes": 14739
+  },
+  "original_rejected_review_preserved": {
+    "path": "data/evaluation/meetings-c3-validation-v1/item-prereview.json",
+    "sha256": "dff1ff302b7efe84674f53f419d1e912a03eb2714dc6771402a3e67d8ce6b3d9",
+    "size_bytes": 12718
+  },
+  "source_freeze9_unchanged": true,
+  "toolchain66_unchanged": true,
+  "existing_split_files_preserved": 31,
+  "freeze_roles_and_exact_binding_set_passed": true,
+  "strict_accepted_prereview_and_all8_contracts_passed": true,
+  "registered_parent_source_exposure_preserved": true,
+  "no_automatic_quality_or_service_adoption_claim": true,
+  "tokenizer_status": "not_run",
+  "stage2_readiness": "dynamic_unmeasured",
+  "official_tokenizer_runs": 0,
+  "model_calls": 0,
+  "native_calls": 0,
+  "network_calls": 0,
+  "paid_calls": 0,
+  "Git_operations": 0,
+  "Maven_invocations": 0,
+  "human_review_count": 0,
+  "next_state": "Parent raw-hash verification and commit before isolated official tokenizer preparation.",
+  "semantic_details_included": false,
+  "ownership_returned": true
+}
