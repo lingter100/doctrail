@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 새 전수 준비 실측
+
+부모는 bc03326의 push/PR 필수 CI 성공을 확인하고 calibration 준비1회와91바인딩 전후 byte hash 대조를 수행했다. 기존 실제 Astra xhigh인 c2_validation_source_b가 격리 validation 준비1회, 원문6·동결13/12/41/18/72 대조를 수행했다. 전수40/40 성공·원문/payload 보존을 확인했고 부모에는 validation 집계/hash만 반환했다. 부모는 원본 영수증을 수정하지 않고 바이트 복사로 보존하고 새 중립 fixture/계획을 등록했다. 새 모델/native/다운로드0, 사용자 검수0이다.
+
 ## 2026-10-14 · 입력 예산 후속 설계 등록
 
 같은 실제 Astra high 역할이 NEW 비교/audit4파일을 반환했고110통과/1skip을 보고했다. 부모의 최종 원본 draft/item/oracle 직접 바인딩 검토를 반영했으며 부모가 전체 Python1,788통과/5skip·Ruff를 확인했다. 부모가 source72 동결 JSON과 실행 안내를 작성했다. 새 실제 tokenizer/native·네트워크·유료0이다. 코드 준비 완료가 자원/의미 품질 준비 완료를 뜻하지 않는다.

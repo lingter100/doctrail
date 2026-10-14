@@ -1,6 +1,6 @@
 # 공통 입력 예산 후속의 실행 안내
 
-이 문서는 실행 방법과 최신 구현 범위를 설명한다. 사전등록 조건은 [변경하지 않는 설계](MEETINGS-C2-INPUT-BUDGET-FOLLOWUP.md)와 [프로토콜](../data/evaluation/meetings-c2-input-budget-protocol-v1.json)에 있다. **현재 새 실제 tokenizer 조사·자원/품질 생성은 0이며 이 문서 자체는 실행 증거가 아니다.**
+이 문서는 실행 방법과 최신 구현 범위를 설명한다. 사전등록 조건은 [변경하지 않는 설계](MEETINGS-C2-INPUT-BUDGET-FOLLOWUP.md)와 [프로토콜](../data/evaluation/meetings-c2-input-budget-protocol-v1.json)에 있다. **전수 입력 준비40/40은 통과했다. 새 자원/품질 생성은 아직0이며 최신 실측과 CI는 STATUS에 기록한다.**
 
 ## 현재 구현
 

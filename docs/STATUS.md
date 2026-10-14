@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C2 새 전수 입력 준비 완료 · 중립4회 실행 대기
+
+`bc03326`의 push38509000972/PR38509004896에서 backend/java-service/web가 모두 통과한 뒤 새 준비를 split별 한 번 실행했다. Calibration16/16, 격리 validation24/24가5,120 이하이며 오류·미측정0이다. Calibration L0 1,180–3,140 / C2 1,290–3,730, validation L0 753–3,631 / C2 807–4,572다. 기존4,096에서는 validation의1개 arm만 실패한다. 원래 실패 기록은 유지하며 새 프로토콜의 길이 통과를 답변 품질로 해석하지 않는다.
+
+Calibration 입력은 기존 입력과 바이트까지 같다. 부모는 calibration91개 바인딩의 전후 hash를, 격리 담당자는 validation 원문6과 동결13/12/41/18/72의 전후 hash를 확인했다. 새 준비 원본 input/receipt와 별도 무결성 영수증을 바이트 복사하여 보존했다. 부모는 validation 의미 본문을 열지 않았다. 생성·다운로드0, 사용자 검수0이다.
+
+`meetings-c2-input-budget-neutral-plan-v1.json`은 성공한 양 split 준비와 코드72/runtime을 연결한다. 새 공식 tokenizer로 정상 L0 400/C2 468, 부하 L0 4,923/C2 5,001을 봉인했다. 이 계획을 커밋한 뒤 정상L0→정상C2→부하C2→부하L0의 새4회만 실행한다. 이후 실제 자원 결과가 통과할 때만 품질 cal16/조건부val12 계획을 봉인한다. Phase1/PR14는 미완료/draft다.
+
 기준일: 2026-10-14 (Asia/Seoul).
 
 ## C2 공통5,120 후속 코드 검증

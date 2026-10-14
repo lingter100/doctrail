@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "derived_parent_safe_budget_preparation_summary",
+  "created_at": "2026-10-14T04:03:20.578017+00:00",
+  "head_sha": "bc033266948073ce7d4b8dae9b2ce37e67d77db3",
+  "ci_push_and_pr_required_jobs_success": true,
+  "raw_tool_receipt": {
+    "path": ".local/c2-budget-validation-inputs-v1/receipt.json",
+    "sha256": "95412924185d0e98ce42dfc85ec8eb3fe7c395b5194a3939fd3db466aef6fd7c",
+    "size_bytes": 39499
+  },
+  "raw_tool_input": {
+    "path": ".local/c2-budget-validation-inputs-v1/input.json",
+    "sha256": "dd90884063de8cdbff52f6e98d44574d7c578de6fed0af45ce33044c478fb8be",
+    "size_bytes": 52367
+  },
+  "integrity_receipt": {
+    "path": ".local/c2-budget-validation-preparation-audit-v1/integrity-receipt.json",
+    "sha256": "923ef6137212498646d7a5e6b2dd59974fc1de725ee4b416f9f1a4bf28beede9",
+    "size_bytes": 19468
+  },
+  "status": "passed",
+  "original_protocol_status": "preflight_failed_input_budget",
+  "protocol_deviation": "equal_input_cap_4096_to_5120_after_length_metadata",
+  "summary": {
+    "total_arms": 24,
+    "measured_arms": 24,
+    "unknown_arms": 0,
+    "failed_arms": 0,
+    "old_4096_pass": 23,
+    "old_4096_fail": 1,
+    "new_5120_pass": 24,
+    "new_5120_fail": 0,
+    "token_range": {
+      "L0": {
+        "min": 753,
+        "max": 3631
+      },
+      "C2": {
+        "min": 807,
+        "max": 4572
+      }
+    }
+  },
+  "payloads_preserved": true,
+  "all_before_after_bytes_preserved": true,
+  "freeze_bound_counts": [
+    13,
+    12,
+    41,
+    18,
+    72
+  ],
+  "new_budget_preparation_invocations": 1,
+  "retries": 0,
+  "native_calls": 0,
+  "model_calls": 0,
+  "downloads": 0,
+  "safe_error_categories": [],
+  "item_level_lengths_or_semantic_content_included": false,
+  "raw_tool_receipt_mutations": 0,
+  "ownership_released": true
+}
