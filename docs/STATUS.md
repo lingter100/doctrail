@@ -2,6 +2,12 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+## C2 별도 공통5,120 입력 예산 후속 등록
+
+새 설계 역할이 [후속 설계](MEETINGS-C2-INPUT-BUDGET-FOLLOWUP.md)를 마쳤고 [기계 판독 프로토콜](../data/evaluation/meetings-c2-input-budget-protocol-v1.json)을 만들었다. 기존 C2는4,096 준비 실패·품질 생성0으로 남긴다. 새로운 후속은 두 arm 공통5,120 / native context6,144 / output384를 고정하며 질문·원문·정답·prompt·분할·품질 기준은 유지한다. 길이 노출 후 변경이므로 원래 계획의 성공이나 pristine validation으로 부르지 않는다.
+
+이 상한을 먼저 commit한 뒤 새 예산 경로/합성검사/source freeze를 구현하고 격리 담당자가 전체24길이를 확인한다. 하나라도 초과하면 추가 상향·자료교체 없이 종료한다. 입력이 맞을 때만 새 정상/부하×두arm의 중립 native4회를 실행하고, 통과하면 calibration16/조건부validation12로 이어간다. 새 최대32회·기존 자원2 포함 계보34회이며 현재 새 호출0이다. 구현·학습·품질 결과가 아닌 등록 단계다.
+
 ## C2 입력 준비 실패 · 품질 생성0
 
 격리 validationv2의 CLI 준비가 generic 오류로 실패했다. 원본을 보존한 별도 metadata 진단 호출에서7번째 입력 C2 **4,572 > 4,096**을 직접 관측했다. 총12의 schema/catalog/grammar는 통과했고 진단loader1/count14,7항목만 측정했다. 첫 CLI의 내부 원인은 미기록이며 진단 결과로 소급 확정하지 않는다. 나머지5는 미측정·실제 품질 호출0이다.
