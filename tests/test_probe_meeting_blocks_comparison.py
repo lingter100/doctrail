@@ -282,7 +282,7 @@ def test_truncation_stops_after_single_call(source):
 
     def truncated(*args):
         output = original(*args)
-        return GGUFResult(output.text, "length", 200, 384, .01, {})
+        return GGUFResult(output.text, "length", 200, 384, output.elapsed_seconds, {})
     base._complete = truncated
     report, _, _ = run(source, base)
     assert len(report["calls"]) == 1 and report["failure"] == "generation_output_truncated"
@@ -294,8 +294,11 @@ def test_structurally_valid_abstention_remains_unscored_and_does_not_stop(source
     original = base._complete
 
     def abstain(*args):
-        original(*args)
-        return GGUFResult('{"status":"abstained","claims":[]}', "eos", 200, 10, .01, {})
+        output = original(*args)
+        # Preserve the fake backend's measured-duration contract. A fixed10ms
+        # exceeds the whole request on fast CI and must be rejected by the guard.
+        return GGUFResult('{"status":"abstained","claims":[]}', "eos", 200, 10,
+                          output.elapsed_seconds, {})
     base._complete = abstain
     report, _, _ = run(source, base)
     assert report["resources_passed"] and len(report["calls"]) == 16

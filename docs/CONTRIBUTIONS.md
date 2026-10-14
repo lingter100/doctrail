@@ -10,6 +10,10 @@
 
 최종 전체 Python1,480passed/1skipped도 부모가 실제 실행했다. 기존 Starlette/httpx 경고1개와 Windows 권한 관련skip을 남겼다. 운영 service 소스가 그대로이므로 Java/React의 과거 검증을 새 모델 운영 결과로 집계하지 않는다.
 
+부모가48aa4f6 Linux CI의1실패를 확인해 합성 보류 fixture의 고정10ms와 빠른 실제 테스트 실행 시간 사이의 모순으로 추적했다. 서비스/모델 제한을 유지하고 fixture 시간 전달만 고쳤으며 관련75passed/1skip·Ruff를 확인했다. source-freeze-v1은 보존하고 v2를 질문 작성 전에 고정한다.
+
+새 calibration source 채택 역할 `c2_calibration_source`는 도구가 실제 gpt-6-astra/xhigh로 수락했다. 원문 이용 조건과 처리/선택 규칙 등록을 맡고 질문 작성은 manifest 고정 이후로 남긴다. 별도 `c2_validation_source` Astra xhigh 생성은 thread limit으로 거절됐으며 수행됐다고 기록하지 않는다.
+
 ## 2026-10-14 · C2 실제 자원 확인과 대조군
 
 부모가 커밋662965d의28파일 고정 계획으로 실제2native호출을 수행하고 원본 바이트 사본·token/시간/RSS표본·종료/재시작을 확인했다. 실제timeout은 일어나지 않았고 합성watchdog검사를 실제취소경험으로 바꾸어 쓰지 않는다. GitHub필수CI와 사용자author/committer연결을 확인했다. 사용자검수0·품질질문0이다.

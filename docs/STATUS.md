@@ -16,6 +16,12 @@
 
 **다음 실행:** 검증된 비교 소스41파일을 고정한 커밋에서 split별 자료 작성자가 공개 파일 이용 조건·본문 적합성·처리 규칙/원본 hash를 먼저 기록한다. 그 다음 새 calibration8/격리validation12를 작성·별도 사전 검토·tokenizer 준비하고 실행 계획을 봉인한다. 실제 비교 전에 질문을 보며 정책을 바꾸지 않는다. 전체 목표는 active이며 사용자 진행 지시를 다시 기다리지 않는다.
 
+### 원격 Linux 실패와 질문 작성 전 고정 v2
+
+구현 `48aa4f6`은 사용자 계정lingter100이 author/committer로 연결됐지만 원격 push/PR CI의 backend에서1실패가 났다(1,459passed/21skipped). Java-service와web은 성공했다. 합성 보류 fixture가 가짜 native 처리 시간을10ms로 고정해 Linux의 더 짧은 전체 요청 시간과 모순됐기 때문이다. 실제 시간 검사·모델·prompt·지표를 느슨하게 바꾸지 않고 fake backend의 시간값을 보류/잘림 fixture가 그대로 쓰도록 수정했다.
+
+수정 후 해당 runner/audit75passed/1Windows-symlink-skip와 Ruff를 확인했다. `meetings-c2-comparison-source-freeze-v1.json`과 실패한 CI는 보존하고, 질문 작성 전 테스트1파일만 다른 **source-freeze-v2**를 등록한다. 새 품질 질문·모델 호출은0이다. 별도 Astra xhigh 역할이 calibration 공개 source 이용 조건/처리 manifest를 준비 중이며, 아직 질문/합성 원문을 작성하지 않는다. 새 validation 역할 생성은 thread limit으로 거절됐고 시작으로 집계하지 않는다.
+
 
 **C2-P0 실제 자원 확인은 통과했다.** `662965d`로 고정한 문단·목록·표·코드 보존 후보를 새 합성 중립 자료2개에 한 번씩 실행했다. 정상3.079초(474입력/27출력/EOS), 강제 부하31.953초(3881입력/384출력/length)이며 source28해시·native로그0바이트·소유 프로세스 정리·metadata만 재시작을 확인했다. [실측 원본과 한계](MEETINGS-C2-RESOURCES.md)를 따른다. **native2·품질 질문/평가0이며 서비스 채택이 아니다.** 같은 중립 검사를 다시 실행하지 않는다.
 
