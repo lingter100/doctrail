@@ -1,5 +1,11 @@
 # 진행 상태
 
+## C2 부분 진단 준비 완료 · 검토자 metadata 노출 처리 중
+
+f500274의 새 진단 도구로 실제 prepare1회를 완료했다. 앞14개 raw/native/mapper가 그대로 재생되고 실패1도 같은 언어 guard 오류로 재현됐다. 익명 pack14 SHA766fff31c98be0ac5e9f53f83ae766c7a129b8a800f29a010e43599ee6c367aa, receipt07e2fec789f8f6b8822f834d3c8a2c982a001473a8ed49f9906db7ab64a806bc다. 새 모델/토크나이저 호출0이다.
+
+독립 역할에 후속 요청을 보낼 때 프로젝트 AGENTS가 자동 주입됐다고 검토자가 보고했다. 모델명·arm·과거 결과·이번 언어 실패 metadata에 노출되어 원래 완전 정보 격리 조건을 충족하지 못한다. 아직 pack/mapping/seed는 열지 않았고 판단0이다. 이 노출을 `meetings-c2-budget-partial-review-exposure-v1.json`에 판정 전에 보존했다. 기존 원본/설계/도구/pack/receipt를 고치지 않고, [방법 수정](MEETINGS-C2-BUDGET-REVIEW-EXPOSURE.md)과 별도 `meetings-c2-budget-partial-review-method-v1.json`을 점수 전에 등록하여 metadata 노출·label-masked 사후 진단으로만 진행한다. 원본 진단 summary가 나오면 노출 영수증과 SHA로 함께 묶은 보충 보고를 반드시 작성한다. 저자/설계 비참여와 모델 정보 맹검은 다른 조건이다. 현재 결과 없음·selected/validation_eligible=false·전체 목표 active를 유지한다.
+
 ## C2 사후 진단 도구 완료 · 실제14응답 준비 다음
 
 새 `audit_meeting_budget_partial`과 합성 검사54개가 통과했다(Windows 링크 권한1skip, 부모19.27s/구현자23.68s, Ruff통과). 고정된 닫힌 report/plan만 허용하고 첫14개의 raw/native/원래 mapper를 재생한다. 실패15번째는 원래 영어 언어 인자를 유지해 같은 guard 오류가 발생하는지 별도 확인한다. 기존 full16 audit는 수정하지 않는다. 이 코드 커밋 뒤 한 번 prepare하여 독립 c2_calibration_judge에 익명 pack만 전달한다. 실제 prepare·의미 판정은 이 기록 시점0이다.
