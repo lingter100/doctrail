@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C3 양 split 공식 입력14개 통과 · 새 neutral4 실행 등록
+
+Validation item v2 고정272f867의 push38533328294/PR38533336903 필수3job이각각모두성공했다. 그커밋뒤격리담당자가공식offline준비를1회실행해8/8통과·실패/미측정0·1088..3450≤5120을확인했다. Input/receipt 원본을 `meetings-c3-validation-inputs-v1`에바이트그대로복사했고139개보호파일/원래payload/whole-context/survey계약불변을확인했다. Input SHA42722cb2dcd0de88d84c4384f7862b6b02757c0c7ed5dbfa5179a0f6617ec6f3, receipt23ddd4d6c2d924405a2d524b39df031dccb202ba737e564f83a108e928ac7668. 부모는metadata/hash만사용한다.
+
+이미통과한cal6과합쳐14입력의첫단계준비가완료됐다. 둘째단계는실제계획에의존하므로아직미측정이다. 새중립실행을 `meetings-c3-neutral-plan-v1.json` SHA c11b256c75f719b6436b124742866fd326080ae4f207cdbc32860526db6283b8로등록했다. 실제공식normal stage1=360tokens, normal stage2=dynamic_unmeasured; 두stress입력은각5081tokens,출력384씩강제부하이며정답성검사가아니다. 양split준비/66소스/runtime식별을묶었고동결neutral_check통과다. 이기록시점native0·quality0·human0; 커밋후normal2+stress2를한번실행한다.
+
+원래C0/C1/C2·C3원문노출이탈·최초validation7/1거절을모두유지한다. 실제중립실패면후속품질생성을시작하지않으며같은부하를재시도하지않는다. 목표active·phase1/PR14 미완료/draft.
+
 ## C3 validation v2 8승인 · item6 고정 완료
 
 격리저자가 C3-VAL-05 oracle의 필수사실1개 설명과근거만 NEW v2에보완했고, 별도Astra xhigh 재검토가8승인/0거절/남은수정0이다. 질문파일·context-selection은원본과byte-identical이고 나머지7oracle사례는canonical-identical임을검토자가확인했다. 다른필드/source9/toolchain66/기존31파일과원래7/1거절기록은유지한다. 부모는전용summary와바이트hash만받고내용피드백을하지않았다.

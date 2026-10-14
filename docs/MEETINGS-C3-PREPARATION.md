@@ -1,5 +1,17 @@
 # C3 원문·문항·실제 입력 준비
 
+## 실제 validation 입력 준비와 중립 검사 등록
+
+Item v2 커밋272f867뒤격리담당자가공식offline준비를한번실행했다.8/8통과·실패/미측정0,입력1088..3450tokens이다. 질문/whole-context/payload와139보호파일을보존했으며재시도·생성·native·download0이다. 원본은 `.local/meetings-c3-validation-prepared-v1`에있고 `data/evaluation/meetings-c3-validation-inputs-v1`에 input/receipt를그대로복사했다. Input SHA42722cb2dcd0de88d84c4384f7862b6b02757c0c7ed5dbfa5179a0f6617ec6f3, receipt23ddd4d6c2d924405a2d524b39df031dccb202ba737e564f83a108e928ac7668. 전용preparation-summary에경로/hash/count만공개하며부모는검증의미내용을보지않는다. 이전source일부노출은별도이탈로계속고지한다.
+
+양split공식준비뒤동결register-neutral을실행해 `data/evaluation/meetings-c3-neutral-plan-v1.json`을사전등록했다(SHA c11b256c75f719b6436b124742866fd326080ae4f207cdbc32860526db6283b8). Normal첫입력360tokens, normal둘째입력은실제첫계획뒤측정한다. Stress두입력은각5081tokens·각384출력의별도강제부하다. 둘째stress는첫출력에의존하지않는자원전용이며품질결과가아니다. 예정native최대4, 요청공유90초및정리/재시작계약은원래대로다. 이기록은등록과모델없는neutral_check통과이며실제native는아직0이다.
+
+```powershell
+uv run --locked --no-sync --group retrieval python -m scripts.probe_meeting_requirements register-neutral --plan data/evaluation/meetings-c3-neutral-plan-v1.json --output .local/meetings-c3-neutral-v1 --code-freeze data/evaluation/meetings-c3-toolchain-source-freeze-v1.json --calibration-receipt data/evaluation/meetings-c3-calibration-inputs-v1/receipt.json --validation-receipt data/evaluation/meetings-c3-validation-inputs-v1/receipt.json --runtime-receipt models/meetings-qwen35-v1/setup-receipt.json
+```
+
+이미 등록한 경로에 다시 실행하지 않는다. 커밋 후 한 번의 실제 run-neutral과 원본 재생 검증 이후에만 품질 실행계획을 봉인한다.
+
 ## 후속: validation item v2 동결
 
 격리validation8의첫사전검토는7승인/1거절이었다. 원본은4e621cc에서보존했고, 검토자가지적한한oracle의사실설명/근거만새v2로보완했다. 질문및context-selection파일은byte동일,다른7oracle사례canonical동일이다. 별도재검토8승인/0거절/남은수정0과strict6파일동결이완료됐다. `meetings-c3-validation-v1/item-freeze-v2.json` SHA854305b8eda2f0044db6751c6542d97237c653c8395124b24f8def8f335227f4. 공식입력준비는동결커밋후에실행하며이기록시점validation tokenizer/native0이다. 상세의미검토는부모에게노출하지않고별도summary/hash만전달했다.
