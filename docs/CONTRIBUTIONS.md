@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 격리 검증 source 완료
+
+도구가 실제 수락한 `c2_validation_source_review` gpt-6-astra/xhigh가 공개4·합성2를 독립 source 검토해6승인·변경요구0을 보고했다. 부모는 전체 manifest·본문·의미 설명을 읽지 않고 원본 metadata/hash를 대조해 source freeze를 작성했다. Java77청크 대조는 작성 역할의 실제 실행이며 검토자의 새 실행으로 중복 계산하지 않는다. 사용자 검수·문항 검토·품질 호출은0이다.
+
 ## 2026-10-14 · 신규 calibration 문항과 사전검토
 
 문항 고정c9c6514 뒤 부모가 공식 cache tokenizer를 로컬에서 실행해16입력 모두 상한 통과를 확인했다. 준비된 payload와 원래8초안이 같고 source41/hash가 바뀌지 않았음을 확인한 후 원본 input/receipt를 바이트 복사했다. 실제 생성 모델 호출은0이다. c9c6514의 push38499101933·PR38499106712 필수3job도 모두 성공했다.

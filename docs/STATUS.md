@@ -2,6 +2,12 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+## C2 격리 validation 전체 원문 검토·고정
+
+별도 작성 역할이 공개4+합성2의6문서/77청크를 준비하고 actual Java2검사를 통과했다. 이어 새 격리 검토 역할이 전체6원문의 출처·내용 일관성을 별도로 검토해6승인·0거절·변경요구0을 보고했다. 부모는 본문·전체 manifest·의미 검토 설명을 읽지 않고 전달된 수량과 바이트 hash만 확인했다. [source 고정](../data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json)과 [실제 Java 영수증](../experiments/results/meetings-c2-source-parity-validation-full-v1.json)을 보존한다.
+
+새 문항보다 먼저 이 source 고정을 commit한다. 다음은 같은 격리 작성 역할의 validation12 질문/oracle/원문 청크 선택, 다른 역할의 문항 사전검토와 공식 로컬 token 준비다. Source 검토6건은 문항 검토나 생성 답변 점수가 아니며 사용자 검수0·새 품질 호출0이다. 전체 목표 active, PR14 draft를 유지한다.
+
 ## C2 calibration 8문항 작성·별도 사전검토
 
 문항 고정 `c9c6514` 이후 공식 로컬 tokenizer로16개 입력을 검사해 모두4,096 상한 이내임을 확인했다. 줄 기준1,180~3,140·문단 후보1,290~3,730 tokens다. [입력](../data/evaluation/meetings-c2-calibration-v1/input.json)과 [실제 token 영수증](../data/evaluation/meetings-c2-calibration-v1/token-receipt.json)을 원본 그대로 보존한다. 원래 질문/청크/순서와 payload가 동일하고 소스 hash도 일치한다. 생성·추가 다운로드0이며 품질 개선 결과가 아니다. push38499101933·PR38499106712의 필수3job이 성공했다. [준비 순서·재현 안내](MEETINGS-C2-PREPARATION.md)를 따른다.
