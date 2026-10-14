@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 신규 calibration 문항과 사전검토
+
+기존 도구 수락 gpt-6-astra/xhigh `c2_calibration_source`가 고정 원문 이후8질문·29필수 사실·전체 청크 선택·작성 영수증을 만들었다. Generic 계약의 후보 차이 문구를 source 채택 때와 이번에 보았음을 기록했으며 정책 source/분할 결과/모델 출력/validation은 읽지 않았다. 부모가 원문과 문항을 별도로 읽어8건을 수용하고 whole-chunk/좌표/순서/기존71바인딩을 검증했다. 부모의 후보 구현 노출을 명시하며 사용자 검수로 세지 않는다.
+
+기존 `c2_validation_source_b` Astra xhigh 재개는 slot 제한으로 한 차례 거절됐고 calibration 작성 완료 후 실제 수락돼 합성 source-only 단계를 시작했다. 거절된 시도를 작업 실행으로 세지 않는다. 새 모델/유료 호출0, 부모 채팅 설정 변경0이다.
+
 ## 2026-10-14 · 실제 source 작성과 별도 내용 검토
 
 기존 Astra xhigh `c2_calibration_source`가 합성3원문·전체 manifest·작성 영수증을 작성하고 고정 helper로 전체55청크를 준비했다. 부모가3원문을 별도로 읽어 내용 일관성·출처를 검토하고 actual Java 대조를 수행했다. 부모의 후보 구현 참여와 synthetic 자료의 쉬운 상태 표시 한계를 review receipt에 명시했다. 이는 문항/출력 의미 검토나 인간 검수가 아니다.
