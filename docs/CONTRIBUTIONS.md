@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · C3 준비·판정 도구와 격리 오류 수정
+
+기존 실제 gpt-6-astra/high requirements_candidate가 새 prepare/review와 검사4파일을 구현했다. 부모가 진단 근거 누락·사실 연결 모순·작성자/처리 증거 연결 누락을 찾아 수정 요청했고 합성 회귀로 보강했다. 기존 실제 Astra high knowledge_recovery_review는 독립 읽기 검토와 새 합성 sentinel 재현으로 code-freeze 인자의 읽기 우회1개를 찾았다. 구현자가 전용 경로 guard와 읽기0 회귀3개로 고쳤다.
+
+부모는 수정 전110/1skip, 수정 후53개 및 Ruff와 동결28/72/41/18 동일성을 확인했다. 구현자의 최종 prepare63/1skip과 부모가 재확인한 review50은 합쳐 고유113개 검사다. 실제 자료·tokenizer·native·사용자 검수는0이다. 부모가 문서/Git을 정리하는 동안 기존 실제 Astra high c2_comparison_runner가 새 실행/audit4파일을 이어 구현한다. 부모 모델 설정을 변경했다고 주장하지 않는다.
+
 ## 2026-10-14 · 자동 실행 설정과 한글 확인
 
 부모가 OpenAI Docs 스킬과 공식 예약/Goals 설명을 확인하고 기존 자동화 설명의 오래된 범위를 찾았다. 공식 automation_update로 같은 id의 설명을 갱신한 뒤 저장 문자열·ACTIVE·주기·연결을 직접 대조했다. 이는 기존 자율 진행 요청의 반영이며 새 유료/배포 승인이나 사람 검수로 기록하지 않는다.

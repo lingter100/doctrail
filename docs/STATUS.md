@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C3 입력 준비·판정 규약 검증 완료 · 실행기 구현 계속
+
+새 준비/review와 대응 검사4파일을 구현했다. 기존 답변 채점 계산은 유지하고 C3 6/8 구성, 실제 출처 작성·채택자와 별도 검토자, 원문에서 재구성한 전체 청크, 원본 Python 처리/Java 대조 영수증을 검증한다. 모든 body 경로와 code-freeze 전용 경로를 읽기 전에 제한한다. 독립 검토가 찾은 code-freeze 인자 우회는 새 합성 파일3종의 읽기0 회귀로 수정했다. 실제 격리 자료 노출은 없다.
+
+최종 코드에 대응하는 고유 검사 **113개 통과 / Windows 링크 권한1 skip**이다. 이는 review50과 최종 prepare63/1skip의 합이며 하나의 전체-suite 실행 수가 아니다. 부모의 수정 전 결합110/1skip(52.47초), 수정 후 review+새 경로53(1.17초), 구현자의 최종 prepare63/1skip(79.93초), Ruff를 구분해 `experiments/results/meetings-c3-preparation-tooling-v1.json`에 기록했다. 후보28 및 기존 C2 72/41/18은 동일하다. 최근 전체 Python 기준은 후보 커밋의1943/6skip이며 새 전체 회귀/원격 CI 결과를 혼동하지 않는다.
+
+다음은 실제 Astra high c2_comparison_runner가 새 probe/audit 및 대응 검사4파일을 구현하는 단계다. 이후 전체 toolchain을 고정한 뒤 새 자료를 채택한다. 현재 실제 새 원문·문항·공식 tokenizer·native0, 전체 freeze 미생성, 서비스 품질/채택 미확인, goal active·phase1/PR14 미완료/draft다. 사용자 진행 재요청 없이 계속한다. 직전 fed152a의 push38516554145/PR38516558408 CI는 모두 성공했다.
+
 ## 자동 후속 설명 갱신 · 무료 구현 계속
 
 기존 doctrail ACTIVE/매시간/같은채팅은 유지하고 설명만 최신 회의1차·무료전용·현재 goal/동결 실험 보존 조건으로 공식 도구에서 갱신했다. 저장된 한글 문자열의 정확한 일치를 확인했다. [자동 실행 경계](AUTONOMY.md)를 따른다. 현재 goal active, 새 후보 평가 도구 구현 중이며 사용자 진행 재요청을 기다리지 않는다.
