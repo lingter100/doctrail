@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "purpose": "post_hoc_partial_diagnostic",
+  "selected": false,
+  "eligible_for_selection": false,
+  "original_full_gate": "failed",
+  "validation_eligible": false,
+  "automatic_service_adoption": false,
+  "case_id": "C2-CAL-08",
+  "arm": "C2",
+  "sequence": 14,
+  "row_sha256": "60f497818f07ec830f4455042f25747739eef3bdf0a7f18a731c6e63175553b1",
+  "call_sha256": "802a89637192b965d8b8d1a8ce05ec53697b876e7e424072855b6e9a9769e5ff",
+  "raw_response_sha256": "70ef2376c85ed74e74ae1e08d68eea88a0f9e958006d5b9f9dbfe0b6523131cc",
+  "request_language": "en",
+  "observed_error": "generation_language_mismatch",
+  "replayed_error": "generation_language_mismatch",
+  "same_guard_reproduced": true,
+  "semantic_scoring_performed": false,
+  "native_transport_verified": true,
+  "payload_sha256": "636e6b1f9a7c10948314cf930d3e5c2e88ddebad6ac947a19231c223a45217e3",
+  "prompt_sha256": "a5befa01af985abe39e2096024a3005e5112d88f9bfeee1457de2e3dddfdc394",
+  "grammar_sha256": "90722c8e095e42981db4ffb10a22e87a43bf7976564a72ac5b0c6710fec23727",
+  "native_metrics": {
+    "input_tokens": 3730,
+    "output_token_limit": 384,
+    "completion_wrapper_ms": 18016.0,
+    "output_tokens": 126,
+    "elapsed_seconds": 18.016000000061467,
+    "finish_reason": "eos",
+    "native_timings": {
+      "cache_n": 0,
+      "prompt_n": 3730,
+      "prompt_ms": 8455.361,
+      "predicted_n": 126,
+      "predicted_ms": 8632.128
+    }
+  },
+  "elapsed_ms": 18063.000000081956,
+  "raw_content_sha256": "bd8fcedf748c57a942387ee58583a6f4898d6c5a964d83b2deaabdc0271900df",
+  "unexecuted": [
+    {
+      "id": "C2-CAL-08",
+      "arm": "L0"
+    }
+  ],
+  "model_calls": 0,
+  "human_review_count": 0
+}

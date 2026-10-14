@@ -1,0 +1,26 @@
+{
+  "schema_version": "1",
+  "reviewer_id": "/root/c2_calibration_judge",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "review_mode": "metadata_exposed_label_masked_posthoc_diagnostic",
+  "self_reported_at": "2026-10-14T04:36:54.2681731Z",
+  "exposure_categories": [
+    "project instructions including arm names, service model names and general policy context",
+    "current execution native and valid-response counts and stopping sample/arm/reason metadata",
+    "previous experiment outcome summaries and project status"
+  ],
+  "exposure_delivery": "User-provided AGENTS instructions in this agent conversation, before review-input access",
+  "registration_receipt_sha256": "759f1b4986bb46c8aeb31a2ec48fd0886ec01558b1ca16a3b56f0223e27df04b",
+  "review_method_sha256": "b05e32d625b0340f859cd36ad5528f07be7403984546d70cf6501a8ee5026f01",
+  "before_pack_access": true,
+  "authored_source_question_oracle_policy_implementation_or_prereview": false,
+  "independent_of_authors_and_designers": true,
+  "mapping_not_seen": true,
+  "equivalent_item_level_arm_links_not_seen_for_reviewed_samples": true,
+  "seed_not_seen": true,
+  "model_hypothesis_blind": false,
+  "prior_results_blind": false,
+  "human_review_count": 0,
+  "limitation": "Original full information isolation is not satisfied or restored. This review supplies posthoc semantic diagnosis only, not selection, validation, or deployment approval."
+}

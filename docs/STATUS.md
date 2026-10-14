@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C2 사후 진단 완료 · 원문 검색 복구 검증
+
+metadata 노출·label-masked AI 사후 진단14개를 잠근 뒤 집계했다. L0/C2 모두 완전정답1/7, 짝별 개선1·퇴보1, 인용 문자열47/47일치다. L0 근거지지 실패4/누락5, C2 근거지지 실패2/누락6/보류선택 오류1을 확인했다. 전체8쌍 gate는 실패 그대로이며 native 추가0·validation0·human0다. [결과와 한계](MEETINGS-C2-BUDGET-RESULTS.md) 및 노출 연결 reporting-receipt를 따르고 원본14판정/잠금/대응표/실패재생을 그대로 보존한다.
+
+부모가 별도로 Java 언어 오류 분류와 React의 질문·필터 보존 원문 검색 전환을 구현했다. 전체 Java131중130통과/기존선택1skip, 새HTTP 오류4통과, production build/typecheck, 실제 Java 기반 브라우저4통과를 확인했다. 언어 오류는 합성 실패 주입이고 가입·문서 등록·검색·원문 보기는 실제 서비스이며 모델호출0이다. 별도 Astra high 읽기검토는 수정요구0. 이 운영 개선은 C2 채택/품질 통과가 아니다. 관련 변경은 아직 커밋 전이며 다음 기록에서 원격 CI를 구분한다.
+
+직전 f500274 push38511797006/PR38511801354, 4eba791 push38512187845/PR38512193037 필수3job은 모두 성공했다. 다음은 진단 근거에 따른 새 무료 후보 설계이며, 부모는 기존 calibration/validation 재실행을 하지 않는다. 전체 목표 active·PR14 OPEN/draft·main 불변.
+
 ## C2 부분 진단 준비 완료 · 검토자 metadata 노출 처리 중
 
 f500274의 새 진단 도구로 실제 prepare1회를 완료했다. 앞14개 raw/native/mapper가 그대로 재생되고 실패1도 같은 언어 guard 오류로 재현됐다. 익명 pack14 SHA766fff31c98be0ac5e9f53f83ae766c7a129b8a800f29a010e43599ee6c367aa, receipt07e2fec789f8f6b8822f834d3c8a2c982a001473a8ed49f9906db7ab64a806bc다. 새 모델/토크나이저 호출0이다.
