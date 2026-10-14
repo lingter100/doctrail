@@ -2,7 +2,19 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+## C2 calibration 전체 원문 고정·격리 공개 원문 대조 완료
+
+신규 AI 합성 원문3개(운영 기준·회의록·인계 기록)를 작성했다. 작성자 자기검토 뒤 부모가 날짜·역할·제안/결정·배정/완료·기록 시점의 일관성을 별도로 검토해 수정 요구0으로 수용했다. 이 검토는 source 작성자와 분리됐지만 부모가 후보 구현에도 참여했으므로 독립 답변 의미 판정으로 세지 않는다. 합성 문서는 실제 조직/회의가 아니며 상태 차이를 명시하는 경향 때문에 실제 잡음 많은 회의보다 쉬울 수 있다.
+
+공개2+합성3의 전체55청크를 actual Java/Python으로 전수 대조해 일치했고 해당 Java2검사가 통과했다. [전체 원문 고정](../data/evaluation/meetings-c2-calibration-v1/source-freeze-v1.json), [원문 검토](../data/evaluation/meetings-c2-calibration-v1/source-review.json), [Java 영수증](../experiments/results/meetings-c2-source-parity-calibration-full-v1.json)을 보존한다. 공개 출처 LICENSE 원본과 처리/발췌 고지도 추가했다. 기존 공개2문서의 manifest 기록은 바뀌지 않았다.
+
+격리 담당자의 검증 공개4문서/71청크도 actual Java/Python 내용·위치·순서·ID 대조를 통과했다. 부모는 metadata 영수증 hash/집계만 확인했고 검증 원문/청크를 읽지 않았다. [독립 실행 영수증](../experiments/results/meetings-c2-source-parity-validation-v2.json)을 따른다. 같은 Maven 출력 디렉터리의 동시 실행을 피하도록 순서를 조율했다.
+
+현재 질문·oracle·선택 context·tokenizer·모델 호출은0이다. 다음은 고정한 calibration 원문에서 새8문항·정답 근거 작성과 별도 문항 검토, 격리 validation 합성2원문 작성/검토다. 실행 계획과 조건부 검증 gate를 고정하기 전 생성하지 않는다. 목표 active, phase1/PR14 미완료/draft다.
+
 자료 고정 바이트 정정: `7ea6c89` 준비 과정에서 검증 source manifest의 CRLF가 Git index에서 LF로 변환돼 사전 hash 검사가 실패했다. 부모가 PowerShell의 실패 종료를 후속 명령에 연결하지 못해 해당 커밋까지 진행한 실수를 남긴다. 질문/모델 실행은 없었다. 해당 metadata 파일만 `-text`로 지정해 격리 작성자의 원본 바이트와 freeze hash를 그대로 보존하고, 디스크/index 검사를 성공시킨 뒤 별도 커밋으로 바로잡는다. 원본 내용이나 판정을 수정하지 않는다.
+
+정정 `f952d95`에서 processing18/policy41의 디스크·index hash가 모두 일치했다. push38496551762·PR38496556075의 backend/java-service/web이 모두 성공했고 GitHub author/committer도 각각lingter100이다. `7ea6c89` CI는 후속 push 때문에 취소됐으므로 성공으로 세지 않는다. 새 calibration 합성 source 작성은 이 고정 이후 시작했으며 질문/모델 실행은 아직0이다.
 
 ## C2 두 split의 출처 채택과 plain-text 후속 처리
 

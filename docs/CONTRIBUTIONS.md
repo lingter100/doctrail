@@ -1,6 +1,14 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · 실제 source 작성과 별도 내용 검토
+
+기존 Astra xhigh `c2_calibration_source`가 합성3원문·전체 manifest·작성 영수증을 작성하고 고정 helper로 전체55청크를 준비했다. 부모가3원문을 별도로 읽어 내용 일관성·출처를 검토하고 actual Java 대조를 수행했다. 부모의 후보 구현 참여와 synthetic 자료의 쉬운 상태 표시 한계를 review receipt에 명시했다. 이는 문항/출력 의미 검토나 인간 검수가 아니다.
+
+기존 Astra xhigh `c2_validation_source_b`가 검증 공개4원문의71청크를 격리 처리하고 actual Java 대조·원본 metadata 영수증 복사를 완료했다. 부모에게는 수량·hash·성공 여부만 전달했고 원문은 열지 않았다. 역할 재개가 일시적으로 거절된 동안 해당 실행을 시작으로 세지 않았으며, 실제 수락된 후에 실행했다. 모델/유료 호출·사용자 검수0이다.
+
 부모의 `7ea6c89` 커밋 전 검사에서 validation source metadata의 Git 줄바꿈 변환을 발견했지만 후속 명령을 중단하지 못했다. 작성자 원본 SHA와 자료 내용은 바꾸지 않고 파일별 byte-preserving 속성으로 수정하며 검증 명령과 커밋을 분리한다. 이 실수는 자료 작성자의 오류나 모델 품질 결과로 돌리지 않는다. 질문/모델 호출은 없었다.
+
+정정f952d95의 디스크/index59개 hash와 push/PR 필수3job 통과·GitHub author/committer의lingter100 연결을 부모가 확인했다. 이후 기존 `c2_calibration_source` Astra xhigh 역할이 새 합성 원문 작성만 시작했다. 질문 작성/평가와 분리한다.
 
 ## 2026-10-14 · 격리 validation source와 RST 호환 처리
 
