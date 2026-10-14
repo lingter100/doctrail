@@ -1,5 +1,7 @@
 # 기여와 직접 검증 기록
 
+부모의 `7ea6c89` 커밋 전 검사에서 validation source metadata의 Git 줄바꿈 변환을 발견했지만 후속 명령을 중단하지 못했다. 작성자 원본 SHA와 자료 내용은 바꾸지 않고 파일별 byte-preserving 속성으로 수정하며 검증 명령과 커밋을 분리한다. 이 실수는 자료 작성자의 오류나 모델 품질 결과로 돌리지 않는다. 질문/모델 호출은 없었다.
+
 ## 2026-10-14 · 격리 validation source와 RST 호환 처리
 
 `c2_validation_source_b`(도구 수락 gpt-6-astra/xhigh)가 검증 source4개·LICENSE/NOTICE·파일별 고지를 확인하고 별도 manifest/문서를 작성했다. 부모에게는 원문 없이 형식·hash·수량·한계만 전달했다. 부모가 새 literal-text 처리 진입점과 합성13검사를 구현했고 `c2_comparison_runner`(기존 Astra high)가 읽기 전용 검토했다. 첫 구현 위임 재개는 thread limit으로 거절됐으므로 그 구현을 해당 역할의 기여로 쓰지 않는다.

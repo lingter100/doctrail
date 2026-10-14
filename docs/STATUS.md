@@ -2,6 +2,8 @@
 
 기준일: 2026-10-14 (Asia/Seoul).
 
+자료 고정 바이트 정정: `7ea6c89` 준비 과정에서 검증 source manifest의 CRLF가 Git index에서 LF로 변환돼 사전 hash 검사가 실패했다. 부모가 PowerShell의 실패 종료를 후속 명령에 연결하지 못해 해당 커밋까지 진행한 실수를 남긴다. 질문/모델 실행은 없었다. 해당 metadata 파일만 `-text`로 지정해 격리 작성자의 원본 바이트와 freeze hash를 그대로 보존하고, 디스크/index 검사를 성공시킨 뒤 별도 커밋으로 바로잡는다. 원본 내용이나 판정을 수정하지 않는다.
+
 ## C2 두 split의 출처 채택과 plain-text 후속 처리
 
 격리 역할이 검증용 공개4문서와 LICENSE/NOTICE를 확인했고 source manifest를 작성했다. 부모는 원문·의미 설명을 열지 않고 전달된 hash·수량·처리 계약만 대조했다. 공개 총6문서(cal2/val4)의 채택 단계이며 합성 평가 본문·질문·oracle·선택 context는0이다.
