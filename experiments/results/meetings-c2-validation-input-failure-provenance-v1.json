@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "metadata_only_failure_export_provenance",
+  "exported_files": {
+    "experiments/results/meetings-c2-validation-input-failure-original-v1.json": "3eba8bbc83d73d310a8561274bfc87a792ab85cb91a342233152382f0576f83c",
+    "experiments/results/meetings-c2-validation-input-failure-summary-v1.json": "a382f63f1b75a012e6d90b0f2f5b3c1eb98122352b1adf061ec395c2279b7be9",
+    "experiments/results/meetings-c2-validation-input-failure-console-v1.json": "68d6eeb90bc4f49635abe80e344861d6bf951d99da638916ccef7a09332cf3d6",
+    "experiments/diagnostics/meetings-c2-validation-input-failure-v1.py.txt": "6e2de9340ae2d5570f0a2153e470efe7d8ae314525b10b907e9bd189c10cac97"
+  },
+  "original_cli_stderr": {
+    "utf8_text": "input_preparation_failed\r\n",
+    "sha256": "ae5d56c2bc3ab950855b841236e619a91205fae0f3b78379c39a80ebe30521d7",
+    "size_bytes": 26
+  },
+  "diagnostic_receipt_history": {
+    "returned_receipt_was_enriched_after_execution": true,
+    "original_receipt_sha256_from_unchanged_console": "3eba8bbc83d73d310a8561274bfc87a792ab85cb91a342233152382f0576f83c",
+    "recovery_method": "Remove derived summary fields and restore diagnostic object from original console; serialize using unchanged entrypoint JSON settings. Bytes and SHA256 match the original console binding.",
+    "original_bytes_recovered": true,
+    "enriched_receipt_preserved": true,
+    "generation_or_tokenizer_rerun_for_recovery": false
+  },
+  "script_artifact": "Recorded executed source, not a new supported CLI; its original relative path is retained in the receipts.",
+  "validation_semantic_contents_exported_here": false,
+  "human_review_count": 0,
+  "service_generation_calls": 0
+}
