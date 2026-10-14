@@ -1,0 +1,777 @@
+{
+  "schema_version": 1,
+  "review_id": "meetings-c2-validation-independent-item-prereview-v2",
+  "version": 2,
+  "phase": "validation",
+  "recorded_at": "2026-10-14T02:52:28.885773+00:00",
+  "status": "ALL_V2_ITEMS_ACCEPTED_FOR_SEPARATE_ITEM_FREEZE",
+  "contains_isolated_validation_semantic_content": true,
+  "parent_safe_metadata_only": false,
+  "custody": "Parent and candidate designers must not open this receipt body. Parent may receive the file hash, acceptance/error counts, broad categories, case/role IDs and aggregate composition only. Detailed corrected-case reasons remain isolated.",
+  "reviewer": {
+    "role": "/root/c2_validation_source_review",
+    "actual_tool_accepted_model": "gpt-6-astra",
+    "actual_tool_accepted_reasoning_effort": "xhigh",
+    "fork_turns": "none",
+    "settings_evidence": "Original isolated spawn settings were tool-accepted as confirmed by the parent; the parent explicitly maintained Astra xhigh for this follow-up. This is not self-model introspection.",
+    "ai_reviewer": true,
+    "human_review_count": 0,
+    "independent_from_source_author": true,
+    "independent_from_question_author": true,
+    "independent_from_oracle_author": true,
+    "question_or_oracle_authorship_in_this_review": false,
+    "prior_roles": [
+      "Independent prereviewer of these six source documents",
+      "Independent prereviewer that requested the two v1 item corrections"
+    ],
+    "future_independent_output_scoring_eligible": false,
+    "ineligibility_reason": "Prior source and item-oracle exposure and source-specific review explanations.",
+    "exposure": {
+      "full_validation_synthetic_family_bodies_reread_this_review": 2,
+      "unchanged_public_family_bodies_previously_read_in_full": 4,
+      "changed_validation_questions_and_oracles_reread": 2,
+      "unchanged_validation_item_cases_byte_compared": 10,
+      "author_correction_explanations_read": true,
+      "generic_request_oracle_validation_contract_used": true,
+      "candidate_adapter_prompt_catalog_implementation_read": false,
+      "candidate_execution": false,
+      "calibration_semantic_content_read": false,
+      "calibration_bound_files_hashed_without_decoding": true,
+      "old_pools_read": false,
+      "service_model_outputs_read": false,
+      "tokenizer_feedback_seen": false,
+      "parent_history_or_status_docs_read": false
+    }
+  },
+  "bindings": {
+    "draft_v2": {
+      "path": "data/evaluation/meetings-c2-validation-v1/draft-v2.json",
+      "sha256": "b328037fe138b2d3472eff268f51df5251d7d7ecba190278a42e538a37bd7a5e"
+    },
+    "oracle_draft_v2": {
+      "path": "data/evaluation/meetings-c2-validation-v1/oracle-draft-v2.json",
+      "sha256": "4ace235ba3b639e6252f1848d60ed0e165eb69bbf4d29e2304c914cf83f75916"
+    },
+    "context_selection_v2": {
+      "path": "data/evaluation/meetings-c2-validation-v1/context-selection-v2.json",
+      "sha256": "5e7693d9acef548331edee83a886411a0a1752b8e2dea6792579a0b1beaf6cf9"
+    },
+    "authoring_receipt_v2": {
+      "path": "data/evaluation/meetings-c2-validation-v1/item-authoring-receipt-v2.json",
+      "sha256": "fd7e4dc3981a9af56ff9a267f25372c7286a7bc0d7003e9e6af49eb24296dad4"
+    },
+    "prior_item_prereview": {
+      "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+      "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+    },
+    "original_draft": {
+      "path": "data/evaluation/meetings-c2-validation-v1/draft.json",
+      "sha256": "c2983dbc4e46a5196049de6f0027e8372812ea6b08082745b76ea6d3b251384f"
+    },
+    "original_oracle_draft": {
+      "path": "data/evaluation/meetings-c2-validation-v1/oracle-draft.json",
+      "sha256": "2c737009209b197c9b4c1484bc46b190e11c1c04d153cdd85a48b176a99d5aa1"
+    },
+    "original_context_selection": {
+      "path": "data/evaluation/meetings-c2-validation-v1/context-selection.json",
+      "sha256": "d5afefbdea235d2c6382098ee6317fdc47dbd9247bf95cb52eae98886bd274d4"
+    },
+    "original_authoring_receipt": {
+      "path": "data/evaluation/meetings-c2-validation-v1/item-authoring-receipt.json",
+      "sha256": "9d6a596e4ee6e2d563d5548fbcda04e187001e15f550fb6cffcc883889a7964d"
+    },
+    "source_freeze": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json",
+      "sha256": "aa4d95bb6a90edec06a4b02375ac04591cfbdc54f91b068178852ccc1da39c45"
+    },
+    "source_inventory": {
+      "path": ".local/c2-source-inventory-validation-full-v1/inventory.json",
+      "sha256": "49ce4cf4fb20096227064cb7a6108fc1bcf5aa306d8b4d7205eb089af6d7a2e5"
+    },
+    "prior_source_review": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-review.json",
+      "sha256": "9188490bed7bd0fadd3bc771f2e5668013e65a17d19a9ed0486dde2a1bf2d3b5"
+    }
+  },
+  "freeze_integrity": [
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json",
+      "sha256": "aa4d95bb6a90edec06a4b02375ac04591cfbdc54f91b068178852ccc1da39c45",
+      "bound_files": 12,
+      "all_bound_bytes_match": true,
+      "contents_used": "Only freeze metadata and file bytes for hashing; candidate/calibration contents were not decoded."
+    },
+    {
+      "path": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+      "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+      "bound_files": 18,
+      "all_bound_bytes_match": true,
+      "contents_used": "Only freeze metadata and file bytes for hashing; candidate/calibration contents were not decoded."
+    },
+    {
+      "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+      "bound_files": 41,
+      "all_bound_bytes_match": true,
+      "contents_used": "Only freeze metadata and file bytes for hashing; candidate/calibration contents were not decoded."
+    }
+  ],
+  "independent_recheck": {
+    "source_raw_hash_bindings_passed": 6,
+    "answer_request_payloads_valid": 12,
+    "oracle_file_valid": true,
+    "validate_oracles_validation_passed": true,
+    "exact_evidence_alternatives": 31,
+    "exact_evidence_spans": 50,
+    "whole_original_context_occurrences_passed": 24,
+    "context_minimum": 1,
+    "context_maximum": 5,
+    "context_limit": 10,
+    "all_context_text_metadata_offsets_equal_inventory": true,
+    "selection_bindings_and_registration_then_chunk_order_match": true,
+    "trim_merge_resegmentation": false,
+    "original_case_object_bytes_identical_per_artifact": {
+      "draft-v2.json": 10,
+      "oracle-draft-v2.json": 10,
+      "context-selection-v2.json": 10
+    },
+    "changed_case_objects_per_artifact": 2,
+    "byte_comparison_method": "JSONDecoder located the original UTF-8 object substring for each case; compared those raw object bytes including internal whitespace. This was not merely reserialization or semantic equality.",
+    "root_metadata_other_than_cases_unchanged": true,
+    "all_twelve_question_strings_preserved": true,
+    "all_required_fact_ids_and_texts_preserved": true,
+    "all_oracle_metadata_and_original_evidence_preserved": true,
+    "all_original_contexts_preserved": true,
+    "whole_context_occurrences_added": 3,
+    "evidence_spans_added": 8,
+    "unchanged_case_acceptance_reaffirmed": 10,
+    "corrected_case_semantic_rereviews": 2,
+    "prior_change_requests_resolved": 2,
+    "new_change_requests": 0,
+    "existing_source_or_draft_file_modifications": 0,
+    "generic_contract_execution_only": true,
+    "python_bytecode_writing_disabled": true
+  },
+  "review_basis": {
+    "semantic_criteria": "Question naturalness, source/input answerability, required facts and qualifiers, role and queried-entity grounding, exact times, and complete sufficient alternatives. Every conjunct remains required within its alternative, and every OR alternative is independently sufficient.",
+    "whole_family_check": "Reread both complete synthetic documents for the changed cases. Both added identity/role anchors and original event records are part of those same unchanged documents, with no conflicting identity or status. The ten unchanged cases retain their original whole-family audits, now tied to unchanged source and case bytes.",
+    "missing_facts": "Four unchanged abstention items still mix known evidence with genuinely missing mandatory facts across their whole relevant family; no missing evidence was manufactured by the v2 additions.",
+    "multisource": "The four necessary multisource questions still require facts from two different document/revision identities in the complete sources; the repaired input now supplies the formerly omitted referents."
+  },
+  "items": [
+    {
+      "case_id": "c2-val-01",
+      "family_id": "C2-F03",
+      "language": "ko",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "4509b01359560e8fb29104de5ca2441c041c656fb13667a3effd9d58f5c21be1"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "457833e6b77cebdcf823b1774a788151fc62a4c37508791011548925911a8ca1"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "c58eec7443b0797d6942549a76d73214170caf651b7dbff400e9df5994b8838c"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-02",
+      "family_id": "C2-F03",
+      "language": "en",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "70eb2265d057479d26b2174716fa072daba020d0a229d29d9b572d6e70bef6d3"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "fb67b156bb44f14f30dba5484a2aa7e398bf7016e9ec5822be6f79bba81590c6"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "f256254e48e48e7bc9c4bb748218165d4cb33d55e8729f25958acb97ac2fd8d7"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-03",
+      "family_id": "C2-F03",
+      "language": "ko",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "0a012ba15980513b168e08b7522ebae1919657a3cdd09176818dc152b2c327bd"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "424b4c6cb28c1c1263fb235c12de6a761832c217807f314734b5b7c5648d237f"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "61aa4fd5aa894b441cb084f06fec09d4ca500e27d4980d6f8529510f3722bc18"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-04",
+      "family_id": "C2-F03",
+      "language": "en",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "572436a257eac96b1219b0b55326c548be05af916f42168f43f06a556a2dc583"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "3125f6df85bb084a43da86a4035817bac68137699ea193af7bcd6e97b48a0e61"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "2ece25db205d607fce2a68a5d83f6ee12ff7c8faa6b318ba797b2c4a48e27603"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-05",
+      "family_id": "C2-F03",
+      "language": "ko",
+      "expected_status": "abstained",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "9d056b25a9821efd9933dba6abbae40966d9b751448663f563978e4653ecdf75"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "8e6f799fe28276c6ee694f63a18ba21c6a5a0caac4e31e2fe93c9ecc09f72d1d"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "7f2d6f503dfdf94ea763a10767f04950dec065da03952e0f7dda7785ad54fc57"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-06",
+      "family_id": "C2-F03",
+      "language": "en",
+      "expected_status": "abstained",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "c175c0403b95003fe3c289f52d965b32f9f615618efd98335579ccfcc014c3cf"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "3a1dba1b3e17e7b93604ab61ccf2dd31ce7310131e0f0ee13fb8e54b2f0d1072"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "f4cf68d7846edd8411ac6074cc6cf1042457667fd7eff51249000a5d4475d570"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-07",
+      "family_id": "C2-F04",
+      "language": "ko",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "fresh_semantic_rereview_of_correction",
+      "prior_verdict": "CHANGES_REQUESTED",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": false,
+          "v2_case_object_sha256": "7f3092d24c831d716995515f945769685b9dd6075f7aedd745e5b4c7c8905719"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": false,
+          "v2_case_object_sha256": "44164db6a5926b9cd94caf49eec5add66c7d35ba75b1e20fe1164e9146ebca28"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": false,
+          "v2_case_object_sha256": "fc7721477d4e1e20c4e4067ddec0a05c0b65047f4f9e114f73d7b0cb18e63915"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "isolated_resolution": {
+        "prior_change_request_id": "C2-VAL-PREREVIEW-01",
+        "status": "RESOLVED",
+        "source_basis": "Both complete synthetic source bodies were reread in this v2 review and their pinned hashes remain unchanged. The policy identifier and explicit production-manager-to-name mapping are in policy c0000; order identity and applied-policy metadata are in order c0000. Both complete original chunks are now supplied without trimming.",
+        "fact_checks": [
+          {
+            "fact_id": "f01",
+            "alternatives_checked": 1,
+            "result": "ACCEPTED",
+            "rationale": "The one conjunction now contains the MK-QP-01 identifier, the sentence explicitly identifying 서도윤 as production manager, and the unchanged complete checklist sentence naming the same person. This supports the required role and checklist in the requested policy."
+          },
+          {
+            "fact_id": "f02",
+            "alternatives_checked": 1,
+            "result": "ACCEPTED",
+            "rationale": "The conjunction now identifies MK-418, includes the April 9 afternoon heading, and retains the 16:30 acceptance plus explicit not-yet-printing statement. Order, date, time and work state are all grounded."
+          },
+          {
+            "fact_id": "f03",
+            "alternatives_checked": 2,
+            "result": "ACCEPTED",
+            "rationale": "Each of the two OR alternatives separately includes the MK-418 anchor, an exact April 10 heading and the actual 10:10 start statement. The repeated heading may come from either overlapping original chunk; neither alternative offers the order/date/event fragments as separate OR evidence."
+          }
+        ],
+        "necessary_multisource": "Still genuinely necessary: the complete acceptance checklist is supplied by the policy and the actual acceptance/start timestamps by the order record. Adding referent anchors does not create an artificial two-document dependency.",
+        "new_conflicts_identified": false
+      }
+    },
+    {
+      "case_id": "c2-val-08",
+      "family_id": "C2-F04",
+      "language": "en",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "bf881fb044bf0c2f65d02647a1b488864633b57755862165807811b415404aad"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "4765f7c653066f186a16d7210a536fcb0961354899a7eacf716526911c414e89"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "a7cf2493d08d0ce7f703509b4d2bf8f39726e64518d86b15bcd79a201fbdc5cf"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-09",
+      "family_id": "C2-F04",
+      "language": "ko",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "b0d38db912b4aef68f4fbe9bffac0b56b4de80e0fd03e8546ff1a469f3693ed7"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "69268b23a6366feb15ee8f4814d0eeb4805e367b29197bd17d27fdb4ef631b5b"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "5d0decbdb7f0bc2f6d89dc8a83b42dad32b3dd211aac490defa7b72d522b8598"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-10",
+      "family_id": "C2-F04",
+      "language": "en",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "fresh_semantic_rereview_of_correction",
+      "prior_verdict": "CHANGES_REQUESTED",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": false,
+          "v2_case_object_sha256": "559bef4385e2ce438df5af7531a8293a83c708b7775dc8af3514bda81b508fd0"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": false,
+          "v2_case_object_sha256": "fd9ee0c1e4cef6497c3196fe1216ffc6a551f8c110a296e0f27eb76dfd6dcfe2"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": false,
+          "v2_case_object_sha256": "cf349de717a66f538bf6418c278cc5bb0b1ad384f78a151d5f9150e4f8906347"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "isolated_resolution": {
+        "prior_change_request_id": "C2-VAL-PREREVIEW-02",
+        "status": "RESOLVED",
+        "source_basis": "The full original order source was reread. Added c0000 supplies the MK-418 identity while the existing c0002 supplies the dated last update. The title, date, revision, chunk strings, offsets and source ordering match the frozen inventory.",
+        "fact_checks": [
+          {
+            "fact_id": "f01",
+            "alternatives_checked": 1,
+            "result": "ACCEPTED",
+            "rationale": "The conjunction contains order identity, the April 10 heading, and the 09:20 feeder-adjustment delay statement. It supports a delayed tentative start rather than a completed job."
+          },
+          {
+            "fact_id": "f02",
+            "alternatives_checked": 1,
+            "result": "ACCEPTED",
+            "rationale": "Order identity is now conjoined with the day heading and unchanged actual 10:10 start after adjustment/test-sheet check. The reservation is not substituted for the actual event."
+          },
+          {
+            "fact_id": "f03",
+            "alternatives_checked": 1,
+            "result": "ACCEPTED",
+            "rationale": "Order identity, the day heading and the 11:40 status are jointly supplied. The fact remains limited to ongoing printing and absence of recorded production/packing completion, without inventing later events."
+          }
+        ],
+        "necessary_multisource": null,
+        "new_conflicts_identified": false
+      }
+    },
+    {
+      "case_id": "c2-val-11",
+      "family_id": "C2-F04",
+      "language": "ko",
+      "expected_status": "abstained",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "ae1f62b7ef459bba070f5761a865d4440fb7bf7d6a39c3758e7f74e7e11b8863"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "85ff975303e36e5adbdd84708748b95f6a5786fccfb0de98e33fcb21b28e32e1"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "086a746c0c6256bc3fa48776c7a1fedb38af4406e9f5c3d4eba21bcee8aea8d9"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    },
+    {
+      "case_id": "c2-val-12",
+      "family_id": "C2-F04",
+      "language": "en",
+      "expected_status": "abstained",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "review_mode": "prior_semantic_acceptance_reaffirmed_after_exact_case_byte_verification",
+      "prior_verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "independent_from_source_question_oracle_author": true,
+      "human_review_count": 0,
+      "case_byte_checks": {
+        "draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "70c8334ea110ac8d7f59a65169b16422b92be822c7fbca719271231305843c71"
+        },
+        "oracle-draft-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "a71d29aad81ea6b34b492115e5b58e71209f679a5118884eb8a0468f35cb89dd"
+        },
+        "context-selection-v2.json": {
+          "case_object_bytes_identical": true,
+          "v2_case_object_sha256": "5a11adf55a1859c90ff3d4380bfc0926e18f99a99765f16d627f9bdc738a4d49"
+        }
+      },
+      "question_naturalness": "ACCEPTED",
+      "required_fact_completeness_and_conditions": "ACCEPTED",
+      "all_evidence_or_alternatives_sufficient_as_complete_and_sets": "ACCEPTED",
+      "exact_offsets_and_quotes": "PASSED",
+      "change_requests": [],
+      "prior_semantic_basis_receipt": {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6"
+      },
+      "isolated_rationale": "The request, oracle and context-selection JSON case-object bytes exactly equal the previously accepted case. The same frozen source inventory remains unchanged; its prior item-specific naturalness, fact/condition/subject/time, sufficient-alternative and whole-family missing-facet findings therefore remain applicable."
+    }
+  ],
+  "change_requests": [],
+  "resolved_prior_change_request_ids": [
+    "C2-VAL-PREREVIEW-01",
+    "C2-VAL-PREREVIEW-02"
+  ],
+  "composition": {
+    "C2-F03": {
+      "items": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2,
+      "multifactual_answered": 4,
+      "necessary_multisource_answered": 2,
+      "partial_known_missing_abstentions": 2,
+      "accepted": 6,
+      "rejected": 0
+    },
+    "C2-F04": {
+      "items": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2,
+      "multifactual_answered": 4,
+      "necessary_multisource_answered": 2,
+      "partial_known_missing_abstentions": 2,
+      "accepted": 6,
+      "rejected": 0
+    }
+  },
+  "counts": {
+    "v2_item_review_coverage": 12,
+    "accepted_items": 12,
+    "rejected_items": 0,
+    "held_items": 0,
+    "change_requests": 0,
+    "prior_requests_resolved": 2,
+    "fresh_corrected_item_semantic_rereviews": 2,
+    "unchanged_item_acceptances_reaffirmed": 10,
+    "unique_validation_items": 12,
+    "independent_ai_reviewers_in_this_receipt": 1,
+    "human_reviews": 0,
+    "known_facts": 30,
+    "genuinely_missing_facts": 5,
+    "evidence_alternatives_accepted": 31,
+    "exact_evidence_spans": 50,
+    "whole_family_absence_audits_retained": 4,
+    "multifactual_answered": 8,
+    "necessary_multisource_answered": 4,
+    "partial_known_missing_abstentions": 4,
+    "new_question_authorship": 0,
+    "new_oracle_authorship": 0,
+    "tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "paid_calls": 0,
+    "network_calls": 0,
+    "existing_files_modified": 0
+  },
+  "parent_safe_summary": {
+    "accepted_items": 12,
+    "rejected_items": 0,
+    "change_requests": 0,
+    "new_error_categories": [],
+    "previous_broad_categories_resolved": [
+      "query_referent_grounding",
+      "required_fact_subject_support"
+    ],
+    "case_ids_in_order": [
+      "c2-val-01",
+      "c2-val-02",
+      "c2-val-03",
+      "c2-val-04",
+      "c2-val-05",
+      "c2-val-06",
+      "c2-val-07",
+      "c2-val-08",
+      "c2-val-09",
+      "c2-val-10",
+      "c2-val-11",
+      "c2-val-12"
+    ],
+    "composition": {
+      "C2-F03": {
+        "items": 6,
+        "ko": 3,
+        "en": 3,
+        "answered": 4,
+        "abstained": 2,
+        "multifactual_answered": 4,
+        "necessary_multisource_answered": 2,
+        "partial_known_missing_abstentions": 2,
+        "accepted": 6,
+        "rejected": 0
+      },
+      "C2-F04": {
+        "items": 6,
+        "ko": 3,
+        "en": 3,
+        "answered": 4,
+        "abstained": 2,
+        "multifactual_answered": 4,
+        "necessary_multisource_answered": 2,
+        "partial_known_missing_abstentions": 2,
+        "accepted": 6,
+        "rejected": 0
+      }
+    },
+    "totals": {
+      "items": 12,
+      "ko": 6,
+      "en": 6,
+      "answered": 8,
+      "abstained": 4,
+      "multifactual_answered": 8,
+      "necessary_multisource_answered": 4,
+      "partial_known_missing_abstentions": 4
+    },
+    "question_author_role_ids": [
+      "/root/c2_validation_source_b"
+    ],
+    "oracle_author_role_ids": [
+      "/root/c2_validation_source_b"
+    ],
+    "independent_prereviewer_role_ids": [
+      "/root/c2_validation_source_review"
+    ],
+    "ready_for_separate_item_freeze": true,
+    "token_preparation_or_quality_run_performed": false
+  },
+  "historical_state_preserved": {
+    "v1_drafts_and_rejection_receipt_unchanged": true,
+    "v1_rejection_not_erased_or_relabelled": true,
+    "v2_author_pending0_and_oracle_historical_limitations_preserved": true,
+    "completed_v2_prereview_recorded_only_here": true
+  },
+  "limitations": [
+    "Acceptance is for the exact v2 item preparation and a separate item freeze, not token feasibility, model answer quality or service adoption.",
+    "Only the two corrected items received fresh semantic rereview; the other ten approvals are reaffirmed through exact case-byte and source-integrity verification, not falsely reported as new questions or independent reviewers.",
+    "Reviewer is independent of the author but saw the author correction explanations and prior oracles; this is not independent blind output scoring.",
+    "Human review remains zero and synthetic business realism is not human-validated.",
+    "A sealed item freeze must precede official tokenizer preparation. No source/question/context reselection based on later token/output feedback is authorized by this receipt."
+  ],
+  "ownership_handoff": {
+    "only_new_file": "data/evaluation/meetings-c2-validation-v1/item-prereview-v2.json",
+    "all_existing_files_preserved": true,
+    "git_operations": 0,
+    "released_to_parent": true,
+    "parent_may_bind_receipt_bytes_and_hash_only": true
+  }
+}
