@@ -4,6 +4,8 @@
 
 ## C2 calibration 8문항 작성·별도 사전검토
 
+문항 고정 `c9c6514` 이후 공식 로컬 tokenizer로16개 입력을 검사해 모두4,096 상한 이내임을 확인했다. 줄 기준1,180~3,140·문단 후보1,290~3,730 tokens다. [입력](../data/evaluation/meetings-c2-calibration-v1/input.json)과 [실제 token 영수증](../data/evaluation/meetings-c2-calibration-v1/token-receipt.json)을 원본 그대로 보존한다. 원래 질문/청크/순서와 payload가 동일하고 소스 hash도 일치한다. 생성·추가 다운로드0이며 품질 개선 결과가 아니다. push38499101933·PR38499106712의 필수3job이 성공했다. [준비 순서·재현 안내](MEETINGS-C2-PREPARATION.md)를 따른다.
+
 원문 고정 `65f3358`의 push38497575703·PR38497580795에서 필수3job이 모두 성공했다. 그 뒤 새 calibration8문항/29필수 사실을 작성하고, 부모가 질문·원문 전체·정답 대안·누락 정보·두 문서 필요성을 별도로 검토해8건을 수용했다. 공개4·합성4, KO4·EN4, 답변가능6·근거부족2이며 실제 여러 문서가 필요한 답변가능 항목은2개다. 원문 전체 청크20회/고유15개를 그대로 선택했고 schema·정확 좌표·등록 순서·기존 고정71파일 hash를 다시 확인했다.
 
 [초안 작성 영수증](../data/evaluation/meetings-c2-calibration-v1/item-authoring-receipt.json)의 사전검토0 상태는 보존하고 [별도 문항 검토8건](../data/evaluation/meetings-c2-calibration-v1/item-prereview.json)을 연결한다. 작성자는 generic 비교 계약의 정책 차이 문구를 보았고 부모는 후보 구현에 참여했으므로 완전히 후보를 모르는 작성/검토라고 주장하지 않는다. 새 출력의 독립 의미 판정에는 두 역할 모두 참여하지 않는다. 사용자 검수0이다.
