@@ -1,0 +1,409 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "phase": "validation",
+  "kind": "item_authoring_receipt",
+  "created_at": "2026-10-14T07:52:09.638173+00:00",
+  "status": "authored_and_self_checked_pending_independent_prereview",
+  "author_role": "/root/c2_validation_source_b",
+  "actual_role_settings": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "provenance": "parent-verified tool acceptance for this existing isolated role; not model self-introspection"
+  },
+  "source_freeze": {
+    "path": "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json",
+    "sha256": "abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733",
+    "size_bytes": 1838
+  },
+  "source_freeze_commit": {
+    "sha": "57981ca",
+    "committed_and_pushed_before_item_authoring": true,
+    "verification_provenance": "parent task attestation; no Git operations by author"
+  },
+  "source_inputs": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-01.md",
+      "sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+      "size_bytes": 19342
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-02.md",
+      "sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+      "size_bytes": 9434
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-01.md",
+      "sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+      "size_bytes": 3187
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-02.md",
+      "sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+      "size_bytes": 3175
+    }
+  ],
+  "inventory": {
+    "path": "data/evaluation/meetings-c3-validation-v1/inventory.json",
+    "sha256": "407d8c66c842936e988c9e47e4172e44e84f0c748a22005a44fb20e64b3fb75c",
+    "size_bytes": 101281
+  },
+  "source_prereview": {
+    "path": "data/evaluation/meetings-c3-validation-v1/source-prereview.json",
+    "sha256": "2bbe229755d1bfadb798d4bb1adcf6daf80d04c01ef9053579c47a339d7a8663",
+    "size_bytes": 19257
+  },
+  "registry": {
+    "path": "data/evaluation/meetings-c3-family-registry-v1.json",
+    "sha256": "597db7e4d1792fc6bdc96af21cfc86f767a272b4156dc7607bbd71a077a36682",
+    "size_bytes": 10720
+  },
+  "frozen_binding_checks": [
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+        "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+        "size_bytes": 7576
+      },
+      "binding_count": 66,
+      "before_match": true,
+      "after_match": true
+    },
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c3-candidate-source-freeze-v1.json",
+        "sha256": "6ce55cb17d264f8da7c587c685947da8d95ff1199ef65f7f34de7d1a275798c6",
+        "size_bytes": 3791
+      },
+      "binding_count": 28,
+      "before_match": true,
+      "after_match": true
+    },
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-input-budget-source-freeze-v1.json",
+        "sha256": "fe8307dfef4e0d4933dd5f894918303980e291a0b7f2a518a71a7e9484b61a99",
+        "size_bytes": 8971
+      },
+      "binding_count": 72,
+      "before_match": true,
+      "after_match": true
+    },
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+        "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+        "size_bytes": 5579
+      },
+      "binding_count": 41,
+      "before_match": true,
+      "after_match": true
+    },
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+        "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+        "size_bytes": 3522
+      },
+      "binding_count": 18,
+      "before_match": true,
+      "after_match": true
+    }
+  ],
+  "artifact_records": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/draft.json",
+      "sha256": "4e1df398d993143568156eb374d8a319b1da3af9235c21d06be51cd4fb29ccdd",
+      "size_bytes": 54549
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/oracle-draft.json",
+      "sha256": "eec0b607fd11077bc8ce8d5ca2f59049bb93b3ec6596d4550a5e6cdac7f02214",
+      "size_bytes": 44048
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/context-selection.json",
+      "sha256": "6ddb4c9a743dec332d14c3a1608b0c15306925a6f2fd19840527fbcaa0937735",
+      "size_bytes": 1548
+    }
+  ],
+  "provenance": {
+    "ai_authored_questions": 8,
+    "ai_authored_oracles": 8,
+    "synthetic_sources_reused_only_from_this_frozen_C3_family": true,
+    "new_synthetic_sources_authored_this_task": 0,
+    "human_author_count": 0,
+    "human_review_count": 0,
+    "author_self_checks_are_not_independent_review": true
+  },
+  "independent_prereview": {
+    "reviewer_id": "/root/c2_validation_source_review",
+    "status": "pending",
+    "actual_item_reviews": 0,
+    "accepted_items": 0,
+    "rejected_items": 0,
+    "author_and_reviewer_distinct": true,
+    "source_prereview_does_not_count_as_item_prereview": true
+  },
+  "counts": {
+    "cases": 8,
+    "public": 4,
+    "synthetic": 4,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "required_facts_total": 33,
+    "supported_facts": 28,
+    "missing_facts": 5,
+    "answered_required_fact_min": 5,
+    "answered_required_fact_max": 5,
+    "genuinely_multiple_document_answered": 4,
+    "cross_language_answered": {
+      "en_to_ko": 1,
+      "ko_to_en": 1
+    },
+    "partial_known_missing_abstained": 4,
+    "whole_family_absence_author_checks": 4,
+    "selected_context_occurrences": 28,
+    "unique_selected_chunks": 14
+  },
+  "construction_order": [
+    "verify committed source binding bytes",
+    "read all four complete frozen source bodies",
+    "form questions and required facts from source semantics and registered allocation",
+    "select unmodified whole original chunks in source/chunk ordinal order",
+    "reconstruct complete frozen block evidence units and coordinates",
+    "validate strict draft and C3 oracle contracts",
+    "write draft/oracle/context selection and this pending-review receipt"
+  ],
+  "contract_checks": {
+    "validate_inventory": true,
+    "validate_processing_receipts": true,
+    "accepted_source_prereview": true,
+    "validate_draft": true,
+    "AnswerRequest_exact_payload": true,
+    "C3OracleFile": true,
+    "validate_oracles_validation": true,
+    "whole_chunk_equality": true,
+    "original_source_then_chunk_ordinal_order": true,
+    "max_ten_contexts": true,
+    "whole_block_evidence_and_coordinates": true,
+    "registered_family_language_answerability": true,
+    "minimum_three_to_six_answered_facts": true,
+    "genuinely_necessary_two_documents_at_least_two": true,
+    "both_cross_language_directions": true,
+    "all_abstained_have_known_and_missing_facts": true,
+    "self_review_is_not_independent_semantic_validation": true
+  },
+  "per_item_author_self_checks": [
+    {
+      "id": "C3-VAL-01",
+      "self_check_only": true,
+      "whole_family_sources_read": true,
+      "selection_basis": "semantic relevance before any tokenizer or generation feedback",
+      "semantic_check": "F1/F2 require the writing document; F3/F4/F5 require the deployment document. The navigation paragraph spans two original chunks and its sufficient evidence set retains both complete frozen units, without trimming or joining chunk text.",
+      "whole_family_absence_checked": false,
+      "all_selected_chunks_original_and_complete": true
+    },
+    {
+      "id": "C3-VAL-02",
+      "self_check_only": true,
+      "whole_family_sources_read": true,
+      "selection_basis": "semantic relevance before any tokenizer or generation feedback",
+      "semantic_check": "Configuration, retained-plugin handling and offline theme constraints require the deployment document. The raw-HTML conversion limitation requires the writing document, so both documents are genuinely necessary.",
+      "whole_family_absence_checked": false,
+      "all_selected_chunks_original_and_complete": true
+    },
+    {
+      "id": "C3-VAL-03",
+      "self_check_only": true,
+      "whole_family_sources_read": true,
+      "selection_basis": "semantic relevance before any tokenizer or generation feedback",
+      "semantic_check": "The complete writing and deployment sources contain no apex A-record IPv4 list. The custom-domain source provides location/format and external links, not the missing values; relevant complete chunks retain the known portion.",
+      "whole_family_absence_checked": true,
+      "all_selected_chunks_original_and_complete": true
+    },
+    {
+      "id": "C3-VAL-04",
+      "self_check_only": true,
+      "whole_family_sources_read": true,
+      "selection_basis": "semantic relevance before any tokenizer or generation feedback",
+      "semantic_check": "The complete family was read, including all hosting-provider and local-file sections. Neither source supplies a maximum publication delay; its absence is not caused by selecting away a relevant chunk.",
+      "whole_family_absence_checked": true,
+      "all_selected_chunks_original_and_complete": true
+    },
+    {
+      "id": "C3-VAL-05",
+      "self_check_only": true,
+      "whole_family_sources_read": true,
+      "selection_basis": "semantic relevance before any tokenizer or generation feedback",
+      "semantic_check": "The numeric acceptance limits exist in the preparation meeting while the hold, revision and completed registration are in the test record. Header units preserve the program/date association; complete table and prose units preserve criteria, actor, time and test-only scope.",
+      "whole_family_absence_checked": false,
+      "all_selected_chunks_original_and_complete": true
+    },
+    {
+      "id": "C3-VAL-06",
+      "self_check_only": true,
+      "whole_family_sources_read": true,
+      "selection_basis": "semantic relevance before any tokenizer or generation feedback",
+      "semantic_check": "The scope and picture-change limits require the preparation source, while the actual revised values and unchanged translation/name spelling require the test source. The timing evidence includes the full table with both column headers and the separate sign-definition unit.",
+      "whole_family_absence_checked": false,
+      "all_selected_chunks_original_and_complete": true
+    },
+    {
+      "id": "C3-VAL-07",
+      "self_check_only": true,
+      "whole_family_sources_read": true,
+      "selection_basis": "semantic relevance before any tokenizer or generation feedback",
+      "semantic_check": "The full family ends at the May 17 test registration and assigns later event results to a separate future record. The actual May 21 start time is absent from all adopted source bytes; all four family chunks are supplied unchanged.",
+      "whole_family_absence_checked": true,
+      "all_selected_chunks_original_and_complete": true
+    },
+    {
+      "id": "C3-VAL-08",
+      "self_check_only": true,
+      "whole_family_sources_read": true,
+      "selection_basis": "semantic relevance before any tokenizer or generation feedback",
+      "semantic_check": "Both full sources distinguish the English-subtitle workflow from the separate Korean descriptive-subtitle work. The latter has no final filename or approval date anywhere in the family; all family chunks remain in the payload.",
+      "whole_family_absence_checked": true,
+      "all_selected_chunks_original_and_complete": true
+    }
+  ],
+  "exposure": {
+    "source_author_and_item_author_same_role": true,
+    "source_review_metadata_seen": true,
+    "C3_plan_data_registry_and_generic_contracts_seen": true,
+    "generic_block_catalog_used_only_for_frozen_evidence_unit_reconstruction": true,
+    "candidate_generation_prompts_not_opened_this_task": true,
+    "official_tokenizer_or_generation_feedback_seen": false,
+    "parent_source_whitespace_exposure_incident": {
+      "path": "data/evaluation/meetings-c3-source-exposure-v1.json",
+      "sha256": "ca21c3ec5149c71b484382698b943ea200662b5202f650604e16ab716407c6e3",
+      "size_bytes": 6858
+    },
+    "incident_details_read_for_question_selection": false,
+    "parent_semantic_feedback_received": false,
+    "questions_not_selected_or_avoided_based_on_parent_exposed_information": true,
+    "historical_closed_pool_metadata_automatically_injected": true,
+    "prior_role_had_C2_validation_authorship_exposure": true,
+    "closed_pool_body_or_question_files_opened_this_task": 0,
+    "prior_pool_content_reuse_translation_or_paraphrase": false,
+    "eligible_for_independent_output_judging": false
+  },
+  "preservation": {
+    "existing_file_count": 18,
+    "existing_artifacts_unchanged": [
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/.gitattributes",
+        "sha256": "daa3fbd3add46395a26c3686200a199def24f2994501ed2e7feb7dd782ca92aa",
+        "size_bytes": 76
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/ATTRIBUTION.md",
+        "sha256": "96d74311a09eb91481851f07f7fc94dd8d91d90352b66d9fee434796090fe609",
+        "size_bytes": 2593
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/inventory.json",
+        "sha256": "407d8c66c842936e988c9e47e4172e44e84f0c748a22005a44fb20e64b3fb75c",
+        "size_bytes": 101281
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/java-parity.json",
+        "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+        "size_bytes": 1908
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/processing-receipt.json",
+        "sha256": "b7a69e6fc3a75ba2098daa3fe456069f02b1a6b7a10cafcfa088ddfe9f7e6c73",
+        "size_bytes": 3906
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/source-adoption-summary.json",
+        "sha256": "3723faa1fe25d0b6d39c97c4972c0efe83e9411a401c10c9b1e7f9fe5ca326ff",
+        "size_bytes": 3883
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/source-authoring-receipt.json",
+        "sha256": "dd0b7706ebd808dde7e4f8018d6f4470eb4faac182258f32d4a44626dc9c756f",
+        "size_bytes": 8022
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/source-freeze-summary.json",
+        "sha256": "4f5df15a47070f13105e588de385e5471da0c91bd3dee3501306c739f727f372",
+        "size_bytes": 7817
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json",
+        "sha256": "abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733",
+        "size_bytes": 1838
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/source-manifest.json",
+        "sha256": "4af98dd1cfc8d026b84ff8d497ceac2ef53ba025214e1bbf49bddc370feb16a0",
+        "size_bytes": 14709
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/source-path-scan-classification.json",
+        "sha256": "a5ed93638f8ddad8054f0edb6bf1cd9b993ff6148baca0f4a176570d28953bd6",
+        "size_bytes": 1604
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/source-prereview.json",
+        "sha256": "2bbe229755d1bfadb798d4bb1adcf6daf80d04c01ef9053579c47a339d7a8663",
+        "size_bytes": 19257
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-documentation-license.md",
+        "sha256": "9263c69ea49f938516831e56f7f62372d67004b1a74648a0b59b13aacf40a701",
+        "size_bytes": 1599
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-LICENSE.txt",
+        "sha256": "26041bd625fc39411dc4b32748216236931c904adb90c2b3e0ba697090a5d54e",
+        "size_bytes": 1292
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-01.md",
+        "sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+        "size_bytes": 19342
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-02.md",
+        "sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+        "size_bytes": 9434
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-01.md",
+        "sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+        "size_bytes": 3187
+      },
+      {
+        "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-02.md",
+        "sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+        "size_bytes": 3175
+      }
+    ],
+    "source_freeze9_unchanged": true,
+    "toolchain66_candidate28_legacy72_41_18_unchanged": true,
+    "raw_source_edits": 0,
+    "chunk_trimming_merging_resegmentation": 0,
+    "question_or_context_selection_after_token_feedback": 0,
+    "original_receipt_overwrites": 0
+  },
+  "activity": {
+    "item_freezes_created": 0,
+    "official_tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "native_calls": 0,
+    "runtime_gpu_launches": 0,
+    "downloads": 0,
+    "network_calls": 0,
+    "paid_calls": 0,
+    "git_operations": 0,
+    "global_document_edits": 0
+  },
+  "next_state": "Separate item prereviewer must review the original drafts before any item freeze or token preparation; no independent item verdict is claimed here.",
+  "ownership_returned": true
+}

@@ -1,5 +1,15 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-14 · Validation item 검토의 실제 거절
+
+기존c2_validation_source_review(Astra xhigh)가원문전체와8문항을대조해7승인/1거절·수정1을판정했다. 원문/질문저자와다른역할이나source사전검토에도참여했으므로출력judge에서는제외한다. 부모는거절ID·완전성/근거충분성일반범주·metadata summary/hash만받았다. 원래초안과구체적지적은그대로보존하고격리저자가새v2보정한다. 사용자검수나답변품질결과는아니며검증tokenizer/native0이다.
+
+## 2026-10-14 · 출력 판정자 예약과 설명 자료
+
+기존c2_calibration_judge(Astra xhigh)는C2 사후 진단 이력을 공개한 현재C3 최종답변 판정자다. 새c3_validation_judge는 실제spawn 도구에 gpt-6-astra/xhigh/fork_turns=none을 지정했고 수락됐다. 두 역할은 현재자료/설계/사전검토에 참여하지 않고 실제노출 attestation만 작성했다. 부모가schema·제외역할·시각을 검증하고 원본 공개사본과seed64bytes씩을 보존했다. 과거결과/모델/가설metadata 노출을 완전맹검으로 포장하지 않는다. 아직judge 판정0·human0이며 사용자/부모모델 변경도 없다.
+
+부모는 실제실패와다음가설을 설명하는 MEETINGS-LEARNING을 작성했다. 사용자가직접이해·검수했다는표시가아니며, DEMO의첫단계설명을과거시점으로구분했다. Validation 문항 의미 검토는별도격리역할이진행하며 부모는내용대신파일hash/size와허용metadata만확인했다. 이전부모source 일부노출사건은별도로유지한다.
+
 ## 2026-10-14 · C3 실제 calibration tokenizer 준비
 
 부모가57981ca 고정 뒤 공식 offline tokenizer6입력을 한 번 검사했다. 모두통과1704..3118, 모델/native/download0이며 원본·공개사본 바이트/모든snapshot/원래payload/survey contract를 대조했다. 새 모델 호출이나 답변 의미 판정이 아니다. 격리 자료 작성자는 source커밋 뒤 validation8 문항을 작성하고 별도 사전검토를 받는다. 인간 검수0·무료 로컬·부모 설정 변경 없음.

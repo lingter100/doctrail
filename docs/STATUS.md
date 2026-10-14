@@ -1,5 +1,19 @@
 # 진행 상태
 
+## C3 validation 사전검토7승인/1거절 · 원본 보존 후 새 v2 보정
+
+별도 Astra xhigh item 검토가8문항 중7승인/1거절(C3-VAL-05), 문항단위수정1을 보고했다. 일반 원인은 필수정보 완전성/근거 충분성이며 구체 의미 설명은 격리 notes에만 보존한다. 기계적schema·좌표·whole-context·등록구성은 통과했고 source9와기존23파일은 그대로다. 부모는 전용 summary와hash만 확인하며 원문/문항/의미설명을 읽거나 내용수정을 지시하지 않는다.
+
+원래draft/oracle-draft/selection/저자pending 영수증과 거절prereview3파일을 그대로 커밋하고, 동일 격리저자가 검토자 지적을 읽어 NEW v2파일만 작성한다. 다른7문항/source/후보66은 보존하며 v2도 별도사전검토 후에만itemfreeze/공식tokenizer를 진행한다. 이 보정은 생성결과나길이에맞춘튜닝이아니다. Validation tokenizer/native0·human0, cal6 준비는재실행하지않는다. 전체goal active·phase1/PR14 미완료/draft.
+
+## C3 검증 문항8개 작성 · 독립 채점 역할 사전 등록
+
+Calibration 입력 커밋452dd92의 push38530777488/PR38530783697에서 backend/java-service/web 필수3job이 각각 모두 성공했다. 격리 저자가 새validation8을 작성했고 별도 c2_validation_source_review가 item 의미 검토 중이다. 작성자 보고는KO4/EN4·답변4/부족4·필수 복수문서4·양방향 언어교차이며 부모는 허용된 요약metadata와4원본파일 hash/size만 확인했다. 독립 승인 전 문항 고정/토크나이저/추론을 하지 않는다.
+
+최종 출력 judge는 calibration의 기존c2_calibration_judge와 validation의 새c3_validation_judge이며 실제 도구 수락 설정은 둘 다Astra xhigh다. 자기신고 attestation2개를 생성 전에 받고 schema/제외역할을 검증했다. 두 역할 모두 AGENTS의 모델·가설·과거 결과metadata를 보았으므로 `metadata-exposed, label-masked`이며 완전 맹검이 아니다. 현C3 작성/설계/사전검토 비참여와 현재plan/mapping/raw/기존판정 미열람을 신고했고, calibration judge의 과거C2 진단 참여는 별도로 적었다. 새seed64bytes씩과hash를 보존하고 원본attestation의 공개바이트사본/부모원문노출2영수증을 `meetings-c3-review-registration-v1/registration.json`에 연결했다. 판정0/native0/human0, 실제 품질실행계획은 아직 없다.
+
+면접 설명용 [회의 학습 자료](MEETINGS-LEARNING.md)는 실제 인용/의미 실패와 C3 선택 이유·대안·검증 한계를 정리한다. 기존 DEMO는M1~M3 당시 설명으로 표시해 현재 기능과 혼동하지 않게 했다. 전체goal active·phase1/PR14 미완료/draft다.
+
 ## C3 calibration 공식 입력6개 통과 · 격리 문항 작성 중
 
 `57981ca7690c46d5c6d81a85acf6939392d8ef59`에서 calibration item6·validation source9·실제 source 노출 이탈 기록을 커밋/푸시했고 GitHub author/committer 모두lingter100을 확인했다. push38530352554/PR38530359486에서 backend/java-service/web 필수3job이 각각 모두 성공했다. CI는 모델 답변을 생성하지 않는다.
