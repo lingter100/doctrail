@@ -13,6 +13,10 @@ C2 고정 전 전체 Python1,325개·Ruff가 통과했고 C1 실행 계획의92�
 
 `662965d`의 push/PR 필수 CI도 모두 성공했고 GitHub author/committer가 각각lingter100인 것을 확인했다. 새 비교용 줄 단위 대조군은 별도 파일에서 구현했으며 원래 C0 prompt/grammar/mapper와384/90 제한을 합성10개로 확인했다. 대조군 추가 후 전체 Python1,335개·Ruff도 통과했다. 실제 C2 품질 비교는 아직 실행하지 않았다.
 
+대조군·실측 보존 커밋 `ddae7bb`의 push/PR 필수 CI도 모두 성공했다. [새 비교 계획](MEETINGS-C2-COMPARISON-PLAN.md)과 [4계열 registry](../data/evaluation/meetings-c2-family-registry-v1.json)를 질문보다 먼저 등록한다. Calibration8/validation12의 출처·언어·답변 가능성 구성과 선택 조건을 고정했지만 실제 질문·oracle·context는0이다. 공개2계열의 고정 commit·경로·LICENSE/NOTICE 메타데이터를 확인했고 개별 문서 이용 조건·본문 적합성은 자료 작성자가 확인해야 하므로 source 채택은 HOLD다. 사용자 승인 대기가 아니다.
+
+**바로 이어 할 작업:** 새 `scripts/probe_meeting_blocks_comparison.py`와 합성 회귀를 구현한다. L0/C2의 교대 순서·단일 호출·384/90 예산·실행 전 dispatch·안전 중단·자원 보고서 연결·validation 선행 게이트를 강제한다. 새 익명 감사 도구와 metric/review schema까지 코드로 고정한 뒤 자료 작성자가 split별 source를 채택하고 새 문항을 만든다. 현재 비교 실행기·새 질문 작성·품질 호출은 미완성이며 기존 실험의 재실행으로 대신하지 않는다.
+
 **C1 실제 비교는 구조 오류로 종료했다.** `45810d2`에서 중립2건/native4회는 통과했고 calibration8계획 중4건/native8회를 실행했다. 네 번째 V0가 초안 주장2개 중1개만 검토해 `generation_invalid_review`로 차단됐다. 나머지4건과 validation은 실행하지 않는다. [원본·실측·원인](MEETINGS-C1-RESULTS.md)을 보존하며 처음3건의 구조 수용을 의미 정답으로 세지 않는다. 사후 부분 의미 검토도 완료했으며 [문단 보존 후속 설계](MEETINGS-C1-FAILURE-FOLLOWUP.md)에 따라 새 단일 생성 후보와 자원 진단을 구현한다. 전체 목표는 활성 상태이며 사용자 진행 지시를 기다리지 않는다.
 
 중립+calibration 총12native회, D1/V1실행0, 유료0이다. calibration 요청은69.094~119.032초이며 모두120초이내지만 수정 경로의 여유는 입증되지 않았다. 종료 후92파일해시 일치·프로세스정리·native로그0바이트를 확인했다. 원본의 초기false flags는 그대로 보존한다. 준비커밋45810d2의 push/PR 필수 CI는 모두 성공했다. PR14는 draft이고 회의1차 자연어답변은 미완성이다.
