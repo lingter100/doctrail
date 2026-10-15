@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 결정 연결 삭제 경합2건 수정 · 실제 Java 브라우저21개 통과
+
+삭제204 뒤 이전GET이 삭제한 연결을 되살리는 문제와, 복구 조회 도중 삭제 후 재조회가 실패하면 재시도 버튼이 계속 비활성 상태인 문제를 각각 실제 Java에서 먼저 재현했다. 성공 시 이전 상세/연결 소유권과refresh상태를 무효화하고 최신 연결을 다시 읽는다. 실패한 DELETE는 연결을 유지하며 자동 재요청하지 않는다.
+
+최종kApN5c에서 새4+충돌5+목록9+기존회의3=21통과/0실패다. TypeScript/build/package-DskipTests 통과이며 실제LLM/사용자검수0이다. [결정 연결 복구](MEETINGS-LINK-RECOVERY.md), 영수증 SHA84c62a511eb0ab74a39684f9a25a1db9f443f53680656e8b133e5e542fd49051에 source3·실패2·중간20통과·최종21통과를 구분했다. 부모 화면 확인도 완료했다. 다음은 이 source의 커밋/원격CI다.
+
+C4 원본 실패는 유지하고 새 동일예산 후속 설계259712c를 push했다. 기존 Astra high가 NEW4 launcher/probe/tests만 구현 중이며 새tokenizer/native/품질0이다. 목표active·Phase1/PR14미완료/draft를 유지한다.
+
 ## C4 별도 동일예산 호환성 후속 등록 · 결정 연결 경합 수정 중
 
 원본 실패63c2b0f의 push38706361018/PR38706369300 필수3job이 모두 성공했다. Astra xhigh 고정 source 검토는 반복 최소2000 한도와 logger를 우회하는stderr 출력을 확인했다. [새 후속 계약](MEETINGS-C4-COMPAT-PLAN.md)은 z2048 const·내용폐기/전체byte계수 drain으로 호환성만 바꾸고928/요청사고512/90초를 유지한다. 실제 속도의94.875초 단순추정 위험을 명시하며 후속도 실패하면 예산 사다리 재시도를 하지 않는다. 새 source/tokenizer/native/품질0, 코드·CI 후 공식 offline 완성JSON>928 검증→plan커밋→neutral2 순서다.

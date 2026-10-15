@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "kind": "meeting_decision_link_delete_recovery_local_verification",
+  "recorded_date_kst": "2026-10-15",
+  "basis_commit": "259712c",
+  "source_state": "verified three-file patch before commit; exact hashes below",
+  "sources": [
+    {
+      "file": "web/src/useMeetings.ts",
+      "sha256": "8ba26352a4e637ba47b39439e9b27195c998f35bfbe03ce61afdad3b4f02226b",
+      "bytes": 13083
+    },
+    {
+      "file": "web/scripts/test-java.mjs",
+      "sha256": "2fba9e0f9f91fc5469863d581fd12e4f7fc090b5575144f26307a9257800b962",
+      "bytes": 9310
+    },
+    {
+      "file": "web/tests/meeting-link-recovery.spec.ts",
+      "sha256": "c543cf221851d22cf0ca6386015d032a101bde273d53136fb810ab20a3f7cdf3",
+      "bytes": 10867
+    }
+  ],
+  "actual_stack": "Java21, SQLite, sessions, decision links, packaged React and Chromium",
+  "synthetic_boundaries": [
+    "deterministic model HTTP transport NOT LLM",
+    "injected DELETE/GET failures",
+    "buffered delivery of actual Java GET/DELETE responses"
+  ],
+  "llm_calls": 0,
+  "human_reviews": 0,
+  "new_browser_passed": 4,
+  "existing_browser_passed": 17,
+  "original_batch": {
+    "file": ".local/web-e2e-batch-kApN5c/run.json",
+    "sha256": "886fdfc966c357d5b76fda5e5847799462dcee28618559397d1b39695631e73d",
+    "bytes": 3082
+  },
+  "successful_spec_runs": [
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T08:37:41.256Z",
+        "spec": "meeting-ready.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 5,
+          "answer": 1
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T08:37:26.232Z",
+        "duration": 14978.247,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-kApN5c/web-e2e-4fjjR0/run.json",
+        "sha256": "7211cb0daf6493e1e419e7f5617a9212d22f9df67179edce8ac68fca182aec4c",
+        "bytes": 368
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-kApN5c/web-e2e-4fjjR0/report.json",
+        "sha256": "29a8768adbd05002ca9f5c48a68d7674f8e13f0ac79034090e2bc8e3ee3edb01",
+        "bytes": 6427
+      }
+    },
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T08:37:21.151Z",
+        "spec": "meeting-list-state.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 8,
+          "answer": 0
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T08:37:03.675Z",
+        "duration": 17426.558,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-kApN5c/web-e2e-JoPP4B/run.json",
+        "sha256": "513be8fd3812982799faba08f3ebfd05a1654e935d926f58e67adcb0941521e5",
+        "bytes": 373
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-kApN5c/web-e2e-JoPP4B/report.json",
+        "sha256": "ef2be3607552a6b0f78159b75e20711786c6f33b068e2c360a43170214499ad5",
+        "bytes": 12966
+      }
+    },
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T08:36:58.856Z",
+        "spec": "meeting-link-recovery.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 9,
+          "answer": 0
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T08:36:50.036Z",
+        "duration": 8779.068000000001,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-kApN5c/web-e2e-rqPZmi/run.json",
+        "sha256": "0854b2812f07ab35b6284e6bfb9ef032cf7b5e20988669d94c70a91d427ddd51",
+        "bytes": 376
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-kApN5c/web-e2e-rqPZmi/report.json",
+        "sha256": "eb14054faf4245098d8703a02964c36df1aea35f5884b09e495c9a32b3513c2b",
+        "bytes": 7518
+      }
+    },
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T08:36:45.547Z",
+        "spec": "meeting-conflict-recovery.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 5,
+          "answer": 0
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T08:36:34.871Z",
+        "duration": 10629.813,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-kApN5c/web-e2e-sJxeyI/run.json",
+        "sha256": "a57c9c0ae46d01dc8775f65e4f58bbf6b5b8d5ee0f8b23434ac28bcb83feb9e5",
+        "bytes": 380
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-kApN5c/web-e2e-sJxeyI/report.json",
+        "sha256": "bfe16bbb5ba9422b08efebbef5fa666803437cfaaece3e933ffd7d1a61dfb55b",
+        "bytes": 8688
+      }
+    }
+  ],
+  "preserved_failures": [
+    {
+      "meaning": "First original product reproduction: actual DELETE204 and server state onlyL2, buffered oldGET restoredL1; 0passed/1failed.",
+      "run": {
+        "file": ".local/web-e2e-batch-A09njm/web-e2e-E8GpHP/run.json",
+        "sha256": "04ea6b9c68cd276d728da3df2682e10498067050632766d804a098a114ec75b2",
+        "bytes": 376
+      },
+      "report": {
+        "file": ".local/web-e2e-batch-A09njm/web-e2e-E8GpHP/report.json",
+        "sha256": "38352e149b8c7ed7bde981bfa81d29ef87f2fa24641a603f22420e6bdfd3bcba",
+        "bytes": 9697
+      },
+      "stats": {
+        "startTime": "2026-10-15T08:32:13.354Z",
+        "duration": 12927.633,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    {
+      "meaning": "First second-defect reproduction: deleting during recovery and a fresh GET failure left retry disabled; 0passed/1failed.",
+      "run": {
+        "file": ".local/web-e2e-batch-79zLEA/web-e2e-RlAJhA/run.json",
+        "sha256": "0f538a4d1ec88787445d972543386991483a5300dec2485e6cd619befa31d74e",
+        "bytes": 376
+      },
+      "report": {
+        "file": ".local/web-e2e-batch-79zLEA/web-e2e-RlAJhA/report.json",
+        "sha256": "820f54ef98402f016ccff91ef8174b92db58debc05e76bcb4b5e379a4afcdd1e",
+        "bytes": 9329
+      },
+      "stats": {
+        "startTime": "2026-10-15T08:35:44.850Z",
+        "duration": 13300.025,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    }
+  ],
+  "passing_batch_before_refresh_fix": {
+    "file": ".local/web-e2e-batch-fMd5WG/run.json",
+    "sha256": "3dc94d3cd430818ad4136ccd76d14f441f2317b03fc61e8b85bee712ab19be62",
+    "bytes": 3081
+  },
+  "screenshots": [
+    {
+      "file": ".local/web-e2e-batch-kApN5c/web-e2e-rqPZmi/results/meeting-link-recovery-real-5e677-d-link-or-hide-the-new-link/link-delete-stale-response.png",
+      "sha256": "d661a38cf99b034d8a2d6822f672ced06bb59e1fca9c7bf694d988560545526e",
+      "bytes": 172906
+    }
+  ],
+  "parent_visual_review": "Final desktop screenshot inspected: delete-success notice and only surviving L2 displayed. AI review, not user review.",
+  "other_checks": {
+    "typecheck": "passed by implementation role",
+    "production_build": "passed by implementation role",
+    "java_package": "passed with -DskipTests; no full local Java suite claim"
+  },
+  "limitations": [
+    "No durable offline store",
+    "Failed DELETE remains an explicit retry, not automatic resend",
+    "Aborted browser responses do not roll back already completed server writes",
+    "No model quality, real outage incidence or user satisfaction measurement",
+    "Remote CI recorded separately after push"
+  ]
+}

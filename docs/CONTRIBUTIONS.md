@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · 결정 연결 경합 재현·수정·검증
+
+meeting_product_audit(실제 Astra xhigh)가 코드에서 삭제 후 지연GET 경합을 확인했다. meeting_link_recovery(실제 Astra high)가 실제 Java·SQLite 응답으로 첫 실패를 재현하고3파일을 수정했다. 부모가 취소된refresh의 상태 고착을 추가 제기했고 같은 구현 역할이 별도 실패를 실제 재현한 뒤 보완했다. 최종21개 브라우저·type/build/package-DskipTests를 통과했다. 부모는 source3해시·원본 실패/성공 보고서 대조·최종 화면 확인·영수증과 문서·Git을 맡는다. 모델 전송은 합성이고LLM0·사용자검수0이다.
+
 ## 2026-10-15 · native 실패 원인 검토와 새 호환성 계약
 
 기존 free_qa_candidate_review(실제 Astra xhigh)가 고정 parser/converter/logger source를 확인해 최초 설계의 반복 한도 누락을 인정하고 동일예산 후속과 사고256 대안을 비교했다. 읽기 전용으로 native/tokenizer/download0이며 부모가 새 protocol과 설계문서를 등록했다. 별도 meeting_link_recovery는 실제 도구가 Astra high/fork none을 수락했고 Java 실제 지연 응답의 원본 실패를 보존하며3개 web파일을 수정 중이다. 부모는 refresh 취소 뒤 플래그 경합을 추가 제기했다. 사용자 검수는0이다.

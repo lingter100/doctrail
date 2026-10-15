@@ -179,7 +179,15 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
   async function removeLink(id: string) {
     if (!detail) return;
     const meetingId = detail.document.id;
-    return mutate(signal => api(`/meetings/${meetingId}/links/${id}`, { method: 'DELETE', signal }), () => { if (selected.current === meetingId) { setLinks(current => current.filter(link => link.id !== id)); setNotice('결정 연결을 해제했어요.'); } });
+    return mutate(signal => api(`/meetings/${meetingId}/links/${id}`, { method: 'DELETE', signal }), () => {
+      if (selected.current !== meetingId) return;
+      // A prior add/refresh may still hold the pre-delete links response.
+      // Retire that read before removing locally, then reconcile surviving links.
+      request('detail'); setRefreshing(false);
+      setLinks(current => current.filter(link => link.id !== id));
+      setNotice('결정 연결을 해제했어요.');
+      void open(meetingId, true);
+    });
   }
   useEffect(() => {
     mounted.current = true; void load();
