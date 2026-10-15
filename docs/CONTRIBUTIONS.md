@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · 원격 검증과 후속 범위 판단
+
+부모가6314e5d의 push/PR 필수3job 전체 성공과 PR browser34/0·Python2154/21skip을 확인했다. 기존 c2_budget_followup(Astra xhigh)은 공개 C3 calibration 진단과 구조를 읽어 두 방향을 비교했으며 파일/새 추론/validation 열람0이었다. 부모는 좁은 상태 조회를 원래 범용 Q&A 완료로 대체하지 않는 범위 판단과 다음 실행 경계를 기록했다. 사용자 의견이나 사용자 검수로 가장하지 않는다.
+
 ## 2026-10-15 · 회의 편집 복구 구현·회귀·화면 확인
 
 meeting_conflict_recovery(실제 Astra high)가 React controller/editor/CSS와 새 브라우저 검사, 해당 검사에만 합성 전송을 허용하는 runner를 수정했다. 지정된5파일이 기존 freeze에 포함되지 않음을 확인했다. TypeScript/build/JAR package와 새5개/기존3개 실제 Java 브라우저를 통과했고 초기 테스트 fixture·selector·setup 실패를 숨기지 않고 보존했다. 부모는 코드 검토, 원본 run/report와 최종 source SHA 연결,390px 화면 확인, 문서화·커밋을 담당했다. 합성 worker 호출을 실제 LLM 분석으로 세지 않으며 사용자 검수0이다.
