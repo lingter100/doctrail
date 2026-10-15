@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · C4 자원 전용 구현·독립 전송 검토·고정
+
+bounded_thinking_transport(실제 Astra high)가 NEW5파일을 구현하고 최종47합성검사·Ruff를 통과했다. free_qa_candidate_review(실제 Astra xhigh)는 고정 native 소스를 읽어 JSON fence/EOS/설정/budget 구분을 검토했고 native 실행·파일 수정0이었다. 부모는 launcher/probe와 source closure를 직접 읽어 cleanup 시간 덮어쓰기·상대import 누락을 제기했고 구현 역할이 이를 수정·회귀 검증했다. 부모가 최종5해시·43binding과 기존불변조건을 확인해 sourcefreeze·tooling영수증·문서를 작성한다. 설계·구현 역할은 향후 독립 품질 judge로 사용하지 않는다. 아직 native/tokenizer/download/품질자료/사용자검수0이다.
+
 ## 2026-10-15 · 목록 복구와 권한 경합 재현·수정
 
 기존 meeting_conflict_recovery(Astra high)가 React5파일에 독립 목록 상태·재시도·권한 거절 무효화와 새9개 실제 Java 브라우저 검사를 구현했다. 부모의 코드 검토에서 늦은201/대상 조회의 소유권 경합을 제기했고, 같은 역할이 수정 전 상세 재등장 실패를 실제 재현해 보존한 뒤 고쳤다. 최종새9+충돌5+기존3, 총17개와 type/build/package-DskipTests를 통과했다. 부모는 실제 run/report·최종source 해시 대조,390px 화면 확인, 영수증·문서화·커밋을 담당했다. 초기 test setup 오류와 실제 제품 결함 재현을 구분한다. 합성 transport/GET 오류를 모델 정확도나 실제 서버 권한 취소 실험으로 기록하지 않으며 LLM0·사용자검수0이다.

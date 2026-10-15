@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 목록 수정 원격43개 통과 · C4 자원 코드43파일 고정
+
+9ed4dc5의 push38702886691/PR38702895274는 필수 backend/java-service/web3job이 각각 모두 성공했다. PR Linux Python2154통과/21환경skip/기존warning1, 실제 Java 브라우저43통과/0실패다. GitHub author/committer는 모두lingter100이다. C4 설계7b6a74a의 앞선push38702278986/PR38702285726도 모두 성공했다.
+
+새 C4-P0 transport/launcher/resource probe와 테스트5파일을 구현했고 실제 Astra high 최종합성47통과/1.63초·Ruff통과다. Source closure의 relative import 누락을 수정해43파일을 고정했다. [구현·실행 경계](MEETINGS-C4-RESOURCE-IMPLEMENTATION.md), sourcefreeze SHA2ba79c7fba2ad52090392f9256396dc8a1813b6bfae31d6b06a7ba2dd9f2d701, tooling 영수증4badfc8047aea8175613296b70f70188515253ddcfd9cb5479d783ed3bef7ea5를 따른다. 이전43/46검사는 수정 전 결과로 구분한다. 현재 newnative/tokenizer/download/qualitydata0이다.
+
+다음은 source+freeze 커밋·CI 뒤 새 neutral2 offline입력 등록, plan 커밋 뒤 실제 자원 단발 실행이다. C4는 아직 서비스에 연결하지 않았으며 원래 broadQ&A와cal6/6→val8/8을 유지한다. 기존 goal active·Phase1/PR14 미완료/draft, 닫힌 C3와 모든 oldpool은 재실행하지 않는다.
+
 ## 회의·작업 목록 실패 복구 · 실제 Java 브라우저17개 통과
 
 2026-10-15. 최초 조회 실패를 실제 빈 목록·0개와 분리했고, 일시적 갱신 실패는 이전 조회 표시와 재시도를 제공한다. 회의/작업 조회 상태를 독립 관리해 상세·저장·폴링 성공이 다른 목록 오류를 지우지 않는다. 명시적403/404 뒤 목록·상세·근거를 숨기고 오래된 mutation/targets 응답도 무효화한다. 부모 검토가 제기한 늦은201의 상세 재등장을 실제 Java+합성403으로 재현한 뒤 수정했다. 서버 저장이 이미 반영됐을 수 있으므로 자동 재요청하지 않는다.
