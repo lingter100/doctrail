@@ -12,7 +12,7 @@
 
 후속 주장 검토 방식도 정확 인용58/58과 별개로 전체 의미 기준0/4에 머물렀다. 문단 단위 C2의 별도 실행 역시 언어 오류로 중단됐으며, 정상 반환된7쌍의 사후 진단은 대조군과 후보 모두 완전 정답1/7이었다. 인용 문자열47/47일치가 답변 완전성을 보장하지 않았다. 이 진단은 모델 metadata에 노출된 AI 검토이며 완전 맹검 비교가 아니다. [C1 실패](docs/MEETINGS-C1-RESULTS.md)와 [C2 원본·진단·한계](docs/MEETINGS-C2-BUDGET-RESULTS.md)를 보존한다.
 
-현재 C3는 요구사항별 근거 계획 후 자연어로 답하는 두 단계 후보를 구현·고정했고 합성 검사101개를 통과했다. 새 자료·실제 모델 품질 검증은 아직 준비 단계다. [후보 구현](docs/MEETINGS-C3-IMPLEMENTATION.md), [실행·판정 계약](docs/MEETINGS-C3-EXECUTION-CONTRACT.md), [현재 상태](docs/STATUS.md)를 기준으로 완료 여부를 구분한다. 서비스에서는 AI 답변 오류 뒤 같은 질문과 필터로 [원문 검색을 이어가는 흐름](docs/MEETINGS-SEARCH-RECOVERY.md)을 실제 Java/React에서 확인했다.
+최신 C3는 요구사항별 근거 계획 후 자연어로 답하는 두 단계 후보를 고정하고 실제6요청/9추론을 완료했다. 독립 최종답변 판정은2/6이며 정확 인용30/30과 의미 정확성은 달랐다. 검증 split 생성과 서비스 채택은 하지 않는다. [실제 C3 결과](docs/MEETINGS-C3-RESULTS.md), [실행·판정 계약](docs/MEETINGS-C3-EXECUTION-CONTRACT.md), [현재 상태](docs/STATUS.md)를 기준으로 완료 여부를 구분한다. 서비스에서는 AI 답변 오류 뒤 같은 질문과 필터로 [원문 검색을 이어가는 흐름](docs/MEETINGS-SEARCH-RECOVERY.md)을 실제 Java/React에서 확인했다.
 
 문서 등록 → 검색 → 원문 근거 확인을 로컬에서 구현·검증했다. 로그인·작업공간·나만 보기 권한, 수정·삭제·재처리, 검색 기록·피드백도 실제 API에 연결했다. 기본 BM25 외에 E5 의미 검색·혼합·BGE 재정렬을 선택할 수 있으며 실제 로컬 GPU와 Java·React 연결을 합성 자료로 검증했다. 검색 임베딩의 제한 미세조정도 실제로 수행했다. [현재 상태](docs/STATUS.md), [모델 서비스 실행·한계](docs/MODEL-SERVING.md).
 

@@ -1,5 +1,15 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · 독립 C3 판정과 실패 보존
+
+기존 c2_calibration_judge(Astra xhigh)가 최종답변6개를 독립 판정해2/6을 기록했다. 부모가 공식 lock을 만든 뒤에만 계획을 공개했고, 같은 judge가6개/27요구사항의 별도 진단을 작성했다. Judge는 mapping/raw/validation을 열지 않았다고 보고했으며 기존 metadata 노출 attestation과 사람0을 유지했다. 부모는 판정을 대신 작성하지 않고 공식 finalize/replay, 실패 gate 확인, 원본9파일 공개 사본·SHA연결 및 설명 문서를 담당했다. 검증 생성/서비스 채택/새 추론은0이다.
+
+## 2026-10-15 · 기존 실행 회수와 제품 감사
+
+부모는 기존 cal6 완료 원본을 회수해 byte-identical 공개 사본·실행 영수증을 만들고 동결 replay와 audit prepare를 실행했다. 새 추론0이며 실제 cal9호출은 앞선 단발 실행에서 발생했다. 사전 예약 c2_calibration_judge를 재개해 익명 최종답변만 전달했고, 답변 판정은 부모가 작성하지 않는다.
+
+새 phase1_delivery_audit는 실제 도구에 Astra xhigh/fork none을 지정해 수락됐으며 코드와 운영 기록을 읽어 충돌 복구·실패 빈 상태 문제를 확인했다. 이 역할은 모델 실험 판정에 참여하지 않는다. 새 meeting_conflict_recovery는 실제 Astra high/fork none으로 수락됐으며 지정된 React 파일과 새 실제 Java 브라우저 검사를 담당한다. 감사는 read-only이며 구현·검증 완료는 후속 기록으로 구분한다. 사용자 검수0, 부모 모델 변경 주장은 없다.
+
 ## 2026-10-14 · 실제 C3 neutral4와 품질 계획
 
 부모가 d9273c8의 고정 neutral을 한 번 실행했다. 실제4native·정상8.063초/부하85.547초·소유정리/metadata재시작/로그0을 확인했고 원본 공개사본 및 동결 재생을 검증했다. 결과 보고와 양split/독립judge/원문노출을 연결한 새 품질 실행계획도 부모가 작성해 모델 없는calibration check를 통과했다. 아직품질생성/사람검수0이며 자원통과를 답변정확성이나사용자승인으로기록하지않는다.

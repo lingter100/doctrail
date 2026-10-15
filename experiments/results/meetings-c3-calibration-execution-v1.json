@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "purpose": "c3_actual_calibration_execution_before_independent_quality_judgment",
+  "execution_commit": "9a8453af93c3d44a1d5e7c8e29fc594c55b310ac",
+  "plan": {
+    "file": "data/evaluation/meetings-c3-quality-plan-v1.json",
+    "sha256": "c5e3f11479e9f240befe1ffcaf83aed0ddcf2288ea294a10bfe0432574def24b"
+  },
+  "original": {
+    "file": ".local/meetings-c3-run-calibration-v1/report.json",
+    "sha256": "8e0d875ebb5ecd23be194485a34b8ef30951134b34a4001e1fa9604cffb88274"
+  },
+  "public_copy": {
+    "file": "experiments/results/meetings-c3-calibration-v1.json",
+    "sha256": "8e0d875ebb5ecd23be194485a34b8ef30951134b34a4001e1fa9604cffb88274"
+  },
+  "original_public_byte_identical": true,
+  "status": "completed",
+  "requests": [
+    {
+      "id": "C3-CAL-01",
+      "status": "passed",
+      "elapsed_ms": 43406.00000019185,
+      "error": null,
+      "stage2_readiness": "measured_at_runtime",
+      "native_rss_sample_count": 169,
+      "native_rss_max_sample_mib": 6513.265625
+    },
+    {
+      "id": "C3-CAL-02",
+      "status": "passed",
+      "elapsed_ms": 21969.00000004098,
+      "error": null,
+      "stage2_readiness": "not_required",
+      "native_rss_sample_count": 85,
+      "native_rss_max_sample_mib": 6730.2421875
+    },
+    {
+      "id": "C3-CAL-03",
+      "status": "passed",
+      "elapsed_ms": 17015.999999828637,
+      "error": null,
+      "stage2_readiness": "not_required",
+      "native_rss_sample_count": 66,
+      "native_rss_max_sample_mib": 6974.2421875
+    },
+    {
+      "id": "C3-CAL-04",
+      "status": "passed",
+      "elapsed_ms": 74780.99999995902,
+      "error": null,
+      "stage2_readiness": "measured_at_runtime",
+      "native_rss_sample_count": 287,
+      "native_rss_max_sample_mib": 7442.859375
+    },
+    {
+      "id": "C3-CAL-05",
+      "status": "passed",
+      "elapsed_ms": 49109.999999869615,
+      "error": null,
+      "stage2_readiness": "measured_at_runtime",
+      "native_rss_sample_count": 191,
+      "native_rss_max_sample_mib": 7885.6796875
+    },
+    {
+      "id": "C3-CAL-06",
+      "status": "passed",
+      "elapsed_ms": 17280.99999995902,
+      "error": null,
+      "stage2_readiness": "not_required",
+      "native_rss_sample_count": 67,
+      "native_rss_max_sample_mib": 8103.36328125
+    }
+  ],
+  "native_posts": 9,
+  "c3_lineage_calls": 13,
+  "unexecuted": [],
+  "operational": {
+    "sources_unchanged": true,
+    "processes_stopped": true,
+    "metadata_recovery": true,
+    "metadata_restart_attempts": 1,
+    "recovery_native_calls": 0,
+    "owned_cleanup_ms": 1155.9999999590218,
+    "recovery_cleanup_ms": 1109.9999998696148,
+    "last_request_through_cleanup_ms": 18547.00000002049,
+    "native_log_bytes": 0,
+    "elapsed_seconds": 327.39099999982864,
+    "memory_scope": "sampled_native_rss_and_system_available_ram_endpoints; GPU not measured; not a peak"
+  },
+  "failures": {},
+  "review_registration": {
+    "file": "data/evaluation/meetings-c3-review-registration-v1/registration.json",
+    "sha256": "4b4c19a73efa0f37acd522104cecb8b7d24665d3b76f0180c73711a5fc08f675"
+  },
+  "execution_reporting": {
+    "file": "data/evaluation/meetings-c3-execution-reporting-v1.json",
+    "sha256": "44f9ede534f1bfe2b9dd2bf589a7aa22c340a28cb0375672db504543d5fbbb39"
+  },
+  "quality_judgments_at_publication": 0,
+  "selected": false,
+  "validation_quality_calls": 0,
+  "human_review_count": 0,
+  "paid_calls": 0
+}

@@ -1,0 +1,998 @@
+{
+  "schema_version": 1,
+  "purpose": "post_lock_plan_diagnostic",
+  "reviewer_id": "/root/c2_calibration_judge",
+  "answer_lock_sha256": "da6898cc0d33e6dca20bafc84f134096db8fbb875716fc1d8966c2cb88d39a36",
+  "plan_pack_sha256": "8102ac53bc0c709eb41ec144ccc7dbeabf2e33a8ac0e0d44cb2ef8b87d81d3e6",
+  "human_review_count": 0,
+  "items": [
+    {
+      "sample_id": "sample-001",
+      "plan_sha256": "3119b9dcc49618e081d80017902b72b1e2aea1b22d68b257adb6915abc4b9ddb",
+      "requirements": [
+        {
+          "requirement_id": 1,
+          "oracle_fact_ids": [
+            "C3-CAL-01-F1",
+            "C3-CAL-01-F2",
+            "C3-CAL-01-F3"
+          ],
+          "need_relevant": true,
+          "support_assessment": "partial",
+          "status_justified": false,
+          "reason": "The need covers shared-resource lifecycle choice and timing, but units 24/26/30 only establish startup/shutdown behavior and shared-resource use. Unit 35 is a truncated yield/with fragment. None of these assigned units supplies the lifespan recommendation or async-context-manager parameter mechanism; 'after shutdown' in the need is also not the source's during-shutdown wording.",
+          "support_offsets": [
+            {
+              "evidence_id": 24,
+              "start_offset": 40,
+              "end_offset": 240
+            },
+            {
+              "evidence_id": 26,
+              "start_offset": 242,
+              "end_offset": 454
+            },
+            {
+              "evidence_id": 30,
+              "start_offset": 689,
+              "end_offset": 870
+            }
+          ]
+        },
+        {
+          "requirement_id": 2,
+          "oracle_fact_ids": [
+            "C3-CAL-01-F4"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "These units jointly identify the BackgroundTasks interface, the email use case, post-response execution and lack of client waiting. The larger example unit also contains unrelated file processing, but relevant supporting portions are sufficient.",
+          "support_offsets": [
+            {
+              "evidence_id": 2,
+              "start_offset": 42,
+              "end_offset": 113
+            },
+            {
+              "evidence_id": 4,
+              "start_offset": 191,
+              "end_offset": 296
+            },
+            {
+              "evidence_id": 6,
+              "start_offset": 327,
+              "end_offset": 381
+            },
+            {
+              "evidence_id": 10,
+              "start_offset": 821,
+              "end_offset": 955
+            }
+          ]
+        },
+        {
+          "requirement_id": 3,
+          "oracle_fact_ids": [
+            "C3-CAL-01-F5"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Unit 47 explicitly establishes that lifespan replaces rather than co-runs the startup/shutdown handlers. Its recommendation cannot repair the separate requirement 1 binding or introduce an async context manager not present here.",
+          "support_offsets": [
+            {
+              "evidence_id": 47,
+              "start_offset": 4870,
+              "end_offset": 5019
+            }
+          ]
+        },
+        {
+          "requirement_id": 4,
+          "oracle_fact_ids": [
+            "C3-CAL-01-F6"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Unit 64 explicitly limits these events to the main app and excludes mounted sub-applications.",
+          "support_offsets": [
+            {
+              "evidence_id": 64,
+              "start_offset": 7819,
+              "end_offset": 7969
+            }
+          ]
+        }
+      ],
+      "oracle_coverage": [
+        {
+          "fact_id": "C3-CAL-01-F1",
+          "requirement_ids": [
+            1
+          ],
+          "need_covered": true,
+          "reason": "The lifecycle-mechanism need represents this requested topic, although its wording and assigned evidence fail to specify the async-context-manager implementation. Topic coverage is not evidence sufficiency."
+        },
+        {
+          "fact_id": "C3-CAL-01-F2",
+          "requirement_ids": [
+            1
+          ],
+          "need_covered": true,
+          "reason": "Startup timing is represented in requirement 1; its selected unit 24 includes once-before-requests detail."
+        },
+        {
+          "fact_id": "C3-CAL-01-F3",
+          "requirement_ids": [
+            1
+          ],
+          "need_covered": true,
+          "reason": "Cleanup timing is represented, but the need's 'after shutdown' shorthand is imprecise; selected unit 26 describes during shutdown."
+        },
+        {
+          "fact_id": "C3-CAL-01-F4",
+          "requirement_ids": [
+            2
+          ],
+          "need_covered": true,
+          "reason": "The email mechanism and post-response timing are explicitly represented."
+        },
+        {
+          "fact_id": "C3-CAL-01-F5",
+          "requirement_ids": [
+            3
+          ],
+          "need_covered": true,
+          "reason": "The compatibility limitation with prior handlers is explicit."
+        },
+        {
+          "fact_id": "C3-CAL-01-F6",
+          "requirement_ids": [
+            4
+          ],
+          "need_covered": true,
+          "reason": "The mounted-sub-application limitation is explicit."
+        }
+      ],
+      "realization_checks": [
+        {
+          "requirement_id": 1,
+          "fully_realized": false,
+          "added_inference": true,
+          "reason": "The final claim omits the async-context-manager parameter mechanism and asserts a recommendation not supported by its own assigned evidence. It also adds 'all requests' completion; the locked judgment records these support failures. The final text says 'when shutting down' instead of reproducing the need's inaccurate after-shutdown shorthand."
+        },
+        {
+          "requirement_id": 2,
+          "fully_realized": true,
+          "added_inference": false,
+          "reason": "The final claim gives BackgroundTasks for simple email and post-response execution, satisfying the corresponding need."
+        },
+        {
+          "requirement_id": 3,
+          "fully_realized": true,
+          "added_inference": false,
+          "reason": "The handler-exclusion rule is fully stated and supported."
+        },
+        {
+          "requirement_id": 4,
+          "fully_realized": true,
+          "added_inference": false,
+          "reason": "Main-only execution and mounted-sub-app exclusion are fully stated."
+        }
+      ],
+      "abstention_branch": null,
+      "abstention_appropriate": null,
+      "abstention_reason": null,
+      "failure_categories": [
+        {
+          "category": "evidence_misclassification",
+          "evidence": "Requirement 1 was marked supported although its assigned units lack the recommendation and async-context-manager mechanism and do not support an after-shutdown timing requirement."
+        },
+        {
+          "category": "realization_omission",
+          "evidence": "The final answer does not explain supplying an async context manager to the lifespan parameter, a required part of the requested mechanism."
+        },
+        {
+          "category": "added_inference",
+          "evidence": "Requirement 1 introduces an after-shutdown shorthand, and its final claim adds an all-requests-completed statement plus a recommendation unsupported by that claim's own selected units. The existing locked answer judgment remains unchanged."
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-002",
+      "plan_sha256": "cc17318b279bf6e9a274651e2917954f4dd68ecfb374e0b19e466f4bb0b55f5f",
+      "requirements": [
+        {
+          "requirement_id": 1,
+          "oracle_fact_ids": [
+            "C3-CAL-05-F1"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Unit 16 contains both named checks, the requirement that both finish, and staff lending for areas still unchecked. The other selected units provide consistent actual checks/status; they do not require closing access.",
+          "support_offsets": [
+            {
+              "evidence_id": 16,
+              "start_offset": 801,
+              "end_offset": 923
+            }
+          ]
+        },
+        {
+          "requirement_id": 2,
+          "oracle_fact_ids": [
+            "C3-CAL-05-F2",
+            "C3-CAL-05-F3"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "The complete opening-status header in unit 35 and overlapping rows in 35/36 distinguish the shelves at the opening. Unit 31 expressly says the second section's book order was correct but its label was wrong. These are sufficient for the requested readiness comparison; the final text need not invent a clock time.",
+          "support_offsets": [
+            {
+              "evidence_id": 35,
+              "start_offset": 828,
+              "end_offset": 846
+            },
+            {
+              "evidence_id": 35,
+              "start_offset": 884,
+              "end_offset": 921
+            },
+            {
+              "evidence_id": 31,
+              "start_offset": 670,
+              "end_offset": 771
+            },
+            {
+              "evidence_id": 36,
+              "start_offset": 943,
+              "end_offset": 982
+            }
+          ]
+        },
+        {
+          "requirement_id": 3,
+          "oracle_fact_ids": [
+            "C3-CAL-05-F4"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Unit 38 supplies the complete named correction/recheck/notification/removal/reopening sequence. Unit 31 supplies the original restriction.",
+          "support_offsets": [
+            {
+              "evidence_id": 38,
+              "start_offset": 1108,
+              "end_offset": 1212
+            }
+          ]
+        },
+        {
+          "requirement_id": 4,
+          "oracle_fact_ids": [
+            "C3-CAL-05-F5",
+            "C3-CAL-05-F6"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Units 38 and 40 explicitly distinguish guidance-work completion from trial completion and state that layout retention remains undecided, with opinions and work records through April 24 going to the next discussion.",
+          "support_offsets": [
+            {
+              "evidence_id": 38,
+              "start_offset": 1213,
+              "end_offset": 1256
+            },
+            {
+              "evidence_id": 40,
+              "start_offset": 1325,
+              "end_offset": 1391
+            }
+          ]
+        }
+      ],
+      "oracle_coverage": [
+        {
+          "fact_id": "C3-CAL-05-F1",
+          "requirement_ids": [
+            1
+          ],
+          "need_covered": true,
+          "reason": "Pre-reopening checks and the consequence of outstanding checks fall within requirement 1."
+        },
+        {
+          "fact_id": "C3-CAL-05-F2",
+          "requirement_ids": [
+            2
+          ],
+          "need_covered": true,
+          "reason": "The opening readiness comparison includes the first shelf."
+        },
+        {
+          "fact_id": "C3-CAL-05-F3",
+          "requirement_ids": [
+            2
+          ],
+          "need_covered": true,
+          "reason": "The readiness comparison includes the second section's correct order versus mismatched guidance."
+        },
+        {
+          "fact_id": "C3-CAL-05-F4",
+          "requirement_ids": [
+            3
+          ],
+          "need_covered": true,
+          "reason": "The responsible person and correction sequence are explicitly requested."
+        },
+        {
+          "fact_id": "C3-CAL-05-F5",
+          "requirement_ids": [
+            4
+          ],
+          "need_covered": true,
+          "reason": "The meaning of completion for the trial includes its limited scope."
+        },
+        {
+          "fact_id": "C3-CAL-05-F6",
+          "requirement_ids": [
+            4
+          ],
+          "need_covered": true,
+          "reason": "The broad overall-trial question includes the pending retention decision and follow-up records; both are in its assigned source."
+        }
+      ],
+      "realization_checks": [
+        {
+          "requirement_id": 1,
+          "fully_realized": true,
+          "added_inference": true,
+          "reason": "The named checks, both-check condition and staff lending are included, but 'confirmed and closed' adds closing access, which was absent from the plan and its evidence. Content coverage and the added error are recorded separately."
+        },
+        {
+          "requirement_id": 2,
+          "fully_realized": false,
+          "added_inference": false,
+          "reason": "The final comparison omits the explicit correct-book-order distinction for the second section, although unit 31 provides it."
+        },
+        {
+          "requirement_id": 3,
+          "fully_realized": true,
+          "added_inference": true,
+          "reason": "All correction and reopening steps are included, but the gendered 'she' adds information not specified in the source; the locked answer diagnosis is preserved."
+        },
+        {
+          "requirement_id": 4,
+          "fully_realized": false,
+          "added_inference": true,
+          "reason": "The final wording changes layout retention to 'maintenance,' describes already-planned collection among pending decisions, and omits forwarding work records and opinions to the next discussion."
+        }
+      ],
+      "abstention_branch": null,
+      "abstention_appropriate": null,
+      "abstention_reason": null,
+      "failure_categories": [
+        {
+          "category": "realization_omission",
+          "evidence": "Selected evidence fully provided the second section's correct book order and the records-to-next-discussion follow-up, but these details were omitted in the final answer."
+        },
+        {
+          "category": "added_inference",
+          "evidence": "The plan's neutral needs and sufficient source selections did not contain closing access, gender information or a shelf-maintenance decision; those appeared in realization, along with treating planned collection as a pending decision."
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-003",
+      "plan_sha256": "34ef2f97bd7b2840235866151615ecfdf1473d168600361b8256858d152910c7",
+      "requirements": [
+        {
+          "requirement_id": 1,
+          "oracle_fact_ids": [
+            "C3-CAL-02-F1",
+            "C3-CAL-02-F3",
+            "C3-CAL-02-F4"
+          ],
+          "need_relevant": true,
+          "support_assessment": "partial",
+          "status_justified": false,
+          "reason": "The broad route/dependency setup need is relevant. Units 10 and 15 are duplicate parameter declarations; 48 and 50 describe levels and reuse. They do not explain calling add_task or its arguments, and they omit object creation/injection, so the entire broad how-to need is not supported by this selection alone.",
+          "support_offsets": [
+            {
+              "evidence_id": 10,
+              "start_offset": 821,
+              "end_offset": 955
+            },
+            {
+              "evidence_id": 48,
+              "start_offset": 2333,
+              "end_offset": 2494
+            },
+            {
+              "evidence_id": 50,
+              "start_offset": 2496,
+              "end_offset": 2624
+            }
+          ]
+        },
+        {
+          "requirement_id": 2,
+          "oracle_fact_ids": [
+            "C3-CAL-02-F1"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "The type declaration plus unit 19 directly explains FastAPI creating and passing the object. Duplicate units 10/15 are unnecessary but do not remove this support.",
+          "support_offsets": [
+            {
+              "evidence_id": 10,
+              "start_offset": 821,
+              "end_offset": 955
+            },
+            {
+              "evidence_id": 19,
+              "start_offset": 1026,
+              "end_offset": 1125
+            }
+          ]
+        },
+        {
+          "requirement_id": 3,
+          "oracle_fact_ids": [
+            "C3-CAL-02-F2",
+            "C3-CAL-02-F3"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "The selected task-function introduction and def/async-def sentence establish both forms; unit 44 names add_task and its callable, ordered positional arguments and keyword arguments. The narrower forms/arguments need is supported.",
+          "support_offsets": [
+            {
+              "evidence_id": 23,
+              "start_offset": 1182,
+              "end_offset": 1233
+            },
+            {
+              "evidence_id": 27,
+              "start_offset": 1296,
+              "end_offset": 1396
+            },
+            {
+              "evidence_id": 44,
+              "start_offset": 1909,
+              "end_offset": 2207
+            }
+          ]
+        },
+        {
+          "requirement_id": 4,
+          "oracle_fact_ids": [
+            "C3-CAL-02-F4",
+            "C3-CAL-02-F5"
+          ],
+          "need_relevant": true,
+          "support_assessment": "partial",
+          "status_justified": false,
+          "reason": "Units 48/50/51 jointly preserve the dependency levels, FastAPI subject, reused object and merged tasks. 'Afterwards' is not anchored to returning the response in these units. The requested scheduling fact is available elsewhere in the provided context but not in this selection.",
+          "support_offsets": [
+            {
+              "evidence_id": 48,
+              "start_offset": 2260,
+              "end_offset": 2494
+            },
+            {
+              "evidence_id": 50,
+              "start_offset": 2496,
+              "end_offset": 2624
+            },
+            {
+              "evidence_id": 51,
+              "start_offset": 2629,
+              "end_offset": 2666
+            }
+          ]
+        },
+        {
+          "requirement_id": 5,
+          "oracle_fact_ids": [],
+          "need_relevant": false,
+          "support_assessment": "not_assessable",
+          "status_justified": false,
+          "reason": "Target audience/version constraints were not requested and are not a fixed-oracle requirement. Lack of evidence for this invented need cannot legitimately make the requested how-to answer uncertain.",
+          "support_offsets": []
+        },
+        {
+          "requirement_id": 6,
+          "oracle_fact_ids": [],
+          "need_relevant": false,
+          "support_assessment": "not_assessable",
+          "status_justified": false,
+          "reason": "Error handling/failure scenarios were not requested. Adding an uncertain failure-handling requirement introduces a new completion condition unrelated to answering this question.",
+          "support_offsets": []
+        }
+      ],
+      "oracle_coverage": [
+        {
+          "fact_id": "C3-CAL-02-F1",
+          "requirement_ids": [
+            1,
+            2
+          ],
+          "need_covered": true,
+          "reason": "Route setup and obtaining the object are represented, with complete injection evidence under requirement 2."
+        },
+        {
+          "fact_id": "C3-CAL-02-F2",
+          "requirement_ids": [
+            3
+          ],
+          "need_covered": true,
+          "reason": "Function forms are explicitly represented."
+        },
+        {
+          "fact_id": "C3-CAL-02-F3",
+          "requirement_ids": [
+            1,
+            3
+          ],
+          "need_covered": true,
+          "reason": "The route-addition how-to and function-argument needs jointly represent this requested information, though requirement 1's own selected units are incomplete."
+        },
+        {
+          "fact_id": "C3-CAL-02-F4",
+          "requirement_ids": [
+            1,
+            4
+          ],
+          "need_covered": true,
+          "reason": "Nested dependency setup and task combination are represented."
+        },
+        {
+          "fact_id": "C3-CAL-02-F5",
+          "requirement_ids": [
+            4
+          ],
+          "need_covered": true,
+          "reason": "Scheduling is included as a need, but its selected evidence omits the response-return timing anchor."
+        }
+      ],
+      "realization_checks": [],
+      "abstention_branch": "stage1",
+      "abstention_appropriate": false,
+      "abstention_reason": "The plan contains uncertain requirements 5 and 6, so the frozen branch rule identifies stage1 abstention without needing raw traces. Those requirements are invented completion conditions, not missing requested information. The fixed oracle expects an answer; the existing incorrect-abstention judgment is unchanged.",
+      "failure_categories": [
+        {
+          "category": "evidence_misclassification",
+          "evidence": "Requirements 1 and 4 are labeled supported despite, respectively, incomplete add-task how-to evidence and a missing post-response timing anchor in their selected units."
+        },
+        {
+          "category": "added_inference",
+          "evidence": "The plan adds mandatory target-audience/version and error-handling needs not present in the question or oracle, then marks both uncertain."
+        },
+        {
+          "category": "abstention_choice",
+          "evidence": "The unsupported extra needs make the plan not fully supported and trigger stage1 abstention on a question whose genuine requirements are answerable from the adopted contexts."
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-004",
+      "plan_sha256": "2ad221f9402bf168b8c732e60d24b8421306bae4ab2dd7e47e7211b1ceeb6ee8",
+      "requirements": [
+        {
+          "requirement_id": 1,
+          "oracle_fact_ids": [
+            "C3-CAL-04-F1"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Unit 8 contains the route-conflict trigger, trial movement of existing furniture, and both excluded purposes. The final loss of the exclusions occurs despite sufficient source evidence.",
+          "support_offsets": [
+            {
+              "evidence_id": 8,
+              "start_offset": 211,
+              "end_offset": 355
+            }
+          ]
+        },
+        {
+          "requirement_id": 2,
+          "oracle_fact_ids": [
+            "C3-CAL-04-F2"
+          ],
+          "need_relevant": true,
+          "support_assessment": "partial",
+          "status_justified": false,
+          "reason": "Unit 14 establishes two shelves, parallel trial placement and the two excluded fixtures, but does not identify the two movable shelves as the essay shelves. That target detail exists in an unselected paragraph.",
+          "support_offsets": [
+            {
+              "evidence_id": 14,
+              "start_offset": 542,
+              "end_offset": 633
+            }
+          ]
+        },
+        {
+          "requirement_id": 3,
+          "oracle_fact_ids": [
+            "C3-CAL-04-F4"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Unit 38 fully supplies Ryu's name, the curtain interference, moving the first shelf away from the entrance, aligning the second shelf and keeping the parallel orientation.",
+          "support_offsets": [
+            {
+              "evidence_id": 38,
+              "start_offset": 361,
+              "end_offset": 526
+            }
+          ]
+        },
+        {
+          "requirement_id": 4,
+          "oracle_fact_ids": [
+            "C3-CAL-04-F3"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Unit 14 directly supports this requirement's recording-window part of the combined work-date/window oracle fact; requirement 6 separately covers the date.",
+          "support_offsets": [
+            {
+              "evidence_id": 14,
+              "start_offset": 655,
+              "end_offset": 701
+            }
+          ]
+        },
+        {
+          "requirement_id": 5,
+          "oracle_fact_ids": [
+            "C3-CAL-04-F6"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Units 14 and 27 fully support compilation on April 24 by Mun, separate meeting scheduling by Cha and renewed discussion using the records. They do not support personal pre-meeting review by Cha or a guaranteed final decision.",
+          "support_offsets": [
+            {
+              "evidence_id": 14,
+              "start_offset": 655,
+              "end_offset": 701
+            },
+            {
+              "evidence_id": 27,
+              "start_offset": 1358,
+              "end_offset": 1413
+            }
+          ]
+        },
+        {
+          "requirement_id": 6,
+          "oracle_fact_ids": [
+            "C3-CAL-04-F3"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "For the stated need 'work date', unit 14 supplies April 13 and regular closure, and unit 32 supplies the year and target-work identity. The need does not itself claim actual completion; that extra assertion is a realization issue.",
+          "support_offsets": [
+            {
+              "evidence_id": 14,
+              "start_offset": 634,
+              "end_offset": 654
+            },
+            {
+              "evidence_id": 32,
+              "start_offset": 156,
+              "end_offset": 188
+            }
+          ]
+        }
+      ],
+      "oracle_coverage": [
+        {
+          "fact_id": "C3-CAL-04-F1",
+          "requirement_ids": [
+            1
+          ],
+          "need_covered": true,
+          "reason": "The purpose need covers the reported trigger, trial adjustment and excluded purposes; the full details are in its selection."
+        },
+        {
+          "fact_id": "C3-CAL-04-F2",
+          "requirement_ids": [
+            2
+          ],
+          "need_covered": true,
+          "reason": "Approved scope is represented, but the selected source misses the essay-shelf identifier."
+        },
+        {
+          "fact_id": "C3-CAL-04-F3",
+          "requirement_ids": [
+            4,
+            6
+          ],
+          "need_covered": true,
+          "reason": "The recording interval and work date are explicitly split between requirements 4 and 6."
+        },
+        {
+          "fact_id": "C3-CAL-04-F4",
+          "requirement_ids": [
+            3
+          ],
+          "need_covered": true,
+          "reason": "Actual positional adjustment is explicitly represented and fully evidenced."
+        },
+        {
+          "fact_id": "C3-CAL-04-F5",
+          "requirement_ids": [],
+          "need_covered": false,
+          "reason": "No requirement asks to distinguish the initial non-permanent approval from the still-pending retention decision at handover. A generic future-procedure need does not capture this two-time status fact, and the selected plans omit the handover paragraph establishing it."
+        },
+        {
+          "fact_id": "C3-CAL-04-F6",
+          "requirement_ids": [
+            5
+          ],
+          "need_covered": true,
+          "reason": "The follow-up procedure is represented with the relevant assigned compilation and scheduling source."
+        }
+      ],
+      "realization_checks": [
+        {
+          "requirement_id": 1,
+          "fully_realized": false,
+          "added_inference": false,
+          "reason": "The final text includes the trigger and trial adjustment but drops the no-shelf-expansion/no-book-disposal exclusions available in unit 8."
+        },
+        {
+          "requirement_id": 2,
+          "fully_realized": false,
+          "added_inference": false,
+          "reason": "The final scope omits essay-shelf identification, reflecting the source-selection gap for requirement 2."
+        },
+        {
+          "requirement_id": 3,
+          "fully_realized": false,
+          "added_inference": false,
+          "reason": "Ryu's name and maintained parallel orientation are omitted even though unit 38 includes both."
+        },
+        {
+          "requirement_id": 4,
+          "fully_realized": true,
+          "added_inference": false,
+          "reason": "The final answer preserves the next-opening-to-April-24 recording window."
+        },
+        {
+          "requirement_id": 5,
+          "fully_realized": false,
+          "added_inference": true,
+          "reason": "The final text changes compilation on April 24 into April 24's records, omits separate meeting scheduling, adds Cha's personal pre-meeting review and strengthens renewed discussion into a final permanent-decision procedure."
+        },
+        {
+          "requirement_id": 6,
+          "fully_realized": true,
+          "added_inference": true,
+          "reason": "The work date/year and regular closure are realized, but the final claim additionally says work was actually performed; the selected schedule/header do not establish that additional execution assertion."
+        }
+      ],
+      "abstention_branch": null,
+      "abstention_appropriate": null,
+      "abstention_reason": null,
+      "failure_categories": [
+        {
+          "category": "requirement_omission",
+          "evidence": "The plan has no requirement for the initial non-permanent approval plus the still-pending retention decision at handover (oracle fact C3-CAL-04-F5)."
+        },
+        {
+          "category": "evidence_misclassification",
+          "evidence": "Requirement 2 is labeled supported although its selected unit omits the essay-shelf target identifier required for complete scope."
+        },
+        {
+          "category": "realization_omission",
+          "evidence": "Despite available evidence, realization drops excluded purposes, Ryu's identity, maintained orientation and Cha's separate meeting-scheduling duty."
+        },
+        {
+          "category": "added_inference",
+          "evidence": "Realization alters the compilation date into a one-day record scope, assigns Cha pre-meeting personal review, guarantees a final-decision procedure and turns a selected schedule/header into an actual-execution assertion."
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-005",
+      "plan_sha256": "b76402ccf0bd8e89c739d02d412dd2fcf2214198362e4c7c36a0106be54a9422",
+      "requirements": [
+        {
+          "requirement_id": 1,
+          "oracle_fact_ids": [
+            "C3-CAL-03-F1"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "The selected units establish email notifications, client non-waiting, post-response execution and the named BackgroundTasks mechanism.",
+          "support_offsets": [
+            {
+              "evidence_id": 2,
+              "start_offset": 42,
+              "end_offset": 113
+            },
+            {
+              "evidence_id": 4,
+              "start_offset": 191,
+              "end_offset": 296
+            },
+            {
+              "evidence_id": 30,
+              "start_offset": 4519,
+              "end_offset": 4642
+            }
+          ]
+        },
+        {
+          "requirement_id": 2,
+          "oracle_fact_ids": [
+            "C3-CAL-03-F1"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "The selected timing and non-waiting passages directly support the requested execution timing.",
+          "support_offsets": [
+            {
+              "evidence_id": 2,
+              "start_offset": 42,
+              "end_offset": 113
+            },
+            {
+              "evidence_id": 4,
+              "start_offset": 191,
+              "end_offset": 296
+            }
+          ]
+        },
+        {
+          "requirement_id": 3,
+          "oracle_fact_ids": [
+            "C3-CAL-03-F2"
+          ],
+          "need_relevant": true,
+          "support_assessment": "unsupported",
+          "status_justified": true,
+          "reason": "A restart/retry guarantee after process interruption is a relevant component of the question. Selected unit 0 is merely the document heading and supplies no such guarantee. Marking this need uncertain, rather than inventing a guarantee, is justified; the oracle confirms the necessary guarantee information is absent.",
+          "support_offsets": []
+        },
+        {
+          "requirement_id": 4,
+          "oracle_fact_ids": [
+            "C3-CAL-03-F2"
+          ],
+          "need_relevant": true,
+          "support_assessment": "unsupported",
+          "status_justified": true,
+          "reason": "The exact guaranteed retry count is explicitly requested. A document heading supplies no count or conditions, and no count is available in the adopted source family. The uncertain status is justified.",
+          "support_offsets": []
+        }
+      ],
+      "oracle_coverage": [
+        {
+          "fact_id": "C3-CAL-03-F1",
+          "requirement_ids": [
+            1,
+            2
+          ],
+          "need_covered": true,
+          "reason": "The email mechanism and execution timing are explicitly represented."
+        },
+        {
+          "fact_id": "C3-CAL-03-F2",
+          "requirement_ids": [
+            3,
+            4
+          ],
+          "need_covered": true,
+          "reason": "The guarantee and its exact retry count are both represented as unestablished needs."
+        }
+      ],
+      "realization_checks": [],
+      "abstention_branch": "stage1",
+      "abstention_appropriate": true,
+      "abstention_reason": "The plan has uncertain requirements 3 and 4, identifying the genuinely missing guarantee/count. Stage1 whole-question abstention is appropriate; known email facts do not justify a partial answered response. Unit 0 is not positive evidence for a retry policy or for zero retries.",
+      "failure_categories": []
+    },
+    {
+      "sample_id": "sample-006",
+      "plan_sha256": "a6e383a62aafd95c2df45135af2a2eeec15e1eb87ae9fb75e9ca10196c93dd27",
+      "requirements": [
+        {
+          "requirement_id": 1,
+          "oracle_fact_ids": [
+            "C3-CAL-06-F1"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "The complete role table assigns post-opening user-feedback records to Bae Yun-seul. The handover paragraph corroborates actual recording of location inquiries without turning those inquiries into votes.",
+          "support_offsets": [
+            {
+              "evidence_id": 21,
+              "start_offset": 927,
+              "end_offset": 946
+            },
+            {
+              "evidence_id": 21,
+              "start_offset": 1081,
+              "end_offset": 1126
+            }
+          ]
+        },
+        {
+          "requirement_id": 2,
+          "oracle_fact_ids": [
+            "C3-CAL-06-F2"
+          ],
+          "need_relevant": true,
+          "support_assessment": "sufficient",
+          "status_justified": true,
+          "reason": "Unit 27 directly names Mun Da-eun and the April 24 compilation date.",
+          "support_offsets": [
+            {
+              "evidence_id": 27,
+              "start_offset": 1358,
+              "end_offset": 1379
+            }
+          ]
+        },
+        {
+          "requirement_id": 3,
+          "oracle_fact_ids": [
+            "C3-CAL-06-F3"
+          ],
+          "need_relevant": true,
+          "support_assessment": "unsupported",
+          "status_justified": true,
+          "reason": "The final favorable-response percentage is explicitly requested. Units 14 and 49 describe planned collection and a pending retention decision, not a numerator, denominator or final percentage. Uncertain status is justified; the oracle confirms this result is absent.",
+          "support_offsets": []
+        }
+      ],
+      "oracle_coverage": [
+        {
+          "fact_id": "C3-CAL-06-F1",
+          "requirement_ids": [
+            1
+          ],
+          "need_covered": true,
+          "reason": "Responsibility for recording user feedback is represented."
+        },
+        {
+          "fact_id": "C3-CAL-06-F2",
+          "requirement_ids": [
+            2
+          ],
+          "need_covered": true,
+          "reason": "Responsibility for compilation is represented, and the selected evidence supplies its date."
+        },
+        {
+          "fact_id": "C3-CAL-06-F3",
+          "requirement_ids": [
+            3
+          ],
+          "need_covered": true,
+          "reason": "The essential final percentage is explicitly represented and left uncertain."
+        }
+      ],
+      "realization_checks": [],
+      "abstention_branch": "stage1",
+      "abstention_appropriate": true,
+      "abstention_reason": "Requirement 3 remains uncertain because the required final percentage is unavailable. The registered branch therefore abstains at stage1, appropriately avoiding a fabricated percentage or a partial answered response.",
+      "failure_categories": []
+    }
+  ]
+}
