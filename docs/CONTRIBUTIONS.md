@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · 목록 복구와 권한 경합 재현·수정
+
+기존 meeting_conflict_recovery(Astra high)가 React5파일에 독립 목록 상태·재시도·권한 거절 무효화와 새9개 실제 Java 브라우저 검사를 구현했다. 부모의 코드 검토에서 늦은201/대상 조회의 소유권 경합을 제기했고, 같은 역할이 수정 전 상세 재등장 실패를 실제 재현해 보존한 뒤 고쳤다. 최종새9+충돌5+기존3, 총17개와 type/build/package-DskipTests를 통과했다. 부모는 실제 run/report·최종source 해시 대조,390px 화면 확인, 영수증·문서화·커밋을 담당했다. 초기 test setup 오류와 실제 제품 결함 재현을 구분한다. 합성 transport/GET 오류를 모델 정확도나 실제 서버 권한 취소 실험으로 기록하지 않으며 LLM0·사용자검수0이다.
+
 ## 2026-10-15 · 무료 사고 경로 설계와 새 구현 역할
 
 새 `free_qa_candidate_review`는 실제 도구에 gpt-6-astra/xhigh/fork none을 지정해 수락됐다. 공개 C3 진단, 허용된 runtime 코드·장비 metadata와 공식 Qwen/Gemma/pinned llama.cpp 자료를 읽어 두 방향을 비교했다. validation/test 본문·oracle 열람, 파일/Git 수정·다운로드·추론은0이었다. 부모는 자원 전용 범위와90초/928tokens 계약을 기록했고 새 `bounded_thinking_transport`를 실제 gpt-6-astra/high/fork none으로 지정해 수락받았다. 이 역할은 NEW5개 코드/테스트 파일만 소유하며 기존 frozen 파일과 서비스 기본값은 변경하지 않는다. 실제 native 실행은 source/input 고정 이후이며 현재0, 사용자검수0이다. 부모 채팅의 모델 설정을 바꿨다는 주장은 없다.

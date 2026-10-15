@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "kind": "meeting_list_load_recovery_local_verification",
+  "recorded_date_kst": "2026-10-15",
+  "basis_commit": "7b6a74ad5705059562ad14d0a52ab9e90a5acc3b",
+  "source_state": "verified five-file patch before commit; exact hashes below",
+  "sources": [
+    {
+      "file": "web/src/useMeetings.ts",
+      "sha256": "7dc9a9ab8316e386e2eb12a6e87002736448ba9e5a9f82db8142a32b145c2c0d",
+      "bytes": 12818
+    },
+    {
+      "file": "web/src/components/MeetingViews.tsx",
+      "sha256": "3317d514ad79c0972814167a34bbbd5cf95ef140e0e6f295b83a1fe611591ed8",
+      "bytes": 34544
+    },
+    {
+      "file": "web/src/meetings.css",
+      "sha256": "2020018de7abf32d7f0205d6e0f6b3fe69d548ca1eca18d2b7b43c3ff62feefa",
+      "bytes": 15287
+    },
+    {
+      "file": "web/tests/meeting-list-state.spec.ts",
+      "sha256": "7c5b5e0c2525e933116c2091b14fac3c03cfb255e60f7fba22afbe6870d3f8e2",
+      "bytes": 17722
+    },
+    {
+      "file": "web/scripts/test-java.mjs",
+      "sha256": "c200c19448b7f9a7a0e7ae202fe3a25c1b3d660162cf531100c408a5e51f15b5",
+      "bytes": 9277
+    }
+  ],
+  "actual_stack": "Java21, SQLite, sessions, packaged React and Chromium",
+  "synthetic_boundaries": [
+    "explicit injected GET errors and delayed response delivery",
+    "deterministic model HTTP transport, NOT an LLM"
+  ],
+  "llm_calls": 0,
+  "human_reviews": 0,
+  "new_browser_passed": 9,
+  "existing_browser_passed": 8,
+  "original_batch": {
+    "file": ".local/web-e2e-batch-SuQbea/run.json",
+    "sha256": "f3543b8cb5fb074c2f835c51122e1ccc118364c424159de0505f05c12b53bf5e",
+    "bytes": 2374
+  },
+  "successful_spec_runs": [
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T07:57:38.117Z",
+        "spec": "meeting-list-state.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 8,
+          "answer": 0
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T07:57:22.520Z",
+        "duration": 15560.65,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-SuQbea/web-e2e-9sWZth/run.json",
+        "sha256": "c43e90ef91a7647d9db31e85604fb55aaa2cf8239a2ed1d1c449f6f430131d72",
+        "bytes": 373
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-SuQbea/web-e2e-9sWZth/report.json",
+        "sha256": "9dc50d2a62a009f3e791248b61c64da1372a335d4d70e06a31730addecad8fdc",
+        "bytes": 12924
+      }
+    },
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T07:57:58.238Z",
+        "spec": "meeting-ready.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 5,
+          "answer": 1
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T07:57:43.951Z",
+        "duration": 14251.475,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-SuQbea/web-e2e-s3Z5fT/run.json",
+        "sha256": "3ae9020655c7727c37c76169f881a4427098b61a401a62e3070aabe03c2acc66",
+        "bytes": 368
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-SuQbea/web-e2e-s3Z5fT/report.json",
+        "sha256": "e600429b8583c18704294c0b2d8bea6e63b79b133032497d04030cb8c25a9674",
+        "bytes": 6388
+      }
+    },
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T07:57:18.204Z",
+        "spec": "meeting-conflict-recovery.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 5,
+          "answer": 0
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T07:57:06.875Z",
+        "duration": 11280.876,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-SuQbea/web-e2e-tzV7jy/run.json",
+        "sha256": "2739d8f7f9bbf6223390fd48663bc44c8aa0e34a3f79c72b1f0d954c3e5ee332",
+        "bytes": 380
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-SuQbea/web-e2e-tzV7jy/report.json",
+        "sha256": "b7a4d7e0cc3286610bc163dc86de9bec338f13b21739bd192d5b9c477942dd41",
+        "bytes": 8649
+      }
+    }
+  ],
+  "preserved_earlier_runs": [
+    {
+      "interpretation": "Initial new-list test: 7 passed, one setup assumption failed because workspace navigation returns to library; test reopened Actions, no production change.",
+      "exit_code": 1,
+      "stats": {
+        "startTime": "2026-10-15T07:49:02.273Z",
+        "duration": 24573.299,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-ySv6x9/web-e2e-429nLA/run.json",
+        "sha256": "b6aacf8efb45995d575c647a810a12538fde774db45353fd826723e5d55dd2ba",
+        "bytes": 373
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-ySv6x9/web-e2e-429nLA/report.json",
+        "sha256": "37cbe20c1286da501c7f1b7ee5f79840a6c6c8018f220dee74f1dd96fb951956",
+        "bytes": 16752
+      }
+    },
+    {
+      "interpretation": "Eight tests passed before the later access-revocation race reproduction; not final-source verification.",
+      "exit_code": 0,
+      "stats": {
+        "startTime": "2026-10-15T07:50:27.212Z",
+        "duration": 16758.858,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-2pwrG4/web-e2e-OLxGUw/run.json",
+        "sha256": "b71547b296466c86a4c80442d309e7f3de16debf7d82ce0ff3a9072ec3700a86",
+        "bytes": 373
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-2pwrG4/web-e2e-OLxGUw/report.json",
+        "sha256": "5a6cfae56528f965adc4efc64c542cc97255451b6bd6b9198eca93aa159b550a",
+        "bytes": 11741
+      }
+    },
+    {
+      "interpretation": "Intentional pre-fix reproduction: delayed real create201 reopened detail after injected list403. Product defect reproduced, then request ownership invalidation fixed it.",
+      "exit_code": 1,
+      "stats": {
+        "startTime": "2026-10-15T07:55:21.425Z",
+        "duration": 12920.412,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-mwDjz0/web-e2e-IV8tuQ/run.json",
+        "sha256": "76212bdee2a519f27688b5510ebaf44bdb111efa324833c1697d51b8b8f4ba3c",
+        "bytes": 373
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-mwDjz0/web-e2e-IV8tuQ/report.json",
+        "sha256": "9c3bb2622a155646ce64c315dd210999177fce909613f9c19290092b83169bd6",
+        "bytes": 9192
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": ".local/web-e2e-batch-SuQbea/web-e2e-9sWZth/results/meeting-list-state-real-Ja-6789d-d-errors-across-detail-save/tasks-stale-list-desktop.png",
+      "sha256": "896179c67bae67b855a56a32dba0118cbcb4e23005c8e04dde8140b44400365f",
+      "bytes": 89543
+    },
+    {
+      "file": ".local/web-e2e-batch-SuQbea/web-e2e-9sWZth/results/meeting-list-state-real-Ja-a664a-t-retry-confirms-true-empty/meetings-initial-failure-mobile.png",
+      "sha256": "0ba9d3c22cf7552a400ae16794a2f0bb90bd289916e45ee3dac45ac514bf4b5f",
+      "bytes": 52369
+    }
+  ],
+  "parent_visual_review": "Final mobile initial-failure screenshot inspected; same-layout earlier desktop stale-task screenshot inspected; no human review.",
+  "other_checks": {
+    "typecheck": "passed by implementation role",
+    "production_build": "passed by implementation role",
+    "java_package": "passed with -DskipTests; not a full Java test claim",
+    "scoped_whitespace": "passed by implementation role"
+  },
+  "limitations": [
+    "Memory-only previous lists, no durable offline store",
+    "Injected access errors verify browser behavior; existing Java ACL checks are separate",
+    "Aborting a browser mutation does not roll back a server write",
+    "No model quality, real outage incidence or user satisfaction measured",
+    "Remote CI recorded separately after push"
+  ]
+}

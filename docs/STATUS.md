@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 회의·작업 목록 실패 복구 · 실제 Java 브라우저17개 통과
+
+2026-10-15. 최초 조회 실패를 실제 빈 목록·0개와 분리했고, 일시적 갱신 실패는 이전 조회 표시와 재시도를 제공한다. 회의/작업 조회 상태를 독립 관리해 상세·저장·폴링 성공이 다른 목록 오류를 지우지 않는다. 명시적403/404 뒤 목록·상세·근거를 숨기고 오래된 mutation/targets 응답도 무효화한다. 부모 검토가 제기한 늦은201의 상세 재등장을 실제 Java+합성403으로 재현한 뒤 수정했다. 서버 저장이 이미 반영됐을 수 있으므로 자동 재요청하지 않는다.
+
+최종 batch SuQbea에서 새9개15.6초·충돌5개11.3초·기존회의3개14.3초, 합계17통과/실패0이다. TypeScript/build/JAR package-DskipTests도 통과했다. source5와 원본 실패·성공 보고서는 `meetings-list-recovery-v1.json` SHA1295cc012eb43622c764ce5d7b8866d01e96f3798799f6658cddb949f327bec3에 연결했다. [목록 복구 문서](MEETINGS-LIST-RECOVERY.md)를 따른다. 실제LLM0·human0, 패키징은 Java 전체검사 주장이 아니다.
+
+C4-P0 설계7b6a74a는 사용자명으로 push됐고 push38702278986의 필수3job이 성공했다. PR38702285726은 이 기록 시점 Java job 진행 중이며 UI 수정은 아직 그 head에 포함되지 않았다. NEW 자원 전용 구현은 별도 Astra high가 진행 중, actualnative0/qualitydata0이다. 다음은 UI head 원격CI와 C4 코드·계약 검사/고정이다. Goal active·Phase1/PR14 미완료/draft, C3닫힘·validation0을 유지한다.
+
 ## C4-P0 자원 전용 설계 등록 · 목록 실패 복구 검증 중
 
 2026-10-15. 실제 Astra xhigh의 공식 문서·고정 runtime 검토 뒤, 캐시 Qwen3.5-9B를 단일 사고 호출로 사용하는 연결·자원 사전 검증을 등록했다. [C4 자원 설계](MEETINGS-C4-RESOURCE-DESIGN.md)를 따른다. 전체928token/공유90초·새 합성neutral2만 허용하며 품질 호출0이다. 512사고/384최종/32framing은 계획 배분이며 독립 native hard cap으로 표현하지 않는다. 최종384는 재토큰화 수용 한도다. 새 자료·품질 평가·서비스 채택은 자원 검증 뒤 별도 계약이며 원래cal6/6→격리val8/8과 전체Q&A 범위를 유지한다.

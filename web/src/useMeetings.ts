@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { api, ApiError } from './api';
+import { api, ApiError, errorMessage } from './api';
 import type { DocTrail } from './useDocTrail';
 import { meetingError, type Analysis, type DecisionLink, type MeetingDetail, type TaskItem } from './meetings';
 
@@ -13,6 +13,10 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
   const [links, setLinks] = useState<DecisionLink[]>([]);
   const [targets, setTargets] = useState<MeetingDetail[]>([]);
   const [loading, setLoading] = useState(true);
+  const [listState, setListState] = useState({
+    meetings: { loaded: false, error: '' },
+    tasks: { loaded: false, error: '' },
+  });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
@@ -33,17 +37,48 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     return { signal: abort.signal, valid: () => mounted.current && !abort.signal.aborted && serials.current.get(key) === token };
   }
   function fail(failure: unknown, valid: () => boolean) { if (valid() && !app.sessionExpired(failure)) setError(meetingError(failure)); }
-  async function load(silent = false) {
+  function accessDenied(failure: unknown) { return failure instanceof ApiError && (failure.status === 403 || failure.status === 404); }
+  function invalidateSelection() {
+    const pendingMutation = mutationBusy.current;
+    request('mutation'); request('targets');
+    mutationBusy.current = false; setBusy(false); setNotice('');
+    edit(false); selected.current = null; setDetail(null); setLinks([]); setTargets([]); app.closeSource();
+    if (pendingMutation) setError('접근 상태가 바뀌어 진행 중인 요청의 결과를 표시하지 않았어요. 서버에 반영됐을 수 있으니 목록을 다시 확인해 주세요.');
+  }
+  async function load() {
     const owner = request('list');
-    if (!silent) { setLoading(true); setError(''); }
+    setLoading(true);
     try {
-      const result = await api<{ items: MeetingDetail[] }>(`/workspaces/${workspaceId}/meetings`, { signal: owner.signal });
-      if (owner.valid()) setMeetings(result.items);
-      if (mode === 'actions') {
-        const result = await api<{ items: TaskItem[] }>(`/tasks?workspace_id=${encodeURIComponent(workspaceId)}`, { signal: owner.signal });
-        if (owner.valid()) setTasks(result.items);
+      try {
+        const result = await api<{ items: MeetingDetail[] }>(`/workspaces/${workspaceId}/meetings`, { signal: owner.signal });
+        if (!owner.valid()) return;
+        setMeetings(result.items);
+        setListState(current => ({ ...current, meetings: { loaded: true, error: '' } }));
+      } catch (failure) {
+        if (!owner.valid() || app.sessionExpired(failure)) return;
+        const denied = accessDenied(failure);
+        if (denied) { setMeetings([]); setTasks([]); invalidateSelection(); }
+        setListState(current => ({ ...current,
+          meetings: { loaded: denied ? false : current.meetings.loaded, error: errorMessage(failure) },
+          tasks: denied ? { loaded: false, error: '회의 접근 상태가 바뀌어 기존 작업 목록도 표시하지 않아요.' } : current.tasks,
+        }));
       }
-    } catch (failure) { fail(failure, owner.valid); }
+      // Tasks have their own endpoint and can succeed even when the meeting
+      // status lookup fails. Neither result can certify the other list.
+      if (mode === 'actions' && owner.valid()) {
+        try {
+          const result = await api<{ items: TaskItem[] }>(`/tasks?workspace_id=${encodeURIComponent(workspaceId)}`, { signal: owner.signal });
+          if (!owner.valid()) return;
+          setTasks(result.items);
+          setListState(current => ({ ...current, tasks: { loaded: true, error: '' } }));
+        } catch (failure) {
+          if (!owner.valid() || app.sessionExpired(failure)) return;
+          const denied = accessDenied(failure);
+          if (denied) { setTasks([]); invalidateSelection(); }
+          setListState(current => ({ ...current, tasks: { loaded: denied ? false : current.tasks.loaded, error: errorMessage(failure) } }));
+        }
+      }
+    }
     finally { if (owner.valid()) setLoading(false); }
   }
   async function open(id: string, silent = false) {
@@ -100,7 +135,7 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     try {
       const result = await action(owner.signal);
       if (!owner.valid()) return false;
-      done(result); void load(true); return true;
+      done(result); void load(); return true;
     } catch (failure) { if (owner.valid()) rejected?.(failure); fail(failure, owner.valid); return false; }
     finally { if (owner.valid()) { mutationBusy.current = false; setBusy(false); } }
   }
@@ -153,9 +188,9 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
   useEffect(() => {
     const pending = (value: MeetingDetail) => ['queued', 'running'].includes(value.meeting.analysis_status);
     if (!(detail && pending(detail)) && !meetings.some(pending)) return;
-    const timer = setTimeout(() => { if (!mutationBusy.current) { void load(true); if (selected.current) void open(selected.current, true); } }, 2500);
+    const timer = setTimeout(() => { if (!mutationBusy.current) { void load(); if (selected.current) void open(selected.current, true); } }, 2500);
     return () => clearTimeout(timer);
   }, [meetings, detail, busy]);
-  return { meetings, tasks, detail, links, targets, loading, busy, error, notice, editing, recovery, refreshing, reviewRequired, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
+  return { meetings, tasks, detail, links, targets, loading, listState, busy, error, notice, editing, recovery, refreshing, reviewRequired, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
 }
 export type MeetingsController = ReturnType<typeof useMeetings>;
