@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · C4 실제 자원 실패 실행·기록과 독립 제품 감사
+
+부모가5dfc95c 이후 공식 단발 runner를 실행했다. 정상1완료·부하1거절·전체실패를 확인하고 원본/진단 바이트 사본과 별도 source43 hash검사·모델 없는 replay를 보존했다. 기존 free_qa_candidate_review(Astra xhigh)에 native grammar/로그·속도 제약의 후속 판단을 요청했다. 별도 meeting_product_audit는 실제 도구가gpt-6-astra/xhigh/fork none을 수락했고 회의 결정 연결 등 Java/React 코드를 읽기 전용 검토한다. 두 역할 모두 품질 평가 judge가 아니며 새로운 품질 자료/사용자검수0이다.
+
 ## 2026-10-15 · C4 원격 확인과 오프라인 입력 준비
 
 부모가130f464의 push/PR 필수3job 성공·Python2201/21skip·Java browser43/0을 확인했다. 저장된 source43과 HEAD 일치 검사를 거쳐 공식 register를 한 번 실행했고 캐시 tokenizer의 정상62/부하5050 입력·plan hash를 확인했다. 별도 모델 없는 check도 통과했다. 모델 가중치 다운로드·실제 생성·품질 자료 작성·사용자검수는0이다. 이 단계는 기존 구현을 실행·기록한 것이며 부모 모델 설정 변경을 주장하지 않는다.

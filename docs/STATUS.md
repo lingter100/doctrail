@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C4-P0 원본 자원 실패 보존 · 품질 호출0
+
+입력계획5dfc95c의 push38705202177/PR38705209533도 필수3job이 각각 모두 성공했다. 이는 원격 합성/서비스 회귀 검사이며 아래 로컬 자원 실패를 통과로 바꾸지 않는다.
+
+5dfc95c에서 neutral2를 한 번 시도했다. 정상62in/521out/EOS·최종재토큰화6·56.172초는 통과했다. 부하는5050입력 요청 뒤 native grammar의 `char{10000,}` 반복 제한으로 거절돼 generation_backend_unavailable로 종료됐다. 로그2167bytes로0로그 조건도 실패했고 실제928token 부하 시간은 미측정이다. 전체98.640초·소유정리0.812초·watchdog미작동·재시작/재시도/품질0이다. 같은 자원 실행을 다시 하지 않는다.
+
+[C4 실제 결과](MEETINGS-C4-RESOURCE-RESULTS.md), raw SHA2b66105860e47180dc29ff78213d43ade81ac29ef2f17ba19ba632440e017729·diagnostic b7f8c9bb70c0d8da6f0331d5b7e604fcd164c84f03506c6b3393238b663cdf53·reporting369d90174f1c73e58683d3fd7cfaa0004903fc44e1f39c46f5b36df4f1ff4f36를 보존했다. 모델 없는 replay는 failed_closed 재현, 별도 source43 hash검사 통과다. 원본 sources_unchanged=false를 고치지 않는다. 다음은 실제 Astra xhigh의 고정 native source·속도 제약 검토 후 별도 후속 계약이며, 독립 제품 audit는 결정 연결의 지연 응답을 검토 중이다. Goal active·Phase1/PR14 미완료/draft·무료로컬, 새 품질자료/사용자검수0이다.
+
 ## C4 코드 원격 CI 통과 · 새 중립 입력2개 등록
 
 130f464055e16e0ca5c751e92f2ee0195e5d7ef5의 push38704337806/PR38704346952에서 backend/java-service/web3job이 각각 모두 성공했다. PR Linux Python2201통과/21환경skip/기존warning1(75.74초), 실제 Java browser43통과/0실패다.
