@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · native 실패 원인 검토와 새 호환성 계약
+
+기존 free_qa_candidate_review(실제 Astra xhigh)가 고정 parser/converter/logger source를 확인해 최초 설계의 반복 한도 누락을 인정하고 동일예산 후속과 사고256 대안을 비교했다. 읽기 전용으로 native/tokenizer/download0이며 부모가 새 protocol과 설계문서를 등록했다. 별도 meeting_link_recovery는 실제 도구가 Astra high/fork none을 수락했고 Java 실제 지연 응답의 원본 실패를 보존하며3개 web파일을 수정 중이다. 부모는 refresh 취소 뒤 플래그 경합을 추가 제기했다. 사용자 검수는0이다.
+
 ## 2026-10-15 · C4 실제 자원 실패 실행·기록과 독립 제품 감사
 
 부모가5dfc95c 이후 공식 단발 runner를 실행했다. 정상1완료·부하1거절·전체실패를 확인하고 원본/진단 바이트 사본과 별도 source43 hash검사·모델 없는 replay를 보존했다. 기존 free_qa_candidate_review(Astra xhigh)에 native grammar/로그·속도 제약의 후속 판단을 요청했다. 별도 meeting_product_audit는 실제 도구가gpt-6-astra/xhigh/fork none을 수락했고 회의 결정 연결 등 Java/React 코드를 읽기 전용 검토한다. 두 역할 모두 품질 평가 judge가 아니며 새로운 품질 자료/사용자검수0이다.
