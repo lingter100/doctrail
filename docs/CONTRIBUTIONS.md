@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · C4 원격 확인과 오프라인 입력 준비
+
+부모가130f464의 push/PR 필수3job 성공·Python2201/21skip·Java browser43/0을 확인했다. 저장된 source43과 HEAD 일치 검사를 거쳐 공식 register를 한 번 실행했고 캐시 tokenizer의 정상62/부하5050 입력·plan hash를 확인했다. 별도 모델 없는 check도 통과했다. 모델 가중치 다운로드·실제 생성·품질 자료 작성·사용자검수는0이다. 이 단계는 기존 구현을 실행·기록한 것이며 부모 모델 설정 변경을 주장하지 않는다.
+
 ## 2026-10-15 · C4 자원 전용 구현·독립 전송 검토·고정
 
 bounded_thinking_transport(실제 Astra high)가 NEW5파일을 구현하고 최종47합성검사·Ruff를 통과했다. free_qa_candidate_review(실제 Astra xhigh)는 고정 native 소스를 읽어 JSON fence/EOS/설정/budget 구분을 검토했고 native 실행·파일 수정0이었다. 부모는 launcher/probe와 source closure를 직접 읽어 cleanup 시간 덮어쓰기·상대import 누락을 제기했고 구현 역할이 이를 수정·회귀 검증했다. 부모가 최종5해시·43binding과 기존불변조건을 확인해 sourcefreeze·tooling영수증·문서를 작성한다. 설계·구현 역할은 향후 독립 품질 judge로 사용하지 않는다. 아직 native/tokenizer/download/품질자료/사용자검수0이다.

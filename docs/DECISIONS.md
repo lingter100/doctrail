@@ -1,5 +1,9 @@
 # 결정 기록
 
+## 2026-10-15 · C4 실제 호출 전에 중립 입력을 고정
+
+원격 필수 CI가 통과한43파일에서 캐시 tokenizer만 사용했다. 정상62와 부하5050 입력은 품질 자료와 무관한 합성 형식/기계 padding이며 생성 결과를 보고 고르지 않았다. prompt hash·tokenizer asset·source binding을 계획에 기록하고 커밋 후 최대2호출로 연결과 자원을 확인한다. 실패하면 동일 입력을 다시 실행하거나 한도를 사후 완화하지 않는다.
+
 ## 2026-10-15 · 실제 실행 전 전송·정리·source 고정의 오류 보완
 
 고정 runtime의 parser가 반환한 JSON framing을 정확히 비교하되 최종 content를 수선하지 않는다. 부하의 부분 JSON과 정상 답변의 완전 JSON을 분리한다. cleanup callback 중복으로 첫 종료 시간이나 실패가 사라지지 않게 했고, 마지막 요청 기준120초와 각 요청90초를 구분했다. source closure는 상대 import까지 따라43파일로 고정한다. 합성47통과를 실제 native 호환성으로 대신하지 않고 source/입력 커밋 이후 단발 neutral2로 검증한다.

@@ -1,5 +1,11 @@
 # 진행 상태
 
+## C4 코드 원격 CI 통과 · 새 중립 입력2개 등록
+
+130f464055e16e0ca5c751e92f2ee0195e5d7ef5의 push38704337806/PR38704346952에서 backend/java-service/web3job이 각각 모두 성공했다. PR Linux Python2201통과/21환경skip/기존warning1(75.74초), 실제 Java browser43통과/0실패다.
+
+그 커밋 뒤 캐시 tokenizer로 새 neutral2 입력을 한 번 준비했다. 정상62tokens, 부하5050tokens(기계 padding4968), 다운로드/새 native/품질자료0이다. plan은 `meetings-c4-neutral-plan-v1.json` SHA ba0b3f40134f79a63eee61329ea50dbebc121d7e357a9bbbec0ff8511b4e1e6d이며 source43·정확 prompt hash·tokenizer assets를 연결한다. 모델 없는 check가 통과했다. 계획 커밋 뒤 `.local/meetings-c4-resources-v1`에서 실제 normal1/stress1만 실행하고 실패도 보존한다. 품질 개선이나 서비스 채택은 아직 확인하지 않았다. Goal active·Phase1/PR14 미완료/draft, 모든 closed pool 불변이다.
+
 ## 목록 수정 원격43개 통과 · C4 자원 코드43파일 고정
 
 9ed4dc5의 push38702886691/PR38702895274는 필수 backend/java-service/web3job이 각각 모두 성공했다. PR Linux Python2154통과/21환경skip/기존warning1, 실제 Java 브라우저43통과/0실패다. GitHub author/committer는 모두lingter100이다. C4 설계7b6a74a의 앞선push38702278986/PR38702285726도 모두 성공했다.
