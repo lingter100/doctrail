@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · 무료 사고 경로 설계와 새 구현 역할
+
+새 `free_qa_candidate_review`는 실제 도구에 gpt-6-astra/xhigh/fork none을 지정해 수락됐다. 공개 C3 진단, 허용된 runtime 코드·장비 metadata와 공식 Qwen/Gemma/pinned llama.cpp 자료를 읽어 두 방향을 비교했다. validation/test 본문·oracle 열람, 파일/Git 수정·다운로드·추론은0이었다. 부모는 자원 전용 범위와90초/928tokens 계약을 기록했고 새 `bounded_thinking_transport`를 실제 gpt-6-astra/high/fork none으로 지정해 수락받았다. 이 역할은 NEW5개 코드/테스트 파일만 소유하며 기존 frozen 파일과 서비스 기본값은 변경하지 않는다. 실제 native 실행은 source/input 고정 이후이며 현재0, 사용자검수0이다. 부모 채팅의 모델 설정을 바꿨다는 주장은 없다.
+
 ## 2026-10-15 · 원격 검증과 후속 범위 판단
 
 부모가6314e5d의 push/PR 필수3job 전체 성공과 PR browser34/0·Python2154/21skip을 확인했다. 기존 c2_budget_followup(Astra xhigh)은 공개 C3 calibration 진단과 구조를 읽어 두 방향을 비교했으며 파일/새 추론/validation 열람0이었다. 부모는 좁은 상태 조회를 원래 범용 Q&A 완료로 대체하지 않는 범위 판단과 다음 실행 경계를 기록했다. 사용자 의견이나 사용자 검수로 가장하지 않는다.

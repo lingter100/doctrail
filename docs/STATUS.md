@@ -1,5 +1,11 @@
 # 진행 상태
 
+## C4-P0 자원 전용 설계 등록 · 목록 실패 복구 검증 중
+
+2026-10-15. 실제 Astra xhigh의 공식 문서·고정 runtime 검토 뒤, 캐시 Qwen3.5-9B를 단일 사고 호출로 사용하는 연결·자원 사전 검증을 등록했다. [C4 자원 설계](MEETINGS-C4-RESOURCE-DESIGN.md)를 따른다. 전체928token/공유90초·새 합성neutral2만 허용하며 품질 호출0이다. 512사고/384최종/32framing은 계획 배분이며 독립 native hard cap으로 표현하지 않는다. 최종384는 재토큰화 수용 한도다. 새 자료·품질 평가·서비스 채택은 자원 검증 뒤 별도 계약이며 원래cal6/6→격리val8/8과 전체Q&A 범위를 유지한다.
+
+실제 Astra high `bounded_thinking_transport`가 NEW 어댑터/launcher/probe와 합성 검사를 소유한다. 기존 소스·실험은 불변이고 아직 새 native0/다운로드0이다. 부모가 source/input 계약을 검토·커밋하기 전 실제 실행은 금지했다. 별도 `meeting_conflict_recovery` 역할은 회의/작업 목록 실패와 빈 상태 구분 및 권한 거절 후 캐시 무효화를 검증 중이며, 원본 실패도 보존한다. Goal active·Phase1/PR14 미완료/draft, 사용자검수0·무료로컬 전용을 유지한다.
+
 ## 최신 원격 검증 완료 · 다음 범위 유지
 
 `6314e5d2f66c7e7f7c71cb061e918f08333683ba`의 push38698271652/PR38698277776에서 backend/java-service/web 필수3job이 각각 모두 성공했다. PR Linux Python2154통과/21환경skip/기존warning1, 실제 Java 브라우저34통과/0실패다. GitHub author/committer는 모두lingter100이며1a61212와6314e5d를 같은 기능 브랜치에 push했다. PR14는 품질 미달 때문에 draft이고 main은 변경하지 않았다.
