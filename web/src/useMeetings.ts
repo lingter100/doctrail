@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { api } from './api';
+import { api, ApiError } from './api';
 import type { DocTrail } from './useDocTrail';
 import { meetingError, type Analysis, type DecisionLink, type MeetingDetail, type TaskItem } from './meetings';
 
@@ -16,6 +16,11 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
+  const [editing, setEditing] = useState(false);
+  const editingRef = useRef(false);
+  const [recovery, setRecovery] = useState<{ detail: MeetingDetail; links: DecisionLink[] } | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [reviewRequired, setReviewRequired] = useState(false);
   const mounted = useRef(false);
   const serials = useRef(new Map<string, number>());
   const aborts = useRef(new Map<string, AbortController>());
@@ -42,8 +47,9 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     finally { if (owner.valid()) setLoading(false); }
   }
   async function open(id: string, silent = false) {
+    if (silent && editingRef.current) return;
     const owner = request('detail'); selected.current = id;
-    if (!silent) { setError(''); setDetail(null); setLinks([]); setNotice(''); app.closeSource(); }
+    if (!silent) { setEditing(false); editingRef.current = false; setRecovery(null); setReviewRequired(false); setRefreshing(false); setError(''); setDetail(null); setLinks([]); setNotice(''); app.closeSource(); }
     try {
       const result = await api<MeetingDetail>(`/meetings/${id}`, { signal: owner.signal });
       if (!owner.valid() || selected.current !== id) return;
@@ -52,15 +58,50 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
       if (owner.valid() && selected.current === id) setLinks(resultLinks.items);
     } catch (failure) { fail(failure, owner.valid); }
   }
-  function back() { request('detail'); selected.current = null; setDetail(null); setLinks([]); setError(''); setNotice(''); app.closeSource(); void load(); }
-  async function mutate<T>(action: (signal: AbortSignal) => Promise<T>, done: (result: T) => void) {
+  function edit(value: boolean) {
+    request('detail'); editingRef.current = value; setEditing(value);
+    setRecovery(null); setReviewRequired(false); setRefreshing(false); setError('');
+  }
+  async function refresh() {
+    if (!detail || mutationBusy.current) return;
+    const id = detail.document.id;
+    const owner = request('detail'); setRefreshing(true); setRecovery(null); setError('');
+    if (editingRef.current) setReviewRequired(true);
+    try {
+      const [latest, latestLinks] = await Promise.all([
+        api<MeetingDetail>(`/meetings/${id}`, { signal: owner.signal }),
+        api<{ items: DecisionLink[] }>(`/meetings/${id}/links`, { signal: owner.signal }),
+      ]);
+      if (!owner.valid() || selected.current !== id) return;
+      if (editingRef.current) setRecovery({ detail: latest, links: latestLinks.items });
+      else { setDetail(latest); setLinks(latestLinks.items); }
+    } catch (failure) { fail(failure, owner.valid); }
+    finally { if (owner.valid()) setRefreshing(false); }
+  }
+  function keepLocal() {
+    if (!recovery || !detail || refreshing || recovery.detail.document.revision !== detail.document.revision
+      || recovery.detail.meeting.source_revision !== detail.meeting.source_revision
+      || recovery.detail.meeting.analysis_status !== 'ready') return null;
+    const latest = recovery.detail;
+    setDetail(latest); setLinks(recovery.links);
+    setRecovery(null); setReviewRequired(false); setError('');
+    setNotice('내 초안을 유지했어요. 서버의 변경 내용을 덮어쓸 수 있으니 확인한 뒤 저장 버튼을 눌러 주세요.');
+    return latest;
+  }
+  function useServer() {
+    if (!recovery || refreshing) return;
+    setDetail(recovery.detail); setLinks(recovery.links); edit(false);
+    setNotice('로컬 초안을 버리고 확인한 서버 버전을 열었어요.');
+  }
+  function back() { edit(false); selected.current = null; setDetail(null); setLinks([]); setError(''); setNotice(''); app.closeSource(); void load(); }
+  async function mutate<T>(action: (signal: AbortSignal) => Promise<T>, done: (result: T) => void, rejected?: (failure: unknown) => void) {
     if (mutationBusy.current) return false;
     const owner = request('mutation'); mutationBusy.current = true; setBusy(true); setError(''); setNotice('');
     try {
       const result = await action(owner.signal);
       if (!owner.valid()) return false;
       done(result); void load(true); return true;
-    } catch (failure) { fail(failure, owner.valid); return false; }
+    } catch (failure) { if (owner.valid()) rejected?.(failure); fail(failure, owner.valid); return false; }
     finally { if (owner.valid()) { mutationBusy.current = false; setBusy(false); } }
   }
   async function create(data: FormData, file: boolean) {
@@ -80,12 +121,13 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
       if (selected.current === id) { request('detail'); setDetail(result); setNotice('분석을 요청했어요. 완료되면 상태가 갱신됩니다.'); }
     });
   }
-  async function save(analysis: Analysis) {
-    if (!detail) return false;
+  async function save(analysis: Analysis, basis = detail) {
+    if (!detail || !basis || (editingRef.current && (reviewRequired || refreshing))) return false;
     const id = detail.document.id;
-    return mutate(signal => api<MeetingDetail>(`/meetings/${id}/analysis`, { method: 'PUT', signal, body: JSON.stringify({ expected_revision: detail.document.revision, expected_version: detail.meeting.version, analysis }) }), result => {
-      if (selected.current === id) { request('detail'); setDetail(result); setLinks([]); setNotice('사용자 수정본을 저장했어요. AI 초안과 원문은 보존돼요.'); void open(id, true); }
-    });
+    if (basis.document.id !== id || basis.document.revision !== detail.document.revision) return false;
+    return mutate(signal => api<MeetingDetail>(`/meetings/${id}/analysis`, { method: 'PUT', signal, body: JSON.stringify({ expected_revision: basis.document.revision, expected_version: basis.meeting.version, analysis }) }), result => {
+      if (selected.current === id) { edit(false); setDetail(result); setLinks([]); setNotice('사용자 수정본을 저장했어요. AI 초안과 원문은 보존돼요.'); void open(id, true); }
+    }, failure => { if (failure instanceof ApiError && failure.status === 409 && editingRef.current) setReviewRequired(true); });
   }
   async function loadTargets() {
     const owner = request('targets'); setError('');
@@ -114,6 +156,6 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     const timer = setTimeout(() => { if (!mutationBusy.current) { void load(true); if (selected.current) void open(selected.current, true); } }, 2500);
     return () => clearTimeout(timer);
   }, [meetings, detail, busy]);
-  return { meetings, tasks, detail, links, targets, loading, busy, error, notice, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
+  return { meetings, tasks, detail, links, targets, loading, busy, error, notice, editing, recovery, refreshing, reviewRequired, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
 }
 export type MeetingsController = ReturnType<typeof useMeetings>;

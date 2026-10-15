@@ -87,9 +87,9 @@ const port = listener.address().port;
 await new Promise((done, reject) => listener.close(error => error ? reject(error) : done()));
 const url = `http://127.0.0.1:${port}`;
 const log = createWriteStream(join(runDirectory, 'java.log'));
-// Only this explicit spec enables a deterministic transport contract fixture.
+// Only these explicit specs enable a deterministic transport contract fixture.
 // All other browser specs keep generation disabled, regardless of shell env.
-const meetingFixture = process.env.DOCTRAIL_E2E_SPEC.replaceAll('\\', '/').endsWith('meeting-ready.spec.ts')
+const meetingFixture = ['meeting-ready.spec.ts', 'meeting-conflict-recovery.spec.ts'].includes(process.env.DOCTRAIL_E2E_SPEC.replaceAll('\\', '/').split('/').at(-1))
   ? await startMeetingTransportFixture() : null;
 const server = spawn(java, ['-jar', jar, '--server.address=127.0.0.1', `--server.port=${port}`], {
   cwd: repo, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],

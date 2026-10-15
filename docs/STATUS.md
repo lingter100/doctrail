@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 회의 편집 충돌 복구 구현 · 실제 Java 브라우저8개 통과
+
+2026-10-15 저장 충돌 후 서버를 새로 읽을 때 미저장 초안이 사라지던 경로를 수정했다. 서버본은 읽기 전용 비교로 열고, 명시적인 로컬 유지/서버본 사용 전에는 초안을 교체하거나 자동 저장하지 않는다. 원문 변경 시 이전 근거 저장을 차단하고 작업공간 변경의 지연 응답도 무효화한다. 보존은 현재 화면 메모리 범위이며 영구 초안은 아니다.
+
+실제 Java/SQLite/CAS/packaged React로 새5개10.3초와 기존 회의3개14.6초가 각각 통과했다. TypeScript/production build/JAR package도 통과했다. JAR package는-DskipTests이므로 Java 전체 테스트 통과로 바꾸어 기록하지 않는다. 모델 경계는 합성 fixture이고 실제 LLM0·사용자검수0이다. 새 테스트 초기3batch의 fixture/selector/setup 실패와 최종 통과를 구분해 보존했다. [복구 문서](MEETINGS-EDIT-RECOVERY.md)와 `meetings-conflict-recovery-v1.json`을 따른다. 부모 AI가390px 비교 화면도 확인했다.
+
+C3 품질2/6 실패와 검증 미개방은 앞선 커밋1a61212에 보존됐다. 현재 수정 커밋을 사용자 명의로 push하고 필수3job/전체 원격 브라우저 회귀를 확인한다. 다음 제품 과제는 목록 조회 실패와 실제 빈 목록을 분리하는 것이며, AI 후속 후보는 닫힌 pool을 다시 쓰지 않는 무료 로컬 설계를 따른다. Goal active·Phase1/PR14 미완료/draft, 유료/공개서비스배포0이다.
+
 ## C3 품질2/6로 종료 · validation 미개방
 
 2026-10-15 기존 사전 예약 judge의 최종답변 판정2/6을 먼저 잠갔다. 통과2건은 모두 적절한 보류이며 답변 가능4건의 완전 정답0/4다. 인용30/30정확, 관련연결29/30, 원자사실지지39/49로 구조·인용과 의미 품질이 달랐다. 잠금 뒤6표본/27요구사항의 계획 진단을 마쳤고 공식 finalize/replay 통과, selected=false/validation_eligible=false다. Validation gate는 본문을 읽기 전에 c3_selection_failed로 거절됐다.

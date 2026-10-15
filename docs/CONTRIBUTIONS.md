@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · 회의 편집 복구 구현·회귀·화면 확인
+
+meeting_conflict_recovery(실제 Astra high)가 React controller/editor/CSS와 새 브라우저 검사, 해당 검사에만 합성 전송을 허용하는 runner를 수정했다. 지정된5파일이 기존 freeze에 포함되지 않음을 확인했다. TypeScript/build/JAR package와 새5개/기존3개 실제 Java 브라우저를 통과했고 초기 테스트 fixture·selector·setup 실패를 숨기지 않고 보존했다. 부모는 코드 검토, 원본 run/report와 최종 source SHA 연결,390px 화면 확인, 문서화·커밋을 담당했다. 합성 worker 호출을 실제 LLM 분석으로 세지 않으며 사용자 검수0이다.
+
 ## 2026-10-15 · 독립 C3 판정과 실패 보존
 
 기존 c2_calibration_judge(Astra xhigh)가 최종답변6개를 독립 판정해2/6을 기록했다. 부모가 공식 lock을 만든 뒤에만 계획을 공개했고, 같은 judge가6개/27요구사항의 별도 진단을 작성했다. Judge는 mapping/raw/validation을 열지 않았다고 보고했으며 기존 metadata 노출 attestation과 사람0을 유지했다. 부모는 판정을 대신 작성하지 않고 공식 finalize/replay, 실패 gate 확인, 원본9파일 공개 사본·SHA연결 및 설명 문서를 담당했다. 검증 생성/서비스 채택/새 추론은0이다.
