@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { api } from '../api';
 import { meetingError, type KnowledgeResult } from '../meetings';
-import type { DocTrail } from '../useDocTrail';
+import type { DocTrail, SourceOrigin } from '../useDocTrail';
 import { searchMethods } from '../searchMethods';
 import type { SearchMethod } from '../types';
 import { Icon } from './Icon';
@@ -22,6 +22,20 @@ export function KnowledgeView({ app }: { app: DocTrail }) {
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; request.current++; abort.current?.abort(); }; }, []);
   function invalidate() { request.current++; abort.current?.abort(); setResult(null); setError(''); setBusy(false); app.closeSource(); }
   function filter(key: keyof typeof filters, value: string) { invalidate(); setFilters(current => ({ ...current, [key]: value })); }
+  function sourceOrigin(): SourceOrigin {
+    const token = request.current;
+    return {
+      query: asked, retryLabel: mode === 'answer' ? '다시 질문' : '다시 검색',
+      isCurrent: () => mounted.current && token === request.current,
+      retry: () => { void run(mode); },
+      onDenied: () => {
+        // A denied source invalidates the snapshot, including answer claims
+        // that may depend on it. Keep the form; only an explicit action resends.
+        invalidate();
+        setError('원문을 열 수 없어 이전 검색 결과와 답변을 숨겼어요. 현재 접근 가능한 자료로 다시 확인해 주세요.');
+      },
+    };
+  }
   async function run(operation: 'search' | 'answer' = mode) {
     if (!query.trim()) return;
     abort.current?.abort(); const controller = new AbortController(); abort.current = controller;
@@ -53,10 +67,10 @@ export function KnowledgeView({ app }: { app: DocTrail }) {
     {busy && <div className="loading" role="status"><span className="spinner"/>{mode === 'answer' ? '접근 가능한 근거를 찾아 답변을 확인하고 있어요…' : '접근 가능한 원문을 검색하고 있어요…'}</div>}
     {!result && !busy && !error && <div className="knowledge-empty"><div className="knowledge-empty-icon"><Icon name="quote"/></div><h2>답변마다 돌아갈 수 있는 원문</h2><p>확인할 수 있는 근거가 부족하면 답변을 보류해요.<br/>회의별 결정과 후속 작업까지 조건으로 찾아보세요.</p><div className="question-suggestions">{['최근 회의에서 확정한 결정은 무엇인가요?', '아직 해결되지 않은 문제는 무엇인가요?'].map(question => <button key={question} onClick={() => { invalidate(); setQuery(question); document.getElementById('knowledge-query')?.focus(); }}>{question}<Icon name="arrow"/></button>)}</div></div>}
     {result && <div className="knowledge-results" aria-live="polite">
-      {mode === 'answer' && <article className={`answer-panel ${result.status === 'abstained' ? 'abstained' : ''}`} data-testid="knowledge-answer"><div className="answer-heading"><span className="meeting-symbol"><Icon name="quote"/></span><h2>{result.status === 'answered' ? '근거 기반 답변' : '답변을 보류했어요'}</h2><span className="experimental-badge">실험 AI</span></div>{result.status === 'answered' ? <div className="answer-claims">{result.claims?.map((claim, index) => <section key={index}><p>{claim.text}</p><div className="claim-citations">{claim.citations.map((citation, citationIndex) => <button className="citation-chip" key={`${citation.document_id}:${citation.start_offset}:${citationIndex}`} onClick={() => void app.openEvidence(citation)}><Icon name="file"/>{citation.title || '원문'}{citation.meeting_date ? ` · ${citation.meeting_date}` : ''}{citation.page ? ` · ${citation.page}p` : ''}<span>근거 {index + 1}.{citationIndex + 1}</span></button>)}</div></section>)}</div> : <><p>현재 접근 가능한 자료에서 질문에 답할 충분한 근거를 확인하지 못했어요. 조건을 조정하거나 관련 원문을 추가해 주세요.</p>{result.reason && <small className="muted">보류 사유: {result.reason}</small>}</>}<div className="answer-provenance">{result.model_called ? '실제 모델 생성 결과 · 원문 확인 필요' : '모델 호출 없이 근거 확인 단계에서 처리'} · 사용자 검수 전</div></article>}
+      {mode === 'answer' && <article className={`answer-panel ${result.status === 'abstained' ? 'abstained' : ''}`} data-testid="knowledge-answer"><div className="answer-heading"><span className="meeting-symbol"><Icon name="quote"/></span><h2>{result.status === 'answered' ? '근거 기반 답변' : '답변을 보류했어요'}</h2><span className="experimental-badge">실험 AI</span></div>{result.status === 'answered' ? <div className="answer-claims">{result.claims?.map((claim, index) => <section key={index}><p>{claim.text}</p><div className="claim-citations">{claim.citations.map((citation, citationIndex) => <button className="citation-chip" key={`${citation.document_id}:${citation.start_offset}:${citationIndex}`} onClick={() => void app.openEvidence(citation, sourceOrigin())}><Icon name="file"/>{citation.title || '원문'}{citation.meeting_date ? ` · ${citation.meeting_date}` : ''}{citation.page ? ` · ${citation.page}p` : ''}<span>근거 {index + 1}.{citationIndex + 1}</span></button>)}</div></section>)}</div> : <><p>현재 접근 가능한 자료에서 질문에 답할 충분한 근거를 확인하지 못했어요. 조건을 조정하거나 관련 원문을 추가해 주세요.</p>{result.reason && <small className="muted">보류 사유: {result.reason}</small>}</>}<div className="answer-provenance">{result.model_called ? '실제 모델 생성 결과 · 원문 확인 필요' : '모델 호출 없이 근거 확인 단계에서 처리'} · 사용자 검수 전</div></article>}
       <div className="section-bar"><h2>검색된 원문 근거 <span className="count">{result.results.length}</span></h2><span className="muted">{result.method in searchMethods ? searchMethods[result.method as SearchMethod].label : result.method}</span></div>
       {!result.results.length && <p className="mini-empty">조건에 맞는 원문 근거가 없어요.</p>}
-      <div className="results">{result.results.map((hit, index) => <article className="result-card knowledge-hit" key={`${hit.document_id}:${hit.chunk_id}`}><div className="result-meta"><span>{hit.document_kind === 'meeting' ? '회의' : '문서'}</span>{filters.scope === 'all' && <span>{app.state.auth?.workspaces.find(workspace => workspace.id === hit.workspace_id)?.name || '워크스페이스'}</span>}<span>{hit.meeting_date || (hit.document_kind === 'meeting' ? '날짜 확인 필요' : `v${hit.revision}`)}</span></div><button className="knowledge-hit-open" onClick={() => void app.openDocument(hit.document_id, hit, index)}><h3>{hit.title}</h3><p className="result-excerpt"><Highlight text={hit.text} query={asked}/></p><span className="text-button">원문에서 확인 <Icon name="arrow"/></span></button></article>)}</div>
+      <div className="results">{result.results.map((hit, index) => <article className="result-card knowledge-hit" key={`${hit.document_id}:${hit.chunk_id}`}><div className="result-meta"><span>{hit.document_kind === 'meeting' ? '회의' : '문서'}</span>{filters.scope === 'all' && <span>{app.state.auth?.workspaces.find(workspace => workspace.id === hit.workspace_id)?.name || '워크스페이스'}</span>}<span>{hit.meeting_date || (hit.document_kind === 'meeting' ? '날짜 확인 필요' : `v${hit.revision}`)}</span></div><button className="knowledge-hit-open" onClick={() => void app.openDocument(hit.document_id, hit, index, undefined, sourceOrigin())}><h3>{hit.title}</h3><p className="result-excerpt"><Highlight text={hit.text} query={asked}/></p><span className="text-button">원문에서 확인 <Icon name="arrow"/></span></button></article>)}</div>
     </div>}
   </section>;
 }

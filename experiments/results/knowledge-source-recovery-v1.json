@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "kind": "verified_local_java_react_source_recovery",
+  "authoring_base_commit": "4ba1fbfd7361b85d8800e453441fee1be49e25d0",
+  "problems": [
+    "Knowledge source retry used an empty or unrelated legacy search.",
+    "Knowledge results and answer claims survived an explicitly observed source access denial."
+  ],
+  "behavior": "Bind explicit retry to originating query, filters, scope and operation; invalidate denied result snapshot; reject obsolete callbacks.",
+  "source_before": [
+    {
+      "file": "web/src/useDocTrail.ts",
+      "sha256": "d5c7366e460ced8efe1f683eb9471731a1d08b205427ab5e37b20de16f6e4d5a"
+    },
+    {
+      "file": "web/src/components/KnowledgeView.tsx",
+      "sha256": "1c725dc0996a97272c5c324bc31e8e90e6dc8d8c71609df210ff6bc4bba21a46"
+    },
+    {
+      "file": "web/src/components/SourcePane.tsx",
+      "sha256": "c898e192cd8f62644ef6fa796e3325fd55fc96a999a5e08f46f5edf9ee8b9eec"
+    },
+    {
+      "file": "web/scripts/test-java.mjs",
+      "sha256": "f70941f682c36128badbfda172373636d1db466cf014874c984587a91773ea81"
+    }
+  ],
+  "source_after": [
+    {
+      "path": "web/src/useDocTrail.ts",
+      "sha256": "2409561da67142d760382d890d0094afeca4f6f91b00f7a007f108d6782bdc1d"
+    },
+    {
+      "path": "web/src/components/KnowledgeView.tsx",
+      "sha256": "d1aa9e3a289d7eed8f50291465abbf3f2411629fa12477eb0ea8686c67fef613"
+    },
+    {
+      "path": "web/src/components/SourcePane.tsx",
+      "sha256": "5e1fb6f19d04f09ce0e55ff9b00b9849f10c3e8f93b018d1ef0f547e92967aa1"
+    },
+    {
+      "path": "web/tests/knowledge-source-recovery.spec.ts",
+      "sha256": "133f3bbecba4054310e6c5f621a36a3eed7b964d6f6891719196128f2067bd41"
+    },
+    {
+      "path": "web/scripts/test-java.mjs",
+      "sha256": "c1773bae1aa712f0d248db8fd7efe13a9575c1bc660c52e26a6b43f115cad06b"
+    }
+  ],
+  "local_verification_summary_sha256": "f2a519a33edca0383e7180d2c6cd9741269da98b3851b5682edf883dd9c352f6",
+  "publication_check_note": "Initial exact string equality rejected equivalent .980Z/.98Z timestamps. Counters/durations remained identical; parsed timestamps matched and original report timestamps are retained here.",
+  "initial_fixture_failure": "B2asFq three selector timeouts before meaningful reproduction",
+  "actual_original_failure": "J2YQS7 three actual failures before production edits",
+  "runs": [
+    {
+      "exitCode": 1,
+      "generationCalls": null,
+      "generation": "disabled",
+      "spec": "knowledge-source-recovery.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:49:21.980Z",
+        "duration": 138134.583,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "directory": "web-e2e-B2asFq",
+      "packagedUi": true,
+      "reportSha256": "17e23ff0b2d42c18df199ddb12dfab0f090b96c1e19cbe772e85caeb9bb1a4ee"
+    },
+    {
+      "exitCode": 0,
+      "generationCalls": {
+        "analyze": 5,
+        "answer": 1
+      },
+      "generation": "deterministic-transport-fixture-NOT-LLM",
+      "spec": "meeting-ready.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:55:50.888Z",
+        "duration": 13527.657,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "directory": "web-e2e-Bufm2q",
+      "packagedUi": true,
+      "reportSha256": "ab4fa0f00b406f2b2780647cf5c5c23e66d2edd316ed21e1f06ea037f2e12825"
+    },
+    {
+      "exitCode": 0,
+      "generationCalls": null,
+      "generation": "disabled",
+      "spec": "request-races.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:55:02.713Z",
+        "duration": 14362.035000000002,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "directory": "web-e2e-hbKPsb",
+      "packagedUi": true,
+      "reportSha256": "0dd363e25857834a55e3ab05f0c58d488537413a816fa9bbf7bedc954a541d14"
+    },
+    {
+      "exitCode": 1,
+      "generationCalls": null,
+      "generation": "disabled",
+      "spec": "knowledge-source-recovery.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:51:50.402Z",
+        "duration": 22544.646,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "directory": "web-e2e-J2YQS7",
+      "packagedUi": true,
+      "reportSha256": "922e1a0ffdfd2c2e6c63a8e2ac8902a4541967bdb5f4299d7140f32a0709a726"
+    },
+    {
+      "exitCode": 0,
+      "generationCalls": {
+        "analyze": 0,
+        "answer": 3
+      },
+      "generation": "deterministic-transport-fixture-NOT-LLM",
+      "spec": "knowledge-source-recovery.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:53:33.558Z",
+        "duration": 12370.469,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "directory": "web-e2e-lY9vPM",
+      "packagedUi": true,
+      "reportSha256": "9ed7dea8154f8be3af4b019f587081aff04dcad557d4f877e71ac04d701ff59a"
+    },
+    {
+      "exitCode": 0,
+      "generationCalls": null,
+      "generation": "disabled",
+      "spec": "model-profile.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:55:31.943Z",
+        "duration": 4581.369000000001,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "directory": "web-e2e-pbqe3s",
+      "packagedUi": true,
+      "reportSha256": "a81766d9f4cf26e16774e80f833649d15efb581ce68b73a14ed405a9096d6ebb"
+    },
+    {
+      "exitCode": 0,
+      "generationCalls": null,
+      "generation": "disabled",
+      "spec": "knowledge-recovery.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:55:22.227Z",
+        "duration": 3206.3630000000003,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "directory": "web-e2e-SiYvrJ",
+      "packagedUi": true,
+      "reportSha256": "79de857a8c0d0fee6f5e78a456dec4dd473efb8af59c31474090749dc4254976"
+    },
+    {
+      "exitCode": 0,
+      "generationCalls": null,
+      "generation": "disabled",
+      "spec": "real-service.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:54:47.515Z",
+        "duration": 10379.358,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "directory": "web-e2e-USeTQ0",
+      "packagedUi": true,
+      "reportSha256": "72e4ef37b00861d8b885a52d06aae525ee8f67a3b30edb4debab3390ac43418e"
+    },
+    {
+      "exitCode": 0,
+      "generationCalls": null,
+      "generation": "disabled",
+      "spec": "model-errors.spec.ts",
+      "serverStopped": true,
+      "stats": {
+        "startTime": "2026-10-16T04:55:42.323Z",
+        "duration": 2287.743,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "directory": "web-e2e-Vricmm",
+      "packagedUi": true,
+      "reportSha256": "53f174c0b906805ceb55370e6d90963e36e15ac993d2b9411cadc1dd95d98869"
+    }
+  ],
+  "successful_browser_checks": 32,
+  "new_checks": 8,
+  "existing_regression_checks": 24,
+  "typecheck": "passed",
+  "production_build": "passed",
+  "java_package": "passed_with_DskipTests",
+  "command_logs_sha256": {
+    "baseline-corrected-selectors.log": "d1cf15a029076841189d4c2451f4ac839f379503c488f7b34a0186478bb9e9f2",
+    "baseline.log": "8fa07a20c205c6d3e1ca37a68f1c6d7da87ffef8c713628739321da2e725f948",
+    "build.log": "deee5337cab60a0997ca834b0a6a59551b7ba17b4c14cf80c9489e864d22e4b7",
+    "fixed-new-tests.log": "9561499fe07c9379b72b475569cd6bab5cb70817a1a39b56ddf49ed26da93850",
+    "knowledge-recovery.spec.ts.log": "a354681e2e86cba3ddfd33e0a7dcf4bf11f6b00b227a5f2a1338f4a8a3ccb93a",
+    "meeting-ready.spec.ts.log": "deca54de0b0e7a499de1e9c37ae7dd319ed5cdf4f153dabf8116aacccd54c881",
+    "model-errors.spec.ts.log": "e57472a21e5d2d8134652a4be6d21037801b4d0b342e10bdb99ff2abb09ce940",
+    "model-profile.spec.ts.log": "1d7a43ba5b177b5bc30e96ccb10084d01bebf3910bc124c15a8e36afbaa03db6",
+    "package.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "postfix-typecheck.log": "dfad95ed5f615b6ba38a4c2f7b93a69663a69b192f0819e5486381743b5b2d92",
+    "real-service.spec.ts.log": "22cd6a076d119c441f64fe05830c693440bb68955756c5940dbf7a40cc2038a6",
+    "request-races.spec.ts.log": "601cc9f28e0d58f6b4dbdbb04ac122bca01ff36178a32d24f0548768da7dbefb",
+    "test-typecheck.log": "dfad95ed5f615b6ba38a4c2f7b93a69663a69b192f0819e5486381743b5b2d92"
+  },
+  "screenshots": [
+    {
+      "file": ".local/knowledge-source-recovery-v1/web-e2e-lY9vPM/results/knowledge-source-recovery--2d728-ms-without-automatic-resend/answer-denied-mobile.png",
+      "sha256": "f71fd44107bd652b834b5761b333871c1f13bf76e2876b2b6579138f55d79fa6",
+      "parent_ai_visually_inspected": true,
+      "human_review": false
+    },
+    {
+      "file": ".local/knowledge-source-recovery-v1/web-e2e-lY9vPM/results/knowledge-source-recovery--dbaf2-wer-only-on-explicit-action/stale-answer-explicit-retry.png",
+      "sha256": "25df17cc121c52e9c36d18978782de64222cd2b0a5b073a16ff531c0deadca62",
+      "parent_ai_visually_inspected": true,
+      "human_review": false
+    }
+  ],
+  "actual_llm_calls": 0,
+  "human_reviews": 0,
+  "public_service_deployed": false,
+  "roles": {
+    "read_only_audit": "c4_product_acceptance_audit: accepted gpt-6-astra xhigh",
+    "implementation_tests": "knowledge_source_recovery: accepted gpt-6-astra high",
+    "parent": "Code/artifact/hash/visual verification and publication; chat model unchanged."
+  },
+  "limitations": [
+    "Synthetic browser documents only; no evaluation sources opened.",
+    "Synthetic answer transport checks workflow only, actual LLM calls zero.",
+    "Explicit source-denial cleanup does not imply instantaneous revocation before a request.",
+    "Java package used -DskipTests; browser service checks are separate from Java unit suite.",
+    "BM25 method exercised; dense model inference was not run."
+  ],
+  "ci": "pending_actual_source_commit"
+}
