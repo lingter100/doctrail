@@ -1,5 +1,17 @@
 # 진행 상태
 
+## GPU 구현 검증 완료 · 회의 원문 접근 거부 회귀 검증 중
+
+새 GPU launcher/probe/test4개는 최종 합성75통과(신규37+기존38)/Ruff 통과, 검사 전후 hash 동일이다. Sourcefreeze59 SHA116b5325와 구현영수증e410d064를 생성했고 기존85/52 working+HEAD 불변이다. 실제 모델·tokenizer 준비0이며 source 커밋/CI가 다음이다. [구현 기록](MEETINGS-GPU-PLACEMENT-IMPLEMENTATION.md)을 따른다.
+
+회의 원문 접근 거부는 실제 Java에서 최초2실패를 재현했다. 외부 연결 문서의 실제404 이후 충돌 복구의 서버 버전을 선택하면 연결이 되살아나는1실패도 보존했다. 현재/외부 회의의 무효화 범위와 recovery.links를 보완했으며 신규11개는 통과했다. 기존 회귀는 진행 중이다. 중간 selector4실패와 test 준비 race1실패는 제품 실패와 분리한다. 전체goalACTIVE·Phase1/PR14draft·무료/로컬을 유지한다.
+
+## GPU 비교 NEW4 구현 중 · 설계 CI 통과
+
+설계15d01f6의 push38866996883/PR38867004588 필수3job 모두 성공했다. GitHub author/committer는lingter100이며 새 실제 Astra high `host_proof_profile`이 설계의NEW4를 구현한다. 부모는완성전 파일을읽기검토만하며sourcefreeze/offline등록/native실행은아직0이다. 기존정리함수의개별timeout을합친전체구간도5초수용조건으로검사하며OS강제선점보장이라고표현하지않는다.
+
+독립실제Astrahigh `meeting_navigation_audit`는기존React의작업목록→회의/작업공간전환과늦은응답귀속을읽기검토한다. 파일수정·서버·테스트·모델실행은없고실제재현과구분한다. 기존동결/닫힌자료는열지않는다. 전체goalACTIVE·Phase1/PR14draft·무료/로컬을유지한다.
+
 ## GPU 배치 비교 설계 확정 · 아직 새 실행 없음
 
 공식 host 결과를9b84b7c로 사용자lingter100 author/committer 명의 커밋·push했다. Push38865692058/PR38865702190의 필수3job 모두 성공을 확인했다. 이번에는 job 상태만 확인했으며 이전 실행의 테스트 개수를 새 실행에 가져오지 않는다. 독립 xhigh와 제한적 max 읽기 비교는 모두 다음 증거로 동일 cached 모델/runtime의 요청 GPU layers24→28을 권고했다. 실제28의 메모리 적합성/속도는 미측정이다.

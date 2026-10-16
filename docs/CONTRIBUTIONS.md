@@ -1,5 +1,15 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · GPU 구현 검증과 원문 접근 실패 재현
+
+실제 Astra high `host_proof_profile`이 NEW4를 작성하고 최종 합성75통과/Ruff 및 전후 동일 hash를 반환했다. 부모가 코드만 읽어 저장 실패·cleanup 총시간·공통 identity·시간 관측 경계를 검토했고 해당 역할이 보완했다. 부모는 sourcefreeze59·영수증·문서와 이후 Git/CI를 담당한다. 실제 tokenizer/native0이며 자원·품질 실측이 아니다.
+
+실제 Astra high `meeting_navigation_audit`의 읽기 후보를 실제 Java/React로 재현한 후 원문 접근 거부 복구를 구현하도록 범위를 넓혔다. 최초 실제404 두 경로와 부모가 추가한 conflict recovery 연결 복원 경로가 각각 실패했다. 역할이 원본 실패와 중간 테스트 준비 오류를 보존하고 새11개 및 관련 회귀를 수행 중이다. 사용자 직접 검수와 실제 LLM 검사는0이다.
+
+## 2026-10-16 · GPU 구현과 회의 이동 읽기 검토 분리
+
+설계15d01f6 커밋·push 뒤 기존 실제Astrahigh `host_proof_profile`에NEW4구현/합성검사만위임했다. 실제모델준비·실행과Git변경은부모가별도게이트뒤수행한다. 동시에새 `meeting_navigation_audit`를gpt-6-astra/high/fork none으로지정했고도구가수락했다. 이역할은회의/작업공간이동시비동기응답과초안귀속의읽기검토만담당한다. 현재그검토를실제재현이나새결함발견으로세지않는다. 부모채팅모델변경·사용자검수0이다.
+
 ## 2026-10-16 · GPU 비교 선택과 구현 범위
 
 기존 실제 Astra xhigh와 별도 실제 Astra max 역할이 서로의 결론을 보기 전에 허용 metadata·코드·고정 upstream을 읽고 GPU 배치 검토를 권고했다. Max 사용은 이 어려운 선택의 읽기 비교1회로 끝냈다. 두 역할 모두 닫힌 질문/답변/validation 의미 자료·새 native/tokenizer 실행0이며 독립 최종 품질 judge에서 제외된다. 부모가 기존 로그 비활성화·폐기 방식을 유지하도록 범위를 확정했고 xhigh 역할이 새 설계2파일을 작성했다. 추가 설계 분석을 종료하고 부모가 파일 소유권을 받아 최종 읽기/JSON 검사를 했다. 기존 실제 Astra high `host_proof_profile`은 NEW launcher/probe/tests4개로 재사용 가능한 구조를 읽기 조사했으며 설계 커밋 전 구현하지 않는다. 사용자 검수0·모델 성능 개선 주장은0이다.
