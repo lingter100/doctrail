@@ -1,5 +1,11 @@
 # 결정 기록
 
+## 2026-10-16 · 불완전한 과거 중복 metadata를 그대로 공개
+
+두 split의 출처 후보가 같으면 원문 채택 전에 repository 식별 metadata로 충돌을 해소한다. 이번에는 먼저 예약한 validation에 해당 저장소를 배정하고 calibration은 별도 출처를 찾는다. 특정 질문에 답하기 쉬운지나 토큰/생성 결과를 기준으로 원문을 바꾼 것이 아니다. 원래 탐색 기록을 보존하며 채택 전 후보와 실제 평가 자료를 구분한다.
+
+과거 자료를 다시 열어 정규화 fingerprint를 만들지 않는다. 이미 기록된 family/URL/revision/raw hash와 확인 가능한 repository 식별 정보만 새 제외 목록으로 추출하고, 없는 과거 fingerprint와 초기 자료 범위를 명시한다. 새 source의 전체/긴 문단 fingerprint와 독립 검토를 추가하되 번역·근접 재서술을 모두 찾았다고 주장하지 않는다. 검증 자료 담당자는 calibration의 fingerprint metadata만 받아 split 간 동일 내용 중복을 확인한다.
+
 ## 2026-10-16 · 최종 커밋 검증과 원문 작성 경계
 
 최종 로컬 수정과 전체 테스트 import 시점을 사후 추정하지 않는다. 최종 코드6754435의 실제 push/PR CI 성공과85개 Git 바이트 일치로 검증 범위를 별도로 확정했다. 관측 영수증을 먼저 커밋하고 그 뒤 source 역할을 시작한다. GitHub CI 성공은 모델 품질 성공이 아니다.

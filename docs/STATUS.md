@@ -1,5 +1,15 @@
 # 진행 상태
 
+## C4 새 원문 작성 시작 · 질문은 아직 금지
+
+CI 영수증 커밋ebc4a86의 push38851548057/PR38851552500도 필수3job이 모두 성공했다. 원문 선택 초기에 두 역할이 같은 공개 저장소를 제안해, 먼저 예약한 validation에 배정하고 calibration은 다른 출처를 고르도록 조정했다. 질문·토큰·모델 결과에 따른 재선택이 아니며 이미 채택한 원문은 없었다. 사전 출처 탐색 이력은 담당자가 보존한다.
+
+CI 관측 영수증은 `ebc4a86a3137107b3b37c151f250c4efdc2a75e9`로 커밋·push했다. 이후 실제 `code_contract(Snapshots(), git=GitProof())`가 최종 코드85개와 두 선행 커밋을 검증했다. 이 순서를 확인한 뒤 새 `c4_calibration_source`와 격리 `c4_validation_source`를 각각 GPT-6 Astra xhigh/fork none으로 시작했다. 역할별 새 source 디렉터리와 split fingerprint만 소유한다. 다른 실행은 중복 작성·Maven 동시 실행을 하지 않는다.
+
+부모가 과거 manifest/registry 12개에서 본문을 출력하지 않고 식별 metadata만 추출했다. 새 `meetings-c4-prior-source-fingerprints-v1.json`은68개 identity row·27개 family를 기록한다(SHA757a85b523303aa85255d38887f5d7ea5689907942b887317ad296cc669badf4). 과거 정규화 fingerprint 부재, 일부 초기 자료의 불완전한 coverage를 명시하며 닫힌 raw/inventory/item/oracle은 열지 않았다. 이를 완전한 중복 없음의 증명으로 쓰지 않는다.
+
+다음은 각 split의 새 공개3·합성3 원문 채택/작성, 별도 source 검토·freshness, 실제 Java/Python 전체 청크 parity와 source 고정·커밋이다. 질문/oracle/context 선택·tokenizer·native 품질 실행은 아직 허용하지 않는다. 부모는 validation의 hash/count/출처 식별 metadata만 받는다. 전체 goal active·Phase1/PR14 draft를 유지한다.
+
 ## C4 최종 코드 CI 통과 · 새 원문 준비 전
 
 코드/85파일 동결 커밋 `6754435c3780a3ee33d46750a69ef35ff44acd3f`를 사용자 계정으로 push했다. push38850972533과 PR38850977356의 backend/java-service/web이 모두 성공했다. Linux Python은 각각2386통과/21skip/기존warning1(64.74/92.48초), 실제 Java 브라우저는 각각49통과/0실패다. 로컬 전체 실행의 import 시점 한계는 유지하며, 이번 CI가 최종 커밋 바이트의 전체 회귀 증거다. author/committer와 GitHub 로그인은 모두lingter100이다.

@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 새 source 역할의 실제 시작 순서
+
+부모가 CI 영수증 커밋ebc4a86과 실제 Git 증명 통과를 확인한 뒤 `c4_calibration_source`·`c4_validation_source`를 새 fork none, 요청 모델gpt-6-astra/사고xhigh로 호출했고 도구가 수락했다. 각 역할은 원문 작성/채택만 담당하며 질문 작성·최종 출력 판정은 현재 업무가 아니다. 부모는 prior 식별 metadata 추출과 문서/Git을 맡고 validation 본문은 받지 않는다. 과거 source normalized fingerprint를 재계산하기 위해 닫힌 본문을 열지 않았다. 사용자 검수0과 부모 모델 설정 미변경을 유지한다.
+
 ## 2026-10-16 · 사용자 명의 push와 최종 원격 회귀
 
 부모가6754435의 author/committer·GitHub 로그인lingter100을 확인하고 push/PR의 필수3job 성공을 직접 조회했다. 원본 로그를 로컬 보존하고 Python2386/21skip와 실제Java browser49/0을 추출했다. source85와 실제Git 객체 대조, CI 관측 영수증·진행 문서·PR 설명을 기록했다. 초기 index checker 실패와 출력 기대값 수정은 별도 보존했다. 새 원문/질문/모델 실행이나 사용자 검수로 세지 않으며 부모 모델 설정은 변경하지 않았다.
