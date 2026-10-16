@@ -1,5 +1,13 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · v2 독립 수락과 새로운 최종 판정 역할
+
+기존 calibration 작성자가 새4파일만 만들고 기존 독립 검토자가 별도4파일과 정확한6binding freeze를 반환했다. 부모는 hash·구조·변경 범위를 확인하며 의미 검토를 대신하지 않았다. 격리 validation 검토자는 실제 Git 전체material검사를37.36초에 통과했고 metadata증거만 반환했다. 공식 tokenizer/native는 아직0이다.
+
+새 `c4_calibration_final_judge`·`c4_validation_final_judge`를 GPT-6 Astra xhigh/fork none으로 생성했고 도구가 수락했다. 각자가 metadata노출/비참여를 직접 attestation에 기록했다. 부모는 계약을 검사하고64byte seed2개와 등록 영수증642c800a를 만들었다. 첫 보조 스크립트 직접 실행의 import 오류는 파일 생성 전에 발생했으며 프로젝트 루트 runpy 호출로 실제 등록을 수행했다. 부모 설정 변경·사용자 검수는 없다.
+
+부모가aed4b46 push/PR 필수3job 성공과 각Java67/0·Python2386/21skip를 원본 CI로그로 확인하고124고유binding Git바이트 대조를 보존했다. 새모델 호출·품질 성공으로 해석하지 않는다.
+
 ## 2026-10-16 · 상세 복구 검증과 부모 판독 오류 정정
 
 `meeting_detail_access_recovery`(앞서 실제 수락한 Astra high)가 실제404 잔존·target409 반복과 후속 합성 target403 입력 유실을 재현하고 최소 수정했다. 최종22개와 수정 전42개를 구분했고 type/build/package-DskipTests를 통과했다. 부모는 source4·원본135artifact hash, 원본 영수증1167975b, 데스크톱·390px 화면을 확인해 공개 영수증872dcef9와 재현 문서를 작성했다. 실제LLM/사용자검수0이다.

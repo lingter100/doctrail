@@ -27,3 +27,5 @@
 `web`에서 `npm run typecheck`, `npm run build`를 실행한다. Java 패키징 후 `npm run test:e2e -- meeting-detail-recovery.spec.ts meeting-conflict-recovery.spec.ts meeting-link-recovery.spec.ts meeting-ready.spec.ts`로 해당 브라우저 묶음을 실행할 수 있다. 환경·패키징 절차는 저장소의 실행 문서를 따른다. 회귀 재현은 모델 실험 재실행과 별개다.
 
 다음은 최종 커밋의 필수 원격 CI 확인이다. 일반 문서·여러 회의·한국어/영어의 자연어 답변 품질은 별도 C4 평가 관문을 유지하며 Phase1과 PR14는 아직 완료 상태가 아니다.
+
+후속 관측: 최종 `aed4b465e60b64409c0cd1d1148b09ff66aeba59`의 push38857039481/PR38857043510 필수 backend/java-service/web3job이 각각 모두 통과했다. 각 실행의 실제 Java 브라우저 묶음은67통과/0실패, Linux Python2386통과/21skip/기존warning1이다. [별도 CI 영수증](../experiments/results/meetings-detail-recovery-ci-v1.json) SHA7d01ce06은 로그 hash와 최종 source/freeze124개 고유 binding의 Git 바이트 대조를 기록한다. 원래 로컬 영수증이나 이전 실패를 변경하지 않았다.

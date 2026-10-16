@@ -1,5 +1,13 @@
 # 진행 상태
 
+## Calibration v2 수락·최종 판정 역할 등록 · 원격67개 통과
+
+Calibration v2 독립 검토는6수락/0불수락/추가수정0이다. Item freeze6 SHAf37ce63b8d58db6eebb50da3e72231d95a0102502ce463a00d9d4d9461ead9a8을 만들었다. 원래5/1 검토7파일은29d7e0a 그대로이며 충분 근거 대안1개만 추가했다. 질문/context/필수사실/다른5문항은 불변이다. Validation8/freeze6c29f8930은 커밋 뒤 실제 Git 전체material 검사도 통과했다. [문항 준비 기록](MEETINGS-C4-ITEMS.md)을 따른다.
+
+새 최종 판정 역할2개를 실제 Astra xhigh/fork none으로 예약했고 attestation과64byte seed를 registration642c800a에 연결했다. 자동 AGENTS의 모델·가설·이전 결과 metadata 노출을 두 역할 모두 공개했으며 완전 맹검이 아니다. 출력 pack/매핑/reasoning은 열지 않았다. 수락한calv2를 커밋한 뒤 전체Git material 확인과 공식offline 계수각1회로 진행한다. 아직 tokenizer/native0이며 토큰 피드백으로 문항이나context를 바꾸지 않는다.
+
+제품aed4b46의 push38857039481/PR38857043510 필수3job이 각각 모두 성공했다. 각실행 실제 Java 브라우저67통과/0실패, Linux Python2386통과/21skip/기존warning1(95.98/80.34초)이다. 별도 CI영수증SHA7d01ce06caf4a16a1c1a669abee915d32ac77276c3f765e6a1f3db8a1940cc23은 원본로그/124고유binding Git검사를 보존한다. 사용자lingter100 author/committer 확인, 일반답변 품질 미입증·전체goalactive·Phase1/PR14draft 유지.
+
 ## 회의 상세·연결 복구 최종22개 통과 · 원본 문항 검토 커밋
 
 최종 실제 Java/패키지 React 검사는22통과/0실패/0skip/0flaky다. 현재 회의의 접근 거부는 이전 상세·작업·목록을 무효화하고, 대상 목록의 오류는 현재 회의와 근거 입력을 보존한다. 버전 충돌 뒤 양쪽 회의를 새로 읽고 명시적 결정 재선택 후에만 연결을 저장한다. [제품 기록](MEETINGS-DETAIL-RECOVERY.md)과 공개 영수증SHA872dcef9a082425ec9d8917bb6774f9aa7a4dbba108670ca917b02052c15c4d8에 원본135개 artifact hash를 확인했다. Type/build/package-DskipTests 통과, 모든 owned 서버 종료·실제LLM/사용자검수0이다. 앞선42통과는 마지막 수정 이전 결과로 구분한다. 다음은 이 최종 source 커밋·원격CI다.

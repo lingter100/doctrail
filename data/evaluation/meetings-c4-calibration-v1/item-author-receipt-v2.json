@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "item_author_correction_receipt_not_independent_prereview",
+  "version": 2,
+  "authored_at_utc": "2026-10-16T05:40:50.165409+00:00",
+  "author_role": "c4_calibration_item_author",
+  "actual_model": "gpt-6-astra",
+  "actual_reasoning_effort": "xhigh",
+  "role_continuity": "Same original calibration item author, continuing only the independent review-cited correction; excluded from final output judging.",
+  "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "original7_preservation_commit": "29d7e0a4e6c0be43fc59582700cbb650186c5b50",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c4-calibration-v1/source-freeze-v1.json",
+    "sha256": "8b1bac818cc1cc786ae75c275c58444ce6928ffb0940f0a4ccfdf229a9f53ce1"
+  },
+  "semantic_read_preconditions": {
+    "head": "29d7e0a4e6c0be43fc59582700cbb650186c5b50",
+    "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+    "source_ancestor_of_head": true,
+    "code_bound_count": 85,
+    "source_bound_count": 14,
+    "source_freeze_sha256": "8b1bac818cc1cc786ae75c275c58444ce6928ffb0940f0a4ccfdf229a9f53ce1",
+    "source_git_bytes_proved": true,
+    "original7_git_bytes_proved": true,
+    "original7_sha256": {
+      "draft.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+      "oracle-draft.json": "68a7a4b37ac6b7badd6b0d12b90fa42ec8f470c1b89c1b30307344f60a743abc",
+      "context-selection.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9",
+      "item-author-receipt.json": "210f4f499bbf616be0dafa344a9354eb500368defb91251ae66276d1fa072a83",
+      "item-prereview.json": "84922366bb082f768ad3baaf505dec7f01b1032366884d903c48c96c5a57775f",
+      "item-prereview-notes.md": "c51333c76eabcd5721193454e2a084a648b5778a46758913165b8328571973bf",
+      "item-review-summary.json": "d39ce9f8526bc78c9cf1fd6a9d83a59aafe69c59557310698fb96faf9b5c3ad1"
+    },
+    "new_semantic_source_or_review_read_before_proof": false,
+    "tokenizer_loads": 0,
+    "native_calls": 0
+  },
+  "original7_sha256": {
+    "draft.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+    "oracle-draft.json": "68a7a4b37ac6b7badd6b0d12b90fa42ec8f470c1b89c1b30307344f60a743abc",
+    "context-selection.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9",
+    "item-author-receipt.json": "210f4f499bbf616be0dafa344a9354eb500368defb91251ae66276d1fa072a83",
+    "item-prereview.json": "84922366bb082f768ad3baaf505dec7f01b1032366884d903c48c96c5a57775f",
+    "item-prereview-notes.md": "c51333c76eabcd5721193454e2a084a648b5778a46758913165b8328571973bf",
+    "item-review-summary.json": "d39ce9f8526bc78c9cf1fd6a9d83a59aafe69c59557310698fb96faf9b5c3ad1"
+  },
+  "original_rejected_review_preserved": true,
+  "review_reference": {
+    "file": "data/evaluation/meetings-c4-calibration-v1/item-prereview.json",
+    "sha256": "84922366bb082f768ad3baaf505dec7f01b1032366884d903c48c96c5a57775f"
+  },
+  "review_notes_reference": {
+    "file": "data/evaluation/meetings-c4-calibration-v1/item-prereview-notes.md",
+    "sha256": "c51333c76eabcd5721193454e2a084a648b5778a46758913165b8328571973bf"
+  },
+  "correction": {
+    "case_id": "C4-CAL-05",
+    "fact_id": "F4",
+    "issue_category": "sufficient_evidence_alternative_completeness",
+    "operation": "Append the existing F3 complete catalog block alone as the fourth F4 evidence alternative, as required by independent prereview.",
+    "added_alternative": {
+      "evidence_units": 1,
+      "chunk_id": "c4-f02-doc02-r1-c0000",
+      "start_offset": 638,
+      "end_offset": 853
+    },
+    "previous_alternatives_preserved": 3,
+    "new_total_alternatives": 4,
+    "only_json_delta": "cases[4].required_facts[3].evidence_alternatives[3]"
+  },
+  "preservation_checks": {
+    "original7_unchanged": true,
+    "draft_v2_byte_identical_to_original": true,
+    "context_selection_v2_byte_identical_to_original": true,
+    "other5_oracle_cases_canonical_identical": true,
+    "all_question_context_required_fact_wording_unchanged": true,
+    "undo_added_alternative_recovers_entire_original_oracle": true,
+    "source14_unchanged": true,
+    "code85_unchanged": true
+  },
+  "counts": {
+    "cases": 6,
+    "ko": 3,
+    "en": 3,
+    "answered": 4,
+    "abstained": 2,
+    "required_facts": 24,
+    "unavoidable_multi_document_answered": 3
+  },
+  "coverage_basis": "Frozen structural validators over the corrected author alternatives; independent v2 semantic acceptance is pending.",
+  "structural_validation": {
+    "validate_draft": "passed",
+    "validate_oracles": "passed",
+    "whole_chunk_identity": "passed",
+    "context_selection_identity": "passed",
+    "added_unit_exact_catalog_identity": "passed",
+    "scoped_delta_and_original_preservation": "passed",
+    "utf8_lf": "passed"
+  },
+  "independent_prereview": {
+    "prospective_reviewer_id": "c4_calibration_item_review",
+    "version": 2,
+    "status": "pending",
+    "completed_v2_reviews": 0,
+    "reviewer_field_is_reservation_only": true
+  },
+  "exposure": {
+    "original_calibration_sources_and_own_items_seen": true,
+    "calibration_item_prereview_and_notes_seen": true,
+    "validation_semantic_files_read": false,
+    "old_closed_pool_texts_oracles_semantic_reports_read": false,
+    "automatic_agents_and_status_aggregate_metadata_seen": true,
+    "source_author_alternate_validation_public_exploration_still_disclosed": true,
+    "overall_source_workflow_pristine_claim": false,
+    "eligible_for_final_output_judging": false
+  },
+  "outputs_sha256": {
+    "draft-v2.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+    "oracle-draft-v2.json": "7489e0815c20c7b08ef29292da628652c16f605f83ef0b7894c52a2d34af9e71",
+    "context-selection-v2.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9"
+  },
+  "tokenizer_loads": 0,
+  "token_estimation_counting_or_feedback": false,
+  "native_calls": 0,
+  "model_inference_calls": 0,
+  "downloads": 0,
+  "maven_runs": 0,
+  "git_mutations": 0,
+  "human_reviews": 0,
+  "item_prereview_or_freeze_created": false
+}
