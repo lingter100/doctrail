@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C4 호환성 입력 준비 완료 · 실행 계획 커밋 전
+
+source/freeze a929359b8014ddbed53743d543144a05f6938949의 push38842697501/PR38842703171 필수 backend/java-service/web3job이 각각 모두 성공했다. PR Linux Python2235통과/21환경skip/기존warning1(79.44초), 실제 Java browser47통과/0실패다.
+
+그 뒤 공식 offline register를 한 번 실행했다. 고정 완성JSON은2052tokens로928보다 크며, 새 normal63/stress5048 입력이 준비됐다. tokenizer load1·native0·download0이고 model-free check도 통과했다. plan SHA8454ddfe48e6f3f5eaff67a4b5abeedc049c2f608f88c25bc20fd83d64b9ead6, preparation SHA3e0f795462aa05bc5138b0e16cb963241a16e35d6764f74f51bc7c8e610674c1이다. 준비를 반복하지 않는다.
+
+다음은 plan/preparation을 커밋한 뒤 새 normal1+stress1 최대2dispatch다. source52와 원래928/요청사고512/90초를 유지한다. 실패하면 재시도·literal 변경·예산 사다리 없이 보존한다. 원래 C4 실패와 모든 닫힌 자료는 불변이며 전체 goal active·Phase1/PR14 draft·품질자료0을 유지한다.
+
 ## C4 호환성 코드52파일 고정 · 새33/회귀47 통과
 
 NEW4 launcher/probe/tests가 구현됐고 실제 Astra high 검사는 새33+원본47=80통과/Windows symlink권한1skip/35.19초·Ruff통과다. 초기fake-tokenizer순서3실패와Ruff1경고를 구분했다. 부모가 startup telemetry누락·임시파일경로를 검토했고 수정 뒤NEW4해시와원본43불변/전체52binding을 확인했다. [구현 문서](MEETINGS-C4-COMPAT-IMPLEMENTATION.md), sourcefreeze SHAde8bfc6b92603b1cd5d999afb5788222c7b71ccda1e7a9a3c0aa5a7df36ef61e·tooling585c9837a506ba3b1a0b5d8ac9986ebee42e76f2e77970b522b1d8c19efbf746를 따른다.
