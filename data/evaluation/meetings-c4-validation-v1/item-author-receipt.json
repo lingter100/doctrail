@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "item_author_receipt",
+  "created_at_utc": "2026-10-16T05:19:49.107608+00:00",
+  "author_role": "c4_validation_item_author",
+  "actual_model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "fork_turns": "none",
+  "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c4-validation-v1/source-freeze-v1.json",
+    "sha256": "b4a132dadd9cef1b5ba5b0c15e2a28024b8fb5141a8200de30afe812c3c52698"
+  },
+  "pre_semantic_proof": {
+    "file": ".local/c4-validation-item-author-v1/pre-semantic-proof.json",
+    "sha256": "1fbcda2304bb0bbd93a0743eb0485ecbf5b9eb2401ffac05b1d848481ac1bfbc",
+    "code_contract_files": 85,
+    "source_bindings": 15,
+    "git_object_and_worktree_exact": true
+  },
+  "files": {
+    "draft.json": "f6f1c5a8ca8584cd8b35d3c2d72659d207fc37a44c0dcdbafce7aaccde728955",
+    "oracle-draft.json": "490d6f658b2dc76cabaefc8a0df64ea9c3fbf55b84376cedc64f2514f64b00dc",
+    "context-selection.json": "038b1265de10917a463e415c6eb8ca47192f031b1a23476e4cada61fad9217ed"
+  },
+  "counts_and_checks": {
+    "items": 8,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "families": 2,
+    "per_family_ko_answered": 1,
+    "per_family_en_answered": 1,
+    "per_family_ko_abstained": 1,
+    "per_family_en_abstained": 1,
+    "required_facts_total": 34,
+    "required_facts_min": 4,
+    "required_facts_max": 5,
+    "general_only_answered": 1,
+    "multiple_meeting_answered": 1,
+    "mixed_answered": 2,
+    "unavoidably_multi_document_answered": 3,
+    "ko_query_requiring_english_evidence": 1,
+    "en_query_requiring_korean_evidence": 1,
+    "full_family_absence_author_checks": 4,
+    "draft_schema": "passed",
+    "oracle_schema_and_coverage": "passed",
+    "whole_chunk_identity": "passed",
+    "catalog_evidence_identity": "passed",
+    "independent_prereview": "pending",
+    "human_reviews": 0,
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "downloads": 0,
+    "maven_runs": 0
+  },
+  "independent_prereviewer": {
+    "prospective_role": "c4_validation_item_review",
+    "state": "pending",
+    "approval_claimed": false
+  },
+  "selection_before_token_feedback": true,
+  "token_counts_estimated_or_measured": false,
+  "token_length_tailoring": false,
+  "source_bytes_changed": false,
+  "toolchain_bytes_changed": false,
+  "independent_review_or_item_freeze_written": false,
+  "prepare_function_or_cli_invoked": false,
+  "exposure": {
+    "own_validation_source_bodies_read": true,
+    "calibration_source_or_item_semantics_read": false,
+    "closed_pool_source_or_item_semantics_read": false,
+    "candidate_contract_and_schema_read": true,
+    "automatic_instructions_and_public_prior_aggregate_metadata_seen": true,
+    "did_participate_in_original_calibration_source_exploration": false,
+    "reported_original_calibration_source_author_alternate_validation_repository_exposure": "Parent source-stage disclosure: exploratory public bodies seen, precise scope partly unknown; this item author did not participate. No pristine-source-isolation claim.",
+    "final_output_judge_eligible": false
+  },
+  "author_semantic_notes_are_not_independent_approval": [
+    {
+      "id": "C4-VAL-01",
+      "full_family_read": true,
+      "full_family_source_hashes": {
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-01.md": "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-02.md": "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-general.md": "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82"
+      },
+      "context_selection_basis": "Semantic relevance and complete support for every available requested fact, fixed before any tokenizer or token feedback; exact whole inventory chunks only.",
+      "all_sufficient_alternatives_author_review": "The May 8 API-design/publishable-state report occurs only in the first meeting; the May 29 PR12/publication/organization/ownership plan occurs only in the second meeting. The general document and repeated calendar material cannot replace either. Every sufficient document set contains both meetings; complete relevant minimal catalog alternatives are registered.",
+      "whole_family_absence_author_review": null,
+      "independent_review_state": "pending"
+    },
+    {
+      "id": "C4-VAL-02",
+      "full_family_read": true,
+      "full_family_source_hashes": {
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-01.md": "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-02.md": "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-general.md": "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82"
+      },
+      "context_selection_basis": "Semantic relevance and complete support for every available requested fact, fixed before any tokenizer or token feedback; exact whole inventory chunks only.",
+      "all_sufficient_alternatives_author_review": "All four requirements are present in the goal paragraph and introduced work list of the general document. Neither meeting repeats this complete purpose/work list. The minimal sufficient document set is the general document alone.",
+      "whole_family_absence_author_review": null,
+      "independent_review_state": "pending"
+    },
+    {
+      "id": "C4-VAL-03",
+      "full_family_read": true,
+      "full_family_source_hashes": {
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-01.md": "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-02.md": "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-general.md": "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82"
+      },
+      "context_selection_basis": "Semantic relevance and complete support for every available requested fact, fixed before any tokenizer or token feedback; exact whole inventory chunks only.",
+      "all_sufficient_alternatives_author_review": "The known organization and publisher requirements are supported by the complete May 29 list. No complete alternative for the missing completion date/version exists anywhere in the adopted family.",
+      "whole_family_absence_author_review": "The complete May 8 minutes, May 29 minutes and general document were read. May 8 describes preparation; May 29 records publication plans. None records a completed npm publication date or released package version. Available plan evidence is retained in the selected whole chunks; the missingness is not caused by dropping an answer chunk.",
+      "independent_review_state": "pending"
+    },
+    {
+      "id": "C4-VAL-04",
+      "full_family_read": true,
+      "full_family_source_hashes": {
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-01.md": "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-02.md": "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-general.md": "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82"
+      },
+      "context_selection_basis": "Semantic relevance and complete support for every available requested fact, fixed before any tokenizer or token feedback; exact whole inventory chunks only.",
+      "all_sufficient_alternatives_author_review": "The complete May 29 PR197 list supports the two known facts. Its overlapped tail elsewhere in the same meeting contains no new outcome. None of the full-family alternatives supplies either missing merge fact.",
+      "whole_family_absence_author_review": "All three public raw documents were read in full. The only PR197 discussion records the invalid-export-names fix and Abhi's redo/adjust action. No actual revised-PR merge date or merge hash appears; the other historical commit link belongs to a different issue. The selected chunk retains the complete PR197 discussion.",
+      "independent_review_state": "pending"
+    },
+    {
+      "id": "C4-VAL-05",
+      "full_family_read": true,
+      "full_family_source_hashes": {
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-general.md": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-01.md": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-02.md": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796"
+      },
+      "context_selection_basis": "Semantic relevance and complete support for every available requested fact, fixed before any tokenizer or token feedback; exact whole inventory chunks only.",
+      "all_sufficient_alternatives_author_review": "The full monthly-package rule and approval-record prerequisite come from the general document. The specific October 13 approval/version and remaining posting/north-bank state come from the second meeting. The first meeting's candidate assembly does not supply the later approval, and the second meeting does not restate the full package rule. Repeated passages and overlapped chunks offer no single-document alternative covering all facts; every sufficient document set contains general plus meeting.",
+      "whole_family_absence_author_review": null,
+      "independent_review_state": "pending"
+    },
+    {
+      "id": "C4-VAL-06",
+      "full_family_read": true,
+      "full_family_source_hashes": {
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-general.md": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-01.md": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-02.md": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796"
+      },
+      "context_selection_basis": "Semantic relevance and complete support for every available requested fact, fixed before any tokenizer or token feedback; exact whole inventory chunks only.",
+      "all_sufficient_alternatives_author_review": "The separate-derived-file/method/range interpolation rule is unique to the general document. The completed visit and absence of recovery records are reported only in the October 13 meeting. Other missing-data reminders do not supply the interpolation rule and visit outcome together. Every sufficient document set requires the general document and this meeting.",
+      "whole_family_absence_author_review": null,
+      "independent_review_state": "pending"
+    },
+    {
+      "id": "C4-VAL-07",
+      "full_family_read": true,
+      "full_family_source_hashes": {
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-general.md": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-01.md": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-02.md": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796"
+      },
+      "context_selection_basis": "Semantic relevance and complete support for every available requested fact, fixed before any tokenizer or token feedback; exact whole inventory chunks only.",
+      "all_sufficient_alternatives_author_review": "The second meeting's complete release paragraph supports the identifier and planned assignee/date. No repeated guideline or earlier stable-link requirement supplies the missing timestamp or URL.",
+      "whole_family_absence_author_review": "All synthetic policy and both meeting texts were read. The second meeting explicitly requires the external link to be sent only after actual posting, and requests a completion record for a future meeting. No document supplies an actual completion timestamp or public download URL. The selected chunks retain the approval, posting plan, conditional external handoff and future follow-up.",
+      "independent_review_state": "pending"
+    },
+    {
+      "id": "C4-VAL-08",
+      "full_family_read": true,
+      "full_family_source_hashes": {
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-general.md": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-01.md": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+        "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-02.md": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796"
+      },
+      "context_selection_basis": "Semantic relevance and complete support for every available requested fact, fixed before any tokenizer or token feedback; exact whole inventory chunks only.",
+      "all_sufficient_alternatives_author_review": "The October 6 workshop paragraph supports the contemplated rainy-day activity and original timing. The October 13 paragraph is needed for maintenance of the timing and added indoor-only/application option. The required finalized refund rule/amount has no sufficient alternative anywhere in the adopted family.",
+      "whole_family_absence_author_review": "The complete general policy and both meeting documents were checked. The earlier workshop paragraph explicitly says not to use finalized rain-refund wording yet. The later workshop paragraph changes participation options and retains the decision schedule but gives no refund terms or amount. No available refund evidence was excluded from context.",
+      "independent_review_state": "pending"
+    }
+  ],
+  "scope_limits": [
+    "Automated draft/oracle/catalog/whole-chunk checks establish structure, coordinates and registered coverage only; independent semantic prereview remains pending.",
+    "Historical normalized fingerprint gaps and limits of exact/near-duplicate review remain as disclosed by the immutable source-stage records.",
+    "No tokenizer, service inference, native generation, model download, Maven run, or model-based quality result occurred in this authorship task."
+  ],
+  "technical_diagnostics": [
+    {
+      "kind": "console_encoding_failure",
+      "tool_chunk": "0432bf",
+      "details": "A read-only catalog inspection using default cp949 stdout stopped at U+00F6 in a public member name. No authored files existed and no source changed. Subsequent read-only inspection used Python UTF-8 mode. Source/evidence bytes were never transcoded or rewritten."
+    }
+  ]
+}

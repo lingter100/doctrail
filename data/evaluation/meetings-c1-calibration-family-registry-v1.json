@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "registry_id": "meetings-c1-calibration-family-registry-v1",
+  "registered_at": "2026-10-13",
+  "phase": "family_registration_before_source_materialization_and_question_authoring",
+  "status": "registered_metadata_only",
+  "design_plan": "docs/MEETINGS-FREE-ANSWER-PLAN.md",
+  "split": "calibration",
+  "scope": {
+    "candidate": "C1",
+    "family_registration_only": true,
+    "source_text_files_created": 0,
+    "questions_authored": 0,
+    "oracles_authored": 0,
+    "validation_items_authored": 0,
+    "native_model_calls": 0,
+    "paid_usage": 0,
+    "no_authoring_before": "Parent records the C1 implementation, prompts, policy and source dependencies freeze; parent then delegates source/question/oracle authoring separately.",
+    "validation_gate": "A distinct custodian may register and author fresh validation families only after the preregistered calibration selection gate passes."
+  },
+  "composition": {
+    "items": 8,
+    "answerable": 6,
+    "insufficient_evidence": 2,
+    "question_languages": {
+      "ko": 4,
+      "en": 4
+    },
+    "origins": {
+      "public": 4,
+      "synthetic": 4
+    },
+    "origin_question_languages": {
+      "public": {
+        "ko": 2,
+        "en": 2
+      },
+      "synthetic": {
+        "ko": 2,
+        "en": 2
+      }
+    },
+    "insufficient_question_languages": {
+      "ko": 1,
+      "en": 1
+    },
+    "source_families": 4,
+    "items_per_family_maximum": 2,
+    "note": "These are intended authoring slots, not completed item-level answerability or semantic judgments."
+  },
+  "family_definition": {
+    "public": "One coherent source project/topic lineage is one family. Different dates, revisions, translations or related documents do not create additional families.",
+    "synthetic": "One independently invented domain, entities and decision history is one family. Renamed people, changed numbers or translated templates do not create additional families.",
+    "within_family_dependence": "Each two-item pair is correlated; eight items represent four source families, not eight independent families.",
+    "prohibited_reuse": [
+      "known4",
+      "exposed prepared12",
+      "M2/M3/M4 corpora and calibration/main-dev/test inputs",
+      "M5-A v1/v2 source families",
+      "M5-B calibration/validation/exemplars"
+    ]
+  },
+  "quality_dimensions": {
+    "multifacet": "At least two explicitly requested parts must each be supported; correctness of one part does not complete the item.",
+    "multisource": "At least two distinct source documents must be necessary to complete the item; decorative extra citations do not count.",
+    "status_and_conditions": "Distinguish documented state, intention, scope and conditions without assuming an event occurred.",
+    "document_changes": "Use explicitly documented revision or decision history; newer text is not automatically proof that a stated change was executed.",
+    "insufficient_evidence": "Some useful evidence is present but at least one unambiguous required part is absent; no empty-evidence shortcut and no ambiguity/conflict substitute."
+  },
+  "approved_public_sources": [
+    {
+      "source_id": "C1-PY-PEP1",
+      "family_id": "C1-F01",
+      "title": "PEP 1 - PEP Purpose and Guidelines",
+      "source_language": "en",
+      "source_kind": "public_primary_process_document",
+      "repository": "python/peps",
+      "revision": "193d435ad52b993d7ab2b133d543dd6b78fbcfbd",
+      "path": "peps/pep-0001.rst",
+      "source_url": "https://github.com/python/peps/blob/193d435ad52b993d7ab2b133d543dd6b78fbcfbd/peps/pep-0001.rst",
+      "download_url": "https://raw.githubusercontent.com/python/peps/193d435ad52b993d7ab2b133d543dd6b78fbcfbd/peps/pep-0001.rst",
+      "git_blob_sha1": "e90d7ff8787fdfd4ac60d4b749ff712b953723b9",
+      "raw_sha256": "e3a9cba0eb60610eac8d27a00d9ace467a2f8c4e213b3037d66d1b8d04a00290",
+      "raw_bytes": 41686,
+      "license": {
+        "reuse_basis": "CC0-1.0 OR document-specific public-domain dedication",
+        "license_url": "https://github.com/python/peps/blob/193d435ad52b993d7ab2b133d543dd6b78fbcfbd/peps/pep-0001.rst#copyright",
+        "license_reference_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "verified_from": "Copyright section in the exact pinned raw bytes",
+        "verified_at": "2026-10-13",
+        "statement": "This document is placed in the public domain or under the CC0-1.0-Universal license, whichever is more permissive."
+      },
+      "attribution": "PEP 1 authors and Python PEP contributors; preserve title, source URL, revision and document-specific dedication.",
+      "planned_raw_path": "data/evaluation/meetings-c1-calibration-v1/sources/public/python-pep-0001.raw.rst"
+    },
+    {
+      "source_id": "C1-PY-PEP13",
+      "family_id": "C1-F01",
+      "title": "PEP 13 - Python Language Governance",
+      "source_language": "en",
+      "source_kind": "public_primary_governance_document",
+      "repository": "python/peps",
+      "revision": "193d435ad52b993d7ab2b133d543dd6b78fbcfbd",
+      "path": "peps/pep-0013.rst",
+      "source_url": "https://github.com/python/peps/blob/193d435ad52b993d7ab2b133d543dd6b78fbcfbd/peps/pep-0013.rst",
+      "download_url": "https://raw.githubusercontent.com/python/peps/193d435ad52b993d7ab2b133d543dd6b78fbcfbd/peps/pep-0013.rst",
+      "git_blob_sha1": "54361685ea1af431bb2770926a9f6976db8d90f8",
+      "raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+      "raw_bytes": 13459,
+      "license": {
+        "reuse_basis": "Document-specific public-domain dedication",
+        "license_id": "LicenseRef-Public-Domain-Declaration",
+        "license_url": "https://github.com/python/peps/blob/193d435ad52b993d7ab2b133d543dd6b78fbcfbd/peps/pep-0013.rst#copyright",
+        "verified_from": "Copyright section in the exact pinned raw bytes",
+        "verified_at": "2026-10-13",
+        "statement": "This document has been placed in the public domain.",
+        "note": "Do not infer CC0 from PEP 1 or apply the repository's software license to this document."
+      },
+      "attribution": "PEP 13 authors and Python PEP contributors; preserve title, source URL, revision, dedication and upstream acknowledgements.",
+      "planned_raw_path": "data/evaluation/meetings-c1-calibration-v1/sources/public/python-pep-0013.raw.rst"
+    },
+    {
+      "source_id": "C1-NP-NEP50",
+      "family_id": "C1-F02",
+      "title": "NEP 50 - Promotion rules for Python scalars",
+      "source_language": "en",
+      "source_kind": "public_primary_design_document",
+      "repository": "numpy/numpy",
+      "revision": "90ddce7d8a788d61463acc40049cc570127430c6",
+      "path": "doc/neps/nep-0050-scalar-promotion.rst",
+      "source_url": "https://github.com/numpy/numpy/blob/90ddce7d8a788d61463acc40049cc570127430c6/doc/neps/nep-0050-scalar-promotion.rst",
+      "download_url": "https://raw.githubusercontent.com/numpy/numpy/90ddce7d8a788d61463acc40049cc570127430c6/doc/neps/nep-0050-scalar-promotion.rst",
+      "git_blob_sha1": "974f6691d363fed86973463fba70191ab2eb3cd3",
+      "raw_sha256": "9068c2e6ff03105aef9b8347975c9b37abf6d333ecee0f05d100ddfcf67e3fa5",
+      "raw_bytes": 33312,
+      "license": {
+        "reuse_basis": "Document-specific public-domain dedication",
+        "license_id": "LicenseRef-Public-Domain-Declaration",
+        "license_url": "https://github.com/numpy/numpy/blob/90ddce7d8a788d61463acc40049cc570127430c6/doc/neps/nep-0050-scalar-promotion.rst#copyright",
+        "verified_from": "Copyright section in the exact pinned raw bytes",
+        "verified_at": "2026-10-13",
+        "statement": "This document has been placed in the public domain.",
+        "note": "The source includes a footnote marker after this declaration. NumPy's repository BSD license is not used as the reuse basis for this NEP."
+      },
+      "attribution": "Sebastian Berg and NumPy NEP contributors; preserve title, source URL, revision and document-specific dedication.",
+      "planned_raw_path": "data/evaluation/meetings-c1-calibration-v1/sources/public/numpy-nep-0050.raw.rst"
+    },
+    {
+      "source_id": "C1-NP-NEP51",
+      "family_id": "C1-F02",
+      "title": "NEP 51 - Changing the representation of NumPy scalars",
+      "source_language": "en",
+      "source_kind": "public_primary_design_document",
+      "repository": "numpy/numpy",
+      "revision": "90ddce7d8a788d61463acc40049cc570127430c6",
+      "path": "doc/neps/nep-0051-scalar-representation.rst",
+      "source_url": "https://github.com/numpy/numpy/blob/90ddce7d8a788d61463acc40049cc570127430c6/doc/neps/nep-0051-scalar-representation.rst",
+      "download_url": "https://raw.githubusercontent.com/numpy/numpy/90ddce7d8a788d61463acc40049cc570127430c6/doc/neps/nep-0051-scalar-representation.rst",
+      "git_blob_sha1": "1d5831fcc26ed78279f554705e7b6557ff6c4372",
+      "raw_sha256": "3b6e592a1a26416c159b4ee481f2637cb56a6b258f6f830de984f051fe33e17c",
+      "raw_bytes": 14315,
+      "license": {
+        "reuse_basis": "Document-specific public-domain dedication",
+        "license_id": "LicenseRef-Public-Domain-Declaration",
+        "license_url": "https://github.com/numpy/numpy/blob/90ddce7d8a788d61463acc40049cc570127430c6/doc/neps/nep-0051-scalar-representation.rst#copyright",
+        "verified_from": "Copyright section in the exact pinned raw bytes",
+        "verified_at": "2026-10-13",
+        "statement": "This document has been placed in the public domain.",
+        "note": "NumPy's repository BSD license is not used as the reuse basis for this NEP."
+      },
+      "attribution": "Sebastian Berg and NumPy NEP contributors; preserve title, source URL, revision and document-specific dedication.",
+      "planned_raw_path": "data/evaluation/meetings-c1-calibration-v1/sources/public/numpy-nep-0051.raw.rst"
+    }
+  ],
+  "families": [
+    {
+      "family_id": "C1-F01",
+      "slug": "python-pep-governance",
+      "origin": "public",
+      "source_languages": [
+        "en"
+      ],
+      "source_ids": [
+        "C1-PY-PEP1",
+        "C1-PY-PEP13"
+      ],
+      "scope": "Python proposal handling and governance, including explicit process conditions and documented governance changes.",
+      "family_boundary": "Both PEPs and all their revisions/translations belong to one family; no separate Python steering-council meeting series.",
+      "slots": [
+        {
+          "item_id": "C1CAL-01",
+          "question_language": "ko",
+          "intended_answerability": "answerable",
+          "required_dimensions": [
+            "multifacet",
+            "multisource",
+            "status_and_conditions"
+          ]
+        },
+        {
+          "item_id": "C1CAL-02",
+          "question_language": "en",
+          "intended_answerability": "answerable",
+          "required_dimensions": [
+            "multifacet",
+            "document_changes",
+            "status_and_conditions"
+          ]
+        }
+      ]
+    },
+    {
+      "family_id": "C1-F02",
+      "slug": "numpy-scalar-design",
+      "origin": "public",
+      "source_languages": [
+        "en"
+      ],
+      "source_ids": [
+        "C1-NP-NEP50",
+        "C1-NP-NEP51"
+      ],
+      "scope": "NumPy scalar design changes, their separate scopes and documented relationships.",
+      "family_boundary": "Both scalar NEPs and their revisions/translations form one family. NEP 0/governance process prose is excluded to avoid treating a PEP-like process as an independent family.",
+      "slots": [
+        {
+          "item_id": "C1CAL-03",
+          "question_language": "ko",
+          "intended_answerability": "answerable",
+          "required_dimensions": [
+            "multifacet",
+            "multisource",
+            "status_and_conditions"
+          ]
+        },
+        {
+          "item_id": "C1CAL-04",
+          "question_language": "en",
+          "intended_answerability": "insufficient_evidence",
+          "required_dimensions": [
+            "multifacet",
+            "insufficient_evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "family_id": "C1-F03",
+      "slug": "synthetic-coastal-bird-census",
+      "origin": "synthetic",
+      "source_languages": [
+        "ko"
+      ],
+      "source_ids": [],
+      "scope": "An invented coastal bird census team's observation-protocol decisions, field-record corrections and conditional assignment handoffs.",
+      "family_boundary": "One invented census project with its own entities and decision history. No telescope checkout, equipment return, garden production, archival digitization or generic software operations.",
+      "planned_source_kinds": [
+        "synthetic_meeting_record",
+        "synthetic_observation_protocol_revision"
+      ],
+      "text_authored": false,
+      "provenance_requirement": "AI-authored fiction, not real research records or ecological guidance; disclose generated sources and questions separately.",
+      "slots": [
+        {
+          "item_id": "C1CAL-05",
+          "question_language": "ko",
+          "intended_answerability": "answerable",
+          "required_dimensions": [
+            "multifacet",
+            "multisource",
+            "status_and_conditions"
+          ]
+        },
+        {
+          "item_id": "C1CAL-06",
+          "question_language": "en",
+          "intended_answerability": "answerable",
+          "required_dimensions": [
+            "multifacet",
+            "document_changes",
+            "status_and_conditions"
+          ]
+        }
+      ]
+    },
+    {
+      "family_id": "C1-F04",
+      "slug": "synthetic-chess-adjudication",
+      "origin": "synthetic",
+      "source_languages": [
+        "en"
+      ],
+      "source_ids": [],
+      "scope": "An invented community chess event committee's pairing and adjudication-procedure decisions, revisions and task ownership.",
+      "family_boundary": "One invented event with independently authored rules and history. No copying real federation rules, participant ticket transfers, course access, equipment lending or archive projects.",
+      "planned_source_kinds": [
+        "synthetic_meeting_record",
+        "synthetic_adjudication_procedure_revision"
+      ],
+      "text_authored": false,
+      "provenance_requirement": "AI-authored fiction, not actual federation rules or a real event; disclose generated sources and questions separately.",
+      "slots": [
+        {
+          "item_id": "C1CAL-07",
+          "question_language": "en",
+          "intended_answerability": "answerable",
+          "required_dimensions": [
+            "multifacet",
+            "multisource",
+            "document_changes",
+            "status_and_conditions"
+          ]
+        },
+        {
+          "item_id": "C1CAL-08",
+          "question_language": "ko",
+          "intended_answerability": "insufficient_evidence",
+          "required_dimensions": [
+            "multifacet",
+            "insufficient_evidence"
+          ]
+        }
+      ]
+    }
+  ],
+  "reproduction_and_authoring_rules": {
+    "public_retrieval": "After the C1 code/policy freeze, retrieve only the four registered raw URLs. Verify byte count, SHA-256 and Git blob identity before creating source files; never substitute a live branch or rendered website revision.",
+    "public_processing": "Retain the original source bytes separately. Select whole source passages with heading context, without paraphrasing, translating, rewriting status or inventing connecting text. Record source line/offset mappings and processed hashes before any native model call.",
+    "public_license": "Preserve the exact copyright/dedication section and source attribution with materialized raw/excerpt files; do not fetch external linked documents or images as if their rights were inherited.",
+    "synthetic_processing": "Author independent meeting records and related documents only after freeze; mark fiction, author role, language and local hashes. No source text exists at registration.",
+    "question_authoring": "Author all eight questions and frozen item-level oracles after family registration and policy freeze. Bind mandatory facts, allowed alternative citations, answerability, forbidden inference, language, source revision and processed hash before inference.",
+    "review": "A separate semantic reviewer who did not implement the generation prompts reviews all items before inference. AI review is not human review.",
+    "source_length": "All evidence needed by an item must fit the unchanged ten-chunk/160-span and per-stage 4096-token limits, including later stage overhead. Token readiness is not yet measured; no truncation after inference begins.",
+    "registry_change_policy": "Preserve this registration. If source integrity, license, family separation or authorability fails before item freeze, record a versioned amendment with reason; do not silently replace a family or source. After inference begins, no item replacement or oracle edits."
+  },
+  "overlap_review": {
+    "status": "metadata_screened_with_explicit_limits",
+    "direct_metadata_sources": [
+      {
+        "path": "data/manifests/kubernetes-pilot.json",
+        "sha256": "ca66496032fad7409c33c400cf18d5396bd40031067b5be71aa4de187d2a8c5c",
+        "observed_scope": "kubernetes/website public document metadata"
+      },
+      {
+        "path": "data/manifests/kubernetes-v1.json",
+        "sha256": "e4d33997b5589bd8d9cc5c56691da5940eba3a7b6554c671b8c39b78910fe69a",
+        "observed_scope": "kubernetes/website; 313 document metadata entries"
+      },
+      {
+        "path": "data/manifests/meeting-public-v1.json",
+        "sha256": "aee75670f38bddf3d15df12b35ae3daf7c2714bc944868b591aee94845a7fe87",
+        "observed_scope": "jupyter/jupyter meeting and host-guide source metadata"
+      },
+      {
+        "path": "data/evaluation/m5b-family-registry-v1.json",
+        "sha256": "b2fb4f0749995a2aa7f87f30a5531e23fb5373f0b42b0b778e0bf7ea7674b4cc",
+        "observed_scope": "12 family and three exemplar IDs/topics/scopes, with metadata only; no item text/oracle/model output opened"
+      }
+    ],
+    "parent_supplied_metadata": [
+      {
+        "scope": "known4",
+        "excluded_domains": [
+          "Jupyter meeting and host material",
+          "synthetic operations meeting"
+        ],
+        "verification": "Parent metadata report; raw questions and outputs were not opened."
+      },
+      {
+        "scope": "prepared12",
+        "excluded_domains": [
+          "rust-lang/lang-team",
+          "synthetic archive digitization"
+        ],
+        "verification": "Parent metadata report; registry role did not open the isolated pool's files."
+      },
+      {
+        "scope": "M5-A",
+        "excluded_domains": [
+          "deployment",
+          "log retention",
+          "backup"
+        ],
+        "verification": "AGENTS.md and M5-B family-registry exclusions only."
+      }
+    ],
+    "conclusion": "The selected public repositories and synthetic topic scopes do not match the reviewed metadata families. This is a bounded family-level screen, not a claim of exhaustive semantic independence.",
+    "unknowns": [
+      "No fact-level or wording comparison with locked or previously exposed item bodies was performed.",
+      "The complete scope of any unregistered historical material cannot be established from the inspected metadata.",
+      "New synthetic facts, selected public excerpts, questions and oracles do not exist yet; their adherence to the registered family scopes must be reviewed before item freeze."
+    ],
+    "old_validation_bodies_opened": false,
+    "old_known4_questions_or_outputs_opened": false,
+    "new_validation_registered": false
+  },
+  "provenance": {
+    "registry_author": "AI source-family registration role /root/meeting_c1_registry",
+    "requested_model": "gpt-6-astra",
+    "requested_reasoning_effort": "xhigh",
+    "tool_accepted_model": "gpt-6-astra",
+    "tool_accepted_reasoning_effort": "xhigh",
+    "settings_evidence": "Parent confirmed spawn_agent explicitly requested model=gpt-6-astra, reasoning_effort=xhigh, fork_turns=none and the tool successfully created /root/meeting_c1_registry.",
+    "parent_chat_model_changed": false,
+    "service_model_changed": false,
+    "public_sources_checked_via": "Primary project pages and GitHub public REST contents at full commit IDs; bytes decoded in memory for hash and license verification, with no source file written.",
+    "ai_authored_registry": true,
+    "ai_authored_questions": 0,
+    "independent_semantic_prereviews": 0,
+    "human_review_count": 0,
+    "model_outputs_used_to_select_families": false
+  }
+}

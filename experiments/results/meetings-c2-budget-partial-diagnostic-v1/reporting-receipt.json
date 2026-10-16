@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "purpose": "exposure_linked_posthoc_partial_diagnostic",
+  "registered_at_utc": "2026-10-14T04:45:44.594772+00:00",
+  "review_mode": "metadata_exposed_label_masked_posthoc_diagnostic",
+  "model_hypothesis_blind": false,
+  "prior_outcome_exposure": true,
+  "original_information_isolation_met": false,
+  "independent_of_authors_and_designers": true,
+  "mapping_unseen_before_lock": true,
+  "human_review_count": 0,
+  "selected": false,
+  "validation_eligible": false,
+  "automatic_service_adoption": false,
+  "original_full_gate": "failed",
+  "exposure_method": {
+    "file": "experiments/results/meetings-c2-budget-partial-review-method-v1.json",
+    "sha256": "b05e32d625b0340f859cd36ad5528f07be7403984546d70cf6501a8ee5026f01",
+    "bytes": 3917
+  },
+  "initial_exposure": {
+    "file": "experiments/results/meetings-c2-budget-partial-review-exposure-v1.json",
+    "sha256": "759f1b4986bb46c8aeb31a2ec48fd0886ec01558b1ca16a3b56f0223e27df04b",
+    "bytes": 1485
+  },
+  "method_amendment": {
+    "file": "docs/MEETINGS-C2-BUDGET-REVIEW-EXPOSURE.md",
+    "sha256": "327db9117f994759589abb8f67c775e6ec34b43f85bbf504f225af2ac64a9a00",
+    "bytes": 6242
+  },
+  "summary": {
+    "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/diagnostic-summary.json",
+    "sha256": "60a90fdd1788a5c70760067fdd02d04a0efc24cbb3ff4dc8a5045c8b3e00af5c",
+    "bytes": 17667
+  },
+  "reviewer_self_attestation": {
+    "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/reviewer-exposure-attestation.json",
+    "sha256": "8b28bfab29528c541dec08730ac0b9c45d4ac4b3fd6025bb5ec4ef7c0cc2bb2d",
+    "bytes": 1447
+  },
+  "artifacts": {
+    "diagnostic-summary.json": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/diagnostic-summary.json",
+        "sha256": "60a90fdd1788a5c70760067fdd02d04a0efc24cbb3ff4dc8a5045c8b3e00af5c",
+        "bytes": 17667
+      },
+      "original": {
+        "file": ".local/c2-budget-partial-audit-v1/diagnostic-summary.json",
+        "sha256": "60a90fdd1788a5c70760067fdd02d04a0efc24cbb3ff4dc8a5045c8b3e00af5c",
+        "bytes": 17667
+      }
+    },
+    "failure-replay.json": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/failure-replay.json",
+        "sha256": "6252e8c5c9704642d33f9256d4e6c115260603985e49d2d04f116c73069d4ffa",
+        "bytes": 1688
+      },
+      "original": {
+        "file": ".local/c2-budget-partial-audit-v1/failure-replay.json",
+        "sha256": "6252e8c5c9704642d33f9256d4e6c115260603985e49d2d04f116c73069d4ffa",
+        "bytes": 1688
+      }
+    },
+    "judgments-lock.json": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/judgments-lock.json",
+        "sha256": "52f19861d0acf6e3315bf6d598be5e144ec60f15be74993382acc2b24dce3d23",
+        "bytes": 894
+      },
+      "original": {
+        "file": ".local/c2-budget-partial-audit-v1/judgments-lock.json",
+        "sha256": "52f19861d0acf6e3315bf6d598be5e144ec60f15be74993382acc2b24dce3d23",
+        "bytes": 894
+      }
+    },
+    "judgments.json": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/judgments.json",
+        "sha256": "9023c338d50c1beb7b9d5f26620abfe1731aab360b55b80457826e3b948c2567",
+        "bytes": 58679
+      },
+      "original": {
+        "file": ".local/c2-budget-partial-audit-v1/judgments.json",
+        "sha256": "9023c338d50c1beb7b9d5f26620abfe1731aab360b55b80457826e3b948c2567",
+        "bytes": 58679
+      }
+    },
+    "mapping.json": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/mapping.json",
+        "sha256": "7eee51f6320d51b0cbe0735fa18c2ef67449d502a568e36171210f5a3bd69eb6",
+        "bytes": 1348
+      },
+      "original": {
+        "file": ".local/c2-budget-partial-audit-v1/mapping.json",
+        "sha256": "7eee51f6320d51b0cbe0735fa18c2ef67449d502a568e36171210f5a3bd69eb6",
+        "bytes": 1348
+      }
+    },
+    "receipt.json": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/receipt.json",
+        "sha256": "07e2fec789f8f6b8822f834d3c8a2c982a001473a8ed49f9906db7ab64a806bc",
+        "bytes": 9212
+      },
+      "original": {
+        "file": ".local/c2-budget-partial-audit-v1/receipt.json",
+        "sha256": "07e2fec789f8f6b8822f834d3c8a2c982a001473a8ed49f9906db7ab64a806bc",
+        "bytes": 9212
+      }
+    },
+    "review-input.json": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/review-input.json",
+        "sha256": "766fff31c98be0ac5e9f53f83ae766c7a129b8a800f29a010e43599ee6c367aa",
+        "bytes": 141670
+      },
+      "original": {
+        "file": ".local/c2-budget-partial-audit-v1/review-input.json",
+        "sha256": "766fff31c98be0ac5e9f53f83ae766c7a129b8a800f29a010e43599ee6c367aa",
+        "bytes": 141670
+      }
+    },
+    "reviewer-exposure-attestation.json": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/reviewer-exposure-attestation.json",
+        "sha256": "8b28bfab29528c541dec08730ac0b9c45d4ac4b3fd6025bb5ec4ef7c0cc2bb2d",
+        "bytes": 1447
+      },
+      "original": {
+        "file": ".local/c2-budget-partial-audit-v1/reviewer-exposure-attestation.json",
+        "sha256": "8b28bfab29528c541dec08730ac0b9c45d4ac4b3fd6025bb5ec4ef7c0cc2bb2d",
+        "bytes": 1447
+      }
+    },
+    "calibration.seed": {
+      "published": {
+        "file": "experiments/results/meetings-c2-budget-partial-diagnostic-v1/calibration.seed",
+        "sha256": "74909b6b6a06924c42ccd794124b0d056108fb5b1ea9aac72aad2d2e294781e7",
+        "bytes": 64
+      },
+      "original": {
+        "file": ".local/c2-comparison-audit-seeds-v1/calibration.seed",
+        "sha256": "74909b6b6a06924c42ccd794124b0d056108fb5b1ea9aac72aad2d2e294781e7",
+        "bytes": 64
+      },
+      "purpose": "Nonsecret fixed shuffle seed, published only after judgment locking; validation seed remains undisclosed."
+    }
+  },
+  "execution_counts": {
+    "planned": 16,
+    "dispatched": 15,
+    "structurally_passed": 14,
+    "language_failures": 1,
+    "unexecuted": 1,
+    "validation": 0
+  },
+  "full_correct": {
+    "numerator": 2,
+    "denominator": 14
+  },
+  "arms": {
+    "L0": {
+      "numerator": 1,
+      "denominator": 7
+    },
+    "C2": {
+      "numerator": 1,
+      "denominator": 7
+    }
+  },
+  "exact_citations": {
+    "numerator": 47,
+    "denominator": 47
+  },
+  "quality_failure_counts_by_arm": {
+    "L0": {
+      "citation_exact": 0,
+      "claim_support": 4,
+      "completeness": 5,
+      "language": 0,
+      "temporal": 0,
+      "subject": 0,
+      "conditions": 0,
+      "correct_abstention_or_answer": 0
+    },
+    "C2": {
+      "citation_exact": 0,
+      "claim_support": 2,
+      "completeness": 6,
+      "language": 0,
+      "temporal": 0,
+      "subject": 0,
+      "conditions": 0,
+      "correct_abstention_or_answer": 1
+    }
+  },
+  "posthoc_improvements": 1,
+  "posthoc_regressions": 1,
+  "publication_rule": "Always accompany raw diagnostic-summary with this exposure-linked receipt. This is not a model-blind efficacy comparison or evidence of candidate readiness.",
+  "limitations": [
+    "Only seven complete pairs out of eight planned; failed language call and unexecuted control have no semantic scores.",
+    "One AI reviewer with prior model and outcome metadata exposure; no human review.",
+    "Citation exactness and relevance do not establish all-fact entailment or completeness.",
+    "No new inference, tokenizer calls, paid services, isolated validation use or automatic adoption."
+  ]
+}

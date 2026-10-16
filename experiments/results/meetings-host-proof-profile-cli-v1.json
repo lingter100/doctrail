@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "synthetic-profile-cli-observation",
+  "started_at_utc": "2026-10-16T06:59:03.255436+00:00",
+  "head_sha": "3a1268f42277f09c3e2674be1ebcd375a01aaa19",
+  "ci_runs": [
+    {
+      "run_id": 38863819959,
+      "head_sha": "3a1268f42277f09c3e2674be1ebcd375a01aaa19",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      }
+    },
+    {
+      "run_id": 38863824654,
+      "head_sha": "3a1268f42277f09c3e2674be1ebcd375a01aaa19",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      }
+    }
+  ],
+  "source_freeze_sha256": "1171f14f7cb176838385723a040ded6921409cc1cfb168833d35e4782687f412",
+  "environment": {
+    "python": "3.11.15",
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 170 Stepping 4, GenuineIntel"
+  },
+  "environment_limitations": "OS cache and concurrent system load are not isolated.",
+  "github_checks_outside_profile": true,
+  "official_cli_invocations": 1,
+  "outer_cli_wall_seconds": 56.61253940000097,
+  "cli_exit_code": 0,
+  "terminal_summary": {
+    "status": "passed",
+    "completed_passes": 7,
+    "error": null,
+    "receipt_error": null
+  },
+  "receipt_sha256": "c746ebd3615b79c91fadef5d1d6b4d7ce154c447731f2ab9e27f86284203c656",
+  "receipt_status": "passed",
+  "passed": true,
+  "source_head_unchanged": true,
+  "source_bytes_unchanged": true,
+  "stdout_sha256": "833b9ccaa9470a32f157386d67d7254e0b8e12cdb447bd8da129412db3de07e9",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

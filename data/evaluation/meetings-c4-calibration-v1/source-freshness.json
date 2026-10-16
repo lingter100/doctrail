@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "created_at_utc": "2026-10-16T04:57:40.306977+00:00",
+  "method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+  "reviewer_id": "c4_calibration_source_review",
+  "prior_metadata_sha256": "757a85b523303aa85255d38887f5d7ea5689907942b887317ad296cc669badf4",
+  "fingerprints_sha256": "0f222307428d124ce268a78aec5bc3798d00f47807d54015095be508ae3baf80",
+  "other_split_sha256": null,
+  "missing_historical_fingerprints": [
+    "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+    "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+    "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+  ],
+  "complete_near_duplicate_absence_proven": false,
+  "semantic_freshness_verdict": "accepted",
+  "semantic_review_reason": "Within the permitted full calibration source review, two separate source histories are coherent and semantically distinct: a genuine public software-internship archive and an explicitly fictional community tool-lending operation. Available historical identity metadata has no collision. No historical semantic/translation absence or complete near-duplicate coverage is claimed; closed and validation bodies were not read.",
+  "within_family_shared_paragraphs": [],
+  "historical_identity_rows_compared": 68,
+  "historical_identity_collision_count": 0,
+  "new_normalized_document_duplicate_count": 0,
+  "cross_family_long_paragraph_duplicate_count": 0,
+  "within_family_shared_long_paragraph_group_count": 0,
+  "public_repository_identity_absent_from_available_prior_index": true,
+  "short_repetition_review": "Repeated meeting layout/contact fields and operational references are consistent with source history; they do not by themselves establish indispensable multi-document evidence. No pair shares an exact normalized paragraph of at least 200 code points.",
+  "reviewer_validation_body_reads": 0,
+  "reviewer_closed_body_reads": 0,
+  "human_review_count": 0,
+  "other_split_comparison_deferred_to_isolated_validation_reviewer": true
+}

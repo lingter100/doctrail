@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "model": "Qwen/Qwen3-1.7B",
+  "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "status": "answered",
+  "reason": null,
+  "claims": [
+    {
+      "text": "검색 로그 보관 기간 30일을 7일로 변경했다.",
+      "citations": [
+        {
+          "chunk_id": "synthetic-release-followup.md-full",
+          "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+          "start_offset": 82,
+          "end_offset": 146
+        }
+      ]
+    },
+    {
+      "text": "로그 보관 기간을 줄이기 위해 논의했다.",
+      "citations": [
+        {
+          "chunk_id": "synthetic-release-followup.md-full",
+          "quote": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.",
+          "start_offset": 147,
+          "end_offset": 181
+        }
+      ]
+    },
+    {
+      "text": "로그 보관 정책과 출시 준비를 재검토했다.",
+      "citations": [
+        {
+          "chunk_id": "synthetic-release-followup.md-full",
+          "quote": "목적: 로그 보관 정책과 출시 준비를 재검토한다.",
+          "start_offset": 53,
+          "end_offset": 80
+        }
+      ]
+    },
+    {
+      "text": "준호는 2026-10-12까지 로그 삭제 작업을 구현한다.",
+      "citations": [
+        {
+          "chunk_id": "synthetic-release-followup.md-full",
+          "quote": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.",
+          "start_offset": 182,
+          "end_offset": 228
+        }
+      ]
+    },
+    {
+      "text": "로그 삭제 작업의 우선순위는 높음.",
+      "citations": [
+        {
+          "chunk_id": "synthetic-release-followup.md-full",
+          "quote": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.",
+          "start_offset": 182,
+          "end_offset": 228
+        }
+      ]
+    }
+  ],
+  "telemetry": {
+    "calls": [
+      {
+        "operation": "bm25_evidence_selection",
+        "received_chunks": 3,
+        "selected_passages": 9,
+        "selected_documents": 2,
+        "passage_limit": 12
+      },
+      {
+        "input_tokens": 1069,
+        "output_tokens": 137,
+        "elapsed_seconds": 13.328000000212342,
+        "peak_allocated_mib": 3611.03271484375,
+        "peak_reserved_mib": 3706.0,
+        "finish_reason": "eos"
+      }
+    ],
+    "elapsed_ms": 13391.0,
+    "effective_generation_config": {
+      "max_new_tokens": 768,
+      "do_sample": false,
+      "num_beams": 1,
+      "num_return_sequences": 1,
+      "temperature": 1.0,
+      "top_k": 50,
+      "top_p": 1.0,
+      "typical_p": 1.0,
+      "repetition_penalty": 1.0,
+      "length_penalty": 1.0,
+      "use_cache": true,
+      "bos_token_id": 151643,
+      "eos_token_id": [
+        151645,
+        151643
+      ],
+      "pad_token_id": 151643,
+      "generation_mode": "greedy_search",
+      "use_model_defaults": false
+    }
+  }
+}

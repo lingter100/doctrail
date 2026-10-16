@@ -1,0 +1,45 @@
+Motivation and scope
+====================
+
+This NEP proposes to change the representation of the following
+NumPy scalars types to distinguish them from the Python scalars:
+
+* ``np.bool_``
+* ``np.uint8``, ``np.int8``, and all other integer scalars
+* ``np.float16``, ``np.float32``, ``np.float64``, ``np.longdouble``
+* ``np.complex64``, ``np.complex128``, ``np.clongdouble``
+* ``np.str_``, ``np.bytes_``
+* ``np.void``  (structured dtypes)
+
+Additionally, the representation of the remaining NumPy scalars will be
+adapted to print as ``np.`` rather than ``numpy.``:
+
+* ``np.datetime64`` and ``np.timedelta64``
+* ``np.void``  (unstructured version)
+
+The NEP does not propose to change how these scalars print – only
+their representation (``__repr__``) will be changed.
+Further, array representation will not be affected since it already
+includes the ``dtype=`` when necessary.
+
+The main motivation behind the change is that the Python numerical types
+behave differently from the NumPy scalars.
+For example numbers with lower precision (e.g. ``uint8`` or ``float16``)
+should be used with care and users should be aware when they are working
+with them.  All NumPy integers can experience overflow which Python integers
+do not.
+These differences will be exacerbated when adopting :ref:`NEP 50 <NEP50>`
+because the lower precision NumPy scalar will be preserved more often.
+Even ``np.float64``, which is very similar to Python's ``float`` and inherits
+from it, does behave differently for example when dividing by zero.
+
+Another common source of confusion are the NumPy booleans.  Python programmers
+sometimes write ``obj is True`` and will surprised when an object that shows
+as ``True`` fails to pass the test.
+It is much easier to understand this behavior when the value is
+shown as ``np.True_``.
+
+Not only do we expect the change to help users better understand and be
+reminded of the differences between NumPy and Python scalars, but we also
+believe that the awareness will greatly help debugging.
+

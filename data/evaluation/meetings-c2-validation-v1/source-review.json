@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "review_id": "meetings-c2-validation-independent-source-review-v1",
+  "phase": "validation",
+  "recorded_at": "2026-10-14T02:15:26.809519+00:00",
+  "status": "SOURCE_ONLY_INDEPENDENT_AI_PREREVIEW_ACCEPTED_PENDING_NEW_SOURCE_FREEZE",
+  "contains_isolated_semantic_notes": true,
+  "parent_safe_metadata_only": false,
+  "custody": "Parent and candidate/prompt designers must not open this receipt. They may bind its bytes/hash and receive only acceptance counts, binding status and generic metadata errors. No source-specific findings are to be copied into parent-facing documentation.",
+  "reviewer": {
+    "reviewer_id": "c2_validation_source_review",
+    "task": "/root/c2_validation_source_review",
+    "reviewer_kind": "ai",
+    "source_author": false,
+    "independent_from_source_author": true,
+    "human_review_count": 0,
+    "development_assistant": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "fork_turns": "none",
+      "evidence": "Parent coordination explicitly confirmed that spawn_agent accepted these settings and returned /root/c2_validation_source_review; not self-model introspection."
+    },
+    "exposure": {
+      "broad_process_status_and_generic_policy_terms_in_agents_read": true,
+      "source_author_self_review_claims_read": true,
+      "full_validation_source_bodies_read": 6,
+      "source_manifests_and_source_only_receipts_read": true,
+      "parent_history_or_status_docs_read": false,
+      "calibration_files_or_bodies_read": false,
+      "candidate_adapter_prompt_or_implementation_read": false,
+      "comparison_runner_code_read": false,
+      "old_question_pools_read": false,
+      "validation_questions_or_oracles_read": false,
+      "service_model_outputs_read": false,
+      "selected_evaluation_contexts_read": false,
+      "inventory_loaded_for_binding_verification": true,
+      "chunk_text_exposed_beyond_complete_bodies": false,
+      "agents_and_project_instructions_read": true
+    },
+    "future_independent_output_scoring_eligible": false,
+    "ineligibility_reason": "This reviewer has read all validation source bodies and written source-specific semantic prereview explanations."
+  },
+  "scope": {
+    "complete_public_bodies": 4,
+    "complete_synthetic_bodies": 2,
+    "checks": [
+      "full-source readability and source scope",
+      "file-level provenance and retained license/NOTICE",
+      "synthetic roles and chronology",
+      "proposal versus decision",
+      "requested work versus recorded execution and completion",
+      "bounded absence statements",
+      "cross-document consistency",
+      "source-byte and inventory/receipt bindings"
+    ],
+    "not_assessed": [
+      "question or oracle correctness",
+      "context selection or token feasibility",
+      "candidate answer correctness",
+      "model quality",
+      "service readiness",
+      "human business realism"
+    ]
+  },
+  "bindings": {
+    "source_manifest": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-manifest-full.json",
+      "sha256": "48fd383b1503f071a3fb99801ec34d9de49681544c86b0a33e2e88f611a48938"
+    },
+    "original_source_manifest": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-manifest.json",
+      "sha256": "c4af4a50c530cfc692d0f1a2be1a2920d23e11477b7b9cf09a3504c6154eb49c"
+    },
+    "authoring_receipt": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-authoring-receipt.json",
+      "sha256": "24aee428eb6fff1c92aeb13ab97bdd1b1ccf4f7c1d83e799e080759fa73a189e"
+    },
+    "whole_document_inventory": {
+      "path": ".local/c2-source-inventory-validation-full-v1/inventory.json",
+      "sha256": "49ce4cf4fb20096227064cb7a6108fc1bcf5aa306d8b4d7205eb089af6d7a2e5"
+    },
+    "source_inventory_receipt": {
+      "path": ".local/c2-source-inventory-validation-full-v1/receipt.json",
+      "sha256": "d819d64abe014b9fd0e4eaf96fbf114d1a74e2669c6c050b1d5139717f27c060"
+    },
+    "actual_java_parity_receipt": {
+      "path": ".local/c2-source-inventory-validation-full-v1/java-parity.json",
+      "sha256": "154409e7bd816fb22849c910a26e9cae4394e0d3b848ad95fc660f13ef95d355"
+    },
+    "attribution": {
+      "path": "data/evaluation/meetings-c2-validation-v1/ATTRIBUTION.md",
+      "sha256": "0ee9556e7635a72ec49915ba2578818b69fcf6c89a69e54511b7452036b5b464"
+    },
+    "license_copy": {
+      "path": "data/evaluation/meetings-c2-validation-v1/licenses/apache-arrow-LICENSE.txt",
+      "sha256": "cd03925a27219d326d622609fbcae6567279af8b8885c33d5969a9e4ef5d7525"
+    },
+    "notice_copy": {
+      "path": "data/evaluation/meetings-c2-validation-v1/licenses/apache-arrow-NOTICE.txt",
+      "sha256": "afd895d61a00101f6d5a41cf518c83865d815e8109e956f512a0ce4ea9738c06"
+    },
+    "source_fetch_receipt": {
+      "path": ".local/c2-source-adoption/validation/fetch-receipt.json",
+      "sha256": "ab25d32af842f608babdbca5fb52769e0cf60b58a0cf59a72aeba4e4a267a48d"
+    },
+    "source_normalization_receipt": {
+      "path": ".local/c2-source-adoption/validation/normalization-receipt.json",
+      "sha256": "3a7118f10c4c8e18c2e9357916b1dc940b582be4470a8278911c4ee4b4ebd2d9"
+    },
+    "pinned_tree": {
+      "path": ".local/c2-source-adoption/validation/tree-by-tree-sha.json",
+      "sha256": "0d90a822c94490e0977ee5dbdacba4162581cb9ddbbdf46114b4a3732278ed83"
+    }
+  },
+  "integrity_verification": {
+    "status": "PASSED",
+    "automated_assertions": 298,
+    "errors": [],
+    "checks": [
+      "author receipt and artifact hashes/sizes",
+      "original public family equality in preserved and extended manifests",
+      "raw bytes and SHA256 for all six documents",
+      "UTF-8/BOM/newline/NFC identity and exact codepoint metadata",
+      "full inventory content equals normalized complete source",
+      "all 77 recorded chunk slices and SHA256 match source coordinates",
+      "four public Git blob SHA1 values match pinned tree entries",
+      "retained LICENSE and NOTICE copies equal raw snapshots and pinned Git blobs",
+      "applicable ancestor license paths restricted to root LICENSE.txt and NOTICE.txt",
+      "full6/77 helper and Java parity receipt linkage"
+    ],
+    "source_bindings_passed": 6,
+    "public_blob_bindings_passed": 4,
+    "license_notice_bindings_passed": 2,
+    "whole_corpus_documents": 6,
+    "whole_corpus_chunks": 77,
+    "java_parity_rerun_by_reviewer": false,
+    "java_parity_scope": "Existing author-executed Java result and source/inventory bindings checked; no new Java execution, no performance measurement.",
+    "historical_state_fields": "Manifest and helper receipt retain their earlier pending/false fields. The later authoring and actual Java receipts establish the subsequent full-corpus parity stage; earlier records were not rewritten."
+  },
+  "format_metadata": {
+    "files_checked": 7,
+    "utf8_decode_errors": 0,
+    "bom_files": 0,
+    "cr_bytes": 0,
+    "missing_final_lf": 0,
+    "intentional_markdown_two_space_breaks": 9,
+    "other_trailing_whitespace_lines": 0,
+    "format_changes_required": 0,
+    "note": "Nine two-space line endings are deliberate Markdown metadata hard breaks in the synthetic source bodies. Source bytes are preserved; no whitespace normalization is proposed."
+  },
+  "documents": [
+    {
+      "source_id": "C2-F03-S01",
+      "document_id": "c2-f03-doc-01",
+      "family_id": "C2-F03",
+      "origin": "public",
+      "source_binding": {
+        "raw_snapshot": ".local/c2-source-adoption/validation/raw/CONTRIBUTING.md",
+        "raw_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917",
+        "processed_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917",
+        "raw_bytes": 3359,
+        "processed_codepoints": 3359,
+        "git_blob_sha1": "d9a06e884d22d700841d47f6b3b37feac364cedb",
+        "whole_document_inventory_chunks": 4
+      },
+      "complete_source_body_read": true,
+      "reviewer_is_author": false,
+      "review_type": "independent_ai_source_prereview",
+      "verdict": "ACCEPTED_FOR_SOURCE_FREEZE_ONLY",
+      "blocking_findings": [],
+      "change_requests": [],
+      "license_provenance": {
+        "file_specific_asf_apache2_header_retained": true,
+        "full_license_and_notice_read": true,
+        "pinned_git_tree_and_blob_verified": true,
+        "applicable_conflicting_exception_identified": false,
+        "linked_or_included_body_adopted": false,
+        "retained_attribution_present": true
+      },
+      "isolated_findings": {
+        "source_kind": "Pinned public contribution guide, not a meeting record.",
+        "coherence": "The document distinguishes bug reporting, patch submission, bounded minor documentation exceptions, major-change discussion, and further guidance. Its ordinary issue-first instruction is qualified by the explicit minor-fix section; that is not an internal contradiction.",
+        "scope_limits": "Linked developer documentation and AI guidance targets are not incorporated by following their URLs. Statements are evaluated as this immutable source snapshot, not as a current external policy assertion."
+      }
+    },
+    {
+      "source_id": "C2-F03-S02",
+      "document_id": "c2-f03-doc-02",
+      "family_id": "C2-F03",
+      "origin": "public",
+      "source_binding": {
+        "raw_snapshot": ".local/c2-source-adoption/validation/raw/docs/source/developers/overview.rst",
+        "raw_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb",
+        "processed_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb",
+        "raw_bytes": 10468,
+        "processed_codepoints": 10466,
+        "git_blob_sha1": "3b8775023236e6ed6dfbde744c8ec09a75eb1507",
+        "whole_document_inventory_chunks": 13
+      },
+      "complete_source_body_read": true,
+      "reviewer_is_author": false,
+      "review_type": "independent_ai_source_prereview",
+      "verdict": "ACCEPTED_FOR_SOURCE_FREEZE_ONLY",
+      "blocking_findings": [],
+      "change_requests": [],
+      "license_provenance": {
+        "file_specific_asf_apache2_header_retained": true,
+        "full_license_and_notice_read": true,
+        "pinned_git_tree_and_blob_verified": true,
+        "applicable_conflicting_exception_identified": false,
+        "linked_or_included_body_adopted": false,
+        "retained_attribution_present": true
+      },
+      "isolated_findings": {
+        "source_kind": "Pinned public developer workflow overview, not a meeting record.",
+        "coherence": "Branch and review workflow, human responsibility for AI assistance, and platform-support requirements are internally readable with their stated conditions. Normative guidance is not a report that any particular contribution has passed review or been merged.",
+        "scope_limits": "The literal include directive for experimental_repos.rst remains unresolved. Included or cross-referenced text is absent from this document and cannot be supplied from an outside source or assumed to be present."
+      }
+    },
+    {
+      "source_id": "C2-F03-S03",
+      "document_id": "c2-f03-doc-03",
+      "family_id": "C2-F03",
+      "origin": "public",
+      "source_binding": {
+        "raw_snapshot": ".local/c2-source-adoption/validation/raw/docs/source/developers/reviewing.rst",
+        "raw_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5",
+        "processed_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5",
+        "raw_bytes": 15187,
+        "processed_codepoints": 15187,
+        "git_blob_sha1": "c0fcf56155d8e38dfa4f8337e243501608f0269e",
+        "whole_document_inventory_chunks": 18
+      },
+      "complete_source_body_read": true,
+      "reviewer_is_author": false,
+      "review_type": "independent_ai_source_prereview",
+      "verdict": "ACCEPTED_FOR_SOURCE_FREEZE_ONLY",
+      "blocking_findings": [],
+      "change_requests": [],
+      "license_provenance": {
+        "file_specific_asf_apache2_header_retained": true,
+        "full_license_and_notice_read": true,
+        "pinned_git_tree_and_blob_verified": true,
+        "applicable_conflicting_exception_identified": false,
+        "linked_or_included_body_adopted": false,
+        "retained_attribution_present": true
+      },
+      "isolated_findings": {
+        "source_kind": "Pinned public review guidelines, not a meeting record.",
+        "coherence": "The opening explicitly treats guidelines as non-exhaustive judgement rather than hard rules. Later exceptions to completeness and follow-up guidance remain conditional. Critical fixes, breaking changes and priority labels describe different classifications; they are not interchangeable.",
+        "scope_limits": "Role descriptions and examples do not establish that an individual has received a role or that a particular contribution satisfies a rule. Linked references and code-of-conduct material are not expanded."
+      }
+    },
+    {
+      "source_id": "C2-F03-S04",
+      "document_id": "c2-f03-doc-04",
+      "family_id": "C2-F03",
+      "origin": "public",
+      "source_binding": {
+        "raw_snapshot": ".local/c2-source-adoption/validation/raw/docs/source/developers/release.rst",
+        "raw_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19",
+        "processed_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19",
+        "raw_bytes": 29948,
+        "processed_codepoints": 29948,
+        "git_blob_sha1": "fbce61ae9d174fde3d8451768b3486bbb582fb48",
+        "whole_document_inventory_chunks": 36
+      },
+      "complete_source_body_read": true,
+      "reviewer_is_author": false,
+      "review_type": "independent_ai_source_prereview",
+      "verdict": "ACCEPTED_FOR_SOURCE_FREEZE_ONLY",
+      "blocking_findings": [],
+      "change_requests": [],
+      "license_provenance": {
+        "file_specific_asf_apache2_header_retained": true,
+        "full_license_and_notice_read": true,
+        "pinned_git_tree_and_blob_verified": true,
+        "applicable_conflicting_exception_identified": false,
+        "linked_or_included_body_adopted": false,
+        "retained_attribution_present": true
+      },
+      "isolated_findings": {
+        "source_kind": "Pinned public release procedure, not a completed release record.",
+        "coherence": "Proposed freeze dates, release candidates, verification, voting and post-release work appear as distinct procedural stages. Committer and PMC responsibilities are qualified in context. Commands and checklist items are instructions within the source, not evidence that those operations occurred.",
+        "scope_limits": "External packaging checklists, linked policies, scripts and examples remain external. Time-sensitive names and process details are preserved as historical snapshot text without live verification."
+      }
+    },
+    {
+      "source_id": "C2-F04-S01",
+      "document_id": "c2-f04-doc-01",
+      "family_id": "C2-F04",
+      "origin": "synthetic",
+      "source_binding": {
+        "raw_snapshot": "data/evaluation/meetings-c2-validation-v1/sources/c2-f04-doc-01.md",
+        "raw_sha256": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de",
+        "processed_sha256": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de",
+        "raw_bytes": 4923,
+        "processed_codepoints": 2064,
+        "git_blob_sha1": null,
+        "whole_document_inventory_chunks": 3
+      },
+      "complete_source_body_read": true,
+      "reviewer_is_author": false,
+      "review_type": "independent_ai_source_prereview",
+      "verdict": "ACCEPTED_FOR_SOURCE_FREEZE_ONLY",
+      "blocking_findings": [],
+      "change_requests": [],
+      "license_provenance": {
+        "explicit_ai_fictional_notice_present": true,
+        "source_author_distinct_from_reviewer": true,
+        "real_meeting_or_private_customer_record": false,
+        "third_party_authorship_not_asserted": true
+      },
+      "isolated_findings": {
+        "source_kind": "Explicitly AI-authored fictional operating policy effective before the companion meeting.",
+        "coherence": "윤해솔 consistently owns customer approval records and schedule coordination; 백지후 owns versioning and production-file assembly; 서도윤 owns acceptance and actual production status. Delegation of internal work cannot substitute for customer authorization. Limited replies, changed versions, complete handoff, tentative reservations, actual start and separate completion stages are distinguished without contradictory instructions.",
+        "temporal_status_check": "The effective date 2031-04-07 precedes the companion meeting on 2031-04-09. The policy prescribes required records but does not claim a real order has completed them.",
+        "absence_check": "A missing or partial approval remains unresolved rather than inferred as consent. An unrecorded shipping/completion state is not silently promoted by another completed stage.",
+        "ambiguity_check": "No blocking ambiguity in role assignment, approval scope, version identity, handoff requirements or completion definitions was identified. This is a source-coherence judgement, not industry validation."
+      }
+    },
+    {
+      "source_id": "C2-F04-S02",
+      "document_id": "c2-f04-doc-02",
+      "family_id": "C2-F04",
+      "origin": "synthetic",
+      "source_binding": {
+        "raw_snapshot": "data/evaluation/meetings-c2-validation-v1/sources/c2-f04-doc-02.md",
+        "raw_sha256": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311",
+        "processed_sha256": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311",
+        "raw_bytes": 4719,
+        "processed_codepoints": 2053,
+        "git_blob_sha1": null,
+        "whole_document_inventory_chunks": 3
+      },
+      "complete_source_body_read": true,
+      "reviewer_is_author": false,
+      "review_type": "independent_ai_source_prereview",
+      "verdict": "ACCEPTED_FOR_SOURCE_FREEZE_ONLY",
+      "blocking_findings": [],
+      "change_requests": [],
+      "license_provenance": {
+        "explicit_ai_fictional_notice_present": true,
+        "source_author_distinct_from_reviewer": true,
+        "real_meeting_or_private_customer_record": false,
+        "third_party_authorship_not_asserted": true
+      },
+      "isolated_findings": {
+        "source_kind": "Explicitly AI-authored fictional meeting record with separately dated follow-up entries.",
+        "coherence": "Order MK-418, registered approver 고나린 and the three internal roles are consistent throughout and with MK-QP-01. The earlier v2 reply is limited to wording; v3 adds the map and receives the later written full approval. Older files and approval history are retained rather than silently replaced.",
+        "temporal_status_check": "The sequence is 2031-04-08 16:40 limited reply, 2031-04-09 09:15 v3 transmission, the 10:00-10:35 meeting, 15:25 full written approval, 16:05 bundle handoff and 16:30 acceptance, followed by 2031-04-10 09:20 equipment inspection, 10:10 actual start and 11:40 work-in-progress. These times do not conflict. The meeting_date is the original meeting date; later headings explicitly identify appended follow-up dates.",
+        "decision_proposal_check": "The same-evening start proposal is explicitly rejected. The next-day 09:30 slot is conditional reservation, not an actual start. The proposed additional colour sample is deferred and is not added as a confirmed process.",
+        "work_completion_check": "Task requests in the meeting are followed by explicit records of approval, assembly and acceptance. Acceptance is distinguished from printing start. The final status records ongoing printing, not completed production, packaging, dispatch or a customer update.",
+        "absence_check": "No delegation reply, delivery booking or later customer update is established merely from silence. The text explicitly bounds the last recorded state; it does not prove events after the last entry could never occur.",
+        "ambiguity_check": "No blocking inconsistency or ambiguity was identified in roles, document versions, dates, conditional reservation, rejected/deferred proposals or unfinished work."
+      }
+    }
+  ],
+  "cross_document_review": {
+    "family_id": "C2-F04",
+    "verdict": "ACCEPTED",
+    "blocking_findings": [],
+    "change_requests": [],
+    "isolated_rationale": "The policy effective before the meeting assigns the same role responsibilities and requirements shown in the companion record. Partial approval, revised files, full final approval, bundle acceptance, tentative scheduling, actual start and unfinished production remain consistent. Requested receipt date, production completion and shipment are kept distinct. No statement requires inference of an unrecorded completed action."
+  },
+  "counts": {
+    "source_documents_reviewed": 6,
+    "public_documents_accepted": 4,
+    "synthetic_documents_accepted": 2,
+    "accepted_documents": 6,
+    "rejected_documents": 0,
+    "held_documents": 0,
+    "independent_ai_source_reviews": 6,
+    "synthetic_cross_document_reviews": 1,
+    "blocking_findings": 0,
+    "change_requests": 0,
+    "metadata_errors": 0,
+    "human_reviews": 0,
+    "question_authorship": 0,
+    "oracle_authorship": 0,
+    "context_selection": 0,
+    "tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "paid_calls": 0,
+    "network_calls": 0,
+    "existing_file_modifications": 0
+  },
+  "limitations": [
+    "Source acceptance is not independent output scoring or an answer-quality/readiness result.",
+    "Public material is judged only as the pinned source snapshot; no live links, included targets or external process truth were verified.",
+    "The reviewer did not inspect calibration or closed pools to test originality; family isolation and no prior-pool derivation remain author provenance claims.",
+    "The author self-review claims were visible before this independent reread; this is not blind-to-author-verdict source review.",
+    "Synthetic business realism and source quality have no human review.",
+    "A separately recorded source freeze must precede validation question/oracle/context authoring; later item prereview remains required."
+  ],
+  "ownership_handoff": {
+    "only_written_path": "data/evaluation/meetings-c2-validation-v1/source-review.json",
+    "all_existing_files_preserved": true,
+    "git_operations": 0,
+    "released_to_parent_for_hash_binding_only": true
+  }
+}

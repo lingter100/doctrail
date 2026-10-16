@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "isolated_source_adoption_and_authoring_receipt",
+  "created_at": "2026-10-14T07:24:36.778332+00:00",
+  "contains_isolated_validation_semantic_content": true,
+  "parent_safe_metadata_only": false,
+  "source_author_role": "/root/c2_validation_source_b",
+  "actual_tool_settings_parent_verified": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "evidence": "Parent confirmed existing tool-accepted settings; not model introspection."
+  },
+  "toolchain_precedes_authoring": {
+    "commit": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+    "freeze": {
+      "path": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+      "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+      "size_bytes": 7576
+    },
+    "ci_success_evidence": "Parent verified push38526167405/PR38526173249 required three jobs before delegation."
+  },
+  "artifacts": {
+    "manifest": {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-manifest.json",
+      "sha256": "4af98dd1cfc8d026b84ff8d497ceac2ef53ba025214e1bbf49bddc370feb16a0",
+      "size_bytes": 14709
+    },
+    "inventory": {
+      "path": "data/evaluation/meetings-c3-validation-v1/inventory.json",
+      "sha256": "407d8c66c842936e988c9e47e4172e44e84f0c748a22005a44fb20e64b3fb75c",
+      "size_bytes": 101281
+    },
+    "original_processing_receipt": {
+      "path": "data/evaluation/meetings-c3-validation-v1/processing-receipt.json",
+      "sha256": "b7a69e6fc3a75ba2098daa3fe456069f02b1a6b7a10cafcfa088ddfe9f7e6c73",
+      "size_bytes": 3906
+    },
+    "original_java_receipt": {
+      "path": "data/evaluation/meetings-c3-validation-v1/java-parity.json",
+      "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+      "size_bytes": 1908
+    },
+    "download_receipt": {
+      "path": ".local/c3-validation-source-adoption-v1/download-receipt.json",
+      "sha256": "9d3cd3ff697647fd5d5669a3bfc567276175c667ee23f549ce7983dd42e30538",
+      "size_bytes": 2818
+    },
+    "additional_legal_page_receipt": {
+      "path": ".local/c3-validation-source-adoption-v1/license-page-download-receipt.json",
+      "sha256": "9b5164d8223198eecc0dd36b6fbc120f13bcd23802b63fccb8e6206dd539af94",
+      "size_bytes": 357
+    },
+    "integrity_before": {
+      "path": ".local/c3-validation-source-adoption-v1/integrity-before.json",
+      "sha256": "cce65efe4356735e1d56b4ac8697e25a6c39425269b078a05df5a44807cc302e",
+      "size_bytes": 18271
+    },
+    "integrity_after": {
+      "path": ".local/c3-validation-source-adoption-v1/integrity-after.json",
+      "sha256": "cbafaf1b27ab85c426cb916f7cc9c7ecfeec30ba3db578cc81e65ff6900cb912",
+      "size_bytes": 19353
+    }
+  },
+  "public_source_audits": [
+    {
+      "document_id": "c3-f03-doc-01",
+      "rights_verdict": "ADOPTED_WITH_BSD_2_CLAUSE_NOTICE_PRESERVATION",
+      "complete_original_body_read": true,
+      "size_and_git_blob_verified": true,
+      "separate_restrictive_notice_found": false,
+      "external_include_expansion": false,
+      "separate_theme_assets_included": false,
+      "suitability": "Complete pinned procedure documentation; interpret examples and hyperlinks literally and do not infer completed real publication events.",
+      "upstream_path": "docs/user-guide/writing-your-docs.md",
+      "raw_sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba"
+    },
+    {
+      "document_id": "c3-f03-doc-02",
+      "rights_verdict": "ADOPTED_WITH_BSD_2_CLAUSE_NOTICE_PRESERVATION",
+      "complete_original_body_read": true,
+      "size_and_git_blob_verified": true,
+      "separate_restrictive_notice_found": false,
+      "external_include_expansion": false,
+      "separate_theme_assets_included": false,
+      "suitability": "Complete pinned procedure documentation; interpret examples and hyperlinks literally and do not infer completed real publication events.",
+      "upstream_path": "docs/user-guide/deploying-your-docs.md",
+      "raw_sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390"
+    }
+  ],
+  "synthetic_authoring": {
+    "documents": 2,
+    "source_ids": [
+      "C3-F04-S01",
+      "C3-F04-S02"
+    ],
+    "freshly_authored_for_registered_family": true,
+    "ai_and_fictional_notice_in_both_full_sources": true,
+    "author_self_review_only": true,
+    "self_review_checks": [
+      "The same program and picture/subtitle revisions are consistently identified across the meeting record and test log.",
+      "The technical criteria, recorded initial observations, permitted subtitle changes and repeated measurements remain distinct.",
+      "Signed time differences match the stated uniform shift; revised line lengths respect the unchanged display criterion.",
+      "Test registration does not assert the later public screening or the status of a separate accessibility track."
+    ],
+    "prior_closed_pool_files_reopened_during_this_task": false,
+    "prior_material_reused_translated_or_paraphrased": false,
+    "human_authorship_or_review_claimed": false
+  },
+  "rights": {
+    "public_adopted_documents": 2,
+    "public_license": "BSD-2-Clause",
+    "pinned_root_license_and_documentation_license_preserved": true,
+    "complete_pinned_tree_contains_notice_file": false,
+    "theme_license_notice_is_outside_adopted_source_scope": true,
+    "synthetic_no_external_text_or_media": true,
+    "rights_verdicts_passed": 4
+  },
+  "processing": {
+    "generic_plaintext_v2_invocations": 1,
+    "documents": 4,
+    "whole_original_chunks": 38,
+    "excluded_sources": 0,
+    "generic_inventory_contract_passed": true,
+    "processing_and_actual_java_receipt_contract_passed": true,
+    "raw_tool_artifact_copies_byte_exact": true,
+    "helper_receipt_synthetic_bodies_authored_zero_is_helper_execution_scope": true,
+    "separate_author_actual_synthetic_documents": 2,
+    "unchanged_normalization_and_chunking_contract": true
+  },
+  "java_execution": {
+    "maven_invocations": 3,
+    "first": "NoGoalSpecifiedException before tests; original console preserved.",
+    "second": "2 tests, 1 receipt-path guard failure before any source inventory read; original console and test reports preserved.",
+    "third": "2 tests passed, 0 failures/errors/skips; whole source inventory compared.",
+    "final_process_receipt": {
+      "path": ".local/c3-validation-source-adoption-v1/java-final-process-result.json",
+      "sha256": "2c2b3132545e8fe96ba65148b4fd94dfb218f68b6996f4dbb3073afa290d764b",
+      "size_bytes": 575
+    },
+    "raw_java_receipt_crlf_count": 40,
+    "new_scoped_gitattributes_preserves_exact_bytes": true,
+    "shared_target_returned": true
+  },
+  "review_state": {
+    "independent_source_reviews": 0,
+    "independent_source_review_status": "pending",
+    "human_reviews": 0,
+    "source_freeze_created": false
+  },
+  "isolation": {
+    "prior_role_has_C2_validation_source_and_item_exposure": true,
+    "C3_plan_contains_prior_failure_descriptions": true,
+    "prior_closed_pool_data_files_opened_in_this_task": false,
+    "calibration_source_or_question_bodies_opened": false,
+    "parent_received_current_source_bodies_full_manifest_inventory_or_semantic_audit": false,
+    "future_independent_output_scoring_eligible": false
+  },
+  "counts": {
+    "public_documents": 2,
+    "new_synthetic_documents": 2,
+    "whole_documents": 4,
+    "whole_chunks": 38,
+    "questions": 0,
+    "oracles": 0,
+    "context_selection": 0,
+    "official_tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "native_calls": 0,
+    "paid_calls": 0,
+    "human_reviews": 0
+  },
+  "limitations": [
+    "Author suitability is not independent source acceptance.",
+    "Actual Java parity proves processing equality, not source truth or candidate answer quality.",
+    "No source freeze, item authorship, tokenizer or model quality result is established.",
+    "Public material is pinned procedure documentation and may have appeared in model training; no novelty or statistical independence claim."
+  ]
+}

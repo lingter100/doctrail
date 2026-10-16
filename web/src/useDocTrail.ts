@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, errorMessage } from './api';
 import { profileLabel } from './searchMethods';
+import type { Evidence } from './meetings';
 import type { Auth, AuthMode, Capabilities, Detail, Doc, History, Hit, Modal, Search, SearchMethod, View, Workspace } from './types';
 
+export type SourceOrigin = {
+  query: string; retryLabel: string; isCurrent: () => boolean;
+  retry: () => void; onDenied?: () => void;
+};
 type State = {
   booting: boolean; auth: Auth | null; authMode: AuthMode; authBusy: boolean; authError: string;
   workspaceId: string; documents: Doc[]; history: History[]; view: View; search: Search | null;
@@ -12,12 +17,14 @@ type State = {
   toast: { id: number; message: string } | null;
   searchMethod: SearchMethod; capabilities: Capabilities | null; capabilitiesBusy: boolean;
   historyNotice: string;
+  selectedEvidence: Evidence | null;
+  selectedSourceOrigin: SourceOrigin | null;
 };
 const emptyWorkspace = {
   documents: [] as Doc[], history: [] as History[], view: 'library' as View, search: null,
   selected: null, selectedHit: null, selectedIndex: 0, query: '', filter: '', loading: false, workspaceLoading: false,
   pageError: '', modal: null, modalBusy: false, modalError: '', feedback: {}, retryBusy: false,
-  historyNotice: '',
+  historyNotice: '', selectedEvidence: null, selectedSourceOrigin: null,
 };
 const initial: State = { ...emptyWorkspace, booting: true, auth: null, authMode: 'register', authBusy: false, authError: '', workspaceId: '', logoutBusy: false, toast: null, searchMethod: 'bm25', capabilities: null, capabilitiesBusy: false };
 
@@ -51,6 +58,7 @@ export function useDocTrail() {
     const listedRevision = live.current.documents.find(doc => doc.id === detail.id)?.revision || 0;
     if (deletedDocuments.current.has(detail.id) || detail.revision < Math.max(documentVersions.current.get(detail.id) || 0, listedRevision)) return false;
     documentVersions.current.set(detail.id, detail.revision);
+    if (detail.workspace_id !== live.current.workspaceId) return true;
     update(current => ({ documents: current.documents.some(doc => doc.id === detail.id)
       ? current.documents.map(doc => doc.id === detail.id ? detail : doc) : [detail, ...current.documents] }));
     return true;
@@ -131,7 +139,7 @@ export function useDocTrail() {
   }
   function changeView(view: View) {
     // A search that finishes after navigating away must not reclaim the view.
-    tokens.current.search++; update({ view, pageError: '', historyNotice: '', loading: view === 'search' ? false : live.current.workspaceLoading });
+    tokens.current.search++; tokens.current.detail++; update({ view, selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null, pageError: '', historyNotice: '', loading: view === 'search' ? false : live.current.workspaceLoading });
   }
   async function logout() {
     if (live.current.logoutBusy) return;
@@ -163,7 +171,7 @@ export function useDocTrail() {
     const epoch = tokens.current.epoch, request = ++tokens.current.search;
     tokens.current.detail++;
     const valid = () => epoch === tokens.current.epoch && request === tokens.current.search;
-    update({ view: 'search', query, searchMethod: method, selected: null, selectedHit: null, search: null, loading: true, pageError: '', historyNotice: '', feedback: {}, retryBusy: false });
+    update({ view: 'search', query, searchMethod: method, selected: null, selectedHit: null, selectedSourceOrigin: null, search: null, loading: true, pageError: '', historyNotice: '', feedback: {}, retryBusy: false });
     try {
       const guard = method !== 'bm25' && expectedProfile ? `&expected_embedding_profile=${encodeURIComponent(expectedProfile)}` : '';
       const result = await api<Search>(`/workspaces/${id}/search?q=${encodeURIComponent(query)}&limit=10&method=${encodeURIComponent(method)}${guard}`);
@@ -177,25 +185,38 @@ export function useDocTrail() {
       }
     } finally { if (valid()) update({ loading: false }); }
   }
-  async function openDocument(id: string, hit?: Hit, selectedIndex = 0) {
+  async function openDocument(id: string, hit?: Hit, selectedIndex = 0, evidence?: Evidence, origin?: SourceOrigin) {
     const epoch = tokens.current.epoch, request = ++tokens.current.detail;
-    const valid = () => epoch === tokens.current.epoch && request === tokens.current.detail;
+    const search = live.current.search, searchRequest = tokens.current.search;
+    // Recovery belongs to the result that opened the source, never whichever
+    // unrelated search happens to remain in global state.
+    const sourceOrigin = origin || (hit && search && live.current.view === 'search' ? {
+      query: search.query, retryLabel: '다시 검색',
+      isCurrent: () => epoch === tokens.current.epoch && searchRequest === tokens.current.search && live.current.view === 'search',
+      retry: () => { void runSearch(search.query, search.method, search.embedding_profile?.id); },
+    } : undefined);
+    const valid = () => epoch === tokens.current.epoch && request === tokens.current.detail && (!sourceOrigin || sourceOrigin.isCurrent());
     try {
       const detail = await api<Detail>(`/documents/${id}`);
       if (!valid()) return;
-      if (replaceDoc(detail)) update({ selected: detail, selectedHit: hit || null, selectedIndex, retryBusy: false });
+      if (replaceDoc(detail)) update({ selected: detail, selectedHit: hit || null, selectedEvidence: evidence || null, selectedSourceOrigin: sourceOrigin || null, selectedIndex, retryBusy: false });
     } catch (error) {
       if (!valid() || sessionExpired(error)) return;
-      update({ selected: null, selectedHit: null });
+      update({ selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null });
       if (error instanceof ApiError && [403, 404].includes(error.status)) {
         // Invalidate an older list as well, so it cannot resurrect a revoked row.
-        tokens.current.load++;
+        tokens.current.load++; tokens.current.search++;
         update(current => ({ loading: false, workspaceLoading: false, documents: current.documents.filter(doc => doc.id !== id), search: current.search && { ...current.search, results: current.search.results.filter(hit => hit.document_id !== id) } }));
+        sourceOrigin?.onDenied?.();
       }
       toast(errorMessage(error));
     }
   }
-  function closeSource() { tokens.current.detail++; update({ selected: null, selectedHit: null, retryBusy: false }); }
+  function closeSource() { tokens.current.detail++; update({ selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null, retryBusy: false }); }
+  function retrySource() {
+    const origin = live.current.selectedSourceOrigin;
+    if (live.current.selected && origin?.isCurrent()) origin.retry();
+  }
   async function feedback(index: number, relevant: boolean) {
     const search = live.current.search, epoch = tokens.current.epoch;
     if (!search) return;
@@ -305,6 +326,7 @@ export function useDocTrail() {
   return { state, workspace: state.auth?.workspaces.find(workspace => workspace.id === state.workspaceId),
     setQuery: (query: string) => update({ query }), setFilter: (filter: string) => update({ filter }),
     setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, rerunHistory, loadCapabilities, setSearchMethod,
-    openDocument, closeSource, feedback, openModal, closeModal, submitModal, reprocess };
+    openDocument, openEvidence: (evidence: Evidence, origin?: SourceOrigin) => openDocument(evidence.document_id, undefined, 0, evidence, origin), sessionExpired,
+    closeSource, retrySource, feedback, openModal, closeModal, submitModal, reprocess };
 }
 export type DocTrail = ReturnType<typeof useDocTrail>;

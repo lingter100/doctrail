@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "purpose": "post_hoc_partial_failure_analysis_only",
+  "review_kind": "independent_semantic_review_role_mapping_summary",
+  "created_at": "2026-10-13T23:54:38.215632+00:00",
+  "planned_cases": 8,
+  "attempted_cases": 4,
+  "unexecuted_cases": 4,
+  "reviewed_samples": 8,
+  "report_sha256": "8ec5780db16b3f9cc5114cf42fe28e616f5c127ea5d9a06d684a1a1c964e3252",
+  "plan_sha256": "854805f703e108b5850485ff88a61d9d537dd54b9549c800e493dc1b7f093363",
+  "oracle_sha256": "b8e3c6a4e5b5e8d5e23b805e8d03a13c71a7d2c4278bcdcab7d8318d50d49849",
+  "input_sha256": "2984eecc5e679c99aa0bd41ada762a45e7350ff3151001c7041b7b6fc7f2dc51",
+  "review_input_sha256": "8045270605a85a17fe439db5516f397fcf3787aaff6b0e1e71d134e9d3c2d6fd",
+  "judgment_sha256": "6526bce4c417744a89a7a51bf7e9e04e24e787324bc8aa264d88ae15a265a12e",
+  "mapping_sha256": "5ef80c8ae6da495afa4e2cad253ac287685db1ffcd0122ef0991d637a9780636",
+  "receipt_sha256": "af822da4f90a1cc4cd354b1868731f4514666fff9ed782b6e08cedc15d34181d",
+  "seed_sha256": "6ba621e5b6ac218f256f6121281477375b60578e17009190bd8938393035606d",
+  "hash_provenance": {
+    "input_sha256_meaning": "Original calibration input hash declared by the provided audit receipt, distinct from the anonymous review pack hash.",
+    "directly_verified_files": [
+      "review-input.json",
+      "judgments.json",
+      "mapping.json",
+      "receipt.json"
+    ],
+    "receipt_declared_only": [
+      "report_sha256",
+      "plan_sha256",
+      "oracle_sha256",
+      "input_sha256",
+      "seed_sha256"
+    ],
+    "receipt_reports_current_source_hashes_match": true,
+    "source_report_plan_oracle_files_opened_by_reviewer": false
+  },
+  "independent_of_implementation": true,
+  "human_review_count": 0,
+  "model_calls": 0,
+  "paid_service_calls": 0,
+  "judgments_fixed_before_mapping": true,
+  "judgments_unchanged": true,
+  "roles": {
+    "D0": {
+      "attempted_cases": 4,
+      "overall_correct": 0,
+      "overall_incorrect": 4,
+      "answered_results": 4,
+      "error_results": 0,
+      "successful_abstentions": 0,
+      "quality_true_counts": {
+        "citation_exact": 4,
+        "claim_support": 0,
+        "completeness": 3,
+        "language": 4,
+        "temporal": 4,
+        "subject": 4,
+        "conditions": 3,
+        "correct_abstention_or_answer": 3
+      },
+      "exact_citation_answer_cases": 4,
+      "delivered_quotes": 31,
+      "exact_delivered_quotes": 31,
+      "all_claims_supported_cases": 0,
+      "answered_results_with_support_failure": 4,
+      "completeness_cases": 3
+    },
+    "C1": {
+      "attempted_cases": 4,
+      "overall_correct": 0,
+      "overall_incorrect": 4,
+      "answered_results": 3,
+      "error_results": 1,
+      "successful_abstentions": 0,
+      "quality_true_counts": {
+        "citation_exact": 3,
+        "claim_support": 0,
+        "completeness": 3,
+        "language": 3,
+        "temporal": 3,
+        "subject": 3,
+        "conditions": 2,
+        "correct_abstention_or_answer": 3
+      },
+      "exact_citation_answer_cases": 3,
+      "delivered_quotes": 27,
+      "exact_delivered_quotes": 27,
+      "all_claims_supported_cases": 0,
+      "answered_results_with_support_failure": 3,
+      "completeness_cases": 3
+    }
+  },
+  "d0_correct": 0,
+  "d0_denominator": 4,
+  "c1_correct": 0,
+  "c1_denominator": 4,
+  "improvements": 0,
+  "regressions": 0,
+  "unchanged_incorrect_pairs": 4,
+  "c1_error_count": 1,
+  "new_non_answer_error_pairs": 1,
+  "paired_outcomes": [
+    {
+      "case_id": "C1CAL-01",
+      "d0_sample_id": "sample-07",
+      "c1_sample_id": "sample-02",
+      "d0_correct": false,
+      "c1_correct": false,
+      "d0_status": "answered",
+      "c1_status": "answered",
+      "improved": false,
+      "regressed": false,
+      "new_non_answer_error": false
+    },
+    {
+      "case_id": "C1CAL-02",
+      "d0_sample_id": "sample-08",
+      "c1_sample_id": "sample-05",
+      "d0_correct": false,
+      "c1_correct": false,
+      "d0_status": "answered",
+      "c1_status": "answered",
+      "improved": false,
+      "regressed": false,
+      "new_non_answer_error": false
+    },
+    {
+      "case_id": "C1CAL-03",
+      "d0_sample_id": "sample-06",
+      "c1_sample_id": "sample-01",
+      "d0_correct": false,
+      "c1_correct": false,
+      "d0_status": "answered",
+      "c1_status": "answered",
+      "improved": false,
+      "regressed": false,
+      "new_non_answer_error": false
+    },
+    {
+      "case_id": "C1CAL-04",
+      "d0_sample_id": "sample-03",
+      "c1_sample_id": "sample-04",
+      "d0_correct": false,
+      "c1_correct": false,
+      "d0_status": "answered",
+      "c1_status": "error",
+      "improved": false,
+      "regressed": false,
+      "new_non_answer_error": true
+    }
+  ],
+  "failure_patterns": [
+    {
+      "pattern": "selected_citation_omits_required_sentence_continuation_or_condition",
+      "failure_codes": [
+        "CLAIM_CITATION_MISSING_SENTENCE_CONTINUATION",
+        "CLAIM_CITATION_MISSING_READINESS_CONDITION",
+        "CLAIM_CITATION_MISSING_CONFLICT_RULE_AND_THRESHOLD",
+        "CLAIM_CITATION_MISSING_CONDITIONAL_CONSEQUENT"
+      ],
+      "abstract_explanation": "Selected exact excerpts stop before the essential predicate, readiness qualification, obligation, threshold, or conditional result. Other supplied context contains the missing text, but it is not attached to the claim.",
+      "sample_counts_by_role": {
+        "D0": 3,
+        "C1": 3
+      }
+    },
+    {
+      "pattern": "added_enumeration_or_comparison_lacks_selected_evidence",
+      "failure_codes": [
+        "ADDED_FACTS_OUTSIDE_SELECTED_CITATIONS",
+        "ADDED_COMPARISON_OUTSIDE_SELECTED_CITATIONS"
+      ],
+      "abstract_explanation": "The prose adds a list of factual examples or a before/after comparison beyond what the attached excerpts state.",
+      "sample_counts_by_role": {
+        "D0": 2,
+        "C1": 1
+      }
+    },
+    {
+      "pattern": "qualified_fact_broadened",
+      "failure_codes": [
+        "QUALIFIED_DISPLAY_REASON_GENERALIZED"
+      ],
+      "abstract_explanation": "An added explanatory reason drops a source qualification and presents the fact more broadly.",
+      "sample_counts_by_role": {
+        "D0": 1,
+        "C1": 1
+      }
+    },
+    {
+      "pattern": "partial_answer_when_full_request_requires_abstention",
+      "failure_codes": [
+        "ANSWERED_WHEN_ORACLE_REQUIRES_ABSTENTION"
+      ],
+      "abstract_explanation": "The response acknowledges that a required facet lacks evidence, but still returns answered instead of the fixed insufficient-evidence abstention.",
+      "sample_counts_by_role": {
+        "D0": 1,
+        "C1": 0
+      }
+    },
+    {
+      "pattern": "non_answer_error_not_valid_abstention",
+      "failure_codes": [
+        "NO_ANSWER_ERROR_NOT_SUCCESSFUL_ABSTENTION"
+      ],
+      "abstract_explanation": "The candidate returns an error rather than an answer or valid abstention. Unassessable quality fields are false, without treating them as separate observed hallucinations.",
+      "sample_counts_by_role": {
+        "D0": 0,
+        "C1": 1
+      }
+    }
+  ],
+  "pattern_counts_overlap": true,
+  "overall_delivered_quotes_exact": 58,
+  "overall_delivered_quotes_total": 58,
+  "selection_gate_passed": false,
+  "candidate_calibration_gate_passed": false,
+  "gate_passed": false,
+  "interpretation": "Both roles have 0/4 fully correct results on the attempted subset. No complete-answer improvement is observed. Zero complete-answer regressions does not mean equal execution behavior: C1 has one new non-answer error. The already-failed calibration selection gate remains false.",
+  "limitations": [
+    "This is a post-hoc comparison of four attempted questions out of eight planned; it cannot establish full-calibration or general service performance.",
+    "Exact-quote totals are conditional on delivered citations: D0 has 31/31 and C1 27/27. The C1 error supplies no citations and does not receive citation success.",
+    "Completeness counts reflect presence of mandatory answer facets in prose, separately from citation support. They do not certify that those facets are adequately evidenced.",
+    "An incorrect partial answer becoming an error is not a successful abstention or a quality improvement.",
+    "Judgments were frozen before role mapping and have not been changed. Error shape and repeated outputs limited effective role blinding.",
+    "The reviewer previously assessed C0. Same-foundation AI evaluation bias remains; human review count is zero.",
+    "No candidate code, new follow-up design, raw report or sealed pool was opened for this mapping summary. No new inference or tuning was performed."
+  ]
+}

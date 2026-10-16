@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "item_review_metadata_summary",
+  "created_at_utc": "2026-10-16T05:28:55.487913+00:00",
+  "reviewer_id": "c4_validation_item_review",
+  "actual_model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "fork_turns": "none",
+  "verdict": "accepted",
+  "counts": {
+    "items": 8,
+    "accepted": 8,
+    "rejected": 0,
+    "requested_changes": 0,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "required_facts": 34,
+    "supported_required_facts": 27,
+    "missing_required_facts": 7,
+    "evidence_span_links": 28,
+    "full_source_documents": 6,
+    "source_chunks": 20
+  },
+  "answerable_coverage_counts": {
+    "general_only": 1,
+    "multiple_meetings": 1,
+    "mixed": 2,
+    "unavoidably_multi_document": 3,
+    "ko_requiring_en": 1,
+    "en_requiring_ko": 1
+  },
+  "requested_change_categories": [],
+  "human_review_count": 0,
+  "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "pre_semantic_head": "1b3f3200bef92eb612db01f5dbccac4aa5c7028b",
+  "pre_semantic_actual_git_proof": {
+    "code_bindings": 85,
+    "source_bindings": 15,
+    "current_and_historical_source_git_passed": true,
+    "code_contract_passed": true
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c4-validation-v1/source-freeze-v1.json",
+    "sha256": "b4a132dadd9cef1b5ba5b0c15e2a28024b8fb5141a8200de30afe812c3c52698"
+  },
+  "code_freeze": {
+    "file": "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json",
+    "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78"
+  },
+  "reviewed_author_file_hashes": {
+    "data/evaluation/meetings-c4-validation-v1/draft.json": "f6f1c5a8ca8584cd8b35d3c2d72659d207fc37a44c0dcdbafce7aaccde728955",
+    "data/evaluation/meetings-c4-validation-v1/oracle-draft.json": "490d6f658b2dc76cabaefc8a0df64ea9c3fbf55b84376cedc64f2514f64b00dc",
+    "data/evaluation/meetings-c4-validation-v1/context-selection.json": "038b1265de10917a463e415c6eb8ca47192f031b1a23476e4cada61fad9217ed",
+    "data/evaluation/meetings-c4-validation-v1/item-author-receipt.json": "ea5996e36a677da6ad3a11877d5891fa7dfb8c1dd485da1e0f0ec29d151402c2"
+  },
+  "new_file_hashes": {
+    "data/evaluation/meetings-c4-validation-v1/item-prereview.json": "f76824abac3c7775968ce16186d87b32080ed41d093b848f45acb8654b0ac3d5",
+    "data/evaluation/meetings-c4-validation-v1/item-prereview-notes.md": "43871671e4aef4ae0687db4faf552f688c80597a22566e85d9efe79269f480f4",
+    "data/evaluation/meetings-c4-validation-v1/item-freeze-v1.json": "c29f89300f48b2f7a7706a87fb05f6f902bc470ab8ecf360e0868ad5ce65afa6"
+  },
+  "local_check_hashes": {
+    ".local/c4-validation-item-review-v1/preflight.json": "39159d3e177a84e9f9292df0ae54207e2cc7e3199d8c8a4f43d52265beb3e6b7",
+    ".local/c4-validation-item-review-v1/structure-check.json": "b84d8380fb226562009455c149040e1f676a44c0d0add54b2c1dd84a1a76974b"
+  },
+  "item_freeze_bindings": 6,
+  "full_load_material": "deferred_until_item_commit",
+  "checks": {
+    "source_inventory_replay": true,
+    "existing_processing_freshness_parity_receipts": true,
+    "draft_oracle_schema_and_coverage": true,
+    "exact_catalog_coordinates": true,
+    "whole_chunk_selection": true,
+    "independent_semantic_prereview": true,
+    "source_code_author_files_unchanged": true,
+    "new_files_utf8_lf_no_bom": true
+  },
+  "activity_counts": {
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "downloads": 0,
+    "maven_runs": 0,
+    "git_writes": 0,
+    "source_edits": 0,
+    "author_file_edits": 0
+  },
+  "prepare_function_or_cli_invoked": false,
+  "exposure": {
+    "source_or_item_authorship_participation": false,
+    "own_validation_source_item_oracle_semantics_read": true,
+    "calibration_source_item_semantics_read": false,
+    "closed_pool_bodies_read": false,
+    "candidate_contract_schema_and_public_prior_aggregate_metadata_seen": true,
+    "author_semantic_notes_seen_but_not_treated_as_independent_votes": true,
+    "original_calibration_source_author_alternate_validation_repository_exposure_disclosed": true,
+    "original_exploration_exact_scope_partly_unverified": true,
+    "this_reviewer_participated_in_original_exploration": false,
+    "pristine_source_isolation_claim": false,
+    "zero_impact_claim": false,
+    "final_output_judge_eligible": false
+  },
+  "limits": {
+    "human_acceptance": false,
+    "model_output_quality_measured": false,
+    "tokenizer_readiness_measured": false,
+    "service_adoption": false,
+    "complete_near_duplicate_absence_proven": false,
+    "historical_fingerprint_gaps_remain": true
+  }
+}

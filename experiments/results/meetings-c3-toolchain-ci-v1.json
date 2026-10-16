@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "github_ci_verification",
+  "head_sha": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+  "runs": [
+    {
+      "run_id": 38526167405,
+      "head_sha": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "java-service",
+          "job_id": 115726905762,
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "job_id": 115726905904,
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "job_id": 115726906083,
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 38526173249,
+      "head_sha": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "java-service",
+          "job_id": 115726924688,
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "job_id": 115726924894,
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "job_id": 115726925113,
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "backend_test_summary": [
+    "2154 passed, 21 skipped, 1 warning in 76.54s (0:01:16)"
+  ],
+  "model_quality_measured": false,
+  "actual_c3_native_calls": 0,
+  "human_review_count": 0
+}

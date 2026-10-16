@@ -1,0 +1,174 @@
+{
+  "kind": "native_backend_readiness_not_quality_evaluation",
+  "human_review_count": 0,
+  "paid_service_calls": 0,
+  "prompt": [
+    {
+      "role": "user",
+      "content": "Output exactly READY."
+    }
+  ],
+  "source_hashes": {
+    "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+    "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+    "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+    "src/doctrail/meeting_worker.py": "5e3ca2dcfa93933b5e76aefd6c74ff2917a76906b90d7af96681ab69d37e0061",
+    "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+    "scripts/probe_meeting_gguf.py": "beb8de6ad85287deb4f71bc73a2f2eca6455985599dc6f72fee6e038885d884d",
+    "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+    "data/models/meetings-generation-gguf-v1.json": "ee069d53d3e8c35c44a71a65733e03551be560753ab06962c32ebdbd36cd2d11"
+  },
+  "identity": {
+    "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "gguf-sha256:5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+    "original_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "experimental": true,
+    "generation_protocol": "meeting-full-chunk-evidence-v5",
+    "artifact": {
+      "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+      "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+      "filename": "Qwen3-4B-Instruct-2507-Q5_K_M.gguf",
+      "sha256": "5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+      "size_bytes": 2889514080
+    },
+    "runtime": {
+      "backend": "llama.cpp",
+      "tag": "b11429",
+      "commit": "d81235049384534c167caea52b85a694f6103d14",
+      "observed_build": "b11429-d81235049",
+      "identity_check": "local_gguf_sha256_and_server_alias",
+      "context_tokens": 6144,
+      "max_input_tokens": 4096,
+      "max_new_tokens": 768,
+      "deadline_seconds": 120,
+      "memory_telemetry": "not_measured"
+    }
+  },
+  "loaded_gpu_snapshot": "NVIDIA GeForce RTX 4050 Laptop GPU, 3733 MiB, 6141 MiB",
+  "native_completion": {
+    "index": 0,
+    "content": "READY",
+    "tokens": [
+      45578,
+      151645
+    ],
+    "id_slot": 0,
+    "stop": true,
+    "model": "5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+    "tokens_predicted": 2,
+    "tokens_evaluated": 12,
+    "generation_settings": {
+      "seed": 0,
+      "temperature": 0.0,
+      "dynatemp_range": 0.0,
+      "dynatemp_exponent": 1.0,
+      "top_k": 40,
+      "top_p": 0.949999988079071,
+      "min_p": 0.05000000074505806,
+      "top_n_sigma": -1.0,
+      "xtc_probability": 0.0,
+      "xtc_threshold": 0.10000000149011612,
+      "typical_p": 1.0,
+      "repeat_last_n": 64,
+      "repeat_penalty": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0,
+      "dry_multiplier": 0.0,
+      "dry_base": 1.75,
+      "dry_allowed_length": 2,
+      "dry_penalty_last_n": 64,
+      "dry_sequence_breakers": [
+        "\n",
+        ":",
+        "\"",
+        "*"
+      ],
+      "mirostat": 0,
+      "mirostat_tau": 5.0,
+      "mirostat_eta": 0.10000000149011612,
+      "adaptive_target": -1.0,
+      "adaptive_decay": 0.8999999761581421,
+      "stop": [],
+      "max_tokens": 768,
+      "n_predict": 768,
+      "n_keep": 0,
+      "n_discard": 0,
+      "ignore_eos": false,
+      "stream": false,
+      "logit_bias": [],
+      "n_probs": 0,
+      "min_keep": 0,
+      "grammar": "",
+      "grammar_lazy": false,
+      "grammar_triggers": [],
+      "preserved_tokens": [],
+      "chat_format": "Content-only",
+      "reasoning_format": "deepseek",
+      "reasoning_in_content": false,
+      "generation_prompt": "",
+      "samplers": [
+        "temperature"
+      ],
+      "speculative.types": "none",
+      "timings_per_token": false,
+      "post_sampling_probs": false,
+      "backend_sampling": false,
+      "lora": []
+    },
+    "prompt": "<|im_start|>user\nOutput exactly READY.<|im_end|>\n<|im_start|>assistant\n",
+    "has_new_line": false,
+    "truncated": false,
+    "stop_type": "eos",
+    "stopping_word": "",
+    "tokens_cached": 13,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 12,
+      "prompt_ms": 49.592,
+      "prompt_per_token_ms": 4.132666666666666,
+      "prompt_per_second": 241.97451201806746,
+      "predicted_n": 2,
+      "predicted_ms": 25.952,
+      "predicted_per_token_ms": 25.952,
+      "predicted_per_second": 38.53267570900123
+    }
+  },
+  "output": {
+    "text": "READY",
+    "finish_reason": "eos",
+    "input_tokens": 12,
+    "output_tokens": 2,
+    "elapsed_seconds": 0.10899999993853271,
+    "telemetry": {
+      "backend": "llama.cpp",
+      "native_timings": {
+        "cache_n": 0,
+        "prompt_n": 12,
+        "prompt_ms": 49.592,
+        "predicted_n": 2,
+        "predicted_ms": 25.952
+      }
+    }
+  },
+  "effective_config": {
+    "backend": "llama.cpp",
+    "temperature": 0.0,
+    "samplers": [
+      "temperature"
+    ],
+    "seed": 0,
+    "dynatemp_range": 0.0,
+    "mirostat": 0,
+    "ignore_eos": false,
+    "stream": false,
+    "stop": [],
+    "logit_bias": [],
+    "grammar_lazy": false,
+    "lora": [],
+    "n_predict": 768,
+    "grammar": "",
+    "cache_prompt_requested": false,
+    "observed_cache_tokens": 0
+  },
+  "status": "passed"
+}

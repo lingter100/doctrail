@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-single-call-thinking-c4-p0-v1",
+  "scope": "neutral_transport_and_resources_only",
+  "registered_date_kst": "2026-10-15",
+  "design_role": {"name": "free_qa_candidate_review", "model": "gpt-6-astra", "reasoning_effort": "xhigh", "tool_accepted": true},
+  "model_manifest": "data/models/meetings-generation-qwen35-v1.json",
+  "model_manifest_sha256": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99",
+  "transport": {"path": "/v1/chat/completions", "loopback_only": true, "enable_thinking": true, "reasoning_format": "deepseek", "reasoning_budget_tokens_requested": 512, "response_format": "json_schema", "grammar_lazy": false},
+  "limits": {"context_tokens": 6144, "input_tokens": 5120, "total_generated_tokens_hard_cap": 928, "final_content_retokenized_acceptance_cap": 384, "request_seconds": 90, "cleanup_seconds": 5, "request_through_cleanup_seconds": 120, "phase_seconds": 1200, "native_calls": 2, "quality_calls": 0, "warmup_calls": 0, "retries": 0, "fallback_calls": 0, "metadata_restarts": 1, "download_calls": 0},
+  "final_token_measurement": {"endpoint": "/tokenize", "add_special": false, "parse_special": false, "meaning": "retokenized final message.content; not exact generated segment count"},
+  "decoding": {"temperature": 0, "seed": 0, "parallel": 1, "cache_prompt": false, "gpu_layers": 24, "fit": "off"},
+  "budget_interpretation": "512 reasoning + 384 final + 32 framing is a planning allocation, not three independently enforced native caps",
+  "neutral_cases": ["new_synthetic_normal_json_and_reasoning_separation", "new_synthetic_near_input_cap_and_full_928_output_stress"],
+  "requirements": ["source_and_input_contract_committed_before_actual_run", "native_identity_and_effective_settings_verified", "no_operational_raw_text_logs", "owned_cleanup_and_metadata_only_recovery", "new_once_only_output_directory", "preserve_any_failure_without_rerun"],
+  "quality_followup": {"registered_for_execution": false, "calibration_cases_planned": 6, "calibration_gate": "6/6 complete semantic correctness", "isolated_validation_cases_planned": 8, "validation_gate": "8/8 complete semantic correctness", "old_pools_reusable": false, "automatic_service_adoption": false},
+  "status_at_registration": {"new_native_calls": 0, "new_quality_data": 0, "human_reviews": 0, "service_integration": false}
+}

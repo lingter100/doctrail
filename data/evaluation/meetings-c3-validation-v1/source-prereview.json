@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "kind": "independent_ai_source_prereview",
+  "created_at": "2026-10-14T07:28:16.182709+00:00",
+  "reviewer_id": "/root/c2_validation_source_review",
+  "author_ids": [
+    "/root/c2_validation_source_b"
+  ],
+  "accepted_ids": [
+    "c3-f03-doc-01",
+    "c3-f03-doc-02",
+    "c3-f04-doc-01",
+    "c3-f04-doc-02"
+  ],
+  "rejected_ids": [],
+  "verdict": "accepted",
+  "human_review_count": 0,
+  "independence": {
+    "independent_of_adoption_and_synthetic_author": true,
+    "source_authoring_performed_by_reviewer": false,
+    "question_authoring_performed_by_reviewer": false,
+    "actual_tool_accepted_settings": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "fork_turns_at_original_spawn": "none",
+      "evidence": "Parent explicitly confirmed the accepted spawn settings and maintained them for this C3 follow-up; this is not a self-introspection claim."
+    },
+    "review_is_ai_not_human": true,
+    "completed_ai_document_reviews": 4,
+    "future_C3_independent_output_scoring_eligible": false,
+    "reason_for_output_judge_exclusion": "Full validation source exposure and source prereview participation."
+  },
+  "exposure": {
+    "fully_blind_claim": false,
+    "prior_C2_validation_source_and_item_prereviewer_in_same_role": true,
+    "closed_C2_M5_or_other_old_pool_files_reopened_in_this_C3_task": false,
+    "retained_prior_review_context_exists": true,
+    "current_AGENTS_read": true,
+    "AGENTS_exposes_candidate_and_historical_quality_metadata": true,
+    "C3_DATA_PLAN_and_family_registry_read": true,
+    "C3_PLAN_exposes_prior_calibration_failure_descriptions_and_candidate_mechanism": true,
+    "candidate_model_identity_and_budget_known_from_project_metadata": true,
+    "candidate_prompt_adapter_catalog_semantic_files_opened": false,
+    "frozen_preparation_source_contract_sections_read": true,
+    "generic_literal_text_processing_helpers_and_limited_ingest_retrieval_import_or_declaration_sections_read": true,
+    "current_C3_calibration_source_or_question_bodies_opened": false,
+    "current_validation_full_sources_manifest_inventory_and_author_semantic_receipt_read": true,
+    "current_C3_questions_or_oracles_exist_in_review_inputs": false,
+    "parent_history_or_other_thread_read": false,
+    "parent_received_source_bodies_or_semantic_review_explanations": false,
+    "statistical_or_fully_blind_independence_claim": false
+  },
+  "inputs": {
+    ".gitattributes": {
+      "path": "data/evaluation/meetings-c3-validation-v1/.gitattributes",
+      "sha256": "daa3fbd3add46395a26c3686200a199def24f2994501ed2e7feb7dd782ca92aa",
+      "size_bytes": 76
+    },
+    "ATTRIBUTION.md": {
+      "path": "data/evaluation/meetings-c3-validation-v1/ATTRIBUTION.md",
+      "sha256": "96d74311a09eb91481851f07f7fc94dd8d91d90352b66d9fee434796090fe609",
+      "size_bytes": 2593
+    },
+    "inventory.json": {
+      "path": "data/evaluation/meetings-c3-validation-v1/inventory.json",
+      "sha256": "407d8c66c842936e988c9e47e4172e44e84f0c748a22005a44fb20e64b3fb75c",
+      "size_bytes": 101281
+    },
+    "java-parity.json": {
+      "path": "data/evaluation/meetings-c3-validation-v1/java-parity.json",
+      "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+      "size_bytes": 1908
+    },
+    "licenses/mkdocs-documentation-license.md": {
+      "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-documentation-license.md",
+      "sha256": "9263c69ea49f938516831e56f7f62372d67004b1a74648a0b59b13aacf40a701",
+      "size_bytes": 1599
+    },
+    "licenses/mkdocs-LICENSE.txt": {
+      "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-LICENSE.txt",
+      "sha256": "26041bd625fc39411dc4b32748216236931c904adb90c2b3e0ba697090a5d54e",
+      "size_bytes": 1292
+    },
+    "processing-receipt.json": {
+      "path": "data/evaluation/meetings-c3-validation-v1/processing-receipt.json",
+      "sha256": "b7a69e6fc3a75ba2098daa3fe456069f02b1a6b7a10cafcfa088ddfe9f7e6c73",
+      "size_bytes": 3906
+    },
+    "source-adoption-summary.json": {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-adoption-summary.json",
+      "sha256": "3723faa1fe25d0b6d39c97c4972c0efe83e9411a401c10c9b1e7f9fe5ca326ff",
+      "size_bytes": 3883
+    },
+    "source-authoring-receipt.json": {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-authoring-receipt.json",
+      "sha256": "dd0b7706ebd808dde7e4f8018d6f4470eb4faac182258f32d4a44626dc9c756f",
+      "size_bytes": 8022
+    },
+    "source-manifest.json": {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-manifest.json",
+      "sha256": "4af98dd1cfc8d026b84ff8d497ceac2ef53ba025214e1bbf49bddc370feb16a0",
+      "size_bytes": 14709
+    },
+    "sources/c3-f03-doc-01.md": {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-01.md",
+      "sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+      "size_bytes": 19342
+    },
+    "sources/c3-f03-doc-02.md": {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-02.md",
+      "sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+      "size_bytes": 9434
+    },
+    "sources/c3-f04-doc-01.md": {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-01.md",
+      "sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+      "size_bytes": 3187
+    },
+    "sources/c3-f04-doc-02.md": {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-02.md",
+      "sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+      "size_bytes": 3175
+    }
+  },
+  "supporting_provenance": {
+    "download-receipt.json": {
+      "path": ".local/c3-validation-source-adoption-v1/download-receipt.json",
+      "sha256": "9d3cd3ff697647fd5d5669a3bfc567276175c667ee23f549ce7983dd42e30538",
+      "size_bytes": 2818
+    },
+    "license-page-download-receipt.json": {
+      "path": ".local/c3-validation-source-adoption-v1/license-page-download-receipt.json",
+      "sha256": "9b5164d8223198eecc0dd36b6fbc120f13bcd23802b63fccb8e6206dd539af94",
+      "size_bytes": 357
+    },
+    "upstream-commit.json": {
+      "path": ".local/c3-validation-source-adoption-v1/upstream-commit.json",
+      "sha256": "213d97965c30ffdfc5c589bc33e25c2807ec94be2abc97d48a3fd1af9c316126",
+      "size_bytes": 2280
+    },
+    "upstream-tree.json": {
+      "path": ".local/c3-validation-source-adoption-v1/upstream-tree.json",
+      "sha256": "812600d2e64cf518164b0afae0db6d9502f27c4fd4436e3625c42a2cc27f1b2d",
+      "size_bytes": 94490
+    },
+    "upstream-license-page.md": {
+      "path": ".local/c3-validation-source-adoption-v1/upstream-license-page.md",
+      "sha256": "9263c69ea49f938516831e56f7f62372d67004b1a74648a0b59b13aacf40a701",
+      "size_bytes": 1599
+    },
+    "java-final-process-result.json": {
+      "path": ".local/c3-validation-source-adoption-v1/java-final-process-result.json",
+      "sha256": "2c2b3132545e8fe96ba65148b4fd94dfb218f68b6996f4dbb3073afa290d764b",
+      "size_bytes": 575
+    },
+    "java-final-TEST-io.doctrail.MeetingSourceParityTest.xml": {
+      "path": ".local/c3-validation-source-adoption-v1/java-final-TEST-io.doctrail.MeetingSourceParityTest.xml",
+      "sha256": "2dffba4e94d0ae16a91f6727a2341d03260d7c8f4935cf33d7be077ccc5301e2",
+      "size_bytes": 22944
+    },
+    "java-final-io.doctrail.MeetingSourceParityTest.txt": {
+      "path": ".local/c3-validation-source-adoption-v1/java-final-io.doctrail.MeetingSourceParityTest.txt",
+      "sha256": "b0c8ef5deb39d6af708f235352bd54da0ed5527d4da75a69368cada5837fb9d1",
+      "size_bytes": 324
+    }
+  },
+  "contract_and_metadata_bindings": {
+    "AGENTS.md": {
+      "path": "AGENTS.md",
+      "sha256": "83c73fd910c2a596e6dce8fb543f9f6fe8372a8d3bbb451f388b4d6680eb09c3",
+      "size_bytes": 23501
+    },
+    "docs/MEETINGS-C3-DATA.md": {
+      "path": "docs/MEETINGS-C3-DATA.md",
+      "sha256": "7fb93b2e0c273375940e3ea48af5a1ea43463d775146e44df7a0962b81e5759e",
+      "size_bytes": 3004
+    },
+    "docs/MEETINGS-C3-PLAN.md": {
+      "path": "docs/MEETINGS-C3-PLAN.md",
+      "sha256": "5159b098ba93a40dd87e6c3e2ab6592e29831f40e969a7705f916b172c40d021",
+      "size_bytes": 15274
+    },
+    "data/evaluation/meetings-c3-family-registry-v1.json": {
+      "path": "data/evaluation/meetings-c3-family-registry-v1.json",
+      "sha256": "597db7e4d1792fc6bdc96af21cfc86f767a272b4156dc7607bbd71a077a36682",
+      "size_bytes": 10720
+    },
+    "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json": {
+      "path": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+      "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+      "size_bytes": 7576
+    },
+    "scripts/prepare_meeting_requirements_inputs.py": {
+      "path": "scripts/prepare_meeting_requirements_inputs.py",
+      "sha256": "3f511177f4b1a71336ee237e8e6eb744dd99fcfa87405e38c3d6c41402ccca71",
+      "size_bytes": 33500
+    },
+    "scripts/prepare_meeting_plaintext_source_inventory.py": {
+      "path": "scripts/prepare_meeting_plaintext_source_inventory.py",
+      "sha256": "7c18029970b5ffed953b394ec5b33381e688820cad7ff4688663bdeedb3f35f6",
+      "size_bytes": 7240
+    },
+    "scripts/prepare_meeting_source_inventory.py": {
+      "path": "scripts/prepare_meeting_source_inventory.py",
+      "sha256": "65d095bf89d918b5fcde1c274d6999d7f791eae26c58c6fe8bdc916b29c80079",
+      "size_bytes": 16218
+    }
+  },
+  "pre_authoring_freeze": {
+    "commit": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+    "freeze_sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+    "freeze_binding_count": 66,
+    "commit_and_both_CI_required_jobs_success_basis": "Parent report; no independent Git/network operation by reviewer. Local freeze/reference hashes independently matched."
+  },
+  "checks": {
+    "all_four_complete_bodies_read": true,
+    "registry_family_split_origin_language_and_public_paths_match": true,
+    "public_raw_size_SHA256_and_Git_blob_SHA1_match_pinned_registry_and_saved_complete_upstream_tree": true,
+    "upstream_commit_tree_link_and_nontruncated_tree_checked": true,
+    "raw_UTF8_LF_NFC_identity_and_original_plaintext_checked": true,
+    "inventory_manifest_SHA256_matches": true,
+    "full_inventory_rebuilt_using_existing_literal_text_v2_document_record_matches_exactly": true,
+    "all_chunk_texts_half_open_codepoint_offsets_ordinals_ids_hashes_and_pages_checked": true,
+    "every_non_whitespace_source_character_covered_by_whole_inventory_chunks": true,
+    "no_external_include_expansion_or_rendering": true,
+    "source_preparation_validate_inventory_contract_passed": true,
+    "source_preparation_validate_processing_receipts_contract_passed": true,
+    "check_prereview_contract_passed_with_exact_author_union_and_inventory_document_order": true,
+    "generic_contract_functions_executed_in_isolation_via_AST_without_importing_candidate_module": true,
+    "source_helper_and_Java_bound_code_hashes_match_toolchain_freeze": true,
+    "all_three_original_processing_inventory_Java_artifact_copies_byte_identical": true,
+    "public_copyright_conditions_disclaimer_and_documentation_license_preserved": true,
+    "saved_complete_tree_contains_no_NOTICE_or_additional_adopted_file_ancestor_license": true,
+    "no_conflicting_license_notice_in_adopted_bodies": true,
+    "theme_assets_and_linked_external_bodies_not_included": true,
+    "both_synthetic_bodies_display_explicit_AI_and_fictional_notice": true,
+    "synthetic_roles_dates_versions_conditions_proposal_decision_work_completion_and_limits_coherent": true,
+    "cross_document_consistency_checked_within_both_whole_families": true,
+    "all_existing_split_files_unchanged_after_review": true
+  },
+  "document_reviews": [
+    {
+      "document_id": "c3-f03-doc-01",
+      "verdict": "accepted",
+      "origin": "public",
+      "whole_body_read": true,
+      "rights": "BSD-2-Clause notices preserved; upstream Markdown examples are literal included text. Linked documentation, example image paths, HTML behavior and optional extension references do not import those external bodies or assets. No separate conflicting notice appears in this body.",
+      "coherence": "The file lays out Markdown source placement, index naming precedence, navigation/title precedence, relative-link behavior and metadata syntax. Examples and procedure rules are distinguished from observed deployment. General all-Markdown wording has an explicit dotfile exception in the adjoining note; it must be read with that qualification. No contradiction requiring source correction was found.",
+      "scope_limit": "Pinned product documentation, not current web verification or evidence of a completed real publication.",
+      "required_changes": []
+    },
+    {
+      "document_id": "c3-f03-doc-02",
+      "verdict": "accepted",
+      "origin": "public",
+      "whole_body_read": true,
+      "rights": "BSD-2-Clause notices preserved. Hosting-provider hyperlinks and executable shell examples remain source text only; no external content or command execution was incorporated.",
+      "coherence": "Project Pages, user/organization Pages, custom-domain setup, static hosting and local-file viewing have separate conditions. The local-file requirement for relative internal URLs agrees with the writing guide. Deployment warnings are not completion records. No cross-document contradiction requiring correction was found.",
+      "scope_limit": "Platform behavior and linked URLs are pinned historical procedure claims, not independently checked present-day service guarantees.",
+      "required_changes": []
+    },
+    {
+      "document_id": "c3-f04-doc-01",
+      "verdict": "accepted",
+      "origin": "synthetic",
+      "whole_body_read": true,
+      "rights": "Opening notice expressly identifies AI authorship and fictional people, festival, works and events. No identifiable third-party passage or media is included; original-authorship provenance remains the author assertion.",
+      "coherence": "The May 16 preparation meeting identifies program RG-06, the picture p3 at 25 fps, draft s2 and three named roles consistently. Format, display and time checks are separate table rows with recording responsibility. The three checkpoints have an absolute 0.20-second tolerance, two-line/42-character limits and a revision mismatch guard. Subtitle changes do not authorize video speed/edit changes. The automation idea is a deferred proposal; May 17 testing and May 21 public screening are not recorded as already complete.",
+      "required_changes": []
+    },
+    {
+      "document_id": "c3-f04-doc-02",
+      "verdict": "accepted",
+      "origin": "synthetic",
+      "whole_body_read": true,
+      "rights": "Opening AI/fictional notice matches the companion source and manifest. No external subtitle text, film media or third-party quotations are included.",
+      "coherence": "The May 17 log references the May 16 meeting and the same program, picture revision, equipment and actors. Morning format acceptance remains separate from display/time holds. The +0.40,+0.40,+0.30 values become 0.00,0.00,-0.10 after the stated uniform 0.40-second advance; all satisfy the unchanged tolerance. Revised line lengths 36 and 18 satisfy the display limit. The sequence from morning check through 13:20 revision, 14:00 recheck, 14:25 technical finding and 14:40 registration is coherent. Prior draft retention, English-track scope, limited checkpoint coverage and the unobserved later event are explicit.",
+      "required_changes": []
+    }
+  ],
+  "whole_family_review": {
+    "C3-F03": "Both complete pinned documents are compatible procedural sources. Cross-references outside the adopted pair are not silently included; examples are not actual organizational outcomes. Source-only review authored no questions or evidence selections.",
+    "C3-F04": "Document A establishes the scope, criteria and role responsibilities; document B records the subsequent checks and revision without overriding the picture or criteria. Status distinctions and time arithmetic agree. The separate accessibility track and later public screening outcomes remain outside the recorded findings. No inconsistent actor, date, subject or completion assertion was found."
+  },
+  "java_parity": {
+    "receipt": {
+      "path": "data/evaluation/meetings-c3-validation-v1/java-parity.json",
+      "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+      "size_bytes": 1908
+    },
+    "original_ignored_receipt": {
+      "path": ".local/c3-validation-source-inventory-v1/java-parity.json",
+      "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+      "size_bytes": 1908
+    },
+    "read_only_reviewer_verification": true,
+    "actual_java_version": "21.0.12.1",
+    "final_tests": 2,
+    "final_failures": 0,
+    "final_errors": 0,
+    "final_skips": 0,
+    "documents": 4,
+    "chunks": 38,
+    "exact_content_pages_chunk_text_offsets_ordinals_ids": true,
+    "original_receipt_CRLF_count": 40,
+    "scoped_gitattributes_preserves_bytes": true,
+    "reviewer_Maven_invocations": 0,
+    "prior_author_invocation_failures_preserved": "The author receipt and parent report disclose the first missing-goal invocation and the second receipt-path guard failure; final XML/process record and actual parity receipt independently confirm the subsequent successful two-test run. The reviewer did not rerun Maven or rewrite any earlier outcome."
+  },
+  "counts": {
+    "families": 2,
+    "public_documents": 2,
+    "synthetic_documents": 2,
+    "reviewed_documents": 4,
+    "accepted_documents": 4,
+    "rejected_documents": 0,
+    "whole_chunks": 38,
+    "required_changes": 0,
+    "metadata_errors": 0,
+    "rights_blockers": 0,
+    "semantic_coherence_blockers": 0,
+    "new_questions": 0,
+    "new_oracles": 0,
+    "selected_contexts": 0,
+    "official_tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "native_calls": 0,
+    "network_calls": 0,
+    "paid_calls": 0,
+    "human_reviews": 0,
+    "reviewer_source_mutations": 0,
+    "reviewer_Git_operations": 0
+  },
+  "change_requests": [],
+  "preservation_and_limits": [
+    "Author receipts and manifest pending-review/parity strings describe their original creation stage and remain untouched; this separate later receipt records independent acceptance.",
+    "The helper receipt synthetic_bodies_authored=0 measures helper execution, not source-author activity; two synthetic originals are separately disclosed.",
+    "This AI source-only acceptance is not a source freeze, question approval, token readiness, answer-quality result or service adoption.",
+    "Novelty against every closed pool was not tested by reopening prohibited material; retained prior C2 exposure and the author original-composition declaration are disclosed.",
+    "Public documentation may have appeared in model training and the four-document sample is purposive; no statistical independence is claimed.",
+    "No downstream source-freeze/question/tokenizer/model stage was initiated by this reviewer."
+  ],
+  "ownership_returned": true
+}

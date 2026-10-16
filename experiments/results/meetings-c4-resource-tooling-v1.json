@@ -1,0 +1,64 @@
+{
+  "basis_commit": "9ed4dc5dbcceb57946c2095815269f2a03ba2998",
+  "candidate": "meeting-single-call-thinking-c4-p0-v1",
+  "date_kst": "2026-10-15",
+  "design_review_role": {
+    "model": "gpt-6-astra",
+    "name": "free_qa_candidate_review",
+    "reasoning_effort": "xhigh",
+    "tool_accepted": true
+  },
+  "downloads": 0,
+  "earlier_checks": [
+    "43 synthetic checks passed before cleanup/import-closure follow-ups",
+    "initial Ruff found four loop-closure warnings and one unused test import; corrected",
+    "46 synthetic checks passed before relative-import closure fix"
+  ],
+  "human_reviews": 0,
+  "implementation_role": {
+    "model": "gpt-6-astra",
+    "name": "bounded_thinking_transport",
+    "reasoning_effort": "high",
+    "tool_accepted": true
+  },
+  "kind": "c4_resource_tooling_verification",
+  "native_calls": 0,
+  "new_quality_items": 0,
+  "new_source_files": {
+    "scripts/probe_meeting_thinking_resources.py": "a2bf9368191d3b057b270078405f6f89fce04ca9b169d4adb8282e9d17669bbf",
+    "scripts/serve_meeting_thinking.py": "540f9d3c970997ef2ad9c0f13f793503b778fa6d7157bdc3d416a4afd0b61ffb",
+    "src/doctrail/meeting_thinking_transport.py": "cd0c47eccc408296667c0d7708d018955107bbb16b4a5311f7eebef1d1abaec4",
+    "tests/test_meeting_thinking_resources.py": "5f4f68dc2ab803e737e8822ee5d867e54b2133dd07dbb593038a3180a5c48fc4",
+    "tests/test_meeting_thinking_transport.py": "a17828ec517edda8552830d4f9d6730b86e2e3a042055deb93205f5246a62d47"
+  },
+  "not_proven": [
+    "Installed native thinking/JSON split compatibility",
+    "928-token stress consumption within90seconds",
+    "Native memory/cleanup/recovery measurements",
+    "General grounded answer quality or service adoption"
+  ],
+  "parent_verification": "Read-only transport/launcher/probe review; reproduced metadata omission; final five hashes and43bindings checked",
+  "review_corrections": [
+    "Pinned native completed JSON fence and stress-only unfinished fence accepted without rewriting final content",
+    "Repeated process cleanup preserves original elapsed/failure evidence",
+    "120-second cleanup envelope measured from last request; every request remains bounded at90seconds",
+    "Source closure resolves relative imports and includes doctrail/db.py"
+  ],
+  "schema_version": 1,
+  "source_freeze": {
+    "bound_files": 43,
+    "file": "data/evaluation/meetings-c4-resource-source-freeze-v1.json",
+    "sha256": "2ba79c7fba2ad52090392f9256396dc8a1813b6bfae31d6b06a7ba2dd9f2d701"
+  },
+  "synthetic_checks": {
+    "commands": [
+      "uv run --locked --no-sync pytest -q tests/test_meeting_thinking_transport.py tests/test_meeting_thinking_resources.py",
+      "uv run --locked --no-sync ruff check src/doctrail/meeting_thinking_transport.py scripts/serve_meeting_thinking.py scripts/probe_meeting_thinking_resources.py tests/test_meeting_thinking_transport.py tests/test_meeting_thinking_resources.py"
+    ],
+    "execution_evidence": "implementation role tool run; remote full CI follows separately",
+    "final_passed": 47,
+    "ruff": "passed",
+    "seconds": 1.63
+  },
+  "tokenizer_loads": 0
+}

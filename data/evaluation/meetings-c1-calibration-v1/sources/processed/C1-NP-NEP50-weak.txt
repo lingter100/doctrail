@@ -1,0 +1,22 @@
+Proposed weak promotion
+-----------------------
+
+This proposal uses a "weak scalar" logic.  This means that Python ``int``, ``float``,
+and ``complex`` are not assigned one of the typical dtypes, such as float64 or int64.
+Rather, they are assigned a special abstract DType, similar to the "scalar" hierarchy
+names: Integral, Floating, ComplexFloating.
+
+When promotion occurs (as it does for ufuncs if no exact loop matches),
+the other DType is able to decide how to regard the Python
+scalar.  E.g. a ``UInt16`` promoting with an ``Integral`` will give ``UInt16``.
+
+.. note::
+
+    A default will most likely be provided in the future for user-defined DTypes.
+    Most likely this will end up being the default integer/float, but in principle
+    more complex schemes could be implemented.
+
+At no time is the value used to decide the result of this promotion.  The value is only
+considered when it is converted to the new dtype; this may raise an error.
+
+

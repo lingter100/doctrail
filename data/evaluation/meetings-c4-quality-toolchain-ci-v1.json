@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "observed_github_ci_not_cryptographic_attestation",
+  "observed_at_utc": "2026-10-16T04:34:42.093089+00:00",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json",
+    "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78"
+  },
+  "head_sha": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+  "runs": [
+    {
+      "run_id": 38850972533,
+      "head_sha": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38850972533",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      },
+      "metadata_sha256": "a9ab94abfa942ed8020c501a2a7ece1d6f817aaced2ae4a2b24a98d1787aadf7",
+      "log_sha256": "745dba15e77512aeaae9f24cce9d866349697ab5079242f82429df7bd8a5deb4",
+      "observed_test_summary_matches": [
+        "2386 passed, 21 skipped, 1 warning in 64.74s (0:01:04)"
+      ],
+      "observed_browser_summary_matches": [],
+      "observed_browser_batch": {
+        "passed": 49,
+        "failed": 0
+      }
+    },
+    {
+      "run_id": 38850977356,
+      "head_sha": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38850977356",
+      "jobs": {
+        "java-service": "success",
+        "web": "success",
+        "backend": "success"
+      },
+      "metadata_sha256": "aefb90e4e71e86331350ea0eb14068951bef29ecb3888d999a5b8722ae21ea39",
+      "log_sha256": "0c9977516a6c5a166ebf13f486c8c649359c06366a3d17d7885f70a60cc41647",
+      "observed_test_summary_matches": [
+        "2386 passed, 21 skipped, 1 warning in 92.48s (0:01:32)"
+      ],
+      "observed_browser_summary_matches": [],
+      "observed_browser_batch": {
+        "passed": 49,
+        "failed": 0
+      }
+    }
+  ],
+  "source_bindings_verified_against_git_and_worktree": 85,
+  "scope": "Exact source commit CI; local full-test import timing remains unproved.",
+  "model_quality_measured": false,
+  "new_quality_native_calls": 0,
+  "human_reviews": 0
+}

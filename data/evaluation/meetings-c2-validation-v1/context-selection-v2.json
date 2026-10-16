@@ -1,0 +1,494 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "created_at": "2026-10-14T02:26:15.607074+00:00",
+  "status": "AUTHOR_DRAFT_BEFORE_OFFICIAL_TOKENIZER_PENDING_INDEPENDENT_ITEM_PREREVIEW",
+  "source_freeze": {
+    "path": "data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json",
+    "sha256": "aa4d95bb6a90edec06a4b02375ac04591cfbdc54f91b068178852ccc1da39c45",
+    "parent_reported_pre_authoring_commit": "ed88108"
+  },
+  "inventory": {
+    "path": ".local/c2-source-inventory-validation-full-v1/inventory.json",
+    "sha256": "49ce4cf4fb20096227064cb7a6108fc1bcf5aa306d8b4d7205eb089af6d7a2e5",
+    "documents": 6,
+    "chunks": 77
+  },
+  "selection_protocol": {
+    "whole_original_chunks_only": true,
+    "trim_merge_resegmentation": false,
+    "max_contexts": 10,
+    "ordering": "source registration ordinal, then original chunk ordinal",
+    "basis": "Semantic relevance and sufficient required-fact coverage before any tokenizer or candidate-output feedback.",
+    "source_or_context_reselection_after_token_feedback": false,
+    "official_tokenizer_runs": 0,
+    "candidate_catalog_or_adapter_calls": 0,
+    "service_model_calls": 0
+  },
+  "cases": [
+    {
+      "case_id": "c2-val-01",
+      "family_id": "C2-F03",
+      "selection_reason": "Minor documentation-update eligibility and the separate contributor-overview merge prerequisites, actor and method.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F03-S01",
+          "document_id": "c2-f03-doc-01",
+          "revision": 1,
+          "registration_ordinal": 0,
+          "chunk_id": "c2-f03-doc-01-r1-c0002",
+          "chunk_ordinal": 2,
+          "start_offset": 1673,
+          "end_offset": 2666,
+          "text_sha256": "6d2df9e950ce1c3472405b0d075183b2c3a413e9cd28f709f0d395d568229fcb"
+        },
+        {
+          "source_id": "C2-F03-S02",
+          "document_id": "c2-f03-doc-02",
+          "revision": 1,
+          "registration_ordinal": 1,
+          "chunk_id": "c2-f03-doc-02-r1-c0006",
+          "chunk_ordinal": 6,
+          "start_offset": 5054,
+          "end_offset": 6049,
+          "text_sha256": "944d0b8ef23c80d8a0c2a46289567218f403be4803fe9038cabffb2a4d053f59"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": "The documentation-update thresholds are in the contributing file; the stated merge prerequisites/actor/method are in the overview. Neither supplied document alone supplies every requested facet.",
+      "missing_facet_whole_family_audit": null
+    },
+    {
+      "case_id": "c2-val-02",
+      "family_id": "C2-F03",
+      "selection_reason": "Patch-submission sequence/title and the distinct issue-label meanings, with the qualifiers needed for the contrast.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F03-S01",
+          "document_id": "c2-f03-doc-01",
+          "revision": 1,
+          "registration_ordinal": 0,
+          "chunk_id": "c2-f03-doc-01-r1-c0001",
+          "chunk_ordinal": 1,
+          "start_offset": 823,
+          "end_offset": 1823,
+          "text_sha256": "bfb70b445004197a50a2b1f6b3cf19fe9bbc0e392c8cd8627aa56c8dd2f159ce"
+        },
+        {
+          "source_id": "C2-F03-S01",
+          "document_id": "c2-f03-doc-01",
+          "revision": 1,
+          "registration_ordinal": 0,
+          "chunk_id": "c2-f03-doc-01-r1-c0002",
+          "chunk_ordinal": 2,
+          "start_offset": 1673,
+          "end_offset": 2666,
+          "text_sha256": "6d2df9e950ce1c3472405b0d075183b2c3a413e9cd28f709f0d395d568229fcb"
+        },
+        {
+          "source_id": "C2-F03-S03",
+          "document_id": "c2-f03-doc-03",
+          "revision": 1,
+          "registration_ordinal": 2,
+          "chunk_id": "c2-f03-doc-03-r1-c0014",
+          "chunk_ordinal": 14,
+          "start_offset": 11825,
+          "end_offset": 12817,
+          "text_sha256": "9342a4b6309510d1df69ebcb86899e8b3e534eb1e143217c26857a4962fc1ce6"
+        },
+        {
+          "source_id": "C2-F03-S03",
+          "document_id": "c2-f03-doc-03",
+          "revision": 1,
+          "registration_ordinal": 2,
+          "chunk_id": "c2-f03-doc-03-r1-c0016",
+          "chunk_ordinal": 16,
+          "start_offset": 13514,
+          "end_offset": 14511,
+          "text_sha256": "151dc9636bf99809d5779eb52c9129f893e78a1bcd388beeb62d6ebd8feb1326"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": "The patch submission sequence and PR-title convention require the contributing file; the label distinction requires the reviewing file.",
+      "missing_facet_whole_family_audit": null
+    },
+    {
+      "case_id": "c2-val-03",
+      "family_id": "C2-F03",
+      "selection_reason": "The complete feature-freeze rule and the following blocker prerequisite, preserved in one original source chunk.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F03-S04",
+          "document_id": "c2-f03-doc-04",
+          "revision": 1,
+          "registration_ordinal": 3,
+          "chunk_id": "c2-f03-doc-04-r1-c0002",
+          "chunk_ordinal": 2,
+          "start_offset": 1697,
+          "end_offset": 2695,
+          "text_sha256": "841eed80d5f4a7d1e9eb15c19fc293ed29f63fe8828476474a68339e84695cb8"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": null,
+      "missing_facet_whole_family_audit": null
+    },
+    {
+      "case_id": "c2-val-04",
+      "family_id": "C2-F03",
+      "selection_reason": "The full Breaking Change label paragraph retains both the guaranteed-ABI exception and experimental-API qualification.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F03-S03",
+          "document_id": "c2-f03-doc-03",
+          "revision": 1,
+          "registration_ordinal": 2,
+          "chunk_id": "c2-f03-doc-03-r1-c0015",
+          "chunk_ordinal": 15,
+          "start_offset": 12667,
+          "end_offset": 13664,
+          "text_sha256": "8d5f46f7a573bb218d6cec276a15863b08ab6bb62e3c6bdaf44b3843b79869b8"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": null,
+      "missing_facet_whole_family_audit": null
+    },
+    {
+      "case_id": "c2-val-05",
+      "family_id": "C2-F03",
+      "selection_reason": "Known voting requirements are supplied; the missing real-vote participant list is absent from the complete family, not removed by chunk selection.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F03-S04",
+          "document_id": "c2-f03-doc-04",
+          "revision": 1,
+          "registration_ordinal": 3,
+          "chunk_id": "c2-f03-doc-04-r1-c0015",
+          "chunk_ordinal": 15,
+          "start_offset": 12697,
+          "end_offset": 13693,
+          "text_sha256": "a1eabec2ebf854fdf40f80e6fbdf3dfc00fcc1b4e235ca7c897a1c019a67eb0d"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": null,
+      "missing_facet_whole_family_audit": {
+        "method": "Author read/reviewed the complete registered family bodies, not only selected contexts.",
+        "result": "All four C2-F03 source bodies were considered. No source identifies the most recently completed actual release vote and its supporting PMC voters.",
+        "reviewed_sources": [
+          {
+            "source_id": "C2-F03-S01",
+            "document_id": "c2-f03-doc-01",
+            "processed_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917"
+          },
+          {
+            "source_id": "C2-F03-S02",
+            "document_id": "c2-f03-doc-02",
+            "processed_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb"
+          },
+          {
+            "source_id": "C2-F03-S03",
+            "document_id": "c2-f03-doc-03",
+            "processed_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5"
+          },
+          {
+            "source_id": "C2-F03-S04",
+            "document_id": "c2-f03-doc-04",
+            "processed_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "c2-val-06",
+      "family_id": "C2-F03",
+      "selection_reason": "The role-eligibility and delegation paragraph is supplied; the real manager identity is missing across the whole family.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F03-S04",
+          "document_id": "c2-f03-doc-04",
+          "revision": 1,
+          "registration_ordinal": 3,
+          "chunk_id": "c2-f03-doc-04-r1-c0001",
+          "chunk_ordinal": 1,
+          "start_offset": 847,
+          "end_offset": 1847,
+          "text_sha256": "6b0a27badb4b0b2c7789264b1545e24b785b8096e0dfdf51ab836ae628e181cd"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": null,
+      "missing_facet_whole_family_audit": {
+        "method": "Author read/reviewed the complete registered family bodies, not only selected contexts.",
+        "result": "All four C2-F03 full source bodies were considered; they do not identify the actual manager of the most recently completed release.",
+        "reviewed_sources": [
+          {
+            "source_id": "C2-F03-S01",
+            "document_id": "c2-f03-doc-01",
+            "processed_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917"
+          },
+          {
+            "source_id": "C2-F03-S02",
+            "document_id": "c2-f03-doc-02",
+            "processed_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb"
+          },
+          {
+            "source_id": "C2-F03-S03",
+            "document_id": "c2-f03-doc-03",
+            "processed_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5"
+          },
+          {
+            "source_id": "C2-F03-S04",
+            "document_id": "c2-f03-doc-04",
+            "processed_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "c2-val-07",
+      "family_id": "C2-F04",
+      "selection_reason": "The operating-standard checklist and the order record with distinct acceptance and actual-start timestamps. The original policy and order header chunks supply both queried identifiers and the production-manager-to-name mapping required by the checklist.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F04-S01",
+          "document_id": "c2-f04-doc-01",
+          "revision": 1,
+          "registration_ordinal": 4,
+          "chunk_id": "c2-f04-doc-01-r1-c0000",
+          "chunk_ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 999,
+          "text_sha256": "9cf53a04f4ac260067331def486aa426a3e41a043cba1b0c6c80e1e48e973299"
+        },
+        {
+          "source_id": "C2-F04-S01",
+          "document_id": "c2-f04-doc-01",
+          "revision": 1,
+          "registration_ordinal": 4,
+          "chunk_id": "c2-f04-doc-01-r1-c0001",
+          "chunk_ordinal": 1,
+          "start_offset": 849,
+          "end_offset": 1849,
+          "text_sha256": "f5f76e6f3c0aa6a9bbc73f887d13397d9fadb46c02d05569a8559aa112ee25f1"
+        },
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0000",
+          "chunk_ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "247f9c19d0c862324cc9d9a846b9db30a25199c91878b8eb184ca9cd4e0c89ce"
+        },
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0001",
+          "chunk_ordinal": 1,
+          "start_offset": 847,
+          "end_offset": 1844,
+          "text_sha256": "3a8fd1bcee3b1d84609adaf3c9bfc257de54d0b2a4f4d12a373bd3742b823695"
+        },
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0002",
+          "chunk_ordinal": 2,
+          "start_offset": 1694,
+          "end_offset": 2053,
+          "text_sha256": "7c1325552c1995a06e563c89d12a4e698182a80b766d7e4c0904879cb2cb529c"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": "The complete required acceptance checklist is specified only in the operating standard; the actual order timestamps are specified only in the order record.",
+      "missing_facet_whole_family_audit": null
+    },
+    {
+      "case_id": "c2-val-08",
+      "family_id": "C2-F04",
+      "selection_reason": "Written-delegation and internal-role limits in the standard, plus the recorded delegation status in the order document.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F04-S01",
+          "document_id": "c2-f04-doc-01",
+          "revision": 1,
+          "registration_ordinal": 4,
+          "chunk_id": "c2-f04-doc-01-r1-c0000",
+          "chunk_ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 999,
+          "text_sha256": "9cf53a04f4ac260067331def486aa426a3e41a043cba1b0c6c80e1e48e973299"
+        },
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0000",
+          "chunk_ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "247f9c19d0c862324cc9d9a846b9db30a25199c91878b8eb184ca9cd4e0c89ce"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": "The standard alone cannot establish the actual order delegation status; the order record alone does not specify the general required delegation form or internal-substitution prohibition.",
+      "missing_facet_whole_family_audit": null
+    },
+    {
+      "case_id": "c2-val-09",
+      "family_id": "C2-F04",
+      "selection_reason": "The complete discussion outcomes and the conditional slot immediately following the rejected early-print proposal.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0000",
+          "chunk_ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "247f9c19d0c862324cc9d9a846b9db30a25199c91878b8eb184ca9cd4e0c89ce"
+        },
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0001",
+          "chunk_ordinal": 1,
+          "start_offset": 847,
+          "end_offset": 1844,
+          "text_sha256": "3a8fd1bcee3b1d84609adaf3c9bfc257de54d0b2a4f4d12a373bd3742b823695"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": null,
+      "missing_facet_whole_family_audit": null
+    },
+    {
+      "case_id": "c2-val-10",
+      "family_id": "C2-F04",
+      "selection_reason": "The full final dated update includes the delay, actual start and explicit in-progress status. The original order header chunk identifies the queried order; the dated update alone does not establish that identity.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0000",
+          "chunk_ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "247f9c19d0c862324cc9d9a846b9db30a25199c91878b8eb184ca9cd4e0c89ce"
+        },
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0002",
+          "chunk_ordinal": 2,
+          "start_offset": 1694,
+          "end_offset": 2053,
+          "text_sha256": "7c1325552c1995a06e563c89d12a4e698182a80b766d7e4c0904879cb2cb529c"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": null,
+      "missing_facet_whole_family_audit": null
+    },
+    {
+      "case_id": "c2-val-11",
+      "family_id": "C2-F04",
+      "selection_reason": "The order quantity and the last in-progress update are both provided; neither full source records actual completion or final delivered quantity.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0000",
+          "chunk_ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "247f9c19d0c862324cc9d9a846b9db30a25199c91878b8eb184ca9cd4e0c89ce"
+        },
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0002",
+          "chunk_ordinal": 2,
+          "start_offset": 1694,
+          "end_offset": 2053,
+          "text_sha256": "7c1325552c1995a06e563c89d12a4e698182a80b766d7e4c0904879cb2cb529c"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": null,
+      "missing_facet_whole_family_audit": {
+        "method": "Author read/reviewed the complete registered family bodies, not only selected contexts.",
+        "result": "Both complete C2-F04 source bodies were reviewed. The standard describes future completion-record requirements; the order record stops while printing is in progress and contains no actual completion time or finalized delivery count.",
+        "reviewed_sources": [
+          {
+            "source_id": "C2-F04-S01",
+            "document_id": "c2-f04-doc-01",
+            "processed_sha256": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de"
+          },
+          {
+            "source_id": "C2-F04-S02",
+            "document_id": "c2-f04-doc-02",
+            "processed_sha256": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "c2-val-12",
+      "family_id": "C2-F04",
+      "selection_reason": "The requested receipt date and unconfirmed shipment status are supplied; the missing tracking number is absent across the complete family.",
+      "ordering": "document registration_ordinal then original chunk ordinal",
+      "whole_original_chunks": [
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 5,
+          "chunk_id": "c2-f04-doc-02-r1-c0000",
+          "chunk_ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "247f9c19d0c862324cc9d9a846b9db30a25199c91878b8eb184ca9cd4e0c89ce"
+        }
+      ],
+      "genuinely_necessary_multisource_reason": null,
+      "missing_facet_whole_family_audit": {
+        "method": "Author read/reviewed the complete registered family bodies, not only selected contexts.",
+        "result": "Both full C2-F04 source bodies were reviewed; neither contains a confirmed courier booking, tracking identifier or later shipment record.",
+        "reviewed_sources": [
+          {
+            "source_id": "C2-F04-S01",
+            "document_id": "c2-f04-doc-01",
+            "processed_sha256": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de"
+          },
+          {
+            "source_id": "C2-F04-S02",
+            "document_id": "c2-f04-doc-02",
+            "processed_sha256": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311"
+          }
+        ]
+      }
+    }
+  ]
+}

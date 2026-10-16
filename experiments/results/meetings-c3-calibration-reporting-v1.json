@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "purpose": "preserve_actual_c3_calibration_independent_audit",
+  "plan": {
+    "file": "data/evaluation/meetings-c3-quality-plan-v1.json",
+    "sha256": "c5e3f11479e9f240befe1ffcaf83aed0ddcf2288ea294a10bfe0432574def24b"
+  },
+  "execution": {
+    "file": "experiments/results/meetings-c3-calibration-v1.json",
+    "sha256": "8e0d875ebb5ecd23be194485a34b8ef30951134b34a4001e1fa9604cffb88274"
+  },
+  "execution_reporting": {
+    "file": "data/evaluation/meetings-c3-execution-reporting-v1.json",
+    "sha256": "44f9ede534f1bfe2b9dd2bf589a7aa22c340a28cb0375672db504543d5fbbb39"
+  },
+  "source_exposure": {
+    "file": "data/evaluation/meetings-c3-source-exposure-v1.json",
+    "sha256": "ca21c3ec5149c71b484382698b943ea200662b5202f650604e16ab716407c6e3"
+  },
+  "review_registration": {
+    "file": "data/evaluation/meetings-c3-review-registration-v1/registration.json",
+    "sha256": "4b4c19a73efa0f37acd522104cecb8b7d24665d3b76f0180c73711a5fc08f675"
+  },
+  "artifacts": [
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/answers.json",
+        "sha256": "03b1e0b440735525802b4ec3d730938b60f40b0640968d1136068b339808d380"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/answers.json",
+        "sha256": "03b1e0b440735525802b4ec3d730938b60f40b0640968d1136068b339808d380"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/mapping.json",
+        "sha256": "8ef3a948784d468c01e90ac103e771b9910b973be2165633bf89f162edadbe38"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/mapping.json",
+        "sha256": "8ef3a948784d468c01e90ac103e771b9910b973be2165633bf89f162edadbe38"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/receipt.json",
+        "sha256": "5d5b66b8afd4c657903cfc6da55f94404d4167a70c42926e4c629a13b8ff0e73"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/receipt.json",
+        "sha256": "5d5b66b8afd4c657903cfc6da55f94404d4167a70c42926e4c629a13b8ff0e73"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/judgments.json",
+        "sha256": "44f36a5e7bb6a1e1b8395de7a7ecad20f0421bf9ea459f12e73794e8c84650a4"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/judgments.json",
+        "sha256": "44f36a5e7bb6a1e1b8395de7a7ecad20f0421bf9ea459f12e73794e8c84650a4"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/answer-lock.json",
+        "sha256": "da6898cc0d33e6dca20bafc84f134096db8fbb875716fc1d8966c2cb88d39a36"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/answer-lock.json",
+        "sha256": "da6898cc0d33e6dca20bafc84f134096db8fbb875716fc1d8966c2cb88d39a36"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/plans.json",
+        "sha256": "8102ac53bc0c709eb41ec144ccc7dbeabf2e33a8ac0e0d44cb2ef8b87d81d3e6"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/plans.json",
+        "sha256": "8102ac53bc0c709eb41ec144ccc7dbeabf2e33a8ac0e0d44cb2ef8b87d81d3e6"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/plan-reveal.json",
+        "sha256": "5c09b9a603e2abf546360707bd10db8b7ee57f8c46328ea41c799e9d68f85f45"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/plan-reveal.json",
+        "sha256": "5c09b9a603e2abf546360707bd10db8b7ee57f8c46328ea41c799e9d68f85f45"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/plan-diagnostics.json",
+        "sha256": "d5420097d6974ac0c21bdb4adc64dd2b4256017c2841aed72b4294f761dc8061"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/plan-diagnostics.json",
+        "sha256": "d5420097d6974ac0c21bdb4adc64dd2b4256017c2841aed72b4294f761dc8061"
+      },
+      "byte_identical": true
+    },
+    {
+      "original": {
+        "file": ".local/meetings-c3-audit-calibration-v1/selection.json",
+        "sha256": "0a78669c43fc14691385cbb13a52c98bb1b25d26327ffaa78e34c873ca67ea71"
+      },
+      "public_copy": {
+        "file": "experiments/results/meetings-c3-calibration-audit-v1/selection.json",
+        "sha256": "0a78669c43fc14691385cbb13a52c98bb1b25d26327ffaa78e34c873ca67ea71"
+      },
+      "byte_identical": true
+    }
+  ],
+  "original_replay_passed": true,
+  "summary": {
+    "cases": 6,
+    "full_correct": 2,
+    "quality": {
+      "citation_exact": 6,
+      "claim_support": 3,
+      "completeness": 2,
+      "language": 6,
+      "temporal": 5,
+      "subject": 4,
+      "conditions": 4,
+      "correct_abstention_or_answer": 5
+    },
+    "citations": 30,
+    "exact_citations": 30,
+    "citation_exact_rate": 1.0,
+    "relevant_citation_links": 29,
+    "citation_precision": 0.9666666666666667,
+    "facts": 49,
+    "supported_facts": 39,
+    "fact_support_rate": 0.7959183673469388,
+    "citation_codepoints": 5801,
+    "citation_duplicate_codepoints": 1658,
+    "source_unique_codepoints": 17795,
+    "citation_unique_codepoints": 4143,
+    "support_unique_codepoints": 2377,
+    "source_quoted_fraction": 0.23281820736161843,
+    "quote_to_support_width": 1.7429533024821202
+  },
+  "selected": false,
+  "validation_eligible": false,
+  "exposure": "metadata-exposed, label-masked",
+  "answer_scores_final": true,
+  "plan_diagnostics_affect_selection": false,
+  "automatic_adoption": false,
+  "human_review_count": 0,
+  "inference_calls_during_publication": 0,
+  "tokenizer_calls_during_publication": 0
+}

@@ -1,0 +1,385 @@
+{
+  "schema_version": 1,
+  "kind": "independent_ai_semantic_review_of_evidence_first_answer_development_v2",
+  "reviewed_at": "2026-10-13T06:03:33.079608+00:00",
+  "report": {
+    "path": "experiments/results/meetings-answer-development-v2.json",
+    "sha256": "ac1a3e36936f5a57dadaaeb3bd83f840457716c2c735e8cc9215bcee800928e0",
+    "status": "completed_not_semantically_verified",
+    "plan_sha256": "ad8a084ae24cd7b8ce9bdcda6de816c3c6932f71a2d0e95d1b9e4157401fc3c7"
+  },
+  "input": {
+    "path": "data/evaluation/meetings-gguf-development-v1.json",
+    "sha256": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+    "question_author": "AI",
+    "scope": "Four answer cases only from known-failure development input; no analysis rerun and no held-out evaluation."
+  },
+  "reviewer": {
+    "type": "AI",
+    "agent": "meetings_review",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "setting_evidence": "Parent-reported tool-accepted spawn; no independent model-setting introspection exposed to reviewer.",
+    "human_review_count": 0,
+    "model_inference_calls_by_reviewer": 0,
+    "test_runs_by_reviewer": 0
+  },
+  "fixture_sha256": {
+    "tests/fixtures/meetings/synthetic-release-followup.md": "0f2e3bf13e65c8a6593b257dda36aed94873d0fdf4a9697380d87325e12c398a",
+    "tests/fixtures/meetings/synthetic-release-planning.md": "606678b791ad6b3e1dde1e1bb0189cf064d8152cbb6ccba405663d36500e5138",
+    "tests/fixtures/meetings/synthetic-runbook.md": "1e95de236f46967b54c8cef312fc305f206f5698ba9d38c288ee37c9b3582d4c",
+    "tests/fixtures/meetings/public/jupyter-february-2025.md": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+    "tests/fixtures/meetings/public/jupyter-host-guide.md": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f",
+    "tests/fixtures/meetings/public/jupyter-june-2025.md": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+    "tests/fixtures/meetings/public/jupyter-license.txt": "1b9f3955dcf9c235b10c168cca09b88c1f2adf992a0dc13120482d93037602ac"
+  },
+  "source_provenance": {
+    "report_sources_unchanged": true,
+    "bound_files_as_recorded": {
+      "data/evaluation/meetings-gguf-development-v1.json": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+      "data/models/meetings-generation-gguf-v1.json": "ee069d53d3e8c35c44a71a65733e03551be560753ab06962c32ebdbd36cd2d11",
+      "docs/MEETINGS-GGUF-CANDIDATE.md": "8c5f5a55239e724213d40f462efb30941a70dbea4c79b7b7426cf4da6b768cf0",
+      "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+      "scripts/probe_meeting_gguf.py": "beb8de6ad85287deb4f71bc73a2f2eca6455985599dc6f72fee6e038885d884d",
+      "scripts/serve_meetings.py": "9c54905ae01d02e7fbd37b955dd62b6de58952cf4e434a1efa75f9816d33c1d8",
+      "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+      "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+      "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+      "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+      "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+      "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+      "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+      "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+      "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+      "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+      "src/doctrail/meeting_answer_v2.py": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444",
+      "scripts/probe_meeting_answer_v2.py": "c813d09d6b61258d36f3eefec2170048a0e713baf6d4b1b3ffc04c5067e13841",
+      "docs/MEETINGS-ANSWER-V2-PLAN.md": "25ff3780527d72626e27e5d7d21f9dc86e7b477fcd7150be71ed4eca3a9934e0"
+    },
+    "interpretation": "Report states execution sources stayed unchanged. Reviewer independently checked original fixture hashes and all supplied source slices; not claiming a new reconstruction of pre-run code state."
+  },
+  "model_runtime_as_recorded": {
+    "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "gguf-sha256:5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+    "original_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "experimental": true,
+    "generation_protocol": "meeting-full-chunk-evidence-v5",
+    "artifact": {
+      "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+      "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+      "filename": "Qwen3-4B-Instruct-2507-Q5_K_M.gguf",
+      "sha256": "5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+      "size_bytes": 2889514080
+    },
+    "runtime": {
+      "backend": "llama.cpp",
+      "tag": "b11429",
+      "commit": "d81235049384534c167caea52b85a694f6103d14",
+      "observed_build": "b11429-d81235049",
+      "identity_check": "local_gguf_sha256_and_server_alias",
+      "context_tokens": 6144,
+      "max_input_tokens": 4096,
+      "max_new_tokens": 768,
+      "deadline_seconds": 120,
+      "memory_telemetry": "not_measured"
+    }
+  },
+  "execution_accounting": {
+    "answer_requests": 4,
+    "native_completions": 4,
+    "analysis_calls": 0,
+    "paid_service_calls": 0,
+    "finish_reasons": [
+      "eos",
+      "eos",
+      "eos",
+      "eos"
+    ],
+    "effective_settings_as_recorded": [
+      {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0
+      },
+      {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0
+      },
+      {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0
+      },
+      {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0
+      }
+    ],
+    "performance_conclusion": "None; this review does not establish Java service latency or peak memory."
+  },
+  "mechanical_checks": {
+    "structural_passes": 3,
+    "structural_failures": 1,
+    "input_context_slices_verified": 18,
+    "accepted_answer_citation_slices_verified": 6,
+    "host_raw_json_parse_failure": {
+      "message": "Expecting ':' delimiter",
+      "position": 652
+    },
+    "host_raw_quote_checks": [
+      {
+        "raw_claim_index": 0,
+        "intended_context_index": 0,
+        "quote": "Point people to the code of conduct: [jupyter.org/conduct](http://jupyter.org/conduct) (send link to chat)",
+        "exact_substring_of_intended_context": false,
+        "matching_supplied_context_indices": [
+          4
+        ]
+      },
+      {
+        "raw_claim_index": 1,
+        "intended_context_index": 1,
+        "quote": "The agenda link should be included in the event’s description in the shared Google Calendar.",
+        "exact_substring_of_intended_context": true,
+        "matching_supplied_context_indices": [
+          1
+        ]
+      },
+      {
+        "raw_claim_index": 2,
+        "intended_context_index": 3,
+        "quote": "Encourage attendees to add discussion points to the agenda. (Share agenda link in the chat)",
+        "exact_substring_of_intended_context": false,
+        "matching_supplied_context_indices": []
+      }
+    ],
+    "note": "Raw host strings inspected without repairing, accepting or replaying the response. Exact substring validity is distinct from semantic entailment."
+  },
+  "case_reviews": [
+    {
+      "case_id": "cross-public",
+      "verdict": "fail_temporal_fidelity",
+      "structural_status": "passed",
+      "claims": [
+        {
+          "claim_index": 0,
+          "text": "In February 2025, a demo of JupyterLab 4.4 was presented by Mike Krassowski during the Jupyter Community Call.",
+          "citations": [
+            {
+              "chunk_id": "253afb2e7ea3405286a18555e89e1d50",
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 demo\n\n\n## Other Links Shared\n\nFragment Identification Syntax for Jupyter: https://github.com/jupyter/nbformat/issues/317",
+              "start_offset": 4883,
+              "end_offset": 5040
+            }
+          ],
+          "exact_quote_verified": true,
+          "semantic_assessment": "supported_demo_topic_with_completion_caveat",
+          "rationale": "Correct February demo passage and Mike attribution. Source is an agenda item, so it directly establishes a listed demo; presented during the call is a conventional but stronger summary than an independently confirmed completed presentation. This caveat is not the sole blocking issue."
+        },
+        {
+          "claim_index": 1,
+          "text": "In February 2025, it was reported that the JupyterLab 4.4 beta would be released on that day during the Jupyter Community Call.",
+          "citations": [
+            {
+              "chunk_id": "a0e73dd03ff84abab42d500ce960bd04",
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers: ",
+              "start_offset": 3397,
+              "end_offset": 3480
+            }
+          ],
+          "exact_quote_verified": true,
+          "semantic_assessment": "planned_status_preserved_but_temporal_phrase_ambiguous",
+          "rationale": "Correct beta announcement quote says will be released today. The text preserves would be released on that day. Trailing during the Community Call can be read as the report time or added release-time constraint; only the report time is supported."
+        },
+        {
+          "claim_index": 2,
+          "text": "In June 2025, it was reported that JupyterLab 4.4 and Notebook 7.4 were released during the Jupyter Community Call.",
+          "citations": [
+            {
+              "chunk_id": "50f7c21b5bee441bad95ff391bfaa0b2",
+              "quote": "JupyterLab 4.4 and Notebook 7.4 are out",
+              "start_offset": 2241,
+              "end_offset": 2280
+            }
+          ],
+          "exact_quote_verified": true,
+          "semantic_assessment": "unsupported_or_ambiguous_release_event_timing",
+          "rationale": "The source says JupyterLab 4.4 and Notebook 7.4 are out: availability reported at the June meeting. The answer says were released during the Jupyter Community Call, which naturally adds release-event timing not in the source. A charitable reading attaches during to reported, but the statement does not reliably preserve the preregistered distinction between meeting date and release date. Mark as ambiguous temporal overclaim, not independently proved false release history."
+        }
+      ],
+      "completeness": "February beta plan and June availability are both addressed using the correct source passages. Nevertheless, the June formulation does not cleanly pass the explicit event-time fidelity gate. No longer repeats v1 claim that both months saw a completed release."
+    },
+    {
+      "case_id": "missing-budget",
+      "verdict": "pass",
+      "structural_status": "passed",
+      "status": "abstained",
+      "claims": [],
+      "rationale": "No catering budget appears in the supplied sources; actual empty-claim abstention is appropriate."
+    },
+    {
+      "case_id": "host-guide",
+      "verdict": "fail_structure_and_quote_fidelity",
+      "structural_status": "failed",
+      "actual_error": "generation_invalid_json",
+      "accepted_answer": false,
+      "raw_observations": [
+        {
+          "raw_claim_index": 0,
+          "text": "The host guide says that attendees should be pointed to the Jupyter Code of Conduct link, which is [jupyter.org/conduct](http://jupyter.org/conduct), and this link should be sent to the chat.",
+          "meaning": "Broadly supported by the guide, but unrelated Code of Conduct link rather than requested agenda link.",
+          "quote_issue": "Quote prepends Point people to the code of to selected passage 0, which begins conduct:. Full string occurs in supplied passage 4, not selected 0."
+        },
+        {
+          "raw_claim_index": 1,
+          "text": "The host guide states that the agenda link must be included in the event’s description within the shared Google Calendar.",
+          "meaning": "Calendar location matches source. Text changes should to must, slightly strengthening normative force.",
+          "quote_issue": "Exact quote occurs in selected passage 1."
+        },
+        {
+          "raw_claim_index": 2,
+          "text": "The host guide encourages attendees to add discussion points to the agenda and specifies that the agenda link should be shared in the chat.",
+          "meaning": "Agenda contribution and chat sharing are broadly supported by the guide.",
+          "quote_issue": "Malformed id key and synthesized quotation: Encourage attendees to add discussion points to the agenda. (Share agenda link in the chat) is not a contiguous exact quote in any supplied passage. Passage 3 instead says If you have a topic you’d like to discuss, please add it to the agenda. (Share agenda link in the chat)."
+        }
+      ],
+      "completeness": "Intended text covers calendar and chat sharing, but there is no valid delivered answer. Do not count intended meaning as a pass.",
+      "syntax_only_repair_sufficient": false,
+      "reason": "Even correcting only the malformed id key would leave two invalid selected-source quote matches and an unrelated claim. No repair was applied or executed."
+    },
+    {
+      "case_id": "korean-mixed-full-docs",
+      "verdict": "pass",
+      "structural_status": "passed",
+      "claims": [
+        {
+          "claim_index": 0,
+          "text": "로그 보관 기간은 2026-10-01 회의에서 30일로 확정되었다.",
+          "citations": [
+            {
+              "chunk_id": "synthetic-release-planning.md-full",
+              "quote": "준호는 로그 보관 기간을 90일로 늘리자고 제안했다. 이 제안은 승인하지 않았다.\n결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.",
+              "start_offset": 127,
+              "end_offset": 203
+            }
+          ],
+          "exact_quote_verified": true,
+          "semantic_assessment": "supported_with_source_date_metadata",
+          "rationale": "Quote includes the rejected 90-day proposal and adopted 30-day decision; claim correctly selects the decision. The 2026-10-01 date is supplied in the source meeting_date/header, not in the narrow quote itself."
+        },
+        {
+          "claim_index": 1,
+          "text": "로그 보관 기간은 2026-10-08 회의에서 30일에서 7일로 변경되었다.",
+          "citations": [
+            {
+              "chunk_id": "synthetic-release-followup.md-full",
+              "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+              "start_offset": 82,
+              "end_offset": 146
+            }
+          ],
+          "exact_quote_verified": true,
+          "semantic_assessment": "supported_with_source_date_metadata",
+          "rationale": "Exact follow-up quote replaces 30 days with seven days. The 2026-10-08 meeting date is correctly supplied in source metadata/header; the quote itself references the superseded October 1 meeting."
+        },
+        {
+          "claim_index": 2,
+          "text": "운영 로그에 원문 질문을 남기면 안 된다.",
+          "citations": [
+            {
+              "chunk_id": "synthetic-runbook.md-full",
+              "quote": "Raw question text and document text must not be written to operational logs.",
+              "start_offset": 190,
+              "end_offset": 266
+            }
+          ],
+          "exact_quote_verified": true,
+          "semantic_assessment": "supported",
+          "rationale": "Exact English runbook sentence explicitly prohibits raw question and document text in operational logs; Korean claim accurately states the requested raw-question restriction."
+        }
+      ],
+      "completeness": "Answers requested when, how and raw-question permission, in Korean. Meets v2 plan; no document-text answer clause required by this question.",
+      "citation_display_note": "Dates rely on the cited document metadata/header as well as the selected narrow quote; no invented date."
+    }
+  ],
+  "aggregate": {
+    "gate": "fail",
+    "cases_passed": 2,
+    "cases_failed": 2,
+    "blocking_case_ids": [
+      "cross-public",
+      "host-guide"
+    ],
+    "remaining_blockers": "Not structural-only: host also fails exact quote fidelity and adds an unrelated claim; public wording introduces unsupported or ambiguous release-event timing.",
+    "decision": "Preserve v2 failure. A syntax-only format fix is not demonstrated to resolve the remaining gate. No automatic model/service adoption and no additional prompt/example tuning or inference performed by this reviewer.",
+    "limitations": [
+      "Known development cases, not held-out evaluation.",
+      "Human review remains zero.",
+      "Semantic judgments are AI review; ambiguous wording is explicitly labeled.",
+      "No Java/browser service validation by this reviewer.",
+      "No M5-B validation or locked test material accessed."
+    ]
+  }
+}

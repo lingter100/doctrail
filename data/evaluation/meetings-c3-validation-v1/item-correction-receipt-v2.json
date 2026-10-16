@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "phase": "validation",
+  "kind": "item_correction_receipt",
+  "version": 2,
+  "created_at": "2026-10-14T08:05:08.984786+00:00",
+  "author_id": "/root/c2_validation_source_b",
+  "actual_role_settings": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "basis": "Existing role settings confirmed by parent tool acceptance; no model self-introspection."
+  },
+  "status": "corrected_by_author_pending_independent_v2_prereview",
+  "original_commit": {
+    "sha": "4e621cc",
+    "preserved_and_pushed_before_correction": true,
+    "basis": "Parent task attestation; author did not invoke Git."
+  },
+  "original_prereview": {
+    "path": "data/evaluation/meetings-c3-validation-v1/item-prereview.json",
+    "sha256": "dff1ff302b7efe84674f53f419d1e912a03eb2714dc6771402a3e67d8ce6b3d9",
+    "size_bytes": 12718
+  },
+  "original_prereview_notes": {
+    "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-notes.md",
+    "sha256": "7edce12e5ec614a4c027db8cbfbe574d09ec074b0982e8021571650f0da8d41b",
+    "size_bytes": 10035
+  },
+  "original_verdict": "changes_requested",
+  "original_accepted_items": 7,
+  "original_rejected_items": 1,
+  "correction_scope": {
+    "case_id": "C3-VAL-05",
+    "fact_id": "F2",
+    "changed_fields": [
+      "required_facts.F2.text",
+      "required_facts.F2.evidence_alternatives[0]"
+    ],
+    "general_categories": [
+      "required_fact_completeness",
+      "evidence_sufficiency"
+    ],
+    "question_changed": false,
+    "selected_contexts_changed": false,
+    "other_case_metadata_changed": false,
+    "other_required_facts_changed": false,
+    "before_fact_canonical_sha256": "a628497614596560744661ed5f8b741f7e4683da7cb8973c276993c0cac25d21",
+    "after_fact_canonical_sha256": "6eff294c14288f14c21e2d26b01c63fa11e93f43d25235cde3df548359203fa4",
+    "isolated_semantic_reason": "The existing F2 omitted why the positive timing deviations actually violated the allowed 0.20-second bound and omitted the positive file-format findings retained during the hold. The correction requires the morning +0.40/+0.40/+0.30-second signed measurements and 44-character display excess, and the retained UTF-8 SRT/no missing sequence/no overlap findings. No new question requirement, source or context was introduced.",
+    "isolated_evidence_reason": "The single OR-of-AND alternative now retains the complete criteria table, test program/date header, initial 09:40 findings, 10:05 hold paragraph, sign/unit definition and whole morning/revised table. These six unchanged units jointly ground subject/date, numerical failure reasons and retained format state. All units were already inside the original four selected contexts."
+  },
+  "artifacts": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/draft-v2.json",
+      "sha256": "4e1df398d993143568156eb374d8a319b1da3af9235c21d06be51cd4fb29ccdd",
+      "size_bytes": 54549
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/oracle-v2.json",
+      "sha256": "40320e4fbad00a9ebe164bddefdc6dccdebfeec7e314674ef73a0e135621edc3",
+      "size_bytes": 46467
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/context-selection-v2.json",
+      "sha256": "6ddb4c9a743dec332d14c3a1608b0c15306925a6f2fd19840527fbcaa0937735",
+      "size_bytes": 1548
+    }
+  ],
+  "counts": {
+    "items": 8,
+    "changed_items": 1,
+    "unchanged_other_items": 7,
+    "changed_questions": 0,
+    "changed_context_selections": 0,
+    "changed_oracle_fact_records": 1,
+    "added_or_removed_facts": 0,
+    "added_evidence_occurrences": 4,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "public": 4,
+    "synthetic": 4,
+    "required_facts": 33,
+    "supported_facts": 28,
+    "missing_facts": 5,
+    "evidence_occurrences": 50,
+    "unique_whole_evidence_units": 24,
+    "necessary_multidocument_answered": 4,
+    "selected_context_occurrences": 28,
+    "unique_selected_chunks": 14
+  },
+  "contract_checks": {
+    "validate_draft": true,
+    "AnswerRequest_exact_payload": true,
+    "C3OracleFile": true,
+    "validate_oracles_validation": true,
+    "validate_inventory": true,
+    "validate_processing_receipts": true,
+    "whole_original_contexts": true,
+    "original_document_then_chunk_order": true,
+    "selection_matches_payloads": true,
+    "whole_block_evidence_and_exact_coordinates": true,
+    "original_registered_composition": true,
+    "answered_fact_counts_within_3_to_6": true,
+    "other_seven_oracle_items_canonical_byte_equivalent": true,
+    "all_eight_draft_items_canonical_byte_equivalent": true,
+    "all_eight_context_selections_canonical_byte_equivalent": true,
+    "draft_file_exact_byte_copy": true,
+    "selection_file_exact_byte_copy": true,
+    "target_non_F2_facts_and_metadata_canonical_byte_equivalent": true,
+    "original_absence_checks_preserved": true
+  },
+  "untouched_oracle_items": [
+    {
+      "id": "C3-VAL-01",
+      "oracle_item_canonical_sha256": "bab6d159fb03121a3e2edcdd46072c0da683c552c72c0e1e1626be2fb4e8a349",
+      "unchanged": true
+    },
+    {
+      "id": "C3-VAL-02",
+      "oracle_item_canonical_sha256": "06ec907374d1ab2e2f1b7b9bdd8092124cb487280550b69cdf29667a1bfd5bdf",
+      "unchanged": true
+    },
+    {
+      "id": "C3-VAL-03",
+      "oracle_item_canonical_sha256": "dc5ef2e44143b4698a43f89ffc143883309affff4cb3bff9aa1de748e51d722b",
+      "unchanged": true
+    },
+    {
+      "id": "C3-VAL-04",
+      "oracle_item_canonical_sha256": "0d4a16534206020ff985a375425b9289962f0678ee104ca8a8bc551146f4e50e",
+      "unchanged": true
+    },
+    {
+      "id": "C3-VAL-06",
+      "oracle_item_canonical_sha256": "ed5657e6c2b23ece9cd84bd4b80cc99cc911c0d6c749f8c442ae871103096916",
+      "unchanged": true
+    },
+    {
+      "id": "C3-VAL-07",
+      "oracle_item_canonical_sha256": "8b8fdc141d09cadfcf04b1daa684635cbf983212f492fddd847f6b45a98f6080",
+      "unchanged": true
+    },
+    {
+      "id": "C3-VAL-08",
+      "oracle_item_canonical_sha256": "b795f0160f12961bb084e5b8ee5d71b8ba9f79c50f725296782eb56889448f09",
+      "unchanged": true
+    }
+  ],
+  "source_freeze": {
+    "path": "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json",
+    "sha256": "abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733",
+    "size_bytes": 1838
+  },
+  "source_binding_count": 9,
+  "source_bindings_unchanged": true,
+  "frozen_binding_checks": [
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+        "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+        "size_bytes": 7576
+      },
+      "binding_count": 66,
+      "before_and_after_match": true
+    },
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c3-candidate-source-freeze-v1.json",
+        "sha256": "6ce55cb17d264f8da7c587c685947da8d95ff1199ef65f7f34de7d1a275798c6",
+        "size_bytes": 3791
+      },
+      "binding_count": 28,
+      "before_and_after_match": true
+    },
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-input-budget-source-freeze-v1.json",
+        "sha256": "fe8307dfef4e0d4933dd5f894918303980e291a0b7f2a518a71a7e9484b61a99",
+        "size_bytes": 8971
+      },
+      "binding_count": 72,
+      "before_and_after_match": true
+    },
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+        "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+        "size_bytes": 5579
+      },
+      "binding_count": 41,
+      "before_and_after_match": true
+    },
+    {
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+        "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+        "size_bytes": 3522
+      },
+      "binding_count": 18,
+      "before_and_after_match": true
+    }
+  ],
+  "preserved_original_artifacts": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/.gitattributes",
+      "sha256": "daa3fbd3add46395a26c3686200a199def24f2994501ed2e7feb7dd782ca92aa",
+      "size_bytes": 76
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/ATTRIBUTION.md",
+      "sha256": "96d74311a09eb91481851f07f7fc94dd8d91d90352b66d9fee434796090fe609",
+      "size_bytes": 2593
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/context-selection.json",
+      "sha256": "6ddb4c9a743dec332d14c3a1608b0c15306925a6f2fd19840527fbcaa0937735",
+      "size_bytes": 1548
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/draft.json",
+      "sha256": "4e1df398d993143568156eb374d8a319b1da3af9235c21d06be51cd4fb29ccdd",
+      "size_bytes": 54549
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/inventory.json",
+      "sha256": "407d8c66c842936e988c9e47e4172e44e84f0c748a22005a44fb20e64b3fb75c",
+      "size_bytes": 101281
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-authoring-receipt.json",
+      "sha256": "9c23d074cde815272eb3a26f673c56e7115d7f5004b1f67c55813b52f81dc0a2",
+      "size_bytes": 17499
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-authoring-summary.json",
+      "sha256": "3d287aad79f8718ab5314240be71c5da300966abd282f67b0abd80d839c441f9",
+      "size_bytes": 3536
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-notes.md",
+      "sha256": "7edce12e5ec614a4c027db8cbfbe574d09ec074b0982e8021571650f0da8d41b",
+      "size_bytes": 10035
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-summary.json",
+      "sha256": "2c1da66c1e962f34618bae1ef2764a72460369bdf39daca78838aae864d2449a",
+      "size_bytes": 3711
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview.json",
+      "sha256": "dff1ff302b7efe84674f53f419d1e912a03eb2714dc6771402a3e67d8ce6b3d9",
+      "size_bytes": 12718
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/java-parity.json",
+      "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+      "size_bytes": 1908
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/oracle-draft.json",
+      "sha256": "eec0b607fd11077bc8ce8d5ca2f59049bb93b3ec6596d4550a5e6cdac7f02214",
+      "size_bytes": 44048
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/processing-receipt.json",
+      "sha256": "b7a69e6fc3a75ba2098daa3fe456069f02b1a6b7a10cafcfa088ddfe9f7e6c73",
+      "size_bytes": 3906
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-adoption-summary.json",
+      "sha256": "3723faa1fe25d0b6d39c97c4972c0efe83e9411a401c10c9b1e7f9fe5ca326ff",
+      "size_bytes": 3883
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-authoring-receipt.json",
+      "sha256": "dd0b7706ebd808dde7e4f8018d6f4470eb4faac182258f32d4a44626dc9c756f",
+      "size_bytes": 8022
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-freeze-summary.json",
+      "sha256": "4f5df15a47070f13105e588de385e5471da0c91bd3dee3501306c739f727f372",
+      "size_bytes": 7817
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json",
+      "sha256": "abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733",
+      "size_bytes": 1838
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-manifest.json",
+      "sha256": "4af98dd1cfc8d026b84ff8d497ceac2ef53ba025214e1bbf49bddc370feb16a0",
+      "size_bytes": 14709
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-path-scan-classification.json",
+      "sha256": "a5ed93638f8ddad8054f0edb6bf1cd9b993ff6148baca0f4a176570d28953bd6",
+      "size_bytes": 1604
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-prereview.json",
+      "sha256": "2bbe229755d1bfadb798d4bb1adcf6daf80d04c01ef9053579c47a339d7a8663",
+      "size_bytes": 19257
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-documentation-license.md",
+      "sha256": "9263c69ea49f938516831e56f7f62372d67004b1a74648a0b59b13aacf40a701",
+      "size_bytes": 1599
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-LICENSE.txt",
+      "sha256": "26041bd625fc39411dc4b32748216236931c904adb90c2b3e0ba697090a5d54e",
+      "size_bytes": 1292
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-01.md",
+      "sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+      "size_bytes": 19342
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-02.md",
+      "sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+      "size_bytes": 9434
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-01.md",
+      "sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+      "size_bytes": 3187
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-02.md",
+      "sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+      "size_bytes": 3175
+    }
+  ],
+  "preserved_original_file_count": 26,
+  "independent_v2_prereview": {
+    "reviewer_id": "/root/c2_validation_source_review",
+    "status": "pending",
+    "actual_reviews": 0,
+    "accepted_items": 0,
+    "rejected_items": 0,
+    "distinct_from_author": true,
+    "author_self_checks_are_not_independent_review": true,
+    "original_review_not_relabelled_as_v2_review": true
+  },
+  "provenance": {
+    "AI_correction": true,
+    "human_review_count": 0,
+    "prior_author_receipt_preserved": true,
+    "original_rejected_prereview_preserved": true,
+    "parent_semantic_feedback_received": false,
+    "correction_based_only_on_isolated_prereviewer_requests_and_frozen_source": true,
+    "validation_tokenizer_or_output_feedback_seen": false,
+    "source_exposure_incident_remains_disclosed": true,
+    "correction_not_based_on_parent_exposure_overlap": true,
+    "new_prior_pool_or_calibration_body_reads": 0,
+    "metadata_status_read": true,
+    "eligible_for_independent_output_judging": false
+  },
+  "activity": {
+    "item_freezes": 0,
+    "official_tokenizer_runs": 0,
+    "model_calls": 0,
+    "native_calls": 0,
+    "downloads": 0,
+    "network_calls": 0,
+    "paid_calls": 0,
+    "Git_operations": 0,
+    "Maven_invocations": 0,
+    "source_edits": 0,
+    "global_document_edits": 0
+  },
+  "next_state": "Separate independent v2 prereview is required before any item freeze or token preparation.",
+  "ownership_returned": true
+}

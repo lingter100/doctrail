@@ -1,0 +1,565 @@
+{
+  "schema_version": 1,
+  "kind": "qwen35_neutral_native_readiness",
+  "started_at": "2026-10-13T06:40:10.810439+00:00",
+  "plan_sha256": "abe3d8cedc32a7fbbc8bcb5a91e8975f87a7111a01b75623d578f1e084911421",
+  "bound_files": {
+    "data/evaluation/meetings-gguf-development-v1.json": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+    "data/models/meetings-generation-gguf-v1.json": "ee069d53d3e8c35c44a71a65733e03551be560753ab06962c32ebdbd36cd2d11",
+    "docs/MEETINGS-GGUF-CANDIDATE.md": "8c5f5a55239e724213d40f462efb30941a70dbea4c79b7b7426cf4da6b768cf0",
+    "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+    "scripts/probe_meeting_gguf.py": "beb8de6ad85287deb4f71bc73a2f2eca6455985599dc6f72fee6e038885d884d",
+    "scripts/serve_meetings.py": "9c54905ae01d02e7fbd37b955dd62b6de58952cf4e434a1efa75f9816d33c1d8",
+    "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+    "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+    "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+    "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+    "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+    "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+    "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+    "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+    "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+    "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+    "src/doctrail/meeting_answer_v2.py": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444",
+    "scripts/probe_meeting_answer_v2.py": "c813d09d6b61258d36f3eefec2170048a0e713baf6d4b1b3ffc04c5067e13841",
+    "docs/MEETINGS-ANSWER-V2-PLAN.md": "25ff3780527d72626e27e5d7d21f9dc86e7b477fcd7150be71ed4eca3a9934e0",
+    "src/doctrail/meeting_answer_grammar.py": "58c2aeaebf203d214ea33a109864c730fb2f9cde2bda0f990309037da1f2d671",
+    "tests/test_meeting_answer_grammar.py": "a9e3ce5bc800f517f281d9548d6a23411517195a9dbdf9e623e605127d99b282",
+    "scripts/probe_meeting_answer_grammar.py": "610c8c7215084fb176bc18a2896d14d120677afad4e21b151780807404af69a8",
+    "tests/test_probe_meeting_answer_grammar.py": "cb384e86b97ba24b0af59152389dc009f20139ea47adc0dd93db4de3fd339d60",
+    "docs/MEETINGS-ANSWER-DECODER-PLAN.md": "5395cc3c481cec2a677a94025ff5ed2355ebf1d734761da100b80e5097382e13",
+    "data/models/meetings-generation-qwen35-v1.json": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99",
+    "src/doctrail/meeting_qwen35.py": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b",
+    "scripts/serve_meeting_qwen35.py": "fe481511ade7e34f4b85053f267c86afff850ed50b9455d5f0f368a58a4a8919",
+    "scripts/probe_meeting_qwen35.py": "a83df14eed376303dedc84abe6f502feac7377a57f39b533e2bd49f6f8cdf820",
+    "scripts/probe_meeting_qwen35_readiness.py": "88a4558f21d567e463c2063885a9e5b09f5ebdcef14c6f3f0432d0c1d734a3c2",
+    "tests/test_meeting_qwen35.py": "d7f1b4f46fdbc128fdebabee0ef801c89f2f0841af84fa7310f8bb92f81d799b",
+    "tests/test_serve_meeting_qwen35.py": "a1efde8dc08811f97a36acfd8742b2fe9ef2fda1169a17581cf2ce888b4ae0b4",
+    "tests/test_probe_meeting_qwen35_readiness.py": "57aa59197a95425748eeb088ad63b284618aaaadfaf04d77bed5dc3369b4f493",
+    "docs/MEETINGS-QWEN35-PLAN.md": "52f6985d23df320b030bd7c02f1795bbf0ece4a1a61efb6f8e3c16efd6daafe5"
+  },
+  "status": "passed_neutral_readiness_only",
+  "attempt_limit": 2,
+  "attempts": [
+    {
+      "id": "neutral_1",
+      "status": "passed",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Return only {\"status\":\"abstained\",\"claims\":[]} for this neutral readiness check."
+        },
+        {
+          "role": "user",
+          "content": "Hello."
+        }
+      ],
+      "native_response": {
+        "content": "{\"status\":\"abstained\",\"claims\":[]}",
+        "tokens": [
+          4754,
+          2738,
+          3147,
+          365,
+          267,
+          2540,
+          2129,
+          46944,
+          763,
+          64040,
+          248046
+        ],
+        "stop": true,
+        "model": "dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+        "tokens_predicted": 11,
+        "tokens_evaluated": 37,
+        "truncated": false,
+        "stop_type": "eos",
+        "stopping_word": "",
+        "tokens_cached": 47,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 37,
+          "prompt_ms": 604.596,
+          "prompt_per_token_ms": 16.340432432432433,
+          "prompt_per_second": 61.197890822962776,
+          "predicted_n": 11,
+          "predicted_ms": 599.86,
+          "predicted_per_token_ms": 59.986000000000004,
+          "predicted_per_second": 16.67055646317474
+        },
+        "generation_settings": {
+          "temperature": 0.0,
+          "samplers": [
+            "temperature"
+          ],
+          "seed": 0,
+          "dynatemp_range": 0.0,
+          "mirostat": 0,
+          "ignore_eos": false,
+          "stream": false,
+          "stop": [],
+          "logit_bias": [],
+          "grammar_lazy": false,
+          "lora": [],
+          "n_predict": 768,
+          "grammar": "root ::= answered | abstained\nanswered ::= \"{\\\"status\\\":\\\"answered\\\",\\\"claims\\\":[\" claim (\",\" claim){0,5} \"]}\"\nabstained ::= \"{\\\"status\\\":\\\"abstained\\\",\\\"claims\\\":[]}\"\nclaim ::= \"{\\\"evidence\\\":[\" evidence (\",\" evidence){0,3} \"],\\\"text\\\":\" string \"}\"\nevidence ::= \"{\\\"id\\\":\" [0-9] \",\\\"quote\\\":\" string \"}\"\nstring ::= \"\\\"\" char+ \"\\\"\"\nchar ::= [^\"\\\\\\x7F\\x00-\\x1F] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F]{4})\n"
+        }
+      },
+      "output": {
+        "text": "{\"status\":\"abstained\",\"claims\":[]}",
+        "finish_reason": "eos",
+        "input_tokens": 37,
+        "output_tokens": 11,
+        "elapsed_seconds": 1.25,
+        "telemetry": {
+          "backend": "llama.cpp",
+          "native_timings": {
+            "cache_n": 0,
+            "prompt_n": 37,
+            "prompt_ms": 604.596,
+            "predicted_n": 11,
+            "predicted_ms": 599.86
+          }
+        }
+      },
+      "effective_config": {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "root ::= answered | abstained\nanswered ::= \"{\\\"status\\\":\\\"answered\\\",\\\"claims\\\":[\" claim (\",\" claim){0,5} \"]}\"\nabstained ::= \"{\\\"status\\\":\\\"abstained\\\",\\\"claims\\\":[]}\"\nclaim ::= \"{\\\"evidence\\\":[\" evidence (\",\" evidence){0,3} \"],\\\"text\\\":\" string \"}\"\nevidence ::= \"{\\\"id\\\":\" [0-9] \",\\\"quote\\\":\" string \"}\"\nstring ::= \"\\\"\" char+ \"\\\"\"\nchar ::= [^\"\\\\\\x7F\\x00-\\x1F] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F]{4})\n",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0,
+        "observed_nonthinking_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+        "enable_thinking_requested": false
+      },
+      "model_runtime_after_call": {
+        "repo_id": "Qwen/Qwen3.5-9B",
+        "revision": "gguf-sha256:dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+        "original_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "experimental": true,
+        "generation_protocol": "meeting-full-chunk-evidence-v5",
+        "artifact": {
+          "repo_id": "unsloth/Qwen3.5-9B-GGUF",
+          "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+          "filename": "Qwen3.5-9B-Q5_K_M.gguf",
+          "sha256": "dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+          "size_bytes": 6577841376
+        },
+        "runtime": {
+          "backend": "llama.cpp",
+          "tag": "b11429",
+          "commit": "d81235049384534c167caea52b85a694f6103d14",
+          "observed_build": "b11429-d81235049",
+          "identity_check": "local_gguf_sha256_and_server_alias",
+          "context_tokens": 6144,
+          "max_input_tokens": 4096,
+          "max_new_tokens": 768,
+          "deadline_seconds": 120,
+          "memory_telemetry": "not_measured"
+        },
+        "answer_decoder": {
+          "policy": "meeting-answer-json-grammar-v1",
+          "answer_policy": "meeting-evidence-first-answer-v2",
+          "grammar_sha256": "8eee0bee59560b67b1361a0d08ce91b6bf16e8554970cd600b778b47f367d5a3",
+          "guarantee_scope": "json_structure_only"
+        },
+        "nonthinking": {
+          "policy": "qwen35-terminal-assistant-preamble-v1",
+          "enable_thinking_requested": false,
+          "assistant_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+          "last_template_verified": true,
+          "verification_scope": "terminal_assistant_preamble_per_prompt"
+        }
+      },
+      "elapsed_python_seconds": 1.25
+    },
+    {
+      "id": "neutral_2",
+      "status": "passed",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Return only {\"status\":\"abstained\",\"claims\":[]} for this neutral readiness check."
+        },
+        {
+          "role": "user",
+          "content": "This is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\nThis is neutral readiness text without document facts.\n"
+        }
+      ],
+      "native_response": {
+        "content": "{\"status\":\"abstained\",\"claims\":[]}",
+        "tokens": [
+          4754,
+          2738,
+          3147,
+          365,
+          267,
+          2540,
+          2129,
+          46944,
+          763,
+          64040,
+          248046
+        ],
+        "stop": true,
+        "model": "dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+        "tokens_predicted": 11,
+        "tokens_evaluated": 3034,
+        "truncated": false,
+        "stop_type": "eos",
+        "stopping_word": "",
+        "tokens_cached": 3044,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 3034,
+          "prompt_ms": 6195.575,
+          "prompt_per_token_ms": 2.042048450889914,
+          "prompt_per_second": 489.70434544009237,
+          "predicted_n": 11,
+          "predicted_ms": 606.197,
+          "predicted_per_token_ms": 60.6197,
+          "predicted_per_second": 16.496287510495762
+        },
+        "generation_settings": {
+          "temperature": 0.0,
+          "samplers": [
+            "temperature"
+          ],
+          "seed": 0,
+          "dynatemp_range": 0.0,
+          "mirostat": 0,
+          "ignore_eos": false,
+          "stream": false,
+          "stop": [],
+          "logit_bias": [],
+          "grammar_lazy": false,
+          "lora": [],
+          "n_predict": 768,
+          "grammar": "root ::= answered | abstained\nanswered ::= \"{\\\"status\\\":\\\"answered\\\",\\\"claims\\\":[\" claim (\",\" claim){0,5} \"]}\"\nabstained ::= \"{\\\"status\\\":\\\"abstained\\\",\\\"claims\\\":[]}\"\nclaim ::= \"{\\\"evidence\\\":[\" evidence (\",\" evidence){0,3} \"],\\\"text\\\":\" string \"}\"\nevidence ::= \"{\\\"id\\\":\" [0-9] \",\\\"quote\\\":\" string \"}\"\nstring ::= \"\\\"\" char+ \"\\\"\"\nchar ::= [^\"\\\\\\x7F\\x00-\\x1F] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F]{4})\n"
+        }
+      },
+      "output": {
+        "text": "{\"status\":\"abstained\",\"claims\":[]}",
+        "finish_reason": "eos",
+        "input_tokens": 3034,
+        "output_tokens": 11,
+        "elapsed_seconds": 6.859999999869615,
+        "telemetry": {
+          "backend": "llama.cpp",
+          "native_timings": {
+            "cache_n": 0,
+            "prompt_n": 3034,
+            "prompt_ms": 6195.575,
+            "predicted_n": 11,
+            "predicted_ms": 606.197
+          }
+        }
+      },
+      "effective_config": {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "root ::= answered | abstained\nanswered ::= \"{\\\"status\\\":\\\"answered\\\",\\\"claims\\\":[\" claim (\",\" claim){0,5} \"]}\"\nabstained ::= \"{\\\"status\\\":\\\"abstained\\\",\\\"claims\\\":[]}\"\nclaim ::= \"{\\\"evidence\\\":[\" evidence (\",\" evidence){0,3} \"],\\\"text\\\":\" string \"}\"\nevidence ::= \"{\\\"id\\\":\" [0-9] \",\\\"quote\\\":\" string \"}\"\nstring ::= \"\\\"\" char+ \"\\\"\"\nchar ::= [^\"\\\\\\x7F\\x00-\\x1F] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F]{4})\n",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0,
+        "observed_nonthinking_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+        "enable_thinking_requested": false
+      },
+      "model_runtime_after_call": {
+        "repo_id": "Qwen/Qwen3.5-9B",
+        "revision": "gguf-sha256:dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+        "original_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "experimental": true,
+        "generation_protocol": "meeting-full-chunk-evidence-v5",
+        "artifact": {
+          "repo_id": "unsloth/Qwen3.5-9B-GGUF",
+          "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+          "filename": "Qwen3.5-9B-Q5_K_M.gguf",
+          "sha256": "dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+          "size_bytes": 6577841376
+        },
+        "runtime": {
+          "backend": "llama.cpp",
+          "tag": "b11429",
+          "commit": "d81235049384534c167caea52b85a694f6103d14",
+          "observed_build": "b11429-d81235049",
+          "identity_check": "local_gguf_sha256_and_server_alias",
+          "context_tokens": 6144,
+          "max_input_tokens": 4096,
+          "max_new_tokens": 768,
+          "deadline_seconds": 120,
+          "memory_telemetry": "not_measured"
+        },
+        "answer_decoder": {
+          "policy": "meeting-answer-json-grammar-v1",
+          "answer_policy": "meeting-evidence-first-answer-v2",
+          "grammar_sha256": "8eee0bee59560b67b1361a0d08ce91b6bf16e8554970cd600b778b47f367d5a3",
+          "guarantee_scope": "json_structure_only"
+        },
+        "nonthinking": {
+          "policy": "qwen35-terminal-assistant-preamble-v1",
+          "enable_thinking_requested": false,
+          "assistant_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+          "last_template_verified": true,
+          "verification_scope": "terminal_assistant_preamble_per_prompt"
+        }
+      },
+      "elapsed_python_seconds": 6.86
+    }
+  ],
+  "paid_service_calls": 0,
+  "quality_cases_queried": 0,
+  "analysis_calls": 0,
+  "human_review_count": 0,
+  "model_runtime": {
+    "repo_id": "Qwen/Qwen3.5-9B",
+    "revision": "gguf-sha256:dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+    "original_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "experimental": true,
+    "generation_protocol": "meeting-full-chunk-evidence-v5",
+    "artifact": {
+      "repo_id": "unsloth/Qwen3.5-9B-GGUF",
+      "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+      "filename": "Qwen3.5-9B-Q5_K_M.gguf",
+      "sha256": "dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+      "size_bytes": 6577841376
+    },
+    "runtime": {
+      "backend": "llama.cpp",
+      "tag": "b11429",
+      "commit": "d81235049384534c167caea52b85a694f6103d14",
+      "observed_build": "b11429-d81235049",
+      "identity_check": "local_gguf_sha256_and_server_alias",
+      "context_tokens": 6144,
+      "max_input_tokens": 4096,
+      "max_new_tokens": 768,
+      "deadline_seconds": 120,
+      "memory_telemetry": "not_measured"
+    },
+    "answer_decoder": {
+      "policy": "meeting-answer-json-grammar-v1",
+      "answer_policy": "meeting-evidence-first-answer-v2",
+      "grammar_sha256": "8eee0bee59560b67b1361a0d08ce91b6bf16e8554970cd600b778b47f367d5a3",
+      "guarantee_scope": "json_structure_only"
+    },
+    "nonthinking": {
+      "policy": "qwen35-terminal-assistant-preamble-v1",
+      "enable_thinking_requested": false,
+      "assistant_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+      "last_template_verified": false,
+      "verification_scope": "terminal_assistant_preamble_per_prompt"
+    }
+  },
+  "measurement_scope": "Python adapter and native HTTP only",
+  "worker_http_measured": false,
+  "java_service_measured": false,
+  "semantic_quality_verified": false,
+  "resources": {
+    "scope": "post_load_periodic_samples_during_neutral_calls",
+    "interval_seconds": 0.5,
+    "sample_count": 16,
+    "native_rss_sample_count": 16,
+    "native_rss_sampled_max_mib": 6355.8125,
+    "whole_device_memory_sampled_max_mib": {
+      "0": 4619
+    },
+    "whole_device_memory_sample_count": 16,
+    "startup_measured": false,
+    "exact_peak_measured": false,
+    "device_memory_is_model_specific": false,
+    "samples": [
+      {
+        "native_rss_mib": 6102.2890625,
+        "device_memory_mib": {
+          "0": 4585
+        },
+        "errors": [],
+        "elapsed_seconds": 0.188
+      },
+      {
+        "native_rss_mib": 6129.4375,
+        "device_memory_mib": {
+          "0": 4587
+        },
+        "errors": [],
+        "elapsed_seconds": 0.625
+      },
+      {
+        "native_rss_mib": 6189.70703125,
+        "device_memory_mib": {
+          "0": 4587
+        },
+        "errors": [],
+        "elapsed_seconds": 1.157
+      },
+      {
+        "native_rss_mib": 6239.64453125,
+        "device_memory_mib": {
+          "0": 4595
+        },
+        "errors": [],
+        "elapsed_seconds": 1.657
+      },
+      {
+        "native_rss_mib": 6241.83203125,
+        "device_memory_mib": {
+          "0": 4601
+        },
+        "errors": [],
+        "elapsed_seconds": 2.172
+      },
+      {
+        "native_rss_mib": 6249.390625,
+        "device_memory_mib": {
+          "0": 4607
+        },
+        "errors": [],
+        "elapsed_seconds": 2.657
+      },
+      {
+        "native_rss_mib": 6251.29296875,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 3.157
+      },
+      {
+        "native_rss_mib": 6251.484375,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 3.672
+      },
+      {
+        "native_rss_mib": 6251.484375,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 4.188
+      },
+      {
+        "native_rss_mib": 6251.484375,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 4.719
+      },
+      {
+        "native_rss_mib": 6251.484375,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 5.172
+      },
+      {
+        "native_rss_mib": 6251.55078125,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 5.75
+      },
+      {
+        "native_rss_mib": 6251.55078125,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 6.219
+      },
+      {
+        "native_rss_mib": 6251.55078125,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 6.735
+      },
+      {
+        "native_rss_mib": 6302.0234375,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 7.235
+      },
+      {
+        "native_rss_mib": 6355.8125,
+        "device_memory_mib": {
+          "0": 4619
+        },
+        "errors": [],
+        "elapsed_seconds": 7.782
+      }
+    ]
+  },
+  "plan_sha256_after": "abe3d8cedc32a7fbbc8bcb5a91e8975f87a7111a01b75623d578f1e084911421",
+  "bound_files_after": {
+    "data/evaluation/meetings-gguf-development-v1.json": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+    "data/models/meetings-generation-gguf-v1.json": "ee069d53d3e8c35c44a71a65733e03551be560753ab06962c32ebdbd36cd2d11",
+    "docs/MEETINGS-GGUF-CANDIDATE.md": "8c5f5a55239e724213d40f462efb30941a70dbea4c79b7b7426cf4da6b768cf0",
+    "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+    "scripts/probe_meeting_gguf.py": "beb8de6ad85287deb4f71bc73a2f2eca6455985599dc6f72fee6e038885d884d",
+    "scripts/serve_meetings.py": "9c54905ae01d02e7fbd37b955dd62b6de58952cf4e434a1efa75f9816d33c1d8",
+    "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+    "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+    "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+    "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+    "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+    "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+    "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+    "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+    "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+    "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+    "src/doctrail/meeting_answer_v2.py": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444",
+    "scripts/probe_meeting_answer_v2.py": "c813d09d6b61258d36f3eefec2170048a0e713baf6d4b1b3ffc04c5067e13841",
+    "docs/MEETINGS-ANSWER-V2-PLAN.md": "25ff3780527d72626e27e5d7d21f9dc86e7b477fcd7150be71ed4eca3a9934e0",
+    "src/doctrail/meeting_answer_grammar.py": "58c2aeaebf203d214ea33a109864c730fb2f9cde2bda0f990309037da1f2d671",
+    "tests/test_meeting_answer_grammar.py": "a9e3ce5bc800f517f281d9548d6a23411517195a9dbdf9e623e605127d99b282",
+    "scripts/probe_meeting_answer_grammar.py": "610c8c7215084fb176bc18a2896d14d120677afad4e21b151780807404af69a8",
+    "tests/test_probe_meeting_answer_grammar.py": "cb384e86b97ba24b0af59152389dc009f20139ea47adc0dd93db4de3fd339d60",
+    "docs/MEETINGS-ANSWER-DECODER-PLAN.md": "5395cc3c481cec2a677a94025ff5ed2355ebf1d734761da100b80e5097382e13",
+    "data/models/meetings-generation-qwen35-v1.json": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99",
+    "src/doctrail/meeting_qwen35.py": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b",
+    "scripts/serve_meeting_qwen35.py": "fe481511ade7e34f4b85053f267c86afff850ed50b9455d5f0f368a58a4a8919",
+    "scripts/probe_meeting_qwen35.py": "a83df14eed376303dedc84abe6f502feac7377a57f39b533e2bd49f6f8cdf820",
+    "scripts/probe_meeting_qwen35_readiness.py": "88a4558f21d567e463c2063885a9e5b09f5ebdcef14c6f3f0432d0c1d734a3c2",
+    "tests/test_meeting_qwen35.py": "d7f1b4f46fdbc128fdebabee0ef801c89f2f0841af84fa7310f8bb92f81d799b",
+    "tests/test_serve_meeting_qwen35.py": "a1efde8dc08811f97a36acfd8742b2fe9ef2fda1169a17581cf2ce888b4ae0b4",
+    "tests/test_probe_meeting_qwen35_readiness.py": "57aa59197a95425748eeb088ad63b284618aaaadfaf04d77bed5dc3369b4f493",
+    "docs/MEETINGS-QWEN35-PLAN.md": "52f6985d23df320b030bd7c02f1795bbf0ece4a1a61efb6f8e3c16efd6daafe5"
+  },
+  "sources_unchanged": true,
+  "completed_at": "2026-10-13T06:41:12.218508+00:00",
+  "attempt_count": 2
+}

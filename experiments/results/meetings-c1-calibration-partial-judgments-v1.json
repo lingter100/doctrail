@@ -1,0 +1,1093 @@
+{
+  "schema_version": 1,
+  "review_kind": "independent_semantic_review",
+  "purpose": "post_hoc_partial_failure_analysis_only",
+  "post_hoc_partial_failure_analysis_only": true,
+  "input_path": ".local/meeting-review-c1-calibration-audit-v1/review-input.json",
+  "input_sha256": "8045270605a85a17fe439db5516f397fcf3787aaff6b0e1e71d134e9d3c2d6fd",
+  "reviewed_at": "2026-10-13T23:52:14.174009+00:00",
+  "independent_of_implementation": true,
+  "human_review_count": 0,
+  "model_calls": 0,
+  "paid_service_calls": 0,
+  "planned_cases": 8,
+  "attempted_cases": 4,
+  "unexecuted_cases": 4,
+  "reviewed_anonymous_samples": 8,
+  "selection_gate_passed": false,
+  "gate_passed": false,
+  "reviewer": {
+    "agent": "/root/meeting_span_semantic",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "settings_evidence": "The parent previously confirmed the tool-accepted spawn for this continuing agent as gpt-6-astra/xhigh with fork_turns=none. No later model change is claimed.",
+    "human_review_count": 0,
+    "prior_review_history": "This continuing reviewer performed the prior C0 known4 independent semantic review. That history remains known and is not represented as a fresh reviewer with no project exposure.",
+    "implementation_participation": false,
+    "candidate_implementation_read": false,
+    "candidate_prompts_or_runner_read": false,
+    "candidate_raw_reports_read": false,
+    "candidate_version_mapping_read": false,
+    "other_agent_inventory_read": false,
+    "locked_pools_read": false,
+    "prior_judgment_reuse": "Only the current anonymous pack and its fixed oracles were used to judge these answers; no previous candidate outputs were reopened.",
+    "role_guessing": {
+      "attempted_role_assignment": false,
+      "possible_inference_leakage": "Equal outputs for repeated questions and the one status:error sample can reveal pairing or suggest roles. Three repeated-question pairs are identical in this pack. This limits effective blinding even though no variant identities were assigned or mapping opened.",
+      "judgment_policy": "The same evidence and oracle rules were applied to each sample independently of any possible role inference."
+    }
+  },
+  "rubric": {
+    "citation_exact": "Every delivered citation must identify a supplied context and exactly match its Unicode code point slice and bounds. An error with no answer receives false rather than vacuous success.",
+    "claim_support": "Every asserted fact, including optional examples, reasons and comparison details, must be supported by citations attached to that claim. Whole-context truth does not rescue missing selected evidence. Contiguous selected line fragments may jointly support a fact, and stated oracle alternatives are allowed.",
+    "completeness": "All mandatory requested facets must be present in the answer prose under the fixed oracle. For an oracle requiring abstention because a facet is unknowable, an answered partial response is incomplete. This dimension is separated from citation support and does not certify evidence sufficiency.",
+    "language": "The delivered answer must use the requested language; technical identifiers may remain in their original spelling.",
+    "temporal": "Reporting, creation, proposal, expectation and actual completion must remain distinct; durations and event dates must not be conflated.",
+    "subject": "Claims must preserve the correct entity, object, responsible party and scope.",
+    "conditions": "Mandatory qualifications, conditional thresholds and scope restrictions must not be broadened or dropped from added factual assertions.",
+    "correct_abstention_or_answer": "Status must match the fixed answerability oracle and required reason. status:error is never a successful abstention.",
+    "overall_correct": "Conjunction of all eight quality booleans. This post-hoc result cannot reopen or pass the already-failed selection gate.",
+    "error_scoring": "All quality booleans for a non-answer error are false. Unassessable language/semantic dimensions are not separately counted as observed hallucinations.",
+    "oracle_preservation": "No oracle was rewritten. Stated alternative evidence was accepted as eligible; selected quotes need not duplicate oracle quote boundaries but must contain the required proposition."
+  },
+  "samples": [
+    {
+      "sample_id": "sample-01",
+      "citation_exact": true,
+      "claim_support": false,
+      "completeness": true,
+      "language": true,
+      "temporal": true,
+      "subject": true,
+      "conditions": false,
+      "correct_abstention_or_answer": true,
+      "overall_correct": false,
+      "shortreason": "All 16 quotes are exact, but claim 2 omits the cited continuation that values are considered on conversion, claim 3 lists multiple scalar types absent from its own citations, and claim 4 drops the when-necessary qualifier from the dtype-display rationale. The required answer facets appear in the text, so coverage does not rescue citation support.",
+      "dimension_reasons": {
+        "citation_exact": "All selected quotes equal the indicated Unicode code point slices of their supplied contexts; no normalization was applied.",
+        "claim_support": "The selected evidence for claim 2 stops at The value is only; the conversion clause is not cited. Claim 3 cites only the introduction, bool and integer items while adding float, complex, string, bytes and void types. Claim 4 makes the optional dtype display sound unconditional.",
+        "completeness": "The prose covers weak abstract versus concrete DTypes, value-independent promotion versus conversion, __repr__, unchanged scalar print and unchanged array representation. This is coverage only, not fully evidenced completeness.",
+        "language": "The substantive response is Korean; technical names and identifiers do not violate the requested Korean language.",
+        "temporal": "The response discusses the supplied NEP design and does not invent a deployment date or claim a completed downstream rollout.",
+        "subject": "It keeps Python int/float/complex promotion distinct from NumPy scalar representation and array representation.",
+        "conditions": "The source says array representation includes dtype= when necessary. The added explanation says arrays already include dtype without that qualification; this broadens the stated display condition.",
+        "correct_abstention_or_answer": "The oracle marks the item answerable and the response status is answered. Other quality dimensions still fail."
+      },
+      "claim_checks": [
+        {
+          "claim_index": 1,
+          "supported_by_selected_citations": true,
+          "reason": "The four consecutive selected lines explicitly establish weak-scalar treatment, non-concrete dtypes and the named abstract DTypes."
+        },
+        {
+          "claim_index": 2,
+          "supported_by_selected_citations": false,
+          "reason": "The selected quote states At no time is the value used to decide the result of this promotion. The value is only, but omits considered when it is converted to the new dtype; this may raise an error. The other selected lines discuss promotion and cannot supply the conversion clause.",
+          "uncited_relevant_context": "considered when it is converted to the new dtype; this may raise an error."
+        },
+        {
+          "claim_index": 3,
+          "supported_by_selected_citations": false,
+          "reason": "Its citations cover the proposal introduction, np.bool_, np.uint8, np.int8 and other integers only. The claimed floating, complex, string, bytes and void types occur elsewhere in the context and are not attached to this claim.",
+          "unsupported_added_details": [
+            "np.float16",
+            "np.float32",
+            "np.float64",
+            "np.longdouble",
+            "np.complex64",
+            "np.complex128",
+            "np.clongdouble",
+            "np.str_",
+            "np.bytes_",
+            "np.void"
+          ]
+        },
+        {
+          "claim_index": 4,
+          "supported_by_selected_citations": false,
+          "reason": "The __repr__/print/array scope is supported. The additional reason omits when necessary from includes the dtype= when necessary, broadening a qualified fact."
+        }
+      ],
+      "oracle_fact_coverage": [
+        {
+          "fact_id": "C1CAL-03-F1",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-03-F2",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-03-F3",
+          "present_in_prose": true
+        }
+      ],
+      "missing_mandatory_facets": [],
+      "failure_codes": [
+        "CLAIM_CITATION_MISSING_SENTENCE_CONTINUATION",
+        "ADDED_FACTS_OUTSIDE_SELECTED_CITATIONS",
+        "QUALIFIED_DISPLAY_REASON_GENERALIZED"
+      ],
+      "observed_status": "answered",
+      "expected_status": "answered",
+      "oracle_id": "C1CAL-03",
+      "full_context_and_fixed_oracle_reviewed": true,
+      "citation_checks": [
+        {
+          "claim_index": 1,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24182,
+          "end_offset": 24268,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24268,
+          "end_offset": 24354,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 3,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24354,
+          "end_offset": 24440,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 4,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24440,
+          "end_offset": 24484,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24485,
+          "end_offset": 24557,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24557,
+          "end_offset": 24616,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 3,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24616,
+          "end_offset": 24696,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 4,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24921,
+          "end_offset": 25009,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1218,
+          "end_offset": 1282,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1282,
+          "end_offset": 1347,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 3,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1348,
+          "end_offset": 1363,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 4,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1363,
+          "end_offset": 1422,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1820,
+          "end_offset": 1886,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1886,
+          "end_offset": 1939,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 3,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1939,
+          "end_offset": 2007,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 4,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 2007,
+          "end_offset": 2047,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-02",
+      "citation_exact": true,
+      "claim_support": false,
+      "completeness": true,
+      "language": true,
+      "temporal": true,
+      "subject": true,
+      "conditions": true,
+      "correct_abstention_or_answer": true,
+      "overall_correct": false,
+      "shortreason": "All four quotes are exact, but the first claim does not cite the final-review-readiness continuation. The second claim omits the line containing both conflict-related abstention and the strict-majority requirement. Those facts are present in the full contexts and in the answer prose, but not in the citations attached to their claims.",
+      "dimension_reasons": {
+        "citation_exact": "All four quotations match their declared source slices and offsets.",
+        "claim_support": "The first quotation ends at once the authors (and sponsor, if any), before the readiness condition. The voting quotations skip particular vote must abstain. Passing requires a strict majority of, so participation is supported but conflicts and threshold are not fully supported by selected evidence.",
+        "completeness": "The prose addresses when and where the author-initiated request starts, vote-or-explicit-abstention, conflict abstention and the non-abstaining-member strict majority. These textual facets are present even though their citation support fails.",
+        "language": "The answer is Korean with relevant English identifier Steering Council issue.",
+        "temporal": "It describes procedural order and readiness, without inventing an actual submission, vote or acceptance.",
+        "subject": "The answer attributes formal initiation to authors and the issue, and council voting rules to PEP 13; it does not substitute editors for the council or core-team membership for council membership.",
+        "conditions": "The substantive procedure retains readiness, conflict abstention and the non-abstaining denominator. The parenthetical sponsor reference is not interpreted as asserting that every PEP must have a sponsor. No two-thirds or all-members denominator is invented.",
+        "correct_abstention_or_answer": "The oracle expects an answered result. The observed answered status is appropriate, although the evidence support fails."
+      },
+      "claim_checks": [
+        {
+          "claim_index": 1,
+          "supported_by_selected_citations": false,
+          "reason": "The issue-opening fragment is exact but incomplete: it does not include determine the PEP is ready for final review and resolution. That essential condition is in the next uncited line.",
+          "uncited_relevant_context": "determine the PEP is ready for final review and resolution."
+        },
+        {
+          "claim_index": 2,
+          "supported_by_selected_citations": false,
+          "reason": "The first two selected lines support vote or explicitly abstain. The quoted fragments omit the line that completes mandatory abstention for a particular conflict and introduces strict majority. The separate non-abstaining council members fragment alone does not establish the passing threshold.",
+          "uncited_relevant_context": "particular vote must abstain. Passing requires a strict majority of"
+        }
+      ],
+      "oracle_fact_coverage": [
+        {
+          "fact_id": "C1CAL-01-F1",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-01-F2",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-01-F3",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-01-F4",
+          "present_in_prose": true
+        }
+      ],
+      "missing_mandatory_facets": [],
+      "failure_codes": [
+        "CLAIM_CITATION_MISSING_READINESS_CONDITION",
+        "CLAIM_CITATION_MISSING_CONFLICT_RULE_AND_THRESHOLD"
+      ],
+      "observed_status": "answered",
+      "expected_status": "answered",
+      "oracle_id": "C1CAL-01",
+      "full_context_and_fixed_oracle_reviewed": true,
+      "citation_checks": [
+        {
+          "claim_index": 1,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP1-review",
+          "start_offset": 15292,
+          "end_offset": 15367,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-powers",
+          "start_offset": 2355,
+          "end_offset": 2426,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 2,
+          "chunk_id": "C1-PY-PEP13-powers",
+          "start_offset": 2426,
+          "end_offset": 2494,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 3,
+          "chunk_id": "C1-PY-PEP13-powers",
+          "start_offset": 2562,
+          "end_offset": 2594,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-03",
+      "citation_exact": true,
+      "claim_support": false,
+      "completeness": false,
+      "language": true,
+      "temporal": true,
+      "subject": true,
+      "conditions": true,
+      "correct_abstention_or_answer": false,
+      "overall_correct": false,
+      "shortreason": "The answer acknowledges that the completed-adaptation count is absent but returns answered instead of the oracle-required insufficient-evidence abstention. Its first claim cites only the new example, not the old 3.0 representation or the proposal-introducing sentence. Exact quotations and a useful partial answer do not satisfy this item.",
+      "dimension_reasons": {
+        "citation_exact": "All four selected code/example and doctest quotations match their supplied source slices.",
+        "claim_support": "The first claim adds instead of 3.0 and proposal status, while its two citations contain only the new input/output example. The old representation and proposal introduction are not selected. The tool-adoption clause of claim 2 is directly quoted; recognizing insufficient evidence does not repair claim 1.",
+        "completeness": "The fixed oracle explicitly rejects a partial representation answer as a complete answer. The requested number of completed downstream adaptations cannot be established, so an answered result fails completeness.",
+        "language": "Both claims are English, as requested.",
+        "temporal": "It keeps the representation as proposed and the doctest tooling as potentially necessary; it does not invent completed migrations or infer them from Accepted status.",
+        "subject": "It distinguishes the np.float32 representation example from downstream package doctest adaptation.",
+        "conditions": "The response preserves may be necessary and does not turn an expectation into confirmed completion or invent a zero count.",
+        "correct_abstention_or_answer": "The oracle requires abstained with insufficient_evidence because a mandatory count is unavailable. Observed status answered violates that fixed decision rule."
+      },
+      "claim_checks": [
+        {
+          "claim_index": 1,
+          "supported_by_selected_citations": false,
+          "reason": "The selected two lines show >>> np.float32(3.0) and np.float32(3.0), but neither contains the original 3.0 display nor the statement that this is proposed. Those assertions depend on uncited preceding context."
+        },
+        {
+          "claim_index": 2,
+          "supported_by_selected_citations": false,
+          "reason": "The two selected sentences support possible doctest tooling for approximate checking. They do not establish a document-wide absence claim. The full supplied contexts and oracle do confirm that the requested completion count is unavailable; the prescribed response to that insufficiency is abstention, not an answered partial result."
+        }
+      ],
+      "oracle_fact_coverage": [],
+      "missing_mandatory_facets": [
+        "The number of downstream packages that had actually finished adapting doctests is not supplied; expected insufficient-evidence abstention was not returned."
+      ],
+      "failure_codes": [
+        "ANSWERED_WHEN_ORACLE_REQUIRES_ABSTENTION",
+        "INCOMPLETE_REQUESTED_COUNT",
+        "ADDED_COMPARISON_OUTSIDE_SELECTED_CITATIONS"
+      ],
+      "observed_status": "answered",
+      "expected_status": "abstained",
+      "oracle_id": "C1CAL-04",
+      "full_context_and_fixed_oracle_reviewed": true,
+      "citation_checks": [
+        {
+          "claim_index": 1,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP51-abstract",
+          "start_offset": 754,
+          "end_offset": 778,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP51-abstract",
+          "start_offset": 778,
+          "end_offset": 798,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP51-backward",
+          "start_offset": 4454,
+          "end_offset": 4512,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP51-backward",
+          "start_offset": 4512,
+          "end_offset": 4573,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-04",
+      "citation_exact": false,
+      "claim_support": false,
+      "completeness": false,
+      "language": false,
+      "temporal": false,
+      "subject": false,
+      "conditions": false,
+      "correct_abstention_or_answer": false,
+      "overall_correct": false,
+      "shortreason": "The result is status:error with candidate_did_not_return_an_answer. It is not the oracle-required abstained/insufficient_evidence result and supplies no assessable answer or citations. All eight quality booleans are conservatively false because no answer was delivered, not because eight separate semantic errors were observed.",
+      "dimension_reasons": {
+        "citation_exact": "No answer was delivered; this dimension is not assessable and is scored false rather than receiving vacuous success.",
+        "claim_support": "No answer was delivered; this dimension is not assessable and is scored false rather than receiving vacuous success.",
+        "completeness": "No answer was delivered; this dimension is not assessable and is scored false rather than receiving vacuous success.",
+        "language": "No answer was delivered; this dimension is not assessable and is scored false rather than receiving vacuous success.",
+        "temporal": "No answer was delivered; this dimension is not assessable and is scored false rather than receiving vacuous success.",
+        "subject": "No answer was delivered; this dimension is not assessable and is scored false rather than receiving vacuous success.",
+        "conditions": "No answer was delivered; this dimension is not assessable and is scored false rather than receiving vacuous success.",
+        "correct_abstention_or_answer": "Expected abstained/insufficient_evidence; received status:error. An execution or candidate error is not a successful abstention."
+      },
+      "claim_checks": [],
+      "oracle_fact_coverage": [],
+      "missing_mandatory_facets": [
+        "A valid insufficient-evidence abstention was not returned."
+      ],
+      "failure_codes": [
+        "NO_ANSWER_ERROR_NOT_SUCCESSFUL_ABSTENTION"
+      ],
+      "unassessable_dimensions_scored_false": [
+        "citation_exact",
+        "claim_support",
+        "completeness",
+        "language",
+        "temporal",
+        "subject",
+        "conditions"
+      ],
+      "observed_status": "error",
+      "expected_status": "abstained",
+      "oracle_id": "C1CAL-04",
+      "full_context_and_fixed_oracle_reviewed": true,
+      "citation_checks": []
+    },
+    {
+      "sample_id": "sample-05",
+      "citation_exact": true,
+      "claim_support": false,
+      "completeness": true,
+      "language": true,
+      "temporal": true,
+      "subject": true,
+      "conditions": true,
+      "correct_abstention_or_answer": true,
+      "overall_correct": false,
+      "shortreason": "All seven quotes are exact and the answer covers both dated amendments, one-week seconding, two-week voting and the two-thirds threshold. However, the last claim cites only the antecedent ending then and omits the vote succeeds, so its asserted outcome is not supported by its attached citation.",
+      "dimension_reasons": {
+        "citation_exact": "All seven selected quotations match their original context slices, preserving the dates and literal Markdown.",
+        "claim_support": "Claims 1 through 3 are supported by their selected evidence. Claim 4 needs the consequent the vote succeeds, which is present only in uncited context. A true antecedent alone does not establish the success outcome.",
+        "completeness": "All four mandatory oracle facts appear in the prose, including both amendments within F1. Missing citation support is judged separately.",
+        "language": "All claims are English, as requested.",
+        "temporal": "The answer associates both amendments with December 10, 2024, distinguishes the one-week seconding deadline from the two-week vote, and does not invent an actual no-confidence event.",
+        "subject": "It distinguishes council election amendments, proposal seconding and a no-confidence vote; the threshold refers to voters expressing lack of confidence.",
+        "conditions": "It preserves within one week, two weeks and at least two thirds of voters; no simple-majority or universal-success condition is substituted.",
+        "correct_abstention_or_answer": "The oracle marks this question answerable and the response is answered."
+      },
+      "claim_checks": [
+        {
+          "claim_index": 1,
+          "supported_by_selected_citations": true,
+          "reason": "The four selected consecutive amendment lines include both dates and both recorded changes."
+        },
+        {
+          "claim_index": 2,
+          "supported_by_selected_citations": true,
+          "reason": "The selected no-confidence line expressly says another core team member seconds the proposal within one week. The oracle also permits the amendment sentence as alternative evidence, but this response uses the primary procedure source."
+        },
+        {
+          "claim_index": 3,
+          "supported_by_selected_citations": true,
+          "reason": "The selected sentence expressly says the vote lasts for two weeks."
+        },
+        {
+          "claim_index": 4,
+          "supported_by_selected_citations": false,
+          "reason": "The only selected sentence fragment ends If at least two thirds of voters express a lack of confidence, then. It does not include the next line the vote succeeds. The attached citation therefore establishes the antecedent but not the outcome claimed.",
+          "uncited_relevant_context": "the vote succeeds."
+        }
+      ],
+      "oracle_fact_coverage": [
+        {
+          "fact_id": "C1CAL-02-F1",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-02-F2",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-02-F3",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-02-F4",
+          "present_in_prose": true
+        }
+      ],
+      "missing_mandatory_facets": [],
+      "failure_codes": [
+        "CLAIM_CITATION_MISSING_CONDITIONAL_CONSEQUENT"
+      ],
+      "observed_status": "answered",
+      "expected_status": "answered",
+      "oracle_id": "C1CAL-02",
+      "full_context_and_fixed_oracle_reviewed": true,
+      "citation_checks": [
+        {
+          "claim_index": 1,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "start_offset": 12733,
+          "end_offset": 12788,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 2,
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "start_offset": 12788,
+          "end_offset": 12851,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 3,
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "start_offset": 12851,
+          "end_offset": 12908,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 4,
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "start_offset": 12908,
+          "end_offset": 12975,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-confidence",
+          "start_offset": 6456,
+          "end_offset": 6519,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-confidence",
+          "start_offset": 6520,
+          "end_offset": 6589,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-confidence",
+          "start_offset": 6589,
+          "end_offset": 6657,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-06",
+      "citation_exact": true,
+      "claim_support": false,
+      "completeness": true,
+      "language": true,
+      "temporal": true,
+      "subject": true,
+      "conditions": false,
+      "correct_abstention_or_answer": true,
+      "overall_correct": false,
+      "shortreason": "All 16 quotes are exact, but claim 2 omits the cited continuation that values are considered on conversion, claim 3 lists multiple scalar types absent from its own citations, and claim 4 drops the when-necessary qualifier from the dtype-display rationale. The required answer facets appear in the text, so coverage does not rescue citation support.",
+      "dimension_reasons": {
+        "citation_exact": "All selected quotes equal the indicated Unicode code point slices of their supplied contexts; no normalization was applied.",
+        "claim_support": "The selected evidence for claim 2 stops at The value is only; the conversion clause is not cited. Claim 3 cites only the introduction, bool and integer items while adding float, complex, string, bytes and void types. Claim 4 makes the optional dtype display sound unconditional.",
+        "completeness": "The prose covers weak abstract versus concrete DTypes, value-independent promotion versus conversion, __repr__, unchanged scalar print and unchanged array representation. This is coverage only, not fully evidenced completeness.",
+        "language": "The substantive response is Korean; technical names and identifiers do not violate the requested Korean language.",
+        "temporal": "The response discusses the supplied NEP design and does not invent a deployment date or claim a completed downstream rollout.",
+        "subject": "It keeps Python int/float/complex promotion distinct from NumPy scalar representation and array representation.",
+        "conditions": "The source says array representation includes dtype= when necessary. The added explanation says arrays already include dtype without that qualification; this broadens the stated display condition.",
+        "correct_abstention_or_answer": "The oracle marks the item answerable and the response status is answered. Other quality dimensions still fail."
+      },
+      "claim_checks": [
+        {
+          "claim_index": 1,
+          "supported_by_selected_citations": true,
+          "reason": "The four consecutive selected lines explicitly establish weak-scalar treatment, non-concrete dtypes and the named abstract DTypes."
+        },
+        {
+          "claim_index": 2,
+          "supported_by_selected_citations": false,
+          "reason": "The selected quote states At no time is the value used to decide the result of this promotion. The value is only, but omits considered when it is converted to the new dtype; this may raise an error. The other selected lines discuss promotion and cannot supply the conversion clause.",
+          "uncited_relevant_context": "considered when it is converted to the new dtype; this may raise an error."
+        },
+        {
+          "claim_index": 3,
+          "supported_by_selected_citations": false,
+          "reason": "Its citations cover the proposal introduction, np.bool_, np.uint8, np.int8 and other integers only. The claimed floating, complex, string, bytes and void types occur elsewhere in the context and are not attached to this claim.",
+          "unsupported_added_details": [
+            "np.float16",
+            "np.float32",
+            "np.float64",
+            "np.longdouble",
+            "np.complex64",
+            "np.complex128",
+            "np.clongdouble",
+            "np.str_",
+            "np.bytes_",
+            "np.void"
+          ]
+        },
+        {
+          "claim_index": 4,
+          "supported_by_selected_citations": false,
+          "reason": "The __repr__/print/array scope is supported. The additional reason omits when necessary from includes the dtype= when necessary, broadening a qualified fact."
+        }
+      ],
+      "oracle_fact_coverage": [
+        {
+          "fact_id": "C1CAL-03-F1",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-03-F2",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-03-F3",
+          "present_in_prose": true
+        }
+      ],
+      "missing_mandatory_facets": [],
+      "failure_codes": [
+        "CLAIM_CITATION_MISSING_SENTENCE_CONTINUATION",
+        "ADDED_FACTS_OUTSIDE_SELECTED_CITATIONS",
+        "QUALIFIED_DISPLAY_REASON_GENERALIZED"
+      ],
+      "observed_status": "answered",
+      "expected_status": "answered",
+      "oracle_id": "C1CAL-03",
+      "full_context_and_fixed_oracle_reviewed": true,
+      "citation_checks": [
+        {
+          "claim_index": 1,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24182,
+          "end_offset": 24268,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24268,
+          "end_offset": 24354,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 3,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24354,
+          "end_offset": 24440,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 4,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24440,
+          "end_offset": 24484,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24485,
+          "end_offset": 24557,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24557,
+          "end_offset": 24616,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 3,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24616,
+          "end_offset": 24696,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 4,
+          "chunk_id": "C1-NP-NEP50-weak",
+          "start_offset": 24921,
+          "end_offset": 25009,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1218,
+          "end_offset": 1282,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1282,
+          "end_offset": 1347,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 3,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1348,
+          "end_offset": 1363,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 4,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1363,
+          "end_offset": 1422,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 1,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1820,
+          "end_offset": 1886,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 2,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1886,
+          "end_offset": 1939,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 3,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 1939,
+          "end_offset": 2007,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 4,
+          "chunk_id": "C1-NP-NEP51-scope",
+          "start_offset": 2007,
+          "end_offset": 2047,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-07",
+      "citation_exact": true,
+      "claim_support": false,
+      "completeness": true,
+      "language": true,
+      "temporal": true,
+      "subject": true,
+      "conditions": true,
+      "correct_abstention_or_answer": true,
+      "overall_correct": false,
+      "shortreason": "All four quotes are exact, but the first claim does not cite the final-review-readiness continuation. The second claim omits the line containing both conflict-related abstention and the strict-majority requirement. Those facts are present in the full contexts and in the answer prose, but not in the citations attached to their claims.",
+      "dimension_reasons": {
+        "citation_exact": "All four quotations match their declared source slices and offsets.",
+        "claim_support": "The first quotation ends at once the authors (and sponsor, if any), before the readiness condition. The voting quotations skip particular vote must abstain. Passing requires a strict majority of, so participation is supported but conflicts and threshold are not fully supported by selected evidence.",
+        "completeness": "The prose addresses when and where the author-initiated request starts, vote-or-explicit-abstention, conflict abstention and the non-abstaining-member strict majority. These textual facets are present even though their citation support fails.",
+        "language": "The answer is Korean with relevant English identifier Steering Council issue.",
+        "temporal": "It describes procedural order and readiness, without inventing an actual submission, vote or acceptance.",
+        "subject": "The answer attributes formal initiation to authors and the issue, and council voting rules to PEP 13; it does not substitute editors for the council or core-team membership for council membership.",
+        "conditions": "The substantive procedure retains readiness, conflict abstention and the non-abstaining denominator. The parenthetical sponsor reference is not interpreted as asserting that every PEP must have a sponsor. No two-thirds or all-members denominator is invented.",
+        "correct_abstention_or_answer": "The oracle expects an answered result. The observed answered status is appropriate, although the evidence support fails."
+      },
+      "claim_checks": [
+        {
+          "claim_index": 1,
+          "supported_by_selected_citations": false,
+          "reason": "The issue-opening fragment is exact but incomplete: it does not include determine the PEP is ready for final review and resolution. That essential condition is in the next uncited line.",
+          "uncited_relevant_context": "determine the PEP is ready for final review and resolution."
+        },
+        {
+          "claim_index": 2,
+          "supported_by_selected_citations": false,
+          "reason": "The first two selected lines support vote or explicitly abstain. The quoted fragments omit the line that completes mandatory abstention for a particular conflict and introduces strict majority. The separate non-abstaining council members fragment alone does not establish the passing threshold.",
+          "uncited_relevant_context": "particular vote must abstain. Passing requires a strict majority of"
+        }
+      ],
+      "oracle_fact_coverage": [
+        {
+          "fact_id": "C1CAL-01-F1",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-01-F2",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-01-F3",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-01-F4",
+          "present_in_prose": true
+        }
+      ],
+      "missing_mandatory_facets": [],
+      "failure_codes": [
+        "CLAIM_CITATION_MISSING_READINESS_CONDITION",
+        "CLAIM_CITATION_MISSING_CONFLICT_RULE_AND_THRESHOLD"
+      ],
+      "observed_status": "answered",
+      "expected_status": "answered",
+      "oracle_id": "C1CAL-01",
+      "full_context_and_fixed_oracle_reviewed": true,
+      "citation_checks": [
+        {
+          "claim_index": 1,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP1-review",
+          "start_offset": 15292,
+          "end_offset": 15367,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-powers",
+          "start_offset": 2355,
+          "end_offset": 2426,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 2,
+          "chunk_id": "C1-PY-PEP13-powers",
+          "start_offset": 2426,
+          "end_offset": 2494,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 3,
+          "chunk_id": "C1-PY-PEP13-powers",
+          "start_offset": 2562,
+          "end_offset": 2594,
+          "exact": true
+        }
+      ]
+    },
+    {
+      "sample_id": "sample-08",
+      "citation_exact": true,
+      "claim_support": false,
+      "completeness": true,
+      "language": true,
+      "temporal": true,
+      "subject": true,
+      "conditions": true,
+      "correct_abstention_or_answer": true,
+      "overall_correct": false,
+      "shortreason": "All seven quotes are exact and the answer covers both dated amendments, one-week seconding, two-week voting and the two-thirds threshold. However, the last claim cites only the antecedent ending then and omits the vote succeeds, so its asserted outcome is not supported by its attached citation.",
+      "dimension_reasons": {
+        "citation_exact": "All seven selected quotations match their original context slices, preserving the dates and literal Markdown.",
+        "claim_support": "Claims 1 through 3 are supported by their selected evidence. Claim 4 needs the consequent the vote succeeds, which is present only in uncited context. A true antecedent alone does not establish the success outcome.",
+        "completeness": "All four mandatory oracle facts appear in the prose, including both amendments within F1. Missing citation support is judged separately.",
+        "language": "All claims are English, as requested.",
+        "temporal": "The answer associates both amendments with December 10, 2024, distinguishes the one-week seconding deadline from the two-week vote, and does not invent an actual no-confidence event.",
+        "subject": "It distinguishes council election amendments, proposal seconding and a no-confidence vote; the threshold refers to voters expressing lack of confidence.",
+        "conditions": "It preserves within one week, two weeks and at least two thirds of voters; no simple-majority or universal-success condition is substituted.",
+        "correct_abstention_or_answer": "The oracle marks this question answerable and the response is answered."
+      },
+      "claim_checks": [
+        {
+          "claim_index": 1,
+          "supported_by_selected_citations": true,
+          "reason": "The four selected consecutive amendment lines include both dates and both recorded changes."
+        },
+        {
+          "claim_index": 2,
+          "supported_by_selected_citations": true,
+          "reason": "The selected no-confidence line expressly says another core team member seconds the proposal within one week. The oracle also permits the amendment sentence as alternative evidence, but this response uses the primary procedure source."
+        },
+        {
+          "claim_index": 3,
+          "supported_by_selected_citations": true,
+          "reason": "The selected sentence expressly says the vote lasts for two weeks."
+        },
+        {
+          "claim_index": 4,
+          "supported_by_selected_citations": false,
+          "reason": "The only selected sentence fragment ends If at least two thirds of voters express a lack of confidence, then. It does not include the next line the vote succeeds. The attached citation therefore establishes the antecedent but not the outcome claimed.",
+          "uncited_relevant_context": "the vote succeeds."
+        }
+      ],
+      "oracle_fact_coverage": [
+        {
+          "fact_id": "C1CAL-02-F1",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-02-F2",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-02-F3",
+          "present_in_prose": true
+        },
+        {
+          "fact_id": "C1CAL-02-F4",
+          "present_in_prose": true
+        }
+      ],
+      "missing_mandatory_facets": [],
+      "failure_codes": [
+        "CLAIM_CITATION_MISSING_CONDITIONAL_CONSEQUENT"
+      ],
+      "observed_status": "answered",
+      "expected_status": "answered",
+      "oracle_id": "C1CAL-02",
+      "full_context_and_fixed_oracle_reviewed": true,
+      "citation_checks": [
+        {
+          "claim_index": 1,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "start_offset": 12733,
+          "end_offset": 12788,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 2,
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "start_offset": 12788,
+          "end_offset": 12851,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 3,
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "start_offset": 12851,
+          "end_offset": 12908,
+          "exact": true
+        },
+        {
+          "claim_index": 1,
+          "citation_index": 4,
+          "chunk_id": "C1-PY-PEP13-amendments",
+          "start_offset": 12908,
+          "end_offset": 12975,
+          "exact": true
+        },
+        {
+          "claim_index": 2,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-confidence",
+          "start_offset": 6456,
+          "end_offset": 6519,
+          "exact": true
+        },
+        {
+          "claim_index": 3,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-confidence",
+          "start_offset": 6520,
+          "end_offset": 6589,
+          "exact": true
+        },
+        {
+          "claim_index": 4,
+          "citation_index": 1,
+          "chunk_id": "C1-PY-PEP13-confidence",
+          "start_offset": 6589,
+          "end_offset": 6657,
+          "exact": true
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "sample_count": 8,
+    "overall_correct_count": 0,
+    "overall_incorrect_count": 8,
+    "answered_samples": 7,
+    "error_samples": 1,
+    "successful_abstention_samples": 0,
+    "quality_true_counts": {
+      "citation_exact": 7,
+      "claim_support": 0,
+      "completeness": 6,
+      "language": 7,
+      "temporal": 7,
+      "subject": 7,
+      "conditions": 5,
+      "correct_abstention_or_answer": 6
+    },
+    "exact_delivered_quotes": 58,
+    "delivered_quotes_total": 58,
+    "claim_support_failures_in_answered_samples": 7,
+    "selection_gate_passed": false
+  },
+  "judgments_fixed_before_mapping": true,
+  "limitations": [
+    "This is post-hoc analysis of eight anonymous samples from only four attempted questions. Four of the eight planned questions were not executed.",
+    "The pack cannot establish quality on the full planned eight-question calibration, select a candidate, or demonstrate service success.",
+    "Questions and oracles are AI-authored and this is another AI judgment using the same general assistant ecosystem. Implementation separation and anonymous IDs do not eliminate common model-family or evaluation bias.",
+    "Human review count is zero. Effective role blinding is limited by repeated outputs and error shape.",
+    "All source comparisons use the contexts and fixed oracles embedded in this input pack. External originals, candidate code, raw run reports and sealed evaluation pools were not read.",
+    "No inference, model rerun, prompt tuning, output repair, service integration or oracle modification was performed."
+  ]
+}

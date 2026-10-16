@@ -1,0 +1,63 @@
+{
+  "actual_model_native_calls": 0,
+  "actual_tokenizer_loads": 0,
+  "basis_commit": "249d0dfa41cfecc81e22cf9c1f3ccd03086170bf",
+  "checks": {
+    "evidence": "Implementation role tool execution; remote full CI recorded separately",
+    "new_passed": 33,
+    "original_regressions_passed": 47,
+    "ruff": "passed",
+    "seconds": 35.19,
+    "synthetic_python_children": 4,
+    "total_passed": 80,
+    "windows_symlink_permission_skips": 1
+  },
+  "date_kst": "2026-10-15",
+  "design_role": {
+    "model": "gpt-6-astra",
+    "name": "free_qa_candidate_review",
+    "reasoning_effort": "xhigh",
+    "tool_accepted": true
+  },
+  "downloads": 0,
+  "followup_id": "meeting-thinking-c4-compat-resource-v1",
+  "human_reviews": 0,
+  "implementation_role": {
+    "model": "gpt-6-astra",
+    "name": "bounded_thinking_transport",
+    "reasoning_effort": "high",
+    "tool_accepted": true
+  },
+  "kind": "c4_compat_resource_tooling_verification",
+  "new_sources": {
+    "scripts/probe_meeting_thinking_compat_resources.py": "83854ab6651c229546a3f3d6bd725dfa6f29d975fc4ff7bcfe1dea1eaf4785af",
+    "scripts/serve_meeting_thinking_compat.py": "3a3dbe8302c1793b1b3766d7276f0408eba66cb48f81ecde10ba52e0e746c73e",
+    "tests/test_meeting_thinking_compat_launcher.py": "b7f1af45370c20fc76f7b3a4c79a64d9e69f8dcc9737721072c20fc7ad8860bd",
+    "tests/test_meeting_thinking_compat_resources.py": "3772f98564063dd1e288950fddc93df5c6d6cbd63b4ed83a19db007011da229b"
+  },
+  "parent_review": [
+    "Startup failures retain numeric telemetry before context yield.",
+    "Drain continuously discards content and counts all bytes; EOF/read/join/start are required.",
+    "Cleanup duration and first failure remain sticky.",
+    "Temporary replace paths are checked and exclusively created.",
+    "Original43 and new52 source closure verified; no original modification."
+  ],
+  "preserved_initial_checks": [
+    "First new tests28passed/3failed: fake-tokenizer JSON key ordering changed on serialized plan; fixture sorted without changing real model contract.",
+    "First Ruff one mutable class-list warning fixed in test fixture."
+  ],
+  "quality_items": 0,
+  "remaining": [
+    "Source/freeze commit and CI",
+    "Once-only cached complete-JSON token count greater than928 and freshneutral2 preparation",
+    "Plan/preparation commit before two new actual dispatches",
+    "928-token const compatibility,90-second stress and metadata recovery are unmeasured"
+  ],
+  "schema_version": 1,
+  "service_adoption": false,
+  "source_freeze": {
+    "bindings": 52,
+    "file": "data/evaluation/meetings-c4-compat-source-freeze-v1.json",
+    "sha256": "de8bfc6b92603b1cd5d999afb5788222c7b71ccda1e7a9a3c0aa5a7df36ef61e"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "meeting-public-v1",
+  "purpose": "Small real-data integration/development corpus, not an independent benchmark; no old evaluation questions",
+  "sources": [
+    {
+      "id": "jupyter-license",
+      "kind": "license",
+      "repository": "jupyter/jupyter",
+      "revision": "6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5",
+      "path": "LICENSE",
+      "raw_url": "https://raw.githubusercontent.com/jupyter/jupyter/6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5/LICENSE",
+      "url": "https://github.com/jupyter/jupyter/blob/6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5/LICENSE",
+      "license": "BSD-3-Clause",
+      "source_sha256": "1b9f3955dcf9c235b10c168cca09b88c1f2adf992a0dc13120482d93037602ac",
+      "fixture": "tests/fixtures/meetings/public/jupyter-license.txt",
+      "fixture_sha256": "1b9f3955dcf9c235b10c168cca09b88c1f2adf992a0dc13120482d93037602ac",
+      "transformation": "none",
+      "origin": "real_public_document",
+      "human_review_count": 0
+    },
+    {
+      "id": "jupyter-february-2025",
+      "kind": "meeting",
+      "repository": "jupyter/jupyter",
+      "revision": "6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5",
+      "path": "docs/source/community/community-call-notes/2025-february.md",
+      "raw_url": "https://raw.githubusercontent.com/jupyter/jupyter/6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5/docs/source/community/community-call-notes/2025-february.md",
+      "url": "https://github.com/jupyter/jupyter/blob/6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5/docs/source/community/community-call-notes/2025-february.md",
+      "license": "BSD-3-Clause",
+      "source_sha256": "696b9eb9cebde75d549380c17b0b631123aff4afa26df86280ae87bae13bc59a",
+      "fixture": "tests/fixtures/meetings/public/jupyter-february-2025.md",
+      "fixture_sha256": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+      "transformation": "LF normalization; remove call-access and mailing-list contact lines; no content additions",
+      "origin": "real_public_document",
+      "human_review_count": 0
+    },
+    {
+      "id": "jupyter-june-2025",
+      "kind": "meeting",
+      "repository": "jupyter/jupyter",
+      "revision": "6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5",
+      "path": "docs/source/community/community-call-notes/2025-june.md",
+      "raw_url": "https://raw.githubusercontent.com/jupyter/jupyter/6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5/docs/source/community/community-call-notes/2025-june.md",
+      "url": "https://github.com/jupyter/jupyter/blob/6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5/docs/source/community/community-call-notes/2025-june.md",
+      "license": "BSD-3-Clause",
+      "source_sha256": "3ff65ccaff4cbcd7fd7302b9b837a2aa98b35ed05d5e2526f19148c982ed56f4",
+      "fixture": "tests/fixtures/meetings/public/jupyter-june-2025.md",
+      "fixture_sha256": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+      "transformation": "LF normalization; remove call-access and mailing-list contact lines; no content additions",
+      "origin": "real_public_document",
+      "human_review_count": 0
+    },
+    {
+      "id": "jupyter-host-guide",
+      "kind": "document",
+      "repository": "jupyter/jupyter",
+      "revision": "6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5",
+      "path": "docs/source/community/host-guide.md",
+      "raw_url": "https://raw.githubusercontent.com/jupyter/jupyter/6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5/docs/source/community/host-guide.md",
+      "url": "https://github.com/jupyter/jupyter/blob/6b5eb0f469c7bc3ea43d6d2a0ba1057853c9a3a5/docs/source/community/host-guide.md",
+      "license": "BSD-3-Clause",
+      "source_sha256": "8a916ae1ef8dfbf923f8ea5d6393d85e8362b91b4090bc5ddd7e3f7f0eaec992",
+      "fixture": "tests/fixtures/meetings/public/jupyter-host-guide.md",
+      "fixture_sha256": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f",
+      "transformation": "LF normalization; remove call-access and mailing-list contact lines; no content additions",
+      "origin": "real_public_document",
+      "human_review_count": 0
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "id": "meetings-gpu-placement-source-ci-v1",
+  "head": "bd4fbf38268065477394e907684b6ad0696d8ceb",
+  "author": "lingter100",
+  "committer": "lingter100",
+  "runs": [
+    {
+      "id": 38870191406,
+      "event": "push",
+      "head": "bd4fbf38268065477394e907684b6ad0696d8ceb",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38870191406",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 38870197353,
+      "event": "pull_request",
+      "head": "bd4fbf38268065477394e907684b6ad0696d8ceb",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38870197353",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "source_freeze_sha256": "116b5325b8b9c1de39c27d486b17d614d9bdef49b32274b14d2838c5a4e9cfaf",
+  "bound_files_verified": 59,
+  "verification_scope": "Job status only; no prior test counts reused.",
+  "earlier_source_commit": {
+    "head": "05ab461793a4c05dec6b3ea4b08b9f98c332a3a0",
+    "push": 38869792669,
+    "push_conclusion": "success",
+    "pr": 38869799295,
+    "pr_conclusion": "cancelled",
+    "note": "Superseded by the final combined source head; cancelled is not passed."
+  },
+  "actual_tokenizer": 0,
+  "actual_native": 0,
+  "human_review": 0
+}

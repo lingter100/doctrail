@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "kind": "meeting_edit_conflict_recovery_local_verification",
+  "recorded_date_kst": "2026-10-15",
+  "basis_commit": "1a61212",
+  "source_state": "five-file recovery patch before commit; exact hashes below",
+  "sources": [
+    {
+      "file": "web/src/useMeetings.ts",
+      "sha256": "4e5ed990f1c4f82c589553195c1fe6b4a1391849802f621f7888bcc290154d84",
+      "bytes": 10795
+    },
+    {
+      "file": "web/src/components/MeetingViews.tsx",
+      "sha256": "5056a4cf7b401a0dc6f98d9f81a77e335fe03aae714ada04c6c07f51d5d810ea",
+      "bytes": 31603
+    },
+    {
+      "file": "web/src/meetings.css",
+      "sha256": "c581652fa03dee2730e8de064af1c35f06e73ca360b614ea5c2724929a81571e",
+      "bytes": 14610
+    },
+    {
+      "file": "web/scripts/test-java.mjs",
+      "sha256": "960106b4cd22d2d505fd7a8999c2e1e14d16c3dc12b04de9d3d17a1ab6ce03ca",
+      "bytes": 9247
+    },
+    {
+      "file": "web/tests/meeting-conflict-recovery.spec.ts",
+      "sha256": "72527d09115bccd1267ef01d94ba99617588b65bc84efe1845867dab0d881cff",
+      "bytes": 10101
+    }
+  ],
+  "actual_stack": "Java 21, SQLite revision/version CAS, packaged React UI, Playwright Chromium",
+  "model_boundary": "deterministic transport fixture, NOT an LLM",
+  "new_browser_passed": 5,
+  "existing_meeting_browser_passed": 3,
+  "successful_spec_runs": [
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T07:16:56.051Z",
+        "spec": "meeting-conflict-recovery.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 5,
+          "answer": 0
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T07:16:45.731Z",
+        "duration": 10280.728000000001,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-IxOXwf/web-e2e-etdVn2/run.json",
+        "sha256": "359a39d0d4ebb9749183e718ed29587687aab5853d557d472d8fc7e5e36c2354",
+        "bytes": 380
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-IxOXwf/web-e2e-etdVn2/report.json",
+        "sha256": "0aafaf013dd2353f544a04b0c6d4eb194a982e76c6a4819ed88df0c00f5dbbfc",
+        "bytes": 8591
+      }
+    },
+    {
+      "run": {
+        "kind": "automated-synthetic-browser-check",
+        "date": "2026-10-15T07:09:07.479Z",
+        "spec": "meeting-ready.spec.ts",
+        "exitCode": 0,
+        "serverStopped": true,
+        "packagedUi": true,
+        "browser": "Playwright Chromium",
+        "humanReview": false,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 5,
+          "answer": 1
+        }
+      },
+      "stats": {
+        "startTime": "2026-10-15T07:08:52.823Z",
+        "duration": 14608.209,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "original_run": {
+        "file": ".local/web-e2e-batch-gYeb5E/web-e2e-zxBtm6/run.json",
+        "sha256": "40ef3e00b86741631efa7379964acea099bb463c8fec9b6caeabe47af6fcf768",
+        "bytes": 368
+      },
+      "original_report": {
+        "file": ".local/web-e2e-batch-gYeb5E/web-e2e-zxBtm6/report.json",
+        "sha256": "81f9b6e0dc9a2643cc772479c99e72e763e20b0c7f75a72e1672b226d99f74a4",
+        "bytes": 6352
+      }
+    }
+  ],
+  "preserved_prior_failed_batches": [
+    {
+      "original": {
+        "file": ".local/web-e2e-batch-gYeb5E/run.json",
+        "sha256": "f8f44f279f2328b9a9f57f6e91e511f0e2dc55d544a0b8c0f423beaaa68bdfc5",
+        "bytes": 1678
+      },
+      "stats": {
+        "expected": 3,
+        "unexpected": 5,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "exit_code": 1,
+      "analysis": "new synthetic transcript omitted the existing fixture date; production unchanged"
+    },
+    {
+      "original": {
+        "file": ".local/web-e2e-batch-mEdYp6/run.json",
+        "sha256": "b3370754d435585cd82552f77579d5d89cd1d125314c7b532fe168c6314934f5",
+        "bytes": 988
+      },
+      "stats": {
+        "expected": 0,
+        "unexpected": 5,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "exit_code": 1,
+      "analysis": "new test label selector did not match the wrapping textarea; production unchanged"
+    },
+    {
+      "original": {
+        "file": ".local/web-e2e-batch-rsNAUL/run.json",
+        "sha256": "edf6d7bbb941b6645f54973926a8bb1554a0cd6913c588a1a9d6928897ad27c3",
+        "bytes": 987
+      },
+      "stats": {
+        "expected": 4,
+        "unexpected": 1,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "exit_code": 1,
+      "analysis": "new test created workspace after auth snapshot; production unchanged"
+    }
+  ],
+  "typecheck": "passed",
+  "production_build": "passed",
+  "java_package_skip_tests": "passed; not a full Java test run",
+  "scoped_whitespace_check": "passed",
+  "new_llm_calls": 0,
+  "human_review_count": 0,
+  "paid_calls": 0,
+  "visual_review": {
+    "reviewer": "parent AI",
+    "screenshot": {
+      "file": ".local/web-e2e-batch-IxOXwf/web-e2e-etdVn2/results/meeting-conflict-recovery--1c3fa-iberate-fresh-version-retry/conflict-comparison-mobile.png",
+      "sha256": "e52479a18a1279ae0bbe0fdba3b511ffc544baa59da96714feb70055156a3b4c",
+      "bytes": 163129
+    },
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "horizontal_overflow_check": "passed in browser",
+    "observed": "server comparison and explicit choices fit viewport; local form remains visible below"
+  },
+  "limits": [
+    "in-memory draft; navigation or page reload is not durable draft storage",
+    "no automatic merge or save",
+    "changed source revision blocks stale draft submission",
+    "local UI regression is not local-model semantic validation or public deployment",
+    "full Java and browser suite will be distinguished in remote CI"
+  ]
+}

@@ -1,0 +1,33 @@
+parse: error parsing grammar: number of repetitions exceeds sane defaults, please reduce the number of repetitions
+
+char ::= [^"\\\x7F\x00-\x1F] | [\\] (["\\bfnrt] | "u" [0-9a-fA-F]{4})
+json-array ::= "[" space ("]" | json-value (space "," space json-value)* space "]")
+json-bool ::= "true" | "false"
+json-null ::= "null"
+json-number ::= "-"? ("0" | [1-9] [0-9]*) ("." [0-9]+)? (("e" | "E") [+-]? [0-9]+)?
+json-object ::= "{" space ("}" | json-string space ":" space json-value (space "," space json-string space ":" space json-value)* space "}")
+json-string ::= "\"" ( [^"\\] | "\\" ( ["\\/ bfnrt] | "u" [0-9a-fA-F]{4} ) )* "\""
+json-value ::= json-object | json-array | json-string | json-number | json-bool | json-null
+response-format ::= "{" space response-format-padding-kv space "}"
+response-format-padding ::= "\"" char{10000,} "\""
+response-format-padding-kv ::= "\"padding\"" space ":" space response-format-padding
+root ::= "<|im_start|>assistant\n" ("<think>" space until-5 ("</think>" | ))? space response-format
+space ::= | " " | "\n"{1,2} [ \t]{0,20}
+until-5 ::= | [<] until-5-01 | [^<] until-5
+until-5-01 ::= | [<] until-5-01 | [/] until-5-02 | [t] until-5-09 | [^/<t] until-5
+until-5-02 ::= | [<] until-5-01 | [t] until-5-03 | [^<t] until-5
+until-5-03 ::= | [<] until-5-01 | [h] until-5-04 | [^<h] until-5
+until-5-04 ::= | [<] until-5-01 | [i] until-5-05 | [^<i] until-5
+until-5-05 ::= | [<] until-5-01 | [n] until-5-06 | [^<n] until-5
+until-5-06 ::= | [<] until-5-01 | [k] until-5-07 | [^<k] until-5
+until-5-07 ::= | [<] until-5-01 | [^<>] until-5
+until-5-09 ::= | [<] until-5-01 | [o] until-5-10 | [^<o] until-5
+until-5-10 ::= | [<] until-5-01 | [o] until-5-11 | [^<o] until-5
+until-5-11 ::= | [<] until-5-01 | [l] until-5-12 | [^<l] until-5
+until-5-12 ::= | [<] until-5-01 | [_] until-5-13 | [^<_] until-5
+until-5-13 ::= | [<] until-5-01 | [c] until-5-14 | [^<c] until-5
+until-5-14 ::= | [<] until-5-01 | [a] until-5-15 | [^<a] until-5
+until-5-15 ::= | [<] until-5-01 | [l] until-5-16 | [^<l] until-5
+until-5-16 ::= | [<] until-5-01 | [l] until-5-17 | [^<l] until-5
+until-5-17 ::= | [<] until-5-01 | [^<>] until-5
+

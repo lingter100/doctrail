@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "c2-isolated-item-authoring-metadata-receipt",
+  "created_at": "2026-10-14T02:32:55.352035+00:00",
+  "status": "draft_schema_verified_pending_independent_item_prereview",
+  "author": {
+    "role": "/root/c2_validation_source_b",
+    "actual_tool_accepted_model": "gpt-6-astra",
+    "actual_tool_accepted_reasoning_effort": "xhigh",
+    "settings_evidence": "Parent explicitly reported tool acceptance; not model self-introspection.",
+    "ai_authored": true,
+    "human_authored_items": 0,
+    "future_independent_output_scoring_eligible": false
+  },
+  "source_freeze": {
+    "path": "data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json",
+    "sha256": "aa4d95bb6a90edec06a4b02375ac04591cfbdc54f91b068178852ccc1da39c45",
+    "size_bytes": 2647,
+    "parent_reported_pre_authoring_commit": "ed88108",
+    "checked_before_authoring": true,
+    "checked_after_authoring": true
+  },
+  "inventory": {
+    "path": ".local/c2-source-inventory-validation-full-v1/inventory.json",
+    "sha256": "49ce4cf4fb20096227064cb7a6108fc1bcf5aa306d8b4d7205eb089af6d7a2e5",
+    "size_bytes": 194305,
+    "documents": 6,
+    "public_documents": 4,
+    "synthetic_documents": 2,
+    "whole_corpus_chunks": 77
+  },
+  "artifacts": [
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/draft.json",
+      "sha256": "c2983dbc4e46a5196049de6f0027e8372812ea6b08082745b76ea6d3b251384f",
+      "size_bytes": 43358,
+      "contains_isolated_validation_semantic_content": true
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/oracle-draft.json",
+      "sha256": "2c737009209b197c9b4c1484bc46b190e11c1c04d153cdd85a48b176a99d5aa1",
+      "size_bytes": 35822,
+      "contains_isolated_validation_semantic_content": true
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/context-selection.json",
+      "sha256": "d5afefbdea235d2c6382098ee6317fdc47dbd9247bf95cb52eae98886bd274d4",
+      "size_bytes": 19245,
+      "contains_isolated_validation_semantic_content": true
+    }
+  ],
+  "composition": {
+    "C2-F03": {
+      "items": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2,
+      "multifactual_answered": 4,
+      "necessary_multisource_answered": 2,
+      "partial_known_missing_abstentions": 2
+    },
+    "C2-F04": {
+      "items": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2,
+      "multifactual_answered": 4,
+      "necessary_multisource_answered": 2,
+      "partial_known_missing_abstentions": 2
+    }
+  },
+  "totals": {
+    "items": 12,
+    "ko": 6,
+    "en": 6,
+    "answered": 8,
+    "abstained": 4,
+    "multifactual_answered": 8,
+    "necessary_multisource_answered": 4,
+    "partial_known_missing_abstentions": 4
+  },
+  "checks": {
+    "answer_request_payloads_valid": 12,
+    "oracle_file_valid": true,
+    "validate_oracles_validation_passed": true,
+    "exact_evidence_offsets_and_quotes_passed": true,
+    "whole_original_context_occurrences_checked": 21,
+    "context_minimum": 1,
+    "context_maximum": 4,
+    "context_limit": 10,
+    "all_context_metadata_and_text_equal_original_inventory_chunks": true,
+    "all_selection_bindings_match": true,
+    "all_contexts_ordered_by_source_registration_then_chunk_ordinal": true,
+    "no_trim_merge_or_resegmentation": true,
+    "whole_family_missing_facet_audit_recorded_for_abstentions": 4,
+    "whole_family_missing_facet_audit_status": "author_self_review_pending_independent_prereview"
+  },
+  "review": {
+    "author_self_review_items": 12,
+    "author_self_review_is_independent": false,
+    "author_self_review_scope": "Requested-facet scope and evidence antecedent, subject and temporal coverage were checked before handoff.",
+    "planned_independent_prereviewer": "/root/c2_validation_source_review",
+    "actual_independent_item_prereviews": 0,
+    "independent_item_prereview_status": "pending",
+    "oracle_independent_prereviewer_field_is_assignment_not_completed_review": true,
+    "human_reviews": 0,
+    "prior_independent_source_review_documents": 6,
+    "prior_source_review_does_not_count_as_item_prereview": true
+  },
+  "freeze_integrity": [
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json",
+      "sha256": "aa4d95bb6a90edec06a4b02375ac04591cfbdc54f91b068178852ccc1da39c45",
+      "size_bytes": 2647,
+      "bound_files": 12,
+      "all_bound_bytes_match": true,
+      "calibration_bound_contents_decoded": false
+    },
+    {
+      "path": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+      "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+      "size_bytes": 3522,
+      "bound_files": 18,
+      "all_bound_bytes_match": true,
+      "calibration_bound_contents_decoded": false
+    },
+    {
+      "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+      "size_bytes": 5579,
+      "bound_files": 41,
+      "all_bound_bytes_match": true,
+      "calibration_bound_contents_decoded": false
+    }
+  ],
+  "calls_and_feedback": {
+    "official_tokenizer_runs": 0,
+    "candidate_catalog_calls": 0,
+    "candidate_adapter_calls": 0,
+    "service_model_generation_calls": 0,
+    "paid_api_calls": 0,
+    "network_calls_during_item_authoring": 0,
+    "candidate_output_feedback_seen": false,
+    "tokenizer_feedback_seen": false,
+    "source_or_context_reselection_after_feedback": false
+  },
+  "isolation": {
+    "calibration_bodies_questions_or_oracles_read": false,
+    "closed_evaluation_pools_read": false,
+    "candidate_adapter_prompt_or_catalog_implementation_read": false,
+    "generic_answer_request_and_oracle_schema_exposure": true,
+    "generic_schema_validation_imports_are_not_candidate_execution": true,
+    "validation_semantic_content_sent_to_parent": false,
+    "parent_handoff_scope": "Paths, byte hashes, counts, schema results and role limitations only.",
+    "source_author_and_item_author_same_role": true,
+    "independent_output_judge_eligible": false
+  },
+  "ownership": {
+    "created_files_only": [
+      "data/evaluation/meetings-c2-validation-v1/draft.json",
+      "data/evaluation/meetings-c2-validation-v1/oracle-draft.json",
+      "data/evaluation/meetings-c2-validation-v1/context-selection.json",
+      "data/evaluation/meetings-c2-validation-v1/item-authoring-receipt.json"
+    ],
+    "existing_source_manifest_helper_policy_freeze_files_changed": false,
+    "git_operations": 0,
+    "released_to_parent": true
+  },
+  "limitations": [
+    "AI-authored validation drafts with no human review.",
+    "Author self-review and schema success do not establish independent semantic acceptance.",
+    "All independent item prereviews remain pending despite the assigned reviewer field.",
+    "No official token preparation, quality generation, answer scoring or service adoption is established.",
+    "Separate item prereview and item freeze are required before token preparation."
+  ]
+}

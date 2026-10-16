@@ -1,0 +1,661 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "cases": [
+    {
+      "id": "C4-CAL-01",
+      "family_id": "c4-f01",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "초반에는 멘토와 공동 멘토가 자료·출발점·작은 과제를 제공하며, transform 관련 이슈나 프로젝트 기반 구조와 주요 개념에 익숙해지는 과제가 포함될 수 있다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc03-r1-c0003",
+                "start_offset": 2958,
+                "end_offset": 3312,
+                "quote": "In the beginning, the mentor (and co-mentor) will provide the intern with several resources, starting points and smaller tasks. These might involve related issues in scikit-image’s transform module, or tasks to get familiar with the project’s infrastructure and important concepts. Self-initiative and new ideas by the intern are of course very welcome.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "이미 존재하는 Python 프로토타입 구현을 새 warping 함수 구현의 출발점으로 사용할 수 있다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc03-r1-c0004",
+                "start_offset": 3341,
+                "end_offset": 3834,
+                "quote": "ng function based on thin-plate spines could be implemented and added to scikit-image. A [prototype implementation of the algorithm already exists in Python](https://github.com/zpincus/celltool/blob/8d7a2b778cd45cf91588451f7f3c4784b049a82c/celltool/numerics/image_warp.py) and may be taken as a starting point. Together with mentors and the community, the intern will design an API for the implementation that is consistent with the transform module and create tests ensuring its correctness.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "인턴은 멘토 및 커뮤니티와 함께 transform 모듈과 일관된 API를 설계하고 정확성을 확인하는 테스트를 만든다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc03-r1-c0004",
+                "start_offset": 3341,
+                "end_offset": 3834,
+                "quote": "ng function based on thin-plate spines could be implemented and added to scikit-image. A [prototype implementation of the algorithm already exists in Python](https://github.com/zpincus/celltool/blob/8d7a2b778cd45cf91588451f7f3c4784b049a82c/celltool/numerics/image_warp.py) and may be taken as a starting point. Together with mentors and the community, the intern will design an API for the implementation that is consistent with the transform module and create tests ensuring its correctness.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "알고리즘 성능 최적화와 새 튜토리얼 또는 갤러리 예제는 인턴십 진행 상황에 따라 할 수 있는 추가 작업이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc03-r1-c0004",
+                "start_offset": 3835,
+                "end_offset": 4013,
+                "quote": "Depending on the progress during the internship, the intern may also optimize the performance of the algorithm and create a new tutorial or gallery example for the new function.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-f01-doc01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2023-06-02"
+        },
+        {
+          "document_id": "c4-f01-doc02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2023-06-09"
+        },
+        {
+          "document_id": "c4-f01-doc03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not turn conditional performance/tutorial work into a guaranteed deliverable or a completed result.",
+        "Do not claim the prototype has already been integrated into scikit-image.",
+        "Do not equate this proposal's TPS task with completed narrative-documentation work in the separate meeting notes."
+      ],
+      "limitations": [
+        "AI-authored item and oracle; independent item prereview is pending and human review is zero.",
+        "Evidence alternatives enumerate semantically sufficient nonredundant routes found by the author across the full adopted family, including overlapping chunks; independent completeness review remains required.",
+        "Evidence uses unchanged complete catalog units and unchanged source-inventory chunks, including their existing boundary fragments; no token measurement informed selection."
+      ],
+      "question_author": "c4_calibration_item_author",
+      "oracle_author": "c4_calibration_item_author",
+      "independent_prereviewer": "c4_calibration_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-CAL-02",
+      "family_id": "c4-f01",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "The June 2 kickoff records weekly meetings on Fridays at 17:00 UTC.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc01-r1-c0001",
+                "start_offset": 879,
+                "end_offset": 1163,
+                "quote": "    - Possibly point to HackMD or GitHub gists\n    - Please tag your mentors!\n- real-time communication\n    - office hours: Wednesdays, time TBD\n    - weekly meetings: Fridays, 17:00 UTC\n    - Community calls: Tuesdays, [calendar](https://scientific-python.org/calendars/skimage.ics)\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "The June 2 kickoff records Wednesday office hours with the time still to be determined.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc01-r1-c0001",
+                "start_offset": 879,
+                "end_offset": 1163,
+                "quote": "    - Possibly point to HackMD or GitHub gists\n    - Please tag your mentors!\n- real-time communication\n    - office hours: Wednesdays, time TBD\n    - weekly meetings: Fridays, 17:00 UTC\n    - Community calls: Tuesdays, [calendar](https://scientific-python.org/calendars/skimage.ics)\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "The June 9 notes record the Wednesday office hour at 13:00 UTC as OK.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc02-r1-c0000",
+                "start_offset": 489,
+                "end_offset": 989,
+                "quote": "- How did it go wrt Week 2 from [Timeline](https://hackmd.io/@mkcor/outreachy-roadmap)?\n    - Interns didn't even have to be 'productive' yet!\n    - Read to learn *and* code to practise.\n    - It's motivating to have a specific goal (see next item).\n- Finish inpainting example [#6853](https://github.com/scikit-image/scikit-image/pull/6853)?\n    - pressure vs. drive\n    - [x] Marianne adds last visualization and credits Biola.\n- async communication: OK\n- office hour on Wednesday at 13:00 UTC: OK\n"
+              }
+            ],
+            [
+              {
+                "chunk_id": "c4-f01-doc02-r1-c0001",
+                "start_offset": 857,
+                "end_offset": 989,
+                "quote": "    - [x] Marianne adds last visualization and credits Biola.\n- async communication: OK\n- office hour on Wednesday at 13:00 UTC: OK\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "Notebooks are to be shared through a Git repository; Marianne is assigned the unchecked task of creating a dedicated repository, with completion not recorded.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc02-r1-c0002",
+                "start_offset": 1833,
+                "end_offset": 2031,
+                "quote": "- How can we best share notebooks?\n  - Share notebooks via a Git repository.\n      - [ ] Marianne creates a dedicated repo.\n  - Lars: Use format https://jupytext.readthedocs.io/en/latest/index.html\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F5",
+          "text": "Lars recommends the Jupytext format for the notebooks.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc02-r1-c0002",
+                "start_offset": 1833,
+                "end_offset": 2031,
+                "quote": "- How can we best share notebooks?\n  - Share notebooks via a Git repository.\n      - [ ] Marianne creates a dedicated repo.\n  - Lars: Use format https://jupytext.readthedocs.io/en/latest/index.html\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-f01-doc01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2023-06-02"
+        },
+        {
+          "document_id": "c4-f01-doc02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2023-06-09"
+        },
+        {
+          "document_id": "c4-f01-doc03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not report that Marianne has already created the dedicated repository; its checkbox is unchecked.",
+        "Do not treat the June 9 one-meeting timestamp alone as proof of the recurring Friday schedule.",
+        "Do not infer a permanent office-hours policy, a causal reason for the timing, or a repository URL not supplied in the adopted sources."
+      ],
+      "limitations": [
+        "AI-authored item and oracle; independent item prereview is pending and human review is zero.",
+        "Evidence alternatives enumerate semantically sufficient nonredundant routes found by the author across the full adopted family, including overlapping chunks; independent completeness review remains required.",
+        "Evidence uses unchanged complete catalog units and unchanged source-inventory chunks, including their existing boundary fragments; no token measurement informed selection."
+      ],
+      "question_author": "c4_calibration_item_author",
+      "oracle_author": "c4_calibration_item_author",
+      "independent_prereviewer": "c4_calibration_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-CAL-03",
+      "family_id": "c4-f01",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "노트북은 Git 저장소를 통해 공유하기로 했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc02-r1-c0002",
+                "start_offset": 1833,
+                "end_offset": 2031,
+                "quote": "- How can we best share notebooks?\n  - Share notebooks via a Git repository.\n      - [ ] Marianne creates a dedicated repo.\n  - Lars: Use format https://jupytext.readthedocs.io/en/latest/index.html\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "전용 저장소 생성은 Marianne의 미체크 작업으로 남아 있으며, 완료했다는 기록은 없다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f01-doc02-r1-c0002",
+                "start_offset": 1833,
+                "end_offset": 2031,
+                "quote": "- How can we best share notebooks?\n  - Share notebooks via a Git repository.\n      - [ ] Marianne creates a dedicated repo.\n  - Lars: Use format https://jupytext.readthedocs.io/en/latest/index.html\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "노트북 공유용 전용 저장소의 확정된 URL이 필요하지만 채택된 계열 전체에 제공되지 않았다.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-f01-doc01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2023-06-02"
+        },
+        {
+          "document_id": "c4-f01-doc02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2023-06-09"
+        },
+        {
+          "document_id": "c4-f01-doc03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": "The author inspected both complete adopted meeting documents and the complete TPS proposal. None supplies a confirmed URL for the dedicated notebook-sharing repository; the June 9 creation task is unchecked. Existing project/archive/prototype/documentation links identify other resources. No answer-containing chunk was omitted to create this absence.",
+      "forbidden_inferences": [
+        "Do not substitute the scikit-image main repository, archive link, TPS prototype repository, or Jupytext documentation URL for the missing dedicated notebook repository URL.",
+        "Do not invent a repository URL or treat the unchecked creation task as completed.",
+        "Do not return the known subset as an answered response when the explicitly requested confirmed URL is absent."
+      ],
+      "limitations": [
+        "AI-authored item and oracle; independent item prereview is pending and human review is zero.",
+        "Evidence alternatives enumerate semantically sufficient nonredundant routes found by the author across the full adopted family, including overlapping chunks; independent completeness review remains required.",
+        "Evidence uses unchanged complete catalog units and unchanged source-inventory chunks, including their existing boundary fragments; no token measurement informed selection."
+      ],
+      "question_author": "c4_calibration_item_author",
+      "oracle_author": "c4_calibration_item_author",
+      "independent_prereviewer": "c4_calibration_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-CAL-04",
+      "family_id": "c4-f02",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "반납 상자에서 회수한 드라이버 한 묶음에 비트 한 개가 빠졌고, 반납 접수는 기록했지만 재대여 승인은 내리지 않아 도현이 보류 표찰을 붙였다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0000",
+                "start_offset": 439,
+                "end_offset": 622,
+                "quote": "반납 상자에서 회수한 드라이버 한 묶음은 비트 한 개가 빠져 있었다. 반납 접수는 기록됐지만 재대여 승인은 내리지 않았고, 도현이 보류 표찰을 붙였다. 대여자는 누락 사실을 확인했고 다음 방문 때 비트를 가져오겠다고 연락했다. 추가 비용이나 새 보상 기준은 결정하지 않았다. 기존 안내서대로 재고 상태와 후속 연락만 기록한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "안내서상 정비 담당자가 공구 묶음·부속품·눈에 보이는 손상을 검사하며, 이 검사가 완료되어야 대여 가능 상태로 복구할 수 있다. 반납 접수와 재대여 승인은 별개다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc03-r1-c0002",
+                "start_offset": 1771,
+                "end_offset": 2241,
+                "quote": "Borrowers may return a kit at the desk or place it in the return box while the community centre is open on weekdays, 09:00–18:00. Receiving a return and approving it for another loan are different steps. The desk records the return time and transaction number; the maintenance lead checks the kit, accessories, and visible damage. Only the completed check permits the availability state to be restored. Items awaiting a check stay on the return shelf with a hold label.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "봉사자가 교체 비용을 임의로 만들거나 보상을 약속하면 안 되며, 새로운 금전 규칙을 사용하려면 별도로 기록된 운영 결정과 주민 사전 안내가 필요하다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc03-r1-c0002",
+                "start_offset": 2242,
+                "end_offset": 2601,
+                "quote": "If an accessory is missing, staff record what was received, keep the kit unavailable, and contact the borrower using the contact details already in the loan register. A volunteer should not invent a replacement charge or promise compensation. Any proposed financial rule requires a separately documented operating decision and notice to residents before use.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "이번 누락 건에 대해 추가 비용이나 새 보상 기준은 결정하지 않았고, 기존 안내서에 따라 재고 상태와 후속 연락만 기록한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0000",
+                "start_offset": 439,
+                "end_offset": 622,
+                "quote": "반납 상자에서 회수한 드라이버 한 묶음은 비트 한 개가 빠져 있었다. 반납 접수는 기록됐지만 재대여 승인은 내리지 않았고, 도현이 보류 표찰을 붙였다. 대여자는 누락 사실을 확인했고 다음 방문 때 비트를 가져오겠다고 연락했다. 추가 비용이나 새 보상 기준은 결정하지 않았다. 기존 안내서대로 재고 상태와 후속 연락만 기록한다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-f02-doc01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-03"
+        },
+        {
+          "document_id": "c4-f02-doc02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-17"
+        },
+        {
+          "document_id": "c4-f02-doc03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not equate recording the return with approval for another loan, or claim the missing bit has already been returned.",
+        "Do not invent a charge, compensation amount, or a new financial decision.",
+        "Do not merge this returned kit with the separate four kits held during opening preparation."
+      ],
+      "limitations": [
+        "AI-authored item and oracle; independent item prereview is pending and human review is zero.",
+        "Evidence alternatives enumerate semantically sufficient nonredundant routes found by the author across the full adopted family, including overlapping chunks; independent completeness review remains required.",
+        "Evidence uses unchanged complete catalog units and unchanged source-inventory chunks, including their existing boundary fragments; no token measurement informed selection."
+      ],
+      "question_author": "c4_calibration_item_author",
+      "oracle_author": "c4_calibration_item_author",
+      "independent_prereviewer": "c4_calibration_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-CAL-05",
+      "family_id": "c4-f02",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "The planned Saturday trials were April 11 and April 18, from 10:00 to 13:00, with an original maximum of six loan handovers reserved per hour.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc01-r1-c0000",
+                "start_offset": 642,
+                "end_offset": 804,
+                "quote": "4월 11일과 18일에는 10:00–13:00에 대여와 반납을 접수하기로 했다. 서윤이 접수대, 나리가 안내와 자원활동 배치를 맡는다. 민서는 두 날에 쓰는 동일한 대기 기록 양식을 준비한다. 전화 예약도 온라인 예약과 같은 대장에 적고, 예약 순서를 바꾸는 별도 우선권을 만들지 않는다.\n"
+              },
+              {
+                "chunk_id": "c4-f02-doc01-r1-c0000",
+                "start_offset": 805,
+                "end_offset": 979,
+                "quote": "첫 시범 기간에는 한 시간에 최대 여섯 건의 대여 인계를 예약한다. 반납은 이 예약 슬롯을 차지하지 않는다. 반납 상자는 안내서의 평일 운영 시간 동안 사용할 수 있지만, 상자에 들어간 물품을 즉시 대여 가능 상태로 바꾸지 않는다. 도현이 실제 물품과 부속품을 검사하고 상태를 갱신한 후 다시 예약에 노출한다.\n"
+              }
+            ],
+            [
+              {
+                "chunk_id": "c4-f02-doc01-r1-c0000",
+                "start_offset": 642,
+                "end_offset": 804,
+                "quote": "4월 11일과 18일에는 10:00–13:00에 대여와 반납을 접수하기로 했다. 서윤이 접수대, 나리가 안내와 자원활동 배치를 맡는다. 민서는 두 날에 쓰는 동일한 대기 기록 양식을 준비한다. 전화 예약도 온라인 예약과 같은 대장에 적고, 예약 순서를 바꾸는 별도 우선권을 만들지 않는다.\n"
+              },
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0000",
+                "start_offset": 638,
+                "end_offset": 853,
+                "quote": "참석자들은 4월 18일에 한해 대여 인계 예약 상한을 시간당 여섯 건에서 네 건으로 낮추기로 결정했다. 나리는 안내판 설명을 맡고 서윤은 인계 확인을 맡아 접수대 역할을 분리한다. 개관 시간 10:00–13:00과 반납 접수 방식은 유지한다. 민서가 예약 화면의 남은 슬롯과 이미 예약한 사람에게 보내는 안내를 같은 날 갱신한다. 이미 확정된 예약을 취소하는 조치는 필요하지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "Returns do not use the loan-handover reservation slots.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc01-r1-c0000",
+                "start_offset": 805,
+                "end_offset": 979,
+                "quote": "첫 시범 기간에는 한 시간에 최대 여섯 건의 대여 인계를 예약한다. 반납은 이 예약 슬롯을 차지하지 않는다. 반납 상자는 안내서의 평일 운영 시간 동안 사용할 수 있지만, 상자에 들어간 물품을 즉시 대여 가능 상태로 바꾸지 않는다. 도현이 실제 물품과 부속품을 검사하고 상태를 갱신한 후 다시 예약에 노출한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "The April 17 decision lowers the handover limit from six to four per hour for April 18 only, while keeping the 10:00–13:00 opening hours and the return arrangements unchanged.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0000",
+                "start_offset": 638,
+                "end_offset": 853,
+                "quote": "참석자들은 4월 18일에 한해 대여 인계 예약 상한을 시간당 여섯 건에서 네 건으로 낮추기로 결정했다. 나리는 안내판 설명을 맡고 서윤은 인계 확인을 맡아 접수대 역할을 분리한다. 개관 시간 10:00–13:00과 반납 접수 방식은 유지한다. 민서가 예약 화면의 남은 슬롯과 이미 예약한 사람에게 보내는 안내를 같은 날 갱신한다. 이미 확정된 예약을 취소하는 조치는 필요하지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "The adjustment is a trial-date change and does not automatically extend to the routine handover limit.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0000",
+                "start_offset": 638,
+                "end_offset": 853,
+                "quote": "참석자들은 4월 18일에 한해 대여 인계 예약 상한을 시간당 여섯 건에서 네 건으로 낮추기로 결정했다. 나리는 안내판 설명을 맡고 서윤은 인계 확인을 맡아 접수대 역할을 분리한다. 개관 시간 10:00–13:00과 반납 접수 방식은 유지한다. 민서가 예약 화면의 남은 슬롯과 이미 예약한 사람에게 보내는 안내를 같은 날 갱신한다. 이미 확정된 예약을 취소하는 조치는 필요하지 않았다.\n"
+              },
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0000",
+                "start_offset": 854,
+                "end_offset": 997,
+                "quote": "이 변경은 첫날 관찰을 확인하기 위한 시범 운영 조정이다. 정규 운영의 인계 상한으로 자동 연장하지 않는다. 민서는 두 운영일의 대기 기록을 4월 21일까지 정리하며, 도현은 검사에 걸린 시간을 따로 제공한다. 이 자료를 함께 본 뒤 다음 달 운영 시간을 "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0000",
+                "start_offset": 638,
+                "end_offset": 853,
+                "quote": "참석자들은 4월 18일에 한해 대여 인계 예약 상한을 시간당 여섯 건에서 네 건으로 낮추기로 결정했다. 나리는 안내판 설명을 맡고 서윤은 인계 확인을 맡아 접수대 역할을 분리한다. 개관 시간 10:00–13:00과 반납 접수 방식은 유지한다. 민서가 예약 화면의 남은 슬롯과 이미 예약한 사람에게 보내는 안내를 같은 날 갱신한다. 이미 확정된 예약을 취소하는 조치는 필요하지 않았다.\n"
+              },
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0001",
+                "start_offset": 854,
+                "end_offset": 1003,
+                "quote": "이 변경은 첫날 관찰을 확인하기 위한 시범 운영 조정이다. 정규 운영의 인계 상한으로 자동 연장하지 않는다. 민서는 두 운영일의 대기 기록을 4월 21일까지 정리하며, 도현은 검사에 걸린 시간을 따로 제공한다. 이 자료를 함께 본 뒤 다음 달 운영 시간을 결정한다.\n"
+              }
+            ],
+            [
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0000",
+                "start_offset": 638,
+                "end_offset": 853,
+                "quote": "참석자들은 4월 18일에 한해 대여 인계 예약 상한을 시간당 여섯 건에서 네 건으로 낮추기로 결정했다. 나리는 안내판 설명을 맡고 서윤은 인계 확인을 맡아 접수대 역할을 분리한다. 개관 시간 10:00–13:00과 반납 접수 방식은 유지한다. 민서가 예약 화면의 남은 슬롯과 이미 예약한 사람에게 보내는 안내를 같은 날 갱신한다. 이미 확정된 예약을 취소하는 조치는 필요하지 않았다.\n"
+              },
+              {
+                "chunk_id": "c4-f02-doc03-r1-c0004",
+                "start_offset": 3884,
+                "end_offset": 4370,
+                "quote": "Trial reviews consider handover queues, instruction time, return checks, missing accessories, and volunteer workload together. A change agreed for one trial date applies only to that date unless the decision explicitly extends it. The records coordinator keeps the earlier decision and links a later change to it. Permanent changes to routine hours or lending rules are issued as a new handbook version with an effective date; a simplified sign that repeats an existing procedure is an "
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-f02-doc01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-03"
+        },
+        {
+          "document_id": "c4-f02-doc02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-17"
+        },
+        {
+          "document_id": "c4-f02-doc03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not apply the new four-per-hour limit retrospectively to April 11 or automatically to regular operations.",
+        "Do not count returns against the handover slots or claim the opening hours changed.",
+        "Do not infer a causal finding about reservation methods from the observed queue times.",
+        "Do not treat the handbook's general trial rule as an alternative source for the concrete April dates or numeric limits."
+      ],
+      "limitations": [
+        "AI-authored item and oracle; independent item prereview is pending and human review is zero.",
+        "Evidence alternatives enumerate semantically sufficient nonredundant routes found by the author across the full adopted family, including overlapping chunks; independent completeness review remains required.",
+        "Evidence uses unchanged complete catalog units and unchanged source-inventory chunks, including their existing boundary fragments; no token measurement informed selection."
+      ],
+      "question_author": "c4_calibration_item_author",
+      "oracle_author": "c4_calibration_item_author",
+      "independent_prereviewer": "c4_calibration_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-CAL-06",
+      "family_id": "c4-f02",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "The proposed topics for the first repair gathering were hangers and assembling a small shelf.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0001",
+                "start_offset": 1466,
+                "end_offset": 1641,
+                "quote": "나리는 첫 수선 모임에서 옷걸이와 작은 선반 조립을 다루자는 제안을 받았다. 공간 사용 시간을 문화센터 담당자에게 확인한 뒤 별도 일정안을 작성하기로 했다. 이번 회의에서 수선 모임의 날짜와 신청 정원은 확정하지 않았다. 다음 운영 검토는 4월 24일이며, 민서는 비교 기록과 남은 정비 목록을 사전에 공유한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "Nari was to check space-use hours with the community-centre contact before preparing a separate schedule proposal.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-f02-doc02-r1-c0001",
+                "start_offset": 1466,
+                "end_offset": 1641,
+                "quote": "나리는 첫 수선 모임에서 옷걸이와 작은 선반 조립을 다루자는 제안을 받았다. 공간 사용 시간을 문화센터 담당자에게 확인한 뒤 별도 일정안을 작성하기로 했다. 이번 회의에서 수선 모임의 날짜와 신청 정원은 확정하지 않았다. 다음 운영 검토는 4월 24일이며, 민서는 비교 기록과 남은 정비 목록을 사전에 공유한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "A confirmed date for the first repair gathering is required but is absent from the full adopted family; the April 17 note explicitly says it was not confirmed.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "F4",
+          "text": "A confirmed signup capacity for the first repair gathering is required but is absent from the full adopted family; the April 17 note explicitly says it was not confirmed.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-f02-doc01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-03"
+        },
+        {
+          "document_id": "c4-f02-doc02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-17"
+        },
+        {
+          "document_id": "c4-f02-doc03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": "The author inspected the complete handbook and both complete adopted meeting documents. They contain no confirmed first-repair-gathering date or signup capacity; the April 17 meeting explicitly leaves both unset. Trial dates, handover slot limits and the next operations-review date refer to different events. No answer-containing chunk was omitted to create the absence.",
+      "forbidden_inferences": [
+        "Do not replace the gathering date with the April 24 operations review date or with the April 18 lending trial date.",
+        "Do not convert the loan-handover hourly limits into the repair gathering's signup capacity.",
+        "Do not claim the proposed gathering, venue hours, date, or capacity has already been approved.",
+        "Do not return only the known proposal and next step as an answered response when the confirmed date and capacity are explicitly requested."
+      ],
+      "limitations": [
+        "AI-authored item and oracle; independent item prereview is pending and human review is zero.",
+        "Evidence alternatives enumerate semantically sufficient nonredundant routes found by the author across the full adopted family, including overlapping chunks; independent completeness review remains required.",
+        "Evidence uses unchanged complete catalog units and unchanged source-inventory chunks, including their existing boundary fragments; no token measurement informed selection."
+      ],
+      "question_author": "c4_calibration_item_author",
+      "oracle_author": "c4_calibration_item_author",
+      "independent_prereviewer": "c4_calibration_item_review",
+      "human_review_count": 0
+    }
+  ]
+}

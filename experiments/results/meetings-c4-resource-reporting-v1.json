@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "purpose": "c4_original_neutral_resource_failure_not_quality_result",
+  "execution_commit": "5dfc95cf7263d8cddeafc7812ab0e83a99ef9f62",
+  "plan": {
+    "file": "data/evaluation/meetings-c4-neutral-plan-v1.json",
+    "sha256": "ba0b3f40134f79a63eee61329ea50dbebc121d7e357a9bbbec0ff8511b4e1e6d",
+    "bytes": 22325
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c4-resource-source-freeze-v1.json",
+    "sha256": "2ba79c7fba2ad52090392f9256396dc8a1813b6bfae31d6b06a7ba2dd9f2d701",
+    "bytes": 4681
+  },
+  "original_report": {
+    "file": ".local/meetings-c4-resources-v1/report.json",
+    "sha256": "2b66105860e47180dc29ff78213d43ade81ac29ef2f17ba19ba632440e017729",
+    "bytes": 130962
+  },
+  "public_report": {
+    "file": "experiments/results/meetings-c4-resources-v1.json",
+    "sha256": "2b66105860e47180dc29ff78213d43ade81ac29ef2f17ba19ba632440e017729",
+    "bytes": 130962
+  },
+  "original_native_log": {
+    "file": ".local/meetings-c4-resources-v1/initial/native.log",
+    "sha256": "b7f8c9bb70c0d8da6f0331d5b7e604fcd164c84f03506c6b3393238b663cdf53",
+    "bytes": 2167
+  },
+  "public_native_log": {
+    "file": "experiments/results/meetings-c4-resource-native-diagnostic-v1.txt",
+    "sha256": "b7f8c9bb70c0d8da6f0331d5b7e604fcd164c84f03506c6b3393238b663cdf53",
+    "bytes": 2167
+  },
+  "original_public_byte_identical": true,
+  "replay": {
+    "status": "failed_closed",
+    "replayed": true,
+    "quality_calls": 0
+  },
+  "status": "failed_closed",
+  "dispatch_attempts": 2,
+  "completed_native_responses": 1,
+  "stress_generation_token_count": null,
+  "normal": {
+    "input_tokens": 62,
+    "output_tokens": 521,
+    "final_retokenized_tokens": 6,
+    "finish_reason": "eos"
+  },
+  "normal_request_seconds": 56.17199999978766,
+  "normal_rss": {
+    "memory_scope": "sampled_native_rss_not_peak_not_gpu",
+    "native_rss_max_sample_mib": 5959.6015625,
+    "native_rss_sample_count": 215
+  },
+  "stress_error": "generation_backend_unavailable",
+  "diagnostic": "native grammar parser rejected char{10000,}: number of repetitions exceeds sane defaults",
+  "native_log_bytes": 2167,
+  "cleanup": [
+    {
+      "seconds": 0.8119999999180436,
+      "stopped": true,
+      "within_budget": true
+    }
+  ],
+  "last_request_through_cleanup_seconds": 2.905999999959022,
+  "elapsed_seconds_including_startup_cleanup": 98.64000000013039,
+  "restarts": 0,
+  "metadata_recovery": false,
+  "original_sources_unchanged_flag": false,
+  "separate_post_failure_source_hash_check": {
+    "passed": true,
+    "bindings": 43,
+    "freeze_sha256": "2ba79c7fba2ad52090392f9256396dc8a1813b6bfae31d6b06a7ba2dd9f2d701"
+  },
+  "quality_calls": 0,
+  "human_reviews": 0,
+  "downloads": 0,
+  "paid_services": 0,
+  "service_adoption": false,
+  "limitations": [
+    "Normal is synthetic format/resource evidence, not Q&A quality.",
+    "Stress request did not return a generation response; full 928-token timing is unmeasured.",
+    "Original sources_unchanged=false was not reached after failure; separate hash check does not rewrite it.",
+    "Native diagnostics bypassed log-disable; the registered zero-log requirement failed.",
+    "RSS is sampled native resident memory, not true peak or GPU memory.",
+    "No rerun, retry, recovery generation, quality data access, or automatic adoption."
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "c2-isolated-item-authoring-correction-receipt",
+  "version": 2,
+  "created_at": "2026-10-14T02:47:10.228245+00:00",
+  "status": "corrected_draft_schema_verified_pending_new_independent_item_prereview",
+  "contains_isolated_validation_semantic_content": true,
+  "parent_safe_metadata_only": false,
+  "custody": "Parent receives file paths, byte hashes, counts and broad categories only; item-specific corrections and evidence descriptions remain isolated.",
+  "author": {
+    "role": "/root/c2_validation_source_b",
+    "actual_tool_accepted_model": "gpt-6-astra",
+    "actual_tool_accepted_reasoning_effort": "xhigh",
+    "settings_evidence": "Parent explicitly confirmed previously tool-accepted role settings; not self-introspection.",
+    "ai_author": true,
+    "author_self_review_is_independent": false,
+    "future_independent_output_scoring_eligible": false
+  },
+  "provenance": {
+    "parent_reported_original_preservation_commit": "47034f1",
+    "original_artifacts": [
+      {
+        "path": "data/evaluation/meetings-c2-validation-v1/draft.json",
+        "sha256": "c2983dbc4e46a5196049de6f0027e8372812ea6b08082745b76ea6d3b251384f",
+        "size_bytes": 43358
+      },
+      {
+        "path": "data/evaluation/meetings-c2-validation-v1/oracle-draft.json",
+        "sha256": "2c737009209b197c9b4c1484bc46b190e11c1c04d153cdd85a48b176a99d5aa1",
+        "size_bytes": 35822
+      },
+      {
+        "path": "data/evaluation/meetings-c2-validation-v1/context-selection.json",
+        "sha256": "d5afefbdea235d2c6382098ee6317fdc47dbd9247bf95cb52eae98886bd274d4",
+        "size_bytes": 19245
+      },
+      {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-authoring-receipt.json",
+        "sha256": "9d6a596e4ee6e2d563d5548fbcda04e187001e15f550fb6cffcc883889a7964d",
+        "size_bytes": 7029
+      },
+      {
+        "path": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+        "sha256": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6",
+        "size_bytes": 42158
+      }
+    ],
+    "original_artifacts_unchanged": true,
+    "prior_independent_prereview_completed": 12,
+    "prior_accepted_items": 10,
+    "prior_rejected_items": 2,
+    "prior_change_requests": 2,
+    "prior_review_is_not_acceptance_of_this_revision": true
+  },
+  "artifacts": [
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/draft-v2.json",
+      "sha256": "b328037fe138b2d3472eff268f51df5251d7d7ecba190278a42e538a37bd7a5e",
+      "size_bytes": 51402
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/oracle-draft-v2.json",
+      "sha256": "4ace235ba3b639e6252f1848d60ed0e165eb69bbf4d29e2304c914cf83f75916",
+      "size_bytes": 37583
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/context-selection-v2.json",
+      "sha256": "5e7693d9acef548331edee83a886411a0a1752b8e2dea6792579a0b1beaf6cf9",
+      "size_bytes": 20680
+    }
+  ],
+  "source_inventory": {
+    "path": ".local/c2-source-inventory-validation-full-v1/inventory.json",
+    "sha256": "49ce4cf4fb20096227064cb7a6108fc1bcf5aa306d8b4d7205eb089af6d7a2e5",
+    "size_bytes": 194305,
+    "documents": 6,
+    "chunks": 77
+  },
+  "freeze_integrity": [
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json",
+      "sha256": "aa4d95bb6a90edec06a4b02375ac04591cfbdc54f91b068178852ccc1da39c45",
+      "size_bytes": 2647,
+      "bound_files": 12,
+      "all_bound_bytes_match": true
+    },
+    {
+      "path": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+      "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+      "size_bytes": 3522,
+      "bound_files": 18,
+      "all_bound_bytes_match": true
+    },
+    {
+      "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+      "size_bytes": 5579,
+      "bound_files": 41,
+      "all_bound_bytes_match": true
+    }
+  ],
+  "correction_scope": {
+    "changed_items": 2,
+    "unchanged_items": 10,
+    "questions_changed": 0,
+    "questions_replaced": 0,
+    "required_fact_texts_changed": 0,
+    "case_ids_or_family_language_expected_status_assignments_changed": 0,
+    "existing_contexts_changed_or_removed": 0,
+    "whole_original_context_occurrences_added": 3,
+    "evidence_spans_added": 8,
+    "broad_categories": [
+      "query_referent_grounding",
+      "required_fact_subject_support"
+    ],
+    "top_level_draft_oracle_selection_metadata_preserved": true,
+    "unmodified_case_bytes_identical_in_all_three_artifacts": true,
+    "unmodified_case_sha256": {
+      "draft-v2.json": {
+        "c2-val-01": "4509b01359560e8fb29104de5ca2441c041c656fb13667a3effd9d58f5c21be1",
+        "c2-val-02": "70eb2265d057479d26b2174716fa072daba020d0a229d29d9b572d6e70bef6d3",
+        "c2-val-03": "0a012ba15980513b168e08b7522ebae1919657a3cdd09176818dc152b2c327bd",
+        "c2-val-04": "572436a257eac96b1219b0b55326c548be05af916f42168f43f06a556a2dc583",
+        "c2-val-05": "9d056b25a9821efd9933dba6abbae40966d9b751448663f563978e4653ecdf75",
+        "c2-val-06": "c175c0403b95003fe3c289f52d965b32f9f615618efd98335579ccfcc014c3cf",
+        "c2-val-08": "bf881fb044bf0c2f65d02647a1b488864633b57755862165807811b415404aad",
+        "c2-val-09": "b0d38db912b4aef68f4fbe9bffac0b56b4de80e0fd03e8546ff1a469f3693ed7",
+        "c2-val-11": "ae1f62b7ef459bba070f5761a865d4440fb7bf7d6a39c3758e7f74e7e11b8863",
+        "c2-val-12": "70c8334ea110ac8d7f59a65169b16422b92be822c7fbca719271231305843c71"
+      },
+      "oracle-draft-v2.json": {
+        "c2-val-01": "457833e6b77cebdcf823b1774a788151fc62a4c37508791011548925911a8ca1",
+        "c2-val-02": "fb67b156bb44f14f30dba5484a2aa7e398bf7016e9ec5822be6f79bba81590c6",
+        "c2-val-03": "424b4c6cb28c1c1263fb235c12de6a761832c217807f314734b5b7c5648d237f",
+        "c2-val-04": "3125f6df85bb084a43da86a4035817bac68137699ea193af7bcd6e97b48a0e61",
+        "c2-val-05": "8e6f799fe28276c6ee694f63a18ba21c6a5a0caac4e31e2fe93c9ecc09f72d1d",
+        "c2-val-06": "3a1dba1b3e17e7b93604ab61ccf2dd31ce7310131e0f0ee13fb8e54b2f0d1072",
+        "c2-val-08": "4765f7c653066f186a16d7210a536fcb0961354899a7eacf716526911c414e89",
+        "c2-val-09": "69268b23a6366feb15ee8f4814d0eeb4805e367b29197bd17d27fdb4ef631b5b",
+        "c2-val-11": "85ff975303e36e5adbdd84708748b95f6a5786fccfb0de98e33fcb21b28e32e1",
+        "c2-val-12": "a71d29aad81ea6b34b492115e5b58e71209f679a5118884eb8a0468f35cb89dd"
+      },
+      "context-selection-v2.json": {
+        "c2-val-01": "c58eec7443b0797d6942549a76d73214170caf651b7dbff400e9df5994b8838c",
+        "c2-val-02": "f256254e48e48e7bc9c4bb748218165d4cb33d55e8729f25958acb97ac2fd8d7",
+        "c2-val-03": "61aa4fd5aa894b441cb084f06fec09d4ca500e27d4980d6f8529510f3722bc18",
+        "c2-val-04": "2ece25db205d607fce2a68a5d83f6ee12ff7c8faa6b318ba797b2c4a48e27603",
+        "c2-val-05": "7f2d6f503dfdf94ea763a10767f04950dec065da03952e0f7dda7785ad54fc57",
+        "c2-val-06": "f4cf68d7846edd8411ac6074cc6cf1042457667fd7eff51249000a5d4475d570",
+        "c2-val-08": "a7cf2493d08d0ce7f703509b4d2bf8f39726e64518d86b15bcd79a201fbdc5cf",
+        "c2-val-09": "5d0decbdb7f0bc2f6d89dc8a83b42dad32b3dd211aac490defa7b72d522b8598",
+        "c2-val-11": "086a746c0c6256bc3fa48776c7a1fedb38af4406e9f5c3d4eba21bcee8aea8d9",
+        "c2-val-12": "5a11adf55a1859c90ff3d4380bfc0926e18f99a99765f16d627f9bdc738a4d49"
+      }
+    }
+  },
+  "isolated_corrections": [
+    {
+      "case_id": "c2-val-07",
+      "change_request_id": "C2-VAL-PREREVIEW-01",
+      "original_question_and_required_facts_preserved": true,
+      "added_whole_chunks": [
+        "c2-f04-doc-01-r1-c0000",
+        "c2-f04-doc-02-r1-c0000"
+      ],
+      "reason": "The supplied contexts previously lacked the queried policy and order identifiers and the explicit production-manager role mapping. Add both original c0000 chunks. Conjoin the policy identifier and production-manager-to-name anchor with the existing checklist evidence. Conjoin the order identifier with the existing acceptance evidence and separately with each of the two unchanged complete actual-start date alternatives.",
+      "alternatives_preserved": true,
+      "date_spans_and_event_spans_preserved": true,
+      "new_independent_review_status": "pending"
+    },
+    {
+      "case_id": "c2-val-10",
+      "change_request_id": "C2-VAL-PREREVIEW-02",
+      "original_question_and_required_facts_preserved": true,
+      "added_whole_chunks": [
+        "c2-f04-doc-02-r1-c0000"
+      ],
+      "reason": "The selected final update did not identify the queried order. Add the original order c0000 chunk and conjoin its order identifier with each of the three existing date-plus-event/status alternatives. Dates and event/status spans remain unchanged.",
+      "alternatives_preserved": true,
+      "date_spans_and_event_spans_preserved": true,
+      "new_independent_review_status": "pending"
+    }
+  ],
+  "composition": {
+    "C2-F03": {
+      "items": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2,
+      "multifactual_answered": 4,
+      "necessary_multisource_answered": 2,
+      "partial_known_missing_abstentions": 2
+    },
+    "C2-F04": {
+      "items": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2,
+      "multifactual_answered": 4,
+      "necessary_multisource_answered": 2,
+      "partial_known_missing_abstentions": 2
+    }
+  },
+  "checks": {
+    "answer_request_payloads_valid": 12,
+    "oracle_file_valid": true,
+    "validate_oracles_validation_passed": true,
+    "exact_evidence_alternatives": 31,
+    "exact_evidence_spans": 50,
+    "whole_original_context_occurrences_checked": 24,
+    "context_minimum": 1,
+    "context_maximum": 5,
+    "context_limit": 10,
+    "all_context_text_metadata_offsets_equal_inventory": true,
+    "selection_bindings_and_registration_chunk_order_match": true,
+    "no_trim_merge_or_resegmentation": true,
+    "original_cases_unchanged_byte_equivalent": 10,
+    "changed_cases_limited_to_two_requested": true,
+    "all_original_question_strings_preserved": true,
+    "all_original_oracle_metadata_required_fact_texts_and_evidence_preserved": true,
+    "whole_family_missing_facet_audits_unchanged": 4,
+    "independent_semantic_acceptance_established": false
+  },
+  "review_state": {
+    "author_self_review_corrected_items": 2,
+    "author_self_review_is_independent": false,
+    "planned_independent_prereviewer": "/root/c2_validation_source_review",
+    "actual_independent_item_prereviews_for_v2": 0,
+    "v2_independent_item_prereview_status": "pending",
+    "unchanged_oracle_limitations_remain_historical_author_stage_statements": true,
+    "human_reviews": 0
+  },
+  "calls_and_feedback": {
+    "official_tokenizer_runs": 0,
+    "candidate_catalog_calls": 0,
+    "candidate_adapter_calls": 0,
+    "service_model_calls": 0,
+    "paid_api_calls": 0,
+    "network_calls": 0,
+    "tokenizer_feedback_seen": false,
+    "service_output_feedback_seen": false,
+    "basis": "Only isolated independent prereview requests and preserved source evidence; no token/output feedback."
+  },
+  "isolation": {
+    "calibration_or_old_pools_read": false,
+    "candidate_adapter_prompt_catalog_implementation_read": false,
+    "generic_request_oracle_validation_contract_used": true,
+    "calibration_bound_file_hashing_only_without_decoding": true,
+    "semantic_content_sent_to_parent": false,
+    "future_independent_output_judge_eligible": false
+  },
+  "ownership": {
+    "only_new_files": [
+      "data/evaluation/meetings-c2-validation-v1/draft-v2.json",
+      "data/evaluation/meetings-c2-validation-v1/oracle-draft-v2.json",
+      "data/evaluation/meetings-c2-validation-v1/context-selection-v2.json",
+      "data/evaluation/meetings-c2-validation-v1/item-authoring-receipt-v2.json"
+    ],
+    "existing_files_changed": 0,
+    "git_operations": 0,
+    "global_docs_changed": 0,
+    "released_to_parent": true
+  },
+  "limitations": [
+    "This corrective draft has no new independent item acceptance yet; do not freeze or tokenize it before separate review.",
+    "The prior rejected revision and review remain unchanged.",
+    "AI author self-review and schema checks do not constitute independent semantic acceptance.",
+    "No human review, model quality evaluation or service adoption is established."
+  ]
+}

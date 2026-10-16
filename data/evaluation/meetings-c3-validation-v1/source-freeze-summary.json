@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "phase": "validation",
+  "kind": "source_freeze_metadata_summary",
+  "created_at": "2026-10-14T07:33:06.874404+00:00",
+  "status": "validated_pending_parent_commit",
+  "parent_safe_metadata_only": true,
+  "source_freeze": {
+    "path": "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json",
+    "sha256": "abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733",
+    "size_bytes": 1838
+  },
+  "source_prereview": {
+    "path": "data/evaluation/meetings-c3-validation-v1/source-prereview.json",
+    "sha256": "2bbe229755d1bfadb798d4bb1adcf6daf80d04c01ef9053579c47a339d7a8663",
+    "size_bytes": 19257
+  },
+  "counts": {
+    "role_bindings": 5,
+    "raw_source_bindings": 4,
+    "total_bindings": 9,
+    "families": 2,
+    "public_documents": 2,
+    "synthetic_documents": 2,
+    "documents": 4,
+    "whole_chunks": 38,
+    "accepted_documents": 4,
+    "rejected_documents": 0,
+    "required_changes": 0,
+    "metadata_errors": 0,
+    "human_reviews": 0
+  },
+  "authorship": {
+    "adoption_and_synthetic_author_ids": [
+      "/root/c2_validation_source_b"
+    ],
+    "prereviewer_id": "/root/c2_validation_source_review",
+    "distinct_roles_verified": true,
+    "source_author_and_prereviewer_excluded_from_independent_output_judging": true
+  },
+  "contract_checks": {
+    "exact_source_freeze_schema": true,
+    "exact_role_and_raw_binding_set": true,
+    "validation_namespace_all_bindings": true,
+    "validate_inventory": true,
+    "validate_processing_receipts": true,
+    "check_prereview": true,
+    "registered_family_composition": true,
+    "public_repository_and_pinned_commit": true,
+    "public_registered_and_actual_git_blob_sha1": true,
+    "manifest_registry_and_toolchain_references": true,
+    "all_bound_file_actual_sha256": true,
+    "original_inventory_processing_java_receipt_bytes": true,
+    "existing_source_artifacts_preserved": true
+  },
+  "frozen_binding_checks": [
+    {
+      "group": "c3_toolchain",
+      "freeze": {
+        "path": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+        "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+        "size_bytes": 7576
+      },
+      "binding_count": 66,
+      "all_actual_bytes_match": true
+    },
+    {
+      "group": "c3_candidate",
+      "freeze": {
+        "path": "data/evaluation/meetings-c3-candidate-source-freeze-v1.json",
+        "sha256": "6ce55cb17d264f8da7c587c685947da8d95ff1199ef65f7f34de7d1a275798c6",
+        "size_bytes": 3791
+      },
+      "binding_count": 28,
+      "all_actual_bytes_match": true
+    },
+    {
+      "group": "c2_budget",
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-input-budget-source-freeze-v1.json",
+        "sha256": "fe8307dfef4e0d4933dd5f894918303980e291a0b7f2a518a71a7e9484b61a99",
+        "size_bytes": 8971
+      },
+      "binding_count": 72,
+      "all_actual_bytes_match": true
+    },
+    {
+      "group": "c2_comparison",
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+        "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+        "size_bytes": 5579
+      },
+      "binding_count": 41,
+      "all_actual_bytes_match": true
+    },
+    {
+      "group": "c2_processing",
+      "freeze": {
+        "path": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+        "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+        "size_bytes": 3522
+      },
+      "binding_count": 18,
+      "all_actual_bytes_match": true
+    }
+  ],
+  "java_parity": {
+    "receipt": {
+      "path": "data/evaluation/meetings-c3-validation-v1/java-parity.json",
+      "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+      "size_bytes": 1908
+    },
+    "documents": 4,
+    "whole_chunks": 38,
+    "exact_content_pages_chunk_text_offsets_ordinals_ids": true,
+    "java_version": "21.0.12.1",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "original_receipt_crlf_count": 40,
+    "maven_invocations_this_task": 0
+  },
+  "existing_artifacts_unchanged": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/.gitattributes",
+      "sha256": "daa3fbd3add46395a26c3686200a199def24f2994501ed2e7feb7dd782ca92aa",
+      "size_bytes": 76
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/ATTRIBUTION.md",
+      "sha256": "96d74311a09eb91481851f07f7fc94dd8d91d90352b66d9fee434796090fe609",
+      "size_bytes": 2593
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/inventory.json",
+      "sha256": "407d8c66c842936e988c9e47e4172e44e84f0c748a22005a44fb20e64b3fb75c",
+      "size_bytes": 101281
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/java-parity.json",
+      "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+      "size_bytes": 1908
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-LICENSE.txt",
+      "sha256": "26041bd625fc39411dc4b32748216236931c904adb90c2b3e0ba697090a5d54e",
+      "size_bytes": 1292
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-documentation-license.md",
+      "sha256": "9263c69ea49f938516831e56f7f62372d67004b1a74648a0b59b13aacf40a701",
+      "size_bytes": 1599
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/processing-receipt.json",
+      "sha256": "b7a69e6fc3a75ba2098daa3fe456069f02b1a6b7a10cafcfa088ddfe9f7e6c73",
+      "size_bytes": 3906
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-adoption-summary.json",
+      "sha256": "3723faa1fe25d0b6d39c97c4972c0efe83e9411a401c10c9b1e7f9fe5ca326ff",
+      "size_bytes": 3883
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-authoring-receipt.json",
+      "sha256": "dd0b7706ebd808dde7e4f8018d6f4470eb4faac182258f32d4a44626dc9c756f",
+      "size_bytes": 8022
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-manifest.json",
+      "sha256": "4af98dd1cfc8d026b84ff8d497ceac2ef53ba025214e1bbf49bddc370feb16a0",
+      "size_bytes": 14709
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-prereview.json",
+      "sha256": "2bbe229755d1bfadb798d4bb1adcf6daf80d04c01ef9053579c47a339d7a8663",
+      "size_bytes": 19257
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-01.md",
+      "sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+      "size_bytes": 19342
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-02.md",
+      "sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+      "size_bytes": 9434
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-01.md",
+      "sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+      "size_bytes": 3187
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-02.md",
+      "sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+      "size_bytes": 3175
+    }
+  ],
+  "new_activity_counts": {
+    "source_edits": 0,
+    "question_authorship": 0,
+    "oracle_authorship": 0,
+    "context_selection": 0,
+    "official_tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "native_calls": 0,
+    "network_calls": 0,
+    "paid_calls": 0,
+    "human_reviews": 0,
+    "git_operations": 0
+  },
+  "completion_limits": {
+    "source_freeze_commit_performed": false,
+    "parent_git_index_byte_verification_pending": true,
+    "questions_must_wait_for_source_freeze_commit": true,
+    "ownership_returned": true
+  }
+}

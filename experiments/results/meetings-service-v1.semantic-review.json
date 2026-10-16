@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "kind": "independent_ai_semantic_review",
+  "review_date": "2026-10-13",
+  "report_path": "experiments/results/meetings-service-v1.json",
+  "report_sha256": "c589f89cacbc61d9ba69a4017c7dd1916cf8fa615cc4c0e9a727bb4d243f2a07",
+  "report_execution_status": "failed",
+  "report_failure": "http_503_generation_invalid_evidence",
+  "reviewer": {
+    "agent_task": "/root/meetings_review",
+    "actual_tool_accepted_settings": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "evidence": "parent_reported_tool_accepted_spawn_from_continuation_record",
+      "independently_exposed_in_reviewer_context": false
+    },
+    "human_review_count": 0,
+    "ai_authored": true,
+    "independent_of_model_inference_execution": true
+  },
+  "scope": {
+    "completed_analysis_entries": 2,
+    "completed_answer_entries": 1,
+    "public_meeting_source_count": 2,
+    "public_ordinary_document_source_count": 1,
+    "synthetic_output_entries_reviewed": 0,
+    "m5_validation_accessed": false,
+    "model_or_gpu_calls_by_reviewer": 0,
+    "source_span_checks": "Recorded automated source-span checks are separate from this semantic assessment; exact matching is not semantic correctness.",
+    "evaluation_limit": "Development inspection of completed recorded outputs only; not a held-out model-quality evaluation, M5 readiness result, or human acceptance."
+  },
+  "reviewed_fixture_sha256": {
+    "tests/fixtures/meetings/public/jupyter-february-2025.md": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+    "tests/fixtures/meetings/public/jupyter-june-2025.md": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+    "tests/fixtures/meetings/public/jupyter-host-guide.md": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f"
+  },
+  "bound_execution_source_sha256": {
+    "src/doctrail/meeting_contract.py": "208f24f4633d9d697a49645f2919402c5f0b72c165a8bda3f328739c33f7a2c2",
+    "src/doctrail/meeting_runtime.py": "a37fbb85bc104431335a1cc35335b0f49936845048263b119747f10c7c7cd254",
+    "src/doctrail/meeting_worker.py": "cc6b78668fb6997c8ff1209f8485f9997d6a0c33b35caeda034f60ae78a6cb3b",
+    "server/src/main/java/io/doctrail/ApiController.java": "896b44d40979a0492fc92dcf5e01d746993bf40650262d810369296b76284517",
+    "server/src/main/java/io/doctrail/ApiError.java": "0fc30aa8140a6b28b44a8a8986aa7e4f243cde6971e134298612dab4afb2f103",
+    "server/src/main/java/io/doctrail/ApiErrors.java": "2d25063362709c8aec8ed0ed03c69193c36b54f3126b47beec416d38099763eb",
+    "server/src/main/java/io/doctrail/Auth.java": "4595bd0dfb079c792fc836032291edcbb1605952ec4f5a60806b11927b923ab8",
+    "server/src/main/java/io/doctrail/DocTrailApplication.java": "9c0a201ca1230abc169c7fc49754360847db0d8ec77e017b41c5fa7d57f6c226",
+    "server/src/main/java/io/doctrail/DocumentService.java": "5a92a56f64903f0789dba588589ae2e0deb408f21ddb31487b5083526d5c6a63",
+    "server/src/main/java/io/doctrail/FrontendController.java": "c675845e45482abd99c91e375b471bb96228661f6a239f4ff90fec3cefd8cd76",
+    "server/src/main/java/io/doctrail/GenerationClient.java": "435bc4017bdba87e1fc4b616c622c74406751fe525a0a8aef06e57a7b65a4bb2",
+    "server/src/main/java/io/doctrail/InferenceClient.java": "a7d3dc950b2d39c1893c739687a81b47916f800f3c6152adba049a40db5abed0",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/KnowledgeService.java": "bbf647232d00cc7493b51f7c63896a34872504d8c7bf10f29ce1694eaa594c83",
+    "server/src/main/java/io/doctrail/LearnedSearch.java": "b20c5cdc2ca4645e30043d27d76e9e86c61d73709e3c5ac06eee9675b2221bf0",
+    "server/src/main/java/io/doctrail/MeetingAnalysis.java": "96a8d289882dc25d7c76da7809456928976220b364ce3c10193eb03290eba21d",
+    "server/src/main/java/io/doctrail/MeetingController.java": "d6c8a4e86292465323277e5782a640019eb73d68382d6dc1c7d952a881af30ac",
+    "server/src/main/java/io/doctrail/MeetingService.java": "b0dbd45561530e62bc419b04790eb1345c1180647ff3becd79d6df01656b1536",
+    "server/src/main/java/io/doctrail/RequestGuard.java": "bc025143500ff8a4f9a5707b0e90c4ef60bcb024fac19b6cc49e0220f24dad98",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/main/java/io/doctrail/Store.java": "932f5949aaa57f6c5121ff6f98422626592b5145639624c3309a5796c58ebdc7",
+    "scripts/verify_meeting_service.py": "b5cca97e766d09767184182979724894fc614f40c3a4563d68bd94f5786a972a"
+  },
+  "analysis_reviews": [
+    {
+      "entry_index": 0,
+      "fixture": "tests/fixtures/meetings/public/jupyter-february-2025.md",
+      "document_id": "c715324744a14cb1832c75476b4cd7e2",
+      "source_revision": 1,
+      "model_call_completed": true,
+      "review_status": "supported_content_with_material_omissions",
+      "metadata": {
+        "meeting_title": "correct_and_source_supported",
+        "meeting_date": "correct_and_source_supported",
+        "participants": {
+          "assessment": "matches_explicit_attendance_table",
+          "count": 23
+        },
+        "purpose": {
+          "assessment": "incorrect_omission",
+          "returned": null,
+          "evidence": {
+            "quote": "Think of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+            "start_offset": 2553,
+            "end_offset": 2680
+          },
+          "explanation": "The explicit Purpose section states the meeting purpose; null does not mean this field was absent from the source."
+        }
+      },
+      "summary": {
+        "factual_support": "All four summary lines are extractive and supported by the source.",
+        "coverage": "inadequate",
+        "boilerplate_line_count": 3,
+        "total_line_count": 4,
+        "explanation": "Discourse, recording and notes-publication boilerplate occupy three slots. Governance/elections, JupyterLab and the other major agenda presentations are absent.",
+        "not_abstractive_summary": true
+      },
+      "items": {
+        "count": 19,
+        "type_counts": {
+          "topic": 19
+        },
+        "all_statuses": "needs_confirmation",
+        "false_confirmed_decisions_found": 0,
+        "invented_assignees_or_deadlines_found": 0,
+        "classification_issue": "Logistics and bare links are included as substantive topics despite their boilerplate role.",
+        "named_task_recall": "not_established_by_these_sources",
+        "decision_proposal_distinction_positive_case": "not_established_by_these_sources",
+        "notes": "The public sources are principally announcements and agendas, not a controlled positive test of explicit task assignment or adopted decisions. No unsupported decision change or task assignment was found in the completed outputs."
+      }
+    },
+    {
+      "entry_index": 1,
+      "fixture": "tests/fixtures/meetings/public/jupyter-june-2025.md",
+      "document_id": "6f0c906c19f6443f997c9a05d0c3c7cc",
+      "source_revision": 1,
+      "model_call_completed": true,
+      "review_status": "supported_content_with_material_omissions",
+      "metadata": {
+        "meeting_title": "correct_and_source_supported",
+        "meeting_date": "correct_and_source_supported",
+        "participants": {
+          "assessment": "matches_explicit_attendance_table",
+          "count": 16
+        },
+        "purpose": {
+          "assessment": "incorrect_omission",
+          "returned": null,
+          "evidence": {
+            "quote": "Think of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+            "start_offset": 1662,
+            "end_offset": 1789
+          },
+          "explanation": "The explicit Purpose section states the meeting purpose; null does not mean this field was absent from the source."
+        }
+      },
+      "summary": {
+        "factual_support": "All four summary lines are extractive and supported by the source.",
+        "coverage": "inadequate",
+        "boilerplate_line_count": 2,
+        "total_line_count": 4,
+        "explanation": "Recording and notes-publication boilerplate occupy two slots. Major topics including JupyterCon, workshops, GeoJupyter, JupyterHub, JupyterHealth and JupyterLite are absent.",
+        "not_abstractive_summary": true
+      },
+      "items": {
+        "count": 19,
+        "type_counts": {
+          "topic": 19
+        },
+        "all_statuses": "needs_confirmation",
+        "false_confirmed_decisions_found": 0,
+        "invented_assignees_or_deadlines_found": 0,
+        "classification_issue": "Logistics and bare links are included as substantive topics despite their boilerplate role.",
+        "named_task_recall": "not_established_by_these_sources",
+        "decision_proposal_distinction_positive_case": "not_established_by_these_sources",
+        "notes": "The public sources are principally announcements and agendas, not a controlled positive test of explicit task assignment or adopted decisions. No unsupported decision change or task assignment was found in the completed outputs."
+      }
+    }
+  ],
+  "answer_reviews": [
+    {
+      "entry_index": 0,
+      "query": "What does the host guide say about the agenda link?",
+      "status": "answered",
+      "model_called": true,
+      "claim_count": 1,
+      "semantic_assessment": "supported_and_adequately_answers_question",
+      "explanation": "The guide explicitly says to include the agenda link in the shared Google Calendar event description. The answer states that requirement and cites the corresponding passage.",
+      "cross_document_synthesis_demonstrated": false,
+      "abstention_demonstrated": false
+    }
+  ],
+  "unreviewed_failure": {
+    "error": "http_503_generation_invalid_evidence",
+    "semantic_assessment": "not_assessable",
+    "explanation": "The report records the HTTP generation-evidence failure but not the failed raw answer. Do not infer its claim content, semantic correctness, abstention behavior, or number of claims."
+  },
+  "overall": {
+    "completed_outputs_have_no_identified_substantive_fabrication": true,
+    "extraction_quality_complete": false,
+    "operational_workflow_complete": false,
+    "limitations": [
+      "Both meeting purposes were omitted although explicitly present.",
+      "Both summaries have materially weak coverage dominated by logistics.",
+      "Positive task extraction, proposal-versus-decision distinction, cross-document answer synthesis and valid model abstention are not established by the completed entries.",
+      "The workflow stopped on a generation-evidence error."
+    ],
+    "recommended_reporting": "Two real public meetings were analyzed with source-supported title/date/attendance and extractive items; purpose and summary quality remain deficient. One ordinary-document answer was supported. The run failed before completing the remaining workflow. Human review is zero."
+  }
+}

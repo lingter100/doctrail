@@ -1,0 +1,200 @@
+"""One isolated metadata-only diagnostic of the unchanged preparation function."""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import re
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "src"))
+os.chdir(ROOT)
+for key, value in {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "HF_DATASETS_OFFLINE": "1",
+    "UV_OFFLINE": "true",
+    "PYTHONDONTWRITEBYTECODE": "1",
+}.items():
+    os.environ[key] = value
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def binding(path):
+    return {"path": path.relative_to(ROOT).as_posix(),
+            "sha256": digest(path), "size_bytes": path.stat().st_size}
+
+
+base = ROOT / "data/evaluation/meetings-c2-validation-v1"
+output = ROOT / ".local/c2-validation-inputs-v2-diagnostic1"
+receipt_path = Path(__file__).with_name("failure-diagnostic-receipt.json")
+assert not output.exists() and not receipt_path.exists(), "diagnostic_output_exists"
+freeze_expected = {
+    base / "item-freeze-v2.json": "192f15a2ac9b22ace58e86b30446d1758d5f1dab78cf106c8969cb1a7944483a",
+    ROOT / "data/evaluation/meetings-c2-comparison-source-freeze-v2.json": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+}
+freeze_receipts = []
+for path, expected in freeze_expected.items():
+    assert digest(path) == expected, "frozen_metadata_digest"
+    bound = json.loads(path.read_bytes())["bound_files"]
+    measured = {name: digest(ROOT / name) for name in bound}
+    assert measured == bound, "frozen_bound_digest"
+    freeze_receipts.append({**binding(path), "measured_bound_files": measured,
+                            "bound_count": len(bound)})
+prior_logs = [ROOT / (".local/c2-validation-token-preparation-v2-failure."
+                    + label + ".bin") for label in ("stdout", "stderr")]
+prior_bindings = [binding(path) for path in prior_logs]
+assert prior_bindings[1]["sha256"] == "ae5d56c2bc3ab950855b841236e619a91205fae0f3b78379c39a80ebe30521d7"
+draft = json.loads((base / "draft-v2.json").read_bytes())
+case_ids = [case["id"] for case in draft["cases"]]
+
+from scripts.prepare_meeting_blocks_inputs import prepare
+from scripts.check_meeting_review_token_budget import count_prompt, load_tokenizer
+
+events = []
+token_rows = []
+loader_calls = 0
+counter_calls = 0
+tokenizer_metadata_sha256 = None
+
+
+def loader(allow_download):
+    global loader_calls, tokenizer_metadata_sha256
+    loader_calls += 1
+    events.append({"event": "loader_enter", "call": loader_calls,
+                   "allow_download": allow_download})
+    # Exact original argument, no replacement loader or tokenizer.
+    result = load_tokenizer(allow_download)
+    tokenizer_metadata_sha256 = hashlib.sha256(
+        json.dumps(result[1], sort_keys=True, ensure_ascii=False,
+                   separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    events.append({"event": "loader_return", "call": loader_calls})
+    return result
+
+
+def counter(tokenizer, prompt):
+    global counter_calls
+    counter_calls += 1
+    ordinal = counter_calls - 1
+    row = {"call": counter_calls, "case_id": case_ids[ordinal // 2],
+           "arm": ("L0", "C2")[ordinal % 2]}
+    events.append({"event": "counter_enter", **row})
+    # The original prompt object and tokenizer are passed without inspection or changes.
+    value = count_prompt(tokenizer, prompt)
+    row["value_is_integer"] = type(value) is int
+    if type(value) is int:
+        row["official_input_tokens"] = value
+    token_rows.append(row)
+    events.append({"event": "counter_return", "call": counter_calls})
+    return value
+
+
+status = "failed"
+error_class = None
+error_code = None
+stage = "prepare_entry"
+safe_frame_metadata = {}
+successful_receipt = None
+try:
+    successful_receipt = prepare(base / "draft-v2.json", output, "validation",
+                                 loader=loader, counter=counter)
+    status = "succeeded_on_diagnostic_invocation"
+    stage = "completed"
+except Exception as exc:
+    error_class = type(exc).__name__
+    message = str(exc)
+    error_code = (message if re.fullmatch(r"[a-z][a-z0-9_]{0,119}", message)
+                  else "exception_detail_suppressed")
+    trace = exc.__traceback__
+    while trace is not None:
+        frame = trace.tb_frame
+        if frame.f_code is prepare.__code__:
+            line = trace.tb_lineno
+            local = frame.f_locals
+            if line <= 86:
+                stage = "strict_schema_or_file_preflight"
+            elif line == 94:
+                stage = "catalog_construction"
+            elif line == 95:
+                stage = "grammar_validation"
+            elif line <= 97:
+                stage = "message_construction"
+            elif line <= 100:
+                stage = "tokenizer_loading_or_metadata"
+            elif line <= 106:
+                stage = "token_count_or_budget_validation"
+            else:
+                stage = "output_integrity_or_persistence"
+            safe_frame_metadata["frozen_prepare_line"] = line
+            if local.get("arm") in ("L0", "C2"):
+                safe_frame_metadata["arm"] = local["arm"]
+            if isinstance(local.get("requests"), list):
+                safe_frame_metadata["schema_validated_requests"] = len(local["requests"])
+                for i, request in enumerate(local["requests"]):
+                    if local.get("request") is request:
+                        safe_frame_metadata["case_id"] = case_ids[i]
+            if isinstance(local.get("prompts"), list):
+                safe_frame_metadata["completed_item_message_pairs"] = len(local["prompts"])
+            current = local.get("case")
+            if stage == "token_count_or_budget_validation" and isinstance(current, dict):
+                safe_frame_metadata["case_id"] = current["id"]
+        trace = trace.tb_next
+
+for item in freeze_receipts:
+    path = ROOT / item["path"]
+    assert digest(path) == item["sha256"], "post_run_frozen_metadata_digest"
+    assert {name: digest(ROOT / name) for name in item["measured_bound_files"]} == item["measured_bound_files"], "post_run_frozen_bound_digest"
+assert [binding(path) for path in prior_logs] == prior_bindings, "prior_failure_changed"
+
+result = {
+    "schema_version": 1,
+    "phase": "validation",
+    "kind": "metadata_only_preparation_failure_diagnostic",
+    "created_at": datetime.now(timezone.utc).isoformat(),
+    "author_role": "/root/c2_validation_source_b",
+    "actual_tool_settings_parent_verified": {"model": "gpt-6-astra", "reasoning_effort": "xhigh"},
+    "diagnostic_entrypoint": binding(Path(__file__)),
+    "original_cli_invocations": 1,
+    "new_instrumented_prepare_invocations": 1,
+    "total_preparation_invocations": 2,
+    "prior_failure": {"public_error_code": "input_preparation_failed", "records": prior_bindings,
+                      "original_output_directory_exists": (ROOT / ".local/c2-validation-inputs-v2").exists(),
+                      "specific_internal_cause_was_not_recorded": True},
+    "diagnostic": {"status": status, "stage": stage, "exception_class": error_class,
+                   "safe_error_code": error_code, **safe_frame_metadata},
+    "draft": binding(base / "draft-v2.json"),
+    "measured_frozen_bindings": freeze_receipts,
+    "tokenizer_loader_calls": loader_calls,
+    "token_counter_calls": counter_calls,
+    "tokenizer_metadata_sha256": tokenizer_metadata_sha256,
+    "events": events,
+    "measured_integer_tokens": token_rows,
+    "diagnostic_output": {"path": output.relative_to(ROOT).as_posix(), "exists": output.exists()},
+    "frozen_files_and_prior_failure_records_unchanged": True,
+    "original_loader_counter_and_arguments_unchanged": True,
+    "source_question_context_or_policy_changes": 0,
+    "model_or_gpu_runtime_launches": 0,
+    "service_generation_calls": 0,
+    "downloads": 0,
+    "paid_calls": 0,
+    "raw_text_prompt_catalog_or_trace_recorded": False,
+    "ownership_released": True,
+}
+if successful_receipt is not None:
+    result["successful_diagnostic_outputs"] = [binding(output / name) for name in ("input.json", "receipt.json")]
+    result["first_failure_explained_by_success"] = False
+with receipt_path.open("x", encoding="utf-8", newline="\n") as stream:
+    json.dump(result, stream, ensure_ascii=False, indent=2)
+    stream.write("\n")
+print(json.dumps({"status": status, "diagnostic": result["diagnostic"],
+                  "new_prepare_invocations": 1, "total_prepare_invocations": 2,
+                  "loader_calls": loader_calls, "counter_calls": counter_calls,
+                  "model_calls": 0, "receipt": binding(receipt_path)}, ensure_ascii=True))

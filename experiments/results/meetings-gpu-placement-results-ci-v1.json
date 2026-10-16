@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "meetings-gpu-placement-results-ci-v1",
+  "head": "d95bd26e7e10e58be9f05949149972bb3c2ccd30",
+  "runs": [
+    {
+      "id": 38872380383,
+      "head": "d95bd26e7e10e58be9f05949149972bb3c2ccd30",
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38872380383",
+      "jobs": [
+        {
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 38872386040,
+      "head": "d95bd26e7e10e58be9f05949149972bb3c2ccd30",
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38872386040",
+      "jobs": [
+        {
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "scope": "Job status only; no previous test counts reused",
+  "author_committer_verified": "lingter100",
+  "model_reruns": 0
+}

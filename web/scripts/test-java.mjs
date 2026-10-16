@@ -6,6 +6,7 @@ import { createServer } from 'node:net';
 import { join, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
+import { startMeetingTransportFixture } from './meeting-transport-fixture.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const repo = resolve(root, '..');
@@ -86,10 +87,15 @@ const port = listener.address().port;
 await new Promise((done, reject) => listener.close(error => error ? reject(error) : done()));
 const url = `http://127.0.0.1:${port}`;
 const log = createWriteStream(join(runDirectory, 'java.log'));
+// Only these explicit specs enable a deterministic transport contract fixture.
+// All other browser specs keep generation disabled, regardless of shell env.
+const meetingFixture = ['meeting-ready.spec.ts', 'meeting-conflict-recovery.spec.ts', 'meeting-list-state.spec.ts', 'meeting-link-recovery.spec.ts', 'meeting-save-pending.spec.ts', 'knowledge-source-recovery.spec.ts', 'meeting-detail-recovery.spec.ts', 'meeting-source-access.spec.ts'].includes(process.env.DOCTRAIL_E2E_SPEC.replaceAll('\\', '/').split('/').at(-1))
+  ? await startMeetingTransportFixture() : null;
 const server = spawn(java, ['-jar', jar, '--server.address=127.0.0.1', `--server.port=${port}`], {
   cwd: repo, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],
   env: { ...process.env, DOCTRAIL_DB: join(runDirectory, 'synthetic.sqlite3'),
     DOCTRAIL_INFERENCE_URL: '', DOCTRAIL_INFERENCE_TOKEN: '', DOCTRAIL_EMBEDDING_PROFILE: 'base',
+    DOCTRAIL_GENERATION_URL: meetingFixture?.url || '', DOCTRAIL_GENERATION_TOKEN: meetingFixture?.token || '',
     DOCTRAIL_SECURE_COOKIE: '0', DOCTRAIL_WEB_DIST: join(runDirectory, 'no-filesystem-ui') },
 });
 server.stdout.pipe(log);
@@ -138,6 +144,7 @@ try {
   await Promise.race([serverExit, delay(15_000, undefined, { ref: false })]);
   if (!serverEnded) { server.kill('SIGKILL'); await Promise.race([serverExit, delay(10_000, undefined, { ref: false })]); }
   log.end();
+  if (meetingFixture) await meetingFixture.close();
   process.removeListener('SIGINT', interrupt);
   process.removeListener('SIGTERM', interrupt);
   process.removeListener('message', onMessage);
@@ -147,6 +154,8 @@ try {
     spec: process.env.DOCTRAIL_E2E_SPEC,
     exitCode: result, serverStopped: serverEnded, packagedUi,
     browser: 'Playwright Chromium', humanReview: false,
+    generation: meetingFixture ? 'deterministic-transport-fixture-NOT-LLM' : 'disabled',
+    generationCalls: meetingFixture?.calls || null,
   }, null, 2) + '\n');
   console.log(`Browser check artifacts: ${relative(repo, runDirectory)}`);
   if (!serverEnded) throw new Error('Owned Java server could not be stopped.');

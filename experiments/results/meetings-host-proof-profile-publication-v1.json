@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "exact-host-proof-profile-publication",
+  "copies": [
+    {
+      "source": ".local/meetings-host-proof-profile-v1/receipt.json",
+      "published": "experiments/results/meetings-host-proof-profile-v1.json",
+      "sha256": "c746ebd3615b79c91fadef5d1d6b4d7ce154c447731f2ab9e27f86284203c656",
+      "bytes": 148998
+    },
+    {
+      "source": ".local/host-proof-profile-execution-observer-v1/completed.json",
+      "published": "experiments/results/meetings-host-proof-profile-cli-v1.json",
+      "sha256": "7098ae1c9ea3523519dacbfc36edbbd88d894075139e985fc4b6054d96f0cc1e",
+      "bytes": 1686
+    }
+  ],
+  "byte_identical": true,
+  "pattern_scan_hits": 0,
+  "warm_repeated_snapshot_components_share_range": [
+    0.7860991694166203,
+    0.8309204126597929
+  ],
+  "component_counters_not_nested_sum": [
+    {
+      "index": 0,
+      "component_read_bytes": 7868416,
+      "component_hashed_bytes": 5861376,
+      "git_show_calls": 134,
+      "archive_bytes": 69632
+    },
+    {
+      "index": 1,
+      "component_read_bytes": 5914624,
+      "component_hashed_bytes": 5861376,
+      "git_show_calls": 0,
+      "archive_bytes": 69632
+    },
+    {
+      "index": 2,
+      "component_read_bytes": 5914624,
+      "component_hashed_bytes": 5861376,
+      "git_show_calls": 0,
+      "archive_bytes": 69632
+    },
+    {
+      "index": 3,
+      "component_read_bytes": 5914624,
+      "component_hashed_bytes": 5861376,
+      "git_show_calls": 0,
+      "archive_bytes": 69632
+    },
+    {
+      "index": 4,
+      "component_read_bytes": 5914624,
+      "component_hashed_bytes": 5861376,
+      "git_show_calls": 0,
+      "archive_bytes": 69632
+    },
+    {
+      "index": 5,
+      "component_read_bytes": 5914624,
+      "component_hashed_bytes": 5861376,
+      "git_show_calls": 0,
+      "archive_bytes": 69632
+    },
+    {
+      "index": 6,
+      "component_read_bytes": 5914624,
+      "component_hashed_bytes": 5861376,
+      "git_show_calls": 0,
+      "archive_bytes": 69632
+    }
+  ],
+  "source_head_unchanged": true,
+  "source_bytes_unchanged": true,
+  "additional_profile_runs": 0,
+  "native_calls": 0,
+  "tokenizer_calls": 0,
+  "human_reviews": 0,
+  "limitations": [
+    "Synthetic-only workload; no causal attribution to C4 deadline.",
+    "Pattern scan is not a universal sensitive-data detector.",
+    "Raw generated fixture/archive bytes are reproducible from the frozen generator and retained locally; only metadata is published."
+  ]
+}

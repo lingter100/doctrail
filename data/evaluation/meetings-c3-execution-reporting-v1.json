@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "purpose": "c3_execution_exposure_and_role_reporting_companion",
+  "quality_plan": {
+    "file": "data/evaluation/meetings-c3-quality-plan-v1.json",
+    "sha256": "c5e3f11479e9f240befe1ffcaf83aed0ddcf2288ea294a10bfe0432574def24b"
+  },
+  "review_registration": {
+    "file": "data/evaluation/meetings-c3-review-registration-v1/registration.json",
+    "sha256": "4b4c19a73efa0f37acd522104cecb8b7d24665d3b76f0180c73711a5fc08f675"
+  },
+  "parent_source_exposure": [
+    {
+      "file": "docs/MEETINGS-C3-SOURCE-EXPOSURE.md",
+      "sha256": "ed81354b45befcbbde55773a9c718cdc4db07b18305a305d2e7acb0e3cfeede8"
+    },
+    {
+      "file": "data/evaluation/meetings-c3-source-exposure-v1.json",
+      "sha256": "ca21c3ec5149c71b484382698b943ea200662b5202f650604e16ab716407c6e3"
+    }
+  ],
+  "gate_changed": false,
+  "source_or_prompt_tuning_after_exposure": false,
+  "validation_isolation_claim": "disclosed_parent_source_exposure_deviation_not_pristine_heldout",
+  "quality_generations_at_registration": 0,
+  "human_review_count": 0,
+  "final_report_must_link_this_receipt_and_actual_attestations": true
+}

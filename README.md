@@ -2,13 +2,27 @@
 
 **소규모 개발 조직을 위한 권한 기반 문서 검색과 근거 확인 서비스.**
 
-화면은 **React + TypeScript + Vite**, 서비스 백엔드는 **Java 21 + Spring Boot**다. Python은 데이터 준비·학습·오프라인 평가와 선택적 검색 모델 추론에 사용한다. 기존 Python 서비스와 동결 실험은 보존한다. [Java 전환 범위와 검증](docs/JAVA-MIGRATION.md), [React 선택 이유](docs/decisions/0003-react-frontend.md), [화면 구조와 검증 실행법](docs/FRONTEND.md)을 참고한다.
+화면은 **React + TypeScript + Vite**, 서비스 백엔드는 **Java 21 + Spring Boot**다. Python은 데이터 준비·학습·오프라인 평가와 선택적 검색·회의 분석·답변 모델 추론에 사용한다. 기존 Python 서비스와 동결 실험은 보존한다. [Java 전환 범위와 검증](docs/JAVA-MIGRATION.md), [React 선택 이유](docs/decisions/0003-react-frontend.md), [화면 구조와 검증 실행법](docs/FRONTEND.md)을 참고한다.
 
 새 팀원이 온보딩·운영 문서에서 정보를 찾을 때, 볼 수 있는 문서의 어느 부분이 근거인지 확인하는 흐름을 만든다. 한국어·영어 문서를 대상으로 검색 기준선부터 임베딩·하이브리드·리랭킹·미세조정까지 비교하는 개인 AI Engineer 포트폴리오 프로젝트다.
 
 ## 현재 범위
 
-문서 등록 → 검색 → 원문 근거 확인을 로컬에서 구현·검증했다. 로그인·작업공간·나만 보기 권한, 수정·삭제·재처리, 검색 기록·피드백도 실제 API에 연결했다. 기본 BM25 외에 E5 의미 검색·혼합·BGE 재정렬을 선택할 수 있으며 실제 로컬 GPU와 Java·React 연결을 합성 자료로 검증했다. 생성형 질의응답·서비스 배포는 후속 단계이며, 검색 임베딩의 제한 미세조정은 실제로 수행했다. [현재 상태](docs/STATUS.md), [모델 서비스 실행·한계](docs/MODEL-SERVING.md).
+최근 무료 로컬 자원 비교에서는 같은5064입력·521출력에서 GPU 배치 요청24→28의 전체시간71.485→63.453초를 관측했다. 각1회 고정순서이며 GPU28 종료시점 여유686MiB라 일반 성능·동시사용·답변 품질을 보장하지 않는다. [원본·실측·한계](docs/MEETINGS-GPU-PLACEMENT-RESULTS.md)를 남기고 서비스 기본값은 유지한다. 제품의 [회의 원문 접근·편집 복구](docs/MEETINGS-SOURCE-ACCESS-RECOVERY.md)는 실제 Java/React52개 검사로 확인했다.
+
+최신 회의 확장은 실제 로컬 분석·관리·UI 흐름을 확인했지만 **자연어 답변 품질이 미달이라 1차 전체 완료는 아니다**. 무료·로컬 모델만 사용한다. 정확 인용 9/9와 의미 통과 2/4가 다르게 나온 실패, 보존한 원본, 다음 검증 경계는 [회의 결과](docs/MEETINGS-RESULTS.md)에 기록했다.
+
+후속 주장 검토 방식도 정확 인용58/58과 별개로 전체 의미 기준0/4에 머물렀다. 문단 단위 C2의 별도 실행 역시 언어 오류로 중단됐으며, 정상 반환된7쌍의 사후 진단은 대조군과 후보 모두 완전 정답1/7이었다. 인용 문자열47/47일치가 답변 완전성을 보장하지 않았다. 이 진단은 모델 metadata에 노출된 AI 검토이며 완전 맹검 비교가 아니다. [C1 실패](docs/MEETINGS-C1-RESULTS.md)와 [C2 원본·진단·한계](docs/MEETINGS-C2-BUDGET-RESULTS.md)를 보존한다.
+
+앞선 C3는 요구사항별 근거 계획 후 자연어로 답하는 두 단계 후보를 고정하고 실제6요청/9추론을 완료했다. 독립 최종답변 판정은2/6이며 정확 인용30/30과 의미 정확성은 달랐다. 검증 split 생성과 서비스 채택은 하지 않는다. [실제 C3 결과](docs/MEETINGS-C3-RESULTS.md), [실행·판정 계약](docs/MEETINGS-C3-EXECUTION-CONTRACT.md), [현재 상태](docs/STATUS.md)를 기준으로 완료 여부를 구분한다. 서비스에서는 AI 답변 오류 뒤 같은 질문과 필터로 [원문 검색을 이어가는 흐름](docs/MEETINGS-SEARCH-RECOVERY.md)을 실제 Java/React에서 확인했다.
+
+C4의 단일 사고 경로는 새 자료로 실제 품질 평가를 시작했지만 두 번째 요청의90초 제한 초과로 종료했다. 전송2회 중 정상 파싱1개, 의미 판정0개이며 나머지 calibration4개와 validation8개는 실행하지 않았다. [실패 결과와 원본 기록](docs/MEETINGS-C4-QUALITY-RESULTS.md)을 보존하고 서비스에 채택하지 않는다. 앞선 [자원 검사 통과](docs/MEETINGS-C4-COMPAT-RESULTS.md)와 실제 답변 품질·시간 조건을 구분한다. 별도 합성 저장소의 [모델 없는 검증 비용 측정](docs/MEETINGS-HOST-PROOF-PROFILE-RESULTS.md)은7회 완료됐으며 재사용6회 중앙값2.933초였다. 이는 실제 C4 지연의 원인이나 서비스 성능을 입증한 결과가 아니다.
+
+제품 화면에서는 접근이 거부된 회의의 오래된 작업 목록을 숨기고, 결정 연결 충돌 후 양쪽 회의를 다시 읽어 재선택하게 했다. 다른 회의 목록을 불러오지 못해도 현재 작성 중인 근거는 보존한다. [상세·연결 복구](docs/MEETINGS-DETAIL-RECOVERY.md)는 실제 Java 브라우저에서 검증했고, 모델 답변 품질과 사용자 검수 여부는 따로 기록한다.
+
+문서 등록 → 검색 → 원문 근거 확인을 로컬에서 구현·검증했다. 로그인·작업공간·나만 보기 권한, 수정·삭제·재처리, 검색 기록·피드백도 실제 API에 연결했다. 기본 BM25 외에 E5 의미 검색·혼합·BGE 재정렬을 선택할 수 있으며 실제 로컬 GPU와 Java·React 연결을 합성 자료로 검증했다. 검색 임베딩의 제한 미세조정도 실제로 수행했다. [현재 상태](docs/STATUS.md), [모델 서비스 실행·한계](docs/MODEL-SERVING.md).
+
+회의 기능은 텍스트 등록과 실제 Qwen 분류 기반 **AI 발췌 요약**, 결정·미해결·담당 작업의 원문 근거, 사용자 편집과 명시적 결정 변경 연결을 제공한다. 회의와 일반 문서를 함께 검색하고 실제 로컬 모델로 근거 답변을 생성하는 실험 경로를 추가했다. 작은 모델의 날짜·주체 혼동과 답변 누락을 성공으로 숨기지 않으며 [실제 실행·실패·완료 상태](docs/MEETINGS-RESULTS.md)를 별도로 공개한다. 녹음·STT·외부 회의 연동·외부 서비스 배포는 포함하지 않는다. [회의 실행·API·복구·시연](docs/MEETINGS-RUNBOOK.md), [자료 출처](docs/MEETINGS-DATA.md), [모델 방식과 한도](docs/MEETINGS-AI.md).
 
 M2에서는 공개 한·영 문서 313개, AI 질문 초안 240개와 리비전 후 활성 질문 239개를 준비했다. 개발용 양성 질문 59개에서 top-5 청크의 필수 근거 완전 회수는 **30/59**, 주석상 교차 언어 질문은 **1/23**이었다. 사용자 검수는 0개이고 test 질문 성능은 열지 않았다. 이 실패를 출발점으로 검색 모델을 비교한다. [실측·실패 분석](experiments/README.md), [데이터 재현](data/README.md), [데이터 카드](docs/DATA-CARD.md)를 제공한다.
 
@@ -45,6 +59,8 @@ java -jar server/target/doctrail-server-0.1.0.jar
 
 이전 구현은 `./scripts/start.ps1 -Backend Python`으로 실행한다. AI 실험 실행법은 [M3-RUNBOOK](docs/M3-RUNBOOK.md)을 따른다. 두 서비스를 같은 포트·같은 DB에 동시에 실행하지 않는다.
 
+회의 AI와 Q&A는 위 빌드 후 고정 로컬 Qwen 가중치와 retrieval 의존성을 준비하고 `uv run --locked --group retrieval --no-sync python -m scripts.serve_meetings --port 8000`으로 실행한다. `--retrieval`을 추가하면 E5/BGE는 CPU에서 함께 실행한다. 일반 Java 실행만으로는 모델이 연결되지 않으며 AI 실패 상태를 표시한다. 정확한 준비 조건·대안·한도는 [회의 운영 안내](docs/MEETINGS-RUNBOOK.md)를 따른다.
+
 개발 중에는 API 서버와 별도로 `web/`에서 `npm run dev`를 실행한다. 프런트엔드 개발 서버가 `/api`를 로컬 API 서버로 전달한다.
 
 ## 검증
@@ -77,6 +93,7 @@ npm run build
 - [M5 답변·보류 설계](docs/M5-DESIGN.md), [생성 실측·실패 분석](docs/M5-GENERATION-ANALYSIS.md), [실행·재생](docs/M5-RUNBOOK.md)
 - [M5-B 새 자료·정책 비교 사전등록](docs/M5-CALIBRATION-PLAN.md), [자료 준비 검증·한계](docs/M5B-PREPARATION.md)
 - [자동 후속 실행과 승인 경계](docs/AUTONOMY.md)
+- [회의 확장 설계](docs/MEETINGS-DESIGN.md), [API·실행·복구](docs/MEETINGS-RUNBOOK.md), [실제 결과·한계](docs/MEETINGS-RESULTS.md)
 
 ## 라이선스와 사실 구분
 
