@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C4 새 품질 계약 등록 · 자료 작성 전 전체 도구 고정 필요
+
+[품질 계획](MEETINGS-C4-QUALITY-PLAN.md), meetings-c4-quality-protocol-v1과 family-registry-v1에 단일 사고+block ID 자연어 후보를 등록했다. 전체928/요청사고512/final384/입력5120/90초를 유지하고 새cal6/6→격리val8/8, 최대14품질호출·재시도0이다. 원래 합성marker validator를 수정하거나stress=True로 우회하지 않고 NEW policy/quality adapter/review/prepare/probe/audit와 대응 합성검사를 만든다. candidate만이 아니라 전체 toolchain freeze/commit/CI 전 새source/question/tokenizer/native를 시작하지 않는다.
+
+설계역할의 공개C2 ID별 실패요약 노출과judge제외를 registry에 기록했다. 기존 원문/격리validation 본문을 새로 열지 않았으며 새source/question/oracle/품질0이다. source-first 전체문서 parity와 family별 일반문서/회의구성·양방향교차언어·필수다문서·보류를 계약화했다. 전체goalactive·Phase1/PR14draft를 유지한다.
+
+자원 결과d2fad63의 push38844363465/PR38844368307 모두성공이다. 저장잠금269ce8b도 push38844774581/PR38844779181 필수3job 각각 모두성공이며 PR의실제 Java browser49/0, Python2235/21skip/기존warning1(46.38초)을확인했다. author/committer 모두lingter100이다. 이 CI는정규화된canonical source를검증했으며모델품질통과와는별개다.
+
 ## 저장 대기 중 편집 유실 수정 · 실제 Java23개 통과
 
 실제 PUT 성공 응답을 지연한 baseline에서 입력18개가 추가 요약/담당자/done을 받았지만 응답 후 앞선 스냅샷만 남는 결함을 재현했다. 전체 분석 fieldset을 저장 중 잠그고 상태 안내와 중복submit 방어를 추가했다. 최종 fEzRhN 새2+충돌5+연결4+목록9+기존3=23통과/0실패이며 type/build/package-DskipTests도 통과했다. 실패503은 합성 주입이고 초안 보존/입력 재개/PUT1회를 확인했다. 실제LLM/사용자검수0이다.

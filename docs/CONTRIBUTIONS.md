@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · C4 품질 설계와 노출 구분
+
+기존 free_qa_candidate_review(실제 Astra xhigh)가 자원 원본/새영수증과허용코드를읽어 NEW quality adapter 경계·block ID정책·schema/언어/보류·새split/역할분리·중단조건을제안했다. 공개MEETINGS-C3-PLAN의C2 ID별실패요약을함께보았다고보고했고새문항/예제로재사용하지않으며judge에서제외했다. 격리본문/질문/oracle/test열람·파일수정·모델실행0이다. 부모가정책/registry/계획과구현순서를등록했다. 새자료작성/품질호출/사용자검수0이며현재부모설정변경주장은없다.
+
 ## 2026-10-16 · 저장 대기 편집 유실 재현·수정
 
 meeting_product_audit(기존 Astra xhigh)는 읽기 전용 코드 감사로 결함을 제기했다. 새 meeting_save_pending(실제 Astra high/fork none)은3web파일만 소유해 최초locator오류와 실제Java유실실패를 따로 보존하고 fieldset 수정·새2/관련21 브라우저·type/build/package를 검증했다. 부모는 코드/원본report/전후evidence/390px화면을 확인하고, CRLF→LF만 정규화한 전후hash·영수증·문서·Git을 맡았다. 합성 모델 전송/503을 표시하며 실제LLM/사용자검수0이다.
