@@ -1,5 +1,17 @@
 # 진행 상태
 
+## GPU 입력5064 준비 완료 · 실행계획 커밋 다음
+
+bd4fbf3에서 공식 register1회가 통과했다. Tokenizer load1/unique prompt1/input5064, native/download0, CLI38.797초·exit0·passed summary·HEAD 불변이다. `.local/meetings-gpu-placement-preparation-v1/`와 observer session84452는 완료/소비됐으므로 반복하지 않는다. [준비 기록](MEETINGS-GPU-PLACEMENT-PREPARATION.md)의 plan36b785b0/receipt4debab95/privateinput59127514를 보존한다.
+
+다음은 계획·준비 영수증 커밋 뒤 실제 Git check와 GPU24→28 각최대1회다. 소스59/5120/6144/928/requested512/EOS-final384/90초는 그대로이며 이전 C4·host프로파일은 닫혀 있다. 실제 품질판정과 서비스채택0, 전체goalACTIVE·Phase1/PR14draft다.
+
+## GPU 새 입력 공식 준비 시작 · 중복 실행 금지
+
+최종bd4fbf3의 push38870191406/PR38870197353 필수3job이 각각 모두 성공했다. Author/committer lingter100, source59 working/HEAD 불변을 확인했고 CI영수증26356ddc를 기록했다. 앞선05ab461 push는 성공했지만 PR은 새 커밋으로 취소됐으므로 통과로 세지 않는다.
+
+같은HEAD에서 고정 CLI `register`를 한 번 시작했다. Session84452와 `.local/meetings-gpu-placement-register-observer-v1/`, `.local/meetings-gpu-placement-preparation-v1/`를 먼저 확인하고 중복 등록하지 않는다. 결과는 아직 미확정이다. HEAD를 유지하며 native/추가tokenizer/다운로드는 시작하지 않는다. 준비 성공 시 plan과receipt 커밋 뒤에만 각 arm 최대1회 실행한다. GoalACTIVE·Phase1/PR14draft·무료/로컬이다.
+
 ## 제품 커밋의 영수증 바이트 보완
 
 제품 수정939d21e 커밋에서 원본 영수증의CRLF가 Git text 정규화로 달라진 것을 확인했다. 부모가 staging 실패를 보기 전에 커밋까지 호출한 순서 오류를 별도 기록했다. 원본·실패 커밋은 유지하고 정확한 영수증 경로만 `-text`로 보완했다. 현재 index는 원본dd4aa1ba와 완전히 같고 제품source4도 검증 hash와 같다. 일반 whitespace 검사는 확인된 CRLF 원본1개를 제외하고 통과했다. 수정 후 HEAD의 CI와 byte 증명 전 실제 모델 비교는 시작하지 않는다.
