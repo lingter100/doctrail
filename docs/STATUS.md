@@ -1,5 +1,21 @@
 # 진행 상태
 
+## C4 새 source 12문서 검토 완료 · 원문 복구 32개 통과
+
+Calibration 공개3·합성3의32청크와 격리 validation 공개3·합성3의20청크가 실제 Java parity 각각2개 통과했다. 별도 Astra xhigh 검토자가 각6건 수락/거절0/수정0을 확인해 source를 고정했다. Cal freeze14 SHA8b1bac81, val freeze15 SHAb4a132da이며 [새 원문 기록](MEETINGS-C4-SOURCES.md)의 노출·과거 fingerprint 누락·환경 경로 공개본 처리·초기 helper 실패를 보존한다. 부모는 validation 본문/의미 검토 설명을 열지 않았다.
+
+새 질문/oracle/context/tokenizer/native0이다. Source 40개 공개 파일의 UTF-8·개인 환경 경로 검사·binding hash 검사가 통과했다. Source freeze 커밋 후 새 미노출 calibration item 작성자와 격리 validation item 작성자가6/8개를 작성한다. 기존 source 작성자/검토자는 최종 judge에서 제외하고 원문·도구85·닫힌 pool을 수정하지 않는다.
+
+지식 검색 원문 복구는9b52878로 커밋했다. 수정 전 실제 Java3실패를 재현했고 최종 새8+기존24=32개가 통과했다. 앞선3 selector timeout은 제품 실패와 구분한다. Type/build/package-DskipTests와 부모 AI 화면 확인을 마쳤다. [제품 수정 기록](KNOWLEDGE-SOURCE-RECOVERY.md) 및 영수증d62bcaa8을 따른다. 실제LLM/사용자검수0, 모든 owned Java 서버 종료, 소유권 반환 완료다. 다음은 최종 source 커밋 push/필수CI이며 Phase1/PR14draft·기존goalactive를 유지한다.
+
+## C4 source 준비와 지식 검색 원문 복구를 병행
+
+Source 역할 두 개가 실제 코드/Git 증명을 확인하며 자료를 준비하고 있다. 부모는 이 검사 중 HEAD를 바꾸지 않는다. Validation 보조 스크립트는 역사적 CI 영수증 커밋을 현재 HEAD와 같아야 한다고 잘못 가정해 원문 디렉터리 생성 전에 종료됐다. 최초 시도는 보존하며 새 보조 스크립트에서 선행 커밋 ancestry와 실제 현재 HEAD를 구분한다. 동결 계약 변경이나 tokenizer/native 실행은 없다.
+
+독립 `c4_product_acceptance_audit`(실제 Astra xhigh, 읽기만)가 두 경로를 발견했다. 지식 검색의 오래된 근거에서 재검색이 일반 검색의 다른 질문으로 연결되고, 원문 접근 거부 후에도 지식 검색의 로컬 결과가 남을 수 있다. 실제 결함 판정은 브라우저 재현 뒤에 한다. 새 `knowledge_source_recovery`(실제 Astra high)가 hook/KnowledgeView/SourcePane·새 browser test·runner의5web파일만 소유한다. 동결 실험과 source 자료를 읽거나 변경하지 않는다.
+
+공유 Maven/target은 calibration parity → validation parity → 제품 재현/검증 순서로 사용한다. 다른 실행은 동시 빌드나 중복 테스트를 시작하지 않는다. 제품 변경은 원래 실패 증거를 보존하고 실제 Java 회귀 뒤에만 완료로 기록한다. 일반 자연어 답변 품질과 Phase1 완료는 여전히 별개다.
+
 ## C4 새 원문 작성 시작 · 질문은 아직 금지
 
 CI 영수증 커밋ebc4a86의 push38851548057/PR38851552500도 필수3job이 모두 성공했다. 원문 선택 초기에 두 역할이 같은 공개 저장소를 제안해, 먼저 예약한 validation에 배정하고 calibration은 다른 출처를 고르도록 조정했다. 질문·토큰·모델 결과에 따른 재선택이 아니며 이미 채택한 원문은 없었다. 사전 출처 탐색 이력은 담당자가 보존한다.

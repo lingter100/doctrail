@@ -1,5 +1,15 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 새 source 독립 검토와 실제 제품 복구 완료
+
+`c4_calibration_source_review`·`c4_validation_source_review`는 도구가 수락한 GPT-6 Astra xhigh로 각6개 원문·이용 조건·processing replay·기존 실제 Java parity를 검토하고14/15binding을 고정했다. Maven/tokenizer/native를 재실행하지 않았다. 부모는 hash/metadata와 공개 패키징만 확인했고 validation 본문/의미 설명은 받지 않았다. Calibration receipt 원본을 로컬 보존하고 개인 환경 경로5개를 가린 새 공개본을 만들었으며 URL까지 가렸던 미게시 첫 파생본 오류도 보존했다.
+
+`knowledge_source_recovery`(실제 Astra high)가 수정 전 실제3실패와 최종32통과를 기록하고5web파일 소유권을 반환했다. 부모는 결과 hash·실행별 수치·코드와390px/desktop 화면2개를 확인하고 문서·사용자 명의 커밋9b52878을 만들었다. 단순 timestamp 표기의 소수 자리 차이로 공개 영수증 보조 검사가 처음 멈춘 기록은 runtime 실패와 구분한다. 실제LLM0·사용자검수0이며 부모 모델 설정은 바꾸지 않았다.
+
+## 2026-10-16 · 원문 복구의 별도 제품 검토
+
+새 `c4_product_acceptance_audit`는 도구가 수락한 Astra xhigh로 Java/React 제품 코드만 읽고 지식 검색과 공용 원문 패널 사이 상태 연결 문제2건을 제시했다. 실행·수정·모델 검사는 하지 않았다. 새 `knowledge_source_recovery`는 Astra high/fork none으로5web파일의 재현·수정·검증을 맡았다. 부모는 출처 역할과 공유 Maven 사용 순서를 조정한다. 코드 추정과 실제 재현은 구분하며 현재 사용자 검수는 없다.
+
 ## 2026-10-16 · 새 source 역할의 실제 시작 순서
 
 부모가 CI 영수증 커밋ebc4a86과 실제 Git 증명 통과를 확인한 뒤 `c4_calibration_source`·`c4_validation_source`를 새 fork none, 요청 모델gpt-6-astra/사고xhigh로 호출했고 도구가 수락했다. 각 역할은 원문 작성/채택만 담당하며 질문 작성·최종 출력 판정은 현재 업무가 아니다. 부모는 prior 식별 metadata 추출과 문서/Git을 맡고 validation 본문은 받지 않는다. 과거 source normalized fingerprint를 재계산하기 위해 닫힌 본문을 열지 않았다. 사용자 검수0과 부모 모델 설정 미변경을 유지한다.
