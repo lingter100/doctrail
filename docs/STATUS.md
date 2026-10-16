@@ -1,5 +1,19 @@
 # 진행 상태
 
+## GPU 비교2회 완료 · 28 후보가 이 pair에서8.032초 짧음
+
+7ac7513에서 공식 pair가 종료됐다(session58865 exit0). 실제전송2/파싱2/자원수용2, input5064/output521/EOS/final6은 양쪽 같고 전체요청71.485→63.453초다. Cleanup1.359/1.078초·로그0·owned PID 부재를 확인했다. CLI266.984초·HEAD/source59/기존85/52 불변·private20 hash를 검증했다. 원본c24cc320, 파생공개63ae6b04, 공개기록d058f2fa는 [결과 문서](MEETINGS-GPU-PLACEMENT-RESULTS.md)에 연결했다. 출력경로는 소비됐으므로 재실행하지 않는다.
+
+Native HTTP는59.047→38.094초였지만 검증 두 구간합은12.172→25.094초로 늘었다. fixedorder n1/동시부하·cache·온도 미통제이며 인과·일반 성능을 단정하지 않는다. GPU28 종료시점 free686MiB, 실효offload/FA unknown,928decode/답변의미품질/서비스채택0이다. 기존 실제Astraxhigh `free_qa_candidate_review`가 허용metadata/code만 읽어 다음 최소후보와 host proof 개선 중 한 단계를 검토한다. 새 설계·코드·품질자료·호출은 아직0이다.
+
+계획7ac7513의 push38871087336/PR38871092753 필수3job도 각각 모두 성공을 확인했다. 이번 확인은job 상태만이며 이전 실행의 테스트 수를 가져오지 않는다. 전체goalACTIVE·Phase1/PR14draft·무료/로컬이다.
+
+## GPU24→28 공식 비교 실행 중 · HEAD 유지
+
+입력·계획을 사용자 명의7ac7513으로 커밋·push한 뒤 동일HEAD에서 공식 `run` CLI를 한 번 시작했다. Session58865, `.local/meetings-gpu-placement-run-observer-v1/`와 `.local/meetings-gpu-placement-v1/report.json`을 먼저 확인하고 중복 호출하지 않는다. 결과는 아직 미확정이며 종료 전 HEAD를 바꾸거나 소스59를 수정하지 않는다. 시작 전 DocTrail Java·native·모델 작업이 없는 것을 확인했고 다른 프로젝트의 프로세스는 건드리지 않았다.
+
+최대2arm의 자원 비교이며 실제 질의응답/의미판정/서비스채택0이다. 종료코드·terminal summary·각 arm 상태·cleanup과 미실행 계수를 함께 확인한다. 기존 C4·host프로파일/모든 닫힌 pool은 재실행하지 않는다. 전체goalACTIVE·Phase1/PR14draft다.
+
 ## GPU 입력5064 준비 완료 · 실행계획 커밋 다음
 
 bd4fbf3에서 공식 register1회가 통과했다. Tokenizer load1/unique prompt1/input5064, native/download0, CLI38.797초·exit0·passed summary·HEAD 불변이다. `.local/meetings-gpu-placement-preparation-v1/`와 observer session84452는 완료/소비됐으므로 반복하지 않는다. [준비 기록](MEETINGS-GPU-PLACEMENT-PREPARATION.md)의 plan36b785b0/receipt4debab95/privateinput59127514를 보존한다.
