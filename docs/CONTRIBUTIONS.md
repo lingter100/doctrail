@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · C5 구현과 정적 구성 소유권
+
+설계 커밋 뒤 기존 실제Astrahigh `host_proof_profile`에 NEW8 구현·합성검사를 지시했다. 부모는별도로protocol에서정적family4개와12문서·cal6/val8 구성metadata만생성했다. 새로운source·질문·oracle·tokenizer·native0을확인했고실제자료작성자나judge를미리배정했다고기록하지않는다. 기존모델·실험을재실행하지않는다.
+
 ## 2026-10-16 · C5 설계 완료
 
 기존 실제Astraxhigh `free_qa_candidate_review`가 새C5 설계2파일을 작성·검증했고 소유권을 반환했다. 부모가 추론변수·90초 경계·NEW8·역할격리·동결순서를 검토하고 family구성 동결과 미래role/judge binding의 순환의존이 없도록 구분을 요청했다. 역할이이를반영했다. 실제 자료·문항·tokenizer·native0, 아직 미배정인 담당자와 실제수락한 설계역할을 구분한다.

@@ -1,5 +1,11 @@
 # 진행 상태
 
+## C5 NEW8 구현 시작 · 정적 family 구성 등록
+
+설계571170e를 사용자 명의로 커밋·push한 뒤 기존 실제Astrahigh `host_proof_profile`에 NEW review/prepare/probe/audit와대응tests8개만 맡겼다. 먼저review/prepare4개를 검증한 뒤부모읽기검토와probe/audit4개를 이어간다. 기존policy/adapter/launcher와동결파일은수정하지않고실제tokenizer/native는0이다. 구현증거는 `.local/c5-implementation-v1/`에남긴다.
+
+부모가 내용 없는family registry3b1d9fa7을 생성했다. c5-f01..04와공개/합성·split·문서수·언어/보류 matrix만 기록했고 실제source identity는null이다. Source/item/judge는아직배정하지않았다. 구현역할은schema읽기만하며부모가registry를소유한다. 소스·평가문항작성은전체toolchain동결커밋/CI 뒤이며현재시작하지않는다. 전체goalACTIVE·Phase1/PR14draft·무료/로컬이다.
+
 ## C5 설계 확정 · 검증된 GPU28 후보의 새 품질 관문
 
 실제Astraxhigh 역할이 [C5 계획](MEETINGS-C5-PLAN.md) SHAca635d5b과 protocol306e8a9e을 작성했고 부모가 읽기 검토했다. 추론 설정은GPU28만 바꾸고 기존policy/adapter/GPU launcher를 재사용한다. NEW8(review/prepare/probe/audit+tests4) 구현·동결/CI 뒤 새source12문서와cal6/격리val8을 순서대로 준비한다.90초·기존토큰·cal6/6→val8/8 관문은 그대로다. 자료·tokenizer/native0이며 실제source/item/judge 역할은 아직 배정하지 않았다.
