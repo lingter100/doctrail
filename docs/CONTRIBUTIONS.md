@@ -1,5 +1,15 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · C5 설계 완료
+
+기존 실제Astraxhigh `free_qa_candidate_review`가 새C5 설계2파일을 작성·검증했고 소유권을 반환했다. 부모가 추론변수·90초 경계·NEW8·역할격리·동결순서를 검토하고 family구성 동결과 미래role/judge binding의 순환의존이 없도록 구분을 요청했다. 역할이이를반영했다. 실제 자료·문항·tokenizer·native0, 아직 미배정인 담당자와 실제수락한 설계역할을 구분한다.
+
+첫 staging의두 EOF빈줄 지적은 `.local/c5-design-format-v1/`의 원본·별도기록으로 보존하고 마지막개행만 정규화했다. 의미 내용은 같으며 최종plan ca635d5b/protocol306e8a9e를 커밋한다.
+
+## 2026-10-16 · 다음 후보 C5 설계 역할
+
+실제Astraxhigh `free_qa_candidate_review`가 새 GPU28 품질 후보를 권고했고 부모가 이를 채택했다. 같은 역할에 설계2파일만 맡겼으며 자료·문항·모델 호출과Git변경 권한은 주지 않았다. 현재 알려진 성능·메모리 한계를 유지하고 기존 검증을 최적화하거나시간 밖으로 옮기지 않는다. 설계자와 부모의 기존 metadata/code 노출을 다음 독립 판정과 구분한다.
+
 ## 2026-10-16 · 실제 GPU 자원 비교와 결과 보존
 
 부모가 계획7ac7513 커밋 뒤 고정 CLI를 한 번 실행하고 두 arm의 실제 자원 통과를 확인했다. 원본을 고치지 않고 metadata 파생 공개본·CLI exactcopy·artifact20개와59/85/52코드 증명을 기록했다. UUID/PID/RSS 표본의 공개 범위 변환도 명시했다. 기존 실제Astraxhigh `free_qa_candidate_review`를 다시 호출해 공개metadata·코드만으로 다음 한 단계 읽기 판단을 요청했다. 이 역할은 독립 최종 답변 judge가 아니며 새 자료/모델을 만들지 않는다. 사용자검수·의미품질판정·서비스채택0이다.

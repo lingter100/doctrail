@@ -1,5 +1,17 @@
 # 진행 상태
 
+## C5 설계 확정 · 검증된 GPU28 후보의 새 품질 관문
+
+실제Astraxhigh 역할이 [C5 계획](MEETINGS-C5-PLAN.md) SHAca635d5b과 protocol306e8a9e을 작성했고 부모가 읽기 검토했다. 추론 설정은GPU28만 바꾸고 기존policy/adapter/GPU launcher를 재사용한다. NEW8(review/prepare/probe/audit+tests4) 구현·동결/CI 뒤 새source12문서와cal6/격리val8을 순서대로 준비한다.90초·기존토큰·cal6/6→val8/8 관문은 그대로다. 자료·tokenizer/native0이며 실제source/item/judge 역할은 아직 배정하지 않았다.
+
+Toolchain 동결에는 내용 없는 고정family 구성만 포함하고 이후 실제role/judge등록은 실행plan의 별도binding으로 검증한다. 미래 역할을이미배정한것처럼기록하지않는다. d95bd26 결과커밋의 push38872380383/PR38872386040 필수3job 모두성공, 사용자author/committerlingter100을확인했고 별도CI영수증을보존했다. 다음은설계커밋뒤 기존실제Astrahigh `host_proof_profile`에NEW8 구현/합성검사만위임한다. 모든닫힌pool은불변이며전체goalACTIVE·Phase1/PR14draft다.
+
+## GPU 실측 커밋 · 새 C5 품질 후보 설계 중
+
+실측 결과를 d95bd26으로 사용자 명의 커밋·push했다. 기존 실제Astraxhigh `free_qa_candidate_review`는 다음 한 단계로 GPU28 고정의 새 품질 후보를 권고했다. 측정되지 않은 proof 최적화는 섞지 않으며 기존90초·토큰·의미 관문을 유지한다. 같은 역할이 NEW `MEETINGS-C5-PLAN.md`와 `meetings-c5-protocol-v1.json` 두 설계 파일만 작성 중이다. 아직 소스·질문 작성자/최종judge가 배정됐다고 주장하지 않으며 새 자료·tokenizer·native0이다. 부모는 validation 의미 자료를 열지 않는다.
+
+GPU pair와 이전모든pool은 완료/닫힌 상태로 보존한다. 전체goalACTIVE·Phase1/PR14draft·무료/로컬을 유지한다.
+
 ## GPU 비교2회 완료 · 28 후보가 이 pair에서8.032초 짧음
 
 7ac7513에서 공식 pair가 종료됐다(session58865 exit0). 실제전송2/파싱2/자원수용2, input5064/output521/EOS/final6은 양쪽 같고 전체요청71.485→63.453초다. Cleanup1.359/1.078초·로그0·owned PID 부재를 확인했다. CLI266.984초·HEAD/source59/기존85/52 불변·private20 hash를 검증했다. 원본c24cc320, 파생공개63ae6b04, 공개기록d058f2fa는 [결과 문서](MEETINGS-GPU-PLACEMENT-RESULTS.md)에 연결했다. 출력경로는 소비됐으므로 재실행하지 않는다.
