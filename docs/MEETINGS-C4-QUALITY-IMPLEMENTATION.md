@@ -52,3 +52,7 @@ Git 검사는 source 바이트가 지정된 선행 commit과 현재 HEAD에 있�
 전체 도구 합성 검사·독립 코드 검토·동결 → 사용자 명의 커밋과 필수 CI → 관측한 CI 영수증 별도 커밋 → 새 source 채택/작성·검토·실제 Java/Python parity·source 커밋 → 새 질문/oracle·item 사전검토·커밋 → 단발 offline 준비 → 실행계획·judge 사전예약·커밋 → calibration 최대6회 → 원래6/6 gate 통과 때만 격리 validation 최대8회다.
 
 예산 실패·품질 실패는 원래 결과를 보존하고 같은 자료를 다시 실행하거나 기준을 낮추지 않는다. 구현 검사만 통과한 상태를 품질 통과나 Phase1 완료로 보고하지 않는다.
+
+## 최종 원격 검증
+
+6754435의 push38850972533·PR38850977356에서 필수3job이 모두 성공했다. Linux Python2386통과/21skip/기존warning1, 실제 Java browser49통과/0실패이며 각 실행은 별개다. 관측 CI 영수증은 원본 log hash·최종85 Git 바이트 대조를 보존한다. 이 결과는 로컬 import 시점을 소급 증명하지 않지만 최종 커밋 코드의 원격 전체 검증을 제공한다. EOF 빈 줄 한 개는 동결 adapter 바이트를 보존하는 정확한 whitespace 예외로 기록했고 실행 검사를 완화하지 않았다. 아직 새 품질 원문/질문/모델 호출0이다.

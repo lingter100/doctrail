@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C4 최종 코드 CI 통과 · 새 원문 준비 전
+
+코드/85파일 동결 커밋 `6754435c3780a3ee33d46750a69ef35ff44acd3f`를 사용자 계정으로 push했다. push38850972533과 PR38850977356의 backend/java-service/web이 모두 성공했다. Linux Python은 각각2386통과/21skip/기존warning1(64.74/92.48초), 실제 Java 브라우저는 각각49통과/0실패다. 로컬 전체 실행의 import 시점 한계는 유지하며, 이번 CI가 최종 커밋 바이트의 전체 회귀 증거다. author/committer와 GitHub 로그인은 모두lingter100이다.
+
+관측 CI 영수증 `meetings-c4-quality-toolchain-ci-v1.json` SHA 2dadfa4a43fc7dd2dde33ad476061b319f7bbbb814678e0de6a5644ef23958bd는 두 원격 run과 원본 로그 hash, Git/작업파일85 대조를 기록한다. 이 영수증의 별도 커밋 후에만 새 원문 채택/작성을 시작한다. 아직 새source/question/oracle/tokenizer/native0이다. 다음은 새 calibration 원문6개와 격리 validation 원문6개의 출처·이용 조건 확인, 독립 검토, 실제 Java/Python 전체 청크 parity이며 질문 작성은 각 source 커밋 뒤다.
+
+커밋 검사에서 동결 adapter의 단일 EOF 빈 줄 경고만 있었다. 경로217행·SHA a4838c76·정확한 경고 바이트를 확인해 보존했다. 초기 일반 checker 실패와 후속 checker의 출력 기대값 오류를 남겼으며, 기대값 수정 후21staged의 전체 바이트·기존 동결·나머지 whitespace0을 확인했다. 코드/품질 기준 변경은 없다. goalactive·Phase1/PR14draft를 유지한다.
+
 ## C4 전체 도구85 동결 · 로컬 전체 회귀 통과 / 커밋·CI 다음
 
 부모 전체 Python 회귀가2398통과/9환경skip/기존warning1로 종료됐다(872.141초). 전체 Ruff도 통과했다. 원본 로그·report는 `.local/c4-quality-final-checks-v1/`에 보존했다. 마지막2파일 강화와 import 시점의 한계는 그대로 남기고 최종 표적1/Ruff 및 최종 커밋 CI로 구분한다. session46951은 종료됐으며 전체검사를 다시 실행하지 않는다.
