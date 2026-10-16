@@ -1,5 +1,13 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 상세 복구 검증과 부모 판독 오류 정정
+
+`meeting_detail_access_recovery`(앞서 실제 수락한 Astra high)가 실제404 잔존·target409 반복과 후속 합성 target403 입력 유실을 재현하고 최소 수정했다. 최종22개와 수정 전42개를 구분했고 type/build/package-DskipTests를 통과했다. 부모는 source4·원본135artifact hash, 원본 영수증1167975b, 데스크톱·390px 화면을 확인해 공개 영수증872dcef9와 재현 문서를 작성했다. 실제LLM/사용자검수0이다.
+
+부모가 보조 재시도 버튼을 잘못 읽고 추가 수정을 요청했으나 원래 `detail ? refresh() : load()` 분기를 확인해 철회했다. 이미 시작한 실제 Java1개는 정상 목록 재조회를 확인했다. 이 과정은 제품 결함이나 추가 수정 성과로 세지 않으며 최종4파일/영수증은 불변이다. 공개 영수증 생성의 첫 `python` 호출은 Windows alias 때문에 실행 전 실패했고, 동일 스크립트를 저장소의 `uv run --no-sync python`으로 처음 실행했다.
+
+부모가 원래 cal5/1·val8 검토를29d7e0a로 커밋한 후 동일 calibration 작성자에게 새v2 한정 보완을 맡겼다. 실제 Git 사전 증명이 완료됐으며 기존 작성/검토 파일·source/code는 보존한다. 작성자와 최종 judge 역할은 계속 분리한다.
+
 ## 2026-10-16 · 새 문항 작성과 독립 의미 검토 분리
 
 새 Astra xhigh 작성자들이 각source커밋 이후6/8문항을 만들고 구조·전체 청크 검사를 수행했다. 원문/도구는 불변이며 calibration 자체 검토 전 초안과 cp949 출력 오류를 별도 보존했다. 부모는 별도 `c4_calibration_item_review`·`c4_validation_item_review`를 Astra xhigh/fork none으로 호출했고 도구가 수락했다. 검토자는 새 review/notes/metadata-summary와 전건수락시에만 freeze를 소유한다. 검토 전 pending 상태를 승인으로 바꾸지 않았으며 사용자 검수는0이다.

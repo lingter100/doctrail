@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 회의 상세·연결 복구 최종22개 통과 · 원본 문항 검토 커밋
+
+최종 실제 Java/패키지 React 검사는22통과/0실패/0skip/0flaky다. 현재 회의의 접근 거부는 이전 상세·작업·목록을 무효화하고, 대상 목록의 오류는 현재 회의와 근거 입력을 보존한다. 버전 충돌 뒤 양쪽 회의를 새로 읽고 명시적 결정 재선택 후에만 연결을 저장한다. [제품 기록](MEETINGS-DETAIL-RECOVERY.md)과 공개 영수증SHA872dcef9a082425ec9d8917bb6774f9aa7a4dbba108670ca917b02052c15c4d8에 원본135개 artifact hash를 확인했다. Type/build/package-DskipTests 통과, 모든 owned 서버 종료·실제LLM/사용자검수0이다. 앞선42통과는 마지막 수정 이전 결과로 구분한다. 다음은 이 최종 source 커밋·원격CI다.
+
+부모가 보조 재시도 버튼을 refresh-only로 오독했지만 현재 코드는 이미detail에 따라load로 분기했다. 이미 시작한 실제 Java1개가 정상 동작을 확인했고 요청한 추가 수정은 취소했다. 최종4파일·원본 영수증1167975b는 그대로다.
+
+원래 작성/검토15파일과 진행 문서를29d7e0a로 보존했다. Calibration은5수락/1불수락, validation은8수락/freeze6을 유지한다. 같은 calibration 작성자가 실제 HEAD29d7e0a·코드85·source14·원본7의 Git 증명을 마친 뒤 새v2에서 지적된 충분 근거 대안만 보완한다. 질문/context/필수사실과 다른5문항은 바꾸지 않으며, 새 독립 검토와 수락 freeze 커밋 전 tokenizer/native를 실행하지 않는다. 부모는 validation 의미 내용을 열지 않는다. 전체goalactive·Phase1/PR14draft 유지.
+
 ## Validation 문항8개 수락 · calibration 1개 보완 필요
 
 격리 item 검토자는validation8수락/0거절/수정0을 완료하고 정확한6binding item-freeze-v1 SHAc29f89300f48b2f7a7706a87fb05f6f902bc470ab8ecf360e0868ad5ce65afa6을 만들었다. 부모용 요약SHAa9388ebe만 읽었으며 의미 검토·문항/oracle은 열지 않았다. Source15·code85·author4불변, 공식tokenizer/native0이다. 전체load_material의 현재Git 검사는 item 커밋 뒤에 실행해야 하므로 우회하지 않았다.
