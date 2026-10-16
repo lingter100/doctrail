@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, errorMessage } from './api';
-import type { DocTrail } from './useDocTrail';
+import type { DocTrail, SourceOrigin } from './useDocTrail';
 import { meetingError, type Analysis, type DecisionLink, type MeetingDetail, type TaskItem } from './meetings';
 
 // This controller is mounted with a session/workspace/view key. Every request and
@@ -47,16 +47,37 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     edit(false); selected.current = null; setDetail(null); setLinks([]); setTargets([]); app.closeSource();
     if (pendingMutation) setError('접근 상태가 바뀌어 진행 중인 요청의 결과를 표시하지 않았어요. 서버에 반영됐을 수 있으니 목록을 다시 확인해 주세요.');
   }
+  function denyCurrentMeeting() {
+    // A cached list and an earlier in-flight list cannot certify access after
+    // an explicit denial from the detail, links or source endpoint.
+    request('list'); setLoading(false); setMeetings([]); setTasks([]);
+    invalidateSelection();
+    const state = { loaded: false, error: '회의 접근 상태가 바뀌어 이전 조회 결과를 숨겼어요. 목록을 다시 확인해 주세요.' };
+    setListState({ meetings: state, tasks: state });
+  }
+  function sourceOrigin(documentId: string): SourceOrigin {
+    const meetingId = selected.current;
+    const isCurrent = () => mounted.current && meetingId !== null && selected.current === meetingId;
+    return { query: '', retryLabel: '회의 다시 확인', isCurrent,
+      retry: () => { if (isCurrent()) void refresh(); },
+      onDenied: () => {
+        if (!isCurrent()) return;
+        if (documentId === meetingId) denyCurrentMeeting();
+        else {
+          // A linked meeting's source denial does not revoke the open meeting.
+          // Retire cached links/targets and their pending reads, preserving drafts.
+          request('detail'); request('targets'); request('list'); setLoading(false); setRefreshing(false); setLinks([]); setTargets([]);
+          setRecovery(current => current && { ...current, links: [] });
+          setMeetings(current => current.filter(item => item.document.id !== documentId));
+          setTasks(current => current.filter(item => item.meeting_id !== documentId));
+        }
+        setError('원문 접근 상태가 바뀌어 이전 조회 결과를 숨겼어요. 다시 확인해 주세요.');
+      },
+    };
+  }
   function detailFailure(failure: unknown, valid: () => boolean, id: string) {
     if (!valid() || selected.current !== id || app.sessionExpired(failure)) return;
-    if (accessDenied(failure)) {
-      // A cached list and an earlier in-flight list cannot certify access after
-      // an explicit denial from the detail or its links endpoint.
-      request('list'); setLoading(false); setMeetings([]); setTasks([]);
-      invalidateSelection();
-      const state = { loaded: false, error: '회의 접근 상태가 바뀌어 이전 조회 결과를 숨겼어요. 목록을 다시 확인해 주세요.' };
-      setListState({ meetings: state, tasks: state });
-    }
+    if (accessDenied(failure)) denyCurrentMeeting();
     setError(meetingError(failure));
   }
   async function load() {
@@ -234,6 +255,6 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     const timer = setTimeout(() => { if (!mutationBusy.current) { void load(); if (selected.current) void open(selected.current, true); } }, 2500);
     return () => clearTimeout(timer);
   }, [meetings, detail, busy]);
-  return { meetings, tasks, detail, links, targets, loading, listState, busy, error, notice, editing, recovery, refreshing, reviewRequired, linkReviewRequired, linkSelectionVersion, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
+  return { meetings, tasks, detail, links, targets, loading, listState, busy, error, notice, editing, recovery, refreshing, reviewRequired, linkReviewRequired, linkSelectionVersion, sourceOrigin, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
 }
 export type MeetingsController = ReturnType<typeof useMeetings>;

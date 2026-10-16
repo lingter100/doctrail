@@ -1,5 +1,11 @@
 # 진행 상태
 
+## 회의 원문 접근 복구 52개 통과 · GPU 소스 커밋
+
+[원문 접근 복구](MEETINGS-SOURCE-ACCESS-RECOVERY.md)는 최종 실제 Java/packaged React 52통과·실패/skip/flaky0이다. 신규11+상세10+충돌5+연결4+저장2+목록9+기본3+지식원문8이며 모든8 owned JVM이 종료됐다. Type/build/package-DskipTests 통과, 최종 source4와 원본148개 hash를 확인했다. 정확한 공개 영수증 dd4aa1ba와 별도 복사 기록9bcadfca를 보존했다. 실제 권한변경404와 합성403/500/503을 구분하고 LLM/사용자검수0을 유지한다.
+
+GPU 소스·freeze59는 사용자 명의05ab461로 커밋·push했다. Push38869792669/PR38869799295는 조회 당시 queued이며 성공으로 간주하지 않는다. 다음은 제품 수정 커밋과 최종 HEAD 필수 CI를 확인한 뒤 고정 offline 등록1회다. 아직 새 tokenizer/native0, 모든 닫힌 실험은 불변이며 goalACTIVE·Phase1/PR14draft다.
+
 ## GPU 구현 검증 완료 · 회의 원문 접근 거부 회귀 검증 중
 
 새 GPU launcher/probe/test4개는 최종 합성75통과(신규37+기존38)/Ruff 통과, 검사 전후 hash 동일이다. Sourcefreeze59 SHA116b5325와 구현영수증e410d064를 생성했고 기존85/52 working+HEAD 불변이다. 실제 모델·tokenizer 준비0이며 source 커밋/CI가 다음이다. [구현 기록](MEETINGS-GPU-PLACEMENT-IMPLEMENTATION.md)을 따른다.

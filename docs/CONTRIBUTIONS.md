@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 원문 복구 최종 검증과 소유권 반환
+
+실제 Astra high `meeting_navigation_audit`이 소유한 web4파일에서 최종52개 실제 Java/React 검사를 마쳤다. 부모가 로컬 영수증의 source4·원본148개 hash와8개 서버 종료를 확인하고 정확한 공개 복사본·설명 문서를 작성했다. 최초 제품2실패·복구 캐시1실패와 별도 test selector/준비 race 실패를 보존했다. 사용자 직접 검수·실제 모델 호출0이다. GPU 구현 소스는 부모가05ab461로 사용자lingter100 명의 커밋·push했으며 원격CI는 별도로 확인한다.
+
 ## 2026-10-16 · GPU 구현 검증과 원문 접근 실패 재현
 
 실제 Astra high `host_proof_profile`이 NEW4를 작성하고 최종 합성75통과/Ruff 및 전후 동일 hash를 반환했다. 부모가 코드만 읽어 저장 실패·cleanup 총시간·공통 identity·시간 관측 경계를 검토했고 해당 역할이 보완했다. 부모는 sourcefreeze59·영수증·문서와 이후 Git/CI를 담당한다. 실제 tokenizer/native0이며 자원·품질 실측이 아니다.
