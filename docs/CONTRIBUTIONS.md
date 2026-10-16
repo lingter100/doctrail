@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 합성 host 프로파일 역할 분리
+
+기존실제Astraxhigh `free_qa_candidate_review`가새설계2파일을작성했다. 부모는실제repo측정과합성fixture측정이섞인중간초안을채택하지않고합성134파일로확정했다. 별도실행승인파일/추가커밋도요구하지않도록정리했다. 최종hash94683b36/652a2f46, 실제profile0이다. 새 `host_proof_profile`을도구에gpt-6-astra/high/fork none으로지정했고수락됐다. 이역할은설계커밋을기다리며코드읽기만했고NEW2구현/테스트를맡는다. 부모설정변경·사용자검수0, 실제서비스모델호출0이다.
+
 ## 2026-10-16 · C4 실제 실패 보존과 독립 시간 검토
 
 부모가43139e0 계획·입력 커밋/필수CI 뒤 공식calibration을1회 실행했고 두 번째deadline오류로종료했다. 전송2/파싱1/의미판정0, 남은cal4/val8미실행이다. 부모는원본134binding확인,115snapshot/27event구조재생,전체report와validation진입의거부를별도영수증에기록했다. 원본falseflags를수정하지않았고report/ledger/trace29개를exactbyte로보존했다. 최초환경경로regex의URL오탐을수정한과정은결과문서에남겼다.

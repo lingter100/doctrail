@@ -1,5 +1,11 @@
 # 진행 상태
 
+## 모델 없는 host 프로파일 설계 확정 · NEW2 구현 다음
+
+[새 설계](MEETINGS-HOST-PROOF-PROFILE-PLAN.md) SHA94683b36과 protocol652a2f46을확정했다. 측정은별도합성Git134파일(Python13+JSON121) cold1/warm6이며 실제평가/원문/trace는열지않고native/tokenizer/HTTP0이다. 현재는설계만완료, 실제측정0이다. 설계커밋뒤실제Astrahigh `host_proof_profile`이NEWscript/test2개만구현한다. 기존검증함수/코드85는변경하지않는다. NEW2·fixture생성규칙/roster·dependency를동결커밋하고필수CI확인뒤해당SHA를기록한단발CLI로진행한다. 별도사용자승인질문/추가실행등록커밋은요구하지않는다.
+
+C4실패보존3aea7bd는사용자lingter100 author/committer로push됐고 push38860648722/PR38860655900 필수3job모두성공했다. 이확인은job상태이며이전실행의테스트개수를가져와새실행횟수로세지않는다. 원본닫힌실험은계속불변, 전체goalactive·Phase1/PR14draft다.
+
 ## C4 품질 실행 CLOSED · 두 번째 요청 deadline 실패
 
 43139e0 공식 실행은 종료됐다(session59908 exit1). 실제 전송시도2/파싱응답1/구조수용1, 첫 요청86.157초·두 번째91.343초 deadline 오류다. 남은cal4/validation8 미실행, 의미판정0·채택false다. Owned native/model job은 종료했고 재실행하지 않는다. [결과 기록](MEETINGS-C4-QUALITY-RESULTS.md)의 원본 SHA4c95b97c, metadata2bf0362f, 별도replay2d039485, exact29파일 공개복사da5b6f03을 보존한다. 원본false flags는 고치지 않았다.
