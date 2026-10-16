@@ -1,5 +1,39 @@
 # 진행 상태
 
+## C4 전체 도구85 동결 · 로컬 전체 회귀 통과 / 커밋·CI 다음
+
+부모 전체 Python 회귀가2398통과/9환경skip/기존warning1로 종료됐다(872.141초). 전체 Ruff도 통과했다. 원본 로그·report는 `.local/c4-quality-final-checks-v1/`에 보존했다. 마지막2파일 강화와 import 시점의 한계는 그대로 남기고 최종 표적1/Ruff 및 최종 커밋 CI로 구분한다. session46951은 종료됐으며 전체검사를 다시 실행하지 않는다.
+
+전체 closure85를 `meetings-c4-quality-toolchain-freeze-v1.json` SHA ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78로 고정했다. 기존52는 불변이다. `meetings-c4-quality-tooling-v1.json` SHA42aa967004750616035e3f201a04daf815ad101cb5a0aaca78bc36f05882216a에 새12파일·74/77합성검사·초기실패·로컬전체 결과·독립읽기검토·한계를 기록했다. [구현 기록](MEETINGS-C4-QUALITY-IMPLEMENTATION.md)을 따른다.
+
+다음은 고정 코드/영수증 커밋·사용자 계정 push·필수CI 관측 후 `meetings-c4-quality-toolchain-ci-v1.json`을 별도커밋하는 순서다. 그 뒤에만 새source를 준비한다. 현재 새source/question/oracle/tokenizer/native0, 원래 C4실패와 모든 닫힌 pool 보존, Phase1/PR14draft·goalactive다.
+
+## C4 도구 소유권 반환 · 부모 전체 회귀 실행 중
+
+새 도구77개 고유 검사는 분할 실행에서 모두 통과했다. 최종 audit/정상replay/파일-Git10개136.28초, 오류순서2개5.85초, 원래 실패flag 보존1개19.04초와 Ruff를 확인했다. 독립 Astra xhigh가 최종 probe7a3e9101/testc7ed13fb 및 나머지6파일을 읽기 재검토해 추가 결함을 보고하지 않았다. 역할 소유권은 모두 반환됐고 추가 편집은 없다.
+
+부모 전체 Python 회귀는 exec session46951, `.local/run_c4_quality_checks_v1.py`와 `.local/c4-quality-final-checks-v1/`에서 진행 중이다. 전체 Ruff는 통과했다. 마지막 두 파일의 실패flag 강화가 전체검사 시작과 교차해 실제 import 시점을 증명하지 못한다. 이 로컬 전체 실행을 최종 바이트 전체 검증이라고 과장하지 않고 마지막 표적검사와 최종 커밋의 CI를 별도로 확인한다. 동일 전체검사를 중복 실행하지 않는다.
+
+정적 closure와 기존52의 합집합은85개로 계산됐지만 아직 freeze 파일은 생성하지 않았다. 전체 회귀 결과 확인→85동결·영수증·커밋→필수CI→관측CI 영수증 별도커밋 이후에 새source를 준비한다. `native_responses_received`는 파싱 응답의 event 저장까지 성공한 수이며 저장 실패 시 실제 수신보다 적을 수 있다. 새 source/question/tokenizer/native0, Phase1/PR14draft·goalactive다.
+
+## C4 runner 연동 실패 보존 · 최종 회귀 대기
+
+새 runner8 전체 v1은66통과/1실패(202.09초)에서 중단돼 audit모듈은 아직 그 실행에서 검사되지 않았다. 추가한 기록 실패 회귀가, 파일 PermissionError를 기존 HTTP가 GenerationError로 감싸 최초 원인을 잃는 결함을 잡았다. 담당자가 observer 기록 실패 시점에 첫 원인을 보존하도록 수정했고 관련3표적 검사는 통과했다. 최초 report.json.tmp FileExistsError도 별개 보존하며 이전 rename 원인은 미확인이다.
+
+고정 event 파일 순서/hash/값 재생과 안전한 실패 코드·경과 시간 기록이 구현됐고, 경로 alias의 반복 samefile 검사 비용을 file identity 집합과 fallback으로 줄이는 변경을 검증 중이다. audit6·정상 cal/replay·경로/Git 표적 검사와 부모 전체 Python 회귀 및 최종 독립 검토가 남았다. 아직 전체 freeze/새 source/question/tokenizer/native0이며 다른 실행에서 이를 완료로 처리하거나 모델을 실행하지 않는다.
+
+## C4 품질 도구 검토 · 전송 직전 deadline 수정
+
+새 policy/adapter 4파일의 최종 합성74검사와 Ruff가 통과했다(담당 역할 실행). 독립 Astra xhigh 검토가 발견한 기록 콜백 뒤 90초 초과 전송은 수정 전 MockTransport native handler 실행으로 재현됐고, 후크 이후 deadline 재검사와 남은 HTTP timeout 축소로 수정됐다. 최종 adapter SHA a4838c76ef5d243dc82d00b2feae05e8dca31548cd000941ebfa74588881ccdd의 읽기 재검토에서 추가 결함은 보고되지 않았다. 앞선72통과는 이 수정 전 기록으로 보존한다.
+
+[구현 명확화](MEETINGS-C4-QUALITY-IMPLEMENTATION-CONTRACT.md)에 정규화 중복·긴 문단·동일 family 반복 사전검토·모든 충분 근거 대안 검사·실제 Git/CI 증명·전송 후크와 완료 건수 구분을 등록했다. 등록된 기존3문서는 변경하지 않는다. Runner 8파일은 구현/합성 검증/독립 검토 중이며 아직 전체 toolchain freeze·새 source·질문·실제 tokenizer/native 호출은 없다. 부모의 failure 원인/실패 지연 기록 및 전송 시도 명칭 검토도 반영 중이다. 전체 goal active·Phase1/PR14 draft를 유지한다.
+
+## C4 품질 구현 진행 중 · 아직 전체 코드 동결 전
+
+설계 6aa76f5의 push38845169571/PR38845175551 필수 3개 job이 각각 모두 성공했다. 기존 bounded_thinking_transport(실제 Astra high)가 새 policy/quality adapter와 테스트 4개 파일을, c2_comparison_runner(실제 Astra high)가 새 review/prepare/probe/audit 및 테스트 8개 파일을 소유해 구현 중이다. 같은 파일을 다른 실행에서 덮어쓰거나 중복 구현하지 않는다.
+
+부모는 실제 Git commit/HEAD 바이트 증명, CI 관측 영수증과 자기참조 없는 고정 순서, source metadata와 oracle의 문서 종류/날짜/언어 대조, 익명 pack의 중첩 원래 ID 제거를 검토 중이다. 아직 전체 toolchain freeze·새 source/question/tokenizer/native 호출은 없다. 기존 52개·완료 자원 결과와 닫힌 자료는 그대로 보존한다.
+
 ## C4 새 품질 계약 등록 · 자료 작성 전 전체 도구 고정 필요
 
 [품질 계획](MEETINGS-C4-QUALITY-PLAN.md), meetings-c4-quality-protocol-v1과 family-registry-v1에 단일 사고+block ID 자연어 후보를 등록했다. 전체928/요청사고512/final384/입력5120/90초를 유지하고 새cal6/6→격리val8/8, 최대14품질호출·재시도0이다. 원래 합성marker validator를 수정하거나stress=True로 우회하지 않고 NEW policy/quality adapter/review/prepare/probe/audit와 대응 합성검사를 만든다. candidate만이 아니라 전체 toolchain freeze/commit/CI 전 새source/question/tokenizer/native를 시작하지 않는다.

@@ -1,5 +1,23 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 전체 로컬 검증과85파일 동결
+
+부모가 전체 Python2398/9skip/warning1·전체Ruff를 실행하고 원본 로그를 보존했다. 마지막2파일 변경과 import 시점 미증명을 영수증에 기록했고 최종 표적검사와 향후 정확한 커밋 CI를 구분한다. 최종12파일 hash와 기존52의 불변을 대조해85binding을 동결하고 공개 metadata 영수증·README·진행 문서를 작성했다. 새자료·실제tokenizer/native·사용자검수0이다. 사용자 GitHub 로그인과 author/committer 설정은lingter100으로 재확인했다.
+
+## 2026-10-16 · 실행 기록 결함 수정과 최종 검증 경계
+
+c2_comparison_runner(기존 실제 Astra high)가 immutable event 기록·원본 재생·파일 identity cache·안전한 첫 실패 보존을 구현했다. 66통과/1실패의 원인을 보존하고 고유77검사를 분할 실행해 모두 통과했으며, 마지막 원래실패flag 표적1/Ruff 뒤 소유권을 반환했다. free_qa_candidate_review(기존 실제 Astra xhigh)는 생성 오류 뒤 기록 오류가 첫 원인을 덮는 추가 경로를 제기하고 최종 변경을 읽기 재검토했다. 이 역할의 테스트·실제자료·native실행0을 유지한다.
+
+부모는 전체 Python 회귀를 실행하고 원본 로그를 별도 저장한다. 마지막 probe/test 두 파일 강화가 이 실행 시작과 교차했음을 기록해 최종 import 시점은 미증명으로 둔다. 최종 표적 검사와 정확한 커밋 CI를 별도로 확인한 뒤에만 자료 준비를 시작한다. 개발 역할 검토를 사용자 검수나 의미 정확성 증명으로 세지 않는다.
+
+## 2026-10-16 · deadline 독립 재검토와 중복 계약 명확화
+
+free_qa_candidate_review(기존 실제 Astra xhigh)가 후크 뒤 시간 제한 결함을 읽기 검토로 제기했고 bounded_thinking_transport(기존 실제 Astra high)가 합성 전송에서 재현·수정하고 최종74/Ruff를 실행했다. 설계 역할의 최종 hash 재검토에는 추가 결함이 없었지만 독립 테스트 재실행은0이었다. 같은 설계 역할은 새로운 source를 읽지 않고 중복 규칙을 검토해 반복 구절로 필수 다문서 요건을 부풀리지 않는 조건을 추가했다. 부모가 새 명확화 문서를 등록하고 runner의 전송 시도/완료 구분과 안전한 실패 원인·지연 기록을 검토했다. 실제 새 자료·tokenizer/native·사용자 검수0이며 설계/구현/부모는 독립 출력 judge에서 제외한다.
+
+## 2026-10-16 · 새 품질 구현 역할 분리
+
+기존 bounded_thinking_transport와 c2_comparison_runner의 실제 Astra high 역할을 재개했다. 각각 새 4개와 8개 파일을 소유하며 공통 API를 합의했다. 부모는 metadata 영수증만으로 커밋됐다고 인정하지 않고 실제 Git 바이트 대조를 요구했으며, source 종류/날짜/언어 대조와 익명 pack의 중첩 ID 노출 경계를 검토했다. 아직 구현 검증은 진행 중이고 실제 tokenizer/native/새 자료/사용자 검수는 0이다.
+
 ## 2026-10-16 · C4 품질 설계와 노출 구분
 
 기존 free_qa_candidate_review(실제 Astra xhigh)가 자원 원본/새영수증과허용코드를읽어 NEW quality adapter 경계·block ID정책·schema/언어/보류·새split/역할분리·중단조건을제안했다. 공개MEETINGS-C3-PLAN의C2 ID별실패요약을함께보았다고보고했고새문항/예제로재사용하지않으며judge에서제외했다. 격리본문/질문/oracle/test열람·파일수정·모델실행0이다. 부모가정책/registry/계획과구현순서를등록했다. 새자료작성/품질호출/사용자검수0이며현재부모설정변경주장은없다.
