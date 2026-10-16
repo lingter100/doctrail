@@ -1,5 +1,13 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 최종57개 원격 회귀와 후속 읽기 감사
+
+부모가9a72a33의 두 CI run·필수3job 성공과 실제 browser57/0·Python2386/21skip를 원본 로그에서 확인했다. 115개 고유 source/code/freeze 바이트를 실제 Git과 대조했고 관측 영수증을 별도로 작성했다. `meeting_tasks_acceptance_audit`는 도구가 수락한 Astra xhigh로 제품 코드만 읽어 두 후속 후보와 재현 조건을 제시했다. 실행·편집·데이터 열람0이다. 새 `meeting_detail_access_recovery`는 Astra high/fork none으로 실제 재현과 최소 수정·회귀를 맡았다. 아직 확인 전 결함을 완료로 기록하지 않으며 모델/사용자 검수0이다.
+
+## 2026-10-16 · 원문 커밋 뒤 새 질문 작성 역할
+
+부모가9b52878/9a72a33을 실제 사용자 author/committer로 커밋·push했다. 검증 자료 본문을 출력하지 않는 index 검사가 원본 Java parity CRLF 변환과 공개 license EOF를 잡았고, 원본 hash를 유지하는 경로 한정 설정으로 해결했다. Source 커밋 이후 새 `c4_calibration_item_author`·`c4_validation_item_author`를 GPT-6 Astra xhigh/fork none으로 호출해 도구가 수락했다. 기존 원문 작성자의 탐색 노출을 소거했다고 주장하지 않으며 새 작성 역할과 독립 검토를 분리한다. 실제 tokenizer/native/사용자 검수0이다.
+
 ## 2026-10-16 · 새 source 독립 검토와 실제 제품 복구 완료
 
 `c4_calibration_source_review`·`c4_validation_source_review`는 도구가 수락한 GPT-6 Astra xhigh로 각6개 원문·이용 조건·processing replay·기존 실제 Java parity를 검토하고14/15binding을 고정했다. Maven/tokenizer/native를 재실행하지 않았다. 부모는 hash/metadata와 공개 패키징만 확인했고 validation 본문/의미 설명은 받지 않았다. Calibration receipt 원본을 로컬 보존하고 개인 환경 경로5개를 가린 새 공개본을 만들었으며 URL까지 가렸던 미게시 첫 파생본 오류도 보존했다.

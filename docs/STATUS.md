@@ -1,5 +1,19 @@
 # 진행 상태
 
+## 9a72a33 원격 CI 통과 · item 작성과 상세 복구 재현 진행
+
+Push38854480523/PR38854484992의 필수3job이 모두 통과했다. Linux Python은 각각2386통과/21skip/기존warning1(65.08/95.61초), 실제 Java 브라우저는 각각57통과/0실패다. [CI 관측 영수증](../experiments/results/knowledge-source-recovery-ci-v1.json) SHA9323d366은 원본 로그 hash·실제 Git와 작업 파일115개 고유 binding 대조를 기록한다. Source 검사 완료를 모델 품질 통과로 세지 않는다.
+
+새 item 작성자 두 명은 source9a72a33·코드85의 실제 Git 증명을 완료한 뒤 각 split만 읽기 시작했다. HEAD hold는 해제했고 질문/oracle 작성은 진행 중이다. 독립 검토/동결/커밋과 공식 tokenizer는 아직 미실행이다.
+
+읽기 전용 `meeting_tasks_acceptance_audit`(실제 Astra xhigh)가 직접 회의 조회403/404 뒤 캐시 유지와 결정 연결 target 버전409 뒤 재로딩 불완전 후보를 찾았다. 새 `meeting_detail_access_recovery`(실제 Astra high)는 hook/MeetingViews/새browser test/runner4파일만 소유해 실제 재현부터 시작한다. 아직 제품 결함 확정이나 수정 통과가 아니다. Maven 슬롯은 이 역할만 사용한다. 다른 역할은 동결 자료·질문·모델을 재실행하지 않는다. 기존goalactive·Phase1/PR14draft 유지.
+
+## Source 커밋9a72a33 · 새 item 작성 역할 시작
+
+제품9b52878과 source9a72a3333c4655e4b6bd729d23bc709de9a0525e를 사용자lingter100 author/committer로 push했다. Source index 검사 최종v3은45자료/문서+attributes=46개에서 코드85·이전C3코드66·source14/15의 Git 바이트를 대조했다. Java parity2개의 CRLF 정규화와 원래 license EOF 경고를 발견한 앞선 검사 실패는 보존하고, 정확한 경로/hash만 예외로 원본을 유지했다. 검증 본문은 출력하지 않았다. 원격CI는 조회 중이다.
+
+Source 커밋 이후 새 `c4_calibration_item_author`와 격리 `c4_validation_item_author`를 실제 GPT-6 Astra xhigh/fork none으로 시작했다. 먼저 실제 source/code Git 증명을 확인하며 그동안 부모가 HEAD를 유지한다. 이후 새6/8질문·정답 근거·전체 context 선택을 작성한다. 독립 item 검토/동결/커밋 전 tokenizer를 실행하지 않으며 역할 작성자가 검토 완료를 대신 기록하지 않는다. 실제 품질 호출0·goalactive·Phase1/PR14draft다.
+
 ## C4 새 source 12문서 검토 완료 · 원문 복구 32개 통과
 
 Calibration 공개3·합성3의32청크와 격리 validation 공개3·합성3의20청크가 실제 Java parity 각각2개 통과했다. 별도 Astra xhigh 검토자가 각6건 수락/거절0/수정0을 확인해 source를 고정했다. Cal freeze14 SHA8b1bac81, val freeze15 SHAb4a132da이며 [새 원문 기록](MEETINGS-C4-SOURCES.md)의 노출·과거 fingerprint 누락·환경 경로 공개본 처리·초기 helper 실패를 보존한다. 부모는 validation 본문/의미 검토 설명을 열지 않았다.

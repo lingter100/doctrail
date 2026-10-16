@@ -21,3 +21,5 @@
 재현 명령은 `cd web` 후 `npm run typecheck`, `npm run build`, 그리고 `DOCTRAIL_E2E_SPEC=tests/knowledge-source-recovery.spec.ts` 환경 변수로 `npm run test:e2e`를 실행하는 방식이다. Windows PowerShell에서는 `$env:DOCTRAIL_E2E_SPEC='tests/knowledge-source-recovery.spec.ts'`로 지정한다. 전체 CI에서는 일반 브라우저 묶음에 새 검사가 자동 포함된다.
 
 다음에는 최종 커밋의 필수 CI를 확인한다. 코드·브라우저 검사 통과만으로 일반 자연어 답변 품질이나 회의1차 전체 완료를 주장하지 않는다.
+
+후속 관측: 제품9b52878을 포함한 source9a72a33의 push38854480523/PR38854484992에서 필수3job이 모두 통과했다. 각 실행의 실제 Java 브라우저 묶음은57통과/0실패, Python2386통과/21skip/기존warning1이다. [별도 CI 영수증](../experiments/results/knowledge-source-recovery-ci-v1.json)에 정확한 커밋·로그 hash를 남겼으며 원래 로컬 영수증은 수정하지 않았다.
