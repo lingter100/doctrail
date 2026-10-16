@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "cases": [
+    {
+      "id": "C4-CAL-01",
+      "payload": {
+        "schema_version": 1,
+        "query": "TPS 인턴십 제안서에서 초반 준비 과제, 활용할 수 있는 구현 출발점, API 설계와 검증 방식, 진행 상황에 따라 가능한 추가 작업을 각각 어떻게 설명하는지 정리해 줘.",
+        "contexts": [
+          {
+            "document_id": "c4-f01-doc03",
+            "revision": 1,
+            "title": "scikit-image Outreachy thin-plate splines project proposal",
+            "meeting_date": null,
+            "chunk_id": "c4-f01-doc03-r1-c0003",
+            "text": "ing a BSc in Computer Science, Applied Math, or another computational discipline (or equivalent). Experience and/or interest in open-source software, scientific data analysis, image processing, and/or technical writing are very welcome.\n\n### Internship Tasks\nForemost, the internship is meant as a learning experience for the intern, and mentors will try to adjust tasks to the strengths and skill level of the intern.\n\nIn the beginning, the mentor (and co-mentor) will provide the intern with several resources, starting points and smaller tasks. These might involve related issues in scikit-image’s transform module, or tasks to get familiar with the project’s infrastructure and important concepts. Self-initiative and new ideas by the intern are of course very welcome.\n\nOnce accustomed, a new warping function based on thin-plate spines could be implemented and added to scikit-image. A [prototype implementation of the algorithm already exists in ",
+            "page": null,
+            "start_offset": 2538,
+            "end_offset": 3491
+          },
+          {
+            "document_id": "c4-f01-doc03",
+            "revision": 1,
+            "title": "scikit-image Outreachy thin-plate splines project proposal",
+            "meeting_date": null,
+            "chunk_id": "c4-f01-doc03-r1-c0004",
+            "text": "ng function based on thin-plate spines could be implemented and added to scikit-image. A [prototype implementation of the algorithm already exists in Python](https://github.com/zpincus/celltool/blob/8d7a2b778cd45cf91588451f7f3c4784b049a82c/celltool/numerics/image_warp.py) and may be taken as a starting point. Together with mentors and the community, the intern will design an API for the implementation that is consistent with the transform module and create tests ensuring its correctness.\n\nDepending on the progress during the internship, the intern may also optimize the performance of the algorithm and create a new tutorial or gallery example for the new function.\n\n### Intern Benefits\nThe intern will experience the end-to-end process from conception of a new idea to its integration into an existing API. With the help of mentors and the community, the intern may expand their skill set in a wide range of concepts and technologies. This will involve API design, code maintainability, ",
+            "page": null,
+            "start_offset": 3341,
+            "end_offset": 4335
+          }
+        ]
+      },
+      "response_language": "ko",
+      "official_input_tokens": 1255,
+      "prompt_sha256": "64f994bea1879aeed5b5c28c749be3003cae81d69b2e65b6fc8dafad27524626"
+    },
+    {
+      "id": "C4-CAL-02",
+      "payload": {
+        "schema_version": 1,
+        "query": "Across the June 2 kickoff and June 9 meeting, what recurring Friday meeting schedule was recorded, how was Wednesday office-hour timing recorded at each meeting, and what repository and format plans were made for sharing notebooks? Include the repository task's owner and recorded status.",
+        "contexts": [
+          {
+            "document_id": "c4-f01-doc01",
+            "revision": 1,
+            "title": "scikit-image Outreachy kickoff — 2023-06-02",
+            "meeting_date": "2023-06-02",
+            "chunk_id": "c4-f01-doc01-r1-c0001",
+            "text": "scikit-image/scikit-image/pulls)\n    - Possibly point to HackMD or GitHub gists\n    - Please tag your mentors!\n- real-time communication\n    - office hours: Wednesdays, time TBD\n    - weekly meetings: Fridays, 17:00 UTC\n    - Community calls: Tuesdays, [calendar](https://scientific-python.org/calendars/skimage.ics)\n\n### Roadmap\n\n- See https://hackmd.io/@mkcor/outreachy-roadmap\n- Wrap up inpainting example: [#6853](https://github.com/scikit-image/scikit-image/pull/6853/files)\n- Investigate embryo 3D cell segmentation (see [paper](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009879))\n\n### Miscellaneous\n\n- SciPy ecosystem coordination: https://scientific-python.org/specs/\n- Career pathways, networking, international connections\n",
+            "page": null,
+            "start_offset": 846,
+            "end_offset": 1608
+          },
+          {
+            "document_id": "c4-f01-doc02",
+            "revision": 1,
+            "title": "scikit-image Outreachy weekly meeting — 2023-06-09",
+            "meeting_date": "2023-06-09",
+            "chunk_id": "c4-f01-doc02-r1-c0000",
+            "text": "# Outreachy meeting\n\n### scikit-image project: narrative documentation\n\n- **Time:** Friday, Jun 9, 2023, 17:00–17:45 UTC\n- **[Join video call via Zoom](https://us06web.zoom.us/j/88060567580?pwd=THRpaWFnSFNwK0Fycy9FVk5RYnV5UT09)**\n- **Notes:** https://hackmd.io/@mkcor/outreachy-meeting\n- **[Archive](https://github.com/scikit-image/skimage-archive/internships/Outreachy_2023-05/)**\n\n**Present:** Ananya, Biola, Lars, Marianne\n\n**Moderator:** Marianne \n\n\n## Agenda\n\n### Review of the week\n\n- How did it go wrt Week 2 from [Timeline](https://hackmd.io/@mkcor/outreachy-roadmap)?\n    - Interns didn't even have to be 'productive' yet!\n    - Read to learn *and* code to practise.\n    - It's motivating to have a specific goal (see next item).\n- Finish inpainting example [#6853](https://github.com/scikit-image/scikit-image/pull/6853)?\n    - pressure vs. drive\n    - [x] Marianne adds last visualization and credits Biola.\n- async communication: OK\n- office hour on Wednesday at 13:00 UTC: OK\n\n### ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 994
+          },
+          {
+            "document_id": "c4-f01-doc02",
+            "revision": 1,
+            "title": "scikit-image Outreachy weekly meeting — 2023-06-09",
+            "meeting_date": "2023-06-09",
+            "chunk_id": "c4-f01-doc02-r1-c0001",
+            "text": "re vs. drive\n    - [x] Marianne adds last visualization and credits Biola.\n- async communication: OK\n- office hour on Wednesday at 13:00 UTC: OK\n\n### Embryonic development project\n\n- Read dataset\n- Select one frame\n    - Ananya used scipy and pandas so far.\n    - But how do you make sense of it?\n        - high level: read supplementary material\n        - low level: inspect the array (dim? shape?) and *visualize* it\n            - Use napari?\n- What are we seeing? Is spacing regular in all 3 spatial dimensions? Is the 3D image grayscale or multichannel?\n- First, focus on the 3D segmentation (one frame).\n- The big picture is about measuring growth velocity(ies).\n\n### Collaboration process\n\n- Marianne would like to `spin jupyter-lab`...\n    - Lars explained why you need to `spin` to set the `PYTHONPATH`; recommends current workaround:\n    ```bash\n    $ spin shell\n    $ jupyter-lab\n    ```\n    in a virtualenv where you have jupyter-lab installed and scikit-image in development. \n- How can ",
+            "page": null,
+            "start_offset": 844,
+            "end_offset": 1843
+          },
+          {
+            "document_id": "c4-f01-doc02",
+            "revision": 1,
+            "title": "scikit-image Outreachy weekly meeting — 2023-06-09",
+            "meeting_date": "2023-06-09",
+            "chunk_id": "c4-f01-doc02-r1-c0002",
+            "text": "`bash\n    $ spin shell\n    $ jupyter-lab\n    ```\n    in a virtualenv where you have jupyter-lab installed and scikit-image in development. \n- How can we best share notebooks?\n  - Share notebooks via a Git repository.\n      - [ ] Marianne creates a dedicated repo.\n  - Lars: Use format https://jupytext.readthedocs.io/en/latest/index.html\n\n### Roadmap\n\n - Interns would like to have a timeline for the TPS project as well.\n - Week of July 9th, 2023 will be off for scikit-image projects.\n     - [x] Marianne emails the Outreachy organizers to let them know.\n",
+            "page": null,
+            "start_offset": 1693,
+            "end_offset": 2250
+          }
+        ]
+      },
+      "response_language": "en",
+      "official_input_tokens": 2647,
+      "prompt_sha256": "c300bd24d4dbb3c6bc073ca7f252c3d878a8dc7455f5875b6d926eeb36d95544"
+    },
+    {
+      "id": "C4-CAL-03",
+      "payload": {
+        "schema_version": 1,
+        "query": "6월 9일 회의에서 정한 노트북 공유 방식, 전용 저장소 개설 담당자와 기록된 진행 상태, 그리고 그 전용 저장소의 확정 URL을 알려줘.",
+        "contexts": [
+          {
+            "document_id": "c4-f01-doc02",
+            "revision": 1,
+            "title": "scikit-image Outreachy weekly meeting — 2023-06-09",
+            "meeting_date": "2023-06-09",
+            "chunk_id": "c4-f01-doc02-r1-c0000",
+            "text": "# Outreachy meeting\n\n### scikit-image project: narrative documentation\n\n- **Time:** Friday, Jun 9, 2023, 17:00–17:45 UTC\n- **[Join video call via Zoom](https://us06web.zoom.us/j/88060567580?pwd=THRpaWFnSFNwK0Fycy9FVk5RYnV5UT09)**\n- **Notes:** https://hackmd.io/@mkcor/outreachy-meeting\n- **[Archive](https://github.com/scikit-image/skimage-archive/internships/Outreachy_2023-05/)**\n\n**Present:** Ananya, Biola, Lars, Marianne\n\n**Moderator:** Marianne \n\n\n## Agenda\n\n### Review of the week\n\n- How did it go wrt Week 2 from [Timeline](https://hackmd.io/@mkcor/outreachy-roadmap)?\n    - Interns didn't even have to be 'productive' yet!\n    - Read to learn *and* code to practise.\n    - It's motivating to have a specific goal (see next item).\n- Finish inpainting example [#6853](https://github.com/scikit-image/scikit-image/pull/6853)?\n    - pressure vs. drive\n    - [x] Marianne adds last visualization and credits Biola.\n- async communication: OK\n- office hour on Wednesday at 13:00 UTC: OK\n\n### ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 994
+          },
+          {
+            "document_id": "c4-f01-doc02",
+            "revision": 1,
+            "title": "scikit-image Outreachy weekly meeting — 2023-06-09",
+            "meeting_date": "2023-06-09",
+            "chunk_id": "c4-f01-doc02-r1-c0001",
+            "text": "re vs. drive\n    - [x] Marianne adds last visualization and credits Biola.\n- async communication: OK\n- office hour on Wednesday at 13:00 UTC: OK\n\n### Embryonic development project\n\n- Read dataset\n- Select one frame\n    - Ananya used scipy and pandas so far.\n    - But how do you make sense of it?\n        - high level: read supplementary material\n        - low level: inspect the array (dim? shape?) and *visualize* it\n            - Use napari?\n- What are we seeing? Is spacing regular in all 3 spatial dimensions? Is the 3D image grayscale or multichannel?\n- First, focus on the 3D segmentation (one frame).\n- The big picture is about measuring growth velocity(ies).\n\n### Collaboration process\n\n- Marianne would like to `spin jupyter-lab`...\n    - Lars explained why you need to `spin` to set the `PYTHONPATH`; recommends current workaround:\n    ```bash\n    $ spin shell\n    $ jupyter-lab\n    ```\n    in a virtualenv where you have jupyter-lab installed and scikit-image in development. \n- How can ",
+            "page": null,
+            "start_offset": 844,
+            "end_offset": 1843
+          },
+          {
+            "document_id": "c4-f01-doc02",
+            "revision": 1,
+            "title": "scikit-image Outreachy weekly meeting — 2023-06-09",
+            "meeting_date": "2023-06-09",
+            "chunk_id": "c4-f01-doc02-r1-c0002",
+            "text": "`bash\n    $ spin shell\n    $ jupyter-lab\n    ```\n    in a virtualenv where you have jupyter-lab installed and scikit-image in development. \n- How can we best share notebooks?\n  - Share notebooks via a Git repository.\n      - [ ] Marianne creates a dedicated repo.\n  - Lars: Use format https://jupytext.readthedocs.io/en/latest/index.html\n\n### Roadmap\n\n - Interns would like to have a timeline for the TPS project as well.\n - Week of July 9th, 2023 will be off for scikit-image projects.\n     - [x] Marianne emails the Outreachy organizers to let them know.\n",
+            "page": null,
+            "start_offset": 1693,
+            "end_offset": 2250
+          }
+        ]
+      },
+      "response_language": "ko",
+      "official_input_tokens": 2110,
+      "prompt_sha256": "e05884f6f75a0b5142a5507f911759c18b9584c6be0d962fead027986c119011"
+    },
+    {
+      "id": "C4-CAL-04",
+      "payload": {
+        "schema_version": 1,
+        "query": "4월 17일 회의에 기록된 비트 누락 드라이버의 반납 접수와 재대여 승인 상태를 설명해 줘. 재대여를 위한 운영 안내서의 검사 조건, 부속품 누락에 대한 비용 처리 원칙, 이번 회의에서 비용을 새로 결정했는지도 함께 정리해 줘.",
+        "contexts": [
+          {
+            "document_id": "c4-f02-doc02",
+            "revision": 1,
+            "title": "미리내 공유공구실 시범 운영 검토회의 — 2026-04-17",
+            "meeting_date": "2026-04-17",
+            "chunk_id": "c4-f02-doc02-r1-c0000",
+            "text": "# 미리내 공유공구실 시범 운영 검토회의\n\nSynthetic, AI-authored fictional organization and people; not a real meeting record.\n\n일시: 2026년 4월 17일 18:30–19:25. 장소: 가상의 미리내 생활문화센터 준비실.\n참석: 서윤, 도현, 나리, 민서. 민서가 4월 3일 회의의 후속 작업표와 첫 시범 운영 기록을 공유했다.\n\n## 4월 11일 운영 기록\n\n첫 토요일에는 대여 인계 12건과 반납 5건을 처리했다. 민서가 거래 번호로 기록한 인계 대기 시간의 중앙값은 7분, 가장 긴 대기는 19분이었다. 긴 대기 두 건은 사용법 설명과 부속품 확인이 같은 접수대에서 겹친 시간대에 발생했다. 이 관찰만으로 예약 방식이 원인이라고 단정하지 않고, 다음 운영일에는 안내 동선과 검사 시간을 따로 적기로 했다.\n\n반납 상자에서 회수한 드라이버 한 묶음은 비트 한 개가 빠져 있었다. 반납 접수는 기록됐지만 재대여 승인은 내리지 않았고, 도현이 보류 표찰을 붙였다. 대여자는 누락 사실을 확인했고 다음 방문 때 비트를 가져오겠다고 연락했다. 추가 비용이나 새 보상 기준은 결정하지 않았다. 기존 안내서대로 재고 상태와 후속 연락만 기록한다.\n\n## 다음 운영일의 변경\n\n참석자들은 4월 18일에 한해 대여 인계 예약 상한을 시간당 여섯 건에서 네 건으로 낮추기로 결정했다. 나리는 안내판 설명을 맡고 서윤은 인계 확인을 맡아 접수대 역할을 분리한다. 개관 시간 10:00–13:00과 반납 접수 방식은 유지한다. 민서가 예약 화면의 남은 슬롯과 이미 예약한 사람에게 보내는 안내를 같은 날 갱신한다. 이미 확정된 예약을 취소하는 조치는 필요하지 않았다.\n\n이 변경은 첫날 관찰을 확인하기 위한 시범 운영 조정이다. 정규 운영의 인계 상한으로 자동 연장하지 않는다. 민서는 두 운영일의 대기 기록을 4월 21일까지 정리하며, 도현은 검사에 걸린 시간을 따로 제공한다. 이 자료를 함께 본 뒤 다음 달 운영 시간을 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 997
+          },
+          {
+            "document_id": "c4-f02-doc03",
+            "revision": 1,
+            "title": "Mirinae Community Tool Library — operating handbook v1",
+            "meeting_date": null,
+            "chunk_id": "c4-f02-doc03-r1-c0002",
+            "text": "r. A volunteer may pause the handover if a required safety item is unavailable.\n\nBorrowers may return a kit at the desk or place it in the return box while the community centre is open on weekdays, 09:00–18:00. Receiving a return and approving it for another loan are different steps. The desk records the return time and transaction number; the maintenance lead checks the kit, accessories, and visible damage. Only the completed check permits the availability state to be restored. Items awaiting a check stay on the return shelf with a hold label.\n\nIf an accessory is missing, staff record what was received, keep the kit unavailable, and contact the borrower using the contact details already in the loan register. A volunteer should not invent a replacement charge or promise compensation. Any proposed financial rule requires a separately documented operating decision and notice to residents before use.\n\n## People and records\n\nSeoyun (서윤), the operations coordinator, owns the reservation ",
+            "page": null,
+            "start_offset": 1690,
+            "end_offset": 2687
+          }
+        ]
+      },
+      "response_language": "ko",
+      "official_input_tokens": 1860,
+      "prompt_sha256": "da46631a8b4ac65b9c3996eb49ad17eec8d4527d5a1cc98131e7ecef620ab582"
+    },
+    {
+      "id": "C4-CAL-05",
+      "payload": {
+        "schema_version": 1,
+        "query": "For the Saturday trials, compare the April 3 plan with the April 17 decision: give the planned dates, opening hours and original hourly handover limit; say whether returns occupy handover slots; explain the April 18 limit and whether hours or return arrangements changed; and clarify whether it automatically became a routine rule.",
+        "contexts": [
+          {
+            "document_id": "c4-f02-doc01",
+            "revision": 1,
+            "title": "미리내 공유공구실 운영회의 — 2026-04-03",
+            "meeting_date": "2026-04-03",
+            "chunk_id": "c4-f02-doc01-r1-c0000",
+            "text": "# 미리내 공유공구실 운영회의\n\nSynthetic, AI-authored fictional organization and people; not a real meeting record.\n\n일시: 2026년 4월 3일 18:30–19:20. 장소: 가상의 미리내 생활문화센터 준비실.\n참석: 운영담당 서윤, 정비담당 도현, 자원활동 조정담당 나리, 기록담당 민서. 진행과 기록은 민서가 맡았다.\n\n## 개관 준비와 대여 흐름\n\n미리내 공유공구실은 주민이 가끔 쓰는 수공구를 빌리고 간단한 수선 방법을 배우는 가상의 비영리 공간이다. 4월 1일 운영 안내서 v1을 참석자에게 배포했다. 오늘 회의는 개관 준비 현황과 두 차례의 토요일 시범 운영을 다뤘다. 일반 안내서에 적힌 검사와 기록 절차는 그대로 적용한다.\n\n서윤은 예약을 받기 전에 실제로 대여 가능한 수량을 확정해야 한다고 보고했다. 등록된 공구 묶음 18개 중 14개는 점검을 마쳤다. 충전 드라이버 두 묶음은 충전기 표기가 불분명하고, 나머지 두 묶음은 보호안경 교체가 필요하다. 네 묶음에는 정비 보류 표찰을 붙이고 예약 화면에 올리지 않기로 했다. 도현이 4월 9일까지 충전기와 보호구를 대조한 뒤 결과를 기록한다. 수량 확보를 위해 검사를 생략하지 않는다.\n\n## 토요일 시범 운영\n\n4월 11일과 18일에는 10:00–13:00에 대여와 반납을 접수하기로 했다. 서윤이 접수대, 나리가 안내와 자원활동 배치를 맡는다. 민서는 두 날에 쓰는 동일한 대기 기록 양식을 준비한다. 전화 예약도 온라인 예약과 같은 대장에 적고, 예약 순서를 바꾸는 별도 우선권을 만들지 않는다.\n\n첫 시범 기간에는 한 시간에 최대 여섯 건의 대여 인계를 예약한다. 반납은 이 예약 슬롯을 차지하지 않는다. 반납 상자는 안내서의 평일 운영 시간 동안 사용할 수 있지만, 상자에 들어간 물품을 즉시 대여 가능 상태로 바꾸지 않는다. 도현이 실제 물품과 부속품을 검사하고 상태를 갱신한 후 다시 예약에 노출한다.\n\n## 안내와 활동 준비\n\n나리는 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c4-f02-doc02",
+            "revision": 1,
+            "title": "미리내 공유공구실 시범 운영 검토회의 — 2026-04-17",
+            "meeting_date": "2026-04-17",
+            "chunk_id": "c4-f02-doc02-r1-c0000",
+            "text": "# 미리내 공유공구실 시범 운영 검토회의\n\nSynthetic, AI-authored fictional organization and people; not a real meeting record.\n\n일시: 2026년 4월 17일 18:30–19:25. 장소: 가상의 미리내 생활문화센터 준비실.\n참석: 서윤, 도현, 나리, 민서. 민서가 4월 3일 회의의 후속 작업표와 첫 시범 운영 기록을 공유했다.\n\n## 4월 11일 운영 기록\n\n첫 토요일에는 대여 인계 12건과 반납 5건을 처리했다. 민서가 거래 번호로 기록한 인계 대기 시간의 중앙값은 7분, 가장 긴 대기는 19분이었다. 긴 대기 두 건은 사용법 설명과 부속품 확인이 같은 접수대에서 겹친 시간대에 발생했다. 이 관찰만으로 예약 방식이 원인이라고 단정하지 않고, 다음 운영일에는 안내 동선과 검사 시간을 따로 적기로 했다.\n\n반납 상자에서 회수한 드라이버 한 묶음은 비트 한 개가 빠져 있었다. 반납 접수는 기록됐지만 재대여 승인은 내리지 않았고, 도현이 보류 표찰을 붙였다. 대여자는 누락 사실을 확인했고 다음 방문 때 비트를 가져오겠다고 연락했다. 추가 비용이나 새 보상 기준은 결정하지 않았다. 기존 안내서대로 재고 상태와 후속 연락만 기록한다.\n\n## 다음 운영일의 변경\n\n참석자들은 4월 18일에 한해 대여 인계 예약 상한을 시간당 여섯 건에서 네 건으로 낮추기로 결정했다. 나리는 안내판 설명을 맡고 서윤은 인계 확인을 맡아 접수대 역할을 분리한다. 개관 시간 10:00–13:00과 반납 접수 방식은 유지한다. 민서가 예약 화면의 남은 슬롯과 이미 예약한 사람에게 보내는 안내를 같은 날 갱신한다. 이미 확정된 예약을 취소하는 조치는 필요하지 않았다.\n\n이 변경은 첫날 관찰을 확인하기 위한 시범 운영 조정이다. 정규 운영의 인계 상한으로 자동 연장하지 않는다. 민서는 두 운영일의 대기 기록을 4월 21일까지 정리하며, 도현은 검사에 걸린 시간을 따로 제공한다. 이 자료를 함께 본 뒤 다음 달 운영 시간을 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 997
+          },
+          {
+            "document_id": "c4-f02-doc02",
+            "revision": 1,
+            "title": "미리내 공유공구실 시범 운영 검토회의 — 2026-04-17",
+            "meeting_date": "2026-04-17",
+            "chunk_id": "c4-f02-doc02-r1-c0001",
+            "text": " 않았다.\n\n이 변경은 첫날 관찰을 확인하기 위한 시범 운영 조정이다. 정규 운영의 인계 상한으로 자동 연장하지 않는다. 민서는 두 운영일의 대기 기록을 4월 21일까지 정리하며, 도현은 검사에 걸린 시간을 따로 제공한다. 이 자료를 함께 본 뒤 다음 달 운영 시간을 결정한다.\n\n## 준비 작업과 기증\n\n4월 3일에 보류했던 네 묶음 가운데 충전 드라이버 두 묶음과 보호안경을 교체한 한 묶음은 4월 9일 검사를 통과했다. 나머지 한 묶음은 맞는 보호안경이 아직 없어 계속 보류한다. 이 수치는 4월 11일 반납품의 비트 누락 건과 별개다. 도현은 작업표에 최초 점검과 반납 후 점검을 다른 줄로 남겼다.\n\n영문 대여 순서표의 용어 검토는 끝났고, 나리가 현장 설명용 큰 글씨 판을 출력했다. 민서는 안내서 자체를 새 버전으로 발행하지 않았다. 새로 준비한 순서표는 기존 절차를 읽기 쉽게 정리한 부속 안내물로 배포한다.\n\n기증 신청은 수동 드라이버 두 세트와 톱 한 개가 들어왔다. 4월 18일에는 물품을 받아 기증 대장에 기록하고 대여품과 다른 선반에 둔다. 도현의 검사를 통과한 뒤에만 재고 등록 여부를 결정한다. 기증 예정 수량을 근거로 추가 예약을 열지 않는다.\n\n## 주민 활동과 다음 회의\n\n나리는 첫 수선 모임에서 옷걸이와 작은 선반 조립을 다루자는 제안을 받았다. 공간 사용 시간을 문화센터 담당자에게 확인한 뒤 별도 일정안을 작성하기로 했다. 이번 회의에서 수선 모임의 날짜와 신청 정원은 확정하지 않았다. 다음 운영 검토는 4월 24일이며, 민서는 비교 기록과 남은 정비 목록을 사전에 공유한다.\n",
+            "page": null,
+            "start_offset": 847,
+            "end_offset": 1641
+          },
+          {
+            "document_id": "c4-f02-doc03",
+            "revision": 1,
+            "title": "Mirinae Community Tool Library — operating handbook v1",
+            "meeting_date": null,
+            "chunk_id": "c4-f02-doc03-r1-c0004",
+            "text": "ordinator, who keeps a short change note rather than silently deleting the previous entry.\n\n## Donations and review\n\nDonation offers are entered in a separate register with the item description and listed accessories. Receiving a donated item does not make it lending stock. Donated tools stay apart from available kits until the maintenance lead completes an inspection and staff record an explicit stock decision. Volunteers may decline an unsuitable item without counting it toward service capacity.\n\nTrial reviews consider handover queues, instruction time, return checks, missing accessories, and volunteer workload together. A change agreed for one trial date applies only to that date unless the decision explicitly extends it. The records coordinator keeps the earlier decision and links a later change to it. Permanent changes to routine hours or lending rules are issued as a new handbook version with an effective date; a simplified sign that repeats an existing procedure is an ",
+            "page": null,
+            "start_offset": 3380,
+            "end_offset": 4370
+          }
+        ]
+      },
+      "response_language": "en",
+      "official_input_tokens": 3664,
+      "prompt_sha256": "8e79cf35f9c518a98f82826150e9fc84c3ed8289ba47001e0e0d7cb7272b2cad"
+    },
+    {
+      "id": "C4-CAL-06",
+      "payload": {
+        "schema_version": 1,
+        "query": "As of the April 17 meeting, what topics were proposed for the first repair gathering, what prerequisite and planning step did Nari have, and what confirmed date and signup capacity were set for that gathering?",
+        "contexts": [
+          {
+            "document_id": "c4-f02-doc01",
+            "revision": 1,
+            "title": "미리내 공유공구실 운영회의 — 2026-04-03",
+            "meeting_date": "2026-04-03",
+            "chunk_id": "c4-f02-doc01-r1-c0000",
+            "text": "# 미리내 공유공구실 운영회의\n\nSynthetic, AI-authored fictional organization and people; not a real meeting record.\n\n일시: 2026년 4월 3일 18:30–19:20. 장소: 가상의 미리내 생활문화센터 준비실.\n참석: 운영담당 서윤, 정비담당 도현, 자원활동 조정담당 나리, 기록담당 민서. 진행과 기록은 민서가 맡았다.\n\n## 개관 준비와 대여 흐름\n\n미리내 공유공구실은 주민이 가끔 쓰는 수공구를 빌리고 간단한 수선 방법을 배우는 가상의 비영리 공간이다. 4월 1일 운영 안내서 v1을 참석자에게 배포했다. 오늘 회의는 개관 준비 현황과 두 차례의 토요일 시범 운영을 다뤘다. 일반 안내서에 적힌 검사와 기록 절차는 그대로 적용한다.\n\n서윤은 예약을 받기 전에 실제로 대여 가능한 수량을 확정해야 한다고 보고했다. 등록된 공구 묶음 18개 중 14개는 점검을 마쳤다. 충전 드라이버 두 묶음은 충전기 표기가 불분명하고, 나머지 두 묶음은 보호안경 교체가 필요하다. 네 묶음에는 정비 보류 표찰을 붙이고 예약 화면에 올리지 않기로 했다. 도현이 4월 9일까지 충전기와 보호구를 대조한 뒤 결과를 기록한다. 수량 확보를 위해 검사를 생략하지 않는다.\n\n## 토요일 시범 운영\n\n4월 11일과 18일에는 10:00–13:00에 대여와 반납을 접수하기로 했다. 서윤이 접수대, 나리가 안내와 자원활동 배치를 맡는다. 민서는 두 날에 쓰는 동일한 대기 기록 양식을 준비한다. 전화 예약도 온라인 예약과 같은 대장에 적고, 예약 순서를 바꾸는 별도 우선권을 만들지 않는다.\n\n첫 시범 기간에는 한 시간에 최대 여섯 건의 대여 인계를 예약한다. 반납은 이 예약 슬롯을 차지하지 않는다. 반납 상자는 안내서의 평일 운영 시간 동안 사용할 수 있지만, 상자에 들어간 물품을 즉시 대여 가능 상태로 바꾸지 않는다. 도현이 실제 물품과 부속품을 검사하고 상태를 갱신한 후 다시 예약에 노출한다.\n\n## 안내와 활동 준비\n\n나리는 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c4-f02-doc01",
+            "revision": 1,
+            "title": "미리내 공유공구실 운영회의 — 2026-04-03",
+            "meeting_date": "2026-04-03",
+            "chunk_id": "c4-f02-doc01-r1-c0001",
+            "text": " 예약 슬롯을 차지하지 않는다. 반납 상자는 안내서의 평일 운영 시간 동안 사용할 수 있지만, 상자에 들어간 물품을 즉시 대여 가능 상태로 바꾸지 않는다. 도현이 실제 물품과 부속품을 검사하고 상태를 갱신한 후 다시 예약에 노출한다.\n\n## 안내와 활동 준비\n\n나리는 사용법 설명을 예약 안내문에 넣는 것만으로 충분하지 않다고 말했다. 참석자들은 처음 대여하는 사람에게 현장에서 그림 안내판을 보여주고 잠금장치 확인을 함께 하기로 했다. 영어로도 안내를 읽고 싶다는 지역 활동가의 제안에 따라 민서가 기존 안내서의 표현을 참고해 짧은 대여 순서표를 준비한다. 번역본의 내용 검토가 끝나기 전에는 완료 표시를 하지 않는다.\n\n기증 접수는 4월 18일부터 시작한다. 기증 신청은 접수하되, 검사 전 기증품을 대여 재고에 합산하지 않는다. 나리는 기증 의사를 밝힌 사람에게 물품 종류와 부속품 목록만 먼저 받는다. 장비 구매와 기증 확정은 이 회의에서 승인하지 않았다.\n\n## 다음 확인\n\n민서는 대기 시간과 반납 처리 누락을 이름 대신 거래 번호로 기록한다. 4월 17일 준비 회의에서 첫 운영일의 대기 기록, 정비 보류 물품, 안내판 검토 상태를 확인한다. 시범 운영의 결과를 보기 전에는 정규 토요일 개관 여부를 공지하지 않기로 했다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1484
+          },
+          {
+            "document_id": "c4-f02-doc02",
+            "revision": 1,
+            "title": "미리내 공유공구실 시범 운영 검토회의 — 2026-04-17",
+            "meeting_date": "2026-04-17",
+            "chunk_id": "c4-f02-doc02-r1-c0000",
+            "text": "# 미리내 공유공구실 시범 운영 검토회의\n\nSynthetic, AI-authored fictional organization and people; not a real meeting record.\n\n일시: 2026년 4월 17일 18:30–19:25. 장소: 가상의 미리내 생활문화센터 준비실.\n참석: 서윤, 도현, 나리, 민서. 민서가 4월 3일 회의의 후속 작업표와 첫 시범 운영 기록을 공유했다.\n\n## 4월 11일 운영 기록\n\n첫 토요일에는 대여 인계 12건과 반납 5건을 처리했다. 민서가 거래 번호로 기록한 인계 대기 시간의 중앙값은 7분, 가장 긴 대기는 19분이었다. 긴 대기 두 건은 사용법 설명과 부속품 확인이 같은 접수대에서 겹친 시간대에 발생했다. 이 관찰만으로 예약 방식이 원인이라고 단정하지 않고, 다음 운영일에는 안내 동선과 검사 시간을 따로 적기로 했다.\n\n반납 상자에서 회수한 드라이버 한 묶음은 비트 한 개가 빠져 있었다. 반납 접수는 기록됐지만 재대여 승인은 내리지 않았고, 도현이 보류 표찰을 붙였다. 대여자는 누락 사실을 확인했고 다음 방문 때 비트를 가져오겠다고 연락했다. 추가 비용이나 새 보상 기준은 결정하지 않았다. 기존 안내서대로 재고 상태와 후속 연락만 기록한다.\n\n## 다음 운영일의 변경\n\n참석자들은 4월 18일에 한해 대여 인계 예약 상한을 시간당 여섯 건에서 네 건으로 낮추기로 결정했다. 나리는 안내판 설명을 맡고 서윤은 인계 확인을 맡아 접수대 역할을 분리한다. 개관 시간 10:00–13:00과 반납 접수 방식은 유지한다. 민서가 예약 화면의 남은 슬롯과 이미 예약한 사람에게 보내는 안내를 같은 날 갱신한다. 이미 확정된 예약을 취소하는 조치는 필요하지 않았다.\n\n이 변경은 첫날 관찰을 확인하기 위한 시범 운영 조정이다. 정규 운영의 인계 상한으로 자동 연장하지 않는다. 민서는 두 운영일의 대기 기록을 4월 21일까지 정리하며, 도현은 검사에 걸린 시간을 따로 제공한다. 이 자료를 함께 본 뒤 다음 달 운영 시간을 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 997
+          },
+          {
+            "document_id": "c4-f02-doc02",
+            "revision": 1,
+            "title": "미리내 공유공구실 시범 운영 검토회의 — 2026-04-17",
+            "meeting_date": "2026-04-17",
+            "chunk_id": "c4-f02-doc02-r1-c0001",
+            "text": " 않았다.\n\n이 변경은 첫날 관찰을 확인하기 위한 시범 운영 조정이다. 정규 운영의 인계 상한으로 자동 연장하지 않는다. 민서는 두 운영일의 대기 기록을 4월 21일까지 정리하며, 도현은 검사에 걸린 시간을 따로 제공한다. 이 자료를 함께 본 뒤 다음 달 운영 시간을 결정한다.\n\n## 준비 작업과 기증\n\n4월 3일에 보류했던 네 묶음 가운데 충전 드라이버 두 묶음과 보호안경을 교체한 한 묶음은 4월 9일 검사를 통과했다. 나머지 한 묶음은 맞는 보호안경이 아직 없어 계속 보류한다. 이 수치는 4월 11일 반납품의 비트 누락 건과 별개다. 도현은 작업표에 최초 점검과 반납 후 점검을 다른 줄로 남겼다.\n\n영문 대여 순서표의 용어 검토는 끝났고, 나리가 현장 설명용 큰 글씨 판을 출력했다. 민서는 안내서 자체를 새 버전으로 발행하지 않았다. 새로 준비한 순서표는 기존 절차를 읽기 쉽게 정리한 부속 안내물로 배포한다.\n\n기증 신청은 수동 드라이버 두 세트와 톱 한 개가 들어왔다. 4월 18일에는 물품을 받아 기증 대장에 기록하고 대여품과 다른 선반에 둔다. 도현의 검사를 통과한 뒤에만 재고 등록 여부를 결정한다. 기증 예정 수량을 근거로 추가 예약을 열지 않는다.\n\n## 주민 활동과 다음 회의\n\n나리는 첫 수선 모임에서 옷걸이와 작은 선반 조립을 다루자는 제안을 받았다. 공간 사용 시간을 문화센터 담당자에게 확인한 뒤 별도 일정안을 작성하기로 했다. 이번 회의에서 수선 모임의 날짜와 신청 정원은 확정하지 않았다. 다음 운영 검토는 4월 24일이며, 민서는 비교 기록과 남은 정비 목록을 사전에 공유한다.\n",
+            "page": null,
+            "start_offset": 847,
+            "end_offset": 1641
+          }
+        ]
+      },
+      "response_language": "en",
+      "official_input_tokens": 3868,
+      "prompt_sha256": "2211c1f7612d183c9eca7ec33dca59131e862cc8d5dd6f387c443e6bff4ccfdf"
+    }
+  ]
+}

@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C4 양쪽 입력 준비 완료 · 생성 전 실행계획 고정
+
+f542691에서 calibration6개(1255~3868tokens)와 격리 validation8개(902~3887tokens)의 공식 offline 준비가 각1회 통과했다. Tokenizer각1/native·download0이며 원래payload/context·원문·item·코드85는 불변이다. 정확한 공개 복사본2개씩을 각 meetings-c4-*-inputs-v1에 남겼다. 이미 끝난 준비를 반복하지 않는다. [공식 준비 기록](MEETINGS-C4-PREPARATION.md)에 실제hash·57.391/57.719초 준비시간·노출 경계를 보존했다.
+
+새 executionplan SHAca2c21eb5e039dc230193513d990a23545659147173d1bbe065995edcaa5034d은 입력/영수증/85파일과 판정자2·제외역할22를 연결한다. 이 계획을 커밋한 뒤 실제Git check→calibration 최대6호출→익명 최종답변 판정 잠금→원본6/6 및 운영관문 재생 순서다. Validation 준비가 통과했다고 실제생성/판정이 열린 것은 아니며 부모는 그 의미 내용을 열지 않는다. 현재 새품질native0이고 추가smoke/retry/warmup0이다.
+
+f542691의 push38857698147/PR38857702290 필수3job이 각각 모두 성공했다. 전체goalactive·Phase1/PR14draft·무료/로컬만 유지한다. 다음 실행은 active process와 output/ledger 존재 여부를 먼저 확인해 중복하지 않는다.
+
 ## Calibration v2 수락·최종 판정 역할 등록 · 원격67개 통과
 
 Calibration v2 독립 검토는6수락/0불수락/추가수정0이다. Item freeze6 SHAf37ce63b8d58db6eebb50da3e72231d95a0102502ce463a00d9d4d9461ead9a8을 만들었다. 원래5/1 검토7파일은29d7e0a 그대로이며 충분 근거 대안1개만 추가했다. 질문/context/필수사실/다른5문항은 불변이다. Validation8/freeze6c29f8930은 커밋 뒤 실제 Git 전체material 검사도 통과했다. [문항 준비 기록](MEETINGS-C4-ITEMS.md)을 따른다.

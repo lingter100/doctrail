@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 공식 offline 준비와 실행계획 연결
+
+기존 calibration/격리 validation 검토 역할이 각 split의 실제 Git 계약 검사 후 동결 CLI를 정확히1회씩 실행했다. 각각6/6·8/8 계수 통과, tokenizer각1/native·download0이다. 원문/payload를 수정하지 않았고 exactbyte 공개 복사본을 검사했다. 부모는 validation 의미 내용을 받지 않고 metadata/hashes만 사용해85binding·제외역할22·사전등록judge2를 연결한 executionplan ca2c21eb를 작성했다. 부모 자체 모델 설정 변경·사용자검수0이며 아직 품질 생성/판정 결과는 없다.
+
 ## 2026-10-16 · v2 독립 수락과 새로운 최종 판정 역할
 
 기존 calibration 작성자가 새4파일만 만들고 기존 독립 검토자가 별도4파일과 정확한6binding freeze를 반환했다. 부모는 hash·구조·변경 범위를 확인하며 의미 검토를 대신하지 않았다. 격리 validation 검토자는 실제 Git 전체material검사를37.36초에 통과했고 metadata증거만 반환했다. 공식 tokenizer/native는 아직0이다.
