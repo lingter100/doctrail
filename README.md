@@ -14,7 +14,9 @@
 
 앞선 C3는 요구사항별 근거 계획 후 자연어로 답하는 두 단계 후보를 고정하고 실제6요청/9추론을 완료했다. 독립 최종답변 판정은2/6이며 정확 인용30/30과 의미 정확성은 달랐다. 검증 split 생성과 서비스 채택은 하지 않는다. [실제 C3 결과](docs/MEETINGS-C3-RESULTS.md), [실행·판정 계약](docs/MEETINGS-C3-EXECUTION-CONTRACT.md), [현재 상태](docs/STATUS.md)를 기준으로 완료 여부를 구분한다. 서비스에서는 AI 답변 오류 뒤 같은 질문과 필터로 [원문 검색을 이어가는 흐름](docs/MEETINGS-SEARCH-RECOVERY.md)을 실제 Java/React에서 확인했다.
 
-C4는 같은 캐시 모델의 단일 사고 경로를 검토한다. 첫 자원 실행의 문법 실패를 보존했고, 별도 호환성 후속은 정상/부하2건을 통과했다. 부하928출력은88초로90초 한도에 여유가 작으며 **자원 통과는 답변 품질 통과가 아니다**. [자원 결과](docs/MEETINGS-C4-COMPAT-RESULTS.md), [새 자료·품질 계획](docs/MEETINGS-C4-QUALITY-PLAN.md), [구현·검증 상태](docs/MEETINGS-C4-QUALITY-IMPLEMENTATION.md)를 분리해 기록한다. 새 품질 평가와 서비스 채택은 아직 완료되지 않았다.
+C4의 단일 사고 경로는 새 자료로 실제 품질 평가를 시작했지만 두 번째 요청의90초 제한 초과로 종료했다. 전송2회 중 정상 파싱1개, 의미 판정0개이며 나머지 calibration4개와 validation8개는 실행하지 않았다. [실패 결과와 원본 기록](docs/MEETINGS-C4-QUALITY-RESULTS.md)을 보존하고 서비스에 채택하지 않는다. 앞선 [자원 검사 통과](docs/MEETINGS-C4-COMPAT-RESULTS.md)와 실제 답변 품질·시간 조건을 구분한다. 다음 [모델 없는 검증 비용 측정](docs/MEETINGS-HOST-PROOF-PROFILE-PLAN.md)은 별도 합성 저장소를 사용하며 실제 C4 지연의 원인을 입증한 결과가 아니다.
+
+제품 화면에서는 접근이 거부된 회의의 오래된 작업 목록을 숨기고, 결정 연결 충돌 후 양쪽 회의를 다시 읽어 재선택하게 했다. 다른 회의 목록을 불러오지 못해도 현재 작성 중인 근거는 보존한다. [상세·연결 복구](docs/MEETINGS-DETAIL-RECOVERY.md)는 실제 Java 브라우저에서 검증했고, 모델 답변 품질과 사용자 검수 여부는 따로 기록한다.
 
 문서 등록 → 검색 → 원문 근거 확인을 로컬에서 구현·검증했다. 로그인·작업공간·나만 보기 권한, 수정·삭제·재처리, 검색 기록·피드백도 실제 API에 연결했다. 기본 BM25 외에 E5 의미 검색·혼합·BGE 재정렬을 선택할 수 있으며 실제 로컬 GPU와 Java·React 연결을 합성 자료로 검증했다. 검색 임베딩의 제한 미세조정도 실제로 수행했다. [현재 상태](docs/STATUS.md), [모델 서비스 실행·한계](docs/MODEL-SERVING.md).
 

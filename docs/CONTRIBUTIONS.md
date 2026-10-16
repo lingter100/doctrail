@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · Host 프로파일 구현과 독립 코드 검토
+
+실제 Astra high `host_proof_profile`이 NEW2를 구현하고 최종29통과/2skip·Ruff와 검사 전후 hash를 반환했다. 실제 Astra xhigh `free_qa_candidate_review`와 부모의 읽기 검토에서 helper 경로, 실패 read 계수, 원시 reference, 기록·deadline, freeze 선행 증명과 읽기 허용 범위를 보완했다. 최종 script995b3428/test659546d9에서 추가 지적이 없었다. 부모는 로컬9개 증거 hash와 최종 before/after 일치, 동결85 불변을 확인하고 새 source52 freeze1171f14f·공개 검증 영수증1234f1cf를 작성했다. 공식 profile0·사용자 검수0이며 테스트를 실제 성능 결과로 기록하지 않는다.
+
 ## 2026-10-16 · 합성 host 프로파일 역할 분리
 
 기존실제Astraxhigh `free_qa_candidate_review`가새설계2파일을작성했다. 부모는실제repo측정과합성fixture측정이섞인중간초안을채택하지않고합성134파일로확정했다. 별도실행승인파일/추가커밋도요구하지않도록정리했다. 최종hash94683b36/652a2f46, 실제profile0이다. 새 `host_proof_profile`을도구에gpt-6-astra/high/fork none으로지정했고수락됐다. 이역할은설계커밋을기다리며코드읽기만했고NEW2구현/테스트를맡는다. 부모설정변경·사용자검수0, 실제서비스모델호출0이다.
