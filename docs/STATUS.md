@@ -1,5 +1,11 @@
 # 진행 상태
 
+## Host 공식 프로파일1회 완료 · 다음 무료 개선 우선순위 비교
+
+3a1268f의 push38863819959/PR38863824654 필수3job 성공 후 official CLI1회, cold1+warm6 모두 통과했다. CLIexit0+passed summary+receipt를 확인했고 HEAD/52bytes 불변이다. 원본c746ebd3·별도CLI7098ae1c·공개복사affb9cae를 [실측 결과](MEETINGS-HOST-PROOF-PROFILE-RESULTS.md)에 연결했다. 출력 `.local/meetings-host-proof-profile-v1/`는 이미 소비됐으므로 재실행하지 않는다. Observer session25872도 exit0으로 종료됐다.
+
+Cold20.083초, warm 중앙값2.933초(2.786–5.329), setup14.725초, CLI벽시계56.613초다. Warm git_show0이며 snapshot/hash·Git proof·unchanged3구간이78.61–83.09%였다. 실제 C4의 원인이나 서비스 시간으로 외삽하지 않는다. 모델/토큰/HTTP/품질0이다. 기존 Astra xhigh와 새 실제Astra max `bounded_resource_decision`이 metadata/code만으로 proof 개선 대 native/GPU resource 검토 중 가장 작은 다음1개를 읽기 비교 중이다. 구현/새실행은아직0. C4/모든닫힌pool불변·전체goalACTIVE·Phase1/PR14draft 유지.
+
 ## Host 프로파일 구현29개 통과 · 동결 후 CI 확인 단계
 
 [구현 기록](MEETINGS-HOST-PROOF-PROFILE-IMPLEMENTATION.md): 최종29통과/2Windows symlink skip/56.33초, Ruff 통과. 검사 전후 script995b3428/test659546d9 동일이며 독립 Astra xhigh 읽기 검토도 같은 hash에서 추가 finding 없음을 확인했다. 초기10실패/Ruff10, clock fixture1실패, 중간21/25/29 통과를 보존하고 합산하지 않는다.

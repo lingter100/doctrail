@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 공식 host 측정과 제한적 설계 비교
+
+부모가3a1268f의 실제 CI·Git bytes·출력 부재를 확인하고 등록한CLI를1회 실행했다.7pass 완료/exit0/summary/receipt 일치, HEAD·source52 불변을 확인해 원본metadata2개의 정확한 공개 복사와집계를남겼다. 측정은합성/CPU파일검증이며모델·품질·사용자검수0이다.
+
+후속 판단은 기존 실제Astraxhigh `free_qa_candidate_review`와 새 `bounded_resource_decision`에 실제수락된 gpt-6-astra/max/fork none을 사용한다. 반복 실패의 어려운 선택에 대한 제한적 읽기 비교1회이며 새 구현·resource 실행은 허가하지 않았다. 두 역할은 metadata와코드만 읽고최종독립품질판정에서제외한다. 부모채팅설정변경이나서비스모델변경으로기록하지않는다.
+
 ## 2026-10-16 · Host 프로파일 구현과 독립 코드 검토
 
 실제 Astra high `host_proof_profile`이 NEW2를 구현하고 최종29통과/2skip·Ruff와 검사 전후 hash를 반환했다. 실제 Astra xhigh `free_qa_candidate_review`와 부모의 읽기 검토에서 helper 경로, 실패 read 계수, 원시 reference, 기록·deadline, freeze 선행 증명과 읽기 허용 범위를 보완했다. 최종 script995b3428/test659546d9에서 추가 지적이 없었다. 부모는 로컬9개 증거 hash와 최종 before/after 일치, 동결85 불변을 확인하고 새 source52 freeze1171f14f·공개 검증 영수증1234f1cf를 작성했다. 공식 profile0·사용자 검수0이며 테스트를 실제 성능 결과로 기록하지 않는다.
