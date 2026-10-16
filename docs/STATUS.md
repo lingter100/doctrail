@@ -1,8 +1,24 @@
 # 진행 상태
 
+## Validation 문항8개 수락 · calibration 1개 보완 필요
+
+격리 item 검토자는validation8수락/0거절/수정0을 완료하고 정확한6binding item-freeze-v1 SHAc29f89300f48b2f7a7706a87fb05f6f902bc470ab8ecf360e0868ad5ce65afa6을 만들었다. 부모용 요약SHAa9388ebe만 읽었으며 의미 검토·문항/oracle은 열지 않았다. Source15·code85·author4불변, 공식tokenizer/native0이다. 전체load_material의 현재Git 검사는 item 커밋 뒤에 실행해야 하므로 우회하지 않았다.
+
+Calibration 독립 검토의 현재 판정은5수락/1불수락이며, 충분한 근거 대안 목록1건이 빠져 있다. 원래4초안과 불수락review를 보존하고 별도v2에서 지적 범위만 수정한 후 재검토한다. 아직calibration item freeze를 만들지 않는다. 두 split의 질문이나 원문을 토큰/모델 결과에 맞춰 바꾸지 않는다.
+
+상세 복구의 직전확장42브라우저 검사는통과했다. 부모 읽기검토가추가한 target목록403/sourceGET200인데 현재quote폼도사라지는 오류를 실제패키지UI+명시합성403으로재현했다. 원래실패를보존하고 source/target오류를분리했으며 최종22검증중이다. 이42개는마지막분리수정전검사로남기고 최종검사와합쳐과장하지않는다. CI문서커밋1b3f320 push38855134304/PR38855138809 필수3job 모두성공.
+
+## C4 새 문항14개 작성 완료 · 독립 검토 중
+
+새 calibration 작성자는6개(KO3/EN3, 답변4/보류2, 필수사실24개), 격리 validation 작성자는8개(KO4/EN4, 답변4/보류4, 필수사실34개)를 반환했다. 각 split의 원문·도구 Git 증명, 전체 청크·좌표·구성·언어 coverage 및 UTF-8/LF 검사는 통과했다. 자동 구조 통과는 의미 검수 완료가 아니다. Cal 자체 보강 전 초안과 초기 cp949 출력 오류는 로컬에 보존했다.
+
+새 `c4_calibration_item_review`·`c4_validation_item_review`가 각각 실제 GPT-6 Astra xhigh/fork none으로 독립 검토를 시작했다. 원래4파일을 수정하지 않으며 불수락이면 원본 검토를 보존하고 freeze/tokenizer를 만들지 않는다. 부모는 validation 의미 내용/메모를 열지 않는다. 실제 tokenizer/native/human0이다.
+
+제품 후속은 실제 Java에서 두 경로를 재현했다: 직접GET404 뒤 기존 작업행 유지, target 담당자만 바꾼 뒤 연결409→source 새로고침→다시409. 같은 초기 실행의 selector timeout은 별개 보존한다. 상세/목록 소유권 무효화와 source+target 재로딩·명시적 결정 재선택을 구현 중이며 아직 최종 통과가 아니다. 제품 역할만 Maven 슬롯을 사용한다.
+
 ## 9a72a33 원격 CI 통과 · item 작성과 상세 복구 재현 진행
 
-Push38854480523/PR38854484992의 필수3job이 모두 통과했다. Linux Python은 각각2386통과/21skip/기존warning1(65.08/95.61초), 실제 Java 브라우저는 각각57통과/0실패다. [CI 관측 영수증](../experiments/results/knowledge-source-recovery-ci-v1.json) SHA9323d366은 원본 로그 hash·실제 Git와 작업 파일115개 고유 binding 대조를 기록한다. Source 검사 완료를 모델 품질 통과로 세지 않는다.
+Push38854480523/PR38854484992의 필수3job이 모두 통과했다. Linux Python은 각각2386통과/21skip/기존warning1(65.08/95.61초), 실제 Java 브라우저는 각각57통과/0실패다. [CI 관측 영수증](../experiments/results/knowledge-source-recovery-ci-v1.json) SHA6920f011은 원본 로그 hash·실제 Git와 작업 파일115개 고유 binding 대조를 기록한다. Source 검사 완료를 모델 품질 통과로 세지 않는다.
 
 새 item 작성자 두 명은 source9a72a33·코드85의 실제 Git 증명을 완료한 뒤 각 split만 읽기 시작했다. HEAD hold는 해제했고 질문/oracle 작성은 진행 중이다. 독립 검토/동결/커밋과 공식 tokenizer는 아직 미실행이다.
 

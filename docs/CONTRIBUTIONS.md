@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 새 문항 작성과 독립 의미 검토 분리
+
+새 Astra xhigh 작성자들이 각source커밋 이후6/8문항을 만들고 구조·전체 청크 검사를 수행했다. 원문/도구는 불변이며 calibration 자체 검토 전 초안과 cp949 출력 오류를 별도 보존했다. 부모는 별도 `c4_calibration_item_review`·`c4_validation_item_review`를 Astra xhigh/fork none으로 호출했고 도구가 수락했다. 검토자는 새 review/notes/metadata-summary와 전건수락시에만 freeze를 소유한다. 검토 전 pending 상태를 승인으로 바꾸지 않았으며 사용자 검수는0이다.
+
+CI 공개 영수증의 최초 로컬 출력은 CRLF였고 Git은 LF로 저장했다. 커밋1b3f320 뒤 이를 확인해 원래 로컬 바이트를 보존하고 작업 파일을 이미 커밋된 LF 바이트와 맞췄으며 문서의 영수증 hash를 Git 기준으로 정정했다. JSON 내용·측정치·run 식별자는 동일하다. 원래 CRLF를 유지해야 하는 동결 Java parity 두 파일과는 별개다.
+
 ## 2026-10-16 · 최종57개 원격 회귀와 후속 읽기 감사
 
 부모가9a72a33의 두 CI run·필수3job 성공과 실제 browser57/0·Python2386/21skip를 원본 로그에서 확인했다. 115개 고유 source/code/freeze 바이트를 실제 Git과 대조했고 관측 영수증을 별도로 작성했다. `meeting_tasks_acceptance_audit`는 도구가 수락한 Astra xhigh로 제품 코드만 읽어 두 후속 후보와 재현 조건을 제시했다. 실행·편집·데이터 열람0이다. 새 `meeting_detail_access_recovery`는 Astra high/fork none으로 실제 재현과 최소 수정·회귀를 맡았다. 아직 확인 전 결함을 완료로 기록하지 않으며 모델/사용자 검수0이다.
