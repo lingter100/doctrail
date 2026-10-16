@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · GPU 비교 선택과 구현 범위
+
+기존 실제 Astra xhigh와 별도 실제 Astra max 역할이 서로의 결론을 보기 전에 허용 metadata·코드·고정 upstream을 읽고 GPU 배치 검토를 권고했다. Max 사용은 이 어려운 선택의 읽기 비교1회로 끝냈다. 두 역할 모두 닫힌 질문/답변/validation 의미 자료·새 native/tokenizer 실행0이며 독립 최종 품질 judge에서 제외된다. 부모가 기존 로그 비활성화·폐기 방식을 유지하도록 범위를 확정했고 xhigh 역할이 새 설계2파일을 작성했다. 추가 설계 분석을 종료하고 부모가 파일 소유권을 받아 최종 읽기/JSON 검사를 했다. 기존 실제 Astra high `host_proof_profile`은 NEW launcher/probe/tests4개로 재사용 가능한 구조를 읽기 조사했으며 설계 커밋 전 구현하지 않는다. 사용자 검수0·모델 성능 개선 주장은0이다.
+
 ## 2026-10-16 · 공식 host 측정과 제한적 설계 비교
 
 부모가3a1268f의 실제 CI·Git bytes·출력 부재를 확인하고 등록한CLI를1회 실행했다.7pass 완료/exit0/summary/receipt 일치, HEAD·source52 불변을 확인해 원본metadata2개의 정확한 공개 복사와집계를남겼다. 측정은합성/CPU파일검증이며모델·품질·사용자검수0이다.

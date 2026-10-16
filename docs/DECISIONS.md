@@ -1,5 +1,9 @@
 # 결정 기록
 
+## 2026-10-16 · 다음 비교는 동일 모델의 요청 GPU 배치 하나
+
+독립 Astra xhigh와 제한적 Astra max 읽기 비교가 모두 host proof 재작성보다 GPU 배치 검토를 권고했다. 첫 실제 native prediction63.403초는 관측됐지만 host 합성2.933초는 실제 C4 검증 시간이 아니다. 따라서 새 중립 입력에서 요청 GPU layers24와28만 비교한다.28은 성능·메모리 적합성이 검증된 값이 아니다. 고정 runtime의 FA 기본AUTO와 `--log-disable`, 기존 bounded discard를 유지하며 실제 offload/FA가 API에 노출되지 않으면 unknown으로 기록한다. 추가 로그 저장·KV 양자화·batch 변경·런타임 교체·설정 사다리는 도입하지 않는다. 새 설계·소스/CI·offline 입력등록을 마친 뒤에만 각1회 실행하며 원래 C4를 재실행하지 않는다.
+
 ## 2026-10-16 · 합성 측정으로 확인한 범위 안에서 다음 작업 선택
 
 Warm에서 git_show0을 확인했으므로 매 요청의 Git object 재조회가 지배적이라는 가설은 채택하지 않는다. 세 snapshot 관련 구간의 높은 비중은 재사용 검토의 단서지만 계측 overhead와 실제 C4 workload 차이가 있다. 이 값만으로 큰 verifier 재작성이나 실패 후보 재실행을 시작하지 않는다. 기존 xhigh 판단과 제한적 max 읽기 비교로 proof 개선과 cached native/GPU 조건 중 가장 작은 다음 증거를 고른다.90초/기존 토큰 한도와 닫힌 pool은 유지한다.

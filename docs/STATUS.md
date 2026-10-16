@@ -1,5 +1,11 @@
 # 진행 상태
 
+## GPU 배치 비교 설계 확정 · 아직 새 실행 없음
+
+공식 host 결과를9b84b7c로 사용자lingter100 author/committer 명의 커밋·push했다. Push38865692058/PR38865702190의 필수3job 모두 성공을 확인했다. 이번에는 job 상태만 확인했으며 이전 실행의 테스트 개수를 새 실행에 가져오지 않는다. 독립 xhigh와 제한적 max 읽기 비교는 모두 다음 증거로 동일 cached 모델/runtime의 요청 GPU layers24→28을 권고했다. 실제28의 메모리 적합성/속도는 미측정이다.
+
+`free_qa_candidate_review`가 [새 GPU 배치 설계](MEETINGS-GPU-PLACEMENT-PLAN.md) SHA5cd3a9cf와 protocol8cad4fe8 두 파일을 작성했고 부모가 읽기 검토와JSON/순서/최대2계수를 확인했다. `host_proof_profile` 실제 Astra high는 구현 가능성 읽기만 완료했다. 설계커밋 뒤 NEW launcher/probe/tests4개를 구현한다. 기존 로그 비활성화/폐기·90초·EOS/final384와 나머지 토큰 계약을 유지한다. 짧은marker 출력은928decode 부하 증명이 아니다. 소스동결/CI 뒤 새 offline중립등록1회·plan커밋 뒤 각1회로 제한한다. 현재 새tokenizer/native0, 모든 닫힌pool불변, 전체goalACTIVE·Phase1/PR14draft다.
+
 ## Host 공식 프로파일1회 완료 · 다음 무료 개선 우선순위 비교
 
 3a1268f의 push38863819959/PR38863824654 필수3job 성공 후 official CLI1회, cold1+warm6 모두 통과했다. CLIexit0+passed summary+receipt를 확인했고 HEAD/52bytes 불변이다. 원본c746ebd3·별도CLI7098ae1c·공개복사affb9cae를 [실측 결과](MEETINGS-HOST-PROOF-PROFILE-RESULTS.md)에 연결했다. 출력 `.local/meetings-host-proof-profile-v1/`는 이미 소비됐으므로 재실행하지 않는다. Observer session25872도 exit0으로 종료됐다.
