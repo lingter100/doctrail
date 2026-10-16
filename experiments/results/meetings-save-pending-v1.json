@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "kind": "meeting_pending_save_edit_loss_local_verification",
+  "recorded_date_kst": "2026-10-16",
+  "basis_component_commit": "249d0df",
+  "sources_at_local_checks": [
+    {
+      "file": "web/src/components/MeetingViews.tsx",
+      "sha256": "02c6747ab41c47f4fa330ec95d7c23b8a62a3248c347aec10fa03fd5ae1d1172",
+      "bytes": 34854
+    },
+    {
+      "file": "web/tests/meeting-save-pending.spec.ts",
+      "sha256": "c494cbf8badfaeadcf38f5fcd4f459ef716f7e3511232a8597e27a7523d06931",
+      "bytes": 7450
+    },
+    {
+      "file": "web/scripts/test-java.mjs",
+      "sha256": "f70941f682c36128badbfda172373636d1db466cf014874c984587a91773ea81",
+      "bytes": 9342
+    }
+  ],
+  "sources": [
+    {
+      "file": "web/src/components/MeetingViews.tsx",
+      "sha256": "df608bd6c6c977c7b2c6a7ffc41a1d49755d96241e7f0f1328ecd8907d854c3a",
+      "bytes": 34851
+    },
+    {
+      "file": "web/tests/meeting-save-pending.spec.ts",
+      "sha256": "c494cbf8badfaeadcf38f5fcd4f459ef716f7e3511232a8597e27a7523d06931",
+      "bytes": 7450
+    },
+    {
+      "file": "web/scripts/test-java.mjs",
+      "sha256": "f70941f682c36128badbfda172373636d1db466cf014874c984587a91773ea81",
+      "bytes": 9342
+    }
+  ],
+  "post_local_check_change": {
+    "kind": "CRLF_to_LF_only",
+    "files": [
+      "web/src/components/MeetingViews.tsx"
+    ],
+    "behavior_or_tests_changed": false
+  },
+  "actual_stack": "Java21, SQLite, sessions, analysis CAS, packaged React and Chromium",
+  "synthetic_boundaries": [
+    "deterministic analysis HTTP transport NOT LLM",
+    "buffered actual Java PUT200 response delivery",
+    "injected PUT503 before forwarding to Java"
+  ],
+  "original_batch": {
+    "file": ".local/web-e2e-batch-fEzRhN/run.json",
+    "sha256": "82b00e0f93be3aa2554b6bfa55e49e834caa1d3ae8918359090a88c32ecee1e5",
+    "bytes": 3779
+  },
+  "stats": {
+    "expected": 23,
+    "unexpected": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "successful_spec_runs": [
+    {
+      "directory": ".local\\web-e2e-batch-fEzRhN\\web-e2e-EveoGd",
+      "kind": "automated-synthetic-browser-check",
+      "date": "2026-10-16T03:12:19.935Z",
+      "spec": "meeting-save-pending.spec.ts",
+      "exitCode": 0,
+      "serverStopped": true,
+      "packagedUi": true,
+      "browser": "Playwright Chromium",
+      "humanReview": false,
+      "generation": "deterministic-transport-fixture-NOT-LLM",
+      "generationCalls": {
+        "analyze": 2,
+        "answer": 0
+      },
+      "stats": {
+        "startTime": "2026-10-16T03:12:15.955Z",
+        "duration": 3935.873,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "directory": ".local\\web-e2e-batch-fEzRhN\\web-e2e-Gq2UB3",
+      "kind": "automated-synthetic-browser-check",
+      "date": "2026-10-16T03:11:15.714Z",
+      "spec": "meeting-conflict-recovery.spec.ts",
+      "exitCode": 0,
+      "serverStopped": true,
+      "packagedUi": true,
+      "browser": "Playwright Chromium",
+      "humanReview": false,
+      "generation": "deterministic-transport-fixture-NOT-LLM",
+      "generationCalls": {
+        "analyze": 5,
+        "answer": 0
+      },
+      "stats": {
+        "startTime": "2026-10-16T03:11:07.930Z",
+        "duration": 7731.4890000000005,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "directory": ".local\\web-e2e-batch-fEzRhN\\web-e2e-iDhnri",
+      "kind": "automated-synthetic-browser-check",
+      "date": "2026-10-16T03:11:28.812Z",
+      "spec": "meeting-link-recovery.spec.ts",
+      "exitCode": 0,
+      "serverStopped": true,
+      "packagedUi": true,
+      "browser": "Playwright Chromium",
+      "humanReview": false,
+      "generation": "deterministic-transport-fixture-NOT-LLM",
+      "generationCalls": {
+        "analyze": 9,
+        "answer": 0
+      },
+      "stats": {
+        "startTime": "2026-10-16T03:11:20.438Z",
+        "duration": 8320.045,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "directory": ".local\\web-e2e-batch-fEzRhN\\web-e2e-ofdZdI",
+      "kind": "automated-synthetic-browser-check",
+      "date": "2026-10-16T03:11:50.474Z",
+      "spec": "meeting-list-state.spec.ts",
+      "exitCode": 0,
+      "serverStopped": true,
+      "packagedUi": true,
+      "browser": "Playwright Chromium",
+      "humanReview": false,
+      "generation": "deterministic-transport-fixture-NOT-LLM",
+      "generationCalls": {
+        "analyze": 8,
+        "answer": 0
+      },
+      "stats": {
+        "startTime": "2026-10-16T03:11:34.766Z",
+        "duration": 15647.197,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "directory": ".local\\web-e2e-batch-fEzRhN\\web-e2e-Sv8vgq",
+      "kind": "automated-synthetic-browser-check",
+      "date": "2026-10-16T03:12:09.367Z",
+      "spec": "meeting-ready.spec.ts",
+      "exitCode": 0,
+      "serverStopped": true,
+      "packagedUi": true,
+      "browser": "Playwright Chromium",
+      "humanReview": false,
+      "generation": "deterministic-transport-fixture-NOT-LLM",
+      "generationCalls": {
+        "analyze": 5,
+        "answer": 1
+      },
+      "stats": {
+        "startTime": "2026-10-16T03:11:55.877Z",
+        "duration": 13436.724,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "original_product_failure": {
+    "report": {
+      "file": ".local/web-e2e-batch-y9FydU/web-e2e-IlzCp0/report.json",
+      "sha256": "600402ba1269854c45861616b9021258658d93695baa155a3b830caad2d0e587",
+      "bytes": 22438
+    },
+    "evidence": {
+      "enabled": [
+        {
+          "tag": "INPUT",
+          "label": "분석 제목"
+        },
+        {
+          "tag": "INPUT",
+          "label": "회의 날짜"
+        },
+        {
+          "tag": "INPUT",
+          "label": "참석자 · 쉼표로 구분"
+        },
+        {
+          "tag": "INPUT",
+          "label": "회의 목적"
+        },
+        {
+          "tag": "TEXTAREA",
+          "label": "회의 요약저장을 누르기 전에 작성한 요약"
+        },
+        {
+          "tag": "TEXTAREA",
+          "label": "제목 근거"
+        },
+        {
+          "tag": "TEXTAREA",
+          "label": "날짜 근거2026-10-13"
+        },
+        {
+          "tag": "TEXTAREA",
+          "label": "참석자 근거민수"
+        },
+        {
+          "tag": "TEXTAREA",
+          "label": "목적 근거"
+        },
+        {
+          "tag": "TEXTAREA",
+          "label": "항목 내용단계별 배포로 진행하기로 결정했다."
+        },
+        {
+          "tag": "SELECT",
+          "label": "분류논의 주제제안결정 사항미해결 사항후속 작업"
+        },
+        {
+          "tag": "SELECT",
+          "label": "상태확인 필요확정"
+        },
+        {
+          "tag": "TEXTAREA",
+          "label": "항목 내용민수는 후속 점검을 맡는다."
+        },
+        {
+          "tag": "SELECT",
+          "label": "분류논의 주제제안결정 사항미해결 사항후속 작업"
+        },
+        {
+          "tag": "SELECT",
+          "label": "상태확인 필요할 일진행 중완료"
+        },
+        {
+          "tag": "INPUT",
+          "label": "담당자"
+        },
+        {
+          "tag": "INPUT",
+          "label": "마감일"
+        },
+        {
+          "tag": "SELECT",
+          "label": "우선순위확인 필요낮음보통높음"
+        }
+      ],
+      "pendingDraft": {
+        "summary": "저장 응답을 기다리는 동안 추가한 요약",
+        "assignee": "응답 대기 중 담당자",
+        "status": "done"
+      },
+      "pendingNotice": [],
+      "after": {
+        "summary": "저장을 누르기 전에 작성한 요약",
+        "assignee": "저장 전 담당자",
+        "status": "doing"
+      },
+      "editorClosed": true,
+      "puts": 1,
+      "realJava": true,
+      "llmCalls": 0,
+      "humanReview": false
+    },
+    "component": {
+      "file": ".local/web-e2e-batch-y9FydU/baseline-MeetingViews.tsx",
+      "sha256": "3317d514ad79c0972814167a34bbbd5cf95ef140e0e6f295b83a1fe611591ed8",
+      "bytes": 34544
+    },
+    "test": {
+      "file": ".local/web-e2e-batch-y9FydU/baseline-meeting-save-pending.spec.ts",
+      "sha256": "c494cbf8badfaeadcf38f5fcd4f459ef716f7e3511232a8597e27a7523d06931",
+      "bytes": 7450
+    }
+  },
+  "earlier_test_setup_failure": {
+    "report": {
+      "file": ".local/web-e2e-batch-Tpd4ig/web-e2e-wg9M5v/report.json",
+      "sha256": "c4676ae499d8e12102142fac0837387c8956449550e2b674ffb641dcf9c21d22",
+      "bytes": 6890
+    },
+    "kind": "locator_timeout_not_product_failure"
+  },
+  "final_pending_evidence": {
+    "enabled": [],
+    "pendingDraft": null,
+    "pendingNotice": [
+      "저장 중에는 내용을 수정할 수 없어요. 저장이 끝난 뒤 다시 편집해 주세요."
+    ],
+    "after": {
+      "summary": "저장을 누르기 전에 작성한 요약",
+      "assignee": "저장 전 담당자",
+      "status": "doing"
+    },
+    "editorClosed": true,
+    "puts": 1,
+    "realJava": true,
+    "llmCalls": 0,
+    "humanReview": false
+  },
+  "visual_check": {
+    "width": 390,
+    "horizontal_overflow": false,
+    "parent_inspected_saved_screenshot": true,
+    "human_review": false,
+    "screenshot": {
+      "file": ".local/web-e2e-batch-fEzRhN/web-e2e-EveoGd/results/meeting-save-pending-real--a1fcb-ains-the-submitted-snapshot/pending-save-mobile.png",
+      "sha256": "152b15732d53083f7a4376009aa65505a600c4680a50cab32a706598b2f6c986",
+      "bytes": 128531
+    }
+  },
+  "other_checks": [
+    "npm --prefix web run typecheck",
+    "npm --prefix web run build",
+    "./server/mvnw.cmd -B -q -f server/pom.xml -DskipTests package"
+  ],
+  "other_checks_status": "passed_by_implementation_role",
+  "java_package_is_not_full_java_test_claim": true,
+  "llm_calls": 0,
+  "human_reviews": 0,
+  "model_setting_actual": {
+    "implementation": "gpt-6-astra high fork_none",
+    "audit": "existing gpt-6-astra xhigh"
+  },
+  "limitations": [
+    "Synthetic transport does not establish extraction or answer quality.",
+    "Local source was normalized from CRLF to LF after checks, with no other byte changes.",
+    "Remote canonical-source CI is recorded separately after commit."
+  ]
+}

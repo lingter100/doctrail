@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 저장 대기 중 편집 유실 수정 · 실제 Java23개 통과
+
+실제 PUT 성공 응답을 지연한 baseline에서 입력18개가 추가 요약/담당자/done을 받았지만 응답 후 앞선 스냅샷만 남는 결함을 재현했다. 전체 분석 fieldset을 저장 중 잠그고 상태 안내와 중복submit 방어를 추가했다. 최종 fEzRhN 새2+충돌5+연결4+목록9+기존3=23통과/0실패이며 type/build/package-DskipTests도 통과했다. 실패503은 합성 주입이고 초안 보존/입력 재개/PUT1회를 확인했다. 실제LLM/사용자검수0이다.
+
+[수정과 재현](MEETINGS-SAVE-PENDING.md), 영수증8908c6a45e8e044d3526e849f7a7a0d16eaf51ff372ce3989e73cb7eee102f0b에 최초locator오류·실제유실실패·최종23통과·source3을 구분했다. 부모 코드/390px화면 확인을 마쳤다. 로컬검사 뒤 component CRLF→LF만 정규화했고 양쪽 hash를 남겼다. 다음은 이3파일 커밋/원격CI다.
+
+C4compat 자원 통과 원본은d2fad63으로 보존/push했고 원격CI 진행 중이다. 다음 C4 품질설계는 기존 Astra xhigh가 진행하며 실제 새품질0·전체goalactive·Phase1/PR14draft다.
+
 ## C4 호환성 실제 자원2건 통과 · 품질0/다음 설계 진행
 
 4ba51b9에서 새 normal1+stress1을 한 번 실행해 passed_resources_only를 확인했다. normal63입력/521출력/EOS/final6/37.984초, stress5048입력/928출력/length/final414/88.000초다. 부하 final은 미완성 padding 재토큰 수이며 유효 답변이 아니다. 최초/재시작 모두 emitted0·EOF·read/join오류0, cleanup0.969/0.875초, metadata restart1/성공, source52불변이 확인됐다. 재실행하지 않는다.

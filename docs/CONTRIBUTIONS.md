@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · 저장 대기 편집 유실 재현·수정
+
+meeting_product_audit(기존 Astra xhigh)는 읽기 전용 코드 감사로 결함을 제기했다. 새 meeting_save_pending(실제 Astra high/fork none)은3web파일만 소유해 최초locator오류와 실제Java유실실패를 따로 보존하고 fieldset 수정·새2/관련21 브라우저·type/build/package를 검증했다. 부모는 코드/원본report/전후evidence/390px화면을 확인하고, CRLF→LF만 정규화한 전후hash·영수증·문서·Git을 맡았다. 합성 모델 전송/503을 표시하며 실제LLM/사용자검수0이다.
+
 ## 2026-10-16 · 실제 호환성 자원 실행과 새 제품 결함 감사
 
 부모가4ba51b9 커밋 후 공식 native2를 한 번 실행하고37.984/88.000초·진단0·정리/재시작/source52 통과를 확인했다. 원본 byte사본·별도 reporting/replay·설명문서를 작성했으며 품질 검토나 사용자검수로 세지 않는다. 기존 meeting_product_audit(Astra xhigh)가 코드 읽기만으로 pending PUT 동안 활성 입력이 성공 응답 때 사라지는 결함을 제기했고 실제 재현은 아직 하지 않았다. 새 meeting_save_pending은 도구가gpt-6-astra/high/fork none을 수락했으며3web파일만 소유한다. 기존 free_qa_candidate_review(Astra xhigh)는 다음 품질 설계를 읽기 전용 검토하고 향후 독립출력 judge에서 제외한다.
