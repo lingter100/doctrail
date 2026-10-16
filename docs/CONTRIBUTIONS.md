@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-15 · C4 호환성 NEW4 구현·80합성검사·고정
+
+기존 bounded_thinking_transport(실제 Astra high)가 새4파일을 구현하고33새검사+47회귀/1Windows skip·Ruff를 통과했다. 소형Python child4개는 pipe검사용이며native모델이아니다. 부모는launcher/probe의startup실패telemetry·EOF·임시파일경로를 검토하고 수정/검증 뒤4해시와52binding을대조해freeze·영수증·문서를 작성했다. 초기fixture3실패/Ruff1수정을 남겼다. 실제 새tokenizer/native/품질/다운로드/사용자검수0, 설계/구현역할은독립품질judge로쓰지않는다.
+
 ## 2026-10-15 · 결정 연결 경합 재현·수정·검증
 
 meeting_product_audit(실제 Astra xhigh)가 코드에서 삭제 후 지연GET 경합을 확인했다. meeting_link_recovery(실제 Astra high)가 실제 Java·SQLite 응답으로 첫 실패를 재현하고3파일을 수정했다. 부모가 취소된refresh의 상태 고착을 추가 제기했고 같은 구현 역할이 별도 실패를 실제 재현한 뒤 보완했다. 최종21개 브라우저·type/build/package-DskipTests를 통과했다. 부모는 source3해시·원본 실패/성공 보고서 대조·최종 화면 확인·영수증과 문서·Git을 맡는다. 모델 전송은 합성이고LLM0·사용자검수0이다.

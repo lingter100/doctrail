@@ -1,5 +1,17 @@
 # 진행 상태
 
+## C4 호환성 코드52파일 고정 · 새33/회귀47 통과
+
+NEW4 launcher/probe/tests가 구현됐고 실제 Astra high 검사는 새33+원본47=80통과/Windows symlink권한1skip/35.19초·Ruff통과다. 초기fake-tokenizer순서3실패와Ruff1경고를 구분했다. 부모가 startup telemetry누락·임시파일경로를 검토했고 수정 뒤NEW4해시와원본43불변/전체52binding을 확인했다. [구현 문서](MEETINGS-C4-COMPAT-IMPLEMENTATION.md), sourcefreeze SHAde8bfc6b92603b1cd5d999afb5788222c7b71ccda1e7a9a3c0aa5a7df36ef61e·tooling585c9837a506ba3b1a0b5d8ac9986ebee42e76f2e77970b522b1d8c19efbf746를 따른다.
+
+이 source/freeze 커밋·CI 전 실제 준비/생성 금지다. 그 뒤 새 offline 완성JSON>928·neutral2를 한 번 준비하고 plan/preparation커밋 후 실제normal1/stress1을 진행한다. 아직 새tokenizer/native/download/품질0, 원래C4실패/closedpools보존·goalactive·Phase1/PR14draft다.
+
+## 결정 연결 수정 원격47개 통과 · C4 호환성 코드 진행
+
+249d0dfa41cfecc81e22cf9c1f3ccd03086170bf의 push38707679936/PR38707689305 필수 backend/java-service/web3job이 각각 모두 성공했다. PR 실제 Java browser47통과/0실패, Linux Python2201통과/21환경skip/기존warning1(75.52초)이다. GitHub author/committer 모두lingter100을 확인했다. 앞선 설계259712c의 push38707260488/PR38707266606도 필수3job이 각각 성공했다.
+
+면접용 MEETINGS-LEARNING에 native 문법·로그 실패와 실제 비동기 삭제 경합을 추가했다. C4compat 구현은 아직 최종 고정 전이며 실제 새 tokenizer/native/품질0이다. 원래실패·전체goalactive·Phase1/PR14draft 상태를 유지한다.
+
 ## 결정 연결 삭제 경합2건 수정 · 실제 Java 브라우저21개 통과
 
 삭제204 뒤 이전GET이 삭제한 연결을 되살리는 문제와, 복구 조회 도중 삭제 후 재조회가 실패하면 재시도 버튼이 계속 비활성 상태인 문제를 각각 실제 Java에서 먼저 재현했다. 성공 시 이전 상세/연결 소유권과refresh상태를 무효화하고 최신 연결을 다시 읽는다. 실패한 DELETE는 연결을 유지하며 자동 재요청하지 않는다.
