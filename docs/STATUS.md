@@ -1,5 +1,19 @@
 # 진행 상태
 
+## C4 품질 실행 CLOSED · 두 번째 요청 deadline 실패
+
+43139e0 공식 실행은 종료됐다(session59908 exit1). 실제 전송시도2/파싱응답1/구조수용1, 첫 요청86.157초·두 번째91.343초 deadline 오류다. 남은cal4/validation8 미실행, 의미판정0·채택false다. Owned native/model job은 종료했고 재실행하지 않는다. [결과 기록](MEETINGS-C4-QUALITY-RESULTS.md)의 원본 SHA4c95b97c, metadata2bf0362f, 별도replay2d039485, exact29파일 공개복사da5b6f03을 보존한다. 원본false flags는 고치지 않았다.
+
+사후 첫 응답 trace/27events/actualGit 재생은 통과했지만 전체report는미완료로, validation은원래selection부재로정상거부됐다. 구조확인은의미품질통과가아니다. 첫 요청의 native67.402379초와 전체시간 차이18.754621초는 원인미확정이며 Git비용으로단정하지않는다. 독립Astraxhigh 검토에따라 다음은새 합성metadata host검증프로파일 설계/구현이다. 닫힌실제data/모델은열지않는다. 43139e0 push38858681852/PR38858688059 필수3job성공. 전체goalactive·Phase1/PR14draft·무료/로컬만 유지한다.
+
+아래 실행시작과native0 기록은 각 시점의 이력이며 최신 상태를 대신하지 않는다.
+
+## C4 calibration 공식 실행 시작 · 중복 실행 금지
+
+실행계획/입력은43139e09f6a0aecfdde1c0c510a563efd348e8d5로 사용자 명의 커밋·push했다. 동결 CLI의 실제 calibration check가exit0으로 완료됐고, 같은 HEAD에서 공식 run을 한 번 시작했다. 현재 exec session59908이며 `.local/c4-quality-execution-observer-v1/run.log`, `.local/meetings-c4-quality-calibration-v1/`와 ledger를 먼저 확인한다. 실행 결과는 아직 미확정이다. HEAD를 유지하며 추가 tokenizer/smoke/native/재실행을 시작하지 않는다. Validation은 아직 미실행이며 원래cal6/6 관문 전에는 열지 않는다.
+
+시작 전 GPU 관측은 RTX4050 Laptop6,141MiB/사용10MiB/활용0%였고 이를 모델 지연 성능으로 해석하지 않는다. 코드85·기존 동결/실패·품질별 예산을 유지한다. 사용자검수0·무료/로컬·전체goalactive·Phase1/PR14draft다.
+
 ## C4 양쪽 입력 준비 완료 · 생성 전 실행계획 고정
 
 f542691에서 calibration6개(1255~3868tokens)와 격리 validation8개(902~3887tokens)의 공식 offline 준비가 각1회 통과했다. Tokenizer각1/native·download0이며 원래payload/context·원문·item·코드85는 불변이다. 정확한 공개 복사본2개씩을 각 meetings-c4-*-inputs-v1에 남겼다. 이미 끝난 준비를 반복하지 않는다. [공식 준비 기록](MEETINGS-C4-PREPARATION.md)에 실제hash·57.391/57.719초 준비시간·노출 경계를 보존했다.

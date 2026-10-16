@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-16 · C4 실제 실패 보존과 독립 시간 검토
+
+부모가43139e0 계획·입력 커밋/필수CI 뒤 공식calibration을1회 실행했고 두 번째deadline오류로종료했다. 전송2/파싱1/의미판정0, 남은cal4/val8미실행이다. 부모는원본134binding확인,115snapshot/27event구조재생,전체report와validation진입의거부를별도영수증에기록했다. 원본falseflags를수정하지않았고report/ledger/trace29개를exactbyte로보존했다. 최초환경경로regex의URL오탐을수정한과정은결과문서에남겼다.
+
+기존 실제Astraxhigh 역할 `free_qa_candidate_review`는허용코드와실패시간metadata만검토했다. 원문·질문·oracle·rawtrace·답변을읽지않고18.754621초잔여를Git비용으로단정할수없음을지적했다. ASTnegative경로와전송직전무결성을보존하는새모델없는프로파일설계를맡는다. 최종판정역할2개는예약했으나품질실패로출력pack/판정0이며사용자검수0이다. 부모채팅설정변경은없다.
+
 ## 2026-10-16 · 공식 offline 준비와 실행계획 연결
 
 기존 calibration/격리 validation 검토 역할이 각 split의 실제 Git 계약 검사 후 동결 CLI를 정확히1회씩 실행했다. 각각6/6·8/8 계수 통과, tokenizer각1/native·download0이다. 원문/payload를 수정하지 않았고 exactbyte 공개 복사본을 검사했다. 부모는 validation 의미 내용을 받지 않고 metadata/hashes만 사용해85binding·제외역할22·사전등록judge2를 연결한 executionplan ca2c21eb를 작성했다. 부모 자체 모델 설정 변경·사용자검수0이며 아직 품질 생성/판정 결과는 없다.
