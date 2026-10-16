@@ -16,6 +16,8 @@
 
 최종 소스4개와 원본148개 artifact hash를 부모가 대조했다. [로컬 검증 영수증](../experiments/results/meetings-source-access-recovery-v1.json)은 SHA `dd4aa1ba9debdd8819a4f53864970b4e95a6d92aafd14176b178aca3425777c8`의 정확한 복사본이고 [공개 복사 기록](../experiments/results/meetings-source-access-recovery-publication-v1.json)은 별도다. 원본은 `.local/meetings-source-access-v1/`에 유지한다. 영수증의 CI·commit0은 로컬 검증 당시 상태이며 후속 Git/CI 결과는 STATUS에서 확인한다.
 
+최초 staging에서 영수증의 CRLF가 Git에 의해 LF로 바뀌어 정확한 바이트 검사가 실패했다. 부모가 이 실패를 확인하기 전에 같은 도구 묶음의 커밋을 실행한 실수도 남긴다. 해당939d21e 커밋을 수정하지 않고, 정확한 파일 경로에만 `-text` 속성을 적용한 후속 커밋으로 원본을 복구했다. 일반 공백 검사의 CRLF 지적은 이 파일의 확인된 원본 hash에만 예외를 적용했고 나머지 경로는 통과했다. [실패 기록](../experiments/results/meetings-source-access-publication-correction-v1.json)을 보존하며 제품 소스4개와52개 검사의 바이트에는 변화가 없다.
+
 ## 재현 방법
 
 Java21 환경에서 React 빌드와 Java 패키징을 마친 뒤 실행한다. 테스트 runner가 임시 DB·Java 서버·합성 모델 transport를 준비하고 정리한다.

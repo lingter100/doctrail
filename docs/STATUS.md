@@ -1,5 +1,9 @@
 # 진행 상태
 
+## 제품 커밋의 영수증 바이트 보완
+
+제품 수정939d21e 커밋에서 원본 영수증의CRLF가 Git text 정규화로 달라진 것을 확인했다. 부모가 staging 실패를 보기 전에 커밋까지 호출한 순서 오류를 별도 기록했다. 원본·실패 커밋은 유지하고 정확한 영수증 경로만 `-text`로 보완했다. 현재 index는 원본dd4aa1ba와 완전히 같고 제품source4도 검증 hash와 같다. 일반 whitespace 검사는 확인된 CRLF 원본1개를 제외하고 통과했다. 수정 후 HEAD의 CI와 byte 증명 전 실제 모델 비교는 시작하지 않는다.
+
 ## 회의 원문 접근 복구 52개 통과 · GPU 소스 커밋
 
 [원문 접근 복구](MEETINGS-SOURCE-ACCESS-RECOVERY.md)는 최종 실제 Java/packaged React 52통과·실패/skip/flaky0이다. 신규11+상세10+충돌5+연결4+저장2+목록9+기본3+지식원문8이며 모든8 owned JVM이 종료됐다. Type/build/package-DskipTests 통과, 최종 source4와 원본148개 hash를 확인했다. 정확한 공개 영수증 dd4aa1ba와 별도 복사 기록9bcadfca를 보존했다. 실제 권한변경404와 합성403/500/503을 구분하고 LLM/사용자검수0을 유지한다.
