@@ -1,5 +1,29 @@
 # 진행 상태
 
+## C5 검증 도구 동결 · 소스 커밋과 CI 다음
+
+2026-10-19 마지막 저장 실패 수정 뒤 probe/audit 전체 합성 회귀37통과(262.10초), NEW8 Ruff·종료코드0·검사 전후 동일 SHA를 확인했다. 실제 Astra high 구현/검토 역할이 소유권을 반환했고 독립 delta 읽기 검토에서 추가 실질 blocker는 없었다. 원래168통과는 마지막 수정 전 결과이며 중복 범위를 합쳐 최종 단일 실행처럼 보고하지 않는다. 최초 저장 실패3개와 수정 증거를 그대로 보존했다.
+
+전체 도구 76개를 `meetings-c5-toolchain-freeze-v1.json` SHAd76670c9로 동결했다(code65, import candidates1632, negative1567). 기존 GPU59/C4quality85/host52의 working·HEAD 바이트가 모두 같다. [구현 기록](MEETINGS-C5-IMPLEMENTATION.md)과 `experiments/results/meetings-c5-implementation-v1.json`에 증거를 연결했다.
+
+다음은 사용자 명의 소스/freeze 커밋·push와 해당 커밋의 backend/java-service/web CI 확인이다. 그 뒤 CI 영수증을 별도 커밋하고 새 자료 역할을 배정한다. 아직 실제 source/item/judge등록/tokenizer/native0이다. 전체 파일시스템 쓰기 불능에서는 report 단독 완료 증명이 불가능하므로 실제 실행은 CLI 종료·summary·무결성을 함께 확인한다. 전체 goal ACTIVE·Phase1/PR14 draft·무료/로컬 유지.
+
+## C5 재개 · 최종 저장 실패 경로 보완 중
+
+2026-10-19 현재 HEAD678dafd와 기존 작업을 보존했다. 이전 구현 역할의 핸들이 없고 DocTrail C5·pytest·native 프로세스도 없는 것을 직접 확인했다. 앞선 단계는 코드 수정과 합성 실패 재현으로 진전이 있었으며, 실행이 계속 중이라고 간주하거나 닫힌 모델 실험을 재시작하지 않는다.
+
+기존 `final-*`의 168통과(NEW94+기존 정책/adapter74), 352.62초, Ruff 성공, 검사 전후 동일 SHA와 종료코드0을 확인했다. 이후 자기 검토에서 terminal completed 저장 후 시간 초과와 실패 상태 재저장 실패가 겹치면 disk의 completed를 다시 성공으로 판정할 수 있는 경로가 발견됐다. 이 결과는 해당 마지막 수정 전 기록으로 보존한다.
+
+새 실제 Astra high `c5_persistence_recovery`가 probe와 대응 테스트2파일만 인수했다. 별도 `.local/c5-persistence-recovery-v1/`에서 원본 복사·합성 재현·최소 수정·관련 회귀를 기록한다. 새 실제 Astra high `c5_persistence_review`는 코드만 독립 검토하며 두 역할 모두 최종 답변 judge에서 제외한다. 부모는 문서·동결·Git/CI를 소유한다. 아직 전체 freeze·새 source/item/tokenizer/native0이며 goal ACTIVE·Phase1/PR14 draft다.
+
+## C5 독립 검토 · 실패 재현과 최종 합성 검증 진행 중
+
+설계/정적 구성 678dafd의 push38873896381과 PR38873903639에서 backend·java-service·web 모두 성공했다. 실제 관측 영수증은 `experiments/results/meetings-c5-design-ci-v1.json`이다. 이것은 아직 커밋하지 않은 NEW8 구현의 CI나 품질 결과가 아니다.
+
+실제 Astra high `meeting_navigation_audit`가 코드와 합성 테스트만 독립 검토한다. 과거 문단 fingerprint의 중복 검사가 빠진 경로를 찾았고 구현 담당 `host_proof_profile`이 합성 metadata로 최초 1실패를 보존한 뒤 수정 검사 1통과를 확인했다. 준비 실행 도중 새 import 후보가 나타나는 경우의 최종 거부, 첫 요청 proof 실패 지연 기록, cleanup 재생, 자연어를 바꾸지 않는 익명 구조 ID 변환도 검증 중이다.
+
+부모는 [구현 기록](MEETINGS-C5-IMPLEMENTATION.md) 초안과 CI 관측만 추가했다. NEW8은 구현 담당 소유이며 중간 실행과 파일 수정이 겹쳤으므로 기존 checkpoint를 최종 결과로 합산하지 않는다. 최종 파일 hash·합성 회귀·독립 재검토 뒤 전체 freeze를 만든다. 새 source/item/역할 배정/tokenizer/native는 0이며 전체 goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
 ## C5 NEW8 구현 시작 · 정적 family 구성 등록
 
 설계571170e를 사용자 명의로 커밋·push한 뒤 기존 실제Astrahigh `host_proof_profile`에 NEW review/prepare/probe/audit와대응tests8개만 맡겼다. 먼저review/prepare4개를 검증한 뒤부모읽기검토와probe/audit4개를 이어간다. 기존policy/adapter/launcher와동결파일은수정하지않고실제tokenizer/native는0이다. 구현증거는 `.local/c5-implementation-v1/`에남긴다.

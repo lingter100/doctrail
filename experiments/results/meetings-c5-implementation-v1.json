@@ -1,0 +1,616 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-implementation-v1",
+  "recorded_at": "2026-10-19T07:45:15.995302+00:00",
+  "head_before_source_commit": "678dafd6516dd552586e8015edfa926e516f3d30",
+  "source_files": [
+    {
+      "path": "src/doctrail/meeting_c5_review.py",
+      "sha256": "ef149459d6f002cd49f84f9f92d3dddd86940c76605deece4e30aa3b33f71684"
+    },
+    {
+      "path": "scripts/prepare_meeting_c5_inputs.py",
+      "sha256": "6ebf1a991e25c52f38b2a0bb7ab8fdceef8e6a880305f69e423ef73df067b04a"
+    },
+    {
+      "path": "scripts/probe_meeting_c5_quality.py",
+      "sha256": "417044bf198c19ec87cf013e4dd76846be7abb1410bd399a69e3fd2fd1ed84f8"
+    },
+    {
+      "path": "scripts/audit_meeting_c5_quality.py",
+      "sha256": "5ed31510640e3dba98049645b79a097c245acb6108485aa711710b777b6e537e"
+    },
+    {
+      "path": "tests/test_meeting_c5_review.py",
+      "sha256": "8283b748a327c1e96cd81b9fcbce3f87a21f02456876d78d5ee3ea46fe18db53"
+    },
+    {
+      "path": "tests/test_prepare_meeting_c5_inputs.py",
+      "sha256": "ae30d94182b714b67c0968a19384b9dc812c022d4e398080f1f2ba2b44c5e898"
+    },
+    {
+      "path": "tests/test_probe_meeting_c5_quality.py",
+      "sha256": "5e3d6d1f69e54f59931a0ec0e839b8e2bd4366739328640ba1a1e1c0fa97dc00"
+    },
+    {
+      "path": "tests/test_audit_meeting_c5_quality.py",
+      "sha256": "2b4363f3db673ba7a002363c84390a04aebc06304c1aeb5592f1708845f29703"
+    }
+  ],
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c5-toolchain-freeze-v1.json",
+    "sha256": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d",
+    "bindings": 76,
+    "code_files": 65,
+    "import_candidates": 1632,
+    "negative_candidates": 1567
+  },
+  "verification": {
+    "original_pre_persistence_delta": {
+      "passed": 168,
+      "new": 94,
+      "reused": 74,
+      "seconds": 352.62,
+      "exit": 0,
+      "ruff_exit": 0,
+      "before_after_same": true,
+      "source_files": [
+        {
+          "path": "src/doctrail/meeting_c5_review.py",
+          "sha256": "ef149459d6f002cd49f84f9f92d3dddd86940c76605deece4e30aa3b33f71684"
+        },
+        {
+          "path": "scripts/prepare_meeting_c5_inputs.py",
+          "sha256": "6ebf1a991e25c52f38b2a0bb7ab8fdceef8e6a880305f69e423ef73df067b04a"
+        },
+        {
+          "path": "scripts/probe_meeting_c5_quality.py",
+          "sha256": "e3982c866ad54fc81a30ac4bd7e8587a866a48c85b7af8d23a25b9a2440a8551"
+        },
+        {
+          "path": "scripts/audit_meeting_c5_quality.py",
+          "sha256": "5ed31510640e3dba98049645b79a097c245acb6108485aa711710b777b6e537e"
+        },
+        {
+          "path": "tests/test_meeting_c5_review.py",
+          "sha256": "8283b748a327c1e96cd81b9fcbce3f87a21f02456876d78d5ee3ea46fe18db53"
+        },
+        {
+          "path": "tests/test_prepare_meeting_c5_inputs.py",
+          "sha256": "ae30d94182b714b67c0968a19384b9dc812c022d4e398080f1f2ba2b44c5e898"
+        },
+        {
+          "path": "tests/test_probe_meeting_c5_quality.py",
+          "sha256": "bf99045a915e8f917ebb961f4fc5f4da66386324bae9c8159ed0de24a0c093a9"
+        },
+        {
+          "path": "tests/test_audit_meeting_c5_quality.py",
+          "sha256": "2b4363f3db673ba7a002363c84390a04aebc06304c1aeb5592f1708845f29703"
+        }
+      ]
+    },
+    "final_probe_audit_regression": {
+      "modules": [
+        "tests/test_probe_meeting_c5_quality.py",
+        "tests/test_audit_meeting_c5_quality.py"
+      ],
+      "passed": 37,
+      "seconds": 262.1,
+      "exit": 0,
+      "terminal_summary_verified": true
+    },
+    "final_ruff": {
+      "scope": "NEW8",
+      "exit": 0,
+      "summary": "All checks passed!"
+    },
+    "final_before_after_same": true,
+    "six_other_new_files_unchanged": true,
+    "initial_persistence_failures": [
+      {
+        "log": ".local/c5-persistence-recovery-v1/initial-failure.txt",
+        "exit": 1,
+        "failed": 2,
+        "seconds": 31.7,
+        "causes": [
+          "completed_report_replay_ignores_failed_amendment_fallback",
+          "locked_calibration_gate_ignores_failure_marker"
+        ]
+      },
+      {
+        "log": ".local/c5-persistence-recovery-v1/initial-presave-failure.txt",
+        "exit": 1,
+        "failed": 1,
+        "seconds": 10.08,
+        "causes": [
+          "phase_deadline_first_failure_replaced_by_permission_error"
+        ]
+      }
+    ],
+    "fixed_targeted": {
+      "passed": 3,
+      "deselected": 24,
+      "seconds": 43.63,
+      "exit": 0
+    },
+    "scopes_overlap_do_not_sum": true
+  },
+  "reviews": [
+    {
+      "schema_version": 1,
+      "id": "meetings-c5-independent-code-review-v1",
+      "recorded_at": "2026-10-16T08:45:06.102548+00:00",
+      "recorded_by": "/root",
+      "reviewer": "/root/meeting_navigation_audit",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "high",
+      "setting_scope": "existing_tool_accepted_role_retained_for_followup",
+      "source_files": [
+        {
+          "path": "src/doctrail/meeting_c5_review.py",
+          "sha256": "ef149459d6f002cd49f84f9f92d3dddd86940c76605deece4e30aa3b33f71684"
+        },
+        {
+          "path": "scripts/prepare_meeting_c5_inputs.py",
+          "sha256": "6ebf1a991e25c52f38b2a0bb7ab8fdceef8e6a880305f69e423ef73df067b04a"
+        },
+        {
+          "path": "scripts/probe_meeting_c5_quality.py",
+          "sha256": "e3982c866ad54fc81a30ac4bd7e8587a866a48c85b7af8d23a25b9a2440a8551"
+        },
+        {
+          "path": "scripts/audit_meeting_c5_quality.py",
+          "sha256": "5ed31510640e3dba98049645b79a097c245acb6108485aa711710b777b6e537e"
+        },
+        {
+          "path": "tests/test_meeting_c5_review.py",
+          "sha256": "8283b748a327c1e96cd81b9fcbce3f87a21f02456876d78d5ee3ea46fe18db53"
+        },
+        {
+          "path": "tests/test_prepare_meeting_c5_inputs.py",
+          "sha256": "ae30d94182b714b67c0968a19384b9dc812c022d4e398080f1f2ba2b44c5e898"
+        },
+        {
+          "path": "tests/test_probe_meeting_c5_quality.py",
+          "sha256": "bf99045a915e8f917ebb961f4fc5f4da66386324bae9c8159ed0de24a0c093a9"
+        },
+        {
+          "path": "tests/test_audit_meeting_c5_quality.py",
+          "sha256": "2b4363f3db673ba7a002363c84390a04aebc06304c1aeb5592f1708845f29703"
+        }
+      ],
+      "initial_findings": [
+        "Historical long paragraph fingerprints were not compared with new documents.",
+        "Preparation did not recheck negative import candidate state after counting."
+      ],
+      "final_review": "Both findings are addressed at the recorded hashes; no additional substantive blocker found.",
+      "checked": [
+        "Historical paragraph intersection rejection and final sealed code discovery",
+        "Calibration gate before validation semantic reads",
+        "Shared outer deadline including first proof, callbacks, final required persistence",
+        "First failure preservation and send-hook versus parsed/archived response accounting",
+        "Judgment lock and hash proof before current-split mapping or raw linkage",
+        "Original complete calibration replay before validation eligibility"
+      ],
+      "review_only": true,
+      "reviewer_test_executions": 0,
+      "reviewer_file_mutations": 0,
+      "reviewer_git_mutations": 0,
+      "reviewer_actual_tokenizer_or_native_calls": 0,
+      "reviewer_closed_or_validation_semantic_reads": 0,
+      "excluded_from_independent_output_judging": true,
+      "human_review_count": 0,
+      "limitation": "Read-only code review does not prove runtime or model quality success. Final test hashes must match."
+    },
+    {
+      "reviewer": "/root/c5_persistence_review",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "high",
+      "setting_scope": "tool_accepted_fork_none",
+      "source_files": [
+        {
+          "path": "scripts/probe_meeting_c5_quality.py",
+          "sha256": "417044bf198c19ec87cf013e4dd76846be7abb1410bd399a69e3fd2fd1ed84f8"
+        },
+        {
+          "path": "tests/test_probe_meeting_c5_quality.py",
+          "sha256": "5e3d6d1f69e54f59931a0ec0e839b8e2bd4366739328640ba1a1e1c0fa97dc00"
+        }
+      ],
+      "finding": "No additional substantive blocker found in the final persistence delta.",
+      "checked": [
+        "failure marker rejects report replay and audit preparation",
+        "locked calibration and validation gates reject before held-out body reads",
+        "pre-save deadline stays first cause after later persistence failure",
+        "implementation and review roles excluded from answer judging"
+      ],
+      "review_only": true,
+      "test_executions": 0,
+      "file_mutations": 0,
+      "actual_tokenizer_or_native_calls": 0,
+      "human_review": 0,
+      "excluded_from_output_judging": true
+    }
+  ],
+  "local_evidence": [
+    {
+      "path": ".local/c5-implementation-v1/all-initial-ruff.txt",
+      "sha256": "c89ab732b955aad2899f1c93f59c64657b0024ffc3ceb30b8456a64dbd32e475",
+      "bytes": 4220
+    },
+    {
+      "path": ".local/c5-implementation-v1/all-ruff-fix.txt",
+      "sha256": "2908db4cb9b02d6a2cb4e220dd425c224bd687a533712c8c898de975c9e12b82",
+      "bytes": 40
+    },
+    {
+      "path": ".local/c5-implementation-v1/closure-preview-counts.json",
+      "sha256": "9031f0a9d7c8d8df9a3416f888079179734615aa9047edd7e8128668bdb10a47",
+      "bytes": 305
+    },
+    {
+      "path": ".local/c5-implementation-v1/final-exits.json",
+      "sha256": "bde4f07d0f1a5aa9813a6589225208cb1a4ded8dc130d99fef1f1969276c422b",
+      "bytes": 74
+    },
+    {
+      "path": ".local/c5-implementation-v1/final-new-collection.txt",
+      "sha256": "24e1f670da9f3b669f46c6f21523a39ef8de6eac037111e0c7a5e52f50c0b7ee",
+      "bytes": 9641
+    },
+    {
+      "path": ".local/c5-implementation-v1/final-pytest.txt",
+      "sha256": "882acd85f889770ccdc13b073c9d8313042653fcb8a6e5d12a76f72a9a8b30eb",
+      "bytes": 276
+    },
+    {
+      "path": ".local/c5-implementation-v1/final-reused-collection.txt",
+      "sha256": "b932dd836b6dad80449903cef3ff126e941337fad0c8366257a3dd93e01b593d",
+      "bytes": 11377
+    },
+    {
+      "path": ".local/c5-implementation-v1/final-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": ".local/c5-implementation-v1/final-source-after.json",
+      "sha256": "f75ed5e76cadcf7e7be8ecfe47c313a11124b91bcbe1822d4c33cdb0ceb991ed",
+      "bytes": 1170
+    },
+    {
+      "path": ".local/c5-implementation-v1/final-source-before.json",
+      "sha256": "f75ed5e76cadcf7e7be8ecfe47c313a11124b91bcbe1822d4c33cdb0ceb991ed",
+      "bytes": 1170
+    },
+    {
+      "path": ".local/c5-implementation-v1/full-review-checkpoint-sha.json",
+      "sha256": "f75ed5e76cadcf7e7be8ecfe47c313a11124b91bcbe1822d4c33cdb0ceb991ed",
+      "bytes": 1170
+    },
+    {
+      "path": ".local/c5-implementation-v1/historical-paragraph-fixed.txt",
+      "sha256": "7871da2dcf0d650ee1b945c9a665d4e92f9de77e641db7924caf0dd5475ff9a0",
+      "bytes": 100
+    },
+    {
+      "path": ".local/c5-implementation-v1/historical-paragraph-original-failure.txt",
+      "sha256": "149617cc3853d9d69076761f9b362de557f6493a2344fba6be72888f42764978",
+      "bytes": 1615
+    },
+    {
+      "path": ".local/c5-implementation-v1/independent-review-v1.json",
+      "sha256": "0e0458192985e01bd3a22ff2476e700c0950a6eabcd4e62daf2b7ee86beed552",
+      "bytes": 2780
+    },
+    {
+      "path": ".local/c5-implementation-v1/new-boundaries-pytest.txt",
+      "sha256": "a331edf1283d3e3c9f80fdbca6d2d179fc64133a99bdd5dc8ff1e335c27703ca",
+      "bytes": 117
+    },
+    {
+      "path": ".local/c5-implementation-v1/post-count-candidate-fixed.txt",
+      "sha256": "c7c1b54cce610ae001a0bee532ff9aa02e9079e0e73be42a66b6077a987ccc05",
+      "bytes": 100
+    },
+    {
+      "path": ".local/c5-implementation-v1/post-count-candidate-original-failure.txt",
+      "sha256": "a9ef8f59f55aca6fd71174beee797100e6795cb15e06b20fceb137c23e27e3d3",
+      "bytes": 1975
+    },
+    {
+      "path": ".local/c5-implementation-v1/probe-audit-initial-pytest.txt",
+      "sha256": "9f0b237ecc7d1de63c8278c32b17ef87e7ad09fb387dee159f46f66e477a7c2b",
+      "bytes": 17602
+    },
+    {
+      "path": ".local/c5-implementation-v1/probe-audit-second-pytest.txt",
+      "sha256": "975dd58137450b6e576c6ead603f5356b6af307e9d3af5e89c4c17c417df5f3d",
+      "bytes": 2064
+    },
+    {
+      "path": ".local/c5-implementation-v1/review-prepare-checkpoint-sha.json",
+      "sha256": "b3af819842a0f01ce04d889de75b969ede61c3e23e41fe469d7fd11159d3126c",
+      "bytes": 584
+    },
+    {
+      "path": ".local/c5-implementation-v1/review-prepare-initial-pytest.txt",
+      "sha256": "c7b2ef6717a7dcec237bae4ab3af1be56875dc589c0c5667d8968e29d407b95a",
+      "bytes": 1873
+    },
+    {
+      "path": ".local/c5-implementation-v1/review-prepare-initial-ruff.txt",
+      "sha256": "faae80b1f97c9f67e8d6aecc53afe297a6a3147397ff062f0fcf022faf20a734",
+      "bytes": 2489
+    },
+    {
+      "path": ".local/c5-implementation-v1/review-prepare-ruff-fix.txt",
+      "sha256": "4b9315462a6ef4a2fe64e4dc2aec1252bf2299ac92f4976c0e81c84799cff44a",
+      "bytes": 39
+    },
+    {
+      "path": ".local/c5-implementation-v1/review-prepare-second-pytest.txt",
+      "sha256": "7574e88a067ca74b1ab093439c059f5f90b65f6628a9af64b270de2f0b237768",
+      "bytes": 101
+    },
+    {
+      "path": ".local/c5-implementation-v1/review-prepare-second-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted-exit.json",
+      "sha256": "580ba17f956ef4be36c281ae67787ff17175a13fad8ba9e3580e5b055fa2a6c1",
+      "bytes": 26
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted.txt",
+      "sha256": "3ef81d722ff9666eb9f9aefcd2a9a6beefe0920411ceb80d21cac48217dfd79d",
+      "bytes": 116
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-exit.json",
+      "sha256": "504f0b28a11ef24973b42d7f35a1d77997e1b875afb1c67cb429a6c6092f8d16",
+      "bytes": 26
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-failure.txt",
+      "sha256": "69bf549b25aa6aaa44ed1d392c8b8dfc2619fe391693ab4b5a3a536bb360850d",
+      "bytes": 5209
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-presave-exit.json",
+      "sha256": "504f0b28a11ef24973b42d7f35a1d77997e1b875afb1c67cb429a6c6092f8d16",
+      "bytes": 26
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-presave-failure.txt",
+      "sha256": "c364170c33a4a9c70d93522f61d8808b5ee6e2f9fe09b0feb6f743ed997e63af",
+      "bytes": 2620
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/original-probe.py",
+      "sha256": "e3982c866ad54fc81a30ac4bd7e8587a866a48c85b7af8d23a25b9a2440a8551",
+      "bytes": 33442
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/original-source.json",
+      "sha256": "094e3baefba00503db98a20a5246b9b70b8ebe34b2fd3eb3e0485d5410dda9b2",
+      "bytes": 298
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/original-test.py",
+      "sha256": "bf99045a915e8f917ebb961f4fc5f4da66386324bae9c8159ed0de24a0c093a9",
+      "bytes": 20219
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/receipt.json",
+      "sha256": "3955e3aaf190bdd115a561f79696badff7ac11778ddffb256fcee61a47f35a00",
+      "bytes": 9915
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-exits.json",
+      "sha256": "d88f61b1255140c48c8a34d549959e817cb73e57544ebf026b12d11e3aad3ff7",
+      "bytes": 74
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-pytest.txt",
+      "sha256": "8ab02c5e57af165d29dd03f5c1edbf7f600b2ccf4f3cce9ac53fc06154f667d3",
+      "bytes": 113
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-source-after.json",
+      "sha256": "2d5c8e90ed7bf25f155c53d47a419ad4e14a8e6076bb80edede63f1f49b0226d",
+      "bytes": 1170
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-source-before.json",
+      "sha256": "2d5c8e90ed7bf25f155c53d47a419ad4e14a8e6076bb80edede63f1f49b0226d",
+      "bytes": 1170
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/review-source.json",
+      "sha256": "2d5c8e90ed7bf25f155c53d47a419ad4e14a8e6076bb80edede63f1f49b0226d",
+      "bytes": 1170
+    }
+  ],
+  "persistence_nested_evidence": [
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted-exit.json",
+      "sha256": "580ba17f956ef4be36c281ae67787ff17175a13fad8ba9e3580e5b055fa2a6c1",
+      "bytes": 26
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted-temp/test_final_save_failure_marker0/.local/meetings-c5-quality-calibration-v1/failed-final-save.json",
+      "sha256": "8182ada512cd36a2fe2cd79fc27cdbb105fe51684ec5081ac107c18dcb1df4f9",
+      "bytes": 51
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted-temp/test_final_save_failure_marker0/.local/meetings-c5-quality-calibration-v1/report.json",
+      "sha256": "bafe9b14609f29655dd95e0e3b8c82a369858b7e7af0fcdb3fe8b9ef3f70be7d",
+      "bytes": 208697
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted-temp/test_late_terminal_save_and_fa0/.local/meetings-c5-quality-calibration-v1/failed-final-save.json",
+      "sha256": "4011c1ece2ba4c93b66faeee958890e0076a54e707e83e74f95cf278ee693b73",
+      "bytes": 208674
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted-temp/test_late_terminal_save_and_fa0/.local/meetings-c5-quality-calibration-v1/report.json",
+      "sha256": "0ce12fdd8dae60bb18b63c9341824f989c736a0174c66b1994e85eb36dfe24e2",
+      "bytes": 208412
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted-temp/test_phase_overrun_before_fina0/.local/meetings-c5-quality-calibration-v1/failed-final-save.json",
+      "sha256": "15024bbe25ce53c793f61f6a865f86649a0c4437f44466a0684a1b1cd927e9d9",
+      "bytes": 208677
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted-temp/test_phase_overrun_before_fina0/.local/meetings-c5-quality-calibration-v1/report.json",
+      "sha256": "bbab23ca45f5bf73a4af741aa716c9645d403bf6bb0ee4b6ac11eb11854131ad",
+      "bytes": 207851
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/fixed-targeted.txt",
+      "sha256": "3ef81d722ff9666eb9f9aefcd2a9a6beefe0920411ceb80d21cac48217dfd79d",
+      "bytes": 116
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-exit.json",
+      "sha256": "504f0b28a11ef24973b42d7f35a1d77997e1b875afb1c67cb429a6c6092f8d16",
+      "bytes": 26
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-failure.txt",
+      "sha256": "69bf549b25aa6aaa44ed1d392c8b8dfc2619fe391693ab4b5a3a536bb360850d",
+      "bytes": 5209
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-presave-exit.json",
+      "sha256": "504f0b28a11ef24973b42d7f35a1d77997e1b875afb1c67cb429a6c6092f8d16",
+      "bytes": 26
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-presave-failure.txt",
+      "sha256": "c364170c33a4a9c70d93522f61d8808b5ee6e2f9fe09b0feb6f743ed997e63af",
+      "bytes": 2620
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-presave-temp/test_phase_overrun_before_fina0/.local/meetings-c5-quality-calibration-v1/failed-final-save.json",
+      "sha256": "355a32d197efce2651eff4c36264ead889a78926c653fa26c917afda5768a440",
+      "bytes": 208695
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-presave-temp/test_phase_overrun_before_fina0/.local/meetings-c5-quality-calibration-v1/report.json",
+      "sha256": "53dfcb784243d3b3182b3222af5971a246a8ce3a585ba6c1bac12094306def85",
+      "bytes": 207851
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-pytest-temp/test_final_save_failure_marker0/.local/meetings-c5-quality-calibration-v1/failed-final-save.json",
+      "sha256": "8182ada512cd36a2fe2cd79fc27cdbb105fe51684ec5081ac107c18dcb1df4f9",
+      "bytes": 51
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-pytest-temp/test_final_save_failure_marker0/.local/meetings-c5-quality-calibration-v1/report.json",
+      "sha256": "40261576408468f8dccc2f24ba94e3844aadb74c3d8bde7b547d1bbfc63c8190",
+      "bytes": 208668
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-pytest-temp/test_late_terminal_save_and_fa0/.local/meetings-c5-quality-calibration-v1/failed-final-save.json",
+      "sha256": "3fbc5e82f5d420b024db538af0b02bceb5f92ab890b86835140dc970c6de192c",
+      "bytes": 208674
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/initial-pytest-temp/test_late_terminal_save_and_fa0/.local/meetings-c5-quality-calibration-v1/report.json",
+      "sha256": "883d477a9ad0f1a5d0db2ec97c5fa162068b3d61368c9f7dc80391a1afbad267",
+      "bytes": 208412
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/original-probe.py",
+      "sha256": "e3982c866ad54fc81a30ac4bd7e8587a866a48c85b7af8d23a25b9a2440a8551",
+      "bytes": 33442
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/original-source.json",
+      "sha256": "094e3baefba00503db98a20a5246b9b70b8ebe34b2fd3eb3e0485d5410dda9b2",
+      "bytes": 298
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/original-test.py",
+      "sha256": "bf99045a915e8f917ebb961f4fc5f4da66386324bae9c8159ed0de24a0c093a9",
+      "bytes": 20219
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-exits.json",
+      "sha256": "d88f61b1255140c48c8a34d549959e817cb73e57544ebf026b12d11e3aad3ff7",
+      "bytes": 74
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-pytest.txt",
+      "sha256": "8ab02c5e57af165d29dd03f5c1edbf7f600b2ccf4f3cce9ac53fc06154f667d3",
+      "bytes": 113
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-source-after.json",
+      "sha256": "2d5c8e90ed7bf25f155c53d47a419ad4e14a8e6076bb80edede63f1f49b0226d",
+      "bytes": 1170
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/regression-source-before.json",
+      "sha256": "2d5c8e90ed7bf25f155c53d47a419ad4e14a8e6076bb80edede63f1f49b0226d",
+      "bytes": 1170
+    },
+    {
+      "path": ".local/c5-persistence-recovery-v1/review-source.json",
+      "sha256": "2d5c8e90ed7bf25f155c53d47a419ad4e14a8e6076bb80edede63f1f49b0226d",
+      "bytes": 1170
+    }
+  ],
+  "preserved_frozen_toolchains": [
+    {
+      "file": "data/evaluation/meetings-gpu-placement-source-freeze-v1.json",
+      "sha256": "116b5325b8b9c1de39c27d486b17d614d9bdef49b32274b14d2838c5a4e9cfaf",
+      "bindings": 59,
+      "working_and_head_unchanged": true
+    },
+    {
+      "file": "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json",
+      "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78",
+      "bindings": 85,
+      "working_and_head_unchanged": true
+    },
+    {
+      "file": "data/evaluation/meetings-host-proof-profile-source-freeze-v1.json",
+      "sha256": "1171f14f7cb176838385723a040ded6921409cc1cfb168833d35e4782687f412",
+      "bindings": 52,
+      "working_and_head_unchanged": true
+    }
+  ],
+  "actual": {
+    "source_authorship": 0,
+    "item_authorship": 0,
+    "judge_registration": 0,
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "downloads": 0,
+    "quality_judgments": 0,
+    "human_review": 0
+  },
+  "limitations": [
+    "Synthetic checks and code review do not prove model answer quality.",
+    "Original 168 and final 37 are overlapping scopes, not one final complete run.",
+    "If every write fails, no durable failure marker can be guaranteed; adoption also requires independently observed CLI exit0, terminal summary and report integrity.",
+    "Deadline checks do not preempt arbitrary filesystem I/O.",
+    "Source commit and exact-commit mandatory CI remain required before fresh semantic data authoring."
+  ]
+}
