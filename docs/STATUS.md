@@ -1,5 +1,13 @@
 # 진행 상태
 
+## C5 실제 자료 역할 수락 · 출처 metadata 등록
+
+CI 영수증 ddc5080 커밋 뒤 실제 Astra xhigh 역할4명이 source/item 작성자·별도 사전검토자를 split별로 수락했다. 같은 split의 source/item 역할 재사용을 명시했고 자기 검토와 split 간 겸임을 금지한다. 모든 역할은 metadata 노출을 공개했고 최종 답변 judge에서 제외된다. 아직 실제 원문/질문 작업을 시작하지 않았다.
+
+`meetings-c5-prior-source-fingerprints-v1.json` SHA dd36b66b는 기존 metadata3개에서80행을 이어받았다. 정규화 문서/긴 문단 hash가 있는 행은 C4의12개뿐이며 과거 누락3항목을 그대로 보존한다. 원문/질문/oracle을 열어 빈칸을 메우지 않았으며 중복 없음의 완전 증명이 아니다.
+
+역할/metadata 커밋 뒤 calibration과 validation 작성자가 실제 code_contract를 먼저 검증한다. 각자 공개 repo를 본문 열기 전에 예약하고 다른 split과의 충돌을 피한다. Java parity는 한 역할씩 실행하며 부모가 실행 순서를 조정한다. 새 source12문서 확정·독립 검토·동결커밋 뒤에만 질문을 만든다. 전체 goal ACTIVE·Phase1/PR14 draft·무료/로컬, tokenizer/native0이다.
+
 ## C5 소스 CI 완료 · 새 원문 준비로 이동
 
 사용자 명의 소스/freeze 커밋 d084f86의 push39218197974와 PR39218203289에서 backend·java-service·web이 모두 성공했다. GitHub author/committer lingter100을 확인했고 동결76개를 해당 커밋과 현재 파일에서 대조했다. CI 영수증은 `data/evaluation/meetings-c5-toolchain-ci-v1.json` SHA f65660a2이며 이 영수증을 별도 커밋한다. job 성공만 관측했고 이전 실행의 검사 수를 이번 CI 수치로 가져오지 않는다.
