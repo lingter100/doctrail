@@ -1,0 +1,27 @@
+---
+title: Rustc Dev Guide WG 2019-05-28 sync meeting
+type: docs
+---
+# Rustc Dev Guide WG 2019-05-28 sync meeting
+
+## Triaging rustc-dev-guide repo
+
+- Some discussion about how to assign issues on the rust-lang/rustc-dev-guide repo
+- Problem: can't assign issues to non-members
+- Possible solutions:
+    - Add WG-rustc-dev-guide members to repo so they can be assigned
+    - use `triagebot` model: bot is assigned the issue and edits the OP to mention the current owner.
+
+## Forge
+
+- Discussed purpose of the forge and how it differs from rustc-dev-guide
+- Niko feels that most of the content in the forge doesn't obviously belong in the guide and that the stuff currently in the guide feels like it belongs in the guide
+- Forge is for team procedures, infra stuff
+    - would also be good to add craterbot and rustc-timer links to forge (probably link to READMEs of their repos)
+- link forge from main page
+
+> my rule of thumb [for what to put in the guide] is sort of "is this something you would do while fixing a compiler bug or implementing a compiler feature" -niko
+
+## Lectures
+
+- Do one on MIR and HAIR construction

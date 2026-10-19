@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-source-review-v2",
+  "recorded_at": "2026-10-19T08:40:09.084830+00:00",
+  "head_before_commit": "030bc1e3ed6fbf2977216d4eb76c64d4281ae793",
+  "calibration": {
+    "accepted": 6,
+    "documents": 6,
+    "chunks": 15,
+    "freeze_files": 14,
+    "source_unchanged": true
+  },
+  "validation_v2": {
+    "accepted": 6,
+    "rejected": 0,
+    "documents": 6,
+    "chunks": 14,
+    "public_raw_unchanged": 3,
+    "synthetic_replaced": 3,
+    "source_changes_during_review": 0,
+    "source_freeze": {
+      "file": "data/evaluation/meetings-c5-validation-v2/source-freeze.json",
+      "sha256": "141778a085495d296f740ba1e259a71d7f124c5308e714268bda463558d47687",
+      "bound_files": 15
+    },
+    "author": "/root/c5_validation_author",
+    "reviewer": "/root/c5_validation_prereviewer",
+    "actual_model": "gpt-6-astra",
+    "effort": "xhigh",
+    "actual_java_tests_passed": 2,
+    "java_failures": 0,
+    "java_errors": 0,
+    "java_skips": 0,
+    "java_test_seconds": 0.35,
+    "reviewer_java_reruns": 0,
+    "new_remaining_jvms": 0,
+    "original_v1_files_preserved": 17,
+    "source_stage_contract": "passed",
+    "full_load_material": "pending_items",
+    "postcommit_git_proof": "pending_source_commit"
+  },
+  "fingerprint_lineage": {
+    "schema_version": 1,
+    "phase": "validation",
+    "changed_at": "2026-10-19T08:27:10.454610+00:00",
+    "author_role": "/root/c5_validation_author",
+    "active_path": "data/evaluation/meetings-c5-validation-source-fingerprints-v1.json",
+    "original_archive": {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-fingerprints-original-v1.json",
+      "sha256": "7ac383c0bcca56b29951226716e2267fe75c4d96e45cfe43e95b164a5314b84d",
+      "commit": "030bc1e3ed6fbf2977216d4eb76c64d4281ae793"
+    },
+    "before_sha256": "7ac383c0bcca56b29951226716e2267fe75c4d96e45cfe43e95b164a5314b84d",
+    "after_sha256": "efd95d65e1b224daf4f6ff649b649e10c784cec783c27c2d9f0436238076c7e4",
+    "authorized_by": "data/evaluation/meetings-c5-role-registration-v1.json source_revision_authorization",
+    "reason": "Activate NEWv2 fingerprints after rebuilding whole six-document inventory; immutable v1 rejection remains bound to original SHA.",
+    "changed_semantic_sources": 3,
+    "public_source_raw_changes": 0,
+    "original_v1_mutations": 0
+  },
+  "public_files": [
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/freshness.json",
+      "sha256": "bf2e1d10437e6f1887a90bb9e454a4d95e7f49c7adc974709a9bafb7f9db30e9",
+      "bytes": 2533
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/java-parity.json",
+      "sha256": "913addeab8934780b7d609567731b7fc8aa3a7b3e3918e0b4f460bc41363c18a",
+      "bytes": 2490
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-pub-general.md",
+      "sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+      "bytes": 3192
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-pub-meeting-01.md",
+      "sha256": "f3e9a2340a385e1232a296d3c4d226a56d4fe4ea8d131da7a1a8fc23a4ed79cf",
+      "bytes": 1915
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-pub-meeting-02.md",
+      "sha256": "000a15674ac56f752a084dbae1ce1714412782ab4f03564db5e0ed2ac0245240",
+      "bytes": 1123
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-syn-general.md",
+      "sha256": "dd4de7fce2e1e209f110e042865f2342b17a79be8713faeb846b5517c7661fa6",
+      "bytes": 2767
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-syn-meeting-01.md",
+      "sha256": "ab94e3ed26e62be7ff806e1fcfb7cf0e0b0aee7f5e9d3096f4742d692da1e455",
+      "bytes": 1992
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-syn-meeting-02.md",
+      "sha256": "dd565a07f9b558b37cd6b3f9e70209728e87c877cb42ad2a5c4f26b40f6e51fe",
+      "bytes": 2330
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/review-metadata-summary.json",
+      "sha256": "cf7464f3a99281b9170eac3e82340a31952fba70cec27968e69cfeed22991863",
+      "bytes": 3118
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/source-adoption-receipt.json",
+      "sha256": "694cd0a17ed7923c4f97225075b7fdcb5e11412b435b3562005c698466f3a6cd",
+      "bytes": 8723
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/source-freeze.json",
+      "sha256": "141778a085495d296f740ba1e259a71d7f124c5308e714268bda463558d47687",
+      "bytes": 2954
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/source-inventory.json",
+      "sha256": "191e7d99dc6f5506faffc999428b9042f1d135705a913c596c22e06eb9af2b93",
+      "bytes": 52076
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/source-manifest.json",
+      "sha256": "9905e7e9f222a83a4c1785a2d9456953590c5a0777f1ae1e65fe2149872a1910",
+      "bytes": 15008
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/source-prereview-notes.md",
+      "sha256": "567f2b017f1783a00b351f9fc26fd549015e17d89b7b45025535e93a80247732",
+      "bytes": 5543
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/source-prereview.json",
+      "sha256": "e47d23ea3d895951114fe0a2647a63dcb0f3cb72cc6e88d7a265c952eb43067a",
+      "bytes": 2036
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v2/source-processing-receipt.json",
+      "sha256": "bb99a12507d484db6a85ba0aa051d413b8aa6d49fb7b81cb2fc02491d3599df1",
+      "bytes": 4841
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-source-fingerprints-v1.json",
+      "sha256": "efd95d65e1b224daf4f6ff649b649e10c784cec783c27c2d9f0436238076c7e4",
+      "bytes": 4349
+    }
+  ],
+  "actual": {
+    "questions": 0,
+    "oracles": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "answer_judgments": 0,
+    "human_review": 0
+  },
+  "limitations": [
+    "AI source prereview and parsing parity do not establish answer quality.",
+    "Historical fingerprint coverage12/80 and3 inherited gaps remain; no complete near-duplicate guarantee.",
+    "Parent reads only hashes/metadata of validation; detailed semantic comparison remains with isolated reviewer.",
+    "Original source-v1 rejection and all17 files remain unchanged at commit030bc1e.",
+    "Source/item same-split reuse is disclosed; final judges are separate metadata-exposed roles."
+  ],
+  "publication_whitespace": {
+    "initial_check_exit": 2,
+    "log_sha256": "c307241b2b46188ed6701de2752b98240c66246370f8b88fc4701840c57bf674",
+    "preserved_source_findings": [
+      {
+        "file": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-pub-general.md",
+        "line": 11,
+        "type": "trailing whitespace."
+      }
+    ],
+    "initial_parent_helper_failure": "Assertion expected git whitespace exit1; observed exit2 with exactly the same one known raw-source whitespace finding. No source mutation.",
+    "reason": "Exact unchanged upstream public raw source retained; no formatting mutation.",
+    "java_crlf_exact_exception": "data/evaluation/meetings-c5-validation-v2/java-parity.json",
+    "source_bytes_changed": 0
+  }
+}

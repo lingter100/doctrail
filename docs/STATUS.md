@@ -1,5 +1,27 @@
 # 진행 상태
 
+## C5 원문12개 최종 수용 · source freeze와 판정자 등록 커밋 준비
+
+Calibration6개/freeze14는 그대로이며 validation NEWv2의6개/14전체청크가 별도 Astra xhigh 재검토에서 수정0·반려0으로 수용됐다. 새 source freeze15 SHA141778a0을 만들었다. 원래 v1 17파일·반려 기록·공개3원문·toolchain76은 보존됐다. 실제 v2 Java2검사 통과 영수증을 검토자가 재생 확인했으며 추가 Java 실행은 하지 않았다. 부모는 의미 내용을 열지 않고 author12·review증거·freeze바이트를 검증했다.
+
+최종 답변 판정자 c5_calibration_final_judge/c5_validation_final_judge를 실제 Astra xhigh/fork none으로 별도 배정했다. 각64byte seed·노출 attestation·등록을 만들었고 metadata-exposed/label-masked 상태를 명시했다. 원문 작성·검토 역할과 겹치지 않으며 실제 판단0이다.
+
+이제 source/freeze·등록을 사용자 명의로 커밋하고 필수 CI를 확인한다. 그 뒤 각 실제 작성자가 자기 split의 committed source 증명을 먼저 마친 다음 calibration6/격리 validation8 질문·oracle·전체청크 선택만 작성한다. 독립 item 검토/동결·커밋 이전 tokenizer/native0을 유지한다. 전체 goal ACTIVE·Phase1/PR14 draft이며 유료 자원/공개 서비스 배포0이다.
+
+## C5 NEWv2 작성 반환 · 독립 원문 재검토 중
+
+기존 실제 Astra xhigh validation author가 NEWv2 공개3동일·합성3교체,6문서/14전체청크를 반환했다. 원래 v1 17파일·calfreeze14·toolchain76은 그대로이며 active fingerprint는 사전등록 예외에 따라7ac383c0→efd95d65로 갱신하고 exact 원본/커밋을 보존했다. 실제 Java2통과/실패0/0.350초·잔여 새 JVM0이며 부모가 author12파일 hash를 확인했다. 새 Java 영수증2490bytes/52CRLF도 narrow -text로 원본 보존한다.
+
+같은 독립 Astra xhigh c5_validation_prereviewer가 NEWv2 source 검토/freshness/조건부 freeze를 소유한다. 실제 code/Git/role 증명 동안 HEAD030bc1e를 유지하며 원 작성자는 수정 작업을 마쳤다. 의미 중복 해소는 아직 검토 전이며 원문 검토 수용·source commit 전 질문/tokenizer/native0이다. Phase1/전체 goal ACTIVE·PR14 draft다.
+
+## C5 원본/반려030bc1e 커밋 · validation NEWv2 작성 시작
+
+원본41파일·calfreeze14·toolchain76의 index 바이트를 확인하고50파일을 사용자 명의030bc1e에 커밋·push했다. 첫 whitespace3건은 검토된 upstream raw2/동일 processed1의 원본 공백/EOF여서 그대로 보존하고 정확한 파일만 제외했다. Java CRLF 영수증2개도 exact 보존했으며 일반 검사 최종 통과를 확인했다. PR 본문을 현재 source 검토 결과와 한계로 갱신했다. push39222294453/PR39222301512의 필수3job 모두 성공을 직접 확인했다. 별도 original-source-ci 영수증에 사용자 author/committer와 함께 기록했다.
+
+같은 실제 Astra xhigh c5_validation_author만 NEWv2 합성3개 수정을 맡는다. 먼저 실제 code_contract/role/원본 커밋 증명을 하며 부모는 그동안 HEAD030bc1e를 유지한다. Author는 source-revision-feedback-v1.json만 읽고 상세 review notes/calibration 의미 자료는 열지 않는다. data/evaluation/meetings-c5-validation-v2와 .local/meetings-c5-validation-source-v2를 소유하며 원래 v1 모든 원문/검토는 보존한다. active flat fingerprint만 사전등록한 canonical metadata 예외로 v2에 맞춰 갱신할 수 있고 원래7ac383c0 archive와 커밋은 유지한다.
+
+Maven은 다른 역할이 쓰지 않는 상태이므로 validation v2가 준비되면 독점 사용하되 새 영수증/로그와 owned cleanup을 남긴다. 같은 독립 reviewer의 재검토·sourcefreeze·커밋 전에는 item/tokenizer/native0이다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## C5 원문 검토: cal6 수용·val3 수용/3 반려 · 새 버전 준비
 
 독립 실제 Astra xhigh 검토가 완료됐다. Calibration6문서는 수정0으로 수용됐고 sourcefreeze14 SHA771a3f18을 만들었다. Validation은 공개3수용/합성3반려이며 source freeze가 없다. 해시/긴 문단 중복은0이지만 split 간 의미 신선도에서 반려됐다. 원래 source6/author hash12와 반려 기록을 그대로 보존했다. 반려된 prereview가 준비 관문을 실제 거부함을 검토자가 확인했다.

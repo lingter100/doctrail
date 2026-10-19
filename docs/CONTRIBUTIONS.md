@@ -1,5 +1,10 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-19 · C5 최종 답변 판정자 선등록
+
+부모가 신규 c5_calibration_final_judge와 c5_validation_final_judge를 각각 gpt-6-astra/xhigh/fork none으로 호출했고 도구가 수락했다. 작성자·원문/문항 검토자·구현자와 다른 실제 역할이며 각자64byte seed와 노출 attestation을 만들었다. 자동 AGENTS·memory summary의 모델/가설/과거집계 metadata 노출을 기록해 metadata-exposed, label-masked로 표시한다. Calibration judge의 schema 주변 코드 읽기 범위 초과도 사실대로 공개했다. 의미 자료·출력·mapping·개별 판정은 읽지 않았으며 실제 판정0이다. 부모 채팅 설정 변경이나 사용자 검수로 기록하지 않는다.
+
+
 ## 2026-10-19 · 원문 의미 신선도 반려와 원본 보존
 
 독립 Astra xhigh calibration reviewer는6개를 수용했고 validation reviewer는 공개3을 수용·합성3을 반려했다. 정확 해시 중복0과 의미상 신선도 수용은 다른 판단이다. 부모는 validation 의미 내용이나 상세 검토 notes를 열지 않고 metadata·hash만 확인했다. 반려 원본·author-safe feedback·fingerprint의 exact archive를 커밋한 뒤 같은 작성자에게 NEWv2만 맡기도록 범위를 등록했다. 이는 모델 결과를 보고 평가를 바꾼 것이 아니며 아직 질문/모델 실행은0이다.

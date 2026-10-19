@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c5-v1",
+  "registered_at": "2026-10-19T08:38:01.173654+00:00",
+  "judges": [
+    {
+      "phase": "calibration",
+      "reviewer_id": "/root/c5_calibration_final_judge",
+      "accepted": true,
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted_at": "2026-10-19T08:36:40.388391+00:00",
+      "settings_provenance": "Parent directly supplied model/effort/fork arguments; collaboration.spawn_agent accepted canonical role. No runtime introspection.",
+      "seed": {
+        "file": "data/evaluation/meetings-c5-review-metadata-v1/calibration/seed.bin",
+        "sha256": "34d75be3ccc50d7666b5721dbbd172e4c4c8b014dd82fbd4ebbe87d68b0bff0a"
+      },
+      "attestation": {
+        "file": "data/evaluation/meetings-c5-review-metadata-v1/calibration/attestation.json",
+        "sha256": "4d2d5e51c65fb49374ff1ca1338f2af6e770d6235f83a9ff64601a10140fb023"
+      },
+      "seed_bytes": 64,
+      "exposure_label": "metadata-exposed, label-masked",
+      "local_acceptance": {
+        "file": ".local/c5-calibration-final-judge-v1/acceptance.json",
+        "sha256": "aaa138fe34a3942786a2ec999366d7ffec1f078817b5062251e2164c755f7373"
+      },
+      "judgments_at_registration": 0,
+      "human_review_count": 0
+    },
+    {
+      "phase": "validation",
+      "reviewer_id": "/root/c5_validation_final_judge",
+      "accepted": true,
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted_at": "2026-10-19T08:37:02.510946+00:00",
+      "settings_provenance": "Parent directly supplied model/effort/fork arguments; collaboration.spawn_agent accepted canonical role. No runtime introspection.",
+      "seed": {
+        "file": "data/evaluation/meetings-c5-review-metadata-v1/validation/seed.bin",
+        "sha256": "9c92518844d6d91f1606154ea87b76166f0753342f7433b1d2cd8e28524901ef"
+      },
+      "attestation": {
+        "file": "data/evaluation/meetings-c5-review-metadata-v1/validation/attestation.json",
+        "sha256": "2440a4d9858009908ca13847f88894058d64c5f096575ff104660ac2d7838700"
+      },
+      "seed_bytes": 64,
+      "exposure_label": "metadata-exposed, label-masked",
+      "local_acceptance": {
+        "file": ".local/c5-validation-final-judge-v1/acceptance.json",
+        "sha256": "c767909b032c59b97c9bcc9875f090641b5833fe197ea00e251e6c08d5152088"
+      },
+      "judgments_at_registration": 0,
+      "human_review_count": 0
+    }
+  ],
+  "excluded_roles": [
+    "/root",
+    "/root/bounded_thinking_transport",
+    "/root/c2_comparison_runner",
+    "/root/c5_calibration_author",
+    "/root/c5_calibration_prereviewer",
+    "/root/c5_persistence_recovery",
+    "/root/c5_persistence_review",
+    "/root/c5_validation_author",
+    "/root/c5_validation_prereviewer",
+    "/root/free_qa_candidate_review",
+    "/root/host_proof_profile",
+    "/root/knowledge_recovery_review",
+    "/root/meeting_navigation_audit",
+    "/root/requirements_candidate"
+  ],
+  "gate": "No semantic pack read until explicit parent assignment; validation requires original calibration6/6 full-integrity gate. Judgments lock before mapping.",
+  "scope": "Reservations only, before items and outputs. Calibration judge disclosed incidental schema-adjacent code exposure; neither judge participated in source/item/design/implementation."
+}

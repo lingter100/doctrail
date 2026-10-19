@@ -1,0 +1,457 @@
+{
+  "schema_version": 1,
+  "source_processing_version": 2,
+  "phase": "validation",
+  "mode": "adopted-all",
+  "manifest_sha256": "9905e7e9f222a83a4c1785a2d9456953590c5a0777f1ae1e65fe2149872a1910",
+  "documents": [
+    {
+      "source_id": "c5-val-pub-general",
+      "document_id": "c5-val-pub-general",
+      "revision": 1,
+      "registration_ordinal": 0,
+      "family_id": "c5-f03",
+      "title": "Rustc Dev Guide Working Group",
+      "meeting_date": null,
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-pub-general.md",
+      "raw_sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+      "raw_size_bytes": 3192,
+      "git_blob_sha1": "c4a7087cd25081d737b38d57baff13cdd9ee57c5",
+      "processed_sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+      "processed_codepoints": 3192,
+      "content": "---\ntitle: Rustc Dev Guide Working Group\ntype: docs\n---\n# Rustc Dev Guide Working Group\n![working group status: active][status]\n\nThis working group aims to make the compiler easier to learn by ensuring that rustc-dev-guide and api docs are \"complete\".\n\n- **Team:** [wg-rustc-dev-guide on rust-lang/team](https://github.com/rust-lang/team/blob/master/teams/wg-rustc-dev-guide.toml)\n- **Meeting Notes:** \n    - [2019.05.14 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md\" >}})\n    - [2019.05.28 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md\" >}})\n    - [2019.06.11 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.06.11-meeting.md\" >}})\n    - [2019.06.25 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.06.25-meeting.md\" >}})\n    - [2019.07.09 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.09-meeting.md\" >}})\n    - [2019.07.23 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.23-meeting.md\" >}})\n    - [2019.08.06 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.08.06-meeting.md\" >}})\n    - [2019.08.20 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.08.20-meeting.md\" >}})\n    - [2019.09.17 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.09.17-meeting.md\" >}})\n    - [2019.10.01 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.10.01-meeting.md\" >}})\n- **Agenda:** [Agenda]({{< relref \"/working-groups/rustc-dev-guide/minutes/agenda\" >}})\n- **FAQ:** [FAQ]({{< relref \"/working-groups/rustc-dev-guide/FAQ\" >}})\n\n[status]: https://img.shields.io/badge/status-active-brightgreen.svg?style=for-the-badge\n[spastorino]: https://github.com/spastorino\n[markim]: https://github.com/mark-i-m\n\n## What is the goal of this working group?\nThis working group aims to accomplish the following:\n\n- Ensure that major components of rustc are covered in rustc-dev-guide\n- Ensure that API doc coverage is at least 90%\n\n# How can I get involved?\nIf you are interested in getting involved in this working group, come and say hi in the Zulip\nstream. You can be added to the Zulip group for the working group if you are interested in being\npinged when there are available tasks.\n\n## Process\nWe are trying to follow a \"sprint-like\" structure where on each \"sprint\" cycle we start with a planning and then\nwork towards the goals defined on that plan. Our current plan is to work for 2 months on a couple of goals, with a few meetings to sync up during that period. We are working towards filling out missing parts of the rustc-dev-guide and building some chapters that help gain an overall understanding of what the compiler does to code to produce its output.\n\n- **Desired experience level:** Any\n- **Relevant repositories:** [`rust-lang/rust`][rust-repo] and [`rust-lang/rustc-dev-guide`][rustc-dev-guide-repo]\n- **Zulip stream:** [`#t-compiler/wg-rustc-dev-guide`][zulip] on Zulip\n\n[rust-repo]: https://github.com/rust-lang/rust\n[rustc-dev-guide-repo]: https://github.com/rust-lang/rustc-dev-guide\n[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 3192,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-pub-general-r1-c0000",
+          "text": "---\ntitle: Rustc Dev Guide Working Group\ntype: docs\n---\n# Rustc Dev Guide Working Group\n![working group status: active][status]\n\nThis working group aims to make the compiler easier to learn by ensuring that rustc-dev-guide and api docs are \"complete\".\n\n- **Team:** [wg-rustc-dev-guide on rust-lang/team](https://github.com/rust-lang/team/blob/master/teams/wg-rustc-dev-guide.toml)\n- **Meeting Notes:** \n    - [2019.05.14 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md\" >}})\n    - [2019.05.28 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md\" >}})\n    - [2019.06.11 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.06.11-meeting.md\" >}})\n    - [2019.06.25 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.06.25-meeting.md\" >}})\n    - [2019.07.09 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.09-meeting.md\" >}})\n    - [2019.07.23 Meeting]({{< relref ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 976,
+          "ordinal": 0,
+          "text_sha256": "7d2449192058e069af80f7b93a69f90384adff25e0053146fd5d4545721852f2"
+        },
+        {
+          "chunk_id": "c5-val-pub-general-r1-c0001",
+          "text": ">}})\n    - [2019.07.09 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.09-meeting.md\" >}})\n    - [2019.07.23 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.23-meeting.md\" >}})\n    - [2019.08.06 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.08.06-meeting.md\" >}})\n    - [2019.08.20 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.08.20-meeting.md\" >}})\n    - [2019.09.17 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.09.17-meeting.md\" >}})\n    - [2019.10.01 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.10.01-meeting.md\" >}})\n- **Agenda:** [Agenda]({{< relref \"/working-groups/rustc-dev-guide/minutes/agenda\" >}})\n- **FAQ:** [FAQ]({{< relref \"/working-groups/rustc-dev-guide/FAQ\" >}})\n\n[status]: https://img.shields.io/badge/status-active-brightgreen.svg?style=for-the-badge\n[spastorino]: https://github.com/spastorino\n[markim]: https://github.com/mark-i-m\n\n## What is the goal ",
+          "page": null,
+          "start_offset": 826,
+          "end_offset": 1825,
+          "ordinal": 1,
+          "text_sha256": "85c77450dc2de25892f11d5c491f46dca8e88bce84f2b09dd0f4315573f6112e"
+        },
+        {
+          "chunk_id": "c5-val-pub-general-r1-c0002",
+          "text": "tus-active-brightgreen.svg?style=for-the-badge\n[spastorino]: https://github.com/spastorino\n[markim]: https://github.com/mark-i-m\n\n## What is the goal of this working group?\nThis working group aims to accomplish the following:\n\n- Ensure that major components of rustc are covered in rustc-dev-guide\n- Ensure that API doc coverage is at least 90%\n\n# How can I get involved?\nIf you are interested in getting involved in this working group, come and say hi in the Zulip\nstream. You can be added to the Zulip group for the working group if you are interested in being\npinged when there are available tasks.\n\n## Process\nWe are trying to follow a \"sprint-like\" structure where on each \"sprint\" cycle we start with a planning and then\nwork towards the goals defined on that plan. Our current plan is to work for 2 months on a couple of goals, with a few meetings to sync up during that period. We are working towards filling out missing parts of the rustc-dev-guide and building some chapters that help gain ",
+          "page": null,
+          "start_offset": 1675,
+          "end_offset": 2675,
+          "ordinal": 2,
+          "text_sha256": "1f2a2230048ac6100fc1c1ad03a815fc082852484131fe2a8355bc5b65acc5c3"
+        },
+        {
+          "chunk_id": "c5-val-pub-general-r1-c0003",
+          "text": "ings to sync up during that period. We are working towards filling out missing parts of the rustc-dev-guide and building some chapters that help gain an overall understanding of what the compiler does to code to produce its output.\n\n- **Desired experience level:** Any\n- **Relevant repositories:** [`rust-lang/rust`][rust-repo] and [`rust-lang/rustc-dev-guide`][rustc-dev-guide-repo]\n- **Zulip stream:** [`#t-compiler/wg-rustc-dev-guide`][zulip] on Zulip\n\n[rust-repo]: https://github.com/rust-lang/rust\n[rustc-dev-guide-repo]: https://github.com/rust-lang/rustc-dev-guide\n[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide\n",
+          "page": null,
+          "start_offset": 2525,
+          "end_offset": 3192,
+          "ordinal": 3,
+          "text_sha256": "57215a0481e2ab61ed6399543e5087b011e4741cc24a66eb8b6b7cf6c444d83d"
+        }
+      ],
+      "provenance": {
+        "origin": "public",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Complete existing general working-group page and two directly linked dated meeting records. Literal historical source; current status is not inferred.",
+          "limitations": [
+            "Hugo front matter, relref markup, and links remain literal; linked external targets are not additional adopted documents.",
+            "General page is the snapshot at pinned revision and is not asserted to have been written on either meeting date.",
+            "Distinct repository from prior rust-lang/lang-team but same organization; independent freshness review must consider this relation."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "repository": "https://github.com/rust-lang/compiler-team",
+        "immutable_commit": "6cf981d16c1852074b397eee544adc3d1a7eb6b6",
+        "upstream_path": "content/working-groups/rustc-dev-guide/_index.md",
+        "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/content/working-groups/rustc-dev-guide/_index.md",
+        "license_id": "MIT",
+        "license": {
+          "id": "MIT",
+          "path": "LICENSE-MIT",
+          "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/LICENSE-MIT",
+          "raw_sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "git_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "notice_text": "Permission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+          "other_repository_license_evidence": {
+            "path": "LICENSE-APACHE",
+            "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+          }
+        }
+      },
+      "source_path": "content/working-groups/rustc-dev-guide/_index.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-pub-meeting-01",
+      "document_id": "c5-val-pub-meeting-01",
+      "revision": 1,
+      "registration_ordinal": 1,
+      "family_id": "c5-f03",
+      "title": "Rustc Dev Guide WG 2019-05-14 sync meeting",
+      "meeting_date": "2019-05-14",
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-pub-meeting-01.md",
+      "raw_sha256": "f3e9a2340a385e1232a296d3c4d226a56d4fe4ea8d131da7a1a8fc23a4ed79cf",
+      "raw_size_bytes": 1915,
+      "git_blob_sha1": "cc2a6c5f81c54cb21d2a21e6f2fdd3e0e1c0acbe",
+      "processed_sha256": "f3e9a2340a385e1232a296d3c4d226a56d4fe4ea8d131da7a1a8fc23a4ed79cf",
+      "processed_codepoints": 1913,
+      "content": "---\ntitle: Rustc Dev Guide WG 2019-05-14 sync meeting\ntype: docs\n---\n# Rustc Dev Guide WG 2019-05-14 sync meeting\n\n## Topics discussed:\n\n- Define what’s the walkthrough section we want to add\n- Triage missing rustc-dev-guide chapters\n- How do we want to keep track of who is doing what? Does github Projects works\n  nice for this?\n\n## Plan for walkthrough/overview chapter\n\n- Goal is to have a chapter which will walk through compilation of simple program\n- Links to other chapters for details\n- This overview differs from the existing queries chapter in that the latter is\n  more focused on how to create your own queries.\n\nStatus:\n- lokalmatador is giving this a try & will open a PR at some point\n\n## rustc-dev-guide missing chapters\n\nTopics that need to be added\n\n- Monomorphization, Type Memory Layout, Codegen, LLVM\n- Macros, hygiene, proc macros, custom derives, etc.\n- Lexing and Parsing\n- Walkthrough of a typical contribution\n- The rest of\n  - Name Resolution\n  - Traits\n    - Region Constraints\n    - SLG solver\n  - Type checking\n  - MIR\n    - Constants, Promoted Constants in MIR\n    - Construction of MIR\n    - Optimizations\n    - Borrow Check: Moves and initialization\n    - MIR Type check\n    - Various parts of NLL\n- A large collection of potential improvements in the form of issues on the repo\n\nStatus:\n\n- Would be good to schedule a lecture on each missing topic\n- less work for the experts\n- Can then transcribe into a chapter\n- @spastorino will arrange lectures, nikomatsakis will create zoom\n\n## How do we want to keep track of who is doing what? Does github Projects works nice for this?\n\n- planning to use github issues.\n- Two issues were created to track existing work:\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of GH projects\n- for now we will move TODO list to GH issues from dropbox",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1913,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-pub-meeting-01-r1-c0000",
+          "text": "---\ntitle: Rustc Dev Guide WG 2019-05-14 sync meeting\ntype: docs\n---\n# Rustc Dev Guide WG 2019-05-14 sync meeting\n\n## Topics discussed:\n\n- Define what’s the walkthrough section we want to add\n- Triage missing rustc-dev-guide chapters\n- How do we want to keep track of who is doing what? Does github Projects works\n  nice for this?\n\n## Plan for walkthrough/overview chapter\n\n- Goal is to have a chapter which will walk through compilation of simple program\n- Links to other chapters for details\n- This overview differs from the existing queries chapter in that the latter is\n  more focused on how to create your own queries.\n\nStatus:\n- lokalmatador is giving this a try & will open a PR at some point\n\n## rustc-dev-guide missing chapters\n\nTopics that need to be added\n\n- Monomorphization, Type Memory Layout, Codegen, LLVM\n- Macros, hygiene, proc macros, custom derives, etc.\n- Lexing and Parsing\n- Walkthrough of a typical contribution\n- The rest of\n  - Name Resolution\n  - Traits\n    - Region ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 994,
+          "ordinal": 0,
+          "text_sha256": "fd46b73d104f58fdf9316b295bef4a76ea2f331de08d46642025e79c82a5f121"
+        },
+        {
+          "chunk_id": "c5-val-pub-meeting-01-r1-c0001",
+          "text": "c macros, custom derives, etc.\n- Lexing and Parsing\n- Walkthrough of a typical contribution\n- The rest of\n  - Name Resolution\n  - Traits\n    - Region Constraints\n    - SLG solver\n  - Type checking\n  - MIR\n    - Constants, Promoted Constants in MIR\n    - Construction of MIR\n    - Optimizations\n    - Borrow Check: Moves and initialization\n    - MIR Type check\n    - Various parts of NLL\n- A large collection of potential improvements in the form of issues on the repo\n\nStatus:\n\n- Would be good to schedule a lecture on each missing topic\n- less work for the experts\n- Can then transcribe into a chapter\n- @spastorino will arrange lectures, nikomatsakis will create zoom\n\n## How do we want to keep track of who is doing what? Does github Projects works nice for this?\n\n- planning to use github issues.\n- Two issues were created to track existing work:\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of ",
+          "page": null,
+          "start_offset": 844,
+          "end_offset": 1843,
+          "ordinal": 1,
+          "text_sha256": "ff521d701dd63c7867be390aca964e1c170ca49fa6463285bce1090a87a02569"
+        },
+        {
+          "chunk_id": "c5-val-pub-meeting-01-r1-c0002",
+          "text": ":\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of GH projects\n- for now we will move TODO list to GH issues from dropbox",
+          "page": null,
+          "start_offset": 1693,
+          "end_offset": 1913,
+          "ordinal": 2,
+          "text_sha256": "4163ac9aaf7ba4acb01c7e98a0a02bad78f56f420165f33d3daae8487cb20a8c"
+        }
+      ],
+      "provenance": {
+        "origin": "public",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Complete existing general working-group page and two directly linked dated meeting records. Literal historical source; current status is not inferred.",
+          "limitations": [
+            "Hugo front matter, relref markup, and links remain literal; linked external targets are not additional adopted documents.",
+            "General page is the snapshot at pinned revision and is not asserted to have been written on either meeting date.",
+            "Distinct repository from prior rust-lang/lang-team but same organization; independent freshness review must consider this relation."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "repository": "https://github.com/rust-lang/compiler-team",
+        "immutable_commit": "6cf981d16c1852074b397eee544adc3d1a7eb6b6",
+        "upstream_path": "content/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md",
+        "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/content/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md",
+        "license_id": "MIT",
+        "license": {
+          "id": "MIT",
+          "path": "LICENSE-MIT",
+          "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/LICENSE-MIT",
+          "raw_sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "git_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "notice_text": "Permission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+          "other_repository_license_evidence": {
+            "path": "LICENSE-APACHE",
+            "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+          }
+        }
+      },
+      "source_path": "content/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-pub-meeting-02",
+      "document_id": "c5-val-pub-meeting-02",
+      "revision": 1,
+      "registration_ordinal": 2,
+      "family_id": "c5-f03",
+      "title": "Rustc Dev Guide WG 2019-05-28 sync meeting",
+      "meeting_date": "2019-05-28",
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-pub-meeting-02.md",
+      "raw_sha256": "000a15674ac56f752a084dbae1ce1714412782ab4f03564db5e0ed2ac0245240",
+      "raw_size_bytes": 1123,
+      "git_blob_sha1": "2ebe1547491336e987fed2f3dc8b13ea9496ae8f",
+      "processed_sha256": "000a15674ac56f752a084dbae1ce1714412782ab4f03564db5e0ed2ac0245240",
+      "processed_codepoints": 1123,
+      "content": "---\ntitle: Rustc Dev Guide WG 2019-05-28 sync meeting\ntype: docs\n---\n# Rustc Dev Guide WG 2019-05-28 sync meeting\n\n## Triaging rustc-dev-guide repo\n\n- Some discussion about how to assign issues on the rust-lang/rustc-dev-guide repo\n- Problem: can't assign issues to non-members\n- Possible solutions:\n    - Add WG-rustc-dev-guide members to repo so they can be assigned\n    - use `triagebot` model: bot is assigned the issue and edits the OP to mention the current owner.\n\n## Forge\n\n- Discussed purpose of the forge and how it differs from rustc-dev-guide\n- Niko feels that most of the content in the forge doesn't obviously belong in the guide and that the stuff currently in the guide feels like it belongs in the guide\n- Forge is for team procedures, infra stuff\n    - would also be good to add craterbot and rustc-timer links to forge (probably link to READMEs of their repos)\n- link forge from main page\n\n> my rule of thumb [for what to put in the guide] is sort of \"is this something you would do while fixing a compiler bug or implementing a compiler feature\" -niko\n\n## Lectures\n\n- Do one on MIR and HAIR construction",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1123,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-pub-meeting-02-r1-c0000",
+          "text": "---\ntitle: Rustc Dev Guide WG 2019-05-28 sync meeting\ntype: docs\n---\n# Rustc Dev Guide WG 2019-05-28 sync meeting\n\n## Triaging rustc-dev-guide repo\n\n- Some discussion about how to assign issues on the rust-lang/rustc-dev-guide repo\n- Problem: can't assign issues to non-members\n- Possible solutions:\n    - Add WG-rustc-dev-guide members to repo so they can be assigned\n    - use `triagebot` model: bot is assigned the issue and edits the OP to mention the current owner.\n\n## Forge\n\n- Discussed purpose of the forge and how it differs from rustc-dev-guide\n- Niko feels that most of the content in the forge doesn't obviously belong in the guide and that the stuff currently in the guide feels like it belongs in the guide\n- Forge is for team procedures, infra stuff\n    - would also be good to add craterbot and rustc-timer links to forge (probably link to READMEs of their repos)\n- link forge from main page\n\n> my rule of thumb [for what to put in the guide] is sort of \"is this something you would ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 999,
+          "ordinal": 0,
+          "text_sha256": "8eeb59f949bd1f38d3d7071bf035f0c8650abd10069cb8f4efbcdc187ce130e1"
+        },
+        {
+          "chunk_id": "c5-val-pub-meeting-02-r1-c0001",
+          "text": "ink to READMEs of their repos)\n- link forge from main page\n\n> my rule of thumb [for what to put in the guide] is sort of \"is this something you would do while fixing a compiler bug or implementing a compiler feature\" -niko\n\n## Lectures\n\n- Do one on MIR and HAIR construction",
+          "page": null,
+          "start_offset": 849,
+          "end_offset": 1123,
+          "ordinal": 1,
+          "text_sha256": "770826694059253eee06e19a7e843322bd12c196da98ca093a2df62526c0660a"
+        }
+      ],
+      "provenance": {
+        "origin": "public",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Complete existing general working-group page and two directly linked dated meeting records. Literal historical source; current status is not inferred.",
+          "limitations": [
+            "Hugo front matter, relref markup, and links remain literal; linked external targets are not additional adopted documents.",
+            "General page is the snapshot at pinned revision and is not asserted to have been written on either meeting date.",
+            "Distinct repository from prior rust-lang/lang-team but same organization; independent freshness review must consider this relation."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "repository": "https://github.com/rust-lang/compiler-team",
+        "immutable_commit": "6cf981d16c1852074b397eee544adc3d1a7eb6b6",
+        "upstream_path": "content/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md",
+        "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/content/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md",
+        "license_id": "MIT",
+        "license": {
+          "id": "MIT",
+          "path": "LICENSE-MIT",
+          "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/LICENSE-MIT",
+          "raw_sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "git_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "notice_text": "Permission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+          "other_repository_license_evidence": {
+            "path": "LICENSE-APACHE",
+            "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+          }
+        }
+      },
+      "source_path": "content/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-syn-general",
+      "document_id": "c5-val-syn-general",
+      "revision": 1,
+      "registration_ordinal": 3,
+      "family_id": "c5-f04",
+      "title": "모래등 공동수로 운영조합 주간 급수 배분 규칙",
+      "meeting_date": null,
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-syn-general.md",
+      "raw_sha256": "dd4de7fce2e1e209f110e042865f2342b17a79be8713faeb846b5517c7661fa6",
+      "raw_size_bytes": 2767,
+      "git_blob_sha1": null,
+      "processed_sha256": "dd4de7fce2e1e209f110e042865f2342b17a79be8713faeb846b5517c7661fa6",
+      "processed_codepoints": 1175,
+      "content": "# 모래등 공동수로 운영조합 주간 급수 배분 규칙\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n문서 번호 MG-WATER-02, 시행일 2026년 2월 1일. 모래등 공동수로 운영조합은 상단 논, 중단 밭, 하단 과수원의 공동 저수지 물을 나누는 가상 농업 조합이다. 세 구역은 한 수로를 번갈아 사용한다. 이 문서는 한 주에 실제로 보낼 수 있는 물의 양과 급수 순서를 정한다. 수량 기록은 이담서, 경작 일정 취합은 문태오, 수로 시간표 작성은 백소린이 맡는다.\n\n## 배분량 산정\n\n이담서는 각 배분 회의 전날 18시에 저수량을 읽고 그 시점의 값을 주간 기준으로 고정한다. 이번 주 사용 가능량은 이 저수량에 유입이 확정된 물을 더한 뒤 공동 비축분 25세제곱미터를 뺀 값이다. 비 예보나 날짜가 정해지지 않은 추가 유입은 확정 유입에 넣지 않는다. 기준 시각 이후 실제 비가 내려도 기존 표를 자동으로 늘리지 않으며 다음 배분 회의에서 새 관측값을 사용한다.\n\n각 구역은 필요한 양과 급수가 가능한 날을 제출한다. 요청 합계가 사용 가능량 이하이면 요청량을 배정하고 남은 물은 저수지에 둔다. 부족하면 경작상 시기를 미룰 수 없는 구역의 최소 필요량을 먼저 확보한 뒤 다른 구역의 조정 가능한 요청을 줄인다. 그 최소량과 사유는 해당 주 회의록에 함께 남긴다. 한 주에 덜 받은 양을 다음 주 몫에 자동으로 더하지 않으며 다음 주의 실제 필요량을 새로 제출한다.\n\n## 시간표와 정산\n\n백소린은 배정량뿐 아니라 시작 구역과 구역별 급수일을 시간표에 적는다. 특정 구역이 매주 첫 순서를 차지하지 않도록 첫 순서를 돌아가며 배정하되, 경작상 날짜 제약 때문에 순서를 바꾸면 회의록에 이유를 남긴다. 한 구역의 급수가 끝난 뒤 다음 구역을 열며 동시 급수는 하지 않는다. 시간표상의 순서는 물 사용의 소유권 순위나 다음 주 배정 우선권을 뜻하지 않는다.\n\n수로 입구에서 잰 방류량을 각 구역의 사용량으로 계산한다. 구역 안의 물 저장량을 따로 추정해 공제하지 않는다. 구역별 종료 시점에 실제 방류량과 예정량의 차이를 기록하고, 남은 양을 임의로 다른 구역에 넘기지 않는다. 주간 기록에는 기준 저수량, 확정 유입량, 비축분, 요청량, 배정량, 실제 방류량을 구분한다. 문태오는 급수 뒤 경작 일정이 달라졌는지도 다음 회의에 가져온다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1175,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-syn-general-r1-c0000",
+          "text": "# 모래등 공동수로 운영조합 주간 급수 배분 규칙\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n문서 번호 MG-WATER-02, 시행일 2026년 2월 1일. 모래등 공동수로 운영조합은 상단 논, 중단 밭, 하단 과수원의 공동 저수지 물을 나누는 가상 농업 조합이다. 세 구역은 한 수로를 번갈아 사용한다. 이 문서는 한 주에 실제로 보낼 수 있는 물의 양과 급수 순서를 정한다. 수량 기록은 이담서, 경작 일정 취합은 문태오, 수로 시간표 작성은 백소린이 맡는다.\n\n## 배분량 산정\n\n이담서는 각 배분 회의 전날 18시에 저수량을 읽고 그 시점의 값을 주간 기준으로 고정한다. 이번 주 사용 가능량은 이 저수량에 유입이 확정된 물을 더한 뒤 공동 비축분 25세제곱미터를 뺀 값이다. 비 예보나 날짜가 정해지지 않은 추가 유입은 확정 유입에 넣지 않는다. 기준 시각 이후 실제 비가 내려도 기존 표를 자동으로 늘리지 않으며 다음 배분 회의에서 새 관측값을 사용한다.\n\n각 구역은 필요한 양과 급수가 가능한 날을 제출한다. 요청 합계가 사용 가능량 이하이면 요청량을 배정하고 남은 물은 저수지에 둔다. 부족하면 경작상 시기를 미룰 수 없는 구역의 최소 필요량을 먼저 확보한 뒤 다른 구역의 조정 가능한 요청을 줄인다. 그 최소량과 사유는 해당 주 회의록에 함께 남긴다. 한 주에 덜 받은 양을 다음 주 몫에 자동으로 더하지 않으며 다음 주의 실제 필요량을 새로 제출한다.\n\n## 시간표와 정산\n\n백소린은 배정량뿐 아니라 시작 구역과 구역별 급수일을 시간표에 적는다. 특정 구역이 매주 첫 순서를 차지하지 않도록 첫 순서를 돌아가며 배정하되, 경작상 날짜 제약 때문에 순서를 바꾸면 회의록에 이유를 남긴다. 한 구역의 급수가 끝난 뒤 다음 구역을 열며 동시 급수는 하지 않는다. 시간표상의 순서는 물 사용의 소유권 순위나 다음 주 배정 우선권을 뜻하지 않는다.\n\n수로 입구에서 잰 방류량을 각 구역의 사용량으로 계산한다. 구역 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998,
+          "ordinal": 0,
+          "text_sha256": "84c5a696891ab429c0644bba6c0e7f2871623b34cfdf79f96ece82207eea977b"
+        },
+        {
+          "chunk_id": "c5-val-syn-general-r1-c0001",
+          "text": " 때문에 순서를 바꾸면 회의록에 이유를 남긴다. 한 구역의 급수가 끝난 뒤 다음 구역을 열며 동시 급수는 하지 않는다. 시간표상의 순서는 물 사용의 소유권 순위나 다음 주 배정 우선권을 뜻하지 않는다.\n\n수로 입구에서 잰 방류량을 각 구역의 사용량으로 계산한다. 구역 안의 물 저장량을 따로 추정해 공제하지 않는다. 구역별 종료 시점에 실제 방류량과 예정량의 차이를 기록하고, 남은 양을 임의로 다른 구역에 넘기지 않는다. 주간 기록에는 기준 저수량, 확정 유입량, 비축분, 요청량, 배정량, 실제 방류량을 구분한다. 문태오는 급수 뒤 경작 일정이 달라졌는지도 다음 회의에 가져온다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1175,
+          "ordinal": 1,
+          "text_sha256": "c5406795d5fee88d0e42d132c15d9a9a673d99e4fa76b7efde342c89056e5629"
+        }
+      ],
+      "provenance": {
+        "origin": "synthetic",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Fresh fictional irrigation cooperative: one weekly allocation rule and two dated allocation meetings with chronological water accounting and scheduling. Source-first replacement within bounded independent reviewer feedback.",
+          "limitations": [
+            "AI-authored fictional operational records; no real-world agricultural recommendation or human review."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "synthetic_provenance": {
+          "ai_authored": true,
+          "fictional": true,
+          "author_role": "/root/c5_validation_author",
+          "notice": "이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.",
+          "original_authorship_for": "C5 isolated validation source-only NEWv2 replacement",
+          "authored_at": "2026-10-19T08:27:10.391719+00:00"
+        }
+      },
+      "source_path": "synthetic/c5-val-syn-general.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-syn-meeting-01",
+      "document_id": "c5-val-syn-meeting-01",
+      "revision": 1,
+      "registration_ordinal": 4,
+      "family_id": "c5-f04",
+      "title": "모래등 공동수로 운영조합 2026-03-02 배분 회의",
+      "meeting_date": "2026-03-02",
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-syn-meeting-01.md",
+      "raw_sha256": "ab94e3ed26e62be7ff806e1fcfb7cf0e0b0aee7f5e9d3096f4742d692da1e455",
+      "raw_size_bytes": 1992,
+      "git_blob_sha1": null,
+      "processed_sha256": "ab94e3ed26e62be7ff806e1fcfb7cf0e0b0aee7f5e9d3096f4742d692da1e455",
+      "processed_codepoints": 870,
+      "content": "# 모래등 공동수로 운영조합 2026-03-02 배분 회의\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n참석자: 이담서, 문태오, 백소린과 세 경작 구역 대표. 대상 기간은 3월 2일부터 3월 8일까지다. 3월 1일 18시 저수량은 135세제곱미터이고 이 기간에 확정된 외부 유입은 없다. 공동 비축분 25세제곱미터를 제외해 주간 배분 한도를 110세제곱미터로 정했다. 주 후반의 비 예보는 아직 확보된 물로 계산하지 않았다.\n\n## 요청과 조정\n\n상단 논은 60세제곱미터, 중단 밭은 40세제곱미터, 하단 과수원은 30세제곱미터를 요청했다. 합계 130세제곱미터가 한도를 넘는다. 중단 밭은 정식 직후 급수가 필요한 구간이 있어 35세제곱미터를 이번 주의 최소 필요량으로 기록했다. 상단 논은 물대기 구간을 나누고, 하단 과수원은 일부 구획의 관수를 다음 주로 미룰 수 있다고 보고했다.\n\n이번 주 배정은 상단 논 50세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 25세제곱미터로 결정했다. 각 대표는 줄어든 분량이 미지급 채무처럼 쌓이는 것은 아니며 다음 주에는 실제 필요량을 다시 낸다는 점을 확인했다. 문태오는 상단 논의 나머지 물대기 구간과 과수원에서 미룬 구획의 경작 상태를 3월 9일 회의에 보고한다.\n\n## 이번 주 시간표\n\n정식 일정 때문에 중단 밭을 먼저 보내기로 했다. 백소린이 적은 급수일은 중단 밭 3월 3일, 하단 과수원 3월 5일, 상단 논 3월 7일이다. 세 구역을 동시에 열지 않는다. 이담서는 각 급수 종료 때 수로 입구 방류량을 적고 잔량이 있어도 다음 구역 몫으로 임의 전환하지 않는다. 이번 주 시간표에는 추가 비가 왔을 때의 증량분을 미리 넣지 않았다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 870,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-syn-meeting-01-r1-c0000",
+          "text": "# 모래등 공동수로 운영조합 2026-03-02 배분 회의\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n참석자: 이담서, 문태오, 백소린과 세 경작 구역 대표. 대상 기간은 3월 2일부터 3월 8일까지다. 3월 1일 18시 저수량은 135세제곱미터이고 이 기간에 확정된 외부 유입은 없다. 공동 비축분 25세제곱미터를 제외해 주간 배분 한도를 110세제곱미터로 정했다. 주 후반의 비 예보는 아직 확보된 물로 계산하지 않았다.\n\n## 요청과 조정\n\n상단 논은 60세제곱미터, 중단 밭은 40세제곱미터, 하단 과수원은 30세제곱미터를 요청했다. 합계 130세제곱미터가 한도를 넘는다. 중단 밭은 정식 직후 급수가 필요한 구간이 있어 35세제곱미터를 이번 주의 최소 필요량으로 기록했다. 상단 논은 물대기 구간을 나누고, 하단 과수원은 일부 구획의 관수를 다음 주로 미룰 수 있다고 보고했다.\n\n이번 주 배정은 상단 논 50세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 25세제곱미터로 결정했다. 각 대표는 줄어든 분량이 미지급 채무처럼 쌓이는 것은 아니며 다음 주에는 실제 필요량을 다시 낸다는 점을 확인했다. 문태오는 상단 논의 나머지 물대기 구간과 과수원에서 미룬 구획의 경작 상태를 3월 9일 회의에 보고한다.\n\n## 이번 주 시간표\n\n정식 일정 때문에 중단 밭을 먼저 보내기로 했다. 백소린이 적은 급수일은 중단 밭 3월 3일, 하단 과수원 3월 5일, 상단 논 3월 7일이다. 세 구역을 동시에 열지 않는다. 이담서는 각 급수 종료 때 수로 입구 방류량을 적고 잔량이 있어도 다음 구역 몫으로 임의 전환하지 않는다. 이번 주 시간표에는 추가 비가 왔을 때의 증량분을 미리 넣지 않았다.\n",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 870,
+          "ordinal": 0,
+          "text_sha256": "ab94e3ed26e62be7ff806e1fcfb7cf0e0b0aee7f5e9d3096f4742d692da1e455"
+        }
+      ],
+      "provenance": {
+        "origin": "synthetic",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Fresh fictional irrigation cooperative: one weekly allocation rule and two dated allocation meetings with chronological water accounting and scheduling. Source-first replacement within bounded independent reviewer feedback.",
+          "limitations": [
+            "AI-authored fictional operational records; no real-world agricultural recommendation or human review."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "synthetic_provenance": {
+          "ai_authored": true,
+          "fictional": true,
+          "author_role": "/root/c5_validation_author",
+          "notice": "이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.",
+          "original_authorship_for": "C5 isolated validation source-only NEWv2 replacement",
+          "authored_at": "2026-10-19T08:27:10.391719+00:00"
+        }
+      },
+      "source_path": "synthetic/c5-val-syn-meeting-01.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-syn-meeting-02",
+      "document_id": "c5-val-syn-meeting-02",
+      "revision": 1,
+      "registration_ordinal": 5,
+      "family_id": "c5-f04",
+      "title": "모래등 공동수로 운영조합 2026-03-09 실적과 새 배분 회의",
+      "meeting_date": "2026-03-09",
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v2/raw/c5-val-syn-meeting-02.md",
+      "raw_sha256": "dd565a07f9b558b37cd6b3f9e70209728e87c877cb42ad2a5c4f26b40f6e51fe",
+      "raw_size_bytes": 2330,
+      "git_blob_sha1": null,
+      "processed_sha256": "dd565a07f9b558b37cd6b3f9e70209728e87c877cb42ad2a5c4f26b40f6e51fe",
+      "processed_codepoints": 1012,
+      "content": "# 모래등 공동수로 운영조합 2026-03-09 실적과 새 배분 회의\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n참석자: 이담서, 문태오, 백소린과 세 경작 구역 대표. 먼저 3월 2일~8일의 기록을 닫고, 3월 9일~15일에 사용할 새 시간표를 만들었다. 지난주 실제 방류량은 상단 논 48세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 24세제곱미터였다. 배정 합계 110세제곱미터 중 쓰지 않은 3세제곱미터는 다른 구역에 보내지 않고 저수지에 남겼다.\n\n## 새 기준값과 요청\n\n3월 8일 18시 저수량은 152세제곱미터로 측정됐다. 주말에 실제 들어온 빗물과 지난주 잔량이 이미 이 관측값에 포함되어 있으므로 각각을 다시 더하지 않는다. 이번 주 외부 수로에서 18세제곱미터가 3월 10일에 들어오기로 확정되어, 비축분 25세제곱미터를 제외한 사용 가능량은 145세제곱미터다. 외부 유입은 첫 급수 전에 들어오는 일정이다.\n\n문태오는 상단 논의 남은 물대기 구간 때문에 이번 주 요청이 65세제곱미터라고 보고했다. 중단 밭은 정식 직후의 집중 급수가 끝나 35세제곱미터를, 하단 과수원은 미뤘던 구획을 포함해 40세제곱미터를 새로 요청했다. 요청 합계 140세제곱미터가 사용 가능량 안에 있으므로 세 요청을 그대로 배정하고 5세제곱미터는 추가로 배분하지 않는다. 지난주 덜 배정된 양을 자동 가산한 계산이 아니라 이번 주 제출된 필요량으로 정한 결과다.\n\n## 순서와 기록\n\n이번 주에는 상단 논이 첫 순서를 맡는다. 급수일은 상단 논 3월 11일, 중단 밭 3월 12일, 하단 과수원 3월 14일이다. 중단 밭의 지난주 정식 날짜 제약은 해소되어 첫 순서를 유지할 이유가 없다는 보고를 반영했다. 백소린은 외부 유입 일정과 급수일을 같은 시간표에 표시한다. 이담서는 실제 외부 유입량과 각 구역 방류량을 따로 남겨 다음 회의에서 계획과 실적을 대조한다. 3월 15일 이후의 유입량과 다음 주 구역별 배정량은 이번 회의에서 정하지 않았다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1012,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+          "text": "# 모래등 공동수로 운영조합 2026-03-09 실적과 새 배분 회의\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n참석자: 이담서, 문태오, 백소린과 세 경작 구역 대표. 먼저 3월 2일~8일의 기록을 닫고, 3월 9일~15일에 사용할 새 시간표를 만들었다. 지난주 실제 방류량은 상단 논 48세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 24세제곱미터였다. 배정 합계 110세제곱미터 중 쓰지 않은 3세제곱미터는 다른 구역에 보내지 않고 저수지에 남겼다.\n\n## 새 기준값과 요청\n\n3월 8일 18시 저수량은 152세제곱미터로 측정됐다. 주말에 실제 들어온 빗물과 지난주 잔량이 이미 이 관측값에 포함되어 있으므로 각각을 다시 더하지 않는다. 이번 주 외부 수로에서 18세제곱미터가 3월 10일에 들어오기로 확정되어, 비축분 25세제곱미터를 제외한 사용 가능량은 145세제곱미터다. 외부 유입은 첫 급수 전에 들어오는 일정이다.\n\n문태오는 상단 논의 남은 물대기 구간 때문에 이번 주 요청이 65세제곱미터라고 보고했다. 중단 밭은 정식 직후의 집중 급수가 끝나 35세제곱미터를, 하단 과수원은 미뤘던 구획을 포함해 40세제곱미터를 새로 요청했다. 요청 합계 140세제곱미터가 사용 가능량 안에 있으므로 세 요청을 그대로 배정하고 5세제곱미터는 추가로 배분하지 않는다. 지난주 덜 배정된 양을 자동 가산한 계산이 아니라 이번 주 제출된 필요량으로 정한 결과다.\n\n## 순서와 기록\n\n이번 주에는 상단 논이 첫 순서를 맡는다. 급수일은 상단 논 3월 11일, 중단 밭 3월 12일, 하단 과수원 3월 14일이다. 중단 밭의 지난주 정식 날짜 제약은 해소되어 첫 순서를 유지할 이유가 없다는 보고를 반영했다. 백소린은 외부 유입 일정과 급수일을 같은 시간표에 표시한다. 이담서는 실제 외부 유입량과 각 구역 방류량을 따로 남겨 다음 회의에서 계획과 실적을 대조한다. 3월 15일 이후의 유입량과 다음 주 구역별 배정량은 이번 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998,
+          "ordinal": 0,
+          "text_sha256": "f6817dbc6c08ca68c2a138bfe2d9bf9c5c1176280ca0aa5270c73af8d2916658"
+        },
+        {
+          "chunk_id": "c5-val-syn-meeting-02-r1-c0001",
+          "text": " 첫 순서를 유지할 이유가 없다는 보고를 반영했다. 백소린은 외부 유입 일정과 급수일을 같은 시간표에 표시한다. 이담서는 실제 외부 유입량과 각 구역 방류량을 따로 남겨 다음 회의에서 계획과 실적을 대조한다. 3월 15일 이후의 유입량과 다음 주 구역별 배정량은 이번 회의에서 정하지 않았다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1012,
+          "ordinal": 1,
+          "text_sha256": "b09eed542964e7cea42096db630b03cb2a78b91addfe597d7c2ce2d298fbc55b"
+        }
+      ],
+      "provenance": {
+        "origin": "synthetic",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Fresh fictional irrigation cooperative: one weekly allocation rule and two dated allocation meetings with chronological water accounting and scheduling. Source-first replacement within bounded independent reviewer feedback.",
+          "limitations": [
+            "AI-authored fictional operational records; no real-world agricultural recommendation or human review."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "synthetic_provenance": {
+          "ai_authored": true,
+          "fictional": true,
+          "author_role": "/root/c5_validation_author",
+          "notice": "이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.",
+          "original_authorship_for": "C5 isolated validation source-only NEWv2 replacement",
+          "authored_at": "2026-10-19T08:27:10.392720+00:00"
+        }
+      },
+      "source_path": "synthetic/c5-val-syn-meeting-02.md",
+      "ingestion_kind": "md"
+    }
+  ],
+  "excluded_sources": []
+}
