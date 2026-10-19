@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "reviewer_id": "/root/c5_validation_prereviewer",
+  "intended_author_role": "/root/c5_validation_author",
+  "recorded_at": "2026-10-19T08:15:41.111690+00:00",
+  "status": "feedback_only_wait_for_parent_new_version_assignment",
+  "original_prereview": {
+    "file": "data/evaluation/meetings-c5-validation-v1/source-prereview.json",
+    "sha256": "36b02a7f032e195491e050ac925ae039ae63f02f797373d794f8f73e3377a4ec"
+  },
+  "verdict": "rejected_new_version_required",
+  "accepted_documents": [
+    "c5-val-pub-general",
+    "c5-val-pub-meeting-01",
+    "c5-val-pub-meeting-02"
+  ],
+  "rejected_documents": [
+    "c5-val-syn-general",
+    "c5-val-syn-meeting-01",
+    "c5-val-syn-meeting-02"
+  ],
+  "reason_code": "cross_split_synthetic_semantic_freshness_rejected",
+  "feedback_scope": "Only actionable information about the author own validation synthetic family; no calibration source quotation, entity, event, document identifier or concrete comparison detail is supplied.",
+  "actionable_feedback": [
+    "The current fictional sound-recording organization and its field recording, edited-audio exhibition and equipment inspection/release workflow did not pass the independent source freshness gate. This is a semantic freshness rejection, not an internal-coherence, licensing or byte/parity failure.",
+    "Write a substantively different fictional organization, problem domain and operating workflow for the NEW three-document synthetic family. Use different source events, constraints and causal relationships. Merely changing names, dates, counts or equipment labels, or paraphrasing the current workflow, is insufficient.",
+    "Keep the registered shape: one complete general document and two complete meetings with distinct dates, a coherent chronological development, explicit AI-authored/fictional provenance, and the existing source-first/language requirements. Do not draft questions or oracles while correcting sources.",
+    "Preserve all original v1 documents, manifests, inventory, processing/adoption/parity evidence, review records and fingerprints. The three accepted public sources must remain byte-identical with the same provenance and license. Place replacement synthetic bodies and derived manifest/inventory/processing/adoption/parity metadata in the explicitly assigned NEW version paths.",
+    "Do not edit or inspect calibration source/item/oracle material. Use only this bounded own-family feedback. Do not open source-prereview-notes.md or reviewer local cross-split notes; those contain reviewer-only comparison reasoning.",
+    "After parent commits the original rejected version and authorizes the exact new paths, rebuild the complete six-document inventory with the unchanged public3 plus NEW synthetic3 and obtain the required actual Java parity once in the parent-coordinated slot. No tokenizer, native/model calls, token-driven source selection or frozen-toolchain changes.",
+    "The frozen tool requires the existing active flat validation fingerprint filename. Do not replace that file until the parent explicitly authorizes it after preserving the original bytes and commit. The original rejection remains tied to the original fingerprint SHA.",
+    "Return source hashes and ownership for independent prereview of the NEW version. No source freeze or item authorship before acceptance and source commit."
+  ],
+  "exposure_disclosure": "Receiving this feedback exposes the original validation author to a cross-split freshness rejection and own-family correction scope only; no concrete calibration semantics are provided.",
+  "does_not_author_replacement": true,
+  "parent_assignment_required_before_mutation": true,
+  "original_fingerprint": {
+    "file": "data/evaluation/meetings-c5-validation-source-fingerprints-v1.json",
+    "sha256": "7ac383c0bcca56b29951226716e2267fe75c4d96e45cfe43e95b164a5314b84d"
+  }
+}

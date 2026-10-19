@@ -54,3 +54,5 @@ uv run --no-sync ruff check src/doctrail/meeting_c5_review.py scripts/prepare_me
 소스/freeze 커밋의 필수3개 CI 성공과 별도 CI 영수증 커밋 뒤에만 새 원문 담당자를 배정한다. 공개/합성 원문을 먼저 확정하고 Java 처리 일치와 별도 원문 검토를 마친 다음 질문을 작성한다. 최종 모델 판정은 이 합성 검증과 별개다.
 
 CI 직접 관측: push39218197974 / PR39218203289 모두 backend·java-service·web 성공. [CI 영수증](../data/evaluation/meetings-c5-toolchain-ci-v1.json)은 동일 소스 커밋과 동결 파일을 결합한다. GitHub author/committer는 모두 lingter100이다. 이 관측에서 CI 검사 개수는 따로 집계하지 않았다.
+
+추가 log 관측: 동일 d084f86의 PR39218203289에서 Linux 전체 pytest2551통과·21skip·경고1(122.26초), 실제 Java 서비스에 연결한 browser78통과·실패0을 확인했다. [집계 영수증](../experiments/results/meetings-c5-source-ci-results-v1.json)은 job log hash와 집계 줄을 보존한다. 이 전체 CI 관측은 앞선 로컬168/37의 겹치는 범위와 구분한다.

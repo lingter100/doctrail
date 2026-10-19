@@ -1,5 +1,33 @@
 # 진행 상태
 
+## C5 원문 검토: cal6 수용·val3 수용/3 반려 · 새 버전 준비
+
+독립 실제 Astra xhigh 검토가 완료됐다. Calibration6문서는 수정0으로 수용됐고 sourcefreeze14 SHA771a3f18을 만들었다. Validation은 공개3수용/합성3반려이며 source freeze가 없다. 해시/긴 문단 중복은0이지만 split 간 의미 신선도에서 반려됐다. 원래 source6/author hash12와 반려 기록을 그대로 보존했다. 반려된 prereview가 준비 관문을 실제 거부함을 검토자가 확인했다.
+
+부모는 원문 의미를 읽지 않고 author18/12 파일과 calfreeze14, 공개 영수증 hash를 확인했다. Validation active fingerprint7ac383c0의 정확한 원본을 phase v1 안 source-fingerprints-original-v1.json에도 보관했다. 먼저 원본과 반려·archive를 커밋한다. 그 뒤 기존 validation author만 author-safe feedback 파일을 읽고 NEWv2 합성3개를 만든다. 공개3원문은 동일 바이트를 유지하고 원래 v1 source/review는 변경하지 않는다. 고정 prepare가 요구하는 active fingerprint 경로만 명시적으로 새 버전 metadata로 갱신하며 이전 bytes/commit을 보존한다.
+
+source/item 역할 registry의 validation v2 허용 경로와 이 제한을 추가했다. 동결 코드76은 그대로이며 모델/질문 피드백이 아닌 원문 사전검토 수정이다. 같은 독립 reviewer의 v2 검토와 source freeze/커밋 전에는 질문·tokenizer·native0을 유지한다. 실제 Java parity는 원래 두 split 각2통과, 새 v2는 별도 검사해야 한다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## C5 원문12문서 처리 완료 · 독립 원문 검토 중
+
+두 작성자가 source-only 소유권을 반환했다. Calibration public3+synthetic3/15청크와 validation public3+synthetic3/14청크를 준비했고 각 split의 실제 Java parity2개(합계4개)가 실패/오류/skip0으로 통과했다. 요청 전후 HEAD cb389a7이 같고 새 owned JVM은 모두 종료됐다. 기존 다른 Java 프로세스는 건드리지 않았다.
+
+현재 실제 Astra xhigh c5_calibration_prereviewer와 c5_validation_prereviewer가 각자 원문 검토를 소유한다. 부모는 의미 본문을 열지 않는다. Validation reviewer에게만 finalized C5 calibration sources/fingerprint를 이용한 split 간 의미 신선도 비교를 명시적으로 허용했고 이 추가 노출을 기록하도록 했다. Calibration 질문/oracle은 작성하지 않았고 열람도 금지한다. 자기 수정·자기 검토는 허용하지 않는다.
+
+최종 공개 출처는 calibration openmainframeproject/tac(CC-BY-4.0, pinned d0a48865), validation rust-lang/compiler-team(pinned6cf981d1, license blob2 검증)이다. Calibration의 현재 멘토링 안내가2018회의 당시 적용됐다고 가정하지 않으며 독립 검토 항목으로 넘겼다. Rejected template 원문과 metadata-only license/404/구성 실패들을 보존했다. Source와 phase fingerprint는 작성자 handoff hash로 고정하며 검토 전 source freeze를 만들지 않았다.
+
+부모는 두 actual Java 영수증의 원본 CRLF·hash를 metadata로 검증하고 정확한 두 경로에만 .gitattributes -text를 추가했다. Source 내용은 수정하지 않았다. 독립 수용/freshness/freeze·source 커밋이 끝나기 전 질문·tokenizer·native는0이다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## C5 새 원문 준비 중 · 현재 역할과 실제 사전 증명
+
+역할/index를 사용자 명의 cb389a7에 커밋·push했다. 두 실제 Astra xhigh 작성자는 실제 code_contract/GitProof157·동결76·snapshot80 및 role_contract를 통과했고 검사 전후 HEAD cb389a7이 같았다. 두 결과 수신 뒤 부모의 초기 HEAD hold를 해제했다. 작성자 소유의 phase source 경로와 fingerprint metadata는 보존하고 부모가 의미 내용을 읽거나 덮어쓰지 않는다. 질문·tokenizer·native0이다. Calibration의 출처 탐색이 길어져 Maven/Java는 먼저 준비된 역할부터 하나씩 실행하도록 조정했다. 아직 어느 역할도 Java를 시작하지 않았으며 validation 우선 실행이 가능하다.
+
+공개 repo 선정은 본문 열기 전 예약한다. 최초 두 역할이 jupyterhub/team-compass를 동시에 제안했으나 calibration의 먼저 도착한 예약을 유지하고 validation은 본문을 열지 않았다. 이후 calibration은 license 부재/API404로 후보를 채택하지 않고 nodejs/Release로 변경했다. Validation의 scipy/community metadata404도 보존하고 pandas-dev/pandas-governance로 변경했다. 예약은 이용 조건/신선도 수용 판정이 아니며 nodejs의 과거 다른 repository와 같은 조직이라는 관계도 독립 검토에 공개한다.
+
+이후 suitability/license 확인에서 nodejs/Release·ipfs/notes·OGGM/community와 pandas-dev/pandas-governance도 채택하지 않았다. 현재 calibration은 openmainframeproject/tac, validation은 rust-lang/compiler-team을 각각 예약했고 validation 공개 raw3개는 실제 확보했다. Rust의 과거 다른 repository와 같은 조직이라는 관계도 독립 검토에 공개한다. 모든 후보 이력은 작성자 local 증거에 남긴다. 역할/index cb389a7의 push39219267445/PR39219277906 필수3job도 실제 조회하여 모두 성공을 확인했다.
+
+소스 d084f86의 PR CI 실제 log에서 Python2551통과/21skip/경고1(122.26초), 실제 Java 연결 browser78통과/실패0을 확인했다. 원본 local168과 마지막37은 별도로 보존하며 CI 결과는 `meetings-c5-source-ci-results-v1.json`에 연결한다. 이 검증은 LLM 의미 품질이나 사용자 검수가 아니다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## C5 실제 자료 역할 수락 · 출처 metadata 등록
 
 CI 영수증 ddc5080 커밋 뒤 실제 Astra xhigh 역할4명이 source/item 작성자·별도 사전검토자를 split별로 수락했다. 같은 split의 source/item 역할 재사용을 명시했고 자기 검토와 split 간 겸임을 금지한다. 모든 역할은 metadata 노출을 공개했고 최종 답변 judge에서 제외된다. 아직 실제 원문/질문 작업을 시작하지 않았다.

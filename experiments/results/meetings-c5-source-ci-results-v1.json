@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-source-ci-results-v1",
+  "source_head": "d084f86d4e4f830eb51cd3dd73f6840a2ad54795",
+  "run_id": 39218203289,
+  "observer_sha256": "81b766f7f3cdfd3866c43f4375d287a18b0d2010055d2a6da5995fef476798b1",
+  "observed_at": "2026-10-19T07:59:23.494946+00:00",
+  "jobs": [
+    {
+      "job": "backend",
+      "job_id": 117946985454,
+      "log_sha256": "db4c3df28e75a30176cfde77429516b8aa28cdeee3c7bb478563f37b57d1c54f",
+      "aggregate_lines": [
+        "backend\tRun uv run ruff check src tests scripts\t2026-10-19T07:47:03.3195700Z All checks passed!",
+        "backend\tRun uv run --no-sync pytest -q\t2026-10-19T07:49:06.8723919Z 2551 passed, 21 skipped, 1 warning in 122.26s (0:02:02)"
+      ]
+    },
+    {
+      "job": "java-service",
+      "job_id": 117946985233,
+      "log_sha256": "c1d9a94a47255e8f387045c551b13136878c252cfbe4f39440d9623d4ec2e53b",
+      "aggregate_lines": [
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:48:05.8857422Z   3 passed (754ms)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:48:11.0264453Z   2 passed (2.2s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:48:21.1968198Z   8 passed (7.3s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:48:31.0250978Z   5 passed (6.9s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:48:43.8275441Z   10 passed (9.9s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:48:51.0744209Z   4 passed (4.1s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:49:03.5792913Z   9 passed (9.6s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:49:16.8448559Z   3 passed (10.1s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:49:22.3674071Z   2 passed (2.6s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:49:35.3342200Z   11 passed (10.0s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:49:44.4710577Z   2 passed (6.2s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:49:48.5515847Z   1 passed (1.1s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:49:54.3982188Z   4 passed (2.7s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:50:02.9603265Z   3 passed (5.6s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:50:13.3957208Z   11 passed (7.5s)",
+        "java-service\tVerify browser workflows against isolated Java service\t2026-10-19T07:50:13.7844309Z Browser batch: 78 passed, 0 failed; artifacts: .local/web-e2e-batch-sMX5Do"
+      ]
+    },
+    {
+      "job": "web",
+      "job_id": 117946985589,
+      "log_sha256": "453ffdd92835d48385808fd4878b7212194e928631e6f2e0694e616df6d49232",
+      "aggregate_lines": []
+    }
+  ],
+  "python": {
+    "passed": 2551,
+    "skipped": 21,
+    "warnings": 1,
+    "seconds": 122.26,
+    "scope": "full Linux pytest at exact C5 source commit"
+  },
+  "java_browser": {
+    "passed": 78,
+    "failed": 0,
+    "scope": "packaged React against isolated actual Java; model transport and injected faults synthetic"
+  },
+  "limitations": [
+    "Full software regression does not prove model quality.",
+    "Local pre-delta168 and final37 remain separate overlapping results.",
+    "No actual LLM/native call or human review claimed from CI."
+  ]
+}

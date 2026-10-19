@@ -26,3 +26,15 @@
 ## 설명할 핵심과 남은 한계
 
 소프트웨어 검사 통과는 모델의 답변 정확성과 다르다. 이번 단계는 새 평가 자료를 신뢰할 수 있게 준비하는 과정이다. 공개 문서와 합성 문서는 구분하고 AI 작성/검토와 사용자 직접 검수도 분리한다. 실제 질문 난도·근거 충분성·답변 품질·운영 적합성은 아직 미확정이다. Phase1과 PR14는 draft를 유지한다.
+
+## 첫 원문 검토 결과
+
+총12문서·29청크의 실제 Java/Python 대조가 각 split2검사씩 통과했다. 별도 원문 검토에서 calibration6개는 수정 없이 수용됐으며 sourcefreeze14 SHA771a3f18을 만들었다. Validation은 공개3수용·합성3반려다. 정확 해시/문단 중복0만으로 의미 신선도가 입증되지 않아 독립 검토가 반려했고 원래 준비 관문도 거부됐다. 모델·질문은 아직 만들지 않았다.
+
+공개 원문 채택 전 license404·회의록 구성 부족 후보를 제외한 과정과 rejected template body도 원본으로 보존했다. Calibration의 현재 멘토링 안내를2018회의 당시 규정으로 해석하지 않는 한계도 기록했다. Validation reviewer의 split 간 비교 세부는 격리 notes에 남기고 부모와 원 작성자에게 calibration 내용을 공개하지 않는다. 작성자는 자기 자료에 관한 별도 feedback만 받는다.
+
+원래 validation v1 원문/manifest/inventory/검토와 fingerprint7ac383c0을 먼저 커밋한다. active flat fingerprint의 정확한 원본도 source-fingerprints-original-v1.json에 보관했다. 기존 작성자가 NEWv2 합성3개를 작성하고 승인된 공개3개는 그대로 사용한다. 고정 schema의 active metadata 파일만 명시적으로 갱신하며 original v1 파일은 덮어쓰지 않는다. v2는 별도 Java/Python 대조와 독립 검토·source freeze를 다시 거쳐야 한다. 과거 실패나 모델 실행을 재실행하지 않는다.
+
+[첫 원문 검토 영수증](../experiments/results/meetings-c5-source-review-v1.json)에 원래 검사와 수용/반려 범위, 공개 파일 hash를 기록했다. 질문 작성은 이번 반려를 해결하고 source 확정 뒤에 시작한다.
+
+첫 staging whitespace 검사에서 upstream raw2개와 동일 processed1개의 EOF/후행 공백3건이 검출됐다. 검토된 원문 hash와 원본 복사 일치를 확인했고 해당 세 파일만 검사 예외로 두어 원문을 고치지 않았다. 실제 Java 영수증2개의 CRLF도 정확히 보존한다. 일반 코드/문서 검사는 그대로 유지하며 최초 실패 log hash는 공개 영수증에 남겼다.

@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-19 · 원문 의미 신선도 반려와 원본 보존
+
+독립 Astra xhigh calibration reviewer는6개를 수용했고 validation reviewer는 공개3을 수용·합성3을 반려했다. 정확 해시 중복0과 의미상 신선도 수용은 다른 판단이다. 부모는 validation 의미 내용이나 상세 검토 notes를 열지 않고 metadata·hash만 확인했다. 반려 원본·author-safe feedback·fingerprint의 exact archive를 커밋한 뒤 같은 작성자에게 NEWv2만 맡기도록 범위를 등록했다. 이는 모델 결과를 보고 평가를 바꾼 것이 아니며 아직 질문/모델 실행은0이다.
+
 ## 2026-10-19 · source/item 역할과 노출 등록
 
 부모가 fork none으로 gpt-6-astra/xhigh를 실제 지정했고 도구가 수락한 작성자2명·독립 사전검토자2명의 role ID와 UTC 수락시각을 기록했다. 같은 split에서 source→item 역할을 재사용하며 자기검토는 금지한다. 역할들은 자동 AGENTS·memory와 현재 설계의 metadata 노출을 보고했고 부모는 이를 pristine/완전 맹검으로 표시하지 않았다.

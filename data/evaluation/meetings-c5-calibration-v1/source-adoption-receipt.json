@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "candidate_id": "meeting-answer-single-thinking-c5-v1",
+  "role_id": "/root/c5_calibration_author",
+  "actual_model": "gpt-6-astra",
+  "actual_effort": "xhigh",
+  "authored_at": "2026-10-19T08:08:07.139474+00:00",
+  "registration_head": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+  "head_at_preparation": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+  "source_first": true,
+  "same_split_source_item_author_reuse_disclosed": true,
+  "preauthorization": {
+    "path": ".local/meetings-c5-calibration-source-v1/preauthorization-v1.json",
+    "sha256": "2ff1d1a50a4656e75895320a42633dd5abf170ec881ed338df3c029fc85a4b81"
+  },
+  "source_manifest": {
+    "path": "data/evaluation/meetings-c5-calibration-v1/source-manifest.json",
+    "sha256": "916712e5f159e99e8c69d3b9cc67284051abf999d3d34e277628ff3179f3db11"
+  },
+  "source_inventory": {
+    "path": "data/evaluation/meetings-c5-calibration-v1/source-inventory.json",
+    "sha256": "8161641591a9561c8fdd3e2a375ff7b315952061a4abac166ac8b9dbd36be7a8"
+  },
+  "source_processing_receipt": {
+    "path": "data/evaluation/meetings-c5-calibration-v1/source-processing-receipt.json",
+    "sha256": "c5e96eb8f4a523fd956f3b2fd3a6c98159b4993363e499d15006013ac7b52249"
+  },
+  "fingerprints": {
+    "path": "data/evaluation/meetings-c5-calibration-source-fingerprints-v1.json",
+    "sha256": "3f2bc21494bc3bcbe557c43f87df644bfd4b8d4d5b14883a12d92e24c2eee236"
+  },
+  "counts": {
+    "adopted_sources": 6,
+    "public_whole_documents": 3,
+    "fresh_synthetic_documents": 3,
+    "families": 2,
+    "chunks": 15,
+    "public_source_bodies_opened_for_selection": 4,
+    "questions": 0,
+    "oracles": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "human_reviews": 0
+  },
+  "exploration_history": [
+    {
+      "repository": "jupyterhub/team-compass",
+      "stage": "metadata_only",
+      "outcome": "not_adopted_license_unconfirmed",
+      "details": "Simultaneous initial split metadata proposal resolved by parent in calibration's favor before either body read. Repository license null, no LICENSE in pinned tree and /license returned404. No source bodies read."
+    },
+    {
+      "repository": "nodejs/Release",
+      "stage": "metadata_only",
+      "outcome": "not_adopted_license_unconfirmed",
+      "details": "License null and /license404. Same organization as historical nodejs/diagnostics, but no source body adopted or read."
+    },
+    {
+      "repository": "ipfs/notes",
+      "stage": "metadata_and_license_only",
+      "outcome": "not_adopted_source_composition",
+      "details": "MIT license verified; pinned tree lacks two dated meeting documents."
+    },
+    {
+      "repository": "OGGM/community",
+      "stage": "metadata_and_license_only",
+      "outcome": "not_adopted_source_composition",
+      "details": "CC-BY-4.0 license verified; pinned tree contains meetings.md but no separate dated meeting pair."
+    },
+    {
+      "stage": "metadata_only_additional_repository_lookups",
+      "repositories": [
+        "eslint/tsc-meetings",
+        "babel/notes",
+        "electron/governance",
+        "nodejs/build",
+        "tc39/notes",
+        "zarr-developers/community",
+        "napari/meeting-notes",
+        "scikit-learn/administrative",
+        "jupyter/weekly-meetings",
+        "jupyter/governance",
+        "AcademySoftwareFoundation/tac",
+        "oneapi-src/oneAPI-tab"
+      ],
+      "source_body_reads": 0,
+      "details": "Repository metadata searches and selected complete trees only. jupyter/weekly-meetings lookup returned404; raw error JSON retained locally."
+    },
+    {
+      "repository": "openmainframeproject/tac",
+      "stage": "licensed_source_selection",
+      "outcome": "adopted_three_full_documents",
+      "rejected_body": {
+        "path": "process/tac_overview.md",
+        "sha256": "0cb8daeb1eb0291c625c223d28ccf4c89dd592e7fda2db7eea5d8fbb77d0fe2e",
+        "reason": "Unresolved template variables and ASWF mailing-list remnant",
+        "preserved": ".local/meetings-c5-calibration-source-v1/rejected-tac-overview.md"
+      },
+      "replacement": "Whole programs/mentorships/README.md; no token feedback or questions were available."
+    }
+  ],
+  "author_mechanical_fingerprint_comparison": {
+    "prior_index": {
+      "path": "data/evaluation/meetings-c5-prior-source-fingerprints-v1.json",
+      "sha256": "dd36b66badd69cc62197dab6927cfea3c221dea8617aad2ea950b58c134df976"
+    },
+    "exact_identity_document_or_long_paragraph_hits": 0,
+    "independent_freshness_verdict": null,
+    "missing_historical_fingerprints": [
+      "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+      "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+      "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+    ],
+    "complete_near_duplicate_absence_proven": false
+  },
+  "limitations": [
+    "Independent source prereview/freshness approval and source freeze are pending and are not authored by this role.",
+    "The mentorship guide is current at the pinned revision, not asserted to apply retrospectively to 2018 meetings.",
+    "Original public spelling, front matter and literal TOC syntax are retained; linked external pages are outside the corpus.",
+    "Historical fingerprint coverage has the explicitly inherited gaps; no complete semantic duplicate absence claim.",
+    "Helper processing receipt synthetic_bodies_authored=0 describes the processing helper only; this author separately created3 synthetic source documents."
+  ],
+  "closed_source_or_item_bodies_opened": 0,
+  "validation_semantic_data_opened": 0,
+  "final_answer_judging_eligible": false,
+  "settings_provenance": "Parent directly supplied and collaboration tool accepted model=gpt-6-astra, reasoning_effort=xhigh, fork_turns=none; not runtime introspection.",
+  "java_parity": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/java-parity.json",
+    "sha256": "839fd4f3715b6719000fc2a392e553ce20239ff67a16b06bbbc32363946f8bfa",
+    "actual_java_version": "21.0.12.1",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "documents": 6,
+    "chunks": 15,
+    "process_exit": 0,
+    "process_elapsed_seconds": 4.55,
+    "head_before": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+    "head_after": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+    "new_java_pids_remaining": [],
+    "private_process_receipt": ".local/meetings-c5-calibration-source-v1/java-parity-process-v1.json"
+  },
+  "author_structural_checks": {
+    "whole_inventory_replay": true,
+    "source_document_schema": true,
+    "frozen_code76_hashes_unchanged": true,
+    "frozen_processing_java_receipt_contract": true,
+    "fingerprint_replay": true,
+    "independent_semantic_review": false,
+    "checked_at": "2026-10-19T08:10:05.261444+00:00"
+  }
+}
