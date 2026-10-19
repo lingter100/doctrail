@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-19T07:51:19.735099+00:00",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c5-toolchain-freeze-v1.json",
+    "sha256": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d"
+  },
+  "head_sha": "d084f86d4e4f830eb51cd3dd73f6840a2ad54795",
+  "runs": [
+    {
+      "run_id": 39218197974,
+      "head_sha": "d084f86d4e4f830eb51cd3dd73f6840a2ad54795",
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39218197974",
+      "jobs": {
+        "backend": "success",
+        "java-service": "success",
+        "web": "success"
+      },
+      "job_ids": {
+        "backend": 117946967027,
+        "java-service": 117946967225,
+        "web": 117946967268
+      }
+    },
+    {
+      "run_id": 39218203289,
+      "head_sha": "d084f86d4e4f830eb51cd3dd73f6840a2ad54795",
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39218203289",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "job_ids": {
+        "java-service": 117946985233,
+        "backend": 117946985454,
+        "web": 117946985589
+      }
+    }
+  ],
+  "observed_by": "/root",
+  "claim_scope": "Exact source commit mandatory job status; job success is not model quality or user acceptance."
+}

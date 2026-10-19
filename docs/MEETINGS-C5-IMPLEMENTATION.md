@@ -1,6 +1,6 @@
 # C5 검증 도구 구현 기록
 
-상태: 마지막 저장 실패 경로 수정과 관련 합성 회귀를 완료했고 전체 도구 76개를 동결했다. 소스 커밋과 해당 CI 확인이 다음이다. 새 원문 수집, 질문 작성, 실제 tokenizer 준비와 모델 생성은 하지 않았다. 이 문서는 [C5 계획](MEETINGS-C5-PLAN.md)의 구현 기록이며 닫힌 C4와 GPU 배치 비교를 다시 실행하는 지시가 아니다.
+상태: 마지막 저장 실패 경로 수정과 관련 합성 회귀를 완료했고 전체 도구 76개를 동결했다. 소스 커밋 d084f86의 양쪽 필수 CI가 통과했고 별도 영수증을 커밋한다. 새 원문 수집, 질문 작성, 실제 tokenizer 준비와 모델 생성은 하지 않았다. 이 문서는 [C5 계획](MEETINGS-C5-PLAN.md)의 구현 기록이며 닫힌 C4와 GPU 배치 비교를 다시 실행하는 지시가 아니다.
 
 ## 해결할 문제와 범위
 
@@ -32,7 +32,7 @@ GPU28의 한 쌍 비교가 실제 답변 품질을 증명하지는 않는다. �
 - 실제 Astra high `meeting_navigation_audit`가 원래 NEW8을, 새 실제 Astra high `c5_persistence_review`가 마지막 delta를 독립 읽기 검토했다. 추가 실질 blocker를 발견하지 못했으며 둘 다 최종 답변 judge에서 제외한다. 읽기 검토는 테스트 실행이나 모델 품질 증명이 아니다.
 - 첫 review/prepare 58통과·Ruff, historical paragraph 최초1실패→수정1통과, 준비 중 import 후보 변경 최초1실패→수정1통과를 각각 보존했다. 실제 과거 원문은 열지 않았다.
 - 마지막 persistence 수정 전 전체 묶음은 168통과(NEW94+기존 정책/adapter74), 352.62초, Ruff·종료코드0·검사 전후 동일 SHA다. 이 수치를 수정 후 단일 실행 결과로 표시하지 않는다.
-- 새 복합 저장 실패는 최초2실패, 저장 전 deadline 원인 유실은 최초1실패로 재현했다. 수정 후 해당3회귀는 43.63초에 통과했다. 최종 probe/audit 전체 회귀37개가 262.10초에 통과했고 NEW8 Ruff·종료코드0·검사 전후 hash 일치를 확인했다. 나머지6파일은 원래168 검사 시점과 같다. 소스 커밋과 필수 CI가 남았다.
+- 새 복합 저장 실패는 최초2실패, 저장 전 deadline 원인 유실은 최초1실패로 재현했다. 수정 후 해당3회귀는 43.63초에 통과했다. 최종 probe/audit 전체 회귀37개가 262.10초에 통과했고 NEW8 Ruff·종료코드0·검사 전후 hash 일치를 확인했다. 나머지6파일은 원래168 검사 시점과 같다. 소스 커밋 d084f86의 push/PR 필수3job이 모두 성공했다.
 
 초기 테스트 실패와 중간 검사 기록은 `.local/c5-implementation-v1/`에, 마지막 저장 실패의 원본과 수정 증거는 `.local/c5-persistence-recovery-v1/`에 보존한다. 사용자 직접 검수, 새 데이터, 실제 추론 품질 판정은 모두 0이다. Phase1과 PR14는 아직 미완료다.
 
@@ -52,3 +52,5 @@ uv run --no-sync ruff check src/doctrail/meeting_c5_review.py scripts/prepare_me
 [동결 파일](../data/evaluation/meetings-c5-toolchain-freeze-v1.json)의 SHA는 `d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d`다. 파일76개·코드65개·import 후보1632개(부재1567개)를 결합한다. 기존 GPU59/C4quality85/host52는 working과 HEAD에서 변경이 없음을 확인했다. [구현 영수증](../experiments/results/meetings-c5-implementation-v1.json)은 검사 범위별 소스 hash, 실패와 수정 증거, 독립 검토 및 한계를 보존한다.
 
 소스/freeze 커밋의 필수3개 CI 성공과 별도 CI 영수증 커밋 뒤에만 새 원문 담당자를 배정한다. 공개/합성 원문을 먼저 확정하고 Java 처리 일치와 별도 원문 검토를 마친 다음 질문을 작성한다. 최종 모델 판정은 이 합성 검증과 별개다.
+
+CI 직접 관측: push39218197974 / PR39218203289 모두 backend·java-service·web 성공. [CI 영수증](../data/evaluation/meetings-c5-toolchain-ci-v1.json)은 동일 소스 커밋과 동결 파일을 결합한다. GitHub author/committer는 모두 lingter100이다. 이 관측에서 CI 검사 개수는 따로 집계하지 않았다.

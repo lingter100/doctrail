@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-19 · C5 소스 커밋의 CI 직접 확인
+
+부모가 사용자 lingter100 author/committer로 d084f86을 커밋·push하고 GitHub metadata를 확인했다. 양쪽 실행의 필수3job 성공을 실제 조회한 뒤 동결76개와 커밋 바이트를 다시 대조하여 별도 CI 영수증을 만들었다. 검증된 코드를 평가 자료 작성 전에 고정한 것이며 실제 모델 품질이나 사용자 검수를 대신하지 않는다.
+
 ## 2026-10-19 · C5 마지막 수정 검증과 도구 동결
 
 실제 Astra high `c5_persistence_recovery`가 최초3실패·수정대상3통과·관련 전체37통과를 기록하고 probe/test2의 소유권을 반환했다. 실제 Astra high `c5_persistence_review`는 같은 최종 hash를 읽기 검토했고 추가 실질 blocker를 찾지 못했다. 두 역할은 최종 답변 판정에서 제외된다.

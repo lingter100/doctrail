@@ -1,5 +1,11 @@
 # 진행 상태
 
+## C5 소스 CI 완료 · 새 원문 준비로 이동
+
+사용자 명의 소스/freeze 커밋 d084f86의 push39218197974와 PR39218203289에서 backend·java-service·web이 모두 성공했다. GitHub author/committer lingter100을 확인했고 동결76개를 해당 커밋과 현재 파일에서 대조했다. CI 영수증은 `data/evaluation/meetings-c5-toolchain-ci-v1.json` SHA f65660a2이며 이 영수증을 별도 커밋한다. job 성공만 관측했고 이전 실행의 검사 수를 이번 CI 수치로 가져오지 않는다.
+
+다음은 과거 출처 fingerprint metadata index와 실제 split별 source/item 역할 등록이다. 등록 커밋 뒤 source-first 순서로 각 split6문서를 준비하며 부모는 validation 본문을 읽지 않는다. 현재 새 자료·문항·judge·tokenizer·native0이다. 전체 goal ACTIVE·Phase1/PR14 draft이며 의미 품질 수용은 아직 남았다.
+
 ## C5 검증 도구 동결 · 소스 커밋과 CI 다음
 
 2026-10-19 마지막 저장 실패 수정 뒤 probe/audit 전체 합성 회귀37통과(262.10초), NEW8 Ruff·종료코드0·검사 전후 동일 SHA를 확인했다. 실제 Astra high 구현/검토 역할이 소유권을 반환했고 독립 delta 읽기 검토에서 추가 실질 blocker는 없었다. 원래168통과는 마지막 수정 전 결과이며 중복 범위를 합쳐 최종 단일 실행처럼 보고하지 않는다. 최초 저장 실패3개와 수정 증거를 그대로 보존했다.
