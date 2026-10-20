@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-20 · 첫 문항 수용과 통합 실행 코드 검토 결과
+
+a09a6ec의 push39393257320/PR39393263368에서 backend·java-service·web 성공과 사용자 author/committer lingter100을 실제 확인했다. [CI 기록](../experiments/results/meetings-service-rag-source-items-ci-v1.json)을 저장했으며 이 CI는 미커밋 실행 구현을 포함하지 않는다. 등록된 validation 작성자에게 val8 초안 작성을 실제 배정했고 아직 반환 전이다.
+
+Calibration 독립 item 검토는6문항·22필수사실을 수정0·거부0으로 수용했다. 부모는 안전 요약과 item freeze10개 bytes/hash만 확인했다. [최종 판정 담당 등록](../data/evaluation/meetings-service-rag-final-judge-registration-v1.json)은 실제 도구가 수락한 새 Astra xhigh/fork none 두 역할의 등록-only 반환을 기록한다. 프로젝트 metadata 노출을 공개하며 pristine/blind 또는 사용자 검수라고 하지 않는다. 실행 custodian·공식 실행은 아직 별도 등록 전이다.
+
+실행 코드6파일은 합성80통과/4.09초·Ruff·Node구문 통과 상태로 반환됐고 부모가 원본 receipt38ff7638과18개 binding을 확인했다. 이어 독립 코드 읽기 검토가 브라우저 최초 실패 원인 유실, Node 조기 종료 때 Chromium 소유권·정리 누락 가능성, browser active 예산 재부여의3개 문제를 확인했다. 같은 구현 담당자에게 좁은 수정과 회귀만 재배정했다. 이전80통과는 수정 전 증거로 보존하며 최종 통합 성공으로 사용하지 않는다. 실제 native·새 답변 품질·사용자 검수0, Goal ACTIVE·Phase1/PR14 draft다.
+
+사용자의 일정 질문에는 기본 서비스·검색 실험·회의 관리 구현과 남은 자연어 정확성·화면·운영·포트폴리오 검증을 나누어 설명했다. 현재 전체 범위는 며칠보다 몇 주 단위 추가 작업이라는 불확실한 계획 추정이며 확정 완료일이나 완료율은 아니다. 다음 판단 지점은 실제 업로드→권한 검색→모델 답변→모든 원문 인용 열기의 통합 결과다.
+
+## 2026-10-20 · 원문·문항 등록 push와 실행 코드 중간 검사
+
+원문 수용·calibration 초안·validation 문항 역할 등록을 a09a6ecfc9636004b2fc18842b70ec3f0a06fc67로 사용자 명의 commit/push했다. Push39393257320/PR39393263368은 마지막 실제 조회에서 진행 중이다. Validation 문항 작성은 정확한 두 CI의 필수3job 성공을 확인한 뒤 별도 배정해야 하며 아직 실행하지 않았다. Calibration 독립 item 검토는 진행 중이다.
+
+실행 구현 담당자가 첫 신규 합성19개와 기존 관련52개, 총71통과/2.93초를 보고했다. 최초 Ruff4개는 보존하고 정리 중이다. 부모가 지적한 분석 callback 시간 후 내부 deadline 재시작과 parsed 응답 기록 경계는 수정했고, 지연 callback 뒤 native0/남은20초·parsed 저장 실패와 unread503 구별 회귀를 통과했다고 보고했다. 현재 추가 browser/cleanup 경계 검토·수정 중이며 최종 소스/hash/검사 반환·부모 확인·독립 전체 코드 검토는 아직 남았다. 중간71개를 최종 변경이나 실제 native 증거로 사용하지 않는다.
+
 ## 2026-10-20 · 두 자료 묶음 수용과 첫 문항 독립 검토
 
 Validation v3 독립 source 검토가6문서/66청크를 수정0·거부0으로 수용했고 부모가 freeze51개 bytes/hash를 확인했다. 과거 metadata 공백3개와 다른 split의 의미·번역 중복 부재 미확인을 유지한다. 같은 source 작성자·독립 검토자를 각각 item 작성·검토자로 재사용하는 [등록](../data/evaluation/meetings-service-rag-validation-items-registration-v3.json)을 만들었다. 둘 다 실제 Astra xhigh 역할의 등록만 반환했으며 source freeze/등록 commit·CI 뒤에만 val8 문항을 배정한다.
