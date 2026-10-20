@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "item_author_receipt",
+  "status": "authored_pending_independent_item_review",
+  "author": "/root/service_rag_validation_sources",
+  "registered_model": "gpt-6-astra",
+  "registered_reasoning_effort": "xhigh",
+  "fork_turns": "none",
+  "runtime_model_self_verified": false,
+  "started_at_utc": "2026-10-20T08:33:54.453604+00:00",
+  "start_timestamp_scope": "First explicitly captured timestamp after initial read-only registration/status inspection; not exact turn start.",
+  "finished_at_utc": "2026-10-20T08:45:39.986016+00:00",
+  "dispatch_gate": {
+    "parent_confirmed_commit": "a09a6ecfc9636004b2fc18842b70ec3f0a06fc67",
+    "parent_confirmed_push_run": 39393257320,
+    "parent_confirmed_pr_run": 39393263368,
+    "parent_confirmed_jobs": [
+      "backend",
+      "java-service",
+      "web"
+    ],
+    "parent_confirmed_required_ci": "SUCCESS",
+    "network_or_git_reverification_by_author": false,
+    "registration_path": "data/evaluation/meetings-service-rag-validation-items-registration-v3.json",
+    "registration_sha256": "460e5ed23408adc469193221cbd94b9ce895728928139e415232b34ca0690057"
+  },
+  "source_freeze": {
+    "path": "data/evaluation/meetings-service-rag-validation-v3/source-freeze-v3.json",
+    "sha256": "3ffde1172db6cd7a6c762084645d2c802882ecd21c2d554237bb093b8652a6b6",
+    "binding_count": 51,
+    "verified_before_authoring": 51,
+    "verified_before_write": 51,
+    "whole_documents_read": 6,
+    "whole_chunks_coordinate_verified": 66,
+    "source_edits": 0
+  },
+  "counts": {
+    "items": 8,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "public_items": 4,
+    "synthetic_items": 4,
+    "required_facts": 31,
+    "supported_required_facts": 19,
+    "missing_requested_values": 12,
+    "required_facts_per_case": [
+      4,
+      5,
+      5,
+      5,
+      3,
+      3,
+      3,
+      3
+    ],
+    "general_only_answered": 1,
+    "multiple_meetings_answered": 2,
+    "mixed_meeting_general_answered": 1,
+    "all_sufficient_alternatives_require_multiple_documents_answered": 3,
+    "ko_question_en_evidence_answered": 2,
+    "en_question_ko_evidence_answered": 2,
+    "exact_evidence_spans": 41,
+    "chunk_cover_alternatives": 43,
+    "chunk_quote_bindings": 45
+  },
+  "artifacts": [
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/draft-questions-v1.json",
+      "bytes": 2891,
+      "sha256": "1f0c77627c8ee6facc39d388b2e7208cb635882d01dd1274e9dfc57fa73ea9f4"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/draft-oracle-v1.json",
+      "bytes": 93902,
+      "sha256": "37af4be7a1a83f2bb7479e56ee16cd870f632622d8d055285a7cd92667907227"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/item-selection-v1.json",
+      "bytes": 7287,
+      "sha256": "8167e71f30096aa3071d780c9589ebb76fe9a361412205081e6b4cc368b18d39"
+    }
+  ],
+  "self_hash_excluded": true,
+  "new_file_count": 4,
+  "line_endings": "UTF-8 without BOM, LF",
+  "checks": {
+    "questions_exact_contract_and_trim_stable": true,
+    "same_order_and_ids_in_oracle": true,
+    "language_status_coverage": true,
+    "facts_3_to_6": true,
+    "all_exact_source_and_chunk_quotes_codepoint_verified": true,
+    "all_minimal_overlap_chunk_covers_enumerated": true,
+    "all_answers_whole_source_alternatives_author_checked": true,
+    "semantic_independence_or_acceptance_proved": false,
+    "unit_test_suite_run": false
+  },
+  "first_failure": {
+    "stage": "initial combined shell command before process creation",
+    "tool": "functions.exec_command",
+    "result": "CreateProcess rejected: blocked by policy",
+    "original_record": "Unmodified tool-call/error transcript in this author conversation; the command did not execute.",
+    "cause_detail": "Tool did not state a more specific reason; no inferred reason asserted.",
+    "artifact_files_created": 0,
+    "network_model_calls": 0,
+    "recovery": "Same authorized four-artifact operation split into an in-memory Python session; no additional helper file, source edits, new permissions or extra workload.",
+    "failed_shell_dispatches": 1
+  },
+  "exposure": {
+    "same_split_source_author_reused": true,
+    "own_v1_v2_closed_exploratory_source_license_metadata_exposure": true,
+    "own_v1_uninspected_commit_patch_payload_preserved": true,
+    "own_v3_complete_public_synthetic_source_and_ingestion_exposure": true,
+    "own_v3_item_authoring_exposure": true,
+    "other_split_semantics_read_this_task": false,
+    "closed_source_semantics_reread_this_task": false,
+    "model_output_read": false,
+    "pristine_or_blind_claim": false,
+    "final_answer_judge_excluded": true
+  },
+  "actual_calls_this_task": {
+    "network": 0,
+    "retrieval": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "model": 0,
+    "java": 0,
+    "maven": 0,
+    "git": 0,
+    "browser": 0,
+    "human_review": 0
+  },
+  "limitations": [
+    "Independent item review and item freeze pending; author does not self-accept.",
+    "No actual retrieval/context-budget/model/citation/answer quality tested.",
+    "Historical fingerprint gaps and unverified cross-split semantic/translation duplicate absence remain.",
+    "Absence and all sufficient semantic alternatives are author judgments over the complete accepted corpus, subject to independent review; exact coordinates alone do not establish semantic completeness.",
+    "No runtime UUID mapping or service execution.",
+    "No other split semantics, closed source bodies, old questions/oracles or model outputs were read in this item task."
+  ],
+  "parent_read_policy": "Receipt coverage/count/status/hash metadata only; questions/oracle/selection/source semantics remain isolated.",
+  "human_review": false,
+  "phase1_complete": false
+}

@@ -1,4 +1,22 @@
 # 진행 상태
+## 2026-10-20 · 실제 화면 검사에서 발견한 실행기 결함과 문항 보완
+
+독립 validation item 검토는7수용·1거부다. 필수사실1개에 대한 충분 근거 대안2곳이 빠졌으며 원본4개·동결51개는 그대로다. 부모는 안전 요약과 새3개 hash를 확인했고 item freeze가 없음을 확인했다. 원본·거부 결과를 먼저 commit한 뒤 같은 작성자가 NEW v2에서 해당 근거 대안만 보완하고 다시 독립 검토한다. 질문 원문·순서·다른7문항·정책·기존 자료를 바꾸지 않는다.
+
+실행 코드 첫 수정본은 합성90통과/4.65초·Ruff·Node구문을 통과했다. 이어 실제 Java/React와 명시적인 합성 HTTP fixture를 연결한 smoke001/002에서 문서3개·회의분석2개까지 완료한 뒤 중단됐다. 두 번째 회의 상세를 열 때 전역 `.analysis-status.ready`가 목록의 두 배지와 일치하는 strict-mode 오류를002의 실제 예외로 확인했다.001에서는 정상 종료 중 프로세스 관찰의 NoSuchProcess도 발생했다. 두 번 모두 답변0·실제모델0이며 각각 소유 PID9개가 없음을 별도 확인했다.
+
+독립 delta 검토는 정리 중 발생한 후속 browser 실패가 기존 driver 첫 실패를 덮는 문제도 확인했다. 같은 담당자에게 상세 영역을 기다리는 selector·종료 경합·첫 실패 보존3개를 좁게 수정하도록 배정했다. 합성90통과와 실제 smoke 실패2개를 구분해 보존하며 다음 실제 UI 재검증 전 코드 안정 반환을 기다린다. 이 결과는 모델 품질 실패나 Phase1 완료가 아니다.
+
+## 2026-10-20 · 실제 화면 점검 준비와 validation 문항 반환
+
+직전 goal turn은 calibration 문항 수용·최종 판정 담당 등록·CI 기록을3bb8dd4024f1d92b0e346a048b6e1d510c335cce로 commit/push한 실질 진행이었다. 이번 시작에서 진행 중인 구현·자료 역할과 프로세스를 확인했고 같은 실행을 재시작하지 않았다. 두 run39395396126/39395403487 필수3job 성공 및 사용자 명의를 실제 확인해 [CI 기록](../experiments/results/meetings-service-rag-items-judges-ci-v1.json)을 저장했다.
+
+Validation 작성자는8문항·31필수사실의 원본4개를 반환했다. 부모는 내용 대신 bytes/hash와 원문 동결51개를 확인했다. 반환문의 oracle SHA에 `a`가 중복된65자리 오타 때문에 첫 비교가 실패했고, 실제 파일 hash37af4be7·bytes93902와 작성자의 파일 무수정 확인으로 정정했다. 원본 파일은 바뀌지 않았다. 등록된 독립 item reviewer에게 검토를 배정했으며 아직 수용 전이다.
+
+Calibration의 기존 원문·문항 작성자가 후속 실행 custodian/executor 등록만 수락했다. [역할](../data/evaluation/meetings-service-rag-calibration-execution-roles-v1.json)은 같은 split의 노출과 최종 judge 제외를 기록한다. 실제 manifest 준비·native 실행은 아직 배정하지 않았다.
+
+새 실제 GPT-6.1 Sol high/fork none 역할이 `.local/service-rag-ui-smoke-v1` 안에서 작은 합성6문서·6질문과 기존 HTTP fixture를 사용하는 실제 Java/React 점검을 준비했다. 모델·다운로드·서버·브라우저 시작0이며 코드 안정 반환 뒤 별도 실행한다. 합성 fixture 신원을 실제 모델로 바꾸지 않도록 imported browser 함수의 테스트 전용 인자만 허용하고 공식 CLI의 고정 신원 검사는 유지한다. 실행 코드3개 수정은 기존 Astra high 담당자가 계속 맡는다. 동결77개 현재 hash 불변을 확인했다.
+
 ## 2026-10-20 · 첫 문항 수용과 통합 실행 코드 검토 결과
 
 a09a6ec의 push39393257320/PR39393263368에서 backend·java-service·web 성공과 사용자 author/committer lingter100을 실제 확인했다. [CI 기록](../experiments/results/meetings-service-rag-source-items-ci-v1.json)을 저장했으며 이 CI는 미커밋 실행 구현을 포함하지 않는다. 등록된 validation 작성자에게 val8 초안 작성을 실제 배정했고 아직 반환 전이다.
