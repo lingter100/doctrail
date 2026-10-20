@@ -1,4 +1,10 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · C7 새 source/item 역할 수락과 metadata 목록
+
+부모가 네 새 역할을 gpt-6-astra/xhigh/fork none으로 호출했고 도구가 실제 수락했다. 각자의 원래 acceptance bytes·UTC 시각·노출과 상대 role_id를 보존하며 registry에서는 실제 canonical task 경로로 연결했다. 네 역할 모두 아직 등록만 수행했다.
+
+부모가 과거 metadata3개의 현재/커밋 bytes를 확인해110행과 누락3항목을 이어받았다. Source/질문/oracle 본문을 읽거나 역사적 fingerprint를 새로 만들지 않았다. 사용자 검수0·새 자료 작성0이며 후속 실제 코드/역할 증명과 별도 지시 후에만 자료 작업을 시작한다.
+
 ## 2026-10-20 · C7 사용자 명의 커밋과 원격 CI 확인
 
 부모가 검증된17파일을9888255로 사용자 명의 커밋·push하고 실제 GitHub author/committer lingter100, PR14 head와 exact committed bytes를 확인했다. 정확한 push/PR 필수3job 성공을 각각 관측해 별도 CI 영수증1bb8d365를 생성했다. 이는 코드·합성 검사·기존 서비스 회귀 확인이며 새로운 실제 자료·모델 답변·사용자 검수를 수행한 증거로 표현하지 않는다.

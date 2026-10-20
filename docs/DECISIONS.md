@@ -1,4 +1,10 @@
 # 결정 기록
+## 2026-10-20 · C7 새 자료 역할과 과거 metadata 범위
+
+닫힌 C6의12개 source fingerprint만 이전98행에 추가한다. 거부 원본과 동일한 공개 중복행도 제거하지 않는다. 정규화 fingerprint가 없는 과거 자료의 빈칸을 채우려고 본문을 다시 열지 않으며, 완전한 중복 부재는 주장하지 않는다.
+
+새 작성자와 독립 검토자를 split별로 분리하고 같은 split의 source→item 역할 재사용은 공개한다. 네 역할은 최종 답변 judge에서 제외한다. 도구가 수락한 모델·사고 수준과 역할 수락 시각은 증거로 남기되 런타임 자체 확인이라고 부르지 않는다. 실제 자료 검색은 등록 커밋과 코드·역할의 Git 증명 뒤에 시작한다.
+
 ## 2026-10-20 · C7 prospective 자료와 최종 채택본 연결
 
 Source admission은 채택 전 prospective manifest를 입력으로 받는다. 기계적 크기 검사를 통과한 뒤 독립 검토를 거치면서 채택 상태가 바뀔 수 있으므로, 원래 manifest의 exact bytes를 admission 영수증과 source freeze의 별도 admission_manifest 역할에 묶기로 했다. 실제 raw 문서는 복제하지 않는다.

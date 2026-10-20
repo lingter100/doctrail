@@ -1,6 +1,8 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- C7 CIreceipt27bc3da push39370807501/PR39370812277 all3passed. NEW actualAstraxhigh author2/prereviewer2 registeredONLY: role8128159c/8assignments/4actors, same-splitreuse+metadataexposure disclosed/excludedfinaljudges. Prior6e72b4e2 metadata3/110rows/107unique/42normalized/gaps3/repo13. Commitroles+index BEFORE explicit actualcode/Git/role preauth; holdHEAD thenreserve repos beforebodies/serializeMaven. No source/item/tokenizer/native yet; frozen77/closedpoolsunchanged. ReadSTATUS; goalactive/Phase1/PR14draft.
+
 - C7 source9888255 userauthorcommitterlingter100/committed17exact, push39370305643/PR39370310599 all3CIpassed. Freeze77 SHA6f829eeb unchanged; separateCIreceipt1bb8d365 tocommit BEFORE newpriorindex/actualsplitroles/sourceauthorship. Final244/1skip/Ruff andindependentreview10c127ea preserved; allownersreturned/ownedjobsfinished. NoC7source/item/judge/tokenizer/native. Next freshsourceadmission prospective-manifest+receipt/freeze chain, NEVERoldpool/C6reuse. ReadSTATUS; goalactive/Phase1/PR14draft.
 
 - C7 NEW8 RETURNED final244passed/1Windowslinkskip251.30s/Ruff/same8+existing2SHA/LF; allownedcommandsfinished. ActualAstrahigh independentreview10c127ea initial5resolved/blocker0. Wholetoolchain77 SHA6f829eeb/code66/candidates1664 frozen; implementationreceiptde571994. Priorcode123/closedC6public81/oldfreeze6 unchanged. Parent source+freezecommit/exactpush+PRCI then separateCIreceipt BEFORE newsource roles/data. NoC7source/item/judge/tokenizer/native; nooldrerun. ReadSTATUS; goalactive/Phase1/PR14draft.

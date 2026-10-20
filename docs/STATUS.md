@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-20 · C7 새 자료 역할4명과 과거 metadata 등록
+
+별도 CI 영수증27bc3da의 push39370807501/PR39370812277도 필수3job 모두 성공했다. 새 c7_calibration_author/c7_validation_author와 c7_calibration_prereviewer/c7_validation_prereviewer를 실제 Astra xhigh/fork none으로 배정했고 네 명 모두 등록만 수락했다. 같은 split source/item 재사용·metadata 노출·최종 judge 제외를 기록했다. 원래 상대 role_id는 receipt에 보존하고 등록에서는 실제 /root 경로로 정규화했다.
+
+Role registry8128159c는8 assignment/4 actual actors, prior index6e72b4e2는metadata3개·110행(canonical107, 중복3보존)·정규화42행·제외repo13·누락3항목이다. 부모는 세 입력 metadata의 working/HEAD exact bytes를 확인했으며 닫힌 본문·질문·oracle을 읽지 않았다.
+
+역할/index 커밋 뒤 작성자에게 실제 code_contract/GitProof/role preauth를 먼저 지시하고 그동안 HEAD를 유지한다. 원문 본문 전에 repo 예약을 조율하며 prospective manifest/raw paths를 보존하고 고정 admission을 통과한 새 자료만 독립 검토한다. 실제 source/item/tokenizer/native0이며 reviewer는 아직 의미 검토를 하지 않았다. Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
 ## 2026-10-20 · C7 소스9888255 양쪽 필수 CI 성공
 
 구현·freeze·원본 실패/검사/독립 검토 기록17파일을98882554595626b4a9f69be930cc4cb3aa47eb95로 커밋·push했다. Staged/working/committed17 exact bytes·공백 검사·좁은 secret 검사와 실제 GitHub author/committer lingter100·PR14 head를 확인했다. PR은 OPEN/DRAFT다.
