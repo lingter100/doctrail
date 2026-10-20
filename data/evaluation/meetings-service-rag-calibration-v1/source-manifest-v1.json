@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_candidate_manifest",
+  "split": "calibration",
+  "status": "bounded_incomplete_no_corpus",
+  "source_acceptance": "not_requested_not_self_accepted",
+  "source_freeze": null,
+  "registered_target_documents": 6,
+  "prepared_corpus_documents": [],
+  "unadopted_discovery_originals": [
+    {
+      "repository": "tc39/notes",
+      "revision": "53a59ad71704e669d488a6b67baf940bfe2fe134",
+      "path": "README.md",
+      "source_url": "https://raw.githubusercontent.com/tc39/notes/53a59ad71704e669d488a6b67baf940bfe2fe134/README.md",
+      "local_original": ".local/service-rag-calibration-v1/license-discovery/tc39-README.md",
+      "raw_bytes": 1969,
+      "raw_sha256": "0163e523e23114871609eb7b6f44092e1a1346c498c65d140808fb146319d967",
+      "git_blob_sha1": "75d829bbdc7bb85283111f7b1d4e4c55c4f8b71e",
+      "tree_blob_match": true,
+      "normalized_sha256": "ae1266f7c27b96e2d6baeffb724b0f2318e23f5ff1e3ad1b0e5d91474688ea5c",
+      "normalized_method": "nfc-whitespace-document-v1",
+      "status": "license_discovery_only_not_corpus",
+      "applicable_license": "unverified",
+      "meeting": false,
+      "processed_or_indexed": false
+    },
+    {
+      "repository": "rust-embedded/wg",
+      "revision": "3491f70af44b5f64cf109f6b7672c2f8ccdd2e1f",
+      "path": "README.md",
+      "source_url": "https://raw.githubusercontent.com/rust-embedded/wg/3491f70af44b5f64cf109f6b7672c2f8ccdd2e1f/README.md",
+      "local_original": ".local/service-rag-calibration-v1/license-discovery/rust-embedded-README.md",
+      "raw_bytes": 19376,
+      "raw_sha256": "14791717d9ea3cd8e6b75b68df1480beeaf69f6605dd4f23665641098cb0d9de",
+      "git_blob_sha1": "590762b64567c79152dd80ca1ae3e807e7b3415d",
+      "tree_blob_match": true,
+      "normalized_sha256": "21af75653968bbda79daade4589910ee7c415b059a5d5eaf9e14dae496e7c39b",
+      "normalized_method": "nfc-whitespace-document-v1",
+      "status": "license_discovery_only_not_corpus",
+      "applicable_license": "unverified",
+      "meeting": false,
+      "processed_or_indexed": false
+    }
+  ],
+  "reservations": [
+    {
+      "repository": "nodejs/TSC",
+      "revision": "8f60e6808c7ffefab1e5389808eee08325326405",
+      "status": "collision_reserved_to_other_split",
+      "body_reads": 0
+    },
+    {
+      "repository": "tc39/notes",
+      "revision": "53a59ad71704e669d488a6b67baf940bfe2fe134",
+      "parent_approved": true,
+      "status": "license_scope_unverified"
+    },
+    {
+      "repository": "rust-embedded/wg",
+      "revision": "3491f70af44b5f64cf109f6b7672c2f8ccdd2e1f",
+      "parent_approved": true,
+      "status": "license_scope_unverified"
+    }
+  ],
+  "originals_retained_complete": true,
+  "c7_admission_executed": false,
+  "c7_limits_applied": false,
+  "failure_categories": [
+    "repository_reservation_collision",
+    "applicable_license_not_verified",
+    "registered_repository_and_public_candidate_limits_reached"
+  ],
+  "unexecuted": [
+    "public_meeting_source_fetch",
+    "synthetic_family_authorship",
+    "service_ingestion",
+    "canonical_chunk_parity",
+    "independent_source_review",
+    "source_freeze",
+    "question_authorship",
+    "tokenizer",
+    "native"
+  ],
+  "no_claims": [
+    "No claim that repositories lack all licenses or permissions",
+    "No claim that public sources are absent or semantically unsuitable",
+    "No model, retrieval, Java, or C7 acceptance conclusion"
+  ],
+  "historical_fingerprint_coverage": "Bound metadata gaps retained; old bodies not reopened; no semantic duplicate absence claimed"
+}

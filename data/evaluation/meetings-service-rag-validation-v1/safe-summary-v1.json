@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_safe_summary",
+  "actor": "/root/service_rag_validation_sources",
+  "split": "validation",
+  "status": "bounded_incomplete_no_adopted_corpus",
+  "reason_categories": [
+    "public_meeting_license_scope_unconfirmed",
+    "external_meeting_revision_and_license_unconfirmed",
+    "parent_closed_author_stage_before_additional_source_work"
+  ],
+  "repositories": [
+    {
+      "repository": "nodejs/TSC",
+      "revision": "8f60e6808c7ffefab1e5389808eee08325326405",
+      "status": "license_scope_unconfirmed",
+      "license_declaration": "ISC in root package.json"
+    },
+    {
+      "repository": "tc39/notes",
+      "revision": "53a59ad71704e669d488a6b67baf940bfe2fe134",
+      "status": "metadata_only_then_parent_reported_other_split_reservation; no further access",
+      "license_declaration": null
+    },
+    {
+      "repository": "rust-lang/wg-async",
+      "revision": "c9991c44d457eabd993f629855243413f1b785b2",
+      "status": "linked_external_meeting_license_and_immutable_revision_unconfirmed",
+      "license_declaration": "Apache-2.0 root license and src reference"
+    }
+  ],
+  "counts": {
+    "complete_public_families": 0,
+    "completed_public_meeting_bodies": 0,
+    "adopted_documents": 0,
+    "synthetic_documents": 0,
+    "java_ingestion_runs": 0,
+    "maven_runs": 0,
+    "questions": 0,
+    "oracles": 0,
+    "tokenizer_runs": 0,
+    "native_calls": 0,
+    "source_freezes": 0,
+    "independent_reviews": 0,
+    "git_mutations": 0,
+    "owned_jobs_remaining": 0
+  },
+  "budget_counts": {
+    "metadata_network_requests_charged": 9,
+    "metadata_direct_fetch_operations": 8,
+    "possible_redirects_conservatively_charged": 1,
+    "repositories_considered": 3,
+    "source_body_fetches_charged": 3,
+    "license_body_fetches": 3,
+    "license_body_fetches_per_repository": {
+      "nodejs/TSC": 1,
+      "rust-lang/wg-async": 2
+    },
+    "unique_direct_external_fetch_operations": 13,
+    "external_requests_charged_including_possible_redirect": 14,
+    "network_failures_observed": 0,
+    "source_and_license_double_counted_fetches": 1,
+    "public_family_candidates_with_three_source_bodies": 0
+  },
+  "elapsed_wall_seconds_upper_bound": 450.8454,
+  "raw_response_patch_payload_uninspected_count": 1,
+  "source_manifest_sha256": "51825f6a9db7b5a6d36518d30e677351ec99fe4d3b794b555272f64ce856e4d9",
+  "author_receipt_sha256": "ec9e4367b8a5255dc02b5326761565f86b99659abccde4f3349cccf85587ed5f",
+  "registration_path": "data/evaluation/meetings-service-rag-source-registration-v1.json",
+  "registration_sha256": "1e27332126d428586f0237eb639980ef0dfe9fde09379f278c330237e4b83d3b",
+  "source_semantic_failure": false,
+  "model_quality_measured": false,
+  "independent_source_acceptance": "not_started",
+  "synthetic_or_java_work_started": false,
+  "historical_normalized_fingerprint_coverage": "incomplete as declared in bound exclusions; historical bodies not reopened",
+  "content_policy": "Counts, hashes, repository/revision identities, license and status only; local originals are not safe semantic summaries."
+}

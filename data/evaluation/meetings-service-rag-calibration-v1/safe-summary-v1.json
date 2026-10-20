@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_safe_summary",
+  "split": "calibration",
+  "status": "bounded_incomplete_no_corpus",
+  "counts": {
+    "network_total": 11,
+    "metadata_network_requests": 9,
+    "repositories_considered": 3,
+    "public_family_candidates": 2,
+    "source_body_fetches": 2,
+    "license_discovery_body_fetches": 2,
+    "applicable_license_bodies_obtained": 0,
+    "source_and_license_dual_counted_fetches": 2,
+    "license_fetches_by_repository": {
+      "tc39/notes": 1,
+      "rust-embedded/wg": 1
+    },
+    "network_failures": 0,
+    "public_meeting_bodies": 0,
+    "candidate_readme_bodies": 2,
+    "complete_public_families": 0,
+    "prepared_public_documents": 0,
+    "new_synthetic_documents": 0,
+    "java_ingestion_runs": 0,
+    "indexed_documents": 0,
+    "indexed_chunks": 0,
+    "questions": 0,
+    "oracles": 0,
+    "native_calls": 0,
+    "tokenizer_calls": 0,
+    "model_downloads": 0,
+    "independent_reviews": 0,
+    "human_review": 0
+  },
+  "failure_categories": [
+    "repository_reservation_collision",
+    "applicable_license_not_verified",
+    "registered_repository_and_public_candidate_limits_reached"
+  ],
+  "repository_statuses": [
+    {
+      "repository": "nodejs/TSC",
+      "revision": "8f60e6808c7ffefab1e5389808eee08325326405",
+      "status": "collision_reserved_to_other_split",
+      "body_reads": 0
+    },
+    {
+      "repository": "tc39/notes",
+      "revision": "53a59ad71704e669d488a6b67baf940bfe2fe134",
+      "parent_approved": true,
+      "status": "license_scope_unverified"
+    },
+    {
+      "repository": "rust-embedded/wg",
+      "revision": "3491f70af44b5f64cf109f6b7672c2f8ccdd2e1f",
+      "parent_approved": true,
+      "status": "license_scope_unverified"
+    }
+  ],
+  "license_status": "No applicable whole-source license verified in the inspected pinned trees and READMEs. License absence or legal impossibility not established.",
+  "source_acceptance": "none",
+  "source_freeze": "none",
+  "independent_review": "not_performed",
+  "unexecuted": [
+    "public_meeting_source_fetch",
+    "synthetic_family_authorship",
+    "service_ingestion",
+    "canonical_chunk_parity",
+    "independent_source_review",
+    "source_freeze",
+    "question_authorship",
+    "tokenizer",
+    "native"
+  ],
+  "limit_stop": "repositories3/3 and public_family_candidates2/2; no extension",
+  "source_manifest_sha256": "892d7bebb3b78288171fa103442cbabef96afa8ba308e5efa92b1417a4f0acb4",
+  "author_receipt_sha256": "fa63e646c1cc3a13694880f2dccf779e54ef2e9603abecac45376a7880dc6715",
+  "network_log_sha256": "2ca25ce0dd8b249d65fb786af4a5195b72f5747024144a89175bb9575d7447f1",
+  "content_disclosure": "counts hashes identities license status only; discovery originals remain role-local"
+}

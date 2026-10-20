@@ -1,4 +1,10 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · 자료 시도의 미완료 보존과 실행 경로 점검
+
+두 실제 Astra xhigh source 역할은 license/revision 확인 한계를 포함한 원본과 집계만 반환했다. 부모는 cal24/val19 hash binding을 확인하고 validation 추가 합성/회의 작성 전에 현재 시도를 닫았다. 이 부모의 종료 결정도 결과에 남긴다.
+
+실제 Astra high 구현 역할의 읽기 전용 사전점검과 실제 Astra xhigh 설계 역할의 두 metadata 조회를 구분했다. 현재 서버·모델·문항·사용자 검수0이며, 작은 파일 현재 hash와 대형 파일의 과거 검증 기록을 같게 보고하지 않는다. 독립 최종 답변 판정이나 공개 자료 수용은 수행하지 않았다.
+
 ## 2026-10-20 · 구현 CI 확인과 새 자료 역할 등록
 
 부모가 GitHub에서 d462903의 push/PR 필수 세 검사 성공과 사용자 author·committer를 확인했다. 새 calibration/validation source 역할은 실제 gpt-6-astra/xhigh/fork none 수락과 등록 응답을 반환했다. 등록 시 실제 원문·질문·oracle·모델 출력은 읽지 않았으며 과거 집계/절차 metadata 노출을 공개했다. 두 역할 모두 최종 답변 judge에서 제외한다.

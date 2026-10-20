@@ -55,3 +55,13 @@ uv run --no-sync pytest -q tests/test_meeting_service_rag.py tests/test_meeting_
 - 인증된 HTTP health까지 startup120초와 worker/handler를 포함한 정리5초의 실제 확인. 현재 `native_adapter_startup_seconds`는 native/adapter 준비만 측정한다.
 - 현재 Java budget은 `KnowledgeService.execute` 진입 기준이다. 그 전 HTTP decoding, 반환 뒤 serialization, 동기 CPU/DB 작업의 hard preemption은 보장하지 않는다. 전체 사용자 지연은 외부에서 따로 측정해야 한다.
 - 클라이언트 timeout/취소가 실제 native 중단 완료를 증명하지 않는다. 합성 watchdog 검사만으로 hard preemption이나 실제 모델 성능을 주장하지 않는다.
+
+## 함께 실행하는 최소 launcher 설계
+
+2026-10-20 추가 설계이며 아직 구현/실행 결과가 아니다. 신규 `scripts/serve_meeting_rag_service.py`와 그 합성 검사 한 파일만 추가한다. 기존 native context와 Uvicorn Server를 현재 Python 프로세스에 두고 CPU 검색·Java만 소유 자식 프로세스로 시작한다. 서로 다른 임의 token을 메모리/자식 환경에 전달하고 로그에는 남기지 않는다. 기존 모델·답변90초·분석120초·동결 코드는 그대로 사용한다.
+
+실제 Astra xhigh 검토의 정정에 따라 종료는 Java의 새 요청 차단→CPU 종료 요청→worker 종료 요청과 owned native 정리 선발동→worker join→context 최종 정리 순서다. 진행 중인 요청이 native를 기다리는 상태에서 먼저 worker join을 완료하려 하지 않는다. 모든 자체 wait/join은 하나의 남은5초를 사용하며, 기존 native cleanup의 별도5초를 합산 허용하지 않는다. 초과·미종료·오류는 실패로 남기고 소유 자원 정리는 계속한다. 강제 선점을 보장한다는 의미는 아니다.
+
+전체 startup120초는 인증된 generation health·CPU/base retrieval health·Java HTTP 준비와 소유 thread/process 생존까지 측정한다. 기존 동기 hash/context 진입의 늦은 반환은 수용 실패로 기록한다. Uvicorn thread 예외도 호출자에게 전달한다. Java에는 opt-in/base를 명시적 인자로 전달한다. 현재 Java health는 status/version만 제공하므로 pinned JAR와 실행 인자 확인은 설정 확인이며 실제 opt-in 효과 증거가 아니다. 실제 서비스 요청 검증이 별도로 필요하다.
+
+신규 경계의 주입된 factory·clock·HTTP probe로 시작/실패/종료/비밀값 비노출을 검사한다. 기존 frozen 모듈 전역을 바꾸거나 실제 자료·모델·브라우저를 이 합성 검사에 사용하지 않는다.

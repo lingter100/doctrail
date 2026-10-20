@@ -1,4 +1,24 @@
 # 진행 상태
+## 2026-10-20 · 최소 실행 조립 설계 검토 수용
+
+실제 Astra xhigh 설계 검토가 worker join 전에 native 정리를 선발동하도록 정정했다. 부모가 runtime의 poison/owned cleanup과 Java health의 실제 반환 필드를 확인했다. [launcher 설계](MEETINGS-SERVICE-RAG.md)는 신규2파일만 허용하고 전체 startup/cleanup 수용·기존 정책·비밀값 비노출을 유지한다. Java CLI/pinned JAR 설정 확인과 실제 opt-in 동작 증명을 구분하는 한계까지 검토 수용했다. 이 설계 커밋 뒤 기존 실제 Astra high service_rag_worker에 구현을 배정한다.
+
+## 2026-10-20 · 첫 자료 시도 종료, 실제 실행 조립의 간극 확인
+
+양쪽 source 역할이 bounded incomplete로 반환했고 부모가 cal24/val19 binding을 확인했다. 공개 회의·합성 corpus·Java·문항·native0이며 license 적용/외부 revision 미확인을 자료 의미 실패나 모델 실패로 보고하지 않는다. [결과와 다음 범위](MEETINGS-SERVICE-RAG-SOURCES.md)에 원본 보존·조회 수·노출 정정을 기록했다. 등록982f2bb의 push39384093729/PR39384099224도 필수3job 모두 성공했다.
+
+실제 Astra high service_rag_worker는 서버/모델 실행 없이 캐시70·작은62현재hash·큰8기존hash/현재size·JAR·실행환경을 확인했다. 부모가 generic 코드13개를 확인했다. 기존 launcher의 다른 worker 선택, 합성 브라우저 runner, Windows 강제 종료의 native 정리 누락 가능성을 확인했다. 기존 정책을 조립하는 신규 launcher+검사2파일 설계 제안을 받고 실제 Astra xhigh 역할의 검토를 진행 중이며 아직 구현 배정 전이다.
+
+같은 Astra xhigh 설계 역할의 metadata 첫6요청은 root LICENSE+날짜별chat 경로 후보1개, 후속6요청은 추가 후보0개를 반환했다. 원문/라이선스 적용·완료 회의 여부는 미검증이다. 기존 시도를 연장하지 않으며 새 자료 시도 범위를 별도로 정한다. 부모는 source 의미 자료를 읽지 않고 Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
+## 2026-10-20 · 등록 커밋 뒤 양쪽 source 작업 진행 중
+
+등록982f2bbd15e244e772405fd752a6b0b7c372c421을 사용자 author/committer로 push하고 두 등록 역할에 source-only 작업을 실제 배정했다. 해당 문서 커밋의 push39384093729/PR39384099224는 마지막 관측에서 진행 중이다. 구현 d462903의 성공 CI와 구분한다. PR14 설명도 구현·검증·실제 모델 미검증 범위로 갱신했다.
+
+첫 metadata 후보가 겹쳐 먼저 요청한 validation이 nodejs/TSC@8f60e6808c7ffefab1e5389808eee08325326405를 독점 예약했다. Calibration은 원래 요청/저장소 예산을 유지하며 다른 후보를 선택한다. Validation은 commit API 응답에 미열람 files1/patch1 payload가 포함됐음을 정정했다. 의도한 원문 fetch/의미 읽기0과 응답 자체의 본문 포함을 구분하고 원본을 보존하며, 부모는 patch 값을 읽지 않는다. 이후 revision 조회는 ref/ls-remote로 제한한다. Java/Maven 슬롯은 아직 누구에게도 배정하지 않았으며 source acceptance·문항·native0이다.
+
+Calibration은 metadata5/24·repo2/3에서 tc39/notes@53a59ad71704e669d488a6b67baf940bfe2fe134를 별도로 예약했다. 이 역할의 초기 revision 응답은 ref-only였고 patch payload는 없었다. 두 역할 모두 license metadata null을 이용 허가로 취급하지 않으며 실제 적용 범위를 확인한다. Source 준비가 진행 중이며 부모는 양쪽 원문을 읽지 않는다.
+
 ## 2026-10-20 · 연결 구현 CI 통과와 다음 자료 담당 등록
 
 구현 d462903c85cba0f132bbc9d13d6dfac915694805의 push39383229849와 PR39383237250은 backend/java-service/web 세 검사 모두 통과했다. GitHub author·committer는 lingter100으로 확인했다. [별도 관측 기록](../experiments/results/meetings-service-rag-implementation-ci-v1.json)은 기존 구현 영수증을 덮어쓰지 않는다. 실제 native 연결·모델 품질·사용자 검수의 통과로 해석하지 않는다.
