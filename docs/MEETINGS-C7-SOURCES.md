@@ -30,3 +30,15 @@
 ## 최초 등록 오류 보존
 
 첫 실제 사전 검증은 두 split 모두 코드 증명 후 역할 경로에서 중단됐다. `.local` 바로 아래 작업 폴더 자체를 넣은 등록은 동결 경로 검사의 하위 구성요소 조건을 만족하지 않았다. [최초 등록](../data/evaluation/meetings-c7-role-registration-initial-v1.json)을 정확히 보존하고 active 등록의 해당12개 항목만 실제 하위 경로로 좁혔다. [수선 영수증](../experiments/results/meetings-c7-role-path-repair-v1.json)에 원본 실패 hash와 변경 목록을 남겼다.116개 경로 검사는 통과했으나 수정 후 실제 역할 증명은 새 커밋에서 별도로 수행한다.
+
+수선 커밋d906614에서 같은 작성자의 실제 사전 검증 v2는 두 split 모두 통과했다. 코드77·역할·과거 metadata의 커밋 증명 후에만 source-only 지시를 내렸다. [공개 사전 증명 기록](../experiments/results/meetings-c7-source-preauthorization-v2.json)은 원본 local 영수증 hash와 실제 수행 범위를 구분한다.
+
+## 원문 탐색 예약
+
+[본문 전 예약 기록](../experiments/results/meetings-c7-source-reservations-v1.json)에 calibration의kubernetes/community와 validation의nodejs/package-maintenance를 분리했다. 과거 제외repo13과의 충돌은 없지만 예약은 자료 채택이나 이용 허가 확인이 아니다. 정확한 revision·license 범위·원문 구성·고정 크기 검사·독립 의미 검토를 통과해야 한다. Node.js 저장소의 NOASSERTION metadata는 허가로 간주하지 않고 실제 license 본문부터 검토한다.
+
+Validation 작성자는 첫 예약 저장소의 MIT 문서 적용 범위를 실제로 확인했지만 의미적 충분성 때문에 채택하지 않았다. 원본 license와 후보5개를 보존한다. 다음 후보는openjs-foundation/standards의965899d0131aafac29723656a28dfc080f66871d를 본문 전에 추가 예약했다. 과거의 다른 OpenJS 저장소 원문은 열지 않으며 같은 조직이라는 이유로 의미적 신선도를 가정하지 않는다. 첫 예약 기록을 소급 변경하지 않는다.
+
+두 번째 탐색 묶음도 의미적 충분성 때문에 채택하지 않아servo/project의3df21b5ac19d6b518db66a50231e439ad0ff56cd를 추가 예약했다. 이전 두 저장소도 다른 split에서 사용하지 않으며 모든 후보 원본과 metadata 오류를 보존한다.
+
+Calibration attempt001의 실제 기계 검사는 공개 family를c7_block_bounds로 거부했다. 합성 family가 통과했더라도 묶음 전체를 채택하지 않는다. 처음6개 raw와 prospective manifest는 불변이며 새 공개 family가 필요하면 새로운 public raw/attempt-NNN 경로를 사용한다. 해당 경로의 prospective-manifest.json은 metadata이며 corpus 문서로 세지 않는다. 최종 source freeze의 admission_manifest 역할은 정확한 공개 원본 경로를 참조한다. 실제 tokenizer·모델 호출은0이다.

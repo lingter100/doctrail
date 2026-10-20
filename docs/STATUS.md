@@ -1,4 +1,44 @@
 # 진행 상태
+## 2026-10-20 · C7 원문 단계 미충족 기록 반환, 제품 회귀 검증 중
+
+두 작성자가 제한된 탐색 결과를 incomplete/no_adopted_corpus로 반환했다. 실제 admission은 split별1회·공개 family는c7_block_bounds 거부·합성은 기계 조건만 통과했다. 추가 작성자 적합성 거부는 각각2개 묶음이며 독립 source 수용/Java parity/문항/tokenizer/native는0이다. 적절한 corpus의 보편적 부재를 입증한 결과가 아니다. [원문 단계 결과](MEETINGS-C7-SOURCE-RESULTS.md)에 범위와 한계를 남겼다.
+
+Calibration95파일의 index4785ee14/outcome1289a1ca, validation9파일의 최종 index4525fffc/outcome9dd18393을 받았다. Validation의 이전 metadata 버전과 launcher alias 오류는 local에 따로 보존됐고 실제 raw/prospective/admission은 바뀌지 않았다. 부모는104개 파일의 hash를 확인했고 좁은 credential·클라이언트IP 오류문구·개인 절대경로 패턴 검사에서 발견0이었다. CRLF인 metadata14개는 bytes를 보존하도록 Git 처리를 분리한다. 원문 의미 검토나 사용자 검수를 대신한 검사는 아니다.
+
+소유 source 명령이 모두 끝나 HEAD 유지 조건을 해제했다. 이전 설계 역할 재활성화는 도구의 agent-thread 제한으로 거부돼 새 실행으로 기록하지 않는다. 사용 가능한 기존 calibration Astra xhigh 역할에 일반 코드·합성 예시만 이용하는 읽기 권고를 배정했다. 자기 calibration 원문 노출이 있으며 독립 source 검토자가 아니라는 한계를 공개한다. 아직 새 설계/자료/실행은 배정하지 않았다.
+
+제품 담당자는 최초 두 결함을 고친 뒤 추가 source404 경계 실패를 실제로 재현·보완했다. 권한 재확인 읽기가 끝날 때까지 수정/취소를 잠그며 실제 source404는 기존 전체 무효화 경로로 보낸다. 최종 관련 browser7개 파일·type/build/offline package 검사가 진행 중이다. 실제 모델 품질과 Phase1은 여전히 미완료다.
+
+최종 실제 Java browser7개 파일은39통과로 반환됐다(new4/link4/detail10/conflict5/save2/source11/ready3). 모든 실행의 serverStopped=true·owned JVM/node0을 확인했고 다른 프로젝트의3 JVM은 그대로 뒀다. 최종 source hash checkpoint는 첫4 완료 후 나머지35 실행 중에 기록됐으므로 전체39의 실행 전후 hash 확인이라고 하지 않는다. 최종 코드의 정확한 커밋 CI를 별도로 요구하며 현재 영수증 정리 중이다.
+
+기존 calibration 역할의 읽기 권고는 반환됐다. 데이터 없는 일반 합성 예시 최대12개로 블록 수·공백·복원/좌표·직렬화 제한을 분리 진단하고 나서 별도 자료 가능성 검토 여부를 판단한다. 아직 새 script/fixture/실행은 없으며 현재 결과·제품 수정 커밋과 CI 뒤 별도로 배정한다.
+
+## 2026-10-20 · 새 원문 준비와 결정 연결 저장 경로의 실제 재현
+
+등록 수선과 실제 사전 검증을 마친 두 작성자가 원문 준비를 진행한다. Validation 첫 공개 후보는 license 적용 범위를 확인했지만 의미적 충분성이 부족해 채택하지 않았고, 원본 license/후보5개와 탐색 기록을 보존한다. 아직 기계적 source admission 완료나 독립 source 수용으로 보고하지 않는다.
+
+Calibration 첫 실제 source admission은 기본 코드/Git 경로에서 실행해 공개 family의 c7_block_bounds 거부와 합성 family 통과를 기록했다. 전체 raw6·prospective manifest·receipt5100bb98은 불변이며 rejected family를 잘라 다시 제출하지 않는다. 새 공개 family의 후속 manifest는 이미 소유한 public raw/attempt 디렉터리에 별도 저장해 나중의 Git proof가 ignored local 자료에 의존하지 않도록 한다.
+
+Validation은 두 번째 공개 탐색 묶음도 의미적 충분성 때문에 채택하지 않았고 원본을 보존했다. 이어servo/project의3df21b5ac19d6b518db66a50231e439ad0ff56cd를 본문 전에 예약했다. 익명 API 제한 오류도 보존하고 사용 가능한 읽기 전용 공개 metadata connector로 탐색한다. 이 상태는 모델 실패나 최종 평가 완료가 아니다.
+
+별도 새 meeting_request_lifecycle_audit를 실제 Astra high/fork none으로 수락했다. 읽기 전용 코드 검토에서 연결 POST의 대상404 뒤 오래된 선택 정보 잔존, 저장 중 취소/재열기 뒤 늦은 성공 응답으로 폼 닫힘이라는 두 가설을 반환했다. 실제 재현 전이며 제품 결함 확정으로 기록하지 않는다.
+
+후속 지시로 같은 담당자에게 nonfrozen web3파일과 필요시 nonfrozen browser runner만 배정했다. 실제 Java·합성 분석 transport로 최초 실패를 보존한 뒤 확인된 결함만 고치며 모델 추론은0이다. Maven/Java 슬롯은 이 담당자에게 우선 배정했고 source 작성자는 준비 완료를 알린 뒤 순서대로 parity를 수행한다. 부모는 HEAD d906614를 유지한다. Source/item/tokenizer/native 의미 평가와 사용자 검수는 아직 완료되지 않았다.
+
+수정 전 실제 Java/packaged React에서 두 결함을 재현했다. POST404 뒤 거부된 대상 제목/결정과 저장 가능 상태가 남았고 명시적 새로고침도 대상 목록 요청0이었다. 지연된 실제 POST201 중 취소→다시 열기→새 입력 후 이전 응답이 새 폼을 닫았으며 서버에는 원래 인용만 저장됐다. 교정된 baseline3 실패/약6.4초와 초기 workspace 선택·selector 설정3실패는 별도 보존한다. 세 번째503 동반 검사는 합성 실패 응답이며 실제 분석 fixture6/답변0·LLM0·serverStopped=true다. 담당자가 최소 수정을 진행 중이며 아직 최종 통과로 보고하지 않는다.
+
+Validation의 첫 실제 source admission도 공개 family의c7_block_bounds로 거부됐다. Raw6/prospective0942447a/receipt d69a4273과 통과한 합성 family를 보존하며 원문을 자르거나 재제출하지 않는다. HEAD 불변·공식 tokenizer/native/Java parity0이다. 다른 새 family만 고정 규칙 아래 탐색하며 충분한 자료가 없으면 미충족으로 남긴다.
+
+## 2026-10-20 · C7 양쪽 실제 사전 검증 통과, 새 원문 준비 시작
+
+경로 수선d9066147adeecefd23c014cce59e30ca350b6a74를 사용자 명의로 커밋·push했다. 실제 GitHub author/committer lingter100·PR14 head·커밋8파일 exact bytes와 동결77 불변을 확인했다.
+
+기존 작성자 두 명이 수정된 커밋에서 실제 기본 code_contract·role_contract·prior index Git 증명을 통과했다. 각각 code77/snapshot81/Git159 revision-path쌍/관측 subprocess167이며 HEAD 전후가 같다. Cal bb9489b8/val e1f1cefa의 새 preauthorization-v2와 공개 metadata82b25fa7를 보존한다. 최초 v1 실패는 변경하지 않았다.
+
+별도 source-only 지시로 split별6문서 준비를 시작했다. 공개 repo는 본문 전에 예약하고 고정 admission과 실제 Java/Python parity 뒤 독립 검토한다. 부모는 HEAD를 유지하고 root 문서/CI metadata만 처리한다. 아직 실제 source 채택·문항·tokenizer/native·사용자 검수0이며 전체 goal ACTIVE·Phase1 미완료다.
+
+수선d906614의 push39372004605/PR39372010020 필수3job 모두 성공했다. 원문 열기 전 calibration은kubernetes/community, validation은nodejs/package-maintenance를 예약했다. 부모는 과거 제외repo13과 충돌하지 않음을 metadata로 확인했고 예약 기록da53c158을 남겼다. Validation의 license metadata NOASSERTION은 이용 허가가 아니므로 작성자가 실제 LICENCE.md의 적용 범위를 확인하기 전에는 채택하지 않는다.
+
 ## 2026-10-20 · C7 역할 경로 사전 검증 실패와 등록 수선
 
 두 작성자의 실제 사전 검증은5e00709에서 code77·Git158 revision/path쌍·snapshot80까지 통과했으나 role_contract의 c7_phase_path에서 각각 중단됐다. 원래 local 작업 폴더 자체는 경로 구성요소가2개여서 동결 검사에서 요구하는 하위 경로가 없었다. 원본 cal9e80801f/vala5ce2676 영수증을 보존했고 작성자들은 prior index나 원문을 아직 읽지 않았다.

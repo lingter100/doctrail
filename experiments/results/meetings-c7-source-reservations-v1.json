@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c7-v1",
+  "recorded_at_utc": "2026-10-20T04:58:33.912193+00:00",
+  "head": "d9066147adeecefd23c014cce59e30ca350b6a74",
+  "prior_index_sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa",
+  "reservations": [
+    {
+      "phase": "calibration",
+      "repository": "kubernetes/community",
+      "actor": "/root/c7_calibration_author",
+      "revision": "author will pin before source adoption",
+      "license": "author metadata reports Apache-2.0; exact scope checked by author before adoption"
+    },
+    {
+      "phase": "validation",
+      "repository": "nodejs/package-maintenance",
+      "actor": "/root/c7_validation_author",
+      "revision": "d25d5073bfe9b19e08d7fbd7920026e4c082f909",
+      "license": "metadata NOASSERTION; LICENCE.md must be independently checked before adoption"
+    }
+  ],
+  "parent_repository_metadata_only": true,
+  "author_reported_body_reads_at_reservation": 0,
+  "reservation_is_not_license_or_source_acceptance": true,
+  "parent_acknowledged_before_body_reads": true,
+  "human_review": 0
+}
