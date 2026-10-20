@@ -1,5 +1,19 @@
 # 진행 상태
 
+## 2026-10-20 · C6 설계 확정, reader 결과 CI 확인
+
+Reader 결과 b08cd76의 push39354041667/PR39354047589에서 backend/java-service/web 모두 성공했고 별도 실제 관측 영수증을 보존했다. 이는 새 C6 구현 CI나 답변 품질 통과가 아니다.
+
+기존 실제 Astra xhigh 설계자가 NEW2를 반환했다. Plan792a9801/protocol10f1ab55는64KiB reader를 모든 proof consumer에 연결하는 NEW8만 지정한다. 비허용 새 경로는 본문 전 거부하고 허용 파일의 hash 불일치는 raw bytes를 읽은 뒤 파싱 전에 거부한다. 도구 소스 동결·커밋·CI 뒤 자료 역할을 등록하며 실제 자료 작성 전후 순서를 구분한다. 부모는 설계/결과CI 커밋 뒤에만 구현 역할을 배정한다. 아직 C6 구현·자료·문항·tokenizer/native0, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · 결과 b08cd76 보존, C6 reader-only 품질 후보 설계
+
+비교 원본·공개 영수증·결과10파일을b08cd762cbffcb938d157eaf0fd083d983b65771로 사용자 명의 커밋·push했다. GitHub author/committer lingter100·exact raw/CLI2개와 commit bytes·동결27 보존을 확인했다. Push39354041667/PR39354047589 필수 CI는 이 기록에서 진행 중이다.
+
+독립 기존 실제 Astra xhigh 읽기 검토의 권고를 채택했다. 새 품질 후보 C6에서만64KiB reader를 inner/caller Snapshots·unchanged·GitProof·committed helper까지 명시적으로 연결한다. 기존 비교/C5 orchestration·monkeypatch/cache·추가 profile loop는 사용하지 않는다. 실제 답변 정확도·서비스 효과는 아직0이며90초·token/GPU28·fresh cal6/6→isolated val8/8·최대14회·source-first 자료 조건은 그대로다.
+
+기존 free_qa_candidate_review는 NEW docs/MEETINGS-C6-PLAN.md와 data/evaluation/meetings-c6-protocol-v1.json만 설계 소유한다. 부모는 rootdocs/CI/Git, 구현·C6자료·문항·tokenizer/native0이다. 전체 goal ACTIVE·Phase1/PR14 draft이며 닫힌 실험을 재실행하지 않는다.
+
 ## 2026-10-20 · reader 단발 합성 비교 완료, 서비스 효과는 별도 검증
 
 64e3454에서 공식 비교4경계가1회 완료됐다. Reference→candidate 시작12.531→10.969초/전송직전3.141→2.047초이며 동일 비읽기 검사·hash/반환bytes/Git events를 확인했다. 고정순서 n=1/부하미통제로 안정적인 개선율·C5 causal 절약·서비스 품질을 주장하지 않는다. CLI59.634초/exit0·summary/raw92fda0c9 일치·HEAD/동결27/oldunion106 unchanged·소유 CLI 종료, 세션51972 FINISHED다. 공식 출력과 observer는 소비됐고 절대 재실행하지 않는다.
