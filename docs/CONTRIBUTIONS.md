@@ -1,4 +1,10 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · source 수용, 문항 검토와 구현 중간 검토
+
+독립 validation source reviewer가6문서/66청크와 저장된 Java 증거를 검토해 수용했고 부모가 동결51개를 hash로 확인했다. Calibration item 작성자는22개 필수사실의6문항 초안을 반환했으며 부모는 의미 읽기 없이 독립 item 검토에 넘겼다. 같은 split의 source→item 역할 재사용과 final judge 제외를 공개했다.
+
+기존 실제 Astra high 구현 역할이 실행 코드6파일을 작성 중이다. 부모가 generic observer delta를 읽어 분석 deadline 재시작과 응답 관측 가능성 기록 문제를 수정 요청했다. 이는 중간 코드 검토이며 실제 native 재현·최종 검사 결과가 아니다. 실제 모델·사용자 검수·공개 배포는 이번 묶음에서 수행하지 않았다.
+
 ## 2026-10-20 · validation 자료 반환과 별도 검토 등록
 
 Validation 작성자가 원문6개 전체 처리·실제 Java parity·영속 artifact42개를 반환했다. 부모는 안전 요약과 bytes/hash만 확인했고 원문·inventory·manifest·작성자 의미 기록은 읽지 않았다. 새 독립 Astra xhigh 역할을 source 검토자로 등록했으며 아직 검토 실행·수용을 주장하지 않는다. 사용자 검수와 모델 품질 실측은0이다.

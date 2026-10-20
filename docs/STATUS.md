@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-20 · 두 자료 묶음 수용과 첫 문항 독립 검토
+
+Validation v3 독립 source 검토가6문서/66청크를 수정0·거부0으로 수용했고 부모가 freeze51개 bytes/hash를 확인했다. 과거 metadata 공백3개와 다른 split의 의미·번역 중복 부재 미확인을 유지한다. 같은 source 작성자·독립 검토자를 각각 item 작성·검토자로 재사용하는 [등록](../data/evaluation/meetings-service-rag-validation-items-registration-v3.json)을 만들었다. 둘 다 실제 Astra xhigh 역할의 등록만 반환했으며 source freeze/등록 commit·CI 뒤에만 val8 문항을 배정한다.
+
+Calibration 작성자는6문항(KO3/EN3·답변4/보류2), 필수사실22개의 NEW4를 반환했다. 부모는 본문을 읽지 않고4개 hash와 기존 source64개를 확인했으며 등록된 독립 item reviewer에게 실제 검토를 배정했다. 문항 수용·품질 실행은 아직 아니다.
+
+실행 설계 fbcdcdc의 push39391822120/PR39391828646 필수3job과 사용자 author/committer를 확인하고 [CI 기록](../experiments/results/meetings-service-rag-execution-design-ci-v1.json)을 남겼다. 기존 실제 Astra high `service_rag_worker`는 NEW driver·검사·browser3개와 비동결 observer3개를 구현 중이다. 부모의 중간 코드 검토는 분석 시작 기록 뒤120초를 새로 부여할 수 있는 경계와 이미 parsed 응답을 받았는데 body unavailable로 기록하는 경계를 지적했다. 수정·회귀 증거를 기다리며 실제 결함 재현 완료나 최종 통과를 주장하지 않는다. 동결77개 현재 hash는 불변이고 관측3파일과 새 source 동결 목록은 겹치지 않는다.
+
 ## 2026-10-20 · 실제 화면 실행 설계 반환
 
 실제 Astra xhigh 설계 역할이 [단일 실행 설계](MEETINGS-SERVICE-RAG-EXECUTION.md)를 반환했고 부모가 generic 계약과 observer 연결점을 검토했다. 신규 driver·검사·Node browser3개와 기존 비동결 서비스3파일의 기본 off 관측 연결이 후속 구현 범위다. 전체 원문 UI 등록6→회의 자동분석4→질문별 UI1회→모든 인용 열기→소유 자원 정리를 포함하며, source/item/판정 역할과 실행 등록 전 실제 모델 호출은 허가하지 않는다. 구현은 이 설계를 commit한 뒤 별도 배정한다.

@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_validation_v3_items_registration",
+  "registered_at_utc": "2026-10-20T08:23:47.889838+00:00",
+  "bindings": [
+    {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "bytes": 19569,
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    {
+      "path": "docs/MEETINGS-SERVICE-RAG-EXECUTION.md",
+      "bytes": 19544,
+      "sha256": "e5f3a5001755ec8c25b481a199902c8936375c9a6e0478df09e535e6ef17b5b7"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-next-stage-registration-v3.json",
+      "bytes": 8876,
+      "sha256": "49539ed9e800cb3d56256e280ec5af801b0a0021359deee8dc0363cf9ec72eaa"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/source-freeze-v3.json",
+      "bytes": 35587,
+      "sha256": "3ffde1172db6cd7a6c762084645d2c802882ecd21c2d554237bb093b8652a6b6"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/source-review-summary-v3.json",
+      "bytes": 6097,
+      "sha256": "a44ce41344e8e5b2ac190a8ff5198d16590da805a93696cc3d28af34632e3728"
+    },
+    {
+      "path": "experiments/results/meetings-service-rag-execution-design-ci-v1.json",
+      "bytes": 2307,
+      "sha256": "6f602f0b19760de5178c3dc006deee7aaa1a9d66bbea995288d766940ba70ee2"
+    }
+  ],
+  "output_root": "data/evaluation/meetings-service-rag-validation-v3/",
+  "source_acceptance": {
+    "documents": 6,
+    "chunks": 66,
+    "accepted": 6,
+    "rejected": 0,
+    "source_edits": 0,
+    "parent_verified_bindings": 51,
+    "cross_split_semantic_duplicates_absence_verified": false,
+    "historical_metadata_gaps": 3
+  },
+  "author": {
+    "actor": "/root/service_rag_validation_sources",
+    "accepted_model": "gpt-6-astra",
+    "accepted_reasoning_effort": "xhigh",
+    "fork_turns": "none",
+    "registration_returned": true,
+    "exposure": "Same-split source author reused: own closed v1/v2 exploratory source and v3 complete source/synthetic/ingestion evidence; not pristine or independent source reviewer.",
+    "new_files": [
+      "draft-questions-v1.json",
+      "draft-oracle-v1.json",
+      "item-selection-v1.json",
+      "item-author-receipt-v1.json"
+    ]
+  },
+  "independent_reviewer": {
+    "actor": "/root/service_rag_validation_source_review",
+    "accepted_model": "gpt-6-astra",
+    "accepted_reasoning_effort": "xhigh",
+    "fork_turns": "none",
+    "registration_returned": true,
+    "exposure": "Same-split source reviewer reused: own6 documents/66 chunks/license/Java evidence/source semantics; not source/item author.",
+    "new_files": [
+      "item-review-v1.json",
+      "item-review-notes-v1.md",
+      "item-review-summary-v1.json",
+      "item-freeze-v1.json"
+    ]
+  },
+  "required_counts": {
+    "items": 8,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "required_facts_per_item": [
+      3,
+      6
+    ],
+    "general_only_min": 1,
+    "multiple_meetings_min": 1,
+    "mixed_meeting_general_min": 1,
+    "all_sufficient_alternatives_require_multiple_documents_min": 2,
+    "ko_question_en_evidence_min": 1,
+    "en_question_ko_evidence_min": 1
+  },
+  "contract": "Reuse generic draft_contract of next-stage-registration-v3 and concrete family_id/source_kind/cases ordering/logical ID contract in execution design. Whole accepted own corpus determines truth/absence and all sufficient evidence alternatives; no retrieval or model-tailored selection.",
+  "read_scope": "Accepted own split source bindings and generic registered code/design only. No other-split or closed question/oracle/source semantics or model outputs.",
+  "questions_payload": "schema_version, phase, cases; each id/query/language/family_id/source_kind public|synthetic; no runtime UUID, context or oracle facts.",
+  "execution_mapping": "Manifest maps logical source IDs to actual current document/revision/chunk IDs and predeclared workspace/principal. Search kind=all, hybrid_rerank/base/top5; no evidence-location filters. Driver never reads oracle.",
+  "dispatch_gate": "Accepted source freeze and this registration committed with exact required CI success, then explicit author dispatch. Independent reviewer starts after author return and separate dispatch.",
+  "freeze_gate": "Independent full acceptance before item freeze; rejected author originals remain unchanged.",
+  "final_answer_judge_excluded": [
+    "author",
+    "independent_reviewer"
+  ],
+  "common_boundaries": [
+    "Free local only; actual retrieval/tokenizer/native/model/download/Java0",
+    "No Git/root docs/frozen/previous source edits",
+    "No locked test or other split semantics",
+    "No human review, approval or model quality claims"
+  ],
+  "current_actual": {
+    "questions": 0,
+    "oracles": 0,
+    "item_reviews": 0,
+    "native_calls": 0,
+    "human_review": 0
+  }
+}

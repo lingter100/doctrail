@@ -1,6 +1,14 @@
 # 서비스 RAG 자료 준비와 실행 사전점검
 
-2026-10-20. 실제 서비스 연결 코드의 필수 CI는 통과했다. 새 자료 준비의 첫 시도는 완전한 공개 corpus를 확보하지 못했으며, 실제 모델 연결이나 답변 품질은 아직 실행하지 않았다.
+2026-10-20. 실제 서비스 연결 코드의 필수 CI는 통과했다. 현재 calibration6문서/32청크와 별도 validation6문서/66청크가 원문 전체 등록·독립 source 검토를 통과했다. 실제 모델 연결과 새 자료의 답변 품질은 아직 실행하지 않았다. 아래 첫 시도의 실패는 수정하지 않고 보존한다.
+
+## 현재 수용된 자료와 다음 문항
+
+Calibration은 기존 freeze64개를 유지하고6문항 초안을 독립 검토 중이다. Validation은 공개3·새 AI 합성3개이며 독립 검토 수용6·거부0·원본수정0이다. 부모가 [source freeze](../data/evaluation/meetings-service-rag-validation-v3/source-freeze-v3.json)의51개 bytes/hash를 확인했다. 실제 Java 등록6·재조회6·원문/66청크 일치는 자료 등록 검증이며 회의 자동 분석이나 검색·생성 품질 증거가 아니다.
+
+과거 fingerprint metadata 공백3개와 다른 split의 의미·번역 중복 부재 미확인을 기록한다. 독립 source 검토가 원문에 적힌 기술 주장 자체나 미완료 계획을 확정 사실로 승인하는 것은 아니다. 가장 큰 원문의51청크도 온전히 보존하며 이후 top5 검색·입력 한도의 통과를 미리 주장하지 않는다.
+
+Validation item 작성자와 독립 reviewer는 [별도 등록](../data/evaluation/meetings-service-rag-validation-items-registration-v3.json)에 묶었다. Source freeze/등록 commit·필수 CI 뒤8문항 작성을 배정한다. 같은 split source 역할을 재사용하고 최종 answer judge에서는 제외한다. 사용자 검수0·실제 모델 호출0이며 기존 실패 원본은 모두 유지한다.
 
 ## 첫 자료 준비 결과
 

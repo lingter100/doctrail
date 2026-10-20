@@ -1,0 +1,1516 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "artifact_kind": "draft_item_oracle",
+  "ai_authored": true,
+  "author_actor": "/root/service_rag_calibration_sources",
+  "independent_review_status": "pending",
+  "source_freeze": {
+    "path": "data/evaluation/meetings-service-rag-calibration-v2/source-freeze-v2.json",
+    "sha256": "423316335a89a55eb3fa052f66dd7b34fb2062072a849f02c97a9134c27799bc"
+  },
+  "coordinate_contract": {
+    "units": "Unicode codepoints",
+    "intervals": "zero-based, start-inclusive, end-exclusive",
+    "source_basis": "Exact UTF-8 decoded accepted processed bytes; raw and processed source bytes are equal in the accepted freeze.",
+    "normalization": "None. No trimming, whitespace rewriting, or Unicode normalization.",
+    "logical_chunk_identity": "<source_id>::chunk::<zero-based accepted ordinal>, bound to source SHA-256 and frozen chunk text SHA-256. This is not a service UUID.",
+    "logical_revision_identity": "Content identity sha256:<accepted processed SHA-256>, not an asserted database revision number.",
+    "runtime_mapping": "Future execution manifest maps these logical identities to actual document/revision/chunk IDs and ACL scope. The actual driver does not read this oracle.",
+    "overlap_rule": "All minimal accepted chunk covers for each exact anchor are listed. Overlapping evidence segments may repeat text; they do not create additional facts."
+  },
+  "source_documents": [
+    {
+      "source_id": "cal-v2-p1",
+      "logical_revision_id": "sha256:50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+      "source_sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public",
+      "document_kind": "meeting",
+      "meeting_date": "2021-04-05",
+      "upstream_repository": "cncf/tag-app-delivery",
+      "upstream_revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "upstream_path": "gitops-wg/meetings/old-committee-principles/2021-04-05-chat.txt",
+      "whole_source_path": ".local/service-rag-calibration-v2/processed/cal-v2-p1.txt",
+      "whole_source_codepoints": 4938,
+      "ai_authored": false,
+      "fictional": false,
+      "chunks": [
+        {
+          "source_chunk_id": "cal-v2-p1::chunk::0",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 1000,
+          "page": null,
+          "text_sha256": "cef75482d1210176c614778f203bcd96834e00bc51cf0fdcf0c47658445ca84e"
+        },
+        {
+          "source_chunk_id": "cal-v2-p1::chunk::1",
+          "ordinal": 1,
+          "start_offset": 850,
+          "end_offset": 1844,
+          "page": null,
+          "text_sha256": "5038ac2e67db8bbe41cb95cfc2b53cd7d9be347f4c50d6d704f6f0cdc86a8bdc"
+        },
+        {
+          "source_chunk_id": "cal-v2-p1::chunk::2",
+          "ordinal": 2,
+          "start_offset": 1694,
+          "end_offset": 2693,
+          "page": null,
+          "text_sha256": "553d8d70683c530db3b0a31f53cf3de1c6f554f0f7efd71133afebfad2eee0a8"
+        },
+        {
+          "source_chunk_id": "cal-v2-p1::chunk::3",
+          "ordinal": 3,
+          "start_offset": 2543,
+          "end_offset": 3535,
+          "page": null,
+          "text_sha256": "8d79d224eb6992c8a30f600e29d253a10a6821d756b3396e3c18a80342f5086e"
+        },
+        {
+          "source_chunk_id": "cal-v2-p1::chunk::4",
+          "ordinal": 4,
+          "start_offset": 3385,
+          "end_offset": 4373,
+          "page": null,
+          "text_sha256": "096a6db78e871d076d8831c5b69d4fb68083be93a7b845c3646e34ab007cfaa7"
+        },
+        {
+          "source_chunk_id": "cal-v2-p1::chunk::5",
+          "ordinal": 5,
+          "start_offset": 4223,
+          "end_offset": 4938,
+          "page": null,
+          "text_sha256": "71b26a18498ead5f24478494514733ec3bda5e0cab748e4b2d75e2ca063afd90"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-p2",
+      "logical_revision_id": "sha256:849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "source_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public",
+      "document_kind": "meeting",
+      "meeting_date": "2021-04-14",
+      "upstream_repository": "cncf/tag-app-delivery",
+      "upstream_revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "upstream_path": "gitops-wg/meetings/old-committee-principles/2021-04-14-chat.txt",
+      "whole_source_path": ".local/service-rag-calibration-v2/processed/cal-v2-p2.txt",
+      "whole_source_codepoints": 8227,
+      "ai_authored": false,
+      "fictional": false,
+      "chunks": [
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::0",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 999,
+          "page": null,
+          "text_sha256": "5afea8ab8c75c0833932799f085a7bfcf5bfdf3c455639fcb6109cd349a2e51c"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::1",
+          "ordinal": 1,
+          "start_offset": 849,
+          "end_offset": 1848,
+          "page": null,
+          "text_sha256": "fb44ed417385e87b7c32ea05949d56bac6894058cfc2a4d82ef3ea46aca45f85"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::2",
+          "ordinal": 2,
+          "start_offset": 1698,
+          "end_offset": 2695,
+          "page": null,
+          "text_sha256": "d7c63d30fe3ca61cd46e56863d517ff93b959b2b0df9a8806952bd9d67e9ed99"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::3",
+          "ordinal": 3,
+          "start_offset": 2545,
+          "end_offset": 3544,
+          "page": null,
+          "text_sha256": "3d812ff114384c2b3f2ecd15943ce8a38810d12bff764a299bb78c8f72e43d4d"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::4",
+          "ordinal": 4,
+          "start_offset": 3394,
+          "end_offset": 4391,
+          "page": null,
+          "text_sha256": "b70abffe5274adc5c87e643378d51cf569b2295bbb38da506ac9bf9733eb3d5f"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::5",
+          "ordinal": 5,
+          "start_offset": 4241,
+          "end_offset": 5238,
+          "page": null,
+          "text_sha256": "0a03a3c465a0b64f81b0ccbce13773bc599289c60007b67202f3838fb0f968fb"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::6",
+          "ordinal": 6,
+          "start_offset": 5088,
+          "end_offset": 6086,
+          "page": null,
+          "text_sha256": "73fb3705338746276ccc6336398a8e4b15f8beca1168349d2975d0b65b1d1381"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::7",
+          "ordinal": 7,
+          "start_offset": 5936,
+          "end_offset": 6932,
+          "page": null,
+          "text_sha256": "aa1f5e2040fe1cc6dbf4d435d96bb5fed799bf8ac73a2a66a62b3e13eb36e104"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::8",
+          "ordinal": 8,
+          "start_offset": 6782,
+          "end_offset": 7777,
+          "page": null,
+          "text_sha256": "269a9504d281d2678ca79f7b507457fd273273c923e4e4aa35651a6f675539c3"
+        },
+        {
+          "source_chunk_id": "cal-v2-p2::chunk::9",
+          "ordinal": 9,
+          "start_offset": 7627,
+          "end_offset": 8227,
+          "page": null,
+          "text_sha256": "a036176a6e40a2464a9d475dbf0a6b9db5650bd2fd1a9add3dd9f47c7f10bfc2"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-p3",
+      "logical_revision_id": "sha256:8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public",
+      "document_kind": "general",
+      "meeting_date": null,
+      "upstream_repository": "cncf/tag-app-delivery",
+      "upstream_revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "upstream_path": "gitops-wg/charter.md",
+      "whole_source_path": ".local/service-rag-calibration-v2/processed/cal-v2-p3.txt",
+      "whole_source_codepoints": 3292,
+      "ai_authored": false,
+      "fictional": false,
+      "chunks": [
+        {
+          "source_chunk_id": "cal-v2-p3::chunk::0",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 992,
+          "page": null,
+          "text_sha256": "24fb940804bf9b9086f947459fb9bf6ae1beecefe908f3cc65dd8b09bce6376e"
+        },
+        {
+          "source_chunk_id": "cal-v2-p3::chunk::1",
+          "ordinal": 1,
+          "start_offset": 842,
+          "end_offset": 1833,
+          "page": null,
+          "text_sha256": "f765e7a02d96a37448bb7f6bdb585ada16a6beec468d7204dfcc074a6bb153fa"
+        },
+        {
+          "source_chunk_id": "cal-v2-p3::chunk::2",
+          "ordinal": 2,
+          "start_offset": 1683,
+          "end_offset": 2682,
+          "page": null,
+          "text_sha256": "2d0417f48c1c54ba83c1b76122cac6e3b09698d339d747ad0185dadd3f4d8ccf"
+        },
+        {
+          "source_chunk_id": "cal-v2-p3::chunk::3",
+          "ordinal": 3,
+          "start_offset": 2532,
+          "end_offset": 3292,
+          "page": null,
+          "text_sha256": "bf90090191407ce37fdc54f8552ae748307e5ca197b04e164c9dc2cb28f7b8f0"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-s1",
+      "logical_revision_id": "sha256:413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "source_sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic",
+      "document_kind": "general",
+      "meeting_date": null,
+      "upstream_repository": null,
+      "upstream_revision": null,
+      "upstream_path": null,
+      "whole_source_path": ".local/service-rag-calibration-v2/processed/cal-v2-s1.txt",
+      "whole_source_codepoints": 4044,
+      "ai_authored": true,
+      "fictional": true,
+      "chunks": [
+        {
+          "source_chunk_id": "cal-v2-s1::chunk::0",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "page": null,
+          "text_sha256": "013b859f7472b01018970bb5f6b5120db5d6b64d477f7be71b329aac0c43c244"
+        },
+        {
+          "source_chunk_id": "cal-v2-s1::chunk::1",
+          "ordinal": 1,
+          "start_offset": 847,
+          "end_offset": 1842,
+          "page": null,
+          "text_sha256": "801aa7a60e4384a43971a8346f5700d67bea61e52b21037da82acc99b8e74c7a"
+        },
+        {
+          "source_chunk_id": "cal-v2-s1::chunk::2",
+          "ordinal": 2,
+          "start_offset": 1692,
+          "end_offset": 2686,
+          "page": null,
+          "text_sha256": "4a7658a008f555dc405e0e803f72f0b4d36c46da953b0d00741eb90ad44f58ba"
+        },
+        {
+          "source_chunk_id": "cal-v2-s1::chunk::3",
+          "ordinal": 3,
+          "start_offset": 2536,
+          "end_offset": 3533,
+          "page": null,
+          "text_sha256": "e3e5fd4efeb6d4bb254cd62fce1b33be691dea0f17eb5d99f10cc1f14e03b513"
+        },
+        {
+          "source_chunk_id": "cal-v2-s1::chunk::4",
+          "ordinal": 4,
+          "start_offset": 3383,
+          "end_offset": 4044,
+          "page": null,
+          "text_sha256": "0adf684f6438bd5794ea1458851ce91332a69439185b62ceb01754ca4cc49db2"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-s2",
+      "logical_revision_id": "sha256:eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "source_sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic",
+      "document_kind": "meeting",
+      "meeting_date": "2026-03-04",
+      "upstream_repository": null,
+      "upstream_revision": null,
+      "upstream_path": null,
+      "whole_source_path": ".local/service-rag-calibration-v2/processed/cal-v2-s2.txt",
+      "whole_source_codepoints": 1534,
+      "ai_authored": true,
+      "fictional": true,
+      "chunks": [
+        {
+          "source_chunk_id": "cal-v2-s2::chunk::0",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 998,
+          "page": null,
+          "text_sha256": "d46b4c9315532ffaf16c9a5d1af6067ee6aba4efcb4f4c6d920b320cde721dbc"
+        },
+        {
+          "source_chunk_id": "cal-v2-s2::chunk::1",
+          "ordinal": 1,
+          "start_offset": 848,
+          "end_offset": 1534,
+          "page": null,
+          "text_sha256": "e81815ecc53bad0e936fb33704bf7d38d3ef53ab7e98a40bfb4260beff1621ed"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-s3",
+      "logical_revision_id": "sha256:eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic",
+      "document_kind": "meeting",
+      "meeting_date": "2026-03-11",
+      "upstream_repository": null,
+      "upstream_revision": null,
+      "upstream_path": null,
+      "whole_source_path": ".local/service-rag-calibration-v2/processed/cal-v2-s3.txt",
+      "whole_source_codepoints": 3565,
+      "ai_authored": true,
+      "fictional": true,
+      "chunks": [
+        {
+          "source_chunk_id": "cal-v2-s3::chunk::0",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 995,
+          "page": null,
+          "text_sha256": "301d1eccee7bb5e2b7e482ff0e663e21012d02814b127d1485335490bc0921f7"
+        },
+        {
+          "source_chunk_id": "cal-v2-s3::chunk::1",
+          "ordinal": 1,
+          "start_offset": 845,
+          "end_offset": 1835,
+          "page": null,
+          "text_sha256": "89cf26a8a077925ea12e0ff3aeb9a33c1e5a7a171ffc4d5e1e3fb0aa59f6028f"
+        },
+        {
+          "source_chunk_id": "cal-v2-s3::chunk::2",
+          "ordinal": 2,
+          "start_offset": 1685,
+          "end_offset": 2683,
+          "page": null,
+          "text_sha256": "f24826eef21187291ea22400d615cf4fa87f8a7e4fe1f5a7924ccde54f23dce3"
+        },
+        {
+          "source_chunk_id": "cal-v2-s3::chunk::3",
+          "ordinal": 3,
+          "start_offset": 2533,
+          "end_offset": 3532,
+          "page": null,
+          "text_sha256": "49c428036db5329e78588dd21b5f1f91b2146854126f9b1307179af8be1a1124"
+        },
+        {
+          "source_chunk_id": "cal-v2-s3::chunk::4",
+          "ordinal": 4,
+          "start_offset": 3382,
+          "end_offset": 3565,
+          "page": null,
+          "text_sha256": "3f9f605fb5211cf841bfda98fb1f28bf5d19b6d3f7e6294ebaa7b94e5e128dda"
+        }
+      ]
+    }
+  ],
+  "evidence_catalog": [
+    {
+      "id": "e001",
+      "source_id": "cal-v2-p3",
+      "logical_revision_id": "sha256:8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_start_offset": 340,
+      "source_end_offset": 438,
+      "exact_quote": "The focus of the GitOps WG is to clearly define a vendor-neutral, principle-led meaning of GitOps.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p3::chunk::0",
+              "chunk_ordinal": 0,
+              "chunk_sha256": "24fb940804bf9b9086f947459fb9bf6ae1beecefe908f3cc65dd8b09bce6376e",
+              "chunk_start_offset": 0,
+              "chunk_end_offset": 992,
+              "source_start_offset": 340,
+              "source_end_offset": 438,
+              "chunk_local_start_offset": 340,
+              "chunk_local_end_offset": 438,
+              "exact_quote": "The focus of the GitOps WG is to clearly define a vendor-neutral, principle-led meaning of GitOps."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e002",
+      "source_id": "cal-v2-p3",
+      "logical_revision_id": "sha256:8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_start_offset": 439,
+      "source_end_offset": 539,
+      "exact_quote": "This will establish a foundation for interoperability between tools, conformance, and certification.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p3::chunk::0",
+              "chunk_ordinal": 0,
+              "chunk_sha256": "24fb940804bf9b9086f947459fb9bf6ae1beecefe908f3cc65dd8b09bce6376e",
+              "chunk_start_offset": 0,
+              "chunk_end_offset": 992,
+              "source_start_offset": 439,
+              "source_end_offset": 539,
+              "chunk_local_start_offset": 439,
+              "chunk_local_end_offset": 539,
+              "exact_quote": "This will establish a foundation for interoperability between tools, conformance, and certification."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e003",
+      "source_id": "cal-v2-p3",
+      "logical_revision_id": "sha256:8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_start_offset": 540,
+      "source_end_offset": 662,
+      "exact_quote": "Lasting programs, documents, and code are planned to live within the [OpenGitOps](https://github.com/open-gitops) project.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p3::chunk::0",
+              "chunk_ordinal": 0,
+              "chunk_sha256": "24fb940804bf9b9086f947459fb9bf6ae1beecefe908f3cc65dd8b09bce6376e",
+              "chunk_start_offset": 0,
+              "chunk_end_offset": 992,
+              "source_start_offset": 540,
+              "source_end_offset": 662,
+              "chunk_local_start_offset": 540,
+              "chunk_local_end_offset": 662,
+              "exact_quote": "Lasting programs, documents, and code are planned to live within the [OpenGitOps](https://github.com/open-gitops) project."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e004",
+      "source_id": "cal-v2-p3",
+      "logical_revision_id": "sha256:8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_start_offset": 1149,
+      "source_end_offset": 1390,
+      "exact_quote": "## Non-Goals\n\n- Recommend/endorse specific projects, vendors or approaches to GitOps\n- Exclude/deprecate specific projects, vendors or approaches to GitOps\n- Promote GitOps over other paradigms or methodologies (i.e. no advocacy or branding)",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p3::chunk::1",
+              "chunk_ordinal": 1,
+              "chunk_sha256": "f765e7a02d96a37448bb7f6bdb585ada16a6beec468d7204dfcc074a6bb153fa",
+              "chunk_start_offset": 842,
+              "chunk_end_offset": 1833,
+              "source_start_offset": 1149,
+              "source_end_offset": 1390,
+              "chunk_local_start_offset": 307,
+              "chunk_local_end_offset": 548,
+              "exact_quote": "## Non-Goals\n\n- Recommend/endorse specific projects, vendors or approaches to GitOps\n- Exclude/deprecate specific projects, vendors or approaches to GitOps\n- Promote GitOps over other paradigms or methodologies (i.e. no advocacy or branding)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e005",
+      "source_id": "cal-v2-s2",
+      "logical_revision_id": "sha256:eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "source_sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "source_start_offset": 1158,
+      "source_end_offset": 1270,
+      "exact_quote": "윤서진은 공개 참가자를 여섯 명으로 제한하는 소규모 운영안을 다음 회의에서 검토하자고 했다. 이 숫자는 오늘 확정된 정원이 아니다. S 지점까지 포함하는 두 지점 공개 경로와 참가비도 결정하지 않았다.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s2::chunk::1",
+              "chunk_ordinal": 1,
+              "chunk_sha256": "e81815ecc53bad0e936fb33704bf7d38d3ef53ab7e98a40bfb4260beff1621ed",
+              "chunk_start_offset": 848,
+              "chunk_end_offset": 1534,
+              "source_start_offset": 1158,
+              "source_end_offset": 1270,
+              "chunk_local_start_offset": 310,
+              "chunk_local_end_offset": 422,
+              "exact_quote": "윤서진은 공개 참가자를 여섯 명으로 제한하는 소규모 운영안을 다음 회의에서 검토하자고 했다. 이 숫자는 오늘 확정된 정원이 아니다. S 지점까지 포함하는 두 지점 공개 경로와 참가비도 결정하지 않았다."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e006",
+      "source_id": "cal-v2-s2",
+      "logical_revision_id": "sha256:eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "source_sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "source_start_offset": 1427,
+      "source_end_offset": 1533,
+      "exact_quote": "의장은 이번 회의에서 장비 구매 한도를 승인하지 않았다고 확인했다. 예행 후 실제 기록을 보고 필요한 물품과 공개 행사 날짜를 정하기로 하고, 다음 회의를 3월 11일 18:30으로 잡았다.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s2::chunk::1",
+              "chunk_ordinal": 1,
+              "chunk_sha256": "e81815ecc53bad0e936fb33704bf7d38d3ef53ab7e98a40bfb4260beff1621ed",
+              "chunk_start_offset": 848,
+              "chunk_end_offset": 1534,
+              "source_start_offset": 1427,
+              "source_end_offset": 1533,
+              "chunk_local_start_offset": 579,
+              "chunk_local_end_offset": 685,
+              "exact_quote": "의장은 이번 회의에서 장비 구매 한도를 승인하지 않았다고 확인했다. 예행 후 실제 기록을 보고 필요한 물품과 공개 행사 날짜를 정하기로 하고, 다음 회의를 3월 11일 18:30으로 잡았다."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e007",
+      "source_id": "cal-v2-s3",
+      "logical_revision_id": "sha256:eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_start_offset": 1763,
+      "source_end_offset": 1936,
+      "exact_quote": "The group cap for this session is six participants, excluding the three volunteers. The ordinary eight-participant ceiling in the guide remains unchanged for other sessions.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s3::chunk::2",
+              "chunk_ordinal": 2,
+              "chunk_sha256": "f24826eef21187291ea22400d615cf4fa87f8a7e4fe1f5a7924ccde54f23dce3",
+              "chunk_start_offset": 1685,
+              "chunk_end_offset": 2683,
+              "source_start_offset": 1763,
+              "source_end_offset": 1936,
+              "chunk_local_start_offset": 78,
+              "chunk_local_end_offset": 251,
+              "exact_quote": "The group cap for this session is six participants, excluding the three volunteers. The ordinary eight-participant ceiling in the guide remains unchanged for other sessions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e008",
+      "source_id": "cal-v2-s3",
+      "logical_revision_id": "sha256:eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_start_offset": 2358,
+      "source_end_offset": 2538,
+      "exact_quote": "The workshop approved up to 180,000 won for two replacement microphone covers and one tripod clamp, with receipts required. This is a purchase ceiling, not an amount already spent.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s3::chunk::2",
+              "chunk_ordinal": 2,
+              "chunk_sha256": "f24826eef21187291ea22400d615cf4fa87f8a7e4fe1f5a7924ccde54f23dce3",
+              "chunk_start_offset": 1685,
+              "chunk_end_offset": 2683,
+              "source_start_offset": 2358,
+              "source_end_offset": 2538,
+              "chunk_local_start_offset": 673,
+              "chunk_local_end_offset": 853,
+              "exact_quote": "The workshop approved up to 180,000 won for two replacement microphone covers and one tripod clamp, with receipts required. This is a purchase ceiling, not an amount already spent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e009",
+      "source_id": "cal-v2-s3",
+      "logical_revision_id": "sha256:eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_start_offset": 1557,
+      "source_end_offset": 1762,
+      "exact_quote": "The chair gave written approval in these minutes for a Station R public walk on 22 March, subject to Oh completing a fresh route check that morning and the field guide's weather conditions being satisfied.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s3::chunk::1",
+              "chunk_ordinal": 1,
+              "chunk_sha256": "89cf26a8a077925ea12e0ff3aeb9a33c1e5a7a171ffc4d5e1e3fb0aa59f6028f",
+              "chunk_start_offset": 845,
+              "chunk_end_offset": 1835,
+              "source_start_offset": 1557,
+              "source_end_offset": 1762,
+              "chunk_local_start_offset": 712,
+              "chunk_local_end_offset": 917,
+              "exact_quote": "The chair gave written approval in these minutes for a Station R public walk on 22 March, subject to Oh completing a fresh route check that morning and the field guide's weather conditions being satisfied."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e010",
+      "source_id": "cal-v2-s1",
+      "logical_revision_id": "sha256:413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "source_sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "source_start_offset": 1826,
+      "source_end_offset": 2125,
+      "exact_quote": "The activity is cancelled at a station if the measured wind reaches six metres per second, rain reaches the recorder enclosure, or the ranger closes the path. Lower gain is not a substitute for cancelling in those conditions. The operator records a cancellation without creating an empty audio file.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s1::chunk::2",
+              "chunk_ordinal": 2,
+              "chunk_sha256": "4a7658a008f555dc405e0e803f72f0b4d36c46da953b0d00741eb90ad44f58ba",
+              "chunk_start_offset": 1692,
+              "chunk_end_offset": 2686,
+              "source_start_offset": 1826,
+              "source_end_offset": 2125,
+              "chunk_local_start_offset": 134,
+              "chunk_local_end_offset": 433,
+              "exact_quote": "The activity is cancelled at a station if the measured wind reaches six metres per second, rain reaches the recorder enclosure, or the ranger closes the path. Lower gain is not a substitute for cancelling in those conditions. The operator records a cancellation without creating an empty audio file."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e011",
+      "source_id": "cal-v2-s3",
+      "logical_revision_id": "sha256:eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_start_offset": 2656,
+      "source_end_offset": 2954,
+      "exact_quote": "The ranger's signed access note for Station S has still not arrived. Station S remains outside the public route. If the note arrives later, the coordinator must bring a separate route proposal for chair approval; today's approval is only for Station R. Nobody assigned a date for a Station S event.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s3::chunk::3",
+              "chunk_ordinal": 3,
+              "chunk_sha256": "49c428036db5329e78588dd21b5f1f91b2146854126f9b1307179af8be1a1124",
+              "chunk_start_offset": 2533,
+              "chunk_end_offset": 3532,
+              "source_start_offset": 2656,
+              "source_end_offset": 2954,
+              "chunk_local_start_offset": 123,
+              "chunk_local_end_offset": 421,
+              "exact_quote": "The ranger's signed access note for Station S has still not arrived. Station S remains outside the public route. If the note arrives later, the coordinator must bring a separate route proposal for chair approval; today's approval is only for Station R. Nobody assigned a date for a Station S event."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e012",
+      "source_id": "cal-v2-s1",
+      "logical_revision_id": "sha256:413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "source_sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "source_start_offset": 2480,
+      "source_end_offset": 2721,
+      "exact_quote": "Participants who cannot use the boardwalk may join the indoor listening session using the same labelled recordings and printed field cards. An indoor session is an access option, not evidence that a closed outdoor route has become available.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s1::chunk::2",
+              "chunk_ordinal": 2,
+              "chunk_sha256": "4a7658a008f555dc405e0e803f72f0b4d36c46da953b0d00741eb90ad44f58ba",
+              "chunk_start_offset": 1692,
+              "chunk_end_offset": 2686,
+              "source_start_offset": 2480,
+              "source_end_offset": 2686,
+              "chunk_local_start_offset": 788,
+              "chunk_local_end_offset": 994,
+              "exact_quote": "Participants who cannot use the boardwalk may join the indoor listening session using the same labelled recordings and printed field cards. An indoor session is an access option, not evidence that a closed "
+            },
+            {
+              "source_chunk_id": "cal-v2-s1::chunk::3",
+              "chunk_ordinal": 3,
+              "chunk_sha256": "e3e5fd4efeb6d4bb254cd62fce1b33be691dea0f17eb5d99f10cc1f14e03b513",
+              "chunk_start_offset": 2536,
+              "chunk_end_offset": 3533,
+              "source_start_offset": 2536,
+              "source_end_offset": 2721,
+              "chunk_local_start_offset": 0,
+              "chunk_local_end_offset": 185,
+              "exact_quote": "ndoor listening session using the same labelled recordings and printed field cards. An indoor session is an access option, not evidence that a closed outdoor route has become available."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e013",
+      "source_id": "cal-v2-s3",
+      "logical_revision_id": "sha256:eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "source_start_offset": 2139,
+      "source_end_offset": 2356,
+      "exact_quote": "The alternative indoor listening session will be available in the workshop room, using labelled recordings and printed field cards. Its availability does not waive a route or weather condition for the outdoor session.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-s3::chunk::2",
+              "chunk_ordinal": 2,
+              "chunk_sha256": "f24826eef21187291ea22400d615cf4fa87f8a7e4fe1f5a7924ccde54f23dce3",
+              "chunk_start_offset": 1685,
+              "chunk_end_offset": 2683,
+              "source_start_offset": 2139,
+              "source_end_offset": 2356,
+              "chunk_local_start_offset": 454,
+              "chunk_local_end_offset": 671,
+              "exact_quote": "The alternative indoor listening session will be available in the workshop room, using labelled recordings and printed field cards. Its availability does not waive a route or weather condition for the outdoor session."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e014",
+      "source_id": "cal-v2-p1",
+      "logical_revision_id": "sha256:50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+      "source_sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+      "source_start_offset": 734,
+      "source_end_offset": 1030,
+      "exact_quote": "00:24:28\tSchlomo Schapiro:\t👍to a shorter title like Brice suggested. For me, \"reconciliation\" emphasizes the goal and I start to think that the details of continuous vs. regularly and the remediation details (immediate, eventually) are actually totally irrelevant - on the level of the principles",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p1::chunk::0",
+              "chunk_ordinal": 0,
+              "chunk_sha256": "cef75482d1210176c614778f203bcd96834e00bc51cf0fdcf0c47658445ca84e",
+              "chunk_start_offset": 0,
+              "chunk_end_offset": 1000,
+              "source_start_offset": 734,
+              "source_end_offset": 1000,
+              "chunk_local_start_offset": 734,
+              "chunk_local_end_offset": 1000,
+              "exact_quote": "00:24:28\tSchlomo Schapiro:\t👍to a shorter title like Brice suggested. For me, \"reconciliation\" emphasizes the goal and I start to think that the details of continuous vs. regularly and the remediation details (immediate, eventually) are actually totally irrelevant - "
+            },
+            {
+              "source_chunk_id": "cal-v2-p1::chunk::1",
+              "chunk_ordinal": 1,
+              "chunk_sha256": "5038ac2e67db8bbe41cb95cfc2b53cd7d9be347f4c50d6d704f6f0cdc86a8bdc",
+              "chunk_start_offset": 850,
+              "chunk_end_offset": 1844,
+              "source_start_offset": 850,
+              "source_end_offset": 1030,
+              "chunk_local_start_offset": 0,
+              "chunk_local_end_offset": 180,
+              "exact_quote": "d I start to think that the details of continuous vs. regularly and the remediation details (immediate, eventually) are actually totally irrelevant - on the level of the principles"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e015",
+      "source_id": "cal-v2-p2",
+      "logical_revision_id": "sha256:849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "source_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "source_start_offset": 273,
+      "source_end_offset": 579,
+      "exact_quote": "16:09:03 From Schlomo Schapiro to Everyone : Moshe, I am not sure there is a conflict. The state reconciliation is continuous and the freeze is part of the declared state for me. The mechanism will still continuously check for discrepancies and then DECIDE to not act because the desired state has a freeze",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p2::chunk::0",
+              "chunk_ordinal": 0,
+              "chunk_sha256": "5afea8ab8c75c0833932799f085a7bfcf5bfdf3c455639fcb6109cd349a2e51c",
+              "chunk_start_offset": 0,
+              "chunk_end_offset": 999,
+              "source_start_offset": 273,
+              "source_end_offset": 579,
+              "chunk_local_start_offset": 273,
+              "chunk_local_end_offset": 579,
+              "exact_quote": "16:09:03 From Schlomo Schapiro to Everyone : Moshe, I am not sure there is a conflict. The state reconciliation is continuous and the freeze is part of the declared state for me. The mechanism will still continuously check for discrepancies and then DECIDE to not act because the desired state has a freeze"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e016",
+      "source_id": "cal-v2-p2",
+      "logical_revision_id": "sha256:849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "source_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "source_start_offset": 6052,
+      "source_end_offset": 6454,
+      "exact_quote": "16:52:13 From Christian Hernandez to Everyone : \"The principle of state reconciliation\"\n\n\"Software agents compare a system’s Actual State to its Desired State. If the actual and desired states differ for any reason, actions to reconcile them are initiated.\"\n16:52:34 From Scott - CNCF GitOps Working Group to Everyone : The problem is we did that last week, and nearly EVERYONE found this disagreeable.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p2::chunk::7",
+              "chunk_ordinal": 7,
+              "chunk_sha256": "aa1f5e2040fe1cc6dbf4d435d96bb5fed799bf8ac73a2a66a62b3e13eb36e104",
+              "chunk_start_offset": 5936,
+              "chunk_end_offset": 6932,
+              "source_start_offset": 6052,
+              "source_end_offset": 6454,
+              "chunk_local_start_offset": 116,
+              "chunk_local_end_offset": 518,
+              "exact_quote": "16:52:13 From Christian Hernandez to Everyone : \"The principle of state reconciliation\"\n\n\"Software agents compare a system’s Actual State to its Desired State. If the actual and desired states differ for any reason, actions to reconcile them are initiated.\"\n16:52:34 From Scott - CNCF GitOps Working Group to Everyone : The problem is we did that last week, and nearly EVERYONE found this disagreeable."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e017",
+      "source_id": "cal-v2-p2",
+      "logical_revision_id": "sha256:849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "source_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "source_start_offset": 6514,
+      "source_end_offset": 6853,
+      "exact_quote": "16:53:02 From Schlomo Schapiro to Everyone : +1 for consensus, if we can't reach it then I'd prefer to release a 0.2 version of the principles with a list of topics that lack consensus. The goal would be to release the 98% of good stuff that we already produced and allow further discussions, even by other people, about the disagreements.",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p2::chunk::7",
+              "chunk_ordinal": 7,
+              "chunk_sha256": "aa1f5e2040fe1cc6dbf4d435d96bb5fed799bf8ac73a2a66a62b3e13eb36e104",
+              "chunk_start_offset": 5936,
+              "chunk_end_offset": 6932,
+              "source_start_offset": 6514,
+              "source_end_offset": 6853,
+              "chunk_local_start_offset": 578,
+              "chunk_local_end_offset": 917,
+              "exact_quote": "16:53:02 From Schlomo Schapiro to Everyone : +1 for consensus, if we can't reach it then I'd prefer to release a 0.2 version of the principles with a list of topics that lack consensus. The goal would be to release the 98% of good stuff that we already produced and allow further discussions, even by other people, about the disagreements."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e018",
+      "source_id": "cal-v2-p3",
+      "logical_revision_id": "sha256:8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "source_start_offset": 1392,
+      "source_end_offset": 1475,
+      "exact_quote": "## Work Products (WIP)\n\n- GitOps definition and terminology document: working draft",
+      "chunk_cover_alternatives": [
+        {
+          "all_of": [
+            {
+              "source_chunk_id": "cal-v2-p3::chunk::1",
+              "chunk_ordinal": 1,
+              "chunk_sha256": "f765e7a02d96a37448bb7f6bdb585ada16a6beec468d7204dfcc074a6bb153fa",
+              "chunk_start_offset": 842,
+              "chunk_end_offset": 1833,
+              "source_start_offset": 1392,
+              "source_end_offset": 1475,
+              "chunk_local_start_offset": 550,
+              "chunk_local_end_offset": 633,
+              "exact_quote": "## Work Products (WIP)\n\n- GitOps definition and terminology document: working draft"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "service-rag-cal-01",
+      "language": "ko",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "c01-f1",
+          "statement": "핵심 임무는 벤더 중립적이고 원칙에 기반한 GitOps의 의미를 명확히 정의하는 것이다.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c01-f1-a1",
+              "all_of": [
+                "e001"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c01-f2",
+          "statement": "그 정의는 도구 간 상호운용성, 적합성(conformance), 인증의 기반을 마련한다.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c01-f2-a1",
+              "all_of": [
+                "e002"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c01-f3",
+          "statement": "장기적으로 유지되는 프로그램·문서·코드는 OpenGitOps 프로젝트에 둘 계획이다.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c01-f3-a1",
+              "all_of": [
+                "e003"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c01-f4",
+          "statement": "특정 프로젝트·벤더·접근법을 추천·지지하거나 배제·폐기하는 일, 그리고 다른 패러다임·방법론보다 GitOps를 홍보하는 일은 Non-Goals에 해당한다.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c01-f4-a1",
+              "all_of": [
+                "e004"
+              ]
+            }
+          ]
+        }
+      ],
+      "whole_corpus_review": {
+        "reviewed_source_ids": [
+          "cal-v2-p1",
+          "cal-v2-p2",
+          "cal-v2-p3",
+          "cal-v2-s1",
+          "cal-v2-s2",
+          "cal-v2-s3"
+        ],
+        "review_basis": "All six whole accepted originals, with accepted chunk coordinates; no retrieved context or other corpus.",
+        "alternative_scope": "All semantically sufficient explicit witnesses within this whole corpus, with minimal witness sets represented below; additional irrelevant or redundant spans are not separate alternatives."
+      },
+      "interpretation_boundaries": [
+        "계획된 산출물 귀속과 이미 완료된 이전을 구분한다.",
+        "Non-Goals 제목을 함께 읽어 목록을 긍정적 목표로 뒤집지 않는다.",
+        "일반 헌장에 명시된 내용이며, 채팅의 개별 의견을 헌장 개정으로 삼지 않는다."
+      ],
+      "forbidden_inferences": [
+        "OpenGitOps로 이미 이전을 완료했다고 단정",
+        "특정 벤더나 도구를 공식 권장한다고 단정",
+        "GitOps가 다른 방법론보다 우월하다는 홍보를 공식 임무로 제시"
+      ],
+      "ai_authored": true,
+      "independent_review_status": "pending",
+      "sufficient_evidence": {
+        "operator": "AND_over_required_facts_OR_over_each_facts_evidence_alternatives",
+        "fact_alternative_combination_count": 1,
+        "minimal_source_document_sets": [
+          [
+            "cal-v2-p3"
+          ]
+        ],
+        "all_sufficient_alternatives_require_multiple_documents": false,
+        "redundant_supersets": "Accepted when every required fact is supported; not separately enumerated.",
+        "chunk_coverage": "Each anchor accepts ANY listed minimal chunk cover; every segment in that selected cover is required. Fact witnesses may be combined independently."
+      }
+    },
+    {
+      "id": "service-rag-cal-02",
+      "language": "en",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "c02-f1",
+          "statement": "On 4 March, limiting the public group to six was proposed for consideration at the next meeting; it was explicitly not a fixed capacity that day.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c02-f1-a1",
+              "all_of": [
+                "e005"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c02-f2",
+          "statement": "The 4 March meeting did not approve an equipment purchasing ceiling; needs were to be considered after the rehearsal.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c02-f2-a1",
+              "all_of": [
+                "e006"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c02-f3",
+          "statement": "The 11 March decision caps the first 22 March public session at six participants, excluding three volunteers; the ordinary eight-participant ceiling remains unchanged for other sessions.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c02-f3-a1",
+              "all_of": [
+                "e009",
+                "e007"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c02-f4",
+          "statement": "On 11 March the workshop authorized up to 180,000 won for two replacement microphone covers and one tripod clamp, with receipts required; this is a ceiling, not money already spent.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c02-f4-a1",
+              "all_of": [
+                "e008"
+              ]
+            }
+          ]
+        }
+      ],
+      "whole_corpus_review": {
+        "reviewed_source_ids": [
+          "cal-v2-p1",
+          "cal-v2-p2",
+          "cal-v2-p3",
+          "cal-v2-s1",
+          "cal-v2-s2",
+          "cal-v2-s3"
+        ],
+        "review_basis": "All six whole accepted originals, with accepted chunk coordinates; no retrieved context or other corpus.",
+        "alternative_scope": "All semantically sufficient explicit witnesses within this whole corpus, with minimal witness sets represented below; additional irrelevant or redundant spans are not separate alternatives."
+      },
+      "interpretation_boundaries": [
+        "The two meeting dates supply different decision states; the later minutes do not make the earlier proposal an earlier approval.",
+        "Participant counts exclude volunteers; the special cap is session-specific.",
+        "The earlier purchasing non-approval is not contradicted by a later approval."
+      ],
+      "forbidden_inferences": [
+        "Six was already approved on 4 March",
+        "Six permanently replaces the guide ceiling for every session",
+        "Six includes the three volunteers",
+        "180,000 won was actually paid",
+        "The purchase approval automatically proves a supplier or receipt number"
+      ],
+      "ai_authored": true,
+      "independent_review_status": "pending",
+      "sufficient_evidence": {
+        "operator": "AND_over_required_facts_OR_over_each_facts_evidence_alternatives",
+        "fact_alternative_combination_count": 1,
+        "minimal_source_document_sets": [
+          [
+            "cal-v2-s2",
+            "cal-v2-s3"
+          ]
+        ],
+        "all_sufficient_alternatives_require_multiple_documents": true,
+        "redundant_supersets": "Accepted when every required fact is supported; not separately enumerated.",
+        "chunk_coverage": "Each anchor accepts ANY listed minimal chunk cover; every segment in that selected cover is required. Fact witnesses may be combined independently."
+      }
+    },
+    {
+      "id": "service-rag-cal-03",
+      "language": "ko",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "c03-f1",
+          "statement": "3월 11일 회의록의 의장 서면 승인은 3월 22일 R 지점 공개 걷기에 한하며, 오가람의 당일 새 동선 점검과 안내서의 날씨 조건 충족을 전제로 한다.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c03-f1-a1",
+              "all_of": [
+                "e009"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c03-f2",
+          "statement": "측정 바람이 초속 6미터에 도달하거나 비가 녹음기 외함에 닿거나 관리인이 길을 닫으면 해당 지점 활동을 취소한다. 증폭값을 낮추어 강행할 수 없으며 취소 기록을 남기고 빈 오디오 파일을 만들지 않는다.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c03-f2-a1",
+              "all_of": [
+                "e010"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c03-f3",
+          "statement": "3월 11일에도 S 지점의 서명된 출입 확인서가 도착하지 않아 공개 경로에서 제외한다. 나중에 도착해도 조정자가 별도 경로안을 의장 승인에 올려야 하며 R 승인이 S 승인으로 이전되지는 않는다.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c03-f3-a1",
+              "all_of": [
+                "e011"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c03-f4",
+          "statement": "실내 듣기는 표기된 녹음과 인쇄된 현장 카드를 사용하는 대안이며, 실내 대안이 가능하다는 사실이 야외 동선 조건을 면제하지는 않는다.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c03-f4-a1",
+              "all_of": [
+                "e012"
+              ]
+            },
+            {
+              "id": "c03-f4-a2",
+              "all_of": [
+                "e013"
+              ]
+            }
+          ]
+        }
+      ],
+      "whole_corpus_review": {
+        "reviewed_source_ids": [
+          "cal-v2-p1",
+          "cal-v2-p2",
+          "cal-v2-p3",
+          "cal-v2-s1",
+          "cal-v2-s2",
+          "cal-v2-s3"
+        ],
+        "review_basis": "All six whole accepted originals, with accepted chunk coordinates; no retrieved context or other corpus.",
+        "alternative_scope": "All semantically sufficient explicit witnesses within this whole corpus, with minimal witness sets represented below; additional irrelevant or redundant spans are not separate alternatives."
+      },
+      "interpretation_boundaries": [
+        "운영 안내서와 특정 날짜의 조건부 승인을 함께 적용한다.",
+        "날씨 수치는 그 이상에서 취소되는 도달 기준이며, 초과할 때만 취소하는 것으로 바꾸지 않는다.",
+        "실내 대안에 관한 두 원문 위치 모두 충분한 대안으로 인정한다.",
+        "실내 대안의 존재는 야외 날씨 조건도 면제하지 않는다.",
+        "확인서가 도착할 가능성을 현재의 S 승인으로 바꾸지 않는다."
+      ],
+      "forbidden_inferences": [
+        "3월 22일 행사가 조건 없이 확정되었다",
+        "풍속이 정확히 6 m/s인 경우 진행할 수 있다",
+        "낮은 gain으로 취소 조건을 대체할 수 있다",
+        "실내 세션이 야외 동선 또는 날씨 조건을 면제한다",
+        "S 확인서만 도착하면 별도 승인 없이 자동 개방한다",
+        "취소한 녹음을 빈 파일로 채운다"
+      ],
+      "ai_authored": true,
+      "independent_review_status": "pending",
+      "sufficient_evidence": {
+        "operator": "AND_over_required_facts_OR_over_each_facts_evidence_alternatives",
+        "fact_alternative_combination_count": 2,
+        "minimal_source_document_sets": [
+          [
+            "cal-v2-s1",
+            "cal-v2-s3"
+          ]
+        ],
+        "all_sufficient_alternatives_require_multiple_documents": true,
+        "redundant_supersets": "Accepted when every required fact is supported; not separately enumerated.",
+        "chunk_coverage": "Each anchor accepts ANY listed minimal chunk cover; every segment in that selected cover is required. Fact witnesses may be combined independently."
+      }
+    },
+    {
+      "id": "service-rag-cal-04",
+      "language": "en",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "c04-f1",
+          "statement": "On 5 April, Schlomo supported a shorter title like Brice suggested, saying reconciliation expresses the goal and that continuous-versus-regular and immediate-versus-eventual remediation details are irrelevant at the principles level.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c04-f1-a1",
+              "all_of": [
+                "e014"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c04-f2",
+          "statement": "On 14 April, Schlomo explained that a freeze can be part of the declared desired state: the mechanism can continuously check discrepancies and decide not to act because of that freeze.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c04-f2-a1",
+              "all_of": [
+                "e015"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c04-f3",
+          "statement": "When the shorter reconciliation wording was posted on 14 April, Scott objected that it had been tried the previous week and nearly everyone had found it disagreeable. This is his reported objection, not a counted vote.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c04-f3-a1",
+              "all_of": [
+                "e016"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c04-f4",
+          "statement": "Schlomo proposed that, if consensus could not be reached, a 0.2 release could include a list of topics lacking consensus so the already-produced work could be released while discussion continued. This was a conditional proposal, not a recorded release approval.",
+          "evidence_state": "present",
+          "evidence_alternatives": [
+            {
+              "id": "c04-f4-a1",
+              "all_of": [
+                "e017"
+              ]
+            }
+          ]
+        }
+      ],
+      "whole_corpus_review": {
+        "reviewed_source_ids": [
+          "cal-v2-p1",
+          "cal-v2-p2",
+          "cal-v2-p3",
+          "cal-v2-s1",
+          "cal-v2-s2",
+          "cal-v2-s3"
+        ],
+        "review_basis": "All six whole accepted originals, with accepted chunk coordinates; no retrieved context or other corpus.",
+        "alternative_scope": "All semantically sufficient explicit witnesses within this whole corpus, with minimal witness sets represented below; additional irrelevant or redundant spans are not separate alternatives."
+      },
+      "interpretation_boundaries": [
+        "Do not silently resolve the tension between support for the shorter title and the later objection. Attribute these remarks to their speakers and dates.",
+        "The chat captures remarks, not every spoken statement or a formal voting transcript.",
+        "A later date or a +1 is not by itself a final decision. No final approval or official release date is recorded anywhere in the allowed corpus.",
+        "Schlomo-attributed facts require his recorded comments; related comments by other speakers can corroborate but cannot substitute for attribution."
+      ],
+      "forbidden_inferences": [
+        "The shorter title achieved a formal unanimous vote",
+        "Scott provided a numerical vote tally",
+        "Continuous reconciliation necessarily means acting during a freeze",
+        "0.2 was approved or released on 14 April",
+        "The available chat proves no decision could ever have occurred outside this corpus"
+      ],
+      "ai_authored": true,
+      "independent_review_status": "pending",
+      "sufficient_evidence": {
+        "operator": "AND_over_required_facts_OR_over_each_facts_evidence_alternatives",
+        "fact_alternative_combination_count": 1,
+        "minimal_source_document_sets": [
+          [
+            "cal-v2-p1",
+            "cal-v2-p2"
+          ]
+        ],
+        "all_sufficient_alternatives_require_multiple_documents": true,
+        "redundant_supersets": "Accepted when every required fact is supported; not separately enumerated.",
+        "chunk_coverage": "Each anchor accepts ANY listed minimal chunk cover; every segment in that selected cover is required. Fact witnesses may be combined independently."
+      }
+    },
+    {
+      "id": "service-rag-cal-05",
+      "language": "ko",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "c05-f1",
+          "statement": "4월 14일에 최종 승인된 원칙 문서의 버전",
+          "evidence_state": "absent",
+          "evidence_alternatives": [],
+          "absence_reason": "0.2는 합의에 이르지 못하면 내놓고 싶다는 조건부 제안에만 등장한다. 최종 승인된 버전으로 확인할 수 없다.",
+          "reviewed_source_ids": [
+            "cal-v2-p1",
+            "cal-v2-p2",
+            "cal-v2-p3",
+            "cal-v2-s1",
+            "cal-v2-s2",
+            "cal-v2-s3"
+          ]
+        },
+        {
+          "id": "c05-f2",
+          "statement": "그 최종 승인을 확정한 표결 결과",
+          "evidence_state": "absent",
+          "evidence_alternatives": [],
+          "absence_reason": "채팅에 동의 표현과 이견 보고는 있지만 정식 표결·찬반 집계·승인 결과가 없고 다른 허용 원문도 이를 보완하지 않는다.",
+          "reviewed_source_ids": [
+            "cal-v2-p1",
+            "cal-v2-p2",
+            "cal-v2-p3",
+            "cal-v2-s1",
+            "cal-v2-s2",
+            "cal-v2-s3"
+          ]
+        },
+        {
+          "id": "c05-f3",
+          "statement": "그 승인 문서의 공식 공개일",
+          "evidence_state": "absent",
+          "evidence_alternatives": [],
+          "absence_reason": "회의 날짜와 채팅 시각은 있지만 해당 문서의 공식 공개일은 없다. 버전 제안과 미래 공개 의향은 공개 사실이나 날짜가 아니다.",
+          "reviewed_source_ids": [
+            "cal-v2-p1",
+            "cal-v2-p2",
+            "cal-v2-p3",
+            "cal-v2-s1",
+            "cal-v2-s2",
+            "cal-v2-s3"
+          ]
+        }
+      ],
+      "whole_corpus_review": {
+        "reviewed_source_ids": [
+          "cal-v2-p1",
+          "cal-v2-p2",
+          "cal-v2-p3",
+          "cal-v2-s1",
+          "cal-v2-s2",
+          "cal-v2-s3"
+        ],
+        "review_basis": "All six whole accepted originals, with accepted chunk coordinates; no retrieved context or other corpus.",
+        "alternative_scope": "All semantically sufficient explicit witnesses within this whole corpus, with minimal witness sets represented below; additional irrelevant or redundant spans are not separate alternatives."
+      },
+      "interpretation_boundaries": [
+        "세 요청 사실 모두 허용 원문에서 확정할 수 없으므로 보류한다.",
+        "제안의 존재를 설명할 수는 있지만 이를 요청한 최종 버전·표결·공개일의 대체 답으로 채우지 않는다.",
+        "정보 부재는 이 동결 corpus 안에서의 부재이며 외부에서 그런 사건이 없었다는 뜻은 아니다."
+      ],
+      "forbidden_inferences": [
+        "0.2 제안을 최종 승인 버전으로 제시",
+        "+1 또는 nearly EVERYONE을 공식 표결 결과로 변환",
+        "4월 14일이나 마지막 채팅 시각을 공식 공개일로 추정",
+        "다른 링크의 미열람 내용으로 빈 근거를 보완"
+      ],
+      "ai_authored": true,
+      "independent_review_status": "pending",
+      "unanswerable_reason": "The full accepted corpus does not establish any of the three requested finalized approval/release facts. Partial discussion evidence is not a sufficient evidence alternative for those missing facts.",
+      "near_miss_evidence": [
+        {
+          "anchor_ids": [
+            "e017"
+          ],
+          "why_insufficient": "Conditional version proposal; no approval or release date."
+        },
+        {
+          "anchor_ids": [
+            "e016"
+          ],
+          "why_insufficient": "Posted wording and reported disagreement; no formal vote tally."
+        },
+        {
+          "anchor_ids": [
+            "e018"
+          ],
+          "why_insufficient": "Charter lists WIP and a working draft, without establishing the requested 14 April final approval."
+        }
+      ],
+      "sufficient_evidence": {
+        "operator": "unavailable",
+        "whole_answer_alternatives": [],
+        "minimal_source_document_sets": [],
+        "all_sufficient_alternatives_require_multiple_documents": null
+      }
+    },
+    {
+      "id": "service-rag-cal-06",
+      "language": "en",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "c06-f1",
+          "statement": "The exact amount already paid as of the 11 March meeting",
+          "evidence_state": "absent",
+          "evidence_alternatives": [],
+          "absence_reason": "The minutes expressly distinguish the 180,000-won purchase ceiling from an amount already spent. No actual payment total is reported elsewhere in the allowed corpus.",
+          "reviewed_source_ids": [
+            "cal-v2-p1",
+            "cal-v2-p2",
+            "cal-v2-p3",
+            "cal-v2-s1",
+            "cal-v2-s2",
+            "cal-v2-s3"
+          ]
+        },
+        {
+          "id": "c06-f2",
+          "statement": "The supplier that received payment",
+          "evidence_state": "absent",
+          "evidence_alternatives": [],
+          "absence_reason": "No supplier or payee is named. Named workshop volunteers are not supplier identities.",
+          "reviewed_source_ids": [
+            "cal-v2-p1",
+            "cal-v2-p2",
+            "cal-v2-p3",
+            "cal-v2-s1",
+            "cal-v2-s2",
+            "cal-v2-s3"
+          ]
+        },
+        {
+          "id": "c06-f3",
+          "statement": "The receipt identifier for that payment",
+          "evidence_state": "absent",
+          "evidence_alternatives": [],
+          "absence_reason": "Receipts are required, but no actual receipt or receipt identifier appears in any allowed source.",
+          "reviewed_source_ids": [
+            "cal-v2-p1",
+            "cal-v2-p2",
+            "cal-v2-p3",
+            "cal-v2-s1",
+            "cal-v2-s2",
+            "cal-v2-s3"
+          ]
+        }
+      ],
+      "whole_corpus_review": {
+        "reviewed_source_ids": [
+          "cal-v2-p1",
+          "cal-v2-p2",
+          "cal-v2-p3",
+          "cal-v2-s1",
+          "cal-v2-s2",
+          "cal-v2-s3"
+        ],
+        "review_basis": "All six whole accepted originals, with accepted chunk coordinates; no retrieved context or other corpus.",
+        "alternative_scope": "All semantically sufficient explicit witnesses within this whole corpus, with minimal witness sets represented below; additional irrelevant or redundant spans are not separate alternatives."
+      },
+      "interpretation_boundaries": [
+        "Abstain from the three historical payment details. The approval ceiling can be explained only as a limit, not as an actual transaction.",
+        "Not knowing the paid amount does not establish that the amount paid was zero.",
+        "Requiring receipts does not prove that a receipt has been issued."
+      ],
+      "forbidden_inferences": [
+        "Treat the approved ceiling as actual spending",
+        "Invent a supplier from a volunteer name or item description",
+        "Invent a receipt identifier from a date or document identifier",
+        "Assert no purchase ever occurred or that the amount paid was zero"
+      ],
+      "ai_authored": true,
+      "independent_review_status": "pending",
+      "unanswerable_reason": "The corpus supplies a purchase authorization and a receipt requirement, but no completed-payment amount, supplier, or receipt identifier.",
+      "near_miss_evidence": [
+        {
+          "anchor_ids": [
+            "e008"
+          ],
+          "why_insufficient": "Authorization ceiling and required receipts do not establish any of the requested completed-transaction facts."
+        }
+      ],
+      "sufficient_evidence": {
+        "operator": "unavailable",
+        "whole_answer_alternatives": [],
+        "minimal_source_document_sets": [],
+        "all_sufficient_alternatives_require_multiple_documents": null
+      }
+    }
+  ],
+  "review_limitations": [
+    "Author completeness assessment is a draft awaiting the registered independent reviewer.",
+    "No human review or final-answer judgment is claimed.",
+    "Source author and item author are the same actor, excluded from independent final answer judging.",
+    "No retrieval, tokenizer, inference, model, or runtime answer was used to select or verify these cases."
+  ]
+}
