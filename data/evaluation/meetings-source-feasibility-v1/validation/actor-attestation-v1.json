@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "actor": "/root/source_feasibility_validation",
+  "split": "validation",
+  "parent_dispatch_head": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+  "accepted_model_request": "gpt-6-astra",
+  "accepted_effort_request": "xhigh",
+  "accepted_fork_request": "none",
+  "runtime_introspection": false,
+  "parent_proof_sha256": "6c3875726ecd1b35d6cc5cc4ff3fae91c9fdf41f642b69a48997dae8e86372c8",
+  "exact_ci_receipt_sha256": "a30c8fab1c39b8d733618982a0cad8bcc14ca50edb863744a6ad444e97d80460",
+  "proof_files": 80,
+  "frozen_bindings": 77,
+  "exposure": "Provided project/system memory summaries and parent aggregate metadata; safe design, protocol, registration, exclusions, proof and exact CI receipt only. No prior C7 participation or source/question/oracle/output body reads.",
+  "excluded_final_judge": true,
+  "allowed_outputs": [
+    ".local/meetings-source-feasibility-v1/validation/",
+    "data/evaluation/meetings-source-feasibility-v1/validation/"
+  ],
+  "body_access_before_reservation": 0,
+  "created_utc": "2026-10-20T06:24:25.3791592Z"
+}

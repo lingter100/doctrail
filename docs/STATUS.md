@@ -1,4 +1,26 @@
 # 진행 상태
+## 2026-10-20 · 실제 서비스 답변 연결 계획 확정
+
+실제 Astra xhigh source_discovery_decision이 [서비스 RAG 계획](MEETINGS-RAG-ACCEPTANCE-PLAN.md)95줄/f3e0820b를 반환했고 부모가 검토했다. 기존 quality adapter의 HTTP 연결, 전체90초 전달, `/analyze` 호환성을 먼저 확인하는 최소 제품 작업이다. 원문 전체를 색인하고 상위5개 권한 청크로 답변하며, 기존 모델·출력·시간 조건과 독립 자료/품질 판정을 유지한다. 새 자료·모델 실행은0이고 구현 배정은 설계 커밋 뒤다.
+
+진행 상황 문서의 지난 자료 탐색 단계를 현재 상태로 바꿨다. 문서·회의 기본 서비스는 구현됐지만 AI 답변 품질과 최종 운영·발표 준비는 미완료다. 실제 전체 경로의 첫 결과 전 확정 완료일·퍼센트를 약속하지 않는다. Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
+## 2026-10-20 · 화면의 두 실제 결함 수정, 자료 탐색은 본문 전 종료
+
+[화면 개선](MEETINGS-VISUAL-ACCEPTANCE.md)은 실제 Java에서 수정 제목 검색과 모바일 작업 정보 숨김을 재현한 뒤3파일로 고쳤다. 기존 흐름1개와 신규 회귀1개가 각 실행에서 통과했고 타입·빌드·오프라인 package도 성공했다. 최초 재현 도구 선택자 오류, 신규 검사 선택자 오류, Oracle shim 종료 보고 정정은 그대로 보존했다. 원본d7553c03·공개projectiona8856e7f/복사기록792f1f84, source10/build2·artifact12·screenshot5 hash를 부모가 확인했다. 소유 JVM0·실제LLM0·사용자 검수0이며 정확한 코드 커밋 CI가 남았다.
+
+양쪽 자료 역할은 검색·tree4회씩을 소진하고 모두 반환했다. 원문/license 본문·완전한 family·admission·문항·모델0이다. Cal8/val19 artifact binding을 부모가 검증했다. [결과](MEETINGS-SOURCE-FEASIBILITY-RESULTS.md)는 탐색 예산의 한계이며 의미·크기 부적합이나 모델 실패가 아니다. HEAD 유지 조건을 해제하며 기존 원본/동결77/소비된 공식 진단을 보존한다.
+
+별도 actual Astra xhigh source_discovery_decision의 읽기 권고는 새 방식의 마지막 제한 탐색, 서비스 RAG 중심 전환, 상한 변경의 세 대안을 비교했다. 부모는 실제 업로드·권한 검색·답변 흐름 완성을 우선하는 두 번째를 선택했다. C7 불가능성을 주장하거나 실패를 성공으로 바꾸는 선택이 아니다. 같은 역할이 NEW MEETINGS-RAG-ACCEPTANCE-PLAN 설계만 작성하며 아직 서비스 코드·새 자료·모델 실행은 배정하지 않았다. Goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · 제한된 공개 자료 검토 실행, 화면 점검 병행
+
+설계·역할·제외목록2e398ec95b0cd640a995a02d5f0056ef18b083bf의 push39379534450/PR39379540590 필수3job 모두 통과했다. 기존77개와 설계/등록/제외3개를 current Git/working bytes로 확인했고 CI 뒤80개 working hash도 같았다. Proof6c387572와 CI 관측a30c8fab를 보존했다.
+
+등록된 실제 Astra xhigh source_feasibility_calibration/validation에 별도로 실행을 배정했다. 각자 검색·tree4/repo3/family2/원문6/license2 per repo를 넘지 않으며 부모가 저장소·commit을 먼저 예약한다. 정식 admission·문항·토크나이저·모델 호출은 허용하지 않는다. 부모는 의미 자료 없이 metadata/건수/hash만 받고 HEAD를 유지한다.
+
+별도 meeting_visual_acceptance를 실제 gpt-6-astra/high/fork none으로 수락해 제품 화면만 점검한다. 초기 actual Java 기존 회의 흐름1개가 통과했고 합성 자료·모델 transport로 실행했다. 수정한 회의 제목 검색과 모바일 작업의 담당자/기한 표시를 추가 재현 중이며 아직 결함 확정이나 운영 코드 변경은 없다. 소유 JVM만 사용하고 원문 검토 역할은 Java를 실행하지 않는다. Goal ACTIVE다.
+
 ## 2026-10-20 · 현재 진척도 설명과 제한된 자료 검토 설계
 
 사용자의 진행도·완료 기간 질문에 [현재 상황 표](PROGRESS-OVERVIEW.md)를 추가했다. 문서·회의 관리와 검색/학습의 실제 구현·실험은 있지만 자연어 답변 품질과 최종 전체 검증·포트폴리오 묶음은 미완료다. 근거 없는 완료 퍼센트나 날짜를 제시하지 않는다.

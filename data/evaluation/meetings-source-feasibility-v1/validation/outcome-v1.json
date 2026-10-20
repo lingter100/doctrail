@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "kind": "bounded_public_source_feasibility_safe_outcome",
+  "split": "validation",
+  "actor": "/root/source_feasibility_validation",
+  "parent_dispatch_head": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+  "closed_at_utc": "2026-10-20T06:29:04.7439421Z",
+  "status": "incomplete_due_to_access_or_integrity",
+  "status_basis": "The design groups unresolved license applicability under this code; no actual access error or integrity failure occurred.",
+  "reason_codes": [
+    "license_unresolved",
+    "discovery_budget_exhausted_before_complete_family_reservation"
+  ],
+  "no_complete_witness_within_budget": true,
+  "plausible_witnesses": 0,
+  "counts": {
+    "search_requests": 2,
+    "tree_requests": 2,
+    "search_or_tree_requests": 4,
+    "metadata_entries_by_request": [
+      20,
+      20,
+      20,
+      11
+    ],
+    "selected_repositories": 2,
+    "reserved_repositories": 2,
+    "complete_families_reserved": 0,
+    "source_slots_reserved": 0,
+    "source_bodies_downloaded": 0,
+    "source_bodies_read": 0,
+    "license_body_attempts": 0,
+    "license_bodies_read": 0,
+    "unexpected_snippet_exposures": 0,
+    "network_request_failures": 0,
+    "integrity_failures": 0,
+    "formal_admission_calls": 0,
+    "processor_chunker_parser_formatter_calls": 0,
+    "java_calls": 0,
+    "tokenizer_calls": 0,
+    "native_model_calls": 0,
+    "synthetic_source_creations": 0,
+    "new_helpers": 0,
+    "tests": 0,
+    "git_changes_by_role": 0
+  },
+  "fixed_limits": {
+    "search_or_tree_requests": 4,
+    "repositories": 3,
+    "families": 2,
+    "source_slots": 6,
+    "licenses_per_repository": 2
+  },
+  "repositories": [
+    {
+      "repository": "nodejs/TSC",
+      "commit": "8f60e6808c7ffefab1e5389808eee08325326405",
+      "tree_sha": "71c17e9061d6ae7673e4b3f42c38f49e5c1f133f",
+      "license_status": "unresolved_from_metadata_only",
+      "parent_reserved": true,
+      "license_body_attempts": 0,
+      "source_bodies_read": 0
+    },
+    {
+      "repository": "rust-embedded/wg",
+      "commit": "3491f70af44b5f64cf109f6b7672c2f8ccdd2e1f",
+      "tree_sha": "3da249191d345af7261fc175c27c48efef7b49b9",
+      "license_status": "unresolved_from_metadata_only",
+      "parent_reserved": true,
+      "license_body_attempts": 0,
+      "source_bodies_read": 0,
+      "prior_metadata_exposure_disclosed": true
+    }
+  ],
+  "proof": {
+    "parent_proof_path": ".local/meetings-source-feasibility-parent-v1/pre-dispatch-code-proof-v1.json",
+    "parent_proof_sha256": "6c3875726ecd1b35d6cc5cc4ff3fae91c9fdf41f642b69a48997dae8e86372c8",
+    "design_ci_path": "experiments/results/meetings-source-feasibility-design-ci-v1.json",
+    "design_ci_sha256": "a30c8fab1c39b8d733618982a0cad8bcc14ca50edb863744a6ad444e97d80460",
+    "prior_index_sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa",
+    "inherited13_normalized_match": true,
+    "excluded_union19_unique": true,
+    "historical_gaps": 3,
+    "prebody_proof_received": true,
+    "no_body_stage_executed": true
+  },
+  "selection_limitations": [
+    "Two initial name-only searches were noisy and led to no selected repository; two known official-project seeds were then recorded before their identity requests. Seed order and observations are preserved.",
+    "Only up to20 metadata entries per request were inspected. Search results are not an exhaustive repository census.",
+    "Root API license=null and no established license path in inspected entries do not prove license absence or refusal. No license body was read.",
+    "No source body, title, relation, semantic adequacy, source-size noncompliance or official admission rejection was evaluated.",
+    "The second repository had historical C7 repository-metadata exposure reported by parent after reservation, but was not in the prior19 body repository union; no metadata-pristine claim.",
+    "Prior fingerprint gaps remain; no complete freshness or near-duplicate absence proof.",
+    "Unused repo/family/license/source-slot quotas do not transfer to additional discovery requests."
+  ],
+  "unexecuted_gates": [
+    "license applicability from complete license texts",
+    "complete three-document family reservation",
+    "full-source-only semantic and format observations",
+    "official mechanical admission",
+    "independent source review",
+    "Java/Python parity",
+    "source freeze",
+    "items and prereview",
+    "offline preparation",
+    "model execution and judgment"
+  ],
+  "conclusions_not_supported": [
+    "all public families impossible",
+    "source semantic or size rejection",
+    "license absence",
+    "actual access or integrity failure",
+    "parser defect",
+    "model quality result",
+    "formal C7 admission rejection",
+    "corpus adoption"
+  ],
+  "next_action": "Parent records bounded outcome. No more discovery, body access or source execution under this dispatch.",
+  "phase1_complete": false
+}
