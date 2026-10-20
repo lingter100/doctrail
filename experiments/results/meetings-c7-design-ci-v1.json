@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c7-v1",
+  "head_sha": "c10b75303f68a7a480342748c9868203b1f2ec68",
+  "observed_at": "2026-10-20T04:13:31.862966+00:00",
+  "observer": "/root using actual gh run view and GitHub commit API",
+  "github_author": "lingter100",
+  "github_committer": "lingter100",
+  "runs": [
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-20T04:07:21Z",
+      "databaseId": 39367874811,
+      "event": "push",
+      "headSha": "c10b75303f68a7a480342748c9868203b1f2ec68",
+      "jobs": [
+        {
+          "databaseId": 118448748947,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367874811/job/118448748947",
+          "startedAt": "2026-10-20T04:07:24Z",
+          "completedAt": "2026-10-20T04:10:56Z"
+        },
+        {
+          "databaseId": 118448749222,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367874811/job/118448749222",
+          "startedAt": "2026-10-20T04:07:24Z",
+          "completedAt": "2026-10-20T04:11:40Z"
+        },
+        {
+          "databaseId": 118448749775,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367874811/job/118448749775",
+          "startedAt": "2026-10-20T04:07:24Z",
+          "completedAt": "2026-10-20T04:07:47Z"
+        }
+      ],
+      "status": "completed",
+      "updatedAt": "2026-10-20T04:11:41Z",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39367874811"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-10-20T04:07:25Z",
+      "databaseId": 39367880614,
+      "event": "pull_request",
+      "headSha": "c10b75303f68a7a480342748c9868203b1f2ec68",
+      "jobs": [
+        {
+          "databaseId": 118448767359,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367880614/job/118448767359",
+          "startedAt": "2026-10-20T04:07:28Z",
+          "completedAt": "2026-10-20T04:11:58Z"
+        },
+        {
+          "databaseId": 118448767568,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367880614/job/118448767568",
+          "startedAt": "2026-10-20T04:07:28Z",
+          "completedAt": "2026-10-20T04:07:44Z"
+        },
+        {
+          "databaseId": 118448767617,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367880614/job/118448767617",
+          "startedAt": "2026-10-20T04:07:28Z",
+          "completedAt": "2026-10-20T04:11:22Z"
+        }
+      ],
+      "status": "completed",
+      "updatedAt": "2026-10-20T04:11:59Z",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39367880614"
+    }
+  ],
+  "scope": "C7 preregistered design and prior C6 closure receipt only. NEW8 implementation remains uncommitted and is not covered by this CI.",
+  "design_files": {
+    "docs/MEETINGS-C7-PLAN.md": "4ac59ad5190df5ae13fb23526b91b96e9cf4883a8b00bd7aa6c8f4fb0901af7b",
+    "data/evaluation/meetings-c7-protocol-v1.json": "3a04120b195c583b79e67c38e3d7592f327a549b7c302a88b12d9dd5ab89fee1"
+  },
+  "c7_source_documents": 0,
+  "c7_items": 0,
+  "c7_actual_tokenizer_loads": 0,
+  "c7_native_calls": 0,
+  "phase1_complete": false
+}

@@ -1,4 +1,36 @@
 # 진행 상태
+## 2026-10-20 · C7 구현·최종 검사·독립 검토·77파일 동결 완료
+
+기존 실제 Astra high host_proof_profile이 NEW8 소유권을 반환했다. 최종 NEW4 테스트 모듈+기존 policy/adapter2는244통과·Windows symlink1skip/251.30초, Ruff 통과다. NEW8·재사용2의 검사 전후와 현재 hash가 같고 UTF-8/BOM 없음/LF이며 검사 뒤 변경0이다. 이전50통과와 겹치는 초기 검사들은 합산하지 않고 실패 ledger와 원본 로그로 보존했다. Owned 검사 명령은 모두 종료됐다.
+
+실제 Astra high c7_implementation_review의 최종 독립 영수증10c127ea는8개 exact hash, 초기5지적 해결, 남은 blocker0을 기록한다. 검토자의 테스트·실제 자료·모델 실행0이며 사용자 검수와 구분한다.
+
+부모가 최종 source closure와 봉인 재탐색 일치를 확인해77파일/Python66/import후보1664(부재1598)를 동결했다. Freeze SHA6f829eeb, 공개 구현 영수증de571994다. 기존 code123·닫힌 C6 공개81·이전 freeze6은 불변이다. 다음은 source/freeze 커밋과 정확한 양쪽 필수 CI, 별도 CI 영수증 커밋이며 그 전에는 새 자료 역할을 배정하지 않는다. Source/item/judge·실제 tokenizer/native0, goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · C7 첫4 수선 검토 완료, runner/audit 구현 시작
+
+독립 Astra high 검토자는 prepare be170c43 및 첫4 delta에서 초기 지적의 해결과 남은 blocker0을 보고했다. 원래 source manifest를 exact hash로 묶고 채택 annotation만 허용하는 비교, 전체 raw identity, 최종 Git 증명과 item 의미 파싱 전 admission replay, 실제0-token 관측 보존을 코드로 확인했다. 검토자가 테스트나 실제 자료를 실행한 것은 아니다.
+
+구현자는 초기78통과/1skip/Ruff1, 추가100통과/1실패/1skip/Ruff1, 별도 encode-empty·processor-capture2실패를 보존했다. 수정 중 전체 검사는118통과/1skip/fixture2실패(12.72초)였고, 두 fixture가 기존값을 다시 대입하던 문제를 실제 다른값으로 바꾼 뒤 해당 transition12통과/Ruff0을 기록했다. 서로 겹치는 검사 수를 합산하지 않는다. 마지막 preptest17a8fa5b 변경2줄도 reviewer에게 전달했으며 최종8개 전체 검사는 아직 전이다.
+
+기존 host_proof_profile이 남은 probe/audit+test4 구현을 이어간다. 독립 reviewer는 최종8개를 재검토한 뒤 새 local 영수증1개만 작성한다. 부모의 freeze helper는 준비만 됐고 아직 실행하지 않았다. 실제 C7 자료/tokenizer/native0, goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
+## 2026-10-20 · C7 첫4 구현 검토, 설계 CI 통과
+
+현재 c10b753의 push39367874811/PR39367880614 필수 backend/web/java-service가 모두 성공했다. GitHub author/committer lingter100을 다시 확인했고 별도 설계 CI 영수증76f36896을 작성했다. 이 CI는 아직 미커밋인 NEW8 구현을 검증한 결과가 아니다.
+
+기존 실제 Astra high host_proof_profile이 review/prepare+test4의 초기 합성78통과·Windows symlink1skip(12.08초)와 Ruff import-order1 실패를 보존했다. 자료 전체 admission과 item 전 replay, 같은 prompt 한 번의 계수 및 첫 실패 종료가 구현됐으며 추가 경계 검사는 진행 중이다. 새 c7_implementation_review가 실제 Astra high/fork none으로 수락돼 첫4 코드·합성 검사만 독립적으로 읽는다. 구현 소유권은 원래 담당자에게 유지하며 부모는 중복 테스트를 실행하지 않는다.
+
+첫 실패에서 준비를 닫는 C7 규칙은 실패한 문항의 실측과 미실행 문항을 분리하도록 해석했다. C6의 모든 문항 계수 방식과 차이가 있으며 동결 설계를 바꾸지 않았다. 실제 C7 자료·tokenizer/native·사용자 검수0, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · C7 설계c10b753 커밋, NEW8 구현 배정
+
+설계2·C6 종료 CI 영수증·root 문서7파일을c10b75303f68a7a480342748c9868203b1f2ec68로 커밋·push했다. 설계 JSON의 전체 파일 binding17개와 stage7 exact bytes/whitespace를 확인했다. 새 설계 CI는 아직 확인 전이다.
+
+기존 실제 Astra high host_proof_profile에 새 review/prepare/probe/audit와 각test8개만 구현하도록 별도로 지시했다. 먼저 review/prepare+test4개를 준비해 독립 코드 검토 후 전체 runner/audit를 연결한다. 새 source admission 영수증이 실제 source freeze→item/offline 검증에 강제 연결되도록 요구했다. 실제 tokenizer/native·옛 실험 실행·Git·기존 파일 변경은 금지했고 합성 테스트만 배정했다.
+
+부모는 내용 없는 C7 family registry SHAde869690을 작성했다. 실제 source identity는 모두null이며12문서/cal6·val8 구성뿐이다. .local/c7-implementation-baseline-v1.json SHAb8ff0ec7은 기존 code union123개와 닫힌 C6 공개81개를 별도로 묶고 현재 불변을 확인했다. Registry/root 문서는 아직 다음 구현 커밋 대상이다. Source/item/finaljudge 역할·자료·모델 실행0이며 구현 완료·동결·정확한 CI 뒤에만 새 자료를 시작한다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C7 크기 수용 설계2 완료, 새 구현 준비
 
 기존 실제 Astra xhigh 설계자가 새 계획4ac59ad5·protocol3a04120b 두 파일을 반환했다. Source family 전체의 실제 메시지 직렬화6656bytes +질문 reserve1024 +wrapper allowance512 =8192bytes라는 engineering 예산을 고정했다. 원문 질문≤512bytes, 전체 원문/청크·block·metadata 상한도 자료 채택 전에 검사한다. 이는 token 수나90초 통과의 보장이 아니며 한국어 정보량·공개 자료 대표성의 한계를 공개한다.

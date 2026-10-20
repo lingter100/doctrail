@@ -1,4 +1,16 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · C7 최종 구현과 독립 검토, 동결
+
+기존 실제 Astra high 구현자가 NEW8·합성 회귀244통과/1skip·Ruff 및 모든 초기 실패를 반환했다. 새 실제 Astra high 독립 검토자는 코드만 읽고 초기5지적 해결·최종 blocker0·exact8 hash 영수증을 생성했다. 부모는 실제 로그·검사 전후 hash·소유 프로세스 종료·기존123/81 및6동결 보존을 확인하고77파일 closure와 공개 결과 영수증을 만들었다. 도구가 수락한 서브에이전트 설정과 현재 채팅 설정을 혼동하지 않으며, 실제 자료·토크나이저·모델 답변·사용자 검수는0이다.
+
+## 2026-10-20 · C7 첫 구현 독립 검토 배정
+
+실행 중 역할 목록에 과거 독립 검토자가 없음을 확인한 뒤 새 c7_implementation_review를 gpt-6-astra/high/fork none으로 호출했고 도구가 수락했다. 첫4 코드와 합성 검사만 읽으며 구현자와 소유권을 분리한다. 부모는 실제 GitHub API로 설계 커밋의 양쪽 필수 CI와 사용자 author/committer를 확인해 설계 CI 영수증을 작성했다. 구현 완료·실제 모델 평가·사용자 검수로 표현하지 않는다.
+
+## 2026-10-20 · C7 새 구현 범위 배정과 원본 보존
+
+부모가 설계 커밋 후 기존 실제 Astra high host_proof_profile에 NEW8 구현·합성 검사 범위를 배정했다. 같은 기존 역할 설정 재사용이며 새 모델 변경이나 구현 완료를 주장하지 않는다. 부모는 실제 자료가 없는 family registry와 code123/닫힌 공개81개 baseline hash를 작성했다. 독립 코드 검토는 첫4개 반환 후 별도 배정하며 현재 실제 자료/사용자 검수0이다.
+
 ## 2026-10-20 · C7 사전 크기 수용 설계
 
 기존 실제 Astra xhigh free_qa_candidate_review가 frozen formatter의 system literal1720bytes와 직렬화 구조를 근거로 NEW 설계2개를 작성했다. JSON/UTF8/LF·산술·근거17hash를 검증했으며 구현·test·tokenizer/native 실행0이다. STATUS에서 validation aggregate 범위를 본 사실을 자진 공개하고 final judge 제외를 유지했다. 부모는 반환 hash·등록 규칙과 Git/CI를 확인했다. 구현자는 이후 별도로 지시하며 이 기록을 사용자 검수로 표현하지 않는다.

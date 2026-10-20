@@ -1,4 +1,10 @@
 # 결정 기록
+## 2026-10-20 · C7 prospective 자료와 최종 채택본 연결
+
+Source admission은 채택 전 prospective manifest를 입력으로 받는다. 기계적 크기 검사를 통과한 뒤 독립 검토를 거치면서 채택 상태가 바뀔 수 있으므로, 원래 manifest의 exact bytes를 admission 영수증과 source freeze의 별도 admission_manifest 역할에 묶기로 했다. 실제 raw 문서는 복제하지 않는다.
+
+이 연결이 임의 수정 허용 경로가 되지 않도록 최종 manifest와의 차이는 명시적인 채택·검토 상태 필드로 제한한다. 원문 참조/hash·제목/ID/날짜·문서 종류/언어·처리 설정처럼 의미나 크기에 영향을 주는 값은 정확히 같아야 한다. 최종 Git 증명과 전체 admission replay는 질문·oracle 의미 파싱 전에 실행한다. 구현·독립 검토·변조 합성 검사가 진행 중이며 동결 설계와 추론 정책을 바꾸는 결정이 아니다.
+
 ## 2026-10-20 · C7은 추론 변경보다 자료 수용 시점을 앞당김
 
 동결 runtime은 유지하고 실제 full-family serialization·metadata·catalog·질문 reserve를 source 채택 전에 검사한다. 8KiB는 독립 engineering 선택이며 held-out 초과량에서 역산한 허용치나 token 보장이 아니다. 새 namespace8개로 계약과 합성 검사를 분리하고 공통 추론 runtime/reader를 복제·변경하지 않는다. 공개 원문이 의미 난도와 크기 조건을 함께 충족하지 못하면 미충족을 기록한다. 기존 source/item 의미 검토와 마지막 공식 토큰 준비를 생략하지 않는다.
