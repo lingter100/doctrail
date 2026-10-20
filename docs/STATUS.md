@@ -1,5 +1,11 @@
 # 진행 상태
 
+## 2026-10-20 · reader source73c36bf 양쪽 필수 CI 통과, 단발 비교 준비
+
+구현·동결13파일을73c36bf1499d2c6cc7721b06a0d1fa54545c24e6로 사용자 명의 커밋·push했다. Index27 bindings/새13파일 bytes·whitespace 검사를 통과했고 GitHub author/committer lingter100을 직접 확인했다. PR14도 최신 source SHA를 가리켰다. Push39353187562/PR39353192367 backend/java-service/web 모두 성공해 정확한 CI receipt를 작성했다. 이전 설계 commit의 PR 미관측 기록은 덮어쓰지 않는다.
+
+이 CI receipt를 별도 커밋한 뒤 NEW 공식 synthetic 비교1회를 실행한다. .local/bounded-snapshot-execution-observer-v1/invocation.json 및 .local/meetings-proof-epoch-v1 존재·프로세스를 먼저 확인해 중복 실행하지 않는다. Reference/start→reference/pre-send→candidate/start→candidate/pre-send 고정4경계/300초이고 warmup·retry·모델·tokenizer0이다. 실행 중 HEAD를 유지한다. 아직 속도 결과는 없으며 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · NEW4 reader 구현·동결 완료, 최종 source CI 대기
 
 기존 실제 Astra high 구현 역할이 NEW4를 반환했고 독립 실제 Astra high 코드 검토에서 최종 blocker0이다. 마지막 setup 경계 수정 전73passed/1skip62.04초, 수정 뒤 영향8passed/45deselected11.24초·Ruff 통과이며 각 실행 전후 SHA 동일이다. 겹치는 검사 수를 합산하지 않는다. 초기1fail/2errors·Ruff11/추가2 및 부모 import 경로 오류를 원본으로 보존했다.
