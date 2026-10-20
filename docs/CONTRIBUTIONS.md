@@ -1,4 +1,10 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · 독립 원문 수용과 문항 역할 등록
+
+독립 source 검토자가 calibration 전체6개와32청크, 저장 응답과 read-only SQLite를 확인해 수용했다. 부모는 의미 notes를 읽지 않고 안전 요약·freeze64개 hash만 확인했다. Source 작성자는 후속 item 작성자, source 검토자는 후속 독립 item 검토자로 각각 재사용한다. 두 역할의 기존 노출을 기록하고 모두 최종 answer judge에서 제외한다. 등록 시 문항 작성/검토0이다.
+
+Validation 작성자는 v2의 용량/완료 기록 미확인과 redirect 계수 초과를 공개했다. 부모는18개 원본 binding을 확인하고 실패를 보존했다. 별도 metadata6회만으로 다음 repository를 예약했으며 원문 의미·license 적용을 부모가 수용한 것은 아니다. v3는 자동 redirect를 끄고 다음 hop 전에 남은 요청 한도를 확인한다. 사용자 검수는0이다.
+
 ## 2026-10-20 · 실행기 정리 실패 수정과 검토 범위
 
 실제 Astra high 작성자가 초기21개 검사 뒤 독립 검토의 native unwind 문제를 재현했다. 수정 전7개 실패, 원래 소스와 receipt, 스타일 실패를 보존했으며 최종29개 검사는 모두 합성 환경이다. 실제 Astra xhigh 검토자는 기존 cleanup telemetry와 코드 delta/새 회귀8개를 읽어 blocker 해소를 확인했고 검사를 직접 재실행했다고 주장하지 않았다.

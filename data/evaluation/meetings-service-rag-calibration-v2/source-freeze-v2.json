@@ -1,0 +1,866 @@
+{
+  "schema_version": 1,
+  "kind": "conditional_service_rag_source_freeze",
+  "version": 2,
+  "split": "calibration",
+  "source_attempt": 2,
+  "created_at": "2026-10-20T07:51:37.595434+00:00",
+  "actor": "/root/service_rag_calibration_source_review",
+  "status": "accepted_source_only_with_declared_freshness_limits",
+  "source_acceptance": true,
+  "immutable_after_return": true,
+  "conditions": [
+    "Use exactly these whole source, processed and coordinate-bound chunk artifacts; do not trim or replace them.",
+    "Keep the independent review limitations and original failures visible.",
+    "Historical semantic and translation nonduplication remains unproven; missing metadata was not repaired by reopening closed bodies.",
+    "This source freeze does not authorize item/model/runtime execution or assert item, meeting-flow, retrieval or Phase1 acceptance."
+  ],
+  "documents": [
+    {
+      "source_id": "cal-v2-p1",
+      "origin": "public",
+      "family_id": "cal-v2-public-gitops",
+      "document_kind": "meeting",
+      "meeting_date": "2021-04-05",
+      "raw_path": ".local/service-rag-calibration-v2/originals/2021-04-05-chat.txt",
+      "raw_sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+      "raw_bytes": 4990,
+      "processed_path": ".local/service-rag-calibration-v2/processed/cal-v2-p1.txt",
+      "processed_sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+      "processed_codepoints": 4938,
+      "normalized_sha256": "966e2a1dbd1b554913a4f7c5c544f10bdd6a45df6a66d00093fefd6be3a36b59",
+      "long_paragraph_sha256": [
+        "966e2a1dbd1b554913a4f7c5c544f10bdd6a45df6a66d00093fefd6be3a36b59"
+      ],
+      "fingerprint_method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+      "chunk_count": 6,
+      "source_url": "https://raw.githubusercontent.com/cncf/tag-app-delivery/cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d/gitops-wg/meetings/old-committee-principles/2021-04-05-chat.txt",
+      "upstream_path": "gitops-wg/meetings/old-committee-principles/2021-04-05-chat.txt",
+      "repository": "cncf/tag-app-delivery",
+      "revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "license_id": "Apache-2.0",
+      "ai_authored": false,
+      "fictional": false,
+      "synthetic_author_role": null,
+      "chunks": [
+        {
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 1000,
+          "page": null,
+          "text_sha256": "cef75482d1210176c614778f203bcd96834e00bc51cf0fdcf0c47658445ca84e"
+        },
+        {
+          "ordinal": 1,
+          "start_offset": 850,
+          "end_offset": 1844,
+          "page": null,
+          "text_sha256": "5038ac2e67db8bbe41cb95cfc2b53cd7d9be347f4c50d6d704f6f0cdc86a8bdc"
+        },
+        {
+          "ordinal": 2,
+          "start_offset": 1694,
+          "end_offset": 2693,
+          "page": null,
+          "text_sha256": "553d8d70683c530db3b0a31f53cf3de1c6f554f0f7efd71133afebfad2eee0a8"
+        },
+        {
+          "ordinal": 3,
+          "start_offset": 2543,
+          "end_offset": 3535,
+          "page": null,
+          "text_sha256": "8d79d224eb6992c8a30f600e29d253a10a6821d756b3396e3c18a80342f5086e"
+        },
+        {
+          "ordinal": 4,
+          "start_offset": 3385,
+          "end_offset": 4373,
+          "page": null,
+          "text_sha256": "096a6db78e871d076d8831c5b69d4fb68083be93a7b845c3646e34ab007cfaa7"
+        },
+        {
+          "ordinal": 5,
+          "start_offset": 4223,
+          "end_offset": 4938,
+          "page": null,
+          "text_sha256": "71b26a18498ead5f24478494514733ec3bda5e0cab748e4b2d75e2ca063afd90"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-p2",
+      "origin": "public",
+      "family_id": "cal-v2-public-gitops",
+      "document_kind": "meeting",
+      "meeting_date": "2021-04-14",
+      "raw_path": ".local/service-rag-calibration-v2/originals/2021-04-14-chat.txt",
+      "raw_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "raw_bytes": 8257,
+      "processed_path": ".local/service-rag-calibration-v2/processed/cal-v2-p2.txt",
+      "processed_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "processed_codepoints": 8227,
+      "normalized_sha256": "50601236aa686dac4820550413ac4528b5af17dbb443e88dcbfd2e92739e982e",
+      "long_paragraph_sha256": [
+        "c91c034b8ee3425a7dea59988041a77aefd7c2c91ba918e0d927087cd9254437",
+        "fd68548a5a22e44bad8c9293ad56a00e939479ce07a7f423fbd44a52e0618031"
+      ],
+      "fingerprint_method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+      "chunk_count": 10,
+      "source_url": "https://raw.githubusercontent.com/cncf/tag-app-delivery/cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d/gitops-wg/meetings/old-committee-principles/2021-04-14-chat.txt",
+      "upstream_path": "gitops-wg/meetings/old-committee-principles/2021-04-14-chat.txt",
+      "repository": "cncf/tag-app-delivery",
+      "revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "license_id": "Apache-2.0",
+      "ai_authored": false,
+      "fictional": false,
+      "synthetic_author_role": null,
+      "chunks": [
+        {
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 999,
+          "page": null,
+          "text_sha256": "5afea8ab8c75c0833932799f085a7bfcf5bfdf3c455639fcb6109cd349a2e51c"
+        },
+        {
+          "ordinal": 1,
+          "start_offset": 849,
+          "end_offset": 1848,
+          "page": null,
+          "text_sha256": "fb44ed417385e87b7c32ea05949d56bac6894058cfc2a4d82ef3ea46aca45f85"
+        },
+        {
+          "ordinal": 2,
+          "start_offset": 1698,
+          "end_offset": 2695,
+          "page": null,
+          "text_sha256": "d7c63d30fe3ca61cd46e56863d517ff93b959b2b0df9a8806952bd9d67e9ed99"
+        },
+        {
+          "ordinal": 3,
+          "start_offset": 2545,
+          "end_offset": 3544,
+          "page": null,
+          "text_sha256": "3d812ff114384c2b3f2ecd15943ce8a38810d12bff764a299bb78c8f72e43d4d"
+        },
+        {
+          "ordinal": 4,
+          "start_offset": 3394,
+          "end_offset": 4391,
+          "page": null,
+          "text_sha256": "b70abffe5274adc5c87e643378d51cf569b2295bbb38da506ac9bf9733eb3d5f"
+        },
+        {
+          "ordinal": 5,
+          "start_offset": 4241,
+          "end_offset": 5238,
+          "page": null,
+          "text_sha256": "0a03a3c465a0b64f81b0ccbce13773bc599289c60007b67202f3838fb0f968fb"
+        },
+        {
+          "ordinal": 6,
+          "start_offset": 5088,
+          "end_offset": 6086,
+          "page": null,
+          "text_sha256": "73fb3705338746276ccc6336398a8e4b15f8beca1168349d2975d0b65b1d1381"
+        },
+        {
+          "ordinal": 7,
+          "start_offset": 5936,
+          "end_offset": 6932,
+          "page": null,
+          "text_sha256": "aa1f5e2040fe1cc6dbf4d435d96bb5fed799bf8ac73a2a66a62b3e13eb36e104"
+        },
+        {
+          "ordinal": 8,
+          "start_offset": 6782,
+          "end_offset": 7777,
+          "page": null,
+          "text_sha256": "269a9504d281d2678ca79f7b507457fd273273c923e4e4aa35651a6f675539c3"
+        },
+        {
+          "ordinal": 9,
+          "start_offset": 7627,
+          "end_offset": 8227,
+          "page": null,
+          "text_sha256": "a036176a6e40a2464a9d475dbf0a6b9db5650bd2fd1a9add3dd9f47c7f10bfc2"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-p3",
+      "origin": "public",
+      "family_id": "cal-v2-public-gitops",
+      "document_kind": "general",
+      "meeting_date": null,
+      "raw_path": ".local/service-rag-calibration-v2/originals/charter.md",
+      "raw_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "raw_bytes": 3296,
+      "processed_path": ".local/service-rag-calibration-v2/processed/cal-v2-p3.txt",
+      "processed_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "processed_codepoints": 3292,
+      "normalized_sha256": "1179cc1269a78258cac4c16e68a36eb45cee2d23d16078eaf3e37260d6a3abf9",
+      "long_paragraph_sha256": [
+        "1f1d8267b176e45a1d1961a80c2fa3bb30b520b497266ad0a6f04df5110813dc",
+        "39191b88b15c7a3473470c20b849e5b17d5a641bc07131b44f88f4707e34b812",
+        "3f553349f47415dbe91d658e26c194045c5d6cbc7c3afcf19a0cbfa4e8c6b947",
+        "54409b0f75eda6da5ad174c03832def72193dfb4371ab82d0df9c958a2d84245",
+        "77c1c1c2474e3a55877bad5964235bed49e627cdcd0022c710549b629ab6bcdc",
+        "7987a18d076bd2220e94fe78d9750d139572d7448e80a9892679898869ab42cf",
+        "aac423693da87faf6d4845c3425b96109e1190c1733dae157bacf96f0de6915f",
+        "cd18ccb80380117ff3932164c6bd585e1b6950cb3ea2a7e17704eab9dae7f4d8"
+      ],
+      "fingerprint_method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+      "chunk_count": 4,
+      "source_url": "https://raw.githubusercontent.com/cncf/tag-app-delivery/cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d/gitops-wg/charter.md",
+      "upstream_path": "gitops-wg/charter.md",
+      "repository": "cncf/tag-app-delivery",
+      "revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "license_id": "Apache-2.0",
+      "ai_authored": false,
+      "fictional": false,
+      "synthetic_author_role": null,
+      "chunks": [
+        {
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 992,
+          "page": null,
+          "text_sha256": "24fb940804bf9b9086f947459fb9bf6ae1beecefe908f3cc65dd8b09bce6376e"
+        },
+        {
+          "ordinal": 1,
+          "start_offset": 842,
+          "end_offset": 1833,
+          "page": null,
+          "text_sha256": "f765e7a02d96a37448bb7f6bdb585ada16a6beec468d7204dfcc074a6bb153fa"
+        },
+        {
+          "ordinal": 2,
+          "start_offset": 1683,
+          "end_offset": 2682,
+          "page": null,
+          "text_sha256": "2d0417f48c1c54ba83c1b76122cac6e3b09698d339d747ad0185dadd3f4d8ccf"
+        },
+        {
+          "ordinal": 3,
+          "start_offset": 2532,
+          "end_offset": 3292,
+          "page": null,
+          "text_sha256": "bf90090191407ce37fdc54f8552ae748307e5ca197b04e164c9dc2cb28f7b8f0"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-s1",
+      "origin": "synthetic",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "document_kind": "general",
+      "meeting_date": null,
+      "raw_path": ".local/service-rag-calibration-v2/originals/synthetic-field-guide.md",
+      "raw_sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "raw_bytes": 4046,
+      "processed_path": ".local/service-rag-calibration-v2/processed/cal-v2-s1.txt",
+      "processed_sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "processed_codepoints": 4044,
+      "normalized_sha256": "fa0ca5175e08ca266e42a66424d9321e7537973346595ac95dce5486c3d65613",
+      "long_paragraph_sha256": [
+        "31e46cdc62188c99afc8b82114b1995af01e442124671a831f50387e3343c146",
+        "5a8c9a6c6b6e23ef531189f80d98a3d1c40ec9721e8c65cfd358dfa84faa4dfe",
+        "5b4f4b7a81c92b429734f423707389f9de82573ae8f7c5132b13cea26f1244d1",
+        "5d1c1f7bf07aad5ca47342203fc33069f34e8ebcbe9cd3d71aa6cc9954a55fba",
+        "b2b9e61ee2a7a124cfbe55b5f7b09ce2f38a2d15ec36c5a7d36183207771d24b",
+        "b4ce42a80c23c6648d0115694ed4f5bb94b105b1d047ebd5f2a15059409e40bf",
+        "b5e54b8ae1f1ee3a4638e786d3a8914688ecf9c3b97f2726e64a9a3162ae0868",
+        "deafd00f31a6e37c04204a0c068c7b548c938262735c0133b74f860b46a9f6fa",
+        "e39afc2d97cf33e134eabae8d634822debd2c50d3ef0ec998c89428c80dcb933",
+        "eadd2e22ffd200a07e69f401cecac96b3e5f0f552e5e616a6b63a80d8694720b",
+        "ec998a5b0a4cfe684322590bcba6f8858ecfde3234adfb18bba89dfb6ec75740",
+        "fa2030bb83e8fd0717484655789a63c9de969ce18617ce1048d92720a20215a7"
+      ],
+      "fingerprint_method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+      "chunk_count": 5,
+      "source_url": null,
+      "upstream_path": null,
+      "repository": null,
+      "revision": null,
+      "license_id": "AI_AUTHORED_FICTIONAL_EVALUATION_SOURCE",
+      "ai_authored": true,
+      "fictional": true,
+      "synthetic_author_role": "/root/service_rag_calibration_sources",
+      "chunks": [
+        {
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "page": null,
+          "text_sha256": "013b859f7472b01018970bb5f6b5120db5d6b64d477f7be71b329aac0c43c244"
+        },
+        {
+          "ordinal": 1,
+          "start_offset": 847,
+          "end_offset": 1842,
+          "page": null,
+          "text_sha256": "801aa7a60e4384a43971a8346f5700d67bea61e52b21037da82acc99b8e74c7a"
+        },
+        {
+          "ordinal": 2,
+          "start_offset": 1692,
+          "end_offset": 2686,
+          "page": null,
+          "text_sha256": "4a7658a008f555dc405e0e803f72f0b4d36c46da953b0d00741eb90ad44f58ba"
+        },
+        {
+          "ordinal": 3,
+          "start_offset": 2536,
+          "end_offset": 3533,
+          "page": null,
+          "text_sha256": "e3e5fd4efeb6d4bb254cd62fce1b33be691dea0f17eb5d99f10cc1f14e03b513"
+        },
+        {
+          "ordinal": 4,
+          "start_offset": 3383,
+          "end_offset": 4044,
+          "page": null,
+          "text_sha256": "0adf684f6438bd5794ea1458851ce91332a69439185b62ceb01754ca4cc49db2"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-s2",
+      "origin": "synthetic",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "document_kind": "meeting",
+      "meeting_date": "2026-03-04",
+      "raw_path": ".local/service-rag-calibration-v2/originals/synthetic-meeting-2026-03-04.md",
+      "raw_sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "raw_bytes": 3332,
+      "processed_path": ".local/service-rag-calibration-v2/processed/cal-v2-s2.txt",
+      "processed_sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "processed_codepoints": 1534,
+      "normalized_sha256": "5d5c98c82428aa2bc9482efa6abc85320a99cce84ad95f5d79b9522117ea65ed",
+      "long_paragraph_sha256": [],
+      "fingerprint_method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+      "chunk_count": 2,
+      "source_url": null,
+      "upstream_path": null,
+      "repository": null,
+      "revision": null,
+      "license_id": "AI_AUTHORED_FICTIONAL_EVALUATION_SOURCE",
+      "ai_authored": true,
+      "fictional": true,
+      "synthetic_author_role": "/root/service_rag_calibration_sources",
+      "chunks": [
+        {
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 998,
+          "page": null,
+          "text_sha256": "d46b4c9315532ffaf16c9a5d1af6067ee6aba4efcb4f4c6d920b320cde721dbc"
+        },
+        {
+          "ordinal": 1,
+          "start_offset": 848,
+          "end_offset": 1534,
+          "page": null,
+          "text_sha256": "e81815ecc53bad0e936fb33704bf7d38d3ef53ab7e98a40bfb4260beff1621ed"
+        }
+      ]
+    },
+    {
+      "source_id": "cal-v2-s3",
+      "origin": "synthetic",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "document_kind": "meeting",
+      "meeting_date": "2026-03-11",
+      "raw_path": ".local/service-rag-calibration-v2/originals/synthetic-meeting-2026-03-11.md",
+      "raw_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "raw_bytes": 3573,
+      "processed_path": ".local/service-rag-calibration-v2/processed/cal-v2-s3.txt",
+      "processed_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "processed_codepoints": 3565,
+      "normalized_sha256": "a157e8f1408ebbcbff2ddb5b306b6c64aabe6d2a309887b8d3f6d9a68ba29657",
+      "long_paragraph_sha256": [
+        "139756aa5469705162c87e190433442297f7d61f9641fa1d72d2d3c9f791067e",
+        "18a003df984fc0ad2ef58a5983fc8e00b25ca2665a0321a90430dd399728e919",
+        "1b60d17e7d8a730a2ef5cd9928ea562b7a6078c6b5b701b885323621324555d2",
+        "234c0857ba800c0e8bdaeb00bf990dc36db58a7c9c683a2cdc24bb57cae52c2d",
+        "41f5fd63f212a7fe8e358a858b9c2fa2bf75c7e45c04ce7fd2526ed9083ce304",
+        "44dfafe4d98276ee1364efca1958f9faa5acefe3ec889d97e8d00a9652c25bb0",
+        "4af7009947da4ba4ecee6470f6e2a534954b3a2c0d2cca413a9442a9ef5ac783",
+        "6ff9a3e74e6ad74edf967511a215807131ae4bba1686d5bdbac0c4aee7f5d32d",
+        "9315e237de0c49d7ba9fe07176fee4e900ec088a3c0bda15d67ff311c248f41b",
+        "d83b2d6a7683d574a704fe5fdda8e72b42b9839f7cf47a63331fd8815a3156d8"
+      ],
+      "fingerprint_method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+      "chunk_count": 5,
+      "source_url": null,
+      "upstream_path": null,
+      "repository": null,
+      "revision": null,
+      "license_id": "AI_AUTHORED_FICTIONAL_EVALUATION_SOURCE",
+      "ai_authored": true,
+      "fictional": true,
+      "synthetic_author_role": "/root/service_rag_calibration_sources",
+      "chunks": [
+        {
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 995,
+          "page": null,
+          "text_sha256": "301d1eccee7bb5e2b7e482ff0e663e21012d02814b127d1485335490bc0921f7"
+        },
+        {
+          "ordinal": 1,
+          "start_offset": 845,
+          "end_offset": 1835,
+          "page": null,
+          "text_sha256": "89cf26a8a077925ea12e0ff3aeb9a33c1e5a7a171ffc4d5e1e3fb0aa59f6028f"
+        },
+        {
+          "ordinal": 2,
+          "start_offset": 1685,
+          "end_offset": 2683,
+          "page": null,
+          "text_sha256": "f24826eef21187291ea22400d615cf4fa87f8a7e4fe1f5a7924ccde54f23dce3"
+        },
+        {
+          "ordinal": 3,
+          "start_offset": 2533,
+          "end_offset": 3532,
+          "page": null,
+          "text_sha256": "49c428036db5329e78588dd21b5f1f91b2146854126f9b1307179af8be1a1124"
+        },
+        {
+          "ordinal": 4,
+          "start_offset": 3382,
+          "end_offset": 3565,
+          "page": null,
+          "text_sha256": "3f9f605fb5211cf841bfda98fb1f28bf5d19b6d3f7e6294ebaa7b94e5e128dda"
+        }
+      ]
+    }
+  ],
+  "document_count": 6,
+  "chunk_count": 32,
+  "whole_originals": true,
+  "raw_and_processed_equal_documents": 6,
+  "chunk_contract": {
+    "max_codepoints": 1000,
+    "minimum_boundary_search_codepoints": 500,
+    "overlap_codepoints": 150,
+    "algorithm": "existing doctrail.retrieval.chunk_content and Java Retrieval.chunkContent"
+  },
+  "ingestion_settings": {
+    "ordinary_documents_endpoint": true,
+    "generation_url_empty": true,
+    "inference_url_empty": true,
+    "rag_answer_enabled": false,
+    "launch_settings": {
+      "path": ".local/service-rag-calibration-v2/java-corrected/launch-settings.json",
+      "bytes": 1373,
+      "sha256": "4c42813b627923e392f1b65ba1d41d5a9cb0bc678c3b055a7a1607a223364afd"
+    },
+    "ingestion_result": {
+      "path": ".local/service-rag-calibration-v2/java-corrected/ingestion-result-v2.json",
+      "bytes": 6653,
+      "sha256": "302f6070eb94ee4c3b72a8f596cfa7297375977403d8c295259ec411b1154db7"
+    },
+    "recorded_code_bindings": {
+      "jar": {
+        "path": "server/target/doctrail-server-0.1.0.jar",
+        "sha256": "8476ba7728f392e62aa53a3999de8d2f08982012dc2a345f503bedb59564976b"
+      },
+      "files": [
+        {
+          "path": "src/doctrail/ingest.py",
+          "sha256": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233"
+        },
+        {
+          "path": "src/doctrail/retrieval.py",
+          "sha256": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56"
+        },
+        {
+          "path": "server/src/main/java/io/doctrail/Ingest.java",
+          "sha256": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f"
+        },
+        {
+          "path": "server/src/main/java/io/doctrail/Retrieval.java",
+          "sha256": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a"
+        },
+        {
+          "path": "server/src/main/java/io/doctrail/DocumentService.java",
+          "sha256": "cf80b13d3eb6c786c8b4633119f790fb39131c0f5f06ce7ec02bcba0a2ad1a0b"
+        },
+        {
+          "path": "server/src/main/java/io/doctrail/ApiController.java",
+          "sha256": "896b44d40979a0492fc92dcf5e01d746993bf40650262d810369296b76284517"
+        },
+        {
+          "path": "server/src/main/java/io/doctrail/Auth.java",
+          "sha256": "4595bd0dfb079c792fc836032291edcbb1605952ec4f5a60806b11927b923ab8"
+        },
+        {
+          "path": "server/src/main/java/io/doctrail/Store.java",
+          "sha256": "932f5949aaa57f6c5121ff6f98422626592b5145639624c3309a5796c58ebdc7"
+        },
+        {
+          "path": "server/src/main/java/io/doctrail/RequestGuard.java",
+          "sha256": "bc025143500ff8a4f9a5707b0e90c4ef60bcb024fac19b6cc49e0220f24dad98"
+        },
+        {
+          "path": "server/src/main/resources/application.properties",
+          "sha256": "81163cde7cfaef6476d0e4c1cd0ace89302ae6aad6a5e4bc4b0f59600bbdfa53"
+        }
+      ]
+    },
+    "reviewer_current_executable_rehash": false,
+    "reviewer_application_chunker_rerun": false
+  },
+  "license": {
+    "path": ".local/service-rag-calibration-v2/originals/LICENSE",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "review": {
+    "path": "data/evaluation/meetings-service-rag-calibration-v2/source-review-v2.json",
+    "bytes": 10839,
+    "sha256": "0fa19d9d15573bfa730d13dfafb6edee8d3e33fd0a2a81b45bf2d6e54654b3b5"
+  },
+  "semantic_notes": {
+    "path": "data/evaluation/meetings-service-rag-calibration-v2/source-review-notes-v2.md",
+    "bytes": 14269,
+    "sha256": "7c9ccd673145cb293c8fb7568bea28501a42adb58d8d9118f6cadb0d146ffb94"
+  },
+  "stable_original_artifact_count": 57,
+  "bound_file_count": 64,
+  "files": [
+    {
+      "path": ".local/service-rag-calibration-v2/author-receipt-v2.json",
+      "bytes": 7902,
+      "sha256": "f6954db15a8c1c82446bdc853e41f7ee6e2a1ed7508fee02a16a2bd1e70aaaf8"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/discovery/tree.json",
+      "bytes": 222475,
+      "sha256": "2dd577577d4c68d4cf3f49998c2a10565954c42a9cde6a5c51c2a7193a80a2ef"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/dispatch-start-v2.json",
+      "bytes": 2079,
+      "sha256": "69baac6492a8a934dc280de6928ab10f21a54490c83cf8da8bee18beb0414327"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java/error.log",
+      "bytes": 136,
+      "sha256": "ded36789b5e9cd6bf3f9116e2484b337394df28aded90e3a8ad668d9fd6d1e22"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java/http-observations.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java/ingestion-result-v2.json",
+      "bytes": 1530,
+      "sha256": "1a7f0d0ac050944e5e4409a0b2d58cababce2ada0547700d5b5540b1f63a4494"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java/launch-settings.json",
+      "bytes": 1210,
+      "sha256": "ef56cb9983af9912b3794c32329981dd3ffe6b8bb1b7600cda8211fde40ca60c"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java/stdout-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p1-read.json",
+      "bytes": 12226,
+      "sha256": "b2c5b4f0d7365d948b9877cf13fe5aeca368fb73e2f509943e84751c08d7d5e0"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p1-upload.json",
+      "bytes": 12226,
+      "sha256": "b2c5b4f0d7365d948b9877cf13fe5aeca368fb73e2f509943e84751c08d7d5e0"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p2-read.json",
+      "bytes": 19593,
+      "sha256": "57167e8049fd08e9fd5367a955e41d17ba64e202e08331fe7055c9ac8193e8d6"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p2-upload.json",
+      "bytes": 19593,
+      "sha256": "57167e8049fd08e9fd5367a955e41d17ba64e202e08331fe7055c9ac8193e8d6"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p3-read.json",
+      "bytes": 8037,
+      "sha256": "c434b37992bb4f8b53db8f65bdec63509eba79c8912ccfe8c8db8443223f5edb"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p3-upload.json",
+      "bytes": 8037,
+      "sha256": "c434b37992bb4f8b53db8f65bdec63509eba79c8912ccfe8c8db8443223f5edb"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s1-read.json",
+      "bytes": 9763,
+      "sha256": "c7d0a4071271a63bc1a14f396512f79809bb11823765b4d67832a00ade9859dd"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s1-upload.json",
+      "bytes": 9763,
+      "sha256": "c7d0a4071271a63bc1a14f396512f79809bb11823765b4d67832a00ade9859dd"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s2-read.json",
+      "bytes": 7742,
+      "sha256": "bfe49e42206768d59003b3a39fad31af80852a442ddba1ae31f09d23ee4a0c83"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s2-upload.json",
+      "bytes": 7742,
+      "sha256": "bfe49e42206768d59003b3a39fad31af80852a442ddba1ae31f09d23ee4a0c83"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s3-read.json",
+      "bytes": 8810,
+      "sha256": "ac098fa8b48b4a059d620bb22cef4a60c4c753d660111b9047d31cf63601a0a7"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s3-upload.json",
+      "bytes": 8810,
+      "sha256": "ac098fa8b48b4a059d620bb22cef4a60c4c753d660111b9047d31cf63601a0a7"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/health.json",
+      "bytes": 33,
+      "sha256": "bcabd7a6286a2c8767139b0d66b8a59a94e05d916862a573aca3fb30677c0ac0"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/http-observations.json",
+      "bytes": 5279,
+      "sha256": "ce910a113e3ceb35af5db9a52bcb559a26206f9357501b468e8468ad7381967a"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/ingestion-result-v2.json",
+      "bytes": 6653,
+      "sha256": "302f6070eb94ee4c3b72a8f596cfa7297375977403d8c295259ec411b1154db7"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/ingestion.sqlite3",
+      "bytes": 274432,
+      "sha256": "efe30f1f60c6bdf3da0fe31190233a235c69c9bec181446adbd31d688c881f93"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/launch-settings.json",
+      "bytes": 1373,
+      "sha256": "4c42813b627923e392f1b65ba1d41d5a9cb0bc678c3b055a7a1607a223364afd"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/registered.json",
+      "bytes": 224,
+      "sha256": "8aa90f264703f803be2d6a861977a2375d652e8aaa93f127d5998ba5407f7486"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/stdout-stderr.log",
+      "bytes": 5198,
+      "sha256": "5b147522a4d58a8fe46e7f3a73bcef6baa3edd7599e0aeb80175c38afa51291c"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/tmp/sqlite-3.53.4.0-2d437927-6666-4132-ae90-c022153a55f0-sqlitejdbc.dll",
+      "bytes": 1014784,
+      "sha256": "f16882d2eded914edd1e1d313e7c8579e040b0da090a52ea99ad7b0c5d961c45"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/tmp/sqlite-3.53.4.0-2d437927-6666-4132-ae90-c022153a55f0-sqlitejdbc.dll.lck",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/verified-snapshot.sqlite3",
+      "bytes": 274432,
+      "sha256": "eaaa4559f7ac0b1650d015a91fca58d416559fa1ce1b0ab84e9c348634bfa240"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/network-log-v2.jsonl",
+      "bytes": 2409,
+      "sha256": "5035f1d54512791d3725cdb6dc59db9df38b873eca4376bfabe9b5faf55cad89"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/originals/2021-04-05-chat.txt",
+      "bytes": 4990,
+      "sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/originals/2021-04-14-chat.txt",
+      "bytes": 8257,
+      "sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/originals/charter.md",
+      "bytes": 3296,
+      "sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/originals/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/originals/synthetic-field-guide.md",
+      "bytes": 4046,
+      "sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/originals/synthetic-meeting-2026-03-04.md",
+      "bytes": 3332,
+      "sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/originals/synthetic-meeting-2026-03-11.md",
+      "bytes": 3573,
+      "sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/processed/cal-v2-p1.txt",
+      "bytes": 4990,
+      "sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/processed/cal-v2-p2.txt",
+      "bytes": 8257,
+      "sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/processed/cal-v2-p3.txt",
+      "bytes": 3296,
+      "sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/processed/cal-v2-s1.txt",
+      "bytes": 4046,
+      "sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/processed/cal-v2-s2.txt",
+      "bytes": 3332,
+      "sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/processed/cal-v2-s3.txt",
+      "bytes": 3573,
+      "sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/publication-correction-v3/original-artifact-index-v2.json",
+      "bytes": 13524,
+      "sha256": "26410a4567461d244691409fcc78f1b013192167f88377b5c5b8de22851784f8"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/publication-correction-v3/original-author-receipt-v2.json",
+      "bytes": 7902,
+      "sha256": "f6954db15a8c1c82446bdc853e41f7ee6e2a1ed7508fee02a16a2bd1e70aaaf8"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/publication-correction-v3/original-safe-summary-v2.json",
+      "bytes": 2662,
+      "sha256": "d4021f1a506c2c40a7fda102ead2f1203fb43aa99b1cac42dae38df02eebc3c6"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/publication-correction-v3/parent-validation-failure-v3.json",
+      "bytes": 1235,
+      "sha256": "082f55077d05b05b35868972d30d6ddcfc8c0745f3d6532aca91f3c7c20324d9"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/source-code-bindings-v2.json",
+      "bytes": 1785,
+      "sha256": "271c3c5d247a6836bf6bdf8aa5d014a3ea44628f190a47e15c55fb3d6aaade1e"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/source-manifest-v2.json",
+      "bytes": 54987,
+      "sha256": "97af0b72ec1ec28f8fafa8871fdd564aac76eb2c00873e585d4e29cce477c400"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v2.json",
+      "bytes": 13524,
+      "sha256": "26410a4567461d244691409fcc78f1b013192167f88377b5c5b8de22851784f8"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/author-receipt-v2.json",
+      "bytes": 7902,
+      "sha256": "f6954db15a8c1c82446bdc853e41f7ee6e2a1ed7508fee02a16a2bd1e70aaaf8"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/correction-receipt-v3.json",
+      "bytes": 4526,
+      "sha256": "2b3099bb568045204adc90042f8a4e548d230e982b65ff90e06a845739f931bf"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/network-log-v2.json",
+      "bytes": 3010,
+      "sha256": "3618580b9184ce37f9970e30d4f9df9e3143297f4dc71de4a306683693087854"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v2.json",
+      "bytes": 2662,
+      "sha256": "d4021f1a506c2c40a7fda102ead2f1203fb43aa99b1cac42dae38df02eebc3c6"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v3.json",
+      "bytes": 2889,
+      "sha256": "240c57a467eb383888e29d772115c07d37d0556a9897ebd745ecde9f245b70df"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-manifest-v2.json",
+      "bytes": 13018,
+      "sha256": "c88b1b6381cfbcf4692f7af5cefc9411aed6625f2a322c603a5fcfec94b4d9f6"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v3.json",
+      "bytes": 15942,
+      "sha256": "801d902f1317bd037f5074c5b43b952d4a6d4f0fa5dc6d5d20d8a0942c9f830d"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-source-followup-registration-v2.json",
+      "bytes": 6783,
+      "sha256": "d092833cab4ddf6c3c92c4bb069dc5813c178268ce8936f78a32241f228c852a"
+    },
+    {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "bytes": 19569,
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    {
+      "path": "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+      "bytes": 2865,
+      "sha256": "26506cbd3c1f49a4b1e6dcb8ce94acd50b410ff34f313d13551342331c3d52b3"
+    },
+    {
+      "path": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+      "bytes": 49624,
+      "sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-review-v2.json",
+      "bytes": 10839,
+      "sha256": "0fa19d9d15573bfa730d13dfafb6edee8d3e33fd0a2a81b45bf2d6e54654b3b5"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-review-notes-v2.md",
+      "bytes": 14269,
+      "sha256": "7c9ccd673145cb293c8fb7568bea28501a42adb58d8d9118f6cadb0d146ffb94"
+    }
+  ],
+  "historical_freshness_status": "metadata_checks_passed_with_three_registered_coverage_gaps; complete_semantic_nonduplication_not_proven",
+  "original_missing_ephemeral_sidecar_count": 2,
+  "item_freeze": false,
+  "questions": 0,
+  "oracles": 0,
+  "native_calls": 0,
+  "human_reviews": 0
+}

@@ -1,4 +1,14 @@
 # 진행 상태
+## 2026-10-20 · calibration 원문 수용, 실행기 CI 통과, 다음 자료·문항 등록
+
+독립 Astra xhigh source 검토가 calibration6개/32청크를 수정0·거부0으로 수용했다. 부모는 안전 요약만 읽고 source freeze64개 bytes/hash를 확인했다. 역사적 metadata 공백3개와 의미·번역 중복 부재 미입증을 제한으로 유지한다. 원문 수용은 회의 자동 분석·검색·문항·답변 품질 수용이 아니다.
+
+실행기 ae6f8daddd3115b797bb9f6aecb5e7a17d3a1008의 push39389175319/PR39389181734는 backend·java-service·web 모두 성공했고 GitHub author/committer도 lingter100이다. 등록5a1b11e의 두 run도 성공이다. [CI 기록](../experiments/results/meetings-service-rag-launcher-ci-v1.json)을 남겼다.
+
+Validation v2는 큰 원문6,482,022bytes가 기존5MiB upload 제한에 걸리고 두 번째 후보의 완료 회의를 확인하지 못해 채택0으로 종료했다. 자동 license redirect 때문에 보수적 HTTP한도3을1회 넘긴 사실과 원본 정정을 보존했다. 부모가18개 binding을 확인했으며 Java/합성/문항/모델0이다. 원문 축약·한도 변경·기존 시도 재실행으로 구제하지 않았다.
+
+부모 metadata 조회6회로 W3C webtransport의 날짜 문서 경로 미발견과 `rust-lang/types-team@cf4adc0044987bceed00d5a8efa225b475e4ad91`의 root license/날짜별 minutes 경로를 확인했다. 본문0·완료 회의/적용license 미확인이다. [다음 등록](../data/evaluation/meetings-service-rag-next-stage-registration-v3.json)은 validation v3 저장소를 예약하고, calibration cal6 문항 작성자와 독립 검토자도 등록한다. Source freeze/등록 commit·CI 뒤 문항 작성, 등록 commit 뒤 별도 validation source dispatch가 다음이다. 현재 질문/tokenizer/native0·Goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · 서비스 실행기29개 검사와 독립 검토 완료
 
 실제 Astra high 작성자가 NEW 실행기/검사2개를 반환했다. Native 시작 실패 시 내부 정리의 시간·오류가 누락되던 문제를 수정 전7개 실패로 재현·보존하고 고쳤다. 최종 LF 소스에서29통과/0.86초·Ruff 통과, 전후 hash 동일이다. 별도 Astra xhigh delta 읽기 검토에서 남은 blocker0이며 부모도 코드·증거13개/이전로그6개·동결77개를 확인했다. [실행 방법과 한계](MEETINGS-SERVICE-RAG.md), [검증 요약](../experiments/results/meetings-service-rag-launcher-v1.json)을 남긴다.

@@ -40,3 +40,13 @@ Java21·Python 의존성·현재 opt-in JAR·브라우저 실행 파일을 확�
 관찰 코드의 최초 변수 충돌은 HTTP0으로 종료했고 원본 로그를 남겼다. 수정 실행만 성공이며 `/documents` 처리 증거를 `/meetings` 자동 분석 증거로 보고하지 않는다. 모델·tokenizer·문항·사용자 검수0이다.
 
 원래 산출물 목록에는 종료 후 제거되는 SQLite 임시2파일이 포함됐다. 부모가50일치/2누락을 확인한 뒤 작성자가 DB 연결이나 Java 실행 없이 [영속 목록 v3](../data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v3.json)를 만들었다. 부모가57개의 bytes/hash를 확인했고 원래 목록·요약·receipt와 누락을 보존했다. [현재 요약](../data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v3.json)은 독립 source 검토 대기다.
+
+이후 독립 검토는6개 수용·거부0·수정0으로 완료됐다. [독립 요약](../data/evaluation/meetings-service-rag-calibration-v2/source-review-summary-v2.json)과 source freeze64개를 별도로 남겼고 부모도64개 hash를 확인했다. 역사적 normalized metadata 공백과 의미·번역 중복 부재 미입증을 명시한다. 문항/답변 품질 및 사용자 검수는 아직 없다.
+
+## Validation v2 종료와 별도 후속 출처
+
+`w3c/web-performance`에서 저장소 문서에 적용되는 W3C license를 확보했으나 공개 family를 채택하지 못했다. 후보 원문 하나가6,482,022bytes로 기존5MiB 업로드 상한을 넘었고, 두 번째 후보를 완료 회의록으로 확인하지 못했다. 기존 Python 처리의 실제 `file_too_large` 관찰1건과 원문4개를 보존했다. Java·합성·문항·모델 실행0이다.
+
+License 원문2개를 얻는 동안 redirect2회를 포함한 실제 HTTP는4회였다. 처음 분류 오류와 보수적 한도3 초과를 숨기지 않고 [안전 요약](../data/evaluation/meetings-service-rag-validation-v2/safe-summary-v2.json)에 정정했다. 부모가18개 산출물 hash를 확인했다.
+
+다음 출처는 별도로 등록한 `rust-lang/types-team`이다. 부모는 GitHub repository/ref/tree metadata만 확인했으며 root Apache/MIT license 경로와 날짜별 minutes 경로의 실제 적용·내용은 작성자와 독립 검토자가 확인해야 한다. W3C webtransport metadata 조회에서 날짜 문서를 찾지 못한 기록도 남긴다. 새 시도에서 이전 원문·거부·라이선스 기록은 바꾸지 않는다.
