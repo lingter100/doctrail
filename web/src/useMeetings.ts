@@ -27,6 +27,7 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
   const [reviewRequired, setReviewRequired] = useState(false);
   const [linkReviewRequired, setLinkReviewRequired] = useState(false);
   const [linkSelectionVersion, setLinkSelectionVersion] = useState(0);
+  const [targetSelectionVersion, setTargetSelectionVersion] = useState(0);
   const mounted = useRef(false);
   const serials = useRef(new Map<string, number>());
   const aborts = useRef(new Map<string, AbortController>());
@@ -181,14 +182,14 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     setNotice('로컬 초안을 버리고 확인한 서버 버전을 열었어요.');
   }
   function back() { edit(false); selected.current = null; setDetail(null); setLinks([]); setError(''); setNotice(''); app.closeSource(); void load(); }
-  async function mutate<T>(action: (signal: AbortSignal) => Promise<T>, done: (result: T) => void, rejected?: (failure: unknown) => void) {
+  async function mutate<T>(action: (signal: AbortSignal) => Promise<T>, done: (result: T) => void, rejected?: (failure: unknown) => void | Promise<void>) {
     if (mutationBusy.current) return false;
     const owner = request('mutation'); mutationBusy.current = true; setBusy(true); setError(''); setNotice('');
     try {
       const result = await action(owner.signal);
       if (!owner.valid()) return false;
       done(result); void load(); return true;
-    } catch (failure) { if (owner.valid()) rejected?.(failure); fail(failure, owner.valid); return false; }
+    } catch (failure) { if (owner.valid()) await rejected?.(failure); fail(failure, owner.valid); return false; }
     finally { if (owner.valid()) { mutationBusy.current = false; setBusy(false); } }
   }
   async function create(data: FormData, file: boolean) {
@@ -221,16 +222,40 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     return results.flatMap(result => result.items).filter(item => item.document.id !== selected.current && item.meeting.analysis_status === 'ready');
   }
   async function loadTargets() {
+    if (linkReviewRequired) { await refresh(); return; }
     const owner = request('targets'); setError('');
     try {
       const results = await fetchTargets(owner.signal);
       if (owner.valid()) setTargets(results);
     } catch (failure) { fail(failure, owner.valid); }
   }
+  async function recheckLinkSource(id: string) {
+    const owner = request('detail'); setRefreshing(true);
+    try {
+      // A denied POST is ambiguous. Check access only; keep the review gate
+      // and the user's draft until they explicitly refresh both sides.
+      await api<MeetingDetail>(`/meetings/${id}`, { signal: owner.signal });
+    } catch (failure) { detailFailure(failure, owner.valid, id); }
+    finally { if (owner.valid()) setRefreshing(false); }
+  }
   async function addLink(target: MeetingDetail, data: { source_item_id: string; target_item_id: string; relation: 'related' | 'supersedes'; quote: string; start_offset: number; end_offset: number }) {
     if (!detail || linkReviewRequired || refreshing || detail.meeting.analysis_status !== 'ready' || detail.meeting.source_revision !== detail.document.revision) return false;
     const id = detail.document.id;
-    return mutate(signal => api(`/meetings/${id}/links`, { method: 'POST', signal, body: JSON.stringify({ ...data, target_meeting_id: target.document.id, expected_revision: detail.document.revision, expected_version: detail.meeting.version, target_expected_revision: target.document.revision, target_expected_version: target.meeting.version }) }), () => { if (selected.current === id) { setNotice('사용자 확인 관계를 저장했어요.'); void open(id, true); } }, failure => { if (failure instanceof ApiError && failure.status === 409) setLinkReviewRequired(true); });
+    return mutate(signal => api(`/meetings/${id}/links`, { method: 'POST', signal, body: JSON.stringify({ ...data, target_meeting_id: target.document.id, expected_revision: detail.document.revision, expected_version: detail.meeting.version, target_expected_revision: target.document.revision, target_expected_version: target.meeting.version }) }), () => { if (selected.current === id) { setNotice('사용자 확인 관계를 저장했어요.'); void open(id, true); } }, async failure => {
+      if (failure instanceof ApiError && failure.status === 409) setLinkReviewRequired(true);
+      if (accessDenied(failure)) {
+        // Retire target data immediately, then check source access without
+        // resubmitting or accepting replacement choices on the user's behalf.
+        request('targets'); request('detail'); request('list');
+        setTargets([]); setLinks([]); setRecovery(null); setLoading(false); setRefreshing(false);
+        setMeetings(current => current.filter(item => item.document.id !== target.document.id));
+        setTasks(current => current.filter(item => item.meeting_id !== target.document.id));
+        setLinkReviewRequired(true); setLinkSelectionVersion(value => value + 1);
+        setTargetSelectionVersion(value => value + 1); app.closeSource();
+        // Keep mutation controls locked until this access check returns.
+        await recheckLinkSource(id);
+      }
+    });
   }
   async function removeLink(id: string) {
     if (!detail) return;
@@ -255,6 +280,6 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     const timer = setTimeout(() => { if (!mutationBusy.current) { void load(); if (selected.current) void open(selected.current, true); } }, 2500);
     return () => clearTimeout(timer);
   }, [meetings, detail, busy]);
-  return { meetings, tasks, detail, links, targets, loading, listState, busy, error, notice, editing, recovery, refreshing, reviewRequired, linkReviewRequired, linkSelectionVersion, sourceOrigin, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
+  return { meetings, tasks, detail, links, targets, loading, listState, busy, error, notice, editing, recovery, refreshing, reviewRequired, linkReviewRequired, linkSelectionVersion, targetSelectionVersion, sourceOrigin, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
 }
 export type MeetingsController = ReturnType<typeof useMeetings>;

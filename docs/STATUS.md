@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-20 · 결정 연결 저장 복구39통과, source 결과 커밋
+
+원문 단계 결과113파일을f136a72163b00406195792e788fb4f38da5d0577로 커밋했다.104개 source/evidence bytes·일반 설명 문서와 Git index의 일치를 확인했고 원본 CRLF14개와 원문 공백 예외5경로를 보존했다. 최초 기본 공백 검사와 좁은 예외 적용 전 실패 로그도 남겼다.
+
+제품 담당자가 네 파일 소유권을 반환했다. 최종39통과/실패0/skip0, typecheck/build/offline package 통과다. 부모가 코드4개와 local artifact33개의 hash를 확인하고 공개 projection87b8399c를 exact copy했다. Local raw44980a57와 별도 공개 기록ec269a8e를 보존하며 첫4 이후 hash checkpoint 한계를 그대로 공개했다. 모바일/데스크톱 screenshot2개도 AI가 확인했고 사용자 검수는0이다.
+
+[결정 연결 저장 복구](MEETINGS-LINK-SUBMIT-RECOVERY.md)에 실제 재현·수정·실행법을 정리했다. 제품 코드 커밋·push와 정확한 필수 CI가 다음 단계다. 그 뒤 데이터 없는 작은 parser/admission 진단을 별도로 구현하며 현재는 계획만 있다. Source/toolchain/닫힌 실험은 불변, 모델 품질·Phase1은 미완료, goal ACTIVE다.
+
 ## 2026-10-20 · C7 원문 단계 미충족 기록 반환, 제품 회귀 검증 중
 
 두 작성자가 제한된 탐색 결과를 incomplete/no_adopted_corpus로 반환했다. 실제 admission은 split별1회·공개 family는c7_block_bounds 거부·합성은 기계 조건만 통과했다. 추가 작성자 적합성 거부는 각각2개 묶음이며 독립 source 수용/Java parity/문항/tokenizer/native는0이다. 적절한 corpus의 보편적 부재를 입증한 결과가 아니다. [원문 단계 결과](MEETINGS-C7-SOURCE-RESULTS.md)에 범위와 한계를 남겼다.

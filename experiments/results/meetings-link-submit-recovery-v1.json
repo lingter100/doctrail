@@ -1,0 +1,627 @@
+{
+  "schema_version": 1,
+  "kind": "meeting-link-submit-product-recovery",
+  "status": "locally_verified_public_projection_candidate",
+  "changes": [
+    "Ambiguous link POST403/404 retires target/link caches and choices, with explicit full refresh and reselection before another save.",
+    "Automatic read-only source revalidation keeps mutation controls locked; confirmed source denial uses full cached-source invalidation.",
+    "Pending link save locks fields, cancellation and outer toggle with accessible status; failures preserve drafts and restore controls."
+  ],
+  "source_hashes": [
+    {
+      "path": "web/src/useMeetings.ts",
+      "sha256": "f0a7fb882ca69afa7277a2afed38f66ee93acd99f1e11e896c22995af0dd8408"
+    },
+    {
+      "path": "web/src/components/MeetingViews.tsx",
+      "sha256": "d8aa340ae7ed0a719a012adb9f6587ec10ad46ad9167a6c45e8c1dd40c36be31"
+    },
+    {
+      "path": "web/tests/meeting-link-submit.spec.ts",
+      "sha256": "061b7d4c10b6f794bfd7a5f385a5a9620e925a508b396a6b034555e3382e58bb"
+    },
+    {
+      "path": "web/scripts/test-java.mjs",
+      "sha256": "70d6030d8ea259eaf680707daf92fb1085eedc2f943c68b23cb6826492f0403c"
+    }
+  ],
+  "source_timing": {
+    "final_run_order": "Latest awaited-source-check edit -> final2 typecheck/build/offline package -> seven final specs. No source edits during or after that final run.",
+    "explicit_hash_checkpoint": "Recorded after the first final spec (new4), while remaining six specs ran; current hashes match.",
+    "limitation": "No separately recorded source-hash checkpoint immediately before the first final spec. Do not describe the checkpoint as pre-all39."
+  },
+  "final_validation": {
+    "passed": 39,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "unique_specs": 7,
+    "browser_report_duration_ms": 99315.485,
+    "browser_commands_wall_seconds": 143.10779050000002,
+    "build": {
+      "exit_code": 0,
+      "seconds": 15.879106
+    },
+    "specs": [
+      {
+        "spec": "meeting-conflict-recovery.spec.ts",
+        "stats": {
+          "startTime": "2026-10-20T05:13:41.229Z",
+          "duration": 11422.92,
+          "expected": 5,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "server_stopped": true,
+        "tests": [
+          {
+            "file": "meeting-conflict-recovery.spec.ts",
+            "title": "synthetic transport + real Java: inspect conflict, keep local explicitly, then deliberate fresh-version retry",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 2787
+              }
+            ]
+          },
+          {
+            "file": "meeting-conflict-recovery.spec.ts",
+            "title": "synthetic transport + real Java: choosing server deliberately discards local without another PUT",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1405
+              }
+            ]
+          },
+          {
+            "file": "meeting-conflict-recovery.spec.ts",
+            "title": "synthetic transport + real Java with synthetic GET failure: failed refresh keeps draft and CAS survives another writer",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1700
+              }
+            ]
+          },
+          {
+            "file": "meeting-conflict-recovery.spec.ts",
+            "title": "synthetic transport + real Java: changed document revision refuses stale evidence and items",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1431
+              }
+            ]
+          },
+          {
+            "file": "meeting-conflict-recovery.spec.ts",
+            "title": "synthetic transport + real Java: delayed recovery cannot repopulate a different workspace",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1465
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "spec": "meeting-detail-recovery.spec.ts",
+        "stats": {
+          "startTime": "2026-10-20T05:13:14.862Z",
+          "duration": 20629.227,
+          "expected": 10,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "server_stopped": true,
+        "tests": [
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java reader: direct detail 404 clears cached task title assignee and count",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 2363
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java link: target-only version conflict refresh allows explicit reviewed retry",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1899
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java reader: refresh-denial owns access invalidation",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1668
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java reader: late-list owns access invalidation",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1557
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java reader: workspace-navigation owns access invalidation",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1488
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java link conflict: target-decision-change requires explicit review",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1740
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java link conflict: source-version requires explicit review",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1782
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java link conflict: source-revision requires explicit review",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1745
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java link conflict: reload-failure requires explicit review",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1747
+              }
+            ]
+          },
+          {
+            "file": "meeting-detail-recovery.spec.ts",
+            "title": "real Java link conflict: target-list-denial requires explicit review",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1878
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "spec": "meeting-link-recovery.spec.ts",
+        "stats": {
+          "startTime": "2026-10-20T05:12:58.048Z",
+          "duration": 10616.753999999999,
+          "expected": 4,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "server_stopped": true,
+        "tests": [
+          {
+            "file": "meeting-link-recovery.spec.ts",
+            "title": "real Java: delayed pre-delete links cannot restore a removed link or hide the new link",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 2696
+              }
+            ]
+          },
+          {
+            "file": "meeting-link-recovery.spec.ts",
+            "title": "real Java + synthetic DELETE failure: preserve the link and retry only on explicit action",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1644
+              }
+            ]
+          },
+          {
+            "file": "meeting-link-recovery.spec.ts",
+            "title": "real Java: delayed successful DELETE cannot reopen the old meeting after workspace movement",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1677
+              }
+            ]
+          },
+          {
+            "file": "meeting-link-recovery.spec.ts",
+            "title": "real Java + synthetic failures: deleting during recovery leaves a failed fresh read retryable",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1839
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "spec": "meeting-link-submit.spec.ts",
+        "stats": {
+          "startTime": "2026-10-20T05:12:40.287Z",
+          "duration": 11368.275,
+          "expected": 4,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "server_stopped": true,
+        "tests": [
+          {
+            "file": "meeting-link-submit.spec.ts",
+            "title": "real Java: link POST target 404 retires cached target and requires explicit refreshed selection",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 3320
+              }
+            ]
+          },
+          {
+            "file": "meeting-link-submit.spec.ts",
+            "title": "real Java: pending link POST locks fields and dismissal so late success cannot discard a replacement draft",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1912
+              }
+            ]
+          },
+          {
+            "file": "meeting-link-submit.spec.ts",
+            "title": "real Java + synthetic link POST 503: unlock retained draft without automatic resubmission",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1691
+              }
+            ]
+          },
+          {
+            "file": "meeting-link-submit.spec.ts",
+            "title": "real Java: ambiguous link POST 404 automatically rechecks and retires a deleted source",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1689
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "spec": "meeting-ready.spec.ts",
+        "stats": {
+          "startTime": "2026-10-20T05:14:41.297Z",
+          "duration": 16208.949,
+          "expected": 3,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "server_stopped": true,
+        "tests": [
+          {
+            "file": "meeting-ready.spec.ts",
+            "title": "synthetic transport + real Java: meeting registration, evidence, user edits, tasks, links, answer and responsive layouts",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 7681
+              }
+            ]
+          },
+          {
+            "file": "meeting-ready.spec.ts",
+            "title": "synthetic transport + real Java: failed reanalysis visibly preserves the ready user-edited result",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 4094
+              }
+            ]
+          },
+          {
+            "file": "meeting-ready.spec.ts",
+            "title": "synthetic transport + real Java: edit conflicts preserve local draft and workspace change cancels delayed meeting",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1649
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "spec": "meeting-save-pending.spec.ts",
+        "stats": {
+          "startTime": "2026-10-20T05:13:58.993Z",
+          "duration": 5762.827,
+          "expected": 2,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "server_stopped": true,
+        "tests": [
+          {
+            "file": "meeting-save-pending.spec.ts",
+            "title": "real Java: pending successful save locks every analysis field and retains the submitted snapshot",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 2860
+              }
+            ]
+          },
+          {
+            "file": "meeting-save-pending.spec.ts",
+            "title": "real Java + synthetic PUT 503: failed save unlocks the preserved draft without automatic retry",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1461
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "spec": "meeting-source-access.spec.ts",
+        "stats": {
+          "startTime": "2026-10-20T05:14:11.462Z",
+          "duration": 23306.533,
+          "expected": 11,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "server_stopped": true,
+        "tests": [
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java reader: full source 404 hides cached meeting and tasks",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 2555
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java reader: evidence source 404 hides cached meeting and tasks",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1660
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java reader: delayed source 404 cannot reclaim meeting",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 2067
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java reader: delayed source 404 cannot reclaim back",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1752
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java reader: delayed source 404 cannot reclaim workspace",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1633
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java owner + synthetic source 500: keep unsaved editor and retry explicitly",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1301
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java owner + synthetic source 503: keep unsaved editor and retry explicitly",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1250
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java owner + synthetic source 403 retires editor",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1503
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java reader: denied linked source hides links but preserves the current meeting",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 1844
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java: denied linked source cannot return from a retained recovery snapshot - server",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 2388
+              }
+            ]
+          },
+          {
+            "file": "meeting-source-access.spec.ts",
+            "title": "real Java: denied linked source cannot return from a retained recovery snapshot - local",
+            "status": "expected",
+            "results": [
+              {
+                "status": "passed",
+                "duration_ms": 2403
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "build_validation": {
+    "typecheck": "passed",
+    "frontend_build": "passed",
+    "offline_maven_package": "passed",
+    "maven_flag": "-DskipTests",
+    "java_unit_tests_executed_by_this_work": false
+  },
+  "boundaries": {
+    "real_java_sqlite_acl_cas": true,
+    "real_packaged_react_ui": true,
+    "extraction_and_answer_transport": "deterministic synthetic HTTP fixture",
+    "llm_calls": 0,
+    "tokenizer_calls": 0,
+    "native_model_calls": 0,
+    "downloads": 0,
+    "git_actions": 0,
+    "frozen_evaluation_changes": 0,
+    "ci_claim": false,
+    "human_review": false,
+    "model_quality_claim": false,
+    "publication": false
+  },
+  "prior_outcomes": [
+    {
+      "stage": "initial_typecheck_setup",
+      "classification": "New test syntax TS1005, corrected before browser execution"
+    },
+    {
+      "stage": "initial_browser_setup",
+      "passed": 0,
+      "failed": 3,
+      "classification": "Wrong initial workspace and exact-label selector setup timeouts, NOT product failures"
+    },
+    {
+      "stage": "corrected_product_baseline",
+      "passed": 0,
+      "failed": 3,
+      "classification": "Real target404 retained target/cache and did not reload targets; real delayed201 closed replacement draft; synthetic503 companion failed pending lock assertion"
+    },
+    {
+      "stage": "intermediate_source_denial",
+      "passed": 3,
+      "failed": 1,
+      "classification": "Original three passed; added actual source deletion/POST404 retained source detail until manual refresh"
+    }
+  ],
+  "counts_note": "Final39 is the seven unique final specs; do not add overlapping baseline or intermediate counts.",
+  "cleanup": {
+    "owned_java_remaining": 0,
+    "owned_node_remaining": 0,
+    "all_seven_servers_stopped": true
+  }
+}

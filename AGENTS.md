@@ -1,6 +1,8 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- C7 source outcomes committed f136a72 (113files incl104source metadata; exactstage/14CRLFpreserved/5originalwhitespaceexceptions). LinkPOST fix final realJava39/0, source4+artifact33 hashesverified; raw44980a57/public87b8399c/publicationec269a8e. Hashcheckpoint AFTERnew4, samefinal35/current; needexactcommitCI. All7ownedJVMstopped, sourceauthorsreturned, noMaven needed. Parent owns productdoc/commit/pushCI; next bounded<=12 generic diagnostic only AFTER these commits/CI, not yet implemented/run. Goalactive/Phase1draft.
+
 - C7 sourceauthors RETURNED bounded incomplete/no_adopted_corpus: actualadmission1each/publicc7_block_bounds/synthmechanicalpass, noacceptedfreeze/items/tokenizer/native/Java. Cal95 index4785ee14/outcome1289a1ca; val9 finalindex4525fffc/outcome9dd18393(localoriginal91/earlymetadataarchives). Parentmetadataonly verifying104 beforecommit; HEADholdreleased afterallsourcejobsfinished. ExistingcalAstraxhigh READONLY genericcode recommendation RETURNED: bounded<=12datafree diagnostic BEFORE newcandidate, cal-sourceexposure disclosed/NOTindependentreview; olddesignreactivation tool rejectedagentthreadlimit. Productfinal39passed/7JVMstopped; receiptpending, hashcheckpoint AFTERfirst4 (notpreall39), requireexactcommitCI. Goalactive/Phase1draft.
 
 - ActualAstrahigh meeting_request_lifecycle_audit owns ONLY useMeetings/MeetingViews/NEWmeeting-link-submit browser test/nonfrozen runner for real POSTtarget404 + pending201 draft-loss repro/fix. ExclusiveMaven granted; sourceauthors waitforJava slot, sourceadmission maycontinue. Read-only2 hypotheses NOTruntimeproof yet. No frozen77/data/native/Git edits. Parent HEADd906614 held/rootdocs; goalactive.

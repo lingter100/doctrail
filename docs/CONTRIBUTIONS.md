@@ -1,4 +1,9 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · 실제 결정 연결 실패 수정과 검증
+
+실제 Astra high 제품 담당자가 원래 두 가설을 Java에서 재현하고 수정했다. 부모의 코드 검토에서 현재 회의 자체의 접근 거부 경계를 추가 확인하도록 했고 실제 중간 실패를 보존한 뒤 읽기 재검증과 입력 잠금을 연결했다. 최종39개 실제 Java browser 검사·type/build/offline package와 source4를 반환했다.
+
+부모가 코드4개/local artifact33개 hash·공개본 exact copy와 화면2개를 확인했다. 첫4 완료 후의 hash checkpoint를 전체39 실행 전 확인이라고 표현하지 않으며 정확한 커밋 CI를 뒤에 확인한다. 합성 모델 transport·실제 모델 실행0·사용자 검수0을 구분한다.
 ## 2026-10-20 · 자료 미충족과 후속 검토의 역할 한계
 
 두 실제 Astra xhigh 작성자가 최초 거부를 보존하고 bounded source-search 결과를 반환했다. 부모는104개 공개 파일의 hash·안전한 metadata만 확인했다. 작성자 적합성 판단을 독립 source review나 사용자 검수로 바꾸어 기록하지 않는다.
