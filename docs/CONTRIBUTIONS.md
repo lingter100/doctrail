@@ -1,4 +1,8 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · C7 사전 크기 수용 설계
+
+기존 실제 Astra xhigh free_qa_candidate_review가 frozen formatter의 system literal1720bytes와 직렬화 구조를 근거로 NEW 설계2개를 작성했다. JSON/UTF8/LF·산술·근거17hash를 검증했으며 구현·test·tokenizer/native 실행0이다. STATUS에서 validation aggregate 범위를 본 사실을 자진 공개하고 final judge 제외를 유지했다. 부모는 반환 hash·등록 규칙과 Git/CI를 확인했다. 구현자는 이후 별도로 지시하며 이 기록을 사용자 검수로 표현하지 않는다.
+
 ## 2026-10-20 · C6 공식 offline 준비와 실패 보존
 
 기존 실제 Astra xhigh split 자료 담당자2명이 고정된 공식 CLI를 자기 자료에1회씩 실행했다. Calibration 담당자는 첫 import 오류를 보존하고 부모의 경로 수정 지시 후 같은 module CLI로 첫 실제 준비를 수행했다. Validation 담당자는 상한 실패를 보존하고 재계수하지 않았다. 토크나이저는 캐시만 사용했고 실제 생성0이다.

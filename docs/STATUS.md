@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-20 · C7 크기 수용 설계2 완료, 새 구현 준비
+
+기존 실제 Astra xhigh 설계자가 새 계획4ac59ad5·protocol3a04120b 두 파일을 반환했다. Source family 전체의 실제 메시지 직렬화6656bytes +질문 reserve1024 +wrapper allowance512 =8192bytes라는 engineering 예산을 고정했다. 원문 질문≤512bytes, 전체 원문/청크·block·metadata 상한도 자료 채택 전에 검사한다. 이는 token 수나90초 통과의 보장이 아니며 한국어 정보량·공개 자료 대표성의 한계를 공개한다.
+
+새 prepare에서 같은 실제 prompt를 한 번 구성·encode해 bytes/hash/token 수를 함께 기록한다. Source/input 조건을 초과하면 자르거나 재선택하지 않고 거부한다. 모델/GPU28/5120·6144/928·384/90초와 cal6→val8 의미 관문은 유지한다. C6 자료/성공 calibration도 재사용하지 않는다.
+
+부모가 설계2·근거 hash/JSON/LF/산술을 확인했다. C6 종료de610의 push39367039464/PR39367044396 필수3job 모두 성공했으며 CI 영수증5832fc7a도 보존한다. 다음은 설계 커밋 뒤 기존 실제 Astra high host_proof_profile에 NEW review/prepare/probe/audit+각test8개를 배정하고 부모가 내용 없는 C7 family registry를 만든다. 아직 새 구현/자료/tokenizer/native0, source 역할·최종 judge도 미배정이다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · C6 종료 커밋, C7 사전 자료 크기 설계 중
+
+C6 종료9파일을de610d9f1c00caf9c7f582402e56026899fd1bab로 사용자 명의 커밋·push했다. 실제 GitHub author/committer lingter100·PR14 head·committed9 exact bytes를 확인했다. Push39367039464/PR39367044396 CI는 이 기록에서 진행 중이다.
+
+기존 실제 Astra xhigh free_qa_candidate_review의 읽기 권고 뒤 새 docs/MEETINGS-C7-PLAN.md와 data/evaluation/meetings-c7-protocol-v1.json 두 설계 파일만 배정했다. 추론은 유지하고 새 원문 채택 전 family 전체의 실제 표현 bytes·chunk/block·문서 metadata 및 질문 여유를 등록한다. 수치는 C6 검증 길이에서 역산하지 않고 formatter 구조와 별도 보수적 예산으로 정한다. Byte 검사가 token 보장은 아니라는 한계를 유지한다.
+
+설계자는 지침에 따라 STATUS 상단을 읽는 과정에서 C6 validation aggregate 범위를 보았음을 즉시 공개했다. 본문·문항별 길이는 열지 않았으며 zero aggregate exposure를 주장하지 않는다. 이후 전문을 읽지 않고 독립 근거로 수치를 도출한다. 부모는 root 문서/CI만 담당하고 현재 새 코드·자료·역할·tokenizer/native0이다. C6는 닫힌 상태, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C6 입력 준비 종료: 검증2문항 토큰 상한 초과
 
 같은 HEAD e8e5297에서 각 split 공식 offline 준비를1회 마쳤다. Calibration6/6 통과,1,273~2,192토큰·CLI71.720초다. 격리 validation8개를 모두 측정했고2개가5,120토큰을 초과했다(범위1,784~5,266, CLI47.741초). 요청 바이트 상한 초과0이다. Tokenizer각1회·다운로드/실제 모델 생성/최종 판정0이다. 이 실패는 입력 수용성 실패이며 모델 의미 품질 실패나 reader 개선 효과의 증거가 아니다.

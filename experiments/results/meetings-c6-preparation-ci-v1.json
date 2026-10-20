@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "head_sha": "de610d9f1c00caf9c7f582402e56026899fd1bab",
+  "observed_at": "2026-10-20T04:03:00.579559+00:00",
+  "observer": "/root using actual gh run view; user GitHub author/committer verified separately",
+  "github_author": "lingter100",
+  "github_committer": "lingter100",
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 39367039464,
+      "event": "push",
+      "headSha": "de610d9f1c00caf9c7f582402e56026899fd1bab",
+      "jobs": [
+        {
+          "databaseId": 118446122367,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367039464/job/118446122367",
+          "startedAt": "2026-10-20T03:57:58Z",
+          "completedAt": "2026-10-20T04:02:07Z"
+        },
+        {
+          "databaseId": 118446122655,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367039464/job/118446122655",
+          "startedAt": "2026-10-20T03:57:58Z",
+          "completedAt": "2026-10-20T04:01:55Z"
+        },
+        {
+          "databaseId": 118446122710,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367039464/job/118446122710",
+          "startedAt": "2026-10-20T03:57:59Z",
+          "completedAt": "2026-10-20T03:58:19Z"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39367039464"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 39367044396,
+      "event": "pull_request",
+      "headSha": "de610d9f1c00caf9c7f582402e56026899fd1bab",
+      "jobs": [
+        {
+          "databaseId": 118446137530,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367044396/job/118446137530",
+          "startedAt": "2026-10-20T03:58:02Z",
+          "completedAt": "2026-10-20T03:58:17Z"
+        },
+        {
+          "databaseId": 118446137749,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367044396/job/118446137749",
+          "startedAt": "2026-10-20T03:58:01Z",
+          "completedAt": "2026-10-20T04:01:46Z"
+        },
+        {
+          "databaseId": 118446137764,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39367044396/job/118446137764",
+          "startedAt": "2026-10-20T03:58:02Z",
+          "completedAt": "2026-10-20T04:02:09Z"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39367044396"
+    }
+  ],
+  "scope": "Required CI for preserved C6 preparation closure and exact artifacts. Does not change input-admissibility failure or imply native inference/semantic quality.",
+  "closure_metadata": {
+    "file": "experiments/results/meetings-c6-preparation-results-v1.json",
+    "sha256": "0b1c83869b6ee3978a82a08e9be3b99c31b2accfb4aa921627aa57b2f37712ad"
+  },
+  "native_calls": 0,
+  "closed_candidate_remains_closed": true
+}

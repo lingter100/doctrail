@@ -1,0 +1,702 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c7-v1",
+  "short_id": "c7",
+  "registered_date_kst": "2026-10-20",
+  "state": "design_only_no_implementation_authorization_or_data_or_role_assignments",
+  "design": "docs/MEETINGS-C7-PLAN.md",
+  "reused_policy_id": "meeting-answer-single-thinking-c4-v1",
+  "evidence": {
+    "c6_preparation_closure": {
+      "sha256": "0b1c83869b6ee3978a82a08e9be3b99c31b2accfb4aa921627aa57b2f37712ad",
+      "permitted_fields_only": [
+        "status",
+        "failure_interpretation",
+        "future_boundary",
+        "preserved_files_verified_unchanged",
+        "native_calls"
+      ],
+      "validation_length_values_not_used": true,
+      "file": "experiments/results/meetings-c6-preparation-results-v1.json"
+    },
+    "c6_closure_commit": "de610d9f1c00caf9c7f582402e56026899fd1bab",
+    "c6_closure_ci": {
+      "sha256": "5832fc7a309e43524135f5a51e6e152336efa0c23e41a7916675e0ce5223caf6",
+      "file": "experiments/results/meetings-c6-preparation-ci-v1.json"
+    },
+    "c6_prior_contract": {
+      "sha256": "10f1ab558996f99b577bb61c533f4b202d73c25fbde42a94e674cb4d3201d691",
+      "file": "data/evaluation/meetings-c6-protocol-v1.json"
+    },
+    "failure_type": "offline_input_admissibility_not_inference_or_semantic_failure",
+    "native_calls": 0,
+    "reader_or_quality_effect_measured": false,
+    "reacts_to_C6_admission_failure": true,
+    "pristine_heldout_independence_claim": false,
+    "budget_basis": "frozen_formatter_structure_plus_independently_chosen_8KiB_engineering_envelope_not_heldout_lengths"
+  },
+  "frozen_reuse": {
+    "src/doctrail/meeting_bounded_snapshot.py": "a5ceb1101b981c74c8929de982af119110842bf89b00c3903f4e956565924a18",
+    "src/doctrail/meeting_answer_thinking.py": "2ef811fd35847dc9dfa9a15654e312e81c53c2d449b5ef7f674bc634526b78f4",
+    "src/doctrail/meeting_thinking_quality.py": "a4838c76ef5d243dc82d00b2feae05e8dca31548cd000941ebfa74588881ccdd",
+    "src/doctrail/meeting_thinking_transport.py": "cd0c47eccc408296667c0d7708d018955107bbb16b4a5311f7eebef1d1abaec4",
+    "scripts/serve_meeting_gpu_placement.py": "083474393f80d0386edcb1cad6efe9ee644655671efa75b8cd921e76a9e23bf5",
+    "src/doctrail/meeting_answer_blocks.py": "16bccf899000f55b7f12ace2b8103021119d9864973e97aed0d91a4895c7bbbb",
+    "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+    "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+    "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114"
+  },
+  "read_only_guard_parity_references_not_runtime_orchestrators": {
+    "src/doctrail/meeting_c6_review.py": "087addb0edb594955699f1e2f6a0113e572249ba5e3080909b55b1a122e05e34",
+    "scripts/prepare_meeting_c6_inputs.py": "4d2f13bf364cbaf62eff73979a30b5bb79ad4f2e013412036572444278bf48b5",
+    "scripts/probe_meeting_c6_quality.py": "799a78ecb91daa0fc75d8a6557159fcba6adad7316e283bf0def6372ff3372a6",
+    "scripts/audit_meeting_c6_quality.py": "7a11ef4d15202ca3deb3ebe66b489d8ece93b3a0335d1252a61c55a7656ac044",
+    "scripts/probe_meeting_thinking_resources.py": "a2bf9368191d3b057b270078405f6f89fce04ca9b169d4adb8282e9d17669bbf"
+  },
+  "reader_integration": {
+    "call": "doctrail.meeting_bounded_snapshot.read_snapshot(target, meter, candidate=True)",
+    "chunk_bytes": 65536,
+    "file_byte_limit": 16777216,
+    "sentinel_bytes": 16777217,
+    "owners": [
+      "source_manifest_inner_Snapshots_get",
+      "inner_unchanged_new_instance",
+      "caller_Snapshots_get",
+      "caller_unchanged_new_instance",
+      "GitProof_fresh_worktree_hash",
+      "committed_helper_additional_fresh_read",
+      "new_preparation_dispatch_and_audit_snapshot_paths"
+    ],
+    "common_core_consumer_order": [
+      "inner_bound_snapshot",
+      "source_manifest_unchanged",
+      "caller_bound_snapshot",
+      "git_ci_head",
+      "git_head",
+      "caller_unchanged"
+    ],
+    "all_existing_guards_and_consumption_order_preserved": true,
+    "short_nonempty_read_continues": true,
+    "stop": "EOF_or_accumulated_BYTE_LIMIT_plus_1",
+    "overflow_checked_before_final_stamp": true,
+    "read_close_invalid_return_errors_fail": true,
+    "whole_bytes_and_stamp_returned": true,
+    "memory_bound_is_not_64KiB_total": true,
+    "new_cache_or_hash_parse_reuse": false,
+    "existing_revision_name_git_blob_cache_semantics_only": true,
+    "fresh_reads_hashes_required_at_each_existing_boundary": true,
+    "monkeypatch_or_global_replacement": false,
+    "cli_reader_switch": false,
+    "meter_content": "safe_python_call_and_returned_byte_counts_only_no_raw_or_extra_profiling_writes",
+    "atomic_snapshot_or_unobserved_ABA_detection_claim": false,
+    "reference_detected_mutation_or_ABA_missed_by_candidate": "integration_failure"
+  },
+  "model": {
+    "name": "Qwen3.5-9B Q5_K_M",
+    "gguf_sha256": "dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+    "runtime_commit": "d81235049384534c167caea52b85a694f6103d14",
+    "runtime_fingerprint": "b11429-d81235049",
+    "same_cached_manifest_alias_tokenizer": true,
+    "gpu_layers_requested": 28,
+    "gpu_layers_effective": null,
+    "flash_attention_requested": "auto_default_unchanged",
+    "flash_attention_effective": null,
+    "parallel": 1,
+    "batch_size": 512,
+    "ubatch_size": 128,
+    "fit": "off",
+    "temperature": 0,
+    "seed": 0,
+    "cache": false,
+    "log_disable": true,
+    "paid_services": false,
+    "downloads": false,
+    "prompt_schema_transport_changes": false
+  },
+  "limits": {
+    "input_tokens": 5120,
+    "context_tokens": 6144,
+    "total_output_tokens": 928,
+    "reasoning_tokens_requested": 512,
+    "final_json_retokenized_tokens": 384,
+    "request_seconds": 90,
+    "cleanup_seconds": 5,
+    "request_start_through_cleanup_seconds": 120,
+    "phase_seconds": 1200,
+    "reasoning_and_final_are_independent_native_hardcaps": false,
+    "native_finish": "eos_only"
+  },
+  "request_boundary": {
+    "t0": "before_first_request_specific_proof_and_semantic_parse",
+    "included": [
+      "head_bytes_path_metadata_proof",
+      "preparation_template_input_tokenize",
+      "before_dispatch_reproof",
+      "durable_reservation_and_callbacks",
+      "native_http",
+      "response_validation_final_retokenization_mapping",
+      "required_result_persistence"
+    ],
+    "remaining_rechecked_after_callbacks_and_last_required_write": true,
+    "http_timeout_capped_to_outer_deadline": true,
+    "late_return_is_failure": true,
+    "proof_moved_outside_request_budget": false,
+    "startup_initial_phase_preflight_and_independent_judging_reported_separately": true,
+    "blocking_io_hard_preemption_claim": false
+  },
+  "answer_contract": {
+    "full_scope": [
+      "general_documents",
+      "multiple_meetings",
+      "general_plus_meetings",
+      "ko",
+      "en"
+    ],
+    "format": "status_and_claims_evidence_ids_text",
+    "max_claims": 6,
+    "evidence_ids_per_claim": [
+      1,
+      4
+    ],
+    "native_text_min_length": 1,
+    "host_text_max_length": 2000,
+    "original_catalog_quotes_offsets": true,
+    "same_prompt_schema_bytes_for_same_inputs": true,
+    "partial_answer_as_answered": false,
+    "technical_failure_as_abstention": false,
+    "exact_quote_alone_is_semantic_pass": false,
+    "marker_or_stress_mode": false
+  },
+  "ownership": {
+    "current_design_only": [
+      "docs/MEETINGS-C7-PLAN.md",
+      "data/evaluation/meetings-c7-protocol-v1.json"
+    ],
+    "future_new_implementation_files": [
+      "src/doctrail/meeting_c7_review.py",
+      "tests/test_meeting_c7_review.py",
+      "scripts/prepare_meeting_c7_inputs.py",
+      "tests/test_prepare_meeting_c7_inputs.py",
+      "scripts/probe_meeting_c7_quality.py",
+      "tests/test_probe_meeting_c7_quality.py",
+      "scripts/audit_meeting_c7_quality.py",
+      "tests/test_audit_meeting_c7_quality.py"
+    ],
+    "future_implementation_authorized_now": false,
+    "new_platform_policy_adapter_launcher_files": false,
+    "old_orchestrators_or_closed_default_paths_called": false,
+    "pure_primitives_explicit_arguments_only": true,
+    "frozen_files_modified": false,
+    "parent_owns_rootdocs_results_ci_git": true
+  },
+  "toolchain": {
+    "freeze_includes": [
+      "new8",
+      "reader_policy_schema_adapter_transport_launcher_and_transitive_dependencies",
+      "tests",
+      "model_manifest",
+      "environment_locks",
+      "design2",
+      "static_content_free_family_registry",
+      "positive_code_roster_and_negative_import_candidate_existence",
+      "source_admission_constants_and_rendering_helper",
+      "single_pass_offline_byte_token_counter"
+    ],
+    "committed_freeze_HEAD_bytes_before_discovery": true,
+    "new_positive_or_unapproved_path_rejected_before_body_read": true,
+    "allowlisted_existing_files_read_raw_bytes_to_compute_SHA": true,
+    "allowed_source_hash_mismatch_rejected_after_read_before_AST_or_semantic_parse": true,
+    "hash_mismatch_detection_without_reading_bytes_claim": false,
+    "actual_roles_judges_data_bind_later_execution_plan_not_retroactive_toolchain": true,
+    "exact_source_commit_ci_required_before_sources": true,
+    "required_ci_jobs": [
+      "backend",
+      "web",
+      "java-service"
+    ],
+    "required_observed_events": [
+      "push",
+      "pull_request"
+    ],
+    "committed_ci_json_is_not_GitHub_authenticity_proof": true,
+    "synthetic_integration_tests_only_before_source_work": true,
+    "test_requirements": [
+      "all_reader_consumers_wired_and_no_old_default_paths",
+      "same_guard_sequence_hash_bytes_and_freshness",
+      "short_reads_overflow_error_priority",
+      "HEAD_committed_bytes_path_alias_negative_import_and_observed_ABA",
+      "callback_and_terminal_write_deadline_late_send_zero",
+      "partial_and_first_failure_persistence",
+      "anonymity_judgment_lock_and_validation_prebody_gate",
+      "full_family_metadata_block_whitespace_overlap_and_escape_accounting",
+      "source_bound_reject_before_adoption_no_transform_rescue",
+      "item_raw_query_and_nested_serialized_reserve",
+      "one_cached_load_one_template_one_encode_same_prompt_bytes_hash_tokens",
+      "frozen_formatter_and_count_semantic_parity_without_actual_tokenizer",
+      "wrapper_byte_or_token_failure_consumes_preparation"
+    ],
+    "unsupported_OS_coverage_and_intermediate_check_versions_disclosed": true
+  },
+  "data": {
+    "source_documents_per_split": 6,
+    "source_documents_total": 12,
+    "documents_per_family": {
+      "meeting_distinct_dates": 2,
+      "general": 1
+    },
+    "family_matrix": [
+      {
+        "id": "c7-f01",
+        "phase": "calibration",
+        "provenance": "public",
+        "ko_answered": 1,
+        "en_answered": 1,
+        "ko_abstained": 1,
+        "en_abstained": 0
+      },
+      {
+        "id": "c7-f02",
+        "phase": "calibration",
+        "provenance": "synthetic",
+        "ko_answered": 1,
+        "en_answered": 1,
+        "ko_abstained": 0,
+        "en_abstained": 1
+      },
+      {
+        "id": "c7-f03",
+        "phase": "validation",
+        "provenance": "public",
+        "ko_answered": 1,
+        "en_answered": 1,
+        "ko_abstained": 1,
+        "en_abstained": 1
+      },
+      {
+        "id": "c7-f04",
+        "phase": "validation",
+        "provenance": "synthetic",
+        "ko_answered": 1,
+        "en_answered": 1,
+        "ko_abstained": 1,
+        "en_abstained": 1
+      }
+    ],
+    "answered_coverage_per_split": {
+      "general_only_min": 1,
+      "multiple_meetings_min": 1,
+      "general_plus_meetings_min": 1,
+      "all_sufficient_alternatives_require_multiple_documents_min": 2,
+      "ko_question_en_evidence_min": 1,
+      "en_question_ko_evidence_min": 1
+    },
+    "required_facts_per_item": [
+      3,
+      6
+    ],
+    "whole_nonempty_chunks_no_token_feedback_truncation_or_reselection": true,
+    "abstention_family_wide_missing_required_information": true,
+    "source_review_parity_freeze_commit_before_questions": true,
+    "item_independent_prereview_freeze_commit_before_offline": true,
+    "official_offline_preparations_per_split": 1,
+    "over_limit_repair_or_recount": false,
+    "pre_offline_rejected_draft_preserved_new_version_requires_prereview": true,
+    "native_feedback_source_or_item_revision": false,
+    "source_admission_before_adoption_and_questions": true,
+    "accepted_source_admission_receipt_bound_into_source_freeze": true,
+    "item_byte_checks_bound_into_item_review_and_offline_receipt": true
+  },
+  "freshness": {
+    "prior_access": "family_URL_revision_raw_normalized_fingerprint_metadata_only",
+    "whole_normalization": "NFC_CRLF_CR_to_LF_whitespace_collapse",
+    "paragraphs": "raw_blank_line_separation_normalized_length_at_least_200_codepoints",
+    "whole_document_duplicates_rejected": true,
+    "cross_family_and_cross_split_long_paragraph_duplicates_rejected": true,
+    "within_family_long_paragraph_overlap": "independent_source_prereview_accept_or_reject_with_reason_before_items_preserve_bytes",
+    "validation_binds_calibration_fingerprints": true,
+    "isolated_source_reviewer_cross_split_near_duplicate_review": true,
+    "prior_missing_coverage_and_semantic_detection_limits_disclosed": true,
+    "closed_body_read_for_dedup": false,
+    "explicit_prior_closed_exclusion_includes_C6": true,
+    "closed_calibration_reuse_or_closed_source_family_relabel": false
+  },
+  "roles": {
+    "assignments": [],
+    "final_judges_assigned": 0,
+    "self_review": false,
+    "cross_split_author_reviewer_overlap": false,
+    "same_split_source_item_role_reuse_disclosed": true,
+    "parent_designer_implementer_validation_semantics": false,
+    "isolated_source_item_offline_custody_is_not_validation_execution_authorization": true,
+    "validation_execution_and_audit_gate_before_metadata_or_body": "original_C7_calibration_6_of_6_and_integrity_replay",
+    "toolchain_source_code_freeze_commit_exact_ci_before_data_role_registration": true,
+    "actual_data_role_invocation_sequence_after_registration_recorded": true,
+    "fresh_data_commit_required_before_its_author_registration": false,
+    "item_authorship_requires_reviewed_data_source_freeze_commit": true,
+    "Git_proves_actual_creation_time_or_prior_nonexistence": false,
+    "final_judge_excluded": [
+      "parent",
+      "design",
+      "implementation",
+      "source_author",
+      "source_prereviewer",
+      "item_author",
+      "item_prereviewer",
+      "mapping_aware_execution_or_audit"
+    ],
+    "distinct_final_judges_required": 2,
+    "actual_acceptance_model_effort_attestation_and_independent_64byte_seed_before_first_output": true,
+    "attestation_before_pack_read_includes_automatic_context_and_metadata_exposure": true,
+    "fully_blind_claim": false,
+    "validation_source_mechanical_admission_access": "designated_isolated_source_author_reviewer_custodian_before_questions_not_quality_execution_authority",
+    "parent_designer_implementer_validation_detailed_lengths_or_freshness_reasons": false,
+    "public_admission_report": "safe_aggregate_count_hash_status_only"
+  },
+  "judging": {
+    "pack_include": [
+      "anonymous_sample_id",
+      "question",
+      "response_language",
+      "contexts",
+      "oracle",
+      "immutable_final_answer_and_citations"
+    ],
+    "pack_exclude": [
+      "original_nested_case_family_candidate_author_identifiers",
+      "mapping",
+      "model_name",
+      "timing",
+      "native_trace",
+      "reasoning"
+    ],
+    "unmaskable_identifier_in_natural_language": "reject_pack_do_not_rewrite_meaning",
+    "criteria": [
+      "all_required_and_extra_facts",
+      "complete_answer",
+      "semantic_citation_support",
+      "entity_time_condition_state",
+      "requested_language",
+      "appropriate_abstention"
+    ],
+    "judgment_sha_lock_before_mapping_aggregation_or_reasoning_diagnostics": true,
+    "audit_reasoning_disclosure_step": false,
+    "post_lock_diagnostics_may_change_score": false
+  },
+  "execution": {
+    "calibration_max_generation_attempts": 6,
+    "validation_max_generation_attempts": 8,
+    "total_max_generation_attempts": 14,
+    "extra_neutral_resource_profile_calls": 0,
+    "warmup_retry_repair_translation_self_review_fallback_calls": 0,
+    "configuration_or_budget_ladder": false,
+    "first_structural_resource_integrity_or_persistence_failure": "close_immediately_preserve_first_cause_partial_unexecuted_later_errors_and_original_flags",
+    "semantic_failure_after_valid_contract": "finish_registered_phase_then_independent_judgment_no_rerun",
+    "exclusive_output_and_ledger_reservation": true,
+    "old_pool_preparation_comparison_or_C6_rerun": false,
+    "separate_counters": [
+      "reservation",
+      "send_hook_attempt",
+      "parsed_response",
+      "archived_parsed_response",
+      "contract_accepted_answer"
+    ],
+    "wire_receipt_or_completion_inferred_from_send_hook": false,
+    "native_drain": {
+      "emitted_bytes": 0,
+      "eof": true,
+      "read_errors": 0,
+      "join_errors": 0,
+      "bounded_discard": true
+    },
+    "public_or_operational_raw_payload_reasoning_token_ids": false,
+    "success_requires": [
+      "CLI_exit_zero",
+      "matching_terminal_summary_receipt_and_replay",
+      "required_persistence_and_deadline",
+      "integrity"
+    ],
+    "stale_passed_receipt_after_failed_terminal_save_is_success": false
+  },
+  "gates": {
+    "calibration_complete_correct": "6/6",
+    "validation_complete_correct": "8/8",
+    "unsupported_facts": 0,
+    "inappropriate_abstentions": 0,
+    "language_failures": 0,
+    "operational_failures": 0,
+    "automatic_service_adoption": false,
+    "ACL_before_scoring_revision_and_source_access_requirements_preserved": true,
+    "fixed_context_gate_is_end_to_end_or_user_acceptance": false
+  },
+  "future_artifacts": [
+    {
+      "file": "data/evaluation/meetings-c7-family-registry-v1.json",
+      "when": "static_content_free_structure_before_toolchain_freeze",
+      "status": "not_created"
+    },
+    {
+      "file": "data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+      "when": "after_new8_synthetic_checks_before_source_work",
+      "status": "not_created"
+    },
+    {
+      "file": "data/evaluation/meetings-c7-toolchain-ci-v1.json",
+      "when": "after_exact_frozen_source_commit_required_ci_before_source_work",
+      "status": "not_created"
+    },
+    {
+      "file": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+      "when": "metadata_only_before_source_adoption",
+      "status": "not_created"
+    },
+    {
+      "file": "data/evaluation/meetings-c7-role-registration-v1.json",
+      "when": "actual_role_acceptance_before_each_role_starts",
+      "status": "not_created"
+    },
+    {
+      "file": "data/evaluation/meetings-c7-review-registration-v1.json",
+      "when": "actual_two_judges_attestations_and_seeds_before_first_quality_output",
+      "status": "not_created"
+    },
+    {
+      "file": "data/evaluation/meetings-c7-execution-plan-v1.json",
+      "when": "after_both_split_source_item_freezes_once_offline_and_judge_registration_commit_before_calibration",
+      "status": "not_created"
+    }
+  ],
+  "required_order": [
+    "design_commit_then_separate_implementation_dispatch",
+    "NEW8_and_parent_static_registry_synthetic_checks",
+    "whole_toolchain_freeze_commit_exact_push_PR_required_CI_receipt",
+    "actual_source_role_registration_and_metadata_only_prior_index_including_C6",
+    "prospective_fresh_full_family_mechanical_admission_before_adoption",
+    "independent_source_coherence_freshness_processing_parity_source_admission_binding_source_freeze_commit",
+    "fresh_item_authorship_hardcoded_question_reserve_independent_prereview_item_freeze_commit",
+    "one_cached_load_and_one_actual_prompt_template_encode_per_item_official_once_per_split",
+    "both_split_passes_actual_two_judges_registration_and_execution_plan_committed_before_outputs",
+    "once_calibration_final_judgments_locked_original_6_of_6_integrity_gate",
+    "only_if_pass_once_isolated_validation_and_final_judgment_lock",
+    "separate_service_integration_and_user_acceptance_no_auto_adoption"
+  ],
+  "registration_counts": {
+    "c7_implementation_files": 0,
+    "c7_source_documents": 0,
+    "c7_questions": 0,
+    "c7_oracles": 0,
+    "c7_tokenizer_loads": 0,
+    "c7_native_generations": 0,
+    "c7_semantic_judgments": 0,
+    "c7_human_reviews": 0
+  },
+  "design_exposure": {
+    "role": "/root/free_qa_candidate_review",
+    "setting": "previously_accepted_Astra_xhigh_retained_no_new_setting_claim",
+    "excluded_from_independent_output_judging": true,
+    "prior": [
+      "automatic_project_metadata",
+      "public_C2_case_ID_failure_summaries",
+      "C3_C4_public_aggregate_and_code",
+      "host_GPU_reader_scalar_metadata",
+      "C5_and_C6_safe_failure_aggregates",
+      "allowed_frozen_code_and_public_contracts"
+    ],
+    "additional_exposure": {
+      "values_used_for_limit_derivation_or_tuning": false,
+      "timing": "C7_design_initial_STATUS_read_before_budget_registration",
+      "type": "C6_validation_aggregate_minimum_and_maximum_tokens_in_new_public_STATUS",
+      "parent_notified_immediately": true,
+      "values_reproduced_here": false
+    },
+    "no_pristine_or_fully_blind_claim": true,
+    "not_read": [
+      "validation_per_item_token_counts_or_case_IDs",
+      "actual_preparation_receipt_case_rows",
+      "closed_raw_reports_traces",
+      "closed_source_question_oracle_input_answer_reasoning_bodies"
+    ],
+    "budget_basis": "frozen_formatter_literal_and_structure_plus_independently_stated_8192_1024_512_engineering_choices",
+    "current_writes_only_design2": true,
+    "current_implementation_data_roles_tests_Git_tokenizer_native_execution": 0
+  },
+  "limitations": [
+    "source_and_item_admission_is_response_to_C6_failure_not_untouched_validation_design",
+    "aggregate_validation_range_exposure_disclosed_not_used_for_thresholds",
+    "bytes_are_not_tokens_or_latency_proof",
+    "chat_wrapper_allowance_unverified_until_once_actual_prompt",
+    "UTF8_rule_differs_in_information_density_across_languages",
+    "small_source_sampling_reduces_representativeness_and_may_be_infeasible_for_coherent_public_families",
+    "same_semantic_difficulty_and_full_scope_still_required",
+    "no_C6_retry_or_counterfactual_native_success",
+    "snapshot_observation_is_not_atomic_concurrency_proof",
+    "fixed_context_gate_is_not_retrieval_service_or_human_acceptance"
+  ],
+  "phase1_complete": false,
+  "public_service_deployment": false,
+  "change_from_c6": "prospective_source_family_and_item_input_admission_only_unchanged_inference_reader_and_limits",
+  "source_admission": {
+    "helper_location": "scripts/prepare_meeting_c7_inputs.py",
+    "registered_before_fresh_sources_or_questions": true,
+    "applies_identically_to": [
+      "calibration",
+      "validation",
+      "public",
+      "synthetic",
+      "ko",
+      "en"
+    ],
+    "valid_unit": "intact_prospective_three_document_family_before_adoption",
+    "contexts": "all_complete_chunks_from_frozen_processing_for_all_three_documents_no_omissions_or_merges",
+    "context_order": [
+      "document_id",
+      "start_offset",
+      "end_offset",
+      "chunk_id"
+    ],
+    "whitespace_blocks_and_repeated_or_overlapping_emitted_chunks_counted": true,
+    "original_raw_processed_chunk_metadata_hashes_bound": true,
+    "source_placeholder_query": "",
+    "source_placeholder_is_question_or_AnswerRequest": false,
+    "frozen_render_function": "answer_messages_thinking(empty_query, build_block_catalog(full_family_contexts), language)",
+    "languages_checked": [
+      "ko",
+      "en"
+    ],
+    "envelope_measurement": "E(x)=len(safe_payload(x).encode(utf-8)); M0=full_family_empty_query_message_array",
+    "outer_message_JSON_includes_nested_user_escaping": true,
+    "cost_components": [
+      "system_content",
+      "message_roles_and_keys",
+      "array_object_punctuation",
+      "empty_query_and_response_language",
+      "document_revision_chunk_title_date_page_offsets",
+      "all_block_ids_text_and_both_edge_flags",
+      "JSON_whitespace_and_control_escaping",
+      "less_than_and_greater_than_escaping",
+      "nested_user_JSON_escaping"
+    ],
+    "system_prompt_utf8_bytes": 1720,
+    "system_prompt_literal_sha256": "b918ad67989cbaa5328974cc6e5c23b3c6a673df4699d5b1e9233f52cbd2f6d2",
+    "system_prompt_already_in_M0_not_added_twice": true,
+    "rendered_engineering_envelope_bytes": 8192,
+    "future_question_serialized_increment_reserve_bytes": 1024,
+    "chat_wrapper_allowance_bytes": 512,
+    "full_family_empty_query_message_envelope_max_bytes": 6656,
+    "source_budget_formula": "E(M0)+1024+512<=8192",
+    "after_system_remaining_bytes": 4936,
+    "remaining_is_shared_wrappers_catalog_metadata_and_text_not_text_only": true,
+    "chat_wrapper_allowance_verified_before_tokenizer": false,
+    "bytes_equal_tokens_or_guaranteed_latency_claim": false,
+    "bounds": {
+      "documents_per_family": 3,
+      "meeting_documents": 2,
+      "general_documents": 1,
+      "distinct_meeting_dates": 2,
+      "processed_source_text_utf8_bytes_per_document": 2048,
+      "processed_source_text_utf8_bytes_per_family": 4096,
+      "chunks_per_family": 6,
+      "chunk_text_utf8_bytes_each": 2048,
+      "emitted_chunk_text_utf8_bytes_sum": 4096,
+      "blocks_including_whitespace_per_family": 24,
+      "block_utf8_bytes_each": 2048,
+      "block_codepoints_each_unchanged": 1024,
+      "document_id_utf8_bytes": 96,
+      "chunk_id_utf8_bytes": 128,
+      "title_utf8_bytes": 128,
+      "existing_ID_codepoint_limit_unchanged": 128,
+      "date_format": "valid_YYYY-MM-DD_10_ASCII_bytes_for_meeting_null_for_general",
+      "revision_min": 1,
+      "revision_max": 999999,
+      "page": "null_or_integer_1_to_999999",
+      "offset_min": 0,
+      "offset_max": 999999,
+      "original_exact_codepoint_range_and_types_required": true,
+      "unregistered_prompt_metadata_allowed": false,
+      "full_family_schema_compact_utf8_bytes": 4096,
+      "source_empty_query_native_request_bytes": 28672,
+      "future_question_native_wire_reserve_bytes": 4096,
+      "admitted_native_request_bytes": 32768,
+      "unchanged_runtime_request_bytes_limit": 524288
+    },
+    "wire_measurement": "len(json.dumps(request_body(messages,schema)).encode(utf-8))_same_defaults_as_frozen_preparation",
+    "wire_formula": "source_empty_query_wire_bytes+4096<=32768; 4096=512_question_raw_bytes*8_conservative_escape_allowance; actual_item_wire_also_checked",
+    "source_gate_tokenizer_chat_template_HTTP_calls": 0,
+    "rejects": "preserve_intact_family_and_mechanical_receipt_before_adoption",
+    "prohibited_rescue": [
+      "truncation",
+      "summarization",
+      "rechunking",
+      "partial_family_or_chunk_adoption",
+      "metadata_shortening_after_failure",
+      "question_or_token_feedback_context_reselection",
+      "same_rejected_family_transformation_and_resubmission"
+    ],
+    "other_fresh_family_search_under_fixed_rules_before_questions_allowed": true,
+    "source_receipt_fields": [
+      "schema_version",
+      "candidate_id",
+      "phase",
+      "family_id",
+      "rule_hash",
+      "toolchain_freeze_hash",
+      "source_and_metadata_hashes",
+      "processed_byte_counts",
+      "all_chunk_and_block_counts",
+      "per_language_M0_hash_and_byte_count",
+      "schema_and_wire_byte_counts",
+      "status",
+      "safe_rejection_codes"
+    ],
+    "source_receipt_access": "own_split_author_reviewer_custodian_only_public_safe_status_count_hash_no_heldout_detail",
+    "independent_coherence_freshness_semantic_difficulty_review_required": true,
+    "scarce_coherent_public_sources": "stop_source_adoption_and_report_no_relaxation_or_synthetic_substitution",
+    "language_information_density_and_selection_bias_disclosed": true,
+    "production_API_question_or_context_limits_changed": false
+  },
+  "item_admission": {
+    "question_raw_utf8_bytes_max": 512,
+    "original_question_codepoints_max": 500,
+    "query_must_remain_nonblank": true,
+    "serialized_question_increment": "0<=E(Mq)-E(M0_same_item_catalog)<=1024",
+    "actual_item_message_envelope": "E(Mq)+512<=8192",
+    "actual_native_request_bytes_max": 32768,
+    "frozen_source_metadata_and_whole_chunks_exact": true,
+    "full_family_admission_required_even_for_context_subset": true,
+    "context_selection": "semantic_selection_frozen_before_official_count_no_size_feedback_reselection",
+    "refusal_stage": "independent_item_prereview_before_freeze_and_official_tokenizer",
+    "validation_details_public": false
+  },
+  "offline_measurement": {
+    "helper_location": "new_prepare_local_count_helper_not_modified_frozen_counter",
+    "cached_tokenizer_loads_per_split": 1,
+    "actual_apply_chat_template_calls_per_item": 1,
+    "actual_encode_calls_per_item": 1,
+    "template_arguments": {
+      "add_generation_prompt": true,
+      "tokenize": false,
+      "enable_thinking": true
+    },
+    "encode_arguments": {
+      "add_special_tokens": false
+    },
+    "same_prompt_used_for": [
+      "UTF8_byte_length",
+      "SHA256",
+      "token_count",
+      "preamble_check",
+      "chat_wrapper_increment"
+    ],
+    "identical_messages_schema_prompt_hash_native_request_semantics": true,
+    "actual_rendered_prompt_utf8_bytes_max": 8192,
+    "actual_wrapper_increment": "0<=len(prompt.encode(utf-8))-sum(len(message.content.encode(utf-8)))<=512",
+    "actual_input_tokens_min": 1,
+    "actual_input_tokens_max": 5120,
+    "source_placeholder_or_full_family_tokenizations": 0,
+    "extra_byte_measurement_tokenizations": 0,
+    "frozen_counter_modified": false,
+    "source_byte_rule_is_token_bound_proof": false,
+    "any_byte_wrapper_token_identity_or_persistence_failure": "close_exclusive_preparation_preserve_partial_and_first_cause_no_recount_payload_edits_or_retry",
+    "both_splits_pass_before_execution_plan_or_native": true,
+    "no_resource_or_profile_run": true
+  }
+}
