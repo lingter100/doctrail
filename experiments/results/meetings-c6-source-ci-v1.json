@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "kind": "actual_github_observation_source_commit",
+  "head_sha": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "observed_at_utc": "2026-10-20T03:06:08.809277+00:00",
+  "author_login": "lingter100",
+  "committer_login": "lingter100",
+  "runs": [
+    {
+      "run_id": 39361887466,
+      "head_sha": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39361887466"
+    },
+    {
+      "run_id": 39361890912,
+      "head_sha": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39361890912"
+    }
+  ],
+  "source_freezes": {
+    "calibration": "ecf4a08d8d5edc8598646e3be2d25b0203af633ae39d298014c479befcf49b53",
+    "validation": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625"
+  },
+  "publication_receipt": {
+    "path": "experiments/results/meetings-c6-source-review-v1.json",
+    "sha256": "8d15ecd6a0f1f4eb6833746d8ee03f747476a89bae0b0aa6963d4a7efe8f6a05"
+  },
+  "actual_parent_working_and_committed_files_verified": 123,
+  "actual_C6_questions_tokenizer_native_judgments": 0,
+  "claim_scope": "Source commit CI and exact published evidence, not model answer quality, human review, service adoption or deployment."
+}

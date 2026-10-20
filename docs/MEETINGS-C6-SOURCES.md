@@ -44,3 +44,9 @@ AI 작성·AI 독립 검토와 사용자 직접 검수는 다르다. 이번 등�
 저장된 실제 Java2개씩의 XML·로그·영수증과 문서 재처리를 확인했다. Review 단계의 Maven·모델·tokenizer 재실행은0이다. [공개 결과 영수증](../experiments/results/meetings-c6-source-review-v1.json)은 source46개·원본36개와 freeze를 묶는다. 원래 실패·Java CRLF·upstream 공백은 보존했고 사람 검수는0이다.
 
 다음은 이 source/freeze 커밋·필수 CI를 확인한 뒤 새 calibration6/validation8 질문과 oracle을 작성하고 별도 사전검토·동결하는 단계다. 현재 실제 질문·tokenizer·native·답변 의미 판정0이며 Phase1·실서비스 채택·배포는 완료되지 않았다.
+
+## Source 커밋과 CI
+
+887e89f795b22ba043a0f62fa1b65c7d62e8cc75에54파일을 커밋·push했다. Push39361887466/PR39361890912 필수 backend/java-service/web이 모두 성공했고 사용자 GitHub author·committer lingter100을 확인했다. 공개 산출물46+동결 코드77개의 Git/working123개 bytes 일치도 확인했다. [실제 CI 관측](../experiments/results/meetings-c6-source-ci-v1.json)은 source 수용/모델 품질과 분리한다.
+
+후속 문항 작성자는 최신 HEAD와 이 source commit의 증명을 새로 수행한다. Validation 작성자는 교차 비교 사유를 읽어 calibration 내용을 배우지 않도록 해당 파일은 hash만 확인한다. 현재 승인된 자기 source6을 질문·oracle·전체 청크 선택의 근거로 사용하고, 별도 사전검토·동결 전에 tokenizer나 실제 모델을 실행하지 않는다.

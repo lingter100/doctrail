@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 2026-10-20 · C6 원문887e89f 양쪽 필수 CI 통과, 다음은 문항 작성
+
+Source/freeze·검토·문서54파일을887e89f795b22ba043a0f62fa1b65c7d62e8cc75로 커밋·push했고 사용자 author/committer lingter100·PR14 최신 head를 확인했다. Push39361887466/PR39361890912 backend/java-service/web 모두 성공했다. 공개 source/review46개와 코드77개, 총123개의 committed/working bytes가 일치했다. CI 영수증은 experiments/results/meetings-c6-source-ci-v1.json이며 CI 상태로 검사 개수나 모델 품질을 추정하지 않는다.
+
+다음은 기존 실제 Astra xhigh c6_calibration_author와 c6_validation_author가 source commit887e89f/freeze14·15 및 최신 HEAD의 실제 code/Git/role 증명을 마친 뒤 NEW draft/oracle/context-selection/author-receipt4개씩 작성하는 단계다. Calibration6/격리 validation8이며 같은 split 작성자 재사용을 이미 공개했다. Validation 작성자는 calibration source/items를 읽지 않고, 자기 freeze에 묶인 교차 비교 freshness 사유도 hash만 확인한다. 작성 후 기존 별도 prereviewer가 item 검토/조건부 동결을 맡으며 최종 답변 judge는 별도 등록한다.
+
+아직 실제 문항·tokenizer·native·의미 답변 판정0이다. 모든 source 역할은 반환됐고 진행 중 DocTrail 검사/모델 프로세스는 없다. 기존 동결/닫힌 실험은 재실행하지 않으며, 전체 goal ACTIVE·Phase1/PR14 draft다. C6 원문 준비 완료가 서비스 완성을 뜻하지 않는다.
+
 ## 2026-10-20 · C6 원문12개 독립 수용·동결, source 커밋 준비
 
 새 독립 Astra xhigh 검토자가 calibration6/20청크와 validation6/13청크를 각각 수용했다. 거부0·요청 수정0·작성 원문 변경0이다. Calibration freeze14 SHAecf4a08d, validation freeze15 SHA1ef3cea7이며 후자는 확정된 현재 calibration SOURCE6과 자신의 SOURCE6의 의미 중복 비교·fingerprint binding을 포함한다. 문항/oracle은 아직 없고 과거 닫힌 원문은 읽지 않았다. 두 공개 family의 반복 문단 각1쌍은 별도 이유를 남겨 수용했다. 역사적 metadata 누락3항목은 그대로이며 완전한 중복 부재 증명은 아니다.

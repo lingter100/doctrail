@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · C6 source 커밋·정확한 CI 확인
+
+부모가 source887e89f의 push39361887466/PR39361890912 필수3job 성공과 GitHub author/committer lingter100을 직접 조회했다. Source/review46+코드77의 실제 커밋123개 바이트도 대조했다. CI 성공을 모델 정확도·새 사용자 검수로 해석하지 않았으며, 단계 설명과 다음 문항 작성의 격리 경계를 기록했다. 이 작업에서 실제 문항·tokenizer·모델 실행은0이다.
+
 ## 2026-10-20 · C6 원문 준비·실제 Java 일치·독립 검토
 
 새로 수락된 gpt-6-astra/xhigh 작성자 c6_calibration_author와 c6_validation_author가 실제 Git/동결77/역할 검증을 한 뒤 서로 다른 공개 repo를 본문 전에 예약했다. 각 공개3·새 AI 합성3 원문, revision·이용조건·처리 영수증과 fingerprint를 작성했다. 각각 실제 Maven1회로 Java2개 통과를 검증했고 탐색 탈락·404·경로 오류 등 초기 증거를 보존했다. 같은 split source→item 재사용은 아직 다음 단계이며 새 문항은0이다.
