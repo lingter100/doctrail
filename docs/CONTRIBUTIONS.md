@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · 후속 후보 제한 비교와 설계 축소
+
+기존 실제 Astra max bounded_resource_decision 역할이 코드·허용 scalar metadata·공식 CPython 소스만 읽어 제한 비교1회를 수행했다. 기존 Astra xhigh free_qa_candidate_review는 자신의 미커밋 초안2개 원본을 로컬에 보존하고 reader-only 설계2개로 수정했다. 두 역할이 원래 수락된 설정 유지를 보고했으며 새 도구 설정 수락이나 부모 채팅 모델 변경으로 기록하지 않는다. 부모는 C5 결과의 양쪽 필수3job CI와 Git 사용자 신원·설계 바이트를 확인했다. 실제 새 구현/공식 비교/모델/사용자 검수는 이 등록 시점0이다.
+
 ## 2026-10-20 · C5 실제 실행 실패와 별도 재생
 
 부모가 고정된 무료 로컬 CLI를 한 번 실행했다. 전송2/구조응답1/둘째 deadline/의미판정0을 기록하고 모델을 재실행하지 않았다. CLI 종료·owned cleanup·HEAD, 원본 report/ledger/trace29개를 확인했다. Actual Git/108snapshot/27event 및 첫 응답의 순수 구조 재생은 모델·tokenizer0으로 수행했다. 부모는 원문/질문/답변/reasoning 의미를 열지 않고 scalar/hash만 읽었으며 기존 독립 Astra xhigh 설계 역할에 후속 읽기 검토를 맡겼다. 사용자 검수와 답변 정확도 성과는0이다.

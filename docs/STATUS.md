@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 2026-10-20 · C5 결과 CI 통과, 후속은 읽기 버퍼 비교로 축소
+
+C5 결과 e18f595의 push39350297487/PR39350302379 필수 backend/java-service/web 모두 성공했고 영수증을 보존했다. 실패 원본·미실행 문항·의미 판정0은 그대로이며 CI 성공이 답변 품질 통과는 아니다.
+
+기존 Astra max 역할의 제한된 코드/메타데이터 비교1회에서 hash/parse 재사용의 기대효용이 작다는 근거를 확인했다. 새 후보는 기존 16MiB+1 읽기 대신 64KiB씩 같은 상한까지 읽는 방식이다. 모든 fresh read/hash/HEAD/path/alias/negative import/마지막 변경 확인을 유지한다. 할당이 실제 C5 병목이라는 주장은 아직 할 수 없다. 원래 hash-cache 초안은 .local/meetings-proof-epoch-abandoned-hash-cache-v1에 보존하고 기존 Astra xhigh 설계자가 자기 NEW2만 수정했다.
+
+다음은 이 설계 커밋 뒤 NEW4 구현·합성 회귀·독립 코드 검토, dependency/fixture 동결과 필수 CI 뒤 새 공식 비교1회다. 기존 profile/C5를 재실행하지 않고 tokenizer/native/품질 실행0을 유지한다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## C5 후속 선택 · 요청 경계 안의 중복 검증 비용 조사
 
 독립 실제 Astra xhigh 읽기 검토를 채택했다. 두 검증 경계·HEAD/committed bytes/path/negative import/마지막 변경 확인은 유지하면서 같은 경계의 반복 읽기/hash/파싱을 재사용하는 작은 새 구현을 비교한다. 실제 C5를 재실행하지 않고 새 기계적 합성 fixture에서 동등한 수용·거부와 비용을 한 번 비교한다. 실행한 뒤에만 개선 여부를 판단하며 runner 비용을 제품 ACL/revision 또는 서비스 지연과 혼동하지 않는다.

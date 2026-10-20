@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "meetings-proof-reader-design-v1",
+  "recorded_at": "2026-10-20T01:07:47.144873+00:00",
+  "design_files": {
+    "docs/MEETINGS-PROOF-EPOCH-PLAN.md": "ddeda6f09537d32bf986a852a78f32c00583bdec9abc6737f014ee511ff642c5",
+    "data/evaluation/meetings-proof-epoch-protocol-v1.json": "72d303f533d4840c8f14891df648bc3aef0da25443dca6b29b0511f56eddc57b"
+  },
+  "design_role": {
+    "handle": "/root/free_qa_candidate_review",
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "acceptance": "original tool-accepted role reused; role reports retained setting, no new acceptance or parent setting change"
+  },
+  "limited_comparison_role": {
+    "handle": "/root/bounded_resource_decision",
+    "model": "gpt-6-astra",
+    "effort": "max",
+    "acceptance": "original tool-accepted role reused; one read-only limited comparison, retained setting reported"
+  },
+  "selected_candidate": "64KiB bounded fresh reads, same BYTE_LIMIT+1 and proof guards; no hash/parse caching",
+  "rejected_proposal": "hash/parse reuse retained all reads but targeted only small historical scalar costs; original draft preserved locally",
+  "causal_evidence": "Repeated oversized read allocation is a code-based hypothesis, not measured C5 attribution or success counterfactual.",
+  "exposure": "allowed code and scalar metadata; no question/oracle/raw answer/trace semantic reads by parent or comparison role; independent quality judging excluded",
+  "zero": {
+    "new_implementation": 0,
+    "official_comparisons": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "http": 0,
+    "quality_judgments": 0,
+    "human_review": 0
+  },
+  "goal": "active; Phase1 incomplete; PR14 draft"
+}
