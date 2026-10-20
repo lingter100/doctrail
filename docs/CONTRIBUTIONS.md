@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · C6 구현·회귀·독립 검토와 바이트 정규화
+
+기존 실제 Astra high host_proof_profile이 NEW8을 구현하고 원본 실패 재현·최종195통과/1skip·Ruff를 기록했다. 별도 기존 Astra high c5_persistence_review가 전 경로 reader, Git/CI,64byte seed와 최초 오류 보존을 읽어 검토했고 최종 blocker0을 반환했다. 실제 모델·사용자 검수는0이며 역할의 기존 수락 설정과 새 설정 변경을 구분한다.
+
+부모는 검사 전후8+기존2·oldunion112 hash를 확인했다. 동결 전 LF사전조건 실패 뒤 검사한 원본4를 보존하고 줄바꿈만 통일했으며 AST동일/Ruff와 독립 byte검증을 받았다. 정규화 전 로컬 결과와 정확한 최종 source CI를 분리한다. 부모가 family구성·도구동결·구현 영수증·문서·사용자 Git 신원·CI를 담당하며, 원문이나 question/oracle의 의미를 읽거나 사용자 검수를 대신하지 않았다.
+
 ## 2026-10-20 · C6 reader 연결 설계와 선행 결과 확인
 
 기존 실제 Astra xhigh free_qa_candidate_review가 NEW C6 설계2개를 작성하고 부모의 경계 표현 검토2건을 반영했다. 비허용 경로 거부와 허용 파일의 hash 확인 순서, 도구 소스 CI와 자료 작성 순서를 분명히 했다. 원래 수락된 역할 설정을 유지하며 새 모델 변경으로 기록하지 않는다. 부모는 결과b08의 정확한 push/PR 필수3job 성공과 설계/evidence hash를 직접 검증하고 Git·문서화를 담당한다. 이 시점 C6 구현·실제 모델 실행·사용자 검수는0이다.

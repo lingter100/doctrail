@@ -1,5 +1,19 @@
 # 진행 상태
 
+## 2026-10-20 · C6 NEW8 구현·독립 검토·동결 완료, 최종 CI 준비
+
+최종 로컬6모듈은195통과·Windows symlink권한1skip·220.87초·Ruff 통과이고 NEW8/기존test2 전후SHA가 같다. 독립 기존 Astra high 검토의 blocker0이다. 그 뒤 부모가 Git LF규칙에 맞춰4파일 CRLF만 LF로 통일했다. 원본은 exact archive, 부모AST/위치 동일·Ruff와 독립 byte변환 일치가 확인됐다.195개는 변환 전 결과이며 정규화된 정확한 소스 전체 CI를 별도로 요구한다.
+
+초기65/Ruff4·prefix1실패·중간71/108·seed/reader5실패와 부모 동결LF사전조건 실패를 보존했다. Helper 첫 실패는 동결/공개출력 생성 전이며 모델/테스트 실패가 아니다. 마지막 도구 동결77/Python66/candidate1648 SHA939731a4, 구현receipt13d3e1e4와 기존동결union112 unchanged를 확인했다. 해당 receipt는 최종LF 소스와 pre-LF 검사hash를 분리한다.
+
+부모가 source/freeze의 사용자 명의 커밋·push·정확한 필수 CI를 이어간다. 설계5657bb1의 push39355274280/PR39355278538은 이미3job 성공했지만 새 구현 CI가 아니다. 아직 C6자료/문항/역할/tokenizer/native0이다. 소스CI와 별도CIreceipt 커밋 뒤 새 source-first 역할 배정이 다음이며 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · C6 설계5657bb1 커밋, NEW8 구현 담당 배정
+
+설계·reader 결과CI·문서8파일을5657bb1b814be7728c9706723b22be31c732e317로 커밋·push했고 GitHub author/committer lingter100을 확인했다. 최종 설계2파일/evidence18/hash·UTF8/LF·staged exact8/whitespace 검사를 통과했다. 설계의 새 CI는 배정 시점 아직 미확인이다.
+
+기존 실제 Astra high host_proof_profile에게 NEW8 구현·합성 검사만 맡겼다. 먼저 review/prepare와 테스트4개를 작성해 독립 기존 Astra high c5_persistence_review의 읽기 검토를 받는다. 부모는 내용 없는 C6 family registry·동결·rootdocs·Git·CI를 담당한다. 기존 frozen 코드와 닫힌 자료를 수정하거나 모델·tokenizer·공식 비교를 실행하지 않는다. 도구 소스의 최종 동결·커밋·정확한 CI 전에는 새 평가 자료 역할을 배정하지 않는다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C6 설계 확정, reader 결과 CI 확인
 
 Reader 결과 b08cd76의 push39354041667/PR39354047589에서 backend/java-service/web 모두 성공했고 별도 실제 관측 영수증을 보존했다. 이는 새 C6 구현 CI나 답변 품질 통과가 아니다.

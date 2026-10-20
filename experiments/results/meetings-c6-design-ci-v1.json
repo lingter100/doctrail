@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c6-design-ci-v1",
+  "head_sha": "5657bb1b814be7728c9706723b22be31c732e317",
+  "observed_at": "2026-10-20T01:51:40.571901+00:00",
+  "runs": [
+    {
+      "run_id": 39355274280,
+      "head_sha": "5657bb1b814be7728c9706723b22be31c732e317",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39355274280"
+    },
+    {
+      "run_id": 39355278538,
+      "head_sha": "5657bb1b814be7728c9706723b22be31c732e317",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39355278538"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "claim_scope": "Design only exact CI. C6 implementation uncommitted/in progress and no quality claim."
+}
