@@ -1,6 +1,8 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- Diagnostic NEW3 returned final11passed13.82s/Ruff; sourcebeforeafter c7fbe495/ac7c452a/469d5748, frozen77unchanged. Parent3+designerreviewer2 findings resolved/blocker0; finalteststrengthening parentread only. Unitreceipt862787a9/publicationd729fe76, logs7verified/observercountformaterror preserved. Official .local/meetings-admission-diagnostic-v1 ABSENT/run0; sourcecommit+normalCI required BEFORE onceCLI. Design27b9f33 push39375421640/PR39375426722 ALL3passed. Allrolesreturned; parent owns commit/CI/officialrun/results. Goalactive/Phase1draft.
+
 - NEW diagnostic design b5d64fa0 returned/accepted: exact12 generic fixtures; same actualAstrahigh meeting_request_lifecycle_audit owns NEW scripts/diagnose_meeting_admission.py + tests/fixtures/meeting-admission-diagnostic-v1.json + tests/test_diagnose_meeting_admission.py ONLY. Targeted unit tests allowed in temp dirs; official .local/meetings-admission-diagnostic-v1 reserved for parent AFTER code review/commit/CI. No pool/source/token/native/Maven/threshold changes; frozen77 immutable. Parent rootdocs/Git; designer actualAstraxhigh may review code but has calibration exposure. Officialrun0/goalactive/Phase1draft.
 
 - Product adbadaa7 and included source f136a72 pushed/userauthorcommitterlingter100; exact push39374479290/PR39374484761 ALL3passed. Old local39/hashcheckpoint caveat preserved. Existing actualAstraxhigh c7_calibration_author now owns NEW docs/MEETINGS-ADMISSION-DIAGNOSTIC.md DESIGN ONLY <=12 generic synthetic fixtures, no data/pool/token/native/threshold edits. Calibration exposure disclosed/not independent. Parent CIreceipt/rootdocs/PR; no diagnostic implementation/run yet. Goalactive/Phase1draft.
