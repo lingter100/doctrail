@@ -1,5 +1,18 @@
 # 진행 상태
 
+## C5 공식 offline 두 split 통과 · 실제 생성 계획 등록
+
+item cefbfee 커밋 뒤 실제 fullmaterial Git 증명을 마치고 공식 계수를 각각1회 실행했다. Calibration6 1570..5021, validation8 2575..4999토큰으로5,120 이내다. Tokenizer1씩/native0/download0·payload보존이며 준비를 재실행하지 않는다. 정확한 공개 input/receipt4개와 판정자2·제외14·동결76을 새 execution plan에 결합했다. 부모는 의미 자료를 읽지 않았다.
+
+다음은 계획 커밋 뒤 실제 model-free calibration check, 원래 calibration 최대6회 단발 생성, 최종답변 판단 lock 후 mapping/집계다. 원래6/6+전체무결성만 validation8을 연다. 추가 neutral/재시도/예산변경은 없다. 각 owned 준비 프로세스 종료와 CLI 증거는 담당자의 영수증을 확인한다. 전체 goal ACTIVE·Phase1/PR14 draft이며 준비 통과를 품질로 보고하지 않는다.
+
+
+## C5 item cefbfee 커밋 · split별 공식 준비 담당 실행 중
+
+수용 문항/독립 검토/동결25파일을 cefbfeebf4cfecf0226fb8c7f9a7eac98fbe6d7d로 커밋·push했고 GitHub author/committer lingter100을 직접 확인했다. Index exact25·item freeze6씩·source14/15·code76·원래 validation17 보존과 whitespace 검사를 통과했다. push39348557481/PR39348561878의 필수 CI는 관측 당시 진행 중이다.
+
+기존 calibration/validation author에게 자기 split의 실제 committed load_material 증명 후 성공한 경우에만 공식 offline CLI1회를 맡겼다. 각 .local/meetings-c5-{phase}-offline-v1 증거 및 prepared-v1 출력은 해당 역할이 소유하며 부모는 HEADcefbfee를 유지한다. 이미 준비 출력이 생겼으면 재실행하지 않는다. 새 native0이며 자료를 토큰 수에 맞춰 수정하지 않는다. PR14는 draft이고 전체 goal ACTIVE다.
+
 ## C5 문항14개 독립 검토 수용 · item freeze 커밋
 
 기존 독립 Astra xhigh 검토자가 calibration6/validation8을 모두 수정0·반려0으로 수용했다. 필요한 사실60개와 충분한 근거 대안, 반복 문단, 전체 family에서의 정보 부재를 점검했고 각 split의 정확한6파일 item freeze를 만들었다. 작성8파일·원문14/15·toolchain76·원래 validation17파일은 보존됐다. Validation 검토 보조 스크립트의 표시/키/import 오류3건은 별도 원본으로 남겼으며 모델 실행이나 자료 변경은 없었다.

@@ -29,4 +29,4 @@ AI가 작성한 질문14개, 구조 검사를 통과한 질문14개, 독립 의�
 
 작은 AI 작성 진단 표본이므로 전체 서비스 정확도로 일반화하지 않는다. 한국어 UI, 권한·수정·삭제와 실제 Java/React 운영은 별도 검증 범위다. [작성 영수증](../experiments/results/meetings-c5-item-authorship-v1.json), [원문 준비](MEETINGS-C5-SOURCES.md), [고정 계획](MEETINGS-C5-PLAN.md), [최신 상태](STATUS.md)에 근거를 남긴다.
 
-검토 결과와 원본 보존 hash는 [독립 검토 영수증](../experiments/results/meetings-c5-item-review-v1.json)에 기록한다. 검토자가 실행한 보조 표시 스크립트 오류3건은 별도 보존했으며 최종 pure 검사는 통과했다. 커밋 후 fullmaterial proof와 공식 계수는 다음 단계다.
+검토 결과와 원본 보존 hash는 [독립 검토 영수증](../experiments/results/meetings-c5-item-review-v1.json)에 기록한다. 검토자가 실행한 보조 표시 스크립트 오류3건은 별도 보존했으며 최종 pure 검사는 통과했다. 이후 cefbfee 커밋의 실제 fullmaterial proof와 공식 계수도 완료됐다. 후속 실측은 [공식 준비 기록](MEETINGS-C5-PREPARATION.md)에 분리했다.

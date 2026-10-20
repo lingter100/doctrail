@@ -1,5 +1,10 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · 공식 입력 계수와 다음 실행 등록
+
+기존 split별 실제 Astra xhigh 작성자들이 실제 committed fullmaterial proof와 공식 tokenizer 준비를 각각1회 수행했다. 부모는 원본 영수증/공개 복사본 hash·집계만 확인하고 고정 조건의 실행계획을 만들었다. 모델 생성·의미 품질 판정·사용자 검수는 아직0이며 validation 개방은 별도 calibration 관문에 달려 있다.
+
+
 ## 2026-10-20 · 질문14개 독립 의미 검토
 
 기존 실제 Astra xhigh prereviewer2명이 자기 split의 작성자와 분리되어 사실 완전성·충분한 대안·시간/조건·전체 family 정보 부재를 확인했다. Calibration6/validation8 수용, 문항 수정0이며 각6개 binding을 동결했다. 부모는 metadata/hash·사용자 Git 신원·기존 자료 보존을 확인했다. AI 생성14·독립 AI 수용14·사용자 검수0·모델 평가0인 시점을 기록하며, 검토 도구 표시 오류3건은 모델/제품 결함으로 합산하지 않는다.
