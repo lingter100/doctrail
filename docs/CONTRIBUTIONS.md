@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · C6 자료 역할과 metadata 비교 등록
+
+부모가 새 c6_calibration_author/c6_validation_author 및 c6_calibration_prereviewer/c6_validation_prereviewer를 fork none, gpt-6-astra/xhigh로 지정했고 도구가 수락했다. 각자의 실제 UTC 수락시각·영수증 hash·노출을 역할 등록에 보존한다. 런타임 자체 introspection이나 부모 채팅 설정 변경을 주장하지 않는다.
+
+부모는 과거 fingerprint metadata4개의 현재/커밋 바이트를 비교하고98행·누락3항목을 이어받았다. 거부된 C5 원문 버전도 fingerprint만 포함했다. 원문/문항/oracle 의미를 읽지 않았다. 역할들은 현재 등록만 완료했고 source 검토·사용자 검수·최종 답변 판정은0이다. 첫 metadata 조회에서 시스템 python 별칭 부재를 확인해 기존 .venv Python으로 실행했으며 데이터 작업 실패나 모델 실패로 분류하지 않는다.
+
 ## 2026-10-20 · C6 정확한 소스의 실제 CI 관측
 
 부모가 d3e4e2e의 push39357782029/PR39357786578 필수3job 성공을 직접 조회하고 freeze77개를 실제 Git 객체와 working bytes로 대조했다. 작성자·커미터 lingter100과 PR14 head도 확인했다. 최종LF 소스 CI를 정규화 전 로컬 검사와 별도로 기록하며 CI 로그를 읽지 않은 검사 개수·답변 품질·사용자 검수는 추정하지 않는다.

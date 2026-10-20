@@ -1,0 +1,681 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "recorded_at_utc": "2026-10-20T02:34:17.752241+00:00",
+  "same_split_reuse_disclosed": true,
+  "assignments": [
+    {
+      "phase": "calibration",
+      "role": "source_author",
+      "role_id": "/root/c6_calibration_author",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted": true,
+      "accepted_at": "2026-10-20T02:29:12.2528817+00:00",
+      "settings_provenance": "Parent explicitly requested and spawn tool accepted these arguments; not runtime introspection.",
+      "prior_exposure": [
+        "Auto-injected AGENTS and memory summary with historical public aggregates and workflow metadata.",
+        "C6 plan, protocol, static family structure, current safe STATUS prefix, parent CI/hash metadata.",
+        "No source bodies, questions, oracles, model outputs, traces, reasoning or mapping at acceptance; not pristine or fully blind."
+      ],
+      "allowed_paths": [
+        "data/evaluation/meetings-c6-calibration-v1/source-manifest.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-inventory.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-processing-receipt.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-adoption-receipt.json",
+        "data/evaluation/meetings-c6-calibration-v1/java-parity.json",
+        "data/evaluation/meetings-c6-calibration-v1/raw",
+        "data/evaluation/meetings-c6-calibration-v1/processed",
+        "data/evaluation/meetings-c6-calibration-v1/draft.json",
+        "data/evaluation/meetings-c6-calibration-v1/oracle-draft.json",
+        "data/evaluation/meetings-c6-calibration-v1/context-selection.json",
+        "data/evaluation/meetings-c6-calibration-v1/author-receipt.json",
+        ".local/meetings-c6-calibration-source-v1/acceptance.json"
+      ],
+      "coordinated_flat_metadata_paths": [
+        "data/evaluation/meetings-c6-calibration-source-fingerprints-v1.json"
+      ],
+      "starts_after_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+      "additional_start_gate": "Commit actual roles and prior index, then explicit source followup and actual code/Git/role proof. Item work requires independently accepted source freeze commit and separate dispatch.",
+      "excluded_from_final_answer_judging": true
+    },
+    {
+      "phase": "calibration",
+      "role": "item_author",
+      "role_id": "/root/c6_calibration_author",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted": true,
+      "accepted_at": "2026-10-20T02:29:12.2528817+00:00",
+      "settings_provenance": "Parent explicitly requested and spawn tool accepted these arguments; not runtime introspection.",
+      "prior_exposure": [
+        "Auto-injected AGENTS and memory summary with historical public aggregates and workflow metadata.",
+        "C6 plan, protocol, static family structure, current safe STATUS prefix, parent CI/hash metadata.",
+        "No source bodies, questions, oracles, model outputs, traces, reasoning or mapping at acceptance; not pristine or fully blind."
+      ],
+      "allowed_paths": [
+        "data/evaluation/meetings-c6-calibration-v1/source-manifest.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-inventory.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-processing-receipt.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-adoption-receipt.json",
+        "data/evaluation/meetings-c6-calibration-v1/java-parity.json",
+        "data/evaluation/meetings-c6-calibration-v1/raw",
+        "data/evaluation/meetings-c6-calibration-v1/processed",
+        "data/evaluation/meetings-c6-calibration-v1/draft.json",
+        "data/evaluation/meetings-c6-calibration-v1/oracle-draft.json",
+        "data/evaluation/meetings-c6-calibration-v1/context-selection.json",
+        "data/evaluation/meetings-c6-calibration-v1/author-receipt.json",
+        ".local/meetings-c6-calibration-source-v1/acceptance.json"
+      ],
+      "coordinated_flat_metadata_paths": [
+        "data/evaluation/meetings-c6-calibration-source-fingerprints-v1.json"
+      ],
+      "starts_after_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+      "additional_start_gate": "Commit actual roles and prior index, then explicit source followup and actual code/Git/role proof. Item work requires independently accepted source freeze commit and separate dispatch.",
+      "excluded_from_final_answer_judging": true
+    },
+    {
+      "phase": "calibration",
+      "role": "source_prereviewer",
+      "role_id": "/root/c6_calibration_prereviewer",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted": true,
+      "accepted_at": "2026-10-20T02:32:35.495Z",
+      "settings_provenance": "Parent explicitly requested and spawn tool accepted these arguments; not runtime introspection.",
+      "prior_exposure": [
+        "Auto-injected AGENTS and memory summary with historical public aggregates and workflow metadata.",
+        "C6 plan, protocol, static family structure, current safe STATUS prefix, parent CI/hash metadata.",
+        "No source bodies, questions, oracles, model outputs, traces, reasoning or mapping at acceptance; not pristine or fully blind."
+      ],
+      "allowed_paths": [
+        "data/evaluation/meetings-c6-calibration-v1/source-prereview.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-prereview-notes.md",
+        "data/evaluation/meetings-c6-calibration-v1/source-freshness.json",
+        "data/evaluation/meetings-c6-calibration-v1/freshness.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-freeze.json",
+        "data/evaluation/meetings-c6-calibration-v1/review-metadata-summary.json",
+        "data/evaluation/meetings-c6-calibration-v1/item-prereview.json",
+        "data/evaluation/meetings-c6-calibration-v1/item-prereview-notes.md",
+        "data/evaluation/meetings-c6-calibration-v1/item-freeze.json",
+        ".local/meetings-c6-calibration-source-review-v1/acceptance.json"
+      ],
+      "coordinated_flat_metadata_paths": [],
+      "starts_after_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+      "additional_start_gate": "Commit actual roles and prior index, then explicit source followup and actual code/Git/role proof. Item work requires independently accepted source freeze commit and separate dispatch.",
+      "excluded_from_final_answer_judging": true
+    },
+    {
+      "phase": "calibration",
+      "role": "item_prereviewer",
+      "role_id": "/root/c6_calibration_prereviewer",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted": true,
+      "accepted_at": "2026-10-20T02:32:35.495Z",
+      "settings_provenance": "Parent explicitly requested and spawn tool accepted these arguments; not runtime introspection.",
+      "prior_exposure": [
+        "Auto-injected AGENTS and memory summary with historical public aggregates and workflow metadata.",
+        "C6 plan, protocol, static family structure, current safe STATUS prefix, parent CI/hash metadata.",
+        "No source bodies, questions, oracles, model outputs, traces, reasoning or mapping at acceptance; not pristine or fully blind."
+      ],
+      "allowed_paths": [
+        "data/evaluation/meetings-c6-calibration-v1/source-prereview.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-prereview-notes.md",
+        "data/evaluation/meetings-c6-calibration-v1/source-freshness.json",
+        "data/evaluation/meetings-c6-calibration-v1/freshness.json",
+        "data/evaluation/meetings-c6-calibration-v1/source-freeze.json",
+        "data/evaluation/meetings-c6-calibration-v1/review-metadata-summary.json",
+        "data/evaluation/meetings-c6-calibration-v1/item-prereview.json",
+        "data/evaluation/meetings-c6-calibration-v1/item-prereview-notes.md",
+        "data/evaluation/meetings-c6-calibration-v1/item-freeze.json",
+        ".local/meetings-c6-calibration-source-review-v1/acceptance.json"
+      ],
+      "coordinated_flat_metadata_paths": [],
+      "starts_after_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+      "additional_start_gate": "Commit actual roles and prior index, then explicit source followup and actual code/Git/role proof. Item work requires independently accepted source freeze commit and separate dispatch.",
+      "excluded_from_final_answer_judging": true
+    },
+    {
+      "phase": "validation",
+      "role": "source_author",
+      "role_id": "/root/c6_validation_author",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted": true,
+      "accepted_at": "2026-10-20T02:31:36.9108736Z",
+      "settings_provenance": "Parent explicitly requested and spawn tool accepted these arguments; not runtime introspection.",
+      "prior_exposure": [
+        "Auto-injected AGENTS and memory summary with historical public aggregates and workflow metadata.",
+        "C6 plan, protocol, static family structure, current safe STATUS prefix, parent CI/hash metadata.",
+        "No source bodies, questions, oracles, model outputs, traces, reasoning or mapping at acceptance; not pristine or fully blind."
+      ],
+      "allowed_paths": [
+        "data/evaluation/meetings-c6-validation-v1/source-manifest.json",
+        "data/evaluation/meetings-c6-validation-v1/source-inventory.json",
+        "data/evaluation/meetings-c6-validation-v1/source-processing-receipt.json",
+        "data/evaluation/meetings-c6-validation-v1/source-adoption-receipt.json",
+        "data/evaluation/meetings-c6-validation-v1/java-parity.json",
+        "data/evaluation/meetings-c6-validation-v1/raw",
+        "data/evaluation/meetings-c6-validation-v1/processed",
+        "data/evaluation/meetings-c6-validation-v1/draft.json",
+        "data/evaluation/meetings-c6-validation-v1/oracle-draft.json",
+        "data/evaluation/meetings-c6-validation-v1/context-selection.json",
+        "data/evaluation/meetings-c6-validation-v1/author-receipt.json",
+        ".local/meetings-c6-validation-source-v1/acceptance.json"
+      ],
+      "coordinated_flat_metadata_paths": [
+        "data/evaluation/meetings-c6-validation-source-fingerprints-v1.json"
+      ],
+      "starts_after_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+      "additional_start_gate": "Commit actual roles and prior index, then explicit source followup and actual code/Git/role proof. Item work requires independently accepted source freeze commit and separate dispatch.",
+      "excluded_from_final_answer_judging": true
+    },
+    {
+      "phase": "validation",
+      "role": "item_author",
+      "role_id": "/root/c6_validation_author",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted": true,
+      "accepted_at": "2026-10-20T02:31:36.9108736Z",
+      "settings_provenance": "Parent explicitly requested and spawn tool accepted these arguments; not runtime introspection.",
+      "prior_exposure": [
+        "Auto-injected AGENTS and memory summary with historical public aggregates and workflow metadata.",
+        "C6 plan, protocol, static family structure, current safe STATUS prefix, parent CI/hash metadata.",
+        "No source bodies, questions, oracles, model outputs, traces, reasoning or mapping at acceptance; not pristine or fully blind."
+      ],
+      "allowed_paths": [
+        "data/evaluation/meetings-c6-validation-v1/source-manifest.json",
+        "data/evaluation/meetings-c6-validation-v1/source-inventory.json",
+        "data/evaluation/meetings-c6-validation-v1/source-processing-receipt.json",
+        "data/evaluation/meetings-c6-validation-v1/source-adoption-receipt.json",
+        "data/evaluation/meetings-c6-validation-v1/java-parity.json",
+        "data/evaluation/meetings-c6-validation-v1/raw",
+        "data/evaluation/meetings-c6-validation-v1/processed",
+        "data/evaluation/meetings-c6-validation-v1/draft.json",
+        "data/evaluation/meetings-c6-validation-v1/oracle-draft.json",
+        "data/evaluation/meetings-c6-validation-v1/context-selection.json",
+        "data/evaluation/meetings-c6-validation-v1/author-receipt.json",
+        ".local/meetings-c6-validation-source-v1/acceptance.json"
+      ],
+      "coordinated_flat_metadata_paths": [
+        "data/evaluation/meetings-c6-validation-source-fingerprints-v1.json"
+      ],
+      "starts_after_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+      "additional_start_gate": "Commit actual roles and prior index, then explicit source followup and actual code/Git/role proof. Item work requires independently accepted source freeze commit and separate dispatch.",
+      "excluded_from_final_answer_judging": true
+    },
+    {
+      "phase": "validation",
+      "role": "source_prereviewer",
+      "role_id": "/root/c6_validation_prereviewer",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted": true,
+      "accepted_at": "2026-10-20T02:33:07.696Z",
+      "settings_provenance": "Parent explicitly requested and spawn tool accepted these arguments; not runtime introspection.",
+      "prior_exposure": [
+        "Auto-injected AGENTS and memory summary with historical public aggregates and workflow metadata.",
+        "C6 plan, protocol, static family structure, current safe STATUS prefix, parent CI/hash metadata.",
+        "No source bodies, questions, oracles, model outputs, traces, reasoning or mapping at acceptance; not pristine or fully blind."
+      ],
+      "allowed_paths": [
+        "data/evaluation/meetings-c6-validation-v1/source-prereview.json",
+        "data/evaluation/meetings-c6-validation-v1/source-prereview-notes.md",
+        "data/evaluation/meetings-c6-validation-v1/source-freshness.json",
+        "data/evaluation/meetings-c6-validation-v1/freshness.json",
+        "data/evaluation/meetings-c6-validation-v1/source-freeze.json",
+        "data/evaluation/meetings-c6-validation-v1/review-metadata-summary.json",
+        "data/evaluation/meetings-c6-validation-v1/item-prereview.json",
+        "data/evaluation/meetings-c6-validation-v1/item-prereview-notes.md",
+        "data/evaluation/meetings-c6-validation-v1/item-freeze.json",
+        ".local/meetings-c6-validation-source-review-v1/acceptance.json"
+      ],
+      "coordinated_flat_metadata_paths": [],
+      "starts_after_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+      "additional_start_gate": "Commit actual roles and prior index, then explicit source followup and actual code/Git/role proof. Item work requires independently accepted source freeze commit and separate dispatch.",
+      "excluded_from_final_answer_judging": true
+    },
+    {
+      "phase": "validation",
+      "role": "item_prereviewer",
+      "role_id": "/root/c6_validation_prereviewer",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted": true,
+      "accepted_at": "2026-10-20T02:33:07.696Z",
+      "settings_provenance": "Parent explicitly requested and spawn tool accepted these arguments; not runtime introspection.",
+      "prior_exposure": [
+        "Auto-injected AGENTS and memory summary with historical public aggregates and workflow metadata.",
+        "C6 plan, protocol, static family structure, current safe STATUS prefix, parent CI/hash metadata.",
+        "No source bodies, questions, oracles, model outputs, traces, reasoning or mapping at acceptance; not pristine or fully blind."
+      ],
+      "allowed_paths": [
+        "data/evaluation/meetings-c6-validation-v1/source-prereview.json",
+        "data/evaluation/meetings-c6-validation-v1/source-prereview-notes.md",
+        "data/evaluation/meetings-c6-validation-v1/source-freshness.json",
+        "data/evaluation/meetings-c6-validation-v1/freshness.json",
+        "data/evaluation/meetings-c6-validation-v1/source-freeze.json",
+        "data/evaluation/meetings-c6-validation-v1/review-metadata-summary.json",
+        "data/evaluation/meetings-c6-validation-v1/item-prereview.json",
+        "data/evaluation/meetings-c6-validation-v1/item-prereview-notes.md",
+        "data/evaluation/meetings-c6-validation-v1/item-freeze.json",
+        ".local/meetings-c6-validation-source-review-v1/acceptance.json"
+      ],
+      "coordinated_flat_metadata_paths": [],
+      "starts_after_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+      "additional_start_gate": "Commit actual roles and prior index, then explicit source followup and actual code/Git/role proof. Item work requires independently accepted source freeze commit and separate dispatch.",
+      "excluded_from_final_answer_judging": true
+    }
+  ],
+  "acceptance_evidence": [
+    {
+      "role_id": "/root/c6_calibration_author",
+      "path": ".local/meetings-c6-calibration-source-v1/acceptance.json",
+      "sha256": "8496f327693640f01ca4586d768315019e7e94df5c65c08096889b61c6e29243",
+      "accepted_at": "2026-10-20T02:29:12.2528817+00:00",
+      "registration_receipt": {
+        "schema_version": 1,
+        "id": "meetings-c6-calibration-source-author-acceptance-v1",
+        "candidate_id": "meeting-answer-single-thinking-c6-v1",
+        "role_id": "/root/c6_calibration_author",
+        "split": "calibration",
+        "accepted_at_utc": "2026-10-20T02:29:12.2528817+00:00",
+        "status": "accepted_registration_only_awaiting_parent_source_dispatch",
+        "model_setting": {
+          "requested_model": "gpt-6-astra",
+          "requested_reasoning_effort": "xhigh",
+          "requested_fork_turns": "none",
+          "evidence": "Parent directly observed spawn tool accepting these arguments and returning canonical role_id; parent message supplied this record.",
+          "runtime_introspection": false
+        },
+        "planned_scope": [
+          "source_author",
+          "later_item_author_after_reviewed_source_freeze_and_commit"
+        ],
+        "same_split_source_item_role_reuse_planned_and_disclosed": true,
+        "current_authorization": [
+          "read_allowed_safe_plan_protocol_static_registry_current_status_metadata",
+          "create_this_acceptance_file_only"
+        ],
+        "source_work_authorized_now": false,
+        "item_work_authorized_now": false,
+        "excluded_from_final_judging": true,
+        "self_review_forbidden": true,
+        "cross_split_author_or_reviewer_role": false,
+        "prior_context_exposure": {
+          "automatic_AGENTS_instructions": true,
+          "automatic_memory_summary": true,
+          "parent_public_status_and_toolchain_CI_metadata": true,
+          "safe_design_protocol_and_static_family_structure": true,
+          "safe_current_root_status": true,
+          "memory_registry_exact_C6_metadata_search": "C6, 939731a4, d3e4e2e search returned no matches; no historical memory body was opened.",
+          "fully_blind_or_pristine_claim": false
+        },
+        "actual_read_paths": [
+          "docs/MEETINGS-C6-PLAN.md",
+          "data/evaluation/meetings-c6-protocol-v1.json",
+          "data/evaluation/meetings-c6-family-registry-v1.json",
+          "docs/STATUS.md:current_safe_status_prefix"
+        ],
+        "counts_at_acceptance": {
+          "actual_historical_or_new_source_body_reads": 0,
+          "source_code_body_reads": 0,
+          "source_or_repository_research": 0,
+          "raw_or_processed_content_reads": 0,
+          "question_or_oracle_or_context_reads": 0,
+          "input_or_output_or_trace_or_reasoning_or_mapping_reads": 0,
+          "validation_semantic_reads": 0,
+          "source_documents_created": 0,
+          "items_created": 0,
+          "tokenizer_loads": 0,
+          "native_generations": 0,
+          "downloads": 0,
+          "official_profile_runs": 0,
+          "tests": 0,
+          "git_mutations": 0
+        },
+        "parent_reported_prerequisites": {
+          "source_commit": "d3e4e2ef401d490c712f6773b07f19d01418f2dc",
+          "toolchain_freeze_entries": 77,
+          "toolchain_freeze_sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b",
+          "source_push_run": "39357782029",
+          "source_pull_request_run": "39357786578",
+          "required_source_jobs": "backend, web, java-service passed in both runs, as directly observed by parent",
+          "separate_CI_receipt_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+          "separate_CI_receipt_commit_CI": "parent reports all three required jobs passed",
+          "independently_verified_by_this_role_at_registration": false
+        },
+        "next_gate": "Wait for parent commit of actual role registration plus prior metadata and explicit source-only followup; then actual committed code_contract, GitProof, and role check before source work.",
+        "source_then_item_gate": "Independent source review, parity, source freeze and commit must precede any item authorship.",
+        "frozen_toolchain_and_closed_pools_immutable": true,
+        "future_outputs_created_now": false,
+        "continued_work_without_parent_followup": false
+      }
+    },
+    {
+      "role_id": "/root/c6_calibration_prereviewer",
+      "path": ".local/meetings-c6-calibration-source-review-v1/acceptance.json",
+      "sha256": "b1e47784ff722f82c8ae984fc7a73e3c09f6215670a59bf2b9076c01f048b364",
+      "accepted_at": "2026-10-20T02:32:35.495Z",
+      "registration_receipt": {
+        "schema_version": 1,
+        "candidate_id": "meeting-answer-single-thinking-c6-v1",
+        "role_id": "/root/c6_calibration_prereviewer",
+        "accepted_at": "2026-10-20T02:32:35.495Z",
+        "status": "accepted_registration_only_waiting_explicit_parent_followup",
+        "split": "calibration",
+        "independent_of_source_and_item_authorship": true,
+        "planned_scope": [
+          "independent_calibration_source_prereview",
+          "later_same_split_item_prereview_after_separate_dispatch"
+        ],
+        "same_split_source_item_review_reuse_disclosed": true,
+        "cross_split_author_or_reviewer_role": false,
+        "excluded_from_final_output_judging": true,
+        "current_authorization": "Read approved C6 plan, protocol, static family registry and safe current STATUS prefix; write this acceptance only. No semantic review yet.",
+        "runtime_setting": {
+          "requested_model": "gpt-6-astra",
+          "requested_reasoning_effort": "xhigh",
+          "requested_fork_turns": "none",
+          "evidence": "Parent reported spawn tool accepted these exact arguments and returned this canonical role ID.",
+          "independently_introspected": false
+        },
+        "exposures": {
+          "automatic_project_AGENTS_instructions": true,
+          "automatic_memory_summary": true,
+          "automatic_memory_summary_scope": "Project history and public metadata summaries supplied in initial context; no memory files opened.",
+          "public_metadata_from_parent_dispatch": true,
+          "public_metadata_from_approved_plan_protocol_registry_status": true,
+          "permitted_document_reads": [
+            "docs/MEETINGS-C6-PLAN.md",
+            "data/evaluation/meetings-c6-protocol-v1.json",
+            "data/evaluation/meetings-c6-family-registry-v1.json",
+            "docs/STATUS.md lines 1-35 only"
+          ],
+          "referenced_evidence_files_opened": false,
+          "historical_or_new_source_bodies_read": false,
+          "questions_oracles_answers_traces_or_mapping_read": false,
+          "isolated_validation_semantics_read": false,
+          "pristine_or_fully_blind_claim": false
+        },
+        "parent_reported_toolchain": {
+          "source_commit": "d3e4e2ef401d490c712f6773b07f19d01418f2dc",
+          "frozen_file_count": 77,
+          "freeze_sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b",
+          "source_push_run_id": "39357782029",
+          "source_pr_run_id": "39357786578",
+          "required_jobs": [
+            "backend",
+            "java-service",
+            "web"
+          ],
+          "source_ci_parent_observed_all_passed": true,
+          "separate_ci_receipt_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+          "receipt_commit_ci_parent_observed_all_three_passed": true,
+          "independently_verified_by_this_role": false
+        },
+        "later_source_review_outputs": [
+          "data/evaluation/meetings-c6-calibration-v1/source-prereview.json",
+          "data/evaluation/meetings-c6-calibration-v1/source-prereview-notes.md",
+          "data/evaluation/meetings-c6-calibration-v1/source-freshness.json",
+          "data/evaluation/meetings-c6-calibration-v1/source-freeze.json (conditional acceptance only)"
+        ],
+        "later_outputs_created_now": false,
+        "followup_prerequisites": [
+          "parent explicit later dispatch",
+          "committed actual role registration",
+          "actual committed code proof before semantic source reads"
+        ],
+        "boundaries": [
+          "no historical or new source bodies until explicit later dispatch",
+          "no questions, oracles, answers, traces, mapping, or isolated validation semantics now",
+          "no source research or downloads",
+          "no model or tokenizer execution",
+          "no tests",
+          "no Git mutation",
+          "preserve frozen toolchain, prior bindings and closed pools",
+          "do not self-review authored artifacts",
+          "item review requires a separate later dispatch"
+        ],
+        "counts": {
+          "source_bodies_read": 0,
+          "source_documents_authored": 0,
+          "source_reviews_performed": 0,
+          "source_research_requests": 0,
+          "downloads": 0,
+          "questions_read_or_authored": 0,
+          "oracles_read_or_authored": 0,
+          "answers_or_traces_read": 0,
+          "mappings_read": 0,
+          "isolated_validation_semantic_reads": 0,
+          "semantic_judgments": 0,
+          "product_model_calls": 0,
+          "tokenizer_calls": 0,
+          "native_generations": 0,
+          "tests_run": 0,
+          "Git_mutations": 0
+        }
+      }
+    },
+    {
+      "role_id": "/root/c6_validation_author",
+      "path": ".local/meetings-c6-validation-source-v1/acceptance.json",
+      "sha256": "d1d4eb2853f2801016395c93847f8ffa9e83f4c0f083c7963480da783ed5f4ef",
+      "accepted_at": "2026-10-20T02:31:36.9108736Z",
+      "registration_receipt": {
+        "schema_version": 1,
+        "candidate_id": "meeting-answer-single-thinking-c6-v1",
+        "role_id": "/root/c6_validation_author",
+        "split": "validation",
+        "accepted_at_utc": "2026-10-20T02:31:36.9108736Z",
+        "scope": "registration_only_no_source_work_until_explicit_followup",
+        "model_setting_provenance": {
+          "requested_model": "gpt-6-astra",
+          "requested_reasoning_effort": "xhigh",
+          "fork_turns": "none",
+          "accepted_by_spawn_tool": true,
+          "evidence": "Parent directly confirmed accepted spawn arguments and canonical role handle in task message.",
+          "runtime_model_introspection_performed": false,
+          "runtime_model_attestation_claim": false
+        },
+        "accepted_roles": [
+          "isolated_validation_source_author",
+          "later_same_split_item_author_after_reviewed_source_freeze_commit"
+        ],
+        "same_split_source_item_reuse": "planned_and_disclosed",
+        "self_review_authorized": false,
+        "cross_split_authorship_or_review_authorized": false,
+        "excluded_from_final_independent_judging": true,
+        "exposure": {
+          "automatic_AGENTS_instructions": true,
+          "automatic_memory_summary": true,
+          "parent_task_public_metadata_and_toolchain_CI_claims": true,
+          "c6_plan_protocol_static_family_registry": true,
+          "docs_STATUS_prefix_lines": 80,
+          "memory_registry_search": "C6-related keyword search returned no relevant hits; no rollout/source bodies opened.",
+          "closed_or_new_source_body_semantic_reads": 0,
+          "calibration_source_or_item_semantic_reads": 0,
+          "questions_or_oracles_or_contexts_read": 0,
+          "model_inputs_outputs_traces_reasoning_or_mapping_read": 0,
+          "fully_blind_claim": false
+        },
+        "read_documents": [
+          "docs/MEETINGS-C6-PLAN.md",
+          "data/evaluation/meetings-c6-protocol-v1.json",
+          "data/evaluation/meetings-c6-family-registry-v1.json",
+          "docs/STATUS.md:prefix80"
+        ],
+        "immutable_toolchain_parent_supplied": {
+          "source_commit": "d3e4e2ef401d490c712f6773b07f19d01418f2dc",
+          "freeze_files": 77,
+          "freeze_sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b",
+          "CI_receipt_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+          "independent_Git_or_CI_proof_performed_in_registration": false
+        },
+        "requirements_before_source_work": [
+          "parent_commits_role_registration_and_prior_metadata_index",
+          "explicit_source_only_followup",
+          "actual_committed_code_contract_GitProof_and_role_check_before_semantics"
+        ],
+        "requirements_before_item_work": [
+          "independent_source_review_and_Java_Python_processing_parity",
+          "source_freeze_and_commit",
+          "explicit_item_authorship_dispatch"
+        ],
+        "custody_and_execution": {
+          "own_split_source_item_offline_custody_is_distinct_from_validation_inference_and_audit": true,
+          "validation_inference_gate_opened": false,
+          "required_validation_execution_gate": "original_C6_calibration_6_of_6_and_integrity_replay_before_metadata_or_body"
+        },
+        "activity_counts": {
+          "source_research": 0,
+          "source_adoptions": 0,
+          "source_authorship": 0,
+          "items_authored": 0,
+          "tokenizer_calls": 0,
+          "native_calls": 0,
+          "downloads": 0,
+          "tests_or_official_profiles": 0,
+          "Git_mutations": 0
+        },
+        "writes": [
+          ".local/meetings-c6-validation-source-v1/acceptance.json"
+        ]
+      }
+    },
+    {
+      "role_id": "/root/c6_validation_prereviewer",
+      "path": ".local/meetings-c6-validation-source-review-v1/acceptance.json",
+      "sha256": "bd0ff83d1676d49a69df8f669bf86c5604ca45abe7cfb8ca070a5451614fc10e",
+      "accepted_at": "2026-10-20T02:33:07.696Z",
+      "registration_receipt": {
+        "schema_version": 1,
+        "record_type": "c6_role_acceptance_registration_only",
+        "candidate_id": "meeting-answer-single-thinking-c6-v1",
+        "accepted_at": "2026-10-20T02:33:07.696Z",
+        "role_id": "/root/c6_validation_prereviewer",
+        "split": "validation",
+        "role": "independent_isolated_source_prereviewer",
+        "planned_later_role": "same_split_item_prereviewer_requires_separate_dispatch",
+        "state": "accepted_registration_only_await_explicit_parent_dispatch",
+        "model_settings": {
+          "model": "gpt-6-astra",
+          "reasoning_effort": "xhigh",
+          "fork_turns": "none",
+          "provenance": "Parent message reports spawn tool accepted these arguments and returned /root/c6_validation_prereviewer; not independently introspected runtime settings.",
+          "parent_observed_tool_acceptance": true,
+          "independent_runtime_introspection": false
+        },
+        "authorization": {
+          "current": "Read only the designated C6 plan, protocol, content-free family registry and STATUS safe current prefix; create this acceptance record only.",
+          "semantic_source_work_authorized_now": false,
+          "later_dispatch_required": true,
+          "committed_role_registration_and_actual_code_proof_required_before_semantic_work": true,
+          "source_authorship": false,
+          "self_review": false,
+          "cross_split_author_or_item_review": false,
+          "final_output_judging": false,
+          "same_split_source_item_review_reuse_disclosed": true,
+          "future_validation_paths": [
+            "data/evaluation/meetings-c6-validation-v1/source-prereview.json",
+            "data/evaluation/meetings-c6-validation-v1/source-prereview-notes.md",
+            "data/evaluation/meetings-c6-validation-v1/freshness.json or source-freshness.json",
+            "data/evaluation/meetings-c6-validation-v1/source-freeze.json only if accepted"
+          ],
+          "future_paths_created_now": 0,
+          "finalized_calibration_source_only_freshness_comparison": "Requires explicit later source-freshness authorization; not authorized now. Calibration items and oracles remain forbidden."
+        },
+        "reads": {
+          "authorized_full_files": [
+            {
+              "path": "docs/MEETINGS-C6-PLAN.md",
+              "sha256": "792a9801fe0fd3c70fda4058f13375042b2e39800863b3335bdc98b14c4ed6b4"
+            },
+            {
+              "path": "data/evaluation/meetings-c6-protocol-v1.json",
+              "sha256": "10f1ab558996f99b577bb61c533f4b202d73c25fbde42a94e674cb4d3201d691"
+            },
+            {
+              "path": "data/evaluation/meetings-c6-family-registry-v1.json",
+              "sha256": "f9625e2c7b492f6eabed77a89c1af068736c0922ef8377a8355ad4355cb0dd37"
+            }
+          ],
+          "status": {
+            "path": "docs/STATUS.md",
+            "scope": "first 60 lines only; public state and aggregate metadata"
+          },
+          "referenced_files_opened": false
+        },
+        "exposure": {
+          "automatic_AGENTS_context": true,
+          "automatic_memory_summary_context": true,
+          "parent_dispatch_and_confirmation": true,
+          "public_design_policy_composition_metadata": true,
+          "public_prior_run_aggregate_hash_CI_and_status_metadata": true,
+          "exposure_description": "Automatic AGENTS instructions and memory summary included historical public source/workflow/failure aggregates and identifiers. The authorized plan, protocol, content-free family registry and STATUS prefix disclose configuration, split composition, prior scalar outcomes and CI/hash metadata. No pristine or fully blind claim is made.",
+          "pristine_claim": false,
+          "fully_blind_claim": false,
+          "old_or_new_source_bodies_read": 0,
+          "questions_or_oracles_read": 0,
+          "answers_reasoning_traces_mappings_read": 0,
+          "calibration_semantic_artifacts_read": 0,
+          "additional_memory_files_opened": 0
+        },
+        "parent_observations_not_independent_proof": {
+          "source_commit": "d3e4e2ef401d490c712f6773b07f19d01418f2dc",
+          "freeze_files": 77,
+          "freeze_sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b",
+          "source_push_run": "39357782029",
+          "source_pull_request_run": "39357786578",
+          "required_jobs_reported_passed": [
+            "backend",
+            "java-service",
+            "web"
+          ],
+          "separate_ci_receipt_commit": "1d9227bde920444737c906d4f647e4ec974f23b9",
+          "separate_receipt_commit_ci_reported_passed": true,
+          "actual_code_contract_or_Git_proof_performed_by_this_role": false,
+          "GitHub_CI_authenticity_independently_verified_by_this_role": false
+        },
+        "counts_this_role_at_registration": {
+          "source_documents_authored": 0,
+          "source_documents_semantically_reviewed": 0,
+          "questions_authored_or_reviewed": 0,
+          "oracles_authored_or_reviewed": 0,
+          "semantic_judgments": 0,
+          "benchmark_model_calls": 0,
+          "tokenizer_calls": 0,
+          "native_generations": 0,
+          "research_requests": 0,
+          "downloads": 0,
+          "tests": 0,
+          "Git_mutations": 0
+        },
+        "final_output_judge_exclusion": "Excluded because source and planned item prereview are data-development roles; separate independent final judges are required.",
+        "commitments": [
+          "Preserve all frozen files, closed pools, failures and prior records.",
+          "Do not open source bodies or semantic evaluation artifacts before explicit dispatch and committed registration/code proof.",
+          "Do not open old closed bodies for deduplication.",
+          "Do not research, download, run tests, tokenizer or native models, or mutate Git under this registration assignment.",
+          "Return this acceptance path and hash to parent, then await further dispatch."
+        ]
+      }
+    }
+  ],
+  "parent_semantic_access": "metadata_only_no_source_bodies_questions_oracles_outputs_or_review_notes",
+  "validation_prereviewer_cross_split_source_access": "Only finalized C6 calibration SOURCES after explicit later freshness dispatch; never calibration items/oracles.",
+  "source_semantic_reads_at_registration": 0,
+  "actual_tokenizer_or_native_calls": 0,
+  "human_review": 0,
+  "final_answer_judges_registered": 0
+}

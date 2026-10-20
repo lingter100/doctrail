@@ -1,5 +1,13 @@
 # 진행 상태
 
+## 2026-10-20 · C6 새 자료 역할과 과거 출처 metadata 등록
+
+CI 영수증1d9227b의 push39358452404/PR39358456535도 필수3job 성공을 직접 확인했다. 새 Astra xhigh 작성자2명·독립 사전검토자2명이 등록만 수락했다. 같은 split source/item 역할 재사용과 자동 AGENTS·memory·공개 metadata 노출을 기록했고 자기검토·split 겸임·최종 답변 judge 참여를 금지한다.
+
+새 prior index659fef38은 기존 metadata4개에서98행(정확히 같은3행 포함, canonical95)을 보존했다. 정규화 hash30행, 과거 누락3항목, 제외 repo11개다. 거부된 C5 validation v1도 포함하며 닫힌 원문을 열어 빈칸을 채우지 않았다. 원문 중복 없음의 완전 증명이 아니다.
+
+부모가 역할/index를 커밋한 뒤 작성자들이 실제 code_contract/GitProof/role preauth를 수행한다. 그동안 HEAD를 유지한다. 공개 repo는 본문 전 예약하고 Java parity는 순차 실행한다. 새 원문6+6의 출처·이용조건·독립 검토·동결커밋이 질문 작성보다 먼저다. 현재 자료·질문·tokenizer/native0, goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C6 최종 정규화 소스 양쪽 필수 CI 통과
 
 d3e4e2e의 push39357782029/PR39357786578 모두 backend/java-service/web 성공을 직접 확인했다. 동결77개와 freeze939731a4의 실제 커밋/working bytes가 일치하며 사용자 GitHub author·committer lingter100도 확인했다. 정확한 최종LF 소스 CI 통과는 이전 로컬195통과/1skip 결과와 별도 증거다. CI 성공만으로 모델 품질을 주장하거나 검사 개수를 추정하지 않는다.
