@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-20 · C6 수용본769d2cc CI와 커밋 자료 검증 통과
+
+수용본769d2cc의 push39365780168/PR39365785254 필수 backend/java-service/web 모두 성공했다. GitHub author·committer lingter100, PR14 head, 커밋23개 exact bytes를 확인했다. 별도 experiments/results/meetings-c6-item-ci-v1.json에 실제 job과 자료 proof를 묶었다.
+
+각 기존 split 담당자가 같은 HEAD에서 실제 기본 GitProof와 load_material을 통과했다. Calibration code77/source14/item6·Git212/snapshot119, validation77/15/6·Git195/snapshot101이다. Validation 보조 프로세스 계측이 Windows 문자열 argv를 놓쳤으므로 실제 subprocess 수는 미확인으로 정정했고 원래 영수증을 보존했다. 실제 GitProof pair 통과와 이 계측 한계를 구분하며 proof 재실행0이다.
+
+두 담당자가 소유권/HEAD hold를 반환했다. 이 CI 영수증·문서 커밋 후 각 담당자에게 공식 offline 준비1회를 별도로 지시한다. 출력 경로 부재와 진행 중 작업을 먼저 확인하고 캐시만 사용한다. 성공하면 입력·영수증 exact 공개 사본과 실행 plan을 실제 calibration 전에 커밋한다. 아직 tokenizer/native/최종 답변 판정0, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 
 ## 2026-10-20 · C6 수정 문항14개 독립 수용·동결 완료
 

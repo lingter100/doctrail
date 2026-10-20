@@ -1,4 +1,8 @@
 # 결정 기록
+## 2026-10-20 · 실제 Git 증명과 계측 한계 분리
+
+커밋 자료 proof는 변하지 않은 기본 Git runner로 수행했다. Validation 보조 observer가 Windows 문자열 argv를 누락해0을 기록한 것은 실제 실행0의 증거가 아니다. 원본을 바꾸지 않고 별도 측정 정정으로 subprocess 횟수를 미확인 처리한다. 통과한195 revision/path pair와 전체 material 계약은 유지하며 숫자를 얻기 위한 proof 재실행은 하지 않는다.
+
 
 ## 2026-10-20 · 질문을 유지한 정답 기준 보완과 수용
 

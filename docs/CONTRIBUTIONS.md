@@ -1,4 +1,8 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · C6 수용본 CI·커밋 자료 확인
+
+기존 실제 Astra xhigh 작성자/자료 담당자2명이 자기 split의 커밋된 자료 전체를 frozen machine validator와 실제 기본 GitProof로 확인했다. 부모는 영수증 hash·상태·개수, exact23 committed bytes와 GitHub 사용자 신원/양쪽 CI 성공만 확인했다. Validation 보조 계측 오류는 원본·정정으로 분리했다. 의미 자료를 부모에게 노출하거나 추가 모델·tokenizer·사용자 검수를 실행하지 않았다.
+
 
 ## 2026-10-20 · C6 제한된 수정과 독립 수용
 
