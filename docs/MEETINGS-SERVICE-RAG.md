@@ -58,10 +58,35 @@ uv run --no-sync pytest -q tests/test_meeting_service_rag.py tests/test_meeting_
 
 ## 함께 실행하는 최소 launcher 설계
 
-2026-10-20 추가 설계이며 아직 구현/실행 결과가 아니다. 신규 `scripts/serve_meeting_rag_service.py`와 그 합성 검사 한 파일만 추가한다. 기존 native context와 Uvicorn Server를 현재 Python 프로세스에 두고 CPU 검색·Java만 소유 자식 프로세스로 시작한다. 서로 다른 임의 token을 메모리/자식 환경에 전달하고 로그에는 남기지 않는다. 기존 모델·답변90초·분석120초·동결 코드는 그대로 사용한다.
+2026-10-20 추가한 설계를 아래처럼 구현했다. 신규 `scripts/serve_meeting_rag_service.py`와 그 합성 검사 한 파일만 추가한다. 기존 native context와 Uvicorn Server를 현재 Python 프로세스에 두고 CPU 검색·Java만 소유 자식 프로세스로 시작한다. 서로 다른 임의 token을 메모리/자식 환경에 전달하고 로그에는 남기지 않는다. 기존 모델·답변90초·분석120초·동결 코드는 그대로 사용한다.
 
 실제 Astra xhigh 검토의 정정에 따라 종료는 Java의 새 요청 차단→CPU 종료 요청→worker 종료 요청과 owned native 정리 선발동→worker join→context 최종 정리 순서다. 진행 중인 요청이 native를 기다리는 상태에서 먼저 worker join을 완료하려 하지 않는다. 모든 자체 wait/join은 하나의 남은5초를 사용하며, 기존 native cleanup의 별도5초를 합산 허용하지 않는다. 초과·미종료·오류는 실패로 남기고 소유 자원 정리는 계속한다. 강제 선점을 보장한다는 의미는 아니다.
 
 전체 startup120초는 인증된 generation health·CPU/base retrieval health·Java HTTP 준비와 소유 thread/process 생존까지 측정한다. 기존 동기 hash/context 진입의 늦은 반환은 수용 실패로 기록한다. Uvicorn thread 예외도 호출자에게 전달한다. Java에는 opt-in/base를 명시적 인자로 전달한다. 현재 Java health는 status/version만 제공하므로 pinned JAR와 실행 인자 확인은 설정 확인이며 실제 opt-in 효과 증거가 아니다. 실제 서비스 요청 검증이 별도로 필요하다.
 
 신규 경계의 주입된 factory·clock·HTTP probe로 시작/실패/종료/비밀값 비노출을 검사한다. 기존 frozen 모듈 전역을 바꾸거나 실제 자료·모델·브라우저를 이 합성 검사에 사용하지 않는다.
+
+## 실행기 검증과 사용 방법
+
+최종 신규29개 합성 검사가0.86초에 통과했고 Ruff도 통과했다. 별도 Astra xhigh 코드 검토가 native 시작 실패 시 내부 정리의 시간·오류를 외부 판정이 놓치는 문제를 발견했다. 수정 전7개 회귀 실패를 보존하고, 이미 소비한 정리 시간과 오류를 전체5초 판정에 포함하도록 고쳤다. 수정 후 독립 delta 검토에서 남은 blocker는0이다. 이전21개와 최종29개는 겹치는 검사이므로 합산하지 않는다.
+
+최종 LF 코드의 검사 전후 hash가 같고 부모가 코드·증거13개 및 이전 로그6개, 기존 동결77개를 확인했다. 초기 Ruff16 지적과 추가 스타일1 지적, 원래 소스·receipt·실패 로그는 별도로 보존했다. [공개 검증 요약](../experiments/results/meetings-service-rag-launcher-v1.json)은 원본에서 만든 LF JSON이며 원본 byte-copy가 아니다.
+
+기존 설치·화면 빌드·Java package와 무료 로컬 모델 캐시가 필요하다. 아래는 실행 방법이며 실제 native 통합 성공 증거는 아니다. 공식 평가는 별도 source/item 검토와 실행 등록을 먼저 따른다.
+
+```powershell
+$ragJarHash = (Get-FileHash -LiteralPath ./server/target/doctrail-server-0.1.0.jar -Algorithm SHA256).Hash.ToLowerInvariant()
+uv run --no-sync python -m scripts.serve_meeting_rag_service `
+  --enable-service-rag --jar-sha256 $ragJarHash `
+  --database .local/service-rag-demo.sqlite3 `
+  --log-dir .local/service-rag-demo-001
+```
+
+로그 폴더는 사용하지 않은 경로여야 한다. 시작 후 표시된 로컬 주소에서 로그인하고, 검색 방법을 `hybrid_rerank`로 선택한다. 답변 근거 상한은 기존 화면의5개이며 launcher가 요청을 강제로 바꾸지 않는다. Ctrl+C로 종료하면 소유 자원을 정리하고 지정 폴더의 `lifecycle.json`에 시작·정리 수용 여부를 남긴다. 정리 초과/오류는 실패이며 자동 재시작하지 않는다.
+
+```powershell
+uv run --no-sync pytest -q tests/test_serve_meeting_rag_service.py
+uv run --no-sync ruff check scripts/serve_meeting_rag_service.py tests/test_serve_meeting_rag_service.py
+```
+
+현재 검증은 가짜 프로세스·시계·HTTP를 주입한 경계 검사다. 실제 native 호환성·HTTP 전체 흐름·모델 품질·5초 이내 실제 종료·사용자 검수는 미완료다. Windows Java/CPU 프로세스 종료는 강제 종료이며 JVM의 graceful shutdown 증거가 아니다.

@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_launcher_implementation_verification",
+  "observed_at": "2026-10-20T07:48:51.352096+00:00",
+  "status": "synthetic_verified_and_independently_code_reviewed",
+  "original_receipt": {
+    "path": ".local/service-rag-launcher-v1/receipt-v2.json",
+    "sha256": "3f6a22a7050f2a5874d241f1e34b0d776aea489c06df5b588779e62ab5262c05",
+    "bytes": 6489
+  },
+  "serialization": "LF public summary derived from original; not exact byte copy",
+  "implementation": {
+    "schema_version": 2,
+    "status": "implementation_revised_pending_independent_delta_review",
+    "base_commit_parent_reported": "fdeb19167d21da008b8502efba6120e90d96dcb7",
+    "source_bindings": [
+      {
+        "path": "scripts/serve_meeting_rag_service.py",
+        "sha256": "ba01240e0d7463c0b0fe4fce4789ccdb52924a7841e0936040c1e30ee43c2669",
+        "bytes": 20565,
+        "crlf": 0
+      },
+      {
+        "path": "tests/test_serve_meeting_rag_service.py",
+        "sha256": "7974b096cdf819ab6cb8d58bceb38e333f5f977cdcea242a93bd20fd1e4596a9",
+        "bytes": 19405,
+        "crlf": 0
+      }
+    ],
+    "preserved_review_ready_receipt": {
+      "path": ".local/service-rag-launcher-v1/receipt.json",
+      "bytes": 4202,
+      "sha256": "d42ff5b7a5894bf55fc7933a51f975d1ec4aed60d4ee6401d3e013941c33b32e"
+    },
+    "preserved_review_ready_sources": [
+      {
+        "path": ".local/service-rag-launcher-v1/review-ready-source/serve_meeting_rag_service.py",
+        "bytes": 19227,
+        "sha256": "4499ae1413ad7c94acdb77f6c1bc966692f571959eae4abd2b522ec2d75f439e"
+      },
+      {
+        "path": ".local/service-rag-launcher-v1/review-ready-source/test_serve_meeting_rag_service.py",
+        "bytes": 16614,
+        "sha256": "70e896109282d66ac1ab19d3ca53047c740113fec5c650d900b5d96277ce16e8"
+      }
+    ],
+    "prior_receipt_and_all_six_original_logs_hash_verified_unchanged": true,
+    "change": [
+      "Charge already completed native cleanup from failed context entry to whole five second cleanup acceptance and remaining owned wait/join budget.",
+      "Preserve native within_budget failure and cleanup/read/join errors independently of confirmed process absence.",
+      "Record prior_native_cleanup_seconds plus outer_elapsed_seconds as combined elapsed_seconds, without double counting cleanup performed during outer shutdown.",
+      "Unconfirmed prior cleanup timing fails closed and permits no additional owned wait budget; cleanup continues.",
+      "Existing model policies, frozen helpers, cleanup ordering and startup acceptance remain unchanged."
+    ],
+    "line_endings": {
+      "final_new_two_files": "LF only before and after final test/Ruff; identical hashes",
+      "original_review_ready_bytes": "preserved exactly in review-ready-source; original receipt unchanged",
+      "normalization": "apply_patch converted launcher to LF; explicit byte normalization converted test CRLF to LF before checks; final style-only fix also LF",
+      "bindings": [
+        {
+          "path": ".local/service-rag-launcher-v1/lf-before-final-checks.json",
+          "bytes": 628,
+          "sha256": "9c18dca3d1deb525a9f70272ac33e125b118463264be7bd386a16a0fffc947ef"
+        },
+        {
+          "path": ".local/service-rag-launcher-v1/final-lf-source-before-checks.json",
+          "bytes": 360,
+          "sha256": "3eb3128691151487f55831fe9537649aa596cbd11ca23de9564ac0bae6f45ca2"
+        },
+        {
+          "path": ".local/service-rag-launcher-v1/final-lf-source-after-checks.json",
+          "bytes": 360,
+          "sha256": "3eb3128691151487f55831fe9537649aa596cbd11ca23de9564ac0bae6f45ca2"
+        }
+      ]
+    },
+    "synthetic_checks": [
+      {
+        "stage": "before fix regression reproduction",
+        "result": "7 failed, 21 deselected in 1.12s",
+        "log": {
+          "path": ".local/service-rag-launcher-v1/tests-native-unwind-repro.log",
+          "bytes": 54636,
+          "sha256": "2e22f3becb77481df161eb1cd6e6a69ebc5e6fcf4eeacd5cea34b7f60deae125"
+        }
+      },
+      {
+        "stage": "first fixed LF checks",
+        "result": "29 passed in 0.91s",
+        "log": {
+          "path": ".local/service-rag-launcher-v1/tests-native-unwind-final.log",
+          "bytes": 101,
+          "sha256": "8729507884c8dc78a52599657f00a46bf7b7a320f9e20530c21216e83de5e05d"
+        }
+      },
+      {
+        "stage": "first fixed LF Ruff",
+        "result": "1 SIM102 finding preserved",
+        "log": {
+          "path": ".local/service-rag-launcher-v1/ruff-native-unwind-final.log",
+          "bytes": 955,
+          "sha256": "7697ed7e8039320ff1bc1a4fa97fb1f97a114cfff7ce5663733454476f945f1a"
+        }
+      },
+      {
+        "stage": "final exact LF source tests",
+        "result": "29 passed in 0.86s",
+        "log": {
+          "path": ".local/service-rag-launcher-v1/tests-native-unwind-lf-final.log",
+          "bytes": 101,
+          "sha256": "86c93dc5d31b2e7e82ee68a3f51a83fdabd938959aa35181e5121ebb3ad6a556"
+        }
+      },
+      {
+        "stage": "final exact LF source Ruff",
+        "result": "All checks passed",
+        "log": {
+          "path": ".local/service-rag-launcher-v1/ruff-native-unwind-lf-final.log",
+          "bytes": 20,
+          "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+        }
+      }
+    ],
+    "test_scope": "existing21 plus eight new fake-only cases: inner cleanup flag/error/drain/overrun failures5, prior successful time plus outer time2, unknown prior time1",
+    "commands": [
+      "uv run --no-sync pytest -q tests/test_serve_meeting_rag_service.py -k 'enter_failure_preserves or prior_successful_native'",
+      "uv run --no-sync pytest -q tests/test_serve_meeting_rag_service.py",
+      "uv run --no-sync ruff check scripts/serve_meeting_rag_service.py tests/test_serve_meeting_rag_service.py"
+    ],
+    "owned_fake_resources": "Plain fake objects only; each new case asserts all fake processes/native stopped and no surviving thread; fixture releases intentionally surviving prior-case fake handles. No OS child/server/native resources started.",
+    "independent_review": "Initial blocker from source_discovery_decision repaired; parent will dispatch final delta review after ownership return. Not yet accepted.",
+    "limitations": [
+      "Synthetic unit verification only; native compatibility, full authenticated service chain, actual cleanup duration and quality remain unexecuted.",
+      "Synchronous context entry/hash/native cleanup/runtime locks cannot be hard preempted; elapsed excess remains failure while owned cleanup continues.",
+      "Prior native time relies on existing owned cleanup telemetry; unknown timing fails acceptance.",
+      "Java health proves status/version only; pinned JAR and explicit CLI arguments confirm launch configuration, not effective opt-in behavior.",
+      "Windows Java/CPU terminate is forced process stop, not graceful JVM shutdown proof."
+    ],
+    "nonexecution": {
+      "native": 0,
+      "tokenizer": 0,
+      "server": 0,
+      "browser": 0,
+      "network": 0,
+      "download": 0,
+      "evaluation_data_read": 0,
+      "git_commands_or_mutations": 0,
+      "frozen_files_modified": 0,
+      "source_files_modified_outside_assigned_new2": 0
+    }
+  },
+  "parent_verification": {
+    "new_source_and_evidence_bindings": 13,
+    "earlier_original_logs": 6,
+    "frozen_c7_bindings": 77,
+    "source_line_endings": "LF, matching tested bytes; original CRLF source preserved separately",
+    "source_semantic_reads": 0
+  },
+  "independent_code_review": {
+    "actor": "/root/source_discovery_decision",
+    "accepted_model": "gpt-6-astra",
+    "accepted_reasoning_effort": "xhigh",
+    "initial_blockers": 1,
+    "initial_finding": "Already completed native context-entry cleanup errors and consumed time were omitted from whole cleanup acceptance.",
+    "final_blockers": 0,
+    "delta_source_hashes": [
+      "ba01240e0d7463c0b0fe4fce4789ccdb52924a7841e0936040c1e30ee43c2669",
+      "7974b096cdf819ab6cb8d58bceb38e333f5f977cdcea242a93bd20fd1e4596a9"
+    ],
+    "actual_review_scope": "Read generic new-code delta and eight fake-only regressions against existing cleanup telemetry contract; no rerun or native execution.",
+    "not_final_answer_judge": true
+  },
+  "ci_status": "Requires exact implementation commit CI after publication",
+  "model_quality_verified": false,
+  "human_review": 0
+}

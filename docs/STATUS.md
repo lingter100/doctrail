@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-20 · 서비스 실행기29개 검사와 독립 검토 완료
+
+실제 Astra high 작성자가 NEW 실행기/검사2개를 반환했다. Native 시작 실패 시 내부 정리의 시간·오류가 누락되던 문제를 수정 전7개 실패로 재현·보존하고 고쳤다. 최종 LF 소스에서29통과/0.86초·Ruff 통과, 전후 hash 동일이다. 별도 Astra xhigh delta 읽기 검토에서 남은 blocker0이며 부모도 코드·증거13개/이전로그6개·동결77개를 확인했다. [실행 방법과 한계](MEETINGS-SERVICE-RAG.md), [검증 요약](../experiments/results/meetings-service-rag-launcher-v1.json)을 남긴다.
+
+구현과 별도로 등록5a1b11e를 사용자 계정으로 commit/push했다. Calibration 독립 source 검토와 validation v2 자료 준비를 실제 dispatch했다. Validation은 `w3c/web-performance@1c8fd577d0895699fcd9f6be595d4b45d6e8b388`을 예약했으며 아직 source 수용은 아니다. 두 역할의 의미 판단과 원문은 부모가 읽지 않는다.
+
+실제 서버·native·tokenizer·모델 답변0이며 새 구현 커밋의 필수 CI가 다음이다. Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
 ## 2026-10-20 · 실제 자료 등록6개 확인, 독립 검토와 validation 후속 등록
 
 Calibration v2 작성자는 공개3·새 합성3을 준비했고 실제 Java `/documents`에서6개 등록/재조회와 전체32청크·codepoint좌표·저장 원문/Python 처리 일치를 확인했다. 승인된 JAR/source10 binding은 그대로이며 소유 JVM0이다. 최초 관찰 코드의 변수 충돌은 HTTP0 실패로, 수정 관찰의 성공은 별도 경로로 보존했다. 회의 등록·자동 분석·모델 품질 통과를 뜻하지 않는다.
