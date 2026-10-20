@@ -1,4 +1,22 @@
 # 진행 상태
+## 2026-10-20 · 실제 화면 실행 설계 반환
+
+실제 Astra xhigh 설계 역할이 [단일 실행 설계](MEETINGS-SERVICE-RAG-EXECUTION.md)를 반환했고 부모가 generic 계약과 observer 연결점을 검토했다. 신규 driver·검사·Node browser3개와 기존 비동결 서비스3파일의 기본 off 관측 연결이 후속 구현 범위다. 전체 원문 UI 등록6→회의 자동분석4→질문별 UI1회→모든 인용 열기→소유 자원 정리를 포함하며, source/item/판정 역할과 실행 등록 전 실제 모델 호출은 허가하지 않는다. 구현은 이 설계를 commit한 뒤 별도 배정한다.
+
+## 2026-10-20 · validation 원문 반환과 독립 검토 담당 등록
+
+직전 goal turn은 실제 CI 관측·문항 작성 배정·Java 등록 슬롯 배정·상태 저장을 진행했다. 이번 시작 시 같은 실행을 반복하지 않고 현재 Git과 프로세스를 확인했다. Validation v3 원문6개/66청크 준비가 반환됐고 부모가 영속42개 bytes/hash를 모두 확인했다. 실제 Java6등록·6재조회3.922초와 최초 readiness 연결 실패1개를 보존했다. 소유 JVM0·추가 모델 호출0이다.
+
+새 `service_rag_validation_source_review`를 실제 gpt-6-astra/xhigh/fork none으로 도구가 수락했고 등록만 반환했다. [등록](../data/evaluation/meetings-service-rag-validation-review-registration-v3.json)은 same-split 전체 원문·license·저장된 Java 증거와 과거 fingerprint metadata만 허용한다. 다른 split 의미 중복 부재를 미확인으로 유지하며 독립 최종 answer judge에서는 제외한다. 원문7개 metadata와 등록을 commit한 뒤 별도로 검토를 배정한다. Calibration 문항 작성과 실제 실행 설계는 계속 진행 중이다.
+
+## 2026-10-20 · 문항 작성 배정, 별도 자료의 실제 등록 확인
+
+등록 cae10eca65362a5b64526a1484d8a93efa3c682b의 push39390198016/PR39390205423에서 backend·java-service·web 모두 성공했고 GitHub author/committer lingter100도 확인했다. [CI 관측 기록](../experiments/results/meetings-service-rag-next-stage-ci-v3.json)을 저장했다. 수용된 calibration 원문에 대한 기존 등록 작성자에게 NEW 문항·정답·선정·작성기록4개만 실제 배정했다. 원문 동결64개를 유지하며 문항 독립 검토는 아직 대기다.
+
+Validation v3 작성자는 별도 원문6개를 준비하고 배정받은 Java 슬롯에서 등록6·재조회6·전체66청크/좌표/저장 원문 일치3.922초를 보고했다. 소유 JVM 종료와 슬롯 해제도 보고했으며 영속 artifact index를 마무리 중이다. 부모의 최종 hash 확인·독립 source 수용은 아직 남았다. 회의 자동 분석·실제 모델 품질 검증으로 해석하지 않는다.
+
+별도 Astra xhigh 설계 역할은 NEW `MEETINGS-SERVICE-RAG-EXECUTION.md` 하나만 작성 중이다. 실제 서비스·브라우저를 연결하는 최소 실행과 기본 off 관측 연결을 설계하며 구현·모델 실행은 아직 배정하지 않았다. 사용자에게는 기본 서비스 구현, AI 품질 미완료, 최종 화면·운영·포트폴리오 검증의 구별을 설명한다. 완성일·완료 퍼센트를 확정하지 않으며 Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
 ## 2026-10-20 · calibration 원문 수용, 실행기 CI 통과, 다음 자료·문항 등록
 
 독립 Astra xhigh source 검토가 calibration6개/32청크를 수정0·거부0으로 수용했다. 부모는 안전 요약만 읽고 source freeze64개 bytes/hash를 확인했다. 역사적 metadata 공백3개와 의미·번역 중복 부재 미입증을 제한으로 유지한다. 원문 수용은 회의 자동 분석·검색·문항·답변 품질 수용이 아니다.

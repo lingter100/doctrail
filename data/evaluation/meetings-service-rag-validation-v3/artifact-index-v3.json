@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_durable_artifact_index",
+  "split": "validation",
+  "status": "prepared_pending_independent_source_review",
+  "artifact_count": 42,
+  "index_self_excluded": true,
+  "sqlite_handles_closed_before_index": true,
+  "ephemeral_sqlite_sidecars_excluded": true,
+  "parent_read_policy": "Only safe-summary-v3.json is parent semantic input; all other files are bytes/hash verification only.",
+  "artifacts": [
+    {
+      "path": ".local/service-rag-validation-v3/health-v3.json",
+      "bytes": 33,
+      "sha256": "bcabd7a6286a2c8767139b0d66b8a59a94e05d916862a573aca3fb30677c0ac0",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/java-http-exchanges-v3.json",
+      "bytes": 4097,
+      "sha256": "4061ee1c4265f6437f16bae25c7114d18909961053f17c0ffff4e478bd67b952",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/java-ingestion-observation-v3.json",
+      "bytes": 2917,
+      "sha256": "41630dccf819534a9807d353b1150d84e7c55a44db93e3e938cf3fe834dd5e17",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/java-ingestion-v3.sqlite3",
+      "bytes": 393216,
+      "sha256": "820a8cca90b630eb210735775814f5674cb67522f29f826c1a91d714d5edad86",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/java-source-mapping-v3.json",
+      "bytes": 17046,
+      "sha256": "a782283937a304dba77a7aa1319bce15714b246b85665dfd44f24aaa59b20d31",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/java-stderr-v3.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/java-stdout-v3.log",
+      "bytes": 5161,
+      "sha256": "566382994a3540e4da55df468d32c1c8737feda34077b77218b8352261098a4b",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/network-log-v3.jsonl",
+      "bytes": 8330,
+      "sha256": "40db9596a61b38be9968df2e2ee99e951c2eb0ff9b1a717fd6c8056472746d3a",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/observe_ingestion_v3.py",
+      "bytes": 10361,
+      "sha256": "1b3ff152bce96afe2e1e1d99ffc88f373f770357ffdb4db80aac7e2d70d69df1",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/observer-console-v3.log",
+      "bytes": 156,
+      "sha256": "914bb21bbae29049ee28f380cb6e7236c440f191477e405f49612a4d91ba4f2c",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/parent-reservation/receipt.json",
+      "bytes": 8717,
+      "sha256": "91a94231150b992e7fe3544dfc436ecdfc4f5fc40019cad85c088d0ce8ad0fa4",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/parent-reservation/repository.json",
+      "bytes": 6516,
+      "sha256": "bd90272e6cfdab981b66ec4bef57731661950e7dfdf8a3ab9147804a7fc30209",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/parent-reservation/revision.json",
+      "bytes": 347,
+      "sha256": "9011738cc7d314f31b8b5ec316e493cafbdfe55d8c53051b6552275ddee6d759",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/parent-reservation/tree.json",
+      "bytes": 18353,
+      "sha256": "410598182b7667e63e21e37c974f79cafad138ed5bb2df94b731cf8117266fe7",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/LICENSE-APACHE",
+      "bytes": 10847,
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/LICENSE-MIT",
+      "bytes": 1023,
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/public-meeting-01.md",
+      "bytes": 42623,
+      "sha256": "accbbd8af950602891a1ed39d79c82f7ce03afe54482de9a737760bb61f787c7",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/public-meeting-02.md",
+      "bytes": 5941,
+      "sha256": "d2f7f9a0ffe37e89fbb5a9b9b975f10ff032e83f35272f6d2c20440e9cb4a5a1",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/README.md",
+      "bytes": 1663,
+      "sha256": "e185ce7501d8f5d5ec4337fa8a159ecbd69a07266732bc22eb74f3c5038c71a2",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/synthetic-general-01.md",
+      "bytes": 3172,
+      "sha256": "fe5c166ef0450108056880f39312d29636ae5f52229f65fe5fbecff87517ea0c",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/synthetic-meeting-01.md",
+      "bytes": 3202,
+      "sha256": "fe486eda6e4d6d6b81eaa3506216a5ec8bf420680273eb016623ebbbf07837c1",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/synthetic-meeting-02.md",
+      "bytes": 3240,
+      "sha256": "872bad4471bf206b33472f49227fbb20c4668370e2febdc14f8738e48b7f6815",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/registration-response-v3.json",
+      "bytes": 242,
+      "sha256": "df7eead5c36a122770a0a331869fa30893c32738d69240a451e234170565b4fd",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/start-v3.json",
+      "bytes": 428,
+      "sha256": "ed14ec7c6473bcb39a19c47fd97168807c9bdce0146cb2747bfddc2933b5b783",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-P-G1-get-v3.json",
+      "bytes": 4212,
+      "sha256": "ba3eb76fa819eb63ea08b6870928602dee45f9c3f26246190b746be2aa9e27ce",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-P-G1-upload-v3.json",
+      "bytes": 4212,
+      "sha256": "ba3eb76fa819eb63ea08b6870928602dee45f9c3f26246190b746be2aa9e27ce",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-P-M1-get-v3.json",
+      "bytes": 101080,
+      "sha256": "ba848910b226c455c98d532c0020a4fa8cfbfea279e294169a485d2c1f5521e6",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-P-M1-upload-v3.json",
+      "bytes": 101080,
+      "sha256": "ba848910b226c455c98d532c0020a4fa8cfbfea279e294169a485d2c1f5521e6",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-P-M2-get-v3.json",
+      "bytes": 14279,
+      "sha256": "7a0215dbaf90794bfe1f3668433588a76601ee43e837506ee2d8b78cf99f3580",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-P-M2-upload-v3.json",
+      "bytes": 14279,
+      "sha256": "7a0215dbaf90794bfe1f3668433588a76601ee43e837506ee2d8b78cf99f3580",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-S-G1-get-v3.json",
+      "bytes": 7447,
+      "sha256": "db4052da94b5450d4993ed4b3f22adb183b04d33c26acc0ab3f3c10bcd44dab9",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-S-G1-upload-v3.json",
+      "bytes": 7447,
+      "sha256": "db4052da94b5450d4993ed4b3f22adb183b04d33c26acc0ab3f3c10bcd44dab9",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-S-M1-get-v3.json",
+      "bytes": 7496,
+      "sha256": "dd24169cd2f333e1ddf67ab899a13ecb4ee84bc50f3af8fc04fc4c71b52a8c1a",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-S-M1-upload-v3.json",
+      "bytes": 7496,
+      "sha256": "dd24169cd2f333e1ddf67ab899a13ecb4ee84bc50f3af8fc04fc4c71b52a8c1a",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-S-M2-get-v3.json",
+      "bytes": 7575,
+      "sha256": "f423c0ca9dcd070d79fd0d942c6cb471a7aa3fe4037b818f60ee163e73ef86e5",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": ".local/service-rag-validation-v3/V3-S-M2-upload-v3.json",
+      "bytes": 7575,
+      "sha256": "f423c0ca9dcd070d79fd0d942c6cb471a7aa3fe4037b818f60ee163e73ef86e5",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/author-receipt-v3.json",
+      "bytes": 3401,
+      "sha256": "1772c01cf4fdcf8d488743e432bf44f51f07fa1a159a67730183f12b0a4dd448",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/safe-summary-v3.json",
+      "bytes": 2686,
+      "sha256": "2d3a0074fd37e9db4a478defb66fa4bc13350f77a26977de779f5d9026b0e77d",
+      "parent_safe_semantic_read": true
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/source-fingerprint-comparison-v3.json",
+      "bytes": 1462,
+      "sha256": "7cf1036b70274c5396778a2ee3ed37c70b251699712149a8b309a30e9a2415fb",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/source-fingerprints-v3.json",
+      "bytes": 8598,
+      "sha256": "795756cde17751cc2a62c166db8d775c893fdf05119a827740ee2d122fc63d01",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/source-inventory-v3.json",
+      "bytes": 159780,
+      "sha256": "b0ecb9a1a56743f74b4379b55bda60d2950964b79095aca1cbffbdd629e61a83",
+      "parent_safe_semantic_read": false
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/source-manifest-v3.json",
+      "bytes": 14128,
+      "sha256": "c6e8d6eb7c446221ad31fc02164a678485586405b2dda58ebf9d9f7183f60341",
+      "parent_safe_semantic_read": false
+    }
+  ]
+}
