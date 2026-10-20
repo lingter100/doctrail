@@ -246,10 +246,24 @@ def test_rows_read_failure_preserves_first_cause_and_attempts_terminal(
     assert json.loads((output / "receipt.json").read_bytes())["summary"] == summary
 
 
-def test_unit_rejects_official_output(binding):
+@pytest.mark.parametrize("preexisting", [False, True])
+def test_unit_rejects_official_output(tmp_path, binding, monkeypatch, preexisting):
+    isolated_root = tmp_path / "isolated-root"
+    isolated_root.mkdir()
+    output = isolated_root / diagnostic.OUTPUT
+    if preexisting:
+        output.mkdir(parents=True)
+        (output / "preserved.txt").write_bytes(b"synthetic consumed output")
+    before = {str(p.relative_to(isolated_root)): p.read_bytes()
+              for p in isolated_root.rglob("*") if p.is_file()}
+    monkeypatch.setattr(diagnostic, "ROOT", isolated_root)
+    monkeypatch.setattr(diagnostic, "measure_fixture",
+                        lambda _: pytest.fail("measurement for refused output"))
     with pytest.raises(ValueError, match="temporary_directory"):
-        diagnostic.run_unit(diagnostic.ROOT / diagnostic.OUTPUT, binding)
-    assert not (diagnostic.ROOT / diagnostic.OUTPUT).exists()
+        diagnostic.run_unit(output, binding)
+    assert output.exists() is preexisting
+    assert {str(p.relative_to(isolated_root)): p.read_bytes()
+            for p in isolated_root.rglob("*") if p.is_file()} == before
 
 
 def test_full_pending_terminal_fsync_failure_never_publishes_receipt(

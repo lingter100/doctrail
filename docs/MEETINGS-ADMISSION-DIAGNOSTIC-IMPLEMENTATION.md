@@ -14,6 +14,8 @@
 
 [단위 검증 영수증](../experiments/results/meeting-admission-diagnostic-implementation-v1.json)은 local 원본862787a9의 exact copy다. 부모가 코드3개와 로그7개 hash·실행 전후 일치·기존77개 불변을 확인했다. 최초 관측 metadata의 검사 수가 숫자77 대신1을77개 나열한 형식 오류도 원본을 보존하고 최종 영수증에 설명했다. 마지막 fsync 검사 강화 부분은 부모가 현재 파일에서 추가로 읽었으며 검토자가 다시 읽은 것으로 주장하지 않는다.
 
+커밋 후 부모가 단위 검사의 실제 출력 디렉터리 의존을 발견했다. 정상 공식 실행 뒤 디렉터리가 존재하면 단위 검사가 실패할 수 있어, 거부 검사를 임시 ROOT의 부재/존재 두 경우로 격리했다. 실제 공식 경로는 건드리지 않았다. 이 변경 이후 최종 검증은 **12통과/14.07초·Ruff 통과**이며 script·fixture·설계·77개 동결 파일은 같다. 부모가 test delta와 코드/설계4개·로그4개 hash를 확인했고 [새 단위 영수증d1e3806d](../experiments/results/meeting-admission-diagnostic-implementation-v2.json)를 원본 bytes 그대로 보존했다. 이전11개 검사와 합산하지 않는다.
+
 ## 실행 범위
 
 단위 검증과 공식 진단은 구분한다. 공식 증거는 검토한 구현이 커밋되고 통상 CI를 통과한 뒤 다음 명령을 한 번 실행해 만든다.
