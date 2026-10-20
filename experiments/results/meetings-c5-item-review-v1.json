@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-item-review-v1",
+  "recorded_at": "2026-10-20T00:35:07.873412+00:00",
+  "source_commit": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "phases": {
+    "calibration": {
+      "accepted": 6,
+      "rejected": 0,
+      "reviewer": "/root/c5_calibration_prereviewer",
+      "author_edits": 0,
+      "item_freeze": {
+        "file": "data/evaluation/meetings-c5-calibration-v1/item-freeze.json",
+        "sha256": "3feef939954379104621259afaa45864779964bf65feb8149f59bf9799c846a2",
+        "binding_count": 6
+      },
+      "metadata_summary": {
+        "file": "data/evaluation/meetings-c5-calibration-v1/item-review-metadata-summary.json",
+        "sha256": "82e76e947a01caf7b17a2693ab5809228db501648e226df14ce8d46a387d65e2"
+      }
+    },
+    "validation": {
+      "accepted": 8,
+      "rejected": 0,
+      "reviewer": "/root/c5_validation_prereviewer",
+      "author_edits": 0,
+      "item_freeze": {
+        "file": "data/evaluation/meetings-c5-validation-v2/item-freeze.json",
+        "sha256": "0a1041bdc9d1465550a7c40b71094ee917c82c50037ae2a4ee87f66e1ef2b64a",
+        "binding_count": 6
+      },
+      "metadata_summary": {
+        "file": "data/evaluation/meetings-c5-validation-v2/item-review-metadata-summary.json",
+        "sha256": "8b4da158189331f51e44d114db65461be77d17780d8f7a099de890f69df5d9ac"
+      }
+    }
+  },
+  "public_files": {
+    "data/evaluation/meetings-c5-calibration-v1/draft.json": "e10d680a17133c774edb585297777e30907448194b419bfebed99147447789ee",
+    "data/evaluation/meetings-c5-calibration-v1/oracle-draft.json": "0d93d8ebbb956a2d5f5a6c35f0ca81234dec5fb2cac2f3d79f03475250d55350",
+    "data/evaluation/meetings-c5-calibration-v1/context-selection.json": "0bfec9af2a02876084eb19c0ddbc0dd3b2f6ed1312529a85feb74336d6f9e476",
+    "data/evaluation/meetings-c5-calibration-v1/author-receipt.json": "493fee9abfaf56a0f219cd9927d480c11192cf889398f2d0152346d7da736ace",
+    "data/evaluation/meetings-c5-calibration-v1/item-prereview.json": "59c89670ed60df1115c0642293d4174ecee7cbd74c44e3ad18cd0e536d92292b",
+    "data/evaluation/meetings-c5-calibration-v1/item-prereview-notes.md": "c12fc57606ffb129a8cc9c0def6e1329e1b441dfac8d384de18cd7ae67241a02",
+    "data/evaluation/meetings-c5-calibration-v1/item-review-metadata-summary.json": "82e76e947a01caf7b17a2693ab5809228db501648e226df14ce8d46a387d65e2",
+    "data/evaluation/meetings-c5-calibration-v1/item-freeze.json": "3feef939954379104621259afaa45864779964bf65feb8149f59bf9799c846a2",
+    "data/evaluation/meetings-c5-validation-v2/draft.json": "eeb25444db889940a592348e1f29e9de499d5de4789413dc6c8b8e7eb1c76d0f",
+    "data/evaluation/meetings-c5-validation-v2/oracle-draft.json": "d4ea37af8e8beb6be58feb614081246e4e6966263c9da68c3aa0f0424060d4aa",
+    "data/evaluation/meetings-c5-validation-v2/context-selection.json": "5aa9059776d92f7f78f1a97173c09575888808ea637be36ed44195b6a33e0523",
+    "data/evaluation/meetings-c5-validation-v2/author-receipt.json": "4a3c28561b2c957151c60144a0da17f4d6b53e510cb9e2b4f08eb79a67842607",
+    "data/evaluation/meetings-c5-validation-v2/item-prereview.json": "55808b293341665c17e5c00158b88aec19d6b0f8b11225d8e6f479d8cdf1ded2",
+    "data/evaluation/meetings-c5-validation-v2/item-prereview-notes.md": "39a3b7187b968662134b39e6a785a98627ad092b7b0254567a36d8958e160d56",
+    "data/evaluation/meetings-c5-validation-v2/item-review-metadata-summary.json": "8b4da158189331f51e44d114db65461be77d17780d8f7a099de890f69df5d9ac",
+    "data/evaluation/meetings-c5-validation-v2/item-freeze.json": "0a1041bdc9d1465550a7c40b71094ee917c82c50037ae2a4ee87f66e1ef2b64a"
+  },
+  "preserved": {
+    "source_bindings": [
+      14,
+      15
+    ],
+    "toolchain_bindings": 76,
+    "original_validation_files": 17
+  },
+  "actual": {
+    "ai_authored_items": 14,
+    "ai_independently_accepted_items": 14,
+    "human_reviewed_items": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0
+  },
+  "limitations": [
+    "Independent AI item review is not human validation or model answer quality.",
+    "Parent verified metadata and hashes only; no semantic item/source reads.",
+    "Full committed material proof must follow this item commit, before once-only offline preparation.",
+    "Validation reviewer display-script errors are retained separately from item results."
+  ]
+}

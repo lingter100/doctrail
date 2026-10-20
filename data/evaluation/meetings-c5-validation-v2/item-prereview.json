@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "verdict": "accepted",
+  "accepted_ids": [
+    "C5-VAL-01",
+    "C5-VAL-02",
+    "C5-VAL-03",
+    "C5-VAL-04",
+    "C5-VAL-05",
+    "C5-VAL-06",
+    "C5-VAL-07",
+    "C5-VAL-08"
+  ],
+  "rejected_ids": [],
+  "author_ids": [
+    "/root/c5_validation_author"
+  ],
+  "reviewer_id": "/root/c5_validation_prereviewer",
+  "human_review_count": 0,
+  "reviewed_at": "2026-10-20T00:34:13.815890+00:00",
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "query_completeness_chronology_subject_conditions_language_checked": true,
+  "all_contexts_original_whole_chunks": true,
+  "accepted_items": 8,
+  "required_facts_reviewed": 31,
+  "evidence_alternatives_reviewed": 29,
+  "evidence_references_reviewed": 32,
+  "missing_facts_checked": 4,
+  "requested_changes": 0,
+  "source_commit": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c5-validation-v2/source-freeze.json",
+    "sha256": "141778a085495d296f740ba1e259a71d7f124c5308e714268bda463558d47687"
+  },
+  "draft_sha256": "eeb25444db889940a592348e1f29e9de499d5de4789413dc6c8b8e7eb1c76d0f",
+  "oracle_sha256": "d4ea37af8e8beb6be58feb614081246e4e6966263c9da68c3aa0f0424060d4aa",
+  "context_selection_sha256": "5aa9059776d92f7f78f1a97173c09575888808ea637be36ed44195b6a33e0523",
+  "author_receipt_sha256": "4a3c28561b2c957151c60144a0da17f4d6b53e510cb9e2b4f08eb79a67842607",
+  "notes": {
+    "file": "data/evaluation/meetings-c5-validation-v2/item-prereview-notes.md",
+    "sha256": "39a3b7187b968662134b39e6a785a98627ad092b7b0254567a36d8958e160d56"
+  },
+  "independent_structural_evidence": {
+    "file": ".local/meetings-c5-validation-item-review-v2/independent-structural-check-v1.json",
+    "sha256": "591722a062599b0250c8aa4f7e85a48d0ef0250893e5763cac11a88cab98ffef"
+  },
+  "semantic_evidence": {
+    "file": ".local/meetings-c5-validation-item-review-v2/semantic-fact-review-v1.json",
+    "sha256": "1bd47af71a261cc53042a04f5241f480ba3e345c254dc7edf3246a71d893f765"
+  },
+  "same_split_source_item_reviewer_reuse_disclosed": true,
+  "historical_calibration_source_exposure_disclosed": true,
+  "new_calibration_semantic_reads": 0,
+  "calibration_item_or_oracle_reads": 0,
+  "final_answer_judge": false,
+  "source_or_author_artifact_edits": 0,
+  "tokenizer_calls": 0,
+  "native_calls": 0,
+  "maven_calls": 0
+}

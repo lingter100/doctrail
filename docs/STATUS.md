@@ -1,5 +1,35 @@
 # 진행 상태
 
+## C5 문항14개 독립 검토 수용 · item freeze 커밋
+
+기존 독립 Astra xhigh 검토자가 calibration6/validation8을 모두 수정0·반려0으로 수용했다. 필요한 사실60개와 충분한 근거 대안, 반복 문단, 전체 family에서의 정보 부재를 점검했고 각 split의 정확한6파일 item freeze를 만들었다. 작성8파일·원문14/15·toolchain76·원래 validation17파일은 보존됐다. Validation 검토 보조 스크립트의 표시/키/import 오류3건은 별도 원본으로 남겼으며 모델 실행이나 자료 변경은 없었다.
+
+부모는 의미 자료 없이 metadata/hash만 검증하고 사용자 명의로 문항·독립 검토·동결을 커밋한다. 그 뒤 각 기존 split 작성자가 실제 committed fullmaterial proof를 마치고, 공식 offline 입력 계수1회로 넘어간다. 준비 출력이 이미 있으면 재실행하지 않는다. 사용자 검수0·tokenizer/native0인 시점이며 자료 수용을 답변 품질로 해석하지 않는다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+
+## C5 문항14개 작성 완료 · 독립 item 검토 진행
+
+기존 실제 Astra xhigh 두 작성자가 calibration6/29facts와 validation8/31facts의 NEW4파일씩을 작성하고 소유권을 반환했다. 구조·전체청크·좌표·구성 검사 모두 통과했고 source14/15와 toolchain76은 그대로다. Calibration KO3/EN3·answered4/abstained2, validation KO4/EN4·answered4/abstained4이며 실제 tokenizer/native0이다. 부모는 author8파일 hash와 새 preauth2개를 확인했다.
+
+기존 독립 c5_calibration_prereviewer와 c5_validation_prereviewer가 각각 NEW item-prereview/notes/metadata-summary/조건부 item-freeze를 소유한다. 실제 code/role/source 증명 전 의미 검토를 하지 않으며 부모는 그동안 HEADaa7836c를 유지한다. 질문을 자기검토하거나 구조 통과를 의미 수용으로 기록하지 않는다. 아직 item freeze/공식 계수/모델 품질 결과가 없다. docs/MEETINGS-C5-ITEMS와 작성 영수증에 AI 작성·AI 검토 pending·human0을 분리했다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+
+## 2026-10-20 · 중단 뒤 기존 문항 작성 역할 재개
+
+이전 turn은 원문·동결·판정자 등록 aa7836c 커밋과 CI 완료로 실질 진행을 마쳤다. 재개 시 Git HEAD·변경 파일과 process를 확인했고 공개 문항4파일씩은 아직 없었다. 기존 preauth2개와 미커밋 CI 영수증/README/상태 기록은 보존했다. 양쪽 원격 CI3job 성공과 PR14 OPEN/draft를 다시 확인했다.
+
+Agent 목록은 root만 표시했지만 같은 calibration 역할 spawn은 already exists로 거절됐다. 기존 followup 핸들로 두 작성자를 이어 호출했고 두 역할이 기존 문맥·원래 수락된 Astra xhigh 설정 보유를 직접 보고했다. 새 모델 수락이나 새 작성자로 바꿨다고 기록하지 않는다. 기존 preauth는 덮지 않고 새 실제 code/role/source 커밋 증명 뒤 이미 승인된 문항 작성을 계속하도록 했다. 새 증명 동안 HEADaa7836c를 유지한다. 부모는 의미 자료를 열지 않고 원문/동결/과거 실험을 보존하며 tokenizer/native0, 전체 goal ACTIVE를 유지한다.
+
+
+## C5 source aa7836c 필수 CI 통과 · 새 문항 작성 중
+
+source/freeze·최종 판정자 등록31파일을 aa7836c로 커밋·push했고 GitHub author/committer lingter100을 확인했다. push39224530427/PR39224538908 모두 backend/java-service/web 성공이다. CI 영수증은 experiments/results/meetings-c5-final-sources-ci-v1.json에 저장했다. 새 검사 개수나 모델 품질을 기존 수치에서 재사용해 추정하지 않는다. 첫 publication helper의 whitespace 종료코드1 가정이 실제2와 달라 실패했고, 원본 log/실패를 보존한 뒤 정확히 알려진 public raw1/Java CRLF1만 예외로 최종 검사를 통과했다. 원문 바이트는 변경0이다.
+
+기존 실제 Astra xhigh 작성자2명이 ITEM 전 실제 code_contract76/role과 자기 split source14/15의 커밋 바이트를 증명했다. Calibration GitProof171/snapshot94, validation GitProof222/snapshot80이며 HEADaa7836c 동일이다. 부모가 CI 성공을 확인해 명시적으로 문항 작성 단계를 열었다. Calibration은 v1, validation은 수용된 v2 경로에서 각 NEW draft/oracle-draft/context-selection/author-receipt4개만 소유한다. 자료·역할·최종 판정자 등록은 고정하며 validation 상세 의미 검토와 질문은 부모가 열지 않는다.
+
+현재 질문 작성 중이고 독립 문항 검토/동결은 아직이다. Final judges2는 예약만 마쳤고 실제 답변 판정0, tokenizer/native0이다. 새 source나 과거 실험을 다시 실행하지 않는다. 다음은 독립 item prereview→수용 freeze/커밋→공식 offline 준비1회이며 전체 goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
+
 ## C5 원문12개 최종 수용 · source freeze와 판정자 등록 커밋 준비
 
 Calibration6개/freeze14는 그대로이며 validation NEWv2의6개/14전체청크가 별도 Astra xhigh 재검토에서 수정0·반려0으로 수용됐다. 새 source freeze15 SHA141778a0을 만들었다. 원래 v1 17파일·반려 기록·공개3원문·toolchain76은 보존됐다. 실제 v2 Java2검사 통과 영수증을 검토자가 재생 확인했으며 추가 Java 실행은 하지 않았다. 부모는 의미 내용을 열지 않고 author12·review증거·freeze바이트를 검증했다.

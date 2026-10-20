@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-final-sources-ci-v1",
+  "observed_at": "2026-10-19T08:45:58.830350+00:00",
+  "head_sha": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "runs": [
+    {
+      "head_sha": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+      "run_id": 39224530427,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39224530427"
+    },
+    {
+      "head_sha": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+      "run_id": 39224538908,
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39224538908"
+    }
+  ],
+  "claim_scope": "Exact accepted source/freeze and judge-registration commit CI; no new test counts or model quality inferred."
+}

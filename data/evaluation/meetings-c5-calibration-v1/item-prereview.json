@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "candidate_id": "meeting-answer-single-thinking-c5-v1",
+  "kind": "item_prereview",
+  "verdict": "accepted",
+  "reviewer_id": "/root/c5_calibration_prereviewer",
+  "author_ids": [
+    "/root/c5_calibration_author"
+  ],
+  "accepted_ids": [
+    "C5-CAL-01",
+    "C5-CAL-02",
+    "C5-CAL-03",
+    "C5-CAL-04",
+    "C5-CAL-05",
+    "C5-CAL-06"
+  ],
+  "rejected_ids": [],
+  "human_review_count": 0,
+  "reviewed_at": "2026-10-20T00:32:39.600155+00:00",
+  "actual_model": "gpt-6-astra",
+  "actual_effort": "xhigh",
+  "settings_provenance": "Original parent-requested and tool-accepted Astra xhigh role/context retained; no fresh invocation or runtime introspection claimed.",
+  "same_split_source_item_reviewer_reuse_disclosed": true,
+  "excluded_from_final_answer_judging": true,
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "required_fact_support_completeness_checked": true,
+  "chronology_conditions_scope_language_checked": true,
+  "whole_contexts_and_coverage_checked": true,
+  "author_changes": 0,
+  "source_changes": 0,
+  "counts": {
+    "cases": 6,
+    "languages": {
+      "ko": 3,
+      "en": 3
+    },
+    "statuses": {
+      "answered": 4,
+      "abstained": 2
+    },
+    "required_facts": 29,
+    "supported_facts": 25,
+    "missing_facts": 4,
+    "alternatives": 28,
+    "context_placements": 24,
+    "unique_whole_chunks": 15,
+    "modes": {
+      "general_only": 2,
+      "multiple_meetings": 1,
+      "mixed_general_and_meeting": 1
+    },
+    "necessary_multidocument_cases": [
+      "C5-CAL-02",
+      "C5-CAL-04"
+    ],
+    "unique_catalog_spans": 213
+  },
+  "preauthorization": {
+    "file": ".local/meetings-c5-calibration-item-review-v1/preauthorization-v1.json",
+    "sha256": "679c7f302e0033b80fcf6af7090b824b0a7129286805dc0e15293089b9fc5fec"
+  },
+  "pure_checks": {
+    "file": ".local/meetings-c5-calibration-item-review-v1/pure-checks-v1.json",
+    "sha256": "fd5ed89820ed47e7b09c04ff31cec5945c4b93a15ba3329c1db9c0048dbfe618"
+  },
+  "independent_semantic_verdict": {
+    "file": ".local/meetings-c5-calibration-item-review-v1/semantic-verdict-v1.json",
+    "sha256": "ad7324813349aedc34be7ae5f98a2d624b7d081752c2f203e99a35661a448cfc"
+  },
+  "notes": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/item-prereview-notes.md",
+    "sha256": "c12fc57606ffb129a8cc9c0def6e1329e1b441dfac8d384de18cd7ae67241a02"
+  },
+  "author_handoff": {
+    "file": ".local/meetings-c5-calibration-items-v1/handoff-v1.json",
+    "sha256": "226be4f310e45c0bdd39f98eefb70db3c23bf8a01196238817bdf37a73aa2b4f"
+  },
+  "author_receipt": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/author-receipt.json",
+    "sha256": "493fee9abfaf56a0f219cd9927d480c11192cf889398f2d0152346d7da736ace"
+  },
+  "reviewed_author_files": {
+    "data/evaluation/meetings-c5-calibration-v1/draft.json": "e10d680a17133c774edb585297777e30907448194b419bfebed99147447789ee",
+    "data/evaluation/meetings-c5-calibration-v1/oracle-draft.json": "0d93d8ebbb956a2d5f5a6c35f0ca81234dec5fb2cac2f3d79f03475250d55350",
+    "data/evaluation/meetings-c5-calibration-v1/context-selection.json": "0bfec9af2a02876084eb19c0ddbc0dd3b2f6ed1312529a85feb74336d6f9e476",
+    "data/evaluation/meetings-c5-calibration-v1/author-receipt.json": "493fee9abfaf56a0f219cd9927d480c11192cf889398f2d0152346d7da736ace"
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/source-freeze.json",
+    "sha256": "771a3f18f878d476b47b934c83b8c059bbde5710335470cf0f79d5ab1565adf8"
+  },
+  "source_commit": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "per_item_verdicts": [
+    {
+      "id": "C5-CAL-01",
+      "verdict": "accepted",
+      "required_facts": 6,
+      "supported_facts": 6,
+      "missing_facts": 0,
+      "all_minimal_alternatives_verified": true,
+      "scope": "Source-bounded item validity; no generated-answer judging."
+    },
+    {
+      "id": "C5-CAL-02",
+      "verdict": "accepted",
+      "required_facts": 5,
+      "supported_facts": 5,
+      "missing_facts": 0,
+      "all_minimal_alternatives_verified": true,
+      "scope": "Source-bounded item validity; no generated-answer judging."
+    },
+    {
+      "id": "C5-CAL-03",
+      "verdict": "accepted",
+      "required_facts": 4,
+      "supported_facts": 2,
+      "missing_facts": 2,
+      "all_minimal_alternatives_verified": true,
+      "scope": "Source-bounded item validity; no generated-answer judging."
+    },
+    {
+      "id": "C5-CAL-04",
+      "verdict": "accepted",
+      "required_facts": 5,
+      "supported_facts": 5,
+      "missing_facts": 0,
+      "all_minimal_alternatives_verified": true,
+      "scope": "Source-bounded item validity; no generated-answer judging."
+    },
+    {
+      "id": "C5-CAL-05",
+      "verdict": "accepted",
+      "required_facts": 5,
+      "supported_facts": 5,
+      "missing_facts": 0,
+      "all_minimal_alternatives_verified": true,
+      "scope": "Source-bounded item validity; no generated-answer judging."
+    },
+    {
+      "id": "C5-CAL-06",
+      "verdict": "accepted",
+      "required_facts": 4,
+      "supported_facts": 2,
+      "missing_facts": 2,
+      "all_minimal_alternatives_verified": true,
+      "scope": "Source-bounded item validity; no generated-answer judging."
+    }
+  ],
+  "exposure": [
+    "Retained calibration source reviewer context and own accepted six-source corpus.",
+    "Auto-injected AGENTS, memory summary, STATUS, historical aggregate and candidate metadata; metadata-only memory lookup previously disclosed.",
+    "Calibration items/oracles/contexts and own-split author receipts reviewed after actual proof.",
+    "No validation or closed semantic corpus; no final-judge seeds, model outputs, reasoning or mappings."
+  ],
+  "limits": [
+    "Pinned public guide does not establish2018 policy applicability.",
+    "Fictional sources are AI-authored; human review0.",
+    "Exact-span checks supplement independent semantic review; they do not themselves prove support.",
+    "Full committed item material proof remains after parent commit.",
+    "No tokenizer budget, native quality, retrieval or service-readiness claim."
+  ],
+  "reviewer_counts": {
+    "tokenizer_calls": 0,
+    "token_estimates": 0,
+    "native_calls": 0,
+    "maven_runs": 0,
+    "downloads": 0,
+    "git_mutations": 0,
+    "author_or_source_edits": 0
+  }
+}

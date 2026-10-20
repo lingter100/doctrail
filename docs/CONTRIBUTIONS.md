@@ -1,5 +1,17 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · 질문14개 독립 의미 검토
+
+기존 실제 Astra xhigh prereviewer2명이 자기 split의 작성자와 분리되어 사실 완전성·충분한 대안·시간/조건·전체 family 정보 부재를 확인했다. Calibration6/validation8 수용, 문항 수정0이며 각6개 binding을 동결했다. 부모는 metadata/hash·사용자 Git 신원·기존 자료 보존을 확인했다. AI 생성14·독립 AI 수용14·사용자 검수0·모델 평가0인 시점을 기록하며, 검토 도구 표시 오류3건은 모델/제품 결함으로 합산하지 않는다.
+
+
+## 2026-10-20 · 중단 뒤 기존 역할로 질문14개 작성
+
+기존 Astra xhigh 작성자2명을 followup으로 재개했고 각자가 새 실제 source/code/role 커밋 증명 뒤 질문6/8개와 oracle/context/author 영수증을 작성했다. Agent 목록과 기존 canonical 경로의 표시 차이는 확인했고, 중복 spawn 거부를 새 역할 수락으로 기록하지 않았다. 원래 수락 설정과 source/item 같은 split 역할 재사용을 공개한다.
+
+부모는 실제 source CI·PR 상태를 재확인하고 작성 결과8파일의 hash와 구조 검사 집계만 대조했다. 새 독립 의미 검토는 기존 별도 prereviewer2명에게 맡겼다. AI 생성14개·구조 검사14개·의미 검토 pending·사용자 검수0을 구분하며 모델을 실행하거나 부모가 validation 의미 자료를 읽지 않았다.
+
+
 ## 2026-10-19 · C5 최종 답변 판정자 선등록
 
 부모가 신규 c5_calibration_final_judge와 c5_validation_final_judge를 각각 gpt-6-astra/xhigh/fork none으로 호출했고 도구가 수락했다. 작성자·원문/문항 검토자·구현자와 다른 실제 역할이며 각자64byte seed와 노출 attestation을 만들었다. 자동 AGENTS·memory summary의 모델/가설/과거집계 metadata 노출을 기록해 metadata-exposed, label-masked로 표시한다. Calibration judge의 schema 주변 코드 읽기 범위 초과도 사실대로 공개했다. 의미 자료·출력·mapping·개별 판정은 읽지 않았으며 실제 판정0이다. 부모 채팅 설정 변경이나 사용자 검수로 기록하지 않는다.
