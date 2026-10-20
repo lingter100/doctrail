@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · C6 정확한 소스의 실제 CI 관측
+
+부모가 d3e4e2e의 push39357782029/PR39357786578 필수3job 성공을 직접 조회하고 freeze77개를 실제 Git 객체와 working bytes로 대조했다. 작성자·커미터 lingter100과 PR14 head도 확인했다. 최종LF 소스 CI를 정규화 전 로컬 검사와 별도로 기록하며 CI 로그를 읽지 않은 검사 개수·답변 품질·사용자 검수는 추정하지 않는다.
+
 ## 2026-10-20 · C6 구현·회귀·독립 검토와 바이트 정규화
 
 기존 실제 Astra high host_proof_profile이 NEW8을 구현하고 원본 실패 재현·최종195통과/1skip·Ruff를 기록했다. 별도 기존 Astra high c5_persistence_review가 전 경로 reader, Git/CI,64byte seed와 최초 오류 보존을 읽어 검토했고 최종 blocker0을 반환했다. 실제 모델·사용자 검수는0이며 역할의 기존 수락 설정과 새 설정 변경을 구분한다.

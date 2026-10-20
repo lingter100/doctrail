@@ -1,5 +1,17 @@
 # 진행 상태
 
+## 2026-10-20 · C6 최종 정규화 소스 양쪽 필수 CI 통과
+
+d3e4e2e의 push39357782029/PR39357786578 모두 backend/java-service/web 성공을 직접 확인했다. 동결77개와 freeze939731a4의 실제 커밋/working bytes가 일치하며 사용자 GitHub author·committer lingter100도 확인했다. 정확한 최종LF 소스 CI 통과는 이전 로컬195통과/1skip 결과와 별도 증거다. CI 성공만으로 모델 품질을 주장하거나 검사 개수를 추정하지 않는다.
+
+data/evaluation/meetings-c6-toolchain-ci-v1.json을 별도 문서 커밋으로 보존한다. 다음은 prior fingerprint metadata index와 실제 calibration/격리 validation source 역할 등록, 각 담당자의 committed code proof, 공개 출처·이용조건 확인과 새 원문 수용/검토/Java처리 일치다. 도구 동결과 역할 등록을 소급 수정하지 않고 원문 확정 뒤에만 질문을 만든다. 아직 C6자료·질문·tokenizer·native·판정0, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · C6 source d3e4e2e 커밋·push, 정확한 CI 확인 중
+
+정규화 소스·동결·문서18파일을d3e4e2ef401d490c712f6773b07f19d01418f2dc로 커밋·push했다. Stage exact18/동결77 index bytes/whitespace 통과, GitHub author·committer lingter100과 PR14 최신 head를 확인했다. Push39357782029/PR39357786578은 기록 당시 진행 중이다.
+
+기존 구현·검토 역할은 소유권을 반환했고 실제 모델/자료 실행은 없다. 부모는 정확한 최종 소스 CI 성공을 관측해 별도 data/evaluation/meetings-c6-toolchain-ci-v1.json을 작성·커밋한 뒤 fresh source 역할을 등록한다. 기존 동결77/oldunion112·닫힌 실험은 변경/재실행하지 않는다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C6 NEW8 구현·독립 검토·동결 완료, 최종 CI 준비
 
 최종 로컬6모듈은195통과·Windows symlink권한1skip·220.87초·Ruff 통과이고 NEW8/기존test2 전후SHA가 같다. 독립 기존 Astra high 검토의 blocker0이다. 그 뒤 부모가 Git LF규칙에 맞춰4파일 CRLF만 LF로 통일했다. 원본은 exact archive, 부모AST/위치 동일·Ruff와 독립 byte변환 일치가 확인됐다.195개는 변환 전 결과이며 정규화된 정확한 소스 전체 CI를 별도로 요구한다.

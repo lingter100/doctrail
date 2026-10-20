@@ -1,6 +1,6 @@
 # C6 검증 도구 구현 기록
 
-상태: NEW8 구현·독립 검토와 소스 동결을 완료했다. 최종 로컬 검사는195통과·1skip·Ruff 통과이며 그 뒤 네 파일의 CRLF만 LF로 통일했다. 정확한 정규화 소스의 필수 CI는 다음 단계다. [설계](MEETINGS-C6-PLAN.md)의5657bb1 push39355274280/PR39355278538 성공을 구현 CI와 혼동하지 않는다. 이 문서는 닫힌 실험을 다시 실행하는 지시가 아니다.
+상태: NEW8 구현·독립 검토·소스 동결과 정확한 소스 CI를 완료했다. 최종 로컬 검사는195통과·1skip·Ruff 통과이며 그 뒤 네 파일의 CRLF만 LF로 통일했다. 정규화 소스d3e4e2e의 push39357782029/PR39357786578은 backend/java-service/web 모두 성공했다. [설계](MEETINGS-C6-PLAN.md)의5657bb1 CI와 별도 증거다. 이 문서는 닫힌 실험을 다시 실행하는 지시가 아니다.
 
 ## 해결하려는 문제와 선택
 
@@ -22,7 +22,7 @@ Reader는 내부와 호출자 snapshot, 마지막 변경 확인, Git 증명의 �
 
 초기65통과/Ruff4, safe-prefix 원본1실패(1.01초), 중간71통과(9.80초)/108통과(189.72초), seed/reader 원본5실패·27deselected(5.63초)를 별도로 보존했다. 서로 겹치는 검사 수는 합산하지 않는다. C6 오류 prefix·입력 저장의 최초 원인, exact push/PR CI 상태,64byte seed, trusted reader 오류의 최초 원인 보존은 등록 계약을 충족하기 위한 metadata 수선이다. 모델/추론 정책 변경으로 표현하지 않는다.
 
-부모의 동결 준비에서 CRLF를 발견해 첫 helper가 출력 생성 전에 거부됐다. 검사한 네 파일의 원본은 `.local/c6-normalization-originals-v1/`에 그대로 보존하고 CRLF→LF만 적용했다. 부모는 AST/위치 동일·Ruff를 확인했고 독립 검토자는 원본 변환 bytes와 현재 파일4개의 exact 일치를 확인했다. 따라서195개 결과는 정규화 전 소스의 결과이며 최종 bytes의 전체 CI는 별도로 확인해야 한다. 원본 실패·검사 로그·hash는 [구현 영수증](../experiments/results/meetings-c6-implementation-v1.json)에 결합했다.
+부모의 동결 준비에서 CRLF를 발견해 첫 helper가 출력 생성 전에 거부됐다. 검사한 네 파일의 원본은 `.local/c6-normalization-originals-v1/`에 그대로 보존하고 CRLF→LF만 적용했다. 부모는 AST/위치 동일·Ruff를 확인했고 독립 검토자는 원본 변환 bytes와 현재 파일4개의 exact 일치를 확인했다. 따라서195개 결과는 정규화 전 소스의 결과다. 최종 bytes는 뒤이어 정확한 소스의 양쪽 전체 CI 성공으로 확인했다. 원본 실패·검사 로그·hash는 [구현 영수증](../experiments/results/meetings-c6-implementation-v1.json)에 결합했다.
 
 ```powershell
 uv run --no-sync python -m pytest tests/test_meeting_c6_review.py tests/test_prepare_meeting_c6_inputs.py tests/test_probe_meeting_c6_quality.py tests/test_audit_meeting_c6_quality.py tests/test_meeting_answer_thinking.py tests/test_meeting_thinking_quality.py -q
@@ -35,4 +35,4 @@ uv run --no-sync ruff check src/doctrail/meeting_c6_review.py scripts/prepare_me
 
 내용 없는 registry는c6-f01..04 구성과12문서/cal6·val8 계획만 기록하며 실제 출처·작성자·원문은 없다. [도구 동결](../data/evaluation/meetings-c6-toolchain-freeze-v1.json)은77파일·Python66·import후보1648(부재1582), SHA939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b다. 기존 frozen union112는 그대로이며 봉인된 재탐색도 일치했다.
 
-정확한 source commit의 push/PR 필수 CI가 성공하고 별도 CI 영수증을 커밋한 뒤 새 자료 역할을 등록한다. 원문 검토와 Java 처리 일치, 문항 독립 검토, 공식 offline 준비를 차례로 거친다. 최종 답변의 의미 판정과 실제 Java/React 서비스 통합·사용자 검수는 여전히 미완료다.
+정확한 source commit의 push/PR 필수 CI 성공을 [별도 영수증](../data/evaluation/meetings-c6-toolchain-ci-v1.json)에 보존했다. 그 영수증을 커밋한 뒤 새 자료 역할을 등록한다. 원문 검토와 Java 처리 일치, 문항 독립 검토, 공식 offline 준비를 차례로 거친다. 최종 답변의 의미 판정과 실제 Java/React 서비스 통합·사용자 검수는 여전히 미완료다.
