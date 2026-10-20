@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_calibration_source_attempt_v2_registration",
+  "registered_at": "2026-10-20T07:24:48.604289+00:00",
+  "prior_attempt_status": "closed_bounded_incomplete_preserved",
+  "prior_result_commit": "fdeb19167d21da008b8502efba6120e90d96dcb7",
+  "reason_for_new_attempt": "Choose a repository with explicit root license metadata and in-repository dated records before source reading; do not extend or overwrite v1.",
+  "actor": "/root/service_rag_calibration_sources",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "fork_turns": "none",
+  "actual_actor_tool_acceptance_previously_verified": true,
+  "prior_exposure": "Own v1 source/license discovery including README bodies and metadata; no adopted meeting corpus/questions/oracle/model output. Not a pristine or final-judge role.",
+  "allowed_paths": [
+    "data/evaluation/meetings-service-rag-calibration-v2/",
+    ".local/service-rag-calibration-v2/"
+  ],
+  "bindings": [
+    {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    {
+      "path": "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+      "sha256": "26506cbd3c1f49a4b1e6dcb8ce94acd50b410ff34f313d13551342331c3d52b3"
+    },
+    {
+      "path": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+      "sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v1/safe-summary-v1.json",
+      "sha256": "4fd53db82c43c703f971110556e29c626e0a1a717be56af6243f4dd25786d160"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v1/safe-summary-v1.json",
+      "sha256": "0804bccc4e3ca54a3f797ef93b1015fd1509739abedc00d6a6969d7c4ff55a78"
+    },
+    {
+      "path": ".local/service-rag-source-v2-reservation/repository.json",
+      "sha256": "4ba00b1243c223bb205eabe6e3940838c216a89242f00905e30a49db53c6eaff"
+    },
+    {
+      "path": ".local/service-rag-source-v2-reservation/revision.json",
+      "sha256": "67ee057ddad60d00678fc18278efd4c8ed33e9a792034197a573fb4f900cb075"
+    }
+  ],
+  "reserved_public_repository": {
+    "repository": "cncf/tag-app-delivery",
+    "revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+    "owner_split": "calibration",
+    "license_metadata": "Apache-2.0",
+    "license_path": "LICENSE",
+    "date_record_metadata_candidates": [
+      "gitops-wg/meetings/old-committee-principles/2021-04-05-chat.txt",
+      "gitops-wg/meetings/old-committee-principles/2021-04-14-chat.txt"
+    ],
+    "related_general_document_metadata_candidate": "gitops-wg/charter.md",
+    "body_verified": false,
+    "completed_meeting_verified": false,
+    "license_scope_verified": false,
+    "parent_metadata_requests_before_registration": 2
+  },
+  "budget": {
+    "repositories": 1,
+    "public_family_candidates": 2,
+    "metadata_requests_after_dispatch": 8,
+    "license_body_fetches": 3,
+    "source_body_fetches": 6,
+    "active_minutes": 30,
+    "excluded_waits": [
+      "exclusive Java/Maven slot",
+      "parent scope clarification"
+    ],
+    "failures_count": true,
+    "automatic_extension": false
+  },
+  "corpus_target": {
+    "public_meetings": 2,
+    "public_general_documents": 1,
+    "new_synthetic_meetings": 2,
+    "new_synthetic_general_documents": 1,
+    "whole_originals": true,
+    "completed_meetings_on_distinct_dates": true,
+    "no_c7_small_family_admission": true
+  },
+  "extra_excluded_body_repositories": [
+    "nodejs/TSC",
+    "tc39/notes",
+    "rust-embedded/wg",
+    "rust-lang/wg-async"
+  ],
+  "source_acceptance": "Pending independent source review; dated chat paths and root license metadata are not acceptance. Preserve incomplete outcome if they do not satisfy the original source requirements.",
+  "actual_ingestion": "Use existing Java upload/parser/complete-index paths with generation/inference disabled, isolated database/ports, serialized Maven. Reuse verified JAR if hash unchanged.",
+  "output_contract": "Whole raw/license/provenance and processed/chunk artifacts, manifest, fingerprints, author receipt, artifact-index-v2.json and safe-summary-v2.json. Parent sees counts/hashes/identity/license/status only. Unlicensed discovery bodies stay local.",
+  "prohibited": [
+    "Git or root-doc edits",
+    "frozen77 or old-attempt edits",
+    "questions/oracles/selection by answers",
+    "other-split semantics",
+    "model/tokenizer/native/download calls",
+    "source trimming or fabricated completion of public meetings"
+  ],
+  "dispatch_gate": "Registration committed, then explicit parent dispatch; repository reservation is already fixed above.",
+  "validation_source_attempt": "Not assigned by this registration; its public source must be independent and separately registered.",
+  "actual_at_registration": {
+    "source_body_fetches": 0,
+    "new_documents": 0,
+    "java_runs": 0,
+    "native_calls": 0,
+    "human_review": 0
+  }
+}

@@ -1,4 +1,10 @@
 # 진행 상태
+## 2026-10-20 · 실행기 구현 배정과 calibration 새 시도 등록
+
+실패 원본/설계 fdeb19167d21da008b8502efba6120e90d96dcb7을 사용자 계정으로 commit/push했다. 기존 actual Astra high service_rag_worker에 NEW serve_meeting_rag_service.py와 검사1개만 실제 구현 배정했다. Native 정리 선발동·공유 startup/cleanup 관찰·Java 설정 확인 한계가 포함되며 실제 모델 실행은 허가하지 않았다.
+
+Calibration v1은 닫힌 상태로 보존한다. [별도 v2 source 등록](../data/evaluation/meetings-service-rag-calibration-source-registration-v2.json)은 metadata에서 Apache-2.0/root LICENSE와 날짜별 기록 경로를 확인한 cncf/tag-app-delivery@cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d 하나만 예약한다. 부모의 repository/ref2조회는 본문0이며 이후 source 역할은 등록 커밋 뒤 별도 배정한다. 실제 완료 회의록·license 적용·일반 문서 관계는 아직 미확인이다. Validation 새 시도는 아직 배정하지 않았다.
+
 ## 2026-10-20 · 최소 실행 조립 설계 검토 수용
 
 실제 Astra xhigh 설계 검토가 worker join 전에 native 정리를 선발동하도록 정정했다. 부모가 runtime의 poison/owned cleanup과 Java health의 실제 반환 필드를 확인했다. [launcher 설계](MEETINGS-SERVICE-RAG.md)는 신규2파일만 허용하고 전체 startup/cleanup 수용·기존 정책·비밀값 비노출을 유지한다. Java CLI/pinned JAR 설정 확인과 실제 opt-in 동작 증명을 구분하는 한계까지 검토 수용했다. 이 설계 커밋 뒤 기존 실제 Astra high service_rag_worker에 구현을 배정한다.
