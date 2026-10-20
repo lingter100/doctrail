@@ -42,7 +42,7 @@ Phase1의 자연어 완전답변, 일반 문서·복수 회의·혼합 근거 �
 - 기존 block parser의 요청10 chunks/160 spans/각1024 codepoints, 실제 input≤5120 tokens/context6144, 기존 wire guard를 유지한다. 선택된 전체 문맥을 실제 formatter로 검증하며 초과하면 native 호출 전 `context_budget_exceeded`로 실패한다. 첫 후보에서는 잘라내기·요약·재분할·더 작은 top-k 재시도·질문별 context 구제는 하지 않는다.
 - 캐시된 Qwen3.5-9B Q5_K_M·pinned build·GPU28 요청·greedy/seed0/cache off/parallel1, output928·요청 thinking512·최종 content 재계수384·EOS 조건을 그대로 사용한다. Thinking512는 확인된 독립 hard cap이라고 부르지 않는다.
 - 모델 답변은 사용자 요청당 최대1회다. 자동 retry·repair·translation·self-review·다른 모델 fallback은 없다. 자원/입력 오류는 보류 성공이 아니다. 모델·90초·출력 정책 변경이 필요하면 별도 근거와 사전 등록 없이는 실행하지 않는다.
-- 응답90초, owned process 정리5초 및 기존 시작부터 정리120초 상한을 구분한다. 최초 startup/readiness는 따로 측정하며 요청 지연에서 숨기지 않는다. hard preemption은 입증 전 주장하지 않는다.
+- 답변90초와 owned cleanup5초를 구분한다. 상시 서비스는 아래 수명 정정에 따라 startup/readiness와 개별 요청을 따로 제한한다. 최초 startup은 따로 측정하며 요청 지연에서 숨기지 않는다. hard preemption은 입증 전 주장하지 않는다.
 
 이 첫 후보는 긴 원문을 허용하지만 긴 prompt를 보장하지 않는다. 상위5개가 예산을 넘거나 복수 문서 근거를 놓칠 수 있으며, 그 실패를 실제 서비스 결과로 드러내는 것이 이번 검증의 목적이다.
 
@@ -93,3 +93,13 @@ Source/item 작성·선정·검토·구현·실행·설계 담당은 독립 최�
 담당은 기존 `/root/source_discovery_decision`이며 부모가 수락한 Astra xhigh/fork none 역할을 유지한다. 프로젝트 집계·허용 계획4개와 위 generic Java/Python/React 코드·launcher·runtime 설정을 읽었다. 일반 코드의 고정 prompt/합성 예시 노출은 있으며 실제 평가 원문·문항·oracle·모델 출력·의미 리뷰는 읽지 않았다. 문체 skill만 읽고 외부 문체 자료는 조회하지 않았다.
 
 작성 파일은 이 문서 하나다. 네트워크·source 확보·processor·테스트·tokenizer·native·Git 변경0이다. 독립 최종 judge 또는 pristine/blind 설계라고 주장하지 않는다. 부모가 C7 종료/root 상태·commit/CI·후속 구현 배정을 맡는다.
+
+## 2026-10-20 서비스 수명 정정
+
+위 최초 작성 상태는 설계 반환 시점의 기록이다. 이후 같은 실제 Astra xhigh 설계 담당의 generic 코드 재검토에 따라 부모가 이 절을 추가했다. 기존 단발 실험의 시작→정리120초를 상시 서비스의 전체 수명으로 해석하지 않는다. 과거 후보·실측·동결 정책은 변경하지 않는다.
+
+- Startup 수용 기준120초는 native 준비·두 클라이언트 identity·인증된 HTTP health 준비까지 포함한다. 현재 launcher의 `native_adapter_startup_seconds`는 HTTP 준비 전 측정이므로 이 전체 기준의 통과 증거가 아니다.
+- 답변은 Java 진입부터 최종 권한 재검사까지90초, 기존 회의 분석은 별도120초/input4096/output768/분류 label4 정책을 유지한다. 같은 pinned native instance/GPU28/공유 outer lock으로 두 기존 정책을 조립하며 실제 동작 호환성은 별도 검증한다.
+- 정리5초 수용은 native/drain뿐 아니라 소유 worker/handler 종료를 외부 실행 주체가 확인해야 한다. 현재 callback·잠금 합성 검사는 실제 종료나 hard preemption의 증거가 아니다.
+- 일반 사용 서비스는 종료 요청까지 유지할 수 있다. 공식 평가만 split별 startup120초 + active phase1500초 + cleanup5초의1625초 창으로 제한한다. Active phase에는 업로드/분석·검색/답변·브라우저·증거 저장을 포함한다. Validation의 회의4건×기존120초와 답변8건×90초가1200초이므로, 설계 역할의1200초 권고에 ingestion/화면/기록 여유300초를 명시적으로 더한 운영 창이다. 개별 요청·출력·호출 수는 늘리지 않는다.
+- Cal 정리와 독립 판정 lock 뒤 원래6/6 조건을 통과해야 validation 서비스를 시작한다. 실패한 phase를 재시작하거나 추가 호출로 구제하지 않는다. 실제 실행은 source/item 준비와 별도 실행 등록 뒤이며 현재 허가된 모델 호출은0이다.

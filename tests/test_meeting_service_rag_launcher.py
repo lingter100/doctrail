@@ -1,0 +1,85 @@
+"""Launcher assembly only: no assets loaded, process started, or network called."""
+from contextlib import contextmanager
+from types import SimpleNamespace
+
+import pytest
+
+from scripts import serve_meeting_service_rag as launcher
+
+
+def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_path):
+    events, metrics = [], {}
+    native = SimpleNamespace(process=object(), drain=object(), cleanup={})
+    @contextmanager
+    def start_llama(**kwargs):
+        events.append(("native", kwargs["gpu_layers"]))
+        assert kwargs["phase_deadline"] > 0
+        yield native
+        events.append("native_exit")
+    @contextmanager
+    def admission(root, **kwargs):
+        assert kwargs == {"external_gpu_owner": True}
+        events.append("worker")
+        yield
+        events.append("worker_exit")
+    def cleanup(process, drain, values):
+        assert process is native.process and drain is native.drain
+        values["within_budget"] = True
+        events.append("cleanup")
+    class Runtime:
+        closed = False
+        def close(self):
+            if not self.closed:
+                self.closed = True
+                assert self.cleanup()
+    def load(native_arg, *, cleanup, startup_deadline):
+        assert native_arg is native
+        assert startup_deadline > 0
+        result = Runtime()
+        result.cleanup = cleanup
+        events.append("load")
+        return result
+    monkeypatch.setattr(launcher, "start_llama", start_llama)
+    monkeypatch.setattr(launcher, "worker_admission", admission)
+    monkeypatch.setattr(launcher, "cleanup_owned", cleanup)
+    monkeypatch.setattr(launcher, "load_runtime", load)
+    with launcher.start_service(token="x" * 40, log_dir=tmp_path / "new", telemetry=metrics):
+        events.append("serve")
+    assert events == [("native", 28), "worker", "load", "serve",
+                      "cleanup", "worker_exit", "native_exit"]
+    assert metrics["native_adapter_startup_seconds"] >= 0
+
+
+def test_cli_requires_explicit_opt_in_before_any_start(monkeypatch, tmp_path):
+    monkeypatch.setattr(launcher, "start_service", lambda **kwargs: pytest.fail("started"))
+    with pytest.raises(SystemExit) as error:
+        launcher.main(["--log-dir", str(tmp_path)])
+    assert error.value.code == 2
+
+
+def test_expired_identity_load_never_serves_and_closes_owned_native(monkeypatch, tmp_path):
+    clock, events = [10.0], []
+    @contextmanager
+    def native(**kwargs):
+        try:
+            yield SimpleNamespace(process=None, drain=None, cleanup={})
+        finally:
+            events.append("native_exit")
+    @contextmanager
+    def admission(*args, **kwargs):
+        yield
+    class Runtime:
+        def close(self):
+            events.append("closed")
+    def load(*args, **kwargs):
+        assert kwargs["startup_deadline"] == 130
+        clock[0] = 131
+        return Runtime()
+    monkeypatch.setattr(launcher.time, "monotonic", lambda: clock[0])
+    monkeypatch.setattr(launcher, "start_llama", native)
+    monkeypatch.setattr(launcher, "worker_admission", admission)
+    monkeypatch.setattr(launcher, "load_runtime", load)
+    with (pytest.raises(ValueError, match="generation_startup_timeout"),
+          launcher.start_service(token="x" * 40, log_dir=tmp_path)):
+        pytest.fail("must not serve expired startup")
+    assert events == ["closed", "native_exit"]

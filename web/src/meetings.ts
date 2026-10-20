@@ -18,6 +18,10 @@ export const analysisLabels = { queued: '분석 대기', running: 'AI 분석 중
 export function meetingError(error: unknown): string {
   if (!(error instanceof ApiError)) return errorMessage(error);
   if (error.status === 409) return '원문이나 분석이 변경되어 저장하지 않았어요. 새로 불러온 뒤 수정 내용을 다시 확인해 주세요.';
+  if (error.code === 'context_budget_exceeded') return '찾은 근거가 한 번에 답변할 수 있는 분량을 넘었어요. 원문은 그대로 보관되어 있어요. 검색 조건을 좁히거나 원문 검색으로 확인해 주세요.';
+  if (error.code === 'inference_timeout') return '관련 근거를 찾는 시간이 초과되어 답변을 만들지 못했어요. 검색 조건을 좁히거나 원문 검색으로 확인해 주세요.';
+  if (error.code === 'generation_busy') return '다른 AI 요청을 처리하고 있어요. 잠시 후 다시 시도해 주세요.';
+  if (error.code === 'generation_cleanup_failed') return 'AI 연결을 안전하게 종료했는지 확인하지 못해 답변 생성을 중단했어요. AI 연결을 다시 시작하기 전에는 원문 검색을 이용해 주세요.';
   if (error.code === 'generation_language_mismatch') return 'AI 응답이 요청한 언어와 달라 답변으로 사용하지 않았어요. 원문 검색으로 근거를 확인할 수 있어요.';
   if (error.code.includes('not_configured') || error.code.includes('disabled')) return 'AI 모델이 연결되지 않았어요. 원문 등록과 키워드 검색은 계속 사용할 수 있어요.';
   if (error.code.includes('invalid_response') || error.code.includes('generation_failed')) return 'AI 응답의 형식이나 근거를 검증하지 못했어요. 답변으로 사용하지 않았으니 다시 시도해 주세요.';

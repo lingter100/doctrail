@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-20 · 서비스 연결 코드와 opt-in 화면 검증 완료
+
+새 Python4파일은23통과/1.06초/기존경고1/Ruff통과, Java6파일은 경계41+별도호환11 통과다. 새 opt-in 설정으로 실제 Java/React의 등록→분석→편집→작업/결정 연결→답변→원문 시나리오1개가 통과했다. 이 화면은 기존 합성 transport이며 새 Python/native 통합이 아니다. Actual model/tokenizer0·사용자 검수0·소유JVM0이다.
+
+부모가 source10·Java증거25/화면4·Python로그10 및 동결77을 확인하고 [구현 요약](MEETINGS-SERVICE-RAG.md)과 공개 검증기록ca23baec를 저장했다. 초기 Python Ruff 실패, watchdog/lock 수정, 분석120초와 답변90초의 구별, startup 지표의 범위를 보존한다. 이전 설계190f582의 push39381783066/PR39381786633은 필수3job 모두 성공했으며 이번 구현의 CI는 아직 별도다.
+
+실제 Astra xhigh 설계 역할의 재검토로 persistent 서비스 수명을 단발120초와 구분했다. 원래 요청·모델·출력 정책은 유지하고 공식 실행 phase의 유한 창은 계획에 명시했다. 다음은 구현 commit/CI 뒤 새 source-first 자료 준비와 실제 전체 경로 검증이다. Goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · 서비스 답변 연결 구현 시작
+
+이전 goal turn은 제품 수정8622787과 설계/결과190f582를 사용자 계정으로 commit/push한 진척이다. 정확한190f582의 push39381783066/PR39381786633은 현재 실행 중이며 이전 head의 성공으로 대체하지 않는다. 세부 진행 중 job을 확인했고 재시작하지 않았다.
+
+새 service_rag_worker를 실제 gpt-6-astra/high/fork none으로 수락해 NEW Python 어댑터·얇은 launcher·검사2개를 배정했다. 기존 actual Astra high meeting_visual_acceptance는 Java 공유90초 deadline·클라이언트·opt-in 설정과 좁은 검사를 맡는다. 부모는 사용자 오류 안내와 문서/Git을 맡는다. 기본 설정은 기존 동작을 유지한다.
+
+일반 코드에서 thinking transport의 `classify_bounded`가 resource-only 오류를 내는 것을 확인했다. 기존 `Qwen35Generator`의 실제 분석 정책과 `QualityThinkingGenerator`의 답변 정책을 한 native instance/공유 잠금 아래 구성하도록 결정했다. 서로 다른 기존 정책을 같다고 보고하지 않으며 actual native 호환성은 아직 미검증이다. 새 모델·다운로드·토크나이저·실제 평가 실행0, 동결77 불변이다.
+
 ## 2026-10-20 · 실제 서비스 답변 연결 계획 확정
 
 실제 Astra xhigh source_discovery_decision이 [서비스 RAG 계획](MEETINGS-RAG-ACCEPTANCE-PLAN.md)95줄/f3e0820b를 반환했고 부모가 검토했다. 기존 quality adapter의 HTTP 연결, 전체90초 전달, `/analyze` 호환성을 먼저 확인하는 최소 제품 작업이다. 원문 전체를 색인하고 상위5개 권한 청크로 답변하며, 기존 모델·출력·시간 조건과 독립 자료/품질 판정을 유지한다. 새 자료·모델 실행은0이고 구현 배정은 설계 커밋 뒤다.

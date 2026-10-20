@@ -22,15 +22,35 @@ public class GenerationClient {
     }
     boolean enabled(){return base!=null;}
     JsonNode call(String path,Object body){
+        return call(path,body,null);
+    }
+    JsonNode call(String path,Object body,AnswerDeadline budget){
+        if(budget!=null&&!path.equals("/answer"))throw new IllegalArgumentException("answer_budget_path_required");
+        if(budget!=null)budget.check();
         if(base==null)throw new ApiError(503,"generation_disabled");
         CompletableFuture<HttpResponse<byte[]>> pending=null;
         try{
-            var req=HttpRequest.newBuilder(base.resolve(path)).timeout(Duration.ofMillis(timeout)).header("Authorization","Bearer "+token).header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofByteArray(json.writeValueAsBytes(body))).build();
-            pending=http.sendAsync(req,info->new InferenceClient.BoundedBody());
-            var response=pending.get(timeout,TimeUnit.MILLISECONDS);
+            byte[] payload=json.writeValueAsBytes(body);
+            long remaining=TimeUnit.MILLISECONDS.toNanos(timeout);
+            if(budget!=null)remaining=Math.min(remaining,budget.remainingNanos());
+            long transportDeadline=System.nanoTime()+remaining;
+            var builder=HttpRequest.newBuilder(base.resolve(path)).timeout(Duration.ofNanos(remaining)).header("Authorization","Bearer "+token).header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofByteArray(payload));
+            if(budget!=null){
+                long millis=TimeUnit.NANOSECONDS.toMillis(Math.min(remaining,budget.remainingNanos()));
+                if(millis<1)throw new ApiError(504,"generation_timeout");
+                builder.header("X-DocTrail-Request-Budget-Ms",Long.toString(Math.min(AnswerDeadline.MAX_MILLIS,millis)));
+                budget.check();
+            }
+            pending=http.sendAsync(builder.build(),info->new InferenceClient.BoundedBody());
+            long wait=transportDeadline-System.nanoTime();
+            if(budget!=null)wait=Math.min(wait,budget.remainingNanos());
+            if(wait<=0)throw new ApiError(504,"generation_timeout");
+            var response=pending.get(wait,TimeUnit.NANOSECONDS);
+            if(budget!=null)budget.check();
             if(response.statusCode()!=200)throw workerError(response.statusCode(),response.body());
             JsonNode value=json.readTree(response.body());
             if(value==null||!value.isObject()||!value.path("schema_version").isIntegralNumber()||!value.path("schema_version").canConvertToInt()||value.path("schema_version").intValue()!=1||!value.path("model").isTextual()||value.path("model").asText().isBlank()||!value.path("revision").isTextual()||value.path("revision").asText().isBlank())throw new ApiError(503,"generation_invalid_response");
+            if(budget!=null)budget.check();
             return value;
         }catch(TimeoutException e){throw new ApiError(504,"generation_timeout");}catch(ExecutionException e){if(e.getCause() instanceof HttpTimeoutException)throw new ApiError(504,"generation_timeout");throw new ApiError(503,"generation_unavailable");}catch(InterruptedException e){Thread.currentThread().interrupt();throw new ApiError(503,"generation_unavailable");}catch(ApiError e){throw e;}catch(com.fasterxml.jackson.core.JsonProcessingException e){throw new ApiError(503,"generation_invalid_response");}catch(Exception e){throw new ApiError(503,"generation_unavailable");}
         finally{if(pending!=null&&!pending.isDone())pending.cancel(true);}
@@ -38,8 +58,8 @@ public class GenerationClient {
     private ApiError workerError(int status,byte[] body){
         try{String code=json.readTree(body).path("error").asText();
             if(status==413&&code.equals("body_too_large"))return new ApiError(413,"generation_input_limit");
-            if(status==422&&Set.of("invalid_request","generation_input_limit","generation_partition_limit").contains(code))return new ApiError(422,code.equals("invalid_request")?"generation_invalid_request":code);
-            if(status==503&&Set.of("model_busy","generation_failed").contains(code))return new ApiError(503,code.equals("model_busy")?"generation_busy":code);
+            if(status==422&&Set.of("invalid_request","generation_input_limit","generation_partition_limit","context_budget_exceeded").contains(code))return new ApiError(422,code.equals("invalid_request")?"generation_invalid_request":code);
+            if(status==503&&Set.of("model_busy","generation_failed","generation_cleanup_failed").contains(code))return new ApiError(503,code.equals("model_busy")?"generation_busy":code);
             if(status==504&&code.equals("generation_deadline_exceeded"))return new ApiError(504,"generation_timeout");
             if(status==502&&Set.of("generation_invalid_json","generation_invalid_schema","generation_invalid_evidence","generation_duplicate_item","generation_unsupported_field","generation_unsupported_metadata","generation_conflicting_metadata","generation_output_truncated","generation_language_mismatch").contains(code))return new ApiError(503,code);
         }catch(Exception ignored){}return new ApiError(503,"generation_unavailable");

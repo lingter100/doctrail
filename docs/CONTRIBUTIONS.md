@@ -1,4 +1,14 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · 실제 설정 화면 검증과 서비스 수명 구분
+
+Python·Java 구현자는 각각 실제 Astra high로 수락된 역할이며 코드와 검증 기록을 반환했다. 부모는 최종 코드·검사와 watchdog/잠금 정정을 읽고 검증기록의 source/artifact hash를 확인했다. 같은 Astra xhigh 설계 역할은 원문·질문 없이 persistent 서비스의 startup·요청·정리 범위만 검토했다. 부모는 active phase에서 분석4×120초+답변8×90초에 ingestion/화면/기록300초를 더한1500초 창을 기록했다. 개별 요청 정책이나 모델 호출 수 확대는 없다.
+
+실제 Java 브라우저 검사는 새 설정을 사용했지만 모델 transport는 합성이다. 새 Python/native 통합, 실제 품질·hard preemption·사용자 검수는 아직 증명하지 않았다.
+
+## 2026-10-20 · 서비스 RAG 구현 역할
+
+도구가 실제 gpt-6-astra/high/fork none을 수락한 새 service_rag_worker가 Python 조립·HTTP 경계·합성 검사를 맡는다. 기존 actual Astra high meeting_visual_acceptance는 Java deadline/설정·검사를 맡으며 같은 디렉터리의 파일 소유권을 분리했다. 부모는 generic 코드의 분석 불호환을 확인하고 기존 두 정책 조립을 승인했다. 모델 설정 변경·사용자 품질 승인·실제 추론으로 표현하지 않는다.
+
 ## 2026-10-20 · 서비스 연결 계획 반환과 사용자 진행도 설명
 
 실제 Astra xhigh source_discovery_decision은 허용된 일반 코드만 검토해 서비스 RAG 계획 한 개를 반환했다. 부모가 계획을 읽고 기존 HTTP 연결·시간 예산·회의 분석 호환성의 간극과 다음 최소 구현 범위를 확인했다. 실제 평가 의미 자료·새 source·토크나이저·모델·사용자 검수는0이다. 사용자의 진행도 질문은 현재 저장소 기록으로 답하며 근거 없는 완성 비율·날짜를 만들지 않는다.

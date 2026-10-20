@@ -2,6 +2,8 @@ package io.doctrail;
 
 import com.fasterxml.jackson.databind.*;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.util.*;
@@ -13,7 +15,12 @@ import static io.doctrail.Store.*;
 public class KnowledgeService {
     final Store store;final Auth auth;final DocumentService docs;final MeetingService meetings;final LearnedSearch learned;final InferenceClient inference;final GenerationClient generation;final ObjectMapper json;
     private final Semaphore active=new Semaphore(1);
-    KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json){this.store=store;this.auth=auth;this.docs=docs;this.meetings=meetings;this.learned=learned;this.inference=inference;this.generation=generation;this.json=json;}
+    private final boolean ragAnswerEnabled;
+    KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json){this(store,auth,docs,meetings,learned,inference,generation,json,false);}
+    @Autowired
+    KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json,@Value("${doctrail.rag-answer-enabled:false}") boolean ragAnswerEnabled){this.store=store;this.auth=auth;this.docs=docs;this.meetings=meetings;this.learned=learned;this.inference=inference;this.generation=generation;this.json=json;this.ragAnswerEnabled=ragAnswerEnabled;}
+    AnswerDeadline answerDeadline(long started){return new AnswerDeadline(started);}
+    private static void check(AnswerDeadline deadline){if(deadline!=null)deadline.check();}
     record Filter(String query,String workspace,String kind,String meeting,String from,String to,String participant,String assignee,String itemType,String method,int limit,String profile){}
     static String optional(JsonNode b,String key,int max){JsonNode v=b.get(key);if(v==null||v.isNull())return null;return MeetingAnalysis.text(b,key,1,max);}
     Filter filter(JsonNode b){
@@ -41,10 +48,11 @@ public class KnowledgeService {
     static boolean contains(JsonNode array,String value){for(var v:array)if(value.equals(v.asText()))return true;return false;}
     static List<Map<String,Object>> clean(List<Map<String,Object>> results){return results.stream().map(row->{Map<String,Object> hit=new LinkedHashMap<>(row);for(String key:List.of("owner_id","visibility","updated_at","ordinal","analysis_status","source_revision","meeting_version","analysis"))hit.remove(key);return hit;}).toList();}
     Map<String,Object> execute(JsonNode b,HttpServletRequest request,boolean answer){
-        long started=System.nanoTime();Filter f=filter(b);Snapshot before=store.read(c->snapshot(c,request,f));String token=Auth.token(request);if(f.profile!=null&&!f.profile.equals(inference.embeddingProfile().get("id")))throw new ApiError(409,"embedding_profile_changed");if(!active.tryAcquire())throw new ApiError(503,"inference_busy");
+        long started=System.nanoTime();AnswerDeadline budget=answer&&ragAnswerEnabled?answerDeadline(started):null;Filter f=filter(b);Snapshot before=store.read(c->snapshot(c,request,f));check(budget);String token=Auth.token(request);if(f.profile!=null&&!f.profile.equals(inference.embeddingProfile().get("id")))throw new ApiError(409,"embedding_profile_changed");if(!active.tryAcquire())throw new ApiError(503,"inference_busy");
         try{
             if(answer&&f.limit>10)throw new ApiError(422,"answer_context_limit");
-            List<Map<String,Object>> ranked;if(f.method.equals("bm25"))ranked=Retrieval.rankChunks(f.query,before.corpus,f.limit);else if(before.corpus.isEmpty())ranked=List.of();else{long deadline=inference.deadline();inference.health(deadline);ranked=learned.rank(f.query,before.corpus,f.limit,f.method,deadline);}
+            List<Map<String,Object>> ranked;if(f.method.equals("bm25"))ranked=Retrieval.rankChunks(f.query,before.corpus,f.limit);else if(before.corpus.isEmpty())ranked=List.of();else{long deadline=inference.deadline();if(budget!=null)deadline=budget.limit(deadline);inference.health(deadline);ranked=learned.rank(f.query,before.corpus,f.limit,f.method,deadline);}
+            check(budget);
             List<Map<String,Object>> results=clean(ranked);Map<String,Object> response;
             if(!answer){response=new LinkedHashMap<>(Map.of("query",f.query,"method",f.method,"results",results));if(!f.method.equals("bm25"))response.put("embedding_profile",inference.embeddingProfile());}
             else if(results.isEmpty())response=abstain("no_evidence",null);
@@ -52,10 +60,18 @@ public class KnowledgeService {
                 // Ranking may have waited on a model. Do not send a stale authorization snapshot
                 // to a second model, even though the final response is also revalidated below.
                 store.read(c->{Snapshot current=snapshot(c,request,f);if(!token.equals(Auth.token(request))||!before.equals(current))throw new ApiError(409,"search_context_changed");return null;});
+                check(budget);
                 List<Map<String,Object>> contexts=results.stream().map(row->{Map<String,Object> v=new LinkedHashMap<>();for(String key:List.of("document_id","revision","chunk_id","title","meeting_date","page","start_offset","end_offset","text"))v.put(key,row.get(key));return v;}).toList();
-                JsonNode output=generation.call("/answer",Map.of("schema_version",1,"query",f.query,"contexts",contexts));response=validateAnswer(output,contexts);
+                check(budget);
+                var payload=Map.of("schema_version",1,"query",f.query,"contexts",contexts);
+                JsonNode output=budget==null?generation.call("/answer",payload):generation.call("/answer",payload,budget);check(budget);response=validateAnswer(output,contexts);check(budget);
             }
-            if(answer){response.put("query",f.query);response.put("method",f.method);response.put("results",results);response.put("model_called",!results.isEmpty());response.put("elapsed_ms",Math.round((System.nanoTime()-started)/10_000.0)/100.0);}return store.read(c->{Snapshot after=snapshot(c,request,f);if(!token.equals(Auth.token(request))||!before.equals(after))throw new ApiError(409,"search_context_changed");return response;});
+            if(answer){response.put("query",f.query);response.put("method",f.method);response.put("results",results);response.put("model_called",!results.isEmpty());response.put("elapsed_ms",Math.round((System.nanoTime()-started)/10_000.0)/100.0);}
+            check(budget);
+            Map<String,Object> verified=store.read(c->{Snapshot after=snapshot(c,request,f);if(!token.equals(Auth.token(request))||!before.equals(after))throw new ApiError(409,"search_context_changed");check(budget);return response;});
+            check(budget); // Includes the final authorization transaction's commit.
+            if(budget!=null)verified.put("elapsed_ms",Math.round((System.nanoTime()-started)/10_000.0)/100.0);
+            return verified;
         }finally{active.release();}
     }
     static Map<String,Object> abstain(String reason,Object model){var response=new LinkedHashMap<String,Object>();response.put("status","abstained");response.put("reason",reason);response.put("claims",List.of());response.put("model",model);response.put("experimental",true);return response;}
