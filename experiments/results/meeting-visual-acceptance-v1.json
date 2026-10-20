@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "kind": "meeting-visual-acceptance-public-safe-projection",
+  "created": "2026-10-20T06:30:50.0439561Z",
+  "head_before": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+  "head_after": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+  "status": "two_reproduced_product_issues_fixed_local_only",
+  "source_bindings": [
+    {
+      "path": "web/src/App.tsx",
+      "before": "b76636f6e070ce48bfaac4c72bab3dba7d75f94c060d64c6209f26e591998129",
+      "after": "b76636f6e070ce48bfaac4c72bab3dba7d75f94c060d64c6209f26e591998129",
+      "unchanged": true,
+      "ownedSource": false,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/src/components/MeetingViews.tsx",
+      "before": "d8aa340ae7ed0a719a012adb9f6587ec10ad46ad9167a6c45e8c1dd40c36be31",
+      "after": "25345eeb686404a8e0cc7d85f065838dbdb94bed78c06cb5cba913ffa393ec07",
+      "unchanged": false,
+      "ownedSource": true,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/src/components/SourcePane.tsx",
+      "before": "5e1fb6f19d04f09ce0e55ff9b00b9849f10c3e8f93b018d1ef0f547e92967aa1",
+      "after": "5e1fb6f19d04f09ce0e55ff9b00b9849f10c3e8f93b018d1ef0f547e92967aa1",
+      "unchanged": true,
+      "ownedSource": false,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/src/useMeetings.ts",
+      "before": "f0a7fb882ca69afa7277a2afed38f66ee93acd99f1e11e896c22995af0dd8408",
+      "after": "f0a7fb882ca69afa7277a2afed38f66ee93acd99f1e11e896c22995af0dd8408",
+      "unchanged": true,
+      "ownedSource": false,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/src/useDocTrail.ts",
+      "before": "2409561da67142d760382d890d0094afeca4f6f91b00f7a007f108d6782bdc1d",
+      "after": "2409561da67142d760382d890d0094afeca4f6f91b00f7a007f108d6782bdc1d",
+      "unchanged": true,
+      "ownedSource": false,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/src/style.css",
+      "before": "12fb54175ca18536b2469b57576b9018e91c382e62192c29f4c24d7893336d41",
+      "after": "12fb54175ca18536b2469b57576b9018e91c382e62192c29f4c24d7893336d41",
+      "unchanged": true,
+      "ownedSource": false,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/src/meetings.css",
+      "before": "2020018de7abf32d7f0205d6e0f6b3fe69d548ca1eca18d2b7b43c3ff62feefa",
+      "after": "488084541f4f28df0eb550518558e3e4ca619cb16158e98b2a8ac19073ec2067",
+      "unchanged": false,
+      "ownedSource": true,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/scripts/test-java.mjs",
+      "before": "70d6030d8ea259eaf680707daf92fb1085eedc2f943c68b23cb6826492f0403c",
+      "after": "70d6030d8ea259eaf680707daf92fb1085eedc2f943c68b23cb6826492f0403c",
+      "unchanged": true,
+      "ownedSource": false,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/scripts/meeting-transport-fixture.mjs",
+      "before": "6a677b91e9493df0d69e9f4ea4f36fa868504febabbe210126a20f5ca92b92c3",
+      "after": "6a677b91e9493df0d69e9f4ea4f36fa868504febabbe210126a20f5ca92b92c3",
+      "unchanged": true,
+      "ownedSource": false,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/tests/meeting-ready.spec.ts",
+      "before": "ab743a86feea703a1ce5fdf8ed18f10f85eb43a63133e42238946d4bc91a3632",
+      "after": "98d2f104e855df8cc5a6d37ae8b0bed4821bbcd73a0493817bdc2e4c06682dfe",
+      "unchanged": false,
+      "ownedSource": true,
+      "buildArtifact": false
+    },
+    {
+      "path": "web/dist/index.html",
+      "before": "23459f7475e3133b20fae6c27736935edfa78ff11773089573fd950868588de0",
+      "after": "26942be5a86e9b85af6dc55f0555f33c5b87e411030934e75937b19ae5b38174",
+      "unchanged": false,
+      "ownedSource": false,
+      "buildArtifact": true
+    },
+    {
+      "path": "server/target/doctrail-server-0.1.0.jar",
+      "before": "f71aee331ff151acacdbb4e6c7e98f3ead5a57d193c90c37e1cb89e752e05329",
+      "after": "eabdd887ea59101c3815bc10e0826914024113e8350d5b1a88700ae505b5e28c",
+      "unchanged": false,
+      "ownedSource": false,
+      "buildArtifact": true
+    }
+  ],
+  "changes": [
+    "Meeting filter includes visible analysis title plus original document title and summary",
+    "Task assignee and due date remain visible with explicit labels and wrapping at desktop/tablet/mobile widths",
+    "Focused regression covers original-title and summary search, unknown metadata, long text, overflow, keyboard activation and mobile source return"
+  ],
+  "validation": {
+    "baseline_existing_scenario": {
+      "passed": 1,
+      "failed": 0,
+      "test_seconds": 6.9,
+      "suite_seconds": 8.4,
+      "transport": "deterministic HTTP fixture; actual LLM0"
+    },
+    "baseline_local_reproduction": {
+      "attempt1": "Harness selector timeout before issue assertions; original logs and screenshot preserved",
+      "attempt2": "Both actual UI issues reproduced in9.639321s against packaged Java+React"
+    },
+    "fixed_existing_scenario": {
+      "passed": 1,
+      "failed": 0,
+      "test_seconds": 6.8,
+      "scope": "Registration/evidence/user edits/tasks/links/answer/responsive layouts; model boundary deterministic"
+    },
+    "fixed_new_regression_first_attempt": {
+      "passed": 0,
+      "failed": 1,
+      "reason": "getByLabel exact 진행 상태 selector timeout",
+      "test_seconds": 45.1,
+      "measured_before_stop": "Edited/original-title and summary searches, desktop metadata and overflow",
+      "unexecuted": "Keyboard and tablet/mobile assertions",
+      "preserved": true
+    },
+    "fixed_new_regression_final": {
+      "passed": 1,
+      "failed": 0,
+      "test_seconds": 3.3,
+      "suite_seconds": 4.5,
+      "correction": "Test selector only: accessible combobox role; product source/bundle unchanged",
+      "widths": [
+        1440,
+        1024,
+        390
+      ],
+      "assertions": [
+        "Visible edited title, original document title, summary search return expected cards",
+        "1440/1024/390 widths show recorded assignee and deadline plus unknown-field labels",
+        "Long task and assignee wrap; document and task fields no horizontal overflow",
+        "Tab reaches first task button; Enter opens details at all3widths; Space opens selected task",
+        "Mobile source exact quote visible; close returns to same edited-title detail",
+        "Page error auto-check passed"
+      ]
+    },
+    "count_note": "Two distinct relevant product scenarios passed across two runs after one preserved test-selector failure. Do not sum overlapping runs into a larger suite count.",
+    "typecheck": {
+      "command": "npm --prefix web run typecheck",
+      "exitCode": 0,
+      "elapsedSeconds": 10.6472573
+    },
+    "build": {
+      "command": "npm --prefix web run build",
+      "exitCode": 0,
+      "elapsedSeconds": 8.0096249
+    },
+    "offline_package": {
+      "command": "./server/mvnw.cmd -o -B -q -f server/pom.xml -DskipTests package",
+      "exitCode": 0,
+      "elapsedSeconds": 10.8370017,
+      "purpose": "Package current React bundle into real Java service; no unit suite or model calls"
+    },
+    "test_typecheck_final": {
+      "command": "tsc -p web/tsconfig.tests.json",
+      "exitCode": 0,
+      "elapsedSeconds": 1.0499831
+    }
+  },
+  "cleanup": {
+    "baseline_initial_report_correction": "First local harness serverStopped=true described the Oracle javapath shim, not the remaining actual JVM; discrepancy preserved. Parent/command/isolated-port ownership verified and actual child stopped.",
+    "correction_receipt": ".local/meeting-visual-acceptance-v1/attempt-1-failed-harness/correction.json",
+    "subsequent_launchers": "Resolved java.home executable",
+    "all_owned_java_stopped": true,
+    "unrelated_jvms_preserved": 3
+  },
+  "evidence": {
+    "raw_receipt": ".local/meeting-visual-acceptance-v1/fix-receipt.json",
+    "raw_receipt_sha256": "d7553c03d37d9659ccb4465ef16775c4db2254d75d2ef1d1d92a226e7f8cc840",
+    "preserved_bindings": [
+      {
+        "path": ".local/meeting-visual-acceptance-v1/baseline.json",
+        "sha256": "3bae133fef27fb2e51da6ecf559fbfd684a99dd02c7aad1a6ea50711c6b579ab"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/receipt.json",
+        "sha256": "d624f9ec973c68c6efabdd7c9ca10632bd7302bd40c5c775f5e1eeba2c4f2d5c"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/attempt-1-failed-harness/audit-report.json",
+        "sha256": "6418f0bac4019790afa96338896c5adb9a6ad617974c1ff722772a9d8b104337"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/attempt-1-failed-harness/correction.json",
+        "sha256": "986973c952534eb94b675cb5f215686b5d009489e17a414c481a20816e64fc6e"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/attempt-2/audit-report.json",
+        "sha256": "331c49657a1f32ee6be8bdcc47a96dbd646f92d3330d14b4e4af431ee1d90936"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/web-e2e-lnwS85/run.json",
+        "sha256": "4edb869e59c748f17d5890145d5c96fa8f89e4d9a8345d9e76b09ba2caa6991d"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/selector-failure.json",
+        "sha256": "8c2daf8536e25a69939d2616aed384ecabf90da0743ebdde0dc89af174cfed30"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/meeting-ready-selector-failure.spec.ts",
+        "sha256": "cbb965ee625c6d8b2165ab1e2ac8fb49620f9e2d18931020e35113a06c6d71be"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-dDMIep/report.json",
+        "sha256": "005529fe67376607cca1ace45bfcb9e4f24a926ad2b8c70a9056af9455a9a516"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-dDMIep/run.json",
+        "sha256": "61475d419a2e1339c1be4a050b7674f87abbf84782db313f53df9053236ec5b2"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/report.json",
+        "sha256": "027078f35c71a69f6a43ccdd4d9bf0f4a91057bf834b0518e32178c853391060"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/run.json",
+        "sha256": "736c5c7dfacfdebeef320293931b2ca8ec8d0a5ca22a3343657ea130d0ce31f7"
+      }
+    ],
+    "final_screenshots": [
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/results/meeting-ready-synthetic-tr-94a24-tays-visible-across-layouts/edited-title-search-desktop.png",
+        "sha256": "6edc05af91e22504d4bec8bee986cce7a0ead09a24a0eaf66472777444e663b9",
+        "review": "AI visual inspection; human review0"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/results/meeting-ready-synthetic-tr-94a24-tays-visible-across-layouts/task-metadata-1024.png",
+        "sha256": "7b6ebc5c18bcf42fbe0fb754b7707349a037feed8e54a77271c50448b9f3076f",
+        "review": "AI visual inspection; human review0"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/results/meeting-ready-synthetic-tr-94a24-tays-visible-across-layouts/task-metadata-1440.png",
+        "sha256": "5e1e07f4ceae9c0de5bc72c51583fa15e788c880a32a751479178b102f873531",
+        "review": "AI visual inspection; human review0"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/results/meeting-ready-synthetic-tr-94a24-tays-visible-across-layouts/task-metadata-390.png",
+        "sha256": "29c51dd483f4e9af0b41676b106f755218d3bce344985d18908481238557737f",
+        "review": "AI visual inspection; human review0"
+      },
+      {
+        "path": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/results/meeting-ready-synthetic-tr-94a24-tays-visible-across-layouts/task-source-mobile.png",
+        "sha256": "c74c4e81d9df84dd6e2c51e8df824f97f0e3fe8ec45fc350c2d72da48b6dcc8e",
+        "review": "AI visual inspection; human review0"
+      }
+    ]
+  },
+  "limits": [
+    "Synthetic local accounts/documents and deterministic HTTP transport; no LLM quality evidence",
+    "Chromium viewport coverage only; no real mobile device, Safari/Firefox, screen reader or user usability review",
+    "No full suite rerun; two distinct relevant scenarios validated across two runs, first run includes1preserved selector failure",
+    "Offline package skips unit tests; serves newly built packaged React as proven by runner",
+    "No server/controller/auth/model/raw-analysis/evaluation/frozen source changes"
+  ],
+  "human_review_count": 0,
+  "actual_llm_calls": 0,
+  "tokenizer_calls": 0,
+  "git_actions_by_product_role": 0,
+  "deployment": false,
+  "source_evaluation_claim": false
+}

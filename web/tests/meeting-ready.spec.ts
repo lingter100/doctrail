@@ -110,6 +110,75 @@ test('synthetic transport + real Java: failed reanalysis visibly preserves the r
   await expect(page.getByRole('button', { name: '분석 편집', exact: true })).toBeEnabled();
 });
 
+test('synthetic transport + real Java: edited titles remain searchable and task metadata stays visible across layouts', async ({ page }, testInfo) => {
+  const auth = await register(page.request, '합성 화면 회귀');
+  const originalTitle = '기존 문서 제목으로도 찾는 합성 회의';
+  const editedTitle = '사용자가 수정한 출시 점검 회의';
+  const longAssignee = '모바일출시품질점검담당김민수와협업담당박지현';
+  const longTask = '작은 화면에서도 작업 내용을 빠뜨리지 않고 출시 전 모바일 접근성 점검과 후속 확인 결과를 공유한다.';
+  const meeting = await create(page.request, auth.workspaces[0].id, originalTitle, `${content}\n${editedTitle}\n${longAssignee}\n2026-10-20`);
+  await create(page.request, auth.workspaces[0].id, '담당자와 기한이 없는 합성 회의');
+  await ready(page); await meetings(page);
+  await page.locator(`[data-meeting="${meeting.document.id}"]`).click();
+  await page.getByRole('button', { name: '분석 편집', exact: true }).click();
+  const editor = page.locator('.analysis-editor');
+  await editor.getByLabel('분석 제목', { exact: true }).fill(editedTitle);
+  await editor.locator('.metadata-proof summary').click();
+  await editor.getByLabel('제목 근거', { exact: true }).fill(editedTitle);
+  await editor.getByLabel('담당자', { exact: true }).fill(longAssignee);
+  await editor.getByLabel('마감일', { exact: true }).fill('2026-10-20');
+  await editor.locator('.item-editor').last().getByRole('textbox', { name: '항목 내용', exact: true }).fill(longTask);
+  await editor.locator('.item-editor').last().getByRole('combobox', { name: '상태', exact: true }).selectOption('doing');
+  await page.getByRole('button', { name: '사용자 수정본 저장' }).click();
+  await expect(editor).toHaveCount(0);
+  await expect(page.locator('.meeting-detail-heading h2')).toHaveText(editedTitle);
+  await page.getByRole('button', { name: '목록으로' }).click();
+  const filter = page.getByRole('textbox', { name: '회의 제목 검색' });
+  for (const query of [editedTitle, originalTitle]) {
+    await filter.fill(query);
+    await expect(page.locator('.meeting-card')).toHaveCount(1);
+    await expect(page.locator('.meeting-card h2')).toHaveText(editedTitle);
+  }
+  await filter.fill('합성 회귀용 고정 초안');
+  await expect(page.locator('.meeting-card')).toHaveCount(2);
+  await filter.fill(editedTitle);
+  await page.screenshot({ path: testInfo.outputPath('edited-title-search-desktop.png'), fullPage: true });
+  await page.locator('[data-view=actions]').click();
+  await expect(page.locator('.task-row')).toHaveCount(2);
+  const task = page.locator('.task-row').filter({ hasText: originalTitle });
+  const unknown = page.locator('.task-row').filter({ hasText: '담당자와 기한이 없는 합성 회의' });
+  for (const width of [1440, 1024, 390]) {
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 1000 });
+    await expect(task.locator('.task-assignee')).toBeVisible();
+    await expect(task.locator('.task-assignee')).toContainText(longAssignee);
+    await expect(task.locator('.task-due')).toBeVisible();
+    await expect(task.locator('.task-due')).toContainText('2026-10-20');
+    await expect(unknown.locator('.task-assignee')).toBeVisible();
+    await expect(unknown.locator('.task-assignee')).toContainText('확인 필요');
+    await expect(unknown.locator('.task-due')).toBeVisible();
+    await expect(unknown.locator('.task-due')).toContainText('확인 필요');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(await page.locator('.task-copy, .task-metadata, .task-field').evaluateAll(elements =>
+      elements.every(element => element.scrollWidth <= element.clientWidth + 1))).toBe(true);
+    await page.getByRole('combobox', { name: '진행 상태', exact: true }).focus();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.task-row').first()).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('.meeting-detail')).toBeVisible();
+    await page.getByRole('button', { name: '목록으로' }).click();
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({ path: testInfo.outputPath(`task-metadata-${width}.png`), fullPage: true });
+  }
+  await task.focus();
+  await page.keyboard.press('Space');
+  await expect(page.locator('.meeting-detail-heading h2')).toHaveText(editedTitle);
+  await page.locator('.analysis-section.action .evidence-button').click();
+  await expect(page.locator('#source-citation')).toHaveText('민수는 후속 점검을 맡는다.');
+  await page.screenshot({ path: testInfo.outputPath('task-source-mobile.png') });
+  await page.locator('#close-source').click();
+  await expect(page.locator('.meeting-detail-heading h2')).toHaveText(editedTitle);
+});
+
 test('synthetic transport + real Java: edit conflicts preserve local draft and workspace change cancels delayed meeting', async ({ page }) => {
   const auth = await register(page.request);
   const doc = await create(page.request, auth.workspaces[0].id, '합성 경합 회의');

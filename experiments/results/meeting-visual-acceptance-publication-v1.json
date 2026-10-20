@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "kind": "meeting_visual_acceptance_publication",
+  "recorded_at_utc": "2026-10-20T06:33:30.656502+00:00",
+  "projection_original": ".local/meeting-visual-acceptance-v1/public-safe-projection.json",
+  "projection_public": "experiments/results/meeting-visual-acceptance-v1.json",
+  "projection_sha256": "a8856e7fd9d77bec5b0cd3a27d5a9888f65f4b1e083c0ecfd0bcbafd75808b4a",
+  "projection_copy_exact": true,
+  "raw_local_receipt_sha256": "d7553c03d37d9659ccb4465ef16775c4db2254d75d2ef1d1d92a226e7f8cc840",
+  "current_source_bindings_verified": 12,
+  "preserved_artifact_bindings_verified": 12,
+  "final_screenshot_bindings_verified": 5,
+  "images": [
+    {
+      "original": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/results/meeting-ready-synthetic-tr-94a24-tays-visible-across-layouts/task-metadata-390.png",
+      "public_copy": "docs/images/meeting-task-metadata-390.png",
+      "sha256": "29c51dd483f4e9af0b41676b106f755218d3bce344985d18908481238557737f",
+      "scope": "actual Java/React with synthetic data; AI visual inspection only"
+    },
+    {
+      "original": ".local/meeting-visual-acceptance-v1/fix-verification/web-e2e-B6mCJX/results/meeting-ready-synthetic-tr-94a24-tays-visible-across-layouts/task-metadata-1024.png",
+      "public_copy": "docs/images/meeting-task-metadata-1024.png",
+      "sha256": "7b6ebc5c18bcf42fbe0fb754b7707349a037feed8e54a77271c50448b9f3076f",
+      "scope": "actual Java/React with synthetic data; AI visual inspection only"
+    }
+  ],
+  "parent_review": "Read three-file delta/new regression/CSS; visually inspected baseline and final390/1024 screenshots. No additional tests or models rerun.",
+  "ci_for_changed_product": "pending",
+  "actual_model_calls": 0,
+  "human_review": 0
+}

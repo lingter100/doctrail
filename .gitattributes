@@ -33,3 +33,10 @@ experiments/results/meeting-admission-diagnostic-implementation-v1.json -text
 experiments/results/meeting-admission-diagnostic-implementation-v2.json -text
 # The official Windows CLI stdout includes a final CRLF; keep its exact bytes.
 experiments/results/meeting-admission-diagnostic-v1/cli-summary.json -text
+# Preserve original bounded-discovery receipt bytes.
+data/evaluation/meetings-source-feasibility-v1/calibration/artifact-index-v1.json -text
+data/evaluation/meetings-source-feasibility-v1/calibration/safe-summary-v1.json -text
+data/evaluation/meetings-source-feasibility-v1/validation/actor-attestation-v1.json -text
+data/evaluation/meetings-source-feasibility-v1/validation/artifact-index-v1.json -text
+data/evaluation/meetings-source-feasibility-v1/validation/outcome-v1.json -text
+experiments/results/meeting-visual-acceptance-v1.json -text
