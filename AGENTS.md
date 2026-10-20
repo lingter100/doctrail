@@ -1,6 +1,8 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- NEW diagnostic design b5d64fa0 returned/accepted: exact12 generic fixtures; same actualAstrahigh meeting_request_lifecycle_audit owns NEW scripts/diagnose_meeting_admission.py + tests/fixtures/meeting-admission-diagnostic-v1.json + tests/test_diagnose_meeting_admission.py ONLY. Targeted unit tests allowed in temp dirs; official .local/meetings-admission-diagnostic-v1 reserved for parent AFTER code review/commit/CI. No pool/source/token/native/Maven/threshold changes; frozen77 immutable. Parent rootdocs/Git; designer actualAstraxhigh may review code but has calibration exposure. Officialrun0/goalactive/Phase1draft.
+
 - Product adbadaa7 and included source f136a72 pushed/userauthorcommitterlingter100; exact push39374479290/PR39374484761 ALL3passed. Old local39/hashcheckpoint caveat preserved. Existing actualAstraxhigh c7_calibration_author now owns NEW docs/MEETINGS-ADMISSION-DIAGNOSTIC.md DESIGN ONLY <=12 generic synthetic fixtures, no data/pool/token/native/threshold edits. Calibration exposure disclosed/not independent. Parent CIreceipt/rootdocs/PR; no diagnostic implementation/run yet. Goalactive/Phase1draft.
 
 - C7 source outcomes committed f136a72 (113files incl104source metadata; exactstage/14CRLFpreserved/5originalwhitespaceexceptions). LinkPOST fix final realJava39/0, source4+artifact33 hashesverified; raw44980a57/public87b8399c/publicationec269a8e. Hashcheckpoint AFTERnew4, samefinal35/current; needexactcommitCI. All7ownedJVMstopped, sourceauthorsreturned, noMaven needed. Parent owns productdoc/commit/pushCI; next bounded<=12 generic diagnostic only AFTER these commits/CI, not yet implemented/run. Goalactive/Phase1draft.

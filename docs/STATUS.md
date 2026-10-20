@@ -1,4 +1,10 @@
 # 진행 상태
+## 2026-10-20 · 일반 합성12개 진단 설계 완료, 구현 배정
+
+[작은 진단 설계](MEETINGS-ADMISSION-DIAGNOSTIC.md)를 실제 Astra xhigh 역할이 반환했다(SHA b5d64fa0). 제목/문단23·24·25개, 공백, 목록·코드블록, 실제150자 chunk overlap, 한국어2048/2049바이트 경계 등12개의 입력과 손으로 계산한 기대값을 고정했다. 기존 family_admission의 결정은 그대로 남기고 별도 관찰로 문단 수·원문 복원·좌표·ko/en 직렬화 크기를 기록한다.
+
+기존 실제 Astra high 제품 담당자에게 NEW CLI·fixture JSON·test 세 파일만 배정했다. 기존77파일·실제 원문·토크나이저·모델·상한은 바꾸지 않는다. 단위 검증과 공식 진단을 구분하며 공식 디렉터리는 부모가 코드 검토·커밋·CI 뒤 한 번만 사용한다. 아직 공식 실행이나 성공 결과는 없다. CI 관측 기록89f2a459는99fcefe로 별도 커밋했고 PR 설명도 현재 결과로 갱신했다.
+
 ## 2026-10-20 · 결정 연결 수정의 정확한 CI 통과, 작은 진단 설계 시작
 
 제품 수정adbadaa7d4d88cbd34bdf85170ee49950b44b36b와 포함된 원문 결과f136a72를 사용자 계정으로 push했다. GitHub author/committer lingter100과 PR14 head를 확인했고 push39374479290/PR39374484761의 backend·web·java-service가 모두 성공했다. 실제 Java verify와 전체 browser CI는 로컬39개 검사 및 그 hash 측정 시점 한계와 구분한다. 원문 결과f136a72만의 별도 CI를 관측한 것은 아니다.
