@@ -1,4 +1,10 @@
 # 진행 상태
+## 2026-10-20 · 결정 연결 수정의 정확한 CI 통과, 작은 진단 설계 시작
+
+제품 수정adbadaa7d4d88cbd34bdf85170ee49950b44b36b와 포함된 원문 결과f136a72를 사용자 계정으로 push했다. GitHub author/committer lingter100과 PR14 head를 확인했고 push39374479290/PR39374484761의 backend·web·java-service가 모두 성공했다. 실제 Java verify와 전체 browser CI는 로컬39개 검사 및 그 hash 측정 시점 한계와 구분한다. 원문 결과f136a72만의 별도 CI를 관측한 것은 아니다.
+
+기존 실제 Astra xhigh calibration 작성자에게 최대12개 일반 합성 예시의 코드 진단 **설계만** 배정했다. 자기 calibration 원문 노출이 있어 독립 검토자로 부르지 않으며 validation 의미 자료를 열지 않는다. NEW 설명 문서 한 개를 소유하고 실제 자료·모델·상한 변경 없이 처리/분할/직렬화 조건을 구분하도록 한다. 구현과 공식 진단은 아직 시작하지 않았다. Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
 ## 2026-10-20 · 결정 연결 저장 복구39통과, source 결과 커밋
 
 원문 단계 결과113파일을f136a72163b00406195792e788fb4f38da5d0577로 커밋했다.104개 source/evidence bytes·일반 설명 문서와 Git index의 일치를 확인했고 원본 CRLF14개와 원문 공백 예외5경로를 보존했다. 최초 기본 공백 검사와 좁은 예외 적용 전 실패 로그도 남겼다.

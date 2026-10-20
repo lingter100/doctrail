@@ -1,4 +1,8 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · 정확한 제품 커밋 CI와 데이터 없는 설계 배정
+
+부모가 adbadaa7의 push/PR 필수3job 성공과 사용자 GitHub author/committer를 직접 관측했다. 기존 실제 Astra xhigh calibration 역할을 일반 코드 진단 설계에 재사용했으며 새로운 독립 역할이나 현재 채팅 모델 변경으로 기록하지 않는다. 자기 calibration 원문 노출을 공개하고 validation 의미 자료/토크나이저/모델 실행은 금지했다. 사용자 검수는 여전히0이다.
+
 ## 2026-10-20 · 실제 결정 연결 실패 수정과 검증
 
 실제 Astra high 제품 담당자가 원래 두 가설을 Java에서 재현하고 수정했다. 부모의 코드 검토에서 현재 회의 자체의 접근 거부 경계를 추가 확인하도록 했고 실제 중간 실패를 보존한 뒤 읽기 재검증과 입력 잠금을 연결했다. 최종39개 실제 Java browser 검사·type/build/offline package와 source4를 반환했다.
