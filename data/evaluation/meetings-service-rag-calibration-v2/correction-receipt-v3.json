@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_artifact_publication_correction",
+  "version": 3,
+  "actor": "/root/service_rag_calibration_sources",
+  "created_at": "2026-10-20T07:41:12.971642+00:00",
+  "scope": "Metadata/hash publication repair only; no SQLite connection or source semantics opened.",
+  "original_v2_publication": [
+    {
+      "original_path": "data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v2.json",
+      "archive_path": ".local/service-rag-calibration-v2/publication-correction-v3/original-artifact-index-v2.json",
+      "bytes": 13524,
+      "sha256": "26410a4567461d244691409fcc78f1b013192167f88377b5c5b8de22851784f8",
+      "exact_copy": true
+    },
+    {
+      "original_path": "data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v2.json",
+      "archive_path": ".local/service-rag-calibration-v2/publication-correction-v3/original-safe-summary-v2.json",
+      "bytes": 2662,
+      "sha256": "d4021f1a506c2c40a7fda102ead2f1203fb43aa99b1cac42dae38df02eebc3c6",
+      "exact_copy": true
+    },
+    {
+      "original_path": "data/evaluation/meetings-service-rag-calibration-v2/author-receipt-v2.json",
+      "archive_path": ".local/service-rag-calibration-v2/publication-correction-v3/original-author-receipt-v2.json",
+      "bytes": 7902,
+      "sha256": "f6954db15a8c1c82446bdc853e41f7ee6e2a1ed7508fee02a16a2bd1e70aaaf8",
+      "exact_copy": true
+    }
+  ],
+  "original_observation": {
+    "time_basis": "v2 author finalization before writer Python process exit",
+    "author_receipt_finished_at": "2026-10-20T07:36:39.941058+00:00",
+    "bindings_verified_in_that_process": 52,
+    "limitation": "Index captured SQLite WAL/SHM sidecars while the snapshot verification connection was still referenced."
+  },
+  "later_observation": {
+    "time_basis": "parent read after v2 writer process exited; then this author metadata/hash check",
+    "author_observed_at": "2026-10-20T07:41:12.971642+00:00",
+    "present_exact_original_bindings": 50,
+    "missing_original_bindings": [
+      {
+        "path": ".local/service-rag-calibration-v2/java-corrected/verified-snapshot.sqlite3-shm",
+        "bytes": 32768,
+        "sha256": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb",
+        "scope": "role_local_source_or_evidence"
+      },
+      {
+        "path": ".local/service-rag-calibration-v2/java-corrected/verified-snapshot.sqlite3-wal",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "scope": "role_local_source_or_evidence"
+      }
+    ],
+    "changed_present_original_bindings": 0,
+    "main_snapshot_and_ingestion_database_hashes_unchanged": true
+  },
+  "cause_assessment": {
+    "confirmed": "Only snapshot -shm and zero-byte -wal bindings are now missing; both main database files and all other 50 original bindings match.",
+    "explanation": "The previous v2 finalization used with sqlite3.connect for its snapshot count check. That transaction context does not explicitly close the connection. End-of-process connection cleanup can remove WAL/SHM files after the in-process index check.",
+    "evidence_level": "Lifecycle explanation consistent with execution history and file metadata; no filesystem deletion event was independently captured.",
+    "agent_deleted_files": false
+  },
+  "correction": "Keep original index, summary, receipt and exact archived copies. Retain missing sidecar metadata in this receipt and exclude ephemeral WAL/SHM from the new stable index. Use file-byte hashing only, without opening SQLite.",
+  "unchanged_evidence": {
+    "documents": 6,
+    "chunks": 32,
+    "source_status": "prepared_pending_independent_source_review",
+    "java_ingestion_reruns": 0,
+    "source_body_accesses": 0,
+    "source_edits": 0,
+    "database_content_edits": 0,
+    "sqlite_connections": 0,
+    "maven_runs": 0,
+    "model_calls": 0,
+    "tokenizer_calls": 0,
+    "questions": 0,
+    "oracles": 0,
+    "git_mutations": 0,
+    "root_doc_mutations": 0
+  },
+  "verification_method": "A separate read-only process after this writer exits checks every new index binding, original publication hashes, archived exact copies and explicitly missing sidecars. It must not open SQLite or produce files.",
+  "source_acceptance": false,
+  "source_freeze": false,
+  "parent_failure_path": ".local/service-rag-calibration-v2/publication-correction-v3/parent-validation-failure-v3.json"
+}

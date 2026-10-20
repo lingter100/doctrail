@@ -1,4 +1,14 @@
 # 진행 상태
+## 2026-10-20 · 실제 자료 등록6개 확인, 독립 검토와 validation 후속 등록
+
+Calibration v2 작성자는 공개3·새 합성3을 준비했고 실제 Java `/documents`에서6개 등록/재조회와 전체32청크·codepoint좌표·저장 원문/Python 처리 일치를 확인했다. 승인된 JAR/source10 binding은 그대로이며 소유 JVM0이다. 최초 관찰 코드의 변수 충돌은 HTTP0 실패로, 수정 관찰의 성공은 별도 경로로 보존했다. 회의 등록·자동 분석·모델 품질 통과를 뜻하지 않는다.
+
+부모의 원래 index 재검증은50일치/임시SQLite `-shm/-wal`2누락이었다. 작성자가 연결 종료 후 안정적으로 남은 파일만 묶은 새 v3를 반환했고 부모가57개 hash/bytes를 확인했다. 원래 index/summary/receipt와 누락 사실을 보존했으며 Java/DB/모델 재실행0이다. [새 요약](../data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v3.json)과 [후속 역할 등록](../data/evaluation/meetings-service-rag-source-followup-registration-v2.json)을 따른다.
+
+새 독립 source 검토자는 실제 Astra xhigh/fork none 요청을 도구가 수락했고 등록만 반환했다. 기존 validation 작성자도 v2 등록만 수락했다. 등록 커밋 뒤 별도로 dispatch하며 source 수용·문항·tokenizer·native는 아직0이다. Validation은 공식 W3C 계열의 명시적 문서 이용조건과 기존 TXT/MD/textPDF 처리를 우선하며 본문 전 출처를 예약한다.
+
+별도 launcher 신규21 합성 검사/Ruff 통과는 초기 증거로 보존한다. 독립 코드 검토가 native 시작 실패 시 이미 소비한 정리 시간·실패를 성공으로 오인할 수 있는 경계를 찾아 작성자가 수정 중이다. 실제 모델 실행은 하지 않았다. 이전7df1135의 push39386565379/PR39386573368 필수3job은 모두 성공했고, fdeb191의 두 run은 취소로 구분했다. Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
 ## 2026-10-20 · 실행기 구현 배정과 calibration 새 시도 등록
 
 실패 원본/설계 fdeb19167d21da008b8502efba6120e90d96dcb7을 사용자 계정으로 commit/push했다. 기존 actual Astra high service_rag_worker에 NEW serve_meeting_rag_service.py와 검사1개만 실제 구현 배정했다. Native 정리 선발동·공유 startup/cleanup 관찰·Java 설정 확인 한계가 포함되며 실제 모델 실행은 허가하지 않았다.

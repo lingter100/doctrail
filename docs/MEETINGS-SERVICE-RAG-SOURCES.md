@@ -32,3 +32,11 @@ Java21·Python 의존성·현재 opt-in JAR·브라우저 실행 파일을 확�
 사용자 요구는 이용 가능한 공개 자료와 재현 가능한 가공이며 GitHub 자료만 사용하라는 조건은 없다. 공식 기관의 명시적인 문서 라이선스·고정 버전/수집 원본을 갖춘 자료도 검토할 수 있다. 플랫폼 선택을 바꾸더라도 전체 원문·공개와 합성 구분·여러 회의와 일반 문서·독립 검토·평가 격리는 유지한다.
 
 [관측 요약](../experiments/results/meetings-service-rag-source-preflight-v1.json), [calibration](../data/evaluation/meetings-service-rag-calibration-v1/safe-summary-v1.json), [validation](../data/evaluation/meetings-service-rag-validation-v1/safe-summary-v1.json), [원래 서비스 계획](MEETINGS-RAG-ACCEPTANCE-PLAN.md)을 함께 읽는다.
+
+## Calibration v2 실제 등록 결과
+
+별도 등록 후 `cncf/tag-app-delivery`의 고정 commit에서 공개3개와 Apache-2.0 원문을 확보하고 새 합성3개를 구분했다. 전체6개를 실제 Java 문서 API에 등록해32청크·좌표·원문 저장값과 기존 Python 처리의 일치를 확인했다. 채팅 기록의 의미적 충분성과 완료 회의 여부는 독립 검토 대상이며 작성자 판단만으로 source 수용을 선언하지 않는다.
+
+관찰 코드의 최초 변수 충돌은 HTTP0으로 종료했고 원본 로그를 남겼다. 수정 실행만 성공이며 `/documents` 처리 증거를 `/meetings` 자동 분석 증거로 보고하지 않는다. 모델·tokenizer·문항·사용자 검수0이다.
+
+원래 산출물 목록에는 종료 후 제거되는 SQLite 임시2파일이 포함됐다. 부모가50일치/2누락을 확인한 뒤 작성자가 DB 연결이나 Java 실행 없이 [영속 목록 v3](../data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v3.json)를 만들었다. 부모가57개의 bytes/hash를 확인했고 원래 목록·요약·receipt와 누락을 보존했다. [현재 요약](../data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v3.json)은 독립 source 검토 대기다.

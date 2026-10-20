@@ -1,4 +1,12 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · 실제 원문 등록 증거 확인과 독립 검토 역할
+
+기존 실제 Astra xhigh 자료 작성자가 calibration6개/32청크의 실제 Java source ingestion을 수행했다. 부모는 원문 의미를 읽지 않고 집계·파일 bytes/hash만 확인했다. 첫 영속 목록의 임시SQLite2누락을 부모가 발견했고 작성자가 재실행 없이 새 목록으로 정정했다. 부모가 최종57개를 확인했다.
+
+새 `/root/service_rag_calibration_source_review`는 gpt-6-astra/xhigh/fork none 요청이 생성 도구에서 수락된 독립 source 검토 역할이다. 역할 자체의 런타임 모델 확인은 수행하지 않았으며 등록 메시지의 건수 노출을 공개했다. 기존 validation 작성자의 v1 노출도 그대로 기록한다. 등록 시 source 의미 검토·문항·모델·사용자 검수0이다.
+
+기존 Astra xhigh 설계 역할은 NEW launcher2파일의 읽기 검토에서 native 초기 실패 정리 판정의 blocker1개를 반환했다. 기존21 합성 통과를 실제 native 성공이나 독립 검토 완료로 바꾸지 않았으며 같은 Astra high 작성자에게 최소 수정만 배정했다.
+
 ## 2026-10-20 · 자료 시도의 미완료 보존과 실행 경로 점검
 
 두 실제 Astra xhigh source 역할은 license/revision 확인 한계를 포함한 원본과 집계만 반환했다. 부모는 cal24/val19 hash binding을 확인하고 validation 추가 합성/회의 작성 전에 현재 시도를 닫았다. 이 부모의 종료 결정도 결과에 남긴다.
