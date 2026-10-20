@@ -1,4 +1,14 @@
 # 진행 상태
+## 2026-10-20 · C6 입력 준비 종료: 검증2문항 토큰 상한 초과
+
+같은 HEAD e8e5297에서 각 split 공식 offline 준비를1회 마쳤다. Calibration6/6 통과,1,273~2,192토큰·CLI71.720초다. 격리 validation8개를 모두 측정했고2개가5,120토큰을 초과했다(범위1,784~5,266, CLI47.741초). 요청 바이트 상한 초과0이다. Tokenizer각1회·다운로드/실제 모델 생성/최종 판정0이다. 이 실패는 입력 수용성 실패이며 모델 의미 품질 실패나 reader 개선 효과의 증거가 아니다.
+
+Calibration의 최초 직접 script 실행은 import에서 scripts 모듈을 찾지 못해 main/prepare/예약 전에 종료됐다. 원본 오류bee34b6a를 보존했고 같은 코드의 -m 모듈 실행으로 경로만 수정했다. CLI launch2/실제 준비1회이며 tokenizer 결과를 보고 재시도한 것이 아니다. Validation은 처음부터 module CLI1회다. 공식 준비 시작 뒤 재실행·payload 수정은 양쪽0이다.
+
+결과 experiments/results/meetings-c6-preparation-results-v1.json SHA0b1c8386, 실패 영수증 exact 공개 사본6a3fecee와 calibration 입력deea9af0/영수증c2d698f0을 보존했다. 원본source46·최초문항14·수용문항16·code77·기존112 bytes 불변이다. 양쪽 준비 통과 조건을 우회하지 않아 실행 plan/native/판정은 만들지 않았고 C6를 닫는다.
+
+기존 실제 Astra xhigh free_qa_candidate_review가 코드·집계만으로 다음 입력 수용성 설계를 읽기 검토 중이다. Validation 문항/개별길이와 닫힌 자료는 튜닝에 쓰지 않는다. 새 설계 파일·자료·모델 실행은 아직 없다. 자료 담당자2명은 반환됐고 부모는 종료 결과를 커밋·CI 확인한다. e8e5297의 push39366267902/PR39366272729 필수3job도 모두 성공했다. 전체 goal ACTIVE·Phase1 미완료·PR14 draft를 유지한다.
+
 ## 2026-10-20 · C6 수용본769d2cc CI와 커밋 자료 검증 통과
 
 수용본769d2cc의 push39365780168/PR39365785254 필수 backend/java-service/web 모두 성공했다. GitHub author·committer lingter100, PR14 head, 커밋23개 exact bytes를 확인했다. 별도 experiments/results/meetings-c6-item-ci-v1.json에 실제 job과 자료 proof를 묶었다.

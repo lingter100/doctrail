@@ -1,4 +1,10 @@
 # 기여와 직접 검증 기록
+## 2026-10-20 · C6 공식 offline 준비와 실패 보존
+
+기존 실제 Astra xhigh split 자료 담당자2명이 고정된 공식 CLI를 자기 자료에1회씩 실행했다. Calibration 담당자는 첫 import 오류를 보존하고 부모의 경로 수정 지시 후 같은 module CLI로 첫 실제 준비를 수행했다. Validation 담당자는 상한 실패를 보존하고 재계수하지 않았다. 토크나이저는 캐시만 사용했고 실제 생성0이다.
+
+부모는 코드/원본/수용본 hash, 안전한 개수·상한·반환 영수증, exact 공개 사본, 실행 출력 부재와 CI를 확인했다. Validation의 의미 자료나 개별 문항 길이는 열어 튜닝하지 않았다. 다음 기존 Astra xhigh 설계 역할에도 코드와 종료 집계만 전달했다. 사용자 검수0, 실제 모델 답변 품질 판정0이다.
+
 ## 2026-10-20 · C6 수용본 CI·커밋 자료 확인
 
 기존 실제 Astra xhigh 작성자/자료 담당자2명이 자기 split의 커밋된 자료 전체를 frozen machine validator와 실제 기본 GitProof로 확인했다. 부모는 영수증 hash·상태·개수, exact23 committed bytes와 GitHub 사용자 신원/양쪽 CI 성공만 확인했다. Validation 보조 계측 오류는 원본·정정으로 분리했다. 의미 자료를 부모에게 노출하거나 추가 모델·tokenizer·사용자 검수를 실행하지 않았다.
