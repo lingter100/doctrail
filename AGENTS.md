@@ -1,6 +1,8 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- C7 first actual preauth BOTH stopped role_contract/c7_phase_path at5e00709 after code77/Git158/snapshot80, source0. Preserve cal9e80801f/vala5ce2676 and original registry8128159c archived exact. Active6024bf54 repairs12 local root entries/116 actualphase_path checks/code77unchanged; receiptf9ced79b. Commit metadata repair BEFORE explicit same-author preauth-v2; holdHEAD during proof, no source untilpass. Initial5e00709 push39371431774/PR39371435953 all3passed. ReadSTATUS; goalactive/Phase1/PR14draft.
+
 - C7 CIreceipt27bc3da push39370807501/PR39370812277 all3passed. NEW actualAstraxhigh author2/prereviewer2 registeredONLY: role8128159c/8assignments/4actors, same-splitreuse+metadataexposure disclosed/excludedfinaljudges. Prior6e72b4e2 metadata3/110rows/107unique/42normalized/gaps3/repo13. Commitroles+index BEFORE explicit actualcode/Git/role preauth; holdHEAD thenreserve repos beforebodies/serializeMaven. No source/item/tokenizer/native yet; frozen77/closedpoolsunchanged. ReadSTATUS; goalactive/Phase1/PR14draft.
 
 - C7 source9888255 userauthorcommitterlingter100/committed17exact, push39370305643/PR39370310599 all3CIpassed. Freeze77 SHA6f829eeb unchanged; separateCIreceipt1bb8d365 tocommit BEFORE newpriorindex/actualsplitroles/sourceauthorship. Final244/1skip/Ruff andindependentreview10c127ea preserved; allownersreturned/ownedjobsfinished. NoC7source/item/judge/tokenizer/native. Next freshsourceadmission prospective-manifest+receipt/freeze chain, NEVERoldpool/C6reuse. ReadSTATUS; goalactive/Phase1/PR14draft.

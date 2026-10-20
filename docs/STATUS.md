@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-20 · C7 역할 경로 사전 검증 실패와 등록 수선
+
+두 작성자의 실제 사전 검증은5e00709에서 code77·Git158 revision/path쌍·snapshot80까지 통과했으나 role_contract의 c7_phase_path에서 각각 중단됐다. 원래 local 작업 폴더 자체는 경로 구성요소가2개여서 동결 검사에서 요구하는 하위 경로가 없었다. 원본 cal9e80801f/vala5ce2676 영수증을 보존했고 작성자들은 prior index나 원문을 아직 읽지 않았다.
+
+부모가 최초 registry8128159c를 별도 initial 파일에 exact bytes로 보존하고 active6024bf54의 local 경로12개만 실제 하위 경로로 좁혔다. 실제 phase_path로116개 등록 경로를 검사했고 동결77파일은 같았다. 영수증f9ced79b에 변경 목록·최초 실패·Windows subprocess 종류 분류의 한계를 기록했다. 이 수선은 실험 입력/모델/크기 규칙 변경이 아니다.
+
+최초 등록5e00709의 push39371431774/PR39371435953 필수3job 모두 성공했다. 다음은 수선 커밋 후 같은 작성자의 새 preauthorization-v2 실제 코드·역할·prior 증명이며 HEAD를 유지한다. 통과 후 원문 수집을 별도 지시한다. 실제 source/item/tokenizer/native0, 사용자 검수0, goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C7 새 자료 역할4명과 과거 metadata 등록
 
 별도 CI 영수증27bc3da의 push39370807501/PR39370812277도 필수3job 모두 성공했다. 새 c7_calibration_author/c7_validation_author와 c7_calibration_prereviewer/c7_validation_prereviewer를 실제 Astra xhigh/fork none으로 배정했고 네 명 모두 등록만 수락했다. 같은 split source/item 재사용·metadata 노출·최종 judge 제외를 기록했다. 원래 상대 role_id는 receipt에 보존하고 등록에서는 실제 /root 경로로 정규화했다.
