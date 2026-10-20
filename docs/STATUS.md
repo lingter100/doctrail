@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-20 · 연결 구현 CI 통과와 다음 자료 담당 등록
+
+구현 d462903c85cba0f132bbc9d13d6dfac915694805의 push39383229849와 PR39383237250은 backend/java-service/web 세 검사 모두 통과했다. GitHub author·committer는 lingter100으로 확인했다. [별도 관측 기록](../experiments/results/meetings-service-rag-implementation-ci-v1.json)은 기존 구현 영수증을 덮어쓰지 않는다. 실제 native 연결·모델 품질·사용자 검수의 통과로 해석하지 않는다.
+
+실제 Astra xhigh/fork none으로 수락된 service_rag_calibration_sources와 service_rag_validation_sources가 등록만 완료했다. [source-only 등록](../data/evaluation/meetings-service-rag-source-registration-v1.json)에 split별 metadata 요청24·repo3·공개 family 후보2·원문 fetch6·license2/repo·실작업30분을 본문 전에 고정했다. 기존 실패 원문을 재사용하거나 C7 크기 조건에 맞춰 원문을 줄이지 않는다.
+
+현재 원문·문항·실제 모델 호출0이다. 등록 커밋과 별도 실행 배정 뒤 저장소/revision을 예약하고 공개 원문3개+새 합성3개를 준비한다. Java 등록·전체 색인 확인은 모델을 끄고 격리 DB에서 수행하며 Maven 실행을 직렬화한다. 독립 source 검토와 질문/최종 판정 담당은 아직 배정하지 않았다. 부모는 의미 자료 없이 집계·hash·출처·license/status만 받는다. Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
 ## 2026-10-20 · 서비스 연결 코드와 opt-in 화면 검증 완료
 
 새 Python4파일은23통과/1.06초/기존경고1/Ruff통과, Java6파일은 경계41+별도호환11 통과다. 새 opt-in 설정으로 실제 Java/React의 등록→분석→편집→작업/결정 연결→답변→원문 시나리오1개가 통과했다. 이 화면은 기존 합성 transport이며 새 Python/native 통합이 아니다. Actual model/tokenizer0·사용자 검수0·소유JVM0이다.

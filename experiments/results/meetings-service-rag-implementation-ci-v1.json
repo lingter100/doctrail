@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_implementation_ci_observation",
+  "observed_at": "2026-10-20T07:02:44.189766+00:00",
+  "source_commit": "d462903c85cba0f132bbc9d13d6dfac915694805",
+  "author": "lingter100",
+  "committer": "lingter100",
+  "runs": [
+    {
+      "id": 39383229849,
+      "head": "d462903c85cba0f132bbc9d13d6dfac915694805",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39383229849",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39383229849/job/118496918512"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39383229849/job/118496918987"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39383229849/job/118496918998"
+        }
+      ]
+    },
+    {
+      "id": 39383237250,
+      "head": "d462903c85cba0f132bbc9d13d6dfac915694805",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39383237250",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39383237250/job/118496942285"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39383237250/job/118496942446"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39383237250/job/118496942515"
+        }
+      ]
+    }
+  ],
+  "implementation_summary": {
+    "path": "experiments/results/meetings-service-rag-implementation-v1.json",
+    "sha256": "ca23baec8394129c745e9b83c452b09c0c54607cf78d31cfcb63f45aad1d6473"
+  },
+  "scope": "Exact committed adapter, deadline, UI and regression checks. CI does not run the real native answer model or prove model quality.",
+  "new_native_model_calls": 0,
+  "human_review": 0
+}
