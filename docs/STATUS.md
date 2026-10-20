@@ -1,5 +1,11 @@
 # 진행 상태
 
+## 2026-10-20 · reader 단발 합성 비교 완료, 서비스 효과는 별도 검증
+
+64e3454에서 공식 비교4경계가1회 완료됐다. Reference→candidate 시작12.531→10.969초/전송직전3.141→2.047초이며 동일 비읽기 검사·hash/반환bytes/Git events를 확인했다. 고정순서 n=1/부하미통제로 안정적인 개선율·C5 causal 절약·서비스 품질을 주장하지 않는다. CLI59.634초/exit0·summary/raw92fda0c9 일치·HEAD/동결27/oldunion106 unchanged·소유 CLI 종료, 세션51972 FINISHED다. 공식 출력과 observer는 소비됐고 절대 재실행하지 않는다.
+
+원본/CLI exact2개와 metadata/publication을 보존했다. 모델·tokenizer·HTTP·의미판정·사용자검수0이며 C5/모든 closed pool은 그대로다. 부모는 결과 commit/CI와 다음 코드·scalar-only Astra xhigh 검토를 이어간다. 아직 새 품질 설계/자료/생성은0이고 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · reader source73c36bf 양쪽 필수 CI 통과, 단발 비교 준비
 
 구현·동결13파일을73c36bf1499d2c6cc7721b06a0d1fa54545c24e6로 사용자 명의 커밋·push했다. Index27 bindings/새13파일 bytes·whitespace 검사를 통과했고 GitHub author/committer lingter100을 직접 확인했다. PR14도 최신 source SHA를 가리켰다. Push39353187562/PR39353192367 backend/java-service/web 모두 성공해 정확한 CI receipt를 작성했다. 이전 설계 commit의 PR 미관측 기록은 덮어쓰지 않는다.

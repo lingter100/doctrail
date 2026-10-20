@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "meetings-proof-epoch-publication-v1",
+  "copies": [
+    {
+      "source": ".local/meetings-proof-epoch-v1/receipt.json",
+      "published": "experiments/results/meetings-proof-epoch-v1.json",
+      "sha256": "92fda0c9a3a065f5dfb4201b4396c563edf899234cb263603634363d9d0b8e46",
+      "bytes": 143516
+    },
+    {
+      "source": ".local/bounded-snapshot-execution-observer-v1/completed.json",
+      "published": "experiments/results/meetings-proof-epoch-cli-v1.json",
+      "sha256": "8c72c763c6ffdefcce3a67705aad6fa47d0c6be536113cfafa617481bcaffbfd",
+      "bytes": 1630
+    }
+  ],
+  "exact": true,
+  "metadata_file": "experiments/results/meetings-proof-epoch-results-metadata-v1.json",
+  "metadata_sha256": "f5fd6b2414991eadb59f78d3cbb1c805f52b3bc6aeab1f01b133f09b4dbdaf8c",
+  "pattern_scan_hits": 0,
+  "pattern_scan_is_universal_privacy_proof": false,
+  "raw_generated_fixture_retained_locally": true,
+  "additional_comparison_runs": 0
+}

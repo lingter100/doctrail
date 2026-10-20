@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · reader 실제 단발 합성 실행과 원본 공개
+
+부모가 소스73c36bf의 실제 양쪽 필수3job CI를 관측·별도 커밋한 뒤64e3454에서 공식 CLI를1회 실행했다. 별도 observer의 exit/summary/receipt hash와 전후 HEAD/동결 bytes를 확인하고 raw/CLI exact copy2개를 만들었다. 합성4경계 계수·시간만 읽었고 실제 질문/oracle/답변 의미를 열지 않았다. 이는 모델 성능·사용자 검수가 아니며 해당 수치는 모두 실제 합성 관측이다.
+
 ## 2026-10-20 · bounded reader 구현·독립 코드 검토
 
 기존 실제 Astra high host_proof_profile이 NEW4 구현과 합성 회귀를 수행했고 c5_persistence_review가 별도 읽기 검토로 cleanup/deadline/accounting/실제 Git guard의 누락을 찾아 최종 변경을 재확인했다. 모델 설정을 새로 바꿨다고 기록하지 않는다. 부모는 전후 SHA·로그·기존 동결106바이트 binding과 새 code/fixture freeze를 검증하고 문서·Git·CI를 담당한다. 전체73검사와 마지막8검사는 scope/소스가 달라 구분하며 official 성능비교·모델·사용자 검수0이다.
