@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "calibration",
+  "kind": "independent_item_prereview",
+  "verdict": "rejected",
+  "reviewer_id": "/root/c6_calibration_prereviewer",
+  "author_ids": [
+    "/root/c6_calibration_author"
+  ],
+  "accepted_ids": [
+    "C6-CAL-01",
+    "C6-CAL-02",
+    "C6-CAL-03",
+    "C6-CAL-04",
+    "C6-CAL-05"
+  ],
+  "rejected_ids": [
+    "C6-CAL-06"
+  ],
+  "human_review_count": 0,
+  "reviewed_at_utc": "2026-10-20T03:23:49.718818+00:00",
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "all_sufficient_alternatives_complete": false,
+  "requested_item_corrections": 1,
+  "source_changes_requested": 0,
+  "author_artifacts_edited": 0,
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "toolchain_source_commit": "d3e4e2ef401d490c712f6773b07f19d01418f2dc",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c6-calibration-v1/source-freeze.json",
+    "sha256": "ecf4a08d8d5edc8598646e3be2d25b0203af633ae39d298014c479befcf49b53"
+  },
+  "preauthorization": {
+    "file": ".local/meetings-c6-calibration-item-review-v1/preauthorization-v1.json",
+    "sha256": "691b507ba1a695202b343572f2cb289780c4b40e15e9913ba7741e1a5dde3b94",
+    "actual_code_files": 77,
+    "actual_source_bound_files": 14,
+    "actual_Git_proven_pairs": 189,
+    "actual_snapshot_files": 96,
+    "item_semantic_reads_before_completion": 0
+  },
+  "author_artifact_sha256": {
+    "data/evaluation/meetings-c6-calibration-v1/draft.json": "aa1957e1086be116cb633b8224ddec8effa91220952be52d5570c5aca4116f21",
+    "data/evaluation/meetings-c6-calibration-v1/oracle-draft.json": "1649e85163a9f368c4f7c8878f31e10ea68b2513106841a0434e2c6972b4f42a",
+    "data/evaluation/meetings-c6-calibration-v1/context-selection.json": "a975274360473f10d3575416be00bd6ccabe505f0bd56a9f22681bde79bf957b",
+    "data/evaluation/meetings-c6-calibration-v1/author-receipt.json": "0ecede36bc5dafd502ae47e99cde2f2302d0020e3ccab13eced8ff120cc9980d"
+  },
+  "notes": {
+    "file": "data/evaluation/meetings-c6-calibration-v1/item-prereview-notes.md",
+    "sha256": "5ddb99729358e97800db48b7d989bd821e21134d7a207206f6d591090a09d1a0"
+  },
+  "author_safe_feedback": {
+    "file": ".local/meetings-c6-calibration-item-review-v1/author-safe-correction-v1.json",
+    "sha256": "2150d4e494acb9efb60e11b355d932d7c8af8dab9f737552c629103fed289729"
+  },
+  "case_verdicts": [
+    {
+      "case_id": "C6-CAL-01",
+      "verdict": "accepted",
+      "reason": "Dated status comparison and all five atomic facts are supported; both meetings required; no unrelated approval or later-state inference."
+    },
+    {
+      "case_id": "C6-CAL-02",
+      "verdict": "accepted",
+      "reason": "Ordinary/confidential channels and both non-critical priority criteria supported. Boundary fragments examined: incomplete ordinary-route linkage is not accepted alone; the complete block remains in the registered alternative."
+    },
+    {
+      "case_id": "C6-CAL-03",
+      "verdict": "accepted",
+      "reason": "Known emergency-request facts supported; numeric first-response guarantee absent across all three full public-family documents. 24/7 is not an SLA."
+    },
+    {
+      "case_id": "C6-CAL-04",
+      "verdict": "accepted",
+      "reason": "General limit, actual duration, both conjunctive prerequisites and no repeated-performance permission supported; both registered repetition alternatives are sufficient; mixed documents required."
+    },
+    {
+      "case_id": "C6-CAL-05",
+      "verdict": "accepted",
+      "reason": "Initial undecided state, constrained trial result, continuing original condition and treatment/demonstration choices supported; both dated meetings required."
+    },
+    {
+      "case_id": "C6-CAL-06",
+      "verdict": "rejected",
+      "reason": "Family-wide missing original production year and partial-missing abstention are valid, but one complete already-provided sufficient causal alternative for req-cal-06-04 is omitted."
+    }
+  ],
+  "finding": {
+    "id": "CAL-ITEM-ALT-01",
+    "category": "missing_sufficient_semantic_evidence_alternative",
+    "case_id": "C6-CAL-06",
+    "fact_id": "req-cal-06-04",
+    "existing_alternative_valid": true,
+    "missing_alternative_is_existing_full_catalog_block": true,
+    "candidate_span": {
+      "document_id": "c6-cal-doc-06",
+      "revision": 1,
+      "chunk_id": "c6-cal-doc-06-r1-c0000",
+      "start_offset": 227,
+      "end_offset": 466,
+      "quote_sha256": "fdb3ccb7e2f4583afe1e52ce96ece39507ba1bf96699f05ad96c8e722960117e"
+    },
+    "reason": "The complete provided paragraph presents the positive trial-paper result, contrasts it with the original paint layer still lifting, and explicitly says no hinge was attached and the original was kept stationary on a support. This same-subject causal chain independently supports the fact that trial success was not treated as permission to move the original. It is not a truncated fragment or a generic rule alone.",
+    "all_originals_preserved": true
+  },
+  "pure_contract_checks": {
+    "draft_schema": "passed",
+    "oracle_schema_and_C6_quota_complexity": "passed",
+    "all_registered_evidence_catalog_membership_and_exact_coordinates": "passed",
+    "whole_immutable_context_chunks": "passed",
+    "context_selection_exact": "passed",
+    "declared_coverage": [
+      {
+        "case_id": "C6-CAL-01",
+        "status": "answered",
+        "response_language": "ko",
+        "required_facts": 5,
+        "contexts": 2,
+        "sufficient_document_sets": [
+          [
+            {
+              "document_id": "c6-cal-doc-01",
+              "revision": 1
+            },
+            {
+              "document_id": "c6-cal-doc-02",
+              "revision": 1
+            }
+          ]
+        ],
+        "unavoidably_multiple_documents": true
+      },
+      {
+        "case_id": "C6-CAL-02",
+        "status": "answered",
+        "response_language": "en",
+        "required_facts": 5,
+        "contexts": 2,
+        "sufficient_document_sets": [
+          [
+            {
+              "document_id": "c6-cal-doc-03",
+              "revision": 1
+            }
+          ]
+        ],
+        "unavoidably_multiple_documents": false
+      },
+      {
+        "case_id": "C6-CAL-03",
+        "status": "abstained",
+        "response_language": "ko",
+        "required_facts": 4,
+        "contexts": 3,
+        "sufficient_document_sets": [],
+        "unavoidably_multiple_documents": false
+      },
+      {
+        "case_id": "C6-CAL-04",
+        "status": "answered",
+        "response_language": "ko",
+        "required_facts": 5,
+        "contexts": 2,
+        "sufficient_document_sets": [
+          [
+            {
+              "document_id": "c6-cal-doc-04",
+              "revision": 1
+            },
+            {
+              "document_id": "c6-cal-doc-06",
+              "revision": 1
+            }
+          ]
+        ],
+        "unavoidably_multiple_documents": true
+      },
+      {
+        "case_id": "C6-CAL-05",
+        "status": "answered",
+        "response_language": "en",
+        "required_facts": 6,
+        "contexts": 3,
+        "sufficient_document_sets": [
+          [
+            {
+              "document_id": "c6-cal-doc-05",
+              "revision": 1
+            },
+            {
+              "document_id": "c6-cal-doc-06",
+              "revision": 1
+            }
+          ]
+        ],
+        "unavoidably_multiple_documents": true
+      },
+      {
+        "case_id": "C6-CAL-06",
+        "status": "abstained",
+        "response_language": "en",
+        "required_facts": 4,
+        "contexts": 3,
+        "sufficient_document_sets": [],
+        "unavoidably_multiple_documents": false
+      }
+    ],
+    "context_occurrences": 15,
+    "required_facts": 29,
+    "registered_evidence_alternatives": 29,
+    "semantic_acceptance_inferred_from_structure": false
+  },
+  "semantic_categories": {
+    "question_subject_time_condition_completeness": "passed",
+    "atomic_required_facts_3_to_6": "passed",
+    "registered_evidence_support": "passed",
+    "all_sufficient_alternatives": "failed_one_missing",
+    "repeated_passages_and_boundary_fragments": "independently_reviewed",
+    "partial_missing_abstention_family_wide": "passed_both",
+    "unavoidable_multi_document_and_source_modes": "passed",
+    "cross_language_quotas": "passed",
+    "selected_contexts_hide_required_answer": "not_found"
+  },
+  "role_disclosure": {
+    "same_split_source_item_review_reuse": true,
+    "source_author_is_different_role": true,
+    "excluded_from_final_output_judging": true,
+    "actual_model": "gpt-6-astra",
+    "actual_effort": "xhigh",
+    "fork_turns": "none",
+    "settings_provenance": "Parent-observed accepted spawn arguments and committed role record, not runtime introspection.",
+    "automatic_AGENTS_memory_public_metadata_exposure": true,
+    "pristine_or_fully_blind_claim": false
+  },
+  "tooling_error_preserved": {
+    "file": ".local/meetings-c6-calibration-item-review-v1/inspection-error-v1.json",
+    "sha256": "3ff0d8554ced56d131d4ce21a1a7a7f89861dfaa270a1da26bef60a3fd71b9f6",
+    "kind": "reviewer_inspection_API_lookup_error",
+    "product_test_failure": false
+  },
+  "forbidden_activity_counts": {
+    "validation_semantics_read": 0,
+    "old_closed_data_bodies_read": 0,
+    "final_judge_or_pack_access": 0,
+    "model_output_trace_mapping_reads": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "official_offline_preparations": 0,
+    "Maven_runs": 0,
+    "product_model_execution": 0,
+    "Git_mutations": 0
+  },
+  "item_freeze_created": false,
+  "next_gate": "Commit immutable v1 originals and rejection before separate same-author NEW version correction and independent rereview.",
+  "expected_full_acceptance_gate": {
+    "accepted": false,
+    "rejection_code": "preparation_prereview_not_accepted",
+    "intentional_negative_contract_check": true
+  },
+  "integrity": {
+    "head_before": "eae71405b679f19ec2f7c53a591bc64052c3de17",
+    "head_after": "eae71405b679f19ec2f7c53a591bc64052c3de17",
+    "author4_unchanged": true,
+    "source23_unchanged": true,
+    "toolchain77_unchanged": true,
+    "source14_freeze_unchanged": true
+  }
+}

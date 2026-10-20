@@ -1,5 +1,17 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · C6 최초 문항 작성과 독립 불수용 기록
+
+기존 작성자가 calibration6/필수사실29, validation8/33을 작성했고, 별도 같은 split prereviewer가 각각 실제 새 proof 뒤 전체 근거를 검토했다. Calibration5수용/1거부·validation7수용/1거부이며 작성자가 빠뜨린 충분한 대안 각1개를 지적했다. 구조·좌표 검사는 통과했지만 독립 의미 수용은 실패했다. 원본8·검토6·표시 오류·안전한 제한 피드백을 보존했다.
+
+부모는 두 검토 집계/반환 hash만 읽어 원본14·source46·code77·old112의 불변을 확인하고 새 경로 사전 승인·결과 영수증·문서를 작성했다. 원문/문항/oracle/검토 노트 및 제한 피드백의 의미는 읽지 않았다. 새 버전은 각 작성자가 이후 커밋 증명과 자기 제한 피드백으로만 작성하도록 분리한다. 실제 서비스 모델 실행·사용자 검수는0이다.
+
+## 2026-10-20 · C6 문항 작성 사전확인과 최종 판정자 등록
+
+기존 실제 Astra xhigh 작성자2명이 자기 code/source/Git/role 증명을 새로 수행했다. Calibration Git189/snapshot96, validation Git191/snapshot97이며 부모가 영수증 bytes와 집계만 확인했다. 같은 split 원문 기억 재사용과 validation 작성자의 proof 대기 중 내부 주제 검토 한계를 공개한다. 새 source/item 본문을 부모가 읽어 답을 만드는 방식은 사용하지 않는다.
+
+부모가 별도 새 final judge2명을 gpt-6-astra/xhigh/fork none으로 지정했고 도구가 수락했다. 각 역할은 자신의64byte seed·노출 진술·수락 기록만 작성했다. 부모는 등록 계약/길이/hash/역할 제외를 확인했으며 아직 익명 pack이나 실제 판정은 없다. 부모 채팅 설정 변경이나 런타임 introspection을 주장하지 않는다. 실제 사용자 검수0·tokenizer/native0이다.
+
 ## 2026-10-20 · C6 source 커밋·정확한 CI 확인
 
 부모가 source887e89f의 push39361887466/PR39361890912 필수3job 성공과 GitHub author/committer lingter100을 직접 조회했다. Source/review46+코드77의 실제 커밋123개 바이트도 대조했다. CI 성공을 모델 정확도·새 사용자 검수로 해석하지 않았으며, 단계 설명과 다음 문항 작성의 격리 경계를 기록했다. 이 작업에서 실제 문항·tokenizer·모델 실행은0이다.

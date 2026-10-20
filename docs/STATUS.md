@@ -1,5 +1,23 @@
 # 진행 상태
 
+## 2026-10-20 · C6 최초 문항 검토 완료, 양쪽 근거 대안 누락 보완 필요
+
+별도 실제 Astra xhigh 검토자가 calibration5수용/1거부, validation7수용/1거부를 반환했다. 각 묶음의 oracle 한 필수사실에서 충분한 근거 대안1개가 누락됐다. 구조·원본 청크/좌표·배분 검사가 통과한 사실과 독립 의미 검토 실패를 분리한다. 질문/필수사실 문구·기존 근거·source/context 변경은 요청되지 않았다. Item freeze·tokenizer·native0이다.
+
+부모는 작성자 원본8·검토6을 hash로 확인했고 source46·code77·기존112 보존을 검증했다. 공개 결과 영수증은 experiments/results/meetings-c6-item-review-v1.json SHAc4054d11이다. 각 검토자의 표시용 helper 오류1개와 작성자의 선행 타이밍 공개도 보존했다. 사용자 검수0, 실제 답변 품질 판정0이다.
+
+원본·거부 기록과 사전 경로 추가 승인c5ec88a4를 먼저 커밋한다. 그 뒤 같은 split 작성자가 actual 새HEAD/source/Git 증명 후 자기 제한 피드백만 읽어 NEW draft-v2/oracle-draft-v2/context-selection-v2/author-receipt-v2를 작성한다. Draft/context는 원본과 같고 지정 대안만 추가한다. 기존 별도 reviewer가 새 버전을 검토하고 수용 시에만 동결한다. 기존 역할 등록bbad1743와 최초 거부 파일은 그대로 유지한다. 모든 현재 소유권은 반환됐고 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · C6 문항 작성 시작, 독립 최종 판정자 등록
+
+기존 실제 Astra xhigh 작성자2명이 같은 HEAD eae7140에서 새 문항 작성 전 코드·원문·역할·실제 Git 증명을 통과했다. Calibration77+14/Git189/snapshot96, validation77+15/Git191/snapshot97이며 부모도 영수증 hash와 집계를 확인했다. 현재 각자 NEW draft/oracle/context-selection/author-receipt4개만 소유하고 calibration6/격리 validation8을 작성 중이다. 원문/freeze는 바꾸지 않는다. 양쪽 HEAD hold는 해제됐다.
+
+Validation 작성자는 증명이 실행 중일 때 이전에 허용된 자기 원문 대화 기억으로 질문 주제를 생각했다는 한계를 자진 공개했다. 새 원문 재열람·산출물 작성·교차 자료 접근은 증명 통과 전 없었다. 별도 sequence note와 author receipt에 남기며 모든 내부 사고가 proof 뒤였다고 주장하지 않는다. Source 수용·커밋이 item 작성보다 앞섰다는 순서는 유지한다.
+
+새 별도 c6_calibration_final_judge/c6_validation_final_judge를 실제 gpt-6-astra/xhigh/fork none으로 수락받았다. 공개 재현용64byte seed각1개, 노출 진술·수락 영수증을 review-registration65e5f569에 묶었다. 자동 지침/모델/과거 집계 metadata 노출을 공개하며 완전 맹검이나 사용자 검수로 표현하지 않는다. 현재 pack 열람·최종 판정0이다.
+
+문서 커밋 eae7140의 push39362544844/PR39362549284 필수3job도 모두 통과했다. 다음은 작성자 반환 뒤 기존 독립 prereviewer의 item 검토·조건부 동결·커밋이다. 공식 offline tokenizer/native는 아직0이며 전체 goal ACTIVE·Phase1/PR14 draft다. [문항 단계 설명](MEETINGS-C6-ITEMS.md)을 따른다.
+
 ## 2026-10-20 · C6 원문887e89f 양쪽 필수 CI 통과, 다음은 문항 작성
 
 Source/freeze·검토·문서54파일을887e89f795b22ba043a0f62fa1b65c7d62e8cc75로 커밋·push했고 사용자 author/committer lingter100·PR14 최신 head를 확인했다. Push39361887466/PR39361890912 backend/java-service/web 모두 성공했다. 공개 source/review46개와 코드77개, 총123개의 committed/working bytes가 일치했다. CI 영수증은 experiments/results/meetings-c6-source-ci-v1.json이며 CI 상태로 검사 개수나 모델 품질을 추정하지 않는다.

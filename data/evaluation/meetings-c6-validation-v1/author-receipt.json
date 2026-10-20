@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "stage": "item_authoring_complete_independent_prereview_pending",
+  "created_at_utc": "2026-10-20T03:16:10.068593+00:00",
+  "question_author": "/root/c6_validation_author",
+  "oracle_author": "/root/c6_validation_author",
+  "independent_prereviewer": "/root/c6_validation_prereviewer",
+  "same_split_source_item_reuse_disclosed": true,
+  "AI_authored": true,
+  "human_review_count": 0,
+  "excluded_final_output_judge": true,
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "preauthorization_head": "eae71405b679f19ec2f7c53a591bc64052c3de17",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c6-validation-v1/source-freeze.json",
+    "sha256": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625"
+  },
+  "toolchain_freeze_sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b",
+  "actual_preauthorization": {
+    "file": ".local/meetings-c6-validation-item-v1/preauthorization-v1.json",
+    "sha256": "bde9ec03dddab8b8e5ffe63b64d0b9e88d02821d4503236aa7767c54810ebc1e"
+  },
+  "sequence_disclosure": {
+    "file": ".local/meetings-c6-validation-item-v1/sequence-disclosure-v1.json",
+    "sha256": "cda9f41f23d4018fa11cae9652e1aca247e22923a0c49362d43a87acb3eeb470",
+    "prior_authorized_source_memory_theme_planning_while_proof_pending": true,
+    "new_source_rereads_and_item_artifact_authorship_after_passed_proof": true,
+    "zero_internal_semantic_planning_before_proof_claim": false,
+    "scope": "Initial tentative themes used already-authorized own-source conversation memory while proof subprocess was pending; no new source read or item file existed then. The preserved preauth zero-authorship field concerns artifacts, not all internal planning."
+  },
+  "counts": {
+    "cases": 8,
+    "required_facts": 33,
+    "answered": 4,
+    "abstained": 4,
+    "ko": 4,
+    "en": 4,
+    "missing_required_facts": 5,
+    "registered_evidence_alternatives": 33
+  },
+  "structural_checks": {
+    "validate_draft": "passed",
+    "validate_oracles": "passed",
+    "whole_immutable_chunks": "passed"
+  },
+  "author_coverage": {
+    "general_only_answered": 1,
+    "multiple_meetings_answered": 2,
+    "general_plus_meeting_answered": 1,
+    "unavoidably_multi_document_answered": 3,
+    "ko_question_en_evidence": true,
+    "en_question_ko_evidence": true,
+    "all_sufficient_alternatives_including_repeated_passages_considered_by_author": true,
+    "independent_acceptance_pending": true
+  },
+  "selection_policy": "Whole immutable chunks of the indicated complete documents; no token measurements, source truncation, or token-driven reselection. Every abstention supplies its entire three-document family.",
+  "per_item_author_notes": [
+    {
+      "id": "C6-VAL-01",
+      "mode": "general_only",
+      "all_family_sources_considered": true,
+      "alternative_notes": "초기화 문단이 청크 경계에 걸친다. Actions 탭 진입은 첫 블록에 있고 입력할 두 값은 후속 블록에 있으므로 각 사실을 실제로 담은 별도 블록에 연결했다. 결과와 링크 위치는 같은 완전한 문단이 지원한다."
+    },
+    {
+      "id": "C6-VAL-02",
+      "mode": "multiple_meetings",
+      "all_family_sources_considered": true,
+      "alternative_notes": "The copied guide and Monday readiness statement occur only in the first meeting; the named follow-up and landing-page direction occur only in the second. The later chunk's partial pronoun-only continuation does not identify April or LF and is not independently sufficient for that named action."
+    },
+    {
+      "id": "C6-VAL-03",
+      "mode": "source_wide_missing",
+      "all_family_sources_considered": true,
+      "alternative_notes": "세 원문과 전체 청크를 모두 제공한다. 비용 또는 회신 금액이 실린 청크를 제외해서 만든 보류가 아니다."
+    },
+    {
+      "id": "C6-VAL-04",
+      "mode": "source_wide_missing",
+      "all_family_sources_considered": true,
+      "alternative_notes": "The complete Round 6 owner line is duplicated across overlapping October 1 chunks; both block alternatives are retained. The calendar destination also appears in the October 15 task block. None establishes the missing timestamp."
+    },
+    {
+      "id": "C6-VAL-05",
+      "mode": "multiple_meetings",
+      "all_family_sources_considered": true,
+      "alternative_notes": "G1의 접시별 수치는 앞 회의에만, G2의 접시별 수치는 뒤 회의에만 있다. 일반 규약의 문턱값만으로 개별 관찰값을 대신할 수 없다."
+    },
+    {
+      "id": "C6-VAL-06",
+      "mode": "general_plus_meeting",
+      "all_family_sources_considered": true,
+      "alternative_notes": "The dated plan requires the April 23 record. The new-number/parent-link rule is present only in the general standard. The no-fixed-return obligation has sufficient alternatives in both the full general paragraph and the later meeting. The overlapping general fragment starts mid-word and is not independently sufficient; redundant supersets of an already sufficient paragraph are not separately listed."
+    },
+    {
+      "id": "C6-VAL-07",
+      "mode": "source_wide_missing",
+      "all_family_sources_considered": true,
+      "alternative_notes": "일반 규약과 두 회의 원문 전체를 제공한다. 앞 회의는 공개 동의와 초안 계획일 뿐 뒤 회의에서 작성된 목록의 내용이나 실제 공개 날짜를 대신하지 않는다."
+    },
+    {
+      "id": "C6-VAL-08",
+      "mode": "source_wide_missing",
+      "all_family_sources_considered": true,
+      "alternative_notes": "All family chunks are supplied. The first later-meeting block preserves the adjacent-row origin in a complete sentence; its overlapping successor begins mid-sentence and does not independently establish adjacency. Both blocks do preserve the full retained-identity decision. Neither supplies a planting site or count."
+    }
+  ],
+  "source_and_review_originals": {
+    "data/evaluation/meetings-c6-validation-source-fingerprints-v1.json": "0f4942f1ffc1ca910dc61a80a24448d3ac10f45cddb4e40a0ffcfbd779d9d8c2",
+    "data/evaluation/meetings-c6-validation-v1/java-parity.json": "e3a4d04b69223490ab8732d46e7c4d779971f13cf31d0f3c9a40b39927c3ab37",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-2026-10-01.md": "f6ef54ee5490a6629fe57e5f1b9874d215387a61df739395d165f88245cdcbe7",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-2026-10-15.md": "d8be27d6f0c97868122266ae518d04354e05b28bb157cb190a6501e77459b4df",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-team-compass.md": "b1097399f704d32bde0c99b9b2efc1e0e57e189e98120a48e02a10ba0de6cebb",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-2026-04-09.md": "b1efcc40a4a3579f63f27a09825d1e6d1a47a2d489998367201990e43912e48a",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-2026-04-23.md": "e4e00b31504aed5bf005453c4b9e24264b0b4008b5c3459cc5f8a6c1a161f6d0",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-seed-record-standard.md": "ad7fc93c10774bb184f05a5c3a77469e09d48125061ef0549e9fb16d3387b599",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-2026-10-01.md": "f6ef54ee5490a6629fe57e5f1b9874d215387a61df739395d165f88245cdcbe7",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-2026-10-15.md": "d8be27d6f0c97868122266ae518d04354e05b28bb157cb190a6501e77459b4df",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-team-compass.md": "b1097399f704d32bde0c99b9b2efc1e0e57e189e98120a48e02a10ba0de6cebb",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-2026-04-09.md": "b1efcc40a4a3579f63f27a09825d1e6d1a47a2d489998367201990e43912e48a",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-2026-04-23.md": "e4e00b31504aed5bf005453c4b9e24264b0b4008b5c3459cc5f8a6c1a161f6d0",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-seed-record-standard.md": "ad7fc93c10774bb184f05a5c3a77469e09d48125061ef0549e9fb16d3387b599",
+    "data/evaluation/meetings-c6-validation-v1/review-metadata-summary.json": "dd559e7ff5d0143564186e422aabbf42ef1ca95f231399c9b46bdc61d4123512",
+    "data/evaluation/meetings-c6-validation-v1/source-adoption-receipt.json": "58be2a4d2e9898b96820b25080909585f995d5edc5cb909495db9756678b52e9",
+    "data/evaluation/meetings-c6-validation-v1/source-freeze.json": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625",
+    "data/evaluation/meetings-c6-validation-v1/source-freshness.json": "52250dd05c3d6d828183177f23316949a53c27c9dfcd5b124be98ba50db3c3b5",
+    "data/evaluation/meetings-c6-validation-v1/source-inventory.json": "25adcc975df011a444daa5c5a145f0641f99b0a797683f15ed4651321d38f48b",
+    "data/evaluation/meetings-c6-validation-v1/source-manifest.json": "153a2a981a07009ea889eccc82005b68e3e40bcab861a342c4386b86a3605d12",
+    "data/evaluation/meetings-c6-validation-v1/source-prereview-notes.md": "2f1e78b2f38eab5c44237fda7e16539f38a7f7f1079f88a77976b468f0ccf70d",
+    "data/evaluation/meetings-c6-validation-v1/source-prereview.json": "f9b33ad4dfe62b36fa4b1c0cda6e1031ef5a1db958cc2a963f4a56cd825a32dc",
+    "data/evaluation/meetings-c6-validation-v1/source-processing-receipt.json": "8fd13d9cbb6f9f1bbccae9edce2d534324d56dfdda4b7e412a3e01f9c4fa563b"
+  },
+  "item_files": {
+    "data/evaluation/meetings-c6-validation-v1/draft.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft.json": "196ed54abf3709213e7818fecd30b9f746ff30493133f48b5f37320d7c55ba19",
+    "data/evaluation/meetings-c6-validation-v1/context-selection.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c"
+  },
+  "local_evidence": {
+    ".local/meetings-c6-validation-item-v1/item-spec-v1.json": "08645a611628c7ea42526f86310e8ed3d224d2bc80a61df86cbd17e1c081e2cf",
+    ".local/meetings-c6-validation-item-v1/candidate-v1/structural-result.json": "16d81e3910990cbe62a3cf15fbe0e81c58ef42571d0fa34a2f6e95127420b735",
+    ".local/meetings-c6-validation-item-v1/own-source-catalog-v1.json": "beb0cc007d0b91f502ae9de48b6243b2a80b227f1b60c2408baca816bb48a20f"
+  },
+  "semantic_answer_quality_measured": false,
+  "independent_item_review_performed_by_author": false,
+  "tokenizer_calls": 0,
+  "official_offline_preparations": 0,
+  "native_calls": 0,
+  "Maven_runs": 0,
+  "model_downloads": 0,
+  "Git_mutations": 0,
+  "source_edits": 0,
+  "review_or_freeze_edits": 0,
+  "crosssplit_source_or_item_semantic_reads": 0,
+  "crosssplit_freshness_reason_reads": 0,
+  "next_gate": "Independent item prereview, then accepted item freeze and commit before any official offline preparation."
+}
