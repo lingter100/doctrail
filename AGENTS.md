@@ -1,6 +1,8 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- Official generic diagnostic COMPLETE ONCE atb1a965b afterpush39376766443/PR39376771232 ALL3passed (CI43792138); CLI0/31.202442s/12expected/82bindings+HEADunchanged. Original9pass/F04+F07 blockreject/F12docbytesreject retained; allrenderboundsfit, no parserdefect/modelqualityclaim. rows1fd02754/terminaldfc17868/pub772828a7; public5exactcopies. Official .local/meetings-admission-diagnostic-v1 CONSUMED/NEVERrerun. Allowners/jobsreturned; parent resultcommitCI, next independent bounded source-feasibility review NOTassigned yet. Frozen77/allclosedimmutable; goalactive/Phase1draft.
+
 - Diagnostic test isolation fixed AFTER c87e5ee push: only test902a5bbc changed to tempROOT absent/existing cases; final12passed14.07s/Ruff, sourcec7fbe495/fixtureac7c452a/design/frozen77unchanged. Newunitreceiptd1e3806d exactpubliccopy, v1 preserved. Parentread delta+4source/log4 hashes. c87e5ee push39376544559/PR39376548279 inprogress atcheck, require FINALcommitCI beforeonceofficialrun. OfficialdirABSENT/run0; allownersreturned, parentGit/CI/run. Goalactive/Phase1draft.
 
 - Diagnostic NEW3 returned final11passed13.82s/Ruff; sourcebeforeafter c7fbe495/ac7c452a/469d5748, frozen77unchanged. Parent3+designerreviewer2 findings resolved/blocker0; finalteststrengthening parentread only. Unitreceipt862787a9/publicationd729fe76, logs7verified/observercountformaterror preserved. Official .local/meetings-admission-diagnostic-v1 ABSENT/run0; sourcecommit+normalCI required BEFORE onceCLI. Design27b9f33 push39375421640/PR39375426722 ALL3passed. Allrolesreturned; parent owns commit/CI/officialrun/results. Goalactive/Phase1draft.

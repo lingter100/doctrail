@@ -1,0 +1,186 @@
+{
+  "kind": "parent_verified_synthetic_diagnostic_publication",
+  "recorded_at_utc": "2026-10-20T05:54:33.918974+00:00",
+  "execution_head": "b1a965b6188ea2efe10278d7795230780842bb8c",
+  "exact_copies": {
+    "reservation.json": {
+      "sha256": "b37d604d3c1e3ca3c69b968805fff277db55022a5260885a84a9cc472dde1367",
+      "bytes": 8925
+    },
+    "rows.jsonl": {
+      "sha256": "1fd02754a61169500389e3a001a2493fbbd2c941763c650f109f48b7949f527e",
+      "bytes": 136345
+    },
+    "receipt.json": {
+      "sha256": "dfc178687f42b0cadd2df310e8b8c931aec21a1726fd23484854462d53d92b7b",
+      "bytes": 18396
+    },
+    "cli-summary.json": {
+      "sha256": "ef2de51c39b545a2a30e79c52c74407805b6ca6a3484faeb42e4111c6030f260",
+      "bytes": 638
+    },
+    "process-receipt.json": {
+      "sha256": "971448ae2f76d3cba0119e638bfee40a2c14af1d04981d33f0d8efeaa56bd3a5",
+      "bytes": 2480
+    }
+  },
+  "verified_bound_files": 82,
+  "all_expected_observations": 12,
+  "matrix": [
+    {
+      "id": "F01",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 3,
+      "whitespace": 0,
+      "processed_bytes": 8,
+      "emitted_chunk_bytes": 8,
+      "max_M0_bytes": 2680,
+      "schema_bytes": 434,
+      "max_wire_bytes": 3847
+    },
+    {
+      "id": "F02",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 23,
+      "whitespace": 0,
+      "processed_bytes": 86,
+      "emitted_chunk_bytes": 86,
+      "max_M0_bytes": 4550,
+      "schema_bytes": 487,
+      "max_wire_bytes": 5786
+    },
+    {
+      "id": "F03",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 24,
+      "whitespace": 0,
+      "processed_bytes": 90,
+      "emitted_chunk_bytes": 90,
+      "max_M0_bytes": 4644,
+      "schema_bytes": 490,
+      "max_wire_bytes": 5884
+    },
+    {
+      "id": "F04",
+      "original_status": "rejected",
+      "original_codes": [
+        "c7_block_bounds"
+      ],
+      "blocks": 25,
+      "whitespace": 0,
+      "processed_bytes": 94,
+      "emitted_chunk_bytes": 94,
+      "max_M0_bytes": 4738,
+      "schema_bytes": 493,
+      "max_wire_bytes": 5982
+    },
+    {
+      "id": "F05",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 23,
+      "whitespace": 10,
+      "processed_bytes": 33,
+      "emitted_chunk_bytes": 33,
+      "max_M0_bytes": 4495,
+      "schema_bytes": 462,
+      "max_wire_bytes": 5696
+    },
+    {
+      "id": "F06",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 24,
+      "whitespace": 11,
+      "processed_bytes": 35,
+      "emitted_chunk_bytes": 35,
+      "max_M0_bytes": 4589,
+      "schema_bytes": 462,
+      "max_wire_bytes": 5790
+    },
+    {
+      "id": "F07",
+      "original_status": "rejected",
+      "original_codes": [
+        "c7_block_bounds"
+      ],
+      "blocks": 25,
+      "whitespace": 11,
+      "processed_bytes": 36,
+      "emitted_chunk_bytes": 36,
+      "max_M0_bytes": 4678,
+      "schema_bytes": 465,
+      "max_wire_bytes": 5883
+    },
+    {
+      "id": "F08",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 3,
+      "whitespace": 0,
+      "processed_bytes": 18,
+      "emitted_chunk_bytes": 18,
+      "max_M0_bytes": 2695,
+      "schema_bytes": 434,
+      "max_wire_bytes": 3858
+    },
+    {
+      "id": "F09",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 3,
+      "whitespace": 0,
+      "processed_bytes": 24,
+      "emitted_chunk_bytes": 24,
+      "max_M0_bytes": 2705,
+      "schema_bytes": 434,
+      "max_wire_bytes": 3868
+    },
+    {
+      "id": "F10",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 4,
+      "whitespace": 0,
+      "processed_bytes": 1102,
+      "emitted_chunk_bytes": 1252,
+      "max_M0_bytes": 4201,
+      "schema_bytes": 436,
+      "max_wire_bytes": 5367
+    },
+    {
+      "id": "F11",
+      "original_status": "passed",
+      "original_codes": [],
+      "blocks": 3,
+      "whitespace": 0,
+      "processed_bytes": 2050,
+      "emitted_chunk_bytes": 2050,
+      "max_M0_bytes": 4720,
+      "schema_bytes": 434,
+      "max_wire_bytes": 7929
+    },
+    {
+      "id": "F12",
+      "original_status": "rejected",
+      "original_codes": [
+        "c7_document_bytes"
+      ],
+      "blocks": 3,
+      "whitespace": 0,
+      "processed_bytes": 2051,
+      "emitted_chunk_bytes": 2051,
+      "max_M0_bytes": 4721,
+      "schema_bytes": 434,
+      "max_wire_bytes": 7933
+    }
+  ],
+  "actual_source_admissions": 0,
+  "model_calls": 0,
+  "human_review": 0,
+  "interpretation": "All fixed generic observations matched. F04/F07 remain rejected by the unchanged block count despite satisfying separately observed render bounds. F12 retains document-byte rejection. No parser defect established and no threshold change authorized.",
+  "limits": "Synthetic engineering observation only; no public-source feasibility, token-count, model latency, semantic quality, adoption or deployment conclusion. This single diagnostic is complete and must not be rerun."
+}
