@@ -1,6 +1,8 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- Result commit3a9fa48 normalized CLI stdout finalCRLF only (original638/ef2de51c vsGit637/cc308c14). Parent stageassertFAILED but shell continuedcommit/push: preserved error, notexperimentfailure. NEWsinglepath-text repair restoresunchangedoriginal; verify successful staging in SEPARATE toolcall BEFORE commit. Publicrepairreceipt recordsfacts. Officialrun remains1/consumed; no rerun. Parent repaircommit/CI next, independent sourcefeasibility notassigned,goalactive.
+
 - Official generic diagnostic COMPLETE ONCE atb1a965b afterpush39376766443/PR39376771232 ALL3passed (CI43792138); CLI0/31.202442s/12expected/82bindings+HEADunchanged. Original9pass/F04+F07 blockreject/F12docbytesreject retained; allrenderboundsfit, no parserdefect/modelqualityclaim. rows1fd02754/terminaldfc17868/pub772828a7; public5exactcopies. Official .local/meetings-admission-diagnostic-v1 CONSUMED/NEVERrerun. Allowners/jobsreturned; parent resultcommitCI, next independent bounded source-feasibility review NOTassigned yet. Frozen77/allclosedimmutable; goalactive/Phase1draft.
 
 - Diagnostic test isolation fixed AFTER c87e5ee push: only test902a5bbc changed to tempROOT absent/existing cases; final12passed14.07s/Ruff, sourcec7fbe495/fixtureac7c452a/design/frozen77unchanged. Newunitreceiptd1e3806d exactpubliccopy, v1 preserved. Parentread delta+4source/log4 hashes. c87e5ee push39376544559/PR39376548279 inprogress atcheck, require FINALcommitCI beforeonceofficialrun. OfficialdirABSENT/run0; allownersreturned, parentGit/CI/run. Goalactive/Phase1draft.

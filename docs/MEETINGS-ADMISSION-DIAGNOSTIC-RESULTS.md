@@ -44,3 +44,9 @@ F01 정규화, F08 소개 문장과 목록, F09 코드블록도 기대와 일치
 [CI 관측 기록](../experiments/results/meeting-admission-diagnostic-ci-v1.json), [공개 복사와 전체 측정표](../experiments/results/meeting-admission-diagnostic-v1/publication.json), [행 원본](../experiments/results/meeting-admission-diagnostic-v1/rows.jsonl), [공식 영수증](../experiments/results/meeting-admission-diagnostic-v1/receipt.json), [프로세스 기록](../experiments/results/meeting-admission-diagnostic-v1/process-receipt.json)을 보존했다.
 
 주요 SHA256은 rows `1fd02754a61169500389e3a001a2493fbbd2c941763c650f109f48b7949f527e`, terminal `dfc178687f42b0cadd2df310e8b8c931aec21a1726fd23484854462d53d92b7b`, publication `772828a7bf4a5204816299678c9d63828d2fd908a8abd8e09eb8883ba533a8c4`다. `.local/meetings-admission-diagnostic-v1`은 소비된 공식 실행이므로 삭제하거나 재실행하지 않는다.
+
+## 공개 저장 과정의 줄바꿈 수선
+
+최초 결과 커밋3a9fa48에서 CLI 요약의 마지막 CRLF가 Git에 의해 LF로 바뀌었다(원본638bytes/ef2de51c, 최초 커밋637bytes/cc308c14). Index exact 검사 assertion이 실패했지만 부모의 shell 명령 나열이 이후 commit/push를 중단하지 않은 검증 흐름 오류였다. 원본 파일·공식 진단 결과의 실패가 아니다.
+
+원본 stdout와 local 공개 copy는 그대로 보존했고 해당 파일 한 경로에만 `-text`를 적용해 원래 bytes를 다시 stage한다. 수선 검증과 commit은 분리해서 실행하며 최초 커밋·실패도 남긴다. [공개 저장 수선 기록](../experiments/results/meeting-admission-diagnostic-publication-repair-v1.json)에 차이와 원인을 기록했다. 공식 진단은 다시 실행하지 않는다.

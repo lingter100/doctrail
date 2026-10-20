@@ -31,3 +31,5 @@ data/evaluation/meetings-c7-validation-v1/source-adoption-receipt.json -text
 # Preserve the exact original Windows unit-verification receipt.
 experiments/results/meeting-admission-diagnostic-implementation-v1.json -text
 experiments/results/meeting-admission-diagnostic-implementation-v2.json -text
+# The official Windows CLI stdout includes a final CRLF; keep its exact bytes.
+experiments/results/meeting-admission-diagnostic-v1/cli-summary.json -text

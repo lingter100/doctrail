@@ -1,0 +1,15 @@
+{
+  "kind": "publication_git_newline_repair",
+  "initial_result_commit": "3a9fa485c56a1c9b67aeda6bc2ef1b4222705798",
+  "file": "experiments/results/meeting-admission-diagnostic-v1/cli-summary.json",
+  "original_stdout_and_working_copy_sha256": "ef2de51c39b545a2a30e79c52c74407805b6ca6a3484faeb42e4111c6030f260",
+  "initial_committed_sha256": "cc308c14da0313a6ad64fd2aba3f5d271acba88c535dd88c24b64a53f60bac1b",
+  "original_bytes": 638,
+  "initial_committed_bytes": 637,
+  "difference": "Only the final Windows stdout CRLF was normalized to LF by Git.",
+  "initial_stage_exact_check": "failed",
+  "cause": "The shell sequence continued to commit and push after the Python assertion exited nonzero. This is a parent verification-flow error, not diagnostic failure.",
+  "repair": "Add a single exact-path -text attribute and stage the original unchanged bytes. Verify staging in a separate successful command before committing.",
+  "preserved": "Original CLI output, rows, receipt, process capture and initial commit are retained unchanged; no experiment rerun or history rewrite.",
+  "official_diagnostic_runs": 1
+}
