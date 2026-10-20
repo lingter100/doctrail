@@ -1,6 +1,8 @@
 # DocTrail project instructions
 
 ## Scope and truthfulness
+- C7 source9888255 userauthorcommitterlingter100/committed17exact, push39370305643/PR39370310599 all3CIpassed. Freeze77 SHA6f829eeb unchanged; separateCIreceipt1bb8d365 tocommit BEFORE newpriorindex/actualsplitroles/sourceauthorship. Final244/1skip/Ruff andindependentreview10c127ea preserved; allownersreturned/ownedjobsfinished. NoC7source/item/judge/tokenizer/native. Next freshsourceadmission prospective-manifest+receipt/freeze chain, NEVERoldpool/C6reuse. ReadSTATUS; goalactive/Phase1/PR14draft.
+
 - C7 NEW8 RETURNED final244passed/1Windowslinkskip251.30s/Ruff/same8+existing2SHA/LF; allownedcommandsfinished. ActualAstrahigh independentreview10c127ea initial5resolved/blocker0. Wholetoolchain77 SHA6f829eeb/code66/candidates1664 frozen; implementationreceiptde571994. Priorcode123/closedC6public81/oldfreeze6 unchanged. Parent source+freezecommit/exactpush+PRCI then separateCIreceipt BEFORE newsource roles/data. NoC7source/item/judge/tokenizer/native; nooldrerun. ReadSTATUS; goalactive/Phase1/PR14draft.
 
 - C7 first4 delta preparebe170c43 independentlyread no remainingblocker; preptest17a8fa5b last2fixturelines shared. Preserved78/1skip/Ruff1,100/1fail/1skip/Ruff1,encodeempty+processorcapture2fail,118pass/1skip/2fixturefail; targetedtransition12/Ruff0 passed afterfixturefix. ActualAstrahigh host_proof_profile NOW ownsremainingprobe/audit4 thenfinal8checks; c7_implementation_review final8read/localreceiptpending. Parent freezehelperprepared NOTexecuted; nofreeze/data/tokenizer/native. ReadSTATUS/activeowners; goalactive/Phase1/PR14draft.

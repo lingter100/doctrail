@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-single-thinking-c7-v1",
+  "head_sha": "98882554595626b4a9f69be930cc4cb3aa47eb95",
+  "observed_at": "2026-10-20T04:39:26.790669+00:00",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+    "sha256": "6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca"
+  },
+  "runs": [
+    {
+      "run_id": 39370305643,
+      "head_sha": "98882554595626b4a9f69be930cc4cb3aa47eb95",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39370305643"
+    },
+    {
+      "run_id": 39370310599,
+      "head_sha": "98882554595626b4a9f69be930cc4cb3aa47eb95",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39370310599"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "claim_scope": "Parent directly observed exact source CI. No C7 source data, tokenizer, native generation or answer quality result. Recorded JSON is not an independent GitHub attestation."
+}

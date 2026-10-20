@@ -1,6 +1,6 @@
 # C7 자료 수용 검사 구현 기록
 
-상태: NEW8 구현·최종 합성 검사244통과/1skip·독립 코드 검토·77파일 동결을 완료했다. 정확한 구현 커밋의 CI 확인이 다음이다. 실제 C7 자료 채택, 토크나이저 준비, 모델 답변 생성과 서비스 채택은 아직0이다. [설계](MEETINGS-C7-PLAN.md)는 c10b753으로 커밋했으며 [설계 CI 영수증](../experiments/results/meetings-c7-design-ci-v1.json)은 해당 커밋의 backend/web/java-service 성공만 증명한다. 미커밋 구현의 CI로 해석하지 않는다.
+상태: NEW8 구현·최종 합성 검사244통과/1skip·독립 코드 검토·77파일 동결과 정확한 구현 커밋9888255의 양쪽 필수 CI를 완료했다. Push39370305643/PR39370310599의 backend/web/java-service가 모두 성공했고 [별도 구현 CI 영수증](../data/evaluation/meetings-c7-toolchain-ci-v1.json)에 보존했다. 실제 C7 자료 채택, 토크나이저 준비, 모델 답변 생성과 서비스 채택은 아직0이다. [설계](MEETINGS-C7-PLAN.md) c10b753의 [설계 CI](../experiments/results/meetings-c7-design-ci-v1.json)와 구분한다.
 
 ## 해결하려는 문제와 선택
 
@@ -41,6 +41,6 @@ uv run --no-sync ruff check src/doctrail/meeting_c7_review.py scripts/prepare_me
 
 동일한 최종 파일로 합성 회귀와 독립 검토를 마친 뒤 [전체 도구 동결](../data/evaluation/meetings-c7-toolchain-freeze-v1.json)을 생성했다.77파일·Python66·import 후보1664(부재1598), SHA6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca다. 봉인된 재탐색도 일치했다. 기존 코드123개와 닫힌 C6 공개81개 및 이전 동결6개의 bytes 불변을 확인했다. [구현 영수증](../experiments/results/meetings-c7-implementation-v1.json)은 최종 검사·초기 실패·독립 검토와 각 원본 hash를 함께 남긴다.
 
-정확한 커밋의 필수 CI와 별도 영수증을 보존한 다음 새 자료 역할을 등록한다. 원문 이용 조건·의미적 적합성·중복·Java 처리 일치와 독립 질문 검토를 거쳐야 실제 모델 평가로 넘어간다.
+정확한 source17파일의 working/committed bytes와 GitHub author/committer lingter100을 확인했다. 양쪽 필수 CI 성공을 확인한 별도 영수증을 커밋한 다음 새 자료 역할을 등록한다. 원문 이용 조건·의미적 적합성·중복·Java 처리 일치와 독립 질문 검토를 거쳐야 실제 모델 평가로 넘어간다.
 
 면접에서는 “입력을 줄여 답이 맞게 했다”가 아니라 “자료를 보기 전에 고정한 수용 규칙으로 후보를 거부할 수 있게 했고, 그 규칙을 만족한 새 자료에서도 별도의 의미 평가가 필요하다”고 설명할 수 있어야 한다. 사용자 직접 검수는 아직 수행되지 않았다.
