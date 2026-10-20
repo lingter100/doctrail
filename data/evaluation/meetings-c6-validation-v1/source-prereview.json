@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "verdict": "accepted",
+  "rejected_ids": [],
+  "accepted_ids": [
+    "c6-v-jupyter-1001",
+    "c6-v-jupyter-1015",
+    "c6-v-jupyter-compass",
+    "c6-v-sodam-standard",
+    "c6-v-sodam-0409",
+    "c6-v-sodam-0423"
+  ],
+  "author_ids": [
+    "/root/c6_validation_author"
+  ],
+  "reviewer_id": "/root/c6_validation_prereviewer",
+  "human_review_count": 0,
+  "reviewed_at_utc": "2026-10-20T02:56:51.634395+00:00",
+  "scope": "Independent source coherence, saved provenance/license evidence, complete text/chunk processing integrity and current C6 cross-split source freshness; no item or output review.",
+  "registered_roles": {
+    "source_author": "/root/c6_validation_author",
+    "source_prereviewer": "/root/c6_validation_prereviewer",
+    "planned_same_split_item_prereviewer": "/root/c6_validation_prereviewer",
+    "same_split_reuse_disclosed": true,
+    "excluded_from_final_output_judging": true
+  },
+  "setting": {
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "fork_turns": "none",
+    "provenance": "Parent-observed accepted spawn settings and exact committed registration; no runtime introspection."
+  },
+  "continuity_head": "0755660866488bb83fb2d7330c008b2ba1da192f",
+  "toolchain_source_commit": "d3e4e2ef401d490c712f6773b07f19d01418f2dc",
+  "role_registration": {
+    "file": "data/evaluation/meetings-c6-role-registration-v1.json",
+    "sha256": "bbad1743d2c74a52052c8cb8091e32faf0fea2166666fa742a4b100d4df1b476"
+  },
+  "actual_preauthorization": {
+    "file": ".local/meetings-c6-validation-source-review-v1/preauthorization-v1.json",
+    "sha256": "ea494e5345ce6d53f2fc844a2002f01f091994f3052d2fabf5ec56bdc1356aeb"
+  },
+  "author_handoff": {
+    "file": ".local/meetings-c6-validation-source-v1/handoff-v1.json",
+    "sha256": "c61ac18beaeb4fc5f280d2033d336cbdb068849ee3869b4844cb455265e08929"
+  },
+  "own_stage_notes": {
+    "file": "data/evaluation/meetings-c6-validation-v1/source-prereview-notes.md",
+    "sha256": "2f1e78b2f38eab5c44237fda7e16539f38a7f7f1079f88a77976b468f0ccf70d"
+  },
+  "freshness_file": "data/evaluation/meetings-c6-validation-v1/source-freshness.json",
+  "accepted_document_count": 6,
+  "source_chunk_count": 13,
+  "requested_source_edits": 0,
+  "source_files_modified": 0,
+  "public_provenance_and_license_saved_evidence": "accepted_for_three_exact_repository_originals_only_no_linked_content_import",
+  "source_processing_replay": {
+    "document_record_exact": 6,
+    "whole_chunks_exact": 13,
+    "processed_files_exact": 6,
+    "saved_python_and_actual_java_receipt_contract": "passed",
+    "saved_java_tests": 2,
+    "saved_java_failures_errors_skips": 0,
+    "saved_java_seconds": 0.312,
+    "reviewer_java_reruns": 0
+  },
+  "freshness_conclusion": "accepted_after_explicit_finalized_C6_calibration_source_only_comparison",
+  "pristine_or_fully_blind_claim": false,
+  "counts": {
+    "question_or_oracle_work": 0,
+    "calibration_items_oracles_context_selection_reads": 0,
+    "old_closed_source_bodies_read": 0,
+    "output_trace_reasoning_mapping_reads": 0,
+    "tokenizer_calls": 0,
+    "native_generations": 0,
+    "new_tests_or_Maven": 0,
+    "research_downloads": 0,
+    "Git_mutations": 0
+  },
+  "next_gate": "Parent source/freeze commit before any item authorship or item review. This does not authorize inference or service adoption."
+}

@@ -22,3 +22,25 @@
 역할/index 커밋 뒤 각 작성자가 실제 code_contract/GitProof/role 계약을 검증한다. 부모는 이 동안 HEAD를 유지한다. 공개 repo를 본문 전에 예약하고 출처·이용조건을 확인한다. Java parity는 한 명씩 실행한다. 독립 source 검토·동결·커밋 후 item 작성·독립 검토·동결·공식 offline 준비1회·조건부 native 평가로 이어간다. 닫힌 실험과 원본 실패는 재실행/수정하지 않는다.
 
 AI 작성·AI 독립 검토와 사용자 직접 검수는 다르다. 이번 등록은 모델 답변 품질을 입증하지 않으며 Phase1과 PR14는 미완료/draft다. 실제 준비·실패·수용 결과는 이후 절에 추가한다.
+
+## 역할 커밋과 원문 준비 시작
+
+역할/index0755660의 push39359700463/PR39359707085 필수3job을 실제 확인했다. 두 작성자 모두 실제77개 코드 binding·159개 Git revision/path proof·81개 snapshot과 역할/과거 index 검증을 수행하고 동일 HEAD를 확인했다. 부모의 선행 검증을 작성자 자신의 증거로 재사용하지 않았다.
+
+본문 전 예약은 calibration openjs-foundation/cross-project-council, validation jupyter/community-committee다. 최초 validation jupyter/governance는 회의 파일 부재로 제외했고 jupyter/leadership404도 보존했다. 이용조건/원문/처리 일치/독립검토는 작성자와 검토자의 실제 후속 결과로만 기록한다. 아직 source 동결과 문항 작성은 시작하지 않았다.
+
+## 원문 처리와 실제 Java 일치 검사
+
+작성자가 source6개씩을 반환했다. Calibration20청크·Java2통과/0.343초, validation13청크·Java2통과/0.312초다. 각 Maven1회·실패/오류/skip0, 소유 새 JVM0이며 공유 폴더 경합을 피하려고 순차 실행했다. 다른 프로젝트 Java 프로세스는 건드리지 않았다. 문항·tokenizer·native0이며 독립 source 검토는 진행 중이다.
+
+부모는 저자 산출물36개와 staged bytes의 일치를 hash로만 확인했다. 첫 whitespace 오류를 보존하고 공개 원본/처리 사본6개의 upstream 공백, 실제 Java영수증2개의 CRLF에만 경로별 예외를 적용했다. 원본 정규화나 의미 변경은0이다. Java영수증에는 좁은 -text 속성을 추가해 Git 자동 줄바꿈 변환을 막았다. 이 절의 처리/검사 성공은 독립 의미 신선도 수용을 대신하지 않는다.
+
+## 독립 검토 결과와 동결
+
+각 source 작성자가 아닌 별도 Astra xhigh 검토자가 6개씩 수용했다. 거부0·원문 변경0이다. Calibration 동결14개 SHAecf4a08d8d5edc8598646e3be2d25b0203af633ae39d298014c479befcf49b53, validation 동결15개 SHA1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625다. Validation 검토자는 자기 자료 검토를 마친 뒤 명시적 허용을 받아 확정된 현재 calibration SOURCE6만 추가로 비교했다. 질문/oracle 접근은 없었다.
+
+새 자료 사이 exact/의미 근접중복 발견0이며 각 공개 family 내부의 공통 문단1쌍은 이유를 기록하고 수용했다. 과거 자료는 metadata만 비교했으므로 누락3항목과 semantic coverage 한계를 유지한다. 이 결과가 모든 과거 문서의 완전한 중복 부재를 증명하지 않는다. 원문/문항 작성자는 자기 자료를 검토하거나 최종 답변 judge를 맡지 않는다.
+
+저장된 실제 Java2개씩의 XML·로그·영수증과 문서 재처리를 확인했다. Review 단계의 Maven·모델·tokenizer 재실행은0이다. [공개 결과 영수증](../experiments/results/meetings-c6-source-review-v1.json)은 source46개·원본36개와 freeze를 묶는다. 원래 실패·Java CRLF·upstream 공백은 보존했고 사람 검수는0이다.
+
+다음은 이 source/freeze 커밋·필수 CI를 확인한 뒤 새 calibration6/validation8 질문과 oracle을 작성하고 별도 사전검토·동결하는 단계다. 현재 실제 질문·tokenizer·native·답변 의미 판정0이며 Phase1·실서비스 채택·배포는 완료되지 않았다.

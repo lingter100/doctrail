@@ -1,5 +1,13 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · C6 원문 준비·실제 Java 일치·독립 검토
+
+새로 수락된 gpt-6-astra/xhigh 작성자 c6_calibration_author와 c6_validation_author가 실제 Git/동결77/역할 검증을 한 뒤 서로 다른 공개 repo를 본문 전에 예약했다. 각 공개3·새 AI 합성3 원문, revision·이용조건·처리 영수증과 fingerprint를 작성했다. 각각 실제 Maven1회로 Java2개 통과를 검증했고 탐색 탈락·404·경로 오류 등 초기 증거를 보존했다. 같은 split source→item 재사용은 아직 다음 단계이며 새 문항은0이다.
+
+별도 gpt-6-astra/xhigh c6_calibration_prereviewer와 c6_validation_prereviewer가 원문·출처·처리 replay·저장된 실제 Java 검사·신선도를 검토했다. 각각6개 수용/원문 변경0이다. Validation 검토자는 자기 검토 뒤 명시적으로 확정된 현재 calibration SOURCE만 비교했으며 기존 own-stage 검토 노트도 그대로 보존했다. 부모/자료 작성자/사전검토자는 최종 답변 judge에 참여하지 않는다.
+
+부모는 실제 도구 수락 설정·소유권/Maven 순서·GitHub 사용자 신원·필수 CI, metadata/hash 기반 원본36/공개46/도구77/기존112 검증과 커밋을 담당했다. 원문/질문/oracle 의미자료를 읽지 않았고 source 검토 결과는 metadata만 받았다. 다른 C:/saas Java 작업은 식별만 하고 변경하지 않았다. 실제 Java 기록·합성 자료·독립 AI 검토·사용자 검수0·모델 품질0을 분리한다.
+
 ## 2026-10-20 · C6 자료 역할과 metadata 비교 등록
 
 부모가 새 c6_calibration_author/c6_validation_author 및 c6_calibration_prereviewer/c6_validation_prereviewer를 fork none, gpt-6-astra/xhigh로 지정했고 도구가 수락했다. 각자의 실제 UTC 수락시각·영수증 hash·노출을 역할 등록에 보존한다. 런타임 자체 introspection이나 부모 채팅 설정 변경을 주장하지 않는다.

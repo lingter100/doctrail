@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "calibration",
+  "method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+  "reviewer_id": "/root/c6_calibration_prereviewer",
+  "prior_metadata_sha256": "659fef38e0e70c066eb38faba3fe1f4f96181525437c4c84561916ddaa0ba0db",
+  "fingerprints_sha256": "d72c1c7c8c668ef76d956e91e3b7b7650dc18af25da8e3f1208e0a46e316aab1",
+  "missing_historical_fingerprints": [
+    "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+    "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+    "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+  ],
+  "complete_near_duplicate_absence_proven": false,
+  "other_split_sha256": null,
+  "semantic_freshness_verdict": "accepted",
+  "semantic_review_reason": "Independently read all six current full documents. The public records contain distinct dated council discussions and an intact fixed-revision IT guide, with administrative repetition separated from dated facts. The new fictional family develops physical conservation observations, material-dependent trial outcomes and original-versus-replica decisions across a guide and two meetings; it is not an entity/number substitution of the reviewed public governance/IT material. No current whole-document semantic duplicate was found. This is a bounded semantic acceptance, not an inference from hash inequality: historical metadata lacks bodies and only 30 of 98 rows have normalized coverage, so historical paraphrase/translation absence cannot be proved. No validation semantics were opened.",
+  "semantic_notes": {
+    "file": "data/evaluation/meetings-c6-calibration-v1/source-prereview-notes.md",
+    "sha256": "98cc9bb624b339870b913a719e4f08f65cc85c09afaf57c54baae7a03c68cc04"
+  },
+  "within_family_shared_paragraphs": [
+    {
+      "documents": [
+        "c6-cal-doc-01",
+        "c6-cal-doc-02"
+      ],
+      "raw_sha256": [
+        "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+        "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758"
+      ],
+      "paragraph_sha256": [
+        "17905d1e3c1b7ebe864c996f256c3ffce9ab742b96842b3f8c5d7046717c7835"
+      ],
+      "verdict": "accepted_history_repetition",
+      "reason": "The independently read 273-codepoint paragraph is the same three regular-review links in the two public meeting records. It is recurring procedural boilerplate, not copied dated decisions or state progression. Both full meetings retain distinct attendance, agenda discussion and outcomes; preserve the original paragraph and do not count its repetition as independent decision evidence."
+    }
+  ],
+  "exact_checks": {
+    "historical_rows_compared": 98,
+    "normalized_historical_rows": 30,
+    "historical_collisions": [],
+    "new_normalized_document_duplicates": 0,
+    "cross_family_long_paragraph_duplicates": 0,
+    "within_family_long_paragraph_pairs": 1,
+    "whole_source_NFC_line_ending_whitespace_recomputed": true,
+    "raw_blank_line_paragraphs_minimum_codepoints": 200
+  },
+  "limitations": {
+    "historical_closed_bodies_read": 0,
+    "historical_semantic_comparison_from_bodies": false,
+    "validation_semantic_access": false,
+    "cross_split_source_semantic_comparison": "Reserved for separately dispatched isolated validation prereviewer.",
+    "hash_difference_alone_used_as_semantic_freshness": false,
+    "independent_final_output_judgment": false
+  }
+}

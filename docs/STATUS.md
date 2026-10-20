@@ -1,5 +1,29 @@
 # 진행 상태
 
+## 2026-10-20 · C6 원문12개 독립 수용·동결, source 커밋 준비
+
+새 독립 Astra xhigh 검토자가 calibration6/20청크와 validation6/13청크를 각각 수용했다. 거부0·요청 수정0·작성 원문 변경0이다. Calibration freeze14 SHAecf4a08d, validation freeze15 SHA1ef3cea7이며 후자는 확정된 현재 calibration SOURCE6과 자신의 SOURCE6의 의미 중복 비교·fingerprint binding을 포함한다. 문항/oracle은 아직 없고 과거 닫힌 원문은 읽지 않았다. 두 공개 family의 반복 문단 각1쌍은 별도 이유를 남겨 수용했다. 역사적 metadata 누락3항목은 그대로이며 완전한 중복 부재 증명은 아니다.
+
+부모는 source 공개 산출물46개·작성자 원본36개·동결77·기존 union112 hash를 확인했다. 실제 Java2개씩 통과(0.343/0.312초), 저장된 XML/로그/영수증의 독립 replay와 원문 처리 일치를 분리했다. Reviewer Maven 재실행0·tokenizer/native0·사용자 검수0이다. 공개 집계 영수증 experiments/results/meetings-c6-source-review-v1.json SHA8d15ecd6에 초기 whitespace 실패와 원본 보존 경계를 기록했다.
+
+모든 작성자·검토자가 소유권을 반환했고 부모가 source/freeze·검토·문서·역할 CI 영수증을 커밋·push한 뒤 정확한 새 CI를 확인한다. 이후 기존 같은 split 작성자가 실제 새 source commit/Git 증명 후 calibration6/격리 validation8 문항을 작성한다. Source 확정 전 질문을 만들지 않았고 실제 item/모델 품질은 아직0이다. 전체 goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
+## 2026-10-20 · C6 원문 작성 반환, 두 split 독립 검토 중
+
+두 작성자가 source6개씩의 소유권을 반환했다. Calibration20청크·actual Java2통과0.343초, validation13청크·actual Java2통과0.312초이며 각각 Maven1회·소유 새 JVM0이다. 두 묶음의 공개3+합성3 원문과 처리 결과를 보존했다. 두 검토자도 같은 HEAD0755660에서 actual code77/Git159/role/prior preauth를 통과했다. 아직 source 수용/동결이나 모델 의미 품질 결과는 아니다.
+
+Calibration reviewer는 자기 source6을 검토 중이다. Validation reviewer는 자기 source 검토만 시작했고, calibration source 수용/freeze 확인 전에는 cross-split 본문을 열지 않는다. 이후 명시적으로 finalized C6 calibration SOURCE만 비교하고 문항/oracle은 금지한다. 각 공개 family의 반복 긴 문단1쌍을 독립 판단한다. 원문36파일의 작성자 hash와 Git index bytes가 일치했다.
+
+첫 whitespace 검사는 원문 공백/Java CRLF로 실패했고 .local/c6-source-initial-whitespace-v1.log에 보존했다. 공개 원본3+처리 사본3의 trailing whitespace와 Java영수증2의 CRLF만 경로별 예외로 검사했다. 좁은 -text2로 정확한 영수증 bytes를 보존했으며 본문 수정0이다. 부모는 source가 반환될 때까지 HEAD를 유지하며 source 검토/freeze 뒤 결과·문서·CI를 함께 커밋한다. 문항·tokenizer/native0, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · C6 역할 커밋0755660 CI 통과, 실제 원문 준비 중
+
+역할/index7파일을0755660866488bb83fb2d7330c008b2ba1da192f로 사용자 명의 커밋·push했다. GitHub author/committer lingter100·PR14 head를 확인했고 push39359700463/PR39359707085 필수3job 모두 성공했다. 별도 관측 영수증은 experiments/results/meetings-c6-role-registration-ci-v1.json이다.
+
+두 작성자는 같은 HEAD에서 실제 code_contract77/GitProof159/snapshot81/role_contract/prior committed bytes를 통과했다. 각 영수증은 .local/meetings-c6-{calibration,validation}-source-v1/preauthorization-v1.json이며 부모가 hash·HEAD·결과를 읽었다. 그 후 calibration은 openjs-foundation/cross-project-council, validation은 jupyter/community-committee를 본문 전 예약했다. Validation의 처음 jupyter/governance는 날짜 있는 회의 자료 부재로 미채택했고 jupyter/leadership404도 보존한다. 예약은 이용조건 수용이나 source 완료가 아니다.
+
+현재 작성자2명이 자기 split source만 준비하며 calibration 사전검토자는 code/metadata preauth만 수행 중이다. 부모는 그 검증 동안 HEAD를 유지한다. Java parity는 아직 슬롯 배정 전이며 질문·tokenizer/native0, source 독립검토·동결은 아직 완료되지 않았다. 기존112개와 C6 동결77 보존, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C6 새 자료 역할과 과거 출처 metadata 등록
 
 CI 영수증1d9227b의 push39358452404/PR39358456535도 필수3job 성공을 직접 확인했다. 새 Astra xhigh 작성자2명·독립 사전검토자2명이 등록만 수락했다. 같은 split source/item 역할 재사용과 자동 AGENTS·memory·공개 metadata 노출을 기록했고 자기검토·split 겸임·최종 답변 judge 참여를 금지한다.

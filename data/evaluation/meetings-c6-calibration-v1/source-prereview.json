@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "calibration",
+  "kind": "independent_source_prereview",
+  "verdict": "accepted",
+  "reviewer_id": "/root/c6_calibration_prereviewer",
+  "author_ids": [
+    "/root/c6_calibration_author"
+  ],
+  "accepted_ids": [
+    "c6-cal-doc-01",
+    "c6-cal-doc-02",
+    "c6-cal-doc-03",
+    "c6-cal-doc-04",
+    "c6-cal-doc-05",
+    "c6-cal-doc-06"
+  ],
+  "rejected_ids": [],
+  "human_review_count": 0,
+  "reviewed_at_utc": "2026-10-20T02:53:09.243293+00:00",
+  "source_documents": 6,
+  "chunks": 20,
+  "source_edits": 0,
+  "document_verdicts": [
+    {
+      "document_id": "c6-cal-doc-01",
+      "verdict": "accepted",
+      "reason": "Full dated council meeting; attendance, agenda, contemporaneous status and recurring administrative sections retained. New PR and tentative status are not treated as completion.",
+      "raw_sha256": "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+      "chunks": 5
+    },
+    {
+      "document_id": "c6-cal-doc-02",
+      "verdict": "accepted",
+      "reason": "Distinct later full meeting with coherent follow-up and other agenda topics. Closure suggestion is distinguished from a completed closure; blank recording and absent private-session detail remain unfilled.",
+      "raw_sha256": "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758",
+      "chunks": 6
+    },
+    {
+      "document_id": "c6-cal-doc-03",
+      "verdict": "accepted",
+      "reason": "Complete fixed-revision support guide with scope, contact channels, priority and emergency sections. Related to the family infrastructure topic but no unsupported 2025 effective date or causal link to a meeting is inferred.",
+      "raw_sha256": "a052c558a2593cdb67c14819c02aa280cbfa459841a8168eace6c47b425ceecb",
+      "chunks": 3
+    },
+    {
+      "document_id": "c6-cal-doc-04",
+      "verdict": "accepted",
+      "reason": "Explicitly fictional general conservation guide with consistent handling, reversible trial, light/time and documentation constraints; not a list of isolated answer facts.",
+      "raw_sha256": "49e30742d9110056e5c22dac079cfc085c9e061b1b6881953f5dc05a565f0958",
+      "chunks": 2
+    },
+    {
+      "document_id": "c6-cal-doc-05",
+      "verdict": "accepted",
+      "reason": "Explicitly fictional first dated meeting distinguishes condition observations, original storage and planned trial alternatives; decisions and unresolved issues fit the guide.",
+      "raw_sha256": "149fd46ea5b73f72a3c362576087636ab185a0aa9fffc94ab99218c0b9024876",
+      "chunks": 2
+    },
+    {
+      "document_id": "c6-cal-doc-06",
+      "verdict": "accepted",
+      "reason": "Explicitly fictional later meeting carries trial evidence forward without treating trial paper as original authorization; original/replica roles and limited inspection remain coherent with earlier records.",
+      "raw_sha256": "60c1f41802550dd549078b524f209fbc8c9683af7649f30b589a2fdefe931d3f",
+      "chunks": 2
+    }
+  ],
+  "notes": {
+    "file": "data/evaluation/meetings-c6-calibration-v1/source-prereview-notes.md",
+    "sha256": "98cc9bb624b339870b913a719e4f08f65cc85c09afaf57c54baae7a03c68cc04"
+  },
+  "scope": [
+    "source coherence",
+    "provenance and complete license preservation",
+    "full-document representative completeness",
+    "date and status distinctions",
+    "independent bounded semantic freshness",
+    "actual document replay",
+    "saved actual Java evidence agreement"
+  ],
+  "source_artifact_bindings": {
+    "data/evaluation/meetings-c6-calibration-source-fingerprints-v1.json": "d72c1c7c8c668ef76d956e91e3b7b7650dc18af25da8e3f1208e0a46e316aab1",
+    "data/evaluation/meetings-c6-calibration-v1/java-parity.json": "db04135999a6334a7b39c5c823d2fc36631b5bea4a0c99063ffe708dc0a56ec7",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-01.txt": "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-02.txt": "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-03.txt": "a052c558a2593cdb67c14819c02aa280cbfa459841a8168eace6c47b425ceecb",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-04.txt": "49e30742d9110056e5c22dac079cfc085c9e061b1b6881953f5dc05a565f0958",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-05.txt": "149fd46ea5b73f72a3c362576087636ab185a0aa9fffc94ab99218c0b9024876",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-06.txt": "60c1f41802550dd549078b524f209fbc8c9683af7649f30b589a2fdefe931d3f",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-01.md": "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-02.md": "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-03.md": "a052c558a2593cdb67c14819c02aa280cbfa459841a8168eace6c47b425ceecb",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-04.md": "49e30742d9110056e5c22dac079cfc085c9e061b1b6881953f5dc05a565f0958",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-05.md": "149fd46ea5b73f72a3c362576087636ab185a0aa9fffc94ab99218c0b9024876",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-06.md": "60c1f41802550dd549078b524f209fbc8c9683af7649f30b589a2fdefe931d3f",
+    "data/evaluation/meetings-c6-calibration-v1/source-adoption-receipt.json": "778eef5d1bcc743892ce0c4472fc2ce6fa2ed2de7a7b5e4436b2f33894e8a4c4",
+    "data/evaluation/meetings-c6-calibration-v1/source-inventory.json": "90e5cbfb711084704167576b1d139fa8532729a74f51f899d4479d638b6775db",
+    "data/evaluation/meetings-c6-calibration-v1/source-manifest.json": "2a945c9c9ad0dd3191aed9d64e912f31fd0d32243d1d32bee3881c7953ffcf76",
+    "data/evaluation/meetings-c6-calibration-v1/source-processing-receipt.json": "f668dcc304917073146edf41ca9fcc356ae1cffc7963153bcdc5c7c0062ee867"
+  },
+  "saved_evidence_sha256": {
+    ".local/meetings-c6-calibration-source-review-v1/preauthorization-v1.json": "ca709528685d9f93edfb4ddd3534359c71c38385e387f54f5cbbecf1140a2006",
+    ".local/meetings-c6-calibration-source-v1/handoff-v1.json": "57591c90d528265c6897919019ead87f2b0e8004c3611498a9adbbdf98e2933e",
+    ".local/meetings-c6-calibration-source-v1/java-run-v1/TEST-io.doctrail.MeetingSourceParityTest.xml": "a978f1edae818a45d5a8a77ed7480c7a1e0939a6f466d2a3fa01b63b9f0ed0e9",
+    ".local/meetings-c6-calibration-source-v1/java-run-v1/io.doctrail.MeetingSourceParityTest.txt": "bd72df45bde164b47285b0c6c1294b77e8c68c09e709d870717b1c68745363c5",
+    ".local/meetings-c6-calibration-source-v1/java-run-v1/java-parity.json": "db04135999a6334a7b39c5c823d2fc36631b5bea4a0c99063ffe708dc0a56ec7",
+    ".local/meetings-c6-calibration-source-v1/java-run-v1/maven.log": "2905f77c19700988056578125caf3cb7ca844e08044a4a0fcb4e5bb82e2b1e96",
+    ".local/meetings-c6-calibration-source-v1/java-run-v1/run-receipt.json": "03cd23e13ee607060ddd888e88ed7fb45b5bceb006f594604f965072d9ed6ffe",
+    ".local/meetings-c6-calibration-source-v1/openjs-commit.json": "04cb9719a7cf8344c490f85d22cdaaf8be7c67d3a521dd797ea60a8fc5a121df",
+    ".local/meetings-c6-calibration-source-v1/openjs-tree.json": "a3559f4f7f22606819e4b719225fc7f17086c7326450ddf2c3c9b78ba12d9341",
+    ".local/meetings-c6-calibration-source-v1/preauthorization-v1.json": "a2bd1a4c1a7464eeaddf34121f8f47f4b2db9c01be1234b907b6723e3f36dcee",
+    ".local/meetings-c6-calibration-source-v1/public-inspection-v1/LICENSE.md": "5daf0195e02254ad479ed5f964a3006de25b0a37c91825d267bb8104ded51cd9",
+    ".local/meetings-c6-calibration-source-v1/public-inspection-v1/meetings__2025__2025-01-07.md": "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+    ".local/meetings-c6-calibration-source-v1/public-inspection-v1/meetings__2025__2025-02-04.md": "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758",
+    ".local/meetings-c6-calibration-source-v1/public-inspection-v1/project-resources__requesting_LFIT_support.md": "a052c558a2593cdb67c14819c02aa280cbfa459841a8168eace6c47b425ceecb",
+    ".local/meetings-c6-calibration-source-v1/python-processing-v1/inventory.json": "90e5cbfb711084704167576b1d139fa8532729a74f51f899d4479d638b6775db",
+    ".local/meetings-c6-calibration-source-v1/python-processing-v1/receipt.json": "f668dcc304917073146edf41ca9fcc356ae1cffc7963153bcdc5c7c0062ee867",
+    ".local/meetings-c6-calibration-source-v1/repo-metadata-openjs-cpc.json": "0ab59e3d01d183853d073cb6a961c66b3efef9310f3d2e4872d7a8f789159a10",
+    ".local/meetings-c6-calibration-source-v1/source-adoption-pre-java-v1.json": "23c4cef1a749a3f8839ca1c7e59eef13e1a82613c3413a190d05cd167fcf4aef"
+  },
+  "continuity": {
+    "head": "0755660866488bb83fb2d7330c008b2ba1da192f",
+    "prior_actual_preauthorization_sha256": "ca709528685d9f93edfb4ddd3534359c71c38385e387f54f5cbbecf1140a2006",
+    "prior_preauthorization_bindings_unchanged": 82,
+    "toolchain_files_unchanged": 77,
+    "actual_roles_and_prior_metadata_unchanged": true,
+    "handoff_sha256": "57591c90d528265c6897919019ead87f2b0e8004c3611498a9adbbdf98e2933e",
+    "author_artifacts_unchanged": 18,
+    "full_code_proof_repeated": false
+  },
+  "verification": {
+    "immutable_document_record_replay_documents": 6,
+    "inventory_content_and_all_chunk_fields_exact": true,
+    "processed_copies_exact": 6,
+    "processing_receipt_contract_passed": true,
+    "java_receipt_contract_passed": true,
+    "java_public_copy_exact": true,
+    "saved_java_XML_text_log_and_receipt_agree": true,
+    "saved_actual_java_tests": 2,
+    "saved_actual_java_failures": 0,
+    "saved_actual_java_errors": 0,
+    "saved_actual_java_skips": 0,
+    "saved_actual_java_suite_seconds": 0.343,
+    "reviewer_Maven_invocations": 0,
+    "public_source_Git_blob_size_matches": 3,
+    "full_license_Git_blob_size_match": true,
+    "live_upstream_refetches": 0
+  },
+  "role_disclosure": {
+    "same_split_source_item_review_reuse": true,
+    "self_review": false,
+    "cross_split_review": false,
+    "excluded_from_final_output_judging": true,
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "settings_provenance": "Parent-observed accepted spawn arguments and committed registration; no runtime introspection.",
+    "automatic_AGENTS_memory_public_metadata_exposure": true,
+    "pristine_or_fully_blind_claim": false
+  },
+  "limits": {
+    "old_closed_source_reads": 0,
+    "validation_semantic_reads": 0,
+    "question_or_oracle_reads_or_authorship": 0,
+    "answer_trace_mapping_reads": 0,
+    "tokenizer_calls": 0,
+    "native_generations": 0,
+    "product_model_execution": 0,
+    "Git_mutations": 0,
+    "human_reviews": 0,
+    "future_item_acceptance": false,
+    "final_answer_quality_measured": false,
+    "service_adoption": false
+  },
+  "next_gate": "Commit accepted source freeze and source files before separately dispatched item work."
+}

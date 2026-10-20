@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "reviewed_at_utc": "2026-10-20T02:56:51.634395+00:00",
+  "method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+  "prior_metadata_sha256": "659fef38e0e70c066eb38faba3fe1f4f96181525437c4c84561916ddaa0ba0db",
+  "fingerprints_sha256": "0f4942f1ffc1ca910dc61a80a24448d3ac10f45cddb4e40a0ffcfbd779d9d8c2",
+  "missing_historical_fingerprints": [
+    "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+    "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+    "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+  ],
+  "complete_near_duplicate_absence_proven": false,
+  "reviewer_id": "/root/c6_validation_prereviewer",
+  "semantic_freshness_verdict": "accepted",
+  "semantic_review_reason": "All six validation originals were read in full and independently compared with all six finalized C6 calibration originals after explicit SOURCE-only authorization. No cross-split translated, paraphrased or identity-swapped reuse of a substantive source, decision sequence or fact pattern was found. Exact fingerprint absence is supporting evidence, not the semantic decision. Shared document composition and high-level evidence-preservation conventions are distinguished from the different domain mechanisms and outcomes. Historical semantic coverage remains limited because closed bodies were not opened.",
+  "within_family_shared_paragraphs": [
+    {
+      "documents": [
+        "c6-v-jupyter-1001",
+        "c6-v-jupyter-1015"
+      ],
+      "raw_sha256": [
+        "f6ef54ee5490a6629fe57e5f1b9874d215387a61df739395d165f88245cdcbe7",
+        "d8be27d6f0c97868122266ae518d04354e05b28bb157cb190a6501e77459b4df"
+      ],
+      "paragraph_sha256": [
+        "5927ea461064d21f00cdaa9c66f08ae3a6edb0230f550878e07dfff82111a3c7"
+      ],
+      "verdict": "accepted_history_repetition",
+      "reason": "The exact same public committee navigation block links previous meetings, governance and the repository. It is retained in two full dated originals; substantive attendees, action items and agenda content differ. This acceptance is limited to this same-family boilerplate pair and does not authorize cross-family or cross-split reuse."
+    }
+  ],
+  "other_split_sha256": "d72c1c7c8c668ef76d956e91e3b7b7650dc18af25da8e3f1208e0a46e316aab1",
+  "calibration_source_freeze": {
+    "file": "data/evaluation/meetings-c6-calibration-v1/source-freeze.json",
+    "sha256": "ecf4a08d8d5edc8598646e3be2d25b0203af633ae39d298014c479befcf49b53"
+  },
+  "calibration_accepted_metadata": {
+    "file": "data/evaluation/meetings-c6-calibration-v1/review-metadata-summary.json",
+    "sha256": "c576a13bf564a74cd028af363562e1ddd5413d27989bad118917c0b92f7ef91a"
+  },
+  "own_stage_notes_preserved": {
+    "file": "data/evaluation/meetings-c6-validation-v1/source-prereview-notes.md",
+    "sha256": "2f1e78b2f38eab5c44237fda7e16539f38a7f7f1079f88a77976b468f0ccf70d"
+  },
+  "cross_split_source_access": {
+    "explicit_parent_dispatch_received": true,
+    "calibration_source_documents_read": 6,
+    "validation_source_documents_read": 6,
+    "all_cross_split_document_pairs_considered": 36,
+    "calibration_questions_oracles_context_selection_outputs_read": 0,
+    "comparison_is_source_freshness_not_cross_split_item_review": true
+  },
+  "semantic_comparison_details": [
+    {
+      "families": [
+        "c6-f01",
+        "c6-f03"
+      ],
+      "verdict": "distinct",
+      "reason": "The calibration public sources concern OpenJS council governance, infrastructure-process rollout and LF IT request channels/prioritization. The validation public sources concern Jupyter community-workshop CFP preparation, web-presence responsibilities and repository note synchronization. Both are open-source committee records and mention LF, but they concern different organizations, dates, actors, artifacts and decisions. The OpenJS support-channel guide is not a paraphrase of the Jupyter note-sync guide, and the completed infrastructure-process report does not stand in for Jupyter pending outreach or launch uncertainty."
+    },
+    {
+      "families": [
+        "c6-f02",
+        "c6-f04"
+      ],
+      "verdict": "distinct",
+      "reason": "The calibration fictional sources use paper-puppet conservation: reversible hinge alternatives on test paper, original paint instability preventing application despite a workable test, replica performance decisions and a separately bounded original inspection. The validation fictional sources use seed-lot custody: retained reference samples, two-dish numerical criteria, consumed test inventory, a retest under changed observation conditions, projected outgoing quantity and unresolved mixed-lot identity. The material transformations, quantitative accounting and decisions differ; neither story can be transferred into the other by replacing names, dates and thresholds. In calibration the successful substitute test does not clear the fragile original; in validation the new actual-lot observation satisfies the exchange rule while delivery still remains scheduled. Those are different causal/status structures."
+    },
+    {
+      "families": [
+        "c6-f02",
+        "c6-f04"
+      ],
+      "verdict": "incidental_overlap_disclosed_not_near_duplicate",
+      "reason": "Both fictional sources independently use the personal name Yun Garam (윤가람) in a custody-related role, and both retain earlier evidence and distinguish restricted observations from broader authorization. A numbered object/lot also includes 17 in both. These lexical and general workflow similarities were considered explicitly. Distinct organization titles, other participants, material states, actions, calculations, record identities and outcomes prevent a shared incident or paraphrased source reading. The common name and numeral alone do not establish scenario reuse."
+    },
+    {
+      "families": [
+        "c6-f01",
+        "c6-f04",
+        "c6-f02",
+        "c6-f03"
+      ],
+      "verdict": "distinct_cross_domain",
+      "reason": "The cross-domain public/fictional pairings do not preserve a common event, fact sequence or translated paragraph. General actions such as keeping records, assigning work and leaving future decisions open are ordinary source features, not sufficient evidence of source duplication."
+    }
+  ],
+  "exact_metadata_results": {
+    "historical_rows_compared": 98,
+    "historical_identity_or_long_paragraph_collisions": 0,
+    "cross_split_document_pairs": 36,
+    "cross_split_identity_normalized_document_or_long_paragraph_collisions": 0,
+    "within_validation_whole_document_duplicates": 0,
+    "within_validation_cross_family_long_paragraph_duplicates": 0,
+    "within_validation_same_family_long_paragraph_pairs": 1
+  },
+  "limits": [
+    "No old closed source body was opened; the three prior-index coverage gaps are preserved verbatim.",
+    "Human review count is zero; the semantic decision is this independent AI reviewer judgment.",
+    "A finite source comparison does not establish complete corpus-wide semantic/translation duplicate absence.",
+    "No item, oracle, token count, model output, retrieval result or final-answer score influenced this source decision."
+  ]
+}

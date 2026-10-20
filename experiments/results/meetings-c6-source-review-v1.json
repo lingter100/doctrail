@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "kind": "source_publication_and_independent_review_metadata",
+  "recorded_at_utc": "2026-10-20T02:57:39.088480+00:00",
+  "registration_and_review_head": "0755660866488bb83fb2d7330c008b2ba1da192f",
+  "phase_records": {
+    "calibration": {
+      "source_documents": 6,
+      "public_exact_documents": 3,
+      "new_ai_synthetic_documents": 3,
+      "chunks": 20,
+      "author_handoff": {
+        "path": ".local/meetings-c6-calibration-source-v1/handoff-v1.json",
+        "sha256": "57591c90d528265c6897919019ead87f2b0e8004c3611498a9adbbdf98e2933e"
+      },
+      "author_artifacts_unchanged": 18,
+      "accepted_sources": 6,
+      "rejected_sources": 0,
+      "requested_source_changes": 0,
+      "independent_review_metadata": {
+        "path": "data/evaluation/meetings-c6-calibration-v1/review-metadata-summary.json",
+        "sha256": "c576a13bf564a74cd028af363562e1ddd5413d27989bad118917c0b92f7ef91a"
+      },
+      "source_freeze": {
+        "path": "data/evaluation/meetings-c6-calibration-v1/source-freeze.json",
+        "sha256": "ecf4a08d8d5edc8598646e3be2d25b0203af633ae39d298014c479befcf49b53",
+        "bound_files": 14
+      },
+      "actual_java_parity": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suite_seconds": 0.343,
+        "maven_invocations": 1,
+        "owned_new_jvms_after": 0,
+        "reviewer_rerun": false,
+        "receipt": "data/evaluation/meetings-c6-calibration-v1/java-parity.json",
+        "sha256": "db04135999a6334a7b39c5c823d2fc36631b5bea4a0c99063ffe708dc0a56ec7"
+      },
+      "preauthorization": {
+        "source": {
+          "path": ".local/meetings-c6-calibration-source-v1/preauthorization-v1.json",
+          "sha256": "a2bd1a4c1a7464eeaddf34121f8f47f4b2db9c01be1234b907b6723e3f36dcee"
+        },
+        "source-review": {
+          "path": ".local/meetings-c6-calibration-source-review-v1/preauthorization-v1.json",
+          "sha256": "ca709528685d9f93edfb4ddd3534359c71c38385e387f54f5cbbecf1140a2006"
+        }
+      }
+    },
+    "validation": {
+      "source_documents": 6,
+      "public_exact_documents": 3,
+      "new_ai_synthetic_documents": 3,
+      "chunks": 13,
+      "author_handoff": {
+        "path": ".local/meetings-c6-validation-source-v1/handoff-v1.json",
+        "sha256": "c61ac18beaeb4fc5f280d2033d336cbdb068849ee3869b4844cb455265e08929"
+      },
+      "author_artifacts_unchanged": 18,
+      "accepted_sources": 6,
+      "rejected_sources": 0,
+      "requested_source_changes": 0,
+      "independent_review_metadata": {
+        "path": "data/evaluation/meetings-c6-validation-v1/review-metadata-summary.json",
+        "sha256": "dd559e7ff5d0143564186e422aabbf42ef1ca95f231399c9b46bdc61d4123512"
+      },
+      "source_freeze": {
+        "path": "data/evaluation/meetings-c6-validation-v1/source-freeze.json",
+        "sha256": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625",
+        "bound_files": 15
+      },
+      "actual_java_parity": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suite_seconds": 0.312,
+        "maven_invocations": 1,
+        "owned_new_jvms_after": 0,
+        "reviewer_rerun": false,
+        "receipt": "data/evaluation/meetings-c6-validation-v1/java-parity.json",
+        "sha256": "e3a4d04b69223490ab8732d46e7c4d779971f13cf31d0f3c9a40b39927c3ab37"
+      },
+      "preauthorization": {
+        "source": {
+          "path": ".local/meetings-c6-validation-source-v1/preauthorization-v1.json",
+          "sha256": "3829e1692e4d5f57700e3b39ffdf822c62724fefe6ee758a4acf172755eee883"
+        },
+        "source-review": {
+          "path": ".local/meetings-c6-validation-source-review-v1/preauthorization-v1.json",
+          "sha256": "ea494e5345ce6d53f2fc844a2002f01f091994f3052d2fabf5ec56bdc1356aeb"
+        }
+      }
+    }
+  },
+  "source_publication_files": {
+    "data/evaluation/meetings-c6-calibration-v1/java-parity.json": "db04135999a6334a7b39c5c823d2fc36631b5bea4a0c99063ffe708dc0a56ec7",
+    "data/evaluation/meetings-c6-calibration-v1/review-metadata-summary.json": "c576a13bf564a74cd028af363562e1ddd5413d27989bad118917c0b92f7ef91a",
+    "data/evaluation/meetings-c6-calibration-v1/source-adoption-receipt.json": "778eef5d1bcc743892ce0c4472fc2ce6fa2ed2de7a7b5e4436b2f33894e8a4c4",
+    "data/evaluation/meetings-c6-calibration-v1/source-freeze.json": "ecf4a08d8d5edc8598646e3be2d25b0203af633ae39d298014c479befcf49b53",
+    "data/evaluation/meetings-c6-calibration-v1/source-freshness.json": "721db1777bc354567ed70c8ebf4665fea3a8d11b9ab08d6b9916269b17d591dc",
+    "data/evaluation/meetings-c6-calibration-v1/source-inventory.json": "90e5cbfb711084704167576b1d139fa8532729a74f51f899d4479d638b6775db",
+    "data/evaluation/meetings-c6-calibration-v1/source-manifest.json": "2a945c9c9ad0dd3191aed9d64e912f31fd0d32243d1d32bee3881c7953ffcf76",
+    "data/evaluation/meetings-c6-calibration-v1/source-prereview-notes.md": "98cc9bb624b339870b913a719e4f08f65cc85c09afaf57c54baae7a03c68cc04",
+    "data/evaluation/meetings-c6-calibration-v1/source-prereview.json": "09f321d0f3e93fc7c2d10ff3d1f82f599c170804c374948560c45ea3921e7c07",
+    "data/evaluation/meetings-c6-calibration-v1/source-processing-receipt.json": "f668dcc304917073146edf41ca9fcc356ae1cffc7963153bcdc5c7c0062ee867",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-01.txt": "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-02.txt": "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-03.txt": "a052c558a2593cdb67c14819c02aa280cbfa459841a8168eace6c47b425ceecb",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-04.txt": "49e30742d9110056e5c22dac079cfc085c9e061b1b6881953f5dc05a565f0958",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-05.txt": "149fd46ea5b73f72a3c362576087636ab185a0aa9fffc94ab99218c0b9024876",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-06.txt": "60c1f41802550dd549078b524f209fbc8c9683af7649f30b589a2fdefe931d3f",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-01.md": "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-02.md": "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-03.md": "a052c558a2593cdb67c14819c02aa280cbfa459841a8168eace6c47b425ceecb",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-04.md": "49e30742d9110056e5c22dac079cfc085c9e061b1b6881953f5dc05a565f0958",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-05.md": "149fd46ea5b73f72a3c362576087636ab185a0aa9fffc94ab99218c0b9024876",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-06.md": "60c1f41802550dd549078b524f209fbc8c9683af7649f30b589a2fdefe931d3f",
+    "data/evaluation/meetings-c6-calibration-source-fingerprints-v1.json": "d72c1c7c8c668ef76d956e91e3b7b7650dc18af25da8e3f1208e0a46e316aab1",
+    "data/evaluation/meetings-c6-validation-v1/java-parity.json": "e3a4d04b69223490ab8732d46e7c4d779971f13cf31d0f3c9a40b39927c3ab37",
+    "data/evaluation/meetings-c6-validation-v1/review-metadata-summary.json": "dd559e7ff5d0143564186e422aabbf42ef1ca95f231399c9b46bdc61d4123512",
+    "data/evaluation/meetings-c6-validation-v1/source-adoption-receipt.json": "58be2a4d2e9898b96820b25080909585f995d5edc5cb909495db9756678b52e9",
+    "data/evaluation/meetings-c6-validation-v1/source-freeze.json": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625",
+    "data/evaluation/meetings-c6-validation-v1/source-freshness.json": "52250dd05c3d6d828183177f23316949a53c27c9dfcd5b124be98ba50db3c3b5",
+    "data/evaluation/meetings-c6-validation-v1/source-inventory.json": "25adcc975df011a444daa5c5a145f0641f99b0a797683f15ed4651321d38f48b",
+    "data/evaluation/meetings-c6-validation-v1/source-manifest.json": "153a2a981a07009ea889eccc82005b68e3e40bcab861a342c4386b86a3605d12",
+    "data/evaluation/meetings-c6-validation-v1/source-prereview-notes.md": "2f1e78b2f38eab5c44237fda7e16539f38a7f7f1079f88a77976b468f0ccf70d",
+    "data/evaluation/meetings-c6-validation-v1/source-prereview.json": "f9b33ad4dfe62b36fa4b1c0cda6e1031ef5a1db958cc2a963f4a56cd825a32dc",
+    "data/evaluation/meetings-c6-validation-v1/source-processing-receipt.json": "8fd13d9cbb6f9f1bbccae9edce2d534324d56dfdda4b7e412a3e01f9c4fa563b",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-2026-10-01.md": "f6ef54ee5490a6629fe57e5f1b9874d215387a61df739395d165f88245cdcbe7",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-2026-10-15.md": "d8be27d6f0c97868122266ae518d04354e05b28bb157cb190a6501e77459b4df",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-team-compass.md": "b1097399f704d32bde0c99b9b2efc1e0e57e189e98120a48e02a10ba0de6cebb",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-2026-04-09.md": "b1efcc40a4a3579f63f27a09825d1e6d1a47a2d489998367201990e43912e48a",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-2026-04-23.md": "e4e00b31504aed5bf005453c4b9e24264b0b4008b5c3459cc5f8a6c1a161f6d0",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-seed-record-standard.md": "ad7fc93c10774bb184f05a5c3a77469e09d48125061ef0549e9fb16d3387b599",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-2026-10-01.md": "f6ef54ee5490a6629fe57e5f1b9874d215387a61df739395d165f88245cdcbe7",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-2026-10-15.md": "d8be27d6f0c97868122266ae518d04354e05b28bb157cb190a6501e77459b4df",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-team-compass.md": "b1097399f704d32bde0c99b9b2efc1e0e57e189e98120a48e02a10ba0de6cebb",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-2026-04-09.md": "b1efcc40a4a3579f63f27a09825d1e6d1a47a2d489998367201990e43912e48a",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-2026-04-23.md": "e4e00b31504aed5bf005453c4b9e24264b0b4008b5c3459cc5f8a6c1a161f6d0",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-seed-record-standard.md": "ad7fc93c10774bb184f05a5c3a77469e09d48125061ef0549e9fb16d3387b599",
+    "data/evaluation/meetings-c6-validation-source-fingerprints-v1.json": "0f4942f1ffc1ca910dc61a80a24448d3ac10f45cddb4e40a0ffcfbd779d9d8c2"
+  },
+  "unchanged_frozen_toolchain_files": 77,
+  "unchanged_prior_union_files": 112,
+  "prior_index": {
+    "path": "data/evaluation/meetings-c6-prior-source-fingerprints-v1.json",
+    "sha256": "659fef38e0e70c066eb38faba3fe1f4f96181525437c4c84561916ddaa0ba0db",
+    "rows": 98,
+    "canonical_unique_rows": 95,
+    "normalized_rows": 30,
+    "historical_coverage_gaps": 3
+  },
+  "parent_actual_source_semantic_reads": 0,
+  "questions_authored": 0,
+  "tokenizer_calls": 0,
+  "native_calls": 0,
+  "human_source_or_item_reviews": 0,
+  "answer_quality_judgments": 0,
+  "initial_whitespace_check": {
+    "exit_code": 2,
+    "affected_paths": 8,
+    "original_log": ".local/c6-source-initial-whitespace-v1.log",
+    "sha256": "b0d46d15229e9bafa6eace0156e0f214bcf71a747cfe5778d0e4a2f96b23a6e7"
+  },
+  "byte_preservation": "Exact author36 and independent review10; upstream public raw/processed6 whitespace and JavaCRLF2 preserved. Narrow -text attributes; no body rewriting.",
+  "scope": "Source acceptance and actual Java processing parity only. No model quality, service adoption, user review, final test or deployment claim. Source freeze commit before item authorship."
+}
