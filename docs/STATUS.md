@@ -1,5 +1,19 @@
 # 진행 상태
 
+## 2026-10-20 · NEW4 reader 구현·동결 완료, 최종 source CI 대기
+
+기존 실제 Astra high 구현 역할이 NEW4를 반환했고 독립 실제 Astra high 코드 검토에서 최종 blocker0이다. 마지막 setup 경계 수정 전73passed/1skip62.04초, 수정 뒤 영향8passed/45deselected11.24초·Ruff 통과이며 각 실행 전후 SHA 동일이다. 겹치는 검사 수를 합산하지 않는다. 초기1fail/2errors·Ruff11/추가2 및 부모 import 경로 오류를 원본으로 보존했다.
+
+소스 동결27/Python23/candidate710 SHA261abc74, fixture40payload/393216bytes+manifest12852/spec1a0e9d79를 작성하고 sealed 검증을 통과했다. 기존 동결 union106 unchanged·공식 output 부재·official/model/tokenizer0이다. docs/MEETINGS-PROOF-EPOCH-IMPLEMENTATION과 구현 receipt에 실행법/한계를 기록했다.
+
+부모가 사용자 명의 source+freeze/spec 커밋·push와 정확한 필수 CI를 이어간다. 설계6ea47c3 push39351706201은3job 성공했지만 PR14 head가e18f595로 남아 동일 설계 PR 실행은 미관측이다. 관측 차이를 원본으로 보존하며 최종 source의 push+PR CI를 실제 확인하기 전 공식 비교를 실행하지 않는다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-20 · reader 설계 커밋 완료, NEW4 구현 진행
+
+설계8파일을6ea47c350fe6d67f03426fc934dceaca517914f5로 커밋·push했고 GitHub author/committer lingter100을 직접 확인했다. 설계 SHA ddeda6f0/protocol72d303f5다. 이 커밋의 필수 CI는 진행 중이며 기존 C5 결과 CI 성공과 구분한다.
+
+기존 실제 Astra high host_proof_profile이 NEW bounded snapshot 모듈·probe·테스트2개만 소유한다. 기존 독립 Astra high c5_persistence_review는 첫 구현 준비 뒤 읽기 검토를 맡는다. 부모는 rootdocs·소스/fixture 동결·영수증·Git을 담당한다. 공식 .local/meetings-proof-epoch-v1은 아직 없고 소스 동결·커밋·정확한 필수 CI 전에는 만들거나 실행하지 않는다. 이 단계는 무료 합성 코드 검증이며 실제 tokenizer/native/품질 평가0, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C5 결과 CI 통과, 후속은 읽기 버퍼 비교로 축소
 
 C5 결과 e18f595의 push39350297487/PR39350302379 필수 backend/java-service/web 모두 성공했고 영수증을 보존했다. 실패 원본·미실행 문항·의미 판정0은 그대로이며 CI 성공이 답변 품질 통과는 아니다.

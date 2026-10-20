@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "meetings-proof-reader-design-ci-observation-v1",
+  "observed_at": "2026-10-20T01:18:06.260157+00:00",
+  "head_sha": "6ea47c350fe6d67f03426fc934dceaca517914f5",
+  "push": {
+    "run_id": 39351706201,
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": {
+      "backend": "success",
+      "java-service": "success",
+      "web": "success"
+    },
+    "url": "https://github.com/lingter100/doctrail/actions/runs/39351706201"
+  },
+  "remote_branch_head": "6ea47c350fe6d67f03426fc934dceaca517914f5",
+  "pr14_head_observed": "e18f595c929648378855c83ffdac93fe09ad0673",
+  "pr14_updated_at": "2026-10-20T00:53:49Z",
+  "exact_head_runs_observed": [
+    {
+      "conclusion": "success",
+      "databaseId": 39351706201,
+      "event": "push",
+      "headSha": "6ea47c350fe6d67f03426fc934dceaca517914f5",
+      "status": "completed"
+    }
+  ],
+  "scope": "Design push required checks passed. PR head/run synchronization is not assumed; no inferred exact PR check or model quality."
+}

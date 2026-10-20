@@ -1,5 +1,9 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · bounded reader 구현·독립 코드 검토
+
+기존 실제 Astra high host_proof_profile이 NEW4 구현과 합성 회귀를 수행했고 c5_persistence_review가 별도 읽기 검토로 cleanup/deadline/accounting/실제 Git guard의 누락을 찾아 최종 변경을 재확인했다. 모델 설정을 새로 바꿨다고 기록하지 않는다. 부모는 전후 SHA·로그·기존 동결106바이트 binding과 새 code/fixture freeze를 검증하고 문서·Git·CI를 담당한다. 전체73검사와 마지막8검사는 scope/소스가 달라 구분하며 official 성능비교·모델·사용자 검수0이다.
+
 ## 2026-10-20 · 후속 후보 제한 비교와 설계 축소
 
 기존 실제 Astra max bounded_resource_decision 역할이 코드·허용 scalar metadata·공식 CPython 소스만 읽어 제한 비교1회를 수행했다. 기존 Astra xhigh free_qa_candidate_review는 자신의 미커밋 초안2개 원본을 로컬에 보존하고 reader-only 설계2개로 수정했다. 두 역할이 원래 수락된 설정 유지를 보고했으며 새 도구 설정 수락이나 부모 채팅 모델 변경으로 기록하지 않는다. 부모는 C5 결과의 양쪽 필수3job CI와 Git 사용자 신원·설계 바이트를 확인했다. 실제 새 구현/공식 비교/모델/사용자 검수는 이 등록 시점0이다.
