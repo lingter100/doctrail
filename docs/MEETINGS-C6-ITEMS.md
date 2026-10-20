@@ -16,8 +16,8 @@ Source commit887e89f의 필수 CI 통과 뒤 문서 HEAD eae7140에서 작성자
 
 | Split | 코드/원문 bindings | Git revision/path 증명 | snapshot | 상태 |
 | --- | --- | --- | --- | --- |
-| calibration | 77/14 | 189 | 96 | 통과, NEW4 반환·독립 검토 중 |
-| validation | 77/15 | 191 | 97 | 통과, NEW4 반환·독립 검토 배정 |
+| calibration | 77/14 | 189 | 96 | 작성 전 확인 통과, 최초 검토5수용/1거부 |
+| validation | 77/15 | 191 | 97 | 작성 전 확인 통과, 최초 검토7수용/1거부 |
 
 영수증은 로컬 `.local/meetings-c6-{calibration,validation}-item-v1/preauthorization-v1.json`이다. 각각 SHA063650d5·bde9ec03이며 실제 Git 실행을 사용했다. 부모는 hash·개수·역할·상태만 읽었다. Validation 작성자는 calibration 원문/질문/oracle 및 자기 source-freshness의 교차 비교 사유를 열지 않는다.
 
@@ -34,3 +34,18 @@ Validation 작성자는 proof 실행을 기다리는 동안 이전에 허용된 
 최종 답변 judge는 새 `/root/c6_calibration_final_judge`와 `/root/c6_validation_final_judge`다. 실제 도구가 Astra xhigh/fork none을 수락했고 각64byte 공개 재현 seed와 노출 진술을 [등록 파일](../data/evaluation/meetings-c6-review-registration-v1.json)에 묶었다. 부모·설계·구현·source/item 작성/검토 역할은 제외한다. 자동 metadata 노출이 있으므로 완전 맹검이라고 하지 않는다. 현재 판정0이며 실제 출력 뒤 별도 지시로 익명 pack만 열고, 판정 hash를 잠근 뒤 mapping을 공개한다.
 
 독립 item 수용/동결·커밋 뒤 각 split 공식 offline 준비를 한 번만 수행한다. 계수 실패를 payload 수정이나 재계수로 살리지 않는다. 실행 plan의 모든 입력/역할을 커밋한 뒤 calibration을 한 번 평가하며, 원래6개 완전정답과 운영 무결성 통과 시에만 validation8을 연다. 지금은 tokenizer/native/사용자 검수0, Phase1 미완료다.
+
+## 수정본 독립 수용과 재현 경계
+
+원본/거부·판정자·경로 승인27파일은09027c9에 사용자 명의로 커밋·push됐다. Push39364334918/PR39364339861 필수3job 성공을 [CI 영수증](../experiments/results/meetings-c6-initial-item-ci-v1.json)에 기록했다. 이 성공으로 최초 의미 거부를 취소하지 않았다.
+
+그 뒤 같은 split 작성자가 새 actual proof를 수행하고 자기 피드백으로 근거 대안 하나씩을 추가했다. Draft/context의 원본 bytes, 다른 문항·fact 문구·상태·기존 대안을 유지했다. 별도 검토자는 새 proof 후 이를 독립 확인하고 모두 수용했다.
+
+| Split | 최초 수용/거부 | v2 수용/거부 | 추가 수정 요청 | 동결 |
+| --- | --- | --- | --- | --- |
+| calibration | 5/1 | 6/0 | 0 | [6bindings,8d012fff](../data/evaluation/meetings-c6-calibration-v1/item-freeze-v2.json) |
+| validation | 7/1 | 8/0 | 0 | [6bindings,3d7b2101](../data/evaluation/meetings-c6-validation-v1/item-freeze-v2.json) |
+
+두 동결은 source_commit887e89f와 원래 source/code freeze를 가리킨다. 원래 `item-freeze.json`은 생성하지 않았고 새 `item-freeze-v2.json`만 수용본을 묶는다. [수용 영수증](../experiments/results/meetings-c6-item-review-v2.json)은 새16개·최초14개·source46·code77·기존112 보존과 preauth/역할을 기록한다. 표시/필드 조회 helper 오류도 제품 검사 실패와 분리해 보존했다.
+
+재현은 등록된 `scripts/prepare_meeting_c6_inputs.py`의 phase·draft/oracle/source-freeze/item-freeze 경로와 각각의 SHA 인자를 사용한다. 수용본 커밋 뒤 담당자가 실제 `load_material` Git proof를 먼저 마치고 공식 준비를 각 split에서1회만 수행한다. 아직 그 준비나 모델 실행은 하지 않았다. 작은 AI 작성/AI 검토14문항이므로 최종 benchmark·전체 서비스 정확도·사용자 만족으로 일반화하지 않는다.

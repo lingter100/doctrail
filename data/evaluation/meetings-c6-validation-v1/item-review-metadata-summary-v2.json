@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "stage": "independent_item_v2_prereview_complete",
+  "reviewer_id": "/root/c6_validation_prereviewer",
+  "recorded_at_utc": "2026-10-20T03:41:25.185795+00:00",
+  "verdict": "accepted",
+  "accepted_count": 8,
+  "rejected_count": 0,
+  "reviewer_changes": 0,
+  "counts": {
+    "cases": 8,
+    "required_facts": 33,
+    "answered": 4,
+    "abstained": 4,
+    "ko": 4,
+    "en": 4,
+    "missing_required_facts": 5,
+    "registered_evidence_alternatives": 34
+  },
+  "coverage_answered_only": {
+    "general_only": 1,
+    "multiple_meetings": 2,
+    "general_plus_meeting": 1,
+    "all_sufficient_alternatives_require_multiple_documents": 3,
+    "ko_question_en_evidence": true,
+    "en_question_ko_evidence": true
+  },
+  "new_finding_categories": {},
+  "resolved_original_finding_categories": {
+    "missing_sufficient_evidence_alternative": 1
+  },
+  "author_revision_counts": {
+    "changed_cases": 1,
+    "changed_facts": 1,
+    "added_evidence_alternatives": 1,
+    "unchanged_other_cases": 7,
+    "question_or_context_changes": 0,
+    "fact_word_or_status_changes": 0,
+    "existing_alternative_changes": 0
+  },
+  "preserved": {
+    "original_author_and_rejection_files": 7,
+    "own_source_and_review_files": 23,
+    "code_files": 77,
+    "new_author_files": 4,
+    "all_hashes_unchanged": true,
+    "original_rejected_verdict_unchanged": true,
+    "original_item_freeze_absent": true
+  },
+  "preauthorization": {
+    "receipt": {
+      "file": ".local/meetings-c6-validation-item-review-v2/preauthorization-v1.json",
+      "sha256": "40a62f935ff128f2d11aba08c55595820cd2f786dad93272fb59312c7fa32947"
+    },
+    "status": "passed",
+    "head_before": "09027c9f47927c8480bb65f4fa5eb94900af230e",
+    "head_after": "09027c9f47927c8480bb65f4fa5eb94900af230e",
+    "git_revision_path_pairs": 199,
+    "snapshots": 105,
+    "real_default_git_runner": true,
+    "code_bound_files": 77,
+    "source_bound_files": 15
+  },
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c6-validation-v1/source-freeze.json",
+    "sha256": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625"
+  },
+  "toolchain_freeze": {
+    "file": "data/evaluation/meetings-c6-toolchain-freeze-v1.json",
+    "sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b"
+  },
+  "author_handoff": {
+    "file": ".local/meetings-c6-validation-item-v2/handoff-v1.json",
+    "sha256": "738495542765410ca068cbccd72531dd64435eb79370652fde1c5478367c7a02"
+  },
+  "new_author_hashes": {
+    "data/evaluation/meetings-c6-validation-v1/draft-v2.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft-v2.json": "8efc42bbc7b9b1862b5d640d6f1afa09f4e93ce759464e18bcd6c70fa47c98ca",
+    "data/evaluation/meetings-c6-validation-v1/context-selection-v2.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c",
+    "data/evaluation/meetings-c6-validation-v1/author-receipt-v2.json": "a46d8a0ad69ecef6bfd5ca79bb9d5e92f2fba51df2661b7bbd467f2887613295"
+  },
+  "review_artifacts": {
+    "data/evaluation/meetings-c6-validation-v1/item-prereview-v2.json": "74109434d46e44d2c126d07ef816cc84dec8fd91c429c1b7ab9bf519b2d963f5",
+    "data/evaluation/meetings-c6-validation-v1/item-prereview-notes-v2.md": "4c9cb7e70bac0aa8a18a1c73055c9d2365f926eb10b88939bd9f52994a876868",
+    "data/evaluation/meetings-c6-validation-v1/item-freeze-v2.json": "3d7b21010fa96a771ec66b94777e7dca2a20fcb06a8d057bc8d1cbb6540965ba"
+  },
+  "item_freeze_created": true,
+  "item_freeze_bound_count": 6,
+  "pure_contract_checks": "passed",
+  "full_committed_load_material_invoked": false,
+  "local_reviewer_projection_failure": {
+    "file": ".local/meetings-c6-validation-item-review-v2/inspection-failure-v1.json",
+    "sha256": "ea12090f40c39442fd17a8bb116a3627ccf9b83246e6e3d0944bf5e3e5cbfc3a"
+  },
+  "corrected_structural_replay": {
+    "file": ".local/meetings-c6-validation-item-review-v2/structural-replay-v1.json",
+    "sha256": "27ced79e229c805b690bd7a4907022a0facbaa7378d6c9d48d1305094f2b47e6"
+  },
+  "same_split_source_item_review_reuse_disclosed": true,
+  "excluded_final_output_judge": true,
+  "prior_author_sequence_disclosure_preserved": true,
+  "internal_cognition_timing_independently_proven": false,
+  "prior_calibration_SOURCE_only_exposure_disclosed": true,
+  "calibration_semantic_rereads_this_stage": 0,
+  "calibration_item_oracle_selection_reads": 0,
+  "final_judge_contacts_or_reads": 0,
+  "tokenizer_calls": 0,
+  "official_offline_preparations": 0,
+  "native_calls": 0,
+  "product_model_calls": 0,
+  "Maven_or_test_runs": 0,
+  "Git_mutations": 0,
+  "human_review_count": 0,
+  "ownership": "returned",
+  "next_gate": "Commit accepted v2 and actual committed material proof before once-only offline preparation; no semantic output quality claimed."
+}

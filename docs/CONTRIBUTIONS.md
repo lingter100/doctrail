@@ -1,5 +1,11 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · C6 제한된 수정과 독립 수용
+
+같은 실제 Astra xhigh 작성자2명이 커밋09027c9의 actual 새 proof 후 자기 제한 피드백만 읽고 각 근거 대안1개를 추가했다. 원본 질문/context bytes를 그대로 복사했다. 같은 별도 Astra xhigh prereviewer2명은 다시 actual proof 뒤 수정 범위·충분한 근거·구성 조건을 독립 검토하여6/6·8/8 수용/추가수정0을 기록하고6binding씩 동결했다. 기존 source/item 역할 재사용과 노출을 공개하며 최종 답변 judge는 별도2명이다.
+
+부모는 실제 GitHub09027c9 사용자 author/committer·push/PR 필수3job 성공, 원본/새 파일의 hash·index와 전체 source/code 보존을 확인하고 공개 영수증/문서/커밋을 담당했다. 문항·oracle·검토 노트·안전 피드백의 의미를 직접 읽거나 판정하지 않았다. 모델 생성·tokenizer·사용자 검수0이며 AI 기여와 사용자 판단을 구분한다.
+
 ## 2026-10-20 · C6 최초 문항 작성과 독립 불수용 기록
 
 기존 작성자가 calibration6/필수사실29, validation8/33을 작성했고, 별도 같은 split prereviewer가 각각 실제 새 proof 뒤 전체 근거를 검토했다. Calibration5수용/1거부·validation7수용/1거부이며 작성자가 빠뜨린 충분한 대안 각1개를 지적했다. 구조·좌표 검사는 통과했지만 독립 의미 수용은 실패했다. 원본8·검토6·표시 오류·안전한 제한 피드백을 보존했다.

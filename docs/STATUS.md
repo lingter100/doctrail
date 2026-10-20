@@ -1,5 +1,27 @@
 # 진행 상태
 
+## 2026-10-20 · C6 수정 문항14개 독립 수용·동결 완료
+
+기존 별도 실제 Astra xhigh 검토자가 calibration6/validation8을 모두 수용했다. 거부0·추가수정0·검토자의 원본 수정0이며, 각 oracle에 지정된 충분한 근거 대안1개만 추가됐음을 독립 확인했다. 질문/context bytes·fact 문구·기존 대안·다른 문항은 유지했다. 각각6binding item-freeze-v2 SHA8d012fff/3d7b2101이며 source_commit887e89f에 묶인다. 최초 거부 파일14개와 old item-freeze 부재를 보존했다.
+
+부모가 새 공개16개·원본14·source46·code77·기존112를 hash로 확인했다. 공개 수용 영수증 experiments/results/meetings-c6-item-review-v2.json SHA1b9fe557에 단계별 preauth·동결·역할·노출·한계를 묶었다. 두 검토자의 표시/필드 조회 오류는 원본으로 보존하며 수정 후 pure 검사와 의미 검토 통과를 구분한다. 사용자 검수와 실제 서비스 모델 실행은0이다.
+
+모든 역할이 소유권을 반환했다. 부모가 수용v2·최초090 CI 영수증·문서를 커밋하고 정확한 필수 CI를 확인한다. 그 뒤 각 split 담당자가 커밋된 전체 material의 실제 Git proof와 공식 offline 준비를 각1회 수행한다. 아직 tokenizer/native·최종 답변 판정0이며 모델 품질이나 Phase1 완성으로 해석하지 않는다. Goal ACTIVE·PR14 draft를 유지한다.
+
+## 2026-10-20 · C6 수정본 반환, 원문·질문 유지 후 독립 재검토
+
+최초 문항 커밋09027c9의 push39364334918/PR39364339861 필수3job 모두 통과했다. 별도 영수증 experiments/results/meetings-c6-initial-item-ci-v1.json SHAfaefc6b5에 실제 관측을 보존한다. CI가 최초 의미 거부를 뒤집지는 않는다.
+
+기존 작성자2명이 실제 새 HEAD/source/Git 증명 후 자기 제한 피드백으로 NEWv24개씩을 반환했다. Calibration6/29사실·validation8/33사실이며 각 지정 대안1개만 추가했다. 부모가 각 draft/context의 원본 바이트 일치와 작성자4개 hash를 확인했다. 다른 문항/필수사실/기존 대안의 유지와 새 근거의 충분성은 독립 재검토가 확인할 항목이다.
+
+기존 별도 Astra xhigh prereviewer2명이 새 actual preauth를 통과했다. Calibration 재검토6수용/0거부/추가수정0이며6binding item-freeze-v2 SHA8d012fff를 반환했다. Validation 담당자는 자기8문항 재검토 중이다. HEAD hold는 모두 해제됐고 부모는 의미자료를 열지 않는다. 양쪽 v2를 모두 수용·커밋하기 전 공식 준비하지 않으며 tokenizer/native0, 전체 goal ACTIVE·Phase1/PR14 draft다. 최초 거부14개는 변경하지 않는다.
+
+## 2026-10-20 · 최초 문항·거부09027c9 보존, 지정 대안만 새 버전 작성
+
+원본/검토14개·최종 판정자 등록·문서 등27파일을09027c9f47927c8480bb65f4fa5eb94900af230e로 커밋·push했다. 실제 GitHub author/committer lingter100·PR14 head·committed27 exact bytes를 확인했다. Push39364334918/PR39364339861은 이 기록에서 진행 중이다. 기존 source887의 필수 CI 통과와 새 문항 커밋 CI를 구분한다.
+
+기존 calibration/격리 validation 작성자에게 NEWv24개씩만 배정했다. 새 HEAD/code/source/역할과 커밋된 원본·경로 추가 승인의 실제 증명을 먼저 수행하며 부모는 그동안 HEAD를 유지한다. 증명 뒤 자기 제한 피드백만 읽고 각 누락 대안1개를 보완한다. Draft/context는 원본 bytes 유지, 나머지 문항·fact 문구·기존 대안·source도 유지한다. 아직v2 수용·item freeze·tokenizer/native0이며 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-20 · C6 최초 문항 검토 완료, 양쪽 근거 대안 누락 보완 필요
 
 별도 실제 Astra xhigh 검토자가 calibration5수용/1거부, validation7수용/1거부를 반환했다. 각 묶음의 oracle 한 필수사실에서 충분한 근거 대안1개가 누락됐다. 구조·원본 청크/좌표·배분 검사가 통과한 사실과 독립 의미 검토 실패를 분리한다. 질문/필수사실 문구·기존 근거·source/context 변경은 요청되지 않았다. Item freeze·tokenizer·native0이다.
