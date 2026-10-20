@@ -1,5 +1,10 @@
 # 기여와 직접 검증 기록
 
+## 2026-10-20 · C5 실제 실행 실패와 별도 재생
+
+부모가 고정된 무료 로컬 CLI를 한 번 실행했다. 전송2/구조응답1/둘째 deadline/의미판정0을 기록하고 모델을 재실행하지 않았다. CLI 종료·owned cleanup·HEAD, 원본 report/ledger/trace29개를 확인했다. Actual Git/108snapshot/27event 및 첫 응답의 순수 구조 재생은 모델·tokenizer0으로 수행했다. 부모는 원문/질문/답변/reasoning 의미를 열지 않고 scalar/hash만 읽었으며 기존 독립 Astra xhigh 설계 역할에 후속 읽기 검토를 맡겼다. 사용자 검수와 답변 정확도 성과는0이다.
+
+
 ## 2026-10-20 · 공식 입력 계수와 다음 실행 등록
 
 기존 split별 실제 Astra xhigh 작성자들이 실제 committed fullmaterial proof와 공식 tokenizer 준비를 각각1회 수행했다. 부모는 원본 영수증/공개 복사본 hash·집계만 확인하고 고정 조건의 실행계획을 만들었다. 모델 생성·의미 품질 판정·사용자 검수는 아직0이며 validation 개방은 별도 calibration 관문에 달려 있다.

@@ -1,5 +1,30 @@
 # 진행 상태
 
+## C5 후속 선택 · 요청 경계 안의 중복 검증 비용 조사
+
+독립 실제 Astra xhigh 읽기 검토를 채택했다. 두 검증 경계·HEAD/committed bytes/path/negative import/마지막 변경 확인은 유지하면서 같은 경계의 반복 읽기/hash/파싱을 재사용하는 작은 새 구현을 비교한다. 실제 C5를 재실행하지 않고 새 기계적 합성 fixture에서 동등한 수용·거부와 비용을 한 번 비교한다. 실행한 뒤에만 개선 여부를 판단하며 runner 비용을 제품 ACL/revision 또는 서비스 지연과 혼동하지 않는다.
+
+기존 free_qa_candidate_review가 NEW docs/MEETINGS-PROOF-EPOCH-PLAN.md와 data/evaluation/meetings-proof-epoch-protocol-v1.json 두 파일만 설계 소유한다. 구현·공식비교·native0, 부모는 C5 실패 결과의 commit/CI를 진행한다. 일반 문서/복수회의/KO·EN/근거/보류·90초·6/6→8/8 요구는 유지한다. 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+## C5 실패 원본/재생 완료 · 후속 검토
+
+C5 raw5d2da15a와 정확한 report/ledger/trace29개를 보존했다. 실제 Git/108snapshot/첫 응답 trace/27event의 별도 재생은 통과했고 전체 완료·validation 관문은 예상대로 거부됐다. 원본 false flags는 변경0이다. 새 replay native/tokenizer0, 실제 run owned process0이며 세션65743/95559는 종료됐다.
+
+기존 실제 Astra xhigh free_qa_candidate_review가 코드·실패 metadata21fcf3da·replay97bd85dd·기존 허용 profile만 읽어 다음 개선 하나를 검토한다. 본문/질문/trace 원문 접근·설계 편집·모델 실행은 없다. 부모는 결과 문서/사용자 명의 commit/CI를 진행한다. C5/모든 closed pool은 재실행 금지, 전체 goal ACTIVE·Phase1/PR14 draft다.
+
+
+## C5 실제 품질 실행 CLOSED · 두 번째 요청 deadline
+
+2f327d3에서 공식 calibration run은 CLI exit1/failed_closed/293.234초로 종료했다. 실제 전송2·파싱1·구조 수용1이며 첫 요청89.859초, 둘째90.953초에서 generation_deadline_exceeded다. Initial proof19.687/23.094초를 직접 기록했다. 나머지 calibration4와 validation8, 의미 판정은0이며 C5를 재실행하거나 미실행 문항만 이어 실행하지 않는다. Raw report SHA5d2da15ac9a9c9bb6f0abb96518e470ea683594e0947814dcacb95f0d63b1edd, 원래 false flags와 실패를 보존한다. Owned processes0·HEAD2f327d3 동일이다.
+
+부모는 새 failure metadata와 별도 actual Git/첫 응답/불변 event 재생, 정확한 공개 archive를 준비 중이다(.local/preserve_c5_quality_failure_v1.py 세션95559). 기존 실제 Astra xhigh free_qa_candidate_review는 코드·허용 scalar metadata만 읽어 후속 하나를 검토한다. 새 설계/수정/모델 실행은 아직 없다. 실행계획 push39349148144/PR39349154882 필수3job 모두 성공했지만 품질 통과가 아니다. 전체 goal ACTIVE·Phase1/PR14 draft이며 무료 로컬 작업을 계속한다.
+
+## C5 실행계획2f327d3 커밋 · calibration 실제 실행 시작
+
+두 split 준비와 실행계획14파일을 사용자 명의2f327d3179ad443773b2b1834aa9e00fee9c5e1f로 커밋·push했다. plan SHA5450de67255b151519b9443306f43466a65b8269dae3c2264da8eca38341df1a이며 판정자2·동결76·입력/영수증을 고정한다. 새 commit의 push39349148144/PR39349154882 CI는 진행 중이다. 직전 item commit의 양쪽3job은 이미 성공했다.
+
+실제 calibration check가 CLI exit0/checked/37.859초/HEAD동일/owned0으로 통과했다. .local/c5-quality-cli-v1/run-invocation.json과 .local/meetings-c5-quality-calibration-v1·quality-ledger-v1의 존재 및 process를 먼저 확인하고 중복 실행하지 않는다. 현재 단발 run을 시작하며 calibration 최대6회, validation은 닫혀 있다. HEAD2f327d3를 실행 종료까지 유지한다. 모델 성공이나 의미 판정은 아직 미확정이고 전체 goal ACTIVE·Phase1/PR14 draft다.
+
 ## C5 공식 offline 두 split 통과 · 실제 생성 계획 등록
 
 item cefbfee 커밋 뒤 실제 fullmaterial Git 증명을 마치고 공식 계수를 각각1회 실행했다. Calibration6 1570..5021, validation8 2575..4999토큰으로5,120 이내다. Tokenizer1씩/native0/download0·payload보존이며 준비를 재실행하지 않는다. 정확한 공개 input/receipt4개와 판정자2·제외14·동결76을 새 execution plan에 결합했다. 부모는 의미 자료를 읽지 않았다.

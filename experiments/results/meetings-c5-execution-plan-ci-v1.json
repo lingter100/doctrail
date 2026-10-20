@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-execution-plan-ci-v1",
+  "observed_at": "2026-10-20T00:46:47.090936+00:00",
+  "head_sha": "2f327d3179ad443773b2b1834aa9e00fee9c5e1f",
+  "runs": [
+    {
+      "head_sha": "2f327d3179ad443773b2b1834aa9e00fee9c5e1f",
+      "run_id": 39349148144,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39349148144"
+    },
+    {
+      "head_sha": "2f327d3179ad443773b2b1834aa9e00fee9c5e1f",
+      "run_id": 39349154882,
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39349154882"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "claim_scope": "Exact preparation and execution-plan commit required CI. No inferred test counts or answer-quality claim."
+}
