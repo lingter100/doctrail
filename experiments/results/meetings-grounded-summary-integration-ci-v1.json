@@ -1,0 +1,168 @@
+{
+  "status": "exact_source_both_required_ci_passed",
+  "source_commit": "17a5dd60d367e72249d3d2dab413b87eaffbda90",
+  "runs": [
+    {
+      "id": 39749052460,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39749052460",
+      "headSha": "17a5dd60d367e72249d3d2dab413b87eaffbda90",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 39749062768,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39749062768",
+      "headSha": "17a5dd60d367e72249d3d2dab413b87eaffbda90",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "server/src/main/java/io/doctrail/MeetingAnalysis.java",
+      "bytes": 8192,
+      "sha256": "e665d71e80c3f1d04021d59d972b89c2546255f6ce6f74705f3c97e330255ff8",
+      "lf": true
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/MeetingService.java",
+      "bytes": 15637,
+      "sha256": "283a0387fa91c8479a03f8c10f076f509895d1a1518d81fdd4fc33bb133eb617",
+      "lf": true
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/GenerationClient.java",
+      "bytes": 6137,
+      "sha256": "7820e2d1e0176f07111b3c730095eb40f7a64ad874bebc43f27033fea6c7be7a",
+      "lf": true
+    },
+    {
+      "path": "server/src/test/java/io/doctrail/MeetingGroundedSummaryTest.java",
+      "bytes": 21569,
+      "sha256": "04a5ace938c69fede1e83e5004d1070a819dd15890a07317bc00dafb7ec0a2f0",
+      "lf": true
+    },
+    {
+      "path": "web/src/meetings.ts",
+      "bytes": 14044,
+      "sha256": "8cbe643a0d42598756c258c5854feb1d2958bfe1c0278a13a6eb5412421cad93"
+    },
+    {
+      "path": "web/src/components/MeetingViews.tsx",
+      "bytes": 45063,
+      "sha256": "a1ed81d5dce33ed16e4db85bd8f63382add47cac485896851a64b17eff56a7f3"
+    },
+    {
+      "path": "web/tests/meeting-grounded-summary.spec.ts",
+      "bytes": 19406,
+      "sha256": "3c8571874ce75f60deebafe75dca3e6e99279cfcf4af36f87ae01046dcd91318"
+    },
+    {
+      "path": "web/scripts/meeting-transport-fixture.mjs",
+      "bytes": 4987,
+      "sha256": "33ca1bd10a193691b9f6c66684d231561e417ee1d8d1e27e78629b30f7a9cb44"
+    },
+    {
+      "path": "web/scripts/test-java.mjs",
+      "bytes": 9514,
+      "sha256": "77b6d79f71191a03b459cd0d331f143118281f34f416c55c86ffa6f5956ab6ed"
+    },
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 20516,
+      "sha256": "c49c8c96c97394f0dd416e6e1d218fabcbcb357da4a7fc8294a59c45fe106e19",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 4473,
+      "sha256": "e6c0b2c1433fb461166b089eff1001b6352c1382a31c898a61fb7fd329ebf3c1",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 22482,
+      "sha256": "cf9e74607f763becb94554d25bc8bd3fa6b56a5d6bd943b2626bea8db572b276",
+      "lf": true
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 38707,
+      "sha256": "83009cce1167fa8798d14ea150d4b5cc92b1228eef13e610abe9f6e10b72a313",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 41322,
+      "sha256": "e762881ab3a150babe9168506ebd0fe224beb71857a3cf67e683b9b8fc4d2ae4",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 6477,
+      "sha256": "45210483fa3bf739c6117f4425395296c6f4b200534323bbf390572efd600d73",
+      "lf": true
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 29661,
+      "sha256": "ea636f53e26b1cb5a2658e916e7b81ab02bb6edd7cdc1bb7445b8a0a3f0b6f59",
+      "lf": true
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 62348,
+      "sha256": "1d34632ce1ca74a2186fba87a47889cdafb7e7de9f1b4c43c38fc082a599cd87",
+      "lf": true
+    },
+    {
+      "path": "src/doctrail/meeting_grounded_summary.py",
+      "bytes": 18267,
+      "sha256": "c2a9865871764ec2237719dc77dc03427f5d6c1edab735b44054fa384af0b2c1"
+    },
+    {
+      "path": "tests/test_meeting_grounded_summary.py",
+      "bytes": 20813,
+      "sha256": "f3fff0339a95bfc6b1d7546ff852925230892503c4f8ab339c2c7ebb57a8b880"
+    }
+  ],
+  "actual_new_model_runs": 0,
+  "human_review": false,
+  "scope": "CI code and synthetic regression; not actual model quality, native feasibility or deployment"
+}

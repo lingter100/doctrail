@@ -1,4 +1,24 @@
 # 진행 상태
+## 2026-10-22 · 실제 요약 비교 실행 계약 확정
+
+기존 Astra xhigh가 [한 번의 개발 실행 계약](MEETINGS-GROUNDED-SUMMARY-EXECUTION.md)48줄/14,002B(SHA2ec2a10b)를 반환했고 부모가 전체를 읽었다. 현재 v3와 companion2를 원본 보존 후 최소 수정해 재사용하고 새 generic 회귀1개만 추가한다. 기존 입력16/기준과 제품19/JAR/UI·동결77은 유지한다. 정확 assembly 전달·의존 경로 집합·새 once 출력 경로·실제 주장/근거 확인이 필수 delta다. 추가 복제 실행기나 별도 평가 체계는 만들지 않는다.
+
+계약+통과한 source CI 기록을 먼저 커밋하고 기존 Astra high 구현자에게 harness3만 배정한다. generic 검사와 독립 읽기를 통과한 최종 binding 후에만 부모가 실제 실행을 별도 한 번 배정한다. 새 독립 Astra xhigh 판단자는 등록 메타데이터만 보았으며 원문 고정 기준→새 요약/근거 판단 잠금→모델 자기검토/성능 순서를 지킨다. 실제 새 모델 실행은 아직0이다.
+
+## 2026-10-22 · 연결 소스의 필수 CI 모두 통과
+
+17a5dd6의 push39749052460/PR39749062768에서 backend·java-service·web이 모두 성공했고 watch29962/80471도 exit0으로 종료됐다. [CI 기록](../experiments/results/meetings-grounded-summary-integration-ci-v1.json)은 source19개 Git/working 일치와 정확 head를 묶는다(SHA e852d379). 새 실제 모델/의미 품질/사용자 검수/배포 증거는 아니다.
+
+기존 v3 실행기를 그대로 쓰면 extraction_assembly 미전달로 legacy가 선택됨을 generic 읽기에서 발견했다. 새 후보를 명시 선택하고 현재 의존 코드·JAR·UI를 고정하며 새 once 경로를 사용하는 최소 수정이 필요하다. 기존 v3 정리26개와 원본을 보존하고 별도 복제 실행기는 만들지 않는다. 설계 반환 후 실제 비교로 연결하며 전체 goal ACTIVE다.
+
+## 2026-10-22 · 연결 소스 공개와 새 후보 실행 준비
+
+직전 goal turn은 연결17개 구현·검사·독립 검토·공개 기록과29개 커밋의 progress다. 재개에서 goal ACTIVE·실제 Git/사용자 계정·제품 프로세스 부재를 확인했다. 최초 sandbox 읽기에서는 Git worktree/CIM 접근이 제한됐고 권한 있는 읽기 재확인으로 clean과 프로젝트 프로세스0을 확인했다.
+
+17a5dd60d367e72249d3d2dab413b87eaffbda90의29개 committed/working bytes가 staging 증거와 모두 같고 author/committer가lingter100임을 확인해 push했다. PR14는OPEN/DRAFT이며 정확 head를 확인했다. push39749052460/PR39749062768은 진행 중이고 watch29962/80471로 같은 실행을 관찰한다. source17은 고정한다.
+
+기존 Astra xhigh 설계자에게 NEW MEETINGS-GROUNDED-SUMMARY-EXECUTION.md만 배정했다. 기존 v3 개발 runner/observer 재사용과 필수 최소 변경을 generic 코드/안전 집계로 판단한다. raw 평가 자료와 닫힌 cal/val/test는 열지 않으며 실제 모델 실행은 아직 배정하지 않았다. 전체 goal ACTIVE/Phase1 incomplete다.
+
 ## 2026-10-22 · 근거 연결 요약의 Java·화면·Python 서비스 연결 검증
 
 Java4 최종121개(신규69+기존52), 실제 Java/합성 응답 화면 신규13+기존28=41개, Python 기존8 관련582개 합성 검사가 통과했다. 타입/build/offline package/Ruff와 각각 별도 Astra xhigh 읽기 검토의 남은 blocker0을 확인했다. NEW2의162개는 Python 관련582개와 겹치므로 합산하지 않는다. 모든 담당자가 반환했고 Java/Maven 슬롯·진행 중 제품 실행은 없다.

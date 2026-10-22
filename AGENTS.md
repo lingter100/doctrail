@@ -1,4 +1,7 @@
 # DocTrail project instructions
+- Grounded execution NEW plan48lines/14002B/2ec2a10b returned and parentaccepted: reuse archived-before-edit v3+browser2 and NEWgeneric regression1, no duplicate runner. CI17a5dd6 bothpassed. Commit contract+CI then existingAstrahigh harness3 only; finalbindings/readreview before explicitonce. NEW Astraxhigh grounded_summary_judge registered metadataonly. Noactualnewmodel/goalACTIVE.
+- Integration17a5dd6 BOTH39749052460/39749062768 ALL3CIpassed/watch29962+80471terminal0; CIe852d379/source19Git+workingexact. ExistingAstraxhigh executionplan1 active/genericv3reuse needs explicitassembly+currentbindings+newoncepath; oldv3/cleanup26 preserve. Parentdocs/Git; noactualnewmodel/goalACTIVE.
+- Integration17a5dd6 pushed/userauthorcommitterlingter100/29Git+workingexact/PR14drafthead. CIpush39749052460+PR39749062768 running/watch29962+80471; reobserve samehandles. Allproductownersreturned/no productjobs/source17held. ExistingAstraxhigh designer owns NEW grounded execution plan1/genericreuse only; noactualnewmodel/goalACTIVE/Phase1incomplete.
 
 ## Scope and truthfulness
 - Parent staging29 failed BEFOREcommit on publicJSON2 CRLF/GitLF; originals2preserved/JSONequal LFonly repaired final576a64c3/ca9d8237. Source17unchanged. Re-stage exact29 in separatecall BEFOREcommit; allownersreturned/CIpending/noactualmodel/goalACTIVE.
