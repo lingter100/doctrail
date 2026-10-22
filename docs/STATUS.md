@@ -1,4 +1,42 @@
 # 진행 상태
+## 2026-10-22 · 근거 연결 요약의 Java·화면·Python 서비스 연결 검증
+
+Java4 최종121개(신규69+기존52), 실제 Java/합성 응답 화면 신규13+기존28=41개, Python 기존8 관련582개 합성 검사가 통과했다. 타입/build/offline package/Ruff와 각각 별도 Astra xhigh 읽기 검토의 남은 blocker0을 확인했다. NEW2의162개는 Python 관련582개와 겹치므로 합산하지 않는다. 모든 담당자가 반환했고 Java/Maven 슬롯·진행 중 제품 실행은 없다.
+
+화면 최초9pass/4fail은 trace DOM의 exact-label 선택자 문제였다. 제품2/패키징UI를 유지하고 신규spec 선택자16줄만 바꿔13개를 통과했다. 기존관련6spec28개도 별도 통과했고 관찰 JVM8/runner8 종료를 확인했다. [Java·화면 공개 결과](../experiments/results/meetings-grounded-summary-java-ui-v1.json), [화면과 실행법](MEETINGS-VISUAL-ACCEPTANCE.md)에 처음 실패·AI 시각검토·사용자 검수 미완료를 구분했다.
+
+Python 최초574pass 뒤 부모가 잘못된 health.runtime None/list/string/int가 AttributeError로 새는 회귀를 재현했다. 원래 source/receipt47개를 보존하고 launcher/test2의 dict 검사를 추가해 기존 generation_health_identity로 정규화했다. 중간582/Ruff TRY004도 보존하고 최종582(18.40초)/Ruff를 확인했다. normal/observer 실제 generator/runtime, 상태·코드 binding·공유120초·관측 실패·busy 진단을 검증했다. [서비스 연결 결과](../experiments/results/meetings-grounded-summary-service-v1.json).
+
+부모는 변경17개와 검사를 읽고 Java61/UI135/Python원래47+delta24 artifact, 현재UI/runtime21, JAR속UI4, 동결77을 확인했다. 대표 합성 이미지2개를 원본 그대로 공개 문서에 연결했다. 부모 checker의 괄호오타와 review key가정 실패는 제품검사 실패와 구분했고 원본/실패를 남겼다. 사용자 계정 source commit·정확 CI가 다음이며 아직 새 후보의 실제 모델·tokenizer·native·의미 평가 실행은0이다. 전체 goal ACTIVE/Phase1 incomplete/PR14 draft다.
+
+최초 staging 검사에서 공개 JSON2의 Windows CRLF와 Git LF가 달라 commit 전에 중단했다. 원본2를 .local/meeting-grounded-summary-service-v1/public-json-crlf-originals에 보존하고 LF만 바꿔 JSON 값 동일을 확인했다. 제품17개는 변경하지 않았다. 공개 결과 최종 LF SHA는576a64c3/ca9d8237이며 최초 df04a28f/0cc2fad2와 구분한다. 재 staging 검증을 별도 호출에서 통과한 뒤에만 commit한다.
+
+## 2026-10-22 · 화면 실제 연결 검사와 Python 서비스 선택 연결 병행
+
+직전 goal turn은 Java4/독립 검토 반환·합성 응답 seam 구현·검증과 실제 UI 회귀 배정의 progress다. 재개에서 goal ACTIVE·Git·담당자·프로세스를 확인했다. 부모는 기존 test-java.mjs 원본을 보존하고 새 spec에만 합성 모델 응답을 켜는 allowlist 한 항목을 추가했다. 이 runner와 fixture2는 부모 소유이며 신규 framework/별도 실행기는 없다.
+
+UI 담당이 타입/build/offline package/JAR 속 UI4 동일을 확인하고 첫 실제 Java+합성 응답 회귀를 진행 중이다. desktop/mobile의 문장별 모든 근거 이동2개는 통과했고 새 편집 검사에서 textbox 선택 timeout이 생겼다. 첫 소스/로그/trace를 보존하며 실제 제품 실패인지 검사 선택자 문제인지 구분한다. 별도 Astra xhigh UI3+fixture2 읽기 검토는 첫 capacity 오류 후 같은 요청 한 번 재시도로 실제 시작했다. 아직 전체 브라우저·UI 독립 검토 완료가 아니다.
+
+Java4 계약과 UI 연결 자체를 확인했으므로 기존 Astra high service_rag_worker에게 설계의 Python 서비스·launcher·acceptance 기존8 연결을 배정했다. 증거는 NEW .local/meeting-grounded-summary-service-v1, NEW2/동결77/기존coverage/닫힌자료는 고정한다. normal/observer 실제 선택과 health·코드 binding·공유 deadline을 합성 검사하며 Java/Maven은 계속 UI 담당 전용이다. Python 최종 결과와 실제 새 모델 실행은 아직 없다. 전체 goal ACTIVE다.
+
+## 2026-10-22 · Java 요약 저장 계약 검사 완료와 화면 연결 검토
+
+후속: 별도 Astra xhigh의 Java4 독립 읽기 검토 blocker0/source4전후동일, read-review-v1.json SHA17ef7bdf를 반환했다. 부모는 React 담당에게 자기 소스3/checkpoint 고정 후 build·offline package·실제 Java+명시 합성 응답의 새 v2/기존 v1/원문 초점 회귀 슬롯을 배정했다. Java/Maven은 이 UI 담당자만 소유한다. 실행 결과는 아직 미반환이고 UI 최종 독립 검토도 남아 있다.
+
+a57c6cb의 push39742086175/PR39742092624 필수 backend·java-service·web 모두 성공했고 watch19196/23565도 exit0으로 종료됐다. 단독 adapter의 CI이며 후속 Java/React 변경의 검증과 구분한다.
+
+기존 Astra high의 Java4가 신규69+기존관련52=121개 합성 JUnit을 통과했다(최종 Maven19.905초). 부모가 고정 source4와 receipt artifact61, 동결77을 확인했다. 최초 두 컴파일 검사 실패와 당시 PID inventory 미수집 한계를 보존하며 최종 추적10개는 종료됐다. Java/Maven 슬롯은 반환됐고 별도 기존 Astra xhigh가 generic 코드 독립 읽기 검토 중이다. 기존 저장 형식/사용자 수정본/버전 전환/원문 좌표/실패 보존을 검사했으며 실제 모델 품질이나 전체 서비스 완료를 뜻하지 않는다.
+
+React 담당은 기존 소유3개 구현과 타입 검사를 진행 중이며 아직 build/package/browser 실행 전이다. 실제 Java에 v2를 처음 저장하려면 모델 응답의 명시적 합성 전송 접점이 필요해 부모가 기존 web/scripts/meeting-transport-fixture.mjs에 FIXTURE_GROUNDED_SUMMARY_V2만 추가했다. 원본과 검사 기록은 .local/meeting-grounded-summary-fixture-v1에 보존했고 기존 v1 HTTP 응답 동일·v2 파생 투영과 emoji 코드포인트 근거를 확인했다. 검토 완료 후 화면 담당에게 Java/Maven·브라우저 슬롯을 별도 배정한다. Python 서비스 연결과 실제 새 모델 실행은 여전히 미배정이며 전체 goal ACTIVE다.
+
+## 2026-10-22 · 단독 요약 소스 공개와 Java·React 계약 연결
+
+NEW2/설계amendment/검증기록9개를a57c6cb로commit/push하고각Git bytes·원격author/committer lingter100·PR14draft/head를확인했다. push39742086175/PR39742092624는진행중이며이source의정확CI를확인한다. 기존99dc866의양쪽필수CI통과와구분한다.
+
+기존 Astra high service_rag_worker는Java MeetingAnalysis/MeetingService/GenerationClient+NEW MeetingGroundedSummaryTest4개와NEW .local/meeting-grounded-summary-java-v1을소유한다. Java/Maven전용이며unit검사만먼저수행한다. 기존 Astra high meeting_ui_focus_review는별도구현역할로React meetings.ts/MeetingViews.tsx+NEW meeting-grounded-summary.spec.ts3개와NEW .local/meeting-grounded-summary-ui-v1을소유한다. 먼저typecheck만하고build/package/browser는Java반환후별도배정한다. 본인구현의최종독립검토는별도담당자에게배정한다.
+
+구형v1/빈분석을보존하고새v2 주장·근거·파생투영·검토완료계약·사용자편집버전보호를연결한다. baseline/JAR/UI를보존했으며아직첫코드/검사반환없음. Python서비스선택/observer연결과실제모델실행은미배정이다. 부모는문서/Git/CI/generic접점읽기만담당하며전체goal ACTIVE다.
+
 ## 2026-10-22 · 근거 연결 요약 adapter 구현·독립 검토 완료
 
 직전 goal turn은 화면수정·실제회귀·정확CI·새설계·3commit/push의progress다. 재개에서 기존goal ACTIVE·Git·담당자·제품프로세스를 확인하고 기존작업을보존했다. 문서99dc866의 push39740135147/PR39740140449 필수3job이 모두 성공했고 watch18061/13528도exit0종료했다.

@@ -424,7 +424,8 @@ def test_batch_preparation_consumes_original_outer_deadline(batch_runtime, monke
 
 
 @pytest.mark.parametrize("policy,assembly", [("single", "legacy"), ("batch-v1", "legacy"),
-    ("batch-v2", "legacy"), ("batch-v2", "coverage-v1")])
+    ("batch-v2", "legacy"), ("batch-v2", "coverage-v1"),
+    ("batch-v2", "grounded-summary-v1")])
 @pytest.mark.parametrize("observed", [False, True])
 def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatch, policy, assembly, observed):
     import doctrail.meeting_service_rag as module
@@ -444,6 +445,8 @@ def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatc
         assert service.health()["extraction"]["classification"]["policy"] == policy
         assert service.health()["extraction"]["assembly"] == assembly
         assert isinstance(service.analysis, module.CoverageMeetingRuntime) == (assembly == "coverage-v1")
+        assert isinstance(service.analysis, module.GroundedSummaryRuntime) == (assembly == "grounded-summary-v1")
+        assert isinstance(service.analysis.generator, module.GroundedSummaryGenerator) == (assembly == "grounded-summary-v1")
     finally:
         service.close()
 
@@ -636,3 +639,174 @@ def test_busy_analysis_does_not_reemit_prior_assembly_diagnostics(batch_runtime)
         assert native.calls == []
     finally:
         service.analysis.lock.release()
+
+
+@pytest.fixture
+def grounded_runtime():
+    from test_meeting_grounded_summary import Native
+
+    from doctrail.meeting_service_rag import (
+        GroundedSummaryGenerator,
+        ObservedGroundedSummaryGenerator,
+    )
+    services = []
+    def build(observer=None):
+        native = Native()
+        native.generator.close()
+        cls = GroundedSummaryGenerator if observer is None else ObservedGroundedSummaryGenerator
+        options = {} if observer is None else {"observer": observer}
+        native.generator = cls("http://127.0.0.1:19003", TOKEN, "unused-synthetic",
+            transport=httpx.MockTransport(native.handle), **options)
+        native.generator._alias = GGUF_SHA256
+        native.generator._metadata = copy.deepcopy(METADATA)
+        answer = SimpleNamespace(public_metadata=lambda: copy.deepcopy(METADATA), close=lambda: None)
+        service = ServiceRuntime(answer, native.generator, cleanup=lambda: True, observer=observer,
+                                 extraction_assembly="grounded-summary-v1")
+        services.append(service)
+        return service, native
+    yield build
+    for service in services:
+        service.close()
+
+
+@pytest.mark.parametrize("observed", [False, True])
+def test_grounded_actual_http_runtime_keeps_full_source_and_one_generation_review(grounded_runtime, observed):
+    from test_meeting_grounded_summary import request
+
+    from doctrail.meeting_grounded_summary import summary_metadata
+    events = []
+    service, native = grounded_runtime((lambda op, event, value: events.append((event, value))) if observed else None)
+    with TestClient(create_app(TOKEN, lambda: service)) as client:
+        assert client.get("/health").status_code == 401
+        health = client.get("/health", headers=headers()).json()
+        assert health["extraction"]["assembly"] == "grounded-summary-v1"
+        assert health["extraction"]["runtime"]["grounded_summary"] == summary_metadata()
+        assert health["extraction"]["limits"]["deadline_seconds"] == 120
+        response = client.post("/analyze", json=request().model_dump(), headers=headers())
+        assert response.status_code == 200
+        result = response.json()
+        assert result["analysis"]["summary_version"] == 2
+        assert result["summary_review"] == {"policy": "grounded-review-v1", "status": "accepted"}
+        assert "last_assembly" not in result and "assembly" not in result
+    assert [stage for stage, _, _ in native.completed] == ["classification", "generation", "review"]
+    for stage, data, _ in native.completed:
+        if stage != "classification":
+            assert "".join(part["text"] for part in data["source_parts"]) == request().content
+    assert native.completed[-1][1]["candidate_claims"] == [
+        {"id": 0, "text": "논의와 결정을 함께 확인한다.", "evidence": [0, 1]}]
+    assert native.generator.service_deadline is None and not native.generator._cache
+    if observed:
+        assert [event for event, _ in events].count("classification_units") == 1
+        assert sum(event == "transport_started" and value["path"] == "/completion" for event, value in events) == 3
+        stage_names = [value["stage"] for event, value in events if event == "summary_stage"]
+        assert stage_names == ["generation_admission", "generation_started", "generation_completed",
+                               "review_admission", "review_started", "review_completed", "assembled"]
+        diagnostic = next(value["diagnostic"] for event, value in events if event == "assembly")
+        assert diagnostic["observation_scope"] == "assembly_only_not_request_success"
+        assert events[-1][0] == "result"
+    else:
+        assert events == []
+
+
+@pytest.mark.parametrize("failure", ["summary_stage", "assembly", "result", "deadline"])
+def test_grounded_observer_failure_or_cost_never_becomes_success(grounded_runtime, monkeypatch, failure):
+    from test_meeting_grounded_summary import request
+    now, events = [100.0], []
+    monkeypatch.setattr(time, "monotonic", lambda: now[0])
+    def observer(op, event, value):
+        events.append((event, value))
+        if event == "assembly" and failure == "deadline":
+            now[0] = 220.0
+        if event == failure:
+            raise OSError("synthetic evidence sink failed")
+    service, native = grounded_runtime(observer)
+    code = "generation_deadline_exceeded" if failure == "deadline" else "generation_failed"
+    with pytest.raises(WorkerError, match=code):
+        service.analyze(request())
+    assert len(native.completed) == (0 if failure == "summary_stage" else 3)
+    if failure != "result":
+        assert not any(event == "result" for event, _ in events)
+    assert service._poisoned and not native.generator._cache
+    assert native.generator.service_deadline is None and not service.lock.locked()
+
+
+@pytest.mark.parametrize("observed", [False, True])
+def test_grounded_preparation_clamps_original_service_deadline(grounded_runtime, monkeypatch, observed):
+    from test_meeting_grounded_summary import request
+    now = [100.0]
+    monkeypatch.setattr(time, "monotonic", lambda: now[0])
+    def observer(op, event, value):
+        if event == "started":
+            now[0] = 150.0
+    service, native = grounded_runtime(observer if observed else None)
+    original = service.analysis.analyze
+    def late(request):
+        now[0] += 40
+        assert native.generator._remaining(340) == (30 if observed else 80)
+        now[0] = 220
+        return original(request)
+    service.analysis.analyze = late
+    with pytest.raises(WorkerError, match="generation_deadline_exceeded"):
+        service.analyze(request())
+    assert native.completed == [] and native.calls == []
+
+
+@pytest.mark.parametrize("lock", ["outer", "inner"])
+def test_grounded_busy_does_not_republish_previous_assembly(grounded_runtime, lock):
+    from test_meeting_grounded_summary import request
+    events = []
+    service, native = grounded_runtime(lambda op, event, value: events.append((event, value)))
+    service.analyze(request())
+    previous = service.analysis.last_assembly
+    events.clear(); native.calls.clear()
+    held = service.lock if lock == "outer" else service.analysis.lock
+    held.acquire()
+    try:
+        with pytest.raises(WorkerError, match="model_busy"):
+            service.analyze(request())
+        assert service.analysis.last_assembly is previous
+        assert not any(event in {"assembly", "summary_stage", "result"} for event, _ in events)
+        assert native.calls == []
+    finally:
+        held.release()
+
+
+@pytest.mark.parametrize("assembly", ["legacy", "coverage-v1"])
+def test_grounded_generator_cannot_be_used_for_other_runtime(grounded_runtime, assembly):
+    from doctrail.generation_runtime import GenerationError
+    service, native = grounded_runtime()
+    with pytest.raises(GenerationError, match="generation_identity_mismatch"):
+        ServiceRuntime(service.answer_generator, native.generator, cleanup=lambda: True,
+                       extraction_assembly=assembly)
+    assert native.calls == []
+
+
+@pytest.mark.parametrize("fault", ["generator", "metadata", "runtime"])
+def test_grounded_health_drift_blocks_requests_before_native(grounded_runtime, fault):
+    from test_meeting_grounded_summary import request
+
+    from doctrail.meeting_grounded_summary import summary_metadata
+    service, native = grounded_runtime()
+    if fault == "generator":
+        service.analysis.generator = SimpleNamespace(public_metadata=lambda: {
+            **METADATA, "grounded_summary": summary_metadata()})
+    elif fault == "runtime":
+        service.analysis.extraction_assembly = "coverage-v1"
+    else:
+        original = native.generator.public_metadata
+        native.generator.public_metadata = lambda: {**original(), "grounded_summary": {}}
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.health()
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.analyze(request())
+    assert native.calls == []
+    service.analysis.generator = native.generator
+
+
+@pytest.mark.parametrize("policy", ["single", "batch-v1"])
+def test_grounded_invalid_policy_fails_before_any_client(monkeypatch, policy):
+    import doctrail.meeting_service_rag as module
+    monkeypatch.setattr(module, "ServiceAnswerGenerator", lambda *args: pytest.fail("constructed client"))
+    with pytest.raises(ValueError, match="invalid_extraction_assembly"):
+        module.load_runtime(SimpleNamespace(), cleanup=lambda: True, startup_deadline=1,
+                            analysis_policy=policy, extraction_assembly="grounded-summary-v1")

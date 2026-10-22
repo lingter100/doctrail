@@ -30,6 +30,24 @@ export async function startMeetingTransportFixture() {
             { id: 'fixture-action', type: 'action', text: action, ...span(action), assignee: null, due_date: null, priority: null, status: 'needs_confirmation' },
           ],
         } };
+        if (body.content.includes('FIXTURE_GROUNDED_SUMMARY_V2')) {
+          // Opt-in synthetic wire contract for real Java persistence/UI tests.
+          // The accepted marker is fabricated; it is not an AI review result.
+          const claims = [
+            { id: 0, text: '합성 초안: 단계별 배포를 결정하고 민수가 후속 점검을 맡는다.', citations: [span(decision), span(action)] },
+            { id: 1, text: '합성 초안: 민수가 후속 점검을 담당한다.', citations: [span(action)] },
+          ];
+          const unique = new Map();
+          for (const claim of claims) {
+            claim.citations.sort((a, b) => a.start_offset - b.start_offset || a.end_offset - b.end_offset);
+            for (const citation of claim.citations) unique.set(`${citation.start_offset}:${citation.end_offset}`, citation);
+          }
+          result.analysis.summary_version = 2;
+          result.analysis.summary_claims = claims;
+          result.analysis.summary = claims.map(claim => claim.text).join('\n');
+          result.analysis.summary_evidence = [...unique.values()].sort((a, b) => a.start_offset - b.start_offset || a.end_offset - b.end_offset);
+          result.summary_review = { policy: 'grounded-review-v1', status: 'accepted' };
+        }
       } else if (request.url === '/answer') {
         calls.answer++;
         const context = body.contexts.find(value => value.text.includes(fixtureMarker));

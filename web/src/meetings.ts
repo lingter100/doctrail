@@ -6,7 +6,61 @@ export type Evidence = Span & { document_id: string; revision: number; chunk_id?
 export type ItemType = 'topic' | 'proposal' | 'decision' | 'unresolved' | 'action';
 export type ItemStatus = 'needs_confirmation' | 'confirmed' | 'todo' | 'doing' | 'done';
 export type MeetingItem = Span & { id: string; type: ItemType; text: string; assignee: string | null; due_date: string | null; priority: 'low' | 'medium' | 'high' | null; status: ItemStatus };
-export type Analysis = { meeting_title: string | null; meeting_date: string | null; participants: string[]; purpose: string | null; summary: string; summary_evidence?: Span[]; metadata_evidence: (Span & { field: string })[]; items: MeetingItem[] };
+export type SummaryClaim = { id: number; text: string; citations: Span[] };
+type AnalysisFields = { meeting_title: string | null; meeting_date: string | null; participants: string[]; purpose: string | null; summary: string; summary_evidence?: Span[]; metadata_evidence: (Span & { field: string })[]; items: MeetingItem[] };
+export type GroundedAnalysis = AnalysisFields & { summary_version: 2; summary_claims: SummaryClaim[]; summary_evidence: Span[] };
+export type Analysis = (AnalysisFields & { summary_version?: never; summary_claims?: never }) | GroundedAnalysis;
+
+// A partial or unknown contract must never silently become an editable v1 summary.
+export function summaryVersion(value: Analysis | null): 1 | 2 | null {
+  if (!value) return null;
+  if (!Object.hasOwn(value, 'summary_version') && !Object.hasOwn(value, 'summary_claims')) return 1;
+  if (value.summary_version !== 2 || !Array.isArray(value.summary_claims) || !Array.isArray(value.summary_evidence)
+    || value.summary_claims.length < 1 || value.summary_claims.length > 6) return null;
+  return value.summary_claims.every((claim, index) => claim && typeof claim === 'object' && claim.id === index && typeof claim.text === 'string'
+    && Array.isArray(claim.citations) && claim.citations.length >= 1 && claim.citations.length <= 4
+    && claim.citations.every(span => span && typeof span.quote === 'string' && Number.isInteger(span.start_offset) && Number.isInteger(span.end_offset))) ? 2 : null;
+}
+export function isGroundedSummary(value: Analysis): value is GroundedAnalysis { return summaryVersion(value) === 2; }
+
+export function summaryProjection(claims: SummaryClaim[]) {
+  const summary_claims = claims.map((claim, id) => ({ id, text: claim.text,
+    citations: claim.citations.map(span => ({ ...span })).sort((a, b) => a.start_offset - b.start_offset || a.end_offset - b.end_offset) }));
+  const unique = new Map<string, Span>();
+  for (const claim of summary_claims) for (const span of claim.citations) unique.set(`${span.start_offset}:${span.end_offset}`, { ...span });
+  return { summary_version: 2 as const, summary_claims, summary: claims.map(claim => claim.text).join('\n'),
+    summary_evidence: [...unique.values()].sort((a, b) => a.start_offset - b.start_offset || a.end_offset - b.end_offset) };
+}
+
+export function summaryEditError(claims: SummaryClaim[], content: string): string {
+  if (claims.length < 1 || claims.length > 6) return '요약 문장은 1개부터 6개까지 작성해 주세요.';
+  const source = Array.from(content);
+  let total = 0;
+  for (const [index, claim] of claims.entries()) {
+    const text = Array.from(claim.text);
+    if (!claim.text.trim() || text.length > 240 || /[\r\n\v\f\u001c-\u001e\u0085\u2028\u2029]/.test(claim.text)
+      || text.some(char => { const point = char.codePointAt(0)!; return point >= 0xd800 && point <= 0xdfff; })) return `요약 문장 ${index + 1}은 줄바꿈 없이 1~240자로 작성해 주세요.`;
+    total += text.length;
+    if (total > 1200) return '요약 문장 전체를 1,200자 이내로 작성해 주세요.';
+    if (claim.citations.length < 1 || claim.citations.length > 4) return `요약 문장 ${index + 1}에 원문 근거를 1~4개 연결해 주세요.`;
+    const seen = new Set<string>();
+    for (const span of claim.citations) {
+      const key = `${span.start_offset}:${span.end_offset}`;
+      if (!span.quote.trim() || Array.from(span.quote).length > 12000 || !Number.isInteger(span.start_offset) || !Number.isInteger(span.end_offset)
+        || span.start_offset < 0 || span.end_offset <= span.start_offset || span.end_offset > source.length
+        || source.slice(span.start_offset, span.end_offset).join('') !== span.quote) return `요약 문장 ${index + 1}의 근거를 원문에서 복사하고 정확한 위치를 선택해 주세요.`;
+      if (seen.has(key)) return `요약 문장 ${index + 1}에 같은 위치의 근거가 중복되어 있어요.`;
+      seen.add(key);
+    }
+  }
+  return '';
+}
+
+export function summaryFailureMessage(code: string | null | undefined): string | null {
+  if (code === 'generation_summary_insufficient') return '원문의 핵심을 충분히 담은 요약을 만들지 못했어요. 원문을 확인하거나 직접 다시 분석을 요청해 주세요.';
+  if (code === 'generation_summary_review_rejected') return '요약의 근거나 핵심 내용이 충분한지 확인하지 못해 새 요약을 반영하지 않았어요. 원문을 확인하거나 직접 다시 분석을 요청해 주세요.';
+  return null;
+}
 export type MeetingDetail = { document: Detail; meeting: { document_id: string; analysis_status: 'queued' | 'running' | 'ready' | 'failed' | 'stale'; analysis_error: string | null; source_revision: number; version: number; ai_analysis: Analysis | null; analysis: Analysis | null; provenance: 'ai' | 'user_edited'; meeting_date?: string | null; participants?: string[] } };
 export type TaskItem = MeetingItem & { meeting_id: string; title: string; workspace_id: string; source_revision: number; version: number };
 export type DecisionLink = Span & { id: string; source_id: string; target_id: string; source_item_id: string; target_item_id: string; source_title?: string; target_title?: string; source_meeting_date?: string | null; target_meeting_date?: string | null; source_item_text?: string; target_item_text?: string; relation: 'related' | 'supersedes'; created_by: string; created_at?: string; source_revision: number; target_revision: number };
@@ -48,6 +102,8 @@ export function knowledgeError(error: unknown): string {
 export function meetingError(error: unknown): string {
   if (!(error instanceof ApiError)) return errorMessage(error);
   if (error.status === 409) return '원문이나 분석이 변경되어 저장하지 않았어요. 새로 불러온 뒤 수정 내용을 다시 확인해 주세요.';
+  const summaryFailure = summaryFailureMessage(error.code);
+  if (summaryFailure) return summaryFailure;
   if (error.code === 'context_budget_exceeded') return '찾은 근거가 한 번에 답변할 수 있는 분량을 넘었어요. 원문은 그대로 보관되어 있어요. 검색 조건을 좁히거나 원문 검색으로 확인해 주세요.';
   if (error.code === 'inference_timeout') return '관련 근거를 찾는 시간이 초과되어 답변을 만들지 못했어요. 검색 조건을 좁히거나 원문 검색으로 확인해 주세요.';
   if (error.code === 'generation_busy') return '다른 AI 요청을 처리하고 있어요. 잠시 후 다시 시도해 주세요.';

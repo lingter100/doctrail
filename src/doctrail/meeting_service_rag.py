@@ -21,6 +21,11 @@ from doctrail.meeting_analysis_batch import (
 from doctrail.meeting_answer_v2 import response_language
 from doctrail.meeting_contract import AnalyzeRequest, AnswerRequest
 from doctrail.meeting_extraction_coverage import CoverageMeetingRuntime
+from doctrail.meeting_grounded_summary import (
+    GroundedSummaryGenerator,
+    GroundedSummaryRuntime,
+    summary_metadata,
+)
 from doctrail.meeting_qwen35 import Qwen35Generator
 from doctrail.meeting_runtime import DEADLINE_SECONDS as EXTRACTION_SECONDS
 from doctrail.meeting_thinking_quality import QualityThinkingGenerator
@@ -28,14 +33,14 @@ from doctrail.meeting_worker import MeetingRuntime
 
 BUDGET_HEADER = "X-DocTrail-Request-Budget-Ms"
 PROTOCOL = "meeting-service-rag-v1"
-ASSEMBLIES = ("legacy", "coverage-v1")
+ASSEMBLIES = ("legacy", "coverage-v1", "grounded-summary-v1")
 
 
 def validate_assembly(analysis_policy, extraction_assembly):
     if analysis_policy not in POLICIES:
         raise ValueError("invalid_analysis_policy")
     if extraction_assembly not in ASSEMBLIES or (
-            extraction_assembly == "coverage-v1" and analysis_policy != "batch-v2"):
+            extraction_assembly != "legacy" and analysis_policy != "batch-v2"):
         raise ValueError("invalid_extraction_assembly")
 
 
@@ -120,6 +125,10 @@ class ObservedScopedBatchedAnalysisGenerator(ObservedAnalysisGenerator,
     """Observer hooks wrap the same scope policy without copying the batch loop."""
 
 
+class ObservedGroundedSummaryGenerator(ObservedAnalysisGenerator, GroundedSummaryGenerator):
+    """The same grounded algorithm with existing transport and deadline observations."""
+
+
 class ServiceAnswerGenerator(QualityThinkingGenerator):
     """Clamp every inherited deadline without copying the frozen answer algorithm."""
 
@@ -147,7 +156,11 @@ class ServiceRuntime:
         classification_metadata(self.analysis_policy)
         validate_assembly(self.analysis_policy, extraction_assembly)
         self.extraction_assembly = extraction_assembly
-        runtime_type = CoverageMeetingRuntime if extraction_assembly == "coverage-v1" else MeetingRuntime
+        if isinstance(analysis_generator, GroundedSummaryGenerator) != (
+                extraction_assembly == "grounded-summary-v1"):
+            raise GenerationError("generation_identity_mismatch")
+        runtime_type = {"legacy": MeetingRuntime, "coverage-v1": CoverageMeetingRuntime,
+                        "grounded-summary-v1": GroundedSummaryRuntime}[extraction_assembly]
         self.analysis = runtime_type(analysis_generator)
         answer = answer_generator.public_metadata()
         if (answer.get("repo_id"), answer.get("revision")) != (
@@ -179,6 +192,11 @@ class ServiceRuntime:
                 and self.analysis.generator.analysis_policy != self.analysis_policy):
             raise WorkerError("generation_failed", 503)
         if getattr(self.analysis, "extraction_assembly", "legacy") != self.extraction_assembly:
+            raise WorkerError("generation_failed", 503)
+        grounded = self.extraction_assembly == "grounded-summary-v1"
+        if (isinstance(self.analysis.generator, GroundedSummaryGenerator) != grounded
+                or self.analysis.generator.public_metadata().get("grounded_summary") != (
+                    summary_metadata() if grounded else None)):
             raise WorkerError("generation_failed", 503)
 
     def health(self):
@@ -216,7 +234,7 @@ class ServiceRuntime:
                 result = self.analysis.analyze(request)
             finally:
                 diagnostic = getattr(self.analysis, "last_assembly", None)
-                if self.extraction_assembly == "coverage-v1" and diagnostic is not previous_assembly:
+                if self.extraction_assembly != "legacy" and diagnostic is not previous_assembly:
                     # Assembly diagnostics do not claim request success. The actual
                     # result/error event below remains authoritative, including deadlines.
                     _observe(self.observer, "analyze", "assembly", {
@@ -398,6 +416,8 @@ def load_runtime(native, *, cleanup, startup_deadline, observer=None, analysis_p
         "batch-v1": (BatchedAnalysisGenerator, ObservedBatchedAnalysisGenerator),
         "batch-v2": (ScopedBatchedAnalysisGenerator, ObservedScopedBatchedAnalysisGenerator),
     }[analysis_policy]
+    if extraction_assembly == "grounded-summary-v1":
+        plain, observed = GroundedSummaryGenerator, ObservedGroundedSummaryGenerator
     options = {} if observer is None else {"observer": observer}
     analysis = (plain if observer is None else observed)(native.url, native.token, native.manifest,
                                                        **options)

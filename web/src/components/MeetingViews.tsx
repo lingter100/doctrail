@@ -1,7 +1,7 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { DocTrail } from '../useDocTrail';
 import { useMeetings, type MeetingsController } from '../useMeetings';
-import { analysisLabels, itemLabels, statusLabels, type Analysis, type ItemStatus, type ItemType, type MeetingDetail, type MeetingItem, type Span } from '../meetings';
+import { analysisLabels, isGroundedSummary, itemLabels, statusLabels, summaryEditError, summaryFailureMessage, summaryProjection, summaryVersion, type Analysis, type ItemStatus, type ItemType, type MeetingDetail, type MeetingItem, type Span, type SummaryClaim } from '../meetings';
 import { Icon } from './Icon';
 
 const kinds: ItemType[] = ['topic', 'proposal', 'decision', 'unresolved', 'action'];
@@ -81,21 +81,21 @@ function MeetingDetailView({ app, controller }: { app: DocTrail; controller: Mee
   const owner = doc.owner_id === app.state.auth?.user.id;
   const current = showAi ? meeting.ai_analysis : meeting.analysis;
   const pending = ['queued', 'running'].includes(meeting.analysis_status);
-  const editable = owner && meeting.analysis_status === 'ready' && !!meeting.analysis;
+  const editable = owner && meeting.analysis_status === 'ready' && !!meeting.analysis && summaryVersion(meeting.analysis) !== null;
   return <article className="meeting-detail" data-testid="meeting-detail">
     <div className="meeting-detail-nav"><button className="text-button" disabled={controller.busy} onClick={controller.back}>← 목록으로</button><div><AnalysisStatus value={meeting.analysis_status}/><span className="experimental-badge">실험 AI</span></div></div>
     <header className="meeting-detail-heading"><h2>{meeting.analysis?.meeting_title || doc.title}</h2><p>원문 v{doc.revision} · 분석 편집 v{meeting.version} · {doc.visibility === 'private' ? '나만 보기' : '워크스페이스'}</p><div className="meeting-detail-actions"><button className="button secondary small-button" onClick={() => void app.openDocument(doc.id, undefined, 0, undefined, controller.sourceOrigin(doc.id))}><Icon name="file"/> 전체 원문</button>{editable && !showAi && <button className="button secondary small-button" disabled={controller.busy} onClick={() => setEditing(!editing)}><Icon name="edit"/>{editing ? '편집 닫기' : '분석 편집'}</button>}{owner && !pending && <button className="text-button" disabled={controller.busy || editing} onClick={() => void controller.analyze()}>{meeting.analysis_status === 'ready' ? 'AI 재분석 요청' : 'AI 분석 다시 시도'}</button>}</div></header>
     {pending && <div className="analysis-banner" role="status"><span className="spinner"/><div><strong>{analysisLabels[meeting.analysis_status]}</strong><p>완료되면 자동 갱신돼요. 원문은 지금도 확인할 수 있어요.</p></div></div>}
-    {meeting.analysis_status === 'failed' && <div className="source-warning"><strong>AI 분석을 완료하지 못했어요</strong><p>{meeting.analysis_error?.includes('not_configured') || meeting.analysis_error?.includes('disabled') ? 'AI 모델이 연결되지 않았어요.' : '모델 연결이나 입력 한도를 확인한 뒤 다시 시도해 주세요.'} 원문은 저장되어 있어요.</p></div>}
-    {meeting.analysis_status === 'ready' && meeting.analysis_error && <div className="source-warning"><strong>최근 재분석을 완료하지 못했어요</strong><p>기존 분석과 사용자 수정본은 보존되어 있어요. 모델 연결을 확인한 뒤 AI 재분석을 다시 요청할 수 있어요.</p></div>}
+    {meeting.analysis_status === 'failed' && <div className="source-warning"><strong>AI 분석을 완료하지 못했어요</strong><p>{summaryFailureMessage(meeting.analysis_error) || (meeting.analysis_error?.includes('not_configured') || meeting.analysis_error?.includes('disabled') ? 'AI 모델이 연결되지 않았어요.' : '모델 연결이나 입력 한도를 확인한 뒤 다시 시도해 주세요.')} 원문은 저장되어 있어요.</p></div>}
+    {meeting.analysis_status === 'ready' && meeting.analysis_error && <div className="source-warning"><strong>최근 재분석을 완료하지 못했어요</strong><p>기존 분석과 사용자 수정본은 보존되어 있어요. {summaryFailureMessage(meeting.analysis_error) || '모델 연결을 확인한 뒤 AI 재분석을 다시 요청할 수 있어요.'}</p></div>}
     {meeting.analysis_status === 'stale' && <div className="source-warning"><strong>현재 원문과 분석 버전이 달라요</strong><p>아래 내용은 이전 원문의 결과예요. 결정과 작업을 사용하기 전에 재분석해 주세요.</p></div>}
     {meeting.ai_analysis && meeting.provenance === 'user_edited' && <div className="meeting-tabs" role="tablist" aria-label="분석 버전"><button role="tab" aria-selected={!showAi} disabled={editing} onClick={() => setShowAi(false)}>사용자 수정본</button><button role="tab" aria-selected={showAi} disabled={editing} onClick={() => setShowAi(true)}>AI 초안 · 읽기 전용</button></div>}
-    <p className="analysis-disclosure">{showAi || meeting.provenance === 'ai' ? 'AI 분류와 원문 추출로 만든 초안이에요. 원문 인용과 함께 의미를 확인해 주세요.' : '사용자가 수정한 분석이에요. AI의 원본 결과와 구분해 보관해요.'} 원문에 없는 정보는 ‘확인 필요’로 표시해요.</p>
-    {showAi && editable && meeting.ai_analysis && <button className="button secondary small-button" disabled={controller.busy} onClick={() => { void controller.save(meeting.ai_analysis!).then(saved => { if (saved) setShowAi(false); }); }}>이 AI 초안을 사용자 수정본으로 적용</button>}
-    {editing && meeting.analysis ? <AnalysisEditor key={doc.id} detail={detail} controller={controller} cancel={() => setEditing(false)}/> : current ? <>
+    <p className="analysis-disclosure">{showAi || meeting.provenance === 'ai' ? current && isGroundedSummary(current) ? 'AI가 원문을 바탕으로 압축한 요약 초안이에요. 각 문장에 연결된 모든 근거를 함께 확인해 주세요. AI 자체 검토가 내용의 정확성이나 완전성을 보증하지는 않아요.' : 'AI 분류와 원문 추출로 만든 초안이에요. 원문 인용과 함께 의미를 확인해 주세요.' : '사용자가 수정한 분석이에요. AI의 원본 결과와 구분해 보관해요.'} 원문에 없는 정보는 ‘확인 필요’로 표시해요.</p>
+    {showAi && editable && meeting.ai_analysis && summaryVersion(meeting.ai_analysis) !== null && <button className="button secondary small-button" disabled={controller.busy} onClick={() => { void controller.save(meeting.ai_analysis!).then(saved => { if (saved) setShowAi(false); }); }}>이 AI 초안을 사용자 수정본으로 적용</button>}
+    {editing && meeting.analysis ? <AnalysisEditor key={doc.id} detail={detail} app={app} controller={controller} cancel={() => setEditing(false)}/> : current ? <>
       <div className="meeting-metadata"><div><span>회의 날짜</span><strong>{current.meeting_date || '확인 필요'}</strong></div><div><span>참석자</span><strong>{current.participants.length ? current.participants.join(', ') : '확인 필요'}</strong></div><div className="meeting-purpose"><span>회의 목적</span><strong>{current.purpose || '확인 필요'}</strong></div></div>
       {!!current.metadata_evidence?.length && <details className="metadata-proof"><summary>기본 정보의 원문 근거</summary>{current.metadata_evidence.map((span, index) => <EvidenceButton key={index} span={span} detail={detail} app={app} controller={controller} label={{ meeting_title: '제목', meeting_date: '날짜', participants: '참석자', purpose: '목적', summary: '요약' }[span.field] || '근거'}/>)}</details>}
-      <section className="analysis-section summary-section"><div className="analysis-section-heading"><Icon name="book"/><h3>{!showAi && meeting.provenance === 'user_edited' ? '수정한 요약' : 'AI 발췌 요약'}</h3></div><p className="summary-copy">{current.summary || '요약을 확인해 주세요.'}</p>{(current.summary_evidence || []).map((span, index) => <EvidenceButton key={index} span={span} detail={detail} app={app} controller={controller}/>)}</section>
+      <section className="analysis-section summary-section"><div className="analysis-section-heading"><Icon name="book"/><h3>{!showAi && meeting.provenance === 'user_edited' ? '수정한 요약' : isGroundedSummary(current) ? 'AI 요약 초안' : summaryVersion(current) === 1 ? 'AI 발췌 요약' : '회의 요약'}</h3></div><SummaryContent value={current} detail={detail} app={app} controller={controller}/></section>
       <div className="analysis-sections">{kinds.map(kind => <section className={`analysis-section ${kind}`} key={kind}><div className="analysis-section-heading"><Icon name={kind === 'action' ? 'check' : kind === 'unresolved' ? 'clock' : 'quote'}/><h3>{itemLabels[kind]}</h3><span className="count">{current.items.filter(item => item.type === kind).length}</span></div>{!current.items.some(item => item.type === kind) ? <p className="muted">추출된 {itemLabels[kind]}이 없어요.</p> : current.items.filter(item => item.type === kind).map(item => <div className="analysis-item" key={item.id} data-item={item.id}><div className="analysis-item-title"><p>{item.text}</p><span className={`status-badge ${item.status === 'confirmed' ? 'ready' : ''}`}>{statusLabels[item.status]}</span></div>{kind === 'action' && <div className="action-meta"><span>담당자 · {item.assignee || '확인 필요'}</span><span>마감일 · {item.due_date || '확인 필요'}</span><span>우선순위 · {item.priority ? { low: '낮음', medium: '보통', high: '높음' }[item.priority] : '확인 필요'}</span></div>}<EvidenceButton span={item} detail={detail} app={app} controller={controller}/></div>)}</section>)}</div>
     </> : !pending && <div className="empty-state"><h2>아직 분석 결과가 없어요</h2><p>전체 원문을 확인하거나 모델 연결 후 분석을 다시 시도하세요.</p></div>}
     {!editing && <section className="analysis-section decision-history"><div className="analysis-section-heading"><Icon name="clock"/><h3>결정 연결</h3>{editable && <button className="text-button" disabled={controller.busy} onClick={() => { setLinkForm(value => !value); void controller.loadTargets(); }}>{linkForm ? '연결 닫기' : '결정 연결하기'}</button>}</div><p className="muted">연결은 사용자가 양쪽 확정 결정과 변경 근거를 확인해 만들어요. 비슷한 논의가 자동으로 변경 관계가 되지는 않아요.</p>{linkForm && <DecisionLinkForm detail={detail} controller={controller} close={() => setLinkForm(false)}/>}
@@ -105,31 +105,96 @@ function MeetingDetailView({ app, controller }: { app: DocTrail; controller: Mee
   </article>;
 }
 
-function AnalysisEditor({ detail, controller, cancel }: { detail: MeetingDetail; controller: MeetingsController; cancel: () => void }) {
+function SummaryContent({ value, detail, app, controller }: { value: Analysis; detail: MeetingDetail; app: DocTrail; controller: MeetingsController }) {
+  if (summaryVersion(value) === null) return <p className="form-error" role="alert">요약 형식을 확인할 수 없어요. 원문을 확인하고 회의를 다시 불러와 주세요.</p>;
+  if (!isGroundedSummary(value)) return <><p className="summary-copy">{value.summary || '요약을 확인해 주세요.'}</p>{(value.summary_evidence || []).map((span, index) => <EvidenceButton key={index} span={span} detail={detail} app={app} controller={controller}/>)}</>;
+  return <div className="answer-claims" aria-label="문장별 요약과 근거">{value.summary_claims.map((claim, index) => <section key={claim.id} data-summary-claim={index}>
+    <p className="summary-copy">{claim.text}</p><small className="field-note">문장 {index + 1} · 근거 {claim.citations.length}개를 함께 확인하세요.</small>
+    {claim.citations.map((span, citation) => <EvidenceButton key={`${span.start_offset}:${span.end_offset}`} span={span} detail={detail} app={app} controller={controller} label={`문장 ${index + 1} 근거 ${citation + 1}`}/>)}
+  </section>)}</div>;
+}
+
+function AnalysisEditor({ detail, app, controller, cancel }: { detail: MeetingDetail; app: DocTrail; controller: MeetingsController; cancel: () => void }) {
   const [basis, setBasis] = useState(detail);
   const [draft, setDraft] = useState<Analysis>(() => structuredClone(detail.meeting.analysis!));
   const content = basis.document.content;
   const busy = controller.busy;
   const latest = controller.recovery?.detail;
   const canKeep = latest && latest.document.revision === basis.document.revision
-    && latest.meeting.source_revision === basis.meeting.source_revision && latest.meeting.analysis_status === 'ready';
+    && latest.meeting.source_revision === basis.meeting.source_revision && latest.meeting.analysis_status === 'ready'
+    && summaryVersion(latest.meeting.analysis) === summaryVersion(draft) && summaryVersion(draft) !== null;
   const blocked = controller.reviewRequired || controller.refreshing;
-  const patch = (change: Partial<Analysis>) => setDraft(current => ({ ...current, ...change }));
+  const patch = (change: Partial<Pick<Analysis, 'meeting_title' | 'meeting_date' | 'participants' | 'purpose' | 'summary' | 'metadata_evidence' | 'items'>>) => setDraft(current => ({ ...current, ...change }));
   const itemPatch = (id: string, change: Partial<MeetingItem>) => patch({ items: draft.items.map(item => item.id === id ? { ...item, ...change } : item) });
-  return <form className="analysis-editor" onSubmit={event => { event.preventDefault(); if (!busy && !blocked) void controller.save(draft, basis); }}><div className="editor-note"><strong>사용자 수정본 편집</strong><p>인용문과 원문은 유지돼요. 없는 정보는 비워 두고, 확정 여부는 근거를 확인한 뒤 바꾸세요.</p></div>
-    {blocked && <section className="edit-recovery" aria-label="편집 충돌 복구"><h3>내 초안은 이 화면에 보관되어 있어요</h3><p>서버 내용을 확인해도 아래 입력은 바뀌지 않아요. 사용할 버전을 선택한 뒤에만 다시 저장할 수 있어요.</p>{controller.refreshing ? <p role="status">서버 버전을 확인하는 중이에요…</p> : latest ? <><p>내 초안의 기준: 원문 v{basis.document.revision} · 분석 v{basis.meeting.version}<br/>확인한 서버: 원문 v{latest.document.revision} · 분석 v{latest.meeting.version}</p><AnalysisComparison value={latest.meeting.analysis}/>{!canKeep && <p className="form-error">원문 또는 분석 상태가 바뀌었어요. 이전 근거와 항목을 그대로 저장할 수 없어요. 초안 내용을 따로 보관한 뒤 서버 버전에서 재분석 상태를 확인해 주세요.</p>}<div className="recovery-actions"><button type="button" className="button secondary" disabled={!canKeep || busy} onClick={() => { const next = controller.keepLocal(); if (next) setBasis(next); }}>내 초안 유지 · 저장은 나중에</button><button type="button" className="button secondary" disabled={busy} onClick={controller.useServer}>내 초안 버리고 서버 버전 사용</button><button type="button" className="text-button" disabled={busy} onClick={() => void controller.refresh()}>서버 버전 다시 확인</button></div></> : <button type="button" className="button secondary" disabled={busy} onClick={() => void controller.refresh()}>서버 버전 불러오기</button>}</section>}
+  const summaryError = summaryVersion(draft) === null ? '요약 형식을 확인할 수 없어 저장할 수 없어요.' : isGroundedSummary(draft) ? summaryEditError(draft.summary_claims, content) : '';
+  const changeClaims = (claims: SummaryClaim[]) => setDraft(current => isGroundedSummary(current) ? { ...current, ...summaryProjection(claims),
+    // Keep the current input rows stable while editing; canonical citation order is applied on save.
+    summary_claims: claims.map((claim, id) => ({ ...claim, id })) } : current);
+  return <form className="analysis-editor" onSubmit={event => { event.preventDefault(); if (!busy && !blocked && !summaryError && summaryVersion(draft) === summaryVersion(basis.meeting.analysis)) void controller.save(isGroundedSummary(draft) ? { ...draft, ...summaryProjection(draft.summary_claims) } : draft, basis); }}><div className="editor-note"><strong>사용자 수정본 편집</strong><p>{isGroundedSummary(draft) ? '요약 문장과 그 문장을 뒷받침하는 근거를 함께 편집하세요. 원문은 바뀌지 않아요.' : '인용문과 원문은 유지돼요.'} 없는 정보는 비워 두고, 확정 여부는 근거를 확인한 뒤 바꾸세요.</p></div>
+    {blocked && <section className="edit-recovery" aria-label="편집 충돌 복구"><h3>내 초안은 이 화면에 보관되어 있어요</h3><p>서버 내용을 확인해도 아래 입력은 바뀌지 않아요. 사용할 버전을 선택한 뒤에만 다시 저장할 수 있어요.</p>{controller.refreshing ? <p role="status">서버 버전을 확인하는 중이에요…</p> : latest ? <><p>내 초안의 기준: 원문 v{basis.document.revision} · 분석 v{basis.meeting.version}<br/>확인한 서버: 원문 v{latest.document.revision} · 분석 v{latest.meeting.version}</p><AnalysisComparison detail={latest} app={app} controller={controller}/>{!canKeep && <p className="form-error">원문, 분석 상태 또는 요약 형식이 바뀌었어요. 이전 근거와 항목을 그대로 저장할 수 없어요. 초안 내용을 따로 보관한 뒤 서버 버전에서 재분석 상태를 확인해 주세요.</p>}<div className="recovery-actions"><button type="button" className="button secondary" disabled={!canKeep || busy} onClick={() => { const next = controller.keepLocal(); if (next) setBasis(next); }}>내 초안 유지 · 저장은 나중에</button><button type="button" className="button secondary" disabled={busy} onClick={controller.useServer}>내 초안 버리고 서버 버전 사용</button><button type="button" className="text-button" disabled={busy} onClick={() => void controller.refresh()}>서버 버전 다시 확인</button></div></> : <button type="button" className="button secondary" disabled={busy} onClick={() => void controller.refresh()}>서버 버전 불러오기</button>}</section>}
     {busy && <p role="status" className="field-note">저장 중에는 내용을 수정할 수 없어요. 저장이 끝난 뒤 다시 편집해 주세요.</p>}
     <fieldset disabled={busy} aria-label="분석 편집 내용" style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
-    <label>분석 제목<input value={draft.meeting_title || ''} maxLength={200} onChange={event => patch({ meeting_title: event.currentTarget.value || null })}/></label><div className="editor-grid"><label>회의 날짜<input type="date" value={draft.meeting_date || ''} onChange={event => patch({ meeting_date: event.currentTarget.value || null })}/></label><label>참석자 · 쉼표로 구분<input value={draft.participants.join(', ')} onChange={event => patch({ participants: event.currentTarget.value.split(',').map(value => value.trim()).filter(Boolean) })}/></label></div><label>회의 목적<input value={draft.purpose || ''} onChange={event => patch({ purpose: event.currentTarget.value || null })}/></label><label>회의 요약<textarea rows={4} value={draft.summary} onChange={event => patch({ summary: event.currentTarget.value })}/></label>
+    <label>분석 제목<input value={draft.meeting_title || ''} maxLength={200} onChange={event => patch({ meeting_title: event.currentTarget.value || null })}/></label><div className="editor-grid"><label>회의 날짜<input type="date" value={draft.meeting_date || ''} onChange={event => patch({ meeting_date: event.currentTarget.value || null })}/></label><label>참석자 · 쉼표로 구분<input value={draft.participants.join(', ')} onChange={event => patch({ participants: event.currentTarget.value.split(',').map(value => value.trim()).filter(Boolean) })}/></label></div><label>회의 목적<input value={draft.purpose || ''} onChange={event => patch({ purpose: event.currentTarget.value || null })}/></label>
+    {isGroundedSummary(draft) ? <SummaryEditor claims={draft.summary_claims} content={content} change={changeClaims}/> : summaryVersion(draft) === 1 && <label>회의 요약<textarea rows={4} value={draft.summary} onChange={event => patch({ summary: event.currentTarget.value })}/></label>}
+    {summaryError && <p className="form-error" role="status">{summaryError}</p>}
     <details className="metadata-proof"><summary>기본 정보의 근거 편집</summary><p className="field-note">비어 있던 기본 정보를 입력했다면 해당 정보의 원문 인용도 추가해 주세요.</p>{(['meeting_title', 'meeting_date', 'participants', 'purpose'] as const).map(field => <MetadataProof key={field} field={field} value={draft.metadata_evidence.find(item => item.field === field)?.quote || ''} content={content} change={span => patch({ metadata_evidence: [...draft.metadata_evidence.filter(item => item.field !== field), ...(span ? [{ field, ...span }] : [])] })}/>)}</details>
     {draft.items.map((item, index) => <fieldset className="item-editor" key={item.id}><legend>{itemLabels[item.type]} {index + 1}</legend><label>항목 내용<textarea rows={2} required value={item.text} onChange={event => itemPatch(item.id, { text: event.currentTarget.value })}/></label><div className="editor-grid"><label>분류<select value={item.type} onChange={event => { const type = event.currentTarget.value as ItemType; itemPatch(item.id, { type, status: 'needs_confirmation', ...(type !== 'action' ? { assignee: null, due_date: null, priority: null } : {}) }); }}>{kinds.map(kind => <option key={kind} value={kind}>{itemLabels[kind]}</option>)}</select></label><label>상태<select value={item.status} onChange={event => itemPatch(item.id, { status: event.currentTarget.value as ItemStatus })}>{(item.type === 'action' ? ['needs_confirmation', 'todo', 'doing', 'done'] : ['needs_confirmation', 'confirmed']).map(status => <option key={status} value={status}>{statusLabels[status as ItemStatus]}</option>)}</select></label></div>{item.type === 'action' && <div className="editor-grid action-fields"><label>담당자<input value={item.assignee || ''} placeholder="확인 필요" onChange={event => itemPatch(item.id, { assignee: event.currentTarget.value || null })}/></label><label>마감일<input type="date" value={item.due_date || ''} onChange={event => itemPatch(item.id, { due_date: event.currentTarget.value || null })}/></label><label>우선순위<select value={item.priority || ''} onChange={event => itemPatch(item.id, { priority: event.currentTarget.value as MeetingItem['priority'] || null })}><option value="">확인 필요</option><option value="low">낮음</option><option value="medium">보통</option><option value="high">높음</option></select></label></div>}<blockquote className="readonly-proof">{item.quote}</blockquote></fieldset>)}
     </fieldset>
-    <div className="editor-actions"><button type="button" className="button secondary" onClick={cancel} disabled={busy}>취소</button><button className="button primary" disabled={busy || blocked}>{busy ? '저장 중…' : '사용자 수정본 저장'}</button></div>
+    <div className="editor-actions"><button type="button" className="button secondary" onClick={cancel} disabled={busy}>취소</button><button className="button primary" disabled={busy || blocked || !!summaryError}>{busy ? '저장 중…' : '사용자 수정본 저장'}</button></div>
   </form>;
 }
 
-function AnalysisComparison({ value }: { value: Analysis | null }) {
-  return <details className="server-analysis" open><summary>서버에 저장된 분석 · 읽기 전용</summary>{value ? <><dl><dt>제목</dt><dd>{value.meeting_title || '확인 필요'}</dd><dt>날짜 / 참석자</dt><dd>{value.meeting_date || '확인 필요'} / {value.participants.join(', ') || '확인 필요'}</dd><dt>목적</dt><dd>{value.purpose || '확인 필요'}</dd><dt>요약</dt><dd>{value.summary}</dd></dl>{value.items.map(item => <div className="server-item" key={item.id}><strong>{itemLabels[item.type]} · {statusLabels[item.status]}</strong><p>{item.text}</p>{item.type === 'action' && <p>담당자: {item.assignee || '확인 필요'} · 마감일: {item.due_date || '확인 필요'} · 우선순위: {item.priority ? { low: '낮음', medium: '보통', high: '높음' }[item.priority] : '확인 필요'}</p>}<blockquote className="readonly-proof">{item.quote}</blockquote></div>)}<details><summary>서버 기본 정보와 요약의 근거</summary>{[...value.metadata_evidence, ...(value.summary_evidence || [])].map((span, index) => <blockquote className="readonly-proof" key={index}>{span.quote}</blockquote>)}</details></> : <p>서버에 분석 결과가 없어요.</p>}</details>;
+function AnalysisComparison({ detail, app, controller }: { detail: MeetingDetail; app: DocTrail; controller: MeetingsController }) {
+  const value = detail.meeting.analysis;
+  return <details className="server-analysis" open><summary>서버에 저장된 분석 · 읽기 전용</summary>{value ? <><dl><dt>제목</dt><dd>{value.meeting_title || '확인 필요'}</dd><dt>날짜 / 참석자</dt><dd>{value.meeting_date || '확인 필요'} / {value.participants.join(', ') || '확인 필요'}</dd><dt>목적</dt><dd>{value.purpose || '확인 필요'}</dd><dt>요약</dt><dd>{summaryVersion(value) === 1 ? value.summary : <SummaryContent value={value} detail={detail} app={app} controller={controller}/>}</dd></dl>{value.items.map(item => <div className="server-item" key={item.id}><strong>{itemLabels[item.type]} · {statusLabels[item.status]}</strong><p>{item.text}</p>{item.type === 'action' && <p>담당자: {item.assignee || '확인 필요'} · 마감일: {item.due_date || '확인 필요'} · 우선순위: {item.priority ? { low: '낮음', medium: '보통', high: '높음' }[item.priority] : '확인 필요'}</p>}<blockquote className="readonly-proof">{item.quote}</blockquote></div>)}<details><summary>서버 기본 정보와 요약의 근거</summary>{[...value.metadata_evidence, ...(!isGroundedSummary(value) ? value.summary_evidence || [] : [])].map((span, index) => <blockquote className="readonly-proof" key={index}>{span.quote}</blockquote>)}</details></> : <p>서버에 분석 결과가 없어요.</p>}</details>;
+}
+
+function SummaryEditor({ claims, content, change }: { claims: SummaryClaim[]; content: string; change: (claims: SummaryClaim[]) => void }) {
+  const positions = useMemo(() => {
+    const result = new Map<number, number>();
+    let utf16 = 0, point = 0;
+    for (const char of content) { result.set(utf16, point++); utf16 += char.length; }
+    result.set(utf16, point);
+    return result;
+  }, [content]);
+  const patch = (index: number, value: Partial<SummaryClaim>) => change(claims.map((claim, i) => i === index ? { ...claim, ...value } : claim));
+  const move = (index: number, direction: number) => { const next = [...claims]; [next[index], next[index + direction]] = [next[index + direction], next[index]]; change(next); };
+  return <section aria-label="문장별 요약 편집">
+    <h3>문장과 근거</h3><p className="field-note">문장 1~6개 · 문장마다 240자 이내 · 전체 1,200자 이내. 한 문장에 필요한 근거 1~4개를 함께 연결하세요. 저장하면 순서와 요약 미리보기가 자동 반영돼요.</p>
+    <details className="metadata-proof"><summary>요약 근거로 쓸 원문 보기</summary><p className="summary-copy">{content}</p></details>
+    {claims.map((claim, index) => <fieldset className="item-editor" key={index} data-summary-editor={index}><legend>요약 문장 {index + 1}</legend>
+      <label>문장 {index + 1} 내용<textarea rows={3} required value={claim.text} onChange={event => patch(index, { text: event.currentTarget.value })}/></label>
+      <p className="field-note">{Array.from(claim.text).length}/240자 · 연결된 근거 {claim.citations.length}/4개</p>
+      {claim.citations.map((citation, citationIndex) => <SummaryCitationEditor key={citationIndex} span={citation} content={content} positions={positions} number={citationIndex + 1}
+        change={span => patch(index, { citations: claim.citations.map((old, i) => i === citationIndex ? span : old) })}
+        remove={() => patch(index, { citations: claim.citations.filter((_, i) => i !== citationIndex) })} canRemove={claim.citations.length > 1}/>)}
+      <div className="recovery-actions"><button type="button" className="text-button" disabled={claim.citations.length >= 4} onClick={() => patch(index, { citations: [...claim.citations, { quote: '', start_offset: -1, end_offset: -1 }] })}>근거 추가</button>
+        <button type="button" className="text-button" aria-label={`문장 ${index + 1} 위로`} disabled={index === 0} onClick={() => move(index, -1)}>위로</button><button type="button" className="text-button" aria-label={`문장 ${index + 1} 아래로`} disabled={index === claims.length - 1} onClick={() => move(index, 1)}>아래로</button>
+        <button type="button" className="text-button danger" aria-label={`문장 ${index + 1} 삭제`} disabled={claims.length <= 1} onClick={() => change(claims.filter((_, i) => i !== index))}>문장 삭제</button></div>
+    </fieldset>)}
+    <div className="editor-actions"><button type="button" className="button secondary" disabled={claims.length >= 6} onClick={() => change([...claims, { id: claims.length, text: '', citations: [{ quote: '', start_offset: -1, end_offset: -1 }] }])}><Icon name="plus"/> 요약 문장 추가</button></div>
+  </section>;
+}
+
+function SummaryCitationEditor({ span, content, positions, number, change, remove, canRemove }: { span: Span; content: string; positions: Map<number, number>; number: number; change: (span: Span) => void; remove: () => void; canRemove: boolean }) {
+  // Match code-point boundaries even when the source contains supplementary Unicode.
+  const offsets = useMemo(() => {
+    const result: number[] = [];
+    if (span.quote.trim()) for (let at = content.indexOf(span.quote); at !== -1; at = content.indexOf(span.quote, at + 1)) {
+      if (positions.has(at) && positions.has(at + span.quote.length)) result.push(positions.get(at)!);
+    }
+    return result;
+  }, [content, positions, span.quote]);
+  const quoteLength = Array.from(span.quote).length;
+  const selected = offsets.includes(span.start_offset) && span.end_offset === span.start_offset + quoteLength ? String(span.start_offset) : '';
+  return <div className="server-item" data-summary-citation-editor={number - 1}>
+    <label>근거 {number} 인용문<textarea rows={2} required value={span.quote} onChange={event => change({ quote: event.currentTarget.value, start_offset: -1, end_offset: -1 })}/></label>
+    <label>근거 {number} 원문 위치<select required value={selected} onChange={event => { const start = event.currentTarget.value === '' ? -1 : Number(event.currentTarget.value); change({ ...span, start_offset: start, end_offset: start < 0 ? -1 : start + quoteLength }); }}>
+      <option value="">원문에서 인용할 위치 선택</option>{offsets.map((offset, index) => <option key={offset} value={offset}>{index + 1}번째 위치 · 문자 {offset}~{offset + quoteLength}</option>)}
+    </select></label>
+    <p className="field-note">{!span.quote ? '원문 구절을 그대로 복사해 주세요.' : !offsets.length ? '원문에서 일치하는 구절을 찾지 못했어요.' : offsets.length > 1 ? `같은 구절이 ${offsets.length}곳에 있어요. 어느 위치를 인용할지 직접 선택해 주세요.` : '인용할 원문 위치를 확인하고 선택해 주세요.'}</p>
+    <button type="button" className="text-button danger" disabled={!canRemove} onClick={remove}>근거 {number} 삭제</button>
+  </div>;
 }
 
 function MetadataProof({ field, value, content, change }: { field: 'meeting_title' | 'meeting_date' | 'participants' | 'purpose'; value: string; content: string; change: (span: Span | null) => void }) {

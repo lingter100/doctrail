@@ -10,6 +10,7 @@ from pathlib import Path
 
 from doctrail.inference import _validate_token
 from doctrail.meeting_analysis_batch import POLICIES
+from doctrail.meeting_grounded_summary import summary_metadata
 from doctrail.meeting_service_rag import ASSEMBLIES, create_app, load_runtime, validate_assembly
 from doctrail.meeting_worker import worker_admission
 from scripts.prepare_meeting_gguf import ROOT
@@ -26,6 +27,8 @@ def start_service(*, token, log_dir, model_dir=DEFAULT_ROOT, manifest=MANIFEST,
     metrics = telemetry if telemetry is not None else {}
     metrics["analysis_policy"] = analysis_policy
     metrics["extraction_assembly"] = extraction_assembly
+    if extraction_assembly == "grounded-summary-v1":
+        metrics["grounded_summary"] = summary_metadata()
     started = time.monotonic()
     startup_deadline = started + 120
     native_metrics = metrics.setdefault("native", {})

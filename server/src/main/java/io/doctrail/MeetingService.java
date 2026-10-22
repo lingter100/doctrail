@@ -31,7 +31,12 @@ public class MeetingService {
     static void cas(Map<String,Object> d,Map<String,Object> m,int revision,int version){if(((Number)d.get("revision")).intValue()!=revision||((Number)m.get("source_revision")).intValue()!=revision||((Number)m.get("version")).intValue()!=version)throw new ApiError(409,"meeting_context_changed");}
     Map<String,Object> update(Connection c,String id,Object user,JsonNode body)throws Exception{
         MeetingAnalysis.fields(body,"expected_revision","expected_version","analysis");var d=docs.document(c,id,user,true);var m=state(c,id);cas(d,m,MeetingAnalysis.integer(body,"expected_revision",1,Integer.MAX_VALUE),MeetingAnalysis.integer(body,"expected_version",0,Integer.MAX_VALUE));if(Set.of("running","queued").contains(m.get("analysis_status")))throw new ApiError(409,"analysis_running");if(!"ready".equals(m.get("analysis_status")))throw new ApiError(409,"analysis_not_ready");
-        var a=MeetingAnalysis.validate(body.get("analysis"),(String)d.get("content"),false);execute(c,"INSERT INTO meeting_edits VALUES (?,?,?,?,?,?,?)",Auth.uid(),id,d.get("revision"),((Number)m.get("version")).intValue()+1,json.writeValueAsString(a),user,Auth.now());execute(c,"UPDATE meetings SET analysis=?,provenance='user_edited',version=version+1 WHERE document_id=?",json.writeValueAsString(a),id);return detail(c,id,user);
+        var a=MeetingAnalysis.validate(body.get("analysis"),(String)d.get("content"),false);
+        // Ordinary edits preserve the contract. Only the exact saved AI draft can
+        // cross versions through the existing explicit apply-draft PUT path.
+        if(MeetingAnalysis.summaryVersion(a)!=MeetingAnalysis.summaryVersion(analysis(m)))
+            MeetingAnalysis.require(m.get("ai_analysis")!=null&&a.equals(json.readTree((String)m.get("ai_analysis"))));
+        execute(c,"INSERT INTO meeting_edits VALUES (?,?,?,?,?,?,?)",Auth.uid(),id,d.get("revision"),((Number)m.get("version")).intValue()+1,json.writeValueAsString(a),user,Auth.now());execute(c,"UPDATE meetings SET analysis=?,provenance='user_edited',version=version+1 WHERE document_id=?",json.writeValueAsString(a),id);return detail(c,id,user);
     }
     record Job(String id,String run,Object user,String sessionHash,Map<String,Object> document,Map<String,Object> membership,int version){}
     Map<String,Object> analyze(String id,JsonNode body,HttpServletRequest request){
@@ -48,9 +53,14 @@ public class MeetingService {
         try{
             store.write(c->{revalidate(c,job);execute(c,"UPDATE meetings SET analysis_status='running' WHERE document_id=?",job.id);execute(c,"UPDATE meeting_runs SET status='running' WHERE id=?",job.run);return null;});
             var output=generation.call("/analyze",Map.of("schema_version",1,"document_id",job.id,"revision",job.document.get("revision"),"title",job.document.get("title"),"content",job.document.get("content")));
-            JsonNode draft=output.path("analysis").deepCopy();if(draft.path("items").isArray())for(var item:draft.get("items"))if(item.isObject())((com.fasterxml.jackson.databind.node.ObjectNode)item).put("id",Auth.uid());var a=MeetingAnalysis.validate(draft,(String)job.document.get("content"),true);String encoded=json.writeValueAsString(a);
+            JsonNode draft=output.path("analysis").deepCopy();if(draft.path("items").isArray())for(var item:draft.get("items"))if(item.isObject())((com.fasterxml.jackson.databind.node.ObjectNode)item).put("id",Auth.uid());var a=MeetingAnalysis.validate(draft,(String)job.document.get("content"),true);requireSummaryReview(output,a);String encoded=json.writeValueAsString(a);
             store.write(c->{revalidate(c,job);execute(c,"UPDATE meeting_runs SET status='ready',analysis=?,model=?,model_revision=?,completed_at=? WHERE id=?",encoded,output.get("model").asText(),output.get("revision").asText(),Auth.now(),job.run);var current=state(c,job.id);boolean keep="user_edited".equals(current.get("provenance"))&&Objects.equals(current.get("source_revision"),job.document.get("revision"));execute(c,"UPDATE meetings SET analysis_status='ready',analysis_error=NULL,source_revision=?,version=version+1,ai_analysis=?,analysis=?,provenance=?,active_run=NULL WHERE document_id=?",job.document.get("revision"),encoded,keep?current.get("analysis"):encoded,keep?"user_edited":"ai",job.id);return null;});
         }catch(Exception e){fail(job,e instanceof ApiError a? a.getMessage():"generation_failed");}
+    }
+    static void requireSummaryReview(JsonNode output,JsonNode analysis){
+        if(MeetingAnalysis.summaryVersion(analysis)!=2)return;
+        JsonNode review=output.path("summary_review");Set<String> fields=new HashSet<>();review.fieldNames().forEachRemaining(fields::add);
+        if(!review.isObject()||!fields.equals(Set.of("policy","status"))||!review.path("policy").isTextual()||!review.path("status").isTextual()||!review.get("policy").asText().equals("grounded-review-v1")||!review.get("status").asText().equals("accepted"))throw new ApiError(503,"generation_invalid_response");
     }
     void fail(Job job,String error){store.write(c->{
         execute(c,"UPDATE meeting_runs SET status='failed',error=?,completed_at=? WHERE id=? AND status IN ('queued','running')",error,Auth.now(),job.run);

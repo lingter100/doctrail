@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-java-react-contracts",
+  "date": "2026-10-22",
+  "status": "local_contracts_verified_actual_model_and_exact_source_ci_pending",
+  "base_commit": "a57c6cb72279970a0df244a6b5f15e9585f36a1a",
+  "source": [
+    {
+      "path": "server/src/main/java/io/doctrail/MeetingAnalysis.java",
+      "bytes": 8192,
+      "sha256": "e665d71e80c3f1d04021d59d972b89c2546255f6ce6f74705f3c97e330255ff8",
+      "lf": true
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/MeetingService.java",
+      "bytes": 15637,
+      "sha256": "283a0387fa91c8479a03f8c10f076f509895d1a1518d81fdd4fc33bb133eb617",
+      "lf": true
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/GenerationClient.java",
+      "bytes": 6137,
+      "sha256": "7820e2d1e0176f07111b3c730095eb40f7a64ad874bebc43f27033fea6c7be7a",
+      "lf": true
+    },
+    {
+      "path": "server/src/test/java/io/doctrail/MeetingGroundedSummaryTest.java",
+      "bytes": 21569,
+      "sha256": "04a5ace938c69fede1e83e5004d1070a819dd15890a07317bc00dafb7ec0a2f0",
+      "lf": true
+    },
+    {
+      "path": "web/src/meetings.ts",
+      "bytes": 14044,
+      "sha256": "8cbe643a0d42598756c258c5854feb1d2958bfe1c0278a13a6eb5412421cad93"
+    },
+    {
+      "path": "web/src/components/MeetingViews.tsx",
+      "bytes": 45063,
+      "sha256": "a1ed81d5dce33ed16e4db85bd8f63382add47cac485896851a64b17eff56a7f3"
+    },
+    {
+      "path": "web/tests/meeting-grounded-summary.spec.ts",
+      "bytes": 19406,
+      "sha256": "3c8571874ce75f60deebafe75dca3e6e99279cfcf4af36f87ae01046dcd91318"
+    },
+    {
+      "path": "web/scripts/meeting-transport-fixture.mjs",
+      "bytes": 4987,
+      "sha256": "33ca1bd10a193691b9f6c66684d231561e417ee1d8d1e27e78629b30f7a9cb44"
+    },
+    {
+      "path": "web/scripts/test-java.mjs",
+      "bytes": 9514,
+      "sha256": "77b6d79f71191a03b459cd0d331f143118281f34f416c55c86ffa6f5956ab6ed"
+    }
+  ],
+  "behavior": [
+    "Strict v1/v2 save contracts with claim-linked exact Unicode spans and canonical projections.",
+    "Human edits preserve their summary version; only the exact stored AI draft may cross versions.",
+    "AI v2 requires the worker review marker; no truth badge is stored or accepted in user PUT.",
+    "Every claim citation remains accessible in AI, edited and conflict views. Repeated quotes require explicit occurrence selection.",
+    "Existing source ACL, revision/deletion invalidation, conflict recovery and source focus paths are reused."
+  ],
+  "java": {
+    "command": "server/mvnw.cmd -o -B -f server/pom.xml -Dtest=MeetingGroundedSummaryTest,MeetingServiceTest,GenerationClientTest,GenerationLanguageBoundaryTest,MeetingReviewBoundaryTest test",
+    "passed": 121,
+    "new": 69,
+    "existing": 52,
+    "maven_seconds": 19.905,
+    "synthetic": true,
+    "receipt": {
+      "path": ".local/meeting-grounded-summary-java-v1/receipt.json",
+      "bytes": 20482,
+      "sha256": "478c78464781cb3652ad4a64ba6dce74c88d2fbc769daaa52d8552e6c7ab5e4c"
+    }
+  },
+  "browser": {
+    "new_v2": 13,
+    "existing_related": 28,
+    "unique_total": 41,
+    "new_v2_seconds": 17.409621,
+    "existing_breakdown": {
+      "v1_ready": 4,
+      "v1_conflict": 5,
+      "save_pending": 2,
+      "source_access": 11,
+      "generation_unavailable": 2,
+      "source_focus": 4
+    },
+    "batches": [
+      {
+        "path": ".local/web-e2e-batch-tkn8tT/run.json",
+        "bytes": 987,
+        "sha256": "eb3acbcde8df104065812857ce31fac1da8a1c7fa658e6e5a4e25ba6b88e5033"
+      },
+      {
+        "path": ".local/web-e2e-batch-znfkyI/run.json",
+        "bytes": 989,
+        "sha256": "eafe6be3bc058fde581856700bfee73990d2afbf988565320678d08c871b9755"
+      },
+      {
+        "path": ".local/web-e2e-batch-KQamjl/run.json",
+        "bytes": 4335,
+        "sha256": "39fbf7478d741a5a24f4ebf02776ac629a260700fd0bc50457d0e4e3b120cb25"
+      }
+    ],
+    "receipt": {
+      "path": ".local/meeting-grounded-summary-ui-v1/implementation-receipt-v2.json",
+      "bytes": 12653,
+      "sha256": "d7aad746f1262e7cf993a4ad9f263eed9c6e866824a171495f58060d0b5ab892"
+    },
+    "kind": "actual local Java/SQLite/HTTP/packaged React; synthetic model transport and explicit browser error injection"
+  },
+  "build": [
+    {
+      "name": "TypeScript app and tests",
+      "exit_code": 0,
+      "log": "typecheck-selector-v2.log"
+    },
+    {
+      "name": "Production frontend build",
+      "exit_code": 0,
+      "log": "build-v1.log"
+    },
+    {
+      "name": "Offline Maven package",
+      "exit_code": 0,
+      "java_tests": "skipped; separately owned Java test results not claimed here",
+      "log": "package-v1.log"
+    }
+  ],
+  "runtime_bindings": [
+    {
+      "manifest": "runtime-bindings-v1.json",
+      "path": "server/target/doctrail-server-0.1.0.jar",
+      "bytes": 49788089,
+      "sha256": "6a6314b3062e93d225da03a31ee182ec65c632412e45d6e41208ac938fd6d117",
+      "unchanged": true
+    },
+    {
+      "manifest": "runtime-bindings-v1.json",
+      "path": "web/dist/favicon.svg",
+      "bytes": 276,
+      "sha256": "fa0d5fc5405923ccd729a6b711036dce29bc09cb35492ac94d01aef6e057067c",
+      "unchanged": true
+    },
+    {
+      "manifest": "runtime-bindings-v1.json",
+      "path": "web/dist/index.html",
+      "bytes": 708,
+      "sha256": "a9233634076e24472404a32422a0991df8756e7923c93b7ae752084665d21e9e",
+      "unchanged": true
+    },
+    {
+      "manifest": "runtime-bindings-v1.json",
+      "path": "web/dist/assets/index-C9z3P3GC.css",
+      "bytes": 47132,
+      "sha256": "35d97dac2cda032c0b8a67208254f9bd49e5107cf8da43ea7c8c689acd3345b9",
+      "unchanged": true
+    },
+    {
+      "manifest": "runtime-bindings-v1.json",
+      "path": "web/dist/assets/index-DgjAwjgK.js",
+      "bytes": 307228,
+      "sha256": "faae518b788d70c8588cb28b191aa2d46086ad898f2aacce1ba70aa90abde4a1",
+      "unchanged": true
+    }
+  ],
+  "independent_read_reviews": [
+    {
+      "path": ".local/meeting-grounded-summary-java-v1/independent-review/read-review-v1.json",
+      "bytes": 4927,
+      "sha256": "17ef7bdf8531079a48fa45131925b9c77d63dc1ed79f3ec8edededb8643b26ea"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-ui-v1/independent-review/read-review-v1.json",
+      "bytes": 5916,
+      "sha256": "06df818454e52b3ae665c8a72520bf2bb19dcb6726939ce6a9e4cdf0d0dad88e"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-ui-v1/independent-review/read-review-v2.json",
+      "bytes": 5052,
+      "sha256": "9ade341d9fec699e7d5babab8eb8708d8428c258b41b89a130970a5d8fe6d99f"
+    }
+  ],
+  "parent_verification": {
+    "java_source": 4,
+    "java_artifacts": 61,
+    "ui_source": 3,
+    "ui_artifacts": 135,
+    "current_source_runtime": 21
+  },
+  "images": [
+    {
+      "path": "docs/images/grounded-summary-1440.png",
+      "bytes": 169787,
+      "sha256": "d8bb77ff151f12a9ec114d96095dd42b8d20008d750ed7c94ac459c7e80c1ef0"
+    },
+    {
+      "path": "docs/images/grounded-summary-390.png",
+      "bytes": 138870,
+      "sha256": "6b22bc1c7335d2406b4ad81ac99355b71b1ba58a98028ad23b684a483c62e9ec"
+    }
+  ],
+  "image_review": "Implementation AI and parent AI inspected synthetic screenshots; no human acceptance.",
+  "preserved_failures": {
+    "java": [
+      {
+        "log": {
+          "path": ".local/meeting-grounded-summary-java-v1/tests-first.log",
+          "bytes": 2729,
+          "sha256": "d9f56659c21d9aa916d9180039f1c5bbf4a01228e2d6721bd0f75cd3a15dbb43"
+        },
+        "cause": "New test method missing void return-type whitespace; compilation failed before tests, source4 archived."
+      },
+      {
+        "log": {
+          "path": ".local/meeting-grounded-summary-java-v1/tests-final.log",
+          "bytes": 4495,
+          "sha256": "5ac00754a2eaa4dd97f8ab84d2ac7fa83e6151b0827f6dc0359bc5c4be103e09"
+        },
+        "cause": "Added test assertThat overload inference ambiguity; compilation failed, source4 archived before explicit List local variable fix."
+      },
+      {
+        "record": {
+          "path": ".local/meeting-grounded-summary-java-v1/final-attempt-display-failure.json",
+          "bytes": 422,
+          "sha256": "815c3c52fda0071b0ed1e45aaadfda9b530b949f87f4f5791caf58455175d402"
+        },
+        "cause": "Terminal-only cp949 UnicodeEncodeError after raw output and process record were saved; corrected display encoding, original raw bytes preserved."
+      }
+    ],
+    "browser": {
+      "passed": 9,
+      "failed": 4,
+      "stage": "Exact getByLabel input lookup before editing or PUT",
+      "cause": "Trace DOM embeds initial textarea text or select option text within label. Exact label text lookup did not match; textbox/combobox accessible-name lookup did match.",
+      "preservation": "Original source candidate-v1; first run logs, errors, screenshots, trace.zip and first-failure-dom-snapshot.json retained",
+      "fix": "Only new browser spec role selectors changed. Product TS/TSX, Java, JAR and dist stayed identical."
+    },
+    "parent_checker": "Scratch verification first failed at parse time with an unmatched parenthesis. Publication checker then assumed identical review key names and failed before publishing; initial script retained. Corrected schema handling passed without product/test rerun."
+  },
+  "cleanup": {
+    "all_8_browser_services_stopped": true,
+    "observed_owned_remaining": 0,
+    "observed_java_count": 8,
+    "forced_process_kill_by_this_agent": 0
+  },
+  "commands": [
+    "npm --prefix web run typecheck",
+    "npm --prefix web run build",
+    "./server/mvnw.cmd -o -B -q -f server/pom.xml -DskipTests package",
+    "npm --prefix web run test:e2e -- meeting-grounded-summary.spec.ts",
+    "npm --prefix web run test:e2e -- meeting-ready.spec.ts meeting-conflict-recovery.spec.ts meeting-save-pending.spec.ts source-focus.spec.ts meeting-unavailable.spec.ts meeting-source-access.spec.ts"
+  ],
+  "limits": [
+    "Actual model/native/tokenizer/GPU execution: 0 for these checks. Synthetic review accepted does not prove semantic quality.",
+    "The prior actual model run cleanup failure and insufficient summaries remain failed; these checks do not repair or rescore them.",
+    "Java and browser checks cover selected contracts, not overall Phase1 acceptance, clean-machine reproduction or deployment.",
+    "Package skipped Java tests; the separate 121-test run supplies Java evidence. Initial67/first browser9 passes are not added to final totals.",
+    "Local original receipts/traces are retained on this machine and are not all published. Public source contains the reproducible tests.",
+    "Source CI, Python service connection verification and real model comparison are separately recorded."
+  ]
+}

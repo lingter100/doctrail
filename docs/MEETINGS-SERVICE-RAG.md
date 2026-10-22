@@ -14,7 +14,26 @@
 
 요약·제목 후처리 후보는 새 경로로 구현하고 서비스 선택까지 연결했다. 저장된 실제 분류의 기계 비교4회와 독립 의미 검토를 마쳤지만 요약 충분성은0/4로 그대로다. 새 실제 서비스 실행은 아직 하지 않았다. 아래 single 연결과 최초 구현 검증은 이전 시점의 기록이다.
 
-## 요약·제목 조립 후보의 실행 설정
+## 근거 연결 압축 요약 후보의 실행 설정
+
+`--analysis-policy batch-v2 --extraction-assembly grounded-summary-v1`은 분류 후 짧은 요약 문장을 만들고, 문장마다 여러 원문 구절을 연결하는 새 후보를 선택한다. 생성1회와 같은 모델의 검토1회를 더하며 재생성은 없다. 전체 원문을 유지하고 각 입력4096·공유 분석120초·기존 답변90초를 늘리지 않는다. 부족하거나 검토에서 거부된 요약은 저장하지 않으며 이전 분석/사용자 수정본을 보존한다. 같은 모델의 검토는 독립 사실 보증이 아니다.
+
+```powershell
+$groundedJarHash = (Get-FileHash server/target/doctrail-server-0.1.0.jar -Algorithm SHA256).Hash.ToLowerInvariant()
+uv run --no-sync python -m scripts.serve_meeting_rag_service `
+  --enable-service-rag --jar-sha256 $groundedJarHash `
+  --database .local/service-rag-grounded-demo.sqlite3 `
+  --log-dir .local/service-rag-grounded-demo-001 `
+  --analysis-policy batch-v2 --extraction-assembly grounded-summary-v1
+```
+
+이 예시는 설치된 모델/runtime·검색 모델 캐시와 최신 Java/화면 빌드가 필요한 실행 안내이며 아직 새 후보의 실제 모델 실행 성공 증거가 아니다. 사용한 경로를 재사용하지 않는다. 기본값은 기존 single/legacy이고 새 assembly는 batch-v2 이외 조합에서 시작 전에 거부된다. Health의 `extraction.assembly` 및 `extraction.runtime.grounded_summary`, lifecycle의 `grounded_summary`에 요약 계약2·생성/검토 prompt/grammar SHA·호출 한도·검토 한계가 표시된다. 선택과 상태가 다르거나 상태 형식이 잘못되면 준비 성공으로 처리하지 않는다.
+
+Python 서비스의 normal/observer 연결·입력 한도·공유 시간·관측·코드 binding은 합성 검사로 확인한다. Java121개와 실제 Java/합성 모델 응답의 브라우저41개 검사는 [별도 결과](../experiments/results/meetings-grounded-summary-java-ui-v1.json)에 기록했다. 모든 UI 근거는 현재 권한과 원문 revision을 다시 확인한다. 원문 검색 색인은 요약으로 대체하지 않는다. 실제 모델의 내용·충분성·지연·전체 종료는 소스 CI 뒤 새 실행에서 검증해야 한다.
+
+[Python 연결 최종582개 검사와 읽기 검토](../experiments/results/meetings-grounded-summary-service-v1.json)는 두 launcher와 평가 실행기의 실제 선택·상태 일치·always-binding을 포함한다. 초기574개 통과 이후 malformed 상태 응답을 정규화하지 못한 문제를 별도 재현해 수정했다. 최초 실패와 원본 결과는 보존하며 실제 모델 수용 결과로 바꾸지 않는다.
+
+## 기존 요약·제목 조립 후보의 실행 설정
 
 `--analysis-policy batch-v2 --extraction-assembly coverage-v1`을 두 launcher에 명시하면 새 발췌 요약/제목 조립을 선택한다. assembly 생략은 `legacy`이며 기존 single/batch-v1과 새 assembly의 조합은 시작 전에 거부한다. 같은4개 요약 슬롯을 유형별로 순환 선택하고, 모델이 제목으로 분류한 원문의 literal 값을 투영한다. 전체 항목·근거 좌표·분류 모델/프롬프트·기존 한도를 유지한다. 동일 분류 비교에서 요약 충분성은 개선되지 않았으며 분류 정확성은 변경 대상이 아니다.
 

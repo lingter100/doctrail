@@ -534,15 +534,19 @@ def test_health_cannot_substitute_another_batch_prompt_policy(rig, requested, re
         pytest.fail("wrong batch prompt policy became ready")
     assert rig.metrics["cleanup"]["accepted"] is True
 
-@pytest.mark.parametrize("assembly", ["legacy", "coverage-v1"])
+@pytest.mark.parametrize("assembly", ["legacy", "coverage-v1", "grounded-summary-v1"])
 def test_combined_assembly_matches_native_health_and_lifecycle(rig, assembly):
     rig.kwargs.update(analysis_policy="batch-v2", extraction_assembly=assembly)
     rig.generation_health["extraction"].update(
         classification=launcher.classification_metadata("batch-v2"), assembly=assembly)
+    if assembly == "grounded-summary-v1":
+        rig.generation_health["extraction"]["runtime"]["grounded_summary"] = launcher.summary_metadata()
     with launcher.start_services(**rig.kwargs):
         assert rig.native_assembly == assembly
     lifecycle = json.loads((rig.kwargs["log_dir"] / "lifecycle.json").read_text())
     assert lifecycle["extraction_assembly"] == assembly and lifecycle["cleanup"]["accepted"]
+    if assembly == "grounded-summary-v1":
+        assert lifecycle["grounded_summary"] == launcher.summary_metadata()
 
 
 @pytest.mark.parametrize("reported", [None, "legacy", "auto"])
@@ -560,6 +564,7 @@ def test_coverage_health_cannot_report_another_or_missing_assembly(rig, reported
 
 
 @pytest.mark.parametrize("policy,assembly", [("single", "coverage-v1"), ("batch-v1", "coverage-v1"),
+    ("single", "grounded-summary-v1"), ("batch-v1", "grounded-summary-v1"),
     ("batch-v2", "auto")])
 def test_combined_assembly_invalid_before_any_resource(rig, policy, assembly):
     rig.kwargs.update(analysis_policy=policy, extraction_assembly=assembly)
@@ -569,7 +574,7 @@ def test_combined_assembly_invalid_before_any_resource(rig, policy, assembly):
     assert not rig.processes and not rig.events
 
 
-@pytest.mark.parametrize("assembly", [None, "legacy", "coverage-v1"])
+@pytest.mark.parametrize("assembly", [None, "legacy", "coverage-v1", "grounded-summary-v1"])
 def test_combined_cli_forwards_assembly(monkeypatch, tmp_path, assembly):
     from contextlib import contextmanager
     seen = []
@@ -584,3 +589,50 @@ def test_combined_cli_forwards_assembly(monkeypatch, tmp_path, assembly):
         args.extend(["--extraction-assembly", assembly])
     launcher.main(args)
     assert seen == [("batch-v2", assembly or "legacy")]
+
+
+@pytest.mark.parametrize("field", ["summary_version", "generation_prompt_sha256", "review_prompt_sha256",
+    "generation_grammar_sha256", "review_grammar_sha256", "generation_output_tokens",
+    "review_output_tokens", "input_tokens_per_call", "extra_completion_cap", "repair_calls",
+    "review_guarantee", "missing"])
+def test_grounded_health_requires_exact_candidate_contract_before_java_ready(rig, field):
+    rig.kwargs.update(analysis_policy="batch-v2", extraction_assembly="grounded-summary-v1")
+    rig.generation_health["extraction"].update(
+        classification=launcher.classification_metadata("batch-v2"), assembly="grounded-summary-v1")
+    metadata = launcher.summary_metadata()
+    if field != "missing":
+        metadata[field] = "incorrect synthetic contract"
+        rig.generation_health["extraction"]["runtime"]["grounded_summary"] = metadata
+    with (pytest.raises(launcher.LaunchError, match="generation_health_identity"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("mismatched summary contract became ready")
+    assert rig.metrics["startup_accepted"] is False
+    assert rig.metrics["cleanup"]["accepted"] is True
+
+
+def test_legacy_health_cannot_claim_grounded_policy(rig):
+    rig.generation_health["extraction"]["runtime"]["grounded_summary"] = launcher.summary_metadata()
+    with (pytest.raises(launcher.LaunchError, match="generation_health_identity"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("wrong candidate became ready")
+
+
+@pytest.mark.parametrize("assembly", ["legacy", "grounded-summary-v1"])
+@pytest.mark.parametrize("runtime_metadata", [None, [], "invalid", 7])
+def test_malformed_runtime_health_is_normalized_and_startup_cleans_owned_resources(
+        rig, assembly, runtime_metadata):
+    rig.kwargs.update(analysis_policy="batch-v2", extraction_assembly=assembly)
+    rig.generation_health["extraction"].update(
+        classification=launcher.classification_metadata("batch-v2"), assembly=assembly,
+        runtime=runtime_metadata)
+    with pytest.raises(launcher.LaunchError, match="^generation_health_identity$"):
+        launcher.check_generation(rig.generation_health, "batch-v2", assembly)
+    with (pytest.raises(launcher.LaunchError, match="^generation_health_identity$"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("malformed runtime health became ready")
+    assert rig.metrics["startup_accepted"] is False
+    assert rig.metrics["failure"] == "generation_health_identity"
+    assert rig.metrics["cleanup"]["accepted"] is True
+    assert rig.native_stopped
+    assert all(process.poll() is not None for process in rig.processes)
+    assert not rig.thread.is_alive()

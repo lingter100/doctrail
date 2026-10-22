@@ -20,7 +20,8 @@ from scripts.serve_meeting_rag_service import ROOT, start_services
 CODE = ("scripts/run_meeting_rag_acceptance.py", "tests/test_run_meeting_rag_acceptance.py",
         "web/scripts/run-meeting-rag-acceptance.mjs", "src/doctrail/meeting_service_rag.py",
         "scripts/serve_meeting_service_rag.py", "scripts/serve_meeting_rag_service.py",
-        "src/doctrail/meeting_analysis_batch.py", "src/doctrail/meeting_extraction_coverage.py")
+        "src/doctrail/meeting_analysis_batch.py", "src/doctrail/meeting_extraction_coverage.py",
+        "src/doctrail/meeting_grounded_summary.py")
 COUNTS = {"calibration": 6, "validation": 8}
 BROWSER_CODES = frozenset({
     "browser_action_failed", "browser_action_timeout", "browser_contract_failed",

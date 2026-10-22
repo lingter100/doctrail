@@ -13,7 +13,13 @@ final class MeetingAnalysis {
         ObjectNode a=json.createObjectNode();a.putNull("meeting_title");a.putNull("meeting_date");a.putArray("participants");a.putNull("purpose");a.put("summary","");a.putArray("summary_evidence");a.putArray("metadata_evidence");a.putArray("items");return a;
     }
     static JsonNode validate(JsonNode a,String content,boolean ai){
-        fields(a,"meeting_title","meeting_date","participants","purpose","summary","summary_evidence","metadata_evidence","items");
+        require(a!=null&&a.isObject());
+        boolean grounded=a.has("summary_version")||a.has("summary_claims");
+        if(grounded){
+            fields(a,"meeting_title","meeting_date","participants","purpose","summary","summary_evidence","metadata_evidence","items","summary_version","summary_claims");
+            require(integer(a,"summary_version",2,2)==2);
+            groundedSummary(a,content,ai);
+        }else fields(a,"meeting_title","meeting_date","participants","purpose","summary","summary_evidence","metadata_evidence","items");
         nullable(a,"meeting_title",200);date(a.get("meeting_date"));nullable(a,"purpose",2000);text(a,"summary",0,12000);
         array(a,"participants",100);Set<String> participants=new HashSet<>();for(var p:a.get("participants")){require(p.isTextual()&&!p.asText().isBlank()&&DocumentService.length(p.asText())<=200&&participants.add(p.asText()));}
         array(a,"summary_evidence",100);for(var e:a.get("summary_evidence")){fields(e,"quote","start_offset","end_offset");evidence(e,content);}
@@ -29,6 +35,36 @@ final class MeetingAnalysis {
         }
         return a.deepCopy();
     }
+    static int summaryVersion(JsonNode a){return a.has("summary_version")?integer(a,"summary_version",2,2):1;}
+    private record Span(int start,int end){}
+    static void groundedSummary(JsonNode a,String content,boolean ai){
+        unicode(content);
+        array(a,"summary_claims",6);require(!a.get("summary_claims").isEmpty());
+        var flattened=new TreeMap<Span,JsonNode>(Comparator.comparingInt(Span::start).thenComparingInt(Span::end));
+        List<String> texts=new ArrayList<>();int total=0,index=0;
+        for(var claim:a.get("summary_claims")){
+            fields(claim,"id","text","citations");require(integer(claim,"id",0,5)==index++);
+            String text=text(claim,"text",1,240);unicode(text);
+            require(!blank(text)&&text.codePoints().noneMatch(MeetingAnalysis::lineBreak));
+            if(ai)require(text.codePoints().anyMatch(c->c>=0x1100&&c<=0x11ff||c>=0x3131&&c<=0x318e||c>=0xac00&&c<=0xd7a3));
+            total+=DocumentService.length(text);require(total<=1200);texts.add(text);
+            array(claim,"citations",4);require(!claim.get("citations").isEmpty());Span previous=null;
+            for(var citation:claim.get("citations")){
+                fields(citation,"quote","start_offset","end_offset");evidence(citation,content);
+                String quote=citation.get("quote").asText();unicode(quote);require(!blank(quote));
+                Span span=new Span(citation.get("start_offset").intValue(),citation.get("end_offset").intValue());
+                require(previous==null||flattened.comparator().compare(previous,span)<0);
+                previous=span;flattened.put(span,citation);
+            }
+        }
+        require(a.path("summary").isTextual()&&a.get("summary").asText().equals(String.join("\n",texts)));
+        array(a,"summary_evidence",24);require(a.get("summary_evidence").size()==flattened.size());
+        int position=0;for(var citation:flattened.values())require(citation.equals(a.get("summary_evidence").get(position++)));
+    }
+    // Match Python's Unicode scalar, str.strip and splitlines boundaries for v2 only.
+    static void unicode(String value){for(int i=0;i<value.length();i++){char c=value.charAt(i);if(Character.isHighSurrogate(c)){require(i+1<value.length()&&Character.isLowSurrogate(value.charAt(++i)));}else require(!Character.isLowSurrogate(c));}}
+    static boolean blank(String value){return value.codePoints().allMatch(c->Character.isWhitespace(c)||Character.isSpaceChar(c)||c==0x85);}
+    static boolean lineBreak(int c){return c==10||c==13||c==11||c==12||c>=0x1c&&c<=0x1e||c==0x85||c==0x2028||c==0x2029;}
     static boolean supported(JsonNode a,String field,String value){for(var e:a.get("metadata_evidence"))if(field.equals(e.get("field").asText())&&e.get("quote").asText().contains(value))return true;return false;}
     static void evidence(JsonNode e,String content){String quote=text(e,"quote",1,12000);int start=integer(e,"start_offset",0,Integer.MAX_VALUE),end=integer(e,"end_offset",1,Integer.MAX_VALUE);require(end>start&&end<=DocumentService.length(content));require(quote.equals(content.substring(content.offsetByCodePoints(0,start),content.offsetByCodePoints(0,end))));}
     static void fields(JsonNode n,String... fields){require(n!=null&&n.isObject());Set<String> actual=new HashSet<>();n.fieldNames().forEachRemaining(actual::add);require(actual.equals(Set.of(fields)));}

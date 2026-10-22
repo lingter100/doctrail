@@ -1,4 +1,16 @@
 # 기여와 직접 검증 기록
+## 2026-10-22 · 연결 구현·실제 화면 회귀·독립 읽기 검토 완료
+
+기존 실제 수락 Astra high 두 역할이 Java/Python과 React를 나누어 구현했다. Java121개·Python최종582개 합성 검사와 실제 Java/합성 응답의 신규13+기존28개 화면 검사를 수행했다. 최초UI 선택자 실패4개는 제품 변경 없이 검사16줄로 수정했고 원본을 남겼다. 기존 Astra xhigh가 Java4/UI3+fixture2/Python8을 독립 읽기 검토했다. 첫 UI 검토 capacity 오류는 같은 요청 한 번 재시도 후 실제 읽기를 수행했으며, 도구가 수락한 기존 역할 설정만 기록한다.
+
+부모는 제품·검사 변경을 읽고 Python health.runtime 형식 오류를 generic 입력으로 재현했다. 구현자에게 launcher/test2 수정을 배정하고 최초574·중간582/Ruff 실패를 보존한 최종582 및 독립 검토를 확인했다. 부모가 바이트·패키징 연결·공개 결과·실행 문서·Git을 담당하고 새 일반 합성 화면3개를 AI 시각 검토했다. 사용자 직접 검수·새 실제 모델 실행·외부 배포는0이다.
+
+## 2026-10-22 · Java 저장 계약과 React 연결의 역할 분리
+
+기존 실제 수락 Astra high 구현자가 Java4를 작성하고 최종 신규69개·기존관련52개 합성 JUnit을 수행했다. 별도 기존 Astra xhigh에게 generic 코드만 읽는 독립 검토를 배정했다. 기존 adapter 독립 검토자였던 Astra high는 이제 React3 구현자이며 자기 구현의 최종 독립 검토를 맡지 않는다.
+
+부모는 Java 변경과 source4/artifact61/동결77 바이트를 확인하고, 실제 Java 저장을 시험할 수 있게 기존 브라우저 합성 모델 응답 fixture에 명시 v2 분기를 추가했다. 기존 v1 응답 동일성과 v2 투영·원문 좌표를 직접 확인했다. fixture의 accepted 검토 표시는 합성이며 실제 AI 검토·실제 모델 품질·사용자 검수를 뜻하지 않는다. 현재 Java/React 변경은 아직 commit/정확 CI 전이고 실제 모델 실행은 없다.
+
 ## 2026-10-22 · 근거 연결 요약 adapter와 합성 경계 검증
 
 기존 실제 수락 Astra high가 NEW module/test2를 구현하고 신규55개 포함 관련162개 MockTransport 검사·Ruff를 수행했다. 부모가 발견한 검토입력의 인용 중복은 기존 Astra xhigh 설계자의 generic 읽기 확인 뒤 exact span triple→유일unit ID로 표현하도록 좁게 수정했다. 실제모델·원문평가자료를 읽거나 실행해 맞춘 변경이 아니다.
