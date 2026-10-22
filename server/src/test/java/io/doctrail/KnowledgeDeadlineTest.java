@@ -213,4 +213,26 @@ class KnowledgeDeadlineTest {
         assertThat(service.deadlines).isZero();assertThat(healthDeadline).isEqualTo(existingInferenceDeadline);
         assertThat(generation.calls()).isEqualTo(1);
     }
+
+    @ParameterizedTest @ValueSource(strings={"no_evidence","insufficient_evidence","conflicting_evidence","unsupported_question","unknown_worker_reason"})
+    void workerAbstentionReasonIsPreservedOrRejectedWithoutRetry(String reason){
+        generation=new FakeGeneration(){
+            @Override JsonNode result(Object body){
+                var output=json.createObjectNode().put("schema_version",1).put("model","synthetic").put("revision","fixture")
+                        .put("status","abstained").put("reason",reason);
+                output.putArray("claims");return output;
+            }
+        };
+        var service=new TestKnowledge(true);
+        if(reason.equals("unknown_worker_reason")){
+            assertThatThrownBy(()->service.execute(body("bm25"),request,true)).isInstanceOfSatisfying(ApiError.class,error->{
+                assertThat(error.status).isEqualTo(503);assertThat(error).hasMessage("generation_invalid_response");
+            });
+        }else{
+            var result=service.execute(body("bm25"),request,true);
+            assertThat(result).containsEntry("status","abstained").containsEntry("reason",reason);
+            assertThat((List<?>)result.get("claims")).isEmpty();
+        }
+        assertThat(generation.calls()).isEqualTo(1);
+    }
 }

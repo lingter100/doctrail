@@ -1,4 +1,42 @@
 # 진행 상태
+## 2026-10-22 · 추출159개 비교 잠금과 후처리 개선 설계
+
+독립 추출 B 판단이 dee6e35c, 안전집계 d4edfac2로 잠겼다. 원문 단독 기준159개 중 우선 일치138·허용 대안11·명확 불일치10이다. 첫37개는 같은 잠금 기준에서32/1/3/1→33/1/3/0이며 인과적 성능 향상이나 공식 정확도가 아니다. 부모는 입력/잠금6개와 기존 답변 잠금 hash·분류 합계만 검증했고 private 내용은 읽지 않았다. [검토 결과와 한계](../experiments/results/meetings-analysis-scope-extraction-review-v1.json).
+
+실제 첫 ready분석의 인용179개는 원문과 일치하지만 네 요약 모두 첫4개 작업만 담아 원문 핵심 범위가 부족했다. 올바른 제목 라벨 이후 결과 필드2개가 빠졌고, 확약3개는 다른 종류로 분류돼 작업 목록에서 빠졌다. 후자는 명확 분류 오류10개의 일부다. 집단 담당자1개와 이미 해결된 질문의 연결1개는 구조/문맥 경고로 구분한다. 기한10개는 올바르며 임의 날짜·담당자·우선순위를 만들지 않았다. 이 결과로 원래 운영 실패를 통과 처리하지 않는다.
+
+기존 Astra xhigh 설계 담당에게 generic 코드와 안전집계만 허용해 NEW MEETINGS-EXTRACTION-COVERAGE-PLAN.md를 배정했다. 우선 요약·제목의 결정적 후처리 손실을 줄이되 기존 single/v1/v2·동결77·닫힌 실험과 원문을 보존한다. 분류 오류와 구조 경고는 별도 남은 문제이며 실제 trace 없는 원인확정을 하지 않는다. 현재 새 구현/실제 run-v3/공식 평가0, 부모는 검증된 제품 안내 수정과 실측·진단을 commit/CI로 진행한다.
+
+## 2026-10-22 · 답변 보류·오류 안내 수정 검증 완료
+
+직전 사용자 진행 문의 응답은 상태 설명만 한 no-progress turn이었다. 재개에서 goal ACTIVE·기존 독립 추출 판정자 running·구현/코드검토 담당자 반환·Git 및 프로세스를 확인했다. 관련 Node2개는 Codex runtime으로 보존하며 제품 Java/GPU 실행은 없다.
+
+지식검색에서 정상 보류4종과 HTTP 실패를 구분하고, Java가 알 수 없는 모델 보류 사유를 근거 부족으로 바꾸던 문제를 기존 generation_invalid_response로 거부하도록 수정했다. 질문·검색 조건·원문 복구·명시 재시도·401 로그인 복구를 유지한다. [구현과 검증](../experiments/results/knowledge-answer-recovery-messages-v1.json)은 Java50개·실제 Java/합성 응답 브라우저14개를 기록한다. 독립 검토가 요청 형식 오류를 분량 초과로 안내하는1개를 찾았고, 중립 안내로 고친 뒤 해당 브라우저 검사1개(27가지 오류)를 다시 통과했다. 총15개의 고유 검사로 합산하지 않는다. 최종 독립 읽기 검토는 blocker0이며 정확한 source CI는 다음 단계다.
+
+부모는 원래 증거82개·추가14개·수정 전 source/JAR/UI13개·현재source/binary10개·제품Python10개·동결77개를 검증했다. Java 보고서50/0과 브라우저6+8/0·마지막 반복1/0을 직접 확인했고 합성 화면2개를 읽었다. 테스트 JVM4개는 부재다. 이전 실제 실행의 JAR/UI는 baseline에 보존했고 현재 binary는 의도적으로 다시 만들었다. receipt-v2의 당시 독립 검토 대기 표시는 그대로 두고 별도 최종 검토53821867을 추가했다. 실제 LLM 호출0·사용자 검수0이며 전체 모델/운영 수용 완료가 아니다.
+
+추출 원문159개 판단(A)이 b233c5cf로 잠겼고 기존37개 판단은 유지됐다. 기존 Astra xhigh 판정자에게 B 실제분류/첫 ready분석과 custody만 배정해 원문 기준과 비교 중이다. 성능/원시 실행/기대답은 판단 잠금 전 전달하지 않는다. 현재6답변과 원문37개 이전 노출을 공개한 사후 개발 진단이다. 다음은 제품/실측 기록 commit·필수 CI, 추출 비교 결과에 따른 품질·통합 작업이다. 새 실제 run-v3는 아직 배정하지 않았다.
+
+## 2026-10-22 · 실제 지연 집계와 보류 안내 수정 시작
+
+직전 goal turn은 답변 잠금·종료 수정 검증을d99f17b로 commit/push하고 원격 필수6job을 확인한 progress다. 이번 재개에서도 goal ACTIVE·실제 담당자3running·현재Git을 확인했으며 관련Node2는Codex runtime이다.
+
+사후 안전 성능 기록c70f89df는 이번 실제 분석4개 worker 관측27.234~31.843초(평균29.33175초), 답변6개 click→response JSON42.973~62.573초(평균52.758초)를 분리했다. Java 서비스 보고 평균52.689255초와 worker 관측44.731833초는 겹치는 구간이다. 부모는 원본141개·timer code3개 hash와5개 통계집계를 확인했다. [실측 지연과 한계](../experiments/results/meetings-analysis-scope-performance-v1.json)에 렌더 완료/분석upload→ready/운영p95/메모리·전력비 미측정을 명시한다. 실제local모델 호출의 API요금0은 전력·PC·개발도구 비용0이나 청구서 검증을 뜻하지 않는다. 판정 잠금 전 검토자에게 성능을 전달하지 않았다.
+
+Generic 읽기 진단은 보류reason과HTTP오류 경로가 다름을 확인했다. 시간초과·일시불가·응답검증실패는 성공한 보류 결과로 설명하지 않고, 기존 지식검색 화면의 원시코드/일괄 근거부족 안내와 부정확한 공용409/일반generation_failed 설명을 고친다. Java의 미지 보류reason도 근거부족으로 바꾸지 않고 기존invalid_response로 거부한다.
+
+기존 실제 Astra high 구현 담당이 web3+KnowledgeService/KnowledgeDeadlineTest 총5파일을 소유한다. 기존JAR/UI4와 관련source8을 baseline13개로 복사·hash확인한 뒤 Java/Maven 슬롯을 독점 배정했다. 실제Java+합성모델 브라우저 경계 검사/관련Javaunit/타입/build로 검증하며 LLM/native/GPU0, 옛run/pins/동결77/제품Python10/모든판단은 그대로다. 원문122개 판단은 기존Astraxhigh reviewer가 계속수행하며 B아직미배정이다.
+
+## 2026-10-22 · 추출 원문159개 판단과 실측 구간 집계 배정
+
+답변 판정·종료 수정 검증을d99f17b로 사용자 계정 commit/push했고 원격 author/committer lingter100·PR14 draft head를 확인했다. Push39722049713/PR39722053838의 필수3job이 모두 성공했다. PR 설명도 실제6답변과 원래 종료 실패·검증 한계를 반영했다.
+
+별도 custody가4원문/159unit/22batch/첫Java ready4를 A 원문 전용/B 실제 분석으로 분리했다. Java 근거좌표179개, 관련 원본1594개 전후/index binding을 확인했고 부모는 새5개 packet/hash와 원래 cli-index1893개를 확인했다. 첫37개는 기존 익명source ID와 실제run ID의1:1 alias이며 원문·unit·좌표는 같았다. 최초 ID동일 assertion 및 envelope/list 가정 검사 실패를 보존하고 기존원본은 수정하지 않았다.
+
+기존 Astra xhigh 독립 판정자에게 A(adbad410)와 기존 source-only37 잠금만 배정했다. 새122개 원문 판단과4회의 원문핵심의미를 NEW independent-extraction-v2에 고정하기 전에는 B(e627e3d7)·현재추출라벨·시간/성능을 읽지 않는다. 기존37 주석은 재작성하지 않으며 이전6답변/근거 노출을 공개한다. 부모는 의미자료를 읽지 않는다.
+
+기존 Astra high custody 담당은 별도 NEW performance-v2에서 원래분석4/답변6의 실제관측 지연을 집계한다. UI·HTTP·worker·native 구간/clockdomain을 구분하고 없는 자원·비용값은 미측정으로 남긴다. 새모델/서비스/Java/브라우저 실행과 parser 재구성은0이며 실제 run-v3는 아직 배정되지 않았다. 다음은 A 판단 잠금 확인 후 B 비교, 그 결과와 운영 수정에 근거한 다음 품질/통합 작업이다. 별도 기존 Astra xhigh 설계 담당은 KnowledgeView의 보류 사유 원시코드 노출과 일괄 근거부족 안내를 generic 서버/UI 코드로 읽기 진단 중이다. 아직 runtime 재현·제품 수정은 없으며 실제 자료/출력은 읽지 않는다.
+
 ## 2026-10-22 · 답변 전용 판정 잠금과 추출 진단 분리
 
 직전 사용자 상태 문의 응답은 no-progress turn이었다. 이번 재개에서 실제 Git·반환된 담당자·CI와 프로세스를 확인했다. 결과076e1bc의 push39720754557/PR39720758450 필수3job이 모두 성공했다. 현재 관측된 관련 Node2개는 Codex runtime/trusted worker이며 프로젝트 서비스로 종료하지 않는다.

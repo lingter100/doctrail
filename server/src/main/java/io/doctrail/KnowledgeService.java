@@ -76,7 +76,7 @@ public class KnowledgeService {
     }
     static Map<String,Object> abstain(String reason,Object model){var response=new LinkedHashMap<String,Object>();response.put("status","abstained");response.put("reason",reason);response.put("claims",List.of());response.put("model",model);response.put("experimental",true);return response;}
     Map<String,Object> validateAnswer(JsonNode out,List<Map<String,Object>> contexts){
-        String state=out.path("status").asText();if(state.equals("abstained")){if(!out.path("claims").isArray()||!out.path("claims").isEmpty())throw new ApiError(503,"generation_invalid_response");String reason=out.path("reason").asText();if(!Set.of("insufficient_evidence","no_evidence","unsupported_question","conflicting_evidence").contains(reason))reason="insufficient_evidence";var response=abstain(reason,out.path("model").asText());response.put("model_revision",out.path("revision").asText());return response;}
+        String state=out.path("status").asText();if(state.equals("abstained")){if(!out.path("claims").isArray()||!out.path("claims").isEmpty())throw new ApiError(503,"generation_invalid_response");String reason=out.path("reason").asText();if(!Set.of("insufficient_evidence","no_evidence","unsupported_question","conflicting_evidence").contains(reason))throw new ApiError(503,"generation_invalid_response");var response=abstain(reason,out.path("model").asText());response.put("model_revision",out.path("revision").asText());return response;}
         if(!state.equals("answered")||!out.path("claims").isArray()||out.path("claims").isEmpty()||out.path("claims").size()>20)throw new ApiError(503,"generation_invalid_response");
         List<Map<String,Object>> claims=new ArrayList<>();
         try{for(var claim:out.get("claims")){

@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "kind": "posthoc_development_extraction_diagnosis",
+  "raw_safe_receipt": {
+    "path": ".local/service-rag-batch-development-v1/independent-extraction-v2/safe-model-review.json",
+    "bytes": 15609,
+    "sha256": "d4edfac263954b1b8508e2126f3d1ac1c19404197059c20f5c316f126c9c5e62"
+  },
+  "safe_result_portable": {
+    "artifact_kind": "safe_posthoc_development_actual_extraction_review",
+    "version": 1,
+    "phase": "v2_extraction_phase_B",
+    "status": "judgment_locked_before_performance_disclosure",
+    "locked_at_utc": "2026-10-22T04:50:03.692Z",
+    "input_bindings": {
+      "source_packet": {
+        "path": ".local/service-rag-batch-development-v1/extraction-packets-v2/source-only.json",
+        "bytes": 45773,
+        "sha256": "adbad410a96625f8ddd37f747092b6a691ad70aae60a408256ba5bce10fea381"
+      },
+      "source_annotation_lock": {
+        "path": ".local/service-rag-batch-development-v1/independent-extraction-v2/source-judgments.json",
+        "bytes": 274353,
+        "sha256": "b233c5cff429724a4686bda63910d612224c8e5c2cd889759d51b372162ce50d"
+      },
+      "first37_annotation_lock": {
+        "path": ".local/service-rag-batch-development-v1/independent-diagnostic-v1/source-judgments-v1.json",
+        "bytes": 41393,
+        "sha256": "2ecd8cd56014010e0e7be8c98a1d2ca15ffbd8c71efc53275c357407a78d4093"
+      },
+      "actual_analysis_packet": {
+        "path": ".local/service-rag-batch-development-v1/extraction-packets-v2/actual-analysis.json",
+        "bytes": 109762,
+        "sha256": "e627e3d7693d5914cad91531071b17db622cf45cfe2d24c38f0b1b4c2c4018ec"
+      },
+      "custody_metadata": {
+        "path": ".local/service-rag-batch-development-v1/extraction-packets-v2/custody.json",
+        "bytes": 255957,
+        "sha256": "2fc3be5545047c67c86bf86379ef97de23f8fa1bf13d59d257115b6ef0d51e9f"
+      },
+      "previous_answer_lock": {
+        "sha256": "24e023708b4d5ef3712fe24c7490cd15b231aef02a0c9005ede213c119cb051c",
+        "provenance": "parent-confirmed; not opened or modified here"
+      }
+    },
+    "private_judgment_lock": {
+      "path": ".local/service-rag-batch-development-v1/independent-extraction-v2/model-comparison.json",
+      "bytes": 577884,
+      "sha256": "dee6e35c50e4142c862b8048b9a9df532662f95e1b5c73963c2ccbaa60a08bc3"
+    },
+    "aggregate": {
+      "classification": {
+        "total": 159,
+        "preferred": 138,
+        "allowed_alternative": 11,
+        "clear_outside_allowed": 10,
+        "conditional_ambiguous": 0,
+        "unconditional_agreement": 149,
+        "missing_or_unscorable": 0,
+        "by_actual_label": [
+          {
+            "label": 0,
+            "tag": "skip",
+            "count": 2,
+            "preferred": 1,
+            "allowed_alternative": 0,
+            "clear_outside_allowed": 1,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 1,
+            "tag": "meeting_title",
+            "count": 4,
+            "preferred": 4,
+            "allowed_alternative": 0,
+            "clear_outside_allowed": 0,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 2,
+            "tag": "meeting_date",
+            "count": 4,
+            "preferred": 4,
+            "allowed_alternative": 0,
+            "clear_outside_allowed": 0,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 3,
+            "tag": "participants",
+            "count": 4,
+            "preferred": 4,
+            "allowed_alternative": 0,
+            "clear_outside_allowed": 0,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 4,
+            "tag": "purpose",
+            "count": 4,
+            "preferred": 4,
+            "allowed_alternative": 0,
+            "clear_outside_allowed": 0,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 5,
+            "tag": "topic",
+            "count": 54,
+            "preferred": 41,
+            "allowed_alternative": 10,
+            "clear_outside_allowed": 3,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 6,
+            "tag": "proposal",
+            "count": 22,
+            "preferred": 19,
+            "allowed_alternative": 0,
+            "clear_outside_allowed": 3,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 7,
+            "tag": "decision",
+            "count": 31,
+            "preferred": 29,
+            "allowed_alternative": 0,
+            "clear_outside_allowed": 2,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 8,
+            "tag": "unresolved",
+            "count": 13,
+            "preferred": 11,
+            "allowed_alternative": 1,
+            "clear_outside_allowed": 1,
+            "conditional_ambiguous": 0
+          },
+          {
+            "label": 9,
+            "tag": "action",
+            "count": 21,
+            "preferred": 21,
+            "allowed_alternative": 0,
+            "clear_outside_allowed": 0,
+            "conditional_ambiguous": 0
+          }
+        ]
+      },
+      "first37_paired_development_comparison": {
+        "same_locked_annotation": true,
+        "previous": {
+          "preferred": 32,
+          "allowed_alternative": 1,
+          "clear_outside_allowed": 3,
+          "conditional_ambiguous": 1
+        },
+        "current": {
+          "preferred": 33,
+          "allowed_alternative": 1,
+          "clear_outside_allowed": 3,
+          "conditional_ambiguous": 0
+        },
+        "previous_count_provenance": "Parent-provided locked v1 aggregate; prior actual B/comparison files were not reopened.",
+        "transition_limit": "Same-input aggregate comparison only; no full previous per-unit transition matrix or causal performance claim."
+      },
+      "new122": {
+        "total": 122,
+        "preferred": 105,
+        "allowed_alternative": 10,
+        "clear_outside_allowed": 7,
+        "conditional_ambiguous": 0
+      },
+      "java_first_ready": {
+        "documents": 4,
+        "versions_all_one": true,
+        "ready_statuses": 4,
+        "actor_edit_exclusion": "custodian verified",
+        "items": 141,
+        "summary_quotes": 16,
+        "metadata_evidence_spans": 22,
+        "total_evidence_spans": 179,
+        "source_exact_evidence_spans": 179,
+        "item_text_exact_source_quotes": 141,
+        "summary_quotes_source_supported": 16,
+        "item_types_follow_actual_model_labels": 141,
+        "missing_items_for_actual_content_labels": 0
+      },
+      "metadata": {
+        "expected_header_fields": 16,
+        "model_header_labels_preferred": 16,
+        "supported_current_meeting_fields": 14,
+        "missing_titles": 2,
+        "wrong_populated_values": 0,
+        "current_meeting_dates_supported": 4,
+        "date_scope_collisions_observed": 0
+      },
+      "summary": {
+        "documents": 4,
+        "source_supported": 4,
+        "material_core_coverage_gaps": 4,
+        "first_four_actions_only": 4,
+        "fully_core_sufficient": 0,
+        "limitation": "Coverage judgment is based on the prelocked AI semantic expectations, not a gold score or a fixed wording requirement."
+      },
+      "actions": {
+        "source_supported_commitments": 24,
+        "present_as_action": 21,
+        "present_only_under_non_action": 3,
+        "entire_source_action_text_lost": 0,
+        "source_named_owners": 22,
+        "supported_named_owner_fields_on_actions": 19,
+        "named_owners_unstructured_with_misclassified_action": 3,
+        "source_collective_owners": 2,
+        "supported_collective_owner_fields": 1,
+        "collective_owner_unstructured": 1,
+        "explicit_calendar_deadlines": 10,
+        "calendar_deadlines_correct": 10,
+        "unsupported_calendar_dates": 0,
+        "source_relative_deadlines_or_durations": 8,
+        "relative_deadlines_or_durations_on_action_items": 6,
+        "relative_deadlines_or_durations_on_non_action_items": 2,
+        "relative_text_retained": 8,
+        "source_deadlines_unspecified": 6,
+        "unsupported_nonnull_assignees": 0,
+        "unsupported_nonnull_priorities": 0
+      },
+      "clear_classification_error_categories": [
+        {
+          "category": "scope_statement_as_unresolved",
+          "counterexample_units": 1
+        },
+        {
+          "category": "question_or_issue_as_topic",
+          "counterexample_units": 2
+        },
+        {
+          "category": "committed_action_as_non_action",
+          "counterexample_units": 3
+        },
+        {
+          "category": "objection_as_proposal",
+          "counterexample_units": 1
+        },
+        {
+          "category": "nonadoption_status_as_decision",
+          "counterexample_units": 1
+        },
+        {
+          "category": "substantive_conduct_report_skipped",
+          "counterexample_units": 1
+        },
+        {
+          "category": "baseline_scope_statement_as_decision",
+          "counterexample_units": 1
+        }
+      ],
+      "document_context_warning": {
+        "resolved_question_still_typed_unresolved_without_resolution_link": 1,
+        "classification_error": false,
+        "ui_effect_verified": false
+      }
+    },
+    "generalized_cause_and_product_issue_categories": [
+      {
+        "category": "model_label_disagreement",
+        "counterexample_units": 10,
+        "certainty": "observed_at_stored_label_stage_against_prelocked_AI_annotation",
+        "description": "The fixed source-only preferred/allowed sets disagree with ten stored class outputs. Nine are carried into Java item types and one substantive unit is skipped. No prompt, model-policy or performance cause is inferred."
+      },
+      {
+        "category": "summary_core_coverage_loss",
+        "counterexample_documents": 4,
+        "certainty": "output_gap_observed_selection_mechanism_inferred",
+        "description": "All four summaries consist of the first four available action quotes while central decisions remain elsewhere in each result. The observed selection fails source-derived core coverage. The implementation rule and runtime transform trace are unknown."
+      },
+      {
+        "category": "metadata_title_projection_loss",
+        "counterexample_fields": 2,
+        "certainty": "correct_upstream_label_and_missing_downstream_value_observed_exact_component_unknown",
+        "description": "Two source-supported titles have correct title labels but null Java title fields and no title evidence. This localizes loss after the label output without proving which conversion or display component caused it."
+      },
+      {
+        "category": "committed_action_not_in_action_list",
+        "counterexample_units": 3,
+        "subset_of_model_label_disagreement": true,
+        "certainty": "label_and_java_type_loss_observed",
+        "description": "Three explicit commitments remain only as non-action items. Their source text survives, but the actionable list and named-owner fields lose them."
+      },
+      {
+        "category": "collective_responsibility_unstructured",
+        "counterexample_fields": 1,
+        "certainty": "representational_gap_observed_schema_expectation_unverified",
+        "description": "One retained action explicitly has collective responsibility in its text but a null structured assignee. No individual assignee should be invented; whether the field is intended to represent groups is outside this packet."
+      },
+      {
+        "category": "resolved_question_context_unlinked",
+        "counterexample_relations": 1,
+        "certainty": "artifact_relationship_gap_observed_user_display_risk_conditional",
+        "description": "One locally valid question label remains unresolved while a later decision answers it, with no resolution link in the item fields. This is not an extra unit-label error, and the UI impact is not verified."
+      }
+    ],
+    "counting_notes": [
+      "The 159 classification categories are exclusive. Preferred and allowed sum to 149; conditional comparisons are separate.",
+      "Ten classification counterexamples are ten units, including three missed action types, two unsupported decision tags and one dropped substantive report. Subset findings must not be added again.",
+      "Four summary gaps count documents; two missing titles count metadata fields. These dimensions overlap documents and are not summed into a single error rate.",
+      "The collective-owner and resolved-question relationship findings are qualified representation/context warnings, not additional clear classifier mismatches.",
+      "All claims are development diagnostics against a prior AI source lock, not official gold accuracy or new operational acceptance."
+    ],
+    "status_boundaries": {
+      "overall_success_failure_gate_reclassified": false,
+      "previous_answer_judgments_revised": false,
+      "current_performance_read": false,
+      "source_annotation_modified": false,
+      "existing_first37_annotation_modified": false,
+      "implementation_or_policy_advice": false
+    },
+    "input_and_lock_preservation": {
+      "source_packet_unchanged": true,
+      "source_annotation_lock_unchanged": true,
+      "first37_lock_unchanged": true,
+      "answer_lock": "parent-confirmed; no read or write in this phase",
+      "existing_file_edits": 0
+    },
+    "execution_limits": {
+      "model_service_whole_parser_tests_git_calls": 0,
+      "original_raw_prompt_or_performance_files_opened": 0,
+      "new_output_files": 2
+    },
+    "exposure_and_limits": [
+      "This is posthoc development AI comparison against previously locked AI source annotations, not gold accuracy, formal evaluation, fresh heldout performance, human review or user approval.",
+      "The same existing judge previously reviewed first37 source/label diagnosis and six current answers with authorized context/full-source evidence. Earlier generic-code exposure and injected project metadata remain disclosed; independence from source/item authorship, implementation and execution does not imply pristine blindness.",
+      "This phase read only the authorized source packet, locked source annotations, actual-analysis packet and custody metadata. Current performance files, original run raw files, prompts, expected markers, oracle and other private judgments were not opened.",
+      "Current B and custody were first read after the source-only annotation lock. The source annotation preferred sets, acceptable alternatives and conditional interpretations were not changed after seeing B.",
+      "Original runtime mapping, first-ready-before-actor-edits identity and original snapshot preservation are custodian assertions. The reviewer independently checked authorized packet hashes, original_content JSON-to-pair agreement, 159 source-unit mappings, and 179 Java quote/offset spans; underlying raw files were not reread.",
+      "Custody metadata states an existing overall run failure. This semantic comparison does not reclassify that gate or any prior answer judgment, regardless of four ready analysis records.",
+      "Correct literal quotations do not establish correct type, completeness or current meeting scope. Conversely, an incorrect decision tag on a negative source sentence is not reported as fabricated positive approval when the negative wording remains intact.",
+      "Relative deadlines and durations retained in text are not penalized merely because a calendar-only due_date is null. No absolute dates, individual group owners, or priorities are invented by the reviewer.",
+      "The first37 v1 comparison uses parent-provided aggregate counts and the identical frozen annotation. Previous B/comparison files were not reopened, so no complete item transition matrix or causal improvement claim is made.",
+      "Current source code, production parser and runtime transform traces were not inspected or executed. Exact downstream component causes and UI behavior remain unverified; output-level gaps are distinguished from those inferences.",
+      "No model, service, whole-parser, tests, Git, policy change, implementation change or existing-file edit was performed. Only two new comparison artifacts are created.",
+      "The existing answer lock was not opened or changed in this phase; its preserved status is parent-confirmed metadata. Only the authorized source locks were independently rehashed here."
+    ]
+  },
+  "parent_verification": {
+    "input_and_private_lock_hashes": 6,
+    "answer_lock_hash_unchanged": true,
+    "classification_aggregate_sums_checked": true,
+    "private_content_read": false,
+    "new_model_or_service_calls": 0
+  },
+  "interpretation": "Literal evidence fidelity does not establish correct classification or sufficient summary coverage. Output-level downstream losses are observed; exact implementation causes need a separate generic code review.",
+  "next_step": "Inspect deterministic summary and title projection before another inference comparison; keep classifier errors and qualified representation warnings separate.",
+  "original_operational_failure_preserved": true,
+  "formal_accuracy_or_human_review": false
+}

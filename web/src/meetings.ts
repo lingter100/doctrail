@@ -15,6 +15,36 @@ export type KnowledgeResult = { query: string; method: string; results: Knowledg
 export const itemLabels: Record<ItemType, string> = { topic: '논의 주제', proposal: '제안', decision: '결정 사항', unresolved: '미해결 사항', action: '후속 작업' };
 export const statusLabels: Record<ItemStatus, string> = { needs_confirmation: '확인 필요', confirmed: '확정', todo: '할 일', doing: '진행 중', done: '완료' };
 export const analysisLabels = { queued: '분석 대기', running: 'AI 분석 중', ready: '분석 완료', failed: '분석 실패', stale: '원문 변경 · 재분석 필요' };
+export function knowledgeAbstention(reason: string | null | undefined): string {
+  switch (reason) {
+    case 'no_evidence': return '현재 검색 조건에 맞는 원문 근거가 없어요. 검색 범위나 회의 조건을 조정해 주세요.';
+    case 'insufficient_evidence': return '찾은 원문만으로는 질문에 답할 근거가 충분하지 않아요. 검색된 원문을 확인하거나 질문과 검색 조건을 구체화해 주세요.';
+    case 'conflicting_evidence': return '찾은 원문의 내용이 서로 달라 답변을 보류했어요. 원문을 비교하고 회의 날짜 등 검색 조건을 확인해 주세요.';
+    case 'unsupported_question': return '현재 답변 기능으로 처리하기 어려운 질문이에요. 원문에서 확인할 수 있는 내용을 구체적으로 질문해 주세요.';
+    default: return '답변을 보류했어요. 검색된 원문을 확인하거나 질문과 검색 조건을 조정해 주세요.';
+  }
+}
+
+export function knowledgeError(error: unknown): string {
+  if (!(error instanceof ApiError)) return '서버에 연결하지 못했어요. 연결 상태를 확인한 뒤 다시 시도해 주세요.';
+  if (error.status === 401) return errorMessage(error);
+  if (error.status === 403 || error.status === 404) return '자료를 확인할 수 없어요. 현재 접근 가능한 자료와 검색 조건을 다시 확인해 주세요.';
+  const code = error.code;
+  if (code === 'search_context_changed') return '검색 중 원문이나 접근 권한이 변경됐어요. 현재 접근 가능한 자료로 다시 확인해 주세요.';
+  if (code === 'embedding_profile_changed') return '검색 모델 설정이 변경됐어요. 현재 검색 방식을 확인한 뒤 다시 검색해 주세요.';
+  if (code === 'generation_timeout') return '답변 생성 시간이 초과됐어요. 잠시 후 직접 다시 시도하거나 원문 검색으로 확인해 주세요.';
+  if (code === 'generation_busy' || code === 'model_busy' || code === 'inference_busy') return '다른 AI 요청을 처리하고 있어요. 잠시 후 직접 다시 시도해 주세요.';
+  if (code === 'generation_unavailable' || code === 'generation_failed') return '답변 생성에 일시적인 문제가 생겼어요. 잠시 후 직접 다시 시도하거나 원문 검색으로 확인해 주세요.';
+  if (['generation_invalid_response', 'generation_invalid_json', 'generation_invalid_schema', 'generation_invalid_evidence', 'generation_duplicate_item', 'generation_unsupported_field', 'generation_unsupported_metadata', 'generation_conflicting_metadata', 'generation_output_truncated'].includes(code)) return 'AI 응답의 형식이나 근거를 검증하지 못했어요. 답변으로 사용하지 않았으니 원문 검색으로 확인해 주세요.';
+  if (code === 'generation_language_mismatch') return 'AI 응답이 요청한 언어와 달라 답변으로 사용하지 않았어요. 원문 검색으로 근거를 확인할 수 있어요.';
+  if (['generation_disabled', 'generation_not_configured', 'generation_cleanup_failed'].includes(code)) return '현재 답변 생성 기능을 사용할 수 없어요. 원문 검색으로 근거를 확인해 주세요.';
+  if (code === 'context_budget_exceeded') return '찾은 근거가 한 번에 답변할 수 있는 분량을 넘었어요. 원문은 그대로 보관되어 있어요. 검색 조건을 좁히거나 원문 검색으로 확인해 주세요.';
+  if (['generation_input_limit', 'generation_partition_limit', 'answer_context_limit', 'visible_corpus_too_large', 'query_too_long'].includes(code)) return '현재 요청을 처리할 수 있는 범위를 넘었어요. 질문이나 검색 조건을 좁히거나 원문 검색으로 확인해 주세요.';
+  if (code === 'inference_timeout') return '관련 근거를 찾는 시간이 초과됐어요. 검색 조건을 조정하거나 잠시 후 직접 다시 검색해 주세요.';
+  if (['inference_disabled', 'inference_unavailable', 'inference_invalid_response'].includes(code)) return '현재 모델 검색을 사용할 수 없어요. 검색 방식을 확인하거나 잠시 후 직접 다시 검색해 주세요.';
+  return '검색 또는 답변 요청을 완료하지 못했어요. 검색 조건을 확인하거나 잠시 후 직접 다시 시도해 주세요.';
+}
+
 export function meetingError(error: unknown): string {
   if (!(error instanceof ApiError)) return errorMessage(error);
   if (error.status === 409) return '원문이나 분석이 변경되어 저장하지 않았어요. 새로 불러온 뒤 수정 내용을 다시 확인해 주세요.';
