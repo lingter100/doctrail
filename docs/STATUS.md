@@ -1,6 +1,8 @@
 # 진행 상태
 ## 2026-10-22 · 재개 확인과 실제 화면 검사004
 
+구현·validation v2 수용·화면 증거22파일을 c8c120d0e573f9cccadf5105341de0500ebcb454로 사용자 명의 commit/push했다. Push39700954136/PR39700959236 모두 backend·java-service·web 성공이며 GitHub author/committer lingter100과 PR14 head 일치도 확인했다. [실행 코드 CI](../experiments/results/meetings-service-rag-execution-ci-v1.json)는 정적 Python 의존성37개와 명시적 테스트/browser/lock/model manifest를 합친45개 파일이 해당 Git commit·현재 작업본과 일치함을 기록한다. JAR/UI는006에 사용한 로컬 artifact이며 Linux CI binary와 동일하다고 주장하지 않는다. 이 CI 기록을 commit한 뒤 기존 등록 calibration 실행 담당에게 manifest 준비만 배정한다.
+
 **최종006 통과:** 실제 Java/React와 합성 HTTP fixture에서 등록6·분석4·질문POST6·모든 인용6열기·권한12확인(허용8/거부4)을15.013초에 마쳤다. 부모가 원본113개 artifact hash와 전후24binding·소유PID9개 종료를 확인하고 desktop 인용/mobile 화면을 읽었다. 실제 모델0·사용자 검수0이며 이 시간은 실제 모델 지연이 아니다. [구현과 재현 방법](MEETINGS-SERVICE-RAG-EXECUTION-IMPLEMENTATION.md), [공개 검증 요약](../experiments/results/meetings-service-rag-execution-v1.json)을 남긴다.
 
 후속 감사에서 main-only DOM에 바깥 source panel도 들어 있다고 가정한 assertion이 실패했다. 원래 runtime 통과와 이 감사 오류를 별도로 보존하고, 원문 API·revision·codepoint·실제 클릭 assertion·각 인용 screenshot으로 감사 범위를 정정했다. 원문 패널 DOM 보존을 주장하지 않으며 재실행007은 하지 않았다. v5 독립 읽기 검토 blocker0·구현 소유권 반환 완료다. 다음은 현재 구현 커밋의 필수 CI 뒤 등록된 calibration 담당자의 실제 실행 manifest와 한 번의 로컬 모델 연결 평가다.
