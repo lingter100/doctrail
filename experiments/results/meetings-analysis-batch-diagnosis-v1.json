@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "batch_development_posthoc_independent_diagnosis",
+  "created_at_utc": "2026-10-22T03:18:55.927541+00:00",
+  "original_failure": {
+    "path": "experiments/results/meetings-analysis-batch-development-v1.json",
+    "sha256": "d996f977005d71f1e63a9f78f36ec21048308a14fd996f176bdaeaf7a554b3f2"
+  },
+  "review_order": "Six unanswered questions fixed as unexecuted and unscorable; source-only37-unit judgments locked before actual labels were read; then compare all37 actual labels.",
+  "reviewer": "existing service_rag_calibration_final_judge, previously accepted Astra xhigh; role/project metadata exposed, not pristine blind",
+  "review_refs": [
+    {
+      "path": ".local/service-rag-batch-development-v1/independent-diagnostic-v1/source-judgments-v1.json",
+      "bytes": 41393,
+      "sha256": "2ecd8cd56014010e0e7be8c98a1d2ca15ffbd8c71efc53275c357407a78d4093"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/independent-diagnostic-v1/safe-source-review-v1.json",
+      "bytes": 3625,
+      "sha256": "7901935f288ec38057eedf5fbf32c439e2a1b81b401772c2686b1e5d6d2af82b"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/independent-diagnostic-v1/model-comparison-v1.json",
+      "bytes": 55320,
+      "sha256": "c10c6d0f305bad25ae47909775c9928a27aa6cba9339971b9a4594a26bea4c76"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/independent-diagnostic-v1/safe-model-review-v1.json",
+      "bytes": 5903,
+      "sha256": "10c5b508c4010782aa4d335e37b72b44c2f750c085cecd85615794d0af2a0c7c"
+    }
+  ],
+  "comparison_counts": {
+    "total_compared": 37,
+    "unique_compared": 37,
+    "preferred_label_agreement": 32,
+    "accepted_nonpreferred_label_agreement": 1,
+    "unconditional_acceptable_set_agreement": 33,
+    "outside_locked_acceptable_set_without_conditional_support": 3,
+    "conditional_scope_ambiguity": 1,
+    "outside_unconditional_set_including_conditional": 4,
+    "source_units_with_multiple_unconditional_acceptable_labels": 6,
+    "accepted_agreements_on_originally_ambiguous_label_sets": 3
+  },
+  "diagnosis": {
+    "cause_category": "cross_meeting_date_scope_conflation",
+    "field": "meeting_date",
+    "generic_cause": "현재 회의와 다른 회의를 가리키는 두 정당한 날짜 언급이 단일 현재 회의 날짜 필드로 합쳐져 충돌 조건에 해당한다.",
+    "same_current_field_legitimate_multivalue_or_paraphrase_conflict": false,
+    "distinct_referents_legitimate_source_values": true,
+    "model_label_taxonomy_scope_ambiguity": "잠긴 주석에서 이미 조건부 모호함으로 기록했다. label 자체의 무조건 오분류와 현재 회의 필드로의 잘못된 귀속을 구별한다.",
+    "interaction": "scope가 보존되지 않는 분류 결과와 scope를 검사하지 않는 literal 날짜 추출의 결합",
+    "generic_problem_needing_resolution": "현재 회의와 다른 회의의 날짜 귀속 구별. 별도로 작업 확약 및 범위/한계 설명을 제안과 혼동하는 분류 불일치가 있다."
+  },
+  "evidence_limits": {
+    "posthoc_development_ai_annotation": true,
+    "gold_accuracy": false,
+    "official_evaluation": false,
+    "human_review": false,
+    "actual_stacktrace_available": false,
+    "original_mapping_independently_reopened_by_judge": false,
+    "mapping_verified_by_custodian": true,
+    "parent_verified_code_pair_matches_run_preserved_frozen77": true,
+    "static_inference_and_pure_literal_parsing": true,
+    "actual_model_service_or_full_parser_replay": false,
+    "answer_score": null,
+    "unexecuted_questions": 6,
+    "native_answer_calls": 0
+  },
+  "next_decision": "Design only: explicit batch-v2 prompt scope and intent clarification while preserving single/batch-v1, full TARGET coverage, model and time budgets, and strict metadata conflict guards. Same unchanged development inputs may be used in a separate new run only after implementation/review/exact CI/pins and explicit dispatch.",
+  "phase1_complete": false
+}

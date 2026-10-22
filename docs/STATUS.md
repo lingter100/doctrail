@@ -1,4 +1,26 @@
 # 진행 상태
+## 2026-10-22 · 범위 분류 설계 수용과 구현 재개
+
+직전 사용자 문의 응답은 상태 설명만 한 no-progress turn이다. 현재 Git·goal·담당자 반환 상태를 확인했으며 승인 대기가 아닌 다음 구현 작업이 있다. 기존 Astra xhigh 설계 담당의 [새 정책 설계](MEETINGS-ANALYSIS-SCOPE-PLAN.md)71줄/12882B, SHA ef21381b를 부모가 전체 읽고 수용했다. 독립 진단과 private4개 binding·기존 동결77개를 확인했다.
+
+설계와 원본 진단을 먼저 commit한 뒤 기존 Astra high 구현 담당에게 기존10파일 이내 batch-v2 연결·회귀 검사를 배정한다. 구현 전 single/v1의 고정 prompt bytes/SHA를 기록하고 일반적인 현재 회의 범위와 확약/제안/범위 정의만 추가한다. 원문·분석120초·엄격한 충돌 판정을 유지한다. 실제 개선은 아직 미확인이고 개발 run-v2는 코드 검토·정확한 CI·새 binding·별도 명시 배정 전에는 실행하지 않는다. Goal ACTIVE, 전체1차와 PR14는 미완료다.
+
+## 2026-10-22 · 날짜 귀속 혼동을 확인하고 새 정책 설계
+
+독립 PHASE B는 고정 주석을 변경하지 않고37개 실제 분류를 모두 비교했다. 우선 해석32개·허용 대안1개가 일치하고, 명확한 불일치3개와 조건부 scope 모호함1개를 구분했다. 최초 충돌 필드는 meeting_date이며 서로 다른 회의를 가리키는 정당한 날짜가 현재 회의의 단일값 필드로 합쳐졌다. 같은 현재 회의의 정당한 복수값이나 재진술 자체가 원인이라는 근거는 없다. 별도로 확약·범위/한계 설명을 제안과 혼동하는 불일치도 기록했다.
+
+부모는 private comparison c10c6d0f·safe receipt10c5b508·고정 annotation2ecd8cd5와 입력 packet hash만 확인했다. 검토자가 읽은 generic 코드2개는 실제 실행 전후 보존한 frozen77 hash와 일치한다. [독립 개발 진단](../experiments/results/meetings-analysis-batch-diagnosis-v1.json)은 static 추론·순수 literal 파싱이며 관측 stack frame은 없다. 원본 packet mapping은 실행 담당 검증에 의존하고,33/37은 사후 AI 주석과의 허용 집합 일치 건수로 gold 정확도나 공식 평가 점수가 아니다. 답변 점수는 null이다.
+
+다음 후보는 명시적 batch-v2의 일반적인 현재 회의 scope·확약/제안/범위 정의를 분명하게 하는 prompt 정책이다. 기존 single/batch-v1·원문 전체·모델·시간 예산·충돌 검사를 유지한다. 기존 Astra xhigh 담당에게 새 설계1개만 배정했으며 구현이나 실제 재실행은 아직 없다. 같은 개발 입력의 별도 run-v2는 새 구현·독립 검토·정확한 CI·binding·명시 배정 이후에만 수행한다.
+
+## 2026-10-22 · 실제 실패 보존과 원문 단독 진단 고정
+
+부모가409개 원본 증거 binding·현재 구현/입력·동결77개를 확인해 [실제 개발 실패 기록](../experiments/results/meetings-analysis-batch-development-v1.json)을650240a로 사용자 계정 commit/push했다. Author/committer lingter100과 PR14 draft head를 확인했고 양쪽 CI39714623993/39714631737의 필수3job이 모두 성공했다. 앞선20bdd3c의 양쪽 필수3job도 모두 성공했으며 실제 모델 코드의 기준은9d08545다.
+
+독립 final judge의 PHASE A는 원문37개 unit을 모두 다루고 source-only 진단 주석2ecd8cd5(41393B)를 고정했다. Safe receipt7901935f(3625B)와 packet A/질문 미실행 상태를 부모가 hash로 확인했다. 실제 모델 라벨 B를 읽기 전 고정됐고 답변6개 모두미실행·score=null이다. Windows 명령 길이 제한으로 실행 전 거부된 주석 저장 시도1건은 별도 기록이며 서비스 재실행은 아니다.
+
+같은 judge에게 이제 B의 실제37개 분류와 고정 주석의 비교를 배정했다. 원문/값/개별 라벨은 부모에게 공개하지 않고, 최초 충돌 필드와 일반화된 원인·집계·한계를 안전 기록으로 반환한다. 이는 사후 개발 진단용 AI 주석이며 공식 평가·사전 gold·사용자 검수로 바꾸지 않는다. 새 정책·코드 수정·실제 재실행은 아직 없다.
+
 ## 2026-10-22 · batch 실제 개발 실행의 메타데이터 충돌 실패
 
 같은 session99834의 실제 CLI는105.672초/exit1로 종료됐다. 시작70.750초는 통과했고2개 업로드 뒤 첫 회의의37개 단위를5개 묶음(8/8/8/8/5)으로 처리했다. Completion5개 모두HTTP200·EOS·truncated=false였지만 worker가 generation_conflicting_metadata로 분석을 거부했다. 이 오류는 원문에 복수 값이 존재하는 문제와 모델의 잘못된 분류를 아직 구분하지 않는다. 실제 예외형·stack trace는 기록에 없으며 코드의 충돌 검사 위치는 정적 추론이다.
