@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "experiment": "meetings-extraction-coverage-review-v1",
+  "recorded_at": "2026-10-22T06:37:43.762495+00:00",
+  "status": "summary_core_sufficiency_not_improved",
+  "evidence_kind": "independent_posthoc_ai_review_of_stored_label_postprocessing_on_synthetic_development_documents",
+  "comparison": "experiments/results/meetings-extraction-coverage-comparison-v1.json",
+  "aggregate": {
+    "documents": 4,
+    "summary_existing_metrics": {
+      "source_supported_documents": {
+        "old": 4,
+        "new": 4
+      },
+      "material_core_coverage_gaps": {
+        "old": 4,
+        "new": 4
+      },
+      "fully_core_sufficient": {
+        "old": 0,
+        "new": 0
+      },
+      "source_supported_summary_quotes": {
+        "old": 16,
+        "new": 16
+      },
+      "metric_provenance": {
+        "path": ".local/service-rag-batch-development-v1/independent-extraction-v2/model-comparison.json",
+        "sha256": "dee6e35c50e4142c862b8048b9a9df532662f95e1b5c73963c2ccbaa60a08bc3",
+        "json_pointer": "#/aggregate/summary"
+      },
+      "note": "The unchanged source-derived core sufficiency judgment is used. No per-category omission score, new denominator, task quota or pass threshold is introduced."
+    },
+    "title_existing_field_comparator": {
+      "expected_title_fields": 4,
+      "missing": {
+        "old": 2,
+        "new": 0
+      },
+      "matches_locked_expected_value": {
+        "old": 2,
+        "new": 2
+      },
+      "populated_value_differs_from_locked_expected": {
+        "old": 0,
+        "new": 2
+      },
+      "difference_explanation": "The newly populated differing values retain the source header label. They identify the correct source meeting and are not fabricated title entities, but they do not exactly match the fixed expected title values.",
+      "metric_provenance": "The unchanged exact-value comparator in each locked first_ready_document_reviews metadata.fields meeting_title entry."
+    },
+    "conditional_output_consistency": {
+      "unchanged_item_semantic_projections": 4,
+      "documents_compared": 4,
+      "item_count": 141,
+      "excluded_from_projection_comparison": [
+        "generated item id"
+      ],
+      "classifier_improvement_claim": false,
+      "operational_success_claim": false
+    },
+    "qualitative_findings": {
+      "improvement": "The candidate summaries explicitly expose adopted decisions that the old task-only summaries did not adequately state. Missing title fields are filled with source-grounded headers.",
+      "remaining": "All summaries still omit material parts of the previously locked core scope. Some filled title values retain a structural header prefix.",
+      "tradeoff": "The new summaries are not semantic supersets of the old summaries; task-detail selection changes. The prelocked rubric permits summarization and no new task-count requirement is imposed.",
+      "unsupported_new_summary_or_title_fact_identified": false,
+      "per_category_omission_counts": "not computed; no such fixed scoring metric was defined in the locked basis"
+    }
+  },
+  "generalized_remaining_failure_types": [
+    "Material conditions or exceptions absent from summaries",
+    "Change/currentness relations and effective timing absent from summaries",
+    "Core operational or service scope absent from summaries",
+    "Structural source-header label retained in title field"
+  ],
+  "preservation": {
+    "source_annotations_changed": false,
+    "labels_changed": false,
+    "source_text_changed": false,
+    "prior_judgments_changed": false,
+    "new_thresholds_added": false,
+    "existing_file_edits": 0
+  },
+  "execution": {
+    "model_tokenizer_product_runtime_tests_git_calls": 0,
+    "optional_comparison_packet_read": false,
+    "source_code_or_performance_read": false,
+    "original_run_raw_or_other_split_read": false,
+    "answer_judgments_read": false,
+    "new_output_files": 2
+  },
+  "status_boundaries": {
+    "classifier_improvement_claim": false,
+    "operational_success_claim": false,
+    "other_gates_reclassified": false,
+    "pristine_blind_claim": false,
+    "fresh_heldout_claim": false,
+    "human_review": false
+  },
+  "reviewer": "Existing registered gpt-6-astra/xhigh reviewer; role setting previously tool accepted, not changed or queried in this review.",
+  "bindings": [
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/independent-review-v1/judgments.json",
+      "bytes": 62490,
+      "sha256": "223147db3f297e7af686cc57006105c8ee1cdc5735d05098b9e94a88ef743094"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/independent-review-v1/safe-result.json",
+      "bytes": 9154,
+      "sha256": "a2adfbaeec091bc36473e2e18901fe4e384799fe235b2133b7d103233dcb853f"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/independent-extraction-v2/source-judgments.json",
+      "bytes": 274353,
+      "sha256": "b233c5cff429724a4686bda63910d612224c8e5c2cd889759d51b372162ce50d"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/independent-extraction-v2/model-comparison.json",
+      "bytes": 577884,
+      "sha256": "dee6e35c50e4142c862b8048b9a9df532662f95e1b5c73963c2ccbaa60a08bc3"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/candidate-packet.json",
+      "bytes": 79753,
+      "sha256": "ac7e90046a3dbe3538ac1805c87d0bb92055740c03caabfb790a4221d3633920"
+    }
+  ],
+  "parent_verification": {
+    "current_input_bindings": 3,
+    "private_judgment_binding": 1,
+    "safe_result_binding": 1,
+    "reviewer_before_after_input_hashes_equal": true,
+    "private_semantic_contents_read": false
+  },
+  "limitations": [
+    "Posthoc development comparison by the existing registered AI judge; not pristine blind, fresh heldout, official evaluation, human review or user approval.",
+    "Prior exposure includes all159 source units, locked source judgments, old actual extraction outputs/diagnosis, six answers and their authorized selected/full-source evidence, plus earlier generic-code and injected project-metadata exposure.",
+    "The requested/registered reviewer configuration remains gpt-6-astra/xhigh with fork none according to the parent registration; this phase did not query runtime identity or invoke another model.",
+    "Only the explicitly authorized source lock, old comparison lock and candidate packet were opened for this phase. The optional comparison packet and source-only/actual-analysis packets were unnecessary and were not reopened.",
+    "Full source text was reconstructed solely from anchors inside the authorized source lock and checked against its source hashes. Original source files were not opened or modified.",
+    "The candidate selection algorithm, source code, model policy, tokenizer, runtime, performance data, original run raw files, other splits, oracle, expected markers and answer judgments were not read or executed.",
+    "Input provenance, stored-label execution and parent CI/integrity claims are supplied by the parent. This judge checked permitted packet hashes and output semantics, not the product runtime or Git state.",
+    "Interpretation is limited to a downstream assembly effect conditional on stored actual labels. Identical item semantic projections are consistent with that condition; this is not evidence of classifier improvement, a fresh model run or operational success.",
+    "The old source annotations, accepted alternatives, document expectations and prior judgments remain immutable. Existing document-level coverage and title-field comparators are retained; no retroactive omission taxonomy or new passing threshold is introduced.",
+    "Literal grounding and core sufficiency are distinct. Source-supported quotations can still omit essential changes, conditions, effective dates or service scope.",
+    "Two filled title values include the source field-label prefix. Their meeting identity is source-grounded, but the fixed expected-value comparison is not silently relaxed to call them exact matches.",
+    "All prior gates and answer judgments remain untouched. No model, tokenizer, product runtime, tests, Git, policy or implementation execution/change occurred; JSON decoding, hashing and new-artifact writing were the only processing.",
+    "The parent reported a newer documentation/receipt commit during review and unchanged product sources and locked inputs. The review remained bound to hashes, not a live HEAD claim."
+  ],
+  "decision": "Keep coverage-v1 optional and preserve non-improvement. Do not promote as a sufficient summary solution. Draft a separate small semantic-aware candidate using generic code and safe aggregate only; no runtime or repeat of consumed runs authorized by this report.",
+  "human_review": false
+}

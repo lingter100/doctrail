@@ -1,4 +1,30 @@
 # 진행 상태
+## 2026-10-22 · 의미 선택 후보의 표현력 가정 확인
+
+설계 담당이 같은 설치 모델의 추가completion1회로 전체원문을 보고 최대4개unit을 선택하는 최소후보를 검토 중이다. 자유생성문장은현재Java에서명제함의를검증하지못하므로 exact-span경로를우선비교한다. 아직설계수용/구현배정/실행승인은아니다.
+
+기존독립Astra xhigh판정자에게 NEW .local/meeting-summary-representation-diagnostic-v1만배정했다. 원래잠금원문기준과필요시기존source-only로4wholeunit의표현력이충분할수있는지진단한다. 새로운점수/필수요건을만들거나대체근거를무시해불가능을단정하지않으며 불확정은그대로남긴다. 개별단위/조건내용은부모에게보내지않고집계만반환한다. 기존후보결과나평가기준을바꾸지않는사후AI설계진단이다. 전체목표를4구절표시로축소하거나cap확대로기존실패를통과시키지않는다.
+
+## 2026-10-22 · 비교 기록 CI 통과와 전체 화면 동선 감사
+
+7341a84의 push39734383357/PR39734388263 필수 backend·java-service·web이 모두 통과했고 watch58451/20061도exit0종료됐다. 원래8개 commit bytes를 다시 확인하고 [CI 기록](../experiments/results/meetings-extraction-coverage-comparison-ci-v1.json)을 남겼다. 신규 의미 결과·설계의CI통과를 뜻하지 않는다.
+
+기존 Astra high에게 NEW .local/meeting-product-walkthrough-v1만 먼저 배정했다. 실제Java/패키징React+합성모델응답으로1440/390px의 전체여정과 대표시각상태를 감사한다. 이전 제목검색/작업메타데이터 검사만 반복하지 않으며 결함 재현 후 수정범위를 확정한다. Java/Maven슬롯은이담당자만 사용하고 새모델/native/GPU는0이다. 별도 Astra xhigh는 의미요약 NEW설계1개만 작성 중이다. 부모는 결과문서/Git을 맡으며 새실제AI서비스실행은아직배정하지않았다.
+
+## 2026-10-22 · 요약 충분성 비개선 확인과 의미 요약 후보 설계
+
+직전 goal turn은 원본2007개/새29개 기계 검증·독립 의미 검토 배정·공개 기록8개 commit/push의 progress다. 재개에서 기존goal ACTIVE·Git·제품프로세스 부재를 확인했다. 기존 독립 Astra xhigh 검토자가 NEW 판단2개를 반환했고 부모는 원래 입력3개와 잠금/안전결과2개의 hash 및 검토 전후 일치를 확인했다.
+
+같은 잠금 기준에서 요약 근거지원4→4, 핵심 범위 부족4→4, 충분성0→0이다. 주요 결정이 더 드러났으나 조건·변경 관계·적용 시점·운영 범위가 빠졌다. 제목 누락2→0이지만 헤더 접두어가 남은2개로 정확한 기대값 일치는2→2다. 새로 만들어낸 사실은 발견되지 않았으나 충분한 요약이나 분류 개선으로 수용하지 않는다. [독립 결과와 한계](../experiments/results/meetings-extraction-coverage-review-v1.json). 원래 실행 실패와 잠금 기준·source/labels는 유지한다.
+
+기존 Astra xhigh 설계 담당에게 NEW MEETINGS-SUMMARY-SEMANTIC-PLAN.md1개만 배정했다. 안전집계/generic 코드만 읽고, 실제 의미관계를 담는 최소 무료·로컬 후보와 기존120초 공유예산/근거계약을 검토한다. cap 확대·자료 절단·특정 문구 규칙으로 기존평가를 통과시키지 않는다. 구현/모델/tokenizer/Java/브라우저/새실행은 아직 배정하지 않았다. 나머지 담당자는 반환했고 부모는 결과문서/CI/Git을 맡는다.
+
+## 2026-10-22 · 비교 기록 공개와 의미 검토 대기
+
+부모가 기계 비교/정확한 source CI기록과문서8개를7341a84로 commit/push했고 Git/current/staged8개 일치 및 원격 author/committer lingter100·PR14 draft/head를 확인했다. Push39734383357/PR39734388263은 마지막조회 web성공/backend·java-service진행중이다. 제품22e945c의 양쪽 필수3개 통과와 새 기록 commit의 진행상태를 구분한다. CI를 재실행하거나 취소하지 않고 현재run을 확인한다.
+
+독립 Astra xhigh 의미 검토자는 NEW independent-review-v1만 작업 중이며 결과는 아직 반환되지 않았다. 나머지 담당자는 반환했고 제품/모델/Java실행은 없다. 사용자 진행 문의에 핵심 구현/남은AI품질·전체운영·외관·포트폴리오를 구분했고 추가2~4주는 확정 납기 아닌 기존 임시 계획 범위로 설명했다. 전체goal은 ACTIVE다.
+
 ## 2026-10-22 · 동일 분류 조립 비교 완료와 독립 의미 검토
 
 기존 Astra high custody 담당이 저장된159개 단위·22개 batch에 대해4회의를 각각1회 조립했다. 요약4개와 제목2개가 바뀌었고 나머지 항목·담당자·기한·메타데이터·근거는 정확히 같았다. 부모는 원본2007개 전후/현재 binding과 새29개 artifact·HEAD22e945c를 내용 노출 없이 검증했다. 원래 개발 실행은 exit1/eligible=false로 유지한다. [기계 비교 기록](../experiments/results/meetings-extraction-coverage-comparison-v1.json).
