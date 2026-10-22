@@ -1,4 +1,30 @@
 # 진행 상태
+## 2026-10-22 · 동일 분류 조립 비교 완료와 독립 의미 검토
+
+기존 Astra high custody 담당이 저장된159개 단위·22개 batch에 대해4회의를 각각1회 조립했다. 요약4개와 제목2개가 바뀌었고 나머지 항목·담당자·기한·메타데이터·근거는 정확히 같았다. 부모는 원본2007개 전후/현재 binding과 새29개 artifact·HEAD22e945c를 내용 노출 없이 검증했다. 원래 개발 실행은 exit1/eligible=false로 유지한다. [기계 비교 기록](../experiments/results/meetings-extraction-coverage-comparison-v1.json).
+
+첫 준비는 Java ID를 dashed UUID로 가정해 조립0회에서 실패했다. 실제 Auth.uid의 compact32hex 계약에 맞춘 검증만 수정했고 원래ID/실패는 보존했다. 최초 receipt가 stdout flush 전0B를 기록한 관측 차이도 보존한 뒤 별도 terminal 기록/v2 receipt로73B를 묶었다. 조립 재실행은 없었다.
+
+기존 Astra xhigh 의미 검토자에게 NEW independent-review-v1만 명시 배정했다. 잠긴 원문 판단/기존 비교를 바꾸지 않고 새4요약·제목을 비교하며 모델·검사·제품수정·성능열람은 하지 않는다. 기존 개발자료 노출을 공개하고 공식/블라인드/사람 검수로 표현하지 않는다. 의미 결과는 대기이고 새 native/Java/브라우저 실행0이다. custody 담당 반환으로HEAD 보유는 해제됐으며 부모는 문서/공개 집계/Git을 맡는다.
+
+## 2026-10-22 · 정확한 CI 통과와 동일 분류의 조립 비교 시작
+
+직전 goal turn은452개 회귀·독립 검토·문서화·사용자 계정 source commit/push의 progress였다. 재개에서 실제 Git·기존 goal ACTIVE·모든 담당자 반환·로컬 제품 프로세스 부재를 확인했다. 22e945c의 push39731681044/PR39731685888 필수3개 job이 모두 성공했고 두 watch 세션도 exit0으로 종료됐다. 정확한 source10의 Git/working hash를 확인해 [CI 수용 기록](../experiments/results/meetings-extraction-coverage-ci-v1.json)(99cb3add)을 저장했다.
+
+승인된 설계에 따라 기존 Astra high custody 담당에게 NEW .local/meeting-extraction-coverage-comparison-v1만 명시 배정했다. 원래 source/actual-analysis/custody의 unit ID·순서·전체quote·offset·label 대응을 먼저 입증한 뒤 회의4개에 순수 조립을1회씩 적용한다. 후보와 원래 첫 Java ready결과의 summary/title/해당근거 외 모든 항목·메타데이터 불변을 확인한다. private 의미 판단은 읽지 않고 기계 비교와 재현 방법·안전집계만 반환한다.
+
+원래 자료·판단·실패·seal·동결77·제품source10은 유지한다. 새 분할/tokenizer/모델/native/Java/브라우저/닫힌평가 재실행은0이다. 부모는 담당자 반환까지HEAD22e945c와제품코드를 고정하고 문서/CI기록만 다룬다. 독립 의미 검토자는 아직 배정하지 않았으며 기존 잠금 기준은 바뀌지 않는다.
+
+## 2026-10-22 · 조립 구현 공개와 정확한 CI 대기
+
+검증된17파일을 별도 staged-byte 확인 뒤22e945ccfe390a335036e46a703c14041c4038dc로 commit/push했다. GitHub author/committer 모두lingter100, PR14 OPEN/DRAFT와 정확한 head를 확인했다. 공개 구현 기록은509b65c9이고 commit17개가 staged/current와 정확히 같았다. PR 설명과 사용자 진행 현황도 최신 검증 범위로 정리했다.
+
+Push39731681044와 PR39731685888은 실제 조회에서 web 성공, backend/java-service 진행 중이다. gh watch 세션76304/94289가 같은 run을 관측 중이며 관측 timeout을 실행 실패로 바꾸거나 재실행하지 않는다. 이 source CI가 끝나기 전에 문서만 다시 push해 취소하지 않는다. 제품소스10은 고정됐고 로컬 Java/GPU는 실행하지 않았다.
+
+이전 source/analysis/custody·추출 source/model 판단·답변 판단6개는 부모가 내용 없이 byte hash만 확인해 불변을 검증했다. 새 비교 출력 경로는 아직 없으며 실제자료 offline 비교를 배정하지 않았다. .local/meeting-extraction-coverage-implementation-v1/parent-offline-input-bindings.json(bdf47811)에 입력과 정확한 source commit을 기록했다. 다음은 양쪽 필수CI 수용 기록 후 기존 custody 담당에게 같은159분류의 NEW 조립 비교를 명시 배정하고, 기존 잠금 기준을 바꾸지 않는 독립 의미 검토다. 실제 모델·토크나이저·Java·기존 닫힌 평가 재실행은 아니다.
+
+이번 goal turn은 NEW2 경계 수정 검증·기존8 연결·452회귀·독립 검토·문서화·source commit/push의 progress다. 전체 Phase1과 goal은 ACTIVE이며 품질 개선과 운영 수용은 미완료다.
+
 ## 2026-10-22 · 요약·제목 조립 후보 서비스 연결 검증
 
 NEW2와 기존8 연결을 마쳤다. 관련6개 test파일의452개 합성/MockTransport·Node 계약 검사(16.42초)와 Ruff를 통과했고 기존 TestClient 경고1개는 남겼다. 이전55/57개는 포함 범위여서 합산하지 않는다. 독립 Astra xhigh의 정확10개 읽기 검토는 blocker0이다. 부모가 코드/검사 변경을 읽고 최종10개·receipt 참조21개·기준87개 복사본/79개 현재·통합 최초소스8개/기준8개를 확인했다. [구현 기록](../experiments/results/meetings-extraction-coverage-implementation-v1.json).

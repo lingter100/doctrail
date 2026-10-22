@@ -12,7 +12,7 @@
 - [답변 판정](../experiments/results/meetings-analysis-scope-answer-review-v1.json), [추출 판정](../experiments/results/meetings-analysis-scope-extraction-review-v1.json), [실측 구간](../experiments/results/meetings-analysis-scope-performance-v1.json)
 - [화면 안내와 Java 경계 검사](../experiments/results/knowledge-answer-recovery-messages-v1.json)
 
-요약·제목 후처리 후보는 새 경로로 구현하고 서비스 선택까지 연결했다. 실제 분류를 고정한 효과 비교와 새 실제 서비스 실행은 아직 하지 않았다. 아래 single 연결과 최초 구현 검증은 이전 시점의 기록이다.
+요약·제목 후처리 후보는 새 경로로 구현하고 서비스 선택까지 연결했다. 저장된 실제 분류의 기계 비교는4회 완료했고 의미 효과는 독립 검토 중이다. 새 실제 서비스 실행은 아직 하지 않았다. 아래 single 연결과 최초 구현 검증은 이전 시점의 기록이다.
 
 ## 요약·제목 조립 후보의 실행 설정
 
@@ -28,7 +28,7 @@ uv run --no-sync python -m scripts.serve_meeting_rag_service `
 
 위 명령은 모델 캐시·설치·정확한 JAR hash가 준비된 경우의 사용 예시이며 실행 성공 증거가 아니다. 실행 이력이 있는 경로는 재사용하지 않는다. Health의 `extraction.assembly`와 lifecycle의 `extraction_assembly`로 실제 선택을 확인한다. 평가 도구에는 CLI 덮어쓰기 옵션이 없으며 plan·registration·calibration gate의 effective assembly가 같아야 한다. 새 module은 legacy에서도 code binding에 포함한다.
 
-[구현 검증](../experiments/results/meetings-extraction-coverage-implementation-v1.json)은 최종452개 합성/MockTransport 및 Node 계약 검사·Ruff·독립 코드 검토를 기록한다. 실제모델·Java/브라우저서비스·저장된 분류의 품질 비교는0이다. 기존57개 단독 검사는 최종452개와 겹치므로 더하지 않는다. 정확한 source CI 다음에 동일 분류의 후처리 효과를 별도로 비교한다.
+[구현 검증](../experiments/results/meetings-extraction-coverage-implementation-v1.json)은 최종452개 합성/MockTransport 및 Node 계약 검사·Ruff·독립 코드 검토를 기록한다. 실제모델·Java/브라우저서비스·저장된 분류의 품질 비교는0이다. 기존57개 단독 검사는 최종452개와 겹치므로 더하지 않는다. 정확한 source22e945c의 push/PR 필수 CI는 [별도 기록](../experiments/results/meetings-extraction-coverage-ci-v1.json)처럼 모두 통과했다. [동일 분류 비교](../experiments/results/meetings-extraction-coverage-comparison-v1.json)에서 요약4개·제목2개가 바뀌고 나머지 항목·근거는 유지됐으며, 실제 의미 개선 여부는 잠금 기준으로 별도 검토 중이다.
 
 ```powershell
 uv run --no-sync pytest -q tests/test_meeting_extraction_coverage.py tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py tests/test_meeting_analysis_batch.py
