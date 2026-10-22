@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "kind": "scratch_cleanup_implementation_synthetic_verification",
+  "status": "implemented_read_reviewed_not_runtime_verified",
+  "current_receipt": {
+    "path": ".local/cleanup-v3-implementation-v1/receipt-v2.json",
+    "bytes": 1893,
+    "sha256": "8c10f702a2f1233256ac7884bc0f073809c4684af704a585b9c39fb2ea17cc33"
+  },
+  "initial_receipt_preserved": {
+    "path": ".local/cleanup-v3-implementation-v1/receipt.json",
+    "bytes": 7299,
+    "sha256": "ff5b769b9380419c56bd2ea4212326adafafdcf2528f4d3c130dcb899978ea23"
+  },
+  "initial_review": {
+    "kind": "parent_record_of_independent_read_review",
+    "reviewer": "/root/source_discovery_decision",
+    "tool_accepted_model_from_existing_role": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "inputs": [
+      {
+        "path": ".local/service-rag-batch-development-v1/development-runner-v3.py",
+        "sha256": "661ea46b665ddf14a5d112a1ac52ce2a4fc6ac1e336b468b8ce1a92b550044eb"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/test_cleanup_v3.py",
+        "sha256": "22407c9415b08e56c07f14abb99669a93ec2aef7f85514b1afc51546171eac07"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/receipt.json",
+        "sha256": "ff5b769b9380419c56bd2ea4212326adafafdcf2528f4d3c130dcb899978ea23"
+      }
+    ],
+    "remaining_findings": 1,
+    "finding": "first_failure truthiness check overwrites falsey non-null values; narrow to unset/null per specified contract and cover falsey preservation. Existing nonempty normal failure codes already survive.",
+    "other_blockers": 0,
+    "verified_boundaries": [
+      "same prior-adjusted absolute cleanup deadline",
+      "PID creation identity and no adoption of reused PID",
+      "unknown queries fail closed",
+      "query cost included",
+      "prior cleanup failure sticky",
+      "Node exit, whole 1625s and exact finalizer/seal unchanged",
+      "batch-v2 and browser-v2 unchanged"
+    ],
+    "tests_or_runtime_executed_by_reviewer": 0,
+    "semantic_material_read": false,
+    "actual_pid_cause_established": false,
+    "new_actual_execution_authorized": false
+  },
+  "final_review": {
+    "kind": "parent_record_of_independent_delta_read_review",
+    "reviewer": "/root/source_discovery_decision",
+    "tool_accepted_model_from_existing_role": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "inputs": [
+      {
+        "path": ".local/service-rag-batch-development-v1/development-runner-v3.py",
+        "bytes": 26374,
+        "sha256": "efe7e9e6260b3970d27ce2e9ac4baab835f802a9fc5e39c7f8a7636b7e366fbe"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/test_cleanup_v3.py",
+        "bytes": 9311,
+        "sha256": "fd1292389073d10045a6137f21074dd39782ea73eb81c288dfbf827b67446371"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/receipt-v2.json",
+        "bytes": 1893,
+        "sha256": "8c10f702a2f1233256ac7884bc0f073809c4684af704a585b9c39fb2ea17cc33"
+      }
+    ],
+    "initial_review": {
+      "path": ".local/cleanup-v3-implementation-v1/independent-review-initial-parent-record.json",
+      "bytes": 1498,
+      "sha256": "dfab0f48e796136bb815f287cfad78fed613df3d6ea47c5e8ada8dcf626b920a"
+    },
+    "blockers": 0,
+    "verified_delta": "Exactly one runner line changes to is None; original tests retained and falsey3 preservation cases added. Deadline, identity, cleanup, final seal and unchanged batch-v2/browser-v2 guards retain original reviewed behavior.",
+    "tests_or_runtime_executed_by_reviewer": 0,
+    "semantic_material_read": false,
+    "actual_pid_cause_established": false,
+    "new_actual_execution_authorized": false
+  },
+  "current_implementation_receipt": {
+    "scope": "null-or-unset first failure only",
+    "change": "Preserve existing empty string, False and 0 first cause; no finalizer or budget change",
+    "checks": {
+      "synthetic_passed": 26,
+      "seconds": 0.36,
+      "ruff": "passed"
+    },
+    "commands": [
+      ".venv/Scripts/python.exe -m pytest .local/cleanup-v3-implementation-v1/test_cleanup_v3.py -q",
+      ".venv/Scripts/python.exe -m ruff check .local/service-rag-batch-development-v1/development-runner-v3.py .local/cleanup-v3-implementation-v1/test_cleanup_v3.py"
+    ],
+    "bindings": [
+      {
+        "path": ".local/service-rag-batch-development-v1/development-runner-v3.py",
+        "bytes": 26374,
+        "sha256": "efe7e9e6260b3970d27ce2e9ac4baab835f802a9fc5e39c7f8a7636b7e366fbe"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/test_cleanup_v3.py",
+        "bytes": 9311,
+        "sha256": "fd1292389073d10045a6137f21074dd39782ea73eb81c288dfbf827b67446371"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/tests-v2.log",
+        "bytes": 101,
+        "sha256": "802bb91596d79fcf4a7e1e30c40e0eed392f2942e2fb7f6ae55bcaf3532e152e"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/ruff-v2.log",
+        "bytes": 20,
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/receipt.json",
+        "bytes": 7299,
+        "sha256": "ff5b769b9380419c56bd2ea4212326adafafdcf2528f4d3c130dcb899978ea23"
+      },
+      {
+        "path": ".local/cleanup-v3-implementation-v1/preserved-before-v2/index.json",
+        "bytes": 1793,
+        "sha256": "641b7a9d074edf9282e174586822aaca3a50a97767b62805ae401db9cc0f8771"
+      }
+    ],
+    "originals": "preserved-before-v2/index.json",
+    "actual_runtime_executions": 0,
+    "limitations": [
+      "Synthetic only; actual process disappearance and native cleanup not executed"
+    ],
+    "source_lf": true
+  },
+  "original_scope_and_limits": {
+    "changes": [
+      "NEW runner-v3 requires NEW run-v3 and exact development-runner-v3.py + unchanged development-browser-v2.mjs harness binding. Existing batch-v2 model/input/question/budget path retained.",
+      "Small identity wait observes only existing PID+creation-time pairs until absent or the same absolute cleanup deadline. NoSuchProcess is absence; reused creation time is not adopted; other query exceptions are unknown and fail closed immediately without retry.",
+      "Browser finish and identity observation use cleanup_started + max(0,5-prior_browser-prior_native). No additional five-second window; invalid prior timing grants no wait and fails cleanup timing.",
+      "Final cleanup elapsed is calculated after the final PID query, including query costs. Prior cleanup false stays false even if identities later disappear. Native/launcher absence and actual Node exit remain independent acceptance requirements.",
+      "Absent/null first failure receives a fixed cleanup/absence/timing code. Existing nonempty earlier browser/runtime cause survives. Invalid browser failure record now explicitly fails status rather than leaving only an invalid-record flag; binding/whole-window failures get fixed causes only when none existed.",
+      "Final evidence writer, immutable index/receipt/seal and post-seal1625-second acceptance logic remain byte-identical."
+    ],
+    "limitations": [
+      "No actual PID role or cause is known or inferred. Old consumed v2 remains failed with its original null first failure.",
+      "Synchronous process queries cannot be hard-preempted; their elapsed overrun fails acceptance afterward. Sleep never adds a new budget.",
+      "Synthetic identity/clock tests only; no actual runtime execution or cleanup improvement measurement.",
+      "Independent review and explicit later parent binding/dispatch are still required; no future run authorized by this receipt."
+    ],
+    "run_v3_absent": true,
+    "product_source_code_changed": false,
+    "native_or_java_or_browser_started": false,
+    "old_failed_run_reclassified": false,
+    "human_review": false,
+    "formal_quality_evaluation": false,
+    "actual_pid_role_or_cause_known": false,
+    "new_actual_run_authorized": false,
+    "scratch_tests_are_not_remote_ci": true
+  },
+  "parent_verification": {
+    "receipt_bound_paths_verified": 6,
+    "unique_paths_verified": 6,
+    "original_and_final_generic_delta_read": true,
+    "actual_tests_rerun_by_parent": false,
+    "archived_pre_delta_files_verified": 10
+  }
+}

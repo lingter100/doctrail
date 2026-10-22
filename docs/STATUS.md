@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-22 · 답변 전용 판정 잠금과 추출 진단 분리
+
+직전 사용자 상태 문의 응답은 no-progress turn이었다. 이번 재개에서 실제 Git·반환된 담당자·CI와 프로세스를 확인했다. 결과076e1bc의 push39720754557/PR39720758450 필수3job이 모두 성공했다. 현재 관측된 관련 Node2개는 Codex runtime/trusted worker이며 프로젝트 서비스로 종료하지 않는다.
+
+독립 기존 Astra xhigh의 답변 전용6건 판단이 잠겼다. 문제 없음5건, 추가 인용의 정밀도 문제1건이며 실질 답변4건은 핵심 요구를 충족하고 보류2건은 타당했다. 주장10개는 조합 근거로 지지됐지만 인용17개 중1개는 해당 주장을 뒷받침하지 않는다. [개발 답변 검토](../experiments/results/meetings-analysis-scope-answer-review-v1.json)는 사후 AI 검토이며 합성 자료·기존 원문 진단 노출·사용자 검수0·공식 평가 아님을 명시한다. 전체 실행exit1은 그대로다.
+
+부모는 private 판단24e02370의 내용은 읽지 않고 hash·safe 결과d933fbb5·입력2개 및 제품10/동결77개를 확인했다. NEW cleanup-v3 첫23개 합성 검사 뒤 독립 읽기 검토에서 최초 실패의 falsey값 덮어쓰기1개를 발견했다. 기존 Astra high가 원본을 보존하고 null/미설정에만 코드를 추가하도록 좁혀26개 합성 검사·Ruff를 통과했으며 최종 독립 delta 검토6343a6a3은 blocker0이다. 부모가 현재6개 binding과 보존10개를 확인했다. [종료 수정 검증](../experiments/results/meetings-cleanup-lifecycle-implementation-v1.json)은 scratch 합성 검사이며 원격 CI나 실제 운영 검증이 아니다. 실제 run-v3/최종 runtime binding은 아직 없다.
+
+같은 구현 담당은 별도 custody 역할로 소비된 run-v2의 회의4개·159개 unit에 대해 원문 전용 packet과 실제 분석 packet을 분리한다. 첫37개는 기존 source-only packet과 동일성을 확인하고 기존 주석은 바꾸지 않는다. 답변 판단 잠금 뒤에도 새 추출 주석은 현재 분류 라벨을 보기 전에 고정하며 부모는 안전 집계·hash만 확인한다. 추가 모델 실행이나 평가 자료 재개방은 배정하지 않았다. Goal ACTIVE, Phase1/PR14 draft 미완료다.
+
+## 2026-10-22 · 결과 commit과 종료 확인 수정 배정
+
+실제 실패와 후속 자원 부재를076e1bc로 사용자 계정 commit/push했고 원격 author/committer lingter100을 확인했다. 양쪽 CI39720754557/39720758450은 진행 중이다. 기존 독립 Astra xhigh 판정자는 answer-only packet b669df1b를 검토하며 판단 잠금 전에는 성능/진단/추출 자료를 받지 않는다.
+
+기존 Astra high 구현 담당에게 NEW ignored development-runner-v3.py와 좁은 합성 검사/증거만 배정했다. 현재 v2실행기·결과·입력·제품code10은 변경하지 않는다. 분석 정책은 같은batch-v2이며 NEWrun-v3/정확파일명만 구분하고 기존 절대cleanup deadline 안의 동일identity 종료 확인·확인후elapsed·최초고정실패코드를 추가한다. 새 모델/서비스 실행·finalbinding은 아직 배정하지 않았다. 단발확인 구조가 실제PID잔류의 원인이라고 확정하지 않는다.
+
 ## 2026-10-22 · 실제 연결 결과 보존과 답변 독립 판정 시작
 
 실행 담당이 최종 증거·후속 검사를 반환하고 HEAD/code/JAR/UI hold와 Java/GPU 슬롯을 해제했다. 부모가1893개 원본 evidence binding과17개 runtime파일·HEAD 동일을 확인했다. 원래 run1880파일과 이전 scratch492개·입력16개·동결77개·고정37개 주석은 유지됐다. [실제 개발 결과](../experiments/results/meetings-analysis-scope-development-v2.json)에 실패와 나중 자원 부재 확인을 분리했다.
