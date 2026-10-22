@@ -19,7 +19,7 @@ from scripts.serve_meeting_thinking_compat import cleanup_owned
 
 @contextmanager
 def start_service(*, token, log_dir, model_dir=DEFAULT_ROOT, manifest=MANIFEST,
-                  telemetry=None):
+                  telemetry=None, observer=None):
     _validate_token(token)
     metrics = telemetry if telemetry is not None else {}
     started = time.monotonic()
@@ -45,7 +45,9 @@ def start_service(*, token, log_dir, model_dir=DEFAULT_ROOT, manifest=MANIFEST,
             timer.daemon = True
             timer.start()
             try:
-                runtime = load_runtime(native, cleanup=cleanup, startup_deadline=startup_deadline)
+                options = {} if observer is None else {"observer": observer}
+                runtime = load_runtime(native, cleanup=cleanup, startup_deadline=startup_deadline,
+                                       **options)
             finally:
                 timer.cancel()
                 timer.join()

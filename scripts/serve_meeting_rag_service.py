@@ -292,7 +292,8 @@ def start_services(*, jar, jar_sha256, database, log_dir, model_root=ROOT / "mod
                    server_factory=make_server, thread_factory=threading.Thread,
                    probe=http_probe, clock=time.monotonic, sleep=time.sleep,
                    token_factory=lambda: secrets.token_urlsafe(48),
-                   java_resolver=java_executable, port_factory=unused_port, environment=None):
+                   java_resolver=java_executable, port_factory=unused_port, environment=None,
+                   observer=None):
     """Minimal assembly seam. Injected factories are only for synthetic unit checks."""
     metrics = metrics if metrics is not None else {}
     service = RunningService(clock=clock, sleep=sleep, probe=probe, metrics=metrics)
@@ -346,8 +347,9 @@ def start_services(*, jar, jar_sha256, database, log_dir, model_root=ROOT / "mod
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         metrics["native_attempted"] = True
+        options = {} if observer is None else {"observer": observer}
         service.native_context = native_factory(token=generation_token,
-            log_dir=log_dir / "native", telemetry=metrics.setdefault("native_adapter", {}))
+            log_dir=log_dir / "native", telemetry=metrics.setdefault("native_adapter", {}), **options)
         service.app = service.native_context.__enter__()
         service.native_entered = True
         if clock() >= deadline:

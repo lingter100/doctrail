@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "kind": "execution_implementation_and_actual_ui_with_synthetic_transport",
+  "observed_at_utc": "2026-10-22T00:37:32.645680+00:00",
+  "source_files": [
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 35497,
+      "sha256": "01e5eb1e3e23c0ab0443b684556225cc56ff278f05ab443b36d205b5a3b9ba8f",
+      "lf": true
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 40027,
+      "sha256": "ab6344add0622ed2460daf0a171a1da4cdd1a10678e8be437017121395c071ec",
+      "lf": true
+    },
+    {
+      "path": "web/scripts/run-meeting-rag-acceptance.mjs",
+      "bytes": 26651,
+      "sha256": "52732498fe856a1b2d01aad6a6f5ab8e032b585c5cc8a8e1125a819ee06ab86d",
+      "lf": true
+    },
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 15964,
+      "sha256": "f12391a210a4929e6c2ff53455ece2d66d2c8ed0ea5dc6910d027686bb270555",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 3602,
+      "sha256": "37b6748fd63a85da980148229a2756d0f1413066d0210c03db5ee23d633ed91b",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 20679,
+      "sha256": "c1f22915fe12d8334dc297f0ab3fafedee82aef2a2c8ae037ba9d355c096f969",
+      "lf": true
+    }
+  ],
+  "checks": {
+    "v3_related_synthetic_tests": {
+      "passed": 100,
+      "seconds": 5.4,
+      "overlaps_earlier_80_and_90": true
+    },
+    "v4_browser_delta": {
+      "passed": 3,
+      "seconds": 2.03
+    },
+    "v5_browser_delta": {
+      "passed": 3,
+      "seconds": 0.96
+    },
+    "ruff": "passed_v3_python_unchanged",
+    "node_syntax": "passed_v5",
+    "independent_read_review": "v3_v4_v5_no_remaining_blockers"
+  },
+  "original_implementation_receipts": [
+    {
+      "path": ".local/service-rag-execution-implementation-v1/receipt.json",
+      "bytes": 12058,
+      "sha256": "38ff7638ae4b3bac3ee6c608b037d1242312d9f2a0887c0df173eb98a6072e2a"
+    },
+    {
+      "path": ".local/service-rag-execution-implementation-v1/receipt-v2.json",
+      "bytes": 9448,
+      "sha256": "e75a06b758331a55966e543b2d80abde26e957f54af510344a194c4965c564a6"
+    },
+    {
+      "path": ".local/service-rag-execution-implementation-v1/receipt-v3.json",
+      "bytes": 6622,
+      "sha256": "7a7761d8b7aa57ddb364b256af60555f2a9a064b20e2eb5262a8b6e973a17610"
+    },
+    {
+      "path": ".local/service-rag-execution-implementation-v1/receipt-v4.json",
+      "bytes": 4371,
+      "sha256": "aaca64103360567fcc8a0c79d1285860a00de4d7118c79aff058b4c585c1a792"
+    },
+    {
+      "path": ".local/service-rag-execution-implementation-v1/receipt-v5.json",
+      "bytes": 4823,
+      "sha256": "10e2a383ad45a1f6f3487a7cbf5c7d3badfef9c7d55927ad4dea31bbc985208a"
+    }
+  ],
+  "actual_java_react_synthetic_attempts": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "elapsed_ms": 10115,
+      "completed_counts": {
+        "sources_mapped": 3,
+        "analyses": 2,
+        "cases": 0,
+        "answer_posts": null,
+        "citations_opened": null
+      },
+      "generation_fixture_calls": {
+        "analyze": 2,
+        "answer": 0
+      },
+      "inference_fixture_calls": {
+        "health": 4,
+        "embed": 0,
+        "rerank": 0
+      },
+      "source_hashes_unchanged": true,
+      "owned_pids_absent": 9,
+      "artifact_count": 39,
+      "receipt": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-001/smoke-receipt.json",
+        "bytes": 950,
+        "sha256": "213ed1877289859ec4274d234b0e593b1ff0df1903473527575c548f0a730a9c"
+      },
+      "artifact_index": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-001/artifact-index.json",
+        "bytes": 6567,
+        "sha256": "5f6742c3cf5b493207802200bfad3662e666ea1538fef433ce627699ec3669e5"
+      },
+      "pid_audit": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-001/owned-pid-audit-after.json",
+        "bytes": 1121,
+        "sha256": "4c8b55099f78d7cae15a9f4ec0b662c8db4315763ff9a8c9ff5bdb298920b6e6"
+      }
+    },
+    {
+      "attempt": 2,
+      "status": "failed",
+      "elapsed_ms": 10521,
+      "completed_counts": {
+        "sources_mapped": 3,
+        "analyses": 2,
+        "cases": 0,
+        "answer_posts": null,
+        "citations_opened": null
+      },
+      "generation_fixture_calls": {
+        "analyze": 2,
+        "answer": 0
+      },
+      "inference_fixture_calls": {
+        "health": 4,
+        "embed": 0,
+        "rerank": 0
+      },
+      "source_hashes_unchanged": true,
+      "owned_pids_absent": 9,
+      "artifact_count": 40,
+      "receipt": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-002/smoke-receipt.json",
+        "bytes": 950,
+        "sha256": "08785f97f392adea14ac6c5b14797a3fab1ef3b0259300ceb9bcc2bf69b31aff"
+      },
+      "artifact_index": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-002/artifact-index.json",
+        "bytes": 6743,
+        "sha256": "8de6c6ab25c17426ac4b45a21fde6d98ddc8e85c24649ca4091b7147326e9afd"
+      },
+      "pid_audit": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-002/owned-pid-audit-after.json",
+        "bytes": 1123,
+        "sha256": "6c50994ae3718a3ca32b5d030da7c060dd0908db0ed2c654c5fb1cbe8fc8b891"
+      }
+    },
+    {
+      "attempt": 3,
+      "status": "failed",
+      "elapsed_ms": 27306,
+      "completed_counts": {
+        "sources_mapped": 5,
+        "analyses": 3,
+        "cases": 0,
+        "answer_posts": null,
+        "citations_opened": null
+      },
+      "generation_fixture_calls": {
+        "analyze": 3,
+        "answer": 0
+      },
+      "inference_fixture_calls": {
+        "health": 5,
+        "embed": 0,
+        "rerank": 0
+      },
+      "source_hashes_unchanged": true,
+      "owned_pids_absent": 9,
+      "artifact_count": 49,
+      "receipt": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-003/smoke-receipt.json",
+        "bytes": 950,
+        "sha256": "9100953c4e3dc20a2ee067992d8a4846025b38a5a130b7f3d9a3edf68af73e28"
+      },
+      "artifact_index": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-003/artifact-index.json",
+        "bytes": 8290,
+        "sha256": "9e82452efeb02663cc4b733b01482829dc82e812577b34a7ae634ee56b37ddf9"
+      },
+      "pid_audit": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-003/owned-pid-audit-after.json",
+        "bytes": 1119,
+        "sha256": "30a6d9ab617520a0aa43b0645b08874182ace644a1e1e59fd13da8599f5c13da"
+      }
+    },
+    {
+      "attempt": 4,
+      "status": "failed",
+      "elapsed_ms": 39414,
+      "completed_counts": {
+        "sources_mapped": 6,
+        "analyses": 4,
+        "cases": 0,
+        "answer_posts": null,
+        "citations_opened": null
+      },
+      "generation_fixture_calls": {
+        "analyze": 4,
+        "answer": 0
+      },
+      "inference_fixture_calls": {
+        "health": 6,
+        "embed": 0,
+        "rerank": 0
+      },
+      "source_hashes_unchanged": true,
+      "owned_pids_absent": 9,
+      "artifact_count": 62,
+      "receipt": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-004/smoke-receipt.json",
+        "bytes": 950,
+        "sha256": "598ebfcb7ce3dfe1480fef28d48da6cfe70bd14ac5ddd89ac003edebadd65876"
+      },
+      "artifact_index": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-004/artifact-index.json",
+        "bytes": 10499,
+        "sha256": "2a1e4da6a6f78a54ca89e54243be22209095b67a91b958d6fc701065970ec9bb"
+      },
+      "pid_audit": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-004/owned-pid-audit-after.json",
+        "bytes": 1122,
+        "sha256": "9ce795d8434c0a1d1d3c107ac771e375ffffe8105aaae7ece8124aaae2989979"
+      }
+    },
+    {
+      "attempt": 5,
+      "status": "failed",
+      "elapsed_ms": 29631,
+      "completed_counts": {
+        "sources_mapped": 6,
+        "analyses": 4,
+        "cases": 0,
+        "answer_posts": null,
+        "citations_opened": null
+      },
+      "generation_fixture_calls": {
+        "analyze": 4,
+        "answer": 0
+      },
+      "inference_fixture_calls": {
+        "health": 6,
+        "embed": 0,
+        "rerank": 0
+      },
+      "source_hashes_unchanged": true,
+      "owned_pids_absent": 9,
+      "artifact_count": 64,
+      "receipt": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-005/smoke-receipt.json",
+        "bytes": 950,
+        "sha256": "5d7d1e9b7198cc78bd53cb35b4a8434256c2993e9f51d68d031f6691476e39e5"
+      },
+      "artifact_index": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-005/artifact-index.json",
+        "bytes": 10887,
+        "sha256": "3712cb5f880da49bf08d5ef4472ef185c0b17b7feedd9b99949a9be8f72ec31f"
+      },
+      "pid_audit": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-005/owned-pid-audit-after.json",
+        "bytes": 1121,
+        "sha256": "04761e82f0535a53cb9d6740e4607f094a4f8731539f065c84bc801655a69ada"
+      }
+    },
+    {
+      "attempt": 6,
+      "status": "completed",
+      "elapsed_ms": 15013,
+      "completed_counts": {
+        "sources_mapped": 6,
+        "analyses": 4,
+        "cases": 6,
+        "answer_posts": 6,
+        "citations_opened": 6
+      },
+      "generation_fixture_calls": {
+        "analyze": 4,
+        "answer": 6
+      },
+      "inference_fixture_calls": {
+        "health": 12,
+        "embed": 12,
+        "rerank": 6
+      },
+      "source_hashes_unchanged": true,
+      "owned_pids_absent": 9,
+      "artifact_count": 113,
+      "receipt": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-006/smoke-receipt.json",
+        "bytes": 931,
+        "sha256": "beb266b9f454cdc2f8f755ab7dc603e104d4bf776037debdaeaa7c2484967466"
+      },
+      "artifact_index": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-006/artifact-index.json",
+        "bytes": 19847,
+        "sha256": "f92cb8bb0717dec27576bad597e818316bc11ff04926458aac4b24cbf3eae2a5"
+      },
+      "pid_audit": {
+        "path": ".local/service-rag-ui-smoke-v1/attempt-006/owned-pid-audit-after.json",
+        "bytes": 1124,
+        "sha256": "eccc592e89b9d4fbb6bc04656236f6498a2da679ba59b0a3e5b7f344f781e981"
+      }
+    }
+  ],
+  "final_ui": {
+    "documents": 6,
+    "analyses": 4,
+    "questions": 6,
+    "answer_posts": 6,
+    "returned_citations": 6,
+    "citations_opened": 6,
+    "access_checks": 12,
+    "allowed": 8,
+    "denied": 4,
+    "source_bindings": 24,
+    "owned_processes_absent": 9,
+    "parent_visual_review": "one desktop citation and one mobile screenshot"
+  },
+  "final_postrun_summary": {
+    "path": ".local/service-rag-ui-smoke-v1/attempt-006/postrun-summary.json",
+    "bytes": 781,
+    "sha256": "7e7cb7b3239352e7df05aae72a80c07cf0a88f280e1e8c5313c2c9bb0522da4f"
+  },
+  "limitations": [
+    "All six UI attempts use explicit synthetic HTTP generation and retrieval fixtures; zero learned model, native, tokenizer and official evaluation calls.",
+    "15.013 seconds is fixture UI workflow elapsed time, not real model latency.",
+    "006 runtime passed; separate postrun assertion wrongly expected source-panel DOM in main-only capture. Failure preserved, corrected audit uses full API source/revision/codepoint and live click assertions/screenshots.",
+    "Authentication credentials, original raw DOM/screenshots and process logs remain local and are not copied into this public summary.",
+    "No human review, model-quality acceptance, final test opening or public deployment.",
+    "Exact source commit CI is still required after this publication."
+  ]
+}

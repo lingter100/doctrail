@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-22 · 재개 확인과 실제 화면 검사004
+
+**최종006 통과:** 실제 Java/React와 합성 HTTP fixture에서 등록6·분석4·질문POST6·모든 인용6열기·권한12확인(허용8/거부4)을15.013초에 마쳤다. 부모가 원본113개 artifact hash와 전후24binding·소유PID9개 종료를 확인하고 desktop 인용/mobile 화면을 읽었다. 실제 모델0·사용자 검수0이며 이 시간은 실제 모델 지연이 아니다. [구현과 재현 방법](MEETINGS-SERVICE-RAG-EXECUTION-IMPLEMENTATION.md), [공개 검증 요약](../experiments/results/meetings-service-rag-execution-v1.json)을 남긴다.
+
+후속 감사에서 main-only DOM에 바깥 source panel도 들어 있다고 가정한 assertion이 실패했다. 원래 runtime 통과와 이 감사 오류를 별도로 보존하고, 원문 API·revision·codepoint·실제 클릭 assertion·각 인용 screenshot으로 감사 범위를 정정했다. 원문 패널 DOM 보존을 주장하지 않으며 재실행007은 하지 않았다. v5 독립 읽기 검토 blocker0·구현 소유권 반환 완료다. 다음은 현재 구현 커밋의 필수 CI 뒤 등록된 calibration 담당자의 실제 실행 manifest와 한 번의 로컬 모델 연결 평가다.
+
+직전 사용자 질문에는 상태를 설명했으며 구현 변경은 없었다. 이번 goal 시작에서 이를 no-progress로 분류하고 실제 Git·프로세스·담당 핸들을 다시 확인해 다음 검사를 실행했다. HEAD b3301c717a0d25df6e936b3d63e8d7f7ea1d3490의 push39397164900/PR39397171130 필수3job 성공과 사용자 author/committer lingter100을 확인했다. [CI 기록](../experiments/results/meetings-service-rag-registration-ci-v1.json)은 미커밋 구현 검사가 아니다.
+
+기존 구현 v3는 합성100통과/5.40초와 독립 코드 검토를 마쳤다. 실제 화면003은 다른 사용자의 reload 뒤 첫 workspace로 돌아가는 검사 코드 문제로5등록·3분석·답변0에서 중단됐다. v4는 선택창을 기다려 해당 사용자의 workspace를 다시 선택하는 두 줄 수정이며, 관련 합성3검사와 별도 읽기 검토 blocker0을 기록했다. 부모는 현재6파일·v4증거4개·기존 동결77개의 hash를 확인했다.
+
+실제 Java/React+명시적 합성 HTTP fixture의004는6등록·4분석·권한12확인(허용8/거부4)까지 진행한 뒤 첫 질문 준비 중 browser_action_timeout으로 종료됐다. 답변POST0·native/tokenizer0,39.414초이며 전후24binding과 종료 후 소유PID9개 부재를 확인했다. 원본62개 artifact index를 보존했다. 같은 경로를 재실행하지 않고005에서 답변 준비 단계의 정확한 예외만 추가 관측한다. 이 결과는 실제 모델 품질이나 전체 서비스 수용이 아니다.
+
+005에서 `getByLabel('검색 범위', {exact:true})`가0개와 일치하는 실제 예외를 확인했다. 세 label 모두 exact0/partial1이었고 실제 capabilities6응답은200/ready/base이며 hybrid_rerank도 활성이다. 등록6·분석4·권한12·답변0,29.631초와 원본64개를 보존했다. v5는 `.knowledge-form` 안의 세 label에서 exact 조건만 제거했고 관련 합성3개/0.96초·구문 검사 뒤006을 별도로 수행했다.
+
+기존 독립 validation 검토자는 v2를8수용/0거부로 반환했다. 지정된 근거 대안2곳만 추가됐고 질문 bytes·다른7문항·31필수사실을 유지한다. 부모는 새 review4개 SHA·item freeze15binding·원문51binding·v1 freeze 부재를 확인했다. v1의 거부와 원본은 그대로 보존한다. 실제 모델 실행·최종 test·사용자 검수는 아직 수행하지 않았고 Goal ACTIVE·Phase1/PR14 draft를 유지한다.
+
 ## 2026-10-20 · 실제 화면 검사에서 발견한 실행기 결함과 문항 보완
 
 독립 validation item 검토는7수용·1거부다. 필수사실1개에 대한 충분 근거 대안2곳이 빠졌으며 원본4개·동결51개는 그대로다. 부모는 안전 요약과 새3개 hash를 확인했고 item freeze가 없음을 확인했다. 원본·거부 결과를 먼저 commit한 뒤 같은 작성자가 NEW v2에서 해당 근거 대안만 보완하고 다시 독립 검토한다. 질문 원문·순서·다른7문항·정책·기존 자료를 바꾸지 않는다.

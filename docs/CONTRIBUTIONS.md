@@ -1,4 +1,14 @@
 # 기여와 직접 검증 기록
+## 2026-10-22 · 기존 역할 재개와 화면004 관측
+
+기존 실제 Sol high 화면 담당이004의 Java/React·합성 HTTP 검사와 소유 자원 정리를 수행했다. 기존 Astra xhigh 설계 검토자는 v4 workspace 선택 두 줄을 읽고 blocker0을 반환했으며 실제 화면·모델 실행은 하지 않았다. 기존 Astra high 구현 담당은 다음 답변 준비 실패의 generic 코드를 확인하고, 기존 Astra xhigh validation 검토자는 v2 보완을 검토한다. 새 역할이나 부모 모델 변경을 주장하지 않는다.
+
+부모는 최신 Git/CI의 사용자 신원·필수job과 현재 구현6파일·기존 동결77개의 hash를 확인하고 상태를 기록했다. 상태 설명만 했던 직전 goal turn은 구현 진척으로 세지 않는다. 사용자 검수·실제 모델 품질 검증·공개 서비스 배포는 수행하지 않았다.
+
+독립 validation v2 검토자는8문항을 수용했고 source51·등록6·원본v1 7·v2작성4의 보존을 확인했다. 부모는 의미 내용 없이 새4개 및 freeze15개 hash를 확인했다. 실제 Sol high 담당의005가 select label exact 불일치를 재현했고, 기존 Astra high 담당이 browser 세 필터를 수정해 관련3개 검사를 통과했다. 실제 모델 품질과 합성 화면 검사 결과를 구분한다.
+
+같은 실제 Sol high 담당이006에서6등록·4분석·6답변·6인용·권한12를 확인하고 소유PID9개를 정리했다. 같은 Astra xhigh 코드 검토자는 v5를 읽어 blocker0을 반환했다. 부모는113개 원본 artifact hash와 desktop 인용/mobile screenshot을 확인했다. 후속 감사의 잘못된 DOM 범위 가정은 별도 실패로 보존했고 source-panel DOM을 확인했다고 쓰지 않는다. 이번 화면의 AI는 명시적 합성 HTTP fixture이며 실제 모델·사용자 검수는0이다.
+
 ## 2026-10-20 · 합성 화면 점검 준비와 후속 역할
 
 사용자가 허용한 반복 구현 설정에 따라 새 `service_rag_ui_smoke`를 실제 gpt-6.1-sol/high/fork none으로 도구가 수락했다. 이 역할은 실제 평가 자료를 읽지 않고 새 작은 합성 자료와 기존 모델 HTTP fixture로 Java/React 화면을 점검하는 scratch harness만 준비한다. 실제 로컬 AI의 품질 검증이나 사용자 검수와 구분한다. 원문·문항 노출이 있는 calibration 작성자는 실행 custodian으로 등록만 수락했고 최종 judge에서는 제외한다.
