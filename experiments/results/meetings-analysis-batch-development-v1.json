@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "kind": "actual_local_batch_development_failure",
+  "created_at_utc": "2026-10-22T02:57:14.369137+00:00",
+  "source_ci_commit": "9d085458dbcc18762fdd95e58e0f7cd5c7741d6f",
+  "execution_head": "20bdd3ca097a80f5dfd764c924dec1a4e9608e74",
+  "execution_head_ci": [
+    {
+      "id": 39712190413,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39712190413",
+      "jobs": {
+        "java-service": "success",
+        "web": "success",
+        "backend": "success"
+      }
+    },
+    {
+      "id": 39712195538,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39712195538",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      }
+    }
+  ],
+  "provenance": "New AI-authored synthetic development sources and questions; not public-source evaluation or final test. One real native run, no replay.",
+  "actual_result": {
+    "kind": "actual-native-development-failed-consumed-NOT-formal-evaluation",
+    "actual_exit_code": 1,
+    "cli_wall_seconds": 105.67200000000048,
+    "startup_seconds": 70.75,
+    "status": "failed",
+    "first_browser_code": "analysis_failed",
+    "worker_fixed_error_code": "generation_conflicting_metadata",
+    "generic_error_category": "extraction metadata conflict guard, from static unique code mapping",
+    "generic_code_location": {
+      "path": "src/doctrail/meeting_contract.py",
+      "function": "extraction_analysis",
+      "line": 305,
+      "generic_raiser_type": "WorkerError",
+      "actual_trace_observed": false
+    },
+    "actual_exception_type": "unavailable",
+    "actual_traceback": "unavailable",
+    "counts": {
+      "uploads": 2,
+      "ready_analysis": 0,
+      "analysis_attempts": 1,
+      "questions_unexecuted": 6,
+      "answer_posts": 0,
+      "native_answer_calls": 0,
+      "synthetic_actor_edits": 0,
+      "supersedes_links": 0,
+      "classification_units": 37,
+      "classification_batches": 5,
+      "batch_sizes": [
+        8,
+        8,
+        8,
+        8,
+        5
+      ],
+      "batch_unit_ids_complete_once_ordered": true,
+      "native_analysis_attempts": 5,
+      "native_analysis_responses": 5,
+      "template_responses": 42,
+      "tokenize_responses": 42
+    },
+    "native_response_metadata_only": [
+      {
+        "response_ordinal": 1,
+        "transport_path": "/completion",
+        "stop": true,
+        "truncated": false,
+        "tokens_predicted": 35,
+        "tokens_evaluated": 828,
+        "tokens_cached": 862,
+        "generation_settings_n_predict": 128,
+        "stop_type": "eos"
+      },
+      {
+        "response_ordinal": 2,
+        "transport_path": "/completion",
+        "stop": true,
+        "truncated": false,
+        "tokens_predicted": 41,
+        "tokens_evaluated": 849,
+        "tokens_cached": 889,
+        "generation_settings_n_predict": 128,
+        "stop_type": "eos"
+      },
+      {
+        "response_ordinal": 3,
+        "transport_path": "/completion",
+        "stop": true,
+        "truncated": false,
+        "tokens_predicted": 43,
+        "tokens_evaluated": 887,
+        "tokens_cached": 929,
+        "generation_settings_n_predict": 128,
+        "stop_type": "eos"
+      },
+      {
+        "response_ordinal": 4,
+        "transport_path": "/completion",
+        "stop": true,
+        "truncated": false,
+        "tokens_predicted": 43,
+        "tokens_evaluated": 864,
+        "tokens_cached": 906,
+        "generation_settings_n_predict": 128,
+        "stop_type": "eos"
+      },
+      {
+        "response_ordinal": 5,
+        "transport_path": "/completion",
+        "stop": true,
+        "truncated": false,
+        "tokens_predicted": 28,
+        "tokens_evaluated": 780,
+        "tokens_cached": 807,
+        "generation_settings_n_predict": 128,
+        "stop_type": "eos"
+      }
+    ],
+    "all_native_http_statuses_200": true,
+    "stopped_eos_field_available": false,
+    "stop_type_eos_observed_all": true,
+    "cleanup_accepted": true,
+    "cleanup_seconds": 0.963353431701762,
+    "node_returncode": 1,
+    "tracked_owned_pid_count": 14,
+    "additional_wrapper_cli_pid_count": 2,
+    "all_16_owned_pid_checks_absent": true,
+    "all_three_leases_free": true,
+    "post_hash_groups": {
+      "code": {
+        "count": 10,
+        "all_passed": true
+      },
+      "harness": {
+        "count": 2,
+        "all_passed": true
+      },
+      "ui": {
+        "count": 4,
+        "all_passed": true
+      },
+      "jar": {
+        "count": 1,
+        "all_passed": true
+      },
+      "old_inputs": {
+        "count": 16,
+        "all_passed": true
+      },
+      "frozen_toolchain": {
+        "count": 77,
+        "all_passed": true
+      }
+    },
+    "runtime_binding_file_sha256": "71e41accd39bcd835c9eb22dd54f17049bc97f539bec6641f498cf35baba7b1a",
+    "finalization": {
+      "actual_exit_code": 1,
+      "index_hash_matches_seal": true,
+      "receipt_hash_matches_seal": true,
+      "indexed_files": 394,
+      "indexed_bindings_match": true,
+      "eligible_candidate": false,
+      "failure_marker_present": true,
+      "eligible": false
+    },
+    "stdout_bytes": 0,
+    "stderr_bytes": 0,
+    "first_failure_and_sealed_run_files_unchanged": true,
+    "judge_packet_created": false,
+    "judge_packet_reason": "No final answer response was generated.",
+    "semantic_acceptance": false,
+    "human_review": false,
+    "slot_and_hold_returned_after_postchecks": true,
+    "additional_run_authorized_or_launched": false
+  },
+  "evidence_refs": [
+    {
+      "path": ".local/service-rag-batch-development-v1/cli-v1/safe-result.json",
+      "bytes": 4398,
+      "sha256": "8156e522d5c4bcb03f7edc7894ab77215db7287f6aa1d3b7d7e77ac6fe4542d6"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/cli-v1/evidence-index.json",
+      "bytes": 66583,
+      "sha256": "59d2e5d708088c12a43c299db3bcd44c6c5052698eee6089e1138461afcc414a"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/runtime-bindings-v1.json",
+      "bytes": 3888,
+      "sha256": "71e41accd39bcd835c9eb22dd54f17049bc97f539bec6641f498cf35baba7b1a"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/parent-execution-readiness-v1.json",
+      "bytes": 1591,
+      "sha256": "f641cfdc13f2c310181d69feb12740d5aab4d554d850196feb3db9ce7aff6cdf"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/harness-receipt-v2.json",
+      "bytes": 2972,
+      "sha256": "0642757906f2f01c3a73b7f013b868eb94ccf7b4a707de4fd5b49afc65a7acaa"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/harness-index-v2.json",
+      "bytes": 12320,
+      "sha256": "0d9763d503d822edf9919957ebf1f8bb41699ba15cfda9deaa6d06e557b4c669"
+    }
+  ],
+  "parent_verified_durable_evidence_bindings": 409,
+  "parent_verified_runtime_bindings": {
+    "code": 10,
+    "harness": 2,
+    "jar": 1,
+    "ui": 4,
+    "frozen_toolchain": 77
+  },
+  "independent_review": {
+    "implementation_blockers_final": 0,
+    "harness_initial_blockers": 1,
+    "harness_final_blockers": 0,
+    "harness_final_boundary_checks": 4,
+    "harness_checker": "existing Astra xhigh; synthetic source quote exposure in generic browser code; excluded final judge"
+  },
+  "next_step": "Independent source-only labels first, then actual model labels comparison as posthoc development diagnosis. No further native execution authorized.",
+  "limitations": [
+    "No answer was generated, so no answer accuracy score exists.",
+    "HTTP200 and EOS are transport/output termination observations, not semantic validity.",
+    "The conflicting metadata code does not establish misclassification versus legitimate multiplicity.",
+    "No direct old-versus-new speedup claim: sources and runs differ.",
+    "No official calibration/validation/test, human review or deployment acceptance."
+  ],
+  "phase1_complete": false
+}

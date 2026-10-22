@@ -1,4 +1,10 @@
 # 기여와 직접 검증 기록
+## 2026-10-22 · 실제 batch 개발 실행과 독립 사후 진단
+
+기존 Sol high 자료 작성자 겸 실행 담당이 새 개발 run-v1을 실제 무료 로컬 모델로 한 번 실행했다. 원본 실패·6문항 미실행·소유 자원 종료·입력/code 보존과409개 증거 binding을 반환했고 부모가 모두 hash로 확인했다. 실제 source/모델 분류·답변 의미는 부모가 읽지 않았다. 이 실행 담당은 자기 자료의 독립 final judge가 아니다.
+
+같은 담당은 원래 runtime에 보존된37개 unit/원문 위치와 ordered5batch의 정확한 대응으로 source-only packet A와 model-label packet B를 분리했다. 모델·서비스·parser 재실행은 없었다. 기존 독립 Astra xhigh final judge에게 A만 읽고 source-only 진단 주석을 고정하도록 배정했으며 B 읽기는 별도 단계다. 기존 Astra xhigh 설계 담당은 실제 의미 자료 없이 generic metadata 계약만 검토했다. AI 검토·사용자 검수·최종 품질 수용을 구분하며 실제 사용자 검수는0이다.
+
 ## 2026-10-22 · 실행기 독립 검토와 판정 역할 확인
 
 부모는9d08545의 정확한 원격 CI6job·사용자 신원·12개 Git binding을 확인했다. 기존 Astra xhigh 실행기 검토자는 generic 코드2파일을 읽어 최종 증거 작성 이후 시간 판정 누락1개를 반환했고, 실행·검사·수정은 하지 않았다. 코드 안의 새 합성 원문 인용 상수에 노출된 사실을 기록하며 별도 의미 자료는 읽지 않았고 final judge에서 제외한다.

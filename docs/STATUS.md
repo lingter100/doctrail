@@ -1,4 +1,18 @@
 # 진행 상태
+## 2026-10-22 · batch 실제 개발 실행의 메타데이터 충돌 실패
+
+같은 session99834의 실제 CLI는105.672초/exit1로 종료됐다. 시작70.750초는 통과했고2개 업로드 뒤 첫 회의의37개 단위를5개 묶음(8/8/8/8/5)으로 처리했다. Completion5개 모두HTTP200·EOS·truncated=false였지만 worker가 generation_conflicting_metadata로 분석을 거부했다. 이 오류는 원문에 복수 값이 존재하는 문제와 모델의 잘못된 분류를 아직 구분하지 않는다. 실제 예외형·stack trace는 기록에 없으며 코드의 충돌 검사 위치는 정적 추론이다.
+
+분석 ready0·답변0·질문6개 모두미실행·작업편집/결정연결0이다. Cleanup0.963초 수용, Node실제exit1, 추적14개와 wrapper/CLI를 합친16개 PID 부재 및 lease3개 해제를 별도 확인했다. Code10/harness2/JAR1/UI4/old16/frozen77 hash는 동일하고 원본 index394개·receipt/seal도 일치했다. 실제exit1·candidatefalse·failure marker로 실행 수용은 false다. 마지막 관측은 원래 실패를 덮어쓰지 않았다.
+
+실행 담당은 HEAD/code hold와 Java/GPU 슬롯을 반환했고 같은 run은 소비된 실패로 보존한다. 추가 실제 실행은 배정하지 않았다. 독립 검토자는 새 원문/37개 unit만 보고 개발 진단용 분류를 먼저 고정한 뒤 실제 모델 분류와 비교한다. 이는 사후 개발 진단이며 사전 gold·공식 평가·사용자 검수가 아니다. 기존 설계 담당은 generic metadata 계약만 읽고 두 원인 가설의 구분 조건을 검토한다. Goal은 ACTIVE다.
+
+## 2026-10-22 · 새 batch 개발 실행1회 시작
+
+실행기 마지막 시간 판정 수정은 지연 유도 합성4개/0.75초와 구문 검사를 통과했고 동일 독립 Astra xhigh delta 검토 blocker0이다. 원본5개 archive와 기존16개 입력을 보존했다. 부모는 새 index53개·기존 입력15개·동결77개·정확한 CI 코드10개·로컬 JAR/UI를 hash로 확인했고 runtime binding71e41acc를 고정했다. 실제 exit0·최종 receipt/index hash·seal·실패 marker 부재를 함께 확인해야 실행 성공이며 임시 summary만으로 수용하지 않는다.
+
+기존 Sol high 실행 담당에게 새 `.local/service-rag-batch-development-v1/run-v1`의 실제 무료 로컬 실행1회만 배정했다. 실제 도구 session99834, wrapper PID30596/CLI child50296 시작이 반환됐으며 원본 CLI 기록은 별도 cli-v1에 보존한다. 부모는 HEAD20bdd3c와 code/JAR/UI를 유지하고 Java/GPU 슬롯은 이 실행만 사용한다. 관찰 timeout만으로 재시작하지 않으며 종료 전 결과나 모델 품질을 주장하지 않는다. 기존 공식 v1/v2·격리 validation·최종 test는 실행하지 않는다.
+
 ## 2026-10-22 · 정확한 batch 소스 CI 통과와 마지막 실행기 경계 수정
 
 직전 goal turn은19개 파일의 구현·검증·문서를9d085458dbcc18762fdd95e58e0f7cd5c7741d6f로 commit/push한 실질 진행이다. 이번 재개에서 사용자 GitHub author/committer lingter100, push39711546643/PR39711551205의 backend·java-service·web 모두 성공과 현재12개 Git binding을 확인했다. [CI 기록](../experiments/results/meetings-analysis-batch-ci-v1.json)은 실제 모델 속도·품질 검증이나 별도 scratch 실행기 검사를 대신하지 않는다.
