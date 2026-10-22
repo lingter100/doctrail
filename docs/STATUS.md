@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-22 · 정확한 batch 소스 CI 통과와 마지막 실행기 경계 수정
+
+직전 goal turn은19개 파일의 구현·검증·문서를9d085458dbcc18762fdd95e58e0f7cd5c7741d6f로 commit/push한 실질 진행이다. 이번 재개에서 사용자 GitHub author/committer lingter100, push39711546643/PR39711551205의 backend·java-service·web 모두 성공과 현재12개 Git binding을 확인했다. [CI 기록](../experiments/results/meetings-analysis-batch-ci-v1.json)은 실제 모델 속도·품질 검증이나 별도 scratch 실행기 검사를 대신하지 않는다.
+
+독립 Astra xhigh 실행기 읽기 검토는 마지막 artifact/index 쓰기 전에 전체1625초 판정을 확정하는 blocker1개를 찾았다. 기존 Sol high 담당에게 최초 코드/준비 기록을 보존하고 최종 증거 작성 뒤 시간·상태를 판정하는 좁은 수정과 합성 경계 검사를 배정했다. 원래16개 개발 자료는 변경하지 않고 실제 run-v1은 아직 없다. 검토자는 browser 코드의 합성 인용 상수에 노출됐으며 독립 final judge에서는 제외한다.
+
+기존 calibration final judge는 새 개발 출력의 독립 의미 검토 가용성만 반환했다. 현재 노출은 과거 실패·시간·집계와 새 구성 metadata이며 pristine blind 상태를 주장하지 않는다. 새 질문·원문·oracle·모델 출력·판정은0이고, 실제 답변 판단을 먼저 고정한 뒤 추출/성능 진단을 공개한다. 새 프레임워크나 역할 체계는 추가하지 않는다. 현재 프로젝트 runtime 프로세스도 없으며 goal은 ACTIVE다.
+
 ## 2026-10-22 · batch 구현 최종208개 검사와 실행 준비
 
 분석 호출을 최대8문장씩 묶는10개 구현 파일이 최종208개 합성 검사13.63초·Ruff를 통과했다. 독립 Astra xhigh 읽기 검토의2개 경계 문제를 해결했고 최종 blocker0이다. 새 adapter는 single에서도 실제 import되므로 항상 code binding에 포함하며, validation의 선행 calibration은 동일한 analysis_policy여야 한다. 처음191개 통과와 추가 회귀검사의8실패/9통과를 원본으로 보존한다. 부모가 코드·증거44개 고유 binding을 확인한 [구현 기록](../experiments/results/meetings-analysis-batch-implementation-v1.json)을 남겼다.
