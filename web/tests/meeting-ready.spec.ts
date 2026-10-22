@@ -97,7 +97,7 @@ test('synthetic transport + real Java: meeting registration, evidence, user edit
   await page.screenshot({ path: testInfo.outputPath('knowledge-answer-mobile.png'), fullPage: true });
 });
 
-test('synthetic transport + real Java: failed reanalysis visibly preserves the ready user-edited result', async ({ page }) => {
+test('synthetic transport + real Java: failed reanalysis visibly preserves the ready user-edited result', async ({ page }, info) => {
   const auth = await register(page.request);
   const meeting = await create(page.request, auth.workspaces[0].id, '재분석 실패 합성 회의', `${content}\nFIXTURE_FAIL_REANALYSIS`);
   const analysis = structuredClone(meeting.meeting.analysis!); analysis.summary = '재분석 실패에도 보존할 사용자 수정본';
@@ -106,8 +106,18 @@ test('synthetic transport + real Java: failed reanalysis visibly preserves the r
   await page.locator(`[data-meeting="${meeting.document.id}"]`).click();
   await page.getByRole('button', { name: 'AI 재분석 요청', exact: true }).click();
   await expect(page.locator('.meeting-detail .source-warning')).toContainText('최근 재분석을 완료하지 못했어요');
+  await expect(page.locator('.meeting-detail .source-warning')).not.toContainText('generation_unavailable');
+  await expect(page.locator('.meeting-detail .source-warning')).not.toContainText('상태 코드');
   await expect(page.locator('.summary-copy')).toHaveText('재분석 실패에도 보존할 사용자 수정본');
   await expect(page.getByRole('button', { name: '분석 편집', exact: true })).toBeEnabled();
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 1000 });
+    await page.screenshot({ path: info.outputPath(`reanalysis-warning-${width}.png`), fullPage: true });
+    const source = page.getByRole('button', { name: '전체 원문', exact: true });
+    await source.focus(); await page.keyboard.press('Enter');
+    await expect(page.locator('#close-source')).toBeFocused();
+    await page.keyboard.press('Enter'); await expect(source).toBeFocused();
+  }
 });
 
 test('synthetic transport + real Java: edited titles remain searchable and task metadata stays visible across layouts', async ({ page }, testInfo) => {

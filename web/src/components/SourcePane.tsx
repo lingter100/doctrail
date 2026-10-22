@@ -24,7 +24,7 @@ export function SourcePane({ app }: { app: DocTrail }) {
   // A matching revision/chunk ID alone is insufficient if its span is corrupt.
   const citation = parts ? candidate : undefined;
   return <aside className="source-pane" aria-label="문서 원문" ref={pane}>
-    <header className="source-top"><span><Icon name="file"/> 원문 보기</span><button ref={close} className="icon-button" id="close-source" aria-label="원문 닫기" onClick={app.closeSource}><Icon name="close"/></button></header>
+    <header className="source-top"><span><Icon name="file"/> 원문 보기</span><button ref={close} className="icon-button" id="close-source" aria-label="원문 닫기" onClick={app.closeSourceFromUser}><Icon name="close"/></button></header>
     <div className="source-scroll"><div className="source-heading"><span className="eyebrow">SOURCE DOCUMENT</span><h2>{doc.title}</h2><p>{doc.filename}</p><div className="source-badges"><span><Icon name={doc.visibility === 'private' ? 'lock' : 'people'}/>{visibilityLabel(doc)}</span><span>버전 {doc.revision}</span><span>{doc.chunk_count}개 구절</span></div></div>
       {doc.status === 'failed' && <div className="source-warning"><strong>이 문서는 아직 검색할 수 없어요.</strong><p>파일에서 텍스트를 추출하지 못했어요. UTF-8 문서 또는 텍스트가 포함된 PDF인지 확인해 주세요.</p>{isOwner && <button className="button secondary" id="retry-document" disabled={retryBusy} onClick={() => void app.reprocess()}>다시 처리하기</button>}</div>}
       {(hit || evidence) && !citation && <div className="source-warning"><strong>검색 이후 원문이 변경되었어요.</strong><p>아래에는 최신 문서가 표시됩니다. 정확한 근거 위치는 다시 검색해 확인해 주세요.</p>{selectedSourceOrigin && <button className="text-button" id="search-again" onClick={app.retrySource}>{selectedSourceOrigin.retryLabel}</button>}</div>}

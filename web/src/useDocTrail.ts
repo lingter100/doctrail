@@ -34,6 +34,7 @@ export function useDocTrail() {
   const tokens = useRef({ epoch: 0, auth: 0, load: 0, search: 0, detail: 0, modal: 0, toast: 0, capabilities: 0 });
   const documentVersions = useRef(new Map<string, number>());
   const deletedDocuments = useRef(new Set<string>());
+  const sourceOpener = useRef<{ element: HTMLElement; documentId: string; epoch: number; view: View; workspace: string; origin?: SourceOrigin } | null>(null);
   function update(patch: Partial<State> | ((current: State) => Partial<State>)) {
     live.current = { ...live.current, ...(typeof patch === 'function' ? patch(live.current) : patch) };
     setState(live.current);
@@ -187,6 +188,9 @@ export function useDocTrail() {
   }
   async function openDocument(id: string, hit?: Hit, selectedIndex = 0, evidence?: Evidence, origin?: SourceOrigin) {
     const epoch = tokens.current.epoch, request = ++tokens.current.detail;
+    const active = document.activeElement;
+    const opener = active instanceof HTMLElement && active !== document.body && !active.closest('.source-pane') ? active : null;
+    const view = live.current.view, workspace = live.current.workspaceId;
     const search = live.current.search, searchRequest = tokens.current.search;
     // Recovery belongs to the result that opened the source, never whichever
     // unrelated search happens to remain in global state.
@@ -199,7 +203,10 @@ export function useDocTrail() {
     try {
       const detail = await api<Detail>(`/documents/${id}`);
       if (!valid()) return;
-      if (replaceDoc(detail)) update({ selected: detail, selectedHit: hit || null, selectedEvidence: evidence || null, selectedSourceOrigin: sourceOrigin || null, selectedIndex, retryBusy: false });
+      if (replaceDoc(detail)) {
+        sourceOpener.current = opener ? { element: opener, documentId: detail.id, epoch, view, workspace, origin: sourceOrigin } : null;
+        update({ selected: detail, selectedHit: hit || null, selectedEvidence: evidence || null, selectedSourceOrigin: sourceOrigin || null, selectedIndex, retryBusy: false });
+      }
     } catch (error) {
       if (!valid() || sessionExpired(error)) return;
       update({ selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null });
@@ -212,7 +219,22 @@ export function useDocTrail() {
       toast(errorMessage(error));
     }
   }
-  function closeSource() { tokens.current.detail++; update({ selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null, retryBusy: false }); }
+  function closeSource() { sourceOpener.current = null; tokens.current.detail++; update({ selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null, retryBusy: false }); }
+  function closeSourceFromUser() {
+    const opener = sourceOpener.current?.documentId === live.current.selected?.id ? sourceOpener.current : null;
+    closeSource();
+    const request = tokens.current.detail;
+    requestAnimationFrame(() => {
+      // Automatic invalidation/navigation never restores focus. Even an explicit
+      // close must not focus a detached result or steal a subsequent interaction.
+      if (!opener || request !== tokens.current.detail || opener.epoch !== tokens.current.epoch
+        || opener.view !== live.current.view || opener.workspace !== live.current.workspaceId
+        || live.current.selected || live.current.modal || !live.current.auth
+        || !opener.element.isConnected || (opener.origin && !opener.origin.isCurrent())
+        || (document.activeElement !== document.body && document.activeElement !== opener.element)) return;
+      opener.element.focus();
+    });
+  }
   function retrySource() {
     const origin = live.current.selectedSourceOrigin;
     if (live.current.selected && origin?.isCurrent()) origin.retry();
@@ -289,6 +311,9 @@ export function useDocTrail() {
         invalidateReads();
         update(current => ({ loading: false, workspaceLoading: false, ...(current.selected?.id === detail.id ? { selected: detail, retryBusy: false } : {}) }));
         if (valid()) {
+          // Upload replaces the panel directly; its removed submit button is not
+          // a source opener, and a previous document's row must not inherit it.
+          if (modal.kind === 'upload' || sourceOpener.current?.documentId !== detail.id) sourceOpener.current = null;
           update({ selected: detail, selectedHit: null, search: null, view: 'library', loading: false, retryBusy: false });
           closeModal();
           toast(modal.kind === 'edit' ? `버전 ${detail.revision}으로 저장했어요. 검색에도 반영됐어요.` : detail.status === 'ready' ? '문서를 추가했어요. 이제 키워드로 검색해 보세요.' : '파일을 저장했지만 텍스트 추출에 실패했어요. 원문 패널을 확인해 주세요.');
@@ -327,6 +352,6 @@ export function useDocTrail() {
     setQuery: (query: string) => update({ query }), setFilter: (filter: string) => update({ filter }),
     setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, rerunHistory, loadCapabilities, setSearchMethod,
     openDocument, openEvidence: (evidence: Evidence, origin?: SourceOrigin) => openDocument(evidence.document_id, undefined, 0, evidence, origin), sessionExpired,
-    closeSource, retrySource, feedback, openModal, closeModal, submitModal, reprocess };
+    closeSource, closeSourceFromUser, retrySource, feedback, openModal, closeModal, submitModal, reprocess };
 }
 export type DocTrail = ReturnType<typeof useDocTrail>;

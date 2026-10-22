@@ -1,0 +1,221 @@
+{
+  "status": "local_ui_fixes_and_scoped_regressions_verified_pending_exact_commit_ci",
+  "date": "2026-10-22",
+  "base_commit": "497b789ca3c7206cb54db9313fdeefc0c146b903",
+  "scope": "Actual Java service and packaged React, synthetic model transport and generic synthetic documents; no native model invocation.",
+  "changes": [
+    "Meeting analysis and reanalysis failure banners preserve useful guidance without displaying raw internal status codes.",
+    "Explicit source close restores the accepted source opener only while document, request, view, workspace, session and source-origin context remain current.",
+    "Uploaded-document replacement clears the old document opener; subsequent opening of the new document restores its own opener."
+  ],
+  "source_files": [
+    {
+      "path": "web/src/components/MeetingViews.tsx",
+      "bytes": 36219,
+      "sha256": "2feb9ef56136ea0c1a8b7c449867e40c5706e8d186001ee3a3cb71ea66cc9766"
+    },
+    {
+      "path": "web/src/useDocTrail.ts",
+      "bytes": 23461,
+      "sha256": "2fb5c309bb8d693537261524035ba49a08ab3e9bbca276fed06a5c8ba9d3c4ed"
+    },
+    {
+      "path": "web/src/components/SourcePane.tsx",
+      "bytes": 4662,
+      "sha256": "be4dd90743a2988033272da8118ea5f95f77365726c7d73933e128ac3fffe8d1"
+    },
+    {
+      "path": "web/tests/meeting-ready.spec.ts",
+      "bytes": 17244,
+      "sha256": "cdbc2a995394053fb2670e288b42508714cfd48e8ecae43ce3f1f4e6bd0be885"
+    },
+    {
+      "path": "web/tests/source-focus.spec.ts",
+      "bytes": 6949,
+      "sha256": "ad3f7dad469e7dc648e913255f869c2e3feb72497b3c88b63623a3f2d68724b0"
+    }
+  ],
+  "local_validation": {
+    "before_narrow_upload_fix": {
+      "browser_unique_tests": 12,
+      "suites": [
+        {
+          "command": ".venv/Scripts/python.exe .local/meeting-product-walkthrough-v1/run_checks.py focus-first tests/source-focus.spec.ts",
+          "result": "3 passed",
+          "seconds": 6.5
+        },
+        {
+          "command": ".venv/Scripts/python.exe .local/meeting-product-walkthrough-v1/run_checks.py meeting-first tests/meeting-ready.spec.ts --grep 'failed reanalysis visibly'",
+          "result": "1 passed",
+          "seconds": 6.8
+        },
+        {
+          "command": ".venv/Scripts/python.exe .local/meeting-product-walkthrough-v1/run_checks.py source-recovery tests/knowledge-source-recovery.spec.ts",
+          "result": "8 passed",
+          "seconds": 14.9
+        }
+      ],
+      "source_receipt": {
+        "path": ".local/meeting-product-walkthrough-v1/safe-receipt-v2.json",
+        "bytes": 49760,
+        "sha256": "2f67cdc7f96b26512b896521194ad96590a442478e0b3cac44aaec28db485775"
+      }
+    },
+    "final_source": [
+      {
+        "command": "npm.cmd run typecheck",
+        "result": "pass",
+        "log": {
+          "path": ".local/meeting-product-walkthrough-v1/typecheck-v3.log",
+          "bytes": 82,
+          "sha256": "dfad95ed5f615b6ba38a4c2f7b93a69663a69b192f0819e5486381743b5b2d92"
+        }
+      },
+      {
+        "command": "npm.cmd run build",
+        "result": "pass",
+        "log": {
+          "path": ".local/meeting-product-walkthrough-v1/build-v3.log",
+          "bytes": 418,
+          "sha256": "928380356cbb34925b4c2071b147564dafe0b2f5b3fdf369649389789f034804"
+        }
+      },
+      {
+        "command": "server/mvnw.cmd -o -B -q -f server/pom.xml package -DskipTests",
+        "result": "pass",
+        "log": {
+          "path": ".local/meeting-product-walkthrough-v1/package-v3.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "command": ".venv/Scripts/python.exe .local/meeting-product-walkthrough-v1/run_checks.py focus-v3 tests/source-focus.spec.ts",
+        "result": "4passed",
+        "seconds": 7.8,
+        "scope": "3 existing focus cases plus1 new upload-replacement case"
+      }
+    ],
+    "counts_caveat": "Prior v2 12tests remain historical evidence. Current v3 reran affected focus4; do not sum12+4 as16unique or claim unchanged8+meeting1 rerun onv3.",
+    "packaging_skips_java_unit_tests": true,
+    "packaged_static_exact_dist": true,
+    "binaries": [
+      {
+        "path": "server/target/doctrail-server-0.1.0.jar",
+        "bytes": 49692231,
+        "sha256": "7c4bfbe60f5cedaca28dcaf5a453b9b779998e56b1c83d96b9f72e897740528e"
+      },
+      {
+        "path": "web/dist/assets/index-B-Fp3L9N.js",
+        "bytes": 298492,
+        "sha256": "f022dab162219a65281c9f6f5d9c9770b178af4df77b71d3a3374281c522c026"
+      },
+      {
+        "path": "web/dist/assets/index-C9z3P3GC.css",
+        "bytes": 47132,
+        "sha256": "35d97dac2cda032c0b8a67208254f9bd49e5107cf8da43ea7c8c689acd3345b9"
+      },
+      {
+        "path": "web/dist/favicon.svg",
+        "bytes": 276,
+        "sha256": "fa0d5fc5405923ccd729a6b711036dce29bc09cb35492ac94d01aef6e057067c"
+      },
+      {
+        "path": "web/dist/index.html",
+        "bytes": 708,
+        "sha256": "cb01269db35db773ec36ead5f8ea26434af1c91d5febfaa23d5e63f27ca2f064"
+      }
+    ],
+    "independent_static_review_blockers": 0,
+    "independent_review": {
+      "path": ".local/meeting-product-walkthrough-v1/independent-review/review-v3.json",
+      "bytes": 3627,
+      "sha256": "9bda3fcd1d94a14e75ad05bd4fa2169744568ac07bbd8599bec4c4f3c365980c"
+    }
+  },
+  "walkthrough": {
+    "widths": [
+      1440,
+      390
+    ],
+    "initial_complete_journey": "attempt-002; 30 screenshot states, no observed horizontal overflow",
+    "initial_limits": "Incorrect timeout envelope and pending empty state were not treated as completed-state proof.",
+    "supplement": "attempt-003 verifies completed empty state, correct timeout guidance and explicit manual retry at both widths.",
+    "user_acceptance": false
+  },
+  "preserved_failures": [
+    "attempt-001: harness assumed the follow-up list returned to the meeting list; original failure retained.",
+    "independent review-v1: old-document focus could survive direct upload replacement; reproduced in actual Java browser.",
+    {
+      "path": "upload-first-repro",
+      "result": "1failed",
+      "classification": "test_action_started_before_existing_modal_focus_restoration_finished",
+      "observed": "Enter reopened upload dialog; source pane did not close. Original source/trace/screenshot/log kept."
+    },
+    {
+      "path": "upload-repro-settled",
+      "result": "1failed",
+      "classification": "confirmed_product_lifecycle_defect",
+      "observed": "After dialog completion settled, B source close restored A row focus; not.toBeFocused assertion failed."
+    },
+    "KeyError: copy; preservation entries use copy/preserved_copy/preserved_evidence variants; no model or test rerun"
+  ],
+  "custody": {
+    "v2_preserved_bindings_verified": 50,
+    "v2_original_evidence_bindings_verified": 127,
+    "v3_reference_bindings_verified": 63,
+    "v3_owned_process_identities_absent": 39,
+    "process_count_is_not_simultaneous_concurrency": true,
+    "parent_verification": {
+      "path": ".local/meeting-product-walkthrough-v1/parent-verification-v3.json",
+      "bytes": 2149,
+      "sha256": "ee400787cf58fcf10f47c1564d3fe277fece04d59cf93a42f8e58848cee15b77"
+    },
+    "v3_receipt": {
+      "path": ".local/meeting-product-walkthrough-v1/safe-receipt-v3.json",
+      "bytes": 16098,
+      "sha256": "e71a5257659de0fa9309cc7b0c05797382a41f7e8a9cb5af93fdb3cc6c2557da"
+    },
+    "initial_review": {
+      "path": ".local/meeting-product-walkthrough-v1/independent-review/review-v1.json",
+      "bytes": 3515,
+      "sha256": "932b2eba2a4ab8d73de6c3ff92fde24669f36a0d5b39fae93dec94683dcf26b3"
+    }
+  },
+  "images": [
+    {
+      "source": {
+        "path": ".local/meeting-product-walkthrough-v1/focus-v3/web-e2e-l3q3ri/results/source-focus-upload-replac-fdd54-ent-restores-its-own-opener/new-document-opener-return.png",
+        "bytes": 100801,
+        "sha256": "db96589d79c46033cfb695c7cd614e0441e0370c53a2c257805b3f1c2b43a16e"
+      },
+      "published": {
+        "path": "docs/images/source-opener-return-1440.png",
+        "bytes": 100801,
+        "sha256": "db96589d79c46033cfb695c7cd614e0441e0370c53a2c257805b3f1c2b43a16e"
+      },
+      "data": "generic synthetic browser fixture",
+      "visual_review": "AI worker and parent; not human acceptance"
+    },
+    {
+      "source": {
+        "path": ".local/meeting-product-walkthrough-v1/focus-v3/web-e2e-l3q3ri/results/source-focus-source-close--a9a7a-g-navigation-focus-at-390px/citation-open.png",
+        "bytes": 30434,
+        "sha256": "3f6961c3fc2e4c26909fc23c80933a774f4eae5fd7e0fa9f5897b9636cdac654"
+      },
+      "published": {
+        "path": "docs/images/source-citation-open-390.png",
+        "bytes": 30434,
+        "sha256": "3f6961c3fc2e4c26909fc23c80933a774f4eae5fd7e0fa9f5897b9636cdac654"
+      },
+      "data": "generic synthetic browser fixture",
+      "visual_review": "AI worker and parent; not human acceptance"
+    }
+  ],
+  "limits": [
+    "Local Chromium checks and AI visual review are not complete accessibility, other-browser or human usability acceptance.",
+    "Earlier 12 checks and final affected 4 overlap; they are not 16 unique final-version tests.",
+    "No new model quality, original failed-run cleanup success, public deployment or Phase1 completion claimed.",
+    "Exact source commit CI will be recorded separately from these local results."
+  ]
+}
