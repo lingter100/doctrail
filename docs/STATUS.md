@@ -1,4 +1,16 @@
 # 진행 상태
+## 2026-10-22 · v2 실행 등록 준비 완료
+
+기존 실행 담당이 v2 NEW3을 반환했고 기존 verify_inputs1회가 통과했다. 부모가 새3개 bytes/hash·plan canonical hash를 확인했으며 v1과 다른 plan 키는 code/ci뿐이다. Source64/item10·질문6·원문6/청크32·JAR1/UI4·정책·roles는 같고 fixed code48은 정확한 CI 커밋475c4c7과 일치한다. Manifest0b06bae5/registration37200145/preparation3d288870이며 v2 run/CLI 경로는 준비 확인 당시 모두 없다.
+
+새 CI 기록과 등록3개를 이 문서와 함께 commit한 뒤 동일 실행 담당에게 한 번만 실제 실행을 배정한다. 원래v1은 실패·소비 상태이며 v2는 별도1회다. 추가 모델 예행·warmup·자료 변경·자동 retry는 없다. 기존 final judge와 격리 validation 조건을 유지한다. 준비 완료를 실제 모델 실행·품질 통과로 기록하지 않는다.
+
+## 2026-10-22 · 수정 소스 CI 통과와 동일 입력 준비
+
+수정13파일을475c4c7dd538347a208d095671e2211ea0206bf9로 사용자 계정 commit/push했다. Push39704965948/PR39704970768 모두 backend·java-service·web 성공이며 GitHub author/committer lingter100·PR14 head 일치도 확인했다. [수정 CI 기록](../experiments/results/meetings-service-rag-startup-repair-ci-v1.json)은 기존45개 보수적 목록과 신규 resolver·관련 회귀검사를 합친48개가 정확한 Git commit/현재 파일과 일치함을 기록한다. 보존한 예전 도우미가 모두 현재 runtime 의존성이라는 주장은 하지 않는다.
+
+기존 등록 calibration 실행 담당에게 v2 manifest/registration/preparation3개 준비만 배정했다. 원래 source64/item10·질문6/원문6/청크32·모델·JAR/UI·roles와 정책은 유지하고 code/CI/출력 경로만 갱신한다. 새 CI 기록과 새 등록은 한 commit에 함께 보존한 뒤 명시적으로1회 실행한다. v1 실패는 소비 상태 그대로이며 새로운 실제 서비스·모델 실행은 아직0이다.
+
 ## 2026-10-22 · Java 시작 수정 검증 완료
 
 NEW Java resolver와 비동결 launcher/회귀검사4파일을 마쳤다. 최종49개 합성 검사0.97초·Ruff 통과, 기존 properties의UTF-8 오류는 실제 bytes에서 같은0xb0/위치406으로 재현했다. 새 resolver의 현재 Windows 기본 임시 폴더 실행은0.625초/exit0이고 실제 JVM 경로 존재·임시 파일 제거를 확인했다. 이모지 임시 경로와 cwd 대안은 JDK21/MS949에서 실패했으며 원본을 보존하고 성공한 최소 구현의 정확한 hash로 복귀했다. Unicode java.home 값 보존은 합성 검사이고 임의 Unicode TMP 지원은 아니다.
