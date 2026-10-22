@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-22 · 관측 수정 최종 검증과 batch 설계
+
+관측 수정 첫59개 통과 뒤 독립 읽기 검토가 늦게 확정되는 Node 실패 종료를 성공으로 기록할 수 있는 경계를 발견했다. 기존59개 결과·소스와 최초/추가6개 실패를 각각 보존했다. 최종2파일은67개 합성 검사6.92초·Ruff를 통과했고 같은 Astra xhigh 역할의 최종 delta 검토에서 blocker0이다. 부모도 변경 코드를 읽고 증거 hash를 확인했다. [수정 기록](../experiments/results/meetings-service-rag-observer-fix-v1.json)을 따른다.
+
+판정용 packet은 최종 작업·정리·binding·시간 검사 뒤 발행한다. 저장 뒤 시간 초과나 I/O 실패로 파일이 남아도 최종 status와 judge_packet_eligible가 수용을 막으며 정확한 packet hash를 별도로 기록한다. 파일 존재만으로 판정을 허용하지 않는다. 원래 v2는 재실행하지 않았다.
+
+[batch 개발 설계](MEETINGS-ANALYSIS-BATCH-PLAN.md)는 batch8/output128/input4096/EOS/분석120초, 기본single·명시batch-v1 선택, 정상/observer 경로 일치와 원문 근거 보존을 고정한다. 기존 Purpose 정규화는 유지하며 새 원문 축약은 없다. 준비는 구현과 병행하되 새 native 개발 실행은 구현·독립 검토·정확한 CI 이후 별도 배정한다. 현재 batch 구현과 실제 성능 측정은 아직 없다.
+
+## 2026-10-22 · 실제 모델 연결 성공, 두 번째 회의 분석 시간 초과
+
+등록 커밋b218603의 push39705995603/PR39705999590은 backend·java-service·web 모두 성공했으며 사용자 author/committer를 확인했다. 등록된 v2를 한 번 실행했고 시작45.485초는 통과했다. 실제 업로드2건 중 첫 회의는114.182초에 ready, 두 번째는120.047초에 generation_timeout으로 실패했다. Worker 원인은 generation_deadline_exceeded다. 모델 분류 시도105/응답104, template/tokenize223회이며 질문6개·답변POST·격리 validation은 모두 미실행이다. 분석 ready는 의미 품질 수용이 아니다.
+
+[실측 실패 요약](../experiments/results/meetings-service-rag-analysis-timeout-v2.json)은 부모가 원문·문항·모델 출력 의미를 읽지 않고2251개 증거 hash와 기존 동결77개를 확인한 기록이다. 원래 단위 집계118은 이벤트2회를 잘못 더한 값이며 원본 단위54+62=116을 별도로 남긴다. Driver cleanup=false도 보존한다. 이후 확인한 소유 자식21+wrapper 잔존0·lease3해제·browser closed와 원래 실패 판정은 구분하며, Node 정확한 종료 코드는 미기록이다. 원래 v1/v2는 소비 상태로 재실행하지 않는다.
+
+실행 담당은 반환했고 HEAD/source hold와 Java/GPU 슬롯을 해제했다. 기존 Astra high 구현 담당의 관측 집계·종료 판정2파일 수정은59개 합성 검사와 Ruff를 통과했다. 기존 Astra xhigh 설계 담당은 원문/단위 전체를 유지하는 최대8개 batch 분류의 새 설계와 관측 수정의 독립 읽기 검토를 맡는다. 기존 frozen77·답변 정책·120초 분석 제한은 유지한다. 새 합성 개발 검증과 실제 자료 수용은 분리하며 공식 세 번째 실행·validation 개방은 아직 없다. 전체 goal은 active, Phase1과 PR14는 미완료다.
+
 ## 2026-10-22 · v2 실행 등록 준비 완료
 
 기존 실행 담당이 v2 NEW3을 반환했고 기존 verify_inputs1회가 통과했다. 부모가 새3개 bytes/hash·plan canonical hash를 확인했으며 v1과 다른 plan 키는 code/ci뿐이다. Source64/item10·질문6·원문6/청크32·JAR1/UI4·정책·roles는 같고 fixed code48은 정확한 CI 커밋475c4c7과 일치한다. Manifest0b06bae5/registration37200145/preparation3d288870이며 v2 run/CLI 경로는 준비 확인 당시 모두 없다.

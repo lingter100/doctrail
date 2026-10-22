@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "kind": "observer_count_cleanup_and_late_business_exit_fix",
+  "created_at_utc": "2026-10-22T02:02:00.787560+00:00",
+  "original_implementation_receipts": [
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/receipt.json",
+      "bytes": 4488,
+      "sha256": "e910395647e42cab65d9e49d10b585b36925a7d289badbfa70bf479de31520cd"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/receipt-v2.json",
+      "bytes": 4681,
+      "sha256": "533c9321208cb5b0cd337c4784ed8d43956b2b6fd5c279d46481697f086e5fa1"
+    }
+  ],
+  "independent_review": {
+    "path": ".local/service-rag-count-cleanup-fix-v1/independent-review-final.json",
+    "bytes": 903,
+    "sha256": "da088fa870c231e1ead5b511d58a92db2af5e164393b39fd493a3be6c9a01b22"
+  },
+  "initial_review": {
+    "path": ".local/service-rag-count-cleanup-fix-v1/independent-review-initial.json",
+    "bytes": 1253,
+    "sha256": "97e5ad693383d8b418bf1361e505baea3b9261d26d121958638de2e26ef67dda"
+  },
+  "code": [
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 37095,
+      "sha256": "1b6270066e03365104602ec80c8c537e13d24cc01f5ca79d8b7af56eb733df10",
+      "lf": true
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 46938,
+      "sha256": "d2b495664968ce1c752b9515689e334593b967288de20d5797a68c23a1c88710",
+      "lf": true
+    }
+  ],
+  "changes": [
+    "Retain analyze:classification_units as summed units; store classification event frequency separately in analyze:classification_units_events. Raw events remain unchanged.",
+    "BrowserChild.finish accepts verified resource closure independently of business exit status and persists exact node_returncode. Existing ownership, errors, timeout, closed-record requirements remain. Execution status, failure codes and acceptance gates unchanged.",
+    "After owned cleanup, final Node returncode != 0 (including unavailable) fails business status while preserving an existing specific failure. Resource cleanup acceptance remains an independent proof.",
+    "Keep reconciled judge packet in memory until final business, cleanup, binding and elapsed-time gates pass. Publish late packet with exact path/bytes/SHA-256 binding in receipt; existing artifact index is not overwritten.",
+    "Recheck elapsed time after packet publication. Publication I/O failure or elapsed > 1625 marks failed and judge_packet_eligible=false; any already-created packet is preserved. File existence alone never grants judgment permission."
+  ],
+  "verification": [
+    {
+      "command": "uv run --no-sync pytest -q tests/test_run_meeting_rag_acceptance.py -k 'late_node_exit or judge_packet_is_not_published'",
+      "stage": "before_fix",
+      "result": "6 failed, 59 deselected in 2.34s; original log preserved"
+    },
+    {
+      "command": "uv run --no-sync pytest -q tests/test_run_meeting_rag_acceptance.py",
+      "stage": "after_fix",
+      "result": "67 passed in 6.92s"
+    },
+    {
+      "command": "uv run --no-sync ruff check scripts/run_meeting_rag_acceptance.py tests/test_run_meeting_rag_acceptance.py",
+      "result": "all checks passed"
+    }
+  ],
+  "previous_passes_not_summed": [
+    {
+      "command": "uv run --no-sync pytest -q tests/test_run_meeting_rag_acceptance.py -k 'classification_unit_sum or business_exit or missing_cleanup_proof or real_browser_boundary_cleanup'",
+      "stage": "before_fix",
+      "result": "6 failed,5 passed,48 deselected in1.57s; originals preserved"
+    },
+    {
+      "command": "uv run --no-sync pytest -q tests/test_run_meeting_rag_acceptance.py",
+      "stage": "after_fix",
+      "result": "59 passed in4.92s"
+    },
+    {
+      "command": "uv run --no-sync ruff check scripts/run_meeting_rag_acceptance.py tests/test_run_meeting_rag_acceptance.py",
+      "result": "all checks passed"
+    }
+  ],
+  "parent_verified_unique_source_evidence_count": 15,
+  "evidence": [
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/receipt.json",
+      "bytes": 4488,
+      "sha256": "e910395647e42cab65d9e49d10b585b36925a7d289badbfa70bf479de31520cd"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/tests-v2-before-fix.log",
+      "bytes": 12195,
+      "sha256": "69651bc462d71764c818731305c11acb0e29ca5d30dbe905f18fd1e91a5e8573"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/tests-v2-after-fix.log",
+      "bytes": 101,
+      "sha256": "73be8360db557b17988370d1b35aa08253b55fe17fd0b0d8f931350ad2262f18"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/ruff-v2.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/version1-source/run_meeting_rag_acceptance.py",
+      "bytes": 35693,
+      "sha256": "6aba9944847e1b29ccbad593525c72b15218e894f4ec8c0f069932c801c83ef1"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/version1-source/test_run_meeting_rag_acceptance.py",
+      "bytes": 43403,
+      "sha256": "18bb0414d540c395a49dfc5fd1c57699e38051135fbbc5eef32d38a5e36cf513"
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 37095,
+      "sha256": "1b6270066e03365104602ec80c8c537e13d24cc01f5ca79d8b7af56eb733df10"
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 46938,
+      "sha256": "d2b495664968ce1c752b9515689e334593b967288de20d5797a68c23a1c88710"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/before-final-check.json",
+      "bytes": 364,
+      "sha256": "bfe4e0208d45e82df96f07be6ad01f291e311ffb8b26471371ba273185b9ea36"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/before-run_meeting_rag_acceptance.py",
+      "bytes": 35497,
+      "sha256": "01e5eb1e3e23c0ab0443b684556225cc56ff278f05ab443b36d205b5a3b9ba8f"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/before-test_run_meeting_rag_acceptance.py",
+      "bytes": 40027,
+      "sha256": "ab6344add0622ed2460daf0a171a1da4cdd1a10678e8be437017121395c071ec"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/ruff.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/source-before.json",
+      "bytes": 332,
+      "sha256": "bbeadc2bbeb6dec51959025e413d43db5f09c188a318b2ef2eebbdaba66cdfba"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/tests-after-fix.log",
+      "bytes": 101,
+      "sha256": "ded011a738984d2b83bf0aa679d7f93096a79b6f11ee2a476706186c8e6a2c3f"
+    },
+    {
+      "path": ".local/service-rag-count-cleanup-fix-v1/tests-before-fix.log",
+      "bytes": 9883,
+      "sha256": "678f8d14ede6ce79b92f25f2f56c48cf87e4dba3e59de84b55415dab63c5e68c"
+    }
+  ],
+  "regressions": [
+    "54+62 units=116 and2 events with unchanged archived values",
+    "Exact return codes0/1/7/-15 with clean proven closure",
+    "Missing/false closed record, owned survivor, Node timeout/forced stop, unconfirmed ownership remain cleanup failure",
+    "Existing observation/kill errors and reused PID boundaries remain tested",
+    "Actual BrowserChild boundary with fake processes: analysis_failed remains failed, cleanup_accepted true and no judge packet",
+    "Late Node None -> 0 succeeds only after cleanup; None -> 1/-15 fails even with accepted cleanup.",
+    "Specific analysis_failed from late first-failure record remains the business failure.",
+    "No packet is present during cleanup or published after cleanup/final binding failure.",
+    "Packet publication elapsed overrun and storage failure preserve the created file, fail status, and forbid judgment."
+  ],
+  "preservation": {
+    "prior_receipt_and_evidence_verified_unchanged": true,
+    "version1_sources_archived_exact": true,
+    "prior_59_pass_log_preserved": true,
+    "new_publication_tests_added_with_fix_not_in_initial_six_failure_run": true
+  },
+  "nonexecution": {
+    "actual_native_tokenizer_java_browser_service_model_maven_network": 0,
+    "evaluation_semantic_reads": 0,
+    "official_reruns": 0,
+    "git": 0
+  },
+  "limitations": [
+    "Synthetic regression proof only; no official consumed phase rerun and no runtime/model quality claim.",
+    "Final judge must require final receipt status mechanical_completed_judgment_pending AND judge_packet_eligible=true, then verify the exact packet binding.",
+    "Packet may exist after a late publication/time failure but remains ineligible. Receipt write failure is a terminal CLI failure; original files are not removed or retried.",
+    "Existing synchronous publication cannot be hard-preempted; elapsed overrun is observed after publication."
+  ],
+  "actual_v2_failure_remains_unchanged": true,
+  "phase1_complete": false,
+  "publication_note": "Parent aggregate LF summary, not an exact byte copy of local receipts."
+}

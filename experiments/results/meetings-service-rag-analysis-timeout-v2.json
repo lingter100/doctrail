@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "kind": "actual_service_rag_analysis_timeout_no_answer_quality_measurement",
+  "recorded_at_utc": "2026-10-22T01:50:13.446340+00:00",
+  "execution_commit": "b218603126e3b474d77e68c27332a2c51068c0db",
+  "implementation_commit": "475c4c7dd538347a208d095671e2211ea0206bf9",
+  "registration_ci": [
+    {
+      "id": 39705995603,
+      "commit": "b218603126e3b474d77e68c27332a2c51068c0db",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39705995603"
+    },
+    {
+      "id": 39705999590,
+      "commit": "b218603126e3b474d77e68c27332a2c51068c0db",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39705999590"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "original_safe_summary": {
+    "path": ".local/meetings-service-rag-calibration-cli-v2/safe-summary-v2.json",
+    "bytes": 14513,
+    "sha256": "1c0161d46a180bd6d184e0441d252b5473df7d6d4b7e14005b04dd1e87d1e7cf"
+  },
+  "original_evidence_index": {
+    "path": ".local/meetings-service-rag-calibration-cli-v2/artifact-index-v2.json",
+    "bytes": 443646,
+    "sha256": "ab4fba84ee94ee4bcacebcf87475eadf748d281d0fdf51b5fc74d2f292887aee"
+  },
+  "original_post_run_verification": {
+    "path": ".local/meetings-service-rag-calibration-cli-v2/post-run-verification-v2.json",
+    "bytes": 569923,
+    "sha256": "3da32115cc66c8bc0361ffb6d19fe4a9b4d0cdbbaed04e198a369e033a44ea8d"
+  },
+  "parent_verification": {
+    "evidence_hashes_verified": 2251,
+    "frozen_toolchain_hashes_verified": 77,
+    "semantic_material_read": false
+  },
+  "status": "failed_during_second_meeting_analysis_run_consumed",
+  "official_command_launches": 1,
+  "cli_exit_code": 1,
+  "cli_wall_seconds": 291.73399999999947,
+  "driver": {
+    "receipt": {
+      "path": ".local/meetings-service-rag-calibration-run-v2/receipt.json",
+      "bytes": 859,
+      "sha256": "ae5aece5fd1b882a81d9962527ebe7ac75bbcfd383dd23d88d237f7df745b6f7"
+    },
+    "artifact_index": {
+      "path": ".local/meetings-service-rag-calibration-run-v2/artifact-index.json",
+      "bytes": 259225,
+      "sha256": "9e9d0049025c28616d004f43bfa85b86221b34a51dbd40c48dde8bb4a224c13d"
+    },
+    "reservation": {
+      "path": ".local/meetings-service-rag-calibration-run-v2/reservation.json",
+      "bytes": 40,
+      "sha256": "8113a802378117eac3b6dadc08aa1f9df7dd7741ce2d919d75b29050466e6998"
+    },
+    "status": "failed",
+    "first_failure_code": "analysis_failed",
+    "first_failure_stage": "analysis",
+    "wall_seconds": 290.125,
+    "original_observer_counts": {
+      "analyze:classification_units": 118,
+      "analyze:error": 1,
+      "analyze:http_status": 550,
+      "analyze:native_attempts": 105,
+      "analyze:native_responses": 104,
+      "analyze:result": 1,
+      "analyze:started": 2,
+      "analyze:template_responses": 223,
+      "analyze:tokenize_responses": 223,
+      "analyze:transport_error": 1,
+      "analyze:transport_request": 551,
+      "analyze:transport_response": 550,
+      "analyze:transport_started": 551
+    },
+    "original_cleanup_accepted": false,
+    "cleanup_seconds": 1.3140249576563292,
+    "prior_browser_cleanup_seconds": 0.20502495765686035,
+    "observer_failure": null,
+    "hard_preemption_proven": false
+  },
+  "startup": {
+    "lifecycle": {
+      "path": ".local/meetings-service-rag-calibration-run-v2/services/lifecycle.json",
+      "bytes": 2832,
+      "sha256": "4e7b197e38755d8d07a8928b486d692d09b9eb3f07a894696a59e9078e07cffa"
+    },
+    "accepted": true,
+    "startup_seconds": 45.48499999999967,
+    "native_attempted": true,
+    "jar_sha256": "8476ba7728f392e62aa53a3999de8d2f08982012dc2a345f503bedb59564976b"
+  },
+  "execution_scope": {
+    "registered_sources": 6,
+    "registered_chunks": 32,
+    "registered_questions": 6,
+    "registered_families": 2,
+    "registered_actors": 2,
+    "actual_upload_artifacts": 2,
+    "analysis_api_operations_started": 2,
+    "analysis_api_operations_ready": 1,
+    "analysis_api_operations_failed": 1,
+    "analysis_api_operations_unexecuted": 2,
+    "sources_not_uploaded": 4,
+    "answer_posts": 0,
+    "answer_native_attempts": 0,
+    "case_states": {
+      "unexecuted": 6,
+      "response_available": 0
+    },
+    "answer_artifact_files": 0,
+    "judge_answer_packet_available": false,
+    "validation_executions": 0,
+    "question_retries": 0,
+    "automatic_retries": 0,
+    "post_terminal_model_or_java_invocations": 0
+  },
+  "analysis": {
+    "segments": [
+      {
+        "ordinal": 1,
+        "declared_classification_units": 54,
+        "native_attempts": 54,
+        "native_responses": 54,
+        "tokenize_requests": 109,
+        "tokenize_responses": 109,
+        "template_requests": 109,
+        "template_responses": 109,
+        "terminal_event": "result",
+        "worker_fixed_error": null,
+        "observer_elapsed_seconds": 113.98499999999967,
+        "api_analysis_status": "ready",
+        "api_fixed_error": null,
+        "api_run_status": "ready",
+        "api_run_fixed_error": null,
+        "api_created_to_completed_seconds": 114.182046,
+        "api_observation_binding": {
+          "path": ".local/meetings-service-rag-calibration-run-v2/browser/analysis-cal-v2-p1-observation-1.json",
+          "bytes": 39365,
+          "sha256": "17a55883725eb79a7926098627a032ea8a7b37598832c89f35c494daa7ba830b"
+        }
+      },
+      {
+        "ordinal": 2,
+        "declared_classification_units": 62,
+        "native_attempts": 51,
+        "native_responses": 50,
+        "tokenize_requests": 114,
+        "tokenize_responses": 114,
+        "template_requests": 114,
+        "template_responses": 114,
+        "terminal_event": "error",
+        "worker_fixed_error": "generation_deadline_exceeded",
+        "observer_elapsed_seconds": 120.04700000000048,
+        "api_analysis_status": "failed",
+        "api_fixed_error": "generation_timeout",
+        "api_run_status": "failed",
+        "api_run_fixed_error": "generation_timeout",
+        "api_created_to_completed_seconds": 120.047235,
+        "api_observation_binding": {
+          "path": ".local/meetings-service-rag-calibration-run-v2/browser/analysis-cal-v2-p2-observation-1.json",
+          "bytes": 20319,
+          "sha256": "2df386ae624c6baa74d678ee299c17288a7b126a14dba43904bd081cb461e3fe"
+        }
+      }
+    ],
+    "fixed_worker_error": "generation_deadline_exceeded",
+    "fixed_api_error": "generation_timeout",
+    "failure_transport_path": "/completion",
+    "failure_http_status": null,
+    "failure_http_status_availability": "not_observed",
+    "failure_body_available": false,
+    "raw_fixed_error_bindings": [
+      {
+        "binding": {
+          "path": ".local/meetings-service-rag-calibration-run-v2/raw/002207.json",
+          "bytes": 247,
+          "sha256": "a4d5f77f37e47323be8081c037f690865e844ec48da7ea8de64638c7830f07e4"
+        },
+        "operation": "analyze",
+        "event": "transport_error",
+        "fixed_fields": {
+          "code": "generation_deadline_exceeded",
+          "path": "/completion",
+          "status": null,
+          "body_available": false,
+          "parsed_json_available": false,
+          "archive_failed": false
+        }
+      },
+      {
+        "binding": {
+          "path": ".local/meetings-service-rag-calibration-run-v2/raw/002208.json",
+          "bytes": 125,
+          "sha256": "086835d22a2e33dae5e7df9295c72638c14d39a5f33b8e148b0425ba62581736"
+        },
+        "operation": "analyze",
+        "event": "error",
+        "fixed_fields": {
+          "code": "generation_deadline_exceeded"
+        }
+      }
+    ],
+    "counts": {
+      "raw_declared_classification_units": 116,
+      "classification_units_event_count": 2,
+      "original_driver_classification_units_counter": 118,
+      "fixed_code_explanation": "Evidence adds each classification_units value and then increments that same event key once. Preserve original 118; raw values 54 + 62 sum to 116.",
+      "native_attempts": 105,
+      "native_responses": 104,
+      "tokenize_requests": 223,
+      "tokenize_responses": 223,
+      "template_requests": 223,
+      "template_responses": 223,
+      "classification_completed_unit_counter": "No dedicated per-unit acceptance event. Report 54/50 successful native responses separately; do not equate this with semantic quality.",
+      "label_token_limit": 4,
+      "label_token_limit_is_not_call_limit": true
+    },
+    "analysis_budget_seconds_per_operation": 120,
+    "interpretation": "Second operation exhausted its analysis generation deadline. Preserve successful first analysis and failed second separately; first ready status is not human or semantic acceptance."
+  },
+  "resource_verification": {
+    "post_run_verification": {
+      "path": ".local/meetings-service-rag-calibration-cli-v2/post-run-verification-v2.json",
+      "bytes": 569923,
+      "sha256": "3da32115cc66c8bc0361ffb6d19fe4a9b4d0cdbbaed04e198a369e033a44ea8d"
+    },
+    "observed_child_process_count": 21,
+    "wrapper_checked": true,
+    "original_owned_processes_remaining": 0,
+    "matching_project_or_native_runtime_processes": 0,
+    "leases_available_unchanged": 3,
+    "pid_reuse_observed": [
+      38036
+    ],
+    "post_terminal_termination_actions": 0,
+    "launcher_cleanup_accepted": true,
+    "launcher_cleanup_seconds": 1.0780000000004293,
+    "native_absence_confirmed": true,
+    "browser_closed": true,
+    "browser_owned_exit_errors": [],
+    "browser_node_exited": true,
+    "node_exact_exit_code": null,
+    "node_exact_exit_code_availability": "not_persisted_by_original_driver",
+    "original_driver_cleanup_accepted": false,
+    "original_driver_cleanup_seconds": 1.3140249576563292,
+    "within_five_seconds": true,
+    "cleanup_interpretation": "Actual post-run resource absence is verified separately. Original driver cleanup false is preserved; finish also tests Node exit code zero, but the exact Node return code was not recorded.",
+    "exclusive_java_gpu_model_slot_returned": true,
+    "head_source_hold_ready_to_release": true
+  },
+  "post_run_inputs": {
+    "all_bound_hashes_passed": true,
+    "registered_plan_sha256": "b7d80c64051802278de09d5fc732aaa9035b8bbe9401d489beb6cc3f93235aa2",
+    "groups": {
+      "source_freeze_files": {
+        "count": 64,
+        "passed": 64
+      },
+      "item_freeze_files": {
+        "count": 10,
+        "passed": 10
+      },
+      "exact_fixed_code": {
+        "count": 48,
+        "passed": 48
+      },
+      "jar": {
+        "count": 1,
+        "passed": 1
+      },
+      "ui": {
+        "count": 4,
+        "passed": 4
+      },
+      "preparation_inputs": {
+        "count": 16,
+        "passed": 16
+      },
+      "prepared_java_readbacks": {
+        "count": 6,
+        "passed": 6
+      },
+      "registered_outputs": {
+        "count": 2,
+        "passed": 2
+      },
+      "original_v1_evidence": {
+        "count": 14,
+        "passed": 14
+      },
+      "official_v2_artifact_index": {
+        "count": 2241,
+        "passed": 2241
+      },
+      "registered_v2_new3": {
+        "count": 3,
+        "passed": 3
+      }
+    },
+    "manifest_sha256": "0b06bae58741e3cc5656879bd6f4e955d81e0ae866fdd9eb53ec87c54ff402f0",
+    "source_item_question_order_and_bytes_unchanged": true
+  },
+  "prior_v1_preserved": {
+    "safe_summary": {
+      "path": ".local/meetings-service-rag-calibration-cli-v1/safe-summary-v1.json",
+      "bytes": 7960,
+      "sha256": "f5de6213b098d4d15fe1643b7b0f1807cba173255069da73b8a920cf2fb4b8f4"
+    },
+    "status": "failed_before_service_ready_run_consumed",
+    "official_launches": 1,
+    "cli_wall_seconds": 1.7029999999999745,
+    "driver_wall_seconds": 0.40599999999994907,
+    "startup_seconds": 0.21900000000005093,
+    "native_attempted": false,
+    "answer_posts": 0,
+    "case_states": {
+      "unexecuted": 6,
+      "response_available": 0
+    },
+    "original_observer_counts": {},
+    "original_observer_counts_availability": "unavailable_empty_object"
+  },
+  "limitations": [
+    "No semantic source, classification labels, analysis text, prompts, model output, or answers are included in this report.",
+    "Raw parsed observer artifacts are retained unchanged; classification response counts are not semantic acceptance.",
+    "Post-terminal checks did not invoke Java, model, tokenizer, service, browser, network, Git, or diagnostic inference.",
+    "Process sampling may omit short-lived children; driver-owned PID identities were cross-matched with capture samples.",
+    "Original v1 and v2 failures remain consumed; no automatic third attempt is authorized.",
+    "No native answer/retrieval/citation quality result exists because the first answer was never attempted.",
+    "Original driver cleanup rejection remains a failed operational result even though later resource absence was verified.",
+    "Raw declared units are 116; original aggregate118 includes two event-count increments. Both are preserved.",
+    "Exact Node exit code and timed-out native response body/status are unavailable, not inferred."
+  ],
+  "next_action": {
+    "old_runs_consumed": [
+      "v1",
+      "v2"
+    ],
+    "third_official_execution_authorized": false,
+    "generic_observer_fixes": [
+      "separate unit total from event count",
+      "separate task failure from cleanup and record exact Node exit code"
+    ],
+    "analysis_candidate": "new full-coverage bounded batch classifier; design and tests pending",
+    "quality_claim": false
+  },
+  "publication_note": "LF aggregate metadata summary; not an exact byte copy of local evidence."
+}

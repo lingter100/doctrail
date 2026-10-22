@@ -800,3 +800,137 @@ def test_analysis_waits_for_detail_then_scoped_ready_badge():
     result = subprocess.run([node, "--input-type=module", "-e", source], capture_output=True,
                             timeout=15, check=False)
     assert result.returncode == 0, result.stderr.decode()
+
+
+def test_classification_unit_sum_is_separate_from_observation_count(fixture):
+    evidence = sink(fixture)
+    for source_id, units in (("s1", 54), ("s2", 62)):
+        current(fixture, "analyze", source_id)
+        source = next(s for s in fixture.manifest["plan"]["sources"] if s["source_id"] == source_id)
+        evidence("analyze", "started", {"content": Path(source["raw"]["path"]).read_text()})
+        evidence("analyze", "classification_units", units)
+    assert evidence.counts["analyze:classification_units"] == 116
+    assert evidence.counts["analyze:classification_units_events"] == 2
+    records = [driver.read_json(p) for p in sorted((fixture.run / "raw").glob("*.json"))]
+    assert [r["value"] for r in records if r["event"] == "classification_units"] == [54, 62]
+
+
+@pytest.mark.parametrize("returncode", [0, 1, 7, -15])
+def test_closed_owned_browser_cleanup_is_independent_of_business_exit(owned_browser, returncode):
+    rig = owned_browser
+    rig.child.poll()
+    rig.node.live = rig.chromium.live = rig.grandchild.live = False
+    rig.child.process.returncode = returncode
+    rig.child.process.poll = lambda: returncode
+    rig.child.process.wait = lambda timeout: returncode
+    driver.save(rig.folder / "browser-closed.json", {"closed": True})
+    assert rig.child.finish(105, lambda: 100) is True
+    record = driver.read_json(rig.folder / "owned-exit.json")
+    assert record["node_returncode"] == returncode
+    assert record["node_exited"] is True and record["errors"] == []
+    assert rig.killed == []
+
+
+@pytest.mark.parametrize("problem", ["closed_missing", "closed_false", "owned_alive", "node_alive",
+                                     "ownership_unconfirmed"])
+def test_business_exit_does_not_mask_missing_cleanup_proof(owned_browser, problem):
+    rig = owned_browser
+    rig.child.poll()
+    rig.node.live = rig.chromium.live = rig.grandchild.live = False
+    if problem != "closed_missing":
+        driver.save(rig.folder / "browser-closed.json", {"closed": problem != "closed_false"})
+    if problem == "owned_alive":
+        rig.grandchild.live = True
+    if problem == "node_alive":
+        rig.node.live = True
+    if problem == "ownership_unconfirmed":
+        rig.child.ownership_confirmed = False
+    assert rig.child.finish(105, lambda: 100) is False
+
+
+def test_analysis_failure_remains_failed_when_real_browser_boundary_cleanup_passes(fixture,
+                                                                                owned_browser):
+    fake, rig = FakeRun(fixture), owned_browser
+    rig.child.poll()
+    rig.node.live = rig.chromium.live = rig.grandchild.live = False
+    def browser(config, folder):
+        rig.child.folder = folder
+        driver.save(folder / "browser-closed.json", {"closed": True})
+        driver.save(folder / "first-failure.json", {"code": "analysis_failed", "stage": "analysis",
+                    "id": "s2", "epoch_ms": 1000, "elapsed_ms": 5})
+        return rig.child
+    result = driver.execute(fixture.path, "calibration", fixture.run, service_factory=fake.service,
+        browser_factory=browser, clock=lambda: fake.now)
+    assert result["cleanup_accepted"] is True
+    assert result["status"] == "failed" and result["failure"] == "analysis_failed"
+    assert result["browser_failure"]["code"] == "analysis_failed"
+    assert not (fixture.run / "judge-answer-packet.json").exists()
+
+
+@pytest.mark.parametrize("returncode,first_failure", [(0, None), (1, None), (-15, None),
+                                                    (1, "analysis_failed")])
+def test_late_node_exit_controls_business_result_not_cleanup(fixture, returncode, first_failure):
+    fake = FakeRun(fixture)
+    packet_present_during_cleanup = []
+    def browser(config, folder):
+        child = fake.browser(config, folder)
+        child.process.returncode = None
+        child.poll = lambda: None
+        child.closing = lambda: True
+        original_finish = child.finish
+        def finish(deadline, clock):
+            packet_present_during_cleanup.append((fixture.run / "judge-answer-packet.json").exists())
+            child.process.returncode = returncode
+            if first_failure:
+                driver.save(folder / "first-failure.json", {"code": first_failure,
+                    "stage": "analysis", "id": "s2", "epoch_ms": 1000, "elapsed_ms": 5})
+            return original_finish(deadline, clock)
+        child.finish = finish
+        return child
+    result = driver.execute(fixture.path, "calibration", fixture.run, service_factory=fake.service,
+        browser_factory=browser, clock=lambda: fake.now)
+    assert result["cleanup_accepted"] is True
+    assert packet_present_during_cleanup == [False]
+    if returncode == 0:
+        assert result["status"] == "mechanical_completed_judgment_pending"
+        assert result["judge_packet_eligible"] is True
+        assert (fixture.run / "judge-answer-packet.json").exists()
+    else:
+        assert result["status"] == "failed"
+        assert result["failure"] == (first_failure or "browser_failed")
+        assert result["judge_packet_eligible"] is False
+        assert not (fixture.run / "judge-answer-packet.json").exists()
+
+
+@pytest.mark.parametrize("failure", ["cleanup", "final_binding"])
+def test_judge_packet_is_not_published_when_final_gate_fails(fixture, failure):
+    fake = FakeRun(fixture, browser_survives=failure == "cleanup", changed=failure == "final_binding")
+    result = driver.execute(fixture.path, "calibration", fixture.run, service_factory=fake.service,
+        browser_factory=fake.browser, clock=lambda: fake.now)
+    assert result["status"] == "failed"
+    assert not (fixture.run / "judge-answer-packet.json").exists()
+
+
+@pytest.mark.parametrize("failure", ["elapsed", "write"])
+def test_packet_publication_failure_preserves_file_but_forbids_judgment(fixture, monkeypatch, failure):
+    fake = FakeRun(fixture)
+    original = driver.save
+    def publication(path, value):
+        original(path, value)
+        if path.name == "judge-answer-packet.json":
+            if failure == "elapsed":
+                fake.now += 1626
+            else:
+                raise OSError("synthetic publication storage failure")
+    monkeypatch.setattr(driver, "save", publication)
+    result = driver.execute(fixture.path, "calibration", fixture.run, service_factory=fake.service,
+        browser_factory=fake.browser, clock=lambda: fake.now)
+    assert (fixture.run / "judge-answer-packet.json").exists()
+    assert result["status"] == "failed" and result["judge_packet_eligible"] is False
+    assert result["cleanup_accepted"] is True
+    if failure == "elapsed":
+        assert result["window_exceeded"] is True and result["wall_seconds"] > 1625
+        packet = (fixture.run / "judge-answer-packet.json").read_bytes()
+        assert result["judge_packet"]["sha256"] == driver.digest(packet)
+    else:
+        assert result["failure"] == "evidence_write_failed"

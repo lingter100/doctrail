@@ -244,7 +244,10 @@ class Evidence:
                         operation == "analyze" and event == "transport_response"
                         and value["path"] in {"/completion", "/v1/chat/completions"}):
                     self.completed_native[operation, key] = self.completed_native.get((operation, key), 0) + 1
-                self.counts[operation + ":" + event] = self.counts.get(operation + ":" + event, 0) + 1
+                event_key = operation + ":" + event
+                if event == "classification_units":
+                    event_key += "_events"
+                self.counts[event_key] = self.counts.get(event_key, 0) + 1
                 if operation == "answer" and event == "worker_response":
                     self.responses[key] = value
                 save(self.folder / "raw" / f"{self.sequence:06d}.json",
@@ -468,13 +471,14 @@ class BrowserChild:
                 pass
             except Exception:  # noqa: BLE001
                 errors.append("browser_descendant_observation_failed")
+        node_returncode = self.process.poll()
         save(self.folder / "owned-exit.json", {
             "ownership_confirmed": self.ownership_confirmed, "errors": errors,
-            "node_exited": self.process.poll() is not None,
+            "node_exited": node_returncode is not None, "node_returncode": node_returncode,
             "owned": [{"pid": pid, "create_time": created}
                       for pid, created in self.descendants]})
         closed = self.folder / "browser-closed.json"
-        return (not errors and self.process.returncode == 0 and closed.exists()
+        return (not errors and node_returncode is not None and closed.exists()
                 and read_json(closed).get("closed") is True)
 
 
@@ -488,10 +492,11 @@ def execute(manifest_path, phase, run_dir, *, service_factory=start_services,
     raw.mkdir()
     browser_folder = run_dir / "browser"
     browser_folder.mkdir()
-    metrics, summary = {}, {"phase": phase, "status": "failed", "hard_preemption_proven": False}
+    metrics, summary = {}, {"phase": phase, "status": "failed", "hard_preemption_proven": False,
+                            "judge_packet_eligible": False}
     service = child = context = evidence = None
     entered = False
-    manifest = questions = browser = None
+    manifest = questions = browser = packet = None
     cleanup_started = None
     try:
         manifest_bytes = Path(manifest_path).read_bytes()
@@ -547,7 +552,6 @@ def execute(manifest_path, phase, run_dir, *, service_factory=start_services,
                 "browser_failed")
         browser = read_json(browser_folder / "result.json")
         packet = reconcile(browser, evidence, questions)
-        save(run_dir / "judge-answer-packet.json", packet)
         require(clock() < evidence.deadline, "active_timeout")
         summary["status"] = "mechanical_completed_judgment_pending"
         summary["active_seconds"] = clock() - ready
@@ -581,6 +585,11 @@ def execute(manifest_path, phase, run_dir, *, service_factory=start_services,
                 context.__exit__(None, None, None)
             except Exception:  # noqa: BLE001
                 cleanup_ok = False
+        if child is not None:
+            summary["node_returncode"] = child.process.returncode
+            if child.process.returncode != 0:
+                summary["status"] = "failed"
+                summary.setdefault("failure", "browser_failed")
         prior = metrics.get("cleanup", {}).get("prior_native_cleanup_seconds", 0)
         # Failed __enter__ may have already performed the entire launcher cleanup.
         if context is not None and not entered:
@@ -645,6 +654,23 @@ def execute(manifest_path, phase, run_dir, *, service_factory=start_services,
         summary["wall_seconds"] = clock() - started
         if summary["wall_seconds"] > 1625:
             summary.update(status="failed", window_exceeded=True)
+        if summary["status"] == "mechanical_completed_judgment_pending" and packet is not None:
+            # Publish only after final task, cleanup and binding checks. The existing index
+            # remains immutable; this late packet has its own exact binding in the receipt.
+            try:
+                packet_path = run_dir / "judge-answer-packet.json"
+                save(packet_path, packet)
+                packet_bytes = packet_path.read_bytes()
+                summary["judge_packet"] = {"path": packet_path.name, "bytes": len(packet_bytes),
+                                           "sha256": digest(packet_bytes)}
+            except Exception:  # noqa: BLE001 - preserve any partial original, never retry
+                summary["status"] = "failed"
+                summary.setdefault("failure", "evidence_write_failed")
+            summary["wall_seconds"] = clock() - started
+            if summary["wall_seconds"] > 1625:
+                summary.update(status="failed", window_exceeded=True)
+            summary["judge_packet_eligible"] = (
+                summary["status"] == "mechanical_completed_judgment_pending")
         save(run_dir / "receipt.json", summary)
     return summary
 
