@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-22 · 분류와 분리한 요약·제목 조립 후보 설계 수용
+
+기존 Astra xhigh가 [새 조립 후보 설계](MEETINGS-EXTRACTION-COVERAGE-PLAN.md)71줄/13,051B(e3f93bfc)를 반환했고 부모가 전체 읽었다. generic 코드에서 기존 action우선 첫4개 선택과 제한된 제목 형식 투영을 확인했지만 실제 누락2건의 변환 trace는 읽지 않았다. 명시적 coverage-v1을 batch-v2에만 결합하고 default legacy와 frozen77·기존분류 prompt/grammar는 보존한다. 같은4개 요약 슬롯을 유형별로 순환해 고르고 model label1의 literal 제목만 확장한다. 요약 충분성은 가설이며 분류10개/확약3개 오류는 별도다.
+
+01bcb66 기대값 수정은 사용자 계정으로 push했고 원격 author/committer lingter100을 확인했다. Push39728455615/PR39728460798 CI는 진행 중이다. 설계를 먼저 commit한 뒤 같은 Astra high 구현 담당에게 NEW module/test2부터 배정하고 독립 읽기 검토 후 service/launcher/driver/test8 연결을 이어간다. 현재 Java/GPU 실행은 없다.
+
+코드 검증·정확한 CI 이후 별도 명시 배정으로 기존159개의 실제 분류와 정확한 unit mapping을 쓰는 NEW offline 조립 비교를 계획한다. 원문 재분할/tokenizer/모델/Java 호출 없이 후처리 효과를 분리하고, 잠긴 원문 판단과 기대 의미를 바꾸지 않는다. 이는 설계이며 아직 replay나 새 native 실행을 시작하지 않았다. 원래 실패·공식 평가 격리는 유지한다.
+
 ## 2026-10-22 · 기존 지식검색 기대값 한 곳 수정
 
 같은 구현 담당이 meeting-unavailable.spec.ts의 지식검색 안내 기대값1곳만 새 동작과 맞췄다. 공용 회의분석 기대값과 제품5개·JAR/UI5개는 그대로다. 타입 검사와 실제 Java 해당2개 검사(12.9초)를 통과했고 테스트 JVM은 종료됐다. 부모가 증거/제품/바이너리24개와 정확한1치환·보고서를 확인했다. [원래 CI 실패와 좁은 수정](../experiments/results/knowledge-answer-recovery-ci-fix-v1.json)을 기록하며 다음 정확한 CI는 아직 대기다. 전체 로컬 suite나 실제 모델을 재실행하지 않았다.
