@@ -3,6 +3,7 @@ import copy
 import json
 import threading
 import time
+from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -16,6 +17,7 @@ from doctrail.meeting_qwen35 import NONTHINKING_PREAMBLE, Qwen35Generator
 from doctrail.meeting_runtime import DEADLINE_SECONDS as EXTRACTION_SECONDS
 from doctrail.meeting_service_rag import (
     BUDGET_HEADER,
+    ObservedBatchedAnalysisGenerator,
     ServiceAnswerGenerator,
     ServiceRuntime,
     create_app,
@@ -292,3 +294,166 @@ def test_timeout_cleanup_failure_is_http_error_and_cannot_reenter():
         count = len(seen)
         response = client.post("/answer", json=PAYLOAD, headers=headers())
         assert response.status_code == 503 and len(seen) == count
+
+
+@pytest.fixture
+def batch_runtime():
+    from test_meeting_analysis_batch import Native
+
+    from doctrail.meeting_analysis_batch import BatchedAnalysisGenerator
+    rigs = []
+    def build(observer=None):
+        native = Native()
+        native.generator.close()
+        def handle(request):
+            body = json.loads(request.content)
+            if request.url.path == "/apply-template" and "TARGETS" not in json.loads(
+                    body["messages"][-1]["content"]):
+                return httpx.Response(200, json={"prompt": "partition" + NONTHINKING_PREAMBLE})
+            if request.url.path == "/tokenize" and body["content"].startswith("partition"):
+                return httpx.Response(200, json={"tokens": [0] * 10})
+            return native.handle(request)
+        cls = BatchedAnalysisGenerator if observer is None else ObservedBatchedAnalysisGenerator
+        options = {} if observer is None else {"observer": observer}
+        native.generator = cls("http://127.0.0.1:19003", TOKEN, "unused-synthetic",
+            transport=httpx.MockTransport(handle), **options)
+        native.generator._alias = GGUF_SHA256
+        native.generator._metadata = copy.deepcopy(METADATA)
+        answer = SimpleNamespace(public_metadata=lambda: copy.deepcopy(METADATA), close=lambda: None)
+        service = ServiceRuntime(answer, native.generator, cleanup=lambda: True, observer=observer)
+        rigs.append(service)
+        return service, native
+    yield build
+    for service in rigs:
+        service.close()
+
+
+@pytest.mark.parametrize("observed", [False, True])
+def test_batch_actual_meeting_runtime_preserves_all_units_offsets_and_extracts_summary(
+        batch_runtime, observed):
+    from doctrail.meeting_contract import meeting_units
+    from doctrail.meeting_worker import classification_messages
+    events = []
+    observer = (lambda op, event, value: events.append((event, value))) if observed else None
+    service, native = batch_runtime(observer)
+    content = "## Purpose\nReview every option.\n" + "\n".join(
+        f"Task {i}: prepare the synthetic report." for i in range(10))
+    units = meeting_units(content)
+    targets = [json.loads(classification_messages(u)[-1]["content"])["TARGET"] for u in units]
+    native.response = lambda ids: json.dumps([[i, 4 if targets[i].startswith("Purpose:") else 9]
+                                             for i in ids])
+    result = service.analyze(AnalyzeRequest(schema_version=1, document_id="synthetic",
+        revision=1, title="Synthetic", content=content))
+    assert [r["TARGET"] for b in native.batches for r in b] == targets
+    assert [r["id"] for b in native.batches for r in b] == list(range(len(units)))
+    analysis = result["analysis"]
+    for item in [*analysis["items"], *analysis["metadata_evidence"], *analysis["summary_evidence"]]:
+        assert content[item["start_offset"]:item["end_offset"]] == item["quote"]
+    assert len(analysis["items"]) + len(analysis["metadata_evidence"]) == len(units)
+    assert len(analysis["summary_evidence"]) == 4
+    assert analysis["summary"] == "\n".join(e["quote"] for e in analysis["summary_evidence"])
+    assert analysis["metadata_evidence"][0]["quote"].startswith("## Purpose\n")
+    assert service.health()["extraction"]["classification"]["policy"] == "batch-v1"
+    assert not native.generator._cache and native.generator.service_deadline is None
+    if observed:
+        assert [value for event, value in events if event == "classification_units"] == [len(units)]
+        assert [value["ids"] for event, value in events if event == "classification_batch"] == [
+            [r["id"] for r in batch] for batch in native.batches]
+        assert sum(event == "transport_started" and value["path"] == "/completion"
+                   for event, value in events) == len(native.batches)
+
+
+def test_later_singleton_overflow_fails_entire_analysis_without_retry(batch_runtime):
+    service, native = batch_runtime()
+    native.size = lambda rows: 4097 if any(row["id"] == 8 for row in rows) else 100
+    with pytest.raises(WorkerError, match="generation_input_limit"):
+        service.analyze(AnalyzeRequest(schema_version=1, document_id="synthetic", revision=1,
+            title="Synthetic", content="\n".join(f"Task {i}." for i in range(17))))
+    assert [[r["id"] for r in b] for b in native.batches] == [list(range(8))]
+    assert not native.generator._cache
+
+
+@pytest.mark.parametrize("event", ["classification_batch", "transport_response"])
+def test_observer_storage_failure_stops_batch_native_without_partial_result(batch_runtime, event):
+    records = []
+    def observe(op, kind, value):
+        records.append(kind)
+        if kind == event:
+            raise OSError("synthetic archive failure")
+    service, native = batch_runtime(observe)
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.analyze(AnalyzeRequest.model_validate(ANALYZE))
+    assert native.batches == []
+    assert not native.generator._cache and native.generator.service_deadline is None
+    assert service._poisoned
+
+
+@pytest.mark.parametrize("observed", [False, True])
+def test_batch_preparation_consumes_original_outer_deadline(batch_runtime, monkeypatch, observed):
+    from doctrail.meeting_analysis_batch import batch_messages
+    now = [100.0]
+    monkeypatch.setattr(time, "monotonic", lambda: now[0])
+    def observer(op, event, value):
+        if event == "started":
+            now[0] += 50
+    service, native = batch_runtime(observer if observed else None)
+    original = service.analysis.analyze
+    def analyze(request):
+        # All preprocessing shares the outer deadline, even when the inner runtime starts later.
+        now[0] += 40
+        assert native.generator._remaining(340) == (30 if observed else 80)
+        native.generator._prepare(batch_messages([{"id": 0, "TARGET": "synthetic"}]), 340)
+        now[0] = 221
+        return original(request)
+    service.analysis.analyze = analyze
+    with pytest.raises(WorkerError, match="generation_deadline_exceeded"):
+        service.analyze(AnalyzeRequest.model_validate(ANALYZE))
+    assert native.batches == [] and not native.generator._cache
+
+
+@pytest.mark.parametrize("policy,observed", [("single", False), ("single", True),
+                                           ("batch-v1", False), ("batch-v1", True)])
+def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatch, policy, observed):
+    import doctrail.meeting_service_rag as module
+    from doctrail.meeting_analysis_batch import BatchedAnalysisGenerator
+    def load(self):
+        self._metadata = copy.deepcopy(METADATA)
+        return self
+    monkeypatch.setattr(module.ServiceAnswerGenerator, "load", load)
+    monkeypatch.setattr(module.Qwen35Generator, "load", load)
+    service = module.load_runtime(SimpleNamespace(url="http://127.0.0.1:19003", token=TOKEN,
+        manifest="unused"), cleanup=lambda: True, startup_deadline=time.monotonic() + 30,
+        analysis_policy=policy, observer=(lambda *args: None) if observed else None)
+    try:
+        assert isinstance(service.analysis.generator, BatchedAnalysisGenerator) == (policy == "batch-v1")
+        assert isinstance(service.analysis.generator, module.ObservedAnalysisGenerator) == observed
+        assert service.health()["extraction"]["classification"]["policy"] == policy
+    finally:
+        service.close()
+
+def test_completed_batch_archive_failure_blocks_all_later_batches(batch_runtime):
+    errors = []
+    def observer(op, event, value):
+        if event == "transport_response" and value["path"] == "/completion":
+            raise OSError("synthetic sink failure after complete parsed body")
+        if event == "transport_error":
+            errors.append(value)
+    service, native = batch_runtime(observer)
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.analyze(AnalyzeRequest(schema_version=1, document_id="synthetic", revision=1,
+            title="Synthetic", content="\n".join(f"Task {i}." for i in range(20))))
+    assert len(native.batches) == 1
+    assert errors[-1]["parsed_json_available"] is True and errors[-1]["archive_failed"] is True
+    assert not native.generator._cache and service._poisoned
+
+
+def test_batch_mapping_observer_time_cannot_renew_deadline(batch_runtime, monkeypatch):
+    now = [100.0]
+    monkeypatch.setattr(time, "monotonic", lambda: now[0])
+    def observer(op, event, value):
+        if event == "classification_batch":
+            now[0] += 121
+    service, native = batch_runtime(observer)
+    with pytest.raises(WorkerError, match="generation_deadline_exceeded"):
+        service.analyze(AnalyzeRequest.model_validate(ANALYZE))
+    assert native.batches == [] and not native.generator._cache

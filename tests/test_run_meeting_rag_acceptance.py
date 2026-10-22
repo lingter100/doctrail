@@ -934,3 +934,127 @@ def test_packet_publication_failure_preserves_file_but_forbids_judgment(fixture,
         assert result["judge_packet"]["sha256"] == driver.digest(packet)
     else:
         assert result["failure"] == "evidence_write_failed"
+
+
+def register_analysis_policy(fixture, policy="batch-v1", *, adapter=True, registered=True):
+    plan = fixture.manifest["plan"]
+    plan["analysis_policy"] = policy
+    if registered:
+        fixture.registration["policy"]["analysis_policy"] = policy
+    plan["code"] = [row for row in plan["code"]
+                    if Path(row["path"]).name != "meeting_analysis_batch.py"]
+    if adapter:
+        plan["code"].append(binding(driver.ROOT / "src/doctrail/meeting_analysis_batch.py"))
+    ci = driver.read_json(plan["ci"]["path"])
+    ci["code"] = plan["code"]
+    plan["ci"] = write(fixture.tmp / "ci.json", ci)
+    fixture.registration["accepted_bindings"]["ci"] = plan["ci"]["sha256"]
+    reregister(fixture)
+
+
+@pytest.mark.parametrize("policy", [None, "single", "batch-v1"])
+def test_registered_analysis_policy_reaches_service_factory(fixture, policy):
+    if policy is not None:
+        register_analysis_policy(fixture, policy)
+    fake = FakeRun(fixture)
+    seen = []
+    def service(**kwargs):
+        seen.append(kwargs["analysis_policy"])
+        return fake.service(**kwargs)
+    result = driver.execute(fixture.path, "calibration", fixture.run, service_factory=service,
+                            browser_factory=fake.browser, clock=lambda: fake.now)
+    assert result["status"] == "mechanical_completed_judgment_pending"
+    assert seen == [policy or "single"] and result["analysis_policy"] == (policy or "single")
+
+
+@pytest.mark.parametrize("fault,expected", [("unregistered", "policy_mismatch"),
+    ("adapter_missing", "code_binding_missing"), ("unknown", "policy_mismatch"),
+    ("registration_only", "policy_mismatch"), ("adapter_changed", "binding_changed")])
+def test_batch_requires_explicit_registered_policy_and_exact_adapter_binding(fixture, fault, expected):
+    register_analysis_policy(fixture, "auto" if fault == "unknown" else "batch-v1",
+                             adapter=fault != "adapter_missing", registered=fault != "unregistered")
+    if fault == "registration_only":
+        del fixture.manifest["plan"]["analysis_policy"]
+        reregister(fixture)
+    if fault == "adapter_changed":
+        plan = fixture.manifest["plan"]
+        plan["code"][-1]["sha256"] = "0" * 64
+        ci = driver.read_json(plan["ci"]["path"])
+        ci["code"] = plan["code"]
+        plan["ci"] = write(fixture.tmp / "ci.json", ci)
+        fixture.registration["accepted_bindings"]["ci"] = plan["ci"]["sha256"]
+        reregister(fixture)
+    result = driver.execute(fixture.path, "calibration", fixture.run,
+        service_factory=lambda **kwargs: pytest.fail("unregistered policy started service"))
+    assert result["status"] == "failed" and result["failure"] == expected
+
+
+def test_classification_units_events_and_batches_are_separate(fixture):
+    evidence = sink(fixture)
+    current(fixture, "analyze", "s1")
+    source = fixture.manifest["plan"]["sources"][1]
+    evidence("analyze", "started", {"content": Path(source["raw"]["path"]).read_text()})
+    evidence("analyze", "classification_units", 9)
+    for ids in (list(range(8)), [8]):
+        evidence("analyze", "classification_batch", {"ids": ids, "grammar_sha256": "a" * 64,
+                                                    "input_tokens": 100})
+    assert evidence.counts["analyze:classification_units"] == 9
+    assert evidence.counts["analyze:classification_units_events"] == 1
+    assert evidence.counts["analyze:classification_batch"] == 2
+
+
+@pytest.mark.parametrize("policy", [None, "single", "batch-v1"])
+@pytest.mark.parametrize("fault", ["missing", "changed"])
+def test_every_effective_policy_pins_loaded_batch_dependency(fixture, policy, fault):
+    register_analysis_policy(fixture, policy or "single", adapter=fault != "missing")
+    plan = fixture.manifest["plan"]
+    if policy is None:
+        del plan["analysis_policy"]
+        del fixture.registration["policy"]["analysis_policy"]
+    if fault == "changed":
+        plan["code"][-1]["sha256"] = "0" * 64
+    ci = driver.read_json(plan["ci"]["path"])
+    ci["code"] = plan["code"]
+    plan["ci"] = write(fixture.tmp / "ci.json", ci)
+    fixture.registration["accepted_bindings"]["ci"] = plan["ci"]["sha256"]
+    reregister(fixture)
+    result = driver.execute(fixture.path, "calibration", fixture.run,
+        service_factory=lambda **kwargs: pytest.fail("unbound loaded dependency started service"))
+    expected = "code_binding_missing" if fault == "missing" else "binding_changed"
+    assert result["status"] == "failed" and result["failure"] == expected
+
+
+@pytest.mark.parametrize("policy,gate_policy,accepted", [
+    (None, None, True), (None, "single", True), ("single", None, True),
+    ("single", "single", True), ("batch-v1", "batch-v1", True),
+    (None, "batch-v1", False), ("single", "batch-v1", False),
+    ("batch-v1", None, False), ("batch-v1", "single", False),
+    ("single", "auto", False), ("batch-v1", "auto", False)])
+def test_validation_gate_requires_same_effective_analysis_policy(fixture, policy, gate_policy,
+                                                               accepted):
+    if policy is not None:
+        register_analysis_policy(fixture, policy)
+    plan = fixture.manifest["plan"]
+    fixture.manifest["phase"] = fixture.registration["phase"] = "validation"
+    questions = fixture.questions
+    questions["phase"] = "validation"
+    questions["cases"].extend([{**questions["cases"][3], "id": f"c{i}"} for i in (6, 7)])
+    plan["questions"] = write(fixture.tmp / "questions.json", questions)
+    roles = driver.read_json(plan["roles"]["path"])
+    roles["executor"]["phase"] = roles["final_judge"]["phase"] = "validation"
+    plan["roles"] = write(fixture.tmp / "roles.json", roles)
+    fixture.registration["accepted_bindings"]["roles"] = plan["roles"]["sha256"]
+    gate = {"phase": "calibration", "answers_total": 6, "answers_passed": 6,
+            "judgment_locked": True, "operational_accepted": True, "cleanup_accepted": True,
+            "code": plan["code"], "judge_lock_sha256": "a" * 64, "run_receipt_sha256": "b" * 64}
+    if gate_policy is not None:
+        gate["analysis_policy"] = gate_policy
+    plan["gate"] = write(fixture.tmp / "gate.json", gate)
+    fixture.registration["gate_sha256"] = plan["gate"]["sha256"]
+    reregister(fixture)
+    if accepted:
+        assert driver.verify_inputs(fixture.manifest, "validation", fixture.run) == questions
+    else:
+        result = driver.execute(fixture.path, "validation", fixture.run,
+            service_factory=lambda **kwargs: pytest.fail("cross-policy gate started service"))
+        assert result["status"] == "failed" and result["failure"] == "calibration_gate_rejected"

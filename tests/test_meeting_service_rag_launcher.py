@@ -7,7 +7,8 @@ import pytest
 from scripts import serve_meeting_service_rag as launcher
 
 
-def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_path):
+@pytest.mark.parametrize("policy", ["single", "batch-v1"])
+def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_path, policy):
     events, metrics = [], {}
     native = SimpleNamespace(process=object(), drain=object(), cleanup={})
     @contextmanager
@@ -32,8 +33,9 @@ def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_p
             if not self.closed:
                 self.closed = True
                 assert self.cleanup()
-    def load(native_arg, *, cleanup, startup_deadline):
+    def load(native_arg, *, cleanup, startup_deadline, analysis_policy):
         assert native_arg is native
+        assert analysis_policy == policy
         assert startup_deadline > 0
         result = Runtime()
         result.cleanup = cleanup
@@ -43,11 +45,13 @@ def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_p
     monkeypatch.setattr(launcher, "worker_admission", admission)
     monkeypatch.setattr(launcher, "cleanup_owned", cleanup)
     monkeypatch.setattr(launcher, "load_runtime", load)
-    with launcher.start_service(token="x" * 40, log_dir=tmp_path / "new", telemetry=metrics):
+    with launcher.start_service(token="x" * 40, log_dir=tmp_path / "new", telemetry=metrics,
+                                analysis_policy=policy):
         events.append("serve")
     assert events == [("native", 28), "worker", "load", "serve",
                       "cleanup", "worker_exit", "native_exit"]
     assert metrics["native_adapter_startup_seconds"] >= 0
+    assert metrics["analysis_policy"] == policy
 
 
 def test_cli_requires_explicit_opt_in_before_any_start(monkeypatch, tmp_path):
@@ -83,3 +87,27 @@ def test_expired_identity_load_never_serves_and_closes_owned_native(monkeypatch,
           launcher.start_service(token="x" * 40, log_dir=tmp_path)):
         pytest.fail("must not serve expired startup")
     assert events == ["closed", "native_exit"]
+
+
+@pytest.mark.parametrize("policy", [None, "batch-v1"])
+def test_cli_passes_explicit_analysis_policy_without_server(monkeypatch, tmp_path, policy):
+    import uvicorn
+    seen = []
+    @contextmanager
+    def start(**kwargs):
+        seen.append(kwargs["analysis_policy"])
+        yield object()
+    monkeypatch.setattr(launcher, "start_service", start)
+    monkeypatch.setattr(uvicorn, "run", lambda *args, **kwargs: None)
+    args = ["--enable-service-rag", "--log-dir", str(tmp_path)]
+    if policy:
+        args.extend(["--analysis-policy", policy])
+    launcher.main(args)
+    assert seen == [policy or "single"]
+
+
+def test_invalid_analysis_policy_rejected_before_native(monkeypatch, tmp_path):
+    monkeypatch.setattr(launcher, "start_llama", lambda **kwargs: pytest.fail("native attempted"))
+    with (pytest.raises(ValueError, match="invalid_analysis_policy"),
+          launcher.start_service(token="x" * 40, log_dir=tmp_path, analysis_policy="auto")):
+        pytest.fail("invalid policy admitted")

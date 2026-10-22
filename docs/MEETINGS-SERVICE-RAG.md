@@ -28,6 +28,23 @@ Python 초기 Ruff 지적과 수정 과정은 보존했다. Java 이번 검사�
 
 ## 실행 설정
 
+2026-10-22 추가: `--analysis-policy batch-v1`은 전체 단위를 최대8개씩 분류하는 새 개발 후보를 선택한다. 두 launcher 모두 이 옵션을 지원하고 기본은 기존 `single`이다. 새 정책은 입력4096·출력128·EOS·분석 전체120초를 검증하며, 긴 입력은 생성 전에 묶음을 나누고 단위 하나도 들어가지 않으면 실패한다. 원문을 축약하거나 실패 뒤 개별 호출로 돌아가지 않는다. 기존 Purpose heading의 추론용 정규화와 원문 근거 좌표는 구분한다. 자연어 답변 정책은 그대로다.
+
+```powershell
+uv run --no-sync python -m scripts.serve_meeting_rag_service `
+  --enable-service-rag --jar-sha256 $ragJarHash `
+  --database .local/service-rag-batch-demo.sqlite3 `
+  --log-dir .local/service-rag-batch-demo-001 --analysis-policy batch-v1
+```
+
+위 명령은 기존 JAR hash·설치·모델 캐시 준비 뒤의 사용 예시이며 실제 실행 성공 기록이 아니다. 같은 경로를 재사용하지 않는다. Health의 `extraction.classification`과 lifecycle의 `analysis_policy`로 실제 선택을 확인한다. 선택한 정책과 health의 prompt/grammar 정책 hash·상한이 다르면 시작을 거부한다. `single`로 복귀할 때는 정상 종료한 뒤 새 로그 경로에서 옵션을 생략한다.
+
+새10파일은 관련208개 합성 검사·Ruff와 독립 코드 검토 blocker0을 마쳤다. [검증 요약](../experiments/results/meetings-analysis-batch-implementation-v1.json)은 이전191개와 실패 이력을 함께 보존한다. 실제 native grammar·속도·의미 정확성은 아직 검증하지 않았다. 공식 평가는 plan과 등록에 같은 정책을 명시하며 모든 정책에서 새 adapter 코드도 고정한다. Validation에는 같은 정책의 calibration 통과가 필요하고 생략된 정책은 기존single만 뜻한다. 닫힌 원래 v1/v2를 새 정책으로 재실행하지 않는다.
+
+```powershell
+uv run --no-sync pytest -q tests/test_meeting_analysis_batch.py tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py
+```
+
 기존 로컬 설치와 모델 캐시가 필요하며 launcher는 다운로드하지 않는다. Java와 worker 터미널에 같은 `DOCTRAIL_GENERATION_TOKEN`을 설정하되 값을 로그·커밋에 남기지 않는다. 실제 모델 검증은 [계획](MEETINGS-RAG-ACCEPTANCE-PLAN.md)의 새 자료/실행 등록 뒤 수행하며 아래 명령 자체는 실행 증거가 아니다.
 
 ```powershell

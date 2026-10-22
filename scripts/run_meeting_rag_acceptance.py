@@ -13,11 +13,13 @@ import threading
 import time
 from pathlib import Path
 
+from doctrail.meeting_analysis_batch import POLICIES
 from scripts.serve_meeting_rag_service import ROOT, start_services
 
 CODE = ("scripts/run_meeting_rag_acceptance.py", "tests/test_run_meeting_rag_acceptance.py",
         "web/scripts/run-meeting-rag-acceptance.mjs", "src/doctrail/meeting_service_rag.py",
-        "scripts/serve_meeting_service_rag.py", "scripts/serve_meeting_rag_service.py")
+        "scripts/serve_meeting_service_rag.py", "scripts/serve_meeting_rag_service.py",
+        "src/doctrail/meeting_analysis_batch.py")
 COUNTS = {"calibration": 6, "validation": 8}
 BROWSER_CODES = frozenset({
     "browser_action_failed", "browser_action_timeout", "browser_contract_failed",
@@ -97,16 +99,21 @@ def verify_inputs(manifest, phase, run_dir):
     require(set(manifest) == {"schema_version", "phase", "registration", "plan"}
             and manifest["schema_version"] == 1 and manifest["phase"] == phase, "manifest_schema")
     plan = manifest["plan"]
-    require(set(plan) == {"questions", "sources", "families", "code", "jar", "ui",
+    require(set(plan) - {"analysis_policy"} == {"questions", "sources", "families", "code", "jar", "ui",
                          "source_freeze", "item_freeze", "ci", "roles", "gate"}, "plan_schema")
+    analysis_policy = plan.get("analysis_policy", "single")
+    require(analysis_policy in POLICIES, "policy_mismatch")
     registration = bound(manifest["registration"], parse=True)
     require(registration["schema_version"] == 1 and registration["phase"] == phase
             and registration["plan_sha256"] == digest(canonical(plan))
             and Path(registration["run_dir"]).resolve() == run_dir, "registration_mismatch")
-    require(registration["policy"] == {
+    expected_policy = {
         "startup_seconds": 120, "active_seconds": 1500, "cleanup_seconds": 5,
         "answer_seconds": 90, "analyze_seconds": 120, "method": "hybrid_rerank",
-        "profile": "base", "limit": 5, "gpu_layers": 28}, "policy_mismatch")
+        "profile": "base", "limit": 5, "gpu_layers": 28}
+    if "analysis_policy" in plan:
+        expected_policy["analysis_policy"] = analysis_policy
+    require(registration["policy"] == expected_policy, "policy_mismatch")
     for key in ("source_freeze", "item_freeze", "ci", "roles"):
         bound(plan[key])
         require(registration["accepted_bindings"][key] == plan[key]["sha256"],
@@ -125,8 +132,9 @@ def verify_inputs(manifest, phase, run_dir):
             and judge["model"] and judge["exposure"] is not None
             and registration["executor"] == executor["role_id"]
             and registration["final_judge"] == judge["role_id"], "roles_not_accepted")
+    required_code = {ROOT / n for n in CODE}
     require({Path(b["path"]).resolve() for b in plan["code"]}
-            >= {ROOT / n for n in CODE}, "code_binding_missing")
+            >= required_code, "code_binding_missing")
     for binding in [*plan["code"], plan["jar"]]:
         bound(binding)
     require(plan["ui"] and any(b["url"] == "/" for b in plan["ui"]), "ui_binding_missing")
@@ -175,6 +183,8 @@ def verify_inputs(manifest, phase, run_dir):
         require(plan["gate"] is not None, "calibration_gate_missing")
         gate = bound(plan["gate"], parse=True)
         require(registration["gate_sha256"] == plan["gate"]["sha256"]
+                and gate.get("analysis_policy", "single") in POLICIES
+                and gate.get("analysis_policy", "single") == analysis_policy
                 and gate["phase"] == "calibration" and gate["answers_total"] == 6
                 and gate["answers_passed"] == 6 and gate["judgment_locked"] is True
                 and gate["operational_accepted"] is True and gate["cleanup_accepted"] is True
@@ -505,13 +515,15 @@ def execute(manifest_path, phase, run_dir, *, service_factory=start_services,
         questions = verify_inputs(manifest, phase, run_dir)
         summary["manifest_sha256"] = digest(manifest_bytes)
         plan = manifest["plan"]
+        summary["analysis_policy"] = plan.get("analysis_policy", "single")
         save(run_dir / "cases-initial.json",
              [{"id": c["id"], "status": "unexecuted"} for c in questions["cases"]])
         require(clock() - started < 120, "startup_timeout")
         evidence = Evidence(run_dir, questions, plan["sources"], clock)
         context = service_factory(jar=Path(plan["jar"]["path"]),
             jar_sha256=plan["jar"]["sha256"], database=run_dir / "isolated.sqlite3",
-            log_dir=run_dir / "services", metrics=metrics, observer=evidence)
+            log_dir=run_dir / "services", metrics=metrics, observer=evidence,
+            analysis_policy=summary["analysis_policy"])
         service = context.__enter__()
         entered = True
         ready = clock()

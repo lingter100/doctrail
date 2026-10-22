@@ -1,4 +1,24 @@
 # 진행 상태
+## 2026-10-22 · batch 구현 최종208개 검사와 실행 준비
+
+분석 호출을 최대8문장씩 묶는10개 구현 파일이 최종208개 합성 검사13.63초·Ruff를 통과했다. 독립 Astra xhigh 읽기 검토의2개 경계 문제를 해결했고 최종 blocker0이다. 새 adapter는 single에서도 실제 import되므로 항상 code binding에 포함하며, validation의 선행 calibration은 동일한 analysis_policy여야 한다. 처음191개 통과와 추가 회귀검사의8실패/9통과를 원본으로 보존한다. 부모가 코드·증거44개 고유 binding을 확인한 [구현 기록](../experiments/results/meetings-analysis-batch-implementation-v1.json)을 남겼다.
+
+기본 single과 명시적 batch-v1 선택을 구분한다. 전체 원문·고정 ID·근거 위치·발췌 요약4개 상한·분석120초를 유지하며 실제 모델 속도/의미 품질은 아직 측정하지 않았다. 다음은 정확한 구현 commit의 필수 CI, 새 개발 실행기 읽기 검토·코드 고정 뒤 새 합성 자료를 실제 모델로 처리하는 개발 실행이다. 기존 공식 v1/v2를 다시 실행하거나 잠긴 validation을 개방하지 않는다.
+
+기존 Sol high 담당이 scratch 실행 코드2개와 metadata3개를 반환했다. 기존 문서/질문 등16개 원본과15개 index binding은 유지됐고 AST·Node 구문·정적 계약 검사를 통과했다. 실제 batch factory를 연결하지만 실행 허용 옵션은 사용하지 않았고 run-v1·runtime binding 파일은 없다. Java·브라우저·native·tokenizer0이며 기존 Astra xhigh 역할의 읽기 검토만 배정했다. 전체 goal은 ACTIVE, 회의1차 확장과 PR14는 미완료다.
+
+## 2026-10-22 · batch 통합191개 검사와 독립 검토 보완
+
+새 adapter와 서비스·실행 옵션·health·등록 연결10파일은191개 합성 검사10.51초와 Ruff를 통과했다. 최초11실패/144통과와 중간1실패/188통과를 보존했다. 부모가10개 코드와18개 증거 hash를 확인했고 NEW2의29개 checkpoint와 최종 통합 검사를 구분했다. 실제 tokenizer/native·Java·브라우저 실행은0이다.
+
+독립 Astra xhigh 최종 읽기 검토는2개 등록 경계를 보완하도록 했다. single에서도 로드하는 새 adapter는 항상 code binding에 포함해야 하고, validation의 선행 calibration은 같은 analysis_policy를 사용했는지 확인해야 한다. 같은 코드라는 이유로 single 결과를 batch 검증의 통과 근거로 사용할 수 없다. 기존 구현 담당이 driver/test2만 보완하며191개 결과·원본10개를 보존한다. 현재 최종 통합 수용·새 source CI·실제 개발 실행은 아직 완료되지 않았다.
+
+## 2026-10-22 · batch 구현 배정과 새 개발 자료 준비
+
+실제 v2 실패·관측 수정·batch 설계를3b623cb로 사용자 계정 commit/push했다. 원격 author/committer lingter100과 PR14 head를 확인했고 push39709145684/PR39709151402의 필수3개 CI가 모두 성공했다. [정확한 commit CI 기록](../experiments/results/meetings-service-rag-observer-fix-ci-v1.json)은 Git의 원래 수정 코드만 다루며 현재 개발 중인 batch 구현을 검증한 결과가 아니다. 기존 Astra high 구현 담당이 새 adapter/test와 기존 service·두 launcher·driver 및 대응 검사, 총10파일을 맡는다. 실제 native 실행은 배정하지 않았다.
+
+기존 Sol high 화면 담당은 NEW `.local/service-rag-batch-development-v1/`에 AI 작성 한·영 문서6개(일반2/회의4), 질문6개와 기대 근거·UI 계획을 준비했다. 문서 단위는33/37/41/32/38/43, 회의 합계159개이며 실제 분석/답변은0이다. 부모는 내용 의미를 읽지 않고 index의15개 상대 경로/hash를 검증했고 run-v1 부재를 확인했다. 최초 부모 검사에서 저장소 기준으로 상대 경로를 찾다가 실패한 뒤 index 기준으로 수정했으며 입력 변경·실행은 없었다. 기존 합성/공식 자료의 문구를 재사용하지 않았다는 작성자 기록과 사용자 검수0을 유지한다. 실제 batch factory·actor별 화면 조작 연결은 코드 완성 이후 준비한다.
+
 ## 2026-10-22 · 관측 수정 최종 검증과 batch 설계
 
 관측 수정 첫59개 통과 뒤 독립 읽기 검토가 늦게 확정되는 Node 실패 종료를 성공으로 기록할 수 있는 경계를 발견했다. 기존59개 결과·소스와 최초/추가6개 실패를 각각 보존했다. 최종2파일은67개 합성 검사6.92초·Ruff를 통과했고 같은 Astra xhigh 역할의 최종 delta 검토에서 blocker0이다. 부모도 변경 코드를 읽고 증거 hash를 확인했다. [수정 기록](../experiments/results/meetings-service-rag-observer-fix-v1.json)을 따른다.

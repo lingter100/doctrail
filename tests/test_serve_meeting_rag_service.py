@@ -77,6 +77,7 @@ class Harness:
             "model": launcher.MODEL_ID, "revision": metadata["revision"],
             "answer": {**copy.deepcopy(metadata), "candidate_id": launcher.CANDIDATE_ID},
             "extraction": {"runtime": copy.deepcopy(metadata),
+                "classification": launcher.classification_metadata("single"),
                 "limits": {"input_tokens": 4096, "output_tokens": 768, "deadline_seconds": 120}}}
         specs = load_model_manifest()["models"]
         self.retrieval_health = {"status": "ready", "runtime": {"device": "cpu",
@@ -120,6 +121,7 @@ class Harness:
 
     def native_factory(self, **kwargs):
         harness = self
+        self.native_policy = kwargs["analysis_policy"]
         assert kwargs["token"] == "A" * 48
         self.native_metrics = kwargs["telemetry"].setdefault("native", {})
         class Native:
@@ -471,3 +473,51 @@ def test_unconfirmed_prior_cleanup_time_fails_closed_without_new_wait_budget(rig
     assert cleanup["elapsed_seconds"] is None
     assert rig.waits[0][1] == 0
     rig.assert_stopped()
+
+
+@pytest.mark.parametrize("policy", ["single", "batch-v1"])
+def test_requested_policy_reaches_native_health_and_lifecycle(rig, policy):
+    rig.kwargs["analysis_policy"] = policy
+    rig.generation_health["extraction"]["classification"] = launcher.classification_metadata(policy)
+    with launcher.start_services(**rig.kwargs):
+        assert rig.native_policy == policy
+    lifecycle = json.loads((rig.kwargs["log_dir"] / "lifecycle.json").read_text())
+    assert lifecycle["analysis_policy"] == policy and lifecycle["cleanup"]["accepted"] is True
+
+
+@pytest.mark.parametrize("field,value", [("policy", "single"), ("batch_cap", 7),
+    ("output_cap", 127), ("prompt_sha256", "a" * 64), ("grammar_policy_sha256", "a" * 64)])
+def test_batch_health_mismatch_fails_closed(rig, field, value):
+    rig.kwargs["analysis_policy"] = "batch-v1"
+    metadata = launcher.classification_metadata("batch-v1")
+    metadata[field] = value
+    rig.generation_health["extraction"]["classification"] = metadata
+    with (pytest.raises(launcher.LaunchError, match="generation_health_identity"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("mismatched policy ready")
+    assert rig.metrics["cleanup"]["accepted"] and all(p.poll() is not None for p in rig.processes)
+
+
+def test_unknown_policy_rejected_before_any_resource(rig):
+    rig.kwargs["analysis_policy"] = "auto"
+    with (pytest.raises(launcher.LaunchError, match="invalid_analysis_policy"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("invalid policy")
+    assert not rig.events and not rig.kwargs["log_dir"].exists()
+
+
+@pytest.mark.parametrize("policy", [None, "batch-v1"])
+def test_combined_cli_policy_forwarding(monkeypatch, tmp_path, policy):
+    from contextlib import contextmanager
+    seen = []
+    @contextmanager
+    def start(**kwargs):
+        seen.append(kwargs["analysis_policy"])
+        yield SimpleNamespace(java_url="synthetic", monitor=lambda: None)
+    monkeypatch.setattr(launcher, "start_services", start)
+    args = ["--enable-service-rag", "--jar-sha256", "a" * 64,
+            "--database", str(tmp_path / "db"), "--log-dir", str(tmp_path / "logs")]
+    if policy:
+        args.extend(["--analysis-policy", policy])
+    launcher.main(args)
+    assert seen == [policy or "single"]

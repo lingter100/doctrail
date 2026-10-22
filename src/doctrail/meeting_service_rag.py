@@ -12,6 +12,11 @@ from fastapi.exceptions import RequestValidationError
 
 from doctrail.generation_runtime import GenerationError
 from doctrail.inference import BoundaryMiddleware, WorkerError, _error, _validate_token
+from doctrail.meeting_analysis_batch import (
+    POLICIES,
+    BatchedAnalysisGenerator,
+    classification_metadata,
+)
 from doctrail.meeting_answer_v2 import response_language
 from doctrail.meeting_contract import AnalyzeRequest, AnswerRequest
 from doctrail.meeting_qwen35 import Qwen35Generator
@@ -95,6 +100,10 @@ class ObservedAnalysisGenerator(Qwen35Generator):
         return result
 
 
+class ObservedBatchedAnalysisGenerator(ObservedAnalysisGenerator, BatchedAnalysisGenerator):
+    """Observer hooks wrap the same batch algorithm as the unobserved service."""
+
+
 class ServiceAnswerGenerator(QualityThinkingGenerator):
     """Clamp every inherited deadline without copying the frozen answer algorithm."""
 
@@ -117,6 +126,8 @@ class ServiceRuntime:
         self.answer_generator = answer_generator
         self.observer = observer
         self.analysis = MeetingRuntime(analysis_generator)
+        self.analysis_policy = "batch-v1" if isinstance(
+            analysis_generator, BatchedAnalysisGenerator) else "single"
         answer = answer_generator.public_metadata()
         if (answer.get("repo_id"), answer.get("revision")) != (
                 self.analysis.model, self.analysis.revision):
@@ -149,7 +160,8 @@ class ServiceRuntime:
         return {"schema_version": 1, "status": "ready", "experimental": True,
                 "model": self.model, "revision": self.revision, "protocol": PROTOCOL,
                 "answer": self.answer_generator.public_metadata(),
-                "extraction": self.analysis.health()}
+                "extraction": {**self.analysis.health(),
+                               "classification": classification_metadata(self.analysis_policy)}}
 
     def analyze(self, request):
         if not self.lock.acquire(blocking=False):
@@ -164,7 +176,7 @@ class ServiceRuntime:
             timer.start()
             started = time.monotonic()
             deadline = started + EXTRACTION_SECONDS
-            if self.observer is not None:
+            if self.observer is not None or self.analysis_policy == "batch-v1":
                 self.analysis.generator.service_deadline = deadline
             _observe(self.observer, "analyze", "started", request.model_dump(mode="json"))
             self._ready()
@@ -195,6 +207,7 @@ class ServiceRuntime:
         finally:
             if self.observer is not None:
                 self.analysis.generator.observing = False
+            if self.observer is not None or self.analysis_policy == "batch-v1":
                 self.analysis.generator.service_deadline = None
             if timer is not None:
                 timer.cancel()
@@ -338,12 +351,16 @@ def create_app(token, runtime_factory):
     return app
 
 
-def load_runtime(native, *, cleanup, startup_deadline, observer=None):
+def load_runtime(native, *, cleanup, startup_deadline, observer=None, analysis_policy="single"):
     """Both clients verify the same already launched pinned local artifact."""
+    if analysis_policy not in POLICIES:
+        raise ValueError("invalid_analysis_policy")
     answer = ServiceAnswerGenerator(native.url, native.token, native.manifest)
-    analysis = (Qwen35Generator(native.url, native.token, native.manifest) if observer is None
-                else ObservedAnalysisGenerator(native.url, native.token, native.manifest,
-                                               observer=observer))
+    plain, observed = ((Qwen35Generator, ObservedAnalysisGenerator) if analysis_policy == "single"
+                       else (BatchedAnalysisGenerator, ObservedBatchedAnalysisGenerator))
+    options = {} if observer is None else {"observer": observer}
+    analysis = (plain if observer is None else observed)(native.url, native.token, native.manifest,
+                                                       **options)
     answer.service_deadline = startup_deadline
     try:
         answer.begin_request(startup_deadline)
