@@ -952,7 +952,7 @@ def register_analysis_policy(fixture, policy="batch-v1", *, adapter=True, regist
     reregister(fixture)
 
 
-@pytest.mark.parametrize("policy", [None, "single", "batch-v1"])
+@pytest.mark.parametrize("policy", [None, "single", "batch-v1", "batch-v2"])
 def test_registered_analysis_policy_reaches_service_factory(fixture, policy):
     if policy is not None:
         register_analysis_policy(fixture, policy)
@@ -970,8 +970,10 @@ def test_registered_analysis_policy_reaches_service_factory(fixture, policy):
 @pytest.mark.parametrize("fault,expected", [("unregistered", "policy_mismatch"),
     ("adapter_missing", "code_binding_missing"), ("unknown", "policy_mismatch"),
     ("registration_only", "policy_mismatch"), ("adapter_changed", "binding_changed")])
-def test_batch_requires_explicit_registered_policy_and_exact_adapter_binding(fixture, fault, expected):
-    register_analysis_policy(fixture, "auto" if fault == "unknown" else "batch-v1",
+@pytest.mark.parametrize("policy", ["batch-v1", "batch-v2"])
+def test_batch_requires_explicit_registered_policy_and_exact_adapter_binding(fixture, fault, expected,
+                                                                           policy):
+    register_analysis_policy(fixture, "auto" if fault == "unknown" else policy,
                              adapter=fault != "adapter_missing", registered=fault != "unregistered")
     if fault == "registration_only":
         del fixture.manifest["plan"]["analysis_policy"]
@@ -1003,7 +1005,7 @@ def test_classification_units_events_and_batches_are_separate(fixture):
     assert evidence.counts["analyze:classification_batch"] == 2
 
 
-@pytest.mark.parametrize("policy", [None, "single", "batch-v1"])
+@pytest.mark.parametrize("policy", [None, "single", "batch-v1", "batch-v2"])
 @pytest.mark.parametrize("fault", ["missing", "changed"])
 def test_every_effective_policy_pins_loaded_batch_dependency(fixture, policy, fault):
     register_analysis_policy(fixture, policy or "single", adapter=fault != "missing")
@@ -1029,7 +1031,10 @@ def test_every_effective_policy_pins_loaded_batch_dependency(fixture, policy, fa
     ("single", "single", True), ("batch-v1", "batch-v1", True),
     (None, "batch-v1", False), ("single", "batch-v1", False),
     ("batch-v1", None, False), ("batch-v1", "single", False),
-    ("single", "auto", False), ("batch-v1", "auto", False)])
+    ("single", "auto", False), ("batch-v1", "auto", False),
+    ("batch-v2", "batch-v2", True), ("batch-v1", "batch-v2", False),
+    ("batch-v2", "batch-v1", False), ("batch-v2", None, False),
+    (None, "batch-v2", False), ("batch-v2", "auto", False)])
 def test_validation_gate_requires_same_effective_analysis_policy(fixture, policy, gate_policy,
                                                                accepted):
     if policy is not None:

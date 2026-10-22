@@ -1,5 +1,19 @@
 # 진행 상태
+## 2026-10-22 · 범위 분류 구현과292개 회귀 검사 완료
+
+명시적 batch-v2를 기존 분류 루프에 연결했다. 실제 변경은 adapter/service와5개 검사, 총7파일이며 두 launcher와driver는 공유 policy 경로를 재사용해3파일 bytes가 그대로다. 구현 전 single/v1 prompt·예시·messages·실제 template request bytes의 고정 기대값을 기록했다. 최종292개 합성 검사11.70초·Ruff를 통과했고 독립 Astra xhigh 읽기 검토1a8f7ff1에서 blocker0이다. 부모가 변경 전체와42개 현재 binding·10개 기존 Git binding·동결77개를 확인했다. [구현 검증 기록](../experiments/results/meetings-analysis-scope-implementation-v1.json).
+
+첫 통합280통과/12실패는 새 중복 metadata-only fixture가 기존 빈 요약 거부 조건을 충족하지 못한 것이며 generic topic1개를 추가해 검사했다. 기존 제품 guard는 변경하지 않았다. Ruff2개와 UTF-8 편집 도우미 실패도 원본으로 보존한다. 이전 설계51e3f47 양쪽 CI39717061481/39717067849의 필수3job은 모두 성공했으며 이는 새 구현의 CI가 아니다.
+
+Scratch 실행 도구는 기존 v1 browser를 보존하고 NEW browser-v2 guard1줄·runner파일명2줄을 고쳤다. 좁은6개 검사와 Node 구문 검사가 통과했고 부모가33개 binding과 browser의 정확한 guard-only 차이를 확인했다. 최종 독립 delta·정확한 제품 commit CI·새 binding을 거친 뒤에만 별도1회 개발 실행을 배정한다. 현재 run-v2/실제 새모델0이며 성능/의미 개선은 미확인이다.
+
+## 2026-10-22 · 실행 도구 정책 불일치를 실제 실행 전에 발견
+
+NEW v2 runner의 초기 정적10개 검사는 통과했으나 독립 읽기 검토가 재사용 browser의 batch-v1 전용 guard를 찾았다. 실제 실행 실패가 아니라 코드 연결 오류의 정적 진단이다. 초기 runner ec8191d9·준비/검사 결과를 보존한 뒤 기존 Sol high 담당이 NEW browser-v2 companion의 정책 검사1곳과 runner의 정확한 파일 경로/binding만 수정한다. 입력·문항·기존 browser·v1 실행·최종 판정/정리 보호는 그대로 유지하며 실제 모델은 아직 실행하지 않는다.
+
 ## 2026-10-22 · 범위 분류 설계 수용과 구현 재개
+
+설계/진단51e3f47을 push하고 원격 author/committer lingter100을 확인했다. 필수 CI39717061481/39717067849는 진행 중이다. 기존 Astra high service_rag_worker는 지정10파일과 ignored 증거만, 기존 Sol high service_rag_ui_smoke는 NEW development-runner-v2.py와 scratch 준비 기록만 배정받아 running 상태다. 기존 입력16개·v1 runner/browser·실패/주석은 보존하며 run-v2 생성·실제 실행은 배정하지 않았다. 부모는 rootdocs/Git/CI를 담당한다.
 
 직전 사용자 문의 응답은 상태 설명만 한 no-progress turn이다. 현재 Git·goal·담당자 반환 상태를 확인했으며 승인 대기가 아닌 다음 구현 작업이 있다. 기존 Astra xhigh 설계 담당의 [새 정책 설계](MEETINGS-ANALYSIS-SCOPE-PLAN.md)71줄/12882B, SHA ef21381b를 부모가 전체 읽고 수용했다. 독립 진단과 private4개 binding·기존 동결77개를 확인했다.
 

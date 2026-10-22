@@ -7,7 +7,7 @@ import pytest
 from scripts import serve_meeting_service_rag as launcher
 
 
-@pytest.mark.parametrize("policy", ["single", "batch-v1"])
+@pytest.mark.parametrize("policy", ["single", "batch-v1", "batch-v2"])
 def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_path, policy):
     events, metrics = [], {}
     native = SimpleNamespace(process=object(), drain=object(), cleanup={})
@@ -89,7 +89,7 @@ def test_expired_identity_load_never_serves_and_closes_owned_native(monkeypatch,
     assert events == ["closed", "native_exit"]
 
 
-@pytest.mark.parametrize("policy", [None, "batch-v1"])
+@pytest.mark.parametrize("policy", [None, "batch-v1", "batch-v2"])
 def test_cli_passes_explicit_analysis_policy_without_server(monkeypatch, tmp_path, policy):
     import uvicorn
     seen = []

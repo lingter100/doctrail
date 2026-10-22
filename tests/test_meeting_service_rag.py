@@ -18,6 +18,7 @@ from doctrail.meeting_runtime import DEADLINE_SECONDS as EXTRACTION_SECONDS
 from doctrail.meeting_service_rag import (
     BUDGET_HEADER,
     ObservedBatchedAnalysisGenerator,
+    ObservedScopedBatchedAnalysisGenerator,
     ServiceAnswerGenerator,
     ServiceRuntime,
     create_app,
@@ -296,11 +297,14 @@ def test_timeout_cleanup_failure_is_http_error_and_cannot_reenter():
         assert response.status_code == 503 and len(seen) == count
 
 
-@pytest.fixture
-def batch_runtime():
+@pytest.fixture(params=["batch-v1", "batch-v2"])
+def batch_runtime(request):
     from test_meeting_analysis_batch import Native
 
-    from doctrail.meeting_analysis_batch import BatchedAnalysisGenerator
+    from doctrail.meeting_analysis_batch import (
+        BatchedAnalysisGenerator,
+        ScopedBatchedAnalysisGenerator,
+    )
     rigs = []
     def build(observer=None):
         native = Native()
@@ -313,7 +317,10 @@ def batch_runtime():
             if request.url.path == "/tokenize" and body["content"].startswith("partition"):
                 return httpx.Response(200, json={"tokens": [0] * 10})
             return native.handle(request)
-        cls = BatchedAnalysisGenerator if observer is None else ObservedBatchedAnalysisGenerator
+        plain, observed = ((BatchedAnalysisGenerator, ObservedBatchedAnalysisGenerator)
+                           if request.param == "batch-v1" else
+                           (ScopedBatchedAnalysisGenerator, ObservedScopedBatchedAnalysisGenerator))
+        cls = plain if observer is None else observed
         options = {} if observer is None else {"observer": observer}
         native.generator = cls("http://127.0.0.1:19003", TOKEN, "unused-synthetic",
             transport=httpx.MockTransport(handle), **options)
@@ -353,7 +360,9 @@ def test_batch_actual_meeting_runtime_preserves_all_units_offsets_and_extracts_s
     assert len(analysis["summary_evidence"]) == 4
     assert analysis["summary"] == "\n".join(e["quote"] for e in analysis["summary_evidence"])
     assert analysis["metadata_evidence"][0]["quote"].startswith("## Purpose\n")
-    assert service.health()["extraction"]["classification"]["policy"] == "batch-v1"
+    assert service.health()["extraction"]["classification"]["policy"] == native.generator.analysis_policy
+    assert all(("Current-meeting scope and statement intent:" in messages[0]["content"])
+               == (service.analysis_policy == "batch-v2") for messages in native.messages)
     assert not native.generator._cache and native.generator.service_deadline is None
     if observed:
         assert [value for event, value in events if event == "classification_units"] == [len(units)]
@@ -412,7 +421,8 @@ def test_batch_preparation_consumes_original_outer_deadline(batch_runtime, monke
 
 
 @pytest.mark.parametrize("policy,observed", [("single", False), ("single", True),
-                                           ("batch-v1", False), ("batch-v1", True)])
+                                           ("batch-v1", False), ("batch-v1", True),
+                                           ("batch-v2", False), ("batch-v2", True)])
 def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatch, policy, observed):
     import doctrail.meeting_service_rag as module
     from doctrail.meeting_analysis_batch import BatchedAnalysisGenerator
@@ -425,7 +435,7 @@ def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatc
         manifest="unused"), cleanup=lambda: True, startup_deadline=time.monotonic() + 30,
         analysis_policy=policy, observer=(lambda *args: None) if observed else None)
     try:
-        assert isinstance(service.analysis.generator, BatchedAnalysisGenerator) == (policy == "batch-v1")
+        assert isinstance(service.analysis.generator, BatchedAnalysisGenerator) == (policy != "single")
         assert isinstance(service.analysis.generator, module.ObservedAnalysisGenerator) == observed
         assert service.health()["extraction"]["classification"]["policy"] == policy
     finally:
@@ -457,3 +467,54 @@ def test_batch_mapping_observer_time_cannot_renew_deadline(batch_runtime, monkey
     with pytest.raises(WorkerError, match="generation_deadline_exceeded"):
         service.analyze(AnalyzeRequest.model_validate(ANALYZE))
     assert native.batches == [] and not native.generator._cache
+
+
+@pytest.mark.parametrize("observed", [False, True])
+@pytest.mark.parametrize("field,label,first,other", [
+    ("meeting_date", 2, "Date: 2041-04-12", "Date: 2041-04-13"),
+    ("meeting_title", 1, "Title: Sample review", "Title: Sample planning"),
+    ("purpose", 4, "Purpose: Review the protocol.", "Purpose: Approve a rollout.")])
+@pytest.mark.parametrize("conflicting", [False, True])
+def test_current_metadata_repetition_keeps_evidence_and_conflict_stays_strict(
+        batch_runtime, observed, field, label, first, other, conflicting):
+    service, native = batch_runtime((lambda *args: None) if observed else None)
+    native.response = lambda ids: json.dumps([[i, label if i < 2 else 5] for i in ids])
+    content = first + "\n" + (other if conflicting else first) + "\nThe sampler emitted its report."
+    request = AnalyzeRequest(schema_version=1, document_id="synthetic", revision=1,
+                             title="Synthetic", content=content)
+    if conflicting:
+        with pytest.raises(WorkerError, match="generation_conflicting_metadata") as error:
+            service.analyze(request)
+        assert error.value.status == 502
+    else:
+        analysis = service.analyze(request)["analysis"]
+        assert len(analysis["metadata_evidence"]) == 2
+        assert all(e["field"] == field for e in analysis["metadata_evidence"])
+        for evidence in analysis["metadata_evidence"]:
+            assert content[evidence["start_offset"]:evidence["end_offset"]] == evidence["quote"]
+    assert len(native.batches) == 1  # no relabel, retry or conflict repair
+    assert not native.generator._cache
+
+
+def test_runtime_rejects_policy_drift_before_health_or_native(batch_runtime):
+    service, native = batch_runtime()
+    native.generator.analysis_policy = "batch-v2" if service.analysis_policy == "batch-v1" else "batch-v1"
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.health()
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.analyze(AnalyzeRequest.model_validate(ANALYZE))
+    assert native.calls == []
+
+
+def test_requested_v2_cannot_load_a_v1_generator(monkeypatch):
+    import doctrail.meeting_service_rag as module
+    def load(self):
+        self._metadata = copy.deepcopy(METADATA)
+        return self
+    monkeypatch.setattr(module.ServiceAnswerGenerator, "load", load)
+    monkeypatch.setattr(module.Qwen35Generator, "load", load)
+    monkeypatch.setattr(module, "ScopedBatchedAnalysisGenerator", module.BatchedAnalysisGenerator)
+    with pytest.raises(GenerationError, match="generation_identity_mismatch"):
+        module.load_runtime(SimpleNamespace(url="http://127.0.0.1:19003", token=TOKEN,
+            manifest="unused"), cleanup=lambda: True, startup_deadline=time.monotonic() + 30,
+            analysis_policy="batch-v2")

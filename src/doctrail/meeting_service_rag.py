@@ -15,6 +15,7 @@ from doctrail.inference import BoundaryMiddleware, WorkerError, _error, _validat
 from doctrail.meeting_analysis_batch import (
     POLICIES,
     BatchedAnalysisGenerator,
+    ScopedBatchedAnalysisGenerator,
     classification_metadata,
 )
 from doctrail.meeting_answer_v2 import response_language
@@ -104,6 +105,11 @@ class ObservedBatchedAnalysisGenerator(ObservedAnalysisGenerator, BatchedAnalysi
     """Observer hooks wrap the same batch algorithm as the unobserved service."""
 
 
+class ObservedScopedBatchedAnalysisGenerator(ObservedAnalysisGenerator,
+                                           ScopedBatchedAnalysisGenerator):
+    """Observer hooks wrap the same scope policy without copying the batch loop."""
+
+
 class ServiceAnswerGenerator(QualityThinkingGenerator):
     """Clamp every inherited deadline without copying the frozen answer algorithm."""
 
@@ -126,8 +132,9 @@ class ServiceRuntime:
         self.answer_generator = answer_generator
         self.observer = observer
         self.analysis = MeetingRuntime(analysis_generator)
-        self.analysis_policy = "batch-v1" if isinstance(
-            analysis_generator, BatchedAnalysisGenerator) else "single"
+        self.analysis_policy = (analysis_generator.analysis_policy if isinstance(
+            analysis_generator, BatchedAnalysisGenerator) else "single")
+        classification_metadata(self.analysis_policy)
         answer = answer_generator.public_metadata()
         if (answer.get("repo_id"), answer.get("revision")) != (
                 self.analysis.model, self.analysis.revision):
@@ -154,6 +161,9 @@ class ServiceRuntime:
     def _ready(self):
         if self._poisoned or self._closed:
             raise WorkerError("generation_failed", 503)
+        if (isinstance(self.analysis.generator, BatchedAnalysisGenerator)
+                and self.analysis.generator.analysis_policy != self.analysis_policy):
+            raise WorkerError("generation_failed", 503)
 
     def health(self):
         self._ready()
@@ -176,7 +186,7 @@ class ServiceRuntime:
             timer.start()
             started = time.monotonic()
             deadline = started + EXTRACTION_SECONDS
-            if self.observer is not None or self.analysis_policy == "batch-v1":
+            if self.observer is not None or self.analysis_policy != "single":
                 self.analysis.generator.service_deadline = deadline
             _observe(self.observer, "analyze", "started", request.model_dump(mode="json"))
             self._ready()
@@ -207,7 +217,7 @@ class ServiceRuntime:
         finally:
             if self.observer is not None:
                 self.analysis.generator.observing = False
-            if self.observer is not None or self.analysis_policy == "batch-v1":
+            if self.observer is not None or self.analysis_policy != "single":
                 self.analysis.generator.service_deadline = None
             if timer is not None:
                 timer.cancel()
@@ -356,8 +366,11 @@ def load_runtime(native, *, cleanup, startup_deadline, observer=None, analysis_p
     if analysis_policy not in POLICIES:
         raise ValueError("invalid_analysis_policy")
     answer = ServiceAnswerGenerator(native.url, native.token, native.manifest)
-    plain, observed = ((Qwen35Generator, ObservedAnalysisGenerator) if analysis_policy == "single"
-                       else (BatchedAnalysisGenerator, ObservedBatchedAnalysisGenerator))
+    plain, observed = {
+        "single": (Qwen35Generator, ObservedAnalysisGenerator),
+        "batch-v1": (BatchedAnalysisGenerator, ObservedBatchedAnalysisGenerator),
+        "batch-v2": (ScopedBatchedAnalysisGenerator, ObservedScopedBatchedAnalysisGenerator),
+    }[analysis_policy]
     options = {} if observer is None else {"observer": observer}
     analysis = (plain if observer is None else observed)(native.url, native.token, native.manifest,
                                                        **options)
@@ -367,7 +380,10 @@ def load_runtime(native, *, cleanup, startup_deadline, observer=None, analysis_p
         analysis.begin_request(startup_deadline)
         answer.load()
         analysis.load()
-        return ServiceRuntime(answer, analysis, cleanup=cleanup, observer=observer)
+        runtime = ServiceRuntime(answer, analysis, cleanup=cleanup, observer=observer)
+        if runtime.analysis_policy != analysis_policy:
+            raise GenerationError("generation_identity_mismatch")
+        return runtime
     except Exception:
         answer.close()
         analysis.close()

@@ -475,7 +475,7 @@ def test_unconfirmed_prior_cleanup_time_fails_closed_without_new_wait_budget(rig
     rig.assert_stopped()
 
 
-@pytest.mark.parametrize("policy", ["single", "batch-v1"])
+@pytest.mark.parametrize("policy", ["single", "batch-v1", "batch-v2"])
 def test_requested_policy_reaches_native_health_and_lifecycle(rig, policy):
     rig.kwargs["analysis_policy"] = policy
     rig.generation_health["extraction"]["classification"] = launcher.classification_metadata(policy)
@@ -487,9 +487,10 @@ def test_requested_policy_reaches_native_health_and_lifecycle(rig, policy):
 
 @pytest.mark.parametrize("field,value", [("policy", "single"), ("batch_cap", 7),
     ("output_cap", 127), ("prompt_sha256", "a" * 64), ("grammar_policy_sha256", "a" * 64)])
-def test_batch_health_mismatch_fails_closed(rig, field, value):
-    rig.kwargs["analysis_policy"] = "batch-v1"
-    metadata = launcher.classification_metadata("batch-v1")
+@pytest.mark.parametrize("policy", ["batch-v1", "batch-v2"])
+def test_batch_health_mismatch_fails_closed(rig, field, value, policy):
+    rig.kwargs["analysis_policy"] = policy
+    metadata = launcher.classification_metadata(policy)
     metadata[field] = value
     rig.generation_health["extraction"]["classification"] = metadata
     with (pytest.raises(launcher.LaunchError, match="generation_health_identity"),
@@ -506,7 +507,7 @@ def test_unknown_policy_rejected_before_any_resource(rig):
     assert not rig.events and not rig.kwargs["log_dir"].exists()
 
 
-@pytest.mark.parametrize("policy", [None, "batch-v1"])
+@pytest.mark.parametrize("policy", [None, "batch-v1", "batch-v2"])
 def test_combined_cli_policy_forwarding(monkeypatch, tmp_path, policy):
     from contextlib import contextmanager
     seen = []
@@ -521,3 +522,13 @@ def test_combined_cli_policy_forwarding(monkeypatch, tmp_path, policy):
         args.extend(["--analysis-policy", policy])
     launcher.main(args)
     assert seen == [policy or "single"]
+
+
+@pytest.mark.parametrize("requested,reported", [("batch-v1", "batch-v2"), ("batch-v2", "batch-v1")])
+def test_health_cannot_substitute_another_batch_prompt_policy(rig, requested, reported):
+    rig.kwargs["analysis_policy"] = requested
+    rig.generation_health["extraction"]["classification"] = launcher.classification_metadata(reported)
+    with (pytest.raises(launcher.LaunchError, match="generation_health_identity"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("wrong batch prompt policy became ready")
+    assert rig.metrics["cleanup"]["accepted"] is True
