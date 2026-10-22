@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "kind": "java_startup_repair_implementation",
+  "recorded_at_utc": "2026-10-22T01:18:40.999790+00:00",
+  "implementation_receipt": {
+    "path": ".local/java-runtime-encoding-fix-v1/receipt.json",
+    "bytes": 10425,
+    "sha256": "442f77909c88d5b86f301a72d7561825d913c3b72a1171d4b4f9878a613ebc7f"
+  },
+  "independent_review_receipt": {
+    "path": ".local/java-runtime-encoding-fix-v1/independent-review.json",
+    "bytes": 1115,
+    "sha256": "649f3de6aaf94e639cbb15e2a1e83f6735968a4e0816c6cc7b8c4fc50f97647d"
+  },
+  "review": {
+    "schema_version": 1,
+    "kind": "parent_record_of_returned_independent_code_review",
+    "reviewer_role": "/root/source_discovery_decision",
+    "accepted_role_model": "gpt-6-astra",
+    "accepted_role_reasoning": "xhigh",
+    "source": "Reviewer's final message in this continuation; parent recorded it without claiming a reviewer-written file.",
+    "blocking_findings": 0,
+    "scope": [
+      "scripts/java_runtime.py",
+      "scripts/serve_meeting_rag_service.py",
+      "tests/test_java_runtime.py",
+      "tests/test_serve_meeting_rag_service.py"
+    ],
+    "checks": [
+      "final four hashes matched before and after review",
+      "frozen helper unchanged",
+      "binary capture and strict Base64/UTF8",
+      "fixed errors and temporary source cleanup",
+      "10 second discovery consumes existing 120 second startup window"
+    ],
+    "limitations_acknowledged": [
+      "default OS temp actual success only",
+      "emoji temp attempts failed and remain preserved",
+      "49 tests and real discovery taken from author receipt, not rerun by reviewer"
+    ],
+    "reviewer_runtime_test_model_data_git_actions": 0,
+    "amendment_sha256": "d1a3bb4e5d7b024b6b6129bdff399cb490215f1145a08cc3cda8c24b571453ab"
+  },
+  "source_after": [
+    {
+      "path": "scripts/java_runtime.py",
+      "bytes": 2989,
+      "sha256": "0eac896345bf38c760b86a0f61e0a537d7fdc2d3f95712a8fe8c4e0a5d46e137",
+      "lf": true
+    },
+    {
+      "path": "tests/test_java_runtime.py",
+      "bytes": 3343,
+      "sha256": "732c2deb66ce2575dccdff204d687c18f926a7b164c58f4892425e477ccff63c",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 20735,
+      "sha256": "ca2e1b412924d5790fbf2e41e0567b1155d1395cc7722dfc320c716fdb8e88e8",
+      "lf": true
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 20685,
+      "sha256": "efc2e55bfe4dd2ab67fba38ed272ed2fb2fe964794a37cb1646c36b413b222a3",
+      "lf": true
+    }
+  ],
+  "checks": [
+    {
+      "stage": "first",
+      "tests": "48 passed1.02s",
+      "ruff": "one SIM117 test style finding preserved"
+    },
+    {
+      "stage": "style_fixed",
+      "tests": "48 passed0.95s",
+      "ruff": "pass"
+    },
+    {
+      "stage": "startup_budget_regression_added_before_temp_experiment",
+      "tests": "49 passed0.97s",
+      "ruff": "pass"
+    }
+  ],
+  "actual_discovery": {
+    "old_properties_probe_calls": 1,
+    "old_probe_returncode": 0,
+    "old_strict_utf8_errors": [
+      {
+        "path": "original-stdout.bin",
+        "strict_utf8": "passed"
+      },
+      {
+        "path": "original-stderr.bin",
+        "strict_utf8": "failed",
+        "error_start": 406,
+        "error_end": 407,
+        "invalid_bytes_hex": "b0"
+      }
+    ],
+    "new_resolver_calls": 3,
+    "new_results_in_order": [
+      "absolute source argv + extra emoji temp: exit1; invalid source path",
+      "absolute source argv + default OS temp: exit0;0.625s; real executable exists; temporary source removed",
+      "ASCII source argv + emoji cwd alternative: exit1; JDK URLClassPath percent-encoded character decode error"
+    ],
+    "final_code": "Restored exact successful absolute-source-argv resolver; no further Java discovery rerun",
+    "successful_default_temp_check": {
+      "returncode": 0,
+      "elapsed_seconds": 0.625,
+      "executable_exists": true,
+      "absolute": true,
+      "executable_path_sha256": "37242b3efa0bda88d1691bfc105cef9f359975abdc51a78ed24e70e53814bb74",
+      "temporary_source_removed": true,
+      "stderr_never_decoded": true
+    },
+    "observation_wrapper": "Real subprocess.run delegated unchanged, raw returned byte streams archived locally; no mocked response in actual discovery."
+  },
+  "resources": {
+    "matching_owned_java_discovery_processes": [],
+    "java_process_access_denied": 0,
+    "default_probe_temp_directories_remaining": 0,
+    "local_unicode_temp_directories_remaining": 0
+  },
+  "limitations": [
+    "Current installed JDK21/MS949 source-file launcher does not support the tested non-MS949 emoji source/temp paths; cwd alternative also failed. Both originals preserved. No claim of arbitrary Unicode TMP support.",
+    "Exact Unicode java.home including Korean/emoji/combining marks is tested synthetically via strict Base64/UTF8. Actual installed java.home was not relocated; actual success is for current OS default temp.",
+    "Requires JDK21+ source-file mode, not JRE-only installations. No native/model/Java-service quality/readiness claim.",
+    "Subprocess timeout and existing startup120 gate remain; this is not a proof of whole-process hard preemption on every platform."
+  ],
+  "parent_verification": {
+    "source_bindings": 4,
+    "local_evidence_hashes": 27,
+    "semantic_evaluation_read": false
+  },
+  "original_failure": {
+    "path": "experiments/results/meetings-service-rag-calibration-startup-failure-v1.json",
+    "bytes": 6779,
+    "sha256": "c42f21f8df50c894a842d4c4fa1fae09bf489ae99e30beac121c3595c845a5c0"
+  },
+  "prospective_amendment": {
+    "path": "docs/MEETINGS-SERVICE-RAG-STARTUP-REPAIR.md",
+    "bytes": 10233,
+    "sha256": "d1a3bb4e5d7b024b6b6129bdff399cb490215f1145a08cc3cda8c24b571453ab"
+  },
+  "official_phase_reruns": 0,
+  "model_quality_claimed": false
+}

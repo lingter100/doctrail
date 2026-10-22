@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "kind": "actual_service_rag_startup_failure_no_model_quality_measurement",
+  "recorded_at_utc": "2026-10-22T01:08:37.468793+00:00",
+  "execution_commit": "34e689eee231d796457059b8ffe434fe80ebc1b6",
+  "registration_ci": [
+    {
+      "id": 39702414533,
+      "commit": "34e689eee231d796457059b8ffe434fe80ebc1b6",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39702414533"
+    },
+    {
+      "id": 39702420513,
+      "commit": "34e689eee231d796457059b8ffe434fe80ebc1b6",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39702420513"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "original_safe_summary": {
+    "path": ".local/meetings-service-rag-calibration-cli-v1/safe-summary-v1.json",
+    "bytes": 7960,
+    "sha256": "f5de6213b098d4d15fe1643b7b0f1807cba173255069da73b8a920cf2fb4b8f4"
+  },
+  "original_evidence_index": {
+    "path": ".local/meetings-service-rag-calibration-cli-v1/artifact-index-v1.json",
+    "bytes": 3447,
+    "sha256": "6f3fcb93ae4640b574c34bfa61a60d78aed7e4883833c1ee4fcff6d84054b8eb"
+  },
+  "parent_verification": {
+    "evidence_hashes_verified": 14,
+    "frozen_toolchain_hashes_verified": 77,
+    "semantic_material_read": false
+  },
+  "status": "failed_before_service_ready_run_consumed",
+  "official_command_launches": 1,
+  "cli_exit_code": 1,
+  "cli_wall_seconds": 1.7029999999999745,
+  "driver": {
+    "receipt": {
+      "path": ".local/meetings-service-rag-calibration-run-v1/receipt.json",
+      "bytes": 338,
+      "sha256": "42d26e0dd256d732597fd241486c962d17e85f45cae77f5af0e8e7a7932d2dc4"
+    },
+    "artifact_index": {
+      "path": ".local/meetings-service-rag-calibration-run-v1/artifact-index.json",
+      "bytes": 589,
+      "sha256": "62b08050e83a6a1a5632de0236a851a8ecc5e796f0fa02d164e9d99844d7ac7f"
+    },
+    "reservation": {
+      "path": ".local/meetings-service-rag-calibration-run-v1/reservation.json",
+      "bytes": 40,
+      "sha256": "8113a802378117eac3b6dadc08aa1f9df7dd7741ce2d919d75b29050466e6998"
+    },
+    "status": "failed",
+    "fixed_failure_code": "execution_failed",
+    "wall_seconds": 0.40599999999994907,
+    "original_observer_counts": {},
+    "original_observer_counts_availability": "unavailable_empty_object",
+    "cleanup_accepted": true,
+    "cleanup_seconds": 0.0,
+    "hard_preemption_proven": false
+  },
+  "startup": {
+    "lifecycle": {
+      "path": ".local/meetings-service-rag-calibration-run-v1/services/lifecycle.json",
+      "bytes": 874,
+      "sha256": "62a6d8d0d384398eb74d6c477d8d55fc18f19ca4adfdf38354f2078838eca30f"
+    },
+    "accepted": false,
+    "fixed_failure_code": "service_failed",
+    "startup_seconds": 0.21900000000005093,
+    "native_attempted": false,
+    "service_children_alive": {
+      "worker": false,
+      "java": false,
+      "retrieval": false
+    },
+    "native_absence_confirmed": true
+  },
+  "execution_scope": {
+    "registered_sources": 6,
+    "registered_chunks": 32,
+    "registered_questions": 6,
+    "registered_families": 2,
+    "registered_actors": 2,
+    "case_states": {
+      "unexecuted": 6,
+      "response_available": 0
+    },
+    "native_model_attempts": 0,
+    "native_model_attempts_basis": "original lifecycle native_attempted=false",
+    "tokenizer_invocations": 0,
+    "question_requests_attempted": 0,
+    "question_requests_basis": "all original case states unexecuted; startup context never became ready",
+    "answer_artifact_files": 0,
+    "semantic_grading_performed": false,
+    "validation_executions": 0,
+    "original_inputs_changed": 0,
+    "automatic_retries": 0,
+    "diagnostic_runtime_invocations_after_terminal": 0
+  },
+  "generic_failure": {
+    "observed_exception": "UnicodeDecodeError",
+    "encoding": "utf-8",
+    "byte": "0xb0",
+    "position": 406,
+    "reason": "invalid start byte",
+    "frames": [
+      {
+        "file": "threading.py",
+        "line": 1045,
+        "function": "_bootstrap_inner"
+      },
+      {
+        "file": "threading.py",
+        "line": 982,
+        "function": "run"
+      },
+      {
+        "file": "subprocess.py",
+        "line": 1599,
+        "function": "_readerthread"
+      },
+      {
+        "file": "<frozen codecs>",
+        "line": 322,
+        "function": "decode"
+      }
+    ],
+    "observed_context": "subprocess text reader thread",
+    "static_code_sequence": "java_executable() calls subprocess.run(java properties/version, text=True) before retrieval/native launch; UTF-8 mode was set in the captured CLI environment",
+    "causal_status": "UTF-8 decode failure proven in original stderr; initial Java discovery is strongly localized by unchanged code order and native_attempted=false, but the caught caller exception type was not persisted",
+    "caller_exception_type": "unavailable",
+    "no_diagnostic_subprocess_invoked": true
+  },
+  "resource_verification": {
+    "post_run_verification": {
+      "path": ".local/meetings-service-rag-calibration-cli-v1/post-run-verification-v1.json",
+      "bytes": 48741,
+      "sha256": "2905605068af07db53f1fbb4f806cf0c9ca520778d90205ffb5c0a5b81bd5704"
+    },
+    "observed_child_process_count": 4,
+    "observed_original_child_processes_remaining": 0,
+    "wrapper_remaining": false,
+    "pid_reuse_observed": [],
+    "reused_pid_processes_modified": false,
+    "matching_project_or_native_runtime_processes": 0,
+    "leases_available_unchanged": 3,
+    "ready_to_return_exclusive_java_gpu_model_slot": true
+  },
+  "limitations": [
+    "Counts in original driver receipt remain an empty object; do not replace them with measured zeros.",
+    "Process sampling was every 0.5 seconds; short-lived Java discovery subprocesses may have occurred without being sampled.",
+    "No semantic answer quality judgment is possible because every case is unexecuted.",
+    "No rerun, repair, import invocation, model/tokenizer execution, or source/item changes were performed during post-run inspection.",
+    "The top-level caught caller exception was reduced to service_failed/execution_failed by existing code; its exact type is unavailable.",
+    "No native readiness, retrieval, answer, citation, quality, or human-review success is claimed.",
+    "The terminal result cannot produce an answer-judge packet because no question ran."
+  ],
+  "original_evidence_unchanged": true,
+  "quality_result": "unmeasured",
+  "next_step": "Repair the non-frozen Java discovery path and verify it without model/evaluation inputs. Keep original run consumed; any subsequent execution needs an explicit prospective design decision."
+}

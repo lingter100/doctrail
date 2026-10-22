@@ -26,9 +26,9 @@ from doctrail.meeting_thinking_transport import (
     RUNTIME_COMMIT,
 )
 from doctrail.model_retrieval import load_model_manifest
+from scripts.java_runtime import JavaRuntimeError, java_executable
 from scripts.serve_meeting_service_rag import start_service
 from scripts.serve_models import ROOT, unused_port
-from scripts.verify_java_service import java_executable
 
 
 class LaunchError(Exception):
@@ -41,7 +41,7 @@ class LaunchError(Exception):
         "startup_timeout", "health_timeout", "service_unhealthy", "jar_pin_required",
         "jar_pin_mismatch", "invalid_ports", "ports_must_differ", "token_factory_failed",
         "owned_cleanup_failed", "service_failed",
-    })
+    }) | JavaRuntimeError.CODES
 
     def __init__(self, code):
         super().__init__(code if code in self.CODES else "service_failed")
@@ -380,7 +380,7 @@ def start_services(*, jar, jar_sha256, database, log_dir, model_root=ROOT / "mod
                        retrieval_url=service.retrieval_url)
         yield service
     except BaseException as error:
-        metrics["failure"] = str(error) if isinstance(error, LaunchError) else (
+        metrics["failure"] = str(error) if isinstance(error, (LaunchError, JavaRuntimeError)) else (
             "interrupted" if isinstance(error, KeyboardInterrupt) else "service_failed")
         if isinstance(error, KeyboardInterrupt):
             raise

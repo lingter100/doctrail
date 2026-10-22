@@ -9,6 +9,35 @@ import pytest
 
 from doctrail.model_retrieval import load_model_manifest
 from scripts import serve_meeting_rag_service as launcher
+from scripts.java_runtime import JavaRuntimeError, java_executable
+
+
+def test_default_java_resolver_is_nonfrozen_unicode_protocol():
+    assert launcher.start_services.__wrapped__.__kwdefaults__["java_resolver"] is java_executable
+
+
+@pytest.mark.parametrize("code", sorted(JavaRuntimeError.CODES))
+def test_java_discovery_error_is_preserved_before_any_service_start(rig, code):
+    def fail():
+        raise JavaRuntimeError(code)
+    rig.kwargs["java_resolver"] = fail
+    with (pytest.raises(launcher.LaunchError, match=f"^{code}$"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("discovery failure must not start services")
+    assert rig.events == []
+    assert rig.metrics["failure"] == code and rig.metrics["native_attempted"] is False
+    assert rig.metrics["cleanup"]["accepted"] is True
+
+
+def test_java_discovery_time_consumes_existing_startup_window(rig):
+    def late():
+        rig.now += 120
+        return "synthetic-direct-java.exe"
+    rig.kwargs["java_resolver"] = late
+    with (pytest.raises(launcher.LaunchError, match="^startup_timeout$"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("Java discovery must not renew the startup window")
+    assert rig.events == [] and rig.metrics["native_attempted"] is False
 
 
 class Harness:

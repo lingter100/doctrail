@@ -30,6 +30,14 @@ v4는 reload 뒤 실제 사용자 workspace를 다시 선택하는 변경이며 
 
 ## 검증 및 공식 실행 방법
 
+### Windows Java 시작 오류 수정
+
+첫 실제 calibration은 서비스 시작 전에 UTF-8 reader 오류로 종료됐다. 모델/질문은 실행되지 않았으며 [원래 실패](../experiments/results/meetings-service-rag-calibration-startup-failure-v1.json)를 보존한다. 기존 Java properties 출력을 binary로 읽은 별도 검사에서도 byte0xb0/위치406의 오류를 재현했다.
+
+비동결 실행기는 새 `scripts/java_runtime.py`로 실제 JVM을 찾는다. JDK21+의 작은 ASCII source-file probe가 `java.home`을 UTF-8/Base64 한 줄로 출력하고 Python이 이를 엄격하게 해석한다. 지역화된 stderr 전체를 UTF-8로 해석하거나 시스템 언어를 변경하지 않는다. 실제 `bin/java` 확인과 임시 파일 정리를 수행하고10초 탐색 제한을 기존 startup120초 안에 포함한다. 오류는 고정 코드로 남긴다.
+
+관련49개 합성 검사·Ruff와 현재 Windows 기본 임시 폴더에서 실제 탐색0.625초 성공을 확인했다. 이모지 임시 경로와 cwd 대안은 설치된 JDK21/MS949에서 실패했고 둘 다 원본을 남겼다. 임의 Unicode 임시 경로 지원을 주장하지 않으며, Unicode java.home 값의 정확한 전달은 합성 검사 결과다. JRE만 있는 환경은 지원하지 않는다. 이것은 서비스 전체나 모델 품질 검증을 대신하지 않는다. [검증 기록](../experiments/results/meetings-service-rag-startup-repair-v1.json)과 [한정된 다음 실행 절차](MEETINGS-SERVICE-RAG-STARTUP-REPAIR.md)를 따른다.
+
 관련 코드 검사는 다음과 같다. 이미 저장된 검사와 같은 소스에 대한 불필요한 반복 실행은 하지 않는다.
 
 ```powershell

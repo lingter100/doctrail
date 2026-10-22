@@ -1,4 +1,18 @@
 # 진행 상태
+## 2026-10-22 · Java 시작 수정 검증 완료
+
+NEW Java resolver와 비동결 launcher/회귀검사4파일을 마쳤다. 최종49개 합성 검사0.97초·Ruff 통과, 기존 properties의UTF-8 오류는 실제 bytes에서 같은0xb0/위치406으로 재현했다. 새 resolver의 현재 Windows 기본 임시 폴더 실행은0.625초/exit0이고 실제 JVM 경로 존재·임시 파일 제거를 확인했다. 이모지 임시 경로와 cwd 대안은 JDK21/MS949에서 실패했으며 원본을 보존하고 성공한 최소 구현의 정확한 hash로 복귀했다. Unicode java.home 값 보존은 합성 검사이고 임의 Unicode TMP 지원은 아니다.
+
+별도 Astra xhigh 최종 읽기 검토는4코드 hash 일치·추가 blocker0을 반환했다. 부모는4코드·27개 원본 증거 hash와 기존 동결 helper 보존을 확인하고 [수정 검증 기록](../experiments/results/meetings-service-rag-startup-repair-v1.json)을 남겼다. 원래 v1 실패는 유지하며 모델·서비스 재실행0이다. [한정된 v2 절차](MEETINGS-SERVICE-RAG-STARTUP-REPAIR.md)를 채택하고 수정 commit의 정확한 CI 뒤 동일 자료·정책의 새 등록을 준비한다. Goal ACTIVE·Phase1/PR14 draft다.
+
+## 2026-10-22 · 실제 시작 실패 보존과 Java 경로 수정
+
+직전 사용자 응답은 상태 설명만 한 no-progress turn이다. 이번 실행에서 공식 calibration v1의 terminal exit1과 안전 증거14개 hash·기존 동결77개를 부모가 확인했다. CLI1.703초·driver0.406초·startup0.219초에 종료됐으며 native_attempted=false, 질문6개 모두 unexecuted·답변0이다. 원래 counts={}는 unavailable 그대로 유지한다. 소유 자식4개와 wrapper 잔존0·잠금3개 해제, 현재 프로젝트 runtime 프로세스0을 확인했다. [실패 공개 기록](../experiments/results/meetings-service-rag-calibration-startup-failure-v1.json)을 남기며 원래 run은 소비된 실패다.
+
+원본 stderr의 UTF-8 UnicodeDecodeError는 증명됐고 불변 코드 순서상 Java 설치 경로 확인 단계로 강하게 좁혀졌다. 상위에서 잡힌 예외형은 원본에 없어 확정하지 않는다. 동결된 verify_java_service.py를 수정하지 않고 비동결 서비스 실행기의 Java discovery를 좁게 고친다. 기존 실제 Astra high 구현 담당에게 최대4개 코드/검사 파일과 별도 실제 Java discovery-only 검증을 배정했다. 모델·서비스·평가 실행은 배정하지 않았다.
+
+기존 Astra xhigh 검토자는 모든 질문·native·판정 미실행 증거를 근거로, 같은 자료를 바꾸지 않는 새 v2 실행의 한정된 prospective 예외를 권고했다. 원래 실행 설계를 덮어쓰지 않고 별도 짧은 추가 설계에 기록한다. 수정 코드·독립 검토·정확한 CI·새 실행 등록이 완료되기 전 실제 v2를 실행하지 않는다. 새 자료 수집·품질 기준 완화·자동 재시도는 없다. 등록 commit34e689e의 push39702414533/PR39702420513 필수3job 성공과 사용자 author/committer도 확인했다. Goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-22 · 실제 calibration 실행 등록 준비
 
 기존 등록된 calibration 원문·문항 작성자 겸 실행 담당이 NEW manifest/registration/preparation3개를 반환했다. 기존 `verify_inputs` 순수 호출1회가 통과했고 source64·item10·code45·JAR1·UI4·기존 Java readback6을 재확인했다. 원문6·청크32·질문6의 bytes·순서 그대로, 가족2·사용자2·workspace2와 가족별 일반1/private1·회의2/workspace를 고정했다. 원문·문항 편집이나 oracle 주입은0이다.
