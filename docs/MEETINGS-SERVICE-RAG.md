@@ -1,6 +1,22 @@
 # 서비스 RAG 연결과 검증 범위
 
-2026-10-22 현재: 기존 Java/React 서비스에 새 로컬 답변 worker를 연결하는 opt-in 구현이다. 코드 계약·합성 전송·실제 Java 화면을 검증했고 실제 native까지 연결했다. 시작45.485초, 첫 회의 분석114.182초 이후 두 번째 분석이120.047초에 실패했다. 실제 답변은 아직 미실행이며 전체 흐름 수용·기본 채택·Phase1 완료가 아니다. [실행 실패 기록](../experiments/results/meetings-service-rag-analysis-timeout-v2.json)을 따른다. 아래의 최초 구현·합성 검사 결과는2026-10-20 기준 이력이다.
+## 현재 확인된 상태 — 2026-10-22
+
+명시적 `batch-v2` 개발 실행은 실제 로컬 모델로 회의4개 분석과 질문6개 응답까지 진행했다. 기본 정책은 여전히 `single`이며 `batch-v1`과 닫힌 실행도 보존한다. 전체 원문·분석120초·답변90초·동일 모델 예산을 유지했다. 원래 종료 검사가 실패했으므로 전체 운영 통과나 기본 채택은 아니다.
+
+답변6건의 독립 사후 AI 검토는 문제 없음5건/불필요한 인용1건이다. 원문 단독 기준 뒤 추출159개를 비교한 결과는 우선138/허용11/명확불일치10이며, 요약4개 핵심 범위 부족·제목2개 누락·작업 확약3개 분류 누락이 남았다. 원문 인용179개 일치만으로 충분한 요약이나 올바른 분류가 증명되지는 않는다. 작은 합성 개발 자료의 결과로 공식 평가·실제 조직 품질·사용자 검수를 대신하지 않는다.
+
+클릭부터 응답JSON까지 질문6건 평균52.758초이며 회의분석 worker 관측4건 평균29.332초다. 렌더 완료·운영p95·전체 비용은 측정하지 않았다. 현재 지식검색 UI는 보류 사유와 요청 실패를 구분하고 원문 검색/명시적 재시도를 안내한다.
+
+- [실제 실행과 원래 실패](../experiments/results/meetings-analysis-scope-development-v2.json)
+- [답변 판정](../experiments/results/meetings-analysis-scope-answer-review-v1.json), [추출 판정](../experiments/results/meetings-analysis-scope-extraction-review-v1.json), [실측 구간](../experiments/results/meetings-analysis-scope-performance-v1.json)
+- [화면 안내와 Java 경계 검사](../experiments/results/knowledge-answer-recovery-messages-v1.json)
+
+다음은 요약·제목 후처리의 원인을 generic 코드로 확인하고 별도 새 경로에서 검증하는 것이다. 현재 새 실제 실행은 배정되지 않았다. 아래 single 연결과 최초 구현 검증은 이전 시점의 기록이다.
+
+## 이전 연결 기록
+
+이전 single 정책 연결 기록: 기존 Java/React 서비스에 새 로컬 답변 worker를 연결한 opt-in 구현이다. 코드 계약·합성 전송·실제 Java 화면을 검증했고 실제 native까지 연결했다. 시작45.485초, 첫 회의 분석114.182초 이후 두 번째 분석이120.047초에 실패했다. 실제 답변은 아직 미실행이며 전체 흐름 수용·기본 채택·Phase1 완료가 아니다. [실행 실패 기록](../experiments/results/meetings-service-rag-analysis-timeout-v2.json)을 따른다. 아래의 최초 구현·합성 검사 결과는2026-10-20 기준 이력이다.
 
 ## 구현한 동작
 

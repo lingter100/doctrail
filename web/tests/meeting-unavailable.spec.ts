@@ -28,7 +28,7 @@ test('real Java without generation: text and PDF registration preserve source, s
   await expect(page.locator('.knowledge-hit')).toContainText('분석 미연결 합성 회의');
   await page.getByRole('tab', { name: '근거 기반 답변' }).click();
   await page.getByRole('button', { name: '질문하기', exact: true }).click();
-  await expect(page.getByRole('alert')).toContainText('AI 모델이 연결되지 않았어요');
+  await expect(page.getByRole('alert')).toContainText('현재 답변 생성 기능을 사용할 수 없어요');
   await page.getByRole('textbox', { name: '지식 질문' }).fill('syntheticnomatch999');
   await page.getByRole('button', { name: '질문하기', exact: true }).click();
   await expect(page.getByTestId('knowledge-answer')).toContainText('답변을 보류했어요');

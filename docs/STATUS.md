@@ -1,4 +1,14 @@
 # 진행 상태
+## 2026-10-22 · 기존 지식검색 기대값 한 곳 수정
+
+같은 구현 담당이 meeting-unavailable.spec.ts의 지식검색 안내 기대값1곳만 새 동작과 맞췄다. 공용 회의분석 기대값과 제품5개·JAR/UI5개는 그대로다. 타입 검사와 실제 Java 해당2개 검사(12.9초)를 통과했고 테스트 JVM은 종료됐다. 부모가 증거/제품/바이너리24개와 정확한1치환·보고서를 확인했다. [원래 CI 실패와 좁은 수정](../experiments/results/knowledge-answer-recovery-ci-fix-v1.json)을 기록하며 다음 정확한 CI는 아직 대기다. 전체 로컬 suite나 실제 모델을 재실행하지 않았다.
+
+## 2026-10-22 · 전체 원격 검사에서 기존 안내 기대값 누락 발견
+
+546242f를 사용자 계정으로 push하고 원격 author/committer lingter100·PR14 draft head를 확인했다. Push39724828993/PR39724834172는 backend/web 성공, java-service 실패다. 전체 Java 브라우저 batch는86통과/1실패이며 meeting-unavailable.spec.ts:31이 knowledge 화면의 generation_disabled에 옛 문구를 기대했다. 실제 새 안내는 설계한 중립 안내다. 원래 실패 로그2개를 보존했으며 테스트 실패를 성공으로 고치거나 같은 run을 재실행하지 않는다.
+
+기존 Astra high 구현 담당에게 해당 spec1개와 NEW ignored 검증 기록만 배정했다. 회의 분석의 공용 경고 기대값은 유지하고 지식검색의 기대값만 고친다. 현재 제품5개/JAR/UI는 유지하며 실제 Java 해당2개 검사와 타입검사 후 정확한 새 CI를 확인한다. Java 슬롯은 이 담당자만 사용하고 실제 모델/GPU0이다. 추출 후처리 설계 담당은 별도 generic 읽기/설계만 수행한다.
+
 ## 2026-10-22 · 추출159개 비교 잠금과 후처리 개선 설계
 
 독립 추출 B 판단이 dee6e35c, 안전집계 d4edfac2로 잠겼다. 원문 단독 기준159개 중 우선 일치138·허용 대안11·명확 불일치10이다. 첫37개는 같은 잠금 기준에서32/1/3/1→33/1/3/0이며 인과적 성능 향상이나 공식 정확도가 아니다. 부모는 입력/잠금6개와 기존 답변 잠금 hash·분류 합계만 검증했고 private 내용은 읽지 않았다. [검토 결과와 한계](../experiments/results/meetings-analysis-scope-extraction-review-v1.json).
