@@ -23,7 +23,7 @@
 
 회의 추출159개를 원문 단독 기준과 비교한 사후 AI 진단에서는149개가 우선/허용 집합에 맞았고10개가 명확히 달랐다. 그러나 네 요약 모두 핵심 내용이 부족했고, 올바른 제목 라벨 이후 필드2개가 빠졌다. 인용179개가 원문과 맞는 것만으로 요약 품질을 통과시키지 않는다. 요약·제목 후처리 개선이 다음 우선이며 확약3개의 작업 분류 누락도 남아 있다. [독립 추출 진단](../experiments/results/meetings-analysis-scope-extraction-review-v1.json).
 
-지식검색의 보류·오류 안내는 근거 충돌/부족과 시간 초과/요청 실패를 구분하도록 수정했다. 관련 Java50개와 실제 Java·합성 응답 브라우저14개, 마지막 좁은 수정의 해당 검사1개 반복을 통과했다. 원문 검색·직접 재시도·세션 복구를 검증한 결과이며 실제 AI 품질 향상으로 해석하지 않는다. [검증 범위](../experiments/results/knowledge-answer-recovery-messages-v1.json).
+지식검색의 보류·오류 안내는 근거 충돌/부족과 시간 초과/요청 실패를 구분하도록 수정했다. 관련 Java50개와 실제 Java·합성 응답 브라우저14개, 마지막 좁은 수정의 해당 검사1개 반복을 통과했다. 원문 검색·직접 재시도·세션 복구를 검증한 결과이며 실제 AI 품질 향상으로 해석하지 않는다. [검증 범위](../experiments/results/knowledge-answer-recovery-messages-v1.json). 전체 원격 검사에서 발견한 기존 기대값1곳을 수정한 뒤 정확한01bcb66의 push/PR 필수3개 검사도 모두 통과했다. [CI와 범위](../experiments/results/knowledge-answer-recovery-ci-v1.json).
 
 최근 실제 개발 실행의 질문 응답은 클릭부터 응답JSON 수신까지6건 평균52.758초(42.973~62.573초)였다. 회의분석 worker 관측은4건 평균29.332초다. 두 수치는 측정 구간이 다르며 전체 렌더 완료나 운영p95가 아니다. 현재 지연도 남은 개선 과제이며 모델품질과 함께 판단한다. [실측과 한계](../experiments/results/meetings-analysis-scope-performance-v1.json).
 

@@ -1,4 +1,10 @@
 # 진행 상태
+## 2026-10-22 · 안내 수정의 전체 CI 통과와 새 조립 구현 시작
+
+01bcb66의 push39728455615/PR39728460798 필수 backend/java-service/web이 모두 성공했다. 부모가 정확한Git과현재제품/검사6개 일치를 확인해 [CI 기록](../experiments/results/knowledge-answer-recovery-ci-v1.json)을 남겼다. 이전546242f의 실패는 보존하며 새 조립 후보의 검사 통과로 해석하지 않는다.
+
+설계91a3435 commit 이후 기존 Astra high에게 NEW meeting_extraction_coverage.py와 해당 test2개만 우선 배정했다. 새 ignored 구현 증거에 변경예정8파일/동결77의 기준을 저장하며 기존 파일은 초기 독립 검토 뒤 연결한다. 실제 generator는 ID를 검증한 뒤 label만 반환하므로 기존 wire를 바꾸지 않고 내부 순서/길이 계약을 유지한다. 이후 offline custody가 원래ID와그순서/quote/offset 대응을 별도로 검증한다. 현재 구현 진행 중이며 실제모델/tokenizer/replay/Java0이다. 부모는 문서/Git/CI만 담당한다.
+
 ## 2026-10-22 · 분류와 분리한 요약·제목 조립 후보 설계 수용
 
 기존 Astra xhigh가 [새 조립 후보 설계](MEETINGS-EXTRACTION-COVERAGE-PLAN.md)71줄/13,051B(e3f93bfc)를 반환했고 부모가 전체 읽었다. generic 코드에서 기존 action우선 첫4개 선택과 제한된 제목 형식 투영을 확인했지만 실제 누락2건의 변환 trace는 읽지 않았다. 명시적 coverage-v1을 batch-v2에만 결합하고 default legacy와 frozen77·기존분류 prompt/grammar는 보존한다. 같은4개 요약 슬롯을 유형별로 순환해 고르고 model label1의 literal 제목만 확장한다. 요약 충분성은 가설이며 분류10개/확약3개 오류는 별도다.
