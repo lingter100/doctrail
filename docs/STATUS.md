@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-22 · 실제 calibration 실행 등록 준비
+
+기존 등록된 calibration 원문·문항 작성자 겸 실행 담당이 NEW manifest/registration/preparation3개를 반환했다. 기존 `verify_inputs` 순수 호출1회가 통과했고 source64·item10·code45·JAR1·UI4·기존 Java readback6을 재확인했다. 원문6·청크32·질문6의 bytes·순서 그대로, 가족2·사용자2·workspace2와 가족별 일반1/private1·회의2/workspace를 고정했다. 원문·문항 편집이나 oracle 주입은0이다.
+
+부모는 새3개 hash/bytes·plan canonical hash·CI의 코드45와 동일함·원문64/item10 binding을 확인했다. 실제 `.local/meetings-service-rag-calibration-run-v1`은 없으며 native/tokenizer/server/Java/모델 실행0이다. [준비 안전 요약](../data/evaluation/meetings-service-rag-calibration-execution-preparation-v1.json)을 남기고 등록 commit 뒤 기존 실행 담당에게 한 번만 실제 실행을 배정한다. 기존 final judge는 출력 생성 전 역할 가용성을 재확인했으며 추가 의미 입력0·프로젝트 metadata 노출 상태다. 실행자는 판정하지 않는다.
+
+CI 기록 커밋3cedd19의 push39701629949/PR39701634576도 필수3job 모두 성공했다. 실제 실행의 코드 기준은 앞서 통과한 c8c120d의45개 binding이며 이후 문서 커밋을 새 구현으로 혼동하지 않는다. Goal ACTIVE·Phase1/PR14 draft다.
+
 ## 2026-10-22 · 재개 확인과 실제 화면 검사004
 
 구현·validation v2 수용·화면 증거22파일을 c8c120d0e573f9cccadf5105341de0500ebcb454로 사용자 명의 commit/push했다. Push39700954136/PR39700959236 모두 backend·java-service·web 성공이며 GitHub author/committer lingter100과 PR14 head 일치도 확인했다. [실행 코드 CI](../experiments/results/meetings-service-rag-execution-ci-v1.json)는 정적 Python 의존성37개와 명시적 테스트/browser/lock/model manifest를 합친45개 파일이 해당 Git commit·현재 작업본과 일치함을 기록한다. JAR/UI는006에 사용한 로컬 artifact이며 Linux CI binary와 동일하다고 주장하지 않는다. 이 CI 기록을 commit한 뒤 기존 등록 calibration 실행 담당에게 manifest 준비만 배정한다.

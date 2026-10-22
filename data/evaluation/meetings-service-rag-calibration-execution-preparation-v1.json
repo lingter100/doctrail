@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "execution_manifest_preparation_receipt",
+  "created_at": "2026-10-22T00:51:00.476537+00:00",
+  "actor": "/root/service_rag_calibration_sources",
+  "status": "prepared_and_existing_verify_inputs_passed_runtime_not_dispatched",
+  "parent_read_policy": "Safe count/hash/role/policy metadata only. Do not semantically read the manifest source titles or question/source bodies.",
+  "input_bindings": {
+    "source_freeze": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-freeze-v2.json",
+      "bytes": 35103,
+      "sha256": "423316335a89a55eb3fa052f66dd7b34fb2062072a849f02c97a9134c27799bc"
+    },
+    "item_freeze": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/item-freeze-v1.json",
+      "bytes": 6963,
+      "sha256": "acb3c65ebdd309fa3f778724134250335acaea9a8b71c228e9a0a46792b2251e"
+    },
+    "ci": {
+      "path": "experiments/results/meetings-service-rag-execution-ci-v1.json",
+      "bytes": 11154,
+      "sha256": "1ac57276a21ccd7a7866667e77b00c8e4812565164c35c44ba01175dc8f1786c"
+    },
+    "roles": {
+      "path": "data/evaluation/meetings-service-rag-calibration-execution-roles-v1.json",
+      "bytes": 1442,
+      "sha256": "a988425badb5c71ae2eacf249556213115cafb9fc5d7de44cc7ce29f921ecfe5"
+    },
+    "questions": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/draft-questions-v1.json",
+      "bytes": 2529,
+      "sha256": "bec375a38be8d2fd81bbce343b2f70f726d441a238d14218125967f41b1946b1"
+    },
+    "source_manifest": {
+      "path": ".local/service-rag-calibration-v2/source-manifest-v2.json",
+      "bytes": 54987,
+      "sha256": "97af0b72ec1ec28f8fafa8871fdd564aac76eb2c00873e585d4e29cce477c400"
+    },
+    "execution_design": {
+      "path": "docs/MEETINGS-SERVICE-RAG-EXECUTION.md",
+      "bytes": 19544,
+      "sha256": "e5f3a5001755ec8c25b481a199902c8936375c9a6e0478df09e535e6ef17b5b7"
+    },
+    "acceptance_plan": {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "bytes": 19569,
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    "prepared_java_result": {
+      "path": ".local/service-rag-calibration-v2/java-corrected/ingestion-result-v2.json",
+      "bytes": 6653,
+      "sha256": "302f6070eb94ee4c3b72a8f596cfa7297375977403d8c295259ec411b1154db7"
+    }
+  },
+  "output_bindings": [
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-execution-manifest-v1.json",
+      "bytes": 23971,
+      "sha256": "f3c2a08f49a5c21ce21b79f703c817526193ebcbb2fe096823dc1884cae25294"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-execution-registration-v1.json",
+      "bytes": 6666,
+      "sha256": "ef7a92af5aab52b6d575491a21b759b5c631823209625648a24bba1c0874e39f"
+    }
+  ],
+  "self_hash": "Returned externally after all writer handles close; not embedded recursively.",
+  "prepared_java_readback_bindings": [
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p1-read.json",
+      "bytes": 12226,
+      "sha256": "b2c5b4f0d7365d948b9877cf13fe5aeca368fb73e2f509943e84751c08d7d5e0"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p2-read.json",
+      "bytes": 19593,
+      "sha256": "57167e8049fd08e9fd5367a955e41d17ba64e202e08331fe7055c9ac8193e8d6"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-p3-read.json",
+      "bytes": 8037,
+      "sha256": "c434b37992bb4f8b53db8f65bdec63509eba79c8912ccfe8c8db8443223f5edb"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s1-read.json",
+      "bytes": 9763,
+      "sha256": "c7d0a4071271a63bc1a14f396512f79809bb11823765b4d67832a00ade9859dd"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s2-read.json",
+      "bytes": 7742,
+      "sha256": "bfe49e42206768d59003b3a39fad31af80852a442ddba1ae31f09d23ee4a0c83"
+    },
+    {
+      "path": ".local/service-rag-calibration-v2/java-corrected/cal-v2-s3-read.json",
+      "bytes": 8810,
+      "sha256": "ac098fa8b48b4a059d620bb22cef4a60c4c753d660111b9047d31cf63601a0a7"
+    }
+  ],
+  "source_mapping_checks": [
+    {
+      "source_id": "cal-v2-p1",
+      "prepared_document_id": "0e68e36f19014892945f7cc0408b4b3d",
+      "prepared_document_revision": 1,
+      "source_revision_identity": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "accepted_document_kind": "meeting",
+      "execution_upload_kind": "meeting",
+      "whole_raw_bytes": 4990,
+      "raw_sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+      "processed_codepoints": 4938,
+      "content_sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+      "chunk_count": 6,
+      "all_original_content_and_chunk_coordinates_match": true
+    },
+    {
+      "source_id": "cal-v2-p2",
+      "prepared_document_id": "e932bb1001b6462883578347c37fb011",
+      "prepared_document_revision": 1,
+      "source_revision_identity": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "accepted_document_kind": "meeting",
+      "execution_upload_kind": "meeting",
+      "whole_raw_bytes": 8257,
+      "raw_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "processed_codepoints": 8227,
+      "content_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+      "chunk_count": 10,
+      "all_original_content_and_chunk_coordinates_match": true
+    },
+    {
+      "source_id": "cal-v2-p3",
+      "prepared_document_id": "aed66f2c71664eb7aa14ebd186543f2f",
+      "prepared_document_revision": 1,
+      "source_revision_identity": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+      "accepted_document_kind": "general",
+      "execution_upload_kind": "document",
+      "whole_raw_bytes": 3296,
+      "raw_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "processed_codepoints": 3292,
+      "content_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+      "chunk_count": 4,
+      "all_original_content_and_chunk_coordinates_match": true
+    },
+    {
+      "source_id": "cal-v2-s1",
+      "prepared_document_id": "a4c3fe56463c42fc86b59396d9992b6f",
+      "prepared_document_revision": 1,
+      "source_revision_identity": "sha256:413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "accepted_document_kind": "general",
+      "execution_upload_kind": "document",
+      "whole_raw_bytes": 4046,
+      "raw_sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "processed_codepoints": 4044,
+      "content_sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+      "chunk_count": 5,
+      "all_original_content_and_chunk_coordinates_match": true
+    },
+    {
+      "source_id": "cal-v2-s2",
+      "prepared_document_id": "95b2bebc6bfe4507ad8a0266d51b5a5d",
+      "prepared_document_revision": 1,
+      "source_revision_identity": "sha256:eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "accepted_document_kind": "meeting",
+      "execution_upload_kind": "meeting",
+      "whole_raw_bytes": 3332,
+      "raw_sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "processed_codepoints": 1534,
+      "content_sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+      "chunk_count": 2,
+      "all_original_content_and_chunk_coordinates_match": true
+    },
+    {
+      "source_id": "cal-v2-s3",
+      "prepared_document_id": "14826bac3357471fa25a5d03bd9071b0",
+      "prepared_document_revision": 1,
+      "source_revision_identity": "sha256:eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "accepted_document_kind": "meeting",
+      "execution_upload_kind": "meeting",
+      "whole_raw_bytes": 3573,
+      "raw_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "processed_codepoints": 3565,
+      "content_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+      "chunk_count": 5,
+      "all_original_content_and_chunk_coordinates_match": true
+    }
+  ],
+  "counts": {
+    "source_documents": 6,
+    "source_chunks": 32,
+    "questions": 6,
+    "question_languages": {
+      "ko": 3,
+      "en": 3
+    },
+    "families": 2,
+    "actors": 2,
+    "workspaces_to_create": 2,
+    "ordinary_documents": 2,
+    "meetings": 4,
+    "private_documents": 2,
+    "workspace_documents": 4,
+    "private_per_family": 1,
+    "source_freeze_bindings": 64,
+    "item_freeze_bindings": 10,
+    "exact_ci_code_bindings": 45,
+    "local_jar_bindings": 1,
+    "local_ui_bindings": 4
+  },
+  "original_question_preservation": {
+    "bytes": 2529,
+    "sha256": "bec375a38be8d2fd81bbce343b2f70f726d441a238d14218125967f41b1946b1",
+    "case_order": [
+      "service-rag-cal-01",
+      "service-rag-cal-02",
+      "service-rag-cal-03",
+      "service-rag-cal-04",
+      "service-rag-cal-05",
+      "service-rag-cal-06"
+    ],
+    "all_query_strings_unmodified": true,
+    "query_context_injected": false,
+    "oracle_or_selection_in_driver_plan": false
+  },
+  "before_verification": {
+    "source": {
+      "binding_count": 64,
+      "all_match": true,
+      "binding_array_sha256": "a17a539e7b8b9866160e624c443ba340e91c11cdf4d37feb480103efa3f3abee",
+      "verified_at": "2026-10-22T00:50:59.675796+00:00"
+    },
+    "item": {
+      "binding_count": 10,
+      "all_match": true,
+      "binding_array_sha256": "cea6e3b30c2245314042d8b3e08c1d3fa8527ef19bb0ae1ef808c65af39dd676",
+      "verified_at": "2026-10-22T00:50:59.676909+00:00"
+    },
+    "code": {
+      "binding_count": 45,
+      "all_match": true,
+      "binding_array_sha256": "211783e238eb4446db4a0d4cd4102e9b920e32968350e5a1d2e750205691b568",
+      "verified_at": "2026-10-22T00:50:59.682912+00:00"
+    },
+    "local_artifacts": {
+      "binding_count": 5,
+      "all_match": true,
+      "binding_array_sha256": "80a76a7a814a5d27a558a5b80b7ab13768534727496d2f45adb7bfd250f80390",
+      "verified_at": "2026-10-22T00:50:59.727982+00:00"
+    }
+  },
+  "after_existing_verify_inputs": {
+    "source": {
+      "binding_count": 64,
+      "all_match": true,
+      "binding_array_sha256": "a17a539e7b8b9866160e624c443ba340e91c11cdf4d37feb480103efa3f3abee",
+      "verified_at": "2026-10-22T00:51:00.428041+00:00"
+    },
+    "item": {
+      "binding_count": 10,
+      "all_match": true,
+      "binding_array_sha256": "cea6e3b30c2245314042d8b3e08c1d3fa8527ef19bb0ae1ef808c65af39dd676",
+      "verified_at": "2026-10-22T00:51:00.429041+00:00"
+    },
+    "code": {
+      "binding_count": 45,
+      "all_match": true,
+      "binding_array_sha256": "211783e238eb4446db4a0d4cd4102e9b920e32968350e5a1d2e750205691b568",
+      "verified_at": "2026-10-22T00:51:00.434042+00:00"
+    },
+    "local_artifacts": {
+      "binding_count": 5,
+      "all_match": true,
+      "binding_array_sha256": "80a76a7a814a5d27a558a5b80b7ab13768534727496d2f45adb7bfd250f80390",
+      "verified_at": "2026-10-22T00:51:00.475113+00:00"
+    }
+  },
+  "pure_verify_inputs": {
+    "status": "passed",
+    "function": "scripts.run_meeting_rag_acceptance.verify_inputs",
+    "unmodified_function": true,
+    "calls": 1,
+    "started_at": "2026-10-22T00:51:00.354866+00:00",
+    "finished_at": "2026-10-22T00:51:00.420025+00:00",
+    "returned_cases": 6,
+    "returned_original_questions_equal": true,
+    "run_directory_absent_after_call": true,
+    "execute_called": false,
+    "start_services_called": false,
+    "reviewed_top_level_local_import_modules": 34,
+    "torch_transformers_sentence_transformers_llama_cpp_or_global_app_imported": false,
+    "bytecode_writes_disabled": true
+  },
+  "run_directory": {
+    "path": "C:\\Users\\SSAFY\\개인프로젝트\\.local\\meetings-service-rag-calibration-run-v1",
+    "exists": false,
+    "reserved_by_runtime": false,
+    "may_create_only_after": "Parent committed registration plus explicit once-runtime dispatch."
+  },
+  "role_status": {
+    "executor": "/root/service_rag_calibration_sources",
+    "final_judge": "/root/service_rag_calibration_final_judge",
+    "same_source_item_author_executor": true,
+    "executor_excluded_from_final_judgment": true,
+    "final_judge_accepted_in_bound_roles": true,
+    "parent_is_metadata_only": true
+  },
+  "current_preparation_counts": {
+    "new_json_files": 3,
+    "new_frameworks_or_checkers": 0,
+    "new_design_documents": 0,
+    "existing_file_edits": 0,
+    "source_or_question_edits": 0,
+    "oracle_or_selection_semantic_reads": 0,
+    "other_split_semantic_reads": 0,
+    "git_commands": 0,
+    "network_calls": 0,
+    "server_launches": 0,
+    "java_launches": 0,
+    "native_calls": 0,
+    "tokenizer_calls": 0,
+    "model_calls": 0,
+    "actual_retrieval_calls": 0,
+    "actual_answer_posts": 0,
+    "actual_uploads": 0,
+    "official_run_directory_creations": 0
+  },
+  "exposure": {
+    "same_source_item_author_executor": true,
+    "previous_own_source_documents": 6,
+    "previous_own_source_chunks": 32,
+    "previous_own_items": 6,
+    "previous_own_oracle_facts": 22,
+    "earlier_own_calibration_v1_readme_exposure": true,
+    "generic_code_fixed_prompts_and_synthetic_examples_exposed": true,
+    "final_answer_judge_excluded": true,
+    "other_split_semantic_reads_this_preparation": 0
+  },
+  "limitations": [
+    "This is manifest preparation and pure verification, not service startup, model compatibility, retrieval quality, final-answer judgment, or Phase1 acceptance.",
+    "Source-only prior Java IDs came from /documents; four real meeting uploads and autoanalysis remain unexecuted.",
+    "Local JAR/UI hashes match the accepted CI receipt metadata; they are not claimed to be binaries produced by Linux CI.",
+    "The CI-bound implementation commit remains c8c120d0e573f9cccadf5105341de0500ebcb454; later receipt/documentation commits do not change that implementation identity.",
+    "The prepared registration still requires parent commit and separate runtime dispatch.",
+    "No SQLite database was opened; frozen database and ancillary files were hashed as bytes only."
+  ],
+  "failures_this_preparation": []
+}

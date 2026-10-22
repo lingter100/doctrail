@@ -1,4 +1,8 @@
 # 기여와 직접 검증 기록
+## 2026-10-22 · 실제 실행 입력 준비
+
+이미 등록된 Astra xhigh calibration 작성자 겸 실행 담당이 수용된 자기 split에서 실행용3개 metadata를 준비했다. 같은 split 원문·문항 작성자 노출을 유지하며 독립 final judge가 아니다. 기존 verify_inputs1회 외에 모델·검색·Java·토크나이저·네트워크·Git·공식 실행은0이다. 부모는 실제 의미 자료 없이 source64/item10/code45와 새3개 hash·계약·run dir 부재를 확인했다. 사용자 검수나 실제 모델 품질 판정은 아직 없다.
+
 ## 2026-10-22 · 기존 역할 재개와 화면004 관측
 
 기존 실제 Sol high 화면 담당이004의 Java/React·합성 HTTP 검사와 소유 자원 정리를 수행했다. 기존 Astra xhigh 설계 검토자는 v4 workspace 선택 두 줄을 읽고 blocker0을 반환했으며 실제 화면·모델 실행은 하지 않았다. 기존 Astra high 구현 담당은 다음 답변 준비 실패의 generic 코드를 확인하고, 기존 Astra xhigh validation 검토자는 v2 보완을 검토한다. 새 역할이나 부모 모델 변경을 주장하지 않는다.
