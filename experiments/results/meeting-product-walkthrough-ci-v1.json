@@ -1,0 +1,93 @@
+{
+  "status": "exact_source_both_required_ci_passed",
+  "source_commit": "fa62c02e96bfafb4a1db9bd19423c5ba242ae727",
+  "runs": [
+    {
+      "id": 39739179228,
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39739179228",
+      "headSha": "fa62c02e96bfafb4a1db9bd19423c5ba242ae727",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 39739183579,
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39739183579",
+      "headSha": "fa62c02e96bfafb4a1db9bd19423c5ba242ae727",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "original_commit_bindings_verified": 14,
+  "current_product_test_bindings_verified": [
+    {
+      "path": "web/src/components/MeetingViews.tsx",
+      "bytes": 36219,
+      "sha256": "2feb9ef56136ea0c1a8b7c449867e40c5706e8d186001ee3a3cb71ea66cc9766"
+    },
+    {
+      "path": "web/src/useDocTrail.ts",
+      "bytes": 23461,
+      "sha256": "2fb5c309bb8d693537261524035ba49a08ab3e9bbca276fed06a5c8ba9d3c4ed"
+    },
+    {
+      "path": "web/src/components/SourcePane.tsx",
+      "bytes": 4662,
+      "sha256": "be4dd90743a2988033272da8118ea5f95f77365726c7d73933e128ac3fffe8d1"
+    },
+    {
+      "path": "web/tests/meeting-ready.spec.ts",
+      "bytes": 17244,
+      "sha256": "cdbc2a995394053fb2670e288b42508714cfd48e8ecae43ce3f1f4e6bd0be885"
+    },
+    {
+      "path": "web/tests/source-focus.spec.ts",
+      "bytes": 6949,
+      "sha256": "ad3f7dad469e7dc648e913255f869c2e3feb72497b3c88b63623a3f2d68724b0"
+    }
+  ],
+  "local_result": "experiments/results/meeting-product-walkthrough-v1.json",
+  "watch_sessions_terminal_exit_zero": [
+    18253,
+    53564
+  ],
+  "github_author": "lingter100",
+  "github_committer": "lingter100",
+  "limits": [
+    "CI and local synthetic browser checks are not actual model quality, human acceptance or deployed service proof.",
+    "This result applies to source fa62c02, not unimplemented grounded-summary candidate or later documentation commits."
+  ]
+}

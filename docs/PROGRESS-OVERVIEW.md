@@ -21,7 +21,7 @@
 
 지식검색의 보류·오류 안내는 근거 충돌/부족과 시간 초과/요청 실패를 구분하도록 수정했다. Java50개·실제 Java/합성 응답 브라우저14개와 좁은 후속 회귀를 통과했고 정확한 수정 커밋의 필수 CI도 통과했다. 검사 반복을 새 고유 검사로 합산하지 않는다. [구현 검증](../experiments/results/knowledge-answer-recovery-messages-v1.json), [CI](../experiments/results/knowledge-answer-recovery-ci-v1.json).
 
-전체 화면 여정에서는 재분석 내부 코드 노출과 키보드 초점 유실을 확인해 고쳤다. 독립 검토가 찾아낸 ‘A 원문을 연 채 B를 업로드한 뒤 닫으면 A로 돌아가는’ 문제도 실제 재현 뒤 수정했다. 첫 수정12개와 최종 영향 범위4개는 겹치는 검사다. 최종 타입·빌드·패키징과 독립 읽기 검토를 마쳤으며 정확한 새 소스의 전체 CI는 이어서 확인한다. [화면·이미지·재현 방법](MEETINGS-VISUAL-ACCEPTANCE.md), [검증 한계](../experiments/results/meeting-product-walkthrough-v1.json).
+전체 화면 여정에서는 재분석 내부 코드 노출과 키보드 초점 유실을 확인해 고쳤다. 독립 검토가 찾아낸 ‘A 원문을 연 채 B를 업로드한 뒤 닫으면 A로 돌아가는’ 문제도 실제 재현 뒤 수정했다. 첫 수정12개와 최종 영향 범위4개는 겹치는 검사다. 최종 타입·빌드·패키징·독립 읽기 검토와 정확한 수정 커밋의 양쪽 필수 CI를 통과했다. [화면·이미지·재현 방법](MEETINGS-VISUAL-ACCEPTANCE.md), [검증 한계](../experiments/results/meeting-product-walkthrough-v1.json), [CI 결과](../experiments/results/meeting-product-walkthrough-ci-v1.json).
 
 ## 실제로 관측한 결과와 한계
 
