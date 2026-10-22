@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-22 · 근거 연결 요약 adapter 구현·독립 검토 완료
+
+직전 goal turn은 화면수정·실제회귀·정확CI·새설계·3commit/push의progress다. 재개에서 기존goal ACTIVE·Git·담당자·제품프로세스를 확인하고 기존작업을보존했다. 문서99dc866의 push39740135147/PR39740140449 필수3job이 모두 성공했고 watch18061/13528도exit0종료했다.
+
+새 module/test2가 신규55개 포함 관련162개 MockTransport회귀(1.01초)와Ruff를 통과했고 독립 Astra high의 정확2개 읽기 검토는blocker0이다. 부모가 전체코드/검사를읽고 source2·artifact32·기준보존11/현재코드10·동결77·로그를확인했다. [단독 adapter 검증](../experiments/results/meetings-grounded-summary-adapter-v1.json). 최초45개/Ruff1실패와후속50개/검토wire이전원본은별도보존했다.
+
+부모generic코드읽기와Astraxhigh설계확인으로 검토입력의중복인용을줄였다. 원문전체/gap은그대로두고 exact(start,end,quote)가유일한unit과일치할때만 검토후보의근거ID로연결한다. 저장claims/인용·기준·4096입력·같은120초는유지한다. 실제token절감/의미동등성/품질/속도는측정하지않았다.
+
+현재새2개는고정/소유권반환이며Python서비스/observer·Java·React연결은아직없다. 부모가소스/설계amendment/검증기록을먼저commit하고 다음Java4/React3계약연결을배정한다. 실제모델/tokenizer/native/Java/브라우저/자료replay는이단계0, 전체goal ACTIVE/Phase1 incomplete다.
+
+## 2026-10-22 · 후속 설계·CI 기록 공개와 최소 구현 진행 중
+
+1476e52(설계9개)와99dc866(CI기록/상태4개)을 push했고 각commit bytes와 원격author/committer lingter100·PR14 OPEN/DRAFT·head99dc866을 확인했다. PR 설명도 현재 기능·비개선·화면수정·새후보 미검증 상태로 갱신했다. 새 문서 head의 push39740135147/PR39740140449는진행중이며 별도watch없음, 다음재개에서같은run을확인한다. 제품fa62c02의양쪽필수CI통과는이미확인한결과다.
+
+기존 Astra high가 NEW meeting_grounded_summary.py/test2를 작성 중이다. 첫 코드 검토/검사 결과는 아직 반환되지 않았고 제품 연결·실제 모델 실행은 미배정이다. 부모는 이source를임의수정/추가stage하지않는다. 이번goal turn은 실제화면수정·검증·독립검토·sourceCI·새후보설계·사용자계정3commit/push의progress이며전체goal은ACTIVE다.
+
 ## 2026-10-22 · 화면 수정 전체 CI 통과와 새 요약 최소 구현 시작
 
 화면수정fa62c02의 push39739179228/PR39739183579 필수3job이 모두 성공했고 watch18253/53564도exit0으로 끝났다. 부모는 원래commit14개와현재제품/검사5개를 확인해 [정확한 CI 결과](../experiments/results/meeting-product-walkthrough-ci-v1.json)를 남겼다. 실제 모델/사용자 품질 수용으로 해석하지 않는다.

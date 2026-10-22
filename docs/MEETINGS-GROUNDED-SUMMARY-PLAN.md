@@ -33,6 +33,7 @@
 - 새 생성은 `_prepare`와 `_complete(messages, same_deadline, 768, new_grammar)`, 검토는 같은 메서드의 출력128을 사용한다. 생성·검토 각각 실제 template 포함 입력4096 이하, EOS 필수다. 768/128은 각각의 최대 출력 토큰이며 새 호출 둘의 합계 최대896이다. 기존 분류 토큰/호출은 별도 합산한다. 선언된 글자 수가 실제 토큰 수를 대신하지 않는다.
 - 생성 wire는 `{"status":"draft","claims":[{"evidence":[unit_id,...],"text":"..."},...]}` 또는 `{"status":"abstained","claims":[]}`다. 모델이 인용문이나 offset을 생성하지 않고, 검증된 unit ID를 전체 원문 span으로 해석한다. 범위/정수형/중복/개수, 비어 있지 않은 유효 Unicode text, 상한, 허용 key만 검사한다. ID 목록은 원문 순서여야 하며 주장 순서는 모델의 설명 순서를 보존한다. 인용의 quote는 Java 기존 span 한도12,000 code point도 충족해야 한다. 넘는 span을 자르거나 임의 부분문자열로 바꾸지 않는다.
 - 검토 wire는 `{"claims":[[claim_id,"supported|unsupported|uncertain"],...],"coverage":"sufficient|insufficient|uncertain"}`의 실제 enum 값 중 하나를 쓰는 엄격한 객체다. 모든 candidate ID가 정확히 한 번, 원래 순서로 있어야 한다. 전부 supported이고 coverage가 sufficient일 때만 반환한다. 검토는 새 문장을 쓰거나 근거를 바꾸지 않는다. 잘못된/모호한 응답은 수리하지 않는다.
+- 구현 전 generic 접점 검토에서 검토 prompt의 인용문 중복을 제거하기로 정했다. `source_parts`의 전체 원문·gap·unit ID·좌표는 유지하고, 검토 후보만 `{id,text,evidence:[unit_id...]}`로 전달한다. 저장 citation의 `(start_offset,end_offset,quote)`가 정확히 하나의 원래 unit과 일치할 때만 변환하며 quote만으로 찾거나 첫 위치를 선택하지 않는다. 저장 계약·투영·생성 결과는 바꾸지 않는다. 변경된 실제 prompt로 admission/관측하고 반복 quote·잘못된 연결 거부·저장 claims 불변·전체 원문 보존을 검사한다. 같은 정보 연결을 보존하는 구현 선택이며 모델 판단 성능 동등성이나 실측 토큰/지연 개선을 뜻하지 않는다.
 - 생성과 검토 지시는 의결/제안/확약, 현재/과거 상태, 조건·예외·변경·적용 시점·대상 범위, 해결되지 않은 충돌을 구분한다. 검토는 각 **주장 전체**가 그 주장에 연결된 근거만으로 지지되는지와 전체 원문 핵심의 누락을 별개로 판단한다. 해결되지 않은 충돌을 그대로 설명할 수는 있지만 임의의 첫 값/최신 날짜를 정답으로 고르지 않는다. 특정 개발 문구나 사례는 넣지 않는다.
 
 ## 시간·검토·실패의 의미
