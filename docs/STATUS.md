@@ -1,4 +1,30 @@
 # 진행 상태
+## 2026-10-22 · 실제 연결 결과 보존과 답변 독립 판정 시작
+
+실행 담당이 최종 증거·후속 검사를 반환하고 HEAD/code/JAR/UI hold와 Java/GPU 슬롯을 해제했다. 부모가1893개 원본 evidence binding과17개 runtime파일·HEAD 동일을 확인했다. 원래 run1880파일과 이전 scratch492개·입력16개·동결77개·고정37개 주석은 유지됐다. [실제 개발 결과](../experiments/results/meetings-analysis-scope-development-v2.json)에 실패와 나중 자원 부재 확인을 분리했다.
+
+실측은 전체510.500초, 시작44.938초, active463.922초다. 문서6등록·회의4분석(159unit/22batch)·질문6응답(답변4/보류2)·원문 인용17·ACL12·합성 actor편집4·명시적 결정연결2를 기록했다. 이것은 같은 합성 개발 자료의 기능 관측이며 의미 정확성·사용자 검수·공식평가·전체 운영 수용이 아니다. 원래 CLIexit1/Node0·owned_absence=false·first_failure:null·runtime_not_eligible를 보존한다. 이후 소유16PID 부재·lease3개 free·GPU작업0을 확인했고 수동kill0이다.
+
+후처리에서 raw worker citation과 Java가 metadata를 추가한 citation 전체를 직접 비교해 assertion1개가 실패했다. 원본을 보존하고 claim text와4개 핵심citation 필드·전체원문/버전/좌표를 따로 검증했으며 실제run 실패와 구분한다. 기존 독립 Astra xhigh 판정자에게 원래6질문·실제권한context·응답만 들어 있는 packet b669df1b를 배정했다. 성능/진단/추출라벨/작성자기대답은 제외하고 답변 판단을 먼저 고정한다.
+
+Generic 정리 코드의 단발 PID 확인과 확인 이전 elapsed 계산을 읽기 검토로 확인했다. 다음 최소 수정은 같은 절대5초 cleanup deadline의 남은 시간 안에서 동일identity의 종료를 확인하고 최초 원인이 없으면 고정 코드를 남기는 것이다. 해당 PID의 정확한 역할과 잔류 원인은 미기록이므로 추측하지 않는다. 기존실행/guards/예산은 유지하고 별도 새 실행기의 구현·합성 경계 검사·독립 검토를 준비한다. 새 실제실행은 아직 배정하지 않았다.
+
+## 2026-10-22 · 실제 답변6건 뒤 소유 프로세스 부재 검사 실패
+
+같은 session63663은 실제 CLI exit1/510.500초로 종료됐다. 실행 담당의 원본 확인에서 analysis-ready4, 질문 completed6, 연결 완료 파일2, 실제 Node exit0/browser mechanical_completed가 관측됐다. 전체 결과의 의미 품질은 아직 판정하지 않았다.
+
+최초 수용 실패는 원본 owned_absence_confirmed=false이며 추적14개 중 PID9120 하나가 검사 당시 same_identity_alive=true였다. Summary의 failure code 필드는 없고 final receipt first_failure=null, finalization code는 runtime_not_eligible다. Cleanup1.035663초 accepted/nativeabsence=true와 전체 수용 실패를 구분한다. 나중 독립 확인에서14개+wrapper/CLI=16개가 모두 없었지만 원래 실패를 통과로 바꾸지 않는다. 추가 kill/재실행은 없다.
+
+현재 HEAD308a27a/code/JAR/UI hold는 실행 담당의 최종 증거 정리까지 유지한다. 부모도17개 runtime파일 hash와 HEAD 동일·wrapper/CLI 부재를 별도로 확인했다. 기존 Astra xhigh 설계 담당에게 generic 정리 코드만 읽는 원인 점검을 배정했으며 새 수정·모델 실행은 없다. 답변6건은 실제자료 mapping 확인 후 timing/diagnostics를 분리한 별도 개발 사후 판정을 준비한다.
+
+## 2026-10-22 · 범위 정책의 실제 개발 비교1회 시작
+
+동일 live session63663 중간 관측: 실제 API analysis-ready4/started4, upload attempts6, question attempts2/completed1, 첫 실패 marker 없음이다. 이는 완료 전 진행 관측이며 답변 의미/전체 수용 판정이 아니다. 후속 기록308a27a의 push39718907258/PR39718913127도 필수3job 모두 성공했다. HEAD/code/JAR/UI hold와 독점 Java/GPU 슬롯은 계속 유지한다.
+
+CI·준비 기록을308a27a로 사용자 계정 commit/push했고 원격 author/committer lingter100을 확인했다. 정확한 제품 코드11cdaa7의 양쪽 필수 CI는 이미 통과했고, 후속 기록 commit의 CI39718907258/39718913127은 진행 중이다. 기존 Sol high 실행 담당에게 NEW run-v2 한 번을 명시 배정했다. 실제 도구 session63663/초기chunk52b534, wrapper PID18296/CLI3888 시작이 반환됐다.
+
+직전 code10·harness2·JAR/UI·기존 입력16·동결77·source-only37 lock·이전 scratch492개 hash를 확인했고 프로젝트 runtime0·lease3개 free·GPU작업0이었다. 예행/warmup 없이 실제 명령을 시작했다. 부모는 HEAD308a27a와 code/JAR/UI를 유지하며 실행 담당만 Java/GPU 슬롯을 사용한다. 관측 timeout만으로 재실행하지 않고 같은 handle을 확인한다. 현재 실행 결과·의미 개선·전체 완료를 주장하지 않는다. 원본 stdout/stderr와 안전 기록은 별도 cli-v2에 보존한다.
+
 ## 2026-10-22 · 새 정책의 정확한 CI 통과와 실제 비교 준비
 
 구현11cdaa7282a86b8a86a2ecb7700f07001a08b23c를 사용자 계정으로 push하고 원격 author/committer lingter100·PR14 draft head를 확인했다. Push39718285606/PR39718289233의 backend/java-service/web이 모두 성공했다. 부모는 정확한 Git code10개와 현재 파일이 같음을 확인했다. [CI·실행 도구 검토 기록](../experiments/results/meetings-analysis-scope-ci-v1.json) SHA75988bb3은 로컬 검사·원격 검사·scratch 검토 범위를 구분한다.
