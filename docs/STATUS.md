@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-22 · 새 정책의 정확한 CI 통과와 실제 비교 준비
+
+구현11cdaa7282a86b8a86a2ecb7700f07001a08b23c를 사용자 계정으로 push하고 원격 author/committer lingter100·PR14 draft head를 확인했다. Push39718285606/PR39718289233의 backend/java-service/web이 모두 성공했다. 부모는 정확한 Git code10개와 현재 파일이 같음을 확인했다. [CI·실행 도구 검토 기록](../experiments/results/meetings-analysis-scope-ci-v1.json) SHA75988bb3은 로컬 검사·원격 검사·scratch 검토 범위를 구분한다.
+
+독립 harness 최종 검토3ee947a1은 최초 browser 정책 불일치가 해결됐고 guard1줄·파일명2줄 외 차이가 없음을 확인했다. 부모는 final runner429219d0/browser312bdae3와33개 binding을 확인했다. NEW runtime-bindings-v2 SHA973e2eb9에는 정확한 code10·새 harness2·기존 JAR/UI·원래 입력 index를 고정했다. 로컬 JAR/UI가 원격 CI에서 내려받은 binary라는 주장은 하지 않는다.
+
+기존 Sol high 담당의 준비 확인 시 프로젝트 runtime0·lease3개 free·GPU작업0이었다. 기존 독립 final judge는 원문37/이전라벨 진단 노출을 공개한 상태로 가용성을 확인했고 고정 주석을 유지한다. 실제 실행된 답변 판단을 먼저 잠근 뒤 성능·추출 진단을 본다. 현재 run-v2는 없고 새 모델 실행0이다. 이 CI 기록을 commit한 뒤 같은 개발 입력의 명시적1회 실행을 별도 배정하며 실행 중 HEAD/code/JAR/UI를 유지한다. 기존 공식 v1/v2·validation·최종 test는 실행하지 않는다.
+
 ## 2026-10-22 · 범위 분류 구현과292개 회귀 검사 완료
 
 명시적 batch-v2를 기존 분류 루프에 연결했다. 실제 변경은 adapter/service와5개 검사, 총7파일이며 두 launcher와driver는 공유 policy 경로를 재사용해3파일 bytes가 그대로다. 구현 전 single/v1 prompt·예시·messages·실제 template request bytes의 고정 기대값을 기록했다. 최종292개 합성 검사11.70초·Ruff를 통과했고 독립 Astra xhigh 읽기 검토1a8f7ff1에서 blocker0이다. 부모가 변경 전체와42개 현재 binding·10개 기존 Git binding·동결77개를 확인했다. [구현 검증 기록](../experiments/results/meetings-analysis-scope-implementation-v1.json).
