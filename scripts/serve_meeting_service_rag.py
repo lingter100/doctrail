@@ -10,7 +10,7 @@ from pathlib import Path
 
 from doctrail.inference import _validate_token
 from doctrail.meeting_analysis_batch import POLICIES
-from doctrail.meeting_service_rag import create_app, load_runtime
+from doctrail.meeting_service_rag import ASSEMBLIES, create_app, load_runtime, validate_assembly
 from doctrail.meeting_worker import worker_admission
 from scripts.prepare_meeting_gguf import ROOT
 from scripts.serve_meeting_gpu_placement import start_llama
@@ -20,12 +20,12 @@ from scripts.serve_meeting_thinking_compat import cleanup_owned
 
 @contextmanager
 def start_service(*, token, log_dir, model_dir=DEFAULT_ROOT, manifest=MANIFEST,
-                  telemetry=None, observer=None, analysis_policy="single"):
-    if analysis_policy not in POLICIES:
-        raise ValueError("invalid_analysis_policy")
+                  telemetry=None, observer=None, analysis_policy="single", extraction_assembly="legacy"):
+    validate_assembly(analysis_policy, extraction_assembly)
     _validate_token(token)
     metrics = telemetry if telemetry is not None else {}
     metrics["analysis_policy"] = analysis_policy
+    metrics["extraction_assembly"] = extraction_assembly
     started = time.monotonic()
     startup_deadline = started + 120
     native_metrics = metrics.setdefault("native", {})
@@ -51,7 +51,8 @@ def start_service(*, token, log_dir, model_dir=DEFAULT_ROOT, manifest=MANIFEST,
             try:
                 options = {} if observer is None else {"observer": observer}
                 runtime = load_runtime(native, cleanup=cleanup, startup_deadline=startup_deadline,
-                                       analysis_policy=analysis_policy, **options)
+                                       analysis_policy=analysis_policy,
+                                       extraction_assembly=extraction_assembly, **options)
             finally:
                 timer.cancel()
                 timer.join()
@@ -72,12 +73,14 @@ def main(argv=None):
     parser.add_argument("--port", type=int, default=8092)
     parser.add_argument("--log-dir", type=Path, required=True)
     parser.add_argument("--analysis-policy", choices=POLICIES, default="single")
+    parser.add_argument("--extraction-assembly", choices=ASSEMBLIES, default="legacy")
     args = parser.parse_args(argv)
     if not 1 <= args.port <= 65535:
         parser.exit(2, "invalid_port\n")
     try:
         with start_service(token=os.environ.get("DOCTRAIL_GENERATION_TOKEN", ""),
-                           log_dir=args.log_dir, analysis_policy=args.analysis_policy) as app:
+                           log_dir=args.log_dir, analysis_policy=args.analysis_policy,
+                           extraction_assembly=args.extraction_assembly) as app:
             import uvicorn
             uvicorn.run(app, host="127.0.0.1", port=args.port,
                         access_log=False, log_level="critical")

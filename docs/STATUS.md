@@ -1,4 +1,32 @@
 # 진행 상태
+## 2026-10-22 · 요약·제목 조립 후보 서비스 연결 검증
+
+NEW2와 기존8 연결을 마쳤다. 관련6개 test파일의452개 합성/MockTransport·Node 계약 검사(16.42초)와 Ruff를 통과했고 기존 TestClient 경고1개는 남겼다. 이전55/57개는 포함 범위여서 합산하지 않는다. 독립 Astra xhigh의 정확10개 읽기 검토는 blocker0이다. 부모가 코드/검사 변경을 읽고 최종10개·receipt 참조21개·기준87개 복사본/79개 현재·통합 최초소스8개/기준8개를 확인했다. [구현 기록](../experiments/results/meetings-extraction-coverage-implementation-v1.json).
+
+명시적 batch-v2+coverage-v1만 새 조립을 선택하고 기본legacy는 유지한다. 일반/관측 runtime·health/lifecycle·두 CLI·plan/registration/validation gate의 실제 선택을 연결했다. assembly 진단은 요청 성공이나 native 호출 수로 세지 않으며 busy 요청에서 이전 진단을 재발행하지 않는다. 모든 정책에서 새 module도 code binding에 포함한다.
+
+최초9개 검사 실패/440통과·Ruff2·출력 해석 harness 실패와 당시 source를 보존했다. 새 모듈 첫 공백 span 회귀2개 실패도 유지한다. 실제 모델/토크나이저/Java/브라우저서비스/저장분류 비교0이다. 다음은 사용자 계정 source commit·정확한 필수 CI, 이후 별도 custody에 의한 동일159분류 조립 비교다. 실제 품질·운영 수용·사용자 검수·Phase1 완료를 주장하지 않는다.
+
+## 2026-10-22 · 조립 단독 검토 완료와 서비스 연결 시작
+
+직전 진행 문의 turn은 좁은 구현 수정을 배정하고 새 회귀 실패·수정 후 통과 근거를 얻은 progress다. 이번 재개에서 goal ACTIVE·구현 담당 반환·독립 검토 진행·Git/프로세스를 확인했다. 제품 Java/GPU는 실행 중이지 않고 관련 Node2개는 Codex runtime으로 보존한다.
+
+NEW2의 공백 span 경계 수정 후57개 합성/MockTransport 검사와 Ruff를 통과했다. 수정 전 신규2개 실패와 기존55개 결과·원본15개는 보존했고 독립 Astra xhigh 최종 delta 검토는 blocker0이다. 부모가 새 module/test를 읽고 현재/보존 기준87개·이전증거14개·수정 receipt 참조8개·보존15개를 확인했다. receipt-v2는68f5b87a이며 실제 품질 개선 결과가 아니다.
+
+같은 Astra high에게 설계에 정한 기존8개 서비스·실행기·수용 도구와 관련 검사의 연결을 명시 배정했다. 기본legacy와 batch-v2+coverage-v1 조합, 실제 health/선택 일치, 별도 assembly-only 진단, 등록/실행 정책 일치와 새 module binding을 검증한다. 분류 정책·시간/한도·동결77·이전실험은 유지한다. 독립 연결 검토와 정확한 CI 전에는 실제자료 offline 비교나 모델/Java 실행을 하지 않는다.
+
+## 2026-10-22 · 진행 문의 응답과 조립 경계 수정
+
+사용자에게 핵심 문서·회의 관리 구현과 남은 AI 품질·지연·통합/외관·포트폴리오 정리를 구분해 설명했다. 추가2~4주는 임시 계획 범위이며 측정된 개발 속도나 확정 납기가 아니다. 유료 사용과 공개 배포는 포함하지 않는다. 기존 goal ACTIVE를 유지한다.
+
+9d7abc2의 push39729057080/PR39729065715 필수3개 job이 각각 모두 성공한 것을 재확인했다. 새 조립 NEW2는55개 합성·MockTransport 검사/Ruff를 통과했고 receipt b224d40b가 반환됐다. 독립 Astra xhigh 읽기 검토는 기존 분할기가 만들 수 있는 공백-only span을 strip 검사로 거부하는 계약 불일치1개를 찾았다. 같은 Astra high에게 최초 결과/소스를 보존한 NEW2 최소수정과 일반 분할 회귀를 배정했으며 기존8파일 연결은 아직 시작하지 않았다. 실제 모델·자료 replay·Java 실행0이고 사용자 검수0이다. last_assembly는 조립 단계 진단이며 요청 성공은 실제 반환/오류로 판단한다.
+
+## 2026-10-22 · 설계·CI 기록 공개와 구현 소유권
+
+설계91a3435와 CI기록9d7abc2를 사용자 계정으로 push했고 원격 author/committer lingter100·PR14 draft head를 확인했다. 문서 commit의 push39729057080/PR39729065715는 진행 중이며, 제품/회귀 수정01bcb66의 양쪽 필수3job 통과와 구분한다. PR 설명에 실제 실패·품질 누락·통과 범위를 반영했다.
+
+기존 Astra high 담당은 NEW 조립module/test2개를 구현 중이며 예정8파일+동결77+freeze/design2=87개 기준 복사/hash를 보고했다. 실제 API는 span-only unit과 label-only row이므로 wire ID를 새로 넣지 않는다. 초기 합성 검사 결과는 아직 반환되지 않았고 독립 검토 후에만 나머지 연결을 배정한다. 부모는 문서/Git, 다른 담당자는 반환 상태이며 실제모델/Java/replay0이다. 이번 goal turn은 제품수정·실제 회귀·원격CI·독립 추출 진단·다음설계/구현 배정의 progress이며 전체 Phase1/goal은 ACTIVE다.
+
 ## 2026-10-22 · 안내 수정의 전체 CI 통과와 새 조립 구현 시작
 
 01bcb66의 push39728455615/PR39728460798 필수 backend/java-service/web이 모두 성공했다. 부모가 정확한Git과현재제품/검사6개 일치를 확인해 [CI 기록](../experiments/results/knowledge-answer-recovery-ci-v1.json)을 남겼다. 이전546242f의 실패는 보존하며 새 조립 후보의 검사 통과로 해석하지 않는다.

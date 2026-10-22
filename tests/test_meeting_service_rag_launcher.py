@@ -7,8 +7,9 @@ import pytest
 from scripts import serve_meeting_service_rag as launcher
 
 
-@pytest.mark.parametrize("policy", ["single", "batch-v1", "batch-v2"])
-def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_path, policy):
+@pytest.mark.parametrize("policy,assembly", [("single", "legacy"), ("batch-v1", "legacy"),
+    ("batch-v2", "legacy"), ("batch-v2", "coverage-v1")])
+def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_path, policy, assembly):
     events, metrics = [], {}
     native = SimpleNamespace(process=object(), drain=object(), cleanup={})
     @contextmanager
@@ -33,9 +34,9 @@ def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_p
             if not self.closed:
                 self.closed = True
                 assert self.cleanup()
-    def load(native_arg, *, cleanup, startup_deadline, analysis_policy):
+    def load(native_arg, *, cleanup, startup_deadline, analysis_policy, extraction_assembly):
         assert native_arg is native
-        assert analysis_policy == policy
+        assert analysis_policy == policy and extraction_assembly == assembly
         assert startup_deadline > 0
         result = Runtime()
         result.cleanup = cleanup
@@ -46,12 +47,13 @@ def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_p
     monkeypatch.setattr(launcher, "cleanup_owned", cleanup)
     monkeypatch.setattr(launcher, "load_runtime", load)
     with launcher.start_service(token="x" * 40, log_dir=tmp_path / "new", telemetry=metrics,
-                                analysis_policy=policy):
+                                analysis_policy=policy, extraction_assembly=assembly):
         events.append("serve")
     assert events == [("native", 28), "worker", "load", "serve",
                       "cleanup", "worker_exit", "native_exit"]
     assert metrics["native_adapter_startup_seconds"] >= 0
     assert metrics["analysis_policy"] == policy
+    assert metrics["extraction_assembly"] == assembly
 
 
 def test_cli_requires_explicit_opt_in_before_any_start(monkeypatch, tmp_path):
@@ -111,3 +113,29 @@ def test_invalid_analysis_policy_rejected_before_native(monkeypatch, tmp_path):
     with (pytest.raises(ValueError, match="invalid_analysis_policy"),
           launcher.start_service(token="x" * 40, log_dir=tmp_path, analysis_policy="auto")):
         pytest.fail("invalid policy admitted")
+
+@pytest.mark.parametrize("policy,assembly", [("single", "coverage-v1"), ("batch-v1", "coverage-v1"),
+    ("batch-v2", "auto")])
+def test_incompatible_assembly_rejected_before_native(monkeypatch, tmp_path, policy, assembly):
+    monkeypatch.setattr(launcher, "start_llama", lambda **kwargs: pytest.fail("native attempted"))
+    with (pytest.raises(ValueError, match="invalid_extraction_assembly"),
+          launcher.start_service(token="x" * 40, log_dir=tmp_path, analysis_policy=policy,
+                                 extraction_assembly=assembly)):
+        pytest.fail("invalid assembly admitted")
+
+
+@pytest.mark.parametrize("assembly", [None, "legacy", "coverage-v1"])
+def test_worker_cli_forwards_assembly(monkeypatch, tmp_path, assembly):
+    import uvicorn
+    seen = []
+    @contextmanager
+    def start(**kwargs):
+        seen.append((kwargs["analysis_policy"], kwargs["extraction_assembly"]))
+        yield object()
+    monkeypatch.setattr(launcher, "start_service", start)
+    monkeypatch.setattr(uvicorn, "run", lambda *args, **kwargs: None)
+    args = ["--enable-service-rag", "--log-dir", str(tmp_path), "--analysis-policy", "batch-v2"]
+    if assembly is not None:
+        args.extend(["--extraction-assembly", assembly])
+    launcher.main(args)
+    assert seen == [("batch-v2", assembly or "legacy")]

@@ -474,10 +474,11 @@ def test_browser_module_import_and_contracts_without_browser():
     assert result.returncode == 0, result.stderr.decode()
 
 
-def test_cli_has_no_fixture_endpoint_or_policy_override():
+@pytest.mark.parametrize("flag", ["--fixture", "--analysis-policy", "--extraction-assembly"])
+def test_cli_has_no_fixture_endpoint_or_policy_override(flag):
     with pytest.raises(SystemExit) as error:
         driver.main(["--phase", "calibration", "--manifest", "none", "--run-dir", "none",
-                     "--fixture", "fake"])
+                     flag, "fake"])
     assert error.value.code == 2
 
 
@@ -1063,3 +1064,110 @@ def test_validation_gate_requires_same_effective_analysis_policy(fixture, policy
         result = driver.execute(fixture.path, "validation", fixture.run,
             service_factory=lambda **kwargs: pytest.fail("cross-policy gate started service"))
         assert result["status"] == "failed" and result["failure"] == "calibration_gate_rejected"
+
+
+def register_assembly(fixture, assembly=None, registered=None, policy="batch-v2"):
+    register_analysis_policy(fixture, policy)
+    if assembly is not None:
+        fixture.manifest["plan"]["extraction_assembly"] = assembly
+    if registered is not None:
+        fixture.registration["policy"]["extraction_assembly"] = registered
+    reregister(fixture)
+
+
+@pytest.mark.parametrize("assembly,registered", [(None, None), (None, "legacy"),
+    ("legacy", None), ("legacy", "legacy"), ("coverage-v1", "coverage-v1")])
+def test_registered_effective_assembly_reaches_actual_service_factory_contract(fixture, assembly, registered):
+    register_assembly(fixture, assembly, registered)
+    fake, seen = FakeRun(fixture), []
+    def service(**kwargs):
+        seen.append((kwargs["analysis_policy"], kwargs["extraction_assembly"]))
+        return fake.service(**kwargs)
+    result = driver.execute(fixture.path, "calibration", fixture.run, service_factory=service,
+                            browser_factory=fake.browser, clock=lambda: fake.now)
+    assert result["status"] == "mechanical_completed_judgment_pending"
+    assert seen == [("batch-v2", assembly or "legacy")]
+    assert result["extraction_assembly"] == (assembly or "legacy")
+
+
+@pytest.mark.parametrize("assembly,registered,policy", [
+    ("coverage-v1", None, "batch-v2"), (None, "coverage-v1", "batch-v2"),
+    ("legacy", "coverage-v1", "batch-v2"), ("coverage-v1", "legacy", "batch-v2"),
+    ("auto", "auto", "batch-v2"), (None, "auto", "batch-v2"),
+    ("coverage-v1", "coverage-v1", "single"), ("coverage-v1", "coverage-v1", "batch-v1")])
+def test_assembly_mismatch_unknown_or_incompatible_cannot_start(fixture, assembly, registered, policy):
+    register_assembly(fixture, assembly, registered, policy)
+    result = driver.execute(fixture.path, "calibration", fixture.run,
+        service_factory=lambda **kwargs: pytest.fail("invalid assembly started service"))
+    assert result["failure"] == "policy_mismatch" and result["status"] == "failed"
+
+
+@pytest.mark.parametrize("policy,assembly", [(None, None), ("single", "legacy"),
+    ("batch-v1", "legacy"), ("batch-v2", "legacy"), ("batch-v2", "coverage-v1")])
+@pytest.mark.parametrize("fault", ["missing", "changed"])
+def test_all_policies_bind_loaded_coverage_module(fixture, policy, assembly, fault):
+    if policy is not None:
+        register_assembly(fixture, assembly, assembly, policy)
+    plan = fixture.manifest["plan"]
+    target = next(row for row in plan["code"] if Path(row["path"]).name == "meeting_extraction_coverage.py")
+    if fault == "missing":
+        plan["code"].remove(target)
+    else:
+        target["sha256"] = "0" * 64
+    ci = driver.read_json(plan["ci"]["path"]); ci["code"] = plan["code"]
+    plan["ci"] = write(fixture.tmp / "ci.json", ci)
+    fixture.registration["accepted_bindings"]["ci"] = plan["ci"]["sha256"]
+    reregister(fixture)
+    result = driver.execute(fixture.path, "calibration", fixture.run,
+        service_factory=lambda **kwargs: pytest.fail("unbound coverage module started service"))
+    assert result["failure"] == ("code_binding_missing" if fault == "missing" else "binding_changed")
+    assert result["status"] == "failed"
+
+
+@pytest.mark.parametrize("assembly,gate_assembly,accepted", [(None, None, True),
+    (None, "legacy", True), ("legacy", None, True), ("legacy", "legacy", True),
+    ("coverage-v1", "coverage-v1", True), (None, "coverage-v1", False),
+    ("coverage-v1", None, False), ("coverage-v1", "legacy", False),
+    ("legacy", "coverage-v1", False), (None, "auto", False), ("coverage-v1", "auto", False)])
+def test_validation_gate_requires_same_effective_assembly(fixture, assembly, gate_assembly, accepted):
+    register_assembly(fixture, assembly, assembly)
+    plan = fixture.manifest["plan"]
+    fixture.manifest["phase"] = fixture.registration["phase"] = "validation"
+    questions = fixture.questions; questions["phase"] = "validation"
+    questions["cases"].extend([{**questions["cases"][3], "id": f"c{i}"} for i in (6, 7)])
+    plan["questions"] = write(fixture.tmp / "questions.json", questions)
+    roles = driver.read_json(plan["roles"]["path"])
+    roles["executor"]["phase"] = roles["final_judge"]["phase"] = "validation"
+    plan["roles"] = write(fixture.tmp / "roles.json", roles)
+    fixture.registration["accepted_bindings"]["roles"] = plan["roles"]["sha256"]
+    gate = {"phase": "calibration", "analysis_policy": "batch-v2", "answers_total": 6,
+            "answers_passed": 6, "judgment_locked": True, "operational_accepted": True,
+            "cleanup_accepted": True, "code": plan["code"], "judge_lock_sha256": "a" * 64,
+            "run_receipt_sha256": "b" * 64}
+    if gate_assembly is not None:
+        gate["extraction_assembly"] = gate_assembly
+    plan["gate"] = write(fixture.tmp / "gate.json", gate)
+    fixture.registration["gate_sha256"] = plan["gate"]["sha256"]
+    reregister(fixture)
+    if accepted:
+        assert driver.verify_inputs(fixture.manifest, "validation", fixture.run) == questions
+    else:
+        result = driver.execute(fixture.path, "validation", fixture.run,
+            service_factory=lambda **kwargs: pytest.fail("cross-assembly gate started service"))
+        assert result["failure"] == "calibration_gate_rejected" and result["status"] == "failed"
+
+
+def test_assembly_evidence_is_nested_and_does_not_add_native_calls(fixture):
+    evidence = sink(fixture); current(fixture, "analyze", "s1")
+    source = fixture.manifest["plan"]["sources"][1]
+    evidence("analyze", "started", {"content": Path(source["raw"]["path"]).read_text()})
+    evidence("analyze", "classification_units", 3)
+    evidence("analyze", "transport_started", {"path": "/completion"})
+    diagnostic = {"extraction_assembly": "coverage-v1", "diagnostic": {
+        "assembly": "coverage-v1", "failure": None, "summary": [{"id": 1, "type": "decision"}],
+        "title_candidate_ids": [0], "title_projected": True}}
+    evidence("analyze", "assembly", diagnostic)
+    assert evidence.counts["analyze:classification_units"] == 3
+    assert evidence.counts["analyze:transport_started"] == 1
+    records = [driver.read_json(p) for p in sorted((fixture.run / "raw").glob("*.json"))]
+    assert [row["value"] for row in records if row["event"] == "assembly"] == [diagnostic]

@@ -20,6 +20,7 @@ from doctrail.meeting_analysis_batch import (
 )
 from doctrail.meeting_answer_v2 import response_language
 from doctrail.meeting_contract import AnalyzeRequest, AnswerRequest
+from doctrail.meeting_extraction_coverage import CoverageMeetingRuntime
 from doctrail.meeting_qwen35 import Qwen35Generator
 from doctrail.meeting_runtime import DEADLINE_SECONDS as EXTRACTION_SECONDS
 from doctrail.meeting_thinking_quality import QualityThinkingGenerator
@@ -27,6 +28,15 @@ from doctrail.meeting_worker import MeetingRuntime
 
 BUDGET_HEADER = "X-DocTrail-Request-Budget-Ms"
 PROTOCOL = "meeting-service-rag-v1"
+ASSEMBLIES = ("legacy", "coverage-v1")
+
+
+def validate_assembly(analysis_policy, extraction_assembly):
+    if analysis_policy not in POLICIES:
+        raise ValueError("invalid_analysis_policy")
+    if extraction_assembly not in ASSEMBLIES or (
+            extraction_assembly == "coverage-v1" and analysis_policy != "batch-v2"):
+        raise ValueError("invalid_extraction_assembly")
 
 
 def _observe(observer, operation, event, value):
@@ -126,15 +136,19 @@ class ServiceAnswerGenerator(QualityThinkingGenerator):
 
 
 class ServiceRuntime:
-    def __init__(self, answer_generator, analysis_generator, *, cleanup, observer=None):
+    def __init__(self, answer_generator, analysis_generator, *, cleanup, observer=None,
+                 extraction_assembly="legacy"):
         if not callable(cleanup):
             raise TypeError("owned_cleanup_required")
         self.answer_generator = answer_generator
         self.observer = observer
-        self.analysis = MeetingRuntime(analysis_generator)
         self.analysis_policy = (analysis_generator.analysis_policy if isinstance(
             analysis_generator, BatchedAnalysisGenerator) else "single")
         classification_metadata(self.analysis_policy)
+        validate_assembly(self.analysis_policy, extraction_assembly)
+        self.extraction_assembly = extraction_assembly
+        runtime_type = CoverageMeetingRuntime if extraction_assembly == "coverage-v1" else MeetingRuntime
+        self.analysis = runtime_type(analysis_generator)
         answer = answer_generator.public_metadata()
         if (answer.get("repo_id"), answer.get("revision")) != (
                 self.analysis.model, self.analysis.revision):
@@ -164,6 +178,8 @@ class ServiceRuntime:
         if (isinstance(self.analysis.generator, BatchedAnalysisGenerator)
                 and self.analysis.generator.analysis_policy != self.analysis_policy):
             raise WorkerError("generation_failed", 503)
+        if getattr(self.analysis, "extraction_assembly", "legacy") != self.extraction_assembly:
+            raise WorkerError("generation_failed", 503)
 
     def health(self):
         self._ready()
@@ -171,7 +187,8 @@ class ServiceRuntime:
                 "model": self.model, "revision": self.revision, "protocol": PROTOCOL,
                 "answer": self.answer_generator.public_metadata(),
                 "extraction": {**self.analysis.health(),
-                               "classification": classification_metadata(self.analysis_policy)}}
+                               "classification": classification_metadata(self.analysis_policy),
+                               "assembly": self.extraction_assembly}}
 
     def analyze(self, request):
         if not self.lock.acquire(blocking=False):
@@ -194,7 +211,17 @@ class ServiceRuntime:
                 raise WorkerError("generation_deadline_exceeded", 504)
             if self.observer is not None:
                 self.analysis.generator.observing = True
-            result = self.analysis.analyze(request)
+            previous_assembly = getattr(self.analysis, "last_assembly", None)
+            try:
+                result = self.analysis.analyze(request)
+            finally:
+                diagnostic = getattr(self.analysis, "last_assembly", None)
+                if self.extraction_assembly == "coverage-v1" and diagnostic is not previous_assembly:
+                    # Assembly diagnostics do not claim request success. The actual
+                    # result/error event below remains authoritative, including deadlines.
+                    _observe(self.observer, "analyze", "assembly", {
+                        "extraction_assembly": self.extraction_assembly,
+                        "diagnostic": diagnostic})
             self._ready()
             if time.monotonic() >= deadline:
                 raise WorkerError("generation_deadline_exceeded", 504)
@@ -361,10 +388,10 @@ def create_app(token, runtime_factory):
     return app
 
 
-def load_runtime(native, *, cleanup, startup_deadline, observer=None, analysis_policy="single"):
+def load_runtime(native, *, cleanup, startup_deadline, observer=None, analysis_policy="single",
+                 extraction_assembly="legacy"):
     """Both clients verify the same already launched pinned local artifact."""
-    if analysis_policy not in POLICIES:
-        raise ValueError("invalid_analysis_policy")
+    validate_assembly(analysis_policy, extraction_assembly)
     answer = ServiceAnswerGenerator(native.url, native.token, native.manifest)
     plain, observed = {
         "single": (Qwen35Generator, ObservedAnalysisGenerator),
@@ -380,7 +407,8 @@ def load_runtime(native, *, cleanup, startup_deadline, observer=None, analysis_p
         analysis.begin_request(startup_deadline)
         answer.load()
         analysis.load()
-        runtime = ServiceRuntime(answer, analysis, cleanup=cleanup, observer=observer)
+        runtime = ServiceRuntime(answer, analysis, cleanup=cleanup, observer=observer,
+                                 extraction_assembly=extraction_assembly)
         if runtime.analysis_policy != analysis_policy:
             raise GenerationError("generation_identity_mismatch")
         return runtime

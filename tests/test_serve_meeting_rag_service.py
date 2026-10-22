@@ -77,7 +77,7 @@ class Harness:
             "model": launcher.MODEL_ID, "revision": metadata["revision"],
             "answer": {**copy.deepcopy(metadata), "candidate_id": launcher.CANDIDATE_ID},
             "extraction": {"runtime": copy.deepcopy(metadata),
-                "classification": launcher.classification_metadata("single"),
+                "classification": launcher.classification_metadata("single"), "assembly": "legacy",
                 "limits": {"input_tokens": 4096, "output_tokens": 768, "deadline_seconds": 120}}}
         specs = load_model_manifest()["models"]
         self.retrieval_health = {"status": "ready", "runtime": {"device": "cpu",
@@ -122,6 +122,7 @@ class Harness:
     def native_factory(self, **kwargs):
         harness = self
         self.native_policy = kwargs["analysis_policy"]
+        self.native_assembly = kwargs["extraction_assembly"]
         assert kwargs["token"] == "A" * 48
         self.native_metrics = kwargs["telemetry"].setdefault("native", {})
         class Native:
@@ -532,3 +533,54 @@ def test_health_cannot_substitute_another_batch_prompt_policy(rig, requested, re
           launcher.start_services(**rig.kwargs)):
         pytest.fail("wrong batch prompt policy became ready")
     assert rig.metrics["cleanup"]["accepted"] is True
+
+@pytest.mark.parametrize("assembly", ["legacy", "coverage-v1"])
+def test_combined_assembly_matches_native_health_and_lifecycle(rig, assembly):
+    rig.kwargs.update(analysis_policy="batch-v2", extraction_assembly=assembly)
+    rig.generation_health["extraction"].update(
+        classification=launcher.classification_metadata("batch-v2"), assembly=assembly)
+    with launcher.start_services(**rig.kwargs):
+        assert rig.native_assembly == assembly
+    lifecycle = json.loads((rig.kwargs["log_dir"] / "lifecycle.json").read_text())
+    assert lifecycle["extraction_assembly"] == assembly and lifecycle["cleanup"]["accepted"]
+
+
+@pytest.mark.parametrize("reported", [None, "legacy", "auto"])
+def test_coverage_health_cannot_report_another_or_missing_assembly(rig, reported):
+    rig.kwargs.update(analysis_policy="batch-v2", extraction_assembly="coverage-v1")
+    rig.generation_health["extraction"]["classification"] = launcher.classification_metadata("batch-v2")
+    if reported is None:
+        del rig.generation_health["extraction"]["assembly"]
+    else:
+        rig.generation_health["extraction"]["assembly"] = reported
+    with (pytest.raises(launcher.LaunchError, match="generation_health_identity"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("incorrect assembly became ready")
+    assert all(p.poll() is not None for p in rig.processes)
+
+
+@pytest.mark.parametrize("policy,assembly", [("single", "coverage-v1"), ("batch-v1", "coverage-v1"),
+    ("batch-v2", "auto")])
+def test_combined_assembly_invalid_before_any_resource(rig, policy, assembly):
+    rig.kwargs.update(analysis_policy=policy, extraction_assembly=assembly)
+    with (pytest.raises(launcher.LaunchError, match="invalid_extraction_assembly"),
+          launcher.start_services(**rig.kwargs)):
+        pytest.fail("invalid assembly")
+    assert not rig.processes and not rig.events
+
+
+@pytest.mark.parametrize("assembly", [None, "legacy", "coverage-v1"])
+def test_combined_cli_forwards_assembly(monkeypatch, tmp_path, assembly):
+    from contextlib import contextmanager
+    seen = []
+    @contextmanager
+    def start(**kwargs):
+        seen.append((kwargs["analysis_policy"], kwargs["extraction_assembly"]))
+        yield SimpleNamespace(java_url="http://127.0.0.1:1", monitor=lambda: None)
+    monkeypatch.setattr(launcher, "start_services", start)
+    args = ["--enable-service-rag", "--jar-sha256", "a" * 64, "--database", str(tmp_path / "x.db"),
+            "--log-dir", str(tmp_path), "--analysis-policy", "batch-v2"]
+    if assembly is not None:
+        args.extend(["--extraction-assembly", assembly])
+    launcher.main(args)
+    assert seen == [("batch-v2", assembly or "legacy")]

@@ -19,7 +19,7 @@ import httpx
 
 from doctrail.meeting_analysis_batch import POLICIES, classification_metadata
 from doctrail.meeting_answer_thinking import CANDIDATE_ID
-from doctrail.meeting_service_rag import PROTOCOL
+from doctrail.meeting_service_rag import ASSEMBLIES, PROTOCOL, validate_assembly
 from doctrail.meeting_thinking_transport import (
     GGUF_SHA256,
     MODEL_ID,
@@ -42,6 +42,7 @@ class LaunchError(Exception):
         "startup_timeout", "health_timeout", "service_unhealthy", "jar_pin_required",
         "jar_pin_mismatch", "invalid_ports", "ports_must_differ", "token_factory_failed",
         "owned_cleanup_failed", "service_failed", "invalid_analysis_policy",
+        "invalid_extraction_assembly",
     }) | JavaRuntimeError.CODES
 
     def __init__(self, code):
@@ -78,14 +79,15 @@ def make_server(app, port):
         access_log=False, log_level="critical", timeout_graceful_shutdown=5))
 
 
-def check_generation(health, analysis_policy="single"):
+def check_generation(health, analysis_policy="single", extraction_assembly="legacy"):
     try:
         if (health["status"] != "ready" or health["protocol"] != PROTOCOL
                 or health["model"] != MODEL_ID
                 or health["revision"] != "gguf-sha256:" + GGUF_SHA256
                 or health["answer"]["candidate_id"] != CANDIDATE_ID):
             raise ValueError
-        if health["extraction"]["classification"] != classification_metadata(analysis_policy):
+        if (health["extraction"]["classification"] != classification_metadata(analysis_policy)
+                or health["extraction"]["assembly"] != extraction_assembly):
             raise ValueError
         for metadata in (health["answer"], health["extraction"]["runtime"]):
             if (metadata["repo_id"] != MODEL_ID
@@ -160,7 +162,8 @@ class RunningService:
             if value is None:
                 return False
             if kind == "generation":
-                check_generation(value, self.metrics["analysis_policy"])
+                check_generation(value, self.metrics["analysis_policy"],
+                                 self.metrics["extraction_assembly"])
             elif kind == "retrieval":
                 check_retrieval(value, self.specs)
             elif value.get("status") != "ok" or value.get("version") != "0.1.0":
@@ -296,10 +299,12 @@ def start_services(*, jar, jar_sha256, database, log_dir, model_root=ROOT / "mod
                    probe=http_probe, clock=time.monotonic, sleep=time.sleep,
                    token_factory=lambda: secrets.token_urlsafe(48),
                    java_resolver=java_executable, port_factory=unused_port, environment=None,
-                   observer=None, analysis_policy="single"):
+                   observer=None, analysis_policy="single", extraction_assembly="legacy"):
     """Minimal assembly seam. Injected factories are only for synthetic unit checks."""
-    if analysis_policy not in POLICIES:
-        raise LaunchError("invalid_analysis_policy")
+    try:
+        validate_assembly(analysis_policy, extraction_assembly)
+    except ValueError as error:
+        raise LaunchError(str(error)) from None
     metrics = metrics if metrics is not None else {}
     service = RunningService(clock=clock, sleep=sleep, probe=probe, metrics=metrics)
     started = clock()
@@ -336,7 +341,7 @@ def start_services(*, jar, jar_sha256, database, log_dir, model_root=ROOT / "mod
                PYTHONUTF8="1")
     service.specs = load_model_manifest()["models"]
     metrics.update(schema_version=1, startup_accepted=False, jar_sha256=jar_sha256,
-                   analysis_policy=analysis_policy,
+                   analysis_policy=analysis_policy, extraction_assembly=extraction_assembly,
                    java_config={"rag_answer_enabled": True, "embedding_profile": "base",
                                 "verification": "pinned_jar_and_explicit_arguments_only"},
                    required_request={"method": "hybrid_rerank", "answer_limit": 5},
@@ -356,7 +361,7 @@ def start_services(*, jar, jar_sha256, database, log_dir, model_root=ROOT / "mod
         options = {} if observer is None else {"observer": observer}
         service.native_context = native_factory(token=generation_token,
             log_dir=log_dir / "native", telemetry=metrics.setdefault("native_adapter", {}),
-            analysis_policy=analysis_policy, **options)
+            analysis_policy=analysis_policy, extraction_assembly=extraction_assembly, **options)
         service.app = service.native_context.__enter__()
         service.native_entered = True
         if clock() >= deadline:
@@ -412,11 +417,13 @@ def main(argv=None):
     parser.add_argument("--retrieval-port", type=int, default=8091)
     parser.add_argument("--generation-port", type=int, default=8092)
     parser.add_argument("--analysis-policy", choices=POLICIES, default="single")
+    parser.add_argument("--extraction-assembly", choices=ASSEMBLIES, default="legacy")
     args = parser.parse_args(argv)
     try:
         with start_services(jar=args.jar, jar_sha256=args.jar_sha256, database=args.database,
                 log_dir=args.log_dir, java_port=args.port, retrieval_port=args.retrieval_port,
-                generation_port=args.generation_port, analysis_policy=args.analysis_policy) as service:
+                generation_port=args.generation_port, analysis_policy=args.analysis_policy,
+                extraction_assembly=args.extraction_assembly) as service:
             print(f"DocTrail experimental service ready: {service.java_url}", flush=True)
             service.monitor()
     except KeyboardInterrupt:

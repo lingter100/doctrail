@@ -14,12 +14,13 @@ import time
 from pathlib import Path
 
 from doctrail.meeting_analysis_batch import POLICIES
+from doctrail.meeting_service_rag import ASSEMBLIES
 from scripts.serve_meeting_rag_service import ROOT, start_services
 
 CODE = ("scripts/run_meeting_rag_acceptance.py", "tests/test_run_meeting_rag_acceptance.py",
         "web/scripts/run-meeting-rag-acceptance.mjs", "src/doctrail/meeting_service_rag.py",
         "scripts/serve_meeting_service_rag.py", "scripts/serve_meeting_rag_service.py",
-        "src/doctrail/meeting_analysis_batch.py")
+        "src/doctrail/meeting_analysis_batch.py", "src/doctrail/meeting_extraction_coverage.py")
 COUNTS = {"calibration": 6, "validation": 8}
 BROWSER_CODES = frozenset({
     "browser_action_failed", "browser_action_timeout", "browser_contract_failed",
@@ -99,10 +100,13 @@ def verify_inputs(manifest, phase, run_dir):
     require(set(manifest) == {"schema_version", "phase", "registration", "plan"}
             and manifest["schema_version"] == 1 and manifest["phase"] == phase, "manifest_schema")
     plan = manifest["plan"]
-    require(set(plan) - {"analysis_policy"} == {"questions", "sources", "families", "code", "jar", "ui",
+    require(set(plan) - {"analysis_policy", "extraction_assembly"} == {"questions", "sources", "families", "code", "jar", "ui",
                          "source_freeze", "item_freeze", "ci", "roles", "gate"}, "plan_schema")
     analysis_policy = plan.get("analysis_policy", "single")
     require(analysis_policy in POLICIES, "policy_mismatch")
+    extraction_assembly = plan.get("extraction_assembly", "legacy")
+    require(extraction_assembly in ASSEMBLIES and (
+        extraction_assembly == "legacy" or analysis_policy == "batch-v2"), "policy_mismatch")
     registration = bound(manifest["registration"], parse=True)
     require(registration["schema_version"] == 1 and registration["phase"] == phase
             and registration["plan_sha256"] == digest(canonical(plan))
@@ -113,7 +117,10 @@ def verify_inputs(manifest, phase, run_dir):
         "profile": "base", "limit": 5, "gpu_layers": 28}
     if "analysis_policy" in plan:
         expected_policy["analysis_policy"] = analysis_policy
-    require(registration["policy"] == expected_policy, "policy_mismatch")
+    registered_policy = dict(registration["policy"])
+    registered_assembly = registered_policy.pop("extraction_assembly", "legacy")
+    require(registered_assembly in ASSEMBLIES and registered_assembly == extraction_assembly
+            and registered_policy == expected_policy, "policy_mismatch")
     for key in ("source_freeze", "item_freeze", "ci", "roles"):
         bound(plan[key])
         require(registration["accepted_bindings"][key] == plan[key]["sha256"],
@@ -185,6 +192,8 @@ def verify_inputs(manifest, phase, run_dir):
         require(registration["gate_sha256"] == plan["gate"]["sha256"]
                 and gate.get("analysis_policy", "single") in POLICIES
                 and gate.get("analysis_policy", "single") == analysis_policy
+                and gate.get("extraction_assembly", "legacy") in ASSEMBLIES
+                and gate.get("extraction_assembly", "legacy") == extraction_assembly
                 and gate["phase"] == "calibration" and gate["answers_total"] == 6
                 and gate["answers_passed"] == 6 and gate["judgment_locked"] is True
                 and gate["operational_accepted"] is True and gate["cleanup_accepted"] is True
@@ -516,6 +525,7 @@ def execute(manifest_path, phase, run_dir, *, service_factory=start_services,
         summary["manifest_sha256"] = digest(manifest_bytes)
         plan = manifest["plan"]
         summary["analysis_policy"] = plan.get("analysis_policy", "single")
+        summary["extraction_assembly"] = plan.get("extraction_assembly", "legacy")
         save(run_dir / "cases-initial.json",
              [{"id": c["id"], "status": "unexecuted"} for c in questions["cases"]])
         require(clock() - started < 120, "startup_timeout")
@@ -523,7 +533,8 @@ def execute(manifest_path, phase, run_dir, *, service_factory=start_services,
         context = service_factory(jar=Path(plan["jar"]["path"]),
             jar_sha256=plan["jar"]["sha256"], database=run_dir / "isolated.sqlite3",
             log_dir=run_dir / "services", metrics=metrics, observer=evidence,
-            analysis_policy=summary["analysis_policy"])
+            analysis_policy=summary["analysis_policy"],
+            extraction_assembly=summary["extraction_assembly"])
         service = context.__enter__()
         entered = True
         ready = clock()

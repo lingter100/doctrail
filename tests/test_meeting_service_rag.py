@@ -297,7 +297,8 @@ def test_timeout_cleanup_failure_is_http_error_and_cannot_reenter():
         assert response.status_code == 503 and len(seen) == count
 
 
-@pytest.fixture(params=["batch-v1", "batch-v2"])
+@pytest.fixture(params=[("batch-v1", "legacy"), ("batch-v2", "legacy"),
+                        ("batch-v2", "coverage-v1")])
 def batch_runtime(request):
     from test_meeting_analysis_batch import Native
 
@@ -305,6 +306,7 @@ def batch_runtime(request):
         BatchedAnalysisGenerator,
         ScopedBatchedAnalysisGenerator,
     )
+    policy, assembly = request.param
     rigs = []
     def build(observer=None):
         native = Native()
@@ -318,7 +320,7 @@ def batch_runtime(request):
                 return httpx.Response(200, json={"tokens": [0] * 10})
             return native.handle(request)
         plain, observed = ((BatchedAnalysisGenerator, ObservedBatchedAnalysisGenerator)
-                           if request.param == "batch-v1" else
+                           if policy == "batch-v1" else
                            (ScopedBatchedAnalysisGenerator, ObservedScopedBatchedAnalysisGenerator))
         cls = plain if observer is None else observed
         options = {} if observer is None else {"observer": observer}
@@ -327,7 +329,8 @@ def batch_runtime(request):
         native.generator._alias = GGUF_SHA256
         native.generator._metadata = copy.deepcopy(METADATA)
         answer = SimpleNamespace(public_metadata=lambda: copy.deepcopy(METADATA), close=lambda: None)
-        service = ServiceRuntime(answer, native.generator, cleanup=lambda: True, observer=observer)
+        service = ServiceRuntime(answer, native.generator, cleanup=lambda: True, observer=observer,
+                                 extraction_assembly=assembly)
         rigs.append(service)
         return service, native
     yield build
@@ -420,10 +423,10 @@ def test_batch_preparation_consumes_original_outer_deadline(batch_runtime, monke
     assert native.batches == [] and not native.generator._cache
 
 
-@pytest.mark.parametrize("policy,observed", [("single", False), ("single", True),
-                                           ("batch-v1", False), ("batch-v1", True),
-                                           ("batch-v2", False), ("batch-v2", True)])
-def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatch, policy, observed):
+@pytest.mark.parametrize("policy,assembly", [("single", "legacy"), ("batch-v1", "legacy"),
+    ("batch-v2", "legacy"), ("batch-v2", "coverage-v1")])
+@pytest.mark.parametrize("observed", [False, True])
+def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatch, policy, assembly, observed):
     import doctrail.meeting_service_rag as module
     from doctrail.meeting_analysis_batch import BatchedAnalysisGenerator
     def load(self):
@@ -433,11 +436,14 @@ def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatc
     monkeypatch.setattr(module.Qwen35Generator, "load", load)
     service = module.load_runtime(SimpleNamespace(url="http://127.0.0.1:19003", token=TOKEN,
         manifest="unused"), cleanup=lambda: True, startup_deadline=time.monotonic() + 30,
-        analysis_policy=policy, observer=(lambda *args: None) if observed else None)
+        analysis_policy=policy, extraction_assembly=assembly,
+        observer=(lambda *args: None) if observed else None)
     try:
         assert isinstance(service.analysis.generator, BatchedAnalysisGenerator) == (policy != "single")
         assert isinstance(service.analysis.generator, module.ObservedAnalysisGenerator) == observed
         assert service.health()["extraction"]["classification"]["policy"] == policy
+        assert service.health()["extraction"]["assembly"] == assembly
+        assert isinstance(service.analysis, module.CoverageMeetingRuntime) == (assembly == "coverage-v1")
     finally:
         service.close()
 
@@ -518,3 +524,115 @@ def test_requested_v2_cannot_load_a_v1_generator(monkeypatch):
         module.load_runtime(SimpleNamespace(url="http://127.0.0.1:19003", token=TOKEN,
             manifest="unused"), cleanup=lambda: True, startup_deadline=time.monotonic() + 30,
             analysis_policy="batch-v2")
+
+
+@pytest.mark.parametrize("observed", [False, True])
+def test_explicit_assembly_changes_only_title_summary_and_records_separate_diagnostics(batch_runtime, observed):
+    events = []
+    observer = (lambda op, event, value: events.append((event, value))) if observed else None
+    service, native = batch_runtime(observer)
+    quotes = ["## Cedar", "Task A", "Task B", "Task C", "Task D", "Task E", "Decision", "Open", "Context", "Proposal"]
+    digits = [1, 9, 9, 9, 9, 9, 7, 8, 5, 6]
+    native.response = lambda ids: json.dumps([[i, digits[i]] for i in ids])
+    content = "\n".join(quotes)
+    with TestClient(create_app(TOKEN, lambda: service)) as client:
+        response = client.post("/analyze", json={**ANALYZE, "content": content}, headers=headers())
+        assert response.status_code == 200
+        output = response.json()
+        assert client.get("/health", headers=headers()).json()["extraction"]["assembly"] == service.extraction_assembly
+    analysis = output["analysis"]
+    assert [row["text"] for row in analysis["items"]] == quotes[1:]
+    assert set(output) == {"schema_version", "model", "revision", "analysis", "telemetry"}
+    assert len(native.batches) == 2
+    if service.extraction_assembly == "coverage-v1":
+        assert analysis["meeting_title"] == "Cedar"
+        assert analysis["summary"] == "Task A\nDecision\nOpen\nContext"
+        assert analysis["metadata_evidence"][0] == {"quote": "## Cedar", "start_offset": 0,
+            "end_offset": 8, "field": "meeting_title"}
+        if observed:
+            diagnostics = [value for event, value in events if event == "assembly"]
+            assert diagnostics == [{"extraction_assembly": "coverage-v1", "diagnostic": {
+                "assembly": "coverage-v1", "failure": None,
+                "summary": [{"id": 1, "type": "action"}, {"id": 6, "type": "decision"},
+                            {"id": 7, "type": "unresolved"}, {"id": 8, "type": "topic"}],
+                "title_candidate_ids": [0], "title_projected": True}}]
+    else:
+        assert analysis["meeting_title"] is None
+        assert analysis["summary"] == "Task A\nTask B\nTask C\nTask D"
+        assert not any(event == "assembly" for event, _ in events)
+    if observed:
+        assert sum(event == "transport_started" and value["path"] == "/completion"
+                   for event, value in events) == 2
+        assert [event for event, _ in events][-1] == "result"
+
+
+@pytest.mark.parametrize("policy,assembly", [("single", "coverage-v1"), ("batch-v1", "coverage-v1"),
+    ("batch-v2", "auto")])
+def test_invalid_assembly_load_fails_before_client_or_asset_construction(monkeypatch, policy, assembly):
+    import doctrail.meeting_service_rag as module
+    monkeypatch.setattr(module, "ServiceAnswerGenerator", lambda *a: pytest.fail("client constructed"))
+    with pytest.raises(ValueError, match="invalid_extraction_assembly"):
+        module.load_runtime(SimpleNamespace(), cleanup=lambda: True, startup_deadline=1,
+                            analysis_policy=policy, extraction_assembly=assembly)
+
+
+@pytest.mark.parametrize("failure", ["expired", "archive", "title"])
+def test_assembly_diagnostic_never_substitutes_request_success(batch_runtime, monkeypatch, failure):
+    import doctrail.meeting_service_rag as module
+    now, events = [100.0], []
+    monkeypatch.setattr(module.time, "monotonic", lambda: now[0])
+    def observer(op, event, value):
+        events.append((event, value))
+        if event == "assembly":
+            if failure == "expired":
+                now[0] = 221.0
+            elif failure == "archive":
+                raise OSError("synthetic archive failure")
+    service, native = batch_runtime(observer)
+    if service.extraction_assembly != "coverage-v1":
+        # Legacy has no assembly callback and retains its existing request behavior.
+        native.response = lambda ids: json.dumps([[i, 5] for i in ids])
+        result = service.analyze(AnalyzeRequest.model_validate(ANALYZE))
+        assert result["analysis"] and not any(e == "assembly" for e, _ in events)
+        return
+    native.response = lambda ids: json.dumps([[i, 1 if i == 0 else 5] for i in ids])
+    request = AnalyzeRequest.model_validate({**ANALYZE, "content": "Title:\nContext" if failure == "title"
+                                             else "## Cedar\nContext"})
+    code = {"expired": "generation_deadline_exceeded", "archive": "generation_failed",
+            "title": "generation_unsupported_field"}[failure]
+    with pytest.raises(WorkerError, match=code):
+        service.analyze(request)
+    assert not any(e == "result" for e, _ in events)
+    assert sum(e == "assembly" for e, _ in events) == 1 and len(native.batches) == 1
+    assert not service.lock.locked() and not service.analysis.lock.locked()
+    if failure != "archive":
+        assert [value for e, value in events if e == "error"] == [{"code": code}]
+    diagnostic = next(value["diagnostic"] for e, value in events if e == "assembly")
+    assert diagnostic["failure"] == (code if failure == "title" else None)
+
+
+def test_assembly_runtime_drift_is_rejected_before_native(batch_runtime):
+    service, native = batch_runtime()
+    service.extraction_assembly = "coverage-v1" if service.extraction_assembly == "legacy" else "legacy"
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.health()
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.analyze(AnalyzeRequest.model_validate(ANALYZE))
+    assert native.calls == []
+
+
+
+def test_busy_analysis_does_not_reemit_prior_assembly_diagnostics(batch_runtime):
+    events = []
+    service, native = batch_runtime(lambda op, event, value: events.append((event, value)))
+    previous = {"assembly": "coverage-v1", "failure": None, "summary": [{"id": 99, "type": "topic"}]}
+    service.analysis.last_assembly = previous
+    service.analysis.lock.acquire()
+    try:
+        with pytest.raises(WorkerError, match="model_busy"):
+            service.analyze(AnalyzeRequest.model_validate(ANALYZE))
+        assert service.analysis.last_assembly is previous
+        assert not any(event == "assembly" for event, _ in events)
+        assert native.calls == []
+    finally:
+        service.analysis.lock.release()
