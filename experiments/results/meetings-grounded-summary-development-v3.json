@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-development-v3",
+  "date": "2026-10-23",
+  "status": "failed_consumed_once",
+  "source_commit": "f3eabc2d45457b69b85c89fc3a68acb38566a8c3",
+  "execution_head": "41389471aeee1dd174cfd9a1f26dfb635b56edbd",
+  "candidate": {
+    "analysis_policy": "batch-v2",
+    "extraction_assembly": "grounded-summary-v3"
+  },
+  "data_scope": "Existing exposed synthetic development inputs and unchanged source-only criteria. Not held-out evaluation or human review.",
+  "outcome": {
+    "cli_exit": 1,
+    "node_exit": 1,
+    "wrapper_tool_exit": 0,
+    "runtime_eligible": false,
+    "browser_first_failure": "analysis_failed",
+    "worker_reason_code": "generation_summary_review_rejected",
+    "failed_analysis_ordinal": 3,
+    "uploads_completed": 5,
+    "analyses_stored": 2,
+    "grounded_ui_confirmed": 2,
+    "answers_completed": 0,
+    "questions_unexecuted": 6,
+    "planned_summary_count": 4,
+    "valid_generation_drafts": 3,
+    "valid_alignment_finals": 3,
+    "complete_summary_pairs": 3,
+    "summary_quality": "independent_individual_review_in_progress"
+  },
+  "transport": {
+    "completion_attempts": 25,
+    "completion_responses": 25,
+    "attempts_by_stage": {
+      "classification": 16,
+      "generation": 3,
+      "alignment": 3,
+      "review": 3
+    },
+    "transport_errors": 0,
+    "completion_after_failure": 0
+  },
+  "timing": {
+    "startup_seconds": 59.03100000000268,
+    "runner_wall_seconds": 379.45299999999406,
+    "cli_wall_seconds": 381.1399999999994,
+    "total_acceptance_bound_seconds": 1625,
+    "within_total_bound": true,
+    "hard_preemption_proven": false,
+    "observer_analyze_seconds": [
+      88.25,
+      101.32800000000861,
+      107.98400000001129
+    ],
+    "observer_interval": "analyze started to terminal result/error, including observer and HTTP boundary",
+    "cleanup_seconds": 1.123218229302438,
+    "not_production_slo_or_latency_benchmark": true
+  },
+  "preservation": {
+    "cleanup_accepted": true,
+    "post_owned_identities_absent": 22,
+    "indexed_run_artifacts": 1337,
+    "run_files_including_index_and_finalization": 1341,
+    "raw_events": 1285,
+    "cli_files": 5,
+    "old_immutable_bindings": 5509,
+    "runtime_dependencies": 91,
+    "frozen_files": 77,
+    "original_input_bindings": 16,
+    "runtime_inputs_and_artifacts_unchanged": true,
+    "new_model_reruns": 0,
+    "extra_kills": 0,
+    "original_failure_preserved": true
+  },
+  "placement": {
+    "gpu_layers_requested": 28,
+    "gpu_layers_effective": null,
+    "effective_placement_confirmed": false
+  },
+  "evidence": {
+    "preparation": {
+      "path": "experiments/results/meetings-grounded-summary-v3-preparation-v1.json",
+      "bytes": 4856,
+      "sha256": "14653d660114689bbd5c1ae665edf7490453187c36cd70cc2785f5fd942f01e1"
+    },
+    "source_ci": {
+      "path": "experiments/results/meetings-grounded-summary-v3-integration-ci-v1.json",
+      "bytes": 3406,
+      "sha256": "971a22bdc35afe5994dea480b4577da0166385def0bda30d172b4cd94ac08641"
+    },
+    "execution_head_ci": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/ci-preparation-final-v1.json",
+      "bytes": 3558,
+      "sha256": "9651d178d5c12350e319bb9c40700b424fda82a945eb036fe8af5fd4ae80758c"
+    },
+    "custody_audit": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/actual-v3-custody/custody-audit-v1.json",
+      "bytes": 7993,
+      "sha256": "88db07f577763131851c9b987cedbf6c7e34fe2cc0421194fcacdfe9292316d1"
+    },
+    "custody_index": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/actual-v3-custody/custody-index-v1.json",
+      "bytes": 2002,
+      "sha256": "ff5036b5e65913a2a4c24e8559c2dc3bffe25b09617214f35f35808501d270da"
+    },
+    "parent_verification": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/parent-actual-v3-verification.json",
+      "bytes": 1248,
+      "sha256": "fb56e749825ed8a34d85debb5798038c8feb1dec42866efd7533b09a1eb0f684"
+    },
+    "anonymous_summary_packet": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/actual-v3-custody/summary-candidates-anonymous-v1.json",
+      "bytes": 29394,
+      "sha256": "ac13c74370e4293746429925416afd825dffb40d0bbe334f21e9e54d816f543d"
+    },
+    "summary_packet_custody": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/actual-v3-custody/summary-packet-custody-v1.json",
+      "bytes": 1024,
+      "sha256": "399899e460ebba1cb6a123bbdd24f4c9b49feb202718c94a31ad5f3460c740a4"
+    },
+    "source_only_lock": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/source-lock.json",
+      "bytes": 16892,
+      "sha256": "af209e25605a1f9c3f6b606d79b40322953192c1ae15babc432db5e90e9b917e"
+    }
+  },
+  "next": "Lock each anonymous candidate judgment before revealing stage and pair mapping. Then compare pairs without changing those judgments. Self-review and performance stay hidden from the judge until the comparison is locked. No rerun of the consumed execution.",
+  "limitations": [
+    "Two stored summaries do not establish content accuracy or sufficiency.",
+    "The third aligned final was not accepted or stored as a successful analysis.",
+    "The fourth meeting, QA and complete edit/link workflow did not complete in this run.",
+    "Explicit stage and pair labels are withheld; source identity can allow same-source pairing to be inferred. This is not pristine blindness.",
+    "Past aggregates and AI-authored criteria are disclosed; human review is zero.",
+    "All model execution is free/local. No deployment or paid API was performed."
+  ]
+}

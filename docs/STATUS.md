@@ -1,4 +1,14 @@
 # 진행 상태
+## 2026-10-23 · 재작성 실제 비교 실패와 초안·수정본 독립 판단 시작
+
+직전 사용자 진행 질문에는 상태와 잠정 일정을 답했으며 제품 진전으로 세지 않는다. 이번 재개에서는 실제 once session84167을 관찰해 CLI/Node exit1을 확인했다(wrapper 도구 exit0과 구분). 소스 f3eabc2·실행HEAD4138947·binding6540090b에서 두 회의의 저장·원문 UI를 확인한 뒤 세 번째 분석이 generation_summary_review_rejected로 실패했다. 업로드5·저장/UI2·답변0, 질문6건은 미실행이다. 분류16+초안3+재작성3+검토3=25회 모두 응답했고 실패 후 추가호출은0이다. 원래 실패를 재실행하거나 성공으로 변경하지 않는다.
+
+전체 CLI381.140초, 분석 observer88.250/101.328/107.984초, 시작59.031초, 정리1.123초를 관측했다. 각 구간의 정의가 달라 합산해 사용자 응답시간이나 SLO로 부르지 않는다. requested GPU28은 확인했지만 telemetry effective는null이므로 실제 GPU 배치를 확정하지 않는다. [실제 실행 결과](../experiments/results/meetings-grounded-summary-development-v3.json)에 범위·원본·한계를 기록했다.
+
+부모가 custody9개, 닫힌 run/CLI1346개, run index1337개, 이전5509개, runtime91의 Git/current, 원본16·동결77·JAR/UI·harness와 소유22identity 부재를 검증했다. parent fb56e749로 보존하고 코드/HEAD HOLD를 해제했다. 실행HEAD의 push39896168492/PR39896173594 필수3job도 모두 성공했으며 watch67002/76123 exit0·CI9651d178은 모델 품질 증거와 분리했다.
+
+기존 Astra xhigh 판정자에게 익명 후보6개 packet ac13c743만 배정했다. 기존 기준을 유지해 개별 원문지원·선택인용지원·핵심충분성을 먼저 잠근다. 단계/쌍 매핑·자동검토·성능은 아직 숨긴다. source identity로 같은 원문 묶음을 추정할 수 있는 한계도 기록한다. Sol high는 새 performance 영역에서 기존 관측 메타데이터만 집계하며 모델을 추가 실행하지 않는다. 부모는 원문/주장을 대신 채점하지 않는다. 전체goal ACTIVE/Phase1미완료다.
+
 ## 2026-10-23 · 정확한 소스 CI와 재작성 비교 준비 완료
 
 서비스 소스 f3eabc2d45457b69b85c89fc3a68acb38566a8c3의 push39893864174/PR39893868615 필수 backend/web/java-service가 모두 성공했다. 같은 watch80471/77880도 exit0이다. 사용자 author/committer lingter100·PR14 draft head와17개 Git/current 바이트를 확인했다. [소스 CI](../experiments/results/meetings-grounded-summary-v3-integration-ci-v1.json)971a22bd와 로컬종료기록a234c1f7을 보존했다. 부모의 첫 UI 바이트비교는 URL 추가필드 때문에 assertion됐고, 실제 바이트·해시는 같음을 확인해 비교필드만 바로잡았다. 제품 변경이나 CI 재실행은 없었다.
