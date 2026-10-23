@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "run_dir": "C:\\Users\\SSAFY\\개인프로젝트\\.local\\meetings-service-rag-calibration-run-v2",
+  "plan_sha256": "b7d80c64051802278de09d5fc732aaa9035b8bbe9401d489beb6cc3f93235aa2",
+  "commit": "475c4c7dd538347a208d095671e2211ea0206bf9",
+  "policy": {
+    "startup_seconds": 120,
+    "active_seconds": 1500,
+    "cleanup_seconds": 5,
+    "answer_seconds": 90,
+    "analyze_seconds": 120,
+    "method": "hybrid_rerank",
+    "profile": "base",
+    "limit": 5,
+    "gpu_layers": 28
+  },
+  "accepted_bindings": {
+    "source_freeze": "423316335a89a55eb3fa052f66dd7b34fb2062072a849f02c97a9134c27799bc",
+    "item_freeze": "acb3c65ebdd309fa3f778724134250335acaea9a8b71c228e9a0a46792b2251e",
+    "ci": "389d7a6816300f125efc5723372ef22135eac9eef6134f55c58fffcbc3d61ac0",
+    "roles": "a988425badb5c71ae2eacf249556213115cafb9fc5d7de44cc7ce29f921ecfe5"
+  },
+  "executor": "/root/service_rag_calibration_sources",
+  "final_judge": "/root/service_rag_calibration_final_judge",
+  "created_at": "2026-10-22T01:27:37.956928+00:00",
+  "status": "v2_prepared_for_combined_parent_commit_not_runtime_dispatched",
+  "runtime_authorization": "Preparation only. Parent must preserve the new CI receipt and this v2 registration in a combined commit, then explicitly dispatch the single additional calibration execution. Both v2 run and CLI directories remain absent until that dispatch. No separate CI-only prerequisite commit is required.",
+  "preparation_dispatch_basis": {
+    "tested_implementation_commit": "475c4c7dd538347a208d095671e2211ea0206bf9",
+    "ci_receipt_sha256": "389d7a6816300f125efc5723372ef22135eac9eef6134f55c58fffcbc3d61ac0",
+    "implementation_push_run": 39704965948,
+    "implementation_pr_run": 39704970768,
+    "github_author": "lingter100",
+    "github_committer": "lingter100",
+    "parent_adopted_amendment": {
+      "path": "docs/MEETINGS-SERVICE-RAG-STARTUP-REPAIR.md",
+      "bytes": 10233,
+      "sha256": "d1a3bb4e5d7b024b6b6129bdff399cb490215f1145a08cc3cda8c24b571453ab"
+    },
+    "combined_receipt_registration_commit_required": true,
+    "combined_commit": "pending_parent",
+    "git_and_network_reverification_by_executor": false
+  },
+  "working_directory": "C:\\Users\\SSAFY\\개인프로젝트",
+  "question_order": [
+    "service-rag-cal-01",
+    "service-rag-cal-02",
+    "service-rag-cal-03",
+    "service-rag-cal-04",
+    "service-rag-cal-05",
+    "service-rag-cal-06"
+  ],
+  "questions_binding": {
+    "path": "data/evaluation/meetings-service-rag-calibration-v2/draft-questions-v1.json",
+    "bytes": 2529,
+    "sha256": "bec375a38be8d2fd81bbce343b2f70f726d441a238d14218125967f41b1946b1"
+  },
+  "custodian_freeze_verification": {
+    "source": {
+      "binding_count": 64,
+      "all_match": true,
+      "binding_array_sha256": "a17a539e7b8b9866160e624c443ba340e91c11cdf4d37feb480103efa3f3abee",
+      "verified_at": "2026-10-22T01:27:37.842763+00:00"
+    },
+    "item": {
+      "binding_count": 10,
+      "all_match": true,
+      "binding_array_sha256": "cea6e3b30c2245314042d8b3e08c1d3fa8527ef19bb0ae1ef808c65af39dd676",
+      "verified_at": "2026-10-22T01:27:37.850562+00:00"
+    },
+    "oracle_and_selection_integrity": "Custodian byte/hash verification only. Driver must not open those files or follow paths inside freezes.",
+    "semantic_item_changes": 0
+  },
+  "actor_workspace_contract": {
+    "actor_count": 2,
+    "workspace_count": 2,
+    "families": [
+      {
+        "id": "cal-v2-public-gitops",
+        "principal": "actor1",
+        "source_kind": "public"
+      },
+      {
+        "id": "cal-v2-synthetic-garam-sound",
+        "principal": "actor2",
+        "source_kind": "synthetic"
+      }
+    ],
+    "workspace_names": "Exact family IDs; workspace and user UUIDs are assigned only by future registration responses.",
+    "membership": "actor2 joins actor1 workspace as in the fixed browser code; actor1 is not a member of actor2 workspace.",
+    "visibility_rule": "General document private; both meeting documents workspace, identically for both families. Chosen by document kind, without question or oracle selection.",
+    "answer_principal": "Each family owner, with access to all three whole family documents.",
+    "service_search_kind": "all",
+    "extra_answer_filters": false
+  },
+  "source_mapping_contract": {
+    "whole_original_documents": 6,
+    "whole_chunks": 32,
+    "ordinary_document_uploads": 2,
+    "meeting_uploads": 4,
+    "prepared_document_revision": 1,
+    "old_ids": "Prepared IDs are taken from the accepted real Java document readbacks; the future run must generate distinct document and chunk IDs and record the mapping.",
+    "source_revision": "Public upstream immutable commit; synthetic immutable accepted content SHA-256. Prepared service revision1 is recorded separately.",
+    "prior_java_scope": "Ordinary /documents ingestion and full chunk verification only; prior source preparation did not validate meeting registration or autoanalysis.",
+    "raw_files_rewritten": false,
+    "questions_rewritten": false
+  },
+  "existing_model_policy_bindings": [
+    {
+      "path": "data/models/m3-models.json",
+      "bytes": 2532,
+      "sha256": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1"
+    },
+    {
+      "path": "data/models/meetings-generation-qwen35-v1.json",
+      "bytes": 2553,
+      "sha256": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99"
+    }
+  ],
+  "existing_policy_scope": "Use the registered launcher/default factories and their exact CI-bound policies. No endpoint, model, context, retrieval, tokenizer, repair, translation, warmup or fallback override.",
+  "single_use_contract": {
+    "maximum_answer_posts": 6,
+    "maximum_answer_native_attempts_per_case": 1,
+    "maximum_meeting_autoanalysis_api_operations": 4,
+    "analysis_native_attempts": "Separately counted under the existing multi-unit extraction policy; not asserted as one native call per API operation.",
+    "phase_restart_allowed": false,
+    "request_resend_allowed": false,
+    "resource_or_integrity_failure": "Stop phase at first failure and retain later cases as unexecuted.",
+    "semantic_judgment": "Separate registered final judge after shutdown; executor does not score or tune responses."
+  },
+  "exposure": {
+    "same_source_item_author_executor": true,
+    "previous_own_source_documents": 6,
+    "previous_own_source_chunks": 32,
+    "previous_own_items": 6,
+    "previous_own_oracle_facts": 22,
+    "earlier_own_calibration_v1_readme_exposure": true,
+    "generic_code_fixed_prompts_and_synthetic_examples_exposed": true,
+    "final_answer_judge_excluded": true,
+    "other_split_semantic_reads_this_preparation": 0,
+    "original_v1_startup_generic_error_and_terminal_metadata_exposed": true
+  },
+  "current_actual": {
+    "official_run_directory_created": false,
+    "official_phase_started": false,
+    "answer_posts": 0,
+    "meeting_uploads": 0,
+    "server_processes_started": 0,
+    "java_processes_started": 0,
+    "native_calls": 0,
+    "tokenizer_calls": 0,
+    "model_calls": 0,
+    "cli_capture_directory_created": false
+  },
+  "cli_dir": "C:\\Users\\SSAFY\\개인프로젝트\\.local\\meetings-service-rag-calibration-cli-v2",
+  "prospective_startup_repair": {
+    "amendment": {
+      "path": "docs/MEETINGS-SERVICE-RAG-STARTUP-REPAIR.md",
+      "bytes": 10233,
+      "sha256": "d1a3bb4e5d7b024b6b6129bdff399cb490215f1145a08cc3cda8c24b571453ab"
+    },
+    "parent_adopted": true,
+    "scope": "One additional infrastructure-only calibration v2 after the consumed v1 startup failure; not a restart or continuation of v1.",
+    "original_v1": {
+      "manifest": {
+        "path": "data/evaluation/meetings-service-rag-calibration-execution-manifest-v1.json",
+        "bytes": 23971,
+        "sha256": "f3c2a08f49a5c21ce21b79f703c817526193ebcbb2fe096823dc1884cae25294"
+      },
+      "registration": {
+        "path": "data/evaluation/meetings-service-rag-calibration-execution-registration-v1.json",
+        "bytes": 6666,
+        "sha256": "ef7a92af5aab52b6d575491a21b759b5c631823209625648a24bba1c0874e39f"
+      },
+      "preparation": {
+        "path": "data/evaluation/meetings-service-rag-calibration-execution-preparation-v1.json",
+        "bytes": 14180,
+        "sha256": "de491c0507d40298f8d932d2f38a0a4a3f0df051f552cc3a22bf028071ec26cd"
+      },
+      "public_failure_receipt": {
+        "path": "experiments/results/meetings-service-rag-calibration-startup-failure-v1.json",
+        "bytes": 6779,
+        "sha256": "c42f21f8df50c894a842d4c4fa1fae09bf489ae99e30beac121c3595c845a5c0"
+      },
+      "safe_summary": {
+        "path": ".local/meetings-service-rag-calibration-cli-v1/safe-summary-v1.json",
+        "bytes": 7960,
+        "sha256": "f5de6213b098d4d15fe1643b7b0f1807cba173255069da73b8a920cf2fb4b8f4"
+      },
+      "evidence_index": {
+        "path": ".local/meetings-service-rag-calibration-cli-v1/artifact-index-v1.json",
+        "bytes": 3447,
+        "sha256": "6f3fcb93ae4640b574c34bfa61a60d78aed7e4883833c1ee4fcff6d84054b8eb"
+      },
+      "driver_receipt": {
+        "path": ".local/meetings-service-rag-calibration-run-v1/receipt.json",
+        "bytes": 338,
+        "sha256": "42d26e0dd256d732597fd241486c962d17e85f45cae77f5af0e8e7a7932d2dc4"
+      },
+      "reservation": {
+        "path": ".local/meetings-service-rag-calibration-run-v1/reservation.json",
+        "bytes": 40,
+        "sha256": "8113a802378117eac3b6dadc08aa1f9df7dd7741ce2d919d75b29050466e6998"
+      },
+      "consumed": true,
+      "status": "failed_before_service_ready_run_consumed",
+      "official_command_launches": 1,
+      "native_attempted": false,
+      "case_states": {
+        "unexecuted": 6,
+        "response_available": 0
+      },
+      "original_observer_counts": {},
+      "original_observer_counts_availability": "unavailable_empty_object"
+    },
+    "additional_official_attempt_limit": 1,
+    "maximum_total_official_startup_attempts_v1_and_v2": 2,
+    "additional_attempts_started_at_preparation": 0,
+    "v2_startup_failure_consumes_attempt": true,
+    "automatic_retry_allowed": false,
+    "third_attempt_authorized": false,
+    "reuse_prior_database_or_partial_outputs": false,
+    "fresh_exclusive_reservation_database_credentials_required": true,
+    "v2_total_acceptance_seconds": 1625,
+    "v1_elapsed_and_failure_reported_separately": true,
+    "unchanged_plan_keys": [
+      "questions",
+      "sources",
+      "families",
+      "jar",
+      "ui",
+      "source_freeze",
+      "item_freeze",
+      "roles",
+      "gate"
+    ],
+    "allowed_changed_plan_keys": [
+      "code",
+      "ci"
+    ],
+    "new_code_paths": [
+      "scripts/java_runtime.py",
+      "tests/test_java_runtime.py",
+      "tests/test_serve_meeting_rag_service.py"
+    ],
+    "modified_existing_code_paths": [
+      "scripts/serve_meeting_rag_service.py"
+    ],
+    "ci_code_binding_count": 48,
+    "source_question_model_policy_judgment_threshold_changes": 0
+  }
+}

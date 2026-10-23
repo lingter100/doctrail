@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c7-v1",
+  "phase": "validation",
+  "recorded_at": "2026-10-20T14:10:09.634658+09:00",
+  "status": "incomplete",
+  "source_adoption": false,
+  "head": "d9066147adeecefd23c014cce59e30ca350b6a74",
+  "head_unchanged_since_preauthorization_and_admission": true,
+  "toolchain_freeze": {
+    "file": "data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+    "sha256": "6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca",
+    "bound_files": 77,
+    "all_bound_worktree_bytes_unchanged": true
+  },
+  "role_registration_sha256": "6024bf5421b51b21a7addc922a3aba3f03d372f6b17737425af570560a2a642c",
+  "prior_metadata_sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa",
+  "preauthorization_v2_sha256": "e1f1cefaf98a6a9a3f504d1662bf15ec1dd3c1036cb0fd4a5a9e22cd15009a38",
+  "prospective_manifest": {
+    "file": "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/prospective-manifest.json",
+    "sha256": "0942447a9bd88f02d02e6ffcf3f6047b1da033a243a783d4224ff85bbc66e043"
+  },
+  "actual_admission_receipt": {
+    "file": ".local/meetings-c7-validation-admission-attempts-v1/artifacts/attempt-001/receipt.json",
+    "sha256": "d69a42735911ee26019a736004c86932470ef2bd496e3794d319260d306c9cac"
+  },
+  "family_statuses": [
+    {
+      "family_id": "c7-f03",
+      "status": "rejected",
+      "safe_rejection_codes": [
+        "c7_block_bounds"
+      ]
+    },
+    {
+      "family_id": "c7-f04",
+      "status": "passed",
+      "safe_rejection_codes": []
+    }
+  ],
+  "counts": {
+    "individual_repository_metadata_identifiers_requested": 22,
+    "repository_search_queries": 3,
+    "reserved_public_repositories_with_body_reads": 3,
+    "public_candidate_source_blobs_preserved": 14,
+    "license_blobs_preserved": 3,
+    "preliminary_selection_refusals": 2,
+    "actual_admission_attempts": 1,
+    "prospective_source_documents": 6,
+    "prospective_public_documents": 3,
+    "synthetic_documents_authored": 3,
+    "adopted_source_documents": 0,
+    "independent_source_reviews": 0,
+    "source_freezes": 0,
+    "Java_Maven_calls": 0,
+    "questions": 0,
+    "oracles": 0,
+    "items": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "model_downloads": 0,
+    "paid_services": 0
+  },
+  "evidence_index": {
+    "file": ".local/meetings-c7-validation-source-v1/artifacts/evidence-index-v1.json",
+    "sha256": "0ed01dcd75abef7b28af80ea4a9d804fc719bdf4ba41bbe1fd86647575781bfc",
+    "immutable_files": 91
+  },
+  "published_immutable_raw_and_manifest": {
+    "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/LICENSE-servo-project": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+    "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/opal-2027-04-02.md": "521100f7e19d968889e3d84ab9bbca70dbcf40543182e3bcd23c01207b79542b",
+    "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/opal-2027-04-16.md": "9db51d118299e3d43b55b9dbf6e94114351a8646723552d2ac07feb16b8a4b0e",
+    "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/opal-listening-policy.md": "329e270236f07ae6b5dbdb20bdfcd8a6b0e364dc5eaeb2cb9b4993cae0ba7503",
+    "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/prospective-manifest.json": "0942447a9bd88f02d02e6ffcf3f6047b1da033a243a783d4224ff85bbc66e043",
+    "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/public-2021-12-10.md": "99e2f9ce4b1cbe0821ebecee4470e410231959b9a99371853e4ec5c09dd46754",
+    "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/public-2022-12-12.md": "69064949a18f61bfc90be1dc9e677aa672f8f63cbbcab28fa62045e26cc45f1a",
+    "data/evaluation/meetings-c7-validation-v1/raw/attempt-001/public-mission-and-vision.md": "034977d8665e1ed13381022859127a45059a490e8117e75e00a2efd7ef176098"
+  },
+  "source_document_count_excludes_license_and_prospective_metadata": true,
+  "no_original_bytes_modified_or_rejected_family_resubmitted": true,
+  "passed_synthetic_family_remains_exact_and_unadopted": true,
+  "missing_gates": [
+    "mechanically_admissible_complete_public_family",
+    "independent_source_coherence_and_freshness_review",
+    "actual_Java_Python_processing_parity",
+    "source_freeze_and_commit"
+  ],
+  "bounded_search_is_not_proof_that_no_possible_corpus_exists": true,
+  "no_threshold_or_semantic_quota_relaxation": true,
+  "C7_success": false,
+  "phase1_complete": false,
+  "known_owned_running_processes": 0,
+  "owned_background_native_Java_processes_started": 0,
+  "outcome": "no_adopted_corpus",
+  "checkpoint": "source_gate_unsatisfied_bounded_search_checkpoint",
+  "status_clarified_at": "2026-10-20T05:12:25.6619480Z",
+  "prior_status_receipt_sha256": "e338bc75fd01316c35ae3385050423aafd9048236872dc01b5b9c55a815eac2f"
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-item-authorship-v1",
+  "recorded_at": "2026-10-20T00:29:50.130878+00:00",
+  "source_commit": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "model_provenance": "Existing registered author roles retained original accepted gpt-6-astra/xhigh/fork-none configuration. Duplicate calibration spawn was rejected; successful existing followup retained context. No new model acceptance.",
+  "calibration": {
+    "role": "/root/c5_calibration_author",
+    "counts": {
+      "cases": 6,
+      "languages": {
+        "ko": 3,
+        "en": 3
+      },
+      "statuses": {
+        "answered": 4,
+        "abstained": 2
+      },
+      "required_facts": 29,
+      "supported_required_facts": 25,
+      "missing_required_facts": 4,
+      "evidence_alternatives": 28,
+      "context_placements": 24,
+      "unique_whole_chunks": 15,
+      "source_documents": 6,
+      "necessary_multidocument_answered_cases": 2,
+      "answered_modes": {
+        "general_only": 2,
+        "multiple_meetings": 1,
+        "mixed_general_and_meeting": 1
+      },
+      "cross_language_both_directions": true
+    },
+    "source_freeze_files": 14,
+    "structural_status": "passed",
+    "independent_review": "pending"
+  },
+  "validation": {
+    "role": "/root/c5_validation_author",
+    "counts": {
+      "case_count": 8,
+      "family_count": 2,
+      "source_document_count": 6,
+      "source_unique_chunks": 14,
+      "required_facts": 31,
+      "required_facts_by_case": [
+        4,
+        5,
+        3,
+        4,
+        5,
+        4,
+        3,
+        3
+      ],
+      "status_counts": {
+        "answered": 4,
+        "abstained": 4
+      },
+      "language_counts": {
+        "ko": 4,
+        "en": 4
+      },
+      "context_references": 44,
+      "evidence_references": 32,
+      "evidence_alternatives_total": 29,
+      "missing_required_facts": 4,
+      "answerable_modes": {
+        "general": 1,
+        "meetings": 2,
+        "mixed": 1
+      },
+      "necessary_multidocument_answered": 3,
+      "crosslanguage_response_languages": [
+        "en",
+        "ko"
+      ],
+      "all_family_absence_items": 4
+    },
+    "source_freeze_files": 15,
+    "structural_status": "passed",
+    "independent_review": "pending"
+  },
+  "resumed_preauth_files": {
+    ".local/meetings-c5-calibration-items-v1/preauth-resume-v2.json": "dd1f158086de642d05038dc82ccb21615d5f6830085cf3ad7a0a9e61b0cf0bb2",
+    ".local/meetings-c5-validation-items-v2/preauth-resume-v3.json": "6e8e00e612674777248d4722f4bf4125287bc22ae174148b5290dd52672f467a"
+  },
+  "author_files": {
+    "data/evaluation/meetings-c5-calibration-v1/draft.json": "e10d680a17133c774edb585297777e30907448194b419bfebed99147447789ee",
+    "data/evaluation/meetings-c5-calibration-v1/oracle-draft.json": "0d93d8ebbb956a2d5f5a6c35f0ca81234dec5fb2cac2f3d79f03475250d55350",
+    "data/evaluation/meetings-c5-calibration-v1/context-selection.json": "0bfec9af2a02876084eb19c0ddbc0dd3b2f6ed1312529a85feb74336d6f9e476",
+    "data/evaluation/meetings-c5-calibration-v1/author-receipt.json": "493fee9abfaf56a0f219cd9927d480c11192cf889398f2d0152346d7da736ace",
+    "data/evaluation/meetings-c5-validation-v2/draft.json": "eeb25444db889940a592348e1f29e9de499d5de4789413dc6c8b8e7eb1c76d0f",
+    "data/evaluation/meetings-c5-validation-v2/oracle-draft.json": "d4ea37af8e8beb6be58feb614081246e4e6966263c9da68c3aa0f0424060d4aa",
+    "data/evaluation/meetings-c5-validation-v2/context-selection.json": "5aa9059776d92f7f78f1a97173c09575888808ea637be36ed44195b6a33e0523",
+    "data/evaluation/meetings-c5-validation-v2/author-receipt.json": "4a3c28561b2c957151c60144a0da17f4d6b53e510cb9e2b4f08eb79a67842607"
+  },
+  "bound_toolchain_unchanged": 76,
+  "actual": {
+    "ai_authored_items": 14,
+    "ai_independent_accepted_items_at_record": 0,
+    "human_reviewed_items": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0
+  },
+  "limitations": [
+    "Pure schema/offset/composition checks do not establish semantic correctness or question difficulty.",
+    "Independent item reviewers have ownership; author artifacts and all source bytes remain unchanged pending review.",
+    "Source-first fixed context evaluation does not measure retrieval quality or whole service accuracy.",
+    "Parent read metadata and hashes only; validation semantics remain isolated."
+  ]
+}

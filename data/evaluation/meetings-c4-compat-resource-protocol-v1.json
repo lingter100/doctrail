@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "followup_id": "meeting-thinking-c4-compat-resource-v1",
+  "generation_protocol": "meeting-single-call-thinking-c4-p0-v1",
+  "scope": "new_same_budget_compatibility_resource_gate_only",
+  "registered_date_kst": "2026-10-15",
+  "design_role": {"name": "free_qa_candidate_review", "model": "gpt-6-astra", "reasoning_effort": "xhigh", "tool_accepted": true},
+  "original_failure": {"report": "experiments/results/meetings-c4-resources-v1.json", "sha256": "2b66105860e47180dc29ff78213d43ade81ac29ef2f17ba19ba632440e017729", "dispatches": 2, "completed_generations": 1, "status": "failed_closed"},
+  "original_source_freeze": {"file": "data/evaluation/meetings-c4-resource-source-freeze-v1.json", "sha256": "2ba79c7fba2ad52090392f9256396dc8a1813b6bfae31d6b06a7ba2dd9f2d701", "bindings": 43},
+  "stress_literal": {"unit": "z", "count": 2048, "separator": " ", "ascii_bytes": 4095, "minimal_json_bytes": 4109, "schema_keyword": "const", "complete_json_retokenized_tokens": "unmeasured_before_source_commit", "required_complete_json_tokens_gt": 928, "adjustment_on_failure": false},
+  "limits": {"context_tokens": 6144, "input_tokens": 5120, "total_output_tokens": 928, "requested_reasoning_tokens": 512, "normal_final_retokenized_tokens": 384, "shared_request_seconds": 90, "cleanup_and_drain_join_seconds": 5, "last_request_through_cleanup_seconds": 120, "phase_seconds": 1200, "new_dispatches_max": 2, "new_quality_calls": 0, "warmup": 0, "retry": 0, "fallback": 0, "download": 0, "metadata_only_restarts_after_both_pass": 1},
+  "runtime": {"unchanged_model_manifest": "data/models/meetings-generation-qwen35-v1.json", "gpu_layers": 24, "temperature": 0, "seed": 0, "cache_prompt": false, "parallel": 1},
+  "diagnostic_capture": {"continuous_discarding_drain": true, "fixed_read_chunk_max_bytes": 8192, "raw_content_retained": false, "all_bytes_counted": true, "passing_emitted_bytes": 0, "passing_eof": true, "passing_read_or_join_errors": 0},
+  "preparation": {"code_and_source_ci_before_offline_load": true, "offline_cached_tokenizer_only": true, "new_normal_and_stress_inputs": true, "literal_token_check_once": true, "plan_commit_before_actual": true, "new_output_directory_once": true},
+  "quality_followup": {"registered": false, "fresh_calibration_gate": "6/6 complete semantic correctness", "isolated_validation_gate": "8/8 complete semantic correctness", "old_pools_reusable": false, "automatic_adoption": false},
+  "status_at_registration": {"new_native_calls": 0, "new_tokenizer_loads": 0, "new_quality_items": 0, "human_reviews": 0, "service_integration": false}
+}

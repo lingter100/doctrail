@@ -2,3 +2,69 @@
 *.jpg binary
 *.png binary
 *.pdf binary
+experiments/results/meetings-c4-resource-native-diagnostic-v1.txt -text
+experiments/results/meetings-source-access-recovery-v1.json -text
+data/evaluation/meetings-c4-calibration-v1/java-parity.json -text
+data/evaluation/meetings-c4-validation-v1/source-java-parity.json -text
+data/evaluation/meetings-c5-validation-v1/java-parity.json -text
+data/evaluation/meetings-c5-calibration-v1/java-parity.json -text
+data/evaluation/meetings-c5-validation-v2/java-parity.json -text
+data/evaluation/meetings-c6-calibration-v1/java-parity.json -text
+data/evaluation/meetings-c6-validation-v1/java-parity.json -text
+data/evaluation/meetings-c6-review-metadata-v1/calibration/seed.bin binary
+data/evaluation/meetings-c6-review-metadata-v1/validation/seed.bin binary
+# Preserve original C7 source-stage evidence bytes (including CRLF metadata).
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/jupyter__jupyter-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/kubernetes__community-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/rust-embedded__wg-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/jupyter__steering-council-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/python__typing-council-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/scientific-python__community-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/jupyter__governance-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/jupyter__software-steering-council-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/WebAssembly__meetings-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-008/dask__community-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-008/kubernetes__sig-release-summary.json -text
+data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-008/numba__numba-summary.json -text
+data/evaluation/meetings-c7-validation-v1/source-adoption-receipt.json -text
+# Preserve the exact original Windows unit-verification receipt.
+experiments/results/meeting-admission-diagnostic-implementation-v1.json -text
+experiments/results/meeting-admission-diagnostic-implementation-v2.json -text
+# The official Windows CLI stdout includes a final CRLF; keep its exact bytes.
+experiments/results/meeting-admission-diagnostic-v1/cli-summary.json -text
+# Preserve original bounded-discovery receipt bytes.
+data/evaluation/meetings-source-feasibility-v1/calibration/artifact-index-v1.json -text
+data/evaluation/meetings-source-feasibility-v1/calibration/safe-summary-v1.json -text
+data/evaluation/meetings-source-feasibility-v1/validation/actor-attestation-v1.json -text
+data/evaluation/meetings-source-feasibility-v1/validation/artifact-index-v1.json -text
+data/evaluation/meetings-source-feasibility-v1/validation/outcome-v1.json -text
+experiments/results/meeting-visual-acceptance-v1.json -text
+# Preserve the source-attempt receipts and their recorded byte hashes.
+data/evaluation/meetings-service-rag-calibration-v1/artifact-index-v1.json -text
+data/evaluation/meetings-service-rag-calibration-v1/author-receipt-v1.json -text
+data/evaluation/meetings-service-rag-calibration-v1/network-log-v1.json -text
+data/evaluation/meetings-service-rag-calibration-v1/safe-summary-v1.json -text
+data/evaluation/meetings-service-rag-calibration-v1/source-manifest-v1.json -text
+data/evaluation/meetings-service-rag-validation-v1/artifact-index-v1.json -text
+data/evaluation/meetings-service-rag-validation-v1/safe-summary-v1.json -text
+# Preserve service source metadata hashes, including corrected durable indexes.
+data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v2.json -text
+data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v3.json -text
+data/evaluation/meetings-service-rag-calibration-v2/author-receipt-v2.json -text
+data/evaluation/meetings-service-rag-calibration-v2/correction-receipt-v3.json -text
+data/evaluation/meetings-service-rag-calibration-v2/network-log-v2.json -text
+data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v2.json -text
+data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v3.json -text
+data/evaluation/meetings-service-rag-calibration-v2/source-manifest-v2.json -text
+# Preserve independent source review and closed validation attempt bytes.
+data/evaluation/meetings-service-rag-validation-v2/artifact-index-v2.json -text
+data/evaluation/meetings-service-rag-validation-v2/safe-summary-v2.json -text
+# Preserve prepared validation-v3 metadata and its durable hash bindings.
+data/evaluation/meetings-service-rag-validation-v3/artifact-index-v3.json -text
+data/evaluation/meetings-service-rag-validation-v3/author-receipt-v3.json -text
+data/evaluation/meetings-service-rag-validation-v3/safe-summary-v3.json -text
+data/evaluation/meetings-service-rag-validation-v3/source-fingerprint-comparison-v3.json -text
+data/evaluation/meetings-service-rag-validation-v3/source-fingerprints-v3.json -text
+data/evaluation/meetings-service-rag-validation-v3/source-inventory-v3.json -text
+data/evaluation/meetings-service-rag-validation-v3/source-manifest-v3.json -text

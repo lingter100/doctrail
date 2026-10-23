@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-python-service-integration",
+  "date": "2026-10-22",
+  "status": "synthetic_contracts_and_independent_read_verified_exact_ci_and_actual_model_pending",
+  "base_commit": "a57c6cb72279970a0df244a6b5f15e9585f36a1a",
+  "source": [
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 20516,
+      "sha256": "c49c8c96c97394f0dd416e6e1d218fabcbcb357da4a7fc8294a59c45fe106e19",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 4473,
+      "sha256": "e6c0b2c1433fb461166b089eff1001b6352c1382a31c898a61fb7fd329ebf3c1",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 22482,
+      "sha256": "cf9e74607f763becb94554d25bc8bd3fa6b56a5d6bd943b2626bea8db572b276",
+      "lf": true
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 38707,
+      "sha256": "83009cce1167fa8798d14ea150d4b5cc92b1228eef13e610abe9f6e10b72a313",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 41322,
+      "sha256": "e762881ab3a150babe9168506ebd0fe224beb71857a3cf67e683b9b8fc4d2ae4",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 6477,
+      "sha256": "45210483fa3bf739c6117f4425395296c6f4b200534323bbf390572efd600d73",
+      "lf": true
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 29661,
+      "sha256": "ea636f53e26b1cb5a2658e916e7b81ab02bb6edd7cdc1bb7445b8a0a3f0b6f59",
+      "lf": true
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 62348,
+      "sha256": "1d34632ce1ca74a2186fba87a47889cdafb7e7de9f1b4c43c38fc082a599cd87",
+      "lf": true
+    }
+  ],
+  "fixed_adapter": [
+    {
+      "path": "src/doctrail/meeting_grounded_summary.py",
+      "bytes": 18267,
+      "sha256": "c2a9865871764ec2237719dc77dc03427f5d6c1edab735b44054fa384af0b2c1"
+    },
+    {
+      "path": "tests/test_meeting_grounded_summary.py",
+      "bytes": 20813,
+      "sha256": "f3fff0339a95bfc6b1d7546ff852925230892503c4f8ab339c2c7ebb57a8b880"
+    }
+  ],
+  "contracts": [
+    "Default single/legacy and legacy/coverage policies unchanged. Grounded-summary-v1 requires batch-v2 before assets/clients are constructed.",
+    "Normal and observed factories select GroundedSummaryGenerator/GroundedSummaryRuntime; observed MRO reuses existing transport hooks and the same algorithm.",
+    "Generator/runtime policy drift and missing/changed grounded summary metadata reject readiness and requests. Health and lifecycle include summary2, prompt/grammar hashes, caps, and same-model review limitation.",
+    "Analysis preparation, classification, generation1, review1, assembly and observer share original120 seconds. Existing answer90 and owned cleanup unchanged.",
+    "Busy requests do not republish prior assembly. Assembly diagnostics remain nested and do not stand for authoritative request success or native completion.",
+    "Both existing launcher CLIs forward explicit assembly with default legacy. Acceptance CLI has no override; manifest/registration/calibration effective assembly must match.",
+    "Loaded grounded module is always a required code binding, including legacy. Old consumed manifests/artifacts are unchanged."
+  ],
+  "final_tests": {
+    "command": ".venv/Scripts/python.exe -m pytest -q tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py tests/test_meeting_grounded_summary.py tests/test_meeting_analysis_batch.py tests/test_meeting_extraction_coverage.py",
+    "passed": 582,
+    "seconds": 18.4,
+    "warning": "One existing Starlette/httpx deprecation",
+    "log": {
+      "path": ".local/meeting-grounded-summary-service-v1/tests-final-health-shape.log",
+      "bytes": 1236,
+      "sha256": "548a633ab1e9758a5234ee4ca15148bad1d5525406bf29dffee43e62476e35c0"
+    },
+    "counting": "Final582 only, do not add original574 or intermediate582."
+  },
+  "ruff": {
+    "command": ".venv/Scripts/python.exe -m ruff check src/doctrail/meeting_service_rag.py scripts/serve_meeting_service_rag.py scripts/serve_meeting_rag_service.py scripts/run_meeting_rag_acceptance.py tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py",
+    "status": "passed",
+    "log": {
+      "path": ".local/meeting-grounded-summary-service-v1/ruff-final-health-shape.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    }
+  },
+  "receipts": [
+    {
+      "path": ".local/meeting-grounded-summary-service-v1/receipt.json",
+      "bytes": 17217,
+      "sha256": "36aaca923016da60e529e0139a6e7b1df754c8f4c07caa0ba7cc807a3a1eed8a"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-service-v1/receipt-v2.json",
+      "bytes": 9598,
+      "sha256": "8ba8ee34453ee5bb22234917fa684e36bc5becc82e4e9ec46c7171096a04eeea"
+    }
+  ],
+  "independent_review": {
+    "path": ".local/meeting-grounded-summary-service-v1/independent-review/read-review-v1.json",
+    "bytes": 9088,
+    "sha256": "2cdaa81f36a62e24f82aacec7412b14aa439c047fda2545f2a785423148bd3cb"
+  },
+  "parent_verification": {
+    "source": 8,
+    "original_artifacts": 47,
+    "delta_artifacts": 24,
+    "review_final_source": 8,
+    "frozen_unchanged": 77
+  },
+  "preserved_failures": [
+    "First412 tests passed; Ruff found four imports. Source8 and logs preserved before correction.",
+    "Original574 tests passed but parent generic reproduction exposed unnormalized AttributeError for malformed health.runtime shapes.",
+    "Explicit runtime dict guard and eight legacy/grounded malformed-shape checks added. Intermediate582 and TRY004 failure preserved before the exact final TypeError line.",
+    "Only final582 counted; prior162/412/574/intermediate582 overlap and are not added."
+  ],
+  "health_shape_fix": "Require extraction.runtime dict before .get; invalid shape normalizes to existing generation_health_identity. Eight legacy/grounded x None/list/string/int checks exercise direct health and startup/owned cleanup.",
+  "reproduction": {
+    "path": ".local/meeting-grounded-summary-service-v1/parent-malformed-health-repro.log",
+    "bytes": 499,
+    "sha256": "2d4a8f90bd14ef260236080b6fc9aa7ba66549398ffdbbd94e096dca3df17ccb"
+  },
+  "real_execution": {
+    "native": 0,
+    "model": 0,
+    "tokenizer": 0,
+    "java": 0,
+    "browser": 0,
+    "actual_data": 0,
+    "git": 0
+  },
+  "limitations": [
+    "Tests use actual routing/factory/generator classes with synthetic HTTP transports, clocks and temporary manifests. No native tokenizer/model process was started.",
+    "Same-model review marker is a wire contract, not independent factual truth. Real source support, summary completeness, latency and resource cleanup remain unverified for this candidate.",
+    "Default single/legacy is preserved; opt-in grounded-summary-v1 requires batch-v2. Closed runs and their original manifests are not rerun or rewritten.",
+    "Original actual model development run and insufficient summary comparison remain failed/insufficient.",
+    "Exact source CI and a new bound once-only development execution are required before any new real model comparison.",
+    "Local originals are retained; public source contains reproducible synthetic tests but does not include all local private evidence."
+  ]
+}

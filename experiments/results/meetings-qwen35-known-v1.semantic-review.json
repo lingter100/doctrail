@@ -1,0 +1,435 @@
+{
+  "schema_version": 1,
+  "gate_passed": false,
+  "report_sha256": "73e97605cecb859ebfb100414e65f14250237e9308310192f474c53063eb438e",
+  "kind": "independent_ai_semantic_review_of_qwen35_known_development_candidate",
+  "reviewed_at": "2026-10-13T06:46:33.016721+00:00",
+  "report": {
+    "path": "experiments/results/meetings-qwen35-known-v1.json",
+    "sha256": "73e97605cecb859ebfb100414e65f14250237e9308310192f474c53063eb438e",
+    "status": "completed_not_semantically_verified",
+    "plan_sha256": "abe3d8cedc32a7fbbc8bcb5a91e8975f87a7111a01b75623d578f1e084911421"
+  },
+  "input": {
+    "path": "data/evaluation/meetings-gguf-development-v1.json",
+    "sha256": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+    "kind": "known_failure_development_cases_not_held_out",
+    "question_author": "AI"
+  },
+  "reviewer": {
+    "type": "AI",
+    "agent": "meetings_review",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "settings_evidence": "Parent-reported tool-accepted spawn; no independent runtime model-setting introspection exposed.",
+    "human_review_count": 0,
+    "model_calls_by_reviewer": 0,
+    "tests_or_service_runs_by_reviewer": 0
+  },
+  "fixture_sha256": {
+    "tests/fixtures/meetings/synthetic-release-followup.md": "0f2e3bf13e65c8a6593b257dda36aed94873d0fdf4a9697380d87325e12c398a",
+    "tests/fixtures/meetings/synthetic-release-planning.md": "606678b791ad6b3e1dde1e1bb0189cf064d8152cbb6ccba405663d36500e5138",
+    "tests/fixtures/meetings/synthetic-runbook.md": "1e95de236f46967b54c8cef312fc305f206f5698ba9d38c288ee37c9b3582d4c",
+    "tests/fixtures/meetings/public/jupyter-february-2025.md": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+    "tests/fixtures/meetings/public/jupyter-host-guide.md": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f",
+    "tests/fixtures/meetings/public/jupyter-june-2025.md": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+    "tests/fixtures/meetings/public/jupyter-license.txt": "1b9f3955dcf9c235b10c168cca09b88c1f2adf992a0dc13120482d93037602ac"
+  },
+  "source_provenance": {
+    "bound_files_as_recorded": {
+      "data/evaluation/meetings-gguf-development-v1.json": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+      "data/models/meetings-generation-gguf-v1.json": "ee069d53d3e8c35c44a71a65733e03551be560753ab06962c32ebdbd36cd2d11",
+      "docs/MEETINGS-GGUF-CANDIDATE.md": "8c5f5a55239e724213d40f462efb30941a70dbea4c79b7b7426cf4da6b768cf0",
+      "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+      "scripts/probe_meeting_gguf.py": "beb8de6ad85287deb4f71bc73a2f2eca6455985599dc6f72fee6e038885d884d",
+      "scripts/serve_meetings.py": "9c54905ae01d02e7fbd37b955dd62b6de58952cf4e434a1efa75f9816d33c1d8",
+      "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+      "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+      "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+      "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+      "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+      "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+      "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+      "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+      "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+      "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+      "src/doctrail/meeting_answer_v2.py": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444",
+      "scripts/probe_meeting_answer_v2.py": "c813d09d6b61258d36f3eefec2170048a0e713baf6d4b1b3ffc04c5067e13841",
+      "docs/MEETINGS-ANSWER-V2-PLAN.md": "25ff3780527d72626e27e5d7d21f9dc86e7b477fcd7150be71ed4eca3a9934e0",
+      "src/doctrail/meeting_answer_grammar.py": "58c2aeaebf203d214ea33a109864c730fb2f9cde2bda0f990309037da1f2d671",
+      "tests/test_meeting_answer_grammar.py": "a9e3ce5bc800f517f281d9548d6a23411517195a9dbdf9e623e605127d99b282",
+      "scripts/probe_meeting_answer_grammar.py": "610c8c7215084fb176bc18a2896d14d120677afad4e21b151780807404af69a8",
+      "tests/test_probe_meeting_answer_grammar.py": "cb384e86b97ba24b0af59152389dc009f20139ea47adc0dd93db4de3fd339d60",
+      "docs/MEETINGS-ANSWER-DECODER-PLAN.md": "5395cc3c481cec2a677a94025ff5ed2355ebf1d734761da100b80e5097382e13",
+      "data/models/meetings-generation-qwen35-v1.json": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99",
+      "src/doctrail/meeting_qwen35.py": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b",
+      "scripts/serve_meeting_qwen35.py": "fe481511ade7e34f4b85053f267c86afff850ed50b9455d5f0f368a58a4a8919",
+      "scripts/probe_meeting_qwen35.py": "a83df14eed376303dedc84abe6f502feac7377a57f39b533e2bd49f6f8cdf820",
+      "scripts/probe_meeting_qwen35_readiness.py": "88a4558f21d567e463c2063885a9e5b09f5ebdcef14c6f3f0432d0c1d734a3c2",
+      "tests/test_meeting_qwen35.py": "d7f1b4f46fdbc128fdebabee0ef801c89f2f0841af84fa7310f8bb92f81d799b",
+      "tests/test_serve_meeting_qwen35.py": "a1efde8dc08811f97a36acfd8742b2fe9ef2fda1169a17581cf2ce888b4ae0b4",
+      "tests/test_probe_meeting_qwen35_readiness.py": "57aa59197a95425748eeb088ad63b284618aaaadfaf04d77bed5dc3369b4f493",
+      "docs/MEETINGS-QWEN35-PLAN.md": "52f6985d23df320b030bd7c02f1795bbf0ece4a1a61efb6f8e3c16efd6daafe5"
+    },
+    "current_bound_file_hashes_match_report": true,
+    "report_sources_unchanged": true,
+    "caveat": "Current hash equality and report unchanged flag support binding; reviewer did not reconstruct an independent pre-run snapshot."
+  },
+  "model_runtime_as_recorded": {
+    "repo_id": "Qwen/Qwen3.5-9B",
+    "revision": "gguf-sha256:dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+    "original_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "experimental": true,
+    "generation_protocol": "meeting-full-chunk-evidence-v5",
+    "artifact": {
+      "repo_id": "unsloth/Qwen3.5-9B-GGUF",
+      "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+      "filename": "Qwen3.5-9B-Q5_K_M.gguf",
+      "sha256": "dc2a39aef291f91a9116ad214058da0d86eb648743a124bd8c333787c4b9c91c",
+      "size_bytes": 6577841376
+    },
+    "runtime": {
+      "backend": "llama.cpp",
+      "tag": "b11429",
+      "commit": "d81235049384534c167caea52b85a694f6103d14",
+      "observed_build": "b11429-d81235049",
+      "identity_check": "local_gguf_sha256_and_server_alias",
+      "context_tokens": 6144,
+      "max_input_tokens": 4096,
+      "max_new_tokens": 768,
+      "deadline_seconds": 120,
+      "memory_telemetry": "not_measured"
+    },
+    "answer_decoder": {
+      "policy": "meeting-answer-json-grammar-v1",
+      "answer_policy": "meeting-evidence-first-answer-v2",
+      "grammar_sha256": "8eee0bee59560b67b1361a0d08ce91b6bf16e8554970cd600b778b47f367d5a3",
+      "guarantee_scope": "json_structure_only"
+    },
+    "nonthinking": {
+      "policy": "qwen35-terminal-assistant-preamble-v1",
+      "enable_thinking_requested": false,
+      "assistant_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+      "last_template_verified": false,
+      "verification_scope": "terminal_assistant_preamble_per_prompt"
+    }
+  },
+  "execution": {
+    "native_answer_calls": 4,
+    "analysis_calls": 0,
+    "paid_service_calls": 0,
+    "json_parseable_outputs": 4,
+    "accepted_results": 2,
+    "rejected_results": 2,
+    "all_finish_reasons": [
+      "eos",
+      "eos",
+      "eos",
+      "eos"
+    ],
+    "effective_settings_as_recorded": [
+      {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "root ::= answered | abstained\nanswered ::= \"{\\\"status\\\":\\\"answered\\\",\\\"claims\\\":[\" claim (\",\" claim){0,5} \"]}\"\nabstained ::= \"{\\\"status\\\":\\\"abstained\\\",\\\"claims\\\":[]}\"\nclaim ::= \"{\\\"evidence\\\":[\" evidence (\",\" evidence){0,3} \"],\\\"text\\\":\" string \"}\"\nevidence ::= \"{\\\"id\\\":\" [0-9] \",\\\"quote\\\":\" string \"}\"\nstring ::= \"\\\"\" char+ \"\\\"\"\nchar ::= [^\"\\\\\\x7F\\x00-\\x1F] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F]{4})\n",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0,
+        "observed_nonthinking_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+        "enable_thinking_requested": false
+      },
+      {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "root ::= answered | abstained\nanswered ::= \"{\\\"status\\\":\\\"answered\\\",\\\"claims\\\":[\" claim (\",\" claim){0,5} \"]}\"\nabstained ::= \"{\\\"status\\\":\\\"abstained\\\",\\\"claims\\\":[]}\"\nclaim ::= \"{\\\"evidence\\\":[\" evidence (\",\" evidence){0,3} \"],\\\"text\\\":\" string \"}\"\nevidence ::= \"{\\\"id\\\":\" [0-9] \",\\\"quote\\\":\" string \"}\"\nstring ::= \"\\\"\" char+ \"\\\"\"\nchar ::= [^\"\\\\\\x7F\\x00-\\x1F] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F]{4})\n",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0,
+        "observed_nonthinking_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+        "enable_thinking_requested": false
+      },
+      {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "root ::= answered | abstained\nanswered ::= \"{\\\"status\\\":\\\"answered\\\",\\\"claims\\\":[\" claim (\",\" claim){0,5} \"]}\"\nabstained ::= \"{\\\"status\\\":\\\"abstained\\\",\\\"claims\\\":[]}\"\nclaim ::= \"{\\\"evidence\\\":[\" evidence (\",\" evidence){0,3} \"],\\\"text\\\":\" string \"}\"\nevidence ::= \"{\\\"id\\\":\" [0-9] \",\\\"quote\\\":\" string \"}\"\nstring ::= \"\\\"\" char+ \"\\\"\"\nchar ::= [^\"\\\\\\x7F\\x00-\\x1F] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F]{4})\n",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0,
+        "observed_nonthinking_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+        "enable_thinking_requested": false
+      },
+      {
+        "backend": "llama.cpp",
+        "temperature": 0.0,
+        "samplers": [
+          "temperature"
+        ],
+        "seed": 0,
+        "dynatemp_range": 0.0,
+        "mirostat": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "stop": [],
+        "logit_bias": [],
+        "grammar_lazy": false,
+        "lora": [],
+        "n_predict": 768,
+        "grammar": "root ::= answered | abstained\nanswered ::= \"{\\\"status\\\":\\\"answered\\\",\\\"claims\\\":[\" claim (\",\" claim){0,5} \"]}\"\nabstained ::= \"{\\\"status\\\":\\\"abstained\\\",\\\"claims\\\":[]}\"\nclaim ::= \"{\\\"evidence\\\":[\" evidence (\",\" evidence){0,3} \"],\\\"text\\\":\" string \"}\"\nevidence ::= \"{\\\"id\\\":\" [0-9] \",\\\"quote\\\":\" string \"}\"\nstring ::= \"\\\"\" char+ \"\\\"\"\nchar ::= [^\"\\\\\\x7F\\x00-\\x1F] | \"\\\\\" ([\"\\\\/bfnrt] | \"u\" [0-9a-fA-F]{4})\n",
+        "cache_prompt_requested": false,
+        "observed_cache_tokens": 0,
+        "observed_nonthinking_preamble_sha256": "55a4de9d8289b8701d87f2fd4a613affa911915e3330051fbf93191148387821",
+        "enable_thinking_requested": false
+      }
+    ],
+    "per_call_observed_preamble_hashes_match": true,
+    "metadata_caveat": "Top-level last_template_verified=false is initial metadata, not evidence that all later prompts failed. Each recorded effective call includes the observed expected preamble hash. Scope is terminal-preamble verification, not full-template equality.",
+    "performance_conclusion": "No Java service performance, peak-memory or generalized quality claim."
+  },
+  "mechanical_checks": {
+    "input_context_slices_verified": 18,
+    "raw_quote_checks": [
+      {
+        "case_id": "cross-public",
+        "claim_index": 0,
+        "context_id": 2,
+        "quote": "Mike Krassowski JupyterLab 4.4 demo",
+        "exact_selected_source_substring": false,
+        "unique_in_selected_source": false
+      },
+      {
+        "case_id": "cross-public",
+        "claim_index": 0,
+        "context_id": 3,
+        "quote": "Mike Krassowski JupyterLab 4.4 beta will be released today :crossed_fingers:",
+        "exact_selected_source_substring": false,
+        "unique_in_selected_source": false
+      },
+      {
+        "case_id": "cross-public",
+        "claim_index": 1,
+        "context_id": 4,
+        "quote": "JupyterLab 4.4 and Notebook 7.4 are out",
+        "exact_selected_source_substring": true,
+        "unique_in_selected_source": true
+      },
+      {
+        "case_id": "host-guide",
+        "claim_index": 0,
+        "context_id": 1,
+        "quote": "Each meeting should have a collaborative public agenda document (for example on HackMD). The agenda link should be included in the event's description in the shared Google Calendar.",
+        "exact_selected_source_substring": false,
+        "unique_in_selected_source": false
+      },
+      {
+        "case_id": "korean-mixed-full-docs",
+        "claim_index": 0,
+        "context_id": 1,
+        "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+        "exact_selected_source_substring": true,
+        "unique_in_selected_source": true
+      },
+      {
+        "case_id": "korean-mixed-full-docs",
+        "claim_index": 1,
+        "context_id": 2,
+        "quote": "Raw question text and document text must not be written to operational logs.",
+        "exact_selected_source_substring": true,
+        "unique_in_selected_source": true
+      }
+    ],
+    "exact_unique_selected_source_quotes": 3,
+    "raw_quote_entries": 6,
+    "accepted_citation_spans_verified": 2,
+    "same_messages_and_answer_grammar_as_4b_decoder": true,
+    "prior_comparison_report": {
+      "path": "experiments/results/meetings-answer-decoder-v1.json",
+      "sha256": "521c5ccaeaff1b643bafcc355a544030d9f1e3d1c10d1c2ee50b9210d0b59a4a"
+    },
+    "note": "No whitespace, Markdown or Unicode punctuation normalization used to admit evidence."
+  },
+  "case_reviews": [
+    {
+      "case_id": "cross-public",
+      "verdict": "fail_exact_quote",
+      "actual_status": "rejected",
+      "actual_error": "generation_invalid_evidence",
+      "claims": [
+        {
+          "claim_index": 0,
+          "raw_claim": {
+            "evidence": [
+              {
+                "id": 2,
+                "quote": "Mike Krassowski JupyterLab 4.4 demo"
+              },
+              {
+                "id": 3,
+                "quote": "Mike Krassowski JupyterLab 4.4 beta will be released today :crossed_fingers:"
+              }
+            ],
+            "text": "In February 2025, Mike Krassowski gave a demo of JupyterLab 4.4 and announced that the beta version would be released that day."
+          },
+          "quote_fidelity": "Both references invalid: Markdown ** around Mike Krassowski is deleted, preventing exact contiguous matches in selected passages 2 and 3.",
+          "semantic_support_in_full_sources": "Beta future status and February context are supported. Demo exists as an agenda item; gave a demo is a slightly stronger completion formulation than a listed presentation. No claim that February beta completed.",
+          "completeness": "Covers February plan/demo."
+        },
+        {
+          "claim_index": 1,
+          "raw_claim": {
+            "evidence": [
+              {
+                "id": 4,
+                "quote": "JupyterLab 4.4 and Notebook 7.4 are out"
+              }
+            ],
+            "text": "In June 2025, it was reported that JupyterLab 4.4 and Notebook 7.4 were released."
+          },
+          "quote_fidelity": "Exact selected passage 4 quote.",
+          "semantic_support_in_full_sources": "Source says versions are out, supporting availability reported in June. Wording reported that ... were released is acceptable as a release-status report here and no longer specifies release during the call. It still does not establish an exact release date.",
+          "completeness": "Covers June release status."
+        }
+      ],
+      "language": "English, matching question.",
+      "overall": "Substantive comparison improved but output was correctly rejected; intended semantics cannot substitute for valid delivered citations."
+    },
+    {
+      "case_id": "missing-budget",
+      "verdict": "pass",
+      "actual_status": "abstained",
+      "claims": [],
+      "rationale": "No catering budget supplied; actual empty-claim abstention is correct. One known negative example does not establish a general abstention rate."
+    },
+    {
+      "case_id": "host-guide",
+      "verdict": "fail_exact_quote_and_completeness",
+      "actual_status": "rejected",
+      "actual_error": "generation_invalid_evidence",
+      "claims": [
+        {
+          "claim_index": 0,
+          "raw_claim": {
+            "evidence": [
+              {
+                "id": 1,
+                "quote": "Each meeting should have a collaborative public agenda document (for example on HackMD). The agenda link should be included in the event's description in the shared Google Calendar."
+              }
+            ],
+            "text": "The host guide states that each meeting must have a collaborative public agenda document, such as one on HackMD, and that the link to this agenda should be included in the event's description within the shared Google Calendar."
+          },
+          "quote_fidelity": "Source has event’s with U+2019; output uses ASCII event's. Thus selected passage 1 quote is not exact.",
+          "semantic_support_in_full_sources": "Public collaborative agenda and calendar placement are supported. Claim changes should have to must have, strengthening recommendation to obligation.",
+          "completeness": "Required agenda-link sharing in meeting chat is absent despite supplied passage 3. This fails the registered case even if punctuation were made exact."
+        }
+      ],
+      "language": "English, matching question.",
+      "overall": "Preserve rejection; no automatic apostrophe repair or permissive quote matching."
+    },
+    {
+      "case_id": "korean-mixed-full-docs",
+      "verdict": "fail_strict_claim_quote_coverage",
+      "actual_status": "answered",
+      "structural_status": "passed",
+      "claims": [
+        {
+          "claim_index": 0,
+          "raw_claim": {
+            "evidence": [
+              {
+                "id": 1,
+                "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다."
+              }
+            ],
+            "text": "검색 로그 보관 기간은 2026-10-01 회의에서 30일로 확정되었으나, 2026-10-08 회의에서 개인정보 노출 범위를 줄이기 위해 7일로 변경되었습니다."
+          },
+          "quote_fidelity": "Selected exact span is valid.",
+          "semantic_support_in_full_sources": "All stated facts are supported by the follow-up source and meeting-date metadata: October 1 prior decision, 30 to seven days on October 8, privacy-exposure rationale.",
+          "semantic_support_in_selected_quote": "Partial. The quote covers the old 30-day decision and replacement with seven days; October 8 is in supplied meeting metadata/header. Added privacy-exposure reason is absent from the selected quote and only appears in the adjacent discussion line.",
+          "missing_support_span": {
+            "fixture": "tests/fixtures/meetings/synthetic-release-followup.md",
+            "quote": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.",
+            "start_offset": 147,
+            "end_offset": 181
+          },
+          "factuality": "Not a fabricated reason; this is an exact-evidence coverage gap for an extra clause in a compound claim."
+        },
+        {
+          "claim_index": 1,
+          "raw_claim": {
+            "evidence": [
+              {
+                "id": 2,
+                "quote": "Raw question text and document text must not be written to operational logs."
+              }
+            ],
+            "text": "원문 질문은 운영 로그에 남겨서는 안 됩니다."
+          },
+          "quote_fidelity": "Exact selected runbook sentence.",
+          "semantic_support_in_selected_quote": "Supported: raw question text must not be written to operational logs.",
+          "factuality": "Correct."
+        }
+      ],
+      "completeness": "The requested change date, 30→7 change and raw-question prohibition are all answered.",
+      "language": "Korean, matching question.",
+      "overall": "Question coverage and full-source factuality pass, but the policy requires each claim to be supported by its own selected quotes. The extra rationale prevents an unqualified citation/semantic gate pass."
+    }
+  ],
+  "aggregate": {
+    "gate": "fail",
+    "gate_passed": false,
+    "strict_full_gate_case_passes": 1,
+    "strict_full_gate_case_failures": 3,
+    "blocking_case_ids": [
+      "cross-public",
+      "host-guide",
+      "korean-mixed-full-docs"
+    ],
+    "structural_passes_not_semantic_passes": true,
+    "natural_answer_readiness": false,
+    "automatic_adoption": false,
+    "new_validation_execution_allowed_by_this_gate": false,
+    "decision": "Preserve the known-case failure. Do not open or execute the separate new validation set after this failed prerequisite. No repeated generation, prompt changes, quote repair or model tuning performed.",
+    "limitations": [
+      "Known previously examined development cases, not held-out evaluation.",
+      "Full-source support and selected-quote support are explicitly separated.",
+      "Human review count is zero.",
+      "No new custodian validation folders, M5-B validation or locked test materials accessed.",
+      "No actual Java answer readiness established by this candidate comparison."
+    ]
+  }
+}

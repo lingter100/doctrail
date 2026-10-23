@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "kind": "synthetic_c3_preparation_tooling_verification",
+  "date": "2026-10-14",
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "implementation_parent": "fed152aae10933dae4a80f2ec4534ea6eedf7385",
+  "source_sha256": {
+    "scripts/prepare_meeting_requirements_inputs.py": "03071e6dbb1b269fbf530b2db0794661ab82432efd70f9b4d6d31f807077f3db",
+    "src/doctrail/meeting_requirements_review.py": "c334bb76e908ffa6ea338789e57bfa3ec1eedb51c5191e149e64c7ffa3b0e4ed",
+    "tests/test_meeting_requirements_review.py": "70bfad5d38c7d28190f4e8803585935a050e6c0a21186cc0e93d952e04470306",
+    "tests/test_prepare_meeting_requirements_inputs.py": "ea2fa81adcae5ec5e990bc0bc69dd3d772007913221ec9e2c7963699ca95b738"
+  },
+  "checks": [
+    {
+      "executor": "parent",
+      "stage": "before_independent_path_fix",
+      "command": "uv run --locked --no-sync pytest -q tests/test_meeting_requirements_review.py tests/test_prepare_meeting_requirements_inputs.py",
+      "passed": 110,
+      "skipped": 1,
+      "seconds": 52.47,
+      "exit_code": 0
+    },
+    {
+      "executor": "requirements_candidate",
+      "stage": "after_independent_path_fix",
+      "command": "uv run --locked --no-sync pytest -q tests/test_prepare_meeting_requirements_inputs.py",
+      "passed": 63,
+      "skipped": 1,
+      "seconds": 79.93,
+      "exit_code": 0,
+      "evidence": "implementation role tool output reported in thread"
+    },
+    {
+      "executor": "parent",
+      "stage": "after_independent_path_fix",
+      "command": "uv run --locked --no-sync pytest -q tests/test_meeting_requirements_review.py tests/test_prepare_meeting_requirements_inputs.py::test_code_freeze_argument_cannot_open_any_phase_or_old_pool_body",
+      "passed": 53,
+      "skipped": 0,
+      "seconds": 1.17,
+      "exit_code": 0
+    }
+  ],
+  "unique_final_test_coverage": {
+    "review_passed": 50,
+    "preparation_passed": 63,
+    "passed": 113,
+    "skipped": 1,
+    "scope": "union of executed final source tests; not one full-suite run",
+    "skip_reason": "Windows symlink privilege unavailable"
+  },
+  "independent_review": {
+    "role": "knowledge_recovery_review",
+    "actual_model": "gpt-6-astra",
+    "actual_effort": "high",
+    "finding": "code_freeze argument could open an unrelated body before rejecting schema",
+    "reproduction": "fresh synthetic sentinel only; no actual held-out body read",
+    "resolution": "fixed dedicated metadata path checked before any snapshot or output claim",
+    "new_read_spy_cases": 3,
+    "unresolved_findings": 0,
+    "resolution_verification": "implementation tests and parent read/test; reviewer did not re-review final fix"
+  },
+  "preserved_freezes": [
+    {
+      "file": "data/evaluation/meetings-c3-candidate-source-freeze-v1.json",
+      "sha256": "6ce55cb17d264f8da7c587c685947da8d95ff1199ef65f7f34de7d1a275798c6",
+      "binding_count": 28,
+      "mismatches": []
+    },
+    {
+      "file": "data/evaluation/meetings-c2-input-budget-source-freeze-v1.json",
+      "sha256": "fe8307dfef4e0d4933dd5f894918303980e291a0b7f2a518a71a7e9484b61a99",
+      "binding_count": 72,
+      "mismatches": []
+    },
+    {
+      "file": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+      "binding_count": 41,
+      "mismatches": []
+    },
+    {
+      "file": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+      "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+      "binding_count": 18,
+      "mismatches": []
+    }
+  ],
+  "boundaries": {
+    "actual_new_source_bodies": 0,
+    "actual_new_questions": 0,
+    "actual_official_tokenizer_calls": 0,
+    "actual_native_calls": 0,
+    "network_calls_for_tests": 0,
+    "human_review_count": 0,
+    "toolchain_freeze_created": false,
+    "data_authoring_eligible": false,
+    "service_adopted": false,
+    "model_quality_measured": false,
+    "entire_phase1_complete": false
+  },
+  "next": "Implement and verify new probe/audit entrypoints, then freeze the entire toolchain before fresh data authoring.",
+  "formatting_note": "Removed an extra EOF blank line after tests; no code or assertion behavior changed."
+}

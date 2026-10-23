@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "experiment": "meetings-extraction-coverage-comparison-ci-v1",
+  "recorded_at": "2026-10-22T06:40:18.499283+00:00",
+  "status": "passed",
+  "commit": "7341a8493f9128e734983c3f0c481ec62115b05d",
+  "runs": [
+    {
+      "id": 39734383357,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39734383357",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 39734388263,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39734388263",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "committed_files_verified": 8,
+  "committed_files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 114435,
+      "sha256": "a1b1f150d5e382aa18a35c57ad145759137e03cb7edec2aa7af22737a0c1b8b9"
+    },
+    {
+      "path": "docs/STATUS.md",
+      "bytes": 377600,
+      "sha256": "053bfa827e4c83b9e2b1e3aa8bc69a731718b72aecffc40562240bf7bb682bfb"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "bytes": 133877,
+      "sha256": "e5707714850929f8b0842d650a3a513caece32df0e1285cbd4d6e4ec0772027e"
+    },
+    {
+      "path": "docs/CONTRIBUTIONS.md",
+      "bytes": 172810,
+      "sha256": "5c698984c6976c448ce44ae4aaba72a3b1be5af0d89c218f2f05b772df813bdf"
+    },
+    {
+      "path": "docs/MEETINGS-SERVICE-RAG.md",
+      "bytes": 17531,
+      "sha256": "55a6330bcc9f5c6d20a6a6856f080c8d5a1f73c4e48dc223e7733ce57527f7c1"
+    },
+    {
+      "path": "docs/PROGRESS-OVERVIEW.md",
+      "bytes": 7862,
+      "sha256": "04b868e1d6495d79c2c50b2e2157ae759c69553c1dd849727b21d0a6cdfced3f"
+    },
+    {
+      "path": "experiments/results/meetings-extraction-coverage-ci-v1.json",
+      "bytes": 3117,
+      "sha256": "99cb3addf1845d368aae0fd92ce8d0d87589f849b1ed860dd8c145c730eb6af0"
+    },
+    {
+      "path": "experiments/results/meetings-extraction-coverage-comparison-v1.json",
+      "bytes": 6030,
+      "sha256": "e6a8e1df7722f01b4b48717944b070d4824815a5d8fff30adc789097d0e03095"
+    }
+  ],
+  "watch_sessions": {
+    "58451": "terminal_exit0",
+    "20061": "terminal_exit0"
+  },
+  "limitations": [
+    "These checks validate the exact comparison/documentation commit and existing code regressions; they do not prove model semantic quality.",
+    "The independent summary review was completed after this commit and is recorded separately.",
+    "No real model execution, public service deployment, user review or complete Phase1 acceptance."
+  ]
+}

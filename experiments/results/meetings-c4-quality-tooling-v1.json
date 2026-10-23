@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-single-thinking-c4-v1",
+  "created_at": "2026-10-16T04:20:57.737044+00:00",
+  "kind": "implementation_and_model_free_verification_before_source_adoption",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json",
+    "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78",
+    "bytes": 9816
+  },
+  "bound_file_count": 85,
+  "new_files": {
+    "scripts/audit_meeting_thinking_quality.py": "5947aa4581a6ce59d2aec1bf681a94442197c526be1bb45214cc577e632d0d59",
+    "scripts/prepare_meeting_thinking_inputs.py": "be7c94291fa4141483c7f885f0b27cec87dbee620b9369863fa564725edb13eb",
+    "scripts/probe_meeting_thinking_quality.py": "7a3e91011e63c8e06eff09e75c8cec8ed64532d5ba9d7b3e5e62a8ed7032a644",
+    "src/doctrail/meeting_answer_thinking.py": "2ef811fd35847dc9dfa9a15654e312e81c53c2d449b5ef7f674bc634526b78f4",
+    "src/doctrail/meeting_thinking_quality.py": "a4838c76ef5d243dc82d00b2feae05e8dca31548cd000941ebfa74588881ccdd",
+    "src/doctrail/meeting_thinking_review.py": "0ea41297c7c4ecc96ad0b8e17d8dc14dcbd83aeb8eb1a9f4a07aee5cc7f66f76",
+    "tests/test_audit_meeting_thinking_quality.py": "528edf78861a2bcc1b570f68f4dfa243d6c5ae5899b060e7ce62e490f05179dc",
+    "tests/test_meeting_answer_thinking.py": "23586ef43ae03aa23132eacc7ca9d6f43dc8d62c364166049895fc15b4d78cbf",
+    "tests/test_meeting_thinking_quality.py": "f172c70ff3c6be0b7e99c5f94c3db6fbad8149afbd21adf359b1f628bd780b09",
+    "tests/test_meeting_thinking_review.py": "ad6f6858b73397c1decf5164d73e1b1e83f8cdc66bb73b895d7688633038c5bb",
+    "tests/test_prepare_meeting_thinking_inputs.py": "ff9d2aa326d11c12b55fccd2ebccd920c0139c02a8858092aabd5f1c2fadf118",
+    "tests/test_probe_meeting_thinking_quality.py": "c7ed13fb64374ac55cfd865c63e4f458f21e3929b75b3b552d3c737e1bc4422c"
+  },
+  "original_compat52_unchanged": true,
+  "candidate_checks": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/test_meeting_answer_thinking.py tests/test_meeting_thinking_quality.py -q",
+    "passed": 74,
+    "seconds": 0.53,
+    "evidence": "owner_tool_output_only",
+    "tool_chunk": "7518c2",
+    "ruff_tool_chunk": "335be1",
+    "pre_fix_deadline_failure": {
+      "failed": 1,
+      "seconds": 0.66,
+      "tool_chunk": "5d0b97"
+    },
+    "prior72_pass_was_before_deadline_fix": true
+  },
+  "tooling_checks": {
+    "unique_checks": 77,
+    "execution": "all_passed_across_partitioned_runs_not_one_final_whole_run",
+    "initial_saved_whole_run": {
+      "passed": 66,
+      "failed": 1,
+      "seconds": 202.09,
+      "audit_module_executed": false
+    },
+    "final_audit_and_delta": {
+      "passed": 10,
+      "seconds": 136.28
+    },
+    "final_error_order": {
+      "passed": 2,
+      "seconds": 5.85
+    },
+    "last_original_failure_flag_delta": {
+      "passed": 1,
+      "seconds": 19.04
+    },
+    "initial_stale_temp_failure": "agent_reported_FileExistsError_prior_rename_root_cause_unconfirmed",
+    "logs_available_locally": [
+      {
+        "file": ".local/c4-quality-tooling-archival-targeted-v1.log",
+        "sha256": "818567a3106610e2a59fe9bf14add5e096f86dc953ebb261a72f8bed09ab5a77",
+        "bytes": 559
+      },
+      {
+        "file": ".local/c4-quality-tooling-error-order-final-v1.log",
+        "sha256": "842ea099888358c9eda478d63b9955d5694e54ad0eecbe2b8db03d5da77fb8cb",
+        "bytes": 428
+      },
+      {
+        "file": ".local/c4-quality-tooling-final-delta-v1.log",
+        "sha256": "fe995326d39dfd9fbf2cbec91fc82739f7a824b3cdf8c2a7e303d82370b74ab9",
+        "bytes": 1456
+      },
+      {
+        "file": ".local/c4-quality-tooling-first-cause-targeted-v1.log",
+        "sha256": "b3f3099bf8a4ae7dac590596dddc72312ff685d18d5da04a6dbd548ed596430f",
+        "bytes": 553
+      },
+      {
+        "file": ".local/c4-quality-tooling-original-failure-flag-v1.log",
+        "sha256": "8a4e089be782dfb64a029abb8fcb6d8891e859c7092f5032a7925f4a05f422d4",
+        "bytes": 101
+      },
+      {
+        "file": ".local/c4-quality-tooling-ruff-final-v1.log",
+        "sha256": "2ad9fc6d5083b14474a5f5fc4547c44ef05333f6cd6b062d8608def1ba646ef8",
+        "bytes": 1590
+      },
+      {
+        "file": ".local/c4-quality-tooling-ruff-final-v2.log",
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      },
+      {
+        "file": ".local/c4-quality-tooling-ruff-final-v3.log",
+        "sha256": "77707f0c8f207af4a8e4b20f77f706ebcfb7259a867931a67e7ffe080cdb8c48",
+        "bytes": 1008
+      },
+      {
+        "file": ".local/c4-quality-tooling-ruff-final-v4.log",
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      },
+      {
+        "file": ".local/c4-quality-tooling-ruff-final-v5.log",
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      },
+      {
+        "file": ".local/c4-quality-tooling-ruff-final-v6.log",
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      },
+      {
+        "file": ".local/c4-quality-tooling-synthetic-final-v1.log",
+        "sha256": "fcd8c5c492abe774e314e49368563fb14eea17cf9badf8e458e7770679af5de2",
+        "bytes": 3105
+      }
+    ]
+  },
+  "parent_whole_regression": {
+    "report": {
+      "file": ".local/c4-quality-final-checks-v1/report.json",
+      "sha256": "cc9d9a6030acbed6b0cd2d13cef9a4ca504dbb78181fb12a0850f463ead7cb31",
+      "bytes": 1040
+    },
+    "pytest": {
+      "exit_code": 0,
+      "elapsed_seconds": 872.141,
+      "counts": {
+        "passed": 2398,
+        "skipped": 9,
+        "warning": 1
+      },
+      "log": ".local/c4-quality-final-checks-v1/pytest.log",
+      "log_sha256": "bcae3e4e7828e28bc6b7a532dff92040d3938cbfd1603078c35a13631a1c18ed"
+    },
+    "ruff": {
+      "exit_code": 0,
+      "elapsed_seconds": 0.297,
+      "log": ".local/c4-quality-final-checks-v1/ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "final_source_import_timing_proven": false,
+    "limitation": "Two-file failure-flag tightening crossed parent full-test start. Final targeted test and Ruff passed; final committed-source CI is required before any data authoring."
+  },
+  "independent_read_review": {
+    "role": "/root/free_qa_candidate_review",
+    "actual_model": "gpt-6-astra",
+    "actual_effort": "xhigh",
+    "mode": "read_only",
+    "tests_executed": 0,
+    "data_reads": 0,
+    "native_calls": 0,
+    "final_files": {
+      "src/doctrail/meeting_thinking_review.py": "0ea41297c7c4ecc96ad0b8e17d8dc14dcbd83aeb8eb1a9f4a07aee5cc7f66f76",
+      "scripts/prepare_meeting_thinking_inputs.py": "be7c94291fa4141483c7f885f0b27cec87dbee620b9369863fa564725edb13eb",
+      "scripts/probe_meeting_thinking_quality.py": "7a3e91011e63c8e06eff09e75c8cec8ed64532d5ba9d7b3e5e62a8ed7032a644",
+      "scripts/audit_meeting_thinking_quality.py": "5947aa4581a6ce59d2aec1bf681a94442197c526be1bb45214cc577e632d0d59",
+      "tests/test_meeting_thinking_review.py": "ad6f6858b73397c1decf5164d73e1b1e83f8cdc66bb73b895d7688633038c5bb",
+      "tests/test_prepare_meeting_thinking_inputs.py": "ff9d2aa326d11c12b55fccd2ebccd920c0139c02a8858092aabd5f1c2fadf118",
+      "tests/test_probe_meeting_thinking_quality.py": "c7ed13fb64374ac55cfd865c63e4f458f21e3929b75b3b552d3c737e1bc4422c",
+      "tests/test_audit_meeting_thinking_quality.py": "528edf78861a2bcc1b570f68f4dfa243d6c5ae5899b060e7ce62e490f05179dc"
+    },
+    "candidate_adapter_sha256": "a4838c76ef5d243dc82d00b2feae05e8dca31548cd000941ebfa74588881ccdd",
+    "remaining_concrete_findings_reported": 0,
+    "excluded_from_independent_output_judging": true
+  },
+  "roles": {
+    "candidate_implementation": {
+      "role": "/root/bounded_thinking_transport",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "high"
+    },
+    "tooling_implementation": {
+      "role": "/root/c2_comparison_runner",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "high"
+    },
+    "parent": "integration_review_recording_verification_no_model_setting_change_claim"
+  },
+  "limits_and_truthfulness": {
+    "synthetic_transport_not_native": true,
+    "http_send_attempts_not_server_receipts": true,
+    "native_responses_received_scope": "parsed_responses_successfully_archived_as_native_response_events; an archival failure can prevent a received response from being counted",
+    "contract_valid_answers_not_semantically_correct_answers": true,
+    "git_proof_does_not_prove_question_authorship_time": true,
+    "source_commit_then_author_invocation_receipt_required": true,
+    "ci_observation_not_cryptographic_remote_attestation": true,
+    "freshness_fingerprints_not_complete_semantic_deduplication": true,
+    "actual_native_schema_quality_latency_unverified": true
+  },
+  "counts_at_freeze": {
+    "new_quality_source_documents": 0,
+    "questions": 0,
+    "oracles": 0,
+    "tokenizer_loads": 0,
+    "quality_native_calls": 0,
+    "downloads": 0,
+    "human_reviews": 0
+  },
+  "automatic_service_adoption": false,
+  "phase1_complete": false,
+  "next_gate": "commit_frozen_toolchain_then_actual_required_CI_then_commit_CI_receipt_before_fresh_source_authoring"
+}

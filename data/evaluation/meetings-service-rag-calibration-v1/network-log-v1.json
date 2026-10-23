@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "kind": "network_access_metadata",
+  "requests": [
+    {
+      "sequence": 1,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/nodejs/TSC",
+      "started_at": "2026-10-20T07:05:01.903662+00:00",
+      "seconds": 0.3734443187713623,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-01-repository.json",
+      "sha256": "1514c28b039f437babfd8fa71bc04f891df214fe92485261ae47a4c690972f16",
+      "bytes": 5715
+    },
+    {
+      "sequence": 2,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/nodejs/TSC/git/ref/heads/main",
+      "started_at": "2026-10-20T07:05:12.867776+00:00",
+      "seconds": 0.28011655807495117,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-02-revision.json",
+      "sha256": "92f33fd61e4e3805770ba65fe458058cdfaab7c491ec27a7df17813d43ff7405",
+      "bytes": 323
+    },
+    {
+      "sequence": 3,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/nodejs/TSC/git/trees/8f60e6808c7ffefab1e5389808eee08325326405?recursive=1",
+      "started_at": "2026-10-20T07:05:48.244932+00:00",
+      "seconds": 0.3796865940093994,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-03-tree.json",
+      "sha256": "197731bb8ae219ae07bb7a920fcf9aa69e6e957ae95ff9b685bd7ebdcd7f47e2",
+      "bytes": 106251
+    },
+    {
+      "sequence": 4,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/tc39/notes",
+      "started_at": "2026-10-20T07:06:33.999474+00:00",
+      "seconds": 0.3683278560638428,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-04-repository.json",
+      "sha256": "1c21d762f41206b048d10f2dc55a25d13687ab86ec62c105322b0589b50de220",
+      "bytes": 5684
+    },
+    {
+      "sequence": 5,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/tc39/notes/git/ref/heads/main",
+      "started_at": "2026-10-20T07:06:34.368802+00:00",
+      "seconds": 0.2626993656158447,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-05-revision.json",
+      "sha256": "2f1293dd2c36dd829ce3acf8ef5cfae58a1f51d7c811e8431fb9e089867a40da",
+      "bytes": 327
+    },
+    {
+      "sequence": 6,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/tc39/notes/git/trees/53a59ad71704e669d488a6b67baf940bfe2fe134?recursive=1",
+      "started_at": "2026-10-20T07:06:58.145627+00:00",
+      "seconds": 0.5896716117858887,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-06-tree.json",
+      "sha256": "cc1ad52ea563980c9f9dfb4777244a2e57e31e5d8ef4f199e23af82f37c69cd1",
+      "bytes": 114652
+    },
+    {
+      "sequence": 7,
+      "category": "license_discovery_body",
+      "repository": "tc39/notes",
+      "also_counted_source_body": true,
+      "url": "https://raw.githubusercontent.com/tc39/notes/53a59ad71704e669d488a6b67baf940bfe2fe134/README.md",
+      "started_at": "2026-10-20T07:07:15.131582+00:00",
+      "seconds": 0.32112574577331543,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/license-discovery/tc39-README.md",
+      "sha256": "0163e523e23114871609eb7b6f44092e1a1346c498c65d140808fb146319d967",
+      "bytes": 1969
+    },
+    {
+      "sequence": 8,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/rust-embedded/wg",
+      "started_at": "2026-10-20T07:07:38.826661+00:00",
+      "seconds": 0.3624587059020996,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-08-repository.json",
+      "sha256": "d22f463789e38ae8577528d53aa3164f79695a62de3c7027b7c479df403878c5",
+      "bytes": 6147
+    },
+    {
+      "sequence": 9,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/rust-embedded/wg/git/ref/heads/master",
+      "started_at": "2026-10-20T07:07:39.189120+00:00",
+      "seconds": 0.34482455253601074,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-09-revision.json",
+      "sha256": "76d0c278601f085091baf7be992340727df115c6586850a271943450ce177da8",
+      "bytes": 343
+    },
+    {
+      "sequence": 10,
+      "category": "metadata",
+      "url": "https://api.github.com/repos/rust-embedded/wg/git/trees/3491f70af44b5f64cf109f6b7672c2f8ccdd2e1f?recursive=1",
+      "started_at": "2026-10-20T07:07:58.958523+00:00",
+      "seconds": 0.3986680507659912,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/metadata-10-tree.json",
+      "sha256": "48a19ce1b09de6d2cf650ab9491a3964780703a70be67df9f4de377dd535dc91",
+      "bytes": 83507
+    },
+    {
+      "sequence": 11,
+      "category": "license_discovery_body",
+      "repository": "rust-embedded/wg",
+      "also_counted_source_body": true,
+      "url": "https://raw.githubusercontent.com/rust-embedded/wg/3491f70af44b5f64cf109f6b7672c2f8ccdd2e1f/README.md",
+      "started_at": "2026-10-20T07:08:26.032818+00:00",
+      "seconds": 0.28356003761291504,
+      "http_status": 200,
+      "error": null,
+      "response_path": ".local/service-rag-calibration-v1/license-discovery/rust-embedded-README.md",
+      "sha256": "14791717d9ea3cd8e6b75b68df1480beeaf69f6605dd4f23665641098cb0d9de",
+      "bytes": 19376
+    }
+  ]
+}

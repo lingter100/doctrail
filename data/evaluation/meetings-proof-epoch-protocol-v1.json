@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "id": "meetings-proof-epoch-v1",
+  "design_revision": 2,
+  "registered_date_kst": "2026-10-20",
+  "state": "design_only_implementation_zero_until_commit",
+  "design": "docs/MEETINGS-PROOF-EPOCH-PLAN.md",
+  "scope_correction": "bounded_snapshot_reader_64KiB_no_epoch_hash_or_parse_cache",
+  "evidence": {
+    "c5_failure_metadata": {
+      "path": "experiments/results/meetings-c5-quality-failure-metadata-v1.json",
+      "sha256": "21fcf3da665c82d9d3fc4a8b1d9727389046ee891f1b708b2cc159f3e15650b4"
+    },
+    "c5_replay_metadata": {
+      "path": "experiments/results/meetings-c5-quality-failure-replay-v1.json",
+      "sha256": "97bd85ddd4c515673381afe4aedc66a9bb7ad762d2f000e192dfc7cc129f025c"
+    },
+    "first_request_seconds": 89.859,
+    "first_initial_proof_seconds": 19.687,
+    "first_native_seconds": 51.395077,
+    "first_unattributed_seconds": 18.776923,
+    "second_initial_proof_seconds": 23.094,
+    "second_native_timing_known": false
+  },
+  "abandoned_proposal": {
+    "kind": "same_epoch_hash_parse_reuse_with_fresh_reads",
+    "implemented": false,
+    "reason": "ABA_safety_retains_reads_and_prior_reported_SHA_AST_cost_is_small",
+    "prior_profile_numbers_are_new_measurement": false,
+    "prior_limited_review_reported_all_SHA_ms": [
+      8.19,
+      16.41
+    ],
+    "prior_limited_review_reported_AST_ms": [
+      0.41,
+      0.99
+    ],
+    "exact_archives": [
+      {
+        "path": ".local/meetings-proof-epoch-abandoned-hash-cache-v1/MEETINGS-PROOF-EPOCH-PLAN.md",
+        "bytes": 14092,
+        "sha256": "7c92e9ca29a5a9f2d037ce4cce2a1a42f7e65a810312ee6c0aaa9b9b71af4689"
+      },
+      {
+        "path": ".local/meetings-proof-epoch-abandoned-hash-cache-v1/meetings-proof-epoch-protocol-v1.json",
+        "bytes": 12237,
+        "sha256": "589f8f8f5cf65d6f0520efa72c9d62dc63043efd3cc5068076fff45760fb26e2"
+      }
+    ]
+  },
+  "source_attribution": {
+    "snapshot_file": "scripts/prepare_meeting_budget_inputs.py",
+    "snapshot_function": "snapshot",
+    "cpython_version": "3.11.15",
+    "cpython_sources": [
+      "https://github.com/python/cpython/blob/v3.11.15/Modules/_io/bufferedio.c#L1541-L1588",
+      "https://github.com/python/cpython/blob/v3.11.15/Modules/_io/bufferedio.c#L819-L836"
+    ],
+    "observed_source_mechanism": "generic_buffered_read_allocates_requested_n_bytes_then_can_resize_at_EOF",
+    "allocator_latency_RSS_or_C5_causal_benefit_proven": false
+  },
+  "reader": {
+    "byte_limit": 16777216,
+    "sentinel_limit": 16777217,
+    "reference_read_request": 16777217,
+    "reference_uses_unchanged_original_snapshot_with_explicit_metered_path_stream_adapter": true,
+    "candidate_chunk_bytes": 65536,
+    "candidate_request": "min(65536,sentinel_limit-total_returned)",
+    "candidate_stop": "empty_bytes_EOF_or_total_returned_equals_sentinel_limit",
+    "nonempty_short_read": "continue",
+    "assemble": "ordered_chunks_then_join_to_same_bytes",
+    "stat_fields": [
+      "st_dev",
+      "st_ino",
+      "st_size",
+      "st_mtime_ns",
+      "st_ctime_ns"
+    ],
+    "order": [
+      "before_stamp",
+      "open_blocking_binary_regular_file",
+      "read",
+      "close",
+      "overflow_check",
+      "after_stamp_check",
+      "return_raw_and_before_stamp"
+    ],
+    "overflow_precedes_stamp_error": true,
+    "same_raw_stamp_and_failure_meaning": true,
+    "partial_bytes_on_read_error_accepted": false,
+    "none_invalid_type_or_overreturn_is_EOF": false,
+    "stat_size_used_for_early_acceptance": false,
+    "reader_hash_parse_epoch_cache": false,
+    "initial_intermediate_and_final_fresh_reads_and_hashes": true,
+    "total_memory_is_64KiB_claim": false,
+    "OS_prefetch_bound_claim": false,
+    "large_file_copy_overhead_possible": true
+  },
+  "equivalence": {
+    "size_cases": [
+      0,
+      1,
+      65535,
+      65536,
+      65537,
+      16777215,
+      16777216,
+      16777217,
+      16777218
+    ],
+    "short_read_fixture": "independent_io_BufferedReader_over_controlled_short_read_raw_stream_each_arm",
+    "scope": "regular_blocking_binary_file_not_socket_interactive_or_nonblocking",
+    "normal_raw_bytes_stamp_and_guard_outcomes_same": true,
+    "first_safe_failure_categories_same": true,
+    "schedules": [
+      "head_change",
+      "committed_bytes_mismatch",
+      "same_size_same_mtime_byte_change",
+      "symlink_reparse_point",
+      "hardlink_alias",
+      "new_positive_or_former_negative_import",
+      "mid_snapshot_or_boundary_change",
+      "change_before_final_reread",
+      "change_between_boundaries",
+      "ABA_visible_at_reference_read_restored_later",
+      "read_close_write_subprocess_errors",
+      "deadline"
+    ],
+    "reference_detected_candidate_missed": "failure_regardless_of_timing",
+    "unobserved_ABA_or_arbitrary_interleaving_guarantee": false,
+    "atomic_snapshot_claim": false,
+    "chunking_can_change_observation_windows": true,
+    "partial_returned_byte_counts_may_differ_on_error": true,
+    "explicit_test_hook_dependency_injection": true,
+    "global_or_existing_code_monkeypatch": false,
+    "official_mutation_option": false,
+    "unsupported_link_checks": "skip_with_coverage_limit_not_pass"
+  },
+  "reference_composition": {
+    "previously_reviewed_file": "scripts/prepare_meeting_c5_inputs.py",
+    "previously_reviewed_sha256": "6ebf1a991e25c52f38b2a0bb7ab8fdceef8e6a880305f69e423ef73df067b04a",
+    "scope": "source_manifest_to_code_contract_core_on_synthetic_root_only",
+    "consumers": [
+      "inner_bound_snapshot_hash_allowed_AST_import_checks",
+      "source_manifest_unchanged_fresh_read_hash",
+      "caller_bound_snapshot_fresh_read_hash",
+      "GitProof_CI_HEAD_current_and_committed_bytes",
+      "GitProof_HEAD_current_and_committed_bytes",
+      "caller_unchanged_final_fresh_read_hash"
+    ],
+    "common_logical_consumers": 6,
+    "physical_reads_fixed_at_six_claim": false,
+    "git_cache_miss_helper_and_manifest_reads_counted": true,
+    "existing_Git_blob_cache_semantics_same_both": true,
+    "head_path_alias_negative_import_and_final_checks_same_both": true,
+    "ci_and_head_consumers_combined": false,
+    "extra_reference_repeats_sleeps_or_parses": 0,
+    "whole_C5_or_108snapshot_reproduction": false,
+    "closed_orchestrator_called": false,
+    "new_cache_between_boundaries": false
+  },
+  "fixture": {
+    "root": "new_owned_synthetic_git_repository_only",
+    "remote_count": 0,
+    "python_code_executed": false,
+    "python_files": 8,
+    "python_bytes_each": 4096,
+    "small_json_files": 24,
+    "small_json_bytes_each": 4096,
+    "large_json_files": 8,
+    "large_json_bytes_each": 32768,
+    "payload_files": 40,
+    "payload_bytes": 393216,
+    "manifest_files": 1,
+    "tracked_files_total": 41,
+    "python_paths": [
+      "scripts/epoch_fixture/__init__.py",
+      "scripts/epoch_fixture/entry.py",
+      "scripts/epoch_fixture/helper_00.py",
+      "scripts/epoch_fixture/helper_01.py",
+      "scripts/epoch_fixture/helper_02.py",
+      "scripts/epoch_fixture/helper_03.py",
+      "scripts/epoch_fixture/helper_04.py",
+      "scripts/epoch_fixture/helper_05.py"
+    ],
+    "json_fields": [
+      "schema_version",
+      "ordinal",
+      "padding"
+    ],
+    "entry_positive_imports": 6,
+    "entry_absent_imports": 32,
+    "absent_import_range": "scripts.epoch_fixture.absent_00..absent_31",
+    "all_actual_resolver_candidates_sealed": true,
+    "exact_UTF8_LF_generator_roster_sizes_hashes_manifest_and_git_metadata_frozen_before_run": true,
+    "git_init_add_single_commit_in_setup_only": true,
+    "remote_network_hooks_signing": false,
+    "project_HEAD_index_config_unchanged": true,
+    "copy_old_fixture_or_actual_quality_graph": false,
+    "official_fixture_mutations": false
+  },
+  "measurement": {
+    "order": [
+      "reference/request_start",
+      "reference/before_dispatch",
+      "candidate/request_start",
+      "candidate/before_dispatch"
+    ],
+    "samples_per_combination": 1,
+    "max_boundaries": 4,
+    "official_CLI_max": 1,
+    "warmup_repetition_reverse_order": 0,
+    "official_fault_suite_rerun": false,
+    "same_nonreader_consumers_guards_instrumentation": true,
+    "background_OS_cache_order_controlled": false,
+    "boundary_checks_persistence_and_total_time_reported_separately": true,
+    "max_CLI_seconds": 300,
+    "deadline_includes_setup_comparison_persistence": true,
+    "subprocess_timeout": "min(15_seconds,remaining_CLI_budget)",
+    "post_terminal_write_deadline_check": true,
+    "blocking_IO_hard_preemption_claim": false,
+    "allocator_tracing_RSS_sampler_or_new_profiler": false,
+    "stable_speedup_or_C5_savings_claim": false
+  },
+  "accounting": {
+    "explicit_shared_IO_no_monkeypatch": true,
+    "file_metrics": [
+      "snapshot_calls",
+      "open_calls",
+      "read_calls",
+      "read_requested_lengths",
+      "actual_read_returned_bytes"
+    ],
+    "returned_bytes_counted_immediately_once": true,
+    "requested_bytes_are_actual_allocation_RSS_disk_bytes": false,
+    "hashlib_payload_bytes_calls_and_parse_calls_recorded": true,
+    "normal_workload_snapshot_hash_parse_guard_counts_and_returned_raw_bytes_same": true,
+    "reader_calls_requested_lengths_and_time_may_differ": true,
+    "logical_path_stat_alias_candidate_counts_are_OS_syscalls": false,
+    "subprocess_metrics": [
+      "command_kind",
+      "start_attempts",
+      "created",
+      "completed",
+      "return_code",
+      "timeout",
+      "stdout_returned_bytes",
+      "stderr_returned_bytes"
+    ],
+    "Git_internal_OS_cache_and_failed_OS_internal_transfers_unknown": true,
+    "nested_double_count": false,
+    "unmetered_controlled_operations": "accounting_incomplete_failure_not_zero",
+    "setup_boundaries_persistence_scopes_separate": true,
+    "partial_error_counts_preserved": true
+  },
+  "output": {
+    "root": ".local/meetings-proof-epoch-v1",
+    "exclusive_reservation": true,
+    "resume_delete_overwrite_retry": false,
+    "first_and_later_cleanup_persistence_failures_separate": true,
+    "partial_counters_and_unexecuted_boundaries_preserved": true,
+    "unique_owned_temp_and_first_failure_preservation": true,
+    "completion_requires": [
+      "exit_zero",
+      "matching_terminal_summary",
+      "four_complete_boundaries",
+      "equivalence_and_integrity",
+      "terminal_persistence_deadline"
+    ],
+    "raw_exception_credentials_or_real_quality_body_logged": false
+  },
+  "ownership": {
+    "current_write_files": [
+      "docs/MEETINGS-PROOF-EPOCH-PLAN.md",
+      "data/evaluation/meetings-proof-epoch-protocol-v1.json"
+    ],
+    "new_implementation_files": [
+      "src/doctrail/meeting_bounded_snapshot.py",
+      "scripts/probe_meeting_bounded_snapshot.py"
+    ],
+    "new_synthetic_test_files": [
+      "tests/test_meeting_bounded_snapshot.py",
+      "tests/test_probe_meeting_bounded_snapshot.py"
+    ],
+    "existing_code_mutation": false,
+    "pure_path_AST_primitive_reuse_explicit_arguments_only": true,
+    "closed_default_paths_or_orchestration": false,
+    "new_cache_proof_framework": false
+  },
+  "registration": {
+    "future_artifacts_not_yet_created": [
+      "data/evaluation/meetings-proof-epoch-source-freeze-v1.json",
+      "data/evaluation/meetings-proof-epoch-fixture-spec-v1.json",
+      "experiments/results/meetings-proof-epoch-implementation-v1.json",
+      "experiments/results/meetings-proof-epoch-ci-v1.json"
+    ],
+    "required_order": [
+      "design_commit",
+      "NEW4_fixed_synthetic_checks_and_original_failure_preservation",
+      "source_dependency_allowlist_fixture_spec_roster_candidate_states_design_freeze",
+      "freeze_commit_exact_required_CI",
+      "official_exclusive_CLI_once"
+    ],
+    "CLI_records_execution_commit_protocol_freeze_spec_hashes": true,
+    "separate_approval_file_or_model_execution_plan": false,
+    "implementation_before_design_commit": false
+  },
+  "stop_conditions": [
+    "equivalence_failure",
+    "scope_integrity_failure",
+    "accounting_incomplete",
+    "original_evidence_persistence_failure",
+    "deadline",
+    "owned_process_cleanup_uncertain"
+  ],
+  "outcomes": {
+    "correct_but_same_or_slower": "completed_comparison_improvement_false_no_repeat",
+    "small_read_request_proves_allocator_or_total_latency_gain": false,
+    "followup_quality_candidate_separate_registration_required": true,
+    "service_adoption": false,
+    "C5_reopened": false
+  },
+  "unchanged_quality_contract": {
+    "free_local": true,
+    "general_documents_multiple_meetings_mixed_sources": true,
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "complete_answer_citations_appropriate_abstention": true,
+    "ACL_revision_preserved": true,
+    "request_seconds": 90,
+    "total_output_tokens": 928,
+    "requested_reasoning_tokens": 512,
+    "final_retokenized_tokens": 384,
+    "input_tokens": 5120,
+    "context_tokens": 6144,
+    "fresh_calibration": "6/6",
+    "isolated_validation": "8/8"
+  },
+  "current_counts": {
+    "implementation": 0,
+    "official_comparison": 0,
+    "Git_commands": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "model_transport_HTTP": 0,
+    "quality": 0,
+    "closed_semantic_reads": 0
+  },
+  "design_role": {
+    "id": "/root/free_qa_candidate_review",
+    "setting": "previously_accepted_Astra_xhigh_not_new_setting_claim",
+    "independent_output_judge_eligible": false,
+    "new_access": "permitted_metadata_hashes_frozen_snapshot_code_official_CPython_source_and_owned_drafts_only"
+  }
+}

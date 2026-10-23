@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "independent_source_prereview",
+  "created_at_utc": "2026-10-16T04:57:40.306977+00:00",
+  "verdict": "accepted",
+  "accepted_ids": [
+    "c4-f01-doc01",
+    "c4-f01-doc02",
+    "c4-f01-doc03",
+    "c4-f02-doc01",
+    "c4-f02-doc02",
+    "c4-f02-doc03"
+  ],
+  "rejected_ids": [],
+  "author_ids": [
+    "c4_calibration_source"
+  ],
+  "reviewer_id": "c4_calibration_source_review",
+  "actual_model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "actual_settings_basis": "Parent source-review role assignment records Astra xhigh; this role did not change the parent model.",
+  "human_review_count": 0,
+  "excluded_from_final_output_judging": true,
+  "notes": {
+    "file": "data/evaluation/meetings-c4-calibration-v1/source-prereview-notes.md",
+    "sha256": "020f9a0a713e9ec1f1b9d5f21feef6ff48856263dd35a51593b6f8e67bb97f0f"
+  },
+  "source_manifest_sha256": "921bcda0d506c4ae812e44b880a8e2a6492a9c61f4e585f6f7854ac2fa48ae2f",
+  "source_inventory_sha256": "4a6c61735f7ce4b49fe5d5d9d6344ca6055ac6de8aadeca908ed5e432936d932",
+  "source_author_original_receipt_sha256": "1108ec8e86c5290bb05f2cfe3f19bb144734f484b145589bc31b099447c413ea",
+  "source_author_original_receipt_publication": "Original reviewed bytes are to be preserved privately; any new public redacted derivative is separate and was not the proof inspected here.",
+  "author_provenance_note": {
+    "file": "data/evaluation/meetings-c4-calibration-v1/source-author-provenance-note.json",
+    "sha256": "115ea24ce63a2fd471d337b09885f2a22cc42f27b733d585a764f3d493c4a029"
+  },
+  "author_exploration_receipt": {
+    "file": "data/evaluation/meetings-c4-calibration-v1/source-exploration-receipt.json",
+    "sha256": "5c042a51e0039abfdefb8126c7ba0f4a6d57a4469ab8c7677f5d5eefc502d68a"
+  },
+  "code_git_preflight": {
+    "passed": true,
+    "toolchain_bound_count": 85,
+    "toolchain_commit": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+    "verified_head": "4ba1fbfd7361b85d8800e453441fee1be49e25d0",
+    "before_adopted_raw_source_review": true
+  },
+  "decisions": [
+    {
+      "document_id": "c4-f01-doc01",
+      "raw_sha256": "25a00643398fd75983b66accab256ba551b8c0011c693bb52c601ffd1880b119",
+      "verdict": "accepted",
+      "reason": "Complete dated English kickoff source; named roles, communication arrangements, roadmap and unresolved timing are internally coherent."
+    },
+    {
+      "document_id": "c4-f01-doc02",
+      "raw_sha256": "b932fa951bc39232a6745980d1f1303376d7f94ae1efd0ffc7a10198530942fe",
+      "verdict": "accepted",
+      "reason": "Complete dated English follow-up; observed progress, completed checklist entries, pending tasks and planning requests retain distinct statuses."
+    },
+    {
+      "document_id": "c4-f01-doc03",
+      "raw_sha256": "251e04b1f819e834f7a222ce8620d08530799531ca8deead07117e170c14663a",
+      "verdict": "accepted",
+      "reason": "Complete related general proposal with project scope, contribution process and mentor background; proposed work is not represented as completed work."
+    },
+    {
+      "document_id": "c4-f02-doc01",
+      "raw_sha256": "dd621d916bf48a71462bbb7be3aa005246bb5cc751365b75ee256c4e36ea1d0e",
+      "verdict": "accepted",
+      "reason": "Explicitly fictional Korean operational meeting; coherent inventory holds, trial dates, responsibilities and follow-up work."
+    },
+    {
+      "document_id": "c4-f02-doc02",
+      "raw_sha256": "843ba80a2b51436e86d591a4a72b66ecbb6bbfc237cfc60afb54dad6cb13d75e",
+      "verdict": "accepted",
+      "reason": "Explicitly fictional Korean follow-up; coherent trial-limited changes, inspection history and observations without unsupported causal or permanent-policy claims."
+    },
+    {
+      "document_id": "c4-f02-doc03",
+      "raw_sha256": "510fa02dbf125d838cabae4e6b5cd6305be2fac985c430546f1e334d3b51b209",
+      "verdict": "accepted",
+      "reason": "Explicitly fictional English general handbook; consistent bilingual names, standing procedures, roles, loan/return states and bounded policy changes."
+    }
+  ],
+  "checks": {
+    "all_full_sources_read": true,
+    "public_raw_bytes_and_pinned_tree_blobs_independently_refetched": true,
+    "complete_public_license_read_and_refetched": true,
+    "file_level_terms_checked": true,
+    "source_kind_language_and_dates_checked": true,
+    "synthetic_fiction_notice_checked": true,
+    "standalone_source_suitability_checked": true,
+    "family_history_coherence_checked": true,
+    "whole_document_and_chunk_replay_passed": true,
+    "frozen_processing_and_java_receipts_passed": true,
+    "original_java_log_hashes_and_local_receipt_match": true,
+    "java_tests": 2,
+    "java_failures": 0,
+    "java_errors": 0,
+    "java_skips": 0,
+    "reviewer_maven_reruns": 0,
+    "author_bound_files_verified": 15
+  },
+  "exposure": {
+    "reviewer_source_author": false,
+    "reviewer_source_selector": false,
+    "reviewer_candidate_metadata_and_prior_aggregate_exposure": true,
+    "reviewer_closed_source_body_reads": 0,
+    "reviewer_validation_body_reads": 0,
+    "reviewer_question_oracle_reads": 0,
+    "fully_blind_claim": false,
+    "source_author_alternate_repository_body_exposure_reported": true,
+    "source_author_exposure_disposition": "Reported same-repository alternate-body exposure, including GOVERNANCE.md and March/May 2024 minutes; exact minute paths/hashes unknown. Parent relayed validation-review metadata for README.md and 2025-05-08/2025-05-29 minutes; no adopted-body overlap identified from known paths/dates. No zero-impact claim. A new unexposed calibration item author is required after source commit."
+  },
+  "questions_authored": 0,
+  "oracles_authored": 0,
+  "selected_contexts": 0,
+  "tokenizer_loads": 0,
+  "native_calls": 0,
+  "model_weight_downloads": 0,
+  "paid_api_calls": 0,
+  "quality_or_service_adoption": false,
+  "next_allowed_step": "Parent verifies and commits accepted source/freeze plus truthful provenance/publication records; only then a new unexposed calibration item author may begin."
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "knowledge_recovery_exact_source_CI",
+  "tested_commit": "01bcb66e43c9f73befdf099849dba8b9eb8b2709",
+  "runs": [
+    {
+      "run_id": 39728455615,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39728455615",
+      "head_sha": "01bcb66e43c9f73befdf099849dba8b9eb8b2709",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 39728460798,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39728460798",
+      "head_sha": "01bcb66e43c9f73befdf099849dba8b9eb8b2709",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "current_verified_source_files": [
+    {
+      "path": "web/src/meetings.ts",
+      "bytes": 9655,
+      "sha256": "727f321eaebfd9ef9db102738ef20b8b929634111d90278a5fec8582fe9d5e66"
+    },
+    {
+      "path": "web/src/components/KnowledgeView.tsx",
+      "bytes": 11755,
+      "sha256": "54f050cd059978de825b560e08e8b885146b7c5baaeaa54b2804219f01bcc9fa"
+    },
+    {
+      "path": "web/tests/knowledge-recovery.spec.ts",
+      "bytes": 11309,
+      "sha256": "56d7e0ee1f22a00c69839fd3dce0011b090d2f0365529c94a48c30bf07316c72"
+    },
+    {
+      "path": "web/tests/meeting-unavailable.spec.ts",
+      "bytes": 4928,
+      "sha256": "1e42ceb5791484b31395a8fbdcbb227e680da255e29aa7429f935c798503650c"
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/KnowledgeService.java",
+      "bytes": 12918,
+      "sha256": "aca9f628fa4007249f761c8dc8f2bf8f58ab56f74e0f8537d8f72cd2caa330b8"
+    },
+    {
+      "path": "server/src/test/java/io/doctrail/KnowledgeDeadlineTest.java",
+      "bytes": 15084,
+      "sha256": "e3f5b4ba3a50bef6fc020741685c3b4e5b6c139c2c72778ed29fa300bf586c3d"
+    }
+  ],
+  "original_failed_commit": "546242f22467095b80d897ad7b773130f1d4a4fb",
+  "original_failure_record": "experiments/results/knowledge-answer-recovery-ci-fix-v1.json",
+  "scope": "Exact source CI confirms the UI/Java recovery change and corrected existing browser expectation. It does not cover the new uncommitted extraction assembly module.",
+  "actual_model_quality_or_new_native_proof": false,
+  "human_review": false
+}

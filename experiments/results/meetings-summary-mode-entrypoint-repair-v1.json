@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "summary-mode-cli-entrypoint-repair",
+  "status": "local_verified_independent_review_complete_source_ci_pending",
+  "base_commit": "0cbe1ce027a3b549a007af571e8580d61c145fa5",
+  "problem": "Direct Python file invocation failed to resolve the scripts package before main.",
+  "change": "Document repository-root Python module invocation and test the real subprocess argument-parser boundary without inherited PYTHONPATH.",
+  "sources": [
+    {
+      "file": "docs/MEETINGS-SUMMARY-MODE-RUNBOOK.md",
+      "size_bytes": 6031,
+      "sha256": "23d9b608b24ce612ea826ffb61add6358bbca8b6262e763dd5369b4d19555f15"
+    },
+    {
+      "file": "tests/test_summary_mode_entrypoint.py",
+      "size_bytes": 2281,
+      "sha256": "c1eb1f397657e0a34d0c8a3d0d6bd4959f711ca85a1177f19bc4ceb2edf7fbb0"
+    }
+  ],
+  "prospective_recovery_contract": {
+    "file": "docs/MEETINGS-SUMMARY-MODE-ENTRYPOINT-RECOVERY.md",
+    "size_bytes": 6486,
+    "sha256": "e9add1d2542bfd360f23862800999277fc03e8f0b700842db332468827adfe2e"
+  },
+  "original_attempt": {
+    "file": "experiments/results/meetings-summary-mode-development-v1.json",
+    "size_bytes": 3405,
+    "sha256": "645c6825b3cbb4ce18a4e9cd90e9ed5a6c67056b2a0c7d518cde48995465f2d5"
+  },
+  "checks": {
+    "real_python_subprocess_regressions": {
+      "passed": 4,
+      "failed": 0,
+      "pytest_seconds": 3.55,
+      "actual_exit_code": 0
+    },
+    "ruff": "passed",
+    "original_direct_file_help_reproduction": {
+      "attempts": 1,
+      "actual_exit_code": 1,
+      "failure": "ModuleNotFoundError: scripts",
+      "diagnostic_execution": false
+    },
+    "independent_review": {
+      "blockers": 0,
+      "advisories": 0,
+      "input_files_unchanged": 12,
+      "kind": "read-only generic code review"
+    },
+    "repair_source_ci": "pending"
+  },
+  "preservation": {
+    "closed_attempt_files_unchanged": 45,
+    "frozen_files_unchanged": 77,
+    "fixed_probe_and_test_files_unchanged": 2,
+    "parent_verified_evidence_files": 18
+  },
+  "evidence": [
+    {
+      "file": ".local/meeting-summary-mode-entrypoint-repair-v1/receipt-v1.json",
+      "size_bytes": 5878,
+      "sha256": "f3a138658ec9f715ec8ab18f40992c46210b458461c91b7af03b6997b1f0f931"
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/entrypoint-repair-preservation-v1.json",
+      "size_bytes": 1731,
+      "sha256": "1dcde7c8c8fb78cb8e90a16b0613960c2fd3f75656f63a4291fc23a6489634a1"
+    },
+    {
+      "file": ".local/meeting-summary-mode-entrypoint-repair-v1/independent-review-v1.json",
+      "size_bytes": 9558,
+      "sha256": "fde0ff23d027c65665e6970b42a6e4fef1726be6e5f778d32fd30187a76fff02"
+    }
+  ],
+  "limitations": [
+    "Parser-only subprocess checks are not model startup, tokenizer, native compatibility, inference or semantic quality validation.",
+    "The consumed v1 attempt and failure remain immutable. A prospective v2 needs separate bindings, exact CI, independent review, fresh resource checks and an explicit once assignment.",
+    "No paid resources, public service deployment or human review were performed."
+  ],
+  "new_model_completions": 0,
+  "human_review_count": 0
+}

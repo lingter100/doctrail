@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-model-review-comparison-v1",
+  "date": "2026-10-23",
+  "locked_independent_review": {
+    "path": "experiments/results/meetings-grounded-summary-review-v1.json",
+    "bytes": 2958,
+    "sha256": "7f856013a75e84ff8fa40af8ae6ef1cb14316b866f01a542b8e057cd4cf45c77"
+  },
+  "private_comparison": {
+    "path": ".local/meeting-grounded-summary-independent-v1/candidate-review-v1/model-review-comparison-v1.json",
+    "bytes": 10150,
+    "sha256": "7fb2e3b4c8140553aef8037db2f2128aacfd937e21d667a267f5d4c355d8634d"
+  },
+  "safe_comparison": {
+    "path": ".local/meeting-grounded-summary-independent-v1/candidate-review-v1/model-review-comparison-safe-v1.json",
+    "bytes": 3765,
+    "sha256": "517be3c3500957b9ce82cededdae12b51c9a12c33e30c498eb3aae96baf65e39"
+  },
+  "model_review_packet": {
+    "path": ".local/meeting-grounded-summary-independent-v1/model-review-packet-v1.json",
+    "bytes": 1596,
+    "sha256": "dc22fa07cfe213d80bc9f5a1ad0fb5b556d005e5ff9b1689eba1875c9e0aad85"
+  },
+  "model_review_custody": {
+    "path": ".local/meeting-grounded-summary-independent-v1/model-review-custody-v1.json",
+    "bytes": 6110,
+    "sha256": "14469868d6ec74fd6ed4bb767af903d8bf755b6390a57648695b074721a74a87"
+  },
+  "model_claim_contract": "The whole claim must be supported only by its selected linked units; coverage is assessed against the full source.",
+  "primary_selected_citation_comparison": {
+    "model_supported_locked_citation_supported": 5,
+    "model_supported_locked_citation_ambiguous": 3,
+    "model_supported_locked_citation_partially_supported": 3,
+    "model_unsupported_locked_citation_supported": 1
+  },
+  "secondary_whole_source_support_comparison": {
+    "model_supported_locked_supported": 7,
+    "model_supported_locked_ambiguous": 3,
+    "model_supported_locked_partially_supported": 1,
+    "model_unsupported_locked_supported": 1
+  },
+  "model_claim_labels": {
+    "supported": 11,
+    "unsupported": 1
+  },
+  "coverage_comparison": {
+    "model_sufficient_locked_insufficient": 2
+  },
+  "candidate_count": 2,
+  "claim_count": 12,
+  "all_supported_sufficient_responses": 1,
+  "unsupported_present_sufficient_responses": 1,
+  "inputs_unchanged": 8,
+  "new_judgments": 0,
+  "criterion_changes": 0,
+  "human_reviews": 0,
+  "limitations": [
+    "Existing locked AI judgments are the comparison reference, not human ground truth.",
+    "Partial or ambiguous support is kept distinct and is not converted into a definitive error.",
+    "Selected-citation and whole-source comparisons are separate views of the same model labels; do not add counts or report separate model accuracy.",
+    "No natural-language rejection rationale was supplied; the reason for the model label is unknown.",
+    "Two exposed synthetic development candidates do not establish generalization accuracy.",
+    "The overall run remains failed and new answer requests were not executed."
+  ]
+}

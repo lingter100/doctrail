@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-items-ci-v1",
+  "observed_at": "2026-10-20T00:40:19.164689+00:00",
+  "head_sha": "cefbfeebf4cfecf0226fb8c7f9a7eac98fbe6d7d",
+  "runs": [
+    {
+      "head_sha": "cefbfeebf4cfecf0226fb8c7f9a7eac98fbe6d7d",
+      "run_id": 39348557481,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39348557481"
+    },
+    {
+      "head_sha": "cefbfeebf4cfecf0226fb8c7f9a7eac98fbe6d7d",
+      "run_id": 39348561878,
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39348561878"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "claim_scope": "Exact independently accepted item/freeze commit required CI; no test counts inferred and no model-quality claim."
+}

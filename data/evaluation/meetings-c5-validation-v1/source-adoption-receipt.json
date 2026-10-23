@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "role_id": "/root/c5_validation_author",
+  "recorded_at": "2026-10-19T08:04:56.297671+00:00",
+  "head": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+  "preauthorization": {
+    "schema_version": 1,
+    "role_id": "/root/c5_validation_author",
+    "phase": "validation",
+    "started_at": "2026-10-19T07:57:46.163195+00:00",
+    "before_head": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+    "semantic_reads_before_proof": 0,
+    "status": "passed",
+    "toolchain_bound_files": 76,
+    "git_proof_bindings": 157,
+    "snapshot_files": 80,
+    "proof_head": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+    "ci_source_head": "d084f86d4e4f830eb51cd3dd73f6840a2ad54795",
+    "roles": {
+      "source_author": "/root/c5_validation_author",
+      "item_author": "/root/c5_validation_author",
+      "source_prereviewer": "/root/c5_validation_prereviewer",
+      "item_prereviewer": "/root/c5_validation_prereviewer"
+    },
+    "metadata_hashes": {
+      "data/evaluation/meetings-c5-toolchain-freeze-v1.json": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d",
+      "data/evaluation/meetings-c5-toolchain-ci-v1.json": "f65660a27bc0cd025338a0be6c80c8b1844ae5d5aed61843651f0e457edea478",
+      "data/evaluation/meetings-c5-role-registration-v1.json": "b9ce1cc61e78530cd138108db1c9dc4bb73fa52eb35e7d642bf6cbf7be2db94c",
+      "data/evaluation/meetings-c5-prior-source-fingerprints-v1.json": "dd36b66badd69cc62197dab6927cfea3c221dea8617aad2ea950b58c134df976"
+    },
+    "after_head": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+    "finished_at": "2026-10-19T07:58:17.430898+00:00",
+    "elapsed_seconds": 31.152
+  },
+  "policy_and_discovery": {
+    "schema_version": 1,
+    "recorded_at": "2026-10-19T08:02:26.977060+00:00",
+    "role_id": "/root/c5_validation_author",
+    "repository": "rust-lang/compiler-team",
+    "immutable_commit": "6cf981d16c1852074b397eee544adc3d1a7eb6b6",
+    "license_basis": "Root LICENSE-MIT permission notice expressly includes associated documentation; preserved without removing repository notice. LICENSE-APACHE also preserved as repository evidence.",
+    "source_selection": "One existing working-group general document and two dated meeting records linked by that general document; selected before any question or tokenizer work.",
+    "processing": "Preserve complete fetched raw UTF-8 bytes including absent final LF; use unchanged literal Markdown extractor and original full-document chunks, retain front matter and Hugo relref markup literally without expansion. Attribution remains separate from source text.",
+    "public_source_files_fetched": 3,
+    "synthetic_sources_to_author": 3,
+    "questions_authored": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "repository_reservation": "Parent explicitly cleared before source bodies. Distinct repository from prior rust-lang/lang-team; same organization disclosed to independent reviewer.",
+    "prior_candidates": [
+      {
+        "repo": "jupyterhub/team-compass",
+        "status": "reservation_collision_no_bodies"
+      },
+      {
+        "repo": "scipy/community",
+        "status": "metadata404_no_bodies"
+      },
+      {
+        "repo": "pandas-dev/pandas-governance",
+        "status": "tree_no_dated_meetings_no_bodies"
+      },
+      {
+        "repo": "scikit-learn/administrative",
+        "status": "metadata_only_no_bodies"
+      },
+      {
+        "repo": "dask/community",
+        "status": "metadata_only_no_bodies"
+      },
+      {
+        "repo": "nodejs/TSC",
+        "status": "metadata_only_no_bodies"
+      },
+      {
+        "repo": "matplotlib/project",
+        "status": "metadata_request_failed_no_bodies"
+      },
+      {
+        "repo": "python/steering-council",
+        "status": "metadata_license_and_tree_not_suitable_no_bodies"
+      }
+    ]
+  },
+  "counts": {
+    "public_documents": 3,
+    "synthetic_documents": 3,
+    "meetings": 4,
+    "general_documents": 2,
+    "source_documents": 6,
+    "chunks": 14,
+    "questions": 0,
+    "oracles": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "model_downloads": 0,
+    "human_reviews": 0
+  },
+  "parent_received_validation_semantics": false,
+  "independent_source_review": "pending",
+  "java_parity": "passed_actual_2_tests_6_documents_14_chunks",
+  "manifest_sha256": "b0b08a41b6a738c9d6fe7721a8ac1bbb794ffe1c11eb8fa27d0be03c0f9733fe",
+  "inventory_sha256": "e96fbc214ed0099adffda5b8d00de3162851c948e5514ff457e73931e1a2b69c",
+  "fingerprints_sha256": "7ac383c0bcca56b29951226716e2267fe75c4d96e45cfe43e95b164a5314b84d",
+  "limitations": [
+    "Source author also reserved as later item author; no item work before independent source freeze commit.",
+    "Processing helper counts concern its own invocation; synthetic3 were authored separately before processing.",
+    "No complete historical near-duplicate absence claimed; inherited missing historical fingerprint coverage remains."
+  ],
+  "actual_java_receipt_sha256": "e4038320492b5e605c9deb9181e50036464967223eb5766a4d5bad18089c47cb",
+  "preserved_failure": {
+    "path": ".local/meetings-c5-validation-source-v1/build-sources-v1.log",
+    "cause": "local builder invocation omitted repository PYTHONPATH, failed import before source directory creation",
+    "corrected_invocation_log": ".local/meetings-c5-validation-source-v1/build-sources-v2.log"
+  },
+  "author_structural_checks": {
+    "schema_version": 1,
+    "phase": "validation",
+    "author_role": "/root/c5_validation_author",
+    "checked_at": "2026-10-19T08:07:02.642062+00:00",
+    "status": "structural_checks_passed",
+    "actual_java": {
+      "tests": 2,
+      "passed": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "tests_seconds": 0.435,
+      "receipt_sha256": "e4038320492b5e605c9deb9181e50036464967223eb5766a4d5bad18089c47cb",
+      "receipt_crlf_count": 52,
+      "receipt_exact_public_copy": true
+    },
+    "python_inventory_replay_documents": 6,
+    "full_chunks": 14,
+    "processing_and_actual_java_receipt_contract": "passed",
+    "toolchain_working_hashes_unchanged": 76,
+    "own_fingerprint_replay": "passed",
+    "author_metadata_diagnostic": {
+      "prior_rows": 80,
+      "known_identity_or_paragraph_match_count": 0,
+      "other_split_metadata": "not_yet_read",
+      "independent_freshness_verdict": "not_authored",
+      "complete_near_duplicate_absence_proven": false
+    },
+    "preserved_initial_failure": {
+      "path": ".local/meetings-c5-validation-source-v1/build-sources-v1.log",
+      "cause": "local builder invocation omitted repository PYTHONPATH, failed import before source directory creation",
+      "corrected_invocation_log": ".local/meetings-c5-validation-source-v1/build-sources-v2.log"
+    },
+    "head": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+    "flat_fingerprint_sha256": "7ac383c0bcca56b29951226716e2267fe75c4d96e45cfe43e95b164a5314b84d"
+  }
+}

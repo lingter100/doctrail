@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "registry_id": "meetings-c3-family-registry-v1",
+  "registered_at_utc": "2026-10-14T04:56:54.778232+00:00",
+  "status": "metadata_only_before_source_and_question_authoring",
+  "design": {
+    "file": "docs/MEETINGS-C3-PLAN.md",
+    "sha256": "5159b098ba93a40dd87e6c3e2ab6592e29831f40e969a7705f916b172c40d021"
+  },
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "policy_code_freeze": "pending targeted implementation tests and parent review; no source authoring before freeze",
+  "question_texts_created": 0,
+  "oracle_records_created": 0,
+  "evaluation_contexts_created": 0,
+  "native_model_calls": 0,
+  "human_review_count": 0,
+  "paid_usage": 0,
+  "split_assignment": "Purposive project/fictional-organization separation; not random or statistically independent. All revisions/translations/close paraphrases from one family stay within its split.",
+  "totals": {
+    "calibration": {
+      "items": 6,
+      "answerable": 4,
+      "insufficient_evidence": 2,
+      "ko": 3,
+      "en": 3
+    },
+    "validation": {
+      "items": 8,
+      "answerable": 4,
+      "insufficient_evidence": 4,
+      "ko": 4,
+      "en": 4
+    }
+  },
+  "invariants": {
+    "max_source_documents": 8,
+    "max_documents_per_family": 2,
+    "required_facts_per_answerable": [
+      3,
+      6
+    ],
+    "minimum_two_document_answerable_per_split": 2,
+    "minimum_en_source_ko_answer_per_split": 1,
+    "minimum_ko_source_en_answer_per_split": 1,
+    "partial_missing_checked_against_whole_adopted_family": true,
+    "source_and_item_freeze_before_tokenization": true,
+    "no_token_feedback_reselection": true,
+    "no_runtime_oracle": true
+  },
+  "excluded_pools": [
+    "C0/C1/C2 completed and prepared/unexecuted pools",
+    "M2/M3/M4/M5/M5-B calibration/validation/test/exemplars",
+    "Translations, close paraphrases, renamed people and numeric substitutions of prior synthetic facts"
+  ],
+  "families": [
+    {
+      "family_id": "C3-F01",
+      "origin": "public",
+      "source_language": "en",
+      "topic": "FastAPI request-background work and application lifecycle",
+      "planned_slots": {
+        "items": 3,
+        "answerable": 2,
+        "insufficient_evidence": 1,
+        "question_languages": {
+          "ko": 2,
+          "en": 1
+        },
+        "insufficient_language": "ko"
+      },
+      "repository": "fastapi/fastapi",
+      "split": "calibration",
+      "immutable_commit": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+      "committed_at": "2026-10-08T12:25:54Z",
+      "spdx": "MIT",
+      "license": {
+        "path": "LICENSE",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+        "size": 1086,
+        "url": "https://api.github.com/repos/fastapi/fastapi/git/blobs/3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+        "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e",
+        "pinned_license_checked": true,
+        "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/LICENSE",
+        "preserved_file": "data/evaluation/meetings-c3-source-licenses/fastapi-LICENSE"
+      },
+      "source_candidates": [
+        {
+          "path": "docs/en/docs/tutorial/background-tasks.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "18c9bb6fe5db9f51769bb771f48b9fee4f4aab13",
+          "size": 4786,
+          "url": "https://api.github.com/repos/fastapi/fastapi/git/blobs/18c9bb6fe5db9f51769bb771f48b9fee4f4aab13",
+          "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/tutorial/background-tasks.md",
+          "raw_url": "https://raw.githubusercontent.com/fastapi/fastapi/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/tutorial/background-tasks.md",
+          "body_read_by_registry_author": true,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "full_body_read_by_registry_author": false,
+          "partial_search_excerpt_seen": true
+        },
+        {
+          "path": "docs/en/docs/advanced/events.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "485340afe2067c8ca2a03d70e4830a240ea085f5",
+          "size": 7985,
+          "url": "https://api.github.com/repos/fastapi/fastapi/git/blobs/485340afe2067c8ca2a03d70e4830a240ea085f5",
+          "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/advanced/events.md",
+          "raw_url": "https://raw.githubusercontent.com/fastapi/fastapi/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/advanced/events.md",
+          "body_read_by_registry_author": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "full_body_read_by_registry_author": false,
+          "partial_search_excerpt_seen": false
+        }
+      ],
+      "source_body_downloaded_here": false,
+      "tree_response_sha1": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+      "git_tree_sha1": "9517233529e09d6421e49df7216f5cfc84baf4f4",
+      "per_file_license_and_source_adoption": "HOLD pending split author inspection after candidate source freeze; repository license does not override file-specific notices.",
+      "exposure": "Parent saw a FastAPI search-result excerpt before registration; no questions or candidate generation. MkDocs parent access was repository/path/size and license metadata only."
+    },
+    {
+      "family_id": "C3-F02",
+      "split": "calibration",
+      "origin": "synthetic",
+      "topic": "Fictional community library movable shelving reorganization",
+      "source_language": "ko",
+      "max_documents": 2,
+      "planned_slots": {
+        "items": 3,
+        "answerable": 2,
+        "insufficient_evidence": 1,
+        "question_languages": {
+          "ko": 1,
+          "en": 2
+        },
+        "insufficient_language": "en"
+      },
+      "source_created": false,
+      "fictional_entities_only": true
+    },
+    {
+      "family_id": "C3-F03",
+      "origin": "public",
+      "source_language": "en",
+      "topic": "MkDocs documentation authoring and publication procedures",
+      "planned_slots": {
+        "items": 4,
+        "answerable": 2,
+        "insufficient_evidence": 2,
+        "question_languages": {
+          "ko": 2,
+          "en": 2
+        },
+        "insufficient_languages": {
+          "ko": 1,
+          "en": 1
+        }
+      },
+      "repository": "mkdocs/mkdocs",
+      "split": "validation",
+      "immutable_commit": "2862536793b3c67d9d83c33e0dd6d50a791928f8",
+      "committed_at": "2025-10-20T13:17:06Z",
+      "spdx": "BSD-2-Clause",
+      "license": {
+        "path": "LICENSE",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "7bb507395f28850a9b99d7f50c0deb356111960a",
+        "size": 1292,
+        "url": "https://api.github.com/repos/mkdocs/mkdocs/git/blobs/7bb507395f28850a9b99d7f50c0deb356111960a",
+        "sha256": "26041bd625fc39411dc4b32748216236931c904adb90c2b3e0ba697090a5d54e",
+        "pinned_license_checked": true,
+        "immutable_url": "https://github.com/mkdocs/mkdocs/blob/2862536793b3c67d9d83c33e0dd6d50a791928f8/LICENSE",
+        "preserved_file": "data/evaluation/meetings-c3-source-licenses/mkdocs-LICENSE"
+      },
+      "source_candidates": [
+        {
+          "path": "docs/user-guide/writing-your-docs.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8327b10782d35206deb902ffd0f2be9848991e78",
+          "size": 19342,
+          "url": "https://api.github.com/repos/mkdocs/mkdocs/git/blobs/8327b10782d35206deb902ffd0f2be9848991e78",
+          "immutable_url": "https://github.com/mkdocs/mkdocs/blob/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/writing-your-docs.md",
+          "raw_url": "https://raw.githubusercontent.com/mkdocs/mkdocs/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/writing-your-docs.md",
+          "body_read_by_registry_author": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "full_body_read_by_registry_author": false,
+          "partial_search_excerpt_seen": false
+        },
+        {
+          "path": "docs/user-guide/deploying-your-docs.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8224cb9ae007ba352435dc319f5a62579552a6f0",
+          "size": 9434,
+          "url": "https://api.github.com/repos/mkdocs/mkdocs/git/blobs/8224cb9ae007ba352435dc319f5a62579552a6f0",
+          "immutable_url": "https://github.com/mkdocs/mkdocs/blob/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/deploying-your-docs.md",
+          "raw_url": "https://raw.githubusercontent.com/mkdocs/mkdocs/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/deploying-your-docs.md",
+          "body_read_by_registry_author": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "full_body_read_by_registry_author": false,
+          "partial_search_excerpt_seen": false
+        }
+      ],
+      "source_body_downloaded_here": false,
+      "tree_response_sha1": "2862536793b3c67d9d83c33e0dd6d50a791928f8",
+      "git_tree_sha1": "cb7bc316a04ef9835d07b7497517eed81914910a",
+      "per_file_license_and_source_adoption": "HOLD pending split author inspection after candidate source freeze; repository license does not override file-specific notices.",
+      "exposure": "Parent saw a FastAPI search-result excerpt before registration; no questions or candidate generation. MkDocs parent access was repository/path/size and license metadata only."
+    },
+    {
+      "family_id": "C3-F04",
+      "split": "validation",
+      "origin": "synthetic",
+      "topic": "Fictional regional film festival subtitle-file verification",
+      "source_language": "ko",
+      "max_documents": 2,
+      "planned_slots": {
+        "items": 4,
+        "answerable": 2,
+        "insufficient_evidence": 2,
+        "question_languages": {
+          "ko": 2,
+          "en": 2
+        },
+        "insufficient_languages": {
+          "ko": 1,
+          "en": 1
+        }
+      },
+      "source_created": false,
+      "fictional_entities_only": true
+    }
+  ],
+  "validation_isolation": "Parent and candidate designer/implementer must not read selected validation bodies, questions, oracles or semantic explanations. Custodian author and separate prereviewer only; metadata/count/hash summaries are allowed.",
+  "reviewer_exclusion": "Source/question authors, prereviewers, candidate designers/implementers and parent cannot independently score final outputs. Any automatically injected project metadata must be disclosed; do not promise full blindness."
+}

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "phase": "validation",
+  "kind": "preparation_metadata_summary",
+  "created_at": "2026-10-14T08:14:31.729552+00:00",
+  "parent_safe_metadata_only": true,
+  "status": "passed",
+  "actual_prepare_invocations": 1,
+  "summary": {
+    "total_cases": 8,
+    "measured_cases": 8,
+    "unmeasured_cases": 0,
+    "failed_cases": 0,
+    "min_stage1_tokens": 1088,
+    "max_stage1_tokens": 3450
+  },
+  "errors": [],
+  "stage1_input_cap": 5120,
+  "stage2_readiness": "dynamic_unmeasured",
+  "original_output_directory": ".local/meetings-c3-validation-prepared-v1",
+  "input": {
+    "path": "data/evaluation/meetings-c3-validation-inputs-v1/input.json",
+    "sha256": "42722cb2dcd0de88d84c4384f7862b6b02757c0c7ed5dbfa5179a0f6617ec6f3",
+    "size_bytes": 54853
+  },
+  "receipt": {
+    "path": "data/evaluation/meetings-c3-validation-inputs-v1/receipt.json",
+    "sha256": "23ddd4d6c2d924405a2d524b39df031dccb202ba737e564f83a108e928ac7668",
+    "size_bytes": 27897
+  },
+  "original_input": {
+    "path": ".local/meetings-c3-validation-prepared-v1/input.json",
+    "sha256": "42722cb2dcd0de88d84c4384f7862b6b02757c0c7ed5dbfa5179a0f6617ec6f3",
+    "size_bytes": 54853
+  },
+  "original_receipt": {
+    "path": ".local/meetings-c3-validation-prepared-v1/receipt.json",
+    "sha256": "23ddd4d6c2d924405a2d524b39df031dccb202ba737e564f83a108e928ac7668",
+    "size_bytes": 27897
+  },
+  "input_and_receipt_byte_identical_to_original": true,
+  "payloads_preserved": true,
+  "context_selection_and_order_preserved": true,
+  "strict_draft_oracle_contract_passed": true,
+  "frozen_survey_contract_passed": true,
+  "exact_public_survey_path_verified": true,
+  "tokenizer_metadata_sha256": "b26e72bbf547da1e2fcb7c278058c5cbb8da57371cc0d010600fe556d1ccc6d1",
+  "integrity_before": {
+    "path": ".local/meetings-c3-validation-token-preparation-v1/integrity-before.json",
+    "sha256": "01f210296c533b0950c3aeed6c24dd80e9d4b59e1cd5936f5410f70fc7912584",
+    "size_bytes": 26274
+  },
+  "integrity_after": {
+    "path": ".local/meetings-c3-validation-token-preparation-v1/integrity-after.json",
+    "sha256": "f1f77da73867e3dccbbcc4ca456a0fab726593fbe1d98f659170533028b0056a",
+    "size_bytes": 3452
+  },
+  "protected_file_count": 139,
+  "all_protected_files_unchanged": true,
+  "binding_counts": {
+    "item": 6,
+    "source": 9,
+    "toolchain": 66,
+    "candidate": 28,
+    "legacy_budget": 72,
+    "legacy_comparison": 41,
+    "legacy_processing": 18
+  },
+  "console_logs": [
+    {
+      "path": ".local/meetings-c3-validation-token-preparation-v1/console.stdout.bin",
+      "sha256": "70729d6bda5894b7e592e8528293af9eb7fa35162e08bab0c4035cf530db4720",
+      "size_bytes": 252
+    },
+    {
+      "path": ".local/meetings-c3-validation-token-preparation-v1/console.stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  ],
+  "invocation_receipts": [
+    {
+      "path": ".local/meetings-c3-validation-token-preparation-v1/invocation-started.json",
+      "sha256": "0b27888ac761b1abe2dc8186cb915bdf4166ac1b9f765ac274cff078769d0301",
+      "size_bytes": 911
+    },
+    {
+      "path": ".local/meetings-c3-validation-token-preparation-v1/invocation-result.json",
+      "sha256": "799f9f5d25e0ccb560b32e2b2fe68e37b61ca78e04880244f6d70ef76c48a0e5",
+      "size_bytes": 201
+    }
+  ],
+  "original_receipts_not_enriched_or_overwritten": true,
+  "private_user_path_and_secret_marker_scan_passed": true,
+  "activity": {
+    "official_preparation_invocations": 1,
+    "official_stage1_measurements": 8,
+    "preparation_retries": 0,
+    "generation_calls": 0,
+    "model_calls": 0,
+    "native_calls": 0,
+    "downloads": 0,
+    "paid_calls": 0,
+    "Git_operations": 0,
+    "calibration_preparation_invocations": 0,
+    "input_edits": 0,
+    "context_reselection_or_shortening": 0
+  },
+  "ownership_returned": true
+}

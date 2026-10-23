@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "purpose": "observed_design_and_static_family_ci",
+  "observed_at": "2026-10-16T08:38:49.537798+00:00",
+  "head_sha": "678dafd6516dd552586e8015edfa926e516f3d30",
+  "runs": [
+    {
+      "run_id": 38873896381,
+      "head_sha": "678dafd6516dd552586e8015edfa926e516f3d30",
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38873896381",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "created_at": "2026-10-16T08:28:15Z",
+      "updated_at": "2026-10-16T08:32:27Z"
+    },
+    {
+      "run_id": 38873903639,
+      "head_sha": "678dafd6516dd552586e8015edfa926e516f3d30",
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38873903639",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      },
+      "created_at": "2026-10-16T08:28:19Z",
+      "updated_at": "2026-10-16T08:32:35Z"
+    }
+  ],
+  "test_counts_inferred": false,
+  "toolchain_implementation_ci": false,
+  "quality_evidence": false,
+  "human_review_count": 0
+}

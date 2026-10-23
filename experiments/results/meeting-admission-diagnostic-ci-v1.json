@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "exact_implementation_ci_observation",
+  "observed_at_utc": "2026-10-20T05:53:17.042350+00:00",
+  "head_sha": "b1a965b6188ea2efe10278d7795230780842bb8c",
+  "author": "lingter100",
+  "committer": "lingter100",
+  "runs": [
+    {
+      "run_id": 39376766443,
+      "event": "push",
+      "head_sha": "b1a965b6188ea2efe10278d7795230780842bb8c",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39376766443",
+      "metadata_sha256": "1352ac64f8937c36a4e0ec82268fb2ac05ebee81d3b395c117ce60a0006bebcd"
+    },
+    {
+      "run_id": 39376771232,
+      "event": "pull_request",
+      "head_sha": "b1a965b6188ea2efe10278d7795230780842bb8c",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39376771232",
+      "metadata_sha256": "57d80865e1469fb4bf54d3c89feefd0f5f0473450039b91b781cc582144964fc"
+    }
+  ],
+  "superseded_runs": {
+    "head_sha": "c87e5ee4983bcb2505845a8ee918c5a365c66c2f",
+    "push_run": 39376544559,
+    "pr_run": 39376548279,
+    "observed_conclusion": "cancelled",
+    "claim": "Superseded by test-isolation correction; not reported as passed."
+  },
+  "official_diagnostic_runs_at_observation": 0,
+  "push_log_observation": {
+    "sha256": "6cba4d67e359f36b319c9780fd2d6f418652fd24ae67de75c44595e1dedff63e",
+    "python": {
+      "passed": 2932,
+      "skipped": 21,
+      "warnings": 1
+    },
+    "java_browser": {
+      "passed": 82,
+      "failed": 0
+    },
+    "scope": "Observed in push-run log; overlapping unit scopes are not summed."
+  },
+  "limitations": "Parent observed GitHub CI, not an independent attestation. Unit/CI checks do not constitute the once-only official diagnostic or model-quality evaluation."
+}

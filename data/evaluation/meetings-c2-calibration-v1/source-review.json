@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "calibration_source_coherence_review_before_questions",
+  "created_at": "2026-10-14T01:44:18.139973+00:00",
+  "reviewer_role": "/root",
+  "reviewer_type": "AI",
+  "independent_of_source_author": true,
+  "independent_of_candidate_implementation": false,
+  "human_review_count": 0,
+  "verdict": "accepted_for_source_freeze_then_question_authorship",
+  "bound_files": {
+    "data/evaluation/meetings-c2-calibration-v1/source-manifest-full.json": "640bc52ca5725a45bf87b4d475ca6c25dae4f853565397b123d9bd8932103e4c",
+    "data/evaluation/meetings-c2-calibration-v1/source-authoring-receipt.json": "bfee25253d7a4e13913e8b81e0ab0558a1e8898a058dc576375e00567cba586e",
+    "data/evaluation/meetings-c2-calibration-v1/sources/c2-cal-f02-rink-rules.md": "bc057b615bc3df475adbc8d24a55b44faaf1c439b7e259aa18d1e587cd226d90",
+    "data/evaluation/meetings-c2-calibration-v1/sources/c2-cal-f02-rink-coordination.md": "4623a011df833e8549550af44548875ac50963d1bc81ef90e40282fa89fc6036",
+    "data/evaluation/meetings-c2-calibration-v1/sources/c2-cal-f02-rink-handoff.md": "686c03c052bdf7131b4ed4b8b8849c12dba8720bfd801d2e1bf1ffcbac879bdc"
+  },
+  "source_documents_reviewed": 3,
+  "checks": [
+    {
+      "dimension": "synthetic_provenance",
+      "passed": true,
+      "reason": "Every source explicitly labels the organization, people and events as AI-authored fiction; no actual operational claim."
+    },
+    {
+      "dimension": "identity_and_roles",
+      "passed": true,
+      "reason": "Registered source roles and named responsibilities remain consistent across policy, meeting and handoff."
+    },
+    {
+      "dimension": "dates_and_effective_scope",
+      "passed": true,
+      "reason": "Policy effective date precedes the meeting and operating day. Meeting date, record cutoff, preparation targets and actual events remain distinct."
+    },
+    {
+      "dimension": "proposal_decision_history",
+      "passed": true,
+      "reason": "The deferred extension and unresolved alternate facility remain separate from the confirmed schedule; no later record silently adopts them."
+    },
+    {
+      "dimension": "task_completion_and_evidence",
+      "passed": true,
+      "reason": "Assignment is not completion. Handoff states actual events, overdue preparation target, pending checks and unknown receipt acknowledgements separately."
+    },
+    {
+      "dimension": "cross_document_consistency",
+      "passed": true,
+      "reason": "Rules, named assignments and actual status have distinct source roles; the stated operation sequence does not contradict the policy."
+    },
+    {
+      "dimension": "scope_and_missing_information",
+      "passed": true,
+      "reason": "The handoff cutoff does not claim later session approval or completion. No source changes were requested after inventory."
+    }
+  ],
+  "changes_requested": 0,
+  "questions_or_oracles_authored_in_review": 0,
+  "selected_contexts": 0,
+  "model_calls": 0,
+  "validation_bodies_read": false,
+  "old_question_pools_read": false,
+  "limitations": [
+    "Parent participated in candidate implementation and coordination; this is separate source-author review, not independent output semantic scoring.",
+    "Purpose-built synthetic documents explicitly distinguish uncertain and completed states and may be easier than noisy real meeting notes.",
+    "Source coherence does not establish question quality, token fit, model performance or real-world generalization.",
+    "AI-authored and AI-reviewed; human review remains zero."
+  ],
+  "next_required": [
+    "Actual Java/Python full inventory parity.",
+    "Source freeze commit before item authorship.",
+    "Separate item-level oracle prereview before tokenizer preparation and generation."
+  ]
+}

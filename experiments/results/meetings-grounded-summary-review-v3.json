@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-independent-paired-review-v3",
+  "date": "2026-10-23",
+  "data_scope": "Three exposed synthetic development meetings, not a fresh held-out dataset or human review.",
+  "comparison_order": "Individual source-grounded judgments sealed before minimal stage/pair disclosure; those judgments remain unchanged.",
+  "aggregate": {
+    "paired_requests": 3,
+    "generation": {
+      "candidate_count": 3,
+      "claim_count": 18,
+      "citation_count": 71,
+      "exact_citation_count": 71,
+      "full_source_support_counts": {
+        "supported": 13,
+        "partial": 3,
+        "ambiguous": 2,
+        "unsupported": 0
+      },
+      "selected_citation_support_counts": {
+        "supported": 10,
+        "partial": 6,
+        "ambiguous": 2,
+        "unsupported": 0
+      },
+      "fixed_core_item_count": 8,
+      "fixed_core_coverage_counts": {
+        "covered": 3,
+        "partial": 3,
+        "missing": 2
+      },
+      "core_sufficient_count": 0,
+      "core_insufficient_count": 3,
+      "overall_summary_accepted_count": 0
+    },
+    "alignment": {
+      "candidate_count": 3,
+      "claim_count": 18,
+      "citation_count": 70,
+      "exact_citation_count": 70,
+      "full_source_support_counts": {
+        "supported": 13,
+        "partial": 3,
+        "ambiguous": 2,
+        "unsupported": 0
+      },
+      "selected_citation_support_counts": {
+        "supported": 10,
+        "partial": 6,
+        "ambiguous": 2,
+        "unsupported": 0
+      },
+      "fixed_core_item_count": 8,
+      "fixed_core_coverage_counts": {
+        "covered": 3,
+        "partial": 3,
+        "missing": 2
+      },
+      "core_sufficient_count": 0,
+      "core_insufficient_count": 3,
+      "overall_summary_accepted_count": 0
+    },
+    "entirely_identical_content_pairs": 1,
+    "claim_text_identical_pairs": 2,
+    "citation_sequence_identical_pairs": 2,
+    "claim_count_changed_pairs": 0,
+    "added_claims": 0,
+    "removed_claims": 0,
+    "compared_claim_slots": 18,
+    "text_changed_claims": 3,
+    "citation_changed_claims": 1,
+    "both_text_and_citation_changed_claims": 0,
+    "any_content_changed_claims": 4,
+    "all_content_identical_claims": 14,
+    "exact_retained_citation_instances": 70,
+    "removed_citation_instances": 1,
+    "added_citation_instances": 0,
+    "citation_reordering_only_claims": 0,
+    "source_support_transition": {
+      "matched_items": 18,
+      "status_changes": 0,
+      "recoveries": 0,
+      "regressions": 0,
+      "remaining_not_fully_met": 5,
+      "transition_counts": {
+        "supported->supported": 13,
+        "ambiguous->ambiguous": 2,
+        "partial->partial": 3
+      }
+    },
+    "selected_citation_support_transition": {
+      "matched_items": 18,
+      "status_changes": 0,
+      "recoveries": 0,
+      "regressions": 0,
+      "remaining_not_fully_met": 8,
+      "transition_counts": {
+        "supported->supported": 10,
+        "ambiguous->ambiguous": 2,
+        "partial->partial": 6
+      }
+    },
+    "core_coverage_transition": {
+      "matched_items": 8,
+      "status_changes": 0,
+      "recoveries": 0,
+      "regressions": 0,
+      "remaining_not_fully_met": 5,
+      "transition_counts": {
+        "missing->missing": 2,
+        "partial->partial": 3,
+        "covered->covered": 3
+      }
+    },
+    "sufficiency_recoveries": 0,
+    "sufficiency_regressions": 0,
+    "acceptance_recoveries": 0,
+    "acceptance_regressions": 0,
+    "new_semantic_judgments": 0,
+    "human_reviews": 0,
+    "user_reviews": 0
+  },
+  "pairs": [
+    {
+      "anonymous_pair_number": 1,
+      "mechanical": {
+        "generation_claim_count": 6,
+        "alignment_claim_count": 6,
+        "claim_ids_preserved": true,
+        "added_claims": 0,
+        "removed_claims": 0,
+        "text_changed_claims": 0,
+        "text_unchanged_claims": 6,
+        "citation_changed_claims": 0,
+        "citation_unchanged_claims": 6,
+        "both_text_and_citation_changed_claims": 0,
+        "any_content_changed_claims": 0,
+        "all_content_identical_claims": 6,
+        "all_claim_texts_identical": true,
+        "all_citation_sequences_identical": true,
+        "entire_claim_text_and_citation_content_identical": true,
+        "generation_citation_instances": 24,
+        "alignment_citation_instances": 24,
+        "exact_retained_citation_instances": 24,
+        "removed_citation_instances": 0,
+        "added_citation_instances": 0,
+        "citation_reordering_only_claims": 0
+      },
+      "generation": {
+        "claim_count": 6,
+        "citation_count": 24,
+        "exact_citation_count": 24,
+        "full_source_support_counts": {
+          "supported": 4,
+          "partial": 2,
+          "ambiguous": 0,
+          "unsupported": 0
+        },
+        "selected_citation_support_counts": {
+          "supported": 2,
+          "partial": 4,
+          "ambiguous": 0,
+          "unsupported": 0
+        },
+        "fixed_core_item_count": 2,
+        "fixed_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 0
+        },
+        "core_sufficiency": "insufficient",
+        "overall_summary_accepted": false
+      },
+      "alignment": {
+        "claim_count": 6,
+        "citation_count": 24,
+        "exact_citation_count": 24,
+        "full_source_support_counts": {
+          "supported": 4,
+          "partial": 2,
+          "ambiguous": 0,
+          "unsupported": 0
+        },
+        "selected_citation_support_counts": {
+          "supported": 2,
+          "partial": 4,
+          "ambiguous": 0,
+          "unsupported": 0
+        },
+        "fixed_core_item_count": 2,
+        "fixed_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 0
+        },
+        "core_sufficiency": "insufficient",
+        "overall_summary_accepted": false
+      },
+      "general_remaining_error_types": [
+        "unsupported named-speaker attribution",
+        "unsupported causal linkage",
+        "selected citations omit the directly supporting statement",
+        "part of a fixed core conditional exception remains omitted"
+      ],
+      "effect_from_frozen_judgments": "All claim texts and citation sequences are identical. Every frozen support and core-coverage status is unchanged; no recovery or regression is established."
+    },
+    {
+      "anonymous_pair_number": 2,
+      "mechanical": {
+        "generation_claim_count": 6,
+        "alignment_claim_count": 6,
+        "claim_ids_preserved": true,
+        "added_claims": 0,
+        "removed_claims": 0,
+        "text_changed_claims": 0,
+        "text_unchanged_claims": 6,
+        "citation_changed_claims": 1,
+        "citation_unchanged_claims": 5,
+        "both_text_and_citation_changed_claims": 0,
+        "any_content_changed_claims": 1,
+        "all_content_identical_claims": 5,
+        "all_claim_texts_identical": true,
+        "all_citation_sequences_identical": false,
+        "entire_claim_text_and_citation_content_identical": false,
+        "generation_citation_instances": 24,
+        "alignment_citation_instances": 23,
+        "exact_retained_citation_instances": 23,
+        "removed_citation_instances": 1,
+        "added_citation_instances": 0,
+        "citation_reordering_only_claims": 0
+      },
+      "generation": {
+        "claim_count": 6,
+        "citation_count": 24,
+        "exact_citation_count": 24,
+        "full_source_support_counts": {
+          "supported": 4,
+          "partial": 1,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "selected_citation_support_counts": {
+          "supported": 4,
+          "partial": 1,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "fixed_core_item_count": 3,
+        "fixed_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 1
+        },
+        "core_sufficiency": "insufficient",
+        "overall_summary_accepted": false
+      },
+      "alignment": {
+        "claim_count": 6,
+        "citation_count": 23,
+        "exact_citation_count": 23,
+        "full_source_support_counts": {
+          "supported": 4,
+          "partial": 1,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "selected_citation_support_counts": {
+          "supported": 4,
+          "partial": 1,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "fixed_core_item_count": 3,
+        "fixed_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 1
+        },
+        "core_sufficiency": "insufficient",
+        "overall_summary_accepted": false
+      },
+      "general_remaining_error_types": [
+        "ambiguous conditional wording",
+        "recommendation status presented as unresolved",
+        "fixed core effective information remains absent",
+        "fixed core exception remains only partly represented"
+      ],
+      "effect_from_frozen_judgments": "One selected citation was removed while all claim texts remain identical. Frozen support and core-coverage states are unchanged; this mechanical deletion does not establish recovery of the remaining problems."
+    },
+    {
+      "anonymous_pair_number": 3,
+      "mechanical": {
+        "generation_claim_count": 6,
+        "alignment_claim_count": 6,
+        "claim_ids_preserved": true,
+        "added_claims": 0,
+        "removed_claims": 0,
+        "text_changed_claims": 3,
+        "text_unchanged_claims": 3,
+        "citation_changed_claims": 0,
+        "citation_unchanged_claims": 6,
+        "both_text_and_citation_changed_claims": 0,
+        "any_content_changed_claims": 3,
+        "all_content_identical_claims": 3,
+        "all_claim_texts_identical": false,
+        "all_citation_sequences_identical": true,
+        "entire_claim_text_and_citation_content_identical": false,
+        "generation_citation_instances": 23,
+        "alignment_citation_instances": 23,
+        "exact_retained_citation_instances": 23,
+        "removed_citation_instances": 0,
+        "added_citation_instances": 0,
+        "citation_reordering_only_claims": 0
+      },
+      "generation": {
+        "claim_count": 6,
+        "citation_count": 23,
+        "exact_citation_count": 23,
+        "full_source_support_counts": {
+          "supported": 5,
+          "partial": 0,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "selected_citation_support_counts": {
+          "supported": 4,
+          "partial": 1,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "fixed_core_item_count": 3,
+        "fixed_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 1
+        },
+        "core_sufficiency": "insufficient",
+        "overall_summary_accepted": false
+      },
+      "alignment": {
+        "claim_count": 6,
+        "citation_count": 23,
+        "exact_citation_count": 23,
+        "full_source_support_counts": {
+          "supported": 5,
+          "partial": 0,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "selected_citation_support_counts": {
+          "supported": 4,
+          "partial": 1,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "fixed_core_item_count": 3,
+        "fixed_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 1
+        },
+        "core_sufficiency": "insufficient",
+        "overall_summary_accepted": false
+      },
+      "general_remaining_error_types": [
+        "ambiguous capacity wording",
+        "selected evidence omits the explicit counting convention",
+        "core service exclusions remain incomplete",
+        "fixed core required referral remains absent"
+      ],
+      "effect_from_frozen_judgments": "Three claim texts change while every citation sequence remains identical. Frozen claim-support and core-coverage statuses do not change; the existing support gaps and core omissions remain."
+    }
+  ],
+  "conclusion": "No recovery or regression appears in the locked claim-support, selected-citation-support, core-coverage, sufficiency or acceptance statuses. Mechanical changes occur in two pairs; all three retain insufficient core coverage and remain unaccepted under the fixed conjunction.",
+  "evidence": {
+    "individual_lock": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/individual-lock-v1.json",
+      "bytes": 8152,
+      "sha256": "63fc9cf443640a196cfb1f264150041fb292c0cef4bd41607534e992f8f49099"
+    },
+    "individual_safe": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/individual-safe-v1.json",
+      "bytes": 5697,
+      "sha256": "9115b7e2b40c4db7a00d1565f836897c2ce6a04d9718fddb310dfaf7234222be"
+    },
+    "paired_lock": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/paired-lock-v1.json",
+      "bytes": 8546,
+      "sha256": "a382227d970e6b59e7b0925f836d94a86c1d46763e73134b011b681ad0f2fc61"
+    },
+    "paired_safe": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/paired-safe-v1.json",
+      "bytes": 16112,
+      "sha256": "702cd93c7636d16a1d39ead04bc7cc7652e916443b1283874df67c69d8af527e"
+    },
+    "stage_disclosure": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/stage-pair-disclosure-v1.json",
+      "bytes": 1727,
+      "sha256": "cab346136d333137573732e4682273c253fd6cf4ff83ea26eaa8ef8d03139f7f"
+    },
+    "disclosure_custody": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/stage-pair-disclosure-custody-v1.json",
+      "bytes": 1089,
+      "sha256": "4ea2a4542d619f455170d891c83e842f502c89bece1099aacfa502c7e18491a7"
+    },
+    "parent_verification": {
+      "path": ".local/meeting-grounded-summary-v3-harness-v1/parent-paired-review-verification-v1.json",
+      "bytes": 648,
+      "sha256": "8582117996c93ea9acf9492831d7114affaf3812bd5f568b7cd65166bc0eacb7"
+    }
+  },
+  "limitations": [
+    "The comparison derives exclusively from immutable individual judgments and exact text/citation differences. It does not create or revise semantic judgments, criteria or answers.",
+    "Exact identical content means original claim ids, ordered claim text and ordered citation quote/start/end triples, excluding candidate identifiers and stage labels.",
+    "Claim ids and counts are the same in these pairs. No improvement is inferred from a denominator change or a higher proportion after dropping claims.",
+    "A wording change or citation deletion is a mechanical change, not evidence of semantic recovery. Recovery and regression are reported only from the already frozen statuses.",
+    "This is posthoc AI review using reused source-grounded criteria. Human review and user acceptance remain zero.",
+    "Historical aggregates and possible same-source grouping were visible before the individual lock. Explicit stage/pair mapping was read only after that lock.",
+    "Model self-review, timing, performance, runtime outcome and the original private map remain unread. This is not a runtime-success, latency, general model-quality or deployment conclusion."
+  ]
+}

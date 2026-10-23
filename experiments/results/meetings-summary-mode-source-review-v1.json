@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "diagnostic": "summary-mode-development-v1",
+  "status": "source_admission_withheld_historical_input_lineage_missing",
+  "evidence_kind": "independent_ai_source_and_metadata_review_not_model_quality",
+  "source_content_and_provenance": "four_public_sources_conditionally_acceptable_prior_judgment_preserved",
+  "admission": {
+    "blocking_gap_count": 1,
+    "blocking_gap": "L2: known historical ignored-probe artifacts lack explicit historical input/source lineage",
+    "prior_content_and_provenance_assessment": "Preserved: content/provenance acceptable with the previously recorded caveats; no rejudgment.",
+    "prior_source_lock": "Unchanged; initial admission-withheld remains in force.",
+    "source_admitted": false,
+    "source_frozen": false,
+    "criteria_authorized": false,
+    "actual_run_authorized": false,
+    "quality_claims": false
+  },
+  "finite_scope_counts": {
+    "protected_original_bindings": 113,
+    "current_safe_metadata_bindings": 29,
+    "total_unique_before_after_inputs": 142,
+    "source_projection_rows": 55,
+    "distinct_source_exact_and_normalized_values": 49,
+    "public_metadata_rows": 110,
+    "public_normalized_rows": 42,
+    "public_distinct_normalized_values": 39,
+    "combined_distinct_normalized_values": 64,
+    "declared_chain_files": 22,
+    "declared_source_reference_rows_with_repetition": 354,
+    "declared_family_registration_rows": 39,
+    "public_raw_hash_rows_matched": 83,
+    "public_missing_normalized_rows": 68,
+    "family_only_missing_normalized_rows": 27,
+    "raw_only_missing_normalized_rows": 41,
+    "source_manifest_records": 24,
+    "recorded_manifest_checks_verified": 384,
+    "closed_runs": 5,
+    "closed_sources": 6,
+    "closed_mapping_pairs": 30,
+    "context_identity_rows": 18,
+    "context_distinct_document_revision_pairs": 6,
+    "ignored_probe_registry_files": 7,
+    "product_code_hash_rows": 21,
+    "historical_run_input_bindings": 0,
+    "known_historical_output_filenames": 11,
+    "new4_observed_metadata_matches": 0
+  },
+  "limits": [
+    {
+      "id": "L1",
+      "classification": "DOCUMENTED_TYPED_LIMIT_NOT_AN_INDEPENDENT_BLOCKER",
+      "finding": "The actual context-only input versions and available identities are known; a complete source document is not supplied by those records. Full-source mapping is absent for six GGUF document/revision pairs.",
+      "constraint": "No source text, paths, semantic overlap or translated absence inferred from IDs."
+    },
+    {
+      "id": "L2",
+      "classification": "BLOCKING_MISSING_EVIDENCE",
+      "finding": "Known historical output artifacts have no demonstrated binding to the historical run/input/source versions. Code-only hash registries and current literals cannot supply that lineage.",
+      "constraint": "Source admission and source freeze remain withheld until existing explicit metadata resolves the gap."
+    },
+    {
+      "id": "L3",
+      "classification": "DOCUMENTED_EXCLUSION; DOES_NOT_REPAIR_L2",
+      "finding": "Three identity records describe a current-main-only DB copy. This is neither a historical snapshot nor a complete-current-state or source-content fingerprint claim.",
+      "constraint": "No DB original/copy opened or row body hashed by this reviewer; no broader DB action requested."
+    },
+    {
+      "id": "L4",
+      "classification": "DOCUMENTED_COMPARISON_COVERAGE_LIMIT_NOT_AN_INDEPENDENT_BLOCKER",
+      "finding": "Sixty-eight repeated public metadata rows lack normalized fingerprints: twenty-seven family-only and forty-one raw-only. Available raw hashes and declared family identities remain useful metadata.",
+      "constraint": "Do not merge family registrations into unique document identities or claim normalized comparison for unavailable rows."
+    }
+  ],
+  "followup": "The bounded historical custody search is closed. Explicit code hashes and context identities do not recover full historical input versions; L2 remains unresolved under the original plan. A separate current protected-split metadata review and prospective design are in progress, with no new admission or run.",
+  "bindings": [
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/coverage-review-v1/safe-coverage-review-v1.json",
+      "bytes": 14754,
+      "sha256": "6734c9c8c7017cd393997f40893decc3e2010abfcd58641134810e0b45742c74"
+    },
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/coverage-review-v1/coverage-review-lock-v1.json",
+      "bytes": 60102,
+      "sha256": "37f1478e8729cb640a2b5a81d657da944a88b02d427cc3c5f52def686c01276a"
+    },
+    {
+      "path": ".local/meeting-summary-mode-prior-source-inventory-v1/historical-binding-discovery-proposal-v1.json",
+      "bytes": 9723,
+      "sha256": "4e2d06fa636a098516504b87d39c3d3201728b5e93932904d00c4f2278ada0f0"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/coverage142-current-verification-v1.json",
+      "bytes": 30413,
+      "sha256": "24ca3f519519404704202622bf07e78b1d50faf5d40272405f2912710225bab8"
+    }
+  ],
+  "actual_new_model_runs": 0,
+  "criteria_created": false,
+  "human_review_count": 0,
+  "paid_service_calls": 0,
+  "public_service_deployments": 0,
+  "phase1_complete": false,
+  "historical_custody_closure": {
+    "product_code_hash_records": 6,
+    "context_identity_records": 3,
+    "complete_historical_input_binding": false,
+    "historical_contamination_proven": false,
+    "historical_isolation_proven": false,
+    "raw_text_or_model_output_values_projected": false,
+    "bindings": [
+      {
+        "path": ".local/meeting-summary-mode-prior-source-inventory-v1/historical-binding-custody-closure-v1.json",
+        "bytes": 5323,
+        "sha256": "a3712c5c04360d6b94e6f28766e0cc7cc0849b3a3ef4cfda4511160589d88175"
+      },
+      {
+        "path": ".local/meeting-summary-mode-parent-v1/historical-projection-verification-v1.json",
+        "bytes": 5396,
+        "sha256": "7d123f5fba879291f0075121e8139e24e8ccf48afb03620c34282b22dd836091"
+      }
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "source_only_author_receipt",
+  "author_role": "c4_validation_source",
+  "actual_model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "authoring_started_at_utc": "2026-10-16T04:46:21.924152+00:00",
+  "completed_at_utc": "2026-10-16T04:47:00.792695+00:00",
+  "toolchain_source_commit": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+  "toolchain_ci_receipt_commit": "ebc4a86a3137107b3b37c151f250c4efdc2a75e9",
+  "authoring_head": "4ba1fbfd7361b85d8800e453441fee1be49e25d0",
+  "code_contract_actual_git_proof_passed": true,
+  "preserved_prior_attempt": {
+    "helper": ".local/c4-validation-source-author-v1.py",
+    "status": "failed_before_output_directory_creation",
+    "reason": "overstrict historical receipt commit versus advanced current HEAD assertion; code_contract had passed; new helper distinguishes historical commit and authoring HEAD",
+    "tokenizer_loads": 0,
+    "native_calls": 0
+  },
+  "ci_receipt_sha256": "2dadfa4a43fc7dd2dde33ad476061b319f7bbbb814678e0de6a5644ef23958bd",
+  "upstream": {
+    "repository": "nodejs/diagnostics",
+    "immutable_commit": "3162f5cdfe86a0830d6ce0eb525d9fbe1d0caee6",
+    "commit_committer_date": "2026-04-15T17:47:35Z",
+    "git_tree_api_snapshot_sha256": "5aa55bfeb77d7ac706b207e54c8b16255470e471cf33b70133ee93c106664196",
+    "commit_api_snapshot_sha256": "b300714b69a3ab8bd09a273915dc4c5bc0fbcc64bbffc460e4ed14b36a12e33b",
+    "raw_files_verified_against_git_blob_identity": 4,
+    "source_documents": 3,
+    "license_documents": 1,
+    "root_license": {
+      "id": "MIT",
+      "repository_license_path": "LICENSE.md",
+      "immutable_url": "https://github.com/nodejs/diagnostics/blob/3162f5cdfe86a0830d6ce0eb525d9fbe1d0caee6/LICENSE.md",
+      "raw_url": "https://raw.githubusercontent.com/nodejs/diagnostics/3162f5cdfe86a0830d6ce0eb525d9fbe1d0caee6/LICENSE.md",
+      "git_blob_sha1": "b446b5a3f5e3c6ae89c62d90df49681fa496123d",
+      "sha256": "2f1fda7b2c2166aa2bece708fdcbbb2ce460a5ba8e702a7b1bae4ad9bfa3c0dd",
+      "retained_file": "data/evaluation/meetings-c4-validation-v1/licenses/nodejs-diagnostics-LICENSE.md",
+      "text": "MIT License (MIT)\n\nCopyright (c) Node.js Diagnostics WG Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\n\n",
+      "applicability": "Repository license expressly covers associated documentation. All three adopted files were read in full; no per-file license override or embedded third-party source body was found. External links and recordings were not imported.",
+      "observed_license_notice_paths": [
+        "LICENSE.md"
+      ]
+    }
+  },
+  "files": {
+    "data/evaluation/meetings-c4-validation-v1/licenses/nodejs-diagnostics-LICENSE.md": "2f1fda7b2c2166aa2bece708fdcbbb2ce460a5ba8e702a7b1bae4ad9bfa3c0dd",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-general.md": "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-01.md": "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-02.md": "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-general.md": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-01.md": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-02.md": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796",
+    "data/evaluation/meetings-c4-validation-v1/source-inventory.json": "ad2a1c8b4a8abdb9801d76f613634cdfe4a3852f52f1acdb26fe32feeab62095",
+    "data/evaluation/meetings-c4-validation-v1/source-manifest.json": "901f5f5da91ddddd917a4f71e24a54a55c908882fdc9a67494197c904bbad006",
+    "data/evaluation/meetings-c4-validation-v1/source-processing-receipt.json": "fc46f62cdf5c29cfc61af15f589ab0c42d64810651ce36202c144c4952d4600c"
+  },
+  "fingerprints": {
+    "path": "data/evaluation/meetings-c4-validation-source-fingerprints-v1.json",
+    "sha256": "b8e6aa5faf7b4bea323eb9adc9ad1a38698312d7fd50729b1e342ca3b7fb94fc"
+  },
+  "counts": {
+    "families": 2,
+    "documents": 6,
+    "public_documents": 3,
+    "synthetic_documents_authored": 3,
+    "dated_meetings": 4,
+    "general_documents": 2,
+    "chunks": 20,
+    "questions": 0,
+    "oracles": 0,
+    "selected_contexts": 0,
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "model_weight_downloads": 0,
+    "paid_api_calls": 0,
+    "human_reviews": 0
+  },
+  "processing_helper_synthetic_bodies_authored_counter": "The immutable helper reports zero because that helper itself authors none. This role separately authored three before invoking it.",
+  "source_scope": "Only the new validation source bodies, frozen implementation/contract code, and prior source identity metadata were read. No old closed source/item/oracle bodies or new calibration semantic material were read.",
+  "split_collision_prevention": "Parent reserved nodejs/diagnostics for validation before adoption; calibration was directed to another repository. Validation fictional organization differs from the calibration organization metadata.",
+  "excluded_from_independent_output_judging": true,
+  "independent_source_review": "pending_separate_role",
+  "actual_java_parity": "pending_separate_execution",
+  "source_freeze": "not_created",
+  "complete_near_duplicate_absence_proven": false,
+  "historical_fingerprint_limit": "Prior metadata lacks historical normalized document and paragraph fingerprints; no closed bodies were opened for deduplication.",
+  "validation_freshness": "Requires later independent source review and binding to the final six-document calibration fingerprint receipt; no calibration semantic reads authorized."
+}

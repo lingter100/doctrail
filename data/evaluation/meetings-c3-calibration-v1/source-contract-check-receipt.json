@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "source_only_contract_check",
+  "checked_at_utc": "2026-10-14T07:19:02.666955+00:00",
+  "source_validator": "scripts.prepare_meeting_requirements_inputs.validate_inventory",
+  "receipt_validator": "scripts.prepare_meeting_requirements_inputs.validate_processing_receipts",
+  "validator_sha256": "3f511177f4b1a71336ee237e8e6eb744dd99fcfa87405e38c3d6c41402ccca71",
+  "toolchain_freeze_sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+  "toolchain_bindings_verified_after_processing": 66,
+  "manifest_sha256": "b5535abe6c1ae844dbeacf29970e26baf717284c8aa00b24575afdc5ee61a147",
+  "passed": true,
+  "documents": 4,
+  "whole_inventory_chunks": 20,
+  "artifact_copies": [
+    {
+      "generated_path": ".local/meetings-c3-calibration-source-inventory-v1/inventory.json",
+      "preserved_path": "data/evaluation/meetings-c3-calibration-v1/inventory.json",
+      "sha256": "544a6bf6a31e49f94e05c1828d2113d8e1bdd526c2646bfe29cac3cc9e516d0e",
+      "size_bytes": 60185,
+      "byte_identical": true,
+      "cr_count": 0,
+      "lf_count": 420
+    },
+    {
+      "generated_path": ".local/meetings-c3-calibration-source-inventory-v1/receipt.json",
+      "preserved_path": "data/evaluation/meetings-c3-calibration-v1/processing-receipt.json",
+      "sha256": "e2c15dd5ef031ddbaf88da1f765b3a0ebcf56f28b57c46134eb85a2fd60302b8",
+      "size_bytes": 3989,
+      "byte_identical": true,
+      "cr_count": 0,
+      "lf_count": 94
+    },
+    {
+      "generated_path": ".local/meetings-c3-calibration-source-inventory-v1/java-parity.json",
+      "preserved_path": "data/evaluation/meetings-c3-calibration-v1/java-parity.json",
+      "sha256": "63740f39a18b9af5fa0b05dc08ff9229097715c4a3823a542b3f0e0a466b04c5",
+      "size_bytes": 1982,
+      "byte_identical": true,
+      "cr_count": 40,
+      "lf_count": 40
+    }
+  ],
+  "selected_contexts": 0,
+  "questions": 0,
+  "oracles": 0,
+  "official_tokenizer_runs": 0,
+  "native_model_calls": 0,
+  "full_preparation_entrypoint_called": false,
+  "independent_prereview_completed": false,
+  "scope": "Source-only schema, provenance, exact raw reconstruction, full inventory and actual parity receipt checks; not source semantic prereview or item/readiness/quality validation."
+}

@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c7-v1",
+  "recorded_at_utc": "2026-10-20T04:53:25.963726+00:00",
+  "kind": "registration_metadata_repair_not_source_or_model_run",
+  "original_committed_head": "5e007096dc59d197cf7159bf0e3e48b4a8237c0d",
+  "original_registry": {
+    "file": "data/evaluation/meetings-c7-role-registration-initial-v1.json",
+    "sha256": "8128159ca3dec8326c5f835c9bfc675af9e0e5c30377a321b74c62646eba875c"
+  },
+  "active_registry": {
+    "file": "data/evaluation/meetings-c7-role-registration-v1.json",
+    "sha256": "6024bf5421b51b21a7addc922a3aba3f03d372f6b17737425af570560a2a642c"
+  },
+  "diagnosis": "Local root entries had two path components; frozen phase_path requires a child component. No frozen code or source budget changes.",
+  "changes": [
+    {
+      "phase": "calibration",
+      "role": "source_author",
+      "old": ".local/meetings-c7-calibration-source-v1",
+      "new": [
+        ".local/meetings-c7-calibration-source-v1/artifacts",
+        ".local/meetings-c7-calibration-source-v1/acceptance.json",
+        ".local/meetings-c7-calibration-source-v1/preauthorization-v1.json",
+        ".local/meetings-c7-calibration-source-v1/preauthorization-v2.json"
+      ]
+    },
+    {
+      "phase": "calibration",
+      "role": "source_author",
+      "old": ".local/meetings-c7-calibration-admission-attempts-v1",
+      "new": [
+        ".local/meetings-c7-calibration-admission-attempts-v1/artifacts"
+      ]
+    },
+    {
+      "phase": "calibration",
+      "role": "item_author",
+      "old": ".local/meetings-c7-calibration-source-v1",
+      "new": [
+        ".local/meetings-c7-calibration-source-v1/artifacts",
+        ".local/meetings-c7-calibration-source-v1/acceptance.json",
+        ".local/meetings-c7-calibration-source-v1/preauthorization-v1.json",
+        ".local/meetings-c7-calibration-source-v1/preauthorization-v2.json"
+      ]
+    },
+    {
+      "phase": "calibration",
+      "role": "item_author",
+      "old": ".local/meetings-c7-calibration-admission-attempts-v1",
+      "new": [
+        ".local/meetings-c7-calibration-admission-attempts-v1/artifacts"
+      ]
+    },
+    {
+      "phase": "calibration",
+      "role": "source_prereviewer",
+      "old": ".local/meetings-c7-calibration-source-review-v1",
+      "new": [
+        ".local/meetings-c7-calibration-source-review-v1/artifacts",
+        ".local/meetings-c7-calibration-source-review-v1/acceptance.json"
+      ]
+    },
+    {
+      "phase": "calibration",
+      "role": "item_prereviewer",
+      "old": ".local/meetings-c7-calibration-source-review-v1",
+      "new": [
+        ".local/meetings-c7-calibration-source-review-v1/artifacts",
+        ".local/meetings-c7-calibration-source-review-v1/acceptance.json"
+      ]
+    },
+    {
+      "phase": "validation",
+      "role": "source_author",
+      "old": ".local/meetings-c7-validation-source-v1",
+      "new": [
+        ".local/meetings-c7-validation-source-v1/artifacts",
+        ".local/meetings-c7-validation-source-v1/acceptance.json",
+        ".local/meetings-c7-validation-source-v1/preauthorization-v1.json",
+        ".local/meetings-c7-validation-source-v1/preauthorization-v2.json"
+      ]
+    },
+    {
+      "phase": "validation",
+      "role": "source_author",
+      "old": ".local/meetings-c7-validation-admission-attempts-v1",
+      "new": [
+        ".local/meetings-c7-validation-admission-attempts-v1/artifacts"
+      ]
+    },
+    {
+      "phase": "validation",
+      "role": "item_author",
+      "old": ".local/meetings-c7-validation-source-v1",
+      "new": [
+        ".local/meetings-c7-validation-source-v1/artifacts",
+        ".local/meetings-c7-validation-source-v1/acceptance.json",
+        ".local/meetings-c7-validation-source-v1/preauthorization-v1.json",
+        ".local/meetings-c7-validation-source-v1/preauthorization-v2.json"
+      ]
+    },
+    {
+      "phase": "validation",
+      "role": "item_author",
+      "old": ".local/meetings-c7-validation-admission-attempts-v1",
+      "new": [
+        ".local/meetings-c7-validation-admission-attempts-v1/artifacts"
+      ]
+    },
+    {
+      "phase": "validation",
+      "role": "source_prereviewer",
+      "old": ".local/meetings-c7-validation-source-review-v1",
+      "new": [
+        ".local/meetings-c7-validation-source-review-v1/artifacts",
+        ".local/meetings-c7-validation-source-review-v1/acceptance.json"
+      ]
+    },
+    {
+      "phase": "validation",
+      "role": "item_prereviewer",
+      "old": ".local/meetings-c7-validation-source-review-v1",
+      "new": [
+        ".local/meetings-c7-validation-source-review-v1/artifacts",
+        ".local/meetings-c7-validation-source-review-v1/acceptance.json"
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "phase": "calibration",
+      "local_original": ".local/meetings-c7-calibration-source-v1/preauthorization-v1.json",
+      "sha256": "9e80801f1da3f607e2ffc8c16561a621af80c5b42a35081ba41ae75ec8bf7ef9",
+      "code_contract": "passed",
+      "role_contract": "c7_phase_path",
+      "git_revision_path_pairs": 158,
+      "snapshot_files": 80,
+      "observed_subprocess_starts": 164,
+      "head_before_after": "5e007096dc59d197cf7159bf0e3e48b4a8237c0d"
+    },
+    {
+      "phase": "validation",
+      "local_original": ".local/meetings-c7-validation-source-v1/preauthorization-v1.json",
+      "sha256": "a5ce2676176de9e534495aa487dd5f3e808cd3124d54c0c51be4c81d8c82edf8",
+      "code_contract": "passed",
+      "role_contract": "c7_phase_path",
+      "git_revision_path_pairs": 158,
+      "snapshot_files": 80,
+      "observed_subprocess_starts": 164,
+      "head_before_after": "5e007096dc59d197cf7159bf0e3e48b4a8237c0d"
+    }
+  ],
+  "validation_subprocess_classifier": "Original receipt labels are unreliable on Windows. Only total observed launch events are reported, not executable-kind counts.",
+  "prior_index_read_by_authors": false,
+  "bound_code_files_unchanged": 77,
+  "registered_paths_checked_with_actual_phase_path": 116,
+  "actual_role_contract_after_repair": "pending commit and same actors' new preauthorization-v2 receipts",
+  "source_items_tokenizer_native": 0,
+  "initial_registration_ci": [
+    {
+      "run_id": 39371431774,
+      "event": "push",
+      "head_sha": "5e007096dc59d197cf7159bf0e3e48b4a8237c0d",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      }
+    },
+    {
+      "run_id": 39371435953,
+      "event": "pull_request",
+      "head_sha": "5e007096dc59d197cf7159bf0e3e48b4a8237c0d",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      }
+    }
+  ]
+}

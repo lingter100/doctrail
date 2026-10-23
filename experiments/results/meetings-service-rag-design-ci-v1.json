@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_design_and_visual_fix_ci_observation",
+  "observed_at": "2026-10-20T06:45:44.387721+00:00",
+  "source_commit": "190f58207e866514a9f2be01cdf4d3b43bd940a7",
+  "author": "lingter100",
+  "committer": "lingter100",
+  "runs": [
+    {
+      "id": 39381783066,
+      "head": "190f58207e866514a9f2be01cdf4d3b43bd940a7",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39381783066/job/118492300872"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39381783066/job/118492301179"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39381783066/job/118492301371"
+        }
+      ]
+    },
+    {
+      "id": 39381786633,
+      "head": "190f58207e866514a9f2be01cdf4d3b43bd940a7",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39381786633/job/118492313256"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39381786633/job/118492313449"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39381786633/job/118492313538"
+        }
+      ]
+    }
+  ],
+  "scope": "Committed service RAG design and existing visual fixes only; not the current uncommitted adapter/deadline implementation",
+  "new_native_model_calls": 0,
+  "human_review": 0
+}

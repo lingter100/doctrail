@@ -1,0 +1,494 @@
+{
+  "schema_version": 1,
+  "kind": "independent_ai_semantic_review",
+  "review_date": "2026-10-13",
+  "bound_artifacts": {
+    "experiments/results/meetings-development-v11.raw.json": "43601557e461dacc14072fa62afd51af5be475f23fc2c273aebdbe509ea9fafc",
+    "experiments/results/meetings-development-v11.results.json": "cd4c22f9ebff3d72713c3030b294302dbfada7270f6e56dfdcf7e79a899d6725"
+  },
+  "bound_execution_source_sha256": {
+    "src\\doctrail\\meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+    "src\\doctrail\\meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+    "src\\doctrail\\meeting_worker.py": "f56b285ca501faa7915a515176f7ca10f812dc3a9fed63b727e19eed20df1605"
+  },
+  "reviewed_fixture_sha256": {
+    "tests/fixtures/meetings/public/jupyter-february-2025.md": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+    "tests/fixtures/meetings/public/jupyter-june-2025.md": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+    "tests/fixtures/meetings/public/jupyter-host-guide.md": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f",
+    "tests/fixtures/meetings/synthetic-release-planning.md": "606678b791ad6b3e1dde1e1bb0189cf064d8152cbb6ccba405663d36500e5138",
+    "tests/fixtures/meetings/synthetic-release-followup.md": "0f2e3bf13e65c8a6593b257dda36aed94873d0fdf4a9697380d87325e12c398a",
+    "tests/fixtures/meetings/synthetic-runbook.md": "1e95de236f46967b54c8cef312fc305f206f5698ba9d38c288ee37c9b3582d4c"
+  },
+  "reviewer": {
+    "agent_task": "/root/meetings_review",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "settings_evidence": "parent_reported_tool_accepted_spawn; not independently exposed in reviewer context",
+    "human_review_count": 0,
+    "ai_authored": true,
+    "gpu_or_model_calls": 0,
+    "tests_run": 0
+  },
+  "scope": {
+    "analysis_cases": 1,
+    "answer_cases": 4,
+    "answered_cases": 3,
+    "abstained_cases": 1,
+    "generated_claims_reviewed": 8,
+    "source_context": "Actual final user payloads in raw calls, excluding few-shot examples as evidence; compared against original local fixtures.",
+    "evaluation_limit": "Repeated development cases, not a held-out evaluation, M5 readiness result, general quality claim or human acceptance.",
+    "m5_validation_accessed": false
+  },
+  "exact_context_receipts": [
+    {
+      "raw_call_index": 1,
+      "case": "cross-public",
+      "question": "What was reported about JupyterLab 4.4 in February and June?",
+      "sources": [
+        {
+          "title": "Jupyter February",
+          "meeting_date": "2025-02-19",
+          "fixture": "tests/fixtures/meetings/public/jupyter-february-2025.md",
+          "passages": [
+            {
+              "id": 0,
+              "text_sha256": "eaa8135152b222aeb86a4a69da6875b4985896279b268e65ddc78a14d44a0dcf",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 2,
+              "text_sha256": "c727e55f6b0c7dd413274719ce46b4f00b06a654c0ef419ea8524f8a53adbf47",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 3,
+              "text_sha256": "db3d28b4027befdaf54889b65b7ba320455cbd7e9a013e8bb11821068a4a5ade",
+              "exact_fixture_substring": true
+            }
+          ]
+        },
+        {
+          "title": "Jupyter June",
+          "meeting_date": "2025-06-11",
+          "fixture": "tests/fixtures/meetings/public/jupyter-june-2025.md",
+          "passages": [
+            {
+              "id": 1,
+              "text_sha256": "e9ffedd3b61bf7b99606a6de9347f504dab12ec7a18a70979ecfee6a83d99021",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 4,
+              "text_sha256": "745cda2674f27dab10ae2ddf4b7d2f9fa837eba8caa72344400be2acb467cdf6",
+              "exact_fixture_substring": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "raw_call_index": 2,
+      "case": "missing-budget",
+      "question": "What is the Jupyter community meeting catering budget?",
+      "sources": [
+        {
+          "title": "Host guide",
+          "meeting_date": null,
+          "fixture": "tests/fixtures/meetings/public/jupyter-host-guide.md",
+          "passages": [
+            {
+              "id": 0,
+              "text_sha256": "bb9127d4068fa193bad649229bd6f0ef0d5d282116a60c33646407aa79a2e8a2",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 1,
+              "text_sha256": "942b7b199632e943084e7e9924240366feff1871720addd71df5fe7b7ba50eb0",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 2,
+              "text_sha256": "3cf4fd7594a3538f60af441b333d30376f0cffc64eb36e8ea7562463b07f2163",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 3,
+              "text_sha256": "00bde727e953fd187cdce3d3600db0b8bc941afcd3de869e4ecf0af75bc7bb82",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 4,
+              "text_sha256": "cdd14008fdb062a6bd7903987eb73002d7e669e18f238643a63b0a22f925253b",
+              "exact_fixture_substring": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "raw_call_index": 3,
+      "case": "host-guide",
+      "question": "What does the host guide say about the agenda link?",
+      "sources": [
+        {
+          "title": "Host guide",
+          "meeting_date": null,
+          "fixture": "tests/fixtures/meetings/public/jupyter-host-guide.md",
+          "passages": [
+            {
+              "id": 0,
+              "text_sha256": "624acf6a782d05192cede2cdc9a3a7e59a8336f8202ba173aebd78c34231b7be",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 1,
+              "text_sha256": "86f70beffdd609cf911ce8abf4260917166299795839e8db5c504cc0c5e682f0",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 2,
+              "text_sha256": "942b7b199632e943084e7e9924240366feff1871720addd71df5fe7b7ba50eb0",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 3,
+              "text_sha256": "cdd14008fdb062a6bd7903987eb73002d7e669e18f238643a63b0a22f925253b",
+              "exact_fixture_substring": true
+            },
+            {
+              "id": 4,
+              "text_sha256": "bb9127d4068fa193bad649229bd6f0ef0d5d282116a60c33646407aa79a2e8a2",
+              "exact_fixture_substring": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "raw_call_index": 4,
+      "case": "korean-mixed-full-docs",
+      "question": "로그 보관 기간은 언제 어떻게 변경됐고 원문 질문을 운영 로그에 남겨도 되나요?",
+      "sources": [
+        {
+          "title": "synthetic-release-planning.md",
+          "meeting_date": "2026-10-01",
+          "fixture": "tests/fixtures/meetings/synthetic-release-planning.md",
+          "passages": [
+            {
+              "id": 0,
+              "text_sha256": "606678b791ad6b3e1dde1e1bb0189cf064d8152cbb6ccba405663d36500e5138",
+              "exact_fixture_substring": true
+            }
+          ]
+        },
+        {
+          "title": "synthetic-release-followup.md",
+          "meeting_date": "2026-10-08",
+          "fixture": "tests/fixtures/meetings/synthetic-release-followup.md",
+          "passages": [
+            {
+              "id": 1,
+              "text_sha256": "0f2e3bf13e65c8a6593b257dda36aed94873d0fdf4a9697380d87325e12c398a",
+              "exact_fixture_substring": true
+            }
+          ]
+        },
+        {
+          "title": "synthetic-runbook.md",
+          "meeting_date": null,
+          "fixture": "tests/fixtures/meetings/synthetic-runbook.md",
+          "passages": [
+            {
+              "id": 2,
+              "text_sha256": "1e95de236f46967b54c8cef312fc305f206f5698ba9d38c288ee37c9b3582d4c",
+              "exact_fixture_substring": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "analysis_review": {
+    "case": "unassigned-action-analysis",
+    "raw_call_index": 0,
+    "fixture": "tests/fixtures/meetings/synthetic-release-planning.md",
+    "assessment": "reject_task_and_topic_classification",
+    "metadata": "Title, date, participants and purpose are supported.",
+    "summary": "All four extracted lines are source-supported; the extract omits the unassigned task, rejected proposal and release-quality unresolved item. It is not a comprehensive summary.",
+    "item_reviews": [
+      {
+        "item_index": 0,
+        "quote": "논의: 검색 결과에는 문서 제목과 원문 근거를 함께 표시한다.",
+        "start_offset": 88,
+        "end_offset": 122,
+        "returned_type": "unresolved",
+        "expected_type": "topic",
+        "classification_correct": false,
+        "text_fact_supported": true,
+        "explanation": "The sentence states a discussion point and contains no unresolved problem. The unresolved label is unsupported."
+      },
+      {
+        "item_index": 1,
+        "quote": "제안: 준호는 로그 보관 기간을 90일로 늘리자고 제안했다. 이 제안은 승인하지 않았다.",
+        "start_offset": 123,
+        "end_offset": 172,
+        "returned_type": "proposal",
+        "expected_type": "proposal",
+        "classification_correct": true,
+        "text_fact_supported": true,
+        "explanation": "The 90-day suggestion was not approved, so proposal is appropriate."
+      },
+      {
+        "item_index": 2,
+        "quote": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.",
+        "start_offset": 173,
+        "end_offset": 203,
+        "returned_type": "decision",
+        "expected_type": "decision",
+        "classification_correct": true,
+        "text_fact_supported": true,
+        "explanation": "The 30-day policy is explicitly finalized; decision type is correct while status remains needs_confirmation."
+      },
+      {
+        "item_index": 3,
+        "quote": "결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.",
+        "start_offset": 204,
+        "end_offset": 233,
+        "returned_type": "decision",
+        "expected_type": "decision",
+        "classification_correct": true,
+        "text_fact_supported": true,
+        "explanation": "The access-check condition for publication is explicitly a decision; status remains needs_confirmation."
+      },
+      {
+        "item_index": 4,
+        "quote": "작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.",
+        "start_offset": 234,
+        "end_offset": 281,
+        "returned_type": "action",
+        "expected_type": "action",
+        "classification_correct": true,
+        "text_fact_supported": true,
+        "explanation": "The explicit Minji assignment, 2026-10-05 deadline and high priority are supported."
+      },
+      {
+        "item_index": 5,
+        "quote": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+        "start_offset": 282,
+        "end_offset": 322,
+        "returned_type": "unresolved",
+        "expected_type": "action",
+        "classification_correct": false,
+        "text_fact_supported": true,
+        "explanation": "The work to check the evidence screen is explicit. Unknown assignee/deadline must remain null action fields, not remove the task from actions."
+      },
+      {
+        "item_index": 6,
+        "quote": "미결: 검색 품질의 출시 기준은 다음 회의에서 결정한다.",
+        "start_offset": 323,
+        "end_offset": 354,
+        "returned_type": "unresolved",
+        "expected_type": "unresolved",
+        "classification_correct": true,
+        "text_fact_supported": true,
+        "explanation": "The release-quality criterion is left for a later meeting, so unresolved is appropriate."
+      }
+    ],
+    "explicit_action_recall_in_this_fixture": {
+      "expected": 2,
+      "returned": 1
+    },
+    "classifier_label_scores": "High conditional label scores are not calibrated correctness probabilities; both incorrect unresolved labels have near-one scores.",
+    "provenance": "Blank item IDs are the worker contract before Java assignment, not a semantic failure."
+  },
+  "answer_reviews": [
+    {
+      "case": "cross-public",
+      "raw_call_index": 1,
+      "assessment": "reject",
+      "claims": [
+        {
+          "claim_index": 0,
+          "text": "JupyterLab 4.4 beta was released in June 2025.",
+          "selected_passage_ids": [
+            3
+          ],
+          "returned_citation_chunk_ids": [
+            "a0e73dd03ff84abab42d500ce960bd04"
+          ],
+          "support_by_selected_evidence": false,
+          "correctness_against_all_supplied_contexts": "incorrect_temporal_and_completion_attribution",
+          "explanation": "Passage 3 belongs to the February 19 meeting and says beta will be released today. It does not establish a completed beta release in June. June passage 4 says JupyterLab 4.4 is out, without the beta assertion.",
+          "supporting_passage_ids_if_repaired": []
+        },
+        {
+          "claim_index": 1,
+          "text": "JupyterLab 4.4 beta was announced in June 2025.",
+          "selected_passage_ids": [
+            3
+          ],
+          "returned_citation_chunk_ids": [
+            "a0e73dd03ff84abab42d500ce960bd04"
+          ],
+          "support_by_selected_evidence": false,
+          "correctness_against_all_supplied_contexts": "incorrect_month_attribution",
+          "explanation": "The cited beta announcement is in February passage 3, not June. June passage 4 supports already-available JupyterLab 4.4, not a June beta announcement.",
+          "supporting_passage_ids_if_repaired": []
+        }
+      ],
+      "completeness": "fails_to_compare_february_and_june",
+      "missing_components": [
+        "February beta planned for release that day and demo agenda item.",
+        "June JupyterLab 4.4 already available."
+      ],
+      "corrected_source_interpretation": "The February notes announce an intended same-day beta release and list a demo. The June notes say JupyterLab 4.4 is out. Planned release is not independent proof of completion."
+    },
+    {
+      "case": "missing-budget",
+      "raw_call_index": 2,
+      "assessment": "appropriate_abstention",
+      "claims": [],
+      "correctness_against_supplied_contexts": "No catering budget appears in the supplied host-guide passages. Abstention is appropriate.",
+      "completeness": "appropriate_to_unanswerable_question",
+      "model_abstention": true
+    },
+    {
+      "case": "host-guide",
+      "raw_call_index": 3,
+      "assessment": "reject_due_to_citation_failures",
+      "claims": [
+        {
+          "claim_index": 0,
+          "text": "The agenda link should be included in the event’s description in the shared Google Calendar.",
+          "selected_passage_ids": [
+            0
+          ],
+          "returned_citation_chunk_ids": [
+            "af0fa2723026411c86e790b38cbf139c"
+          ],
+          "support_by_selected_evidence": false,
+          "correctness_against_all_supplied_contexts": "correct_fact_wrong_citation",
+          "explanation": "Calendar inclusion is stated in passage 1. Selected passage 0 covers conduct, discussion and the opening script; it does not state the calendar requirement.",
+          "supporting_passage_ids_if_repaired": [
+            1
+          ]
+        },
+        {
+          "claim_index": 1,
+          "text": "The agenda link should be added to the chat during the meeting.",
+          "selected_passage_ids": [
+            3
+          ],
+          "returned_citation_chunk_ids": [
+            "fd828c0d8c29464d8d10bdd62dc2cca9"
+          ],
+          "support_by_selected_evidence": true,
+          "correctness_against_all_supplied_contexts": "correct",
+          "explanation": "Passage 3 explicitly says to share the agenda link in the chat.",
+          "supporting_passage_ids_if_repaired": [
+            3
+          ]
+        },
+        {
+          "claim_index": 2,
+          "text": "The agenda is a collaboratively created document made by the participants.",
+          "selected_passage_ids": [
+            2
+          ],
+          "returned_citation_chunk_ids": [
+            "235750829b244d6486d767bcb7ff32b9"
+          ],
+          "support_by_selected_evidence": false,
+          "correctness_against_all_supplied_contexts": "correct_fact_wrong_citation",
+          "explanation": "Collaborative agenda creation is stated in passage 4, not the selected closing-script passage 2.",
+          "supporting_passage_ids_if_repaired": [
+            4
+          ]
+        },
+        {
+          "claim_index": 3,
+          "text": "The agenda should be used as meeting minutes.",
+          "selected_passage_ids": [
+            2
+          ],
+          "returned_citation_chunk_ids": [
+            "235750829b244d6486d767bcb7ff32b9"
+          ],
+          "support_by_selected_evidence": false,
+          "correctness_against_all_supplied_contexts": "correct_fact_wrong_citation",
+          "explanation": "Use as meeting minutes is stated in passage 4, not selected passage 2.",
+          "supporting_passage_ids_if_repaired": [
+            4
+          ]
+        }
+      ],
+      "completeness": "core_calendar_and_chat_instructions_present_but_three_of_four_claims_are_miscited",
+      "note": "Correct facts elsewhere in the prompt do not repair incorrect returned citations."
+    },
+    {
+      "case": "korean-mixed-full-docs",
+      "raw_call_index": 4,
+      "assessment": "reject_citation_and_completeness",
+      "claims": [
+        {
+          "claim_index": 0,
+          "text": "The retention period for search logs was changed from 30 days to 7 days.",
+          "selected_passage_ids": [
+            0
+          ],
+          "returned_citation_chunk_ids": [
+            "synthetic-release-planning.md-full"
+          ],
+          "support_by_selected_evidence": false,
+          "correctness_against_all_supplied_contexts": "correct_fact_wrong_citation",
+          "explanation": "The initial planning document, passage 0, confirms 30 days and contains no seven-day change. Follow-up passage 1 explicitly replaces 30 days with seven days.",
+          "supporting_passage_ids_if_repaired": [
+            1
+          ]
+        },
+        {
+          "claim_index": 1,
+          "text": "Log deletion should be verified by checking the scheduled deletion job and retained timestamp range.",
+          "selected_passage_ids": [
+            2
+          ],
+          "returned_citation_chunk_ids": [
+            "synthetic-runbook.md-full"
+          ],
+          "support_by_selected_evidence": true,
+          "correctness_against_all_supplied_contexts": "correct_but_not_the_asked_logging_rule",
+          "explanation": "Runbook passage 2 states how to verify deletion. This is supported but does not answer whether raw questions may be logged.",
+          "supporting_passage_ids_if_repaired": [
+            2
+          ]
+        }
+      ],
+      "completeness": "incomplete",
+      "missing_components": [
+        "The original decision date 2026-10-01 and change date 2026-10-08.",
+        "Raw question text and document text must not be written to operational logs."
+      ],
+      "language": "English response to a Korean question despite the question-language instruction.",
+      "full_relevant_context_was_supplied": true,
+      "note": "Both complete synthetic meetings and the complete English runbook are in the actual prompt, including the missing prohibition. This inspection does not blame source retrieval for the omitted content."
+    }
+  ],
+  "aggregate_observations": {
+    "claim_support_by_returned_citation": {
+      "supported": 2,
+      "unsupported": 6,
+      "total": 8
+    },
+    "incorrect_temporal_claims": 2,
+    "globally_supported_facts_with_wrong_citations": 4,
+    "appropriate_model_abstentions": 1,
+    "analysis_item_type_errors": 2,
+    "task_omissions_from_action_category": 1
+  },
+  "overall": {
+    "semantic_acceptance": false,
+    "supported_quote_does_not_mean_supported_claim": true,
+    "recommendation": "Preserve this failed candidate. Three answered cases are not acceptable: public comparison misattributes time/status, host-guide facts use wrong citations, and mixed-language synthesis cites the wrong decision and omits required components. One missing-budget abstention is appropriate; task classification remains incomplete.",
+    "human_review_count": 0
+  }
+}

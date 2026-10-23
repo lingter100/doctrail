@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "source_processing_freeze_before_synthetic_bodies_and_question_authorship",
+  "created_at": "2026-10-14T01:23:14.179789+00:00",
+  "source_parent_commit": "a5cd9d524b92cb79b5e1aaccffdb6d7ca78e02e9",
+  "bound_files": {
+    "scripts/prepare_meeting_source_inventory.py": "65d095bf89d918b5fcde1c274d6999d7f791eae26c58c6fe8bdc916b29c80079",
+    "tests/test_prepare_meeting_source_inventory.py": "aee7c90628cbc13cf5a8536257f11f460bf985e887058b32004ad9943b226634",
+    "server/src/test/java/io/doctrail/MeetingSourceParityTest.java": "04e3371b13c2a8b0c577975fb589a6c9a1999012cc434ab1cf6f3851c093f23f",
+    "docs/MEETINGS-C2-SOURCE-PROCESSING.md": "2083d15bc70318b113c8804dacfb80ca70bb0039d428bbec9938b30283405ebb",
+    "docs/MEETINGS-C2-CALIBRATION-SOURCES.md": "6827c1df9b592cf4bd168a0dd3976c0283b2e6547e2b6cc4ded3937cb39ee4b5",
+    "data/evaluation/meetings-c2-calibration-v1/source-manifest.json": "cf35a68534eba12602996b67423bcadbc3dff409d58bd724a48178f4d4b516a6",
+    "data/evaluation/meetings-c2-comparison-source-freeze-v2.json": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+    "experiments/results/meetings-c2-source-inventory-calibration-v1.json": "e4c63f34847273b965ed8d791535f88bf57d9b853d0e3bf7062e0a46f1702c3a",
+    "experiments/results/meetings-c2-source-parity-calibration-v1.json": "92fb6dc832f0354b2c562a0a0e5613255aa40534d81edda099b0d8a5dabc25ec",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56"
+  },
+  "actual_public_documents": 2,
+  "actual_java_python_equal_chunks": 49,
+  "synthetic_evaluation_bodies_authored": 0,
+  "questions_authored": 0,
+  "oracles_authored": 0,
+  "selected_contexts": 0,
+  "tokenizer_runs": 0,
+  "model_calls": 0,
+  "human_reviews": 0,
+  "semantic_quality_measured": false,
+  "active_comparison_source_freeze": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+  "policy_source41_changed": false
+}

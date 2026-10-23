@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "candidate_synthetic_code_verification",
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "recorded_at_utc": "2026-10-14T05:14:11.289689+00:00",
+  "basis_commit": "748947c3e73e40a2e8d975aea4aaa4db39879528",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c3-candidate-source-freeze-v1.json",
+    "sha256": "6ce55cb17d264f8da7c587c685947da8d95ff1199ef65f7f34de7d1a275798c6",
+    "bindings": 28
+  },
+  "commands": [
+    "uv run --locked --no-sync ruff check src tests scripts",
+    "uv run --locked --no-sync pytest -q",
+    "uv run --locked --no-sync pytest -q tests/test_probe_meeting_answer_spans.py"
+  ],
+  "initial_full_suite": {
+    "passed": 1941,
+    "failed": 1,
+    "skipped": 6,
+    "warnings": 1,
+    "elapsed_seconds": 214.37,
+    "failure_test": "tests/test_probe_meeting_answer_spans.py::test_failure_is_recorded_without_retry_and_other_cases_continue",
+    "recorded_failure": "PermissionError",
+    "failure_callsite_known": false,
+    "native_inference_calls": 0,
+    "plan_sources_inputs_unchanged_post_failure": true,
+    "old_frozen_code_changed": false,
+    "raw_report": {
+      "file": "experiments/results/meetings-c3-implementation-v1/initial-failure-report.json",
+      "sha256": "2e2dc45e66d85b0cc8baad7c21cde85d95b6c00c5978184657c634d25d85d7d4"
+    },
+    "log": {
+      "file": ".local/c3-initial-python-tests-v1.log",
+      "sha256": "c5fd5cdc7730d1dccd2e388c3ce781987c568e247c3e3cf801410177d4861d55"
+    }
+  },
+  "old_runner_targeted_recheck": {
+    "passed": 40,
+    "elapsed_seconds": 4.05,
+    "log": {
+      "file": ".local/c3-old-runner-targeted-recheck-v1.log",
+      "sha256": "a861cb2050e6c640ee5f171e8280182d63d7ee0ddaecba52b3991ddbc846fc92"
+    }
+  },
+  "final_full_suite": {
+    "passed": 1943,
+    "failed": 0,
+    "skipped": 6,
+    "warnings": 1,
+    "elapsed_seconds": 154.34,
+    "log": {
+      "file": ".local/c3-final-python-tests-v1.log",
+      "sha256": "cab4d96d8b693936b6329956577e35334632766b8b6b12f70f0dc06fce294e53"
+    }
+  },
+  "candidate_targeted": {
+    "passed": 101,
+    "reported_by": "requirements_candidate",
+    "elapsed_seconds": 0.61,
+    "scope": "synthetic objects and HTTP MockTransport, no tokenizer or native calls"
+  },
+  "ruff": "passed",
+  "independent_review": {
+    "role": "knowledge_recovery_review",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "initial_actionable_findings": 1,
+    "finding": "previous-request grammar/template metadata leaked into next request identity",
+    "resolution": "capture resource identity after per-request reset; add sequential empty-request regression",
+    "followup_actionable_findings": 0,
+    "review_only": true
+  },
+  "implementation": {
+    "role": "requirements_candidate",
+    "model": "gpt-6-astra",
+    "effort": "high"
+  },
+  "old_freeze_verification": [
+    {
+      "file": "data/evaluation/meetings-c2-input-budget-source-freeze-v1.json",
+      "sha256": "fe8307dfef4e0d4933dd5f894918303980e291a0b7f2a518a71a7e9484b61a99",
+      "bindings": 72,
+      "unchanged": true
+    },
+    {
+      "file": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+      "bindings": 41,
+      "unchanged": true
+    },
+    {
+      "file": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+      "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+      "bindings": 18,
+      "unchanged": true
+    }
+  ],
+  "new_native_calls": 0,
+  "new_tokenizer_calls": 0,
+  "human_review_count": 0,
+  "paid_calls": 0,
+  "service_adopted": false,
+  "phase1_completed": false,
+  "remote_ci": "pending_for_candidate_commit",
+  "limitations": [
+    "Synthetic tests do not establish model answer quality.",
+    "The original Windows PermissionError callsite and cause are unconfirmed; it was not erased or retroactively passed.",
+    "Execution/review tooling and fresh data remain pending; candidate freeze alone does not authorize inference."
+  ]
+}

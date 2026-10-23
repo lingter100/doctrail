@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "registered_at": "2026-10-20T03:14:12.342725+00:00",
+  "judges": [
+    {
+      "phase": "calibration",
+      "reviewer_id": "/root/c6_calibration_final_judge",
+      "accepted": true,
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted_at": "2026-10-20T03:10:29.989799+00:00",
+      "settings_provenance": "Parent explicitly supplied and collaboration.spawn_agent accepted model/effort/fork arguments and canonical role. Not runtime introspection.",
+      "seed": {
+        "file": "data/evaluation/meetings-c6-review-metadata-v1/calibration/seed.bin",
+        "sha256": "4daa12a537af8b63135212d7499d7f26392bf6fb476fdca519d1a4384c206aa0"
+      },
+      "attestation": {
+        "file": "data/evaluation/meetings-c6-review-metadata-v1/calibration/attestation.json",
+        "sha256": "ac71723a502e167e249861edf7d4b01bd632585cfea80fe86fb1149b409508d3"
+      },
+      "seed_bytes": 64,
+      "exposure_label": "metadata-exposed, label-masked",
+      "local_acceptance": {
+        "file": ".local/c6-calibration-final-judge-v1/acceptance.json",
+        "sha256": "f39a3487acfc3d7a4daf3bd24a65a935a7ae65688a97b8ea0317d34f37045b2e"
+      },
+      "judgments_at_registration": 0,
+      "human_review_count": 0
+    },
+    {
+      "phase": "validation",
+      "reviewer_id": "/root/c6_validation_final_judge",
+      "accepted": true,
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "accepted_at": "2026-10-20T03:13:37.459148+00:00",
+      "settings_provenance": "Parent explicitly supplied and collaboration.spawn_agent accepted model/effort/fork arguments and canonical role. Not runtime introspection.",
+      "seed": {
+        "file": "data/evaluation/meetings-c6-review-metadata-v1/validation/seed.bin",
+        "sha256": "b147d65dd12a459052fa9485c09bfbc9773973f4fbcb731c24522822ff4af5ee"
+      },
+      "attestation": {
+        "file": "data/evaluation/meetings-c6-review-metadata-v1/validation/attestation.json",
+        "sha256": "bbdd331a6077607c161a11ed175950f5346dd54ee7780b94b7d716e081b4bb4c"
+      },
+      "seed_bytes": 64,
+      "exposure_label": "metadata-exposed, label-masked",
+      "local_acceptance": {
+        "file": ".local/c6-validation-final-judge-v1/acceptance.json",
+        "sha256": "e7681b2b3823a96a22926e43aca7098bae70c380efb2ce6f2b53d494f0eef9bb"
+      },
+      "judgments_at_registration": 0,
+      "human_review_count": 0
+    }
+  ],
+  "excluded_roles": [
+    "/root",
+    "/root/bounded_thinking_transport",
+    "/root/c2_comparison_runner",
+    "/root/c5_persistence_recovery",
+    "/root/c5_persistence_review",
+    "/root/c6_calibration_author",
+    "/root/c6_calibration_prereviewer",
+    "/root/c6_validation_author",
+    "/root/c6_validation_prereviewer",
+    "/root/free_qa_candidate_review",
+    "/root/host_proof_profile",
+    "/root/knowledge_recovery_review",
+    "/root/meeting_navigation_audit",
+    "/root/requirements_candidate"
+  ],
+  "gate": "Registration only. No semantic pack until separate explicit dispatch after actual output; original calibration6/6 plus full integrity is required before validation. Lock judgments before mapping.",
+  "scope": "Both roles are new and independent of C6 design, implementation, source/item authorship and prereview. Automatic workflow/model/historical aggregate metadata exposure is disclosed. No pristine blindness claim.",
+  "attestation_check": "Schema, flags, roles and registration timestamp validated against current UTC only; no actual pack opened and no judgment performed."
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "status": "finite_current_declared_source_metadata_direct_separation_confirmed_admission_not_decided",
+  "purpose": "Current protected source separation, not historical no-exposure proof or model-quality evaluation.",
+  "decision": {
+    "finite_current_metadata_audit_complete": true,
+    "new4_direct_matches_in_reviewed_known_source_metadata": 0,
+    "declared_retrieval_test_source_superset_separation_confirmed": true,
+    "known_explicit_validation_source_direct_matches": 0,
+    "original_L2_changed": false,
+    "original_admission_withheld_changed": false,
+    "new_source_admitted": false,
+    "source_frozen": false,
+    "criteria_created": 0,
+    "actual_run_authorized": false
+  },
+  "counts": {
+    "metadata_files": 32,
+    "whole_retrieval_corpus_documents": 313,
+    "whole_retrieval_families": 212,
+    "declared_test_subset_documents": 66,
+    "declared_test_subset_families": 51,
+    "validation_assignment_rows": 50,
+    "validation_distinct_identities": 40,
+    "c7_calibration_candidates": 6,
+    "new_documents": 4,
+    "observed_direct_matches": 0
+  },
+  "test_superset_witness": "The same exact kubernetes-v1 source manifest enumerates all313 documents and marks66 as test sources. All313 were compared; no test question or answer was opened.",
+  "reservations": "Reserved validation families are not treated as assigned sources. Early null/not_created flags are not a current nonexistence proof. Exact3 declared absent paths remain a limited observation.",
+  "limits": {
+    "new4_document_count": 4,
+    "new4_matches": [
+      {
+        "new_id": "summary-mode-source-01",
+        "identity_matches": [],
+        "URL_matches": [],
+        "raw_fullUTF8_NFC_recorded_normalized_hash_matches": []
+      },
+      {
+        "new_id": "summary-mode-source-02",
+        "identity_matches": [],
+        "URL_matches": [],
+        "raw_fullUTF8_NFC_recorded_normalized_hash_matches": []
+      },
+      {
+        "new_id": "summary-mode-source-03",
+        "identity_matches": [],
+        "URL_matches": [],
+        "raw_fullUTF8_NFC_recorded_normalized_hash_matches": []
+      },
+      {
+        "new_id": "summary-mode-source-04",
+        "identity_matches": [],
+        "URL_matches": [],
+        "raw_fullUTF8_NFC_recorded_normalized_hash_matches": []
+      }
+    ],
+    "source_family_result": "No explicit source/document/family identity collision was observed. Registered publisher/repository URLs are compared as metadata; no family identity is inferred solely from an organization name, title or topic.",
+    "normalization": "Kubernetes uses recorded normalizer_version hugo-strict-v1; new4 uses the prior locked C7 NFC/LF/whitespace method. Recorded hash equality was checked, but unequal hashes from different normalization methods are not a proof of semantic or translation absence.",
+    "collection_dates": "Kubernetes pilot/v1 collected_at is 2026-10-12. The new4 v2 manifest was created on 2026-10-23 and records meeting dates 2005-02-07, 2005-02-15, 2005-03-30, 2005-05-16. Creation and meeting dates are not collection dates; they were not substituted or used alone to prove separation.",
+    "historical_L2": "Unresolved historical run/input lineage remains exactly as locked. This finite current-protected-source audit neither resolves L2 nor demands complete reconstruction of every historical development input."
+  },
+  "bindings": [
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/current-split-review-v1/superset-delta-v1/safe-superset-delta-v1.json",
+      "bytes": 12929,
+      "sha256": "fcdbd4121b56edd81e52512086363995121ba1247559267272e63691f6509ee6"
+    },
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/current-split-review-v1/superset-delta-v1/superset-delta-lock-v1.json",
+      "bytes": 72165,
+      "sha256": "588783abdbbc95fe66b42a1d81e4bdeec92937de2b161794fcc30f26d11b88f0"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/current-split-verification-v1.json",
+      "bytes": 39547,
+      "sha256": "10171fa7dfae14b45289c563dd52cf84bc4130d28f329bf7f5271ecfbb6b1c01"
+    }
+  ],
+  "human_review": 0,
+  "new_model_runs": 0,
+  "phase1_complete": false
+}

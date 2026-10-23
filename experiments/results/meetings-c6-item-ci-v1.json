@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "head_sha": "769d2cca9e0524cb77f4713f4d0b59dadd9dfae9",
+  "observed_at": "2026-10-20T03:48:54.631886+00:00",
+  "observer": "/root using actual gh run view and gh api",
+  "github_author": "lingter100",
+  "github_committer": "lingter100",
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 39365780168,
+      "event": "push",
+      "headSha": "769d2cca9e0524cb77f4713f4d0b59dadd9dfae9",
+      "jobs": [
+        {
+          "databaseId": 118442179320,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39365780168/job/118442179320",
+          "startedAt": "2026-10-20T03:43:28Z",
+          "completedAt": "2026-10-20T03:43:41Z"
+        },
+        {
+          "databaseId": 118442179587,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39365780168/job/118442179587",
+          "startedAt": "2026-10-20T03:43:28Z",
+          "completedAt": "2026-10-20T03:47:43Z"
+        },
+        {
+          "databaseId": 118442179638,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39365780168/job/118442179638",
+          "startedAt": "2026-10-20T03:43:28Z",
+          "completedAt": "2026-10-20T03:47:06Z"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39365780168"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 39365785254,
+      "event": "pull_request",
+      "headSha": "769d2cca9e0524cb77f4713f4d0b59dadd9dfae9",
+      "jobs": [
+        {
+          "databaseId": 118442197356,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39365785254/job/118442197356",
+          "startedAt": "2026-10-20T03:43:32Z",
+          "completedAt": "2026-10-20T03:43:47Z"
+        },
+        {
+          "databaseId": 118442197447,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39365785254/job/118442197447",
+          "startedAt": "2026-10-20T03:43:32Z",
+          "completedAt": "2026-10-20T03:47:36Z"
+        },
+        {
+          "databaseId": 118442197840,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39365785254/job/118442197840",
+          "startedAt": "2026-10-20T03:43:32Z",
+          "completedAt": "2026-10-20T03:48:00Z"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39365785254"
+    }
+  ],
+  "committed_files_verified": 23,
+  "committed_material_proofs": {
+    "calibration": {
+      "file": ".local/meetings-c6-calibration-item-v2/committed-material-proof-v1.json",
+      "sha256": "ca72cdb11514da9320f88f381f925b104026fd08eda06ed0280fe586aba541b3",
+      "full_material_contract": "passed",
+      "code_count": 77,
+      "source_count": 14,
+      "item_count": 6,
+      "git_revision_path_pairs": 212,
+      "snapshots": 119
+    },
+    "validation": {
+      "file": ".local/meetings-c6-validation-item-v2/committed-material-proof-v1.json",
+      "sha256": "dc7e9c1cfb381b2260fba82dd40de65d3dfbff463b6068f24880ca35de99cf5a",
+      "full_material_contract": "passed",
+      "code_count": 77,
+      "source_count": 15,
+      "item_count": 6,
+      "git_revision_path_pairs": 195,
+      "snapshots": 101,
+      "measurement_correction": {
+        "file": ".local/meetings-c6-validation-item-v2/committed-material-proof-measurement-note-v1.json",
+        "sha256": "7e5a3d00364306923afccb77cb38149299c3cde48feabbb2d0c7cbaa36cb2249",
+        "actual_git_subprocess_count": null,
+        "reason": "Auxiliary observer missed Windows string-form argv. Real default GitProof 195 revision/path pairs passed. Original receipt preserved; no proof rerun."
+      }
+    }
+  },
+  "scope": "Accepted v2 item/source contract and required CI only; no tokenizer/native, answer quality or human review claim. Original semantic rejections remain preserved.",
+  "next": "Each isolated custodian performs official offline preparation once with accepted committed v2; then bind both inputs and registered judges in an execution plan committed before calibration native run."
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "kind": "independent_service_rag_source_review_safe_summary",
+  "version": 2,
+  "split": "calibration",
+  "source_attempt": 2,
+  "status": "accepted_source_only_with_declared_freshness_limits",
+  "source_acceptance": true,
+  "source_freeze": true,
+  "counts": {
+    "independent_source_reviews": 1,
+    "public_documents": 3,
+    "new_synthetic_documents": 3,
+    "meeting_documents": 4,
+    "general_documents": 2,
+    "accepted_documents": 6,
+    "rejected_documents": 0,
+    "blocking_findings": 0,
+    "requested_source_edits": 0,
+    "whole_originals_checked": 6,
+    "processed_documents_checked": 6,
+    "chunks_checked": 32,
+    "saved_upload_responses_checked": 6,
+    "saved_readback_responses_checked": 6,
+    "preserved_database_files_checked": 2,
+    "stable_original_bindings_checked": 57,
+    "stable_original_mismatches": 0,
+    "freeze_file_bindings": 64,
+    "historical_metadata_rows": 110,
+    "historical_coverage_gaps": 3,
+    "historical_raw_nonempty_rows": 83,
+    "historical_normalized_rows": 42,
+    "historical_nonempty_long_paragraph_rows": 38,
+    "fingerprint_or_identity_matches": 0,
+    "original_missing_ephemeral_sidecars": 2,
+    "recreated_sidecars": 0,
+    "reviewer_new_files": 4,
+    "reviewer_network_requests": 0,
+    "reviewer_java_runs": 0,
+    "reviewer_sqlite_readonly_connections": 4,
+    "reviewer_model_calls": 0,
+    "reviewer_tokenizer_calls": 0,
+    "reviewer_native_calls": 0,
+    "reviewer_git_commands": 0,
+    "reviewer_source_edits": 0,
+    "reviewer_setup_failures_preserved": 2,
+    "questions": 0,
+    "oracles": 0,
+    "human_reviews": 0
+  },
+  "statuses": {
+    "license_provenance": "accepted_scoped_repository_evidence",
+    "whole_original_processing_chunk_parity": "passed",
+    "saved_ordinary_document_java_ingestion_evidence": "passed",
+    "current_corpus_semantic_review": "accepted",
+    "historical_freshness": "metadata_only_with_declared_gaps",
+    "complete_semantic_or_translation_nonduplication": "not_proven",
+    "meeting_autoanalysis": "unexecuted",
+    "retrieval": "unexecuted",
+    "items": "unexecuted",
+    "native_runtime": "unexecuted",
+    "model_quality": "unexecuted",
+    "human_acceptance": "unexecuted",
+    "phase1": "incomplete",
+    "runtime_model_self_verification": "unavailable"
+  },
+  "bindings": {
+    "registration": {
+      "path": "data/evaluation/meetings-service-rag-source-followup-registration-v2.json",
+      "bytes": 6783,
+      "sha256": "d092833cab4ddf6c3c92c4bb069dc5813c178268ce8936f78a32241f228c852a"
+    },
+    "stable_artifact_index": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v3.json",
+      "bytes": 15942,
+      "sha256": "801d902f1317bd037f5074c5b43b952d4a6d4f0fa5dc6d5d20d8a0942c9f830d"
+    },
+    "review": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-review-v2.json",
+      "bytes": 10839,
+      "sha256": "0fa19d9d15573bfa730d13dfafb6edee8d3e33fd0a2a81b45bf2d6e54654b3b5"
+    },
+    "semantic_notes_hash_only": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-review-notes-v2.md",
+      "bytes": 14269,
+      "sha256": "7c9ccd673145cb293c8fb7568bea28501a42adb58d8d9118f6cadb0d146ffb94"
+    },
+    "conditional_source_freeze": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-freeze-v2.json",
+      "bytes": 35103,
+      "sha256": "423316335a89a55eb3fa052f66dd7b34fb2062072a849f02c97a9134c27799bc"
+    }
+  },
+  "self_binding_included": false
+}

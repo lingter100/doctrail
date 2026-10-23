@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-performance-v3",
+  "scope": "Consumed local development observation only. No quality judgment, self-review verdict, diagnosis, cause inference, retokenization, replay or new execution. Format follows prior v2 token-budget metadata, extended to classification and alignment.",
+  "source_commit": "f3eabc2d45457b69b85c89fc3a68acb38566a8c3",
+  "execution_head": "41389471aeee1dd174cfd9a1f26dfb635b56edbd",
+  "counts": {
+    "analyze_request_count": 3,
+    "answer_operation_count": 0,
+    "completion_count": 25,
+    "summary_completion_count": 9,
+    "eos_stop_type_count": 25
+  },
+  "by_stage": {
+    "classification": {
+      "call_count": 16,
+      "request_input_tokens": {
+        "available_count": 16,
+        "missing_count": 0,
+        "total": 19781,
+        "min": 1092,
+        "max": 1292,
+        "mean": 1236.3125
+      },
+      "response_tokens_evaluated": {
+        "available_count": 16,
+        "missing_count": 0,
+        "total": 19781,
+        "min": 1092,
+        "max": 1292,
+        "mean": 1236.3125
+      },
+      "output_tokens_predicted": {
+        "available_count": 16,
+        "missing_count": 0,
+        "total": 597,
+        "min": 7,
+        "max": 43,
+        "mean": 37.3125
+      },
+      "native_prompt_ms": {
+        "available_count": 16,
+        "missing_count": 0,
+        "total": 36333.99800000001,
+        "min": 1955.398,
+        "max": 2528.088,
+        "mean": 2270.874875
+      },
+      "native_predicted_ms": {
+        "available_count": 16,
+        "missing_count": 0,
+        "total": 35311.757999999994,
+        "min": 379.295,
+        "max": 3128.937,
+        "mean": 2206.984875
+      },
+      "transport_observer_elapsed_seconds": {
+        "available_count": 16,
+        "missing_count": 0,
+        "total": 73.64099999998871,
+        "min": 2.422000000005937,
+        "max": 5.875,
+        "mean": 4.602562499999294
+      },
+      "adapter_elapsed_seconds": {
+        "available_count": 0,
+        "missing_count": 16,
+        "total": null,
+        "min": null,
+        "max": null,
+        "mean": null
+      },
+      "stop_type_counts": {
+        "eos": 16
+      },
+      "native_total_elapsed_available_count": 0
+    },
+    "generation": {
+      "call_count": 3,
+      "request_input_tokens": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 6929,
+        "min": 2199,
+        "max": 2486,
+        "mean": 2309.6666666666665
+      },
+      "response_tokens_evaluated": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 6929,
+        "min": 2199,
+        "max": 2486,
+        "mean": 2309.6666666666665
+      },
+      "output_tokens_predicted": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 1181,
+        "min": 359,
+        "max": 421,
+        "mean": 393.6666666666667
+      },
+      "native_prompt_ms": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 12054.157,
+        "min": 3848.306,
+        "max": 4269.71,
+        "mean": 4018.0523333333335
+      },
+      "native_predicted_ms": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 71251.59599999999,
+        "min": 21613.591,
+        "max": 27234.495,
+        "mean": 23750.532
+      },
+      "transport_observer_elapsed_seconds": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 83.65599999998813,
+        "min": 25.906999999991967,
+        "max": 31.35899999999674,
+        "mean": 27.885333333329374
+      },
+      "adapter_elapsed_seconds": {
+        "available_count": 2,
+        "missing_count": 1,
+        "total": 52.3119999999908,
+        "min": 25.921999999991385,
+        "max": 26.389999999999418,
+        "mean": 26.1559999999954
+      },
+      "stop_type_counts": {
+        "eos": 3
+      },
+      "native_total_elapsed_available_count": 0
+    },
+    "alignment": {
+      "call_count": 3,
+      "request_input_tokens": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 8959,
+        "min": 2883,
+        "max": 3128,
+        "mean": 2986.3333333333335
+      },
+      "response_tokens_evaluated": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 8959,
+        "min": 2883,
+        "max": 3128,
+        "mean": 2986.3333333333335
+      },
+      "output_tokens_predicted": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 1191,
+        "min": 356,
+        "max": 421,
+        "mean": 397
+      },
+      "native_prompt_ms": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 15623.279999999999,
+        "min": 4698.289,
+        "max": 5618.033,
+        "mean": 5207.76
+      },
+      "native_predicted_ms": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 71892.64600000001,
+        "min": 23053.827,
+        "max": 24489.516,
+        "mean": 23964.215333333334
+      },
+      "transport_observer_elapsed_seconds": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 87.65600000000268,
+        "min": 27.76600000000326,
+        "max": 29.98399999999674,
+        "mean": 29.21866666666756
+      },
+      "adapter_elapsed_seconds": {
+        "available_count": 2,
+        "missing_count": 1,
+        "total": 57.828000000008615,
+        "min": 27.78200000000652,
+        "max": 30.046000000002095,
+        "mean": 28.914000000004307
+      },
+      "stop_type_counts": {
+        "eos": 3
+      },
+      "native_total_elapsed_available_count": 0
+    },
+    "review": {
+      "call_count": 3,
+      "request_input_tokens": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 7943,
+        "min": 2554,
+        "max": 2783,
+        "mean": 2647.6666666666665
+      },
+      "response_tokens_evaluated": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 7943,
+        "min": 2554,
+        "max": 2783,
+        "mean": 2647.6666666666665
+      },
+      "output_tokens_predicted": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 121,
+        "min": 40,
+        "max": 41,
+        "mean": 40.333333333333336
+      },
+      "native_prompt_ms": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 14048.384999999998,
+        "min": 4348.549,
+        "max": 5185.498,
+        "mean": 4682.795
+      },
+      "native_predicted_ms": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 10116.014,
+        "min": 2186.52,
+        "max": 5671.523,
+        "mean": 3372.0046666666667
+      },
+      "transport_observer_elapsed_seconds": {
+        "available_count": 3,
+        "missing_count": 0,
+        "total": 24.89100000001781,
+        "min": 6.76600000000326,
+        "max": 11.172000000005937,
+        "mean": 8.297000000005937
+      },
+      "adapter_elapsed_seconds": {
+        "available_count": 2,
+        "missing_count": 1,
+        "total": 18.17200000002049,
+        "min": 6.969000000011874,
+        "max": 11.203000000008615,
+        "mean": 9.086000000010245
+      },
+      "stop_type_counts": {
+        "eos": 3
+      },
+      "native_total_elapsed_available_count": 0
+    }
+  },
+  "analysis_observer_seconds": {
+    "available_count": 3,
+    "missing_count": 0,
+    "total": 297.5620000000199,
+    "min": 88.25,
+    "max": 107.98400000001129,
+    "mean": 99.18733333333996
+  },
+  "worker_analysis_elapsed_ms": {
+    "available_count": 2,
+    "missing_count": 1,
+    "total": 189562.0,
+    "min": 88234.0,
+    "max": 101328.0,
+    "mean": 94781.0
+  },
+  "runtime_intervals": {
+    "startup": {
+      "elapsed_seconds": 59.03100000000268,
+      "scope": "Runner monotonic start to services ready. Includes pinned checks/import/launch; independent of CLI wrapper entry. Startup acceptance check is not hard preemption.",
+      "reference": {
+        "path": ".local/service-rag-batch-development-v1/run-grounded-summary-v3/development-summary.json",
+        "bytes": 1574,
+        "sha256": "5698f07a3ce944a84aa83b347a80d18529ba46a4e8f6ec8b9f7c73f9605c1fdc"
+      },
+      "field": "startup_seconds"
+    },
+    "runner_wall": {
+      "elapsed_seconds": 379.45299999999406,
+      "scope": "Runner monotonic start through cleanup observation before final index/seal writes; not CLI lifetime and not complete finalization time.",
+      "reference": {
+        "path": ".local/service-rag-batch-development-v1/run-grounded-summary-v3/development-summary.json",
+        "bytes": 1574,
+        "sha256": "5698f07a3ce944a84aa83b347a80d18529ba46a4e8f6ec8b9f7c73f9605c1fdc"
+      },
+      "field": "wall_seconds"
+    },
+    "cli_wrapper": {
+      "elapsed_seconds": 381.1399999999994,
+      "scope": "Wrapper measurement beginning immediately before hidden CLI spawn through actual CLI return; stdout/stderr close precedes terminal record. Contains runner and CLI boundary overhead.",
+      "reference": {
+        "path": ".local/service-rag-batch-development-v1/cli-grounded-summary-v3/terminal.json",
+        "bytes": 384,
+        "sha256": "b4871147546ecc0950fb948fd20d96f2a81a1aab54e4b69dc92f78280897e74e"
+      },
+      "field": "elapsed_seconds"
+    },
+    "cleanup": {
+      "elapsed_seconds": 1.123218229302438,
+      "accepted": true,
+      "scope": "Recorded runner whole cleanup accounting using prior browser/native cleanup and outer remaining budget; overlaps runner wall, not an extra duration to add.",
+      "reference": {
+        "path": ".local/service-rag-batch-development-v1/run-grounded-summary-v3/development-summary.json",
+        "bytes": 1574,
+        "sha256": "5698f07a3ce944a84aa83b347a80d18529ba46a4e8f6ec8b9f7c73f9605c1fdc"
+      },
+      "field": "cleanup_seconds"
+    },
+    "browser_cumulative": {
+      "elapsed_ms": 310082.0534,
+      "scope": "Cumulative from browser run performance.now() start to its failure observation; not latency of one analyze call. Error code/verdict excluded.",
+      "reference": {
+        "path": ".local/service-rag-batch-development-v1/run-grounded-summary-v3/development-summary.json",
+        "bytes": 1574,
+        "sha256": "5698f07a3ce944a84aa83b347a80d18529ba46a4e8f6ec8b9f7c73f9605c1fdc"
+      },
+      "field": "browser_failure.elapsed_ms"
+    }
+  },
+  "budget_contract": {
+    "input_tokens_per_completion": 4096,
+    "classification_output_cap": 128,
+    "generation_output_cap": 768,
+    "alignment_output_cap": 768,
+    "review_output_cap": 128,
+    "summary_completion_cap": 3,
+    "summary_output_cap_total": 1664,
+    "shared_analysis_deadline_seconds": 120,
+    "answer_seconds": 90,
+    "startup_seconds": 120,
+    "active_seconds": 1500,
+    "cleanup_seconds": 5,
+    "whole_seconds": 1625,
+    "no_budget_change": true
+  },
+  "gpu_placement": {
+    "recorded": [
+      {
+        "recorded_metadata_path": "/native_adapter/native",
+        "gpu_layers_requested": 28,
+        "gpu_layers_effective": null
+      }
+    ],
+    "requested_layers": 28,
+    "effective_layers": null,
+    "effective_not_inferred_from_manifest_requested_argv_or_memory": true
+  },
+  "units_and_intervals": {
+    "request.input_tokens_prompt_list_length": "Count of actual request prompt token IDs; includes applied template; no tokenizer instantiated.",
+    "tokens_evaluated": "Native response integer copied as recorded; kept separate from request token-list length and cache fields.",
+    "tokens_predicted": "Native response output token count copied as recorded; no EOS adjustment or retokenization.",
+    "tokens_cached": "Native field copied without interpreting it as a cache hit or saved compute.",
+    "prompt_n": "Native timings prompt_n token count.",
+    "predicted_n": "Native timings predicted_n token count.",
+    "cache_n": "Native timings cache_n copied as recorded; distinct from top-level tokens_cached.",
+    "prompt_ms": "Native recorded prompt-processing milliseconds; excludes other unreported components.",
+    "predicted_ms": "Native recorded token-prediction milliseconds; no invented native total.",
+    "transport_observer_elapsed_seconds": "Completion transport_started monotonic through transport_response monotonic; includes client/native/parsing/observer boundaries, not preparation/template/tokenizer admission or whole analyze duration.",
+    "adapter_elapsed_seconds": "Recorded successful result per-stage adapter telemetry where available; unavailable values stay null.",
+    "worker_elapsed_ms": "Recorded successful result worker elapsed_ms where available.",
+    "aggregates": "Arithmetic over available recorded values only; missing_count retained; intervals can overlap and must not be added as disjoint components."
+  },
+  "evidence": {
+    "metadata": {
+      "path": ".local/meeting-grounded-summary-v3-performance-v1/token-budget-metadata-v1.json",
+      "bytes": 91781,
+      "sha256": "db09070d1930a845e71e4c92805ba28d894096886081094cb5854759178e08c5"
+    },
+    "index": {
+      "path": ".local/meeting-grounded-summary-v3-performance-v1/evidence-index-v1.json",
+      "bytes": 289297,
+      "sha256": "602aa81d4a3e41a63e4c681e9405e1b92c012a57447eb44ae51054a7fbccb649"
+    },
+    "receipt": {
+      "path": ".local/meeting-grounded-summary-v3-performance-v1/receipt-v1.json",
+      "bytes": 1107,
+      "sha256": "58c6cc1d7a80a35357ac74d9763b96f9c3a8ed4d02c23d1dac15aea29980c8fa"
+    },
+    "parent_verification": {
+      "path": ".local/meeting-grounded-summary-v3-performance-v1/parent-verification-v1.json",
+      "bytes": 583,
+      "sha256": "ef53df19d1401d6de38d270d427612ee38a82d1a420bfdf7aeb8f09fe443d8a0"
+    }
+  },
+  "limitations": [
+    "The original execution failed and was consumed; this metadata does not turn it into a success.",
+    "These are overlapping measured intervals on three exposed synthetic development meetings, not a performance benchmark or production SLO.",
+    "Recorded native prompt and prediction durations are not an invented native total.",
+    "The third operation has no successful worker telemetry; null values are preserved.",
+    "No inference about semantic improvement, rejection cause or quality is made. Independent judgment is separate.",
+    "Requested GPU layers28 is observed configuration; effective placement is unreported.",
+    "No tokenizer/model/runtime rerun, human review or paid service was used."
+  ]
+}

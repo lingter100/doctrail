@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-existing-run-token-latency-metadata-v2",
+  "date": "2026-10-23",
+  "status": "observed_failed_development_run",
+  "metadata_receipt": {
+    "path": ".local/meeting-grounded-summary-v2-harness-v1/performance-v1/token-budget-metadata-v1.json",
+    "bytes": 20715,
+    "sha256": "986c830365d05aa49b8d1ceb591579463e5d8a2f925afe204723d5134b13ebbe"
+  },
+  "reference_bindings_verified": 38,
+  "measurements": [
+    {
+      "analyze_request_ordinal": 1,
+      "worker_telemetry": {
+        "elapsed_ms": 62000.0
+      },
+      "worker_elapsed_scope": "MeetingRuntime._run monotonic start to result telemetry construction; generator.end_request excluded",
+      "observer_elapsed_seconds": 62.09300000000803,
+      "observer_interval": "Evidence analyze started to terminal result/error; recorded monotonic difference, not browser lifetime",
+      "references": {
+        "observer_started": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000000.json",
+        "observer_terminal": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000395.json",
+        "worker_telemetry": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000395.json"
+      },
+      "summary_calls": [
+        {
+          "operation": "generation",
+          "native_response": {
+            "tokens_evaluated": 2432,
+            "tokens_predicted": 355,
+            "stop": true,
+            "stop_type": "eos",
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 2432,
+              "prompt_ms": 4039.448,
+              "predicted_n": 355,
+              "predicted_ms": 18873.375
+            }
+          },
+          "native_total_elapsed_seconds": "unavailable",
+          "native_total_elapsed_scope": "No direct total elapsed field persisted; prompt_ms and predicted_ms remain separate.",
+          "adapter_telemetry": {
+            "input_tokens": 2432,
+            "output_tokens": 355,
+            "finish_reason": "eos",
+            "elapsed_seconds": 23.047000000005937
+          },
+          "adapter_elapsed_scope": "GGUFGenerator._complete entry through preparation/native HTTP/validation; not a native-only total",
+          "summary_stage_observer": {
+            "input_tokens": 2432,
+            "output_cap": 768,
+            "finish_reason": "eos"
+          },
+          "transport_observer_elapsed_seconds": 23.047000000005937,
+          "transport_observer_interval": "transport_started /completion to transport_response /completion; derived only from recorded monotonic fields; includes observer/HTTP overhead",
+          "references": {
+            "native_response": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000376.json",
+            "transport_start": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000374.json",
+            "input_admission": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000305.json",
+            "completion_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000377.json",
+            "start_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000372.json",
+            "adapter_telemetry": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000395.json"
+          }
+        },
+        {
+          "operation": "review",
+          "native_response": {
+            "tokens_evaluated": 2625,
+            "tokens_predicted": 40,
+            "stop": true,
+            "stop_type": "eos",
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 2625,
+              "prompt_ms": 4257.103,
+              "predicted_n": 40,
+              "predicted_ms": 2043.9
+            }
+          },
+          "native_total_elapsed_seconds": "unavailable",
+          "native_total_elapsed_scope": "No direct total elapsed field persisted; prompt_ms and predicted_ms remain separate.",
+          "adapter_telemetry": {
+            "input_tokens": 2625,
+            "output_tokens": 40,
+            "finish_reason": "eos",
+            "elapsed_seconds": 6.5310000000026776
+          },
+          "adapter_elapsed_scope": "GGUFGenerator._complete entry through preparation/native HTTP/validation; not a native-only total",
+          "summary_stage_observer": {
+            "input_tokens": 2625,
+            "output_cap": 128,
+            "finish_reason": "eos"
+          },
+          "transport_observer_elapsed_seconds": 6.5310000000026776,
+          "transport_observer_interval": "transport_started /completion to transport_response /completion; derived only from recorded monotonic fields; includes observer/HTTP overhead",
+          "references": {
+            "native_response": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000391.json",
+            "transport_start": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000389.json",
+            "input_admission": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000386.json",
+            "completion_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000392.json",
+            "start_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000387.json",
+            "adapter_telemetry": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000395.json"
+          }
+        }
+      ]
+    },
+    {
+      "analyze_request_ordinal": 2,
+      "worker_telemetry": {
+        "elapsed_ms": 68266.0
+      },
+      "worker_elapsed_scope": "MeetingRuntime._run monotonic start to result telemetry construction; generator.end_request excluded",
+      "observer_elapsed_seconds": 68.28099999998813,
+      "observer_interval": "Evidence analyze started to terminal result/error; recorded monotonic difference, not browser lifetime",
+      "references": {
+        "observer_started": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000396.json",
+        "observer_terminal": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000836.json",
+        "worker_telemetry": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000836.json"
+      },
+      "summary_calls": [
+        {
+          "operation": "generation",
+          "native_response": {
+            "tokens_evaluated": 2674,
+            "tokens_predicted": 408,
+            "stop": true,
+            "stop_type": "eos",
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 2674,
+              "prompt_ms": 4338.587,
+              "predicted_n": 408,
+              "predicted_ms": 23405.188
+            }
+          },
+          "native_total_elapsed_seconds": "unavailable",
+          "native_total_elapsed_scope": "No direct total elapsed field persisted; prompt_ms and predicted_ms remain separate.",
+          "adapter_telemetry": {
+            "input_tokens": 2674,
+            "output_tokens": 408,
+            "finish_reason": "eos",
+            "elapsed_seconds": 27.781000000002678
+          },
+          "adapter_elapsed_scope": "GGUFGenerator._complete entry through preparation/native HTTP/validation; not a native-only total",
+          "summary_stage_observer": {
+            "input_tokens": 2674,
+            "output_cap": 768,
+            "finish_reason": "eos"
+          },
+          "transport_observer_elapsed_seconds": 27.76600000000326,
+          "transport_observer_interval": "transport_started /completion to transport_response /completion; derived only from recorded monotonic fields; includes observer/HTTP overhead",
+          "references": {
+            "native_response": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000817.json",
+            "transport_start": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000815.json",
+            "input_admission": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000733.json",
+            "completion_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000818.json",
+            "start_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000813.json",
+            "adapter_telemetry": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000836.json"
+          }
+        },
+        {
+          "operation": "review",
+          "native_response": {
+            "tokens_evaluated": 2916,
+            "tokens_predicted": 35,
+            "stop": true,
+            "stop_type": "eos",
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 2916,
+              "prompt_ms": 4938.635,
+              "predicted_n": 35,
+              "predicted_ms": 2116.983
+            }
+          },
+          "native_total_elapsed_seconds": "unavailable",
+          "native_total_elapsed_scope": "No direct total elapsed field persisted; prompt_ms and predicted_ms remain separate.",
+          "adapter_telemetry": {
+            "input_tokens": 2916,
+            "output_tokens": 35,
+            "finish_reason": "eos",
+            "elapsed_seconds": 7.203000000008615
+          },
+          "adapter_elapsed_scope": "GGUFGenerator._complete entry through preparation/native HTTP/validation; not a native-only total",
+          "summary_stage_observer": {
+            "input_tokens": 2916,
+            "output_cap": 128,
+            "finish_reason": "eos"
+          },
+          "transport_observer_elapsed_seconds": 7.203000000008615,
+          "transport_observer_interval": "transport_started /completion to transport_response /completion; derived only from recorded monotonic fields; includes observer/HTTP overhead",
+          "references": {
+            "native_response": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000832.json",
+            "transport_start": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000830.json",
+            "input_admission": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000827.json",
+            "completion_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000833.json",
+            "start_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000828.json",
+            "adapter_telemetry": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000836.json"
+          }
+        }
+      ]
+    },
+    {
+      "analyze_request_ordinal": 3,
+      "worker_telemetry": {
+        "elapsed_ms": "unavailable"
+      },
+      "worker_elapsed_scope": "MeetingRuntime._run monotonic start to result telemetry construction; generator.end_request excluded",
+      "observer_elapsed_seconds": 61.0,
+      "observer_interval": "Evidence analyze started to terminal result/error; recorded monotonic difference, not browser lifetime",
+      "references": {
+        "observer_started": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/000837.json",
+        "observer_terminal": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001239.json",
+        "worker_telemetry": "unavailable"
+      },
+      "summary_calls": [
+        {
+          "operation": "generation",
+          "native_response": {
+            "tokens_evaluated": 2387,
+            "tokens_predicted": 335,
+            "stop": true,
+            "stop_type": "eos",
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 2387,
+              "prompt_ms": 4026.209,
+              "predicted_n": 335,
+              "predicted_ms": 18663.994
+            }
+          },
+          "native_total_elapsed_seconds": "unavailable",
+          "native_total_elapsed_scope": "No direct total elapsed field persisted; prompt_ms and predicted_ms remain separate.",
+          "adapter_telemetry": "unavailable",
+          "adapter_elapsed_scope": "GGUFGenerator._complete entry through preparation/native HTTP/validation; not a native-only total",
+          "summary_stage_observer": {
+            "input_tokens": 2387,
+            "output_cap": 768,
+            "finish_reason": "eos"
+          },
+          "transport_observer_elapsed_seconds": 22.921999999991385,
+          "transport_observer_interval": "transport_started /completion to transport_response /completion; derived only from recorded monotonic fields; includes observer/HTTP overhead",
+          "references": {
+            "native_response": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001221.json",
+            "transport_start": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001219.json",
+            "input_admission": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001150.json",
+            "completion_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001222.json",
+            "start_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001217.json",
+            "adapter_telemetry": "unavailable"
+          }
+        },
+        {
+          "operation": "review",
+          "native_response": {
+            "tokens_evaluated": 2560,
+            "tokens_predicted": 42,
+            "stop": true,
+            "stop_type": "eos",
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 2560,
+              "prompt_ms": 4301.04,
+              "predicted_n": 42,
+              "predicted_ms": 2246.918
+            }
+          },
+          "native_total_elapsed_seconds": "unavailable",
+          "native_total_elapsed_scope": "No direct total elapsed field persisted; prompt_ms and predicted_ms remain separate.",
+          "adapter_telemetry": "unavailable",
+          "adapter_elapsed_scope": "GGUFGenerator._complete entry through preparation/native HTTP/validation; not a native-only total",
+          "summary_stage_observer": {
+            "input_tokens": 2560,
+            "output_cap": 128,
+            "finish_reason": "eos"
+          },
+          "transport_observer_elapsed_seconds": 6.953000000008615,
+          "transport_observer_interval": "transport_started /completion to transport_response /completion; derived only from recorded monotonic fields; includes observer/HTTP overhead",
+          "references": {
+            "native_response": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001236.json",
+            "transport_start": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001234.json",
+            "input_admission": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001231.json",
+            "completion_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001237.json",
+            "start_stage": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/raw/001232.json",
+            "adapter_telemetry": "unavailable"
+          }
+        }
+      ]
+    }
+  ],
+  "aggregates": {
+    "analyze_request_count": 3,
+    "generation_call_count": 3,
+    "review_call_count": 3,
+    "summary_call_count": 6,
+    "input_tokens_total": 15594,
+    "output_tokens_total": 1215,
+    "generation_input_tokens_total": 7493,
+    "generation_output_tokens_total": 1098,
+    "review_input_tokens_total": 8101,
+    "review_output_tokens_total": 117,
+    "native_total_elapsed_available_count": 0,
+    "adapter_elapsed_available_count": 4,
+    "worker_elapsed_available_count": 2,
+    "eos_stop_type_count": 6
+  },
+  "browser_cumulative_observation": {
+    "elapsed_ms": 200162.8344,
+    "measurement_scope": "cumulative since browser run() performance.now() start; not an analyze request latency",
+    "reference": ".local/service-rag-batch-development-v1/run-grounded-summary-v2/browser/first-failure.json",
+    "field": "elapsed_ms"
+  },
+  "cli_wrapper_observation": {
+    "elapsed_seconds": 271.5625896,
+    "measurement_scope": "PowerShell wrapper stopwatch covering CLI launch to observed CLI exit; not native or analyze latency",
+    "reference": ".local/service-rag-batch-development-v1/cli-grounded-summary-v2/terminal.json",
+    "field": "elapsed_seconds"
+  },
+  "service_external_paid_api_calls": 0,
+  "per_request_total_cost": "not_measured",
+  "limitations": [
+    "Three existing synthetic development requests; no additional inference or benchmark.",
+    "Summary generation/review token totals exclude the sixteen classification completions.",
+    "Analyze intervals include worker/observer boundaries; browser cumulative time and CLI lifetime are separate measurements.",
+    "Native prompt and prediction durations are not a directly measured native total; missing worker/adapter values remain unavailable.",
+    "All six summary completions ended at EOS below their output caps; this does not establish why semantic omissions occurred.",
+    "Failed partial run timings are not a successful end-to-end latency or SLO; no superiority claim versus v1.",
+    "Hardware/electricity/coding-agent costs were not measured as request cost."
+  ]
+}

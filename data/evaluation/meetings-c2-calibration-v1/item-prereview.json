@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "calibration_item_prereview_before_tokenization",
+  "created_at": "2026-10-14T02:03:04.018578+00:00",
+  "phase": "calibration",
+  "reviewer_id": "/root",
+  "reviewer_type": "AI",
+  "independent_of_question_and_oracle_author": true,
+  "independent_of_candidate_design_or_implementation": false,
+  "human_review_count": 0,
+  "bound_files": {
+    "data/evaluation/meetings-c2-calibration-v1/draft.json": "88f4ac217db4481ae58e98df24497d6621a24a6c6e806ff314b9814dd87cdab4",
+    "data/evaluation/meetings-c2-calibration-v1/oracle-draft.json": "4d8762a5e1c494f921de8042415e03b1c46db46bcffb1066384600a5e1983ecf",
+    "data/evaluation/meetings-c2-calibration-v1/context-selection.json": "3ccd43676029fa77b3354d4d7040755344a1c406a188abb7157810abba8c8d7d",
+    "data/evaluation/meetings-c2-calibration-v1/item-authoring-receipt.json": "b65cc127603c682c6c04b5a07ab3cff3d9facc5a3a6ebf5d2e73b10918cc9b0c",
+    "data/evaluation/meetings-c2-calibration-v1/source-freeze-v1.json": "a5c0ea0aa89c30b07a10a34bb9fae969871e9b1c6d1be2c4ef5f03699d1213e7",
+    "data/evaluation/meetings-c2-comparison-source-freeze-v2.json": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+    "data/evaluation/meetings-c2-source-processing-freeze-v2.json": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad"
+  },
+  "inventory_sha256": "84619318a5a7d665739f46da4d468686b62c23b6923f17c0ade00477db74ddc9",
+  "cases": [
+    {
+      "id": "C2-CAL-01",
+      "verdict": "accepted",
+      "reason": "Member reviews do not suffice for acceptance; the membership document supplies the approver requirement while the charter supplies GC technical delegation. Both documents are necessary for the two requested roles. Selected charter scope prevents interpreting general governance as technical authority.",
+      "required_facts_reviewed": 2,
+      "necessary_multisource": true,
+      "exact_whole_contexts_verified": 3,
+      "changes_requested": 0
+    },
+    {
+      "id": "C2-CAL-02",
+      "verdict": "accepted",
+      "reason": "The source directly gives the two-member company cap, enough resignations within 28 days, removal of all company representation if that fails, and a special election as soon as possible. This is a conditional policy, not an actual job-change event or a dated election.",
+      "required_facts_reviewed": 4,
+      "necessary_multisource": false,
+      "exact_whole_contexts_verified": 2,
+      "changes_requested": 0
+    },
+    {
+      "id": "C2-CAL-03",
+      "verdict": "accepted",
+      "reason": "The source supports all default-process qualifications: TC-ratified SIG exceptions, nominee acceptance, maintainer majority with no objection, minimum five-day opening when approval is not unanimous, and triager status only after merge. Existing triager support is not maintainer approval.",
+      "required_facts_reviewed": 5,
+      "necessary_multisource": false,
+      "exact_whole_contexts_verified": 2,
+      "changes_requested": 0
+    },
+    {
+      "id": "C2-CAL-04",
+      "verdict": "accepted",
+      "reason": "Both full adopted public bodies were inspected. Monthly regular-meeting frequency and the closed-meeting exclusion are present, but no most-recent actual GC meeting date is supplied. Last-updated month is not an event date. Missing evidence was not removed by chunk selection.",
+      "required_facts_reviewed": 2,
+      "necessary_multisource": false,
+      "exact_whole_contexts_verified": 2,
+      "changes_requested": 0
+    },
+    {
+      "id": "C2-CAL-05",
+      "verdict": "accepted",
+      "reason": "The frozen meeting supplies the old/new beginner session schedule and one-day scope; the separate operating policy supplies both notification channels and per-channel content/time records. Both documents are necessary, and required actions are not actual completion claims.",
+      "required_facts_reviewed": 4,
+      "necessary_multisource": true,
+      "exact_whole_contexts_verified": 3,
+      "changes_requested": 0
+    },
+    {
+      "id": "C2-CAL-06",
+      "verdict": "accepted",
+      "reason": "The handoff distinguishes the 15:10 cutoff from its 15:12 writing time. Free practice has not started and lacks an approval/start record; the 15:15 recheck is planned and the next worker must add real results. Missing approval is not a documented denial.",
+      "required_facts_reviewed": 4,
+      "necessary_multisource": false,
+      "exact_whole_contexts_verified": 2,
+      "changes_requested": 0
+    },
+    {
+      "id": "C2-CAL-07",
+      "verdict": "accepted",
+      "reason": "Actual event rows distinguish resurfacing completion, held inspection, passed reinspection, entry approval and actual class start/end. The question concerns the beginner class on the recorded day; planned deadlines and free-practice events are not interchangeable.",
+      "required_facts_reviewed": 5,
+      "necessary_multisource": false,
+      "exact_whole_contexts_verified": 2,
+      "changes_requested": 0
+    },
+    {
+      "id": "C2-CAL-08",
+      "verdict": "accepted",
+      "reason": "All three full synthetic source bodies were inspected. The assignment, recipient and reporting deadline are stated, but actual auxiliary-surface availability is absent and the handoff records no received result. Absence of approval does not establish unavailability; complete abstention is appropriate under the frozen contract.",
+      "required_facts_reviewed": 3,
+      "necessary_multisource": false,
+      "exact_whole_contexts_verified": 4,
+      "changes_requested": 0
+    }
+  ],
+  "automated_checks": {
+    "contract": "doctrail.meeting_comparison_review.validate_oracles",
+    "passed": true,
+    "whole_context_occurrences": 20,
+    "unique_chunks": 15,
+    "source_registration_and_chunk_order_preserved": true,
+    "active_freeze_files_verified": 71,
+    "semantic_truth_inferred_from_schema": false
+  },
+  "completed_ai_item_prereviews": 8,
+  "changes_requested": 0,
+  "official_tokenizer_runs": 0,
+  "model_calls": 0,
+  "old_question_pools_read": false,
+  "validation_bodies_read": false,
+  "limitations": [
+    "The parent participated in candidate design/implementation; this is separate-author item prereview, not independent output scoring.",
+    "The source and question author are the same AI role and saw generic policy differences; their exposure receipt is preserved.",
+    "Purposeful public/synthetic examples and shared AI biases limit generalization; human review is zero.",
+    "Reference spans are sufficient alternatives, not an exhaustive exact-boundary matching rule.",
+    "Question preparation and schema validity do not prove generated answer quality, live retrieval or Java/React operation."
+  ]
+}

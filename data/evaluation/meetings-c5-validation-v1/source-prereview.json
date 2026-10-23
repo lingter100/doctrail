@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "verdict": "rejected",
+  "accepted_ids": [
+    "c5-val-pub-general",
+    "c5-val-pub-meeting-01",
+    "c5-val-pub-meeting-02"
+  ],
+  "rejected_ids": [
+    "c5-val-syn-general",
+    "c5-val-syn-meeting-01",
+    "c5-val-syn-meeting-02"
+  ],
+  "author_ids": [
+    "/root/c5_validation_author"
+  ],
+  "reviewer_id": "/root/c5_validation_prereviewer",
+  "human_review_count": 0,
+  "reviewed_at": "2026-10-19T08:14:31.089325+00:00",
+  "source_manifest_sha256": "b0b08a41b6a738c9d6fe7721a8ac1bbb794ffe1c11eb8fa27d0be03c0f9733fe",
+  "source_inventory_sha256": "e96fbc214ed0099adffda5b8d00de3162851c948e5514ff457e73931e1a2b69c",
+  "notes": {
+    "file": "data/evaluation/meetings-c5-validation-v1/source-prereview-notes.md",
+    "sha256": "aa5ee03996dff60b3f371b0acf6ccee39ebac7d685bbe88109bc32ad7583b9bb"
+  },
+  "rejection_codes": [
+    "cross_split_synthetic_semantic_near_duplicate"
+  ],
+  "source_integrity_passed": true,
+  "source_documents_reviewed": 6,
+  "whole_chunks_reviewed": 14,
+  "original_sources_modified": false,
+  "source_freeze_created": false,
+  "same_split_source_item_reviewer_reuse_disclosed": true,
+  "calibration_sources_read_for_isolated_freshness": true,
+  "calibration_items_or_oracles_read": false,
+  "next_action": "original_author_feedback_bounded_new_version_then_independent_review_before_source_freeze"
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "mode": "adopted-public",
+  "manifest": {
+    "path": "data/evaluation/meetings-c2-calibration-v1/source-manifest.json",
+    "sha256": "cf35a68534eba12602996b67423bcadbc3dff409d58bd724a48178f4d4b516a6"
+  },
+  "bound_files": {
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "scripts/prepare_meeting_source_inventory.py": "65d095bf89d918b5fcde1c274d6999d7f791eae26c58c6fe8bdc916b29c80079",
+    "tests/test_prepare_meeting_source_inventory.py": "aee7c90628cbc13cf5a8536257f11f460bf985e887058b32004ad9943b226634"
+  },
+  "references": {
+    "family_registry": {
+      "path": "data/evaluation/meetings-c2-family-registry-v1.json",
+      "sha256": "0fe710907f10dfc407997970ed176c0a657aa6d1e24a0ca95f4da07f8dd9c76c"
+    },
+    "active_comparison_source_freeze": {
+      "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27"
+    }
+  },
+  "inventory_sha256": "c24b51f0793fc17c0f0a0a89d906441718fd082a08a3abc334fa64e59c083f29",
+  "processing_protocol": "c2-cal-source-processing-v1",
+  "documents": [
+    {
+      "source_id": "c2-cal-f01-governance-charter",
+      "document_id": "c2-cal-f01-governance-charter",
+      "revision": 1,
+      "raw_sha256": "ccb43c8d7c0b27797c5202f14e7767f692dbf0869f31688cbe5c02a50f0e17de",
+      "raw_size_bytes": 15223,
+      "git_blob_sha1": "c756e99bdeb90fa21b12af315a820acf865157a7",
+      "processed_sha256": "ccb43c8d7c0b27797c5202f14e7767f692dbf0869f31688cbe5c02a50f0e17de",
+      "processed_codepoints": 15215,
+      "chunks": 18
+    },
+    {
+      "source_id": "c2-cal-f01-membership",
+      "document_id": "c2-cal-f01-membership",
+      "revision": 1,
+      "raw_sha256": "5a55a6a7a8a83e1c4c1b73fefbf4d71ed7adca400fc3c558c9e342ff6c00042f",
+      "raw_size_bytes": 25854,
+      "git_blob_sha1": "f18f974f0859d8fe45267e50c571c1a46f121484",
+      "processed_sha256": "5a55a6a7a8a83e1c4c1b73fefbf4d71ed7adca400fc3c558c9e342ff6c00042f",
+      "processed_codepoints": 25854,
+      "chunks": 31
+    }
+  ],
+  "excluded_sources": [
+    {
+      "source_id": "c2-cal-f02-rink-rules",
+      "family_id": "C2-F02",
+      "origin": "synthetic",
+      "registration_ordinal": 2,
+      "reason": "excluded_by_explicit_adopted_public_mode"
+    },
+    {
+      "source_id": "c2-cal-f02-rink-coordination",
+      "family_id": "C2-F02",
+      "origin": "synthetic",
+      "registration_ordinal": 3,
+      "reason": "excluded_by_explicit_adopted_public_mode"
+    },
+    {
+      "source_id": "c2-cal-f02-rink-handoff",
+      "family_id": "C2-F02",
+      "origin": "synthetic",
+      "registration_ordinal": 4,
+      "reason": "excluded_by_explicit_adopted_public_mode"
+    }
+  ],
+  "counts": {
+    "registered_sources": 5,
+    "processed_documents": 2,
+    "chunks": 49,
+    "excluded_sources": 3,
+    "selected_contexts": 0,
+    "questions": 0,
+    "oracles": 0,
+    "synthetic_bodies_authored": 0,
+    "tokenizer_runs": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "human_reviews": 0
+  },
+  "java_parity_verified": false
+}

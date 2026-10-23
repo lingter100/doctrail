@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-independent-development-review-v1",
+  "date": "2026-10-23",
+  "status": "not_accepted",
+  "actual_run": {
+    "path": "experiments/results/meetings-grounded-summary-development-v1.json",
+    "bytes": 4724,
+    "sha256": "65313913891b46c220ac51cba90dda5fc75c9731bfd6321f4a84dad2ef47516b"
+  },
+  "locked_private_judgment": {
+    "path": ".local/meeting-grounded-summary-independent-v1/candidate-review-v1/judgments-v1.json",
+    "bytes": 67235,
+    "sha256": "9414a8a19b3300c69925d944b561102c4bce972137a98ee2b256ff3b6457f78d"
+  },
+  "safe_aggregate": {
+    "path": ".local/meeting-grounded-summary-independent-v1/candidate-review-v1/safe-aggregate-v1.json",
+    "bytes": 4588,
+    "sha256": "2ebca8c6dd4a55f84984b8c59f8ec3627c3028b52c7a3f4d52606a51d569fa39"
+  },
+  "source_lock": {
+    "path": ".local/meeting-grounded-summary-independent-v1/source-lock.json",
+    "bytes": 11498,
+    "sha256": "4f68b2f9788187ec883ad600b62de7c531b4ba12a9c5d81aa56f8c613dd7bed9"
+  },
+  "candidate_count": 2,
+  "claim_count": 12,
+  "citation_count": 48,
+  "exact_citation_anchors": 48,
+  "claim_source_support": {
+    "supported": 8,
+    "ambiguous": 3,
+    "partially_supported": 1
+  },
+  "claim_selected_citation_support": {
+    "supported": 6,
+    "ambiguous": 3,
+    "partially_supported": 3
+  },
+  "core_sufficiency": {
+    "insufficient": 2,
+    "not_judged": 0,
+    "sufficient": 0
+  },
+  "core_omission_type_counts": {
+    "core_conditional_exception_omission": 1,
+    "core_effective_date_omission": 1
+  },
+  "core_ambiguity_type_counts": {
+    "core_conditional_exception_ambiguity": 1
+  },
+  "claim_issue_type_counts": {
+    "ambiguous_speaker_attribution": 1,
+    "unsupported_causal_relation": 1,
+    "citation_subclaim_gap_with_same_source_alternative": 2,
+    "ambiguous_conditional_scope": 1,
+    "ambiguous_transition_trigger": 1,
+    "recommendation_as_unresolved_status_ambiguity": 1
+  },
+  "same_source_alternative_evidence_claims": 2,
+  "overlapping_issue_counts": true,
+  "judgment_order": "source-only criteria locked, then new summary and linked citations judged and locked before model self-review or performance",
+  "current_model_self_review_comparison": "separate_followup_pending",
+  "inputs_unchanged": 4,
+  "new_criteria": 0,
+  "human_reviews": 0,
+  "limitations": [
+    "AI judgment with inherited historical aggregate exposure; not pristine blind review.",
+    "Two existing synthetic development candidates; no held-out or new public-data evaluation.",
+    "Exact citation anchors establish text identity, not support for every clause.",
+    "Source support and support from the specifically selected citations are separate.",
+    "Ambiguous or partial support is not counted as fully supported.",
+    "No direct 4-to-2 aggregate improvement claim; this partial run did not complete all planned documents.",
+    "Original runtime failure and pending answer workflow remain unchanged."
+  ]
+}

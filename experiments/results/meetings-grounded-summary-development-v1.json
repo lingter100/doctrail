@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-actual-development-v1",
+  "date": "2026-10-23",
+  "status": "failed_consumed",
+  "source_commit": "17a5dd60d367e72249d3d2dab413b87eaffbda90",
+  "execution_head": "13642abad2b872076a3f5aecf43eaa6efd81697d",
+  "preparation": {
+    "path": "experiments/results/meetings-grounded-summary-development-preparation-v1.json",
+    "bytes": 4186,
+    "sha256": "23b5aa06e0325d3100686cb43c3ad269be21b948767b2c0f1a0bc896e4857d61"
+  },
+  "runtime_binding": {
+    "path": ".local/service-rag-batch-development-v1/runtime-bindings-grounded-summary-v1.json",
+    "bytes": 18227,
+    "sha256": "5f2725569407b3f9d314cfd406e047e8784d51c560c71536f84f1cd946636508"
+  },
+  "custody_audit": {
+    "path": ".local/service-rag-batch-development-v1/cli-grounded-summary-v1/custody-audit-v1.json",
+    "bytes": 5562,
+    "sha256": "076ad2c39ff0fa6ef71fac06c44d22fc36bd2be58af13968025de09fcd18375f"
+  },
+  "parent_verification": {
+    "path": ".local/meeting-grounded-summary-harness-v1/parent-run-verification-v1.json",
+    "bytes": 806,
+    "sha256": "1fc2493274e9eb0b93a59ea51b98ac731b05a240311d6c1ac934eb23786ed107"
+  },
+  "run_index": {
+    "path": ".local/service-rag-batch-development-v1/run-grounded-summary-v1/artifact-index.json",
+    "bytes": 101977,
+    "sha256": "ba9029a7a8cd675d871a8e21439c6bf5b275751acf8031af1a25cf944745e7cd"
+  },
+  "cli_index": {
+    "path": ".local/service-rag-batch-development-v1/cli-grounded-summary-v1/custody-index-v1.json",
+    "bytes": 2057,
+    "sha256": "45ec018ea66aa300eb6ba5e3ba80a0a4db2bf4d1a69404b34f22aeb7c5c90a67"
+  },
+  "final_receipt": {
+    "path": ".local/service-rag-batch-development-v1/run-grounded-summary-v1/final-receipt.json",
+    "bytes": 395,
+    "sha256": "1a63c78c96eac1dfdaf5dc00cb5e50324ca4032b25bd83bf1af8c06b1841c66c"
+  },
+  "final_seal": {
+    "path": ".local/service-rag-batch-development-v1/run-grounded-summary-v1/finalization-seal.json",
+    "bytes": 282,
+    "sha256": "e913071735691f789e57a7d2269efe9eb663721934f5195008ccc61924d5cf1c"
+  },
+  "final_failure": {
+    "path": ".local/service-rag-batch-development-v1/run-grounded-summary-v1/finalization-failure.json",
+    "bytes": 373,
+    "sha256": "0c514d91c922634fcc92607f0bea2e04c29c19e164e4cd9e950b19f985de156c"
+  },
+  "run": {
+    "invocations": 1,
+    "reruns": 0,
+    "cli_exit": 1,
+    "node_exit": 1,
+    "runtime_eligible": false,
+    "first_browser_error": "analysis_failed",
+    "worker_error": "generation_summary_review_rejected",
+    "failed_operation_index_1_based": 2,
+    "failure_stage": "summary_review",
+    "uploads_completed": 3,
+    "analyses_saved": 1,
+    "grounded_summary_ui_completed": 1,
+    "answers_completed": 0,
+    "questions_unexecuted": 6,
+    "remaining_analyses_unexecuted": 2
+  },
+  "model_calls": {
+    "classification_attempts": 11,
+    "summary_generation_attempts": 2,
+    "summary_review_attempts": 2,
+    "total_attempts": 15,
+    "total_responses": 15,
+    "transport_errors": 0,
+    "completions_after_failure": 0
+  },
+  "timing_seconds": {
+    "startup": 47.39100000000326,
+    "cli_wall": 195.9453531,
+    "runner_wall": 194.93700000000536,
+    "last_seal_check": 195.53100000000268,
+    "cleanup": 1.3155221252527554
+  },
+  "cleanup": {
+    "accepted": true,
+    "original_owned_count": 14,
+    "audited_identity_count": 17,
+    "audited_all_absent": true,
+    "leases_available": 3,
+    "extra_kills": 0
+  },
+  "preservation": {
+    "run_files_verified": 876,
+    "raw_files": 836,
+    "cli_files_verified": 10,
+    "runtime_files": 91,
+    "harness_files": 2,
+    "ui_files": 4,
+    "original_input_bindings": 16,
+    "frozen_files": 77,
+    "input_and_code_posthash_equal": true
+  },
+  "summary_packet": {
+    "path": ".local/service-rag-batch-development-v1/cli-grounded-summary-v1/summary-candidates-v1.json",
+    "bytes": 9957,
+    "sha256": "dc1084469d0598dc8928714e54af4db362662e91f759295e6785da51e4d5cfa1"
+  },
+  "independent_summary_judgment": {
+    "status": "pending_separate_locked_judgment",
+    "candidates": 2,
+    "human_review": 0
+  },
+  "limitations": [
+    "Existing synthetic development documents; not new public-source acceptance or held-out/generalization evaluation.",
+    "One stored summary and exact source/UI checks do not establish semantic sufficiency.",
+    "A model review rejection is not independent evidence that a summary is incorrect.",
+    "Clean process shutdown does not change the original overall failure.",
+    "No answer requests were executed; no new answer quality result.",
+    "No full model-weight rehash in this invocation; prior cached manifests and preflight size/existence checks are separate evidence.",
+    "No public service deployment or paid service use."
+  ]
+}

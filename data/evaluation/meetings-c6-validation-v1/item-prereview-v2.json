@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "revision": "v2",
+  "reviewed_at_utc": "2026-10-20T03:41:25.167757+00:00",
+  "verdict": "accepted",
+  "accepted_ids": [
+    "C6-VAL-01",
+    "C6-VAL-02",
+    "C6-VAL-03",
+    "C6-VAL-04",
+    "C6-VAL-05",
+    "C6-VAL-06",
+    "C6-VAL-07",
+    "C6-VAL-08"
+  ],
+  "rejected_ids": [],
+  "author_ids": [
+    "/root/c6_validation_author"
+  ],
+  "reviewer_id": "/root/c6_validation_prereviewer",
+  "human_review_count": 0,
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "all_sufficient_alternatives_complete": true,
+  "semantic_finding_categories": {},
+  "findings": [],
+  "resolved_original_finding_counts": {
+    "missing_sufficient_evidence_alternative": 1
+  },
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "preauthorization_head": "09027c9f47927c8480bb65f4fa5eb94900af230e",
+  "actual_preauthorization": {
+    "file": ".local/meetings-c6-validation-item-review-v2/preauthorization-v1.json",
+    "sha256": "40a62f935ff128f2d11aba08c55595820cd2f786dad93272fb59312c7fa32947"
+  },
+  "item_handoff": {
+    "file": ".local/meetings-c6-validation-item-v2/handoff-v1.json",
+    "sha256": "738495542765410ca068cbccd72531dd64435eb79370652fde1c5478367c7a02"
+  },
+  "revision_authorization": {
+    "file": "data/evaluation/meetings-c6-item-revision-authorization-v1.json",
+    "sha256": "c5ec88a471371b073f2113d95395047f343dccb7da9d3b07d9391b73e3c0c6b6"
+  },
+  "new_author_item_hashes": {
+    "data/evaluation/meetings-c6-validation-v1/draft-v2.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft-v2.json": "8efc42bbc7b9b1862b5d640d6f1afa09f4e93ce759464e18bcd6c70fa47c98ca",
+    "data/evaluation/meetings-c6-validation-v1/context-selection-v2.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c",
+    "data/evaluation/meetings-c6-validation-v1/author-receipt-v2.json": "a46d8a0ad69ecef6bfd5ca79bb9d5e92f2fba51df2661b7bbd467f2887613295"
+  },
+  "original_author_and_rejection_hashes": {
+    "data/evaluation/meetings-c6-validation-v1/draft.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft.json": "196ed54abf3709213e7818fecd30b9f746ff30493133f48b5f37320d7c55ba19",
+    "data/evaluation/meetings-c6-validation-v1/context-selection.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c",
+    "data/evaluation/meetings-c6-validation-v1/author-receipt.json": "6c0e19979d53250e4e68881db07f8e906350fce1e405f25c4e702802b510bde0",
+    "data/evaluation/meetings-c6-validation-v1/item-prereview.json": "b24d85e24a236ebffbae451e36bad60531d7d3b71a0e81c470392145b71271c2",
+    "data/evaluation/meetings-c6-validation-v1/item-prereview-notes.md": "75edb49498c21aa2df2bb29fadcb035fa190b7ce947db4f21c8602b3e4ebb0bf",
+    "data/evaluation/meetings-c6-validation-v1/item-review-metadata-summary.json": "c4fa9ccb07ca95fae02ba36bc59dbd9ca80c40d425eb1382fcaf3beebafa3eff"
+  },
+  "original_rejected_review": {
+    "file": "data/evaluation/meetings-c6-validation-v1/item-prereview.json",
+    "sha256": "b24d85e24a236ebffbae451e36bad60531d7d3b71a0e81c470392145b71271c2"
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c6-validation-v1/source-freeze.json",
+    "sha256": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625"
+  },
+  "toolchain_freeze": {
+    "file": "data/evaluation/meetings-c6-toolchain-freeze-v1.json",
+    "sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b"
+  },
+  "structural_replay": {
+    "file": ".local/meetings-c6-validation-item-review-v2/structural-replay-v1.json",
+    "sha256": "27ced79e229c805b690bd7a4907022a0facbaa7378d6c9d48d1305094f2b47e6"
+  },
+  "semantic_notes": {
+    "file": "data/evaluation/meetings-c6-validation-v1/item-prereview-notes-v2.md",
+    "sha256": "4c9cb7e70bac0aa8a18a1c73055c9d2365f926eb10b88939bd9f52994a876868"
+  },
+  "facts_reviewed": 33,
+  "missing_required_facts": 5,
+  "registered_evidence_alternatives": 34,
+  "required_item_counts": {
+    "cases": 8,
+    "answered": 4,
+    "abstained": 4,
+    "ko": 4,
+    "en": 4
+  },
+  "accepted_item_count": 8,
+  "rejected_item_count": 0,
+  "reviewer_source_or_item_edits": 0,
+  "limited_author_revision": {
+    "draft_bytes_unchanged": true,
+    "selection_bytes_unchanged": true,
+    "new_oracle_minus_one_added_alternative_equals_original": true,
+    "added_alternative_equals_own_safe_feedback": true,
+    "other_cases_unchanged": 7,
+    "changed_cases": 1,
+    "changed_facts": 1,
+    "added_alternatives": 1,
+    "all_fact_words_statuses_existing_alternatives_preserved": true
+  },
+  "coverage_answered_only": {
+    "general_only": 1,
+    "multiple_meetings": 2,
+    "general_plus_meeting": 1,
+    "all_sufficient_alternatives_require_multiple_documents": 3,
+    "ko_question_en_evidence": true,
+    "en_question_ko_evidence": true
+  },
+  "same_split_source_item_review_reuse_disclosed": true,
+  "excluded_from_final_output_judging": true,
+  "model_effort_provenance": {
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "fork_turns": "none",
+    "provenance": "Parent-observed accepted spawn arguments and committed registration; not runtime introspection."
+  },
+  "prior_exposure": {
+    "automatic_AGENTS_memory_and_public_metadata": true,
+    "own_validation_source_prereview": true,
+    "previous_explicit_finalized_calibration_SOURCE_only_freshness_comparison": true,
+    "calibration_source_semantic_rereads_in_this_item_stage": 0,
+    "calibration_item_oracle_selection_reads": 0,
+    "fully_blind_or_pristine_claim": false,
+    "own_original_item_prereview": true
+  },
+  "author_sequence_disclosure": {
+    "reference": ".local/meetings-c6-validation-item-v1/sequence-disclosure-v1.json",
+    "sha256": "cda9f41f23d4018fa11cae9652e1aca247e22923a0c49362d43a87acb3eeb470",
+    "prior_authorized_source_memory_theme_planning_while_preauth_pending_preserved": true,
+    "new_source_reread_or_item_artifact_before_proof_claimed_by_author": false,
+    "internal_thought_timing_independently_proven": false,
+    "v2_sequence_reference": {
+      "file": ".local/meetings-c6-validation-item-v2/sequence-disclosure-v1.json",
+      "sha256": "1d244834f52993584683462e83ee83f11dac60c7790656d8ba4f0ccdcb258622",
+      "no_internal_thought_timing_proof_claim": true
+    },
+    "author_proof_timestamp_precedes_v2_created_at": true
+  },
+  "mechanical_checks": {
+    "validate_draft": "passed",
+    "validate_oracles": "passed",
+    "whole_chunks_coordinates_and_selection": "passed",
+    "all_abstention_family_sources_included": "passed",
+    "new_oracle_exact_single_alternative_addition": "passed",
+    "structural_success_is_semantic_acceptance": false
+  },
+  "counts": {
+    "tokenizer_calls": 0,
+    "official_offline_preparations": 0,
+    "native_generations": 0,
+    "product_model_calls": 0,
+    "Maven_or_test_runs": 0,
+    "Git_mutations": 0,
+    "source_edits": 0,
+    "author_item_edits": 0,
+    "old_closed_semantic_reads": 0,
+    "final_judge_contacts_or_reads": 0
+  },
+  "preserved_local_receipt_projection_failure": {
+    "file": ".local/meetings-c6-validation-item-review-v2/inspection-failure-v1.json",
+    "sha256": "ea12090f40c39442fd17a8bb116a3627ccf9b83246e6e3d0944bf5e3e5cbfc3a"
+  },
+  "item_freeze_created": true,
+  "prereview_gate_check": {
+    "status": "passed",
+    "official_preparation_invoked": false
+  },
+  "full_committed_load_material_invoked": false,
+  "next_gate": "Commit accepted new v2 inputs, prereview and six-role freeze, then actual committed material proof before once-only offline preparation. Input acceptance is not measured output quality."
+}

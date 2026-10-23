@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "registry_id": "meetings-summary-mode-development-exclusions-v1",
+  "status": "development-reserved-prospective-exclusions",
+  "reservation_scope": "summary-mode-development-v1",
+  "purpose": "Reserve these four development sources and mechanically associated source revisions/content against future protected evaluation reuse.",
+  "effective_scope": {
+    "future_protected_pools": [
+      "calibration",
+      "validation",
+      "final_test"
+    ],
+    "existing_protected_assignments_modified": false,
+    "unassigned_protected_families_reassigned": false,
+    "source_admission_or_freeze_or_criteria_or_run_authorized": false
+  },
+  "contract_reference": {
+    "path": "docs/MEETINGS-SUMMARY-MODE-PROVENANCE-BOUNDARY.md",
+    "bytes": 7014,
+    "sha256": "ab191c4aa424d2ca16a874683feb3c88eb6064a89bcb47e9bae0e2fdfa9a11ac"
+  },
+  "source_metadata_references": {
+    "author_v2_manifest": {
+      "path": ".local/meeting-summary-mode-sources-v1/v2/source-manifest.json",
+      "bytes": 11246,
+      "sha256": "e23f4eda4249420ba56df551071b8a018b01ccc4e879c094253693cfa7db0f8d"
+    },
+    "independent_fingerprints": {
+      "path": ".local/meeting-summary-mode-independent-v1/source-fingerprints-v1.json",
+      "bytes": 10048,
+      "sha256": "d21af5a1844ea104d3c95c6551ac6a463232dfd2cb731c05e74eb2e5cf1e394f"
+    },
+    "fingerprint_receipt": {
+      "path": ".local/meeting-summary-mode-independent-v1/safe-fingerprint-receipt-v1.json",
+      "bytes": 46313,
+      "sha256": "f31f2c788a81e5c4603e2ec6492c25373d942e6476dc785126e0d2f832273892"
+    }
+  },
+  "fingerprint_method": {
+    "id": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+    "document_normalization": "CRLF/CR to LF, Unicode NFC, single ASCII space joins str.split().",
+    "paragraph_rule": "Blank-line split of NFC/LF text, whitespace collapse, normalized length>=200 Unicode codepoints, sorted unique UTF8 SHA256.",
+    "no_source_text_processed_in_this_registry_task": true
+  },
+  "reserved_source_count": 4,
+  "reserved_sources": [
+    {
+      "source_id": "summary-mode-source-01",
+      "document_id": "7961eb4e-d5ca-560c-960e-dbadbc280492",
+      "reservation": "development-reserved",
+      "reserved_for": "summary-mode-development-v1",
+      "excluded_from_future_protected_pools": [
+        "calibration",
+        "validation",
+        "final_test"
+      ],
+      "canonical_url": "https://foundation.wikimedia.org/wiki/Minutes:2005-02-07",
+      "pinned_revision_url": "https://foundation.wikimedia.org/w/index.php?oldid=555255",
+      "wiki_revision_id": 555255,
+      "revision_identity": "478a3c2a754c160bb764110c9a20b799eba7ab002066ad3fc5a29acd1bb33f52",
+      "source_date": "2005-02-07",
+      "observed_publisher_host": "foundation.wikimedia.org",
+      "observed_series_namespace": "Minutes",
+      "fingerprints": {
+        "raw_publisher_bytes_sha256": "478a3c2a754c160bb764110c9a20b799eba7ab002066ad3fc5a29acd1bb33f52",
+        "canonical_parsed_utf8_sha256": "e6abd123e6e17caac382a9b37b4b17265d9a1e6dc8d2f52324e776178d02be35",
+        "normalized_sha256": "29f83c47ba11b184f4eae9da52cc2b472c9b4ba84aaec7f8d5a3cbacc6a78488",
+        "long_paragraph_sha256": [
+          "09630c828b396d21497af9e40dac15ca34eb2d09e9c1bebfa4e4f86ddb238213",
+          "17cdf3c7d40f94a2392af0c9c1a43f3f1843be0532f32484f21b682b4c622cce",
+          "4816ed98d20d8af41d47949aa073913facaa9d96c07141cfc96a74c39f277d7f",
+          "b3ea2393352bbb511a586bad24179518e6dd844be976cd8ee0569e76b178190c",
+          "d67b26a7b0a027359d412ac3a8bce0a93b4e7683a724656e142403d3e914ca03",
+          "fcfcbb3f97298047aa4ea037a3097f3d5b00029414108e3ce45df3ae77e703ec",
+          "ff10c2d46a59d64ffe7d3195726c78117e889d7d280800791fbb209b6bc2ce96"
+        ]
+      },
+      "declared_source_set_metadata": {
+        "id": "summary-mode-source-set-v1",
+        "meaning": "structural fingerprint adapter namespace only",
+        "semantic_family_membership_asserted": false
+      },
+      "source_attribution": {
+        "source_url": "https://foundation.wikimedia.org/wiki/Minutes:2005-02-07",
+        "pinned_revision_url": "https://foundation.wikimedia.org/w/index.php?oldid=555255",
+        "license_as_declared": "CC BY-SA 4.0",
+        "preserve_existing_attribution_conditions": true,
+        "existing_attribution_notice": {
+          "path": ".local/meeting-summary-mode-sources-v1/v2/parsed/summary-mode-source-01.attribution.json",
+          "bytes": 2063,
+          "sha256": "92a8f58d1e7f42818a6d85f9578c16d0b1cc573898b91dfcaa049587913befb7"
+        }
+      }
+    },
+    {
+      "source_id": "summary-mode-source-02",
+      "document_id": "376c5665-5b32-54d3-806d-734294e72335",
+      "reservation": "development-reserved",
+      "reserved_for": "summary-mode-development-v1",
+      "excluded_from_future_protected_pools": [
+        "calibration",
+        "validation",
+        "final_test"
+      ],
+      "canonical_url": "https://foundation.wikimedia.org/wiki/Minutes:2005-02-15",
+      "pinned_revision_url": "https://foundation.wikimedia.org/w/index.php?oldid=436016",
+      "wiki_revision_id": 436016,
+      "revision_identity": "e01a7deb8ccd4d78a20a8890a00da7e549bbf676bb84c3e65e1e4648edc900bc",
+      "source_date": "2005-02-15",
+      "observed_publisher_host": "foundation.wikimedia.org",
+      "observed_series_namespace": "Minutes",
+      "fingerprints": {
+        "raw_publisher_bytes_sha256": "e01a7deb8ccd4d78a20a8890a00da7e549bbf676bb84c3e65e1e4648edc900bc",
+        "canonical_parsed_utf8_sha256": "1f365d9f6adcf0dab80d8386842beb3ada37ee925c72a1a10c6601bbcc2d5078",
+        "normalized_sha256": "78ed012fff8b12a7a95692c876153abd9da5bbc45416a41ac75f893c4e230f23",
+        "long_paragraph_sha256": [
+          "14e60ad17878e007c5b7cb6f198a904a8dc8cf333943419115f28a53f0d49fc1",
+          "4ead412ba8c1f58452e439c9ae75e35ea1500957cb688648ba9dc345d4ec5fc6"
+        ]
+      },
+      "declared_source_set_metadata": {
+        "id": "summary-mode-source-set-v1",
+        "meaning": "structural fingerprint adapter namespace only",
+        "semantic_family_membership_asserted": false
+      },
+      "source_attribution": {
+        "source_url": "https://foundation.wikimedia.org/wiki/Minutes:2005-02-15",
+        "pinned_revision_url": "https://foundation.wikimedia.org/w/index.php?oldid=436016",
+        "license_as_declared": "CC BY-SA 4.0",
+        "preserve_existing_attribution_conditions": true,
+        "existing_attribution_notice": {
+          "path": ".local/meeting-summary-mode-sources-v1/v2/parsed/summary-mode-source-02.attribution.json",
+          "bytes": 2063,
+          "sha256": "29d8a5fc4cf3a853c78794763783af9c69f49ab93299a6208952e6311f76f261"
+        }
+      }
+    },
+    {
+      "source_id": "summary-mode-source-03",
+      "document_id": "ef1f3beb-baad-5d86-b4ee-f67f16fca944",
+      "reservation": "development-reserved",
+      "reserved_for": "summary-mode-development-v1",
+      "excluded_from_future_protected_pools": [
+        "calibration",
+        "validation",
+        "final_test"
+      ],
+      "canonical_url": "https://foundation.wikimedia.org/wiki/Minutes:2005-03-30",
+      "pinned_revision_url": "https://foundation.wikimedia.org/w/index.php?oldid=555264",
+      "wiki_revision_id": 555264,
+      "revision_identity": "d07fb47faa683016b1d8890926140074409e5beff84ebb303ee15821bac19ffe",
+      "source_date": "2005-03-30",
+      "observed_publisher_host": "foundation.wikimedia.org",
+      "observed_series_namespace": "Minutes",
+      "fingerprints": {
+        "raw_publisher_bytes_sha256": "d07fb47faa683016b1d8890926140074409e5beff84ebb303ee15821bac19ffe",
+        "canonical_parsed_utf8_sha256": "bd20681693549acc3549f304e5ccb6786e03537160751b4af30954201dd80516",
+        "normalized_sha256": "15cc42d23b8d2ff27592afb91608d88ae8003db05c1afd7cb0b1e54b1cf9eb80",
+        "long_paragraph_sha256": [
+          "3648894f9b721071f1b959a0bf757ae5dc55e525f1768550523abccd7d280f99"
+        ]
+      },
+      "declared_source_set_metadata": {
+        "id": "summary-mode-source-set-v1",
+        "meaning": "structural fingerprint adapter namespace only",
+        "semantic_family_membership_asserted": false
+      },
+      "source_attribution": {
+        "source_url": "https://foundation.wikimedia.org/wiki/Minutes:2005-03-30",
+        "pinned_revision_url": "https://foundation.wikimedia.org/w/index.php?oldid=555264",
+        "license_as_declared": "CC BY-SA 4.0",
+        "preserve_existing_attribution_conditions": true,
+        "existing_attribution_notice": {
+          "path": ".local/meeting-summary-mode-sources-v1/v2/parsed/summary-mode-source-03.attribution.json",
+          "bytes": 2063,
+          "sha256": "029bf41e90ba66d00596d976eed50b191ad692a348073348bcd7518dd4566b2c"
+        }
+      }
+    },
+    {
+      "source_id": "summary-mode-source-04",
+      "document_id": "248f547d-c857-57be-9aab-0016aebd425c",
+      "reservation": "development-reserved",
+      "reserved_for": "summary-mode-development-v1",
+      "excluded_from_future_protected_pools": [
+        "calibration",
+        "validation",
+        "final_test"
+      ],
+      "canonical_url": "https://foundation.wikimedia.org/wiki/Minutes:2005-05-16",
+      "pinned_revision_url": "https://foundation.wikimedia.org/w/index.php?oldid=436051",
+      "wiki_revision_id": 436051,
+      "revision_identity": "4576f9724f24f2af93125420db78f1ee9471109aeb8f4bc55805daece385cd77",
+      "source_date": "2005-05-16",
+      "observed_publisher_host": "foundation.wikimedia.org",
+      "observed_series_namespace": "Minutes",
+      "fingerprints": {
+        "raw_publisher_bytes_sha256": "4576f9724f24f2af93125420db78f1ee9471109aeb8f4bc55805daece385cd77",
+        "canonical_parsed_utf8_sha256": "27776554c0202bd8217b28c81272c01b2b1fcbe1e5cf2a6b9da9bb7734aaacda",
+        "normalized_sha256": "ad1fb557c152d19c431b6f82ef98af453969eb95e7584306ceb473e7645e4bbf",
+        "long_paragraph_sha256": [
+          "6ec22d4888ccfd9c11b6fbd23f7ded7d19b8ea2d8c12bde797724d48be662ab4",
+          "f4992860bec164cc4fa3496df61e285c2b74749b228dc6c5cab2c45ec360e3e4"
+        ]
+      },
+      "declared_source_set_metadata": {
+        "id": "summary-mode-source-set-v1",
+        "meaning": "structural fingerprint adapter namespace only",
+        "semantic_family_membership_asserted": false
+      },
+      "source_attribution": {
+        "source_url": "https://foundation.wikimedia.org/wiki/Minutes:2005-05-16",
+        "pinned_revision_url": "https://foundation.wikimedia.org/w/index.php?oldid=436051",
+        "license_as_declared": "CC BY-SA 4.0",
+        "preserve_existing_attribution_conditions": true,
+        "existing_attribution_notice": {
+          "path": ".local/meeting-summary-mode-sources-v1/v2/parsed/summary-mode-source-04.attribution.json",
+          "bytes": 2063,
+          "sha256": "0f7c1b5e922a8e375aab219c222341ecde630909e980b65b8205e7d698fdc92b"
+        }
+      }
+    }
+  ],
+  "matching_rules": {
+    "same_reserved_identifier": "The listed source_id/document_id identifies a development-reserved record.",
+    "same_source_revision": "Publisher host plus wiki_revision_id, or canonical URL plus the same pinned revision, denotes the listed source revision even if representation differs.",
+    "exact_or_normalized_hash_equality": "Observed byte or specified normalization fingerprint equality; exclude future protected reuse of matching development content.",
+    "long_paragraph_hash_intersection": "Shared-text signal requiring split review; does not establish an exact duplicate, a common semantic family or historical exposure.",
+    "declared_source_set_id": "The common structural adapter ID is not a semantic family/disjointness finding."
+  },
+  "prospective_publisher_namespace_policy": {
+    "rule_id": "exclude-governancewiki-publisher-minutes-from-future-protected-evaluation",
+    "policy_kind": "conservative prospective exclusion; not an observed duplicate or semantic-family finding",
+    "observed_basis": {
+      "source_count": 4,
+      "canonical_publisher_host": "foundation.wikimedia.org",
+      "canonical_decoded_path_prefix": "/wiki/Minutes:",
+      "source_dates": [
+        "2005-02-07",
+        "2005-02-15",
+        "2005-03-30",
+        "2005-05-16"
+      ]
+    },
+    "future_exclusion_selector": {
+      "canonical_publisher_host": "foundation.wikimedia.org",
+      "canonical_decoded_path_prefix": "/wiki/Minutes:"
+    },
+    "future_effect": "Exclude this Governance Wiki publisher meeting-minutes namespace, including other dates and revisions, from future calibration, validation and final_test source selection.",
+    "pinned_oldid_URL_alone_does_not_identify_page_namespace": true,
+    "other_publishers_or_unrelated_page_namespaces_not_inferred_same_family": true,
+    "existing_protected_split_reassignment": false
+  },
+  "review_boundary": {
+    "current_split_audit_result_read_or_predetermined": false,
+    "existing_protected_conflict_handling": "Parent and source reviewer decide separately; this registry cannot move an existing protected source/family into development.",
+    "old_L2_history_limit_unchanged": true,
+    "historical_protected_isolation_or_contamination_claim": false,
+    "new_source_admission_freeze_criteria_or_run_decision": false
+  },
+  "attribution_boundary": "Canonical and pinned source URLs, declared licenses and exact existing attribution notice references are retained. These exclusions do not replace or relax existing attribution or license conditions."
+}

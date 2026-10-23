@@ -64,7 +64,7 @@ public class LearnedSearch {
             return response;
         });
     }
-    private List<Map<String,Object>> rank(String query,List<Map<String,Object>> rows,int limit,String method,long deadline){
+    List<Map<String,Object>> rank(String query,List<Map<String,Object>> rows,int limit,String method,long deadline){
         if(rows.isEmpty())return List.of();
         var queryVector=inference.embed("query",List.of(Map.of("id","query","text",query)),deadline).get("query");
         Map<String,Double> scores=new HashMap<>();

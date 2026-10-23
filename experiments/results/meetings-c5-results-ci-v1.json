@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-results-ci-v1",
+  "observed_at": "2026-10-20T00:58:36.331291+00:00",
+  "head_sha": "e18f595c929648378855c83ffdac93fe09ad0673",
+  "runs": [
+    {
+      "head_sha": "e18f595c929648378855c83ffdac93fe09ad0673",
+      "run_id": 39350297487,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39350297487"
+    },
+    {
+      "head_sha": "e18f595c929648378855c83ffdac93fe09ad0673",
+      "run_id": 39350302379,
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39350302379"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "claim_scope": "Exact closed C5 failure archive/reporting commit required CI; no inferred test counts or model quality."
+}

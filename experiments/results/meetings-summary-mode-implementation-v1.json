@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "diagnostic": "summary-mode-development-v1",
+  "status": "implementation_and_independent_static_review_complete_source_ci_pending",
+  "scope": "Synthetic orchestration and failure handling only; no actual model or source acceptance.",
+  "source_files": [
+    {
+      "path": "scripts/probe_meeting_summary_mode.py",
+      "bytes": 55769,
+      "sha256": "986130db21ea2786e865d7ad0a309cbb319e71e1fdd2b9c2a18c93364e4ef56b"
+    },
+    {
+      "path": "tests/test_probe_meeting_summary_mode.py",
+      "bytes": 64760,
+      "sha256": "1456d332fa5819f14408d30145add35f36afd26dfeeb7b04dc30c8df4fba3914"
+    }
+  ],
+  "contracts": [
+    {
+      "path": "docs/MEETINGS-SUMMARY-QUALITY-NEXT.md",
+      "bytes": 18650,
+      "sha256": "fb32d66f4c2264edec160b908b83fa1050731c455099636b985793db40d0b329"
+    },
+    {
+      "path": "docs/MEETINGS-SUMMARY-MODE-LAUNCHER-REPAIR.md",
+      "bytes": 11215,
+      "sha256": "7bbd6e2c35c4cea5970a2150bdbbdb74296085eb11a40ca4426aba93fb340a5b"
+    }
+  ],
+  "final_synthetic_tests": {
+    "passed": 167,
+    "seconds": 2.74,
+    "command": ".venv/Scripts/python.exe -m pytest -q tests/test_probe_meeting_summary_mode.py",
+    "includes_prior_155": true,
+    "ruff": "passed",
+    "logs": [
+      {
+        "path": ".local/meeting-summary-mode-implementation-v1/repair-v2/final/pytest.json",
+        "bytes": 164,
+        "sha256": "079ee633e7f6ff5d12770753e7185f6c8d12506c68ffce35afc36eaf581fa4cb"
+      },
+      {
+        "path": ".local/meeting-summary-mode-implementation-v1/repair-v2/final/pytest.log",
+        "bytes": 264,
+        "sha256": "e826dc2f4945c63b87216626bbf5155901518e55a2c7d19d152a46d1bc620ab0"
+      },
+      {
+        "path": ".local/meeting-summary-mode-implementation-v1/repair-v2/final/ruff.json",
+        "bytes": 211,
+        "sha256": "5da3577acc5a7d38dc3526b10dc4dadb2d0bed6db55162d749c250f3046555bf"
+      },
+      {
+        "path": ".local/meeting-summary-mode-implementation-v1/repair-v2/final/ruff.log",
+        "bytes": 20,
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+      }
+    ]
+  },
+  "independent_static_review": {
+    "remaining_blockers": 0,
+    "full_review": {
+      "path": ".local/meeting-summary-mode-implementation-v1/independent-review-v1.json",
+      "bytes": 20915,
+      "sha256": "391ad9b6152ddd6af81a18926c969a823afa3345f88421f21d1ca958732904af"
+    },
+    "first_rereview": {
+      "path": ".local/meeting-summary-mode-implementation-v1/repair-v1/independent-review-v1.json",
+      "bytes": 19526,
+      "sha256": "a25e3e996ad20c002a5ad7a7ee4012d90095ee5724fc9c26bfea9adc1241269c"
+    },
+    "final_delta_review": {
+      "path": ".local/meeting-summary-mode-implementation-v1/repair-v2/independent-review-v1.json",
+      "bytes": 13606,
+      "sha256": "c5a94d04c5193b3e80a4e415a83aab001f21337f5638e0c2fca09719f19f1991"
+    },
+    "reviewer_independent_of_implementer": true,
+    "reviewer_also_plan_author": true,
+    "semantic_review": false
+  },
+  "evidence": [
+    {
+      "path": ".local/meeting-summary-mode-implementation-v1/repair-v2/receipt.json",
+      "bytes": 8032,
+      "sha256": "9cf25fa25a35d1acaede996a62144a38c2ae8e8ba70d42f678372b7316a2d6d4"
+    },
+    {
+      "path": ".local/meeting-summary-mode-implementation-v1/repair-v2/evidence-index.json",
+      "bytes": 20884,
+      "sha256": "220b50e31d2eb233689031206544499258f97f1c835b2699eeb0fdcf749eeec1"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/repair-v2-implementation-verification-v1.json",
+      "bytes": 725,
+      "sha256": "f13fa425a4b205245869fb982c35266820daf5f6689d4e5f402c570b44618b71"
+    }
+  ],
+  "preservation": {
+    "baseline_current_and_copies": 140,
+    "frozen": 77,
+    "preedit_artifacts": 56,
+    "final_index_artifacts": 74,
+    "earlier_failures_retained": true,
+    "old_case_count_not_added_to_final": true
+  },
+  "repaired_behaviors": [
+    "Normal semantic rejection distinct from operational completion.",
+    "Original semantic and operational causes preserved after subsequent failures.",
+    "Same post-write clock drives terminal timing and eligibility.",
+    "Owned process cleanup registered before post-Popen drain setup.",
+    "First client-close, seal and invalidation failure retain populated bound terminal.",
+    "Attempt/transport/response/contract-validation counts separate."
+  ],
+  "limits": [
+    "Fake HTTP/clock/owner tests do not establish real native compatibility, resource bounds or summary quality.",
+    "Partial-write regressions raise after synthetic file creation; no actual OS partial write reproduced.",
+    "External terminal custody remains mandatory; failed disk sealing is never represented as complete.",
+    "Source acceptance, source-only criteria, final registration, exact source CI and actual once-run remain separate pending steps."
+  ],
+  "actual_model_calls": 0,
+  "actual_tokenizer_calls": 0,
+  "native_processes_started": 0,
+  "human_review_count": 0,
+  "paid_service_calls": 0,
+  "public_service_deployments": 0
+}

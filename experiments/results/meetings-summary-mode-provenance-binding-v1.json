@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "synthetic_implementation_and_independent_review_passed_exact_source_ci_pending",
+  "design_commit": "b53cc654803cfbb539b9d7043df7b5e0fd0c21f6",
+  "change": "Require exact provenance_boundary in registration and initial/post-custody file checks. Original plan and launcher amendment remain required; no prompt, model, budget or product behavior change.",
+  "source": [
+    {
+      "path": "scripts/probe_meeting_summary_mode.py",
+      "bytes": 56152,
+      "sha256": "480ca031a8de1e61c462726b987508bf5b05a784fde76c376ceafc3015b78f30"
+    },
+    {
+      "path": "tests/test_probe_meeting_summary_mode.py",
+      "bytes": 69874,
+      "sha256": "ab3b6fa11331c776fb1790e395715e7734f6c1094d9ba7945ce365d4ba5e1b9e"
+    }
+  ],
+  "contract": {
+    "path": "docs/MEETINGS-SUMMARY-MODE-PROVENANCE-BOUNDARY.md",
+    "bytes": 7014,
+    "sha256": "ab191c4aa424d2ca16a874683feb3c88eb6064a89bcb47e9bae0e2fdfa9a11ac"
+  },
+  "verification": {
+    "synthetic_tests_passed": 176,
+    "existing_cases_included": 167,
+    "new_cases": 9,
+    "elapsed_seconds": 3.93,
+    "ruff_passed": true,
+    "independent_static_blockers": 0,
+    "independent_static_advisories": 0,
+    "independent_inputs_unchanged": 11,
+    "evidence_entries_byte_verified": 4144,
+    "generic_refs_unchanged_at_worker_return": 142,
+    "frozen_refs_unchanged": 77,
+    "subsequent_parent_runbook_edit": "intentional documentation update after preservation verification; not an unchanged generic-ref claim"
+  },
+  "preserved_failures": [
+    "pre-fix 6 failed / 4 passed",
+    "first implementation 175 passed / 1 added test exception expectation failed",
+    "read-only Git permission failure, edit CRLF assertion, cp949 read error"
+  ],
+  "bindings": [
+    {
+      "path": ".local/meeting-summary-mode-boundary-implementation-v1/receipt.json",
+      "bytes": 3773,
+      "sha256": "4fbcc588c2d205913303ad6e376d6b258ceb97166fcc873dfe3748fd36bd9c85"
+    },
+    {
+      "path": ".local/meeting-summary-mode-boundary-implementation-v1/independent-review-v1.json",
+      "bytes": 14645,
+      "sha256": "9d596d958210493f4db2b60799a152fe2fe542548c5793fc482523b572ce080f"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/boundary-implementation-verification-v1.json",
+      "bytes": 1233400,
+      "sha256": "40e966d698c879c300c05b0922707adea11bf25ca7326d9bfbb16e3924570b14"
+    }
+  ],
+  "limits": {
+    "model_runs": 0,
+    "tokenizer_runs": 0,
+    "source_admission": false,
+    "criteria_written": false,
+    "human_review": 0,
+    "paid_calls": 0,
+    "public_deployment": false,
+    "phase1_complete": false
+  }
+}

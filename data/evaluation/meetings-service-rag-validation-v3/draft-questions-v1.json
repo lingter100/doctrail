@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "cases": [
+    {
+      "id": "SRV3-V01",
+      "query": "Types Team은 어떤 문제를 해결하려는 팀이며, 언어 기능·명세·solver 개선이라는 업무와 정기 설계 회의가 그 목적에 어떻게 연결되는지 설명해 주세요.",
+      "language": "ko",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public"
+    },
+    {
+      "id": "SRV3-V02",
+      "query": "After the 24 April review, explain the rules for Galdae Record Classroom’s next tactile-map kit loan: its duration, when an extension becomes valid, and whether both returned kits can immediately be lent again.",
+      "language": "en",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic"
+    },
+    {
+      "id": "SRV3-V03",
+      "query": "2022년 3월 18일과 5월 27일 회의 기록을 비교해 MIR Formality의 subtyping 지원과 solver 상태가 어떻게 달라졌는지 설명해 주세요. 당시 구현된 내용, 향후 계획, Chalk의 recursive solver와의 관계를 구분해 주세요.",
+      "language": "ko",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public"
+    },
+    {
+      "id": "SRV3-V04",
+      "query": "Trace the bag-identification tag decision from the 7 April meeting to the 24 April review. Explain the original trial, what was observed, the follow-up change and deadline, and its limits for the other bags and kit contents.",
+      "language": "en",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic"
+    },
+    {
+      "id": "SRV3-V05",
+      "query": "4월 24일 회의까지 확정된 금액을 기준으로, 들뜬 지도 한 장의 교체 구입비와 순회함 분실 변상액, 차량 이동비는 각각 얼마인가요?",
+      "language": "ko",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic"
+    },
+    {
+      "id": "SRV3-V06",
+      "query": "According to the Types Team records, which Rust release adopted MIR Formality as an official part of the language definition, on what date did that adoption occur, and which approved RFC number authorized it?",
+      "language": "en",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public"
+    },
+    {
+      "id": "SRV3-V07",
+      "query": "2022년 5월 27일 기록에서 formalityc의 최종 구현 담당자, 실제 도입 완료일, 표준 Rust 테스트 스위트 전체의 측정된 성공률을 확인해 주세요.",
+      "language": "ko",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public"
+    },
+    {
+      "id": "SRV3-V08",
+      "query": "What is the confirmed rollout schedule after the 24 April review: the approved release date of the revised direction guides, the next borrowing institution, and its dispatch date?",
+      "language": "en",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic"
+    }
+  ]
+}

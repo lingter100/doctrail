@@ -1,0 +1,457 @@
+{
+  "schema_version": 1,
+  "source_processing_version": 2,
+  "phase": "validation",
+  "mode": "adopted-all",
+  "manifest_sha256": "b0b08a41b6a738c9d6fe7721a8ac1bbb794ffe1c11eb8fa27d0be03c0f9733fe",
+  "documents": [
+    {
+      "source_id": "c5-val-pub-general",
+      "document_id": "c5-val-pub-general",
+      "revision": 1,
+      "registration_ordinal": 0,
+      "family_id": "c5-f03",
+      "title": "Rustc Dev Guide Working Group",
+      "meeting_date": null,
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-pub-general.md",
+      "raw_sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+      "raw_size_bytes": 3192,
+      "git_blob_sha1": "c4a7087cd25081d737b38d57baff13cdd9ee57c5",
+      "processed_sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+      "processed_codepoints": 3192,
+      "content": "---\ntitle: Rustc Dev Guide Working Group\ntype: docs\n---\n# Rustc Dev Guide Working Group\n![working group status: active][status]\n\nThis working group aims to make the compiler easier to learn by ensuring that rustc-dev-guide and api docs are \"complete\".\n\n- **Team:** [wg-rustc-dev-guide on rust-lang/team](https://github.com/rust-lang/team/blob/master/teams/wg-rustc-dev-guide.toml)\n- **Meeting Notes:** \n    - [2019.05.14 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md\" >}})\n    - [2019.05.28 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md\" >}})\n    - [2019.06.11 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.06.11-meeting.md\" >}})\n    - [2019.06.25 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.06.25-meeting.md\" >}})\n    - [2019.07.09 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.09-meeting.md\" >}})\n    - [2019.07.23 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.23-meeting.md\" >}})\n    - [2019.08.06 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.08.06-meeting.md\" >}})\n    - [2019.08.20 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.08.20-meeting.md\" >}})\n    - [2019.09.17 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.09.17-meeting.md\" >}})\n    - [2019.10.01 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.10.01-meeting.md\" >}})\n- **Agenda:** [Agenda]({{< relref \"/working-groups/rustc-dev-guide/minutes/agenda\" >}})\n- **FAQ:** [FAQ]({{< relref \"/working-groups/rustc-dev-guide/FAQ\" >}})\n\n[status]: https://img.shields.io/badge/status-active-brightgreen.svg?style=for-the-badge\n[spastorino]: https://github.com/spastorino\n[markim]: https://github.com/mark-i-m\n\n## What is the goal of this working group?\nThis working group aims to accomplish the following:\n\n- Ensure that major components of rustc are covered in rustc-dev-guide\n- Ensure that API doc coverage is at least 90%\n\n# How can I get involved?\nIf you are interested in getting involved in this working group, come and say hi in the Zulip\nstream. You can be added to the Zulip group for the working group if you are interested in being\npinged when there are available tasks.\n\n## Process\nWe are trying to follow a \"sprint-like\" structure where on each \"sprint\" cycle we start with a planning and then\nwork towards the goals defined on that plan. Our current plan is to work for 2 months on a couple of goals, with a few meetings to sync up during that period. We are working towards filling out missing parts of the rustc-dev-guide and building some chapters that help gain an overall understanding of what the compiler does to code to produce its output.\n\n- **Desired experience level:** Any\n- **Relevant repositories:** [`rust-lang/rust`][rust-repo] and [`rust-lang/rustc-dev-guide`][rustc-dev-guide-repo]\n- **Zulip stream:** [`#t-compiler/wg-rustc-dev-guide`][zulip] on Zulip\n\n[rust-repo]: https://github.com/rust-lang/rust\n[rustc-dev-guide-repo]: https://github.com/rust-lang/rustc-dev-guide\n[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 3192,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-pub-general-r1-c0000",
+          "text": "---\ntitle: Rustc Dev Guide Working Group\ntype: docs\n---\n# Rustc Dev Guide Working Group\n![working group status: active][status]\n\nThis working group aims to make the compiler easier to learn by ensuring that rustc-dev-guide and api docs are \"complete\".\n\n- **Team:** [wg-rustc-dev-guide on rust-lang/team](https://github.com/rust-lang/team/blob/master/teams/wg-rustc-dev-guide.toml)\n- **Meeting Notes:** \n    - [2019.05.14 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md\" >}})\n    - [2019.05.28 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md\" >}})\n    - [2019.06.11 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.06.11-meeting.md\" >}})\n    - [2019.06.25 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.06.25-meeting.md\" >}})\n    - [2019.07.09 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.09-meeting.md\" >}})\n    - [2019.07.23 Meeting]({{< relref ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 976,
+          "ordinal": 0,
+          "text_sha256": "7d2449192058e069af80f7b93a69f90384adff25e0053146fd5d4545721852f2"
+        },
+        {
+          "chunk_id": "c5-val-pub-general-r1-c0001",
+          "text": ">}})\n    - [2019.07.09 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.09-meeting.md\" >}})\n    - [2019.07.23 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.07.23-meeting.md\" >}})\n    - [2019.08.06 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.08.06-meeting.md\" >}})\n    - [2019.08.20 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.08.20-meeting.md\" >}})\n    - [2019.09.17 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.09.17-meeting.md\" >}})\n    - [2019.10.01 Meeting]({{< relref \"/working-groups/rustc-dev-guide/minutes/2019.10.01-meeting.md\" >}})\n- **Agenda:** [Agenda]({{< relref \"/working-groups/rustc-dev-guide/minutes/agenda\" >}})\n- **FAQ:** [FAQ]({{< relref \"/working-groups/rustc-dev-guide/FAQ\" >}})\n\n[status]: https://img.shields.io/badge/status-active-brightgreen.svg?style=for-the-badge\n[spastorino]: https://github.com/spastorino\n[markim]: https://github.com/mark-i-m\n\n## What is the goal ",
+          "page": null,
+          "start_offset": 826,
+          "end_offset": 1825,
+          "ordinal": 1,
+          "text_sha256": "85c77450dc2de25892f11d5c491f46dca8e88bce84f2b09dd0f4315573f6112e"
+        },
+        {
+          "chunk_id": "c5-val-pub-general-r1-c0002",
+          "text": "tus-active-brightgreen.svg?style=for-the-badge\n[spastorino]: https://github.com/spastorino\n[markim]: https://github.com/mark-i-m\n\n## What is the goal of this working group?\nThis working group aims to accomplish the following:\n\n- Ensure that major components of rustc are covered in rustc-dev-guide\n- Ensure that API doc coverage is at least 90%\n\n# How can I get involved?\nIf you are interested in getting involved in this working group, come and say hi in the Zulip\nstream. You can be added to the Zulip group for the working group if you are interested in being\npinged when there are available tasks.\n\n## Process\nWe are trying to follow a \"sprint-like\" structure where on each \"sprint\" cycle we start with a planning and then\nwork towards the goals defined on that plan. Our current plan is to work for 2 months on a couple of goals, with a few meetings to sync up during that period. We are working towards filling out missing parts of the rustc-dev-guide and building some chapters that help gain ",
+          "page": null,
+          "start_offset": 1675,
+          "end_offset": 2675,
+          "ordinal": 2,
+          "text_sha256": "1f2a2230048ac6100fc1c1ad03a815fc082852484131fe2a8355bc5b65acc5c3"
+        },
+        {
+          "chunk_id": "c5-val-pub-general-r1-c0003",
+          "text": "ings to sync up during that period. We are working towards filling out missing parts of the rustc-dev-guide and building some chapters that help gain an overall understanding of what the compiler does to code to produce its output.\n\n- **Desired experience level:** Any\n- **Relevant repositories:** [`rust-lang/rust`][rust-repo] and [`rust-lang/rustc-dev-guide`][rustc-dev-guide-repo]\n- **Zulip stream:** [`#t-compiler/wg-rustc-dev-guide`][zulip] on Zulip\n\n[rust-repo]: https://github.com/rust-lang/rust\n[rustc-dev-guide-repo]: https://github.com/rust-lang/rustc-dev-guide\n[zulip]: https://rust-lang.zulipchat.com/#narrow/stream/196385-t-compiler.2Fwg-rustc-dev-guide\n",
+          "page": null,
+          "start_offset": 2525,
+          "end_offset": 3192,
+          "ordinal": 3,
+          "text_sha256": "57215a0481e2ab61ed6399543e5087b011e4741cc24a66eb8b6b7cf6c444d83d"
+        }
+      ],
+      "provenance": {
+        "origin": "public",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Complete existing general working-group page and two directly linked dated meeting records. Literal historical source; current status is not inferred.",
+          "limitations": [
+            "Hugo front matter, relref markup, and links remain literal; linked external targets are not additional adopted documents.",
+            "General page is the snapshot at pinned revision and is not asserted to have been written on either meeting date.",
+            "Distinct repository from prior rust-lang/lang-team but same organization; independent freshness review must consider this relation."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "repository": "https://github.com/rust-lang/compiler-team",
+        "immutable_commit": "6cf981d16c1852074b397eee544adc3d1a7eb6b6",
+        "upstream_path": "content/working-groups/rustc-dev-guide/_index.md",
+        "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/content/working-groups/rustc-dev-guide/_index.md",
+        "license_id": "MIT",
+        "license": {
+          "id": "MIT",
+          "path": "LICENSE-MIT",
+          "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/LICENSE-MIT",
+          "raw_sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "git_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "notice_text": "Permission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+          "other_repository_license_evidence": {
+            "path": "LICENSE-APACHE",
+            "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+          }
+        }
+      },
+      "source_path": "content/working-groups/rustc-dev-guide/_index.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-pub-meeting-01",
+      "document_id": "c5-val-pub-meeting-01",
+      "revision": 1,
+      "registration_ordinal": 1,
+      "family_id": "c5-f03",
+      "title": "Rustc Dev Guide WG 2019-05-14 sync meeting",
+      "meeting_date": "2019-05-14",
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-pub-meeting-01.md",
+      "raw_sha256": "f3e9a2340a385e1232a296d3c4d226a56d4fe4ea8d131da7a1a8fc23a4ed79cf",
+      "raw_size_bytes": 1915,
+      "git_blob_sha1": "cc2a6c5f81c54cb21d2a21e6f2fdd3e0e1c0acbe",
+      "processed_sha256": "f3e9a2340a385e1232a296d3c4d226a56d4fe4ea8d131da7a1a8fc23a4ed79cf",
+      "processed_codepoints": 1913,
+      "content": "---\ntitle: Rustc Dev Guide WG 2019-05-14 sync meeting\ntype: docs\n---\n# Rustc Dev Guide WG 2019-05-14 sync meeting\n\n## Topics discussed:\n\n- Define what’s the walkthrough section we want to add\n- Triage missing rustc-dev-guide chapters\n- How do we want to keep track of who is doing what? Does github Projects works\n  nice for this?\n\n## Plan for walkthrough/overview chapter\n\n- Goal is to have a chapter which will walk through compilation of simple program\n- Links to other chapters for details\n- This overview differs from the existing queries chapter in that the latter is\n  more focused on how to create your own queries.\n\nStatus:\n- lokalmatador is giving this a try & will open a PR at some point\n\n## rustc-dev-guide missing chapters\n\nTopics that need to be added\n\n- Monomorphization, Type Memory Layout, Codegen, LLVM\n- Macros, hygiene, proc macros, custom derives, etc.\n- Lexing and Parsing\n- Walkthrough of a typical contribution\n- The rest of\n  - Name Resolution\n  - Traits\n    - Region Constraints\n    - SLG solver\n  - Type checking\n  - MIR\n    - Constants, Promoted Constants in MIR\n    - Construction of MIR\n    - Optimizations\n    - Borrow Check: Moves and initialization\n    - MIR Type check\n    - Various parts of NLL\n- A large collection of potential improvements in the form of issues on the repo\n\nStatus:\n\n- Would be good to schedule a lecture on each missing topic\n- less work for the experts\n- Can then transcribe into a chapter\n- @spastorino will arrange lectures, nikomatsakis will create zoom\n\n## How do we want to keep track of who is doing what? Does github Projects works nice for this?\n\n- planning to use github issues.\n- Two issues were created to track existing work:\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of GH projects\n- for now we will move TODO list to GH issues from dropbox",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1913,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-pub-meeting-01-r1-c0000",
+          "text": "---\ntitle: Rustc Dev Guide WG 2019-05-14 sync meeting\ntype: docs\n---\n# Rustc Dev Guide WG 2019-05-14 sync meeting\n\n## Topics discussed:\n\n- Define what’s the walkthrough section we want to add\n- Triage missing rustc-dev-guide chapters\n- How do we want to keep track of who is doing what? Does github Projects works\n  nice for this?\n\n## Plan for walkthrough/overview chapter\n\n- Goal is to have a chapter which will walk through compilation of simple program\n- Links to other chapters for details\n- This overview differs from the existing queries chapter in that the latter is\n  more focused on how to create your own queries.\n\nStatus:\n- lokalmatador is giving this a try & will open a PR at some point\n\n## rustc-dev-guide missing chapters\n\nTopics that need to be added\n\n- Monomorphization, Type Memory Layout, Codegen, LLVM\n- Macros, hygiene, proc macros, custom derives, etc.\n- Lexing and Parsing\n- Walkthrough of a typical contribution\n- The rest of\n  - Name Resolution\n  - Traits\n    - Region ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 994,
+          "ordinal": 0,
+          "text_sha256": "fd46b73d104f58fdf9316b295bef4a76ea2f331de08d46642025e79c82a5f121"
+        },
+        {
+          "chunk_id": "c5-val-pub-meeting-01-r1-c0001",
+          "text": "c macros, custom derives, etc.\n- Lexing and Parsing\n- Walkthrough of a typical contribution\n- The rest of\n  - Name Resolution\n  - Traits\n    - Region Constraints\n    - SLG solver\n  - Type checking\n  - MIR\n    - Constants, Promoted Constants in MIR\n    - Construction of MIR\n    - Optimizations\n    - Borrow Check: Moves and initialization\n    - MIR Type check\n    - Various parts of NLL\n- A large collection of potential improvements in the form of issues on the repo\n\nStatus:\n\n- Would be good to schedule a lecture on each missing topic\n- less work for the experts\n- Can then transcribe into a chapter\n- @spastorino will arrange lectures, nikomatsakis will create zoom\n\n## How do we want to keep track of who is doing what? Does github Projects works nice for this?\n\n- planning to use github issues.\n- Two issues were created to track existing work:\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of ",
+          "page": null,
+          "start_offset": 844,
+          "end_offset": 1843,
+          "ordinal": 1,
+          "text_sha256": "ff521d701dd63c7867be390aca964e1c170ca49fa6463285bce1090a87a02569"
+        },
+        {
+          "chunk_id": "c5-val-pub-meeting-01-r1-c0002",
+          "text": ":\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of GH projects\n- for now we will move TODO list to GH issues from dropbox",
+          "page": null,
+          "start_offset": 1693,
+          "end_offset": 1913,
+          "ordinal": 2,
+          "text_sha256": "4163ac9aaf7ba4acb01c7e98a0a02bad78f56f420165f33d3daae8487cb20a8c"
+        }
+      ],
+      "provenance": {
+        "origin": "public",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Complete existing general working-group page and two directly linked dated meeting records. Literal historical source; current status is not inferred.",
+          "limitations": [
+            "Hugo front matter, relref markup, and links remain literal; linked external targets are not additional adopted documents.",
+            "General page is the snapshot at pinned revision and is not asserted to have been written on either meeting date.",
+            "Distinct repository from prior rust-lang/lang-team but same organization; independent freshness review must consider this relation."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "repository": "https://github.com/rust-lang/compiler-team",
+        "immutable_commit": "6cf981d16c1852074b397eee544adc3d1a7eb6b6",
+        "upstream_path": "content/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md",
+        "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/content/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md",
+        "license_id": "MIT",
+        "license": {
+          "id": "MIT",
+          "path": "LICENSE-MIT",
+          "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/LICENSE-MIT",
+          "raw_sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "git_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "notice_text": "Permission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+          "other_repository_license_evidence": {
+            "path": "LICENSE-APACHE",
+            "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+          }
+        }
+      },
+      "source_path": "content/working-groups/rustc-dev-guide/minutes/2019.05.14-meeting.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-pub-meeting-02",
+      "document_id": "c5-val-pub-meeting-02",
+      "revision": 1,
+      "registration_ordinal": 2,
+      "family_id": "c5-f03",
+      "title": "Rustc Dev Guide WG 2019-05-28 sync meeting",
+      "meeting_date": "2019-05-28",
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-pub-meeting-02.md",
+      "raw_sha256": "000a15674ac56f752a084dbae1ce1714412782ab4f03564db5e0ed2ac0245240",
+      "raw_size_bytes": 1123,
+      "git_blob_sha1": "2ebe1547491336e987fed2f3dc8b13ea9496ae8f",
+      "processed_sha256": "000a15674ac56f752a084dbae1ce1714412782ab4f03564db5e0ed2ac0245240",
+      "processed_codepoints": 1123,
+      "content": "---\ntitle: Rustc Dev Guide WG 2019-05-28 sync meeting\ntype: docs\n---\n# Rustc Dev Guide WG 2019-05-28 sync meeting\n\n## Triaging rustc-dev-guide repo\n\n- Some discussion about how to assign issues on the rust-lang/rustc-dev-guide repo\n- Problem: can't assign issues to non-members\n- Possible solutions:\n    - Add WG-rustc-dev-guide members to repo so they can be assigned\n    - use `triagebot` model: bot is assigned the issue and edits the OP to mention the current owner.\n\n## Forge\n\n- Discussed purpose of the forge and how it differs from rustc-dev-guide\n- Niko feels that most of the content in the forge doesn't obviously belong in the guide and that the stuff currently in the guide feels like it belongs in the guide\n- Forge is for team procedures, infra stuff\n    - would also be good to add craterbot and rustc-timer links to forge (probably link to READMEs of their repos)\n- link forge from main page\n\n> my rule of thumb [for what to put in the guide] is sort of \"is this something you would do while fixing a compiler bug or implementing a compiler feature\" -niko\n\n## Lectures\n\n- Do one on MIR and HAIR construction",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1123,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-pub-meeting-02-r1-c0000",
+          "text": "---\ntitle: Rustc Dev Guide WG 2019-05-28 sync meeting\ntype: docs\n---\n# Rustc Dev Guide WG 2019-05-28 sync meeting\n\n## Triaging rustc-dev-guide repo\n\n- Some discussion about how to assign issues on the rust-lang/rustc-dev-guide repo\n- Problem: can't assign issues to non-members\n- Possible solutions:\n    - Add WG-rustc-dev-guide members to repo so they can be assigned\n    - use `triagebot` model: bot is assigned the issue and edits the OP to mention the current owner.\n\n## Forge\n\n- Discussed purpose of the forge and how it differs from rustc-dev-guide\n- Niko feels that most of the content in the forge doesn't obviously belong in the guide and that the stuff currently in the guide feels like it belongs in the guide\n- Forge is for team procedures, infra stuff\n    - would also be good to add craterbot and rustc-timer links to forge (probably link to READMEs of their repos)\n- link forge from main page\n\n> my rule of thumb [for what to put in the guide] is sort of \"is this something you would ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 999,
+          "ordinal": 0,
+          "text_sha256": "8eeb59f949bd1f38d3d7071bf035f0c8650abd10069cb8f4efbcdc187ce130e1"
+        },
+        {
+          "chunk_id": "c5-val-pub-meeting-02-r1-c0001",
+          "text": "ink to READMEs of their repos)\n- link forge from main page\n\n> my rule of thumb [for what to put in the guide] is sort of \"is this something you would do while fixing a compiler bug or implementing a compiler feature\" -niko\n\n## Lectures\n\n- Do one on MIR and HAIR construction",
+          "page": null,
+          "start_offset": 849,
+          "end_offset": 1123,
+          "ordinal": 1,
+          "text_sha256": "770826694059253eee06e19a7e843322bd12c196da98ca093a2df62526c0660a"
+        }
+      ],
+      "provenance": {
+        "origin": "public",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Complete existing general working-group page and two directly linked dated meeting records. Literal historical source; current status is not inferred.",
+          "limitations": [
+            "Hugo front matter, relref markup, and links remain literal; linked external targets are not additional adopted documents.",
+            "General page is the snapshot at pinned revision and is not asserted to have been written on either meeting date.",
+            "Distinct repository from prior rust-lang/lang-team but same organization; independent freshness review must consider this relation."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "repository": "https://github.com/rust-lang/compiler-team",
+        "immutable_commit": "6cf981d16c1852074b397eee544adc3d1a7eb6b6",
+        "upstream_path": "content/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md",
+        "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/content/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md",
+        "license_id": "MIT",
+        "license": {
+          "id": "MIT",
+          "path": "LICENSE-MIT",
+          "immutable_url": "https://github.com/rust-lang/compiler-team/blob/6cf981d16c1852074b397eee544adc3d1a7eb6b6/LICENSE-MIT",
+          "raw_sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+          "git_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "notice_text": "Permission is hereby granted, free of charge, to any\nperson obtaining a copy of this software and associated\ndocumentation files (the \"Software\"), to deal in the\nSoftware without restriction, including without\nlimitation the rights to use, copy, modify, merge,\npublish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this permission notice\nshall be included in all copies or substantial portions\nof the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF\nANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED\nTO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A\nPARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT\nSHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR\nIN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\nDEALINGS IN THE SOFTWARE.\n",
+          "other_repository_license_evidence": {
+            "path": "LICENSE-APACHE",
+            "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+          }
+        }
+      },
+      "source_path": "content/working-groups/rustc-dev-guide/minutes/2019.05.28-meeting.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-syn-general",
+      "document_id": "c5-val-syn-general",
+      "revision": 1,
+      "registration_ordinal": 3,
+      "family_id": "c5-f04",
+      "title": "밤여울 소리기록실 현장음 수집·공개 운영 규정",
+      "meeting_date": null,
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-syn-general.md",
+      "raw_sha256": "9f67d83dbf21728e19f41ca738c5e94a25731c6421314985b5afd0e3b41840da",
+      "raw_size_bytes": 2842,
+      "git_blob_sha1": null,
+      "processed_sha256": "9f67d83dbf21728e19f41ca738c5e94a25731c6421314985b5afd0e3b41840da",
+      "processed_codepoints": 1200,
+      "content": "# 밤여울 소리기록실 현장음 수집·공개 운영 규정\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n문서 번호: BY-SOUND-2026-03. 시행일은 2026년 4월 1일이다. 밤여울 소리기록실은 마을의 일상 소리를 수집해 작은 청취 전시와 연구용 목록을 운영하는 가상 비영리 기록실이다. 이 규정은 야외 녹음 원본, 열람용 사본, 전시용 편집본에 공통으로 적용된다. 기록관리 책임자는 윤하린, 장비 담당자는 서민재, 공개 심의 담당자는 오다온이다.\n\n## 수집과 등록\n\n현장 담당자는 녹음 후 사흘 안에 수집 일시, 장소 구역, 장비 번호, 파일 길이, 참여자 동의 상태를 접수대장에 기록한다. 장비 시계와 현장 수첩의 시각이 다르면 두 값을 함께 남기고 원인을 조사한다. 원본 WAV 파일은 접수 즉시 읽기 전용 보관함에 넣는다. 잡음 제거와 구간 편집은 복제본에서만 수행하며 원본을 덮어쓰지 않는다. 윤하린은 주 1회 접수대장과 실제 보관 파일의 수량을 대조하고 누락을 별도 목록으로 관리한다.\n\n## 공개 판단\n\n사람의 식별 가능한 발화가 들어간 파일은 참여자 동의와 공개 심의를 모두 통과해야 전시에 쓸 수 있다. 동의가 없는 발화를 제거한 편집본도 오다온이 제거 구간을 확인한 뒤 승인해야 한다. 동의 상태가 불명확하거나 배경 대화의 화자가 확인되지 않으면 내부 보관만 허용한다. 이 경우 상태를 '보류'로 적고 전시 가능으로 추정하지 않는다. 자연음과 기계음만 있는 파일은 발화 점검 결과를 대장에 남기고 동일한 공개 심의를 거친다.\n\n전시용 편집본을 승인할 때에는 원본 관리번호, 편집본 버전, 제거·감쇠한 구간, 청취 확인자, 승인일을 기록한다. 한 번 승인된 파일이라도 편집 구간이나 음량 처리가 바뀌면 새 버전으로 다시 심의한다. 열람용 사본은 원본과의 연결을 유지하며, 전시 승인이 열람용 사본 전체의 자유 배포를 뜻하지는 않는다.\n\n## 장비와 이동 전시\n\n서민재는 출발 전 배터리 상태와 저장매체의 남은 공간을 점검하고 돌아온 날 점검표를 닫는다. 결함이 의심되는 장비에는 사용 중지 표지를 붙인다. 장비가 돌아왔다는 사실만으로 다음 대여를 승인하지 않으며 담당자의 재점검 기록이 있어야 한다. 이동 전시는 승인된 편집본만 담은 별도 재생 장치를 사용하고 현장에서는 네트워크 연결을 끈다. 전시 종료 뒤에는 재생 장치의 임시 사본을 삭제하고 삭제 확인을 남긴다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1200,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-syn-general-r1-c0000",
+          "text": "# 밤여울 소리기록실 현장음 수집·공개 운영 규정\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n문서 번호: BY-SOUND-2026-03. 시행일은 2026년 4월 1일이다. 밤여울 소리기록실은 마을의 일상 소리를 수집해 작은 청취 전시와 연구용 목록을 운영하는 가상 비영리 기록실이다. 이 규정은 야외 녹음 원본, 열람용 사본, 전시용 편집본에 공통으로 적용된다. 기록관리 책임자는 윤하린, 장비 담당자는 서민재, 공개 심의 담당자는 오다온이다.\n\n## 수집과 등록\n\n현장 담당자는 녹음 후 사흘 안에 수집 일시, 장소 구역, 장비 번호, 파일 길이, 참여자 동의 상태를 접수대장에 기록한다. 장비 시계와 현장 수첩의 시각이 다르면 두 값을 함께 남기고 원인을 조사한다. 원본 WAV 파일은 접수 즉시 읽기 전용 보관함에 넣는다. 잡음 제거와 구간 편집은 복제본에서만 수행하며 원본을 덮어쓰지 않는다. 윤하린은 주 1회 접수대장과 실제 보관 파일의 수량을 대조하고 누락을 별도 목록으로 관리한다.\n\n## 공개 판단\n\n사람의 식별 가능한 발화가 들어간 파일은 참여자 동의와 공개 심의를 모두 통과해야 전시에 쓸 수 있다. 동의가 없는 발화를 제거한 편집본도 오다온이 제거 구간을 확인한 뒤 승인해야 한다. 동의 상태가 불명확하거나 배경 대화의 화자가 확인되지 않으면 내부 보관만 허용한다. 이 경우 상태를 '보류'로 적고 전시 가능으로 추정하지 않는다. 자연음과 기계음만 있는 파일은 발화 점검 결과를 대장에 남기고 동일한 공개 심의를 거친다.\n\n전시용 편집본을 승인할 때에는 원본 관리번호, 편집본 버전, 제거·감쇠한 구간, 청취 확인자, 승인일을 기록한다. 한 번 승인된 파일이라도 편집 구간이나 음량 처리가 바뀌면 새 버전으로 다시 심의한다. 열람용 사본은 원본과의 연결을 유지하며, 전시 승인이 열람용 사본 전체의 자유 배포를 뜻하지는 않는다.\n\n## 장비와 이동 전시\n\n서민재는 출발 전 배터리 상태와 저장매체의 남은 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 999,
+          "ordinal": 0,
+          "text_sha256": "d82b65ff62ca45668f309f072ff11b525a40d1ff7868379a575dcd015feb4c77"
+        },
+        {
+          "chunk_id": "c5-val-syn-general-r1-c0001",
+          "text": " 한 번 승인된 파일이라도 편집 구간이나 음량 처리가 바뀌면 새 버전으로 다시 심의한다. 열람용 사본은 원본과의 연결을 유지하며, 전시 승인이 열람용 사본 전체의 자유 배포를 뜻하지는 않는다.\n\n## 장비와 이동 전시\n\n서민재는 출발 전 배터리 상태와 저장매체의 남은 공간을 점검하고 돌아온 날 점검표를 닫는다. 결함이 의심되는 장비에는 사용 중지 표지를 붙인다. 장비가 돌아왔다는 사실만으로 다음 대여를 승인하지 않으며 담당자의 재점검 기록이 있어야 한다. 이동 전시는 승인된 편집본만 담은 별도 재생 장치를 사용하고 현장에서는 네트워크 연결을 끈다. 전시 종료 뒤에는 재생 장치의 임시 사본을 삭제하고 삭제 확인을 남긴다.\n",
+          "page": null,
+          "start_offset": 849,
+          "end_offset": 1200,
+          "ordinal": 1,
+          "text_sha256": "1af3e9f618399fb3dcaf55c77e5671d7ec0587fc521eaa93edd97a33bbf566f1"
+        }
+      ],
+      "provenance": {
+        "origin": "synthetic",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Fresh explicitly fictional sound archive, operating policy and two chronological operations meetings. Authored as source material before any questions.",
+          "limitations": [
+            "AI-authored fictional scenario; not external factual evidence or human-reviewed material."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "synthetic_provenance": {
+          "ai_authored": true,
+          "fictional": true,
+          "author_role": "/root/c5_validation_author",
+          "notice": "이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.",
+          "original_authorship_for": "C5 isolated validation source-first corpus",
+          "authored_at": "2026-10-19T08:04:56.222159+00:00"
+        }
+      },
+      "source_path": "synthetic/c5-val-syn-general.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-syn-meeting-01",
+      "document_id": "c5-val-syn-meeting-01",
+      "revision": 1,
+      "registration_ordinal": 4,
+      "family_id": "c5-f04",
+      "title": "밤여울 소리기록실 2026-05-07 수집 운영 회의",
+      "meeting_date": "2026-05-07",
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-syn-meeting-01.md",
+      "raw_sha256": "cd34a9317af111fe83bf226051e85ffdd5cd3d1b996e0d4a85db238ac1e26720",
+      "raw_size_bytes": 2185,
+      "git_blob_sha1": null,
+      "processed_sha256": "cd34a9317af111fe83bf226051e85ffdd5cd3d1b996e0d4a85db238ac1e26720",
+      "processed_codepoints": 955,
+      "content": "# 밤여울 소리기록실 2026-05-07 수집 운영 회의\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n회의 일시: 2026년 5월 7일 10:00~10:45. 참석자는 윤하린, 서민재, 오다온, 현장 기록자 이새봄이다. 검토 범위는 4월 수집분의 접수 상태와 6월 작은 청취 전시 준비다. 이번 회의는 전시의 개최일이나 외부 기관 대여료를 확정하는 자리가 아니다.\n\n## 4월 수집분 정리\n\n접수대장에는 18건이 등록되어 있고 원본 18개가 읽기 전용 보관함에 있는 것을 확인했다. 그중 관리번호 BY-0412에는 장비 시계가 현장 수첩보다 7분 빠른 기록이 남아 있다. 이새봄이 5월 12일까지 현장 수첩 사진과 장비 점검표를 모아 시각 차이의 원인을 확인하기로 했다. 원본의 시각 정보를 지금 고치지 않고 두 시각을 함께 유지한다.\n\nBY-0418은 시장 골목의 수집음에 식별 가능한 대화가 있어 전시 후보에서 보류했다. 오다온은 화자 동의 여부를 확인하되, 동의를 얻지 못하면 해당 발화를 제거한 편집본을 따로 심의하기로 했다. 동의서가 없는 원본을 먼저 전시하거나, 회의에서 논의했다는 이유만으로 공개 승인 처리하지 않는다.\n\n## 장비와 전시 준비\n\n녹음기 R-4는 오른쪽 입력에서 간헐적인 잡음이 발견되어 사용 중지했다. 서민재가 케이블 교체와 입력 시험을 5월 15일까지 실시하고 결과를 다음 운영 회의에 가져온다. R-4의 다음 현장 대여는 시험 기록을 확인할 때까지 보류한다. 예비 녹음기 R-2는 이번 주 수집팀에 배정한다.\n\n윤하린은 전시 후보 6건의 원본 관리번호와 편집본 버전을 연결한 목록을 만든다. 오다온은 각 후보의 발화 점검과 공개 승인 상태를 검토한다. 아직 승인되지 않은 후보는 내부 검토용 장치에만 넣는다. 다음 회의는 5월 21일이며, 점검 결과와 승인 목록을 확인한 뒤 이동 전시에 사용할 편집본을 결정한다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 955,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-syn-meeting-01-r1-c0000",
+          "text": "# 밤여울 소리기록실 2026-05-07 수집 운영 회의\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n회의 일시: 2026년 5월 7일 10:00~10:45. 참석자는 윤하린, 서민재, 오다온, 현장 기록자 이새봄이다. 검토 범위는 4월 수집분의 접수 상태와 6월 작은 청취 전시 준비다. 이번 회의는 전시의 개최일이나 외부 기관 대여료를 확정하는 자리가 아니다.\n\n## 4월 수집분 정리\n\n접수대장에는 18건이 등록되어 있고 원본 18개가 읽기 전용 보관함에 있는 것을 확인했다. 그중 관리번호 BY-0412에는 장비 시계가 현장 수첩보다 7분 빠른 기록이 남아 있다. 이새봄이 5월 12일까지 현장 수첩 사진과 장비 점검표를 모아 시각 차이의 원인을 확인하기로 했다. 원본의 시각 정보를 지금 고치지 않고 두 시각을 함께 유지한다.\n\nBY-0418은 시장 골목의 수집음에 식별 가능한 대화가 있어 전시 후보에서 보류했다. 오다온은 화자 동의 여부를 확인하되, 동의를 얻지 못하면 해당 발화를 제거한 편집본을 따로 심의하기로 했다. 동의서가 없는 원본을 먼저 전시하거나, 회의에서 논의했다는 이유만으로 공개 승인 처리하지 않는다.\n\n## 장비와 전시 준비\n\n녹음기 R-4는 오른쪽 입력에서 간헐적인 잡음이 발견되어 사용 중지했다. 서민재가 케이블 교체와 입력 시험을 5월 15일까지 실시하고 결과를 다음 운영 회의에 가져온다. R-4의 다음 현장 대여는 시험 기록을 확인할 때까지 보류한다. 예비 녹음기 R-2는 이번 주 수집팀에 배정한다.\n\n윤하린은 전시 후보 6건의 원본 관리번호와 편집본 버전을 연결한 목록을 만든다. 오다온은 각 후보의 발화 점검과 공개 승인 상태를 검토한다. 아직 승인되지 않은 후보는 내부 검토용 장치에만 넣는다. 다음 회의는 5월 21일이며, 점검 결과와 승인 목록을 확인한 뒤 이동 전시에 사용할 편집본을 결정한다.\n",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 955,
+          "ordinal": 0,
+          "text_sha256": "cd34a9317af111fe83bf226051e85ffdd5cd3d1b996e0d4a85db238ac1e26720"
+        }
+      ],
+      "provenance": {
+        "origin": "synthetic",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Fresh explicitly fictional sound archive, operating policy and two chronological operations meetings. Authored as source material before any questions.",
+          "limitations": [
+            "AI-authored fictional scenario; not external factual evidence or human-reviewed material."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "synthetic_provenance": {
+          "ai_authored": true,
+          "fictional": true,
+          "author_role": "/root/c5_validation_author",
+          "notice": "이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.",
+          "original_authorship_for": "C5 isolated validation source-first corpus",
+          "authored_at": "2026-10-19T08:04:56.222159+00:00"
+        }
+      },
+      "source_path": "synthetic/c5-val-syn-meeting-01.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "c5-val-syn-meeting-02",
+      "document_id": "c5-val-syn-meeting-02",
+      "revision": 1,
+      "registration_ordinal": 5,
+      "family_id": "c5-f04",
+      "title": "밤여울 소리기록실 2026-05-21 점검 결과 회의",
+      "meeting_date": "2026-05-21",
+      "raw_snapshot": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-syn-meeting-02.md",
+      "raw_sha256": "f813c88857ac05189086419486d26efeaba8c815eb85254d4631173cb8a9163f",
+      "raw_size_bytes": 2420,
+      "git_blob_sha1": null,
+      "processed_sha256": "f813c88857ac05189086419486d26efeaba8c815eb85254d4631173cb8a9163f",
+      "processed_codepoints": 1066,
+      "content": "# 밤여울 소리기록실 2026-05-21 점검 결과 회의\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n회의 일시: 2026년 5월 21일 10:00~10:50. 참석자는 윤하린, 서민재, 오다온, 이새봄이다. 5월 7일에 남긴 후속 과제와 이동 전시용 파일 준비 상태를 확인했다. 4월 접수대장의 18건과 읽기 전용 원본은 그대로 유지한다.\n\n## 후속 과제 결과\n\n이새봄은 BY-0412의 수첩 사진과 장비 점검표를 제출했다. 녹음 당일 배터리 교체 후 장비 시계를 잘못 맞춘 것이 원인이었다. 윤하린은 접수대장에 '현장 수첩 시각을 목록의 기준 시각으로 사용'이라고 주석을 추가하고, 장비에 기록된 원래 시각과 7분 차이도 보존했다. 원본 파일 자체는 수정하지 않았다.\n\nBY-0418의 화자 동의서는 확보되지 않았다. 오다온은 대화 구간을 제거한 편집본 v2를 청취하고 5월 20일자로 전시 사용을 승인했다. 이 승인 범위는 v2 한 개이며 원본과 이전 편집본 v1은 계속 내부 보관한다. 윤하린은 전시 목록에 승인일, 제거 구간, 청취 확인자와 원본 관리번호 연결을 기록한다. 다른 구간을 다시 편집하면 기존 승인으로 전시에 사용할 수 없고 재심의를 요청한다.\n\n서민재는 R-4의 케이블을 교체한 뒤 30분씩 두 차례 입력 시험을 수행했다. 두 시험 모두 잡음이 재현되지 않았고 점검표가 완성되어 사용 중지 표지를 해제했다. R-4는 5월 25일부터 현장 대여를 재개한다. 이 결정은 다른 장비에 대한 일괄 점검 통과로 확대하지 않는다.\n\n## 전시 반출 준비\n\n후보 6건 중 BY-0418 v2를 포함한 편집본 4개가 공개 승인을 받았고 2개는 보류 상태다. 이동 전시 장치에는 승인된 4개만 넣는다. 서민재는 반출 전 네트워크가 꺼진 상태에서 파일 재생을 확인하고, 윤하린은 장치의 파일 목록과 승인 목록이 일치하는지 대조한다. 오다온은 승인되지 않은 2개가 장치에 없음을 마지막으로 확인한다. 전시가 끝나면 임시 사본 삭제 기록을 남긴다. 장소 사용 승인과 구체적인 개최일은 외부 회신을 기다리고 있어 이번 회의에서 확정하지 않았다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1066,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+          "text": "# 밤여울 소리기록실 2026-05-21 점검 결과 회의\n\n이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.\n\n회의 일시: 2026년 5월 21일 10:00~10:50. 참석자는 윤하린, 서민재, 오다온, 이새봄이다. 5월 7일에 남긴 후속 과제와 이동 전시용 파일 준비 상태를 확인했다. 4월 접수대장의 18건과 읽기 전용 원본은 그대로 유지한다.\n\n## 후속 과제 결과\n\n이새봄은 BY-0412의 수첩 사진과 장비 점검표를 제출했다. 녹음 당일 배터리 교체 후 장비 시계를 잘못 맞춘 것이 원인이었다. 윤하린은 접수대장에 '현장 수첩 시각을 목록의 기준 시각으로 사용'이라고 주석을 추가하고, 장비에 기록된 원래 시각과 7분 차이도 보존했다. 원본 파일 자체는 수정하지 않았다.\n\nBY-0418의 화자 동의서는 확보되지 않았다. 오다온은 대화 구간을 제거한 편집본 v2를 청취하고 5월 20일자로 전시 사용을 승인했다. 이 승인 범위는 v2 한 개이며 원본과 이전 편집본 v1은 계속 내부 보관한다. 윤하린은 전시 목록에 승인일, 제거 구간, 청취 확인자와 원본 관리번호 연결을 기록한다. 다른 구간을 다시 편집하면 기존 승인으로 전시에 사용할 수 없고 재심의를 요청한다.\n\n서민재는 R-4의 케이블을 교체한 뒤 30분씩 두 차례 입력 시험을 수행했다. 두 시험 모두 잡음이 재현되지 않았고 점검표가 완성되어 사용 중지 표지를 해제했다. R-4는 5월 25일부터 현장 대여를 재개한다. 이 결정은 다른 장비에 대한 일괄 점검 통과로 확대하지 않는다.\n\n## 전시 반출 준비\n\n후보 6건 중 BY-0418 v2를 포함한 편집본 4개가 공개 승인을 받았고 2개는 보류 상태다. 이동 전시 장치에는 승인된 4개만 넣는다. 서민재는 반출 전 네트워크가 꺼진 상태에서 파일 재생을 확인하고, 윤하린은 장치의 파일 목록과 승인 목록이 일치하는지 대조한다. 오다온은 승인되지 않은 2개가 장치에 없음을 마지막으로 확인한다. 전시가 끝나면 임시 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998,
+          "ordinal": 0,
+          "text_sha256": "b70580fea2b46cab13448c1a4294a7eda3e22fc52658b5e183a9b4703803cbc5"
+        },
+        {
+          "chunk_id": "c5-val-syn-meeting-02-r1-c0001",
+          "text": " 상태다. 이동 전시 장치에는 승인된 4개만 넣는다. 서민재는 반출 전 네트워크가 꺼진 상태에서 파일 재생을 확인하고, 윤하린은 장치의 파일 목록과 승인 목록이 일치하는지 대조한다. 오다온은 승인되지 않은 2개가 장치에 없음을 마지막으로 확인한다. 전시가 끝나면 임시 사본 삭제 기록을 남긴다. 장소 사용 승인과 구체적인 개최일은 외부 회신을 기다리고 있어 이번 회의에서 확정하지 않았다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1066,
+          "ordinal": 1,
+          "text_sha256": "4cf216bfe9f4f0fa986110ad2b3873a17571e17246337f4347d111a59ac0c3a3"
+        }
+      ],
+      "provenance": {
+        "origin": "synthetic",
+        "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "author_role": "/root/c5_validation_author",
+          "scope": "Fresh explicitly fictional sound archive, operating policy and two chronological operations meetings. Authored as source material before any questions.",
+          "limitations": [
+            "AI-authored fictional scenario; not external factual evidence or human-reviewed material."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "synthetic_provenance": {
+          "ai_authored": true,
+          "fictional": true,
+          "author_role": "/root/c5_validation_author",
+          "notice": "이 문서는 AI가 새로 작성한 가상 조직의 합성 자료이며 실제 기관·인물·사업을 기록하지 않는다.",
+          "original_authorship_for": "C5 isolated validation source-first corpus",
+          "authored_at": "2026-10-19T08:04:56.222159+00:00"
+        }
+      },
+      "source_path": "synthetic/c5-val-syn-meeting-02.md",
+      "ingestion_kind": "md"
+    }
+  ],
+  "excluded_sources": []
+}

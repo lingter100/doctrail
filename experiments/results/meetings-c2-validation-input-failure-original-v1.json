@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "metadata_only_preparation_failure_diagnostic",
+  "created_at": "2026-10-14T03:00:28.689824+00:00",
+  "author_role": "/root/c2_validation_source_b",
+  "actual_tool_settings_parent_verified": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh"
+  },
+  "diagnostic_entrypoint": {
+    "path": ".local/c2-validation-token-diagnostic1/diagnose.py",
+    "sha256": "6e2de9340ae2d5570f0a2153e470efe7d8ae314525b10b907e9bd189c10cac97",
+    "size_bytes": 8705
+  },
+  "original_cli_invocations": 1,
+  "new_instrumented_prepare_invocations": 1,
+  "total_preparation_invocations": 2,
+  "prior_failure": {
+    "public_error_code": "input_preparation_failed",
+    "records": [
+      {
+        "path": ".local/c2-validation-token-preparation-v2-failure.stdout.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      },
+      {
+        "path": ".local/c2-validation-token-preparation-v2-failure.stderr.bin",
+        "sha256": "ae5d56c2bc3ab950855b841236e619a91205fae0f3b78379c39a80ebe30521d7",
+        "size_bytes": 26
+      }
+    ],
+    "original_output_directory_exists": false,
+    "specific_internal_cause_was_not_recorded": true
+  },
+  "diagnostic": {
+    "status": "failed",
+    "stage": "token_count_or_budget_validation",
+    "exception_class": "ValueError",
+    "safe_error_code": "input_preparation_token_limit",
+    "frozen_prepare_line": 106,
+    "arm": "C2",
+    "schema_validated_requests": 12,
+    "case_id": "c2-val-07",
+    "completed_item_message_pairs": 12
+  },
+  "draft": {
+    "path": "data/evaluation/meetings-c2-validation-v1/draft-v2.json",
+    "sha256": "b328037fe138b2d3472eff268f51df5251d7d7ecba190278a42e538a37bd7a5e",
+    "size_bytes": 51402
+  },
+  "measured_frozen_bindings": [
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/item-freeze-v2.json",
+      "sha256": "192f15a2ac9b22ace58e86b30446d1758d5f1dab78cf106c8969cb1a7944483a",
+      "size_bytes": 2588,
+      "measured_bound_files": {
+        "data/evaluation/meetings-c2-validation-v1/draft-v2.json": "b328037fe138b2d3472eff268f51df5251d7d7ecba190278a42e538a37bd7a5e",
+        "data/evaluation/meetings-c2-validation-v1/oracle-draft-v2.json": "4ace235ba3b639e6252f1848d60ed0e165eb69bbf4d29e2304c914cf83f75916",
+        "data/evaluation/meetings-c2-validation-v1/context-selection-v2.json": "5e7693d9acef548331edee83a886411a0a1752b8e2dea6792579a0b1beaf6cf9",
+        "data/evaluation/meetings-c2-validation-v1/item-authoring-receipt-v2.json": "fd7e4dc3981a9af56ff9a267f25372c7286a7bc0d7003e9e6af49eb24296dad4",
+        "data/evaluation/meetings-c2-validation-v1/item-prereview-v2.json": "ceeeafe977c0a82b1eb181e126640fe92cae1c0b5cf0b28e40211ad7c6ae028b",
+        "data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json": "aa4d95bb6a90edec06a4b02375ac04591cfbdc54f91b068178852ccc1da39c45",
+        "data/evaluation/meetings-c2-validation-v1/draft.json": "c2983dbc4e46a5196049de6f0027e8372812ea6b08082745b76ea6d3b251384f",
+        "data/evaluation/meetings-c2-validation-v1/oracle-draft.json": "2c737009209b197c9b4c1484bc46b190e11c1c04d153cdd85a48b176a99d5aa1",
+        "data/evaluation/meetings-c2-validation-v1/context-selection.json": "d5afefbdea235d2c6382098ee6317fdc47dbd9247bf95cb52eae98886bd274d4",
+        "data/evaluation/meetings-c2-validation-v1/item-authoring-receipt.json": "9d6a596e4ee6e2d563d5548fbcda04e187001e15f550fb6cffcc883889a7964d",
+        "data/evaluation/meetings-c2-validation-v1/item-prereview.json": "99629a5215e661a892c2c797087e9a86b41f86bcf3a55b5c8794a1921af846b6",
+        "data/evaluation/meetings-c2-comparison-source-freeze-v2.json": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+        "data/evaluation/meetings-c2-source-processing-freeze-v2.json": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad"
+      },
+      "bound_count": 13
+    },
+    {
+      "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+      "size_bytes": 5579,
+      "measured_bound_files": {
+        "data/evaluation/meetings-c2-family-registry-v1.json": "0fe710907f10dfc407997970ed176c0a657aa6d1e24a0ca95f4da07f8dd9c76c",
+        "data/models/meetings-generation-qwen35-v1.json": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99",
+        "docs/MEETINGS-C1-FAILURE-FOLLOWUP.md": "00fcd0679906ee349c6415d0aef206bf1b13c3bdafef0000f8a9497c3487b516",
+        "docs/MEETINGS-C2-COMPARISON-PLAN.md": "45bdfda2d931ce8c7caa3e73f67c896997ac789c2a31379e4c2e9118e3aca17d",
+        "docs/MEETINGS-C2-NEUTRAL-PLAN.md": "67aa3c949313594488a8961c3132ce23515a9afa695ec63dcbe95f9515dacd7a",
+        "docs/MEETINGS-C2-REVIEW-CONTRACT.md": "da40a446d6d6997353f45ee15a368e3696f95381d98c6fb5333854fe1b6722d8",
+        "pyproject.toml": "db45870df5b6d4fd543e14b9d837d25614033f9049692cead50e1a366a72308d",
+        "scripts/check_meeting_review_token_budget.py": "25d6aa7e53a03ae46213340d48b7d3d2d119e768a870227ad4dc93593481c8cc",
+        "scripts/prepare_meeting_blocks_inputs.py": "2c4d684bb4d14b3f83b2214955a808e18114cbb86e0a82767808b7d8a7f02b41",
+        "scripts/prepare_meeting_comparison_audit.py": "ce40cb9e2b064b7a1fbfe375fb0aff59d35f43c5a36e0a0bbbf14cd8ae4276c2",
+        "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+        "scripts/probe_meeting_answer_review.py": "6bc1bd5dfa4b9076ee3d50bda4a580ae76d45b9fef03bbaf555728d4ad0facc6",
+        "scripts/probe_meeting_blocks_comparison.py": "6a7d07f3eb87c7bc94308707e8c603702b4ed2dfca23f3572076e12c48adbc8f",
+        "scripts/probe_meeting_blocks_resources.py": "c724e5c7f8bded015b4ee2cd02ce12503c8ab8cb05551413568e6fdf8c3af1c6",
+        "scripts/serve_meetings.py": "9c54905ae01d02e7fbd37b955dd62b6de58952cf4e434a1efa75f9816d33c1d8",
+        "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+        "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+        "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+        "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+        "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+        "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+        "src/doctrail/meeting_answer_blocks.py": "16bccf899000f55b7f12ace2b8103021119d9864973e97aed0d91a4895c7bbbb",
+        "src/doctrail/meeting_answer_grammar.py": "58c2aeaebf203d214ea33a109864c730fb2f9cde2bda0f990309037da1f2d671",
+        "src/doctrail/meeting_answer_lines_bounded.py": "3ca12ce89664010bea51c11948c2d050034b38cc3347d080229bb13f9eea0ba1",
+        "src/doctrail/meeting_answer_review.py": "c2dfc0992b313ad2da69bec4c5c2a19eba2bcab9114fa54ccc46100619adaf22",
+        "src/doctrail/meeting_answer_spans.py": "aa0a7a03991ee1839e71d9fb7756eda58758eafbd7c32bd768cb9c1659382ac2",
+        "src/doctrail/meeting_answer_v2.py": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444",
+        "src/doctrail/meeting_comparison_review.py": "74ab9121c5c0da58ce7101f3abe0beeade381cc935f788be89e6c80237176b86",
+        "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+        "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+        "src/doctrail/meeting_qwen35.py": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b",
+        "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+        "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+        "tests/test_meeting_answer_blocks.py": "5f6b0225d45a130fcda812392a39fecb2885f8dc0bb595b477a52bd372b1caa3",
+        "tests/test_meeting_answer_lines_bounded.py": "4101d4f5708ee818461cc52d0e58ddb8baf1eedc5132a7959c839aebcbc88001",
+        "tests/test_meeting_blocks_resources.py": "619902890b32448189a6fcf79113d238d85f8cadf2785114a8403b475f234f77",
+        "tests/test_meeting_comparison_review.py": "876161762c84b740ed3acfec9924b2bd6407bb68171b7cdf3d9603f33c431435",
+        "tests/test_prepare_meeting_blocks_inputs.py": "8a8adf61c1f910862d6fe39921848a9d7510b7307cfaace4b624d77cb054ec59",
+        "tests/test_prepare_meeting_comparison_audit.py": "60adb6c5a3472f55b3eb9a4406213182fba604848be97b6b687287920bca7ab7",
+        "tests/test_probe_meeting_blocks_comparison.py": "bc1774243e5e92847b84aabf136165572546e8bc2be7673fe8c52f040cd53612",
+        "uv.lock": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+      },
+      "bound_count": 41
+    }
+  ],
+  "tokenizer_loader_calls": 1,
+  "token_counter_calls": 14,
+  "tokenizer_metadata_sha256": "b26e72bbf547da1e2fcb7c278058c5cbb8da57371cc0d010600fe556d1ccc6d1",
+  "events": [
+    {
+      "event": "loader_enter",
+      "call": 1,
+      "allow_download": false
+    },
+    {
+      "event": "loader_return",
+      "call": 1
+    },
+    {
+      "event": "counter_enter",
+      "call": 1,
+      "case_id": "c2-val-01",
+      "arm": "L0"
+    },
+    {
+      "event": "counter_return",
+      "call": 1
+    },
+    {
+      "event": "counter_enter",
+      "call": 2,
+      "case_id": "c2-val-01",
+      "arm": "C2"
+    },
+    {
+      "event": "counter_return",
+      "call": 2
+    },
+    {
+      "event": "counter_enter",
+      "call": 3,
+      "case_id": "c2-val-02",
+      "arm": "L0"
+    },
+    {
+      "event": "counter_return",
+      "call": 3
+    },
+    {
+      "event": "counter_enter",
+      "call": 4,
+      "case_id": "c2-val-02",
+      "arm": "C2"
+    },
+    {
+      "event": "counter_return",
+      "call": 4
+    },
+    {
+      "event": "counter_enter",
+      "call": 5,
+      "case_id": "c2-val-03",
+      "arm": "L0"
+    },
+    {
+      "event": "counter_return",
+      "call": 5
+    },
+    {
+      "event": "counter_enter",
+      "call": 6,
+      "case_id": "c2-val-03",
+      "arm": "C2"
+    },
+    {
+      "event": "counter_return",
+      "call": 6
+    },
+    {
+      "event": "counter_enter",
+      "call": 7,
+      "case_id": "c2-val-04",
+      "arm": "L0"
+    },
+    {
+      "event": "counter_return",
+      "call": 7
+    },
+    {
+      "event": "counter_enter",
+      "call": 8,
+      "case_id": "c2-val-04",
+      "arm": "C2"
+    },
+    {
+      "event": "counter_return",
+      "call": 8
+    },
+    {
+      "event": "counter_enter",
+      "call": 9,
+      "case_id": "c2-val-05",
+      "arm": "L0"
+    },
+    {
+      "event": "counter_return",
+      "call": 9
+    },
+    {
+      "event": "counter_enter",
+      "call": 10,
+      "case_id": "c2-val-05",
+      "arm": "C2"
+    },
+    {
+      "event": "counter_return",
+      "call": 10
+    },
+    {
+      "event": "counter_enter",
+      "call": 11,
+      "case_id": "c2-val-06",
+      "arm": "L0"
+    },
+    {
+      "event": "counter_return",
+      "call": 11
+    },
+    {
+      "event": "counter_enter",
+      "call": 12,
+      "case_id": "c2-val-06",
+      "arm": "C2"
+    },
+    {
+      "event": "counter_return",
+      "call": 12
+    },
+    {
+      "event": "counter_enter",
+      "call": 13,
+      "case_id": "c2-val-07",
+      "arm": "L0"
+    },
+    {
+      "event": "counter_return",
+      "call": 13
+    },
+    {
+      "event": "counter_enter",
+      "call": 14,
+      "case_id": "c2-val-07",
+      "arm": "C2"
+    },
+    {
+      "event": "counter_return",
+      "call": 14
+    }
+  ],
+  "measured_integer_tokens": [
+    {
+      "call": 1,
+      "case_id": "c2-val-01",
+      "arm": "L0",
+      "value_is_integer": true,
+      "official_input_tokens": 1283
+    },
+    {
+      "call": 2,
+      "case_id": "c2-val-01",
+      "arm": "C2",
+      "value_is_integer": true,
+      "official_input_tokens": 1402
+    },
+    {
+      "call": 3,
+      "case_id": "c2-val-02",
+      "arm": "L0",
+      "value_is_integer": true,
+      "official_input_tokens": 2201
+    },
+    {
+      "call": 4,
+      "case_id": "c2-val-02",
+      "arm": "C2",
+      "value_is_integer": true,
+      "official_input_tokens": 2371
+    },
+    {
+      "call": 5,
+      "case_id": "c2-val-03",
+      "arm": "L0",
+      "value_is_integer": true,
+      "official_input_tokens": 788
+    },
+    {
+      "call": 6,
+      "case_id": "c2-val-03",
+      "arm": "C2",
+      "value_is_integer": true,
+      "official_input_tokens": 874
+    },
+    {
+      "call": 7,
+      "case_id": "c2-val-04",
+      "arm": "L0",
+      "value_is_integer": true,
+      "official_input_tokens": 753
+    },
+    {
+      "call": 8,
+      "case_id": "c2-val-04",
+      "arm": "C2",
+      "value_is_integer": true,
+      "official_input_tokens": 807
+    },
+    {
+      "call": 9,
+      "case_id": "c2-val-05",
+      "arm": "L0",
+      "value_is_integer": true,
+      "official_input_tokens": 983
+    },
+    {
+      "call": 10,
+      "case_id": "c2-val-05",
+      "arm": "C2",
+      "value_is_integer": true,
+      "official_input_tokens": 1202
+    },
+    {
+      "call": 11,
+      "case_id": "c2-val-06",
+      "arm": "L0",
+      "value_is_integer": true,
+      "official_input_tokens": 833
+    },
+    {
+      "call": 12,
+      "case_id": "c2-val-06",
+      "arm": "C2",
+      "value_is_integer": true,
+      "official_input_tokens": 927
+    },
+    {
+      "call": 13,
+      "case_id": "c2-val-07",
+      "arm": "L0",
+      "value_is_integer": true,
+      "official_input_tokens": 3631
+    },
+    {
+      "call": 14,
+      "case_id": "c2-val-07",
+      "arm": "C2",
+      "value_is_integer": true,
+      "official_input_tokens": 4572
+    }
+  ],
+  "diagnostic_output": {
+    "path": ".local/c2-validation-inputs-v2-diagnostic1",
+    "exists": false
+  },
+  "frozen_files_and_prior_failure_records_unchanged": true,
+  "original_loader_counter_and_arguments_unchanged": true,
+  "source_question_context_or_policy_changes": 0,
+  "model_or_gpu_runtime_launches": 0,
+  "service_generation_calls": 0,
+  "downloads": 0,
+  "paid_calls": 0,
+  "raw_text_prompt_catalog_or_trace_recorded": false,
+  "ownership_released": true
+}

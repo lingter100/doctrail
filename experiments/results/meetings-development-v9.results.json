@@ -1,0 +1,226 @@
+[
+  {
+    "case": "cross-public",
+    "result": {
+      "schema_version": 1,
+      "model": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "status": "answered",
+      "reason": null,
+      "claims": [
+        {
+          "text": "JupyterLab 4.4 demo was announced in February 2025.",
+          "citations": [
+            {
+              "chunk_id": "253afb2e7ea3405286a18555e89e1d50",
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 demo",
+              "start_offset": 4883,
+              "end_offset": 4924
+            }
+          ]
+        },
+        {
+          "text": "JupyterLab 4.4 beta was announced in February 2025.",
+          "citations": [
+            {
+              "chunk_id": "a0e73dd03ff84abab42d500ce960bd04",
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:",
+              "start_offset": 3397,
+              "end_offset": 3479
+            }
+          ]
+        },
+        {
+          "text": "JupyterLab 4.4 was announced in June 2025.",
+          "citations": [
+            {
+              "chunk_id": "50f7c21b5bee441bad95ff391bfaa0b2",
+              "quote": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out",
+              "start_offset": 2056,
+              "end_offset": 2280
+            }
+          ]
+        }
+      ],
+      "telemetry": {
+        "calls": [
+          {
+            "operation": "bm25_evidence_selection",
+            "received_chunks": 5,
+            "selected_passages": 9,
+            "selected_documents": 2,
+            "passage_limit": 12
+          },
+          {
+            "input_tokens": 1241,
+            "output_tokens": 85,
+            "elapsed_seconds": 7.327999999979511,
+            "peak_allocated_mib": 3696.68505859375,
+            "peak_reserved_mib": 3826.0,
+            "finish_reason": "eos"
+          }
+        ],
+        "elapsed_ms": 7359.0,
+        "effective_generation_config": {
+          "max_new_tokens": 768,
+          "do_sample": false,
+          "num_beams": 1,
+          "num_return_sequences": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "use_cache": true,
+          "bos_token_id": 151643,
+          "eos_token_id": [
+            151645,
+            151643
+          ],
+          "pad_token_id": 151643,
+          "generation_mode": "greedy_search",
+          "use_model_defaults": false
+        }
+      }
+    }
+  },
+  {
+    "case": "missing-budget",
+    "result": {
+      "schema_version": 1,
+      "model": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "status": "abstained",
+      "reason": "insufficient_evidence",
+      "claims": [],
+      "telemetry": {
+        "calls": [
+          {
+            "operation": "bm25_evidence_selection",
+            "received_chunks": 5,
+            "selected_passages": 12,
+            "selected_documents": 1,
+            "passage_limit": 12
+          },
+          {
+            "input_tokens": 1247,
+            "output_tokens": 12,
+            "elapsed_seconds": 1.1879999998491257,
+            "peak_allocated_mib": 3699.66064453125,
+            "peak_reserved_mib": 4018.0,
+            "finish_reason": "eos"
+          }
+        ],
+        "elapsed_ms": 1188.0,
+        "effective_generation_config": {
+          "max_new_tokens": 768,
+          "do_sample": false,
+          "num_beams": 1,
+          "num_return_sequences": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "use_cache": true,
+          "bos_token_id": 151643,
+          "eos_token_id": [
+            151645,
+            151643
+          ],
+          "pad_token_id": 151643,
+          "generation_mode": "greedy_search",
+          "use_model_defaults": false
+        }
+      }
+    }
+  },
+  {
+    "case": "host-guide",
+    "result": {
+      "schema_version": 1,
+      "model": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "status": "answered",
+      "reason": null,
+      "claims": [
+        {
+          "text": "The agenda link should be included in the event’s description in the shared Google Calendar.",
+          "citations": [
+            {
+              "chunk_id": "77c1a2849eb74e788dd1b3dc7bb649c8",
+              "quote": "Each meeting should have a collaborative public agenda document (for example on HackMD). The agenda link should be included in the event’s description in the shared Google Calendar.",
+              "start_offset": 737,
+              "end_offset": 918
+            }
+          ]
+        },
+        {
+          "text": "The agenda link should be shared in the chat.",
+          "citations": [
+            {
+              "chunk_id": "fd828c0d8c29464d8d10bdd62dc2cca9",
+              "quote": "> If you have a topic you’d like to discuss, please add it to the agenda. (Share agenda link in the chat)",
+              "start_offset": 8675,
+              "end_offset": 8780
+            }
+          ]
+        },
+        {
+          "text": "The agenda is a collaboratively created document made by the participants.",
+          "citations": [
+            {
+              "chunk_id": "3a9c12e39e23449c98136ef1310190f0",
+              "quote": "* *The agenda is a collaboratively created document made by the participants.Ensure a section for today’s meeting is created, with today’s date and a table for participants to record their names (which can be copied/pasted from lower entries). The agenda will also be used as meeting minutes.*",
+              "start_offset": 6727,
+              "end_offset": 7020
+            }
+          ]
+        }
+      ],
+      "telemetry": {
+        "calls": [
+          {
+            "operation": "bm25_evidence_selection",
+            "received_chunks": 5,
+            "selected_passages": 12,
+            "selected_documents": 1,
+            "passage_limit": 12
+          },
+          {
+            "input_tokens": 1225,
+            "output_tokens": 73,
+            "elapsed_seconds": 5.655999999959022,
+            "peak_allocated_mib": 3688.47412109375,
+            "peak_reserved_mib": 4018.0,
+            "finish_reason": "eos"
+          }
+        ],
+        "elapsed_ms": 5687.0,
+        "effective_generation_config": {
+          "max_new_tokens": 768,
+          "do_sample": false,
+          "num_beams": 1,
+          "num_return_sequences": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "use_cache": true,
+          "bos_token_id": 151643,
+          "eos_token_id": [
+            151645,
+            151643
+          ],
+          "pad_token_id": 151643,
+          "generation_mode": "greedy_search",
+          "use_model_defaults": false
+        }
+      }
+    }
+  }
+]

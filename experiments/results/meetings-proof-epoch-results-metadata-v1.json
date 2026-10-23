@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "id": "meetings-proof-epoch-results-metadata-v1",
+  "recorded_at": "2026-10-20T01:32:22.336742+00:00",
+  "execution_commit": "64e3454b5dae36b53e8ebd31e6e899292c777cdd",
+  "status": "completed_once",
+  "rows": [
+    {
+      "label": "reference/request_start",
+      "elapsed_seconds": 12.531,
+      "snapshot_calls": 326,
+      "read_calls": 326,
+      "read_returned_bytes": 3222840,
+      "hash_calls": 244,
+      "hash_bytes": 2410704,
+      "ast_parse_calls": 8,
+      "json_parse_calls": 1,
+      "head_checks": 4,
+      "path_checks": 950,
+      "alias_checks": 162,
+      "candidate_checks": 616,
+      "stat_calls": 814,
+      "read_requested_lengths": {
+        "16777217": 326
+      },
+      "git_commands": 86
+    },
+    {
+      "label": "reference/before_dispatch",
+      "elapsed_seconds": 3.141,
+      "snapshot_calls": 244,
+      "read_calls": 244,
+      "read_returned_bytes": 2410704,
+      "hash_calls": 244,
+      "hash_bytes": 2410704,
+      "ast_parse_calls": 8,
+      "json_parse_calls": 1,
+      "head_checks": 4,
+      "path_checks": 868,
+      "alias_checks": 162,
+      "candidate_checks": 616,
+      "stat_calls": 650,
+      "read_requested_lengths": {
+        "16777217": 244
+      },
+      "git_commands": 4
+    },
+    {
+      "label": "candidate/request_start",
+      "elapsed_seconds": 10.969,
+      "snapshot_calls": 326,
+      "read_calls": 652,
+      "read_returned_bytes": 3222840,
+      "hash_calls": 244,
+      "hash_bytes": 2410704,
+      "ast_parse_calls": 8,
+      "json_parse_calls": 1,
+      "head_checks": 4,
+      "path_checks": 950,
+      "alias_checks": 162,
+      "candidate_checks": 616,
+      "stat_calls": 814,
+      "read_requested_lengths": {
+        "65536": 652
+      },
+      "git_commands": 86
+    },
+    {
+      "label": "candidate/before_dispatch",
+      "elapsed_seconds": 2.047,
+      "snapshot_calls": 244,
+      "read_calls": 488,
+      "read_returned_bytes": 2410704,
+      "hash_calls": 244,
+      "hash_bytes": 2410704,
+      "ast_parse_calls": 8,
+      "json_parse_calls": 1,
+      "head_checks": 4,
+      "path_checks": 868,
+      "alias_checks": 162,
+      "candidate_checks": 616,
+      "stat_calls": 650,
+      "read_requested_lengths": {
+        "65536": 488
+      },
+      "git_commands": 4
+    }
+  ],
+  "observed_improvement": true,
+  "cli_elapsed_seconds": 59.634,
+  "total_through_terminal_persistence_seconds": 58.92199999996228,
+  "terminal_persistence_seconds": 0.01600000000325963,
+  "source_and_prior_freezes_unchanged": true,
+  "same_nonreader_guard_hash_bytes_counts_and_git_events": true,
+  "native_calls": 0,
+  "tokenizer_calls": 0,
+  "model_transport_HTTP": 0,
+  "quality_judgments": 0,
+  "human_reviews": 0,
+  "service_adoption": false,
+  "C5_reopened": false,
+  "limitations": [
+    "One sample per arm/boundary, fixed reference-first order, OS cache and background load uncontrolled.",
+    "Same synthetic six-consumer core; not whole C5 orchestration or production service latency.",
+    "Requested read lengths are not allocations, RSS or physical I/O.",
+    "No causal attribution of C5 deadline or success counterfactual.",
+    "No rerun, new quality candidate registration remains separate."
+  ]
+}

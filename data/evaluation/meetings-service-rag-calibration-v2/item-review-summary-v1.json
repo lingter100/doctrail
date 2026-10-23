@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "independent_service_rag_item_review_safe_summary",
+  "version": 1,
+  "phase": "calibration",
+  "status": "accepted_all_items_source_and_item_stage_only",
+  "item_acceptance": true,
+  "item_freeze": true,
+  "counts": {
+    "independent_item_reviews": 1,
+    "accepted_items": 6,
+    "rejected_items": 0,
+    "blocking_findings": 0,
+    "requested_author_changes": 0,
+    "ko": 3,
+    "en": 3,
+    "answered": 4,
+    "abstained": 2,
+    "required_facts_total": 22,
+    "present_required_facts": 16,
+    "absent_required_facts": 6,
+    "general_only": 1,
+    "multiple_meetings": 2,
+    "mixed_meeting_general": 1,
+    "all_sufficient_alternatives_require_multiple_documents": 3,
+    "ko_question_en_evidence": 2,
+    "en_question_ko_evidence": 1,
+    "whole_sources_checked": 6,
+    "source_chunks_checked": 32,
+    "exact_source_anchors_checked": 18,
+    "minimal_chunk_covers_checked": 18,
+    "chunk_local_quote_segments_checked": 20,
+    "source_freeze_bindings_verified": 64,
+    "author_original_files_verified": 4,
+    "original_binding_mismatches": 0,
+    "original_edits": 0,
+    "new_review_files": 4,
+    "item_freeze_bindings": 10,
+    "retrieval_calls": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "model_calls": 0,
+    "java_runs": 0,
+    "network_requests": 0,
+    "git_commands": 0,
+    "other_split_semantic_reads": 0,
+    "model_output_reads": 0,
+    "human_reviews": 0
+  },
+  "statuses": {
+    "semantic_completeness": "accepted",
+    "sufficient_alternatives": "accepted_within_frozen_corpus",
+    "whole_corpus_absence": "accepted",
+    "coordinate_and_identity_checks": "passed",
+    "case_order_and_language_contract": "passed",
+    "author_safe_feedback": "no_change_requested",
+    "source_and_item_originals": "unchanged",
+    "retrieval": "unexecuted",
+    "runtime_mapping": "pending",
+    "native_runtime": "unexecuted",
+    "model_quality": "unexecuted",
+    "final_answer_judgment": "unexecuted",
+    "human_review": "unexecuted",
+    "phase1": "incomplete"
+  },
+  "bindings": {
+    "registration": {
+      "path": "data/evaluation/meetings-service-rag-next-stage-registration-v3.json",
+      "bytes": 8876,
+      "sha256": "49539ed9e800cb3d56256e280ec5af801b0a0021359deee8dc0363cf9ec72eaa"
+    },
+    "source_freeze": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-freeze-v2.json",
+      "bytes": 35103,
+      "sha256": "423316335a89a55eb3fa052f66dd7b34fb2062072a849f02c97a9134c27799bc"
+    },
+    "review": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/item-review-v1.json",
+      "bytes": 8370,
+      "sha256": "007d0f2fe6449257e5061440c9c4436a4047cda7b47083e3d30ea89bde9c4f73"
+    },
+    "semantic_notes_hash_only": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/item-review-notes-v1.md",
+      "bytes": 16800,
+      "sha256": "0949c69de275533e56cf1694f1e9f0529beeb97c9f38389af34887de1e3da300"
+    },
+    "conditional_item_freeze": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/item-freeze-v1.json",
+      "bytes": 6963,
+      "sha256": "acb3c65ebdd309fa3f778724134250335acaea9a8b71c228e9a0a46792b2251e"
+    }
+  },
+  "self_binding_included": false
+}

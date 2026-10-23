@@ -1,0 +1,803 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "whole_source_canonical_inventory",
+  "documents": [
+    {
+      "source_id": "V3-P-M1",
+      "document_id": "V3-P-M1",
+      "family_id": "V3-PUBLIC-01",
+      "origin": "public",
+      "kind": "meeting",
+      "meeting_date": "2022-03-18",
+      "title": "a MIR Formality, goals and the reality",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/public-meeting-01.md",
+      "raw_size_bytes": 42623,
+      "raw_sha256": "accbbd8af950602891a1ed39d79c82f7ce03afe54482de9a737760bb61f787c7",
+      "git_blob_sha1": "aae175476215d49b691446a8db456a96d1c8e907",
+      "upstream_path": "minutes/2022-03-18-mir-formality-goals-and-reality.md",
+      "repository": "rust-lang/types-team",
+      "upstream_revision": "cf4adc0044987bceed00d5a8efa225b475e4ad91",
+      "processed_sha256": "accbbd8af950602891a1ed39d79c82f7ce03afe54482de9a737760bb61f787c7",
+      "processed_codepoints": 42623,
+      "content": "# a MIR Formality, goals and the reality\n\nFrom [the repository](https://github.com/nikomatsakis/a-mir-formality) (emphasis mine):\n\n> This repository is an early-stage experimental project that aims to be a complete, authoritative formal model of the [Rust MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html). **Presuming these experiments bear fruit, the intention is to bring this model into Rust as an RFC and develop it as an official part of the language definition.**\n\nThe goal of this document is to explain the high-level structure as well as giving a sense for the overall development roadmap I have in mind.\n\n[ToC]\n\n## How I see formality being used\n\nFormality will become the \"primary source\" for \"what Rust means\":\n\n* When a new language feature is designed, one stage in the process will be formalizing that feature into formality. \n    * Currently, since formality focuses on MIR, this will only make sense for \"core language features\" like implied bounds or specialization. Eventually I'd like to extend formality to cover other areas like name resolution and Rust surface syntax.\n    * This will help to uncover interactions between features.\n* Formality can be fuzzed and checked against rustc, much as the [AWS S3 team does to check their code](https://www.amazon.science/publications/using-lightweight-formal-methods-to-validate-a-key-value-storage-node-in-amazon-s3).\n    * We can extend rustc to generate formality declarations.\n* For the trait solver, formality will map quite closely to its overall structure, which allows us to experiment with new algorithms or structure and see their effects quickly.\n    * As an initial example, I plan to prototype a new approach for associated type normalization.\n\n## Why a new repo? Why PLT redex?\n\nI had originally hoped that chalk could serve as a kind of \"executable semantics\" for Rust. The idea was that the separation between \"generating clauses\" and \"the solver\" would allow us to specify how Rust works on a high-enough level that the code is nicely generic. Over time, though, I've become convinced that this approach won't scale. There is a lot of \"incidental complexity\" that is created by integrating chalk into rustc, as well as engineering for efficiency. Ultimately, I don't see chalk being sufficiently malleable for our purposes.\n\nI chose to use PLT Redex because it's a really great tool for exploration. It allows you to write very high-level structures, execute them, and see what happens. I think it's sufficiently approachable that we can onboard contributors and grow the types team. I'm not sure the same is true of other alternatives. Plus I like it.\n\n## Formality and the types team\n\nI imagine formality being \"owned and maintained\" by the types team, like other rust-lang projects. \n\n## Layers of formality\n\nFormality is structured into several layers. These layers are meant to also map fairly closely onto chalk and the eventual Rust trait solver implementation. Ideally, one should be able to map back and forth between formality and the code with ease.\n\n* **formality-ty:** the \"types\" layer\n    * Defines Rust types and functions for equating/relating them.\n        * The representation is meant to cover all Rust types, but is optimized for extracting their \"essential properties\".\n    * Defines core logical predicates (`Implemented(T: Trait)`, etc) and solvers.\n        * But doesn't define what they *mean* -- i.e., the conditions in which they are true.\n* **formality-decl:** the \"Rust declarations\" layer\n    * Defines Rust \"top-level items\" and their semantics\n        * This includes crates, structs, traits, impls, but excludes function bodies.\n    * Semantics are defined by converting Rust items into predicates\n        * e.g., `impl<T: Eq> Eq for Vec<T>` becomes a \"program clause\" (axiom) like `forall<T> { Implemented(T: Eq) => HasImpl(Vec<T: Eq>) }` (the distinction between `HasImpl` and `Implemented` is covered below).\n    * Defines the well-formedness checks for those items\n        * e.g., `struct Foo { f1: T1 }` is well-formed if \n* **formality-mir:** the \"type system for MIR\" layer\n    * Defines MIR and rules for its type checker (corresponds roughly to the MIR borrow checker + polonius).\n    * Caveat: I've sketched this out, but nothing more.\n* **formality-mir-op:** the \"operational semantics for MIR\" layer\n    * Extends the above level with an operational semantics. Basically equivalent to miri.\n    * Caveat: I haven't even sketched this out yet.\n\n## A closer look at formality-ty\n\nLet's take a closer look at the formality-ty layer. \n\n### Defining Rust types\n\nThe current definition of types looks like this ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/grammar.rkt#L25-L37)):\n\n```scheme\n(define-language formality-ty\n  ...\n  (Ty :=\n      (TyApply TyName Parameters) ; Application type\n      VarId                       ; Bound or existential (inference) variable\n      (! VarId)                   ; Universal (placeholder) variable\n      )\n  (TyName :=\n          AdtId           ; enum/struct/union\n          TraitId         ; trait\n          AssociatedTy    ; Associated type\n          ScalarId        ; Something like i32, u32, etc\n          (Ref MaybeMut)  ; `&mut` or `&`, expects a lifetime + type parameter\n          (Tuple number)  ; tuple of given arity\n          )\n   ...\n   (ScalarId := i8 u8 i16 u16 i32 u32 i64 u64 i128 u128 bool)\n   ...\n   (AssociatedTy := (TraitId AssociatedTyId))\n   ...\n   (Parameters := (Parameter ...))\n   (Parameter := Ty Lt)\n   ...\n   ((AdtId VarId TraitId AssociatedTyId AnyId) := variable-not-otherwise-mentioned)\n)\n```\n\nAs you can see, it's woefully incomplete, but it should give you some idea for the level of abstraction we are shooting for and also how PLT Redex works. The idea here is that a type is either a variable, a placeholder that represents a generic type, or an \"application\" of a type name to some parameters. Let's see some examples:\n\n* A generic type like `T` could either be `T` or `(! T)`:\n    * `T` is used when the generic has yet to be substituted, e.g., as part of a declaration.\n    * `(! T)` is used as a placeholder to \"any type `T`\".\n* A type like `Vec<T>` in Rust would be represented therefore as:\n    * `(TyApply Vec (T))`, in a declaration; or,\n    * `(TyApply Vec ((! T)))` when checking it.\n* A scalar type like `i32` is represented as `(TyApply i32 ())`.\n\nAs I said, this defintion of types is woefully incomplete. I expect it to eventually include:\n\n* \"alias types\" like associated types and type aliases\n* \"existential\" types like `dyn`\n* \"forall\" quantifies to cover `for<'a> ...`\n* \"function\" types `fn(A1...An) -> R`\n* \"implication\" types `where(...) T`-- these don't exist in Rust yet =)\n\nYou can also see that the definition of types is aligned to highlight their \"essential\" characteristics and not necessarily for convenience elsewhere. Almost every Rust type, for example, boils down to *some* kind of \"application\" (it's likely that we can even represent `fn` types this way).\n\n### Type unification\n\nA key part of the type layer is that it includes *type unification*. That is, it defines the rules for making types equal. This will eventually have to be extended to cover subtyping (more on that a bit later) so that we can properly handle variance.\n\nUnification is done via a \"metafunction\", which just means a function that operates on terms (versus a function in the Rust program being analyzed):\n\n```scheme\n(define-metafunction formality-ty\n  most-general-unifier : Env TermPairs -> EnvSubstitution or Error\n```\n\nThis function takes an environment `Env` and a list of pairs of terms that should be equated and gives back either:\n\n* a new environment and substitution from inference variables to values that will make the two terms syntactically equal; or,\n* the term `Error`, if they cannot be unified.\n\nThe unifier is a bit smarter than the traditional unification in that it knows about *universes* and so can handle \"forall\" proofs and things (that's what is found in the environment). This is the same as chalk and rustc. \n\nI won't cover the details but I'll just give an example. This is actually modified from a unit test from the code ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/unify.rkt#L254-L269)). Invoking `most-general-unifier` like so:\n\n```scheme\n(most-general-unifier Env_2 ((A X)\n                             (X (TyApply Vec (Y)))\n                             (Y (TyApply i32 ()))))\n```\n\ncorresponds to saying that `[A = X, X = Vec<Y>, Y = i32]` must all be true, where `A`, `X` and `Y` are inference variables. The resulting output is a substitution that maps `A`, `X` and `Y` to the following values:\n\n* `A -> Vec<i32>`\n* `X -> Vec<i32>`\n* `Y -> i32`\n\n### Predicates\n\nFormality-ty also defines the core predicates used to define Rust semantics. The current definition is as follows ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/grammar.rkt#L121-L130)):\n\n```scheme\n  (Predicate :=\n             ; `TraitRef` is (fully) implemented.\n             (Implemented TraitRef)\n             ; an impl exists for `TraitRef`; this *by itself* doesn't mean\n             ; that `TraitRef` is implemented, as the supertraits may not\n             ; have impls.\n             (HasImpl TraitRef)\n             ; the given type or lifetime is well-formed.\n             (WellFormed (ParameterKind Parameter))\n             )\n```\n\nThese core predicates are then used to define a richer vocabulary of goals (things that can be proven) and various kinds of \"clauses\" (things that are assumed to be true, axioms) ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/grammar.rkt#L136-L143)):\n\n```scheme\n  (Goals = (Goal ...))\n  (Goal :=\n        Predicate\n        (Equate Term Term)\n        (All Goals)\n        (Any Goals)\n        (Implies Hypotheses Goal)\n        (Quantifier KindedVarIds Goal)\n        )\n\n  ((Hypotheses Clauses Invariants) := (Clause ...))\n  ((Hypothesis Clause Invariant) :=\n                                 Predicate\n                                 (Implies Goals Predicate)\n                                 (ForAll KindedVarIds Clause)\n                                 )\n```\n\nImportantly, the *types layer* defines a solver that gives semantics to all the \"meta\" parts of goals and clauses -- e.g., it defines what it means to prove `(All (G1 G2))` (prove both `G1` and `G2`, duh). But it doesn't have any rules for what it means to prove the *core* predicates true -- so it could never prove `(Implemented (Debug ((! T))))`. Those rules all come from the declaration layer and are given to the types layer as part of the \"environment\".\n\nYou might be curious about the distinction between goal and clause and why there are so many names for clauses (hypothesis, clause, invariant, etc). Let's talk briefly about that.\n\n* **Goals vs clauses:** \n    * The role of `ForAll` in goals and clauses is different.\n        * Proving $\\forall X. G$ requiers proving that `G` is true for any value of `X` (i.e., for a placeholder `(! X)`, in our setup).\n        * In contrast, if you know $\\forall X. G$ as an axiom, it means that you can give `X` any value `X1` you want.\n    * Clauses have a limited structure between that keeps the solver tractable. The idea is that they are always \"ways to prove a single predicate\" true; we don't allow a clause like `(Any (A B))` as a clause, since that would mean \"A or B is true but you don't know which\". That would then be a second way to prove an `Any` goal like `(Any ...)` and introduce lots of complications (we got enough already, thanks).\n* **Hypotheses vs clauses vs invariants:**\n    * These distinctions are used to express and capture implied bounds. We'll defer a detailed analysis until the section below, but briefly:\n        * \"Hypotheses\" are where-clauses that are assumed to be true in this section of the code.\n        * \"Clauses\" are global rules that are always true (derived, e.g., from an impl).\n        * \"Invariants\" express implied bounds (e.g., supertrait relationships like \"if `T: Eq`, then `T: PartialEq`\").\n\n### Solver\n\nPutting all this together, the types layer currently includes a relatively simple solver called `cosld-solve`. This is referencing the classic [SLD Resolution Algorithm](https://en.wikipedia.org/wiki/SLD_resolution) that powers prolog, although the version of it that we've implemented is extended in two ways:\n\n* It covers Hereditary Harrop predicates using the [techniques described by Gopalan Nadathur](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.2510&rep=rep1&type=pdf).\n* It is coinductive as [described by Luke Simon et al.](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.102.9618&rep=rep1&type=pdf) -- this means it permits cycles, roughly speaking.\n\nIn terms of chalk solvers, it is \"similar\" to slg, but much simpler in its structure (it doesn't do any caching). \n\nAll those fancy words aside, it's really quite simple. It's defined via induction rules, which PLT Redex lets us write in a natural style. The definition begins like so:\n\n```scheme\n(define-judgment-form formality-ty\n  #:mode (prove I I I O)\n  #:contract (prove Env Predicates_stack Goal EnvSubstitution)\n```\n\nThis says that we are trying to prove something written as `(prove Env Predciates Goal EnvSubstitution)`, where the first three are 'inputs' and the final name is an 'output' (the input vs output distinction is often left implicit in Prolog and other languages). The idea is that we will prove that `Goal` is true in some environment `Env`; the environment contains our hypotheses and clauses, as well as information about the variables in scope. The `Predicates` list is the stack of things we are solving, it's used to detect cycles. The `EnvSubstitution` is the *output*, it is a modified environment paired with a substitution that potentially gives new values to inference variables found in `Goal`.\n\nHere is a simple rule. It defines the way we prove `Any` ([source](https://github.com/nikomatsakis/a-mir-formality/blob/main/src/ty/cosld-solve/prove.rkt#L62-L65)). The notation is as follows. The stuff \"above the line\" are the conditions that have to be proven; the thing \"under the line\" is the conclusion that we can draw.\n\n```scheme\n  [(prove Env Predicates_stack Goal_1 EnvSubstitution_out)\n   ------------------------------------------------------- \"prove-any\"\n   (prove Env Predicates_stack (Any (Goal_0 ... Goal_1 Goal_2 ...)) EnvSubstitution_out)\n   ]\n```\n\nThis rule says:\n\n* Given some goal `(Any (Goal_0 ... Goal_1 Goal_2 ...))` where `Goal_1` is found somewhere in that list...\n    * if we can prove `Goal_1` to be true, then the `Any` goal is true.\n\nOr read another way:\n\n* If we can prove `Goal_1` to be true, then we can prove `(Any Goals)` to be true so long as `Goal_1` is somewhere in `Goals`.\n\nIt shows you a bit of the power of PLT Redex (and Racket's pattern matching), as well. We are able to write the rule in a \"non-deterministic\" way -- saying, \"pick any goal from the list\" and prove it. Redex will search all the possibilities.\n\n## A closer look at formality-decl\n\nNow that we've surveyed the type layer, let's look at the declaration layer. It begins by declaring an \"extended\" language `formality-decl` that adds new stuff to `formality-ty` ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/grammar.rkt#L5)):\n\n```scheme\n(define-extended-language formality-decl formality-ty ...)\n```\n\nFor example, a set of crates looks like this ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/grammar.rkt#L7-L10)):\n\n```scheme\n (CrateDecls := (CrateDecl ...))\n  (CrateDecl := (CrateId CrateContents))\n  (CrateContents := (crate (CrateItemDecl ...)))\n  (CrateItemDecl := AdtDecl TraitDecl TraitImplDecl)\n```\n\nBasically a list of items like `(a (crate (item1 item2 item3)))` where `item{1,2,3}` are either structs/enums (`AdtDecl`), traits (`TraitDecl`), or impls (`TraitImplDecl`).\n\n### Declaring traits in `FormalityDecl`\n\nLet's look more closely at one of those kinds of items. A trait declaration looks like this ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/grammar.rkt#L26-L27)):\n\n```scheme\n  (TraitDecl := (TraitId TraitContents))\n  (TraitContents := (trait KindedVarIds WhereClauses TraitItems))\n  ...\n  (WhereClauses := (WhereClause ...))\n  (WhereClause :=\n               (ForAll KindedVarIds WhereClause)\n               (Implemented TraitRef)\n               )\n```\n\nHere:\n\n* `TraitId` is the name of the trait\n* `KindedVarIds` is a list of generic parameters like `((TyVar Self) (TyVar T))`. Note that the `Self` parameter is made explicit. \n* `WhereClauses` is a list of where-clauses, which are currently just `T: Foo` trait references (though potentially higher-ranked).\n* `TraitItems` are the contents of the trait, currently not used for anything.\n\nSo the following Rust trait\n\n```rust\ntrait Foo<T: Ord>: Bar { }\n```\n\nwould be represented as\n\n```scheme\n(Foo (trait ; KindedVarIds -- the generics:\n            ((TyKind Self) (TyKind T))\n            ; where clauses, including supertraits:\n            ((Implemented (Ord (T))) (Implemented (Bar (Self))))\n            ; trait items, empty list:\n            ()\n            ))\n```\n\n### Lowering crate items to clauses\n\nThe next part of `formality-decl` is the metafunction `env-with-crate-decls` ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L20-L23)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Add the clauses/hypothesis from multiple crates\n  ;; into the environment, where CrateId names the current crate.\n  env-with-crate-decls : Env CrateDecls CrateId -> Env\n  ; ...\n  )\n```\n\nWhat this does is to convert *Rust declarations* into the *environment* from the type layer. Note that it takes:\n\n* a base environment `Env` (typically just the constant `EmptyEnv`)\n* a set of crates `CrateDecls` (this is meant to include the imports)\n* the id of the current crate `CrateId`. This is because the set of rules we generate for a particular item can be different depending on whether we are compiling the crate where it was declared or some other crate (consider e.g. `#[non_exhaustive]`).\n\n### Generating the clauses for a single crate item\n\nThe `env-with-crate-decls` function just iterates over all the items in all the crates and ultimately invokes this helper function, `crate-item-decl-rules` ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L57-L63)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Given a crate item, return a tuple of:\n  ;;\n  ;; * The clauses that hold in all crates due to this item\n  ;; * The invariants that hold in all crates due to this item\n  ;; * The invariants that hold only in the crate that declared this item\n  crate-item-decl-rules : CrateDecls CrateItemDecl -> (Clauses Invariants Invariants)\n```\n\n`crate-item-decl-rules` takes \n\n* the full set of crates `CrateDecls` and\n* the declaration of a single item `CrateItemDecl`\n\nand it returns a 3-tuple. As the comment says, this contains both clauses (rules that can be used to derive true facts) along with two sets of invariants. We'll cover the invariants later.\n\nMetafunctions are basically a gigantic match statement. They consist of a series of clauses, each of which begins with a \"pattern match\" against the arguments. \n\nTo see how it works, let's look at the case for an `impl` from that section. To begin with, here is the comment explaining what we aim to do:\n\n```scheme\n [;; For an trait impl declared in the crate C, like the following:\n   ;;\n   ;;     impl<'a, T> Foo<'a, T> for i32 where T: Ord { }\n   ;;\n   ;; We consider `HasImpl` to hold if (a) all inputs are well formed and (b) where\n   ;; clauses are satisfied:\n   ;;\n   ;;     (ForAll ((LtKind 'a) (TyKind T))\n   ;;         (HasImpl (Foo (i32 'a u32))) :-\n   ;;             (WellFormed (TyKind i32))\n   ;;             (WellFormed (TyKind i32))\n   ;;             (Implemented (Ord T)))\n```\n\nThe actual code for this ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L141-L166)) begins by matching the item that we are generating rules for:\n\n```scheme\n   (crate-item-decl-rules CrateDecls (impl KindedVarIds_impl TraitRef WhereClauses_impl ImplItems))\n```\n\nThe next line is the final result. The function this is part of  -- this says we will produce one global clause\n\n```scheme\n   ((Clause) () ())\n```\n\nThis final result is allowed to refer to variables defined on the following lines, shown below. A `(where/error <pattern> <value>)` clause is effectively just `let <pattern> = <value>`, in Rust terms; the `/error` part means \"if this pattern doesn't match, generate an error\". You can also write `(where <pattern> <value>)`, but that means that if the pattern doesn't match, the metafunction should to see if the next rule works.\n\nThe impl code begins by pattern matching against the `TraitRef` that the impl is implementing (in the example from the comment, that would be `(Foo (i32 'a T))`). We extract out the `TraitId` and the self type `Parameter_trait`:\n\n```scheme\n   (where/error (TraitId (Parameter_trait ...)) TraitRef)\n```\n\nNext we look up the definition of the trait itself to find out its generics, using a helper function `item-with-id`. This matches and extracts out the parameter kinds (lifetimes vs types, in this code):\n\n```scheme\n   (where/error (trait KindedVarIds_trait _ _) (item-with-id CrateDecls TraitId))\n   (where/error ((ParameterKind_trait _) ...) KindedVarIds_trait)\n```\n\nNext we convert the where clauses (e,g, `T: Ord`) into goals, using a helper function `where-clauses-to-goals` (described below):\n```scheme\n   (where/error (Goal_wc ...) (where-clauses-to-goals WhereClauses_impl))\n```\n\nFinally we can generate that variable `Clause` that was referenced in the final result. Note that we use the `...` notation to \"flatten\" together the list of goals from the where-clauses (`Goal_wc ...`) and `WellFormed`-ness goals that we must prove (i.e., to use the impl, we must show that its input types are well-formed):\n\n```scheme\n   (where/error Clause (ForAll KindedVarIds_impl\n                               (Implies\n                                ((WellFormed (ParameterKind_trait Parameter_trait)) ...\n                                 Goal_wc ...\n                                 )\n                                (HasImpl TraitRef))))\n   ]\n```\n\nThe `where-clause-to-goal` helper is fairly simple. Here is the source, I'll leave puzzling it out as an exercise to the reader ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L197-L211)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Convert a where clause `W` into a goal that proves `W` is true.\n  where-clause-to-goal : WhereClause -> Goal\n\n  ((where-clause-to-goal (Implemented TraitRef))\n   (Implemented TraitRef)\n   )\n\n  ((where-clause-to-goal (ForAll KindedVarIds WhereClause))\n   (ForAll KindedVarIds Goal)\n   (where/error Goal (where-clause-to-goal WhereClause))\n   )\n\n  ; FIXME: Support lifetimes, projections\n  )\n```\n\n### Generating the \"ok goals\" for a crate\n\nIn addition to \"clauses\", there is also a function `crate-ok-goal` that generate goals for each crate item in a given crate ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-ok.rkt#L7-L11)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Given a set of crates and the decl for the current crate,\n  ;; generate the goal that proves all declarations in the current crate are\n  ;; \"ok\". Other crates are assumed to be \"ok\".\n  crate-ok-goal : CrateDecls CrateDecl -> Goal\n```\n\nThe idea is that the crate is \"ok\" (i.e., passes the type check) if these goals are satisfied. For the declarations layer, these goals correspond roughly to rustc's `wfcheck`. Here is the rule for impls ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-ok.rkt#L59-L71)):\n\n```scheme\n  [;; For a trait impl declared in the crate C, like the following:\n   ;;\n   ;;     impl<'a, T> Foo<'a, T> for u32 { }\n   ;;\n   ;; we require that the trait is implemented.\n   (crate-item-ok-goal _ (impl KindedVarIds_impl TraitRef WhereClauses_impl ImplItems))\n   (ForAll KindedVarIds_impl\n           (Implies ((WellFormed KindedVarId_impl) ... WhereClause_impl ...)\n                    (All ((Implemented TraitRef)))))\n\n   (where/error (KindedVarId_impl ...) KindedVarIds_impl)\n   (where/error (WhereClause_impl ...) WhereClauses_impl)\n   ]\n  )\n```\n\nIn short, an impl is well-formed if the trait is implemented. We'll look at the definition of `Implemented` in more detail in [the next section](#Case-study-Implied-bounds-and-perfect-derive), but for now it suffices to say that a trait is implemented if (a) it has an impl and (b) all of its where-clauses are satisfied. Since we know there is an impl (we're checking it right now!) this is equivalent to saying \"all of the trait's where clauses are satisfied\".\n\n## Case study: Implied bounds and perfect derive\n\nThe current code doesn't really model Rust as it is today. It actually models Rust extended with support for two new features, \"implied bounds\" and \"perfect derive\":\n\n* **Implied bounds:** Given `struct Foo<T: Ord>`, can `impl<T> Foo<T> { ... }` just know that `T: Ord`?\n    * (We actually have implied bounds today, but they are limited to supertraits (e.g., `T: Eq => T: PartialEq`), so maybe a better way to describe implied bounds would be *expanded implied bounds*.)\n* **Perfect derive:** Given `#[derive(Clone)] struct Foo<T> { x: Rc<T> }`, we \"just know\" that `impl<T> Clone for Foo<T>` works, and that `T: Clone` is not necessary?\n    * The idea is that `derive` would generate `impl<T> Clone for Foo<T> where Rc<T>: Clone`. Seems simple, right?\n    * The trick is that we have to extend all trait matching to work like auto-traits does, and accept cycles. Consider deriving clone on\n        * `struct List<T> { value: Rc<T>, next: Option<Rc<List<T>>> }`\n        * here you would get `impl<T> Clone for List<T> where Rc<T>: Clone, Option<Rc<List<T>>>: Clone` -- if you try that today, you'll find it is a cycle error.\n    * We are going to refer to this \"accept cycles\" as coinductive; it's basically the [co-LP formulation by Luke Simon et al.](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.102.9618&rep=rep1&type=pdf) that I referred to earlier.\n\nThese two features are a bit tricky to integrate because accepting cycles, if you're not careful, can easily lead you into assuming implied bounds that are not true. The classic example is this:\n\n```rust\ntrait Copy { }\ntrait Magic: Copy { }\n```\n\nClearly, given these traits, we know that `T: Magic => T: Copy`, right? But what about if someone writes this rather tautological impl:\n\n```rust\nimpl<T: Magic> Magic for T { }\n```\n\nIf we're not careful, we can use this impl to show that every type implements `Magic` -- and yet there is no `impl Copy` anywhere. Something is off!\n\nThe solution to that is based on the scheme that [scalexm](https://github.com/scalexm) invented for Chalk; I've tweaked it somewhat by integrating it a bit more deeply into the \"core logic\", which simplifies the predicates that we need. I find I like this formulation better, and it allows us to simplify a few other things too.\n\n### Distinguish `HasImpl` and `Implemented`\n\nThe first key part of the system is to distinguish *having an impl* (`HasImpl`) from *being implemented* (`Implemented`). The former says that the user wrote an impl. The latter says that all the requirements are met to implement the trait, including in particular that all of its where clauses (which includes the supertraits) are satisfied.\n\nUsing the code for impls we saw earlier, the `Magic` impl would generate the following clause:\n\n```scheme\n; forall<T> { Implemented(T: Magic) => HasImpl(T: Magic) }\n(ForAll ((TyKind T)) \n        (Implies ((Implemented (Magic (T))))\n                 (HasImpl (Magic (T)))))\n```\n\nTo actually prove `Implemented(T: Magic)`, This clause has to be combined with the clauses generated by the trait declarations ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L95-L118)). For the `Copy` trait, which has no where clauses, this clause is very simple. To be implemented, the impl must exist, and the type must be well-formed:\n\n```scheme\n; forall<T> { (\n;               HasImpl(T: Copy), \n;               WellFormed(T),\n;             ) => Implemented(T: Copy) }\n(ForAll ((TyKind T))\n        (Implies ((HasImpl (Copy (T)))\n                  (WellFormed (TyKind (T))))\n                 (Implemented (Copy (T)))))\n```\n\nFor `Magic`, the rule includes the where clause that `T: Copy`:\n\n```schheme\n; forall<T> { (\n;               HasImpl(T: Magic), \n;               WellFormed(T),\n;               Implemented(T: Copy),\n;             ) => Implemented(T: Magic) }\n(ForAll ((TyKind T))\n        (Implies ((HasImpl (Magic (T)))\n                  (WellFormed (TyKind (T)))\n                  (Implemented (Copy (T))))\n                 (Implemented (Magic (T)))))\n```\n\nNow we start to see how this works -- if I want to call a function with a `T: Magic` where clause, like this...\n\n```rust\nfn make_the_magic_happen<T: Magic>(t: T) {\n    let u = t;\n    drop((t, u)); // both t, u are valid\n}\n```\n\n...it is not enough to show that `HasImpl` is satisfied, I also have to prove that `T: Copy`. To do that, I have to show that `HasImpl(T: Copy)`, and I can't do that.\n\n### But wait, implied bounds?\n\nActually though, the above is not sufficient to solve the problem. That's because we haven't added in implied bounds yet! The *naive* version of implied bounds is that we want to add in a rule like so:\n\n```\nImplemented(T: Magic) => Implemented(T: Copy)\n```\n\ni.e., if I know that `T: Magic`, I also know that `T: Copy`. But if we literally added that clause, it would be unsound, at least in a coinductive setting. Why is that? Say I want to prove that `String: Copy`...\n\n* `Implemented(String: Copy)`? Well, that's true if...\n    * `Implemented(String: Magic)`? Well, that's true if...\n        * `HasImpl(String: Magic)`? Well, that's true if...\n            * `Implemented(String: Magic)` -- and that's on the stack, so that's ok!\n        * `WellFormed(String)` -- yep\n        * `Implemented(String: Copy)` -- well, that's on the stack, so that's ok!\n\nThe traditional solution so this sort of problem is to impose some kind of limits on the impls people can write so they must be \"productive\". It's a bit tricky to define what productivity means, but intuitively it means \"not tautological\". The challenge is that the various schemes I've seen for showing productivity don't accept impls like the ones that perfect derive would create, so they wouldn't really work for us. The solution in the impl works a different way.\n\nThe co-LP formulation acccepts any cycle as valid, so it's very easy to create these kind of \"tautological rules\". Now, if the user actually *wrote* those impls, I don't see that as a problem. It's ok to have mutually dependent impls, all we want to know basically is \"when I call a method, there will be some impl to go to\" (see example below). But it's not good if it's unsound. =)\n\n```rust\ntrait Foo {\n    fn foo(&self);\n}\n\ntrait Bar {\n    fn bar(&self);\n}\n\nimpl<T: Bar> Foo for T {\n    fn foo(&self) {\n        if something() { self.bar() }\n    }\n}\n\nimpl<T: Foo> Bar for T {\n    fn bar(&self) {\n        if something() { self.foo() }\n    }\n}\n```\n\n### Enter: invariants\n\nThe insight is that it's not ok to use implied bounds out of thin air. You only want to use them for where-clauses that you have in scope. In this way, they are categorically different from program clauses, which always hold. I've decided to refer to implied bounds as *invariants* -- the idea is that they are things which \"must be true if the program is valid\". So for our program we would have one **invariant**:\n\n```\nforall<T> { Implemented(T: Magic) => Implemented(T: Copy) }\n```\n\nTo express this a bit more formally, let `F` be the set of all \"facts\" we can generate from the clauses alone (a \"fact\" here is just a predicate that refers to some concrete types and thing)s. Because there are an infinite set of types, the set of facts is also infinite, but that's ok. In our example, given the rules we've seen so far (but ignoring the implied bound), we can show that `HasImpl(i32: Magic)` and `HasImpl(u32: Magic)` easily enough. We don't have a `HasImpl(i32: Copy)` fact, though, and because of that we also can't have a `Implemented(i32: Copy)` fact. Given this set of facts `F`, then we ought to be able to prove each invariant `I`, or something is broken in our type rules. In our example, the invariant `forall<T> { Implemented(T: Magic) => Implemented(T: Copy) }` does in fact hold, because there are no `Implemented(T: Magic)` facts.\n\n### Integrating invariants into the solver\n\nThe solver is able to make use of invariants to generate proofs, but only in a limited way. Whereas we can always use a program clause, we can only apply invariants to the *hypotheses* that are in scope -- a *hypotheses* is some where-clause that we are assuming to be true. The idea here is that the caller must have proven that hypothesis to be a *fact* -- if they did so, then unless our type rules are broken, the invariant holds, which means that any facts we can derive with the invariants are also true.\n\nThis in turn implies that the seemingly tautological impl of `Magic` is actually **legal**! Recall the \"ok goals\" we saw before, that are used to decide which declarations are legal. The \"ok\" goal for the magic impl looks like this:\n\n```scheme\n(ForAll ((TyKind T))\n        (Implies ((Implemented (Magic (T))))\n                 (Implemented (Magic (T)))))\n```\n\nBasically, \"if we assume that `T: Magic` is implemented, then we can show that `T: Magic` is implemented\". Well, that's obviously true.\n\nOK, so the impl is legal, but what about this function `make_the_magic_happen`?\n\n```rust\nfn make_the_magic_happen<T: Magic>(t: T) {\n    let u = t;\n    drop((t, u)); // both t, u are valid\n}\n```\n\nWe don't currently have type-checking logic in formality but, if we did, type-checking this function would require copying `t` and hence proving that:\n\n```\nforall<T> {\n    Implemented(T: Magic) => Implemented(T: Copy)\n}\n```\n\nHere the `Implemented(T: Magic) => ...` comes from the where-clauses on the function. To solve this, the solver puts `Implemented(T: Magic)` into the environment as a hypothesis using the \"prove-implies\" rule ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/cosld-solve/prove.rkt#L67-L71)):\n\n```scheme\n  [(where Env_1 (env-with-hypotheses Env Hypotheses))\n   (prove Env_1 Predicates_stack Goal EnvSubstitution_out)\n   -------------------------------------------------------- \"prove-implies\"\n   (prove Env Predicates_stack (Implies Hypotheses Goal) (reset Env () EnvSubstitution_out))\n   ]\n```\n\nNext it can apply the \"prove-hypothesis-imply\" rule ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/cosld-solve/prove.rkt#L41-L45)):\n\n```scheme\n  [(where #f (in? Predicate Predicates_stack))\n   (Hypotheses-imply Env () Predicate EnvSubstitution_out)\n   --------------- \"prove-hypotheses-imply\"\n   (prove Env Predicates_stack Predicate EnvSubstitution_out)\n   ]\n```\n\nThis rule usess [`Hypotheses-imply`](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/cosld-solve/hypothesize.rkt#L9-L11), another typing judgment which determines whether `Predicate` is either *directly* in the environment as a hypothesis **or can be derived via an invariant**. This last part is what we need here! The only hypothesis in the environment is `Implemented(T: Magic)`, but we can use the invariant\n\n```\nImplemented(T: Magic) => Implemented(T: Copy)\n```\n\nto expand that to `Implemented(T: Copy)`, so we are happy.\n\n### Wait, so is this sound?\n\nBut accepting this impl and this function this doesn't mean we have an unsound program -- the question is, who is going to *call* that function, and with what type? And this is where the errors come in. Consider this `main` function:\n\n```rust\nfn main() {\n    make_the_magic_happen(\"Die, cruel world, die!\".to_string());\n}\n```\n\nFor this program to type-check, we must prove the where-clauses on `make_the_magic_happen`, which means proving\n\n```\nImplemented(String: Magic)\n```\n\nBut in this case, there are no hypotheses in the environment, so we can't make use of the invariants. We have to use the program clause, it requires also showing that `Implemented(String: Copy)` which in turn means showing `HasImpl(String: Copy)`, and we cannot do that.\n\nThinking a bit more abstractly, no matter what where clauses we have on various functions, we will \"bottom out\" in a `main` function somewhere, and `main` has no where clauses. Therefore, if our program relies on `Implemented(i32: Magic)`, that must be provable in an environment with no hypotheses. Put another way, `Implemented(i32: Magic)` must be a member of that infinite set of facts that we described earlier, the ones which categorize \"everything that is true in this program\". But we already argued that this set does not include `Implemented(i32: Magic)`, because the only way to get such a fact is to use the program clause, and the program clause requires that `HasImpl(i32: Copy)`, which is not true.\n\n### Productivity again?\n\nxxx -- didn't get time to to finish this, but I think that you can frame the previous two sections in terms of the typical \"productivity\" rules. There is a nice thesis I've been slowly working through on this. The TL;DR is something like this: \"we accept all cycles but require that for any proof of `Implemented(T: Foo)`, `HasImpl(T: Foo)` must appear somewhere in the cycle\", but that's not quite stating it right.\n\n## Future directions\n\nHere are some of the next steps I've been thinking about and we could discuss:\n\n* There are some fixes to how `Hypothesize-implies` works that I want to make (I think it should be \"bottom-up\", not \"top-down\" as it is today, if that makes sense -- basically adopt the elaboration strategy from)\n* Sketch out the MIR type-checker\n* Integrate higher-ranked types and regions, polonius, etc -- I've been reading up on subtyping systems and I think I have some ideas for a fresh approach here\n* Implement the \"recursive solver\" as a metafunction\n    * it is useful to be able to compare the \"cosld-solver\", which I believe is sound+complete, against ours, which (I hope) is merely sound\n* Extend rustc with `-Zformality` to allow it to generate formality programs\n* Use PLT redex to fuzz the existing solver and test the \"invariant logic\"\n\n# Niko's FAQ\n\n## If this is a complete model, isn't that just an implementation? \n\nNot really. It leaves out a ton of stuff:\n\n* diagnostics\n* low-level ABI details\n* parser and concrete rust syntax\n* running C code and FFI (though you can imagine translating C code to equivalent unsafe Rust, which would be supported to some extent)\n* platform specific things, interactions with the operating system\n\nCurrently, it's focusing on MIR and back, which means we can exclude a lot of things\n\n* name resolution\n* layout (we can take struct layouts as inputs)\n* \n\n# Questions\n\n## Are there any fundamental differences to Chalk, so far?\n\nnikomatsakis: Yes. Chalk does not have the concept of invariants and handles implied bounds in a different way (`FromEnv` goals). Chalk also has one structural setup that has to be ported to formality -- it generates program clauses \"on demand\". This is required because actually the set of program clauses for a Rust program is potentially infinite (think of e.g. auto traits). I've been debating the best way to model this with PLT Redex and in particular whether it's important to preserve the various layers I've shown here, it might be easier if we merged everything into one.\n\n## Is this an \"ideal\" Rust model, or a \"practical\" one?\n\n- Current Rust semantics, or the one we want\n\nnikomatsakis: You're asking the right question, and it's something I wanted to discuss. Right now it's the \"ideal\" model in the sense that I am using it to show how some extensions to Rust would work, but I think it's important that it be the \"practical\" one too. It's not hard to disable the implied bounds (actually, limit them to supertraits) and remove support for cycles. What's a bit more interesting, and I'm not sure about it, is the best way to have \"feature gates\" so that we can show the \"diff required\" to support a new feature. \n\n## Is it practical to try to develop Chalk alongside? I.e. update Chalk's rules as a-mir-formality is updated?\n\nnikomatsakis: I think so, and I think we should. This is partly why Formality's structure intentionally mirrors Chalk (and it should eventually include the solver, so that we can show \"these are things the compiler should be able to prove\" versus \"these are things that are provable\"). The idea is that we can prototype and explore more quickly in this environment, but chalk would scale up to real programs (the PLT Redex solver is way too slow for that). Also, Chalk's structure would be more optimized for performance, for giving good error messages, for dealing with low-level ABI details, and all the other fun stuff that the model does NOT include.\n\n## What about Coq?\n\n> it seems that coq is the most popular at POPL etc. How well do you think the framework you're using will integrate into other PL tools/efforts?\n\nnikomatsakis: As you can see, the notation is quite high-level, so if nothing else I think it would be easy to manually transcribe things. But I would assume people have made efforts to \"export\" rules and things from PLT Redex to other formats.\n\n## How would types team signoff integrate into feature process?\n\n* add a checkbox \"types team signoff\" for new language features\n* open an issue on formality repository\n\n\n## How/where does coercion fit in?\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 42623,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "text": "# a MIR Formality, goals and the reality\n\nFrom [the repository](https://github.com/nikomatsakis/a-mir-formality) (emphasis mine):\n\n> This repository is an early-stage experimental project that aims to be a complete, authoritative formal model of the [Rust MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html). **Presuming these experiments bear fruit, the intention is to bring this model into Rust as an RFC and develop it as an official part of the language definition.**\n\nThe goal of this document is to explain the high-level structure as well as giving a sense for the overall development roadmap I have in mind.\n\n[ToC]\n\n## How I see formality being used\n\nFormality will become the \"primary source\" for \"what Rust means\":\n\n* When a new language feature is designed, one stage in the process will be formalizing that feature into formality. \n    * Currently, since formality focuses on MIR, this will only make sense for \"core language features\" like implied bounds or specialization. ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 995,
+          "ordinal": 0,
+          "chunk_id": "V3-P-M1-r1-c0000",
+          "text_sha256": "f93e1306ca0c436ef7329f711e4ee5ee07920ab7a02792f53adb10597a6cc0a6"
+        },
+        {
+          "text": "lity. \n    * Currently, since formality focuses on MIR, this will only make sense for \"core language features\" like implied bounds or specialization. Eventually I'd like to extend formality to cover other areas like name resolution and Rust surface syntax.\n    * This will help to uncover interactions between features.\n* Formality can be fuzzed and checked against rustc, much as the [AWS S3 team does to check their code](https://www.amazon.science/publications/using-lightweight-formal-methods-to-validate-a-key-value-storage-node-in-amazon-s3).\n    * We can extend rustc to generate formality declarations.\n* For the trait solver, formality will map quite closely to its overall structure, which allows us to experiment with new algorithms or structure and see their effects quickly.\n    * As an initial example, I plan to prototype a new approach for associated type normalization.\n\n## Why a new repo? Why PLT redex?\n\nI had originally hoped that chalk could serve as a kind of \"executable ",
+          "page": null,
+          "start_offset": 845,
+          "end_offset": 1839,
+          "ordinal": 1,
+          "chunk_id": "V3-P-M1-r1-c0001",
+          "text_sha256": "9253d9972aa3b3e8142ab52186675d30ba0b891f36c5c880dfb46492bac4b3fd"
+        },
+        {
+          "text": "pproach for associated type normalization.\n\n## Why a new repo? Why PLT redex?\n\nI had originally hoped that chalk could serve as a kind of \"executable semantics\" for Rust. The idea was that the separation between \"generating clauses\" and \"the solver\" would allow us to specify how Rust works on a high-enough level that the code is nicely generic. Over time, though, I've become convinced that this approach won't scale. There is a lot of \"incidental complexity\" that is created by integrating chalk into rustc, as well as engineering for efficiency. Ultimately, I don't see chalk being sufficiently malleable for our purposes.\n\nI chose to use PLT Redex because it's a really great tool for exploration. It allows you to write very high-level structures, execute them, and see what happens. I think it's sufficiently approachable that we can onboard contributors and grow the types team. I'm not sure the same is true of other alternatives. Plus I like it.\n\n## Formality and the types team\n\nI imagine ",
+          "page": null,
+          "start_offset": 1689,
+          "end_offset": 2689,
+          "ordinal": 2,
+          "chunk_id": "V3-P-M1-r1-c0002",
+          "text_sha256": "e6fe1e1f8815e307ad01c002f5ebf632fa252cbebcac123057f481c82743b729"
+        },
+        {
+          "text": "ontributors and grow the types team. I'm not sure the same is true of other alternatives. Plus I like it.\n\n## Formality and the types team\n\nI imagine formality being \"owned and maintained\" by the types team, like other rust-lang projects. \n\n## Layers of formality\n\nFormality is structured into several layers. These layers are meant to also map fairly closely onto chalk and the eventual Rust trait solver implementation. Ideally, one should be able to map back and forth between formality and the code with ease.\n\n* **formality-ty:** the \"types\" layer\n    * Defines Rust types and functions for equating/relating them.\n        * The representation is meant to cover all Rust types, but is optimized for extracting their \"essential properties\".\n    * Defines core logical predicates (`Implemented(T: Trait)`, etc) and solvers.\n        * But doesn't define what they *mean* -- i.e., the conditions in which they are true.\n* **formality-decl:** the \"Rust declarations\" layer\n    * Defines Rust ",
+          "page": null,
+          "start_offset": 2539,
+          "end_offset": 3531,
+          "ordinal": 3,
+          "chunk_id": "V3-P-M1-r1-c0003",
+          "text_sha256": "7e7da3090ebd9de5f9c3ad91f70ab6d8bebb518ec044e9354c0c3bcc6b58e9d5"
+        },
+        {
+          "text": "oesn't define what they *mean* -- i.e., the conditions in which they are true.\n* **formality-decl:** the \"Rust declarations\" layer\n    * Defines Rust \"top-level items\" and their semantics\n        * This includes crates, structs, traits, impls, but excludes function bodies.\n    * Semantics are defined by converting Rust items into predicates\n        * e.g., `impl<T: Eq> Eq for Vec<T>` becomes a \"program clause\" (axiom) like `forall<T> { Implemented(T: Eq) => HasImpl(Vec<T: Eq>) }` (the distinction between `HasImpl` and `Implemented` is covered below).\n    * Defines the well-formedness checks for those items\n        * e.g., `struct Foo { f1: T1 }` is well-formed if \n* **formality-mir:** the \"type system for MIR\" layer\n    * Defines MIR and rules for its type checker (corresponds roughly to the MIR borrow checker + polonius).\n    * Caveat: I've sketched this out, but nothing more.\n* **formality-mir-op:** the \"operational semantics for MIR\" layer\n    * Extends the above level with an ",
+          "page": null,
+          "start_offset": 3381,
+          "end_offset": 4376,
+          "ordinal": 4,
+          "chunk_id": "V3-P-M1-r1-c0004",
+          "text_sha256": "a14f61befa02a6543346210856fcef6fa0a1f38c8d0d41e09f6ee0fcfa621192"
+        },
+        {
+          "text": "at: I've sketched this out, but nothing more.\n* **formality-mir-op:** the \"operational semantics for MIR\" layer\n    * Extends the above level with an operational semantics. Basically equivalent to miri.\n    * Caveat: I haven't even sketched this out yet.\n\n## A closer look at formality-ty\n\nLet's take a closer look at the formality-ty layer. \n\n### Defining Rust types\n\nThe current definition of types looks like this ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/grammar.rkt#L25-L37)):\n\n```scheme\n(define-language formality-ty\n  ...\n  (Ty :=\n      (TyApply TyName Parameters) ; Application type\n      VarId                       ; Bound or existential (inference) variable\n      (! VarId)                   ; Universal (placeholder) variable\n      )\n  (TyName :=\n          AdtId           ; enum/struct/union\n          TraitId         ; trait\n          AssociatedTy    ; Associated type\n          ScalarId        ; Something like i32, ",
+          "page": null,
+          "start_offset": 4226,
+          "end_offset": 5226,
+          "ordinal": 5,
+          "chunk_id": "V3-P-M1-r1-c0005",
+          "text_sha256": "9468c2dea0aa328b08b45d9196c1429972b82855883d6eec3c6d38bb9dfee4b0"
+        },
+        {
+          "text": "    ; enum/struct/union\n          TraitId         ; trait\n          AssociatedTy    ; Associated type\n          ScalarId        ; Something like i32, u32, etc\n          (Ref MaybeMut)  ; `&mut` or `&`, expects a lifetime + type parameter\n          (Tuple number)  ; tuple of given arity\n          )\n   ...\n   (ScalarId := i8 u8 i16 u16 i32 u32 i64 u64 i128 u128 bool)\n   ...\n   (AssociatedTy := (TraitId AssociatedTyId))\n   ...\n   (Parameters := (Parameter ...))\n   (Parameter := Ty Lt)\n   ...\n   ((AdtId VarId TraitId AssociatedTyId AnyId) := variable-not-otherwise-mentioned)\n)\n```\n\nAs you can see, it's woefully incomplete, but it should give you some idea for the level of abstraction we are shooting for and also how PLT Redex works. The idea here is that a type is either a variable, a placeholder that represents a generic type, or an \"application\" of a type name to some parameters. Let's see some examples:\n\n* A generic type like `T` could either be `T` or `(! T)`:\n    * `T` is used when ",
+          "page": null,
+          "start_offset": 5076,
+          "end_offset": 6074,
+          "ordinal": 6,
+          "chunk_id": "V3-P-M1-r1-c0006",
+          "text_sha256": "6ab1ac20aac5614c4a14f4a51f4b0459f567eac139583121c1f19b56b13a85b3"
+        },
+        {
+          "text": "cation\" of a type name to some parameters. Let's see some examples:\n\n* A generic type like `T` could either be `T` or `(! T)`:\n    * `T` is used when the generic has yet to be substituted, e.g., as part of a declaration.\n    * `(! T)` is used as a placeholder to \"any type `T`\".\n* A type like `Vec<T>` in Rust would be represented therefore as:\n    * `(TyApply Vec (T))`, in a declaration; or,\n    * `(TyApply Vec ((! T)))` when checking it.\n* A scalar type like `i32` is represented as `(TyApply i32 ())`.\n\nAs I said, this defintion of types is woefully incomplete. I expect it to eventually include:\n\n* \"alias types\" like associated types and type aliases\n* \"existential\" types like `dyn`\n* \"forall\" quantifies to cover `for<'a> ...`\n* \"function\" types `fn(A1...An) -> R`\n* \"implication\" types `where(...) T`-- these don't exist in Rust yet =)\n\nYou can also see that the definition of types is aligned to highlight their \"essential\" characteristics and not necessarily for convenience elsewhere. ",
+          "page": null,
+          "start_offset": 5924,
+          "end_offset": 6922,
+          "ordinal": 7,
+          "chunk_id": "V3-P-M1-r1-c0007",
+          "text_sha256": "c77305ec7a70f2d3d5ab1f4646bf25d2ef71a4d58ffbbb4acca9b75b24ea6e48"
+        },
+        {
+          "text": "ou can also see that the definition of types is aligned to highlight their \"essential\" characteristics and not necessarily for convenience elsewhere. Almost every Rust type, for example, boils down to *some* kind of \"application\" (it's likely that we can even represent `fn` types this way).\n\n### Type unification\n\nA key part of the type layer is that it includes *type unification*. That is, it defines the rules for making types equal. This will eventually have to be extended to cover subtyping (more on that a bit later) so that we can properly handle variance.\n\nUnification is done via a \"metafunction\", which just means a function that operates on terms (versus a function in the Rust program being analyzed):\n\n```scheme\n(define-metafunction formality-ty\n  most-general-unifier : Env TermPairs -> EnvSubstitution or Error\n```\n\nThis function takes an environment `Env` and a list of pairs of terms that should be equated and gives back either:\n\n* a new environment and substitution from ",
+          "page": null,
+          "start_offset": 6772,
+          "end_offset": 7764,
+          "ordinal": 8,
+          "chunk_id": "V3-P-M1-r1-c0008",
+          "text_sha256": "31364eaec7a5a66650da8203d4d0aadc9013aef4081d3444ba89ef01a1f8019f"
+        },
+        {
+          "text": "tion takes an environment `Env` and a list of pairs of terms that should be equated and gives back either:\n\n* a new environment and substitution from inference variables to values that will make the two terms syntactically equal; or,\n* the term `Error`, if they cannot be unified.\n\nThe unifier is a bit smarter than the traditional unification in that it knows about *universes* and so can handle \"forall\" proofs and things (that's what is found in the environment). This is the same as chalk and rustc. \n\nI won't cover the details but I'll just give an example. This is actually modified from a unit test from the code ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/unify.rkt#L254-L269)). Invoking `most-general-unifier` like so:\n\n```scheme\n(most-general-unifier Env_2 ((A X)\n                             (X (TyApply Vec (Y)))\n                             (Y (TyApply i32 ()))))\n```\n\ncorresponds to saying that `[A = X, X = Vec<Y>, Y ",
+          "page": null,
+          "start_offset": 7614,
+          "end_offset": 8613,
+          "ordinal": 9,
+          "chunk_id": "V3-P-M1-r1-c0009",
+          "text_sha256": "967940203b0848a58b3e2d35e3689c93f3ac2d97c1c84d8b4772d41411127154"
+        },
+        {
+          "text": "                     (X (TyApply Vec (Y)))\n                             (Y (TyApply i32 ()))))\n```\n\ncorresponds to saying that `[A = X, X = Vec<Y>, Y = i32]` must all be true, where `A`, `X` and `Y` are inference variables. The resulting output is a substitution that maps `A`, `X` and `Y` to the following values:\n\n* `A -> Vec<i32>`\n* `X -> Vec<i32>`\n* `Y -> i32`\n\n### Predicates\n\nFormality-ty also defines the core predicates used to define Rust semantics. The current definition is as follows ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/grammar.rkt#L121-L130)):\n\n```scheme\n  (Predicate :=\n             ; `TraitRef` is (fully) implemented.\n             (Implemented TraitRef)\n             ; an impl exists for `TraitRef`; this *by itself* doesn't mean\n             ; that `TraitRef` is implemented, as the supertraits may not\n             ; have impls.\n             (HasImpl TraitRef)\n             ; the given type or lifetime is ",
+          "page": null,
+          "start_offset": 8463,
+          "end_offset": 9462,
+          "ordinal": 10,
+          "chunk_id": "V3-P-M1-r1-c0010",
+          "text_sha256": "c747b1d7b4c66a92edac9c5e4b583bf0b4390d19a1c2ba6c38fcb6ca9b8458ff"
+        },
+        {
+          "text": "f` is implemented, as the supertraits may not\n             ; have impls.\n             (HasImpl TraitRef)\n             ; the given type or lifetime is well-formed.\n             (WellFormed (ParameterKind Parameter))\n             )\n```\n\nThese core predicates are then used to define a richer vocabulary of goals (things that can be proven) and various kinds of \"clauses\" (things that are assumed to be true, axioms) ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/grammar.rkt#L136-L143)):\n\n```scheme\n  (Goals = (Goal ...))\n  (Goal :=\n        Predicate\n        (Equate Term Term)\n        (All Goals)\n        (Any Goals)\n        (Implies Hypotheses Goal)\n        (Quantifier KindedVarIds Goal)\n        )\n\n  ((Hypotheses Clauses Invariants) := (Clause ...))\n  ((Hypothesis Clause Invariant) :=\n                                 Predicate\n                                 (Implies Goals Predicate)\n                                 (ForAll ",
+          "page": null,
+          "start_offset": 9312,
+          "end_offset": 10307,
+          "ordinal": 11,
+          "chunk_id": "V3-P-M1-r1-c0011",
+          "text_sha256": "0be359c95bb07b3a1530c3e565821bc77affcc00344bf9b67d3a0e6d0bd15cd8"
+        },
+        {
+          "text": "nt) :=\n                                 Predicate\n                                 (Implies Goals Predicate)\n                                 (ForAll KindedVarIds Clause)\n                                 )\n```\n\nImportantly, the *types layer* defines a solver that gives semantics to all the \"meta\" parts of goals and clauses -- e.g., it defines what it means to prove `(All (G1 G2))` (prove both `G1` and `G2`, duh). But it doesn't have any rules for what it means to prove the *core* predicates true -- so it could never prove `(Implemented (Debug ((! T))))`. Those rules all come from the declaration layer and are given to the types layer as part of the \"environment\".\n\nYou might be curious about the distinction between goal and clause and why there are so many names for clauses (hypothesis, clause, invariant, etc). Let's talk briefly about that.\n\n* **Goals vs clauses:** \n    * The role of `ForAll` in goals and clauses is different.\n        * Proving $\\forall X. G$ requiers proving that `G` ",
+          "page": null,
+          "start_offset": 10157,
+          "end_offset": 11157,
+          "ordinal": 12,
+          "chunk_id": "V3-P-M1-r1-c0012",
+          "text_sha256": "2bd0ffd50c7c34be441bf01f2b064669f51737df302d502d2726aef38c4cfb7f"
+        },
+        {
+          "text": "t.\n\n* **Goals vs clauses:** \n    * The role of `ForAll` in goals and clauses is different.\n        * Proving $\\forall X. G$ requiers proving that `G` is true for any value of `X` (i.e., for a placeholder `(! X)`, in our setup).\n        * In contrast, if you know $\\forall X. G$ as an axiom, it means that you can give `X` any value `X1` you want.\n    * Clauses have a limited structure between that keeps the solver tractable. The idea is that they are always \"ways to prove a single predicate\" true; we don't allow a clause like `(Any (A B))` as a clause, since that would mean \"A or B is true but you don't know which\". That would then be a second way to prove an `Any` goal like `(Any ...)` and introduce lots of complications (we got enough already, thanks).\n* **Hypotheses vs clauses vs invariants:**\n    * These distinctions are used to express and capture implied bounds. We'll defer a detailed analysis until the section below, but briefly:\n        * \"Hypotheses\" are where-clauses that are ",
+          "page": null,
+          "start_offset": 11007,
+          "end_offset": 12006,
+          "ordinal": 13,
+          "chunk_id": "V3-P-M1-r1-c0013",
+          "text_sha256": "892f7d0051247d33c91387ddce407d5f2f689fe6e68386a5ba134245ddb6b764"
+        },
+        {
+          "text": "s and capture implied bounds. We'll defer a detailed analysis until the section below, but briefly:\n        * \"Hypotheses\" are where-clauses that are assumed to be true in this section of the code.\n        * \"Clauses\" are global rules that are always true (derived, e.g., from an impl).\n        * \"Invariants\" express implied bounds (e.g., supertrait relationships like \"if `T: Eq`, then `T: PartialEq`\").\n\n### Solver\n\nPutting all this together, the types layer currently includes a relatively simple solver called `cosld-solve`. This is referencing the classic [SLD Resolution Algorithm](https://en.wikipedia.org/wiki/SLD_resolution) that powers prolog, although the version of it that we've implemented is extended in two ways:\n\n* It covers Hereditary Harrop predicates using the [techniques described by Gopalan Nadathur](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.2510&rep=rep1&type=pdf).\n* It is coinductive as [described by Luke Simon et ",
+          "page": null,
+          "start_offset": 11856,
+          "end_offset": 12819,
+          "ordinal": 14,
+          "chunk_id": "V3-P-M1-r1-c0014",
+          "text_sha256": "59c22dcd0737782dcfa2b772d4e0dc28fe95c9a2572be092a27a4e5acca69f6f"
+        },
+        {
+          "text": "n Nadathur](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.2510&rep=rep1&type=pdf).\n* It is coinductive as [described by Luke Simon et al.](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.102.9618&rep=rep1&type=pdf) -- this means it permits cycles, roughly speaking.\n\nIn terms of chalk solvers, it is \"similar\" to slg, but much simpler in its structure (it doesn't do any caching). \n\nAll those fancy words aside, it's really quite simple. It's defined via induction rules, which PLT Redex lets us write in a natural style. The definition begins like so:\n\n```scheme\n(define-judgment-form formality-ty\n  #:mode (prove I I I O)\n  #:contract (prove Env Predicates_stack Goal EnvSubstitution)\n```\n\nThis says that we are trying to prove something written as `(prove Env Predciates Goal EnvSubstitution)`, where the first three are 'inputs' and the final name is an 'output' (the input vs output distinction is often left implicit in Prolog and other languages). The idea is that ",
+          "page": null,
+          "start_offset": 12669,
+          "end_offset": 13667,
+          "ordinal": 15,
+          "chunk_id": "V3-P-M1-r1-c0015",
+          "text_sha256": "52c53b739be7beb816c1eb7f9b853bec9ee7beab89da947b3d6a1e0fd20a75c5"
+        },
+        {
+          "text": "e 'inputs' and the final name is an 'output' (the input vs output distinction is often left implicit in Prolog and other languages). The idea is that we will prove that `Goal` is true in some environment `Env`; the environment contains our hypotheses and clauses, as well as information about the variables in scope. The `Predicates` list is the stack of things we are solving, it's used to detect cycles. The `EnvSubstitution` is the *output*, it is a modified environment paired with a substitution that potentially gives new values to inference variables found in `Goal`.\n\nHere is a simple rule. It defines the way we prove `Any` ([source](https://github.com/nikomatsakis/a-mir-formality/blob/main/src/ty/cosld-solve/prove.rkt#L62-L65)). The notation is as follows. The stuff \"above the line\" are the conditions that have to be proven; the thing \"under the line\" is the conclusion that we can draw.\n\n```scheme\n  [(prove Env Predicates_stack Goal_1 EnvSubstitution_out)\n   ",
+          "page": null,
+          "start_offset": 13517,
+          "end_offset": 14492,
+          "ordinal": 16,
+          "chunk_id": "V3-P-M1-r1-c0016",
+          "text_sha256": "27b6dfa3612b0e0793e00ab431d7a19a915142c8d49b495f6584b8fcb645988a"
+        },
+        {
+          "text": "to be proven; the thing \"under the line\" is the conclusion that we can draw.\n\n```scheme\n  [(prove Env Predicates_stack Goal_1 EnvSubstitution_out)\n   ------------------------------------------------------- \"prove-any\"\n   (prove Env Predicates_stack (Any (Goal_0 ... Goal_1 Goal_2 ...)) EnvSubstitution_out)\n   ]\n```\n\nThis rule says:\n\n* Given some goal `(Any (Goal_0 ... Goal_1 Goal_2 ...))` where `Goal_1` is found somewhere in that list...\n    * if we can prove `Goal_1` to be true, then the `Any` goal is true.\n\nOr read another way:\n\n* If we can prove `Goal_1` to be true, then we can prove `(Any Goals)` to be true so long as `Goal_1` is somewhere in `Goals`.\n\nIt shows you a bit of the power of PLT Redex (and Racket's pattern matching), as well. We are able to write the rule in a \"non-deterministic\" way -- saying, \"pick any goal from the list\" and prove it. Redex will search all the possibilities.\n\n## A closer look at formality-decl\n\nNow that we've surveyed the type layer, let's look at ",
+          "page": null,
+          "start_offset": 14342,
+          "end_offset": 15339,
+          "ordinal": 17,
+          "chunk_id": "V3-P-M1-r1-c0017",
+          "text_sha256": "0f3e8b0e58d62ef31a298110121da2de06b5a5c9eeb9d597b5e269d77983dc7f"
+        },
+        {
+          "text": "st\" and prove it. Redex will search all the possibilities.\n\n## A closer look at formality-decl\n\nNow that we've surveyed the type layer, let's look at the declaration layer. It begins by declaring an \"extended\" language `formality-decl` that adds new stuff to `formality-ty` ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/grammar.rkt#L5)):\n\n```scheme\n(define-extended-language formality-decl formality-ty ...)\n```\n\nFor example, a set of crates looks like this ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/grammar.rkt#L7-L10)):\n\n```scheme\n (CrateDecls := (CrateDecl ...))\n  (CrateDecl := (CrateId CrateContents))\n  (CrateContents := (crate (CrateItemDecl ...)))\n  (CrateItemDecl := AdtDecl TraitDecl TraitImplDecl)\n```\n\nBasically a list of items like `(a (crate (item1 item2 item3)))` where `item{1,2,3}` are either structs/enums (`AdtDecl`), traits (`TraitDecl`), or ",
+          "page": null,
+          "start_offset": 15189,
+          "end_offset": 16189,
+          "ordinal": 18,
+          "chunk_id": "V3-P-M1-r1-c0018",
+          "text_sha256": "c088697b244523139104b3d51974e313a9056de89ee992970ff2099f12450195"
+        },
+        {
+          "text": "\n\nBasically a list of items like `(a (crate (item1 item2 item3)))` where `item{1,2,3}` are either structs/enums (`AdtDecl`), traits (`TraitDecl`), or impls (`TraitImplDecl`).\n\n### Declaring traits in `FormalityDecl`\n\nLet's look more closely at one of those kinds of items. A trait declaration looks like this ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/grammar.rkt#L26-L27)):\n\n```scheme\n  (TraitDecl := (TraitId TraitContents))\n  (TraitContents := (trait KindedVarIds WhereClauses TraitItems))\n  ...\n  (WhereClauses := (WhereClause ...))\n  (WhereClause :=\n               (ForAll KindedVarIds WhereClause)\n               (Implemented TraitRef)\n               )\n```\n\nHere:\n\n* `TraitId` is the name of the trait\n* `KindedVarIds` is a list of generic parameters like `((TyVar Self) (TyVar T))`. Note that the `Self` parameter is made explicit. \n* `WhereClauses` is a list of where-clauses, which are currently just `T: Foo` trait ",
+          "page": null,
+          "start_offset": 16039,
+          "end_offset": 17034,
+          "ordinal": 19,
+          "chunk_id": "V3-P-M1-r1-c0019",
+          "text_sha256": "d696a4e2449a1716dd5e47ec1825a5b3b5629caba49f5aa36b4fc6eb51f402a8"
+        },
+        {
+          "text": ") (TyVar T))`. Note that the `Self` parameter is made explicit. \n* `WhereClauses` is a list of where-clauses, which are currently just `T: Foo` trait references (though potentially higher-ranked).\n* `TraitItems` are the contents of the trait, currently not used for anything.\n\nSo the following Rust trait\n\n```rust\ntrait Foo<T: Ord>: Bar { }\n```\n\nwould be represented as\n\n```scheme\n(Foo (trait ; KindedVarIds -- the generics:\n            ((TyKind Self) (TyKind T))\n            ; where clauses, including supertraits:\n            ((Implemented (Ord (T))) (Implemented (Bar (Self))))\n            ; trait items, empty list:\n            ()\n            ))\n```\n\n### Lowering crate items to clauses\n\nThe next part of `formality-decl` is the metafunction `env-with-crate-decls` ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L20-L23)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Add the clauses/hypothesis from ",
+          "page": null,
+          "start_offset": 16884,
+          "end_offset": 17880,
+          "ordinal": 20,
+          "chunk_id": "V3-P-M1-r1-c0020",
+          "text_sha256": "972b6d8d7e40cef03f4c2faf9bee2e8ce77d796928d9a64d177efa7380e52fd6"
+        },
+        {
+          "text": "a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L20-L23)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Add the clauses/hypothesis from multiple crates\n  ;; into the environment, where CrateId names the current crate.\n  env-with-crate-decls : Env CrateDecls CrateId -> Env\n  ; ...\n  )\n```\n\nWhat this does is to convert *Rust declarations* into the *environment* from the type layer. Note that it takes:\n\n* a base environment `Env` (typically just the constant `EmptyEnv`)\n* a set of crates `CrateDecls` (this is meant to include the imports)\n* the id of the current crate `CrateId`. This is because the set of rules we generate for a particular item can be different depending on whether we are compiling the crate where it was declared or some other crate (consider e.g. `#[non_exhaustive]`).\n\n### Generating the clauses for a single crate item\n\nThe `env-with-crate-decls` function just iterates over all the items in all the crates and ultimately invokes this helper function, ",
+          "page": null,
+          "start_offset": 17730,
+          "end_offset": 18723,
+          "ordinal": 21,
+          "chunk_id": "V3-P-M1-r1-c0021",
+          "text_sha256": "9f795ded9dddbe53329ade0abe0cb032131aedc205b3a1b81bebc4c687e38fcd"
+        },
+        {
+          "text": "ingle crate item\n\nThe `env-with-crate-decls` function just iterates over all the items in all the crates and ultimately invokes this helper function, `crate-item-decl-rules` ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L57-L63)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Given a crate item, return a tuple of:\n  ;;\n  ;; * The clauses that hold in all crates due to this item\n  ;; * The invariants that hold in all crates due to this item\n  ;; * The invariants that hold only in the crate that declared this item\n  crate-item-decl-rules : CrateDecls CrateItemDecl -> (Clauses Invariants Invariants)\n```\n\n`crate-item-decl-rules` takes \n\n* the full set of crates `CrateDecls` and\n* the declaration of a single item `CrateItemDecl`\n\nand it returns a 3-tuple. As the comment says, this contains both clauses (rules that can be used to derive true facts) along with two sets of invariants. We'll cover the ",
+          "page": null,
+          "start_offset": 18573,
+          "end_offset": 19571,
+          "ordinal": 22,
+          "chunk_id": "V3-P-M1-r1-c0022",
+          "text_sha256": "b6f06f994f8a6c571c2b4516138b33029facbd6cde7b2f855d78e1a5fbc435ad"
+        },
+        {
+          "text": "ple. As the comment says, this contains both clauses (rules that can be used to derive true facts) along with two sets of invariants. We'll cover the invariants later.\n\nMetafunctions are basically a gigantic match statement. They consist of a series of clauses, each of which begins with a \"pattern match\" against the arguments. \n\nTo see how it works, let's look at the case for an `impl` from that section. To begin with, here is the comment explaining what we aim to do:\n\n```scheme\n [;; For an trait impl declared in the crate C, like the following:\n   ;;\n   ;;     impl<'a, T> Foo<'a, T> for i32 where T: Ord { }\n   ;;\n   ;; We consider `HasImpl` to hold if (a) all inputs are well formed and (b) where\n   ;; clauses are satisfied:\n   ;;\n   ;;     (ForAll ((LtKind 'a) (TyKind T))\n   ;;         (HasImpl (Foo (i32 'a u32))) :-\n   ;;             (WellFormed (TyKind i32))\n   ;;             (WellFormed (TyKind i32))\n   ;;             (Implemented (Ord T)))\n```\n\nThe actual code for this ",
+          "page": null,
+          "start_offset": 19421,
+          "end_offset": 20410,
+          "ordinal": 23,
+          "chunk_id": "V3-P-M1-r1-c0023",
+          "text_sha256": "b59f89deeb2c7718cdd9e68c8a2c7b048fa38e4f3374ce38746136a88c8c2026"
+        },
+        {
+          "text": "         (WellFormed (TyKind i32))\n   ;;             (WellFormed (TyKind i32))\n   ;;             (Implemented (Ord T)))\n```\n\nThe actual code for this ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L141-L166)) begins by matching the item that we are generating rules for:\n\n```scheme\n   (crate-item-decl-rules CrateDecls (impl KindedVarIds_impl TraitRef WhereClauses_impl ImplItems))\n```\n\nThe next line is the final result. The function this is part of  -- this says we will produce one global clause\n\n```scheme\n   ((Clause) () ())\n```\n\nThis final result is allowed to refer to variables defined on the following lines, shown below. A `(where/error <pattern> <value>)` clause is effectively just `let <pattern> = <value>`, in Rust terms; the `/error` part means \"if this pattern doesn't match, generate an error\". You can also write `(where <pattern> <value>)`, but that means that if the pattern doesn't match, the ",
+          "page": null,
+          "start_offset": 20260,
+          "end_offset": 21259,
+          "ordinal": 24,
+          "chunk_id": "V3-P-M1-r1-c0024",
+          "text_sha256": "46dea71c7cb92b0521ac3bb7b7fb8c6be2a7696458546028422a097a0875af7a"
+        },
+        {
+          "text": "this pattern doesn't match, generate an error\". You can also write `(where <pattern> <value>)`, but that means that if the pattern doesn't match, the metafunction should to see if the next rule works.\n\nThe impl code begins by pattern matching against the `TraitRef` that the impl is implementing (in the example from the comment, that would be `(Foo (i32 'a T))`). We extract out the `TraitId` and the self type `Parameter_trait`:\n\n```scheme\n   (where/error (TraitId (Parameter_trait ...)) TraitRef)\n```\n\nNext we look up the definition of the trait itself to find out its generics, using a helper function `item-with-id`. This matches and extracts out the parameter kinds (lifetimes vs types, in this code):\n\n```scheme\n   (where/error (trait KindedVarIds_trait _ _) (item-with-id CrateDecls TraitId))\n   (where/error ((ParameterKind_trait _) ...) KindedVarIds_trait)\n```\n\nNext we convert the where clauses (e,g, `T: Ord`) into goals, using a helper function `where-clauses-to-goals` (described ",
+          "page": null,
+          "start_offset": 21109,
+          "end_offset": 22103,
+          "ordinal": 25,
+          "chunk_id": "V3-P-M1-r1-c0025",
+          "text_sha256": "2916448971f3e820edd721eac5fff9a52608d25bd8ce9097718f3ae8addb0543"
+        },
+        {
+          "text": ".) KindedVarIds_trait)\n```\n\nNext we convert the where clauses (e,g, `T: Ord`) into goals, using a helper function `where-clauses-to-goals` (described below):\n```scheme\n   (where/error (Goal_wc ...) (where-clauses-to-goals WhereClauses_impl))\n```\n\nFinally we can generate that variable `Clause` that was referenced in the final result. Note that we use the `...` notation to \"flatten\" together the list of goals from the where-clauses (`Goal_wc ...`) and `WellFormed`-ness goals that we must prove (i.e., to use the impl, we must show that its input types are well-formed):\n\n```scheme\n   (where/error Clause (ForAll KindedVarIds_impl\n                               (Implies\n                                ((WellFormed (ParameterKind_trait Parameter_trait)) ...\n                                 Goal_wc ...\n                                 )\n                                (HasImpl TraitRef))))\n   ]\n```\n\nThe `where-clause-to-goal` helper is fairly simple. Here is the source, I'll leave puzzling it ",
+          "page": null,
+          "start_offset": 21953,
+          "end_offset": 22953,
+          "ordinal": 26,
+          "chunk_id": "V3-P-M1-r1-c0026",
+          "text_sha256": "fd14086aa040d9a15e53d634f03ef02fc7595860abd7859bd369f31b79836e17"
+        },
+        {
+          "text": "                       (HasImpl TraitRef))))\n   ]\n```\n\nThe `where-clause-to-goal` helper is fairly simple. Here is the source, I'll leave puzzling it out as an exercise to the reader ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L197-L211)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Convert a where clause `W` into a goal that proves `W` is true.\n  where-clause-to-goal : WhereClause -> Goal\n\n  ((where-clause-to-goal (Implemented TraitRef))\n   (Implemented TraitRef)\n   )\n\n  ((where-clause-to-goal (ForAll KindedVarIds WhereClause))\n   (ForAll KindedVarIds Goal)\n   (where/error Goal (where-clause-to-goal WhereClause))\n   )\n\n  ; FIXME: Support lifetimes, projections\n  )\n```\n\n### Generating the \"ok goals\" for a crate\n\nIn addition to \"clauses\", there is also a function `crate-ok-goal` that generate goals for each crate item in a given crate ",
+          "page": null,
+          "start_offset": 22803,
+          "end_offset": 23745,
+          "ordinal": 27,
+          "chunk_id": "V3-P-M1-r1-c0027",
+          "text_sha256": "a60636b718130082dbaf17ccee0904cb125047b81ad8e3ef5ac8921928d83944"
+        },
+        {
+          "text": "e \"ok goals\" for a crate\n\nIn addition to \"clauses\", there is also a function `crate-ok-goal` that generate goals for each crate item in a given crate ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-ok.rkt#L7-L11)):\n\n```scheme\n(define-metafunction formality-decl\n  ;; Given a set of crates and the decl for the current crate,\n  ;; generate the goal that proves all declarations in the current crate are\n  ;; \"ok\". Other crates are assumed to be \"ok\".\n  crate-ok-goal : CrateDecls CrateDecl -> Goal\n```\n\nThe idea is that the crate is \"ok\" (i.e., passes the type check) if these goals are satisfied. For the declarations layer, these goals correspond roughly to rustc's `wfcheck`. Here is the rule for impls ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-ok.rkt#L59-L71)):\n\n```scheme\n  [;; For a trait impl declared in the crate C, like the following:\n   ;;\n   ",
+          "page": null,
+          "start_offset": 23595,
+          "end_offset": 24594,
+          "ordinal": 28,
+          "chunk_id": "V3-P-M1-r1-c0028",
+          "text_sha256": "edab15f3cfe30195aa90a1c4e558714289dd9391de0fa1e0f32e32f960a8c222"
+        },
+        {
+          "text": "f56a55d781acc73dca86c996b15c5/src/decl/decl-ok.rkt#L59-L71)):\n\n```scheme\n  [;; For a trait impl declared in the crate C, like the following:\n   ;;\n   ;;     impl<'a, T> Foo<'a, T> for u32 { }\n   ;;\n   ;; we require that the trait is implemented.\n   (crate-item-ok-goal _ (impl KindedVarIds_impl TraitRef WhereClauses_impl ImplItems))\n   (ForAll KindedVarIds_impl\n           (Implies ((WellFormed KindedVarId_impl) ... WhereClause_impl ...)\n                    (All ((Implemented TraitRef)))))\n\n   (where/error (KindedVarId_impl ...) KindedVarIds_impl)\n   (where/error (WhereClause_impl ...) WhereClauses_impl)\n   ]\n  )\n```\n\nIn short, an impl is well-formed if the trait is implemented. We'll look at the definition of `Implemented` in more detail in [the next section](#Case-study-Implied-bounds-and-perfect-derive), but for now it suffices to say that a trait is implemented if (a) it has an impl and (b) all of its where-clauses are satisfied. Since we know there is an impl (we're checking it ",
+          "page": null,
+          "start_offset": 24444,
+          "end_offset": 25440,
+          "ordinal": 29,
+          "chunk_id": "V3-P-M1-r1-c0029",
+          "text_sha256": "ca322e50cc4821ee8706e23c9fdfd2cd922684937dc8136bb395778b3701e813"
+        },
+        {
+          "text": "y that a trait is implemented if (a) it has an impl and (b) all of its where-clauses are satisfied. Since we know there is an impl (we're checking it right now!) this is equivalent to saying \"all of the trait's where clauses are satisfied\".\n\n## Case study: Implied bounds and perfect derive\n\nThe current code doesn't really model Rust as it is today. It actually models Rust extended with support for two new features, \"implied bounds\" and \"perfect derive\":\n\n* **Implied bounds:** Given `struct Foo<T: Ord>`, can `impl<T> Foo<T> { ... }` just know that `T: Ord`?\n    * (We actually have implied bounds today, but they are limited to supertraits (e.g., `T: Eq => T: PartialEq`), so maybe a better way to describe implied bounds would be *expanded implied bounds*.)\n* **Perfect derive:** Given `#[derive(Clone)] struct Foo<T> { x: Rc<T> }`, we \"just know\" that `impl<T> Clone for Foo<T>` works, and that `T: Clone` is not necessary?\n    * The idea is that `derive` would generate `impl<T> Clone for ",
+          "page": null,
+          "start_offset": 25290,
+          "end_offset": 26287,
+          "ordinal": 30,
+          "chunk_id": "V3-P-M1-r1-c0030",
+          "text_sha256": "bf477d5457738c2d04301785333426d7805769f38607c69f3a8188006993eb08"
+        },
+        {
+          "text": " know\" that `impl<T> Clone for Foo<T>` works, and that `T: Clone` is not necessary?\n    * The idea is that `derive` would generate `impl<T> Clone for Foo<T> where Rc<T>: Clone`. Seems simple, right?\n    * The trick is that we have to extend all trait matching to work like auto-traits does, and accept cycles. Consider deriving clone on\n        * `struct List<T> { value: Rc<T>, next: Option<Rc<List<T>>> }`\n        * here you would get `impl<T> Clone for List<T> where Rc<T>: Clone, Option<Rc<List<T>>>: Clone` -- if you try that today, you'll find it is a cycle error.\n    * We are going to refer to this \"accept cycles\" as coinductive; it's basically the [co-LP formulation by Luke Simon et al.](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.102.9618&rep=rep1&type=pdf) that I referred to earlier.\n\nThese two features are a bit tricky to integrate because accepting cycles, if you're not careful, can easily lead you into assuming implied bounds that are not true. The classic example ",
+          "page": null,
+          "start_offset": 26137,
+          "end_offset": 27137,
+          "ordinal": 31,
+          "chunk_id": "V3-P-M1-r1-c0031",
+          "text_sha256": "6837a19760fec6e2aa537a452902f1485ef7708f303d7b7bc4d4f3455539ca56"
+        },
+        {
+          "text": "to integrate because accepting cycles, if you're not careful, can easily lead you into assuming implied bounds that are not true. The classic example is this:\n\n```rust\ntrait Copy { }\ntrait Magic: Copy { }\n```\n\nClearly, given these traits, we know that `T: Magic => T: Copy`, right? But what about if someone writes this rather tautological impl:\n\n```rust\nimpl<T: Magic> Magic for T { }\n```\n\nIf we're not careful, we can use this impl to show that every type implements `Magic` -- and yet there is no `impl Copy` anywhere. Something is off!\n\nThe solution to that is based on the scheme that [scalexm](https://github.com/scalexm) invented for Chalk; I've tweaked it somewhat by integrating it a bit more deeply into the \"core logic\", which simplifies the predicates that we need. I find I like this formulation better, and it allows us to simplify a few other things too.\n\n### Distinguish `HasImpl` and `Implemented`\n\nThe first key part of the system is to distinguish *having an impl* (`HasImpl`) ",
+          "page": null,
+          "start_offset": 26987,
+          "end_offset": 27983,
+          "ordinal": 32,
+          "chunk_id": "V3-P-M1-r1-c0032",
+          "text_sha256": "3128bbcd0cf87c94f82c7997922146351368e186510a5685198c44647ff6ed80"
+        },
+        {
+          "text": "a few other things too.\n\n### Distinguish `HasImpl` and `Implemented`\n\nThe first key part of the system is to distinguish *having an impl* (`HasImpl`) from *being implemented* (`Implemented`). The former says that the user wrote an impl. The latter says that all the requirements are met to implement the trait, including in particular that all of its where clauses (which includes the supertraits) are satisfied.\n\nUsing the code for impls we saw earlier, the `Magic` impl would generate the following clause:\n\n```scheme\n; forall<T> { Implemented(T: Magic) => HasImpl(T: Magic) }\n(ForAll ((TyKind T)) \n        (Implies ((Implemented (Magic (T))))\n                 (HasImpl (Magic (T)))))\n```\n\nTo actually prove `Implemented(T: Magic)`, This clause has to be combined with the clauses generated by the trait declarations ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L95-L118)). For the `Copy` trait, which has no ",
+          "page": null,
+          "start_offset": 27833,
+          "end_offset": 28831,
+          "ordinal": 33,
+          "chunk_id": "V3-P-M1-r1-c0033",
+          "text_sha256": "ed7a9d6fd1cfdfa778e86491a5a20090d699ca37ed195e16d31c24aec5810c92"
+        },
+        {
+          "text": "nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/decl/decl-to-clause.rkt#L95-L118)). For the `Copy` trait, which has no where clauses, this clause is very simple. To be implemented, the impl must exist, and the type must be well-formed:\n\n```scheme\n; forall<T> { (\n;               HasImpl(T: Copy), \n;               WellFormed(T),\n;             ) => Implemented(T: Copy) }\n(ForAll ((TyKind T))\n        (Implies ((HasImpl (Copy (T)))\n                  (WellFormed (TyKind (T))))\n                 (Implemented (Copy (T)))))\n```\n\nFor `Magic`, the rule includes the where clause that `T: Copy`:\n\n```schheme\n; forall<T> { (\n;               HasImpl(T: Magic), \n;               WellFormed(T),\n;               Implemented(T: Copy),\n;             ) => Implemented(T: Magic) }\n(ForAll ((TyKind T))\n        (Implies ((HasImpl (Magic (T)))\n                  (WellFormed (TyKind (T)))\n                  (Implemented (Copy (T))))\n                 (Implemented (Magic (T)))))\n```\n\nNow ",
+          "page": null,
+          "start_offset": 28681,
+          "end_offset": 29680,
+          "ordinal": 34,
+          "chunk_id": "V3-P-M1-r1-c0034",
+          "text_sha256": "c03472439f03743c1943abf9ebbb645552eec4fbfe83b45185b9d7511d517c30"
+        },
+        {
+          "text": "c (T)))\n                  (WellFormed (TyKind (T)))\n                  (Implemented (Copy (T))))\n                 (Implemented (Magic (T)))))\n```\n\nNow we start to see how this works -- if I want to call a function with a `T: Magic` where clause, like this...\n\n```rust\nfn make_the_magic_happen<T: Magic>(t: T) {\n    let u = t;\n    drop((t, u)); // both t, u are valid\n}\n```\n\n...it is not enough to show that `HasImpl` is satisfied, I also have to prove that `T: Copy`. To do that, I have to show that `HasImpl(T: Copy)`, and I can't do that.\n\n### But wait, implied bounds?\n\nActually though, the above is not sufficient to solve the problem. That's because we haven't added in implied bounds yet! The *naive* version of implied bounds is that we want to add in a rule like so:\n\n```\nImplemented(T: Magic) => Implemented(T: Copy)\n```\n\ni.e., if I know that `T: Magic`, I also know that `T: Copy`. But if we literally added that clause, it would be unsound, at least in a coinductive setting. Why is that? ",
+          "page": null,
+          "start_offset": 29530,
+          "end_offset": 30529,
+          "ordinal": 35,
+          "chunk_id": "V3-P-M1-r1-c0035",
+          "text_sha256": "03349ea7dca262c529801fcadac5cf598e977951ca531935f806312cff0d753f"
+        },
+        {
+          "text": "t `T: Magic`, I also know that `T: Copy`. But if we literally added that clause, it would be unsound, at least in a coinductive setting. Why is that? Say I want to prove that `String: Copy`...\n\n* `Implemented(String: Copy)`? Well, that's true if...\n    * `Implemented(String: Magic)`? Well, that's true if...\n        * `HasImpl(String: Magic)`? Well, that's true if...\n            * `Implemented(String: Magic)` -- and that's on the stack, so that's ok!\n        * `WellFormed(String)` -- yep\n        * `Implemented(String: Copy)` -- well, that's on the stack, so that's ok!\n\nThe traditional solution so this sort of problem is to impose some kind of limits on the impls people can write so they must be \"productive\". It's a bit tricky to define what productivity means, but intuitively it means \"not tautological\". The challenge is that the various schemes I've seen for showing productivity don't accept impls like the ones that perfect derive would create, so they wouldn't really work for us. The ",
+          "page": null,
+          "start_offset": 30379,
+          "end_offset": 31379,
+          "ordinal": 36,
+          "chunk_id": "V3-P-M1-r1-c0036",
+          "text_sha256": "c51b5cc02f04a846daa97da1822108555235f60156b85aca43a893c59403a8e7"
+        },
+        {
+          "text": "chemes I've seen for showing productivity don't accept impls like the ones that perfect derive would create, so they wouldn't really work for us. The solution in the impl works a different way.\n\nThe co-LP formulation acccepts any cycle as valid, so it's very easy to create these kind of \"tautological rules\". Now, if the user actually *wrote* those impls, I don't see that as a problem. It's ok to have mutually dependent impls, all we want to know basically is \"when I call a method, there will be some impl to go to\" (see example below). But it's not good if it's unsound. =)\n\n```rust\ntrait Foo {\n    fn foo(&self);\n}\n\ntrait Bar {\n    fn bar(&self);\n}\n\nimpl<T: Bar> Foo for T {\n    fn foo(&self) {\n        if something() { self.bar() }\n    }\n}\n\nimpl<T: Foo> Bar for T {\n    fn bar(&self) {\n        if something() { self.foo() }\n    }\n}\n```\n\n### Enter: invariants\n\nThe insight is that it's not ok to use implied bounds out of thin air. You only want to use them for where-clauses that you have in ",
+          "page": null,
+          "start_offset": 31229,
+          "end_offset": 32228,
+          "ordinal": 37,
+          "chunk_id": "V3-P-M1-r1-c0037",
+          "text_sha256": "cc442d46df4141c44135359a107bc0619232a5964a025e891b5b4e65ae0998e4"
+        },
+        {
+          "text": "nter: invariants\n\nThe insight is that it's not ok to use implied bounds out of thin air. You only want to use them for where-clauses that you have in scope. In this way, they are categorically different from program clauses, which always hold. I've decided to refer to implied bounds as *invariants* -- the idea is that they are things which \"must be true if the program is valid\". So for our program we would have one **invariant**:\n\n```\nforall<T> { Implemented(T: Magic) => Implemented(T: Copy) }\n```\n\nTo express this a bit more formally, let `F` be the set of all \"facts\" we can generate from the clauses alone (a \"fact\" here is just a predicate that refers to some concrete types and thing)s. Because there are an infinite set of types, the set of facts is also infinite, but that's ok. In our example, given the rules we've seen so far (but ignoring the implied bound), we can show that `HasImpl(i32: Magic)` and `HasImpl(u32: Magic)` easily enough. We don't have a `HasImpl(i32: Copy)` fact, ",
+          "page": null,
+          "start_offset": 32078,
+          "end_offset": 33076,
+          "ordinal": 38,
+          "chunk_id": "V3-P-M1-r1-c0038",
+          "text_sha256": "68b2e4f542f793948cc352837602ef7af31cac3fa2574c0468040580d57e4031"
+        },
+        {
+          "text": "noring the implied bound), we can show that `HasImpl(i32: Magic)` and `HasImpl(u32: Magic)` easily enough. We don't have a `HasImpl(i32: Copy)` fact, though, and because of that we also can't have a `Implemented(i32: Copy)` fact. Given this set of facts `F`, then we ought to be able to prove each invariant `I`, or something is broken in our type rules. In our example, the invariant `forall<T> { Implemented(T: Magic) => Implemented(T: Copy) }` does in fact hold, because there are no `Implemented(T: Magic)` facts.\n\n### Integrating invariants into the solver\n\nThe solver is able to make use of invariants to generate proofs, but only in a limited way. Whereas we can always use a program clause, we can only apply invariants to the *hypotheses* that are in scope -- a *hypotheses* is some where-clause that we are assuming to be true. The idea here is that the caller must have proven that hypothesis to be a *fact* -- if they did so, then unless our type rules are broken, the invariant holds, ",
+          "page": null,
+          "start_offset": 32926,
+          "end_offset": 33924,
+          "ordinal": 39,
+          "chunk_id": "V3-P-M1-r1-c0039",
+          "text_sha256": "9ba7a0fa344bcfb4ec19b9cfc1b1b965e78108cf6cd90a3f9f813435f52def06"
+        },
+        {
+          "text": "ere is that the caller must have proven that hypothesis to be a *fact* -- if they did so, then unless our type rules are broken, the invariant holds, which means that any facts we can derive with the invariants are also true.\n\nThis in turn implies that the seemingly tautological impl of `Magic` is actually **legal**! Recall the \"ok goals\" we saw before, that are used to decide which declarations are legal. The \"ok\" goal for the magic impl looks like this:\n\n```scheme\n(ForAll ((TyKind T))\n        (Implies ((Implemented (Magic (T))))\n                 (Implemented (Magic (T)))))\n```\n\nBasically, \"if we assume that `T: Magic` is implemented, then we can show that `T: Magic` is implemented\". Well, that's obviously true.\n\nOK, so the impl is legal, but what about this function `make_the_magic_happen`?\n\n```rust\nfn make_the_magic_happen<T: Magic>(t: T) {\n    let u = t;\n    drop((t, u)); // both t, u are valid\n}\n```\n\nWe don't currently have type-checking logic in formality but, if we did, ",
+          "page": null,
+          "start_offset": 33774,
+          "end_offset": 34766,
+          "ordinal": 40,
+          "chunk_id": "V3-P-M1-r1-c0040",
+          "text_sha256": "9b4ec2c9454e32c0d1c145f7c7d38bfeaa85343199df6f7e814c8739d0002ced"
+        },
+        {
+          "text": "agic>(t: T) {\n    let u = t;\n    drop((t, u)); // both t, u are valid\n}\n```\n\nWe don't currently have type-checking logic in formality but, if we did, type-checking this function would require copying `t` and hence proving that:\n\n```\nforall<T> {\n    Implemented(T: Magic) => Implemented(T: Copy)\n}\n```\n\nHere the `Implemented(T: Magic) => ...` comes from the where-clauses on the function. To solve this, the solver puts `Implemented(T: Magic)` into the environment as a hypothesis using the \"prove-implies\" rule ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/cosld-solve/prove.rkt#L67-L71)):\n\n```scheme\n  [(where Env_1 (env-with-hypotheses Env Hypotheses))\n   (prove Env_1 Predicates_stack Goal EnvSubstitution_out)\n   -------------------------------------------------------- \"prove-implies\"\n   (prove Env Predicates_stack (Implies Hypotheses Goal) (reset Env () EnvSubstitution_out))\n   ]\n```\n\nNext it can apply the ",
+          "page": null,
+          "start_offset": 34616,
+          "end_offset": 35596,
+          "ordinal": 41,
+          "chunk_id": "V3-P-M1-r1-c0041",
+          "text_sha256": "840adf9bb98f7dfc23b7169a6927acef74ca6e0fb4fbf2bed7d6118844782cc0"
+        },
+        {
+          "text": "-------- \"prove-implies\"\n   (prove Env Predicates_stack (Implies Hypotheses Goal) (reset Env () EnvSubstitution_out))\n   ]\n```\n\nNext it can apply the \"prove-hypothesis-imply\" rule ([source](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/cosld-solve/prove.rkt#L41-L45)):\n\n```scheme\n  [(where #f (in? Predicate Predicates_stack))\n   (Hypotheses-imply Env () Predicate EnvSubstitution_out)\n   --------------- \"prove-hypotheses-imply\"\n   (prove Env Predicates_stack Predicate EnvSubstitution_out)\n   ]\n```\n\nThis rule usess [`Hypotheses-imply`](https://github.com/nikomatsakis/a-mir-formality/blob/47eceea34b5f56a55d781acc73dca86c996b15c5/src/ty/cosld-solve/hypothesize.rkt#L9-L11), another typing judgment which determines whether `Predicate` is either *directly* in the environment as a hypothesis **or can be derived via an invariant**. This last part is what we need here! The only hypothesis in the environment is `Implemented(T: Magic)`, but we ",
+          "page": null,
+          "start_offset": 35446,
+          "end_offset": 36446,
+          "ordinal": 42,
+          "chunk_id": "V3-P-M1-r1-c0042",
+          "text_sha256": "e20443573f54a508972fc61abc0989d2d97a095dd351639b7c9433e73e05e307"
+        },
+        {
+          "text": "*or can be derived via an invariant**. This last part is what we need here! The only hypothesis in the environment is `Implemented(T: Magic)`, but we can use the invariant\n\n```\nImplemented(T: Magic) => Implemented(T: Copy)\n```\n\nto expand that to `Implemented(T: Copy)`, so we are happy.\n\n### Wait, so is this sound?\n\nBut accepting this impl and this function this doesn't mean we have an unsound program -- the question is, who is going to *call* that function, and with what type? And this is where the errors come in. Consider this `main` function:\n\n```rust\nfn main() {\n    make_the_magic_happen(\"Die, cruel world, die!\".to_string());\n}\n```\n\nFor this program to type-check, we must prove the where-clauses on `make_the_magic_happen`, which means proving\n\n```\nImplemented(String: Magic)\n```\n\nBut in this case, there are no hypotheses in the environment, so we can't make use of the invariants. We have to use the program clause, it requires also showing that `Implemented(String: Copy)` which in ",
+          "page": null,
+          "start_offset": 36296,
+          "end_offset": 37293,
+          "ordinal": 43,
+          "chunk_id": "V3-P-M1-r1-c0043",
+          "text_sha256": "c2c61039303fadc376d2e6a4618a8d2ed20c5f3e17ce306d96642fdf89b469ba"
+        },
+        {
+          "text": "onment, so we can't make use of the invariants. We have to use the program clause, it requires also showing that `Implemented(String: Copy)` which in turn means showing `HasImpl(String: Copy)`, and we cannot do that.\n\nThinking a bit more abstractly, no matter what where clauses we have on various functions, we will \"bottom out\" in a `main` function somewhere, and `main` has no where clauses. Therefore, if our program relies on `Implemented(i32: Magic)`, that must be provable in an environment with no hypotheses. Put another way, `Implemented(i32: Magic)` must be a member of that infinite set of facts that we described earlier, the ones which categorize \"everything that is true in this program\". But we already argued that this set does not include `Implemented(i32: Magic)`, because the only way to get such a fact is to use the program clause, and the program clause requires that `HasImpl(i32: Copy)`, which is not true.\n\n### Productivity again?\n\nxxx -- didn't get time to to finish this, ",
+          "page": null,
+          "start_offset": 37143,
+          "end_offset": 38143,
+          "ordinal": 44,
+          "chunk_id": "V3-P-M1-r1-c0044",
+          "text_sha256": "784a894d4b43353bd4046a16c7c8bd96d67eb05fe6a912dbe61ee6a4c66501c4"
+        },
+        {
+          "text": "se, and the program clause requires that `HasImpl(i32: Copy)`, which is not true.\n\n### Productivity again?\n\nxxx -- didn't get time to to finish this, but I think that you can frame the previous two sections in terms of the typical \"productivity\" rules. There is a nice thesis I've been slowly working through on this. The TL;DR is something like this: \"we accept all cycles but require that for any proof of `Implemented(T: Foo)`, `HasImpl(T: Foo)` must appear somewhere in the cycle\", but that's not quite stating it right.\n\n## Future directions\n\nHere are some of the next steps I've been thinking about and we could discuss:\n\n* There are some fixes to how `Hypothesize-implies` works that I want to make (I think it should be \"bottom-up\", not \"top-down\" as it is today, if that makes sense -- basically adopt the elaboration strategy from)\n* Sketch out the MIR type-checker\n* Integrate higher-ranked types and regions, polonius, etc -- I've been reading up on subtyping systems and I think I have ",
+          "page": null,
+          "start_offset": 37993,
+          "end_offset": 38992,
+          "ordinal": 45,
+          "chunk_id": "V3-P-M1-r1-c0045",
+          "text_sha256": "437357d3e95bbbf238cf3a72b3fb510dd962f5f1cb9eb90c9f19ba4dd09012ca"
+        },
+        {
+          "text": "h out the MIR type-checker\n* Integrate higher-ranked types and regions, polonius, etc -- I've been reading up on subtyping systems and I think I have some ideas for a fresh approach here\n* Implement the \"recursive solver\" as a metafunction\n    * it is useful to be able to compare the \"cosld-solver\", which I believe is sound+complete, against ours, which (I hope) is merely sound\n* Extend rustc with `-Zformality` to allow it to generate formality programs\n* Use PLT redex to fuzz the existing solver and test the \"invariant logic\"\n\n# Niko's FAQ\n\n## If this is a complete model, isn't that just an implementation? \n\nNot really. It leaves out a ton of stuff:\n\n* diagnostics\n* low-level ABI details\n* parser and concrete rust syntax\n* running C code and FFI (though you can imagine translating C code to equivalent unsafe Rust, which would be supported to some extent)\n* platform specific things, interactions with the operating system\n\nCurrently, it's focusing on MIR and back, which means we can ",
+          "page": null,
+          "start_offset": 38842,
+          "end_offset": 39839,
+          "ordinal": 46,
+          "chunk_id": "V3-P-M1-r1-c0046",
+          "text_sha256": "1c68a5e39182a2234ce90dd2fe60981723ed042ce250338119557e19a2605f08"
+        },
+        {
+          "text": "rted to some extent)\n* platform specific things, interactions with the operating system\n\nCurrently, it's focusing on MIR and back, which means we can exclude a lot of things\n\n* name resolution\n* layout (we can take struct layouts as inputs)\n* \n\n# Questions\n\n## Are there any fundamental differences to Chalk, so far?\n\nnikomatsakis: Yes. Chalk does not have the concept of invariants and handles implied bounds in a different way (`FromEnv` goals). Chalk also has one structural setup that has to be ported to formality -- it generates program clauses \"on demand\". This is required because actually the set of program clauses for a Rust program is potentially infinite (think of e.g. auto traits). I've been debating the best way to model this with PLT Redex and in particular whether it's important to preserve the various layers I've shown here, it might be easier if we merged everything into one.\n\n## Is this an \"ideal\" Rust model, or a \"practical\" one?\n\n- Current Rust semantics, or the one we ",
+          "page": null,
+          "start_offset": 39689,
+          "end_offset": 40687,
+          "ordinal": 47,
+          "chunk_id": "V3-P-M1-r1-c0047",
+          "text_sha256": "d636219a57a06046ead7baf14d8832b95667fc242f1fa479e28af02c6fc4efd5"
+        },
+        {
+          "text": "t might be easier if we merged everything into one.\n\n## Is this an \"ideal\" Rust model, or a \"practical\" one?\n\n- Current Rust semantics, or the one we want\n\nnikomatsakis: You're asking the right question, and it's something I wanted to discuss. Right now it's the \"ideal\" model in the sense that I am using it to show how some extensions to Rust would work, but I think it's important that it be the \"practical\" one too. It's not hard to disable the implied bounds (actually, limit them to supertraits) and remove support for cycles. What's a bit more interesting, and I'm not sure about it, is the best way to have \"feature gates\" so that we can show the \"diff required\" to support a new feature. \n\n## Is it practical to try to develop Chalk alongside? I.e. update Chalk's rules as a-mir-formality is updated?\n\nnikomatsakis: I think so, and I think we should. This is partly why Formality's structure intentionally mirrors Chalk (and it should eventually include the solver, so that we can show ",
+          "page": null,
+          "start_offset": 40537,
+          "end_offset": 41532,
+          "ordinal": 48,
+          "chunk_id": "V3-P-M1-r1-c0048",
+          "text_sha256": "d763b92b4f33e52a2182765cab5570be0ca761442dafb42077969c06906950ae"
+        },
+        {
+          "text": "ink we should. This is partly why Formality's structure intentionally mirrors Chalk (and it should eventually include the solver, so that we can show \"these are things the compiler should be able to prove\" versus \"these are things that are provable\"). The idea is that we can prototype and explore more quickly in this environment, but chalk would scale up to real programs (the PLT Redex solver is way too slow for that). Also, Chalk's structure would be more optimized for performance, for giving good error messages, for dealing with low-level ABI details, and all the other fun stuff that the model does NOT include.\n\n## What about Coq?\n\n> it seems that coq is the most popular at POPL etc. How well do you think the framework you're using will integrate into other PL tools/efforts?\n\nnikomatsakis: As you can see, the notation is quite high-level, so if nothing else I think it would be easy to manually transcribe things. But I would assume people have made efforts to \"export\" rules and ",
+          "page": null,
+          "start_offset": 41382,
+          "end_offset": 42376,
+          "ordinal": 49,
+          "chunk_id": "V3-P-M1-r1-c0049",
+          "text_sha256": "7b0887710b14fcbbbd405feae0b6d2ad6eed87371450c90cfb5f9b855050c46e"
+        },
+        {
+          "text": "h-level, so if nothing else I think it would be easy to manually transcribe things. But I would assume people have made efforts to \"export\" rules and things from PLT Redex to other formats.\n\n## How would types team signoff integrate into feature process?\n\n* add a checkbox \"types team signoff\" for new language features\n* open an issue on formality repository\n\n\n## How/where does coercion fit in?\n",
+          "page": null,
+          "start_offset": 42226,
+          "end_offset": 42623,
+          "ordinal": 50,
+          "chunk_id": "V3-P-M1-r1-c0050",
+          "text_sha256": "9887d9ad332a9ec4234a59c35d3a5a7b40aa6df82a8f3328d81cfa39914adc04"
+        }
+      ],
+      "selection_status": "author_selected_pending_independent_source_review"
+    },
+    {
+      "source_id": "V3-P-M2",
+      "document_id": "V3-P-M2",
+      "family_id": "V3-PUBLIC-01",
+      "origin": "public",
+      "kind": "meeting",
+      "meeting_date": "2022-05-27",
+      "title": "Formality roadmap",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/public-meeting-02.md",
+      "raw_size_bytes": 5941,
+      "raw_sha256": "d2f7f9a0ffe37e89fbb5a9b9b975f10ff032e83f35272f6d2c20440e9cb4a5a1",
+      "git_blob_sha1": "8c662068bcf8f31d207be5511bf1408ad3e19122",
+      "upstream_path": "minutes/2022-05-27-mir-formality-roadmap.md",
+      "repository": "rust-lang/types-team",
+      "upstream_revision": "cf4adc0044987bceed00d5a8efa225b475e4ad91",
+      "processed_sha256": "d2f7f9a0ffe37e89fbb5a9b9b975f10ff032e83f35272f6d2c20440e9cb4a5a1",
+      "processed_codepoints": 5941,
+      "content": "# Formality roadmap\n\nZulip discussion link: https://rust-lang.zulipchat.com/#narrow/stream/326132-t-types.2Fmeetings/topic/2022-05-27/near/284128865\n\n## Goals\n\n* Complete model of safe Rust including all static checks + operational semantics\n* Able to run against portions of standard Rust test suite to compare behavior\n\n## Current status of MIR formality\n\n* Subtyping algorithm modeled\n* Solver is \"explore all routes\", does not match recursive structure in chalk\n* Many gaps along the way:\n    * ... (fill in)\n\n## Big picture tasks and layers\n\n* *Checking a MIR program:* The **mir** layer drives the process of checking that a program meets all of Rust rules. This relies on...\n    * *OK goals*: the **decl layer** creates an \"ok goal\" for the various Rust declarations\n    * *Type checker*: The **mir** layer \n* *Solving goals*: The **logic layer** is tasked with taking a goal and returning a answer scheme. This relies on...\n    * *Defining what is true:* The **decl layer** is tasked with converting Rust declarations into *clauses*\n    * *Built-in Rust rules:* The **ty layer** implements various built-in relations like subtyping\n\n## Spikes\n\nThe plan is to drive this development through *spikes*, meaning example tests that we can use to work out what parts of the sytem need to be implemented. nikomatsakis intends to have enough implemented by next Wednesday's formality meeting that folks can start filling in.\n\nSpikes and why they were chosen:\n\n* Issue #25860: https://github.com/nikomatsakis/a-mir-formality/issues/22\n    * validates our fix to a long-standing soundness problem\n* Lending iterator: https://github.com/nikomatsakis/a-mir-formality/issues/40\n    * important to pending stabilization\n* TAIT: \n    * pending stabilization, but also raises some interesting questions\n\n## Test driver\n\nFiled under https://github.com/nikomatsakis/a-mir-formality/issues/42\n\n> We should create a test harness / rustc driver `formalityc` that works as follows:\n>\n> * It parses an input rust crate and compiles it to MIR\n> * It generates MIR formality files from the MIR and some portion of the interfaces of other crates\n> * It writes those files to a test file and then invokes `racket` to run MIR formality against them\n>     * It reads some sort of special comments (e.g., `// compile-fail`) to determine what behavior is expected.\n>\n> This can be used to extend our test suite with Rust test files rather than hand-coding things in Racket.\n>\n> Eventually I expect the racket code to go away and be replaced with either Rust code or (my current preference) some Rust interpreter of our definition.\n\n\n## Implementation in rustc\n\nAnother angle is ongoing work to align the formality model with rustc implementations:\n\n* subtyping work\n\n## Discussion: Implementation in chalk\n\nAnother angle is ongoing work to align the formality model with chalk implementations:\n\n* Formality does not model the chalk recursive trait solver\n* Chalk needs to adopt Formality's overall goal structure\n* Chalk needs to adopt Formality's subtyping and type-relating goals\n* Chalk needs to adopt Formality's approach to associated types\n\nConclusion from discussion: probably we just want to restart chalk from scratch.\n\n## Discussion: Overview of rustc static checks\n\nKey:\n\n* :x: never expect to model this\n* :hourglass: would like to model this, but not right now\n* :heavy_minus_sign: not covered by the spikes above\n* :heavy_check_mark: this is part of our first goal\n\n| Phase | Modeled? | How? |\n| --- | --- | --- |\n| Parsing | :x:\n| Macro expansion | :hourglass: \n| Name resolution | :hourglass: \n| Lifetime elision rules | :hourglass: \n| Associated type trait selection | :hourglass: | e.g. `T::Item` becoming `<T as Iterator>::Item`\n| Variance inference | :hourglass:  | we will take variance as \"input\" to the declarations |\n| Coherence overlap / orphan | :heavy_check_mark:  | The decl layer's OK check |\n| HIR type checker's WF checks | :heavy_check_mark:  | The decl layer's OK check |\n| Dyn safety rules | :heavy_minus_sign: | \n| Impl matches trait? | :heavy_check_mark: | Decl layer's OK check|\n| Const promotion | :hourglass: | decided by MIR building in rustc \n| HIR type checking of fn bodies | :hourglass:  | we take MIR as input |\n| Method resolution | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Closure capture inference | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Closure mode (fn, fnmut) and signature inference | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Coercion insertion | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Drop/StorageDead placement | :hourglass: | decided by MIR building in rustc |\n| Patterns/exhaustiveness | :hourglass: | decided by MIR building in rustc |\n| Unsafe checking | :heavy_minus_sign: | Part of \"type checking\" on MIR |\n| MIR type check | :heavy_check_mark: | mir layer generates goals \n| Borrow checking | :heavy_check_mark: | mir layer polonius-style check |\n| Rust subtyping | :heavy_check_mark: | modeled by the ty layer and also decl |\n| Operational semantics | :hourglass: | basically what miri does |\n| Transmute rules | :hourglass: \n| Layout | :hourglass: | input to operational semantics for now |\n\n## Discussion: Const generics\n\nDiscussion around whether we want to model const generics and what would be required to do so.\n\nConclusion was that we needed deeper discussion, but some felt modeling const generics could be useful for resolving some of the questions around newer features; this would broaden scope to include \n\n## Questions for discussion\n\n* What about coherence rules?\n* What is needed to align chalk and formality?\n* Should we include operational semantics and -- if so -- how does that fit in?\n    * conclusion from meeting *seemed* to be to keep it out of scope to start\n* ~~What are all the static checks rustc does, and which are covered by the spikes above?~~\n    * see table\n* Const generics?",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 5941,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "text": "# Formality roadmap\n\nZulip discussion link: https://rust-lang.zulipchat.com/#narrow/stream/326132-t-types.2Fmeetings/topic/2022-05-27/near/284128865\n\n## Goals\n\n* Complete model of safe Rust including all static checks + operational semantics\n* Able to run against portions of standard Rust test suite to compare behavior\n\n## Current status of MIR formality\n\n* Subtyping algorithm modeled\n* Solver is \"explore all routes\", does not match recursive structure in chalk\n* Many gaps along the way:\n    * ... (fill in)\n\n## Big picture tasks and layers\n\n* *Checking a MIR program:* The **mir** layer drives the process of checking that a program meets all of Rust rules. This relies on...\n    * *OK goals*: the **decl layer** creates an \"ok goal\" for the various Rust declarations\n    * *Type checker*: The **mir** layer \n* *Solving goals*: The **logic layer** is tasked with taking a goal and returning a answer scheme. This relies on...\n    * *Defining what is true:* The **decl layer** is tasked with ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 997,
+          "ordinal": 0,
+          "chunk_id": "V3-P-M2-r1-c0000",
+          "text_sha256": "469f5fca31fa0b2318f791a19f92fd474fc2db77b30d9fd4c91f6c61159666b6"
+        },
+        {
+          "text": "ayer** is tasked with taking a goal and returning a answer scheme. This relies on...\n    * *Defining what is true:* The **decl layer** is tasked with converting Rust declarations into *clauses*\n    * *Built-in Rust rules:* The **ty layer** implements various built-in relations like subtyping\n\n## Spikes\n\nThe plan is to drive this development through *spikes*, meaning example tests that we can use to work out what parts of the sytem need to be implemented. nikomatsakis intends to have enough implemented by next Wednesday's formality meeting that folks can start filling in.\n\nSpikes and why they were chosen:\n\n* Issue #25860: https://github.com/nikomatsakis/a-mir-formality/issues/22\n    * validates our fix to a long-standing soundness problem\n* Lending iterator: https://github.com/nikomatsakis/a-mir-formality/issues/40\n    * important to pending stabilization\n* TAIT: \n    * pending stabilization, but also raises some interesting questions\n\n## Test driver\n\nFiled under ",
+          "page": null,
+          "start_offset": 847,
+          "end_offset": 1824,
+          "ordinal": 1,
+          "chunk_id": "V3-P-M2-r1-c0001",
+          "text_sha256": "33d152e71f92a47fa800cd559309f66c29058c525fb6012aa2d91381d71dede0"
+        },
+        {
+          "text": "   * important to pending stabilization\n* TAIT: \n    * pending stabilization, but also raises some interesting questions\n\n## Test driver\n\nFiled under https://github.com/nikomatsakis/a-mir-formality/issues/42\n\n> We should create a test harness / rustc driver `formalityc` that works as follows:\n>\n> * It parses an input rust crate and compiles it to MIR\n> * It generates MIR formality files from the MIR and some portion of the interfaces of other crates\n> * It writes those files to a test file and then invokes `racket` to run MIR formality against them\n>     * It reads some sort of special comments (e.g., `// compile-fail`) to determine what behavior is expected.\n>\n> This can be used to extend our test suite with Rust test files rather than hand-coding things in Racket.\n>\n> Eventually I expect the racket code to go away and be replaced with either Rust code or (my current preference) some Rust interpreter of our definition.\n\n\n## Implementation in rustc\n\nAnother angle is ongoing work to ",
+          "page": null,
+          "start_offset": 1674,
+          "end_offset": 2671,
+          "ordinal": 2,
+          "chunk_id": "V3-P-M2-r1-c0002",
+          "text_sha256": "aa22b39e314c21e47a450235808896fca1b74e7b4ff76d331fcedb8ef2438e83"
+        },
+        {
+          "text": "h either Rust code or (my current preference) some Rust interpreter of our definition.\n\n\n## Implementation in rustc\n\nAnother angle is ongoing work to align the formality model with rustc implementations:\n\n* subtyping work\n\n## Discussion: Implementation in chalk\n\nAnother angle is ongoing work to align the formality model with chalk implementations:\n\n* Formality does not model the chalk recursive trait solver\n* Chalk needs to adopt Formality's overall goal structure\n* Chalk needs to adopt Formality's subtyping and type-relating goals\n* Chalk needs to adopt Formality's approach to associated types\n\nConclusion from discussion: probably we just want to restart chalk from scratch.\n\n## Discussion: Overview of rustc static checks\n\nKey:\n\n* :x: never expect to model this\n* :hourglass: would like to model this, but not right now\n* :heavy_minus_sign: not covered by the spikes above\n* :heavy_check_mark: this is part of our first goal\n\n| Phase | Modeled? | How? |\n| --- | --- | --- |\n| Parsing | :x:\n",
+          "page": null,
+          "start_offset": 2521,
+          "end_offset": 3521,
+          "ordinal": 3,
+          "chunk_id": "V3-P-M2-r1-c0003",
+          "text_sha256": "cd8d0fec11f4804ff8ca1c16a0038eb0cf671242703f507408e0a55def7581da"
+        },
+        {
+          "text": " not covered by the spikes above\n* :heavy_check_mark: this is part of our first goal\n\n| Phase | Modeled? | How? |\n| --- | --- | --- |\n| Parsing | :x:\n| Macro expansion | :hourglass: \n| Name resolution | :hourglass: \n| Lifetime elision rules | :hourglass: \n| Associated type trait selection | :hourglass: | e.g. `T::Item` becoming `<T as Iterator>::Item`\n| Variance inference | :hourglass:  | we will take variance as \"input\" to the declarations |\n| Coherence overlap / orphan | :heavy_check_mark:  | The decl layer's OK check |\n| HIR type checker's WF checks | :heavy_check_mark:  | The decl layer's OK check |\n| Dyn safety rules | :heavy_minus_sign: | \n| Impl matches trait? | :heavy_check_mark: | Decl layer's OK check|\n| Const promotion | :hourglass: | decided by MIR building in rustc \n| HIR type checking of fn bodies | :hourglass:  | we take MIR as input |\n| Method resolution | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Closure capture inference | :hourglass: | decided ",
+          "page": null,
+          "start_offset": 3371,
+          "end_offset": 4369,
+          "ordinal": 4,
+          "chunk_id": "V3-P-M2-r1-c0004",
+          "text_sha256": "5f194ee98c354d25089d7da17a2ec3029b06d2bc2b7b57f4e8e6af301a04ab2f"
+        },
+        {
+          "text": "MIR as input |\n| Method resolution | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Closure capture inference | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Closure mode (fn, fnmut) and signature inference | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Coercion insertion | :hourglass: | decided by HIR type checker, embedded in MIR |\n| Drop/StorageDead placement | :hourglass: | decided by MIR building in rustc |\n| Patterns/exhaustiveness | :hourglass: | decided by MIR building in rustc |\n| Unsafe checking | :heavy_minus_sign: | Part of \"type checking\" on MIR |\n| MIR type check | :heavy_check_mark: | mir layer generates goals \n| Borrow checking | :heavy_check_mark: | mir layer polonius-style check |\n| Rust subtyping | :heavy_check_mark: | modeled by the ty layer and also decl |\n| Operational semantics | :hourglass: | basically what miri does |\n| Transmute rules | :hourglass: \n| Layout | :hourglass: | input to operational semantics for ",
+          "page": null,
+          "start_offset": 4219,
+          "end_offset": 5218,
+          "ordinal": 5,
+          "chunk_id": "V3-P-M2-r1-c0005",
+          "text_sha256": "3e2e8024b15b6ff1bed4fa39c83c9b513389e40c2e86319a514a58308295ee45"
+        },
+        {
+          "text": "nal semantics | :hourglass: | basically what miri does |\n| Transmute rules | :hourglass: \n| Layout | :hourglass: | input to operational semantics for now |\n\n## Discussion: Const generics\n\nDiscussion around whether we want to model const generics and what would be required to do so.\n\nConclusion was that we needed deeper discussion, but some felt modeling const generics could be useful for resolving some of the questions around newer features; this would broaden scope to include \n\n## Questions for discussion\n\n* What about coherence rules?\n* What is needed to align chalk and formality?\n* Should we include operational semantics and -- if so -- how does that fit in?\n    * conclusion from meeting *seemed* to be to keep it out of scope to start\n* ~~What are all the static checks rustc does, and which are covered by the spikes above?~~\n    * see table\n* Const generics?",
+          "page": null,
+          "start_offset": 5068,
+          "end_offset": 5941,
+          "ordinal": 6,
+          "chunk_id": "V3-P-M2-r1-c0006",
+          "text_sha256": "f7ac0b9ef886a955482280f5322632848262a3a40ce753b3cf24aecfb691279d"
+        }
+      ],
+      "selection_status": "author_selected_pending_independent_source_review"
+    },
+    {
+      "source_id": "V3-P-G1",
+      "document_id": "V3-P-G1",
+      "family_id": "V3-PUBLIC-01",
+      "origin": "public",
+      "kind": "general",
+      "meeting_date": null,
+      "title": "Types Team",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/README.md",
+      "raw_size_bytes": 1663,
+      "raw_sha256": "e185ce7501d8f5d5ec4337fa8a159ecbd69a07266732bc22eb74f3c5038c71a2",
+      "git_blob_sha1": "8f624fcdc4ab87923dce4d16620da6953d456336",
+      "upstream_path": "README.md",
+      "repository": "rust-lang/types-team",
+      "upstream_revision": "cf4adc0044987bceed00d5a8efa225b475e4ad91",
+      "processed_sha256": "e185ce7501d8f5d5ec4337fa8a159ecbd69a07266732bc22eb74f3c5038c71a2",
+      "processed_codepoints": 1663,
+      "content": "# Types Team\n\n## Scope and purpose\n\nThe **types** team is dedicated to improving the trait\nsystem implementation in rustc. This team is a collaboration\nbetween the [lang team] and the compiler team. We have a number of inter-related\ngoals:\n\n- designing new trait-related language features;\n- documenting and specifying the semantics of traits in Rust today; and,\n- improving the trait solver implementation in rustc.\n\n[lang team]: https://github.com/rust-lang/lang-team/\n\nA big part of this work is transitioning the compiler to use a\n[Chalk-style] solver, but along the way we hope to make targeted fixes\nto the existing solver where needed.\n\n[Chalk-style]: https://github.com/rust-lang-nursery/chalk\n\n## Design meetings\n\nWe hold weekly design meetings where we talk in depth about various\ntopics ([calendar event][ce-design]).  These meetings take place on Zulip (see below). The goal is\nnot just to figure out what we want to do, it's also a way to spread\nknowledge. Feel free to come and lurk!\n\n[ce-design]: https://calendar.google.com/calendar/u/0/embed?src=6u5rrtce6lrtv07pfi3damgjus@group.calendar.google.com\n\nYou'll find minutes from past meetings in [the minutes directory](minutes).\n\n## Chat forum\n\nOn [the rust-lang Zulip][z], in [the `#t-types` stream][s].\n\n[z]: https://rust-lang.zulipchat.com/\n[s]: https://rust-lang.zulipchat.com/#narrow/stream/144729-t-types\n\n## Dedicated repository\n\nDocuments related to the types team are stored on a\ndedicated repository, [rust-lang/types-team]. This repository contains\nmeeting minutes, past sprints, as well as draft RFCs and other\ndocuments.\n\n[rust-lang/types-team]: https://github.com/rust-lang/types-team\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1663,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "text": "# Types Team\n\n## Scope and purpose\n\nThe **types** team is dedicated to improving the trait\nsystem implementation in rustc. This team is a collaboration\nbetween the [lang team] and the compiler team. We have a number of inter-related\ngoals:\n\n- designing new trait-related language features;\n- documenting and specifying the semantics of traits in Rust today; and,\n- improving the trait solver implementation in rustc.\n\n[lang team]: https://github.com/rust-lang/lang-team/\n\nA big part of this work is transitioning the compiler to use a\n[Chalk-style] solver, but along the way we hope to make targeted fixes\nto the existing solver where needed.\n\n[Chalk-style]: https://github.com/rust-lang-nursery/chalk\n\n## Design meetings\n\nWe hold weekly design meetings where we talk in depth about various\ntopics ([calendar event][ce-design]).  These meetings take place on Zulip (see below). The goal is\nnot just to figure out what we want to do, it's also a way to spread\nknowledge. Feel free to come and lurk!\n\n",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 999,
+          "ordinal": 0,
+          "chunk_id": "V3-P-G1-r1-c0000",
+          "text_sha256": "ed90cae0a730cbdafc529245ec99b470cec6359a6726c8506ef44686a1007684"
+        },
+        {
+          "text": " place on Zulip (see below). The goal is\nnot just to figure out what we want to do, it's also a way to spread\nknowledge. Feel free to come and lurk!\n\n[ce-design]: https://calendar.google.com/calendar/u/0/embed?src=6u5rrtce6lrtv07pfi3damgjus@group.calendar.google.com\n\nYou'll find minutes from past meetings in [the minutes directory](minutes).\n\n## Chat forum\n\nOn [the rust-lang Zulip][z], in [the `#t-types` stream][s].\n\n[z]: https://rust-lang.zulipchat.com/\n[s]: https://rust-lang.zulipchat.com/#narrow/stream/144729-t-types\n\n## Dedicated repository\n\nDocuments related to the types team are stored on a\ndedicated repository, [rust-lang/types-team]. This repository contains\nmeeting minutes, past sprints, as well as draft RFCs and other\ndocuments.\n\n[rust-lang/types-team]: https://github.com/rust-lang/types-team\n",
+          "page": null,
+          "start_offset": 849,
+          "end_offset": 1663,
+          "ordinal": 1,
+          "chunk_id": "V3-P-G1-r1-c0001",
+          "text_sha256": "e14df87ac0ecb5e73e5a15d953fd757cb4fe621d00db6ea7f02b15753e3305ee"
+        }
+      ],
+      "selection_status": "author_selected_pending_independent_source_review"
+    },
+    {
+      "source_id": "V3-S-M1",
+      "document_id": "V3-S-M1",
+      "family_id": "V3-SYNTHETIC-01",
+      "origin": "synthetic",
+      "kind": "meeting",
+      "meeting_date": "2026-04-07",
+      "title": "별모래 생활사관 촉각지도 순회함 운영회의",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/synthetic-meeting-01.md",
+      "raw_size_bytes": 3202,
+      "raw_sha256": "fe486eda6e4d6d6b81eaa3506216a5ec8bf420680273eb016623ebbbf07837c1",
+      "git_blob_sha1": "8c93d0f2e38608e96909220bebc40ab9c9710d8c",
+      "upstream_path": null,
+      "repository": null,
+      "upstream_revision": null,
+      "processed_sha256": "fe486eda6e4d6d6b81eaa3506216a5ec8bf420680273eb016623ebbbf07837c1",
+      "processed_codepoints": 1384,
+      "content": "# 별모래 생활사관 촉각지도 순회함 운영회의\n\n이 회의록은 DocTrail 검증을 위해 AI가 새로 작성한 허구의 완료 회의 기록이다. 기관과 인물 및 모든 사건은 가상이다. 작성 역할은 /root/service_rag_validation_sources이며 실제 회의나 사용자 검수를 주장하지 않는다.\n\n회의는 2026년 4월 7일 14시부터 14시 45분까지 생활사관 준비실에서 진행되었다. 참석자는 운영책임자 박해온, 자료관리자 이누리, 배송담당 정모루, 기록교육담당 오단비다. 이누리가 회의록을 작성했고 참석자들은 회의 종료 전 아래 결정과 보류 항목을 확인했다.\n\n## 초기 수요와 재고 보고\n\n이누리는 보유한 순회함 6세트 중 4세트의 수량과 촉각 상태 점검이 끝났고, 나머지 2세트는 위치표지의 부착 상태를 확인 중이라고 보고했다. 박해온은 보유 수량과 출고 가능 수량을 구분해 예약표에 적도록 지시했다. 정모루는 다음 배송일의 차량 공간이 3세트 분량이라고 설명했다. 차량의 수용량을 보유 세트 수로 바꾸어 기록하지 않기로 했다.\n\n## 갈대 기록교실의 예외 요청\n\n갈대 기록교실은 4월 13일과 20일에 연속 수업을 진행하므로 같은 세트를 두 수업에 사용하고 싶다고 요청했다. 오단비는 수업 사이에 반납과 재인계를 하면 참가자별 표지 배치가 사라진다고 설명했다.\n\n회의는 갈대 기록교실에 한해 4월 11일 인수부터 4월 22일 반납까지 순회함 2세트를 배정하는 예외를 승인했다. 이 기간은 연장 신청을 미리 승인한 것으로 처리하지 않고, 기관과 기간이 지정된 별도 운영안으로 남긴다. 일반 대여의 기간과 연장 규칙은 그대로 적용한다. 예외 종료 후 다음 대여부터는 BM-OPS-14 기준으로 복귀한다.\n\n이누리는 4월 9일까지 두 세트의 인수 목록을 확정하고, 정모루는 4월 11일 오전에 배송한다. 오단비는 첫 수업 뒤 안내지의 이해하기 어려운 표현만 모아 보고한다. 참가자의 음성 녹음은 수집하지 않는다.\n\n## 음성 안내와 식별표 논의\n\n정모루는 가방에 음성 재생기를 넣는 방안을 제안했으나, 배터리 점검과 콘텐츠 권한 확인을 맡을 사람이 정해지지 않아 결정하지 않았다. 현재 배정된 두 세트에도 음성 재생기를 추가하지 않는다.\n\n가방을 쉽게 구분하려고 파란 원형 식별표를 붙이는 제안은 승인했다. 식별표는 가방 바깥 손잡이에만 붙이며 촉각지도 위에는 붙이지 않는다. 이 변경은 4월 11일 출고할 갈대 기록교실의 두 가방에 먼저 적용하고, 반납 결과를 본 뒤 다른 가방 적용 여부를 다시 논의한다.\n\n## 마무리\n\n다음 운영회의는 반납 결과가 모인 뒤 열기로 했으며 날짜는 정하지 않았다. 두 세트의 예외 대여는 승인됐지만 배송 완료, 수업 완료, 반납 점검 완료는 이 회의에서 확인한 사실이 아니다. 비용과 변상액에 대해서는 보고나 결정이 없었다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1384,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "text": "# 별모래 생활사관 촉각지도 순회함 운영회의\n\n이 회의록은 DocTrail 검증을 위해 AI가 새로 작성한 허구의 완료 회의 기록이다. 기관과 인물 및 모든 사건은 가상이다. 작성 역할은 /root/service_rag_validation_sources이며 실제 회의나 사용자 검수를 주장하지 않는다.\n\n회의는 2026년 4월 7일 14시부터 14시 45분까지 생활사관 준비실에서 진행되었다. 참석자는 운영책임자 박해온, 자료관리자 이누리, 배송담당 정모루, 기록교육담당 오단비다. 이누리가 회의록을 작성했고 참석자들은 회의 종료 전 아래 결정과 보류 항목을 확인했다.\n\n## 초기 수요와 재고 보고\n\n이누리는 보유한 순회함 6세트 중 4세트의 수량과 촉각 상태 점검이 끝났고, 나머지 2세트는 위치표지의 부착 상태를 확인 중이라고 보고했다. 박해온은 보유 수량과 출고 가능 수량을 구분해 예약표에 적도록 지시했다. 정모루는 다음 배송일의 차량 공간이 3세트 분량이라고 설명했다. 차량의 수용량을 보유 세트 수로 바꾸어 기록하지 않기로 했다.\n\n## 갈대 기록교실의 예외 요청\n\n갈대 기록교실은 4월 13일과 20일에 연속 수업을 진행하므로 같은 세트를 두 수업에 사용하고 싶다고 요청했다. 오단비는 수업 사이에 반납과 재인계를 하면 참가자별 표지 배치가 사라진다고 설명했다.\n\n회의는 갈대 기록교실에 한해 4월 11일 인수부터 4월 22일 반납까지 순회함 2세트를 배정하는 예외를 승인했다. 이 기간은 연장 신청을 미리 승인한 것으로 처리하지 않고, 기관과 기간이 지정된 별도 운영안으로 남긴다. 일반 대여의 기간과 연장 규칙은 그대로 적용한다. 예외 종료 후 다음 대여부터는 BM-OPS-14 기준으로 복귀한다.\n\n이누리는 4월 9일까지 두 세트의 인수 목록을 확정하고, 정모루는 4월 11일 오전에 배송한다. 오단비는 첫 수업 뒤 안내지의 이해하기 어려운 표현만 모아 보고한다. 참가자의 음성 녹음은 수집하지 않는다.\n\n## 음성 안내와 식별표 논의\n\n정모루는 가방에 음성 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 996,
+          "ordinal": 0,
+          "chunk_id": "V3-S-M1-r1-c0000",
+          "text_sha256": "83fe615d7d91cc6861725dcf515ef158498ffbe8bd07169c199ae0f1342e3a10"
+        },
+        {
+          "text": "다.\n\n이누리는 4월 9일까지 두 세트의 인수 목록을 확정하고, 정모루는 4월 11일 오전에 배송한다. 오단비는 첫 수업 뒤 안내지의 이해하기 어려운 표현만 모아 보고한다. 참가자의 음성 녹음은 수집하지 않는다.\n\n## 음성 안내와 식별표 논의\n\n정모루는 가방에 음성 재생기를 넣는 방안을 제안했으나, 배터리 점검과 콘텐츠 권한 확인을 맡을 사람이 정해지지 않아 결정하지 않았다. 현재 배정된 두 세트에도 음성 재생기를 추가하지 않는다.\n\n가방을 쉽게 구분하려고 파란 원형 식별표를 붙이는 제안은 승인했다. 식별표는 가방 바깥 손잡이에만 붙이며 촉각지도 위에는 붙이지 않는다. 이 변경은 4월 11일 출고할 갈대 기록교실의 두 가방에 먼저 적용하고, 반납 결과를 본 뒤 다른 가방 적용 여부를 다시 논의한다.\n\n## 마무리\n\n다음 운영회의는 반납 결과가 모인 뒤 열기로 했으며 날짜는 정하지 않았다. 두 세트의 예외 대여는 승인됐지만 배송 완료, 수업 완료, 반납 점검 완료는 이 회의에서 확인한 사실이 아니다. 비용과 변상액에 대해서는 보고나 결정이 없었다.\n",
+          "page": null,
+          "start_offset": 846,
+          "end_offset": 1384,
+          "ordinal": 1,
+          "chunk_id": "V3-S-M1-r1-c0001",
+          "text_sha256": "38d874428b06179db1b99e37deb15c827d2d8eda86256fd9367001a6942a99c7"
+        }
+      ],
+      "selection_status": "author_selected_pending_independent_source_review"
+    },
+    {
+      "source_id": "V3-S-M2",
+      "document_id": "V3-S-M2",
+      "family_id": "V3-SYNTHETIC-01",
+      "origin": "synthetic",
+      "kind": "meeting",
+      "meeting_date": "2026-04-24",
+      "title": "별모래 생활사관 촉각지도 순회함 반납 점검회의",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/synthetic-meeting-02.md",
+      "raw_size_bytes": 3240,
+      "raw_sha256": "872bad4471bf206b33472f49227fbb20c4668370e2febdc14f8738e48b7f6815",
+      "git_blob_sha1": "706b91dbd2fc34d23c72b9173ba0a9015885dfd0",
+      "upstream_path": null,
+      "repository": null,
+      "upstream_revision": null,
+      "processed_sha256": "872bad4471bf206b33472f49227fbb20c4668370e2febdc14f8738e48b7f6815",
+      "processed_codepoints": 1404,
+      "content": "# 별모래 생활사관 촉각지도 순회함 반납 점검회의\n\n이 회의록은 DocTrail 검증을 위해 AI가 새로 작성한 허구의 완료 회의 기록이다. 기관과 인물 및 모든 사건은 가상이다. 작성 역할은 /root/service_rag_validation_sources이며 실제 회의나 사용자 검수를 주장하지 않는다.\n\n회의는 2026년 4월 24일 10시부터 10시 35분까지 생활사관 준비실에서 진행되었다. 참석자는 박해온, 이누리, 정모루, 오단비다. 기록자는 오단비이며, 회의 말미에 참석자들이 완료 보고와 후속 조치를 구분해 확인했다.\n\n## 이행 결과\n\n정모루는 갈대 기록교실로 보낸 두 순회함을 4월 11일 오전에 인계했고, 4월 22일 오후에 모두 회수했다고 보고했다. 오단비는 예정된 두 수업이 진행됐으며, 안내지의 방향 설명 두 문장에서 혼동이 보고되었다고 설명했다. 수업 전체의 접근성이 검증되었다거나 모든 참가자가 불편 없이 사용했다고 평가하지는 않았다.\n\n이누리는 반납한 두 세트 중 한 세트는 수량과 촉각 상태 점검을 마쳤고, 다른 세트는 지도 한 장의 양각 선이 들떠 교체를 기다리고 있다고 보고했다. 들뜬 지도는 4월 28일까지 교체할 예정이며, 교체 후 재점검은 아직 수행하지 않았다. 보관실에 돌아온 두 세트가 모두 다음 출고에 사용 가능한 것은 아니다.\n\n## 식별표의 적용 범위\n\n두 가방의 파란 원형 식별표는 이동 중 떨어지지 않았다. 다만 기록교실 내부의 보관표와 모양이 같아 한 차례 위치를 혼동했다는 보고가 있었다. 회의는 원형 식별표를 다른 기관으로 확대하는 일을 보류했다.\n\n갈대 기록교실에서 재사용할 때도 원형 표지를 유지하지 않고, 가방 손잡이에 긴 직사각형 표지를 붙이는 안으로 바꾸기로 했다. 이누리가 4월 30일까지 두 가방의 표지를 교체한다. 이것은 가방 식별표의 후속 변경이며 지도 장수나 위치표지 수를 늘리는 결정이 아니다. 다른 네 가방은 다음 검토 때까지 기존 상태로 둔다.\n\n## 운영 문서와 다음 대여\n\n4월 7일 승인한 갈대 기록교실의 예외 기간은 4월 22일에 끝났음을 확인했다. 해당 기관이 다음 수업에 다시 빌릴 때는 일반 대여 절차를 따른다. 이번 결과를 바탕으로 모든 기관의 대여 기간을 늘리자는 의견이 나왔지만 채택하지 않았다. BM-OPS-14의 개정 승인도 이루어지지 않았다.\n\n오단비는 안내지의 방향 표현을 고친 초안을 4월 29일까지 제출한다. 초안 검토 담당자는 박해온이며, 배포일은 승인 후 따로 정한다. 현재 사용 중인 안내지가 이미 교체됐다는 의미는 아니다.\n\n## 남은 사항\n\n음성 재생기 추가안은 이번 회의에서도 결정하지 않았다. 콘텐츠 이용 조건과 관리 담당자 확인이 남아 있기 때문이다. 교체 지도 구입 비용은 아직 견적을 받지 못해 확정하지 않았다. 다음 기관의 이름과 배송일도 예약표가 확정된 뒤 정하기로 했다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1404,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "text": "# 별모래 생활사관 촉각지도 순회함 반납 점검회의\n\n이 회의록은 DocTrail 검증을 위해 AI가 새로 작성한 허구의 완료 회의 기록이다. 기관과 인물 및 모든 사건은 가상이다. 작성 역할은 /root/service_rag_validation_sources이며 실제 회의나 사용자 검수를 주장하지 않는다.\n\n회의는 2026년 4월 24일 10시부터 10시 35분까지 생활사관 준비실에서 진행되었다. 참석자는 박해온, 이누리, 정모루, 오단비다. 기록자는 오단비이며, 회의 말미에 참석자들이 완료 보고와 후속 조치를 구분해 확인했다.\n\n## 이행 결과\n\n정모루는 갈대 기록교실로 보낸 두 순회함을 4월 11일 오전에 인계했고, 4월 22일 오후에 모두 회수했다고 보고했다. 오단비는 예정된 두 수업이 진행됐으며, 안내지의 방향 설명 두 문장에서 혼동이 보고되었다고 설명했다. 수업 전체의 접근성이 검증되었다거나 모든 참가자가 불편 없이 사용했다고 평가하지는 않았다.\n\n이누리는 반납한 두 세트 중 한 세트는 수량과 촉각 상태 점검을 마쳤고, 다른 세트는 지도 한 장의 양각 선이 들떠 교체를 기다리고 있다고 보고했다. 들뜬 지도는 4월 28일까지 교체할 예정이며, 교체 후 재점검은 아직 수행하지 않았다. 보관실에 돌아온 두 세트가 모두 다음 출고에 사용 가능한 것은 아니다.\n\n## 식별표의 적용 범위\n\n두 가방의 파란 원형 식별표는 이동 중 떨어지지 않았다. 다만 기록교실 내부의 보관표와 모양이 같아 한 차례 위치를 혼동했다는 보고가 있었다. 회의는 원형 식별표를 다른 기관으로 확대하는 일을 보류했다.\n\n갈대 기록교실에서 재사용할 때도 원형 표지를 유지하지 않고, 가방 손잡이에 긴 직사각형 표지를 붙이는 안으로 바꾸기로 했다. 이누리가 4월 30일까지 두 가방의 표지를 교체한다. 이것은 가방 식별표의 후속 변경이며 지도 장수나 위치표지 수를 늘리는 결정이 아니다. 다른 네 가방은 다음 검토 때까지 기존 상태로 둔다.\n\n## 운영 문서와 다음 대여\n\n4월 7일 승인한 갈대 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 999,
+          "ordinal": 0,
+          "chunk_id": "V3-S-M2-r1-c0000",
+          "text_sha256": "4cfd34037f32e467998e8c80e3a2d663746bc24d3db7343a4042c694f1f3ebb3"
+        },
+        {
+          "text": "로 바꾸기로 했다. 이누리가 4월 30일까지 두 가방의 표지를 교체한다. 이것은 가방 식별표의 후속 변경이며 지도 장수나 위치표지 수를 늘리는 결정이 아니다. 다른 네 가방은 다음 검토 때까지 기존 상태로 둔다.\n\n## 운영 문서와 다음 대여\n\n4월 7일 승인한 갈대 기록교실의 예외 기간은 4월 22일에 끝났음을 확인했다. 해당 기관이 다음 수업에 다시 빌릴 때는 일반 대여 절차를 따른다. 이번 결과를 바탕으로 모든 기관의 대여 기간을 늘리자는 의견이 나왔지만 채택하지 않았다. BM-OPS-14의 개정 승인도 이루어지지 않았다.\n\n오단비는 안내지의 방향 표현을 고친 초안을 4월 29일까지 제출한다. 초안 검토 담당자는 박해온이며, 배포일은 승인 후 따로 정한다. 현재 사용 중인 안내지가 이미 교체됐다는 의미는 아니다.\n\n## 남은 사항\n\n음성 재생기 추가안은 이번 회의에서도 결정하지 않았다. 콘텐츠 이용 조건과 관리 담당자 확인이 남아 있기 때문이다. 교체 지도 구입 비용은 아직 견적을 받지 못해 확정하지 않았다. 다음 기관의 이름과 배송일도 예약표가 확정된 뒤 정하기로 했다.\n",
+          "page": null,
+          "start_offset": 849,
+          "end_offset": 1404,
+          "ordinal": 1,
+          "chunk_id": "V3-S-M2-r1-c0001",
+          "text_sha256": "1549b2236d36638ae2fb0986eadd45efbc9fb85bc0e732c3f2b222120f0db63e"
+        }
+      ],
+      "selection_status": "author_selected_pending_independent_source_review"
+    },
+    {
+      "source_id": "V3-S-G1",
+      "document_id": "V3-S-G1",
+      "family_id": "V3-SYNTHETIC-01",
+      "origin": "synthetic",
+      "kind": "general",
+      "meeting_date": null,
+      "title": "별모래 생활사관 촉각지도 순회함 운영 기준 1.0",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/synthetic-general-01.md",
+      "raw_size_bytes": 3172,
+      "raw_sha256": "fe5c166ef0450108056880f39312d29636ae5f52229f65fe5fbecff87517ea0c",
+      "git_blob_sha1": "1f1abc2d550d801e4c2112ad0c337185cf950638",
+      "upstream_path": null,
+      "repository": null,
+      "upstream_revision": null,
+      "processed_sha256": "fe5c166ef0450108056880f39312d29636ae5f52229f65fe5fbecff87517ea0c",
+      "processed_codepoints": 1376,
+      "content": "# 별모래 생활사관 촉각지도 순회함 운영 기준 1.0\n\n이 문서는 DocTrail 검증을 위해 AI가 새로 작성한 허구의 일반 운영 문서다. 별모래 생활사관, 등장인물, 기관, 일정, 수치는 실제 대상과 관계없다. 작성 역할은 /root/service_rag_validation_sources이며 실제 현장 조사나 사용자 검수는 이루어지지 않았다.\n\n문서번호는 BM-OPS-14, 승인일은 2026년 4월 2일, 적용 시작일은 2026년 4월 6일이다. 승인자는 가상의 운영책임자 박해온이다. 이 기준은 생활사관이 마을 기록교실에 빌려주는 촉각지도 순회함의 대여와 반납에 적용한다. 관내 상설전시와 개인 방문객용 안내판에는 적용하지 않는다.\n\n## 대여 단위와 인계\n\n순회함 한 세트는 양각지도 8장, 위치표지 16개, 확대문자 안내지 2권, 잠금가방 1개로 구성한다. 음성 재생기는 기본 구성에 포함하지 않는다. 대여 기관은 담당자 한 명을 지정하고 인수 시 구성품 개수를 기록한다. 부품이 빠졌다는 이유만으로 나머지 세트를 다음 기관에 넘겨서는 안 된다.\n\n기본 대여 기간은 인수일을 포함한 10일이다. 다음 예약이 없고 자료관리자가 승인한 경우에만 한 번, 최대 4일 연장할 수 있다. 연장 요청을 보냈다는 사실은 연장 승인이 아니다. 자료관리자의 승인 날짜와 새 반납일이 인계대장에 모두 적혀야 효력이 생긴다.\n\n## 반납과 재출고\n\n반납 담당자는 수량, 양각 선의 들뜸, 위치표지의 부착 상태를 확인한다. 닦아낸 뒤 상태를 점검하며, 점검 완료 표시가 없는 세트는 보관 중이더라도 출고 가능한 재고로 세지 않는다. 점검 중 발견한 손상은 반납 기관의 과실로 자동 판단하지 않고, 인수 기록과 반납 사진을 함께 비교한다.\n\n양각 선이 손끝에 걸릴 정도로 들뜨면 해당 지도 한 장을 교체한다. 표면의 옅은 색 번짐만 있고 선의 모양과 촉감이 유지되면 사용 가능으로 기록한다. 손상 유형이 이 두 기준으로 구분되지 않으면 출고를 보류하고 운영책임자에게 판정을 요청한다.\n\n## 예외의 범위\n\n회의에서 별도 운영안을 승인할 때는 적용 기관, 시작일과 종료일, 변경할 항목, 복귀 조건을 기록한다. 특정 기관에 승인한 예외가 다른 기관의 규칙까지 바꾸지는 않는다. 예외 종료 뒤에는 이 문서의 기본 기준으로 돌아간다. 예외 운영 결과가 좋았다는 평가만으로 기준 문서의 개정이 완료되는 것도 아니다.\n\n참여자의 음성이나 얼굴은 대여 기록의 필수 항목이 아니다. 기관 이름, 수량, 점검 결과, 담당 역할, 인계 시각만 기록한다. 운영 담당자가 필요하다고 판단한 추가 개인정보 수집은 이 문서만으로 승인되지 않는다.\n\n이 문서는 물품 구입 가격, 분실 변상액, 차량 이동비를 정하지 않는다. 해당 금액은 별도 계약이나 예산 승인 문서가 있어야 확정할 수 있다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1376,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "text": "# 별모래 생활사관 촉각지도 순회함 운영 기준 1.0\n\n이 문서는 DocTrail 검증을 위해 AI가 새로 작성한 허구의 일반 운영 문서다. 별모래 생활사관, 등장인물, 기관, 일정, 수치는 실제 대상과 관계없다. 작성 역할은 /root/service_rag_validation_sources이며 실제 현장 조사나 사용자 검수는 이루어지지 않았다.\n\n문서번호는 BM-OPS-14, 승인일은 2026년 4월 2일, 적용 시작일은 2026년 4월 6일이다. 승인자는 가상의 운영책임자 박해온이다. 이 기준은 생활사관이 마을 기록교실에 빌려주는 촉각지도 순회함의 대여와 반납에 적용한다. 관내 상설전시와 개인 방문객용 안내판에는 적용하지 않는다.\n\n## 대여 단위와 인계\n\n순회함 한 세트는 양각지도 8장, 위치표지 16개, 확대문자 안내지 2권, 잠금가방 1개로 구성한다. 음성 재생기는 기본 구성에 포함하지 않는다. 대여 기관은 담당자 한 명을 지정하고 인수 시 구성품 개수를 기록한다. 부품이 빠졌다는 이유만으로 나머지 세트를 다음 기관에 넘겨서는 안 된다.\n\n기본 대여 기간은 인수일을 포함한 10일이다. 다음 예약이 없고 자료관리자가 승인한 경우에만 한 번, 최대 4일 연장할 수 있다. 연장 요청을 보냈다는 사실은 연장 승인이 아니다. 자료관리자의 승인 날짜와 새 반납일이 인계대장에 모두 적혀야 효력이 생긴다.\n\n## 반납과 재출고\n\n반납 담당자는 수량, 양각 선의 들뜸, 위치표지의 부착 상태를 확인한다. 닦아낸 뒤 상태를 점검하며, 점검 완료 표시가 없는 세트는 보관 중이더라도 출고 가능한 재고로 세지 않는다. 점검 중 발견한 손상은 반납 기관의 과실로 자동 판단하지 않고, 인수 기록과 반납 사진을 함께 비교한다.\n\n양각 선이 손끝에 걸릴 정도로 들뜨면 해당 지도 한 장을 교체한다. 표면의 옅은 색 번짐만 있고 선의 모양과 촉감이 유지되면 사용 가능으로 기록한다. 손상 유형이 이 두 기준으로 구분되지 않으면 출고를 보류하고 운영책임자에게 판정을 요청한다.\n\n## ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 997,
+          "ordinal": 0,
+          "chunk_id": "V3-S-G1-r1-c0000",
+          "text_sha256": "de5027b640b40bd91516dd8a03e48b4b2b8a9ee1f937fffb860ad94410c79527"
+        },
+        {
+          "text": "함께 비교한다.\n\n양각 선이 손끝에 걸릴 정도로 들뜨면 해당 지도 한 장을 교체한다. 표면의 옅은 색 번짐만 있고 선의 모양과 촉감이 유지되면 사용 가능으로 기록한다. 손상 유형이 이 두 기준으로 구분되지 않으면 출고를 보류하고 운영책임자에게 판정을 요청한다.\n\n## 예외의 범위\n\n회의에서 별도 운영안을 승인할 때는 적용 기관, 시작일과 종료일, 변경할 항목, 복귀 조건을 기록한다. 특정 기관에 승인한 예외가 다른 기관의 규칙까지 바꾸지는 않는다. 예외 종료 뒤에는 이 문서의 기본 기준으로 돌아간다. 예외 운영 결과가 좋았다는 평가만으로 기준 문서의 개정이 완료되는 것도 아니다.\n\n참여자의 음성이나 얼굴은 대여 기록의 필수 항목이 아니다. 기관 이름, 수량, 점검 결과, 담당 역할, 인계 시각만 기록한다. 운영 담당자가 필요하다고 판단한 추가 개인정보 수집은 이 문서만으로 승인되지 않는다.\n\n이 문서는 물품 구입 가격, 분실 변상액, 차량 이동비를 정하지 않는다. 해당 금액은 별도 계약이나 예산 승인 문서가 있어야 확정할 수 있다.\n",
+          "page": null,
+          "start_offset": 847,
+          "end_offset": 1376,
+          "ordinal": 1,
+          "chunk_id": "V3-S-G1-r1-c0001",
+          "text_sha256": "0e7ede18ed2e3e56798adca252abcb208cd3b35866ee53638737ed6480737f97"
+        }
+      ],
+      "selection_status": "author_selected_pending_independent_source_review"
+    }
+  ],
+  "processing_contract": {
+    "implementation": "existing doctrail.ingest.extract and doctrail.retrieval.chunk_content",
+    "chunk_codepoints": 1000,
+    "overlap_codepoints": 150,
+    "whole_originals": true,
+    "selected_contexts": 0,
+    "questions": 0
+  },
+  "code_bindings_before_java": {
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/main/java/io/doctrail/DocumentService.java": "cf80b13d3eb6c786c8b4633119f790fb39131c0f5f06ce7ec02bcba0a2ad1a0b",
+    "server/src/main/java/io/doctrail/ApiController.java": "896b44d40979a0492fc92dcf5e01d746993bf40650262d810369296b76284517",
+    "server/src/main/java/io/doctrail/Store.java": "932f5949aaa57f6c5121ff6f98422626592b5145639624c3309a5796c58ebdc7",
+    "server/src/main/java/io/doctrail/GenerationClient.java": "5fce2ec0a8e6512cbe3dd4cad8c50c17ff0b7edb347bf7b094d388aa880070a0",
+    "server/src/main/java/io/doctrail/MeetingService.java": "59607dcc54cab3226d5c535b81d1f2b2b85df1d31232dd3169743fe009700780",
+    "server/src/main/resources/application.properties": "81163cde7cfaef6476d0e4c1cd0ace89302ae6aad6a5e4bc4b0f59600bbdfa53",
+    "server/target/doctrail-server-0.1.0.jar": "8476ba7728f392e62aa53a3999de8d2f08982012dc2a345f503bedb59564976b"
+  },
+  "independent_source_review": "pending"
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-independent-development-review-v2",
+  "date": "2026-10-23",
+  "status": "not_accepted",
+  "actual_run": {
+    "path": "experiments/results/meetings-grounded-summary-development-v2.json",
+    "bytes": 5240,
+    "sha256": "3128f0f94af2e45976661fee7885e3ca6e795d6285ed4e785a64b46e67758a8c"
+  },
+  "locked_private_judgment": {
+    "path": ".local/meeting-grounded-summary-v2-independent-v1/independent-summary-v1.json",
+    "bytes": 59878,
+    "sha256": "63f2b8443cde7c1ea453156228963b32437e6bc2e2c86d7975e3e520f815cf0c"
+  },
+  "safe_aggregate": {
+    "path": ".local/meeting-grounded-summary-v2-independent-v1/independent-safe-summary-v1.json",
+    "bytes": 8433,
+    "sha256": "0bee9eb95362903338dddb54f7d8bfa7040499644326c159186795dad18d463f"
+  },
+  "source_lock": {
+    "path": ".local/meeting-grounded-summary-v2-independent-v1/source-lock.json",
+    "bytes": 11535,
+    "sha256": "be191d0d2784d997dcc56e030e93fe8939d2f4bcb93097965138d404ec4b7d84"
+  },
+  "aggregate": {
+    "candidate_count": 3,
+    "claim_count": 17,
+    "citation_count": 34,
+    "exact_source_span_matches": 34,
+    "source_revision_bindings_supplied": 3,
+    "source_content_bindings_verified": 3,
+    "whole_source_claim_support": {
+      "supported": 13,
+      "partial": 1,
+      "ambiguous": 3,
+      "unsupported": 0
+    },
+    "selected_citation_set_claim_support": {
+      "supported": 9,
+      "partial": 7,
+      "ambiguous": 1,
+      "unsupported": 0
+    },
+    "core_sufficiency": {
+      "sufficient": 1,
+      "insufficient": 2,
+      "unknown": 0
+    },
+    "existing_core_entries": {
+      "total": 8,
+      "covered": 4,
+      "partial": 2,
+      "missing": 2
+    },
+    "claims_all_supported_in_whole_source_candidate_count": 0,
+    "nonexclusive_issue_claim_counts": {
+      "proposal_adoption_and_destination_conflation": 1,
+      "selected_citation_omits_claim_component": 6,
+      "unrelated_selected_citation": 4,
+      "causal_or_unresolved_referent_ambiguity": 1,
+      "active_item_scope_ambiguity": 1,
+      "proposal_to_decision_relation_ambiguity": 1,
+      "cross_topic_referent_ambiguity": 1
+    }
+  },
+  "judgment_order": "Source-only criteria locked, then summary-only candidates judged before model self-review/performance/outcome disclosure.",
+  "input_bindings_unchanged": 5,
+  "new_criteria": 0,
+  "human_reviews": 0,
+  "current_model_self_review_comparison": "separate_followup_pending",
+  "limitations": [
+    "Three candidates from existing synthetic development material; not held-out/public-organizational evaluation or human acceptance.",
+    "Historical project aggregates exposed through AGENTS; not pristine blinded review.",
+    "One core-sufficient candidate still has a partially supported claim; no candidate has every claim fully supported by the whole source.",
+    "Exact citation anchors establish source identity, not semantic support. Selected-citation support is distinct from whole-source support.",
+    "Partial and ambiguous claims remain distinct from unsupported claims; issue counts overlap.",
+    "No direct improvement-rate comparison with the two-candidate v1 review: candidate counts and reviewing role context differ.",
+    "Original runtime failure, unanswered six questions and Phase1 incompleteness remain unchanged."
+  ]
+}

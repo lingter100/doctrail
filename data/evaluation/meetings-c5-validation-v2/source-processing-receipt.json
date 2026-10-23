@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "source_processing_version": 2,
+  "phase": "validation",
+  "mode": "adopted-all",
+  "manifest": {
+    "path": "data/evaluation/meetings-c5-validation-v2/source-manifest.json",
+    "sha256": "9905e7e9f222a83a4c1785a2d9456953590c5a0777f1ae1e65fe2149872a1910"
+  },
+  "bound_files": {
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "scripts/prepare_meeting_plaintext_source_inventory.py": "7c18029970b5ffed953b394ec5b33381e688820cad7ff4688663bdeedb3f35f6",
+    "scripts/prepare_meeting_source_inventory.py": "65d095bf89d918b5fcde1c274d6999d7f791eae26c58c6fe8bdc916b29c80079",
+    "tests/test_prepare_meeting_plaintext_source_inventory.py": "3ce4995b783ebc59f26a840cc7eebda672b62278e884866c4d192217bb6a6f9e",
+    "tests/test_prepare_meeting_source_inventory.py": "ab38a37febf242fb00cd69ce9864bf81f366ee02d88f76a5511e492fb4989511"
+  },
+  "references": {
+    "family_registry": {
+      "path": "data/evaluation/meetings-c5-family-registry-v1.json",
+      "sha256": "3b1d9fa7d9f9065ca5c77123c05c90177312700635e00675a9cfa75d0cc54e63"
+    },
+    "active_comparison_source_freeze": {
+      "path": "data/evaluation/meetings-c5-toolchain-freeze-v1.json",
+      "sha256": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d"
+    }
+  },
+  "inventory_sha256": "191e7d99dc6f5506faffc999428b9042f1d135705a913c596c22e06eb9af2b93",
+  "processing_protocol": "c5-validation-v2-literal-markdown-full-documents",
+  "documents": [
+    {
+      "source_id": "c5-val-pub-general",
+      "document_id": "c5-val-pub-general",
+      "revision": 1,
+      "raw_sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+      "raw_size_bytes": 3192,
+      "git_blob_sha1": "c4a7087cd25081d737b38d57baff13cdd9ee57c5",
+      "processed_sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+      "processed_codepoints": 3192,
+      "chunks": 4
+    },
+    {
+      "source_id": "c5-val-pub-meeting-01",
+      "document_id": "c5-val-pub-meeting-01",
+      "revision": 1,
+      "raw_sha256": "f3e9a2340a385e1232a296d3c4d226a56d4fe4ea8d131da7a1a8fc23a4ed79cf",
+      "raw_size_bytes": 1915,
+      "git_blob_sha1": "cc2a6c5f81c54cb21d2a21e6f2fdd3e0e1c0acbe",
+      "processed_sha256": "f3e9a2340a385e1232a296d3c4d226a56d4fe4ea8d131da7a1a8fc23a4ed79cf",
+      "processed_codepoints": 1913,
+      "chunks": 3
+    },
+    {
+      "source_id": "c5-val-pub-meeting-02",
+      "document_id": "c5-val-pub-meeting-02",
+      "revision": 1,
+      "raw_sha256": "000a15674ac56f752a084dbae1ce1714412782ab4f03564db5e0ed2ac0245240",
+      "raw_size_bytes": 1123,
+      "git_blob_sha1": "2ebe1547491336e987fed2f3dc8b13ea9496ae8f",
+      "processed_sha256": "000a15674ac56f752a084dbae1ce1714412782ab4f03564db5e0ed2ac0245240",
+      "processed_codepoints": 1123,
+      "chunks": 2
+    },
+    {
+      "source_id": "c5-val-syn-general",
+      "document_id": "c5-val-syn-general",
+      "revision": 1,
+      "raw_sha256": "dd4de7fce2e1e209f110e042865f2342b17a79be8713faeb846b5517c7661fa6",
+      "raw_size_bytes": 2767,
+      "git_blob_sha1": null,
+      "processed_sha256": "dd4de7fce2e1e209f110e042865f2342b17a79be8713faeb846b5517c7661fa6",
+      "processed_codepoints": 1175,
+      "chunks": 2
+    },
+    {
+      "source_id": "c5-val-syn-meeting-01",
+      "document_id": "c5-val-syn-meeting-01",
+      "revision": 1,
+      "raw_sha256": "ab94e3ed26e62be7ff806e1fcfb7cf0e0b0aee7f5e9d3096f4742d692da1e455",
+      "raw_size_bytes": 1992,
+      "git_blob_sha1": null,
+      "processed_sha256": "ab94e3ed26e62be7ff806e1fcfb7cf0e0b0aee7f5e9d3096f4742d692da1e455",
+      "processed_codepoints": 870,
+      "chunks": 1
+    },
+    {
+      "source_id": "c5-val-syn-meeting-02",
+      "document_id": "c5-val-syn-meeting-02",
+      "revision": 1,
+      "raw_sha256": "dd565a07f9b558b37cd6b3f9e70209728e87c877cb42ad2a5c4f26b40f6e51fe",
+      "raw_size_bytes": 2330,
+      "git_blob_sha1": null,
+      "processed_sha256": "dd565a07f9b558b37cd6b3f9e70209728e87c877cb42ad2a5c4f26b40f6e51fe",
+      "processed_codepoints": 1012,
+      "chunks": 2
+    }
+  ],
+  "excluded_sources": [],
+  "counts": {
+    "registered_sources": 6,
+    "processed_documents": 6,
+    "chunks": 14,
+    "excluded_sources": 0,
+    "selected_contexts": 0,
+    "questions": 0,
+    "oracles": 0,
+    "synthetic_bodies_authored": 0,
+    "tokenizer_runs": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "human_reviews": 0
+  },
+  "java_parity_verified": false
+}

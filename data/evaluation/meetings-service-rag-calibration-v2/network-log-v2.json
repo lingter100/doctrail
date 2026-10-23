@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "scope": "external source discovery requests after v2 dispatch; parent prior metadata2 separately registered; local service HTTP separately recorded",
+  "requests": [
+    {
+      "category": "metadata",
+      "url": "https://api.github.com/repos/cncf/tag-app-delivery/git/trees/cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d?recursive=1",
+      "started_at": "2026-10-20T07:27:40.953156+00:00",
+      "seconds": 0.5361044406890869,
+      "status": 200,
+      "error": null,
+      "path": ".local/service-rag-calibration-v2/discovery/tree.json",
+      "bytes": 222475,
+      "sha256": "2dd577577d4c68d4cf3f49998c2a10565954c42a9cde6a5c51c2a7193a80a2ef"
+    },
+    {
+      "category": "license",
+      "url": "https://raw.githubusercontent.com/cncf/tag-app-delivery/cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d/LICENSE",
+      "started_at": "2026-10-20T07:27:41.491256+00:00",
+      "seconds": 0.2844810485839844,
+      "status": 200,
+      "error": null,
+      "path": ".local/service-rag-calibration-v2/originals/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "category": "source",
+      "url": "https://raw.githubusercontent.com/cncf/tag-app-delivery/cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d/gitops-wg/meetings/old-committee-principles/2021-04-05-chat.txt",
+      "upstream_path": "gitops-wg/meetings/old-committee-principles/2021-04-05-chat.txt",
+      "started_at": "2026-10-20T07:27:55.785256+00:00",
+      "seconds": 0.3272082805633545,
+      "status": 200,
+      "error": null,
+      "path": ".local/service-rag-calibration-v2/originals/2021-04-05-chat.txt",
+      "bytes": 4990,
+      "sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd"
+    },
+    {
+      "category": "source",
+      "url": "https://raw.githubusercontent.com/cncf/tag-app-delivery/cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d/gitops-wg/meetings/old-committee-principles/2021-04-14-chat.txt",
+      "upstream_path": "gitops-wg/meetings/old-committee-principles/2021-04-14-chat.txt",
+      "started_at": "2026-10-20T07:27:56.112464+00:00",
+      "seconds": 0.3301854133605957,
+      "status": 200,
+      "error": null,
+      "path": ".local/service-rag-calibration-v2/originals/2021-04-14-chat.txt",
+      "bytes": 8257,
+      "sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95"
+    },
+    {
+      "category": "source",
+      "url": "https://raw.githubusercontent.com/cncf/tag-app-delivery/cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d/gitops-wg/charter.md",
+      "upstream_path": "gitops-wg/charter.md",
+      "started_at": "2026-10-20T07:27:56.443655+00:00",
+      "seconds": 0.31908440589904785,
+      "status": 200,
+      "error": null,
+      "path": ".local/service-rag-calibration-v2/originals/charter.md",
+      "bytes": 3296,
+      "sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff"
+    }
+  ]
+}

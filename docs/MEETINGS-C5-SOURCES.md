@@ -1,0 +1,48 @@
+# C5 새 원문 준비와 역할 기록
+
+2026-10-19. 검증 도구 소스 d084f86의 양쪽 필수 CI가 성공했고 CI 영수증은 ddc5080에 커밋했다. 이 문서는 새 자료 작성 전 역할과 순서를 기록하고 후속 검토 결과를 누적한다. 역할 등록 당시 원문·문항·tokenizer·모델 실행은0이었으며 이후 상태는 아래 검토 결과와 STATUS를 따른다.
+
+## 목적과 방법
+
+회의와 일반 문서를 연결하는 답변을 검증하려면 질문에 맞춰 근거를 만든 자료를 피해야 한다. 각 split마다 새 공개 family와 명시적 합성 조직을 하나씩 정하고, 각각 날짜가 다른 회의2개와 일반 문서1개를 먼저 확정한다. 전체12문서의 출처·이용 조건·revision·문서 처리 일치·독립 검토를 마친 뒤 질문을 작성한다. 토큰 계수나 모델 출력으로 원문을 조정하지 않는다.
+
+공개 저장소는 본문을 열기 전에 서로 다른 repo를 예약한다. 과거 metadata index의 제외 repo9개도 사용하지 않는다. 이전 raw/normalized/긴 문단 hash를 비교하지만 과거68행에는 정규화 hash가 없으므로 완전 중복 검증이라고 주장하지 않는다. 누락3항목은 index에 그대로 남긴다.
+
+## 실제 역할
+
+| Split | 작성(source, 이후 item) | 별도 사전검토(source, 이후 item) |
+| --- | --- | --- |
+| calibration | /root/c5_calibration_author | /root/c5_calibration_prereviewer |
+| validation | /root/c5_validation_author | /root/c5_validation_prereviewer |
+
+모두 실제 도구가 수락한 GPT-6 Astra xhigh, fork none이다. 부모 채팅 설정을 변경한 것은 아니다. [역할 등록](../data/evaluation/meetings-c5-role-registration-v1.json)에 수락 시각·허용 경로·노출과 시작 조건을 기록한다. 같은 split 역할 재사용은 공개하며 자기검토·split 간 겸임·최종 답변 판정을 금지한다. 부모는 validation 본문·oracle·의미 검토를 열지 않는다.
+
+## 실행 순서와 소유권
+
+역할/index 커밋 뒤 작성자가 실제 Git 기반 code_contract와 원래76개 동결을 확인한다. 부모는 이 확인 동안 HEAD를 유지한다. 공개 repo 예약 후 출처와 이용 조건을 확인하고 각자 원문6개·처리 inventory·처리 영수증·phase fingerprint metadata를 만든다. Java 검증은 Maven/포트 경합을 피하도록 순서를 조정한다.
+
+원문 작성자는 자신의 사전검토나 source freeze를 만들지 않는다. 별도 검토자가 전체 원문·출처·일관성·신선도·Java/Python parity를 확인한 다음 수용한 자료만 동결한다. 원문 커밋 뒤 item 작성, 독립 item 검토와 동결, 공식 offline 준비1회, 실제 quality 실행 순서를 따른다. 이전 실험을 재실행하지 않는다.
+
+## 설명할 핵심과 남은 한계
+
+소프트웨어 검사 통과는 모델의 답변 정확성과 다르다. 이번 단계는 새 평가 자료를 신뢰할 수 있게 준비하는 과정이다. 공개 문서와 합성 문서는 구분하고 AI 작성/검토와 사용자 직접 검수도 분리한다. 실제 질문 난도·근거 충분성·답변 품질·운영 적합성은 아직 미확정이다. Phase1과 PR14는 draft를 유지한다.
+
+## 첫 원문 검토 결과
+
+총12문서·29청크의 실제 Java/Python 대조가 각 split2검사씩 통과했다. 별도 원문 검토에서 calibration6개는 수정 없이 수용됐으며 sourcefreeze14 SHA771a3f18을 만들었다. Validation은 공개3수용·합성3반려다. 정확 해시/문단 중복0만으로 의미 신선도가 입증되지 않아 독립 검토가 반려했고 원래 준비 관문도 거부됐다. 모델·질문은 아직 만들지 않았다.
+
+공개 원문 채택 전 license404·회의록 구성 부족 후보를 제외한 과정과 rejected template body도 원본으로 보존했다. Calibration의 현재 멘토링 안내를2018회의 당시 규정으로 해석하지 않는 한계도 기록했다. Validation reviewer의 split 간 비교 세부는 격리 notes에 남기고 부모와 원 작성자에게 calibration 내용을 공개하지 않는다. 작성자는 자기 자료에 관한 별도 feedback만 받는다.
+
+원래 validation v1 원문/manifest/inventory/검토와 fingerprint7ac383c0을 먼저 커밋한다. active flat fingerprint의 정확한 원본도 source-fingerprints-original-v1.json에 보관했다. 기존 작성자가 NEWv2 합성3개를 작성하고 승인된 공개3개는 그대로 사용한다. 고정 schema의 active metadata 파일만 명시적으로 갱신하며 original v1 파일은 덮어쓰지 않는다. v2는 별도 Java/Python 대조와 독립 검토·source freeze를 다시 거쳐야 한다. 과거 실패나 모델 실행을 재실행하지 않는다.
+
+[첫 원문 검토 영수증](../experiments/results/meetings-c5-source-review-v1.json)에 원래 검사와 수용/반려 범위, 공개 파일 hash를 기록했다. 질문 작성은 이번 반려를 해결하고 source 확정 뒤에 시작한다.
+
+첫 staging whitespace 검사에서 upstream raw2개와 동일 processed1개의 EOF/후행 공백3건이 검출됐다. 검토된 원문 hash와 원본 복사 일치를 확인했고 해당 세 파일만 검사 예외로 두어 원문을 고치지 않았다. 실제 Java 영수증2개의 CRLF도 정확히 보존한다. 일반 코드/문서 검사는 그대로 유지하며 최초 실패 log hash는 공개 영수증에 남겼다.
+
+## NEWv2 재검토와 확정 자료
+
+Validation 새 버전은 공개3원문을 그대로 두고 합성3개를 교체했다. 같은 독립 검토자가 전체6문서/14청크를 수정0·반려0으로 수용했고 source freeze15 SHA141778a0을 만들었다. 새 실제 Java/Python2검사는 통과했고 검토자는 원래 영수증을 검증했으며 다시 실행하지 않았다. 원래17파일·반려·fingerprint7ac383c0 archive는 그대로다. Active fingerprint만 사전등록한 경로에서 efd95d65로 갱신하고 전후 lineage를 보존했다.
+
+따라서 현재 확정 대상은 calibration6/15청크와 validation6/14청크, 총12문서/29청크다. 보존한 반려 자료를 새 평가 문서 수에 더하지 않는다. 양쪽 source freeze14/15의 정확한 바이트를 커밋하고 CI를 확인한 뒤 각각 새 질문6/8개를 작성한다. 공개 calibration 안내문은 고정 revision 당시 문서이며2018회의 당시 정책으로 소급하지 않는다.
+
+[새 버전 검토 영수증](../experiments/results/meetings-c5-source-review-v2.json)에 실제 검사·해시·제한을 기록했다. 의미 신선도 수용은 현재 검토 범위의 AI 판정이며 모든 과거 근접중복 부재, 모델 정답률 또는 사용자 검수를 뜻하지 않는다. 최종 답변 판정자는 별도 실제 Astra xhigh 두 역할로 선등록했고 자동 metadata 노출을 공개했다.

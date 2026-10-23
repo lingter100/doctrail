@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "diagnostic": "summary-mode-development-v1",
+  "status": "source_criteria_and_execution_bindings_locked; independent_binding_review_passed; once_not_dispatched",
+  "plan": {
+    "path": "docs/MEETINGS-SUMMARY-QUALITY-NEXT.md",
+    "bytes": 18650,
+    "sha256": "fb32d66f4c2264edec160b908b83fa1050731c455099636b985793db40d0b329",
+    "commit": "8098c1981ea8aadd03c24d9267a1e9615a4893e5"
+  },
+  "roles": [
+    {
+      "role": "implementation_and_synthetic_tests",
+      "agent": "/root/summary_mode_probe_worker",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "scope": [
+        "NEW scripts/probe_meeting_summary_mode.py",
+        "NEW tests/test_probe_meeting_summary_mode.py",
+        "NEW ignored implementation evidence"
+      ],
+      "raw_source_or_criteria_access_authorized": false,
+      "actual_runtime_authorized": false
+    },
+    {
+      "role": "public_source_author",
+      "agent": "/root/summary_mode_source_author",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "xhigh",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "scope": [
+        "NEW ignored public source originals, provenance, full parsed input, replay helper and safe metadata"
+      ],
+      "criteria_or_model_output_access_authorized": false,
+      "actual_runtime_authorized": false
+    },
+    {
+      "role": "independent_source_review_then_source_only_criteria_and_final_judgment",
+      "agent": "/root/summary_mode_source_review",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "xhigh",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "status": "source_only_criteria_locked; final_judgment_not_dispatched",
+      "source_review_dispatched": true,
+      "criteria_dispatched": true,
+      "actual_runtime_authorized": false,
+      "registration": {
+        "path": ".local/meeting-summary-mode-independent-v1/role-registration-v1.json",
+        "bytes": 3560,
+        "sha256": "203a47cc943e1cd218a71baef609de40a9a417a441b8baa5eee67fa20484eb27"
+      },
+      "source_review_safe_report": {
+        "path": ".local/meeting-summary-mode-independent-v1/safe-source-review-v1.json",
+        "bytes": 11044,
+        "sha256": "dc8259d1e0211f48ac67d38cc68f7b4cefcc85f4609b048e8cba63e9e5534809"
+      },
+      "source_review_lock": {
+        "path": ".local/meeting-summary-mode-independent-v1/source-review-lock-v1.json",
+        "bytes": 41780,
+        "sha256": "a735992f19fe6b1dd47a3c613a578c77a4306ab69b85ff76f1940f650c3b310a"
+      },
+      "coverage_review_safe_report": {
+        "path": ".local/meeting-summary-mode-independent-v1/coverage-review-v1/safe-coverage-review-v1.json",
+        "bytes": 14754,
+        "sha256": "6734c9c8c7017cd393997f40893decc3e2010abfcd58641134810e0b45742c74"
+      },
+      "coverage_review_lock": {
+        "path": ".local/meeting-summary-mode-independent-v1/coverage-review-v1/coverage-review-lock-v1.json",
+        "bytes": 60102,
+        "sha256": "37f1478e8729cb640a2b5a81d657da944a88b02d427cc3c5f52def686c01276a"
+      },
+      "prospective_source_disposition": {
+        "path": ".local/meeting-summary-mode-independent-v1/prospective-admission-v1/safe-prospective-source-disposition-v1.json",
+        "bytes": 18895,
+        "sha256": "95f68f3db0690fc0448696a58ea78d3453f061f2c178501fe8d05b4192782023"
+      }
+    },
+    {
+      "role": "provenance_boundary_binding_implementation",
+      "agent": "/root/summary_mode_boundary_worker",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "scope": [
+        "scripts/probe_meeting_summary_mode.py",
+        "tests/test_probe_meeting_summary_mode.py",
+        "NEW ignored .local/meeting-summary-mode-boundary-implementation-v1 evidence"
+      ],
+      "raw_source_or_criteria_access_authorized": false,
+      "actual_runtime_authorized": false
+    },
+    {
+      "role": "prospective_execution_custodian",
+      "agent": "/root/java_browser_ci_recovery",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "existing_tool_accepted_role_reused": true,
+      "status": "final_binding_preparation_complete; actual_execution_not_dispatched",
+      "registration": {
+        "path": ".local/meeting-summary-mode-execution-v1/executor-registration-v1.json",
+        "bytes": 8562,
+        "sha256": "37026e072a98306079b1f2092724135d2715cf360dc4b4aba3f2cb4180c4d606"
+      },
+      "source_criteria_semantic_access_authorized": false,
+      "actual_runtime_authorized": false,
+      "excluded_from_independent_quality_judging": true,
+      "replaces_absent_sol_preparation_role": true,
+      "prior_preparation_and_capacity_errors_preserved": true
+    }
+  ],
+  "parent_scope": "generic plan and code, public/safe aggregates, mechanical metadata/hash checks, docs and Git; no raw source semantic judgments",
+  "profile_limitation": "Accepted spawn requests, not an independent inspection of provider internals or a change to the parent chat settings.",
+  "exposure": "Inherited historical AGENTS aggregates are disclosed. Designer and implementer are excluded from new source-specific criteria and final judgment.",
+  "human_review_count": 0,
+  "paid_service_calls": 0,
+  "public_service_deployments": 0,
+  "actual_diagnostic_runs": 0,
+  "prospective_launcher_amendment": {
+    "path": "docs/MEETINGS-SUMMARY-MODE-LAUNCHER-REPAIR.md",
+    "bytes": 11215,
+    "sha256": "7bbd6e2c35c4cea5970a2150bdbbdb74296085eb11a40ca4426aba93fb340a5b"
+  },
+  "implementation_review": {
+    "path": ".local/meeting-summary-mode-implementation-v1/repair-v2/independent-review-v1.json",
+    "bytes": 13606,
+    "sha256": "c5a94d04c5193b3e80a4e415a83aab001f21337f5638e0c2fca09719f19f1991"
+  },
+  "implementation_source_commit": "ac86dd43e4e80a10892fec29c72ec26066ac604b",
+  "prospective_provenance_boundary": {
+    "path": "docs/MEETINGS-SUMMARY-MODE-PROVENANCE-BOUNDARY.md",
+    "bytes": 7014,
+    "sha256": "ab191c4aa424d2ca16a874683feb3c88eb6064a89bcb47e9bae0e2fdfa9a11ac",
+    "parent_design_accepted": true,
+    "implementation_dispatched": true,
+    "source_admission": true,
+    "design_commit": "b53cc654803cfbb539b9d7043df7b5e0fd0c21f6",
+    "implementation_review": {
+      "path": ".local/meeting-summary-mode-boundary-implementation-v1/independent-review-v1.json",
+      "bytes": 14645,
+      "sha256": "9d596d958210493f4db2b60799a152fe2fe542548c5793fc482523b572ce080f"
+    },
+    "implementation_status": "176_synthetic_and_static_review_passed; unchanged_diagnostic_code_verified_on_d75_both_CI_passed; original207_failure_preserved",
+    "source_disposition": {
+      "path": "experiments/results/meetings-summary-mode-prospective-admission-v1.json",
+      "bytes": 1341,
+      "sha256": "a081cf11b2211c0005e17bcf889d02fd883a28d0df67f07c129cda7a9b52b292"
+    }
+  },
+  "criteria_lock": {
+    "path": "experiments/results/meetings-summary-mode-criteria-lock-v1.json",
+    "bytes": 1939,
+    "sha256": "6bdbf43db588c452d59914264e587a9a855e1825063ecb039392815efa339acf"
+  },
+  "current_source_ci": {
+    "path": "experiments/results/java-browser-ci-recovery-ci-v1.json",
+    "bytes": 3428,
+    "sha256": "44c252cc8a273727e5f99cbf3841d80006f67bfa6b3c6bb7597c0336eee050f6"
+  },
+  "execution_preparation": {
+    "path": "experiments/results/meetings-summary-mode-preparation-v1.json",
+    "bytes": 3673,
+    "sha256": "3040f539f248621fd8bbd7b3720a06bc38aca8b2183e78a4fce2f8c5fb0a9316"
+  }
+}

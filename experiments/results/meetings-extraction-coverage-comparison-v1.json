@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "experiment": "meetings-extraction-coverage-comparison-v1",
+  "recorded_at": "2026-10-22T06:29:10.280340+00:00",
+  "status": "mechanical_comparison_completed_semantic_review_pending",
+  "evidence_kind": "offline_postprocessing_of_saved_actual_model_labels_on_synthetic_development_documents",
+  "source_commit": "22e945ccfe390a335036e46a703c14041c4038dc",
+  "source_ci": "experiments/results/meetings-extraction-coverage-ci-v1.json",
+  "comparison": {
+    "assembly_calls": 4,
+    "successes": 4,
+    "units": 159,
+    "saved_batches": 22,
+    "summary_changed_count": 4,
+    "title_changed_count": 2,
+    "all_non_summary_title_fields_exact": true
+  },
+  "method": "Use all original unit IDs, full quotes, offsets, ordered saved labels and original Java first-ready results. Assemble once per each of four meetings without calling the classifier again. Compare summary/title and preserve all other output fields; match compact Java UUID wrappers without rewriting original IDs.",
+  "preservation": {
+    "original_bindings_verified": 2007,
+    "original_bindings_unchanged": true,
+    "source10_unchanged": true,
+    "frozen77_unchanged": true,
+    "original_run_status_unchanged": {
+      "exit_code": 1,
+      "eligible": false
+    }
+  },
+  "parent_verification": {
+    "original_bindings": 2007,
+    "new_artifacts": 29,
+    "all_current_bytes_and_sha256_exact": true,
+    "before_after_bindings_exact": true,
+    "head_unchanged": true,
+    "private_semantic_contents_read": false
+  },
+  "first_preparation_failure": {
+    "code": "java_uuid",
+    "assembly_calls_at_failure": 0,
+    "cause": "custodian assumed dashed UUID; Java Auth.uid emits compact32hex",
+    "correction": "original raw IDs retained and exactcompactUUID equality checked"
+  },
+  "terminal_binding_observation": {
+    "first_receipt_preserved": true,
+    "assembly_stdout_at_in_process_receipt_bytes": 0,
+    "terminal_assembly_stdout_bytes": 73,
+    "reason": "First receipt preceded stdout final flush; separate terminal observation and v2 receipt preserve both states. No assembly was repeated."
+  },
+  "bindings": [
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/safe-receipt-v2.json",
+      "bytes": 8927,
+      "sha256": "88d570c1ad178a50cdabb53255d360a264df524e3c2ba4678f5636f4fb3eeb37"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/safe-receipt.json",
+      "bytes": 6084,
+      "sha256": "e133ad0ca35e8e2c9efa634c9591c49242ea649b8ff3db6f10bc191efff37d77"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/parent-metadata-verification.json",
+      "bytes": 344,
+      "sha256": "cd35ea7f389808a3830d3495ce5d6564ff6c599457d00e08493c510cd29917ff"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/custody.json",
+      "bytes": 397832,
+      "sha256": "5b1208872ee2299abd0060b1471c5139f6ec30c2020568ee52112e45bdd8f714"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/input-snapshot-before.json",
+      "bytes": 397183,
+      "sha256": "c46f6a87cd7084b9a272ee23a41225dee255def5ba69624d8e1be9055a1e51ff"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/prepared-mapping.json",
+      "bytes": 241428,
+      "sha256": "5dacc789b41f7431a48b839e931e5fb39107d63f78ced199ad772ad02f285dfc"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/candidate-packet.json",
+      "bytes": 79753,
+      "sha256": "ac7e90046a3dbe3538ac1805c87d0bb92055740c03caabfb790a4221d3633920"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/comparison-packet.json",
+      "bytes": 116862,
+      "sha256": "d42dfc1f705d9f47940fc7ad892cf391b92e8e84fd5f5327bca112a10cfb44ff"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/compare_saved_labels.py",
+      "bytes": 18439,
+      "sha256": "8c806e4904f996cbf8c94a4f48ffba7493cb4677af72e6865c5bc351537d0335"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/preparation-failure.json",
+      "bytes": 55,
+      "sha256": "3873b4f487313c8fabfb68c80220f73b0ebfa7d5d3993a33182c0c2fde9f8ed0"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/preparation-correction.json",
+      "bytes": 1151,
+      "sha256": "7e0be8738459f875f3fc61cb0c67c8093aa0b8c3049e0a264b6d3fb91ac87a12"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-comparison-v1/terminal-binding-observation.json",
+      "bytes": 983,
+      "sha256": "cc6874aa5d8141cabe65ec9371be98f81b3c6d1954b29b6f40c4617354976658"
+    }
+  ],
+  "reproduction": {
+    "warning": "Static CLI entrypoints verified from helper code, not a fresh reproduction. Output namespace is consumed and helper paths are fixed. Reproduction requires retained local private packets, installed project imports, and a separately reviewed fresh output allocation; a clean public checkout alone cannot reproduce this local diagnostic.",
+    "product_function": "src/doctrail/meeting_extraction_coverage.py:assemble_coverage",
+    "helper_entrypoints_static_verified": [
+      ".venv/Scripts/python.exe -X utf8 .local/meeting-extraction-coverage-comparison-v1/compare_saved_labels.py prepare",
+      ".venv/Scripts/python.exe -X utf8 .local/meeting-extraction-coverage-comparison-v1/compare_saved_labels.py assemble-once"
+    ]
+  },
+  "limitations": [
+    "Changes in summary/title are mechanical differences, not yet a semantic quality improvement.",
+    "Same saved classifier labels; no claim of classifier accuracy improvement.",
+    "No repartition, tokenizer, model, native, Java, browser, network or closed evaluation rerun.",
+    "Original development execution remains exit_code=1 and eligible=false.",
+    "Posthoc development comparison on synthetic documents; no fresh heldout evaluation, human review or deployment."
+  ],
+  "next": "Independent semantic reviewer uses unchanged locked source judgments and existing model comparison; write new judgments only."
+}

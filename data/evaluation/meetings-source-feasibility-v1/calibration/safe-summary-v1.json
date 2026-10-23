@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "kind": "bounded_public_source_feasibility_safe_outcome",
+  "recorded_at_utc": "2026-10-20T06:26:39.2172677Z",
+  "actor": "/root/source_feasibility_calibration",
+  "split": "calibration",
+  "status": "no_complete_witness_within_budget",
+  "safe_codes": [
+    "metadata_navigation_budget_exhausted_before_complete_family_paths",
+    "no_source_semantics_observed",
+    "no_admission_run",
+    "no_complete_family_reserved"
+  ],
+  "fixed_head": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+  "requested_actor_settings": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "fork_turns": "none",
+    "runtime_model_introspection": false
+  },
+  "exposure": {
+    "provided_project_instructions": true,
+    "provided_environment_memory_summary": true,
+    "parent_aggregate_metadata": true,
+    "design_registration_exclusions_protocol_and_parent_proof": true,
+    "new_repository_metadata": true,
+    "historical_source_bodies": 0,
+    "new_source_bodies": 0,
+    "license_bodies": 0,
+    "questions_oracles_model_outputs": 0,
+    "validation_semantic_reads": 0,
+    "prior_C7_role_participation": false,
+    "fully_blind_claim": false,
+    "final_answer_judge_eligible": false
+  },
+  "safe_inputs_verified": [
+    {
+      "path": ".local/meetings-source-feasibility-parent-v1/pre-dispatch-code-proof-v1.json",
+      "sha256": "6c3875726ecd1b35d6cc5cc4ff3fae91c9fdf41f642b69a48997dae8e86372c8",
+      "matches_expected": true
+    },
+    {
+      "path": "docs/MEETINGS-SOURCE-FEASIBILITY-PLAN.md",
+      "sha256": "70ecc0bef45ef2e4503d212f1b6d1a8ef0cd98bdfca20e02cdaa88137ad54fc8",
+      "matches_expected": true
+    },
+    {
+      "path": "data/evaluation/meetings-source-feasibility-registration-v1.json",
+      "sha256": "c996d40bf1981b9bdea55da0c81a4ce139f0a8b7a34ad5a1db7051dc63a3d8e3",
+      "matches_expected": true
+    },
+    {
+      "path": "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+      "sha256": "26506cbd3c1f49a4b1e6dcb8ce94acd50b410ff34f313d13551342331c3d52b3",
+      "matches_expected": true
+    },
+    {
+      "path": "data/evaluation/meetings-c7-protocol-v1.json",
+      "sha256": "3a04120b195c583b79e67c38e3d7592f327a549b7c302a88b12d9dd5ab89fee1",
+      "matches_expected": true
+    }
+  ],
+  "ci": {
+    "receipt_path": "experiments/results/meetings-source-feasibility-design-ci-v1.json",
+    "receipt_sha256": "a30c8fab1c39b8d733618982a0cad8bcc14ca50edb863744a6ad444e97d80460",
+    "head": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+    "push_run": 39379534450,
+    "pull_request_run": 39379540590,
+    "all_three_jobs_both_events": "success",
+    "observation_source": "parent CI receipt and explicit dispatch; actor did not query CI again"
+  },
+  "prior_exclusions": {
+    "repositories": 19,
+    "historical_fingerprint_gaps_preserved": true,
+    "whole_repo_match": false,
+    "full_duplicate_absence_proven": false
+  },
+  "budget": {
+    "search_or_tree": {
+      "limit": 4,
+      "used": 4,
+      "repository_search": 1,
+      "directory_tree": 3,
+      "remaining": 0
+    },
+    "reviewed_metadata_per_request": [
+      20,
+      8,
+      5,
+      3
+    ],
+    "reviewed_search_or_tree_metadata_total": 36,
+    "repositories": {
+      "limit": 3,
+      "selected_for_identity": 1
+    },
+    "families": {
+      "limit": 2,
+      "reserved": 0,
+      "complete_read": 0,
+      "plausible": 0
+    },
+    "document_slots": {
+      "limit": 6,
+      "reserved": 0,
+      "body_attempts": 0,
+      "body_successes": 0
+    },
+    "license_attempts": 0,
+    "licenses_per_repo_limit": 2,
+    "failed_network_attempts": 0,
+    "unexpected_body_snippets": 0
+  },
+  "repositories": [
+    {
+      "repo": "openwebdocs/project",
+      "commit": "7319b01c19bab0083d6c6b15f59a94e6fa750289",
+      "root_tree_sha": "23f804c0db223a95caa023cab057d96d38d49c8a",
+      "identity_requests": 1,
+      "parent_reserved": true,
+      "parent_reservation_recorded_at_utc": "2026-10-20T06:25:18.115209",
+      "license_status": "unexamined",
+      "family_count": 0
+    }
+  ],
+  "selection": {
+    "repository": "Observed metadata order; first non-excluded project-governance repository after meeting-tool repositories and excluded repository.",
+    "tree": "First20 entries in each observed Git tree order, without size sorting. Final response exposed only further directories; no guessed paths or extra listing used.",
+    "short_document_selection_bias": "Goal favors small sources by design; this run read no source size-selected family.",
+    "search_result_projection": "Repository identity/branch/size/license-label metadata only; no descriptions, readmes, snippets or source bodies."
+  },
+  "judgment": {
+    "type": "metadata_only_bounded_discovery",
+    "source_only_semantic_judgment": "not_executed",
+    "reading_observation": "No source body was opened, so no semantic or format observation exists.",
+    "license_confirmed": false,
+    "completed_two_meetings_and_general_confirmed": false,
+    "full_family_limits_passed": false,
+    "source_adopted": false,
+    "corpus_frozen": false,
+    "item_suitability_confirmed": false,
+    "model_quality_measured": false,
+    "universal_public_source_impossibility_proven": false
+  },
+  "prohibited_execution_counts": {
+    "new_helper": 0,
+    "processor": 0,
+    "chunker": 0,
+    "parser": 0,
+    "render": 0,
+    "admit_sources": 0,
+    "family_admission": 0,
+    "formal_role_contract": 0,
+    "official_diagnostic": 0,
+    "java_maven": 0,
+    "tokenizer": 0,
+    "native_model": 0,
+    "tests": 0,
+    "synthetic_replacement": 0,
+    "git_mutations": 0,
+    "paid_resources": 0,
+    "docker_wsl": 0
+  },
+  "stop_reason": "The fixed four search/tree requests were consumed while navigating primary repository metadata; no complete family paths were observable within that request budget. Stop without further query, guessed-path lookup, license/body fetch, or quota transfer.",
+  "next_action": "Return safe metadata/hash evidence to parent. This search path is closed under its fixed budget; no source preparation or other phase is authorized by this result.",
+  "artifact_policy": "Raw metadata and append-preserved ledger remain in own local calibration directory. Public artifact contains safe outcome and identity/hash metadata only. No source files were downloaded."
+}

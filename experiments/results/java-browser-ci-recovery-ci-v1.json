@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "kind": "exact-source-ci-after-java-runner-repair",
+  "observed_at": "2026-10-23T07:58:13.894895+00:00",
+  "source_commit": "d75ee5ded2237961e1d6af26ef12ae4779c88ffc",
+  "runs": [
+    {
+      "run_id": "39920322500",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39920322500",
+      "event": "push",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "failure_artifact_upload_exercised": false
+    },
+    {
+      "run_id": "39920328822",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39920328822",
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "failure_artifact_upload_exercised": false
+    }
+  ],
+  "source_files": [
+    {
+      "path": "web/scripts/test-java.mjs",
+      "bytes": 9692,
+      "sha256": "1ded2f4d2b91d471ddbdc01951afae3da3c6630e492e6548f34ffd6c88003fd4"
+    },
+    {
+      "path": "web/scripts/java-runner-lifecycle.mjs",
+      "bytes": 5330,
+      "sha256": "13cdfde137c23705b05b20d81735f45b5035f5ced4a5940c02a68e2bc7efcd64"
+    },
+    {
+      "path": "web/scripts/java-runner-lifecycle.test.mjs",
+      "bytes": 10422,
+      "sha256": "8f2a7658185407c39a439bdddb07fc74783509fd3035bfd427ca8cdd20ec84de"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 7772,
+      "sha256": "4fa2cc67c9c73fd886350aadcd5caad1792b4821526613edfe1a1ddad01d79ae"
+    }
+  ],
+  "diagnostic_source_files": [
+    {
+      "path": "scripts/probe_meeting_summary_mode.py",
+      "bytes": 56152,
+      "mtime_ns": 1792737752045564300,
+      "ctime_ns": 1792730283160160500,
+      "reparse": false,
+      "sha256": "480ca031a8de1e61c462726b987508bf5b05a784fde76c376ceafc3015b78f30"
+    },
+    {
+      "path": "tests/test_probe_meeting_summary_mode.py",
+      "bytes": 69874,
+      "mtime_ns": 1792737817720480600,
+      "ctime_ns": 1792730388642148200,
+      "reparse": false,
+      "sha256": "ab3b6fa11331c776fb1790e395715e7734f6c1094d9ba7945ce365d4ba5e1b9e"
+    }
+  ],
+  "verification": {
+    "committed_files_git_and_working": 12,
+    "diagnostic_code_files_git_and_working": 141,
+    "frozen_files_unchanged": 77,
+    "author_and_committer": "lingter100"
+  },
+  "evidence": {
+    "path": ".local/meeting-summary-mode-parent-v1/ci-recovery-final-v1/receipt-v1.json",
+    "bytes": 42157,
+    "sha256": "2db64b7e3cf157446f8a2e5bbd9bba783518bfbaae5bfcab770689d728da45d2"
+  },
+  "original_ci_failure_preserved": true,
+  "original_ci_root_cause": "unknown",
+  "actual_new_model_runs": 0,
+  "limits": [
+    "CI verifies automated software checks; it does not establish model quality or human acceptance.",
+    "Failure-only artifact upload was skipped on success and is not yet exercised."
+  ]
+}

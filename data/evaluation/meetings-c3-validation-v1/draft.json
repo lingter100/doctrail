@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "cases": [
+    {
+      "id": "C3-VAL-01",
+      "response_language": "ko",
+      "payload": {
+        "schema_version": 1,
+        "query": "MkDocs 문서를 GitHub Project Pages에 게시하기 전에 확인하려고 해요. 같은 디렉터리에 index.md와 README.md가 함께 있을 때의 처리, nav에 빠진 페이지의 생성·접근 방식, 배포 명령과 기본 배포 브랜치, push 전 검토 방법, 미추적 파일·미커밋 작업의 포함 여부를 설명해주세요.",
+        "contexts": [
+          {
+            "document_id": "c3-f03-doc-01",
+            "revision": 1,
+            "title": "Writing your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-01-r1-c0003",
+            "text": "any repository hosting sites provide special treatment for README files by\ndisplaying the contents of the README file when browsing the contents of a\ndirectory. Therefore, MkDocs will allow you to name your index pages as\n`README.md` instead of `index.md`. In that way, when users are browsing your\nsource code, the repository host can display the index page of that directory as\nit is a README file. However, when MkDocs renders your site, the file will be\nrenamed to `index.html` so that the server will serve it as a proper index file.\n\nIf both an `index.md` file and a `README.md` file are found in the same\ndirectory, then the `index.md` file is used and the `README.md` file is\nignored.\n\n### Configure Pages and Navigation\n\nThe [nav](configuration.md#nav) configuration setting in your `mkdocs.yml` file\ndefines which pages are included in the global site navigation menu as well as\nthe structure of that menu. If not provided, the navigation will be\nautomatically created by discovering all ",
+            "page": null,
+            "start_offset": 2512,
+            "end_offset": 3510
+          },
+          {
+            "document_id": "c3-f03-doc-01",
+            "revision": 1,
+            "title": "Writing your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-01-r1-c0006",
+            "text": "- License: license.md\n    - Release Notes: release-notes.md\n```\n\nWith the above configuration we have three top level items: \"Home\", \"User Guide\"\nand \"About.\" \"Home\" is a link to the homepage for the site. Under the \"User\nGuide\" section two pages are listed: \"Writing your docs\" and \"Styling your\ndocs.\" Under the \"About\" section two more pages are listed: \"License\" and\n\"Release Notes.\"\n\nNote that a section cannot have a page assigned to it. Sections are only\ncontainers for child pages and sub-sections. You may nest sections as deeply as\nyou like. However, be careful that you don't make it too difficult for your\nusers to navigate through the site navigation by over-complicating the nesting.\nWhile sections may mirror your directory structure, they do not have to.\n\nAny pages not listed in your navigation configuration will still be rendered and\nincluded with the built site, however, they will not be linked from the global\nnavigation and will not be included in the `previous` and `next` ",
+            "page": null,
+            "start_offset": 5050,
+            "end_offset": 6047
+          },
+          {
+            "document_id": "c3-f03-doc-01",
+            "revision": 1,
+            "title": "Writing your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-01-r1-c0007",
+            "text": "d and\nincluded with the built site, however, they will not be linked from the global\nnavigation and will not be included in the `previous` and `next` links. Such\npages will be \"hidden\" unless linked to directly.\n\n## Writing with Markdown\n\nMkDocs pages must be authored in [Markdown][md], a lightweight markup language\nwhich results in easy-to-read, easy-to-write plain text documents that can be\nconverted to valid HTML documents in a predictable manner.\n\nMkDocs uses the [Python-Markdown] library to render Markdown documents to HTML.\nPython-Markdown is almost completely compliant with the [reference\nimplementation][md], although there are a few very minor [differences].\n\nIn addition to the base Markdown [syntax] which is common across all Markdown\nimplementations, MkDocs includes support for extending the Markdown syntax with\nPython-Markdown [extensions]. See the MkDocs' [markdown_extensions]\nconfiguration setting for details on how to enable extensions.\n\nMkDocs includes some extensions ",
+            "page": null,
+            "start_offset": 5897,
+            "end_offset": 6895
+          },
+          {
+            "document_id": "c3-f03-doc-02",
+            "revision": 1,
+            "title": "Deploying your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-02-r1-c0000",
+            "text": "# Deploying your docs\n\nA basic guide to deploying your docs to various hosting providers\n\n---\n\n## GitHub Pages\n\nIf you host the source code for a project on [GitHub], you can easily use\n[GitHub Pages] to host the documentation for your project. There are two basic\n[types of GitHub Pages sites]: Project Pages sites, and User and Organization\nPages sites. They are nearly identical but have some important differences,\nwhich require a different work flow when deploying.\n\n### Project Pages\n\nProject Pages sites are simpler as the site files get deployed to a branch\nwithin the project repository (`gh-pages` by default). After you `checkout` the\nprimary working branch (usually `master`) of the git repository where you\nmaintain the source documentation for your project, run the following command:\n\n```sh\nmkdocs gh-deploy\n```\n\nThat's it! Behind the scenes, MkDocs will build your docs and use the\n[ghp-import] tool to commit them to the `gh-pages` branch and push the\n`gh-pages` branch to GitHub.\n\n",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 999
+          },
+          {
+            "document_id": "c3-f03-doc-02",
+            "revision": 1,
+            "title": "Deploying your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-02-r1-c0001",
+            "text": " scenes, MkDocs will build your docs and use the\n[ghp-import] tool to commit them to the `gh-pages` branch and push the\n`gh-pages` branch to GitHub.\n\nUse `mkdocs gh-deploy --help` to get a full list of options available for the\n`gh-deploy` command.\n\nBe aware that you will not be able to review the built site before it is pushed\nto GitHub. Therefore, you may want to verify any changes you make to the docs\nbeforehand by using the `build` or `serve` commands and reviewing the built\nfiles locally.\n\nWARNING:\nYou should never edit files in your pages repository by hand if you're using\nthe `gh-deploy` command because you will lose your work the next time you\nrun the command.\n\nWARNING:\nIf there are untracked files or uncommitted work in the local repository where\n`mkdocs gh-deploy` is run, these will be included in the pages that are deployed.\n\n### Organization and User Pages\n\nUser and Organization Pages sites are not tied to a specific project, and the\nsite files are deployed to the `master` ",
+            "page": null,
+            "start_offset": 849,
+            "end_offset": 1849
+          }
+        ]
+      }
+    },
+    {
+      "id": "C3-VAL-02",
+      "response_language": "en",
+      "payload": {
+        "schema_version": 1,
+        "query": "For an MkDocs site distributed for offline file:// viewing, what should site_url and use_directory_urls be, how should search be handled while keeping other plugins, how must internal links written in raw HTML be prepared, and what must the theme provide?",
+        "contexts": [
+          {
+            "document_id": "c3-f03-doc-01",
+            "revision": 1,
+            "title": "Writing your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-01-r1-c0014",
+            "text": " with a Markdown editor.\n\n[GitHub Pages CNAME file]: https://help.github.com/articles/using-a-custom-domain-with-github-pages/\n\n#### Linking from raw HTML\n\nMarkdown allows document authors to fall back to raw HTML when the Markdown\nsyntax does not meets the author's needs. MkDocs does not limit Markdown in this\nregard. However, as all raw HTML is ignored by the Markdown parser, MkDocs is\nnot able to validate or convert links contained in raw HTML. When including\ninternal links within raw HTML, you will need to manually format the link\nappropriately for the rendered document.\n\n### Meta-Data\n\nMkDocs includes support for both YAML and MultiMarkdown style meta-data (often\ncalled front-matter). Meta-data consists of a series of keywords and values\ndefined at the beginning of a Markdown document, which are stripped from the\ndocument prior to it being processing by Python-Markdown. The key/value pairs\nare passed by MkDocs to the page template. Therefore, if a theme includes\nsupport, the ",
+            "page": null,
+            "start_offset": 11828,
+            "end_offset": 12823
+          },
+          {
+            "document_id": "c3-f03-doc-02",
+            "revision": 1,
+            "title": "Deploying your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-02-r1-c0008",
+            "text": "g the `file://`\nscheme.\n\nNote that, due to the security settings of all modern browsers, some things\nwill not work the same and some features may not work at all. In fact, a few\nsettings will need to be customized in very specific ways.\n\n-   [site_url]:\n\n    The `site_url` must be set to an empty string, which instructs MkDocs to\n    build your site so that it will work with the `file://` scheme.\n\n    ```yaml\n    site_url: \"\"\n    ```\n\n-   [use_directory_urls]:\n\n    Set `use_directory_urls` to `false`. Otherwise, internal links between\n    pages will not work properly.\n\n    ```yaml\n    use_directory_urls: false\n    ```\n\n-   [search]:\n\n    You will need to either disable the search plugin, or use a third-party\n    search plugin which is specifically designed to work with the `file://`\n    scheme. To disable all plugins, set the `plugins` setting to an empty list.\n\n    ```yaml\n    plugins: []\n    ```\n\n    If you have other plugins enabled, simply ensure that `search` is not\n    included ",
+            "page": null,
+            "start_offset": 6786,
+            "end_offset": 7785
+          },
+          {
+            "document_id": "c3-f03-doc-02",
+            "revision": 1,
+            "title": "Deploying your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-02-r1-c0009",
+            "text": "etting to an empty list.\n\n    ```yaml\n    plugins: []\n    ```\n\n    If you have other plugins enabled, simply ensure that `search` is not\n    included in the list.\n\nWhen writing your documentation, it is imperative that all internal links use\nrelative URLs as [documented][internal links]. Remember, each reader of your\ndocumentation will be using a different device and the files will likely be in a\ndifferent location on that device.\n\nIf you expect your documentation to be viewed off-line, you may also need to be\ncareful about which themes you choose. Many themes make use of CDNs for various\nsupport files, which require a live Internet connection. You will need to choose\na theme which includes all support files directly in the theme.\n\nWhen you build your site (using the `mkdocs build` command), all of the files\nare written to the directory assigned to the [site_dir] configuration option\n(defaults to `\"site\"`) in your `mkdocs.yaml` config file. Generally, you will\nsimply need to copy the ",
+            "page": null,
+            "start_offset": 7635,
+            "end_offset": 8634
+          }
+        ]
+      }
+    },
+    {
+      "id": "C3-VAL-03",
+      "response_language": "ko",
+      "payload": {
+        "schema_version": 1,
+        "query": "GitHub Pages 사용자 정의 도메인을 MkDocs로 배포할 때 CNAME 파일을 어디에 두고 어떤 형식으로 작성해야 하나요? 또한 최상위 도메인의 DNS A 레코드에 입력할 정확한 IPv4 주소들도 제공된 두 문서를 기준으로 알려주세요.",
+        "contexts": [
+          {
+            "document_id": "c3-f03-doc-02",
+            "revision": 1,
+            "title": "Deploying your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-02-r1-c0003",
+            "text": "to inform the\ndeploy script to commit to the `master` branch. You may override the default\nwith the [remote_branch] configuration setting, but if you forget to change\ndirectories before running the deploy script, it will commit to the `master`\nbranch of your project, which you probably don't want.\n\n### Custom Domains\n\nGitHub Pages includes support for using a [Custom Domain] for your site. In\naddition to the steps documented by GitHub, you need to take one additional step\nso that MkDocs will work with your custom domain. You need to add a `CNAME` file\nto the root of your [docs_dir]. The file must contain a single bare domain or\nsubdomain on a single line (see MkDocs' own [CNAME file] as an example). You may\ncreate the file manually, or use GitHub's web interface to set up the custom\ndomain (under Settings / Custom Domain). If you use the web interface, GitHub\nwill create the `CNAME` file for you and save it to the root of your \"pages\"\nbranch. So that the file does not get removed the ",
+            "page": null,
+            "start_offset": 2549,
+            "end_offset": 3548
+          },
+          {
+            "document_id": "c3-f03-doc-02",
+            "revision": 1,
+            "title": "Deploying your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-02-r1-c0004",
+            "text": " web interface, GitHub\nwill create the `CNAME` file for you and save it to the root of your \"pages\"\nbranch. So that the file does not get removed the next time you deploy, you need\nto copy the file to your `docs_dir`. With the file properly included in your\n`docs_dir`, MkDocs will include the file in your built site and push it to your\n\"pages\" branch each time you run the `gh-deploy` command.\n\nIf you are having problems getting a custom domain to work, see GitHub's\ndocumentation on [Troubleshooting custom domains].\n\n[GitHub]: https://github.com/\n[GitHub Pages]: https://pages.github.com/\n[types of GitHub Pages sites]: https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#types-of-github-pages-sites\n[ghp-import]: https://github.com/davisp/ghp-import\n[remote_branch]: ./configuration.md#remote_branch\n[Custom Domain]: https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-github-pages-site\n[docs_dir]: ./configuration.md#docs_dir\n[CNAME ",
+            "page": null,
+            "start_offset": 3398,
+            "end_offset": 4397
+          }
+        ]
+      }
+    },
+    {
+      "id": "C3-VAL-04",
+      "response_language": "en",
+      "payload": {
+        "schema_version": 1,
+        "query": "When publishing Project Pages with mkdocs gh-deploy, which branch is used by default and what happens to untracked files or uncommitted work? What maximum delay, in minutes, do these documents specify before the deployed site becomes publicly reachable?",
+        "contexts": [
+          {
+            "document_id": "c3-f03-doc-02",
+            "revision": 1,
+            "title": "Deploying your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-02-r1-c0000",
+            "text": "# Deploying your docs\n\nA basic guide to deploying your docs to various hosting providers\n\n---\n\n## GitHub Pages\n\nIf you host the source code for a project on [GitHub], you can easily use\n[GitHub Pages] to host the documentation for your project. There are two basic\n[types of GitHub Pages sites]: Project Pages sites, and User and Organization\nPages sites. They are nearly identical but have some important differences,\nwhich require a different work flow when deploying.\n\n### Project Pages\n\nProject Pages sites are simpler as the site files get deployed to a branch\nwithin the project repository (`gh-pages` by default). After you `checkout` the\nprimary working branch (usually `master`) of the git repository where you\nmaintain the source documentation for your project, run the following command:\n\n```sh\nmkdocs gh-deploy\n```\n\nThat's it! Behind the scenes, MkDocs will build your docs and use the\n[ghp-import] tool to commit them to the `gh-pages` branch and push the\n`gh-pages` branch to GitHub.\n\n",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 999
+          },
+          {
+            "document_id": "c3-f03-doc-02",
+            "revision": 1,
+            "title": "Deploying your docs",
+            "meeting_date": null,
+            "chunk_id": "c3-f03-doc-02-r1-c0001",
+            "text": " scenes, MkDocs will build your docs and use the\n[ghp-import] tool to commit them to the `gh-pages` branch and push the\n`gh-pages` branch to GitHub.\n\nUse `mkdocs gh-deploy --help` to get a full list of options available for the\n`gh-deploy` command.\n\nBe aware that you will not be able to review the built site before it is pushed\nto GitHub. Therefore, you may want to verify any changes you make to the docs\nbeforehand by using the `build` or `serve` commands and reviewing the built\nfiles locally.\n\nWARNING:\nYou should never edit files in your pages repository by hand if you're using\nthe `gh-deploy` command because you will lose your work the next time you\nrun the command.\n\nWARNING:\nIf there are untracked files or uncommitted work in the local repository where\n`mkdocs gh-deploy` is run, these will be included in the pages that are deployed.\n\n### Organization and User Pages\n\nUser and Organization Pages sites are not tied to a specific project, and the\nsite files are deployed to the `master` ",
+            "page": null,
+            "start_offset": 849,
+            "end_offset": 1849
+          }
+        ]
+      }
+    },
+    {
+      "id": "C3-VAL-05",
+      "response_language": "ko",
+      "payload": {
+        "schema_version": 1,
+        "query": "RG-06의 2032년 5월 17일 시험상영에서 화면·시간 항목에 적용한 기준, 오전 보류 사유와 파일 형식 항목의 상태, 손라휘가 올린 수정본의 변경 내용·시각, 재검사에서 합격을 기록한 사람·시각, 마지막 등록 판본·담당자·시각을 설명해줘.",
+        "contexts": [
+          {
+            "document_id": "c3-f04-doc-01",
+            "revision": 1,
+            "title": "작은개울 영화제 자막 대조 준비회의",
+            "meeting_date": "2032-05-16",
+            "chunk_id": "c3-f04-doc-01-r1-c0000",
+            "text": "# 작은개울 영화제 자막 대조 준비회의\n\n이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.\n\n문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n\n## 사용할 자료와 대조 범위\n\n5월 21일 작은개울 영화제의 RG-06 회차에서는 한국어 대사 영상에 영문 자막을 함께 띄우기로 했다. 이번 점검은 이 회차의 외부 자막 파일만 대상으로 한다. 청각 접근성을 위한 한국어 설명 자막은 별도 작업이며, 영문 자막 점검 결과를 그 파일의 검수 결과로 쓰지 않는다.\n\n대조 영상은 `summerpost_picture_p3.mp4`, 초당 25프레임 판본으로 고정했다. 손라휘가 가져온 초안은 `summerpost_en_s2.srt`다. 파일 이름의 판본과 실제 점검대장에 적은 판본이 다르면 재생 비교를 시작하지 않고 어떤 영상을 기준으로 작성했는지 먼저 확인한다. 영상 편집본이 달라지면 기존 자막의 합격 표시를 이어 쓰지 않는다.\n\n## 이번 회차의 점검 기준\n\n| 구분 | 확인할 내용 | 완료 기록 담당 |\n| --- | --- | --- |\n| 파일 형식 | UTF-8로 저장한 SRT이며 순번 누락과 겹치는 표시 시간이 없어야 한다. | 손라휘 |\n| 화면 표시 | 상영기 B의 지정 글꼴에서 한 자막은 두 줄 이내, 각 줄은 공백을 포함해 42자 이내여야 한다. | 나은재 |\n| 시간 대조 | 첫 대사, 버스 정류장 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n\n권마루는 사용한 영상·자막 파일명, 세 지점의 측정값과 발견 사항을 시험상영 점검표에 모은다. 한 지점이라도 기준을 벗어나면 원인을 기록하고 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c3-f04-doc-01",
+            "revision": 1,
+            "title": "작은개울 영화제 자막 대조 준비회의",
+            "meeting_date": "2032-05-16",
+            "chunk_id": "c3-f04-doc-01-r1-c0001",
+            "text": " 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n\n권마루는 사용한 영상·자막 파일명, 세 지점의 측정값과 발견 사항을 시험상영 점검표에 모은다. 한 지점이라도 기준을 벗어나면 원인을 기록하고 수정본을 같은 세 지점에서 다시 확인한다. 세 지점만 확인했다는 사실을 작품 전체의 모든 대사 시점이 검증됐다는 뜻으로 넓히지 않는다.\n\n## 회의에서 정한 후속 작업\n\n손라휘는 자막 표시 시간과 줄 나눔을 고칠 수 있지만 영상의 재생 속도나 편집 길이는 바꾸지 않는다. 맞춤법을 손볼 때도 인물 이름의 영문 표기는 프로그램팀이 전달한 표기표를 따른다. 측정에 쓰는 소리 지점은 나은재가 점검대장에 표시하고 같은 위치를 재검사한다.\n\n자동 검사 도구를 추가하자는 의견은 나왔지만 이번 작업에는 도입하지 않았다. 설치·사용법 확인에 필요한 시간을 따로 잡은 뒤 다음 행사에서 검토하기로 했다. 이번에는 기존 상영기 B에서 사람이 파일 형식, 화면 표시와 세 지점의 시간을 대조한다. 5월 17일 시험상영을 하되, 그 결과가 나오기 전에는 행사 당일 상영이 완료됐다고 기록하지 않는다.\n",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1438
+          },
+          {
+            "document_id": "c3-f04-doc-02",
+            "revision": 1,
+            "title": "작은개울 영화제 RG-06 시험상영 점검표",
+            "meeting_date": "2032-05-17",
+            "chunk_id": "c3-f04-doc-02-r1-c0000",
+            "text": "# 작은개울 영화제 RG-06 시험상영 점검표\n\n이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.\n\n문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n\n## 오전 점검과 보류\n\n오전 9시 40분 손라휘와 나은재는 영상 파일 `summerpost_picture_p3.mp4`와 자막 초안 `summerpost_en_s2.srt`의 판본을 대장과 대조했다. 초당 25프레임 영상임을 확인한 뒤 재생했다. 자막은 UTF-8 SRT였고 순번 누락이나 표시 시간 겹침은 발견되지 않았다.\n\n나은재는 오전 10시 5분 세 지점의 시간 차이를 기록했다. 자막이 기준 소리보다 늦게 나왔고, 버스 정류장 장면의 한 자막에서는 첫 줄이 공백 포함 44자로 나타났다. 권마루는 화면 표시와 시간 대조를 보류로 적었다. 파일 형식 항목의 확인 결과까지 취소하지는 않았다.\n\n시간을 맞추려고 영상 재생 속도를 바꾸자는 현장 의견은 채택하지 않았다. 나은재가 영상 판본을 유지해야 한다고 설명했고, 손라휘가 자막의 표시 시간만 수정하기로 했다. 상영기나 영상 파일을 바꾸는 시험으로 대체하지 않았다.\n\n## 수정본 재검사\n\n오후 1시 20분 손라휘는 모든 자막의 표시 시간을 0.40초 앞당기고, 문제된 자막의 두 줄을 각각 36자와 18자로 다시 나눈 `summerpost_en_s3.srt`를 올렸다. 인물 이름 표기와 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n\n나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c3-f04-doc-02",
+            "revision": 1,
+            "title": "작은개울 영화제 RG-06 시험상영 점검표",
+            "meeting_date": "2032-05-17",
+            "chunk_id": "c3-f04-doc-02-r1-c0001",
+            "text": " 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n\n나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 표시됨을 뜻한다. 단위는 초이며, 초안과 수정본 모두 같은 세 지점을 썼다.\n\n| 대조 지점 | 오전 초안 s2 | 오후 수정본 s3 |\n| --- | ---: | ---: |\n| 첫 대사 | +0.40 | 0.00 |\n| 버스 정류장 장면 전환 | +0.40 | 0.00 |\n| 마지막 편지 화면 | +0.30 | -0.10 |\n\n오후 2시 25분 나은재는 수정본의 세 지점 측정과 화면 표시가 회의에서 정한 기준을 충족한다고 기록했다. 권마루는 오후 2시 40분 RG-06의 시험상영용 자막을 s3로 등록하고, s2에는 비교용 이전 판본 표시를 붙였다. 시험상영 확인 대상은 영문 자막이며 한국어 설명 자막의 진행 상태는 이 점검표에 합치지 않았다.\n\n## 기록의 마감 범위\n\n이 문서는 5월 17일 오후 2시 40분까지의 시험과 등록 상태를 정리한 것이다. 행사일 상영 결과와 관객 의견은 행사 후 별도 운영 기록에 모으기로 했다. 현재 시험 결과로 그 후의 상영이나 관객 반응을 대신 기록하지 않는다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1507
+          }
+        ]
+      }
+    },
+    {
+      "id": "C3-VAL-06",
+      "response_language": "en",
+      "payload": {
+        "schema_version": 1,
+        "query": "For the RG-06 check on 17 May 2032, what was the subtitle scope, which picture file and frame rate were fixed, what limits applied to changes to the picture, what did the revised subtitle change and leave unchanged, and what do its three recheck timing results mean?",
+        "contexts": [
+          {
+            "document_id": "c3-f04-doc-01",
+            "revision": 1,
+            "title": "작은개울 영화제 자막 대조 준비회의",
+            "meeting_date": "2032-05-16",
+            "chunk_id": "c3-f04-doc-01-r1-c0000",
+            "text": "# 작은개울 영화제 자막 대조 준비회의\n\n이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.\n\n문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n\n## 사용할 자료와 대조 범위\n\n5월 21일 작은개울 영화제의 RG-06 회차에서는 한국어 대사 영상에 영문 자막을 함께 띄우기로 했다. 이번 점검은 이 회차의 외부 자막 파일만 대상으로 한다. 청각 접근성을 위한 한국어 설명 자막은 별도 작업이며, 영문 자막 점검 결과를 그 파일의 검수 결과로 쓰지 않는다.\n\n대조 영상은 `summerpost_picture_p3.mp4`, 초당 25프레임 판본으로 고정했다. 손라휘가 가져온 초안은 `summerpost_en_s2.srt`다. 파일 이름의 판본과 실제 점검대장에 적은 판본이 다르면 재생 비교를 시작하지 않고 어떤 영상을 기준으로 작성했는지 먼저 확인한다. 영상 편집본이 달라지면 기존 자막의 합격 표시를 이어 쓰지 않는다.\n\n## 이번 회차의 점검 기준\n\n| 구분 | 확인할 내용 | 완료 기록 담당 |\n| --- | --- | --- |\n| 파일 형식 | UTF-8로 저장한 SRT이며 순번 누락과 겹치는 표시 시간이 없어야 한다. | 손라휘 |\n| 화면 표시 | 상영기 B의 지정 글꼴에서 한 자막은 두 줄 이내, 각 줄은 공백을 포함해 42자 이내여야 한다. | 나은재 |\n| 시간 대조 | 첫 대사, 버스 정류장 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n\n권마루는 사용한 영상·자막 파일명, 세 지점의 측정값과 발견 사항을 시험상영 점검표에 모은다. 한 지점이라도 기준을 벗어나면 원인을 기록하고 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c3-f04-doc-01",
+            "revision": 1,
+            "title": "작은개울 영화제 자막 대조 준비회의",
+            "meeting_date": "2032-05-16",
+            "chunk_id": "c3-f04-doc-01-r1-c0001",
+            "text": " 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n\n권마루는 사용한 영상·자막 파일명, 세 지점의 측정값과 발견 사항을 시험상영 점검표에 모은다. 한 지점이라도 기준을 벗어나면 원인을 기록하고 수정본을 같은 세 지점에서 다시 확인한다. 세 지점만 확인했다는 사실을 작품 전체의 모든 대사 시점이 검증됐다는 뜻으로 넓히지 않는다.\n\n## 회의에서 정한 후속 작업\n\n손라휘는 자막 표시 시간과 줄 나눔을 고칠 수 있지만 영상의 재생 속도나 편집 길이는 바꾸지 않는다. 맞춤법을 손볼 때도 인물 이름의 영문 표기는 프로그램팀이 전달한 표기표를 따른다. 측정에 쓰는 소리 지점은 나은재가 점검대장에 표시하고 같은 위치를 재검사한다.\n\n자동 검사 도구를 추가하자는 의견은 나왔지만 이번 작업에는 도입하지 않았다. 설치·사용법 확인에 필요한 시간을 따로 잡은 뒤 다음 행사에서 검토하기로 했다. 이번에는 기존 상영기 B에서 사람이 파일 형식, 화면 표시와 세 지점의 시간을 대조한다. 5월 17일 시험상영을 하되, 그 결과가 나오기 전에는 행사 당일 상영이 완료됐다고 기록하지 않는다.\n",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1438
+          },
+          {
+            "document_id": "c3-f04-doc-02",
+            "revision": 1,
+            "title": "작은개울 영화제 RG-06 시험상영 점검표",
+            "meeting_date": "2032-05-17",
+            "chunk_id": "c3-f04-doc-02-r1-c0000",
+            "text": "# 작은개울 영화제 RG-06 시험상영 점검표\n\n이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.\n\n문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n\n## 오전 점검과 보류\n\n오전 9시 40분 손라휘와 나은재는 영상 파일 `summerpost_picture_p3.mp4`와 자막 초안 `summerpost_en_s2.srt`의 판본을 대장과 대조했다. 초당 25프레임 영상임을 확인한 뒤 재생했다. 자막은 UTF-8 SRT였고 순번 누락이나 표시 시간 겹침은 발견되지 않았다.\n\n나은재는 오전 10시 5분 세 지점의 시간 차이를 기록했다. 자막이 기준 소리보다 늦게 나왔고, 버스 정류장 장면의 한 자막에서는 첫 줄이 공백 포함 44자로 나타났다. 권마루는 화면 표시와 시간 대조를 보류로 적었다. 파일 형식 항목의 확인 결과까지 취소하지는 않았다.\n\n시간을 맞추려고 영상 재생 속도를 바꾸자는 현장 의견은 채택하지 않았다. 나은재가 영상 판본을 유지해야 한다고 설명했고, 손라휘가 자막의 표시 시간만 수정하기로 했다. 상영기나 영상 파일을 바꾸는 시험으로 대체하지 않았다.\n\n## 수정본 재검사\n\n오후 1시 20분 손라휘는 모든 자막의 표시 시간을 0.40초 앞당기고, 문제된 자막의 두 줄을 각각 36자와 18자로 다시 나눈 `summerpost_en_s3.srt`를 올렸다. 인물 이름 표기와 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n\n나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c3-f04-doc-02",
+            "revision": 1,
+            "title": "작은개울 영화제 RG-06 시험상영 점검표",
+            "meeting_date": "2032-05-17",
+            "chunk_id": "c3-f04-doc-02-r1-c0001",
+            "text": " 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n\n나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 표시됨을 뜻한다. 단위는 초이며, 초안과 수정본 모두 같은 세 지점을 썼다.\n\n| 대조 지점 | 오전 초안 s2 | 오후 수정본 s3 |\n| --- | ---: | ---: |\n| 첫 대사 | +0.40 | 0.00 |\n| 버스 정류장 장면 전환 | +0.40 | 0.00 |\n| 마지막 편지 화면 | +0.30 | -0.10 |\n\n오후 2시 25분 나은재는 수정본의 세 지점 측정과 화면 표시가 회의에서 정한 기준을 충족한다고 기록했다. 권마루는 오후 2시 40분 RG-06의 시험상영용 자막을 s3로 등록하고, s2에는 비교용 이전 판본 표시를 붙였다. 시험상영 확인 대상은 영문 자막이며 한국어 설명 자막의 진행 상태는 이 점검표에 합치지 않았다.\n\n## 기록의 마감 범위\n\n이 문서는 5월 17일 오후 2시 40분까지의 시험과 등록 상태를 정리한 것이다. 행사일 상영 결과와 관객 의견은 행사 후 별도 운영 기록에 모으기로 했다. 현재 시험 결과로 그 후의 상영이나 관객 반응을 대신 기록하지 않는다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1507
+          }
+        ]
+      }
+    },
+    {
+      "id": "C3-VAL-07",
+      "response_language": "ko",
+      "payload": {
+        "schema_version": 1,
+        "query": "제공된 자료에서 RG-06 시험상영용으로 마지막 등록된 자막 판본, 등록 담당자와 등록 시각, 그리고 2032년 5월 21일 행사 당일의 실제 상영 시작 시각을 함께 확인해줘.",
+        "contexts": [
+          {
+            "document_id": "c3-f04-doc-01",
+            "revision": 1,
+            "title": "작은개울 영화제 자막 대조 준비회의",
+            "meeting_date": "2032-05-16",
+            "chunk_id": "c3-f04-doc-01-r1-c0000",
+            "text": "# 작은개울 영화제 자막 대조 준비회의\n\n이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.\n\n문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n\n## 사용할 자료와 대조 범위\n\n5월 21일 작은개울 영화제의 RG-06 회차에서는 한국어 대사 영상에 영문 자막을 함께 띄우기로 했다. 이번 점검은 이 회차의 외부 자막 파일만 대상으로 한다. 청각 접근성을 위한 한국어 설명 자막은 별도 작업이며, 영문 자막 점검 결과를 그 파일의 검수 결과로 쓰지 않는다.\n\n대조 영상은 `summerpost_picture_p3.mp4`, 초당 25프레임 판본으로 고정했다. 손라휘가 가져온 초안은 `summerpost_en_s2.srt`다. 파일 이름의 판본과 실제 점검대장에 적은 판본이 다르면 재생 비교를 시작하지 않고 어떤 영상을 기준으로 작성했는지 먼저 확인한다. 영상 편집본이 달라지면 기존 자막의 합격 표시를 이어 쓰지 않는다.\n\n## 이번 회차의 점검 기준\n\n| 구분 | 확인할 내용 | 완료 기록 담당 |\n| --- | --- | --- |\n| 파일 형식 | UTF-8로 저장한 SRT이며 순번 누락과 겹치는 표시 시간이 없어야 한다. | 손라휘 |\n| 화면 표시 | 상영기 B의 지정 글꼴에서 한 자막은 두 줄 이내, 각 줄은 공백을 포함해 42자 이내여야 한다. | 나은재 |\n| 시간 대조 | 첫 대사, 버스 정류장 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n\n권마루는 사용한 영상·자막 파일명, 세 지점의 측정값과 발견 사항을 시험상영 점검표에 모은다. 한 지점이라도 기준을 벗어나면 원인을 기록하고 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c3-f04-doc-01",
+            "revision": 1,
+            "title": "작은개울 영화제 자막 대조 준비회의",
+            "meeting_date": "2032-05-16",
+            "chunk_id": "c3-f04-doc-01-r1-c0001",
+            "text": " 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n\n권마루는 사용한 영상·자막 파일명, 세 지점의 측정값과 발견 사항을 시험상영 점검표에 모은다. 한 지점이라도 기준을 벗어나면 원인을 기록하고 수정본을 같은 세 지점에서 다시 확인한다. 세 지점만 확인했다는 사실을 작품 전체의 모든 대사 시점이 검증됐다는 뜻으로 넓히지 않는다.\n\n## 회의에서 정한 후속 작업\n\n손라휘는 자막 표시 시간과 줄 나눔을 고칠 수 있지만 영상의 재생 속도나 편집 길이는 바꾸지 않는다. 맞춤법을 손볼 때도 인물 이름의 영문 표기는 프로그램팀이 전달한 표기표를 따른다. 측정에 쓰는 소리 지점은 나은재가 점검대장에 표시하고 같은 위치를 재검사한다.\n\n자동 검사 도구를 추가하자는 의견은 나왔지만 이번 작업에는 도입하지 않았다. 설치·사용법 확인에 필요한 시간을 따로 잡은 뒤 다음 행사에서 검토하기로 했다. 이번에는 기존 상영기 B에서 사람이 파일 형식, 화면 표시와 세 지점의 시간을 대조한다. 5월 17일 시험상영을 하되, 그 결과가 나오기 전에는 행사 당일 상영이 완료됐다고 기록하지 않는다.\n",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1438
+          },
+          {
+            "document_id": "c3-f04-doc-02",
+            "revision": 1,
+            "title": "작은개울 영화제 RG-06 시험상영 점검표",
+            "meeting_date": "2032-05-17",
+            "chunk_id": "c3-f04-doc-02-r1-c0000",
+            "text": "# 작은개울 영화제 RG-06 시험상영 점검표\n\n이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.\n\n문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n\n## 오전 점검과 보류\n\n오전 9시 40분 손라휘와 나은재는 영상 파일 `summerpost_picture_p3.mp4`와 자막 초안 `summerpost_en_s2.srt`의 판본을 대장과 대조했다. 초당 25프레임 영상임을 확인한 뒤 재생했다. 자막은 UTF-8 SRT였고 순번 누락이나 표시 시간 겹침은 발견되지 않았다.\n\n나은재는 오전 10시 5분 세 지점의 시간 차이를 기록했다. 자막이 기준 소리보다 늦게 나왔고, 버스 정류장 장면의 한 자막에서는 첫 줄이 공백 포함 44자로 나타났다. 권마루는 화면 표시와 시간 대조를 보류로 적었다. 파일 형식 항목의 확인 결과까지 취소하지는 않았다.\n\n시간을 맞추려고 영상 재생 속도를 바꾸자는 현장 의견은 채택하지 않았다. 나은재가 영상 판본을 유지해야 한다고 설명했고, 손라휘가 자막의 표시 시간만 수정하기로 했다. 상영기나 영상 파일을 바꾸는 시험으로 대체하지 않았다.\n\n## 수정본 재검사\n\n오후 1시 20분 손라휘는 모든 자막의 표시 시간을 0.40초 앞당기고, 문제된 자막의 두 줄을 각각 36자와 18자로 다시 나눈 `summerpost_en_s3.srt`를 올렸다. 인물 이름 표기와 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n\n나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c3-f04-doc-02",
+            "revision": 1,
+            "title": "작은개울 영화제 RG-06 시험상영 점검표",
+            "meeting_date": "2032-05-17",
+            "chunk_id": "c3-f04-doc-02-r1-c0001",
+            "text": " 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n\n나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 표시됨을 뜻한다. 단위는 초이며, 초안과 수정본 모두 같은 세 지점을 썼다.\n\n| 대조 지점 | 오전 초안 s2 | 오후 수정본 s3 |\n| --- | ---: | ---: |\n| 첫 대사 | +0.40 | 0.00 |\n| 버스 정류장 장면 전환 | +0.40 | 0.00 |\n| 마지막 편지 화면 | +0.30 | -0.10 |\n\n오후 2시 25분 나은재는 수정본의 세 지점 측정과 화면 표시가 회의에서 정한 기준을 충족한다고 기록했다. 권마루는 오후 2시 40분 RG-06의 시험상영용 자막을 s3로 등록하고, s2에는 비교용 이전 판본 표시를 붙였다. 시험상영 확인 대상은 영문 자막이며 한국어 설명 자막의 진행 상태는 이 점검표에 합치지 않았다.\n\n## 기록의 마감 범위\n\n이 문서는 5월 17일 오후 2시 40분까지의 시험과 등록 상태를 정리한 것이다. 행사일 상영 결과와 관객 의견은 행사 후 별도 운영 기록에 모으기로 했다. 현재 시험 결과로 그 후의 상영이나 관객 반응을 대신 기록하지 않는다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1507
+          }
+        ]
+      }
+    },
+    {
+      "id": "C3-VAL-08",
+      "response_language": "en",
+      "payload": {
+        "schema_version": 1,
+        "query": "For the RG-06 subtitle check, who was assigned to record the file-format check and what encoding, format and sequence/timing conditions were required? What are the final filename and approval date of the separate Korean descriptive subtitle file?",
+        "contexts": [
+          {
+            "document_id": "c3-f04-doc-01",
+            "revision": 1,
+            "title": "작은개울 영화제 자막 대조 준비회의",
+            "meeting_date": "2032-05-16",
+            "chunk_id": "c3-f04-doc-01-r1-c0000",
+            "text": "# 작은개울 영화제 자막 대조 준비회의\n\n이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.\n\n문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n\n## 사용할 자료와 대조 범위\n\n5월 21일 작은개울 영화제의 RG-06 회차에서는 한국어 대사 영상에 영문 자막을 함께 띄우기로 했다. 이번 점검은 이 회차의 외부 자막 파일만 대상으로 한다. 청각 접근성을 위한 한국어 설명 자막은 별도 작업이며, 영문 자막 점검 결과를 그 파일의 검수 결과로 쓰지 않는다.\n\n대조 영상은 `summerpost_picture_p3.mp4`, 초당 25프레임 판본으로 고정했다. 손라휘가 가져온 초안은 `summerpost_en_s2.srt`다. 파일 이름의 판본과 실제 점검대장에 적은 판본이 다르면 재생 비교를 시작하지 않고 어떤 영상을 기준으로 작성했는지 먼저 확인한다. 영상 편집본이 달라지면 기존 자막의 합격 표시를 이어 쓰지 않는다.\n\n## 이번 회차의 점검 기준\n\n| 구분 | 확인할 내용 | 완료 기록 담당 |\n| --- | --- | --- |\n| 파일 형식 | UTF-8로 저장한 SRT이며 순번 누락과 겹치는 표시 시간이 없어야 한다. | 손라휘 |\n| 화면 표시 | 상영기 B의 지정 글꼴에서 한 자막은 두 줄 이내, 각 줄은 공백을 포함해 42자 이내여야 한다. | 나은재 |\n| 시간 대조 | 첫 대사, 버스 정류장 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n\n권마루는 사용한 영상·자막 파일명, 세 지점의 측정값과 발견 사항을 시험상영 점검표에 모은다. 한 지점이라도 기준을 벗어나면 원인을 기록하고 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c3-f04-doc-01",
+            "revision": 1,
+            "title": "작은개울 영화제 자막 대조 준비회의",
+            "meeting_date": "2032-05-16",
+            "chunk_id": "c3-f04-doc-01-r1-c0001",
+            "text": " 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n\n권마루는 사용한 영상·자막 파일명, 세 지점의 측정값과 발견 사항을 시험상영 점검표에 모은다. 한 지점이라도 기준을 벗어나면 원인을 기록하고 수정본을 같은 세 지점에서 다시 확인한다. 세 지점만 확인했다는 사실을 작품 전체의 모든 대사 시점이 검증됐다는 뜻으로 넓히지 않는다.\n\n## 회의에서 정한 후속 작업\n\n손라휘는 자막 표시 시간과 줄 나눔을 고칠 수 있지만 영상의 재생 속도나 편집 길이는 바꾸지 않는다. 맞춤법을 손볼 때도 인물 이름의 영문 표기는 프로그램팀이 전달한 표기표를 따른다. 측정에 쓰는 소리 지점은 나은재가 점검대장에 표시하고 같은 위치를 재검사한다.\n\n자동 검사 도구를 추가하자는 의견은 나왔지만 이번 작업에는 도입하지 않았다. 설치·사용법 확인에 필요한 시간을 따로 잡은 뒤 다음 행사에서 검토하기로 했다. 이번에는 기존 상영기 B에서 사람이 파일 형식, 화면 표시와 세 지점의 시간을 대조한다. 5월 17일 시험상영을 하되, 그 결과가 나오기 전에는 행사 당일 상영이 완료됐다고 기록하지 않는다.\n",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1438
+          },
+          {
+            "document_id": "c3-f04-doc-02",
+            "revision": 1,
+            "title": "작은개울 영화제 RG-06 시험상영 점검표",
+            "meeting_date": "2032-05-17",
+            "chunk_id": "c3-f04-doc-02-r1-c0000",
+            "text": "# 작은개울 영화제 RG-06 시험상영 점검표\n\n이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.\n\n문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n\n## 오전 점검과 보류\n\n오전 9시 40분 손라휘와 나은재는 영상 파일 `summerpost_picture_p3.mp4`와 자막 초안 `summerpost_en_s2.srt`의 판본을 대장과 대조했다. 초당 25프레임 영상임을 확인한 뒤 재생했다. 자막은 UTF-8 SRT였고 순번 누락이나 표시 시간 겹침은 발견되지 않았다.\n\n나은재는 오전 10시 5분 세 지점의 시간 차이를 기록했다. 자막이 기준 소리보다 늦게 나왔고, 버스 정류장 장면의 한 자막에서는 첫 줄이 공백 포함 44자로 나타났다. 권마루는 화면 표시와 시간 대조를 보류로 적었다. 파일 형식 항목의 확인 결과까지 취소하지는 않았다.\n\n시간을 맞추려고 영상 재생 속도를 바꾸자는 현장 의견은 채택하지 않았다. 나은재가 영상 판본을 유지해야 한다고 설명했고, 손라휘가 자막의 표시 시간만 수정하기로 했다. 상영기나 영상 파일을 바꾸는 시험으로 대체하지 않았다.\n\n## 수정본 재검사\n\n오후 1시 20분 손라휘는 모든 자막의 표시 시간을 0.40초 앞당기고, 문제된 자막의 두 줄을 각각 36자와 18자로 다시 나눈 `summerpost_en_s3.srt`를 올렸다. 인물 이름 표기와 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n\n나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c3-f04-doc-02",
+            "revision": 1,
+            "title": "작은개울 영화제 RG-06 시험상영 점검표",
+            "meeting_date": "2032-05-17",
+            "chunk_id": "c3-f04-doc-02-r1-c0001",
+            "text": " 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n\n나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 표시됨을 뜻한다. 단위는 초이며, 초안과 수정본 모두 같은 세 지점을 썼다.\n\n| 대조 지점 | 오전 초안 s2 | 오후 수정본 s3 |\n| --- | ---: | ---: |\n| 첫 대사 | +0.40 | 0.00 |\n| 버스 정류장 장면 전환 | +0.40 | 0.00 |\n| 마지막 편지 화면 | +0.30 | -0.10 |\n\n오후 2시 25분 나은재는 수정본의 세 지점 측정과 화면 표시가 회의에서 정한 기준을 충족한다고 기록했다. 권마루는 오후 2시 40분 RG-06의 시험상영용 자막을 s3로 등록하고, s2에는 비교용 이전 판본 표시를 붙였다. 시험상영 확인 대상은 영문 자막이며 한국어 설명 자막의 진행 상태는 이 점검표에 합치지 않았다.\n\n## 기록의 마감 범위\n\n이 문서는 5월 17일 오후 2시 40분까지의 시험과 등록 상태를 정리한 것이다. 행사일 상영 결과와 관객 의견은 행사 후 별도 운영 기록에 모으기로 했다. 현재 시험 결과로 그 후의 상영이나 관객 반응을 대신 기록하지 않는다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1507
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_implementation_summary",
+  "recorded_at": "2026-10-20T06:52:45.714005+00:00",
+  "source_commit_at_tests": "190f58207e866514a9f2be01cdf4d3b43bd940a7",
+  "scope": "new implementation in working tree; exact source commit CI pending",
+  "format": "normalized JSON summary; original receipts retained locally, not byte copies",
+  "worker_receipt_sha256": "4d2866a1ca4a9f4f81f270cd0cbb990b546c1f43313442195bc4b7b1f49fd564",
+  "java_projection_sha256": "bdd52877e9cbea94deb94415ae72f01ad9da7abf22086ac9d0b9c7e295b784b3",
+  "worker": {
+    "schema_version": 1,
+    "scope": "synthetic service adapter contracts only",
+    "files": [
+      {
+        "path": "src/doctrail/meeting_service_rag.py",
+        "sha256": "f9b5ce5851fa53d1ea7cd8d8535c902cde0af9931a5d13b89a2cfa9a2e6fe7d7",
+        "bytes": 10094
+      },
+      {
+        "path": "scripts/serve_meeting_service_rag.py",
+        "sha256": "679b8aad480cfd1a361ab8ea99e27591434538d282730e0a617078500df6044c",
+        "bytes": 3460
+      },
+      {
+        "path": "tests/test_meeting_service_rag.py",
+        "sha256": "f320ea3b72cc4e68dc32d8e54149a39dd983d0f4fc8580272dae481c79837150",
+        "bytes": 13560
+      },
+      {
+        "path": "tests/test_meeting_service_rag_launcher.py",
+        "sha256": "f1777b801688666cce0a760d05c39ef7a8c2961037ac48e147ad8e81fad7dd1e",
+        "bytes": 3355
+      }
+    ],
+    "final_pytest": "23 passed, 1 existing TestClient deprecation warning in 1.06s",
+    "final_ruff": "passed",
+    "original_logs": [
+      "tests-initial.log",
+      "ruff-initial.log",
+      "tests-revision1.log",
+      "ruff-revision1.log",
+      "tests-revision2.log",
+      "ruff-revision2.log",
+      "tests-revision3.log",
+      "ruff-revision3.log"
+    ],
+    "preserved_failures": [
+      "ruff-initial: TRY004 and SIM102 twice",
+      "ruff-revision2: SIM117"
+    ],
+    "corrections": [
+      "parent review: outer admission lock held through watchdog cancel and join",
+      "existing extraction deadline120 imported; initial90 assumption corrected",
+      "startup loader remaining deadline and owned cleanup watchdog added",
+      "startup metric excludes HTTP readiness",
+      "repeated close preserves cleanup failure"
+    ],
+    "actual_tokenizer_calls": 0,
+    "actual_native_calls": 0,
+    "downloads": 0,
+    "network_calls": 0,
+    "limitations": [
+      "native compatibility and hard preemption unverified",
+      "HTTP readiness and full worker exit not exercised",
+      "policy is answer thinking928 vs existing extraction label4 with separate120 seconds",
+      "no semantic evaluation or source reading"
+    ]
+  },
+  "java": {
+    "schema_version": 1,
+    "kind": "service-rag-java-public-safe-projection",
+    "created": "2026-10-20T06:51:29.364388Z",
+    "status": "implementation_and_synthetic_service_checks_complete",
+    "head_before": "190f58207e866514a9f2be01cdf4d3b43bd940a7",
+    "head_after": "190f58207e866514a9f2be01cdf4d3b43bd940a7",
+    "source_bindings": [
+      {
+        "path": "server/src/main/java/io/doctrail/KnowledgeService.java",
+        "before": "8c1484e5c5acb24624b6217b0d28f73461bf198eefa3a61cfdc2284815ee9832",
+        "after": "48dd13ff6f8d93e28a3cacef5641841a675246309ddc3ecbe901cac1b6540ff8",
+        "tested_equals_final": true
+      },
+      {
+        "path": "server/src/main/java/io/doctrail/GenerationClient.java",
+        "before": "dd9e1296cef5709f7f1f4cb83787a8ca0767f988ee6451a7bccedb242c944770",
+        "after": "5fce2ec0a8e6512cbe3dd4cad8c50c17ff0b7edb347bf7b094d388aa880070a0",
+        "tested_equals_final": true
+      },
+      {
+        "path": "server/src/main/java/io/doctrail/AnswerDeadline.java",
+        "before": null,
+        "after": "90a48217ec93caef5f6d267b70cbd8853b1d9058f706e637639471fcdc5e5289",
+        "tested_equals_final": true
+      },
+      {
+        "path": "server/src/test/java/io/doctrail/GenerationClientTest.java",
+        "before": "9741279ac0f1a8fe7639c060700c2e188411a2efa1b5a37c88e69be8578b666c",
+        "after": "f6126833a1133bf7978a0c3b9163a05885d546de97a1fad36a7968f0d4189808",
+        "tested_equals_final": true
+      },
+      {
+        "path": "server/src/test/java/io/doctrail/KnowledgeDeadlineTest.java",
+        "before": null,
+        "after": "6f52c2de05dda95e942af7e84712e41b78ae3fdaed0c7502786ad6e15e084cc6",
+        "tested_equals_final": true
+      },
+      {
+        "path": "server/src/main/resources/application.properties",
+        "before": "c86243b13ec720adb35993b34120716de0c6a976817fc64356cba0fa0056a838",
+        "after": "81163cde7cfaef6476d0e4c1cd0ace89302ae6aad6a5e4bc4b0f59600bbdfa53",
+        "tested_equals_final": true
+      }
+    ],
+    "unmodified_bindings": [
+      {
+        "path": "server/src/main/java/io/doctrail/InferenceClient.java",
+        "sha256": "a7d3dc950b2d39c1893c739687a81b47916f800f3c6152adba049a40db5abed0",
+        "unchanged": true
+      },
+      {
+        "path": "server/src/main/java/io/doctrail/LearnedSearch.java",
+        "sha256": "b20c5cdc2ca4645e30043d27d76e9e86c61d73709e3c5ac06eee9675b2221bf0",
+        "unchanged": true
+      },
+      {
+        "path": "data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+        "sha256": "6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca",
+        "unchanged": true
+      }
+    ],
+    "configuration": {
+      "property": "doctrail.rag-answer-enabled",
+      "environment": "DOCTRAIL_RAG_ANSWER_ENABLED",
+      "default": "false",
+      "browser_verification": "true"
+    },
+    "contract": {
+      "worker_header": "X-DocTrail-Request-Budget-Ms",
+      "answer_budget_ms": 90000,
+      "retrieval_deadline": "minimum of shared absolute deadline and existing InferenceClient deadline",
+      "checks": "initial snapshot; retrieval; pre-send authorization snapshot; context assembly; postworker; citation validation; final authorization snapshot and read transaction completion",
+      "search": "existing unbounded-by-answer path unchanged",
+      "analysis": "existing GenerationClient call without budget header",
+      "user_cannot_extend": "Incoming header ignored; unknown request_budget_ms JSON rejected",
+      "safe_errors": {
+        "generation_cleanup_failed": 503,
+        "generation_busy": "existing model_busy mapping",
+        "inference_timeout": "existing earlier retrieval timeout",
+        "context_budget_exceeded": 422,
+        "generation_timeout": 504
+      },
+      "header_range": "integer1..90000; floor remaining time and cap existing generation timeout",
+      "start": "KnowledgeService.execute entry before filtering and initial auth/corpus snapshot"
+    },
+    "verification": {
+      "focused": {
+        "errors": 0,
+        "skipped": 0,
+        "generation_client": 20,
+        "passed": 41,
+        "failed": 0,
+        "knowledge_deadline": 21,
+        "maven_seconds": 16.224
+      },
+      "existing_compatibility": {
+        "selected_meeting_service": 6,
+        "maven_seconds": 5.423,
+        "meeting_review": 1,
+        "passed": 11,
+        "generation_language": 4,
+        "errors": 0,
+        "failed": 0,
+        "skipped": 0
+      },
+      "actual_browser": {
+        "synthetic_transport_calls": {
+          "analyze": 2,
+          "answer": 1
+        },
+        "scope": "registration/evidence/user edits/tasks/links/answer/citation/desktop/mobile",
+        "passed": 1,
+        "grep": "meeting registration, evidence",
+        "opt_in_environment": true,
+        "failed": 0,
+        "packaged_ui_verified": true,
+        "test_seconds": 6.8,
+        "suite_seconds": 8.0,
+        "runtime": "actual Spring Java21 and packaged React; existing deterministic transport, not new Python adapter",
+        "spec": "meeting-ready.spec.ts"
+      }
+    },
+    "initial_failures": [],
+    "warnings": [
+      "Existing Commons Logging discovery warning during tests",
+      "Existing unchecked/deprecated test compile warnings",
+      "NO_COLOR/FORCE_COLOR browser warning"
+    ],
+    "screenshots": [
+      {
+        "path": ".local/service-rag-java-v1/web-e2e-KZmApe/results/meeting-ready-synthetic-tr-f937b-swer-and-responsive-layouts/knowledge-answer-evidence-desktop.png",
+        "sha256": "c1955df3907855b1fd3f12af2b594283a2df05dd089f57147d08f74e02969aba"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-e2e-KZmApe/results/meeting-ready-synthetic-tr-f937b-swer-and-responsive-layouts/knowledge-answer-mobile.png",
+        "sha256": "019b51b1cae9a8f62879245d1ba8b209e58982ce2c3bf1e5c8fb4e7cd5099264"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-e2e-KZmApe/results/meeting-ready-synthetic-tr-f937b-swer-and-responsive-layouts/meeting-detail-desktop.png",
+        "sha256": "7c7e662c92fcb551b0831e1b814354a638f31d0ec7a70d26e73f615a36085e84"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-e2e-KZmApe/results/meeting-ready-synthetic-tr-f937b-swer-and-responsive-layouts/meeting-detail-mobile.png",
+        "sha256": "1114101eb465c0693a5aed6b6e6162bd4ac2bd883d854e7bdd39aa217a7cab92"
+      }
+    ],
+    "evidence_bindings": [
+      {
+        "path": ".local/service-rag-java-v1/baseline.json",
+        "sha256": "25582a2b43956bf7a939986691db6d20189d1b2c2d1f4ce1a72147a49454d14d"
+      },
+      {
+        "path": ".local/service-rag-java-v1/compatibility-tests.json",
+        "sha256": "12fe33d4a3294b1e99d9544fcbe14e0029f3d59a49e66dab7a7baf4cdbddd3f8"
+      },
+      {
+        "path": ".local/service-rag-java-v1/compatibility-tests.log",
+        "sha256": "f127faa8f8b3b44d0bbca06b0a433ae0a888e111262821459c14c84378d65c43"
+      },
+      {
+        "path": ".local/service-rag-java-v1/final-source-and-process-check.json",
+        "sha256": "fd606ab4172a8f51d2ddc6e67afd4c159732414aa3df0e0b6d727fa8aaec303d"
+      },
+      {
+        "path": ".local/service-rag-java-v1/focused-tests-v1.json",
+        "sha256": "825d94f6a6bbbeb703ec79d46d4c0028d616582a25903ca9f462808c8937c87b"
+      },
+      {
+        "path": ".local/service-rag-java-v1/focused-tests-v1.log",
+        "sha256": "647e0f2321b5d3e4862257d912459bee1fbf52e2855c366bf668963de18fe4b2"
+      },
+      {
+        "path": ".local/service-rag-java-v1/offline-package.json",
+        "sha256": "acabeaa75b53a8787a625a2f9d10e0efe4042a905d6ccfa8e3662ca93abc37c9"
+      },
+      {
+        "path": ".local/service-rag-java-v1/opt-in-browser.json",
+        "sha256": "d483ca4220d86d5b4619f8b6195029260f103b25daed3cfb804597d369b7fad5"
+      },
+      {
+        "path": ".local/service-rag-java-v1/opt-in-browser.log",
+        "sha256": "78c90ace029b5eb634b1c9b35eb4b2abcc7aead18edcfc0b0269423210de1d93"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-build.json",
+        "sha256": "bf47d5f8f287d6527142cfe5429155951cfdb1ae41fa6e8eb5276212c0829a63"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-build.log",
+        "sha256": "bb5985e57f80df7b494dc88ea3a39ee70fb004565192c418415092740be1933c"
+      },
+      {
+        "path": ".local/service-rag-java-v1/compatibility-surefire/io.doctrail.GenerationLanguageBoundaryTest.txt",
+        "sha256": "9425efb99ddebbffb6bf4771ba0f24753d03a625c3c6fb7d99be5f3b20d8f1a2"
+      },
+      {
+        "path": ".local/service-rag-java-v1/compatibility-surefire/io.doctrail.MeetingReviewBoundaryTest.txt",
+        "sha256": "5749968251978252a51bb3820f1d22fac5075281ffeed37b74c1bb7c48857763"
+      },
+      {
+        "path": ".local/service-rag-java-v1/compatibility-surefire/io.doctrail.MeetingServiceTest.txt",
+        "sha256": "7aa3b66100ea579c76dae862e7d4e27a559f7539a1323eda307b0a78223d723a"
+      },
+      {
+        "path": ".local/service-rag-java-v1/compatibility-surefire/TEST-io.doctrail.GenerationLanguageBoundaryTest.xml",
+        "sha256": "7b749a5dbc2dfa3e3546dce383c0850e87e2f6d50681c09e73b53418921f98dd"
+      },
+      {
+        "path": ".local/service-rag-java-v1/compatibility-surefire/TEST-io.doctrail.MeetingReviewBoundaryTest.xml",
+        "sha256": "d6dfba453abc250551d76410215d4b81748ccc14e3757457e69df447a0dfbed2"
+      },
+      {
+        "path": ".local/service-rag-java-v1/compatibility-surefire/TEST-io.doctrail.MeetingServiceTest.xml",
+        "sha256": "ab59b9d865a5d010ed54d4f5248ed76b57e8855f9ed2b4116050916771ac0705"
+      },
+      {
+        "path": ".local/service-rag-java-v1/focused-surefire/io.doctrail.GenerationClientTest.txt",
+        "sha256": "3df110926959a968f7756d84ff65e7f1e4cb6e49ee338e6c74c5589f816b9c8b"
+      },
+      {
+        "path": ".local/service-rag-java-v1/focused-surefire/io.doctrail.KnowledgeDeadlineTest.txt",
+        "sha256": "df7ea0b68a60adc000247a802dad76cd4091ea015acb362faf4982966923ccdc"
+      },
+      {
+        "path": ".local/service-rag-java-v1/focused-surefire/TEST-io.doctrail.GenerationClientTest.xml",
+        "sha256": "efb023dcf4227e5027e66a3fccd298ac66435aeb1a9a2fa0474d4cb382bcc802"
+      },
+      {
+        "path": ".local/service-rag-java-v1/focused-surefire/TEST-io.doctrail.KnowledgeDeadlineTest.xml",
+        "sha256": "2f71ffb98135f6b0395ab8fcfc878d79710326d59e05dee0c85ee873385f5310"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-e2e-KZmApe/java.log",
+        "sha256": "934bd6a37fdc1030df2b63aac4d37bafb76079bc79ef5ef3ec7ae451685a8d07"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-e2e-KZmApe/report.json",
+        "sha256": "2c5181e2e2c79d5f0aca9a9afb82816b71d0d46599525f61993335d5ade408a3"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-e2e-KZmApe/run.json",
+        "sha256": "e63b9c3c2df3e524b8d3ed4f05879bf210bc46c5dc003d42b3aec796052e9761"
+      },
+      {
+        "path": ".local/service-rag-java-v1/web-e2e-KZmApe/results/.last-run.json",
+        "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      }
+    ],
+    "raw_receipt": ".local/service-rag-java-v1/receipt.json",
+    "raw_receipt_sha256": "916dfbed6e03aa60ae2157e6a30d0ccf1088123a271b143f5298dd6a01b5bc7a",
+    "cleanup": {
+      "owned_launcher": "Existing runner resolves real java.home executable",
+      "unrelated_java_preserved": 3,
+      "owned_java_absent": true
+    },
+    "actual_model_calls": 0,
+    "tokenizer_calls": 0,
+    "downloads": 0,
+    "human_review": 0,
+    "git_actions": 0,
+    "phase1_complete": false,
+    "limitations": [
+      "Deadline stage tests mostly use controllable monotonic clock; real HTTP short remaining-budget timeout is separate; no actual90s production/model load measurement",
+      "Synchronous SQLite/CPU work is checked after completion; hard preemption and native cancellation completion are not claimed",
+      "Budget starts at service method entry; HTTP request decoding before invocation and response serialization after return are not directly preempted",
+      "Actual browser uses old deterministic transport fixture; new Python adapter/native integration not exercised",
+      "Spring opt-in environment and production wiring exercised; HTTP budget header range separately verified by GenerationClient HTTP unit tests",
+      "No UI broad regression, actual corpus, tokenizer, native generation, source/item quality or user review"
+    ]
+  },
+  "worker_logs": [
+    {
+      "path": ".local/service-rag-worker-v1/tests-initial.log",
+      "sha256": "76a384578015d2e4ee9cfd1649ee48a41a76d7b6e07aecf1eabe7b1a8ce2bccd"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/ruff-initial.log",
+      "sha256": "c93b22b09a7d0369656cdbd0f1411c64660de40e81c7673cd6f1aee7d7587bd3"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/tests-revision1.log",
+      "sha256": "5f800a391c2c3310b038f0a189a816f0e802999563553a6c459d152cddd7ab71"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/ruff-revision1.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/tests-revision2.log",
+      "sha256": "17b309c303c16a428e6cab859872943ef9b2390c33004b3bf26da727630d2852"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/ruff-revision2.log",
+      "sha256": "a749099322fa936f31886cd88b5abd73bce634833af4034bd511ab771f919719"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/tests-revision3.log",
+      "sha256": "0c314fdf76bc5a929cd7f2ac11d598aa20775bf7e324fa9a8dbd225dadf43928"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/ruff-revision3.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/tests-final.log",
+      "sha256": "5430591f65b5e5b0750deb040d892dcc84aa756c3c1910401d39ba730969464c"
+    },
+    {
+      "path": ".local/service-rag-worker-v1/ruff-final.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    }
+  ],
+  "parent_web_error_messages": {
+    "path": "web/src/meetings.ts",
+    "sha256": "d788684483254079458e328ad04a1920ca98a3088173e1973303c2ba93fc974f",
+    "verification": "typecheck passed; included in subsequent Java-role production web build and opt-in browser scenario"
+  },
+  "frozen77_unchanged": true,
+  "parent_review": "Read implementation, boundary tests, shared-lock race correction and startup clamp; no model result or user review",
+  "actual_model_calls": 0,
+  "human_review": 0,
+  "deployment": false
+}

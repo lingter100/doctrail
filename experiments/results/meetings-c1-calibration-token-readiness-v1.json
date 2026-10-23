@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-review-c1",
+  "purpose": "tokenizer_only_input_readiness_estimate",
+  "input_sha256": "2984eecc5e679c99aa0bd41ada762a45e7350ff3151001c7041b7b6fc7f2dc51",
+  "tokenizer": {
+    "repo_id": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "transformers_version": "4.57.6",
+    "assets_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+      "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003",
+      "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d"
+    },
+    "trust_remote_code": false,
+    "download_authorized": true
+  },
+  "candidate_code_sha256": {
+    "src/doctrail/meeting_answer_spans.py": "aa0a7a03991ee1839e71d9fb7756eda58758eafbd7c32bd768cb9c1659382ac2",
+    "src/doctrail/meeting_answer_review.py": "c2dfc0992b313ad2da69bec4c5c2a19eba2bcab9114fa54ccc46100619adaf22",
+    "src/doctrail/meeting_answer_v2.py": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444",
+    "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+    "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+    "src/doctrail/meeting_qwen35.py": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b",
+    "scripts/check_meeting_review_token_budget.py": "25d6aa7e53a03ae46213340d48b7d3d2d119e768a870227ad4dc93593481c8cc"
+  },
+  "cases": [
+    {
+      "id": "C1CAL-01",
+      "placeholder_prompt_tokens": {
+        "D0": 1284,
+        "V0_empty": 1336,
+        "V1_empty": 1336,
+        "D1_empty": 1448,
+        "V0_fixed_synthetic": 1347,
+        "V1_fixed_synthetic": 1347,
+        "D1_fixed_synthetic": 1472
+      },
+      "planning_prompt_tokens_with_headroom": {
+        "D0": 1284,
+        "V0_empty": 2360,
+        "V1_empty": 2360,
+        "D1_empty": 2984,
+        "V0_fixed_synthetic": 2371,
+        "V1_fixed_synthetic": 2371,
+        "D1_fixed_synthetic": 3008
+      },
+      "d0_within_limit": true,
+      "planning_within_limit": true
+    },
+    {
+      "id": "C1CAL-02",
+      "placeholder_prompt_tokens": {
+        "D0": 1195,
+        "V0_empty": 1247,
+        "V1_empty": 1247,
+        "D1_empty": 1359,
+        "V0_fixed_synthetic": 1258,
+        "V1_fixed_synthetic": 1258,
+        "D1_fixed_synthetic": 1383
+      },
+      "planning_prompt_tokens_with_headroom": {
+        "D0": 1195,
+        "V0_empty": 2271,
+        "V1_empty": 2271,
+        "D1_empty": 2895,
+        "V0_fixed_synthetic": 2282,
+        "V1_fixed_synthetic": 2282,
+        "D1_fixed_synthetic": 2919
+      },
+      "d0_within_limit": true,
+      "planning_within_limit": true
+    },
+    {
+      "id": "C1CAL-03",
+      "placeholder_prompt_tokens": {
+        "D0": 1794,
+        "V0_empty": 1846,
+        "V1_empty": 1846,
+        "D1_empty": 1958,
+        "V0_fixed_synthetic": 1857,
+        "V1_fixed_synthetic": 1857,
+        "D1_fixed_synthetic": 1982
+      },
+      "planning_prompt_tokens_with_headroom": {
+        "D0": 1794,
+        "V0_empty": 2870,
+        "V1_empty": 2870,
+        "D1_empty": 3494,
+        "V0_fixed_synthetic": 2881,
+        "V1_fixed_synthetic": 2881,
+        "D1_fixed_synthetic": 3518
+      },
+      "d0_within_limit": true,
+      "planning_within_limit": true
+    },
+    {
+      "id": "C1CAL-04",
+      "placeholder_prompt_tokens": {
+        "D0": 1897,
+        "V0_empty": 1949,
+        "V1_empty": 1949,
+        "D1_empty": 2061,
+        "V0_fixed_synthetic": 1960,
+        "V1_fixed_synthetic": 1960,
+        "D1_fixed_synthetic": 2085
+      },
+      "planning_prompt_tokens_with_headroom": {
+        "D0": 1897,
+        "V0_empty": 2973,
+        "V1_empty": 2973,
+        "D1_empty": 3597,
+        "V0_fixed_synthetic": 2984,
+        "V1_fixed_synthetic": 2984,
+        "D1_fixed_synthetic": 3621
+      },
+      "d0_within_limit": true,
+      "planning_within_limit": true
+    },
+    {
+      "id": "C1CAL-05",
+      "placeholder_prompt_tokens": {
+        "D0": 1185,
+        "V0_empty": 1237,
+        "V1_empty": 1237,
+        "D1_empty": 1349,
+        "V0_fixed_synthetic": 1248,
+        "V1_fixed_synthetic": 1248,
+        "D1_fixed_synthetic": 1373
+      },
+      "planning_prompt_tokens_with_headroom": {
+        "D0": 1185,
+        "V0_empty": 2261,
+        "V1_empty": 2261,
+        "D1_empty": 2885,
+        "V0_fixed_synthetic": 2272,
+        "V1_fixed_synthetic": 2272,
+        "D1_fixed_synthetic": 2909
+      },
+      "d0_within_limit": true,
+      "planning_within_limit": true
+    },
+    {
+      "id": "C1CAL-06",
+      "placeholder_prompt_tokens": {
+        "D0": 1444,
+        "V0_empty": 1496,
+        "V1_empty": 1496,
+        "D1_empty": 1608,
+        "V0_fixed_synthetic": 1507,
+        "V1_fixed_synthetic": 1507,
+        "D1_fixed_synthetic": 1632
+      },
+      "planning_prompt_tokens_with_headroom": {
+        "D0": 1444,
+        "V0_empty": 2520,
+        "V1_empty": 2520,
+        "D1_empty": 3144,
+        "V0_fixed_synthetic": 2531,
+        "V1_fixed_synthetic": 2531,
+        "D1_fixed_synthetic": 3168
+      },
+      "d0_within_limit": true,
+      "planning_within_limit": true
+    },
+    {
+      "id": "C1CAL-07",
+      "placeholder_prompt_tokens": {
+        "D0": 1154,
+        "V0_empty": 1206,
+        "V1_empty": 1206,
+        "D1_empty": 1318,
+        "V0_fixed_synthetic": 1217,
+        "V1_fixed_synthetic": 1217,
+        "D1_fixed_synthetic": 1342
+      },
+      "planning_prompt_tokens_with_headroom": {
+        "D0": 1154,
+        "V0_empty": 2230,
+        "V1_empty": 2230,
+        "D1_empty": 2854,
+        "V0_fixed_synthetic": 2241,
+        "V1_fixed_synthetic": 2241,
+        "D1_fixed_synthetic": 2878
+      },
+      "d0_within_limit": true,
+      "planning_within_limit": true
+    },
+    {
+      "id": "C1CAL-08",
+      "placeholder_prompt_tokens": {
+        "D0": 935,
+        "V0_empty": 987,
+        "V1_empty": 987,
+        "D1_empty": 1099,
+        "V0_fixed_synthetic": 998,
+        "V1_fixed_synthetic": 998,
+        "D1_fixed_synthetic": 1123
+      },
+      "planning_prompt_tokens_with_headroom": {
+        "D0": 935,
+        "V0_empty": 2011,
+        "V1_empty": 2011,
+        "D1_empty": 2635,
+        "V0_fixed_synthetic": 2022,
+        "V1_fixed_synthetic": 2022,
+        "D1_fixed_synthetic": 2659
+      },
+      "d0_within_limit": true,
+      "planning_within_limit": true
+    }
+  ],
+  "model_calls": 0,
+  "native_calls": 0,
+  "input_limit": 4096,
+  "headroom": {
+    "draft_output_tokens": 768,
+    "review_output_tokens": 512,
+    "serialization_margin_tokens": 256
+  },
+  "limitations": [
+    "Dynamic draft/review content is unknown before generation.",
+    "Headroom is a planning estimate, not a mathematical worst-case guarantee.",
+    "Official Transformers token counts are not verified identical to native GGUF counts.",
+    "Frozen native per-stage token guards remain authoritative; this is not quality evidence.",
+    "V1 uses the same placeholder review input as V0, not a generated revised draft."
+  ],
+  "summary": {
+    "cases": 8,
+    "all_d0_within_limit": true,
+    "all_planning_within_limit": true,
+    "max_placeholder_tokens": 2085,
+    "max_planning_tokens": 3621
+  }
+}

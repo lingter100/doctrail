@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-single-thinking-c4-v1",
+  "phases": {
+    "calibration": {
+      "draft": {
+        "file": "data/evaluation/meetings-c4-calibration-v1/draft-v2.json",
+        "sha256": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098"
+      },
+      "oracle": {
+        "file": "data/evaluation/meetings-c4-calibration-v1/oracle-draft-v2.json",
+        "sha256": "7489e0815c20c7b08ef29292da628652c16f605f83ef0b7894c52a2d34af9e71"
+      },
+      "source_freeze": {
+        "file": "data/evaluation/meetings-c4-calibration-v1/source-freeze-v1.json",
+        "sha256": "8b1bac818cc1cc786ae75c275c58444ce6928ffb0940f0a4ccfdf229a9f53ce1"
+      },
+      "item_freeze": {
+        "file": "data/evaluation/meetings-c4-calibration-v1/item-freeze-v2.json",
+        "sha256": "f37ce63b8d58db6eebb50da3e72231d95a0102502ce463a00d9d4d9461ead9a8"
+      },
+      "input": {
+        "file": "data/evaluation/meetings-c4-calibration-inputs-v1/input.json",
+        "sha256": "8fe62a35bc9d28cd66f1d3d1eb5dcf2bdae126dfe2838bd59ba3ea8e3bad8c60"
+      },
+      "preparation_receipt": {
+        "file": "data/evaluation/meetings-c4-calibration-inputs-v1/receipt.json",
+        "sha256": "2fc5e869d501f2870774131aa886157bb221c31eb876eb778fda4cabde771620"
+      },
+      "case_ids": [
+        "C4-CAL-01",
+        "C4-CAL-02",
+        "C4-CAL-03",
+        "C4-CAL-04",
+        "C4-CAL-05",
+        "C4-CAL-06"
+      ],
+      "output_dir": ".local/meetings-c4-quality-calibration-v1"
+    },
+    "validation": {
+      "draft": {
+        "file": "data/evaluation/meetings-c4-validation-v1/draft.json",
+        "sha256": "f6f1c5a8ca8584cd8b35d3c2d72659d207fc37a44c0dcdbafce7aaccde728955"
+      },
+      "oracle": {
+        "file": "data/evaluation/meetings-c4-validation-v1/oracle-draft.json",
+        "sha256": "490d6f658b2dc76cabaefc8a0df64ea9c3fbf55b84376cedc64f2514f64b00dc"
+      },
+      "source_freeze": {
+        "file": "data/evaluation/meetings-c4-validation-v1/source-freeze-v1.json",
+        "sha256": "b4a132dadd9cef1b5ba5b0c15e2a28024b8fb5141a8200de30afe812c3c52698"
+      },
+      "item_freeze": {
+        "file": "data/evaluation/meetings-c4-validation-v1/item-freeze-v1.json",
+        "sha256": "c29f89300f48b2f7a7706a87fb05f6f902bc470ab8ecf360e0868ad5ce65afa6"
+      },
+      "input": {
+        "file": "data/evaluation/meetings-c4-validation-inputs-v1/input.json",
+        "sha256": "78eb18ffdaae823d415001b078625876603bc18bb36e9172e2cedf1f4acc4126"
+      },
+      "preparation_receipt": {
+        "file": "data/evaluation/meetings-c4-validation-inputs-v1/receipt.json",
+        "sha256": "3821048055f4ace4fa9b8af0da1bb1f0ecc110118112026b338f31810314505c"
+      },
+      "case_ids": [
+        "C4-VAL-01",
+        "C4-VAL-02",
+        "C4-VAL-03",
+        "C4-VAL-04",
+        "C4-VAL-05",
+        "C4-VAL-06",
+        "C4-VAL-07",
+        "C4-VAL-08"
+      ],
+      "output_dir": ".local/meetings-c4-quality-validation-v1"
+    }
+  },
+  "audit": {
+    "calibration": {
+      "reviewer_id": "/root/c4_calibration_final_judge",
+      "seed": {
+        "file": "data/evaluation/meetings-c4-review-metadata-v1/calibration/seed.bin",
+        "sha256": "d25c023273003bb718c07e5e565ed7970049973a84ec0846580d5ef88bdbe223"
+      },
+      "attestation": {
+        "file": "data/evaluation/meetings-c4-review-metadata-v1/calibration/attestation.json",
+        "sha256": "670935d04e98e6cec5f9a3f9250a17248495f330eb229176d6710be4285d3070"
+      },
+      "output_dir": ".local/meetings-c4-audit-calibration-v1"
+    },
+    "validation": {
+      "reviewer_id": "/root/c4_validation_final_judge",
+      "seed": {
+        "file": "data/evaluation/meetings-c4-review-metadata-v1/validation/seed.bin",
+        "sha256": "f562fb21e38508360c4e47b3c8a01e5ce8801c2ab4b286632fe6154975d72111"
+      },
+      "attestation": {
+        "file": "data/evaluation/meetings-c4-review-metadata-v1/validation/attestation.json",
+        "sha256": "b6bc646dbdfc337a696e87b6d0a53012ca26afd4ed7330c38249186f584ee5e2"
+      },
+      "output_dir": ".local/meetings-c4-audit-validation-v1"
+    }
+  },
+  "bound_files": {
+    "data/evaluation/meetings-c4-compat-resource-protocol-v1.json": "4f3f6239ff241d3555d54ddb1f753324e5f51000e9ef6bf01a646d0ab3e0802c",
+    "data/evaluation/meetings-c4-compat-source-freeze-v1.json": "de8bfc6b92603b1cd5d999afb5788222c7b71ccda1e7a9a3c0aa5a7df36ef61e",
+    "data/evaluation/meetings-c4-family-registry-v1.json": "509a155134383e989cf7eef174e8c563e0e19a8a7feb569e6d87e61439080858",
+    "data/evaluation/meetings-c4-neutral-plan-v1.json": "ba0b3f40134f79a63eee61329ea50dbebc121d7e357a9bbbec0ff8511b4e1e6d",
+    "data/evaluation/meetings-c4-quality-protocol-v1.json": "dd9748639d948cce470ec175a5c1ee69bc7b1ba24ea440e684461fe284708cc4",
+    "data/evaluation/meetings-c4-resource-protocol-v1.json": "498297947a61e653f23fb8d5b04431d85b3cffff3915a1da71fd1d9419fe4314",
+    "data/evaluation/meetings-c4-resource-source-freeze-v1.json": "2ba79c7fba2ad52090392f9256396dc8a1813b6bfae31d6b06a7ba2dd9f2d701",
+    "data/models/meetings-generation-qwen35-v1.json": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99",
+    "docs/MEETINGS-C4-COMPAT-PLAN.md": "286b43cf20566ee681fe72edb62b0828d4e51651bffbcf89f4c83d238018e739",
+    "docs/MEETINGS-C4-QUALITY-IMPLEMENTATION-CONTRACT.md": "1109b25c559dc55705bd57f8860f49754c2321afab6508738b76c0dbeaa41416",
+    "docs/MEETINGS-C4-QUALITY-PLAN.md": "58926a02b4005b8653eb42ed9d8e7d6a6cbdd23bf6ee3602e4cf2af2095426b3",
+    "docs/MEETINGS-C4-RESOURCE-DESIGN.md": "f70d31831c82f286f9612f296a1b14b8042f50622dd63beef08113e5a80b1254",
+    "experiments/results/meetings-c4-compat-resources-v1.json": "4221cf730c348b4ba6d5741f47a818e1c2ee68cdd337e21a05947d5379bd6043",
+    "experiments/results/meetings-c4-resources-v1.json": "2b66105860e47180dc29ff78213d43ade81ac29ef2f17ba19ba632440e017729",
+    "pyproject.toml": "db45870df5b6d4fd543e14b9d837d25614033f9049692cead50e1a366a72308d",
+    "scripts/audit_meeting_thinking_quality.py": "5947aa4581a6ce59d2aec1bf681a94442197c526be1bb45214cc577e632d0d59",
+    "scripts/backup_db.py": "93eb767a0969a4999a8e33ee465cfed2f82c13d7c8b96eeecd092669dbb29a6a",
+    "scripts/benchmark_api.py": "488d36d124cd7cf8ec53c2bce42a17912717ec8787c97d814b1488c8d8192f0f",
+    "scripts/check_meeting_review_token_budget.py": "25d6aa7e53a03ae46213340d48b7d3d2d119e768a870227ad4dc93593481c8cc",
+    "scripts/evaluate_dataset.py": "4de523c5b46415e6ec105e102efa30ee9146b4ec0ed0f2c18705f3c9f00c40fe",
+    "scripts/prepare_corpus.py": "181de3ed388f76ec66e13d851b267ddf7dded0046829a816cf03b8afc28bce57",
+    "scripts/prepare_meeting_budget_inputs.py": "bc3acfb4b85fe63cf76cc5c6e878c74f658f0ec779a3c9515e1b6b271fe004a2",
+    "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+    "scripts/prepare_meeting_plaintext_source_inventory.py": "7c18029970b5ffed953b394ec5b33381e688820cad7ff4688663bdeedb3f35f6",
+    "scripts/prepare_meeting_requirements_inputs.py": "3f511177f4b1a71336ee237e8e6eb744dd99fcfa87405e38c3d6c41402ccca71",
+    "scripts/prepare_meeting_source_inventory.py": "65d095bf89d918b5fcde1c274d6999d7f791eae26c58c6fe8bdc916b29c80079",
+    "scripts/prepare_meeting_thinking_inputs.py": "be7c94291fa4141483c7f885f0b27cec87dbee620b9369863fa564725edb13eb",
+    "scripts/probe_meeting_answer_review.py": "6bc1bd5dfa4b9076ee3d50bda4a580ae76d45b9fef03bbaf555728d4ad0facc6",
+    "scripts/probe_meeting_blocks_resources.py": "c724e5c7f8bded015b4ee2cd02ce12503c8ab8cb05551413568e6fdf8c3af1c6",
+    "scripts/probe_meeting_thinking_compat_resources.py": "83854ab6651c229546a3f3d6bd725dfa6f29d975fc4ff7bcfe1dea1eaf4785af",
+    "scripts/probe_meeting_thinking_quality.py": "7a3e91011e63c8e06eff09e75c8cec8ed64532d5ba9d7b3e5e62a8ed7032a644",
+    "scripts/probe_meeting_thinking_resources.py": "a2bf9368191d3b057b270078405f6f89fce04ca9b169d4adb8282e9d17669bbf",
+    "scripts/question_dataset.py": "37806c6c0a33cbfd057a5ead3209e331ee5d8478703e5d4d456d5722f92f855b",
+    "scripts/serve_meeting_thinking.py": "540f9d3c970997ef2ad9c0f13f793503b778fa6d7157bdc3d416a4afd0b61ffb",
+    "scripts/serve_meeting_thinking_compat.py": "3a3dbe8302c1793b1b3766d7276f0408eba66cb48f81ecde10ba52e0e746c73e",
+    "scripts/serve_meetings.py": "9c54905ae01d02e7fbd37b955dd62b6de58952cf4e434a1efa75f9816d33c1d8",
+    "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+    "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+    "scripts/validate_splits.py": "81fa8bfb482c6a149a7e6445e81319d7069b270b745ed4c7b0a35c7f2233a3ce",
+    "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/test/java/io/doctrail/MeetingSourceParityTest.java": "04e3371b13c2a8b0c577975fb589a6c9a1999012cc434ab1cf6f3851c093f23f",
+    "src/doctrail/__init__.py": "5a97f0d9f1932ccb8226c49ad4b84ea55503300b360c040fbd60d381877370cc",
+    "src/doctrail/app.py": "1bf911ccd79458c06e9cc4090f295ce83e6afd5c4b327ff2e9652844d356d224",
+    "src/doctrail/db.py": "34cd843011b93219d0a7c46727082cf81254eba6a4d8428d334ba6b918532961",
+    "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+    "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+    "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/meeting_answer_blocks.py": "16bccf899000f55b7f12ace2b8103021119d9864973e97aed0d91a4895c7bbbb",
+    "src/doctrail/meeting_answer_grammar.py": "58c2aeaebf203d214ea33a109864c730fb2f9cde2bda0f990309037da1f2d671",
+    "src/doctrail/meeting_answer_lines_bounded.py": "3ca12ce89664010bea51c11948c2d050034b38cc3347d080229bb13f9eea0ba1",
+    "src/doctrail/meeting_answer_requirements.py": "9ce7879944d8772be761cbaf3ee764e3dbd8b5a3a0d14e2683334b9cceae39e2",
+    "src/doctrail/meeting_answer_review.py": "c2dfc0992b313ad2da69bec4c5c2a19eba2bcab9114fa54ccc46100619adaf22",
+    "src/doctrail/meeting_answer_spans.py": "aa0a7a03991ee1839e71d9fb7756eda58758eafbd7c32bd768cb9c1659382ac2",
+    "src/doctrail/meeting_answer_thinking.py": "2ef811fd35847dc9dfa9a15654e312e81c53c2d449b5ef7f674bc634526b78f4",
+    "src/doctrail/meeting_answer_v2.py": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444",
+    "src/doctrail/meeting_comparison_review.py": "74ab9121c5c0da58ce7101f3abe0beeade381cc935f788be89e6c80237176b86",
+    "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+    "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+    "src/doctrail/meeting_input_budget.py": "5c61f8c378f4e28c5c47fc30cc3485543dfd0a10a9e4f7062ac173f983bca76a",
+    "src/doctrail/meeting_qwen35.py": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b",
+    "src/doctrail/meeting_requirements_review.py": "c334bb76e908ffa6ea338789e57bfa3ec1eedb51c5191e149e64c7ffa3b0e4ed",
+    "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+    "src/doctrail/meeting_thinking_quality.py": "a4838c76ef5d243dc82d00b2feae05e8dca31548cd000941ebfa74588881ccdd",
+    "src/doctrail/meeting_thinking_review.py": "0ea41297c7c4ecc96ad0b8e17d8dc14dcbd83aeb8eb1a9f4a07aee5cc7f66f76",
+    "src/doctrail/meeting_thinking_transport.py": "cd0c47eccc408296667c0d7708d018955107bbb16b4a5311f7eebef1d1abaec4",
+    "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+    "src/doctrail/model_retrieval.py": "0b1f60e3f38daa8f6dc85642c17832a82c6ea32ec87f3733aa8aa3fbc63dd5b4",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "tests/test_audit_meeting_thinking_quality.py": "528edf78861a2bcc1b570f68f4dfa243d6c5ae5899b060e7ce62e490f05179dc",
+    "tests/test_meeting_answer_thinking.py": "23586ef43ae03aa23132eacc7ca9d6f43dc8d62c364166049895fc15b4d78cbf",
+    "tests/test_meeting_requirements_review.py": "70bfad5d38c7d28190f4e8803585935a050e6c0a21186cc0e93d952e04470306",
+    "tests/test_meeting_thinking_compat_launcher.py": "b7f1af45370c20fc76f7b3a4c79a64d9e69f8dcc9737721072c20fc7ad8860bd",
+    "tests/test_meeting_thinking_compat_resources.py": "3772f98564063dd1e288950fddc93df5c6d6cbd63b4ed83a19db007011da229b",
+    "tests/test_meeting_thinking_quality.py": "f172c70ff3c6be0b7e99c5f94c3db6fbad8149afbd21adf359b1f628bd780b09",
+    "tests/test_meeting_thinking_resources.py": "5f4f68dc2ab803e737e8822ee5d867e54b2133dd07dbb593038a3180a5c48fc4",
+    "tests/test_meeting_thinking_review.py": "ad6f6858b73397c1decf5164d73e1b1e83f8cdc66bb73b895d7688633038c5bb",
+    "tests/test_meeting_thinking_transport.py": "a17828ec517edda8552830d4f9d6730b86e2e3a042055deb93205f5246a62d47",
+    "tests/test_prepare_meeting_plaintext_source_inventory.py": "3ce4995b783ebc59f26a840cc7eebda672b62278e884866c4d192217bb6a6f9e",
+    "tests/test_prepare_meeting_source_inventory.py": "ab38a37febf242fb00cd69ce9864bf81f366ee02d88f76a5511e492fb4989511",
+    "tests/test_prepare_meeting_thinking_inputs.py": "ff9d2aa326d11c12b55fccd2ebccd920c0139c02a8858092aabd5f1c2fadf118",
+    "tests/test_probe_meeting_thinking_quality.py": "c7ed13fb64374ac55cfd865c63e4f458f21e3929b75b3b552d3c737e1bc4422c",
+    "uv.lock": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+  },
+  "code_freeze": {
+    "file": "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json",
+    "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78"
+  },
+  "protocol_sha256": "dd9748639d948cce470ec175a5c1ee69bc7b1ba24ea440e684461fe284708cc4",
+  "excluded_roles": [
+    "/root",
+    "/root/bounded_thinking_transport",
+    "/root/c2_comparison_runner",
+    "/root/c4_calibration_item_author",
+    "/root/c4_calibration_item_review",
+    "/root/c4_calibration_source",
+    "/root/c4_calibration_source_review",
+    "/root/c4_validation_item_author",
+    "/root/c4_validation_item_review",
+    "/root/c4_validation_source",
+    "/root/c4_validation_source_review",
+    "/root/free_qa_candidate_review",
+    "/root/knowledge_recovery_review",
+    "/root/requirements_candidate",
+    "c4_calibration_item_author",
+    "c4_calibration_item_review",
+    "c4_calibration_source",
+    "c4_calibration_source_review",
+    "c4_validation_item_author",
+    "c4_validation_item_review",
+    "c4_validation_source",
+    "c4_validation_source_review"
+  ]
+}

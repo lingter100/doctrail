@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "item_author_receipt_not_independent_prereview",
+  "authored_at_utc": "2026-10-16T05:19:08.787279+00:00",
+  "author_role": "c4_calibration_item_author",
+  "actual_model": "gpt-6-astra",
+  "actual_reasoning_effort": "xhigh",
+  "actual_role_settings_evidence": "Parent delegation reports tool-accepted fresh Astra xhigh role; this receipt does not claim to change the parent model.",
+  "fresh_role": true,
+  "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c4-calibration-v1/source-freeze-v1.json",
+    "sha256": "8b1bac818cc1cc786ae75c275c58444ce6928ffb0940f0a4ccfdf229a9f53ce1"
+  },
+  "semantic_read_preconditions": {
+    "head": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+    "code_bound_count": 85,
+    "code_ci_commit": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+    "source_bound_count": 14,
+    "source_freeze_sha256": "8b1bac818cc1cc786ae75c275c58444ce6928ffb0940f0a4ccfdf229a9f53ce1",
+    "source_git_bytes_proved": true,
+    "semantic_source_opened_before_proof": false,
+    "tokenizer_loads": 0,
+    "native_calls": 0
+  },
+  "authorship_after_source_commit": true,
+  "source_documents_read_in_full": [
+    "c4-f01-doc01",
+    "c4-f01-doc02",
+    "c4-f01-doc03",
+    "c4-f02-doc01",
+    "c4-f02-doc02",
+    "c4-f02-doc03"
+  ],
+  "source_chunks_reviewed": 32,
+  "source_files_modified": false,
+  "source_bound_hashes_rechecked_before_authorship": true,
+  "all_alternative_review_scope": "Author read the six complete adopted calibration sources and their 32 unchanged chunks. Enumerated nonredundant sufficient evidence routes, including overlapping catalog-unit alternatives, and checked subject/time/status/conditions. Redundant supersets of already sufficient evidence are not separate semantic routes. Independent reviewer must verify this author inventory rather than trust the structural validator to discover omitted alternatives.",
+  "independent_prereview": {
+    "prospective_reviewer_id": "c4_calibration_item_review",
+    "status": "pending",
+    "completed_reviews": 0,
+    "reviewer_field_is_reservation_only": true
+  },
+  "full_family_absence_checks": [
+    {
+      "id": "C4-CAL-03",
+      "family_id": "c4-f01",
+      "documents_checked": [
+        "c4-f01-doc01",
+        "c4-f01-doc02",
+        "c4-f01-doc03"
+      ],
+      "author_absence_check_completed": true,
+      "missing_required_facts": 1,
+      "independent_absence_review": "pending",
+      "created_by_omitting_answer_chunks": false
+    },
+    {
+      "id": "C4-CAL-06",
+      "family_id": "c4-f02",
+      "documents_checked": [
+        "c4-f02-doc01",
+        "c4-f02-doc02",
+        "c4-f02-doc03"
+      ],
+      "author_absence_check_completed": true,
+      "missing_required_facts": 2,
+      "independent_absence_review": "pending",
+      "created_by_omitting_answer_chunks": false
+    }
+  ],
+  "case_coverage": [
+    {
+      "id": "C4-CAL-01",
+      "family_id": "c4-f01",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": 4,
+      "missing_required_facts": 0,
+      "whole_contexts": 2,
+      "minimal_document_count_across_registered_sufficient_alternatives": 1,
+      "registered_sufficient_document_sets": [
+        [
+          {
+            "document_id": "c4-f01-doc03",
+            "revision": 1
+          }
+        ]
+      ]
+    },
+    {
+      "id": "C4-CAL-02",
+      "family_id": "c4-f01",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": 5,
+      "missing_required_facts": 0,
+      "whole_contexts": 4,
+      "minimal_document_count_across_registered_sufficient_alternatives": 2,
+      "registered_sufficient_document_sets": [
+        [
+          {
+            "document_id": "c4-f01-doc01",
+            "revision": 1
+          },
+          {
+            "document_id": "c4-f01-doc02",
+            "revision": 1
+          }
+        ]
+      ]
+    },
+    {
+      "id": "C4-CAL-03",
+      "family_id": "c4-f01",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": 3,
+      "missing_required_facts": 1,
+      "whole_contexts": 3,
+      "minimal_document_count_across_registered_sufficient_alternatives": null,
+      "registered_sufficient_document_sets": []
+    },
+    {
+      "id": "C4-CAL-04",
+      "family_id": "c4-f02",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": 4,
+      "missing_required_facts": 0,
+      "whole_contexts": 2,
+      "minimal_document_count_across_registered_sufficient_alternatives": 2,
+      "registered_sufficient_document_sets": [
+        [
+          {
+            "document_id": "c4-f02-doc02",
+            "revision": 1
+          },
+          {
+            "document_id": "c4-f02-doc03",
+            "revision": 1
+          }
+        ]
+      ]
+    },
+    {
+      "id": "C4-CAL-05",
+      "family_id": "c4-f02",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": 4,
+      "missing_required_facts": 0,
+      "whole_contexts": 4,
+      "minimal_document_count_across_registered_sufficient_alternatives": 2,
+      "registered_sufficient_document_sets": [
+        [
+          {
+            "document_id": "c4-f02-doc01",
+            "revision": 1
+          },
+          {
+            "document_id": "c4-f02-doc02",
+            "revision": 1
+          }
+        ],
+        [
+          {
+            "document_id": "c4-f02-doc01",
+            "revision": 1
+          },
+          {
+            "document_id": "c4-f02-doc02",
+            "revision": 1
+          },
+          {
+            "document_id": "c4-f02-doc03",
+            "revision": 1
+          }
+        ]
+      ]
+    },
+    {
+      "id": "C4-CAL-06",
+      "family_id": "c4-f02",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": 4,
+      "missing_required_facts": 2,
+      "whole_contexts": 4,
+      "minimal_document_count_across_registered_sufficient_alternatives": null,
+      "registered_sufficient_document_sets": []
+    }
+  ],
+  "coverage_counts": {
+    "cases": 6,
+    "ko": 3,
+    "en": 3,
+    "answered": 4,
+    "abstained": 2,
+    "required_facts": 24,
+    "general_only_answered": 1,
+    "multiple_meeting_only_answered": 1,
+    "mixed_required_answered": 1,
+    "all_alternatives_multi_document_answered": 3,
+    "ko_requires_english_answered": 2,
+    "en_requires_korean_answered": 1
+  },
+  "coverage_counts_are_structural_for_registered_author_alternatives_not_independent_semantic_acceptance": true,
+  "context_selection_before_token_measurement": true,
+  "context_selection_uses_whole_inventory_chunks": true,
+  "token_estimation_counting_or_feedback": false,
+  "structural_validation": {
+    "validate_draft": "passed",
+    "validate_oracles": "passed",
+    "whole_chunk_inventory_identity": "passed",
+    "context_selection_identity": "passed",
+    "source_bound_sha256_identity": "passed",
+    "semantic_correctness_certified_by_validation": false
+  },
+  "exposure": {
+    "calibration_sources": true,
+    "own_calibration_items_oracles": true,
+    "protocol_registry_contract_and_schema_code": true,
+    "validation_semantic_files_read": false,
+    "old_closed_pool_texts_oracles_semantic_reports_read": false,
+    "validation_path_names_seen_in_initial_filename_search_only": true,
+    "automatic_agents_and_parent_summary_metadata_seen": true,
+    "source_author_cross_validation_public_exploration_disclosed": true,
+    "source_author_exploration_scope": "Parent reports original calibration source author explored alternate validation-repository public bodies; exact scope partly unknown. This fresh item role did not access those bodies, and does not claim the overall source workflow was pristine.",
+    "eligible_for_final_output_judging": false
+  },
+  "preserved_authoring_diagnostic": {
+    "initial_catalog_display": "UnicodeEncodeError from Windows cp949 output for an em dash; no item artifacts were written",
+    "recovery": "Reran the same catalog read with Python -X utf8; no source or chunk edits",
+    "effect_on_tokenizer_native_counts": "none"
+  },
+  "outputs_sha256": {
+    "draft.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+    "oracle-draft.json": "68a7a4b37ac6b7badd6b0d12b90fa42ec8f470c1b89c1b30307344f60a743abc",
+    "context-selection.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9"
+  },
+  "item_prereview_or_freeze_created": false,
+  "tokenizer_loads": 0,
+  "native_calls": 0,
+  "model_inference_calls": 0,
+  "downloads": 0,
+  "maven_runs": 0,
+  "git_mutations": 0,
+  "human_reviews": 0,
+  "author_self_review_before_independent_prereview": {
+    "initial_structural_checks": "passed",
+    "preserved_initial_artifact_sha256": {
+      "draft.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+      "oracle-draft.json": "1b59ff28a4da108a48cdbe8c804d8c940dda0f17660cd384d4fb3c5fd61178e7",
+      "context-selection.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9",
+      "item-author-receipt.json": "a9001b8e7cdc4fb0af73ec885fa7fe8c6cd88d2a3a273c9d49b2b69c0ca7500c"
+    },
+    "preserved_location": ".local/c4-calibration-item-author-v1/pre-selfreview/",
+    "change": "Added the explicit antecedent change block to two anaphoric evidence alternatives; question/context/fact text unchanged; no review feedback or token feedback occurred."
+  }
+}

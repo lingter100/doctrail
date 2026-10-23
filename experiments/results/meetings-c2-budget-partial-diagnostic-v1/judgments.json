@@ -1,0 +1,1717 @@
+{
+  "schema_version": 1,
+  "reviewer_id": "/root/c2_calibration_judge",
+  "mapping_not_seen": true,
+  "independent_of_authors_and_designers": true,
+  "human_review_count": 0,
+  "judgments": [
+    {
+      "sample_id": "sample-01",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": true,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [],
+      "required_facts": [
+        {
+          "fact_id": "regular_frequency",
+          "present": false,
+          "reason": "No factual answer is supplied; this is the required whole-question abstention."
+        },
+        {
+          "fact_id": "latest_actual_meeting_date",
+          "present": false,
+          "reason": "No latest actual date is supplied. The source does not establish it, so abstaining is correct."
+        }
+      ],
+      "full_correct": true,
+      "reason": "Correct whole-question abstention: the charter supplies cadence but no date of the latest actual meeting. This is metadata-exposed, label-masked posthoc AI diagnosis, not a model/hypothesis-blind review.",
+      "masking_guess": {
+        "unit_style": "unknown",
+        "confidence": "none",
+        "reason": "There are no claims or selected quotation units from which to infer unit width. Prior execution metadata exposure is recorded separately; no item-to-arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-02",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "The resurfacing preceding the beginner balance class ended at 14:03.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 710,
+                  "end_offset": 733
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected event table records resurfacing completion at 14:03."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "Entry to the beginner balance class was approved at 14:14.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 813,
+                  "end_offset": 840
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected table records beginner-class entry approval at 14:14."
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "facts": [
+            {
+              "text": "The beginner balance class actually started at 14:18.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 845,
+                  "end_offset": 870
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected table explicitly records the actual class start."
+            }
+          ]
+        },
+        {
+          "claim_index": 3,
+          "facts": [
+            {
+              "text": "The beginner balance class actually ended at 15:03.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 875,
+                  "end_offset": 899
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected table explicitly records the actual class end."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "resurfacing_finished",
+          "present": false,
+          "reason": "The 14:03 completion is stated, but the required recorder Go Haerim is omitted."
+        },
+        {
+          "fact_id": "inspection_held",
+          "present": false,
+          "reason": "The 14:05 inspection hold and residual water by the eastern fence are absent from the answer text; their presence only inside the quotation does not supply an answer claim."
+        },
+        {
+          "fact_id": "reinspection_passed",
+          "present": false,
+          "reason": "The clearing of residual water and Go Haerim's 14:11 successful reinspection are omitted."
+        },
+        {
+          "fact_id": "entry_approved",
+          "present": false,
+          "reason": "The 14:14 approval is stated, but the required approving person Yun Raon is omitted."
+        },
+        {
+          "fact_id": "actual_lesson_window",
+          "present": true,
+          "reason": "The answer explicitly states actual start 14:18 and actual end 15:03."
+        }
+      ],
+      "full_correct": false,
+      "reason": "All four stated times are supported, but the requested sequence omits the held inspection and successful reinspection, and does not identify the two required actors. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "Each claim selects the same complete event table covering seven events rather than a short individual event span. This is an observed unit-width guess, not an arm identification."
+      }
+    },
+    {
+      "sample_id": "sample-03",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "The beginner balance class's previous time was 14:00–14:45.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected class row is relevant, but it omits the header that identifies which time is previous and which is newly confirmed."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "The beginner balance class's changed time was 14:18–15:03.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The row contains the class and both time ranges, but the selected quotation has no column header establishing their old/new roles."
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "facts": [
+            {
+              "text": "The confirmed change must be reflected on the lobby notice board.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1060,
+                  "end_offset": 1104
+                }
+              ]
+            },
+            {
+              "text": "The confirmed change must also be sent by text to the session's registrants.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1060,
+                  "end_offset": 1104
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected paragraph explicitly requires both notification channels."
+            }
+          ]
+        },
+        {
+          "claim_index": 3,
+          "facts": [
+            {
+              "text": "The content reflected in each channel must be recorded.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1105,
+                  "end_offset": 1138
+                }
+              ]
+            },
+            {
+              "text": "The processing time for each channel must be recorded.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1105,
+                  "end_offset": 1138
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected paragraph explicitly states per-channel content and processing-time recording."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "previous_session_window",
+          "present": true,
+          "reason": "The correct previous time 14:00–14:45 is explicitly stated, although its selected citation lacks the header needed to support the role."
+        },
+        {
+          "fact_id": "new_session_window",
+          "present": false,
+          "reason": "The correct changed time is stated, but the required restriction to February 15 alone is not stated."
+        },
+        {
+          "fact_id": "required_notification_channels",
+          "present": true,
+          "reason": "Both the lobby notice board and texts to the session's registrants are explicitly included."
+        },
+        {
+          "fact_id": "per_channel_records",
+          "present": false,
+          "reason": "Both required record fields are included, but the answer does not identify the reception staff as the responsible recorder."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The time labels depend on unselected table headers; the answer also omits the one-day limit and responsible recorder. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "short_units",
+        "confidence": "medium",
+        "reason": "The two time claims select individual table rows without their header, although the notification claims select a multi-sentence paragraph. No arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-04",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": true,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "Ordinary members' code review alone is insufficient for accepting/merging the contribution.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 7227,
+                  "end_offset": 7331
+                }
+              ]
+            },
+            {
+              "text": "An approver's additional review is required.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 7227,
+                  "end_offset": 7331
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected paragraph explicitly requires at least one approver in addition to member reviews."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "GC should not retain technical decision-making authority itself.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1319,
+                  "end_offset": 1383
+                }
+              ]
+            },
+            {
+              "text": "GC should delegate technical authority to TC and SIGs.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1242,
+                  "end_offset": 1312
+                },
+                {
+                  "citation_index": 0,
+                  "start_offset": 1319,
+                  "end_offset": 1383
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected bullet explicitly states technical delegation and GC non-retention of authority."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "member_approval",
+          "present": true,
+          "reason": "The answer denies sufficiency of member review and requires an additional approver review."
+        },
+        {
+          "fact_id": "gc_technical_scope",
+          "present": true,
+          "reason": "It states non-retention by GC and delegation to TC/SIGs, preserving the requested technical-governance distinction."
+        }
+      ],
+      "full_correct": true,
+      "reason": "Both required role distinctions are correctly stated and supported by the selected quotations. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "Selected quotations include an entire multi-line note and multiple complete bullets, beyond the individual supporting sentences. This is a width guess, not an arm identification."
+      }
+    },
+    {
+      "sample_id": "sample-05",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": true,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "Ordinary members' code review alone is insufficient to accept the contribution.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 6770,
+                  "end_offset": 6847
+                },
+                {
+                  "citation_index": 1,
+                  "start_offset": 6849,
+                  "end_offset": 6878
+                }
+              ]
+            },
+            {
+              "text": "An approver's additional review is required.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This identifies member review and provides the antecedent for the following selected insufficiency fragment."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This says member review is insufficient and a further review is needed, but cuts off before naming its reviewer."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "This is topically relevant to acceptance requirements, but ends after 'at least one' and never identifies an approver."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "GC should not retain technical decision-making authority itself.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 1319,
+                  "end_offset": 1383
+                }
+              ]
+            },
+            {
+              "text": "Technical responsibilities should be delegated to TC and SIGs.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1242,
+                  "end_offset": 1312
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This selected line supplies the complete technical delegation requirement."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This selected line explicitly supplies GC's non-retention of technical authority."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "member_approval",
+          "present": true,
+          "reason": "The answer text includes both member-review insufficiency and the additional approver requirement, even though the latter is not supported by the selected fragments."
+        },
+        {
+          "fact_id": "gc_technical_scope",
+          "present": true,
+          "reason": "Technical delegation to TC/SIGs and GC non-retention are both stated."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The approver role is asserted but missing from every selected citation for that claim; unselected continuation lines cannot repair it. Other required content is present. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "short_units",
+        "confidence": "high",
+        "reason": "Several citations are single wrapped lines that end mid-sentence, including immediately before the missing reviewer role. No arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-06",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "At the 15:10 cutoff there was no recorded entry approval for personal free practice.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1181,
+                  "end_offset": 1220
+                }
+              ]
+            },
+            {
+              "text": "At the 15:10 cutoff there was no recorded actual start for personal free practice.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1181,
+                  "end_offset": 1220
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The quotation explicitly distinguishes missing approval/start records at 15:10."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "Yoon Ra-on was planned to recheck the use area at 15:15 as follow-up.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1139,
+                  "end_offset": 1180
+                }
+              ]
+            },
+            {
+              "text": "That planned 15:15 recheck also covers the preceding cleanup status.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1139,
+                  "end_offset": 1180
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The quotation names Yun Raon, 15:15, both check subjects, and future planned status. 'Next shift' is read as the follow-up framing, not an added completed action or different actor."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "not_started",
+          "present": false,
+          "reason": "Absence of a recorded start is stated, but the separate required fact that practice had not actually started is not stated."
+        },
+        {
+          "fact_id": "no_approval_or_start_record",
+          "present": true,
+          "reason": "Both absent records are stated at 15:10 without converting absence into denial."
+        },
+        {
+          "fact_id": "planned_recheck",
+          "present": true,
+          "reason": "The answer identifies Yoon Ra-on, both check subjects, 15:15, and planned status."
+        },
+        {
+          "fact_id": "next_shift_recording",
+          "present": false,
+          "reason": "It omits the next worker's obligation to record actual approval/progress and the prohibition on carrying over the prior class's approval."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The stated absent records and planned recheck are supported, but actual not-started status and the required next-worker recording/no-transfer instruction are omitted. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "Both claims select the entire follow-up paragraph spanning status, future check, prohibition, and next-worker recording. This does not identify an arm."
+      }
+    },
+    {
+      "sample_id": "sample-07",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "For the path without unanimous maintainer approval, a majority of maintainers must approve the PR.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9583,
+                  "end_offset": 9659
+                },
+                {
+                  "citation_index": 1,
+                  "start_offset": 9661,
+                  "end_offset": 9691
+                }
+              ]
+            },
+            {
+              "text": "No maintainer may have objected by requesting changes on the PR.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 9696,
+                  "end_offset": 9737
+                },
+                {
+                  "citation_index": 2,
+                  "start_offset": 9739,
+                  "end_offset": 9767
+                }
+              ]
+            },
+            {
+              "text": "Without unanimous approval, the PR must remain open for at least five days before merging.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This supplies the majority subject in the alternative to unanimous approval."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This supplies the approval predicate and the beginning of the no-objection condition."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "This completes 'requesting changes' but ends before the actual waiting-period requirement. None of the selected lines contains five days."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "The nominee becomes a triager after the PR is merged.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 10066,
+                  "end_offset": 10135
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly establishes triager status after merger."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "default_scope",
+          "present": false,
+          "reason": "The answer omits the TC-ratified SIG-charter exception and does not describe the existing SIG maintainers' default election procedure."
+        },
+        {
+          "fact_id": "nominee_acceptance",
+          "present": false,
+          "reason": "The nominee's acceptance by approving the PR is not stated."
+        },
+        {
+          "fact_id": "majority_no_objection",
+          "present": true,
+          "reason": "Both majority approval and no maintainer requesting changes are stated."
+        },
+        {
+          "fact_id": "five_day_window",
+          "present": true,
+          "reason": "The answer states at least five days without unanimous approval, though no selected citation contains that period."
+        },
+        {
+          "fact_id": "status_after_merge",
+          "present": true,
+          "reason": "Post-merge triager status is explicitly stated."
+        }
+      ],
+      "full_correct": false,
+      "reason": "Five days is unsupported by the selected fragments; the answer also omits nominee acceptance and the default-procedure scope. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "short_units",
+        "confidence": "high",
+        "reason": "The condition citations are individual wrapped lines ending mid-sentence; the status citation is one complete line. No arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-08",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": false
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "Regular GC meetings must be held at least once per month.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 12045,
+                  "end_offset": 12121
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected paragraph directly establishes the minimum monthly cadence."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "The provided sources do not contain the exact date of the most recent meeting.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This selected policy paragraph has no occurrence date, but its local absence does not establish absence throughout the sources."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "The selected closed-meeting policy fragment is relevant to the type of meeting but cannot establish a source-wide negative about the latest actual date."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "The overlapping closed-meeting frequency/notice policy is relevant context but does not establish source-wide absence of an actual meeting date."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "regular_frequency",
+          "present": false,
+          "reason": "Monthly frequency is stated, but the required exclusion of closed meetings is omitted from the answer text."
+        },
+        {
+          "fact_id": "latest_actual_meeting_date",
+          "present": false,
+          "reason": "No exact latest actual date is supplied; it is unavailable, so the expected response is whole-question abstention rather than a partial answered response."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The answer supplies partial information in answered status despite the required abstention. Its selected policy excerpts support cadence but not a claim about absence across all sources. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "The quotations are complete or chunk-truncated multi-sentence policy paragraphs, including overlapping closed-meeting passages. This does not identify an arm."
+      }
+    },
+    {
+      "sample_id": "sample-09",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "When job moves change representation, enough committee members must resign within 28 days to restore the maximum.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 8924,
+                  "end_offset": 9005
+                },
+                {
+                  "citation_index": 1,
+                  "start_offset": 9005,
+                  "end_offset": 9086
+                },
+                {
+                  "citation_index": 2,
+                  "start_offset": 9086,
+                  "end_offset": 9114
+                }
+              ]
+            },
+            {
+              "text": "The maximum is two committee members per company.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This provides the conditional job-change trigger."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This supplies sufficient resignations, the 28-day period, and a reference to the maximum."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "This completes restoration of that maximum; none of these selected lines states its numerical value."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "If sufficient resignations cannot restore the limit within the period, the entire company's representation is removed.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9115,
+                  "end_offset": 9165
+                },
+                {
+                  "citation_index": 1,
+                  "start_offset": 9165,
+                  "end_offset": 9243
+                }
+              ]
+            },
+            {
+              "text": "A special election is then held for the affected positions.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9115,
+                  "end_offset": 9165
+                },
+                {
+                  "citation_index": 1,
+                  "start_offset": 9165,
+                  "end_offset": 9243
+                },
+                {
+                  "citation_index": 2,
+                  "start_offset": 9244,
+                  "end_offset": 9308
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This supplies the conditional failure antecedent."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This completes the failure condition and specifies removal of the entire company representation."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "This states the resulting special election for those positions."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "corporate_limit",
+          "present": true,
+          "reason": "The answer explicitly states a maximum of two members per company, though that number is absent from the selected quotations."
+        },
+        {
+          "fact_id": "resignation_window",
+          "present": true,
+          "reason": "It states enough resignations within 28 days after the job-change trigger in the question to restore the cap."
+        },
+        {
+          "fact_id": "removal_after_failure",
+          "present": true,
+          "reason": "It specifies removal of the entire company's representation if resignations cannot restore the limit in time."
+        },
+        {
+          "fact_id": "replacement_election",
+          "present": false,
+          "reason": "The special election for affected positions is stated, but the required 'as soon as possible' timing is omitted."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The two-member cap is unsupported by the selected lines, and the special-election timing is absent. The conditional resignation/removal sequence is otherwise preserved. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "short_units",
+        "confidence": "high",
+        "reason": "Every selected unit is an individual wrapped line, including fragments on either side of sentence boundaries. No arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-10",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "At 15:10, there was no record of entry approval for personal free practice.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1181,
+                  "end_offset": 1220
+                }
+              ]
+            },
+            {
+              "text": "At 15:10, there was no record of an actual start for personal free practice.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1181,
+                  "end_offset": 1220
+                }
+              ]
+            },
+            {
+              "text": "Personal free practice had not yet begun.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1119,
+                  "end_offset": 1138
+                }
+              ]
+            },
+            {
+              "text": "The lack of an approval/start record is explained by practice not having begun ('as it had not yet begun').",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The paragraph supports the separate status and missing-record facts. It does not establish the added causal explanation: entry approval can precede a start, and no cause for absence of either record is stated."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "Yun La-on was scheduled to recheck the use area at 15:15.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1139,
+                  "end_offset": 1180
+                }
+              ]
+            },
+            {
+              "text": "The scheduled 15:15 recheck also covers the preceding cleanup status.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1139,
+                  "end_offset": 1180
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected paragraph names the person, planned time, and both check subjects; the transliteration is acceptable."
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "facts": [
+            {
+              "text": "The free-practice timetable confirmed in the February 13 meeting remained valid at handover.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1333,
+                  "end_offset": 1379
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly supports the additional still-valid timetable fact."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "not_started",
+          "present": true,
+          "reason": "It explicitly says personal free practice had not yet begun at the cutoff."
+        },
+        {
+          "fact_id": "no_approval_or_start_record",
+          "present": true,
+          "reason": "It explicitly states absence of both records at 15:10 and does not call that a denial."
+        },
+        {
+          "fact_id": "planned_recheck",
+          "present": true,
+          "reason": "It preserves Yun Raon's planned 15:15 check of the use area and prior cleanup."
+        },
+        {
+          "fact_id": "next_shift_recording",
+          "present": false,
+          "reason": "The next worker's actual-approval/progress recording duty and the prohibition on carrying over prior-class approval are omitted."
+        }
+      ],
+      "full_correct": false,
+      "reason": "Required follow-up recording/no-transfer instructions are absent. The separate status facts are supported, but the added 'as' explanation for missing records is not established by the quotation. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "Each quotation contains an entire multi-sentence handover paragraph. No arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-11",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "Resurfacing before the beginner class ended at 14:03.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 710,
+                  "end_offset": 733
+                }
+              ]
+            },
+            {
+              "text": "Entry approval for the beginner balance class occurred at 14:14.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 813,
+                  "end_offset": 840
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This row records resurfacing completion at 14:03."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This row explicitly records class entry approval at 14:14."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "The beginner balance class actually began at 14:18.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 845,
+                  "end_offset": 870
+                }
+              ]
+            },
+            {
+              "text": "The beginner balance class actually ended at 15:03.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 875,
+                  "end_offset": 899
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The row explicitly identifies the class's actual start."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "The row explicitly identifies the class's actual finish."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "resurfacing_finished",
+          "present": false,
+          "reason": "The completion time is given, but Go Haerim's recording of it is not included in the answer text."
+        },
+        {
+          "fact_id": "inspection_held",
+          "present": false,
+          "reason": "The 14:05 inspection hold caused by water near the eastern fence is omitted."
+        },
+        {
+          "fact_id": "reinspection_passed",
+          "present": false,
+          "reason": "Residual-water cleanup and Go Haerim's 14:11 reinspection pass are omitted."
+        },
+        {
+          "fact_id": "entry_approved",
+          "present": false,
+          "reason": "The approval time is given, but Yun Raon is not named as the approving person."
+        },
+        {
+          "fact_id": "actual_lesson_window",
+          "present": true,
+          "reason": "Both actual class times, 14:18 and 15:03, are explicitly stated."
+        }
+      ],
+      "full_correct": false,
+      "reason": "All stated event times are supported, but the held inspection and reinspection are missing and the required actors are omitted. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "short_units",
+        "confidence": "high",
+        "reason": "All selected units are individual event-table rows. They contain self-describing event text even without the general table header. No arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-12",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "The beginner balance class's previous time was 14:00–14:45.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 607,
+                  "end_offset": 617
+                },
+                {
+                  "citation_index": 0,
+                  "start_offset": 646,
+                  "end_offset": 666
+                }
+              ]
+            },
+            {
+              "text": "Its changed time was 14:18–15:03.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 607,
+                  "end_offset": 627
+                },
+                {
+                  "citation_index": 0,
+                  "start_offset": 646,
+                  "end_offset": 680
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected complete table contains both the column roles and the relevant class row."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "The confirmed change must be reflected on the lobby notice board.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1060,
+                  "end_offset": 1104
+                }
+              ]
+            },
+            {
+              "text": "The change must also be sent by text to the session's registrants.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1060,
+                  "end_offset": 1104
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The paragraph explicitly requires both channels."
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "facts": [
+            {
+              "text": "The content reflected in each notification channel must be recorded.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1105,
+                  "end_offset": 1138
+                }
+              ]
+            },
+            {
+              "text": "The processing time in each notification channel must be recorded.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1105,
+                  "end_offset": 1138
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly supplies both required record fields for each channel."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "previous_session_window",
+          "present": true,
+          "reason": "The previous time is explicitly stated and tied to the table's previous-time column."
+        },
+        {
+          "fact_id": "new_session_window",
+          "present": false,
+          "reason": "The new time is stated, but its required applicability to February 15 alone is not stated."
+        },
+        {
+          "fact_id": "required_notification_channels",
+          "present": true,
+          "reason": "Both lobby notice board and texts to session registrants are included."
+        },
+        {
+          "fact_id": "per_channel_records",
+          "present": false,
+          "reason": "Both channel-specific record fields are given, but the reception staff's responsibility is omitted."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The selected quotations support the stated times, channels, and fields, but the one-day scope and responsible recorder in the required facts are omitted. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "The time quotation includes the complete table with header and two session rows; other quotations contain the full notification paragraph. No arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-13",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "Enough committee members must resign within 28 days to restore the maximum representation.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9005,
+                  "end_offset": 9114
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly supplies the resignation requirement and period; the question provides the job-change scenario."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "If enough members cannot be found to resign after that period, the entire company's representation is removed.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9115,
+                  "end_offset": 9243
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected paragraph contains this complete conditional removal rule."
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "facts": [
+            {
+              "text": "In that removal case, a special election is held for those positions.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9115,
+                  "end_offset": 9308
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected paragraph supplies both the antecedent removal case and resulting election."
+            }
+          ]
+        },
+        {
+          "claim_index": 3,
+          "facts": [
+            {
+              "text": "A special election for a position lost through resignation or other member loss is held as soon as possible.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9560,
+                  "end_offset": 9708
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected special-election paragraph directly establishes prompt election timing for the lost position."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "corporate_limit",
+          "present": false,
+          "reason": "The answer refers to a maximum but never states the required cap of two members from one company."
+        },
+        {
+          "fact_id": "resignation_window",
+          "present": true,
+          "reason": "Within the question's representation-change scenario, it states enough resignations within 28 days to restore the cap."
+        },
+        {
+          "fact_id": "removal_after_failure",
+          "present": true,
+          "reason": "It states the full-company removal consequence when sufficient resignations cannot be found after the period."
+        },
+        {
+          "fact_id": "replacement_election",
+          "present": true,
+          "reason": "It states the election for affected positions and its 'as soon as possible' timing."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The conditional process and election timing are supported, but the numerical corporate-representation cap is missing. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "Three claims repeat a long multi-sentence representation paragraph; the fourth selects the entire special-election paragraph. No arm mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-14",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "Without unanimous maintainer approval, a majority of maintainers must approve the PR.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9583,
+                  "end_offset": 9691
+                }
+              ]
+            },
+            {
+              "text": "In that maintainer-approval procedure, no maintainer may object by requesting changes.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9696,
+                  "end_offset": 9767
+                }
+              ]
+            },
+            {
+              "text": "Without unanimous approval the PR should remain open at least five days before merger.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 9768,
+                  "end_offset": 9901
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The selected full procedure includes majority approval, no maintainer objection through changes, and the five-day non-unanimous waiting period."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "The nominee becomes a triager after the PR is merged.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 10066,
+                  "end_offset": 10135
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly establishes status after merger."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "default_scope",
+          "present": false,
+          "reason": "The answer text omits the TC-ratified SIG-charter exception and the default existing-maintainer election scope, even though those appear in the quotation."
+        },
+        {
+          "fact_id": "nominee_acceptance",
+          "present": false,
+          "reason": "The nominee's acceptance by approving the PR appears only in the source quotation, not in the answer text."
+        },
+        {
+          "fact_id": "majority_no_objection",
+          "present": true,
+          "reason": "The answer includes majority maintainer approval and no changes objection within that procedure."
+        },
+        {
+          "fact_id": "five_day_window",
+          "present": true,
+          "reason": "It states the five-day waiting period for the non-unanimous path."
+        },
+        {
+          "fact_id": "status_after_merge",
+          "present": true,
+          "reason": "It explicitly places triager status after PR merger."
+        }
+      ],
+      "full_correct": false,
+      "reason": "All stated requirements are supported, but nominee acceptance and the default-procedure exception/scope are omitted. Metadata-exposed, label-masked posthoc AI diagnosis only.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "The main claim selects the entire triager procedure, including multiple paragraphs and all merge-condition bullets. The status claim selects a short complete sentence. No arm mapping was inspected."
+      }
+    }
+  ]
+}

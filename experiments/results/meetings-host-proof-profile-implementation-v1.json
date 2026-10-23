@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "synthetic-host-proof-implementation-checks",
+  "source_files": {
+    "scripts/profile_meeting_host_proof.py": "995b342878c8ef34722787742819d36252d67dbb045ee60cce905ed8ae54e7cc",
+    "tests/test_profile_meeting_host_proof.py": "659546d95c0d298a011332dd687808c9e72959f695b6d65f3591e1c81a1886df"
+  },
+  "source_before_after_equal": true,
+  "pytest": {
+    "passed": 29,
+    "skipped": 2,
+    "seconds": 56.33,
+    "scope": "Synthetic fixtures only",
+    "skip_reason": "Windows symlink privilege unavailable; hardlink checks executed"
+  },
+  "ruff": "passed",
+  "independent_read_review": {
+    "role": "free_qa_candidate_review",
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "same_source_hashes": true,
+    "remaining_findings": 0,
+    "not_execution_proof": true
+  },
+  "implementation_role": {
+    "role": "host_proof_profile",
+    "model": "gpt-6-astra",
+    "effort": "high"
+  },
+  "freeze": {
+    "file": "data/evaluation/meetings-host-proof-profile-source-freeze-v1.json",
+    "sha256": "1171f14f7cb176838385723a040ded6921409cc1cfb168833d35e4782687f412",
+    "bound_files": 52,
+    "code_files": 50,
+    "import_candidate_paths": 1352,
+    "fixture_manifest_sha256": "5637824f61154370b1d0f1335aa9dfd489091c3d687957dd0ba14c7075087384"
+  },
+  "initial_failures_preserved_as": "Explicit observation summary, not raw stdout; original tool outputs remain in task history",
+  "intermediate_results_not_summed": true,
+  "official_profile_runs": 0,
+  "native_calls": 0,
+  "tokenizer_calls": 0,
+  "http_calls": 0,
+  "quality_calls": 0,
+  "human_reviews": 0,
+  "artifacts": [
+    {
+      "file": ".local/host-proof-profile-implementation-v1/final-after-hashes.json",
+      "sha256": "69099f4cbc38212e1ced728fc83f54dc0e83ab3b8bd6f13274240b887bdaf8d0",
+      "bytes": 376
+    },
+    {
+      "file": ".local/host-proof-profile-implementation-v1/final-before-hashes.json",
+      "sha256": "69099f4cbc38212e1ced728fc83f54dc0e83ab3b8bd6f13274240b887bdaf8d0",
+      "bytes": 376
+    },
+    {
+      "file": ".local/host-proof-profile-implementation-v1/final-pytest.txt",
+      "sha256": "6d77e828916ea821ead83250ed7276f39fa02809a759391791e32cc303e8e05e",
+      "bytes": 113
+    },
+    {
+      "file": ".local/host-proof-profile-implementation-v1/final-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "file": ".local/host-proof-profile-implementation-v1/final-source-hashes.json",
+      "sha256": "69099f4cbc38212e1ced728fc83f54dc0e83ab3b8bd6f13274240b887bdaf8d0",
+      "bytes": 376
+    },
+    {
+      "file": ".local/host-proof-profile-implementation-v1/initial-and-intermediate-observations.txt",
+      "sha256": "63c37c20ffa16d3dcb2364cd7c8ecf906fcb924a576225eba1bfae3ef12b8d32",
+      "bytes": 1630
+    },
+    {
+      "file": ".local/host-proof-profile-implementation-v1/intermediate-25-pytest.txt",
+      "sha256": "914ec8ef577b936dc7151a57b2248f5c1b566c9a10d3365dfb29d6902825ffcc",
+      "bytes": 113
+    },
+    {
+      "file": ".local/host-proof-profile-implementation-v1/intermediate-25-source-hashes.json",
+      "sha256": "75d7731ebbb25da308d9148c25ebafe582ca0ae6e1135555db5a67e3ebde93d3",
+      "bytes": 376
+    },
+    {
+      "file": ".local/host-proof-profile-implementation-v1/intermediate-29-pytest.txt",
+      "sha256": "3b1fe481b5d3f4e25e84c4aec8515d1fa9c7637f602be01261dff00327698e8a",
+      "bytes": 123
+    }
+  ],
+  "limitations": [
+    "Deadline is checked at I/O boundaries, not hard I/O preemption.",
+    "Terminal elapsed timestamp precedes its own persistence.",
+    "Persisted passed is provisional until CLI exit0 and final passed summary; failure amendment itself may fail.",
+    "Returned read bytes are measured; unknown OS transfer before a read exception is not inferred."
+  ]
+}

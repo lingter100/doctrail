@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "run_dir": "C:\\Users\\SSAFY\\개인프로젝트\\.local\\meetings-service-rag-calibration-run-v1",
+  "plan_sha256": "f8c7daac9cf53c10ca4eca460d6e6e75625c73a52fdc31443e876dfd7590d56f",
+  "commit": "c8c120d0e573f9cccadf5105341de0500ebcb454",
+  "policy": {
+    "startup_seconds": 120,
+    "active_seconds": 1500,
+    "cleanup_seconds": 5,
+    "answer_seconds": 90,
+    "analyze_seconds": 120,
+    "method": "hybrid_rerank",
+    "profile": "base",
+    "limit": 5,
+    "gpu_layers": 28
+  },
+  "accepted_bindings": {
+    "source_freeze": "423316335a89a55eb3fa052f66dd7b34fb2062072a849f02c97a9134c27799bc",
+    "item_freeze": "acb3c65ebdd309fa3f778724134250335acaea9a8b71c228e9a0a46792b2251e",
+    "ci": "1ac57276a21ccd7a7866667e77b00c8e4812565164c35c44ba01175dc8f1786c",
+    "roles": "a988425badb5c71ae2eacf249556213115cafb9fc5d7de44cc7ce29f921ecfe5"
+  },
+  "executor": "/root/service_rag_calibration_sources",
+  "final_judge": "/root/service_rag_calibration_final_judge",
+  "created_at": "2026-10-22T00:50:59.732989+00:00",
+  "status": "prepared_for_parent_commit_not_runtime_dispatched",
+  "runtime_authorization": "This preparation does not authorize execution. Parent must commit the registration and separately dispatch one real calibration phase. The proposed run directory remains absent until that dispatch.",
+  "preparation_dispatch_basis": {
+    "parent_reported_receipt_commit": "3cedd19b13385b096b016f6c3ccdb5deb5ee7e38",
+    "tested_implementation_commit": "c8c120d0e573f9cccadf5105341de0500ebcb454",
+    "ci_receipt_sha256": "1ac57276a21ccd7a7866667e77b00c8e4812565164c35c44ba01175dc8f1786c",
+    "implementation_push_run": 39700954136,
+    "implementation_pr_run": 39700959236,
+    "github_author": "lingter100",
+    "github_committer": "lingter100",
+    "git_and_network_reverification_by_executor": false
+  },
+  "working_directory": "C:\\Users\\SSAFY\\개인프로젝트",
+  "question_order": [
+    "service-rag-cal-01",
+    "service-rag-cal-02",
+    "service-rag-cal-03",
+    "service-rag-cal-04",
+    "service-rag-cal-05",
+    "service-rag-cal-06"
+  ],
+  "questions_binding": {
+    "path": "data/evaluation/meetings-service-rag-calibration-v2/draft-questions-v1.json",
+    "bytes": 2529,
+    "sha256": "bec375a38be8d2fd81bbce343b2f70f726d441a238d14218125967f41b1946b1"
+  },
+  "custodian_freeze_verification": {
+    "source": {
+      "binding_count": 64,
+      "all_match": true,
+      "binding_array_sha256": "a17a539e7b8b9866160e624c443ba340e91c11cdf4d37feb480103efa3f3abee",
+      "verified_at": "2026-10-22T00:50:59.675796+00:00"
+    },
+    "item": {
+      "binding_count": 10,
+      "all_match": true,
+      "binding_array_sha256": "cea6e3b30c2245314042d8b3e08c1d3fa8527ef19bb0ae1ef808c65af39dd676",
+      "verified_at": "2026-10-22T00:50:59.676909+00:00"
+    },
+    "oracle_and_selection_integrity": "Custodian byte/hash verification only. Driver must not open those files or follow paths inside freezes.",
+    "semantic_item_changes": 0
+  },
+  "actor_workspace_contract": {
+    "actor_count": 2,
+    "workspace_count": 2,
+    "families": [
+      {
+        "id": "cal-v2-public-gitops",
+        "principal": "actor1",
+        "source_kind": "public"
+      },
+      {
+        "id": "cal-v2-synthetic-garam-sound",
+        "principal": "actor2",
+        "source_kind": "synthetic"
+      }
+    ],
+    "workspace_names": "Exact family IDs; workspace and user UUIDs are assigned only by future registration responses.",
+    "membership": "actor2 joins actor1 workspace as in the fixed browser code; actor1 is not a member of actor2 workspace.",
+    "visibility_rule": "General document private; both meeting documents workspace, identically for both families. Chosen by document kind, without question or oracle selection.",
+    "answer_principal": "Each family owner, with access to all three whole family documents.",
+    "service_search_kind": "all",
+    "extra_answer_filters": false
+  },
+  "source_mapping_contract": {
+    "whole_original_documents": 6,
+    "whole_chunks": 32,
+    "ordinary_document_uploads": 2,
+    "meeting_uploads": 4,
+    "prepared_document_revision": 1,
+    "old_ids": "Prepared IDs are taken from the accepted real Java document readbacks; the future run must generate distinct document and chunk IDs and record the mapping.",
+    "source_revision": "Public upstream immutable commit; synthetic immutable accepted content SHA-256. Prepared service revision1 is recorded separately.",
+    "prior_java_scope": "Ordinary /documents ingestion and full chunk verification only; prior source preparation did not validate meeting registration or autoanalysis.",
+    "raw_files_rewritten": false,
+    "questions_rewritten": false
+  },
+  "existing_model_policy_bindings": [
+    {
+      "path": "data/models/m3-models.json",
+      "bytes": 2532,
+      "sha256": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1"
+    },
+    {
+      "path": "data/models/meetings-generation-qwen35-v1.json",
+      "bytes": 2553,
+      "sha256": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99"
+    }
+  ],
+  "existing_policy_scope": "Use the registered launcher/default factories and their exact CI-bound policies. No endpoint, model, context, retrieval, tokenizer, repair, translation, warmup or fallback override.",
+  "single_use_contract": {
+    "maximum_answer_posts": 6,
+    "maximum_answer_native_attempts_per_case": 1,
+    "maximum_meeting_autoanalysis_api_operations": 4,
+    "analysis_native_attempts": "Separately counted under the existing multi-unit extraction policy; not asserted as one native call per API operation.",
+    "phase_restart_allowed": false,
+    "request_resend_allowed": false,
+    "resource_or_integrity_failure": "Stop phase at first failure and retain later cases as unexecuted.",
+    "semantic_judgment": "Separate registered final judge after shutdown; executor does not score or tune responses."
+  },
+  "exposure": {
+    "same_source_item_author_executor": true,
+    "previous_own_source_documents": 6,
+    "previous_own_source_chunks": 32,
+    "previous_own_items": 6,
+    "previous_own_oracle_facts": 22,
+    "earlier_own_calibration_v1_readme_exposure": true,
+    "generic_code_fixed_prompts_and_synthetic_examples_exposed": true,
+    "final_answer_judge_excluded": true,
+    "other_split_semantic_reads_this_preparation": 0
+  },
+  "current_actual": {
+    "official_run_directory_created": false,
+    "official_phase_started": false,
+    "answer_posts": 0,
+    "meeting_uploads": 0,
+    "server_processes_started": 0,
+    "java_processes_started": 0,
+    "native_calls": 0,
+    "tokenizer_calls": 0,
+    "model_calls": 0
+  }
+}

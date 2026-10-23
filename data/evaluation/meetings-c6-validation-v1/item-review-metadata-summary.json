@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "reviewer_id": "/root/c6_validation_prereviewer",
+  "source_and_item_author_id": "/root/c6_validation_author",
+  "reviewed_at_utc": "2026-10-20T03:24:21.358701+00:00",
+  "verdict": "rejected",
+  "accepted_items": 7,
+  "rejected_items": 1,
+  "source_items_changed": 0,
+  "item_facts_reviewed": 33,
+  "required_facts_missing": 5,
+  "rejection_categories": {
+    "missing_sufficient_evidence_alternative": 1
+  },
+  "structural_and_whole_chunk_checks_passed": true,
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_checked": true,
+  "all_sufficient_alternatives_complete": false,
+  "expected_status_changes_requested": 0,
+  "question_or_fact_wording_changes_requested": 0,
+  "existing_evidence_alternatives_to_remove": 0,
+  "missing_evidence_alternatives_to_add": 1,
+  "answered_coverage": {
+    "general_only": 1,
+    "multiple_meetings": 2,
+    "general_plus_meeting": 1,
+    "all_sufficient_alternatives_require_multiple_documents": 3,
+    "ko_question_en_evidence": true,
+    "en_question_ko_evidence": true
+  },
+  "author4_unchanged": 4,
+  "source23_unchanged": 23,
+  "code77_unchanged": 77,
+  "actual_preauthorization": {
+    "path": ".local/meetings-c6-validation-item-review-v1/preauthorization-v1.json",
+    "sha256": "d0d620dd871c263d25156a475781a31152c66d4007b9927e15ea4e2cc9adbccf",
+    "code": 77,
+    "source": 15,
+    "Git_proven_pairs": 191,
+    "snapshots": 97
+  },
+  "head_before": "eae71405b679f19ec2f7c53a591bc64052c3de17",
+  "head_after": "eae71405b679f19ec2f7c53a591bc64052c3de17",
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "source_freeze_sha256": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625",
+  "source_item_preproof_memory_planning_disclosure_preserved": true,
+  "internal_thought_timing_proven": false,
+  "original_item_sha256": {
+    "data/evaluation/meetings-c6-validation-v1/draft.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft.json": "196ed54abf3709213e7818fecd30b9f746ff30493133f48b5f37320d7c55ba19",
+    "data/evaluation/meetings-c6-validation-v1/context-selection.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c",
+    "data/evaluation/meetings-c6-validation-v1/author-receipt.json": "6c0e19979d53250e4e68881db07f8e906350fce1e405f25c4e702802b510bde0"
+  },
+  "review_artifacts": {
+    "data/evaluation/meetings-c6-validation-v1/item-prereview.json": "b24d85e24a236ebffbae451e36bad60531d7d3b71a0e81c470392145b71271c2",
+    "data/evaluation/meetings-c6-validation-v1/item-prereview-notes.md": "75edb49498c21aa2df2bb29fadcb035fa190b7ce947db4f21c8602b3e4ebb0bf"
+  },
+  "author_safe_feedback": {
+    "path": ".local/meetings-c6-validation-item-review-v1/author-safe-feedback-v1.json",
+    "sha256": "5570b6d4a06f55383f02da20f6a1df2bc911f73302bdc41134d39df8da5ddd3c",
+    "safe_for_same_split_author": true,
+    "calibration_semantics_included": false
+  },
+  "reviewer_display_error": {
+    "count": 1,
+    "kind": "wrong_key_in_display_projection_not_product_validation",
+    "evidence": {
+      "file": ".local/meetings-c6-validation-item-review-v1/inspection-failure-v1.json",
+      "sha256": "59c04e778b05521e6ca7ba8bbb6dfa8dee819e424e6bce19b482a87e12910021"
+    },
+    "originals_modified": false
+  },
+  "structural_replay": {
+    "file": ".local/meetings-c6-validation-item-review-v1/structural-replay-v1.json",
+    "sha256": "14c676966202be5f7a1808454c5747fef0e5265a43e58bd6cc1f588fdbf14610"
+  },
+  "item_freeze_created": false,
+  "rejected_prereview_gate": {
+    "status": "correctly_rejected",
+    "code": "preparation_prereview_not_accepted",
+    "official_preparation_invoked": false
+  },
+  "same_split_reuse_disclosed": true,
+  "prior_calibration_SOURCE_only_freshness_exposure_disclosed": true,
+  "calibration_item_oracle_context_access": 0,
+  "excluded_final_output_judge": true,
+  "counts": {
+    "tokenizer_calls": 0,
+    "official_offline_preparations": 0,
+    "native_generations": 0,
+    "product_model_calls": 0,
+    "Maven_or_test_runs": 0,
+    "Git_mutations": 0,
+    "source_edits": 0,
+    "author_item_edits": 0,
+    "old_closed_semantic_reads": 0,
+    "final_judge_contacts_or_reads": 0
+  },
+  "semantic_item_texts_quotes_or_reasoning_in_this_summary": false,
+  "next_action": "Parent preserves original item/rejection artifacts, registers a new author revision and routes only the author-safe feedback; no tokenizer/native/offline yet."
+}

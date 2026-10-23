@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "bounded_source_feasibility_metadata_exclusions",
+  "prior_index": {
+    "path": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+    "sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa",
+    "rows": {
+      "rows": 110,
+      "canonical_unique_rows": 107,
+      "exact_repeated_rows_retained": 3,
+      "inherited_rows": 98,
+      "new_closed_c6_rows": 12,
+      "normalized_document_rows": 42,
+      "long_paragraph_rows": 42
+    },
+    "limitations": [
+      "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+      "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+      "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+    ]
+  },
+  "prior_repositories_normalized": [
+    "apache/arrow",
+    "fastapi/fastapi",
+    "rust-lang/lang-team",
+    "mkdocs/mkdocs",
+    "nodejs/diagnostics",
+    "numpy/numpy",
+    "open-telemetry/community",
+    "openmainframeproject/tac",
+    "python/peps",
+    "rust-lang/compiler-team",
+    "scikit-image/skimage-archive",
+    "openjs-foundation/cross-project-council",
+    "jupyter/community-committee"
+  ],
+  "additional_c7_body_repositories": [
+    "kubernetes/community",
+    "uio-carpentry/organisational",
+    "agldwg/meeting-minutes",
+    "nodejs/package-maintenance",
+    "openjs-foundation/standards",
+    "servo/project"
+  ],
+  "additional_identity_provenance": "Prior C7 source roles returned body exposure metadata, retained in parent task context; no historical body reopened for this index. Whole repository exclusion conservatively covers those sources.",
+  "excluded_repositories": [
+    "agldwg/meeting-minutes",
+    "apache/arrow",
+    "fastapi/fastapi",
+    "jupyter/community-committee",
+    "kubernetes/community",
+    "mkdocs/mkdocs",
+    "nodejs/diagnostics",
+    "nodejs/package-maintenance",
+    "numpy/numpy",
+    "open-telemetry/community",
+    "openjs-foundation/cross-project-council",
+    "openjs-foundation/standards",
+    "openmainframeproject/tac",
+    "python/peps",
+    "rust-lang/compiler-team",
+    "rust-lang/lang-team",
+    "scikit-image/skimage-archive",
+    "servo/project",
+    "uio-carpentry/organisational"
+  ],
+  "count": 19,
+  "historical_body_reads_for_index": 0,
+  "complete_semantic_duplicate_absence_proven": false,
+  "policy": "Exclude entire repositories and all inherited identity/fingerprint matches. Preserve gaps; do not reopen old bodies to fill them."
+}

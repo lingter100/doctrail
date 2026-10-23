@@ -1,0 +1,1042 @@
+{
+  "schema_version": 1,
+  "reviewer_id": "/root/c2_calibration_judge",
+  "mapping_not_seen": true,
+  "independent_of_authors_and_designers": true,
+  "human_review_count": 0,
+  "judgments": [
+    {
+      "sample_id": "sample-001",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "Application startup and shutdown logic can prepare and clean up resources shared across requests.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 2,
+                  "start_offset": 689,
+                  "end_offset": 870
+                }
+              ]
+            },
+            {
+              "text": "Lifespan is the recommended mechanism for that preparation and cleanup.",
+              "supported": false,
+              "support": []
+            },
+            {
+              "text": "Preparation executes once before application startup and before receiving requests.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 40,
+                  "end_offset": 240
+                }
+              ]
+            },
+            {
+              "text": "Cleanup executes once when the application is shutting down.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 242,
+                  "end_offset": 454
+                }
+              ]
+            },
+            {
+              "text": "That shutdown cleanup follows completion of all request processing, as asserted by '모든 요청을 처리한 후'.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This establishes one-time startup before requests."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This establishes one-time shutdown after handling possibly many requests, but does not by itself establish the stronger all-requests-completed wording."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "This directly supports shared-resource preparation and cleanup."
+            },
+            {
+              "citation_index": 3,
+              "relevant": false,
+              "reason": "This orphaned before-yield/after-with fragment does not identify application start/shutdown timing or a recommendation. The claim does not assert yield/with behavior; the selected fragment adds no support for its stated facts."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "BackgroundTasks can be used for simple email notification after an action.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 2,
+                  "start_offset": 327,
+                  "end_offset": 569
+                },
+                {
+                  "citation_index": 3,
+                  "start_offset": 821,
+                  "end_offset": 955
+                }
+              ]
+            },
+            {
+              "text": "The background notification runs after the response is returned.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 42,
+                  "end_offset": 113
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly supplies post-response execution timing."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This is relevant to separating response delivery from completion of the background work."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "The email example directly supports email notifications as the intended use."
+            },
+            {
+              "citation_index": 3,
+              "relevant": true,
+              "reason": "This supplies the named BackgroundTasks interface for the preceding background-task discussion."
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "facts": [
+            {
+              "text": "The lifespan parameter is the recommended startup/shutdown mechanism.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 4736,
+                  "end_offset": 4869
+                }
+              ]
+            },
+            {
+              "text": "Providing lifespan means the old startup handlers are not called.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 4870,
+                  "end_offset": 4974
+                }
+              ]
+            },
+            {
+              "text": "Providing lifespan means the old shutdown handlers are not called.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 4870,
+                  "end_offset": 4974
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly states both the recommendation and mutual exclusivity with startup/shutdown handlers."
+            }
+          ]
+        },
+        {
+          "claim_index": 3,
+          "facts": [
+            {
+              "text": "These lifespan startup/shutdown events execute for the main application.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 7819,
+                  "end_offset": 7969
+                }
+              ]
+            },
+            {
+              "text": "They do not execute for mounted sub-applications.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 7819,
+                  "end_offset": 7969
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly limits these events to the main application and excludes mounted sub-applications."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "C3-CAL-01-F1",
+          "present": false,
+          "reason": "Lifespan is named, but the required implementation mechanism of supplying an async context manager to FastAPI's lifespan parameter is absent."
+        },
+        {
+          "fact_id": "C3-CAL-01-F2",
+          "present": true,
+          "reason": "The answer states one-time preparation before application startup, which places it before receiving requests."
+        },
+        {
+          "fact_id": "C3-CAL-01-F3",
+          "present": true,
+          "reason": "One-time cleanup at shutdown after request handling is stated; the stronger 'all requests' wording has a separate citation-support problem."
+        },
+        {
+          "fact_id": "C3-CAL-01-F4",
+          "present": true,
+          "reason": "It identifies BackgroundTasks for simple email notifications and execution after returning the response, so the client need not wait for that execution."
+        },
+        {
+          "fact_id": "C3-CAL-01-F5",
+          "present": true,
+          "reason": "The answer explicitly says the existing startup and shutdown handlers are no longer called when lifespan is used."
+        },
+        {
+          "fact_id": "C3-CAL-01-F6",
+          "present": true,
+          "reason": "Main-app-only execution and exclusion of mounted sub-applications are explicit."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The async-context-manager mechanism is missing. Claim 0's own selected quotations do not establish its recommendation or the all-requests-completed wording, and its yield fragment is not relevant support; the recommendation is supported only by a different claim's quotation. Final-answer-only, metadata-exposed label-masked AI review under the preregistered attestation; no plans or mapping inspected.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "medium",
+        "reason": "Selections are mostly complete explanatory paragraphs, with one short truncated yield fragment and one longer example block. This describes observed widths only, not an inferred plan or arm."
+      }
+    },
+    {
+      "sample_id": "sample-002",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": false,
+        "conditions": false,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "Ryu Jeong-ho must check passage/aisle access before reopening an area.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 801,
+                  "end_offset": 833
+                }
+              ]
+            },
+            {
+              "text": "Ryu Jeong-ho must check access to the inspection panel/cabinet.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 801,
+                  "end_offset": 833
+                }
+              ]
+            },
+            {
+              "text": "The aisle and access must be closed by Ryu Jeong-ho, as literally asserted by 'confirmed and closed'.",
+              "supported": false,
+              "support": []
+            },
+            {
+              "text": "Mun Da-eun must cross-check the book arrangement against location guidance.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 834,
+                  "end_offset": 858
+                }
+              ]
+            },
+            {
+              "text": "An area may reopen only after both checks are complete.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 801,
+                  "end_offset": 885
+                }
+              ]
+            },
+            {
+              "text": "Books in areas with outstanding checks are supplied by staff lending at the information desk.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 886,
+                  "end_offset": 923
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly supplies both assigned checks, their joint reopening condition and the temporary staff-lending arrangement; it never requires closing access."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "The actual work paragraph is relevant corroboration that access was checked and remained available, not that it was closed."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "This supplies the actual arrangement/guidance comparison and the outstanding-label restriction."
+            },
+            {
+              "citation_index": 3,
+              "relevant": true,
+              "reason": "The table header and affected rows are relevant to completed checks, available areas and the temporary staff-lending status."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "The first shelf was available at opening because its passage and arrangement/guidance checks were complete.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 2,
+                  "start_offset": 828,
+                  "end_offset": 846
+                },
+                {
+                  "citation_index": 2,
+                  "start_offset": 884,
+                  "end_offset": 921
+                }
+              ]
+            },
+            {
+              "text": "The end section of the second shelf retained an old sign pointing to its previous location.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 670,
+                  "end_offset": 711
+                }
+              ]
+            },
+            {
+              "text": "That end section could not open immediately because its location guidance did not match the new arrangement.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 712,
+                  "end_offset": 771
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This supports that the passage and inspection-panel access were confirmed after the physical move."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This directly establishes the old location label, guidance mismatch and delayed opening of the end section."
+            },
+            {
+              "citation_index": 2,
+              "relevant": true,
+              "reason": "Its complete status header and first-shelf row support availability at the opening."
+            },
+            {
+              "citation_index": 3,
+              "relevant": true,
+              "reason": "The overlapping table repeats both relevant shelf statuses and completes the second shelf's follow-up entry."
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "facts": [
+            {
+              "text": "Mun Da-eun replaced the restricted section's old sign with one for the new location.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 1108,
+                  "end_offset": 1148
+                }
+              ]
+            },
+            {
+              "text": "Mun Da-eun checked the replacement label against the book arrangement again.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 1108,
+                  "end_offset": 1163
+                }
+              ]
+            },
+            {
+              "text": "Mun Da-eun informed Bae Yun-seul that the check was complete.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 1108,
+                  "end_offset": 1181
+                }
+              ]
+            },
+            {
+              "text": "After that notification, Mun Da-eun removed the staff-lending notice for the section.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 1108,
+                  "end_offset": 1112
+                },
+                {
+                  "citation_index": 1,
+                  "start_offset": 1164,
+                  "end_offset": 1202
+                }
+              ]
+            },
+            {
+              "text": "The section then reopened for use.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 1164,
+                  "end_offset": 1212
+                }
+              ]
+            },
+            {
+              "text": "Mun Da-eun is female, as implied by the gendered pronoun 'she'.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This identifies the original label restriction and the corresponding staff-lending notice that the later actions resolve."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This directly supports the correction, recheck, notification, notice removal and reopening sequence, but gives no gender information."
+            }
+          ]
+        },
+        {
+          "claim_index": 3,
+          "facts": [
+            {
+              "text": "The correction completed the remaining location-guidance work.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1213,
+                  "end_offset": 1256
+                }
+              ]
+            },
+            {
+              "text": "Completing that guidance work did not end the overall trial.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1213,
+                  "end_offset": 1256
+                }
+              ]
+            },
+            {
+              "text": "The trial therefore continued beyond that correction.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 1213,
+                  "end_offset": 1256
+                }
+              ]
+            },
+            {
+              "text": "A final maintenance/upkeep decision about the moved shelves remained pending.",
+              "supported": false,
+              "support": []
+            },
+            {
+              "text": "Opinions were to be collected through April 24.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 1357,
+                  "end_offset": 1391
+                }
+              ]
+            },
+            {
+              "text": "The collection of opinions through April 24 was itself one of the pending decisions, as listed under 'other pending decisions'.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly limits the completion to guidance work and keeps the overall trial ongoing."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This supports a pending decision about retaining the layout and planned feedback collection. It does not describe shelf maintenance, nor make the already-planned collection an undecided choice."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "C3-CAL-05-F1",
+          "present": true,
+          "reason": "Both responsible people, both checks, their joint reopening requirement and staff lending while checks remain are present. The added instruction to close access is separately unsupported and contrary to the access condition."
+        },
+        {
+          "fact_id": "C3-CAL-05-F2",
+          "present": true,
+          "reason": "The first shelf's completed checks and readiness at the opening are explicitly stated within the question's opening-event scope."
+        },
+        {
+          "fact_id": "C3-CAL-05-F3",
+          "present": false,
+          "reason": "The old label and guidance mismatch are stated, and staff lending is described generally, but the answer never preserves the required explicit distinction that this second section's book order itself was correct."
+        },
+        {
+          "fact_id": "C3-CAL-05-F4",
+          "present": true,
+          "reason": "The answer identifies Mun Da-eun and the correction, recheck, notification to Bae, notice removal and reopening sequence after the initially restricted opening."
+        },
+        {
+          "fact_id": "C3-CAL-05-F5",
+          "present": true,
+          "reason": "It explicitly distinguishes completion of remaining guidance work from ending the trial."
+        },
+        {
+          "fact_id": "C3-CAL-05-F6",
+          "present": false,
+          "reason": "It substitutes 'final maintenance' for the decision to retain the layout and omits forwarding the collected work records and opinions to the next discussion."
+        }
+      ],
+      "full_correct": false,
+      "reason": "The answer adds a requirement to close access, unsupported gender and pending-decision wording, and mistranslates layout retention as maintenance. It omits the correct-book-order distinction and the full records-to-next-discussion follow-up. Final-answer-only, metadata-exposed label-masked AI review; no plans or mapping inspected.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "The citations are full multi-sentence paragraphs and overlapping table blocks, often containing more events than the linked claim. No plan or mapping was used."
+      }
+    },
+    {
+      "sample_id": "sample-003",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": false,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": false
+      },
+      "claims": [],
+      "required_facts": [
+        {
+          "fact_id": "C3-CAL-02-F1",
+          "present": false,
+          "reason": "The response abstains without supplying this fact, although the fixed oracle and adopted context provide its evidence."
+        },
+        {
+          "fact_id": "C3-CAL-02-F2",
+          "present": false,
+          "reason": "The response abstains without supplying this fact, although the fixed oracle and adopted context provide its evidence."
+        },
+        {
+          "fact_id": "C3-CAL-02-F3",
+          "present": false,
+          "reason": "The response abstains without supplying this fact, although the fixed oracle and adopted context provide its evidence."
+        },
+        {
+          "fact_id": "C3-CAL-02-F4",
+          "present": false,
+          "reason": "The response abstains without supplying this fact, although the fixed oracle and adopted context provide its evidence."
+        },
+        {
+          "fact_id": "C3-CAL-02-F5",
+          "present": false,
+          "reason": "The response abstains without supplying this fact, although the fixed oracle and adopted context provide its evidence."
+        }
+      ],
+      "full_correct": false,
+      "reason": "This is an answerable question: the adopted contexts provide typed BackgroundTasks injection, both function forms, add_task arguments, dependency-level object reuse/merging, and post-response timing. Abstaining is therefore incorrect. There are no asserted facts or citations to fail those vacuous checks. Final-answer-only, metadata-exposed label-masked AI review; no plans or mapping inspected.",
+      "masking_guess": {
+        "unit_style": "unknown",
+        "confidence": "none",
+        "reason": "The abstained response has no selected citation units from which to infer unit width. No plan or mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-004",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": false,
+        "completeness": false,
+        "language": true,
+        "temporal": false,
+        "subject": false,
+        "conditions": false,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [
+        {
+          "claim_index": 0,
+          "facts": [
+            {
+              "text": "A return-book waiting cart near the adult reading-room entrance caused readers' and return-sorting staff's routes to overlap.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 211,
+                  "end_offset": 292
+                }
+              ]
+            },
+            {
+              "text": "The relocation aimed to trial adjustments to existing furniture positions in response to that route conflict.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 211,
+                  "end_offset": 355
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This explicitly states the reported route conflict and the trial-adjustment purpose; the answer does not claim the problem was already solved."
+            }
+          ]
+        },
+        {
+          "claim_index": 1,
+          "facts": [
+            {
+              "text": "The approved trial places two movable shelves parallel to the window-side reading seats.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 542,
+                  "end_offset": 587
+                }
+              ]
+            },
+            {
+              "text": "Fixed shelves in the children's section are excluded from the move.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 588,
+                  "end_offset": 633
+                }
+              ]
+            },
+            {
+              "text": "The periodical display is also excluded from the move.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 588,
+                  "end_offset": 633
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly supplies the approved orientation, number and trial status, and both excluded fixtures."
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "facts": [
+            {
+              "text": "The first shelf obstructed the hand space needed to pull the window curtain.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 394,
+                  "end_offset": 436
+                }
+              ]
+            },
+            {
+              "text": "To address that obstruction, the first shelf was moved slightly away from the entrance.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 394,
+                  "end_offset": 484
+                }
+              ]
+            },
+            {
+              "text": "The second shelf was then aligned with the adjusted first shelf.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 456,
+                  "end_offset": 501
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This directly records the curtain interference, the adjustment direction and the subsequent second-shelf alignment."
+            }
+          ]
+        },
+        {
+          "claim_index": 3,
+          "facts": [
+            {
+              "text": "Usage was to be recorded from the next opening through April 24 as part of the approved trial.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 655,
+                  "end_offset": 701
+                }
+              ]
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This explicitly supplies both the start and end of the recording period."
+            }
+          ]
+        },
+        {
+          "claim_index": 4,
+          "facts": [
+            {
+              "text": "Mun Da-eun is responsible for compiling the records.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 1,
+                  "start_offset": 1358,
+                  "end_offset": 1379
+                }
+              ]
+            },
+            {
+              "text": "The records to compile are specifically the records of April 24, as phrased '4월 24일의 기록'.",
+              "supported": false,
+              "support": []
+            },
+            {
+              "text": "Cha So-yeon will personally review the records after compilation and before the next meeting.",
+              "supported": false,
+              "support": []
+            },
+            {
+              "text": "The next discussion will reconsider whether the layout should be retained based on recorded usage.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 655,
+                  "end_offset": 701
+                },
+                {
+                  "citation_index": 1,
+                  "start_offset": 1380,
+                  "end_offset": 1413
+                }
+              ]
+            },
+            {
+              "text": "That procedure will determine the permanent layout, rather than merely reconsider it.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "This supports recording usage and then discussing retention again; it does not guarantee a final permanent decision."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "This assigns compilation on April 24 to Mun and separate meeting scheduling to Cha. It does not restrict compilation to that day's records or assign Cha a personal review before the meeting."
+            }
+          ]
+        },
+        {
+          "claim_index": 5,
+          "facts": [
+            {
+              "text": "The relocation work date was April 13, 2026, a regular closure day.",
+              "supported": true,
+              "support": [
+                {
+                  "citation_index": 0,
+                  "start_offset": 634,
+                  "end_offset": 654
+                },
+                {
+                  "citation_index": 1,
+                  "start_offset": 156,
+                  "end_offset": 188
+                }
+              ]
+            },
+            {
+              "text": "The relocation was actually performed on that date, rather than only being scheduled or identified as the handover's target work.",
+              "supported": false,
+              "support": []
+            }
+          ],
+          "citations": [
+            {
+              "citation_index": 0,
+              "relevant": true,
+              "reason": "The meeting paragraph supplies the scheduled regular-closure date; by itself it is a plan."
+            },
+            {
+              "citation_index": 1,
+              "relevant": true,
+              "reason": "The header supplies the year and identifies the target work date, but contains no actual action/completion record. Actual actions elsewhere in the supplied context cannot be borrowed into this claim's selected citations."
+            }
+          ]
+        }
+      ],
+      "required_facts": [
+        {
+          "fact_id": "C3-CAL-04-F1",
+          "present": false,
+          "reason": "The route-conflict trigger and trial furniture adjustment are stated, but the required exclusions of increasing shelf count and discarding books are not stated."
+        },
+        {
+          "fact_id": "C3-CAL-04-F2",
+          "present": false,
+          "reason": "Two movable shelves, parallel trial placement and both excluded fixtures are stated, but the answer does not identify the moved shelves as the essay shelves."
+        },
+        {
+          "fact_id": "C3-CAL-04-F3",
+          "present": true,
+          "reason": "The date April 13, 2026, regular closure day, and recording from the next opening through April 24 are all stated. The separate assertion of actual execution has a citation-support issue."
+        },
+        {
+          "fact_id": "C3-CAL-04-F4",
+          "present": false,
+          "reason": "The curtain obstruction, move away from the entrance and second-shelf alignment are given; the answer omits Ryu Jeong-ho as actor and omits that the parallel orientation was maintained during the actual adjustment."
+        },
+        {
+          "fact_id": "C3-CAL-04-F5",
+          "present": false,
+          "reason": "The answer calls the arrangement a trial but never states that the meeting approval did not settle permanent placement or that retention remained undecided at handover."
+        },
+        {
+          "fact_id": "C3-CAL-04-F6",
+          "present": false,
+          "reason": "The answer includes compilation and a later discussion but changes compilation on April 24 into 'April 24's records,' omits Cha's separate scheduling duty, and asserts personal pre-meeting review and a final-decision outcome not provided by the source."
+        }
+      ],
+      "full_correct": false,
+      "reason": "Several required scope, actor and pending-status details are omitted. The follow-up is altered into compilation of one day's records, Cha's personal review and a guaranteed permanent-decision procedure; the last claim's selected plan/header do not establish actual execution. Final-answer-only, metadata-exposed label-masked AI review; no plans or mapping inspected.",
+      "masking_guess": {
+        "unit_style": "broad_units",
+        "confidence": "high",
+        "reason": "Each quotation is a complete paragraph or full metadata block, with several reused broad paragraphs. No item-level plan or mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-005",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": true,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [],
+      "required_facts": [
+        {
+          "fact_id": "C3-CAL-03-F1",
+          "present": false,
+          "reason": "No partial factual answer is supplied, consistently with the fixed oracle's required whole-question abstention."
+        },
+        {
+          "fact_id": "C3-CAL-03-F2",
+          "present": false,
+          "reason": "This essential requested result is absent from the adopted source family; no value is invented, so whole-question abstention is appropriate."
+        }
+      ],
+      "full_correct": true,
+      "reason": "Correct whole-question abstention: email mechanism and timing are available, but the requested guaranteed retry count after process interruption is not supplied. No retry count is fabricated. Final-answer-only, metadata-exposed label-masked AI review; no plans or mapping inspected.",
+      "masking_guess": {
+        "unit_style": "unknown",
+        "confidence": "none",
+        "reason": "The abstained response has no selected quotation units from which to infer width. No plan or mapping was inspected."
+      }
+    },
+    {
+      "sample_id": "sample-006",
+      "quality": {
+        "citation_exact": true,
+        "claim_support": true,
+        "completeness": true,
+        "language": true,
+        "temporal": true,
+        "subject": true,
+        "conditions": true,
+        "correct_abstention_or_answer": true
+      },
+      "claims": [],
+      "required_facts": [
+        {
+          "fact_id": "C3-CAL-06-F1",
+          "present": false,
+          "reason": "No partial factual answer is supplied, consistently with the fixed oracle's required whole-question abstention."
+        },
+        {
+          "fact_id": "C3-CAL-06-F2",
+          "present": false,
+          "reason": "No partial factual answer is supplied, consistently with the fixed oracle's required whole-question abstention."
+        },
+        {
+          "fact_id": "C3-CAL-06-F3",
+          "present": false,
+          "reason": "This essential requested result is absent from the adopted source family; no value is invented, so whole-question abstention is appropriate."
+        }
+      ],
+      "full_correct": true,
+      "reason": "Correct whole-question abstention: feedback-recording and compilation assignments are available, but no final favorable-response percentage or counts to calculate it are supplied. Final-answer-only, metadata-exposed label-masked AI review; no plans or mapping inspected.",
+      "masking_guess": {
+        "unit_style": "unknown",
+        "confidence": "none",
+        "reason": "The abstained response has no selected quotation units from which to infer width. No plan or mapping was inspected."
+      }
+    }
+  ]
+}

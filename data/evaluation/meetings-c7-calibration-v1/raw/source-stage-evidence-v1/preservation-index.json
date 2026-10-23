@@ -1,0 +1,714 @@
+{
+  "attribution": {
+    "bytes": 7521,
+    "path": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/attribution.json",
+    "sha256": "2b7f7c8e320c6971b774ccbadb618ea2e6b987cdd9c991ea6344fee8ded07df6"
+  },
+  "candidate003_canonical_metadata": {
+    "bytes": 2415,
+    "path": "data/evaluation/meetings-c7-calibration-v1/raw/attempt-003/canonical-metadata.json",
+    "sha256": "4aae7838dd3fab834ad21558123fc1c7cbd8aea44d0919aecb3241c182c5b426"
+  },
+  "corpus_status": "incomplete/no_adopted_corpus",
+  "exact_public_copies": [
+    {
+      "bytes": 21767,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/admission-001-observer.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/admission-001-observer.json",
+      "sha256": "93c00b8540a49bf2ddd12ccb585e13158f9c5bcc35474d4f9a86acb2e5f66506"
+    },
+    {
+      "bytes": 1948,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/canonical-metadata-rules-v1.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/canonical-metadata-rules-v1.json",
+      "sha256": "4965c7b61ef13dac119b347624ea098503f642c4ae82b91c98e8ca53b796fc97"
+    },
+    {
+      "bytes": 345,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/electron__governance-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/electron__governance-ref.json",
+      "sha256": "bafdf8d2315c0354cbe0548640c52e2d651a0f4d7ea1e1447a5b8bf504cd9d3f"
+    },
+    {
+      "bytes": 6276,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/electron__governance-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/electron__governance-repo.json",
+      "sha256": "d3ef29f19cd709d4096a2f0266ab6f7c1eafd7ef595882ba938a4a67c7c4242f"
+    },
+    {
+      "bytes": 89194,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/electron__governance-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/electron__governance-tree.json",
+      "sha256": "f4c8e6d8f9329b8142390919daf2741ff07256168757e64ea6cfc7e7073afc38"
+    },
+    {
+      "bytes": 345,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/nodejs__abi-stable-node-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/nodejs__abi-stable-node-ref.json",
+      "sha256": "fe8470efe23ea1b279478b6ea84d86c9eb6f683cb2bcc75f869f4fd6d37c5c1f"
+    },
+    {
+      "bytes": 6291,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/nodejs__abi-stable-node-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/nodejs__abi-stable-node-repo.json",
+      "sha256": "7dbdc0c76c267548fa63802533942cefb78a01d52e1b78d85177f3f5c791d298"
+    },
+    {
+      "bytes": 9480,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/nodejs__abi-stable-node-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/nodejs__abi-stable-node-tree.json",
+      "sha256": "5f38e365ec76ec43b104017b1296d6996307a315e3ac4f3084925cd0c4aececa"
+    },
+    {
+      "bytes": 327,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/nodejs__build-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/nodejs__build-ref.json",
+      "sha256": "af815cb085937772c4611694d99e68dea8f49f831b07fa3c388ad71507bc4a38"
+    },
+    {
+      "bytes": 5798,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/nodejs__build-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/nodejs__build-repo.json",
+      "sha256": "be92e9087ba5e3e37bef1bfa55e2854f104f6f7eb698921cafa2ddd410330e14"
+    },
+    {
+      "bytes": 196489,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/nodejs__build-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/nodejs__build-tree.json",
+      "sha256": "905118b26479df993ef3333f63465b543b1c3e8d0c183e89a47db98ead041d75"
+    },
+    {
+      "bytes": 40632,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-001/summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-001/summary.json",
+      "sha256": "7aa3df1be354f9f9e1fb54e726afab2eb0635b34d8ba608f8f9d3b9eacc1adb9"
+    },
+    {
+      "bytes": 341,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/jupyter__jupyter-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/jupyter__jupyter-ref.json",
+      "sha256": "392da6879bbcc0b4ef43d6aeb052a5ca3329f91b657f87d8f8d0c7e70bd8c2f5"
+    },
+    {
+      "bytes": 6173,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/jupyter__jupyter-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/jupyter__jupyter-repo.json",
+      "sha256": "22d29d87a39c326a2d85e03f93461c0225dd9ed647d42ba77e85b955999e2ca8"
+    },
+    {
+      "bytes": 1027,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/jupyter__jupyter-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/jupyter__jupyter-summary.json",
+      "sha256": "a66aa9a57f6d7d24c7d9efa4a589c4357cc1f5fb244a7c664b3c9b01aa78933b"
+    },
+    {
+      "bytes": 67734,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/jupyter__jupyter-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/jupyter__jupyter-tree.json",
+      "sha256": "9182950bdfbc364c513d88db2aec710c6d64e6ca46acf596b6b14f065754b2f4"
+    },
+    {
+      "bytes": 343,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/kubernetes__community-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/kubernetes__community-ref.json",
+      "sha256": "c59e81724a57ca15fcd26d7ae780135e555ff065a90e1cb15574ecfc01ff828a"
+    },
+    {
+      "bytes": 6410,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/kubernetes__community-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/kubernetes__community-repo.json",
+      "sha256": "989e48eeae40a07da89ee1a39479b87638f8c61ddca1f55ff4d706b288481376"
+    },
+    {
+      "bytes": 9074,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/kubernetes__community-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/kubernetes__community-summary.json",
+      "sha256": "8b71f58258a89f747b9ba7a11193ddb74425778751901d300f1049b3bf8fa01e"
+    },
+    {
+      "bytes": 470029,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/kubernetes__community-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/kubernetes__community-tree.json",
+      "sha256": "ca6bd779659dbac19a97a36d4c9945cd4ed5a75cf42c1b33f2fa881dcd89ef50"
+    },
+    {
+      "bytes": 343,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/rust-embedded__wg-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/rust-embedded__wg-ref.json",
+      "sha256": "76d0c278601f085091baf7be992340727df115c6586850a271943450ce177da8"
+    },
+    {
+      "bytes": 6147,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/rust-embedded__wg-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/rust-embedded__wg-repo.json",
+      "sha256": "d22f463789e38ae8577528d53aa3164f79695a62de3c7027b7c479df403878c5"
+    },
+    {
+      "bytes": 13941,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/rust-embedded__wg-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/rust-embedded__wg-summary.json",
+      "sha256": "e78040cfc576c4c334f447027f788b1b1f181bc65ecf97da0921f5dba1f9534d"
+    },
+    {
+      "bytes": 83507,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-002/rust-embedded__wg-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-002/rust-embedded__wg-tree.json",
+      "sha256": "48a19ce1b09de6d2cf650ab9491a3964780703a70be67df9f4de377dd535dc91"
+    },
+    {
+      "bytes": 3333,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-003/commit.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-003/commit.json",
+      "sha256": "fdfb98a8dbd378ccc03bfa3a04925ce3c73911fdc627585e9400a697d279ff1f"
+    },
+    {
+      "bytes": 11882,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-003/tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-003/tree.json",
+      "sha256": "dd373878088fc60a37b28ec2d1ccf37578076b003005555d0e83b7ade9cf4d1d"
+    },
+    {
+      "bytes": 4420,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-004/commit.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-004/commit.json",
+      "sha256": "f83429ca3e17e717ef1fc8816cf878b6b09aa57ca2c6dab057299207a6c8bea7"
+    },
+    {
+      "bytes": 166826,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-004/tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-004/tree.json",
+      "sha256": "96cd2521ea06ac196a90437d559f0379c26db8e7c6babdf8d63c7529645a747f"
+    },
+    {
+      "bytes": 160,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-005/jupyter__steering-council-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/jupyter__steering-council-summary.json",
+      "sha256": "1c5cf786173bf2e93e88e6a8d6cd6feb0d4d24b06c4cf3981f5aecf6d27d6160"
+    },
+    {
+      "bytes": 340,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-005/python__typing-council-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/python__typing-council-ref.json",
+      "sha256": "5354ad06f62a6d1f848cd9ff46aaeae4db9c66ddc7c2808ab23043b8bdf8648b"
+    },
+    {
+      "bytes": 6144,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-005/python__typing-council-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/python__typing-council-repo.json",
+      "sha256": "546c1b898ea5df2880c58df4c8fca8154059123686d605c12d6a7c55b6176467"
+    },
+    {
+      "bytes": 187,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-005/python__typing-council-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/python__typing-council-summary.json",
+      "sha256": "9f0664a81d75db53c3721976b3a489fe79a88ed7e2862926b8ee85752f795556"
+    },
+    {
+      "bytes": 409,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-005/python__typing-council-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/python__typing-council-tree.json",
+      "sha256": "8e209e585d0dc87d046fc10c6f75756ef37bf3cb231c952473bb41d8ea4c5990"
+    },
+    {
+      "bytes": 163,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-005/scientific-python__community-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-005/scientific-python__community-summary.json",
+      "sha256": "2e80990243b37a4729b5296e1bb40d76a5c6ce2942c21a26804561cbc7be583c"
+    },
+    {
+      "bytes": 339,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/jupyter__governance-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/jupyter__governance-ref.json",
+      "sha256": "7991969c00064406747ec6e17efa8db02b9569040c89939a4a976880302ee2e6"
+    },
+    {
+      "bytes": 6275,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/jupyter__governance-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/jupyter__governance-repo.json",
+      "sha256": "d5374c135318c71e076fbf6b253f6b8af0417c5f2b1ebb56bb6d84ecb6d070d3"
+    },
+    {
+      "bytes": 2672,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/jupyter__governance-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/jupyter__governance-summary.json",
+      "sha256": "652fcaa4f9214d247cfe3766301859b22bd94e275148795fc326e21f07968d48"
+    },
+    {
+      "bytes": 18024,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/jupyter__governance-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/jupyter__governance-tree.json",
+      "sha256": "0c5adf44033c513e639e0ec5b2a4b951353b8f4c9f6820560dc6775cf37a392b"
+    },
+    {
+      "bytes": 169,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/jupyter__software-steering-council-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/jupyter__software-steering-council-summary.json",
+      "sha256": "3504dc9348b790a7f48a97f514cb8e7844ba504a2c37d257b00acdeb29a5c345"
+    },
+    {
+      "bytes": 343,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/WebAssembly__meetings-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/WebAssembly__meetings-ref.json",
+      "sha256": "2f559c4d0c2c760812a4781f488e03c24b95d0cc721853d26c6c655f6623a7d8"
+    },
+    {
+      "bytes": 6281,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/WebAssembly__meetings-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/WebAssembly__meetings-repo.json",
+      "sha256": "d9c82a381520462dc37c85006cad4c2a1a1cdda3cd32cdc3fdc4563c1acf5473"
+    },
+    {
+      "bytes": 43397,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/WebAssembly__meetings-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/WebAssembly__meetings-summary.json",
+      "sha256": "01c1c8debd95ddc590734ab34231b81c30ac7745d880ef8f0f7c6d0431a13709"
+    },
+    {
+      "bytes": 333137,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-006/WebAssembly__meetings-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-006/WebAssembly__meetings-tree.json",
+      "sha256": "5a5f033a08ef16d38e89adda089a135aa1c6951b5e57a1779b032e014d56e97b"
+    },
+    {
+      "bytes": 18826,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-007/commits.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-007/commits.json",
+      "sha256": "57859a12294b65f3858c2ab783d6182d63484784b87c25d96625f99a1195138f"
+    },
+    {
+      "bytes": 10231,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-007/tree-0.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-007/tree-0.json",
+      "sha256": "04921fb744e1ba3cad87bfde4080e52b6648d67c9f762c730c6a065cea17ee11"
+    },
+    {
+      "bytes": 9303,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-007/tree-1.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-007/tree-1.json",
+      "sha256": "011c791333901b7b8f5ceffa39e0b58d4135d5a88dc672141aeb92ae29a8e062"
+    },
+    {
+      "bytes": 160,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-008/dask__community-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-008/dask__community-summary.json",
+      "sha256": "f8b4c6307107f8ac1023370b0affdb2c69c5a5d2c375ddcb901ba5ee220f6ee9"
+    },
+    {
+      "bytes": 168,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-008/kubernetes__sig-release-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-008/kubernetes__sig-release-summary.json",
+      "sha256": "c329651bfa6cda6ac83a58560f2b660bb06a5be9f63d978246d851b8342579a4"
+    },
+    {
+      "bytes": 157,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-008/numba__numba-summary.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-008/numba__numba-summary.json",
+      "sha256": "aa3ac1bd6937c936e76e1d415070fa40dfc73fe681712e2be70911e403c1a395"
+    },
+    {
+      "bytes": 5915,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-009/dask__community-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-009/dask__community-repo.json",
+      "sha256": "e84ed2785ce32a1c81b51e364c89afc6601da54f2b6babd1d2bf699756c9a985"
+    },
+    {
+      "bytes": 356,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-009/kubernetes__sig-release-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-009/kubernetes__sig-release-ref.json",
+      "sha256": "bd7d8e2b3446827a9c92ba7fa8b46911019ca7ef3d506f6eb45d1923f84886c6"
+    },
+    {
+      "bytes": 6609,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-009/kubernetes__sig-release-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-009/kubernetes__sig-release-repo.json",
+      "sha256": "06465f28446eef86b858505dd0080b427fbe1b40555e503e04fc2eac06453ec1"
+    },
+    {
+      "bytes": 1340558,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-009/kubernetes__sig-release-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-009/kubernetes__sig-release-tree.json",
+      "sha256": "f0c9ab58332cc6b5d8cd86e57881390c13142b42eee0f5b66966a67e0be5e004"
+    },
+    {
+      "bytes": 326,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-009/numba__numba-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-009/numba__numba-ref.json",
+      "sha256": "c6181bd48d4220bb7202b6f9851436ab8e544a01200cc6d7e516a718393ab9bf"
+    },
+    {
+      "bytes": 6051,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-009/numba__numba-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-009/numba__numba-repo.json",
+      "sha256": "2dee0372979b4f2ddc6be3cf96c38a5373505298894421e96398201e11af606c"
+    },
+    {
+      "bytes": 267814,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-009/numba__numba-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-009/numba__numba-tree.json",
+      "sha256": "c0d934e57279e661e8b5f8cb6b16d450e91e0d01f8833e18976f648347bafd73"
+    },
+    {
+      "bytes": 356,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/AGLDWG__meeting-minutes-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/AGLDWG__meeting-minutes-ref.json",
+      "sha256": "680160412c1b9bf33a88a240a0f490028c25f1bde8a56cf46f082a424da86fa5"
+    },
+    {
+      "bytes": 6411,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/AGLDWG__meeting-minutes-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/AGLDWG__meeting-minutes-repo.json",
+      "sha256": "e4726ad24a6f5b808f123b1abb213aeeb32b639ccbde51764fe3e41a4e10fd5e"
+    },
+    {
+      "bytes": 19394,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/AGLDWG__meeting-minutes-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/AGLDWG__meeting-minutes-tree.json",
+      "sha256": "cc641c395143a9186f83b0a1dc8eb48459a06fa9cba18b6dee00ea9e915b5758"
+    },
+    {
+      "bytes": 350,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/ome__meeting-minutes-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/ome__meeting-minutes-ref.json",
+      "sha256": "5128122c079503dcee2aff5ef559649e04817d7551620d56d08e2effce021733"
+    },
+    {
+      "bytes": 6251,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/ome__meeting-minutes-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/ome__meeting-minutes-repo.json",
+      "sha256": "6eae4502337cc78e8005a13a98cde580b42acdf994fd6b5b81fb17435d956ed2"
+    },
+    {
+      "bytes": 110105,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/ome__meeting-minutes-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/ome__meeting-minutes-tree.json",
+      "sha256": "4510f3fbdf8d036fa6ca403ab2d5d54bcc9d4732e23c2ee12ea7018445153538"
+    },
+    {
+      "bytes": 10210,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/search-0.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/search-0.json",
+      "sha256": "6bec10a30fa88f2ee4143cb513b96a93b0f852e8381d1703e4e5fee4e8541f33"
+    },
+    {
+      "bytes": 10194,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/search-1.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/search-1.json",
+      "sha256": "295ac56ed1abbd3fe97d24fe32b5561952c5765e7793c7a3e0f7e1378f8fb6d8"
+    },
+    {
+      "bytes": 10627,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/search-2.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/search-2.json",
+      "sha256": "4edf3a4816fd01a65f1581cbcee43fe2480f385ea7c44ad5bb02eeccfd5f970a"
+    },
+    {
+      "bytes": 368,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/uio-carpentry__organisational-ref.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/uio-carpentry__organisational-ref.json",
+      "sha256": "c4892f85502322f9bef71c4e8ba6d78fc2aa35426eeb34f92b7fa3fb77ee4064"
+    },
+    {
+      "bytes": 6889,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/uio-carpentry__organisational-repo.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/uio-carpentry__organisational-repo.json",
+      "sha256": "ba81627e30299dcc7afe8f52313ff05e707b7cb9ad6ad71bad71243a9b6c9a60"
+    },
+    {
+      "bytes": 34019,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/exploration-010/uio-carpentry__organisational-tree.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/exploration-010/uio-carpentry__organisational-tree.json",
+      "sha256": "36156531a1821a294210d687b6ea5f5579b7a6589540cd1b3d4ffb543354a3dc"
+    },
+    {
+      "bytes": 11357,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/kubernetes-community-LICENSE",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/kubernetes-community-LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+    },
+    {
+      "bytes": 2203,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/public-fetch-003.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/public-fetch-003.json",
+      "sha256": "629f644b5a94e23666659fd801d5cb4373757066c28d2af68a9f118b2bfc171b"
+    },
+    {
+      "bytes": 1667,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/public-refusal-002.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/public-refusal-002.json",
+      "sha256": "1e8410813e92132c19bfae67a453fcec3e2dc37bc852d3981b42581fff2a0eae"
+    },
+    {
+      "bytes": 1783,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/public-refusal-003.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/public-refusal-003.json",
+      "sha256": "862284bf0e78b7d75364a2c2015738ea6103941b5d2aa352d61ad43e381fb9e2"
+    },
+    {
+      "bytes": 1349,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/public-selection-001.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/public-selection-001.json",
+      "sha256": "92cc42e7743109490d1869afb35265aaf455ba384390eb2bff31b2a43f8c8aad"
+    },
+    {
+      "bytes": 1929,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/public-selection-002.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/public-selection-002.json",
+      "sha256": "b758e30d552e51bc784c810f1c5833a80869ce3f1e9098288d210159dfdecdf3"
+    },
+    {
+      "bytes": 18650,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-source-v1/artifacts/uio-carpentry-LICENSE.txt",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/author-artifacts/uio-carpentry-LICENSE.txt",
+      "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661"
+    },
+    {
+      "bytes": 7027,
+      "copy_kind": "exact",
+      "original": ".local/meetings-c7-calibration-admission-attempts-v1/artifacts/attempt-001/receipt.json",
+      "public_copy": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/rejected-admission-001.json",
+      "sha256": "5100bb987d71b3a98c3132f3c25a0e9e2e3535dbc62cee304428628a8f856f73"
+    }
+  ],
+  "fingerprints": {
+    "bytes": 7186,
+    "path": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/source-exposure-fingerprints.json",
+    "sha256": "76dbab6f637239367de151522f204faf50a0e9f1621403b8bd46d4d43b772aa0"
+  },
+  "not_corpus_documents": "All JSON, licenses and archived API responses are provenance metadata; source documents are only the 12 explicit original_raw_sources.",
+  "original_prospective_manifest": {
+    "bytes": 11682,
+    "path": "data/evaluation/meetings-c7-calibration-v1/source-admission-manifest.json",
+    "sha256": "8bebba89f3904f52de6efad449267061fc2ff5683e97fb400df1e3c2a34f0df1"
+  },
+  "original_raw_sources": [
+    {
+      "bytes": 877,
+      "candidate": "attempt-001",
+      "document_id": "c7-cal-p01",
+      "immutable_commit": "42299de31db7057a0789ced0bae191cf79e38152",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/c7-cal-p01.md",
+      "repository": "kubernetes/community",
+      "revision_identity": "405588fafe2e6fb18f4b3b87718d6c313fafaaf6",
+      "sha256": "19c9e559fd62cfd44af64cc7b015a15d199aae12885f03df15155df8cdb1519b",
+      "upstream_path": "sig-apps/minutes/2016-05-18.md",
+      "url": "https://github.com/kubernetes/community/blob/42299de31db7057a0789ced0bae191cf79e38152/sig-apps/minutes/2016-05-18.md"
+    },
+    {
+      "bytes": 507,
+      "candidate": "attempt-001",
+      "document_id": "c7-cal-p02",
+      "immutable_commit": "42299de31db7057a0789ced0bae191cf79e38152",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/c7-cal-p02.md",
+      "repository": "kubernetes/community",
+      "revision_identity": "a394e650be94d5a5c28479f23da6d3ea74ff7eac",
+      "sha256": "73574135174b43f6aa6706c03a1721ef6e868b77cc45339e6aaafda8269d1851",
+      "upstream_path": "sig-apps/minutes/2016-05-25.md",
+      "url": "https://github.com/kubernetes/community/blob/42299de31db7057a0789ced0bae191cf79e38152/sig-apps/minutes/2016-05-25.md"
+    },
+    {
+      "bytes": 1381,
+      "candidate": "attempt-001",
+      "document_id": "c7-cal-p03",
+      "immutable_commit": "42299de31db7057a0789ced0bae191cf79e38152",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/c7-cal-p03.md",
+      "repository": "kubernetes/community",
+      "revision_identity": "ebaad9e842d997ab4af8c35f432d85ab01b7cc48",
+      "sha256": "0306484ececbefcc6370145222fb9465071e1e5d0ccb0f96ffaa635a4b8bff64",
+      "upstream_path": "sig-apps/README.md",
+      "url": "https://github.com/kubernetes/community/blob/42299de31db7057a0789ced0bae191cf79e38152/sig-apps/README.md"
+    },
+    {
+      "bytes": 1331,
+      "candidate": "attempt-002",
+      "document_id": "c7-cal-p04",
+      "immutable_commit": "77b1152c5f63e66acfc91ff3083e0c79970ac81c",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/attempt-002/c7-cal-p04.md",
+      "repository": "uio-carpentry/organisational",
+      "revision_identity": "004905c13802c38a9a3a16542987110724b47ae6",
+      "sha256": "a7fae7eeb7569c933f537cb71a7157f4ddcd6f884de7dbd25acaddf62b0bd0ed",
+      "upstream_path": "meetings/170407_organisers.md",
+      "url": "https://github.com/uio-carpentry/organisational/blob/77b1152c5f63e66acfc91ff3083e0c79970ac81c/meetings/170407_organisers.md"
+    },
+    {
+      "bytes": 920,
+      "candidate": "attempt-002",
+      "document_id": "c7-cal-p05",
+      "immutable_commit": "77b1152c5f63e66acfc91ff3083e0c79970ac81c",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/attempt-002/c7-cal-p05.md",
+      "repository": "uio-carpentry/organisational",
+      "revision_identity": "9c1e734d8b8ba8be533e3b737a4e0da1c7646110",
+      "sha256": "17d5868c2f6fd438268fdc08eebd188068020ab68e999ece24c1bcb5858303db",
+      "upstream_path": "meetings/190821_organisers.md",
+      "url": "https://github.com/uio-carpentry/organisational/blob/77b1152c5f63e66acfc91ff3083e0c79970ac81c/meetings/190821_organisers.md"
+    },
+    {
+      "bytes": 622,
+      "candidate": "attempt-002",
+      "document_id": "c7-cal-p06",
+      "immutable_commit": "77b1152c5f63e66acfc91ff3083e0c79970ac81c",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/attempt-002/c7-cal-p06.md",
+      "repository": "uio-carpentry/organisational",
+      "revision_identity": "a507aa6b8b8bae809f721dd5a0e4e1ba02298f6d",
+      "sha256": "2f6689e01c9278ce9da2a6054a45a70b198c3ab7430721cd4f4af1d2543a3f7c",
+      "upstream_path": "meetings/README.md",
+      "url": "https://github.com/uio-carpentry/organisational/blob/77b1152c5f63e66acfc91ff3083e0c79970ac81c/meetings/README.md"
+    },
+    {
+      "bytes": 705,
+      "candidate": "attempt-003",
+      "document_id": "c7-cal-p07",
+      "immutable_commit": "b1828f26aab5033401b7186372df4a60bc0ad74f",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/attempt-003/c7-cal-p07.md",
+      "repository": "AGLDWG/meeting-minutes",
+      "revision_identity": "b0f4c08a1257c6983298edbcb99cd890348e10f4",
+      "sha256": "bcd8a964a163882d6e88b3e1b429cdc21ff61c666d0c405fbaa9ca3f6ba5cad0",
+      "upstream_path": "2025/plenary-2025-10-02.md",
+      "url": "https://github.com/AGLDWG/meeting-minutes/blob/b1828f26aab5033401b7186372df4a60bc0ad74f/2025/plenary-2025-10-02.md"
+    },
+    {
+      "bytes": 1214,
+      "candidate": "attempt-003",
+      "document_id": "c7-cal-p08",
+      "immutable_commit": "b1828f26aab5033401b7186372df4a60bc0ad74f",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/attempt-003/c7-cal-p08.md",
+      "repository": "AGLDWG/meeting-minutes",
+      "revision_identity": "858a327bda99960e99792b98063025996c24ddb3",
+      "sha256": "bb13b1ed2561add845eb9cdb8a5ba060e1ecf6ba45ce041d173719851437a5de",
+      "upstream_path": "2025/plenary-2025-11-06.md",
+      "url": "https://github.com/AGLDWG/meeting-minutes/blob/b1828f26aab5033401b7186372df4a60bc0ad74f/2025/plenary-2025-11-06.md"
+    },
+    {
+      "bytes": 465,
+      "candidate": "attempt-003",
+      "document_id": "c7-cal-p09",
+      "immutable_commit": "b1828f26aab5033401b7186372df4a60bc0ad74f",
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/attempt-003/c7-cal-p09.md",
+      "repository": "AGLDWG/meeting-minutes",
+      "revision_identity": "80a9bc31187171639aad2eb831eb0d785e0d0f11",
+      "sha256": "f85a11952ae2025855631098102cb5a177c21e50f88dea8294f0c06c8ebcec1e",
+      "upstream_path": "README.md",
+      "url": "https://github.com/AGLDWG/meeting-minutes/blob/b1828f26aab5033401b7186372df4a60bc0ad74f/README.md"
+    },
+    {
+      "bytes": 435,
+      "candidate": "synthetic-001",
+      "document_id": "c7-cal-s01",
+      "immutable_commit": null,
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/c7-cal-s01.md",
+      "repository": null,
+      "revision_identity": "ae5a66491de4d7ceeff1e3d0799a0d0247a6e1426148ba315761cd4a062dc74c",
+      "sha256": "ae5a66491de4d7ceeff1e3d0799a0d0247a6e1426148ba315761cd4a062dc74c",
+      "upstream_path": "lumen-session-2032-02-03.md",
+      "url": null
+    },
+    {
+      "bytes": 473,
+      "candidate": "synthetic-001",
+      "document_id": "c7-cal-s02",
+      "immutable_commit": null,
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/c7-cal-s02.md",
+      "repository": null,
+      "revision_identity": "d909c712dc3d017cf9b55f2a74b7dd2fb2468abd03c68d1090f6877e4a2548f1",
+      "sha256": "d909c712dc3d017cf9b55f2a74b7dd2fb2468abd03c68d1090f6877e4a2548f1",
+      "upstream_path": "lumen-session-2032-02-10.md",
+      "url": null
+    },
+    {
+      "bytes": 493,
+      "candidate": "synthetic-001",
+      "document_id": "c7-cal-s03",
+      "immutable_commit": null,
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/c7-cal-s03.md",
+      "repository": null,
+      "revision_identity": "5ce34dc933536b59c88698be830948ce653f02c4ebcc9c220e4ea5818cb77074",
+      "sha256": "5ce34dc933536b59c88698be830948ce653f02c4ebcc9c220e4ea5818cb77074",
+      "upstream_path": "lumen-handling-policy.md",
+      "url": null
+    }
+  ],
+  "phase": "calibration",
+  "public_metadata_screening": {
+    "all_exploration_is_public_repository_or_public_API_metadata": true,
+    "credential_token_request_header_private_repository_private_url_or_absolute_personal_path_findings": 0,
+    "derivatives": 0,
+    "initial_files_scanned": 74,
+    "new_refusal003": "Manually composed public source metadata only."
+  },
+  "recorded_at": "2026-10-20T05:12:29.716604+00:00",
+  "schema_version": 1
+}

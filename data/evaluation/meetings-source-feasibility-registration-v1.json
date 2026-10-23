@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "kind": "bounded_source_feasibility_registration",
+  "recorded_at_utc": "2026-10-20T06:16:36.758677+00:00",
+  "design": {
+    "path": "docs/MEETINGS-SOURCE-FEASIBILITY-PLAN.md",
+    "sha256": "70ecc0bef45ef2e4503d212f1b6d1a8ef0cd98bdfca20e02cdaa88137ad54fc8",
+    "actor": "/root/source_feasibility_review",
+    "tool_accepted": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "fork_turns": "none",
+      "task_name": "/root/source_feasibility_review"
+    }
+  },
+  "split_roles": [
+    {
+      "split": "calibration",
+      "actor": "/root/source_feasibility_calibration",
+      "model_request": "gpt-6-astra",
+      "reasoning_effort_request": "xhigh",
+      "fork_turns_request": "none",
+      "tool_result": {
+        "task_name": "/root/source_feasibility_calibration"
+      },
+      "actor_acceptance_received": true,
+      "runtime_model_introspection": false,
+      "stage": "registration_only",
+      "actual_read_paths": [
+        "docs/MEETINGS-SOURCE-FEASIBILITY-PLAN.md"
+      ],
+      "additional_allowed_read_paths": [
+        "docs/MEETINGS-C7-PLAN.md",
+        "data/evaluation/meetings-c7-protocol-v1.json",
+        "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+        "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json"
+      ],
+      "owned_paths": [
+        ".local/meetings-source-feasibility-v1/calibration/",
+        "data/evaluation/meetings-source-feasibility-v1/calibration/"
+      ],
+      "exposure": "Provided project instructions, environment memory summary, parent aggregate metadata and current design only; actor reports no prior C7 role or actual source/question/oracle/output reads. Not a pristine-judge claim.",
+      "final_answer_judge_eligible": false,
+      "searches": 0,
+      "source_bodies": 0,
+      "outputs": 0
+    },
+    {
+      "split": "validation",
+      "actor": "/root/source_feasibility_validation",
+      "model_request": "gpt-6-astra",
+      "reasoning_effort_request": "xhigh",
+      "fork_turns_request": "none",
+      "tool_result": {
+        "task_name": "/root/source_feasibility_validation"
+      },
+      "actor_acceptance_received": true,
+      "runtime_model_introspection": false,
+      "stage": "registration_only",
+      "actual_read_paths": [
+        "docs/MEETINGS-SOURCE-FEASIBILITY-PLAN.md"
+      ],
+      "additional_allowed_read_paths": [
+        "docs/MEETINGS-C7-PLAN.md",
+        "data/evaluation/meetings-c7-protocol-v1.json",
+        "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+        "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json"
+      ],
+      "owned_paths": [
+        ".local/meetings-source-feasibility-v1/validation/",
+        "data/evaluation/meetings-source-feasibility-v1/validation/"
+      ],
+      "exposure": "Provided project instructions, environment memory summary, parent aggregate metadata and current design only; actor reports no prior C7 role or actual source/question/oracle/output reads. Not a pristine-judge claim.",
+      "final_answer_judge_eligible": false,
+      "searches": 0,
+      "source_bodies": 0,
+      "outputs": 0
+    }
+  ],
+  "parent": {
+    "semantic_scope": "metadata/code/count/hash only; historical development result-summary exposure disclosed, excluded from judging",
+    "owns": [
+      "root documentation",
+      "registration/exclusions",
+      "Git/CI",
+      "metadata-only repository reservation ledger"
+    ]
+  },
+  "fixed_limits_per_split": {
+    "search_or_tree_requests": 4,
+    "repositories": 3,
+    "families": 2,
+    "document_slots": 6,
+    "licenses_per_repository": 2
+  },
+  "execution_status": "not_dispatched",
+  "execution_requires": [
+    "design/roles/exclusions commit and exact required CI",
+    "current committed and working frozen77/protocol byte proof",
+    "explicit parent followup",
+    "parent cross-split repository reservation before license and source bodies"
+  ],
+  "forbidden": [
+    "old source/question/oracle/model output semantic reads",
+    "formal C7 role_contract/admit_sources",
+    "processor/chunker/parser/formatter",
+    "new helper or toolchain",
+    "Java/Maven",
+    "tokenizer/native/model",
+    "paid resources",
+    "Docker/WSL manipulation"
+  ],
+  "precommit_existing_code_proof": {
+    "head": "7e1a09280cfcce925bc0e7a49e73459bc2838d8f",
+    "freeze_path": "data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+    "freeze_sha256": "6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca",
+    "working_and_committed_bindings_verified": 77,
+    "protocol_sha256": "3a04120b195c583b79e67c38e3d7592f327a549b7c302a88b12d9dd5ab89fee1",
+    "read_mode": "byte hashes only; no pool semantics read"
+  },
+  "user_review": 0,
+  "phase1_complete": false
+}

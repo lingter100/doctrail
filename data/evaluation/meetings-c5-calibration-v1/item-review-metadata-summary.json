@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "item_review_metadata_summary",
+  "reviewer_id": "/root/c5_calibration_prereviewer",
+  "reviewed_at": "2026-10-20T00:32:39.600155+00:00",
+  "verdict": "accepted",
+  "accepted_count": 6,
+  "rejected_count": 0,
+  "author_changes": 0,
+  "source_changes": 0,
+  "counts": {
+    "cases": 6,
+    "languages": {
+      "ko": 3,
+      "en": 3
+    },
+    "statuses": {
+      "answered": 4,
+      "abstained": 2
+    },
+    "required_facts": 29,
+    "supported_facts": 25,
+    "missing_facts": 4,
+    "alternatives": 28,
+    "context_placements": 24,
+    "unique_whole_chunks": 15,
+    "modes": {
+      "general_only": 2,
+      "multiple_meetings": 1,
+      "mixed_general_and_meeting": 1
+    },
+    "necessary_multidocument_cases": [
+      "C5-CAL-02",
+      "C5-CAL-04"
+    ],
+    "unique_catalog_spans": 213
+  },
+  "item_freeze": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/item-freeze.json",
+    "sha256": "3feef939954379104621259afaa45864779964bf65feb8149f59bf9799c846a2"
+  },
+  "item_freeze_binding_count": 6,
+  "item_freeze_bound_files": {
+    "data/evaluation/meetings-c5-calibration-v1/context-selection.json": "0bfec9af2a02876084eb19c0ddbc0dd3b2f6ed1312529a85feb74336d6f9e476",
+    "data/evaluation/meetings-c5-calibration-v1/draft.json": "e10d680a17133c774edb585297777e30907448194b419bfebed99147447789ee",
+    "data/evaluation/meetings-c5-calibration-v1/item-prereview.json": "59c89670ed60df1115c0642293d4174ecee7cbd74c44e3ad18cd0e536d92292b",
+    "data/evaluation/meetings-c5-calibration-v1/oracle-draft.json": "0d93d8ebbb956a2d5f5a6c35f0ca81234dec5fb2cac2f3d79f03475250d55350",
+    "data/evaluation/meetings-c5-calibration-v1/source-freeze.json": "771a3f18f878d476b47b934c83b8c059bbde5710335470cf0f79d5ab1565adf8",
+    "data/evaluation/meetings-c5-toolchain-freeze-v1.json": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d"
+  },
+  "item_prereview": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/item-prereview.json",
+    "sha256": "59c89670ed60df1115c0642293d4174ecee7cbd74c44e3ad18cd0e536d92292b"
+  },
+  "notes": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/item-prereview-notes.md",
+    "sha256": "c12fc57606ffb129a8cc9c0def6e1329e1b441dfac8d384de18cd7ae67241a02"
+  },
+  "preauthorization": {
+    "file": ".local/meetings-c5-calibration-item-review-v1/preauthorization-v1.json",
+    "sha256": "679c7f302e0033b80fcf6af7090b824b0a7129286805dc0e15293089b9fc5fec"
+  },
+  "pure_checks": {
+    "file": ".local/meetings-c5-calibration-item-review-v1/pure-checks-v1.json",
+    "sha256": "fd5ed89820ed47e7b09c04ff31cec5945c4b93a15ba3329c1db9c0048dbfe618"
+  },
+  "semantic_verdict": {
+    "file": ".local/meetings-c5-calibration-item-review-v1/semantic-verdict-v1.json",
+    "sha256": "ad7324813349aedc34be7ae5f98a2d624b7d081752c2f203e99a35661a448cfc"
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/source-freeze.json",
+    "sha256": "771a3f18f878d476b47b934c83b8c059bbde5710335470cf0f79d5ab1565adf8"
+  },
+  "head_before": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "head_after": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "author4_unchanged": true,
+  "source14_unchanged": true,
+  "code76_unchanged": true,
+  "source_item_pure_primitive_checks": "passed",
+  "full_committed_item_load_material_executed": false,
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "tokenizer_calls": 0,
+  "native_calls": 0,
+  "maven_runs": 0,
+  "human_reviews": 0,
+  "downloads": 0,
+  "git_mutations": 0,
+  "limitations": [
+    "Source guide historical applicability remains unknown.",
+    "Source/item review does not establish generated-answer quality.",
+    "Parent commit and real committed fullmaterial proof precede once-only offline preparation."
+  ]
+}

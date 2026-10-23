@@ -1,0 +1,67 @@
+[
+  {
+    "case": "public-february",
+    "error": "generation_output_truncated"
+  },
+  {
+    "case": "synthetic-korean",
+    "error": "generation_invalid_schema"
+  },
+  {
+    "case": "synthetic-answer",
+    "result": {
+      "schema_version": 1,
+      "model": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "status": "answered",
+      "reason": null,
+      "claims": [
+        {
+          "text": "민수는 2026-10-20까지 검색 평가 문서를 작성합니다.",
+          "citations": [
+            {
+              "chunk_id": "c1",
+              "quote": "민수가 2026-10-20까지 검색 평가 문서를 작성합니다.",
+              "start_offset": 118,
+              "end_offset": 151
+            }
+          ]
+        }
+      ],
+      "telemetry": {
+        "calls": [
+          {
+            "input_tokens": 399,
+            "output_tokens": 73,
+            "elapsed_seconds": 10.078999999910593,
+            "peak_allocated_mib": 3368.48583984375,
+            "peak_reserved_mib": 4928.0,
+            "finish_reason": "eos"
+          }
+        ],
+        "elapsed_ms": 10109.0,
+        "effective_generation_config": {
+          "max_new_tokens": 768,
+          "do_sample": false,
+          "num_beams": 1,
+          "num_return_sequences": 1,
+          "temperature": 1.0,
+          "top_k": 50,
+          "top_p": 1.0,
+          "typical_p": 1.0,
+          "repetition_penalty": 1.0,
+          "length_penalty": 1.0,
+          "use_cache": true,
+          "bos_token_id": 151643,
+          "eos_token_id": [
+            151645,
+            151643
+          ],
+          "pad_token_id": 151643,
+          "generation_mode": "greedy_search",
+          "use_model_defaults": false
+        }
+      }
+    }
+  }
+]

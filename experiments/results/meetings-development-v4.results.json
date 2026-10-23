@@ -1,0 +1,143 @@
+[
+  {
+    "case": "public-february",
+    "error": "generation_empty_summary"
+  },
+  {
+    "case": "synthetic-korean",
+    "result": {
+      "schema_version": 1,
+      "model": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "analysis": {
+        "meeting_title": "검색 정책 회의",
+        "meeting_date": "2026-10-13",
+        "participants": [
+          "민수",
+          "지영"
+        ],
+        "purpose": "검색 정책을 결정한다.",
+        "summary": "민수: 검색 결과를 10개로 늘리는 것을 제안합니다.\n지영: 우선 5개를 유지하기로 확정했습니다.\n민수가 2026-10-20까지 검색 평가 문서를 작성합니다.\n다중 문서 검색의 정확도 문제는 아직 해결하지 못했습니다.",
+        "summary_evidence": [
+          {
+            "quote": "민수: 검색 결과를 10개로 늘리는 것을 제안합니다.",
+            "start_offset": 63,
+            "end_offset": 92
+          },
+          {
+            "quote": "지영: 우선 5개를 유지하기로 확정했습니다.",
+            "start_offset": 93,
+            "end_offset": 117
+          },
+          {
+            "quote": "민수가 2026-10-20까지 검색 평가 문서를 작성합니다.",
+            "start_offset": 118,
+            "end_offset": 151
+          },
+          {
+            "quote": "다중 문서 검색의 정확도 문제는 아직 해결하지 못했습니다.",
+            "start_offset": 152,
+            "end_offset": 184
+          }
+        ],
+        "items": [
+          {
+            "quote": "민수: 검색 결과를 10개로 늘리는 것을 제안합니다.",
+            "start_offset": 63,
+            "end_offset": 92,
+            "id": "",
+            "type": "proposal",
+            "text": "민수: 검색 결과를 10개로 늘리는 것을 제안합니다.",
+            "assignee": null,
+            "due_date": null,
+            "priority": null,
+            "status": "needs_confirmation"
+          },
+          {
+            "quote": "지영: 우선 5개를 유지하기로 확정했습니다.",
+            "start_offset": 93,
+            "end_offset": 117,
+            "id": "",
+            "type": "decision",
+            "text": "지영: 우선 5개를 유지하기로 확정했습니다.",
+            "assignee": null,
+            "due_date": null,
+            "priority": null,
+            "status": "needs_confirmation"
+          },
+          {
+            "quote": "민수가 2026-10-20까지 검색 평가 문서를 작성합니다.",
+            "start_offset": 118,
+            "end_offset": 151,
+            "id": "",
+            "type": "action",
+            "text": "민수가 2026-10-20까지 검색 평가 문서를 작성합니다.",
+            "assignee": "민수",
+            "due_date": "2026-10-20",
+            "priority": null,
+            "status": "needs_confirmation"
+          },
+          {
+            "quote": "다중 문서 검색의 정확도 문제는 아직 해결하지 못했습니다.",
+            "start_offset": 152,
+            "end_offset": 184,
+            "id": "",
+            "type": "unresolved",
+            "text": "다중 문서 검색의 정확도 문제는 아직 해결하지 못했습니다.",
+            "assignee": null,
+            "due_date": null,
+            "priority": null,
+            "status": "needs_confirmation"
+          }
+        ],
+        "metadata_evidence": [
+          {
+            "quote": "회의 제목: 검색 정책 회의",
+            "start_offset": 0,
+            "end_offset": 15,
+            "field": "meeting_title"
+          },
+          {
+            "quote": "회의 날짜: 2026-10-13",
+            "start_offset": 16,
+            "end_offset": 33,
+            "field": "meeting_date"
+          },
+          {
+            "quote": "참석자: 민수, 지영",
+            "start_offset": 34,
+            "end_offset": 45,
+            "field": "participants"
+          },
+          {
+            "quote": "참석자: 민수, 지영",
+            "start_offset": 34,
+            "end_offset": 45,
+            "field": "participants"
+          },
+          {
+            "quote": "목적: 검색 정책을 결정한다.",
+            "start_offset": 46,
+            "end_offset": 62,
+            "field": "purpose"
+          }
+        ]
+      },
+      "telemetry": {
+        "calls": [
+          {
+            "operation": "restricted_next_token_classification",
+            "input_tokens": 5027,
+            "output_tokens": 8,
+            "forward_batches": 2,
+            "elapsed_seconds": 1.5,
+            "peak_allocated_mib": 3611.1630859375,
+            "peak_reserved_mib": 4014.0
+          }
+        ],
+        "elapsed_ms": 1532.0,
+        "effective_generation_config": null
+      }
+    }
+  }
+]

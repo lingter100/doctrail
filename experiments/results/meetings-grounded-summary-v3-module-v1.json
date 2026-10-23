@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-v3-module-implementation-synthetic-verification",
+  "date": "2026-10-23",
+  "status": "module_verified_service_integration_pending",
+  "design": {
+    "path": "docs/MEETINGS-SUMMARY-CLAIM-ALIGNMENT-PLAN.md",
+    "bytes": 13262,
+    "sha256": "bbd481d8de98ac2efae978d3d7c69ab9580bd86d66203ad92d8784016977b8fa"
+  },
+  "source_files": [
+    {
+      "path": "src/doctrail/meeting_grounded_summary.py",
+      "bytes": 32180,
+      "sha256": "10b24748597a8812d62dcea17807a9e2b22c790102923ac7a0d8efd58b6d6e8d"
+    },
+    {
+      "path": "tests/test_meeting_grounded_summary.py",
+      "bytes": 51533,
+      "sha256": "a9bd565bbfe9f9c8b7a975fe20413b8888c6c04647e8c641c4d0f4208e6e0f12"
+    }
+  ],
+  "implementation_receipt": {
+    "path": ".local/meeting-grounded-summary-v3-implementation-v1/receipt.json",
+    "bytes": 10678,
+    "sha256": "beec31e253388d5cf1853497789ec7999e4b89ca1babf17c1ef17a69d40319cb"
+  },
+  "independent_review": {
+    "path": ".local/meeting-grounded-summary-v3-implementation-v1/independent-review-v1.json",
+    "bytes": 8261,
+    "sha256": "6dc0e980e4cb7a1b070ca30b390b6d34a8a6af46e6225c73f2593e178479debc"
+  },
+  "parent_verification": {
+    "path": ".local/meeting-grounded-summary-v3-implementation-v1/parent-verification-v1.json",
+    "bytes": 1104,
+    "sha256": "bda511932ad2c049c144aa92257443f9431f23c34100c459805a3d63ce798519"
+  },
+  "change": "Explicit flat draft -> full-source alignment rewrite once -> mandatory final same-model review. Existing v1/v2 contracts preserved.",
+  "synthetic_checks": {
+    "pytest_passed": 228,
+    "pytest_seconds": 1.53,
+    "ruff_passed": true,
+    "first_attempt_failures": 0,
+    "existing_test_functions_retained": 38
+  },
+  "independent_code_review_blockers": 0,
+  "candidate_metadata": {
+    "assembly": "grounded-summary-v3",
+    "summary_version": 2,
+    "review_policy": "grounded-review-v1",
+    "response_language": "ko",
+    "generation_prompt_sha256": "ab5982cef5b05121c8fd78aba96baf9b1d86e6250fb2820dac66ab95e4487c02",
+    "review_prompt_sha256": "b73e0684c783882482cde783cd3a1b780ca85477da5fcffcd24c28e1cd03ef56",
+    "generation_grammar_sha256": "0656e7930a7fd05ce6126bd8138787d824a8f81de2419187d72a952dcb07cb85",
+    "review_grammar_sha256": "9964289ac750f5be26b5e84dd78822d76bfb3f28b8103c5f5b6858e02295f118",
+    "input_tokens_per_call": 4096,
+    "generation_output_tokens": 768,
+    "review_output_tokens": 128,
+    "extra_completion_cap": 3,
+    "repair_calls": 1,
+    "claim_cap": 6,
+    "claim_codepoints": 240,
+    "total_claim_codepoints": 1200,
+    "citations_per_claim": 4,
+    "citation_codepoints": 12000,
+    "language_guard": "script_presence_only",
+    "review_guarantee": "same_model_not_independent",
+    "alignment_prompt_sha256": "e4750ba11d61e28e190051ee37ffdc3713011428248c792acce45c48173c9bb7",
+    "alignment_grammar_sha256": "0656e7930a7fd05ce6126bd8138787d824a8f81de2419187d72a952dcb07cb85",
+    "alignment_output_tokens": 768,
+    "stage_order": [
+      "generation",
+      "alignment",
+      "review"
+    ]
+  },
+  "preservation": {
+    "baseline_original_files": 10,
+    "current_integration_files_unchanged": 8,
+    "frozen_artifact_hashes_verified": 77,
+    "old_prompt_grammar_constants_and_metadata_unchanged": true
+  },
+  "actual_model_calls": 0,
+  "human_reviews": 0,
+  "service_integration": "not_yet_assigned_at_module_receipt",
+  "exact_source_ci": "pending_after_integration_commit",
+  "limitations": [
+    "Scripted generic MockTransport proves control flow, not semantic correctness, readability or summary completeness.",
+    "Same-model final review is not independent quality assurance.",
+    "No real tokenizer/native service/Java/browser run or old experiment replay.",
+    "Real budget feasibility and paired draft/final quality comparison remain required.",
+    "This file covers module/test2 only; do not add its count to later overlapping integration checks."
+  ]
+}

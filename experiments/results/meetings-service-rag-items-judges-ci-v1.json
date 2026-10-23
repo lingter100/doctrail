@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "observed_ci_receipt",
+  "observed_at_utc": "2026-10-20T08:47:50.674085+00:00",
+  "head_sha": "3bb8dd4024f1d92b0e346a048b6e1d510c335cce",
+  "author": "lingter100",
+  "committer": "lingter100",
+  "runs": [
+    {
+      "run_id": 39395396126,
+      "headSha": "3bb8dd4024f1d92b0e346a048b6e1d510c335cce",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39395396126",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39395396126/job/118536765017"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39395396126/job/118536765483"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39395396126/job/118536765498"
+        }
+      ]
+    },
+    {
+      "run_id": 39395403487,
+      "headSha": "3bb8dd4024f1d92b0e346a048b6e1d510c335cce",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39395403487",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39395403487/job/118536791154"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39395403487/job/118536791629"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39395403487/job/118536791641"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Calibration item acceptance and final judge registration only; excludes uncommitted execution code.",
+    "Not actual native integration, answer quality, human review or deployment."
+  ]
+}

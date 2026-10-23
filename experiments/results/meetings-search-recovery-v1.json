@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "local_service_error_recovery_verification",
+  "recorded_at_utc": "2026-10-14T04:48:39.940837+00:00",
+  "basis_commit": "b62228c",
+  "source_state": "recovery patch before its commit",
+  "service": "Java 21 packaged React UI",
+  "commands": [
+    "npm run build",
+    "./server/mvnw -B -q -f server/pom.xml verify",
+    "npm run typecheck",
+    "npm run test:e2e -- knowledge-recovery.spec.ts meeting-unavailable.spec.ts"
+  ],
+  "java": {
+    "total": 131,
+    "failures": 0,
+    "errors": 0,
+    "skips": [
+      {
+        "suite": "io.doctrail.MeetingSourceParityTest",
+        "test": "registeredInventoryMatchesActualJavaExtractionAndChunks",
+        "reason": null
+      }
+    ],
+    "passed": 130,
+    "new_language_boundary": 4,
+    "preserved_semantic_boundary": 1
+  },
+  "frontend_production_build": "passed",
+  "frontend_and_test_typecheck": "passed",
+  "browser": {
+    "passed": 4,
+    "failed": 0,
+    "model_calls": 0,
+    "human_review": false,
+    "raw": {
+      "file": "experiments/results/meetings-search-recovery-browser-v1.json",
+      "sha256": "fc2e898901fb64449052ebaf84791e4be5d076c383cd42dcc4c48416d0b42f22",
+      "bytes": 1518
+    },
+    "original": {
+      "file": ".local/web-e2e-batch-bngzdw/run.json",
+      "sha256": "fc2e898901fb64449052ebaf84791e4be5d076c383cd42dcc4c48416d0b42f22",
+      "bytes": 1518
+    },
+    "packaged_ui_confirmed": true,
+    "owned_servers_stopped": true
+  },
+  "source_bindings": [
+    {
+      "file": "server/src/main/java/io/doctrail/GenerationClient.java",
+      "sha256": "dd9e1296cef5709f7f1f4cb83787a8ca0767f988ee6451a7bccedb242c944770",
+      "bytes": 4827
+    },
+    {
+      "file": "server/src/test/java/io/doctrail/GenerationLanguageBoundaryTest.java",
+      "sha256": "c6c20e20392af803be6f28df8d38c14278d13fa55d81ac92056e22db4bbbeebe",
+      "bytes": 2006
+    },
+    {
+      "file": "server/src/test/java/io/doctrail/MeetingReviewBoundaryTest.java",
+      "sha256": "43dd424224fa6a1633918c5eafa25ec737108530f939f33e698e48742b5da656",
+      "bytes": 1701
+    },
+    {
+      "file": "web/src/meetings.ts",
+      "sha256": "2f2ae8c63b25c78bafbf8f5dc13fa27b8e2624360faef063c9165336bed962f6",
+      "bytes": 4509
+    },
+    {
+      "file": "web/src/components/KnowledgeView.tsx",
+      "sha256": "1c725dc0996a97272c5c324bc31e8e90e6dc8d8c71609df210ff6bc4bba21a46",
+      "bytes": 11221
+    },
+    {
+      "file": "web/tests/knowledge-recovery.spec.ts",
+      "sha256": "a5e36b4f73d5419a6852bdcf9258b23fc8978999c6f5a1e293242f8b350732a4",
+      "bytes": 3771
+    },
+    {
+      "file": "web/tests/meeting-unavailable.spec.ts",
+      "sha256": "24befd38b4c2e380cbe69ed852c0b296463b6609cbaa91323a547c0b633b1587",
+      "bytes": 4912
+    }
+  ],
+  "ai_review": {
+    "role": "/root/knowledge_recovery_review",
+    "tool_accepted_model": "gpt-6-astra",
+    "tool_accepted_reasoning": "high",
+    "actionable_findings": 0,
+    "kind": "read_only_code_review"
+  },
+  "limitations": [
+    "Language mismatch is deliberate synthetic HTTP/browser error injection, not a new actual LLM run.",
+    "Registration, session, upload, source search and source viewing use the actual isolated Java service.",
+    "This does not validate answer semantics, adopt C2, deploy publicly or constitute human review.",
+    "Remote CI for this new patch not yet observed at receipt creation."
+  ]
+}

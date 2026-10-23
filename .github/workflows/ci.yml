@@ -38,9 +38,25 @@ jobs:
       - name: Install browser for the packaged React UI
         run: npx playwright install --with-deps chromium
         working-directory: web
+      - name: Verify isolated browser runner diagnostics with Node subprocesses
+        run: node --test web/scripts/java-runner-lifecycle.test.mjs
       - name: Verify browser workflows against isolated Java service
+        id: browser-checks
         run: npm run test:e2e
         working-directory: web
+      - name: Preserve isolated browser failure diagnostics
+        if: failure() && steps.browser-checks.outcome == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: java-browser-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .local/web-e2e-batch-*/run.json
+            .local/web-e2e-batch-*/web-e2e-*/run.json
+            .local/web-e2e-batch-*/web-e2e-*/java.log
+            .local/web-e2e-batch-*/web-e2e-*/report.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 3
   backend:
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +67,15 @@ jobs:
           enable-cache: true
       - run: uv sync --frozen --python 3.11
       - run: uv run ruff check src tests scripts
-      - run: uv run pytest -q
+      - name: Install hash-pinned lightweight resource test dependency
+        run: uv pip install --no-deps --require-hashes -r .github/test-runtime-requirements.txt
+      - run: uv run --no-sync pytest -q
+      - name: Verify licensed meeting fixture provenance without network or models
+        run: uv run python -m scripts.prepare_meeting_fixtures
+      - name: Verify sealed meeting data preparation without network or models
+        run: uv run python data/evaluation/meetings-qwen35-validation-v1/verify.py
+      - name: Verify fresh meeting calibration provenance without network or models
+        run: uv run python data/evaluation/meetings-c1-calibration-v1/verify.py
       - run: uv run python scripts/validate_splits.py data/manifests/kubernetes-pilot.json data/evaluation/pilot-smoke.jsonl
       - name: Replay frozen public corpus and verify candidate provenance
         run: |

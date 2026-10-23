@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "kind": "actual_github_observation_role_registration_commit",
+  "observed_at_utc": "2026-10-20T02:40:22.017673+00:00",
+  "head_sha": "0755660866488bb83fb2d7330c008b2ba1da192f",
+  "runs": [
+    {
+      "run_id": 39359700463,
+      "head_sha": "0755660866488bb83fb2d7330c008b2ba1da192f",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39359700463"
+    },
+    {
+      "run_id": 39359707085,
+      "head_sha": "0755660866488bb83fb2d7330c008b2ba1da192f",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39359707085"
+    }
+  ],
+  "claim_scope": "Exact role/index commit CI; not actual source review, model quality, user review or deployment."
+}

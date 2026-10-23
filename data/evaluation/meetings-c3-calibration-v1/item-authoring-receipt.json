@@ -1,0 +1,654 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "item_authoring_receipt",
+  "created_at_utc": "2026-10-14 07:34:42 UTC",
+  "author_role": "/root/c2_calibration_source",
+  "question_author": "/root/c2_calibration_source",
+  "oracle_author": "/root/c2_calibration_source",
+  "author_status": "AI-draft; independent item prereview pending",
+  "model_setting_evidence": {
+    "parent_report": "Existing actual gpt-6-astra xhigh calibration role retained.",
+    "new_model_setting_change_claimed": false,
+    "new_setting_acceptance_tool_called": false
+  },
+  "prerequisites": {
+    "source_freeze": {
+      "path": "data/evaluation/meetings-c3-calibration-v1/source-freeze-v1.json",
+      "sha256": "e423804942438acfa38c8bb77095905761a9c9098ce743d33b289048cc6b3676",
+      "bindings": 9,
+      "parent_reported_committed_before_question_authoring": "d02697e171e575533fb81fd651b007a9fc87499b",
+      "parent_reported_source_review": {
+        "accepted": 4,
+        "rejected": 0,
+        "changes": 0
+      },
+      "author_git_operations": 0
+    },
+    "toolchain_freeze": {
+      "path": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+      "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+      "bindings": 66,
+      "parent_reported_commit": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+      "parent_reported_required_ci": "all three jobs succeeded on both push and PR"
+    },
+    "source_inventory": {
+      "path": "data/evaluation/meetings-c3-calibration-v1/inventory.json",
+      "sha256": "544a6bf6a31e49f94e05c1828d2113d8e1bdd526c2646bfe29cac3cc9e516d0e"
+    },
+    "source_data_commit_ci_status_at_authorization": "Parent checking; not independently queried by author. Source freeze commit before questions was confirmed by parent."
+  },
+  "files": {
+    "data/evaluation/meetings-c3-calibration-v1/draft.json": {
+      "sha256": "3a87a916b30552138942f6bff04ba8a9cce54d60ab522dade319373ac138a4fc"
+    },
+    "data/evaluation/meetings-c3-calibration-v1/oracle.json": {
+      "sha256": "b408ca9377e322da426a7c86ec999feb8bf3701974115d1e8b9a736e42d66770"
+    },
+    "data/evaluation/meetings-c3-calibration-v1/context-selection.json": {
+      "sha256": "300b9f7f991eb85205d1dd5550014c9f47fd263e7113cb5f13c82f9a6a03fd96"
+    }
+  },
+  "counts": {
+    "questions": 6,
+    "oracles": 6,
+    "selection_records": 6,
+    "public_cases": 3,
+    "synthetic_cases": 3,
+    "ko": 3,
+    "en": 3,
+    "answered": 4,
+    "abstained": 2,
+    "multifact_answered": 4,
+    "essential_two_document_answered": 3,
+    "en_source_ko_answered": 1,
+    "ko_source_en_answered": 1,
+    "selected_context_instances": 23,
+    "distinct_selected_whole_chunks": 13,
+    "whole_inventory_chunks": 20,
+    "human_authors": 0,
+    "human_reviews": 0,
+    "user_reviews": 0,
+    "completed_independent_item_prereviews": 0,
+    "official_tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "native_calls": 0,
+    "paid_usage": 0,
+    "network_calls_this_item_task": 0
+  },
+  "construction_protocol": {
+    "semantic_basis": "Questions and required informational needs were written from the four newly frozen sources, with family/language/status quotas supplied by the preregistered C3 contract.",
+    "selection_basis": "Select whole inventory chunks by semantic relevance and required qualifications; preserve registered document order and ascending chunk ordinal. No cropping, merging, rewritten source text or token-budget-directed selection.",
+    "coordinate_basis": "The frozen review contract requires whole catalog units. After the questions and whole-chunk selection were written, the existing build_block_catalog public function was called solely to obtain valid exact quote/codepoint coordinates; its implementation and runtime prompts were not inspected for authoring.",
+    "question_changes_after_catalog_inspection": 0,
+    "context_selection_changes_after_catalog_inspection": 0,
+    "tokenizer_counted_or_estimated_for_selection": false,
+    "performance_feedback_used": false,
+    "source_files_modified": false,
+    "metadata": "Explicit response_language is outside exact AnswerRequest payload. Existing document_id/revision/title/meeting_date and chunk page/offset/text remain identical; null is preserved. Report/reference dates are not promoted to meeting dates.",
+    "oracle_semantics": "Each evidence_alternatives entry is a sufficient AND-set of unchanged whole units. An empty list marks required information absent from the whole adopted family. Evidence coordinates remain separate when an original paragraph/table crosses service chunks."
+  },
+  "cases": [
+    {
+      "id": "C3-CAL-01",
+      "family_id": "C3-F01",
+      "language": "ko",
+      "expected_status": "answered",
+      "author_status": "AI-draft",
+      "independent_item_prereview": "pending",
+      "human_review_count": 0,
+      "required_fact_count": 6,
+      "whole_chunk_selection": [
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 960,
+          "text_sha256": "801c84e0161bc48bf58a668c27d8875043bcfc024029f24fc00219b7a24dd40f",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0005",
+          "ordinal": 5,
+          "start_offset": 4202,
+          "end_offset": 4786,
+          "text_sha256": "d03684c2b63127eea325053a9a352d218834632098383e5ad46f67c73f71d629",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S02",
+          "document_id": "c3-cal-fastapi-lifespan-events",
+          "registration_ordinal": 1,
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 996,
+          "text_sha256": "7d4fe6a779ac88f8833e5782298642e60b1fd4926f6d3a81f32c1050202926df",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S02",
+          "document_id": "c3-cal-fastapi-lifespan-events",
+          "registration_ordinal": 1,
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0005",
+          "ordinal": 5,
+          "start_offset": 4231,
+          "end_offset": 5231,
+          "text_sha256": "505b1e624565aec75a95cb60faf3f5f04aa52bdc4fd24a7d63d0e853fbe16981",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S02",
+          "document_id": "c3-cal-fastapi-lifespan-events",
+          "registration_ordinal": 1,
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0009",
+          "ordinal": 9,
+          "start_offset": 7613,
+          "end_offset": 7970,
+          "text_sha256": "86541dacebfe48399a1c2ba41f06b4c3e37c13cc106e0280bce6efb6faff18ce",
+          "meeting_date": null,
+          "page": null
+        }
+      ],
+      "selection_and_necessity_reason": "Background Tasks supplies the small-email mechanism and after-response timing; Lifespan Events supplies shared app-resource lifecycle, startup/shutdown-handler exclusion and main/sub-application scope. Neither complete document supplies the other's required facts.",
+      "essential_two_document_answered": true
+    },
+    {
+      "id": "C3-CAL-02",
+      "family_id": "C3-F01",
+      "language": "en",
+      "expected_status": "answered",
+      "author_status": "AI-draft",
+      "independent_item_prereview": "pending",
+      "human_review_count": 0,
+      "required_fact_count": 5,
+      "whole_chunk_selection": [
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 960,
+          "text_sha256": "801c84e0161bc48bf58a668c27d8875043bcfc024029f24fc00219b7a24dd40f",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 810,
+          "end_offset": 1810,
+          "text_sha256": "30e036beac16d64c9ea509257f757333dfc844fc0a3738d0a0e0e48e7ea32231",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0002",
+          "ordinal": 2,
+          "start_offset": 1660,
+          "end_offset": 2655,
+          "text_sha256": "85d46e4ab1a1239d724fc7d3ce1b6485c57715effd0be7ead72e7f56f1f25750",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0003",
+          "ordinal": 3,
+          "start_offset": 2505,
+          "end_offset": 3502,
+          "text_sha256": "6df677e4b99c84c82b1417207c3c3693a64353d81ab8cad1fbc776d79015bad8",
+          "meeting_date": null,
+          "page": null
+        }
+      ],
+      "selection_and_necessity_reason": "One Background Tasks document supplies object creation, task-function forms, arguments, dependency reuse and after-response execution. Adjacent whole chunks preserve the complete reuse paragraph even where its sentence crosses the service boundary.",
+      "essential_two_document_answered": false
+    },
+    {
+      "id": "C3-CAL-03",
+      "family_id": "C3-F01",
+      "language": "ko",
+      "expected_status": "abstained",
+      "author_status": "AI-draft",
+      "independent_item_prereview": "pending",
+      "human_review_count": 0,
+      "required_fact_count": 2,
+      "whole_chunk_selection": [
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 960,
+          "text_sha256": "801c84e0161bc48bf58a668c27d8875043bcfc024029f24fc00219b7a24dd40f",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0004",
+          "ordinal": 4,
+          "start_offset": 3352,
+          "end_offset": 4352,
+          "text_sha256": "659a60941f3045f5c1acaf047806402a5a2600ce818caca3b3fe565c67380e86",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F01-S01",
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "registration_ordinal": 0,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0005",
+          "ordinal": 5,
+          "start_offset": 4202,
+          "end_offset": 4786,
+          "text_sha256": "d03684c2b63127eea325053a9a352d218834632098383e5ad46f67c73f71d629",
+          "meeting_date": null,
+          "page": null
+        }
+      ],
+      "selection_and_necessity_reason": "The background-work introduction and caveat are relevant to the supported email mechanism; both complete adopted public bodies were separately inspected for the missing crash/restart retry guarantee. No answer-bearing chunk was omitted to manufacture absence.",
+      "essential_two_document_answered": false
+    },
+    {
+      "id": "C3-CAL-04",
+      "family_id": "C3-F02",
+      "language": "ko",
+      "expected_status": "answered",
+      "author_status": "AI-draft",
+      "independent_item_prereview": "pending",
+      "human_review_count": 0,
+      "required_fact_count": 6,
+      "whole_chunk_selection": [
+        {
+          "source_id": "C3-F02-S01",
+          "document_id": "c3-cal-library-relocation-meeting",
+          "registration_ordinal": 2,
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 998,
+          "text_sha256": "510b531edf6e57c29e26cef476d4659b53661cde9878be51eba4ceda18c543cc",
+          "meeting_date": "2026-04-07",
+          "page": null
+        },
+        {
+          "source_id": "C3-F02-S01",
+          "document_id": "c3-cal-library-relocation-meeting",
+          "registration_ordinal": 2,
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 848,
+          "end_offset": 1414,
+          "text_sha256": "372e452799afe96e767a97c445616e195302c9938c9d9f27f6cce6f0b98f081b",
+          "meeting_date": "2026-04-07",
+          "page": null
+        },
+        {
+          "source_id": "C3-F02-S02",
+          "document_id": "c3-cal-library-relocation-handover",
+          "registration_ordinal": 3,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 998,
+          "text_sha256": "b2e541c73f08a04d5789e1b6af57cab0ee035cd54d21fa438f5c96d322d79e7d",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F02-S02",
+          "document_id": "c3-cal-library-relocation-handover",
+          "registration_ordinal": 3,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 848,
+          "end_offset": 1392,
+          "text_sha256": "a7efba9f4d122e82a24910727e5249a9951ada4695499de4c5f67d2fb904934e",
+          "meeting_date": null,
+          "page": null
+        }
+      ],
+      "selection_and_necessity_reason": "The meeting alone supplies the original concern, approved scope, planned recording interval and review assignments. The handover supplies the actual curtain-related adjustment and later unresolved layout status; these are not recoverable from the original meeting alone.",
+      "essential_two_document_answered": true
+    },
+    {
+      "id": "C3-CAL-05",
+      "family_id": "C3-F02",
+      "language": "en",
+      "expected_status": "answered",
+      "author_status": "AI-draft",
+      "independent_item_prereview": "pending",
+      "human_review_count": 0,
+      "required_fact_count": 6,
+      "whole_chunk_selection": [
+        {
+          "source_id": "C3-F02-S01",
+          "document_id": "c3-cal-library-relocation-meeting",
+          "registration_ordinal": 2,
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 998,
+          "text_sha256": "510b531edf6e57c29e26cef476d4659b53661cde9878be51eba4ceda18c543cc",
+          "meeting_date": "2026-04-07",
+          "page": null
+        },
+        {
+          "source_id": "C3-F02-S02",
+          "document_id": "c3-cal-library-relocation-handover",
+          "registration_ordinal": 3,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 998,
+          "text_sha256": "b2e541c73f08a04d5789e1b6af57cab0ee035cd54d21fa438f5c96d322d79e7d",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F02-S02",
+          "document_id": "c3-cal-library-relocation-handover",
+          "registration_ordinal": 3,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 848,
+          "end_offset": 1392,
+          "text_sha256": "a7efba9f4d122e82a24910727e5249a9951ada4695499de4c5f67d2fb904934e",
+          "meeting_date": null,
+          "page": null
+        }
+      ],
+      "selection_and_necessity_reason": "The meeting supplies the normative two-check reopening rule and pending-area staff lending. The handover supplies the opening-state comparison and subsequent correction; merely seeing two documents is not the claimed necessity.",
+      "essential_two_document_answered": true
+    },
+    {
+      "id": "C3-CAL-06",
+      "family_id": "C3-F02",
+      "language": "en",
+      "expected_status": "abstained",
+      "author_status": "AI-draft",
+      "independent_item_prereview": "pending",
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "whole_chunk_selection": [
+        {
+          "source_id": "C3-F02-S01",
+          "document_id": "c3-cal-library-relocation-meeting",
+          "registration_ordinal": 2,
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 998,
+          "text_sha256": "510b531edf6e57c29e26cef476d4659b53661cde9878be51eba4ceda18c543cc",
+          "meeting_date": "2026-04-07",
+          "page": null
+        },
+        {
+          "source_id": "C3-F02-S01",
+          "document_id": "c3-cal-library-relocation-meeting",
+          "registration_ordinal": 2,
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 848,
+          "end_offset": 1414,
+          "text_sha256": "372e452799afe96e767a97c445616e195302c9938c9d9f27f6cce6f0b98f081b",
+          "meeting_date": "2026-04-07",
+          "page": null
+        },
+        {
+          "source_id": "C3-F02-S02",
+          "document_id": "c3-cal-library-relocation-handover",
+          "registration_ordinal": 3,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 998,
+          "text_sha256": "b2e541c73f08a04d5789e1b6af57cab0ee035cd54d21fa438f5c96d322d79e7d",
+          "meeting_date": null,
+          "page": null
+        },
+        {
+          "source_id": "C3-F02-S02",
+          "document_id": "c3-cal-library-relocation-handover",
+          "registration_ordinal": 3,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 848,
+          "end_offset": 1392,
+          "text_sha256": "a7efba9f4d122e82a24910727e5249a9951ada4695499de4c5f67d2fb904934e",
+          "meeting_date": null,
+          "page": null
+        }
+      ],
+      "selection_and_necessity_reason": "All four whole chunks from the two synthetic documents are supplied. The known feedback roles are present and the final percentage is absent from both full bodies, so context selection does not create insufficiency.",
+      "essential_two_document_answered": false
+    }
+  ],
+  "whole_family_absence_author_checks": [
+    {
+      "id": "C3-CAL-03",
+      "family_id": "C3-F01",
+      "known_fact_ids": [
+        "C3-CAL-03-F1"
+      ],
+      "missing_fact_ids": [
+        "C3-CAL-03-F2"
+      ],
+      "checked_sources": [
+        {
+          "source_id": "C3-F01-S01",
+          "raw_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+          "processed_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468"
+        },
+        {
+          "source_id": "C3-F01-S02",
+          "raw_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+          "processed_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab"
+        }
+      ],
+      "method": "Read both entire adopted raw bodies/inventory documents, including background-work caveats and normal app lifecycle descriptions. This is an author semantic check, not a keyword-only absence test.",
+      "conclusion": "Neither body specifies a guaranteed retry count for interrupted background tasks after process restart. Lifecycle cleanup, links to Starlette/Celery and same-process use do not supply that guarantee.",
+      "selected_away_answer": false,
+      "independent_check_pending": true
+    },
+    {
+      "id": "C3-CAL-06",
+      "family_id": "C3-F02",
+      "known_fact_ids": [
+        "C3-CAL-06-F1",
+        "C3-CAL-06-F2"
+      ],
+      "missing_fact_ids": [
+        "C3-CAL-06-F3"
+      ],
+      "checked_sources": [
+        {
+          "source_id": "C3-F02-S01",
+          "raw_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+          "processed_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7"
+        },
+        {
+          "source_id": "C3-F02-S02",
+          "raw_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+          "processed_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac"
+        }
+      ],
+      "method": "Read both entire fictional bodies, including the meeting assignments, opening handover and latest trial-status paragraph; all family chunks are also selected for this item.",
+      "conclusion": "The records assign feedback collection and compilation but contain no final respondent count, approval count or approval percentage. Early position inquiries and planned later compilation cannot establish that result.",
+      "selected_away_answer": false,
+      "independent_check_pending": true
+    }
+  ],
+  "structural_validation": {
+    "passed": true,
+    "checks": [
+      "validate_draft",
+      "validate_oracles",
+      "whole_context_identity",
+      "context_selection_exact_schema_and_order",
+      "source_and_toolchain_hashes"
+    ],
+    "rows": [
+      {
+        "id": "C3-CAL-01",
+        "family_id": "C3-F01",
+        "language": "ko",
+        "expected_status": "answered",
+        "required_facts": 6,
+        "missing_facts": 0,
+        "contexts": 5,
+        "essential_multi_document_structural": true
+      },
+      {
+        "id": "C3-CAL-02",
+        "family_id": "C3-F01",
+        "language": "en",
+        "expected_status": "answered",
+        "required_facts": 5,
+        "missing_facts": 0,
+        "contexts": 4,
+        "essential_multi_document_structural": false
+      },
+      {
+        "id": "C3-CAL-03",
+        "family_id": "C3-F01",
+        "language": "ko",
+        "expected_status": "abstained",
+        "required_facts": 2,
+        "missing_facts": 1,
+        "contexts": 3,
+        "essential_multi_document_structural": false
+      },
+      {
+        "id": "C3-CAL-04",
+        "family_id": "C3-F02",
+        "language": "ko",
+        "expected_status": "answered",
+        "required_facts": 6,
+        "missing_facts": 0,
+        "contexts": 4,
+        "essential_multi_document_structural": true
+      },
+      {
+        "id": "C3-CAL-05",
+        "family_id": "C3-F02",
+        "language": "en",
+        "expected_status": "answered",
+        "required_facts": 6,
+        "missing_facts": 0,
+        "contexts": 3,
+        "essential_multi_document_structural": true
+      },
+      {
+        "id": "C3-CAL-06",
+        "family_id": "C3-F02",
+        "language": "en",
+        "expected_status": "abstained",
+        "required_facts": 3,
+        "missing_facts": 1,
+        "contexts": 4,
+        "essential_multi_document_structural": false
+      }
+    ],
+    "freezes": {
+      "data/evaluation/meetings-c3-calibration-v1/source-freeze-v1.json": {
+        "sha256": "e423804942438acfa38c8bb77095905761a9c9098ce743d33b289048cc6b3676",
+        "bindings": 9,
+        "unchanged": true
+      },
+      "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json": {
+        "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+        "bindings": 66,
+        "unchanged": true
+      }
+    },
+    "files": {
+      "draft.json": "3a87a916b30552138942f6bff04ba8a9cce54d60ab522dade319373ac138a4fc",
+      "oracle.json": "b408ca9377e322da426a7c86ec999feb8bf3701974115d1e8b9a736e42d66770",
+      "context-selection.json": "300b9f7f991eb85205d1dd5550014c9f47fd263e7113cb5f13c82f9a6a03fd96"
+    },
+    "tokenizer_runs": 0,
+    "model_calls": 0,
+    "scope": "Author-run structural/provenance checks only; no independent semantic judgment or answer-quality measurement.",
+    "invocation": "@'\nimport hashlib\nimport json\nfrom pathlib import Path\nfrom doctrail.meeting_contract import AnswerRequest\nfrom doctrail.meeting_requirements_review import validate_oracles\nfrom doctrail.meeting_comparison_review import requires_multiple_sources\nfrom scripts.prepare_meeting_requirements_inputs import validate_draft, canonical\nbase = Path(\"data/evaluation/meetings-c3-calibration-v1\")\nread = lambda name: json.loads((base / name).read_text(encoding=\"utf-8\"))\ndraft, oracle, selection, inventory = [read(n) for n in (\"draft.json\", \"oracle.json\", \"context-selection.json\", \"inventory.json\")]\nvalidate_draft(draft, \"calibration\")\nparsed = validate_oracles(draft, oracle, \"calibration\")\nexpected_selection = {\"schema_version\":1, \"phase\":\"calibration\", \"cases\":[{\"id\":c[\"id\"],\"chunk_ids\":[x[\"chunk_id\"] for x in c[\"payload\"][\"contexts\"]]} for c in draft[\"cases\"]]}\nassert canonical(selection) == canonical(expected_selection)\nchunks = {}\nfor d in inventory[\"documents\"]:\n    for c in d[\"chunks\"]:\n        context = {k:d[k] for k in (\"document_id\",\"revision\",\"title\",\"meeting_date\")}\n        context.update({k:c[k] for k in (\"chunk_id\",\"text\",\"page\",\"start_offset\",\"end_offset\")})\n        chunks[c[\"chunk_id\"]] = (d[\"family_id\"],context,d[\"registration_ordinal\"],c[\"ordinal\"],c[\"text_sha256\"])\nrows = []\nfor case, o in zip(draft[\"cases\"],parsed.cases,strict=True):\n    contexts=case[\"payload\"][\"contexts\"]\n    coordinates=[]\n    for context in contexts:\n        family, original, di, ci, digest = chunks[context[\"chunk_id\"]]\n        assert family == o.family_id and context == original\n        assert hashlib.sha256(context[\"text\"].encode(\"utf-8\")).hexdigest() == digest\n        coordinates.append((di,ci))\n    assert coordinates == sorted(coordinates)\n    request = AnswerRequest.model_validate(case[\"payload\"])\n    rows.append({\"id\":case[\"id\"],\"family_id\":o.family_id,\"language\":o.language,\"expected_status\":o.expected_status,\"required_facts\":len(o.required_facts),\"missing_facts\":sum(not f.evidence_alternatives for f in o.required_facts),\"contexts\":len(contexts),\"essential_multi_document_structural\":requires_multiple_sources(o,[x.model_dump() for x in request.contexts])})\nfreezes = {}\nfor name, expected_sha in [(\"data/evaluation/meetings-c3-calibration-v1/source-freeze-v1.json\",\"e423804942438acfa38c8bb77095905761a9c9098ce743d33b289048cc6b3676\"),(\"data/evaluation/meetings-c3-toolchain-source-freeze-v1.json\",\"0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3\")]:\n    raw=Path(name).read_bytes()\n    assert hashlib.sha256(raw).hexdigest()==expected_sha\n    freeze=json.loads(raw)\n    assert all(hashlib.sha256(Path(n).read_bytes()).hexdigest()==h for n,h in freeze[\"bound_files\"].items())\n    freezes[name]={\"sha256\":expected_sha,\"bindings\":len(freeze[\"bound_files\"]),\"unchanged\":True}\nprint(json.dumps({\"passed\":True,\"checks\":[\"validate_draft\",\"validate_oracles\",\"whole_context_identity\",\"context_selection_exact_schema_and_order\",\"source_and_toolchain_hashes\"],\"rows\":rows,\"freezes\":freezes,\"files\":{n:hashlib.sha256((base/n).read_bytes()).hexdigest() for n in (\"draft.json\",\"oracle.json\",\"context-selection.json\")},\"tokenizer_runs\":0,\"model_calls\":0},ensure_ascii=False))\n'@ | uv run --locked --no-sync python -X utf8 -",
+    "official_prepare_entrypoint_called": false,
+    "official_tokenizer_loaded": false,
+    "model_dispatched": false
+  },
+  "prereview": {
+    "planned_reviewer_id": "/root/c3_calibration_source_review",
+    "status": "pending",
+    "completed_count": 0,
+    "accepted_count": 0,
+    "rejected_count": 0,
+    "human_review_count": 0,
+    "note": "The oracle independent_prereviewer field reserves the planned separate role. It does not claim that any review has occurred. The reviewer owns a later separate item-prereview record."
+  },
+  "exposure": {
+    "prior_role": "C2 calibration source/question author; those pools remain closed and were not reopened in this task.",
+    "current_exposure": [
+      "New C3 calibration raw sources and complete inventory",
+      "C3 source/adoption records and source-freeze metadata",
+      "C3 plan/policy description, including its embedded historical calibration diagnostics",
+      "Frozen review and preparation schema/source-validation contracts",
+      "Catalog-produced exact evidence units for the already selected new calibration chunks"
+    ],
+    "candidate_blindness_claimed": false,
+    "candidate_adapter_or_prompt_implementation_read_for_authoring": false,
+    "candidate_output_seen_or_used": false,
+    "validation_semantics_read": false,
+    "closed_pool_files_read": false
+  },
+  "exclusions": {
+    "author_ineligible_for_independent_final_output_scoring": true,
+    "author_ineligible_for_validation_authorship": true,
+    "source_and_item_prereviewers_also_excluded_from_final_output_scoring": true
+  },
+  "limitations": [
+    "AI-authored questions, oracles and fictional sources share an author and may share bias; independent prereview remains required.",
+    "Small purposive calibration corpus, public pretraining exposure and policy-description exposure remain disclosed.",
+    "Exact quote/schema checks cannot establish semantic adequacy, naturalness or model answer quality.",
+    "No item freeze or official input-budget readiness result exists at this handoff; dynamic stage2 readiness is unmeasured.",
+    "The final answer language is explicit; reasonable name transliterations preserve the same fictional people rather than asserting official English names."
+  ],
+  "handoff": {
+    "owned_new_files": [
+      "draft.json",
+      "oracle.json",
+      "context-selection.json",
+      "item-authoring-receipt.json"
+    ],
+    "source_freeze_created_or_modified": false,
+    "item_freeze_created": false,
+    "source_or_prior_receipts_modified": false,
+    "global_docs_modified": false,
+    "git_operations": 0,
+    "next": "Separate item prereview, then parent item-freeze/commit before any official token preparation."
+  }
+}

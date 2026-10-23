@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "cases": [
+    {
+      "id": "C6-VAL-01",
+      "payload": {
+        "schema_version": 1,
+        "query": "팀 컴퍼스 지침에 따라 새 회의 노트를 만들 때 실행할 GitHub 작업, 입력할 두 값, 생성 결과, HackMD 링크 위치, 편집 내용을 GitHub로 동기화하는 방법을 한국어로 설명해줘.",
+        "contexts": [
+          {
+            "document_id": "c6-v-jupyter-compass",
+            "revision": 1,
+            "title": "Jupyter Community Committee Team compass",
+            "meeting_date": null,
+            "chunk_id": "c6-v-jupyter-compass-r1-c0000",
+            "text": "# Jupyter Community Committee Team compass\n\n**A team compass is a place for community members, new and old, to align on objectives,\npractices, and happenings.**\n\nPlease use this repository's issue tracker for any changes related to our policies or\npractices -- how we communicate, how we work together.\n\n\n## Contributing\n\nThis is a [MySTMD](https://mystmd.org) project.\nThe development environment is managed by [Pixi](https://pixi.sh).\n\n\n### Start a local preview server\n\n```bash\npixi run preview\n```\n\nThis will start a local preview server.\nView your changes immediately in your browser!\nAny changes to the website content will trigger an automatic re-render.\n\n\n### Render the website\n\n```bash\npixi run render\n```\n\n\n## Common activities\n\n### Initialize and sync meeting notes\n\nInitialize meeting notes on HackMD by navigating to the \"Actions\" tab of this repo.\nThen select \"Setup / sync meeting notes\" on the left panel.\nNow click \"Run workflow\" in the main workflow listing panel.\nFinally, fill ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-jupyter-compass",
+            "revision": 1,
+            "title": "Jupyter Community Committee Team compass",
+            "meeting_date": null,
+            "chunk_id": "c6-v-jupyter-compass-r1-c0001",
+            "text": " of this repo.\nThen select \"Setup / sync meeting notes\" on the left panel.\nNow click \"Run workflow\" in the main workflow listing panel.\nFinally, fill in the kind of meeting you're initializing and the date, and click \"Run workflow\".\n\n<details>\n  <summary>Screenshot</summary>\n  <img src=\"https://github.com/user-attachments/assets/db567500-48ee-4e32-8cf3-5eab01cce96c\">\n</details>\n\nA Pull Request and HackMD document will be created.\nVisit the PR to find the HackMD link.\n\nWhen you're ready to sync data from HackMD back to GitHub, comment in the PR with `/bot please sync notes`.\nSee [an example PR from another project](https://github.com/geojupyter/geojupyter.org/pull/32) for an example.\n\n> [!NOTE]\n> This job may occasionally fail with e.g. 403 response from HackMD.\n> In the past, re-running the job has worked.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1666
+          }
+        ]
+      },
+      "response_language": "ko"
+    },
+    {
+      "id": "C6-VAL-02",
+      "payload": {
+        "schema_version": 1,
+        "query": "Across the October 1 and October 15 Community Committee notes, what guide had been copied and what was said about Monday's CFP launch readiness on October 1, and what web-presence follow-up and landing-page direction were recorded on October 15? Answer in English.",
+        "contexts": [
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0000",
+            "text": "---\ntitle: \"Jupyter Community Committee Meeting\"\ndescription: |\n  A bi-weekly gathering of the Community Committee.\ndate: \"2026-10-01\"\nauthor:\n  - name: \"The Community Committee\"\ncategories:\n  - \"Meeting notes\"\ntags: [meeting-notes]\n---\n\n# Community Committee Meeting (2026-10-01)\n\nPlease add new agenda items under the `New agenda items` heading!\n\n- [Previous meetings](https://jupyter.org/community-committee/meeting-notes/)\n- [Jupyter Community Committee](https://jupyter.org/governance/list-of-standing-committees-and-working-groups/#jupyter-community-building) handy links:\n  - [GitHub repo](https://github.com/jupyter/community-committee)\n\n\n## Attendees\n\n* Matt\n* Jason\n* Lahari\n\n\n### Action items\n\n- [ ] Matt: Update \"Round 5 Workshop Submission and List of Workshops\" URL on https://jupyter.org/community#calendar to point directly to archive page instead of the URL for the current year's workshops\n- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0001",
+            "text": " page instead of the URL for the current year's workshops\n- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write requirements for landing page for LF: https://docs.google.com/document/d/1BAXgH9N3D3DmLRtpJdTAcAPhA2E0gaQyA-K2Q5lNXgg/edit?tab=t.0\n- [ ] ?: Update \"Schedule\" section in Workshop planning doc, flesh out details of each step https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0\n    - [ ] See https://docs.google.com/document/d/1YIcOdHJ3hFWA84e10WQKGdNhiBWnMq6psTh6HWC7BcU/edit?tab=t.0\n- [ ] ?: Figure out what to do with \"Organizer's toolkit\" https://drive.google.com/drive/folders/1mxnSgM8EFBJDNsdOf3GP0sUn6oQ2TTYx\n    - Move it in to our 2027 directory? https://drive.google.com/drive/folders/1Q6eFtHcQgr6EyKGeLHS8lPx3Ze9Ywt6g\n    - Move it in to our team compass? (Matt: yes)\n    - Call this something else. Let's have a little glossary. Should use \"Host\" for individual workshop organizers and \"Organizer\" ",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1848
+          },
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0002",
+            "text": "mpass? (Matt: yes)\n    - Call this something else. Let's have a little glossary. Should use \"Host\" for individual workshop organizers and \"Organizer\" for program organizers.\n- [ ] ?: Create CFP form. See https://drive.google.com/drive/folders/1s_6tR2gYKOZgWhDvjpMVOvVxh8v2xRfr\n\n\n### Standing items\n\n- Active initiatives\n    - Community workshops\n- Upcoming initiatives\n    - ...\n\n\n### Agenda & notes\n\n- CFP for community workshop\n    - We captured process notes in our [planning doc](https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0#heading=h.kgwuplugbfdz)\n    - We copied the Organizer's Guide (https://docs.google.com/document/d/12Eo7YQMCsUXwG8bZnkzQEOJB0vJW5cINsf6Diaa-LqM/edit?tab=t.0#heading=h.h40oo6mctxv) to our 2027 directory\n    - We don't think we can launch our CFP on Monday!\n    - Matt is out next week\n",
+            "page": null,
+            "start_offset": 1698,
+            "end_offset": 2558
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0000",
+            "text": "---\ntitle: \"Jupyter Community Committee Meeting\"\ndescription: |\n  A bi-weekly gathering of the Community Committee.\ndate: \"2026-10-15\"\nauthor:\n  - name: \"The Community Committee\"\ncategories:\n  - \"Meeting notes\"\ntags: [meeting-notes]\n---\n\n# Community Committee Meeting (2026-10-15)\n\nPlease add new agenda items under the `New agenda items` heading!\n\n- [Previous meetings](https://jupyter.org/community-committee/meeting-notes/)\n- [Jupyter Community Committee](https://jupyter.org/governance/list-of-standing-committees-and-working-groups/#jupyter-community-building) handy links:\n  - [GitHub repo](https://github.com/jupyter/community-committee)\n\n\n## Attendees\n\n* Matt\n* Jason\n* Serena\n* April\n\n\n### Action items\n\n- [ ] April: Email LF to get the work started on updating the web presence. We don't know yet everything we want to change, but we can let them know we're starting this process and ask them what information they need from us.\n\n\n### Standing items\n\n- Active initiatives\n    - ...\n- ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 994
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0001",
+            "text": "can let them know we're starting this process and ask them what information they need from us.\n\n\n### Standing items\n\n- Active initiatives\n    - ...\n- Upcoming initiatives\n    - ...\n\n\n### Agenda & notes\n\n- Community workshop CFP -- can we get it out today???\n    - Tasks -- see our doc `https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0` under \"October 5\":\n\t\t* Make our CFP form\n\t\t* Draft: `https://docs.google.com/forms/d/19sQk2j9h2GXOZLMPMpTM-JOkSMVBXVkKp5JZYIfzD4k/edit`\n\t\t* Write blog post\n\t\t    * Process: *Should* be a private queue for blog posts for initial vetting. Fill out content intake form. Then work in HackMD/GDocs. Then PR (opened by maintainer?)\n\t\t* **Ask LF to update the web presence for community workshops**\n\t\t\t* [https\\://events.linuxfoundation.org/jupyter-workshops/](https://events.linuxfoundation.org/jupyter-workshops/)\n\t\t\t* ",
+            "page": null,
+            "start_offset": 844,
+            "end_offset": 1738
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0002",
+            "text": "e for community workshops**\n\t\t\t* [https\\://events.linuxfoundation.org/jupyter-workshops/](https://events.linuxfoundation.org/jupyter-workshops/)\n\t\t\t* [https\\://events.linuxfoundation.org/archive/2026/jupyter-workshops/](https://events.linuxfoundation.org/archive/2026/jupyter-workshops/)\n\t\t        * This should be *the* landing page, avoid diluting across multiple pages!!!!\n\t\t        * There's a subpage that describes how to run a workshop / role of hosts, and that content won't be current because LF is not longer doing some of that work.\n\t\t* Create a Round 6 entry on [https\\://jupyter.org/community\\#calendar](https://jupyter.org/community#calendar)\n\t\t* Trigger marketing promotion (JMS – use Media Playbook Checklist Tier 1): [Media Playbook Checklist](https://docs.google.com/document/d/12xizBPpvWjacJ3lv-T28rGo8rRhg1xBZT2a32T_hyhg/edit?tab=t.0)\n",
+            "page": null,
+            "start_offset": 1588,
+            "end_offset": 2443
+          }
+        ]
+      },
+      "response_language": "en"
+    },
+    {
+      "id": "C6-VAL-03",
+      "payload": {
+        "schema_version": 1,
+        "query": "2026년 10월 15일 회의에서 April에게 맡긴 연락 상대와 연락 목적, 그리고 그 연락에 대해 LF가 회신한 확정 작업비 금액을 한국어로 알려줘.",
+        "contexts": [
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0000",
+            "text": "---\ntitle: \"Jupyter Community Committee Meeting\"\ndescription: |\n  A bi-weekly gathering of the Community Committee.\ndate: \"2026-10-01\"\nauthor:\n  - name: \"The Community Committee\"\ncategories:\n  - \"Meeting notes\"\ntags: [meeting-notes]\n---\n\n# Community Committee Meeting (2026-10-01)\n\nPlease add new agenda items under the `New agenda items` heading!\n\n- [Previous meetings](https://jupyter.org/community-committee/meeting-notes/)\n- [Jupyter Community Committee](https://jupyter.org/governance/list-of-standing-committees-and-working-groups/#jupyter-community-building) handy links:\n  - [GitHub repo](https://github.com/jupyter/community-committee)\n\n\n## Attendees\n\n* Matt\n* Jason\n* Lahari\n\n\n### Action items\n\n- [ ] Matt: Update \"Round 5 Workshop Submission and List of Workshops\" URL on https://jupyter.org/community#calendar to point directly to archive page instead of the URL for the current year's workshops\n- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0001",
+            "text": " page instead of the URL for the current year's workshops\n- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write requirements for landing page for LF: https://docs.google.com/document/d/1BAXgH9N3D3DmLRtpJdTAcAPhA2E0gaQyA-K2Q5lNXgg/edit?tab=t.0\n- [ ] ?: Update \"Schedule\" section in Workshop planning doc, flesh out details of each step https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0\n    - [ ] See https://docs.google.com/document/d/1YIcOdHJ3hFWA84e10WQKGdNhiBWnMq6psTh6HWC7BcU/edit?tab=t.0\n- [ ] ?: Figure out what to do with \"Organizer's toolkit\" https://drive.google.com/drive/folders/1mxnSgM8EFBJDNsdOf3GP0sUn6oQ2TTYx\n    - Move it in to our 2027 directory? https://drive.google.com/drive/folders/1Q6eFtHcQgr6EyKGeLHS8lPx3Ze9Ywt6g\n    - Move it in to our team compass? (Matt: yes)\n    - Call this something else. Let's have a little glossary. Should use \"Host\" for individual workshop organizers and \"Organizer\" ",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1848
+          },
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0002",
+            "text": "mpass? (Matt: yes)\n    - Call this something else. Let's have a little glossary. Should use \"Host\" for individual workshop organizers and \"Organizer\" for program organizers.\n- [ ] ?: Create CFP form. See https://drive.google.com/drive/folders/1s_6tR2gYKOZgWhDvjpMVOvVxh8v2xRfr\n\n\n### Standing items\n\n- Active initiatives\n    - Community workshops\n- Upcoming initiatives\n    - ...\n\n\n### Agenda & notes\n\n- CFP for community workshop\n    - We captured process notes in our [planning doc](https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0#heading=h.kgwuplugbfdz)\n    - We copied the Organizer's Guide (https://docs.google.com/document/d/12Eo7YQMCsUXwG8bZnkzQEOJB0vJW5cINsf6Diaa-LqM/edit?tab=t.0#heading=h.h40oo6mctxv) to our 2027 directory\n    - We don't think we can launch our CFP on Monday!\n    - Matt is out next week\n",
+            "page": null,
+            "start_offset": 1698,
+            "end_offset": 2558
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0000",
+            "text": "---\ntitle: \"Jupyter Community Committee Meeting\"\ndescription: |\n  A bi-weekly gathering of the Community Committee.\ndate: \"2026-10-15\"\nauthor:\n  - name: \"The Community Committee\"\ncategories:\n  - \"Meeting notes\"\ntags: [meeting-notes]\n---\n\n# Community Committee Meeting (2026-10-15)\n\nPlease add new agenda items under the `New agenda items` heading!\n\n- [Previous meetings](https://jupyter.org/community-committee/meeting-notes/)\n- [Jupyter Community Committee](https://jupyter.org/governance/list-of-standing-committees-and-working-groups/#jupyter-community-building) handy links:\n  - [GitHub repo](https://github.com/jupyter/community-committee)\n\n\n## Attendees\n\n* Matt\n* Jason\n* Serena\n* April\n\n\n### Action items\n\n- [ ] April: Email LF to get the work started on updating the web presence. We don't know yet everything we want to change, but we can let them know we're starting this process and ask them what information they need from us.\n\n\n### Standing items\n\n- Active initiatives\n    - ...\n- ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 994
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0001",
+            "text": "can let them know we're starting this process and ask them what information they need from us.\n\n\n### Standing items\n\n- Active initiatives\n    - ...\n- Upcoming initiatives\n    - ...\n\n\n### Agenda & notes\n\n- Community workshop CFP -- can we get it out today???\n    - Tasks -- see our doc `https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0` under \"October 5\":\n\t\t* Make our CFP form\n\t\t* Draft: `https://docs.google.com/forms/d/19sQk2j9h2GXOZLMPMpTM-JOkSMVBXVkKp5JZYIfzD4k/edit`\n\t\t* Write blog post\n\t\t    * Process: *Should* be a private queue for blog posts for initial vetting. Fill out content intake form. Then work in HackMD/GDocs. Then PR (opened by maintainer?)\n\t\t* **Ask LF to update the web presence for community workshops**\n\t\t\t* [https\\://events.linuxfoundation.org/jupyter-workshops/](https://events.linuxfoundation.org/jupyter-workshops/)\n\t\t\t* ",
+            "page": null,
+            "start_offset": 844,
+            "end_offset": 1738
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0002",
+            "text": "e for community workshops**\n\t\t\t* [https\\://events.linuxfoundation.org/jupyter-workshops/](https://events.linuxfoundation.org/jupyter-workshops/)\n\t\t\t* [https\\://events.linuxfoundation.org/archive/2026/jupyter-workshops/](https://events.linuxfoundation.org/archive/2026/jupyter-workshops/)\n\t\t        * This should be *the* landing page, avoid diluting across multiple pages!!!!\n\t\t        * There's a subpage that describes how to run a workshop / role of hosts, and that content won't be current because LF is not longer doing some of that work.\n\t\t* Create a Round 6 entry on [https\\://jupyter.org/community\\#calendar](https://jupyter.org/community#calendar)\n\t\t* Trigger marketing promotion (JMS – use Media Playbook Checklist Tier 1): [Media Playbook Checklist](https://docs.google.com/document/d/12xizBPpvWjacJ3lv-T28rGo8rRhg1xBZT2a32T_hyhg/edit?tab=t.0)\n",
+            "page": null,
+            "start_offset": 1588,
+            "end_offset": 2443
+          },
+          {
+            "document_id": "c6-v-jupyter-compass",
+            "revision": 1,
+            "title": "Jupyter Community Committee Team compass",
+            "meeting_date": null,
+            "chunk_id": "c6-v-jupyter-compass-r1-c0000",
+            "text": "# Jupyter Community Committee Team compass\n\n**A team compass is a place for community members, new and old, to align on objectives,\npractices, and happenings.**\n\nPlease use this repository's issue tracker for any changes related to our policies or\npractices -- how we communicate, how we work together.\n\n\n## Contributing\n\nThis is a [MySTMD](https://mystmd.org) project.\nThe development environment is managed by [Pixi](https://pixi.sh).\n\n\n### Start a local preview server\n\n```bash\npixi run preview\n```\n\nThis will start a local preview server.\nView your changes immediately in your browser!\nAny changes to the website content will trigger an automatic re-render.\n\n\n### Render the website\n\n```bash\npixi run render\n```\n\n\n## Common activities\n\n### Initialize and sync meeting notes\n\nInitialize meeting notes on HackMD by navigating to the \"Actions\" tab of this repo.\nThen select \"Setup / sync meeting notes\" on the left panel.\nNow click \"Run workflow\" in the main workflow listing panel.\nFinally, fill ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-jupyter-compass",
+            "revision": 1,
+            "title": "Jupyter Community Committee Team compass",
+            "meeting_date": null,
+            "chunk_id": "c6-v-jupyter-compass-r1-c0001",
+            "text": " of this repo.\nThen select \"Setup / sync meeting notes\" on the left panel.\nNow click \"Run workflow\" in the main workflow listing panel.\nFinally, fill in the kind of meeting you're initializing and the date, and click \"Run workflow\".\n\n<details>\n  <summary>Screenshot</summary>\n  <img src=\"https://github.com/user-attachments/assets/db567500-48ee-4e32-8cf3-5eab01cce96c\">\n</details>\n\nA Pull Request and HackMD document will be created.\nVisit the PR to find the HackMD link.\n\nWhen you're ready to sync data from HackMD back to GitHub, comment in the PR with `/bot please sync notes`.\nSee [an example PR from another project](https://github.com/geojupyter/geojupyter.org/pull/32) for an example.\n\n> [!NOTE]\n> This job may occasionally fail with e.g. 403 response from HackMD.\n> In the past, re-running the job has worked.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1666
+          }
+        ]
+      },
+      "response_language": "ko"
+    },
+    {
+      "id": "C6-VAL-04",
+      "payload": {
+        "schema_version": 1,
+        "query": "For the Round 6 workshop calendar entry, identify the named owner recorded on October 1 and its calendar destination, then give the entry's actual publication timestamp as confirmed by October 15. Answer in English.",
+        "contexts": [
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0000",
+            "text": "---\ntitle: \"Jupyter Community Committee Meeting\"\ndescription: |\n  A bi-weekly gathering of the Community Committee.\ndate: \"2026-10-01\"\nauthor:\n  - name: \"The Community Committee\"\ncategories:\n  - \"Meeting notes\"\ntags: [meeting-notes]\n---\n\n# Community Committee Meeting (2026-10-01)\n\nPlease add new agenda items under the `New agenda items` heading!\n\n- [Previous meetings](https://jupyter.org/community-committee/meeting-notes/)\n- [Jupyter Community Committee](https://jupyter.org/governance/list-of-standing-committees-and-working-groups/#jupyter-community-building) handy links:\n  - [GitHub repo](https://github.com/jupyter/community-committee)\n\n\n## Attendees\n\n* Matt\n* Jason\n* Lahari\n\n\n### Action items\n\n- [ ] Matt: Update \"Round 5 Workshop Submission and List of Workshops\" URL on https://jupyter.org/community#calendar to point directly to archive page instead of the URL for the current year's workshops\n- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0001",
+            "text": " page instead of the URL for the current year's workshops\n- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write requirements for landing page for LF: https://docs.google.com/document/d/1BAXgH9N3D3DmLRtpJdTAcAPhA2E0gaQyA-K2Q5lNXgg/edit?tab=t.0\n- [ ] ?: Update \"Schedule\" section in Workshop planning doc, flesh out details of each step https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0\n    - [ ] See https://docs.google.com/document/d/1YIcOdHJ3hFWA84e10WQKGdNhiBWnMq6psTh6HWC7BcU/edit?tab=t.0\n- [ ] ?: Figure out what to do with \"Organizer's toolkit\" https://drive.google.com/drive/folders/1mxnSgM8EFBJDNsdOf3GP0sUn6oQ2TTYx\n    - Move it in to our 2027 directory? https://drive.google.com/drive/folders/1Q6eFtHcQgr6EyKGeLHS8lPx3Ze9Ywt6g\n    - Move it in to our team compass? (Matt: yes)\n    - Call this something else. Let's have a little glossary. Should use \"Host\" for individual workshop organizers and \"Organizer\" ",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1848
+          },
+          {
+            "document_id": "c6-v-jupyter-1001",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-01)",
+            "meeting_date": "2026-10-01",
+            "chunk_id": "c6-v-jupyter-1001-r1-c0002",
+            "text": "mpass? (Matt: yes)\n    - Call this something else. Let's have a little glossary. Should use \"Host\" for individual workshop organizers and \"Organizer\" for program organizers.\n- [ ] ?: Create CFP form. See https://drive.google.com/drive/folders/1s_6tR2gYKOZgWhDvjpMVOvVxh8v2xRfr\n\n\n### Standing items\n\n- Active initiatives\n    - Community workshops\n- Upcoming initiatives\n    - ...\n\n\n### Agenda & notes\n\n- CFP for community workshop\n    - We captured process notes in our [planning doc](https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0#heading=h.kgwuplugbfdz)\n    - We copied the Organizer's Guide (https://docs.google.com/document/d/12Eo7YQMCsUXwG8bZnkzQEOJB0vJW5cINsf6Diaa-LqM/edit?tab=t.0#heading=h.h40oo6mctxv) to our 2027 directory\n    - We don't think we can launch our CFP on Monday!\n    - Matt is out next week\n",
+            "page": null,
+            "start_offset": 1698,
+            "end_offset": 2558
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0000",
+            "text": "---\ntitle: \"Jupyter Community Committee Meeting\"\ndescription: |\n  A bi-weekly gathering of the Community Committee.\ndate: \"2026-10-15\"\nauthor:\n  - name: \"The Community Committee\"\ncategories:\n  - \"Meeting notes\"\ntags: [meeting-notes]\n---\n\n# Community Committee Meeting (2026-10-15)\n\nPlease add new agenda items under the `New agenda items` heading!\n\n- [Previous meetings](https://jupyter.org/community-committee/meeting-notes/)\n- [Jupyter Community Committee](https://jupyter.org/governance/list-of-standing-committees-and-working-groups/#jupyter-community-building) handy links:\n  - [GitHub repo](https://github.com/jupyter/community-committee)\n\n\n## Attendees\n\n* Matt\n* Jason\n* Serena\n* April\n\n\n### Action items\n\n- [ ] April: Email LF to get the work started on updating the web presence. We don't know yet everything we want to change, but we can let them know we're starting this process and ask them what information they need from us.\n\n\n### Standing items\n\n- Active initiatives\n    - ...\n- ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 994
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0001",
+            "text": "can let them know we're starting this process and ask them what information they need from us.\n\n\n### Standing items\n\n- Active initiatives\n    - ...\n- Upcoming initiatives\n    - ...\n\n\n### Agenda & notes\n\n- Community workshop CFP -- can we get it out today???\n    - Tasks -- see our doc `https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0` under \"October 5\":\n\t\t* Make our CFP form\n\t\t* Draft: `https://docs.google.com/forms/d/19sQk2j9h2GXOZLMPMpTM-JOkSMVBXVkKp5JZYIfzD4k/edit`\n\t\t* Write blog post\n\t\t    * Process: *Should* be a private queue for blog posts for initial vetting. Fill out content intake form. Then work in HackMD/GDocs. Then PR (opened by maintainer?)\n\t\t* **Ask LF to update the web presence for community workshops**\n\t\t\t* [https\\://events.linuxfoundation.org/jupyter-workshops/](https://events.linuxfoundation.org/jupyter-workshops/)\n\t\t\t* ",
+            "page": null,
+            "start_offset": 844,
+            "end_offset": 1738
+          },
+          {
+            "document_id": "c6-v-jupyter-1015",
+            "revision": 1,
+            "title": "Jupyter Community Committee Meeting (2026-10-15)",
+            "meeting_date": "2026-10-15",
+            "chunk_id": "c6-v-jupyter-1015-r1-c0002",
+            "text": "e for community workshops**\n\t\t\t* [https\\://events.linuxfoundation.org/jupyter-workshops/](https://events.linuxfoundation.org/jupyter-workshops/)\n\t\t\t* [https\\://events.linuxfoundation.org/archive/2026/jupyter-workshops/](https://events.linuxfoundation.org/archive/2026/jupyter-workshops/)\n\t\t        * This should be *the* landing page, avoid diluting across multiple pages!!!!\n\t\t        * There's a subpage that describes how to run a workshop / role of hosts, and that content won't be current because LF is not longer doing some of that work.\n\t\t* Create a Round 6 entry on [https\\://jupyter.org/community\\#calendar](https://jupyter.org/community#calendar)\n\t\t* Trigger marketing promotion (JMS – use Media Playbook Checklist Tier 1): [Media Playbook Checklist](https://docs.google.com/document/d/12xizBPpvWjacJ3lv-T28rGo8rRhg1xBZT2a32T_hyhg/edit?tab=t.0)\n",
+            "page": null,
+            "start_offset": 1588,
+            "end_offset": 2443
+          },
+          {
+            "document_id": "c6-v-jupyter-compass",
+            "revision": 1,
+            "title": "Jupyter Community Committee Team compass",
+            "meeting_date": null,
+            "chunk_id": "c6-v-jupyter-compass-r1-c0000",
+            "text": "# Jupyter Community Committee Team compass\n\n**A team compass is a place for community members, new and old, to align on objectives,\npractices, and happenings.**\n\nPlease use this repository's issue tracker for any changes related to our policies or\npractices -- how we communicate, how we work together.\n\n\n## Contributing\n\nThis is a [MySTMD](https://mystmd.org) project.\nThe development environment is managed by [Pixi](https://pixi.sh).\n\n\n### Start a local preview server\n\n```bash\npixi run preview\n```\n\nThis will start a local preview server.\nView your changes immediately in your browser!\nAny changes to the website content will trigger an automatic re-render.\n\n\n### Render the website\n\n```bash\npixi run render\n```\n\n\n## Common activities\n\n### Initialize and sync meeting notes\n\nInitialize meeting notes on HackMD by navigating to the \"Actions\" tab of this repo.\nThen select \"Setup / sync meeting notes\" on the left panel.\nNow click \"Run workflow\" in the main workflow listing panel.\nFinally, fill ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-jupyter-compass",
+            "revision": 1,
+            "title": "Jupyter Community Committee Team compass",
+            "meeting_date": null,
+            "chunk_id": "c6-v-jupyter-compass-r1-c0001",
+            "text": " of this repo.\nThen select \"Setup / sync meeting notes\" on the left panel.\nNow click \"Run workflow\" in the main workflow listing panel.\nFinally, fill in the kind of meeting you're initializing and the date, and click \"Run workflow\".\n\n<details>\n  <summary>Screenshot</summary>\n  <img src=\"https://github.com/user-attachments/assets/db567500-48ee-4e32-8cf3-5eab01cce96c\">\n</details>\n\nA Pull Request and HackMD document will be created.\nVisit the PR to find the HackMD link.\n\nWhen you're ready to sync data from HackMD back to GitHub, comment in the PR with `/bot please sync notes`.\nSee [an example PR from another project](https://github.com/geojupyter/geojupyter.org/pull/32) for an example.\n\n> [!NOTE]\n> This job may occasionally fail with e.g. 403 response from HackMD.\n> In the past, re-running the job has worked.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1666
+          }
+        ]
+      },
+      "response_language": "en"
+    },
+    {
+      "id": "C6-VAL-05",
+      "payload": {
+        "schema_version": 1,
+        "query": "4월 9일과 4월 23일 기록을 비교해 은점팥 G1·G2 검사의 A·B 접시 정상 발아 수와 각 검사 후 교환 판단을 한국어로 설명해줘.",
+        "contexts": [
+          {
+            "document_id": "c6-v-sodam-0409",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 9일 표본 관찰 회의",
+            "meeting_date": "2026-04-09",
+            "chunk_id": "c6-v-sodam-0409-r1-c0000",
+            "text": "# 소담 씨앗기록소 표본 관찰 회의\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n회의일: 2026년 4월 9일. 참석: 보관 담당 윤가람, 기록 담당 한서윤, 텃밭 연락 담당 오다빈.\n\n## 은점팥 묶음의 첫 관찰\n\n입고번호 SD-26-17은 기증자가 은점팥이라고 부른 묶음이다. 3월 26일 개봉 때 240립을 세었고, 기준표본 30립을 봉인한 뒤 검사 SD-26-17-G1에 40립을 사용했다. 오늘 14일 관찰 결과는 A접시 정상 발아 18립, B접시 12립이다. 전체로는 30/40이지만 두 접시 각각의 기준을 적용해야 하므로 교환 출고를 보류했다.\n\n윤가람은 B접시가 오후에 난방 배관 가까이 놓였고 해당 위치의 온도 메모가 비어 있음을 보고했다. 낮은 발아 수가 씨앗 자체 때문이라고 확정할 수는 없다. 접시를 둔 위치 도면과 누락 사실을 G1에 남기고, 두 접시를 창고 안쪽 같은 선반에 놓아 새 40립으로 G2를 시작한다. 다음 회의에서 14일 기록을 확인한다. G1은 취소하거나 지우지 않는다.\n\n## 교환 요청과 이름 표기\n\n모래마을 어린이텃밭은 은점팥 60립을 요청했다. 오다빈은 출고 가능한 결과가 나오기 전에는 수령 날짜를 확정하지 않기로 했다. 기증자는 공개 지역을 '남부 들녘'으로 쓰는 데 동의했으며 실명과 정확한 밭 위치는 공개하지 말아 달라고 했다. 한서윤은 채록명과 공식 품종명을 구분해 공개 목록 초안을 정리한다. 원본 동의서는 별도 서류함에 보관한다.\n\n## 푸른밤콩 묶음\n\n입고번호 SD-26-23의 봉투에는 크기와 색이 다른 씨앗이 함께 들어 있다. 기증자 메모에는 같은 밭에서 받았다는 말만 있고 두 형태가 같은 계통인지는 확인되지 않았다. 이번 회의에서는 외형별 사진을 붙여 한 묶음으로 보관하고, 임의의 새 품종명을 붙이거나 다른 입고번호로 나누지 않기로 했다. 오다빈이 기증자에게 채종 경위를 확인한다. 이 묶음의 교환 수량이나 발아검사 일정은 정하지 않았다.\n",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 994
+          },
+          {
+            "document_id": "c6-v-sodam-0423",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 23일 재관찰과 교환 회의",
+            "meeting_date": "2026-04-23",
+            "chunk_id": "c6-v-sodam-0423-r1-c0000",
+            "text": "# 소담 씨앗기록소 재관찰과 교환 회의\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n회의일: 2026년 4월 23일. 참석: 윤가람, 한서윤, 오다빈.\n\n## 은점팥 재관찰 종료\n\n검사 SD-26-17-G2의 14일 기록은 A접시 정상 발아 17립, B접시 19립이다. 두 접시는 같은 선반에서 관찰했고 이번에는 위치별 온도 메모에 빠진 날이 없었다. 두 접시 모두 규약의 기준을 충족했다. 다만 G1과 G2 사이의 차이가 난방 배관 하나에서 비롯됐다고 단정하지 않는다. G2 기록에는 환경 배치를 바꿨다는 사실과 그 한계를 함께 적는다.\n\n윤가람은 모래마을 어린이텃밭 요청분 60립을 4월 25일 전달하기로 했다. 출고표는 입고번호 SD-26-17과 검사번호 G2를 연결한다. 한서윤이 최초 수량 240립에서 기준표본 30립, G1 사용량 40립, G2 사용량 40립, 이번 출고 60립을 각각 빼면 교환 가능한 잔량은 70립이라고 확인했다. 기준표본 30립은 이 잔량에 포함하지 않는다. 4월 25일 실제 전달 서명은 아직 없으므로 오늘 재고표에는 예정 출고로 표시한다.\n\n## 공개 목록과 회신 범위\n\n한서윤은 공개 목록의 은점팥 항목에 채록명, 허용된 지역 '남부 들녘', 기록소 입고번호를 적었다. 기증자 실명과 밭 위치는 넣지 않았다. 목록 공개일은 이번 회의에서 확정하지 않았다. 오다빈은 수령처에 채종 여부와 다른 형태의 씨앗이 섞였는지 회신해 달라고 전달한다. 일정 수량의 반환 약속이나 다음 해 수확량을 이번 출고의 조건으로 추가하지 않는다.\n\n## 푸른밤콩 확인 결과\n\n기증자는 SD-26-23이 인접한 두 줄에서 함께 수확됐으며 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-sodam-0423",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 23일 재관찰과 교환 회의",
+            "meeting_date": "2026-04-23",
+            "chunk_id": "c6-v-sodam-0423-r1-c0001",
+            "text": " 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. 교환 출고와 폐기를 승인한 기록도 없다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1021
+          }
+        ]
+      },
+      "response_language": "ko"
+    },
+    {
+      "id": "C6-VAL-06",
+      "payload": {
+        "schema_version": 1,
+        "query": "For the April 25 exchange planned on April 23, give the recipient and quantity. Under the records standard, how must a later harvest be identified and linked, and is a fixed quantity of seeds required back? Answer in English.",
+        "contexts": [
+          {
+            "document_id": "c6-v-sodam-standard",
+            "revision": 1,
+            "title": "소담 씨앗기록소 표본 보관과 교환 기록 규약",
+            "meeting_date": null,
+            "chunk_id": "c6-v-sodam-standard-r1-c0000",
+            "text": "# 소담 씨앗기록소 표본 보관과 교환 기록 규약\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n2026년 3월 4일 확정. 기록소는 기증받은 씨앗의 유래와 관찰 이력을 보존하면서 소량의 지역 교환을 운영한다. 입고번호는 처음 받은 묶음의 식별자이며 발아검사나 소분을 거쳐도 바꾸지 않는다. 후속 수확물은 새 입고번호를 받고 원래 묶음을 부모 기록으로 연결한다. 기증자가 부른 이름은 채록명으로 남기며, 공식 품종명으로 확인된 것처럼 표시하지 않는다.\n\n## 수량과 표본\n\n봉투를 처음 열 때 보관 담당자와 기록 담당자가 함께 낟알 수를 센다. 균일한 상태의 씨앗 30립은 기준표본으로 따로 봉인한다. 기준표본은 교환이나 발아검사에 쓰지 않는다. 검사용으로 꺼낸 낟알은 결과와 관계없이 재고에 되넣지 않는다. 재고표에는 최초 수량, 기준표본, 검사 사용량, 교환 출고량, 교환 가능한 잔량을 서로 다른 칸에 적는다.\n\n## 발아 관찰\n\n교환 검사는 20립씩 두 접시에 나누고 14일째 정상 발아 수를 각각 기록한다. 두 접시가 모두 16립 이상일 때만 이 규약의 교환 기준에 해당한다. 평균만으로 한 접시의 낮은 값을 가리지 않는다. 환경 이상이 의심되면 위치와 온도 메모를 남기고 새 40립으로 다시 관찰할 수 있지만, 이전 결과를 삭제하거나 새 결과와 합산하지 않는다. 재검사는 같은 입고번호 아래 별도 검사번호로 연결한다.\n\n## 교환과 공개 기록\n\n교환 수령처, 출고 수량, 해당 검사번호는 보관 담당자 윤가람이 출고표에 적고 기록 담당자 한서윤이 재고 산식을 확인한다. 수령처는 다음 수확 때 채종 여부와 혼입 관찰만 회신하며 정해진 수량을 반드시 돌려줄 의무는 없다. 기증자의 실명과 정확한 밭 위치는 원본 동의서에 별도로 보관한다. 공개 목록에는 기증자가 허용한 지역 단위와 채록명만 싣는다. 동의 범위가 확인되지 않은 항목은 공개를 미룬다.\n\n검사 기준을 충족하지 못한 씨앗도 유래 기록은 남긴다. 폐기를 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-sodam-standard",
+            "revision": 1,
+            "title": "소담 씨앗기록소 표본 보관과 교환 기록 규약",
+            "meeting_date": null,
+            "chunk_id": "c6-v-sodam-standard-r1-c0001",
+            "text": "드시 돌려줄 의무는 없다. 기증자의 실명과 정확한 밭 위치는 원본 동의서에 별도로 보관한다. 공개 목록에는 기증자가 허용한 지역 단위와 채록명만 싣는다. 동의 범위가 확인되지 않은 항목은 공개를 미룬다.\n\n검사 기준을 충족하지 못한 씨앗도 유래 기록은 남긴다. 폐기를 하려면 윤가람과 한서윤이 사유와 실제 수량을 함께 기록해야 하며, 교환 보류를 폐기 결정으로 해석하지 않는다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1060
+          },
+          {
+            "document_id": "c6-v-sodam-0423",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 23일 재관찰과 교환 회의",
+            "meeting_date": "2026-04-23",
+            "chunk_id": "c6-v-sodam-0423-r1-c0000",
+            "text": "# 소담 씨앗기록소 재관찰과 교환 회의\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n회의일: 2026년 4월 23일. 참석: 윤가람, 한서윤, 오다빈.\n\n## 은점팥 재관찰 종료\n\n검사 SD-26-17-G2의 14일 기록은 A접시 정상 발아 17립, B접시 19립이다. 두 접시는 같은 선반에서 관찰했고 이번에는 위치별 온도 메모에 빠진 날이 없었다. 두 접시 모두 규약의 기준을 충족했다. 다만 G1과 G2 사이의 차이가 난방 배관 하나에서 비롯됐다고 단정하지 않는다. G2 기록에는 환경 배치를 바꿨다는 사실과 그 한계를 함께 적는다.\n\n윤가람은 모래마을 어린이텃밭 요청분 60립을 4월 25일 전달하기로 했다. 출고표는 입고번호 SD-26-17과 검사번호 G2를 연결한다. 한서윤이 최초 수량 240립에서 기준표본 30립, G1 사용량 40립, G2 사용량 40립, 이번 출고 60립을 각각 빼면 교환 가능한 잔량은 70립이라고 확인했다. 기준표본 30립은 이 잔량에 포함하지 않는다. 4월 25일 실제 전달 서명은 아직 없으므로 오늘 재고표에는 예정 출고로 표시한다.\n\n## 공개 목록과 회신 범위\n\n한서윤은 공개 목록의 은점팥 항목에 채록명, 허용된 지역 '남부 들녘', 기록소 입고번호를 적었다. 기증자 실명과 밭 위치는 넣지 않았다. 목록 공개일은 이번 회의에서 확정하지 않았다. 오다빈은 수령처에 채종 여부와 다른 형태의 씨앗이 섞였는지 회신해 달라고 전달한다. 일정 수량의 반환 약속이나 다음 해 수확량을 이번 출고의 조건으로 추가하지 않는다.\n\n## 푸른밤콩 확인 결과\n\n기증자는 SD-26-23이 인접한 두 줄에서 함께 수확됐으며 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-sodam-0423",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 23일 재관찰과 교환 회의",
+            "meeting_date": "2026-04-23",
+            "chunk_id": "c6-v-sodam-0423-r1-c0001",
+            "text": " 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. 교환 출고와 폐기를 승인한 기록도 없다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1021
+          }
+        ]
+      },
+      "response_language": "en"
+    },
+    {
+      "id": "C6-VAL-07",
+      "payload": {
+        "schema_version": 1,
+        "query": "4월 23일 기록에 따라 은점팥 공개 목록에 적힌 지역과 제외한 개인정보를 설명하고, 그 목록이 실제로 공개된 확정 날짜를 한국어로 알려줘.",
+        "contexts": [
+          {
+            "document_id": "c6-v-sodam-standard",
+            "revision": 1,
+            "title": "소담 씨앗기록소 표본 보관과 교환 기록 규약",
+            "meeting_date": null,
+            "chunk_id": "c6-v-sodam-standard-r1-c0000",
+            "text": "# 소담 씨앗기록소 표본 보관과 교환 기록 규약\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n2026년 3월 4일 확정. 기록소는 기증받은 씨앗의 유래와 관찰 이력을 보존하면서 소량의 지역 교환을 운영한다. 입고번호는 처음 받은 묶음의 식별자이며 발아검사나 소분을 거쳐도 바꾸지 않는다. 후속 수확물은 새 입고번호를 받고 원래 묶음을 부모 기록으로 연결한다. 기증자가 부른 이름은 채록명으로 남기며, 공식 품종명으로 확인된 것처럼 표시하지 않는다.\n\n## 수량과 표본\n\n봉투를 처음 열 때 보관 담당자와 기록 담당자가 함께 낟알 수를 센다. 균일한 상태의 씨앗 30립은 기준표본으로 따로 봉인한다. 기준표본은 교환이나 발아검사에 쓰지 않는다. 검사용으로 꺼낸 낟알은 결과와 관계없이 재고에 되넣지 않는다. 재고표에는 최초 수량, 기준표본, 검사 사용량, 교환 출고량, 교환 가능한 잔량을 서로 다른 칸에 적는다.\n\n## 발아 관찰\n\n교환 검사는 20립씩 두 접시에 나누고 14일째 정상 발아 수를 각각 기록한다. 두 접시가 모두 16립 이상일 때만 이 규약의 교환 기준에 해당한다. 평균만으로 한 접시의 낮은 값을 가리지 않는다. 환경 이상이 의심되면 위치와 온도 메모를 남기고 새 40립으로 다시 관찰할 수 있지만, 이전 결과를 삭제하거나 새 결과와 합산하지 않는다. 재검사는 같은 입고번호 아래 별도 검사번호로 연결한다.\n\n## 교환과 공개 기록\n\n교환 수령처, 출고 수량, 해당 검사번호는 보관 담당자 윤가람이 출고표에 적고 기록 담당자 한서윤이 재고 산식을 확인한다. 수령처는 다음 수확 때 채종 여부와 혼입 관찰만 회신하며 정해진 수량을 반드시 돌려줄 의무는 없다. 기증자의 실명과 정확한 밭 위치는 원본 동의서에 별도로 보관한다. 공개 목록에는 기증자가 허용한 지역 단위와 채록명만 싣는다. 동의 범위가 확인되지 않은 항목은 공개를 미룬다.\n\n검사 기준을 충족하지 못한 씨앗도 유래 기록은 남긴다. 폐기를 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-sodam-standard",
+            "revision": 1,
+            "title": "소담 씨앗기록소 표본 보관과 교환 기록 규약",
+            "meeting_date": null,
+            "chunk_id": "c6-v-sodam-standard-r1-c0001",
+            "text": "드시 돌려줄 의무는 없다. 기증자의 실명과 정확한 밭 위치는 원본 동의서에 별도로 보관한다. 공개 목록에는 기증자가 허용한 지역 단위와 채록명만 싣는다. 동의 범위가 확인되지 않은 항목은 공개를 미룬다.\n\n검사 기준을 충족하지 못한 씨앗도 유래 기록은 남긴다. 폐기를 하려면 윤가람과 한서윤이 사유와 실제 수량을 함께 기록해야 하며, 교환 보류를 폐기 결정으로 해석하지 않는다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1060
+          },
+          {
+            "document_id": "c6-v-sodam-0409",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 9일 표본 관찰 회의",
+            "meeting_date": "2026-04-09",
+            "chunk_id": "c6-v-sodam-0409-r1-c0000",
+            "text": "# 소담 씨앗기록소 표본 관찰 회의\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n회의일: 2026년 4월 9일. 참석: 보관 담당 윤가람, 기록 담당 한서윤, 텃밭 연락 담당 오다빈.\n\n## 은점팥 묶음의 첫 관찰\n\n입고번호 SD-26-17은 기증자가 은점팥이라고 부른 묶음이다. 3월 26일 개봉 때 240립을 세었고, 기준표본 30립을 봉인한 뒤 검사 SD-26-17-G1에 40립을 사용했다. 오늘 14일 관찰 결과는 A접시 정상 발아 18립, B접시 12립이다. 전체로는 30/40이지만 두 접시 각각의 기준을 적용해야 하므로 교환 출고를 보류했다.\n\n윤가람은 B접시가 오후에 난방 배관 가까이 놓였고 해당 위치의 온도 메모가 비어 있음을 보고했다. 낮은 발아 수가 씨앗 자체 때문이라고 확정할 수는 없다. 접시를 둔 위치 도면과 누락 사실을 G1에 남기고, 두 접시를 창고 안쪽 같은 선반에 놓아 새 40립으로 G2를 시작한다. 다음 회의에서 14일 기록을 확인한다. G1은 취소하거나 지우지 않는다.\n\n## 교환 요청과 이름 표기\n\n모래마을 어린이텃밭은 은점팥 60립을 요청했다. 오다빈은 출고 가능한 결과가 나오기 전에는 수령 날짜를 확정하지 않기로 했다. 기증자는 공개 지역을 '남부 들녘'으로 쓰는 데 동의했으며 실명과 정확한 밭 위치는 공개하지 말아 달라고 했다. 한서윤은 채록명과 공식 품종명을 구분해 공개 목록 초안을 정리한다. 원본 동의서는 별도 서류함에 보관한다.\n\n## 푸른밤콩 묶음\n\n입고번호 SD-26-23의 봉투에는 크기와 색이 다른 씨앗이 함께 들어 있다. 기증자 메모에는 같은 밭에서 받았다는 말만 있고 두 형태가 같은 계통인지는 확인되지 않았다. 이번 회의에서는 외형별 사진을 붙여 한 묶음으로 보관하고, 임의의 새 품종명을 붙이거나 다른 입고번호로 나누지 않기로 했다. 오다빈이 기증자에게 채종 경위를 확인한다. 이 묶음의 교환 수량이나 발아검사 일정은 정하지 않았다.\n",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 994
+          },
+          {
+            "document_id": "c6-v-sodam-0423",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 23일 재관찰과 교환 회의",
+            "meeting_date": "2026-04-23",
+            "chunk_id": "c6-v-sodam-0423-r1-c0000",
+            "text": "# 소담 씨앗기록소 재관찰과 교환 회의\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n회의일: 2026년 4월 23일. 참석: 윤가람, 한서윤, 오다빈.\n\n## 은점팥 재관찰 종료\n\n검사 SD-26-17-G2의 14일 기록은 A접시 정상 발아 17립, B접시 19립이다. 두 접시는 같은 선반에서 관찰했고 이번에는 위치별 온도 메모에 빠진 날이 없었다. 두 접시 모두 규약의 기준을 충족했다. 다만 G1과 G2 사이의 차이가 난방 배관 하나에서 비롯됐다고 단정하지 않는다. G2 기록에는 환경 배치를 바꿨다는 사실과 그 한계를 함께 적는다.\n\n윤가람은 모래마을 어린이텃밭 요청분 60립을 4월 25일 전달하기로 했다. 출고표는 입고번호 SD-26-17과 검사번호 G2를 연결한다. 한서윤이 최초 수량 240립에서 기준표본 30립, G1 사용량 40립, G2 사용량 40립, 이번 출고 60립을 각각 빼면 교환 가능한 잔량은 70립이라고 확인했다. 기준표본 30립은 이 잔량에 포함하지 않는다. 4월 25일 실제 전달 서명은 아직 없으므로 오늘 재고표에는 예정 출고로 표시한다.\n\n## 공개 목록과 회신 범위\n\n한서윤은 공개 목록의 은점팥 항목에 채록명, 허용된 지역 '남부 들녘', 기록소 입고번호를 적었다. 기증자 실명과 밭 위치는 넣지 않았다. 목록 공개일은 이번 회의에서 확정하지 않았다. 오다빈은 수령처에 채종 여부와 다른 형태의 씨앗이 섞였는지 회신해 달라고 전달한다. 일정 수량의 반환 약속이나 다음 해 수확량을 이번 출고의 조건으로 추가하지 않는다.\n\n## 푸른밤콩 확인 결과\n\n기증자는 SD-26-23이 인접한 두 줄에서 함께 수확됐으며 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-sodam-0423",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 23일 재관찰과 교환 회의",
+            "meeting_date": "2026-04-23",
+            "chunk_id": "c6-v-sodam-0423-r1-c0001",
+            "text": " 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. 교환 출고와 폐기를 승인한 기록도 없다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1021
+          }
+        ]
+      },
+      "response_language": "ko"
+    },
+    {
+      "id": "C6-VAL-08",
+      "payload": {
+        "schema_version": 1,
+        "query": "For SD-26-23, what did the donor report about the collection origin, how were the lot identity and mixed state kept, and what exact site and seed count were approved for observation planting? Answer in English.",
+        "contexts": [
+          {
+            "document_id": "c6-v-sodam-standard",
+            "revision": 1,
+            "title": "소담 씨앗기록소 표본 보관과 교환 기록 규약",
+            "meeting_date": null,
+            "chunk_id": "c6-v-sodam-standard-r1-c0000",
+            "text": "# 소담 씨앗기록소 표본 보관과 교환 기록 규약\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n2026년 3월 4일 확정. 기록소는 기증받은 씨앗의 유래와 관찰 이력을 보존하면서 소량의 지역 교환을 운영한다. 입고번호는 처음 받은 묶음의 식별자이며 발아검사나 소분을 거쳐도 바꾸지 않는다. 후속 수확물은 새 입고번호를 받고 원래 묶음을 부모 기록으로 연결한다. 기증자가 부른 이름은 채록명으로 남기며, 공식 품종명으로 확인된 것처럼 표시하지 않는다.\n\n## 수량과 표본\n\n봉투를 처음 열 때 보관 담당자와 기록 담당자가 함께 낟알 수를 센다. 균일한 상태의 씨앗 30립은 기준표본으로 따로 봉인한다. 기준표본은 교환이나 발아검사에 쓰지 않는다. 검사용으로 꺼낸 낟알은 결과와 관계없이 재고에 되넣지 않는다. 재고표에는 최초 수량, 기준표본, 검사 사용량, 교환 출고량, 교환 가능한 잔량을 서로 다른 칸에 적는다.\n\n## 발아 관찰\n\n교환 검사는 20립씩 두 접시에 나누고 14일째 정상 발아 수를 각각 기록한다. 두 접시가 모두 16립 이상일 때만 이 규약의 교환 기준에 해당한다. 평균만으로 한 접시의 낮은 값을 가리지 않는다. 환경 이상이 의심되면 위치와 온도 메모를 남기고 새 40립으로 다시 관찰할 수 있지만, 이전 결과를 삭제하거나 새 결과와 합산하지 않는다. 재검사는 같은 입고번호 아래 별도 검사번호로 연결한다.\n\n## 교환과 공개 기록\n\n교환 수령처, 출고 수량, 해당 검사번호는 보관 담당자 윤가람이 출고표에 적고 기록 담당자 한서윤이 재고 산식을 확인한다. 수령처는 다음 수확 때 채종 여부와 혼입 관찰만 회신하며 정해진 수량을 반드시 돌려줄 의무는 없다. 기증자의 실명과 정확한 밭 위치는 원본 동의서에 별도로 보관한다. 공개 목록에는 기증자가 허용한 지역 단위와 채록명만 싣는다. 동의 범위가 확인되지 않은 항목은 공개를 미룬다.\n\n검사 기준을 충족하지 못한 씨앗도 유래 기록은 남긴다. 폐기를 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-sodam-standard",
+            "revision": 1,
+            "title": "소담 씨앗기록소 표본 보관과 교환 기록 규약",
+            "meeting_date": null,
+            "chunk_id": "c6-v-sodam-standard-r1-c0001",
+            "text": "드시 돌려줄 의무는 없다. 기증자의 실명과 정확한 밭 위치는 원본 동의서에 별도로 보관한다. 공개 목록에는 기증자가 허용한 지역 단위와 채록명만 싣는다. 동의 범위가 확인되지 않은 항목은 공개를 미룬다.\n\n검사 기준을 충족하지 못한 씨앗도 유래 기록은 남긴다. 폐기를 하려면 윤가람과 한서윤이 사유와 실제 수량을 함께 기록해야 하며, 교환 보류를 폐기 결정으로 해석하지 않는다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1060
+          },
+          {
+            "document_id": "c6-v-sodam-0409",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 9일 표본 관찰 회의",
+            "meeting_date": "2026-04-09",
+            "chunk_id": "c6-v-sodam-0409-r1-c0000",
+            "text": "# 소담 씨앗기록소 표본 관찰 회의\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n회의일: 2026년 4월 9일. 참석: 보관 담당 윤가람, 기록 담당 한서윤, 텃밭 연락 담당 오다빈.\n\n## 은점팥 묶음의 첫 관찰\n\n입고번호 SD-26-17은 기증자가 은점팥이라고 부른 묶음이다. 3월 26일 개봉 때 240립을 세었고, 기준표본 30립을 봉인한 뒤 검사 SD-26-17-G1에 40립을 사용했다. 오늘 14일 관찰 결과는 A접시 정상 발아 18립, B접시 12립이다. 전체로는 30/40이지만 두 접시 각각의 기준을 적용해야 하므로 교환 출고를 보류했다.\n\n윤가람은 B접시가 오후에 난방 배관 가까이 놓였고 해당 위치의 온도 메모가 비어 있음을 보고했다. 낮은 발아 수가 씨앗 자체 때문이라고 확정할 수는 없다. 접시를 둔 위치 도면과 누락 사실을 G1에 남기고, 두 접시를 창고 안쪽 같은 선반에 놓아 새 40립으로 G2를 시작한다. 다음 회의에서 14일 기록을 확인한다. G1은 취소하거나 지우지 않는다.\n\n## 교환 요청과 이름 표기\n\n모래마을 어린이텃밭은 은점팥 60립을 요청했다. 오다빈은 출고 가능한 결과가 나오기 전에는 수령 날짜를 확정하지 않기로 했다. 기증자는 공개 지역을 '남부 들녘'으로 쓰는 데 동의했으며 실명과 정확한 밭 위치는 공개하지 말아 달라고 했다. 한서윤은 채록명과 공식 품종명을 구분해 공개 목록 초안을 정리한다. 원본 동의서는 별도 서류함에 보관한다.\n\n## 푸른밤콩 묶음\n\n입고번호 SD-26-23의 봉투에는 크기와 색이 다른 씨앗이 함께 들어 있다. 기증자 메모에는 같은 밭에서 받았다는 말만 있고 두 형태가 같은 계통인지는 확인되지 않았다. 이번 회의에서는 외형별 사진을 붙여 한 묶음으로 보관하고, 임의의 새 품종명을 붙이거나 다른 입고번호로 나누지 않기로 했다. 오다빈이 기증자에게 채종 경위를 확인한다. 이 묶음의 교환 수량이나 발아검사 일정은 정하지 않았다.\n",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 994
+          },
+          {
+            "document_id": "c6-v-sodam-0423",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 23일 재관찰과 교환 회의",
+            "meeting_date": "2026-04-23",
+            "chunk_id": "c6-v-sodam-0423-r1-c0000",
+            "text": "# 소담 씨앗기록소 재관찰과 교환 회의\n\n이 문서는 평가를 위해 AI가 작성한 가상 조직의 기록이다. 실제 단체·품종·재배 지침을 나타내지 않는다.\n\n회의일: 2026년 4월 23일. 참석: 윤가람, 한서윤, 오다빈.\n\n## 은점팥 재관찰 종료\n\n검사 SD-26-17-G2의 14일 기록은 A접시 정상 발아 17립, B접시 19립이다. 두 접시는 같은 선반에서 관찰했고 이번에는 위치별 온도 메모에 빠진 날이 없었다. 두 접시 모두 규약의 기준을 충족했다. 다만 G1과 G2 사이의 차이가 난방 배관 하나에서 비롯됐다고 단정하지 않는다. G2 기록에는 환경 배치를 바꿨다는 사실과 그 한계를 함께 적는다.\n\n윤가람은 모래마을 어린이텃밭 요청분 60립을 4월 25일 전달하기로 했다. 출고표는 입고번호 SD-26-17과 검사번호 G2를 연결한다. 한서윤이 최초 수량 240립에서 기준표본 30립, G1 사용량 40립, G2 사용량 40립, 이번 출고 60립을 각각 빼면 교환 가능한 잔량은 70립이라고 확인했다. 기준표본 30립은 이 잔량에 포함하지 않는다. 4월 25일 실제 전달 서명은 아직 없으므로 오늘 재고표에는 예정 출고로 표시한다.\n\n## 공개 목록과 회신 범위\n\n한서윤은 공개 목록의 은점팥 항목에 채록명, 허용된 지역 '남부 들녘', 기록소 입고번호를 적었다. 기증자 실명과 밭 위치는 넣지 않았다. 목록 공개일은 이번 회의에서 확정하지 않았다. 오다빈은 수령처에 채종 여부와 다른 형태의 씨앗이 섞였는지 회신해 달라고 전달한다. 일정 수량의 반환 약속이나 다음 해 수확량을 이번 출고의 조건으로 추가하지 않는다.\n\n## 푸른밤콩 확인 결과\n\n기증자는 SD-26-23이 인접한 두 줄에서 함께 수확됐으며 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998
+          },
+          {
+            "document_id": "c6-v-sodam-0423",
+            "revision": 1,
+            "title": "소담 씨앗기록소 2026년 4월 23일 재관찰과 교환 회의",
+            "meeting_date": "2026-04-23",
+            "chunk_id": "c6-v-sodam-0423-r1-c0001",
+            "text": " 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. 교환 출고와 폐기를 승인한 기록도 없다.\n",
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1021
+          }
+        ]
+      },
+      "response_language": "en"
+    }
+  ]
+}

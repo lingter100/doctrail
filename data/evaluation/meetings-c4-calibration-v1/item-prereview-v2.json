@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "version": 2,
+  "kind": "independent_item_prereview_not_final_answer_judgment",
+  "reviewed_at_utc": "2026-10-16T05:45:48.805880+00:00",
+  "verdict": "accepted",
+  "accepted_ids": [
+    "C4-CAL-01",
+    "C4-CAL-02",
+    "C4-CAL-03",
+    "C4-CAL-04",
+    "C4-CAL-05",
+    "C4-CAL-06"
+  ],
+  "rejected_ids": [],
+  "author_ids": [
+    "c4_calibration_item_author"
+  ],
+  "reviewer_id": "c4_calibration_item_review",
+  "actual_model": "gpt-6-astra",
+  "actual_reasoning_effort": "xhigh",
+  "actual_role_settings_evidence": "Parent reports continuation of the original tool-accepted Astra xhigh independent reviewer; no claim to change the parent model.",
+  "human_review_count": 0,
+  "reviewer_eligible_for_final_output_judging": false,
+  "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "semantic_read_preconditions": {
+    "schema_version": 1,
+    "role": "c4_calibration_item_review",
+    "phase": "calibration",
+    "review_revision": "v2",
+    "pre_semantic_git_proof_passed": true,
+    "head": "aed4b465e60b64409c0cd1d1148b09ff66aeba59",
+    "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+    "toolchain_commit": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+    "original_rejected_commit": "29d7e0a4e6c0be43fc59582700cbb650186c5b50",
+    "code_bindings": 85,
+    "source_bindings": 14,
+    "original_rejected_files_proven": 7,
+    "source_freeze_sha256": "8b1bac818cc1cc786ae75c275c58444ce6928ffb0940f0a4ccfdf229a9f53ce1",
+    "native_calls": 0,
+    "tokenizer_loads": 0,
+    "v2_semantic_files_parsed_before_proof": 0
+  },
+  "reviewed_v2_author_files_sha256": {
+    "draft-v2.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+    "oracle-draft-v2.json": "7489e0815c20c7b08ef29292da628652c16f605f83ef0b7894c52a2d34af9e71",
+    "context-selection-v2.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9",
+    "item-author-receipt-v2.json": "445125750458d78bb06dd7bd1980436722933dfc21c90c1a585394a4a742d9c4"
+  },
+  "original_rejected_files_sha256": {
+    "draft.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+    "oracle-draft.json": "68a7a4b37ac6b7badd6b0d12b90fa42ec8f470c1b89c1b30307344f60a743abc",
+    "context-selection.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9",
+    "item-author-receipt.json": "210f4f499bbf616be0dafa344a9354eb500368defb91251ae66276d1fa072a83",
+    "item-prereview.json": "84922366bb082f768ad3baaf505dec7f01b1032366884d903c48c96c5a57775f",
+    "item-prereview-notes.md": "c51333c76eabcd5721193454e2a084a648b5778a46758913165b8328571973bf",
+    "item-review-summary.json": "d39ce9f8526bc78c9cf1fd6a9d83a59aafe69c59557310698fb96faf9b5c3ad1"
+  },
+  "original_rejected_review_preserved": true,
+  "prior_verdict": {
+    "accepted_count": 5,
+    "rejected_count": 1,
+    "issue_category": "sufficient_evidence_alternative_completeness"
+  },
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "all_sufficient_alternatives_accepted": true,
+  "semantic_review_basis": "The same independent reviewer retains the preceding full reading of all six calibration sources and 32 cataloged chunks. Actual Git proof and hash equality preserve those source/item meanings. This review re-read the single added evidence unit and independently checked the complete v2 delta; unchanged semantics were not rewritten or re-authored.",
+  "structural_verification": {
+    "draft_schema": "passed",
+    "oracle_schema_quotes_offsets_coverage": "passed",
+    "whole_source_inventory_replay": "passed",
+    "freshness_replay": "passed",
+    "existing_processing_java_receipts": "passed",
+    "whole_chunk_identity": "passed",
+    "source_metadata_identity": "passed",
+    "context_selection_identity": "passed",
+    "draft_bytes_unchanged": true,
+    "context_selection_bytes_unchanged": true,
+    "only_oracle_delta": "C4-CAL-05/F4 one complete existing single-block evidence alternative appended",
+    "other_five_cases_unchanged": true,
+    "all_fact_text_unchanged": true,
+    "source_documents": 6,
+    "source_chunks": 32,
+    "cases": 6,
+    "facts": 24,
+    "coverage": [
+      {
+        "id": "C4-CAL-01",
+        "required_facts": 4,
+        "status": "answered",
+        "minimum_sufficient_documents": 1
+      },
+      {
+        "id": "C4-CAL-02",
+        "required_facts": 5,
+        "status": "answered",
+        "minimum_sufficient_documents": 2
+      },
+      {
+        "id": "C4-CAL-03",
+        "required_facts": 3,
+        "status": "abstained",
+        "minimum_sufficient_documents": null
+      },
+      {
+        "id": "C4-CAL-04",
+        "required_facts": 4,
+        "status": "answered",
+        "minimum_sufficient_documents": 2
+      },
+      {
+        "id": "C4-CAL-05",
+        "required_facts": 4,
+        "status": "answered",
+        "minimum_sufficient_documents": 2
+      },
+      {
+        "id": "C4-CAL-06",
+        "required_facts": 4,
+        "status": "abstained",
+        "minimum_sufficient_documents": null
+      }
+    ],
+    "v2_author_sha256": {
+      "draft-v2.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+      "oracle-draft-v2.json": "7489e0815c20c7b08ef29292da628652c16f605f83ef0b7894c52a2d34af9e71",
+      "context-selection-v2.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9",
+      "item-author-receipt-v2.json": "445125750458d78bb06dd7bd1980436722933dfc21c90c1a585394a4a742d9c4"
+    },
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "semantic_acceptance_by_script": false,
+    "full_load_material": "not_run_uncommitted_item_gate_preserved"
+  },
+  "checks_distinct_from_semantic_acceptance": true,
+  "items": [
+    {
+      "id": "C4-CAL-01",
+      "verdict": "accepted",
+      "facts_checked": 4,
+      "known_facts": 4,
+      "missing_facts": 0,
+      "reason": "Question, facts, evidence and contexts are identical to the independently accepted original. Proposal tasks, conditional status, prototype, API consistency and testing remain supported.",
+      "minimal_sufficient_document_count": 1
+    },
+    {
+      "id": "C4-CAL-02",
+      "verdict": "accepted",
+      "facts_checked": 5,
+      "known_facts": 5,
+      "missing_facts": 0,
+      "reason": "The original accepted recurring-schedule, dated office-hour and pending repository-task distinctions are unchanged. Both meeting sources and the registered overlapping office-hour alternatives remain necessary/sufficient as previously reviewed.",
+      "minimal_sufficient_document_count": 2
+    },
+    {
+      "id": "C4-CAL-03",
+      "verdict": "accepted",
+      "facts_checked": 3,
+      "known_facts": 2,
+      "missing_facts": 1,
+      "reason": "The unchanged full public family still supplies no confirmed dedicated notebook-repository URL; other resource links remain different subjects. The whole-family absence finding and complete June 9 context selection are unchanged.",
+      "minimal_sufficient_document_count": null
+    },
+    {
+      "id": "C4-CAL-04",
+      "verdict": "accepted",
+      "facts_checked": 4,
+      "known_facts": 4,
+      "missing_facts": 0,
+      "reason": "The accepted kit identity, return-versus-reloan status, inspection conditions and financial-rule distinction are unchanged. Meeting plus handbook remain necessary.",
+      "minimal_sufficient_document_count": 2
+    },
+    {
+      "id": "C4-CAL-05",
+      "verdict": "accepted",
+      "facts_checked": 4,
+      "known_facts": 4,
+      "missing_facts": 0,
+      "reason": "The fourth F4 alternative is exactly the existing complete decision block c4-f02-doc02-r1-c0000 at 638..853. Its express April-18-only limit is sufficient by itself for trial-date scope and no automatic routine extension. It closes the prior omission without inferring scope from chronology. The three prior routes remain, and no other oracle content changed. April 3 dates/return-slot handling and April 17 changes still require two meetings.",
+      "minimal_sufficient_document_count": 2,
+      "resolved_issue_category": "sufficient_evidence_alternative_completeness"
+    },
+    {
+      "id": "C4-CAL-06",
+      "verdict": "accepted",
+      "facts_checked": 4,
+      "known_facts": 2,
+      "missing_facts": 2,
+      "reason": "The unchanged synthetic family expressly leaves the repair gathering date and capacity unset. Nari's proposal/prerequisite/planning step and the distinction from lending-trial and operations-review dates remain supported.",
+      "minimal_sufficient_document_count": null
+    }
+  ],
+  "delta_review": {
+    "only_case": "C4-CAL-05",
+    "only_fact": "F4",
+    "operation": "one existing complete single-block alternative appended",
+    "previous_alternatives_unchanged": 3,
+    "new_alternative_count": 4,
+    "added_quote_and_coordinates_exact": true,
+    "added_alternative_independently_sufficient": true,
+    "entire_oracle_recovers_original_when_addition_removed": true,
+    "draft_bytes_unchanged": true,
+    "context_selection_bytes_unchanged": true,
+    "all_fact_text_unchanged": true,
+    "other_five_oracles_unchanged": true
+  },
+  "coverage_after_independent_review": {
+    "cases": 6,
+    "ko": 3,
+    "en": 3,
+    "answered": 4,
+    "abstained": 2,
+    "required_facts": 24,
+    "general_only_answered": 1,
+    "multiple_meeting_only_answered": 1,
+    "mixed_required_answered": 1,
+    "unavoidably_multi_document_answered": 3,
+    "ko_requires_english_answered": 2,
+    "en_requires_korean_answered": 1
+  },
+  "exposure": {
+    "independent_of_item_authorship": true,
+    "same_prior_prereviewer": true,
+    "prior_rejection_and_notes_seen": true,
+    "candidate_protocol_contract_schema_metadata_seen": true,
+    "automatic_agents_prior_result_metadata_seen": true,
+    "calibration_sources_items_oracles_author_receipts_seen": true,
+    "validation_semantic_files_read": false,
+    "old_closed_pool_semantic_files_read": false,
+    "validation_filenames_seen_only_in_prior_discovery": true,
+    "source_author_alternative_validation_repository_public_body_exploration": "Original exposure remains disclosed; exact scope partly unknown. This reviewer did not open those bodies and does not claim the overall source workflow pristine.",
+    "fully_blind_claim": false
+  },
+  "limitations": [
+    "AI independent prereview; human review zero. This acceptance is not final generated-answer quality or service adoption.",
+    "Historical normalized fingerprints are incomplete; complete near-duplicate absence is not proven, and no old semantic pool was reopened.",
+    "Existing source-chunk boundary fragments remain unchanged; complete relevant clauses were reviewed rather than assuming every physical source paragraph was uncut.",
+    "Existing Java parity receipts were replayed structurally without a new Maven/runtime run.",
+    "Full load_material must wait for committed v2 item artifacts. Its actual Git gate was not bypassed, and official prepare/CLI was not invoked."
+  ],
+  "tokenizer_loads": 0,
+  "native_calls": 0,
+  "model_inference_calls": 0,
+  "downloads": 0,
+  "maven_runs": 0,
+  "git_mutations": 0
+}

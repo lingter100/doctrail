@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_calibration_registration_ci_observation",
+  "observed_at": "2026-10-20T07:39:56.212145+00:00",
+  "commit": "7df1135a050a9aaebd1e4d0c35a8c61339507359",
+  "runs": [
+    {
+      "id": 39386565379,
+      "head": "7df1135a050a9aaebd1e4d0c35a8c61339507359",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39386565379",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39386565379/job/118507878794"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39386565379/job/118507878888"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39386565379/job/118507879100"
+        }
+      ]
+    },
+    {
+      "id": 39386573368,
+      "head": "7df1135a050a9aaebd1e4d0c35a8c61339507359",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39386573368",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39386573368/job/118507911891"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39386573368/job/118507912308"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39386573368/job/118507912518"
+        }
+      ]
+    }
+  ],
+  "github_author": "lingter100",
+  "github_committer": "lingter100",
+  "superseded_runs": {
+    "commit": "fdeb19167d21da008b8502efba6120e90d96dcb7",
+    "ids": [
+      39386179274,
+      39386185139
+    ],
+    "conclusion": "cancelled",
+    "not_claimed_passed": true
+  },
+  "scope": "Registered source follow-up and included prior code; no new native model quality."
+}

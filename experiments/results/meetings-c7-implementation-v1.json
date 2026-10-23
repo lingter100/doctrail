@@ -1,0 +1,471 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c7-implementation-v1",
+  "recorded_at": "2026-10-20T04:33:22.261898+00:00",
+  "design_commit": "c10b75303f68a7a480342748c9868203b1f2ec68",
+  "candidate_id": "meeting-answer-single-thinking-c7-v1",
+  "source_files": {
+    "src/doctrail/meeting_c7_review.py": "7c3e8547c2f8fbc384e7400fd6f92317bb0d86ef1e34889f935404ec3e42a45b",
+    "scripts/prepare_meeting_c7_inputs.py": "6f50cab70e21daa996cf832604d115e1e1fdf6a69a63c7ae7c569ec7ee89528d",
+    "scripts/probe_meeting_c7_quality.py": "8b7e8c544983eedf0a3596d35437bb70ab59a41a55c283310d5a7e49f36aeea4",
+    "scripts/audit_meeting_c7_quality.py": "80b50c89236903abb4077c87754b807765c8b0bc9c50d803f6bbbebd2d2df9df",
+    "tests/test_meeting_c7_review.py": "589429fba83842bffceeb2734bb5512766ab689a0db71002c0cba9882a9a4c81",
+    "tests/test_prepare_meeting_c7_inputs.py": "17a8fa5bbba462144e0dcbf3cf459b500a0ad62075c0dcbf198954ff81f0132b",
+    "tests/test_probe_meeting_c7_quality.py": "6922fa952aac78d964edd1593448715232b592737359214b2ed345ad988934d4",
+    "tests/test_audit_meeting_c7_quality.py": "70684509aca4be58cb76a602bfdae9466c1cf370483b05640f9d50beea749148"
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+    "sha256": "6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca",
+    "bound_files": 77,
+    "code_roster": 66,
+    "import_candidates": 1664,
+    "absent_candidates": 1598
+  },
+  "checks": {
+    "scope": "Four NEW C7 test modules plus existing policy and adapter modules",
+    "passed": 244,
+    "skipped": 1,
+    "seconds": 251.3,
+    "pytest_exit": 0,
+    "ruff_exit": 0,
+    "before_after_same": true,
+    "source_files": {
+      "src/doctrail/meeting_c7_review.py": "7c3e8547c2f8fbc384e7400fd6f92317bb0d86ef1e34889f935404ec3e42a45b",
+      "scripts/prepare_meeting_c7_inputs.py": "6f50cab70e21daa996cf832604d115e1e1fdf6a69a63c7ae7c569ec7ee89528d",
+      "scripts/probe_meeting_c7_quality.py": "8b7e8c544983eedf0a3596d35437bb70ab59a41a55c283310d5a7e49f36aeea4",
+      "scripts/audit_meeting_c7_quality.py": "80b50c89236903abb4077c87754b807765c8b0bc9c50d803f6bbbebd2d2df9df",
+      "tests/test_meeting_c7_review.py": "589429fba83842bffceeb2734bb5512766ab689a0db71002c0cba9882a9a4c81",
+      "tests/test_prepare_meeting_c7_inputs.py": "17a8fa5bbba462144e0dcbf3cf459b500a0ad62075c0dcbf198954ff81f0132b",
+      "tests/test_probe_meeting_c7_quality.py": "6922fa952aac78d964edd1593448715232b592737359214b2ed345ad988934d4",
+      "tests/test_audit_meeting_c7_quality.py": "70684509aca4be58cb76a602bfdae9466c1cf370483b05640f9d50beea749148"
+    },
+    "existing_tests_unchanged": {
+      "tests/test_meeting_answer_thinking.py": "23586ef43ae03aa23132eacc7ca9d6f43dc8d62c364166049895fc15b4d78cbf",
+      "tests/test_meeting_thinking_quality.py": "f172c70ff3c6be0b7e99c5f94c3db6fbad8149afbd21adf359b1f628bd780b09"
+    },
+    "overlapping_intermediate_scopes_not_added": true,
+    "skip_is_not_pass": true
+  },
+  "independent_review": {
+    "schema_version": 1,
+    "kind": "independent_code_and_synthetic_test_review",
+    "candidate_id": "meeting-answer-single-thinking-c7-v1",
+    "status": "completed",
+    "reviewer": {
+      "role_id": "/root/c7_implementation_review",
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "high",
+      "fork_turns": "none",
+      "setting_basis": "parent orchestrator accepted dispatch",
+      "excluded_from_final_output_judging": true
+    },
+    "source_files": {
+      "src/doctrail/meeting_c7_review.py": "7c3e8547c2f8fbc384e7400fd6f92317bb0d86ef1e34889f935404ec3e42a45b",
+      "scripts/prepare_meeting_c7_inputs.py": "6f50cab70e21daa996cf832604d115e1e1fdf6a69a63c7ae7c569ec7ee89528d",
+      "scripts/probe_meeting_c7_quality.py": "8b7e8c544983eedf0a3596d35437bb70ab59a41a55c283310d5a7e49f36aeea4",
+      "scripts/audit_meeting_c7_quality.py": "80b50c89236903abb4077c87754b807765c8b0bc9c50d803f6bbbebd2d2df9df",
+      "tests/test_meeting_c7_review.py": "589429fba83842bffceeb2734bb5512766ab689a0db71002c0cba9882a9a4c81",
+      "tests/test_prepare_meeting_c7_inputs.py": "17a8fa5bbba462144e0dcbf3cf459b500a0ad62075c0dcbf198954ff81f0132b",
+      "tests/test_probe_meeting_c7_quality.py": "6922fa952aac78d964edd1593448715232b592737359214b2ed345ad988934d4",
+      "tests/test_audit_meeting_c7_quality.py": "70684509aca4be58cb76a602bfdae9466c1cf370483b05640f9d50beea749148"
+    },
+    "remaining_blockers": 0,
+    "findings": [
+      {
+        "id": "C7-CR-01",
+        "status": "resolved",
+        "initial_file": "scripts/prepare_meeting_c7_inputs.py",
+        "initial_lines": [
+          435,
+          484
+        ],
+        "issue": "Source admission wrote a new nested output path without creating or exclusively reserving its parent.",
+        "resolution": "Source admission validates receipt location and exclusively creates its output directory before evaluation; existing reservation refuses reuse.",
+        "verified_lines": [
+          454,
+          468
+        ]
+      },
+      {
+        "id": "C7-CR-02",
+        "status": "resolved",
+        "initial_file": "scripts/prepare_meeting_c7_inputs.py",
+        "initial_lines": [
+          477,
+          484
+        ],
+        "issue": "A raw processor exception escaped before any durable source rejection receipt.",
+        "resolution": "All declared roles and provenance are checked before raw reads; manifest reference and expected/observed raw hashes are captured, and processor failures persist a safe rejected receipt.",
+        "verified_lines": [
+          489,
+          524
+        ]
+      },
+      {
+        "id": "C7-CR-03",
+        "status": "resolved",
+        "initial_file": "scripts/prepare_meeting_c7_inputs.py",
+        "initial_lines": [
+          129,
+          153
+        ],
+        "issue": "A date or metadata failure could omit the rejecting document and later documents from the family rejection identities.",
+        "resolution": "All available document, metadata, processed and chunk hashes/counts are recorded before date/page acceptance. The prospective admission manifest is an explicit source-freeze role; only approved adoption/review annotation changes are allowed and all remaining canonical manifest content must match before receipt replay and item parsing.",
+        "verified_lines": [
+          129,
+          161,
+          196,
+          207,
+          696,
+          752
+        ]
+      },
+      {
+        "id": "C7-CR-04",
+        "status": "resolved",
+        "initial_file": "scripts/prepare_meeting_c7_inputs.py",
+        "initial_lines": [
+          148,
+          151
+        ],
+        "issue": "Declared source page metadata could be malformed while regenerated plaintext chunks retained null page values.",
+        "resolution": "Family admission validates declared page as null or a strict integer in the registered range while retaining all known identities before rejection.",
+        "verified_lines": [
+          145,
+          146
+        ]
+      },
+      {
+        "id": "C7-CR-05",
+        "status": "resolved",
+        "initial_file": "scripts/prepare_meeting_c7_inputs.py",
+        "initial_lines": [
+          207,
+          218
+        ],
+        "issue": "An actual encode returning an empty token list lost the observed zero count and prompt measurements before the failed receipt row was created; the injected-counter test did not exercise this path.",
+        "resolution": "The single-pass counter returns a valid observed zero and prompt hash/byte/wrapper measurements. The preparation acceptance gate rejects zero after preserving the measured row and leaves remaining case IDs unexecuted. A fake tokenizer empty-encode test exercises the actual counter.",
+        "verified_lines": [
+          226,
+          237,
+          820,
+          831
+        ],
+        "test_lines": [
+          889,
+          901
+        ]
+      }
+    ],
+    "initial_prepare_sha256": "e7314fe88a5ff9436356c53480d1170322c1af4f905459e3545a415c50354d4a",
+    "final_new_probe_audit_findings": [],
+    "reviewed_contracts": [
+      "Regenerated intact full-family document_record output; all complete emitted chunks, overlaps and whitespace blocks; metadata, date, numeric, Unicode, nested escaping, schema and wire limits.",
+      "Prospective source snapshot evidence distinguished from committed code/role and final source Git proof; exact admission_manifest binding with only approved adoption annotations mutable.",
+      "Source freeze, role, freshness, processor parity and admission replay before draft/oracle semantic parsing; exact whole-chunk and item byte admission binding.",
+      "Single cached tokenizer load and one actual template/encode per attempted item; same prompt hash, bytes, wrapper delta and token count; first failure preserves measured row and leaves later IDs unexecuted.",
+      "Prepared input and receipt fields bound through execution plan, pre-send native prompt identity, immutable trace events, native response validation, grounded answer reconstruction and final audit replay.",
+      "Original calibration 6/6 locked judgment and integrity replay before validation execution/audit semantics; two distinct excluded-role-safe judges with exact 64-byte registered seeds.",
+      "Anonymous fact, source and role identifiers; natural language preserved or rejected; mapping/raw connection only after immutable judgment lock; no reasoning disclosure step.",
+      "Same outer 90-second request deadline including first proof, callback, send hook, required writes and checks; phase/cleanup limits; first cause retained separately from later archival or terminal-save failures.",
+      "Separate reservation, send-attempt, parsed, archived and contract-valid counters; stale completed report rejected when terminal-save failure marker exists; no retry or extra native calls.",
+      "64KiB reader used for inner/caller snapshots, fresh unchanged checks, GitProof and committed-helper reads; positive/negative import, path/alias, hash and HEAD guards retained."
+    ],
+    "review_execution_counts": {
+      "source_or_test_code_execution": 0,
+      "tests": 0,
+      "git_commands": 0,
+      "actual_tokenizer_loads": 0,
+      "native_generations": 0,
+      "model_calls": 0,
+      "maven": 0,
+      "network_calls": 0,
+      "actual_evaluation_data_reads": 0,
+      "source_code_edits": 0
+    },
+    "permitted_write": ".local/c7-independent-review-v1.json",
+    "test_evidence_is_separate": true,
+    "implementation_owner_evidence": {
+      "file": ".local/c7-implementation-v1/full-final-receipt.json",
+      "sha256": "35621ca6c88cac6bbf493d5fcf9836de6b517b7b93cf8e2a27d4a378ff474ec2",
+      "receipt_hash_verified": true,
+      "receipt_read": true,
+      "pytest_exit": 0,
+      "ruff_exit": 0,
+      "owner_reported_passed": 244,
+      "owner_reported_skipped": 1,
+      "owner_reported_skip_reason": "Windows symbolic-link permission",
+      "counts_basis": "implementation owner message; reviewer did not execute tests or infer independent test reproduction"
+    },
+    "exposure_and_limits": {
+      "read_scope": "design, protocol, new code, synthetic test code, allowed prior contract code, safe implementation metadata",
+      "actual_source_question_oracle_input_output_bodies_read": false,
+      "validation_per_item_lengths_read": false,
+      "automatic_project_metadata_exposure": true,
+      "pristine_or_fully_blind_claim": false,
+      "human_review_count": 0,
+      "semantic_quality_verified": false,
+      "native_execution_verified": false,
+      "production_or_service_adoption_claim": false,
+      "independent_code_review_does_not_replace_test_or_source_CI_evidence": true
+    },
+    "created_at": "2026-10-20T04:32:42.6582666+00:00",
+    "final_hash_recheck": "all_eight_match_review_ready_and_current_bytes"
+  },
+  "implementation_role": {
+    "role": "/root/host_proof_profile",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "original_role_setting_retained": true,
+    "new_model_setting_acceptance_claim": false
+  },
+  "preservation_baseline": {
+    "file": ".local/c7-implementation-baseline-v1.json",
+    "sha256": "b8ff0ec7a46a366d09b6482b1d5aff12a17b6f68ac9945ef78ec611eddf3ec4c",
+    "prior_code_unchanged": 123,
+    "closed_c6_publication_unchanged": 81
+  },
+  "preserved_prior_freezes": {
+    "data/evaluation/meetings-c5-toolchain-freeze-v1.json": {
+      "sha256": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d",
+      "bound_count": 76,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json": {
+      "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78",
+      "bound_count": 85,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-gpu-placement-source-freeze-v1.json": {
+      "sha256": "116b5325b8b9c1de39c27d486b17d614d9bdef49b32274b14d2838c5a4e9cfaf",
+      "bound_count": 59,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-host-proof-profile-source-freeze-v1.json": {
+      "sha256": "1171f14f7cb176838385723a040ded6921409cc1cfb168833d35e4782687f412",
+      "bound_count": 52,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-proof-epoch-source-freeze-v1.json": {
+      "sha256": "261abc74b39862f9768387def7a86629ea6345dd43ccb692f6abed6f2174a4f1",
+      "bound_count": 27,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-c6-toolchain-freeze-v1.json": {
+      "sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b",
+      "bound_count": 77,
+      "working_bytes_match": true
+    }
+  },
+  "local_evidence": {
+    "failure-ledger-v1.json": {
+      "file": ".local/c7-implementation-v1/failure-ledger-v1.json",
+      "sha256": "71fc5be4328a4ba10b13bdfeff30563b9bf021326e3b8ae7a6f7112fc002dcf6",
+      "bytes": 2180
+    },
+    "first4-admission-before.json": {
+      "file": ".local/c7-implementation-v1/first4-admission-before.json",
+      "sha256": "804043b287e7e5c054f1356a180202f2ef052517dccd40002e56fff026bb66fe",
+      "bytes": 442
+    },
+    "first4-admission-pytest.txt": {
+      "file": ".local/c7-implementation-v1/first4-admission-pytest.txt",
+      "sha256": "09b2fde26eda3aef85aa2e99bf3d62d9d025346301ddecb2553529c49fb83db2",
+      "bytes": 2496
+    },
+    "first4-admission-receipt.json": {
+      "file": ".local/c7-implementation-v1/first4-admission-receipt.json",
+      "sha256": "e129e2a1bb3edf36b175de8c9cf2f2925a8a9e6d5b79c8e3b24fb64db526d9f1",
+      "bytes": 1698
+    },
+    "first4-admission-ruff.txt": {
+      "file": ".local/c7-implementation-v1/first4-admission-ruff.txt",
+      "sha256": "b565c6bd339804602dfc00b9208f2d019dcc0d79baa155b86f2a7ee1062840e0",
+      "bytes": 829
+    },
+    "first4-initial-before.json": {
+      "file": ".local/c7-implementation-v1/first4-initial-before.json",
+      "sha256": "ca70f061f54f531782eec9a7a1235f619a9ffab4e06c7f889a9a6bde579ca6b7",
+      "bytes": 442
+    },
+    "first4-initial-pytest.txt": {
+      "file": ".local/c7-implementation-v1/first4-initial-pytest.txt",
+      "sha256": "4b8ea594aa022e59dd67eb856eb12b94e86ba582da7ebaf6e4ed77813da6f71c",
+      "bytes": 194
+    },
+    "first4-initial-receipt.json": {
+      "file": ".local/c7-implementation-v1/first4-initial-receipt.json",
+      "sha256": "d6d4b9fa5b3049e3c2483be505cad3b0493612a42b72cb69fb6b026a484e2c8c",
+      "bytes": 1697
+    },
+    "first4-initial-ruff.txt": {
+      "file": ".local/c7-implementation-v1/first4-initial-ruff.txt",
+      "sha256": "16bbe0033c304321889a218b4db0ae66e17393d137393262b02c9229ecf97e48",
+      "bytes": 2502
+    },
+    "first4-reviewed-before.json": {
+      "file": ".local/c7-implementation-v1/first4-reviewed-before.json",
+      "sha256": "2e2f9409412044b16f803a9bc73f4ebb19be27df1a74df02a2cc840678a30c3b",
+      "bytes": 438
+    },
+    "first4-reviewed-pytest.txt": {
+      "file": ".local/c7-implementation-v1/first4-reviewed-pytest.txt",
+      "sha256": "79f102e3a656d795b80ad4218c526382c771a5e6dff01ed2474f2d88af011a0d",
+      "bytes": 2563
+    },
+    "first4-reviewed-receipt.json": {
+      "file": ".local/c7-implementation-v1/first4-reviewed-receipt.json",
+      "sha256": "9145e90086be2f512c6ec354dd185416317d0de5b735033214ff8e7f01110ce9",
+      "bytes": 1652
+    },
+    "first4-reviewed-ruff.txt": {
+      "file": ".local/c7-implementation-v1/first4-reviewed-ruff.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "first4-transition-delta-pytest.txt": {
+      "file": ".local/c7-implementation-v1/first4-transition-delta-pytest.txt",
+      "sha256": "341d54407588c3a018185065471b492ce3e1aa1a701a2238e082e62a39d2bc38",
+      "bytes": 116
+    },
+    "first4-transition-delta-receipt.json": {
+      "file": ".local/c7-implementation-v1/first4-transition-delta-receipt.json",
+      "sha256": "6af0e12d8587e495c57306b281d3f22f5febb4b6d12a715689db3b2667f8b595",
+      "bytes": 1654
+    },
+    "first4-transition-delta-ruff.txt": {
+      "file": ".local/c7-implementation-v1/first4-transition-delta-ruff.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "full-final-before.json": {
+      "file": ".local/c7-implementation-v1/full-final-before.json",
+      "sha256": "16be922cfedb74e75830a8f98bbd6b7311680e65ad57293fb8db0651777ca368",
+      "bytes": 1202
+    },
+    "full-final-pytest.txt": {
+      "file": ".local/c7-implementation-v1/full-final-pytest.txt",
+      "sha256": "53230a8b1f49a53caae108ad059d7aa86d83a9aac257ab2cb5b8b8baff9c0e7d",
+      "bytes": 368
+    },
+    "full-final-receipt.json": {
+      "file": ".local/c7-implementation-v1/full-final-receipt.json",
+      "sha256": "35621ca6c88cac6bbf493d5fcf9836de6b517b7b93cf8e2a27d4a378ff474ec2",
+      "bytes": 3623
+    },
+    "full-final-ruff.txt": {
+      "file": ".local/c7-implementation-v1/full-final-ruff.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "review-ready-eight.json": {
+      "file": ".local/c7-implementation-v1/review-ready-eight.json",
+      "sha256": "ec11380ea8994ea91efb5a0ec3f7659943dd684a643828480d61fa3bcf7183f0",
+      "bytes": 880
+    },
+    "review-zero-capture-original-pytest.txt": {
+      "file": ".local/c7-implementation-v1/review-zero-capture-original-pytest.txt",
+      "sha256": "e38a2805ce16aa12a66a12ce148a1c8421be65b60549d49112943236f9a06e81",
+      "bytes": 2379
+    },
+    "review-zero-capture-original-receipt.json": {
+      "file": ".local/c7-implementation-v1/review-zero-capture-original-receipt.json",
+      "sha256": "c2e59882479b9c02a4e9c92c0e350790647c54eef510c024fc8261428bb7ca1c",
+      "bytes": 1174
+    },
+    "run_final.py": {
+      "file": ".local/c7-implementation-v1/run_final.py",
+      "sha256": "8d483e42e4bf95f3bdd1f962447e8d27fef82c18084feb46c99bf6b5aec5d320",
+      "bytes": 1919
+    },
+    "runner-audit-initial-pytest.txt": {
+      "file": ".local/c7-implementation-v1/runner-audit-initial-pytest.txt",
+      "sha256": "85f5bbf4f8471410ac4e6e237e11805501ea8b973cf37bdb201ae5d0adda2cc8",
+      "bytes": 113
+    },
+    "runner-audit-initial-receipt.json": {
+      "file": ".local/c7-implementation-v1/runner-audit-initial-receipt.json",
+      "sha256": "170f7be0cf7fdc7a6e8e448a3483edb358e6524ca6565d1bbd5f2a54e65a65c8",
+      "bytes": 2752
+    },
+    "runner-audit-initial-ruff.txt": {
+      "file": ".local/c7-implementation-v1/runner-audit-initial-ruff.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "runner-initial-pytest.txt": {
+      "file": ".local/c7-implementation-v1/runner-initial-pytest.txt",
+      "sha256": "1932ec90a99d843d74a4f69b01447d4110b1585954d6ce341b8f5943d0315e2d",
+      "bytes": 101
+    },
+    "runner-initial-receipt.json": {
+      "file": ".local/c7-implementation-v1/runner-initial-receipt.json",
+      "sha256": "b3affeeaeb3463dd092160c92e90111cb269ed25fdc3e5badbcd021653aecdfc",
+      "bytes": 2760
+    },
+    "runner-initial-ruff.txt": {
+      "file": ".local/c7-implementation-v1/runner-initial-ruff.txt",
+      "sha256": "2b535c7c15c899857649f3fb3dd19d671b4a53f0b4c9371f42c0daf9a2b78c52",
+      "bytes": 1682
+    }
+  },
+  "preserved_intermediate_checks": {
+    "scope": "synthetic code tests only; all scopes overlap and are not summed",
+    "entries": [
+      {
+        "receipt": "first4-initial-receipt.json",
+        "pytest": "78 passed, 1 skipped, 12.08s",
+        "ruff": "1 import-order failure; fixed"
+      },
+      {
+        "receipt": "first4-admission-receipt.json",
+        "pytest": "1 failed, 100 passed, 1 skipped, 14.11s",
+        "failure": "exclusive admission output parent missing",
+        "ruff": "1 unnecessary encode failure; fixed"
+      },
+      {
+        "receipt": "review-zero-capture-original-receipt.json",
+        "pytest": "2 failed, 79 deselected, 1.45s",
+        "failure": "real fake-tokenizer empty encode observation lost; processor rejection lacked original raw capture"
+      },
+      {
+        "receipt": "first4-reviewed-receipt.json",
+        "pytest": "2 failed, 118 passed, 1 skipped, 12.72s",
+        "failure": "two mutation test values equaled original fixture metadata; fixture corrected; implementation unchanged",
+        "ruff": "passed"
+      },
+      {
+        "receipt": "first4-transition-delta-receipt.json",
+        "pytest": "12 passed; transition scope only",
+        "ruff": "passed"
+      },
+      {
+        "receipt": "runner-initial-receipt.json",
+        "pytest": "1 passed, 11.61s; full synthetic calibration and replay",
+        "ruff": "1 import order failure; fixed"
+      },
+      {
+        "receipt": "runner-audit-initial-receipt.json",
+        "pytest": "50 passed, 244.40s",
+        "ruff": "passed",
+        "source": "same exact eight as review-ready-eight.json; before/after equal"
+      }
+    ],
+    "interpretations": [
+      "C7 offline preparation stops at first failed attempted item, retains its observed values and lists remaining IDs as unexecuted; it does not survey remaining items.",
+      "Prospective source manifest and raw snapshot hashes are admission evidence, not committed source proof. Source freeze/Git verification is required later.",
+      "Only source_suitability verdict/reason/reviewer_id/reviewed_at and source adoption_verdict may change between prospective and adopted manifest. Other metadata must be exact.",
+      "Actual tokenizer/model/native/download/source/item authoring and official runs remain zero."
+    ]
+  },
+  "actual_source_documents": 0,
+  "actual_questions": 0,
+  "actual_tokenizer_loads": 0,
+  "native_calls": 0,
+  "old_closed_reruns": 0,
+  "human_reviews": 0,
+  "service_adoption": false,
+  "claim_scope": "Synthetic checks and independent code read only; no actual token, semantic answer quality or service latency result.",
+  "next": "Commit source and freeze, observe exact push and PR required CI, then commit a separate CI receipt before fresh source roles."
+}

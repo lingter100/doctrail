@@ -1,0 +1,1246 @@
+{
+  "schema_version": 1,
+  "purpose": "final_answer_review",
+  "samples": [
+    {
+      "sample_id": "sample-001",
+      "question": "FastAPI 앱에서 여러 요청이 공유할 리소스의 준비·정리와, 요청 처리 결과를 알리는 간단한 이메일 알림을 구현하려고 합니다. 각각 어떤 방식을 쓰고 언제 실행되나요? 앱의 준비·정리에 권장되는 방식을 택했을 때 기존 startup/shutdown 핸들러와 마운트한 하위 앱에는 어떤 제한이 있는지도 설명해 주세요.",
+      "response_language": "ko",
+      "contexts": [
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+          "text": "# Background Tasks { #background-tasks }\n\nYou can define background tasks to be run *after* returning a response.\n\nThis is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n\nThis includes, for example:\n\n* Email notifications sent after performing an action:\n    * As connecting to an email server and sending an email tends to be \"slow\" (several seconds), you can return the response right away and send the email notification in the background.\n* Processing data:\n    * For example, let's say you receive a file that must go through a slow process, you can return a response of \"Accepted\" (HTTP 202) and process the file in the background.\n\n## Using `BackgroundTasks` { #using-backgroundtasks }\n\nFirst, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n\n{* ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 960
+        },
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0005",
+          "text": "https://docs.celeryq.dev).\n\nThey tend to require more complex configurations, a message/job queue manager, like RabbitMQ or Redis, but they allow you to run background tasks in multiple processes, and especially, in multiple servers.\n\nBut if you need to access variables and objects from the same **FastAPI** app, or you need to perform small background tasks (like sending an email notification), you can simply just use `BackgroundTasks`.\n\n## Recap { #recap }\n\nImport and use `BackgroundTasks` with parameters in *path operation functions* and dependencies to add background tasks.\n",
+          "page": null,
+          "start_offset": 4202,
+          "end_offset": 4786
+        },
+        {
+          "document_id": "c3-cal-fastapi-lifespan-events",
+          "revision": 1,
+          "title": "FastAPI — Lifespan Events",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+          "text": "# Lifespan Events { #lifespan-events }\n\nYou can define logic (code) that should be executed before the application **starts up**. This means that this code will be executed **once**, **before** the application **starts receiving requests**.\n\nThe same way, you can define logic (code) that should be executed when the application is **shutting down**. In this case, this code will be executed **once**, **after** having handled possibly **many requests**.\n\nBecause this code is executed before the application **starts** taking requests, and right after it **finishes** handling requests, it covers the whole application **lifespan** (the word \"lifespan\" will be important in a second 😉).\n\nThis can be very useful for setting up **resources** that you need to use for the whole app, and that are **shared** among requests, and/or that you need to **clean up** afterwards. For example, a database connection pool, or loading a shared machine learning model.\n\n## Use Case { #use-case }\n\nLet's start ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 996
+        },
+        {
+          "document_id": "c3-cal-fastapi-lifespan-events",
+          "revision": 1,
+          "title": "FastAPI — Lifespan Events",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0005",
+          "text": "l execute the code before the `yield`, and after exiting the `with` block, it will execute the code after the `yield`.\n\nIn our code example above, we don't use it directly, but we pass it to FastAPI for it to use it.\n\nThe `lifespan` parameter of the `FastAPI` app takes an **async context manager**, so we can pass our new `lifespan` async context manager to it.\n\n{* ../../docs_src/events/tutorial003_py310.py hl[22] *}\n\n## Alternative Events (deprecated) { #alternative-events-deprecated }\n\n/// warning\n\nThe recommended way to handle the *startup* and *shutdown* is using the `lifespan` parameter of the `FastAPI` app as described above. If you provide a `lifespan` parameter, `startup` and `shutdown` event handlers will no longer be called. It's all `lifespan` or all events, not both.\n\nYou can probably skip this part.\n\n///\n\nThere's an alternative way to define this logic to be executed during *startup* and during *shutdown*.\n\nYou can define event handlers (functions) that need to be executed ",
+          "page": null,
+          "start_offset": 4231,
+          "end_offset": 5231
+        },
+        {
+          "document_id": "c3-cal-fastapi-lifespan-events",
+          "revision": 1,
+          "title": "FastAPI — Lifespan Events",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0009",
+          "text": " Lifespan' docs](https://starlette.dev/lifespan/).\n\nIncluding how to handle lifespan state that can be used in other areas of your code.\n\n///\n\n## Sub Applications { #sub-applications }\n\n🚨 Keep in mind that these lifespan events (startup and shutdown) will only be executed for the main application, not for [Sub Applications - Mounts](sub-applications.md).\n",
+          "page": null,
+          "start_offset": 7613,
+          "end_offset": 7970
+        }
+      ],
+      "oracle": {
+        "id": "sample-001",
+        "family_id": "C3-F01",
+        "provenance": "public",
+        "language": "ko",
+        "expected_status": "answered",
+        "required_facts": [
+          {
+            "id": "C3-CAL-01-F1",
+            "text": "여러 요청이 공유할 앱 리소스의 준비·정리에 권장되는 방식은 FastAPI의 lifespan 매개변수에 async context manager를 제공하는 것이다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+                  "start_offset": 689,
+                  "end_offset": 956,
+                  "quote": "This can be very useful for setting up **resources** that you need to use for the whole app, and that are **shared** among requests, and/or that you need to **clean up** afterwards. For example, a database connection pool, or loading a shared machine learning model.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0005",
+                  "start_offset": 4449,
+                  "end_offset": 4594,
+                  "quote": "The `lifespan` parameter of the `FastAPI` app takes an **async context manager**, so we can pass our new `lifespan` async context manager to it.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0005",
+                  "start_offset": 4736,
+                  "end_offset": 5020,
+                  "quote": "The recommended way to handle the *startup* and *shutdown* is using the `lifespan` parameter of the `FastAPI` app as described above. If you provide a `lifespan` parameter, `startup` and `shutdown` event handlers will no longer be called. It's all `lifespan` or all events, not both.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-01-F2",
+            "text": "앱 준비 로직은 한 번 실행되며 애플리케이션이 요청을 받기 전의 시작 단계에서 실행된다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+                  "start_offset": 40,
+                  "end_offset": 241,
+                  "quote": "You can define logic (code) that should be executed before the application **starts up**. This means that this code will be executed **once**, **before** the application **starts receiving requests**.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-01-F3",
+            "text": "앱 정리 로직은 한 번 실행되며 애플리케이션이 요청 처리를 마친 뒤 종료하는 단계에서 실행된다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+                  "start_offset": 242,
+                  "end_offset": 455,
+                  "quote": "The same way, you can define logic (code) that should be executed when the application is **shutting down**. In this case, this code will be executed **once**, **after** having handled possibly **many requests**.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+                  "start_offset": 456,
+                  "end_offset": 688,
+                  "quote": "Because this code is executed before the application **starts** taking requests, and right after it **finishes** handling requests, it covers the whole application **lifespan** (the word \"lifespan\" will be important in a second 😉).\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-01-F4",
+            "text": "간단한 이메일 알림에는 BackgroundTasks를 사용할 수 있고, 작업은 응답을 반환한 뒤 실행하여 클라이언트가 알림 완료를 기다리지 않게 할 수 있다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                  "start_offset": 42,
+                  "end_offset": 114,
+                  "quote": "You can define background tasks to be run *after* returning a response.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                  "start_offset": 115,
+                  "end_offset": 297,
+                  "quote": "This is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0005",
+                  "start_offset": 4437,
+                  "end_offset": 4643,
+                  "quote": "But if you need to access variables and objects from the same **FastAPI** app, or you need to perform small background tasks (like sending an email notification), you can simply just use `BackgroundTasks`.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-01-F5",
+            "text": "lifespan 매개변수를 제공하면 기존 startup/shutdown 이벤트 핸들러는 호출되지 않는다. 두 방식을 함께 실행하는 설정으로 설명하면 안 된다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0005",
+                  "start_offset": 4736,
+                  "end_offset": 5020,
+                  "quote": "The recommended way to handle the *startup* and *shutdown* is using the `lifespan` parameter of the `FastAPI` app as described above. If you provide a `lifespan` parameter, `startup` and `shutdown` event handlers will no longer be called. It's all `lifespan` or all events, not both.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-01-F6",
+            "text": "이 lifespan 시작·종료 이벤트는 메인 애플리케이션에만 실행되고 마운트된 하위 애플리케이션에는 실행되지 않는다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0009",
+                  "start_offset": 7799,
+                  "end_offset": 7970,
+                  "quote": "🚨 Keep in mind that these lifespan events (startup and shutdown) will only be executed for the main application, not for [Sub Applications - Mounts](sub-applications.md).\n"
+                }
+              ]
+            ]
+          }
+        ],
+        "unanswerable_reason": null,
+        "forbidden_inferences": [
+          "준비·정리 로직을 요청마다 실행하거나 각 사용자마다 별도 리소스를 준비한다고 주장하지 않는다.",
+          "이메일 작업의 완료·내구성·재시도를 보장하거나 응답 이전에 완료된다고 주장하지 않는다.",
+          "lifespan과 기존 startup/shutdown 핸들러가 함께 실행되거나 마운트된 하위 앱에 같은 이벤트가 자동 실행된다고 주장하지 않는다."
+        ],
+        "limitations": [
+          "두 고정 FastAPI 문서의 설명에 한정한다. 참조된 예시 코드나 연결 페이지의 내용은 근거가 아니다.",
+          "앱 수명주기와 요청 이후 작업의 구분이 필수이며, 동일 문서의 두 청크만으로 복수 문서 요건을 대신하지 않는다."
+        ],
+        "question_author": "/root/c2_calibration_source",
+        "oracle_author": "/root/c2_calibration_source",
+        "independent_prereviewer": "/root/c3_calibration_source_review",
+        "human_review_count": 0
+      },
+      "answer": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "여러 요청이 공유하는 리소스의 준비 및 정리를 위해 권장되는 방식은 lifespan 이벤트입니다. 이 방식은 애플리케이션이 시작되기 전에 한 번 실행되거나, 모든 요청을 처리한 후 종료될 때 한 번 실행됩니다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+                "quote": "You can define logic (code) that should be executed before the application **starts up**. This means that this code will be executed **once**, **before** the application **starts receiving requests**.\n",
+                "start_offset": 40,
+                "end_offset": 241
+              },
+              {
+                "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+                "quote": "The same way, you can define logic (code) that should be executed when the application is **shutting down**. In this case, this code will be executed **once**, **after** having handled possibly **many requests**.\n",
+                "start_offset": 242,
+                "end_offset": 455
+              },
+              {
+                "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+                "quote": "This can be very useful for setting up **resources** that you need to use for the whole app, and that are **shared** among requests, and/or that you need to **clean up** afterwards. For example, a database connection pool, or loading a shared machine learning model.\n",
+                "start_offset": 689,
+                "end_offset": 956
+              },
+              {
+                "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0005",
+                "quote": "l execute the code before the `yield`, and after exiting the `with` block, it will execute the code after the `yield`.\n",
+                "start_offset": 4231,
+                "end_offset": 4350
+              }
+            ]
+          },
+          {
+            "text": "요청 처리 결과를 알리는 간단한 이메일 알림을 위해 BackgroundTasks 방식을 사용하며, 이는 응답을 반환한 후에 실행됩니다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                "quote": "You can define background tasks to be run *after* returning a response.\n",
+                "start_offset": 42,
+                "end_offset": 114
+              },
+              {
+                "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                "quote": "This is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n",
+                "start_offset": 115,
+                "end_offset": 297
+              },
+              {
+                "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                "quote": "This includes, for example:\n\n* Email notifications sent after performing an action:\n    * As connecting to an email server and sending an email tends to be \"slow\" (several seconds), you can return the response right away and send the email notification in the background.\n* Processing data:\n    * For example, let's say you receive a file that must go through a slow process, you can return a response of \"Accepted\" (HTTP 202) and process the file in the background.\n",
+                "start_offset": 298,
+                "end_offset": 765
+              },
+              {
+                "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                "quote": "First, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n",
+                "start_offset": 821,
+                "end_offset": 956
+              }
+            ]
+          },
+          {
+            "text": "권장 방식인 lifespan 이벤트를 사용할 경우, 기존 startup 및 shutdown 이벤트 핸들러는 더 이상 호출되지 않습니다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0005",
+                "quote": "The recommended way to handle the *startup* and *shutdown* is using the `lifespan` parameter of the `FastAPI` app as described above. If you provide a `lifespan` parameter, `startup` and `shutdown` event handlers will no longer be called. It's all `lifespan` or all events, not both.\n",
+                "start_offset": 4736,
+                "end_offset": 5020
+              }
+            ]
+          },
+          {
+            "text": "lifespan 이벤트는 메인 애플리케이션에서만 실행되며, 마운트된 하위 애플리케이션 (Sub Applications) 에서는 실행되지 않습니다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0009",
+                "quote": "🚨 Keep in mind that these lifespan events (startup and shutdown) will only be executed for the main application, not for [Sub Applications - Mounts](sub-applications.md).\n",
+                "start_offset": 7799,
+                "end_offset": 7970
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "sample-002",
+      "question": "At Solgeuneul Library's first opening after the shelf move, what checks were required before an area could reopen, and how did the readiness of the two shelves differ? Describe who resolved the remaining restriction and how, and explain what that completion meant for the overall trial.",
+      "response_language": "en",
+      "contexts": [
+        {
+          "document_id": "c3-cal-library-relocation-meeting",
+          "revision": 1,
+          "title": "솔그늘도서관 이동서가 재배치 회의 기록",
+          "meeting_date": "2026-04-07",
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+          "text": "# 솔그늘도서관 이동서가 재배치 회의 기록\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n회의일: 2026-04-07\n참석: 관장 차소연, 자료 담당 사서 문다은, 시설 담당 류정호, 이용자 안내 담당 배윤슬\n기록: 문다은\n\n## 재배치 배경과 검토한 안\n\n성인자료실 입구의 반납 도서 대기 카트가 수필 서가 앞에 머무르면서, 책을 고르는 이용자와 반납 정리 담당자의 동선이 겹친다는 의견이 접수되었다. 이번 회의는 서가 수를 늘리거나 장서를 폐기하는 회의가 아니라 기존 가구의 위치를 시험적으로 조정하는 자리였다.\n\n문다은은 수필용 이동서가 두 대를 창가 열람석 쪽으로 옮기고 반납 카트는 직원 작업대 옆에 두자는 안을 설명했다. 배윤슬은 창가 좌석에서 책장이 시야를 가릴 수 있다는 의견을 냈다. 류정호는 북쪽 벽에 두 대를 붙이는 대안을 제시했지만, 그 위치에서는 벽면 점검함을 열기 어려워 채택하지 않았다.\n\n## 확정한 범위와 운영 방식\n\n차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n\n서가를 옮기기 전에는 책을 순서대로 임시 카트에 옮기고 각 칸의 청구기호 범위를 남긴다. 장서의 등록번호와 대출 상태는 바꾸지 않는다. 배치가 끝나면 류정호가 통로와 점검함 접근 상태를 확인하고 문다은이 책의 배열과 위치 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n\n| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998
+        },
+        {
+          "document_id": "c3-cal-library-relocation-handover",
+          "revision": 1,
+          "title": "솔그늘도서관 서가 이동 작업 및 개관 인계장",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+          "text": "# 솔그늘도서관 서가 이동 작업 및 개관 인계장\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n\n## 휴관일 작업 기록\n\n문다은은 수필용 이동서가 두 대의 책을 청구기호 구간별로 나누어 임시 카트에 옮겼다. 이동 전 배치표와 각 카트의 표찰을 대조한 뒤 류정호에게 빈 서가를 인계했다. 장서 등록번호와 대출 상태는 이번 작업에서 수정하지 않았다.\n\n류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n\n책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n\n## 4월 14일 개관 인계\n\n| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998
+        },
+        {
+          "document_id": "c3-cal-library-relocation-handover",
+          "revision": 1,
+          "title": "솔그늘도서관 서가 이동 작업 및 개관 인계장",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+          "text": " 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 다시 대조 |\n| 반납 도서 대기 카트 | 직원 작업대 옆으로 이동 완료 | 반납 정리 담당자가 작업 뒤 같은 자리에 복귀 |\n| 어린이자료실 고정 서가 | 이동하지 않음 | 기존 안내 유지 |\n\n문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n\n오전에는 수필 서가 위치를 묻는 문의가 있었고, 배윤슬은 위치 안내 기록에 남겼다. 창가 좌석 증설은 작업하지 않았다. 이동한 서가의 최종 유지 여부는 아직 결정되지 않았으며, 4월 24일까지 모을 의견과 작업 기록을 다음 논의에 넘긴다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1392
+        }
+      ],
+      "oracle": {
+        "id": "sample-002",
+        "family_id": "C3-F02",
+        "provenance": "synthetic",
+        "language": "en",
+        "expected_status": "answered",
+        "required_facts": [
+          {
+            "id": "C3-CAL-05-F1",
+            "text": "Before an area reopened, Ryu Jeong-ho had to check passage and inspection-panel access, and Moon Da-eun had to compare the book arrangement with the location guidance. Both checks had to be complete for that area; books in an unchecked area were supplied through staff lending at the desk.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                  "start_offset": 725,
+                  "end_offset": 924,
+                  "quote": "서가를 옮기기 전에는 책을 순서대로 임시 카트에 옮기고 각 칸의 청구기호 범위를 남긴다. 장서의 등록번호와 대출 상태는 바꾸지 않는다. 배치가 끝나면 류정호가 통로와 점검함 접근 상태를 확인하고 문다은이 책의 배열과 위치 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-05-F2",
+            "text": "At the April 14 opening, the first movable shelf had completed its access and arrangement/guidance checks and was available for use.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 120,
+                  "end_offset": 219,
+                  "quote": "문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 809,
+                  "end_offset": 825,
+                  "quote": "## 4월 14일 개관 인계\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 826,
+                  "end_offset": 998,
+                  "quote": "| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 "
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                  "start_offset": 848,
+                  "end_offset": 1107,
+                  "quote": " 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 다시 대조 |\n| 반납 도서 대기 카트 | 직원 작업대 옆으로 이동 완료 | 반납 정리 담당자가 작업 뒤 같은 자리에 복귀 |\n| 어린이자료실 고정 서가 | 이동하지 않음 | 기존 안내 유지 |\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-05-F3",
+            "text": "The end section of the second shelf still had its old location label. Although the book order was correct, the guidance did not match, so that section was offered through staff lending instead of opening directly to users.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 613,
+                  "end_offset": 808,
+                  "quote": "책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 809,
+                  "end_offset": 825,
+                  "quote": "## 4월 14일 개관 인계\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 826,
+                  "end_offset": 998,
+                  "quote": "| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 "
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                  "start_offset": 848,
+                  "end_offset": 1107,
+                  "quote": " 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 다시 대조 |\n| 반납 도서 대기 카트 | 직원 작업대 옆으로 이동 완료 | 반납 정리 담당자가 작업 뒤 같은 자리에 복귀 |\n| 어린이자료실 고정 서가 | 이동하지 않음 | 기존 안내 유지 |\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-05-F4",
+            "text": "After opening, Moon Da-eun replaced that section's label, checked it against the book arrangement again, notified Bae Yun-seul that the check was complete, and then removed the staff-lending notice and reopened the section.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                  "start_offset": 1108,
+                  "end_offset": 1257,
+                  "quote": "문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-05-F5",
+            "text": "That completion resolved the remaining location-guidance work; it did not end the entire trial.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                  "start_offset": 1108,
+                  "end_offset": 1257,
+                  "quote": "문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-05-F6",
+            "text": "The final decision on retaining the new layout was still pending; feedback and work records through April 24 were to go to the next discussion.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                  "start_offset": 1258,
+                  "end_offset": 1392,
+                  "quote": "오전에는 수필 서가 위치를 묻는 문의가 있었고, 배윤슬은 위치 안내 기록에 남겼다. 창가 좌석 증설은 작업하지 않았다. 이동한 서가의 최종 유지 여부는 아직 결정되지 않았으며, 4월 24일까지 모을 의견과 작업 기록을 다음 논의에 넘긴다.\n"
+                }
+              ]
+            ]
+          }
+        ],
+        "unanswerable_reason": null,
+        "forbidden_inferences": [
+          "Do not say both shelves were fully ready at the initial opening, or that the whole second shelf or whole library stayed closed.",
+          "Do not turn a location-label problem into an incorrectly ordered collection or imply that a single check was sufficient under the meeting rule.",
+          "Do not attribute Moon's label correction or notice removal to Bae, invent a clock time for reopening, or claim a final layout decision followed from the correction."
+        ],
+        "limitations": [
+          "English response is required for these Korean synthetic source documents. Reasonable name transliterations are acceptable when the people and actions remain unambiguous.",
+          "The table crosses two frozen chunks. Its overlapping whole units and its opening-date heading are retained together; headers must not be inferred from a row alone."
+        ],
+        "question_author": "/root/c2_calibration_source",
+        "oracle_author": "/root/c2_calibration_source",
+        "independent_prereviewer": "/root/c3_calibration_source_review",
+        "human_review_count": 0
+      },
+      "answer": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "Before an area could reopen after the shelf move, the aisle and access to inspection cabinets had to be confirmed and closed by Ryu Jeong-ho, while the book arrangement and location guides had to be cross-checked by Mun Da-eun. Once both of these checks were completed for a specific area, service could resume there, with any remaining areas providing books through staff loans at the guide desk.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                "quote": "서가를 옮기기 전에는 책을 순서대로 임시 카트에 옮기고 각 칸의 청구기호 범위를 남긴다. 장서의 등록번호와 대출 상태는 바꾸지 않는다. 배치가 끝나면 류정호가 통로와 점검함 접근 상태를 확인하고 문다은이 책의 배열과 위치 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n",
+                "start_offset": 725,
+                "end_offset": 924
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n",
+                "start_offset": 361,
+                "end_offset": 612
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n",
+                "start_offset": 613,
+                "end_offset": 808
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 ",
+                "start_offset": 826,
+                "end_offset": 998
+              }
+            ]
+          },
+          {
+            "text": "The first shelf was ready for reopening because its aisle access and the matching of book arrangement with location guides were fully completed. In contrast, the last section of the second shelf could not be reopened immediately because an old guide sign remained, indicating the previous location and failing to match the new arrangement.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n",
+                "start_offset": 361,
+                "end_offset": 612
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n",
+                "start_offset": 613,
+                "end_offset": 808
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 ",
+                "start_offset": 826,
+                "end_offset": 998
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                "quote": " 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 다시 대조 |\n| 반납 도서 대기 카트 | 직원 작업대 옆으로 이동 완료 | 반납 정리 담당자가 작업 뒤 같은 자리에 복귀 |\n| 어린이자료실 고정 서가 | 이동하지 않음 | 기존 안내 유지 |\n",
+                "start_offset": 848,
+                "end_offset": 1107
+              }
+            ]
+          },
+          {
+            "text": "Mun Da-eun resolved the remaining restriction by replacing the old guide sign with one matching the new location and re-verifying the book arrangement. After informing Bae Yoon-seul that the check was complete, she retrieved the staff loan notice for that section and allowed service to resume.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n",
+                "start_offset": 613,
+                "end_offset": 808
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                "quote": "문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n",
+                "start_offset": 1108,
+                "end_offset": 1257
+              }
+            ]
+          },
+          {
+            "text": "The completion of this final guide sign replacement and re-check marked the end of the remaining guidance work but did not signify the conclusion of the overall pilot operation. The pilot continued with other pending decisions, such as the final maintenance of the moved shelves and the collection of opinions until April 24.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                "quote": "문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n",
+                "start_offset": 1108,
+                "end_offset": 1257
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                "quote": "오전에는 수필 서가 위치를 묻는 문의가 있었고, 배윤슬은 위치 안내 기록에 남겼다. 창가 좌석 증설은 작업하지 않았다. 이동한 서가의 최종 유지 여부는 아직 결정되지 않았으며, 4월 24일까지 모을 의견과 작업 기록을 다음 논의에 넘긴다.\n",
+                "start_offset": 1258,
+                "end_offset": 1392
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "sample-003",
+      "question": "How do I add background work in a FastAPI route and its nested dependencies? Explain how to obtain the task object, which forms of task function and arguments it supports, and how work from the different dependency levels is combined and scheduled.",
+      "response_language": "en",
+      "contexts": [
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+          "text": "# Background Tasks { #background-tasks }\n\nYou can define background tasks to be run *after* returning a response.\n\nThis is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n\nThis includes, for example:\n\n* Email notifications sent after performing an action:\n    * As connecting to an email server and sending an email tends to be \"slow\" (several seconds), you can return the response right away and send the email notification in the background.\n* Processing data:\n    * For example, let's say you receive a file that must go through a slow process, you can return a response of \"Accepted\" (HTTP 202) and process the file in the background.\n\n## Using `BackgroundTasks` { #using-backgroundtasks }\n\nFirst, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n\n{* ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 960
+        },
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0001",
+          "text": "ndtasks }\n\nFirst, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[1,13] *}\n\n**FastAPI** will create the object of type `BackgroundTasks` for you and pass it as that parameter.\n\n## Create a task function { #create-a-task-function }\n\nCreate a function to be run as the background task.\n\nIt is just a standard function that can receive parameters.\n\nIt can be an `async def` or normal `def` function, **FastAPI** will know how to handle it correctly.\n\nIn this case, the task function will write to a file (simulating sending an email).\n\nAnd as the write operation doesn't use `async` and `await`, we define the function with normal `def`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[6:9] *}\n\n## Add the background task { #add-the-background-task }\n\nInside of your *path operation function*, pass your task function to the *background tasks* object ",
+          "page": null,
+          "start_offset": 810,
+          "end_offset": 1810
+        },
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0002",
+          "text": " the background task { #add-the-background-task }\n\nInside of your *path operation function*, pass your task function to the *background tasks* object with the method `.add_task()`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[14] *}\n\n`.add_task()` receives as arguments:\n\n* A task function to be run in the background (`write_notification`).\n* Any sequence of arguments that should be passed to the task function in order (`email`).\n* Any keyword arguments that should be passed to the task function (`message=\"some notification\"`).\n\n## Dependency Injection { #dependency-injection }\n\nUsing `BackgroundTasks` also works with the dependency injection system, you can declare a parameter of type `BackgroundTasks` at multiple levels: in a *path operation function*, in a dependency (dependable), in a sub-dependency, etc.\n\n**FastAPI** knows what to do in each case and how to reuse the same object, so that all the background tasks are merged together and are run in the background ",
+          "page": null,
+          "start_offset": 1660,
+          "end_offset": 2655
+        },
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0003",
+          "text": "** knows what to do in each case and how to reuse the same object, so that all the background tasks are merged together and are run in the background afterwards:\n\n\n{* ../../docs_src/background_tasks/tutorial002_an_py310.py hl[13,15,22,25] *}\n\n\nIn this example, the messages will be written to the `log.txt` file *after* the response is sent.\n\nIf there was a query in the request, it will be written to the log in a background task.\n\nAnd then another background task generated at the *path operation function* will write a message using the `email` path parameter.\n\n## Technical Details { #technical-details }\n\nThe class `BackgroundTasks` comes directly from [`starlette.background`](https://starlette.dev/background/).\n\nIt is imported/included directly into FastAPI so that you can import it from `fastapi` and avoid accidentally importing the alternative `BackgroundTask` (without the `s` at the end) from `starlette.background`.\n\nBy only using `BackgroundTasks` (and not `BackgroundTask`), it's ",
+          "page": null,
+          "start_offset": 2505,
+          "end_offset": 3502
+        }
+      ],
+      "oracle": {
+        "id": "sample-003",
+        "family_id": "C3-F01",
+        "provenance": "public",
+        "language": "en",
+        "expected_status": "answered",
+        "required_facts": [
+          {
+            "id": "C3-CAL-02-F1",
+            "text": "Import BackgroundTasks and declare a parameter of that type in the path operation function; FastAPI creates the object and passes it into that parameter.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0001",
+                  "start_offset": 821,
+                  "end_offset": 956,
+                  "quote": "First, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0001",
+                  "start_offset": 1026,
+                  "end_offset": 1126,
+                  "quote": "**FastAPI** will create the object of type `BackgroundTasks` for you and pass it as that parameter.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-02-F2",
+            "text": "A background task function may be a normal def function or an async def function; FastAPI handles either form.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0001",
+                  "start_offset": 1182,
+                  "end_offset": 1234,
+                  "quote": "Create a function to be run as the background task.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0001",
+                  "start_offset": 1296,
+                  "end_offset": 1397,
+                  "quote": "It can be an `async def` or normal `def` function, **FastAPI** will know how to handle it correctly.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-02-F3",
+            "text": "Inside the path operation, use the task object's .add_task() method with the task function, its positional arguments in order, and any keyword arguments.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0002",
+                  "start_offset": 1711,
+                  "end_offset": 1841,
+                  "quote": "Inside of your *path operation function*, pass your task function to the *background tasks* object with the method `.add_task()`:\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0002",
+                  "start_offset": 1909,
+                  "end_offset": 2208,
+                  "quote": "`.add_task()` receives as arguments:\n\n* A task function to be run in the background (`write_notification`).\n* Any sequence of arguments that should be passed to the task function in order (`email`).\n* Any keyword arguments that should be passed to the task function (`message=\"some notification\"`).\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-02-F4",
+            "text": "BackgroundTasks parameters may be declared in the path operation, dependencies and sub-dependencies; FastAPI reuses the same object and merges the tasks from those levels.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0002",
+                  "start_offset": 2260,
+                  "end_offset": 2495,
+                  "quote": "Using `BackgroundTasks` also works with the dependency injection system, you can declare a parameter of type `BackgroundTasks` at multiple levels: in a *path operation function*, in a dependency (dependable), in a sub-dependency, etc.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0002",
+                  "start_offset": 2496,
+                  "end_offset": 2655,
+                  "quote": "**FastAPI** knows what to do in each case and how to reuse the same object, so that all the background tasks are merged together and are run in the background "
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0003",
+                  "start_offset": 2505,
+                  "end_offset": 2667,
+                  "quote": "** knows what to do in each case and how to reuse the same object, so that all the background tasks are merged together and are run in the background afterwards:\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-02-F5",
+            "text": "The background tasks are run after the response is returned rather than requiring the client to wait for their completion.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                  "start_offset": 42,
+                  "end_offset": 114,
+                  "quote": "You can define background tasks to be run *after* returning a response.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                  "start_offset": 115,
+                  "end_offset": 297,
+                  "quote": "This is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n"
+                }
+              ]
+            ]
+          }
+        ],
+        "unanswerable_reason": null,
+        "forbidden_inferences": [
+          "Do not claim that each dependency receives an isolated task collection or that tasks are discarded at dependency boundaries.",
+          "Do not replace BackgroundTasks with the singular BackgroundTask without describing a different manual response construction; that is not the requested mechanism.",
+          "Do not invent execution concurrency, task ordering guarantees, retries, persistence, or code from the unresolved example includes."
+        ],
+        "limitations": [
+          "The two overlapping whole evidence units for the reuse/merge paragraph jointly preserve its subject and ending; neither fragment alone is declared sufficient for that whole fact.",
+          "No external example file has been adopted or executed."
+        ],
+        "question_author": "/root/c2_calibration_source",
+        "oracle_author": "/root/c2_calibration_source",
+        "independent_prereviewer": "/root/c3_calibration_source_review",
+        "human_review_count": 0
+      },
+      "answer": {
+        "status": "abstained",
+        "reason": "insufficient_evidence",
+        "claims": []
+      }
+    },
+    {
+      "sample_id": "sample-004",
+      "question": "솔그늘도서관이 이동서가를 재배치한 목적과 승인한 범위는 무엇이었고, 작업 중 실제로 어떤 위치 조정을 했나요? 작업일과 이용 상황을 기록할 기간, 영구 배치 여부를 정하기 위한 후속 절차도 설명해 주세요.",
+      "response_language": "ko",
+      "contexts": [
+        {
+          "document_id": "c3-cal-library-relocation-meeting",
+          "revision": 1,
+          "title": "솔그늘도서관 이동서가 재배치 회의 기록",
+          "meeting_date": "2026-04-07",
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+          "text": "# 솔그늘도서관 이동서가 재배치 회의 기록\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n회의일: 2026-04-07\n참석: 관장 차소연, 자료 담당 사서 문다은, 시설 담당 류정호, 이용자 안내 담당 배윤슬\n기록: 문다은\n\n## 재배치 배경과 검토한 안\n\n성인자료실 입구의 반납 도서 대기 카트가 수필 서가 앞에 머무르면서, 책을 고르는 이용자와 반납 정리 담당자의 동선이 겹친다는 의견이 접수되었다. 이번 회의는 서가 수를 늘리거나 장서를 폐기하는 회의가 아니라 기존 가구의 위치를 시험적으로 조정하는 자리였다.\n\n문다은은 수필용 이동서가 두 대를 창가 열람석 쪽으로 옮기고 반납 카트는 직원 작업대 옆에 두자는 안을 설명했다. 배윤슬은 창가 좌석에서 책장이 시야를 가릴 수 있다는 의견을 냈다. 류정호는 북쪽 벽에 두 대를 붙이는 대안을 제시했지만, 그 위치에서는 벽면 점검함을 열기 어려워 채택하지 않았다.\n\n## 확정한 범위와 운영 방식\n\n차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n\n서가를 옮기기 전에는 책을 순서대로 임시 카트에 옮기고 각 칸의 청구기호 범위를 남긴다. 장서의 등록번호와 대출 상태는 바꾸지 않는다. 배치가 끝나면 류정호가 통로와 점검함 접근 상태를 확인하고 문다은이 책의 배열과 위치 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n\n| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998
+        },
+        {
+          "document_id": "c3-cal-library-relocation-meeting",
+          "revision": 1,
+          "title": "솔그늘도서관 이동서가 재배치 회의 기록",
+          "meeting_date": "2026-04-07",
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+          "text": " 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n\n| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 서가 배치표 준비 | 새 서가 위치와 책 배열 대조 결과 |\n| 류정호 | 이동 경로 정리와 가구 상태 확인 | 통로·점검함 접근 확인 결과 |\n| 배윤슬 | 휴관 작업 안내와 임시 대출 안내문 준비 | 개관 후 이용자 의견 기록 |\n\n배윤슬이 제안한 창가 독서모임 좌석 증설은 이번 작업과 함께 진행하지 않는다. 시범 운영 의견을 모은 뒤 별도 안건으로 다룬다. 안내 데스크는 책 위치를 찾기 어려웠다는 의견과 좌석 시야에 대한 의견을 구분해 기록하기로 했다.\n\n## 다음 확인\n\n작업 당일 발견한 문제가 있으면 원래 계획과 실제 조치를 함께 인계장에 적는다. 담당자가 현장에서 가구 위치를 조금 조정한 경우에도 이유와 확인 결과를 남긴다. 문다은은 4월 24일 기록을 취합하고, 차소연은 그 기록을 검토할 다음 회의 일정을 별도로 정한다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1414
+        },
+        {
+          "document_id": "c3-cal-library-relocation-handover",
+          "revision": 1,
+          "title": "솔그늘도서관 서가 이동 작업 및 개관 인계장",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+          "text": "# 솔그늘도서관 서가 이동 작업 및 개관 인계장\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n\n## 휴관일 작업 기록\n\n문다은은 수필용 이동서가 두 대의 책을 청구기호 구간별로 나누어 임시 카트에 옮겼다. 이동 전 배치표와 각 카트의 표찰을 대조한 뒤 류정호에게 빈 서가를 인계했다. 장서 등록번호와 대출 상태는 이번 작업에서 수정하지 않았다.\n\n류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n\n책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n\n## 4월 14일 개관 인계\n\n| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998
+        },
+        {
+          "document_id": "c3-cal-library-relocation-handover",
+          "revision": 1,
+          "title": "솔그늘도서관 서가 이동 작업 및 개관 인계장",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+          "text": " 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 다시 대조 |\n| 반납 도서 대기 카트 | 직원 작업대 옆으로 이동 완료 | 반납 정리 담당자가 작업 뒤 같은 자리에 복귀 |\n| 어린이자료실 고정 서가 | 이동하지 않음 | 기존 안내 유지 |\n\n문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n\n오전에는 수필 서가 위치를 묻는 문의가 있었고, 배윤슬은 위치 안내 기록에 남겼다. 창가 좌석 증설은 작업하지 않았다. 이동한 서가의 최종 유지 여부는 아직 결정되지 않았으며, 4월 24일까지 모을 의견과 작업 기록을 다음 논의에 넘긴다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1392
+        }
+      ],
+      "oracle": {
+        "id": "sample-004",
+        "family_id": "C3-F02",
+        "provenance": "synthetic",
+        "language": "ko",
+        "expected_status": "answered",
+        "required_facts": [
+          {
+            "id": "C3-CAL-04-F1",
+            "text": "성인자료실 입구의 반납 카트 때문에 수필 서가 이용자와 반납 정리 담당자의 동선이 겹친다는 의견을 계기로 기존 가구의 위치를 시험 조정한 것이다. 서가 수 확대나 장서 폐기가 목적은 아니었다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                  "start_offset": 211,
+                  "end_offset": 356,
+                  "quote": "성인자료실 입구의 반납 도서 대기 카트가 수필 서가 앞에 머무르면서, 책을 고르는 이용자와 반납 정리 담당자의 동선이 겹친다는 의견이 접수되었다. 이번 회의는 서가 수를 늘리거나 장서를 폐기하는 회의가 아니라 기존 가구의 위치를 시험적으로 조정하는 자리였다.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-04-F2",
+            "text": "승인된 범위는 수필용 이동서가 두 대를 창가 열람석과 평행하게 두는 시범 배치이며, 어린이자료실 고정 서가와 정기간행물 진열대는 이동 대상에서 제외됐다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                  "start_offset": 357,
+                  "end_offset": 523,
+                  "quote": "문다은은 수필용 이동서가 두 대를 창가 열람석 쪽으로 옮기고 반납 카트는 직원 작업대 옆에 두자는 안을 설명했다. 배윤슬은 창가 좌석에서 책장이 시야를 가릴 수 있다는 의견을 냈다. 류정호는 북쪽 벽에 두 대를 붙이는 대안을 제시했지만, 그 위치에서는 벽면 점검함을 열기 어려워 채택하지 않았다.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                  "start_offset": 542,
+                  "end_offset": 724,
+                  "quote": "차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-04-F3",
+            "text": "작업일은 2026-04-13 정기 휴관일이고 이용 상황은 다음 개관일부터 4월 24일까지 기록하기로 했다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                  "start_offset": 117,
+                  "end_offset": 192,
+                  "quote": "회의일: 2026-04-07\n참석: 관장 차소연, 자료 담당 사서 문다은, 시설 담당 류정호, 이용자 안내 담당 배윤슬\n기록: 문다은\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                  "start_offset": 542,
+                  "end_offset": 724,
+                  "quote": "차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 120,
+                  "end_offset": 219,
+                  "quote": "문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-04-F4",
+            "text": "류정호는 첫 번째 서가가 창가 커튼을 잡아당길 손자리를 가리는 것을 발견해 그 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄으며, 창가 열람석과 평행한 방향은 유지했다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 361,
+                  "end_offset": 612,
+                  "quote": "류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-04-F5",
+            "text": "회의의 승인은 영구 배치 확정이 아니며, 후속 인계장 시점에도 이동한 서가의 최종 유지 여부는 결정되지 않았다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                  "start_offset": 542,
+                  "end_offset": 724,
+                  "quote": "차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                  "start_offset": 120,
+                  "end_offset": 219,
+                  "quote": "문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+                  "start_offset": 1258,
+                  "end_offset": 1392,
+                  "quote": "오전에는 수필 서가 위치를 묻는 문의가 있었고, 배윤슬은 위치 안내 기록에 남겼다. 창가 좌석 증설은 작업하지 않았다. 이동한 서가의 최종 유지 여부는 아직 결정되지 않았으며, 4월 24일까지 모을 의견과 작업 기록을 다음 논의에 넘긴다.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-04-F6",
+            "text": "문다은이 4월 24일 기록을 취합하고 차소연이 그 기록을 검토할 다음 회의 일정을 별도로 정해, 기록을 바탕으로 유지 여부를 다시 논의하기로 했다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                  "start_offset": 542,
+                  "end_offset": 724,
+                  "quote": "차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+                  "start_offset": 1268,
+                  "end_offset": 1414,
+                  "quote": "작업 당일 발견한 문제가 있으면 원래 계획과 실제 조치를 함께 인계장에 적는다. 담당자가 현장에서 가구 위치를 조금 조정한 경우에도 이유와 확인 결과를 남긴다. 문다은은 4월 24일 기록을 취합하고, 차소연은 그 기록을 검토할 다음 회의 일정을 별도로 정한다.\n"
+                }
+              ]
+            ]
+          }
+        ],
+        "unanswerable_reason": null,
+        "forbidden_inferences": [
+          "현장 조정을 북쪽 벽 배치안의 채택이라고 바꾸거나 커튼 간섭을 점검함 문제로 바꿔 설명하지 않는다.",
+          "창가 좌석 증설, 어린이 고정 서가 이동, 정기간행물 진열대 이동이나 영구 배치 확정이 완료됐다고 주장하지 않는다.",
+          "다음 회의의 날짜·참석자·결과나 이용 개선 효과를 만들어내지 않는다."
+        ],
+        "limitations": [
+          "AI 합성 도서관 기록에 대한 질문이며 실제 기관의 관측 결과가 아니다.",
+          "회의는 계획·승인을, 인계장은 이후 실제 조치로 설정한 경과를 증명한다. 둘을 하나의 시점으로 합치지 않는다."
+        ],
+        "question_author": "/root/c2_calibration_source",
+        "oracle_author": "/root/c2_calibration_source",
+        "independent_prereviewer": "/root/c3_calibration_source_review",
+        "human_review_count": 0
+      },
+      "answer": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "text": "성인자료실 입구 반납 도서 대기 카트와 서가 사이에서 이용자와 담당자의 동선이 겹치는 문제를 해결하기 위해 기존 가구의 위치를 시험적으로 조정하는 것이 재배치 목적이었다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                "quote": "성인자료실 입구의 반납 도서 대기 카트가 수필 서가 앞에 머무르면서, 책을 고르는 이용자와 반납 정리 담당자의 동선이 겹친다는 의견이 접수되었다. 이번 회의는 서가 수를 늘리거나 장서를 폐기하는 회의가 아니라 기존 가구의 위치를 시험적으로 조정하는 자리였다.\n",
+                "start_offset": 211,
+                "end_offset": 356
+              }
+            ]
+          },
+          {
+            "text": "승인된 범위는 어린이자료실의 고정 서가와 정기간행물 진열대를 제외한 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영이었다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                "quote": "차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n",
+                "start_offset": 542,
+                "end_offset": 724
+              }
+            ]
+          },
+          {
+            "text": "작업 중 첫 번째 서가를 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 방지하기 위해 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n",
+                "start_offset": 361,
+                "end_offset": 612
+              }
+            ]
+          },
+          {
+            "text": "다음 개관일부터 4 월 24일까지의 기간 동안 이용 상황을 기록하도록 승인되었다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                "quote": "차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n",
+                "start_offset": 542,
+                "end_offset": 724
+              }
+            ]
+          },
+          {
+            "text": "4 월 24 일의 기록을 문다은이 취합한 후 차소연이 검토하여 다음 회의에서 유지 여부를 다시 논의하는 절차로 영구 배치 여부가 결정된다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                "quote": "차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n",
+                "start_offset": 542,
+                "end_offset": 724
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+                "quote": "작업 당일 발견한 문제가 있으면 원래 계획과 실제 조치를 함께 인계장에 적는다. 담당자가 현장에서 가구 위치를 조금 조정한 경우에도 이유와 확인 결과를 남긴다. 문다은은 4월 24일 기록을 취합하고, 차소연은 그 기록을 검토할 다음 회의 일정을 별도로 정한다.\n",
+                "start_offset": 1268,
+                "end_offset": 1414
+              }
+            ]
+          },
+          {
+            "text": "서가 재배치 작업은 2026 년 4 월 13 일 정기 휴관일에 수행되었다.",
+            "citations": [
+              {
+                "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+                "quote": "차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n",
+                "start_offset": 542,
+                "end_offset": 724
+              },
+              {
+                "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+                "quote": "문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n",
+                "start_offset": 120,
+                "end_offset": 219
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "sample-005",
+      "question": "FastAPI에서 간단한 이메일 알림을 클라이언트가 기다리지 않게 처리하려면 어떤 방식을 쓰고 언제 실행하나요? 그 방식은 서버 프로세스가 중단된 작업을 재시작 뒤 정확히 몇 번 재시도하도록 보장하나요?",
+      "response_language": "ko",
+      "contexts": [
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+          "text": "# Background Tasks { #background-tasks }\n\nYou can define background tasks to be run *after* returning a response.\n\nThis is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n\nThis includes, for example:\n\n* Email notifications sent after performing an action:\n    * As connecting to an email server and sending an email tends to be \"slow\" (several seconds), you can return the response right away and send the email notification in the background.\n* Processing data:\n    * For example, let's say you receive a file that must go through a slow process, you can return a response of \"Accepted\" (HTTP 202) and process the file in the background.\n\n## Using `BackgroundTasks` { #using-backgroundtasks }\n\nFirst, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n\n{* ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 960
+        },
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0004",
+          "text": "ernative `BackgroundTask` (without the `s` at the end) from `starlette.background`.\n\nBy only using `BackgroundTasks` (and not `BackgroundTask`), it's then possible to use it as a *path operation function* parameter and have **FastAPI** handle the rest for you, just like when using the `Request` object directly.\n\nIt's still possible to use `BackgroundTask` alone in FastAPI, but you have to create the object in your code and return a Starlette `Response` including it.\n\nYou can see more details in [Starlette's official docs for Background Tasks](https://starlette.dev/background/).\n\n## Caveat { #caveat }\n\nIf you need to perform heavy background computation and you don't necessarily need it to be run by the same process (for example, you don't need to share memory, variables, etc), you might benefit from using other bigger tools like [Celery](https://docs.celeryq.dev).\n\nThey tend to require more complex configurations, a message/job queue manager, like RabbitMQ or Redis, but they allow you ",
+          "page": null,
+          "start_offset": 3352,
+          "end_offset": 4352
+        },
+        {
+          "document_id": "c3-cal-fastapi-background-tasks",
+          "revision": 1,
+          "title": "FastAPI — Background Tasks",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0005",
+          "text": "https://docs.celeryq.dev).\n\nThey tend to require more complex configurations, a message/job queue manager, like RabbitMQ or Redis, but they allow you to run background tasks in multiple processes, and especially, in multiple servers.\n\nBut if you need to access variables and objects from the same **FastAPI** app, or you need to perform small background tasks (like sending an email notification), you can simply just use `BackgroundTasks`.\n\n## Recap { #recap }\n\nImport and use `BackgroundTasks` with parameters in *path operation functions* and dependencies to add background tasks.\n",
+          "page": null,
+          "start_offset": 4202,
+          "end_offset": 4786
+        }
+      ],
+      "oracle": {
+        "id": "sample-005",
+        "family_id": "C3-F01",
+        "provenance": "public",
+        "language": "ko",
+        "expected_status": "abstained",
+        "required_facts": [
+          {
+            "id": "C3-CAL-03-F1",
+            "text": "간단한 이메일 알림에는 BackgroundTasks를 사용할 수 있으며, 응답을 반환한 뒤 작업을 실행해 클라이언트가 완료를 기다리지 않게 할 수 있다.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                  "start_offset": 42,
+                  "end_offset": 114,
+                  "quote": "You can define background tasks to be run *after* returning a response.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+                  "start_offset": 115,
+                  "end_offset": 297,
+                  "quote": "This is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n"
+                },
+                {
+                  "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0005",
+                  "start_offset": 4437,
+                  "end_offset": 4643,
+                  "quote": "But if you need to access variables and objects from the same **FastAPI** app, or you need to perform small background tasks (like sending an email notification), you can simply just use `BackgroundTasks`.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-03-F2",
+            "text": "서버 프로세스가 중단한 작업을 재시작 후 정확히 몇 번 재시도하도록 보장하는지에 대한 수치와 보장 조건이 필요하다.",
+            "evidence_alternatives": []
+          }
+        ],
+        "unanswerable_reason": "Background Tasks와 Lifespan Events 두 채택 원문 전체를 확인했다. 간단한 알림의 방식과 실행 시점은 있지만, 프로세스 중단 후 재시작한 작업의 보장 재시도 횟수나 그 보장 조건은 제시되지 않는다. 정상 앱 시작·종료 설명과 다른 도구의 링크로 이 필수 수치를 대신할 수 없어 질문 전체를 보류해야 한다.",
+        "forbidden_inferences": [
+          "자료에 재시도 수치가 없다는 이유로 보장 횟수가 0회라고 단정하지 않는다.",
+          "Celery나 메시지 큐가 언급됐다는 사실만으로 BackgroundTasks의 내구성 또는 재시도 정책을 만들어내지 않는다.",
+          "알려진 이메일 처리 방식만 답하고 질문 전체를 answered로 처리하지 않는다."
+        ],
+        "limitations": [
+          "정보 부재 확인은 선택된 청크만이 아니라 채택된 C3-F01 원문 두 개 전체에 대해 수행했다.",
+          "이는 문서 근거의 부족이며 FastAPI 실제 구현의 재시도 횟수에 대한 외부 지식 판정이 아니다."
+        ],
+        "question_author": "/root/c2_calibration_source",
+        "oracle_author": "/root/c2_calibration_source",
+        "independent_prereviewer": "/root/c3_calibration_source_review",
+        "human_review_count": 0
+      },
+      "answer": {
+        "status": "abstained",
+        "reason": "insufficient_evidence",
+        "claims": []
+      }
+    },
+    {
+      "sample_id": "sample-006",
+      "question": "For Solgeuneul Library's shelving trial, who was responsible for recording user feedback and who was to compile it, and what was the final percentage of respondents who favored keeping the new layout?",
+      "response_language": "en",
+      "contexts": [
+        {
+          "document_id": "c3-cal-library-relocation-meeting",
+          "revision": 1,
+          "title": "솔그늘도서관 이동서가 재배치 회의 기록",
+          "meeting_date": "2026-04-07",
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+          "text": "# 솔그늘도서관 이동서가 재배치 회의 기록\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n회의일: 2026-04-07\n참석: 관장 차소연, 자료 담당 사서 문다은, 시설 담당 류정호, 이용자 안내 담당 배윤슬\n기록: 문다은\n\n## 재배치 배경과 검토한 안\n\n성인자료실 입구의 반납 도서 대기 카트가 수필 서가 앞에 머무르면서, 책을 고르는 이용자와 반납 정리 담당자의 동선이 겹친다는 의견이 접수되었다. 이번 회의는 서가 수를 늘리거나 장서를 폐기하는 회의가 아니라 기존 가구의 위치를 시험적으로 조정하는 자리였다.\n\n문다은은 수필용 이동서가 두 대를 창가 열람석 쪽으로 옮기고 반납 카트는 직원 작업대 옆에 두자는 안을 설명했다. 배윤슬은 창가 좌석에서 책장이 시야를 가릴 수 있다는 의견을 냈다. 류정호는 북쪽 벽에 두 대를 붙이는 대안을 제시했지만, 그 위치에서는 벽면 점검함을 열기 어려워 채택하지 않았다.\n\n## 확정한 범위와 운영 방식\n\n차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n\n서가를 옮기기 전에는 책을 순서대로 임시 카트에 옮기고 각 칸의 청구기호 범위를 남긴다. 장서의 등록번호와 대출 상태는 바꾸지 않는다. 배치가 끝나면 류정호가 통로와 점검함 접근 상태를 확인하고 문다은이 책의 배열과 위치 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n\n| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998
+        },
+        {
+          "document_id": "c3-cal-library-relocation-meeting",
+          "revision": 1,
+          "title": "솔그늘도서관 이동서가 재배치 회의 기록",
+          "meeting_date": "2026-04-07",
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+          "text": " 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n\n| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 서가 배치표 준비 | 새 서가 위치와 책 배열 대조 결과 |\n| 류정호 | 이동 경로 정리와 가구 상태 확인 | 통로·점검함 접근 확인 결과 |\n| 배윤슬 | 휴관 작업 안내와 임시 대출 안내문 준비 | 개관 후 이용자 의견 기록 |\n\n배윤슬이 제안한 창가 독서모임 좌석 증설은 이번 작업과 함께 진행하지 않는다. 시범 운영 의견을 모은 뒤 별도 안건으로 다룬다. 안내 데스크는 책 위치를 찾기 어려웠다는 의견과 좌석 시야에 대한 의견을 구분해 기록하기로 했다.\n\n## 다음 확인\n\n작업 당일 발견한 문제가 있으면 원래 계획과 실제 조치를 함께 인계장에 적는다. 담당자가 현장에서 가구 위치를 조금 조정한 경우에도 이유와 확인 결과를 남긴다. 문다은은 4월 24일 기록을 취합하고, 차소연은 그 기록을 검토할 다음 회의 일정을 별도로 정한다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1414
+        },
+        {
+          "document_id": "c3-cal-library-relocation-handover",
+          "revision": 1,
+          "title": "솔그늘도서관 서가 이동 작업 및 개관 인계장",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+          "text": "# 솔그늘도서관 서가 이동 작업 및 개관 인계장\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n\n## 휴관일 작업 기록\n\n문다은은 수필용 이동서가 두 대의 책을 청구기호 구간별로 나누어 임시 카트에 옮겼다. 이동 전 배치표와 각 카트의 표찰을 대조한 뒤 류정호에게 빈 서가를 인계했다. 장서 등록번호와 대출 상태는 이번 작업에서 수정하지 않았다.\n\n류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n\n책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n\n## 4월 14일 개관 인계\n\n| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998
+        },
+        {
+          "document_id": "c3-cal-library-relocation-handover",
+          "revision": 1,
+          "title": "솔그늘도서관 서가 이동 작업 및 개관 인계장",
+          "meeting_date": null,
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+          "text": " 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 다시 대조 |\n| 반납 도서 대기 카트 | 직원 작업대 옆으로 이동 완료 | 반납 정리 담당자가 작업 뒤 같은 자리에 복귀 |\n| 어린이자료실 고정 서가 | 이동하지 않음 | 기존 안내 유지 |\n\n문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n\n오전에는 수필 서가 위치를 묻는 문의가 있었고, 배윤슬은 위치 안내 기록에 남겼다. 창가 좌석 증설은 작업하지 않았다. 이동한 서가의 최종 유지 여부는 아직 결정되지 않았으며, 4월 24일까지 모을 의견과 작업 기록을 다음 논의에 넘긴다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1392
+        }
+      ],
+      "oracle": {
+        "id": "sample-006",
+        "family_id": "C3-F02",
+        "provenance": "synthetic",
+        "language": "en",
+        "expected_status": "abstained",
+        "required_facts": [
+          {
+            "id": "C3-CAL-06-F1",
+            "text": "Bae Yun-seul was responsible for recording user feedback after reopening.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+                  "start_offset": 925,
+                  "end_offset": 1129,
+                  "quote": "| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 서가 배치표 준비 | 새 서가 위치와 책 배열 대조 결과 |\n| 류정호 | 이동 경로 정리와 가구 상태 확인 | 통로·점검함 접근 확인 결과 |\n| 배윤슬 | 휴관 작업 안내와 임시 대출 안내문 준비 | 개관 후 이용자 의견 기록 |\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-06-F2",
+            "text": "Moon Da-eun was to compile the records on April 24.",
+            "evidence_alternatives": [
+              [
+                {
+                  "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+                  "start_offset": 1268,
+                  "end_offset": 1414,
+                  "quote": "작업 당일 발견한 문제가 있으면 원래 계획과 실제 조치를 함께 인계장에 적는다. 담당자가 현장에서 가구 위치를 조금 조정한 경우에도 이유와 확인 결과를 남긴다. 문다은은 4월 24일 기록을 취합하고, 차소연은 그 기록을 검토할 다음 회의 일정을 별도로 정한다.\n"
+                }
+              ]
+            ]
+          },
+          {
+            "id": "C3-CAL-06-F3",
+            "text": "The final percentage of respondents who favored retaining the new layout is required.",
+            "evidence_alternatives": []
+          }
+        ],
+        "unanswerable_reason": "Both adopted C3-F02 documents were reviewed in full. They assign feedback recording and compilation and describe early operation, but provide neither a final approval percentage nor respondent counts from which it could be calculated. The handover still leaves the layout decision pending. The required final result is absent from the entire adopted family, so the whole question must be abstained.",
+        "forbidden_inferences": [
+          "Do not treat the existence of a position inquiry as a vote or derive an approval percentage from it.",
+          "Do not give 0%, 100%, a majority, a denominator, or a final adoption decision that the records do not provide.",
+          "Do not answer only the known assignments and mark the whole question answered."
+        ],
+        "limitations": [
+          "Whole-family absence was checked across both complete synthetic bodies, not created by omitting an available result chunk.",
+          "This is a fictional record with no human/user survey evidence; future planned record collection is not a completed result."
+        ],
+        "question_author": "/root/c2_calibration_source",
+        "oracle_author": "/root/c2_calibration_source",
+        "independent_prereviewer": "/root/c3_calibration_source_review",
+        "human_review_count": 0
+      },
+      "answer": {
+        "status": "abstained",
+        "reason": "insufficient_evidence",
+        "claims": []
+      }
+    }
+  ]
+}

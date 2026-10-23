@@ -1,0 +1,681 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "cases": [
+    {
+      "id": "C5-CAL-01",
+      "family_id": "c5-f01",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "c5-cal-01-fact-01",
+          "text": "Open Mainframe Project 회원에 소속되어 있거나, Open Mainframe Project가 호스팅하는 프로젝트의 기여자여야 한다. 두 경로는 대안 관계다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-03-r1-c0001",
+                "start_offset": 1059,
+                "end_offset": 1743,
+                "quote": "- Must be affiliated with an Open Mainframe Project member OR is a contributor to an Open Mainframe Project hosted project.\n- Must be at least 18 years of age.\n- Must be a participant (TSC member, maintainer, contributor, or equivalent) in the project for which you want to be a mentor.\n- Should have significant experience on the subject matter and the skills that the mentees will be developing.\n- Must not be subject to any obligations to third parties (such as contractual obligations to an employer) that would restrict or prohibit performing as a mentor.\n- Must be able to devote sufficient time to assisting one or more mentees on a regular basis throughout their mentorships.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-01-fact-02",
+          "text": "멘토는 만 18세 이상이어야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-03-r1-c0001",
+                "start_offset": 1059,
+                "end_offset": 1743,
+                "quote": "- Must be affiliated with an Open Mainframe Project member OR is a contributor to an Open Mainframe Project hosted project.\n- Must be at least 18 years of age.\n- Must be a participant (TSC member, maintainer, contributor, or equivalent) in the project for which you want to be a mentor.\n- Should have significant experience on the subject matter and the skills that the mentees will be developing.\n- Must not be subject to any obligations to third parties (such as contractual obligations to an employer) that would restrict or prohibit performing as a mentor.\n- Must be able to devote sufficient time to assisting one or more mentees on a regular basis throughout their mentorships.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-01-fact-03",
+          "text": "멘토링하려는 바로 그 프로젝트의 참여자여야 하며, TSC 위원·메인테이너·기여자 또는 이에 준하는 참여가 해당한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-03-r1-c0001",
+                "start_offset": 1059,
+                "end_offset": 1743,
+                "quote": "- Must be affiliated with an Open Mainframe Project member OR is a contributor to an Open Mainframe Project hosted project.\n- Must be at least 18 years of age.\n- Must be a participant (TSC member, maintainer, contributor, or equivalent) in the project for which you want to be a mentor.\n- Should have significant experience on the subject matter and the skills that the mentees will be developing.\n- Must not be subject to any obligations to third parties (such as contractual obligations to an employer) that would restrict or prohibit performing as a mentor.\n- Must be able to devote sufficient time to assisting one or more mentees on a regular basis throughout their mentorships.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-01-fact-04",
+          "text": "해당 주제와 멘티가 개발할 기술에 상당한 경험이 있는 것이 권고된다. 이 항목의 표현은 Should이며, 다른 Must 항목과 같은 필수 조건으로 바꾸지 않는다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-03-r1-c0001",
+                "start_offset": 1059,
+                "end_offset": 1743,
+                "quote": "- Must be affiliated with an Open Mainframe Project member OR is a contributor to an Open Mainframe Project hosted project.\n- Must be at least 18 years of age.\n- Must be a participant (TSC member, maintainer, contributor, or equivalent) in the project for which you want to be a mentor.\n- Should have significant experience on the subject matter and the skills that the mentees will be developing.\n- Must not be subject to any obligations to third parties (such as contractual obligations to an employer) that would restrict or prohibit performing as a mentor.\n- Must be able to devote sufficient time to assisting one or more mentees on a regular basis throughout their mentorships.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-01-fact-05",
+          "text": "고용주와의 계약 등 제3자에 대한 의무가 멘토 활동을 제한하거나 금지해서는 안 된다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-03-r1-c0001",
+                "start_offset": 1059,
+                "end_offset": 1743,
+                "quote": "- Must be affiliated with an Open Mainframe Project member OR is a contributor to an Open Mainframe Project hosted project.\n- Must be at least 18 years of age.\n- Must be a participant (TSC member, maintainer, contributor, or equivalent) in the project for which you want to be a mentor.\n- Should have significant experience on the subject matter and the skills that the mentees will be developing.\n- Must not be subject to any obligations to third parties (such as contractual obligations to an employer) that would restrict or prohibit performing as a mentor.\n- Must be able to devote sufficient time to assisting one or more mentees on a regular basis throughout their mentorships.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-01-fact-06",
+          "text": "멘토십 기간 전체에 걸쳐 한 명 이상의 멘티를 정기적으로 돕는 데 충분한 시간을 쓸 수 있어야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-03-r1-c0001",
+                "start_offset": 1059,
+                "end_offset": 1743,
+                "quote": "- Must be affiliated with an Open Mainframe Project member OR is a contributor to an Open Mainframe Project hosted project.\n- Must be at least 18 years of age.\n- Must be a participant (TSC member, maintainer, contributor, or equivalent) in the project for which you want to be a mentor.\n- Should have significant experience on the subject matter and the skills that the mentees will be developing.\n- Must not be subject to any obligations to third parties (such as contractual obligations to an employer) that would restrict or prohibit performing as a mentor.\n- Must be able to devote sufficient time to assisting one or more mentees on a regular basis throughout their mentorships.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-cal-doc-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2018-01-11"
+        },
+        {
+          "document_id": "c5-cal-doc-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2018-02-08"
+        },
+        {
+          "document_id": "c5-cal-doc-03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "안내문이 2018년에도 유효했다고 추론하지 않는다.",
+        "소속과 기여 두 경로를 모두 충족해야 한다고 바꾸지 않는다.",
+        "경험에 관한 권고를 필수 조건이나 보장으로 바꾸지 않는다.",
+        "특정 근무시간 수나 추가 자격증 조건을 만들지 않는다."
+      ],
+      "limitations": [
+        "제공된 고정 revision의 안내문 내용만 묻는다. 2018년 적용 여부와 외부 링크 내용은 범위 밖이다.",
+        "목록 전체가 하나의 구조 블록이므로 각 자격 사실의 인용 블록은 동일하다. 겹침 청크의 잘린 마지막 문장은 충분한 독립 대안이 아니다."
+      ],
+      "question_author": "/root/c5_calibration_author",
+      "oracle_author": "/root/c5_calibration_author",
+      "independent_prereviewer": "/root/c5_calibration_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-CAL-02",
+      "family_id": "c5-f01",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "c5-cal-02-fact-01",
+          "text": "At the January 11 meeting, Mertic reported 26 applications for the internship program.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-01-r1-c0001",
+                "start_offset": 1349,
+                "end_offset": 1679,
+                "quote": "Mr. Mertic said we've had 26 applications for the internship program. There was also discussion on helping interns with thier proposals, and Mr. Mertic proposed adding a Discourse section for this. Mr. Santalucia also volunteered to hold a teleconference for all the intern applicants, which Mr. Mertic agreed to help coordinate.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-02-fact-02",
+          "text": "Mertic proposed adding a Discourse section to help interns with their proposals.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-01-r1-c0001",
+                "start_offset": 1349,
+                "end_offset": 1679,
+                "quote": "Mr. Mertic said we've had 26 applications for the internship program. There was also discussion on helping interns with thier proposals, and Mr. Mertic proposed adding a Discourse section for this. Mr. Santalucia also volunteered to hold a teleconference for all the intern applicants, which Mr. Mertic agreed to help coordinate.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-02-fact-03",
+          "text": "Santalucia volunteered to hold a teleconference for all intern applicants, and Mertic agreed to help coordinate it.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-01-r1-c0001",
+                "start_offset": 1349,
+                "end_offset": 1679,
+                "quote": "Mr. Mertic said we've had 26 applications for the internship program. There was also discussion on helping interns with thier proposals, and Mr. Mertic proposed adding a Discourse section for this. Mr. Santalucia also volunteered to hold a teleconference for all the intern applicants, which Mr. Mertic agreed to help coordinate.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-02-fact-04",
+          "text": "At the February 8 meeting, Dahlberg reported 47 applicants.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-02-r1-c0000",
+                "start_offset": 923,
+                "end_offset": 996,
+                "quote": "Mr. Dahlberg indicated that there were 47 applicants, and that after the "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c5-cal-doc-02-r1-c0001",
+                "start_offset": 923,
+                "end_offset": 1150,
+                "quote": "Mr. Dahlberg indicated that there were 47 applicants, and that after the call for proposals closes on 2/15 he will engage mentors to start going through applications and dividing up the reviews based upon projects applied for.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-02-fact-05",
+          "text": "After the proposal call closed on February 15, Dahlberg planned to engage mentors to review applications and divide the reviews according to the projects applied for.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-02-r1-c0001",
+                "start_offset": 923,
+                "end_offset": 1150,
+                "quote": "Mr. Dahlberg indicated that there were 47 applicants, and that after the call for proposals closes on 2/15 he will engage mentors to start going through applications and dividing up the reviews based upon projects applied for.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-cal-doc-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2018-01-11"
+        },
+        {
+          "document_id": "c5-cal-doc-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2018-02-08"
+        },
+        {
+          "document_id": "c5-cal-doc-03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not describe the proposed Discourse section or volunteered teleconference as already implemented or completed.",
+        "Do not describe the February review plan as a completed selection or infer accepted-intern counts.",
+        "Do not use the later pinned mentorship guide as a policy governing the 2018 meetings."
+      ],
+      "limitations": [
+        "These are contemporaneous meeting reports and prospective actions, not proof that applicant support or review was completed.",
+        "The shorter overlapping February block independently preserves the full applicant-count clause, so it is an additional sufficient alternative for the count only."
+      ],
+      "question_author": "/root/c5_calibration_author",
+      "oracle_author": "/root/c5_calibration_author",
+      "independent_prereviewer": "/root/c5_calibration_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-CAL-03",
+      "family_id": "c5-f01",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "c5-cal-03-fact-01",
+          "text": "2월 8일 회의에 정족수가 없어서 VM Workshop 2018 후원 문제에 대한 투표를 현장에서 마치지 못했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-02-r1-c0002",
+                "start_offset": 1753,
+                "end_offset": 2051,
+                "quote": "Mr. Mertic indicated that marketing committee has decided to pass the question of sponsoring VM Workshop 2018 to the TSC, as they felt it was more of a community event. All in attendance generally agreed, however since there isn't wasn't a quorum Mr. Mertic said he would take the vote over email.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-03-fact-02",
+          "text": "Mertic은 이메일로 투표를 진행하겠다고 말했다. 이는 당시 예정한 다음 절차다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-02-r1-c0002",
+                "start_offset": 1753,
+                "end_offset": 2051,
+                "quote": "Mr. Mertic indicated that marketing committee has decided to pass the question of sponsoring VM Workshop 2018 to the TSC, as they felt it was more of a community event. All in attendance generally agreed, however since there isn't wasn't a quorum Mr. Mertic said he would take the vote over email.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-03-fact-03",
+          "text": "그 뒤 이메일 투표의 최종 승인 또는 부결 결과는 제공된 자료에 없다.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "c5-cal-03-fact-04",
+          "text": "최종 확정된 후원 금액은 제공된 자료에 없다.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-cal-doc-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2018-01-11"
+        },
+        {
+          "document_id": "c5-cal-doc-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2018-02-08"
+        },
+        {
+          "document_id": "c5-cal-doc-03",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": "두 회의록과 안내문 전체에는 2월 8일 당시의 정족수 부재와 이메일 투표 계획만 있고, 이후 이메일 투표의 최종 결과와 확정 후원 금액이 없다. 요청한 필수정보가 빠져 전체 답변을 보류해야 한다.",
+      "forbidden_inferences": [
+        "이메일 투표 계획을 실제 투표 실시나 승인으로 바꾸지 않는다.",
+        "참석자들의 일반적 동의를 정식 후원 승인으로 취급하지 않는다.",
+        "정족수 부재를 부결로 해석하지 않는다.",
+        "미기재 금액을 0원 또는 다른 임의 금액으로 채우지 않는다."
+      ],
+      "limitations": [
+        "공개 family의 두 회의록과 안내문 전체를 확인해도 후속 이메일 투표 결과와 확정 금액은 없다.",
+        "질문의 일부 사실은 있어도 핵심 요청 둘이 빠지므로 전체 보류가 필요하다. 외부 링크의 문서는 제공되지 않았다."
+      ],
+      "question_author": "/root/c5_calibration_author",
+      "oracle_author": "/root/c5_calibration_author",
+      "independent_prereviewer": "/root/c5_calibration_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-CAL-04",
+      "family_id": "c5-f02",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "c5-cal-04-fact-01",
+          "text": "9월 2일 운영안의 대여 대상은 낭독 프로그램을 운영하는 협력 도서관이며 개인에게 직접 대여하지 않는다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-04-r1-c0000",
+                "start_offset": 144,
+                "end_offset": 342,
+                "quote": "모래등 소리도서관은 마을 작은도서관에서 사용할 이동 청취함을 빌려주는 가상의 공동작업실이다. 한 함에는 충전식 재생기 한 대, 머리띠형 헤드폰 두 개, 큰 글씨 사용안내 한 장을 넣는다. 청취함은 낭독 프로그램을 운영하는 협력 도서관에만 빌려주며 개인에게 직접 대여하지 않는다. 9월에는 세 함을 준비하고, 시험 결과를 보고 정규 대여 여부를 결정한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-04-fact-02",
+          "text": "9월 23일 회의에서는 버드나무 작은도서관의 10월 7일 행사에 셋째 함을 보내기로 했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-06-r1-c0000",
+                "start_offset": 525,
+                "end_offset": 720,
+                "quote": "세 사람은 버드나무 작은도서관의 10월 7일 행사에 셋째 함을 보내기로 했다. 인계 예정일은 10월 6일이다. 다만 하린의 안내문 수정과 윤서의 수령 담당자 확인을 모두 마친 뒤 대여를 최종 확정한다. 둘째 함은 계속 예비 장비로 남긴다. 정규 대여 전환은 두 번째 행사 결과를 본 뒤 논의하며, 이번 결정은 10월 한 차례 추가 시범에 한정한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-04-fact-03",
+          "text": "인계 예정일은 10월 6일이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-06-r1-c0000",
+                "start_offset": 525,
+                "end_offset": 720,
+                "quote": "세 사람은 버드나무 작은도서관의 10월 7일 행사에 셋째 함을 보내기로 했다. 인계 예정일은 10월 6일이다. 다만 하린의 안내문 수정과 윤서의 수령 담당자 확인을 모두 마친 뒤 대여를 최종 확정한다. 둘째 함은 계속 예비 장비로 남긴다. 정규 대여 전환은 두 번째 행사 결과를 본 뒤 논의하며, 이번 결정은 10월 한 차례 추가 시범에 한정한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-04-fact-04",
+          "text": "대여를 최종 확정하려면 하린의 안내문 수정과 윤서의 수령 담당자 확인을 모두 마쳐야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-06-r1-c0000",
+                "start_offset": 525,
+                "end_offset": 720,
+                "quote": "세 사람은 버드나무 작은도서관의 10월 7일 행사에 셋째 함을 보내기로 했다. 인계 예정일은 10월 6일이다. 다만 하린의 안내문 수정과 윤서의 수령 담당자 확인을 모두 마친 뒤 대여를 최종 확정한다. 둘째 함은 계속 예비 장비로 남긴다. 정규 대여 전환은 두 번째 행사 결과를 본 뒤 논의하며, 이번 결정은 10월 한 차례 추가 시범에 한정한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-04-fact-05",
+          "text": "이 결정은 10월 한 차례 추가 시범에 한정되며 정규 대여 전환은 두 번째 행사 결과를 본 뒤 논의한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-06-r1-c0000",
+                "start_offset": 525,
+                "end_offset": 720,
+                "quote": "세 사람은 버드나무 작은도서관의 10월 7일 행사에 셋째 함을 보내기로 했다. 인계 예정일은 10월 6일이다. 다만 하린의 안내문 수정과 윤서의 수령 담당자 확인을 모두 마친 뒤 대여를 최종 확정한다. 둘째 함은 계속 예비 장비로 남긴다. 정규 대여 전환은 두 번째 행사 결과를 본 뒤 논의하며, 이번 결정은 10월 한 차례 추가 시범에 한정한다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-cal-doc-04",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-cal-doc-05",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-09-09"
+        },
+        {
+          "document_id": "c5-cal-doc-06",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-09-23"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "9월 운영안이 10월에도 자동으로 그대로 적용된다고 단정하지 않는다.",
+        "예정된 인계나 조건부 대여가 이미 완료됐다고 바꾸지 않는다.",
+        "두 조건 중 하나만 충족하면 최종 확정된다고 바꾸지 않는다.",
+        "추가 시범을 정규 대여 전환이나 모든 도서관 대상 확대 결정으로 바꾸지 않는다."
+      ],
+      "limitations": [
+        "9월 2일 운영안의 대상 범위와 9월 23일 추가 시범 결정을 각각 설명한다. 운영안의 유효기간을 임의로 연장하지 않는다.",
+        "가상의 조직 기록이며 실제 도서관 운영이나 사람에 관한 사실이 아니다."
+      ],
+      "question_author": "/root/c5_calibration_author",
+      "oracle_author": "/root/c5_calibration_author",
+      "independent_prereviewer": "/root/c5_calibration_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-CAL-05",
+      "family_id": "c5-f02",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "c5-cal-05-fact-01",
+          "text": "Feedback is collected on paper cards after the event, with no fields for participants to enter names or contact details.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-04-r1-c0000",
+                "start_offset": 902,
+                "end_offset": 999,
+                "quote": "이용 소감은 행사 뒤 종이 카드로 받되 이름과 연락처를 적는 칸은 만들지 않는다. 하린은 카드의 내용을 접근성, 음질, 진행 방식으로 분류하고 원본은 분류 완료 후 30일이 "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c5-cal-doc-04-r1-c0001",
+                "start_offset": 902,
+                "end_offset": 1094,
+                "quote": "이용 소감은 행사 뒤 종이 카드로 받되 이름과 연락처를 적는 칸은 만들지 않는다. 하린은 카드의 내용을 접근성, 음질, 진행 방식으로 분류하고 원본은 분류 완료 후 30일이 지나면 폐기한다. 협력 도서관의 연락처는 장비 인수와 반납에만 사용한다. 9월 말 운영 회의에서는 장비 점검 기록과 익명 의견을 함께 보고 다음 달 운영 범위를 정한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-05-fact-02",
+          "text": "Harin classifies the card contents into accessibility, audio quality, and program delivery or facilitation.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-04-r1-c0000",
+                "start_offset": 902,
+                "end_offset": 999,
+                "quote": "이용 소감은 행사 뒤 종이 카드로 받되 이름과 연락처를 적는 칸은 만들지 않는다. 하린은 카드의 내용을 접근성, 음질, 진행 방식으로 분류하고 원본은 분류 완료 후 30일이 "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c5-cal-doc-04-r1-c0001",
+                "start_offset": 902,
+                "end_offset": 1094,
+                "quote": "이용 소감은 행사 뒤 종이 카드로 받되 이름과 연락처를 적는 칸은 만들지 않는다. 하린은 카드의 내용을 접근성, 음질, 진행 방식으로 분류하고 원본은 분류 완료 후 30일이 지나면 폐기한다. 협력 도서관의 연락처는 장비 인수와 반납에만 사용한다. 9월 말 운영 회의에서는 장비 점검 기록과 익명 의견을 함께 보고 다음 달 운영 범위를 정한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-05-fact-03",
+          "text": "The original cards are discarded once 30 days have passed after classification is completed.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-04-r1-c0001",
+                "start_offset": 902,
+                "end_offset": 1094,
+                "quote": "이용 소감은 행사 뒤 종이 카드로 받되 이름과 연락처를 적는 칸은 만들지 않는다. 하린은 카드의 내용을 접근성, 음질, 진행 방식으로 분류하고 원본은 분류 완료 후 30일이 지나면 폐기한다. 협력 도서관의 연락처는 장비 인수와 반납에만 사용한다. 9월 말 운영 회의에서는 장비 점검 기록과 익명 의견을 함께 보고 다음 달 운영 범위를 정한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-05-fact-04",
+          "text": "Partner-library contact details are used only for equipment handover and return.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-04-r1-c0001",
+                "start_offset": 902,
+                "end_offset": 1094,
+                "quote": "이용 소감은 행사 뒤 종이 카드로 받되 이름과 연락처를 적는 칸은 만들지 않는다. 하린은 카드의 내용을 접근성, 음질, 진행 방식으로 분류하고 원본은 분류 완료 후 30일이 지나면 폐기한다. 협력 도서관의 연락처는 장비 인수와 반납에만 사용한다. 9월 말 운영 회의에서는 장비 점검 기록과 익명 의견을 함께 보고 다음 달 운영 범위를 정한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-05-fact-05",
+          "text": "At the end-of-September operations meeting, equipment inspection records and anonymous feedback are reviewed together to decide the scope of operations for the following month.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-04-r1-c0001",
+                "start_offset": 902,
+                "end_offset": 1094,
+                "quote": "이용 소감은 행사 뒤 종이 카드로 받되 이름과 연락처를 적는 칸은 만들지 않는다. 하린은 카드의 내용을 접근성, 음질, 진행 방식으로 분류하고 원본은 분류 완료 후 30일이 지나면 폐기한다. 협력 도서관의 연락처는 장비 인수와 반납에만 사용한다. 9월 말 운영 회의에서는 장비 점검 기록과 익명 의견을 함께 보고 다음 달 운영 범위를 정한다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-cal-doc-04",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-cal-doc-05",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-09-09"
+        },
+        {
+          "document_id": "c5-cal-doc-06",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-09-23"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not start the retention period at the event date or the date the cards are received; it starts after classification is complete.",
+        "Do not add participant identifiers or repurpose library contacts for marketing.",
+        "Do not treat the planned end-of-month review as a completed decision or claim that the September plan automatically governs October."
+      ],
+      "limitations": [
+        "The subject is the September 2 operating plan, not a claim about subsequent real-world compliance.",
+        "Both overlapping blocks fully state the collection and classification propositions. Only the longer block completes the disposal rule and later provisions.",
+        "Names may be transliterated; no official English organization or person names are asserted."
+      ],
+      "question_author": "/root/c5_calibration_author",
+      "oracle_author": "/root/c5_calibration_author",
+      "independent_prereviewer": "/root/c5_calibration_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-CAL-06",
+      "family_id": "c5-f02",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "c5-cal-06-fact-01",
+          "text": "The September 23 meeting did not finalize the additional equipment-purchase budget.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-06-r1-c0000",
+                "start_offset": 721,
+                "end_offset": 895,
+                "quote": "윤서는 두 번째 행사가 끝나면 반납 일정과 점검 기록을 모은다. 하린은 새 안내문에 대한 익명 의견을 기존 분류와 나누어 정리한다. 도윤은 버튼 표식이 떨어지거나 조작을 방해하지 않는지도 반납 점검에 포함한다. 다음 회의는 10월 14일 오후 2시로 잡았으며, 추가 구입 예산은 이번 회의에서 확정하지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "c5-cal-06-fact-02",
+          "text": "The organization funding an additional equipment purchase is not identified in the supplied records.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "c5-cal-06-fact-03",
+          "text": "An exact approved purchase-budget amount is not provided in the supplied records.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "c5-cal-06-fact-04",
+          "text": "The next meeting scheduled on September 23 is October 14 at 2 p.m.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-cal-doc-06-r1-c0000",
+                "start_offset": 721,
+                "end_offset": 895,
+                "quote": "윤서는 두 번째 행사가 끝나면 반납 일정과 점검 기록을 모은다. 하린은 새 안내문에 대한 익명 의견을 기존 분류와 나누어 정리한다. 도윤은 버튼 표식이 떨어지거나 조작을 방해하지 않는지도 반납 점검에 포함한다. 다음 회의는 10월 14일 오후 2시로 잡았으며, 추가 구입 예산은 이번 회의에서 확정하지 않았다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-cal-doc-04",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-cal-doc-05",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-09-09"
+        },
+        {
+          "document_id": "c5-cal-doc-06",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-09-23"
+        }
+      ],
+      "unanswerable_reason": "The full operating plan and both meetings do not identify a purchase-funding organization or an exact approved amount. The September 23 minutes explicitly leave the additional purchase budget unfinalized, so the composite request requires abstention.",
+      "forbidden_inferences": [
+        "Do not turn an unfinalized budget into a zero budget, a denial, an approved amount, or a known funder.",
+        "Do not infer a purchase commitment or funding source from the existing three kits.",
+        "Do not substitute the September 23 meeting announced in the earlier minutes for the next meeting scheduled by the September 23 minutes."
+      ],
+      "limitations": [
+        "All three fictional-family documents were read in full and are supplied as whole chunks; neither a funding organization nor an approved amount appears.",
+        "Known budget status and next-meeting information do not make the entire composite request answerable.",
+        "This is an AI-authored fictional organization; no real funding or purchase is implied."
+      ],
+      "question_author": "/root/c5_calibration_author",
+      "oracle_author": "/root/c5_calibration_author",
+      "independent_prereviewer": "/root/c5_calibration_prereviewer",
+      "human_review_count": 0
+    }
+  ]
+}

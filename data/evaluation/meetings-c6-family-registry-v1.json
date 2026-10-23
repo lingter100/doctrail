@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c6-family-registry-v1",
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "reused_policy_id": "meeting-answer-single-thinking-c4-v1",
+  "scope": "Static structure only; actual sources, roles, reviewers and judges are separate later records",
+  "protocol": {
+    "path": "data/evaluation/meetings-c6-protocol-v1.json",
+    "sha256": "10f1ab558996f99b577bb61c533f4b202d73c25fbde42a94e674cb4d3201d691"
+  },
+  "registration_head": "5657bb1b814be7728c9706723b22be31c732e317",
+  "families": [
+    {
+      "family_id": "c6-f01",
+      "split": "calibration",
+      "provenance": "public",
+      "source_documents": {
+        "meetings": 2,
+        "general_documents": 1,
+        "distinct_meeting_dates": true
+      },
+      "case_membership": {
+        "ko_answered": 1,
+        "en_answered": 1,
+        "ko_abstained": 1,
+        "en_abstained": 0
+      },
+      "source_selection": "not_started_at_registration",
+      "source_identity": null
+    },
+    {
+      "family_id": "c6-f02",
+      "split": "calibration",
+      "provenance": "synthetic",
+      "source_documents": {
+        "meetings": 2,
+        "general_documents": 1,
+        "distinct_meeting_dates": true
+      },
+      "case_membership": {
+        "ko_answered": 1,
+        "en_answered": 1,
+        "ko_abstained": 0,
+        "en_abstained": 1
+      },
+      "source_selection": "not_started_at_registration",
+      "source_identity": null
+    },
+    {
+      "family_id": "c6-f03",
+      "split": "validation",
+      "provenance": "public",
+      "source_documents": {
+        "meetings": 2,
+        "general_documents": 1,
+        "distinct_meeting_dates": true
+      },
+      "case_membership": {
+        "ko_answered": 1,
+        "en_answered": 1,
+        "ko_abstained": 1,
+        "en_abstained": 1
+      },
+      "source_selection": "not_started_at_registration",
+      "source_identity": null
+    },
+    {
+      "family_id": "c6-f04",
+      "split": "validation",
+      "provenance": "synthetic",
+      "source_documents": {
+        "meetings": 2,
+        "general_documents": 1,
+        "distinct_meeting_dates": true
+      },
+      "case_membership": {
+        "ko_answered": 1,
+        "en_answered": 1,
+        "ko_abstained": 1,
+        "en_abstained": 1
+      },
+      "source_selection": "not_started_at_registration",
+      "source_identity": null
+    }
+  ],
+  "split_structure": {
+    "calibration": {
+      "cases": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2
+    },
+    "validation": {
+      "cases": 8,
+      "ko": 4,
+      "en": 4,
+      "answered": 4,
+      "abstained": 4
+    }
+  },
+  "source_documents_total": 12,
+  "per_split_answerable_coverage": {
+    "general_document_only_min": 1,
+    "multiple_meetings_min": 1,
+    "general_document_plus_meeting_min": 1,
+    "unavoidably_multi_document_min": 2,
+    "ko_query_requiring_en_evidence_min": 1,
+    "en_query_requiring_ko_evidence_min": 1,
+    "required_facts_min": 3,
+    "required_facts_max": 6
+  },
+  "actual_at_registration": {
+    "source_adoptions": 0,
+    "source_authorship": 0,
+    "questions": 0,
+    "oracles": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "human_reviews": 0,
+    "source_or_final_judge_assignments": 0
+  },
+  "freshness": {
+    "old_closed_bodies_not_opened": true,
+    "prior_metadata_index": "required_before_source_adoption",
+    "actual_family_identity_between_splits": "must_be_disjoint"
+  },
+  "exposure": "Designer, parent and implementer know policy, composition, prior public aggregate and resource metadata; they are excluded from final independent judging",
+  "future_actual_role_and_judge_registration": "Separately committed execution-plan bindings; never edit this frozen structure to add assignments"
+}

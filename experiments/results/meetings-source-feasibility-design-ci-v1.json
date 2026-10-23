@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "source_feasibility_design_ci_observation",
+  "recorded_at_utc": "2026-10-20T06:22:50.778159+00:00",
+  "head": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+  "runs": [
+    {
+      "run_id": 39379534450,
+      "event": "push",
+      "head": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39379534450"
+    },
+    {
+      "run_id": 39379540590,
+      "event": "pull_request",
+      "head": "2e398ec95b0cd640a995a02d5f0056ef18b083bf",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39379540590"
+    }
+  ],
+  "pre_dispatch_proof": {
+    "path": ".local/meetings-source-feasibility-parent-v1/pre-dispatch-code-proof-v1.json",
+    "sha256": "6c3875726ecd1b35d6cc5cc4ff3fae91c9fdf41f642b69a48997dae8e86372c8",
+    "committed_and_working": 80,
+    "frozen_code_protocol_bindings": 77,
+    "working_bindings_rechecked_after_ci": 80
+  },
+  "new_source_discovery_before_dispatch": 0,
+  "formal_admission_processor_tokenizer_model_calls": 0,
+  "goal": "active",
+  "phase1_complete": false
+}

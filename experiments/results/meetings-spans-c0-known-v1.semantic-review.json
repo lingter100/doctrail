@@ -1,0 +1,542 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-spans-c0",
+  "phase": "known",
+  "review_type": "independent_ai_semantic_review_of_known_development_cases",
+  "reviewed_at": "2026-10-13T07:26:19.603802+00:00",
+  "source_commit": "7c5904206adf07bc849091ca26a217d005ff8818",
+  "report_path": "experiments/results/meetings-spans-c0-known-v1.json",
+  "report_sha256": "9ebd0cebfd91fe02690448d27166a3480a1d8361ea46fa3f6dd717eaa8518808",
+  "plan_path": "data/evaluation/meetings-span-c0-plan-v1.json",
+  "plan_sha256": "a9f316dc9f6e102c5ec1ae304dbcd51c5491e39d1554e6493490018663a8c60e",
+  "input_path": "data/evaluation/meetings-gguf-development-v1.json",
+  "input_sha256": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+  "architecture_proposal_sha256": "e50209d39d6d005697a4cd401af9c002e165b5269f1432e6d8799cbaa5220d1d",
+  "independent_of_implementation": true,
+  "reviewer": {
+    "role": "independent_semantic_reviewer",
+    "agent": "/root/meeting_span_semantic",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "settings_evidence": "Parent confirmed the actual spawn_agent call specified model=gpt-6-astra, reasoning_effort=xhigh, fork_turns=none and the tool accepted this agent. This does not assert that the parent model was changed.",
+    "human_review_count": 0,
+    "implementation_participation": false,
+    "custodian_role": false,
+    "model_identity_blinded": false,
+    "previous_candidate_raw_outputs_read": false,
+    "previous_semantic_review_receipts_read": false,
+    "prior_failure_summary_exposure": "The required architecture proposal describes general prior failure types. No previous candidate outputs or semantic reviews were opened.",
+    "independent_judgment": "Verdicts were formed from the C0 output, supplied known-case contexts and allowed source fixtures. The parent provided no case-level prior judgments."
+  },
+  "review_protocol": {
+    "gate_rule": "All four known cases must pass structure, exact citations, support for every added fact, every requested facet, language and correct answer/abstention status. Any single case failure makes gate_passed false.",
+    "support_scope": "Each claim must be supported by its attached exact quotes, interpreted with their supplied source metadata. Full context may establish meaning, but uncited adjacent text cannot supply a missing factual premise.",
+    "date_rule": "Meeting/reporting dates do not establish the actual date of a reported release or operational completion. A listed agenda item or proposed action does not establish completion.",
+    "no_leniency": "Plausibility, exact string validity, semantic support elsewhere in the context, and overall topical relevance do not rescue an unsupported added fact.",
+    "input_filter": "Reviewed exactly the four case IDs bound by the known phase. The original development file contains a separate analysis case that was excluded from semantic output review.",
+    "validation_data_accessed": false,
+    "m5b_validation_accessed": false,
+    "final_test_accessed": false,
+    "additional_service_model_calls": 0,
+    "model_calls": 0,
+    "paid_service_calls": 0,
+    "code_or_prompt_changes": 0,
+    "output_rewrites": 0
+  },
+  "mechanical_verification": {
+    "report_hash_matches_requested": true,
+    "plan_hash_matches_report": true,
+    "input_hash_matches_plan": true,
+    "all_bound_fixture_hashes_match": true,
+    "fixture_hash_scope": "The seven fixture paths explicitly named by the known-input file were hash-checked. No validation paths were traversed or opened.",
+    "quote_count": 9,
+    "exact_quotes_passed": 9,
+    "quote_offset_basis": "Python Unicode code point slicing of the exact supplied context, relative to each context start_offset; no normalization."
+  },
+  "cases": [
+    {
+      "semantic_passed": false,
+      "all_claims_supported_by_selected_citations": false,
+      "question_completeness_passed": true,
+      "required_facets_missing": [],
+      "required_facets_assessment": [
+        {
+          "facet": "February report concerning JupyterLab 4.4 beta",
+          "covered": true,
+          "assessment": "The answer preserves the announcement that the beta would be released that day; it does not claim the beta actually shipped that day."
+        },
+        {
+          "facet": "June report concerning JupyterLab 4.4 availability",
+          "covered": true,
+          "assessment": "The answer reports that the June meeting said JupyterLab 4.4 was released. Both requested months are covered."
+        }
+      ],
+      "date_and_status_assessment": {
+        "passed": false,
+        "supported_date_uses": "February and June are the reporting/meeting months supplied in the contexts. The June sentence says it was reported in June, so it does not explicitly invent June as the actual release date.",
+        "unsupported_status_change": "The February demo is an agenda entry, not evidence that Mike completed the demo. The source fixture explicitly places the bullet under Agenda Items and says to add agenda items before the meeting. The answer changes that listing into the completed event gave a demo."
+      },
+      "language_assessment": {
+        "expected": "en",
+        "passed": true,
+        "reason": "Both claims are natural English."
+      },
+      "abstention_assessment": {
+        "expected_status": "answered",
+        "observed_status": "answered",
+        "passed": true,
+        "reason": "The supplied February and June report excerpts support a substantive answer; abstention is not required."
+      },
+      "claim_reviews": [
+        {
+          "claim_index": 1,
+          "supported": false,
+          "supported_facts": [
+            "The February source associates Mike Krassowski with a JupyterLab 4.4 demo agenda item.",
+            "The February report announces that the JupyterLab 4.4 beta will be released today; would be released on that day faithfully preserves its prospective status.",
+            "The selected sources belong to the February 19, 2025 meeting according to their supplied metadata."
+          ],
+          "unsupported_facts": [
+            {
+              "text": "Mike Krassowski gave a demo of JupyterLab 4.4",
+              "failure_type": "agenda_listing_promoted_to_completed_event",
+              "reason": "Neither selected quote states that the demo occurred. The full February source clarifies that the demo bullet is an agenda item entered before the meeting. A likely occurrence is insufficient under the all-added-facts rule.",
+              "source_excerpt": "## Agenda Items\n\nAdd agenda items here **before** the meeting. We will reorganize the agenda so that it fits in the 60m meeting slot.",
+              "source_path": "tests/fixtures/meetings/public/jupyter-february-2025.md"
+            }
+          ],
+          "citation_relevance_notes": "Both citations concern the claimed subject, but relevance and exact copying do not establish completion of the demo.",
+          "claim_text": "In February 2025, Mike Krassowski gave a demo of JupyterLab 4.4, and it was announced that the JupyterLab 4.4 beta would be released on that day.",
+          "selected_citations": [
+            {
+              "chunk_id": "253afb2e7ea3405286a18555e89e1d50",
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 demo\n",
+              "start_offset": 4883,
+              "end_offset": 4925
+            },
+            {
+              "chunk_id": "a0e73dd03ff84abab42d500ce960bd04",
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers: \n",
+              "start_offset": 3397,
+              "end_offset": 3481
+            }
+          ],
+          "citation_checks": [
+            {
+              "citation_index": 1,
+              "chunk_id": "253afb2e7ea3405286a18555e89e1d50",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": "2025-02-19",
+              "source_revision": 1
+            },
+            {
+              "citation_index": 2,
+              "chunk_id": "a0e73dd03ff84abab42d500ce960bd04",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": "2025-02-19",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "supported": true,
+          "supported_facts": [
+            "The June source reports that JupyterLab 4.4 is out.",
+            "In June modifies the reporting occasion, which is supported by the selected source meeting_date 2025-06-11."
+          ],
+          "unsupported_facts": [],
+          "citation_relevance_notes": "The selected release-status sentence directly supports the report. The answer does not assert the exact release date.",
+          "claim_text": "In June 2025, it was reported that JupyterLab 4.4 was released.",
+          "selected_citations": [
+            {
+              "chunk_id": "50f7c21b5bee441bad95ff391bfaa0b2",
+              "quote": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out\n",
+              "start_offset": 2056,
+              "end_offset": 2281
+            }
+          ],
+          "citation_checks": [
+            {
+              "citation_index": 1,
+              "chunk_id": "50f7c21b5bee441bad95ff391bfaa0b2",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": "2025-06-11",
+              "source_revision": 1
+            }
+          ]
+        }
+      ],
+      "failure_codes": [
+        "UNSUPPORTED_COMPLETED_EVENT"
+      ],
+      "verdict_reason": "Fail despite exact quotes and coverage of both months: the additional completed-demo claim lacks support.",
+      "id": "cross-public",
+      "query": "What was reported about JupyterLab 4.4 in February and June?",
+      "observed_status": "answered",
+      "observed_reason": null,
+      "structural_status_reported": "passed",
+      "full_provided_context_reviewed": true,
+      "provided_context_count": 5,
+      "quotes_correct": true,
+      "quotes_checked": 3
+    },
+    {
+      "semantic_passed": true,
+      "all_claims_supported_by_selected_citations": true,
+      "question_completeness_passed": true,
+      "required_facets_missing": [],
+      "required_facets_assessment": [
+        {
+          "facet": "A catering budget, if supplied evidence establishes one",
+          "covered": true,
+          "assessment": "All five supplied contexts concern meeting hosting, agendas, calendars, recordings and follow-up. None gives a catering allocation, amount, currency, spending policy or a statement that the budget is zero. Correct abstention fully handles this unanswerable request."
+        }
+      ],
+      "date_and_status_assessment": {
+        "passed": true,
+        "reason": "No dated event, proposal, completion or budget fact was invented."
+      },
+      "language_assessment": {
+        "expected": "en",
+        "passed": true,
+        "reason": "The abstained contract contains no generated natural-language claim; no conflicting response language is introduced. This does not count as an English prose answer."
+      },
+      "abstention_assessment": {
+        "expected_status": "abstained",
+        "observed_status": "abstained",
+        "passed": true,
+        "reason": "The requested catering budget is absent from every supplied context. The result uses insufficient_evidence and an empty claims array."
+      },
+      "claim_reviews": [],
+      "failure_codes": [],
+      "verdict_reason": "Pass: warranted abstention without unsupported budget speculation.",
+      "id": "missing-budget",
+      "query": "What is the Jupyter community meeting catering budget?",
+      "observed_status": "abstained",
+      "observed_reason": "insufficient_evidence",
+      "structural_status_reported": "passed",
+      "full_provided_context_reviewed": true,
+      "provided_context_count": 5,
+      "quotes_correct": true,
+      "quotes_checked": 0
+    },
+    {
+      "semantic_passed": true,
+      "all_claims_supported_by_selected_citations": true,
+      "question_completeness_passed": true,
+      "required_facets_missing": [],
+      "required_facets_assessment": [
+        {
+          "facet": "Where the agenda link belongs in meeting event information",
+          "covered": true,
+          "assessment": "The answer specifies the shared Google Calendar event description."
+        },
+        {
+          "facet": "Sharing the agenda link with meeting participants",
+          "covered": true,
+          "assessment": "The answer specifies sharing the agenda link in the chat. The supplied guide also discusses collaborative agenda creation and next-call topic submission; those contextual details do not add a separately requested link location, and the answer gives the two direct agenda-link instructions."
+        }
+      ],
+      "date_and_status_assessment": {
+        "passed": true,
+        "reason": "Both statements remain hosting instructions using should. Neither is represented as a completed action or dated event."
+      },
+      "language_assessment": {
+        "expected": "en",
+        "passed": true,
+        "reason": "Both claims are natural English."
+      },
+      "abstention_assessment": {
+        "expected_status": "answered",
+        "observed_status": "answered",
+        "passed": true,
+        "reason": "Both direct agenda-link instructions are supplied and quoted."
+      },
+      "claim_reviews": [
+        {
+          "claim_index": 1,
+          "supported": true,
+          "supported_facts": [
+            "The agenda link should be in the event description in the shared Google Calendar."
+          ],
+          "unsupported_facts": [],
+          "citation_relevance_notes": "The selected span states the same instruction verbatim. The claim uses a straight apostrophe in its prose; its actual citation preserves the source curly apostrophe.",
+          "claim_text": "The agenda link should be included in the event's description in the shared Google Calendar.",
+          "selected_citations": [
+            {
+              "chunk_id": "77c1a2849eb74e788dd1b3dc7bb649c8",
+              "quote": "Each meeting should have a collaborative public agenda document (for example on HackMD). The agenda link should be included in the event’s description in the shared Google Calendar.\n",
+              "start_offset": 737,
+              "end_offset": 919
+            }
+          ],
+          "citation_checks": [
+            {
+              "citation_index": 1,
+              "chunk_id": "77c1a2849eb74e788dd1b3dc7bb649c8",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": null,
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "supported": true,
+          "supported_facts": [
+            "The host should share the agenda link in the chat."
+          ],
+          "unsupported_facts": [],
+          "citation_relevance_notes": "The selected guide-script instruction explicitly says Share agenda link in the chat. Host attribution follows the supplied Host guide context and does not add a separate unsupported operational fact.",
+          "claim_text": "The host should share the agenda link in the chat.",
+          "selected_citations": [
+            {
+              "chunk_id": "fd828c0d8c29464d8d10bdd62dc2cca9",
+              "quote": "> If you have a topic you’d like to discuss, please add it to the agenda. (Share agenda link in the chat)\n",
+              "start_offset": 8675,
+              "end_offset": 8781
+            }
+          ],
+          "citation_checks": [
+            {
+              "citation_index": 1,
+              "chunk_id": "fd828c0d8c29464d8d10bdd62dc2cca9",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": null,
+              "source_revision": 1
+            }
+          ]
+        }
+      ],
+      "failure_codes": [],
+      "verdict_reason": "Pass: both requested agenda-link instructions are supported by their own exact citations.",
+      "id": "host-guide",
+      "query": "What does the host guide say about the agenda link?",
+      "observed_status": "answered",
+      "observed_reason": null,
+      "structural_status_reported": "passed",
+      "full_provided_context_reviewed": true,
+      "provided_context_count": 5,
+      "quotes_correct": true,
+      "quotes_checked": 2
+    },
+    {
+      "semantic_passed": false,
+      "all_claims_supported_by_selected_citations": false,
+      "question_completeness_passed": true,
+      "required_facets_missing": [],
+      "required_facets_assessment": [
+        {
+          "facet": "When the retention decision changed",
+          "covered": true,
+          "assessment": "The answer gives the October 1 original decision and October 8 follow-up meeting; these dates agree with the selected source metadata, and October 1 also appears in the selected follow-up quote."
+        },
+        {
+          "facet": "How the retention period changed",
+          "covered": true,
+          "assessment": "The answer gives the confirmed 30-day policy followed by the 7-day policy. It does not confuse the unapproved 90-day proposal with an adopted decision."
+        },
+        {
+          "facet": "Whether raw questions may be written to operational logs",
+          "covered": true,
+          "assessment": "The answer correctly says no and cites the runbook prohibition."
+        }
+      ],
+      "date_and_status_assessment": {
+        "passed": true,
+        "reason": "The answer frames the 30-to-7-day change as a change at the two meetings, which supports a policy-decision reading. It does not explicitly claim that Junho completed the implementation or deletion job. The rejected 90-day proposal remains distinct from the 30-day decision. Dates are meeting/decision dates, not evidence of operational rollout completion."
+      },
+      "language_assessment": {
+        "expected": "ko",
+        "passed": true,
+        "reason": "Both claims are natural Korean, including the claim supported by the English runbook."
+      },
+      "abstention_assessment": {
+        "expected_status": "answered",
+        "observed_status": "answered",
+        "passed": true,
+        "reason": "The contexts support all requested retention-history and logging-permission facets; abstention is not required."
+      },
+      "claim_reviews": [
+        {
+          "claim_index": 1,
+          "supported": false,
+          "supported_facts": [
+            "The October 1 meeting confirmed a 30-day search-log retention period.",
+            "The October 8 follow-up decided to replace the prior 30-day period with 7 days.",
+            "The 90-day suggestion was not approved; the answer does not present it as approved."
+          ],
+          "unsupported_facts": [
+            {
+              "text": "개인정보 노출 범위를 줄이기 위해",
+              "failure_type": "added_reason_not_supported_by_selected_citations",
+              "reason": "The reason is present elsewhere in the same supplied follow-up context, but none of this claim's three selected citations contains it. The architecture requires every fact to be supported by the citations attached to that claim; a nearby uncited sentence cannot repair this error.",
+              "uncited_supporting_excerpt": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.\n",
+              "source_chunk_id": "synthetic-release-followup.md-full",
+              "source_path": "tests/fixtures/meetings/synthetic-release-followup.md"
+            }
+          ],
+          "citation_relevance_notes": "The original 30-day decision and the 30-to-7-day replacement are relevant. The first selected quote concerns the rejected 90-day proposal and supplies no privacy rationale. No selected quote supports the added causal explanation.",
+          "claim_text": "검색 로그 보관 기간은 2026-10-01 회의에서 30일로 확정된 후, 2026-10-08 회의에서 개인정보 노출 범위를 줄이기 위해 7일로 변경되었습니다.",
+          "selected_citations": [
+            {
+              "chunk_id": "synthetic-release-planning.md-full",
+              "quote": "제안: 준호는 로그 보관 기간을 90일로 늘리자고 제안했다. 이 제안은 승인하지 않았다.\n",
+              "start_offset": 123,
+              "end_offset": 173
+            },
+            {
+              "chunk_id": "synthetic-release-planning.md-full",
+              "quote": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.\n",
+              "start_offset": 173,
+              "end_offset": 204
+            },
+            {
+              "chunk_id": "synthetic-release-followup.md-full",
+              "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.\n",
+              "start_offset": 82,
+              "end_offset": 147
+            }
+          ],
+          "citation_checks": [
+            {
+              "citation_index": 1,
+              "chunk_id": "synthetic-release-planning.md-full",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": "2026-10-01",
+              "source_revision": 1
+            },
+            {
+              "citation_index": 2,
+              "chunk_id": "synthetic-release-planning.md-full",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": "2026-10-01",
+              "source_revision": 1
+            },
+            {
+              "citation_index": 3,
+              "chunk_id": "synthetic-release-followup.md-full",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": "2026-10-08",
+              "source_revision": 1
+            }
+          ]
+        },
+        {
+          "claim_index": 2,
+          "supported": true,
+          "supported_facts": [
+            "Raw question text must not be written to operational logs."
+          ],
+          "unsupported_facts": [],
+          "citation_relevance_notes": "The selected runbook span expressly forbids logging raw question and document text. The Korean claim answers the raw-question part accurately without adding an exception.",
+          "claim_text": "원문 질문은 운영 로그에 남겨서는 안 됩니다.",
+          "selected_citations": [
+            {
+              "chunk_id": "synthetic-runbook.md-full",
+              "quote": "Search logs contain request IDs and safe error codes. Raw question text and document text must not be written to operational logs.\n",
+              "start_offset": 136,
+              "end_offset": 267
+            }
+          ],
+          "citation_checks": [
+            {
+              "citation_index": 1,
+              "chunk_id": "synthetic-runbook.md-full",
+              "known_context": true,
+              "within_context": true,
+              "exact_codepoint_slice": true,
+              "nonblank": true,
+              "declared_length_matches": true,
+              "source_meeting_date": null,
+              "source_revision": 1
+            }
+          ]
+        }
+      ],
+      "failure_codes": [
+        "UNSUPPORTED_ADDED_REASON_IN_SELECTED_CITATIONS"
+      ],
+      "verdict_reason": "Fail despite complete coverage and Korean output: the privacy rationale is not supported by any citation attached to its claim.",
+      "id": "korean-mixed-full-docs",
+      "query": "로그 보관 기간은 언제 어떻게 변경됐고 원문 질문을 운영 로그에 남겨도 되나요?",
+      "observed_status": "answered",
+      "observed_reason": null,
+      "structural_status_reported": "passed",
+      "full_provided_context_reviewed": true,
+      "provided_context_count": 3,
+      "quotes_correct": true,
+      "quotes_checked": 4
+    }
+  ],
+  "aggregate": {
+    "case_count": 4,
+    "structural_passed_reported": 4,
+    "exact_citation_cases_passed": 4,
+    "exact_quotes_passed": 9,
+    "exact_quotes_total": 9,
+    "semantic_cases_passed": 2,
+    "semantic_cases_failed": 2,
+    "claims_all_facts_supported": 4,
+    "claims_total": 6,
+    "question_completeness_cases_passed": 4,
+    "language_cases_passed": 4,
+    "date_and_status_cases_passed": 3,
+    "correct_abstentions": 1,
+    "required_abstentions": 1,
+    "incorrect_abstentions": 0,
+    "passed_ids": [
+      "missing-budget",
+      "host-guide"
+    ],
+    "failed_ids": [
+      "cross-public",
+      "korean-mixed-full-docs"
+    ],
+    "failure_types": [
+      "agenda_listing_promoted_to_completed_event",
+      "added_reason_not_supported_by_selected_citations"
+    ]
+  },
+  "gate_passed": false,
+  "disposition": "C0 known-case gate failed. Do not proceed to sealed validation or adopt the natural-language answer path on this evidence. Preserve this once-only result without output-driven retries or tuning.",
+  "limitations": [
+    "These four cases are known development cases, not held-out validation, and support no general quality claim.",
+    "Questions were AI-authored. Source contexts combine public documents and explicitly AI-authored synthetic fixtures; no human semantic review was performed.",
+    "Exact quotations demonstrate copying and location correctness only. They do not prove semantic support or completeness.",
+    "This review evaluates saved Python-adapter/model answers. It does not establish Java service performance, browser operations, deployment readiness or phase-1 completion."
+  ]
+}

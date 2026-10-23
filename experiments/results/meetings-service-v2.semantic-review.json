@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "kind": "independent_ai_semantic_review",
+  "review_date": "2026-10-13",
+  "report_path": "experiments/results/meetings-service-v2.json",
+  "report_sha256": "2ba5b24346ddf6594f113088505695a21d9f2fb8a835b289597a69696871e4af",
+  "report_execution_status": "failed",
+  "report_failure": "assigned_and_unassigned_actions",
+  "reviewer": {
+    "agent_task": "/root/meetings_review",
+    "actual_tool_accepted_settings": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "evidence": "parent_reported_tool_accepted_spawn_from_continuation_record",
+      "independently_exposed_in_reviewer_context": false
+    },
+    "human_review_count": 0,
+    "ai_authored": true,
+    "model_or_gpu_calls_by_reviewer": 0
+  },
+  "scope": {
+    "completed_analysis_entries": 4,
+    "public_analysis_entries": 2,
+    "synthetic_analysis_entries": 2,
+    "completed_answer_entries": 5,
+    "answer_entries_with_actual_model_call": 4,
+    "zero_model_call_abstention_entries": 1,
+    "m5_validation_accessed": false,
+    "span_checks": "Automatic span checks remain separate from claim-evidence semantic support.",
+    "evaluation_limit": "Repeated development inspection, not a held-out evaluation or general model-quality claim."
+  },
+  "provenance": {
+    "fixtures_sha256_verified_against_current_files": {
+      "tests/fixtures/meetings/synthetic-release-followup.md": "0f2e3bf13e65c8a6593b257dda36aed94873d0fdf4a9697380d87325e12c398a",
+      "tests/fixtures/meetings/synthetic-release-planning.md": "606678b791ad6b3e1dde1e1bb0189cf064d8152cbb6ccba405663d36500e5138",
+      "tests/fixtures/meetings/synthetic-runbook.md": "1e95de236f46967b54c8cef312fc305f206f5698ba9d38c288ee37c9b3582d4c",
+      "tests/fixtures/meetings/public/jupyter-february-2025.md": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+      "tests/fixtures/meetings/public/jupyter-host-guide.md": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f",
+      "tests/fixtures/meetings/public/jupyter-june-2025.md": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+      "tests/fixtures/meetings/public/jupyter-license.txt": "1b9f3955dcf9c235b10c168cca09b88c1f2adf992a0dc13120482d93037602ac"
+    },
+    "bound_execution_source_sha256": {
+      "src/doctrail/meeting_contract.py": "e6208677d5d7fdd4323e803d3f669e7b03b20af858b9e3bd43d794decc9a0591",
+      "src/doctrail/meeting_runtime.py": "9bb4ffb22ad62d01f5dbcd1b35b6669a26bfa463882d8c6000c1ab192deefefe",
+      "src/doctrail/meeting_worker.py": "b58860895ff31e0de90b9977f0fa8860812195d913120ba7deb437586a16d6eb",
+      "server/src/main/java/io/doctrail/ApiController.java": "896b44d40979a0492fc92dcf5e01d746993bf40650262d810369296b76284517",
+      "server/src/main/java/io/doctrail/ApiError.java": "0fc30aa8140a6b28b44a8a8986aa7e4f243cde6971e134298612dab4afb2f103",
+      "server/src/main/java/io/doctrail/ApiErrors.java": "2d25063362709c8aec8ed0ed03c69193c36b54f3126b47beec416d38099763eb",
+      "server/src/main/java/io/doctrail/Auth.java": "4595bd0dfb079c792fc836032291edcbb1605952ec4f5a60806b11927b923ab8",
+      "server/src/main/java/io/doctrail/DocTrailApplication.java": "9c0a201ca1230abc169c7fc49754360847db0d8ec77e017b41c5fa7d57f6c226",
+      "server/src/main/java/io/doctrail/DocumentService.java": "cf80b13d3eb6c786c8b4633119f790fb39131c0f5f06ce7ec02bcba0a2ad1a0b",
+      "server/src/main/java/io/doctrail/FrontendController.java": "c675845e45482abd99c91e375b471bb96228661f6a239f4ff90fec3cefd8cd76",
+      "server/src/main/java/io/doctrail/GenerationClient.java": "c9e2ecf27609655d62af0b927e71f9323829273ac739266119a9c48ad1ff3666",
+      "server/src/main/java/io/doctrail/InferenceClient.java": "a7d3dc950b2d39c1893c739687a81b47916f800f3c6152adba049a40db5abed0",
+      "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+      "server/src/main/java/io/doctrail/KnowledgeService.java": "8c1484e5c5acb24624b6217b0d28f73461bf198eefa3a61cfdc2284815ee9832",
+      "server/src/main/java/io/doctrail/LearnedSearch.java": "b20c5cdc2ca4645e30043d27d76e9e86c61d73709e3c5ac06eee9675b2221bf0",
+      "server/src/main/java/io/doctrail/MeetingAnalysis.java": "afe7fb53fdfcdd2a651f9aaf1c570b938d6735c8c997619deba7b17e60a480f5",
+      "server/src/main/java/io/doctrail/MeetingController.java": "514269c3feb0602eb8a878fd18bc4e5b1baa0ed0ba5d116ac642a935a1319ccf",
+      "server/src/main/java/io/doctrail/MeetingService.java": "59607dcc54cab3226d5c535b81d1f2b2b85df1d31232dd3169743fe009700780",
+      "server/src/main/java/io/doctrail/RequestGuard.java": "bc025143500ff8a4f9a5707b0e90c4ef60bcb024fac19b6cc49e0220f24dad98",
+      "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+      "server/src/main/java/io/doctrail/Store.java": "932f5949aaa57f6c5121ff6f98422626592b5145639624c3309a5796c58ebdc7",
+      "scripts/verify_meeting_service.py": "18188f90da111377744931409126558c0875b8e78fd9745dd3a935e0fa698cd8"
+    },
+    "recorded_prelaunch_artifact_hashes": {
+      "src/doctrail/meeting_contract.py": "e6208677d5d7fdd4323e803d3f669e7b03b20af858b9e3bd43d794decc9a0591",
+      "src/doctrail/meeting_runtime.py": "9bb4ffb22ad62d01f5dbcd1b35b6669a26bfa463882d8c6000c1ab192deefefe",
+      "src/doctrail/meeting_worker.py": "b58860895ff31e0de90b9977f0fa8860812195d913120ba7deb437586a16d6eb",
+      "scripts/serve_meetings.py": "9f136c3720f3d51e15f1b401dea662df7dc8121be6358bd375a40507b328e496",
+      "scripts/verify_meeting_service.py": "18188f90da111377744931409126558c0875b8e78fd9745dd3a935e0fa698cd8",
+      "server/target/doctrail-server-0.1.0.jar": "4813d86d80c3143873c453cc8f3075011923380fc700d27bce8ba3b319717cc7",
+      "web/dist/assets/index-Cg9NvQLO.js": "522f60aac39dcb85a262ca4d8537474fca294e9530507b166d431bc6f75c8deb",
+      "web/dist/assets/index-Du-A5LDn.css": "8ff4cc26a870bff6c0f4fd2c25bde18dd42f2a0b1c47f22d6ef46d3289a29e6b"
+    },
+    "loaded_sources_unchanged_during_run": true,
+    "loaded_sources_evidence": "The stable execution report records true; the reviewer did not independently monitor that run. Later working-tree edits are not evidence about the loaded v2 artifacts."
+  },
+  "public_analysis_reviews": [
+    {
+      "entry_index": 0,
+      "fixture": "tests/fixtures/meetings/public/jupyter-february-2025.md",
+      "document_id": "7a480d811162407abf1571e1863e648d",
+      "metadata_assessment": "title_date_attendance_and_explicit_purpose_supported",
+      "participant_count": 23,
+      "summary_assessment": "supported_selective_extract_not_comprehensive",
+      "summary_detail": "The four selected lines concern GeoJupyter, JupyterLab beta, Jupyter Book and Binder. The logistics-dominated v1 selection is fixed; governance and later agenda topics remain outside the short extract.",
+      "items": {
+        "count": 19,
+        "type_counts": {
+          "topic": 19
+        },
+        "invented_confirmed_decisions_found": 0,
+        "invented_assignees_or_deadlines_found": 0,
+        "limitation": "Logistics and bare links remain among topic items; the public sources do not establish positive assigned-task or adopted-decision recall."
+      }
+    },
+    {
+      "entry_index": 1,
+      "fixture": "tests/fixtures/meetings/public/jupyter-june-2025.md",
+      "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+      "metadata_assessment": "title_date_attendance_and_explicit_purpose_supported",
+      "participant_count": 16,
+      "summary_assessment": "supported_selective_extract_not_comprehensive",
+      "summary_detail": "The four selected lines concern releases/security, the host guide, JupyterCon and workshops. The logistics-dominated v1 selection is fixed; later agenda topics remain outside the short extract.",
+      "items": {
+        "count": 19,
+        "type_counts": {
+          "topic": 19
+        },
+        "invented_confirmed_decisions_found": 0,
+        "invented_assignees_or_deadlines_found": 0,
+        "limitation": "Logistics and bare links remain among topic items; the public sources do not establish positive assigned-task or adopted-decision recall."
+      }
+    }
+  ],
+  "synthetic_analysis_reviews": [
+    {
+      "entry_index": 2,
+      "fixture": "tests/fixtures/meetings/synthetic-release-planning.md",
+      "document_id": "b8370d1ea3dc47d6bd25cb322d88cd7d",
+      "metadata_assessment": "all_fields_supported",
+      "proposal_decision_assessment": "The rejected 90-day suggestion is a proposal; both explicit decisions are decision items. All remain needs_confirmation, correctly avoiding automatic user confirmation.",
+      "assigned_task_assessment": "Minji is correctly assigned the access regression test, due 2026-10-05, high priority.",
+      "unassigned_task_assessment": "incorrectly_classified_unresolved_instead_of_action",
+      "unassigned_task_evidence": {
+        "quote": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+        "start_offset": 282,
+        "end_offset": 322,
+        "id": "2a5ef7eafe994d87948aa4f35d0a311d",
+        "type": "unresolved",
+        "text": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+        "assignee": null,
+        "due_date": null,
+        "priority": null,
+        "status": "needs_confirmation"
+      },
+      "explanation": "The source explicitly commits to checking the evidence screen. Missing owner and deadline should be null action fields, not a reason to remove the task from action lists.",
+      "explicit_task_recall_in_this_fixture": {
+        "expected": 2,
+        "returned_action_items": 1
+      },
+      "unresolved_issue_assessment": "The future release-quality criterion remains unresolved correctly.",
+      "summary_assessment": "Supported extract containing both decisions and both task texts; the unassigned task remains in the summary but is missing from the action category."
+    },
+    {
+      "entry_index": 3,
+      "fixture": "tests/fixtures/meetings/synthetic-release-followup.md",
+      "document_id": "c06afa3f0d64497386350c925c90081d",
+      "metadata_assessment": "all_fields_supported",
+      "decision_assessment": "The explicit replacement of the previous 30-day rule by seven days is correctly a decision needing confirmation. No automatic supersession link is established by this output.",
+      "assigned_task_assessment": "Junho, due 2026-10-12, high priority, correctly extracted for implementation of log deletion.",
+      "unresolved_issue_assessment": "The unconfirmed public release date remains unresolved.",
+      "summary_assessment": "The four substantive source lines are supported and cover the fixture."
+    }
+  ],
+  "answer_reviews": [
+    {
+      "entry_index": 0,
+      "query": "What does the host guide say about the agenda link?",
+      "status": "answered",
+      "model_called": true,
+      "claim_count": 3,
+      "semantic_assessment": "supported_and_adequately_answers_question",
+      "explanation": "Calendar inclusion and sharing the agenda link in chat are directly supported. The extra collaborative-agenda statement is also supported.",
+      "claims_supported": 3
+    },
+    {
+      "entry_index": 1,
+      "query": "What was reported about JupyterLab 4.4 in February and June?",
+      "status": "answered",
+      "model_called": true,
+      "claim_count": 3,
+      "semantic_assessment": "supported_but_incomplete_status_comparison",
+      "explanation": "Both months are cited, but announced omits the central contrast: February said the beta would be released that day; June said JupyterLab 4.4 was already out. The February demo is in the agenda; do not interpret the answer as proof the presentation occurred.",
+      "cross_document_citations_present": true,
+      "complete_release_status_contrast": false
+    },
+    {
+      "entry_index": 2,
+      "query": "누가 회사 비밀 프로젝트의 예산을 승인했나요?",
+      "status": "abstained",
+      "model_called": false,
+      "claim_count": 0,
+      "semantic_assessment": "appropriate_no_evidence_response",
+      "explanation": "The sources do not identify approval of a secret-company-project budget. This is a zero-model-call retrieval abstention, not evidence of model abstention."
+    },
+    {
+      "entry_index": 3,
+      "query": "What is the Jupyter community meeting catering budget?",
+      "status": "abstained",
+      "model_called": true,
+      "claim_count": 0,
+      "semantic_assessment": "appropriate_model_abstention",
+      "explanation": "The public meeting notes contain no catering budget. The completed actual model response abstains rather than inventing a value."
+    },
+    {
+      "entry_index": 4,
+      "query": "로그 보관 기간은 언제 어떻게 변경됐고 원문 질문을 운영 로그에 남겨도 되나요?",
+      "status": "answered",
+      "model_called": true,
+      "claim_count": 5,
+      "semantic_assessment": "unacceptable_citation_mismatch_and_incomplete_answer",
+      "cross_document_results_present": true,
+      "successful_meeting_document_synthesis": false,
+      "findings": [
+        {
+          "claim_index": 0,
+          "type": "missing_historical_qualification",
+          "text": "검색 로그 보관 기간을 30일로 확정했다.",
+          "explanation": "The quoted follow-up explicitly says the old 30-day decision was replaced. The claim states 30 days without the historical qualifier needed to explain the change."
+        },
+        {
+          "claim_index": 1,
+          "type": "citation_does_not_support_claim",
+          "text": "로그 보관 기간을 7일로 변경하기로 확정했다.",
+          "citation": {
+            "document_id": "b8370d1ea3dc47d6bd25cb322d88cd7d",
+            "revision": 1,
+            "chunk_id": "0bd63533979b4026aae9572d6463d895",
+            "title": "출시 회의",
+            "meeting_date": "2026-10-01",
+            "page": null,
+            "start_offset": 173,
+            "end_offset": 203,
+            "quote": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다."
+          },
+          "explanation": "The seven-day-change claim cites only the first meeting sentence confirming 30 days. Exact span validity does not make this evidence support seven days."
+        },
+        {
+          "type": "unanswered_question_component",
+          "component": "when the retention policy changed",
+          "explanation": "The answer omits explicit decision dates and does not clearly state the chronological 30-day to seven-day change."
+        },
+        {
+          "type": "unanswered_question_component",
+          "component": "whether raw questions may be written to operational logs",
+          "expected_source": "tests/fixtures/meetings/synthetic-runbook.md",
+          "expected_rule": "Raw question text and document text must not be written to operational logs.",
+          "explanation": "The English runbook appears in Java retrieval results, yet no claim answers the logging-prohibition question."
+        }
+      ],
+      "other_claims": {
+        "indexes": [
+          2,
+          3,
+          4
+        ],
+        "assessment": "supported_but_do_not_resolve_the_missing_components"
+      }
+    }
+  ],
+  "failure_interpretation": {
+    "assertion": "assigned_and_unassigned_actions",
+    "supported_by_recorded_output": true,
+    "explanation": "The planning meeting has one correctly assigned action and one explicit unassigned action misclassified as unresolved. The run stops at that check; later editing, linking and remaining operations cannot be inferred successful."
+  },
+  "overall": {
+    "semantic_acceptance": false,
+    "operational_workflow_complete": false,
+    "improvements_from_v1": [
+      "Explicit purposes are now extracted for both public meetings.",
+      "Public summaries now select substantive content rather than recording/notes logistics.",
+      "One actual model abstention is appropriate.",
+      "Synthetic assigned tasks and proposal/decision distinction have positive examples."
+    ],
+    "remaining_failures": [
+      "The explicit unassigned task is missing from action items.",
+      "The mixed meeting/document answer contains a seven-day claim with a thirty-day-only citation.",
+      "The mixed answer omits policy-change timing and the raw-question logging prohibition.",
+      "The public comparison loses planned-beta versus already-released status."
+    ],
+    "human_review_count": 0,
+    "recommended_reporting": "Four analyses and five answer responses were inspected, separating public and synthetic sources and four actual answer calls from one retrieval-only abstention. Extraction improved, but a task-classification failure stopped the workflow and the mixed answer is not semantically acceptable. No end-to-end completion or general quality gate is established."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "cases": [
+    {
+      "id": "service-rag-cal-01",
+      "query": "GitOps WG 헌장에 따르면 이 그룹의 핵심 임무는 무엇이며, 어떤 기반을 마련하고 장기 산출물은 어디에 둘 계획인가? 특정 제품·접근법의 지지나 배제, 다른 방법론과의 관계에서 활동 범위도 설명해 줘.",
+      "language": "ko",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public"
+    },
+    {
+      "id": "service-rag-cal-02",
+      "query": "How did the participant-limit and equipment-purchase decisions change from the Garam workshop meeting on 4 March to the meeting on 11 March 2026? Explain the scope of the later participant limit and what the purchase approval does and does not establish.",
+      "language": "en",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic"
+    },
+    {
+      "id": "service-rag-cal-03",
+      "query": "가람 소리공방의 3월 11일 회의록과 현장 안내서를 함께 보면, 3월 22일 R 지점 공개 걷기를 진행하거나 취소해야 하는 조건은 무엇인가? S 지점과 실내 듣기 대안은 어떻게 처리해야 하는지도 설명해 줘.",
+      "language": "ko",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic"
+    },
+    {
+      "id": "service-rag-cal-04",
+      "query": "How did the state-reconciliation discussion develop between the 5 and 14 April 2021 chats? Explain Schlomo Schapiro's reasoning about a shorter title and change freezes, Scott's objection concerning the earlier wording, and the fallback release proposal. Distinguish suggestions from a recorded final decision.",
+      "language": "en",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public"
+    },
+    {
+      "id": "service-rag-cal-05",
+      "query": "2021년 4월 14일 GitOps WG 회의에서 최종 승인된 원칙 문서의 버전, 그 승인을 확정한 표결 결과, 공식 공개일을 알려 줘.",
+      "language": "ko",
+      "family_id": "cal-v2-public-gitops",
+      "source_kind": "public"
+    },
+    {
+      "id": "service-rag-cal-06",
+      "query": "As of the Garam workshop meeting on 11 March 2026, what exact amount had been paid for the replacement microphone covers and tripod clamp, which supplier was paid, and what was the receipt identifier?",
+      "language": "en",
+      "family_id": "cal-v2-synthetic-garam-sound",
+      "source_kind": "synthetic"
+    }
+  ]
+}

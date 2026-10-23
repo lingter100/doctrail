@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "source_version": 2,
+  "verdict": "accepted",
+  "accepted_ids": [
+    "c5-val-pub-general",
+    "c5-val-pub-meeting-01",
+    "c5-val-pub-meeting-02",
+    "c5-val-syn-general",
+    "c5-val-syn-meeting-01",
+    "c5-val-syn-meeting-02"
+  ],
+  "rejected_ids": [],
+  "author_ids": [
+    "/root/c5_validation_author"
+  ],
+  "reviewer_id": "/root/c5_validation_prereviewer",
+  "human_review_count": 0,
+  "reviewed_at": "2026-10-19T08:38:21.244131+00:00",
+  "source_manifest_sha256": "9905e7e9f222a83a4c1785a2d9456953590c5a0777f1ae1e65fe2149872a1910",
+  "source_inventory_sha256": "191e7d99dc6f5506faffc999428b9042f1d135705a913c596c22e06eb9af2b93",
+  "source_documents_reviewed": 6,
+  "whole_chunks_reviewed": 14,
+  "all_whole_sources_reviewed": true,
+  "source_integrity_passed": true,
+  "complete_source_coherence": "accepted",
+  "license_and_provenance": "accepted_with_recorded_limitations",
+  "semantic_freshness": "accepted_with_recorded_historical_coverage_limits",
+  "notes": {
+    "file": "data/evaluation/meetings-c5-validation-v2/source-prereview-notes.md",
+    "sha256": "567f2b017f1783a00b351f9fc26fd549015e17d89b7b45025535e93a80247732"
+  },
+  "reviewer_semantic_comparison": {
+    "file": ".local/meetings-c5-validation-review-v2/cross-split-semantic-review-v2.md",
+    "sha256": "e01349329d1e043b1282cfbf5bf9f030d1cc3fb3d0a966a4b134ace4131b3f0e"
+  },
+  "same_split_source_item_reviewer_reuse_disclosed": true,
+  "calibration_source_only_exposure_authorized": true,
+  "calibration_items_or_oracles_read": false,
+  "author_correction_feedback_only_no_model_feedback": true,
+  "original_v1_rejection_preserved": {
+    "file": "data/evaluation/meetings-c5-validation-v1/source-prereview.json",
+    "sha256": "36b02a7f032e195491e050ac925ae039ae63f02f797373d794f8f73e3377a4ec",
+    "commit": "030bc1e3ed6fbf2977216d4eb76c64d4281ae793"
+  },
+  "source_changes_requested": 0,
+  "reviewer_source_edits": 0,
+  "questions": 0,
+  "oracles": 0,
+  "tokenizer_calls": 0,
+  "native_calls": 0
+}

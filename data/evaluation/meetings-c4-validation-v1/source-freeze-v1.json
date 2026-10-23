@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-single-thinking-c4-v1",
+  "phase": "validation",
+  "kind": "source",
+  "bound_files": {
+    "data/evaluation/meetings-c4-calibration-source-fingerprints-v1.json": "0f222307428d124ce268a78aec5bc3798d00f47807d54015095be508ae3baf80",
+    "data/evaluation/meetings-c4-prior-source-fingerprints-v1.json": "757a85b523303aa85255d38887f5d7ea5689907942b887317ad296cc669badf4",
+    "data/evaluation/meetings-c4-validation-source-fingerprints-v1.json": "b8e6aa5faf7b4bea323eb9adc9ad1a38698312d7fd50729b1e342ca3b7fb94fc",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-general.md": "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-01.md": "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-pub-meeting-02.md": "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-general.md": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-01.md": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+    "data/evaluation/meetings-c4-validation-v1/raw/c4-val-syn-meeting-02.md": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796",
+    "data/evaluation/meetings-c4-validation-v1/source-freshness.json": "6702bde61b3eff9e422dc35a8fbce004c37a4b35a544a2cca81a510e9d590b55",
+    "data/evaluation/meetings-c4-validation-v1/source-inventory.json": "ad2a1c8b4a8abdb9801d76f613634cdfe4a3852f52f1acdb26fe32feeab62095",
+    "data/evaluation/meetings-c4-validation-v1/source-java-parity.json": "fb731cc378b21788ed679193f06fec04773e519900155faf3e7caa272063ef99",
+    "data/evaluation/meetings-c4-validation-v1/source-manifest.json": "901f5f5da91ddddd917a4f71e24a54a55c908882fdc9a67494197c904bbad006",
+    "data/evaluation/meetings-c4-validation-v1/source-prereview.json": "d24890dce485234a9a230c50654da11fc61397a6223de40518f54cac9ab475e9",
+    "data/evaluation/meetings-c4-validation-v1/source-processing-receipt.json": "fc46f62cdf5c29cfc61af15f589ab0c42d64810651ce36202c144c4952d4600c"
+  },
+  "files": {
+    "manifest": "data/evaluation/meetings-c4-validation-v1/source-manifest.json",
+    "inventory": "data/evaluation/meetings-c4-validation-v1/source-inventory.json",
+    "processing_receipt": "data/evaluation/meetings-c4-validation-v1/source-processing-receipt.json",
+    "prereview": "data/evaluation/meetings-c4-validation-v1/source-prereview.json",
+    "java_parity": "data/evaluation/meetings-c4-validation-v1/source-java-parity.json",
+    "freshness": "data/evaluation/meetings-c4-validation-v1/source-freshness.json",
+    "fingerprints": "data/evaluation/meetings-c4-validation-source-fingerprints-v1.json"
+  },
+  "toolchain_commit": "6754435c3780a3ee33d46750a69ef35ff44acd3f"
+}

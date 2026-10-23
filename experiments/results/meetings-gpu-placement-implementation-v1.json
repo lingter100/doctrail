@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "id": "meetings-gpu-placement-implementation-v1",
+  "implementation_head_before_commit": "15d01f632b0c19bffbd66171fc1ff7bb8f560f6a",
+  "source_files": [
+    {
+      "path": "scripts/serve_meeting_gpu_placement.py",
+      "sha256": "083474393f80d0386edcb1cad6efe9ee644655671efa75b8cd921e76a9e23bf5"
+    },
+    {
+      "path": "scripts/probe_meeting_gpu_placement.py",
+      "sha256": "33b0efbf6bee2bee00339fd6a60519e70ac5b0aaca1a2a6aa58a106e888927ea"
+    },
+    {
+      "path": "tests/test_meeting_gpu_placement_launcher.py",
+      "sha256": "8ccfff5866184c6673fc5ac531bbba0d399fa4dd360119ee2daadcbc8a75de59"
+    },
+    {
+      "path": "tests/test_probe_meeting_gpu_placement.py",
+      "sha256": "b365e376796782d1ed7a4c4619ee3ee66d32f855669d027e9c3ec16661701ce6"
+    }
+  ],
+  "source_freeze": {
+    "path": "data/evaluation/meetings-gpu-placement-source-freeze-v1.json",
+    "sha256": "116b5325b8b9c1de39c27d486b17d614d9bdef49b32274b14d2838c5a4e9cfaf",
+    "bindings": 59,
+    "code_files": 54,
+    "import_candidates": 1420
+  },
+  "local_synthetic_verification": {
+    "passed": 75,
+    "new": 37,
+    "existing_regressions": 38,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 8.77,
+    "ruff_exit": 0,
+    "source_before_after_equal": true
+  },
+  "preserved": [
+    {
+      "path": "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json",
+      "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78",
+      "bindings": 85,
+      "working_and_head_unchanged": true
+    },
+    {
+      "path": "data/evaluation/meetings-host-proof-profile-source-freeze-v1.json",
+      "sha256": "1171f14f7cb176838385723a040ded6921409cc1cfb168833d35e4782687f412",
+      "bindings": 52,
+      "working_and_head_unchanged": true
+    }
+  ],
+  "local_evidence": [
+    {
+      "path": ".local/gpu-placement-implementation-v1/final-exits.json",
+      "sha256": "bde4f07d0f1a5aa9813a6589225208cb1a4ded8dc130d99fef1f1969276c422b",
+      "bytes": 74
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/final-pytest.txt",
+      "sha256": "b96f9bd62d2265e2490e68a77b8864b5c924ff62569711eeacf5d0aa4cb1cfb0",
+      "bytes": 182
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/final-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/final-source-after.json",
+      "sha256": "922432254259cce090aa4c9043f0d3c95f244deaeaeb0a7ed31428d270a0485e",
+      "bytes": 606
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/final-source-before.json",
+      "sha256": "922432254259cce090aa4c9043f0d3c95f244deaeaeb0a7ed31428d270a0485e",
+      "bytes": 606
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/implementation-summary.md",
+      "sha256": "6f6d211db3bd3c5e60c1799d3556fe9aba5725c6c9eb305a28d972c45b1f8d45",
+      "bytes": 2545
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/initial-pytest.txt",
+      "sha256": "c276bb8358995d52505551b9d7f6b1149909ac1ae9116415c9be093f84bfd5e3",
+      "bytes": 101
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/initial-ruff.txt",
+      "sha256": "af2de57eb600a804bc3ad3c7008b8fc6df90b23facde094adf3b2ade6aa229ad",
+      "bytes": 10214
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/intermediate-pytest.txt",
+      "sha256": "893cd55007a3fa0661416b56d807e5b865eeaaa38e1faab298c8916866976d87",
+      "bytes": 101
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/intermediate-ruff.txt",
+      "sha256": "1383018376131278b6ff64ec3dfd2d44837e0864cd3b2de8b8cc69674c542b40",
+      "bytes": 770
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/pre-final-pytest.txt",
+      "sha256": "d57e6568f0085a9736a90273bec9f6312543fdcc1b5184e7ebfecb9497c932c3",
+      "bytes": 101
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/pre-final-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/second-pytest.txt",
+      "sha256": "87bbe867e8e1239a93431522fe327fcd00a296d2cd1307c01a1c959254eac544",
+      "bytes": 102
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/second-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/third-pytest.txt",
+      "sha256": "16f31b55379f5b1f7617b4c0a047554c43f5f232dbbdd0b654a446775d1d9c8a",
+      "bytes": 101
+    },
+    {
+      "path": ".local/gpu-placement-implementation-v1/third-ruff.txt",
+      "sha256": "e159a18281631cf3616d25b43e0d2a1e543425e13986f1a8a4f51f1095f6f5b9",
+      "bytes": 971
+    }
+  ],
+  "actual": {
+    "official_registration": 0,
+    "tokenizer": 0,
+    "native_generation": 0,
+    "gpu_queries": 0,
+    "downloads": 0,
+    "quality_judgments": 0,
+    "human_review": 0
+  },
+  "limitations": [
+    "Synthetic tests do not prove resource suitability or answer quality.",
+    "Actual effective offload and flash attention remain unknown.",
+    "Elapsed deadline checks cannot preempt arbitrary blocking filesystem I/O.",
+    "Terminal CLI and arm status must be checked; pair completion is not resource success."
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "author_role": "/root/c7_calibration_author",
+  "candidate_id": "meeting-answer-single-thinking-c7-v1",
+  "counts": {
+    "accepted_complete_corpora": 0,
+    "actual_admission_rejections": 1,
+    "actual_default_source_admission_calls": 1,
+    "adopted_documents": 0,
+    "adopted_families": 0,
+    "author_source_qualification_refusals": 2,
+    "closeout_observed_git_subprocesses": 2,
+    "git_mutations": 0,
+    "inventory_preparation_calls": 0,
+    "items": 0,
+    "java_parity_runs": 0,
+    "maven_commands": 0,
+    "mechanically_passed_synthetic_families_not_adopted": 1,
+    "model_downloads": 0,
+    "native_calls": 0,
+    "oracles": 0,
+    "paid_services": 0,
+    "questions": 0,
+    "selected_public_families": 3,
+    "synthetic_documents_authored_and_preserved": 3,
+    "tests": 0,
+    "tokenizer_calls": 0,
+    "unique_public_source_documents_downloaded_and_preserved": 9
+  },
+  "future_gate": "No item or inference work authorized from this incomplete source-stage outcome.",
+  "immutable_constraints_changed": false,
+  "originals_preserved": true,
+  "phase": "calibration",
+  "preservation_index": {
+    "bytes": 40376,
+    "path": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/preservation-index.json",
+    "sha256": "a20346e3724453777527ff41bfce1ea505306da77317337ada486372b41677a2"
+  },
+  "proof": {
+    "actual_default_admission_receipt": {
+      "bytes": 7027,
+      "path": "data/evaluation/meetings-c7-calibration-v1/raw/source-stage-evidence-v1/rejected-admission-001.json",
+      "sha256": "5100bb987d71b3a98c3132f3c25a0e9e2e3535dbc62cee304428628a8f856f73"
+    },
+    "actual_default_preauth_v2_receipt": {
+      "bytes": 74473,
+      "path": ".local/meetings-c7-calibration-source-v1/preauthorization-v2.json",
+      "sha256": "bb9489b868972dd75f93426030b5973285923304b08d47759c2b58134ee0556d"
+    },
+    "current_working_toolchain_files_checked": 77,
+    "head_after": "d9066147adeecefd23c014cce59e30ca350b6a74",
+    "head_before": "d9066147adeecefd23c014cce59e30ca350b6a74",
+    "head_unchanged": true,
+    "prior_baseline_owned_public_files_unchanged": 15,
+    "toolchain_freeze": {
+      "bytes": 107827,
+      "path": "data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+      "sha256": "6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca"
+    },
+    "working_toolchain_all_hashes_match_frozen": true
+  },
+  "recorded_at": "2026-10-20T05:12:29.852195+00:00",
+  "rejected_family_rescue_or_trimming": false,
+  "schema_version": 1,
+  "scope": "Bounded calibration source search only. No universal impossibility claim; no complete corpus, acceptance, source freeze, item, tokenizer or native result.",
+  "source_stage_outcomes": [
+    {
+      "attempt": "001",
+      "public_family_code": "c7_block_bounds",
+      "status": "actual_admission_rejected",
+      "synthetic_family_status": "mechanically_passed_not_adopted"
+    },
+    {
+      "attempt": "002",
+      "status": "author_source_qualification_refused"
+    },
+    {
+      "attempt": "003",
+      "status": "author_source_qualification_refused"
+    }
+  ],
+  "status": "incomplete/no_adopted_corpus",
+  "subprocess_count_limit": "Closeout observed exactly two read-only Git processes; historical per-call observations remain in original receipts. No unobserved total subprocess count is inferred."
+}

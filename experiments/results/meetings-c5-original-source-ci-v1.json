@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-original-source-ci-v1",
+  "recorded_at": "2026-10-19T08:34:39.561876+00:00",
+  "head_sha": "030bc1e3ed6fbf2977216d4eb76c64d4281ae793",
+  "runs": [
+    {
+      "run_id": 39222294453,
+      "head_sha": "030bc1e3ed6fbf2977216d4eb76c64d4281ae793",
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39222294453",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      }
+    },
+    {
+      "run_id": 39222301512,
+      "head_sha": "030bc1e3ed6fbf2977216d4eb76c64d4281ae793",
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39222301512",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      }
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "verified": {
+    "original_validation_files": 17,
+    "c5_toolchain": 76,
+    "calibration_source_freeze": 14,
+    "new_v2_author_files": 12
+  },
+  "claim_scope": "Original source/rejection commit CI only; NEWv2 source not yet committed or independently accepted."
+}

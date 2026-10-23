@@ -1,0 +1,733 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "cases": [
+    {
+      "id": "C3-VAL-01",
+      "family_id": "C3-F03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "같은 디렉터리에 index.md와 README.md가 모두 있으면 index.md를 사용하고 README.md는 무시한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-01-r1-c0003",
+                "start_offset": 3052,
+                "end_offset": 3205,
+                "quote": "If both an `index.md` file and a `README.md` file are found in the same\ndirectory, then the `index.md` file is used and the `README.md` file is\nignored.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "nav에 없는 페이지도 렌더링되어 사이트에 포함되지만 전역 탐색과 previous/next 링크에는 포함되지 않으며 직접 링크하지 않으면 숨겨진 페이지가 된다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-01-r1-c0006",
+                "start_offset": 5110,
+                "end_offset": 6047,
+                "quote": "```\n\nWith the above configuration we have three top level items: \"Home\", \"User Guide\"\nand \"About.\" \"Home\" is a link to the homepage for the site. Under the \"User\nGuide\" section two pages are listed: \"Writing your docs\" and \"Styling your\ndocs.\" Under the \"About\" section two more pages are listed: \"License\" and\n\"Release Notes.\"\n\nNote that a section cannot have a page assigned to it. Sections are only\ncontainers for child pages and sub-sections. You may nest sections as deeply as\nyou like. However, be careful that you don't make it too difficult for your\nusers to navigate through the site navigation by over-complicating the nesting.\nWhile sections may mirror your directory structure, they do not have to.\n\nAny pages not listed in your navigation configuration will still be rendered and\nincluded with the built site, however, they will not be linked from the global\nnavigation and will not be included in the `previous` and `next` "
+              },
+              {
+                "chunk_id": "c3-f03-doc-01-r1-c0007",
+                "start_offset": 5897,
+                "end_offset": 6109,
+                "quote": "d and\nincluded with the built site, however, they will not be linked from the global\nnavigation and will not be included in the `previous` and `next` links. Such\npages will be \"hidden\" unless linked to directly.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "Project Pages는 소스 문서 저장소의 주 작업 브랜치를 checkout한 뒤 mkdocs gh-deploy로 배포하며 기본 배포 브랜치는 그 프로젝트 저장소의 gh-pages다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0000",
+                "start_offset": 491,
+                "end_offset": 827,
+                "quote": "Project Pages sites are simpler as the site files get deployed to a branch\nwithin the project repository (`gh-pages` by default). After you `checkout` the\nprimary working branch (usually `master`) of the git repository where you\nmaintain the source documentation for your project, run the following command:\n\n```sh\nmkdocs gh-deploy\n```\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "gh-deploy가 push하기 전에 빌드 결과를 검토하는 중간 단계는 없으므로, 변경 사항을 먼저 build 또는 serve로 로컬에서 확인한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0001",
+                "start_offset": 1099,
+                "end_offset": 1348,
+                "quote": "Be aware that you will not be able to review the built site before it is pushed\nto GitHub. Therefore, you may want to verify any changes you make to the docs\nbeforehand by using the `build` or `serve` commands and reviewing the built\nfiles locally.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F5",
+          "text": "gh-deploy를 실행한 로컬 저장소의 미추적 파일과 미커밋 작업도 배포되는 페이지에 포함된다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0001",
+                "start_offset": 1527,
+                "end_offset": 1697,
+                "quote": "WARNING:\nIf there are untracked files or uncommitted work in the local repository where\n`mkdocs gh-deploy` is run, these will be included in the pages that are deployed.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "nav에서 빠졌다는 이유로 페이지가 빌드에서 제외되거나 접근 통제가 된다고 말하지 않는다.",
+        "Project Pages의 기본 브랜치를 User/Organization Pages의 master와 혼동하지 않는다.",
+        "gh-deploy가 미커밋 작업을 자동으로 제외하거나 push 전 검토를 기다린다고 말하지 않는다."
+      ],
+      "limitations": [
+        "고정된 공개 문서의 절차이며 실제 사이트에 배포를 실행하거나 결과를 확인한 기록이 아니다."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C3-VAL-02",
+      "family_id": "C3-F03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "Set site_url to an empty string so the built site works with the file:// scheme.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0008",
+                "start_offset": 7024,
+                "end_offset": 7785,
+                "quote": "-   [site_url]:\n\n    The `site_url` must be set to an empty string, which instructs MkDocs to\n    build your site so that it will work with the `file://` scheme.\n\n    ```yaml\n    site_url: \"\"\n    ```\n\n-   [use_directory_urls]:\n\n    Set `use_directory_urls` to `false`. Otherwise, internal links between\n    pages will not work properly.\n\n    ```yaml\n    use_directory_urls: false\n    ```\n\n-   [search]:\n\n    You will need to either disable the search plugin, or use a third-party\n    search plugin which is specifically designed to work with the `file://`\n    scheme. To disable all plugins, set the `plugins` setting to an empty list.\n\n    ```yaml\n    plugins: []\n    ```\n\n    If you have other plugins enabled, simply ensure that `search` is not\n    included "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "Set use_directory_urls to false so internal links between pages work properly.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0008",
+                "start_offset": 7024,
+                "end_offset": 7785,
+                "quote": "-   [site_url]:\n\n    The `site_url` must be set to an empty string, which instructs MkDocs to\n    build your site so that it will work with the `file://` scheme.\n\n    ```yaml\n    site_url: \"\"\n    ```\n\n-   [use_directory_urls]:\n\n    Set `use_directory_urls` to `false`. Otherwise, internal links between\n    pages will not work properly.\n\n    ```yaml\n    use_directory_urls: false\n    ```\n\n-   [search]:\n\n    You will need to either disable the search plugin, or use a third-party\n    search plugin which is specifically designed to work with the `file://`\n    scheme. To disable all plugins, set the `plugins` setting to an empty list.\n\n    ```yaml\n    plugins: []\n    ```\n\n    If you have other plugins enabled, simply ensure that `search` is not\n    included "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "Disable the search plugin or use a third-party search plugin specifically designed for file://. When retaining other plugins, omit search from their list; plugins: [] instead disables all plugins.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0008",
+                "start_offset": 7024,
+                "end_offset": 7785,
+                "quote": "-   [site_url]:\n\n    The `site_url` must be set to an empty string, which instructs MkDocs to\n    build your site so that it will work with the `file://` scheme.\n\n    ```yaml\n    site_url: \"\"\n    ```\n\n-   [use_directory_urls]:\n\n    Set `use_directory_urls` to `false`. Otherwise, internal links between\n    pages will not work properly.\n\n    ```yaml\n    use_directory_urls: false\n    ```\n\n-   [search]:\n\n    You will need to either disable the search plugin, or use a third-party\n    search plugin which is specifically designed to work with the `file://`\n    scheme. To disable all plugins, set the `plugins` setting to an empty list.\n\n    ```yaml\n    plugins: []\n    ```\n\n    If you have other plugins enabled, simply ensure that `search` is not\n    included "
+              },
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0009",
+                "start_offset": 7661,
+                "end_offset": 7798,
+                "quote": "    ```yaml\n    plugins: []\n    ```\n\n    If you have other plugins enabled, simply ensure that `search` is not\n    included in the list.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "Internal links must use relative URLs. MkDocs cannot validate or convert links inside raw HTML, so the author must manually format those links for the rendered document.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-01-r1-c0014",
+                "start_offset": 11984,
+                "end_offset": 12410,
+                "quote": "Markdown allows document authors to fall back to raw HTML when the Markdown\nsyntax does not meets the author's needs. MkDocs does not limit Markdown in this\nregard. However, as all raw HTML is ignored by the Markdown parser, MkDocs is\nnot able to validate or convert links contained in raw HTML. When including\ninternal links within raw HTML, you will need to manually format the link\nappropriately for the rendered document.\n"
+              },
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0009",
+                "start_offset": 7799,
+                "end_offset": 8070,
+                "quote": "When writing your documentation, it is imperative that all internal links use\nrelative URLs as [documented][internal links]. Remember, each reader of your\ndocumentation will be using a different device and the files will likely be in a\ndifferent location on that device.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F5",
+          "text": "Choose a theme that includes all its support files directly, since CDN-hosted support files require a live Internet connection.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0009",
+                "start_offset": 8071,
+                "end_offset": 8376,
+                "quote": "If you expect your documentation to be viewed off-line, you may also need to be\ncareful about which themes you choose. Many themes make use of CDNs for various\nsupport files, which require a live Internet connection. You will need to choose\na theme which includes all support files directly in the theme.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not claim that plugins: [] retains other plugins.",
+        "Do not claim MkDocs automatically converts or validates links embedded in raw HTML.",
+        "Do not promise every browser feature works offline after these settings."
+      ],
+      "limitations": [
+        "This is guidance in the pinned documentation, not an executed offline-browser test."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C3-VAL-03",
+      "family_id": "C3-F03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "CNAME 파일은 docs_dir의 루트에 둔다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0003",
+                "start_offset": 2869,
+                "end_offset": 3548,
+                "quote": "GitHub Pages includes support for using a [Custom Domain] for your site. In\naddition to the steps documented by GitHub, you need to take one additional step\nso that MkDocs will work with your custom domain. You need to add a `CNAME` file\nto the root of your [docs_dir]. The file must contain a single bare domain or\nsubdomain on a single line (see MkDocs' own [CNAME file] as an example). You may\ncreate the file manually, or use GitHub's web interface to set up the custom\ndomain (under Settings / Custom Domain). If you use the web interface, GitHub\nwill create the `CNAME` file for you and save it to the root of your \"pages\"\nbranch. So that the file does not get removed the "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "CNAME 파일에는 bare domain 또는 subdomain 하나를 한 줄에 적는다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0003",
+                "start_offset": 2869,
+                "end_offset": 3548,
+                "quote": "GitHub Pages includes support for using a [Custom Domain] for your site. In\naddition to the steps documented by GitHub, you need to take one additional step\nso that MkDocs will work with your custom domain. You need to add a `CNAME` file\nto the root of your [docs_dir]. The file must contain a single bare domain or\nsubdomain on a single line (see MkDocs' own [CNAME file] as an example). You may\ncreate the file manually, or use GitHub's web interface to set up the custom\ndomain (under Settings / Custom Domain). If you use the web interface, GitHub\nwill create the `CNAME` file for you and save it to the root of your \"pages\"\nbranch. So that the file does not get removed the "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "최상위 도메인의 DNS A 레코드에 입력할 정확한 IPv4 주소들.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "CNAME 위치·형식은 있으나 두 채택 문서 전체에 최상위 도메인용 DNS A 레코드의 IPv4 주소 목록은 없다. 외부 GitHub 링크의 내용을 채택한 것으로 간주할 수 없으므로 질문 전체를 보류해야 한다.",
+      "forbidden_inferences": [
+        "GitHub Pages의 IP 주소를 사전 지식이나 외부 링크에서 보충하지 않는다.",
+        "문서에 없는 DNS 값을 추정하거나 CNAME의 문자열을 IPv4 주소로 취급하지 않는다.",
+        "알려진 CNAME 부분만 답하고 전체 answered로 처리하지 않는다."
+      ],
+      "limitations": [
+        "Whole-family absence was checked against both complete pinned source files; linked external pages were not fetched or adopted."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C3-VAL-04",
+      "family_id": "C3-F03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "The default deployment branch for Project Pages is gh-pages in the project repository.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0000",
+                "start_offset": 491,
+                "end_offset": 827,
+                "quote": "Project Pages sites are simpler as the site files get deployed to a branch\nwithin the project repository (`gh-pages` by default). After you `checkout` the\nprimary working branch (usually `master`) of the git repository where you\nmaintain the source documentation for your project, run the following command:\n\n```sh\nmkdocs gh-deploy\n```\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "Untracked files or uncommitted work in the local repository where gh-deploy runs are included in the deployed pages.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f03-doc-02-r1-c0001",
+                "start_offset": 1527,
+                "end_offset": 1697,
+                "quote": "WARNING:\nIf there are untracked files or uncommitted work in the local repository where\n`mkdocs gh-deploy` is run, these will be included in the pages that are deployed.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "The documented maximum delay in minutes until the deployed site becomes publicly reachable.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "Both complete adopted documents describe building, pushing and hosting guidance but specify no maximum post-deployment availability delay in minutes. The requested bound cannot be supplied from this family, so the whole request requires abstention.",
+      "forbidden_inferences": [
+        "Do not invent a publication service-level limit or treat the push as evidence of immediate public reachability.",
+        "Do not supply a delay from general GitHub knowledge or an unadopted linked page.",
+        "Do not return only the two known deployment facts as an answered whole request."
+      ],
+      "limitations": [
+        "The source is procedural documentation, not a deployment timing observation."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C3-VAL-05",
+      "family_id": "C3-F04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "상영기 B의 지정 글꼴에서 자막은 두 줄 이내이고 각 줄은 공백 포함 42자 이내여야 한다. 첫 대사·버스 정류장 장면 전환·마지막 편지 화면의 세 지점에서 시작과 기준 소리의 차이는 각각 0.20초 이내여야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 104,
+                "end_offset": 248,
+                "quote": "문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 647,
+                "end_offset": 920,
+                "quote": "| 구분 | 확인할 내용 | 완료 기록 담당 |\n| --- | --- | --- |\n| 파일 형식 | UTF-8로 저장한 SRT이며 순번 누락과 겹치는 표시 시간이 없어야 한다. | 손라휘 |\n| 화면 표시 | 상영기 B의 지정 글꼴에서 한 자막은 두 줄 이내, 각 줄은 공백을 포함해 42자 이내여야 한다. | 나은재 |\n| 시간 대조 | 첫 대사, 버스 정류장 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "오전 10시 5분 나은재가 기록한 초안의 세 지점은 첫 대사 +0.40초, 버스 정류장 장면 전환 +0.40초, 마지막 편지 화면 +0.30초로 모두 기준 소리보다 늦어 각각 0.20초 한도를 넘었고, 버스 정류장 장면 자막의 첫 줄은 공백 포함 44자로 42자 한도를 넘었다. 권마루는 화면 표시·시간 대조를 보류로 기록했지만, 오전 9시 40분 확인한 UTF-8 SRT·순번 누락 없음·표시 시간 겹침 없음의 파일 형식 결과는 유지했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 647,
+                "end_offset": 920,
+                "quote": "| 구분 | 확인할 내용 | 완료 기록 담당 |\n| --- | --- | --- |\n| 파일 형식 | UTF-8로 저장한 SRT이며 순번 누락과 겹치는 표시 시간이 없어야 한다. | 손라휘 |\n| 화면 표시 | 상영기 B의 지정 글꼴에서 한 자막은 두 줄 이내, 각 줄은 공백을 포함해 42자 이내여야 한다. | 나은재 |\n| 시간 대조 | 첫 대사, 버스 정류장 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 108,
+                "end_offset": 261,
+                "quote": "문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 276,
+                "end_offset": 445,
+                "quote": "오전 9시 40분 손라휘와 나은재는 영상 파일 `summerpost_picture_p3.mp4`와 자막 초안 `summerpost_en_s2.srt`의 판본을 대장과 대조했다. 초당 25프레임 영상임을 확인한 뒤 재생했다. 자막은 UTF-8 SRT였고 순번 누락이나 표시 시간 겹침은 발견되지 않았다.\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 446,
+                "end_offset": 598,
+                "quote": "나은재는 오전 10시 5분 세 지점의 시간 차이를 기록했다. 자막이 기준 소리보다 늦게 나왔고, 버스 정류장 장면의 한 자막에서는 첫 줄이 공백 포함 44자로 나타났다. 권마루는 화면 표시와 시간 대조를 보류로 적었다. 파일 형식 항목의 확인 결과까지 취소하지는 않았다.\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0001",
+                "start_offset": 911,
+                "end_offset": 1041,
+                "quote": "나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 표시됨을 뜻한다. 단위는 초이며, 초안과 수정본 모두 같은 세 지점을 썼다.\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0001",
+                "start_offset": 1042,
+                "end_offset": 1183,
+                "quote": "| 대조 지점 | 오전 초안 s2 | 오후 수정본 s3 |\n| --- | ---: | ---: |\n| 첫 대사 | +0.40 | 0.00 |\n| 버스 정류장 장면 전환 | +0.40 | 0.00 |\n| 마지막 편지 화면 | +0.30 | -0.10 |\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "오후 1시 20분 손라휘가 모든 표시 시간을 0.40초 앞당기고 문제 자막을 36자·18자의 두 줄로 나눈 summerpost_en_s3.srt를 올렸다. 인물 이름 표기와 대사 번역은 바꾸지 않았다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 108,
+                "end_offset": 261,
+                "quote": "문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 737,
+                "end_offset": 910,
+                "quote": "오후 1시 20분 손라휘는 모든 자막의 표시 시간을 0.40초 앞당기고, 문제된 자막의 두 줄을 각각 36자와 18자로 다시 나눈 `summerpost_en_s3.srt`를 올렸다. 인물 이름 표기와 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "오후 2시 25분 나은재가 수정본의 세 지점 측정과 화면 표시가 회의 기준을 충족한다고 기록했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 108,
+                "end_offset": 261,
+                "quote": "문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0001",
+                "start_offset": 1184,
+                "end_offset": 1364,
+                "quote": "오후 2시 25분 나은재는 수정본의 세 지점 측정과 화면 표시가 회의에서 정한 기준을 충족한다고 기록했다. 권마루는 오후 2시 40분 RG-06의 시험상영용 자막을 s3로 등록하고, s2에는 비교용 이전 판본 표시를 붙였다. 시험상영 확인 대상은 영문 자막이며 한국어 설명 자막의 진행 상태는 이 점검표에 합치지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F5",
+          "text": "오후 2시 40분 권마루가 RG-06의 시험상영용 자막을 s3로 등록하고 s2에는 비교용 이전 판본 표시를 붙였다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 108,
+                "end_offset": 261,
+                "quote": "문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0001",
+                "start_offset": 1184,
+                "end_offset": 1364,
+                "quote": "오후 2시 25분 나은재는 수정본의 세 지점 측정과 화면 표시가 회의에서 정한 기준을 충족한다고 기록했다. 권마루는 오후 2시 40분 RG-06의 시험상영용 자막을 s3로 등록하고, s2에는 비교용 이전 판본 표시를 붙였다. 시험상영 확인 대상은 영문 자막이며 한국어 설명 자막의 진행 상태는 이 점검표에 합치지 않았다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "보류가 파일 형식 확인까지 취소한 것으로 확대하지 않는다.",
+        "시험상영 결과를 행사 당일 상영 완료나 한국어 설명 자막의 합격으로 확대하지 않는다.",
+        "세 지점 점검을 작품 전체 대사 시점 검증으로 확대하지 않는다."
+      ],
+      "limitations": [
+        "AI-authored fictional records; no real film festival or human validation.",
+        "All dates and status claims remain within the fictional May 16 preparation and May 17 test records."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C3-VAL-06",
+      "family_id": "C3-F04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "The check covered the external English subtitles for RG-06, whose picture has Korean dialogue. Korean descriptive subtitles were a separate task and the English-subtitle result was not a result for that file.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 104,
+                "end_offset": 248,
+                "quote": "문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 267,
+                "end_offset": 423,
+                "quote": "5월 21일 작은개울 영화제의 RG-06 회차에서는 한국어 대사 영상에 영문 자막을 함께 띄우기로 했다. 이번 점검은 이 회차의 외부 자막 파일만 대상으로 한다. 청각 접근성을 위한 한국어 설명 자막은 별도 작업이며, 영문 자막 점검 결과를 그 파일의 검수 결과로 쓰지 않는다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "The fixed comparison picture was summerpost_picture_p3.mp4 at 25 frames per second.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 104,
+                "end_offset": 248,
+                "quote": "문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 424,
+                "end_offset": 629,
+                "quote": "대조 영상은 `summerpost_picture_p3.mp4`, 초당 25프레임 판본으로 고정했다. 손라휘가 가져온 초안은 `summerpost_en_s2.srt`다. 파일 이름의 판본과 실제 점검대장에 적은 판본이 다르면 재생 비교를 시작하지 않고 어떤 영상을 기준으로 작성했는지 먼저 확인한다. 영상 편집본이 달라지면 기존 자막의 합격 표시를 이어 쓰지 않는다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "손라휘 could adjust subtitle display times and line breaks but could not change picture playback speed or edited length.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 104,
+                "end_offset": 248,
+                "quote": "문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0001",
+                "start_offset": 1095,
+                "end_offset": 1242,
+                "quote": "손라휘는 자막 표시 시간과 줄 나눔을 고칠 수 있지만 영상의 재생 속도나 편집 길이는 바꾸지 않는다. 맞춤법을 손볼 때도 인물 이름의 영문 표기는 프로그램팀이 전달한 표기표를 따른다. 측정에 쓰는 소리 지점은 나은재가 점검대장에 표시하고 같은 위치를 재검사한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "손라휘 uploaded summerpost_en_s3.srt with every subtitle 0.40 seconds earlier and the problem subtitle split into lines of 36 and 18 characters. Character-name spelling and dialogue translation were unchanged.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 108,
+                "end_offset": 261,
+                "quote": "문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 737,
+                "end_offset": 910,
+                "quote": "오후 1시 20분 손라휘는 모든 자막의 표시 시간을 0.40초 앞당기고, 문제된 자막의 두 줄을 각각 36자와 18자로 다시 나눈 `summerpost_en_s3.srt`를 올렸다. 인물 이름 표기와 대사 번역은 이번 수정에서 바꾸지 않았다. 수정 뒤에도 UTF-8 형식, 순번과 시간 겹침을 다시 확인했다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F5",
+          "text": "The revised s3 values were 0.00 seconds at the first dialogue, 0.00 at the bus-stop scene transition and -0.10 at the final letter image. The values are subtitle start minus reference-sound time, so the first two were aligned and the last was 0.10 seconds early; positive values would mean late.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 108,
+                "end_offset": 261,
+                "quote": "문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0001",
+                "start_offset": 911,
+                "end_offset": 1041,
+                "quote": "나은재는 오후 2시부터 같은 영상과 상영기 B로 재검사했다. 아래 값은 자막 시작 시각에서 기준 소리 시각을 뺀 값이다. 양수는 늦게 표시됨, 음수는 먼저 표시됨을 뜻한다. 단위는 초이며, 초안과 수정본 모두 같은 세 지점을 썼다.\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0001",
+                "start_offset": 1042,
+                "end_offset": 1183,
+                "quote": "| 대조 지점 | 오전 초안 s2 | 오후 수정본 s3 |\n| --- | ---: | ---: |\n| 첫 대사 | +0.40 | 0.00 |\n| 버스 정류장 장면 전환 | +0.40 | 0.00 |\n| 마지막 편지 화면 | +0.30 | -0.10 |\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not confuse the afternoon s3 column with the morning s2 measurements.",
+        "Do not describe the signed difference as an absolute delay: -0.10 means early.",
+        "Do not claim a changed picture version, changed playback speed, changed translation, Korean descriptive-subtitle approval or verification of every dialogue cue."
+      ],
+      "limitations": [
+        "Fictional AI-authored sources; the test did not establish the later festival screening outcome.",
+        "The three timing measurements apply only to the specified checkpoints."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C3-VAL-07",
+      "family_id": "C3-F04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "RG-06 시험상영용으로 마지막 등록된 자막 판본은 s3다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 108,
+                "end_offset": 261,
+                "quote": "문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0001",
+                "start_offset": 1184,
+                "end_offset": 1364,
+                "quote": "오후 2시 25분 나은재는 수정본의 세 지점 측정과 화면 표시가 회의에서 정한 기준을 충족한다고 기록했다. 권마루는 오후 2시 40분 RG-06의 시험상영용 자막을 s3로 등록하고, s2에는 비교용 이전 판본 표시를 붙였다. 시험상영 확인 대상은 영문 자막이며 한국어 설명 자막의 진행 상태는 이 점검표에 합치지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "등록 담당자는 권마루이고 등록 시각은 2032년 5월 17일 오후 2시 40분이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0000",
+                "start_offset": 108,
+                "end_offset": 261,
+                "quote": "문서번호: SG-SUB-06-B  \n기록일: 2032년 5월 17일  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n적용 문서: 5월 16일 자막 대조 준비회의 SG-SUB-06-A  \n기록 담당: 권마루  \n시험 장비: 상영기 B, 행사 때 사용할 지정 글꼴\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-02-r1-c0001",
+                "start_offset": 1184,
+                "end_offset": 1364,
+                "quote": "오후 2시 25분 나은재는 수정본의 세 지점 측정과 화면 표시가 회의에서 정한 기준을 충족한다고 기록했다. 권마루는 오후 2시 40분 RG-06의 시험상영용 자막을 s3로 등록하고, s2에는 비교용 이전 판본 표시를 붙였다. 시험상영 확인 대상은 영문 자막이며 한국어 설명 자막의 진행 상태는 이 점검표에 합치지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "2032년 5월 21일 행사 당일 RG-06의 실제 상영 시작 시각.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "두 가상 문서 전체에는 5월 17일 시험·등록 기록과 5월 21일 행사 계획만 있고 행사 당일의 실제 시작 시각은 없다. 시험 시작이나 등록 시각으로 행사일 실제 상영 시각을 대체할 수 없어 질문 전체를 보류해야 한다.",
+      "forbidden_inferences": [
+        "오전 9시 40분, 오후 2시 또는 오후 2시 40분을 행사 당일 실제 상영 시작으로 바꾸지 않는다.",
+        "행사 예정일이 있다는 이유로 실제 상영이 이루어졌다고 가정하지 않는다.",
+        "알려진 등록 정보만 제공한 부분 답변을 전체 answered로 처리하지 않는다."
+      ],
+      "limitations": [
+        "Both full fictional source documents are included as their original four chunks; no relevant source chunk was withheld."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C3-VAL-08",
+      "family_id": "C3-F04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "손라휘 was assigned to record completion of the file-format check.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 104,
+                "end_offset": 248,
+                "quote": "문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 647,
+                "end_offset": 920,
+                "quote": "| 구분 | 확인할 내용 | 완료 기록 담당 |\n| --- | --- | --- |\n| 파일 형식 | UTF-8로 저장한 SRT이며 순번 누락과 겹치는 표시 시간이 없어야 한다. | 손라휘 |\n| 화면 표시 | 상영기 B의 지정 글꼴에서 한 자막은 두 줄 이내, 각 줄은 공백을 포함해 42자 이내여야 한다. | 나은재 |\n| 시간 대조 | 첫 대사, 버스 정류장 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "The file had to be UTF-8 SRT with no missing sequence numbers and no overlapping display times.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 104,
+                "end_offset": 248,
+                "quote": "문서번호: SG-SUB-06-A  \n회의일: 2032년 5월 16일  \n회의 시간: 오전 10시부터 10시 40분까지  \n대상 프로그램: RG-06, 단편영화 《여름 우체통》  \n참석: 나은재(상영 기술), 손라휘(영문 자막), 권마루(프로그램 운영·기록)\n"
+              },
+              {
+                "chunk_id": "c3-f04-doc-01-r1-c0000",
+                "start_offset": 647,
+                "end_offset": 920,
+                "quote": "| 구분 | 확인할 내용 | 완료 기록 담당 |\n| --- | --- | --- |\n| 파일 형식 | UTF-8로 저장한 SRT이며 순번 누락과 겹치는 표시 시간이 없어야 한다. | 손라휘 |\n| 화면 표시 | 상영기 B의 지정 글꼴에서 한 자막은 두 줄 이내, 각 줄은 공백을 포함해 42자 이내여야 한다. | 나은재 |\n| 시간 대조 | 첫 대사, 버스 정류장 장면 전환, 마지막 편지 화면의 세 지점에서 자막 시작과 기준 소리의 차이가 각각 0.20초 이내여야 한다. | 나은재 |\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "The final filename of the separate Korean descriptive subtitle file.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "F4",
+          "text": "The approval date of the separate Korean descriptive subtitle file.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "The whole adopted family gives the English-subtitle format assignment and conditions, while treating Korean descriptive subtitles as a separate task. It supplies neither that separate file's final filename nor its approval date, requiring whole-request abstention.",
+      "forbidden_inferences": [
+        "Do not use summerpost_en_s2.srt or summerpost_en_s3.srt as the Korean descriptive-subtitle filename.",
+        "Do not transfer the May 17 English-subtitle test or registration date to approval of Korean descriptive subtitles.",
+        "Do not treat exclusion from these records as proof that the separate work never occurred or had failed."
+      ],
+      "limitations": [
+        "All four original family chunks are included; missing information is absent from both complete source documents."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    }
+  ]
+}

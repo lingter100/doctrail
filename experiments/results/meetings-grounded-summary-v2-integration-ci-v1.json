@@ -1,0 +1,112 @@
+{
+  "status": "exact_source_both_required_ci_passed",
+  "source_commit": "23d67b574cff6a4e2c0ab47a3823b2b4f4289fad",
+  "runs": [
+    {
+      "id": 39885044931,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39885044931",
+      "headSha": "23d67b574cff6a4e2c0ab47a3823b2b4f4289fad",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 39885050510,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39885050510",
+      "headSha": "23d67b574cff6a4e2c0ab47a3823b2b4f4289fad",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 21167,
+      "sha256": "de7ab7999e2a7c3269b9b4c4af6273a541ab0833e13e71a207fd96fabbf538c5"
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 4536,
+      "sha256": "9bdf5f490f777aa9a20db0d21be33b34107f31c1962602c973d71200695b0137"
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 22574,
+      "sha256": "cf282f01118b0968a18edd5f8ab7748496bb1aa2dd980b0ed58e8b462a327d02"
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 38707,
+      "sha256": "83009cce1167fa8798d14ea150d4b5cc92b1228eef13e610abe9f6e10b72a313"
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 44029,
+      "sha256": "96b0d5ece5092967cbb813431f2980583c83c8db3d34f3d895102d747f44983c"
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 6632,
+      "sha256": "f7f5edc37226aa26b5ab84ea357988c578b3473c9bcf72fb5b204ae11452d31f"
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 31731,
+      "sha256": "8e75faa8c20a7f0e466bbbb28d2177aa79d70f0c4c0a34cc7c3a97f517d1f468"
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 63312,
+      "sha256": "73281a645b9b49a7ff33dd6d316d581e26a6aafb2cb3275a481375ac4bac875a"
+    },
+    {
+      "path": "src/doctrail/meeting_grounded_summary.py",
+      "bytes": 28695,
+      "sha256": "5b765a679ada4b6b4165674573763c2c323e9df813d8c75ba453347421e05423"
+    },
+    {
+      "path": "tests/test_meeting_grounded_summary.py",
+      "bytes": 37066,
+      "sha256": "f99ec890eafc3817763d8d42d6fb6fc527d3417a49136bc05acf52f09de13caa"
+    }
+  ],
+  "limits": [
+    "CI uses synthetic model transports and offline fixtures; it does not establish actual candidate semantic quality.",
+    "Local JAR/UI are separately pinned existing artifacts, not downloaded CI binaries."
+  ]
+}

@@ -1,0 +1,794 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "cases": [
+    {
+      "id": "C5-VAL-01",
+      "family_id": "c5-f03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "C5-VAL-01-F01",
+          "text": "rustc의 주요 구성 요소가 rustc-dev-guide에 다뤄지도록 하는 것이 목표다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-general-r1-c0002",
+                "start_offset": 1848,
+                "end_offset": 2020,
+                "quote": "This working group aims to accomplish the following:\n\n- Ensure that major components of rustc are covered in rustc-dev-guide\n- Ensure that API doc coverage is at least 90%\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-01-F02",
+          "text": "API 문서 커버리지를 최소 90%로 만드는 것이 목표다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-general-r1-c0002",
+                "start_offset": 1848,
+                "end_offset": 2020,
+                "quote": "This working group aims to accomplish the following:\n\n- Ensure that major components of rustc are covered in rustc-dev-guide\n- Ensure that API doc coverage is at least 90%\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-01-F03",
+          "text": "참여를 원하면 Zulip 스트림에 와서 인사한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-general-r1-c0002",
+                "start_offset": 2047,
+                "end_offset": 2277,
+                "quote": "If you are interested in getting involved in this working group, come and say hi in the Zulip\nstream. You can be added to the Zulip group for the working group if you are interested in being\npinged when there are available tasks.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-01-F04",
+          "text": "할 일이 생겼을 때 알림을 받고 싶으면 작업 그룹의 Zulip 그룹에 추가될 수 있다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-general-r1-c0002",
+                "start_offset": 2047,
+                "end_offset": 2277,
+                "quote": "If you are interested in getting involved in this working group, come and say hi in the Zulip\nstream. You can be added to the Zulip group for the working group if you are interested in being\npinged when there are available tasks.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-val-pub-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-val-pub-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2019-05-14"
+        },
+        {
+          "document_id": "c5-val-pub-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2019-05-28"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "목표 수치를 이미 달성한 실적으로 바꾸지 않는다.",
+        "Zulip 그룹 추가를 자동 승인이나 필수 자격 요건으로 표현하지 않는다."
+      ],
+      "limitations": [
+        "제공된 일반 소개 문서의 내용만 설명하며 현재의 운영 상태를 확인한 답변은 아니다."
+      ],
+      "question_author": "/root/c5_validation_author",
+      "oracle_author": "/root/c5_validation_author",
+      "independent_prereviewer": "/root/c5_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-VAL-02",
+      "family_id": "c5-f03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "C5-VAL-02-F01",
+          "text": "On May 14, the group planned to use GitHub issues to track work.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-01-r1-c0001",
+                "start_offset": 1612,
+                "end_offset": 1843,
+                "quote": "- planning to use github issues.\n- Two issues were created to track existing work:\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-01-r1-c0002",
+                "start_offset": 1693,
+                "end_offset": 1913,
+                "quote": ":\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of GH projects\n- for now we will move TODO list to GH issues from dropbox"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-02-F02",
+          "text": "The TODO list was to move from Dropbox to GitHub issues for the time being.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-01-r1-c0002",
+                "start_offset": 1693,
+                "end_offset": 1913,
+                "quote": ":\n  - https://github.com/rust-lang/rustc-dev-guide/issues/319\n  - https://github.com/rust-lang/rustc-dev-guide/issues/320\n- discussed possible use of GH projects\n- for now we will move TODO list to GH issues from dropbox"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-02-F03",
+          "text": "On May 28, the issue-assignment problem was that non-members could not be assigned issues.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-02-r1-c0000",
+                "start_offset": 149,
+                "end_offset": 471,
+                "quote": "- Some discussion about how to assign issues on the rust-lang/rustc-dev-guide repo\n- Problem: can't assign issues to non-members\n- Possible solutions:\n    - Add WG-rustc-dev-guide members to repo so they can be assigned\n    - use `triagebot` model: bot is assigned the issue and edits the OP to mention the current owner.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-02-F04",
+          "text": "One possible solution was to add working-group members to the repository so they could be assigned issues.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-02-r1-c0000",
+                "start_offset": 149,
+                "end_offset": 471,
+                "quote": "- Some discussion about how to assign issues on the rust-lang/rustc-dev-guide repo\n- Problem: can't assign issues to non-members\n- Possible solutions:\n    - Add WG-rustc-dev-guide members to repo so they can be assigned\n    - use `triagebot` model: bot is assigned the issue and edits the OP to mention the current owner.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-02-F05",
+          "text": "The other possible solution was a triagebot-style arrangement: assign the bot and edit the original post to mention the current owner.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-02-r1-c0000",
+                "start_offset": 149,
+                "end_offset": 471,
+                "quote": "- Some discussion about how to assign issues on the rust-lang/rustc-dev-guide repo\n- Problem: can't assign issues to non-members\n- Possible solutions:\n    - Add WG-rustc-dev-guide members to repo so they can be assigned\n    - use `triagebot` model: bot is assigned the issue and edits the OP to mention the current owner.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-val-pub-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-val-pub-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2019-05-14"
+        },
+        {
+          "document_id": "c5-val-pub-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2019-05-28"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not say that either proposed assignment solution was selected or implemented.",
+        "Do not replace the stated GitHub-issues plan with a decision to use GitHub Projects."
+      ],
+      "limitations": [
+        "These are dated plans and discussion options; the records do not establish later implementation."
+      ],
+      "question_author": "/root/c5_validation_author",
+      "oracle_author": "/root/c5_validation_author",
+      "independent_prereviewer": "/root/c5_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-VAL-03",
+      "family_id": "c5-f03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "C5-VAL-03-F01",
+          "text": "새 장은 간단한 프로그램의 컴파일 과정을 따라 설명하려는 것이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-01-r1-c0000",
+                "start_offset": 374,
+                "end_offset": 624,
+                "quote": "- Goal is to have a chapter which will walk through compilation of simple program\n- Links to other chapters for details\n- This overview differs from the existing queries chapter in that the latter is\n  more focused on how to create your own queries.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-03-F02",
+          "text": "lokalmatador가 작성을 시도하고 있다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-01-r1-c0000",
+                "start_offset": 625,
+                "end_offset": 700,
+                "quote": "Status:\n- lokalmatador is giving this a try & will open a PR at some point\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-03-F03",
+          "text": "해당 PR을 제출하기로 한 정확한 달력 날짜.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-val-pub-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-val-pub-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2019-05-14"
+        },
+        {
+          "document_id": "c5-val-pub-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2019-05-28"
+        }
+      ],
+      "unanswerable_reason": "세 문서 전체에 PR 제출의 정확한 날짜가 없다. 5월 14일 회의는 at some point라고만 적으므로 질문의 필수 날짜를 완성할 수 없다.",
+      "forbidden_inferences": [
+        "회의 날짜나 나중 회의 링크의 날짜를 PR 제출 날짜로 사용하지 않는다.",
+        "at some point를 확정 기한으로 바꾸지 않는다."
+      ],
+      "limitations": [
+        "같은 자료 묶음의 일반 문서와 두 회의 전체를 포함했다. 날짜 부재는 이 제공 범위에 한정된다."
+      ],
+      "question_author": "/root/c5_validation_author",
+      "oracle_author": "/root/c5_validation_author",
+      "independent_prereviewer": "/root/c5_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-VAL-04",
+      "family_id": "c5-f03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "C5-VAL-04-F01",
+          "text": "The May 14 minutes say spastorino would arrange lectures.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-01-r1-c0001",
+                "start_offset": 1313,
+                "end_offset": 1514,
+                "quote": "Status:\n\n- Would be good to schedule a lecture on each missing topic\n- less work for the experts\n- Can then transcribe into a chapter\n- @spastorino will arrange lectures, nikomatsakis will create zoom\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-04-F02",
+          "text": "The May 14 minutes say nikomatsakis would create the Zoom meeting.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-01-r1-c0001",
+                "start_offset": 1313,
+                "end_offset": 1514,
+                "quote": "Status:\n\n- Would be good to schedule a lecture on each missing topic\n- less work for the experts\n- Can then transcribe into a chapter\n- @spastorino will arrange lectures, nikomatsakis will create zoom\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-04-F03",
+          "text": "The May 28 minutes list a lecture on MIR and HAIR construction.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-pub-meeting-02-r1-c0001",
+                "start_offset": 1086,
+                "end_offset": 1123,
+                "quote": "- Do one on MIR and HAIR construction"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-04-F04",
+          "text": "The exact scheduled calendar date of the MIR and HAIR construction lecture.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-val-pub-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-val-pub-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2019-05-14"
+        },
+        {
+          "document_id": "c5-val-pub-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2019-05-28"
+        }
+      ],
+      "unanswerable_reason": "The complete three-document family names the topic but supplies no scheduled date for that lecture. The required date cannot be recovered from meeting dates or links.",
+      "forbidden_inferences": [
+        "Do not use May 28 or a linked meeting date as the lecture date.",
+        "Do not turn the general lecture responsibilities into evidence that this particular lecture was arranged or held."
+      ],
+      "limitations": [
+        "The question distinguishes the general responsibilities stated on May 14 from the topic listed on May 28."
+      ],
+      "question_author": "/root/c5_validation_author",
+      "oracle_author": "/root/c5_validation_author",
+      "independent_prereviewer": "/root/c5_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-VAL-05",
+      "family_id": "c5-f04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "C5-VAL-05-F01",
+          "text": "사용 가능량은 관측 저수량 152에 확정 외부 유입 18을 더하고 비축분 25를 빼서 145세제곱미터로 계산한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 305,
+                "end_offset": 499,
+                "quote": "3월 8일 18시 저수량은 152세제곱미터로 측정됐다. 주말에 실제 들어온 빗물과 지난주 잔량이 이미 이 관측값에 포함되어 있으므로 각각을 다시 더하지 않는다. 이번 주 외부 수로에서 18세제곱미터가 3월 10일에 들어오기로 확정되어, 비축분 25세제곱미터를 제외한 사용 가능량은 145세제곱미터다. 외부 유입은 첫 급수 전에 들어오는 일정이다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-05-F02",
+          "text": "주말 빗물과 지난주 잔량은 이미 관측값 152에 포함되어 있으므로 다시 더하지 않는다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 305,
+                "end_offset": 499,
+                "quote": "3월 8일 18시 저수량은 152세제곱미터로 측정됐다. 주말에 실제 들어온 빗물과 지난주 잔량이 이미 이 관측값에 포함되어 있으므로 각각을 다시 더하지 않는다. 이번 주 외부 수로에서 18세제곱미터가 3월 10일에 들어오기로 확정되어, 비축분 25세제곱미터를 제외한 사용 가능량은 145세제곱미터다. 외부 유입은 첫 급수 전에 들어오는 일정이다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-05-F03",
+          "text": "요청 합계 140세제곱미터를 배정하고 남은 5세제곱미터는 추가 배분하지 않는다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 500,
+                "end_offset": 740,
+                "quote": "문태오는 상단 논의 남은 물대기 구간 때문에 이번 주 요청이 65세제곱미터라고 보고했다. 중단 밭은 정식 직후의 집중 급수가 끝나 35세제곱미터를, 하단 과수원은 미뤘던 구획을 포함해 40세제곱미터를 새로 요청했다. 요청 합계 140세제곱미터가 사용 가능량 안에 있으므로 세 요청을 그대로 배정하고 5세제곱미터는 추가로 배분하지 않는다. 지난주 덜 배정된 양을 자동 가산한 계산이 아니라 이번 주 제출된 필요량으로 정한 결과다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-05-F04",
+          "text": "각 구역의 사용량은 수로 입구에서 잰 방류량으로 계산한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-general-r1-c0000",
+                "start_offset": 962,
+                "end_offset": 998,
+                "quote": "수로 입구에서 잰 방류량을 각 구역의 사용량으로 계산한다. 구역 "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c5-val-syn-general-r1-c0001",
+                "start_offset": 962,
+                "end_offset": 1175,
+                "quote": "수로 입구에서 잰 방류량을 각 구역의 사용량으로 계산한다. 구역 안의 물 저장량을 따로 추정해 공제하지 않는다. 구역별 종료 시점에 실제 방류량과 예정량의 차이를 기록하고, 남은 양을 임의로 다른 구역에 넘기지 않는다. 주간 기록에는 기준 저수량, 확정 유입량, 비축분, 요청량, 배정량, 실제 방류량을 구분한다. 문태오는 급수 뒤 경작 일정이 달라졌는지도 다음 회의에 가져온다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-05-F05",
+          "text": "구역 안의 물 저장량을 따로 추정해 사용량에서 공제하지 않는다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-general-r1-c0001",
+                "start_offset": 962,
+                "end_offset": 1175,
+                "quote": "수로 입구에서 잰 방류량을 각 구역의 사용량으로 계산한다. 구역 안의 물 저장량을 따로 추정해 공제하지 않는다. 구역별 종료 시점에 실제 방류량과 예정량의 차이를 기록하고, 남은 양을 임의로 다른 구역에 넘기지 않는다. 주간 기록에는 기준 저수량, 확정 유입량, 비축분, 요청량, 배정량, 실제 방류량을 구분한다. 문태오는 급수 뒤 경작 일정이 달라졌는지도 다음 회의에 가져온다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-val-syn-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-val-syn-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-03-02"
+        },
+        {
+          "document_id": "c5-val-syn-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-03-09"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "관측값에 들어 있는 빗물이나 지난주 잔량을 다시 더하지 않는다.",
+        "확정된 외부 유입 일정을 실제 유입 완료로 바꾸지 않는다.",
+        "추가 배분하지 않는 5세제곱미터를 다음 주 특정 구역의 확정 몫으로 만들지 않는다."
+      ],
+      "limitations": [
+        "회의 시점의 이번 주 계획과 일반 정산 규칙을 결합한다. 실제 외부 유입 완료나 이번 주 최종 사용 실적은 별도다."
+      ],
+      "question_author": "/root/c5_validation_author",
+      "oracle_author": "/root/c5_validation_author",
+      "independent_prereviewer": "/root/c5_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-VAL-06",
+      "family_id": "c5-f04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "C5-VAL-06-F01",
+          "text": "The upper paddy was allocated 50 cubic metres and actually received a discharge of 48 cubic metres.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-01-r1-c0000",
+                "start_offset": 475,
+                "end_offset": 658,
+                "quote": "이번 주 배정은 상단 논 50세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 25세제곱미터로 결정했다. 각 대표는 줄어든 분량이 미지급 채무처럼 쌓이는 것은 아니며 다음 주에는 실제 필요량을 다시 낸다는 점을 확인했다. 문태오는 상단 논의 나머지 물대기 구간과 과수원에서 미룬 구획의 경작 상태를 3월 9일 회의에 보고한다.\n"
+              },
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 96,
+                "end_offset": 290,
+                "quote": "참석자: 이담서, 문태오, 백소린과 세 경작 구역 대표. 먼저 3월 2일~8일의 기록을 닫고, 3월 9일~15일에 사용할 새 시간표를 만들었다. 지난주 실제 방류량은 상단 논 48세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 24세제곱미터였다. 배정 합계 110세제곱미터 중 쓰지 않은 3세제곱미터는 다른 구역에 보내지 않고 저수지에 남겼다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-06-F02",
+          "text": "The middle field was allocated 35 cubic metres and actually received a discharge of 35 cubic metres.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-01-r1-c0000",
+                "start_offset": 475,
+                "end_offset": 658,
+                "quote": "이번 주 배정은 상단 논 50세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 25세제곱미터로 결정했다. 각 대표는 줄어든 분량이 미지급 채무처럼 쌓이는 것은 아니며 다음 주에는 실제 필요량을 다시 낸다는 점을 확인했다. 문태오는 상단 논의 나머지 물대기 구간과 과수원에서 미룬 구획의 경작 상태를 3월 9일 회의에 보고한다.\n"
+              },
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 96,
+                "end_offset": 290,
+                "quote": "참석자: 이담서, 문태오, 백소린과 세 경작 구역 대표. 먼저 3월 2일~8일의 기록을 닫고, 3월 9일~15일에 사용할 새 시간표를 만들었다. 지난주 실제 방류량은 상단 논 48세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 24세제곱미터였다. 배정 합계 110세제곱미터 중 쓰지 않은 3세제곱미터는 다른 구역에 보내지 않고 저수지에 남겼다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-06-F03",
+          "text": "The lower orchard was allocated 25 cubic metres and actually received a discharge of 24 cubic metres.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-01-r1-c0000",
+                "start_offset": 475,
+                "end_offset": 658,
+                "quote": "이번 주 배정은 상단 논 50세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 25세제곱미터로 결정했다. 각 대표는 줄어든 분량이 미지급 채무처럼 쌓이는 것은 아니며 다음 주에는 실제 필요량을 다시 낸다는 점을 확인했다. 문태오는 상단 논의 나머지 물대기 구간과 과수원에서 미룬 구획의 경작 상태를 3월 9일 회의에 보고한다.\n"
+              },
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 96,
+                "end_offset": 290,
+                "quote": "참석자: 이담서, 문태오, 백소린과 세 경작 구역 대표. 먼저 3월 2일~8일의 기록을 닫고, 3월 9일~15일에 사용할 새 시간표를 만들었다. 지난주 실제 방류량은 상단 논 48세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 24세제곱미터였다. 배정 합계 110세제곱미터 중 쓰지 않은 3세제곱미터는 다른 구역에 보내지 않고 저수지에 남겼다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-06-F04",
+          "text": "Three cubic metres of the total allocation were unused and remained in the reservoir rather than being transferred to another zone.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 96,
+                "end_offset": 290,
+                "quote": "참석자: 이담서, 문태오, 백소린과 세 경작 구역 대표. 먼저 3월 2일~8일의 기록을 닫고, 3월 9일~15일에 사용할 새 시간표를 만들었다. 지난주 실제 방류량은 상단 논 48세제곱미터, 중단 밭 35세제곱미터, 하단 과수원 24세제곱미터였다. 배정 합계 110세제곱미터 중 쓰지 않은 3세제곱미터는 다른 구역에 보내지 않고 저수지에 남겼다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-val-syn-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-val-syn-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-03-02"
+        },
+        {
+          "document_id": "c5-val-syn-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-03-09"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not confuse the original requested quantities with the March 2 allocations.",
+        "Do not substitute the new March 9–15 allocations for the prior week actual discharges.",
+        "Do not add a later entitlement or transfer of the unused water."
+      ],
+      "limitations": [
+        "Actual discharges refer to March 2–8 as reported on March 9; translations of zone names preserve the three distinct zones."
+      ],
+      "question_author": "/root/c5_validation_author",
+      "oracle_author": "/root/c5_validation_author",
+      "independent_prereviewer": "/root/c5_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-VAL-07",
+      "family_id": "c5-f04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "C5-VAL-07-F01",
+          "text": "3월 9일~15일의 사용 가능량은 145세제곱미터다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 305,
+                "end_offset": 499,
+                "quote": "3월 8일 18시 저수량은 152세제곱미터로 측정됐다. 주말에 실제 들어온 빗물과 지난주 잔량이 이미 이 관측값에 포함되어 있으므로 각각을 다시 더하지 않는다. 이번 주 외부 수로에서 18세제곱미터가 3월 10일에 들어오기로 확정되어, 비축분 25세제곱미터를 제외한 사용 가능량은 145세제곱미터다. 외부 유입은 첫 급수 전에 들어오는 일정이다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-07-F02",
+          "text": "외부 수로의 18세제곱미터가 3월 10일에 들어오기로 확정되어 있다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 305,
+                "end_offset": 499,
+                "quote": "3월 8일 18시 저수량은 152세제곱미터로 측정됐다. 주말에 실제 들어온 빗물과 지난주 잔량이 이미 이 관측값에 포함되어 있으므로 각각을 다시 더하지 않는다. 이번 주 외부 수로에서 18세제곱미터가 3월 10일에 들어오기로 확정되어, 비축분 25세제곱미터를 제외한 사용 가능량은 145세제곱미터다. 외부 유입은 첫 급수 전에 들어오는 일정이다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-07-F03",
+          "text": "3월 16일~22일 상단 논의 확정 배정량.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-val-syn-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-val-syn-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-03-02"
+        },
+        {
+          "document_id": "c5-val-syn-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-03-09"
+        }
+      ],
+      "unanswerable_reason": "전체 세 문서에 3월 16일~22일 상단 논의 확정 배정량이 없다. 3월 9일 회의는 3월 15일 이후 유입량과 다음 주 구역별 배정량을 정하지 않았다고 명시한다.",
+      "forbidden_inferences": [
+        "이번 주 상단 논 배정량을 다음 주에 그대로 이월하지 않는다.",
+        "추가 배분하지 않은 물이나 지난주 부족분을 다음 주 확정 몫으로 추론하지 않는다.",
+        "예정 외부 유입을 실제 유입 완료로 바꾸지 않는다."
+      ],
+      "limitations": [
+        "같은 합성 조직의 일반 규칙과 두 회의 전체를 포함한다. 다음 주 배정량의 부재는 제공된 기록 범위에서 확인한 것이다."
+      ],
+      "question_author": "/root/c5_validation_author",
+      "oracle_author": "/root/c5_validation_author",
+      "independent_prereviewer": "/root/c5_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C5-VAL-08",
+      "family_id": "c5-f04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "C5-VAL-08-F01",
+          "text": "The middle field no longer needed the first slot because its previous transplanting-date constraint had been resolved.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 752,
+                "end_offset": 998,
+                "quote": "이번 주에는 상단 논이 첫 순서를 맡는다. 급수일은 상단 논 3월 11일, 중단 밭 3월 12일, 하단 과수원 3월 14일이다. 중단 밭의 지난주 정식 날짜 제약은 해소되어 첫 순서를 유지할 이유가 없다는 보고를 반영했다. 백소린은 외부 유입 일정과 급수일을 같은 시간표에 표시한다. 이담서는 실제 외부 유입량과 각 구역 방류량을 따로 남겨 다음 회의에서 계획과 실적을 대조한다. 3월 15일 이후의 유입량과 다음 주 구역별 배정량은 이번 "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-08-F02",
+          "text": "The upper paddy was scheduled first, with its irrigation date set to March 11.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c5-val-syn-meeting-02-r1-c0000",
+                "start_offset": 752,
+                "end_offset": 998,
+                "quote": "이번 주에는 상단 논이 첫 순서를 맡는다. 급수일은 상단 논 3월 11일, 중단 밭 3월 12일, 하단 과수원 3월 14일이다. 중단 밭의 지난주 정식 날짜 제약은 해소되어 첫 순서를 유지할 이유가 없다는 보고를 반영했다. 백소린은 외부 유입 일정과 급수일을 같은 시간표에 표시한다. 이담서는 실제 외부 유입량과 각 구역 방류량을 따로 남겨 다음 회의에서 계획과 실적을 대조한다. 3월 15일 이후의 유입량과 다음 주 구역별 배정량은 이번 "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "C5-VAL-08-F03",
+          "text": "The exact clock time when irrigation actually started for the first zone in that week.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c5-val-syn-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c5-val-syn-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-03-02"
+        },
+        {
+          "document_id": "c5-val-syn-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-03-09"
+        }
+      ],
+      "unanswerable_reason": "The entire family gives a planned order and calendar dates but no actual clock-time record of that week's first irrigation. The required actual start time is therefore absent.",
+      "forbidden_inferences": [
+        "Do not turn the scheduled date into evidence of actual commencement.",
+        "Do not use the 18:00 reservoir-reading time as an irrigation start time.",
+        "Do not invent a midnight or morning start from the calendar date."
+      ],
+      "limitations": [
+        "The supplied record is a planning meeting. Its schedule does not establish later execution time."
+      ],
+      "question_author": "/root/c5_validation_author",
+      "oracle_author": "/root/c5_validation_author",
+      "independent_prereviewer": "/root/c5_validation_prereviewer",
+      "human_review_count": 0
+    }
+  ]
+}
