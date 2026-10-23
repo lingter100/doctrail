@@ -1,4 +1,18 @@
 # 진행 상태
+## 2026-10-23 · Java 실행기 실제 연결 검증 완료
+
+수정된 공식 batch/main 실행기로 meeting-ready.spec.ts 한 파일을1회 검증했다. 실제 Java21·패키지React·합성HTTP 모델 fixture로4통과/17.12초, 전체35.49초/종료0이다. 서버 정상요청SIGTERM·로그flush·packagedUI 일치, infrastructure/startup/누락0이며 실제 LLM0이다. 추적Node/Java6개와현재직계자식 부재를 확인했지만 브라우저 자식 전체관측으로 확대하지 않는다. 기존JAR/dist5·내부정적45개가 같고 재빌드/설치/재시도0이다. 부모가18증거·원본/복사4쌍·현재source4를 대조했다. [수정·검증 결과](../experiments/results/java-browser-ci-recovery-v1.json)에 원래CI원인미확정과 새로운CI/업로드미검증을 구분했다. 소스커밋/정확CI 다음이며 Java슬롯은 반환됐다.
+
+자료수용10개는 사용자명의 eb9d326으로 로컬커밋했다. 새 기준4개는 출력 전 잠겼다. 실행등록/자원10GiB/새CI가 충족되기 전 실제모델진단은 하지 않으며 전체goal ACTIVE다.
+
+## 2026-10-23 · 원문 기준 잠금과 실행기 최종 독립 검토
+
+같은 독립 Astra xhigh 판단자가 전체 원문4개와 순서·비공개 요약 기준을 모델 출력 전에 잠갔다. safe35679077/receipt7dca0025/lockfa149e9f, private d2dfafef이며 부모는194입력·출력3·부재3경로를 확인했다. 비공개 기준은 바이트만 검증했다. [공개 잠금 기록](../experiments/results/meetings-summary-mode-criteria-lock-v1.json)은 실제 품질이나 최종평가가 아니다.
+
+CI 실행기 JCI-01은 수정 전 실제Node 반례2개에서 잘못된 성공을 재현했고 helper/test2 수정 뒤11개/1.212초 통과했다. 독립 최종 b57b322f는 차단0/권고0, 입력13개가 동일하다. 부모가 현재4·새증거65·원본38을 대조했다. 기존 JAR/UI를 재빌드하지 않는 실제 Java 단일 회의spec은 별도로 검증 중이다. 새 모델 진단은0이며 자원조건/최종등록/정확CI가 남았다.
+
+Sol high 실행준비는 마지막 응답에서 capacity오류2회가 났으나 이미 저장된6파일을 부모가 검증했다. 코드141·metadata12·원문hash는 현재 동일하고 자산61은 작업자1회전체hash 후 부모stat검증으로 구분한다. 실제실행 전 전체재검증이 필요하다. 07:33:41Z 실행기와 같은psutil 측정은 여유RAM9,263,050,752B로10GiB미만이다. 실제실행/등록경로는 생성하지 않았고 전체goal ACTIVE다.
+
 ## 2026-10-23 · 개발 전용 자료 수용과 독립 기준 배정
 
 새 계약의 독립 판정은4개 accepted/0withheld다. safe95f68f3d/lock1881b3d0의 입력190·출력2·부재3경로를 부모가 확인하고 [자료 수용](../experiments/results/meetings-summary-mode-prospective-admission-v1.json)을 기록했다. 기존 L2와 모든 원자료는 보존한다. 같은 Astra xhigh reviewer에게 새 source-only 기준·잠금만 배정하며 실제 모델 실행은0이다. 실행 준비의 현재 여유RAM 약7.7GiB는 시작요구10GiB에 못미쳐 실제 추론 조건을 충족하지 않는다. 다른 프로세스를 종료하거나 기준을 낮추지 않고 코드/자료/서비스 검증을 계속한다. 전체goal ACTIVE다.

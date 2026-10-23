@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "diagnostic": "summary-mode-development-v1",
+  "status": "source-only criteria locked before new model output",
+  "documents": 4,
+  "source_input_unchanged": true,
+  "input_bindings_verified_by_parent": 194,
+  "declared_paths_still_absent": 3,
+  "scope": "Development diagnostic only; not unseen holdout or official final evaluation.",
+  "dimensions": [
+    "full-claim source support",
+    "full-claim selected evidence support",
+    "exact source coordinates",
+    "whole-document core sufficiency",
+    "conditions exceptions time and status",
+    "readable complete Korean summary"
+  ],
+  "references": [
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/source-only-criteria-v1/safe-source-only-criteria-v1.json",
+      "bytes": 10558,
+      "sha256": "356790779a8eb3b9ce0f73c861a02d3dc8e79e5d3f037961553fbf402dd24950"
+    },
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/source-only-criteria-v1/source-receipt-v1.json",
+      "bytes": 10998,
+      "sha256": "7dca002538be68f0bf0d2d2d26611a58bdd7059f1c04d88320c4df7ad0c8eb06"
+    },
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/source-only-criteria-v1/source-lock-v1.json",
+      "bytes": 83438,
+      "sha256": "fa149e9f0ce55c9a33f22947b2166bf5a3ada832612ad8fa7fcccee5d36dbc66"
+    },
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/source-only-criteria-v1/private-summary-criteria-v1.json",
+      "bytes": 79764,
+      "sha256": "d2dfafef19bf4c82d232843cdf9df263522ffd9c792aa6b53da8c9fe1824979f"
+    }
+  ],
+  "private_criteria_access": "Parent and executor byte/hash verification only; source-specific criteria not read.",
+  "original_L2_preserved": true,
+  "human_review_count": 0,
+  "actual_model_runs": 0,
+  "execution_prepared": false,
+  "remaining": [
+    "exact source CI",
+    "runtime registration",
+    "live RAM and exclusive runtime checks",
+    "explicit once dispatch"
+  ]
+}

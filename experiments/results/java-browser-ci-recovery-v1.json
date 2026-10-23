@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "kind": "java-browser-runner-failure-observability-and-status-repair",
+  "original_failure": {
+    "run": "https://github.com/lingter100/doctrail/actions/runs/39914310802",
+    "source_commit": "207bf0346b875f0929bb15c8f342162544d1c14d",
+    "root_cause": "unknown",
+    "failed_spec": "unknown",
+    "original_log_sha256": "2845c289d1c1a9237eeb82a734acb130e5757d3b6917784124a8a962752f4d34",
+    "original_rerun": false
+  },
+  "changes": [
+    "retain spec, phase, exit code, signal and flushed Java log",
+    "fail unexpected server termination even if browser returns zero",
+    "preserve first callback error and normal requested cleanup",
+    "report startup/infrastructure/missing-report counts separately",
+    "upload only isolated run.json/java.log/report.json on CI failure for 3 days"
+  ],
+  "node_regression": {
+    "before_repair": {
+      "passed": 8,
+      "failed": 2,
+      "cases": "actual Node spontaneous exit23 or exit0 plus browser result0 falsely succeeded"
+    },
+    "final_passed": 11,
+    "final_failed": 0,
+    "duration_ms": 1212.0281,
+    "scope": "real Node child lifecycle; not reproduction of original Java failure"
+  },
+  "independent_static_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "reference": {
+      "path": ".local/java-browser-ci-recovery-v1/repair-v2/independent-review-v2.json",
+      "bytes": 12127,
+      "sha256": "b57b322f58848ef85683f875c0e2a618fe8307d678f2055d8f581f08bdf1c659"
+    }
+  },
+  "actual_local_integration": {
+    "spec": "meeting-ready.spec.ts",
+    "attempts": 1,
+    "results": {
+      "infrastructureFailures": 0,
+      "testsPassed": 4,
+      "missingRuns": 0,
+      "testsFailed": 0,
+      "flaky": 0,
+      "batchExitCode": 0,
+      "unreportedSpecs": 0,
+      "selectedSpecs": 1,
+      "startupFailures": 0,
+      "browserDurationMs": 17119.656,
+      "skipped": 0
+    },
+    "duration_seconds": 35.4903533,
+    "java": 21,
+    "production_packaged_ui": true,
+    "generation": "deterministic HTTP fixture, not LLM",
+    "actual_model_calls": 0,
+    "tracked_node_java_processes_absent": 6,
+    "browser_children_not_exhaustively_sampled": true,
+    "runtime_files_and_45_packaged_static_entries_unchanged": true,
+    "reference": {
+      "path": ".local/java-browser-ci-recovery-v1/actual-java-v1/receipt-v1.json",
+      "bytes": 17968,
+      "sha256": "376f1abb03cad15bc08a2e03a11fad825e9245296860b36544b395f09a5a8488"
+    }
+  },
+  "source_files": [
+    {
+      "path": "web/scripts/test-java.mjs",
+      "bytes": 9692,
+      "sha256": "1ded2f4d2b91d471ddbdc01951afae3da3c6630e492e6548f34ffd6c88003fd4"
+    },
+    {
+      "path": "web/scripts/java-runner-lifecycle.mjs",
+      "bytes": 5330,
+      "sha256": "13cdfde137c23705b05b20d81735f45b5035f5ced4a5940c02a68e2bc7efcd64"
+    },
+    {
+      "path": "web/scripts/java-runner-lifecycle.test.mjs",
+      "bytes": 10422,
+      "sha256": "8f2a7658185407c39a439bdddb07fc74783509fd3035bfd427ca8cdd20ec84de"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 7772,
+      "sha256": "4fa2cc67c9c73fd886350aadcd5caad1792b4821526613edfe1a1ddad01d79ae"
+    }
+  ],
+  "evidence": [
+    {
+      "path": ".local/java-browser-ci-recovery-v1/repair-v2/receipt-v2.json",
+      "bytes": 18284,
+      "sha256": "6015ebea0fed59225223b308553327faf8ccc1ac61f405b5b136472bc215d155"
+    },
+    {
+      "path": ".local/java-browser-ci-recovery-v1/independent-review-v1.json",
+      "bytes": 14892,
+      "sha256": "f9374ef41e044d32bda8449e4ac51a7ac3c679642ec96a84a79428fae53b7007"
+    }
+  ],
+  "exact_source_ci": "pending",
+  "artifact_upload_exercised": false,
+  "limits": [
+    "Original Java failure cause remains unknown.",
+    "Local single-spec integration does not establish full suite success.",
+    "Node and synthetic browser checks do not establish model quality or human acceptance."
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "diagnostic": "summary-mode-development-v1",
-  "status": "new_contract_development_sources_accepted; source_only_criteria_next; actual_execution_not_authorized",
+  "status": "development_sources_and_source_only_criteria_locked; execution_registration_CI_resources_pending",
   "plan": {
     "path": "docs/MEETINGS-SUMMARY-QUALITY-NEXT.md",
     "bytes": 18650,
@@ -44,7 +44,7 @@
       "requested_effort": "xhigh",
       "fork_turns": "none",
       "spawn_request_accepted": true,
-      "status": "new_contract_development_sources_accepted; source_only_criteria_dispatched",
+      "status": "source_only_criteria_locked; final_judgment_not_dispatched",
       "source_review_dispatched": true,
       "criteria_dispatched": true,
       "actual_runtime_authorized": false,
@@ -132,5 +132,10 @@
       "bytes": 1341,
       "sha256": "a081cf11b2211c0005e17bcf889d02fd883a28d0df67f07c129cda7a9b52b292"
     }
+  },
+  "criteria_lock": {
+    "path": "experiments/results/meetings-summary-mode-criteria-lock-v1.json",
+    "bytes": 1939,
+    "sha256": "6bdbf43db588c452d59914264e587a9a855e1825063ecb039392815efa339acf"
   }
 }

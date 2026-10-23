@@ -38,9 +38,25 @@ jobs:
       - name: Install browser for the packaged React UI
         run: npx playwright install --with-deps chromium
         working-directory: web
+      - name: Verify isolated browser runner diagnostics with Node subprocesses
+        run: node --test web/scripts/java-runner-lifecycle.test.mjs
       - name: Verify browser workflows against isolated Java service
+        id: browser-checks
         run: npm run test:e2e
         working-directory: web
+      - name: Preserve isolated browser failure diagnostics
+        if: failure() && steps.browser-checks.outcome == 'failure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: java-browser-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .local/web-e2e-batch-*/run.json
+            .local/web-e2e-batch-*/web-e2e-*/run.json
+            .local/web-e2e-batch-*/web-e2e-*/java.log
+            .local/web-e2e-batch-*/web-e2e-*/report.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 3
   backend:
     runs-on: ubuntu-latest
     steps:

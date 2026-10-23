@@ -1,4 +1,10 @@
 # 기여와 직접 검증 기록
+## 2026-10-23 · 서버 종료 판정과 실제 화면 회귀
+
+Astra high 구현자가 실제Node 반례2개를 수정 전 실패로 보존하고 최종11회귀를 통과했다. 별도 Astra xhigh 읽기 검토는 JCI-01 해소/차단0을 확인했다. 같은 구현자가 기존JAR/UI로 실제Java·합성응답 회의화면4개를1회 통과했고 부모가증거·현재source4를 확인했다. 원래Java 시작실패의 원인해결이나실제LLM 품질로 주장하지 않는다.
+
+독립 source reviewer는 승인된원문4개 전체를읽고 출력전에privatecriteria d2dfafef와lockfa149e9f를 고정했다. 부모는기준내용을읽지않고194입력·출력3을바이트로검증했다. 사용자직접검수0이다. Sol high 준비산출물은마지막응답capacity오류2회를남긴채부모가저장파일로확인했으며 실제진단0/자원미충족이다.
+
 ## 2026-10-23 · 현재 자료 감사와 CI 실패 관측 보완
 
 Astra xhigh 독립 reviewer가 보호 source 배정 metadata만 유한 감사했고 Sol high custody가 미래 평가 제외 목록을 작성했다. 부모는183입력/부재3경로 및 제외 목록14참조를 기계적으로 확인하며 본문 의미·정답을 읽지 않았다. 새 java_browser_ci_recovery의 gpt-6-astra/high/fork none 요청을 도구가 수락했다. 구현 범위는 generic Java browser runner와 lifecycle helper/test 및 CI 실패 로그 보존이며 새 모델·사용자 검수·부모 채팅 설정 변경으로 세지 않는다.
