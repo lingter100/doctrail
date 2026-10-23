@@ -1,4 +1,42 @@
 # 진행 상태
+## 2026-10-23 · 실제 실패·독립 검토 완료와 다음 최소 구현 확정
+
+직전 진행 설명 뒤 실제1회비교→실패보존→독립요약판단→잠금후자기검토대비→기존토큰관측까지 완료했다. 추가모델실행은0이며 남은전체목표를완료로축소하지않는다. [후속설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md)52줄/11295B/76f654bc를부모가전체읽기와delta검증후수용했다. 최초48줄본1306521b는별도보존했다.
+
+다음은이기록을사용자명의로commit한뒤새Astrahigh구현자에게기존meeting_grounded_summary.py+대응test2만배정하는것이다. baseline/v1byte를먼저보존하고일반합성으로관계wire/파생/검토입력을구현한다. 제품실행·자료replay·서비스8파일연결은아직배정전이며2파일검토후연결한다. 모든이전역할은반환했고원래runtime91/JAR/UI/동결77은변경없음,goalACTIVE/Phase1incomplete다.
+
+## 2026-10-23 · 기존 실행 토큰·측정 구간 확인
+
+추가 모델 실행 없이 custody가 기존 관측필드만 추출했다. 생성입력2244/2486·출력421/359, 검토입력2606/2786·출력40/40으로4회모두EOS다. analyze observer구간은62.797/68.188초이며 성공요청의 worker구간62.782초만 있다. native전체직접시간은없고 prompt/prediction필드를분리했다. 부모가metadata13494B/68464d56과원본참조24개를hash-only확인했다. [숫자·측정구간·한계](../experiments/results/meetings-grounded-summary-performance-v1.json)는새wire의여유나성공을보장하지않으며전체실패·자료불변이다.
+
+## 2026-10-23 · 같은 모델 검토의 불일치 확인
+
+기존 독립 판정자가 잠금 뒤 모델 review2개를 비교해 private7fb2e3b4/safe517be3c3을 반환했다. 부모는 입력8개·두출력해시·집계동일성을 확인했다. 모델은11주장supported/1unsupported, coverage2개모두sufficient였으나 기존독립판단은2개모두insufficient였다. 모델 prompt는 선택근거 ONLY를 요구하므로 주비교는 인용기준5지원일치/부분3·애매3을모델지원/독립지원1을모델미지원이며 원문전체지원7일치는별도보조집계다. 부분/애매를확정오류나일반화정확도로바꾸지않는다. [자기검토 대비](../experiments/results/meetings-grounded-summary-self-review-v1.json).
+
+검토 완화나 새 재실행을 하지 않는다. 기존 Astra xhigh 설계자는 현재 evidence-before-text와 단순 재포장의 차이를 명시해 전체 원문의 관계 양끝 근거와 선택 bundle/claim 대응을 다루는 최소 prospective 후보를 작성 중이다. 같은 원문·기준·4096/768/120과 공개summary_version2를 유지하는 방향이며 문서 반환 후 실제 수정 범위를 검토한다. 전체goal ACTIVE다.
+
+## 2026-10-23 · 요약2건 독립 판단 잠금과 후속 원인 분리
+
+독립 Astra xhigh가 private9414a8a1(67,235B)/safe2ebca8c6(4,588B)를 잠갔다. 부모는 입력4와 두출력 hash·집계만 검증했다. 12주장/48인용은 정확 좌표지만 원문지원8·부분1·애매3, 선택근거지원6·부분3·애매3이며 핵심 충분성0/2다. 조건예외1·적용시점1이 빠지고 조건범위 애매1이 남았다. 같은 원문에서 대체 근거를 찾을 수 있는 주장2도 구분했다. [독립 결과](../experiments/results/meetings-grounded-summary-review-v1.json)는 AI판단/노출된 합성개발2건이며 기존4건과 단순 개선률 비교하지 않는다.
+
+판단 잠금 후에만 같은 judge에게 원래 모델 review응답 packet1596B/dc22fa07과 custody14469868을 배정했다. 기존 판단을 바꾸지 않고 수용/거부와 claim·coverage 불일치만 비교하며 아직 반환 전이다. 별도 기존 Astra xhigh grounded_harness_review는 generic 코드/안전집계만으로 NEW 후속 설계1개를 작성 중이고 제품수정/새실행은 배정하지 않았다. 판정자의 Windows 명령 길이·입력 검토 크기 제한은 작은 전달 조각으로 해결했으며 원래 실행실패와 구분한다.
+
+13642ab의 push39877798147/PR39877803204 필수3job은 모두 성공하고 watch27502/36643도 exit0이다. 최종CI metadataffe2cf89(1,364B)를 보존했다. source17/JAR/UI/닫힌자료는 동일하고 전체goal ACTIVE다.
+
+## 2026-10-23 · 실제 요약 비교 실패 보존과 독립 판단
+
+새 grounded-summary 실제 실행은 두 번째 분석의 generation_summary_review_rejected로 종료됐다. CLI/Node1, 업로드3·저장/근거UI1·답변0이며 질문6은 미실행이다. 분류11+생성2+검토2=15completion 시도/응답, 전송오류0·실패뒤추가0이다. startup47.391초/CLI195.945초, cleanup1.316초·소유17identity 부재를 확인했다. 정상 정리로 원래 runtime_not_eligible 실패를 통과 처리하지 않는다. [실제 실패·범위·증거](../experiments/results/meetings-grounded-summary-development-v1.json).
+
+부모가 run876+CLI10파일, runtime91/harness2/JARUI4/원본16/동결77과17identity 부재를 다시 확인하고 HEADhold를 해제했다. 기존 실행·원문·기준은 바뀌지 않았고 추가실행은 없다. 사후 custody 파일저장 옵션 오류1과 부모의 CLI index 경로 추정/진행중CI 완료조건 assertion은 실제 모델 실패와 구분해 보존했다.
+
+기계 계약을 통과한 새 요약2개만 담은 packet9957B/dc108446을 기존 독립 Astra xhigh grounded_summary_final_judge에게 배정했다. 판단은 기존 source-only 잠금 기준으로 먼저 고정하며 labels/items/자기검토/성능/진단은 보지 않는다. 의미 결과는 아직 미반환이며 모델 거부의 타당성을 단정하지 않는다. 전체 goal ACTIVE/Phase1 incomplete다.
+
+## 2026-10-23 · 새 요약 방식의 실제 1회 개발 비교 시작
+
+부모가 최종 binding5f272556와 검토 결과를13642abad로 commit/push하고 사용자 author/committer lingter100·PR14 draft head를 확인했다. 별도 once 배정 후 기존 Sol high grounded_run_custodian이 exec54024/wrapper47700/CLI27864로 실제 실행을 시작했다(UTC00:24:46/47). 직전 runtime91·원본16·동결77·새 경로 부재와 자원/lease3를 확인했다. 새 run-grounded-summary-v1/cli-grounded-summary-v1만 사용하며 HEAD13642abad·실행 코드·JAR/UI는 종료와 posthash 반환까지 고정한다. 실제 결과는 아직 미확인이다.
+
+문서 CI push39877798147/PR39877803204는 부모 watch27502/36643으로 같은 실행을 관찰한다. 이미 통과한 제품 source17a5dd6 CI와 구분하며 새 CI를 실제 실행의 추가 선행조건으로 만들지 않는다. final judge는 새 요약/근거 packet 전까지 대기하고 자기검토·성능을 먼저 보지 않는다.
+
 ## 2026-10-23 · 실제 비교의 최종 설정 고정
 
 직전 진행 문의 turn은 상태 설명만 했으므로 no-progress였다. 이번에는 현재 Git·프로세스·검토 결과를 다시 확인하고 다음 안전 작업인 최종 runtime binding을 생성했다. 독립 Astra xhigh 읽기 검토885cc1e3의 blocker0을 전체 읽었으며 source3가 동일하다. binding5f272556(18,227B)은 runtime91·harness2·JAR/UI4·source CI·원본16·동결77을 순수 검증했다. 새 실행/CLI 폴더는 없으며 실제 모델은 아직 실행 전이다.
