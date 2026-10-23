@@ -1,4 +1,28 @@
 # 진행 상태
+## 2026-10-23 · 자기검토 대조 완료와 재작성 후보 설계 수용
+
+같은 독립 Astra xhigh 판정자가 잠긴 판단을 바꾸지 않고 실제 모델 검토3개와 대조했다. 부모는 신규 custody13b4dda5의1429참조/1409고유파일, 비교1fffb82e·안전372f62a8의입력10개와 교차표 산술을 확인했다. [자기검토 비교](../experiments/results/meetings-grounded-summary-self-review-v2.json)40a78c80에서 모델은15주장 supported/2uncertain, coverage3개 모두 sufficient다. 선택인용 기준의 partial5·ambiguous1도 모델이 supported라 했고, 독립 핵심부족2개를 충분으로 표시했다. 이 차이를 확정오류 정답률로 바꾸지 않으며 모델 내부 이유도 추정하지 않는다. 기존 판단·실패·기준은 불변이다.
+
+새 도구 수락 Astra xhigh 설계자의 [다음 후보](MEETINGS-SUMMARY-CLAIM-ALIGNMENT-PLAN.md)를 검토했다. 기존 flat 초안→전체 원문 기반 재작성1회→필수 최종검토를 명시 후보로 추가하며, 문장·인용 수정과 빠진 핵심 추가를 함께 허용한다. 검토만 완화하거나 인용에 맞춰 핵심을 덜 말하는 대안은 선택하지 않는다. 새 후보에만 생성768/재작성768/검토128과completion3/repair1을 선언하고 입력4096·전체분석120초·공개계약은 유지한다. 실제 비용과 품질은 아직 가설이다.
+
+설계와 이번 결과를 먼저 커밋한 뒤 기존 module/test2만 Astra high에 배정한다. 같은 실행의 초안·최종본을 기존 기준으로 각각 검토해 추가 호출의 효과를 확인할 계획이며, 아직 실제v3/서비스연결/모델실행은0이다. 이전 source23d와JAR/UI·닫힌자료는 유지한다. 전체goal ACTIVE다.
+
+## 2026-10-23 · 관계 요약의 독립 판단과 기존 지연 기록 확인
+
+직전 turn은 사용자 진행/일정 질문에 답한 상태 설명으로 분류한다. 새 실행 없이 다음 안전 작업인 독립 판단·관측 집계 검증과 공개 결과 작성으로 이어갔다. 독립 상세63f2b844/안전0bee9eb9의 입력5개 전후와 주장/인용/충분성 합계를 확인했다. [독립 결과](../experiments/results/meetings-grounded-summary-review-v2.json)는 후보3·주장17·정확좌표34개, 원문지원13/부분1/애매3, 선택인용지원9/부분7/애매1, 핵심충분1/부족2다. 충분한 한 후보도 부분지원 문장이 있어 전체승인은0이며 이전2후보와 개선율을 직접 비교하지 않는다. 사용자검수0·공식평가 아님을 유지한다.
+
+[기존 성능 관측](../experiments/results/meetings-grounded-summary-performance-v2.json)은 생성3/검토3만의 입력15594·출력1215/EOS6이다. 분류16회 토큰을 포함한 전체 비용으로 쓰지 않는다. 분석 관측62.093/68.281/61.000초와 브라우저 누적200162.8344ms·CLI271.5625896초는 서로 다른 구간이다. 직접 native 전체시간은 unavailable이며 출력상한 이전 EOS가 의미 누락의 원인을 증명하지 않는다. 부모 검증f6b92be6은 원문/출력 의미를 읽지 않고 안전 집계·참조 바이트를 확인했다.
+
+a1a6d59의 push39888356826/PR39888361019 필수3job은 현재 모두 성공했다. 별도 result-ci-final-v1.json(7c46e5df)에 종료 메타데이터를 저장했다. 새 Sol high custody에게 모델 자기검토3개만 새 self-review-packets-v1에 분리하도록 배정했다. 기존 판단을 바꾸지 않고 선택인용 기준의 자동 판단과 비교할 예정이며 제품 코드·닫힌 실행·기준은 고정한다. 전체 goal ACTIVE/Phase1 미완료다.
+
+## 2026-10-23 · 실제 결과 공개 후 독립 판단·관측 정리 진행
+
+실제 실패와현재설명8개를a1a6d591994f17d93271c73eb66d330fa1631851로commit/push했다. staged65a8cfb7의8개Git/current·공개참조8개·원격author/committer lingter100·PR14draft head/body를확인했다. source23d67b5와준비42fb1e0의양쪽필수CI는모두통과했다. 현재결과커밋의push39888356826/PR39888361019는watch52334/59636으로같은실행을관찰하며backend/web은둘다통과했고Java진행중이다. 완료전추가push로취소하거나재실행하지않는다.
+
+기존Astraxhigh grounded_relations_final_judge는source-lock be191d0d와summary-only a281ac3f만으로판단중이며결과미반환이다. 기존Solhigh grounded_run_custodian에게는NEW .local/meeting-grounded-summary-v2-harness-v1/performance-v1/token-budget-metadata-v1.json의메타데이터추출만별도배정했다. 기존generation3/review3의토큰/EOS/측정구간을정리하며raw문장·자기검토값은부모/판정자에게전달하지않는다. sealedrun/CLI/custody7개·기존3295개·코드/잠금은불변이고새모델호출0이다.
+
+다음은같은CI관찰과반환검증, 독립내용판단을먼저잠근뒤모델자기검토를비교하는것이다. 유효요약3개와저장2개를혼동하지않으며기존실패는소비된상태로유지한다. 전체목표와1차완료기준은진행중이다.
+
 ## 2026-10-23 · 관계 요약 실제 실패 보존과 독립 내용 판단
 
 v2 once는세번째분석의generation_summary_review_rejected로종료됐다. CLI/Node1, 업로드5·분석저장/근거UI2·답변0이고질문6은미실행이다. 분류16+생성3+검토3=22completion시도/응답, 전송오류0·실패뒤추가0이다. cleanup1.018초와17소유identity부재·lease3해제를확인했지만원래runtime_eligible=false실패는유지한다. [실제결과](../experiments/results/meetings-grounded-summary-development-v2.json)3128f0f9에측정구간·미실행범위·한계를구분했다.

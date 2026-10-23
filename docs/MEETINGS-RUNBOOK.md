@@ -4,7 +4,7 @@
 
 현재 개발 후보는 `batch-v2` + `grounded-summary-v2`다. 기존 `scripts.serve_meeting_service_rag`와 `scripts.serve_meeting_rag_service`의 선택 인자는 `--analysis-policy batch-v2 --extraction-assembly grounded-summary-v2`이며, 기본 선택을 바꾸지 않는다. v1과 v2의 프롬프트·문법 해시가 다르므로 실행기와 worker health가 같은 후보를 보고해야 한다. 불일치 시 준비 또는 요청을 거부한다.
 
-v2는 조건·예외·시점 등의 관계와 그 양끝 원문을 먼저 연결하고 각 요약 문장에 근거를 붙인다. 저장·화면의 `summary_version=2` 계약은 기존과 같다. [핵심 모듈 검증](../experiments/results/meetings-grounded-summary-v2-module-v1.json)은 합성 검사와 코드 검토이며 실제 요약 개선의 증거가 아니다. 서비스 연결의 관련 합성 회귀761개와 정확한 소스의 push/PR 필수 CI도 통과했다. [실제 v2 비교](../experiments/results/meetings-grounded-summary-development-v2.json)는 세 번째 분석의 자동 검토 거부로 실패했으며 새 요약의 독립 내용 판단은 진행 중이다.
+v2는 조건·예외·시점 등의 관계와 그 양끝 원문을 먼저 연결하고 각 요약 문장에 근거를 붙인다. 저장·화면의 `summary_version=2` 계약은 기존과 같다. [핵심 모듈 검증](../experiments/results/meetings-grounded-summary-v2-module-v1.json)은 합성 검사와 코드 검토이며 실제 요약 개선의 증거가 아니다. 서비스 연결의 관련 합성 회귀761개와 정확한 소스의 push/PR 필수 CI도 통과했다. [실제 v2 비교](../experiments/results/meetings-grounded-summary-development-v2.json)는 세 번째 분석의 자동 검토 거부로 실패했으며 [독립 내용 판단](../experiments/results/meetings-grounded-summary-review-v2.json)은 핵심충분1/부족2이며 선택인용지원9/17로 전체 후보 수용 조건을 충족하지 못했다. 원래 실패와 미실행 질문6건은 유지한다.
 
 모델을 실행하지 않는 회귀 재현은 다음과 같다. 이미 설치된 잠금 환경을 사용하며 명령이 실제 모델이나 브라우저를 시작하지 않는다.
 

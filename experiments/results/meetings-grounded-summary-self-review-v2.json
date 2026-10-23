@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-locked-judgment-model-review-comparison-v2",
+  "date": "2026-10-23",
+  "status": "not_a_quality_gate",
+  "independent_review": {
+    "path": "experiments/results/meetings-grounded-summary-review-v2.json",
+    "bytes": 3319,
+    "sha256": "109d4d0053160f6b8b69557bd025d690cbb57179ce6e3d02e54dcc9b421ae7fb"
+  },
+  "locked_private_comparison": {
+    "path": ".local/meeting-grounded-summary-v2-independent-v1/self-review-comparison-v1/comparison-v1.json",
+    "bytes": 36939,
+    "sha256": "1fffb82e7861d09ffa067c8915888c7783355a5cb5a49bbbf4c05bc53def1e82"
+  },
+  "safe_comparison": {
+    "path": ".local/meeting-grounded-summary-v2-independent-v1/self-review-comparison-v1/safe-summary-v1.json",
+    "bytes": 28017,
+    "sha256": "372f62a8b13070398f17ba9029dc52eabe5ad0592528378be5821b17609729f0"
+  },
+  "aggregate": {
+    "candidate_count": 3,
+    "claim_count": 17,
+    "primary_selected_citations": {
+      "rows": [
+        "supported",
+        "partial",
+        "ambiguous",
+        "unsupported"
+      ],
+      "columns": [
+        "supported",
+        "unsupported",
+        "uncertain"
+      ],
+      "cross_tab": {
+        "supported": {
+          "supported": 9,
+          "unsupported": 0,
+          "uncertain": 0
+        },
+        "partial": {
+          "supported": 5,
+          "unsupported": 0,
+          "uncertain": 2
+        },
+        "ambiguous": {
+          "supported": 1,
+          "unsupported": 0,
+          "uncertain": 0
+        },
+        "unsupported": {
+          "supported": 0,
+          "unsupported": 0,
+          "uncertain": 0
+        }
+      },
+      "totals": {
+        "rows": {
+          "supported": 9,
+          "partial": 7,
+          "ambiguous": 1,
+          "unsupported": 0
+        },
+        "columns": {
+          "supported": 15,
+          "unsupported": 0,
+          "uncertain": 2
+        },
+        "total": 17
+      }
+    },
+    "secondary_whole_source": {
+      "rows": [
+        "supported",
+        "partial",
+        "ambiguous",
+        "unsupported"
+      ],
+      "columns": [
+        "supported",
+        "unsupported",
+        "uncertain"
+      ],
+      "cross_tab": {
+        "supported": {
+          "supported": 12,
+          "unsupported": 0,
+          "uncertain": 1
+        },
+        "partial": {
+          "supported": 1,
+          "unsupported": 0,
+          "uncertain": 0
+        },
+        "ambiguous": {
+          "supported": 2,
+          "unsupported": 0,
+          "uncertain": 1
+        },
+        "unsupported": {
+          "supported": 0,
+          "unsupported": 0,
+          "uncertain": 0
+        }
+      },
+      "totals": {
+        "rows": {
+          "supported": 13,
+          "partial": 1,
+          "ambiguous": 3,
+          "unsupported": 0
+        },
+        "columns": {
+          "supported": 15,
+          "unsupported": 0,
+          "uncertain": 2
+        },
+        "total": 17
+      }
+    },
+    "coverage": {
+      "rows": [
+        "sufficient",
+        "insufficient",
+        "unknown"
+      ],
+      "columns": [
+        "sufficient",
+        "insufficient",
+        "uncertain"
+      ],
+      "cross_tab": {
+        "sufficient": {
+          "sufficient": 1,
+          "insufficient": 0,
+          "uncertain": 0
+        },
+        "insufficient": {
+          "sufficient": 2,
+          "insufficient": 0,
+          "uncertain": 0
+        },
+        "unknown": {
+          "sufficient": 0,
+          "insufficient": 0,
+          "uncertain": 0
+        }
+      },
+      "totals": {
+        "rows": {
+          "sufficient": 1,
+          "insufficient": 2,
+          "unknown": 0
+        },
+        "columns": {
+          "sufficient": 3,
+          "insufficient": 0,
+          "uncertain": 0
+        },
+        "total": 3
+      }
+    },
+    "model_contract_decisions": {
+      "accepted": 2,
+      "rejected": 1
+    },
+    "descriptive_cells": {
+      "primary_model_supported_with_locked_supported": 9,
+      "primary_model_supported_with_locked_partial": 5,
+      "primary_model_supported_with_locked_ambiguous": 1,
+      "primary_model_supported_with_locked_unsupported": 0,
+      "primary_model_unsupported_with_locked_supported": 0,
+      "primary_model_uncertain_with_locked_partial": 2,
+      "primary_model_uncertain_with_locked_ambiguous": 0,
+      "secondary_model_supported_with_locked_supported": 12,
+      "secondary_model_supported_with_locked_partial": 1,
+      "secondary_model_supported_with_locked_ambiguous": 2,
+      "secondary_model_uncertain_with_locked_supported": 1,
+      "secondary_model_uncertain_with_locked_ambiguous": 1,
+      "model_sufficient_with_locked_insufficient": 2
+    },
+    "contract_context_counts": {
+      "model_accepted_candidates_with_locked_primary_partial_or_ambiguous": 2,
+      "model_accepted_candidates_with_locked_core_insufficient": 1,
+      "model_rejected_candidates_with_locked_core_insufficient": 1
+    }
+  },
+  "inputs_unchanged": 10,
+  "new_semantic_judgments": 0,
+  "new_criteria": 0,
+  "human_reviews": 0,
+  "interpretation": "The same model marked all three summaries sufficiently complete while the independent locked review found two insufficient. Six model-supported claims were partial or ambiguous under the selected-citation criterion. These descriptive disagreements do not convert partial/ambiguous into definitive unsupported labels.",
+  "limitations": [
+    "Same continuing registered AI judge after its independent summary judgment was locked; not a new or replacement judge.",
+    "Posthoc AI-only comparison on synthetic development material; not human review, formal test accuracy, heldout gold, user acceptance or operational acceptance.",
+    "Historical outcome aggregates were exposed through the originally supplied AGENTS context. Updated AGENTS aggregates were injected after the independent judgment lock and before this comparison. No AGENTS file was opened and no pristine-blind claim is made.",
+    "Independent claim labels and core sufficiency are copied unchanged from the locked artifact. No new source interpretation, scoring criterion, relation completeness requirement, label or old-candidate rejudgment is introduced.",
+    "Partial and ambiguous remain separate descriptive rows. They are not collapsed into definitively incorrect or unsupported; model uncertain is not automatically treated as equivalent to either row.",
+    "Accepted/rejected are derived solely from normalized model outputs and the permitted parse_review semantic gate. They do not state whether a model run, product operation, UI flow or evaluation succeeded.",
+    "Only the new model review packet, custody metadata, locked judgments and bound input hashes were used. Only RELATION_REVIEW_PROMPT and parse_review were inspected in generic source code.",
+    "No raw run, relation payload, latency, performance, diagnostic, question/oracle, current runtime, CLI or STATUS files were opened. Custody references were not traversed.",
+    "The parent reported custody verification of 1429 references and 1409 unique paths. This comparison independently checks the custody file hash and mapped candidate identities, not those referenced raw files.",
+    "Source registration's original exposure and authority limitations remain in force. No self-review result is used to revise the prior independent judgment."
+  ]
+}

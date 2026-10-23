@@ -4,7 +4,7 @@
 
 2026-10-23의 명시 후보 `grounded-summary-v2`는 전체 원문에서 관계 근거 묶음과 요약 문장을 한 번 생성하고 같은 모델이 한 번 검토하는 방식이다. 관계의 양끝과 문장을 연결하고 인용을 원문에서 파생하지만, 연결됐다는 사실이나 자동 검토 통과가 의미 정확성을 보장하지 않는다. 기본 경로와 이전 발췌 요약은 보존한다.
 
-[후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md)와 [모듈의 합성 검증](../experiments/results/meetings-grounded-summary-v2-module-v1.json)을 참고한다. [새 후보의 실제 실행](../experiments/results/meetings-grounded-summary-development-v2.json)은 세 번째 자동 검토 거부로 실패했다. 유효 요약3개는 독립 내용 판단 중이며 이전 v1의 핵심 충분성0/2 실패를 대체하지 않는다. 아래 모델·발췌 방식·실험 결과는 각각 기록된 경로와 시점의 증거다.
+[후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md)와 [모듈의 합성 검증](../experiments/results/meetings-grounded-summary-v2-module-v1.json)을 참고한다. [새 후보의 실제 실행](../experiments/results/meetings-grounded-summary-development-v2.json)은 세 번째 자동 검토 거부로 실패했다. [독립 내용 판단](../experiments/results/meetings-grounded-summary-review-v2.json)은 핵심충분1/부족2, 선택인용지원9/17이며 전체 승인 후보는 없다. 이전 v1의 핵심 충분성0/2 실패를 대체하거나 직접 개선율로 비교하지 않는다. 아래 모델·발췌 방식·실험 결과는 각각 기록된 경로와 시점의 증거다.
 
 이 경로는 Phase 1 회의록/문서 지식 검색을 위한 **실험 모델 통합**이다. 기존 M5-A v1/v2 및 M5-B 동결 입력·평가·계획은 변경하거나 재실행하지 않는다. Qwen3-1.7B의 과거 의미 오류와 보류 실패는 해결됐다고 주장하지 않는다. 모델 기본 채택, 사용자 검수, 생성 품질 평가 통과의 증거가 아니다.
 
