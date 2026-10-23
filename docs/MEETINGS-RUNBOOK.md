@@ -4,7 +4,7 @@
 
 현재 개발 후보는 `batch-v2` + `grounded-summary-v2`다. 기존 `scripts.serve_meeting_service_rag`와 `scripts.serve_meeting_rag_service`의 선택 인자는 `--analysis-policy batch-v2 --extraction-assembly grounded-summary-v2`이며, 기본 선택을 바꾸지 않는다. v1과 v2의 프롬프트·문법 해시가 다르므로 실행기와 worker health가 같은 후보를 보고해야 한다. 불일치 시 준비 또는 요청을 거부한다.
 
-v2는 조건·예외·시점 등의 관계와 그 양끝 원문을 먼저 연결하고 각 요약 문장에 근거를 붙인다. 저장·화면의 `summary_version=2` 계약은 기존과 같다. [핵심 모듈 검증](../experiments/results/meetings-grounded-summary-v2-module-v1.json)은 합성 검사와 코드 검토이며 실제 요약 개선의 증거가 아니다. 서비스 연결의 관련 합성 회귀761개도 통과했지만 실제 v2 모델 비교와 정확한 소스 CI는 아직 남아 있다.
+v2는 조건·예외·시점 등의 관계와 그 양끝 원문을 먼저 연결하고 각 요약 문장에 근거를 붙인다. 저장·화면의 `summary_version=2` 계약은 기존과 같다. [핵심 모듈 검증](../experiments/results/meetings-grounded-summary-v2-module-v1.json)은 합성 검사와 코드 검토이며 실제 요약 개선의 증거가 아니다. 서비스 연결의 관련 합성 회귀761개와 정확한 소스의 push/PR 필수 CI도 통과했다. [실제 v2 비교](../experiments/results/meetings-grounded-summary-development-v2.json)는 세 번째 분석의 자동 검토 거부로 실패했으며 새 요약의 독립 내용 판단은 진행 중이다.
 
 모델을 실행하지 않는 회귀 재현은 다음과 같다. 이미 설치된 잠금 환경을 사용하며 명령이 실제 모델이나 브라우저를 시작하지 않는다.
 
@@ -12,7 +12,7 @@ v2는 조건·예외·시점 등의 관계와 그 양끝 원문을 먼저 연결
 .venv/Scripts/python.exe -X utf8 -m pytest -q tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py tests/test_meeting_grounded_summary.py tests/test_meeting_analysis_batch.py tests/test_meeting_extraction_coverage.py
 ```
 
-실제 비교는 [후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md)의 정확한 소스 CI·실행 설정 고정·별도 한 번 실행 절차를 따른다. 이전 v1 실패에 이어 실행하거나 기존 출력 폴더를 재사용하지 않는다. 아래 기존 발췌 요약 실행 경로와 구분한다.
+실제 비교는 [후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md)의 정확한 소스 CI·실행 설정 고정·별도 한 번 실행 절차를 따른다. v1과 v2 모두 이미 소비된 실행이므로 다시 실행하거나 기존 출력 폴더를 재사용하지 않는다. 후속 후보는 원인·독립 판단을 확인한 뒤 새 계약으로 결정한다. 아래 기존 발췌 요약 실행 경로와 구분한다.
 
 회의 편집 충돌의 서버본 비교·초안 유지·명시적 재저장은 [편집 복구](MEETINGS-EDIT-RECOVERY.md)를 따른다. 이전 답변 후보 C3의 실제2/6 실패와 검증 미개방은 [C3 결과](MEETINGS-C3-RESULTS.md)에 기록했다.
 

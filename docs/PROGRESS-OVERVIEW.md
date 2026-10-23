@@ -21,9 +21,9 @@
 
 이에 조건·예외·시점 등 관계의 양끝 원문을 먼저 연결하고 요약 주장과 인용을 같은 관계 묶음에서 도출하는 후보를 구현했다. 기존 Java/React 저장·표시 계약과 구형 기본 동작을 유지하며 명시적으로 선택한다. 모듈·서비스의 관련 합성 회귀761개와 Ruff, 독립 코드 검토를 통과했다. 모듈257개는 이761개에 포함돼 합산하지 않는다. 실제 비교 실행기의 합성 검사·독립 읽기 검토도 마쳤다.
 
-소스23d67b5를 사용자 명의로commit/push했고 정확한 소스의 push/PR 필수 CI가 모두 통과했다. 실제 비교에 사용할 실행 설정·원본·산출물도 고정했다. **새 후보의 실제 모델 실행과 내용 품질 개선은 아직 미검증이다.** 한 번의 실제 비교로 요약·근거 이동·기존 질의응답과 관리 흐름을 확인한다. 실패하면 해당 실행과 미실행 단계를 보존하고 원인을 분리한다.
+소스23d67b5의 push/PR 필수 CI와 실행 설정 확인 뒤 실제 로컬 모델로 한 번 비교했다. 두 회의의 요약 저장·원문 근거 이동까지 진행했지만 세 번째 분석의 자동 근거 검토가 요약을 거부해 전체 실행은 실패했다. 질문6건은 실행하지 않았다. **유효 요약3개의 독립 내용 판단이 진행 중이며, 핵심 누락이 개선됐다고 아직 판단하지 않는다.** 정상 종료와 원본 보존을 확인해도 전체 실패를 통과로 바꾸지 않는다.
 
-[후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md), [구현·검증 범위](../experiments/results/meetings-grounded-summary-v2-service-v1.json), [직전 실제 실패](../experiments/results/meetings-grounded-summary-development-v1.json), [독립 내용 판단](../experiments/results/meetings-grounded-summary-review-v1.json), [모델 자기검토의 한계](../experiments/results/meetings-grounded-summary-self-review-v1.json).
+[후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md), [구현·검증 범위](../experiments/results/meetings-grounded-summary-v2-service-v1.json), [이번 실제 결과](../experiments/results/meetings-grounded-summary-development-v2.json), [이전 실제 실패](../experiments/results/meetings-grounded-summary-development-v1.json), [독립 내용 판단](../experiments/results/meetings-grounded-summary-review-v1.json), [모델 자기검토의 한계](../experiments/results/meetings-grounded-summary-self-review-v1.json).
 
 ## 이전에 확인한 성과와 한계
 
@@ -33,7 +33,7 @@
 
 ## 남은 순서와 일정
 
-1. 새 관계 요약 후보를 실제 모델로 비교하고, 남은 요약·분류·질의응답 문제를 개선한다.
+1. 새 관계 요약3개의 독립 내용 판단을 잠근 뒤 자동 검토와 대조한다. 결과를 근거로 남은 요약·분류·질의응답 문제의 다음 수정을 결정한다.
 2. 공개 실제 자료의 출처·권한·전체 색인을 유지하며 정해진 calibration 통과 뒤 격리 validation과 최종 평가를 수행한다. 실패한 실험이나 잠긴 기준을 덮어쓰지 않는다.
 3. 문서 권한·갱신·삭제, 실제 모델을 포함한 전체 화면, 오류 복구·종료·재시작·새 환경 실행을 검증한다. 사용자 외관·사용성 판단을 별도로 기록한다.
 4. 기준/개선 비교와 실패 분석, 시연, 간결한 소개·면접 설명을 정리한다. AI 작성·검토와 사용자 결정·검수를 구분한다.

@@ -1,4 +1,18 @@
 # 진행 상태
+## 2026-10-23 · 관계 요약 실제 실패 보존과 독립 내용 판단
+
+v2 once는세번째분석의generation_summary_review_rejected로종료됐다. CLI/Node1, 업로드5·분석저장/근거UI2·답변0이고질문6은미실행이다. 분류16+생성3+검토3=22completion시도/응답, 전송오류0·실패뒤추가0이다. cleanup1.018초와17소유identity부재·lease3해제를확인했지만원래runtime_eligible=false실패는유지한다. [실제결과](../experiments/results/meetings-grounded-summary-development-v2.json)3128f0f9에측정구간·미실행범위·한계를구분했다.
+
+부모는custody감사1d684d86의23참조, run의indexed1293개(실제전체1297개), CLI4개, old3295개와runtime91/harness/JAR/UI/원본16/동결77을hash-only확인했다. 17소유identity부재도현재다시확인해parent355ca4fb에저장하고HEADhold를해제했다. sealedrun/CLI에후속파일을쓰지않았고재실행·추가kill0이다. 소스42fb1e0의문서CI도양쪽필수3job모두통과했다.
+
+새summary-onlypacket a281ac3f(8,738B)은기계유효후보3개·claims17·인용34개를포함한다. 부모는custody91bbab0a의11참조와packet제외필드를검증했고원문/요약내용을읽지않았다. 기존Astraxhigh grounded_relations_final_judge에게기존source-lock be191d0d와이packet만별도배정했다. 선택인용지원·원문전체지원·핵심충분성을먼저잠그며자기검토·성능·실패진단은아직전달하지않았다. 결과는미반환이며저장2건을의미개선으로해석하지않는다. 부모는결과문서와Git, 전체goal ACTIVE/Phase1미완료다.
+
+## 2026-10-23 · 관계 요약 후보 실제 비교 시작
+
+실행 전 기록과 CI를42fb1e06f4789bb88885a99f8ad17e4ecc09cd7f로commit/push하고6개Git/current·원격author/committer lingter100·PR14draft head를 확인했다. 기존 Sol high에게 별도once를배정한뒤 session29482/wrapper3472/CLI45488(UTC01:56:59/01:57:00)로 실제 실행을 시작했다. 직전HEAD42fb1e0·bindingce6116f2·runtime91/harness3/JARUI4/원본16/동결77와자원·lease3·새경로부재를다시확인했다. 새run-grounded-summary-v2/cli-grounded-summary-v2만사용한다.
+
+부모는종료와posthash반환까지HEAD·실행소스·JAR/UI를고정하고raw원문/출력/자기검토를읽지않는다. 실행담당이같은session을관찰하며재시작하지않는다. 종료후packet/custody는sealedrun/CLI에덧쓰지않고.local/meeting-grounded-summary-v2-harness-v1/actual-v2-custody에별도보존한다. source-only기준을확인한grounded_relations_final_judge는summary-onlypacket과별도배정전까지대기한다. 문서CI39886651363/39886655079도필수3job모두통과하고watch19396/87793은exit0이다. 최종기록은.local/meeting-grounded-summary-v2-harness-v1/ci-record-final.json이다. 실제sourceCI는앞서통과했다. 실행결과는아직미확인이고전체goal ACTIVE다.
+
 ## 2026-10-23 · 관계 요약 후보의 전체 검사와 실행 설정 고정
 
 직전 goal turn은 소스19개commit/push와 PR 설명 갱신으로 진전이 있었다. 이번에는 같은 CI를 재실행하지 않고 관찰해23d67b5의 push39885044931/PR39885050510 필수3job 모두 성공을 확인했다. watch11344/41541도exit0이다. push의 브라우저 설치 지연은 이후 정상 완료됐으며 제품 실패로 기록하지 않는다. [정확한 소스 CI](../experiments/results/meetings-grounded-summary-v2-integration-ci-v1.json)의SHA는f5785266이다.
