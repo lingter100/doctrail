@@ -1,10 +1,14 @@
 # 회의·지식 Q&A 운영 가이드
+## 2026-10-23 다음 진단 준비
+
+[summary-mode-development-v1 설계](MEETINGS-SUMMARY-QUALITY-NEXT.md)는 수용됐지만 실행 준비는 미완료다. 신규 probe/test2의 검증·정확한 source CI, 새 공개 원문4개/독립 기준과 설정 동결 후 별도 once를 배정한다. 실제 실행 명령은 아직 안내하지 않는다. 서비스120초·현재 기본값·닫힌 v3 run은 유지한다. 아래는 이미 소비한 후보의 재현 범위와 역사 기록이다.
+
 
 ## 2026-10-23 원문 대조 재작성 후보
 
-다음 명시 후보는 `--analysis-policy batch-v2 --extraction-assembly grounded-summary-v3`다. 초안768·재작성768·최종검토128의 최대3회가 분류를 포함한 같은120초 기한을 공유한다. health와 실행 설정에서 alignment prompt/grammar 해시, 호출상한3·수정1·단계순서가 일치해야 한다. Java/React의 summary_version2와 기본 선택은 바뀌지 않는다.
+이번에 비교한 명시 후보는 `--analysis-policy batch-v2 --extraction-assembly grounded-summary-v3`다. 초안768·재작성768·최종검토128의 최대3회가 분류를 포함한 같은120초 기한을 공유한다. health와 실행 설정에서 alignment prompt/grammar 해시, 호출상한3·수정1·단계순서가 일치해야 한다. Java/React의 summary_version2와 기본 선택은 바뀌지 않는다.
 
-[서비스 연결](../experiments/results/meetings-grounded-summary-v3-service-v1.json)의849합성 검사와 독립 코드 검토, [정확한 소스 CI](../experiments/results/meetings-grounded-summary-v3-integration-ci-v1.json), 실행기240합성과 [실행 준비](../experiments/results/meetings-grounded-summary-v3-preparation-v1.json) 뒤 실제 once를 마쳤다. [실제 결과](../experiments/results/meetings-grounded-summary-development-v3.json)는 세 번째 자동검토 거부로 실패·소비 상태다. 두 요약 저장·원문 UI만 확인됐고 질문6건은 미실행이다. `run-grounded-summary-v3`/`cli-grounded-summary-v3`는 닫힌 원본이며 재사용·덮어쓰기·재실행하지 않는다. 새로운 후보나 실행은 별도 근거와 사전 계획을 따른다. 아래 v2는 과거 기록이다.
+[서비스 연결](../experiments/results/meetings-grounded-summary-v3-service-v1.json)의849합성 검사와 독립 코드 검토, [정확한 소스 CI](../experiments/results/meetings-grounded-summary-v3-integration-ci-v1.json), 실행기240합성과 [실행 준비](../experiments/results/meetings-grounded-summary-v3-preparation-v1.json) 뒤 실제 once를 마쳤다. [실제 결과](../experiments/results/meetings-grounded-summary-development-v3.json)는 세 번째 자동검토 거부로 실패·소비 상태다. 두 요약 저장·원문 UI만 확인됐고 질문6건은 미실행이다. `run-grounded-summary-v3`/`cli-grounded-summary-v3`는 닫힌 원본이며 재사용·덮어쓰기·재실행하지 않는다. 새로운 후보나 실행은 별도 근거와 사전 계획을 따른다. [독립 쌍 판단](../experiments/results/meetings-grounded-summary-review-v3.json)에서도 핵심충분0/3→0/3·회복0이므로 수용하지 않는다. [성능 관측](../experiments/results/meetings-grounded-summary-performance-v3.json)의 추가 호출 비용과 품질을 구분한다. 아래 v2는 과거 기록이다.
 
 현재849개 합성 검사의 재현 범위는 다음5개 파일이다. 모델·Java·브라우저를 기동하지 않는다.
 

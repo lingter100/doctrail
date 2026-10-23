@@ -8,7 +8,7 @@
 
 ## 현재 범위
 
-명시 후보 `grounded-summary-v3`는 초안 → 전체 원문 대조 재작성1회 → 최종검토를 실제 서비스에 연결했다. 관련 합성849개(핵심228개 포함), 독립 코드 검토와 정확한 소스 CI는 통과했지만 [실제 로컬 비교](experiments/results/meetings-grounded-summary-development-v3.json)는 세 번째 회의의 자동검토 거부로 실패했다. 두 회의 저장·원문 이동을 확인했고 질의응답6건은 실행하지 못했다. 초안3개·수정본3개를 단계 표시 없이 독립 판단하는 중이며 의미 개선은 아직 확정하지 않았다. 기존 기본값과 Java·React 계약을 유지한다.
+명시 후보 `grounded-summary-v3`는 초안 → 전체 원문 대조 재작성1회 → 최종검토를 실제 서비스에 연결했다. 관련 합성849개(핵심228개 포함), 독립 코드 검토와 정확한 소스 CI는 통과했지만 [실제 로컬 비교](experiments/results/meetings-grounded-summary-development-v3.json)는 세 번째 회의의 자동검토 거부로 실패했다. 두 회의 저장·원문 이동을 확인했고 질의응답6건은 실행하지 못했다. [독립 쌍 비교](experiments/results/meetings-grounded-summary-review-v3.json)에서는 초안·수정본 모두 핵심충분0/3이며 고정 품질 상태의 회복이 없었다. [추가 재작성 전송 관측](experiments/results/meetings-grounded-summary-performance-v3.json)은 평균29.219초다. 이 후보를 품질 개선이나 기본 채택으로 승격하지 않는다. [문제·비교 방법·면접 설명](docs/MEETINGS-SUMMARY-V3-ANALYSIS.md)을 별도로 정리했다. 기존 기본값과 Java·React 계약을 유지한다. 다음은 [새 공개 회의록의 추론 모드 대조 진단](docs/MEETINGS-SUMMARY-QUALITY-NEXT.md)이며 아직 실제 실행 전이다.
 
 이전 관계 근거 요약 후보를 기존 Python 모델 서비스에 연결했다. 관련 합성 회귀761개와 독립 코드 검토를 통과했으며 기존 Java·React 저장 계약과 기본 요약 방식은 유지한다. [연결 검증](experiments/results/meetings-grounded-summary-v2-service-v1.json)은 실제 모델 품질 개선이나 전체 완료의 증거가 아니다. [새 후보의 실제 비교](experiments/results/meetings-grounded-summary-development-v2.json)는 두 회의의 저장·근거 이동 뒤 세 번째 자동 근거 검토 거부로 실패했다. [독립 내용 검토](experiments/results/meetings-grounded-summary-review-v2.json)에서 핵심충분1/부족2였지만 세 후보 모두 일부 문장 지원 문제가 남아 수용하지 않았다. 질의응답6건은 미실행이며 사람 검수는0이다.
 

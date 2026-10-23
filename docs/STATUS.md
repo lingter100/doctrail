@@ -1,4 +1,26 @@
 # 진행 상태
+## 2026-10-23 · 비개선 결과 보존과 새 추론 모드 진단 설계 수용
+
+직전 사용자 진행·일정 질문에는 현재 상태를 설명했으며 제품 진전으로 세지 않는다. 이번 재개에서 현재 Git 변경·ACTIVE goal·기존 역할을 다시 확인했다. 기본 권한의 Git/CIM 조회 실패는 읽기 권한을 높여 확인했고 다른 프로세스를 변경하지 않았다. 제품 Java/native 프로세스는 보이지 않았으며 Python helper를 제품 실행으로 세지 않았다.
+
+기존 Astra xhigh 설계자가 [후속 문서](MEETINGS-SUMMARY-QUALITY-NEXT.md)57줄/18650B/fb32d66f를 반환했다. 부모는 전체 원안과 최종 변경, 공식 고정 revision의 thinking 설정과 generic primitive를 확인해 설계를 수용했다. 새 실제 공개 회의록4개에서 같은 cached9B·같은 chat transport·같은 최종 요약 계약으로 모드만 대조한다. 두 arm 공통 native1312·최종768재계수·입력4096, arm180초/whole1625초이며 서비스120초는 바꾸지 않는다. 요청 reasoning512는 독립 hard cap이 아니고 효과는 아직 미측정이다.
+
+정상 최종검토 거부 뒤 다음 사전 arm 관측은 이 새 진단에만 허용한다. 같은 arm의 추가 추론·수정은0이다. generation abstained는 schema 오류와 구분한 semantic 비수용·전체중단이며 검토할 claims가 없어 review0, 남은 arm은 미실행이다. 운영·무결성 실패도 전체중단한다. 결과를 보고 예산·순서·내용 기준을 바꾸지 않는다.
+
+공개 비교·성능·자기검토3개(63cde0d6/aea85733/e00a620b)의18개 고유 근거 참조를 다시 확인했고 [실험 설명](MEETINGS-SUMMARY-V3-ANALYSIS.md)을 추가했다. 이 결과와 설계를 먼저 사용자 명의로 커밋한다. 이후 신규 probe/test2만 구현하고 별도 자료 담당과 독립 검토자가 새 원문·기준을 준비한다. source CI·자료/기준 동결·정확한 실행 설정·별도 once 배정 전 실제 모델 실행은 없다. 전체goal ACTIVE/Phase1미완료다.
+
+## 2026-10-23 · 재작성 쌍 비교에서 품질 개선 없음
+
+개별 판단6개를 먼저 잠근 뒤(63fc9cf4), 자기검토·성능·실행 결과를 제거한 단계/쌍 매핑cab34613만 공개했다. 같은 판정자가 기존 판단을 바꾸지 않고 쌍 비교a382227d를 잠갔다. 부모는 입력9개 전후·출력2개·안전 집계와 원래 문장/인용의 기계적 차이를 확인했다(parent85821179). [독립 쌍 결과](../experiments/results/meetings-grounded-summary-review-v3.json)는 새 의미 판단이나 사용자 검수가 아니다.
+
+세 쌍의 초안/수정본은 각각18주장이다. 두 단계 모두 원문지원13·부분3·애매2, 선택인용지원10·부분6·애매2, 핵심충분0/3·전체수용0/3이며 회복/퇴보가 없다. 한 쌍은 문장·인용이 모두 같고, 한 쌍은 인용1개만 삭제했으며, 나머지 쌍은 문장3개만 바꿨다. 핵심 항목8개 중 covered3/partial3/missing2도 같았다. 인용141좌표 일치를 의미 품질 통과로 바꾸지 않는다.
+
+[성능 관측](../experiments/results/meetings-grounded-summary-performance-v3.json)은 actual25호출·1349입력과114메타참조를 부모가 대조했다(parentef53df19). 초안·재작성·검토3회씩의 전송관측 평균은27.885/29.219/8.297초, 출력토큰 총1181/1191/121, 모든25호출EOS다. 재작성 비용은 관측했지만 이 표본에서 고정 품질 상태가 개선되지 않았다. 세 번째 worker 성공 telemetry와 모든 native총시간은 미기록으로null을 유지했다.
+
+두 판단 잠금 후 같은 판정자가 실제 self-review packet b5a22f16을 대조해8ffd06eb로 잠갔다. 부모는 custody1356개와3개최종본 결속(69c8f118), 비교13입력 전후·교차표 산술(bcdbd0f6)을 검증했다. [자기검토 대조](../experiments/results/meetings-grounded-summary-self-review-v3.json)는 모델16supported/1unsupported/1uncertain 중 선택인용 supported일치10, partial5·ambiguous1도modelsupported임을 보여준다. 모델coverage3모두sufficient지만 고정 핵심 충분성은3모두insufficient다. 이를 이진 오답률로 바꾸거나 모델 거부의 내부 이유를 추정하지 않는다. 기존 Astra xhigh 설계자는 공개 집계와 generic코드만으로 NEW MEETINGS-SUMMARY-QUALITY-NEXT.md를 준비한다. 단순 문구 강화 반복, 필수 핵심 축소나 검토 완화로 목표를 바꾸지 않는다. 이 시점에는 설계 미수용/구현 미배정이었다. 이후 설계 수용은 위 최신 항목을 따르며 새 모델 실행은0이다.
+
+결과커밋a58f155의 push39898072500/PR39898076834 필수3job은 모두 성공했다. watch55007/45913 exit0·8개Git/current 동일성과 CI2ee42bc0을 확인했다. 사용자 author/committer lingter100·PR14 draft를 유지한다. 원래 v3 실행은 실패·소비 상태이며 전체goal ACTIVE/Phase1미완료다.
+
 ## 2026-10-23 · 재작성 실제 비교 실패와 초안·수정본 독립 판단 시작
 
 직전 사용자 진행 질문에는 상태와 잠정 일정을 답했으며 제품 진전으로 세지 않는다. 이번 재개에서는 실제 once session84167을 관찰해 CLI/Node exit1을 확인했다(wrapper 도구 exit0과 구분). 소스 f3eabc2·실행HEAD4138947·binding6540090b에서 두 회의의 저장·원문 UI를 확인한 뒤 세 번째 분석이 generation_summary_review_rejected로 실패했다. 업로드5·저장/UI2·답변0, 질문6건은 미실행이다. 분류16+초안3+재작성3+검토3=25회 모두 응답했고 실패 후 추가호출은0이다. 원래 실패를 재실행하거나 성공으로 변경하지 않는다.

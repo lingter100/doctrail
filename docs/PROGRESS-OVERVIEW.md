@@ -25,7 +25,7 @@
 
 [후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md), [구현·검증 범위](../experiments/results/meetings-grounded-summary-v2-service-v1.json), [이번 실제 결과](../experiments/results/meetings-grounded-summary-development-v2.json), [이전 실제 실패](../experiments/results/meetings-grounded-summary-development-v1.json), [독립 내용 판단](../experiments/results/meetings-grounded-summary-review-v2.json), [모델 자기검토의 한계](../experiments/results/meetings-grounded-summary-self-review-v2.json), [다음 재작성 후보](MEETINGS-SUMMARY-CLAIM-ALIGNMENT-PLAN.md).
 
-그 결과를 바탕으로 초안 → 원문 대조 재작성1회 → 최종검토를 수행하는 v3를 서비스에 연결했다. 관련 합성849개(핵심228개 포함)와 독립 코드 검토는 통과했다. [현재 연결 검증](../experiments/results/meetings-grounded-summary-v3-service-v1.json)은 실제 모델 품질이나 최종 통합 성공을 뜻하지 않는다. 정확한 소스 CI, 실행기240합성·독립 재검토와 [실행 설정 고정](../experiments/results/meetings-grounded-summary-v3-preparation-v1.json)을 마쳤다. [실제 비교](../experiments/results/meetings-grounded-summary-development-v3.json)는 세 번째 회의 자동검토 거부로 실패했다. 두 요약을 저장했고 질문6건은 미실행이다. 초안3개·수정본3개를 단계 표시 없이 독립 판단하고 있으며, 재작성의 내용 개선은 아직 확정하지 않았다.
+그 결과를 바탕으로 초안 → 원문 대조 재작성1회 → 최종검토를 수행하는 v3를 서비스에 연결했다. 관련 합성849개(핵심228개 포함)와 독립 코드 검토는 통과했다. [현재 연결 검증](../experiments/results/meetings-grounded-summary-v3-service-v1.json)은 실제 모델 품질이나 최종 통합 성공을 뜻하지 않는다. 정확한 소스 CI, 실행기240합성·독립 재검토와 [실행 설정 고정](../experiments/results/meetings-grounded-summary-v3-preparation-v1.json)을 마쳤다. [실제 비교](../experiments/results/meetings-grounded-summary-development-v3.json)는 세 번째 회의 자동검토 거부로 실패했다. 두 요약을 저장했고 질문6건은 미실행이다. [독립 쌍 비교](../experiments/results/meetings-grounded-summary-review-v3.json)에서 초안과 수정본 모두 핵심충분0/3이며, 문장·인용·핵심 상태의 회복이 없었다. 추가 재작성에는 [평균29.219초](../experiments/results/meetings-grounded-summary-performance-v3.json)가 들었으며 이번 후보는 수용하지 않는다. [이번 실험의 설명과 한계](MEETINGS-SUMMARY-V3-ANALYSIS.md)에서 면접 설명과 사용자 확인 항목을 볼 수 있다.
 
 ## 이전에 확인한 성과와 한계
 
@@ -35,7 +35,7 @@
 
 ## 남은 순서와 일정
 
-1. 완료된 재작성 실행의 초안·최종본을 각각 독립 판단해 잠근 뒤 쌍으로 비교한다. 충분성과 근거 연결의 개선·퇴보를 확인하고, 원래 실행 실패와 미실행 범위는 유지한다.
+1. 재작성의 비개선과 [자기검토의 누락](../experiments/results/meetings-grounded-summary-self-review-v3.json)을 보존했다. 그 근거로 [새 공개 회의록에서 같은 모델의 추론 모드 대조](MEETINGS-SUMMARY-QUALITY-NEXT.md)를 설계했다. 다음은 신규 진단 코드와 별도 원문·기준 준비이며 효과는 아직 미측정이다. 기존 실패·기준·미실행 범위는 유지한다.
 2. 공개 실제 자료의 출처·권한·전체 색인을 유지하며 정해진 calibration 통과 뒤 격리 validation과 최종 평가를 수행한다. 실패한 실험이나 잠긴 기준을 덮어쓰지 않는다.
 3. 문서 권한·갱신·삭제, 실제 모델을 포함한 전체 화면, 오류 복구·종료·재시작·새 환경 실행을 검증한다. 사용자 외관·사용성 판단을 별도로 기록한다.
 4. 기준/개선 비교와 실패 분석, 시연, 간결한 소개·면접 설명을 정리한다. AI 작성·검토와 사용자 결정·검수를 구분한다.
