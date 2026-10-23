@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-development-preparation-v2",
+  "date": "2026-10-23",
+  "status": "prepared_not_executed",
+  "source_commit": "23d67b574cff6a4e2c0ab47a3823b2b4f4289fad",
+  "execution_contract": {
+    "path": "docs/MEETINGS-GROUNDED-SUMMARY-EXECUTION.md",
+    "bytes": 14002,
+    "sha256": "2ec2a10be87b0d391b48ccf3b3cb1aedb53af06f4e5b59c29f845116deb7a1f9"
+  },
+  "candidate_contract": {
+    "path": "docs/MEETINGS-GROUNDED-SUMMARY-NEXT.md",
+    "bytes": 11295,
+    "sha256": "76f654bcd0c79fc8945f2ab10d1464935027a76d11f02b6bc9380f5235a7abf2"
+  },
+  "source_ci_receipt": {
+    "path": "experiments/results/meetings-grounded-summary-v2-integration-ci-v1.json",
+    "bytes": 3406,
+    "sha256": "f57852661ed6f8c7343640508874304fb39250249291ec4f4a541b55b7538d47"
+  },
+  "runtime_binding": {
+    "path": ".local/service-rag-batch-development-v1/runtime-bindings-grounded-summary-v2.json",
+    "bytes": 18425,
+    "sha256": "ce6116f2d50543d616133bdf0c5299f8d9c06178daddc26a57b44da23d87fbae"
+  },
+  "implementation_receipt": {
+    "path": ".local/meeting-grounded-summary-v2-harness-v1/receipt-v1.json",
+    "bytes": 6337,
+    "sha256": "55455717df55c30dbea3c28ba3b6515f2e15c7ade17595278a5e40482ca0b000"
+  },
+  "harness_sources": [
+    {
+      "path": ".local/service-rag-batch-development-v1/development-runner-v3.py",
+      "bytes": 45123,
+      "sha256": "7b5d391476871571e55e199a9b907206cd3d0b4b9b538ad00788dbe9888f30b4"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/development-browser-v2.mjs",
+      "bytes": 42868,
+      "sha256": "97b7d1d9fb56b63a710e0e3eb42640c947b5d352130441d2fc3f54b1a5f88dab"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/test_grounded_harness.py",
+      "bytes": 35230,
+      "sha256": "6493f6b346b52a5743e5e3c5da69efd20870eb17c49d6a8eb6af5ff141e700e1"
+    }
+  ],
+  "independent_review": {
+    "path": ".local/meeting-grounded-summary-v2-harness-v1/independent-review/read-review-v1.json",
+    "bytes": 11120,
+    "sha256": "7bfb5fff1b452b1a7c12284827d9fd71f8b5f369ff5279ce3aaa5f45493b1452"
+  },
+  "independent_read_blockers": 0,
+  "checks": {
+    "pytest_passed": 133,
+    "cleanup_passed": 25,
+    "harness_passed": 108,
+    "deselected": 1,
+    "deselected_name": "test_v3_cli_selects_only_new_run_path_without_starting_runtime",
+    "deselection_same_as_previous_checkpoint": true,
+    "pytest_seconds": 1.86,
+    "pytest_exit": 0,
+    "node_syntax_exit": 0,
+    "ruff_exit": 0
+  },
+  "preservation": {
+    "archived_before_edit": 3,
+    "closed_input_artifact_bindings_verified_by_custodian": 3295,
+    "frozen_files": 77,
+    "exact_runtime_dependencies": 91,
+    "runtime_git_source_exact": true,
+    "original_input_bindings": 16,
+    "local_ui_files_in_jar": 4,
+    "prior_failed_runs_unchanged": true
+  },
+  "roles": {
+    "custodian": "/root/grounded_run_custodian",
+    "custodian_tool_accepted_profile": "GPT-6.1 Sol high",
+    "final_judge": "/root/grounded_relations_final_judge",
+    "judge_tool_accepted_profile": "GPT-6 Astra xhigh",
+    "parent_semantics": "metadata only",
+    "exposure": "AGENTS historical aggregates inherited; not fully blind or human reviewed"
+  },
+  "source_only_lock": {
+    "path": ".local/meeting-grounded-summary-v2-independent-v1/source-lock.json",
+    "bytes": 11535,
+    "sha256": "be191d0d2784d997dcc56e030e93fe8939d2f4bcb93097965138d404ec4b7d84"
+  },
+  "custody_preflight": {
+    "path": ".local/meeting-grounded-summary-v2-harness-v1/readiness-v1.json",
+    "bytes": 18722,
+    "sha256": "1e1b4cc2cabe125942c47131228eed47f5e324a3afbb9e1e24f5730d46a94257"
+  },
+  "exposure": "Existing exposed synthetic development sources and locked criteria reused. Historical AGENTS aggregates disclosed. Not blind generalization or human review.",
+  "actual_execution": {
+    "new_model": 0,
+    "quality_result": null,
+    "human_review": 0,
+    "public_service_deployment": 0
+  },
+  "limitations": [
+    "No actual v2 runtime or semantic quality is established by synthetic checks, static review or CI.",
+    "The original v1 execution remains failed and consumed.",
+    "Resources must be rechecked immediately before the separate explicit once dispatch.",
+    "Preparation is not an actual execution; parent commits this record before dispatch."
+  ]
+}

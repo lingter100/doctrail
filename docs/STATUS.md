@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-23 · 관계 요약 후보의 전체 검사와 실행 설정 고정
+
+직전 goal turn은 소스19개commit/push와 PR 설명 갱신으로 진전이 있었다. 이번에는 같은 CI를 재실행하지 않고 관찰해23d67b5의 push39885044931/PR39885050510 필수3job 모두 성공을 확인했다. watch11344/41541도exit0이다. push의 브라우저 설치 지연은 이후 정상 완료됐으며 제품 실패로 기록하지 않는다. [정확한 소스 CI](../experiments/results/meetings-grounded-summary-v2-integration-ci-v1.json)의SHA는f5785266이다.
+
+기존 Sol high가 읽기 준비1e1b4cc2에서 관련 프로세스0/GPU0MiB/lease3사용 가능, 원본16·동결77·source10·harness3·기존3295개 불변을 확인했다. 부모도runtime91의Git/current 일치와 변경4개, JAR/UI4 불변·JAR내부 일치, 원본16/동결77을 확인했다. 자원을 예약하지 않았으므로 실제 시작 직전 다시 확인한다.
+
+새 runtime-bindings-grounded-summary-v2.json(18,425B/SHAce6116f2)은source23d67b5·CI·runtime91·harness2·기존JAR/UI·원본·새source-only judge를 묶는다. 기존 함수의 순수verify_runtime 검사를 통과했으며 새run/CLI는 없다. [실행 전 기록](../experiments/results/meetings-grounded-summary-development-preparation-v2.json)fb1302d7을먼저commit한뒤 기존 실행 담당에게 별도once를배정한다. 추가 문서CI를 실제 실행의 새 선행조건으로 만들지 않는다. 실제모델0/전체goal ACTIVE다.
+
+## 2026-10-23 · 관계 요약 후보 소스 반영과 전체 CI 진행
+
+검증된 소스·문서19개를23d67b574cff6a4e2c0ab47a3823b2b4f4289fad로commit/push했다. staged-source-v1(103e4e5b)의19개Git/working바이트와 원격author/committer lingter100을 확인했다. PR14는draft를 유지하고761개 합성 검사와 실제 후보 미실행을 구분해 설명을 갱신했다. 실행기 독립 읽기 검토7bfb5fff도 차단0이며 source3 전후 해시가 같다.
+
+push39885044931/PR39885050510 CI는 각각watch11344/41541로 같은 실행을 관찰 중이다. web은 둘 다 통과했고 backend/Java 전체 결과는 아직 미확인이다. 다음 재개에서는 같은 handle 또는 정확한 run ID를 확인하고 재실행하거나 끝나기 전 문서 push로 취소하지 않는다. 모두 통과하면 meetings-grounded-summary-v2-integration-ci-v1.json을 작성하고 새 runtime binding을 고정한다. 최종 binding/actual v2/CLI v2는 아직 없고 제품 슬롯과 추가 추론을 배정하지 않았다. 전체goal ACTIVE다.
+
+사용자 진행 질문에는 기본 서비스 구현과 미완료 AI 품질을 나눠 설명했고, 1차 안정화·포트폴리오 정리의 추가2~4주는 실측 납기가 아닌 잠정 계획 범위라고 밝혔다. 외관·사용 흐름 검수는 포함하며 STT/외부 회의 연동·공개 배포는 포함하지 않는다.
+
 ## 2026-10-23 · 관계 요약 후보의 서비스 연결 검증 완료
 
 관계 모듈2와 기존 서비스 연결7개를 구현했다(acceptance driver1개 불변). 최종 관련 합성761개/34.26초·Ruff 통과, 기존 Starlette 경고1개는 의존성을 바꾸지 않고 기록했다. module257개는 이761개에 포함돼 합산하지 않는다. 서비스 독립 읽기 d691b9c3의 차단0과 source8/fixed2를 부모가 확인했다. [모듈](../experiments/results/meetings-grounded-summary-v2-module-v1.json), [서비스 연결](../experiments/results/meetings-grounded-summary-v2-service-v1.json)에 실제 실행0과 최초 실패를 구분한다. 부모는44참조·baseline10·frozen77과 최종LF를 확인했다.
