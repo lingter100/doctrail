@@ -1,4 +1,8 @@
 # DocTrail project instructions
+- Alignmentv3 f3eabc2 BOTH39893864174/39893868615 ALL3CIpassed/watch80471+77880exit0/CI971a22bd. Harness narrowtitlefix final3 7f70b4d7/d3014cf6/d6bdd625/240synthetic4.10s/RuffNode/review3f378d55 blocker0; original193+title29fail+review1 preserved/parent5509+69+22 verified. NEWactualAstraxhigh grounded_alignment_final_judge source-lock af209e25/3inputs fixed. Binding6540090b runtime91Git+JARUI+orig16+frozen77 verified/prep14653d66; commitprep BEFORE explicitonce to existingSolhigh grounded_alignment_harness_worker. Readiness broadhelpers22 falsematch preserved/reclassification+formalresume-reconsideration accepted; rechecklive atstart. actualrun/CLIabsent/goalACTIVE.
+
+
+
 - Alignmentv3 service RETURNED savedreceipt33cca3f5/849synthetic24.91s(includes228)/Ruff; finalworkerreplycapacityfailed but parent verified4371+current10+frozen77 and independentAstraxhighba00f574 blocker0. Productdelta allowlist1+tests4/module2fixed. ExistingSolhigh grounded_alignment_harness_worker resumed existingharness3+NEWv3-harness only/archivefirst/noactual. Parent source/docs/Git/CI next; sourcecommitpending/goalACTIVE/Phase1incomplete.
 
 

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "status": "prepared_exact_source_ci_and_harness_review_passed_actual_not_dispatched",
+  "candidate": "grounded-summary-v3",
+  "analysis_policy": "batch-v2",
+  "source_commit": "f3eabc2d45457b69b85c89fc3a68acb38566a8c3",
+  "ci": {
+    "path": "experiments/results/meetings-grounded-summary-v3-integration-ci-v1.json",
+    "bytes": 3406,
+    "sha256": "971a22bdc35afe5994dea480b4577da0166385def0bda30d172b4cd94ac08641"
+  },
+  "runtime_binding": {
+    "path": ".local/service-rag-batch-development-v1/runtime-bindings-grounded-summary-v3.json",
+    "bytes": 18507,
+    "sha256": "6540090b0847149f8ddd49da5dfa9dcc9b0f0199001976654804ef9cfb376ddd"
+  },
+  "parent_verification": {
+    "path": ".local/meeting-grounded-summary-v3-harness-v1/parent-verification-v2.json",
+    "bytes": 1966,
+    "sha256": "c70dbb361fb420d484def1de0cbc43f9876998bfc56d70c7749fa8a3e3e3a1f6"
+  },
+  "candidate_contract": {
+    "path": "docs/MEETINGS-SUMMARY-CLAIM-ALIGNMENT-PLAN.md",
+    "bytes": 13262,
+    "sha256": "bbd481d8de98ac2efae978d3d7c69ab9580bd86d66203ad92d8784016977b8fa"
+  },
+  "base_execution_contract": {
+    "path": "docs/MEETINGS-GROUNDED-SUMMARY-EXECUTION.md",
+    "bytes": 14002,
+    "sha256": "2ec2a10be87b0d391b48ccf3b3cb1aedb53af06f4e5b59c29f845116deb7a1f9"
+  },
+  "harness_review": {
+    "path": ".local/meeting-grounded-summary-v3-harness-v1/independent-review-v2.json",
+    "bytes": 9552,
+    "sha256": "3f378d555a1f488688a10cd5b38d9d85a420e5490a249d1cabdd53b350c9c029"
+  },
+  "harness_test_source": {
+    "path": ".local/service-rag-batch-development-v1/test_grounded_harness.py",
+    "bytes": 38246,
+    "sha256": "d6bdd62512798948969ae749c6bfb8bfe1606b20589f7842035d977dd6e76453"
+  },
+  "harness_checks": {
+    "passed": 240,
+    "current_harness": 215,
+    "unchanged_cleanup": 25,
+    "deselected_historical_cli": 1,
+    "seconds": 4.1,
+    "ruff_exit": 0,
+    "node_syntax_exit": 0,
+    "first_title_regressions_failed": 29,
+    "first_title_regressions_passed": 10,
+    "earlier_193_pass_preserved": true
+  },
+  "source_only_lock": {
+    "path": ".local/meeting-grounded-summary-v3-independent-v1/source-lock.json",
+    "bytes": 16892,
+    "sha256": "af209e25605a1f9c3f6b606d79b40322953192c1ae15babc432db5e90e9b917e"
+  },
+  "roles": {
+    "custodian": "/root/grounded_alignment_harness_worker",
+    "custodian_tool_accepted_profile": "GPT-6.1 Sol high",
+    "final_judge": "/root/grounded_alignment_final_judge",
+    "judge_tool_accepted_profile": "GPT-6 Astra xhigh",
+    "parent_semantics": "metadata only",
+    "exposure": "Historical aggregates inherited; stage/pair/self-review/performance withheld from new judge until judgment locks; not pristine blind or human reviewed"
+  },
+  "readiness_snapshot": {
+    "path": ".local/meeting-grounded-summary-v3-harness-v1/readiness-v1.json",
+    "bytes": 26255,
+    "sha256": "0acfed85da3e6a83b55eeb3e84ff1e30984ac9de0589ecf561b1923b8a210707"
+  },
+  "readiness_scope_interpretation": {
+    "path": ".local/meeting-grounded-summary-v3-harness-v1/parent-readiness-interpretation-v1.json",
+    "bytes": 2397,
+    "sha256": "195334d1c4d97ccd8673c1c2eebd5dbc290ab455667d134d29b2a5e3a3604004"
+  },
+  "prospective_flow": {
+    "meetings": 4,
+    "general_documents": 2,
+    "questions": 6,
+    "source_input_index_sha256": "fae0db8b6c03cc591da5dda7fb9b81a9e046132d956cfeb0ee764d2d6785ca32",
+    "summary_stages": [
+      "generation",
+      "alignment",
+      "review"
+    ],
+    "output_caps": [
+      768,
+      768,
+      128
+    ],
+    "analysis_shared_seconds": 120,
+    "answer_seconds": 90,
+    "startup_seconds": 120,
+    "active_seconds": 1500,
+    "cleanup_seconds": 5,
+    "whole_seconds": 1625,
+    "first_failure_stops_later_steps": true,
+    "same_request_draft_and_final_independent_judgment": true,
+    "stage_pair_and_self_review_hidden_until_individual_judgments_locked": true
+  },
+  "actual_model_execution_count": 0,
+  "human_reviews": 0,
+  "limits": [
+    "Preparation is not runtime success, semantic acceptance, full Phase1 completion or deployment.",
+    "Resource availability expires after observation. Old broad helper-process match failure is preserved; explicit DocTrail runtime checks and leases are rechecked before once.",
+    "The manifest default GPU24 differs from the unchanged service launcher requested GPU28; actual native placement must be observed during execution.",
+    "Existing development sources and criteria are reused, not fresh held-out data. No private text, answers or judgments are published here.",
+    "Public checkout alone lacks ignored local inputs, bindings, cached weights and runtime artifacts. Existing failures and originals remain immutable.",
+    "Parent must commit this prospective record and separately assign exactly one actual run; no new run or CLI directory exists at preparation."
+  ]
+}

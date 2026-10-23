@@ -1,4 +1,16 @@
 # 진행 상태
+## 2026-10-23 · 정확한 소스 CI와 재작성 비교 준비 완료
+
+서비스 소스 f3eabc2d45457b69b85c89fc3a68acb38566a8c3의 push39893864174/PR39893868615 필수 backend/web/java-service가 모두 성공했다. 같은 watch80471/77880도 exit0이다. 사용자 author/committer lingter100·PR14 draft head와17개 Git/current 바이트를 확인했다. [소스 CI](../experiments/results/meetings-grounded-summary-v3-integration-ci-v1.json)971a22bd와 로컬종료기록a234c1f7을 보존했다. 부모의 첫 UI 바이트비교는 URL 추가필드 때문에 assertion됐고, 실제 바이트·해시는 같음을 확인해 비교필드만 바로잡았다. 제품 변경이나 CI 재실행은 없었다.
+
+실행기 기존3개를 원본 보존 후 v3에 연결했다. 첫193합성 이후 독립읽기에서 세 단계 제목을 실제 요청·문서 제목에 결속하지 않은 누락1개와 축소된 회귀 사례를 찾았다. 제목 반례29실패를 보존한 뒤 runner/test2만 수정하고 양쪽 저장본의 같은 잘못된 근거·인용과 첫 분류 호출 cap/input/EOS 검사를 복구했다. 최종240합성(현재215+기존cleanup25)/4.10초와 Ruff·Node, 독립 재검토3f378d55 차단0을 확인했다. 기존149/193·초기Ruff·review1·pre-fix22와 닫힌5509개를 유지했다.
+
+새 도구 수락 Astra xhigh 판정자가 기존 원문/기준3개만 확인해 source-lock af209e25를 기록했다. 4문서·159anchor·254참조 기준은 불변이다. 같은 요청의 초안·수정본을 단계/쌍/자기검토/성능을 가린 채 각각 판단해 잠근 뒤 비교한다. AGENTS 과거집계 노출과 AI기준·사용자검수0을 유지한다.
+
+자원점검은 과거 중지를 현재로 해석한 자동승인 거부가 있었지만, 이후 인간의 명시적 재개와 ACTIVE goal을 제시한 같은 명령의 정식 재심사1회가 승인됐다. 경로만 일치한22프로세스를 실패로 기록한 원본도 유지했다. 후속 분류는 helper18·기존진단프로세스부재1·출처미확정3이며 마지막3개도 Blender MCP 진입점·부모체인이 확인됐다. 명시 DocTrail runtime/native/Java/browser 진입점0, 당시 GPU0MiB/lease3가용이었다. 기존manifest GPU24와 실제서비스 launcher 요청28을 구분했고 새 실행 직전 다시 확인한다. 다른 프로세스는 종료하지 않았다.
+
+부모가 runtime91의 Git/current·harness2·JAR/UI일치·원본16·동결77과 검토/기준을 새 binding6540090b(18507B)에 고정하고 기존 verify_runtime을 모델기동 없이 통과했다. [신규 실행 준비](../experiments/results/meetings-grounded-summary-v3-preparation-v1.json)14653d66은 실제 실행0/새run·CLI부재 상태다. 이 기록을 먼저 커밋하고 기존 Sol high 실행 담당에게 별도once를 배정한다. 문서만을 위한 추가CI를 새 실행 조건으로 늘리지 않는다. 전체goal ACTIVE/Phase1미완료다.
+
 ## 2026-10-23 · 재작성 서비스 연결 검증과 소스 통합 준비
 
 직전 사용자 진행 질문은 상태 설명이며 제품 진전으로 세지 않는다. 이번 재개에서 저장된 서비스 receipt33cca3f5와 독립 검토ba00f574, 원본·현재 코드10개·증거4371개·동결77개를 확인했다. 관련 합성849개가24.91초에 통과했고 Ruff도 통과했다. 핵심228개는849개에 포함된다. 독립 코드 검토는 발견사항0이며 실제 모델 품질 검토가 아니다.

@@ -4,7 +4,7 @@
 
 다음 명시 후보는 `--analysis-policy batch-v2 --extraction-assembly grounded-summary-v3`다. 초안768·재작성768·최종검토128의 최대3회가 분류를 포함한 같은120초 기한을 공유한다. health와 실행 설정에서 alignment prompt/grammar 해시, 호출상한3·수정1·단계순서가 일치해야 한다. Java/React의 summary_version2와 기본 선택은 바뀌지 않는다.
 
-[서비스 연결](../experiments/results/meetings-grounded-summary-v3-service-v1.json)의849합성 검사와 독립 코드 검토를 통과했지만 실제 모델 실행은 아직0이다. 다음은 정확한 소스 CI, 기존 실행기 검토, 새 binding·판정 준비와 별도 한 번 실행이다. 기존 실패 실행 폴더를 재사용하지 않는다. 아래 v2는 과거 후보 기록이다.
+[서비스 연결](../experiments/results/meetings-grounded-summary-v3-service-v1.json)의849합성 검사와 독립 코드 검토를 통과했지만 실제 모델 실행은 아직0이다. [정확한 소스 CI](../experiments/results/meetings-grounded-summary-v3-integration-ci-v1.json)와 실행기240합성·독립 재검토, 새binding·판정자 준비를 마쳤다. [실행 준비 기록](../experiments/results/meetings-grounded-summary-v3-preparation-v1.json) 커밋 뒤 별도 한 번 실행을 배정한다. 기존 실패 실행 폴더를 재사용하지 않는다. 아래 v2는 과거 후보 기록이다.
 
 현재849개 합성 검사의 재현 범위는 다음5개 파일이다. 모델·Java·브라우저를 기동하지 않는다.
 
