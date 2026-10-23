@@ -1,4 +1,36 @@
 # 진행 상태
+## 2026-10-23 · 재작성 서비스 연결 검증과 소스 통합 준비
+
+직전 사용자 진행 질문은 상태 설명이며 제품 진전으로 세지 않는다. 이번 재개에서 저장된 서비스 receipt33cca3f5와 독립 검토ba00f574, 원본·현재 코드10개·증거4371개·동결77개를 확인했다. 관련 합성849개가24.91초에 통과했고 Ruff도 통과했다. 핵심228개는849개에 포함된다. 독립 코드 검토는 발견사항0이며 실제 모델 품질 검토가 아니다.
+
+제품 연결 변경은 공통 후보 목록1개와 검사4개다. 기존 실행기2개와 acceptance driver는 공통 분기를 통해 v3를 전달하므로 바이트를 유지했다. 일반/관측 실행, CLI, metadata 해시·호출상한·단계순서, 최종검토 뒤 최종본만 반환하는 HTTP 경로를 확인했다. 핵심module2는 기존 검토 해시로 고정했다. [서비스 연결 결과](../experiments/results/meetings-grounded-summary-v3-service-v1.json)에 재현 명령과 한계를 기록했다.
+
+구현 담당의 마지막 응답과 sealing 재시도는 모델 용량 오류였지만, 이미 저장된 코드·로그·receipt를 부모와 독립 검토자가 확인했다. 테스트를 다시 실행하거나 정상 반환으로 꾸미지 않았다. 실행기 담당도 용량 오류 후 동일한 도구 수락 Sol high 역할로 기존3개 원본 보존과 다음 비교 준비를 재개했다. 새 실제 모델/native/Java/browser·최종binding·run경로는 아직 없다.
+
+다음은 검증된 source/docs의 사용자 명의 commit과 정확한 필수CI, 실행기 독립검토, 초안/최종 쌍의 판정자와 실행 설정 고정이다. 그 뒤 별도 한 번 실행을 배정한다. 전체goal ACTIVE/Phase1 미완료다.
+
+## 2026-10-23 · 재작성 핵심 검토 통과와 서비스 연결 시작
+
+독립 코드 검토6dc0e980(8261B)은 발견사항0이며 source2 전후가 같다. 부모가 전체 검토를 읽고 입력과 증거를 확인해 parent bda51193과 [핵심 구현 결과](../experiments/results/meetings-grounded-summary-v3-module-v1.json)fed15772를 작성했다. 기존14상수·구형metadata·parser/projection/gate가보존됐고 변경된기존test는fixture확장및새유효후보v3를invalid v4로옮긴것임을확인했다. 228합성통과를실제의미성능으로사용하지않는다.
+
+같은실제Astra high grounded_summary_alignment_worker에게기존service/launcher/driver및test8중필요한파일만연결하도록배정했다. source2(10b24748/a9bd565b)는고정하고NEW .local/meeting-grounded-summary-v3-service-v1에baseline/실패/최종증거를보존한다. v3명시선택·normal/observed동일경로·health/manifest정확metadata·단계telemetry와구형호환을generic검사한다. 기존공통분기로작동하는파일은불필요하게수정하지않는다.
+
+서비스연결최종검사/독립검토/제품sourcecommitCI는아직미완료이며새harness/실제v3모델/native/Java/browser는아직배정하지않았다. 결과·설계94b02d5만공개돼필수CI를통과했으며현재제품변경은검토후묶어커밋한다. 전체goal ACTIVE/Phase1미완료다.
+
+## 2026-10-23 · 재작성 핵심 구현 반환과 독립 코드 검토
+
+기존module/test2에 명시적 v3를 추가했다. 최종source2는10b24748/a9bd565b이며 관련generic합성228개가1.53초에통과했고Ruff도첫시도통과했다. receipt beec31e2는원본10개·첫시도source/logs·diff를포함한22개증거를묶는다. 부모는이22개와기존연결8개·frozen77불변을확인했고기존test함수38개가모두유지됨을확인했다. 검사 개수는이번단일test파일범위이며이전다른범위검사와합산하지않는다.
+
+구현자의소유가반환된뒤기존도구수락Astra xhigh alignment설계자에게정확2파일의독립읽기검토를배정했다. 단계별cap/grammar,중간/최종claims,원문전체,deadline와검토전저장방지및기존회귀변경을확인한다. 실제의미판정이나모델실행이아니며현재검토반환전이다. 기존service8연결은아직배정하지않았다.
+
+94b02d5의push39891214043/PR39891218810필수3job은모두성공했고watch38240/51200도exit0이다. 종료메타데이터abf3010e를보존했다. 새v3모델/Java/browser실행은0이며전체goal ACTIVE다.
+
+## 2026-10-23 · 결과·재작성 설계 공개와 핵심 구현 시작
+
+결과3개와 설계·문서12개를94b02d5980ca4e40b9bcbd924c0dca525082676a로commit/push했다. staged b863ac0e의Git/working 일치와 원격 author/committer lingter100, PR14 OPEN/DRAFT의head/body를 확인했다. 양쪽필수CI39891214043/39891218810은watch38240/51200으로관찰중이며 재시작하지 않는다.
+
+최종설계50줄/13262B/bbd481d8은 원안5eb3c5a4를 별도보존하고 독립자기검토 결과만 반영했다. NEW grounded_summary_alignment_worker에 GPT-6 Astra/high/fork none을 요청했고 도구가 수락했다. 기존module/test2와NEWignored구현증거만 소유한다. source2/baseline8/contracts/frozen77을 먼저 보존하고 v3정렬단계·cap/grammar/metadata·공유deadline·실패뒤0호출을 검사한다. 기존서비스8 연결·새모델/native/Java/browser는 아직 배정하지 않았다. 부모는 문서와Git이며 전체goal ACTIVE다.
+
 ## 2026-10-23 · 자기검토 대조 완료와 재작성 후보 설계 수용
 
 같은 독립 Astra xhigh 판정자가 잠긴 판단을 바꾸지 않고 실제 모델 검토3개와 대조했다. 부모는 신규 custody13b4dda5의1429참조/1409고유파일, 비교1fffb82e·안전372f62a8의입력10개와 교차표 산술을 확인했다. [자기검토 비교](../experiments/results/meetings-grounded-summary-self-review-v2.json)40a78c80에서 모델은15주장 supported/2uncertain, coverage3개 모두 sufficient다. 선택인용 기준의 partial5·ambiguous1도 모델이 supported라 했고, 독립 핵심부족2개를 충분으로 표시했다. 이 차이를 확정오류 정답률로 바꾸지 않으며 모델 내부 이유도 추정하지 않는다. 기존 판단·실패·기준은 불변이다.

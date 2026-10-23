@@ -2,6 +2,8 @@
 
 ## 후속 개발 후보의 구분
 
+2026-10-23의 다음 후보 `grounded-summary-v3`는 flat 초안 뒤 전체 원문을 다시 대조해 문장·인용·누락을 함께 고치고 최종검토를 거친다. [설계](MEETINGS-SUMMARY-CLAIM-ALIGNMENT-PLAN.md)와 [서비스 연결](../experiments/results/meetings-grounded-summary-v3-service-v1.json)의 관련 합성849개·독립 코드 검토는 완료했다. 실제 품질과 추가 호출의120초 내 수행 가능성은 아직 미검증이다. 기본 경로는 유지하고 명시 선택만 추가했다.
+
 2026-10-23의 명시 후보 `grounded-summary-v2`는 전체 원문에서 관계 근거 묶음과 요약 문장을 한 번 생성하고 같은 모델이 한 번 검토하는 방식이다. 관계의 양끝과 문장을 연결하고 인용을 원문에서 파생하지만, 연결됐다는 사실이나 자동 검토 통과가 의미 정확성을 보장하지 않는다. 기본 경로와 이전 발췌 요약은 보존한다.
 
 [후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md)와 [모듈의 합성 검증](../experiments/results/meetings-grounded-summary-v2-module-v1.json)을 참고한다. [새 후보의 실제 실행](../experiments/results/meetings-grounded-summary-development-v2.json)은 세 번째 자동 검토 거부로 실패했다. [독립 내용 판단](../experiments/results/meetings-grounded-summary-review-v2.json)은 핵심충분1/부족2, 선택인용지원9/17이며 전체 승인 후보는 없다. 이전 v1의 핵심 충분성0/2 실패를 대체하거나 직접 개선율로 비교하지 않는다. 아래 모델·발췌 방식·실험 결과는 각각 기록된 경로와 시점의 증거다.

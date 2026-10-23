@@ -29,7 +29,8 @@ def review(count=1):
 
 
 class Native:
-    def __init__(self, assembly=summary.ASSEMBLY):
+    def __init__(self, assembly=summary.ASSEMBLY, generator_class=summary.GroundedSummaryGenerator,
+                 **options):
         self.calls, self.prepared, self.completed, self.events = [], [], [], []
         self.labels = {}
         self.size = lambda stage, data: 100
@@ -38,11 +39,12 @@ class Native:
         self.stop = {}
         self.after = lambda stage, path: None
         self.on_event = lambda stage: None
-        self.generator = summary.GroundedSummaryGenerator("http://127.0.0.1:19003", "x" * 48,
-            "unused-synthetic", transport=httpx.MockTransport(self.handle), assembly=assembly)
+        self.generator = generator_class("http://127.0.0.1:19003", "x" * 48,
+            "unused-synthetic", transport=httpx.MockTransport(self.handle), assembly=assembly, **options)
         self.generator._alias = GGUF_SHA256
         self.generator._metadata = {"repo_id": "synthetic-not-a-model", "revision": "fixture-v1"}
-        self.generator._emit = self.emit
+        if generator_class is summary.GroundedSummaryGenerator:
+            self.generator._emit = self.emit
         self.runtime = summary.GroundedSummaryRuntime(self.generator)
 
     def emit(self, event, value, deadline):
@@ -57,6 +59,7 @@ class Native:
             messages = body["messages"]
             data = json.loads(messages[-1]["content"])
             stage = ("classification" if "TARGETS" in data else "partition" if "lines" in data
+                     else "alignment" if "draft_claims" in data
                      else "review" if "candidate_claims" in data else "generation")
             self.prepared.append((stage, data, messages))
             assert body["chat_template_kwargs"] == {"enable_thinking": False}
@@ -77,10 +80,10 @@ class Native:
                 assert body["n_predict"] == 128 and body["grammar"] == batch_grammar(ids)
             else:
                 response = self.responses[stage]
-                assert body["n_predict"] == (768 if stage == "generation" else 128)
-                generation_grammar = (summary.GENERATION_GRAMMAR if self.assembly == summary.ASSEMBLY
+                assert body["n_predict"] == (768 if stage in ("generation", "alignment") else 128)
+                generation_grammar = (summary.GENERATION_GRAMMAR if self.assembly != summary.RELATION_ASSEMBLY
                                       else summary.RELATION_GENERATION_GRAMMAR)
-                assert body["grammar"] == (generation_grammar if stage == "generation"
+                assert body["grammar"] == (generation_grammar if stage in ("generation", "alignment")
                                            else summary.REVIEW_GRAMMAR)
             text = response if isinstance(response, str) else json.dumps(response, ensure_ascii=False)
             result = {"content": text, "model": GGUF_SHA256,
@@ -658,7 +661,7 @@ def test_relation_metadata_is_explicit_default_v1_and_preserved_contract_hashes(
 
 
 def test_relation_unknown_policy_and_wrong_batch_rejected_before_transport(monkeypatch):
-    for assembly in ("grounded-summary-v3", None, True):
+    for assembly in ("grounded-summary-v4", None, True):
         with pytest.raises(ValueError, match="unsupported grounded summary"):
             summary.summary_metadata(assembly)
         with pytest.raises(ValueError, match="unsupported grounded summary"):
@@ -685,3 +688,256 @@ def test_relation_eviction_rechecks_actual_input_without_new_budget(relations, m
         current == "generation" for current, _, _ in relations.prepared) == 2) else 100
     fail(relations, "generation_input_limit", content)
     assert [stage for stage, _, _ in relations.completed] == ["classification"] * 10
+
+
+@pytest.fixture
+def alignment():
+    fixture = Native(summary.ALIGNMENT_ASSEMBLY)
+    fixture.responses["alignment"] = draft(text="원문을 다시 확인한 최종 요약이다.")
+    yield fixture
+    fixture.generator.close()
+
+
+def test_alignment_rewrites_adds_splits_reorders_and_only_stores_final(alignment):
+    # Scripted semantics exercise the pipeline, not model reasoning quality.
+    content = " \t😀 논의\r\n제안은 아직 미결이다.\n검토가 끝나면 적용한다.\n반복\n반복  \n"
+    units = meeting_units(content)
+    alignment.responses["generation"] = draft((0,), "모든 제안을 이미 적용하기로 결정했다.")
+    alignment.responses["alignment"] = {"status": "draft", "claims": [
+        {"evidence": [3, 4], "text": "반복된 두 원문 위치를 확인한다."},
+        {"evidence": [1, 2], "text": "제안은 미결이며 검토가 끝나면 적용한다."},
+        {"evidence": [0], "text": "논의를 진행했다."}]}
+    alignment.responses["review"] = review(3)
+    result = alignment.run(content)
+    stages = {stage: (data, body) for stage, data, body in alignment.completed}
+    assert list(stages) == ["classification", "generation", "alignment", "review"]
+    initial, rewritten, checked = (stages[key][0] for key in ("generation", "alignment", "review"))
+    assert initial["source_parts"] == rewritten["source_parts"] == checked["source_parts"]
+    for data in (initial, rewritten, checked):
+        assert "".join(part["text"] for part in data["source_parts"]) == content
+        assert data["untrusted_title"] == request().title
+        assert data["response_language"] == "ko"
+    assert rewritten["draft_claims"] == [{"id": 0,
+        "text": "모든 제안을 이미 적용하기로 결정했다.", "evidence": [0]}]
+    assert "draft_claims" not in checked and "candidate_claims" not in rewritten
+    assert checked["candidate_claims"] == [
+        {"id": i, **row} for i, row in enumerate(alignment.responses["alignment"]["claims"])]
+    claims = result["analysis"]["summary_claims"]
+    assert [row["id"] for row in claims] == [0, 1, 2]
+    assert claims[0]["citations"] == units[3:5]
+    assert claims[0]["citations"][0]["quote"] == claims[0]["citations"][1]["quote"]
+    assert claims[0]["citations"][0]["start_offset"] != claims[0]["citations"][1]["start_offset"]
+    assert result["analysis"]["summary_evidence"] == units
+    assert result["analysis"]["summary"] == "\n".join(row["text"] for row in claims)
+    assert "이미 적용" not in result["analysis"]["summary"]
+    assert result["summary_review"] == {"policy": summary.REVIEW_POLICY, "status": "accepted"}
+    assert alignment.runtime.last_assembly["stage"] == "assembled"
+    assert alignment.runtime.last_assembly["claims"] == 3
+    calls = result["telemetry"]["calls"]
+    summary_calls = [row for row in calls if row["operation"].startswith("grounded_summary_")]
+    assert [row["operation"] for row in summary_calls] == [
+        "grounded_summary_generation", "grounded_summary_alignment", "grounded_summary_review"]
+    assert sum(row["completion_calls"] for row in summary_calls) == 3
+    for stage, _, messages in alignment.prepared:
+        if stage in ("generation", "alignment", "review"):
+            assert messages[0]["content"] == {"generation": summary.GENERATION_PROMPT,
+                "alignment": summary.ALIGNMENT_PROMPT, "review": summary.REVIEW_PROMPT}[stage]
+    assert len({deadline for _, _, deadline in alignment.events}) == 1
+
+
+def test_alignment_can_merge_claims_and_review_uses_new_count(alignment):
+    alignment.responses["generation"] = {"status": "draft", "claims": [
+        {"evidence": [0], "text": "첫 논의다."}, {"evidence": [1], "text": "결정을 확인한다."}]}
+    result = alignment.run()
+    assert len(result["analysis"]["summary_claims"]) == 1
+    assert alignment.runtime.last_assembly["claims"] == 1
+    checked = alignment.completed[-1][1]["candidate_claims"]
+    assert checked == [{"id": 0, "text": "원문을 다시 확인한 최종 요약이다.", "evidence": [0, 1]}]
+
+
+@pytest.mark.parametrize("stage,count", [("generation", 2), ("alignment", 3)])
+@pytest.mark.parametrize("raw,code", [
+    ('{"status":"draft","claims":[],"claims":[]}', "generation_invalid_json"),
+    ({"status": "abstained", "claims": []}, "generation_summary_insufficient"),
+    ({"status": "draft", "claims": []}, "generation_invalid_schema"),
+    ({**draft(), "extra": "수정 이유"}, "generation_invalid_schema"),
+    (draft((2,)), "generation_invalid_evidence"),
+    (draft((True,)), "generation_invalid_evidence"),
+    (draft((1, 0)), "generation_invalid_evidence"),
+    (draft((0, 0)), "generation_invalid_evidence"),
+    (draft((0,), "English only"), "generation_language_mismatch"),
+    (draft((0,), "가\n나"), "generation_invalid_schema"),
+    (draft((0,), "가" * 241), "generation_invalid_schema"),
+    (draft((0,), "\ud800가"), "generation_invalid_schema"),
+    ({"status": "draft", "claims": [{"evidence": [0], "text": "가" * 201}] * 6},
+     "generation_invalid_schema"),
+    ({"status": "draft", "claims": [{"evidence": [0], "text": "가"}] * 7},
+     "generation_invalid_schema"),
+])
+def test_alignment_invalid_intermediate_aborts_without_fallback(alignment, stage, count, raw, code):
+    alignment.responses[stage] = raw if isinstance(raw, str) else json.dumps(raw)
+    fail(alignment, code)
+    assert len(alignment.completed) == count
+    assert alignment.runtime.last_assembly["stage"] == stage
+    assert alignment.runtime.last_assembly["failure"] == code
+    assert "review_status" not in alignment.runtime.last_assembly
+
+
+@pytest.mark.parametrize("raw,code", [
+    ({"claims": [], "coverage": "sufficient"}, "generation_invalid_schema"),
+    ({"claims": [[1, "supported"]], "coverage": "sufficient"}, "generation_invalid_schema"),
+    ({"claims": [[0, "supported"]], "coverage": "insufficient"}, "generation_summary_review_rejected"),
+    ({"claims": [[0, "supported"]], "coverage": "uncertain"}, "generation_summary_review_rejected"),
+    ({"claims": [[0, "unsupported"]], "coverage": "sufficient"}, "generation_summary_review_rejected"),
+    ({"claims": [[0, "uncertain"]], "coverage": "sufficient"}, "generation_summary_review_rejected"),
+])
+def test_alignment_final_review_is_mandatory_no_repair_or_original_fallback(alignment, raw, code):
+    alignment.responses["review"] = raw
+    fail(alignment, code)
+    assert [row[0] for row in alignment.completed] == ["classification", "generation", "alignment", "review"]
+    assert alignment.runtime.last_assembly["stage"] == "review"
+    assert "review_status" not in alignment.runtime.last_assembly
+
+
+@pytest.mark.parametrize("stage,count", [("generation", 2), ("alignment", 3), ("review", 4)])
+def test_alignment_all_completions_require_eos_without_retry(alignment, stage, count):
+    alignment.stop[stage] = "limit"
+    fail(alignment, "generation_output_truncated")
+    assert len(alignment.completed) == count
+    assert alignment.runtime.last_assembly["stage"] == stage
+
+
+@pytest.mark.parametrize("stage,count", [("generation", 0), ("alignment", 2), ("review", 3)])
+def test_alignment_actual_template_input_cap_at_every_stage(alignment, stage, count):
+    alignment.size = lambda current, data: 4097 if current == stage else 100
+    fail(alignment, "generation_input_limit")
+    assert len(alignment.completed) == count
+
+
+@pytest.mark.parametrize("stage,count", [("generation_admission", 0), ("generation_started", 1),
+    ("generation_completed", 2), ("alignment_admission", 2), ("alignment_started", 2),
+    ("alignment_completed", 3), ("review_admission", 3), ("review_started", 3),
+    ("review_completed", 4), ("assembled", 4)])
+def test_alignment_same_deadline_includes_every_observer_stage(alignment, monkeypatch, stage, count):
+    clock = [100.0]
+    monkeypatch.setattr(time, "monotonic", lambda: clock[0])
+    def elapsed(current):
+        if current == stage:
+            clock[0] = 220.0
+    alignment.on_event = elapsed
+    fail(alignment, "generation_deadline_exceeded")
+    assert len(alignment.completed) == count
+    assert {deadline for _, _, deadline in alignment.events} == {220.0}
+
+
+@pytest.mark.parametrize("stage,count", [("generation", 2), ("alignment", 3), ("review", 4)])
+def test_alignment_transport_cost_does_not_restart_deadline(alignment, monkeypatch, stage, count):
+    clock = [100.0]
+    monkeypatch.setattr(time, "monotonic", lambda: clock[0])
+    def elapsed(current, path):
+        if current == stage and path == "/completion":
+            clock[0] = 220.0
+    alignment.after = elapsed
+    fail(alignment, "generation_deadline_exceeded")
+    assert len(alignment.completed) == count
+    assert {deadline for _, _, deadline in alignment.events} == {220.0}
+
+
+@pytest.mark.parametrize("stage,count", [("alignment_admission", 2), ("alignment_completed", 3),
+                                       ("review_completed", 4)])
+def test_alignment_observer_failure_is_not_swallowed(alignment, stage, count):
+    def reject(current):
+        if current == stage:
+            raise WorkerError("synthetic_sink_failed", 503)
+    alignment.on_event = reject
+    fail(alignment, "synthetic_sink_failed")
+    assert len(alignment.completed) == count
+    assert alignment.runtime.last_assembly["failure"] == "synthetic_sink_failed"
+
+
+@pytest.mark.parametrize("assembly", [summary.ASSEMBLY, summary.RELATION_ASSEMBLY, summary.ALIGNMENT_ASSEMBLY])
+@pytest.mark.parametrize("stage", ["unexpected", "alignment_admission", "", None])
+def test_summary_unknown_stage_rejected_before_any_transport(assembly, stage):
+    fixture = Native(assembly)
+    try:
+        with pytest.raises(ValueError, match="unsupported grounded summary stage"):
+            fixture.generator.summary_complete([], time.monotonic() + 120, stage, [])
+        assert fixture.calls == [] and fixture.events == []
+    finally:
+        fixture.generator.close()
+
+
+@pytest.mark.parametrize("assembly", [summary.ASSEMBLY, summary.RELATION_ASSEMBLY])
+def test_old_candidates_cannot_execute_alignment(assembly):
+    fixture = Native(assembly)
+    try:
+        with pytest.raises(ValueError, match="unsupported grounded summary stage"):
+            fixture.generator.summary_complete([], time.monotonic() + 120, "alignment", [])
+        assert fixture.calls == [] and fixture.events == []
+    finally:
+        fixture.generator.close()
+
+
+def test_alignment_metadata_binds_stage_order_and_old_metadata_is_exact():
+    expected = {
+        summary.ASSEMBLY: "95a4f3488c1c6632282d2c0ab07002f79b11bac93294bf3247456f92b822a33a",
+        summary.RELATION_ASSEMBLY: "5045469842055c0dfcfd347aa317c73855961e34cdc4d855bae15dca36a1d231"}
+    for assembly, digest in expected.items():
+        assert hashlib.sha256(json.dumps(summary.summary_metadata(assembly), sort_keys=True).encode()).hexdigest() == digest
+    metadata = summary.summary_metadata(summary.ALIGNMENT_ASSEMBLY)
+    assert metadata["stage_order"] == ["generation", "alignment", "review"]
+    assert metadata["extra_completion_cap"] == 3 and metadata["repair_calls"] == 1
+    assert metadata["alignment_output_tokens"] == 768
+    assert metadata["alignment_prompt_sha256"] == hashlib.sha256(summary.ALIGNMENT_PROMPT.encode()).hexdigest()
+    assert metadata["alignment_grammar_sha256"] == hashlib.sha256(summary.GENERATION_GRAMMAR.encode()).hexdigest()
+    old = summary.summary_metadata()
+    assert all(metadata[key] == value for key, value in old.items()
+               if key not in {"assembly", "extra_completion_cap", "repair_calls"})
+
+
+@pytest.mark.parametrize("mutation", ["missing-gap", "missing-unit", "changed-coordinate"])
+def test_alignment_message_requires_complete_source_and_original_coordinates(mutation):
+    content = " \t첫 원문\n반복\n반복  \n"
+    units = meeting_units(content)
+    source = summary.source_payload("제목", content, units)
+    claims = summary.parse_draft(json.dumps(draft((1, 2))), units, content)
+    if mutation == "missing-gap": source["source_parts"].pop(0)
+    elif mutation == "missing-unit": source["source_parts"].pop(1)
+    else: source["source_parts"][1]["start_offset"] += 1
+    with pytest.raises(WorkerError, match="generation_invalid_evidence"):
+        summary.alignment_summary_messages(source, content, units, claims)
+
+
+def test_alignment_message_rejects_nonunique_full_span_identity():
+    content = "반복\n반복"
+    units = meeting_units(content)
+    source = summary.source_payload("제목", content, units)
+    claims = summary.parse_draft(json.dumps(draft((1,))), units, content)
+    # A valid substring is still not a full source unit, even when quote matching succeeds.
+    claims[0]["citations"] = [{"quote": "반", "start_offset": 3, "end_offset": 4}]
+    with pytest.raises(WorkerError, match="generation_invalid_evidence"):
+        summary.alignment_summary_messages(source, content, units, claims)
+
+
+def test_alignment_plain_and_existing_observed_generator_share_path():
+    from doctrail.meeting_service_rag import ObservedGroundedSummaryGenerator
+    events = []
+    plain = Native(summary.ALIGNMENT_ASSEMBLY)
+    del plain.generator._emit
+    observed = Native(summary.ALIGNMENT_ASSEMBLY, generator_class=ObservedGroundedSummaryGenerator,
+                      observer=lambda *args: events.append(args))
+    observed.generator.observing = True
+    try:
+        for fixture in (plain, observed):
+            fixture.responses["alignment"] = draft(text="두 원문을 함께 다시 확인한다.")
+        first, second = plain.run(), observed.run()
+        assert first["analysis"] == second["analysis"]
+        assert first["summary_review"] == second["summary_review"]
+        assert plain.completed == observed.completed
+        assert [row[0] for row in observed.completed] == ["classification", "generation", "alignment", "review"]
+        assert observed.generator.summary_complete.__func__ is summary.GroundedSummaryGenerator.summary_complete
+        assert any(args[1] == "summary_stage" and args[2]["stage"] == "alignment_completed" for args in events)
+        assert any(args[1] == "transport_response" and args[2]["path"] == "/completion" for args in events)
+    finally:
+        plain.generator.close()
+        observed.generator.close()

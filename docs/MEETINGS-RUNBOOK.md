@@ -1,8 +1,20 @@
 # 회의·지식 Q&A 운영 가이드
 
+## 2026-10-23 원문 대조 재작성 후보
+
+다음 명시 후보는 `--analysis-policy batch-v2 --extraction-assembly grounded-summary-v3`다. 초안768·재작성768·최종검토128의 최대3회가 분류를 포함한 같은120초 기한을 공유한다. health와 실행 설정에서 alignment prompt/grammar 해시, 호출상한3·수정1·단계순서가 일치해야 한다. Java/React의 summary_version2와 기본 선택은 바뀌지 않는다.
+
+[서비스 연결](../experiments/results/meetings-grounded-summary-v3-service-v1.json)의849합성 검사와 독립 코드 검토를 통과했지만 실제 모델 실행은 아직0이다. 다음은 정확한 소스 CI, 기존 실행기 검토, 새 binding·판정 준비와 별도 한 번 실행이다. 기존 실패 실행 폴더를 재사용하지 않는다. 아래 v2는 과거 후보 기록이다.
+
+현재849개 합성 검사의 재현 범위는 다음5개 파일이다. 모델·Java·브라우저를 기동하지 않는다.
+
+```powershell
+.venv/Scripts/python.exe -X utf8 -m pytest -q tests/test_meeting_grounded_summary.py tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py
+```
+
 ## 2026-10-23 관계 근거 요약 후보
 
-현재 개발 후보는 `batch-v2` + `grounded-summary-v2`다. 기존 `scripts.serve_meeting_service_rag`와 `scripts.serve_meeting_rag_service`의 선택 인자는 `--analysis-policy batch-v2 --extraction-assembly grounded-summary-v2`이며, 기본 선택을 바꾸지 않는다. v1과 v2의 프롬프트·문법 해시가 다르므로 실행기와 worker health가 같은 후보를 보고해야 한다. 불일치 시 준비 또는 요청을 거부한다.
+이전 개발 후보는 `batch-v2` + `grounded-summary-v2`다. 기존 `scripts.serve_meeting_service_rag`와 `scripts.serve_meeting_rag_service`의 선택 인자는 `--analysis-policy batch-v2 --extraction-assembly grounded-summary-v2`이며, 기본 선택을 바꾸지 않는다. v1과 v2의 프롬프트·문법 해시가 다르므로 실행기와 worker health가 같은 후보를 보고해야 한다. 불일치 시 준비 또는 요청을 거부한다.
 
 v2는 조건·예외·시점 등의 관계와 그 양끝 원문을 먼저 연결하고 각 요약 문장에 근거를 붙인다. 저장·화면의 `summary_version=2` 계약은 기존과 같다. [핵심 모듈 검증](../experiments/results/meetings-grounded-summary-v2-module-v1.json)은 합성 검사와 코드 검토이며 실제 요약 개선의 증거가 아니다. 서비스 연결의 관련 합성 회귀761개와 정확한 소스의 push/PR 필수 CI도 통과했다. [실제 v2 비교](../experiments/results/meetings-grounded-summary-development-v2.json)는 세 번째 분석의 자동 검토 거부로 실패했으며 [독립 내용 판단](../experiments/results/meetings-grounded-summary-review-v2.json)은 핵심충분1/부족2이며 선택인용지원9/17로 전체 후보 수용 조건을 충족하지 못했다. 원래 실패와 미실행 질문6건은 유지한다.
 

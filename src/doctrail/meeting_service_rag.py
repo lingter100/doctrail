@@ -22,6 +22,7 @@ from doctrail.meeting_answer_v2 import response_language
 from doctrail.meeting_contract import AnalyzeRequest, AnswerRequest
 from doctrail.meeting_extraction_coverage import CoverageMeetingRuntime
 from doctrail.meeting_grounded_summary import (
+    ALIGNMENT_ASSEMBLY,
     ASSEMBLY,
     RELATION_ASSEMBLY,
     GroundedSummaryGenerator,
@@ -35,7 +36,7 @@ from doctrail.meeting_worker import MeetingRuntime
 
 BUDGET_HEADER = "X-DocTrail-Request-Budget-Ms"
 PROTOCOL = "meeting-service-rag-v1"
-GROUNDED_ASSEMBLIES = (ASSEMBLY, RELATION_ASSEMBLY)
+GROUNDED_ASSEMBLIES = (ASSEMBLY, RELATION_ASSEMBLY, ALIGNMENT_ASSEMBLY)
 ASSEMBLIES = ("legacy", "coverage-v1", *GROUNDED_ASSEMBLIES)
 
 

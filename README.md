@@ -8,7 +8,9 @@
 
 ## 현재 범위
 
-후속 관계 근거 요약 후보를 기존 Python 모델 서비스에 연결했다. 관련 합성 회귀761개와 독립 코드 검토를 통과했으며 기존 Java·React 저장 계약과 기본 요약 방식은 유지한다. [연결 검증](experiments/results/meetings-grounded-summary-v2-service-v1.json)은 실제 모델 품질 개선이나 전체 완료의 증거가 아니다. [새 후보의 실제 비교](experiments/results/meetings-grounded-summary-development-v2.json)는 두 회의의 저장·근거 이동 뒤 세 번째 자동 근거 검토 거부로 실패했다. [독립 내용 검토](experiments/results/meetings-grounded-summary-review-v2.json)에서 핵심충분1/부족2였지만 세 후보 모두 일부 문장 지원 문제가 남아 수용하지 않았다. 질의응답6건은 미실행이며 사람 검수는0이다.
+새 명시 후보 `grounded-summary-v3`는 초안 작성 → 전체 원문 기반 재작성1회 → 필수 최종검토로 연결했다. 관련 합성849개(핵심228개 포함), Ruff와 독립 코드 검토를 통과했다. [연결 검증](experiments/results/meetings-grounded-summary-v3-service-v1.json)은 코드·합성 흐름 증거이며 실제 요약 품질은 아직 비교하지 않았다. 기존 기본값과 Java·React 계약을 유지하고, 정확한 소스 CI·실행기 검토·새 실행 설정 확인 뒤 한 번 비교한다.
+
+이전 관계 근거 요약 후보를 기존 Python 모델 서비스에 연결했다. 관련 합성 회귀761개와 독립 코드 검토를 통과했으며 기존 Java·React 저장 계약과 기본 요약 방식은 유지한다. [연결 검증](experiments/results/meetings-grounded-summary-v2-service-v1.json)은 실제 모델 품질 개선이나 전체 완료의 증거가 아니다. [새 후보의 실제 비교](experiments/results/meetings-grounded-summary-development-v2.json)는 두 회의의 저장·근거 이동 뒤 세 번째 자동 근거 검토 거부로 실패했다. [독립 내용 검토](experiments/results/meetings-grounded-summary-review-v2.json)에서 핵심충분1/부족2였지만 세 후보 모두 일부 문장 지원 문제가 남아 수용하지 않았다. 질의응답6건은 미실행이며 사람 검수는0이다.
 
 새 근거 연결 요약 방식의 실제 로컬 비교는 두 번째 분석의 자동 검토 거부로 종료됐다. 독립 AI 검토에서도 생성된 두 요약 모두 핵심 조건이나 시점을 충분히 담지 못했다. 인용 위치 확인과 내용 품질을 구분하고 [실행 실패](experiments/results/meetings-grounded-summary-development-v1.json)·[독립 판단](experiments/results/meetings-grounded-summary-review-v1.json)을 보존한다. 이 실행에서 질의응답6건은 미실행이다.
 

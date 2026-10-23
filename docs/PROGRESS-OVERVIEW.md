@@ -25,6 +25,8 @@
 
 [후속 설계](MEETINGS-GROUNDED-SUMMARY-NEXT.md), [구현·검증 범위](../experiments/results/meetings-grounded-summary-v2-service-v1.json), [이번 실제 결과](../experiments/results/meetings-grounded-summary-development-v2.json), [이전 실제 실패](../experiments/results/meetings-grounded-summary-development-v1.json), [독립 내용 판단](../experiments/results/meetings-grounded-summary-review-v2.json), [모델 자기검토의 한계](../experiments/results/meetings-grounded-summary-self-review-v2.json), [다음 재작성 후보](MEETINGS-SUMMARY-CLAIM-ALIGNMENT-PLAN.md).
 
+그 결과를 바탕으로 초안 → 원문 대조 재작성1회 → 최종검토를 수행하는 v3를 서비스에 연결했다. 관련 합성849개(핵심228개 포함)와 독립 코드 검토는 통과했다. [현재 연결 검증](../experiments/results/meetings-grounded-summary-v3-service-v1.json)은 실제 모델 품질이나 최종 통합 성공을 뜻하지 않는다. 소스 CI와 실행 준비 후 같은 요청의 초안·수정본을 각각 평가한다.
+
 ## 이전에 확인한 성과와 한계
 
 - 검색 기준·후보 선택·미세조정의 개발 비교를 수행했다. 일부 회수 지표가 좋아졌지만 다중 문서 질문은 악화된 결과도 있다. 개발 결과만으로 최종 성능이나 기본 모델 채택을 확정하지 않는다. [M3](M3-ANALYSIS.md), [후보 개선](M3-CANDIDATE-ANALYSIS.md), [M4](M4-MAIN-DEV-ANALYSIS.md).
@@ -33,7 +35,7 @@
 
 ## 남은 순서와 일정
 
-1. 자기검토 대조에서 확인한 누락을 바탕으로 초안·원문을 다시 대조하는 재작성 후보를 구현한다. 같은 요청의 초안과 최종본을 비교해 충분성과 근거 연결이 실제로 좋아지는지 확인한다.
+1. 구현·합성 검토를 마친 재작성 후보의 정확한 소스 CI와 실행 준비를 마친다. 같은 요청의 초안과 최종본을 비교해 충분성과 근거 연결이 실제로 좋아지는지 확인한다.
 2. 공개 실제 자료의 출처·권한·전체 색인을 유지하며 정해진 calibration 통과 뒤 격리 validation과 최종 평가를 수행한다. 실패한 실험이나 잠긴 기준을 덮어쓰지 않는다.
 3. 문서 권한·갱신·삭제, 실제 모델을 포함한 전체 화면, 오류 복구·종료·재시작·새 환경 실행을 검증한다. 사용자 외관·사용성 판단을 별도로 기록한다.
 4. 기준/개선 비교와 실패 분석, 시연, 간결한 소개·면접 설명을 정리한다. AI 작성·검토와 사용자 결정·검수를 구분한다.

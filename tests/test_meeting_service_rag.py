@@ -426,7 +426,8 @@ def test_batch_preparation_consumes_original_outer_deadline(batch_runtime, monke
 
 @pytest.mark.parametrize("policy,assembly", [("single", "legacy"), ("batch-v1", "legacy"),
     ("batch-v2", "legacy"), ("batch-v2", "coverage-v1"),
-    ("batch-v2", "grounded-summary-v1"), ("batch-v2", "grounded-summary-v2")])
+    ("batch-v2", "grounded-summary-v1"), ("batch-v2", "grounded-summary-v2"),
+    ("batch-v2", "grounded-summary-v3")])
 @pytest.mark.parametrize("observed", [False, True])
 def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatch, policy, assembly, observed):
     import doctrail.meeting_service_rag as module
@@ -647,7 +648,7 @@ def test_busy_analysis_does_not_reemit_prior_assembly_diagnostics(batch_runtime)
 
 @pytest.fixture(params=GROUNDED_ASSEMBLIES)
 def grounded_runtime(request):
-    from test_meeting_grounded_summary import Native, relation_draft
+    from test_meeting_grounded_summary import Native, draft, relation_draft
 
     from doctrail.meeting_service_rag import (
         GroundedSummaryGenerator,
@@ -659,6 +660,8 @@ def grounded_runtime(request):
         native = Native(assembly)
         if assembly == "grounded-summary-v2":
             native.responses["generation"] = relation_draft()
+        elif assembly == "grounded-summary-v3":
+            native.responses["alignment"] = draft()
         native.generator.close()
         cls = GroundedSummaryGenerator if observer is None else ObservedGroundedSummaryGenerator
         options = {} if observer is None else {"observer": observer}
@@ -677,7 +680,7 @@ def grounded_runtime(request):
 
 
 @pytest.mark.parametrize("observed", [False, True])
-def test_grounded_actual_http_runtime_keeps_full_source_and_one_generation_review(grounded_runtime, observed):
+def test_grounded_http_runtime_keeps_full_source_and_mandatory_final_review(grounded_runtime, observed):
     from test_meeting_grounded_summary import request
 
     from doctrail.meeting_grounded_summary import summary_metadata
@@ -695,12 +698,15 @@ def test_grounded_actual_http_runtime_keeps_full_source_and_one_generation_revie
         assert result["analysis"]["summary_version"] == 2
         assert result["summary_review"] == {"policy": "grounded-review-v1", "status": "accepted"}
         assert "last_assembly" not in result and "assembly" not in result
-    assert [stage for stage, _, _ in native.completed] == ["classification", "generation", "review"]
+    expected_stages = (["classification", "generation", "alignment", "review"]
+                       if service.extraction_assembly == "grounded-summary-v3"
+                       else ["classification", "generation", "review"])
+    assert [stage for stage, _, _ in native.completed] == expected_stages
     for stage, data, _ in native.completed:
         if stage != "classification":
             assert "".join(part["text"] for part in data["source_parts"]) == request().content
     candidate = native.completed[-1][1]
-    if service.extraction_assembly == "grounded-summary-v1":
+    if service.extraction_assembly != "grounded-summary-v2":
         assert candidate["candidate_claims"] == [
             {"id": 0, "text": "논의와 결정을 함께 확인한다.", "evidence": [0, 1]}]
     else:
@@ -712,10 +718,13 @@ def test_grounded_actual_http_runtime_keeps_full_source_and_one_generation_revie
     assert native.generator.service_deadline is None and not native.generator._cache
     if observed:
         assert [event for event, _ in events].count("classification_units") == 1
-        assert sum(event == "transport_started" and value["path"] == "/completion" for event, value in events) == 3
+        assert sum(event == "transport_started" and value["path"] == "/completion"
+                   for event, value in events) == len(expected_stages)
         stage_names = [value["stage"] for event, value in events if event == "summary_stage"]
-        assert stage_names == ["generation_admission", "generation_started", "generation_completed",
-                               "review_admission", "review_started", "review_completed", "assembled"]
+        expected_events = ["generation_admission", "generation_started", "generation_completed"]
+        if service.extraction_assembly == "grounded-summary-v3":
+            expected_events += ["alignment_admission", "alignment_started", "alignment_completed"]
+        assert stage_names == expected_events + ["review_admission", "review_started", "review_completed", "assembled"]
         diagnostic = next(value["diagnostic"] for event, value in events if event == "assembly")
         assert diagnostic["observation_scope"] == "assembly_only_not_request_success"
         assert events[-1][0] == "result"
@@ -738,7 +747,8 @@ def test_grounded_observer_failure_or_cost_never_becomes_success(grounded_runtim
     code = "generation_deadline_exceeded" if failure == "deadline" else "generation_failed"
     with pytest.raises(WorkerError, match=code):
         service.analyze(request())
-    assert len(native.completed) == (0 if failure == "summary_stage" else 3)
+    assert len(native.completed) == (0 if failure == "summary_stage" else
+                                     4 if service.extraction_assembly == "grounded-summary-v3" else 3)
     if failure != "result":
         assert not any(event == "result" for event, _ in events)
     assert service._poisoned and not native.generator._cache
@@ -852,4 +862,94 @@ def test_grounded_initialization_rejects_cross_candidate_before_any_call(grounde
     with pytest.raises(GenerationError, match="generation_identity_mismatch"):
         ServiceRuntime(service.answer_generator, native.generator, cleanup=lambda: True,
                        extraction_assembly=selected)
+    assert native.calls == []
+
+
+@pytest.mark.parametrize("grounded_runtime", ["grounded-summary-v3"], indirect=True)
+@pytest.mark.parametrize("observed", [False, True])
+def test_alignment_http_publishes_replacement_only_after_final_review(grounded_runtime, observed):
+    from test_meeting_grounded_summary import draft, request, review
+
+    from doctrail.meeting_grounded_summary import GroundedSummaryGenerator
+    events = []
+    service, native = grounded_runtime((lambda op, event, value: events.append((event, value))) if observed else None)
+    native.responses["generation"] = draft((0,), "모든 변경을 이미 적용했다.")
+    native.responses["alignment"] = {"status": "draft", "claims": [
+        {"evidence": [1], "text": "결정을 확인한다."},
+        {"evidence": [0], "text": "첫 논의를 진행했다."}]}
+    native.responses["review"] = review(2)
+    assert native.generator.summary_complete.__func__ is GroundedSummaryGenerator.summary_complete
+    def before_completion(stage, path):
+        if path == "/completion":
+            assert not any(event == "result" for event, _ in events)
+    native.after = before_completion
+    with TestClient(create_app(TOKEN, lambda: service)) as client:
+        response = client.post("/analyze", json=request().model_dump(), headers=headers())
+    assert response.status_code == 200
+    result = response.json()
+    assert result["analysis"]["summary"] == "결정을 확인한다.\n첫 논의를 진행했다."
+    assert [row["id"] for row in result["analysis"]["summary_claims"]] == [0, 1]
+    assert "이미 적용" not in result["analysis"]["summary"]
+    assert native.completed[-1][1]["candidate_claims"] == [
+        {"id": 0, "text": "결정을 확인한다.", "evidence": [1]},
+        {"id": 1, "text": "첫 논의를 진행했다.", "evidence": [0]}]
+    assert "draft_claims" not in native.completed[-1][1]
+    calls = result["telemetry"]["calls"]
+    assert [row["operation"] for row in calls if row["operation"].startswith("grounded_summary_")] == [
+        "grounded_summary_generation", "grounded_summary_alignment", "grounded_summary_review"]
+    assert [row[0] for row in native.completed] == ["classification", "generation", "alignment", "review"]
+    if observed:
+        assert [event for event, _ in events].count("result") == 1
+        stages = [value["stage"] for event, value in events if event == "summary_stage"]
+        assert stages.index("alignment_completed") < stages.index("review_completed") < stages.index("assembled")
+
+
+@pytest.mark.parametrize("grounded_runtime", ["grounded-summary-v3"], indirect=True)
+@pytest.mark.parametrize("observed", [False, True])
+@pytest.mark.parametrize("fault,count", [("alignment-abstain", 3), ("alignment-eos", 3),
+    ("alignment-input", 2), ("review-rejected", 4), ("review-schema", 4)])
+def test_alignment_http_failure_never_returns_draft_or_skips_final_review(grounded_runtime, observed, fault, count):
+    from test_meeting_grounded_summary import request
+    events = []
+    service, native = grounded_runtime((lambda op, event, value: events.append((event, value))) if observed else None)
+    if fault == "alignment-abstain":
+        native.responses["alignment"] = {"status": "abstained", "claims": []}
+    elif fault == "alignment-eos":
+        native.stop["alignment"] = "limit"
+    elif fault == "alignment-input":
+        native.size = lambda stage, data: 4097 if stage == "alignment" else 100
+    elif fault == "review-rejected":
+        native.responses["review"]["coverage"] = "insufficient"
+    else:
+        native.responses["review"] = {}
+    with TestClient(create_app(TOKEN, lambda: service)) as client:
+        response = client.post("/analyze", json=request().model_dump(), headers=headers())
+    assert response.status_code >= 400
+    assert "error" in response.json() and "analysis" not in response.json()
+    assert "summary_review" not in response.json()
+    assert len(native.completed) == count
+    assert not any(event == "result" for event, _ in events)
+    assert "review_status" not in service.analysis.last_assembly
+
+
+@pytest.mark.parametrize("grounded_runtime", ["grounded-summary-v3"], indirect=True)
+@pytest.mark.parametrize("field", ["alignment_prompt_sha256", "alignment_grammar_sha256",
+    "alignment_output_tokens", "extra_completion_cap", "repair_calls", "stage_order"])
+@pytest.mark.parametrize("fault", ["changed", "missing"])
+def test_alignment_contract_drift_blocks_health_and_analyze_before_transport(grounded_runtime, field, fault):
+    from test_meeting_grounded_summary import request
+    service, native = grounded_runtime()
+    metadata = native.generator.public_metadata()
+    if fault == "changed":
+        metadata["grounded_summary"][field] = "incorrect synthetic alignment contract"
+    else:
+        metadata["grounded_summary"].pop(field)
+    native.generator.public_metadata = lambda: metadata
+    with pytest.raises(GenerationError, match="generation_identity_mismatch"):
+        ServiceRuntime(service.answer_generator, native.generator, cleanup=lambda: True,
+                       extraction_assembly="grounded-summary-v3")
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.health()
+    with pytest.raises(WorkerError, match="generation_failed"):
+        service.analyze(request())
     assert native.calls == []

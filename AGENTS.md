@@ -1,4 +1,14 @@
 # DocTrail project instructions
+- Alignmentv3 service RETURNED savedreceipt33cca3f5/849synthetic24.91s(includes228)/Ruff; finalworkerreplycapacityfailed but parent verified4371+current10+frozen77 and independentAstraxhighba00f574 blocker0. Productdelta allowlist1+tests4/module2fixed. ExistingSolhigh grounded_alignment_harness_worker resumed existingharness3+NEWv3-harness only/archivefirst/noactual. Parent source/docs/Git/CI next; sourcecommitpending/goalACTIVE/Phase1incomplete.
+
+
+
+- Alignmentv3 module2 independentAstraxhigh6dc0e980 blocker0/parentbda51193/publicfed15772 verified; source2fixed10b24748/a9bd565b. ExistingactualAstrahigh alignmentworker NOW owns existingservice8neededonly+NEW.local/meeting-grounded-summary-v3-service-v1; no module2edits/native/harness. 94b02d5 BOTHall3CIpassed/abf3010e. Parentdocs/Git; finalintegrationtests/review/sourcecommitpending, goalACTIVE/Phase1incomplete.
+
+- Alignmentv3 module2 RETURNED10b24748/a9bd565b/228synthetic1.53s/Rufffirstpass/beec31e2. Parent22evidence/baseline10+fixed8/frozen77/oldtest38retained verified; existingactualAstraxhigh alignmentdesigner now NEWindependent-review-v1 readonly2. 94b02d5 BOTH39891214043+39891218810 ALL3CIpassed/watch38240+51200exit0/abf3010e. Workerreturned/no service8/native; parentdocs/Git, goalACTIVE.
+
+- Results+alignmentdesign94b02d5 pushed/userlingter100/12Gitexact/PR14draftupdated. CI39891214043+39891218810 live/watch38240+51200. NEWactualAstrahigh grounded_summary_alignment_worker owns module/test2+NEW.local/meeting-grounded-summary-v3-implementation-v1 only; baselinefirst, no service8/native. Planbbd481d8 accepted/original5eb3preserved; oldlocks/frozen77 unchanged; parentdocs/Git, goalACTIVE.
+
 - V2 selfreview LOCK1fffb82e/safe372f62a8/input10same: model15supported2uncertain/coverage3sufficient vslocked2insufficient; primary9match+5partial1ambig modelsupported. Parentcustody1429refs/1409unique+arithmetic verified55a0d507/public40a78c80. NEWactualAstraxhigh alignment-v3 plan50lines/bbd481d8 accepted, original5eb3c5a4 preserved; commitresults/design BEFORE NEWAstrahigh module/test2. No newruntime/sourceedits yet; goalACTIVE.
 
 - V2 independent63f2b844/safe0bee9eb9 LOCK verified input5/arithmetic:3drafts17claims34exact, selected9sup7partial1amb/core1sufficient2insufficient/allclaimaccepted0. Public109d4d00/performance8208a4aa, parentf6b92be6; a1a6d59 BOTH39888356826+39888361019 ALL3CIpassed/7c46e5df. NEWactualSolhigh grounded_v2_review_custody owns NEW self-review-packets-v1 only/no runtime. Existingjudgment immutable; source23d/oldrun/frozen77 unchanged; parentdocs/Git, goalACTIVE.
