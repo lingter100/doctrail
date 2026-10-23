@@ -13,8 +13,8 @@
 저장소의 기존 Python 개발 환경에서 실행한다. 모델 가중치나 GPU를 불러오지 않는다.
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -q tests/test_probe_meeting_summary_mode.py
-.\.venv\Scripts\python.exe -m ruff check scripts/probe_meeting_summary_mode.py tests/test_probe_meeting_summary_mode.py
+.\.venv\Scripts\python.exe -m pytest -q tests/test_probe_meeting_summary_mode.py tests/test_summary_mode_entrypoint.py
+.\.venv\Scripts\python.exe -m ruff check scripts/probe_meeting_summary_mode.py tests/test_probe_meeting_summary_mode.py tests/test_summary_mode_entrypoint.py
 ```
 
 가짜 HTTP·시계·프로세스 handle로 요청 대조, 토큰/시간 경계, 근거 검토, 자원 관측, 소유 프로세스 정리와 종료 결과를 검사한다. 실제 native 호환이나 AI 정확성을 증명하는 검사는 아니다. 최초102개 검사 뒤 발견한5개 문제,155개 검사 뒤 발견한 종료 기록 유실과 각 수정 전 실패를 로컬 증거에 보존했다.
@@ -26,6 +26,14 @@
 등록에는 원래 `plan`·`amendment`와 함께 필수 `provenance_boundary`가 있어야 한다. 경로는 `docs/MEETINGS-SUMMARY-MODE-PROVENANCE-BOUNDARY.md`, 크기는7,014B, SHA256은 `ab191c4aa424d2ca16a874683feb3c88eb6064a89bcb47e9bae0e2fdfa9a11ac`다. 누락·다른 값·파일 변경은 실행 전에 거부하며 종료 후에도 같은 바이트인지 검사한다. 이 바인딩이나 `prepared=true` 자체가 자료 수용을 뜻하지 않는다.
 
 CLI는 `--registration`과 `--execute-once-sha256`을 모두 요구한다. 후자는 실제 등록 파일의 SHA256이어야 한다. 임의의 예시 등록이나 잠긴 과거 입력으로 시험 실행하지 않는다. 등록 경로·해시와 별도의 once 배정이 완료된 뒤 실제 명령과 환경을 실행 기록에 남긴다. 서비스의120초 한도는 이 진단의180초 arm 한도와 별개다. 요청된 reasoning512token은 독립적인 강제 상한으로 주장하지 않는다.
+
+실제 CLI는 저장소 루트에서 모듈로 실행한다. 아래 변수에는 별도로 승인된 새 등록 경로와 그 파일의 정확한 SHA256을 넣는다. 명령 예시는 실행 승인을 대신하지 않는다.
+
+```powershell
+.\.venv\Scripts\python.exe -B -X utf8 -m scripts.probe_meeting_summary_mode --registration $registrationPath --execute-once-sha256 $registrationSha256
+```
+
+직접 파일 경로로 실행한 최초 시도는 `scripts` 패키지 import 단계에서 실패했으며, 그 종료와 사용된 once 승인은 보존한다. `PYTHONPATH`나 `sys.path`를 추가하지 않는다. 새 진입점 검사는 상속된 `PYTHONPATH`를 제거한 실제 하위 프로세스에서 `--help`와 필수 인자 거부만 확인한다. 등록 검증·모델·tokenizer·native 시작은 실행하지 않으며, 실제 모델 시작이나 품질을 검증한 결과로 해석하지 않는다.
 
 ## 실패 기록과 해석
 

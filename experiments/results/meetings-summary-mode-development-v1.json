@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "kind": "summary-mode-development-attempt-v1",
+  "status": "failed_before_main_module_import",
+  "source_commit": "0cbe1ce027a3b549a007af571e8580d61c145fa5",
+  "source_ci": [
+    {
+      "id": "39923924866",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39923924866",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": "39923933711",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39923933711",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "registration": {
+    "file": ".local/meeting-summary-mode-execution-v1/registration-v1.json",
+    "size_bytes": 32515,
+    "sha256": "2388bedc5b2eada1a0611bea74eee2bee18b13e185ce4b7ff466dbf825d27fde"
+  },
+  "once_consumed": true,
+  "cli_dispatches": 1,
+  "cli_exit_code": 1,
+  "wrapper_exit_code": 0,
+  "cli_seconds": 1.030741,
+  "first_failure": {
+    "stage": "module-import-before-main",
+    "type": "ModuleNotFoundError",
+    "module": "scripts",
+    "file": "scripts/probe_meeting_summary_mode.py",
+    "line": 47
+  },
+  "bound_terminal_present": false,
+  "stdout_bytes": 0,
+  "run_directory_created": false,
+  "native_launches": 0,
+  "tokenizer_calls": 0,
+  "model_completions": 0,
+  "quality_results_available": false,
+  "startup_resource_gate_passed": true,
+  "startup_ram": {
+    "observed_at_unix": 1792743841.4937623,
+    "available_bytes": 10768719872,
+    "required_bytes": 10737418240,
+    "pass": true
+  },
+  "bindings": {
+    "worker_posthash_refs": 249,
+    "worker_unique_files": 247,
+    "all_unchanged": true,
+    "parent_scope": "metadata and non-asset hashes; model asset sizes only"
+  },
+  "cleanup": {
+    "owned_processes_absent": true,
+    "leases_released": true,
+    "extra_process_kills": 0
+  },
+  "evidence": [
+    {
+      "path": ".local/meeting-summary-mode-execution-v1/custody-v1/receipt-v1.json",
+      "bytes": 3730,
+      "sha256": "932f6030baf4cdfb16f125914bf48c9fe88700f7874b683672aae99a0baf5820"
+    },
+    {
+      "path": ".local/meeting-summary-mode-execution-v1/cli-v1/stderr.txt",
+      "bytes": 258,
+      "sha256": "e69a35d7beaac1af04404003f68ece1d3453081a770fac008a2ea6d015e22a08"
+    },
+    {
+      "path": ".local/meeting-summary-mode-execution-v1/cli-v1/exit-observation.json",
+      "bytes": 822,
+      "sha256": "f7b25cbaf4b837cc282c608ac0f394cb46082fd90f56bb8c0ce9797d1ec278a9"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/actual-v1-parent-verification.json",
+      "bytes": 1480,
+      "sha256": "ad8484c12ff24fa6659cbba25f290a15cf8e340b3d9b06c0e3b3a0c2c8a61987"
+    }
+  ],
+  "retries": 0,
+  "next": "Correct and test the Python module entry command without models; any new attempt needs separately recorded prospective authority and fresh registration/paths.",
+  "human_review_count": 0,
+  "paid_calls": 0
+}

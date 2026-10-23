@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-23 · 실제 비교의 실행 진입 실패 보존과 명령 수정
+
+등록·독립 검토를 공개한 0cbe1ce의 push39923924866/PR39923933711은 필수 3개가 양쪽 통과했다. 새 자원 확인에서 가용 RAM10,768,719,872B로 10GiB 기준을 충족해 예정 CLI를 1회 발행했지만, 직접 파일 호출의 `scripts` import가 main 전에 실패했다. 실제 CLI exit1/1.030741초, stdout0, run 경로 미생성, native·tokenizer·모델 completion0이다. Wrapper exit0은 별도 관측이며 성공으로 세지 않는다. [원래 실패](../experiments/results/meetings-summary-mode-development-v1.json)와 custody932f6030·parent ad8484c1을 보존했고 원래 once는 소비됐다. 출력이 없어 새 품질 판단은 없다.
+
+기존 Astra high 담당이 저장소 루트의 `-m scripts.probe_meeting_summary_mode` 호출을 문서화하고, 상속 PYTHONPATH 없이 실제 Python subprocess의 도움말·필수 인자 거부 4개를 검사했다(3.55초/Ruff 통과). 직접 파일 호출 오류도 모델 없이 1회 재현해 보존했다. 부모가 source2·evidence18·닫힌 시도45·동결77·기존 probe/test2를 확인했다(1dcde7c8). 독립 Astra xhigh 검토 fde0ff23에서 차단0/권고0이며 부모가 입력12개를 다시 확인했다. [수정 결과](../experiments/results/meetings-summary-mode-entrypoint-repair-v1.json)를 남겼고 정확한 수정 소스 CI는 아직 별도다. 실제 모델 시작 가능성이나 품질을 증명하지 않는다.
+
+[진입점 복구 보완안](MEETINGS-SUMMARY-MODE-ENTRYPOINT-RECOVERY.md)을 읽고 수용했다. 기존 입력·기준·원계약·예산은 그대로 두고 새 경로의 v2 등록·외부 companion·정확한 CI·독립 검토·시작 직전 자원 확인과 별도 once 배정 후에만 최대 1회 진행한다. 현재 v2 등록·CLI·run은 없으며 재시도나 환경 우회를 하지 않았다. 전체 goal ACTIVE/Phase1 미완료다.
+
 ## 2026-10-23 · 최종 요약 비교 등록·독립 검토 완료
 
 0fbc44d의push39921959067/PR39921966514 필수3개가 양쪽 통과했고 watch20476/23815가exit0으로 닫혔다. 실제 실행 등록2388bedc는32,515B이며 공식 읽기 검증1회/7.344초로 코드141·자산61 전체해시·계획3·원문·기준잠금·순서8을 확인했다. 부모는새증거14·현재147참조·이전18·동결77을6dc3c6dc로 확인했다. 독립 Astra xhigh bab747f3는binding차단0/권고0이며 부모가입력27개를재확인했다. 이후 공개 역할 metadata만 준비 완료로 갱신하며 원래 검토 입력은0fbc와로컬에 보존된다. [사전등록 결과](../experiments/results/meetings-summary-mode-preparation-v1.json)는 실제모델 성능이 아니다.
