@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-development-preparation-v1",
+  "date": "2026-10-23",
+  "status": "prepared_not_executed",
+  "source_commit": "17a5dd60d367e72249d3d2dab413b87eaffbda90",
+  "execution_contract": {
+    "path": "docs/MEETINGS-GROUNDED-SUMMARY-EXECUTION.md",
+    "bytes": 14002,
+    "sha256": "2ec2a10be87b0d391b48ccf3b3cb1aedb53af06f4e5b59c29f845116deb7a1f9"
+  },
+  "source_ci_receipt": {
+    "path": "experiments/results/meetings-grounded-summary-integration-ci-v1.json",
+    "bytes": 5160,
+    "sha256": "e852d3795e4c56164fab0fa91577b1c5e7f0a6d7f98f73dd4baf5c0b69f39743"
+  },
+  "runtime_binding": {
+    "path": ".local/service-rag-batch-development-v1/runtime-bindings-grounded-summary-v1.json",
+    "bytes": 18227,
+    "sha256": "5f2725569407b3f9d314cfd406e047e8784d51c560c71536f84f1cd946636508"
+  },
+  "implementation_receipt": {
+    "path": ".local/meeting-grounded-summary-harness-v1/receipt-v1.json",
+    "bytes": 5701,
+    "sha256": "070da1c9a0331fe6b1c4c2284b445521e661db9e8387f701819ed471796dcf7b"
+  },
+  "harness_sources": [
+    {
+      "path": ".local/service-rag-batch-development-v1/development-runner-v3.py",
+      "bytes": 41964,
+      "sha256": "d92379a08ba77f90cee7e276fd639683e5250273873baf8b43379d70519be35b"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/development-browser-v2.mjs",
+      "bytes": 42648,
+      "sha256": "76837d5de1471084cc8391ec0a36fab56b5c7c4a415a5836b91613fa72d70d1d"
+    },
+    {
+      "path": ".local/service-rag-batch-development-v1/test_grounded_harness.py",
+      "bytes": 21922,
+      "sha256": "37a25d88ebdd85c28ad41d468a31f90bb2db8314e1234ef134416f1d7cc832da"
+    }
+  ],
+  "independent_review": {
+    "path": ".local/meeting-grounded-summary-harness-v1/independent-review/read-review-v1.json",
+    "bytes": 7935,
+    "sha256": "885cc1e3818177c5ffb22a91da2d41698919d6f4554a5b865535765f625971ba"
+  },
+  "independent_read_blockers": 0,
+  "checks": {
+    "current_synthetic_passed": 79,
+    "common_cleanup": 25,
+    "new_generic": 54,
+    "old_cli_expectation_deselected": 1,
+    "current_seconds": 1.99,
+    "archived_original_cleanup_passed": 26,
+    "archived_seconds": 0.28,
+    "archived_tests_overlap_do_not_sum": true,
+    "ruff": "passed",
+    "node_syntax": "passed",
+    "initial_current_passed": 73,
+    "initial_current_failed": 2,
+    "initial_failures_preserved": true
+  },
+  "preservation": {
+    "archived_before_edit": 33,
+    "fixed_product_binary_original_inputs": 40,
+    "frozen_files": 77,
+    "exact_runtime_dependencies": 91,
+    "ui_files_in_jar": 4,
+    "original_input_bindings": 16
+  },
+  "roles": {
+    "implementation": "grounded_harness_worker; tool-accepted GPT-6 Astra high",
+    "read_review": "grounded_harness_review; tool-accepted GPT-6 Astra xhigh",
+    "execution_custody": "grounded_run_custodian; tool-accepted GPT-6.1 Sol high",
+    "independent_summary_judgment": "grounded_summary_final_judge; tool-accepted GPT-6 Astra xhigh",
+    "parent_chat_model_changed": false,
+    "separate_runtime_model_setting_query": false
+  },
+  "source_only_lock": {
+    "path": ".local/meeting-grounded-summary-independent-v1/source-lock.json",
+    "bytes": 11498,
+    "sha256": "4f68b2f9788187ec883ad600b62de7c531b4ba12a9c5d81aa56f8c613dd7bed9"
+  },
+  "custody_preflight": {
+    "path": ".local/meeting-grounded-summary-custody-v1/roles-preflight.json",
+    "bytes": 9605,
+    "sha256": "536a949efdb5f0ca8bc15c3305b249dde1fd07d1b6cfb609f0f82cae3712f039"
+  },
+  "exposure": "Source-only criteria read before current candidate output. Inherited AGENTS historical aggregates disclosed. Exposed development comparison, not blind generalization or human review.",
+  "actual_execution": {
+    "new_model": 0,
+    "quality_result": null,
+    "human_review": 0,
+    "public_service_deployment": 0
+  },
+  "limitations": [
+    "Pure bindings and synthetic tests do not demonstrate actual model quality or runtime success.",
+    "Source CI passed; final explicit once dispatch follows this preparation record.",
+    "Original failed runs and locked criteria are unchanged.",
+    "Existing local input files remain private; public references record metadata only."
+  ]
+}

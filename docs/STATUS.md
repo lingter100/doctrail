@@ -1,4 +1,28 @@
 # 진행 상태
+## 2026-10-23 · 실제 비교의 최종 설정 고정
+
+직전 진행 문의 turn은 상태 설명만 했으므로 no-progress였다. 이번에는 현재 Git·프로세스·검토 결과를 다시 확인하고 다음 안전 작업인 최종 runtime binding을 생성했다. 독립 Astra xhigh 읽기 검토885cc1e3의 blocker0을 전체 읽었으며 source3가 동일하다. binding5f272556(18,227B)은 runtime91·harness2·JAR/UI4·source CI·원본16·동결77을 순수 검증했다. 새 실행/CLI 폴더는 없으며 실제 모델은 아직 실행 전이다.
+
+[준비 결과](../experiments/results/meetings-grounded-summary-development-preparation-v1.json)를 먼저 커밋한 뒤 기존 Sol high grounded_run_custodian에게 새 경로의 한 번 실행을 명시 배정한다. source17a5dd6와 기존 실패·평가 기준은 유지하며, 문서 CI 추가 연쇄를 실행 조건으로 만들지 않는다. 현재 Astra xhigh grounded_summary_final_judge는 기존 원문/잠금 기준3개를 확인했고 새 출력은 아직 보지 않았다. 새 요약/근거 판단 잠금 전에는 자기검토·성능·진단을 전달하지 않는다. 전체 goal ACTIVE/Phase1 incomplete다.
+
+## 2026-10-23 · 실행기 합성 검증 반환과 독립 읽기 검토
+
+직전 goal turn은 기존 harness2의 최소 연결/NEW test1 구현·검사, source-only 기준 잠금과 실행 자원 준비의 progress다. 현재79개(공통 cleanup25+신규54)가1.99초에 통과했고 Ruff/Node syntax가 통과했다. 구 CLI 하나는 새 명시 후보/once 경로 계약으로 의도적으로 거부하므로 기존 기대1개를 제외하고 새 CLI 검사로 대체했다. 보존 원본에서는 cleanup26개가0.28초에 통과했으며 현재79개와 중복 합산하지 않는다. 최초73pass/2fail의 구 CLI 기대와 Node argv 검사 실행 오류를 원본과 함께 보존했다.
+
+checkpoint-v1 source3 SHA는d92379a0/76837d5d/37a25d88, receipt070da1c9다. 부모는 source/log12개, 보존33개, 고정40개, 동결77과 실제 runtime91개 Git/current 일치를 확인했고 runner/browser 변경을 읽었다. 제품 소스와 JAR/UI는 바뀌지 않았다. 현재 NEW 도구 수락 Astra xhigh grounded_harness_review가 정확3개를 독립 읽기 검토 중이다.
+
+원문/기준2개는 source-lock4f68b2f9(11,498B)에4문서/159단위/254기준참조로 묶였다. 부모는 메타데이터와 원본2 해시만 확인했다. Sol high 실행 준비536a949e(9,605B)는 입력16 동일·캐시 존재/크기·당시 GPU0 및 lease3 실제 잠금 가능을 기록했고 전체 가중치 재해시는 하지 않았다. 실제 실행 직전에 자원을 다시 확인해야 한다. 재개 후 역할 inventory가 초기화되어 현재 그 두 역할은 없으며 필요 시 보존된 lock/준비 기록으로 새 역할에 정확히 이어간다.
+
+86b74ab의 push39875315155/PR39875319327 필수3job도 모두 성공했다. PR watch32042의 exit0은 앞서 확인했지만 push watch53057은 재개 후 handle이 없어 같은 원격 실행의 완료를 확인했다. 관찰기 부재를 CI 실패/중지로 처리하거나 실행을 재시작하지 않았다. 최종 runtime binding과 새 actualrun은 아직 없고 전체 goal ACTIVE다.
+
+## 2026-10-23 · 중단 후 재개와 실제 비교 실행기 연결
+
+직전 goal turn은 제품17a5dd6의 양쪽 필수 CI 통과·공개 결과 확인과 실행 계약86b74ab 커밋까지의 progress다. 재개에서 clean HEAD86b74ab, goal ACTIVE와 제품 프로세스 부재를 확인했다. 커밋6개 바이트/사용자 명의를 다시 확인한 뒤 push했고 PR14 OPEN/DRAFT의 정확 head를 확인했다. 문서 CI39875315155/39875319327은 watch53057/32042로 같은 실행을 관찰한다. 제품19와 패키징 산출물은 고정한다.
+
+이전 담당자들이 현재 agent inventory에 없어 NEW grounded_harness_worker를 도구가 수락한 Astra high로 배정했다. 기존 runner/browser2와 NEW generic test1만 소유하고 원본/cleanup 증거33개를 보존했다. 현재 입력16·제품/JAR/UI 총40개와 동결77을 확인했다는 중간 보고를 받았고 부모는 최종 반환 때 검증한다. 실제 모델/서버/최종 runtime binding은 아직 생성·배정하지 않았다.
+
+독립 판단도 새 Astra xhigh 역할 grounded_summary_source_lock으로 연결했다. 기존 원문 packet과 source-only locked 기준2개만 허용하며 새 출력 평가 전 기준을 확인한다. fork none이어도 초기 AGENTS의 과거 결과 집계가 전달됨을 역할이 보고했다. 새 후보 출력은 아직 없으며 집계 노출을 숨기지 않는다. 완전무노출/blind 일반화 평가로 표현하지 않고, 기존 등록의 메타데이터만 노출됐다는 자기보고도 완전한 환경 노출 보증으로 쓰지 않는다.
+
 ## 2026-10-22 · 실제 요약 비교 실행 계약 확정
 
 기존 Astra xhigh가 [한 번의 개발 실행 계약](MEETINGS-GROUNDED-SUMMARY-EXECUTION.md)48줄/14,002B(SHA2ec2a10b)를 반환했고 부모가 전체를 읽었다. 현재 v3와 companion2를 원본 보존 후 최소 수정해 재사용하고 새 generic 회귀1개만 추가한다. 기존 입력16/기준과 제품19/JAR/UI·동결77은 유지한다. 정확 assembly 전달·의존 경로 집합·새 once 출력 경로·실제 주장/근거 확인이 필수 delta다. 추가 복제 실행기나 별도 평가 체계는 만들지 않는다.
