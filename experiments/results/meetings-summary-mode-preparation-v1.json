@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "kind": "prospective-summary-mode-development-execution-binding",
+  "diagnostic": "summary-mode-development-v1",
+  "status": "bindings_prepared_and_independently_reviewed; actual_execution_not_dispatched",
+  "source_commit": "0fbc44d811075a030594b337eadda2f53cfbae24",
+  "source_ci": {
+    "runs": [
+      39921959067,
+      39921966514
+    ],
+    "all_three_jobs_passed_each": true,
+    "evidence": {
+      "path": ".local/meeting-summary-mode-parent-v1/executor-role-ci-final-v1.json",
+      "bytes": 2279,
+      "sha256": "ee592c3ad1356889a60d50f7593d5866e4cf1a533463006944a0c4df30471662"
+    }
+  },
+  "registration": {
+    "path": ".local/meeting-summary-mode-execution-v1/registration-v1.json",
+    "bytes": 32515,
+    "sha256": "2388bedc5b2eada1a0611bea74eee2bee18b13e185ce4b7ff466dbf825d27fde"
+  },
+  "executor": {
+    "path": ".local/meeting-summary-mode-execution-v1/executor-registration-v1.json",
+    "bytes": 8562,
+    "sha256": "37026e072a98306079b1f2092724135d2715cf360dc4b4aba3f2cb4180c4d606"
+  },
+  "verification": {
+    "asset_count": 61,
+    "code_count": 141,
+    "document_count": 4,
+    "elapsed_seconds": 7.3439999999973224,
+    "finished_unix": 1792742836.9457352,
+    "invocations": 1,
+    "official_function": "scripts.probe_meeting_summary_mode.verify_registration",
+    "order_count": 8,
+    "output_directory_absent": true,
+    "registration_sha256": "2388bedc5b2eada1a0611bea74eee2bee18b13e185ce4b7ff466dbf825d27fde",
+    "source_contents_printed_or_semantically_inspected": false,
+    "source_input_parsed_mechanically": true,
+    "started_unix": 1792742829.6022217,
+    "status": "passed"
+  },
+  "independent_binding_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "reference": {
+      "path": ".local/meeting-summary-mode-execution-v1/independent-binding-review-v1.json",
+      "bytes": 20664,
+      "sha256": "bab747f3aa375e0097304fceba863a50220c98c17fba3d0de10632325f4f1a59"
+    }
+  },
+  "evidence": [
+    {
+      "path": ".local/meeting-summary-mode-execution-v1/final-bindings-v1/receipt-v1.json",
+      "bytes": 8647,
+      "sha256": "a6ae6e454d8cb1f45cb3e17c96f26b0ba722c924573d1eac2d9f2c163b3a14c4"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/final-binding-parent-verification-v1.json",
+      "bytes": 38855,
+      "sha256": "6dc3c6dc64ba0067e1458b0ea09d80ab6e267c21991df7ba38759401148a1481"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/final-binding-review-verification-v1.json",
+      "bytes": 341,
+      "sha256": "29b0f33cf0d01f432fc8b813830b9810137fb20a15263650a44ed658794b7b61"
+    }
+  ],
+  "source_criteria_semantics_read_by_parent_or_executor": false,
+  "observed_resource_checks": [
+    {
+      "available_bytes": 10098229248,
+      "required_bytes": 10737418240,
+      "passed": false,
+      "at": "2026-10-23T08:07:16.945735Z"
+    },
+    {
+      "available_bytes": 11024265216,
+      "required_bytes": 10737418240,
+      "passed": true,
+      "at": "2026-10-23T08:18:13.304310Z",
+      "scope": "parent point-in-time psutil observation; not resource reservation or run authorization"
+    }
+  ],
+  "remaining_start_conditions": [
+    "fresh unchanged RAM and resource/lease/ownership checks",
+    "exact registration/source/assets and absent output/CLI",
+    "separate parent once dispatch after publication"
+  ],
+  "actual_new_model_runs": 0,
+  "human_review_count": 0,
+  "paid_calls": 0,
+  "limits": [
+    "Binding verification and CI are not model quality results.",
+    "No new final evaluation opened; original failures and historical input uncertainty preserved.",
+    "Prepared registration does not itself authorize native startup."
+  ]
+}

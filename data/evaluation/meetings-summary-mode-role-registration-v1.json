@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "diagnostic": "summary-mode-development-v1",
-  "status": "sources_and_criteria_locked; source_CI_passed; executor_registered; final_bindings_and_live_resources_pending",
+  "status": "source_criteria_and_execution_bindings_locked; independent_binding_review_passed; once_not_dispatched",
   "plan": {
     "path": "docs/MEETINGS-SUMMARY-QUALITY-NEXT.md",
     "bytes": 18650,
@@ -100,7 +100,7 @@
       "requested_model": "gpt-6-astra",
       "requested_effort": "high",
       "existing_tool_accepted_role_reused": true,
-      "status": "registered_metadata_preparation_only",
+      "status": "final_binding_preparation_complete; actual_execution_not_dispatched",
       "registration": {
         "path": ".local/meeting-summary-mode-execution-v1/executor-registration-v1.json",
         "bytes": 8562,
@@ -160,5 +160,10 @@
     "path": "experiments/results/java-browser-ci-recovery-ci-v1.json",
     "bytes": 3428,
     "sha256": "44c252cc8a273727e5f99cbf3841d80006f67bfa6b3c6bb7597c0336eee050f6"
+  },
+  "execution_preparation": {
+    "path": "experiments/results/meetings-summary-mode-preparation-v1.json",
+    "bytes": 3673,
+    "sha256": "3040f539f248621fd8bbd7b3720a06bc38aca8b2183e78a4fce2f8c5fb0a9316"
   }
 }
