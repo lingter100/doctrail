@@ -1,5 +1,6 @@
 """Generic MockTransport only: no tokenizer/model/native server or saved-data replay."""
 import copy
+import hashlib
 import json
 import time
 
@@ -28,16 +29,17 @@ def review(count=1):
 
 
 class Native:
-    def __init__(self):
+    def __init__(self, assembly=summary.ASSEMBLY):
         self.calls, self.prepared, self.completed, self.events = [], [], [], []
         self.labels = {}
         self.size = lambda stage, data: 100
         self.responses = {"generation": draft(), "review": review()}
+        self.assembly = assembly
         self.stop = {}
         self.after = lambda stage, path: None
         self.on_event = lambda stage: None
         self.generator = summary.GroundedSummaryGenerator("http://127.0.0.1:19003", "x" * 48,
-            "unused-synthetic", transport=httpx.MockTransport(self.handle))
+            "unused-synthetic", transport=httpx.MockTransport(self.handle), assembly=assembly)
         self.generator._alias = GGUF_SHA256
         self.generator._metadata = {"repo_id": "synthetic-not-a-model", "revision": "fixture-v1"}
         self.generator._emit = self.emit
@@ -76,7 +78,9 @@ class Native:
             else:
                 response = self.responses[stage]
                 assert body["n_predict"] == (768 if stage == "generation" else 128)
-                assert body["grammar"] == (summary.GENERATION_GRAMMAR if stage == "generation"
+                generation_grammar = (summary.GENERATION_GRAMMAR if self.assembly == summary.ASSEMBLY
+                                      else summary.RELATION_GENERATION_GRAMMAR)
+                assert body["grammar"] == (generation_grammar if stage == "generation"
                                            else summary.REVIEW_GRAMMAR)
             text = response if isinstance(response, str) else json.dumps(response, ensure_ascii=False)
             result = {"content": text, "model": GGUF_SHA256,
@@ -393,3 +397,291 @@ def test_review_wire_rejects_nonunique_or_nonunit_span_link(boundary):
     claims = [{"id": 0, "text": "원문을 확인한다.", "citations": [citation]}]
     with pytest.raises(WorkerError, match="generation_invalid_evidence"):
         summary.summary_messages(source, claims)
+
+
+def relation_draft(anchor=0, links=None, text="논의와 결정을 함께 확인한다."):
+    return {"status": "draft", "bundles": [{"id": 0, "anchor": anchor,
+             "links": [["support", 1, 0]] if links is None else links}],
+            "claims": [{"bundle": 0, "text": text}]}
+
+
+@pytest.fixture
+def relations():
+    fixture = Native(summary.RELATION_ASSEMBLY)
+    fixture.responses["generation"] = relation_draft()
+    yield fixture
+    fixture.generator.close()
+
+
+def test_relation_full_source_gaps_direction_repeated_positions_and_public_contract(relations):
+    content = " \t😀 논의\n조건\n예외\n시점\n반복\n반복  \n"
+    units = meeting_units(content)
+    raw = relation_draft(0, [["condition", 1, 0], ["exception", 2, 0], ["effective_time", 3, 0]],
+                         "조건과 예외 및 적용 시점을 함께 확인한다.")
+    raw["bundles"].append({"id": 1, "anchor": 5, "links": [["support", 5, 4]]})
+    raw["claims"].append({"bundle": 1, "text": "반복된 두 위치를 함께 확인한다."})
+    saved = copy.deepcopy(raw)
+    relations.responses.update(generation=raw, review=review(2))
+    result = relations.run(content)
+    claims = result["analysis"]["summary_claims"]
+    assert claims[0]["citations"] == units[:4]
+    assert claims[1]["citations"] == units[4:6]
+    assert claims[1]["citations"][0]["quote"] == claims[1]["citations"][1]["quote"]
+    assert claims[1]["citations"][0]["start_offset"] != claims[1]["citations"][1]["start_offset"]
+    generated = next(data for stage, data, _ in relations.completed if stage == "generation")
+    checked = next(data for stage, data, _ in relations.completed if stage == "review")
+    assert "".join(part["text"] for part in generated["source_parts"]) == content
+    assert generated["source_parts"] == checked["source_parts"]
+    assert checked["bundles"] == saved["bundles"]
+    assert checked["candidate_claims"] == [{"id": i, **row} for i, row in enumerate(saved["claims"])]
+    assert all(set(row) == {"id", "bundle", "text"} for row in checked["candidate_claims"])
+    assert all(set(row) == {"id", "anchor", "links"} for row in checked["bundles"])
+    assert result["analysis"]["summary_version"] == 2
+    assert "bundles" not in result["analysis"]
+    assert result["summary_review"] == {"policy": summary.REVIEW_POLICY, "status": "accepted"}
+    assert relations.runtime.last_assembly["assembly"] == summary.RELATION_ASSEMBLY
+    assert [stage for stage, _, _ in relations.completed] == ["classification", "generation", "review"]
+    assert raw == saved
+
+
+@pytest.mark.parametrize("anchor,links,ids", [
+    (2, [], [2]),
+    (2, [["condition", 2, 2]], [2]),
+    (2, [["support", 1, 2], ["cause", 1, 0]], [0, 1, 2]),
+    (0, [["condition", 1, 0], ["exception", 2, 1], ["effective_time", 3, 2],
+         ["support", 3, 3]], [0, 1, 2, 3]),
+    (0, [["support", 0, 1], ["support", 1, 0], ["cause", 0, 1]], [0, 1]),
+])
+def test_relation_zero_four_self_links_and_undirected_connectivity(anchor, links, ids):
+    content = "하나\n둘\n셋\n넷"
+    units = meeting_units(content)
+    raw = relation_draft(anchor, links)
+    claims, candidate = summary.parse_relation_draft(json.dumps(raw), units, content)
+    assert claims[0]["citations"] == [units[i] for i in ids]
+    assert candidate["bundles"] == raw["bundles"]  # Endpoint direction is never sorted.
+
+
+def invalid_relation_cases():
+    cases = []
+    def add(name, mutate, code="generation_invalid_schema"):
+        data = relation_draft()
+        mutate(data)
+        cases.append(pytest.param(data, code, id=name))
+    add("missing-bundles", lambda d: d.pop("bundles"))
+    add("extra-evidence", lambda d: d.update(evidence=[0]))
+    add("bundles-not-list", lambda d: d.update(bundles={}))
+    add("empty-bundles", lambda d: d.update(bundles=[]))
+    add("missing-claim", lambda d: d.update(claims=[]))
+    add("claims-not-list", lambda d: d.update(claims={}))
+    add("null-bundle", lambda d: d["bundles"].__setitem__(0, None))
+    add("null-claim", lambda d: d["claims"].__setitem__(0, None))
+    add("bundle-id-bool", lambda d: d["bundles"][0].update(id=False))
+    add("bundle-id-gap", lambda d: d["bundles"][0].update(id=1))
+    add("bundle-unused", lambda d: d["bundles"].append({"id": 1, "anchor": 0, "links": []}))
+    add("duplicate-bundle", lambda d: (d["bundles"].append(copy.deepcopy(d["bundles"][0])),
+                                       d["claims"].append({"bundle": 1, "text": "두 번째다."})))
+    add("duplicate-reference", lambda d: (d["bundles"].append({"id": 1, "anchor": 0, "links": []}),
+                                          d["claims"].append(copy.deepcopy(d["claims"][0]))))
+    add("claim-reference-bool", lambda d: d["claims"][0].update(bundle=False))
+    add("claim-reference-unknown", lambda d: d["claims"][0].update(bundle=1))
+    add("claim-extra-id", lambda d: d["claims"][0].update(id=0))
+    add("bundle-extra-evidence", lambda d: d["bundles"][0].update(evidence=[0, 1]))
+    add("links-not-list", lambda d: d["bundles"][0].update(links={}))
+    add("links-five", lambda d: d["bundles"][0].update(links=[[r, 0, 0] for r in summary.RELATIONS[:5]]))
+    for name, change in [
+        ("anchor-bool", {"anchor": True}), ("anchor-negative", {"anchor": -1}),
+        ("anchor-unknown", {"anchor": 5}), ("endpoint-bool", {"links": [["support", False, 0]]}),
+        ("endpoint-negative", {"links": [["support", -1, 0]]}),
+        ("endpoint-unknown", {"links": [["support", 5, 0]]}),
+        ("endpoint-float", {"links": [["support", 1.0, 0]]}),
+        ("unknown-relation", {"links": [["topic", 1, 0]]}),
+        ("invalid-relation-type", {"links": [[{}, 1, 0]]}),
+        ("short-link", {"links": [["support", 1]]}),
+        ("nonlist-link", {"links": [None]}),
+        ("disconnected", {"links": [["support", 1, 2]]}),
+        ("self-link-disconnected", {"links": [["support", 1, 1]]}),
+        ("duplicate-triple", {"links": [["support", 1, 0], ["support", 1, 0]]}),
+        ("five-derived-citations", {"links": [["support", i, 0] for i in range(1, 5)]}),
+    ]:
+        add(name, lambda d, change=change: d["bundles"][0].update(change), "generation_invalid_evidence")
+    return cases
+
+
+@pytest.mark.parametrize("raw,code", invalid_relation_cases())
+def test_relation_invalid_structure_stops_without_review_or_repair(relations, raw, code):
+    relations.responses["generation"] = raw
+    fail(relations, code, "하나\n둘\n셋\n넷\n다섯")
+    assert [stage for stage, _, _ in relations.completed] == ["classification", "generation"]
+
+
+@pytest.mark.parametrize("raw,code", [
+    ('{"status":"draft","bundles":[],"bundles":[],"claims":[]}', "generation_invalid_json"),
+    ({"status": "abstained", "bundles": [], "claims": []}, "generation_summary_insufficient"),
+    ({"status": "abstained", **{k: v for k, v in relation_draft().items() if k != "status"}},
+     "generation_invalid_schema"),
+    (relation_draft(text="English only"), "generation_language_mismatch"),
+    (relation_draft(text=""), "generation_invalid_schema"),
+    (relation_draft(text="  "), "generation_invalid_schema"),
+    (relation_draft(text="가\n나"), "generation_invalid_schema"),
+    (relation_draft(text="가\u2028나"), "generation_invalid_schema"),
+    (relation_draft(text="\ud800가"), "generation_invalid_schema"),
+    (relation_draft(text="가" * 241), "generation_invalid_schema"),
+])
+def test_relation_strict_json_abstain_unicode_and_language(relations, raw, code):
+    relations.responses["generation"] = raw if isinstance(raw, str) else json.dumps(raw)
+    fail(relations, code)
+    assert len(relations.completed) == 2
+
+
+def test_relation_claim_total_codepoints_and_max_six_with_twenty_four_citations(relations):
+    raw = {"status": "draft", "bundles": [
+        {"id": i, "anchor": 0, "links": [["support", j, 0] for j in range(1, 4)]}
+        for i in range(6)], "claims": [{"bundle": i, "text": "가" + "😀" * 199} for i in range(6)]}
+    relations.responses.update(generation=raw, review=review(6))
+    result = relations.run("첫째\n둘째\n셋째\n넷째")
+    claims = result["analysis"]["summary_claims"]
+    assert sum(len(row["text"]) for row in claims) == 1200
+    assert sum(len(row["citations"]) for row in claims) == 24
+    assert len(result["analysis"]["summary_evidence"]) == 4
+    raw["claims"][0]["text"] += "가"
+    relations.completed.clear()
+    fail(relations, "generation_invalid_schema", "첫째\n둘째\n셋째\n넷째")
+    assert len(relations.completed) == 2
+    raw["claims"][0]["text"] = "가"
+    raw["claims"].append({"bundle": 6, "text": "일곱째다."})
+    raw["bundles"].append({"id": 6, "anchor": 0, "links": []})
+    relations.completed.clear()
+    fail(relations, "generation_invalid_schema", "첫째\n둘째\n셋째\n넷째")
+    assert len(relations.completed) == 2
+
+
+@pytest.mark.parametrize("content,units", [
+    ("  ", [{"quote": "  ", "start_offset": 0, "end_offset": 2}]),
+    ("", [{"quote": "", "start_offset": 0, "end_offset": 0}]),
+    ("😀" * 12001, [{"quote": "😀" * 12001, "start_offset": 0, "end_offset": 12001}]),
+    ("가나다", [{"quote": "가나다", "start_offset": 0, "end_offset": 2}]),
+], ids=["blank", "empty", "overlong", "inexact"])
+def test_relation_derived_citations_reject_blank_overlong_and_inexact(content, units):
+    with pytest.raises(WorkerError, match="generation_invalid_evidence"):
+        summary.parse_relation_draft(json.dumps(relation_draft(0, [])), units, content)
+
+
+def test_relation_unit_159_and_12000_codepoint_citation_are_valid():
+    content = "\n".join([f"원문 {i}" for i in range(159)] + ["😀" * 12000])
+    units = meeting_units(content)
+    claims, _ = summary.parse_relation_draft(json.dumps(relation_draft(159, [])), units, content)
+    assert claims[0]["citations"] == [units[159]]
+
+
+@pytest.mark.parametrize("mutation", ["missing-unit", "missing-gap", "altered-unit", "reordered", "extra"])
+@pytest.mark.parametrize("reviewing", [False, True])
+def test_relation_prompt_refuses_incomplete_or_altered_source(mutation, reviewing):
+    content = " \t첫 원문\n\n두 번째  \n"
+    units = meeting_units(content)
+    source = summary.source_payload("제목", content, units)
+    _, candidate = summary.parse_relation_draft(json.dumps(relation_draft()), units, content)
+    if mutation == "missing-unit": source["source_parts"].pop(1)
+    elif mutation == "missing-gap": source["source_parts"].pop(0)
+    elif mutation == "altered-unit": source["source_parts"][1]["text"] = "변경"
+    elif mutation == "reordered": source["source_parts"].reverse()
+    else: source["extra"] = True
+    with pytest.raises(WorkerError, match="generation_invalid_evidence"):
+        summary.relation_summary_messages(source, content, units, candidate if reviewing else None)
+
+
+@pytest.mark.parametrize("relation", summary.RELATIONS)
+@pytest.mark.parametrize("judgment", ["unsupported", "uncertain"])
+def test_relation_connectivity_never_overrides_semantic_rejection(relations, relation, judgment):
+    relations.responses.update(generation=relation_draft(0, [[relation, 1, 0]]),
+                               review={"claims": [[0, judgment]], "coverage": "sufficient"})
+    fail(relations, "generation_summary_review_rejected")
+    assert [stage for stage, _, _ in relations.completed] == ["classification", "generation", "review"]
+
+
+@pytest.mark.parametrize("coverage", ["insufficient", "uncertain"])
+def test_relation_review_omissions_reject_without_repair(relations, coverage):
+    relations.responses["review"]["coverage"] = coverage
+    fail(relations, "generation_summary_review_rejected")
+    assert len(relations.completed) == 3
+
+
+@pytest.mark.parametrize("stage,count", [("generation", 2), ("review", 3)])
+def test_relation_eos_required_without_retry(relations, stage, count):
+    relations.stop[stage] = "limit"
+    fail(relations, "generation_output_truncated")
+    assert len(relations.completed) == count
+
+
+@pytest.mark.parametrize("stage,count", [("generation", 0), ("review", 2)])
+def test_relation_actual_template_input_overflow_stops_completion(relations, stage, count):
+    relations.size = lambda current, data: 4097 if current == stage else 100
+    fail(relations, "generation_input_limit")
+    assert len(relations.completed) == count
+
+
+@pytest.mark.parametrize("stage,count", [("generation_admission", 0), ("generation_completed", 2),
+                                        ("review_admission", 2), ("review_completed", 3), ("assembled", 3)])
+def test_relation_all_stages_share_original_120_seconds(relations, monkeypatch, stage, count):
+    clock = [100.0]
+    monkeypatch.setattr(time, "monotonic", lambda: clock[0])
+    def elapsed(current):
+        if current == stage:
+            clock[0] = 220.0
+    relations.on_event = elapsed
+    fail(relations, "generation_deadline_exceeded")
+    assert len(relations.completed) == count
+    assert {deadline for _, _, deadline in relations.events} == {220.0}
+
+
+def test_relation_metadata_is_explicit_default_v1_and_preserved_contract_hashes(relations):
+    original = summary.summary_metadata()
+    assert original == summary.summary_metadata(summary.ASSEMBLY)
+    expected = {
+        "generation_prompt_sha256": "ab5982cef5b05121c8fd78aba96baf9b1d86e6250fb2820dac66ab95e4487c02",
+        "review_prompt_sha256": "b73e0684c783882482cde783cd3a1b780ca85477da5fcffcd24c28e1cd03ef56",
+        "generation_grammar_sha256": "0656e7930a7fd05ce6126bd8138787d824a8f81de2419187d72a952dcb07cb85",
+        "review_grammar_sha256": "9964289ac750f5be26b5e84dd78822d76bfb3f28b8103c5f5b6858e02295f118",
+    }
+    assert {key: original[key] for key in expected} == expected
+    metadata = relations.generator.public_metadata()
+    policy = metadata["grounded_summary"]
+    assert metadata["classification"]["policy"] == "batch-v2"
+    assert policy["assembly"] == summary.RELATION_ASSEMBLY
+    assert policy["generation_grammar_sha256"] == hashlib.sha256(
+        summary.RELATION_GENERATION_GRAMMAR.encode()).hexdigest()
+    unchanged = set(original) - {"assembly", "generation_prompt_sha256", "review_prompt_sha256",
+                                 "generation_grammar_sha256"}
+    assert all(policy[key] == original[key] for key in unchanged)
+    assert policy["relation_guard"] == "connectivity_not_semantic_support"
+    assert policy["relations"] == list(summary.RELATIONS)
+    assert policy["bundle_cap"] == 6 and policy["links_per_bundle"] == 4
+
+
+def test_relation_unknown_policy_and_wrong_batch_rejected_before_transport(monkeypatch):
+    for assembly in ("grounded-summary-v3", None, True):
+        with pytest.raises(ValueError, match="unsupported grounded summary"):
+            summary.summary_metadata(assembly)
+        with pytest.raises(ValueError, match="unsupported grounded summary"):
+            summary.GroundedSummaryGenerator(assembly=assembly)
+    monkeypatch.setattr(summary.GroundedSummaryGenerator, "analysis_policy", "batch-v1")
+    with pytest.raises(ValueError, match="requires batch-v2"):
+        summary.GroundedSummaryGenerator(assembly=summary.RELATION_ASSEMBLY)
+
+
+def test_relation_unit_limit_and_observer_failure_stop_following_calls(relations):
+    fail(relations, "generation_partition_limit", "\n".join(f"일반 원문 {i}" for i in range(161)))
+    assert relations.completed == []
+    def reject(stage):
+        if stage == "generation_completed":
+            raise WorkerError("synthetic_sink_failed", 503)
+    relations.on_event = reject
+    fail(relations, "synthetic_sink_failed")
+    assert len(relations.completed) == 2
+
+
+def test_relation_eviction_rechecks_actual_input_without_new_budget(relations, monkeypatch):
+    content = "\n".join(f"합성 문장 {i}" for i in range(80))
+    relations.size = lambda stage, data: 4097 if (stage == "generation" and sum(
+        current == "generation" for current, _, _ in relations.prepared) == 2) else 100
+    fail(relations, "generation_input_limit", content)
+    assert [stage for stage, _, _ in relations.completed] == ["classification"] * 10

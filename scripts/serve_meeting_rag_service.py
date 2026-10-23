@@ -20,7 +20,12 @@ import httpx
 from doctrail.meeting_analysis_batch import POLICIES, classification_metadata
 from doctrail.meeting_answer_thinking import CANDIDATE_ID
 from doctrail.meeting_grounded_summary import summary_metadata
-from doctrail.meeting_service_rag import ASSEMBLIES, PROTOCOL, validate_assembly
+from doctrail.meeting_service_rag import (
+    ASSEMBLIES,
+    GROUNDED_ASSEMBLIES,
+    PROTOCOL,
+    validate_assembly,
+)
 from doctrail.meeting_thinking_transport import (
     GGUF_SHA256,
     MODEL_ID,
@@ -87,7 +92,8 @@ def check_generation(health, analysis_policy="single", extraction_assembly="lega
         if not isinstance(runtime_metadata, dict):
             raise TypeError
         if runtime_metadata.get("grounded_summary") != (
-                summary_metadata() if extraction_assembly == "grounded-summary-v1" else None):
+                summary_metadata(extraction_assembly) if extraction_assembly in GROUNDED_ASSEMBLIES
+                else None):
             raise ValueError
         if (health["status"] != "ready" or health["protocol"] != PROTOCOL
                 or health["model"] != MODEL_ID
@@ -354,8 +360,8 @@ def start_services(*, jar, jar_sha256, database, log_dir, model_root=ROOT / "mod
                                 "verification": "pinned_jar_and_explicit_arguments_only"},
                    required_request={"method": "hybrid_rerank", "answer_limit": 5},
                    native_attempted=False)
-    if extraction_assembly == "grounded-summary-v1":
-        metrics["grounded_summary"] = summary_metadata()
+    if extraction_assembly in GROUNDED_ASSEMBLIES:
+        metrics["grounded_summary"] = summary_metadata(extraction_assembly)
     try:
         java = java_resolver()
         if clock() >= deadline:

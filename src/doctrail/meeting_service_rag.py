@@ -22,6 +22,8 @@ from doctrail.meeting_answer_v2 import response_language
 from doctrail.meeting_contract import AnalyzeRequest, AnswerRequest
 from doctrail.meeting_extraction_coverage import CoverageMeetingRuntime
 from doctrail.meeting_grounded_summary import (
+    ASSEMBLY,
+    RELATION_ASSEMBLY,
     GroundedSummaryGenerator,
     GroundedSummaryRuntime,
     summary_metadata,
@@ -33,7 +35,8 @@ from doctrail.meeting_worker import MeetingRuntime
 
 BUDGET_HEADER = "X-DocTrail-Request-Budget-Ms"
 PROTOCOL = "meeting-service-rag-v1"
-ASSEMBLIES = ("legacy", "coverage-v1", "grounded-summary-v1")
+GROUNDED_ASSEMBLIES = (ASSEMBLY, RELATION_ASSEMBLY)
+ASSEMBLIES = ("legacy", "coverage-v1", *GROUNDED_ASSEMBLIES)
 
 
 def validate_assembly(analysis_policy, extraction_assembly):
@@ -156,11 +159,14 @@ class ServiceRuntime:
         classification_metadata(self.analysis_policy)
         validate_assembly(self.analysis_policy, extraction_assembly)
         self.extraction_assembly = extraction_assembly
-        if isinstance(analysis_generator, GroundedSummaryGenerator) != (
-                extraction_assembly == "grounded-summary-v1"):
+        grounded = extraction_assembly in GROUNDED_ASSEMBLIES
+        if (isinstance(analysis_generator, GroundedSummaryGenerator) != grounded
+                or (grounded and getattr(analysis_generator, "summary_assembly", None) != extraction_assembly)
+                or analysis_generator.public_metadata().get("grounded_summary") != (
+                    summary_metadata(extraction_assembly) if grounded else None)):
             raise GenerationError("generation_identity_mismatch")
         runtime_type = {"legacy": MeetingRuntime, "coverage-v1": CoverageMeetingRuntime,
-                        "grounded-summary-v1": GroundedSummaryRuntime}[extraction_assembly]
+                        **dict.fromkeys(GROUNDED_ASSEMBLIES, GroundedSummaryRuntime)}[extraction_assembly]
         self.analysis = runtime_type(analysis_generator)
         answer = answer_generator.public_metadata()
         if (answer.get("repo_id"), answer.get("revision")) != (
@@ -193,10 +199,12 @@ class ServiceRuntime:
             raise WorkerError("generation_failed", 503)
         if getattr(self.analysis, "extraction_assembly", "legacy") != self.extraction_assembly:
             raise WorkerError("generation_failed", 503)
-        grounded = self.extraction_assembly == "grounded-summary-v1"
+        grounded = self.extraction_assembly in GROUNDED_ASSEMBLIES
         if (isinstance(self.analysis.generator, GroundedSummaryGenerator) != grounded
+                or (grounded and getattr(self.analysis.generator, "summary_assembly", None)
+                    != self.extraction_assembly)
                 or self.analysis.generator.public_metadata().get("grounded_summary") != (
-                    summary_metadata() if grounded else None)):
+                    summary_metadata(self.extraction_assembly) if grounded else None)):
             raise WorkerError("generation_failed", 503)
 
     def health(self):
@@ -416,9 +424,11 @@ def load_runtime(native, *, cleanup, startup_deadline, observer=None, analysis_p
         "batch-v1": (BatchedAnalysisGenerator, ObservedBatchedAnalysisGenerator),
         "batch-v2": (ScopedBatchedAnalysisGenerator, ObservedScopedBatchedAnalysisGenerator),
     }[analysis_policy]
-    if extraction_assembly == "grounded-summary-v1":
+    if extraction_assembly in GROUNDED_ASSEMBLIES:
         plain, observed = GroundedSummaryGenerator, ObservedGroundedSummaryGenerator
     options = {} if observer is None else {"observer": observer}
+    if extraction_assembly in GROUNDED_ASSEMBLIES:
+        options["assembly"] = extraction_assembly
     analysis = (plain if observer is None else observed)(native.url, native.token, native.manifest,
                                                        **options)
     answer.service_deadline = startup_deadline

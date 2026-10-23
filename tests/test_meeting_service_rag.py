@@ -17,6 +17,7 @@ from doctrail.meeting_qwen35 import NONTHINKING_PREAMBLE, Qwen35Generator
 from doctrail.meeting_runtime import DEADLINE_SECONDS as EXTRACTION_SECONDS
 from doctrail.meeting_service_rag import (
     BUDGET_HEADER,
+    GROUNDED_ASSEMBLIES,
     ObservedBatchedAnalysisGenerator,
     ObservedScopedBatchedAnalysisGenerator,
     ServiceAnswerGenerator,
@@ -425,7 +426,7 @@ def test_batch_preparation_consumes_original_outer_deadline(batch_runtime, monke
 
 @pytest.mark.parametrize("policy,assembly", [("single", "legacy"), ("batch-v1", "legacy"),
     ("batch-v2", "legacy"), ("batch-v2", "coverage-v1"),
-    ("batch-v2", "grounded-summary-v1")])
+    ("batch-v2", "grounded-summary-v1"), ("batch-v2", "grounded-summary-v2")])
 @pytest.mark.parametrize("observed", [False, True])
 def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatch, policy, assembly, observed):
     import doctrail.meeting_service_rag as module
@@ -445,8 +446,11 @@ def test_load_runtime_selects_same_algorithm_with_or_without_observer(monkeypatc
         assert service.health()["extraction"]["classification"]["policy"] == policy
         assert service.health()["extraction"]["assembly"] == assembly
         assert isinstance(service.analysis, module.CoverageMeetingRuntime) == (assembly == "coverage-v1")
-        assert isinstance(service.analysis, module.GroundedSummaryRuntime) == (assembly == "grounded-summary-v1")
-        assert isinstance(service.analysis.generator, module.GroundedSummaryGenerator) == (assembly == "grounded-summary-v1")
+        assert isinstance(service.analysis, module.GroundedSummaryRuntime) == (assembly in GROUNDED_ASSEMBLIES)
+        assert isinstance(service.analysis.generator, module.GroundedSummaryGenerator) == (assembly in GROUNDED_ASSEMBLIES)
+        if assembly in GROUNDED_ASSEMBLIES:
+            assert service.analysis.generator.summary_assembly == assembly
+            assert service.health()["extraction"]["runtime"]["grounded_summary"] == module.summary_metadata(assembly)
     finally:
         service.close()
 
@@ -641,9 +645,9 @@ def test_busy_analysis_does_not_reemit_prior_assembly_diagnostics(batch_runtime)
         service.analysis.lock.release()
 
 
-@pytest.fixture
-def grounded_runtime():
-    from test_meeting_grounded_summary import Native
+@pytest.fixture(params=GROUNDED_ASSEMBLIES)
+def grounded_runtime(request):
+    from test_meeting_grounded_summary import Native, relation_draft
 
     from doctrail.meeting_service_rag import (
         GroundedSummaryGenerator,
@@ -651,17 +655,20 @@ def grounded_runtime():
     )
     services = []
     def build(observer=None):
-        native = Native()
+        assembly = request.param
+        native = Native(assembly)
+        if assembly == "grounded-summary-v2":
+            native.responses["generation"] = relation_draft()
         native.generator.close()
         cls = GroundedSummaryGenerator if observer is None else ObservedGroundedSummaryGenerator
         options = {} if observer is None else {"observer": observer}
         native.generator = cls("http://127.0.0.1:19003", TOKEN, "unused-synthetic",
-            transport=httpx.MockTransport(native.handle), **options)
+            transport=httpx.MockTransport(native.handle), assembly=assembly, **options)
         native.generator._alias = GGUF_SHA256
         native.generator._metadata = copy.deepcopy(METADATA)
         answer = SimpleNamespace(public_metadata=lambda: copy.deepcopy(METADATA), close=lambda: None)
         service = ServiceRuntime(answer, native.generator, cleanup=lambda: True, observer=observer,
-                                 extraction_assembly="grounded-summary-v1")
+                                 extraction_assembly=assembly)
         services.append(service)
         return service, native
     yield build
@@ -679,8 +686,8 @@ def test_grounded_actual_http_runtime_keeps_full_source_and_one_generation_revie
     with TestClient(create_app(TOKEN, lambda: service)) as client:
         assert client.get("/health").status_code == 401
         health = client.get("/health", headers=headers()).json()
-        assert health["extraction"]["assembly"] == "grounded-summary-v1"
-        assert health["extraction"]["runtime"]["grounded_summary"] == summary_metadata()
+        assert health["extraction"]["assembly"] == service.extraction_assembly
+        assert health["extraction"]["runtime"]["grounded_summary"] == summary_metadata(service.extraction_assembly)
         assert health["extraction"]["limits"]["deadline_seconds"] == 120
         response = client.post("/analyze", json=request().model_dump(), headers=headers())
         assert response.status_code == 200
@@ -692,8 +699,16 @@ def test_grounded_actual_http_runtime_keeps_full_source_and_one_generation_revie
     for stage, data, _ in native.completed:
         if stage != "classification":
             assert "".join(part["text"] for part in data["source_parts"]) == request().content
-    assert native.completed[-1][1]["candidate_claims"] == [
-        {"id": 0, "text": "논의와 결정을 함께 확인한다.", "evidence": [0, 1]}]
+    candidate = native.completed[-1][1]
+    if service.extraction_assembly == "grounded-summary-v1":
+        assert candidate["candidate_claims"] == [
+            {"id": 0, "text": "논의와 결정을 함께 확인한다.", "evidence": [0, 1]}]
+    else:
+        assert candidate["candidate_claims"] == [
+            {"id": 0, "bundle": 0, "text": "논의와 결정을 함께 확인한다."}]
+        assert candidate["bundles"] == [{"id": 0, "anchor": 0, "links": [["support", 1, 0]]}]
+        assert [span["quote"] for span in result["analysis"]["summary_claims"][0]["citations"]] == [
+            "첫 논의", "결정을 확인한다."]
     assert native.generator.service_deadline is None and not native.generator._cache
     if observed:
         assert [event for event, _ in events].count("classification_units") == 1
@@ -781,7 +796,8 @@ def test_grounded_generator_cannot_be_used_for_other_runtime(grounded_runtime, a
     assert native.calls == []
 
 
-@pytest.mark.parametrize("fault", ["generator", "metadata", "runtime"])
+@pytest.mark.parametrize("fault", ["generator", "metadata", "runtime", "candidate", "missing-candidate",
+                                  "cross-candidate-metadata"])
 def test_grounded_health_drift_blocks_requests_before_native(grounded_runtime, fault):
     from test_meeting_grounded_summary import request
 
@@ -789,12 +805,23 @@ def test_grounded_health_drift_blocks_requests_before_native(grounded_runtime, f
     service, native = grounded_runtime()
     if fault == "generator":
         service.analysis.generator = SimpleNamespace(public_metadata=lambda: {
-            **METADATA, "grounded_summary": summary_metadata()})
+            **METADATA, "grounded_summary": summary_metadata(service.extraction_assembly)})
     elif fault == "runtime":
         service.analysis.extraction_assembly = "coverage-v1"
-    else:
+    elif fault == "metadata":
         original = native.generator.public_metadata
         native.generator.public_metadata = lambda: {**original(), "grounded_summary": {}}
+    else:
+        original = native.generator.public_metadata()
+        other = next(candidate for candidate in GROUNDED_ASSEMBLIES if candidate != service.extraction_assembly)
+        if fault == "cross-candidate-metadata":
+            original["grounded_summary"] = summary_metadata(other)
+        elif fault == "candidate":
+            native.generator.summary_assembly = other
+        else:
+            del native.generator.summary_assembly
+        # A forged metadata report must not hide a changed generator selection.
+        native.generator.public_metadata = lambda: original
     with pytest.raises(WorkerError, match="generation_failed"):
         service.health()
     with pytest.raises(WorkerError, match="generation_failed"):
@@ -804,9 +831,25 @@ def test_grounded_health_drift_blocks_requests_before_native(grounded_runtime, f
 
 
 @pytest.mark.parametrize("policy", ["single", "batch-v1"])
-def test_grounded_invalid_policy_fails_before_any_client(monkeypatch, policy):
+@pytest.mark.parametrize("assembly", GROUNDED_ASSEMBLIES)
+def test_grounded_invalid_policy_fails_before_any_client(monkeypatch, policy, assembly):
     import doctrail.meeting_service_rag as module
     monkeypatch.setattr(module, "ServiceAnswerGenerator", lambda *args: pytest.fail("constructed client"))
     with pytest.raises(ValueError, match="invalid_extraction_assembly"):
         module.load_runtime(SimpleNamespace(), cleanup=lambda: True, startup_deadline=1,
-                            analysis_policy=policy, extraction_assembly="grounded-summary-v1")
+                            analysis_policy=policy, extraction_assembly=assembly)
+
+
+@pytest.mark.parametrize("fault", ["selection", "metadata"])
+def test_grounded_initialization_rejects_cross_candidate_before_any_call(grounded_runtime, fault):
+    from doctrail.meeting_grounded_summary import summary_metadata
+    service, native = grounded_runtime()
+    other = next(candidate for candidate in GROUNDED_ASSEMBLIES if candidate != service.extraction_assembly)
+    selected = other if fault == "selection" else service.extraction_assembly
+    if fault == "metadata":
+        original = native.generator.public_metadata()
+        native.generator.public_metadata = lambda: {**original, "grounded_summary": summary_metadata(other)}
+    with pytest.raises(GenerationError, match="generation_identity_mismatch"):
+        ServiceRuntime(service.answer_generator, native.generator, cleanup=lambda: True,
+                       extraction_assembly=selected)
+    assert native.calls == []

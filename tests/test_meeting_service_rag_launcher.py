@@ -8,7 +8,8 @@ from scripts import serve_meeting_service_rag as launcher
 
 
 @pytest.mark.parametrize("policy,assembly", [("single", "legacy"), ("batch-v1", "legacy"),
-    ("batch-v2", "legacy"), ("batch-v2", "coverage-v1"), ("batch-v2", "grounded-summary-v1")])
+    ("batch-v2", "legacy"), ("batch-v2", "coverage-v1"), ("batch-v2", "grounded-summary-v1"),
+    ("batch-v2", "grounded-summary-v2")])
 def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_path, policy, assembly):
     events, metrics = [], {}
     native = SimpleNamespace(process=object(), drain=object(), cleanup={})
@@ -54,8 +55,8 @@ def test_gpu28_native_then_worker_admission_and_owned_cleanup(monkeypatch, tmp_p
     assert metrics["native_adapter_startup_seconds"] >= 0
     assert metrics["analysis_policy"] == policy
     assert metrics["extraction_assembly"] == assembly
-    if assembly == "grounded-summary-v1":
-        assert metrics["grounded_summary"] == launcher.summary_metadata()
+    if assembly in launcher.GROUNDED_ASSEMBLIES:
+        assert metrics["grounded_summary"] == launcher.summary_metadata(assembly)
     else:
         assert "grounded_summary" not in metrics
 
@@ -120,6 +121,7 @@ def test_invalid_analysis_policy_rejected_before_native(monkeypatch, tmp_path):
 
 @pytest.mark.parametrize("policy,assembly", [("single", "coverage-v1"), ("batch-v1", "coverage-v1"),
     ("single", "grounded-summary-v1"), ("batch-v1", "grounded-summary-v1"),
+    ("single", "grounded-summary-v2"), ("batch-v1", "grounded-summary-v2"),
     ("batch-v2", "auto")])
 def test_incompatible_assembly_rejected_before_native(monkeypatch, tmp_path, policy, assembly):
     monkeypatch.setattr(launcher, "start_llama", lambda **kwargs: pytest.fail("native attempted"))
@@ -129,7 +131,7 @@ def test_incompatible_assembly_rejected_before_native(monkeypatch, tmp_path, pol
         pytest.fail("invalid assembly admitted")
 
 
-@pytest.mark.parametrize("assembly", [None, "legacy", "coverage-v1", "grounded-summary-v1"])
+@pytest.mark.parametrize("assembly", [None, "legacy", "coverage-v1", "grounded-summary-v1", "grounded-summary-v2"])
 def test_worker_cli_forwards_assembly(monkeypatch, tmp_path, assembly):
     import uvicorn
     seen = []

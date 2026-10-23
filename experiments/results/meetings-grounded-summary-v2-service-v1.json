@@ -1,0 +1,137 @@
+{
+  "status": "service_candidate_connected_synthetic_verified_independent_read_reviewed",
+  "candidate": "grounded-summary-v2",
+  "source_files": [
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 21167,
+      "sha256": "de7ab7999e2a7c3269b9b4c4af6273a541ab0833e13e71a207fd96fabbf538c5",
+      "changed": true
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 4536,
+      "sha256": "9bdf5f490f777aa9a20db0d21be33b34107f31c1962602c973d71200695b0137",
+      "changed": true
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 22574,
+      "sha256": "cf282f01118b0968a18edd5f8ab7748496bb1aa2dd980b0ed58e8b462a327d02",
+      "changed": true
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 38707,
+      "sha256": "83009cce1167fa8798d14ea150d4b5cc92b1228eef13e610abe9f6e10b72a313",
+      "changed": false
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 44029,
+      "sha256": "96b0d5ece5092967cbb813431f2980583c83c8db3d34f3d895102d747f44983c",
+      "changed": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 6632,
+      "sha256": "f7f5edc37226aa26b5ab84ea357988c578b3473c9bcf72fb5b204ae11452d31f",
+      "changed": true
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 31731,
+      "sha256": "8e75faa8c20a7f0e466bbbb28d2177aa79d70f0c4c0a34cc7c3a97f517d1f468",
+      "changed": true
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 63312,
+      "sha256": "73281a645b9b49a7ff33dd6d316d581e26a6aafb2cb3275a481375ac4bac875a",
+      "changed": true
+    }
+  ],
+  "fixed_module2": [
+    {
+      "path": "src/doctrail/meeting_grounded_summary.py",
+      "bytes": 28695,
+      "sha256": "5b765a679ada4b6b4165674573763c2c323e9df813d8c75ba453347421e05423",
+      "changed": false
+    },
+    {
+      "path": "tests/test_meeting_grounded_summary.py",
+      "bytes": 37066,
+      "sha256": "f99ec890eafc3817763d8d42d6fb6fc527d3417a49136bc05acf52f09de13caa",
+      "changed": false
+    }
+  ],
+  "checks": {
+    "generic_regression_passed": 761,
+    "elapsed_seconds": 34.26,
+    "warnings": 1,
+    "warning_scope": "Existing StarletteDeprecationWarning about httpx/TestClient; dependencies unchanged",
+    "ruff": "passed",
+    "independent_static_remaining_blockers": 0,
+    "module_257_included_do_not_add": true
+  },
+  "behavior": [
+    "Shared ASSEMBLIES includes explicit grounded-summary-v2; legacy and v1 defaults remain unchanged",
+    "Normal and observed factories pass the exact assembly into the same GroundedSummaryGenerator implementation",
+    "Initialization and readiness bind service/runtime/generator assembly plus exact candidate metadata; cross-v1/v2 and forged-metadata drift rejected before completion",
+    "Both launchers bind selected prompt/grammar hashes in metrics and health; CLI uses shared assembly list",
+    "Acceptance driver byte unchanged: shared ASSEMBLIES, exact registration/gate selection and source module hashes verified by generic tests",
+    "Existing deadline120, answer90, busy locks, observer events and cleanup reused; no extra completion"
+  ],
+  "bindings": [
+    {
+      "path": ".local/meeting-grounded-summary-v2-service-v1/receipt.json",
+      "bytes": 14284,
+      "sha256": "cc478d1dcd8c32eb0d9c52c412b80165f0ad11d2e594288b7574fc359f89465a"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v2-service-v1/parent-verification-v1.json",
+      "bytes": 2347,
+      "sha256": "941b3fb44b40f9f227eb874ac6fa8858021f6683aec35b58d5a30f75548cd79c"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v2-service-v1/independent-review/read-review-v1.json",
+      "bytes": 11673,
+      "sha256": "d691b9c3079f5e70db680f288808cadfaaa7a0fa926310499dd5b3caada39f48"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v2-service-v1/pytest-final.log",
+      "bytes": 1398,
+      "sha256": "9ee3bbec5a2bc29129b231ca792c9786891299075500c2d567f2380a5acbe0ed"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v2-service-v1/ruff-final.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "experiments/results/meetings-grounded-summary-v2-module-v1.json",
+      "bytes": 3137,
+      "sha256": "1615b376195f7339cd20ea1e6314fbc03932757b77a95c79bbd7bcf5dbaee0b0"
+    }
+  ],
+  "preserved_failures": [
+    "First 761 regression passed; Ruff I001 import formatting fixed with first source8 and logs retained",
+    "Preservation audit suffix matched test path unintentionally; corrected audit exact path only, no product change"
+  ],
+  "actual_execution": {
+    "real_model": 0,
+    "native": 0,
+    "tokenizer": 0,
+    "java": 0,
+    "browser": 0,
+    "real_service_launch": 0,
+    "downloads": 0,
+    "quality_replay": 0
+  },
+  "human_reviewed": false,
+  "limits": [
+    "Synthetic HTTP/process/clock checks only; not actual model, Java/browser execution, semantics or deployment",
+    "Exact source CI and actual v2 comparison remain required",
+    "Source-only judge is separately registered; no new candidate output has been generated or judged"
+  ]
+}

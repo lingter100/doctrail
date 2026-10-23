@@ -8,6 +8,8 @@
 
 ## 현재 범위
 
+후속 관계 근거 요약 후보를 기존 Python 모델 서비스에 연결했다. 관련 합성 회귀761개와 독립 코드 검토를 통과했으며 기존 Java·React 저장 계약과 기본 요약 방식은 유지한다. [연결 검증](experiments/results/meetings-grounded-summary-v2-service-v1.json)은 실제 모델 품질 개선이나 전체 완료의 증거가 아니다. 새 후보의 실제 비교는 아직 수행하지 않았다.
+
 새 근거 연결 요약 방식의 실제 로컬 비교는 두 번째 분석의 자동 검토 거부로 종료됐다. 독립 AI 검토에서도 생성된 두 요약 모두 핵심 조건이나 시점을 충분히 담지 못했다. 인용 위치 확인과 내용 품질을 구분하고 [실행 실패](experiments/results/meetings-grounded-summary-development-v1.json)·[독립 판단](experiments/results/meetings-grounded-summary-review-v1.json)을 보존한다. 이 실행에서 질의응답6건은 미실행이다.
 
 2026-10-23 기준, 문서·회의 관리와 검색/학습 실험은 실제로 연결했지만 **자연어 답변 품질과 1차 전체 완료는 미충족**이다. 기능별 완료 범위, 남은 순서와 일정의 불확실성은 [현재 진행 상황](docs/PROGRESS-OVERVIEW.md)에 따로 정리했다. 아래 기록의 도구 검증·합성 검사·CI 성공을 모델 품질이나 전체 완료로 해석하지 않는다.

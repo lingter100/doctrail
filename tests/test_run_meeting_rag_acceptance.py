@@ -1077,7 +1077,7 @@ def register_assembly(fixture, assembly=None, registered=None, policy="batch-v2"
 
 @pytest.mark.parametrize("assembly,registered", [(None, None), (None, "legacy"),
     ("legacy", None), ("legacy", "legacy"), ("coverage-v1", "coverage-v1"),
-    ("grounded-summary-v1", "grounded-summary-v1")])
+    ("grounded-summary-v1", "grounded-summary-v1"), ("grounded-summary-v2", "grounded-summary-v2")])
 def test_registered_effective_assembly_reaches_actual_service_factory_contract(fixture, assembly, registered):
     register_assembly(fixture, assembly, registered)
     fake, seen = FakeRun(fixture), []
@@ -1100,7 +1100,14 @@ def test_registered_effective_assembly_reaches_actual_service_factory_contract(f
     ("grounded-summary-v1", "coverage-v1", "batch-v2"),
     ("coverage-v1", "grounded-summary-v1", "batch-v2"),
     ("grounded-summary-v1", "grounded-summary-v1", "single"),
-    ("grounded-summary-v1", "grounded-summary-v1", "batch-v1")])
+    ("grounded-summary-v1", "grounded-summary-v1", "batch-v1"),
+    ("grounded-summary-v2", None, "batch-v2"), (None, "grounded-summary-v2", "batch-v2"),
+    ("grounded-summary-v2", "grounded-summary-v1", "batch-v2"),
+    ("grounded-summary-v1", "grounded-summary-v2", "batch-v2"),
+    ("grounded-summary-v2", "coverage-v1", "batch-v2"),
+    ("coverage-v1", "grounded-summary-v2", "batch-v2"),
+    ("grounded-summary-v2", "grounded-summary-v2", "single"),
+    ("grounded-summary-v2", "grounded-summary-v2", "batch-v1")])
 def test_assembly_mismatch_unknown_or_incompatible_cannot_start(fixture, assembly, registered, policy):
     register_assembly(fixture, assembly, registered, policy)
     result = driver.execute(fixture.path, "calibration", fixture.run,
@@ -1110,7 +1117,7 @@ def test_assembly_mismatch_unknown_or_incompatible_cannot_start(fixture, assembl
 
 @pytest.mark.parametrize("policy,assembly", [(None, None), ("single", "legacy"),
     ("batch-v1", "legacy"), ("batch-v2", "legacy"), ("batch-v2", "coverage-v1"),
-    ("batch-v2", "grounded-summary-v1")])
+    ("batch-v2", "grounded-summary-v1"), ("batch-v2", "grounded-summary-v2")])
 @pytest.mark.parametrize("fault", ["missing", "changed"])
 @pytest.mark.parametrize("module", ["meeting_extraction_coverage.py", "meeting_grounded_summary.py"])
 def test_all_policies_bind_loaded_assembly_module(fixture, policy, assembly, fault, module):
@@ -1139,7 +1146,12 @@ def test_all_policies_bind_loaded_assembly_module(fixture, policy, assembly, fau
     ("legacy", "coverage-v1", False), (None, "auto", False), ("coverage-v1", "auto", False),
     ("grounded-summary-v1", "grounded-summary-v1", True),
     ("grounded-summary-v1", None, False), (None, "grounded-summary-v1", False),
-    ("grounded-summary-v1", "coverage-v1", False), ("coverage-v1", "grounded-summary-v1", False)])
+    ("grounded-summary-v1", "coverage-v1", False), ("coverage-v1", "grounded-summary-v1", False),
+    ("grounded-summary-v2", "grounded-summary-v2", True),
+    ("grounded-summary-v2", None, False), (None, "grounded-summary-v2", False),
+    ("grounded-summary-v2", "grounded-summary-v1", False),
+    ("grounded-summary-v1", "grounded-summary-v2", False),
+    ("grounded-summary-v2", "coverage-v1", False), ("coverage-v1", "grounded-summary-v2", False)])
 def test_validation_gate_requires_same_effective_assembly(fixture, assembly, gate_assembly, accepted):
     register_assembly(fixture, assembly, assembly)
     plan = fixture.manifest["plan"]
@@ -1185,7 +1197,8 @@ def test_assembly_evidence_is_nested_and_does_not_add_native_calls(fixture):
 
 
 
-def test_grounded_stage_observations_are_separate_from_completed_native_calls(fixture):
+@pytest.mark.parametrize("assembly", ["grounded-summary-v1", "grounded-summary-v2"])
+def test_grounded_stage_observations_are_separate_from_completed_native_calls(fixture, assembly):
     evidence = sink(fixture); current(fixture, "analyze", "s1")
     source = fixture.manifest["plan"]["sources"][1]
     evidence("analyze", "started", {"content": Path(source["raw"]["path"]).read_text()})
@@ -1195,8 +1208,8 @@ def test_grounded_stage_observations_are_separate_from_completed_native_calls(fi
             evidence("analyze", "summary_stage", {"stage": stage + "_started"})
         evidence("analyze", "transport_started", {"path": "/completion"})
         evidence("analyze", "transport_response", {"path": "/completion", "parsed_json": {}})
-    evidence("analyze", "assembly", {"extraction_assembly": "grounded-summary-v1",
-        "diagnostic": {"assembly": "grounded-summary-v1", "stage": "assembled",
+    evidence("analyze", "assembly", {"extraction_assembly": assembly,
+        "diagnostic": {"assembly": assembly, "stage": "assembled",
                        "observation_scope": "assembly_only_not_request_success"}})
     assert evidence.counts["analyze:classification_units"] == 2
     assert evidence.counts["analyze:summary_stage"] == 2
