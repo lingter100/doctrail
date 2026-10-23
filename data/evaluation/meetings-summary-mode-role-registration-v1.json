@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "diagnostic": "summary-mode-development-v1",
-  "status": "implementation_review_and_source_ci_passed; finite_source_review_withheld_L2; no_criteria_or_actual_dispatch",
+  "status": "new_contract_development_sources_accepted; source_only_criteria_next; actual_execution_not_authorized",
   "plan": {
     "path": "docs/MEETINGS-SUMMARY-QUALITY-NEXT.md",
     "bytes": 18650,
@@ -44,9 +44,9 @@
       "requested_effort": "xhigh",
       "fork_turns": "none",
       "spawn_request_accepted": true,
-      "status": "finite_source_coverage_review_locked_withheld_L2; no_criteria",
+      "status": "new_contract_development_sources_accepted; source_only_criteria_dispatched",
       "source_review_dispatched": true,
-      "criteria_dispatched": false,
+      "criteria_dispatched": true,
       "actual_runtime_authorized": false,
       "registration": {
         "path": ".local/meeting-summary-mode-independent-v1/role-registration-v1.json",
@@ -72,6 +72,11 @@
         "path": ".local/meeting-summary-mode-independent-v1/coverage-review-v1/coverage-review-lock-v1.json",
         "bytes": 60102,
         "sha256": "37f1478e8729cb640a2b5a81d657da944a88b02d427cc3c5f52def686c01276a"
+      },
+      "prospective_source_disposition": {
+        "path": ".local/meeting-summary-mode-independent-v1/prospective-admission-v1/safe-prospective-source-disposition-v1.json",
+        "bytes": 18895,
+        "sha256": "95f68f3db0690fc0448696a58ea78d3453f061f2c178501fe8d05b4192782023"
       }
     },
     {
@@ -114,13 +119,18 @@
     "sha256": "ab191c4aa424d2ca16a874683feb3c88eb6064a89bcb47e9bae0e2fdfa9a11ac",
     "parent_design_accepted": true,
     "implementation_dispatched": true,
-    "source_admission": false,
+    "source_admission": true,
     "design_commit": "b53cc654803cfbb539b9d7043df7b5e0fd0c21f6",
     "implementation_review": {
       "path": ".local/meeting-summary-mode-boundary-implementation-v1/independent-review-v1.json",
       "bytes": 14645,
       "sha256": "9d596d958210493f4db2b60799a152fe2fe542548c5793fc482523b572ce080f"
     },
-    "implementation_status": "176_synthetic_passed_independent_static_review_passed_exact_source_ci_pending"
+    "implementation_status": "176_synthetic_and_static_review_passed; source207_push_java_startup_failed_PR_passed; repair_pending",
+    "source_disposition": {
+      "path": "experiments/results/meetings-summary-mode-prospective-admission-v1.json",
+      "bytes": 1341,
+      "sha256": "a081cf11b2211c0005e17bcf889d02fd883a28d0df67f07c129cda7a9b52b292"
+    }
   }
 }

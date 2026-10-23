@@ -1,4 +1,22 @@
 # 진행 상태
+## 2026-10-23 · 개발 전용 자료 수용과 독립 기준 배정
+
+새 계약의 독립 판정은4개 accepted/0withheld다. safe95f68f3d/lock1881b3d0의 입력190·출력2·부재3경로를 부모가 확인하고 [자료 수용](../experiments/results/meetings-summary-mode-prospective-admission-v1.json)을 기록했다. 기존 L2와 모든 원자료는 보존한다. 같은 Astra xhigh reviewer에게 새 source-only 기준·잠금만 배정하며 실제 모델 실행은0이다. 실행 준비의 현재 여유RAM 약7.7GiB는 시작요구10GiB에 못미쳐 실제 추론 조건을 충족하지 않는다. 다른 프로세스를 종료하거나 기준을 낮추지 않고 코드/자료/서비스 검증을 계속한다. 전체goal ACTIVE다.
+
+## 2026-10-23 · CI 한쪽 시작 실패 보존과 새 자료 분리 검토
+
+직전 사용자 질문에는 진행·일정만 설명했으므로 제품 진전으로 세지 않는다. 재개 시 Git/진행 역할/ACTIVE goal을 확인했고 명시적인 DocTrail/llama 실행 명령은 관측되지 않았다. 다른 프로젝트의 프로세스는 변경하지 않았다.
+
+207bf034의 PR39914322073은 필수3개 성공, push39914310802는 backend/web 성공·Java 브라우저 단계 실패로 종료됐다. watch61989/92919는 각각1/0으로 닫혔다. 원본 로그2845c289와 terminal 결과를 보존했으며 원격 artifact는0이다. 보고서95통과/0실패는 시작 실패를 제외한 집계다. Java 종료 원인은 로그와 code/signal이 없어 미확정이다. [CI 결과](../experiments/results/meetings-summary-mode-provenance-binding-ci-v1.json)를 남겼고 원래 실행을 재시도하지 않았다. 새 Astra high 역할이 generic browser runner의 종료·로그·실패 집계와 CI 보존을 보완한다.
+
+현재 보호 split의32 metadata/183입력+부재3경로 감사가 반환돼 새4의 직접 일치0을 확인했다. 부모의10171fa7 검증과 공개 current-split 결과를 보존했다. Sol high의 개발 전용 미래 제외 목록16609d73/14참조를5c32d993으로 검증했다. 기존 Astra xhigh source reviewer는 새 계약 아래 별도 자료 수용 판단만 진행한다. 원래 L2 보류는 유지하고 아직 기준 작성·실제 모델 실행0/전체goal ACTIVE다.
+
+## 2026-10-23 · 바인딩 소스 공개와 현재 평가 자료 감사
+
+검증된8개를207bf034로commit/push했고 staged e2b3ba24의Git/current와원격 사용자author/committer lingter100·PR14 OPEN/DRAFT head를 확인했다. push39914310802/PR39914322073은 진행 중이며 watch61989/92919를 유지한다. 소스2는480ca031/ab3b6fa1로 고정한다.
+
+현재 split reviewer는 공개Kubernetes 전체313원문 중 test66원문이 같은 manifest의부분집합임을 metadata로확인했다. 새4와상위집합의직접관측일치0을보고했지만최종감사·수용결과는미반환이다. 질문·정답은열지않았다. 기존Sol high custody는새4의미래calibration/validation/test제외를위한새metadata목록1개만준비한다. 자료수용·기준·실제모델실행은0이며전체goal ACTIVE다.
+
 ## 2026-10-23 · 경계 바인딩 구현·독립 검토 완료
 
 신규 등록 필수 provenance_boundary를 실행 전과 종료 후 검사에 연결했다. 기존167개 포함176합성/3.93초와 Ruff 통과, 독립 Astra xhigh 검토9d596d95 차단0/권고0이다. 부모는4144증거·현재소스2·반환시generic142·동결77을40e966d6로 검증했고 독립입력11개를 다시 대조했다. 이후 부모의 runbook 갱신은 별도 문서 변경이다. [구현 결과](../experiments/results/meetings-summary-mode-provenance-binding-v1.json)에 기존 실패와 실제 모델0을 구분했다. 소스 commit/정확한 CI 전이며 자료 수용·기준 작성도 아직0이다.

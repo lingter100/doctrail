@@ -1,4 +1,8 @@
 # 기여와 직접 검증 기록
+## 2026-10-23 · 현재 자료 감사와 CI 실패 관측 보완
+
+Astra xhigh 독립 reviewer가 보호 source 배정 metadata만 유한 감사했고 Sol high custody가 미래 평가 제외 목록을 작성했다. 부모는183입력/부재3경로 및 제외 목록14참조를 기계적으로 확인하며 본문 의미·정답을 읽지 않았다. 새 java_browser_ci_recovery의 gpt-6-astra/high/fork none 요청을 도구가 수락했다. 구현 범위는 generic Java browser runner와 lifecycle helper/test 및 CI 실패 로그 보존이며 새 모델·사용자 검수·부모 채팅 설정 변경으로 세지 않는다.
+
 ## 2026-10-23 · 필수 계약 구현의 독립 코드 검토
 
 도구 수락 Astra high 구현자가 기존167개를 유지하고9개 반례·정상 검사를 추가해176합성/3.93초와 Ruff를 통과했다. 기존 Astra xhigh 설계자는 구현자와 별도로 정적 검토해 차단/권고0을 반환하고 기존59개 test 함수의231 assert AST 보존을 확인했다. 부모가 원본4144증거와 입력11개를 검증하고 실행 안내·공개 결과를 갱신했다. 실제 모델 성능·원문 수용·사용자 검수로 해석하지 않는다.
