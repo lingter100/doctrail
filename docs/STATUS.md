@@ -1,4 +1,10 @@
 # 진행 상태
+## 2026-10-23 · 복구 소스 CI 양쪽 통과와 다음 실행 준비
+
+직전 사용자 질문에는 진행·일정만 설명했으며 제품 진전으로 세지 않는다. 재개 시 같은 CI를 확인해 d75ee5ded2237961e1d6af26ef12ae4779c88ffc의 push39920322500/PR39920328822 모두 backend/web/java-service 성공을 확인했다. 부모가 Git/working12개와 진단 코드141개·동결77개 및 원격 사용자 author/committer lingter100을 확인했다. [정확한 CI 기록](../experiments/results/java-browser-ci-recovery-ci-v1.json)과 로컬2db64b7e를 보존한다. 성공 실행이므로 실패 artifact 업로드 경로는 실행되지 않았으며 원래207 시작 실패 원인도 미확정이다.
+
+기존 Sol 준비 담당은 live inventory에 없고 저장된 준비 산출물은 보존했다. 이미 실제 도구 수락된 Astra high java_browser_ci_recovery에게 새 실행 담당 등록·안전 metadata 준비만 배정했다. 원문·비공개 기준 의미 열람, 실제 진단/Java/tokenizer/native는 아직 허용하지 않았다. 07:56:13Z 부모 psutil 가용RAM10,700,156,928B는 시작기준10,737,418,240B보다 작았다. 조회 셸 자신의 명령 문자열은 실제 모델 프로세스로 세지 않는다. 다른 앱 종료나 기준 완화 없이 최종 등록과 시작 직전 자원을 확인한다. 전체goal ACTIVE, Phase1 미완료다.
+
 ## 2026-10-23 · Java 실행기 실제 연결 검증 완료
 
 수정된 공식 batch/main 실행기로 meeting-ready.spec.ts 한 파일을1회 검증했다. 실제 Java21·패키지React·합성HTTP 모델 fixture로4통과/17.12초, 전체35.49초/종료0이다. 서버 정상요청SIGTERM·로그flush·packagedUI 일치, infrastructure/startup/누락0이며 실제 LLM0이다. 추적Node/Java6개와현재직계자식 부재를 확인했지만 브라우저 자식 전체관측으로 확대하지 않는다. 기존JAR/dist5·내부정적45개가 같고 재빌드/설치/재시도0이다. 부모가18증거·원본/복사4쌍·현재source4를 대조했다. [수정·검증 결과](../experiments/results/java-browser-ci-recovery-v1.json)에 원래CI원인미확정과 새로운CI/업로드미검증을 구분했다. 소스커밋/정확CI 다음이며 Java슬롯은 반환됐다.

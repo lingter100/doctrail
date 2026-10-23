@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "diagnostic": "summary-mode-development-v1",
-  "status": "development_sources_and_source_only_criteria_locked; execution_registration_CI_resources_pending",
+  "status": "sources_and_criteria_locked; source_CI_passed; executor_registered; final_bindings_and_live_resources_pending",
   "plan": {
     "path": "docs/MEETINGS-SUMMARY-QUALITY-NEXT.md",
     "bytes": 18650,
@@ -93,6 +93,24 @@
       ],
       "raw_source_or_criteria_access_authorized": false,
       "actual_runtime_authorized": false
+    },
+    {
+      "role": "prospective_execution_custodian",
+      "agent": "/root/java_browser_ci_recovery",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "existing_tool_accepted_role_reused": true,
+      "status": "registered_metadata_preparation_only",
+      "registration": {
+        "path": ".local/meeting-summary-mode-execution-v1/executor-registration-v1.json",
+        "bytes": 8562,
+        "sha256": "37026e072a98306079b1f2092724135d2715cf360dc4b4aba3f2cb4180c4d606"
+      },
+      "source_criteria_semantic_access_authorized": false,
+      "actual_runtime_authorized": false,
+      "excluded_from_independent_quality_judging": true,
+      "replaces_absent_sol_preparation_role": true,
+      "prior_preparation_and_capacity_errors_preserved": true
     }
   ],
   "parent_scope": "generic plan and code, public/safe aggregates, mechanical metadata/hash checks, docs and Git; no raw source semantic judgments",
@@ -126,7 +144,7 @@
       "bytes": 14645,
       "sha256": "9d596d958210493f4db2b60799a152fe2fe542548c5793fc482523b572ce080f"
     },
-    "implementation_status": "176_synthetic_and_static_review_passed; source207_push_java_startup_failed_PR_passed; repair_pending",
+    "implementation_status": "176_synthetic_and_static_review_passed; unchanged_diagnostic_code_verified_on_d75_both_CI_passed; original207_failure_preserved",
     "source_disposition": {
       "path": "experiments/results/meetings-summary-mode-prospective-admission-v1.json",
       "bytes": 1341,
@@ -137,5 +155,10 @@
     "path": "experiments/results/meetings-summary-mode-criteria-lock-v1.json",
     "bytes": 1939,
     "sha256": "6bdbf43db588c452d59914264e587a9a855e1825063ecb039392815efa339acf"
+  },
+  "current_source_ci": {
+    "path": "experiments/results/java-browser-ci-recovery-ci-v1.json",
+    "bytes": 3428,
+    "sha256": "44c252cc8a273727e5f99cbf3841d80006f67bfa6b3c6bb7597c0336eee050f6"
   }
 }
