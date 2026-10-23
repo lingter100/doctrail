@@ -1,4 +1,28 @@
 # 진행 상태
+## 2026-10-23 · 역사적 입력 조사를 종료하고 별도 개발 계약 수용
+
+마지막3선택자는 제품코드 해시6행과 GGUF 문맥 식별3행만 제공했다. 부모가 새4파일·참조25개를7d123f5f로 대조했으며 과거 전체 입력 버전은 미증명으로 남겨 유한 조사를 닫았다. 보류를 해결됐다고 바꾸지 않았다.
+
+별도 Astra xhigh 설계자의 [자료 이력 경계](MEETINGS-SUMMARY-MODE-PROVENANCE-BOUNDARY.md)ab191c4a를 부모가 읽고 수용했다. 과거 전체 실행 복원을 모든 후속 개발의 조건으로 삼던 과도한 해석은 정정하지만 현재 보호 split 분리·Test 비사용·미래 제외와 원래 품질 기준은 유지한다. 기존 source reviewer가 알려진22개 등록의 split/assignment 메타데이터만 새로 감사 중이다. 새 자료 수용·기준 작성·실제 모델 실행은0이다. 설계 커밋 후 probe/test2의 필수 계약 참조를 연결하고 독립 검토·정확한 CI를 진행한다. 전체goal ACTIVE/Phase1 미완료다.
+
+## 2026-10-23 · 자료 검토의 실제 미결과 마지막 기록 확인
+
+직전 사용자 질문은 진행 설명이며 제품 진전으로 계산하지 않는다. 이번 재개에서는 Git/기존goal ACTIVE/진행 역할을 확인했다. 제품 실행을 새로 시작하거나 다른 프로젝트의 프로세스를 변경하지 않았다.
+
+독립 자료 재검토6734c9c8과 lock37f1478e는 원문4개의 내용·출처 판단을 유지하되 과거 초기 진단의 실제 실행–입력 버전 연결(L2)1건 때문에 자료 수용을 보류했다. 부모가142개 원본의 현재 바이트를24ca3f51로 확인했고 [공개 검토 결과](../experiments/results/meetings-summary-mode-source-review-v1.json)에 미해결 사유를 남겼다. 문맥만 보존된 입력·현재DB·일부 정규화 해시 누락은 별도 한계이며 모두를 새로운 차단으로 확대하지 않는다.
+
+별도 custody가44개 입력을 고정한 뒤 raw/results22개의 구조만 검사했다. rawv10의 명시 source_hashes와 payload context 식별, rawv11 source_hashes라는3개 선택자를 찾았으며 부모가55참조를9968f1a4로 확인했다. 해당 값만 기계적으로 투영하도록 배정했다. 질문·본문·출력에서 과거 원문을 추정하지 않는다. 이 유한 검색을 마친 뒤 기록 부재와 실제 중복을 구분하며, 새로운 보호 split과의 직접 분리와 과거 노출 불확실성을 별도로 판단한다. 원래 보류·실패·source2·동결77은 유지하고 새 기준/실제 모델 실행은0이다.
+
+## 2026-10-23 · 정확한 진단 소스 CI 양쪽 통과
+
+ac86dd43 소스의 push39908668533·PR39908672220에서 backend/web/java-service가 모두 통과했다. 같은 watch4160/60875도 exit0으로 종료됐다. [CI 결과](../experiments/results/meetings-summary-mode-implementation-ci-v1.json)는 원래Git11개와 현재고정 source2를 확인하며 부모 진행문서2개의 후속수정은 구분한다. 실제 새모델/자료 수용/기준 작성은0이고 독립 자료 검토 결과를 기다린다. 원문 준비·중복 확인 범위는 [자료 설명](MEETINGS-SUMMARY-MODE-SOURCES.md)에 정리했다. 전체goal ACTIVE/Phase1 미완료다.
+
+## 2026-10-23 · 진단 소스 공개와 CI·자료 재검토
+
+검증된11개를 ac86dd43e4e80a10892fec29c72ec26066ac604b 로 commit/push했다. staged d5eda1e7의Git/current 일치, 원격 author/committer lingter100과 PR14 OPEN/DRAFT head/body를 확인했다. push39908668533의3필수CI 모두 통과했고 watch4160 exit0이다. PR39908672220은 backend/web 통과·Java 브라우저 설치 진행 중이며 watch60875를 이어 관찰한다. 새 push로 취소하거나 재실행하지 않는다.
+
+자료 custody의7범위 최종표26369cc9와 한계fe4dfbcd를 받았고 부모가62참조를 d0ad1efd로 확인했다. GGUF context18개, 제품코드hash21개, 현재DB 복사본id3개와 선언22metadata의 참조를 구분했으며 원본DB를 열거나 바꾸지 않았다. 실제 과거 run 결속·일부 compatible hash가 없다는 한계를 유지한다. 같은 독립 Astra xhigh source reviewer에게 기존 source 검토를 유지한 metadata 재검토만 배정했다. 자료 수용·freeze·criteria·실제 모델 실행은 아직0이다. 전체goal ACTIVE/Phase1 미완료다.
+
 ## 2026-10-23 · 추론 모드 진단 구현과 독립 재검토 완료
 
 SM-R1의 수정 전 반례7개 실패를 보존하고, 새 probe/test2의167합성/2.74초와 Ruff를 확인했다. 기존155개 및56test 함수/helper의 AST를 유지했다. 부모는 최종74증거·baseline140현재/복사본·동결77·pre-edit56을 f13fa425로 대조했다. 독립 Astra xhigh delta 검토 c5a94d04는 남은 차단0이며 입력9개를 부모가 다시 확인했다. 최초 연결 종료·seal/invalidation 예외에도 최초 원인과 등록·종료 정보를 보존한다. 실제 OS 부분쓰기나 native/모델 검증으로 확대하지 않는다.
