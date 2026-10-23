@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "diagnostic": "summary-mode-development-v1",
+  "status": "source_review_completed_with_admission_withheld; implementation_changes_required; actual_execution_not_dispatched",
+  "plan": {
+    "path": "docs/MEETINGS-SUMMARY-QUALITY-NEXT.md",
+    "bytes": 18650,
+    "sha256": "fb32d66f4c2264edec160b908b83fa1050731c455099636b985793db40d0b329",
+    "commit": "8098c1981ea8aadd03c24d9267a1e9615a4893e5"
+  },
+  "roles": [
+    {
+      "role": "implementation_and_synthetic_tests",
+      "agent": "/root/summary_mode_probe_worker",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "scope": [
+        "NEW scripts/probe_meeting_summary_mode.py",
+        "NEW tests/test_probe_meeting_summary_mode.py",
+        "NEW ignored implementation evidence"
+      ],
+      "raw_source_or_criteria_access_authorized": false,
+      "actual_runtime_authorized": false
+    },
+    {
+      "role": "public_source_author",
+      "agent": "/root/summary_mode_source_author",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "xhigh",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "scope": [
+        "NEW ignored public source originals, provenance, full parsed input, replay helper and safe metadata"
+      ],
+      "criteria_or_model_output_access_authorized": false,
+      "actual_runtime_authorized": false
+    },
+    {
+      "role": "independent_source_review_then_source_only_criteria_and_final_judgment",
+      "agent": "/root/summary_mode_source_review",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "xhigh",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "status": "independent_source_review_returned; no_criteria",
+      "source_review_dispatched": true,
+      "criteria_dispatched": false,
+      "actual_runtime_authorized": false,
+      "registration": {
+        "path": ".local/meeting-summary-mode-independent-v1/role-registration-v1.json",
+        "bytes": 3560,
+        "sha256": "203a47cc943e1cd218a71baef609de40a9a417a441b8baa5eee67fa20484eb27"
+      },
+      "source_review_safe_report": {
+        "path": ".local/meeting-summary-mode-independent-v1/safe-source-review-v1.json",
+        "bytes": 11044,
+        "sha256": "dc8259d1e0211f48ac67d38cc68f7b4cefcc85f4609b048e8cba63e9e5534809"
+      },
+      "source_review_lock": {
+        "path": ".local/meeting-summary-mode-independent-v1/source-review-lock-v1.json",
+        "bytes": 41780,
+        "sha256": "a735992f19fe6b1dd47a3c613a578c77a4306ab69b85ff76f1940f650c3b310a"
+      }
+    }
+  ],
+  "parent_scope": "generic plan and code, public/safe aggregates, mechanical metadata/hash checks, docs and Git; no raw source semantic judgments",
+  "profile_limitation": "Accepted spawn requests, not an independent inspection of provider internals or a change to the parent chat settings.",
+  "exposure": "Inherited historical AGENTS aggregates are disclosed. Designer and implementer are excluded from new source-specific criteria and final judgment.",
+  "human_review_count": 0,
+  "paid_service_calls": 0,
+  "public_service_deployments": 0,
+  "actual_diagnostic_runs": 0,
+  "prospective_launcher_amendment": {
+    "path": "docs/MEETINGS-SUMMARY-MODE-LAUNCHER-REPAIR.md",
+    "bytes": 11215,
+    "sha256": "7bbd6e2c35c4cea5970a2150bdbbdb74296085eb11a40ca4426aba93fb340a5b"
+  }
+}

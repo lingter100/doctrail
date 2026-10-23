@@ -1,7 +1,25 @@
 # 진행 상태
+## 2026-10-23 · 진단 실행 오류 5개 수정 준비와 실제 공개 원문 독립 검토
+
+직전 진행·일정 질문에는 상태만 답했으므로 제품 진전으로 세지 않는다. 현재 Git/프로세스 조회와 기존 goal을 다시 확인하고 안전하게 가능한 수정으로 이어갔다. 일반 조회 권한의 Git/CIM 실패는 읽기 권한을 높여 확인했으며 다른 프로세스는 변경하지 않았다.
+
+신규 probe/test2의 102개 합성 검사(1.47초)와 Ruff는 통과했지만 독립 Astra xhigh 코드 검토391ad9b6에서 차단5개가 나왔다. 정상 의미 거부와 운영 실패의 혼동, 최초 오류 덮어쓰기, guard 종료 뒤 deadline, 최종 시간과 판정 불일치, Popen 뒤 drain 생성 전 소유권 공백이다. 부모는 소스/근거12개와 동결77을 확인해25ce6e37로 보존했다. 초기102개와 이전 실패를 유지하고 [실행 전 보완](MEETINGS-SUMMARY-MODE-LAUNCHER-REPAIR.md)7bbd6e2c를 수용했다. 공유 helper를 고치지 않고 신규 probe/test2에서만 수정하며 실제 실행 승인은 아니다.
+
+새 공개 회의록4개의 원문·라이선스·전체 파싱은 독립 검토에서 조건부 적합으로 판단됐다. 원문 작성자가 보존한103개 자료와106개 입력 binding,82개 좌표를 검토했으며 렌더링과 literal 차이는 원본과 함께 남겼다. 짧은 공개 회의 요약은 연결된 전체 대화록과 구분한다. safe-source-review dc8259d1 및 lock a735992f는 실제 모델 품질이 아니다. 과거 자료 전체의 중복 확인7범위가 남아 자료 수용·동결과 기준 작성은 아직 하지 않았다.
+
+별도 Sol high custody의 schema-only 승인안3ac5dd91을 읽고 명시 source 전용38레코드의 기계적 fingerprint만 배정한다. 질문·답변·정답·모델 출력·AnswerRequest contexts는 제외하고 누락 범위는 남긴다. 38은 고유 문서 수가 아니다. 부모는 원문/정답을 읽거나 채점하지 않는다. 이번 보완·등록을 먼저 커밋한 뒤 동일 구현자의 수정과 독립 재검토를 진행한다. 새 모델/tokenizer/native/Java/browser 실행0, 사용자 검수0, goal ACTIVE/Phase1 미완료다.
+
+## 2026-10-23 · 결과·설계 공개와 진단 구현·실제 자료 준비 시작
+
+결과·설계12개를8098c1981ea8aadd03c24d9267a1e9615a4893e5로commit/push했다. stage00620c6c의12개와Git/working 바이트, 원격 author/committer lingter100·PR14 OPEN/DRAFT의 head/body를 확인했다. push39900844267·PR39900974665의3필수CI가 모두 성공했고 watch86779/39261도 exit0이다. ci-reviewed-next-final-v1.json에12개 Git 바이트와 현재 변경 중인 부모 문서3개를 구분했다. 새 미커밋 probe/test의 CI나 모델 품질로 세지 않는다.
+
+새 summary_mode_probe_worker에 Astra high/fork none 요청을 도구가 수락했다. 신규 probe/test2와 ignored 구현 증거만 소유하며 generic 의존성140개와 동결77을 보존한 뒤 첫 probe를 작성했다. 합성 검사와 독립 검토는 아직 미반환이다. 새 summary_mode_source_author는 Astra xhigh/fork none으로 신규 실제 공개 원문·이용조건·전체 파싱·중복 검토만 준비한다. 자료는 아직 수용·동결 전이며 구현자는 원문과 정답을 읽지 않는다.
+
+새 Astra xhigh/fork none source reviewer의 [역할 등록](../data/evaluation/meetings-summary-mode-role-registration-v1.json)을 확인했다. 개별 registration203a47cc는3560B이며 신규 원문·기준·모델출력 읽기0, 아직 source review나 criteria 작성은 배정하지 않았다. 부모는 등록 메타데이터만 확인했다. 실제 모델·tokenizer·Java·browser 실행0이고 현재 두 구현/자료 담당의 반환을 기다리며 독립 가능한 기록과CI 확인을 계속한다. 전체goal ACTIVE/Phase1미완료다.
+
 ## 2026-10-23 · 비개선 결과 보존과 새 추론 모드 진단 설계 수용
 
-직전 사용자 진행·일정 질문에는 현재 상태를 설명했으며 제품 진전으로 세지 않는다. 이번 재개에서 현재 Git 변경·ACTIVE goal·기존 역할을 다시 확인했다. 기본 권한의 Git/CIM 조회 실패는 읽기 권한을 높여 확인했고 다른 프로세스를 변경하지 않았다. 제품 Java/native 프로세스는 보이지 않았으며 Python helper를 제품 실행으로 세지 않았다.
+직전 사용자 진행·일정 질문에는 현재 상태를 설명했으며 제품 진전으로 세지 않는다. 이번 재개에서 현재 Git 변경·ACTIVE goal·기존 역할을 다시 확인했다. 기본 권한의 Git/CIM 조회 실패는 읽기 권한을 높여 확인했고 다른 프로세스를 변경하지 않았다. 제품 Java/native 프로세스는 보이지 않았으며 Python 프로세스의 경로만으로 제품 실행 여부를 판단하지 않았다.
 
 기존 Astra xhigh 설계자가 [후속 문서](MEETINGS-SUMMARY-QUALITY-NEXT.md)57줄/18650B/fb32d66f를 반환했다. 부모는 전체 원안과 최종 변경, 공식 고정 revision의 thinking 설정과 generic primitive를 확인해 설계를 수용했다. 새 실제 공개 회의록4개에서 같은 cached9B·같은 chat transport·같은 최종 요약 계약으로 모드만 대조한다. 두 arm 공통 native1312·최종768재계수·입력4096, arm180초/whole1625초이며 서비스120초는 바꾸지 않는다. 요청 reasoning512는 독립 hard cap이 아니고 효과는 아직 미측정이다.
 
