@@ -56,6 +56,8 @@ PLAN = "docs/MEETINGS-SUMMARY-QUALITY-NEXT.md"
 PLAN_SHA = "fb32d66f4c2264edec160b908b83fa1050731c455099636b985793db40d0b329"
 AMENDMENT = "docs/MEETINGS-SUMMARY-MODE-LAUNCHER-REPAIR.md"
 AMENDMENT_SHA = "7bbd6e2c35c4cea5970a2150bdbbdb74296085eb11a40ca4426aba93fb340a5b"
+PROVENANCE_BOUNDARY = "docs/MEETINGS-SUMMARY-MODE-PROVENANCE-BOUNDARY.md"
+PROVENANCE_BOUNDARY_SHA = "ab191c4aa424d2ca16a874683feb3c88eb6064a89bcb47e9bae0e2fdfa9a11ac"
 LIMITS = {"input_tokens": 4096, "generation_tokens": 1312, "reasoning_requested": 512,
           "final_retokenized_tokens": 768, "review_tokens": 128, "arm_seconds": 180,
           "generation_seconds": 150, "startup_seconds": 120, "active_seconds": 1500,
@@ -850,13 +852,15 @@ def verify_registration(path, expected_sha, root=ROOT):
         fail("registration_identity")
     spec = strict_json(path.read_text(encoding="utf-8"))
     required = {"schema_version", "diagnostic", "prepared", "limits", "input", "plan", "amendment", "code",
-                "assets", "source_receipt", "source_lock", "order", "output_dir", "runtime"}
+                "provenance_boundary", "assets", "source_receipt", "source_lock", "order", "output_dir", "runtime"}
     if (not isinstance(spec, dict) or set(spec) != required
             or type(spec["schema_version"]) is not int or spec["schema_version"] != 1
             or spec["diagnostic"] != ID or spec["prepared"] is not True
             or encoded(spec["limits"]) != encoded(LIMITS)
             or spec["plan"] != {"file": PLAN, "sha256": PLAN_SHA, "size_bytes": 18650}
             or spec["amendment"] != {"file": AMENDMENT, "sha256": AMENDMENT_SHA, "size_bytes": 11215}
+            or spec["provenance_boundary"] != {"file": PROVENANCE_BOUNDARY,
+                "sha256": PROVENANCE_BOUNDARY_SHA, "size_bytes": 7014}
             or spec["runtime"] != {"manifest_sha256": MANIFEST_SHA256, "model_sha256": GGUF_SHA256,
                 "commit": RUNTIME_COMMIT, "argv": normalized_argv(28)}):
         fail("registration_contract")
@@ -871,7 +875,7 @@ def verify_registration(path, expected_sha, root=ROOT):
             or {r["file"] for r in spec["assets"]} != asset_names or len(spec["assets"]) != len(asset_names)
             or "models/meetings-qwen35-v1/setup-receipt.json" not in asset_names):
         fail("asset_binding")
-    for reference in [spec[k] for k in ("plan", "amendment", "input", "source_receipt", "source_lock")] + spec["code"] + spec["assets"]:
+    for reference in [spec[k] for k in ("plan", "amendment", "provenance_boundary", "input", "source_receipt", "source_lock")] + spec["code"] + spec["assets"]:
         check_ref(reference, root)
     if sha((root / "data/models/meetings-generation-qwen35-v1.json").read_bytes()) != MANIFEST_SHA256:
         fail("manifest_identity")
@@ -1032,7 +1036,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
                 fail("registration_identity")
             if sha((root / "data/models/meetings-generation-qwen35-v1.json").read_bytes()) != MANIFEST_SHA256:
                 fail("manifest_identity")
-            for reference in [spec[k] for k in ("plan", "amendment", "input", "source_receipt", "source_lock")] + spec["code"] + spec["assets"]:
+            for reference in [spec[k] for k in ("plan", "amendment", "provenance_boundary", "input", "source_receipt", "source_lock")] + spec["code"] + spec["assets"]:
                 check_ref(reference, root)
             report["bindings_unchanged"] = True
         except Exception as error:  # noqa: BLE001 - custody errors invalidate execution

@@ -639,7 +639,7 @@ def test_execute_lifecycle_with_fake_owner_and_http_only(tmp_path, monkeypatch, 
     registration = tmp_path / "synthetic-registration.json"
     registration.write_bytes(b"{}")
     reference = {"file": registration.name, **p.digest(registration)}
-    spec = {"plan": reference, "amendment": reference, "input": reference, "source_receipt": reference,
+    spec = {"plan": reference, "amendment": reference, "provenance_boundary": reference, "input": reference, "source_receipt": reference,
             "source_lock": reference, "code": [], "assets": [], "runtime": {"argv": p.normalized_argv(28)}}
     manifest = tmp_path / "data/models/meetings-generation-qwen35-v1.json"
     manifest.parent.mkdir(parents=True)
@@ -1069,6 +1069,8 @@ def synthetic_registration(tmp_path):
         return {"file": name, **p.digest(path)}
     plan = write(p.PLAN, (p.ROOT / p.PLAN).read_bytes())
     amendment = write(p.AMENDMENT, (p.ROOT / p.AMENDMENT).read_bytes())
+    boundary_name = "docs/MEETINGS-SUMMARY-MODE-PROVENANCE-BOUNDARY.md"
+    boundary = write(boundary_name, (p.ROOT / boundary_name).read_bytes())
     write("data/models/meetings-generation-qwen35-v1.json", p.MANIFEST.read_bytes())
     inputs = write("synthetic/input.json", p.encoded({"schema_version": 1,
         "diagnostic": p.ID, "documents": documents()}))
@@ -1079,7 +1081,8 @@ def synthetic_registration(tmp_path):
         "tests/test_probe_meeting_summary_mode.py")]
     assets = [write("models/meetings-qwen35-v1/setup-receipt.json", b'{"synthetic":true}')]
     spec = {"schema_version": 1, "diagnostic": p.ID, "prepared": True, "limits": p.LIMITS,
-        "input": inputs, "plan": plan, "amendment": amendment, "code": code, "assets": assets,
+        "input": inputs, "plan": plan, "amendment": amendment, "provenance_boundary": boundary,
+        "code": code, "assets": assets,
         "source_receipt": receipt, "source_lock": lock, "order": p.order(documents()),
         "output_dir": ".local/synthetic-never-created/" + p.ID,
         "runtime": {"manifest_sha256": p.MANIFEST_SHA256, "model_sha256": p.GGUF_SHA256,
@@ -1223,7 +1226,7 @@ def test_repair_executor_startup_failures_keep_eight_arms_unexecuted(tmp_path, m
     registration = tmp_path / "synthetic-registration.json"
     registration.write_bytes(b"{}")
     reference = {"file": registration.name, **p.digest(registration)}
-    spec = {key: reference for key in ("plan", "amendment", "input", "source_receipt", "source_lock")}
+    spec = {key: reference for key in ("plan", "amendment", "provenance_boundary", "input", "source_receipt", "source_lock")}
     spec.update(code=[], assets=[], runtime={"argv": p.normalized_argv(28)})
     manifest = tmp_path / "data/models/meetings-generation-qwen35-v1.json"
     manifest.parent.mkdir(parents=True)
@@ -1359,7 +1362,7 @@ def test_terminal_repair_first_close_failure_reaches_bound_cli(tmp_path, monkeyp
     registration = tmp_path / "synthetic-registration.json"
     registration.write_bytes(b"{}")
     reference = {"file": registration.name, **p.digest(registration)}
-    spec = {k: reference for k in ("plan", "amendment", "input", "source_receipt", "source_lock")}
+    spec = {k: reference for k in ("plan", "amendment", "provenance_boundary", "input", "source_receipt", "source_lock")}
     spec.update(code=[], assets=[], runtime={"argv": p.normalized_argv(28)})
     manifest = tmp_path / "data/models/meetings-generation-qwen35-v1.json"
     manifest.parent.mkdir(parents=True)
@@ -1406,3 +1409,96 @@ def test_terminal_repair_first_close_failure_reaches_bound_cli(tmp_path, monkeyp
     assert result["cleanup"]["within_budget"] is True and process.returncode == 0
     assert sum(row[0] == "terminate" for row in events) == 1
     assert result["terminal_observed_at"] == result["whole_seconds_after_final_writes"] == clock.now
+
+
+
+def test_boundary_exact_reference_is_required_alongside_original_contracts(tmp_path):
+    path, spec = synthetic_registration(tmp_path)
+    actual, rows, output = p.verify_registration(path, p.sha(path.read_bytes()), tmp_path)
+    assert actual["provenance_boundary"] == {
+        "file": "docs/MEETINGS-SUMMARY-MODE-PROVENANCE-BOUNDARY.md", "size_bytes": 7014,
+        "sha256": "ab191c4aa424d2ca16a874683feb3c88eb6064a89bcb47e9bae0e2fdfa9a11ac"}
+    assert actual["plan"] == spec["plan"] and actual["amendment"] == spec["amendment"]
+    assert rows == documents() and not output.exists()
+    assert not (tmp_path / ".local").exists()
+
+
+@pytest.mark.parametrize("mutation", ["missing", "file", "size_bytes", "sha256",
+                                     "file_mutation", "file_missing"])
+def test_boundary_invalid_registration_stops_before_any_launch_or_output(tmp_path, monkeypatch, mutation):
+    path, spec = synthetic_registration(tmp_path)
+    boundary = spec["provenance_boundary"]
+    if mutation == "missing":
+        del spec["provenance_boundary"]
+    elif mutation == "file_mutation":
+        target = tmp_path / boundary["file"]
+        target.write_bytes(b"!" + target.read_bytes()[1:])  # same size, changed content
+    elif mutation == "file_missing":
+        (tmp_path / boundary["file"]).unlink()
+    else:
+        boundary[mutation] = {"file": "docs/other-boundary.md", "size_bytes": 7015,
+                              "sha256": "0" * 64}[mutation]
+    path.write_bytes(p.encoded(spec))
+    calls = []
+    def forbidden(*args, **kwargs):
+        calls.append((args, kwargs))
+        pytest.fail("registration rejection must precede native/model setup")
+    monkeypatch.setattr(p, "owned_launcher", forbidden)
+    monkeypatch.setattr(p, "ModeAdapter", forbidden)
+    before = {str(f.relative_to(tmp_path)): p.digest(f) for f in tmp_path.rglob("*") if f.is_file()}
+    match = {"file_mutation": "summary_mode_binding_changed",
+             "file_missing": "missing_or_linked_artifact"}.get(mutation, "summary_mode_registration_contract")
+    with pytest.raises(ValueError, match=match):
+        p.execute(path, p.sha(path.read_bytes()), root=tmp_path, clock=Clock())
+    after = {str(f.relative_to(tmp_path)): p.digest(f) for f in tmp_path.rglob("*") if f.is_file()}
+    assert before == after and calls == [] and not (tmp_path / ".local").exists()
+
+
+@pytest.mark.parametrize("mutate_boundary", [False, True])
+def test_boundary_post_custody_recheck_uses_real_registration_and_fake_runtime(tmp_path, monkeypatch, mutate_boundary):
+    path, spec = synthetic_registration(tmp_path)
+    http = HTTP()
+    monkeypatch.setitem(sys.modules, "psutil", SimpleNamespace(
+        virtual_memory=lambda: SimpleNamespace(available=10 * 1024**3)))
+    monkeypatch.setitem(sys.modules, "scripts.probe_meeting_gpu_placement", SimpleNamespace(
+        gpu_checkpoint=lambda **kwargs: {"query_stopped": True, "error": None, "uuid": "synthetic-gpu"}))
+    # Only the synthetic output parent is prepared; execute still must create its once directory.
+    (tmp_path / spec["output_dir"]).parent.mkdir(parents=True)
+    @contextmanager
+    def launcher(**kwargs):
+        kwargs["telemetry"].update(process_creation_attempted=True, owned_create_time=123.0)
+        try:
+            yield SimpleNamespace(process=SimpleNamespace(pid=123), url="http://127.0.0.1:8123",
+                                  token="x" * 40, manifest=tmp_path / p.MANIFEST.relative_to(p.ROOT))
+        finally:
+            kwargs["telemetry"].update(process_absence_confirmed=True, within_budget=True, seconds=0)
+            if mutate_boundary:
+                target = tmp_path / spec["provenance_boundary"]["file"]
+                target.write_bytes(b"!" + target.read_bytes()[1:])
+    monkeypatch.setattr(p, "owned_launcher", launcher)
+    class Guard:
+        def __init__(self, *args, **kwargs):
+            self.created = 123.0
+
+        def check(self):
+            pass
+
+        @contextmanager
+        def arm(self, deadline, metrics):
+            yield
+    monkeypatch.setattr(p, "ResourceGuard", Guard)
+    original = p.ModeAdapter
+    def factory(*args, **kwargs):
+        gen = original(*args, transport=httpx.MockTransport(http), **kwargs)
+        gen.load = lambda: gen
+        return gen
+    monkeypatch.setattr(p, "ModeAdapter", factory)
+    result = p.execute(path, p.sha(path.read_bytes()), root=tmp_path, clock=http.clock)
+    assert len(http.completions) == 16 and result["product_writes"] == 0
+    assert result["bindings_unchanged"] is (not mutate_boundary)
+    assert result["eligible"] is (not mutate_boundary)
+    assert result["operational_eligible"] is (not mutate_boundary)
+    if mutate_boundary:
+        assert result["operational_failure"]["code"] == "summary_mode_binding_changed"
+    else:
+        assert result["first_failure"] is None
