@@ -1,0 +1,110 @@
+{
+  "status": "completed_with_rejections",
+  "operational_complete": true,
+  "mechanically_complete": false,
+  "CLI_exit": 1,
+  "outer_wrapper_tool_exit": 0,
+  "elapsed_seconds": 100.96900000004098,
+  "counts": {
+    "http": 25,
+    "qa": 4,
+    "requested_tokens": 4096,
+    "review": 0,
+    "summary": 4
+  },
+  "denominators": {
+    "summary": 4,
+    "qa": 4
+  },
+  "stage_status_counts": {
+    "summary": {
+      "rejected": 4
+    },
+    "review": {
+      "not_applicable": 4
+    },
+    "qa": {
+      "rejected": 4
+    }
+  },
+  "failure_counts": {
+    "summary:generation_output_limit": 3,
+    "qa:generation_invalid_json": 3,
+    "summary:generation_invalid_json": 1,
+    "qa:generation_output_limit": 1
+  },
+  "first_failure": {
+    "stage": "summary",
+    "code": "generation_output_limit"
+  },
+  "stop_reason": null,
+  "policy": "native-rss6-host2-v1",
+  "limits": {
+    "active_available_bytes": 2147483648,
+    "active_seconds": 900,
+    "cleanup_seconds": 5,
+    "completion_calls": 12,
+    "generation_calls": 8,
+    "input_tokens": 4096,
+    "native_rss_bytes": 6442450944,
+    "qa_seconds": 60,
+    "qa_tokens": 256,
+    "requested_tokens": 4608,
+    "review_tokens": 128,
+    "startup_available_bytes": 8589934592,
+    "startup_seconds": 120,
+    "summary_seconds": 120,
+    "summary_tokens": 768,
+    "whole_seconds": 1025
+  },
+  "internal_startup_RAM_sample": {
+    "available_bytes": 9330892800,
+    "elapsed_seconds": 4.452999999979511,
+    "minimum_bytes": 8589934592,
+    "passed": true,
+    "stage": "before_native_popen"
+  },
+  "cleanup_seconds": 0.5,
+  "cleanup_within_budget": true,
+  "process_absence_confirmed": true,
+  "remaining_drain_thread": false,
+  "owned_pipes_closed": true,
+  "bindings_unchanged": true,
+  "late_invalidation_present": false,
+  "terminal_report_actual_exit_consistent": true,
+  "report": {
+    "file": ".local/meeting-local-candidate-execution-v4/local-candidate-development-v1/report.json",
+    "size_bytes": 29145,
+    "sha256": "47563fac036b4b49ca77e63eaae9b6272ec82cd86e6fa267ba915b8025209302"
+  },
+  "terminal": {
+    "file": ".local/meeting-local-candidate-execution-v4/local-candidate-development-v1/terminal.json",
+    "size_bytes": 957,
+    "sha256": "fba4812b2dee8ed381ab066c37ebda10a2db811668a649ce1e4a00bb0e5c163d"
+  },
+  "semantic_review_performed": false,
+  "user_review_performed": false,
+  "retries": 0,
+  "once_consumed": true,
+  "sampled_max_native_rss_bytes": 2941214720,
+  "sampled_min_available_ram_bytes": 5473984512,
+  "sampled_max_device_vram_mib": 3172.0,
+  "sample_scope": "sampled native RSS and device-wide VRAM, not instantaneous peak or exclusive ownership",
+  "schema_version": 1,
+  "source_head": "b5cae0d817510ba7b77eedf05ff2a146c038e624",
+  "registration_sha256": "ec9a1b3d74260c19b7921d783a2dfbfdc719f9c065a48685a95bdd0594589b90",
+  "parent_custody_acceptance_sha256": "c657ddd64e2d1d8ba6bbf7a44c5e88df7064b3c0c092092f4439644b1f5560f6",
+  "accepted_parsed_summaries": 0,
+  "accepted_parsed_answers": 0,
+  "raw_responses_preserved": 8,
+  "sealed_files": 66,
+  "owned_identities_confirmed_absent": 18,
+  "external_startup_available_bytes": 9516060672,
+  "quality_acceptance": false,
+  "limitations": [
+    "One development run only; structural acceptance is not semantic accuracy.",
+    "Requested output token budget is not actual generated token count.",
+    "Resource observations are samples, not OS reservations or exclusive GPU use.",
+    "Prior consumed failures and unconsumed v3 refusals preserved; no retry."
+  ]
+}

@@ -14,7 +14,7 @@
 
 새 3B 후보는 원문 전체와 근거 위치를 유지하는 입력 형식까지 구현했지만 실제 요약·답변 품질 결과는 아직 없다. 앞선 실제 실행의 입력 한도 거부와 이후 시작 자원 미달을 보존한다. 닫힌 평가 출력 폴더나 이전 실행 명령을 재사용하지 않는다. 현재 결과는 [진행 현황](PROGRESS-OVERVIEW.md)과 [최근 실행 상태](STATUS.md)를 확인한다.
 
-새 [자원 정책 구현](../experiments/results/meetings-local-resource-envelope-v1.json)은 schema2의 명시적 선택에서 native RSS6GiB·시작8GiB·호스트여유2GiB를 사용한다. 기본8/10GiB는 유지한다. 111합성검사와 독립 코드 검토는 완료됐지만 정확 소스 CI·새 등록·실제 생성은 아직 남아 있다. 표본 감시는 메모리를 예약하거나 순간 할당을 막는 기능이 아니다. 기존 출력 파일에는 정책 정보가 추가되며 바이트 동일을 약속하지 않는다. 재현 명령은 연결된 결과의 `reproduce_command`를 따른다.
+새 [자원 정책 구현](../experiments/results/meetings-local-resource-envelope-v1.json)은 schema2의 명시적 선택에서 native RSS6GiB·시작8GiB·호스트여유2GiB를 사용한다. 기본8/10GiB는 유지한다. 111합성검사·독립 코드 검토와 [정확 소스 CI](../experiments/results/meetings-local-resource-policy-source-ci-v1.json)를 통과했다. 후속 [실제 비교](MEETINGS-LOCAL-RESOURCE-RESULTS.md)는 생성8건·검사수용0으로 종료됐다. 소비한 등록을 다시 실행하지 않으며 새 개입은 별도 설계·등록이 필요하다. 표본 감시는 메모리를 예약하거나 순간 할당을 막는 기능이 아니다. 기존 출력 파일에는 정책 정보가 추가되며 바이트 동일을 약속하지 않는다. 재현 명령은 연결된 결과의 `reproduce_command`를 따른다.
 
 지금 시연할 수 있는 범위는 원문 등록·검색·근거 이동과 확인된 관리 흐름이다. AI가 충분히 요약하고 정확히 답한다는 시연은 실제 품질 검증 후 확정한다. [첫 단계 시연](DEMO.md)은 M1~M3의 역사적 범위이며 현재 회의 기능 전체 완료를 뜻하지 않는다.
 

@@ -1,4 +1,40 @@
 # 진행 상태
+## 2026-10-26 · 구조적 원인 확인과 다음 단일 개입 설계
+
+별도 구조 진단6e824f30은8응답 모두 코드 펜스, EOS4건의 내부 JSON 성립과 실제cap에 도달한 미완결4건을 확인했다. EOS요약1건의 주장5개는 근거5~9개로 기존최대4개를 위반한다. QA3건은 확인한 필요 구조조건만 만족했으며 ID존재·의미정답은 미검증이다. 부모가80개참조와66봉인을 해시로 확인했고 원래실패8개는 유지한다(3acec998). [공개 구조 집계](../experiments/results/meetings-local-resource-structure-v1.json)는 수리나 채택 결과가 아니다.
+
+Astra xhigh의 [새 형식 설계](MEETINGS-LOCAL-FORMAT-NEXT.md)는 schema3의 명시적 claims-json-gbnf-v1에서 요약/QA 생성 grammar만 변경한다. 기존summary grammar를 그대로 재사용하고 현재정수ID형 QA grammar를 후보 내부에 추가한다. source2만 허용하며 기존schema1/2·프롬프트·파서·원문·질문·품질·시간·토큰·자원 조건은 유지한다. 실제엔진과 의미품질은 미검증이다.
+
+부모는17입력을 확인하고 완전맹검으로 오해될 수 있는 문장1곳만 정정했다. 원래설계와receipt는 새검토폴더에 보존하며 기존자동문맥노출을 기록하고 추가정체매핑/자체검토/성능공개보다 개별판정을 먼저 잠그는 것으로 정확히 제한한다. 결과·설계를 사용자명의로 공개한 뒤 Astra high에게 source2 구현을 별도배정한다. 아직새코드/등록/모델실행0, 전체goal ACTIVE다.
+
+## 2026-10-26 · 새 자원 정책 실제 실행 종료, 응답 형식 실패 보존
+
+v4를 실제1회 실행했다. 외부 시작 관측9,516,060,672B와 내부9,330,892,800B는 등록8GiB를 충족했다. 공식CLI exit1/관찰 wrapper0,100.969초에 고정8항목 처리는 끝났지만 요약4·QA4 모두 거부돼 mechanically_complete=false다. 요약은 출력한도3·JSON형식1, QA는 JSON형식3·출력한도1이며 유효한 parsed 초안·답변0, 검토 호출0이다. 생성8/HTTP25·요청출력4096토큰은 의미 정확도나 실제 생성토큰 총합이 아니다. [실제 결과](../experiments/results/meetings-local-resource-actual-v1.json)를 별도로 남겼다.
+
+원본 응답8과 봉인파일66을 보존했다. 부모가350개 중복제거참조·고정264·현재코드60/Git·자산상태62·소유신원18개 부재를 확인해 HOLD를 해제했다(c657ddd6). 정리는0.5초이고 새 재실행은 허용하지 않는다. 과거v1/v2 및 v3 미소비 두 거부·동결77은 그대로다.
+
+기존 Astra xhigh에게 별도 NEW 구조실패진단 폴더만 배정했다. 정확히 지정한 raw completion8의 종료·토큰·JSON 구조만 분석하고 의미 기준·정답·원문을 추가로 읽거나 출력을 고쳐 채택하지 않는다. 부모에게는 문장 없이 안전한 형식 집계만 반환한다. 유효 parsed 출력이 없어 최종 의미판정자에게 packet은 아직 전달하지 않았다. 전체goal ACTIVE이며 1차는 미완료다.
+
+## 2026-10-26 · 새 등록 수용과 실제 비교 별도 배정
+
+schema2 등록 ec9a1b3d·companion a4964e0d·준비5058af1f는 공식 순수검증1회/3.596289초를 통과했다. 자산62개 전체해시1회·runtime55·코드60/Git 일치를 확인했고 부모가 고정264참조·현재코드60·자산상태62를 대조했다(64cee00c). 기존 원문4/질문4/기준/모델/compact wire·순서·품질·시간은 유지한다. [준비 결과](../experiments/results/meetings-local-resource-preparation-v1.json)는 실제 생성과 구분한다.
+
+새 최종 판정자 source-only 인계73b51a25의19연결을 부모가 확인했다(515d0027). 기존 기준을 변경하지 않고 해석 주의1건을 계승한다. 자동 문맥 집계 노출이 있어 완전 맹검을 주장하지 않으며 실제 출력은 아직 전달하지 않았다.
+
+같은 Astra high 실행 담당에게 NEW v4/actual-once-v1의 외부fresh gate1회와 통과 시 공식CLI1회를 별도로 배정했다. registration_policy 순수 해석을 사용해 시작8GiB/native6GiB/호스트여유2GiB를 등록과 일치시킨다. 미달이면 CLI0으로 끝내고 반복 관측·다른 앱 종료·자동 대체를 하지 않는다. 실제 시작 여부는 이 배정만으로 확인된 것이 아니며 후속 실행 기록에 따른다. HEADb5cae0d·코드60·자산은 종료와 사후검증까지 고정하고 부모는 문서만 작성한다. 기존v3 미소비·두 거부/닫힌실패는 보존하며 전체goal ACTIVE다.
+
+## 2026-10-26 · 정확 소스 CI 완료와 새 정책 실행 준비
+
+b5cae0d의 push40286444715·PR40286450943에서 backend/web/java-service가 모두 통과했고 watch1775/89922는 exit0으로 종료됐다(CI27148340). PR14draft의 설명도 완료 상태로 갱신했다. 이는 모델 생성·실환경 메모리 적합성이나 의미 품질의 증거가 아니다.
+
+기존 Astra xhigh 준비 담당에게 NEW execution-v4의 schema2 등록·companion·준비증거만 배정했다. 현재 코드60/Git·고정 모델자산·원문4/질문4/기준·compact wire를 결속하고 새 policy의 정확한limits를 사용한다. 공식 순수검증1회와 자산전체hash1회만 허용하며 liveRAM/GPU·실제CLI/native/tokenizer/Java는 배정하지 않는다. 새 출력경로는 부재로 유지하고 기존v3 미소비/두 거부는 보존한다. 별도 판정자는 기존 잠금 기준의 source-only 인계 중이다. 실제 once는 준비·인계 수용 후 별도 배정하며 전체goal ACTIVE다.
+
+## 2026-10-26 · 구현 공개와 최종 판정자 인계
+
+자원 정책 source2와 설명9파일을 사용자 author/committer의 b5cae0d817510ba7b77eedf05ff2a146c038e624로 commit/push했다. Git·작업파일9개 동일성, 원격 계정과 PR14draft head/설명을 확인했다. 필수 CI push40286444715·PR40286450943은 watch1775/89922로 관찰 중이며 새 push나 재실행으로 취소하지 않는다. 코드 소유자는 모두 반환했고 source2를 고정한다.
+
+이전 source-only 판정자는 현재 live 역할 목록에 없어, 도구가 수락한 새 Astra xhigh local_candidate_resource_final_judge에게 기존4원문·4질문·잠긴 기준의 인계만 배정했다. 새 기준이나 질문을 만들지 않으며 출력·자체검토·성능 자료는 아직 전달하지 않는다. 명시된 source/criteria/기존 채택 기록만 읽고 새 인계 폴더에 기록한다. 후속 실제 출력이 생긴 뒤 개별 판정을 먼저 고정해야 한다. 새 실행 등록·모델 실행은 아직 없으며 전체 goal ACTIVE다.
+
 ## 2026-10-26 · 자원 정책 구현과 독립 코드 검토 완료
 
 별도 native6GiB/시작8GiB/호스트여유2GiB 정책을 후보 script/test2에 구현했다. schema2의 정확한 정책·전체 limits로만 선택하며 기존 기본값과 입력·품질·시간 조건은 유지한다. 시작·활성 감시와 HTTP 확인에 같은 정책을 연결하고 낮은 상한 초과를 resources로 고정한다. 기존82개와 새23개·동결 guard6개를 포함한111합성검사/3.92초 및 Ruff를 통과했다. 부모가21증거·270고정참조·before2를 확인했다(98b9c500).
