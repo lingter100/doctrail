@@ -1,4 +1,12 @@
 # 진행 상태
+## 2026-10-26 · 자원 정책 구현과 독립 코드 검토 완료
+
+별도 native6GiB/시작8GiB/호스트여유2GiB 정책을 후보 script/test2에 구현했다. schema2의 정확한 정책·전체 limits로만 선택하며 기존 기본값과 입력·품질·시간 조건은 유지한다. 시작·활성 감시와 HTTP 확인에 같은 정책을 연결하고 낮은 상한 초과를 resources로 고정한다. 기존82개와 새23개·동결 guard6개를 포함한111합성검사/3.92초 및 Ruff를 통과했다. 부모가21증거·270고정참조·before2를 확인했다(98b9c500).
+
+독립 Astra xhigh 검토는 차단0·근거표현권고1이다(2b59580e,29입력확인). RE-A1을 수용해 기존값·동작 유지와 출력 JSON 바이트 동일을 구분한다. report/terminal에는 정책 정보가 추가된다. 보존기록의35개는 테스트함수30·helper4·클래스1이며 기존82 cases와 구분한다. 원본 receipt는 수정하지 않았다. [공개 구현 결과](../experiments/results/meetings-local-resource-envelope-v1.json)에 범위와 재현 명령을 남겼다.
+
+설계·설명자료66543c7의 push40284185791·PR40284189928은 backend/web/java-service 모두 성공했고 watch60571/17432가 exit0으로 종료됐다(ec33e6b0). 이는 새 source2의 CI가 아니다. 다음은 사용자 명의 구현 commit/push와 정확 소스 CI, 그 뒤 새 schema2 등록·출력·companion의 별도 준비다. 실제 자원관측·모델/tokenizer/생성0이며 기존 v3 미소비 등록과 두 거부를 보존한다. 전체 goal ACTIVE, 1차 품질 미완료다.
+
 ## 2026-10-26 · 별도 자원 예산 설계 수용
 
 새 [자원 예산 설계](MEETINGS-LOCAL-RESOURCE-ENVELOPE.md)01a7a7e9와12근거를 확인했다. 기존 native8GiB/시작10GiB 기본값은 유지하며, 새 명시정책은 native 허용량을6GiB로25% 줄이고 호스트 여유2GiB 기준을 유지해 시작을8GiB로 맞춘다. 같은 원문·질문·품질·출력·문맥·시간 조건에서 실행 예산만 별도로 시험하는 것으로 생성 성공이나 OS 메모리 예약을 보장하지 않는다.

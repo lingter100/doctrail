@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "source_head": "66543c7f5655d5b49e1d72c365b97c94bbdb9494",
+  "runs": [
+    {
+      "run_id": 40284185791,
+      "event": "push",
+      "head_sha": "66543c7f5655d5b49e1d72c365b97c94bbdb9494",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40284185791",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 40284189928,
+      "event": "pull_request",
+      "head_sha": "66543c7f5655d5b49e1d72c365b97c94bbdb9494",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40284189928",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "watch_sessions": [
+    {
+      "session_id": 60571,
+      "exit_code": 0
+    },
+    {
+      "session_id": 17432,
+      "exit_code": 0
+    }
+  ],
+  "scope": "plan and portfolio documentation with unchanged runtime; not new resource-policy implementation or model-quality evidence"
+}

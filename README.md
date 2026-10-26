@@ -8,6 +8,8 @@
 
 ## 현재 범위
 
+무료 로컬 후보의 [명시적 메모리 정책](experiments/results/meetings-local-resource-envelope-v1.json)을 구현해 111합성검사와 독립 코드 검토를 마쳤다. 실행 중 허용 메모리와 시작 조건을 함께 줄이며, 실제 생성의 적합성·품질과 서비스 채택은 아직 확인 전이다.
+
 **문서·회의 관리 기능은 대부분 구현됐으며, 무료 로컬 AI의 내용 품질과 운영 안정성을 검증 중이다.** 기능별 상태와 남은 순서는 [현재 진행 상황](docs/PROGRESS-OVERVIEW.md), 백업·복원의 범위와 재현 방법은 [운영 검증](docs/MEETINGS-RESTORE-VERIFICATION.md)을 참고한다. 회의1차와 전체 포트폴리오는 아직 미완료다.
 
 현재 확인된 기능·검색 학습 결과·실패를 설명하는 [포트폴리오 초안](docs/PORTFOLIO-DRAFT.md)과 [면접 12문항 초안](docs/INTERVIEW-DRAFT.md)을 준비했다. 사용자 검수·직접 시연·설명 연습 확인 전 자료이며 제출 완성본이 아니다.

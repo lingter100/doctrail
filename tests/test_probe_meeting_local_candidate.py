@@ -349,6 +349,10 @@ def test_execute_preserves_startup_cause_and_once_output(tmp_path, monkeypatch):
     result = probe.execute(path, digest, root=tmp_path, clock=lambda: 0)
     assert result["first_failure"]["code"] == "local_candidate_synthetic_startup"
     assert (tmp_path / spec["output_dir"] / "report.json").is_file()
+    terminal = json.loads((tmp_path / spec["output_dir"] / "terminal.json").read_text(encoding="utf-8"))
+    assert result["resource_policy"] == terminal["resource_policy"] == "legacy"
+    assert result["limits"] == terminal["limits"] == probe.LIMITS
+    assert probe.registration_policy(spec) is probe.LEGACY_RESOURCES
     with pytest.raises(probe.CandidateFailure, match="output_scope"):
         probe.execute(path, digest, root=tmp_path, clock=lambda: 0)
     assert seen == ["once"]
@@ -754,3 +758,251 @@ def test_compact_mandatory_review_still_checks_4096_and_cannot_pass(tmp_path):
     assert all(row["review"]["status"] == "rejected" for row in result["documents"])
     assert not result["mechanically_complete"]
     assert sum(path == "/completion" for path, _ in requests) == 8
+
+
+def rss6_registration(spec):
+    spec.update(schema_version=2, resource_policy="native-rss6-host2-v1",
+                limits={**probe.LIMITS, "native_rss_bytes": 6 * 1024**3,
+                        "startup_available_bytes": 8 * 1024**3})
+    return spec
+
+
+def test_resource_policy_schema2_is_explicit_and_immutable(tmp_path, monkeypatch):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    rss6_registration(spec)
+    verified = probe.verify_registration(path, seal(), tmp_path)[0]
+    policy = probe.registration_policy(verified)
+    assert policy.name == "native-rss6-host2-v1"
+    assert policy.limits["startup_available_bytes"] == 8 * 1024**3
+    assert policy.limits["native_rss_bytes"] == 6 * 1024**3
+    assert policy.limits["active_available_bytes"] == 2 * 1024**3
+    with pytest.raises(TypeError):
+        policy.limits["native_rss_bytes"] = 99
+    assert probe.LIMITS["native_rss_bytes"] == 8 * 1024**3
+
+
+@pytest.mark.parametrize("fault", ["schema", "bool-schema", "missing-policy", "unknown-policy", "legacy-policy",
+                                   "old-limits", "host", "tokens", "extra", "extra-limit"])
+def test_resource_policy_rejects_mismatch_before_bound_reads(tmp_path, monkeypatch, fault):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    rss6_registration(spec)
+    if fault == "schema":
+        spec["schema_version"] = 3
+    elif fault == "bool-schema":
+        spec["schema_version"] = True
+    elif fault == "missing-policy":
+        del spec["resource_policy"]
+    elif fault == "unknown-policy":
+        spec["resource_policy"] = "native-rss7-host2-v1"
+    elif fault == "legacy-policy":
+        spec["schema_version"] = 1
+    elif fault == "old-limits":
+        spec["limits"] = dict(probe.LIMITS)
+    elif fault == "host":
+        spec["limits"]["active_available_bytes"] -= 1
+    elif fault == "tokens":
+        spec["limits"]["summary_tokens"] -= 1
+    elif fault == "extra":
+        spec["override"] = True
+    else:
+        spec["limits"]["arbitrary"] = 1
+    monkeypatch.setattr(probe, "check_ref", lambda *a: pytest.fail("invalid policy must precede asset reads"))
+    with pytest.raises(probe.CandidateFailure, match="registration_contract"):
+        probe.verify_registration(path, seal(), tmp_path)
+
+
+class PolicyPS:
+    def __init__(self):
+        self.created, self.rss, self.available = 1.0, 1, 10 * 1024**3
+        self.rss_reads, self.ram_reads, self.access_error = 0, 0, False
+    def Process(self, pid):
+        if self.access_error:
+            raise PermissionError("synthetic")
+        def memory():
+            self.rss_reads += 1
+            return SimpleNamespace(rss=self.rss)
+        return SimpleNamespace(create_time=lambda: self.created, memory_info=memory)
+    def virtual_memory(self):
+        self.ram_reads += 1
+        return SimpleNamespace(available=self.available)
+
+
+def policy_process():
+    process = SimpleNamespace(pid=123, returncode=None, kills=[])
+    process.poll = lambda: process.returncode
+    def kill():
+        process.kills.append(123)
+        process.returncode = -1
+    process.kill = kill
+    return process
+
+
+@pytest.mark.parametrize("policy", [probe.LEGACY_RESOURCES, probe.RSS6_RESOURCES])
+def test_resource_policy_rss_and_host_boundaries_share_one_sample(policy):
+    from scripts import probe_meeting_summary_mode as frozen
+    before = dict(frozen.LIMITS)
+    for field, threshold in (("rss", policy.limits["native_rss_bytes"]),
+                             ("available", policy.limits["active_available_bytes"])):
+        for delta in (-1, 0, 1):
+            ps, process = PolicyPS(), policy_process()
+            setattr(ps, field, threshold + delta)
+            guard = probe.make_resource_guard(process, policy, ps=ps, clock=lambda: 7, expected_created=1)
+            fails = delta > 0 if field == "rss" else delta < 0
+            if fails:
+                with pytest.raises(ValueError, match="summary_mode_resources"):
+                    guard.check()
+                ps.rss, ps.available = 1, 10 * 1024**3
+                with pytest.raises(ValueError, match="summary_mode_resources"):
+                    guard.check()
+                assert guard.failure == "resources"
+            else:
+                row = guard.check()
+                assert row == {"at": 7, "rss": ps.rss, "available": ps.available}
+            assert ps.rss_reads == ps.ram_reads == 1
+    assert frozen.LIMITS == before and probe.LIMITS["native_rss_bytes"] == 8 * 1024**3
+    if policy is probe.LEGACY_RESOURCES:
+        assert type(guard) is probe.ResourceGuard
+
+
+@pytest.mark.parametrize("fault", ["initial-identity", "reused", "access", "exited"])
+def test_resource_policy_ownership_never_kills_uncertain_identity(fault):
+    ps, process = PolicyPS(), policy_process()
+    if fault == "initial-identity":
+        with pytest.raises(ValueError, match="ownership"):
+            probe.make_resource_guard(process, probe.RSS6_RESOURCES, ps=ps, expected_created=2)
+    else:
+        guard = probe.make_resource_guard(process, probe.RSS6_RESOURCES, ps=ps, expected_created=1)
+        if fault == "reused":
+            ps.created = 2
+        elif fault == "access":
+            ps.access_error = True
+        else:
+            process.returncode = 0
+        with pytest.raises(ValueError, match="ownership"):
+            guard.check()
+        guard.stop_owned()
+        assert guard.failure == "ownership"
+    assert process.kills == [] and ps.rss_reads == ps.ram_reads == 0
+
+
+def test_resource_policy_inherited_arm_latches_resources_and_blocks_http(tmp_path, monkeypatch):
+    from scripts import probe_meeting_summary_mode as frozen
+    ps, process = PolicyPS(), policy_process()
+    ps.rss = 6 * 1024**3 + 1
+    guard = probe.make_resource_guard(process, probe.RSS6_RESOURCES, ps=ps, clock=lambda: 0, expected_created=1)
+    class InlineThread:
+        def __init__(self, *, target, **kwargs):
+            self.target = target
+        def start(self):
+            self.target()
+        def join(self, **kwargs):
+            pass
+        def is_alive(self):
+            return False
+    monkeypatch.setattr(frozen.threading, "Thread", InlineThread)
+    adapter, requests, _, _ = adapter_fixture(tmp_path)
+    adapter.resource_check = guard.check
+    adapter.begin_request(120)
+    metrics = {}
+    with pytest.raises(ValueError, match="summary_mode_resources"):  # noqa: SIM117
+        with guard.arm(120, metrics):
+            adapter._request("POST", "/completion", {"n_predict": 768}, 120)
+    assert guard.failure == "resources" and process.kills == [123]
+    assert adapter.halted and requests == [] and adapter.counts["summary"] == 0
+    assert metrics["joined"] and metrics["samples"] == []
+    adapter.close()
+
+
+@pytest.mark.parametrize("delta", [-1, 0, 1])
+def test_resource_policy_startup_external_interpretation_matches_single_internal_sample(tmp_path, monkeypatch, delta):
+    import psutil
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    rss6_registration(spec)
+    # Pure interpretation has no resource sampling or asset access; future observers use this limit.
+    policy = probe.registration_policy(spec)
+    available = policy.limits["startup_available_bytes"] + delta
+    calls = []
+    def sample():
+        calls.append("ram")
+        return SimpleNamespace(available=available)
+    def popen(*args, **kwargs):
+        calls.append("Popen")
+        raise ValueError("synthetic Popen sentinel")
+    monkeypatch.setattr(psutil, "virtual_memory", sample)
+    monkeypatch.setattr(probe, "unused_port", lambda: 1234)
+    monkeypatch.setattr(probe.subprocess, "Popen", popen)
+    result = probe.execute(path, seal(), root=tmp_path, clock=lambda: 0)
+    output = tmp_path / spec["output_dir"]
+    terminal = json.loads((output / "terminal.json").read_text(encoding="utf-8"))
+    assert calls == (["ram"] if delta < 0 else ["ram", "Popen"])
+    gate = result["cleanup"]["startup_ram_gate"]
+    assert gate == terminal["startup_ram_gate"]
+    assert gate["available_bytes"] == available and gate["minimum_bytes"] == 8 * 1024**3
+    assert gate["passed"] is (delta >= 0)
+    assert result["resource_policy"] == terminal["resource_policy"] == policy.name
+    assert result["limits"] == terminal["limits"] == dict(policy.limits)
+    assert result["cleanup"]["effective_limits"] == dict(policy.limits)
+    if delta < 0:
+        assert result["first_failure"]["code"] == "local_candidate_startup_ram"
+        assert not result["cleanup"].get("process_creation_attempted")
+
+
+@pytest.mark.parametrize("fail_after_completion", [False, True])
+def test_resource_policy_two_guards_http_callback_cleanup_and_no_later_completion(tmp_path, monkeypatch, fail_after_completion):
+    import psutil
+
+    from scripts import probe_meeting_gpu_placement as gpu
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    rss6_registration(spec)
+    ps, process = PolicyPS(), policy_process()
+    process.stdout = object()
+    guards, cleaned = [], []
+    original_factory = probe.make_resource_guard
+    def factory(p, policy, **kwargs):
+        assert p is process and policy is probe.RSS6_RESOURCES
+        guard = original_factory(p, policy, ps=ps, **kwargs)
+        guards.append(guard)
+        return guard
+    @contextmanager
+    def arm(self, deadline, metrics):
+        self.check()
+        try:
+            yield
+            self.check()
+        finally:
+            metrics.update(joined=True, samples=[], sample_cap=721)
+    monkeypatch.setattr(probe.ResourceGuard, "arm", arm)
+    monkeypatch.setattr(probe, "make_resource_guard", factory)
+    monkeypatch.setattr(psutil, "virtual_memory", lambda: SimpleNamespace(available=8 * 1024**3))
+    monkeypatch.setattr(probe, "unused_port", lambda: 1234)
+    monkeypatch.setattr(probe.subprocess, "Popen", lambda *a, **k: process)
+    monkeypatch.setattr(probe, "owned_create_time", lambda p: 1.0)
+    monkeypatch.setattr(probe, "DiscardDrain", lambda stream: SimpleNamespace(start=lambda: None))
+    monkeypatch.setattr(probe, "wait_ready", lambda *a, **k: guards[0].check())
+    def cleanup(p, drain, metrics, **kwargs):
+        cleaned.append(p)
+        metrics["within_budget"] = True
+    monkeypatch.setattr(probe, "cleanup_owner", cleanup)
+    monkeypatch.setattr(gpu, "gpu_checkpoint", lambda **k: {"uuid": "synthetic", "query_stopped": True})
+    def alter(adapter, endpoint, payload, response, clock):
+        if fail_after_completion and endpoint == "/completion":
+            ps.rss = 6 * 1024**3 + 1
+    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter)
+    def candidate(*args, **kwargs):
+        adapter.resource_check = kwargs["resource_check"]
+        assert adapter.resource_check.__self__ is guards[1]
+        adapter.load = lambda: adapter.resource_check()
+        return adapter
+    monkeypatch.setattr(probe, "CandidateAdapter", candidate)
+    result = probe.execute(path, seal(), root=tmp_path, clock=clock)
+    assert len(guards) == 2 and all(type(g) is probe.CandidateResourceGuard for g in guards)
+    assert cleaned == [process] and result["cleanup"]["within_budget"]
+    completions = [r for r in requests if r[0] == "/completion"]
+    assert len(completions) == (1 if fail_after_completion else 12)
+    assert result["limits"] == dict(probe.RSS6_RESOURCES.limits)
+    if fail_after_completion:
+        assert result["stop_reason"]["code"] == "summary_mode_resources"
+        assert adapter.halted and guards[1].failure == "resources"
+        assert all(row["qa"]["status"] == "unexecuted" for row in result["documents"])
+    else:
+        assert result["mechanically_complete"]

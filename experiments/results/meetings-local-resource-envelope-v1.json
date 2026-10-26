@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "status": "implemented_synthetic_verified_independent_review_complete_pending_exact_source_ci",
+  "policy": "native-rss6-host2-v1",
+  "scope": "Offline free/local model candidate execution resources; not generation quality or service adoption",
+  "limits": {
+    "legacy": {
+      "startup_available_bytes": 10737418240,
+      "native_rss_bytes": 8589934592,
+      "active_available_bytes": 2147483648
+    },
+    "explicit_schema2": {
+      "startup_available_bytes": 8589934592,
+      "native_rss_bytes": 6442450944,
+      "active_available_bytes": 2147483648
+    }
+  },
+  "preserved": [
+    "Full source and evidence identity/offsets",
+    "Four fixed development summaries and four questions",
+    "Model/profile/template and compact source-parts wire",
+    "Input/output/context/time and quality limits",
+    "Closed experiments and unconsumed v3 registration with both resource refusals",
+    "Frozen shared resource guard"
+  ],
+  "verification": {
+    "candidate_cases": 105,
+    "existing_candidate_cases": 82,
+    "new_policy_cases": 23,
+    "selected_frozen_guard_cases": 6,
+    "total_cases": 111,
+    "pytest_seconds": 3.92,
+    "pytest_wrapper_seconds": 5.078000000037719,
+    "ruff": "passed",
+    "first_failures_preserved": [
+      "Schema2 unsupported before implementation: one failing regression",
+      "Ruff import spacing finding before final cleanup"
+    ]
+  },
+  "evidence_clarifications": [
+    "Legacy resource values and behavior are retained; report and terminal contain additive policy metadata and are not byte-identical.",
+    "Thirty original test functions are retained. The preservation record's 35 count includes four helpers and one class, not 35 tests."
+  ],
+  "runtime": {
+    "actual_resource_observations": 0,
+    "native_starts": 0,
+    "tokenizer_calls": 0,
+    "completion_calls": 0,
+    "new_registration_created": false
+  },
+  "limitations": [
+    "Synthetic checks do not prove generation fits the 6GiB native RSS budget.",
+    "Sampled stop thresholds are not OS memory reservations or peak allocation limits.",
+    "Exact source CI and a separate registration/observer with matching policy precede actual execution.",
+    "User review and Phase1 completion remain pending."
+  ],
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 1,
+    "advisory_id": "RE-A1",
+    "disposition": "Accepted evidence wording clarification; original receipts retained; no source repair required",
+    "receipt_sha256": "2b59580e56f7f844d6c648036e8d9cace8d058bdd7534605a8d73b811cfb6d19",
+    "inputs_verified": 29,
+    "tests_rerun": false
+  },
+  "source_files": [
+    {
+      "file": "scripts/probe_meeting_local_candidate.py",
+      "sha256": "e33430bef56b27def6c88cac269bddb48f809ac96651fde9a777a957765464f1"
+    },
+    {
+      "file": "tests/test_probe_meeting_local_candidate.py",
+      "sha256": "6216d6971514dd49535b0de035a6a62b8cb22655c7d23d6b2a30528e10de6000"
+    }
+  ],
+  "reproduce_command": ".venv/Scripts/python.exe -B -X utf8 -m pytest tests/test_probe_meeting_local_candidate.py tests/test_probe_meeting_summary_mode.py::test_resource_boundary_and_reused_pid_never_killed tests/test_probe_meeting_summary_mode.py::test_resources_fail_closed tests/test_probe_meeting_summary_mode.py::test_resource_error_aborts_remaining_completions tests/test_probe_meeting_summary_mode.py::test_resource_sampler_has_new_721_bound_without_changing_old_sampler tests/test_probe_meeting_summary_mode.py::test_repair_resource_guard_binds_initial_launcher_creation_time -q"
+}

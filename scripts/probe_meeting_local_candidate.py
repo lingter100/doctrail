@@ -13,9 +13,11 @@ import re
 import secrets
 import subprocess
 import time
+from collections.abc import Mapping
 from contextlib import ExitStack, contextmanager, nullcontext
 from dataclasses import dataclass
 from pathlib import Path
+from types import MappingProxyType
 
 from doctrail.inference import WorkerError
 from doctrail.meeting_contract import grounded_answer_refs, meeting_units, strict_json
@@ -61,6 +63,17 @@ LIMITS = {"input_tokens": 4096, "summary_tokens": 768, "review_tokens": 128,
           "whole_seconds": 1025, "completion_calls": 12, "generation_calls": 8,
           "requested_tokens": 4608, "startup_available_bytes": 10 * 1024**3,
           "active_available_bytes": 2 * 1024**3, "native_rss_bytes": 8 * 1024**3}
+@dataclass(frozen=True)
+class ResourcePolicy:
+    name: str
+    limits: Mapping[str, int]
+
+
+LEGACY_RESOURCES = ResourcePolicy("legacy", MappingProxyType(dict(LIMITS)))
+RSS6_RESOURCES = ResourcePolicy("native-rss6-host2-v1", MappingProxyType({
+    **LIMITS, "native_rss_bytes": 6 * 1024**3, "startup_available_bytes": 8 * 1024**3}))
+
+
 CONTENT_ERRORS = frozenset({"generation_invalid_json", "generation_invalid_schema", "generation_invalid_evidence",
     "generation_summary_insufficient", "generation_summary_review_rejected",
     "generation_language_mismatch", "generation_input_limit", "generation_partition_limit",
@@ -139,6 +152,39 @@ class CandidateFailure(RuntimeError):
 def require(value, code):
     if not value:
         raise CandidateFailure(code)
+
+
+def registration_policy(spec):
+    """Pure strict policy interpretation shared with a separately assigned observer."""
+    required = {"schema_version", "diagnostic", "prepared", "limits", "profile", "input", "criteria_locks",
+                "code", "assets", "model_root", "output_dir", "order"}
+    require(isinstance(spec, dict) and type(spec.get("schema_version")) is int
+            and spec["schema_version"] in (1, 2), "registration_contract")
+    policy = LEGACY_RESOURCES if spec["schema_version"] == 1 else RSS6_RESOURCES
+    if spec["schema_version"] == 2:
+        required.add("resource_policy")
+        require(spec.get("resource_policy") == policy.name, "registration_contract")
+    require(set(spec) in (required, required | {"source_wire_format"})
+            and spec["diagnostic"] == ID and spec["prepared"] is True
+            and encoded(spec["limits"]) == encoded(dict(policy.limits)), "registration_contract")
+    wire_format(spec.get("source_wire_format", LEGACY_WIRE))
+    return policy
+
+
+class CandidateResourceGuard(ResourceGuard):
+    """Lower only the native cap on the same owned sample; reuse all lifecycle logic."""
+    def check(self):
+        row = super().check()
+        if row["rss"] > RSS6_RESOURCES.limits["native_rss_bytes"]:
+            self.failure = "resources"  # inherited arm must not relabel this as deadline
+            raise ValueError("summary_mode_resources")
+        return row
+
+
+def make_resource_guard(process, policy, **kwargs):
+    require(policy is LEGACY_RESOURCES or policy is RSS6_RESOURCES, "resource_policy")
+    guard = ResourceGuard if policy is LEGACY_RESOURCES else CandidateResourceGuard
+    return guard(process, **kwargs)
 
 
 def remaining(clock, deadline):
@@ -469,9 +515,13 @@ def checked_assets(spec, profile, receipt, root):
 
 
 @contextmanager
-def launch(profile, model_root, deadline, metrics, *, prepared, root=ROOT, clock=time.monotonic):
+def launch(profile, model_root, deadline, metrics, *, prepared, policy=LEGACY_RESOURCES,
+           root=ROOT, clock=time.monotonic):
     """Small profile seam; leases, readiness, drain and cleanup are shared primitives."""
     import psutil
+    require(policy is LEGACY_RESOURCES or policy is RSS6_RESOURCES, "resource_policy")
+    limits = policy.limits
+    metrics.update(resource_policy=policy.name, effective_limits=dict(limits))
     with ExitStack() as stack:
         for name in ("meeting-generation.gpu.lock", "meeting-generation.worker.lock", "meeting-llama.lease"):
             stack.enter_context(worker_lease(root / ".local" / name))
@@ -489,9 +539,9 @@ def launch(profile, model_root, deadline, metrics, *, prepared, root=ROOT, clock
         remaining(clock, deadline)
         available = psutil.virtual_memory().available
         metrics["startup_ram_gate"] = {"stage": "before_native_popen", "available_bytes": available,
-            "minimum_bytes": LIMITS["startup_available_bytes"],
-            "passed": available >= LIMITS["startup_available_bytes"],
-            "elapsed_seconds": clock() - (deadline - LIMITS["startup_seconds"])}
+            "minimum_bytes": limits["startup_available_bytes"],
+            "passed": available >= limits["startup_available_bytes"],
+            "elapsed_seconds": clock() - (deadline - limits["startup_seconds"])}
         require(metrics["startup_ram_gate"]["passed"], "startup_ram")
         try:
             metrics["process_creation_attempted"] = True
@@ -501,7 +551,7 @@ def launch(profile, model_root, deadline, metrics, *, prepared, root=ROOT, clock
             metrics.update(owned_pid=process.pid, owned_create_time=owned_create_time(process))
             drain = DiscardDrain(process.stdout)
             drain.start()
-            guard = ResourceGuard(process, clock=clock, expected_created=metrics["owned_create_time"])
+            guard = make_resource_guard(process, policy, clock=clock, expected_created=metrics["owned_create_time"])
             with guard.arm(deadline, metrics.setdefault("startup_resources", {})):
                 wait_ready(process, f"http://127.0.0.1:{port}/health",
                            headers={"Authorization": "Bearer " + token}, timeout=remaining(clock, deadline))
@@ -515,13 +565,7 @@ def verify_registration(path, expected_sha, root=ROOT):
     require(re.fullmatch(r"[a-f0-9]{64}", expected_sha) and sha(path.read_bytes()) == expected_sha,
             "registration_identity")
     spec = strict_json(path.read_text(encoding="utf-8"))
-    required = {"schema_version", "diagnostic", "prepared", "limits", "profile", "input", "criteria_locks",
-                "code", "assets", "model_root", "output_dir", "order"}
-    require(isinstance(spec, dict) and set(spec) in (required, required | {"source_wire_format"})
-            and type(spec["schema_version"]) is int and spec["schema_version"] == 1
-            and spec["diagnostic"] == ID and spec["prepared"] is True
-            and encoded(spec["limits"]) == encoded(LIMITS), "registration_contract")
-    wire_format(spec.get("source_wire_format", LEGACY_WIRE))
+    registration_policy(spec)
     require(spec["profile"]["file"] == PROFILE and spec["profile"]["sha256"] == PROFILE_SHA,
             "profile_binding")
     require(isinstance(spec["criteria_locks"], dict) and set(spec["criteria_locks"]) == {"summary", "qa"},
@@ -554,6 +598,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
     started = clock()
     spec, documents, output, prepared = verify_registration(path, expected_sha, root)
     source_wire_format = spec.get("source_wire_format", LEGACY_WIRE)
+    policy = registration_policy(spec)
     output.mkdir(parents=True, exist_ok=False)  # reservation survives every subsequent failure
     private = output / "private"
     private.mkdir()
@@ -571,8 +616,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
     try:
         remaining(clock, started + 120)
         with launch(root / PROFILE, root / spec["model_root"], started + 120, metrics,
-                    prepared=prepared, root=root, clock=clock) as service:
-            guard = ResourceGuard(service.process, clock=clock, expected_created=metrics["owned_create_time"])
+                    prepared=prepared, policy=policy, root=root, clock=clock) as service:
+            guard = make_resource_guard(service.process, policy, clock=clock, expected_created=metrics["owned_create_time"])
             adapter = CandidateAdapter(service.url, service.token, root / PROFILE, clock=clock,
                                        observe=emit, resource_check=guard.check)
             adapter.begin_request(started + 120)
@@ -603,7 +648,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
         report["stop_reason"] = report["stop_reason"] or record
         report.update(status="stopped", operational_complete=False, mechanically_complete=False)
     finally:
-        report.update(cleanup=metrics, registration_sha256=expected_sha, limits=LIMITS,
+        report.update(cleanup=metrics, registration_sha256=expected_sha, limits=dict(policy.limits),
+                      resource_policy=policy.name, resource_limit_scope="sampled_stop_thresholds_not_reservation_or_peak_limits",
                       source_wire_format=source_wire_format,
                       retries=0, AI_quality=False, effective_offload_layers=None,
                       gpu_layers_requested=99, gpu_samples=gpu_samples,
@@ -639,7 +685,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
         if clock() - started > 1025:
             report.update(status="stopped", operational_complete=False, mechanically_complete=False)
             report["stop_reason"] = report["stop_reason"] or {"code": "local_candidate_whole_deadline"}
-        terminal = {"source_wire_format": source_wire_format,
+        terminal = {"source_wire_format": source_wire_format, "resource_policy": policy.name,
+                    "limits": dict(policy.limits),
                     "startup_ram_gate": metrics.get("startup_ram_gate"), "status": report["status"], "mechanically_complete": report["mechanically_complete"],
                     "operational_complete": report["operational_complete"], "stop_reason": report["stop_reason"],
                     "registration_sha256": expected_sha, "report_sha256": sha((output / "report.json").read_bytes()),
