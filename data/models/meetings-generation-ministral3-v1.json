@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "purpose": "One explicit offline meeting summary and whole-source QA capability pilot; not validated or adopted",
+  "metadata_verified_date": "2026-10-26",
+  "model": "mistralai/Ministral-3-3B-Instruct-2512",
+  "revision": "b35d4dfe56c142746f54dbd64f579faab2744308",
+  "license": "Apache-2.0",
+  "gguf": {
+    "repo_id": "mistralai/Ministral-3-3B-Instruct-2512-GGUF",
+    "revision": "fc774f009f0c62a186f48e870fd6295b36f63779",
+    "provenance": "Official Mistral Q5_K_M quantization; text-only pilot without vision projector",
+    "filename": "Ministral-3-3B-Instruct-2512-Q5_K_M.gguf",
+    "size_bytes": 2474178720,
+    "sha256": "e23dd88b0e0951d3f5784d6d4092210cda2b006b251f33b226b283a6c9d1f6bb",
+    "url": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512-GGUF/resolve/fc774f009f0c62a186f48e870fd6295b36f63779/Ministral-3-3B-Instruct-2512-Q5_K_M.gguf"
+  },
+  "llama": {
+    "repository": "ggml-org/llama.cpp",
+    "tag": "b11429",
+    "commit": "d81235049384534c167caea52b85a694f6103d14",
+    "platform": "windows-x64-cuda-12.4",
+    "license": "MIT",
+    "assets": [
+      {
+        "filename": "llama-b11429-bin-win-cuda-12.4-x64.zip",
+        "size_bytes": 264478423,
+        "sha256": "dd6df685c1024e6aa55ca55ad35038692d5e284d4dc895e7a646c3245d3d14ff",
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11429/llama-b11429-bin-win-cuda-12.4-x64.zip"
+      },
+      {
+        "filename": "cudart-llama-bin-win-cuda-12.4-x64.zip",
+        "size_bytes": 391443627,
+        "sha256": "8c79a9b226de4b3cacfd1f83d24f962d0773be79f1e7b75c6af4ded7e32ae1d6",
+        "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11429/cudart-llama-bin-win-cuda-12.4-x64.zip"
+      }
+    ]
+  },
+  "licenses": [
+    {
+      "filename": "Ministral-MODEL-CARD.md",
+      "size_bytes": 31,
+      "sha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7",
+      "url": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512-GGUF/resolve/fc774f009f0c62a186f48e870fd6295b36f63779/README.md"
+    },
+    {
+      "filename": "Apache-2.0.txt",
+      "size_bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+    },
+    {
+      "filename": "llama.cpp-LICENSE.txt",
+      "size_bytes": 1078,
+      "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049384534c167caea52b85a694f6103d14/LICENSE"
+    }
+  ],
+  "constraints": {
+    "explicit_download_only": true,
+    "service_downloads": false,
+    "external_api": false,
+    "quality_verified": false,
+    "human_reviews": 0
+  },
+  "local_execution": {
+    "gpu_layers": 99,
+    "context_tokens": 6144,
+    "parallel": 1,
+    "cache_type_k": "f16",
+    "cache_type_v": "f16",
+    "reasoning": "off",
+    "model_quality_verified": false,
+    "automatic_fallback": false
+  }
+}

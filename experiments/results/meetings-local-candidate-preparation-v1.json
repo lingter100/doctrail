@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "prospective_free_local_meeting_generation_capability_pilot_preparation",
+  "status": "assets_data_and_implementation_review_ready_actual_execution_pending",
+  "design": {
+    "path": "docs/MEETINGS-SUMMARY-NEXT-DECISION.md",
+    "sha256": "26cd9dc5d3fa07b4005a1ecf4f26c28cec5c6c6780f8cfcc3f461f18f2ad0481"
+  },
+  "model_profile": {
+    "path": "data/models/meetings-generation-ministral3-v1.json",
+    "sha256": "2b4d19c14af2697188d6a07a41b1ea971c1eaefec68fbc9beb035d74906f1de7",
+    "bytes": 3008
+  },
+  "assets": {
+    "model": {
+      "path": "Ministral-3-3B-Instruct-2512-Q5_K_M.gguf",
+      "size_bytes": 2474178720,
+      "sha256": "e23dd88b0e0951d3f5784d6d4092210cda2b006b251f33b226b283a6c9d1f6bb"
+    },
+    "runtime_files": 55,
+    "setup_receipt_sha256": "0fd332ffcd982a11a2c8b7da5eea22c886911be35917d4e1290f25a797ed6938",
+    "runtime_downloads": 0,
+    "official_weight_downloads": 1,
+    "cached_runtime_archives_copied_and_verified": 2,
+    "models_loaded": 0
+  },
+  "data": {
+    "sources": 4,
+    "repository_families": 2,
+    "questions": 4,
+    "AI_authored_questions": 4,
+    "author_source_assessments": 4,
+    "independent_AI_source_only_reviews": 4,
+    "independent_review_accepted": 4,
+    "withheld": 0,
+    "blockers": 0,
+    "exact_QA_source_spans": 16,
+    "required_QA_semantic_elements": 13,
+    "human_reviews": 0,
+    "question_input_sha256": "97264c18c07daa1014399aaffbc2c3e4e2644914b181e3f285fb5584407461d3",
+    "QA_criteria_sha256": "b65a17c51f985b9345dde00f7e012ae2880f4e395356428820ff4f44ec80f564",
+    "QA_adoption_lock_sha256": "e7134494e68f8f42ac67149bae10fd11a8b2d007fd8e1541462d04a47f561f82",
+    "independent_safe_receipt_sha256": "55a782f67118850fdb60cc811b7b049d70f35bc62bad0315cef8c5fa1621b83f",
+    "existing_summary_criteria_unchanged": true,
+    "existing_qualified_witnesses_unchanged": true,
+    "future_protected_exclusions": "data/evaluation/meetings-summary-qualified-development-exclusions-v1.json",
+    "revision_policy": "local first import revision 1; upstream repository commit remains separately bound"
+  },
+  "limits": [
+    "Source-only AI question/criteria review, not actual model quality or user review.",
+    "Four answerable single-document development questions; not a protected final evaluation or full search/ACL RAG benchmark.",
+    "Model weights verified, but native loading, template fit, output quality, latency and resource suitability are not yet measured.",
+    "Original qualified candidate HOLD and all failures/criteria remain preserved."
+  ],
+  "actual_outputs": 0,
+  "paid_calls": 0,
+  "public_service_deployment": false,
+  "implementation": {
+    "initial_preserved": {
+      "source_refs": [
+        {
+          "file": "scripts/probe_meeting_local_candidate.py",
+          "size_bytes": 28696,
+          "sha256": "651323be8ff6dbb4f68c547ef2c08532f2f069596bf9dc915519379fe2d4fe0b"
+        },
+        {
+          "file": "tests/test_probe_meeting_local_candidate.py",
+          "size_bytes": 21562,
+          "sha256": "15cde503e073e4ed7280a1782a93ee878fe224c8e008db8841b3196619345474"
+        }
+      ],
+      "tests": {
+        "passed": 39,
+        "seconds": 1.33,
+        "Ruff": "passed",
+        "scope": "synthetic mock transport and fake process/file cases; no native model"
+      },
+      "first_failure_preserved": "Boolean predicted_n was accepted as integer1; failing regression preserved before strict-int fix",
+      "existing_bound_files_unchanged": true,
+      "frozen77_verified": 77,
+      "independent_code_review": "pending",
+      "actual_model_runs": 0
+    },
+    "source_refs": [
+      {
+        "file": "scripts/probe_meeting_local_candidate.py",
+        "size_bytes": 28723,
+        "sha256": "615e20f45f667e73e9a8cb33ae34b8808f2632dfb4974e8eb7f7980dd2a4eeda"
+      },
+      {
+        "file": "tests/test_probe_meeting_local_candidate.py",
+        "size_bytes": 24196,
+        "sha256": "3f7b16cfb3c2ef9df1ca62daa0583fb75164d86b33a565bf45e8d3bcebe87d9b"
+      }
+    ],
+    "tests": {
+      "passed": 43,
+      "seconds": 1.21,
+      "Ruff": "passed",
+      "scope": "synthetic only"
+    },
+    "independent_initial_review": {
+      "blockers": 1,
+      "id": "LC-R1",
+      "sha256": "bedc301f0b9d5bb7f0b0b99cd3d27c09baf388fbd6559f5161d0b0dbc89038a3"
+    },
+    "repair": {
+      "receipt_sha256": "474b7654be1e045fb53c216fc6bd11094d2f721172f925c8fbe8078c8ebf6c40",
+      "prefail": "3 failed, 1 passed, 39 deselected",
+      "change": "Only generation_invalid_json added to CONTENT_ERRORS. Existing strict model-content parsers now record a rejection and continue fixed QA/source order. generation_backend_protocol and resource/runtime failures still halt; no regeneration or budget changes.",
+      "old_failure_and_39_tests_preserved": true
+    },
+    "independent_delta_review": {
+      "remaining_blockers": 0,
+      "sha256": "1d7f9b466e1ce497440e88c57c8aa5d6d49a7f94c6c60193ae1f6e41b0540a56",
+      "source_bindings_verified": true
+    },
+    "actual_model_runs": 0
+  },
+  "required_CI_at_record_creation": "new source not yet published; check the exact source commit and subsequent execution receipt"
+}
