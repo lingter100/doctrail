@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "status": "implemented_synthetic_validated_independently_reviewed",
+  "scope": "Explicit offline candidate wire only; Java/React service defaults unchanged.",
+  "design": {
+    "file": "docs/MEETINGS-LOCAL-CANDIDATE-INPUT-NEXT.md",
+    "size_bytes": 5679,
+    "sha256": "042f28e980237e3af1fbcfd27e5d7fdb0fe73d2d49920911fd355e7f38347dfc"
+  },
+  "source": [
+    {
+      "file": "scripts/probe_meeting_local_candidate.py",
+      "size_bytes": 36964,
+      "sha256": "c60c7e65f13e73b893a2e23ff12cd01cca2502f9e7574ee97a7a50a6131218db"
+    },
+    {
+      "file": "tests/test_probe_meeting_local_candidate.py",
+      "size_bytes": 40102,
+      "sha256": "69d8bbd9600a2fa4895dd41eb2ce33d876708073054834d072a4f3779e056755"
+    }
+  ],
+  "change": [
+    "Only optional source_wire_format registration key added; absent/explicit legacy preserves serialized message bytes",
+    "Opt-in compact projects each canonical gap to its exact string and each unit to original [ID,text]",
+    "Existing summary_messages finishes review evidence linking before shared summary/review/QA transport projection",
+    "Fixed design legend appended only in compact; other payload values remain unchanged and existing messages/safe_payload serialize the object",
+    "Canonical exact content, full parts order and per-unit original ID/text invariants are checked; local corruption stops before HTTP",
+    "Actual selected wire is recorded in report and terminal; no fallback or CLI/environment override"
+  ],
+  "validation": {
+    "prefail": "20 failed, 4 passed, 58 deselected on original driver; preserved",
+    "first_full": "82 passed in 2.99s; Ruff found one unused new test variable; source and logs preserved",
+    "final_full": "82 passed in 3.15s",
+    "final_Ruff": "passed",
+    "original58_tests": "retained; no retired tests",
+    "source_line_endings": "LF"
+  },
+  "preservation": {
+    "fixed_current_refs": 220,
+    "original_source_refs_via_archives": 2,
+    "consumed_v2_output_files": 50,
+    "frozen77": true,
+    "unchanged_AST_contracts": [
+      "LIMITS",
+      "CONTENT_ERRORS",
+      "PROFILE",
+      "PROFILE_SHA",
+      "MODEL_SHA",
+      "CODE_FILES",
+      "validate_input",
+      "CandidateAdapter",
+      "command",
+      "CheckedAssets",
+      "runtime_path_set",
+      "checked_assets",
+      "launch"
+    ]
+  },
+  "budgets_unchanged": {
+    "input_tokens": 4096,
+    "summary_review_QA_tokens": [
+      768,
+      128,
+      256
+    ],
+    "summary_shared_seconds": 120,
+    "QA_seconds": 60,
+    "ctx": 6144,
+    "startup_active_cleanup_whole_seconds": [
+      120,
+      900,
+      5,
+      1025
+    ],
+    "startup_RAM_bytes": 10737418240,
+    "source_and_QA_denominators": [
+      4,
+      4
+    ],
+    "generation_and_review_max": [
+      8,
+      4
+    ],
+    "requested_token_max": 4608
+  },
+  "independent_review": {
+    "status": "no_blockers_in_reviewed_delta",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "blockers": 0,
+    "advisories": 0,
+    "inputs_verified": 28,
+    "tests_rerun": false
+  },
+  "source_CI": {
+    "status": "pending_source_commit"
+  },
+  "evidence": [
+    {
+      "file": ".local/meeting-local-candidate-compact-implementation-v1/receipt.json",
+      "size_bytes": 7296,
+      "sha256": "67bec5d8d4bd3ed3abc462889e9c194e88106bd723d3d48d7ab447d6ad68f2a5"
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-compact-implementation-acceptance-v1.json",
+      "size_bytes": 798,
+      "sha256": "c237950ceab80c084c2bd49604b12e6b6772f1af88157717ac9433e2113df1b9"
+    },
+    {
+      "file": ".local/meeting-local-candidate-compact-code-review-v1/receipt-v1.json",
+      "size_bytes": 13538,
+      "sha256": "c1e4445f503ceb98b6e8310dbd407b1d81357351f6d660f0276c78ee0aee8e8b"
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-compact-review-acceptance-v1.json",
+      "size_bytes": 253,
+      "sha256": "fbfae1c4f2ee7fcb478f6eaefa091e6a51a0c9607ea6a1c52b358ff4ab991fe0"
+    }
+  ],
+  "actual_new_model_calls": 0,
+  "actual_new_tokenizer_calls": 0,
+  "limits": [
+    "Synthetic checks verify wire preservation and contract handling, not actual token savings or fit.",
+    "No new summary/QA quality result; original consumed failures stay unchanged.",
+    "Exact source CI and a new separately bound one-time actual run remain necessary."
+  ],
+  "phase1_complete": false,
+  "public_service_deployed": false
+}

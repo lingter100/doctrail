@@ -1,4 +1,20 @@
 # 진행 상태
+## 2026-10-26 · 전송 형식 수정의 독립 검토 완료
+
+Astra xhigh의 변경분 검토c1e4445f에서 차단0·추가권고0이며 부모가28입력을대조했다. 기존legacy바이트·원문/ID·전체순서·자체검토근거연결·4096한도·원래종료계약이유지된다. 기존58검사는그대로이고새24검사를더해82개를통과했다. [구현 검증 기록](../experiments/results/meetings-local-candidate-compact-v1.json)에초기실패와실제토큰/품질미확인을남겼다.
+
+모든코드소유자는반환했다. 검증된source2와안내를사용자명의로commit하고,기존계획의push40273275050 Java검사종료를같은watch26040으로확인한뒤새소스를push한다. PR40273280275의필수3개는이미통과했다. 진행중인검사를취소하거나성공으로간주하지않으며새실행등록/native/tokenizer는아직0이다. 전체goal ACTIVE다.
+
+## 2026-10-26 · 전송 형식 구현 반환과 독립 검토
+
+기존 Astra high가 source2를c60c7e65/69d8bbd9로 반환했다. 기존58개를 유지한82합성검사/3.15초·Ruff를 통과했고 초기20실패와 첫Ruff지적을 보존했다. 부모가21구현참조·220고정참조·before2사본 및 기존28개테스트 정의 AST일치를 확인했다(c237950c). 같은 Astra xhigh 설계자에게 구현자와 분리된 변경분 검토를 배정했으며 새 모델·tokenizer·Java 실행은0이다.
+
+계획8f3의 PR40273280275 필수3개는 성공했고watch27840은exit0으로닫혔다. push40273275050은Java Maven단계가진행중이며같은watch26040을관찰한다. 현재진행중검사를취소하는push·재실행을하지않고 독립검토와필수CI확인뒤소스를공개한다. 전체goal ACTIVE다.
+
+## 2026-10-26 · 원문 보존 전송 형식 구현 시작
+
+결과·설계9파일을 사용자 author/committer의8f3fa34로commit/push하고 Git/current 동일성과 PR14draft head·설명을 확인했다. 양쪽CI40273275050/40273280275는 같은watch26040/27840으로 관측중이다. 기존 Astra high에게 candidate source/test2와 새 구현 증거 폴더만 배정했다. 기존58회귀·원본v2·동결 자료를 보존하며 실제 모델·tokenizer·Java나 새 실행 등록은 아직 배정하지 않는다. 전체goal ACTIVE다.
+
 ## 2026-10-26 · 실제 입력 한도 거부와 원문 보존 후속 설계
 
 새 등록의 공식CLI1회는14.578초/exit1로 종료됐다. 실제 시작RAM11,172,413,440B가 기존10GiB조건을 통과했고 native1·template8·tokenize8을 확인했다. 요약4·QA4의 입력은4,570~5,771토큰으로4096한도를 모두 넘어 completion0이며, 모델 내용 품질 결과는 없다. 부모가220해시참조·sealed50파일·소유10신원 부재를 확인해 고정을 해제했다(7d20c403). [실제 v2 결과](../experiments/results/meetings-local-candidate-actual-v2.json)는 소비된 결과로 보존하며 원래 시작RAM실패도 유지한다.

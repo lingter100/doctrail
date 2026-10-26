@@ -37,7 +37,7 @@ $env:PYTHONUTF8 = '1'
 
 ## 입력 한도 후속 변경
 
-[실제 v2 기록](../experiments/results/meetings-local-candidate-actual-v2.json)의 summary/QA 입력은4,570~5,771토큰이다. [설계](MEETINGS-LOCAL-CANDIDATE-INPUT-NEXT.md)는 원문을 보존하고 unit을 `[id,text]`, gap을 원래 문자열로 전송하는 명시적 선택형식을 제안한다. 서버의 원래 위치 map과 검토 연결은 유지하며 아직 구현·실제 적합성 검증 전이다. 새 등록은 `source_wire_format`을 고정하고 기존 등록을 수정하지 않는다.4096·mandatory review·실행예산은 불변이다.
+[실제 v2 기록](../experiments/results/meetings-local-candidate-actual-v2.json)의 summary/QA 입력은4,570~5,771토큰이다. [설계](MEETINGS-LOCAL-CANDIDATE-INPUT-NEXT.md)는 원문을 보존하고 unit을 `[id,text]`, gap을 원래 문자열로 전송하는 명시적 선택형식을 제안한다. 서버의 원래 위치 map과 검토 연결을 유지하는 구현을 마쳤고82합성검사·독립검토를 통과했다. [구현 기록](../experiments/results/meetings-local-candidate-compact-v1.json)은 실제 토큰 적합성이나 내용 품질 검증을 뜻하지 않는다. 새 등록은 `source_wire_format`을 고정하고 기존 등록을 수정하지 않는다.4096·mandatory review·실행예산은 불변이다.
 
 ## 실제 실행 기록
 

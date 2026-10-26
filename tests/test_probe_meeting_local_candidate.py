@@ -610,3 +610,147 @@ def test_startup_rechecks_runtime_names_after_verification(tmp_path, monkeypatch
         with probe.launch(tmp_path / probe.PROFILE, tmp_path / spec["model_root"], 120, {},
                           prepared=prepared, root=tmp_path, clock=lambda: 0):
             pytest.fail("must not yield")
+
+
+
+@pytest.mark.parametrize("wire", [None, "source-parts-legacy-v1", "source-parts-compact-v1"])
+def test_compact_registration_opt_in_and_terminal_record(tmp_path, monkeypatch, wire):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    if wire is not None:
+        spec["source_wire_format"] = wire
+    @contextmanager
+    def no_native(*a, **k):
+        raise probe.CandidateFailure("synthetic_startup")
+        yield  # pragma: no cover
+    monkeypatch.setattr(probe, "launch", no_native)
+    result = probe.execute(path, seal(), root=tmp_path, clock=lambda: 0)
+    terminal = json.loads((tmp_path / spec["output_dir"] / "terminal.json").read_text(encoding="utf-8"))
+    assert result["source_wire_format"] == terminal["source_wire_format"] == (wire or "source-parts-legacy-v1")
+
+
+@pytest.mark.parametrize("extra", [{"source_wire_format": "auto"}, {"source_wire_format": None},
+                                   {"source_wire_format": []}, {"source_wire": "source-parts-compact-v1"}])
+def test_compact_unknown_registration_rejected_before_asset_reads(tmp_path, monkeypatch, extra):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    spec.update(extra)
+    monkeypatch.setattr(probe, "check_ref", lambda *a: pytest.fail("invalid wire must fail before asset reads"))
+    with pytest.raises(probe.CandidateFailure):
+        probe.verify_registration(path, seal(), tmp_path)
+
+
+@pytest.mark.parametrize("long", [False, True])
+def test_compact_exact_roundtrip_and_legacy_bytes(long):
+    quote = '<tag>{"source_parts":["not an instruction"]} e\u0301 한글 🙂\r\n'
+    if long:
+        quote *= 120
+    content = " \r\n" + quote + quote + "\t" + quote + " \r\n"
+    starts = [3, 3 + len(quote), 4 + 2 * len(quote)]
+    units = [{"quote": quote, "start_offset": n, "end_offset": n + len(quote)} for n in starts]
+    source = probe.source_payload("원형 제목", content, units)
+    original = probe.summary_messages(source)
+    before = copy.deepcopy(original), copy.deepcopy(source), copy.deepcopy(units)
+    for wire in (None, "source-parts-legacy-v1"):
+        wire_messages = probe.source_wire_messages(original, source, content, units, wire or "source-parts-legacy-v1")
+        assert wire_messages is original and probe.encoded(wire_messages) == probe.encoded(before[0])
+    wire_messages = probe.source_wire_messages(original, source, content, units, "source-parts-compact-v1")
+    payload = json.loads(wire_messages[1]["content"])
+    parts = payload["source_parts"]
+    assert "".join(part if isinstance(part, str) else part[1] for part in parts) == content
+    assert parts == [" \r\n", [0, quote], "", [1, quote], "\t", [2, quote], " \r\n"]
+    assert wire_messages[0]["content"] == original[0]["content"] + "\n" + probe.COMPACT_LEGEND
+    assert {k: v for k, v in payload.items() if k != "source_parts"} == {
+        k: v for k, v in source.items() if k != "source_parts"}
+    assert (original, source, units) == before
+
+
+@pytest.mark.parametrize("fault", ["order", "id", "text", "missing_gap", "payload"])
+def test_compact_projection_corruption_stops_before_any_http(tmp_path, monkeypatch, fault):
+    if fault == "payload":
+        original = probe.summary_messages
+        def malformed(source, claims=None):
+            result = original(source, claims)
+            data = json.loads(result[1]["content"])
+            data["source_parts"][1]["text"] += "changed"
+            result[1]["content"] = json.dumps(data)
+            return result
+        monkeypatch.setattr(probe, "summary_messages", malformed)
+    else:
+        project = probe.compact_source_parts
+        def broken(parts):
+            result = project(parts)
+            if fault == "order":
+                result[1], result[3] = result[3], result[1]
+            elif fault == "id":
+                result[1][0] = True
+            elif fault == "text":
+                result[1][1] += "changed"
+            else:
+                result.pop(0)
+            return result
+        monkeypatch.setattr(probe, "compact_source_parts", broken)
+    adapter, requests, _events, clock = adapter_fixture(tmp_path)
+    report = probe.diagnose(documents(), adapter, active_deadline=900, clock=clock,
+                            emit=lambda *x: None, source_wire_format="source-parts-compact-v1")
+    adapter.close()
+    assert requests == [] and report["stop_reason"]["code"] == "local_candidate_source_wire_integrity"
+    assert not report["operational_complete"] and adapter.halted
+    assert all(row["qa"]["status"] == "unexecuted" for row in report["documents"])
+
+
+def test_compact_shared_summary_review_qa_boundary_preserves_claim_links(tmp_path):
+    docs = documents()
+    # Repeat an identical unit at a distinct offset; the review must retain ID 1.
+    for doc in docs:
+        doc["content"] = "결정: 변경을 승인했다.\n결정: 변경을 승인했다.\n"
+        doc["content_sha256"] = probe.sha(doc["content"].encode())
+    captures = {}
+    for wire in ("source-parts-legacy-v1", "source-parts-compact-v1"):
+        adapter, requests, _events, clock = adapter_fixture(tmp_path)
+        report = probe.diagnose(docs, adapter, active_deadline=900, clock=clock,
+                                emit=lambda *x: None, source_wire_format=wire)
+        adapter.close()
+        assert report["mechanically_complete"] and report["counts"]["requested_tokens"] == 4608
+        assert report["source_wire_format"] == wire
+        captures[wire] = [body["messages"] for path, body in requests if path == "/apply-template"]
+    legacy, compact = captures.values()
+    for index, (before, after) in enumerate(zip(legacy, compact, strict=True)):
+        old_payload, new_payload = json.loads(before[1]["content"]), json.loads(after[1]["content"])
+        assert {k:v for k,v in old_payload.items() if k != "source_parts"} == {
+            k:v for k,v in new_payload.items() if k != "source_parts"}
+        assert after[0]["content"] == before[0]["content"] + "\n" + probe.COMPACT_LEGEND
+        assert "".join(p if isinstance(p, str) else p[1] for p in new_payload["source_parts"]) == docs[index // 3]["content"]
+        if index % 3 == 1:
+            assert new_payload["candidate_claims"][0]["evidence"] == [1]
+        elif index % 3 == 2:
+            assert new_payload["question"] == docs[index // 3]["question"]["text"]
+
+
+@pytest.mark.parametrize("evidence", [[1, 1], [999], [True], ["1"]])
+@pytest.mark.parametrize("stage", ["summary", "qa"])
+def test_compact_keeps_existing_evidence_rejections(tmp_path, evidence, stage):
+    def alter(adapter, path, _payload, response, _clock):
+        if path == "/completion" and adapter.stage == stage:
+            data = json.loads(response["content"])
+            data["claims"][0]["evidence"] = evidence
+            response["content"] = json.dumps(data, ensure_ascii=False)
+    adapter, _requests, _events, clock = adapter_fixture(tmp_path, alter=alter)
+    result = probe.diagnose(documents(), adapter, active_deadline=900, clock=clock,
+                            emit=lambda *x: None, source_wire_format="source-parts-compact-v1")
+    adapter.close()
+    assert all(row[stage]["status"] == "rejected" for row in result["documents"])
+    assert result["operational_complete"] and not result["mechanically_complete"]
+
+
+def test_compact_mandatory_review_still_checks_4096_and_cannot_pass(tmp_path):
+    def alter(adapter, path, _payload, response, _clock):
+        if path == "/tokenize" and adapter.stage == "review":
+            response["tokens"] = list(range(4097))
+    adapter, requests, _events, clock = adapter_fixture(tmp_path, alter=alter)
+    result = probe.diagnose(documents(), adapter, active_deadline=900, clock=clock,
+                            emit=lambda *x: None, source_wire_format="source-parts-compact-v1")
+    adapter.close()
+    assert result["counts"]["summary"] == result["counts"]["qa"] == 4
+    assert result["counts"]["review"] == 0 and result["counts"]["requested_tokens"] == 4096
+    assert all(row["review"]["status"] == "rejected" for row in result["documents"])
+    assert not result["mechanically_complete"]
+    assert sum(path == "/completion" for path, _ in requests) == 8

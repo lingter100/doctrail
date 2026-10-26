@@ -51,6 +51,10 @@ ID = "local-candidate-development-v1"
 PROFILE = "data/models/meetings-generation-ministral3-v1.json"
 PROFILE_SHA = "2b4d19c14af2697188d6a07a41b1ea971c1eaefec68fbc9beb035d74906f1de7"
 MODEL_SHA = "e23dd88b0e0951d3f5784d6d4092210cda2b006b251f33b226b283a6c9d1f6bb"
+LEGACY_WIRE = "source-parts-legacy-v1"
+COMPACT_WIRE = "source-parts-compact-v1"
+COMPACT_LEGEND = ("source_parts is ordered: strings are verbatim gaps; [id,text] pairs are citable units. "
+                  "Read all entries. Evidence IDs refer only to those original unit IDs.")
 LIMITS = {"input_tokens": 4096, "summary_tokens": 768, "review_tokens": 128,
           "qa_tokens": 256, "summary_seconds": 120, "qa_seconds": 60,
           "startup_seconds": 120, "active_seconds": 900, "cleanup_seconds": 5,
@@ -165,6 +169,51 @@ def validate_input(data):
     return copy.deepcopy(data["documents"])
 
 
+def wire_format(value):
+    require(isinstance(value, str) and value in (LEGACY_WIRE, COMPACT_WIRE), "source_wire_format")
+    return value
+
+
+def compact_source_parts(parts):
+    """Project canonical parts without sorting, renumbering or changing strings."""
+    return [part["text"] if part["kind"] == "gap" else [part["id"], part["text"]] for part in parts]
+
+
+def source_wire_messages(request_messages, source, content, units, source_wire_format):
+    if wire_format(source_wire_format) == LEGACY_WIRE:
+        return request_messages  # Existing messages and serialized bytes remain untouched.
+    try:
+        require(isinstance(source, dict) and encoded(source) == encoded(
+            source_payload(source["untrusted_title"], content, units)), "source_wire_integrity")
+        require(isinstance(request_messages, list) and len(request_messages) == 2
+                and all(isinstance(message, dict) and set(message) == {"role", "content"}
+                        and isinstance(message["content"], str) for message in request_messages)
+                and [message["role"] for message in request_messages] == ["system", "user"],
+                "source_wire_integrity")
+        payload = strict_json(request_messages[1]["content"])
+        require(isinstance(payload, dict) and encoded(payload["source_parts"]) == encoded(source["source_parts"]),
+                "source_wire_integrity")
+        parts = compact_source_parts(source["source_parts"])
+        require(isinstance(parts, list) and len(parts) == len(source["source_parts"]), "source_wire_integrity")
+        texts = []
+        for original, projected in zip(source["source_parts"], parts, strict=True):
+            if original["kind"] == "gap":
+                require(isinstance(projected, str) and projected == original["text"], "source_wire_integrity")
+                texts.append(projected)
+            else:
+                require(isinstance(projected, list) and len(projected) == 2
+                        and type(projected[0]) is int and projected[0] == original["id"]
+                        and isinstance(projected[1], str) and projected[1] == original["text"],
+                        "source_wire_integrity")
+                texts.append(projected[1])
+        require("".join(texts) == content, "source_wire_integrity")
+        return messages(request_messages[0]["content"] + "\n" + COMPACT_LEGEND,
+                        {**payload, "source_parts": parts})
+    except (KeyError, TypeError, ValueError, WorkerError) as error:
+        # A malformed local projection is an execution failure, never a model rejection.
+        raise CandidateFailure("source_wire_integrity") from error
+
+
 class CandidateAdapter(GGUFGenerator):
     """Embedded template, existing bounded HTTP/completion validation, no Qwen suffix."""
     def __init__(self, *args, clock=time.monotonic, observe=None, resource_check=None, **kwargs):
@@ -249,8 +298,10 @@ class CandidateAdapter(GGUFGenerator):
             self.stage = None
 
 
-def diagnose(documents, adapter, *, active_deadline, emit, clock=time.monotonic, guard=None, checkpoint=None):
-    report = {"diagnostic": ID, "documents": [{"id": d["id"], "question_id": d["question"]["id"],
+def diagnose(documents, adapter, *, active_deadline, emit, clock=time.monotonic, guard=None, checkpoint=None,
+             source_wire_format=LEGACY_WIRE):
+    source_wire_format = wire_format(source_wire_format)
+    report = {"diagnostic": ID, "source_wire_format": source_wire_format, "documents": [{"id": d["id"], "question_id": d["question"]["id"],
               **{k: {"status": "unexecuted"} for k in ("summary", "review", "qa")}} for d in documents],
               "first_failure": None, "stop_reason": None, "summary_denominator": 4, "qa_denominator": 4}
 
@@ -259,6 +310,8 @@ def diagnose(documents, adapter, *, active_deadline, emit, clock=time.monotonic,
         try:
             remaining(clock, deadline)
             with guard.arm(deadline, metrics) if guard else nullcontext():
+                request_messages = source_wire_messages(request_messages, source, document["content"], units,
+                                                        source_wire_format)
                 if checkpoint:
                     checkpoint()
                 result = adapter.complete(document["id"], stage, request_messages, deadline)
@@ -462,11 +515,13 @@ def verify_registration(path, expected_sha, root=ROOT):
     require(re.fullmatch(r"[a-f0-9]{64}", expected_sha) and sha(path.read_bytes()) == expected_sha,
             "registration_identity")
     spec = strict_json(path.read_text(encoding="utf-8"))
-    require(isinstance(spec, dict) and set(spec) == {"schema_version", "diagnostic", "prepared", "limits",
-            "profile", "input", "criteria_locks", "code", "assets", "model_root", "output_dir", "order"}
+    required = {"schema_version", "diagnostic", "prepared", "limits", "profile", "input", "criteria_locks",
+                "code", "assets", "model_root", "output_dir", "order"}
+    require(isinstance(spec, dict) and set(spec) in (required, required | {"source_wire_format"})
             and type(spec["schema_version"]) is int and spec["schema_version"] == 1
             and spec["diagnostic"] == ID and spec["prepared"] is True
             and encoded(spec["limits"]) == encoded(LIMITS), "registration_contract")
+    wire_format(spec.get("source_wire_format", LEGACY_WIRE))
     require(spec["profile"]["file"] == PROFILE and spec["profile"]["sha256"] == PROFILE_SHA,
             "profile_binding")
     require(isinstance(spec["criteria_locks"], dict) and set(spec["criteria_locks"]) == {"summary", "qa"},
@@ -498,6 +553,7 @@ def verify_registration(path, expected_sha, root=ROOT):
 def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
     started = clock()
     spec, documents, output, prepared = verify_registration(path, expected_sha, root)
+    source_wire_format = spec.get("source_wire_format", LEGACY_WIRE)
     output.mkdir(parents=True, exist_ok=False)  # reservation survives every subsequent failure
     private = output / "private"
     private.mkdir()
@@ -525,7 +581,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
                 adapter.load()
                 active_started = clock()
                 report = diagnose(documents, adapter, active_deadline=min(started + 1020, active_started + 900),
-                                  emit=emit, clock=clock, guard=guard, checkpoint=checkpoint)
+                                  emit=emit, clock=clock, guard=guard, checkpoint=checkpoint,
+                                  source_wire_format=source_wire_format)
             except Exception as error:  # noqa: BLE001 - preserve body cause before client shutdown
                 record = error_record(error)
                 report["first_failure"] = report["first_failure"] or record
@@ -547,6 +604,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
         report.update(status="stopped", operational_complete=False, mechanically_complete=False)
     finally:
         report.update(cleanup=metrics, registration_sha256=expected_sha, limits=LIMITS,
+                      source_wire_format=source_wire_format,
                       retries=0, AI_quality=False, effective_offload_layers=None,
                       gpu_layers_requested=99, gpu_samples=gpu_samples,
                       gpu_scope="device_wide_samples_not_process_peak_or_exclusive_ownership",
@@ -581,7 +639,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
         if clock() - started > 1025:
             report.update(status="stopped", operational_complete=False, mechanically_complete=False)
             report["stop_reason"] = report["stop_reason"] or {"code": "local_candidate_whole_deadline"}
-        terminal = {"startup_ram_gate": metrics.get("startup_ram_gate"), "status": report["status"], "mechanically_complete": report["mechanically_complete"],
+        terminal = {"source_wire_format": source_wire_format,
+                    "startup_ram_gate": metrics.get("startup_ram_gate"), "status": report["status"], "mechanically_complete": report["mechanically_complete"],
                     "operational_complete": report["operational_complete"], "stop_reason": report["stop_reason"],
                     "registration_sha256": expected_sha, "report_sha256": sha((output / "report.json").read_bytes()),
                     "elapsed_seconds_after_report_write": clock() - started}
