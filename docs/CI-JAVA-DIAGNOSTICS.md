@@ -1,6 +1,6 @@
 # Java 자동 검사의 시간 제한과 진단 기록
 
-2026-10-26. 구현·로컬 검증과 독립 코드 검토 완료, 변경 소스의 원격 CI는 진행 전이다. [검증 기록](../experiments/results/java-ci-bounded-verification-v1.json)을 함께 본다. [설계](CI-JAVA-BOUNDED-VERIFICATION.md)와 [원래 실행 중단 기록](../experiments/results/java-ci-stall-v1.json)을 구분한다.
+2026-10-26. 구현·로컬 검증과 독립 코드 검토 완료, 변경 소스3e323c98의 양쪽 필수 CI도 완료했다. 실제 Linux 정상 경로에서 Maven·보고서·업로드가 성공했고 내려받은 보고서의 Java232검사/실패0을 확인했다. Linux 합성 지연 종료는 별도 미검증이다. [원격 검사·진단 파일 확인](../experiments/results/java-ci-bounded-source-ci-v1.json)을 보존한다. [검증 기록](../experiments/results/java-ci-bounded-verification-v1.json)을 함께 본다. [설계](CI-JAVA-BOUNDED-VERIFICATION.md)와 [원래 실행 중단 기록](../experiments/results/java-ci-stall-v1.json)을 구분한다.
 
 ## 해결하려는 문제
 
