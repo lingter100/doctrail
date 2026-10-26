@@ -1,6 +1,6 @@
 # 무료 로컬 회의 생성 후보 실행 안내
 
-이 경로는 기존 서비스 기본 모델을 바꾸지 않는 개발 실험이다. [선택 이유](MEETINGS-SUMMARY-NEXT-DECISION.md), [준비 기록](../experiments/results/meetings-local-candidate-preparation-v1.json)을 함께 읽는다. 새 모델의 실제 품질·속도·메모리 결과는 아직 없다.
+이 경로는 기존 서비스 기본 모델을 바꾸지 않는 개발 실험이다. [선택 이유](MEETINGS-SUMMARY-NEXT-DECISION.md), [준비 기록](../experiments/results/meetings-local-candidate-preparation-v1.json)을 함께 읽는다. 첫 공식 실행은 native 시작 전 가용RAM 조건에서 실패했다. 실제 생성 품질·추론 속도·모델 메모리 결과는 아직 없다.
 
 ## 모델 파일 준비
 
@@ -33,7 +33,7 @@ $env:PYTHONUTF8 = '1'
 
 ## 실제 실행 전 상태
 
-새 코드의 관련 회귀·독립 코드 검토·정확한 소스 CI와 역할/입력/새 출력경로 등록이 끝난 뒤 별도로 실행을 배정한다. 현재는 준비 중이며 최종 실행 등록 파일과 실제 결과가 없다. 등록 후 명령 형식은 다음과 같다. 아래 자리표시자를 임의 값으로 채워 실행하지 않는다.
+새 코드의43합성검사·독립 검토와9fdf6ae2의필수CI를 통과한 뒤 등록df2e819e로 공식CLI를1회 실행했다. 결과는38.282초/exit1, local_candidate_startup_ram이며 native/생성/토큰화0이다. 원본 실행은 소비됐고 같은 등록·출력경로로 다시 실행하지 않는다. [안전 결과](../experiments/results/meetings-local-candidate-actual-v1.json)에 미실행과 관측 한계를 남겼다. 아래는 향후 별도 검증된 새 등록에만 사용하는 명령 형식이다. 자리표시자를 임의 값으로 채워 실행하지 않는다.
 
 ```powershell
 & .venv/Scripts/python.exe -B -X utf8 -m scripts.probe_meeting_local_candidate `
