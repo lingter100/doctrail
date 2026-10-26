@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "kind": "actual_Java_with_synthetic_meeting_transport_operations",
+  "status": "passed_scoped_local_restore",
+  "source_bindings": [
+    {
+      "path": "scripts/verify_meeting_operations_companion.py",
+      "bytes": 36976,
+      "sha256": "8a0455788b71a53bf1aaa93438c9ab2d3890e55b9f038efc1526b1144594d9bc"
+    },
+    {
+      "path": "tests/test_meeting_operations_companion.py",
+      "bytes": 37001,
+      "sha256": "8f27c336b6d2692e23fd87045cc814de868b43b48afdc5242b17cd8ac3d237ff"
+    }
+  ],
+  "jar": {
+    "file": "doctrail-server-0.1.0.jar",
+    "size_bytes": 49788089,
+    "sha256": "6a6314b3062e93d225da03a31ee182ec65c632412e45d6e41208ac938fd6d117"
+  },
+  "latest_local_tests": {
+    "passed": 56,
+    "seconds": 4.8,
+    "includes_existing_Node_cases": 3,
+    "Ruff": "passed",
+    "receipt": {
+      "path": ".local/meeting-operations-companion-v1/observer-repair-v2/receipt-v1.json",
+      "bytes": 5293,
+      "sha256": "3a5d52a821ddf95048f4ac27dfbed045259f9f42397bd55f940d91fbbd29f87c"
+    }
+  },
+  "independent_final_review": {
+    "path": ".local/meeting-operations-companion-v1/observer-review-v2/review-v1.json",
+    "bytes": 11958,
+    "sha256": "1793c10db09d66977eedd741c635a1d632a554a56e53d439f48b284159590f1c"
+  },
+  "review_blockers_remaining": 0,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "CLI_exit_code": 1,
+      "elapsed_seconds": 1.5154778957366943,
+      "first_failure": {
+        "stage": "setup-java",
+        "type": "TypeError",
+        "code": "exception_private_log"
+      },
+      "checks_completed": 0,
+      "report": {
+        "path": ".local/meeting-operations-companion-v1/actual-v1/report.json",
+        "bytes": 2796,
+        "sha256": "913bbb11f306eb551b64458fad05e703df4c6e5997b9f0c5b664f2f91544f872"
+      },
+      "receipt": {
+        "path": ".local/meeting-operations-companion-v1/actual-v1-custody/receipt-v1.json",
+        "bytes": 3028,
+        "sha256": "1efe05df215b2d447ffaf7129d0bd6cb1653e63e06f830191d32768b4c29df88"
+      },
+      "failure_preserved": true
+    },
+    {
+      "attempt": 2,
+      "status": "failed",
+      "CLI_exit_code": 1,
+      "elapsed_seconds": 5.344148635864258,
+      "first_failure": {
+        "stage": "setup-java",
+        "type": "CheckFailure",
+        "code": "java_exit_observation_failed"
+      },
+      "checks_completed": 0,
+      "report": {
+        "path": ".local/meeting-operations-companion-v1/actual-v2/report.json",
+        "bytes": 3687,
+        "sha256": "92c9ebae4fa75314e7b51e8fb905fbd8e4fd4a343ff521b90d5207cd0d330605"
+      },
+      "receipt": {
+        "path": ".local/meeting-operations-companion-v1/actual-v2-custody/receipt-v1.json",
+        "bytes": 3234,
+        "sha256": "e58608f4f7107da0ae10ce624b0dbdab96e411d0de6c7d9b828c7aa91a3df748"
+      },
+      "failure_preserved": true
+    },
+    {
+      "attempt": 3,
+      "status": "passed",
+      "CLI_exit_code": 0,
+      "elapsed_seconds": 11.603596448898315,
+      "first_failure": null,
+      "checks_completed": 12,
+      "report": {
+        "path": ".local/meeting-operations-companion-v1/actual-v3/report.json",
+        "bytes": 7738,
+        "sha256": "d2c85fe995769d84ba10e8df54bf7e10b6425486f1b21b36ddf4d5248b20ba59"
+      },
+      "receipt": {
+        "path": ".local/meeting-operations-companion-v1/actual-v3-custody/receipt-v1.json",
+        "bytes": 5696,
+        "sha256": "bc582f611a897e66e83cdf3d0fbc5e096fb3ebb1cfcae2f4a10d94770a5418ad"
+      },
+      "failure_preserved": false
+    }
+  ],
+  "checks": [
+    "summary_v2_edit_and_provenance",
+    "confirmed_decision_supersedes",
+    "done_assignee_tasks",
+    "source_restart_without_generation",
+    "backup_restore_table_equality",
+    "integrity_foreign_keys",
+    "old_cookie_denied",
+    "relogin_state_equality",
+    "bm25_unicode_spans",
+    "private_member_ACL",
+    "no_fixture_calls_during_restart_or_restore",
+    "source_backup_unchanged"
+  ],
+  "fixture_calls": {
+    "analyze": 2,
+    "answer": 0
+  },
+  "restored_sessions_before_login": 0,
+  "table_counts": {
+    "documents": 2,
+    "chunks": 2,
+    "meetings": 2,
+    "meeting_runs": 2,
+    "meeting_edits": 2,
+    "meeting_links": 1,
+    "meeting_link_evidence": 1,
+    "users": 2,
+    "workspaces": 2,
+    "memberships": 3
+  },
+  "Java_lifecycles": [
+    {
+      "phase": "setup",
+      "captured_handles": 1,
+      "exit_observed": true,
+      "reference_restored": true,
+      "observation_errors": [],
+      "exit_codes": [
+        1
+      ]
+    },
+    {
+      "phase": "restart",
+      "captured_handles": 1,
+      "exit_observed": true,
+      "reference_restored": true,
+      "observation_errors": [],
+      "exit_codes": [
+        1
+      ]
+    },
+    {
+      "phase": "restored",
+      "captured_handles": 1,
+      "exit_observed": true,
+      "reference_restored": true,
+      "observation_errors": [],
+      "exit_codes": [
+        1
+      ]
+    }
+  ],
+  "fixed_refs_verified": 243,
+  "owned_process_identities_absent": 17,
+  "parent_verification": {
+    "path": ".local/meeting-summary-mode-parent-v1/operations-actual-v3-acceptance.json",
+    "bytes": 382,
+    "sha256": "886850f11fb6ce979d55846bf65b6737bfcc3cdaffb4bac944f0d39b0732396f"
+  },
+  "failure_analysis": {
+    "first": "Java properties output MS949 versus Python UTF-8; failed before target service. Fixed only controlled child stream encoding and decoder preflight.",
+    "second": "Inventory cmdline/create_time NoSuchProcess; exact raced PID unknown. Preserved failure. New scoped helper-module capture retains the identical real Popen.",
+    "independent_pre_execution_counterexample": "Release only confirmed-exit owned Popen references before bounded identity-aware absence checking; unknown exit and unresolved identity remain failure."
+  },
+  "limits": [
+    "Actual Java and SQLite operations with synthetic documents and fixed HTTP analysis responses; no local model was called.",
+    "Completed-stop backup to a new database path; not live-traffic, abrupt-crash, load, or cross-host disaster recovery.",
+    "API operations only; no new browser visual/user acceptance claim.",
+    "Observed nonzero Java exit codes follow existing helper terminate/wait cleanup and are recorded, not rewritten to zero.",
+    "Actual CLI elapsed time is this operations check duration, not service response latency benchmark.",
+    "Exact source CI was not yet run when this local-result record was authored; inspect matching PR checks and CI receipt separately."
+  ],
+  "AI_quality": false,
+  "human_review_count": 0,
+  "paid_calls": 0,
+  "public_service_deployment": false,
+  "CI_wiring": {
+    "workflow": {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 8870,
+      "sha256": "ea0a6898e88265eb8e302827416a9ea8b612ed8a130448a0b960614030a89fe6"
+    },
+    "implementation_receipt": {
+      "path": ".local/meeting-operations-companion-v1/ci-wiring-v1/receipt-v1.json",
+      "bytes": 2851,
+      "sha256": "684a3291d8597581cabfb24b4d6ffaf0c22af255693c091f6340dcde488c7475"
+    },
+    "independent_review": {
+      "path": ".local/meeting-operations-companion-v1/ci-review-v1/review-v1.json",
+      "bytes": 5684,
+      "sha256": "4cbcf65197e24444519acc2d9bc319c45fbb98d416cadd34693e7b79b3358f8a"
+    },
+    "remaining_blockers": 0,
+    "remote_checks_at_record_creation": "not_yet_run"
+  }
+}
