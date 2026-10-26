@@ -27,7 +27,7 @@
 
 실제 Java 백업·복원은12항목을 통과했다. 회의 편집·작업·결정 연결을 보존하고 복원 전 쿠키 거부, 재로그인, 권한과 원문 검색을 확인했다. 두 초기 실패를 보존한 뒤 도구를 보완했고 최종56회귀와 독립 검토를 통과했다. 실제 서버와 합성 자료의 운영 검증이며 모델 품질·공개 배포·사용자 검수를 대신하지 않는다. [복원 범위와 재현 방법](MEETINGS-RESTORE-VERIFICATION.md).
 
-새 무료 모델의 첫 공식 실행은 모델 시작 전에 가용RAM 조건으로 중단됐다. 요약4·답변4는 전부 미실행이며 모델 품질 결과는 아직 없다. 내부 실패 시점 수치가 없어 메모리 감소 원인은 미확인이다. 준비/실행 경로와 관측을 보완한 뒤 새 실행을 별도 검토한다. [실패 기록](../experiments/results/meetings-local-candidate-actual-v1.json).
+새 무료 모델의 첫 시작RAM 실패를 보존한 뒤 실행 경로를 보완했다. 새 등록에서는 모델이 시작됐지만 요약4·답변4 입력이 모두4096토큰을 넘어 실제 답변 생성은0이었다. [최신 실제 결과](../experiments/results/meetings-local-candidate-actual-v2.json)와 [원래 실패](../experiments/results/meetings-local-candidate-actual-v1.json)를 구분한다. 다음은 원문과 근거를 유지하면서 반복 전송 정보를 줄이는 [입력 형식 수정](MEETINGS-LOCAL-CANDIDATE-INPUT-NEXT.md)이다. 실제 토큰 적합성과 생성 품질은 아직 미확인이다.
 
 ## 남은 순서와 예상 기간
 

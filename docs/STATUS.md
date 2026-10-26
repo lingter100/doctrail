@@ -1,4 +1,32 @@
 # 진행 상태
+## 2026-10-26 · 실제 입력 한도 거부와 원문 보존 후속 설계
+
+새 등록의 공식CLI1회는14.578초/exit1로 종료됐다. 실제 시작RAM11,172,413,440B가 기존10GiB조건을 통과했고 native1·template8·tokenize8을 확인했다. 요약4·QA4의 입력은4,570~5,771토큰으로4096한도를 모두 넘어 completion0이며, 모델 내용 품질 결과는 없다. 부모가220해시참조·sealed50파일·소유10신원 부재를 확인해 고정을 해제했다(7d20c403). [실제 v2 결과](../experiments/results/meetings-local-candidate-actual-v2.json)는 소비된 결과로 보존하며 원래 시작RAM실패도 유지한다.
+
+[후속 설계](MEETINGS-LOCAL-CANDIDATE-INPUT-NEXT.md)042f28e9와8입력을 대조해 수용했다. 원문과 ID·위치 연결을 유지하고 전송 직전 반복 구조만 줄이는 명시적 compact 형식을 기존 candidate source/test2에 추가한다. 기존58검사·4096·품질/자원조건은 불변이며, summary/review/QA 공통 경계와 legacy 바이트를 검증한다. 바이트 비교로 토큰 절감이나 품질 개선을 주장하지 않는다.
+
+직전 사용자 상태 응답은 개발 진전 없는 설명 턴이었다. 이번에는 실제 종료 기록·설계 입력을 재확인하고 결과/설계를 공개한 뒤 최소 구현으로 진행한다. 모든 코드 소유자는 반환했으며 새 구현은 별도 배정한다. 전체goal ACTIVE/회의1차 미완료다.
+
+## 2026-10-26 · 새 등록 수용과 조건부 실제 실행 배정
+
+새등록3630a9ff·companionbfbfe07f·준비5c6d1810을부모가155참조와code60/profile Git/current로확인했다(c7f2b525). 공식순수검증1회/4.000초·자산62/runtime55를통과했으며원문·질문·기준·모델·한도는동일하고소스2/출력경로만변경됐다. 원래v1실패4출력과before2사본을보존한다.
+
+준비시점RAM10,634,731,520B는10GiB기준미달로유지한다. 부모가남은Python의명령본문없이시각·이름·부모관계만확인한결과nonstdin16개는Blender연동도구계보였고모델작업/종료대상으로취급하지않았다. 다른프로세스변경과RAM재샘플은하지않았다.
+
+준비수용후같은실행담당에게실제배정단계의fresh조건검사1회를허용했다. 미달이면CLI0/출력부재로즉시반환하고통과할때까지반복하지않는다. 통과한경우에만공식CLI1회를실행하며HEAD63c6/code60/자료·자산을사후검증까지고정한다. 현재시작확인은아직없다. 전체goal ACTIVE다.
+
+## 2026-10-26 · 수정본 CI 완료와 새 실행 등록 준비
+
+63c6fdc의push40270836541·PR40270841737에서backend/web/java-service가모두성공했고watch37901/58523은exit0으로닫혔다. CIreceipt7e120eae를저장하고PR14draft설명을완료상태로갱신했다. 직전goal턴은실제실패보존·실행경로수정·58검사·독립검토·소스공개라는실질진전이며현재도전체goal ACTIVE다.
+
+같은 Astra high에게NEW.local/meeting-local-candidate-execution-v2의등록·출처companion만배정했다. 자료/질문/요약·QA기준/모델/한도는동일하게유지하고현재code60·공식4개반환값에맞춰순수검증1회를수행한다. 원래v1의소비실패·sealed4파일·기존source2사본을보존하며새실제CLI/native/tokenizer/Java는아직배정하지않는다. 부모검토와시작직전자원확인후별도once배정이필요하다.
+
+## 2026-10-26 · 수정 소스 공개와 필수 검사 진행
+
+시작 경로 수정·검증 기록·안내7파일을사용자명의63c6fdc로commit/push했다. 부모가staged f4b35fae의7파일과Git/working바이트를대조했고원격author/committer lingter100·PR14draft head와설명을확인했다. 필수CI push40270836541·PR40270841737은같은watch37901·58523으로관측중이다. 아직이소스의CI완료를주장하지않으며진행중검사를새push로취소하지않는다.
+
+직전설계705의양쪽40270271424/40270276595는필수3개모두성공했고watch52543/79674는exit0으로닫혔다(CI51f371b7). 모든코드담당자는반환했다. 다음은현재소스CI완료확인뒤새.local/meeting-local-candidate-execution-v2의등록·출처companion만별도준비하는것이며현재해당폴더는없다. 기존입력·요약/QA기준·모델자산은동일하고소비된v1/원본실패를재시작하지않는다. 공식검증반환값이현재spec/docs/output/prepared4개임을새준비관찰기에반영해야한다. 전체goal ACTIVE/회의1차미완료다.
+
 ## 2026-10-26 · 시작 경로 수정의 독립 검토 완료
 
 독립 Astra xhigh 검토18705d02는 차단0이며 기존19개테스트함수와assertion이 유지됨을 확인했다. 부모가7입력+19지정증거를대조했다. [구현 검증 기록](../experiments/results/meetings-local-candidate-startup-repair-v1.json)에58합성검사·Ruff·초기실패와현재한계를보존했다. source2는7e16d9c7/d6689ba3으로고정, 모든코드소유자가반환했다.

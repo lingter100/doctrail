@@ -1,6 +1,6 @@
 # 무료 로컬 회의 생성 후보 실행 안내
 
-이 경로는 기존 서비스 기본 모델을 바꾸지 않는 개발 실험이다. [선택 이유](MEETINGS-SUMMARY-NEXT-DECISION.md), [준비 기록](../experiments/results/meetings-local-candidate-preparation-v1.json)을 함께 읽는다. 첫 공식 실행은 native 시작 전 가용RAM 조건에서 실패했다. 실제 생성 품질·추론 속도·모델 메모리 결과는 아직 없다.
+이 경로는 기존 서비스 기본 모델을 바꾸지 않는 개발 실험이다. [선택 이유](MEETINGS-SUMMARY-NEXT-DECISION.md), [준비 기록](../experiments/results/meetings-local-candidate-preparation-v1.json)을 함께 읽는다. 첫 공식 실행의 시작RAM 실패를 보존했다. 보완 후 새 등록에서는 native가 시작됐지만8입력이4096토큰을 넘어 생성0이었다. 실제 생성 품질·추론 속도·생성 중 메모리 결과는 아직 없다.
 
 ## 모델 파일 준비
 
@@ -33,11 +33,15 @@ $env:PYTHONUTF8 = '1'
 
 ## 시작 경로 보완
 
-[후속 설계](MEETINGS-LOCAL-CANDIDATE-STARTUP-NEXT.md)에 따라 현재 등록에서 전체 검증한62자산을 준비 완료 연결값으로 launch에 전달한다. 실행 중 prepare·압축해제·다운로드는 하지 않는다. runtime파일집합·등록 메타데이터·경로 안전성·native신원·사후hash는 유지한다. 실제Popen직전RAM단일sample과10GiB판정을report/terminal에남기며 미달이면재샘플대기없이거부한다.58합성검사와독립검토는통과했지만 실제RAM통과·API적합성은아직확인하지않았다. [구현 기록](../experiments/results/meetings-local-candidate-startup-repair-v1.json).
+[후속 설계](MEETINGS-LOCAL-CANDIDATE-STARTUP-NEXT.md)에 따라 현재 등록에서 전체 검증한62자산을 준비 완료 연결값으로 launch에 전달한다. 실행 중 prepare·압축해제·다운로드는 하지 않는다. runtime파일집합·등록 메타데이터·경로 안전성·native신원·사후hash는 유지한다. 실제Popen직전RAM단일sample과10GiB판정을report/terminal에남기며 미달이면재샘플대기없이거부한다.58합성검사와독립검토·63c6fdc의필수CI를통과했다. 이후새등록에서실제RAM조건과native시작·template/tokenize까지확인했으나completion은입력한도로실행되지않았다. [구현 기록](../experiments/results/meetings-local-candidate-startup-repair-v1.json).
 
-## 실제 실행 전 상태
+## 입력 한도 후속 변경
 
-새 코드의43합성검사·독립 검토와9fdf6ae2의필수CI를 통과한 뒤 등록df2e819e로 공식CLI를1회 실행했다. 결과는38.282초/exit1, local_candidate_startup_ram이며 native/생성/토큰화0이다. 원본 실행은 소비됐고 같은 등록·출력경로로 다시 실행하지 않는다. [안전 결과](../experiments/results/meetings-local-candidate-actual-v1.json)에 미실행과 관측 한계를 남겼다. 아래는 향후 별도 검증된 새 등록에만 사용하는 명령 형식이다. 자리표시자를 임의 값으로 채워 실행하지 않는다.
+[실제 v2 기록](../experiments/results/meetings-local-candidate-actual-v2.json)의 summary/QA 입력은4,570~5,771토큰이다. [설계](MEETINGS-LOCAL-CANDIDATE-INPUT-NEXT.md)는 원문을 보존하고 unit을 `[id,text]`, gap을 원래 문자열로 전송하는 명시적 선택형식을 제안한다. 서버의 원래 위치 map과 검토 연결은 유지하며 아직 구현·실제 적합성 검증 전이다. 새 등록은 `source_wire_format`을 고정하고 기존 등록을 수정하지 않는다.4096·mandatory review·실행예산은 불변이다.
+
+## 실제 실행 기록
+
+새 코드의43합성검사·독립 검토와9fdf6ae2의필수CI를 통과한 뒤 등록df2e819e로 공식CLI를1회 실행했다. 결과는38.282초/exit1, local_candidate_startup_ram이며 native/생성/토큰화0이다. 원본 실행은 소비됐고 같은 등록·출력경로로 다시 실행하지 않는다. [안전 결과](../experiments/results/meetings-local-candidate-actual-v1.json)에 미실행과 관측 한계를 남겼다. 보완 소스63c6fdc의 새 등록3630a9ff도 실제1회로 소비됐고 모든8항목이 입력 한도로 거부됐다. 아래는 향후 별도 검증된 새 등록에만 사용하는 명령 형식이다. 자리표시자를 임의 값으로 채워 실행하지 않는다.
 
 ```powershell
 & .venv/Scripts/python.exe -B -X utf8 -m scripts.probe_meeting_local_candidate `

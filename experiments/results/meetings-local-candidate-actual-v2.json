@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "experiment": "meetings-local-candidate-development-v2",
+  "status": "completed_with_input_rejections_consumed",
+  "source_commit": "63c6fdc5aa3222513f0bd01eb1ae0fb2fdf439ca",
+  "profile": "data/models/meetings-generation-ministral3-v1.json",
+  "registration_sha256": "3630a9ffb16716eba545cc4e1c01bcd1f5d0422e76e74d97677a2c32498aef7e",
+  "companion_sha256": "bfbfe07f4caea4d2264323273e73cc05b8296016477da335c542acc89c5a7e16",
+  "CLI": {
+    "calls": 1,
+    "exit_code": 1,
+    "wrapper_exit": 0,
+    "elapsed_seconds": 14.577999999979511
+  },
+  "operational": {
+    "native_starts": 1,
+    "operational_complete": true,
+    "mechanically_complete": false,
+    "startup_ram_gate": {
+      "available_bytes": 11172413440,
+      "elapsed_seconds": 4.078000000037719,
+      "minimum_bytes": 10737418240,
+      "passed": true,
+      "stage": "before_native_popen"
+    },
+    "http_calls": 17,
+    "endpoint_counts": {
+      "/props": 1,
+      "/apply-template": 8,
+      "/tokenize": 8
+    },
+    "completion_calls": 0,
+    "requested_output_tokens": 0,
+    "cleanup_seconds": 0.4220000000204891,
+    "owned_identities_absent": 10,
+    "native_numeric_exit_code_recorded": false,
+    "late_invalidation": false,
+    "retries": 0
+  },
+  "fixed_outcomes": {
+    "summary_denominator": 4,
+    "summary_input_rejections": 4,
+    "qa_denominator": 4,
+    "qa_input_rejections": 4,
+    "review_not_applicable": 4,
+    "semantic_judgments": 0,
+    "user_reviews": 0
+  },
+  "input_token_observations": [
+    {
+      "source_id": "qualified-source-01",
+      "stage": "summary",
+      "actual_input_tokens": 4684,
+      "limit": 4096,
+      "excess_tokens": 588
+    },
+    {
+      "source_id": "qualified-source-01",
+      "stage": "qa",
+      "actual_input_tokens": 4636,
+      "limit": 4096,
+      "excess_tokens": 540
+    },
+    {
+      "source_id": "qualified-source-02",
+      "stage": "summary",
+      "actual_input_tokens": 4627,
+      "limit": 4096,
+      "excess_tokens": 531
+    },
+    {
+      "source_id": "qualified-source-02",
+      "stage": "qa",
+      "actual_input_tokens": 4570,
+      "limit": 4096,
+      "excess_tokens": 474
+    },
+    {
+      "source_id": "qualified-source-03",
+      "stage": "summary",
+      "actual_input_tokens": 5771,
+      "limit": 4096,
+      "excess_tokens": 1675
+    },
+    {
+      "source_id": "qualified-source-03",
+      "stage": "qa",
+      "actual_input_tokens": 5740,
+      "limit": 4096,
+      "excess_tokens": 1644
+    },
+    {
+      "source_id": "qualified-source-04",
+      "stage": "summary",
+      "actual_input_tokens": 4927,
+      "limit": 4096,
+      "excess_tokens": 831
+    },
+    {
+      "source_id": "qualified-source-04",
+      "stage": "qa",
+      "actual_input_tokens": 4888,
+      "limit": 4096,
+      "excess_tokens": 792
+    }
+  ],
+  "interpretation": [
+    "Native startup and cleanup worked under the unchanged10GiB gate in this run.",
+    "All8 templated inputs exceeded4096 tokens before a completion request; there is no summary/answer quality result.",
+    "The registered whole-source representation was preserved; no source shortening, question replacement or budget increase was performed.",
+    "Prior startup failure and preparation RAM failure remain separate preserved observations.",
+    "The CLI duration is not inference or answer latency; sampled startup memory is not a generation peak."
+  ],
+  "evidence": [
+    {
+      "file": ".local/meeting-local-candidate-execution-v2/actual-once-v1/safe-result.json",
+      "size_bytes": 5769,
+      "sha256": "8f0119c191ab88ebfd9ee866475cfde7c5577d8a63d456aecd94e92619431874"
+    },
+    {
+      "file": ".local/meeting-local-candidate-execution-v2/actual-once-v1/terminal-custody-receipt.json",
+      "size_bytes": 5324,
+      "sha256": "9b39e9061d087b82b035108a04936ca3869f55a88b1cfff72a19244d1d56dacc"
+    },
+    {
+      "file": ".local/meeting-local-candidate-execution-v2/local-candidate-development-v1/report.json",
+      "size_bytes": 9643,
+      "sha256": "50d201f9ef41349ff319432253ecc012038fce13ddd7abb2ff1cda0c3631f398"
+    },
+    {
+      "file": ".local/meeting-local-candidate-execution-v2/local-candidate-development-v1/terminal.json",
+      "size_bytes": 502,
+      "sha256": "707f2003cb933faf946880898558ccaacf21d0efafe2a4ddeec2be5b40849317"
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-actual-v2-acceptance.json",
+      "size_bytes": 1018,
+      "sha256": "7d20c40346f3b7e3708e0f86f5f3e6a0f6ae2fe12a52461bc9f1cca37bb58f8a"
+    }
+  ],
+  "phase1_complete": false,
+  "public_service_deployed": false
+}
