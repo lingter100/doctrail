@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "status": "operator_cancelled_after_prolonged_maven_stage",
+  "source_commit": "8f3fa342471d59486d950fb624647fdbe5a3f152",
+  "push_run_id": 40273275050,
+  "push_jobs": {
+    "java-service": "cancelled",
+    "backend": "success",
+    "web": "success"
+  },
+  "reference_pr_run_id": 40273280275,
+  "reference_pr_jobs": {
+    "web": "success",
+    "java-service": "success",
+    "backend": "success"
+  },
+  "reference_pr_maven_seconds": 34,
+  "observed_maven_seconds_at_cancel_request": 1857.557612,
+  "operator_action": "Explicit cancellation request after at least1800s in same Maven step; original run not retried and not classified as passed.",
+  "terminal_updated_at": "2026-10-26T05:52:14Z",
+  "watch": {
+    "session": 26040,
+    "terminal_exit_code": 1
+  },
+  "diagnostics": {
+    "java_log_fetch_exit_code": 1,
+    "java_log_bytes": 0,
+    "java_log_fetch_message": "log not found: 121410537467",
+    "root_cause": "unconfirmed",
+    "static_wait_risk": "ExecutorService.close can wait for unfinished tasks after Future.get times out; not evidence that this occurred in the cancelled run."
+  },
+  "followup": "docs/CI-JAVA-BOUNDED-VERIFICATION.md",
+  "model_execution_or_quality_result": false,
+  "human_per_action_review": false,
+  "evidence": [
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/ci-stall-operator-stop-v1.json",
+      "size_bytes": 33108,
+      "sha256": "7085a868e0fabaff197dd0ac377bab4d0bec2d3628ab5603dde05c1046eb25d5"
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/ci-stall-operator-stop-response-v1.json",
+      "size_bytes": 108,
+      "sha256": "217ed23856102bf84a5ce25ad0a0dbefd5d4e84697cd6dbb01bb7d37fb48792e"
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/ci-stall-terminal-v1/run.json",
+      "size_bytes": 15282,
+      "sha256": "e537652035046bbdd49e3bd3e317a70656281bb2122c67897e8d1cc23365855b"
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/ci-stall-terminal-v1/receipt.json",
+      "size_bytes": 302,
+      "sha256": "022d08b83a322745d908661abf66de7356b2f8c125cb19df0bf5ff8064a50351"
+    },
+    {
+      "file": ".local/meeting-ci-maven-observation-v1/receipt.json",
+      "size_bytes": 897,
+      "sha256": "cd44608a27f4e9a7f2daabe6afe189041f688dcb246cc575177fe385460d1dd7"
+    }
+  ]
+}

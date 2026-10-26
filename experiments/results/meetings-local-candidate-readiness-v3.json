@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "evidence_type": "actual_local_preexecution_resource_observation",
+  "status": "not_executed_resource_gate_refused",
+  "source_head": "8fa6382864b0e0cceecbb1cda7f2d1e06ed17172",
+  "registration_sha256": "d75f2edce8c2d15b8b56c523bfa184c07ca7638985652c77a1fdb23b624cf303",
+  "source_wire_format": "source-parts-compact-v1",
+  "source_documents": 4,
+  "questions": 4,
+  "fixed_input_limit_tokens": 4096,
+  "preparation_verification": {
+    "calls": 1,
+    "elapsed_seconds": 6.125,
+    "assets_hashed": 62
+  },
+  "fresh_resource_observation": {
+    "samples": 1,
+    "available_RAM_bytes": 10732064768,
+    "required_RAM_bytes": 10737418240,
+    "shortfall_bytes": 5353472,
+    "known_model_candidates": 0,
+    "GPU_exclusivity_established": false
+  },
+  "actual_CLI_calls": 0,
+  "native_tokenizer_completion_calls": 0,
+  "once_consumed": false,
+  "output_created": false,
+  "other_application_changes": 0,
+  "resamples": 0,
+  "custody_sha256": "4778ffba2519c51642ae2297e42b9c7bf0822097c6478dbe509710da6f13315b",
+  "parent_acceptance_sha256": "82aa67e049bb7347800221c57838b4ae0f0a9515998516a9d7ba1dc6cb4ee243",
+  "limitations": [
+    "No model quality, token fit or response latency result exists for this attempt.",
+    "Memory availability is a point-in-time observation, not a reservation.",
+    "Earlier consumed experiments and failed observations remain preserved.",
+    "User review and public service deployment remain zero."
+  ]
+}
