@@ -1,4 +1,28 @@
 # 진행 상태
+## 2026-10-26 · 새 실행 준비와 출력 전 기준 인수 완료
+
+등록9fc0be13은32,515B이며 원래 v1과 output_dir만 다르다. 실행 담당의 공식 읽기 검증은 정확히1회/11.703초로 code141/assets61/documents4/order8을 확인했고, CLI/run은 만들지 않았다. 최종 companion88dc2cdf와 receipt e1af60e4를 보존했다. 부모는 준비 artifact14·companion/receipt 참조·원래45·동결77·추가6개 및 현재code141을 대조했다. 모델 자산은 담당의 전체해시1회와 부모의61개 크기 확인을 구분한다(parent f634ac8c).
+
+새 독립 판단자는 역할921cf669를 먼저 쓰고 동일 원문·private criteria를 인수했다. safe7db6c09f와 입력4개는 부모가 해시로만 확인했다. 새 generic 최종 검토48cb8eb1은 차단0/권고0이며 부모가입력37개를 다시 대조했다. [공개 준비 결과](../experiments/results/meetings-summary-mode-preparation-v2.json)를 게시한 뒤 실제 실행을 별도1회 배정한다. 실제 모델 품질 결과는 아직 없으며 old v1 실패는 소비된 상태 그대로다.
+
+준비 시 RAM12,676,591,616B와 lease3 획득·반납은 당시 관측이다. GPU 목록의 ChatGPT.exe/N/A와 전체사용10MiB를 유지하며 GPU가 비었다거나 예약됐다고 말하지 않는다. 시작 직전 기존조건을 다시 검사한다. 전체goal ACTIVE/Phase1 미완료다.
+
+## 2026-10-26 · 중단 후 재개와 정확한 CI 성공 확인
+
+직전 목표 실행은 두 필수 CI의 최종 성공을 확인하고 새 CI 결과 파일을 저장했으므로 진전으로 분류한다. 현재 28ff830과 미커밋 진행문서2·CI결과1을 보존했다. 원격 push39926828730/PR39926836673의 backend/web/java-service 모두 성공을 다시 확인했으며, 기존 watch40723/87215는 지난 관측에서 exit0으로 닫혔다. [정확한 결과](../experiments/results/meetings-summary-mode-entrypoint-repair-ci-v1.json)689af5c7은 진단 code141의 Git/current 일치와 새 parser 검사를 구분한다. 실제 새 모델 품질 결과는 없다.
+
+live agent 목록에는 부모만 있었고 v2 폴더는 없었다. 새 execution custodian의 Astra high, source-only successor와 generic binding reviewer의 Astra xhigh 요청을 도구가 수락했다. [새 역할 선언](../data/evaluation/meetings-summary-mode-role-registration-v2.json)은 옛 담당의 연속성을 주장하지 않고 기능상 역할·노출·금지 범위를 유지한다. 이전 v1 등록과 실패·원문·criteria fa149e9f는 불변이다. 독립 generic 검토 effbd506은 담당자 교체가 역할 분리와 출력 전 기존 기준 인수를 유지하면 원계약과 일치한다고 판단했다. 부모는 그 해석을 수용하며 새 기준을 만들지 않는다.
+
+새 실행 담당은 v2 metadata 준비만, 독립 판단자는 잠긴 원문·기준 인수만 맡았다. 아직 실제 CLI/모델 배정은 없다. 재개 시 가용 RAM11,804,504,064B 관측은 자원 예약이 아니며 시작 직전 다시 확인한다. 최종 binding 검토·게시 뒤 별도 once를 배정한다. 기존 무료·로컬 범위와 전체 goal ACTIVE를 유지한다.
+
+운영 후속 항목으로 기존 실제 Java 검사에 회의 상태의 백업→새 경로 복원→기존 세션 거부→재로그인→요약·작업·결정 연결·근거 보존의 전체 증거가 없음을 확인했다. generic 감사0be479ba의 입력15개를 대조하고 parent714d6c51을 남겼다. 복원 결함이 입증된 것은 아니며, 현재 고정 비교가 끝난 뒤 기존 Java 검증 실행기에 필요한 사례 하나를 추가한다. 별도 모델 실행이나 새 아키텍처를 도입하는 작업이 아니다.
+
+## 2026-10-23 · 실행 명령 수정 공개와 필수 CI 진행
+
+검증한 11개를28ff830890c80a06fcd0f82d4c43687db5bc6d73로 사용자 명의 commit/push했다. staged0c500e42의 Git/current 일치와 원격 author/committer lingter100, PR14 OPEN/DRAFT head/body를 확인했다. push39926828730·PR39926836673은 진행 중이며 watch40723/87215를 같은 실행에서 이어 확인한다. 새 push로 기존 CI를 취소하거나 다시 실행하지 않는다.
+
+원래 v1은 모델 시작 전 실패로 보존하고, 수정의 실제 subprocess4·독립 검토 통과와 새 전체 CI를 구분한다. 다음은 정확한 CI 후 별도 v2 등록과 외부 companion 준비다. 현재 v2 경로는 없고 실제 모델0, 전체 goal ACTIVE/Phase1 미완료다.
+
 ## 2026-10-23 · 실제 비교의 실행 진입 실패 보존과 명령 수정
 
 등록·독립 검토를 공개한 0cbe1ce의 push39923924866/PR39923933711은 필수 3개가 양쪽 통과했다. 새 자원 확인에서 가용 RAM10,768,719,872B로 10GiB 기준을 충족해 예정 CLI를 1회 발행했지만, 직접 파일 호출의 `scripts` import가 main 전에 실패했다. 실제 CLI exit1/1.030741초, stdout0, run 경로 미생성, native·tokenizer·모델 completion0이다. Wrapper exit0은 별도 관측이며 성공으로 세지 않는다. [원래 실패](../experiments/results/meetings-summary-mode-development-v1.json)와 custody932f6030·parent ad8484c1을 보존했고 원래 once는 소비됐다. 출력이 없어 새 품질 판단은 없다.

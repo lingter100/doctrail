@@ -8,7 +8,7 @@
 
 ## 현재 범위
 
-새 추론 모드 비교의 공개 원문 4개·독립 기준과 소스 CI를 확정했지만 첫 실제 호출은 Python 모듈 경로 오류로 모델 시작 전에 종료됐다. [실패 기록](experiments/results/meetings-summary-mode-development-v1.json)은 실제 CLI 1회·모델 추론 0회를 구분한다. [모듈 실행 안내](docs/MEETINGS-SUMMARY-MODE-RUNBOOK.md)와 실제 subprocess 검사 4개를 추가했으며, 독립 검토는 통과했고 수정 소스 CI와 [별도 새 실행 조건](docs/MEETINGS-SUMMARY-MODE-ENTRYPOINT-RECOVERY.md)을 확인한다. 새 모델 품질 결과는 아직 없다.
+새 추론 모드 비교의 공개 원문 4개·독립 기준과 소스 CI를 확정했지만 첫 실제 호출은 Python 모듈 경로 오류로 모델 시작 전에 종료됐다. [실패 기록](experiments/results/meetings-summary-mode-development-v1.json)은 실제 CLI 1회·모델 추론 0회를 구분한다. [모듈 실행 안내](docs/MEETINGS-SUMMARY-MODE-RUNBOOK.md)와 실제 subprocess 검사 4개를 추가했으며, 독립 검토와 수정 소스의 필수 CI를 통과했으며 [별도 새 실행 조건](docs/MEETINGS-SUMMARY-MODE-ENTRYPOINT-RECOVERY.md)을 확인한다. 새 모델 품질 결과는 아직 없다.
 
 명시 후보 `grounded-summary-v3`는 초안 → 전체 원문 대조 재작성1회 → 최종검토를 실제 서비스에 연결했다. 관련 합성849개(핵심228개 포함), 독립 코드 검토와 정확한 소스 CI는 통과했지만 [실제 로컬 비교](experiments/results/meetings-grounded-summary-development-v3.json)는 세 번째 회의의 자동검토 거부로 실패했다. 두 회의 저장·원문 이동을 확인했고 질의응답6건은 실행하지 못했다. [독립 쌍 비교](experiments/results/meetings-grounded-summary-review-v3.json)에서는 초안·수정본 모두 핵심충분0/3이며 고정 품질 상태의 회복이 없었다. [추가 재작성 전송 관측](experiments/results/meetings-grounded-summary-performance-v3.json)은 평균29.219초다. 이 후보를 품질 개선이나 기본 채택으로 승격하지 않는다. [문제·비교 방법·면접 설명](docs/MEETINGS-SUMMARY-V3-ANALYSIS.md)을 별도로 정리했다. 기존 기본값과 Java·React 계약을 유지한다. 다음은 [새 공개 회의록의 추론 모드 대조 진단](docs/MEETINGS-SUMMARY-QUALITY-NEXT.md)이며 첫 호출의 import 실패 이후 실제 모델 비교가 남아 있다.
 
@@ -16,7 +16,7 @@
 
 새 근거 연결 요약 방식의 실제 로컬 비교는 두 번째 분석의 자동 검토 거부로 종료됐다. 독립 AI 검토에서도 생성된 두 요약 모두 핵심 조건이나 시점을 충분히 담지 못했다. 인용 위치 확인과 내용 품질을 구분하고 [실행 실패](experiments/results/meetings-grounded-summary-development-v1.json)·[독립 판단](experiments/results/meetings-grounded-summary-review-v1.json)을 보존한다. 이 실행에서 질의응답6건은 미실행이다.
 
-2026-10-23 기준, 문서·회의 관리와 검색/학습 실험은 실제로 연결했지만 **자연어 답변 품질과 1차 전체 완료는 미충족**이다. 기능별 완료 범위, 남은 순서와 일정의 불확실성은 [현재 진행 상황](docs/PROGRESS-OVERVIEW.md)에 따로 정리했다. 아래 기록의 도구 검증·합성 검사·CI 성공을 모델 품질이나 전체 완료로 해석하지 않는다.
+2026-10-26 기준, 문서·회의 관리와 검색/학습 실험은 실제로 연결했지만 **자연어 답변 품질과 1차 전체 완료는 미충족**이다. 기능별 완료 범위, 남은 순서와 일정의 불확실성은 [현재 진행 상황](docs/PROGRESS-OVERVIEW.md)에 따로 정리했다. 아래 기록의 도구 검증·합성 검사·CI 성공을 모델 품질이나 전체 완료로 해석하지 않는다.
 
 평가 도구의64KiB 읽기 후보를 새 합성 Git 자료에서1회 비교했다. 같은 검증을 유지한 시작 경계12.531→10.969초, 전송직전3.141→2.047초를 관측했다. 고정순서 n=1·부하 미통제이므로 실제 서비스 성능이나 C5 성공 가능성으로 일반화하지 않는다. [원본·실측·한계](docs/MEETINGS-PROOF-EPOCH-RESULTS.md)를 보존했고, C6에 이 reader를 연결한 검증 도구를 구현했다. [구현·검사·동결](docs/MEETINGS-C6-IMPLEMENTATION.md)은 새 평가 자료와 실제 답변 품질 검증에 선행하는 단계다. 아직 C6 모델 평가나 서비스 채택은 하지 않았다.
 

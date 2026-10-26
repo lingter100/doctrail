@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "diagnostic": "summary-mode-development-v1",
+  "attempt": "prospective-external-attempt-v2",
+  "record_kind": "role_declaration_before_actual_execution",
+  "declared_date": "2026-10-26",
+  "live_inventory_at_resume": [
+    "/root"
+  ],
+  "prior_agents_unavailable": true,
+  "old_role_registration_preserved": {
+    "file": "data/evaluation/meetings-summary-mode-role-registration-v1.json",
+    "size_bytes": 7584,
+    "sha256": "0cd69793fe52e8835053fb1f94c5cc8afc8eb0b82d00c1948003d601580c1ade"
+  },
+  "old_failed_attempt_preserved": {
+    "file": "experiments/results/meetings-summary-mode-development-v1.json",
+    "size_bytes": 3405,
+    "sha256": "645c6825b3cbb4ce18a4e9cd90e9ed5a6c67056b2a0c7d518cde48995465f2d5"
+  },
+  "recovery_contract": {
+    "file": "docs/MEETINGS-SUMMARY-MODE-ENTRYPOINT-RECOVERY.md",
+    "size_bytes": 6486,
+    "sha256": "e9add1d2542bfd360f23862800999277fc03e8f0b700842db332468827adfe2e"
+  },
+  "criteria_identity_unchanged": {
+    "file": ".local/meeting-summary-mode-independent-v1/source-only-criteria-v1/source-lock-v1.json",
+    "size_bytes": 83438,
+    "sha256": "fa149e9f0ce55c9a33f22947b2166bf5a3ada832612ad8fa7fcccee5d36dbc66"
+  },
+  "roles": [
+    {
+      "role": "mechanical_execution_custodian",
+      "agent": "/root/summary_mode_v2_executor",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "high",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "initial_scope": "new v2 metadata preparation only; no actual execution until separate assignment",
+      "raw_source_or_criteria_semantic_access": false,
+      "quality_judge_eligible": false
+    },
+    {
+      "role": "source_only_successor_and_independent_final_judge",
+      "agent": "/root/summary_mode_v2_judge",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "xhigh",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "initial_scope": "declare role before adopting immutable existing source/criteria; no reauthoring or candidate judgments yet",
+      "implementation_or_runtime_access": false,
+      "source_criteria_read_authorized": true,
+      "actual_execution_authorized": false
+    },
+    {
+      "role": "independent_generic_execution_binding_review",
+      "agent": "/root/summary_mode_v2_binding_review",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "xhigh",
+      "fork_turns": "none",
+      "spawn_request_accepted": true,
+      "initial_scope": "generic role continuity and later exact finalbindings review only",
+      "raw_source_or_criteria_semantic_access": false,
+      "quality_judge_eligible": false
+    }
+  ],
+  "separation": "Fresh agent identities replace unavailable predecessors, with unchanged role responsibilities, exclusion boundaries, original locked criteria and output-before-judgment sequence. No claim of old-agent continuity or complete blinding.",
+  "exposure": "User-provided historical AGENTS aggregates may be inherited; each role records actual exposure. No new diagnostic model output exists at declaration.",
+  "parent_scope": "generic code/metadata/hash/docs/Git only; no original source or private criteria semantic read",
+  "runtime_at_declaration": {
+    "v2_cli_exists": false,
+    "v2_run_exists": false,
+    "model_completions": 0
+  },
+  "human_review_count": 0,
+  "paid_calls": 0,
+  "public_service_deployments": 0,
+  "profile_limit": "Records tool-accepted requests, not provider internal inspection or parent model change."
+}

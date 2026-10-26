@@ -1,4 +1,14 @@
 # 기여와 직접 검증 기록
+## 2026-10-26 · 준비 역할별 결과 확인
+
+도구 수락 Astra high 실행 담당이 새 등록과 외부 companion을 작성하고 공식 read-only 검증1회로 전체 자산을 확인했다. 최초 임시 스크립트 경로 접근 실패는 본문 실행 전 실패로 보존했고 in-memory 준비 명령으로 마쳤다. 새 Astra xhigh 판단자는 기존 기준을 변경하지 않고 출력 전에 인수했으며, 별도 Astra xhigh 검토자는 generic 최종 binding을 검토해 차단0을 반환했다. 부모는 원문·private 기준 의미를 읽지 않고 해시·공개 metadata·검토입력37개를 확인했다. 실제 진단 실행·모델 품질 판단·사람 검수0이다.
+
+## 2026-10-26 · 중단 후 역할 재등록과 CI 재확인
+
+부모가 현재 Git·기존 goal ACTIVE·프로세스 metadata·원격 CI를 확인했다. 이전 목표 실행의 실제 CI 성공 확인은 진전이며 원래 import 실패와 미실행 모델 품질은 보존한다. 새 summary_mode_v2_executor의 gpt-6-astra/high, summary_mode_v2_judge와 summary_mode_v2_binding_review의 gpt-6-astra/xhigh/fork none 요청을 도구가 수락했다. 부모 채팅 설정 변경이나 옛 agent 재사용으로 쓰지 않는다.
+
+새 역할은 각각 기계적 준비, 기존 source-only 기준 인수, generic 검토로 분리한다. 독립 generic 역할 검토의 조건을 부모가 수용했으며 아직 실제 실행이나 의미 판정은 없다. source-only 담당의 비상승 Git 읽기 조회 1회는 work-tree 오류였고 추가 Git 없이 부모가 정확한 root와 .local 무시 경로를 확인했다. 모델·사용자 검수·유료 호출·공개 서비스 배포0이다.
+
 ## 2026-10-23 · 실제 진입 실패 관측과 모델 없는 수정 검사
 
 기존 도구 수락 Astra high 실행자가 fresh 자원 확인 뒤 1회 CLI를 발행했고, main 이전 import 실패·실제 exit1·모델0·소유 프로세스 부재·원본 불변을 기록했다. 부모는 안전 metadata와 해시만 확인했으며 원문·비공개 기준 의미를 읽지 않았다. 같은 구현자가 모듈 실행 안내와 실제 subprocess 검사4개를 추가하고 원래 직접 파일 오류를 별도 1회 재현했다. 이 오류 재현은 실제 진단 실행이 아니다.

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "summary-mode-entrypoint-exact-source-ci",
+  "source_commit": "28ff830890c80a06fcd0f82d4c43687db5bc6d73",
+  "runs": [
+    {
+      "id": "39926828730",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39926828730",
+      "event": "push",
+      "head_sha": "28ff830890c80a06fcd0f82d4c43687db5bc6d73",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "java-service",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39926828730/job/120325172673"
+        },
+        {
+          "name": "web",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39926828730/job/120325173015"
+        },
+        {
+          "name": "backend",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39926828730/job/120325173045"
+        }
+      ]
+    },
+    {
+      "id": "39926836673",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39926836673",
+      "event": "pull_request",
+      "head_sha": "28ff830890c80a06fcd0f82d4c43687db5bc6d73",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "web",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39926836673/job/120325198889"
+        },
+        {
+          "name": "backend",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39926836673/job/120325199218"
+        },
+        {
+          "name": "java-service",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39926836673/job/120325199249"
+        }
+      ]
+    }
+  ],
+  "git_files_verified": 11,
+  "current_files_matching_source": 9,
+  "later_uncommitted_progress_docs": [
+    "AGENTS.md",
+    "docs/STATUS.md"
+  ],
+  "diagnostic_code_git_and_current_unchanged": 141,
+  "new_parser_test_in_ci": true,
+  "native_model_execution": 0,
+  "human_review_count": 0,
+  "limits": [
+    "CI and parser checks do not establish model startup, native compatibility or semantic quality.",
+    "The original v1 remains consumed and failed before main.",
+    "New execution still requires separate v2 registration, external companion, fixed resource checks and once assignment."
+  ]
+}
