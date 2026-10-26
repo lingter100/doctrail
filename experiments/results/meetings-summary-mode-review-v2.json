@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "independent-ai-review-of-one-anonymous-returned-summary",
+  "status": "not-accepted",
+  "safe_aggregate": {
+    "anonymous_candidates": 1,
+    "whole_claims": 5,
+    "selected_citations": 20,
+    "exact_selected_citations": 20,
+    "full_source_support": {
+      "supported": 1,
+      "partial": 4,
+      "unsupported": 0,
+      "uncertain_or_ambiguous": 0
+    },
+    "selected_evidence_support": {
+      "supported": 0,
+      "partial": 5,
+      "unsupported": 0,
+      "uncertain_or_ambiguous": 0
+    },
+    "accepted_whole_claims": 0,
+    "core_coverage": {
+      "sufficient": 0,
+      "insufficient": 1,
+      "not_assessable": 0
+    },
+    "readable_Korean_sentence_candidates": 1,
+    "complete_Korean_document_summaries": 0,
+    "independently_semantically_accepted_candidates": 0,
+    "paired_comparison_performed": false
+  },
+  "safe_receipt": {
+    "file": ".local/meeting-summary-mode-independent-v2/individual-review-v1/safe-aggregate-receipt-v1.json",
+    "size_bytes": 5917,
+    "sha256": "e6626930534e78949b598ca97d07f101aec74b3778ece85c1036c02746509339"
+  },
+  "individual_lock": {
+    "file": ".local/meeting-summary-mode-independent-v2/individual-review-v1/individual-lock-v1.json",
+    "size_bytes": 1074,
+    "sha256": "83f4ee71647fd07493c0cd3938846a766bf8dd6990e4804b3a14c775d72b5c56"
+  },
+  "criteria_unchanged": true,
+  "individual_judgment_locked_before_mapping_selfreview_performance": true,
+  "human_review_count": 0,
+  "limitations": {
+    "historical_aggregate_exposure": "Inherited user AGENTS and parent messages contain historical aggregates. Prior permitted generic rules include the original A/B threshold. Complete blinding is not claimed.",
+    "successor_continuity_claimed": false,
+    "same_source_pair_inference_limit": "The fixed source can permit source identity recognition; no pair mapping was provided or opened.",
+    "candidate_mode_known": false,
+    "pair_map_or_sibling_receipt_reads": 0,
+    "self_review_reasoning_performance_runtime_or_agent_summary_reads": 0,
+    "other_evaluation_split_reads": 0,
+    "one_candidate_only": true,
+    "paired_recovery_regression_or_mode_benefit_conclusion": "Not assessed and not inferable from this one-draft packet.",
+    "source_criteria_or_gates_changed": false,
+    "human_review_count": 0,
+    "model_tokenizer_native_java_browser_network_executions": 0,
+    "Git_mutations": 0,
+    "actual_execution_authority": false,
+    "parent_executor_private_judgment_access": "Hash/byte verification only. Return safe aggregate and binding metadata; do not return raw claims, source-specific criteria or private semantic reasons.",
+    "locked_before_identity_mode_self_review_and_performance_disclosure": true
+  },
+  "actual_run_status": "failed; no retry; no candidate promotion"
+}

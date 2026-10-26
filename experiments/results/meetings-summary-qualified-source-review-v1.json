@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "status": "accepted_for_development_source_only",
+  "source_set_id": "meeting-summary-qualified-sources-v1",
+  "accepted": 4,
+  "withheld": 0,
+  "blocking_findings": 0,
+  "author_model": "gpt-6-astra",
+  "author_reasoning": "xhigh",
+  "independent_reviewer_model": "gpt-6-astra",
+  "independent_reviewer_reasoning": "xhigh",
+  "models_note": "Tool-accepted author and independent-review subagents, not service inference models.",
+  "checks": {
+    "full_sources_read": 4,
+    "official_pinned_raw_live_matches": 4,
+    "official_pinned_license_live_matches": 2,
+    "source_blob_matches": 4,
+    "raw_canonical_identical": 4,
+    "payload_full_reconstruction": 4,
+    "exact_zero_based_unit_and_coordinate_mapping": 4,
+    "base_unit_total": 307,
+    "repository_family_count": 2,
+    "same_family_document_pairs": 2,
+    "normalized_duplicate_pairs": 0,
+    "shared_long_paragraph_pairs": 0,
+    "declared_metadata_files": 31,
+    "declared_repository_selector_union": 20,
+    "direct_family_assignment_rows": 70,
+    "declared_source_repository_id_hash_collisions": 0,
+    "immutable_author_package_files": 35,
+    "frozen_files_preserved": 77,
+    "terminal_fixed_input_bindings": 68
+  },
+  "source_manifest_binding": {
+    "path": ".local/meeting-summary-qualified-sources-v1/source-manifest.json",
+    "bytes": 17129,
+    "sha256": "6a4b32167eb4953bd4483803b7d92326dc391cb4f59c41e35b38c2cc5dde3490"
+  },
+  "independent_safe_receipt": {
+    "path": ".local/meeting-summary-qualified-independent-v1/admission-v1/safe-receipt.json",
+    "bytes": 11302,
+    "sha256": "2a53e8cdd1641c4746631791cc872e4a2ac347c5954a2befedab011fa27dc51f"
+  },
+  "independent_artifact_index": {
+    "path": ".local/meeting-summary-qualified-independent-v1/admission-v1/artifact-index.json",
+    "bytes": 3092,
+    "sha256": "17f547bf1301322dc5390989c18028ea42d3a1d7b4a506c3eb69e2a2f39b5d59"
+  },
+  "registration": {
+    "path": ".local/meeting-summary-qualified-independent-v1/admission-v1/registration.json",
+    "bytes": 2065,
+    "sha256": "921f4e21dccbbf3f41168572379c2efc332b917f2a433932a0c3c1a1be5074b8"
+  },
+  "terminal_input_binding": {
+    "path": ".local/meeting-summary-qualified-independent-v1/admission-v1/terminal-input-binding.json",
+    "bytes": 32056,
+    "sha256": "4a64508c5f56411942a7aa206e829a193a09fba571bb1a970fe8dc756235ea08"
+  },
+  "limits": [
+    "Four documents from two related project families, not four independent organizations.",
+    "Zarr publisher TLDR sections remain in full originals and are not target summaries or ground truth.",
+    "Current separation is limited to the designated31 metadata, represented assignments and declared identifiers; no complete-history or universal registry guarantee.",
+    "Historical L2 run-input unknown remains unchanged.",
+    "Provisional unit coordinates are before tokenizer partition; no model input4096/template/runtime binding verified.",
+    "Old source bodies were not read for semantic near-duplicate matching; whole declared project-family and identifier/hash exclusions provide the permitted comparison.",
+    "Independent AI admission is not human review, Korean readability/summary sufficiency evidence, final evaluation, model quality, service readiness or legal opinion."
+  ],
+  "preserved_audit_failures": [
+    "Default python alias launch failure before script execution; isolated existing interpreter used.",
+    "Initial independent audit mistakenly assumed one-based payload IDs; original failed check retained and separately corrected after exact zero-based mapping verified.",
+    "Concurrent parent-owned AGENTS hash delta retained; author35, declared31, generic plans2 and frozen77 unchanged."
+  ],
+  "parent_verification": {
+    "review_output_refs": 13,
+    "fixed_inputs": 68,
+    "frozen77": 77,
+    "private_source_or_judgment_semantics_read": false
+  },
+  "prospective_exclusion_registry": "data/evaluation/meetings-summary-qualified-development-exclusions-v1.json",
+  "criteria_witness_feasibility_model_tokenizer_Java_calls": 0,
+  "human_reviews": 0,
+  "adoption_decision": "Parent accepts only current bounded source admission; no implementation or actual model run authorized by this record."
+}
