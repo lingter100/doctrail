@@ -14,6 +14,7 @@ import secrets
 import subprocess
 import time
 from contextlib import ExitStack, contextmanager, nullcontext
+from dataclasses import dataclass
 from pathlib import Path
 
 from doctrail.inference import WorkerError
@@ -27,7 +28,7 @@ from doctrail.meeting_grounded_summary import (
     summary_messages,
 )
 from doctrail.meeting_worker import ANSWER_PROMPT, messages, worker_lease
-from scripts.prepare_meeting_gguf import prepare
+from scripts.prepare_meeting_gguf import linked, safe_member
 from scripts.probe_meeting_summary_mode import (
     Evidence,
     ResourceGuard,
@@ -336,21 +337,109 @@ def command(server, model, port):
             "--no-webui", "--log-disable"]
 
 
+@dataclass(frozen=True)
+class CheckedAssets:
+    """Ephemeral connection from this execution's full registration verification."""
+
+    profile: Path
+    model_root: Path
+    model: Path
+    server: Path
+    receipt: dict
+    runtime_names: frozenset[str]
+
+
+def runtime_path_set(directory):
+    """Names only, with reparse rejection before descending; no second digest pass."""
+    require(directory.is_dir() and not linked(directory), "runtime_path")
+    files, directories, pending = set(), set(), [directory]
+    while pending:
+        for path in pending.pop().iterdir():
+            require(not linked(path), "runtime_reparse")
+            name = path.relative_to(directory).as_posix()
+            if path.is_dir():
+                directories.add(name)
+                pending.append(path)
+            else:
+                require(path.is_file(), "runtime_path")
+                files.add(name)
+    expected_directories = {parent.as_posix() for name in files for parent in Path(name).parents
+                            if parent != Path(".")}
+    require(directories == expected_directories, "runtime_directories")
+    return frozenset(files)
+
+
+def checked_assets(spec, profile, receipt, root):
+    """Connect already hashed references; never install, extract or rehash assets."""
+    model_root = bound_path(spec["model_root"], root)
+    references = {r["file"]: r for r in spec["assets"]}
+    require(receipt.get("schema_version") == 1 and profile.get("schema_version") == 1
+            and receipt.get("manifest_sha256") == spec["profile"]["sha256"] == PROFILE_SHA,
+            "receipt_profile")
+
+    def connect(name, metadata):
+        relative = safe_member(name)
+        require(relative.as_posix() == name, "asset_path")
+        path = bound_path((model_root / relative).relative_to(root).as_posix(), root)
+        reference = references.get(path.relative_to(root).as_posix())
+        require(reference is not None and all(reference[k] == metadata[k]
+                for k in ("size_bytes", "sha256")), "receipt_asset")
+        return path
+
+    def filename(metadata):
+        name = metadata["filename"]
+        require(safe_member(name).as_posix() == name and len(Path(name).parts) == 1, "asset_filename")
+        return name
+
+    model = connect(filename(profile["gguf"]), profile["gguf"])
+    require(receipt["model"] == {"path": profile["gguf"]["filename"],
+            **{k: profile["gguf"][k] for k in ("size_bytes", "sha256")}}
+            and receipt["model"]["sha256"] == MODEL_SHA, "receipt_model")
+    licenses = {}
+    for metadata in profile["licenses"]:
+        name = "licenses/" + filename(metadata)
+        connect(name, metadata)
+        licenses[name] = {k: metadata[k] for k in ("size_bytes", "sha256")}
+    require(receipt["licenses"] == licenses, "receipt_licenses")
+    for metadata in profile["llama"]["assets"]:
+        connect("downloads/" + filename(metadata), metadata)
+    runtime = receipt["runtime_files"]
+    require(isinstance(runtime, dict) and bool(runtime)
+            and len({name.casefold() for name in runtime}) == len(runtime), "runtime_names")
+    for name, metadata in runtime.items():
+        connect("runtime/" + name, metadata)
+    servers = [name for name in runtime if Path(name).name == "llama-server.exe"]
+    require(len(servers) == 1 and receipt["server_path"] == "runtime/" + servers[0], "receipt_server")
+    server = connect(receipt["server_path"], runtime[servers[0]])
+    require(runtime_path_set(model_root / "runtime") == frozenset(runtime), "runtime_inventory")
+    return CheckedAssets(root / PROFILE, model_root, model, server, copy.deepcopy(receipt), frozenset(runtime))
+
+
 @contextmanager
-def launch(profile, model_root, deadline, metrics, *, root=ROOT, clock=time.monotonic):
+def launch(profile, model_root, deadline, metrics, *, prepared, root=ROOT, clock=time.monotonic):
     """Small profile seam; leases, readiness, drain and cleanup are shared primitives."""
     import psutil
     with ExitStack() as stack:
         for name in ("meeting-generation.gpu.lock", "meeting-generation.worker.lock", "meeting-llama.lease"):
             stack.enter_context(worker_lease(root / ".local" / name))
-        receipt = prepare(profile, model_root, allow_download=False)
-        remaining(clock, deadline)
-        require(psutil.virtual_memory().available >= LIMITS["startup_available_bytes"], "startup_ram")
-        server, model = model_root / receipt["server_path"], model_root / receipt["model"]["path"]
+        require(isinstance(prepared, CheckedAssets) and prepared.profile == profile
+                and prepared.model_root == model_root, "prepared_connection")
+        server, model, receipt = prepared.server, prepared.model, prepared.receipt
+        for path in (model_root, server, model):
+            bound_path(path.relative_to(root).as_posix(), root)
+        require(server.is_file() and model.is_file()
+                and runtime_path_set(model_root / "runtime") == prepared.runtime_names, "runtime_inventory")
         port, token = unused_port(), secrets.token_urlsafe(48)
         environment = {k: v for k, v in os.environ.items() if not k.startswith("LLAMA_ARG_")}
         environment.update(LLAMA_API_KEY=token, HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1")
         process, drain = None, None
+        remaining(clock, deadline)
+        available = psutil.virtual_memory().available
+        metrics["startup_ram_gate"] = {"stage": "before_native_popen", "available_bytes": available,
+            "minimum_bytes": LIMITS["startup_available_bytes"],
+            "passed": available >= LIMITS["startup_available_bytes"],
+            "elapsed_seconds": clock() - (deadline - LIMITS["startup_seconds"])}
+        require(metrics["startup_ram_gate"]["passed"], "startup_ram")
         try:
             metrics["process_creation_attempted"] = True
             process = subprocess.Popen(command(server, model, port), cwd=server.parent,
@@ -402,12 +491,13 @@ def verify_registration(path, expected_sha, root=ROOT):
     require(spec["order"] == [d["id"] for d in documents], "source_order")
     output = bound_path(spec["output_dir"], root)
     require(output.is_relative_to(root / ".local") and output.name == ID and not output.exists(), "output_scope")
-    return spec, documents, output
+    prepared = checked_assets(spec, profile, receipt, root)
+    return spec, documents, output, prepared
 
 
 def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
     started = clock()
-    spec, documents, output = verify_registration(path, expected_sha, root)
+    spec, documents, output, prepared = verify_registration(path, expected_sha, root)
     output.mkdir(parents=True, exist_ok=False)  # reservation survives every subsequent failure
     private = output / "private"
     private.mkdir()
@@ -424,7 +514,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
                   for s in ("summary", "review", "qa")}} for d in documents]}
     try:
         remaining(clock, started + 120)
-        with launch(root / PROFILE, root / spec["model_root"], started + 120, metrics, root=root, clock=clock) as service:
+        with launch(root / PROFILE, root / spec["model_root"], started + 120, metrics,
+                    prepared=prepared, root=root, clock=clock) as service:
             guard = ResourceGuard(service.process, clock=clock, expected_created=metrics["owned_create_time"])
             adapter = CandidateAdapter(service.url, service.token, root / PROFILE, clock=clock,
                                        observe=emit, resource_check=guard.check)
@@ -490,7 +581,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
         if clock() - started > 1025:
             report.update(status="stopped", operational_complete=False, mechanically_complete=False)
             report["stop_reason"] = report["stop_reason"] or {"code": "local_candidate_whole_deadline"}
-        terminal = {"status": report["status"], "mechanically_complete": report["mechanically_complete"],
+        terminal = {"startup_ram_gate": metrics.get("startup_ram_gate"), "status": report["status"], "mechanically_complete": report["mechanically_complete"],
                     "operational_complete": report["operational_complete"], "stop_reason": report["stop_reason"],
                     "registration_sha256": expected_sha, "report_sha256": sha((output / "report.json").read_bytes()),
                     "elapsed_seconds_after_report_write": clock() - started}

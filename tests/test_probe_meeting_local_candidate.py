@@ -2,6 +2,7 @@
 import copy
 import json
 from contextlib import contextmanager
+from pathlib import Path
 from types import SimpleNamespace
 
 import httpx
@@ -226,7 +227,8 @@ def test_launch_reuses_cleanup_on_exact_returned_handle(monkeypatch, tmp_path, f
     def arm(*args):
         yield
     monkeypatch.setattr(probe, "worker_lease", lease)
-    monkeypatch.setattr(probe, "prepare", lambda *a, **k: {"server_path": "runtime/server", "model": {"path": "model"}} if k == {"allow_download": False} else pytest.fail("download"))
+    spec, registration, seal = registration_fixture(tmp_path, monkeypatch)
+    prepared = probe.verify_registration(registration, seal(), tmp_path)[3]
     monkeypatch.setattr(psutil, "virtual_memory", lambda: SimpleNamespace(available=10 * 1024**3))
     monkeypatch.setattr(probe, "unused_port", lambda: 1234)
     monkeypatch.setenv("LLAMA_ARG_N_GPU_LAYERS", "0")
@@ -252,7 +254,8 @@ def test_launch_reuses_cleanup_on_exact_returned_handle(monkeypatch, tmp_path, f
     monkeypatch.setattr(probe, "wait_ready", ready)
     monkeypatch.setattr(probe, "cleanup_owner", lambda p, d, m, **k: seen.append(("cleanup", p)))
     with pytest.raises(ValueError, match="first"):  # noqa: SIM117
-        with probe.launch(tmp_path / "profile", tmp_path, 120, {}, root=tmp_path, clock=lambda: 0):
+        with probe.launch(tmp_path / probe.PROFILE, tmp_path / spec["model_root"], 120, {},
+                          prepared=prepared, root=tmp_path, clock=lambda: 0):
             raise ValueError("first body failure")
     assert len([x for x in seen if x[0] == "cleanup"]) == 1
     assert next(x[1] for x in seen if x[0] == "cleanup") is process
@@ -278,7 +281,12 @@ def registration_fixture(tmp_path, monkeypatch):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data if isinstance(data, bytes) else probe.encoded(data))
         return {"file": name, "size_bytes": path.stat().st_size, "sha256": probe.sha(path.read_bytes())}
-    profile = write(probe.PROFILE, {"llama": {"assets": [{"filename": "runtime.zip"}]}})
+    metadata = {"size_bytes": len(b"synthetic artifact"), "sha256": probe.sha(b"synthetic artifact")}
+    profile = write(probe.PROFILE, {"schema_version": 1,
+                    "gguf": {"filename": "model.gguf", **metadata},
+                    "llama": {"assets": [{"filename": "runtime.zip", **metadata}]},
+                    "licenses": [{"filename": "license.txt", **metadata}]})
+    monkeypatch.setattr(probe, "MODEL_SHA", metadata["sha256"])
     monkeypatch.setattr(probe, "PROFILE_SHA", profile["sha256"])
     monkeypatch.setattr(probe, "CODE_FILES", ("scripts/fake_driver.py",))
     code = write("scripts/fake_driver.py", b"# test-only code binding")
@@ -286,9 +294,11 @@ def registration_fixture(tmp_path, monkeypatch):
     criteria = {key: write(".local/" + key + "-lock.json", b"PRIVATE CRITERION NOT MODEL INPUT") for key in ("summary", "qa")}
     model_root = "models/candidate"
     assets = [write(model_root + "/" + name, b"synthetic artifact")
-              for name in ("model.gguf", "runtime/server.exe", "licenses/license.txt", "downloads/runtime.zip")]
-    assets.append(write(model_root + "/setup-receipt.json", {"model": {"path": "model.gguf"},
-                 "runtime_files": {"server.exe": {}}, "licenses": {"licenses/license.txt": {}}}))
+              for name in ("model.gguf", "runtime/llama-server.exe", "licenses/license.txt", "downloads/runtime.zip")]
+    assets.append(write(model_root + "/setup-receipt.json", {"schema_version": 1, "manifest_sha256": profile["sha256"],
+                 "model": {"path": "model.gguf", **metadata}, "quality_verified": False,
+                 "server_path": "runtime/llama-server.exe",
+                 "runtime_files": {"llama-server.exe": metadata}, "licenses": {"licenses/license.txt": metadata}}))
     spec = {"schema_version": 1, "diagnostic": probe.ID, "prepared": True, "limits": probe.LIMITS,
             "profile": profile, "input": source, "criteria_locks": criteria, "code": [code], "assets": assets,
             "model_root": model_root, "output_dir": ".local/run/" + probe.ID, "order": [d["id"] for d in documents()]}
@@ -315,12 +325,13 @@ def test_registration_binds_only_declared_files_and_refuses_changes(tmp_path, mo
     elif fault == "limits":
         spec["limits"] = {**probe.LIMITS, "qa_tokens": 257}
     digest = seal()
-    monkeypatch.setattr(probe, "prepare", lambda *a, **k: pytest.fail("registration must not prepare"))
+    monkeypatch.setattr(probe, "prepare", lambda *a, **k: pytest.fail("registration must not prepare"), raising=False)
     if fault:
         with pytest.raises((probe.CandidateFailure, ValueError)):
             probe.verify_registration(path, "0" * 64 if fault == "digest" else digest, tmp_path)
     else:
-        verified, docs, output = probe.verify_registration(path, digest, tmp_path)
+        verified, docs, output, prepared = probe.verify_registration(path, digest, tmp_path)
+        assert prepared.model_root == tmp_path / spec["model_root"]
         assert verified == spec and docs == documents() and not output.exists()
         assert "PRIVATE CRITERION" not in json.dumps(docs)
 
@@ -399,11 +410,13 @@ def test_startup_ram_gate_precedes_process_creation(monkeypatch, tmp_path):
     def lease(path):
         yield
     monkeypatch.setattr(probe, "worker_lease", lease)
-    monkeypatch.setattr(probe, "prepare", lambda *a, **k: {})
+    spec, registration, seal = registration_fixture(tmp_path, monkeypatch)
+    prepared = probe.verify_registration(registration, seal(), tmp_path)[3]
     monkeypatch.setattr(psutil, "virtual_memory", lambda: SimpleNamespace(available=10 * 1024**3 - 1))
     monkeypatch.setattr(probe.subprocess, "Popen", lambda *a, **k: pytest.fail("RAM gate must precede Popen"))
     with pytest.raises(probe.CandidateFailure, match="startup_ram"):  # noqa: SIM117
-        with probe.launch(tmp_path / "profile", tmp_path, 120, {}, root=tmp_path, clock=lambda: 0):
+        with probe.launch(tmp_path / probe.PROFILE, tmp_path / spec["model_root"], 120, {},
+                          prepared=prepared, root=tmp_path, clock=lambda: 0):
             pytest.fail("must not yield")
 
 
@@ -470,3 +483,130 @@ def test_lc_r1_native_envelope_json_error_stops_without_later_dispatch(tmp_path)
     assert not report["operational_complete"]
     assert report["documents"][0]["qa"]["status"] == "unexecuted"
     assert all(row["summary"]["status"] == "unexecuted" for row in report["documents"][1:])
+
+
+@pytest.mark.parametrize("fault", ["manifest", "model", "runtime_digest", "server", "license", "archive", "extra", "missing", "reparse"])
+def test_startup_checked_asset_relationships_before_popen(tmp_path, monkeypatch, fault):
+    from scripts import prepare_meeting_gguf as setup
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    model_root = tmp_path / spec["model_root"]
+    receipt_path = model_root / "setup-receipt.json"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    if fault == "manifest":
+        receipt["manifest_sha256"] = "0" * 64
+    elif fault == "model":
+        receipt["model"]["sha256"] = "0" * 64
+    elif fault == "runtime_digest":
+        receipt["runtime_files"]["llama-server.exe"]["sha256"] = "0" * 64
+    elif fault == "server":
+        receipt["server_path"] = "downloads/runtime.zip"
+    elif fault == "license":
+        receipt["licenses"]["licenses/license.txt"]["sha256"] = "0" * 64
+    elif fault == "archive":
+        archive = model_root / "downloads/runtime.zip"
+        archive.write_bytes(b"different registered archive")
+        for reference in spec["assets"]:
+            if reference["file"].endswith("runtime.zip"):
+                reference.update(size_bytes=archive.stat().st_size, sha256=probe.sha(archive.read_bytes()))
+    elif fault == "extra":
+        (model_root / "runtime/extra.dll").write_bytes(b"extra")
+    elif fault == "missing":
+        (model_root / "runtime/llama-server.exe").unlink()
+    else:
+        # Simulate Windows junction metadata even where creating symlinks requires privileges.
+        directory = model_root / "runtime/junction"
+        directory.mkdir()
+        monkeypatch.setattr(probe, "linked", lambda p: Path(p) == directory, raising=False)
+    receipt_path.write_bytes(probe.encoded(receipt))
+    for reference in spec["assets"]:
+        if reference["file"].endswith("setup-receipt.json"):
+            reference.update(size_bytes=receipt_path.stat().st_size, sha256=probe.sha(receipt_path.read_bytes()))
+    monkeypatch.setattr(setup, "prepare", lambda *a, **k: pytest.fail("no preparation"))
+    monkeypatch.setattr(probe.subprocess, "Popen", lambda *a, **k: pytest.fail("no native launch"))
+    with pytest.raises((probe.CandidateFailure, ValueError)):
+        probe.verify_registration(path, seal(), tmp_path)
+
+
+@pytest.mark.parametrize("available", [10 * 1024**3 - 1, 10 * 1024**3])
+def test_startup_no_prepare_single_ram_sample_and_exact_checked_paths(tmp_path, monkeypatch, available):
+    import psutil
+
+    from scripts import prepare_meeting_gguf as setup
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    result = probe.verify_registration(path, seal(), tmp_path)
+    extra = {"prepared": result[3]} if len(result) == 4 else {}
+    calls, metrics = [], {}
+    @contextmanager
+    def lease(path):
+        yield
+    def sample():
+        calls.append("ram")
+        return SimpleNamespace(available=available)
+    def forbidden(*a, **k):
+        pytest.fail("launch must not prepare, extract, download, or rehash")
+    def popen(argv, **kwargs):
+        calls.append("Popen")
+        assert Path(argv[0]) == tmp_path / spec["model_root"] / "runtime/llama-server.exe"
+        assert Path(argv[argv.index("--model") + 1]) == tmp_path / spec["model_root"] / "model.gguf"
+        raise ValueError("synthetic Popen sentinel")
+    for name in ("prepare", "extract_runtime", "download"):
+        monkeypatch.setattr(setup, name, forbidden)
+    monkeypatch.setattr(probe, "prepare", forbidden, raising=False)
+    monkeypatch.setattr(probe, "check_ref", forbidden)
+    monkeypatch.setattr(probe, "worker_lease", lease)
+    monkeypatch.setattr(psutil, "virtual_memory", sample)
+    monkeypatch.setattr(probe, "unused_port", lambda: 1234)
+    monkeypatch.setattr(probe.subprocess, "Popen", popen)
+    monkeypatch.setattr(probe, "cleanup_owner", lambda *a, **k: None)
+    expected = probe.CandidateFailure if available < 10 * 1024**3 else ValueError
+    with pytest.raises(expected):  # noqa: SIM117
+        with probe.launch(tmp_path / probe.PROFILE, tmp_path / spec["model_root"], 120,
+                          metrics, root=tmp_path, clock=lambda: 7, **extra):
+            pytest.fail("must not yield")
+    assert calls == (["ram"] if available < 10 * 1024**3 else ["ram", "Popen"])
+    assert metrics["startup_ram_gate"] == {"stage": "before_native_popen", "available_bytes": available,
+        "minimum_bytes": 10 * 1024**3, "passed": available >= 10 * 1024**3, "elapsed_seconds": 7}
+
+
+
+def test_startup_low_ram_survives_report_terminal_and_cleanup_path(tmp_path, monkeypatch):
+    import psutil
+    spec, registration, seal = registration_fixture(tmp_path, monkeypatch)
+    samples = []
+    def sample():
+        samples.append(True)
+        return SimpleNamespace(available=10 * 1024**3 - 1)
+    monkeypatch.setattr(psutil, "virtual_memory", sample)
+    monkeypatch.setattr(probe, "unused_port", lambda: 1234)
+    monkeypatch.setattr(probe.subprocess, "Popen", lambda *a, **k: pytest.fail("low RAM cannot start"))
+    result = probe.execute(registration, seal(), root=tmp_path, clock=lambda: 0)
+    output = tmp_path / spec["output_dir"]
+    report = json.loads((output / "report.json").read_text(encoding="utf-8"))
+    terminal = json.loads((output / "terminal.json").read_text(encoding="utf-8"))
+    assert samples == [True]
+    assert result["first_failure"]["code"] == "local_candidate_startup_ram"
+    assert terminal["startup_ram_gate"] == report["cleanup"]["startup_ram_gate"]
+    assert terminal["startup_ram_gate"]["available_bytes"] == 10 * 1024**3 - 1
+    assert not terminal["startup_ram_gate"]["passed"]
+    assert not report["cleanup"].get("process_creation_attempted")
+    assert report["bindings_unchanged"] and all(row["qa"]["status"] == "unexecuted" for row in report["documents"])
+
+
+@pytest.mark.parametrize("fault", ["extra", "missing", "reparse"])
+def test_startup_rechecks_runtime_names_after_verification(tmp_path, monkeypatch, fault):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    prepared = probe.verify_registration(path, seal(), tmp_path)[3]
+    runtime = prepared.model_root / "runtime"
+    if fault == "extra":
+        (runtime / "extra.dll").write_bytes(b"extra")
+    elif fault == "missing":
+        prepared.server.unlink()
+    else:
+        child = runtime / "junction"
+        child.mkdir()
+        monkeypatch.setattr(probe, "linked", lambda p: p == child)
+    monkeypatch.setattr(probe.subprocess, "Popen", lambda *a, **k: pytest.fail("changed runtime cannot start"))
+    with pytest.raises(probe.CandidateFailure):  # noqa: SIM117
+        with probe.launch(tmp_path / probe.PROFILE, tmp_path / spec["model_root"], 120, {},
+                          prepared=prepared, root=tmp_path, clock=lambda: 0):
+            pytest.fail("must not yield")

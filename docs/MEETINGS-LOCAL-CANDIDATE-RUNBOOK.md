@@ -31,6 +31,10 @@ $env:PYTHONUTF8 = '1'
 
 기계적 형식·내용 거부는 원본을 보존하고 다음 고정 항목으로 간다. 자원·프로토콜·실행 안전 실패에서는 남은 항목을 미실행으로 남긴다. 모델 내부 검토 통과는 독립 내용 통과를 대신하지 않는다. 고정 분모는 요약4·답변4이며 무효·보류·미실행을 숨기지 않는다.
 
+## 시작 경로 보완
+
+[후속 설계](MEETINGS-LOCAL-CANDIDATE-STARTUP-NEXT.md)에 따라 현재 등록에서 전체 검증한62자산을 준비 완료 연결값으로 launch에 전달한다. 실행 중 prepare·압축해제·다운로드는 하지 않는다. runtime파일집합·등록 메타데이터·경로 안전성·native신원·사후hash는 유지한다. 실제Popen직전RAM단일sample과10GiB판정을report/terminal에남기며 미달이면재샘플대기없이거부한다.58합성검사와독립검토는통과했지만 실제RAM통과·API적합성은아직확인하지않았다. [구현 기록](../experiments/results/meetings-local-candidate-startup-repair-v1.json).
+
 ## 실제 실행 전 상태
 
 새 코드의43합성검사·독립 검토와9fdf6ae2의필수CI를 통과한 뒤 등록df2e819e로 공식CLI를1회 실행했다. 결과는38.282초/exit1, local_candidate_startup_ram이며 native/생성/토큰화0이다. 원본 실행은 소비됐고 같은 등록·출력경로로 다시 실행하지 않는다. [안전 결과](../experiments/results/meetings-local-candidate-actual-v1.json)에 미실행과 관측 한계를 남겼다. 아래는 향후 별도 검증된 새 등록에만 사용하는 명령 형식이다. 자리표시자를 임의 값으로 채워 실행하지 않는다.
