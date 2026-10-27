@@ -8,7 +8,7 @@
 
 ## 현재 범위
 
-무료 로컬 후보의 [최신 실제 비교](docs/MEETINGS-LOCAL-SUMMARY-CONTROL-RESULTS.md)는 분량 지침을 정확히 전송했지만 요약4개 모두 출력·문자 수 조건으로 거부됐다. 답변4개도 형식 통과 뒤 별도 AI 내용 수용0/4였다. 코드188합성검사·독립 검토·CI 성공을 모델 품질 개선으로 바꾸지 않고 후보를 서비스에 채택하지 않는다. [QA 후속 계획](docs/MEETINGS-LOCAL-QA-CONTROL-NEXT.md)은 별도 지침 하나를 비교하며 현재 구현 전이다.
+무료 로컬 후보의 [최신 실제 비교](docs/MEETINGS-LOCAL-QA-CONTROL-RESULTS.md)에서 QA 지침을 바꿨지만 별도 AI 내용 수용은0/4로 유지됐다. 인용10/10일치와 충분한 답변은 달랐고 요약4개도 출력·문자 수 조건으로 거부됐다. 237합성검사·독립 코드 검토·CI 성공을 모델 품질로 해석하지 않으며 후보를 서비스에 채택하지 않는다. 사전 계획대로 같은 지침 미세변형은 종료하고 다른 무료 로컬 접근과 [요약 엔진 검증 준비](docs/MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md)를 진행한다.
 
 **문서·회의 관리 기능은 대부분 구현됐으며, 무료 로컬 AI의 내용 품질과 운영 안정성을 검증 중이다.** 기능별 상태와 남은 순서는 [현재 진행 상황](docs/PROGRESS-OVERVIEW.md), 백업·복원의 범위와 재현 방법은 [운영 검증](docs/MEETINGS-RESTORE-VERIFICATION.md)을 참고한다. 회의1차와 전체 포트폴리오는 아직 미완료다.
 
