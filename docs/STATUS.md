@@ -1,4 +1,24 @@
 # 진행 상태
+## 2026-10-27 · fixture 핀 수정의 실제 운영 검증과 QA 구현 계획 수용
+
+같은 Astra high가 기본 합성 fixture 경로의 호환성을 확인한 뒤 companion의SHA 한 문자열만33ca1bd→fe2de364로 갱신했다. 부모는 원본과 현재가 이치환1개뿐이고 FIXED3개가 실제파일과일치함을확인했다. 기존56합성검사5.23초/Ruff·테스트본문불변, 정확복사JAR762da434/명시Java21의새합성DB운영1회14.781초/12항목통과를검증했다. setup/restart/restored Java3회와관측소유12신원은종료/부재다. 부모34참조를대조했고 원래CI실패·개인DB·원래JAR는보존한다. 새소스CI는아직이다.
+
+Astra xhigh의 새 QA adapter 계획65줄9800524a를 수용했다. 부모25참조를 확인했고 원계획/receipt와 역할 열람 범위만 명확히 한 addendum를 보존했다. 새policy/adapter/runner/CLI/test5개만 구현하며 기존source2·자료·6개/13회/6of6조건과 요약목표를 유지한다. 새취득/내장metadata검토/runtime55확인 없이 실행등록을완성하지않는다. 공개 후 새코드구현을배정하고 실제취득은수정CI뒤순차진행한다. 전체목표ACTIVE다.
+
+## 2026-10-27 · 게시 후 운영 검사에서 오래된 fixture 결속 발견
+
+b16d5ed의 push40465246850·PR40465253756은 terminal 실패다. backend/web은 양쪽 모두 통과했지만 java-service의 합성 편집·복원 단계가 binding-preflight/helper_or_fixture_binding에서 실패했다. watch87699/57044는 exit1로 종료됐다. 두 실제 보고서와 ZIP 공식 digest·job logs를 보존했다. 해당 단계의 Java lifecycles/checks는0으로, 실제 복원이 실패했다고 단정하지 않는다. 뒤의 전체 브라우저 CI도 실행되지 않았다.
+
+원인은 수동 보정에서 공개 자료 opt-in을 추가한 fixture의 게시SHA fe2de364와 companion에 남은 옛SHA33ca1bd의 불일치다. 기존 Astra high에게 기본 합성 경로 호환성을 확인한 뒤 이핀만갱신하고 원래56검사/Ruff·기존정확복사JAR의새격리운영검사를하도록배정했다. 원래guard/frozen helper/DB/JAR/실패를 유지한다. 재실행으로 실패를 덮지 않고 수정커밋의정확CI를새로확인할때까지취득은시작하지않는다. 전체목표ACTIVE다.
+
+## 2026-10-27 · 보정 기능과 엔진 수정 게시, 정확 소스 CI 진행
+
+사용자 명의5638623/b16d5ed 두 커밋을 기능 브랜치에 게시했다. 원격 author/committer lingter100, 현재/Git33파일 바이트와 PR14 draft head/본문을 확인했다. push40465246850·PR40465253756은 같은 watch87699/57044로 관찰 중이다. 새로운 실행이나 조기 추가push는 하지 않는다.
+
+보정 기능의 실제Java273통과/기존skip1, 첫전체156통과/2실패와 마지막 관련6개 통과를 분리한 공개검증 문서를 게시했다. 엔진173합성 및 최종검토 결과도 실제 재취득·빌드·모델 성공과 구분한다. 부모 마지막 review 경로 확인은 루트AGENTS를 상대출력으로 잘못 해석해 쓰기 전 중단됐고, 루트문서로 다시 대조했다. 검토 당시AGENTS는 새 상태줄을 제외한 바이트가 정확해시와 같음을 확인해 별도 보존했다.
+
+기존 Astra high 프론트 담당자는 무료QA 자산 취득 관찰 준비만, 기존 Astra xhigh는 새QA adapter의 최소구현 설계만 맡는다. 실제 다운로드/새모델/자원gate는 아직0이다. 다음 실제 엔진 취득은 정확CI 이후 새폴더·한번배정·원래실패보존 조건으로만 진행한다. 전체 목표ACTIVE다.
+
 ## 2026-10-27 · 수동 보정 표적 회귀 종료와 엔진 수정 커밋
 
 수동 보정 전체 원본156통과/2실패와 공개/합성 검사의 범위를 보존했다. 기존 ready/save-pending 첫 표적5통과/1선택자실패 뒤 ready만4통과, save-pending2통과는 재실행하지 않았다. 최종 타입 검사도 통과했다. 부모가 실제 통합·엔진 수정312참조와 최종 검토/표적/게시 바이트117참조를 대조했다. 새 spec의 CRLF4개만LF로 맞추고 TypeScript5.9.3 생성JS 동일·원본 보존을 확인했다. 기존 Astra xhigh의 마지막 테스트 델타3개 검토91a74ec9는 blocker0/advisory0이며 부모가 입력과 검토문서를 대조했다.

@@ -117,6 +117,8 @@ npm run build
 - [통합 기록·피드백 검증](docs/MEETINGS-KNOWLEDGE-HISTORY-VERIFICATION.md), [회의 수동 보정 계획](docs/MEETINGS-MANUAL-CORRECTION-PLAN.md), [실제 보정 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)
 - [요약 엔진 검증 도구](docs/MEETINGS-SUMMARY-ENGINE-PREPARATION.md), [새 무료 QA 준비 계약](docs/MEETINGS-FREE-QA-PREPARATION-PLAN.md)
 
+- [무료 QA 비교 구현 계획](docs/MEETINGS-FREE-QA-ADAPTER-PLAN.md)
+
 ## 라이선스와 사실 구분
 
 프로젝트 코드는 MIT License다. 공개 문서·데이터셋은 각 원출처의 이용 조건을 따르며 코드의 MIT 라이선스로 재지정하지 않는다. 합성 예시와 공개 원문, 계획과 실측, 자동 검수와 사용자 검수를 구분한다. AI가 설계·구현·실험·문서 작성을 지원하며, 사용자의 직접 판단·검증은 별도로 기록한다.
