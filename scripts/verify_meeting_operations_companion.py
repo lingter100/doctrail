@@ -37,7 +37,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FIXED = {
     "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
     "scripts/backup_db.py": "93eb767a0969a4999a8e33ee465cfed2f82c13d7c8b96eeecd092669dbb29a6a",
-    "web/scripts/meeting-transport-fixture.mjs": "33ca1bd10a193691b9f6c66684d231561e417ee1d8d1e27e78629b30f7a9cb44",
+    "web/scripts/meeting-transport-fixture.mjs": "fe2de364c7923ebfaf473b4f3397d773c169a299a0c031e8666f73caf7ab3519",
 }
 TABLES = ("documents", "chunks", "meetings", "meeting_runs", "meeting_edits", "meeting_links",
           "meeting_link_evidence", "users", "workspaces", "memberships")

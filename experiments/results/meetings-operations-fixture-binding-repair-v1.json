@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "LOCAL_REPAIRED_EXACT_SOURCE_CI_PENDING",
+  "source_files": [
+    {
+      "file": "scripts/verify_meeting_operations_companion.py",
+      "sha256": "2f016609f62f0d17aeac889a2504b82bff069882654739edf7a763ddd77c482b",
+      "size_bytes": 36976
+    },
+    {
+      "file": "tests/test_meeting_operations_companion.py",
+      "sha256": "8f27c336b6d2692e23fd87045cc814de868b43b48afdc5242b17cd8ac3d237ff",
+      "size_bytes": 37001
+    }
+  ],
+  "change": "One fixture SHA literal updated; actual FIXED bindings retained and matched current files.",
+  "default_fixture_compatibility": "Removing only opt-in crypto import/false-default argument/guarded public-source branch restores old normalized source exactly; companion HOST passes no options.",
+  "synthetic_validation": {
+    "passed": 56,
+    "seconds": 5.23,
+    "ruff": "passed",
+    "exits": {
+      "pytest_exit": 0,
+      "ruff_exit": 0
+    }
+  },
+  "actual_validation": {
+    "official_exit": 0,
+    "seconds": 14.780999999959022,
+    "cli_count": 1,
+    "jar": "762da434612407b8a8c9a9a03d9c7c9a51386d5785d506f2e015eaab39ab2454",
+    "java_lifecycles": 3,
+    "checks": [
+      "summary_v2_edit_and_provenance",
+      "confirmed_decision_supersedes",
+      "done_assignee_tasks",
+      "source_restart_without_generation",
+      "backup_restore_table_equality",
+      "integrity_foreign_keys",
+      "old_cookie_denied",
+      "relogin_state_equality",
+      "bm25_unicode_spans",
+      "private_member_ACL",
+      "no_fixture_calls_during_restart_or_restore",
+      "source_backup_unchanged"
+    ],
+    "fixture_calls": {
+      "analyze": 2,
+      "answer": 0
+    },
+    "owned_identities_and_wrapper_absent": 12
+  },
+  "first_failure_result": "experiments/results/meetings-manual-engine-source-ci-v1.json",
+  "preservation": {
+    "test_source_unchanged": true,
+    "prior_ci_failures_preserved": true,
+    "original_jar_and_personal_database_unchanged": true
+  },
+  "receipt": {
+    "file": ".local/meeting-operations-fixture-binding-repair-v1/receipt.json",
+    "sha256": "10393b8396d46cd5b4eda90036a9d36a91c6fdb80b19e448b4e10da566d8a66d"
+  },
+  "AI_quality": false,
+  "human_review_count": 0,
+  "model_calls": 0
+}

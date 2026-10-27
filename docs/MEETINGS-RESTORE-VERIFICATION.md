@@ -37,3 +37,11 @@ Java 서버는 루프백 주소로 제한하고, 검사에서 만든 Java·Node 
 ## Windows 출력 인코딩
 
 Python은 위 명령처럼 -X utf8로 실행한다. 보조 도구는 자식 JVM의 stdout.encoding과 stderr.encoding을 UTF-8로 고정하고 Python의 실제 기본 해독기가 UTF-8인지 시작 전에 확인한다. 이는 [Java 21 System 문서](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html)의 스트림 인코딩 속성을 사용한다. Windows 전역 환경이나 동결 helper를 바꾸지 않으며 상속 JVM 설정을 제거하고 검사 뒤 원래 환경을 복원한다. 첫 실패와 후속 결과는 별개 출력 폴더로 보존한다.
+
+## 2026-10-27 공개 원문 보정 fixture 확장 후 결속 갱신
+
+수동 보정의 공개 원문 검사를 명시 opt-in으로 추가하면서 합성 transport 파일이 바뀌었지만 companion의 고정SHA는 옛 값을 유지했다. b16d5ed의 양쪽 CI가 Java 시작 전 binding-preflight/helper_or_fixture_binding으로 실패했다. 원래 보고서·ZIP·로그를 보존했으며 복원 동작의 실패로 분류하지 않는다. [최초 CI 실패](../experiments/results/meetings-manual-engine-source-ci-v1.json)를 참고한다.
+
+기본 호출의 옵션은 false이고 기존 companion은 인자 없이 호출한다. 공개 분기와 관련 import/false-default 옵션만 제외하면 이전 정규화 소스와 일치함을 확인했다. guard를 없애지 않고 fixture SHA 한 문자열만 현재 게시 바이트에 맞췄다. 기존56합성검사5.23초/Ruff를 통과했고 테스트 본문은 변경하지 않았다.
+
+이미 검증한 별도 복사본 JAR와 명시Java21에서 새 합성DB로 실제 companion1회를 실행해14.781초에12항목을 통과했다. setup/restart/restored Java3회와 소유 프로세스 종료·부재를 확인했고 fixture는 분석2회/답변0회였다. 원래 JAR·개인 DB·이전 CI 실패는 보존했다. [수정 결과](../experiments/results/meetings-operations-fixture-binding-repair-v1.json)는 정확 게시 소스 CI·실제 AI 품질·사용자 검수와 별개다.
