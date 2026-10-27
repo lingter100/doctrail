@@ -1,0 +1,368 @@
+{
+  "status": "completed_with_rejections",
+  "operational_complete": true,
+  "mechanically_complete": false,
+  "counts": {
+    "http": 25,
+    "qa": 4,
+    "requested_tokens": 4096,
+    "review": 0,
+    "summary": 4
+  },
+  "registration_sha256": "e5b6035c4d8b507a03f79499892d792819ce84da8fab9163283ad89b87182af1",
+  "resource_policy": "native-rss6-host2-v1",
+  "response_format": {
+    "policy": "claims-json-gbnf-v1",
+    "qa_sha256": "ed997a709d82c0b8444820ebf85026ee89e9276d41552a3621601378d566ecaf",
+    "review_sha256": "9964289ac750f5be26b5e84dd78822d76bfb3f28b8103c5f5b6858e02295f118",
+    "summary_sha256": "0656e7930a7fd05ce6126bd8138787d824a8f81de2419187d72a952dcb07cb85"
+  },
+  "summary_control": {
+    "base_prompt_sha256": "ab5982cef5b05121c8fd78aba96baf9b1d86e6250fb2820dac66ab95e4487c02",
+    "effective_system_sha256": "40a1f7772fc5a3bb9b9935b5635db8edfd77f2154852c8a0132798f72b225266",
+    "instruction_sha256": "7300b8053e63b7478fd42f5cf9ce9e7aa1a9c8cdae6cda29f50ce6deb2da0073",
+    "policy": "summary-budget-plan-v1"
+  },
+  "source_wire_format": "source-parts-compact-v1",
+  "limits": {
+    "active_available_bytes": 2147483648,
+    "active_seconds": 900,
+    "cleanup_seconds": 5,
+    "completion_calls": 12,
+    "generation_calls": 8,
+    "input_tokens": 4096,
+    "native_rss_bytes": 6442450944,
+    "qa_seconds": 60,
+    "qa_tokens": 256,
+    "requested_tokens": 4608,
+    "review_tokens": 128,
+    "startup_available_bytes": 8589934592,
+    "startup_seconds": 120,
+    "summary_seconds": 120,
+    "summary_tokens": 768,
+    "whole_seconds": 1025
+  },
+  "sampled_max_native_rss_bytes": 3000971264,
+  "sampled_min_available_ram_bytes": 6764367872,
+  "sampled_max_device_vram_mib": 3163.0,
+  "bindings_unchanged": true,
+  "elapsed_seconds": 88.20400000002701,
+  "CLI_exit": 1,
+  "outer_wrapper_tool_exit": 0,
+  "CLI_elapsed_seconds": 89.25,
+  "once_consumed": true,
+  "official_CLI_issues": 1,
+  "retries": 0,
+  "stage_status_counts": {
+    "summary": {
+      "rejected": 4
+    },
+    "review": {
+      "not_applicable": 4
+    },
+    "qa": {
+      "valid": 4
+    }
+  },
+  "rejection_codes": {
+    "summary": {
+      "generation_output_limit": 3,
+      "generation_invalid_schema": 1
+    },
+    "review": {},
+    "qa": {}
+  },
+  "first_failure_code": "generation_output_limit",
+  "stop_reason_code": null,
+  "fresh_gate_RAM": 9850679296,
+  "startup_ram_gate": {
+    "available_bytes": 9657360384,
+    "elapsed_seconds": 4.110000000044238,
+    "minimum_bytes": 8589934592,
+    "passed": true,
+    "stage": "before_native_popen"
+  },
+  "cleanup": {
+    "seconds": 0.3899999999557622,
+    "within_budget": true,
+    "stopped": true,
+    "cleanup_errors": 0,
+    "process_absence_confirmed": true,
+    "owned_process_handle": "closed",
+    "owned_pipes_closed": true,
+    "remaining_drain_thread": false
+  },
+  "late_invalidation_present": false,
+  "terminal_report_consistent": true,
+  "CLI_matches_terminal": true,
+  "schema_version": 1,
+  "source_head": "07015e87ba9426139045fd20baf5d79acbd6cace",
+  "fixed_denominators": {
+    "summary": 4,
+    "qa": 4
+  },
+  "parsed_summaries": 0,
+  "parsed_answers": 4,
+  "summary_structure": {
+    "transmission": {
+      "recorded_summary_apply_template_requests_checked": 4,
+      "effective_system_exact": 4,
+      "instruction_lines": 5,
+      "instruction_and_legend_occurrences_per_request": 1,
+      "binding": {
+        "policy": "summary-budget-plan-v1",
+        "base_prompt_sha256": "ab5982cef5b05121c8fd78aba96baf9b1d86e6250fb2820dac66ab95e4487c02",
+        "instruction_sha256": "7300b8053e63b7478fd42f5cf9ce9e7aa1a9c8cdae6cda29f50ce6deb2da0073",
+        "effective_system_sha256": "40a1f7772fc5a3bb9b9935b5635db8edfd77f2154852c8a0132798f72b225266"
+      },
+      "method": "Programmatic comparison of system field only to AST-derived frozen base + LF + fixed5line instruction + LF + compact legend. User content not accessed; no model instruction-understanding claim."
+    },
+    "observed": {
+      "limit": {
+        "count": 3,
+        "native_stop_type": "limit",
+        "actual_returned_timing_tokens_each": 768,
+        "request_cap": 768,
+        "strict_JSON_incomplete": 3,
+        "unfinished_string": 3,
+        "original_rejection_retained": "generation_output_limit"
+      },
+      "invalid_schema": {
+        "count": 1,
+        "native_stop_type": "eos",
+        "tokens": 738,
+        "cap": 768,
+        "strict_JSON_valid": true,
+        "claims": 6,
+        "individual_text_codepoint_range": [
+          123,
+          254
+        ],
+        "hard_individual_limit": 240,
+        "hard_individual_excess_count": 3,
+        "first_failure_predicate": "summary_projection line284: second claim has243 Unicode code points >240; this fails before aggregate total checking.",
+        "later_observed_not_first_failure": {
+          "individual_lengths_exceeding240": [
+            243,
+            254,
+            248
+          ],
+          "total_codepoints": 1239,
+          "hard_total": 1200,
+          "total_excess": 39
+        },
+        "soft_target_observations_only": {
+          "individual_goal": 160,
+          "individual_over_goal": 5,
+          "total_goal": 960,
+          "total_over_goal": true,
+          "not_new_rejection_criteria": true
+        },
+        "other_inspected_shape": "Exact keys/types/status/cardinality, UTF8, nonblank single paragraph, Hangul regex presence, integer sorted unique ID shape passed. Source ID membership, spans and semantic support not independently evaluated."
+      },
+      "all_four": {
+        "grammar_echo_exact": 4,
+        "grammar_sha256": "0656e7930a7fd05ce6126bd8138787d824a8f81de2419187d72a952dcb07cb85",
+        "fences": 0,
+        "unicode_escape_sequences": 0,
+        "input_token_range": [
+          2507,
+          3367
+        ],
+        "input_limit": 4096,
+        "stop_true": 4,
+        "truncated_false": 4
+      }
+    },
+    "comparison_to_v5_safe_diagnosis": {
+      "reference": {
+        "file": ".local/meeting-local-candidate-v5-summary-structure-v1/safe-summary.json",
+        "size_bytes": 5978,
+        "sha256": "d44c6b843da1cb4557f0df07c238688023d539c1064b4e20303de6613408273f"
+      },
+      "summary_rejected": [
+        4,
+        4
+      ],
+      "output_limit": [
+        3,
+        3
+      ],
+      "invalid_schema": [
+        1,
+        1
+      ],
+      "parsed_and_review_each": [
+        0,
+        0
+      ],
+      "EOS_tokens": [
+        728,
+        738
+      ],
+      "EOS_total_codepoints": [
+        1235,
+        1239
+      ],
+      "EOS_individual_ranges": [
+        [
+          170,
+          238
+        ],
+        [
+          123,
+          254
+        ]
+      ],
+      "EOS_first_predicates": [
+        "aggregate total >1200",
+        "individual text >240 before total"
+      ],
+      "grammar_echo_exact": [
+        4,
+        4
+      ],
+      "fences": [
+        0,
+        0
+      ],
+      "input_ranges": [
+        [
+          2324,
+          3184
+        ],
+        [
+          2507,
+          3367
+        ]
+      ],
+      "interpretation": "Per-run structural observations only, not a paired identical-answer character comparison, causal/general model-effect estimate, semantic score or proof that a compliant alternative cannot fit."
+    },
+    "generic_explanation": [
+      "Native limit maps to length and is rejected at candidate lines426-427 before strict JSON/parse at455; JSON incompleteness does not replace the first error.",
+      "EOS draft reaches parse_draft then summary_projection; individual length gate284 precedes total gate289. Later excessive lengths and total1239 are diagnostic observations, not reclassified first errors.",
+      "The unchanged grammar uses char+ for strings and does not enforce decoded individual240/total1200, soft160/960, semantic support or language quality.",
+      "Exact saved system and grammar echo establish recorded configuration agreement; they do not prove instruction understanding, universal engine correctness or content quality.",
+      "No valid parsed draft means mandatory review has no input and remains not_applicable."
+    ]
+  },
+  "independent_semantic_review": {
+    "status": "current_individual_judgments_locked_safe_aggregate_complete",
+    "fixed_denominators": {
+      "summary": 4,
+      "QA": 4
+    },
+    "packet_counts": {
+      "items": 4,
+      "all_items_judged": 4,
+      "QA": 4,
+      "summary": 0,
+      "claims": 4,
+      "answered": 4,
+      "abstained": 0
+    },
+    "QA_semantic_results": {
+      "fixed_denominator": 4,
+      "independently_judged": 4,
+      "accepted": 0,
+      "not_accepted": 4,
+      "indeterminate": 0,
+      "sufficient": 0,
+      "insufficient": 4,
+      "full_source_whole_claim_support": {
+        "supported": 1,
+        "partial": 2,
+        "unsupported": 1,
+        "uncertain": 0
+      },
+      "actually_selected_evidence_whole_claim_support": {
+        "supported": 0,
+        "partial": 3,
+        "unsupported": 1,
+        "uncertain": 0
+      },
+      "required_elements_total": 13,
+      "required_element_coverage": {
+        "covered": 1,
+        "partial": 7,
+        "missing": 4,
+        "incorrect": 1
+      },
+      "natural_korean_adequate": 3,
+      "natural_korean_not_fully_natural": 1
+    },
+    "summary_semantic_results": {
+      "fixed_denominator": 4,
+      "independently_judged": 0,
+      "not_semantically_judged": 4,
+      "accepted": null,
+      "semantic_rate": null,
+      "absence_reason": "Not available in the authorized packet; execution or failure reason is not inferred."
+    },
+    "taxonomy_item_counts_overlapping": {
+      "required_information_missing_or_incomplete": 4,
+      "selected_evidence_incomplete_for_whole_claim": 4,
+      "source_temporal_or_status_contradiction": 1,
+      "added_specificity_or_relation_ambiguity": 2,
+      "naturalness_or_referent_issue": 1
+    },
+    "taxonomy_note": "Descriptions of current locked findings only, not new semantic thresholds.",
+    "prior_exposure": "Prior v5 content and judgment exposure and automatically supplied project aggregates persist. Complete blinding and independence from previous exposure are not claimed.",
+    "limitations": [
+      "Four fixed development QA items evaluated by AI; no human review, protected-final-test result or general model-quality conclusion.",
+      "No operational or service acceptance, runtime/performance or self-review agreement conclusion.",
+      "Absent summary items retain the fixed denominator and not-judged status, without an inferred semantic zero percent.",
+      "Private item explanations remain in locked artifacts; only aggregates and artifact bindings are returned."
+    ]
+  },
+  "service_adoption": false,
+  "human_review_count": 0,
+  "evidence": {
+    "actual_safe_result": {
+      "file": ".local/meeting-local-candidate-execution-v6/actual-once-v1/safe-result.json",
+      "size_bytes": 3030,
+      "sha256": "19f610f04665edbb8abd730578a2ab5d93ad37904705509ce914ed229fbf85aa"
+    },
+    "parent_custody": {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-v6-custody-acceptance-v1.json",
+      "size_bytes": 813,
+      "sha256": "266e42402a8439d5002808767c580f3373a51bbf50ad7751f922e6c96a47b9fb"
+    },
+    "structural_safe": {
+      "file": ".local/meeting-local-candidate-v6-summary-structure-v1/safe-summary.json",
+      "size_bytes": 7420,
+      "sha256": "7eb019c1e0ed9319d64eeea28f0c3b2c2decffa8ef1a49b12ecbffcf65e79ae6"
+    },
+    "parent_structural_acceptance": {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-v6-structure-acceptance-v1.json",
+      "size_bytes": 834,
+      "sha256": "69009cc1c7c19261ff57e65c093f628d79ad0583fc8591926ceb3919f8e81fbc"
+    },
+    "parent_packet_acceptance": {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-v6-packet-acceptance-v1.json",
+      "size_bytes": 1439,
+      "sha256": "10432684416473c0956ac494f0e354ca233b8c7f9002efa213d72d5b4fe2e29a"
+    },
+    "independent_judge_safe": {
+      "file": ".local/meeting-local-candidate-resource-final-judge-v1/individual-v6-v1/safe-receipt.json",
+      "size_bytes": 6658,
+      "sha256": "8dcb151df12dc336fc11ccc7b7df615fe2b9cacb450d840a67dbdcdcbce4f312"
+    },
+    "parent_judgment_acceptance": {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-v6-judgment-acceptance-v1.json",
+      "size_bytes": 885,
+      "sha256": "61004b7711b76a2e7d9e5c90e053e51754d0be8d1e457059551fcd68dc443483"
+    }
+  },
+  "limitations": [
+    "Fixed repeatedly exposed development inputs, one run; not protected evaluation or general accuracy.",
+    "All summary outputs remain structurally rejected; no semantic accuracy score assigned.",
+    "Recorded exact system transmission does not prove model compliance.",
+    "Requested output tokens are budget requests, not actual generated token sum.",
+    "RSS/RAM/VRAM observations are sampled; device-wide VRAM is not exclusive use.",
+    "Whole-source QA diagnostic is not retrieval/ACL end-to-end service acceptance.",
+    "Old failures and this consumed run preserved; no repair or retry.",
+    "Independent AI QA acceptance0/4 on this fixed development set; prior v5 exposure is disclosed and human review remains0."
+  ],
+  "quality_acceptance": false
+}
