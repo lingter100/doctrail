@@ -16,9 +16,10 @@ public class KnowledgeService {
     final Store store;final Auth auth;final DocumentService docs;final MeetingService meetings;final LearnedSearch learned;final InferenceClient inference;final GenerationClient generation;final ObjectMapper json;
     private final Semaphore active=new Semaphore(1);
     private final boolean ragAnswerEnabled;
+    final KnowledgeHistoryService history;
     KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json){this(store,auth,docs,meetings,learned,inference,generation,json,false);}
     @Autowired
-    KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json,@Value("${doctrail.rag-answer-enabled:false}") boolean ragAnswerEnabled){this.store=store;this.auth=auth;this.docs=docs;this.meetings=meetings;this.learned=learned;this.inference=inference;this.generation=generation;this.json=json;this.ragAnswerEnabled=ragAnswerEnabled;}
+    KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json,@Value("${doctrail.rag-answer-enabled:false}") boolean ragAnswerEnabled){this.store=store;this.auth=auth;this.docs=docs;this.meetings=meetings;this.learned=learned;this.inference=inference;this.generation=generation;this.json=json;this.ragAnswerEnabled=ragAnswerEnabled;this.history=new KnowledgeHistoryService(store,auth,docs,meetings,json);}
     AnswerDeadline answerDeadline(long started){return new AnswerDeadline(started);}
     private static void check(AnswerDeadline deadline){if(deadline!=null)deadline.check();}
     record Filter(String query,String workspace,String kind,String meeting,String from,String to,String participant,String assignee,String itemType,String method,int limit,String profile){}
@@ -68,7 +69,9 @@ public class KnowledgeService {
             }
             if(answer){response.put("query",f.query);response.put("method",f.method);response.put("results",results);response.put("model_called",!results.isEmpty());response.put("elapsed_ms",Math.round((System.nanoTime()-started)/10_000.0)/100.0);}
             check(budget);
-            Map<String,Object> verified=store.read(c->{Snapshot after=snapshot(c,request,f);if(!token.equals(Auth.token(request))||!before.equals(after))throw new ApiError(409,"search_context_changed");check(budget);return response;});
+            Map<String,Object> verified=store.write(c->{Snapshot after=snapshot(c,request,f);if(!token.equals(Auth.token(request))||!before.equals(after))throw new ApiError(409,"search_context_changed");check(budget);
+                history.save(c,before.user,f,answer,response,results,!f.method.equals("bm25")&&!before.corpus.isEmpty()?inference.embeddingProfile():null);
+                check(budget);return response;});
             check(budget); // Includes the final authorization transaction's commit.
             if(budget!=null)verified.put("elapsed_ms",Math.round((System.nanoTime()-started)/10_000.0)/100.0);
             return verified;

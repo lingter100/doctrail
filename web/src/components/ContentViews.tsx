@@ -1,4 +1,7 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
+import { api } from '../api';
+import { knowledgeAbstention, knowledgeError } from '../meetings';
+import type { KnowledgeHistory } from '../types';
 import { date, excerpt, fullDate, highlightParts, statusLabel, visibilityLabel } from '../helpers';
 import type { DocTrail } from '../useDocTrail';
 import { Icon } from './Icon';
@@ -27,8 +30,45 @@ export function Library({ app }: { app: DocTrail }) {
 }
 export function HistoryView({ app }: { app: DocTrail }) {
   const { history } = app.state;
-  return <><div className="section-bar"><h2>최근 검색 <span className="count">{history.length}</span></h2><span className="muted">내 검색 기록만 표시됩니다</span></div>
+  const [tab, setTab] = useState<'document' | 'knowledge'>('document');
+  const [items, setItems] = useState<KnowledgeHistory[]>([]);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const request = useRef(0);
+  const abort = useRef<AbortController | null>(null);
+  useEffect(() => () => { request.current++; abort.current?.abort(); }, []);
+  useEffect(() => {
+    if (app.state.logoutBusy) { request.current++; abort.current?.abort(); setItems([]); setBusy(false); setError(''); }
+  }, [app.state.logoutBusy]);
+  function selectTab(next: typeof tab) {
+    request.current++; abort.current?.abort(); setBusy(false); setError(''); setItems([]); setTab(next);
+    if (next === 'knowledge') void load();
+  }
+  async function load() {
+    abort.current?.abort(); const controller = new AbortController(); abort.current = controller;
+    const token = ++request.current, current = app.captureContext();
+    const valid = () => current() && token === request.current && !controller.signal.aborted;
+    setBusy(true); setError(''); setItems([]);
+    try {
+      const response = await api<{ items: KnowledgeHistory[] }>('/knowledge/history', { signal: controller.signal });
+      if (valid()) setItems(response.items);
+    } catch (failure) { if (valid() && !app.sessionExpired(failure)) setError(knowledgeError(failure)); }
+    finally { if (valid()) setBusy(false); }
+  }
+  return <>
+    <div className="meeting-tabs history-tabs" role="tablist" aria-label="기록 종류">
+      <button type="button" role="tab" aria-selected={tab === 'document'} onClick={() => selectTab('document')}>문서 검색</button>
+      <button type="button" role="tab" aria-selected={tab === 'knowledge'} onClick={() => selectTab('knowledge')}>통합 검색·질문</button>
+    </div>
+    {tab === 'document' ? <><div className="section-bar"><h2>최근 검색 <span className="count">{history.length}</span></h2><span className="muted">내 검색 기록만 표시됩니다</span></div>
     {history.length ? <div className="history-list">{history.map((item, index) => <button key={item.id} className="history-row" data-history={index} onClick={() => app.rerunHistory(item)}><span className="history-icon"><Icon name="clock"/></span><span><strong>{item.query}</strong><small>{fullDate(item.created_at)} · {searchMethods[item.method || 'bm25'].label}{item.method && item.method !== 'bm25' ? ` · ${profileLabel(item.embedding_profile)}` : ''}</small></span><span className="history-count">근거 {item.result_count}개</span><Icon name="arrow"/></button>)}</div> : <div className="empty-state compact"><Icon name="clock" className="empty-icon"/><h2>아직 검색 기록이 없어요.</h2><p>궁금한 키워드를 검색하면, 이곳에서 다시 찾을 수 있어요.</p></div>}
+</> : <section aria-label="통합 검색·질문 기록">
+      <div className="section-bar"><h2>통합 검색·질문 <span className="count">{items.length}</span></h2><button className="text-button" disabled={busy} onClick={() => void load()}>기록 새로고침</button></div>
+      <p className="field-note">모든 워크스페이스의 내 완료 기록을 최근 100개까지 표시해요. 조건만 복원하며, 답변과 원문은 보관하지 않아요. 근거 수는 현재 접근 가능한 최신 자료 기준이에요.</p>
+      {busy ? <div className="loading" role="status">기록을 불러오는 중이에요…</div> : error ? <div className="error-banner" role="alert">{error}<button className="text-button" onClick={() => void load()}>기록 다시 불러오기</button></div> : items.length ? <div className="history-list">{items.map(item => <button key={item.id} className="history-row knowledge-history-row" data-knowledge-history={item.id} onClick={() => app.restoreKnowledgeHistory(item)}>
+        <span className="history-icon"><Icon name="clock"/></span><span><strong>{item.query}</strong><small>{fullDate(item.created_at)} · {item.operation === 'answer' ? '질문' : '검색'} · {item.status === 'abstained' ? '답변 보류' : item.status === 'answered' ? '답변 완료' : '검색 완료'}</small><small>{item.kind === 'all' ? '회의 + 문서' : item.kind === 'meeting' ? '회의' : '문서'} · {item.workspace_id === null ? '모든 워크스페이스' : app.state.auth?.workspaces.find(workspace => workspace.id === item.workspace_id)?.name || '접근 확인 필요'} · {searchMethods[item.method].label} · 최대 {item.filters.limit}개</small>{item.status === 'abstained' && <small>{knowledgeAbstention(item.reason)}</small>}<small>조건 복원 · 실행은 다음 화면에서</small></span><span className="history-count">근거 {item.result_count}개</span><Icon name="arrow"/>
+      </button>)}</div> : <div className="empty-state compact"><Icon name="clock" className="empty-icon"/><h2>아직 통합 검색·질문 기록이 없어요.</h2><p>검색 또는 질문이 완료되면 이곳에서 조건을 다시 불러올 수 있어요.</p></div>}
+    </section>}
   </>;
 }
 export function SearchView({ app }: { app: DocTrail }) {

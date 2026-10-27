@@ -30,6 +30,7 @@ class KnowledgeDeadlineTest {
     String documentId;
     AtomicLong clock=new AtomicLong(System.nanoTime());
     int reads;IntConsumer afterRead=ignored->{};
+    Runnable afterWrite=()->{};
     Runnable duringRank=()->{},duringGeneration=()->{};
     IntConsumer duringSnapshot=ignored->{};
     Runnable duringValidation=()->{};
@@ -70,6 +71,7 @@ class KnowledgeDeadlineTest {
     @BeforeEach void setup(){
         store=new Store(temp.resolve("deadline.sqlite3").toString()){
             @Override <T>T read(Work<T> work){T result=super.read(work);afterRead.accept(++reads);return result;}
+            @Override <T>T write(Work<T> work){T result=super.write(work);afterWrite.run();return result;}
         };
         store.write(c->{
             for(String id:List.of(user,"other"))execute(c,"INSERT INTO users VALUES (?,?,?,?)",id,id+"@example.test",id,"unused");
@@ -143,10 +145,11 @@ class KnowledgeDeadlineTest {
     @ParameterizedTest @ValueSource(booleans={false,true})
     void finalAuthorizationAndItsTransactionCompletionAreInsideBudget(boolean afterCommit){
         var service=new TestKnowledge(true);
-        if(afterCommit)afterRead=count->{if(count==3)expire();};
+        if(afterCommit)afterWrite=this::expire;
         else duringSnapshot=count->{if(count==3)expire();};
         timeout(()->service.execute(body("bm25"),request,true));
         assertThat(service.snapshots).isEqualTo(3);assertThat(generation.sharedCalls).isEqualTo(1);
+        assertThat((List<?>)store.read(c->rows(c,"SELECT id FROM knowledge_history"))).hasSize(afterCommit?1:0);
     }
     @Test void emptyEvidenceStillChecksFinalBudgetWithoutCallingGeneration(){
         var service=new TestKnowledge(true);duringSnapshot=count->{if(count==2)expire();};

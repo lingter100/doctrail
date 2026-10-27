@@ -32,4 +32,6 @@ public class MeetingController {
     @GetMapping("/tasks") Map<String,Object> tasks(@RequestParam(name="workspace_id",required=false) String workspace,@RequestParam(required=false) String assignee,@RequestParam(required=false) String status,HttpServletRequest request){return store.read(c->Map.of("items",meetings.tasks(c,auth.user(c,request).get("id"),workspace,assignee,status)));}
     @PostMapping("/knowledge/search") Map<String,Object> search(@RequestBody JsonNode b,HttpServletRequest request){return knowledge.execute(b,request,false);}
     @PostMapping("/knowledge/answer") Map<String,Object> answer(@RequestBody JsonNode b,HttpServletRequest request){return knowledge.execute(b,request,true);}
+    @GetMapping("/knowledge/history") Map<String,Object> history(HttpServletRequest request){return knowledge.history.list(request);}
+    @PostMapping("/knowledge/history/{id}/feedback") Map<String,Object> feedback(@PathVariable String id,@RequestBody JsonNode b,HttpServletRequest request){return knowledge.history.feedback(id,b,request);}
 }

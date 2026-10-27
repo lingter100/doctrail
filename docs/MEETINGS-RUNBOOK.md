@@ -123,6 +123,8 @@ uv run --no-sync --group retrieval python -m scripts.serve_meetings --port 8000 
 | `DELETE /meetings/{id}/links/{linkId}` | 연결 출발 회의 소유자만 해제; 상대 회의 접근권한도 다시 확인, `204` |
 | `POST /knowledge/search` | 회의·문서 통합 검색. 필터를 후보 생성 전에 적용 |
 | `POST /knowledge/answer` | 같은 필터로 검색 후 생성·인용 검증. 답변 또는 보류; 실패는 오류 상태 |
+| `GET /knowledge/history` | 본인 통합 요청 기록. 현재 접근 가능한 범위와 근거 수 재확인 |
+| `POST /knowledge/history/{id}/feedback` | `result_id,relevant`로 결과 평가. 권한·revision·근거 재검증 후 최신 평가로 갱신 |
 | `GET /documents/{id}` / `DELETE /documents/{id}` | 기존 원문 조회·소유자 삭제. 회의 삭제도 이 문서 API 사용 |
 
 작업 변경 전용 PATCH는 없다. 회의 상세의 전체 분석을 읽어 항목 ID를 유지하면서 수정하고 CAS PUT으로 저장한다. 분석은 제목·날짜·참석자·목적·요약, `summary_evidence`, `metadata_evidence`, `items`를 포함한다. 각 항목은 `id,type,text,quote,start_offset,end_offset,assignee,due_date,priority,status`를 갖는다. 비작업 항목의 담당자·기한·우선순위는 null이다. 원문 인용은 **Unicode code point** 기준의 정확한 연속 구절이어야 한다.
@@ -131,7 +133,7 @@ uv run --no-sync --group retrieval python -m scripts.serve_meetings --port 8000 
 
 지식 요청 필드는 `query,workspace_id,kind,meeting_id,date_from,date_to,participant,assignee,item_type,method,limit,expected_embedding_profile`이다. `workspace_id:null`은 현재 접근 가능한 모든 작업공간, `kind`는 `all|meeting|document`, `item_type`은 `decision|action|unresolved` 또는 null이다. 날짜·참석자·작업 조건을 쓰면 일반 문서는 제외된다. 이름 조건은 서버에서 정확히 일치하는 문자열로 비교하며 사용자 계정 연결이 아니다. 검색은 최대 50개, 답변은 최대 10개 후보를 허용한다. 화면은 원문 검색에 10개, 답변에는 관련도 상위 5개를 요청하고 이를 안내한다. 5개라도 전체 prompt 한도를 넘으면 명시적으로 실패하며 후보 본문을 몰래 자르지 않는다.
 
-새 `/knowledge/*` 요청·답변은 현재 검색 이력에 저장하지 않는다. 기존 워크스페이스 문서 검색 이력은 유지하지만 전체 작업공간 Q&A를 그 이력에 임의로 넣지 않는다. 사용자 수정 요약은 검색 근거 본문으로 사용하지 않는다. 검색·인용 대상은 원문 청크이고 분석 메타데이터는 조건 적용에 사용한다.
+완료된 `/knowledge/search|answer` 요청은 별도 개인 통합 기록에 질문·조건·상태·실제 사용 모델 정보와 근거 식별자를 저장한다. 응답의 `history_id`와 결과별 `result_id`로 평가하며, 조회·평가 때 현재 권한과 원문 revision·청크·근거 해시를 다시 확인한다. 원문·제목·생성 답변은 복제하지 않는다. 기존 문서 검색 이력은 보존한다. 기록 선택은 조건만 복원하고 사용자가 명시적으로 다시 실행한다. 사용자 수정 요약은 검색 근거 본문으로 사용하지 않으며 분석 메타데이터는 조건 적용에 사용한다. 계약과 검증 수준은 [API 문서](API-CONTRACT.md#unified-meetingdocument-knowledge-and-personal-history)를 따른다.
 
 Python 내부 worker는 Bearer 인증이 있는 `GET /health`, `POST /analyze`, `POST /answer`를 제공한다. DB·사용자 세션·전체 코퍼스에 접근하지 않으며 Java가 허용한 원문만 받는다. Java의 worker URL은 `http://127.0.0.1:<port>`로 제한되고 실행기가 임시 token을 자식 환경에 전달한다. 브라우저는 worker를 직접 호출하지 않는다.
 
@@ -147,6 +149,9 @@ Python 내부 worker는 Bearer 인증이 있는 `GET /health`, `POST /analyze`, 
 | `meeting_edits` | 사용자 저장마다 분석 스냅샷·편집자·version 기록 |
 | `meeting_links` | 두 문서·두 항목·revision·생성 시 version·관계·인용·작성자 |
 | `meeting_link_evidence` | 연결 당시 두 결정 항목의 스냅샷. 현재 항목과 비교해 유효성을 확인 |
+| `knowledge_history` | 개인별 완료 요청의 질문·범위·조건·상태·실제 사용 모델 정보 |
+| `knowledge_history_results` | 요청별 근거 문서/revision/청크/offset/해시. 원문·답변 미저장 |
+| `knowledge_feedback` | 해당 사용자 기록의 결과별 최신 관련성 평가 |
 
 별도 `meeting_items`나 작업 테이블은 없다. 항목은 분석 JSON에 저장하고 `/tasks`에서 모은다. 날짜·참석자도 활성 분석 JSON에서 읽는다. 이 구현 이름은 초기 설계 문서의 개념 테이블과 구분한다. 과거 연결에 항목 스냅샷이 없으면 현재 연결 목록에서 제외한다. 지원하지 않는 DB 버전은 시작 시 거부한다. 이미 존재하는 테이블의 다른 열 구조를 자동 수선하는 범용 migration은 아니다.
 
@@ -209,7 +214,7 @@ Java는 모든 목록·상세·작업·연결·검색·수정·삭제에서 현�
 
 ## Phase 2 이후 범위
 
-실시간 녹음·음성 전사·화자 분리, 스캔 PDF OCR, 캘린더/회의 도구 자동 수집, 외부 업무 도구 동기화·알림, 자동 결정 변경 추론, Q&A 대화 이력·지속 저장, 자동 자연어 날짜 해석, 생산 서비스 공개 배포·부하 확장·범용 DB migration은 이번 완료 범위에 포함하지 않는다. 기존 M2/M3/M4와 M5 동결 평가를 다시 실행하거나 새 기능의 품질 근거로 대체하지 않는다.
+실시간 녹음·음성 전사·화자 분리, 스캔 PDF OCR, 캘린더/회의 도구 자동 수집, 외부 업무 도구 동기화·알림, 자동 결정 변경 추론, 이전 답변을 문맥으로 사용하는 다중 턴 대화와 답변 본문 지속 저장, 자동 자연어 날짜 해석, 생산 서비스 공개 배포·부하 확장·범용 DB migration은 이번 완료 범위에 포함하지 않는다. 기존 M2/M3/M4와 M5 동결 평가를 다시 실행하거나 새 기능의 품질 근거로 대체하지 않는다.
 
 
 ## 실제 분석·라이프사이클만 확인하는 후속 검사

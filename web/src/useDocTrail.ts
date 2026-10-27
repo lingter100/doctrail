@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, errorMessage } from './api';
 import { profileLabel } from './searchMethods';
 import type { Evidence } from './meetings';
-import type { Auth, AuthMode, Capabilities, Detail, Doc, History, Hit, Modal, Search, SearchMethod, View, Workspace } from './types';
+import type { Auth, AuthMode, Capabilities, Detail, Doc, History, Hit, KnowledgeHistory, Modal, Search, SearchMethod, View, Workspace } from './types';
 
 export type SourceOrigin = {
   query: string; retryLabel: string; isCurrent: () => boolean;
@@ -17,6 +17,8 @@ type State = {
   toast: { id: number; message: string } | null;
   searchMethod: SearchMethod; capabilities: Capabilities | null; capabilitiesBusy: boolean;
   historyNotice: string;
+  knowledgeRestore: KnowledgeHistory | null;
+  viewVersion: number;
   selectedEvidence: Evidence | null;
   selectedSourceOrigin: SourceOrigin | null;
 };
@@ -24,14 +26,14 @@ const emptyWorkspace = {
   documents: [] as Doc[], history: [] as History[], view: 'library' as View, search: null,
   selected: null, selectedHit: null, selectedIndex: 0, query: '', filter: '', loading: false, workspaceLoading: false,
   pageError: '', modal: null, modalBusy: false, modalError: '', feedback: {}, retryBusy: false,
-  historyNotice: '', selectedEvidence: null, selectedSourceOrigin: null,
+  knowledgeRestore: null, viewVersion: 0, historyNotice: '', selectedEvidence: null, selectedSourceOrigin: null,
 };
 const initial: State = { ...emptyWorkspace, booting: true, auth: null, authMode: 'register', authBusy: false, authError: '', workspaceId: '', logoutBusy: false, toast: null, searchMethod: 'bm25', capabilities: null, capabilitiesBusy: false };
 
 export function useDocTrail() {
   const [state, setState] = useState<State>(initial);
   const live = useRef(state);
-  const tokens = useRef({ epoch: 0, auth: 0, load: 0, search: 0, detail: 0, modal: 0, toast: 0, capabilities: 0 });
+  const tokens = useRef({ epoch: 0, auth: 0, context: 0, load: 0, search: 0, detail: 0, modal: 0, toast: 0, capabilities: 0 });
   const documentVersions = useRef(new Map<string, number>());
   const deletedDocuments = useRef(new Set<string>());
   const sourceOpener = useRef<{ element: HTMLElement; documentId: string; epoch: number; view: View; workspace: string; origin?: SourceOrigin } | null>(null);
@@ -140,11 +142,12 @@ export function useDocTrail() {
   }
   function changeView(view: View) {
     // A search that finishes after navigating away must not reclaim the view.
-    tokens.current.search++; tokens.current.detail++; update({ view, selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null, pageError: '', historyNotice: '', loading: view === 'search' ? false : live.current.workspaceLoading });
+    tokens.current.context++; tokens.current.search++; tokens.current.detail++; update({ view, viewVersion: live.current.viewVersion + 1, knowledgeRestore: null, selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null, pageError: '', historyNotice: '', loading: view === 'search' ? false : live.current.workspaceLoading });
   }
   async function logout() {
     if (live.current.logoutBusy) return;
     const session = tokens.current.auth;
+    tokens.current.context++; tokens.current.search++; tokens.current.detail++;
     update({ logoutBusy: true });
     try {
       await api('/auth/logout', { method: 'POST' });
@@ -154,6 +157,20 @@ export function useDocTrail() {
     } catch (error) {
       if (session === tokens.current.auth && !sessionExpired(error)) { update({ logoutBusy: false }); toast(errorMessage(error)); }
     }
+  }
+  // Invalidate component requests synchronously, before React unmount cleanup.
+  // Search-method/request sequencing is separate from component context.
+  // A failed logout still invalidates responses issued before the attempt.
+  function captureContext() {
+    const epoch = tokens.current.epoch, session = tokens.current.auth, context = tokens.current.context;
+    const view = live.current.view, workspace = live.current.workspaceId;
+    return () => epoch === tokens.current.epoch && session === tokens.current.auth && context === tokens.current.context
+      && view === live.current.view && workspace === live.current.workspaceId && !!live.current.auth && !live.current.logoutBusy;
+  }
+  function restoreKnowledgeHistory(item: KnowledgeHistory) {
+    changeView('knowledge');
+    update({ knowledgeRestore: item });
+    requestAnimationFrame(() => document.getElementById('knowledge-query')?.focus());
   }
   function rerunHistory(item: History) {
     const method = item.method || 'bm25';
@@ -350,7 +367,7 @@ export function useDocTrail() {
   }
   return { state, workspace: state.auth?.workspaces.find(workspace => workspace.id === state.workspaceId),
     setQuery: (query: string) => update({ query }), setFilter: (filter: string) => update({ filter }),
-    setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, rerunHistory, loadCapabilities, setSearchMethod,
+    setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, rerunHistory, restoreKnowledgeHistory, captureContext, loadCapabilities, setSearchMethod,
     openDocument, openEvidence: (evidence: Evidence, origin?: SourceOrigin) => openDocument(evidence.document_id, undefined, 0, evidence, origin), sessionExpired,
     closeSource, closeSourceFromUser, retrySource, feedback, openModal, closeModal, submitModal, reprocess };
 }

@@ -29,6 +29,7 @@ public class Store {
                 execute(c, "CREATE TABLE IF NOT EXISTS search_metadata (search_id TEXT PRIMARY KEY REFERENCES searches(id) ON DELETE CASCADE,method TEXT NOT NULL CHECK(method IN ('bm25','dense','hybrid','hybrid_rerank')))");
                 execute(c, "CREATE TABLE IF NOT EXISTS search_model_metadata (search_id TEXT PRIMARY KEY REFERENCES searches(id) ON DELETE CASCADE,profile_id TEXT NOT NULL,model TEXT NOT NULL,revision TEXT NOT NULL)");
                 for(String sql : MEETINGS_SCHEMA.split(";")) if(!sql.isBlank()) execute(c,sql);
+                for(String sql : KNOWLEDGE_SCHEMA.split(";")) if(!sql.isBlank()) execute(c,sql);
                 execute(c, "PRAGMA journal_mode=WAL");
             }
         } catch (Exception e) { throw new IllegalStateException("database_initialization_failed"); }
@@ -71,6 +72,12 @@ public class Store {
     private static void bind(PreparedStatement p,Object[] args) throws SQLException {
         for(int i=0;i<args.length;i++) { if(args[i] instanceof byte[] bytes) p.setBytes(i+1,bytes); else p.setObject(i+1,args[i]); }
     }
+    private static final String KNOWLEDGE_SCHEMA="""
+        CREATE TABLE IF NOT EXISTS knowledge_history (id TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,operation TEXT NOT NULL CHECK(operation IN ('search','answer')),query TEXT NOT NULL,workspace_id TEXT REFERENCES workspaces(id) ON DELETE CASCADE,kind TEXT NOT NULL CHECK(kind IN ('all','meeting','document')),filters_json TEXT NOT NULL,method TEXT NOT NULL,embedding_profile_json TEXT,generation_model_json TEXT,status TEXT NOT NULL CHECK(status IN ('searched','answered','abstained')),reason TEXT,model_called INTEGER NOT NULL CHECK(model_called IN (0,1)),created_at TEXT NOT NULL);
+        CREATE INDEX IF NOT EXISTS ix_knowledge_history_user_created ON knowledge_history(user_id,created_at DESC,id DESC);
+        CREATE TABLE IF NOT EXISTS knowledge_history_results (id TEXT PRIMARY KEY,history_id TEXT NOT NULL REFERENCES knowledge_history(id) ON DELETE CASCADE,document_id TEXT NOT NULL REFERENCES documents(id) ON DELETE CASCADE,revision INTEGER NOT NULL,chunk_id TEXT NOT NULL,start_offset INTEGER NOT NULL,end_offset INTEGER NOT NULL,evidence_sha256 TEXT NOT NULL,UNIQUE(history_id,chunk_id));
+        CREATE TABLE IF NOT EXISTS knowledge_feedback (result_id TEXT PRIMARY KEY REFERENCES knowledge_history_results(id) ON DELETE CASCADE,relevant INTEGER NOT NULL CHECK(relevant IN (0,1)),updated_at TEXT NOT NULL);
+        """;
     private static final String MEETINGS_SCHEMA="""
         CREATE TABLE IF NOT EXISTS meetings (document_id TEXT PRIMARY KEY REFERENCES documents(id) ON DELETE CASCADE,analysis_status TEXT NOT NULL,analysis_error TEXT,source_revision INTEGER NOT NULL,version INTEGER NOT NULL DEFAULT 0,ai_analysis TEXT,analysis TEXT NOT NULL,provenance TEXT NOT NULL,active_run TEXT);
         CREATE TABLE IF NOT EXISTS meeting_runs (id TEXT PRIMARY KEY,document_id TEXT NOT NULL REFERENCES documents(id) ON DELETE CASCADE,source_revision INTEGER NOT NULL,status TEXT NOT NULL,analysis TEXT,model TEXT,model_revision TEXT,error TEXT,created_at TEXT NOT NULL,completed_at TEXT);

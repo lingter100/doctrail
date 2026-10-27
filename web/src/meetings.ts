@@ -64,8 +64,8 @@ export function summaryFailureMessage(code: string | null | undefined): string |
 export type MeetingDetail = { document: Detail; meeting: { document_id: string; analysis_status: 'queued' | 'running' | 'ready' | 'failed' | 'stale'; analysis_error: string | null; source_revision: number; version: number; ai_analysis: Analysis | null; analysis: Analysis | null; provenance: 'ai' | 'user_edited'; meeting_date?: string | null; participants?: string[] } };
 export type TaskItem = MeetingItem & { meeting_id: string; title: string; workspace_id: string; source_revision: number; version: number };
 export type DecisionLink = Span & { id: string; source_id: string; target_id: string; source_item_id: string; target_item_id: string; source_title?: string; target_title?: string; source_meeting_date?: string | null; target_meeting_date?: string | null; source_item_text?: string; target_item_text?: string; relation: 'related' | 'supersedes'; created_by: string; created_at?: string; source_revision: number; target_revision: number };
-export type KnowledgeHit = Hit & { workspace_id: string; document_kind: 'meeting' | 'document'; meeting_date: string | null };
-export type KnowledgeResult = { query: string; method: string; results: KnowledgeHit[]; status?: 'answered' | 'abstained'; reason?: string | null; claims?: { text: string; citations: Evidence[] }[]; model_called?: boolean; experimental?: boolean };
+export type KnowledgeHit = Hit & { result_id: string; workspace_id: string; document_kind: 'meeting' | 'document'; meeting_date: string | null };
+export type KnowledgeResult = { history_id: string; query: string; method: string; results: KnowledgeHit[]; status?: 'answered' | 'abstained'; reason?: string | null; claims?: { text: string; citations: Evidence[] }[]; model_called?: boolean; experimental?: boolean };
 export const itemLabels: Record<ItemType, string> = { topic: '논의 주제', proposal: '제안', decision: '결정 사항', unresolved: '미해결 사항', action: '후속 작업' };
 export const statusLabels: Record<ItemStatus, string> = { needs_confirmation: '확인 필요', confirmed: '확정', todo: '할 일', doing: '진행 중', done: '완료' };
 export const analysisLabels = { queued: '분석 대기', running: 'AI 분석 중', ready: '분석 완료', failed: '분석 실패', stale: '원문 변경 · 재분석 필요' };
@@ -84,6 +84,7 @@ export function knowledgeError(error: unknown): string {
   if (error.status === 401) return errorMessage(error);
   if (error.status === 403 || error.status === 404) return '자료를 확인할 수 없어요. 현재 접근 가능한 자료와 검색 조건을 다시 확인해 주세요.';
   const code = error.code;
+  if (code === 'knowledge_result_stale') return '원문이 변경되어 피드백을 저장하지 않았어요. 현재 조건으로 다시 검색한 뒤 평가해 주세요.';
   if (code === 'search_context_changed') return '검색 중 원문이나 접근 권한이 변경됐어요. 현재 접근 가능한 자료로 다시 확인해 주세요.';
   if (code === 'embedding_profile_changed') return '검색 모델 설정이 변경됐어요. 현재 검색 방식을 확인한 뒤 다시 검색해 주세요.';
   if (code === 'generation_timeout') return '답변 생성 시간이 초과됐어요. 잠시 후 직접 다시 시도하거나 원문 검색으로 확인해 주세요.';
