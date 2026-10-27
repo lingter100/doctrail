@@ -114,6 +114,8 @@ npm run build
 - [M5-B 새 자료·정책 비교 사전등록](docs/M5-CALIBRATION-PLAN.md), [자료 준비 검증·한계](docs/M5B-PREPARATION.md)
 - [자동 후속 실행과 승인 경계](docs/AUTONOMY.md)
 - [회의 확장 설계](docs/MEETINGS-DESIGN.md), [API·실행·복구](docs/MEETINGS-RUNBOOK.md), [실제 결과·한계](docs/MEETINGS-RESULTS.md)
+- [통합 기록·피드백 검증](docs/MEETINGS-KNOWLEDGE-HISTORY-VERIFICATION.md), [회의 수동 보정 계획](docs/MEETINGS-MANUAL-CORRECTION-PLAN.md)
+- [요약 엔진 검증 도구](docs/MEETINGS-SUMMARY-ENGINE-PREPARATION.md), [새 무료 QA 준비 계약](docs/MEETINGS-FREE-QA-PREPARATION-PLAN.md)
 
 ## 라이선스와 사실 구분
 

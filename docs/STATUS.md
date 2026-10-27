@@ -1,4 +1,30 @@
 # 진행 상태
+## 2026-10-27 · 통합 기록의 실제 연결 검증과 게시 준비
+
+통합 기록·피드백 구현을 사용자 명의93bf1f8로 로컬 커밋했다. Java는255통과·기존 선택 검사1skip, 화면은 첫 전체19spec에서117통과·2실패였다. 단어가 겹친 no-evidence 시험 전제와 검색 전환 시 limit5가 남는 회귀를 각각 수정한 뒤 관련2spec22개가 통과했다. 독립 검토deda1ea5는 blocker0/advisory0이며 부모가58참조와 실제 검사 소스/복사본97개를 확인했다. 첫 실패와 준비 오류를 보존했고 전체를 성공으로 합산하지 않는다. [검증 문서](MEETINGS-KNOWLEDGE-HISTORY-VERIFICATION.md)에 재현·실제/모형 구분을 정리했다.
+
+새 브라우저 검사 파일은 게시 시 CRLF만 LF로 통일했다. 검사한 원본/복사본을 보존하고 TypeScript5.9.3 변환 JS 바이트가 같음을 확인했다. 제품 소스는 이 변환에서 바뀌지 않았다. 원래 JAR·개인 DB를 보존하고 모든 검사 서버의 종료·로그 flush를 확인했다. 실제 LLM과 사용자 검수는0이다.
+
+엔진 고정 해시 수정은 사용자 명의5e6976e로 로컬 커밋했다. 두 코드 커밋과 수용한 후속 설계를 함께 게시한 뒤 같은 최종 head의 양쪽 CI를 확인한다. 현재 새 CI 전이며 취득·빌드·새 모델 실행은 시작하지 않았다. 통합 기록이 끝난 뒤 회의 수동 보정, 무료 QA 준비와 요약 엔진 실제 검증을 이어간다. 전체 목표ACTIVE다.
+
+## 2026-10-27 · 게시 바이트 수정 수용과 후속 두 설계
+
+엔진runtime.PINS_SHA 한 문자열을 실제LF pins4de0a7e로 맞췄다. 원본/실패 보존·102합성검사5.39초/Ruff·독립52905d3a blocker0/advisory0을 확인했고 부모가 구현/검토 해시를 대조했다. [수정 결과](../experiments/results/meetings-summary-engine-binding-repair-v1.json)를 새 커밋의 정확 CI로 확인할 예정이다. 실제취득/build/native0이다.
+
+[수동 보정 계획](MEETINGS-MANUAL-CORRECTION-PLAN.md)은 기존 CAS PUT을 유지해 항목추가/삭제/근거선택·배정·충돌/권한 흐름을 완성한다. 입력30개와문서0fee5aa7를 확인했고 공유소스는현재history검증이끝난후구현한다. [무료QA 준비계약](MEETINGS-FREE-QA-PREPARATION-PLAN.md)은 새6쌍·고정예산과공식두shard4,683,073,632B를결속한다. 변환원본commit미공개와template차이를한계로남기고실제내장metadata확인전모델실행을금지한다. 현재설계/작은공식metadata뿐,가중치/새질문/모델실행0이다. 전체목표ACTIVE다.
+
+## 2026-10-27 · 엔진 준비 첫 CI의 게시 바이트 불일치
+
+9a6ba117의 push40452226824·PR40452231318은 모두 terminal이다. web/java-service는 성공, backend는 pins_changed1건 실패/4491통과/21skip이다. watch92377/5685 exit1로 종료됐고 재실행하지 않았다. [원래 CI 결과](../experiments/results/meetings-summary-engine-preparation-ci-v1.json)와 raw job logs를 보존했다. 부모가 pins.json의 CRLF만 LF로 바꾸었지만 runtime.PINS_SHA는 원래 바이트를 가리켰다. JSON 의미 동일성이 원시 바이트 계약을 유지하지 않는다는 게시 오류이며 실제 compiler/엔진 실패로 해석하지 않는다. guard를 제거하지 않고 LF 바이트의 정확한 hash로 맞춘 뒤 검증할 예정이다. 취득/빌드/native0이다.
+
+현재 history 전체 실제 회귀의 추가 실패는 답변실패→원문검색 전환이 기존limit10 대신5를 보내는 제품UI 회귀다. 첫 no-evidence 질문의 단어 겹침과 구분한다. 같은 구현자에게 전체종료/cleanup 후 두 문제의 원본을 보존하고 명시fallback10·비중복질의/실제빈결과 전제만 수정해 history/recovery표적spec을 확인하도록 허용했다. 기존 기록복원limit과기준은 유지한다. 전체목표ACTIVE다.
+
+## 2026-10-27 · 엔진 준비 게시와 통합 화면 실제 회귀 시작
+
+요약 엔진 준비21파일을 사용자 명의9a6ba117로 게시했다. 원격 author/committer lingter100, Git/현재 바이트와341연결을 확인했다. pins.json의 CRLF만 LF로 바꿔 Git 게시 바이트와 맞췄고 JSON 동일성·원본을 보존했다. push40452226824/PR40452231318의 같은 watch92377/5685를 관찰 중이다. 실제 도구 취득/빌드/native는 아직0이다.
+
+프론트 수정 독립 검토9fbef110 blocker0/advisory0·부모73참조검증을 마쳤다. 현재 소스97파일의 새 복사본에서 offline Java package10.112초 후 기존 runner 전체1회 session52426이 진행 중이다. 제품JAR·개인DB는 보존했다. 신규실제검사1개는 no-evidence 질문의 synthetic/evidence 단어가 문서와 겹쳐 generation_disabled로 실패했다. 제품 원인으로 세지 않고 원본을 보존한다. 현재 전체 실행이 끝난 뒤 명시적 비중복 질의와 실제 검색 빈결과 전제를 확인하는 테스트만 수정하고 해당spec을 재검증하도록 배정했다. 전체 목표ACTIVE다.
+
 ## 2026-10-27 · 엔진 준비 수정의 독립 검토 완료
 
 SGE-R1/R2/R3 수정의 별도 검토ad44f2b0는 blocker0/advisory0이며 부모가 입력 해시를 대조했다. [구현 결과](MEETINGS-SUMMARY-ENGINE-PREPARATION.md)는102합성검사·코드 검토와 실제 취득/빌드/엔진0을 구분한다. 도구 코드와 결과를 먼저 게시하고 정확 소스 CI 이후 취득 단계를 진행한다. 통합 기록 프론트 수정6385b4b1의 소스8/스냅샷·검사 근거도 확인했고 독립 delta 검토 중이다. 전체 목표ACTIVE다.
