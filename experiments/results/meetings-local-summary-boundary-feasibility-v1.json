@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "status": "bounded_pure_feasibility_pass_engine_unavailable_no_integration",
+  "source_commit": "07015e87ba9426139045fd20baf5d79acbd6cace",
+  "grammar": {
+    "sha256": "e744497da34d0af79e2cc0419de0241d093136ec84b62a51bad905b982f8e290",
+    "bytes": 910051,
+    "explicit_rules": 1452,
+    "alternative_separators": 58325,
+    "initial_construction_seconds": 0.016,
+    "estimated_expanded_rules_upper_bound": 1516,
+    "expansion_estimate_measured_by_engine": false
+  },
+  "corpus": {
+    "sha256": "722fd6f6ac6ac5c2a39c7ab23efcdc32a79dc8776df638b0a99c28a8c43c65cb",
+    "synthetic_cases": 106,
+    "fixed_before_results": true,
+    "prefix_cases_engine_unverified": 10
+  },
+  "initial_attempt": {
+    "status": "harness_setup_failure",
+    "missing_dependency": "SPAN_FIELDS",
+    "completed_suites": 0,
+    "receipt_sha256": "42f6d649dbf69e7be0113aae83a655ec706575129672c07dc3e6bf97d73db3b1",
+    "failure_sha256": "098ddfe9d06f13981095df80971bba7e5220be0fc7101fe8817280e949b8a931",
+    "parent_refs_verified": 16
+  },
+  "separate_setup_repair": {
+    "scope": "Only isolated frozen-parser namespace adds exact baseline SPAN_FIELDS; all other AST unchanged.",
+    "old_driver_sha256": "20b64284583f454bb61472406975f11d60787ecbf367634291ee38f69d9cb329",
+    "new_driver_sha256": "2602b7c2f7549d29200f00fc549320c29498740b00ea797d1bb937ecb96237dd",
+    "one_new_pure_pass": true,
+    "original_v1_files_preserved": 13,
+    "grammar_corpus_expected_values_budgets_unchanged": true,
+    "receipt_sha256": "e1ecef6382ff012752d588204e8cf405c6077c50c39a9ba1e090b43f08ecf42c",
+    "parent_acceptance_sha256": "7fdf38b954d99b4b2d59ff5bdeb6b946efb50e979b7fff90d602004a16c9d0b9",
+    "parent_refs_verified": 32
+  },
+  "pure_results": {
+    "status": "finite_expected_oracle_and_frozen_parser_cases_pass",
+    "cases": 106,
+    "pair_length_boundary_checks": 288956,
+    "elapsed_seconds": 0.10899999999674037,
+    "result_sha256": "4da2fd97f622bcd846eb0c3ae05a7d752fab2b21f00973cd05ceb973b3d19e93",
+    "emitted_grammar_executed": false
+  },
+  "engine_status": "Prepared pinned b11429 runtime55 contains no official model-free validator or matching harness; no build/download/alternate engine used.",
+  "execution_counts": {
+    "model": 0,
+    "native_engine": 0,
+    "tokenizer": 0,
+    "Java": 0,
+    "download": 0,
+    "build": 0,
+    "product_integration": 0
+  },
+  "limitations": [
+    "Pure oracle/state algebra is not execution of the emitted GBNF or proof of all strings.",
+    "The original grammar and parser intentionally differ on key ordering, whitespace, abstention and evidence validation; expected results preserve those distinctions.",
+    "Unicode escape behavior, prefix viability, native initialization, token-filter cost and actual quality remain unverified.",
+    "Local prototype evidence lives in ignored folders; fresh-clone runnable prototype packaging is not yet complete.",
+    "No adoption; this does not resolve prior768-token incompleteness."
+  ]
+}

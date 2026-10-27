@@ -139,6 +139,39 @@ def summary_request_messages(source, control=LEGACY_SUMMARY_CONTROL):
     return result
 
 
+@dataclass(frozen=True)
+class QAControl:
+    name: str
+    instruction: str
+
+    def system(self):
+        return ANSWER_PROMPT + ("\n" + self.instruction + "\n" + COMPACT_LEGEND if self.instruction else "")
+
+    def binding(self, source_wire_format=LEGACY_WIRE):
+        effective = self.system()
+        if not self.instruction and source_wire_format == COMPACT_WIRE:
+            effective += "\n" + COMPACT_LEGEND
+        return {"policy": self.name, "base_prompt_sha256": sha(ANSWER_PROMPT.encode("utf-8")),
+                "instruction_sha256": sha(self.instruction.encode("utf-8")),
+                "effective_system_sha256": sha(effective.encode("utf-8"))}
+
+
+LEGACY_QA_CONTROL = QAControl("legacy", "")
+QA_COVERAGE_CONTROL = QAControl("qa-coverage-plan-v1", (
+    'Before emitting JSON, identify every explicit part of the question and the source qualifications needed to answer it; emit only the final answer, not this plan.\n'
+    'Cover every requested part with the existing 1-4 short factual claims as needed, following the question order. Do not collapse unrelated facts into one claim or repeat the same fact.\n'
+    "For each claim, select all and only the original evidence IDs needed to support every detail, including subject, state, time, scope and qualifications. Uncited surrounding text or another claim's citations cannot substitute.\n"
+    'Before finishing, check the whole answer for unanswered parts and unsupported details. Do not invent facts or drop necessary qualifications to fill a gap; keep the existing abstention rule.\n'
+    'The 256 generated-token budget covers the entire JSON, including evidence IDs. Keep the answer concise and complete; output no plan, reasoning, checklist, quotes or extra keys.'
+))
+
+
+def qa_request_messages(source, question, control=LEGACY_QA_CONTROL):
+    require(control is LEGACY_QA_CONTROL or control is QA_COVERAGE_CONTROL, "qa_control")
+    system = ANSWER_PROMPT + ("\n" + control.instruction if control is QA_COVERAGE_CONTROL else "")
+    return messages(system, {**source, "question": question})
+
+
 CONTENT_ERRORS = frozenset({"generation_invalid_json", "generation_invalid_schema", "generation_invalid_evidence",
     "generation_summary_insufficient", "generation_summary_review_rejected",
     "generation_language_mismatch", "generation_input_limit", "generation_partition_limit",
@@ -224,22 +257,29 @@ def registration_policy(spec):
     required = {"schema_version", "diagnostic", "prepared", "limits", "profile", "input", "criteria_locks",
                 "code", "assets", "model_root", "output_dir", "order"}
     require(isinstance(spec, dict) and type(spec.get("schema_version")) is int
-            and spec["schema_version"] in (1, 2, 3, 4), "registration_contract")
+            and spec["schema_version"] in (1, 2, 3, 4, 5), "registration_contract")
+    if spec["schema_version"] == 5:
+        require({"response_format", "summary_control", "qa_control", "source_wire_format"} <= set(spec),
+                "registration_contract")
     policy = LEGACY_RESOURCES if spec["schema_version"] == 1 else RSS6_RESOURCES
-    if spec["schema_version"] in (2, 3, 4):
+    if spec["schema_version"] in (2, 3, 4, 5):
         required.add("resource_policy")
         require(spec.get("resource_policy") == policy.name, "registration_contract")
-    if spec["schema_version"] in (3, 4):
+    if spec["schema_version"] in (3, 4, 5):
         required.update({"response_format", "source_wire_format"})
         require(spec.get("source_wire_format") == COMPACT_WIRE
                 and isinstance(spec.get("response_format"), dict)
                 and encoded(spec["response_format"]) == encoded(CLAIMS_JSON_FORMAT.binding()),
                 "response_format")
-    if spec["schema_version"] == 4:
+    if spec["schema_version"] in (4, 5):
         required.add("summary_control")
         require(isinstance(spec.get("summary_control"), dict)
                 and encoded(spec["summary_control"]) == encoded(SUMMARY_BUDGET_CONTROL.binding()),
                 "summary_control")
+    if spec["schema_version"] == 5:
+        required.add("qa_control")
+        require(isinstance(spec.get("qa_control"), dict)
+                and encoded(spec["qa_control"]) == encoded(QA_COVERAGE_CONTROL.binding()), "qa_control")
     require(set(spec) in (required, required | {"source_wire_format"})
             and spec["diagnostic"] == ID and spec["prepared"] is True
             and encoded(spec["limits"]) == encoded(dict(policy.limits)), "registration_contract")
@@ -339,12 +379,17 @@ def source_wire_messages(request_messages, source, content, units, source_wire_f
 class CandidateAdapter(GGUFGenerator):
     """Embedded template, existing bounded HTTP/completion validation, no Qwen suffix."""
     def __init__(self, *args, clock=time.monotonic, observe=None, resource_check=None,
-                 response_format=LEGACY_RESPONSE_FORMAT, summary_control=LEGACY_SUMMARY_CONTROL, **kwargs):
+                 response_format=LEGACY_RESPONSE_FORMAT, summary_control=LEGACY_SUMMARY_CONTROL,
+                 qa_control=LEGACY_QA_CONTROL, **kwargs):
         require(response_format is LEGACY_RESPONSE_FORMAT or response_format is CLAIMS_JSON_FORMAT, "response_format")
         require(summary_control is LEGACY_SUMMARY_CONTROL or summary_control is SUMMARY_BUDGET_CONTROL,
                 "summary_control")
         require(summary_control is LEGACY_SUMMARY_CONTROL or response_format is CLAIMS_JSON_FORMAT,
                 "summary_control")
+        require(qa_control is LEGACY_QA_CONTROL or qa_control is QA_COVERAGE_CONTROL, "qa_control")
+        require(qa_control is LEGACY_QA_CONTROL or (response_format is CLAIMS_JSON_FORMAT
+                and summary_control is SUMMARY_BUDGET_CONTROL), "qa_control")
+        self.qa_control = qa_control
         self.summary_control = summary_control
         self.response_format = response_format
         super().__init__(*args, **kwargs)
@@ -420,6 +465,14 @@ class CandidateAdapter(GGUFGenerator):
                         and len(request_messages) == 2
                         and request_messages[0] == {"role": "system", "content": self.summary_control.system()}
                         and request_messages[1].get("role") == "user", "summary_system")
+            require(self.qa_control is LEGACY_QA_CONTROL or self.qa_control is QA_COVERAGE_CONTROL, "qa_control")
+            if self.qa_control is QA_COVERAGE_CONTROL and stage == "qa":
+                require(self.response_format is CLAIMS_JSON_FORMAT and self.summary_control is SUMMARY_BUDGET_CONTROL
+                        and isinstance(request_messages, list) and len(request_messages) == 2
+                        and request_messages[0] == {"role": "system", "content": self.qa_control.system()}
+                        and request_messages[1].get("role") == "user"
+                        and sha(request_messages[0]["content"].encode("utf-8"))
+                            == self.qa_control.binding()["effective_system_sha256"], "qa_system")
             result = self._complete(request_messages, deadline, LIMITS[stage + "_tokens"],
                                     self.response_format.grammars[stage])
             self._remaining(deadline)
@@ -436,7 +489,7 @@ class CandidateAdapter(GGUFGenerator):
 
 
 def diagnose(documents, adapter, *, active_deadline, emit, clock=time.monotonic, guard=None, checkpoint=None,
-             source_wire_format=LEGACY_WIRE, summary_control=LEGACY_SUMMARY_CONTROL):
+             source_wire_format=LEGACY_WIRE, summary_control=LEGACY_SUMMARY_CONTROL, qa_control=LEGACY_QA_CONTROL):
     source_wire_format = wire_format(source_wire_format)
     report = {"diagnostic": ID, "source_wire_format": source_wire_format, "documents": [{"id": d["id"], "question_id": d["question"]["id"],
               **{k: {"status": "unexecuted"} for k in ("summary", "review", "qa")}} for d in documents],
@@ -493,7 +546,7 @@ def diagnose(documents, adapter, *, active_deadline, emit, clock=time.monotonic,
                 row["review"] = {"status": "not_applicable", "reason": "no_valid_draft"}
             mapping = {index: {**unit, "chunk_id": f"{document['document_id']}:{document['revision']}:{index}"}
                        for index, unit in enumerate(units)}
-            qa_messages = messages(ANSWER_PROMPT, {**source, "question": document["question"]["text"]})
+            qa_messages = qa_request_messages(source, document["question"]["text"], qa_control)
             invoke(document, row, "qa", qa_messages, min(active_deadline, clock() + 60),
                    lambda raw, mapping=mapping: grounded_answer_refs(raw, mapping))
         except Exception as error:  # noqa: BLE001 - retain safe failure, stop or rethrow
@@ -690,8 +743,9 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
     spec, documents, output, prepared = verify_registration(path, expected_sha, root)
     source_wire_format = spec.get("source_wire_format", LEGACY_WIRE)
     policy = registration_policy(spec)
-    response_format = CLAIMS_JSON_FORMAT if spec["schema_version"] in (3, 4) else LEGACY_RESPONSE_FORMAT
-    summary_control = SUMMARY_BUDGET_CONTROL if spec["schema_version"] == 4 else LEGACY_SUMMARY_CONTROL
+    response_format = CLAIMS_JSON_FORMAT if spec["schema_version"] in (3, 4, 5) else LEGACY_RESPONSE_FORMAT
+    summary_control = SUMMARY_BUDGET_CONTROL if spec["schema_version"] in (4, 5) else LEGACY_SUMMARY_CONTROL
+    qa_control = QA_COVERAGE_CONTROL if spec["schema_version"] == 5 else LEGACY_QA_CONTROL
     output.mkdir(parents=True, exist_ok=False)  # reservation survives every subsequent failure
     private = output / "private"
     private.mkdir()
@@ -713,7 +767,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
             guard = make_resource_guard(service.process, policy, clock=clock, expected_created=metrics["owned_create_time"])
             adapter = CandidateAdapter(service.url, service.token, root / PROFILE, clock=clock,
                                        observe=emit, resource_check=guard.check, response_format=response_format,
-                                       summary_control=summary_control)
+                                       summary_control=summary_control, qa_control=qa_control)
             adapter.begin_request(started + 120)
             try:
                 checkpoint()
@@ -721,7 +775,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
                 active_started = clock()
                 report = diagnose(documents, adapter, active_deadline=min(started + 1020, active_started + 900),
                                   emit=emit, clock=clock, guard=guard, checkpoint=checkpoint,
-                                  source_wire_format=source_wire_format, summary_control=summary_control)
+                                  source_wire_format=source_wire_format, summary_control=summary_control, qa_control=qa_control)
             except Exception as error:  # noqa: BLE001 - preserve body cause before client shutdown
                 record = error_record(error)
                 report["first_failure"] = report["first_failure"] or record
@@ -746,6 +800,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
                       resource_policy=policy.name, response_format=response_format.binding(),
                       summary_control=summary_control.binding(source_wire_format), resource_limit_scope="sampled_stop_thresholds_not_reservation_or_peak_limits",
                       source_wire_format=source_wire_format,
+                      qa_control=qa_control.binding(source_wire_format), qa_control_scope="selected_settings_only_not_execution_or_quality",
                       retries=0, AI_quality=False, effective_offload_layers=None,
                       gpu_layers_requested=99, gpu_samples=gpu_samples,
                       gpu_scope="device_wide_samples_not_process_peak_or_exclusive_ownership",
@@ -782,6 +837,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
             report["stop_reason"] = report["stop_reason"] or {"code": "local_candidate_whole_deadline"}
         terminal = {"source_wire_format": source_wire_format, "resource_policy": policy.name,
                     "response_format": response_format.binding(), "summary_control": summary_control.binding(source_wire_format),
+                    "qa_control": qa_control.binding(source_wire_format),
+                    "qa_control_scope": "selected_settings_only_not_execution_or_quality",
                     "limits": dict(policy.limits),
                     "startup_ram_gate": metrics.get("startup_ram_gate"), "status": report["status"], "mechanically_complete": report["mechanically_complete"],
                     "operational_complete": report["operational_complete"], "stop_reason": report["stop_reason"],

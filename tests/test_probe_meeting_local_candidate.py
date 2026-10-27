@@ -29,7 +29,7 @@ class Clock:
         return self.now
 
 
-def adapter_fixture(tmp_path, *, alter=None, clock=None, response_format=None, summary_control=None):
+def adapter_fixture(tmp_path, *, alter=None, clock=None, response_format=None, summary_control=None, qa_control=None):
     clock = clock or Clock()
     requests, observed = [], []
     def handle(request):
@@ -58,7 +58,8 @@ def adapter_fixture(tmp_path, *, alter=None, clock=None, response_format=None, s
     adapter = probe.CandidateAdapter("http://127.0.0.1:54321", "t" * 40, tmp_path / "profile.json",
             clock=clock, transport=httpx.MockTransport(handle), observe=lambda *x: observed.append(x),
             **({"response_format": response_format} if response_format is not None else {}),
-            **({"summary_control": summary_control} if summary_control is not None else {}))
+            **({"summary_control": summary_control} if summary_control is not None else {}),
+            **({"qa_control": qa_control} if qa_control is not None else {}))
     adapter._alias = probe.MODEL_SHA
     return adapter, requests, observed, clock
 
@@ -1469,3 +1470,319 @@ def test_summary_control_soft_targets_do_not_become_parser_limits(tmp_path):
                            source_wire_format=probe.COMPACT_WIRE, summary_control=probe.SUMMARY_BUDGET_CONTROL)
     adapter.close()
     assert result["mechanically_complete"]  # 200 > 160 and 1200 > 960: existing hard limits, not semantic success
+
+
+def qa_control_registration(spec):
+    control_registration(spec)
+    spec.update(schema_version=5, qa_control=probe.QA_COVERAGE_CONTROL.binding())
+    return spec
+
+
+def qa_adapter_fixture(tmp_path, **kwargs):
+    return adapter_fixture(tmp_path, response_format=probe.CLAIMS_JSON_FORMAT,
+                           summary_control=probe.SUMMARY_BUDGET_CONTROL,
+                           qa_control=probe.QA_COVERAGE_CONTROL, **kwargs)
+
+
+def qa_diagnose(adapter, clock, docs=None):
+    return probe.diagnose(docs or documents(), adapter, active_deadline=900, clock=clock,
+                          emit=lambda *a: None, source_wire_format=probe.COMPACT_WIRE,
+                          summary_control=probe.SUMMARY_BUDGET_CONTROL, qa_control=probe.QA_COVERAGE_CONTROL)
+
+
+def test_qa_control_exact_immutable_prospective_binding():
+    assert probe.QA_COVERAGE_CONTROL.binding() == {
+        "policy": "qa-coverage-plan-v1",
+        "base_prompt_sha256": "db163498b0a2ffe122a7e695db90a0c0fbb5fe074a1df75aa541f65a22f59a0e",
+        "instruction_sha256": "e73ab738ab7a7409f0bc7e24a6cb617d033171a7429bfb8d85792dd94dfb00d1",
+        "effective_system_sha256": "7daad39a3afe7be9b4b0b016dc88e798e5f7f7430276ebf9767b7b5bd8838f71"}
+    instruction = probe.QA_COVERAGE_CONTROL.instruction
+    assert len(instruction.splitlines()) == 5 and not instruction.endswith("\n")
+    with pytest.raises(AttributeError):
+        probe.QA_COVERAGE_CONTROL.instruction = "changed"
+    for wire in (probe.LEGACY_WIRE, probe.COMPACT_WIRE):
+        expected = probe.ANSWER_PROMPT + ("\n" + probe.COMPACT_LEGEND if wire == probe.COMPACT_WIRE else "")
+        assert probe.LEGACY_QA_CONTROL.binding(wire)["effective_system_sha256"] == probe.sha(expected.encode())
+
+
+def test_qa_control_schema5_terminal_is_selected_settings_not_execution(tmp_path, monkeypatch):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    qa_control_registration(spec)
+    verified = probe.verify_registration(path, seal(), tmp_path)[0]
+    assert probe.registration_policy(verified) is probe.RSS6_RESOURCES
+    @contextmanager
+    def launch(*args, **kwargs):
+        assert kwargs["policy"] is probe.registration_policy(verified)
+        raise probe.CandidateFailure("synthetic_startup")
+        yield  # pragma: no cover
+    monkeypatch.setattr(probe, "launch", launch)
+    result = probe.execute(path, seal(), root=tmp_path, clock=lambda: 0)
+    terminal = json.loads((tmp_path / spec["output_dir"] / "terminal.json").read_text(encoding="utf-8"))
+    for key in ("qa_control", "summary_control", "response_format", "limits"):
+        assert result[key] == terminal[key] == spec[key]
+    assert result["qa_control_scope"] == terminal["qa_control_scope"] == "selected_settings_only_not_execution_or_quality"
+    assert result["first_failure"]["code"] == "local_candidate_synthetic_startup"
+    assert all(row["qa"]["status"] == "unexecuted" for row in result["documents"])
+    with pytest.raises(probe.CandidateFailure, match="output_scope"):
+        probe.execute(path, seal(), root=tmp_path, clock=lambda: 0)
+
+
+@pytest.mark.parametrize("fault", ["schema", "bool", "old1", "old2", "old3", "old4", "missing-control",
+    "missing", "extra", "type", "policy", "base_prompt", "instruction", "effective_system", "hash-type",
+    "wire", "format", "resource", "limits", "summary-missing", "summary-legacy", "summary-hash"])
+def test_qa_control_invalid_binding_precedes_bound_reads_and_native(tmp_path, monkeypatch, fault):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    qa_control_registration(spec)
+    if fault in ("schema", "bool") or fault.startswith("old"):
+        spec["schema_version"] = int(fault[-1]) if fault.startswith("old") else {"schema": 6, "bool": True}[fault]
+    elif fault == "missing-control":
+        del spec["qa_control"]
+    elif fault == "missing":
+        del spec["qa_control"]["instruction_sha256"]
+    elif fault == "extra":
+        spec["qa_control"]["instruction"] = "arbitrary"
+    elif fault == "type":
+        spec["qa_control"] = []
+    elif fault == "policy":
+        spec["qa_control"]["policy"] = "unknown"
+    elif fault == "hash-type":
+        spec["qa_control"]["instruction_sha256"] = True
+    elif fault in ("base_prompt", "instruction", "effective_system"):
+        spec["qa_control"][fault + "_sha256"] = "0" * 64
+    elif fault == "wire":
+        spec["source_wire_format"] = probe.LEGACY_WIRE
+    elif fault == "format":
+        spec["response_format"] = probe.LEGACY_RESPONSE_FORMAT.binding()
+    elif fault == "resource":
+        spec["resource_policy"] = "legacy"
+    elif fault == "limits":
+        spec["limits"]["qa_tokens"] += 1
+    elif fault == "summary-missing":
+        del spec["summary_control"]
+    elif fault == "summary-legacy":
+        spec["summary_control"] = probe.LEGACY_SUMMARY_CONTROL.binding()
+    else:
+        spec["summary_control"]["instruction_sha256"] = "0" * 64
+    monkeypatch.setattr(probe, "check_ref", lambda *a: pytest.fail("must fail before bound file reads"))
+    monkeypatch.setattr(probe, "launch", lambda *a, **k: pytest.fail("must fail before native"))
+    with pytest.raises(probe.CandidateFailure):
+        probe.execute(path, seal(), root=tmp_path, clock=lambda: 0)
+    assert not (tmp_path / spec["output_dir"]).exists()
+
+
+def test_qa_control_untrusted_or_mixed_selection_precedes_client(monkeypatch):
+    monkeypatch.setattr(probe.GGUFGenerator, "__init__", lambda *a, **k: pytest.fail("client must not open"))
+    for value in ({}, "qa-coverage-plan-v1", probe.QAControl("qa-coverage-plan-v1", "changed"),
+                  probe.QAControl("qa-coverage-plan-v1", probe.QA_COVERAGE_CONTROL.instruction)):
+        with pytest.raises(probe.CandidateFailure, match="qa_control"):
+            probe.CandidateAdapter(qa_control=value)
+        with pytest.raises(probe.CandidateFailure, match="qa_control"):
+            probe.qa_request_messages({}, "question", value)
+    for response, summary in ((probe.LEGACY_RESPONSE_FORMAT, probe.LEGACY_SUMMARY_CONTROL),
+                              (probe.CLAIMS_JSON_FORMAT, probe.LEGACY_SUMMARY_CONTROL)):
+        with pytest.raises(probe.CandidateFailure, match="qa_control"):
+            probe.CandidateAdapter(qa_control=probe.QA_COVERAGE_CONTROL, response_format=response, summary_control=summary)
+
+
+@pytest.mark.parametrize("schema", [1, 2, 3, 4])
+def test_qa_control_old_schema_and_default_requests_unchanged(tmp_path, monkeypatch, schema):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    if schema >= 2:
+        rss6_registration(spec)
+    if schema >= 3:
+        format_registration(spec)
+    if schema == 4:
+        control_registration(spec)
+    probe.verify_registration(path, seal(), tmp_path)
+    wire = spec.get("source_wire_format", probe.LEGACY_WIRE)
+    response = probe.CLAIMS_JSON_FORMAT if schema >= 3 else probe.LEGACY_RESPONSE_FORMAT
+    summary = probe.SUMMARY_BUDGET_CONTROL if schema == 4 else probe.LEGACY_SUMMARY_CONTROL
+    recorded = []
+    for kwargs in ({}, {"qa_control": probe.LEGACY_QA_CONTROL}):
+        adapter, requests, _, clock = adapter_fixture(tmp_path, response_format=response, summary_control=summary, **kwargs)
+        result = probe.diagnose(documents(), adapter, active_deadline=900, clock=clock, emit=lambda *a: None,
+                                source_wire_format=wire, summary_control=summary, **kwargs)
+        adapter.close()
+        assert result["mechanically_complete"]
+        recorded.append(requests)
+    assert probe.encoded(recorded[0]) == probe.encoded(recorded[1])
+    for doc in documents():
+        units = probe.meeting_units(doc["content"])
+        source = probe.source_payload(doc["title"], doc["content"], units)
+        assert probe.encoded(probe.qa_request_messages(source, doc["question"]["text"])) == probe.encoded(
+            probe.messages(probe.ANSWER_PROMPT, {**source, "question": doc["question"]["text"]}))
+
+
+def test_qa_control_changes_only_qa_system_preserves_all_payloads_and_grammars(tmp_path):
+    docs = documents()
+    for d in docs:
+        d["question"]["text"] = "조건은 무엇인가? 예외와 담당자, 완료 여부 및 기한은?"
+        d["content"] += "조건: 점검이 통과한 경우에만 진행한다.\n예외: 긴급 변경은 보류한다.\n"
+        d["content_sha256"] = probe.sha(d["content"].encode())
+    runs, parsed = [], []
+    for control in (probe.LEGACY_QA_CONTROL, probe.QA_COVERAGE_CONTROL):
+        adapter, requests, _, clock = adapter_fixture(tmp_path, response_format=probe.CLAIMS_JSON_FORMAT,
+            summary_control=probe.SUMMARY_BUDGET_CONTROL, qa_control=control)
+        events = []
+        result = probe.diagnose(docs, adapter, active_deadline=900, clock=clock, emit=lambda *a, events=events: events.append(a),
+            source_wire_format=probe.COMPACT_WIRE, summary_control=probe.SUMMARY_BUDGET_CONTROL, qa_control=control)
+        adapter.close()
+        assert result["mechanically_complete"] and result["counts"]["requested_tokens"] == 4608
+        runs.append(requests)
+        parsed.append(events)
+    assert probe.encoded(parsed[0]) == probe.encoded(parsed[1])  # same generic evidence mapping
+    templates = [[b for p, b in rows if p == "/apply-template"] for rows in runs]
+    for i, (old, new) in enumerate(zip(*templates, strict=True)):
+        if i % 3 == 2:
+            system = new["messages"][0]["content"]
+            assert system == probe.QA_COVERAGE_CONTROL.system()
+            assert system.count(probe.QA_COVERAGE_CONTROL.instruction) == system.count(probe.COMPACT_LEGEND) == 1
+            assert probe.sha(system.encode()) == probe.QA_COVERAGE_CONTROL.binding()["effective_system_sha256"]
+            assert old["messages"][0]["content"] == probe.ANSWER_PROMPT + "\n" + probe.COMPACT_LEGEND
+            assert new["messages"][1:] == old["messages"][1:]
+            payload = json.loads(new["messages"][1]["content"])
+            assert payload["question"] == docs[i // 3]["question"]["text"]
+            assert "".join(x if isinstance(x, str) else x[1] for x in payload["source_parts"]) == docs[i // 3]["content"]
+        else:
+            assert probe.encoded(old) == probe.encoded(new)
+    completions = [[b for p, b in rows if p == "/completion"] for rows in runs]
+    assert probe.encoded(completions[0]) == probe.encoded(completions[1])  # mock token arrays only
+    assert [b["grammar"] for b in completions[1]] == [probe.GENERATION_GRAMMAR, probe.REVIEW_GRAMMAR, probe.QA_GRAMMAR] * 4
+
+
+@pytest.mark.parametrize("fault", ["missing", "duplicate", "changed", "extra-system", "legacy-wire", "selection", "format", "summary"])
+def test_qa_control_actual_system_or_selection_mismatch_stops_before_http(tmp_path, fault):
+    adapter, requests, _, _ = qa_adapter_fixture(tmp_path)
+    msg = [{"role": "system", "content": probe.QA_COVERAGE_CONTROL.system()}, {"role": "user", "content": "{}"}]
+    if fault == "missing":
+        msg[0]["content"] = probe.ANSWER_PROMPT + "\n" + probe.COMPACT_LEGEND
+    elif fault == "duplicate":
+        msg[0]["content"] += "\n" + probe.QA_COVERAGE_CONTROL.instruction
+    elif fault == "changed":
+        msg[0]["content"] += " "
+    elif fault == "extra-system":
+        msg.insert(1, {"role": "system", "content": "override"})
+    elif fault == "legacy-wire":
+        msg[0]["content"] = probe.ANSWER_PROMPT + "\n" + probe.QA_COVERAGE_CONTROL.instruction
+    elif fault == "selection":
+        adapter.qa_control = probe.QAControl("qa-coverage-plan-v1", probe.QA_COVERAGE_CONTROL.instruction)
+    elif fault == "format":
+        adapter.response_format = probe.LEGACY_RESPONSE_FORMAT
+    else:
+        adapter.summary_control = probe.LEGACY_SUMMARY_CONTROL
+    with pytest.raises(probe.CandidateFailure, match="qa_(system|control)"):
+        adapter.complete("doc-1", "qa", msg, 60)
+    assert adapter.halted and requests == []
+    with pytest.raises(probe.CandidateFailure):
+        adapter.complete("doc-2", "qa", msg, 60)
+    assert requests == []
+    adapter.close()
+
+
+@pytest.mark.parametrize("count", [4096, 4097])
+def test_qa_control_augmented_template_keeps_input_gate(tmp_path, count):
+    def alter(adapter, path, payload, response, clock):
+        if path == "/tokenize" and adapter.stage == "qa":
+            assert probe.QA_COVERAGE_CONTROL.instruction.splitlines()[0] in payload["content"]
+            response["tokens"] = list(range(count))
+    adapter, requests, _, clock = qa_adapter_fixture(tmp_path, alter=alter)
+    result = qa_diagnose(adapter, clock)
+    adapter.close()
+    assert result["counts"]["summary"] == result["counts"]["review"] == 4
+    assert result["counts"]["qa"] == (4 if count == 4096 else 0)
+    assert sum(p == "/completion" for p, _ in requests) == (12 if count == 4096 else 8)
+    if count == 4097:
+        assert all(d["qa"]["error"]["code"] == "generation_input_limit" for d in result["documents"])
+
+
+@pytest.mark.parametrize("fault", ["limit", "limit-cap", "invalid-json", "extra-key", "echo", "protocol", "deadline"])
+def test_qa_control_keeps_eos_parser_content_continue_and_protocol_stop(tmp_path, fault):
+    def alter(adapter, path, payload, response, clock):
+        if adapter.stage != "qa":
+            return
+        if path == "/completion":
+            assert payload["n_predict"] == 256
+            if fault in ("limit", "limit-cap"):
+                response["stop_type"] = "limit"
+                if fault == "limit-cap":
+                    response.update(tokens_predicted=256, tokens=[201] * 256)
+                    response["timings"]["predicted_n"] = 256
+            elif fault == "invalid-json":
+                response["content"] = "{"
+            elif fault == "extra-key":
+                body = json.loads(response["content"])
+                body["plan"] = "forbidden"
+                response["content"] = json.dumps(body)
+            elif fault == "echo":
+                response["generation_settings"]["grammar"] += " "
+            elif fault == "protocol":
+                response["tokens_predicted"] = True
+        elif fault == "deadline" and path == "/apply-template":
+            clock.now = 61
+    adapter, requests, _, clock = qa_adapter_fixture(tmp_path, alter=alter)
+    result = qa_diagnose(adapter, clock)
+    adapter.close()
+    if fault in ("limit", "limit-cap", "invalid-json", "extra-key"):
+        assert result["operational_complete"] and not result["mechanically_complete"]
+        assert result["counts"]["qa"] == 4 and all(d["qa"]["status"] == "rejected" for d in result["documents"])
+        assert len([p for p, _ in requests if p == "/completion"]) == 12
+    else:
+        assert result["stop_reason"] and not result["operational_complete"] and adapter.halted
+        assert result["counts"]["qa"] == (0 if fault == "deadline" else 1)
+        assert all(d["qa"]["status"] == "unexecuted" for d in result["documents"][1:])
+
+
+@pytest.mark.parametrize("resource_failure", [False, True])
+def test_qa_control_execute_binds_adapter_preserves_resource_stop_cleanup_once(tmp_path, monkeypatch, resource_failure):
+    from scripts import probe_meeting_gpu_placement as gpu
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    qa_control_registration(spec)
+    state = {"failed": False, "cleanup": 0}
+    def alter(adapter, endpoint, payload, response, clock):
+        if resource_failure and endpoint == "/completion" and adapter.stage == "qa":
+            state["failed"] = True
+    adapter, requests, _, clock = qa_adapter_fixture(tmp_path, alter=alter)
+    class Guard:
+        def check(self):
+            if state["failed"]:
+                raise ValueError("summary_mode_resources")
+        @contextmanager
+        def arm(self, deadline, metrics):
+            self.check()
+            yield
+            self.check()
+    guard = Guard()
+    @contextmanager
+    def launch(*args, **kwargs):
+        metrics = args[3]
+        metrics["owned_create_time"] = 1.0
+        metrics["process_creation_attempted"] = True  # mock marker, no actual process
+        try:
+            yield SimpleNamespace(url="http://127.0.0.1:54321", token="t" * 40, process=object())
+        finally:
+            state["cleanup"] += 1
+            metrics["within_budget"] = True
+    def candidate(*args, **kwargs):
+        assert kwargs["qa_control"] is probe.QA_COVERAGE_CONTROL
+        assert kwargs["summary_control"] is probe.SUMMARY_BUDGET_CONTROL
+        assert kwargs["response_format"] is probe.CLAIMS_JSON_FORMAT
+        adapter.resource_check = kwargs["resource_check"]
+        adapter.load = lambda: adapter.resource_check()
+        return adapter
+    monkeypatch.setattr(probe, "launch", launch)
+    monkeypatch.setattr(probe, "CandidateAdapter", candidate)
+    monkeypatch.setattr(probe, "make_resource_guard", lambda *a, **k: guard)
+    monkeypatch.setattr(gpu, "gpu_checkpoint", lambda **k: {"uuid": "synthetic", "query_stopped": True})
+    result = probe.execute(path, seal(), root=tmp_path, clock=clock)
+    assert state["cleanup"] == 1 and result["cleanup"]["within_budget"]
+    assert result["qa_control"] == spec["qa_control"] and result["bindings_unchanged"]
+    assert result["counts"]["qa"] == (1 if resource_failure else 4)
+    if resource_failure:
+        assert result["stop_reason"]["code"] == "summary_mode_resources" and adapter.halted
+        assert len([p for p, _ in requests if p == "/completion"]) == 3
+        assert all(d["qa"]["status"] == "unexecuted" for d in result["documents"][1:])
+    else:
+        assert result["mechanically_complete"] and result["counts"]["requested_tokens"] == 4608
+    with pytest.raises(probe.CandidateFailure, match="output_scope"):
+        probe.execute(path, seal(), root=tmp_path, clock=clock)
+    assert state["cleanup"] == 1
