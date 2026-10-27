@@ -2,6 +2,50 @@ import type { Detail, Hit } from './types';
 import { ApiError, errorMessage } from './api';
 
 export type Span = { quote: string; start_offset: number; end_offset: number };
+// Built once for an editor's exact source and shared by selection and save.
+export type SourceIndex = { content: string; boundaries: Map<number, number>; offsets: number[]; valid: boolean };
+export function createSourceIndex(content: string): SourceIndex {
+  const boundaries = new Map<number, number>(), offsets: number[] = []; let utf16 = 0, valid = true;
+  for (const char of content) { if (/^[\uD800-\uDFFF]$/.test(char)) valid = false; boundaries.set(utf16, offsets.length); offsets.push(utf16); utf16 += char.length; }
+  boundaries.set(utf16, offsets.length); offsets.push(utf16);
+  return { content, boundaries, offsets, valid };
+}
+const asSourceIndex = (source: string | SourceIndex) => typeof source === 'string' ? createSourceIndex(source) : source;
+export function sourceSpan(source: string | SourceIndex, value: string, start: number, end: number): Span | null {
+  const index = asSourceIndex(source), { content, boundaries } = index;
+  if (!index.valid || value !== content || !boundaries.has(start) || !boundaries.has(end) || end <= start) return null;
+  const start_offset = boundaries.get(start)!, end_offset = boundaries.get(end)!;
+  if (end_offset - start_offset > 12000) return null;
+  const quote = content.slice(start, end);
+  return quote.trim() ? { quote, start_offset, end_offset } : null;
+}
+// Match enumeration performs boundary lookups, never rebuilds the index.
+export function sourceMatchPositions(index: SourceIndex, quote: string): number[] {
+  const result: number[] = [];
+  if (!index.valid || !quote.trim() || Array.from(quote).length > 12000) return result;
+  for (let at = index.content.indexOf(quote); at !== -1; at = index.content.indexOf(quote, at + 1)) {
+    if (index.boundaries.has(at) && index.boundaries.has(at + quote.length)) result.push(index.boundaries.get(at)!);
+  }
+  return result;
+}
+export function sourceMatches(source: string | SourceIndex, quote: string): Span[] {
+  const index = asSourceIndex(source), length = Array.from(quote).length;
+  return sourceMatchPositions(index, quote).map(start_offset => ({ quote, start_offset, end_offset: start_offset + length }));
+}
+export function exactSourceSpan(index: SourceIndex, span: Span): boolean {
+  const { start_offset: start, end_offset: end, quote } = span;
+  return index.valid && Number.isInteger(start) && Number.isInteger(end) && start >= 0 && end > start && end < index.offsets.length
+    && end - start <= 12000 && !!quote.trim() && index.content.slice(index.offsets[start], index.offsets[end]) === quote;
+}
+export function itemEditError(item: MeetingItem, source: string | SourceIndex): string {
+  const validText = (value: string, max: number) => !!value.trim() && Array.from(value).length <= max && !Array.from(value).some(c => /^[\uD800-\uDFFF]$/.test(c));
+  if (!validText(item.text, 3000)) return '내용을 1~3,000자로 입력해 주세요.';
+  if (!exactSourceSpan(asSourceIndex(source), item)) return '정확한 원문 근거를 선택해 주세요.';
+  if (!(item.type === 'action' ? ['needs_confirmation', 'todo', 'doing', 'done'] : ['needs_confirmation', 'confirmed']).includes(item.status)) return '분류에 맞는 상태를 선택해 주세요.';
+  if (item.assignee !== null && !validText(item.assignee, 200)) return '담당자를 1~200자로 입력해 주세요.';
+  if (item.due_date && (!/^\d{4}-\d{2}-\d{2}$/.test(item.due_date) || !Number.isFinite(Date.parse(item.due_date)) || new Date(item.due_date).toISOString().slice(0, 10) !== item.due_date)) return '실제 달력에 있는 날짜를 입력해 주세요.';
+  return '';
+}
 export type Evidence = Span & { document_id: string; revision: number; chunk_id?: string; title?: string; meeting_date?: string | null; page?: number | null };
 export type ItemType = 'topic' | 'proposal' | 'decision' | 'unresolved' | 'action';
 export type ItemStatus = 'needs_confirmation' | 'confirmed' | 'todo' | 'doing' | 'done';
@@ -32,9 +76,9 @@ export function summaryProjection(claims: SummaryClaim[]) {
     summary_evidence: [...unique.values()].sort((a, b) => a.start_offset - b.start_offset || a.end_offset - b.end_offset) };
 }
 
-export function summaryEditError(claims: SummaryClaim[], content: string): string {
+export function summaryEditError(claims: SummaryClaim[], content: string | SourceIndex): string {
   if (claims.length < 1 || claims.length > 6) return '요약 문장은 1개부터 6개까지 작성해 주세요.';
-  const source = Array.from(content);
+  const source = asSourceIndex(content);
   let total = 0;
   for (const [index, claim] of claims.entries()) {
     const text = Array.from(claim.text);
@@ -47,8 +91,7 @@ export function summaryEditError(claims: SummaryClaim[], content: string): strin
     for (const span of claim.citations) {
       const key = `${span.start_offset}:${span.end_offset}`;
       if (!span.quote.trim() || Array.from(span.quote).length > 12000 || !Number.isInteger(span.start_offset) || !Number.isInteger(span.end_offset)
-        || span.start_offset < 0 || span.end_offset <= span.start_offset || span.end_offset > source.length
-        || source.slice(span.start_offset, span.end_offset).join('') !== span.quote) return `요약 문장 ${index + 1}의 근거를 원문에서 복사하고 정확한 위치를 선택해 주세요.`;
+        || span.start_offset < 0 || span.end_offset <= span.start_offset || !exactSourceSpan(source, span)) return `요약 문장 ${index + 1}의 근거를 원문에서 복사하고 정확한 위치를 선택해 주세요.`;
       if (seen.has(key)) return `요약 문장 ${index + 1}에 같은 위치의 근거가 중복되어 있어요.`;
       seen.add(key);
     }

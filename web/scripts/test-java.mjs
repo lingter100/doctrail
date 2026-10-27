@@ -95,8 +95,8 @@ await new Promise((done, reject) => listener.close(error => error ? reject(error
 const url = `http://127.0.0.1:${port}`;
 // Only these explicit specs enable a deterministic transport contract fixture.
 // All other browser specs keep generation disabled, regardless of shell env.
-const meetingFixture = ['meeting-ready.spec.ts', 'meeting-conflict-recovery.spec.ts', 'meeting-list-state.spec.ts', 'meeting-link-recovery.spec.ts', 'meeting-link-submit.spec.ts', 'meeting-save-pending.spec.ts', 'knowledge-source-recovery.spec.ts', 'meeting-detail-recovery.spec.ts', 'meeting-source-access.spec.ts', 'meeting-grounded-summary.spec.ts'].includes(process.env.DOCTRAIL_E2E_SPEC.replaceAll('\\', '/').split('/').at(-1))
-  ? await startMeetingTransportFixture() : null;
+const meetingFixture = ['meeting-ready.spec.ts', 'meeting-conflict-recovery.spec.ts', 'meeting-list-state.spec.ts', 'meeting-link-recovery.spec.ts', 'meeting-link-submit.spec.ts', 'meeting-save-pending.spec.ts', 'knowledge-source-recovery.spec.ts', 'meeting-detail-recovery.spec.ts', 'meeting-source-access.spec.ts', 'meeting-grounded-summary.spec.ts', 'meeting-manual-correction.spec.ts'].includes(process.env.DOCTRAIL_E2E_SPEC.replaceAll('\\', '/').split('/').at(-1))
+  ? await startMeetingTransportFixture({ allowPublicManualCorrection: process.env.DOCTRAIL_E2E_SPEC.replaceAll('\\', '/').split('/').at(-1) === 'meeting-manual-correction.spec.ts' }) : null;
 const server = spawn(java, ['-jar', jar, '--server.address=127.0.0.1', `--server.port=${port}`], {
   cwd: repo, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'],
   env: { ...process.env, DOCTRAIL_DB: join(runDirectory, 'synthetic.sqlite3'),

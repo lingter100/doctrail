@@ -203,6 +203,7 @@ test(`real Java: denied linked source cannot return from a retained recovery sna
       await page.getByRole('button', { name: '내 초안 유지 · 저장은 나중에', exact: true }).click();
       await expect(page.locator('.analysis-editor').getByRole('textbox', { name: '회의 요약', exact: true })).toHaveValue('유지할 복구 초안');
       await page.locator('.analysis-editor').getByRole('button', { name: '취소', exact: true }).click();
+  await page.getByRole('dialog', { name: '미저장 변경 확인' }).getByRole('button', { name: '버리고 이동' }).click();
     }
     await page.screenshot({ path: info.outputPath('recovery-after-source-denial.png'), fullPage: true });
     await expect(page.locator('.meeting-detail-heading h2')).toHaveText(target.document.title);

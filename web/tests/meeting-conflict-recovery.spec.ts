@@ -144,6 +144,7 @@ test('synthetic transport + real Java: delayed recovery cannot repopulate a diff
   await page.getByRole('button', { name: '서버 버전 확인', exact: true }).click();
   await held.captured;
   await page.locator('#workspace-select').selectOption(second!.id);
+  await page.getByRole('dialog', { name: '미저장 변경 확인' }).getByRole('button', { name: '버리고 이동' }).click();
   await held.release();
   await expect(page.getByTestId('meeting-detail')).toHaveCount(0);
   await expect(page.locator('.edit-recovery')).toHaveCount(0);

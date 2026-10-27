@@ -2,8 +2,9 @@
 // generation-quality test, or a substitute for the separate real GPU checks.
 import { createServer } from 'node:http';
 import { once } from 'node:events';
+import { createHash } from 'node:crypto';
 export const fixtureMarker = 'SYNTHETIC_MEETING_TRANSPORT_FIXTURE';
-export async function startMeetingTransportFixture() {
+export async function startMeetingTransportFixture({ allowPublicManualCorrection = false } = {}) {
   const token = 'synthetic-local-browser-transport-token-2026';
   const calls = { analyze: 0, answer: 0 };
   const attempts = new Map();
@@ -18,6 +19,14 @@ export async function startMeetingTransportFixture() {
         calls.analyze++;
         const attempt = (attempts.get(body.document_id) || 0) + 1; attempts.set(body.document_id, attempt);
         if (body.content.includes('FIXTURE_FAIL_REANALYSIS') && attempt > 1) { response.writeHead(503).end(); return; }
+        // Only the newly named manual-correction spec may opt into this immutable
+        // BSD-3-Clause public source. No markers are appended to licensed text.
+        if (allowPublicManualCorrection && createHash('sha256').update(body.content, 'utf8').digest('hex') === '7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4') {
+          const quote = body.content.split('\n')[0];
+          const proof = { quote, start_offset: 0, end_offset: Array.from(quote).length };
+          const analysis = { meeting_title: null, meeting_date: null, participants: [], purpose: null, summary: quote, summary_evidence: [proof], metadata_evidence: [], items: [{ id: 'public-fixture-topic', type: 'topic', text: quote, ...proof, assignee: null, due_date: null, priority: null, status: 'needs_confirmation' }] };
+          response.writeHead(200, { 'Content-Type': 'application/json' }).end(JSON.stringify({ ...envelope, analysis })); return;
+        }
         if (!body.content.includes(fixtureMarker)) { response.writeHead(422).end(); return; }
         const span = quote => { const index = body.content.indexOf(quote); if (index < 0) throw Error('Fixture quote missing'); const start_offset = Array.from(body.content.slice(0, index)).length; return { quote, start_offset, end_offset: start_offset + Array.from(quote).length }; };
         const decision = '단계별 배포로 진행하기로 결정했다.';

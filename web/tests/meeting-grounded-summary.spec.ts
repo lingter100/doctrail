@@ -1,3 +1,11 @@
+async function pickQuote(page: Page, section: ReturnType<Page['locator']>, number: number, quote: string, ordinal = 0) {
+  await section.getByRole('button', { name: '근거 ' + number + ' 원문 위치 선택', exact: true }).click();
+  const picker = page.getByRole('dialog', { name: '원문 근거 선택' });
+  await picker.getByLabel('정확한 구절 붙여넣기').fill(quote);
+  await expect(picker.getByRole('button', { name: '확인한 위치 사용' })).toBeDisabled();
+  await picker.locator('.span-match').nth(ordinal).click();
+  await picker.getByRole('button', { name: '확인한 위치 사용' }).click();
+}
 import type { APIRequestContext, Page } from '@playwright/test';
 import { test, expect, register, ready } from './support';
 import type { GroundedAnalysis, MeetingDetail, Span, SummaryClaim } from '../src/meetings';
@@ -92,15 +100,10 @@ test('v2 edits preserve repeat occurrence, all citations and canonical projectio
   const first = editor.locator('[data-summary-editor="0"]');
   const editedText = 'Edited summary: source references remain visible.'; // Human edits have no model-language gate.
   await first.getByRole('textbox', { name: '문장 1 내용', exact: true }).fill(editedText);
-  await first.getByRole('textbox', { name: '근거 1 인용문', exact: true }).fill(repeated);
-  await expect(first.getByRole('combobox', { name: '근거 1 원문 위치', exact: true })).toHaveValue('');
-  await expect(editor.getByRole('button', { name: '사용자 수정본 저장' })).toBeDisabled();
-  await first.getByRole('combobox', { name: '근거 1 원문 위치', exact: true }).selectOption(String(occurrence(repeated, 1).start_offset));
+  await pickQuote(page, first, 1, repeated, 1);
   await first.getByRole('button', { name: '근거 추가', exact: true }).click();
   const emoji = occurrence('😀 합성 요약 회의');
-  await first.getByRole('textbox', { name: '근거 3 인용문', exact: true }).fill(emoji.quote);
-  await expect(first.getByRole('combobox', { name: '근거 3 원문 위치', exact: true })).toHaveValue('');
-  await first.getByRole('combobox', { name: '근거 3 원문 위치', exact: true }).selectOption(String(emoji.start_offset));
+  await pickQuote(page, first, 3, emoji.quote);
   await first.getByRole('button', { name: '문장 1 아래로', exact: true }).click();
   await expect(editor.getByRole('textbox', { name: '문장 2 내용', exact: true })).toHaveValue(editedText);
   await editor.getByRole('button', { name: '요약 문장 추가' }).click();
@@ -144,10 +147,13 @@ test('v2 invalid edits never send PUT: unknown/repeated position, blank text, co
   await text.fill('두 문단\n허용하지 않음'); await expect(save).toBeDisabled();
   await text.fill('😀'.repeat(239) + '가'); await expect(save).toBeEnabled();
   await text.fill('편집 중인 문장');
-  await first.getByRole('textbox', { name: '근거 1 인용문', exact: true }).fill('원문에 없는 인용'); await expect(save).toBeDisabled();
+  await first.getByRole('button', { name: '근거 1 원문 위치 선택' }).click();
+  const picker = page.getByRole('dialog', { name: '원문 근거 선택' });
+  await picker.getByLabel('정확한 구절 붙여넣기').fill('원문에 없는 인용');
+  await expect(picker.getByRole('button', { name: '확인한 위치 사용' })).toBeDisabled();
+  await picker.getByRole('button', { name: '취소', exact: true }).click();
   const duplicate = analysisOf(doc).summary_claims[0].citations[1];
-  await first.getByRole('textbox', { name: '근거 1 인용문', exact: true }).fill(duplicate.quote);
-  await first.getByRole('combobox', { name: '근거 1 원문 위치', exact: true }).selectOption(String(duplicate.start_offset));
+  await pickQuote(page, first, 1, duplicate.quote);
   await expect(save).toBeDisabled(); await expect(editor).toContainText('같은 위치의 근거가 중복');
   await first.getByRole('button', { name: '근거 1 삭제', exact: true }).click();
   await expect(save).toBeEnabled();

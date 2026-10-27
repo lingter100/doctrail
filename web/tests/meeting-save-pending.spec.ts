@@ -92,7 +92,8 @@ test('real Java + synthetic PUT 503: failed save unlocks the preserved draft wit
   await expect(action.getByRole('textbox', { name: '담당자', exact: true })).toHaveValue('저장 전 담당자');
   await expect(action.getByRole('combobox', { name: '상태', exact: true })).toHaveValue('doing');
   for (const control of await editor.locator('input, textarea, select').all()) await expect(control).toBeEnabled();
-  await expect(editor.getByRole('status')).toHaveCount(0);
+  await expect(editor.getByRole('status').filter({ hasText: '저장 중에는 내용을 수정할 수 없어요.' })).toHaveCount(0);
+  await expect(editor.getByRole('status').filter({ hasText: '미저장 변경 있음' })).toBeVisible();
   await editor.getByRole('textbox', { name: '회의 요약', exact: true }).fill('실패 후 보존한 초안을 계속 편집');
   expect((await read()).meeting.version).toBe(doc.meeting.version);
   expect(puts).toBe(1);

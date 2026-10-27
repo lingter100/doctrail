@@ -46,7 +46,7 @@ export function App() {
             {state.historyNotice && <div className="error-banner" role="status" data-testid="history-model-notice">{state.historyNotice}</div>}
             {state.pageError && <div className="error-banner" role="alert">{state.pageError}<button id="reload" className="text-button" onClick={() => void (view === 'search' ? app.runSearch(state.query) : app.loadWorkspace())}>다시 불러오기</button></div>}
             <section className="content-section" aria-live="polite">{state.loading ? <div className="loading"><span className="spinner"/>문서를 불러오는 중이에요…</div> : view === 'library' ? <Library app={app}/> : view === 'history' ? <HistoryView key={`${auth.user.id}:${state.workspaceId}:${state.viewVersion}:history`} app={app}/> : <SearchView app={app}/>}</section></>}
-            {meetingView && <MeetingWorkspace key={`${auth.user.id}:${state.workspaceId}:${view}`} app={app} mode={view}/>}
+            {meetingView && <MeetingWorkspace key={`${auth.user.id}:${state.workspaceId}:${state.viewVersion}:${view}`} app={app} mode={view}/>}
             {view === 'knowledge' && <KnowledgeView key={`${auth.user.id}:${state.workspaceId}:${state.viewVersion}:knowledge`} app={app}/>}
             <footer className="main-footer"><span>문서에서 시작해, 근거로 도착하다.</span><span>DOCTRAIL</span></footer>
           </main>

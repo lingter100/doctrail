@@ -134,7 +134,17 @@ test('synthetic transport + real Java: edited titles remain searchable and task 
   const editor = page.locator('.analysis-editor');
   await editor.getByLabel('분석 제목', { exact: true }).fill(editedTitle);
   await editor.locator('.metadata-proof summary').click();
-  await editor.getByLabel('제목 근거', { exact: true }).fill(editedTitle);
+  await editor.getByRole('button', { name: '제목 근거 선택', exact: true }).click();
+  const picker = page.getByRole('dialog', { name: '원문 근거 선택', exact: true });
+  await picker.getByLabel('정확한 구절 붙여넣기', { exact: true }).fill(editedTitle);
+  await expect(picker.locator('.span-match')).toHaveCount(1);
+  await expect(picker.locator('.span-match mark')).toHaveText(editedTitle);
+  await expect(picker.getByRole('button', { name: '확인한 위치 사용', exact: true })).toBeDisabled();
+  await picker.locator('.span-match').click();
+  await expect(picker.locator('.span-match')).toHaveAttribute('aria-pressed', 'true');
+  await picker.getByRole('button', { name: '확인한 위치 사용', exact: true }).click();
+  await expect(picker).toHaveCount(0);
+  await expect(editor.getByRole('textbox', { name: '제목 근거', exact: true })).toHaveValue(editedTitle);
   await editor.getByLabel('담당자', { exact: true }).fill(longAssignee);
   await editor.getByLabel('마감일', { exact: true }).fill('2026-10-20');
   await editor.locator('.item-editor').last().getByRole('textbox', { name: '항목 내용', exact: true }).fill(longTask);
@@ -142,6 +152,9 @@ test('synthetic transport + real Java: edited titles remain searchable and task 
   await page.getByRole('button', { name: '사용자 수정본 저장' }).click();
   await expect(editor).toHaveCount(0);
   await expect(page.locator('.meeting-detail-heading h2')).toHaveText(editedTitle);
+  const persisted = await (await page.request.get(`/api/meetings/${meeting.document.id}`)).json() as MeetingDetail;
+  const titleStart = [...meeting.document.content.slice(0, meeting.document.content.indexOf(editedTitle))].length;
+  expect(persisted.meeting.analysis!.metadata_evidence).toContainEqual({ field: 'meeting_title', quote: editedTitle, start_offset: titleStart, end_offset: titleStart + [...editedTitle].length });
   await page.getByRole('button', { name: '목록으로' }).click();
   const filter = page.getByRole('textbox', { name: '회의 제목 검색' });
   for (const query of [editedTitle, originalTitle]) {
@@ -203,6 +216,7 @@ test('synthetic transport + real Java: edit conflicts preserve local draft and w
   await expect(page.getByRole('alert')).toContainText('변경되어 저장하지 않았어요');
   await expect(page.locator('.analysis-editor').getByLabel('회의 요약')).toHaveValue('저장되지 않은 로컬 수정');
   await page.locator('.analysis-editor').getByRole('button', { name: '취소', exact: true }).click();
+  await page.getByRole('dialog', { name: '미저장 변경 확인' }).getByRole('button', { name: '버리고 이동' }).click();
   await page.getByRole('button', { name: '목록으로' }).click();
   const held = await delayResponse(page, (url, method) => url.pathname === `/api/meetings/${doc.document.id}` && method === 'GET');
   await page.locator(`[data-meeting="${doc.document.id}"]`).click(); await held.captured;

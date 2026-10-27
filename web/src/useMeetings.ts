@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, errorMessage } from './api';
 import type { DocTrail, SourceOrigin } from './useDocTrail';
-import { meetingError, type Analysis, type DecisionLink, type MeetingDetail, type TaskItem } from './meetings';
+import { meetingError, summaryVersion, type Analysis, type DecisionLink, type MeetingDetail, type TaskItem } from './meetings';
 
 // This controller is mounted with a session/workspace/view key. Every request and
 // poll also owns a token: responses from disposed pages cannot reclaim the UI.
@@ -11,6 +11,7 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [detail, setDetail] = useState<MeetingDetail | null>(null);
   const [links, setLinks] = useState<DecisionLink[]>([]);
+  const [linksKnown, setLinksKnown] = useState(false);
   const [targets, setTargets] = useState<MeetingDetail[]>([]);
   const [loading, setLoading] = useState(true);
   const [listState, setListState] = useState({
@@ -34,10 +35,11 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
   const selected = useRef<string | null>(null);
   const mutationBusy = useRef(false);
   function request(key: string) {
+    const contextValid = app.captureContext();
     aborts.current.get(key)?.abort();
     const abort = new AbortController(); aborts.current.set(key, abort);
     const token = (serials.current.get(key) || 0) + 1; serials.current.set(key, token);
-    return { signal: abort.signal, valid: () => mounted.current && !abort.signal.aborted && serials.current.get(key) === token };
+    return { signal: abort.signal, valid: () => mounted.current && contextValid() && !abort.signal.aborted && serials.current.get(key) === token };
   }
   function fail(failure: unknown, valid: () => boolean) { if (valid() && !app.sessionExpired(failure)) setError(meetingError(failure)); }
   function accessDenied(failure: unknown) { return failure instanceof ApiError && (failure.status === 403 || failure.status === 404); }
@@ -67,7 +69,7 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
         else {
           // A linked meeting's source denial does not revoke the open meeting.
           // Retire cached links/targets and their pending reads, preserving drafts.
-          request('detail'); request('targets'); request('list'); setLoading(false); setRefreshing(false); setLinks([]); setTargets([]);
+          request('detail'); request('targets'); request('list'); setLoading(false); setRefreshing(false); setLinks([]); setLinksKnown(false); setTargets([]);
           setRecovery(current => current && { ...current, links: [] });
           setMeetings(current => current.filter(item => item.document.id !== documentId));
           setTasks(current => current.filter(item => item.meeting_id !== documentId));
@@ -118,25 +120,37 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     finally { if (owner.valid()) setLoading(false); }
   }
   async function open(id: string, silent = false) {
-    if (silent && editingRef.current) return;
-    const owner = request('detail'); selected.current = id;
+    if (app.state.logoutBusy || (silent && editingRef.current)) return;
+    const owner = request('detail'); selected.current = id; setLinksKnown(false);
     if (!silent) { setEditing(false); editingRef.current = false; setRecovery(null); setReviewRequired(false); setLinkReviewRequired(false); setRefreshing(false); setError(''); setDetail(null); setLinks([]); setNotice(''); app.closeSource(); }
     try {
       const result = await api<MeetingDetail>(`/meetings/${id}`, { signal: owner.signal });
       if (!owner.valid() || selected.current !== id) return;
       setDetail(result);
       const resultLinks = await api<{ items: DecisionLink[] }>(`/meetings/${id}/links`, { signal: owner.signal });
-      if (owner.valid() && selected.current === id) setLinks(resultLinks.items);
+      if (owner.valid() && selected.current === id) { setLinks(resultLinks.items); setLinksKnown(true); }
     } catch (failure) { detailFailure(failure, owner.valid, id); }
   }
   function edit(value: boolean) {
     request('detail'); editingRef.current = value; setEditing(value);
     setRecovery(null); setReviewRequired(false); setLinkReviewRequired(false); setRefreshing(false); setError('');
   }
+  async function verifySource(basis: MeetingDetail) {
+    if (mutationBusy.current || app.state.logoutBusy || reviewRequired || refreshing) return null;
+    const id = basis.document.id, owner = request('picker');
+    try {
+      const latest = await api<MeetingDetail>(`/meetings/${id}`, { signal: owner.signal });
+      if (!owner.valid() || selected.current !== id || !editingRef.current) return null;
+      if (latest.document.revision !== basis.document.revision || latest.meeting.source_revision !== basis.meeting.source_revision || latest.meeting.version !== basis.meeting.version || latest.meeting.analysis_status !== 'ready' || latest.document.content !== basis.document.content) {
+        setReviewRequired(true); setError('원문이나 분석이 바뀌었어요. 초안을 유지한 채 서버 버전을 확인해 주세요.'); return null;
+      }
+      return { content: latest.document.content, valid: () => owner.valid() && selected.current === id && editingRef.current };
+    } catch (failure) { detailFailure(failure, owner.valid, id); return null; }
+  }
   async function refresh() {
-    if (!detail || mutationBusy.current) return;
+    if (!detail || mutationBusy.current || app.state.logoutBusy) return;
     const id = detail.document.id;
-    const owner = request('detail'); setRefreshing(true); setRecovery(null); setError('');
+    const owner = request('detail'); setRefreshing(true); setRecovery(null); setError(''); setLinksKnown(false);
     if (editingRef.current) setReviewRequired(true);
     try {
       const [latest, latestLinks] = await Promise.all([
@@ -156,6 +170,7 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
         }
       }
       if (!owner.valid() || selected.current !== id) return;
+      setLinksKnown(true);
       if (editingRef.current) setRecovery({ detail: latest, links: latestLinks.items });
       else { setDetail(latest); setLinks(latestLinks.items); }
       if (latestTargets) {
@@ -169,7 +184,7 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
   function keepLocal() {
     if (!recovery || !detail || refreshing || recovery.detail.document.revision !== detail.document.revision
       || recovery.detail.meeting.source_revision !== detail.meeting.source_revision
-      || recovery.detail.meeting.analysis_status !== 'ready') return null;
+      || recovery.detail.meeting.analysis_status !== 'ready' || summaryVersion(recovery.detail.meeting.analysis) !== summaryVersion(detail.meeting.analysis)) return null;
     const latest = recovery.detail;
     setDetail(latest); setLinks(recovery.links);
     setRecovery(null); setReviewRequired(false); setError('');
@@ -181,9 +196,9 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     setDetail(recovery.detail); setLinks(recovery.links); edit(false);
     setNotice('로컬 초안을 버리고 확인한 서버 버전을 열었어요.');
   }
-  function back() { edit(false); selected.current = null; setDetail(null); setLinks([]); setError(''); setNotice(''); app.closeSource(); void load(); }
+  function back() { app.requestLeave(() => { edit(false); selected.current = null; setDetail(null); setLinks([]); setLinksKnown(false); setError(''); setNotice(''); app.closeSource(); void load(); }); }
   async function mutate<T>(action: (signal: AbortSignal) => Promise<T>, done: (result: T) => void, rejected?: (failure: unknown) => void | Promise<void>) {
-    if (mutationBusy.current) return false;
+    if (mutationBusy.current || app.state.logoutBusy) return false;
     const owner = request('mutation'); mutationBusy.current = true; setBusy(true); setError(''); setNotice('');
     try {
       const result = await action(owner.signal);
@@ -215,13 +230,20 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     if (basis.document.id !== id || basis.document.revision !== detail.document.revision) return false;
     return mutate(signal => api<MeetingDetail>(`/meetings/${id}/analysis`, { method: 'PUT', signal, body: JSON.stringify({ expected_revision: basis.document.revision, expected_version: basis.meeting.version, analysis }) }), result => {
       if (selected.current === id) { edit(false); setDetail(result); setLinks([]); setNotice('사용자 수정본을 저장했어요. AI 초안과 원문은 보존돼요.'); void open(id, true); }
-    }, failure => { if (failure instanceof ApiError && failure.status === 409 && editingRef.current) setReviewRequired(true); });
+    }, failure => {
+      if (accessDenied(failure)) { denyCurrentMeeting(); return; }
+      // A lost response may hide a committed PUT. Require an explicit version read
+      // before another CAS; never retry the mutation automatically.
+      if (editingRef.current && (!(failure instanceof ApiError) || failure.status === 409 || failure.status >= 500)) setReviewRequired(true);
+      if (!(failure instanceof ApiError) || failure.status >= 500) setNotice('저장 여부가 확인되지 않아요. 서버에 저장됐을 수 있으니 버전을 확인한 뒤 직접 다시 저장해 주세요.');
+    });
   }
   async function fetchTargets(signal: AbortSignal) {
     const results = await Promise.all((app.state.auth?.workspaces || []).map(workspace => api<{ items: MeetingDetail[] }>(`/workspaces/${workspace.id}/meetings`, { signal })));
     return results.flatMap(result => result.items).filter(item => item.document.id !== selected.current && item.meeting.analysis_status === 'ready');
   }
   async function loadTargets() {
+    if (app.state.logoutBusy) return;
     if (linkReviewRequired) { await refresh(); return; }
     const owner = request('targets'); setError('');
     try {
@@ -271,6 +293,12 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     });
   }
   useEffect(() => {
+    if (!app.state.logoutBusy) return;
+    for (const abort of aborts.current.values()) abort.abort();
+    if (mutationBusy.current) setReviewRequired(true);
+    mutationBusy.current = false; setBusy(false); setRefreshing(false); setLoading(false);
+  }, [app.state.logoutBusy]);
+  useEffect(() => {
     mounted.current = true; void load();
     return () => { mounted.current = false; for (const abort of aborts.current.values()) abort.abort(); };
   }, []);
@@ -280,6 +308,6 @@ export function useMeetings(app: DocTrail, mode: 'meetings' | 'actions') {
     const timer = setTimeout(() => { if (!mutationBusy.current) { void load(); if (selected.current) void open(selected.current, true); } }, 2500);
     return () => clearTimeout(timer);
   }, [meetings, detail, busy]);
-  return { meetings, tasks, detail, links, targets, loading, listState, busy, error, notice, editing, recovery, refreshing, reviewRequired, linkReviewRequired, linkSelectionVersion, targetSelectionVersion, sourceOrigin, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
+  return { meetings, tasks, detail, links, linksKnown, verifySource, targets, loading, listState, busy, error, notice, editing, recovery, refreshing, reviewRequired, linkReviewRequired, linkSelectionVersion, targetSelectionVersion, sourceOrigin, edit, refresh, keepLocal, useServer, load, open, back, create, analyze, save, loadTargets, addLink, removeLink, clearError: () => setError('') };
 }
 export type MeetingsController = ReturnType<typeof useMeetings>;
