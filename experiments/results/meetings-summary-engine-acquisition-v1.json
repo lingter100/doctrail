@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "status": "ACQUISITION_FAILED_SHARED_DEADLINE",
+  "measurement_kind": "actual_local_tool_acquisition_not_model_evaluation",
+  "source_commit": "3d331e8baff453d78b407e3cbb606768807d779e",
+  "official_cli_count": 1,
+  "official_exit": 1,
+  "supervisor_seconds": 595.75,
+  "wrapper_seconds": 596.89,
+  "error": "BoundaryError:shared_deadline",
+  "acquired_archive": {
+    "name": "llvm-mingw-20250709-ucrt-x86_64.zip",
+    "bytes": 171028561,
+    "sha256": "82babcd6aae4dc3606e8e0471d816989c384b4bf86a139f184a8b4a1b2c2758d",
+    "official_hash_matched": true
+  },
+  "partial_files": 335,
+  "partial_total_bytes_including_archive": 178285815,
+  "not_acquired": [
+    "CMake",
+    "Ninja",
+    "selected llama.cpp source",
+    "complete acquisition manifest"
+  ],
+  "cleanup": {
+    "official_all_absent": true,
+    "official_errors": 0,
+    "supplemental_owned_identity_count": 7,
+    "supplemental_all_absent": true
+  },
+  "sampled_peak_rss_bytes": 225501184,
+  "sampled_minimum_host_available_bytes": 6967132160,
+  "code_and_protected_hash_changes": 0,
+  "var_metadata_changes": 0,
+  "downloaded_executable_build_validator_model_java_executions": 0,
+  "retries": 0,
+  "evidence_sha256": {
+    "safe_summary": "56f22d45d989d0ee56ffa152eed5d1b302a1f5097d927726c3a5f38c489fa92e",
+    "receipt": "363dbbe466d7990b5576f015c6bba0e1cbe67338b6d6301c344f2a757edd7b94",
+    "partial_inventory": "2dea478c7f93314c52c73e268c50adc14a0ec38800abba4063832d58fabde0d8"
+  },
+  "limitations": [
+    "Timeout occurred during LLVM extraction; causal bottleneck is not yet established.",
+    "Partial files and original failure are preserved; downloaded tools are not executable-approved.",
+    "Resource samples are not operating-system hard bounds.",
+    "This is tool preparation, not model quality or deployment validation."
+  ],
+  "next_action": "Read-only source and saved-metadata diagnosis before repair or any new acquisition."
+}

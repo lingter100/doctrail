@@ -1,4 +1,34 @@
 # 진행 상태
+## 2026-10-27 · 취득 최소 수정 계획과 수동 보정 구현 반환
+
+[엔진 취득 후속 계획](MEETINGS-SUMMARY-ENGINE-ACQUISITION-NEXT.md)을 수용했다. 반복 전체 탐색·압축 용량 이중 합산·redirect body 미계상 경로를 별도로 구분한다. 시간 초과의 지배 원인은 미측정이며 원래 한도와 실패 폴더를 유지한다. 부모는 진단18참조를 확인했다. 계획 게시 후 기존3파일 수정만 배정하며 새 취득/빌드/모델 실행은 아직0이다.
+
+수동 보정15파일이 반환됐다(d51f71ef). 마지막 순수/API모형28개와 기존 history 모형14개·type/build가 통과했다. 실제 Java 첫274개는272통과/새 시험 전제 오류1/기존skip1이고, 전제 수정 후 신규18개만 통과한 범위다. 부모가91참조·최종19스냅샷·Java실제복사35개를 대조했고 새 Astra xhigh manual_correction_review가 독립 검토한다. 실제 Java+브라우저 최종 검증은 아직0이다.
+
+무료 QA 준비 독립 검토aa472b37은 redirect body·마지막 deadline 판정에 blocker2를 반환했다. 부모는35참조를 확인하고 기존 Astra high에 assets/test/README만 좁게 수정하도록 배정했다. 원래69합성검사/소스/실패를 보존하며 실제 가중치 취득은 하지 않는다. 앞선 턴은 상태 설명뿐 아니라 실제 종료 근거 확인·새 결과 기록·독립 검토 배정으로 authoritative state를 갱신한 progress다. 전체 목표ACTIVE다.
+
+## 2026-10-27 · 엔진 취득 실패 보존과 무료 QA 준비 코드 검토
+
+엔진 취득1회는 LLVM 압축 해제 중 공유 시간 한도로 종료됐다(official exit1, supervisor595.75초, wrapper596.890초). ZIP171,028,561B는 공식 SHA와 같지만 CMake·Ninja·엔진 소스와 완전한 취득 manifest는 없다. 원래 실패와 부분335파일을 보존했고 재시도하지 않았다. 소유7신원의 부재·공식 정리를 확인한 담당자 기록과 부모396개 고정 해시/9개 영수증 참조 검증 뒤 소스 유지 제한을 해제했다. 내려받은 실행파일·빌드·엔진·모델 실행은0이다. [실제 준비 실패 기록](../experiments/results/meetings-summary-engine-acquisition-v1.json)은 원인 확정이나 AI 성능 결과가 아니다.
+
+무료 QA 자산 준비5파일은69합성검사4.34초/Ruff를 통과했고 소유권을 반환했다. 부모는5소스·21고정 입력·28증거를 대조했다. 실제 가중치 취득·GGUF 적합성·모델 실행은0이며, 새 Astra xhigh free_qa_asset_review가 독립 검토한다. 새 Astra xhigh engine_acquisition_diagnosis는 원래 취득 로그·일반 코드만으로 원인과 최소 수정을 검토한다. 두 설정은 도구가 수락했다. 수동 보정 화면은 기존 Astra high가 구현·검증 중이며 최종 실제 Java+화면 검증은 아직이다. 전체 목표ACTIVE다.
+
+사용자에게 관리·검색 기능과 AI 품질의 진행 차이, 추가2~4주의 조건부 계획을 설명했다. 이는 보장된 납기·측정 완료율이 아니며 무료 로컬 AI의 품질 수용이 큰 변수다.
+
+## 2026-10-27 · 통합 기록의 정확 소스 CI 완료와 다음 구현 시작
+
+3d331e8의 push40454776409·PR40454781165에서 backend/web/java-service가 모두 통과했다. 같은 watch24892/6375는 exit0으로 종료됐다. push 로그에서 현재 전체 브라우저120통과·실패0·인프라 오류0, Python4492통과·21skip/130.62초를 확인했다. [CI 기록](../experiments/results/meetings-knowledge-history-source-ci-v1.json)을 보존한다. 최초 로컬117통과·2실패와 이전9a6의 게시 해시 오류는 그대로 남긴다. 이 CI는 새로 작성 중인 수동 보정/QA 자산 코드에 적용되지 않는다.
+
+기존 Astra high 프론트 구현자는 수동 보정 계획에 따라 공유 화면·선택기·초안 보호와 검사를 구현하기 시작했다. 실제 최종 Java+브라우저 검증은 소스 검토 후 별도 배정한다. 다른 기존 Astra high는 새 무료 QA 자산 준비 코드와 순수 검사만 소유하며 실제 모델/다운로드는0이다.
+
+별도 기존 Astra high knowledge_history_backend는 고정 엔진 취득1회를 시작했다. session34236, wrapper35788/1793079035.562734, supervisor13240/1793079038.2975297을 담당자가 관찰한다. 고정15개와 불변376/77을 확인했고 NEW .local/meeting-summary-engine-work-v1에만 다운로드한다. 취득한 실행파일·컴파일러·엔진·모델은 실행하지 않는다. terminal/정리/해시 확인까지 엔진15개를 유지하며 다른 소스와 문서 작업은 계속한다. 전체 목표ACTIVE다.
+
+## 2026-10-27 · 통합 기록·바이트 수정·후속 설계 게시
+
+5e6976e/93bf1f8/3d331e8 세 커밋을 사용자 계정으로 게시했다. 원격 author/committer와31개 Git/현재 파일 바이트, PR14 draft head/본문을 확인했다. push40454776409·PR40454781165의 같은 watch24892/6375를 관찰한다. 필수 CI 완료 전 기능 통합을 확정하지 않으며 과거9a6 실패는 그대로 보존한다.
+
+기존 Astra high qa_control_implementation은 새 무료 QA profile·자산 준비/verify-only·32MiB GGUF metadata reader와 합성 검사를 새 파일에서 구현한다. 현재 코드는 준비 중이며 실제 가중치 다운로드·토크나이저·native·모델·Java는0이다. 서비스 모델 기본값과 기존 실행/평가 자료는 바꾸지 않는다. 수동 보정 공유 소스 구현과 실제 엔진 취득은 CI 이후 별도 배정한다. 전체 목표ACTIVE다.
+
 ## 2026-10-27 · 통합 기록의 실제 연결 검증과 게시 준비
 
 통합 기록·피드백 구현을 사용자 명의93bf1f8로 로컬 커밋했다. Java는255통과·기존 선택 검사1skip, 화면은 첫 전체19spec에서117통과·2실패였다. 단어가 겹친 no-evidence 시험 전제와 검색 전환 시 limit5가 남는 회귀를 각각 수정한 뒤 관련2spec22개가 통과했다. 독립 검토deda1ea5는 blocker0/advisory0이며 부모가58참조와 실제 검사 소스/복사본97개를 확인했다. 첫 실패와 준비 오류를 보존했고 전체를 성공으로 합산하지 않는다. [검증 문서](MEETINGS-KNOWLEDGE-HISTORY-VERIFICATION.md)에 재현·실제/모형 구분을 정리했다.

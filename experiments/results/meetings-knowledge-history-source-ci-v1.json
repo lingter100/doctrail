@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "head": "3d331e8baff453d78b407e3cbb606768807d779e",
+  "included_commits": [
+    "5e6976e8688d10d86476f57797e77799947c0ac0",
+    "93bf1f8264485cee80505bf3061da43a6a682111"
+  ],
+  "status": "all_required_checks_passed",
+  "runs": [
+    {
+      "id": 40454776409,
+      "event": "push",
+      "watch_session": 24892,
+      "watch_exit_code": 0,
+      "watch_closed": true,
+      "jobs": [
+        {
+          "id": 122025434545,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122025434786,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122025435049,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40454781165,
+      "event": "pull_request",
+      "watch_session": 6375,
+      "watch_exit_code": 0,
+      "watch_closed": true,
+      "jobs": [
+        {
+          "id": 122025449618,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122025449840,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122025450014,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "observed_push_logs": {
+    "java_job": 122025434545,
+    "browser": {
+      "passed": 120,
+      "failed": 0,
+      "infrastructure_failures": 0,
+      "missing_reports": 0,
+      "exit_code": 0
+    },
+    "python_job": 122025435049,
+    "python": {
+      "passed": 4492,
+      "skipped": 21,
+      "warnings": 2,
+      "elapsed_seconds": 130.62
+    }
+  },
+  "first_failed_source": "experiments/results/meetings-summary-engine-preparation-ci-v1.json",
+  "scope": "CI of this exact Git head, including the current full browser suite. Synthetic APIs/model transports are not actual LLM quality; optional/private data skips and human review remain separate.",
+  "human_review": false,
+  "actual_new_model_or_engine_execution": 0
+}
