@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-27T01:19:40.280386+00:00",
+  "scope": "Result and prospective summary-control design publication; not new implementation or real-model quality",
+  "head": "d4a825e1db8a9c1b49c558b089b223906745d23e",
+  "all_required_checks_passed": true,
+  "runs": [
+    {
+      "id": 40431179828,
+      "event": "push",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 121948957576,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 121948957800,
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "id": 121948957883,
+          "name": "web",
+          "conclusion": "success"
+        }
+      ],
+      "watch_session": 93154,
+      "watch_exit": 0,
+      "watch_closed": true
+    },
+    {
+      "id": 40431186903,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 121948982008,
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "id": 121948982145,
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "id": 121948982231,
+          "name": "java-service",
+          "conclusion": "success"
+        }
+      ],
+      "watch_session": 38252,
+      "watch_exit": 0,
+      "watch_closed": true
+    }
+  ],
+  "reruns": 0,
+  "runtime_model_calls": 0,
+  "human_review": 0
+}

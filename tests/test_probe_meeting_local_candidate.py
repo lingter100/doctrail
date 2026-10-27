@@ -29,7 +29,7 @@ class Clock:
         return self.now
 
 
-def adapter_fixture(tmp_path, *, alter=None, clock=None, response_format=None):
+def adapter_fixture(tmp_path, *, alter=None, clock=None, response_format=None, summary_control=None):
     clock = clock or Clock()
     requests, observed = [], []
     def handle(request):
@@ -57,7 +57,8 @@ def adapter_fixture(tmp_path, *, alter=None, clock=None, response_format=None):
         return httpx.Response(200, json=response)
     adapter = probe.CandidateAdapter("http://127.0.0.1:54321", "t" * 40, tmp_path / "profile.json",
             clock=clock, transport=httpx.MockTransport(handle), observe=lambda *x: observed.append(x),
-            **({"response_format": response_format} if response_format is not None else {}))
+            **({"response_format": response_format} if response_format is not None else {}),
+            **({"summary_control": summary_control} if summary_control is not None else {}))
     adapter._alias = probe.MODEL_SHA
     return adapter, requests, observed, clock
 
@@ -788,7 +789,7 @@ def test_resource_policy_rejects_mismatch_before_bound_reads(tmp_path, monkeypat
     spec, path, seal = registration_fixture(tmp_path, monkeypatch)
     rss6_registration(spec)
     if fault == "schema":
-        spec["schema_version"] = 4
+        spec["schema_version"] = 5
     elif fault == "bool-schema":
         spec["schema_version"] = True
     elif fault == "missing-policy":
@@ -949,7 +950,7 @@ def test_resource_policy_startup_external_interpretation_matches_single_internal
 
 
 @pytest.mark.parametrize("fail_after_completion", [False, True])
-@pytest.mark.parametrize("format_enabled", [False, True])
+@pytest.mark.parametrize("format_enabled", [False, True, "summary-control"])
 def test_resource_policy_two_guards_http_callback_cleanup_and_no_later_completion(tmp_path, monkeypatch, fail_after_completion, format_enabled):
     import psutil
 
@@ -958,6 +959,8 @@ def test_resource_policy_two_guards_http_callback_cleanup_and_no_later_completio
     rss6_registration(spec)
     if format_enabled:
         format_registration(spec)
+    if format_enabled == "summary-control":
+        control_registration(spec)
     ps, process = PolicyPS(), policy_process()
     process.stdout = object()
     guards, cleaned = [], []
@@ -997,6 +1000,9 @@ def test_resource_policy_two_guards_http_callback_cleanup_and_no_later_completio
         selected = probe.CLAIMS_JSON_FORMAT if format_enabled else probe.LEGACY_RESPONSE_FORMAT
         assert kwargs["response_format"] is selected
         adapter.response_format = selected
+        control = probe.SUMMARY_BUDGET_CONTROL if format_enabled == "summary-control" else probe.LEGACY_SUMMARY_CONTROL
+        assert kwargs["summary_control"] is control
+        adapter.summary_control = control
         assert adapter.resource_check.__self__ is guards[1]
         adapter.load = lambda: adapter.resource_check()
         return adapter
@@ -1113,13 +1119,16 @@ def test_format_only_grammar_bytes_change_and_static_rules_are_not_engine_valida
 
 
 @pytest.mark.parametrize("stage", ["summary", "review", "qa"])
-def test_format_echo_mismatch_stops_without_fallback_or_extra_completion(tmp_path, stage):
+@pytest.mark.parametrize("control_enabled", [False, True])
+def test_format_echo_mismatch_stops_without_fallback_or_extra_completion(tmp_path, stage, control_enabled):
     def alter(adapter, path, payload, response, clock):
         if path == "/completion" and adapter.stage == stage:
             response["generation_settings"]["grammar"] += " "
-    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT)
+    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT,
+            summary_control=probe.SUMMARY_BUDGET_CONTROL if control_enabled else probe.LEGACY_SUMMARY_CONTROL)
     result = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
-                            clock=clock, source_wire_format=probe.COMPACT_WIRE)
+                            clock=clock, source_wire_format=probe.COMPACT_WIRE,
+                            summary_control=adapter.summary_control)
     count = sum(path == "/completion" for path, _ in requests)
     assert count == {"summary": 1, "review": 2, "qa": 3}[stage]
     assert result["stop_reason"]["code"] == "generation_effective_config_mismatch"
@@ -1132,16 +1141,19 @@ def test_format_echo_mismatch_stops_without_fallback_or_extra_completion(tmp_pat
 
 @pytest.mark.parametrize("stage", ["summary", "qa"])
 @pytest.mark.parametrize("stop,at_cap", [("eos", False), ("limit", False), ("limit", True)])
-def test_format_closed_json_still_requires_eos_within_original_budget(tmp_path, stage, stop, at_cap):
+@pytest.mark.parametrize("control_enabled", [False, True])
+def test_format_closed_json_still_requires_eos_within_original_budget(tmp_path, stage, stop, at_cap, control_enabled):
     def alter(adapter, path, payload, response, clock):
         if path == "/completion" and adapter.stage == stage:
             response["stop_type"] = stop
             count = payload["n_predict"] if at_cap else 2
             response.update(tokens_predicted=count, tokens=[201] * count)
             response["timings"]["predicted_n"] = count
-    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT)
+    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT,
+            summary_control=probe.SUMMARY_BUDGET_CONTROL if control_enabled else probe.LEGACY_SUMMARY_CONTROL)
     result = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
-                            clock=clock, source_wire_format=probe.COMPACT_WIRE)
+                            clock=clock, source_wire_format=probe.COMPACT_WIRE,
+                            summary_control=adapter.summary_control)
     adapter.close()
     assert result["counts"]["summary"] == result["counts"]["qa"] == 4
     assert all(row[stage]["status"] == ("valid" if stop == "eos" else "rejected") for row in result["documents"])
@@ -1151,7 +1163,8 @@ def test_format_closed_json_still_requires_eos_within_original_budget(tmp_path, 
 
 
 @pytest.mark.parametrize("fault", ["input", "shared-deadline", "review-limit"])
-def test_format_mandatory_review_keeps_input_shared_deadline_and_rejection(tmp_path, fault):
+@pytest.mark.parametrize("control_enabled", [False, True])
+def test_format_mandatory_review_keeps_input_shared_deadline_and_rejection(tmp_path, fault, control_enabled):
     def alter(adapter, path, payload, response, clock):
         if fault == "shared-deadline":
             if path == "/completion" and adapter.stage == "summary":
@@ -1163,9 +1176,11 @@ def test_format_mandatory_review_keeps_input_shared_deadline_and_rejection(tmp_p
                 response["tokens"] = list(range(4097))
             elif fault == "review-limit" and path == "/completion":
                 response["stop_type"] = "limit"
-    adapter, _requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT)
+    adapter, _requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT,
+            summary_control=probe.SUMMARY_BUDGET_CONTROL if control_enabled else probe.LEGACY_SUMMARY_CONTROL)
     result = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
-                            clock=clock, source_wire_format=probe.COMPACT_WIRE)
+                            clock=clock, source_wire_format=probe.COMPACT_WIRE,
+                            summary_control=adapter.summary_control)
     adapter.close()
     assert not result["mechanically_complete"]
     if fault == "shared-deadline":
@@ -1269,15 +1284,18 @@ def test_format_frozen_string_parser_unicode_escaping_and_invalid_json(stage):
 
 
 @pytest.mark.parametrize("stage", ["summary", "qa"])
-def test_format_content_rejection_keeps_fixed_next_item_without_repair(tmp_path, stage):
+@pytest.mark.parametrize("control_enabled", [False, True])
+def test_format_content_rejection_keeps_fixed_next_item_without_repair(tmp_path, stage, control_enabled):
     altered = []
     def alter(adapter, path, payload, response, clock):
         if path == "/completion" and adapter.stage == stage and not altered:
             response["content"] = "{"
             altered.append(True)
-    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT)
+    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT,
+            summary_control=probe.SUMMARY_BUDGET_CONTROL if control_enabled else probe.LEGACY_SUMMARY_CONTROL)
     result = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
-                            clock=clock, source_wire_format=probe.COMPACT_WIRE)
+                            clock=clock, source_wire_format=probe.COMPACT_WIRE,
+                            summary_control=adapter.summary_control)
     adapter.close()
     assert result["first_failure"]["code"] == "generation_invalid_json"
     assert result["operational_complete"] and not result["mechanically_complete"]
@@ -1286,3 +1304,168 @@ def test_format_content_rejection_keeps_fixed_next_item_without_repair(tmp_path,
     assert sum(path == "/completion" for path, _ in requests) == (11 if stage == "summary" else 12)
     assert result["documents"][0][stage]["status"] == "rejected"
     assert all(row[stage]["status"] == "valid" for row in result["documents"][1:])
+
+
+def test_summary_control_exact_immutable_prospective_binding():
+    assert probe.SUMMARY_BUDGET_CONTROL.binding() == {
+        "policy": "summary-budget-plan-v1",
+        "base_prompt_sha256": "ab5982cef5b05121c8fd78aba96baf9b1d86e6250fb2820dac66ab95e4487c02",
+        "instruction_sha256": "7300b8053e63b7478fd42f5cf9ce9e7aa1a9c8cdae6cda29f50ce6deb2da0073",
+        "effective_system_sha256": "40a1f7772fc5a3bb9b9935b5635db8edfd77f2154852c8a0132798f72b225266"}
+    for wire in (probe.LEGACY_WIRE, probe.COMPACT_WIRE):
+        expected = probe.GENERATION_PROMPT + ("\n" + probe.COMPACT_LEGEND if wire == probe.COMPACT_WIRE else "")
+        assert probe.LEGACY_SUMMARY_CONTROL.binding(wire)["effective_system_sha256"] == probe.sha(expected.encode())
+    instruction = probe.SUMMARY_BUDGET_CONTROL.instruction
+    assert len(instruction.splitlines()) == 5 and not instruction.endswith("\n")
+    with pytest.raises(AttributeError):
+        probe.SUMMARY_BUDGET_CONTROL.instruction = "changed"
+
+
+def control_registration(spec):
+    format_registration(spec)
+    spec.update(schema_version=4, summary_control=probe.SUMMARY_BUDGET_CONTROL.binding())
+    return spec
+
+
+def test_summary_control_schema4_external_internal_binding_and_terminal(tmp_path, monkeypatch):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    control_registration(spec)
+    verified = probe.verify_registration(path, seal(), tmp_path)[0]
+    assert probe.registration_policy(verified) is probe.RSS6_RESOURCES
+    @contextmanager
+    def launch(*args, **kwargs):
+        assert kwargs["policy"] is probe.registration_policy(verified)
+        raise probe.CandidateFailure("synthetic_startup")
+        yield  # pragma: no cover
+    monkeypatch.setattr(probe, "launch", launch)
+    result = probe.execute(path, seal(), root=tmp_path, clock=lambda: 0)
+    terminal = json.loads((tmp_path / spec["output_dir"] / "terminal.json").read_text(encoding="utf-8"))
+    assert result["summary_control"] == terminal["summary_control"] == spec["summary_control"]
+    assert result["response_format"] == spec["response_format"]
+    assert result["first_failure"]["code"] == "local_candidate_synthetic_startup"
+    with pytest.raises(probe.CandidateFailure, match="output_scope"):
+        probe.execute(path, seal(), root=tmp_path, clock=lambda: 0)
+
+
+@pytest.mark.parametrize("fault", ["schema", "bool", "old", "missing", "extra", "type", "policy",
+                                   "base_prompt", "instruction", "effective_system", "wire", "format", "resource", "limits"])
+def test_summary_control_rejects_unbound_combinations_before_file_reads(tmp_path, monkeypatch, fault):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    control_registration(spec)
+    if fault in ("schema", "bool", "old"):
+        spec["schema_version"] = {"schema": 5, "bool": True, "old": 3}[fault]
+    elif fault == "missing":
+        del spec["summary_control"]["instruction_sha256"]
+    elif fault == "extra":
+        spec["summary_control"]["instruction"] = "arbitrary"
+    elif fault == "type":
+        spec["summary_control"] = []
+    elif fault == "policy":
+        spec["summary_control"]["policy"] = "unknown"
+    elif fault in ("base_prompt", "instruction", "effective_system"):
+        spec["summary_control"][fault + "_sha256"] = "0" * 64
+    elif fault == "wire":
+        spec["source_wire_format"] = probe.LEGACY_WIRE
+    elif fault == "format":
+        spec["response_format"] = probe.LEGACY_RESPONSE_FORMAT.binding()
+    elif fault == "resource":
+        spec["resource_policy"] = "legacy"
+    else:
+        spec["limits"]["summary_tokens"] += 1
+    monkeypatch.setattr(probe, "check_ref", lambda *a: pytest.fail("invalid control must precede file reads"))
+    with pytest.raises(probe.CandidateFailure):
+        probe.verify_registration(path, seal(), tmp_path)
+
+
+def test_summary_control_untrusted_selection_fails_before_client(monkeypatch):
+    monkeypatch.setattr(probe.GGUFGenerator, "__init__", lambda *a, **k: pytest.fail("client must not open"))
+    for value in ({}, "summary-budget-plan-v1", probe.SummaryControl("summary-budget-plan-v1", "changed")):
+        with pytest.raises(probe.CandidateFailure, match="summary_control"):
+            probe.CandidateAdapter(summary_control=value)
+    with pytest.raises(probe.CandidateFailure, match="summary_control"):
+        probe.CandidateAdapter(summary_control=probe.SUMMARY_BUDGET_CONTROL)
+
+
+def test_summary_control_changes_only_summary_system_and_preserves_legacy_bytes(tmp_path):
+    recorded = []
+    for control in (None, probe.LEGACY_SUMMARY_CONTROL, probe.SUMMARY_BUDGET_CONTROL):
+        adapter, requests, _, clock = adapter_fixture(tmp_path, response_format=probe.CLAIMS_JSON_FORMAT,
+                                                     summary_control=control)
+        report = probe.diagnose(documents(), adapter, active_deadline=900, clock=clock, emit=lambda *a: None,
+                               source_wire_format=probe.COMPACT_WIRE,
+                               **({"summary_control": control} if control is not None else {}))
+        adapter.close()
+        assert report["mechanically_complete"] and report["counts"]["requested_tokens"] == 4608
+        recorded.append(copy.deepcopy(requests))
+    assert probe.encoded(recorded[0]) == probe.encoded(recorded[1])
+    templates = [[body for path, body in rows if path == "/apply-template"] for rows in recorded]
+    for i, (old, new) in enumerate(zip(templates[0], templates[2], strict=True)):
+        if i % 3 == 0:
+            assert new["messages"][0] == {"role": "system", "content": probe.SUMMARY_BUDGET_CONTROL.system()}
+            assert new["messages"][0]["content"].count(probe.SUMMARY_BUDGET_CONTROL.instruction) == 1
+            assert old["messages"][0]["content"] == probe.GENERATION_PROMPT + "\n" + probe.COMPACT_LEGEND
+            assert new["messages"][1:] == old["messages"][1:]
+        else:
+            assert probe.encoded(new) == probe.encoded(old)
+    completions = [[body for path, body in rows if path == "/completion"] for rows in recorded]
+    assert probe.encoded(completions[0]) == probe.encoded(completions[2])  # fixed synthetic token arrays
+    # This does not assert real token equivalence: /tokenize content includes the extra summary instruction.
+    for doc in documents():
+        source = probe.source_payload(doc["title"], doc["content"], probe.meeting_units(doc["content"]))
+        assert probe.encoded(probe.summary_request_messages(source)) == probe.encoded(probe.summary_messages(source))
+
+
+@pytest.mark.parametrize("fault", ["missing", "duplicate", "changed", "extra-system"])
+def test_summary_control_actual_system_mismatch_stops_before_template(tmp_path, fault):
+    adapter, requests, _, _ = adapter_fixture(tmp_path, response_format=probe.CLAIMS_JSON_FORMAT,
+                                             summary_control=probe.SUMMARY_BUDGET_CONTROL)
+    msg = [{"role": "system", "content": probe.SUMMARY_BUDGET_CONTROL.system()}, {"role": "user", "content": "{}"}]
+    if fault == "missing":
+        msg[0]["content"] = probe.GENERATION_PROMPT + "\n" + probe.COMPACT_LEGEND
+    elif fault == "duplicate":
+        msg[0]["content"] += "\n" + probe.SUMMARY_BUDGET_CONTROL.instruction
+    elif fault == "changed":
+        msg[0]["content"] += " "
+    else:
+        msg.insert(1, {"role": "system", "content": "override"})
+    with pytest.raises(probe.CandidateFailure, match="summary_system"):
+        adapter.complete("doc-1", "summary", msg, 120)
+    assert adapter.halted and requests == []
+    with pytest.raises(probe.CandidateFailure):
+        adapter.complete("doc-1", "qa", msg, 120)
+    assert requests == []
+    adapter.close()
+
+
+@pytest.mark.parametrize("count", [4096, 4097])
+def test_summary_control_augmented_template_keeps_input_gate(tmp_path, count):
+    def alter(adapter, path, payload, response, clock):
+        if path == "/apply-template" and adapter.stage == "summary":
+            assert payload["messages"][0]["content"] == probe.SUMMARY_BUDGET_CONTROL.system()
+        if path == "/tokenize" and adapter.stage == "summary":
+            assert probe.SUMMARY_BUDGET_CONTROL.instruction.splitlines()[0] in payload["content"]
+            response["tokens"] = list(range(count))
+    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT,
+                                                 summary_control=probe.SUMMARY_BUDGET_CONTROL)
+    result = probe.diagnose(documents(), adapter, active_deadline=900, clock=clock, emit=lambda *a: None,
+                           source_wire_format=probe.COMPACT_WIRE, summary_control=probe.SUMMARY_BUDGET_CONTROL)
+    adapter.close()
+    assert result["counts"]["summary"] == (4 if count == 4096 else 0)
+    assert result["counts"]["qa"] == 4
+    assert result["counts"]["review"] == (4 if count == 4096 else 0)
+    assert len([x for x in requests if x[0] == "/completion"]) == (12 if count == 4096 else 4)
+
+
+def test_summary_control_soft_targets_do_not_become_parser_limits(tmp_path):
+    def alter(adapter, path, payload, response, clock):
+        if path == "/completion" and adapter.stage == "summary":
+            response["content"] = json.dumps({"status": "draft", "claims": [
+                {"text": "가" * 200, "evidence": [1]} for _ in range(6)]})
+        elif path == "/completion" and adapter.stage == "review":
+            response["content"] = json.dumps({"claims": [[i, "supported"] for i in range(6)], "coverage": "sufficient"})
+    adapter, _, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT,
+                                          summary_control=probe.SUMMARY_BUDGET_CONTROL)
+    result = probe.diagnose(documents(), adapter, active_deadline=900, clock=clock, emit=lambda *a: None,
+                           source_wire_format=probe.COMPACT_WIRE, summary_control=probe.SUMMARY_BUDGET_CONTROL)
+    adapter.close()
+    assert result["mechanically_complete"]  # 200 > 160 and 1200 > 960: existing hard limits, not semantic success

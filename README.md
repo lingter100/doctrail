@@ -8,7 +8,7 @@
 
 ## 현재 범위
 
-무료 로컬 후보의 [최신 실제 비교](docs/MEETINGS-LOCAL-FORMAT-RESULTS.md)는 JSON 생성 문법을 적용해 답변4개가 형식을 통과했다. 그러나 독립 AI 내용 평가에서는 수용0/4였고 요약4개도 출력·문자 수 한도에서 거부됐다. 인용11개가 원문과 같아도 충분한 답변을 보장하지 않았다. 원본과 이전 실패를 보존하며 서비스에는 채택하지 않는다. [후속 요약 분량 계획](docs/MEETINGS-LOCAL-SUMMARY-CONTROL-NEXT.md)은 설계만 완료됐고 답변 품질 문제는 별도로 남아 있다.
+무료 로컬 후보의 [최신 실제 비교](docs/MEETINGS-LOCAL-FORMAT-RESULTS.md)는 JSON 생성 문법을 적용해 답변4개가 형식을 통과했다. 그러나 독립 AI 내용 평가에서는 수용0/4였고 요약4개도 출력·문자 수 한도에서 거부됐다. 인용11개가 원문과 같아도 충분한 답변을 보장하지 않았다. 원본과 이전 실패를 보존하며 서비스에는 채택하지 않는다. [후속 요약 분량 제어](experiments/results/meetings-local-summary-control-implementation-v1.json)는 기존 기준을 유지한 코드 구현·188합성검사·독립 정적 검토를 통과했다. 실제 효과는 미확인이고 답변 품질 문제는 별도로 남아 있다.
 
 **문서·회의 관리 기능은 대부분 구현됐으며, 무료 로컬 AI의 내용 품질과 운영 안정성을 검증 중이다.** 기능별 상태와 남은 순서는 [현재 진행 상황](docs/PROGRESS-OVERVIEW.md), 백업·복원의 범위와 재현 방법은 [운영 검증](docs/MEETINGS-RESTORE-VERIFICATION.md)을 참고한다. 회의1차와 전체 포트폴리오는 아직 미완료다.
 

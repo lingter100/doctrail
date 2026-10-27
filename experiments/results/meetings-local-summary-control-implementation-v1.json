@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "status": "implemented_synthetic_verified_independent_review_complete_pending_exact_source_CI",
+  "scope": "Offline summary-only opt-in control; not service adoption or real model-quality evidence",
+  "policy": {
+    "policy": "summary-budget-plan-v1",
+    "base_prompt_sha256": "ab5982cef5b05121c8fd78aba96baf9b1d86e6250fb2820dac66ab95e4487c02",
+    "instruction_sha256": "7300b8053e63b7478fd42f5cf9ce9e7aa1a9c8cdae6cda29f50ce6deb2da0073",
+    "effective_system_sha256": "40a1f7772fc5a3bb9b9935b5635db8edfd77f2154852c8a0132798f72b225266"
+  },
+  "registration_schema": 4,
+  "source_files": [
+    {
+      "file": "scripts/probe_meeting_local_candidate.py",
+      "size_bytes": 44835,
+      "sha256": "9de904a86e9f2b0bfdb951ff67637528f3c52185d06954b4a2e5d24be13b2a16"
+    },
+    {
+      "file": "tests/test_probe_meeting_local_candidate.py",
+      "size_bytes": 79178,
+      "sha256": "f323dd3ce06a111fbec27763226eaa287397e99ad6d326db11a5ca066f59eb3d"
+    }
+  ],
+  "changes": [
+    "schema4 exact summary_control4keys and fixed UTF8 hashes, schema3 format/compact/RSS6 exact retained",
+    "Immutable trusted SummaryControl identities; untrusted objects rejected before client construction",
+    "Only summary system gains exact5lines before existing compact legend; actual system verified before HTTP template",
+    "QA/review messages, source payload/IDs, grammars, EOS, parser hard240/1200, token/time/resource/once/cleanup retained",
+    "Soft160/960 never validator: synthetic6x200 hard-valid accepted with mandatory review",
+    "report/terminal add policy/hash metadata; legacy effective system hash reflects selected wire"
+  ],
+  "verification": {
+    "prior_cases_retained": 147,
+    "added_cases": 41,
+    "total_cases": 188,
+    "candidate_cases": 182,
+    "selected_frozen_guard_cases": 6,
+    "pytest_seconds": 6.87,
+    "wrapper_seconds": 8.813000000023749,
+    "ruff": "passed",
+    "saved_evidence_references_verified": 22,
+    "fixed_references_verified": 472,
+    "existing_test_functions_retained": 47,
+    "existing_top_level_test_file_definitions_retained": 56
+  },
+  "preserved": [
+    "Legacy schema1/2/3 and direct default request behavior",
+    "Complete original source/user payloads, evidence IDs, QA and review requests",
+    "Strict parsers, hard240/1200 and existing semantic criteria;160/960 are soft writing targets only",
+    "Grammar/EOS/input/token/time/resource/once/owned cleanup conditions",
+    "Closed v5 outputs, prior failures and frozen modules"
+  ],
+  "first_failure_preserved": "New policy API absent before implementation; existing baseline was not rerun",
+  "intermediate_change": "After first188pass, corrected additive legacy effective-system metadata for compact wire; final188pass after this code change. Requests unchanged.",
+  "implementation_receipt_sha256": "753cb5d429da93c9fa8334f529014d59c32c73082ffed8a5f050865db3421fce",
+  "parent_implementation_acceptance_sha256": "d01f70f9f6fc08f912dd03cb9f3eb0e221ad23f666fb1f2eb079d0a4a8ed918c",
+  "independent_review": {
+    "status": "complete",
+    "blockers": 0,
+    "advisories": 0,
+    "inputs_verified": 33,
+    "receipt_sha256": "58714dbef5df41945078bfeb77f55a85652add128f50b68aa53fbe863eab5fd5",
+    "parent_acceptance_sha256": "4c81be5d24a8f980e92eeb1a373e8953d8431c495a389d52ec92b3b7d70985bc",
+    "source_only": true,
+    "actual_runtime": 0
+  },
+  "actual_runtime": {
+    "actual_native_calls": 0,
+    "tokenizer_calls": 0,
+    "GBNF_engine_calls": 0,
+    "Java_calls": 0,
+    "live_resource_samples": 0,
+    "asset_fullhash_calls": 0,
+    "new_registration_or_output": false,
+    "Git_mutations": 0,
+    "private_semantic_reads": 0,
+    "model_quality_evidence": false,
+    "criteria_changes": 0
+  },
+  "limitations": [
+    "Synthetic/mock token and HTTP cases do not measure actual new prompt token count, complete generation, review feasibility or semantic sufficiency.",
+    "Summary-only change does not resolve the separately observed QA content failures.",
+    "Legacy report and terminal gain additive selected-policy metadata; they are not byte-identical artifacts.",
+    "Exact source CI, fresh registration and separate once-run are still required before claiming a real result.",
+    "User review and Phase1 quality acceptance remain incomplete."
+  ],
+  "reproduce_command": ".venv/Scripts/python.exe -B -X utf8 -m pytest tests/test_probe_meeting_local_candidate.py tests/test_probe_meeting_summary_mode.py::test_resource_boundary_and_reused_pid_never_killed tests/test_probe_meeting_summary_mode.py::test_resources_fail_closed tests/test_probe_meeting_summary_mode.py::test_resource_error_aborts_remaining_completions tests/test_probe_meeting_summary_mode.py::test_resource_sampler_has_new_721_bound_without_changing_old_sampler tests/test_probe_meeting_summary_mode.py::test_repair_resource_guard_binds_initial_launcher_creation_time -q"
+}

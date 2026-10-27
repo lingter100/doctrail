@@ -24,6 +24,7 @@ from doctrail.meeting_contract import grounded_answer_refs, meeting_units, stric
 from doctrail.meeting_gguf import GGUFGenerator, _integer
 from doctrail.meeting_grounded_summary import (
     GENERATION_GRAMMAR,
+    GENERATION_PROMPT,
     REVIEW_GRAMMAR,
     parse_draft,
     parse_review,
@@ -100,6 +101,42 @@ LEGACY_RESPONSE_FORMAT = ResponseFormat("legacy", MappingProxyType({
     "summary": "", "qa": "", "review": REVIEW_GRAMMAR}))
 CLAIMS_JSON_FORMAT = ResponseFormat("claims-json-gbnf-v1", MappingProxyType({
     "summary": GENERATION_GRAMMAR, "qa": QA_GRAMMAR, "review": REVIEW_GRAMMAR}))
+
+
+@dataclass(frozen=True)
+class SummaryControl:
+    name: str
+    instruction: str
+
+    def system(self):
+        return GENERATION_PROMPT + ("\n" + self.instruction + "\n" + COMPACT_LEGEND if self.instruction else "")
+
+    def binding(self, source_wire_format=LEGACY_WIRE):
+        effective = self.system()
+        if not self.instruction and source_wire_format == COMPACT_WIRE:
+            effective += "\n" + COMPACT_LEGEND
+        return {"policy": self.name, "base_prompt_sha256": sha(GENERATION_PROMPT.encode("utf-8")),
+                "instruction_sha256": sha(self.instruction.encode("utf-8")),
+                "effective_system_sha256": sha(effective.encode("utf-8"))}
+
+
+LEGACY_SUMMARY_CONTROL = SummaryControl("legacy", "")
+SUMMARY_BUDGET_CONTROL = SummaryControl("summary-budget-plan-v1", (
+    'Plan the complete summary before emitting JSON; emit only the final JSON, not the plan.\n'
+    'Choose 1-6 claims according to essential content, not a fixed count. Allocate space across all claims rather than giving every claim the maximum.\n'
+    'Aim for at most 160 Unicode code points per claim and 960 in total as soft writing targets. If sufficient supported coverage needs more, use the original limits of 240 per claim and 1200 total.\n'
+    "Remove repeated wording, not necessary facts or qualifications. Preserve names, decisions versus proposals, conditions, exceptions, dates, scope and unresolved uncertainty with each claim's supporting evidence.\n"
+    'The 768 generated-token budget covers the entire JSON, including keys and evidence IDs; code points are not tokens. Complete the whole JSON within that budget. If a sufficiently complete supported summary cannot fit the original limits, abstain.'
+))
+
+
+def summary_request_messages(source, control=LEGACY_SUMMARY_CONTROL):
+    require(control is LEGACY_SUMMARY_CONTROL or control is SUMMARY_BUDGET_CONTROL, "summary_control")
+    result = summary_messages(source)
+    if control is SUMMARY_BUDGET_CONTROL:
+        require(result[0] == {"role": "system", "content": GENERATION_PROMPT}, "summary_system")
+        result[0] = {"role": "system", "content": GENERATION_PROMPT + "\n" + control.instruction}
+    return result
 
 
 CONTENT_ERRORS = frozenset({"generation_invalid_json", "generation_invalid_schema", "generation_invalid_evidence",
@@ -187,17 +224,22 @@ def registration_policy(spec):
     required = {"schema_version", "diagnostic", "prepared", "limits", "profile", "input", "criteria_locks",
                 "code", "assets", "model_root", "output_dir", "order"}
     require(isinstance(spec, dict) and type(spec.get("schema_version")) is int
-            and spec["schema_version"] in (1, 2, 3), "registration_contract")
+            and spec["schema_version"] in (1, 2, 3, 4), "registration_contract")
     policy = LEGACY_RESOURCES if spec["schema_version"] == 1 else RSS6_RESOURCES
-    if spec["schema_version"] in (2, 3):
+    if spec["schema_version"] in (2, 3, 4):
         required.add("resource_policy")
         require(spec.get("resource_policy") == policy.name, "registration_contract")
-    if spec["schema_version"] == 3:
+    if spec["schema_version"] in (3, 4):
         required.update({"response_format", "source_wire_format"})
         require(spec.get("source_wire_format") == COMPACT_WIRE
                 and isinstance(spec.get("response_format"), dict)
                 and encoded(spec["response_format"]) == encoded(CLAIMS_JSON_FORMAT.binding()),
                 "response_format")
+    if spec["schema_version"] == 4:
+        required.add("summary_control")
+        require(isinstance(spec.get("summary_control"), dict)
+                and encoded(spec["summary_control"]) == encoded(SUMMARY_BUDGET_CONTROL.binding()),
+                "summary_control")
     require(set(spec) in (required, required | {"source_wire_format"})
             and spec["diagnostic"] == ID and spec["prepared"] is True
             and encoded(spec["limits"]) == encoded(dict(policy.limits)), "registration_contract")
@@ -297,8 +339,13 @@ def source_wire_messages(request_messages, source, content, units, source_wire_f
 class CandidateAdapter(GGUFGenerator):
     """Embedded template, existing bounded HTTP/completion validation, no Qwen suffix."""
     def __init__(self, *args, clock=time.monotonic, observe=None, resource_check=None,
-                 response_format=LEGACY_RESPONSE_FORMAT, **kwargs):
+                 response_format=LEGACY_RESPONSE_FORMAT, summary_control=LEGACY_SUMMARY_CONTROL, **kwargs):
         require(response_format is LEGACY_RESPONSE_FORMAT or response_format is CLAIMS_JSON_FORMAT, "response_format")
+        require(summary_control is LEGACY_SUMMARY_CONTROL or summary_control is SUMMARY_BUDGET_CONTROL,
+                "summary_control")
+        require(summary_control is LEGACY_SUMMARY_CONTROL or response_format is CLAIMS_JSON_FORMAT,
+                "summary_control")
+        self.summary_control = summary_control
         self.response_format = response_format
         super().__init__(*args, **kwargs)
         self.clock, self.observe = clock, observe or (lambda *args: None)
@@ -366,6 +413,13 @@ class CandidateAdapter(GGUFGenerator):
         self.stage = stage
         self.begin_request(deadline)
         try:
+            require(self.summary_control is LEGACY_SUMMARY_CONTROL or self.summary_control is SUMMARY_BUDGET_CONTROL,
+                    "summary_control")
+            if self.summary_control is SUMMARY_BUDGET_CONTROL and stage == "summary":
+                require(self.response_format is CLAIMS_JSON_FORMAT and isinstance(request_messages, list)
+                        and len(request_messages) == 2
+                        and request_messages[0] == {"role": "system", "content": self.summary_control.system()}
+                        and request_messages[1].get("role") == "user", "summary_system")
             result = self._complete(request_messages, deadline, LIMITS[stage + "_tokens"],
                                     self.response_format.grammars[stage])
             self._remaining(deadline)
@@ -382,7 +436,7 @@ class CandidateAdapter(GGUFGenerator):
 
 
 def diagnose(documents, adapter, *, active_deadline, emit, clock=time.monotonic, guard=None, checkpoint=None,
-             source_wire_format=LEGACY_WIRE):
+             source_wire_format=LEGACY_WIRE, summary_control=LEGACY_SUMMARY_CONTROL):
     source_wire_format = wire_format(source_wire_format)
     report = {"diagnostic": ID, "source_wire_format": source_wire_format, "documents": [{"id": d["id"], "question_id": d["question"]["id"],
               **{k: {"status": "unexecuted"} for k in ("summary", "review", "qa")}} for d in documents],
@@ -430,7 +484,7 @@ def diagnose(documents, adapter, *, active_deadline, emit, clock=time.monotonic,
             source = source_payload(document["title"], document["content"], units)
             emit("source", {"document": document["id"], "source": source, "question": document["question"]})
             summary_end = min(active_deadline, clock() + 120)
-            claims = invoke(document, row, "summary", summary_messages(source), summary_end,
+            claims = invoke(document, row, "summary", summary_request_messages(source, summary_control), summary_end,
                             lambda raw, units=units, content=document["content"]: parse_draft(raw, units, content))
             if claims is not None:
                 invoke(document, row, "review", summary_messages(source, claims), summary_end,
@@ -636,7 +690,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
     spec, documents, output, prepared = verify_registration(path, expected_sha, root)
     source_wire_format = spec.get("source_wire_format", LEGACY_WIRE)
     policy = registration_policy(spec)
-    response_format = CLAIMS_JSON_FORMAT if spec["schema_version"] == 3 else LEGACY_RESPONSE_FORMAT
+    response_format = CLAIMS_JSON_FORMAT if spec["schema_version"] in (3, 4) else LEGACY_RESPONSE_FORMAT
+    summary_control = SUMMARY_BUDGET_CONTROL if spec["schema_version"] == 4 else LEGACY_SUMMARY_CONTROL
     output.mkdir(parents=True, exist_ok=False)  # reservation survives every subsequent failure
     private = output / "private"
     private.mkdir()
@@ -657,7 +712,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
                     prepared=prepared, policy=policy, root=root, clock=clock) as service:
             guard = make_resource_guard(service.process, policy, clock=clock, expected_created=metrics["owned_create_time"])
             adapter = CandidateAdapter(service.url, service.token, root / PROFILE, clock=clock,
-                                       observe=emit, resource_check=guard.check, response_format=response_format)
+                                       observe=emit, resource_check=guard.check, response_format=response_format,
+                                       summary_control=summary_control)
             adapter.begin_request(started + 120)
             try:
                 checkpoint()
@@ -665,7 +721,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
                 active_started = clock()
                 report = diagnose(documents, adapter, active_deadline=min(started + 1020, active_started + 900),
                                   emit=emit, clock=clock, guard=guard, checkpoint=checkpoint,
-                                  source_wire_format=source_wire_format)
+                                  source_wire_format=source_wire_format, summary_control=summary_control)
             except Exception as error:  # noqa: BLE001 - preserve body cause before client shutdown
                 record = error_record(error)
                 report["first_failure"] = report["first_failure"] or record
@@ -687,7 +743,8 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
         report.update(status="stopped", operational_complete=False, mechanically_complete=False)
     finally:
         report.update(cleanup=metrics, registration_sha256=expected_sha, limits=dict(policy.limits),
-                      resource_policy=policy.name, response_format=response_format.binding(), resource_limit_scope="sampled_stop_thresholds_not_reservation_or_peak_limits",
+                      resource_policy=policy.name, response_format=response_format.binding(),
+                      summary_control=summary_control.binding(source_wire_format), resource_limit_scope="sampled_stop_thresholds_not_reservation_or_peak_limits",
                       source_wire_format=source_wire_format,
                       retries=0, AI_quality=False, effective_offload_layers=None,
                       gpu_layers_requested=99, gpu_samples=gpu_samples,
@@ -724,7 +781,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
             report.update(status="stopped", operational_complete=False, mechanically_complete=False)
             report["stop_reason"] = report["stop_reason"] or {"code": "local_candidate_whole_deadline"}
         terminal = {"source_wire_format": source_wire_format, "resource_policy": policy.name,
-                    "response_format": response_format.binding(),
+                    "response_format": response_format.binding(), "summary_control": summary_control.binding(source_wire_format),
                     "limits": dict(policy.limits),
                     "startup_ram_gate": metrics.get("startup_ram_gate"), "status": report["status"], "mechanically_complete": report["mechanically_complete"],
                     "operational_complete": report["operational_complete"], "stop_reason": report["stop_reason"],
