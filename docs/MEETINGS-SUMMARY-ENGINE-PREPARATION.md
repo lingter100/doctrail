@@ -30,3 +30,19 @@ runtime.PINS_SHA 한 문자열만 게시된 LF 파일의 정확한 SHA로 맞췄
 정확 소스3d331e8의 양쪽 필수 CI를 통과한 뒤 도구 취득1회를 실행했다. LLVM-MinGW ZIP171,028,561B의 공식 SHA는 일치했지만 압축 해제 중 공유 시간 한도에 도달했다. supervisor595.75초, wrapper596.890초, official exit1이며 CMake·Ninja·선택한 엔진 소스와 완전한 취득 manifest는 없다. [실제 준비 실패 결과](../experiments/results/meetings-summary-engine-acquisition-v1.json)에 원래 오류와 부분 파일 보존 여부를 남겼다.
 
 공식 자식 정리와 별도 소유7신원의 부재를 확인했고 고정396개 파일은 바뀌지 않았다. 부분335파일은 실행 승인 상태가 아니며 재시도하거나 내려받은 프로그램을 실행하지 않았다. 모델 품질 실패나 Docker 장애로 해석할 근거는 없다. 저장된 기록과 코드에서 원인을 분석한 뒤 원래 자원·시간 한도를 유지하는 수정을 검토한다. 실제 성능 원인을 아직 확정하지 않았다.
+
+## 취득 경계 보완과 외부 성공 확인
+
+첫 취득의 반복 전체 탐색은 작업자 쓰기 전 바이트 장부와 단계별 전체 검사로 바꿨다. supervisor의 독립 전체 검사는 유지한다. ZIP 선언 크기의 이중 합산과 redirect 본문의 미계상 읽기를 보완했다. 별도 검토에서 발견한 마지막 supervision receipt 용량 사전 검사와 최종 manifest 공유 deadline 누락도 수정했다. 준비 시작부터 최종 읽기·쓰기·전체 검사·게시까지 같은600초 마감을 전달한다. 늦은 게시에는 pending 복구와 failure marker를 적용한다.
+
+최종173합성검사19.91초와 Ruff를 통과했고 기존145개 합성 사례(42개 함수) 및 OwnedTree/safe_path/build 본문은 보존했다. 새 검사 작성 과정의6개 기대 오류와 Ruff 실패도 별도 보존했다. 이 결과는 모형 프로세스·시계·파일 시스템 검사이며 실제 취득 속도나 성공을 측정하지 않는다. 정확한 게시 소스 CI와 다음 실제 취득은 별도 확인한다.
+
+저장소가 응답하지 않거나 늦은 게시의 rollback과 failure 기록이 함께 실패하면 내부 acquisition.json만 남을 수 있다. 다음 실제 취득은 아래 조건을 모두 확인해야 수용한다. 현재 check_acquired가 외부 실행 증거를 자동으로 받거나 검증한다고 주장하지 않는다.
+
+- 새 canonical root의 acquisition-attempt.json worker_token·명령·정확한 소스/커밋·pins SHA·시작/종료시각을 외부 관찰 기록에 결속한다. 원래 실패 root와 부분 파일은 재사용하지 않는다.
+- 그 실제 acquire CLI 종료 코드0과 마지막 stdout JSON status=ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE를 모두 확인한다. wrapper 종료0, 중간 worker 결과, 내부 acquisition.json 또는 failure marker 부재만으로 대체하지 않는다.
+- 같은 root/token의 supervision·cleanup·취득 manifest와 원본 보존/최종 자산 대조, 관측 소유 프로세스의 종료·부재, 원래 시간·용량·메모리 조건을 확인한다. 원래 취득의 마지막 실행부터 기록 종료까지 실제 경과도 보존한다. 실제 CLI 실패·중단 또는 확인 근거 누락은 FAILED/UNKNOWN으로 유지한다.
+- 위 외부 수용이 확인된 취득 manifest의 정확한 SHA만 별도 파일/실행 목록 검토와 build 배정에 전달한다. build --reviewed-acquisition-sha256 인자는 외부 검토를 자동 증명하지 않는다. 같은 실패 root의 새 검증이나 파일상의 성공으로 실패를 복구하지 않는다.
+- 취득 완료는 다운로드한 실행파일의 실행 승인이나 컴파일·엔진 판정·모델 품질 통과가 아니다. 파일/실행 목록 검토와 명시적인 다음 단계 배정이 필요하다.
+
+이 운영 조건은 기존 무료 로컬 개발 범위이며 추가 유료 승인 절차가 아니다. OS 강제 시간 보장이나 저장소 고장 중 기록 성공을 약속하지 않는다. 원래600초·512MiB 전송·4GiB 디스크·RSS2GiB/host reserve2GiB·정리5초와 빌드/validator 예산은 유지한다.

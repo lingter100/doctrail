@@ -87,14 +87,39 @@ def inventory(root):
     return rows
 
 
-def disk_bytes(root):
+def disk_bytes(root, checkpoint=None):
+    def check(event):
+        if checkpoint is not None:
+            checkpoint(event)
+    check("start")
     total = 0
     for p in Path(root).rglob("*"):
+        check("before_entry")
         safe_path(root, p.relative_to(root).as_posix())
         if p.is_file():
             total += p.stat().st_size
             require(total <= DISK, "disk_budget")
+        check("after_entry")
+    check("complete")
     return total
+
+
+def write_bounded(root, path, value, deadline=None, clock=time.monotonic, limit=DISK):
+    """Account for serialized metadata before writing; a late/partial write is failure."""
+    def checkpoint(event=None):
+        if deadline is not None:
+            require(clock() < deadline, "shared_deadline")
+    checkpoint()
+    data = (json.dumps(value, ensure_ascii=True, indent=2, allow_nan=False) + "\n").encode()
+    safe_path(root, Path(path).relative_to(root).as_posix())
+    require(disk_bytes(root, checkpoint=checkpoint) + len(data) <= limit, "disk_budget")
+    checkpoint()
+    with Path(path).open("xb") as stream:
+        checkpoint()
+        require(stream.write(data) == len(data), "short_write")
+        stream.flush()
+        checkpoint()
+    checkpoint()
 
 
 def check_refs(root, rows, exact=False):
@@ -279,13 +304,17 @@ def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allo
     validate_temporary(root, env)
     require(clock() < deadline - 5, "deadline_before_start")
     require(ps.virtual_memory().available >= start, "startup_resource_gate")
-    disk_bytes(root)
+    def startup_checkpoint(event):
+        require(clock() < deadline - 5, "deadline_before_start")
+        require(ps.virtual_memory().available >= start, "startup_resource_gate")
+    disk_bytes(root, checkpoint=startup_checkpoint)
     started = clock()
     record = {"argv": [str(x) for x in argv], "status": "failed", "cleanup": None,
               "budget": {"rss": rss, "host_available": host, "startup_available": start,
                          "shared_seconds_remaining": deadline - started, "cleanup_reserved_seconds": 5},
               "resource_scope": "sampled_owned_tree_not_OS_hard_peak_limit",
-              "temporary_directory": env["TEMP"]}
+              "temporary_directory": env["TEMP"],
+              "active_disk_scans": {"count": 0, "entries": 0, "seconds": 0.0}}
     process, tree = None, None
     error = None
     try:
@@ -294,10 +323,21 @@ def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allo
                             stdout=out, stderr=err, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
             tree = OwnedTree(process, allowed, ps, clock, sleeper)
             tree.capture(ps.Process(process.pid))
+            def scan_checkpoint(event):
+                if event == "before_entry":
+                    record["active_disk_scans"]["entries"] += 1
+                tree.sample(rss, host)
+                require(clock() < deadline - 5, "shared_deadline")
+                require(Path(out.name).stat().st_size <= 8 * 1024**2 and Path(err.name).stat().st_size <= 8 * 1024**2, "log_budget")
             while True:
                 tree.sample(rss, host)
                 require(clock() < deadline - 5, "shared_deadline")
-                disk_bytes(root)
+                scan_started = clock()
+                record["active_disk_scans"]["count"] += 1
+                try:
+                    disk_bytes(root, checkpoint=scan_checkpoint)
+                finally:
+                    record["active_disk_scans"]["seconds"] += clock() - scan_started
                 require(Path(out.name).stat().st_size <= 8 * 1024**2 and Path(err.name).stat().st_size <= 8 * 1024**2, "log_budget")
                 if process.poll() is not None:
                     break
@@ -329,9 +369,21 @@ def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allo
                 "descendant_absence_unverified": True}
         record["elapsed_seconds"] = clock() - started
         record["within_shared_deadline"] = clock() <= deadline
-        write(Path(str(log_prefix) + ".json"), record)
-    require(record["cleanup"] is not None and record["cleanup"]["all_absent"] and not record["cleanup"]["errors"], "cleanup_failed")
-    require(record["within_shared_deadline"], "cleanup_or_process_exceeded_shared_deadline")
+        if error is None:
+            if not (record["cleanup"] is not None and record["cleanup"]["all_absent"] and not record["cleanup"]["errors"]):
+                error = BoundaryError("cleanup_failed")
+            elif not record["within_shared_deadline"]:
+                error = BoundaryError("cleanup_or_process_exceeded_shared_deadline")
+        try:
+            # Failure reporting is best effort, never a fresh successful execution budget.
+            write_bounded(root, Path(str(log_prefix) + ".json"), record,
+                          deadline=deadline if error is None else None, clock=clock, limit=DISK)
+        except Exception as reporting_error:  # noqa: BLE001 - preserve original cause and cleanup evidence
+            if error is None:
+                error = reporting_error
+            else:
+                error.add_note("supervision_receipt_failed:" + type(reporting_error).__name__)
     if error:
+        error.supervision_record = record
         raise error
     return record

@@ -10,10 +10,12 @@ import secrets
 import stat
 import sys
 import time
+import urllib.error
 import urllib.request
 import zipfile
+from contextlib import contextmanager
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.summary_grammar.runtime import (
@@ -35,6 +37,7 @@ from tools.summary_grammar.runtime import (
     run_owned,
     safe_path,
     write,
+    write_bounded,
 )
 
 
@@ -44,7 +47,13 @@ class Budget:
             import psutil as ps
         self.root, self.ps, self.clock = root, ps, clock
         self.end, self.downloaded = clock() + 600, 0
+        self.written = self.scan_count = self.scan_entries = 0
+        self.scan_seconds = 0.0
+        self.files = {}
+        self.total = 0
+        self.logs = {"acquisition-supervision.stdout", "acquisition-supervision.stderr"}
         require(ps.virtual_memory().available >= 4 * 1024**3, "preparation_startup_ram")
+        self.scan(initial=True)
 
     def check(self, incoming=0):
         self.downloaded += incoming
@@ -52,7 +61,100 @@ class Budget:
         process = self.ps.Process()
         rss = process.memory_info().rss + sum(p.memory_info().rss for p in process.children(recursive=True))
         require(rss <= 2 * 1024**3 and self.ps.virtual_memory().available >= 2 * 1024**3, "preparation_resources")
-        return disk_bytes(self.root)
+        self.log_growth()
+        return self.total
+
+    def log_growth(self):
+        for name in self.logs:
+            path = safe_path(self.root, name)
+            try:
+                size = path.stat().st_size
+            except FileNotFoundError:
+                require(name not in self.files, "ledger_file_missing")
+                continue
+            require(path.is_file(), "log_type")
+            require(size >= self.files.get(name, 0) and size <= 8 * 1024**2, "log_budget")
+            self.total += size - self.files.get(name, 0)
+            self.files[name] = size
+        require(self.total <= DISK, "disk_budget")
+
+    def scan(self, initial=False):
+        started = self.clock()
+        observed = {}
+        self.scan_count += 1
+        try:
+            self.check()
+            for path in self.root.rglob("*"):
+                self.check()
+                name = path.relative_to(self.root).as_posix()
+                safe_path(self.root, name)
+                if path.is_file():
+                    observed[name] = path.stat().st_size
+                self.scan_entries += 1
+                self.check()
+            self.check()
+            # Logs may grow while scanning. Reconcile their latest directly observed sizes.
+            for name in self.logs:
+                if name in self.files:
+                    observed[name] = self.files[name]
+            actual = sum(observed.values())
+            require(actual <= DISK, "disk_budget")
+            if initial:
+                self.files, self.total = observed, actual
+            else:
+                require(observed == self.files and actual == self.total, "disk_ledger_mismatch")
+            return actual
+        finally:
+            self.scan_seconds += self.clock() - started
+
+    def write_chunk(self, out, data, terminal=False):
+        if terminal:
+            self.log_growth()
+        else:
+            self.check()
+        path = Path(out.name)
+        name = path.relative_to(self.root).as_posix()
+        safe_path(self.root, name)
+        require(path.stat().st_size == self.files.get(name, 0), "disk_ledger_mismatch")
+        require(self.total + len(data) <= DISK, "disk_budget")
+        # Reserve before writing. A partial write fails without refund or reuse.
+        self.total += len(data)
+        self.written += len(data)
+        self.files[name] = self.files.get(name, 0) + len(data)
+        require(out.write(data) == len(data), "short_write")
+        out.flush()
+
+    def write_json(self, path, value, terminal=False):
+        data = (json.dumps(value, ensure_ascii=True, indent=2, allow_nan=False) + "\n").encode()
+        with path.open("xb") as stream:
+            self.write_chunk(stream, data, terminal=terminal)
+
+    def event(self, phase, state, terminal=False):
+        require(phase in {"download-llvm", "extract-llvm", "inventory-llvm", "download-cmake", "extract-cmake", "inventory-cmake",
+                          "download-ninja", "extract-ninja", "inventory-ninja", "source-metadata", "sources", "licenses", "manifest"}, "phase_name")
+        path = self.root / "acquisition-phases.jsonl"
+        data = (json.dumps({"phase": phase, "state": state, "elapsed_seconds": self.clock() - (self.end - 600),
+                           "download_body_bytes": self.downloaded, "written_bytes": self.written,
+                           "scan_count": self.scan_count, "scan_entries": self.scan_entries,
+                           "scan_seconds": self.scan_seconds}, allow_nan=False) + "\n").encode()
+        require(self.files.get(path.name, 0) + len(data) <= 32768, "phase_metadata_budget")
+        with path.open("ab") as stream:
+            self.write_chunk(stream, data, terminal=terminal)
+
+    @contextmanager
+    def phase(self, name):
+        self.scan()
+        self.event(name, "start")
+        try:
+            yield
+            self.scan()
+        except Exception as error:
+            try:
+                self.event(name, "failed", terminal=True)
+            except Exception as reporting_error:  # noqa: BLE001 - retain the original phase failure
+                error.add_note("phase_metadata_failed:" + type(reporting_error).__name__)
+            raise
+        self.event(name, "end")
 
 
 ALLOWED_HOSTS = {"github.com", "api.github.com", "raw.githubusercontent.com", "release-assets.githubusercontent.com", "objects.githubusercontent.com"}
@@ -66,20 +168,56 @@ def checked_url(url):
 
 
 class Redirects(urllib.request.HTTPRedirectHandler):
-    def redirect_request(self, req, fp, code, msg, headers, newurl):
-        checked_url(newurl)
-        return super().redirect_request(req, fp, code, msg, headers, newurl)
+    # Returning the response prevents urllib's default fp.read() and recursive dispatch.
+    def http_error_302(self, req, fp, code, msg, headers):
+        return fp
+
+    http_error_301 = http_error_303 = http_error_307 = http_error_308 = http_error_302
+
+
+class ClosedErrors(urllib.request.HTTPDefaultErrorHandler):
+    def http_error_default(self, req, fp, code, msg, headers):
+        fp.close()
+        raise BoundaryError("http_status")
+
+
+def open_download(url, budget, opener):
+    seen = set()
+    for hop in range(6):
+        budget.check()
+        checked_url(url)
+        require(url not in seen, "redirect_loop")
+        seen.add(url)
+        request = urllib.request.Request(url, headers={"User-Agent": "DocTrail-model-free-grammar-preparation", "Accept": "application/vnd.github+json"})
+        try:
+            response = opener.open(request, timeout=min(10, max(0.001, budget.end - budget.clock())))
+        except urllib.error.HTTPError as error:
+            error.close()
+            raise BoundaryError("http_status") from error
+        try:
+            budget.check()
+            checked_url(response.geturl())
+            if response.status == 200:
+                return response
+            require(response.status in {301, 302, 303, 307, 308}, "http_status")
+            require(hop < 5, "redirect_hops")
+            location = response.headers.get("Location")
+            require(isinstance(location, str) and 0 < len(location) <= 8192, "redirect_location")
+            url = checked_url(urljoin(url, location))
+        except Exception:
+            response.close()
+            raise
+        response.close()  # Never consume a redirect body, including an error response body.
+    raise BoundaryError("redirect_hops")
 
 
 def fetch(url, path, budget, expected=None, opener=None, max_bytes=DOWNLOAD):
-    opener = opener or urllib.request.build_opener(Redirects())
+    opener = opener or urllib.request.build_opener(Redirects(), ClosedErrors())
     checked_url(url)
     budget.check()
-    request = urllib.request.Request(url, headers={"User-Agent": "DocTrail-model-free-grammar-preparation", "Accept": "application/vnd.github+json"})
     size = 0
-    with opener.open(request, timeout=min(10, max(0.001, budget.end - budget.clock()))) as response, path.open("xb") as out:
-        checked_url(response.geturl())
-        require(response.status == 200, "http_status")
+    with open_download(url, budget, opener) as response, path.open("xb") as out:
+        budget.files[path.relative_to(budget.root).as_posix()] = 0
         while True:
             budget.check()
             chunk = response.read(min(65536, max_bytes - size + 1))
@@ -87,8 +225,8 @@ def fetch(url, path, budget, expected=None, opener=None, max_bytes=DOWNLOAD):
                 break
             size += len(chunk)
             budget.check(len(chunk))
-            require(size <= max_bytes and disk_bytes(budget.root) + len(chunk) <= DISK, "download_byte_budget")
-            out.write(chunk)
+            require(size <= max_bytes, "download_byte_budget")
+            budget.write_chunk(out, chunk)
     actual = digest(path.read_bytes())
     require(expected is None or expected == actual, "download_hash_mismatch")
     return actual
@@ -97,10 +235,12 @@ def fetch(url, path, budget, expected=None, opener=None, max_bytes=DOWNLOAD):
 def extract_zip(archive, dest, budget):
     dest.mkdir()
     seen, expanded = set(), 0
+    initial = budget.check()
     with zipfile.ZipFile(archive) as source:
         infos = source.infolist()
         require(len(infos) <= 50000, "archive_entry_count")
         for info in infos:
+            budget.check()
             name = info.filename[:-1] if info.is_dir() else info.filename
             target = safe_path(dest, name)
             require(name.casefold() not in seen, "archive_duplicate")
@@ -109,18 +249,19 @@ def extract_zip(archive, dest, budget):
             require(not stat.S_ISLNK(mode) and (stat.S_IFMT(mode) in (0, stat.S_IFREG, stat.S_IFDIR))
                     and not info.flag_bits & 1, "archive_type")
             expanded += info.file_size
-            require(expanded + disk_bytes(budget.root) <= DISK, "archive_expanded_budget")
+            require(expanded + initial <= DISK, "archive_expanded_budget")
             if info.is_dir():
                 target.mkdir(parents=True, exist_ok=True)
                 continue
             target.parent.mkdir(parents=True, exist_ok=True)
             with source.open(info) as src, target.open("xb") as out:
+                budget.files[target.relative_to(budget.root).as_posix()] = 0
                 count = 0
                 while chunk := src.read(65536):
                     budget.check()
                     count += len(chunk)
-                    require(count <= info.file_size and disk_bytes(budget.root) + len(chunk) <= DISK, "archive_byte_budget")
-                    out.write(chunk)
+                    require(count <= info.file_size, "archive_byte_budget")
+                    budget.write_chunk(out, chunk)
             require(count == info.file_size, "archive_size")
     budget.check()
 
@@ -132,6 +273,11 @@ def selected_source(path):
     return path in {"CMakeLists.txt", "LICENSE"} or parts[0] in {"cmake", "include", "src", "ggml", "vendor"}
 
 
+def write_metadata(root, path, value, deadline=None, clock=time.monotonic):
+    """Supervisor/early-failure metadata is bounded by the same workspace byte limit."""
+    write_bounded(root, path, value, deadline=deadline, clock=clock, limit=DISK)
+
+
 def acquire(root, opener=None, budget_factory=Budget, worker_token=None):
     root = Path(root).absolute()
     safe_path(root.parent, root.name)
@@ -140,6 +286,7 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None):
     else:
         require(os.environ.get("DOCTRAIL_ACQUIRE_TOKEN") == worker_token
                 and load(root / "acquisition-attempt.json")["worker_token"] == worker_token, "worker_binding")
+    budget = None
     try:
         budget = budget_factory(root)
         specification = pins()
@@ -147,70 +294,90 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None):
         (root / "tools").mkdir()
         tools = []
         for item in specification["tools"]:
+            tool = "llvm" if "llvm" in item["name"] else "cmake" if "cmake" in item["name"] else "ninja"
             archive = safe_path(root / "archives", item["name"])
-            h = fetch(item["asset"], archive, budget, item["published_sha256"], opener)
-            destination = root / "tools" / ("llvm" if "llvm" in item["name"] else "cmake" if "cmake" in item["name"] else "ninja")
-            extract_zip(archive, destination, budget)
-            tools.append({"name": item["name"], "url": item["asset"], "archive_sha256": h,
-                          "publisher_sha256": item["published_sha256"], "inventory": inventory(destination),
-                          "directory": destination.relative_to(root).as_posix()})
+            with budget.phase("download-" + tool):
+                h = fetch(item["asset"], archive, budget, item["published_sha256"], opener)
+            destination = root / "tools" / tool
+            with budget.phase("extract-" + tool):
+                extract_zip(archive, destination, budget)
+            with budget.phase("inventory-" + tool):
+                tools.append({"name": item["name"], "url": item["asset"], "archive_sha256": h,
+                              "publisher_sha256": item["published_sha256"], "inventory": inventory(destination),
+                              "directory": destination.relative_to(root).as_posix()})
         api = "https://api.github.com/repos/ggml-org/llama.cpp/git/"
-        fetch(api + "commits/" + COMMIT, root / "commit.json", budget, opener=opener, max_bytes=2 * 1024**2)
-        commit = load(root / "commit.json")
-        require(commit["sha"] == COMMIT, "source_commit")
-        tree_sha = commit["tree"]["sha"]
-        require(len(tree_sha) == 40 and all(c in "0123456789abcdef" for c in tree_sha), "tree_identity")
-        fetch(api + "trees/" + tree_sha + "?recursive=1", root / "tree.json", budget, opener=opener, max_bytes=8 * 1024**2)
-        tree = load(root / "tree.json")
-        require(tree["sha"] == tree_sha and tree.get("truncated") is False and len(tree["tree"]) <= 50000, "tree_truncated")
+        with budget.phase("source-metadata"):
+            fetch(api + "commits/" + COMMIT, root / "commit.json", budget, opener=opener, max_bytes=2 * 1024**2)
+            commit = load(root / "commit.json")
+            require(commit["sha"] == COMMIT, "source_commit")
+            tree_sha = commit["tree"]["sha"]
+            require(len(tree_sha) == 40 and all(c in "0123456789abcdef" for c in tree_sha), "tree_identity")
+            fetch(api + "trees/" + tree_sha + "?recursive=1", root / "tree.json", budget, opener=opener, max_bytes=8 * 1024**2)
+            tree = load(root / "tree.json")
+            require(tree["sha"] == tree_sha and tree.get("truncated") is False and len(tree["tree"]) <= 50000, "tree_truncated")
         source_root = root / "source"
         source_root.mkdir()
         sources = []
-        for entry in tree["tree"]:
-            path = entry["path"]
-            if not (path in {"CMakeLists.txt", "LICENSE"} or path.split("/")[0] in {"cmake", "include", "src", "ggml", "vendor"}):
-                continue
-            if entry["type"] == "tree":
-                continue
-            require(entry["type"] == "blob" and entry["mode"] == "100644" and selected_source(path), "source_type")
-            require(type(entry["size"]) is int and 0 <= entry["size"] <= 16 * 1024**2, "source_size")
-            target = safe_path(source_root, path)
-            target.parent.mkdir(parents=True, exist_ok=True)
-            url = f"https://raw.githubusercontent.com/ggml-org/llama.cpp/{COMMIT}/{path}"
-            fetch(url, target, budget, opener=opener, max_bytes=entry["size"])
-            data = target.read_bytes()
-            require(len(data) == entry["size"] and hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == entry["sha"], "source_blob")
-            sources.append({**reference(target, source_root), "blob_id": entry["sha"], "url": url})
+        with budget.phase("sources"):
+            for entry in tree["tree"]:
+                budget.check()
+                path = entry["path"]
+                if not (path in {"CMakeLists.txt", "LICENSE"} or path.split("/")[0] in {"cmake", "include", "src", "ggml", "vendor"}):
+                    continue
+                if entry["type"] == "tree":
+                    continue
+                require(entry["type"] == "blob" and entry["mode"] == "100644" and selected_source(path), "source_type")
+                require(type(entry["size"]) is int and 0 <= entry["size"] <= 16 * 1024**2, "source_size")
+                target = safe_path(source_root, path)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                url = f"https://raw.githubusercontent.com/ggml-org/llama.cpp/{COMMIT}/{path}"
+                fetch(url, target, budget, opener=opener, max_bytes=entry["size"])
+                data = target.read_bytes()
+                require(len(data) == entry["size"] and hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == entry["sha"], "source_blob")
+                sources.append({**reference(target, source_root), "blob_id": entry["sha"], "url": url})
         require({"CMakeLists.txt", "LICENSE", "src/llama-grammar.cpp", "src/llama-grammar.h"} <= {r["file"] for r in sources}, "source_incomplete")
         # Ninja's tiny release zip may omit COPYING. Preserve the pinned upstream license separately.
-        fetch("https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/COPYING", root / "ninja-COPYING", budget, opener=opener, max_bytes=65536)
-        license_refs = [reference(root / "ninja-COPYING", root), reference(source_root / "LICENSE", root)]
-        for tool in tools:
-            found = [r for r in tool["inventory"] if any(x in Path(r["file"]).name.lower() for x in ("license", "copying", "copyright"))]
-            require(found or tool["directory"] == "tools/ninja", "tool_license_missing")
-            license_refs.extend(reference(root / tool["directory"] / r["file"], root) for r in found)
-        result = {"schema_version": 1, "status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE", "engine_commit": COMMIT,
-                  "tree_id": tree_sha, "source": sources, "tools": tools, "licenses": license_refs,
-                  "runtime_bindings": runtime_bindings(root, {"tools": tools}),
-                  "bundle": inventory(BUNDLE), "download_bytes": budget.downloaded, "disk_bytes": budget.check(),
-                  "compiler_native_execution": 0, "review": "A separate reviewed SHA256 of this exact lock is required by build."}
-        write(root / "raw-acquisition.json", result)
+        with budget.phase("licenses"):
+            fetch("https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/COPYING", root / "ninja-COPYING", budget, opener=opener, max_bytes=65536)
+            license_refs = [reference(root / "ninja-COPYING", root), reference(source_root / "LICENSE", root)]
+            for tool in tools:
+                found = [r for r in tool["inventory"] if any(x in Path(r["file"]).name.lower() for x in ("license", "copying", "copyright"))]
+                require(found or tool["directory"] == "tools/ninja", "tool_license_missing")
+                license_refs.extend(reference(root / tool["directory"] / r["file"], root) for r in found)
+        with budget.phase("manifest"):
+            result = {"schema_version": 1, "status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE", "engine_commit": COMMIT,
+                      "tree_id": tree_sha, "source": sources, "tools": tools, "licenses": license_refs,
+                      "runtime_bindings": runtime_bindings(root, {"tools": tools}),
+                      "bundle": inventory(BUNDLE), "download_bytes": budget.downloaded, "disk_bytes": budget.check(),
+                      "compiler_native_execution": 0, "review": "A separate reviewed SHA256 of this exact lock is required by build."}
+            budget.write_json(root / "raw-acquisition.json", result)
+        budget.scan()
         return result
     except Exception as error:
-        write(root / "acquisition-failure.json", {"error": type(error).__name__, "reason": str(error), "partial_files_preserved": True, "execution": 0})
+        failure = {"error": type(error).__name__, "reason": str(error)[:4000], "partial_files_preserved": True, "execution": 0}
+        try:
+            if budget is None:
+                write_metadata(root, root / "acquisition-failure.json", failure)
+            else:
+                budget.write_json(root / "acquisition-failure.json", failure, terminal=True)
+        except Exception as reporting_error:  # noqa: BLE001 - never replace the acquisition failure
+            error.add_note("failure_metadata_failed:" + type(reporting_error).__name__)
         raise
 
 
 def acquire_supervised(root, runner=run_owned, clock=time.monotonic):
     """The supervisor can stop a blocked DNS/socket/extraction worker at the shared deadline."""
+    deadline = clock() + 600
+    def checkpoint():
+        require(clock() < deadline, "shared_deadline")
     root = Path(root).absolute()
     safe_path(root.parent, root.name)
     root.mkdir(exist_ok=False)
     token = secrets.token_hex(24)
     command = [sys.executable, "-B", str(Path(__file__).resolve()), "_acquire-worker",
                "--workspace", str(root), "--worker-token", token]
-    write(root / "acquisition-attempt.json", {"worker_token": token, "argv": command,
-          "shared_seconds": 600, "retry": False})
+    write_metadata(root, root / "acquisition-attempt.json", {"worker_token": token, "argv": command,
+          "shared_seconds": 600, "retry": False}, deadline=deadline, clock=clock)
     allowed = [Path(sys.executable), Path(getattr(sys, "_base_executable", sys.executable))]
     if "SystemRoot" in os.environ:
         allowed.append(Path(os.environ["SystemRoot"]) / "System32/conhost.exe")
@@ -218,15 +385,33 @@ def acquire_supervised(root, runner=run_owned, clock=time.monotonic):
     env["DOCTRAIL_ACQUIRE_TOKEN"] = token
     try:
         runner(command, cwd=root, env=env, root=root, log_prefix=root / "acquisition-supervision",
-               deadline=clock() + 600, rss=2 * 1024**3, host=2 * 1024**3, start=4 * 1024**3,
+               deadline=deadline, rss=2 * 1024**3, host=2 * 1024**3, start=4 * 1024**3,
                allowed=allowed, clock=clock)
+        checkpoint()
         result = load(root / "raw-acquisition.json")
+        checkpoint()
         result["acquisition_cleanup"] = reference(root / "acquisition-supervision.json", root)
-        write(root / "acquisition.json", result)
+        checkpoint()
+        candidate = root / "acquisition-pending.json"
+        write_metadata(root, candidate, result, deadline=deadline, clock=clock)
+        checkpoint()
+        candidate.rename(root / "acquisition.json")
+        try:
+            checkpoint()
+        except Exception as error:
+            # Keep late publication as unaccepted evidence, never return it as success.
+            try:
+                (root / "acquisition.json").rename(candidate)
+            except OSError as invalidation_error:
+                error.add_note("late_lock_invalidation_failed:" + type(invalidation_error).__name__)
+            raise
         return result
     except Exception as error:
-        write(root / "acquisition-supervision-failure.json", {"error": type(error).__name__,
-              "reason": str(error), "partial_files_preserved": True, "no_retry": True})
+        try:
+            write_metadata(root, root / "acquisition-supervision-failure.json", {"error": type(error).__name__,
+                           "reason": str(error)[:4000], "partial_files_preserved": True, "no_retry": True})
+        except Exception as reporting_error:  # noqa: BLE001 - retain original supervision failure
+            error.add_note("supervision_metadata_failed:" + type(reporting_error).__name__)
         raise
 
 
@@ -299,6 +484,8 @@ def optional_probe_guard(root, binding, env, application_dir):
 
 
 def check_acquired(root, reviewed_sha):
+    require(not (root / "acquisition-pending.json").exists()
+            and not (root / "acquisition-supervision-failure.json").exists(), "acquisition_finalization_failed")
     lock = reviewed(root / "acquisition.json", reviewed_sha)
     require(lock["status"] == "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE" and lock["engine_commit"] == COMMIT, "acquisition_contract")
     check_refs(root, [lock["acquisition_cleanup"]])

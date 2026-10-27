@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "status": "SOURCE_REVIEWED_ACTUAL_ACQUISITION_PENDING",
+  "date": "2026-10-27",
+  "source_files": [
+    {
+      "file": "scripts/prepare_summary_grammar_engine.py",
+      "sha256": "32286d41406c80b31f064409d5ae95bfc2158ce1cd656795a78f476e7d6c6230",
+      "size_bytes": 32337
+    },
+    {
+      "file": "tools/summary_grammar/runtime.py",
+      "sha256": "6b678b056a456e364be991df0dd22dd9eaf6e8c9e8f68ff53fd349c1b007513b",
+      "size_bytes": 17701
+    },
+    {
+      "file": "tests/test_summary_grammar_engine.py",
+      "sha256": "992738758cb9459a6eda06603f7270f66d63b927406f407a87da60a4aa4b598b",
+      "size_bytes": 56986
+    }
+  ],
+  "implementation": [
+    "write-ahead worker byte accounting with phase scans and retained supervisor scans",
+    "single ZIP declared-size accounting plus actual write checks",
+    "bounded explicit redirects without inherited unaccounted body consumption",
+    "serialized supervision metadata pre-accounted before writing",
+    "one 600-second deadline through final read, scan, metadata write and publication",
+    "late publication rollback/failure marker plus mandatory external CLI success gate"
+  ],
+  "validation": {
+    "synthetic_passed": 173,
+    "seconds": 19.91,
+    "ruff": "passed",
+    "prior_cases_preserved": 145,
+    "prior_test_functions_preserved": 42,
+    "actual_acquisition_attempts_after_repair": 0,
+    "compiler_engine_model_calls": 0
+  },
+  "review": {
+    "blockers": 0,
+    "advisories": 0,
+    "original_verdict": {
+      "blockers": 0,
+      "advisories": 1
+    },
+    "resolved_advisory": "External exact-attempt CLI exit0, final stdout, cleanup/custody and failed-root non-recovery gate documented and independently accepted",
+    "receipt": {
+      "file": ".local/meeting-summary-engine-acquisition-review-v2/receipt-final.json",
+      "sha256": "c5cbc928a76b889ffa81ecefe74bc376bac103d3a555ad589b5d11ab11fb39a6",
+      "size_bytes": 10262
+    }
+  },
+  "evidence": [
+    {
+      "file": ".local/meeting-summary-engine-acquisition-repair-v2/receipt.json",
+      "sha256": "24dad9d19b95adfb67224f88e485ff5e7b9265a8c91b986693b8f3b5aed58e0d",
+      "size_bytes": 9873
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/manual-integrated-engine-repair-acceptance-v1.json",
+      "sha256": "39b229d08a990ef618701795f14c72909adf79c4569b004112552ff65e0f3fdd",
+      "size_bytes": 76714
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/engine-final-manual-targets-acceptance-v1.json",
+      "sha256": "243abe27d26bf132d3d771843f4bd9df7cdfa83e4833106feb600eb2c75c566d",
+      "size_bytes": 27483
+    }
+  ],
+  "preserved_failure": {
+    "result": "experiments/results/meetings-summary-engine-acquisition-v1.json",
+    "official_exit": 1,
+    "reason": "shared_deadline",
+    "partial_files": 335,
+    "automatic_retry": false
+  },
+  "limitations": [
+    "Synthetic validation does not measure acquisition speed or prove actual acquisition success.",
+    "Filesystem calls cannot be forcibly preempted; rollback and error logging can fail.",
+    "check_acquired does not automatically validate external observer evidence; the documented operator gate is mandatory.",
+    "Exact newly published source CI and a separately assigned new acquisition remain pending."
+  ],
+  "human_review": false
+}

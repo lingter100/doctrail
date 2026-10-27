@@ -73,14 +73,13 @@ def test_reparse_and_reference_change_are_rejected(tmp_path, monkeypatch):
         rt.safe_path(tmp_path, "x")
 
 
-class FakeBudget:
+class FakeBudget(prep.Budget):
     def __init__(self, root):
-        self.root, self.downloaded, self.end = root, 0, 100
-        self.clock = lambda: 0
+        super().__init__(root, ps=FakePS(root), clock=lambda: 0)
     def check(self, incoming=0):
-        self.downloaded += incoming
+        result = super().check(incoming)
         rt.require(self.downloaded <= rt.DOWNLOAD, "preparation_budget")
-        return rt.disk_bytes(self.root)
+        return result
 
 
 def test_archive_roundtrip_and_disk_bound(tmp_path, monkeypatch):
@@ -89,9 +88,10 @@ def test_archive_roundtrip_and_disk_bound(tmp_path, monkeypatch):
         z.writestr("dir/file.txt", b"x\r\ny")
     prep.extract_zip(archive, tmp_path / "expanded", FakeBudget(tmp_path))
     assert (tmp_path / "expanded/dir/file.txt").read_bytes() == b"x\r\ny"
-    monkeypatch.setattr(prep, "DISK", 1)
+    budget = FakeBudget(tmp_path)
+    monkeypatch.setattr(prep, "DISK", budget.total + 1)
     with pytest.raises(rt.BoundaryError, match="archive_expanded_budget"):
-        prep.extract_zip(archive, tmp_path / "oversize", FakeBudget(tmp_path))
+        prep.extract_zip(archive, tmp_path / "oversize", budget)
 
 
 @pytest.mark.parametrize("fault", ["escape", "symlink", "duplicate", "case-alias", "device"])
@@ -609,3 +609,471 @@ def test_temp_scope_fails_closed_before_any_process(tmp_path, monkeypatch, fault
         with pytest.raises(FileExistsError): rt.clean_environment([], tmp_path, "phase-tmp")
     else:
         with pytest.raises(rt.BoundaryError): rt.validate_temporary(tmp_path, env)
+
+
+def test_worker_many_chunk_writes_have_constant_full_scan_count(tmp_path):
+    budget = FakeBudget(tmp_path)
+    with budget.phase("sources"):
+        for index in range(24):
+            path = tmp_path / str(index)
+            body = bytes([index]) * 131073
+            prep.fetch("https://github.com/synthetic/" + str(index), path, budget,
+                       opener=SimpleNamespace(open=lambda *a, body=body, **k: Response(body)))
+            assert path.read_bytes() == body
+    assert budget.scan_count == 3  # initial + stage start/end, independent of 72 body chunks
+    assert budget.downloaded == 24 * 131073
+    assert budget.scan() == rt.disk_bytes(tmp_path)
+    assert budget.scan_count == 4
+    events = [json.loads(line) for line in (tmp_path / "acquisition-phases.jsonl").read_text().splitlines()]
+    assert [row["state"] for row in events] == ["start", "end"]
+    assert events[-1]["scan_count"] == 3 and events[-1]["download_body_bytes"] == budget.downloaded
+
+
+@pytest.mark.parametrize("extra", [0, 1])
+def test_archive_declared_total_is_counted_once_at_exact_disk_boundary(tmp_path, monkeypatch, extra):
+    archive = tmp_path / "archive.zip"
+    with zipfile.ZipFile(archive, "w") as stream:
+        stream.writestr("empty", b"")
+        stream.writestr("first", b"a" * 70)
+        stream.writestr("second", b"b" * 30)
+    budget = FakeBudget(tmp_path)
+    monkeypatch.setattr(prep, "DISK", archive.stat().st_size + 100 - extra)
+    if extra:
+        with pytest.raises(rt.BoundaryError, match="archive_expanded_budget"):
+            prep.extract_zip(archive, tmp_path / "out", budget)
+        assert (tmp_path / "out/first").read_bytes() == b"a" * 70
+    else:
+        prep.extract_zip(archive, tmp_path / "out", budget)
+        assert budget.scan() == prep.DISK
+        assert (tmp_path / "out/empty").read_bytes() == b""
+        assert (tmp_path / "out/second").read_bytes() == b"b" * 30
+
+
+@pytest.mark.parametrize("fault", ["unknown", "unknown-empty", "temporary", "modified", "removed", "same-total-different-file", "stat"])
+def test_worker_phase_boundary_rejects_unaccounted_files_and_observation_errors(tmp_path, monkeypatch, fault):
+    (tmp_path / "known").write_bytes(b"known")
+    budget = FakeBudget(tmp_path)
+    if fault in {"unknown", "unknown-empty", "temporary"}:
+        folder = tmp_path / "tmp" if fault == "temporary" else tmp_path
+        folder.mkdir(exist_ok=True)
+        (folder / "unknown").write_bytes(b"" if fault == "unknown-empty" else b"x")
+    elif fault == "modified": (tmp_path / "known").write_bytes(b"more bytes")
+    elif fault == "removed": (tmp_path / "known").unlink()
+    elif fault == "same-total-different-file": (tmp_path / "known").rename(tmp_path / "other")
+    else:
+        original = Path.stat
+        def denied(path, *a, **k):
+            if path == tmp_path / "known": raise PermissionError("synthetic")
+            return original(path, *a, **k)
+        monkeypatch.setattr(Path, "stat", denied)
+    with pytest.raises((rt.BoundaryError, PermissionError)):
+        budget.scan()
+
+
+@pytest.mark.parametrize("fault", [None, "oversize", "shrink", "stat"])
+def test_worker_direct_log_growth_is_accounted_without_recursive_scans(tmp_path, monkeypatch, fault):
+    log = tmp_path / "acquisition-supervision.stderr"
+    log.write_bytes(b"old")
+    budget = FakeBudget(tmp_path)
+    if fault == "stat":
+        original = Path.stat
+        def denied(path, *a, **k):
+            if path == log: raise PermissionError("synthetic")
+            return original(path, *a, **k)
+        monkeypatch.setattr(Path, "stat", denied)
+    else: log.write_bytes(b"x" * (8 * 1024**2 + 1) if fault == "oversize" else b"" if fault == "shrink" else b"growing")
+    if fault:
+        with pytest.raises((rt.BoundaryError, PermissionError)): budget.check()
+    else:
+        assert budget.check() == 7 and budget.scan_count == 1
+        assert budget.scan() == 7
+
+
+def test_worker_short_write_is_reserved_not_refunded_or_reused(tmp_path):
+    budget = FakeBudget(tmp_path)
+    path = tmp_path / "partial"
+    with path.open("xb") as stream:
+        class ShortWriter:
+            name = str(path)
+            def write(self, body):
+                stream.write(body[:2]); stream.flush(); return 2
+            def flush(self): stream.flush()
+        with pytest.raises(rt.BoundaryError, match="short_write"):
+            budget.write_chunk(ShortWriter(), b"payload")
+    assert path.read_bytes() == b"pa" and budget.total == budget.written == 7
+    with pytest.raises(rt.BoundaryError, match="disk_ledger_mismatch"): budget.scan()
+    with pytest.raises(FileExistsError): budget.write_json(path, {})
+
+
+def test_worker_all_metadata_bytes_and_bounded_events_count_in_ledger(tmp_path, monkeypatch):
+    budget = FakeBudget(tmp_path)
+    budget.write_json(tmp_path / "metadata.json", {"metadata": "synthetic"})
+    budget.event("sources", "start")
+    assert budget.scan() == rt.disk_bytes(tmp_path) == budget.written
+    size = budget.total
+    monkeypatch.setattr(prep, "DISK", size)
+    with pytest.raises(rt.BoundaryError, match="disk_budget"): budget.write_json(tmp_path / "overflow", {})
+    assert (tmp_path / "overflow").stat().st_size == 0
+    monkeypatch.setattr(prep, "DISK", rt.DISK)
+    metadata = tmp_path / "acquisition-phases.jsonl"
+    budget.files[metadata.name] = 32768
+    with pytest.raises(rt.BoundaryError, match="phase_metadata_budget"): budget.event("sources", "end")
+
+
+@pytest.mark.parametrize("difference", [-1, 1])
+def test_archive_stream_length_mismatch_preserves_partial_bytes(tmp_path, monkeypatch, difference):
+    archive = tmp_path / "archive.zip"
+    with zipfile.ZipFile(archive, "w") as stream: stream.writestr("entry", b"12345")
+    original = zipfile.ZipFile.open
+    def changed(self, name, mode="r", *a, **k):
+        if mode == "r": return io.BytesIO(b"x" * (5 + difference))
+        return original(self, name, mode, *a, **k)
+    monkeypatch.setattr(zipfile.ZipFile, "open", changed)
+    with pytest.raises(rt.BoundaryError, match="archive_size|archive_byte_budget"):
+        prep.extract_zip(archive, tmp_path / "out", FakeBudget(tmp_path))
+    assert (tmp_path / "out/entry").exists()
+
+
+class DispatchBody(io.BytesIO):
+    def __init__(self, data): super().__init__(data); self.reads = []
+    def read(self, size=-1):
+        assert size >= 0, "unbounded_body_read"
+        self.reads.append(size)
+        return super().read(size)
+
+
+def dispatch_opener(responses, clock=None):
+    import email.message
+    import urllib.response
+    calls, bodies = [], []
+    class SyntheticHTTPS(prep.urllib.request.HTTPSHandler):
+        def https_open(self, request):
+            calls.append((request.full_url, request.timeout))
+            status, location, body = responses[len(calls) - 1]
+            headers = email.message.Message()
+            if location is not None: headers["Location"] = location
+            payload = DispatchBody(body); bodies.append(payload)
+            response = urllib.response.addinfourl(payload, headers, request.full_url, status)
+            response.msg = "synthetic"
+            if clock is not None: clock.now += 1
+            return response
+    opener = prep.urllib.request.build_opener(SyntheticHTTPS(), prep.Redirects(), prep.ClosedErrors())
+    return opener, calls, bodies
+
+
+@pytest.mark.parametrize("code", [301, 302, 303, 307, 308])
+def test_real_urllib_redirect_dispatch_closes_without_reading_body(tmp_path, code):
+    opener, calls, bodies = dispatch_opener([(code, "/next", b"discarded"), (200, None, b"data")])
+    budget = FakeBudget(tmp_path)
+    assert prep.fetch("https://github.com/start", tmp_path / "file", budget, opener=opener) == rt.digest(b"data")
+    assert [row[0] for row in calls] == ["https://github.com/start", "https://github.com/next"]
+    assert bodies[0].reads == [] and all(body.closed for body in bodies)
+    assert budget.downloaded == 4
+
+
+@pytest.mark.parametrize("fault", ["origin", "credentials", "port", "loop", "hops", "missing", "error", "deadline", "totalcap"])
+def test_real_urllib_dispatch_rejects_redirect_error_and_budget_faults(tmp_path, monkeypatch, fault):
+    clock = Clock()
+    responses = [(302, "/next", b"never read"), (200, None, b"payload")]
+    if fault == "origin": responses[0] = (302, "http://github.com/x", b"never read")
+    elif fault == "credentials": responses[0] = (302, "https://u@github.com/x", b"never read")
+    elif fault == "port": responses[0] = (302, "https://github.com:444/x", b"never read")
+    elif fault == "loop": responses[0] = (302, "/start", b"never read")
+    elif fault == "hops": responses = [(302, "/" + str(i), b"never read") for i in range(6)]
+    elif fault == "missing": responses[0] = (302, None, b"never read")
+    elif fault == "error": responses[0] = (500, None, b"never read")
+    elif fault == "totalcap": monkeypatch.setattr(prep, "DOWNLOAD", 3)
+    budget = prep.Budget(tmp_path, ps=FakePS(tmp_path), clock=clock)
+    if fault == "deadline": clock.now = 599.5
+    opener, calls, bodies = dispatch_opener(responses, clock)
+    with pytest.raises(rt.BoundaryError): prep.fetch("https://github.com/start", tmp_path / "file", budget, opener=opener)
+    assert all(body.closed for body in bodies)
+    if fault != "totalcap": assert all(body.reads == [] for body in bodies)
+    assert len(calls) <= 6
+
+
+def test_redirect_hops_share_remaining_time_and_close_http_error(tmp_path):
+    clock = Clock(); budget = prep.Budget(tmp_path, ps=FakePS(tmp_path), clock=clock)
+    clock.now = 597
+    opener, calls, bodies = dispatch_opener([(302, "/next", b"discard"), (200, None, b"data")], clock)
+    prep.fetch("https://github.com/start", tmp_path / "file", budget, opener=opener)
+    assert [row[1] for row in calls] == [3, 2] and all(body.closed for body in bodies)
+    error_body = DispatchBody(b"never consumed")
+    def denied(*a, **k): raise prep.urllib.error.HTTPError("https://github.com/x", 403, "synthetic", {}, error_body)
+    with pytest.raises(rt.BoundaryError, match="http_status"):
+        prep.fetch("https://github.com/x", tmp_path / "error", budget, opener=SimpleNamespace(open=denied))
+    assert error_body.closed and error_body.reads == []
+
+
+def test_disk_optional_checkpoint_order_and_original_return_errors(tmp_path, monkeypatch):
+    (tmp_path / "one").write_bytes(b"123")
+    (tmp_path / "two").write_bytes(b"45")
+    events = []
+    assert rt.disk_bytes(tmp_path, checkpoint=events.append) == rt.disk_bytes(tmp_path) == 5
+    assert events == ["start", "before_entry", "after_entry", "before_entry", "after_entry", "complete"]
+    monkeypatch.setattr(rt, "DISK", 4)
+    with pytest.raises(rt.BoundaryError, match="disk_budget"): rt.disk_bytes(tmp_path)
+    with pytest.raises(rt.BoundaryError, match="disk_budget"): rt.disk_bytes(tmp_path, checkpoint=lambda event: None)
+
+
+@pytest.mark.parametrize("fault", ["deadline", "rss", "host", "log", "identity", "observation"])
+def test_supervisor_scan_checks_mid_traversal_and_preserves_owned_cleanup(tmp_path, monkeypatch, fault):
+    clock = Clock(); ps = FakePS(tmp_path); process = FakePopen(ps, clock)
+    env = rt.clean_environment([], tmp_path, "tmp")
+    (tmp_path / "first").write_bytes(b"x")
+    (tmp_path / "second").write_bytes(b"y")
+    launched = False
+    changed = False
+    original = rt.safe_path
+    def mutate(root, name):
+        nonlocal changed
+        result = original(root, name)
+        if launched and not changed:
+            changed = True
+            if fault == "deadline": clock.now = 1.1
+            elif fault == "rss": ps.fault = "rss"
+            elif fault == "host": ps.fault = "host"
+            elif fault == "observation": ps.fault = "observation"
+            elif fault == "identity": ps.reused = True
+            else:
+                with (tmp_path / "run.stderr").open("ab") as stream: stream.write(b"x" * (8 * 1024**2 + 1))
+        return result
+    def launch(*a, **k):
+        nonlocal launched
+        launched = True
+        return process
+    monkeypatch.setattr(rt, "safe_path", mutate)
+    with pytest.raises((rt.BoundaryError, FakePS.AccessDenied)):
+        rt.run_owned([tmp_path / "root.exe"], cwd=tmp_path, env=env, root=tmp_path,
+                     log_prefix=tmp_path / "run", deadline=6, rss=100, host=1, start=1,
+                     allowed=[tmp_path / "root.exe", tmp_path / "child.exe"], ps=ps, popen=launch,
+                     clock=clock, sleeper=clock.sleep)
+    result = rt.load(tmp_path / "run.json")
+    assert changed and result["active_disk_scans"]["count"] == 1
+    assert result["active_disk_scans"]["entries"] == 1
+    assert result["budget"]["cleanup_reserved_seconds"] == 5
+    assert set(ps.killed) <= {10, 20}
+    if fault == "identity": assert result["cleanup"]["errors"] and not ps.killed
+    else: assert result["cleanup"]["all_absent"]
+
+
+def test_startup_scan_deadline_stops_before_launch(tmp_path, monkeypatch):
+    clock = Clock(); ps = FakePS(tmp_path)
+    env = rt.clean_environment([], tmp_path, "tmp")
+    original = rt.safe_path
+    def slow(root, name):
+        result = original(root, name)
+        clock.now += 0.6
+        return result
+    monkeypatch.setattr(rt, "safe_path", slow)
+    with pytest.raises(rt.BoundaryError, match="deadline_before_start"):
+        rt.run_owned([], cwd=tmp_path, env=env, root=tmp_path, log_prefix=tmp_path / "run",
+                     deadline=6, rss=100, host=1, start=1, allowed=[], ps=ps,
+                     popen=lambda *a, **k: pytest.fail("no process may start"), clock=clock, sleeper=clock.sleep)
+
+
+def test_archive_crc_rejection_is_not_bypassed_by_ledger(tmp_path):
+    archive = tmp_path / "crc.zip"
+    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_STORED) as stream:
+        stream.writestr("entry", b"unique CRC payload")
+    original = archive.read_bytes()
+    archive.write_bytes(original.replace(b"unique CRC payload", b"broken CRC payload", 1))
+    with pytest.raises(zipfile.BadZipFile, match="CRC"):
+        prep.extract_zip(archive, tmp_path / "out", FakeBudget(tmp_path))
+    assert archive.read_bytes() != original and (tmp_path / "out/entry").exists()
+
+
+def test_phase_reporting_failure_keeps_original_exception(tmp_path, monkeypatch):
+    budget = FakeBudget(tmp_path)
+    original = budget.event
+    def broken(phase, state, **kwargs):
+        if state == "failed": raise OSError("synthetic reporting failure")
+        original(phase, state, **kwargs)
+    monkeypatch.setattr(budget, "event", broken)
+    with pytest.raises(ValueError, match="original") as error, budget.phase("sources"):
+        raise ValueError("original")
+    assert error.value.__notes__ == ["phase_metadata_failed:OSError"]
+
+
+@pytest.mark.parametrize("remaining", [-1, 0, 1])
+def test_bounded_metadata_serialized_bytes_fit_exact_or_reject_before_write(tmp_path, remaining):
+    (tmp_path / "payload").write_bytes(b"abc")
+    value = {"cleanup": {"all_absent": True}, "unicode": "한글"}
+    encoded = (json.dumps(value, ensure_ascii=True, indent=2, allow_nan=False) + "\n").encode()
+    path = tmp_path / "receipt.json"
+    if remaining < 0:
+        with pytest.raises(rt.BoundaryError, match="disk_budget"):
+            rt.write_bounded(tmp_path, path, value, limit=3 + len(encoded) + remaining)
+        assert not path.exists() and rt.disk_bytes(tmp_path) == 3
+    else:
+        rt.write_bounded(tmp_path, path, value, limit=3 + len(encoded) + remaining)
+        assert path.read_bytes() == encoded and rt.disk_bytes(tmp_path) == 3 + len(encoded)
+
+
+def metadata_stream_fault(monkeypatch, target_name, fault, clock=None):
+    original = Path.open
+    def opening(path, mode="r", *args, **kwargs):
+        stream = original(path, mode, *args, **kwargs)
+        if path.name != target_name or mode != "xb": return stream
+        class Stream:
+            def __enter__(self): return self
+            def __exit__(self, *args): stream.close()
+            def write(self, data):
+                if fault == "short": return stream.write(data[:-1])
+                if fault == "write": raise OSError("synthetic write failure")
+                count = stream.write(data)
+                if fault == "late-write": clock.now = 611
+                return count
+            def flush(self):
+                if fault == "flush": raise OSError("synthetic flush failure")
+                stream.flush()
+                if fault == "late-flush": clock.now = 611
+        return Stream()
+    monkeypatch.setattr(Path, "open", opening)
+
+
+@pytest.mark.parametrize("fault", ["short", "write", "flush", "disk-over", "disk-exact", "disk-spare"])
+@pytest.mark.parametrize("process_fault", [None, "rss"])
+def test_supervision_receipt_faults_preserve_primary_and_cleanup(tmp_path, monkeypatch, fault, process_fault):
+    clock = Clock(); ps = FakePS(tmp_path, process_fault); process = FakePopen(ps, clock)
+    original = rt.write_bounded
+    observed = {}
+    def writer(root, path, record, **kwargs):
+        observed["record"] = record
+        if fault.startswith("disk-"):
+            size = len((json.dumps(record, ensure_ascii=True, indent=2, allow_nan=False) + "\n").encode())
+            cap = rt.disk_bytes(root) + size + {"disk-over": -1, "disk-exact": 0, "disk-spare": 1}[fault]
+            kwargs["limit"] = cap
+            observed["cap"] = cap
+        return original(root, path, record, **kwargs)
+    monkeypatch.setattr(rt, "write_bounded", writer)
+    metadata_stream_fault(monkeypatch, "run.json", fault)
+    kwargs = {"cwd": tmp_path, "env": rt.clean_environment([], tmp_path, "tmp"), "root": tmp_path,
+              "log_prefix": tmp_path / "run", "deadline": 6, "rss": 100, "host": 1, "start": 1,
+              "allowed": [tmp_path / "root.exe", tmp_path / "child.exe"], "ps": ps,
+              "popen": lambda *a, **k: process, "clock": clock, "sleeper": clock.sleep}
+    fails = fault not in {"disk-exact", "disk-spare"}
+    if process_fault or fails:
+        with pytest.raises((rt.BoundaryError, OSError)) as caught:
+            rt.run_owned([tmp_path / "root.exe"], **kwargs)
+        assert caught.value.supervision_record is observed["record"]
+        if process_fault:
+            assert str(caught.value) == "resource_budget"
+            if fails: assert caught.value.__notes__[0].startswith("supervision_receipt_failed:")
+    else:
+        result = rt.run_owned([tmp_path / "root.exe"], **kwargs)
+        assert result["within_shared_deadline"]
+    assert observed["record"]["cleanup"]["all_absent"] and process.closed
+    assert set(ps.killed) <= {10, 20}
+    if fault == "disk-over": assert not (tmp_path / "run.json").exists()
+    if fault in {"disk-exact", "disk-spare"}:
+        assert rt.disk_bytes(tmp_path) <= observed["cap"]
+
+
+@pytest.mark.parametrize("fault", [None, "scan", "read", "late-write", "late-flush", "publish", "short", "flush"])
+def test_acquisition_finalization_shares_absolute_deadline_and_never_accepts_late_lock(tmp_path, monkeypatch, fault):
+    root = tmp_path / "new"
+    clock = Clock(); clock.now = 10
+    finished = False
+    calls = []
+    def runner(argv, **kwargs):
+        nonlocal finished
+        calls.append(kwargs["deadline"])
+        assert kwargs["deadline"] == 610
+        rt.write(root / "raw-acquisition.json", {"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"})
+        rt.write(root / "acquisition-supervision.json", {"cleanup": {"all_absent": True, "errors": []}})
+        clock.now = 609
+        finished = True
+    original_safe = rt.safe_path
+    def safe(folder, name):
+        value = original_safe(folder, name)
+        if finished and fault == "scan" and name == "raw-acquisition.json": clock.now = 611
+        return value
+    monkeypatch.setattr(rt, "safe_path", safe)
+    original_load = prep.load
+    def load(path):
+        value = original_load(path)
+        if fault == "read" and path.name == "raw-acquisition.json": clock.now = 611
+        return value
+    monkeypatch.setattr(prep, "load", load)
+    original_rename = Path.rename
+    def rename(path, target):
+        value = original_rename(path, target)
+        if fault == "publish" and path.name == "acquisition-pending.json": clock.now = 611
+        return value
+    monkeypatch.setattr(Path, "rename", rename)
+    metadata_stream_fault(monkeypatch, "acquisition-pending.json", fault, clock)
+    if fault:
+        with pytest.raises((rt.BoundaryError, OSError)):
+            prep.acquire_supervised(root, runner=runner, clock=clock)
+        assert not (root / "acquisition.json").exists()
+        assert (root / "raw-acquisition.json").exists()
+        assert (root / "acquisition-supervision-failure.json").exists()
+        with pytest.raises(rt.BoundaryError, match="acquisition_finalization_failed"):
+            prep.check_acquired(root, "0" * 64)
+    else:
+        result = prep.acquire_supervised(root, runner=runner, clock=clock)
+        assert result["status"] == "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"
+        assert (root / "acquisition.json").exists()
+        assert not (root / "acquisition-pending.json").exists()
+        assert clock.now == 609
+    assert calls == [610]
+
+
+def test_acquisition_reporting_failure_retains_original_error_without_new_budget(tmp_path, monkeypatch):
+    root = tmp_path / "new"; clock = Clock()
+    original = rt.BoundaryError("original worker failure")
+    def runner(*args, **kwargs):
+        clock.now = kwargs["deadline"] + 1
+        raise original
+    metadata_stream_fault(monkeypatch, "acquisition-supervision-failure.json", "flush")
+    with pytest.raises(rt.BoundaryError) as caught:
+        prep.acquire_supervised(root, runner=runner, clock=clock)
+    assert caught.value is original
+    assert original.__notes__ == ["supervision_metadata_failed:OSError"]
+    assert clock.now == 601 and not (root / "acquisition.json").exists()
+
+
+@pytest.mark.parametrize("fault", ["scan", "late-write", "late-flush"])
+def test_supervision_receipt_scan_and_write_deadline_cannot_return_success(tmp_path, monkeypatch, fault):
+    clock = Clock(); ps = FakePS(tmp_path); process = FakePopen(ps, clock)
+    original = rt.write_bounded
+    def writer(*args, **kwargs):
+        clock.now = 609
+        if fault == "scan":
+            original_safe = rt.safe_path
+            def safe(root, name):
+                result = original_safe(root, name)
+                if name == "run.stdout": clock.now = 611
+                return result
+            monkeypatch.setattr(rt, "safe_path", safe)
+        return original(*args, **kwargs)
+    monkeypatch.setattr(rt, "write_bounded", writer)
+    metadata_stream_fault(monkeypatch, "run.json", fault, clock)
+    with pytest.raises(rt.BoundaryError, match="shared_deadline") as caught:
+        rt.run_owned([], cwd=tmp_path, env=rt.clean_environment([], tmp_path, "tmp"), root=tmp_path,
+                     log_prefix=tmp_path / "run", deadline=610, rss=100, host=1, start=1,
+                     allowed=[tmp_path / "root.exe", tmp_path / "child.exe"], ps=ps,
+                     popen=lambda *a, **k: process, clock=clock, sleeper=clock.sleep)
+    assert caught.value.supervision_record["cleanup"]["all_absent"] and process.closed
+    assert clock.now == 611
+
+
+def test_late_publication_rollback_error_preserves_timeout_and_rejects_lock(tmp_path, monkeypatch):
+    root = tmp_path / "new"; clock = Clock()
+    def runner(*args, **kwargs):
+        rt.write(root / "raw-acquisition.json", {"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"})
+        rt.write(root / "acquisition-supervision.json", {"cleanup": {"all_absent": True, "errors": []}})
+    original = Path.rename
+    def rename(path, target):
+        if path.name == "acquisition.json": raise OSError("synthetic rollback failure")
+        result = original(path, target)
+        clock.now = 601
+        return result
+    monkeypatch.setattr(Path, "rename", rename)
+    with pytest.raises(rt.BoundaryError, match="shared_deadline") as caught:
+        prep.acquire_supervised(root, runner=runner, clock=clock)
+    assert caught.value.__notes__ == ["late_lock_invalidation_failed:OSError"]
+    assert (root / "acquisition.json").exists()
+    with pytest.raises(rt.BoundaryError, match="acquisition_finalization_failed"):
+        prep.check_acquired(root, rt.digest((root / "acquisition.json").read_bytes()))
