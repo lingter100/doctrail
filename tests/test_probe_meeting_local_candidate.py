@@ -29,7 +29,7 @@ class Clock:
         return self.now
 
 
-def adapter_fixture(tmp_path, *, alter=None, clock=None):
+def adapter_fixture(tmp_path, *, alter=None, clock=None, response_format=None):
     clock = clock or Clock()
     requests, observed = [], []
     def handle(request):
@@ -56,7 +56,8 @@ def adapter_fixture(tmp_path, *, alter=None, clock=None):
                 return replacement
         return httpx.Response(200, json=response)
     adapter = probe.CandidateAdapter("http://127.0.0.1:54321", "t" * 40, tmp_path / "profile.json",
-            clock=clock, transport=httpx.MockTransport(handle), observe=lambda *x: observed.append(x))
+            clock=clock, transport=httpx.MockTransport(handle), observe=lambda *x: observed.append(x),
+            **({"response_format": response_format} if response_format is not None else {}))
     adapter._alias = probe.MODEL_SHA
     return adapter, requests, observed, clock
 
@@ -787,7 +788,7 @@ def test_resource_policy_rejects_mismatch_before_bound_reads(tmp_path, monkeypat
     spec, path, seal = registration_fixture(tmp_path, monkeypatch)
     rss6_registration(spec)
     if fault == "schema":
-        spec["schema_version"] = 3
+        spec["schema_version"] = 4
     elif fault == "bool-schema":
         spec["schema_version"] = True
     elif fault == "missing-policy":
@@ -948,12 +949,15 @@ def test_resource_policy_startup_external_interpretation_matches_single_internal
 
 
 @pytest.mark.parametrize("fail_after_completion", [False, True])
-def test_resource_policy_two_guards_http_callback_cleanup_and_no_later_completion(tmp_path, monkeypatch, fail_after_completion):
+@pytest.mark.parametrize("format_enabled", [False, True])
+def test_resource_policy_two_guards_http_callback_cleanup_and_no_later_completion(tmp_path, monkeypatch, fail_after_completion, format_enabled):
     import psutil
 
     from scripts import probe_meeting_gpu_placement as gpu
     spec, path, seal = registration_fixture(tmp_path, monkeypatch)
     rss6_registration(spec)
+    if format_enabled:
+        format_registration(spec)
     ps, process = PolicyPS(), policy_process()
     process.stdout = object()
     guards, cleaned = [], []
@@ -990,6 +994,9 @@ def test_resource_policy_two_guards_http_callback_cleanup_and_no_later_completio
     adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter)
     def candidate(*args, **kwargs):
         adapter.resource_check = kwargs["resource_check"]
+        selected = probe.CLAIMS_JSON_FORMAT if format_enabled else probe.LEGACY_RESPONSE_FORMAT
+        assert kwargs["response_format"] is selected
+        adapter.response_format = selected
         assert adapter.resource_check.__self__ is guards[1]
         adapter.load = lambda: adapter.resource_check()
         return adapter
@@ -1006,3 +1013,276 @@ def test_resource_policy_two_guards_http_callback_cleanup_and_no_later_completio
         assert all(row["qa"]["status"] == "unexecuted" for row in result["documents"])
     else:
         assert result["mechanically_complete"]
+
+
+def format_registration(spec):
+    rss6_registration(spec)
+    spec.update(schema_version=3, source_wire_format=probe.COMPACT_WIRE,
+                response_format=probe.CLAIMS_JSON_FORMAT.binding())
+    return spec
+
+
+def test_format_schema3_binds_exact_grammars_and_terminal(tmp_path, monkeypatch):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    format_registration(spec)
+    verified = probe.verify_registration(path, seal(), tmp_path)[0]
+    assert probe.registration_policy(verified) is probe.RSS6_RESOURCES
+    @contextmanager
+    def launch(*args, **kwargs):
+        raise probe.CandidateFailure("synthetic_startup")
+        yield  # pragma: no cover
+    monkeypatch.setattr(probe, "launch", launch)
+    result = probe.execute(path, seal(), root=tmp_path, clock=lambda: 0)
+    terminal = json.loads((tmp_path / spec["output_dir"] / "terminal.json").read_text(encoding="utf-8"))
+    assert result["response_format"] == terminal["response_format"] == spec["response_format"]
+    assert result["first_failure"]["code"] == "local_candidate_synthetic_startup"
+
+
+@pytest.mark.parametrize("fault", ["schema", "old-schema", "missing-format", "missing-hash", "extra", "type",
+                                   "policy", "summary-hash", "qa-hash", "review-hash", "wire", "resource", "limits"])
+def test_format_registration_rejects_invalid_binding_before_file_reads(tmp_path, monkeypatch, fault):
+    spec, path, seal = registration_fixture(tmp_path, monkeypatch)
+    format_registration(spec)
+    if fault == "schema":
+        spec["schema_version"] = True
+    elif fault == "old-schema":
+        spec["schema_version"] = 2
+    elif fault == "missing-format":
+        del spec["response_format"]
+    elif fault == "missing-hash":
+        del spec["response_format"]["qa_sha256"]
+    elif fault == "extra":
+        spec["response_format"]["grammar"] = "arbitrary"
+    elif fault == "type":
+        spec["response_format"] = []
+    elif fault == "policy":
+        spec["response_format"]["policy"] = "unknown"
+    elif fault.endswith("-hash"):
+        spec["response_format"][fault.split("-")[0] + "_sha256"] = "0" * 64
+    elif fault == "wire":
+        spec["source_wire_format"] = probe.LEGACY_WIRE
+    elif fault == "resource":
+        spec["resource_policy"] = "legacy"
+    else:
+        spec["limits"]["summary_tokens"] += 1
+    monkeypatch.setattr(probe, "check_ref", lambda *a: pytest.fail("binding rejected before assets"))
+    with pytest.raises(probe.CandidateFailure):
+        probe.verify_registration(path, seal(), tmp_path)
+
+
+def test_format_adapter_rejects_unvalidated_or_mutable_selection_before_client_creation(monkeypatch):
+    monkeypatch.setattr(probe.GGUFGenerator, "__init__", lambda *a, **k: pytest.fail("invalid selection"))
+    for value in ({}, "claims-json-gbnf-v1", probe.ResponseFormat("claims-json-gbnf-v1", {})):
+        with pytest.raises(probe.CandidateFailure, match="response_format"):
+            probe.CandidateAdapter(response_format=value)
+    with pytest.raises(TypeError):
+        probe.CLAIMS_JSON_FORMAT.grammars["qa"] = "arbitrary"
+
+
+def test_format_only_grammar_bytes_change_and_static_rules_are_not_engine_validation(tmp_path):
+    from doctrail.meeting_grounded_summary import GENERATION_GRAMMAR, REVIEW_GRAMMAR
+    runs = []
+    for selection in (None, probe.LEGACY_RESPONSE_FORMAT, probe.CLAIMS_JSON_FORMAT):
+        adapter, requests, _, clock = adapter_fixture(tmp_path, response_format=selection)
+        report = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
+                                clock=clock, source_wire_format=probe.COMPACT_WIRE)
+        adapter.close()
+        assert report["mechanically_complete"] and report["counts"]["requested_tokens"] == 4608
+        runs.append(requests)
+    assert probe.encoded(runs[0]) == probe.encoded(runs[1])
+    old_grammars, new_grammars = [], []
+    for (old_path, old), (new_path, new) in zip(runs[0], runs[2], strict=True):
+        assert old_path == new_path
+        if old_path == "/completion":
+            old_grammars.append(old["grammar"])
+            new_grammars.append(new["grammar"])
+            assert probe.encoded({k: v for k, v in old.items() if k != "grammar"}) == probe.encoded({
+                k: v for k, v in new.items() if k != "grammar"})
+        else:
+            assert probe.encoded(old) == probe.encoded(new)
+    assert old_grammars == ["", REVIEW_GRAMMAR, ""] * 4
+    assert new_grammars == [GENERATION_GRAMMAR, REVIEW_GRAMMAR, probe.QA_GRAMMAR] * 4
+    for rule in ("id ::=", "string ::=", "char ::="):
+        assert next(x for x in probe.QA_GRAMMAR.splitlines() if x.startswith(rule)) == next(
+            x for x in GENERATION_GRAMMAR.splitlines() if x.startswith(rule))
+    assert 'claim ("," claim){0,5}' in probe.QA_GRAMMAR and 'id ("," id){0,3}' in probe.QA_GRAMMAR
+    assert r'claim ::= "{\"text\":" string ",\"evidence\":[' in probe.QA_GRAMMAR
+    assert set(probe.CLAIMS_JSON_FORMAT.binding()) == {"policy", "summary_sha256", "qa_sha256", "review_sha256"}
+    review_payload = json.loads(runs[2][3][1]["messages"][-1]["content"])
+    assert review_payload["candidate_claims"][0]["evidence"] == [1]
+
+
+@pytest.mark.parametrize("stage", ["summary", "review", "qa"])
+def test_format_echo_mismatch_stops_without_fallback_or_extra_completion(tmp_path, stage):
+    def alter(adapter, path, payload, response, clock):
+        if path == "/completion" and adapter.stage == stage:
+            response["generation_settings"]["grammar"] += " "
+    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT)
+    result = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
+                            clock=clock, source_wire_format=probe.COMPACT_WIRE)
+    count = sum(path == "/completion" for path, _ in requests)
+    assert count == {"summary": 1, "review": 2, "qa": 3}[stage]
+    assert result["stop_reason"]["code"] == "generation_effective_config_mismatch"
+    before = len(requests)
+    with pytest.raises(probe.CandidateFailure):
+        adapter.complete("extra", "qa", [], 900)
+    assert len(requests) == before and adapter.halted
+    adapter.close()
+
+
+@pytest.mark.parametrize("stage", ["summary", "qa"])
+@pytest.mark.parametrize("stop,at_cap", [("eos", False), ("limit", False), ("limit", True)])
+def test_format_closed_json_still_requires_eos_within_original_budget(tmp_path, stage, stop, at_cap):
+    def alter(adapter, path, payload, response, clock):
+        if path == "/completion" and adapter.stage == stage:
+            response["stop_type"] = stop
+            count = payload["n_predict"] if at_cap else 2
+            response.update(tokens_predicted=count, tokens=[201] * count)
+            response["timings"]["predicted_n"] = count
+    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT)
+    result = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
+                            clock=clock, source_wire_format=probe.COMPACT_WIRE)
+    adapter.close()
+    assert result["counts"]["summary"] == result["counts"]["qa"] == 4
+    assert all(row[stage]["status"] == ("valid" if stop == "eos" else "rejected") for row in result["documents"])
+    if stop != "eos":
+        assert all(row[stage]["error"]["code"] == "generation_output_limit" for row in result["documents"])
+    assert sum(path == "/completion" for path, _ in requests) == (8 if stage == "summary" and stop != "eos" else 12)
+
+
+@pytest.mark.parametrize("fault", ["input", "shared-deadline", "review-limit"])
+def test_format_mandatory_review_keeps_input_shared_deadline_and_rejection(tmp_path, fault):
+    def alter(adapter, path, payload, response, clock):
+        if fault == "shared-deadline":
+            if path == "/completion" and adapter.stage == "summary":
+                clock.now = 119
+            elif path == "/apply-template" and adapter.stage == "review":
+                clock.now += 2
+        elif adapter.stage == "review":
+            if fault == "input" and path == "/tokenize":
+                response["tokens"] = list(range(4097))
+            elif fault == "review-limit" and path == "/completion":
+                response["stop_type"] = "limit"
+    adapter, _requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT)
+    result = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
+                            clock=clock, source_wire_format=probe.COMPACT_WIRE)
+    adapter.close()
+    assert not result["mechanically_complete"]
+    if fault == "shared-deadline":
+        assert result["counts"]["summary"] == 1 and result["counts"]["review"] == result["counts"]["qa"] == 0
+        assert result["stop_reason"]
+    else:
+        assert result["counts"]["summary"] == result["counts"]["qa"] == 4
+        assert result["counts"]["review"] == (0 if fault == "input" else 4)
+        assert all(row["review"]["status"] == "rejected" for row in result["documents"])
+
+
+@pytest.mark.parametrize("stage", ["summary", "qa"])
+def test_format_frozen_parsers_keep_keys_cardinality_ids_and_original_spans(stage):
+    content = "\n".join(f"근거 {i}." for i in range(160))
+    units = probe.meeting_units(content)
+    assert len(units) == 160
+    mapping = {i: {**unit, "chunk_id": f"synthetic:1:{i}"} for i, unit in enumerate(units)}
+    def parse(data):
+        raw = json.dumps(data, ensure_ascii=True)
+        return probe.parse_draft(raw, units, content) if stage == "summary" else probe.grounded_answer_refs(raw, mapping)
+    def data(count=1, refs=None):
+        return {"status": "draft" if stage == "summary" else "answered",
+                "claims": [{"text": "변경을 승인했다.", "evidence": [0, 159] if refs is None else refs} for _ in range(count)]}
+    for count in (0, 1, 6, 7):
+        if count in (1, 6):
+            result = parse(data(count))
+            claims = result if stage == "summary" else result["claims"]
+            assert len(claims) == count
+            assert [c["quote"] for c in claims[0]["citations"]] == [units[0]["quote"], units[159]["quote"]]
+        else:
+            with pytest.raises(probe.WorkerError):
+                parse(data(count))
+    for refs in ([], [0], [0, 1, 2, 159], [0, 1, 2, 3, 159]):
+        if 1 <= len(refs) <= 4:
+            parse(data(refs=refs))
+        else:
+            with pytest.raises(probe.WorkerError):
+                parse(data(refs=refs))
+    for refs in ([160], [-1], [1.0], [True], [0, 0]):
+        with pytest.raises(probe.WorkerError, match="generation_invalid_evidence"):
+            parse(data(refs=refs))
+    if stage == "summary":
+        with pytest.raises(probe.WorkerError, match="generation_invalid_evidence"):
+            parse(data(refs=[159, 0]))
+    else:
+        assert [c["quote"] for c in parse(data(refs=[159, 0]))["claims"][0]["citations"]] == [units[159]["quote"], units[0]["quote"]]
+    for where in ("top", "claim"):
+        wrong = data()
+        (wrong if where == "top" else wrong["claims"][0])["extra"] = "not allowed"
+        with pytest.raises(probe.WorkerError, match="generation_invalid_schema"):
+            parse(wrong)
+    abstained = {"status": "abstained", "claims": []}
+    if stage == "summary":
+        with pytest.raises(probe.WorkerError, match="generation_summary_insufficient"):
+            parse(abstained)
+    else:
+        assert parse(abstained)["status"] == "abstained"
+
+
+@pytest.mark.parametrize("stage", ["summary", "qa"])
+def test_format_frozen_string_parser_unicode_escaping_and_invalid_json(stage):
+    content = "근거 한 줄."
+    units = probe.meeting_units(content)
+    def parse_raw(raw):
+        return probe.parse_draft(raw, units, content) if stage == "summary" else probe.grounded_answer_refs(raw, {0: units[0]})
+    def raw(text):
+        return json.dumps({"status": "draft" if stage == "summary" else "answered",
+                           "claims": [{"text": text, "evidence": [0]}]}, ensure_ascii=True)
+    text = '한글 English 비BMP😀 조합e\u0301 따옴표" 역슬래시\\ 슬래시/'
+    value = parse_raw(raw(text))
+    claims = value if stage == "summary" else value["claims"]
+    assert claims[0]["text"] == text  # no Unicode normalization or substitutions
+    good = raw("정상 문장")
+    malformed = ["```json\n" + good + "\n```", "prefix " + good, good[:-1],
+                 good.replace('"claims":', '"status":"duplicate","claims":'),
+                 good.replace("정상", "정상\x01"), raw("정상").replace('"text": "', '"text": "\\q')]
+    # ensure_ascii encodes Hangul; raw control characters must be inserted into the string itself.
+    malformed[4] = good.replace('"text": "', '"text": "\x01')
+    for bad in malformed:
+        with pytest.raises(probe.WorkerError, match="generation_invalid_json"):
+            parse_raw(bad)
+    limit = 240 if stage == "summary" else 2000
+    parse_raw(raw("가" * limit))
+    with pytest.raises(probe.WorkerError, match="generation_invalid_schema"):
+        parse_raw(raw("가" * (limit + 1)))
+    if stage == "summary":
+        for text in ("한글\n다음줄", "한글\ud800"):
+            with pytest.raises(probe.WorkerError):
+                parse_raw(raw(text))
+        many = {"status": "draft", "claims": [{"text": "가" * 240, "evidence": [0]}] * 5}
+        probe.parse_draft(json.dumps(many), units, content)
+        many["claims"].append({"text": "가", "evidence": [0]})
+        with pytest.raises(probe.WorkerError):
+            probe.parse_draft(json.dumps(many), units, content)
+    else:
+        assert parse_raw(raw("한글\n다음줄"))["claims"][0]["text"] == "한글\n다음줄"
+        # Frozen QA parser has no UTF-8 check: later evidence serialization fails closed.
+        parsed = parse_raw(raw("한글\ud800"))
+        with pytest.raises(UnicodeEncodeError):
+            probe.encoded(parsed)
+
+
+@pytest.mark.parametrize("stage", ["summary", "qa"])
+def test_format_content_rejection_keeps_fixed_next_item_without_repair(tmp_path, stage):
+    altered = []
+    def alter(adapter, path, payload, response, clock):
+        if path == "/completion" and adapter.stage == stage and not altered:
+            response["content"] = "{"
+            altered.append(True)
+    adapter, requests, _, clock = adapter_fixture(tmp_path, alter=alter, response_format=probe.CLAIMS_JSON_FORMAT)
+    result = probe.diagnose(documents(), adapter, active_deadline=900, emit=lambda *a: None,
+                            clock=clock, source_wire_format=probe.COMPACT_WIRE)
+    adapter.close()
+    assert result["first_failure"]["code"] == "generation_invalid_json"
+    assert result["operational_complete"] and not result["mechanically_complete"]
+    assert result["counts"]["summary"] == result["counts"]["qa"] == 4
+    assert result["counts"]["review"] == (3 if stage == "summary" else 4)
+    assert sum(path == "/completion" for path, _ in requests) == (11 if stage == "summary" else 12)
+    assert result["documents"][0][stage]["status"] == "rejected"
+    assert all(row[stage]["status"] == "valid" for row in result["documents"][1:])

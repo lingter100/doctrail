@@ -23,6 +23,7 @@ from doctrail.inference import WorkerError
 from doctrail.meeting_contract import grounded_answer_refs, meeting_units, strict_json
 from doctrail.meeting_gguf import GGUFGenerator, _integer
 from doctrail.meeting_grounded_summary import (
+    GENERATION_GRAMMAR,
     REVIEW_GRAMMAR,
     parse_draft,
     parse_review,
@@ -72,6 +73,33 @@ class ResourcePolicy:
 LEGACY_RESOURCES = ResourcePolicy("legacy", MappingProxyType(dict(LIMITS)))
 RSS6_RESOURCES = ResourcePolicy("native-rss6-host2-v1", MappingProxyType({
     **LIMITS, "native_rss_bytes": 6 * 1024**3, "startup_available_bytes": 8 * 1024**3}))
+
+
+# Same JSON string/escape and integer-ID rules as the frozen summary grammar.
+QA_GRAMMAR = r"""root ::= answered | abstained
+answered ::= "{\"status\":\"answered\",\"claims\":[" claim ("," claim){0,5} "]}"
+abstained ::= "{\"status\":\"abstained\",\"claims\":[]}"
+claim ::= "{\"text\":" string ",\"evidence\":[" id ("," id){0,3} "]}"
+id ::= "0" | [1-9] [0-9]? | "1" [0-5] [0-9]
+string ::= "\"" char+ "\""
+char ::= [^"\\\x7F\x00-\x1F] | "\\" (["\\/bfnrt] | "u" [0-9a-fA-F]{4})
+"""
+
+
+@dataclass(frozen=True)
+class ResponseFormat:
+    name: str
+    grammars: Mapping[str, str]
+
+    def binding(self):
+        return {"policy": self.name, **{stage + "_sha256": sha(grammar.encode("utf-8"))
+                for stage, grammar in self.grammars.items()}}
+
+
+LEGACY_RESPONSE_FORMAT = ResponseFormat("legacy", MappingProxyType({
+    "summary": "", "qa": "", "review": REVIEW_GRAMMAR}))
+CLAIMS_JSON_FORMAT = ResponseFormat("claims-json-gbnf-v1", MappingProxyType({
+    "summary": GENERATION_GRAMMAR, "qa": QA_GRAMMAR, "review": REVIEW_GRAMMAR}))
 
 
 CONTENT_ERRORS = frozenset({"generation_invalid_json", "generation_invalid_schema", "generation_invalid_evidence",
@@ -159,11 +187,17 @@ def registration_policy(spec):
     required = {"schema_version", "diagnostic", "prepared", "limits", "profile", "input", "criteria_locks",
                 "code", "assets", "model_root", "output_dir", "order"}
     require(isinstance(spec, dict) and type(spec.get("schema_version")) is int
-            and spec["schema_version"] in (1, 2), "registration_contract")
+            and spec["schema_version"] in (1, 2, 3), "registration_contract")
     policy = LEGACY_RESOURCES if spec["schema_version"] == 1 else RSS6_RESOURCES
-    if spec["schema_version"] == 2:
+    if spec["schema_version"] in (2, 3):
         required.add("resource_policy")
         require(spec.get("resource_policy") == policy.name, "registration_contract")
+    if spec["schema_version"] == 3:
+        required.update({"response_format", "source_wire_format"})
+        require(spec.get("source_wire_format") == COMPACT_WIRE
+                and isinstance(spec.get("response_format"), dict)
+                and encoded(spec["response_format"]) == encoded(CLAIMS_JSON_FORMAT.binding()),
+                "response_format")
     require(set(spec) in (required, required | {"source_wire_format"})
             and spec["diagnostic"] == ID and spec["prepared"] is True
             and encoded(spec["limits"]) == encoded(dict(policy.limits)), "registration_contract")
@@ -262,7 +296,10 @@ def source_wire_messages(request_messages, source, content, units, source_wire_f
 
 class CandidateAdapter(GGUFGenerator):
     """Embedded template, existing bounded HTTP/completion validation, no Qwen suffix."""
-    def __init__(self, *args, clock=time.monotonic, observe=None, resource_check=None, **kwargs):
+    def __init__(self, *args, clock=time.monotonic, observe=None, resource_check=None,
+                 response_format=LEGACY_RESPONSE_FORMAT, **kwargs):
+        require(response_format is LEGACY_RESPONSE_FORMAT or response_format is CLAIMS_JSON_FORMAT, "response_format")
+        self.response_format = response_format
         super().__init__(*args, **kwargs)
         self.clock, self.observe = clock, observe or (lambda *args: None)
         self.resource_check = resource_check or (lambda: None)
@@ -330,7 +367,7 @@ class CandidateAdapter(GGUFGenerator):
         self.begin_request(deadline)
         try:
             result = self._complete(request_messages, deadline, LIMITS[stage + "_tokens"],
-                                    REVIEW_GRAMMAR if stage == "review" else "")
+                                    self.response_format.grammars[stage])
             self._remaining(deadline)
             if result.finish_reason != "eos":
                 raise WorkerError("generation_output_limit", 502)
@@ -599,6 +636,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
     spec, documents, output, prepared = verify_registration(path, expected_sha, root)
     source_wire_format = spec.get("source_wire_format", LEGACY_WIRE)
     policy = registration_policy(spec)
+    response_format = CLAIMS_JSON_FORMAT if spec["schema_version"] == 3 else LEGACY_RESPONSE_FORMAT
     output.mkdir(parents=True, exist_ok=False)  # reservation survives every subsequent failure
     private = output / "private"
     private.mkdir()
@@ -619,7 +657,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
                     prepared=prepared, policy=policy, root=root, clock=clock) as service:
             guard = make_resource_guard(service.process, policy, clock=clock, expected_created=metrics["owned_create_time"])
             adapter = CandidateAdapter(service.url, service.token, root / PROFILE, clock=clock,
-                                       observe=emit, resource_check=guard.check)
+                                       observe=emit, resource_check=guard.check, response_format=response_format)
             adapter.begin_request(started + 120)
             try:
                 checkpoint()
@@ -649,7 +687,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
         report.update(status="stopped", operational_complete=False, mechanically_complete=False)
     finally:
         report.update(cleanup=metrics, registration_sha256=expected_sha, limits=dict(policy.limits),
-                      resource_policy=policy.name, resource_limit_scope="sampled_stop_thresholds_not_reservation_or_peak_limits",
+                      resource_policy=policy.name, response_format=response_format.binding(), resource_limit_scope="sampled_stop_thresholds_not_reservation_or_peak_limits",
                       source_wire_format=source_wire_format,
                       retries=0, AI_quality=False, effective_offload_layers=None,
                       gpu_layers_requested=99, gpu_samples=gpu_samples,
@@ -686,6 +724,7 @@ def execute(path, expected_sha, *, root=ROOT, clock=time.monotonic):
             report.update(status="stopped", operational_complete=False, mechanically_complete=False)
             report["stop_reason"] = report["stop_reason"] or {"code": "local_candidate_whole_deadline"}
         terminal = {"source_wire_format": source_wire_format, "resource_policy": policy.name,
+                    "response_format": response_format.binding(),
                     "limits": dict(policy.limits),
                     "startup_ram_gate": metrics.get("startup_ram_gate"), "status": report["status"], "mechanically_complete": report["mechanically_complete"],
                     "operational_complete": report["operational_complete"], "stop_reason": report["stop_reason"],

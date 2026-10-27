@@ -12,9 +12,11 @@
 
 기본 Java DB는 `var/doctrail-java.sqlite3`, 4B 실험 서비스의 기본 DB는 `var/meetings-experimental.sqlite3`다. 다른 DB로 실행하면 계정·문서가 따로 보이는 것이므로 기존 파일을 지우거나 덮어쓰지 않는다. 같은 DB·포트를 두 서비스에서 동시에 사용하지 않는다. 시작 스크립트의 패키징은 실행 준비이며 전체 검증은 README의 `verify`와 UI 검사 절차를 따른다.
 
-새 3B 후보는 원문 전체와 근거 위치를 유지하는 입력 형식까지 구현했지만 실제 요약·답변 품질 결과는 아직 없다. 앞선 실제 실행의 입력 한도 거부와 이후 시작 자원 미달을 보존한다. 닫힌 평가 출력 폴더나 이전 실행 명령을 재사용하지 않는다. 현재 결과는 [진행 현황](PROGRESS-OVERVIEW.md)과 [최근 실행 상태](STATUS.md)를 확인한다.
+새 3B 후보는 입력 형식과 별도 메모리 정책을 적용해 실제 생성8건에 도달했지만, 형식·길이 검사에서 모두 거부돼 의미 품질을 아직 평가하지 못했다. 앞선 입력 한도 거부와 시작 자원 미달도 보존한다. 닫힌 평가 출력 폴더나 이전 실행 명령을 재사용하지 않는다. 현재 결과는 [진행 현황](PROGRESS-OVERVIEW.md)과 [최근 실행 상태](STATUS.md)를 확인한다.
 
 새 [자원 정책 구현](../experiments/results/meetings-local-resource-envelope-v1.json)은 schema2의 명시적 선택에서 native RSS6GiB·시작8GiB·호스트여유2GiB를 사용한다. 기본8/10GiB는 유지한다. 111합성검사·독립 코드 검토와 [정확 소스 CI](../experiments/results/meetings-local-resource-policy-source-ci-v1.json)를 통과했다. 후속 [실제 비교](MEETINGS-LOCAL-RESOURCE-RESULTS.md)는 생성8건·검사수용0으로 종료됐다. 소비한 등록을 다시 실행하지 않으며 새 개입은 별도 설계·등록이 필요하다. 표본 감시는 메모리를 예약하거나 순간 할당을 막는 기능이 아니다. 기존 출력 파일에는 정책 정보가 추가되며 바이트 동일을 약속하지 않는다. 재현 명령은 연결된 결과의 `reproduce_command`를 따른다.
+
+[생성 문법 후보 구현](../experiments/results/meetings-local-format-implementation-v1.json)은 새 schema3의 `claims-json-gbnf-v1`에서만 사용한다. 기존 등록·기본 서비스는 자동 변경하지 않는다. 원문·질문·프롬프트·파서·시간과 출력 한도는 유지하며 생성 중 JSON 구조와 배열 한도를 제한한다. 147합성검사·Ruff·독립 코드 검토는 통과했지만 실제 문법 엔진과 내용 품질은 아직 미검증이다. 정확 소스 CI를 확인한 뒤 새 등록·출력 폴더로 실제 실행을 별도 배정한다. 닫힌 v4 등록과 결과는 재사용하지 않는다.
 
 지금 시연할 수 있는 범위는 원문 등록·검색·근거 이동과 확인된 관리 흐름이다. AI가 충분히 요약하고 정확히 답한다는 시연은 실제 품질 검증 후 확정한다. [첫 단계 시연](DEMO.md)은 M1~M3의 역사적 범위이며 현재 회의 기능 전체 완료를 뜻하지 않는다.
 

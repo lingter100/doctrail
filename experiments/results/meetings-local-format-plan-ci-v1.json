@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "source_head": "96596b1821e07d22e7bcab678a4d41520e7507a5",
+  "runs": [
+    {
+      "run_id": 40293490700,
+      "event": "push",
+      "head_sha": "96596b1821e07d22e7bcab678a4d41520e7507a5",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40293490700",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 40293498126,
+      "event": "pull_request",
+      "head_sha": "96596b1821e07d22e7bcab678a4d41520e7507a5",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40293498126",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "watch_sessions": [
+    {
+      "session_id": 53721,
+      "exit_code": 0
+    },
+    {
+      "session_id": 48192,
+      "exit_code": 0
+    }
+  ],
+  "scope": "Published actual results and next design; source2 format implementation and new grammar engine are not covered by this head."
+}
