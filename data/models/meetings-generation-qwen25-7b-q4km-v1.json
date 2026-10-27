@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "id": "meetings-generation-qwen25-7b-q4km-v1",
+  "purpose": "Asset preparation only; no execution approval or quality claim",
+  "gguf": {
+    "repo_id": "Qwen/Qwen2.5-7B-Instruct-GGUF",
+    "revision": "bb5d59e06d9551d752d08b292a50eb208b07ab1f",
+    "quantization": "Q4_K_M",
+    "shards": [
+      {
+        "filename": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf",
+        "size_bytes": 3993201344,
+        "sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db",
+        "git_lfs_pointer_blob_id": "72de309249b41bf41019dd2efc5cb8e4a19c8c8e",
+        "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/bb5d59e06d9551d752d08b292a50eb208b07ab1f/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf"
+      },
+      {
+        "filename": "qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf",
+        "size_bytes": 689872288,
+        "sha256": "539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a",
+        "git_lfs_pointer_blob_id": "c550b63c2e50a9984b5535c5c21ccd168c0cb08f",
+        "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/bb5d59e06d9551d752d08b292a50eb208b07ab1f/qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf"
+      }
+    ],
+    "total_size_bytes": 4683073632,
+    "entry_filename": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf"
+  },
+  "license": {
+    "name": "Apache-2.0",
+    "file_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "size_bytes": 11343,
+    "base_and_gguf_license_api_blob_id": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab",
+    "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/resolve/bb5d59e06d9551d752d08b292a50eb208b07ab1f/LICENSE"
+  },
+  "provenance": {
+    "base_model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "conversion_base_commit": null,
+    "reason": "pinned GGUF card names base_model without conversion commit; no inference from current base main",
+    "base_metadata_observation_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "observation_method": "read official base main metadata once, then request exact returned revision; separate from conversion lineage"
+  },
+  "observations": {
+    "base_config": {
+      "architecture": "Qwen2ForCausalLM",
+      "layers": 28,
+      "query_heads": 28,
+      "key_value_heads": 4,
+      "vocab_size": 152064,
+      "max_position_embeddings": 32768,
+      "hidden_size": 3584
+    },
+    "tokenizer_metadata": {
+      "tokenizer_class": "Qwen2Tokenizer",
+      "add_bos_token": false,
+      "bos_token": null,
+      "eos_token": "<|im_end|>",
+      "eos_token_id": 151645,
+      "pad_token": "<|endoftext|>",
+      "pad_token_id": 151643,
+      "im_start_token_id": 151644,
+      "model_max_length": 131072,
+      "split_special_tokens": false,
+      "clean_up_tokenization_spaces": false,
+      "not_loaded_or_executed": true,
+      "asset_metadata_only": [
+        {
+          "filename": "tokenizer.json",
+          "size_bytes": 7031645,
+          "git_blob_id": "443909a61d429dff23010e5bddd28ff530edda00"
+        },
+        {
+          "filename": "vocab.json",
+          "size_bytes": 2776833,
+          "git_blob_id": "4783fe10ac3adce15ac8f358ef5462739852c569"
+        },
+        {
+          "filename": "merges.txt",
+          "size_bytes": 1671839,
+          "git_blob_id": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+        }
+      ]
+    },
+    "templates": {
+      "base_tokenizer_config_utf8": {
+        "size_bytes": 2507,
+        "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f"
+      },
+      "repository_gguf_api_utf8": {
+        "size_bytes": 2509,
+        "sha256": "d5495a1e5db0611132a97e46a65dbb64a642a499421228b9c8b93229097fa9a4"
+      },
+      "observed_difference": "tools instructional JSON example uses doubled versus single outer braces; no-tools branch appears structurally alike but no renderer was executed",
+      "scope": "repository API derived gguf metadata is not asserted to be exact Q4 shard metadata or immutable artifact extraction; actual embedded template/tokenizer KV must be verified and locked after acquisition before neutral",
+      "overrides_allowed": false
+    },
+    "not_embedded_shard_verification": true
+  },
+  "primary_metadata": [
+    {
+      "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-7B-Instruct-GGUF/revision/bb5d59e06d9551d752d08b292a50eb208b07ab1f?blobs=true",
+      "sha256": "8a538b26e96f59af8ffe420995c0fea6d77f4b65beb56786159c331baf2f24b5",
+      "size_bytes": 9781
+    },
+    {
+      "url": "https://huggingface.co/api/models/Qwen/Qwen2.5-7B-Instruct/revision/a09a35458c702b33eeacc393d103063234e8bc28?blobs=true",
+      "sha256": "b906ff0b58e878196b5e81e3fabc3b8e23cd13b95ec63c26be81f0a70375ec77",
+      "size_bytes": 9305
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/raw/bb5d59e06d9551d752d08b292a50eb208b07ab1f/README.md",
+      "sha256": "b813de546b5f0a1d8c49307d428582fd649be627d9b33a60ecf807a3381af05e",
+      "size_bytes": 5633
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct-GGUF/raw/bb5d59e06d9551d752d08b292a50eb208b07ab1f/LICENSE",
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "size_bytes": 11343
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/raw/a09a35458c702b33eeacc393d103063234e8bc28/config.json",
+      "sha256": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+      "size_bytes": 663
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/raw/a09a35458c702b33eeacc393d103063234e8bc28/generation_config.json",
+      "sha256": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+      "size_bytes": 243
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/raw/a09a35458c702b33eeacc393d103063234e8bc28/tokenizer_config.json",
+      "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "size_bytes": 7305
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049384534c167caea52b85a694f6103d14/src/llama-model-loader.cpp",
+      "sha256": "301f8250eef5b34d14617c7c9bf5c14bb60519d199751f4d829502a5107f0593",
+      "size_bytes": 78348
+    }
+  ],
+  "runtime_reuse": {
+    "tag": "b11429",
+    "commit": "d81235049384534c167caea52b85a694f6103d14",
+    "profile": {
+      "file": "data/models/meetings-generation-ministral3-v1.json",
+      "sha256": "2b4d19c14af2697188d6a07a41b1ea971c1eaefec68fbc9beb035d74906f1de7",
+      "size_bytes": 3008
+    },
+    "setup_receipt": {
+      "file": "models/meetings-ministral3-v1/setup-receipt.json",
+      "sha256": "0fd332ffcd982a11a2c8b7da5eea22c886911be35917d4e1290f25a797ed6938",
+      "size_bytes": 9182
+    },
+    "runtime_file_count": 55,
+    "runtime_files": {
+      "cublas64_12.dll": {
+        "size_bytes": 100033536,
+        "sha256": "e40202fe4223c1cd2d2dce7beec59e1ed61c7801bd827309183be9b50e358f4c"
+      },
+      "cublasLt64_12.dll": {
+        "size_bytes": 473551360,
+        "sha256": "2a896460bef60ed57ef32b0875812f355a6984e671d638bb632f5e8c1d7a831f"
+      },
+      "cudart64_12.dll": {
+        "size_bytes": 553984,
+        "sha256": "d28e42265da7462162a54da6b7a99ea4fa2caf8139d862bb500db875d0b32dfc"
+      },
+      "ggml-base.dll": {
+        "size_bytes": 803328,
+        "sha256": "19b7666b4cd7dc01e219e247783ffd1979694d6f1635bbf3209ae5fa0fc169c0"
+      },
+      "ggml-cpu-alderlake.dll": {
+        "size_bytes": 1434624,
+        "sha256": "176045703530b923eb565052d9c622e1453c7013ac11823926f89260768cdddd"
+      },
+      "ggml-cpu-cannonlake.dll": {
+        "size_bytes": 1614336,
+        "sha256": "c9723eab21d1d80e38f3791088739c56a8a36f7db5ad2340811eac2d3fd45af7"
+      },
+      "ggml-cpu-cascadelake.dll": {
+        "size_bytes": 1598976,
+        "sha256": "1db7a13737763d444c278ac218ad9dc5dc850e1fcd98bc07ece307ae6f64dda6"
+      },
+      "ggml-cpu-cooperlake.dll": {
+        "size_bytes": 1608704,
+        "sha256": "482a40664f87b8e94bdab53c13b14fa6b722ffd743a7a7c4fa7d5cec6ed44852"
+      },
+      "ggml-cpu-haswell.dll": {
+        "size_bytes": 1439232,
+        "sha256": "8022a1d17a56f537b956683a484dc1a0f95ab4b01e95b4c57d53bb1e6c3e529f"
+      },
+      "ggml-cpu-icelake.dll": {
+        "size_bytes": 1606144,
+        "sha256": "c096a02ec4a9fecca14a14bd9ed5d6c9fa7569cc2a678b08dd1978646abe1e2a"
+      },
+      "ggml-cpu-ivybridge.dll": {
+        "size_bytes": 1314816,
+        "sha256": "1792967edf602b0a459cbb519e71a3037fba5854ba273b8328467c9d9dc201f1"
+      },
+      "ggml-cpu-piledriver.dll": {
+        "size_bytes": 1307648,
+        "sha256": "b47a82e5d9087f03a54a840e848e4f2e0b44312309065e60b8d0cd421202233c"
+      },
+      "ggml-cpu-sandybridge.dll": {
+        "size_bytes": 1289728,
+        "sha256": "007dc9fca693bf1e3941c1d46bb273de587c2d0947625884ccd68154d190e03c"
+      },
+      "ggml-cpu-sapphirerapids.dll": {
+        "size_bytes": 1885696,
+        "sha256": "72b1203f01d4aa12f22d45415d91dc046f15e3eb3da49f7110b59c888bee9978"
+      },
+      "ggml-cpu-skylakex.dll": {
+        "size_bytes": 1608192,
+        "sha256": "ccf578111e9688c2c51f0279ab4e56351fa084f7d6e43e7c091d961fdbb03081"
+      },
+      "ggml-cpu-sse42.dll": {
+        "size_bytes": 915456,
+        "sha256": "740d3e84289733501b70274904c9d1135bdc579babf7c82825f5ae0133e5afbd"
+      },
+      "ggml-cpu-x64.dll": {
+        "size_bytes": 908288,
+        "sha256": "b1089f3ad0cc1363519c3583b033648cf471297bdd5482e72c71dcf5c5cb0765"
+      },
+      "ggml-cpu-zen4.dll": {
+        "size_bytes": 1615360,
+        "sha256": "7f257519148e3b81fc718acad0f7afcd381d2b429fe0032a1f97e365d7ff2db5"
+      },
+      "ggml-cuda.dll": {
+        "size_bytes": 570216448,
+        "sha256": "e839574a72208d598c3c7e8bd19edfa1b8ab8fb523108f8853cad0df9e25cd6c"
+      },
+      "ggml-rpc-server.exe": {
+        "size_bytes": 117248,
+        "sha256": "621d99411e46c721cc7a479cfb38491525f857b9159ad2656193994751d183fa"
+      },
+      "ggml-rpc.dll": {
+        "size_bytes": 168960,
+        "sha256": "7ba393c88878711014e57bfe77a45ec99bbcc106f945baec1c90614370dd9459"
+      },
+      "ggml.dll": {
+        "size_bytes": 79872,
+        "sha256": "2dc74873c47a09294431af997f7d5c31bdbc0eafc49c2c30ea03b7331c1a5c3c"
+      },
+      "libomp.dll": {
+        "size_bytes": 768000,
+        "sha256": "a12116ba72d1d6820407cf30be23da04ce79d6bb8a71a5ee71759c5a1faa6f1c"
+      },
+      "LICENSE-LLVM-OpenMP": {
+        "size_bytes": 19741,
+        "sha256": "fdad1758a9e1f9d5a81e18879b3406772115edc92c24bfa36b70c654f325e8e4"
+      },
+      "llama-batched-bench-impl.dll": {
+        "size_bytes": 61952,
+        "sha256": "fffda75084850c467df634417ac29b0aa814146021f334cd18d91a16e97b3048"
+      },
+      "llama-batched-bench.exe": {
+        "size_bytes": 9216,
+        "sha256": "0185ab3a5799d3452282ee01d0b501ef385769c0642a9375af2983a1834792c3"
+      },
+      "llama-bench-impl.dll": {
+        "size_bytes": 403968,
+        "sha256": "34e052bc21d7e81a174c4cb2f48aa93b26863a2fb6f326d70e17c732179b55ae"
+      },
+      "llama-bench.exe": {
+        "size_bytes": 9216,
+        "sha256": "168ad39c85bb45b1b43b133074317bc577ed7b0a34d380d6a559207683b94114"
+      },
+      "llama-cli-impl.dll": {
+        "size_bytes": 3315712,
+        "sha256": "5dc73fb3fecc0da17f6b18999a4516e6e346dcc0e1cff10379ab16a4fca182cc"
+      },
+      "llama-cli.exe": {
+        "size_bytes": 9216,
+        "sha256": "db2ca6b1255759101d8933370c992a9f2e219a0d62bc6528072eb4e0e7a323ba"
+      },
+      "llama-common.dll": {
+        "size_bytes": 7924224,
+        "sha256": "cb5011455243a8b6a91fed00fbb33d93fdb53fa7c417fc59f27a004af85d7d9b"
+      },
+      "llama-completion-impl.dll": {
+        "size_bytes": 136192,
+        "sha256": "92c753b5d1328540a43349466f892abbd34c3f902351f19b0aa58bc1752a97af"
+      },
+      "llama-completion.exe": {
+        "size_bytes": 9216,
+        "sha256": "aaf0bba4723883b8a4f25e9d02bb23802cad1cc5f5cb2aab53098691bf7c4c0d"
+      },
+      "llama-fit-params-impl.dll": {
+        "size_bytes": 43008,
+        "sha256": "b92509e2088e1fd2e4b0a3be809dc014019ed6430987ae6d30a2bae14ecf69ca"
+      },
+      "llama-fit-params.exe": {
+        "size_bytes": 9216,
+        "sha256": "c2bf85d263a04a73ed4af00e08a42296daac5a33255e31952e133b474848a494"
+      },
+      "llama-gemma3-cli.exe": {
+        "size_bytes": 27136,
+        "sha256": "1031f697b423794b145c38818d1350d22b07d6526aececbf84299a568a47184c"
+      },
+      "llama-gguf-split.exe": {
+        "size_bytes": 60416,
+        "sha256": "8743e2535624e84b0bba34a36bb7b7fdfea8dc5648d8139048644ddc03d4253d"
+      },
+      "llama-imatrix.exe": {
+        "size_bytes": 252416,
+        "sha256": "bd0e416ace4c93b30a110ce231d0afe9307b3a0ae7dc0438b4ca4b020fe9a7c6"
+      },
+      "llama-llava-cli.exe": {
+        "size_bytes": 27136,
+        "sha256": "1031f697b423794b145c38818d1350d22b07d6526aececbf84299a568a47184c"
+      },
+      "llama-minicpmv-cli.exe": {
+        "size_bytes": 27136,
+        "sha256": "193513388b62212ee816f752e64db9a377288f3bd3acb3fb509e23ca547fa387"
+      },
+      "llama-mtmd-cli.exe": {
+        "size_bytes": 92672,
+        "sha256": "e0f682258ece3fb940d8f0e6f334208ba3b8a1810739384093cfae63fb671851"
+      },
+      "llama-mtmd-debug.exe": {
+        "size_bytes": 55808,
+        "sha256": "bff6e878ab5814fadc82509558b81b9c17b25fee708db2fb76695c99722db527"
+      },
+      "llama-perplexity-impl.dll": {
+        "size_bytes": 197632,
+        "sha256": "7c07c54f84dfa2c6503e83f6f2bfe9788e7f0d00280517f10e7deddcf38beb99"
+      },
+      "llama-perplexity.exe": {
+        "size_bytes": 9216,
+        "sha256": "dda4774f04508bf4092e3d4e2cd13bc47b5433d3581793556f91284fb8b3c567"
+      },
+      "llama-quantize-impl.dll": {
+        "size_bytes": 137216,
+        "sha256": "a46a92fcd97eaf4db39a7460f48b744387ce257c02fa48f43f591f086d4f9f1a"
+      },
+      "llama-quantize.exe": {
+        "size_bytes": 9216,
+        "sha256": "645013b453bd71f82c7849b8ceb57a745aab69fdf30fca022b20afba9cfcf3cf"
+      },
+      "llama-qwen2vl-cli.exe": {
+        "size_bytes": 27136,
+        "sha256": "193513388b62212ee816f752e64db9a377288f3bd3acb3fb509e23ca547fa387"
+      },
+      "llama-results.exe": {
+        "size_bytes": 46592,
+        "sha256": "c131056ff1c1b2e737ec2bb2506df4883d9791e0239ac4a8d398298d742f73ff"
+      },
+      "llama-server-impl.dll": {
+        "size_bytes": 9170944,
+        "sha256": "8bdf535224880cf5b919ada99e6cb225338cce4d444b8e5b4acd1e2bb10bc0a0"
+      },
+      "llama-server.exe": {
+        "size_bytes": 9216,
+        "sha256": "7e236243c9b670c6a49410c03186fd575c57a0efe3fd8a21d8727503d571d5b6"
+      },
+      "llama-tokenize.exe": {
+        "size_bytes": 58880,
+        "sha256": "cdfc60f1714c630c5bc8e4c798e0399370688fb252ee7c6064f522247ae756ad"
+      },
+      "llama-tts.exe": {
+        "size_bytes": 41984,
+        "sha256": "a040c7203eb66dd61591f1c309165117d517e5d6c01ca086de126451b24ff847"
+      },
+      "llama.dll": {
+        "size_bytes": 3311616,
+        "sha256": "48d2b52f4d6b2d7db2ca4698edbb95ecb4511b792396c566e1340668b6415a71"
+      },
+      "llama.exe": {
+        "size_bytes": 104448,
+        "sha256": "466d9ea880c580baaea54d83dee8c70fa3b711e19076fe97a03bcd919924aa92"
+      },
+      "mtmd.dll": {
+        "size_bytes": 1795072,
+        "sha256": "817ba2841e73b9ef1170f2e235d30ef4cca5d4ec520a4817ca60e3737cff79ad"
+      }
+    },
+    "copy_or_upgrade": false,
+    "current_asset_reverification": "not performed; separate execution prerequisite"
+  },
+  "preparation_limits": {
+    "transfer_bytes": 5368709120,
+    "new_owned_disk_bytes": 6442450944,
+    "total_seconds": 1800,
+    "embedded_metadata_read_limit_bytes": 33554432,
+    "allow_merge": false,
+    "allow_runtime_upgrade": false,
+    "allow_retry": false
+  },
+  "constraints": {
+    "explicit_download_only": true,
+    "service_downloads": false,
+    "native_execution_approved": false,
+    "quality_verified": false,
+    "automatic_retry": false,
+    "merge": false,
+    "template_override": false
+  }
+}

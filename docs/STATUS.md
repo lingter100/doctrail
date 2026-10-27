@@ -1,4 +1,30 @@
 # 진행 상태
+## 2026-10-27 · 수동 보정 실제 통합 배정과 엔진 종료 경계 보완
+
+수동 보정 delta9ac67cb6는 blocker0/advisory0이다. 부모가95입력+검토문서를 대조했고 기존 Astra high에게 새 정확 복사본의 Java 전체·브라우저 전체를 순차 실행하도록 배정했다. 새 실제3개와 공개 fixture·기존 회귀를 포함하며 공유 UI15·원래JAR·개인DB는 유지한다. 아직 실제 실행 성공 결과는 없다.
+
+엔진145합성 수정은 부모404참조·원본3·기존 부분335파일과 OwnedTree AST를 확인했다. 별도 검토40362858가 최종 supervision metadata의 디스크 사전 검사와 final manifest의 공유 deadline 누락을 발견했다. 부모19참조 확인 뒤 같은 high에 source3의 좁은2차 수정을 배정했다. 원래145·취득 실패와 한도는 유지하며 실제 재취득은 하지 않는다.
+
+무료 QA는 변경된 helperceb660ca와도104합성검사10.18초/Ruff를 각각1회 통과했다. 부모가 결합10참조/20index를 확인했고 이전 helper와 원본 검사는 보존했다. 이 결합 결과는 아직 엔진2차 수정이나 실제 모델을 검증하지 않는다. 수용된 QA 코드와 문서는 별도 커밋으로 준비하고 실제 취득은 최종 코드 검토·CI 이후로 유지한다. 전체 목표ACTIVE다.
+
+## 2026-10-27 · 무료 QA 준비 코드와 외부 성공 조건 수용
+
+무료 QA source B1/B2 수정의 최종 독립 범위8e332627은 source blocker0, 실제 취득 전 운영 조건1로 확정됐다. 부모는31참조를 대조했고 변경 중인 runtime는 검토 당시 원본6a3 archive로 확인했다. 새 [외부 성공 gate](MEETINGS-FREE-QA-ACQUISITION-GATE.md)는 같은 root/attempt의 실제CLI exit0·최종 stdout·종료/custody를 모두 요구하며 실패/누락을 파일상의 성공으로 복구하지 않는다. 문서 검토ff64cfb9 blocker0과5참조를 확인했다. 이 조건은 현재 CLI에 자동 구현된 추가 보장이라고 주장하지 않는다.
+
+[준비 검증](MEETINGS-FREE-QA-ASSETS-VERIFICATION.md)은104합성검사·원래69보존·Ruff와 실제 inspect CLI0을 구분한다. 새 모델 취득·GGUF 실물 적합성·품질 검증은0이다. 코드/문서를 게시하고 최종 결합 CI 뒤 별도 실제 취득을 배정한다. 엔진 runtime 수정과 회의 보정 수정을 병행하며 전체 목표ACTIVE다.
+
+## 2026-10-27 · 취득 후속 계획의 정확 소스 CI 완료
+
+d95804e의 push40458309346·PR40458315672 backend/web/java-service가 모두 통과했고 같은 watch97517/62075가 exit0으로 종료됐다. [CI 기록](../experiments/results/meetings-summary-engine-acquisition-plan-ci-v1.json)을 보존하며 미커밋 코드의 통과로 해석하지 않는다. 다음 실질적인 검증 변경과 함께 기록을 게시하고 동일 CI를 반복 실행하지 않는다. 전체 목표ACTIVE다.
+
+## 2026-10-27 · 취득 후속 계획 게시와 두 구현의 좁은 수정
+
+실패·계획11파일을 사용자 명의d95804e로 게시했고415개 문서 연결·Git/현재 바이트·원격 신원을 확인했다. PR14 draft head/본문도 일치한다. push40458309346·PR40458315672는 같은 watch97517/62075로 관찰 중이며 새 실행을 만들거나 취소하지 않는다. 현재 CI는 이 문서 커밋에 관한 것이며 미커밋 구현을 검증하지 않는다.
+
+무료 QA 준비의 B1/B2 수정은104합성검사7.04초/Ruff를 통과했다(c30c6682). 부모33참조+47index를 대조했고 기존 Astra xhigh가 독립 delta 검토한다. 수정3파일 외 프로필·CLI·generic helper는 유지했다. 엔진 담당 기존 Astra high는 공개 계획에 따라 prepare/test 수정과 원본 보존을 진행하되, QA 검토 종료까지 runtime.py는 읽기 전용으로 유지한다. 다운로드/빌드/native/모델 실행은0이다.
+
+수동 보정 독립 검토504f4902는 MC-R1 새 workspace 생성의 초안 보호 누락, MC-R2 반복 구절의 원문 재순회, MC-A1 복구 뒤 연결 개수 안내를 반환했다. 부모80참조 확인 후 기존 Astra high에게 해당 React/spec만 수정하도록 배정했다. 기존15파일·28모형/14history·Java18과 실패를 보존한다. 실제 Java+브라우저 최종 통합은 수정 및 delta 검토 뒤 별도 실행한다. 전체 목표ACTIVE다.
+
 ## 2026-10-27 · 취득 최소 수정 계획과 수동 보정 구현 반환
 
 [엔진 취득 후속 계획](MEETINGS-SUMMARY-ENGINE-ACQUISITION-NEXT.md)을 수용했다. 반복 전체 탐색·압축 용량 이중 합산·redirect body 미계상 경로를 별도로 구분한다. 시간 초과의 지배 원인은 미측정이며 원래 한도와 실패 폴더를 유지한다. 부모는 진단18참조를 확인했다. 계획 게시 후 기존3파일 수정만 배정하며 새 취득/빌드/모델 실행은 아직0이다.
