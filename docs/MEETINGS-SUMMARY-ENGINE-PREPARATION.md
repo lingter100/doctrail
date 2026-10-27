@@ -17,3 +17,10 @@
 ## 아직 증명하지 않은 것
 
 실제 배포 파일의 구조·호환성·컴파일·엔진 판정은 미검증이다. 관측한 자원 값은 OS의 강제 격리나 순간 최대치를 보장하지 않는다. 문법 통과 역시 모델 출력 토큰 비용이나 요약의 의미 정확성을 입증하지 않는다. 기존 실패 후보, 입력, 최종 평가와 모델 예산은 그대로 유지한다. 다음은 정확 소스 CI 이후 취득 파일 검토와 실제 엔진 검증이다. 사용자 검수와 실제 모델 실험은0이다.
+
+
+## 게시 바이트 불일치와 수정
+
+최초 게시9a6ba117의 양쪽 CI에서 web/java-service는 통과했지만 Python검사는1실패·4491통과·21skip이었다. Git 게시 줄바꿈에 맞춰 pins.json을 LF로 정규화한 뒤 고정 raw SHA를 갱신하지 않은 부모의 게시 오류다. JSON 의미는 같아도 원시 바이트 검사는 달라지는 점을 누락했다. [최초 실패](../experiments/results/meetings-summary-engine-preparation-ci-v1.json)와 원본·로그를 보존했다.
+
+runtime.PINS_SHA 한 문자열만 게시된 LF 파일의 정확한 SHA로 맞췄다. 바이트 guard·정책·테스트를 완화하지 않았고102합성검사5.39초/Ruff·독립 검토 blocker0/advisory0을 확인했다. [수정 결과](../experiments/results/meetings-summary-engine-binding-repair-v1.json)는 새 커밋 CI와 실제 취득·빌드·엔진 실행의 성공을 아직 주장하지 않는다.
