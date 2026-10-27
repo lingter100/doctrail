@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "commit": "ce94128874331ef7603f5ec6f8984f40bbda843b",
+  "status": "all_required_checks_passed",
+  "runs": [
+    {
+      "id": 40448747445,
+      "event": "push",
+      "head_sha": "ce94128874331ef7603f5ec6f8984f40bbda843b",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40448747445",
+      "jobs": [
+        {
+          "id": 122006187154,
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "id": 122006187327,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 122006187589,
+          "name": "backend",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40448750184,
+      "event": "pull_request",
+      "head_sha": "ce94128874331ef7603f5ec6f8984f40bbda843b",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40448750184",
+      "jobs": [
+        {
+          "id": 122006195475,
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "id": 122006195642,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 122006195689,
+          "name": "backend",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "watchers": [
+    {
+      "session": 49174,
+      "exit_code": 0,
+      "closed": true
+    },
+    {
+      "session": 18624,
+      "exit_code": 0,
+      "closed": true
+    }
+  ],
+  "scope": "Prospective QA and knowledge-history designs plus previous trial CI; not uncommitted implementation verification",
+  "user_author_committer": "lingter100"
+}
