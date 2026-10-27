@@ -8,7 +8,7 @@
 
 ## 현재 범위
 
-무료 로컬 후보의 [명시적 메모리 정책](experiments/results/meetings-local-resource-envelope-v1.json)은 111합성검사·독립 코드 검토·필수 CI를 통과했다. 후속 [실제 비교](docs/MEETINGS-LOCAL-RESOURCE-RESULTS.md)는 생성8건까지 실행됐지만 출력한도4·JSON형식4 거부로 유효 요약·답변0이었다. 원본을 보존하고 구조적 원인을 분석하며, 서비스에 채택하지 않는다. 후속 [생성 문법 후보](experiments/results/meetings-local-format-implementation-v1.json)는 명시적인 schema3에서만 요약·답변 형식을 제한한다. 관련147합성검사·Ruff와 독립 코드 검토를 통과했으며 실제 엔진 호환성과 의미 품질은 미검증이다.
+무료 로컬 후보의 [최신 실제 비교](docs/MEETINGS-LOCAL-FORMAT-RESULTS.md)는 JSON 생성 문법을 적용해 답변4개가 형식을 통과했다. 그러나 독립 AI 내용 평가에서는 수용0/4였고 요약4개도 출력·문자 수 한도에서 거부됐다. 인용11개가 원문과 같아도 충분한 답변을 보장하지 않았다. 원본과 이전 실패를 보존하며 서비스에는 채택하지 않는다. [후속 요약 분량 계획](docs/MEETINGS-LOCAL-SUMMARY-CONTROL-NEXT.md)은 설계만 완료됐고 답변 품질 문제는 별도로 남아 있다.
 
 **문서·회의 관리 기능은 대부분 구현됐으며, 무료 로컬 AI의 내용 품질과 운영 안정성을 검증 중이다.** 기능별 상태와 남은 순서는 [현재 진행 상황](docs/PROGRESS-OVERVIEW.md), 백업·복원의 범위와 재현 방법은 [운영 검증](docs/MEETINGS-RESTORE-VERIFICATION.md)을 참고한다. 회의1차와 전체 포트폴리오는 아직 미완료다.
 

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "status": "prospectively_fixed_before_v5_outputs",
+  "scope": "Mechanical eligibility for independently reviewing the fixed local format pilot; semantic criteria unchanged",
+  "source_contract_sha256": "63ee643f81188985d8fdb9e29be914ec34890180a964819a7f2fcee39edc77ba",
+  "semantic_invariants": "Existing adoption-lock, full-source and selected-evidence support, sufficiency, natural Korean, all thresholds, sources, questions, budgets and scope notes remain unchanged.",
+  "fixed_denominators": {
+    "summary": 4,
+    "QA": 4,
+    "sources": 4
+  },
+  "eligibility": {
+    "include": "Include EVERY unique, complete, sealed, integrity-verified parsed summary or QA artifact actually emitted by the fixed runner for a fixed source/question slot after its existing strict parser accepted an EOS-complete generation.",
+    "invariant_to": "Later model self-review, operational outcome, apparent quality, acceptance, latency, and output length are not additional selection filters. Existing parser limits remain unchanged.",
+    "QA_abstention": "Include abstention artifacts if emitted by that existing parser; eligibility does not imply semantic sufficiency.",
+    "exclude": "Raw-only, non-EOS, strict-parser-rejected, missing, partially persisted or integrity-unverified artifacts are not semantic packets. Never repair, reparse raw, truncate, merge or regenerate to manufacture eligibility.",
+    "custody": "Technical custodian must first verify sealed bytes, original parsed-artifact hash, fixed runner registration, fixed source/question/evidence linkage and completion/parser provenance. Sealing and integrity success do not imply run or cleanup success.",
+    "failed_execution": "A complete eligible parsed artifact followed by resource, cleanup or another operational failure remains included for diagnostic model-content judgment only. Run and service acceptance stay failed."
+  },
+  "mechanical_clarifications": {
+    "slot": "One fixed task kind plus source and, for QA, fixed question identity; no source or question replacement.",
+    "unique": "Byte-identical aliases count as one only when custody proves the same original artifact provenance. Distinct candidates or unresolved duplicate provenance withhold the whole affected slot; never choose the better-looking candidate.",
+    "partial": "Partial means incomplete persistence or integrity, never semantically incomplete content. Semantically weak but structurally eligible content remains included.",
+    "absence": "Missing artifact does not prove unexecuted. Use unexecuted only when provenance establishes no execution; otherwise preserve no-output or unresolved status."
+  },
+  "packet": {
+    "contents": "Opaque item IDs, task kind, original parsed output content and exact prebound source/question/evidence mappings only.",
+    "projection": "Copy the parsed content subtree without changing strings, numbers, ordering of arrays, citations or abstention fields. A mechanical projection may omit metadata; it must not edit or reconstruct content. Custodian retains the original artifact bytes/hash and the projection provenance.",
+    "withheld": "No model self-review, operational or structural disposition, slot-ledger reasons, performance, model identity or new identity mapping before individual judgment lock.",
+    "unavoidable_exposure": "Packet item count and intrinsic output content may reveal availability or abstention; complete blinding is not claimed."
+  },
+  "ledger": {
+    "owner": "Parent or technical custodian retains all eight fixed slots and complete provenance.",
+    "separate": "Keep execution/no-output, structural rejection, integrity withholding, model self-review disposition and independent semantic judgment distinct.",
+    "unjudged": "Excluded or absent slots remain not semantically judged with their mechanical reason. Never report them as semantic 0 percent or silently reduce summary4/QA4 denominators.",
+    "subset": "Report eligible count and independently judged count separately from fixed denominators; no semantic rate is assigned to an empty judged set."
+  },
+  "disclosure_order": [
+    "Parent binds this exact addendum to the prospective execution companion before dispatch.",
+    "Parent separately assigns all eligible anonymous output-only items after custody.",
+    "Judge locks individual judgments under existing criteria, without the full slot ledger, self-review, performance or identity mapping.",
+    "Only after that lock may parent separately authorize those disclosures; no eligible items means zero semantic judgments, not a semantic failure rate."
+  ],
+  "actual_outputs_read_or_judged": 0,
+  "human_reviews": 0
+}

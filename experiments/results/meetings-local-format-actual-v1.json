@@ -1,0 +1,234 @@
+{
+  "status": "completed_with_rejections",
+  "operational_complete": true,
+  "mechanically_complete": false,
+  "counts": {
+    "http": 25,
+    "qa": 4,
+    "requested_tokens": 4096,
+    "review": 0,
+    "summary": 4
+  },
+  "registration_sha256": "c0425d8743210c00b4554250698c7b34e7230c9dfc8bb268d747a822e4639479",
+  "resource_policy": "native-rss6-host2-v1",
+  "response_format": {
+    "policy": "claims-json-gbnf-v1",
+    "qa_sha256": "ed997a709d82c0b8444820ebf85026ee89e9276d41552a3621601378d566ecaf",
+    "review_sha256": "9964289ac750f5be26b5e84dd78822d76bfb3f28b8103c5f5b6858e02295f118",
+    "summary_sha256": "0656e7930a7fd05ce6126bd8138787d824a8f81de2419187d72a952dcb07cb85"
+  },
+  "source_wire_format": "source-parts-compact-v1",
+  "limits": {
+    "active_available_bytes": 2147483648,
+    "active_seconds": 900,
+    "cleanup_seconds": 5,
+    "completion_calls": 12,
+    "generation_calls": 8,
+    "input_tokens": 4096,
+    "native_rss_bytes": 6442450944,
+    "qa_seconds": 60,
+    "qa_tokens": 256,
+    "requested_tokens": 4608,
+    "review_tokens": 128,
+    "startup_available_bytes": 8589934592,
+    "startup_seconds": 120,
+    "summary_seconds": 120,
+    "summary_tokens": 768,
+    "whole_seconds": 1025
+  },
+  "sampled_max_native_rss_bytes": 2957680640,
+  "sampled_min_available_ram_bytes": 9323601920,
+  "sampled_max_device_vram_mib": 3163.0,
+  "bindings_unchanged": true,
+  "elapsed_seconds": 87.10899999999674,
+  "CLI_exit": 1,
+  "outer_wrapper_tool_exit": 0,
+  "CLI_elapsed_seconds": 88.23499999998603,
+  "once_consumed": true,
+  "official_CLI_issues": 1,
+  "retries": 0,
+  "stage_status_counts": {
+    "summary": {
+      "rejected": 4
+    },
+    "review": {
+      "not_applicable": 4
+    },
+    "qa": {
+      "valid": 4
+    }
+  },
+  "rejection_codes": {
+    "summary": {
+      "generation_output_limit": 3,
+      "generation_invalid_schema": 1
+    },
+    "review": {},
+    "qa": {}
+  },
+  "first_failure_code": "generation_output_limit",
+  "stop_reason_code": null,
+  "fresh_gate_RAM": 12849897472,
+  "startup_ram_gate": {
+    "available_bytes": 12810817536,
+    "elapsed_seconds": 3.9679999999934807,
+    "minimum_bytes": 8589934592,
+    "passed": true,
+    "stage": "before_native_popen"
+  },
+  "cleanup": {
+    "seconds": 0.375,
+    "within_budget": true,
+    "stopped": true,
+    "cleanup_errors": 0,
+    "process_absence_confirmed": true,
+    "owned_process_handle": "closed",
+    "owned_pipes_closed": true,
+    "remaining_drain_thread": false
+  },
+  "late_invalidation_present": false,
+  "terminal_report_consistent": true,
+  "CLI_matches_terminal": true,
+  "schema_version": 1,
+  "source_head": "4998d195be00a7de42ce9d2921d120825b785f83",
+  "fixed_denominators": {
+    "summary": 4,
+    "qa": 4
+  },
+  "accepted_parsed_summaries": 0,
+  "accepted_parsed_answers": 4,
+  "independent_AI_review": {
+    "fixed_denominators": {
+      "summary": 4,
+      "QA": 4
+    },
+    "packet_and_judged_counts": {
+      "all_packet_items": 4,
+      "all_packet_items_independently_judged": 4,
+      "QA": 4,
+      "summary": 0,
+      "claims": 4,
+      "answered": 4,
+      "abstained": 0
+    },
+    "QA_semantic_results": {
+      "fixed_denominator": 4,
+      "independently_judged": 4,
+      "accepted": 0,
+      "not_accepted": 4,
+      "indeterminate": 0,
+      "sufficient": 0,
+      "insufficient": 4,
+      "full_source_whole_claim_support": {
+        "supported": 1,
+        "partial": 2,
+        "unsupported": 1,
+        "uncertain": 0
+      },
+      "actually_selected_evidence_whole_claim_support": {
+        "supported": 0,
+        "partial": 3,
+        "unsupported": 1,
+        "uncertain": 0
+      },
+      "required_elements_total": 13,
+      "required_element_coverage": {
+        "covered": 1,
+        "partial": 7,
+        "missing": 4,
+        "incorrect": 1
+      },
+      "natural_korean_adequate": 3,
+      "natural_korean_not_fully_natural": 1
+    },
+    "summary_semantic_results": {
+      "fixed_denominator": 4,
+      "independently_judged": 0,
+      "not_semantically_judged": 4,
+      "accepted": null,
+      "semantic_rate": null,
+      "absence_reason": "Not supplied to this judge; no absent-slot outcome or failure reason inferred."
+    },
+    "taxonomy_item_counts_overlapping": {
+      "required_information_missing_or_incomplete": 4,
+      "selected_evidence_incomplete_for_whole_claim": 4,
+      "added_specificity_or_relation_ambiguity": 2,
+      "naturalness_or_referent_issue": 1,
+      "source_temporal_or_status_contradiction": 1
+    },
+    "taxonomy_note": "Descriptive categories summarize locked judgments; they do not introduce new acceptance criteria or thresholds.",
+    "limitations": [
+      "Independent AI evaluation of four fixed development QA items; human review zero and no general-quality or protected-final-test claim.",
+      "Existing automatically supplied historical aggregates and identity metadata were disclosed before assignment; complete blinding is not claimed.",
+      "No performance, execution status, model-selfreview agreement or service acceptance conclusion.",
+      "No semantic failure or zero percent is assigned to absent summary packet slots.",
+      "Private per-item reasons remain in locked private judgment artifacts; parent receives aggregates and hash metadata only."
+    ]
+  },
+  "summary_structure": {
+    "limit_cases": 3,
+    "limit_actual_tokens_each": 768,
+    "limit_incomplete_json": 3,
+    "EOS_cases": 1,
+    "EOS_tokens": 728,
+    "EOS_claims": 6,
+    "EOS_total_codepoints": 1235,
+    "hard_total_codepoints": 1200,
+    "EOS_individual_claim_range": [
+      170,
+      238
+    ],
+    "meaning_reviewed": false
+  },
+  "quality_acceptance": false,
+  "human_review_count": 0,
+  "service_adoption": false,
+  "scope": "One fixed development run with complete sources; not retrieval/ACL end-to-end or general model accuracy",
+  "evidence": {
+    "actual_safe_result": {
+      "file": ".local/meeting-local-candidate-execution-v5/actual-once-v1/safe-result.json",
+      "size_bytes": 2678,
+      "sha256": "99a7d4121ff539be4652a8559ebbb0b7d676d5b263cec9095418dc3856e9d743"
+    },
+    "parent_custody_acceptance": {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-v5-custody-acceptance-v1.json",
+      "size_bytes": 747,
+      "sha256": "441b247f3882d37a1d0eab33a9611690c4bc1b6f36717a357a2e80ad4e9e2687"
+    },
+    "parent_packet_acceptance": {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-v5-packet-acceptance-v1.json",
+      "size_bytes": 1330,
+      "sha256": "94b0982ef0a99c3bcc6b8daedb441816bb91a27e2c9ec67b825d3506c52d33eb"
+    },
+    "summary_structure": {
+      "file": ".local/meeting-local-candidate-v5-summary-structure-v1/safe-summary.json",
+      "size_bytes": 5978,
+      "sha256": "d44c6b843da1cb4557f0df07c238688023d539c1064b4e20303de6613408273f"
+    },
+    "parent_structure_acceptance": {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-v5-structure-acceptance-v1.json",
+      "size_bytes": 691,
+      "sha256": "615c6eab7ff42018abe6d59656da76856d53edf3688ec877a1b1f33030e984dd"
+    },
+    "independent_judge_safe_receipt": {
+      "file": ".local/meeting-local-candidate-resource-final-judge-v1/individual-v5-v1/safe-receipt.json",
+      "size_bytes": 6793,
+      "sha256": "f600231e0eb11d8348ed803232ee6fefb6a691d23da45af22a68a4d7d44a82ac"
+    },
+    "parent_judgment_acceptance": {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-v5-judgment-acceptance-v1.json",
+      "size_bytes": 7117,
+      "sha256": "7c91bbacaebf68fca17a18f307ba8f3625fe6b4e29f4ce8b0b5c5dae573440ca"
+    }
+  },
+  "limitations": [
+    "Four development QA cases independently judged by AI; no human review, protected validation or final test opened.",
+    "All11 cited spans are exact source text, but no QA item fully meets unchanged content/evidence criteria.",
+    "No semantic score assigned to four structurally rejected summaries.",
+    "Requested tokens are budget requests, not actual generated token totals.",
+    "Resource values are samples; device-wide VRAM is not exclusive model usage.",
+    "Compared with v4 on the same repeatedly exposed development inputs; no causal or generalization claim.",
+    "Original failed run and original external response-link metadata are preserved; only a new external metadata correction was added.",
+    "Summary-only prompt plan does not solve the separate QA quality failure."
+  ]
+}
