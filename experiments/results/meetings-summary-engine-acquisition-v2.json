@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "status": "FAILED_CONSUMED_NO_RETRY",
+  "source_commit": "017141a824b7b373718cb6c9eef7e044bb83c60b",
+  "kind": "actual_tool_acquisition_not_model_evaluation",
+  "actual_cli_count": 1,
+  "actual_cli_exit": 15,
+  "observer_exit": 1,
+  "failure": {
+    "first": "observer:RuntimeError:external_scan_deadline",
+    "subsequent": [
+      "binding_or_finalization:FileNotFoundError"
+    ],
+    "stage": "extract-llvm",
+    "reason_scope": "Observed outer scan deadline stop; no dominant-cause inference"
+  },
+  "timing": {
+    "start_utc_epoch": 1793088602.69417,
+    "cli_end_utc_epoch": 1793089197.7221038,
+    "official_wall_seconds": 595.0149999999558,
+    "through_observer_record_seconds": 602.2189999999828,
+    "through_external_seal_seconds": 655.655999999959,
+    "through_safe_summary_seconds": 824.280999999959,
+    "post_custody_is_not_additional_acquisition_time": true
+  },
+  "partial": {
+    "file_count": 4411,
+    "total_bytes": 451437402,
+    "extracted_llvm": {
+      "file_count": 4406,
+      "bytes": 280407643
+    }
+  },
+  "prior_v1_comparison_metadata_only": {
+    "status": "ACQUISITION_FAILED_SHARED_DEADLINE_NO_RETRY",
+    "official_exit": 1,
+    "supervisor_seconds": 595.75,
+    "wrapper_seconds": 596.890000000014,
+    "file_count": 335,
+    "total_bytes": 178285815,
+    "extracted_llvm": {
+      "file_count": 329,
+      "bytes": 7254979
+    },
+    "not_a_controlled_performance_comparison": true
+  },
+  "last_saved_phase_not_terminal_total": {
+    "phase": "extract-llvm",
+    "state": "start",
+    "elapsed_seconds": 122.09399999998277,
+    "download_body_bytes": 171028561,
+    "written_bytes": 171028981,
+    "scan_count": 4,
+    "scan_entries": 26,
+    "scan_seconds": 0.8899999999557622
+  },
+  "observed_owned_absent": true,
+  "originals_and_fixed_source_preserved": true,
+  "downloaded_program_execution": 0,
+  "model_execution": 0,
+  "build": 0,
+  "human_review": 0,
+  "limitations": [
+    "No controlled speed comparison or dominant-cause determination.",
+    "Failure root is not accepted for execution or recovery.",
+    "Post-termination custody time is separate from acquisition budget."
+  ]
+}

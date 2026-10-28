@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "MEASURED_ONCE_NOT_CAUSAL_RECONSTRUCTION",
+  "kind": "sequential_self_process_control_cost_microprofile",
+  "invocations": 1,
+  "calls_per_segment": 256,
+  "segments": [
+    {
+      "name": "worker_resource_log_check",
+      "attempted": 256,
+      "completed": 256,
+      "status": "completed",
+      "timeout": false,
+      "elapsed_seconds": 3.3280000000377186,
+      "deadline_offset_seconds": 5.171999999962281
+    },
+    {
+      "name": "safe_path_plus_stat",
+      "attempted": 256,
+      "completed": 256,
+      "status": "completed",
+      "timeout": false,
+      "elapsed_seconds": 0.18799999996554106,
+      "deadline_offset_seconds": 8.5
+    },
+    {
+      "name": "self_owned_tree_sample",
+      "attempted": 256,
+      "completed": 256,
+      "status": "completed",
+      "timeout": false,
+      "elapsed_seconds": 3.4839999999967404,
+      "deadline_offset_seconds": 8.687999999965541
+    },
+    {
+      "name": "external_lstat_is_file",
+      "attempted": 256,
+      "completed": 256,
+      "status": "completed",
+      "timeout": false,
+      "elapsed_seconds": 0.01600000000325963,
+      "deadline_offset_seconds": 12.171999999962281
+    }
+  ],
+  "elapsed_seconds": 7.202999999979511,
+  "external_wall_seconds": 7.5902457,
+  "no_payload_or_zip_entry_body_read": true,
+  "no_subprocess_download_extract_native_model_java_git": true,
+  "original_metadata_unchanged": true,
+  "limits": {
+    "total_seconds": 30,
+    "cleanup_reserved_seconds": 5,
+    "segment_seconds": 5,
+    "output_bytes": 65536
+  },
+  "limitations": [
+    "Single current sequential measurement, no repeated sampling or extrapolation.",
+    "Single blocking OS call has no hard timeout.",
+    "Not a causal allocation of earlier acquisition failures, nor a speedup or success probability.",
+    "Budget.__init__ startup gate/full scan excluded; exact Budget.check and log_growth measured with bound existing metadata.",
+    "OwnedTree.sample observed only self; no cleanup kill or new child process."
+  ]
+}

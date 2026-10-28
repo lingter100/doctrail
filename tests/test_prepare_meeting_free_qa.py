@@ -567,3 +567,80 @@ def test_finalization_deadline_and_io_failure_append_invalidation(tmp_path, monk
             a.supervise(root, 'verify-only', ps=ps, popen=launch, clock=clock, sleeper=clock.sleep)
         assert (folder / 'supervisor.json').read_bytes() == preserved
     assert state['launches'] == 1 and process.closed
+
+
+@pytest.mark.parametrize('status', [301, 302, 303, 307, 308])
+@pytest.mark.parametrize('port', ['', ':443'])
+def test_exact_aws_cdn_redirect_download_keeps_digest_and_unread_body(tmp_path, status, port):
+    root = base_root(tmp_path)
+    spec, bodies = synthetic_spec()
+    budget = a.Budget(root, spec, 1800, lambda: 0)
+    url = f'https://us.aws.cdn.hf.co{port}/public-synthetic-shard'
+    discarded = RedirectBody(status, url)
+    requests, responses = [], [discarded, Response(bodies[0], url=url)]
+    opener = a.urllib.request.build_opener(a.urllib.request.ProxyHandler({}),
+        a.Redirects(budget), dispatch_opener(responses, requests))
+    shard = spec['gguf']['shards'][0]
+    result = a.download_one(root, shard, budget, opener, fake_publish)
+    assert result == {key: shard[key] for key in ('filename', 'size_bytes', 'sha256', 'url')}
+    assert (root / 'assets' / shard['filename']).read_bytes() == bodies[0]
+    assert budget.transferred == len(bodies[0]) and budget.deadline == 1800
+    assert requests == [(shard['url'], 10), (url, 10)]
+    assert discarded.closed and not discarded.read_calls and not responses
+
+
+@pytest.mark.parametrize('url', [
+    'http://us.aws.cdn.hf.co/x',
+    'https://user@us.aws.cdn.hf.co/x',
+    'https://user:password@us.aws.cdn.hf.co/x',
+    'https://us.aws.cdn.hf.co:444/x',
+    'https://us.aws.cdn.hf.co/x#fragment',
+    'https://us.aws.cdn.hf.co.evil.example/x',
+    'https://evil.us.aws.cdn.hf.co/x',
+    'https://us-aws.cdn.hf.co/x',
+    'https://us.aws.cdn.hf.co@evil.example/x',
+    'https://us.aws.cdn.hf.co./x',
+])
+def test_aws_cdn_origin_near_matches_rejected_before_transport(tmp_path, url):
+    root = base_root(tmp_path)
+    spec, _ = synthetic_spec()
+    budget = a.Budget(root, spec, 1800, lambda: 0)
+    discarded = RedirectBody(302, url)
+    requests, responses = [], [discarded]
+    opener = a.urllib.request.build_opener(a.urllib.request.ProxyHandler({}),
+        a.Redirects(budget), dispatch_opener(responses, requests))
+    with pytest.raises(a.BoundaryError, match='download_origin'):
+        a.download_one(root, spec['gguf']['shards'][0], budget, opener, fake_publish)
+    assert len(requests) == 1 and budget.transferred == 0
+    assert discarded.closed and not discarded.read_calls
+    assert not (root / 'assets' / spec['gguf']['shards'][0]['filename']).exists()
+
+
+@pytest.mark.parametrize('fault', ['deadline', 'transfer', 'disk', 'loop', 'hops'])
+def test_aws_cdn_redirect_keeps_shared_limits_and_cycle_rejection(tmp_path, monkeypatch, fault):
+    root = base_root(tmp_path)
+    spec, _ = synthetic_spec()
+    clock = Clock()
+    budget = a.Budget(root, spec, 1800, clock)
+    start = spec['gguf']['shards'][0]['url']
+    cdn = 'https://us.aws.cdn.hf.co/public-synthetic-shard'
+    def close_event():
+        if fault == 'deadline': clock.now = 1795
+        elif fault == 'transfer': budget.transferred = a.TRANSFER + 1
+        elif fault == 'disk': monkeypatch.setattr(a, 'DISK', 1)
+    redirects = [RedirectBody(302, cdn, close_event)]
+    if fault == 'loop': redirects.append(RedirectBody(302, start))
+    if fault == 'hops':
+        redirects = [RedirectBody(302, f'{cdn}/{i}') for i in range(11)]
+    requests, responses = [], list(redirects)
+    opener = a.urllib.request.build_opener(a.urllib.request.ProxyHandler({}),
+        a.Redirects(budget), dispatch_opener(responses, requests))
+    reason = {'deadline': 'shared_deadline', 'transfer': 'transfer_budget',
+              'disk': 'disk_budget', 'loop': 'redirect_limit', 'hops': 'redirect_limit'}[fault]
+    with pytest.raises(a.BoundaryError, match=reason):
+        a.download_one(root, spec['gguf']['shards'][0], budget, opener, fake_publish)
+    assert len(requests) == {'loop': 2, 'hops': 11}.get(fault, 1)
+    assert all(row.closed and not row.read_calls for row in redirects)
+    assert budget.deadline == 1800
+    assert budget.transferred == (a.TRANSFER + 1 if fault == 'transfer' else 0)
+    assert not (root / 'assets' / spec['gguf']['shards'][0]['filename']).exists()

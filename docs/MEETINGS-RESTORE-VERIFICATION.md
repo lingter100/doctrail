@@ -45,3 +45,5 @@ Python은 위 명령처럼 -X utf8로 실행한다. 보조 도구는 자식 JVM�
 기본 호출의 옵션은 false이고 기존 companion은 인자 없이 호출한다. 공개 분기와 관련 import/false-default 옵션만 제외하면 이전 정규화 소스와 일치함을 확인했다. guard를 없애지 않고 fixture SHA 한 문자열만 현재 게시 바이트에 맞췄다. 기존56합성검사5.23초/Ruff를 통과했고 테스트 본문은 변경하지 않았다.
 
 이미 검증한 별도 복사본 JAR와 명시Java21에서 새 합성DB로 실제 companion1회를 실행해14.781초에12항목을 통과했다. setup/restart/restored Java3회와 소유 프로세스 종료·부재를 확인했고 fixture는 분석2회/답변0회였다. 원래 JAR·개인 DB·이전 CI 실패는 보존했다. [수정 결과](../experiments/results/meetings-operations-fixture-binding-repair-v1.json)는 정확 게시 소스 CI·실제 AI 품질·사용자 검수와 별개다.
+
+핀 수정 후017141a의 양쪽 필수 CI가 모두 통과했고, push의 실제 운영 검사도 passed였다. 이어 전체 브라우저158개가 통과했다. [CI 기록](../experiments/results/meetings-manual-engine-repair-ci-v1.json)에 원래 실패와 구분해 남긴다.

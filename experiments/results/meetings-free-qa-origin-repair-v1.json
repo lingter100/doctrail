@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "status": "SOURCE_REVIEW_ACCEPTED_ACTUAL_REACQUISITION_PENDING",
+  "change": "Allow only the exact additional official CDN host us.aws.cdn.hf.co; other transport and acquisition checks unchanged.",
+  "source_files": [
+    {
+      "path": "tools/free_qa/assets.py",
+      "size_bytes": 27483,
+      "sha256": "ea7878f46f8e93b3ba88d8e683c29b51c8390f33767cb8b45df981729060c6a5"
+    },
+    {
+      "path": "tests/test_prepare_meeting_free_qa.py",
+      "size_bytes": 35466,
+      "sha256": "e4f7591c0d457eab50aa06b2059ce93a8af691beb1b05f82d352f5132f57a3a9"
+    }
+  ],
+  "verification": {
+    "synthetic_cases_passed": 129,
+    "existing_cases": 104,
+    "new_cases": 25,
+    "seconds": 7.1,
+    "ruff": "passed",
+    "independent_review_blockers": 0,
+    "independent_review_advisories": 0,
+    "parent_review_input_refs_verified": 17
+  },
+  "provenance": [
+    {
+      "path": ".local/meeting-free-qa-origin-repair-v1/final-receipt.json",
+      "size_bytes": 5626,
+      "sha256": "86d869007976154635ef95bf104d0c8702975769bb5f11310e5b69a1e3053f53"
+    },
+    {
+      "path": ".local/meeting-free-qa-origin-review-v1/receipt.json",
+      "size_bytes": 5829,
+      "sha256": "6b5084c14cada42cb6285bc05433de422df94544e252ffd9e2464f95a4d3bc98"
+    },
+    {
+      "path": ".local/meeting-free-qa-origin-diagnosis-v1/head-origin.json",
+      "size_bytes": 834,
+      "sha256": "5718fab69e49152cb2aa18a41778ff00ff40215f8a6f3205696cb6c5c34e0227"
+    }
+  ],
+  "previous_failure": {
+    "result": "experiments/results/meetings-free-qa-acquisition-v1.json",
+    "first_error": "download_origin",
+    "transferred_bytes": 0,
+    "consumed": true,
+    "preserved": true
+  },
+  "limits": [
+    "Current HEAD observation does not reconstruct the historical GET redirect.",
+    "Tests use synthetic HTTPS transport, not real shard download.",
+    "New exact source CI, separate fresh-root acquisition, metadata review and model comparison remain."
+  ],
+  "actual_reacquisition": 0,
+  "actual_model_calls": 0,
+  "human_review": 0,
+  "service_adoption": false
+}

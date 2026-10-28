@@ -27,7 +27,7 @@ SECONDS = 1800
 METADATA = 32 * 1024**2
 CHUNK = 1024 * 1024
 HOSTS = {"huggingface.co", "cas-bridge.xethub.hf.co", "cdn-lfs.huggingface.co",
-         "cdn-lfs.hf.co", "cdn-lfs-us-1.hf.co", "cdn-lfs-eu-1.hf.co"}
+         "cdn-lfs.hf.co", "cdn-lfs-us-1.hf.co", "cdn-lfs-eu-1.hf.co", "us.aws.cdn.hf.co"}
 CONTROL = {"profile.json", "attempt.json", "supervisor.stdout", "supervisor.stderr", "supervisor.json",
            "acquisition.json", "failure.json", "download-1.json", "download-2.json", "shard-1.json", "shard-2.json",
            "verify/attempt.json", "verify/supervisor.stdout", "verify/supervisor.stderr",

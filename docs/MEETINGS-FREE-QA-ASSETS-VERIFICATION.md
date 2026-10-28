@@ -1,6 +1,6 @@
 # 무료 QA 모델 자산 준비 구현과 검증
 
-2026-10-27. 다른 무료 로컬 모델을 같은 조건으로 비교하기 위한 파일 준비 도구를 구현했다. **현재는 코드·합성 검사·운영 문서 검토까지 완료했고, 새 모델 가중치 다운로드와 실제 모델 검증은 아직0이다.**
+2026-10-28 갱신. 고정된 무료 모델 파일을 준비하는 도구를 구현했다. 첫 실제 취득은 `download_origin`·전송0B로 실패했고 원본을 보존했다. 정확한 CDN 호스트 추가는129합성검사와 독립 코드 검토를 통과했으며, 수정 소스 CI와 새 취득·실제 모델 검증은 남아 있다.
 
 ## 해결하려는 문제와 선택
 
@@ -18,6 +18,14 @@
 - 실제 CLI `inspect`는 종료0, `PROFILE_ONLY_ASSETS_NOT_READ`를 반환했다. 프로필/진입점 확인이며 가중치·GGUF·모델을 실행하거나 검증한 결과가 아니다.
 
 [기계 판독 결과](../experiments/results/meetings-free-qa-assets-preparation-v1.json)에 최종 소스 해시·원래 helper·검토·실제/합성 구분을 기록했다. README 운영 조건 추가는 코드 검사와 구분한 문서 검토다. 별도 수정 중인 공통 엔진 runtime는 자신의 검토와 최종 결합 소스 CI가 필요하다.
+
+## 첫 실제 취득과 수정 범위
+
+[첫 취득 결과](../experiments/results/meetings-free-qa-acquisition-v1.json)는 CLI1·전송0B의 소비된 실패다. 거부된 URL이 기록되지 않아 당시 GET의 정확한 redirect를 복원할 수 없다. 이후 별도 HEAD1회에서 현재 공식 URL의302 응답이 `us.aws.cdn.hf.co`로 안내함을 확인했고, 정확한 호스트 한 개만 추가했다. 본문 다운로드나 redirect 추적은 수행하지 않았다.
+
+[수정 결과](../experiments/results/meetings-free-qa-origin-repair-v1.json)는 기존104+추가25검사129통과·Ruff·독립 검토 blocker0을 기록한다. 기존 테스트21함수의 원본 전체 prefix와 그 외 생산 코드가 그대로다. 와일드카드나 임의 하위 도메인을 허용하지 않으며, 성공하는 실제 다운로드를 입증한 검사는 아니다.
+
+실패 폴더 `models/meetings-qwen25-7b-q4km-v1`은 재사용하지 않는다. 다음 취득은 수정 소스의 CI와 새 폴더·새 실행 기록을 고정한 뒤 수행한다. 실패 파일을 offline verify로 성공 상태로 바꾸지 않는다.
 
 ## 실행과 다음 단계
 

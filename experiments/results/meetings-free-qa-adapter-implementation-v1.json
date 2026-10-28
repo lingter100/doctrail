@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "status": "SOURCE_ACCEPTED_PENDING_EXACT_CI_ASSETS_AND_REAL_COMPARISON",
+  "source_files": [
+    {
+      "path": "tools/free_qa/policy.py",
+      "size_bytes": 14259,
+      "sha256": "4a86c0b66cb74dc9642858944b30063d38a984e648b6eba2d5a43b683652cb04"
+    },
+    {
+      "path": "tools/free_qa/adapter.py",
+      "size_bytes": 6981,
+      "sha256": "c097ce83ce2c8542535401462118d3eecfa6f6507460b28b8a0dfefa1a937977"
+    },
+    {
+      "path": "tools/free_qa/runner.py",
+      "size_bytes": 33848,
+      "sha256": "8fed54452328a46403b4f4e1f1bf9a1b2bd7e654d8a5bf838a9ff62da2ffdbc1"
+    },
+    {
+      "path": "scripts/probe_meeting_free_qa.py",
+      "size_bytes": 1766,
+      "sha256": "ee27728d32ba84cec2f583bffa367a962e67ad366d365ab5ec2028b350be77d3"
+    },
+    {
+      "path": "tests/test_meeting_free_qa.py",
+      "size_bytes": 60677,
+      "sha256": "bf3d9b6eac71fa4e81bf14de569c63067c195f464bcc1b75d0550fcb64b9ca21"
+    }
+  ],
+  "contract": {
+    "same_cases": 6,
+    "answerable": 4,
+    "abstention": 2,
+    "epochs": [
+      "neutral",
+      "baseline",
+      "candidate"
+    ],
+    "maximum_completions": 13,
+    "maximum_requested_output_tokens": 3328,
+    "per_request_seconds": 60,
+    "per_request_input_tokens": 4096,
+    "per_request_output_tokens": 256
+  },
+  "validation": {
+    "repair_suite": {
+      "passed": 167,
+      "failed": 0,
+      "seconds": 22.84
+    },
+    "separate_legacy_candidate_gguf_regression": {
+      "passed": 284,
+      "failed": 0,
+      "seconds": 12.81
+    },
+    "ruff": "passed",
+    "independent_delta": {
+      "blockers": 0,
+      "advisories": 0,
+      "parent_verified_refs": 341
+    }
+  },
+  "repair": "Remove per-case answerability/kind/language labels from execution contract; separately bind source-only aggregate prereview to fixed trusted lock. Private criteria are hash-only for executor.",
+  "provenance": [
+    {
+      "path": ".local/meeting-free-qa-adapter-implementation-v1/receipt.json",
+      "size_bytes": 32749,
+      "sha256": "8cd73a0c039392d5dd47bc182e5562bf8ce1ea7ca3f90858f63f7ae2c9549abb"
+    },
+    {
+      "path": ".local/meeting-free-qa-adapter-review-v1/receipt.json",
+      "size_bytes": 12632,
+      "sha256": "820afabfe99636fb4358799687176bddba4737b5d169d6796ff0c0434eb4e173"
+    },
+    {
+      "path": ".local/meeting-free-qa-adapter-repair-v1/receipt.json",
+      "size_bytes": 40197,
+      "sha256": "df3fcec09c172032f2350dfca46c9a4c1bc2ba76fedddf805abaacfef8ef5e9c"
+    },
+    {
+      "path": ".local/meeting-free-qa-adapter-review-v2/receipt.json",
+      "size_bytes": 78738,
+      "sha256": "552127fad7babde7b976e01d4d048028541e9117bbcc518a193cb93c3f5319c1"
+    },
+    {
+      "path": ".local/meeting-free-qa-publication-v1/receipt.json",
+      "size_bytes": 534,
+      "sha256": "a36add4275702be2b1c48fdc4be08a78b4614b8c1b6af985569a9bc836c4599d"
+    }
+  ],
+  "publication_normalization": {
+    "file": "tools/free_qa/adapter.py",
+    "crlf_to_lf": 1,
+    "original_archived": true,
+    "ast_equal": true,
+    "test_rerun": false
+  },
+  "original_failures_preserved": true,
+  "actual_new_model_runs": 0,
+  "actual_new_comparison_cases_authored": 0,
+  "human_review": 0,
+  "service_adoption": false,
+  "limitations": [
+    "Synthetic runtime and saved regressions are not actual model quality.",
+    "Asset acquisition, embedded metadata review, trusted bindings and fresh data registration remain.",
+    "Fixed six-case comparison is an entry check, not held-out quality or service adoption."
+  ]
+}

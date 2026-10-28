@@ -1,4 +1,46 @@
 # 진행 상태
+## 2026-10-28 · 무료 QA 비교 코드의 독립 검토 완료
+
+직접 재개 승인에 따라 현재 저장소·goal·실행 상태를 다시 확인했다. 이전 두 취득은 종료된 실패이며 재실행하지 않았다. 새 B1 수정167합성/별도284회귀/Ruff와 원래 실패 보존을 확인했고, Astra xhigh 독립 수정검토는 blocker0/advisory0이다. 부모는 검토341참조와 별도 원본 보존298참조·56고정입력·3파일 AST를 대조했다. adapter의 CRLF1개만LF로 게시 정리하고 원본·AST동일성을 남겼다.
+
+[비교 구현 검증](MEETINGS-FREE-QA-ADAPTER-VERIFICATION.md)과 [origin 수정 결과](../experiments/results/meetings-free-qa-origin-repair-v1.json)를 준비했다. origin 독립검토도 blocker0/advisory0이며129합성검사만으로 실제 다운로드 성공을 주장하지 않는다. 검토된 QA5+origin2·기존 실패/측정 결과를 사용자 명의로 게시하고 정확CI를 확인한다. 새QA취득v2는 준비만, 엔진v3는 최소 구현계약 검토만 진행하며 실제모델/새질문/사용자검수0이다. 전체 goal ACTIVE.
+
+## 2026-10-27 · 실제 준비 실패 보존과 좁은 코드 수정
+
+두 실제 취득은 종료됐고 재시도하지 않았다. 엔진v2는 LLVM4,406파일 추출 중595.015초 외부 시간 경계에서 종료15/wrapper1로 실패했다. QA 가중치v1은 download_origin으로 전송0B·CLI1/wrapper1에 종료됐다. 부모는 각각5,179/5,180참조와 종료·보존 근거를 대조해 소스 HOLD를 해제했다. [엔진 결과](../experiments/results/meetings-summary-engine-acquisition-v2.json)와 [QA 결과](../experiments/results/meetings-free-qa-acquisition-v1.json)는 성공·실패 원인 추정·모델 품질을 구분한다.
+
+별도 HEAD1회는 현재 공식 모델 URL이 us.aws.cdn.hf.co로 안내하는 것을 확인했다. 본문0/추가호스트follow0이며 과거 GET 응답의 복원은 아니다. 기존 assets 허용목록에 정확호스트1개를 추가했고 원래104+새25합성검사129통과/Ruff를 확인했다. 원본 테스트 prefix·나머지생산AST불변13참조를 부모가 확인했으며 독립 검토 중이다. 실제 재취득은 새 정확CI 이후 별도배정한다.
+
+엔진 제어비용은 사전 고정한30초 예산 내 한 번만 측정했다. 4구간 각각256회 완료: worker3.328초, 경로/stat0.188초, 자기프로세스검사3.484초, 외부stat0.016초. 총7.203초/외부7.590초이며 과거 실패의 원인 비율이나 전체 취득시간으로 확장하지 않는다. 부모16참조를 확인했고 기존 Astra xhigh가 측정과 x64 의존성에 근거한 최소 다음 구현계약을 작성한다.
+
+새 QA5 구현은130합성검사와 추가gate검사/기존388회귀를 마쳤지만 독립 검토에서 실행자에게 사례별 answerability를 노출하는 B1을 발견했다. 부모42참조 확인 뒤 같은 Astra high에게 policy/runner/test3만 수정하도록 배정했다. 실제 질문·기준·모델을 아직 만들거나 실행하지 않았으며 원래 구현·실패와 역할경계를 유지한다. 전체 목표ACTIVE다.
+
+## 2026-10-27 · 수정 후 도구 취득 실제 시작
+
+기존 Astra high가 검토observer aa14ff19와 binding43706f2b를 확인하고 engine acquisition-v2 공식CLI1회를 시작했다. session40712, wrapper3152/CLI22308이며 실행은 소비됐다. 동일 세션의 종료·원본보존·외부seal을 기다린다. HEAD017/source15/pins와 기존 동결 자료는 종료/사후대조까지 고정한다. 이 시작을 취득 성공이나 빌드·모델 실행으로 세지 않는다.
+
+QA 구현의 새 정상심사는 사용자의 직접 재개 답변을 근거로 허용됐고 테스트 기대 수정이 실행됐다. 앞선 거절과 실패는 보존한다. 같은 새5파일의 순수검사만 진행하며 실제취득 자원작업과 모델·Java·브라우저·다른취득을 겹치지 않는다.
+
+## 2026-10-27 · 재개 직접 확인과 실제 취득 배정 준비
+
+사용자가 자동 승인 차단 설명 뒤 “무료·로컬 개발과 테스트를 계속 진행해”라고 직접 확인했다. 앞선 거절·미실행은 그대로이며 유료·공개배포 제한은 유지한다. QA 비교 새5파일은 첫59통과, 확장92통과/8실패, 첫Ruff18건의 원본을 보존하고 같은 구현자가 수정·순수검사를 재개한다. 실제새모델/평가질문/사용자 의미검수는0이다.
+
+관찰기 독립 수정검토 a38990e4는 E1/E2/Q1 모두 해소, blocker0/advisory0이다. 부모가 검토/수정/원본55참조와 source15의 현재Git바이트·017의 양쪽CI를 확인했다. 새 exact binding은 취득1회 배정용이며 실제성공이 아니다. 기존 v1 실패와 부분파일을 유지하고 새 work-v2/acquisition-v2만 사용한다. 실제취득 전이며 source15/HEAD/pins 고정, 빌드·새모델실행·동시QA가중치취득은 금지한다. 전체 목표ACTIVE다.
+
+## 2026-10-27 · 보정 기능 전체 CI 통과, 실제 취득 전 관찰기 보완
+
+017141a의 push40467577636·PR40467584323에서 backend/web/java-service가 모두 통과했다. 기존 watch67323/30840은 exit0으로 종료됐다. push job122066603513의 실제 운영 passed와 전체 브라우저158통과·실패0·인프라오류0·누락0을 확인했다. [정확 CI 결과](../experiments/results/meetings-manual-engine-repair-ci-v1.json)를 보존하고 다음 실질적 변경과 함께 게시한다. b16 원래 실패는 그대로이며 CI를 불필요하게 재실행하지 않는다.
+
+취득 관찰기 독립 검토b3e6d227는3개 blocker를 반환했다. 엔진CLI가 먼저 끝날 때 관측 자식 정리 누락, 외부 로그/metadata/OUT 용량 경계 누락, QA assignment 필수source 목록 검증 누락이다. 부모가 입력과 검토문서를 확인하고 기존 Astra high backend에게 원래prep를 보존한 NEW두 prep-repair 폴더의 좁은 수정·순수 모형 검사만 배정했다. 실제 Popen/download/liveRAM/model은0이며 수정검토 전 취득은 시작하지 않는다.
+
+기존 Astra high frontend의 새QA5파일 구현은 별도로 진행한다. 계획·원자료·한도·서비스 기본값은 유지하며 실제새가중치/모델/평가질문0이다. 전체목표ACTIVE다.
+
+## 2026-10-27 · CI 핀 수정과 QA 비교 계획 게시
+
+사용자 명의 f512e3e/017141a를 게시했다. 원격 author/committer, 현재/Git11파일 바이트, PR14 draft head/본문을 확인했다. push40467577636·PR40467584323은 같은 watch67323/30840으로 관찰 중이다. b16의 원래 실패와 종료된 watch는 그대로 보존한다.
+
+기존 Astra high 프론트 담당자는 수용한 새QA policy/adapter/runner/CLI/test5파일만 구현한다. 기존 source2·공통코드·assets/profile·기존검사·Git은 유지하고 합성 검사만 허용했다. 별도 기존 Astra xhigh는 실제 취득 전 engine/QA 관찰기 초안을 읽기 전용 검토한다. backend의 핀 수정 및 실제 운영 검증은 반환됐다. 새 취득/모델/자료0, 전체 목표ACTIVE다.
+
 ## 2026-10-27 · fixture 핀 수정의 실제 운영 검증과 QA 구현 계획 수용
 
 같은 Astra high가 기본 합성 fixture 경로의 호환성을 확인한 뒤 companion의SHA 한 문자열만33ca1bd→fe2de364로 갱신했다. 부모는 원본과 현재가 이치환1개뿐이고 FIXED3개가 실제파일과일치함을확인했다. 기존56합성검사5.23초/Ruff·테스트본문불변, 정확복사JAR762da434/명시Java21의새합성DB운영1회14.781초/12항목통과를검증했다. setup/restart/restored Java3회와관측소유12신원은종료/부재다. 부모34참조를대조했고 원래CI실패·개인DB·원래JAR는보존한다. 새소스CI는아직이다.
