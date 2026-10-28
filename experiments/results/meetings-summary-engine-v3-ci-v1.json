@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "EXACT_HEAD_REQUIRED_CI_PASSED",
+  "head_commit": "9359a8998bce2a438f4f56c6897ff71fb952a69a",
+  "runs": [
+    {
+      "id": 40649357996,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40649357996",
+      "required_jobs": [
+        "backend",
+        "web",
+        "java-service"
+      ],
+      "conclusion": "success"
+    },
+    {
+      "id": 40649363314,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40649363314",
+      "required_jobs": [
+        "backend",
+        "web",
+        "java-service"
+      ],
+      "conclusion": "success"
+    }
+  ],
+  "watchers": {
+    "sessions": [
+      95539,
+      70727
+    ],
+    "exit_codes": [
+      0,
+      0
+    ],
+    "closed": true,
+    "initial_local_network_error_preserved": true,
+    "workflow_reruns": 0
+  },
+  "push_observed": {
+    "python": {
+      "passed": 5240,
+      "skipped": 21,
+      "warnings": 2,
+      "seconds": 169.89
+    },
+    "browser": {
+      "passed": 158,
+      "failed": 0,
+      "infrastructure_failures": 0,
+      "missing_reports": 0,
+      "missing_runs": 0
+    },
+    "java_operations": {
+      "status": "passed",
+      "AI_quality": false
+    }
+  },
+  "scope": "Published source CI: synthetic/model-free regressions, saved-result replay, actual Java and partly synthetic browser responses; not new native engine or model quality validation.",
+  "created_at_utc": "2026-10-28T07:28:45.412468+00:00",
+  "new_native_or_model_calls": 0,
+  "human_review_count": 0
+}
