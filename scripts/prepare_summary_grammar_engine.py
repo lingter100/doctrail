@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import re
 import secrets
@@ -14,6 +15,7 @@ import urllib.error
 import urllib.request
 import zipfile
 from contextlib import contextmanager
+from functools import wraps
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
@@ -30,21 +32,49 @@ from tools.summary_grammar.runtime import (
     disk_bytes,
     inventory,
     load,
+    parse_json,
     pins,
     reference,
     require,
-    reviewed,
     run_owned,
     safe_path,
     write,
     write_bounded,
 )
 
+ACQUISITION_PROFILE = "llvm-x64-sampled-50ms-v1"
+LLVM_PREFIX = "llvm-mingw-20250709-ucrt-x86_64/"
+LLVM_SHA = "82babcd6aae4dc3606e8e0471d816989c384b4bf86a139f184a8b4a1b2c2758d"
+
+
+def validate_acquisition_profile(value):
+    require(value in (None, ACQUISITION_PROFILE), "acquisition_profile")
+    return value
+
+
+def budget_guard(method):
+    @wraps(method)
+    def guarded(self, *args, **kwargs):
+        if self.profile and self.failure is not None:
+            raise self.failure
+        try:
+            return method(self, *args, **kwargs)
+        except Exception as error:
+            if self.profile:
+                self.failure = self.failure or error
+                raise self.failure
+            raise
+    return guarded
+
 
 class Budget:
-    def __init__(self, root, ps=None, clock=time.monotonic):
+    def __init__(self, root, ps=None, clock=time.monotonic, acquisition_profile=None):
         if ps is None:
             import psutil as ps
+        self.profile = validate_acquisition_profile(acquisition_profile)
+        self.failure, self.last_sample_start = None, None
+        self.samples, self.sample_attempts, self.max_sample_gap, self.forced_samples = 0, 0, 0.0, {}
+        self.terminal_observation = "not_attempted"
         self.root, self.ps, self.clock = root, ps, clock
         self.end, self.downloaded = clock() + 600, 0
         self.written = self.scan_count = self.scan_entries = 0
@@ -53,9 +83,32 @@ class Budget:
         self.total = 0
         self.logs = {"acquisition-supervision.stdout", "acquisition-supervision.stderr"}
         require(ps.virtual_memory().available >= 4 * 1024**3, "preparation_startup_ram")
+        if self.profile:
+            require(self.clock() < self.end, "preparation_budget")
+            self.check(force="start")
         self.scan(initial=True)
 
-    def check(self, incoming=0):
+    @budget_guard
+    def check(self, incoming=0, force=None):
+        if self.profile:
+            self.downloaded += incoming
+            require(self.downloaded <= DOWNLOAD and self.clock() < self.end, "preparation_budget")
+            self.log_growth()
+            require(self.clock() < self.end, "preparation_budget")
+            started = self.clock()
+            if force or self.last_sample_start is None or started - self.last_sample_start >= 0.050:
+                self.sample_attempts += 1
+                if self.last_sample_start is not None:
+                    self.max_sample_gap = max(self.max_sample_gap, started - self.last_sample_start)
+                process = self.ps.Process()
+                rss = process.memory_info().rss + sum(p.memory_info().rss for p in process.children(recursive=True))
+                require(rss <= 2 * 1024**3 and self.ps.virtual_memory().available >= 2 * 1024**3, "preparation_resources")
+                require(self.clock() < self.end, "preparation_budget")
+                self.last_sample_start = started
+                self.samples += 1
+                if force:
+                    self.forced_samples[force] = self.forced_samples.get(force, 0) + 1
+            return self.total
         self.downloaded += incoming
         require(self.downloaded <= DOWNLOAD and self.clock() < self.end, "preparation_budget")
         process = self.ps.Process()
@@ -64,6 +117,7 @@ class Budget:
         self.log_growth()
         return self.total
 
+    @budget_guard
     def log_growth(self):
         for name in self.logs:
             path = safe_path(self.root, name)
@@ -78,6 +132,7 @@ class Budget:
             self.files[name] = size
         require(self.total <= DISK, "disk_budget")
 
+    @budget_guard
     def scan(self, initial=False):
         started = self.clock()
         observed = {}
@@ -107,8 +162,9 @@ class Budget:
         finally:
             self.scan_seconds += self.clock() - started
 
+    @budget_guard
     def write_chunk(self, out, data, terminal=False):
-        if terminal:
+        if terminal and not self.profile:
             self.log_growth()
         else:
             self.check()
@@ -117,18 +173,24 @@ class Budget:
         safe_path(self.root, name)
         require(path.stat().st_size == self.files.get(name, 0), "disk_ledger_mismatch")
         require(self.total + len(data) <= DISK, "disk_budget")
+        if self.profile:
+            require(self.clock() < self.end, "preparation_budget")
         # Reserve before writing. A partial write fails without refund or reuse.
         self.total += len(data)
         self.written += len(data)
         self.files[name] = self.files.get(name, 0) + len(data)
         require(out.write(data) == len(data), "short_write")
         out.flush()
+        if self.profile:
+            self.check()
 
+    @budget_guard
     def write_json(self, path, value, terminal=False):
         data = (json.dumps(value, ensure_ascii=True, indent=2, allow_nan=False) + "\n").encode()
         with path.open("xb") as stream:
             self.write_chunk(stream, data, terminal=terminal)
 
+    @budget_guard
     def event(self, phase, state, terminal=False):
         require(phase in {"download-llvm", "extract-llvm", "inventory-llvm", "download-cmake", "extract-cmake", "inventory-cmake",
                           "download-ninja", "extract-ninja", "inventory-ninja", "source-metadata", "sources", "licenses", "manifest"}, "phase_name")
@@ -136,24 +198,47 @@ class Budget:
         data = (json.dumps({"phase": phase, "state": state, "elapsed_seconds": self.clock() - (self.end - 600),
                            "download_body_bytes": self.downloaded, "written_bytes": self.written,
                            "scan_count": self.scan_count, "scan_entries": self.scan_entries,
-                           "scan_seconds": self.scan_seconds}, allow_nan=False) + "\n").encode()
+                           "scan_seconds": self.scan_seconds,
+                           **({"resource_sampling": self.sampling("phase:" + phase + ":" + state)} if self.profile else {})}, allow_nan=False) + "\n").encode()
         require(self.files.get(path.name, 0) + len(data) <= 32768, "phase_metadata_budget")
         with path.open("ab") as stream:
             self.write_chunk(stream, data, terminal=terminal)
 
+    def sampling(self, point):
+        return {"profile": self.profile, "interval_seconds": 0.050, "observation_point": point,
+                "sample_count": self.samples, "sample_count_basis": "successful_resource_calls",
+                "attempted_sample_count": self.sample_attempts, "forced_reasons": dict(self.forced_samples),
+                "maximum_observed_start_gap_seconds": self.max_sample_gap,
+                "terminal_observation": self.terminal_observation,
+                "failure_latched": self.failure is not None,
+                "scope": "checkpoint_schedule_not_hard_timer_or_peak_guarantee"}
+
+    def failure_terminal(self):
+        # A sticky failure cannot be cleared to take another sample or publish success.
+        self.terminal_observation = "skipped_prior_failure" if self.failure else "skipped_deadline"
+
     @contextmanager
     def phase(self, name):
+        if self.profile:
+            self.check(force="phase-start:" + name)
         self.scan()
         self.event(name, "start")
         try:
             yield
             self.scan()
         except Exception as error:
+            if self.profile:
+                self.failure = self.failure or error
+                self.failure_terminal()
             try:
                 self.event(name, "failed", terminal=True)
             except Exception as reporting_error:  # noqa: BLE001 - retain the original phase failure
                 error.add_note("phase_metadata_failed:" + type(reporting_error).__name__)
+            if self.profile:
+                raise self.failure
             raise
+        if self.profile:
+            self.check(force="phase-complete:" + name)
         self.event(name, "end")
 
 
@@ -266,6 +351,79 @@ def extract_zip(archive, dest, budget):
     budget.check()
 
 
+def llvm_selection(infos, dest, initial=0, checkpoint=lambda: None):
+    require(len(infos) <= 50000, "archive_entry_count")
+    keep = {"bin", "include", "lib", "share", "x86_64-w64-mingw32"}
+    omit = {"aarch64-w64-mingw32", "armv7-w64-mingw32", "i686-w64-mingw32", "python"}
+    seen, expanded, selected, parents = set(), 0, [], set()
+    for info in infos:
+        checkpoint()
+        name = info.filename[:-1] if info.is_dir() else info.filename
+        safe_path(dest, name)
+        require(name.casefold() not in seen, "archive_duplicate")
+        seen.add(name.casefold())
+        mode = info.external_attr >> 16
+        require(not stat.S_ISLNK(mode) and stat.S_IFMT(mode) in (0, stat.S_IFREG, stat.S_IFDIR)
+                and not info.flag_bits & 1, "archive_type")
+        require(info.file_size >= 0, "archive_size")
+        expanded += info.file_size
+        require(expanded + initial <= DISK, "archive_expanded_budget")
+        require(name == LLVM_PREFIX[:-1] or name.startswith(LLVM_PREFIX), "llvm_root")
+        relative = name[len(LLVM_PREFIX):] if name.startswith(LLVM_PREFIX) else ""
+        top = relative.split("/")[0]
+        license_file = not info.is_dir() and any(x in Path(name).name.lower() for x in ("license", "copying", "copyright"))
+        require(not relative or top in keep | omit or ("/" not in relative and license_file), "llvm_unknown_top_level")
+        if not relative or top in keep or license_file:
+            selected.append(info)
+            parents.update(str(parent).replace("\\", "/") for parent in Path(name).parents if str(parent) != ".")
+        checkpoint()
+    selected_names = {i.filename for i in selected}
+    selected.extend(i for i in infos if i.is_dir() and i.filename.rstrip("/") in parents and i.filename not in selected_names)
+    selected.sort(key=lambda i: i.filename)
+    files = {i.filename: i for i in selected if not i.is_dir()}
+    for name in ("bin/clang.exe", "bin/clang++.exe", "bin/clang-20.exe", "LICENSE.TXT"):
+        require(LLVM_PREFIX + name in files and files[LLVM_PREFIX + name].file_size > 0, "llvm_required_file")
+    drivers = [name for name in files if re.fullmatch(r"clang-[0-9]+\.exe", Path(name).name)]
+    require(drivers == [LLVM_PREFIX + "bin/clang-20.exe"], "llvm_required_driver")
+    for prefix in ("bin/", "include/", "lib/", "share/", "lib/clang/20/include/", "x86_64-w64-mingw32/include/", "x86_64-w64-mingw32/lib/"):
+        require(any(name.startswith(LLVM_PREFIX + prefix) and info.file_size > 0 for name, info in files.items()), "llvm_required_subtree")
+    rows = [[i.filename, i.file_size, i.CRC, i.external_attr] for i in selected]
+    descriptor = {"policy": ACQUISITION_PROFILE, "prefix": LLVM_PREFIX,
+                  "selection_sha256": digest(json.dumps(rows, ensure_ascii=True, separators=(",", ":")).encode()),
+                  "selected_entries": len(selected), "excluded_entries": len(infos) - len(selected),
+                  "selected_bytes": sum(i.file_size for i in selected),
+                  "excluded_bytes": expanded - sum(i.file_size for i in selected)}
+    checkpoint()
+    return selected, descriptor
+
+
+def extract_llvm_x64(archive, dest, budget):
+    require(digest(archive.read_bytes()) == LLVM_SHA, "llvm_archive_pin")
+    budget.check()
+    dest.mkdir()
+    with zipfile.ZipFile(archive) as source:
+        selected, descriptor = llvm_selection(source.infolist(), dest, budget.check(), budget.check)
+        for info in selected:
+            budget.check()
+            target = safe_path(dest, info.filename.rstrip("/"))
+            if info.is_dir():
+                target.mkdir(parents=True, exist_ok=True)
+                continue
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with source.open(info) as src, target.open("xb") as out:
+                budget.files[target.relative_to(budget.root).as_posix()] = 0
+                count = 0
+                while chunk := src.read(65536):
+                    budget.check()
+                    count += len(chunk)
+                    require(count <= info.file_size, "archive_byte_budget")
+                    budget.write_chunk(out, chunk)
+            require(count == info.file_size, "archive_size")
+            budget.check()
+    budget.check()
+    return descriptor
+
+
 def selected_source(path):
     parts = path.split("/")
     require(parts[0].lower() != "models" and not any(x.lower() in {".git", "node_modules"} for x in parts), "source_payload")
@@ -278,17 +436,25 @@ def write_metadata(root, path, value, deadline=None, clock=time.monotonic):
     write_bounded(root, path, value, deadline=deadline, clock=clock, limit=DISK)
 
 
-def acquire(root, opener=None, budget_factory=Budget, worker_token=None):
+def acquire(root, opener=None, budget_factory=Budget, worker_token=None, acquisition_profile=None):
+    profile = validate_acquisition_profile(acquisition_profile)
     root = Path(root).absolute()
     safe_path(root.parent, root.name)
     if worker_token is None:
+        require(profile is None, "profile_requires_supervision")
         root.mkdir(exist_ok=False)
     else:
         require(os.environ.get("DOCTRAIL_ACQUIRE_TOKEN") == worker_token
                 and load(root / "acquisition-attempt.json")["worker_token"] == worker_token, "worker_binding")
+        attempt = load(root / "acquisition-attempt.json")
+        require(attempt.get("acquisition_profile") == profile, "worker_profile_binding")
+        if profile:
+            require(attempt["argv"] == [sys.executable, "-B", str(Path(__file__).resolve()), "_acquire-worker",
+                    "--workspace", str(root), "--worker-token", worker_token,
+                    "--acquisition-profile", profile], "worker_attempt_binding")
     budget = None
     try:
-        budget = budget_factory(root)
+        budget = budget_factory(root, acquisition_profile=profile) if profile else budget_factory(root)
         specification = pins()
         (root / "archives").mkdir()
         (root / "tools").mkdir()
@@ -299,12 +465,17 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None):
             with budget.phase("download-" + tool):
                 h = fetch(item["asset"], archive, budget, item["published_sha256"], opener)
             destination = root / "tools" / tool
+            selection = None
             with budget.phase("extract-" + tool):
-                extract_zip(archive, destination, budget)
+                if profile and tool == "llvm":
+                    selection = extract_llvm_x64(archive, destination, budget)
+                else:
+                    extract_zip(archive, destination, budget)
             with budget.phase("inventory-" + tool):
                 tools.append({"name": item["name"], "url": item["asset"], "archive_sha256": h,
                               "publisher_sha256": item["published_sha256"], "inventory": inventory(destination),
-                              "directory": destination.relative_to(root).as_posix()})
+                              "directory": destination.relative_to(root).as_posix(),
+                              **({"selection": selection} if selection is not None else {})})
         api = "https://api.github.com/repos/ggml-org/llama.cpp/git/"
         with budget.phase("source-metadata"):
             fetch(api + "commits/" + COMMIT, root / "commit.json", budget, opener=opener, max_bytes=2 * 1024**2)
@@ -350,23 +521,41 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None):
                       "runtime_bindings": runtime_bindings(root, {"tools": tools}),
                       "bundle": inventory(BUNDLE), "download_bytes": budget.downloaded, "disk_bytes": budget.check(),
                       "compiler_native_execution": 0, "review": "A separate reviewed SHA256 of this exact lock is required by build."}
+            if profile:
+                result["schema_version"] = 2
+                result["acquisition_profile"] = profile
+                result["worker_sampling"] = budget.sampling("manifest_before_raw_write")
             budget.write_json(root / "raw-acquisition.json", result)
         budget.scan()
+        if profile:
+            budget.check(force="success-terminal")
+            budget.terminal_observation = "observed_success_terminal"
+            budget.write_json(root / "worker-terminal.json", budget.sampling("success_terminal_before_receipt_write"))
+            budget.check()
         return result
     except Exception as error:
+        if profile and budget is not None:
+            budget.failure = budget.failure or error
+            budget.failure_terminal()
+            error = budget.failure
         failure = {"error": type(error).__name__, "reason": str(error)[:4000], "partial_files_preserved": True, "execution": 0}
         try:
-            if budget is None:
+            if budget is None or profile:
+                if profile and budget is not None:
+                    failure["worker_sampling"] = budget.sampling("failure_before_receipt_write")
                 write_metadata(root, root / "acquisition-failure.json", failure)
             else:
                 budget.write_json(root / "acquisition-failure.json", failure, terminal=True)
         except Exception as reporting_error:  # noqa: BLE001 - never replace the acquisition failure
             error.add_note("failure_metadata_failed:" + type(reporting_error).__name__)
+        if profile and budget is not None:
+            raise budget.failure
         raise
 
 
-def acquire_supervised(root, runner=run_owned, clock=time.monotonic):
+def acquire_supervised(root, runner=run_owned, clock=time.monotonic, acquisition_profile=None):
     """The supervisor can stop a blocked DNS/socket/extraction worker at the shared deadline."""
+    profile = validate_acquisition_profile(acquisition_profile)
     deadline = clock() + 600
     def checkpoint():
         require(clock() < deadline, "shared_deadline")
@@ -376,8 +565,10 @@ def acquire_supervised(root, runner=run_owned, clock=time.monotonic):
     token = secrets.token_hex(24)
     command = [sys.executable, "-B", str(Path(__file__).resolve()), "_acquire-worker",
                "--workspace", str(root), "--worker-token", token]
+    if profile:
+        command.extend(["--acquisition-profile", profile])
     write_metadata(root, root / "acquisition-attempt.json", {"worker_token": token, "argv": command,
-          "shared_seconds": 600, "retry": False}, deadline=deadline, clock=clock)
+          "shared_seconds": 600, "retry": False, **({"acquisition_profile": profile} if profile else {})}, deadline=deadline, clock=clock)
     allowed = [Path(sys.executable), Path(getattr(sys, "_base_executable", sys.executable))]
     if "SystemRoot" in os.environ:
         allowed.append(Path(os.environ["SystemRoot"]) / "System32/conhost.exe")
@@ -386,9 +577,13 @@ def acquire_supervised(root, runner=run_owned, clock=time.monotonic):
     try:
         runner(command, cwd=root, env=env, root=root, log_prefix=root / "acquisition-supervision",
                deadline=deadline, rss=2 * 1024**3, host=2 * 1024**3, start=4 * 1024**3,
-               allowed=allowed, clock=clock)
+               allowed=allowed, clock=clock, **({"acquisition_profile": profile} if profile else {}))
         checkpoint()
         result = load(root / "raw-acquisition.json")
+        if profile:
+            require(result.get("acquisition_profile") == profile, "raw_profile_binding")
+            check_profile_records(root, result, profile)
+            result["worker_terminal"] = reference(root / "worker-terminal.json", root)
         checkpoint()
         result["acquisition_cleanup"] = reference(root / "acquisition-supervision.json", root)
         checkpoint()
@@ -483,13 +678,257 @@ def optional_probe_guard(root, binding, env, application_dir):
             "scope": "preflight_absence_not_an_execution_result; observed_ld_children_still_forbidden"}
 
 
+def check_profile_records(root, lock, profile):
+    require(profile == ACQUISITION_PROFILE and lock.get("acquisition_profile") == profile, "acquisition_profile_binding")
+    require(not (root / "acquisition-failure.json").exists(), "acquisition_worker_failed")
+    attempt, raw = load(root / "acquisition-attempt.json"), load(root / "raw-acquisition.json")
+    supervision = load(root / "acquisition-supervision.json")
+    require(all(row.get("acquisition_profile") == profile for row in (attempt, raw, supervision)), "acquisition_profile_binding")
+    expected_raw = {k: v for k, v in lock.items() if k not in {"acquisition_cleanup", "worker_terminal"}}
+    require(raw == expected_raw, "raw_acquisition_changed")
+    argv = attempt.get("argv", [])
+    require(len(argv) == 10 and argv[-2:] == ["--acquisition-profile", profile]
+            and argv[3] == "_acquire-worker" and argv[4:8] == ["--workspace", str(root), "--worker-token", attempt.get("worker_token")]
+            and supervision.get("argv") == argv and attempt.get("shared_seconds") == 600
+            and attempt.get("retry") is False, "acquisition_attempt_binding")
+    require(supervision.get("status") == "process_exited_zero_not_semantic_success" and supervision.get("exit") == 0
+            and supervision.get("within_shared_deadline") is True and supervision.get("failure_latched") is False
+            and not supervision.get("error"), "acquisition_supervision_failed")
+    require(supervision.get("cleanup", {}).get("all_absent") is True
+            and supervision["cleanup"].get("errors") == [], "acquisition_cleanup_failed")
+    sample = supervision.get("resource_sampling", {})
+    require(sample.get("interval_seconds") == 0.050 and sample.get("sample_count", 0) > 0
+            and sample.get("terminal_observation") == "observed", "acquisition_sampling_binding")
+    if "acquisition_cleanup" in lock:
+        require(lock.get("worker_terminal", {}).get("file") == "worker-terminal.json", "worker_terminal_binding")
+        check_refs(root, [lock["worker_terminal"]])
+    terminal = load(root / "worker-terminal.json")
+    require(terminal.get("profile") == profile and terminal.get("interval_seconds") == 0.050
+            and terminal.get("failure_latched") is False and terminal.get("terminal_observation") == "observed_success_terminal"
+            and terminal.get("forced_reasons", {}).get("success-terminal") == 1, "worker_terminal_binding")
+    require(raw.get("worker_sampling", {}).get("profile") == profile
+            and raw["worker_sampling"].get("failure_latched") is False, "worker_sampling_binding")
+
+
+def external_keys(value, keys):
+    require(type(value) is dict and set(value) == set(keys.split()), "external_schema")
+
+
+def external_sha(value):
+    require(type(value) is str and re.fullmatch("[0-9a-f]{64}", value), "external_sha")
+    return value
+
+
+def external_number(value, minimum=0):
+    require(type(value) in (int, float) and minimum <= value <= sys.float_info.max
+            and math.isfinite(value), "external_number")
+    return value
+
+
+def external_absolute(value):
+    require(type(value) is str and Path(value).is_absolute()
+            and value == os.path.normcase(str(Path(value).resolve())), "external_absolute_path")
+    return value
+
+
+def external_identity(value, kind="cli"):
+    external_keys(value, "pid create_time executable" + (" source_sha256" if kind == "observer" else " absent" if kind == "custody" else ""))
+    require(type(value["pid"]) is int and value["pid"] > 0, "external_pid")
+    require(external_number(value["create_time"]) > 0, "external_create_time")
+    executable = external_absolute(value["executable"])
+    if kind == "observer":
+        external_sha(value["source_sha256"])
+    if kind == "custody":
+        require(value["absent"] is True, "external_identity_present")
+    return value["pid"], value["create_time"], executable
+
+
+def external_root(root):
+    root = Path(root).absolute()
+    safe_path(Path(root.anchor), root.relative_to(root.anchor).as_posix())
+    require(root.is_dir(), "external_root")
+    return root
+
+
+def external_read(root, name, limit, seen, ref=None, expected=None):
+    """Bound every read, hash original bytes, and reject aliases and observed mutation."""
+    if ref is not None:
+        external_keys(ref, "file size_bytes sha256")
+        require(ref["file"] == name and type(ref["size_bytes"]) is int
+                and 0 <= ref["size_bytes"] <= limit, "external_reference")
+        external_sha(ref["sha256"])
+    path = safe_path(root, name)
+    before = path.stat()
+    require(stat.S_ISREG(before.st_mode) and before.st_size <= limit, "external_read_limit")
+    identity = before.st_dev, before.st_ino
+    require(identity not in seen, "external_file_alias")
+    seen.add(identity)
+    if ref is not None:
+        require(before.st_size == ref["size_bytes"], "external_reference_size")
+    def stamp(row):
+        # Python 3.12 Windows stat may expose birth time as ctime while fstat
+        # exposes change time. Compare stable cross-API fields, then compare
+        # ctime separately within each API before/after the read.
+        return row.st_dev, row.st_ino, row.st_size, row.st_mtime_ns, getattr(row, "st_birthtime_ns", None)
+    chunks, size, hasher = [], 0, hashlib.sha256()
+    with path.open("rb") as stream:
+        opened = os.fstat(stream.fileno())
+        require(stamp(opened) == stamp(before), "external_file_changed")
+        while True:
+            chunk = stream.read(min(65536, limit - size + 1))
+            if not chunk:
+                break
+            size += len(chunk)
+            require(size <= limit and size <= before.st_size, "external_read_limit")
+            hasher.update(chunk)
+            chunks.append(chunk)
+        closed = os.fstat(stream.fileno())
+        require(stamp(closed) == stamp(opened) and closed.st_ctime_ns == opened.st_ctime_ns, "external_file_changed")
+    safe_path(root, name)
+    after = path.stat()
+    require(stamp(after) == stamp(before) and after.st_ctime_ns == before.st_ctime_ns
+            and size == before.st_size, "external_file_changed")
+    sha = hasher.hexdigest()
+    if ref is not None:
+        require(size == ref["size_bytes"] and sha == ref["sha256"], "external_reference_changed")
+    if expected is not None:
+        require(sha == external_sha(expected), "external_review_digest_mismatch")
+    return b"".join(chunks)
+
+
+def external_json(data):
+    # Explicit UTF-8 rejects JSON's automatic UTF-16/32 byte detection.
+    return parse_json(data.decode("utf-8"))
+
+
+def check_external_acceptance(root, expected):
+    """Expected SHA must come from a separately assigned human/parent external review.
+
+    Hashes cannot authenticate an observer or prove self-asserted JSON is truthful.
+    Never derive approval from these files, an environment variable or a registry.
+    This validates fixed acquisition-terminal custody, not later build WORK contents.
+    """
+    root = external_root(root)
+    companion = external_root(root.with_name(root.name + ".external-review"))
+    names = {"acceptance.json", "observer-terminal.json", "custody.json", "cli.stdout", "cli.stderr"}
+    observed = set()
+    for path in companion.iterdir():
+        require(path.name in names and path.name not in observed, "external_companion_files")
+        observed.add(path.name)
+    require(observed == names, "external_companion_files")
+    seen = set()
+    acceptance = external_json(external_read(companion, "acceptance.json", 64 * 1024, seen, expected=expected))
+    external_keys(acceptance, "schema profile workspace attempt manifest stdout stderr observer_terminal custody sources")
+    workspace = str(root.resolve())
+    def bound(value, schema):
+        require(value["schema"] == schema and value["profile"] == ACQUISITION_PROFILE
+                and value["workspace"] == workspace, "external_contract")
+    bound(acceptance, "engine-v3-external-acceptance-v1")
+    manifest = external_json(external_read(root, "acquisition.json", 16 * 1024**2, seen, acceptance["manifest"]))
+    attempt = external_json(external_read(root, "acquisition-attempt.json", 16 * 1024, seen, acceptance["attempt"]))
+    stdout = external_read(companion, "cli.stdout", 4 * 1024, seen, acceptance["stdout"])
+    external_read(companion, "cli.stderr", 8 * 1024**2, seen, acceptance["stderr"])
+    terminal = external_json(external_read(companion, "observer-terminal.json", 128 * 1024, seen, acceptance["observer_terminal"]))
+    custody = external_json(external_read(companion, "custody.json", 256 * 1024, seen, acceptance["custody"]))
+    sources = acceptance["sources"]
+    require(type(sources) is list and len(sources) == 3, "external_sources")
+    repo = external_root(Path(__file__).resolve().parents[1])
+    for ref, name, limit in zip(sources, ("scripts/prepare_summary_grammar_engine.py", "tools/summary_grammar/runtime.py", "tools/summary_grammar/pins.json"),
+                                (256 * 1024, 128 * 1024, 32 * 1024), strict=True):
+        external_read(repo, name, limit, seen, ref)
+    external_keys(terminal, "schema evidence_kind profile workspace attempt_sha256 manifest_sha256 stdout_sha256 stderr_sha256 argv observer cli sources_before sources_after exit_code terminal_observed elapsed_seconds budget_seconds cleanup_reserved_seconds limits_pass first_failure")
+    bound(terminal, "engine-v3-external-terminal-v1")
+    require(terminal["evidence_kind"] == "external_actual_cli_observation", "external_evidence_kind")
+    for key in ("attempt", "manifest", "stdout", "stderr"):
+        require(terminal[key + "_sha256"] == acceptance[key]["sha256"], "external_terminal_binding")
+    # Compare strict revalidated refs, not Python equality (where True equals 1).
+    for key in ("sources_before", "sources_after"):
+        require(type(terminal[key]) is list and len(terminal[key]) == 3, "external_sources")
+        for actual, ref in zip(terminal[key], sources, strict=True):
+            external_keys(actual, "file size_bytes sha256")
+            require(type(actual["size_bytes"]) is int and actual == ref, "external_sources_changed")
+    observer = external_identity(terminal["observer"], "observer")
+    cli = external_identity(terminal["cli"])
+    require(observer != cli and observer[0] != cli[0], "external_observer_is_cli")
+    require(type(attempt) is dict and type(attempt.get("argv")) is list and len(attempt["argv"]) >= 3, "external_attempt_argv")
+    prefix = attempt["argv"][:3]
+    require(all(type(item) is str for item in prefix) and prefix[1] == "-B"
+            and Path(prefix[0]).is_absolute() and Path(prefix[2]).is_absolute()
+            and Path(prefix[2]).resolve() == Path(__file__).resolve(), "external_attempt_argv")
+    require(terminal["argv"] == prefix + ["acquire", "--workspace", str(root), "--acquisition-profile", ACQUISITION_PROFILE]
+            and cli[2] == os.path.normcase(str(Path(prefix[0]).resolve())), "external_cli_argv")
+    require(type(terminal["exit_code"]) is int and terminal["exit_code"] == 0
+            and terminal["terminal_observed"] is True and terminal["limits_pass"] is True
+            and terminal["first_failure"] is None, "external_terminal_failed")
+    require(external_number(terminal["elapsed_seconds"]) <= 600
+            and type(terminal["budget_seconds"]) is int and terminal["budget_seconds"] == 600
+            and type(terminal["cleanup_reserved_seconds"]) is int and terminal["cleanup_reserved_seconds"] == 5,
+            "external_time_budget")
+    require(stdout in (b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n',
+                       b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\r\n'), "external_stdout_protocol")
+    external_keys(custody, "schema profile workspace attempt_sha256 manifest_sha256 observer_terminal_sha256 identities all_absent errors")
+    bound(custody, "engine-v3-external-custody-v1")
+    for key in ("attempt", "manifest", "observer_terminal"):
+        require(custody[key + "_sha256"] == acceptance[key]["sha256"], "external_custody_binding")
+    require(custody["all_absent"] is True and custody["errors"] == [], "external_custody_failed")
+    rows = custody["identities"]
+    require(type(rows) is list and 1 <= len(rows) <= 128, "external_custody_identities")
+    identities = [external_identity(row, "custody") for row in rows]
+    require(len(set(identities)) == len(identities) and cli in identities
+            and all(row[0] != observer[0] for row in identities), "external_custody_ownership")
+    # Keep the internal receipt checks below; require its owned identities too.
+    require(type(manifest) is dict and type(manifest.get("acquisition_cleanup")) is dict
+            and manifest["acquisition_cleanup"].get("file") == "acquisition-supervision.json", "external_cleanup_binding")
+    supervision = external_json(external_read(root, "acquisition-supervision.json", 128 * 1024, seen, manifest["acquisition_cleanup"]))
+    owned = supervision.get("cleanup", {}).get("identities")
+    require(type(owned) is list and 1 <= len(owned) <= 128, "external_internal_identities")
+    for row in owned:
+        require(type(row) is list and len(row) == 3, "external_internal_identity")
+        ident = external_identity(dict(zip(("pid", "create_time", "executable"), row, strict=True)))
+        require(ident in identities, "external_custody_incomplete")
+    return manifest
+
+
 def check_acquired(root, reviewed_sha):
+    """Legacy SHA reviews acquisition.json; v3 SHA reviews external acceptance.json.
+
+    The caller supplies an independently reviewed digest, never automatic approval.
+    SHA binding alone does not authenticate the observer or its assertions.
+    """
+    root = Path(root)
     require(not (root / "acquisition-pending.json").exists()
             and not (root / "acquisition-supervision-failure.json").exists(), "acquisition_finalization_failed")
-    lock = reviewed(root / "acquisition.json", reviewed_sha)
+    companion = root.with_name(root.name + ".external-review")
+    external = companion.exists() or companion.is_symlink()
+    if external:
+        lock = check_external_acceptance(root, reviewed_sha)
+    else:
+        # Preserve legacy digest semantics while bounding the pre-profile read.
+        require(isinstance(reviewed_sha, str) and re.fullmatch("[0-9a-f]{64}", reviewed_sha), "review_digest_required")
+        raw = external_read(external_root(root), "acquisition.json", 16 * 1024**2, set())
+        require(digest(raw) == reviewed_sha, "review_digest_mismatch")
+        lock = external_json(raw)
     require(lock["status"] == "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE" and lock["engine_commit"] == COMMIT, "acquisition_contract")
     check_refs(root, [lock["acquisition_cleanup"]])
-    cleanup = load(root / lock["acquisition_cleanup"]["file"])["cleanup"]
+    supervision = load(root / lock["acquisition_cleanup"]["file"])
+    records = [lock, supervision]
+    for name in ("acquisition-attempt.json", "raw-acquisition.json"):
+        if (root / name).exists():
+            records.append(load(root / name))
+    profiles = [row.get("acquisition_profile") for row in records]
+    selected = (any("selection" in row for row in lock.get("tools", []))
+                or (root / "worker-terminal.json").exists() or "worker_terminal" in lock
+                or "worker_sampling" in lock or lock.get("schema_version", 1) == 2
+                or any("worker_sampling" in row or row.get("schema_version", 1) == 2
+                       or "--acquisition-profile" in row.get("argv", [])
+                       or any("selection" in tool for tool in row.get("tools", [])) for row in records))
+    if any(value is not None for value in profiles) or selected:
+        require(external, "external_acceptance_missing")
+        require(all(value == ACQUISITION_PROFILE for value in profiles), "acquisition_profile_binding")
+        check_profile_records(root, lock, ACQUISITION_PROFILE)
+    else:
+        require(not external, "external_profile_missing")
+    cleanup = supervision["cleanup"]
     require(cleanup["all_absent"] and not cleanup["errors"], "acquisition_cleanup_failed")
     check_refs(BUNDLE, lock["bundle"], exact=True)
     check_refs(root / "source", [{k: row[k] for k in ("file", "size_bytes", "sha256")} for row in lock["source"]])
@@ -503,6 +942,13 @@ def check_acquired(root, reviewed_sha):
                 or row["archive_sha256"] == pin["published_sha256"]), "tool_pin_changed")
         require(digest(safe_path(root / "archives", row["name"]).read_bytes()) == row["archive_sha256"], "archive_changed")
         check_refs(root / row["directory"], row["inventory"], exact=True)
+        if lock.get("acquisition_profile") and row["directory"] == "tools/llvm":
+            require(row["archive_sha256"] == LLVM_SHA, "llvm_archive_pin")
+            with zipfile.ZipFile(root / "archives" / row["name"]) as archive:
+                infos, selection = llvm_selection(archive.infolist(), root / row["directory"])
+            require(row.get("selection") == selection, "llvm_selection_changed")
+            require({(r["file"], r["size_bytes"]) for r in row["inventory"]}
+                    == {(i.filename, i.file_size) for i in infos if not i.is_dir()}, "llvm_selection_inventory")
     check_refs(root, lock["licenses"])
     require(lock["runtime_bindings"] == runtime_bindings(root, lock), "runtime_bindings_changed")
     return lock
@@ -589,17 +1035,19 @@ def main():
     parser.add_argument("operation", choices=["inspect", "acquire", "build", "_acquire-worker"])
     parser.add_argument("--workspace", type=Path)
     parser.add_argument("--worker-token", help=argparse.SUPPRESS)
-    parser.add_argument("--reviewed-acquisition-sha256")
+    parser.add_argument("--reviewed-acquisition-sha256", help="Externally reviewed artifact SHA256: legacy acquisition.json; v3 sibling external-review/acceptance.json. Supply only after independent CLI-terminal and custody review; hashes do not authenticate self-asserted observations.")
+    parser.add_argument("--acquisition-profile", choices=[ACQUISITION_PROFILE])
     args = parser.parse_args()
+    require(args.acquisition_profile is None or args.operation in {"acquire", "_acquire-worker"}, "acquisition_profile_operation")
     if args.operation == "inspect":
         print(json.dumps({"pins": pins(), "executable_ready": False}))
     else:
         require(args.workspace is not None, "workspace_required")
         if args.operation == "_acquire-worker":
             require(args.worker_token is not None, "worker_token_required")
-            result = acquire(args.workspace, worker_token=args.worker_token)
+            result = acquire(args.workspace, worker_token=args.worker_token, acquisition_profile=args.acquisition_profile)
         elif args.operation == "acquire":
-            result = acquire_supervised(args.workspace)
+            result = acquire_supervised(args.workspace, acquisition_profile=args.acquisition_profile)
         else:
             result = build(args.workspace, args.reviewed_acquisition_sha256)
         print(json.dumps({"status": result["status"]}))

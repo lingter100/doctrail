@@ -298,13 +298,49 @@ class OwnedTree:
 
 
 def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allowed,
-              ps=None, popen=subprocess.Popen, clock=time.monotonic, sleeper=time.sleep):
+              ps=None, popen=subprocess.Popen, clock=time.monotonic, sleeper=time.sleep,
+              acquisition_profile=None):
+    require(acquisition_profile in (None, "llvm-x64-sampled-50ms-v1"), "acquisition_profile")
+    sampled = acquisition_profile is not None
+    first_failure = [None]
+    last_sample, last_startup = [None], [None]
+    sampling = {"interval_seconds": 0.050, "sample_count": 0, "sample_count_basis": "successful_resource_calls",
+                "attempted_sample_count": 0, "forced_reasons": {},
+                "maximum_observed_start_gap_seconds": 0.0, "terminal_observation": "not_attempted",
+                "startup_host_samples": 0, "startup_forced_reasons": {},
+                "scope": "checkpoint_schedule_not_hard_timer_or_peak_guarantee"}
+    def latch(exc):
+        if sampled:
+            first_failure[0] = first_failure[0] or exc
+            return first_failure[0]
+        return exc
     if ps is None:
         import psutil as ps
     validate_temporary(root, env)
-    require(clock() < deadline - 5, "deadline_before_start")
-    require(ps.virtual_memory().available >= start, "startup_resource_gate")
     def startup_checkpoint(event):
+        if not sampled:
+            require(clock() < deadline - 5, "deadline_before_start")
+            require(ps.virtual_memory().available >= start, "startup_resource_gate")
+            return
+        if first_failure[0] is not None:
+            raise first_failure[0]
+        try:
+            require(clock() < deadline - 5, "deadline_before_start")
+            now = clock()
+            force = event in {"host_gate", "start", "complete", "before_spawn"}
+            if force or last_startup[0] is None or now - last_startup[0] >= 0.050:
+                require(ps.virtual_memory().available >= start, "startup_resource_gate")
+                require(clock() < deadline - 5, "deadline_before_start")
+                last_startup[0] = now
+                sampling["startup_host_samples"] += 1
+                if force:
+                    reasons = sampling["startup_forced_reasons"]
+                    reasons[event] = reasons.get(event, 0) + 1
+        except Exception as exc:  # noqa: BLE001 - latch the first startup observation failure
+            raise latch(exc)
+    if sampled:
+        startup_checkpoint("host_gate")
+    else:
         require(clock() < deadline - 5, "deadline_before_start")
         require(ps.virtual_memory().available >= start, "startup_resource_gate")
     disk_bytes(root, checkpoint=startup_checkpoint)
@@ -315,23 +351,61 @@ def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allo
               "resource_scope": "sampled_owned_tree_not_OS_hard_peak_limit",
               "temporary_directory": env["TEMP"],
               "active_disk_scans": {"count": 0, "entries": 0, "seconds": 0.0}}
+    if sampled:
+        record.update(acquisition_profile=acquisition_profile, resource_sampling=sampling, failure_latched=False)
     process, tree = None, None
     error = None
     try:
         with Path(str(log_prefix) + ".stdout").open("xb") as out, Path(str(log_prefix) + ".stderr").open("xb") as err:
+            if sampled:
+                startup_checkpoint("before_spawn")
             process = popen([str(x) for x in argv], cwd=cwd, env=env, stdin=subprocess.DEVNULL,
                             stdout=out, stderr=err, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
             tree = OwnedTree(process, allowed, ps, clock, sleeper)
             tree.capture(ps.Process(process.pid))
+            log_sizes = {}
+            def resource_checkpoint(force=None):
+                if first_failure[0] is not None:
+                    raise first_failure[0]
+                try:
+                    require(clock() < deadline - 5, "shared_deadline")
+                    for path in (Path(out.name), Path(err.name)):
+                        size = path.stat().st_size
+                        require(log_sizes.get(path, 0) <= size <= 8 * 1024**2, "log_budget")
+                        log_sizes[path] = size
+                        require(clock() < deadline - 5, "shared_deadline")
+                    now = clock()
+                    if force or last_sample[0] is None or now - last_sample[0] >= 0.050:
+                        sampling["attempted_sample_count"] += 1
+                        if last_sample[0] is not None:
+                            sampling["maximum_observed_start_gap_seconds"] = max(
+                                sampling["maximum_observed_start_gap_seconds"], now - last_sample[0])
+                        tree.sample(rss, host)
+                        require(clock() < deadline - 5, "shared_deadline")
+                        last_sample[0] = now
+                        sampling["sample_count"] += 1
+                        if force:
+                            reasons = sampling["forced_reasons"]
+                            reasons[force] = reasons.get(force, 0) + 1
+                except Exception as exc:  # noqa: BLE001 - latch observation errors before cleanup
+                    raise latch(exc)
+            if sampled:
+                resource_checkpoint("child_capture")
             def scan_checkpoint(event):
                 if event == "before_entry":
                     record["active_disk_scans"]["entries"] += 1
-                tree.sample(rss, host)
-                require(clock() < deadline - 5, "shared_deadline")
-                require(Path(out.name).stat().st_size <= 8 * 1024**2 and Path(err.name).stat().st_size <= 8 * 1024**2, "log_budget")
+                if sampled:
+                    resource_checkpoint("scan_" + event if event in {"start", "complete"} else None)
+                else:
+                    tree.sample(rss, host)
+                    require(clock() < deadline - 5, "shared_deadline")
+                    require(Path(out.name).stat().st_size <= 8 * 1024**2 and Path(err.name).stat().st_size <= 8 * 1024**2, "log_budget")
             while True:
-                tree.sample(rss, host)
-                require(clock() < deadline - 5, "shared_deadline")
+                if sampled:
+                    resource_checkpoint()
+                else:
+                    tree.sample(rss, host)
+                    require(clock() < deadline - 5, "shared_deadline")
                 scan_started = clock()
                 record["active_disk_scans"]["count"] += 1
                 try:
@@ -340,15 +414,29 @@ def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allo
                     record["active_disk_scans"]["seconds"] += clock() - scan_started
                 require(Path(out.name).stat().st_size <= 8 * 1024**2 and Path(err.name).stat().st_size <= 8 * 1024**2, "log_budget")
                 if process.poll() is not None:
+                    if sampled:
+                        resource_checkpoint("process_terminal")
+                        sampling["terminal_observation"] = "observed"
                     break
+                if sampled:
+                    resource_checkpoint()
                 sleeper(0.05)
             record["exit"] = process.wait(timeout=max(0.001, deadline - clock() - 5))
             require(record["exit"] == 0, "tool_exit")
             record["status"] = "process_exited_zero_not_semantic_success"
     except Exception as exc:  # noqa: BLE001 - retain cause before bounded cleanup
-        error = exc
-        record["error"] = type(exc).__name__ + ":" + str(exc)
+        error = latch(exc)
+        record["error"] = type(error).__name__ + ":" + str(error)
     finally:
+        if sampled:
+            if error is not None:
+                sampling["terminal_observation"] = "skipped_prior_failure"
+            elif tree is not None and tree.seen:
+                try:
+                    resource_checkpoint("before_cleanup")
+                except Exception as terminal_error:  # noqa: BLE001 - preserve terminal failure and still clean up
+                    error = latch(terminal_error)
+                    sampling["terminal_observation"] = "failed_before_cleanup"
         if tree is not None and tree.seen:
             record["cleanup"] = tree.cleanup(min(deadline, clock() + 5))
         elif process is not None:
@@ -374,13 +462,18 @@ def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allo
                 error = BoundaryError("cleanup_failed")
             elif not record["within_shared_deadline"]:
                 error = BoundaryError("cleanup_or_process_exceeded_shared_deadline")
+        if sampled and error is not None:
+            error = latch(error)
+            record.update(status="failed", failure_latched=True, error=type(error).__name__ + ":" + str(error))
         try:
             # Failure reporting is best effort, never a fresh successful execution budget.
             write_bounded(root, Path(str(log_prefix) + ".json"), record,
                           deadline=deadline if error is None else None, clock=clock, limit=DISK)
         except Exception as reporting_error:  # noqa: BLE001 - preserve original cause and cleanup evidence
             if error is None:
-                error = reporting_error
+                error = latch(reporting_error)
+                if sampled:
+                    record.update(status="failed", failure_latched=True, error=type(error).__name__ + ":" + str(error))
             else:
                 error.add_note("supervision_receipt_failed:" + type(reporting_error).__name__)
     if error:

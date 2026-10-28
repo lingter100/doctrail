@@ -34,6 +34,23 @@ its acquired hash must be inspected and included in the separately reviewed
 license files, engine blobs, tool inventories and the exact acquired Ninja bytes.
 No executable/version invocation is used to substitute for that review.
 
+The opt-in v3 acquisition profile `llvm-x64-sampled-50ms-v1` selects the pinned
+x64 LLVM tool files and licenses, checks all ZIP entries before extracting the
+selected entries, and samples costly resource observations at 50 ms checkpoints.
+Time, log, transfer and disk checks still run at every checkpoint. Short resource
+peaks between samples may be missed. Legacy acquisition keeps its existing policy.
+
+For v3, the reviewed SHA supplied to `build` is the SHA of externally reviewed
+`<workspace>.external-review/acceptance.json`, **not** the SHA of `acquisition.json`.
+The companion binds the actual acquisition SHA, exact attempt and source bytes,
+externally observed CLI exit, complete stdout/stderr, elapsed time and process
+cleanup. See the [external acceptance contract](../../docs/MEETINGS-SUMMARY-ENGINE-V3-EXTERNAL-GATE.md).
+The CLI never creates or approves that external record for itself. An independent
+external observation and review must establish the supplied digest; computing a
+hash of self-asserted JSON is not an observation. Synthetic test fixtures do not
+authorize execution. Legacy acquisition still uses the reviewed `acquisition.json`
+SHA. Internal success files alone do not establish successful v3 completion.
+
 ```
 python -B -m scripts.prepare_summary_grammar_engine build --workspace _grammar-engine-work --reviewed-acquisition-sha256 REVIEWED_SHA256
 ```
@@ -46,6 +63,19 @@ or global PATH/registry installation. The portable Windows toolchain and this CM
 recipe have NOT been configured, linked or engine-tested by the preparation task.
 A successful build emits `build-manifest.json`; independently inspect its source,
 executable, trace, logs and cleanup evidence before supplying its reviewed hash.
+
+For compatibility, `acquisition_sha256` in a v3 build attempt/manifest carries the
+reviewed companion SHA. The actual acquisition SHA is in the companion's manifest
+reference. Public execution reports must distinguish `review_artifact_sha256`
+from `actual_acquisition_sha256`. Both build checks and the validator recheck the
+same external record; later build files do not change the acquisition-time custody
+scope. Bounded pre/post checks do not establish a new 900-second bound on the whole
+build command: the existing 900-second runner budget begins after preflight.
+The new external-control reads are bounded and check the bytes they return.
+Existing internal inventory/reference checks reread acquisition files through the
+legacy helpers. The full verification is therefore not an atomic snapshot or an
+end-to-end bounded-I/O operation against concurrent mutation. Keep the reviewed
+workspace exclusive; the later check does not retroactively bound an earlier read.
 
 ```
 python -B -m scripts.verify_summary_grammar_engine run --workspace _grammar-engine-work --reviewed-build-sha256 REVIEWED_SHA256

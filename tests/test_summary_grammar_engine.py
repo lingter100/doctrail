@@ -1077,3 +1077,837 @@ def test_late_publication_rollback_error_preserves_timeout_and_rejects_lock(tmp_
     assert (root / "acquisition.json").exists()
     with pytest.raises(rt.BoundaryError, match="acquisition_finalization_failed"):
         prep.check_acquired(root, rt.digest((root / "acquisition.json").read_bytes()))
+
+# Explicit v3 policy tests use only fake clocks/processes and small synthetic archives.
+def v3_external_fixture(root, mutate=None):
+    """Synthetic tmp-only claims: no observer/session/approval or actual run exists.
+
+    Supplying this self-asserted digest is ONLY a test input, never operational
+    authorization. Pure hashes cannot establish the truth of these assertions.
+    """
+    folder = root.with_name(root.name + ".external-review")
+    folder.mkdir(exist_ok=True)
+    def put(name, value):
+        data = value if isinstance(value, bytes) else (json.dumps(value, allow_nan=True) + "\n").encode()
+        (folder / name).write_bytes(data)
+    put("cli.stdout", b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n')
+    put("cli.stderr", b"synthetic fixture only\n")
+    repo = Path(prep.__file__).resolve().parents[1]
+    sources = [rt.reference(repo / name, repo) for name in ("scripts/prepare_summary_grammar_engine.py", "tools/summary_grammar/runtime.py", "tools/summary_grammar/pins.json")]
+    attempt = rt.reference(root / "acquisition-attempt.json", root)
+    manifest = rt.reference(root / "acquisition.json", root)
+    python = prep.os.path.normcase(str(Path(prep.sys.executable).resolve()))
+    observer = {"pid": 100, "create_time": 1.0, "executable": python, "source_sha256": "1" * 64}
+    cli = {"pid": 101, "create_time": 2.0, "executable": python}
+    common = {"profile": prep.ACQUISITION_PROFILE, "workspace": str(root.resolve())}
+    terminal = {"schema": "engine-v3-external-terminal-v1", "evidence_kind": "external_actual_cli_observation", **common,
+        "attempt_sha256": attempt["sha256"], "manifest_sha256": manifest["sha256"],
+        "stdout_sha256": rt.reference(folder / "cli.stdout", folder)["sha256"], "stderr_sha256": rt.reference(folder / "cli.stderr", folder)["sha256"],
+        "argv": rt.load(root / "acquisition-attempt.json")["argv"][:3] + ["acquire", "--workspace", str(root), "--acquisition-profile", prep.ACQUISITION_PROFILE],
+        "observer": observer, "cli": cli, "sources_before": sources, "sources_after": sources,
+        "exit_code": 0, "terminal_observed": True, "elapsed_seconds": 4.0, "budget_seconds": 600,
+        "cleanup_reserved_seconds": 5, "limits_pass": True, "first_failure": None}
+    custody = {"schema": "engine-v3-external-custody-v1", **common, "attempt_sha256": attempt["sha256"], "manifest_sha256": manifest["sha256"],
+        "observer_terminal_sha256": "pending", "identities": [{**cli, "absent": True}, {"pid": 202, "create_time": 2.0, "executable": python, "absent": True}],
+        "all_absent": True, "errors": []}
+    acceptance = {"schema": "engine-v3-external-acceptance-v1", **common, "attempt": attempt, "manifest": manifest,
+        "stdout": rt.reference(folder / "cli.stdout", folder), "stderr": rt.reference(folder / "cli.stderr", folder),
+        "observer_terminal": {}, "custody": {}, "sources": sources}
+    if mutate:
+        mutate("terminal", terminal)
+    put("observer-terminal.json", terminal)
+    acceptance["observer_terminal"] = rt.reference(folder / "observer-terminal.json", folder)
+    custody["observer_terminal_sha256"] = acceptance["observer_terminal"]["sha256"]
+    if mutate:
+        mutate("custody", custody)
+    put("custody.json", custody)
+    acceptance["custody"] = rt.reference(folder / "custody.json", folder)
+    if mutate:
+        mutate("acceptance", acceptance)
+    put("acceptance.json", acceptance)
+    return rt.digest((folder / "acceptance.json").read_bytes())
+
+
+def v3_budget(root, clock=None, ps=None):
+    return prep.Budget(root, ps=ps or FakePS(root), clock=clock or Clock(), acquisition_profile=prep.ACQUISITION_PROFILE)
+
+
+def test_v3_worker_interval_forced_phases_and_legacy_per_checkpoint(tmp_path):
+    clock = Clock(); ps = FakePS(tmp_path)
+    budget = v3_budget(tmp_path, clock, ps)
+    first = budget.samples
+    for _ in range(4): budget.check()
+    clock.now = 0.049; budget.check()
+    assert budget.samples == first
+    clock.now = 0.050; budget.check()
+    assert budget.samples == first + 1
+    clock.now = 0.400; budget.check()
+    assert budget.samples == first + 2  # no catch-up burst
+    with budget.phase("sources"):
+        budget.check()
+    budget.check(force="success-terminal")
+    assert budget.forced_samples == {"start": 1, "phase-start:sources": 1, "phase-complete:sources": 1, "success-terminal": 1}
+    assert budget.max_sample_gap == pytest.approx(0.350)
+    legacy = prep.Budget(tmp_path, ps=ps, clock=clock)
+    before = ps.memory_samples
+    legacy.check(); legacy.check()
+    assert ps.memory_samples == before + 2
+
+
+@pytest.mark.parametrize("fault", ["deadline", "download", "disk", "log", "log-shrink"])
+def test_v3_worker_cheap_limits_and_sticky_failure_between_samples(tmp_path, monkeypatch, fault):
+    clock = Clock(); budget = v3_budget(tmp_path, clock)
+    if fault == "deadline": clock.now = 600
+    elif fault == "download": budget.downloaded = rt.DOWNLOAD + 1
+    elif fault == "disk": budget.total = prep.DISK + 1
+    else:
+        path = tmp_path / "acquisition-supervision.stdout"
+        if fault == "log":
+            with path.open("wb") as stream: stream.truncate(8 * 1024**2 + 1)
+        else:
+            path.write_bytes(b"abc"); budget.check(); path.write_bytes(b"a")
+    count = budget.samples
+    with pytest.raises(rt.BoundaryError) as caught: budget.check()
+    clock.now = 0; budget.downloaded = budget.total = 0
+    with pytest.raises(rt.BoundaryError) as repeated: budget.check(force="success-terminal")
+    assert repeated.value is caught.value and budget.samples == count
+
+
+@pytest.mark.parametrize("fault", ["rss", "host", "observation", "slow-os"])
+def test_v3_worker_scheduled_resources_and_post_os_deadline_latch(tmp_path, monkeypatch, fault):
+    clock = Clock(); ps = FakePS(tmp_path); budget = v3_budget(tmp_path, clock, ps)
+    if fault == "rss":
+        monkeypatch.setattr(ps, "Process", lambda: SimpleNamespace(memory_info=lambda: SimpleNamespace(rss=3 * 1024**3), children=lambda **k: []))
+    elif fault == "slow-os":
+        original = ps.virtual_memory
+        def slow():
+            result = original(); clock.now = 601; return result
+        monkeypatch.setattr(ps, "virtual_memory", slow)
+    else: ps.fault = fault
+    budget.check()  # below interval does not observe the expensive fault
+    clock.now = 0.050
+    with pytest.raises((rt.BoundaryError, FakePS.AccessDenied)) as caught: budget.check()
+    ps.fault = None; clock.now = 0
+    with pytest.raises(type(caught.value)) as repeated: budget.check()
+    assert caught.value is repeated.value
+
+
+def test_v3_phase_failure_and_metadata_failure_preserve_original(tmp_path, monkeypatch):
+    budget = v3_budget(tmp_path)
+    original = ValueError("original phase failure")
+    with pytest.raises(ValueError) as caught, budget.phase("sources"):
+        raise original
+    assert caught.value is original and budget.failure is original
+    assert budget.terminal_observation == "skipped_prior_failure"
+    with pytest.raises(ValueError) as repeated:
+        budget.write_json(tmp_path / "success.json", {"status": "success"})
+    assert repeated.value is original and not (tmp_path / "success.json").exists()
+
+
+def v3_run_wrapper(monkeypatch):
+    original = rt.run_owned
+    def run(*args, **kwargs):
+        return original(*args, **kwargs, acquisition_profile=prep.ACQUISITION_PROFILE)
+    monkeypatch.setattr(rt, "run_owned", run)
+
+
+@pytest.mark.parametrize("fault", [None, "start", "capture", "rss", "host", "observation", "unexpected", "timeout", "log", "cleanup-denied"])
+def test_v3_owned_failure_cleanup_regressions(tmp_path, monkeypatch, fault):
+    v3_run_wrapper(monkeypatch)
+    test_owned_tree_mocked_resource_failure_cleanup_and_no_unrelated_kill(tmp_path, fault)
+
+
+@pytest.mark.parametrize("fault", ["short", "write", "flush", "disk-over", "disk-exact", "disk-spare"])
+@pytest.mark.parametrize("process_fault", [None, "rss"])
+def test_v3_receipt_fault_regressions(tmp_path, monkeypatch, fault, process_fault):
+    v3_run_wrapper(monkeypatch)
+    test_supervision_receipt_faults_preserve_primary_and_cleanup(tmp_path, monkeypatch, fault, process_fault)
+
+
+@pytest.mark.parametrize("fault", ["scan", "late-write", "late-flush"])
+def test_v3_receipt_deadline_regressions(tmp_path, monkeypatch, fault):
+    v3_run_wrapper(monkeypatch)
+    test_supervision_receipt_scan_and_write_deadline_cannot_return_success(tmp_path, monkeypatch, fault)
+
+
+def test_v3_supervisor_sampling_boundaries_and_no_catchup(tmp_path, monkeypatch):
+    clock = Clock(); ps = FakePS(tmp_path); process = FakePopen(ps, clock)
+    observed, checkpoints = [], []
+    original_sample, original_disk = rt.OwnedTree.sample, rt.disk_bytes
+    def sample(self, *args):
+        observed.append(clock.now)
+        return original_sample(self, *args)
+    def disk(root, checkpoint=None):
+        if checkpoint and checkpoint.__name__ == "scan_checkpoint":
+            checkpoint("start")
+            before = len(observed)
+            clock.now += 0.049; checkpoint("before_entry"); checkpoints.append(len(observed) - before)
+            clock.now += 0.001; checkpoint("after_entry"); checkpoints.append(len(observed) - before)
+            clock.now += 0.5; checkpoint("before_entry"); checkpoints.append(len(observed) - before)
+            checkpoint("complete")
+            return 0
+        return original_disk(root, checkpoint)
+    monkeypatch.setattr(rt.OwnedTree, "sample", sample)
+    monkeypatch.setattr(rt, "disk_bytes", disk)
+    result = rt.run_owned([], cwd=tmp_path, env=rt.clean_environment([], tmp_path, "tmp"), root=tmp_path,
+                          log_prefix=tmp_path / "run", deadline=60, rss=100, host=1, start=1,
+                          allowed=[tmp_path / "root.exe", tmp_path / "child.exe"], ps=ps,
+                          popen=lambda *a, **k: process, clock=clock, sleeper=clock.sleep,
+                          acquisition_profile=prep.ACQUISITION_PROFILE)
+    assert checkpoints[:3] == [0, 1, 2]
+    reasons = result["resource_sampling"]["forced_reasons"]
+    assert reasons == {"child_capture": 1, "scan_start": 2, "scan_complete": 2, "process_terminal": 1, "before_cleanup": 1}
+    assert result["resource_sampling"]["startup_forced_reasons"] == {"host_gate": 1, "start": 1, "complete": 1, "before_spawn": 1}
+    assert result["resource_sampling"]["sample_count"] == len(observed)
+    assert result["resource_sampling"]["terminal_observation"] == "observed"
+
+
+@pytest.mark.parametrize("fault", ["deadline", "log", "disk", "slow-sample", "identity", "unexpected", "observation", "rss", "host"])
+def test_v3_supervisor_checkpoint_failures_cleanup_and_first_cause(tmp_path, monkeypatch, fault):
+    clock = Clock(); ps = FakePS(tmp_path); process = FakePopen(ps, clock)
+    original_disk, original_sample = rt.disk_bytes, rt.OwnedTree.sample
+    def sample(self, *args):
+        result = original_sample(self, *args)
+        if fault == "slow-sample": clock.now = 56
+        return result
+    def disk(root, checkpoint=None):
+        if checkpoint and checkpoint.__name__ == "scan_checkpoint":
+            checkpoint("start")
+            if fault == "deadline": clock.now = 56
+            elif fault == "log":
+                with (tmp_path / "run.stdout").open("ab") as stream: stream.truncate(8 * 1024**2 + 1)
+            elif fault == "disk": raise rt.BoundaryError("disk_budget")
+            elif fault == "identity": ps.reused = True; clock.now = 0.050
+            else: ps.fault = fault; clock.now = 0.050
+            checkpoint("before_entry")
+            return 0
+        return original_disk(root, checkpoint)
+    monkeypatch.setattr(rt, "disk_bytes", disk)
+    monkeypatch.setattr(rt.OwnedTree, "sample", sample)
+    with pytest.raises((rt.BoundaryError, FakePS.AccessDenied)) as caught:
+        rt.run_owned([], cwd=tmp_path, env=rt.clean_environment([], tmp_path, "tmp"), root=tmp_path,
+                     log_prefix=tmp_path / "run", deadline=60, rss=100, host=1, start=1,
+                     allowed=[tmp_path / "root.exe", tmp_path / "child.exe"], ps=ps,
+                     popen=lambda *a, **k: process, clock=clock, sleeper=clock.sleep,
+                     acquisition_profile=prep.ACQUISITION_PROFILE)
+    record = caught.value.supervision_record
+    assert record["failure_latched"] and record["status"] == "failed"
+    assert record["resource_sampling"]["terminal_observation"] == "skipped_prior_failure"
+    if fault == "identity": assert ps.killed == []
+    else: assert record["cleanup"]["all_absent"]
+    assert clock.now <= 60
+
+
+def llvm_fixture_rows():
+    return {prep.LLVM_PREFIX + name: b"synthetic" for name in (
+        "bin/clang.exe", "bin/clang++.exe", "bin/clang-20.exe", "bin/helper.dll", "bin/driver-wrapper",
+        "include/shared.h", "lib/shared.a", "share/doc/readme.txt", "lib/clang/20/include/resource.h",
+        "x86_64-w64-mingw32/include/windows.h", "x86_64-w64-mingw32/lib/kernel32.a", "LICENSE.TXT",
+        "i686-w64-mingw32/lib/unused.a", "python/unused.py", "aarch64-w64-mingw32/include/unused.h",
+        "armv7-w64-mingw32/COPYING", "python/nested/COPYRIGHT.txt")}
+
+
+def llvm_fixture_zip(path, rows=None):
+    with zipfile.ZipFile(path, "w") as archive:
+        for name, body in (rows or llvm_fixture_rows()).items(): archive.writestr(name, body)
+    return path
+
+
+def test_v3_selection_retains_licenses_dependencies_and_never_opens_excluded(tmp_path, monkeypatch):
+    archive = llvm_fixture_zip(tmp_path / "llvm.zip")
+    monkeypatch.setattr(prep, "LLVM_SHA", rt.digest(archive.read_bytes()))
+    original = zipfile.ZipFile.open
+    opened = []
+    def opening(self, member, *args, **kwargs):
+        opened.append(member.filename)
+        assert not member.filename.endswith(("unused.a", "unused.py", "unused.h"))
+        return original(self, member, *args, **kwargs)
+    monkeypatch.setattr(zipfile.ZipFile, "open", opening)
+    budget = v3_budget(tmp_path)
+    summary = prep.extract_llvm_x64(archive, tmp_path / "out", budget)
+    assert summary["excluded_entries"] == 3 and summary["selected_entries"] == 14
+    assert set(opened) == {r["file"] for r in rt.inventory(tmp_path / "out")}
+    assert (tmp_path / "out" / prep.LLVM_PREFIX / "python/nested/COPYRIGHT.txt").is_file()
+    budget.scan()
+    assert budget.total == rt.disk_bytes(tmp_path)
+    with zipfile.ZipFile(archive) as source:
+        infos, same = prep.llvm_selection(list(reversed(source.infolist())), tmp_path / "out")
+    assert same == summary
+    encoded = json.dumps([[i.filename, i.file_size, i.CRC, i.external_attr] for i in infos], ensure_ascii=True, separators=(",", ":")).encode()
+    assert summary["selection_sha256"] == rt.digest(encoded)
+
+
+@pytest.mark.parametrize("missing", ["bin/clang.exe", "bin/clang++.exe", "bin/clang-20.exe", "lib/clang/20/include/resource.h", "include/shared.h", "share/doc/readme.txt", "x86_64-w64-mingw32/include/windows.h", "x86_64-w64-mingw32/lib/kernel32.a", "LICENSE.TXT"])
+@pytest.mark.parametrize("empty", [False, True])
+def test_v3_selection_requires_nonempty_x64_dependencies(tmp_path, missing, empty):
+    rows = llvm_fixture_rows()
+    if empty: rows[prep.LLVM_PREFIX + missing] = b""
+    else: del rows[prep.LLVM_PREFIX + missing]
+    with zipfile.ZipFile(llvm_fixture_zip(tmp_path / "llvm.zip", rows)) as archive, pytest.raises(rt.BoundaryError, match="llvm_required"):
+        prep.llvm_selection(archive.infolist(), tmp_path / "out")
+
+
+@pytest.mark.parametrize("fault", ["root", "unknown", "unsafe", "duplicate", "symlink", "encrypted", "oversize", "count", "extra-driver"])
+def test_v3_entire_central_directory_checked_before_selected_bodies(tmp_path, monkeypatch, fault):
+    rows = llvm_fixture_rows(); path = tmp_path / "llvm.zip"
+    if fault == "root": rows["other/readme"] = b"x"
+    elif fault == "unknown": rows[prep.LLVM_PREFIX + "new-platform/a"] = b"x"
+    elif fault == "unsafe": rows[prep.LLVM_PREFIX + "python/../escape"] = b"x"
+    elif fault == "duplicate": rows[prep.LLVM_PREFIX + "python/UNUSED.py"] = b"x"
+    elif fault == "extra-driver": rows[prep.LLVM_PREFIX + "bin/clang-19.exe"] = b"x"
+    llvm_fixture_zip(path, rows)
+    with zipfile.ZipFile(path) as archive:
+        infos = archive.infolist()
+    excluded = next(i for i in infos if i.filename.endswith("unused.py"))
+    if fault == "symlink": excluded.external_attr = (stat.S_IFLNK | 0o777) << 16
+    elif fault == "encrypted": excluded.flag_bits |= 1
+    elif fault == "oversize": excluded.file_size = prep.DISK
+    elif fault == "count": infos = infos * 3000
+    with pytest.raises(rt.BoundaryError): prep.llvm_selection(infos, tmp_path / "out")
+    assert not (tmp_path / "out").exists()
+
+
+@pytest.mark.parametrize("operation", ["inspect", "build"])
+def test_v3_profile_cli_rejects_nonacquisition_before_any_action(monkeypatch, operation):
+    monkeypatch.setattr(prep.sys, "argv", ["prepare", operation, "--acquisition-profile", prep.ACQUISITION_PROFILE])
+    with pytest.raises(rt.BoundaryError, match="acquisition_profile_operation"): prep.main()
+
+
+@pytest.mark.parametrize("profile", ["", "unknown", "LLVM-X64", 50])
+def test_v3_unknown_profile_rejected_before_root_or_resources(tmp_path, profile):
+    with pytest.raises(rt.BoundaryError, match="acquisition_profile"):
+        prep.acquire_supervised(tmp_path / "new", acquisition_profile=profile)
+    assert not (tmp_path / "new").exists()
+
+
+@pytest.mark.parametrize("fault", ["profile", "token", "argv", "missing-profile"])
+def test_v3_worker_attempt_binding_before_budget(tmp_path, monkeypatch, fault):
+    root = tmp_path
+    token = "synthetic-token"
+    argv = [prep.sys.executable, "-B", str(Path(prep.__file__).resolve()), "_acquire-worker", "--workspace", str(root), "--worker-token", token, "--acquisition-profile", prep.ACQUISITION_PROFILE]
+    attempt = {"worker_token": token, "argv": argv, "acquisition_profile": prep.ACQUISITION_PROFILE}
+    if fault == "profile": attempt["acquisition_profile"] = "other"
+    elif fault == "missing-profile": del attempt["acquisition_profile"]
+    elif fault == "token": attempt["worker_token"] = "other"
+    else: attempt["argv"][-1] = "other"
+    rt.write(root / "acquisition-attempt.json", attempt)
+    monkeypatch.setenv("DOCTRAIL_ACQUIRE_TOKEN", token)
+    with pytest.raises(rt.BoundaryError, match="worker_"):
+        prep.acquire(root, worker_token=token, acquisition_profile=prep.ACQUISITION_PROFILE,
+                     budget_factory=lambda *a, **k: pytest.fail("must reject before budget"))
+
+
+def v3_mocked_acquisition(root, monkeypatch, clock=None, runner_fault=None):
+    import hashlib
+    clock = clock or Clock()
+    urls, toolpins = {}, []
+    for name in ("llvm-synthetic.zip", "cmake-synthetic.zip", "ninja-win.zip"):
+        data = io.BytesIO()
+        with zipfile.ZipFile(data, "w") as archive:
+            if name.startswith("llvm"):
+                for file, body in llvm_fixture_rows().items(): archive.writestr(file, body)
+            elif name.startswith("cmake"):
+                archive.writestr("cmake.exe", b"synthetic")
+                archive.writestr("LICENSE", b"synthetic license")
+                archive.writestr("share/cmake-3.31/Modules/Platform/Windows-GNU.cmake", "# synthetic\n" * 54 + prep.LD_SOURCE + "\n")
+            else: archive.writestr("ninja.exe", b"synthetic")
+        url = "https://github.com/synthetic/" + name
+        urls[url] = data.getvalue()
+        toolpins.append({"name": name, "asset": url, "published_sha256": None if name.startswith("ninja") else rt.digest(data.getvalue())})
+    monkeypatch.setattr(prep, "pins", lambda: {"tools": toolpins})
+    monkeypatch.setattr(prep, "LLVM_SHA", toolpins[0]["published_sha256"])
+    tree = []
+    for name in ("CMakeLists.txt", "LICENSE", "src/llama-grammar.h", "src/llama-grammar.cpp"):
+        body = b"synthetic source " + name.encode()
+        urls[f"https://raw.githubusercontent.com/ggml-org/llama.cpp/{rt.COMMIT}/{name}"] = body
+        tree.append({"path": name, "type": "blob", "mode": "100644", "size": len(body),
+                     "sha": hashlib.sha1(b"blob " + str(len(body)).encode() + b"\0" + body).hexdigest()})
+    api = "https://api.github.com/repos/ggml-org/llama.cpp/git/"
+    urls[api + "commits/" + rt.COMMIT] = json.dumps({"sha": rt.COMMIT, "tree": {"sha": "a" * 40}}).encode()
+    urls[api + "trees/" + "a" * 40 + "?recursive=1"] = json.dumps({"sha": "a" * 40, "truncated": False, "tree": tree}).encode()
+    urls["https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/COPYING"] = b"synthetic license"
+    opener = SimpleNamespace(open=lambda request, **k: Response(urls[request.full_url]))
+    calls = []
+    def runner(argv, **kwargs):
+        calls.append(argv)
+        assert kwargs["acquisition_profile"] == prep.ACQUISITION_PROFILE
+        assert kwargs["deadline"] == 600 and kwargs["rss"] == 2 * 1024**3
+        assert argv[-2:] == ["--acquisition-profile", prep.ACQUISITION_PROFILE]
+        token = argv[argv.index("--worker-token") + 1]
+        monkeypatch.setenv("DOCTRAIL_ACQUIRE_TOKEN", token)
+        prep.acquire(root, opener=opener, budget_factory=lambda folder, **options: prep.Budget(folder, ps=FakePS(folder), clock=clock, **options),
+                     worker_token=token, acquisition_profile=prep.ACQUISITION_PROFILE)
+        rt.write(root / "acquisition-supervision.json", {"acquisition_profile": prep.ACQUISITION_PROFILE, "argv": argv,
+                 "status": "process_exited_zero_not_semantic_success", "exit": 0, "within_shared_deadline": True,
+                 "failure_latched": False, "cleanup": {"all_absent": True, "errors": [],
+                     "identities": [[202, 2.0, prep.os.path.normcase(str(Path(prep.sys.executable).resolve()))]]},
+                 "resource_sampling": {"interval_seconds": 0.050, "sample_count": 3, "terminal_observation": "observed"}})
+        if runner_fault: runner_fault(root)
+    result = prep.acquire_supervised(root, runner=runner, clock=clock, acquisition_profile=prep.ACQUISITION_PROFILE)
+    assert len(calls) == 1
+    return result
+
+
+def test_v3_full_mocked_acquisition_and_exact_lock_verification(tmp_path, monkeypatch):
+    root = tmp_path / "new"
+    result = v3_mocked_acquisition(root, monkeypatch)
+    checked = prep.check_acquired(root, v3_external_fixture(root))
+    assert checked == result and result["schema_version"] == 2
+    assert result["tools"][0]["selection"]["excluded_entries"] == 3
+    assert result["worker_sampling"]["observation_point"] == "manifest_before_raw_write"
+    terminal = rt.load(root / "worker-terminal.json")
+    assert terminal["forced_reasons"]["success-terminal"] == 1
+    phases = [json.loads(line) for line in (root / "acquisition-phases.jsonl").read_text().splitlines()]
+    assert all(row["resource_sampling"]["observation_point"].startswith("phase:") for row in phases)
+    with pytest.raises(FileExistsError): prep.acquire_supervised(root, acquisition_profile=prep.ACQUISITION_PROFILE)
+
+
+@pytest.mark.parametrize("fault", ["final-profile", "raw-profile", "attempt-profile", "supervision-profile", "all-profiles", "selection-hash", "selection-inventory", "archive", "failure-latch", "worker-failure", "cleanup", "terminal", "terminal-ref", "attempt-argv", "raw-content", "worker-sampling", "supervisor-sampling"])
+def test_v3_profile_selection_and_terminal_tampering_rejected(tmp_path, monkeypatch, fault):
+    root = tmp_path / "new"
+    lock = v3_mocked_acquisition(root, monkeypatch)
+    def change(name, action):
+        path = root / name; value = rt.load(path); action(value); path.write_text(json.dumps(value))
+    if fault.endswith("-profile"):
+        name = {"final-profile": "acquisition.json", "raw-profile": "raw-acquisition.json", "attempt-profile": "acquisition-attempt.json", "supervision-profile": "acquisition-supervision.json"}[fault]
+        change(name, lambda value: value.pop("acquisition_profile"))
+    elif fault == "all-profiles":
+        for name in ("acquisition.json", "raw-acquisition.json", "acquisition-attempt.json", "acquisition-supervision.json"):
+            change(name, lambda value: value.pop("acquisition_profile"))
+    elif fault == "selection-hash":
+        change("raw-acquisition.json", lambda value: value["tools"][0]["selection"].update(selection_sha256="0" * 64))
+        change("acquisition.json", lambda value: value["tools"][0]["selection"].update(selection_sha256="0" * 64))
+    elif fault == "selection-inventory":
+        target = root / "tools/llvm" / prep.LLVM_PREFIX / "python/unused.py"
+        target.write_bytes(b"extra")
+        for name in ("raw-acquisition.json", "acquisition.json"):
+            change(name, lambda value: value["tools"][0].update(inventory=rt.inventory(root / "tools/llvm")))
+    elif fault == "archive": (root / "archives" / lock["tools"][0]["name"]).write_bytes(b"changed")
+    elif fault == "failure-latch": change("acquisition-supervision.json", lambda value: value.update(failure_latched=True))
+    elif fault == "worker-failure": rt.write(root / "acquisition-failure.json", {"reason": "synthetic"})
+    elif fault == "cleanup": change("acquisition-supervision.json", lambda value: value["cleanup"].update(all_absent=False))
+    elif fault == "terminal": change("worker-terminal.json", lambda value: value.update(failure_latched=True))
+    elif fault == "terminal-ref": change("acquisition.json", lambda value: value.pop("worker_terminal"))
+    elif fault == "attempt-argv": change("acquisition-attempt.json", lambda value: value["argv"].append("extra"))
+    elif fault == "raw-content": change("raw-acquisition.json", lambda value: value.update(download_bytes=0))
+    elif fault == "worker-sampling":
+        for name in ("raw-acquisition.json", "acquisition.json"):
+            change(name, lambda value: value["worker_sampling"].update(failure_latched=True))
+    elif fault == "supervisor-sampling": change("acquisition-supervision.json", lambda value: value["resource_sampling"].update(interval_seconds=1))
+    # Rebind the changed receipt itself to exercise semantic checks beyond file hashing.
+    change("acquisition.json", lambda value: value.update(acquisition_cleanup=rt.reference(root / "acquisition-supervision.json", root)))
+    expected = v3_external_fixture(root)
+    with pytest.raises(rt.BoundaryError) as caught:
+        prep.check_acquired(root, expected)
+    # These tests must exercise the existing internal validators, not fail early
+    # merely because the newly required external fixture was missing or stale.
+    assert not str(caught.value).startswith("external_")
+
+
+@pytest.mark.parametrize("fault", ["publish", "rollback", "late-write", "late-flush", "short", "flush"])
+def test_v3_finalization_faults_preserve_failure_and_reject_late_lock(tmp_path, monkeypatch, fault):
+    clock = Clock(); root = tmp_path / "new"
+    original = Path.rename
+    def rename(path, target):
+        if fault == "rollback" and path.name == "acquisition.json": raise OSError("synthetic rollback failure")
+        result = original(path, target)
+        if fault in {"publish", "rollback"} and path.name == "acquisition-pending.json": clock.now = 601
+        return result
+    monkeypatch.setattr(Path, "rename", rename)
+    metadata_stream_fault(monkeypatch, "acquisition-pending.json", fault, clock)
+    with pytest.raises((rt.BoundaryError, OSError)):
+        v3_mocked_acquisition(root, monkeypatch, clock)
+    assert (root / "acquisition-supervision-failure.json").exists()
+    if fault == "rollback": assert (root / "acquisition.json").exists()
+    else: assert not (root / "acquisition.json").exists()
+    with pytest.raises(rt.BoundaryError, match="acquisition_finalization_failed"):
+        prep.check_acquired(root, "0" * 64)
+
+
+def test_v3_worker_write_os_deadline_and_no_refund_latch(tmp_path):
+    clock = Clock(); budget = v3_budget(tmp_path, clock)
+    path = tmp_path / "payload"; path.write_bytes(b"")
+    class SlowWriter:
+        name = str(path)
+        def write(self, data):
+            path.write_bytes(data); clock.now = 601; return len(data)
+        def flush(self): pass
+    with pytest.raises(rt.BoundaryError, match="preparation_budget") as caught:
+        budget.write_chunk(SlowWriter(), b"partial")
+    assert budget.written == 7 and path.read_bytes() == b"partial"
+    clock.now = 0
+    with pytest.raises(rt.BoundaryError) as repeated: budget.check()
+    assert repeated.value is caught.value
+
+
+def test_v3_phase_reraises_first_latch_after_caught_failure_and_later_error(tmp_path):
+    budget = v3_budget(tmp_path)
+    first = None
+    with pytest.raises(rt.BoundaryError) as caught, budget.phase("sources"):
+        budget.downloaded = rt.DOWNLOAD + 1
+        try: budget.check()
+        except rt.BoundaryError as error: first = error
+        raise ValueError("later unrelated error")
+    assert caught.value is first and budget.failure is first
+
+
+def test_v3_direct_log_failure_latches_before_restored_state(tmp_path):
+    budget = v3_budget(tmp_path)
+    path = tmp_path / "acquisition-supervision.stdout"
+    path.write_bytes(b"abc"); budget.log_growth(); path.write_bytes(b"a")
+    with pytest.raises(rt.BoundaryError) as caught: budget.log_growth()
+    path.write_bytes(b"abc")
+    with pytest.raises(rt.BoundaryError) as repeated: budget.check()
+    assert caught.value is repeated.value
+
+
+def test_v3_attempt_counts_distinguish_failed_observation_without_catchup(tmp_path):
+    clock = Clock(); ps = FakePS(tmp_path); budget = v3_budget(tmp_path, clock, ps)
+    successful = budget.samples
+    ps.fault = "observation"; clock.now = 0.075
+    with pytest.raises(FakePS.AccessDenied): budget.check()
+    record = budget.sampling("failure")
+    assert record["sample_count_basis"] == "successful_resource_calls"
+    assert record["sample_count"] == successful and record["attempted_sample_count"] == successful + 1
+    assert record["maximum_observed_start_gap_seconds"] == 0.075
+    assert budget.last_sample_start == 0
+
+
+EXTERNAL_KEYS = {
+    "acceptance": ["schema", "profile", "workspace", "attempt", "manifest", "stdout", "stderr", "observer_terminal", "custody", "sources"],
+    "terminal": ["schema", "evidence_kind", "profile", "workspace", "attempt_sha256", "manifest_sha256", "stdout_sha256", "stderr_sha256", "argv", "observer", "cli", "sources_before", "sources_after", "exit_code", "terminal_observed", "elapsed_seconds", "budget_seconds", "cleanup_reserved_seconds", "limits_pass", "first_failure"],
+    "custody": ["schema", "profile", "workspace", "attempt_sha256", "manifest_sha256", "observer_terminal_sha256", "identities", "all_absent", "errors"],
+}
+
+
+@pytest.fixture(scope="module")
+def external_template(tmp_path_factory):
+    """Produce one synthetic tree; external-only tests clone it, never reuse WORK."""
+    root = tmp_path_factory.mktemp("external-template") / "new"
+    with pytest.MonkeyPatch.context() as patch:
+        v3_mocked_acquisition(root, patch)
+        toolpins, llvm_sha = prep.pins(), prep.LLVM_SHA
+    return {path.relative_to(root).as_posix(): path.read_bytes() for path in root.rglob("*") if path.is_file()}, toolpins, llvm_sha
+
+
+@pytest.fixture
+def external_acquisition(external_template, monkeypatch):
+    files, toolpins, llvm_sha = external_template
+    monkeypatch.setattr(prep, "pins", lambda: toolpins)
+    monkeypatch.setattr(prep, "LLVM_SHA", llvm_sha)
+    def clone(root):
+        for name, data in files.items():
+            path = root / name; path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(data)
+        for name in ("acquisition-attempt.json", "acquisition-supervision.json"):
+            path = root / name; row = rt.load(path); row["argv"][5] = str(root); path.write_text(json.dumps(row))
+        lock = rt.load(root / "acquisition.json")
+        lock["acquisition_cleanup"] = rt.reference(root / "acquisition-supervision.json", root)
+        (root / "acquisition.json").write_text(json.dumps(lock))
+        return lock
+    return clone
+
+
+@pytest.mark.parametrize("kind,key", [(kind, key) for kind, keys in EXTERNAL_KEYS.items() for key in keys] + [(kind, "extra") for kind in EXTERNAL_KEYS])
+def test_external_exact_top_level_schema(tmp_path, monkeypatch, external_acquisition, kind, key):
+    root = tmp_path / "new"; external_acquisition(root)
+    def mutate(at, value):
+        if at == kind:
+            if key == "extra": value[key] = None
+            else: value.pop(key)
+    expected = v3_external_fixture(root, mutate)
+    with pytest.raises(rt.BoundaryError, match="external_schema"):
+        prep.check_acquired(root, expected)
+
+
+
+@pytest.mark.parametrize("kind,key,value", [
+    ("acceptance", "schema", "other"), ("acceptance", "profile", None), ("acceptance", "workspace", "/other"),
+    ("terminal", "evidence_kind", "synthetic"), ("terminal", "evidence_kind", "self_reported"),
+    ("terminal", "evidence_kind", "pending"), ("terminal", "evidence_kind", "unknown"),
+    ("terminal", "schema", "other"), ("terminal", "profile", None), ("terminal", "workspace", "/other"),
+    *[("terminal", key, "0" * 64) for key in ("attempt_sha256", "manifest_sha256", "stdout_sha256", "stderr_sha256")],
+    ("terminal", "argv", []), ("terminal", "exit_code", 1), ("terminal", "exit_code", False),
+    ("terminal", "terminal_observed", False), ("terminal", "terminal_observed", 1),
+    ("terminal", "limits_pass", False), ("terminal", "limits_pass", 1), ("terminal", "first_failure", "shared_deadline"),
+    *[("terminal", "elapsed_seconds", value) for value in (-1, 601, True, "4", None, float("nan"), float("inf"), -float("inf"))],
+    ("terminal", "budget_seconds", 601), ("terminal", "budget_seconds", 600.0),
+    ("terminal", "cleanup_reserved_seconds", 6), ("terminal", "cleanup_reserved_seconds", 5.0),
+    ("terminal", "sources_before", []), ("terminal", "sources_after", []),
+    ("custody", "schema", "other"), ("custody", "profile", None), ("custody", "workspace", "/other"),
+    *[("custody", key, "0" * 64) for key in ("attempt_sha256", "manifest_sha256", "observer_terminal_sha256")],
+    ("custody", "all_absent", False), ("custody", "all_absent", 1), ("custody", "errors", ["unknown"]),
+    ("custody", "identities", []), ("acceptance", "sources", []),
+])
+def test_external_bound_fields_reject_self_asserted_bad_evidence(tmp_path, monkeypatch, external_acquisition, kind, key, value):
+    root = tmp_path / "new"; external_acquisition(root)
+    expected = v3_external_fixture(root, lambda at, row: row.update({key: value}) if at == kind else None)
+    with pytest.raises((rt.BoundaryError, ValueError)):
+        prep.check_acquired(root, expected)
+
+
+
+@pytest.mark.parametrize("role", ["attempt", "manifest", "stdout", "stderr", "observer_terminal", "custody", "source"])
+@pytest.mark.parametrize("fault", ["extra", "missing", "absolute", "parent", "backslash", "case", "alias", "role", "size-bool", "size-negative", "size-wrong", "sha-upper", "sha-wrong"])
+def test_external_reference_schema_names_and_bytes(tmp_path, monkeypatch, external_acquisition, role, fault):
+    root = tmp_path / "new"; external_acquisition(root)
+    def mutate(at, row):
+        if at != "acceptance": return
+        ref = row["sources"][0] if role == "source" else row[role]
+        if fault == "extra": ref["extra"] = 0
+        elif fault == "missing": ref.pop("sha256")
+        elif fault == "absolute": ref["file"] = str(root / "acquisition.json")
+        elif fault == "parent": ref["file"] = "../" + ref["file"]
+        elif fault == "backslash": ref["file"] = "other\\" + ref["file"]
+        elif fault == "case": ref["file"] = ref["file"].upper()
+        elif fault == "alias": ref["file"] += ". "
+        elif fault == "role": ref["file"] = "cli.stdout"
+        elif fault == "size-bool": ref["size_bytes"] = True
+        elif fault == "size-negative": ref["size_bytes"] = -1
+        elif fault == "size-wrong": ref["size_bytes"] += 1
+        elif fault == "sha-upper": ref["sha256"] = "A" * 64
+        elif fault == "sha-wrong": ref["sha256"] = "0" * 64
+    if role == "stdout" and fault == "role":
+        # A role cannot alias another role even if its own basename is valid.
+        fault = "parent"
+    expected = v3_external_fixture(root, mutate)
+    with pytest.raises(rt.BoundaryError): prep.check_acquired(root, expected)
+
+
+
+@pytest.mark.parametrize("kind", ["observer", "cli", "custody"])
+@pytest.mark.parametrize("fault", ["extra", "missing", "pid-bool", "pid-zero", "time-bool", "time-zero", "time-infinite", "relative", "alias"])
+def test_external_identity_strict_schema_and_types(tmp_path, monkeypatch, external_acquisition, kind, fault):
+    root = tmp_path / "new"; external_acquisition(root)
+    def mutate(at, row):
+        if at != ("custody" if kind == "custody" else "terminal"): return
+        ident = row["identities"][0] if kind == "custody" else row[kind]
+        if fault == "extra": ident["unknown"] = True
+        elif fault == "missing": ident.pop("pid")
+        elif fault == "pid-bool": ident["pid"] = True
+        elif fault == "pid-zero": ident["pid"] = 0
+        elif fault == "time-bool": ident["create_time"] = True
+        elif fault == "time-zero": ident["create_time"] = 0
+        elif fault == "time-infinite": ident["create_time"] = float("inf")
+        elif fault == "relative": ident["executable"] = "python.exe"
+        elif fault == "alias": ident["executable"] = str(Path(ident["executable"]).parent / ".." / "python.exe")
+    expected = v3_external_fixture(root, mutate)
+    with pytest.raises(rt.BoundaryError): prep.check_acquired(root, expected)
+
+
+
+@pytest.mark.parametrize("fault", ["duplicate", "observer", "missing-cli", "missing-worker", "reused-cli", "present", "unknown", "too-many", "observer-is-cli", "observer-sha", "wrong-executable", "worker-argv", "source-before", "source-after", "source-order"])
+def test_external_ownership_and_before_after_binding(tmp_path, monkeypatch, external_acquisition, fault):
+    root = tmp_path / "new"; external_acquisition(root)
+    def mutate(at, row):
+        if at == "terminal":
+            if fault == "observer-is-cli": row["observer"].update(row["cli"])
+            elif fault == "observer-sha": row["observer"]["source_sha256"] = "not-sha"
+            elif fault == "wrong-executable": row["cli"]["executable"] = prep.os.path.normcase(str((root / "other.exe").resolve()))
+            elif fault == "worker-argv": row["argv"][3] = "_acquire-worker"
+            elif fault == "source-before": row["sources_before"] = [{**ref, "sha256": "0" * 64} for ref in row["sources_before"]]
+            elif fault == "source-after": row["sources_after"] = [{**ref, "size_bytes": True} for ref in row["sources_after"]]
+        elif at == "custody":
+            rows = row["identities"]
+            if fault == "duplicate": rows.append(dict(rows[0]))
+            elif fault == "observer": rows.append({**rows[0], "pid": 100, "create_time": 1.0})
+            elif fault == "missing-cli": rows.pop(0)
+            elif fault == "missing-worker": rows.pop()
+            elif fault == "reused-cli": rows[0]["create_time"] = 1000.0
+            elif fault == "present": rows[0]["absent"] = False
+            elif fault == "unknown": rows[0]["absent"] = "unknown"
+            elif fault == "too-many": rows.extend([{**rows[1], "pid": n + 300} for n in range(127)])
+        elif at == "acceptance" and fault == "source-order": row["sources"].reverse()
+    expected = v3_external_fixture(root, mutate)
+    with pytest.raises(rt.BoundaryError): prep.check_acquired(root, expected)
+
+
+
+@pytest.mark.parametrize("raw", [b'', b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}', b'{}\n',
+    b'{"status":"ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n', b'prefix\n{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n',
+    b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n\n', b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n' * 2])
+def test_external_stdout_is_exact_original_protocol(tmp_path, monkeypatch, external_acquisition, raw):
+    root = tmp_path / "new"; external_acquisition(root)
+    folder = root.with_name(root.name + ".external-review")
+    def mutate(at, row):
+        if at == "terminal":
+            (folder / "cli.stdout").write_bytes(raw)
+            row["stdout_sha256"] = rt.digest(raw)
+        elif at == "acceptance": row["stdout"] = rt.reference(folder / "cli.stdout", folder)
+    expected = v3_external_fixture(root, mutate)
+    with pytest.raises(rt.BoundaryError, match="external_stdout_protocol"): prep.check_acquired(root, expected)
+
+
+
+@pytest.mark.parametrize("fault", ["missing", "manifest-sha", "wrong-sha", "self-marker", "strip-profiles"])
+def test_external_digest_is_never_automatically_approved_or_legacy_fallback(tmp_path, monkeypatch, external_acquisition, fault):
+    root = tmp_path / "new"; external_acquisition(root)
+    if fault in {"manifest-sha", "wrong-sha"}: v3_external_fixture(root)
+    if fault == "self-marker": (root / "success.json").write_text('{"success":true}')
+    if fault == "strip-profiles":
+        for name in ("acquisition.json", "raw-acquisition.json", "acquisition-attempt.json", "acquisition-supervision.json"):
+            path = root / name; value = rt.load(path); value.pop("acquisition_profile"); path.write_text(json.dumps(value))
+        lock = rt.load(root / "acquisition.json")
+        lock["acquisition_cleanup"] = rt.reference(root / "acquisition-supervision.json", root)
+        (root / "acquisition.json").write_text(json.dumps(lock))
+    expected = "0" * 64 if fault == "wrong-sha" else rt.digest((root / "acquisition.json").read_bytes())
+    with pytest.raises(rt.BoundaryError, match="external_"): prep.check_acquired(root, expected)
+
+
+
+@pytest.mark.parametrize("fault", ["extra-file", "extra-directory", "case-alias", "other-root", "hardlink", "reparse"])
+def test_external_sibling_and_reference_path_boundaries(tmp_path, monkeypatch, external_acquisition, fault):
+    root = tmp_path / "new"; external_acquisition(root)
+    expected = v3_external_fixture(root); folder = root.with_name(root.name + ".external-review")
+    if fault == "extra-file": (folder / "extra").write_bytes(b'')
+    elif fault == "extra-directory": (folder / "extra").mkdir()
+    elif fault == "case-alias": (folder / "acceptance.json").rename(folder / "Acceptance.json")
+    elif fault == "other-root": folder.rename(tmp_path / "different.external-review")
+    elif fault == "hardlink":
+        # Model equal filesystem identities: Windows restricted environments
+        # need not permit creating a real hardlink for this pure boundary test.
+        (folder / "cli.stderr").write_bytes((folder / "cli.stdout").read_bytes())
+        acceptance = rt.load(folder / "acceptance.json"); acceptance["stderr"] = rt.reference(folder / "cli.stderr", folder)
+        (folder / "acceptance.json").write_text(json.dumps(acceptance)); expected = rt.digest((folder / "acceptance.json").read_bytes())
+        original_stat = Path.stat
+        def same_identity(path, *args, **kwargs):
+            return original_stat(folder / "cli.stdout" if path == folder / "cli.stderr" else path, *args, **kwargs)
+        monkeypatch.setattr(Path, "stat", same_identity)
+    elif fault == "reparse":
+        original = Path.lstat
+        def lstat(path, *args, **kwargs):
+            if path == folder: return SimpleNamespace(st_mode=stat.S_IFDIR, st_file_attributes=1024)
+            return original(path, *args, **kwargs)
+        monkeypatch.setattr(Path, "lstat", lstat)
+    with pytest.raises(rt.BoundaryError) as caught: prep.check_acquired(root, expected)
+    if fault == "hardlink": assert str(caught.value) == "external_file_alias"
+
+
+
+def test_external_orphan_compound_finalization_failure_has_no_acceptance(tmp_path, monkeypatch):
+    root = tmp_path / "new"; clock = Clock(); original = Path.rename; write_metadata = prep.write_metadata
+    def rename(path, target):
+        if path.name == "acquisition.json": raise OSError("synthetic rollback failure")
+        result = original(path, target)
+        if path.name == "acquisition-pending.json": clock.now = 601
+        return result
+    def write(root, path, *args, **kwargs):
+        if path.name == "acquisition-supervision-failure.json": raise OSError("synthetic marker failure")
+        return write_metadata(root, path, *args, **kwargs)
+    monkeypatch.setattr(Path, "rename", rename); monkeypatch.setattr(prep, "write_metadata", write)
+    with pytest.raises(rt.BoundaryError, match="shared_deadline") as caught: v3_mocked_acquisition(root, monkeypatch, clock)
+    assert len(caught.value.__notes__) == 2
+    assert (root / "acquisition.json").exists()
+    assert not (root / "acquisition-pending.json").exists() and not (root / "acquisition-supervision-failure.json").exists()
+    with pytest.raises(rt.BoundaryError, match="external_acceptance_missing"):
+        prep.check_acquired(root, rt.digest((root / "acquisition.json").read_bytes()))
+    expected = v3_external_fixture(root, lambda at, row: row.update(exit_code=1, elapsed_seconds=601, first_failure="shared_deadline") if at == "terminal" else None)
+    with pytest.raises(rt.BoundaryError, match="external_terminal_failed"): prep.check_acquired(root, expected)
+
+
+@pytest.mark.parametrize("name,limit", [("acceptance.json", 64 * 1024), ("observer-terminal.json", 128 * 1024),
+    ("custody.json", 256 * 1024), ("cli.stdout", 4 * 1024), ("cli.stderr", 8 * 1024**2),
+    ("acquisition-attempt.json", 16 * 1024), ("acquisition.json", 16 * 1024**2),
+    ("prepare.py", 256 * 1024), ("runtime.py", 128 * 1024), ("pins.json", 32 * 1024)])
+def test_external_reads_are_bounded_before_open_and_during_read(tmp_path, monkeypatch, name, limit):
+    path = tmp_path / name; path.write_bytes(b'x' * (limit + 1))
+    original = Path.open
+    def forbidden(path, *args, **kwargs): raise AssertionError("oversize file must not be opened")
+    monkeypatch.setattr(Path, "open", forbidden)
+    with pytest.raises(rt.BoundaryError, match="external_read_limit"): prep.external_read(tmp_path, name, limit, set())
+    monkeypatch.setattr(Path, "open", original); path.write_bytes(b'x' * limit)
+    calls = []
+    class Tracking:
+        def __init__(self, stream): self.stream = stream
+        def __enter__(self): return self
+        def __exit__(self, *args): self.stream.close()
+        def fileno(self): return self.stream.fileno()
+        def read(self, size): calls.append(size); return self.stream.read(size)
+    monkeypatch.setattr(Path, "open", lambda path, *args, **kwargs: Tracking(original(path, *args, **kwargs)))
+    assert prep.external_read(tmp_path, name, limit, set()) == b'x' * limit
+    assert all(0 < size <= 65536 for size in calls)
+
+
+@pytest.mark.parametrize("fault", ["growth", "short", "changed-stat", "observation"])
+def test_external_read_rejects_observed_races_and_io_errors(tmp_path, monkeypatch, fault):
+    path = tmp_path / "record"; path.write_bytes(b'abcd'); original = Path.open
+    class Faulty:
+        def __init__(self, stream): self.stream = stream; self.calls = 0
+        def __enter__(self): return self
+        def __exit__(self, *args): self.stream.close()
+        def fileno(self): return self.stream.fileno()
+        def read(self, size):
+            self.calls += 1
+            if fault == "observation": raise OSError("synthetic read failure")
+            if fault == "growth": return b'x' * 5
+            if fault == "short": return b''
+            data = self.stream.read(size)
+            if self.calls == 1:
+                with original(path, "ab") as out: out.write(b'x')
+            return data
+    monkeypatch.setattr(Path, "open", lambda path, *args, **kwargs: Faulty(original(path, *args, **kwargs)))
+    with pytest.raises((rt.BoundaryError, OSError)): prep.external_read(tmp_path, "record", 4, set())
+
+
+@pytest.mark.parametrize("raw", [b'{"a":1,"a":2}', b'{"outer":{"a":1,"a":2}}', b'{"x":NaN}', b'{"x":Infinity}',
+    b'{"x":-Infinity}', b'\xff', '{}'.encode('utf-16'), b'{} garbage'])
+def test_external_json_rejects_duplicates_nonfinite_and_non_utf8(raw):
+    with pytest.raises((rt.BoundaryError, ValueError)): prep.external_json(raw)
+
+
+@pytest.mark.parametrize("fault", ["companion", "manifest", "stdout", "source-ref", None])
+def test_external_build_double_check_and_verifier_review_artifact_forwarding(tmp_path, monkeypatch, external_acquisition, fault):
+    monkeypatch.delenv("SystemRoot", raising=False)
+    root = tmp_path / "new"; external_acquisition(root)
+    expected = v3_external_fixture(root); folder = root.with_name(root.name + ".external-review")
+    calls, checks = [], []
+    check = prep.check_acquired
+    def checked(where, sha):
+        checks.append(sha)
+        return check(where, sha)
+    monkeypatch.setattr(prep, "check_acquired", checked)
+    def runner(argv, **kwargs):
+        calls.append(argv)
+        prefix = kwargs["log_prefix"]
+        for ext in (".stdout", ".stderr"): Path(str(prefix) + ext).write_bytes(b'')
+        rt.write(Path(str(prefix) + ".json"), {"cleanup": {"all_absent": True, "errors": [], "identities": []}})
+        if len(calls) == 1:
+            (root / "configure-trace.jsonl").write_text(json.dumps({"cmd": "execute_process", "args": ["COMMAND", str(argv[0]), "--version"]}) + "\n")
+        else:
+            target = root / "build/bin"; target.mkdir(parents=True); (target / "summary-grammar-validator.exe").write_bytes(b'not-executable')
+            if fault == "companion": (folder / "acceptance.json").write_bytes(b'{}')
+            elif fault == "manifest": (root / "acquisition.json").write_bytes(b'{}')
+            elif fault == "stdout": (folder / "cli.stdout").write_bytes(b'{}\n')
+            elif fault == "source-ref":
+                acceptance = rt.load(folder / "acceptance.json"); acceptance["sources"][0]["sha256"] = "0" * 64
+                (folder / "acceptance.json").write_text(json.dumps(acceptance))
+        return {}
+    if fault:
+        with pytest.raises(rt.BoundaryError, match="external_"): prep.build(root, expected, runner=runner, clock=lambda: 0)
+        assert not (root / "build-manifest.json").exists()
+    else:
+        result = prep.build(root, expected, runner=runner, clock=lambda: 0)
+        assert result["acquisition_sha256"] == expected
+        assert rt.load(root / "build-attempt.json")["acquisition_sha256"] == expected
+        assert check(root, expected)["schema_version"] == 2  # Build additions are permitted.
+        class Forwarded(Exception): pass
+        def verifier_gate(where, sha):
+            assert sha == expected and check(where, sha)["schema_version"] == 2
+            raise Forwarded("stop before any verification/native work")
+        monkeypatch.setattr(verify, "check_acquired", verifier_gate)
+        with pytest.raises(Forwarded): verify.verify(root, rt.digest((root / "build-manifest.json").read_bytes()))
+    assert checks == [expected, expected] and len(calls) == 2
+
+
+
+def test_external_valid_crlf_boundary_time_and_unprovable_observer_truth(tmp_path, monkeypatch, external_acquisition):
+    root = tmp_path / "new"; result = external_acquisition(root)
+    folder = root.with_name(root.name + ".external-review")
+    def mutate(at, row):
+        if at == "terminal":
+            raw = b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\r\n'
+            (folder / "cli.stdout").write_bytes(raw); row["stdout_sha256"] = rt.digest(raw); row["elapsed_seconds"] = 600
+        elif at == "acceptance": row["stdout"] = rt.reference(folder / "cli.stdout", folder)
+    expected = v3_external_fixture(root, mutate)
+    # Deliberately synthetic claims can pass structure if a caller supplies their
+    # digest. This demonstrates the external-review trust boundary, not approval.
+    assert prep.check_acquired(root, expected) == result
