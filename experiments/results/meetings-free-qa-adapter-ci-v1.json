@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "status": "EXACT_HEAD_REQUIRED_CI_PASSED",
+  "head": "0c34174f65c6d415e046925a7b4e2d11495264f7",
+  "runs": [
+    {
+      "run_id": 40609990173,
+      "event": "push",
+      "head_sha": "0c34174f65c6d415e046925a7b4e2d11495264f7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40609990173",
+      "jobs": [
+        {
+          "id": 122558918269,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122558918405,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122558918410,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 40609996316,
+      "event": "pull_request",
+      "head_sha": "0c34174f65c6d415e046925a7b4e2d11495264f7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40609996316",
+      "jobs": [
+        {
+          "id": 122558938635,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122558939052,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122558939086,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "push_observations": {
+    "python_summary": "2026-10-28T00:41:31.2074981Z 4859 passed, 21 skipped, 2 warnings in 197.55s (0:03:17)",
+    "browser_summary": "2026-10-28T00:43:48.9380953Z Browser batch: 158 passed, 0 failed tests; 0 infrastructure failures (0 startup), 0 specs without reports, 0 missing runs; exit 0; artifacts: .local/web-e2e-batch-3XfeCu",
+    "actual_java_operations": "2026-10-28T00:39:33.6497422Z {\"status\": \"passed\", \"report\": \".local/meeting-operations-ci/report.json\", \"AI_quality\": false}"
+  },
+  "watch_sessions": [
+    {
+      "id": 74793,
+      "exit_code": 0,
+      "closed": true
+    },
+    {
+      "id": 78179,
+      "exit_code": 0,
+      "closed": true
+    }
+  ],
+  "limits": [
+    "Synthetic model transport in service checks is not AI quality.",
+    "Public frozen result replay is not fresh model inference or held-out evaluation.",
+    "Windows asset acquisition and new model quality remain unverified."
+  ]
+}

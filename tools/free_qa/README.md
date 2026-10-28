@@ -8,16 +8,27 @@ The GGUF conversion's base commit is unknown. The separately observed base
 revision and repository templates are not asserted to be the shards' metadata.
 No runtime binary is copied, downloaded, upgraded or currently reverified here.
 
-From the repository root, with the existing Python environment (Python 3.11+
-and psutil for future worker supervision):
+From the repository root, use an explicitly verified Python 3.11 or 3.12
+environment with psutil. This checkout currently uses the separate asset-only
+Python described in [runtime recovery](../../docs/MEETINGS-ASSET-RUNTIME-RECOVERY.md);
+the original uv Python junction is blocked and remains unchanged:
 
 ```powershell
 python -B scripts/prepare_meeting_free_qa.py inspect
 # Only after separate review and an explicit acquisition assignment:
-python -B scripts/prepare_meeting_free_qa.py acquire --root models/meetings-qwen25-7b-q4km-v1 --download
+python -B scripts/prepare_meeting_free_qa.py acquire --root models/meetings-qwen25-7b-q4km-new-run --download
 # Separate offline verification; no network fallback and no automatic retry:
-python -B scripts/prepare_meeting_free_qa.py verify-only --root models/meetings-qwen25-7b-q4km-v1
+python -B scripts/prepare_meeting_free_qa.py verify-only --root models/meetings-qwen25-7b-q4km-new-run
 ```
+
+The example root must be a fresh, separately assigned name; never reuse it for a
+second acquisition. In this checkout the failed `v1` root is preserved, and the
+successful `v2` root is consumed and immutable. [The v2 result](../../experiments/results/meetings-free-qa-acquisition-v2.json)
+records two full pinned shards, CLI/wrapper exit 0 and parent custody acceptance.
+It is not permission to repeat acquisition or proof of model loading or quality.
+The [separate metadata review](../../docs/MEETINGS-FREE-QA-METADATA-REVIEW.md)
+and fixed-source environment checks have completed; current runtime admission,
+exact code bindings and actual model protocol/quality checks remain required.
 
 `inspect` reads only the pinned public profile. Acquire requires a nonexistent
 workspace whose parent exists and the explicit `--download` flag. Publication

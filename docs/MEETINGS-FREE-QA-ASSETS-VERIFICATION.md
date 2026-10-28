@@ -1,6 +1,6 @@
 # 무료 QA 모델 자산 준비 구현과 검증
 
-2026-10-28 갱신. 고정된 무료 모델 파일을 준비하는 도구를 구현했다. 첫 실제 취득은 `download_origin`·전송0B로 실패했고 원본을 보존했다. 정확한 CDN 호스트 추가는129합성검사와 독립 코드 검토를 통과했으며, 수정 소스 CI와 새 취득·실제 모델 검증은 남아 있다.
+2026-10-28 갱신. 고정된 무료 모델 파일을 준비하는 도구를 구현했다. 첫 실제 취득은 `download_origin`·전송0B로 실패했고 원본을 보존했다. 정확한 CDN 호스트 추가는129합성검사·독립 코드 검토·수정 소스 CI를 통과했다. 새 폴더의 실제 취득과 별도 내장 metadata 검토를 완료했으며 실제 모델 로딩·품질 검증은 남아 있다.
 
 ## 해결하려는 문제와 선택
 
@@ -25,10 +25,12 @@
 
 [수정 결과](../experiments/results/meetings-free-qa-origin-repair-v1.json)는 기존104+추가25검사129통과·Ruff·독립 검토 blocker0을 기록한다. 기존 테스트21함수의 원본 전체 prefix와 그 외 생산 코드가 그대로다. 와일드카드나 임의 하위 도메인을 허용하지 않으며, 성공하는 실제 다운로드를 입증한 검사는 아니다.
 
-실패 폴더 `models/meetings-qwen25-7b-q4km-v1`은 재사용하지 않는다. 다음 취득은 수정 소스의 CI와 새 폴더·새 실행 기록을 고정한 뒤 수행한다. 실패 파일을 offline verify로 성공 상태로 바꾸지 않는다.
+실패 폴더 `models/meetings-qwen25-7b-q4km-v1`은 재사용하지 않았다. 수정 소스0c34174의 양쪽 CI 이후 새 v2 폴더·실행 기록으로 취득1회를 수행했다. 실패 파일을 offline verify로 성공 상태로 바꾸지 않았다.
+
+[새 실제 취득](../experiments/results/meetings-free-qa-acquisition-v2.json)은 CLI0·wrapper0,862.985초,두 shard4,683,073,632바이트다. 부모는 전체 SHA·결과17파일·보존5,390참조·소스4개·실행환경5개·소유 프로세스6개 부재를 확인했다. 기존 Python 시작 오류는 [자산용 격리 환경](MEETINGS-ASSET-RUNTIME-RECOVERY.md)으로 분리했으며 원래 환경을 수정하지 않았다. 모델 추론과 내용 검수는 아직0이다.
 
 ## 실행과 다음 단계
 
 설치된 프로젝트 Python 환경에서 `python -B scripts/prepare_meeting_free_qa.py inspect`로 프로필만 확인할 수 있다. 실제 취득·offline 검증 명령은 [도구 README](../tools/free_qa/README.md)에 있고, [운영 gate](MEETINGS-FREE-QA-ACQUISITION-GATE.md)를 충족한 별도 실행에만 사용한다.
 
-다음은 정확 소스 CI, 별도 취득, 실제 내장 metadata 검토다. 그 뒤에도 실제 로딩·자원 적합성·새6개 개발 비교·격리 평가·Java 서비스 채택은 남아 있다. 더 큰 모델의 우위·응답 속도·정확성·새 하드웨어 적합성을 아직 주장하지 않는다. 사용자 직접 검수는0이다.
+[내장 metadata 검토](MEETINGS-FREE-QA-METADATA-REVIEW.md)와 별도 환경의 고정 소스 합성 검사는 마쳤다. 다음은 현재 runtime·외부 gate 결속과 새 코드 회귀 확인이다. 그 뒤에도 실제 로딩·자원 적합성·새6개 개발 비교·격리 평가·Java 서비스 채택은 남아 있다. 더 큰 모델의 우위·응답 속도·정확성·새 하드웨어 적합성을 아직 주장하지 않는다. 사용자 직접 검수는0이다.

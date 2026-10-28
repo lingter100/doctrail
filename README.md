@@ -17,9 +17,11 @@
 | 검색 모델 비교 | BM25·임베딩·혼합·리랭커, 도메인 임베딩 미세조정과 실제 서비스 연결 | 격리 최종 평가와 기본 모델 채택 판단 |
 | AI 요약·질의응답 | 실제 로컬 추론, 출처 검증·답변 보류·오류 복구 | 정보 누락·의미 오류 개선, 독립 품질 평가 |
 
-2026-10-27 게시 소스 `017141a`의 필수 CI와 전체 브라우저 검사158개를 통과했다. 일부 화면 검사는 합성 모델 응답을 사용하므로 실제 AI 품질의 근거로 세지 않는다. 최근 소규모 개발 QA 비교의 내용 수용은0/4였고 실패 후보는 채택하지 않았다. [기능 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)과 [AI 실패 분석](docs/MEETINGS-LOCAL-QA-CONTROL-RESULTS.md)을 구분해 기록한다.
+2026-10-28 게시 소스 `0c34174`의 양쪽 필수 CI와 전체 브라우저 검사158개를 통과했다. 일부 화면 검사는 합성 모델 응답을 사용하므로 실제 AI 품질의 근거로 세지 않는다. 최근 소규모 개발 QA 비교의 내용 수용은0/4였고 실패 후보는 채택하지 않았다. [기능 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)과 [AI 실패 분석](docs/MEETINGS-LOCAL-QA-CONTROL-RESULTS.md)을 구분해 기록한다.
 
-새 [무료 QA 비교 실행기](docs/MEETINGS-FREE-QA-ADAPTER-VERIFICATION.md)는 합성 회귀와 독립 코드 검토를 마쳤다. 실제 새 모델 비교는 아직 전이며, 두 준비 실패와 수정 내역을 보존했다.
+새 [무료 QA 비교 실행기](docs/MEETINGS-FREE-QA-ADAPTER-VERIFICATION.md)는 합성 회귀·독립 코드 검토·필수 CI를 마쳤다. 새 모델의 [실제 파일 취득](experiments/results/meetings-free-qa-acquisition-v2.json)은 862.985초에 완료했고 전체4.68GB 해시와 종료·기존 자료 보존을 확인했다. [내부 설정 검토](docs/MEETINGS-FREE-QA-METADATA-REVIEW.md)는 마쳤고 실제 로딩·답변 비교는 남아 있다. 앞선 준비 실패도 보존한다.
+
+[요약 엔진 준비 v3](docs/MEETINGS-SUMMARY-ENGINE-V3-VERIFICATION.md)는 x64 파일 선택·자원 표본 정책과 실제 외부 종료 기록의 결속을 구현했다. 고정 소스554합성 검사와 독립 검토를 마쳤으며 실제 새 취득·빌드·요약 품질은 아직 검증 전이다. 최초 최종화 결함과 수정 중 실패도 보존한다.
 
 기능별 상태·남은 순서는 [진행 상황](docs/PROGRESS-OVERVIEW.md), 재현과 한계는 [실험 기록](experiments/README.md), 현재 확인된 경험을 설명하는 자료는 [포트폴리오 초안](docs/PORTFOLIO-DRAFT.md)·[면접 초안](docs/INTERVIEW-DRAFT.md)에 있다. 사용자 직접 검수·시연·설명 연습은 아직 확인하지 않았다. 녹음·STT·외부 회의 연동은2차 범위이며 유료 사용과 공개 서비스 배포는 하지 않았다.
 

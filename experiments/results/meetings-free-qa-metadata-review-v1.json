@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "INDEPENDENT_AI_METADATA_ACCEPTED_ONLY",
+  "metadata_blockers": 0,
+  "advisories": 2,
+  "metadata_bytes_read": 14327500,
+  "tensor_bytes_read": 0,
+  "current_full_weight_hash_passes_by_reviewer": 0,
+  "models": [
+    {
+      "id": "qwen25-7b-q4km",
+      "architecture": "qwen2",
+      "shard_header_bytes": [
+        5934211,
+        106
+      ],
+      "split_indices": [
+        0,
+        1
+      ],
+      "split_count": 2,
+      "tensor_header_counts": [
+        280,
+        59
+      ],
+      "template_bytes": 2509,
+      "template_sha256": "d5495a1e5db0611132a97e46a65dbb64a642a499421228b9c8b93229097fa9a4",
+      "tokenizer_sha256": "62c4c2969e067fddb2724130937321ada12ec02a3ca7f958653dafa9c937fc0b",
+      "embedded_context_length": 131072,
+      "separately_observed_base_context_length": 32768,
+      "planned_runtime_context": 6144,
+      "conversion_base_commit": null,
+      "differences": "Embedded template differs from separately observed base template by two braces; stored BOS151643 coexists with add_bos=false. Embedded observations are retained, not replaced."
+    },
+    {
+      "id": "ministral3-3b-q5km",
+      "architecture": "mistral3",
+      "shard_header_bytes": [
+        8393183
+      ],
+      "split_count": null,
+      "tensor_header_counts": [
+        236
+      ],
+      "template_bytes": 7753,
+      "template_sha256": "d28d7df94f0fd7e8d0075a22c473333d6e7dd2bc4c36c83e8b975300a0fb94bc",
+      "tokenizer_sha256": "b87096199996031a52163a72505c431e21ba1e33524aa87636439893e1f85294",
+      "embedded_context_length": 262144,
+      "planned_runtime_context": 6144,
+      "fresh_complete_weight_hash_checked": false
+    }
+  ],
+  "review_receipt_sha256": "d394c33f4f947db9dc3cc8c96f24598aa7280cd5c4888226b53f6ef5ff25c322",
+  "review_manifest_sha256": "0ab6d36a89ed6a1a532108fa93eb9f164d7f8d835d8945a55eb680379c5ce4f9",
+  "parent_acceptance_sha256": "aea3a8e6e1d43b99c37c9de50106275ac0adf89323bb3048b21d37cc7729d703",
+  "parent_input_refs_verified": 51,
+  "parent_output_refs_verified": 36,
+  "actual_model_tokenizer_network_calls": 0,
+  "human_review": 0,
+  "execution_approved": false,
+  "service_adopted": false,
+  "remaining": [
+    "Fresh existing3B full hash and runtime55 custody",
+    "Exact model-specific external gate wrappers and bindings",
+    "Current code/inference environment verification",
+    "Separate new-six-case sealing and execution registrations",
+    "Actual neutral protocol run then paired quality comparison"
+  ]
+}

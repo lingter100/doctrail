@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "FIXED_HEAD_IMPORT_AND_SYNTHETIC_COMPATIBILITY_PASS",
+  "source_commit": "0c34174f65c6d415e046925a7b4e2d11495264f7",
+  "fixed_public_source_files": 69,
+  "source_bytes": 1190270,
+  "new_interpreter": ".local/meeting-qa-inference-python312-v1/venv/Scripts/python.exe",
+  "python_version": "3.12.14",
+  "locked_dependency_packages": 23,
+  "new_wheel_transfer_bytes": 3953750,
+  "reused_locked_wheels": 7,
+  "sanitized_import_exit": 0,
+  "cli_help_exit": 0,
+  "tests": {
+    "tests": 167,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "test_elapsed_seconds": 22.92200000002049,
+  "asset_environment_files_preserved": 1394,
+  "installed_files_hash_recorded": 1960,
+  "parent_control_refs_verified": 32,
+  "compatibility_receipt_sha256": "eb9a720f2fd09cc095c960294354a77b4089e65779a52f9ec6769ebe45534497",
+  "safe_summary_sha256": "8a4d2f3217cef3f22fb0d24c471b330a6fde666d679d364cef7b1664f3ffb3af",
+  "parent_acceptance_sha256": "af66f46d60088e922b07b42182b317723f199fb65e949aeb329755b944d01244",
+  "current_working_source_tested": false,
+  "original_uv_environment_changed": false,
+  "model_tokenizer_native_loopback_calls": 0,
+  "human_review": 0,
+  "limitations": "Only copied public source at0c was imported/tested. Current engine changes need separate combined regression and exact CI; actual model loading/protocol/quality remain untested."
+}

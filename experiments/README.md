@@ -1,5 +1,18 @@
 # 실험 실행 기록
 
+## 2026-10-28 · 무료 QA 비교 준비의 현재 근거
+
+- [비교 실행기 CI](results/meetings-free-qa-adapter-ci-v1.json): 게시 소스0c34174의 양쪽 필수 검사 통과. Python4,859통과·21skip, 전체 브라우저158통과. 실제 AI 품질 검사는 아니다.
+- [자산 전용 Python 호환성](results/meetings-asset-python312-readiness-v1.json): 원래 실행 오류를 보존하고 별도 환경에서350합성·회귀 검사와 제한환경 가져오기를 확인했다.
+- [새 모델 실제 취득](results/meetings-free-qa-acquisition-v2.json): 862.985초, 두 파일4,683,073,632바이트, 전체 SHA·종료·원본 보존 확인. 새 모델 추론·품질 평가는0이다.
+- [실제 내장 설정 검토](results/meetings-free-qa-metadata-review-v1.json): GGUF header14,327,500바이트만 읽은 독립 검토. 차단0·주의2이며 tokenizer 실행·답변 품질 검사가 아니다.
+- [별도 추론 환경](results/meetings-qa-inference-python312-readiness-v1.json): 잠금패키지23개와 고정0c 소스에서 QA167합성 검사. 기존 환경을 덮어쓰지 않았다.
+- [현재 자산 결속 후보](results/meetings-free-qa-asset-gates-v1.json): 기존3B/runtime62파일 전체 해시와 새7B 취득 기록 결속. 독립 검토 차단0·주의1이며 과거 설치commit unknown·추론 미실행을 유지한다.
+- [엔진 v3 최초 구현과 B1](results/meetings-summary-engine-v3-review-v1.json): 엔진285합성·결합 QA/자산296통과 뒤 독립 검토가 최종화 오류를 발견했다. 원래 통과와 결함 재현은 보존하며 [외부 종료 결속](../docs/MEETINGS-SUMMARY-ENGINE-V3-EXTERNAL-GATE.md)을 별도 수정한다.
+- [외부 종료 결속 수정](results/meetings-summary-engine-v3-external-gate-v1.json): 고정 소스554합성 검사·Ruff, 독립 검토 차단0·권고0. 최초 탐색 실패와 Windows fixture 오류를 보존했다. 게시 소스 CI와 실제 취득·빌드·모델은 별도다.
+
+앞선 [QA 취득 실패](results/meetings-free-qa-acquisition-v1.json)와 [엔진 취득 실패](results/meetings-summary-engine-acquisition-v2.json)는 원래 결과로 남긴다. 내장 metadata 검토와 별도 추론 환경의 범위 검사는 마쳤지만 새6개 실제 개발 비교는 후속 단계다. 요약 엔진은 [v3 구현 계약](../docs/MEETINGS-SUMMARY-ENGINE-V3-PLAN.md)과 외부 종료 결속을 검증 중이며 실제 취득·빌드 성공을 아직 주장하지 않는다.
+
 ## M1 파일럿: 기능 연결과 실패 탐색
 
 재현 명령:
