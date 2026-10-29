@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "status": "SOURCE_REVIEW_ACCEPTED_PENDING_PUBLISHED_CI",
+  "baseline_commit": "75b76e139a2d6fbb0c0a01f377ba568ea9c95875",
+  "production_delta": "One fixed TRUSTED_LOCK_FILE literal from data/meetings/free-qa-trusted-locks-v1.json to data/meetings/free-qa-trusted-locks-v2.json; other runner bytes unchanged.",
+  "sources": [
+    {
+      "file": "tools/free_qa/runner.py",
+      "sha256": "79a7b17c664eeb86daa3c5ea2aca9203dcb5c68b16b069e5448f88b167e8110e",
+      "size_bytes": 38669
+    },
+    {
+      "file": "tests/test_meeting_free_qa.py",
+      "sha256": "df36a6199ef6a8cbab9ecb6ce69b92d5d9c1c0137ec607eb9f95ad4ade7a09db",
+      "size_bytes": 81945
+    }
+  ],
+  "implementation_receipt_sha256": "5df1611b009454108c1d9cf49301e718d3ad9b454537a29e6aea9cdb7ef91bac",
+  "tests": {
+    "new_synthetic_cases": 9,
+    "focused_passed": 12,
+    "focused_inherited_cases": 3,
+    "focused_pytest_seconds": 4.23,
+    "related_qa_passed": 217,
+    "related_startup_passed": 70,
+    "related_combined_passed": 287,
+    "related_pytest_seconds": 43.53,
+    "related_wrapper_seconds": 44.8133501,
+    "ruff": "passed",
+    "initial_test_failures": 0
+  },
+  "independent_review": {
+    "receipt_sha256": "2d5b0299937bb634812b95fd14f5f4019afba26e51c6f38c871f837472a52dd0",
+    "blockers": 0,
+    "advisories": 0,
+    "finite_refs_verified": 24,
+    "tests_rerun": 0,
+    "human_review": false
+  },
+  "verified_boundaries": [
+    "fixed v2 trust loading and v1-only rejection",
+    "source change rejected before reservation",
+    "closed v1 bytes preserved",
+    "contract/epoch once rejects retry with alternate output",
+    "startup terminal and zero-generation neutral rejected as QA predecessors",
+    "valid neutral/baseline predecessor ordering and inherited13 generation/3328 token cap"
+  ],
+  "preserved": [
+    "policy, adapter, model settings, schemas, shared leases and once behavior",
+    "archived original source2 at Git75b",
+    "consumed startup v2 and all previous failed comparisons",
+    "sealed questions, criteria, packet and order"
+  ],
+  "actual_new_controls_created": false,
+  "actual_model_calls": 0,
+  "private_semantic_reads": 0,
+  "next": "Exact new-source CI before fresh candidate preparation; neutral generation first under a separate actual assignment. Startup success is not a QA predecessor."
+}
