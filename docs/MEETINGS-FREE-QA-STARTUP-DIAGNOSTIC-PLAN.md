@@ -48,13 +48,13 @@
 
 ## 현재 구현과 재현
 
-기존 실행기·어댑터의 공통 부분과 새 `scripts/probe_meeting_free_qa_startup.py`를 구현했다. `verify`는 별도 신뢰·등록의 메타데이터만 검사하며 실제 가중치를 준비하거나 실행하지 않는다. `run`은 정확한 등록 SHA와 once를 요구하는 별도 실제 실행 진입점이다. 아직 실제 신뢰·등록 파일은 만들지 않았다.
+기존 실행기·어댑터의 공통 부분과 새 `scripts/probe_meeting_free_qa_startup.py`를 구현했다. `verify`는 별도 신뢰·등록의 메타데이터만 검사하며 실제 가중치를 준비하거나 실행하지 않는다. `run`은 정확한 등록 SHA와 once를 요구하는 별도 실제 실행 진입점이다. 독립 검토 뒤 별도 로컬 신뢰·등록 파일을 설치했고 공식 메타데이터 검사 1회가 종료 0·1.703초로 통과했다. 이후 실제 시작 진단 1회는 준비 확인 뒤 설정 검증에서 중단됐고 once는 소비됐다. [실제 결과와 보존 검증 실패](MEETINGS-FREE-QA-STARTUP-RESULTS.md)를 성공이나 QA 선행 조건으로 바꾸지 않는다.
 
-관련 QA 189개와 새 진단 65개, 총 254개·Ruff가 통과했다. 초기 모형 오류와 수정 결과는 [구조화 기록](../experiments/results/meetings-free-qa-startup-implementation-v1.json)에 보존했다. 독립 Astra xhigh 변경 검토는 차단 0·권고 0으로 완료했다. 공유 검증/준비 조건과 기존 QA 실행·once·종료 흐름의 보존을 확인했다. 게시 소스 CI는 다음 단계다.
+관련 QA 189개와 새 진단 65개, 총 254개·Ruff가 통과했다. 초기 모형 오류와 수정 결과는 [구조화 기록](../experiments/results/meetings-free-qa-startup-implementation-v1.json)에 보존했다. 독립 Astra xhigh 변경 검토는 차단 0·권고 0으로 완료했다. 공유 검증/준비 조건과 기존 QA 실행·once·종료 흐름의 보존을 확인했다. 게시 커밋2bda334의 양쪽 필수 CI는 모두 통과했다. Python 5,327개 통과·21개 제외, 브라우저 158개 통과와 실제 Java 운영 검사는 [CI 기록](../experiments/results/meetings-free-qa-startup-ci-v1.json)에 별도로 남겼다. 이는 실제 모델 준비·답변 품질 검증이 아니다.
 
 ```sh
 python -B -m pytest tests/test_meeting_free_qa.py tests/test_meeting_free_qa_startup.py -q -p no:cacheprovider
 ruff check tools/free_qa/runner.py tools/free_qa/adapter.py scripts/probe_meeting_free_qa_startup.py tests/test_meeting_free_qa.py tests/test_meeting_free_qa_startup.py --no-cache
 ```
 
-잠긴 의존성을 사용한다. Windows의 합성 하드링크 fixture는 해당 파일 생성 권한이 필요하다. 위 검사는 모델을 실행하지 않는다. 실제 실행 명령과 등록값은 별도 준비·검토가 완료된 뒤 기록한다.
+잠긴 의존성을 사용한다. Windows의 합성 하드링크 fixture는 해당 파일 생성 권한이 필요하다. 위 검사는 모델을 실행하지 않는다. 실제 실행의 등록·명령·관찰 기록은 [결과 JSON](../experiments/results/meetings-free-qa-startup-actual-v1.json)의 로컬 원본 참조로 연결한다. 소비된 실행은 재시도하지 않는다. 이 문서의 종료 시점 바이트도 별도로 보존했으며, 향후 고정 보존 목록에 들어간 문서는 실행 중 갱신하지 않는다.

@@ -9,6 +9,25 @@ from doctrail.meeting_gguf import GGUFGenerator, _integer
 from scripts.probe_meeting_local_candidate import CONTENT_ERRORS, QA_COVERAGE_CONTROL, QA_GRAMMAR
 from tools.free_qa.policy import EPOCHS, ModelPolicy, need, sha
 
+# Pinned llama.cpp jinja lexer removes one terminal LF from this raw GGUF
+# template. These are source-derived /props bytes, not observed actual props.
+_RUNTIME_TEMPLATE_BYTES = {
+    ("qwen25-7b-q4km", "b11429", "d81235049384534c167caea52b85a694f6103d14",
+     "d5495a1e5db0611132a97e46a65dbb64a642a499421228b9c8b93229097fa9a4", 2509):
+        ("4e9918361c284a93880606d182d64da6a9fe97cdc1f5c5a78c1c8840444246fc", 2508),
+}
+
+
+def _runtime_template_matches(template, policy):
+    if not isinstance(template, str):
+        return False
+    raw_digest = policy.reviewed["template_sha256"]
+    key = (policy.model_id, policy.runtime["tag"], policy.runtime["commit"], raw_digest,
+           policy.reviewed["metadata"][0]["template"]["size_bytes"])
+    expected_digest, expected_size = _RUNTIME_TEMPLATE_BYTES.get(key, (raw_digest, None))
+    received = template.encode("utf-8")
+    return (expected_size is None or len(received) == expected_size) and sha(received) == expected_digest
+
 
 def validate_props(props, prepared):
     """Pure runtime identity/settings validation; no transport or generation methods."""
@@ -22,8 +41,7 @@ def validate_props(props, prepared):
          and type(props["default_generation_settings"]["n_ctx"]) is int
          and type(props.get("total_slots")) is int and props["total_slots"] == 1
          and props.get("is_sleeping") is False, "runtime_settings")
-    need(isinstance(props.get("chat_template"), str)
-         and sha(props["chat_template"].encode()) == policy.reviewed["template_sha256"], "runtime_template")
+    need(_runtime_template_matches(props.get("chat_template"), policy), "runtime_template")
     return {"build": props["build_info"], "context_tokens": 6144, "slots": 1}
 
 

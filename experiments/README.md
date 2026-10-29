@@ -1,5 +1,11 @@
 # 실험 실행 기록
 
+## 2026-10-29 · 생성 없는 시작 진단
+
+- [실제 시작 결과](results/meetings-free-qa-startup-actual-v1.json): 1회, health 통과 뒤 설정의 `free_qa_runtime_template` 실패. 외부 관측29.338초, 생성/요청 토큰0. 잔류 conhost의 최초 관찰 공백과 부모 계획 문서 변경으로 외부 검증은 실패다. 나중 두 알려진 신원 부재를 별도 기록했다.
+- [분석과 한계](../docs/MEETINGS-FREE-QA-STARTUP-RESULTS.md): 관측한 준비 성공과 미관측 template 내용·생성 품질을 구분한다. 소비된 실행과 이전 중립 실패를 반복하지 않는다.
+- [게시 소스 CI](results/meetings-free-qa-startup-ci-v1.json):2bda334 양쪽 필수 검사 통과, Python5327통과·21제외, 브라우저158통과. 실제 모델 품질과 별개다.
+
 ## 2026-10-28 · 무료 QA 비교 준비의 현재 근거
 
 - [비교 실행기 CI](results/meetings-free-qa-adapter-ci-v1.json): 게시 소스0c34174의 양쪽 필수 검사 통과. Python4,859통과·21skip, 전체 브라우저158통과. 실제 AI 품질 검사는 아니다.

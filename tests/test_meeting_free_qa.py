@@ -7,7 +7,7 @@ import json
 import os
 import struct
 from contextlib import contextmanager
-from dataclasses import FrozenInstanceError
+from dataclasses import FrozenInstanceError, replace
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -19,11 +19,71 @@ from scripts import probe_meeting_local_candidate as legacy
 from tools.free_qa import assets
 from tools.free_qa import policy as p
 from tools.free_qa import runner as r
-from tools.free_qa.adapter import PairedQAAdapter
+from tools.free_qa.adapter import PairedQAAdapter, validate_props
 from tools.summary_grammar.runtime import BoundaryError
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_PROFILES = {key: (ROOT / value[0]).read_bytes() for key, value in p.PROFILE_PINS.items()}
+
+# Public Qwen2.5-7B-Instruct GGUF template, Apache-2.0; raw metadata pin.
+# Qwen/Qwen2.5-7B-Instruct-GGUF@bb5d59e06d9551d752d08b292a50eb208b07ab1f
+# Kept inline so CI uses no local assets. Runtime expectation is source-derived.
+QWEN_RAW_TEMPLATE = (
+    "{%- if tools %}\n"
+    "    {{- '<|im_start|>system\\n' }}\n"
+    "    {%- if messages[0]['role'] == 'system' %}\n"
+    "        {{- messages[0]['content'] }}\n"
+    "    {%- else %}\n"
+    "        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n"
+    "    {%- endif %}\n"
+    "    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n"
+    "    {%- for tool in tools %}\n"
+    "        {{- \"\\n\" }}\n"
+    "        {{- tool | tojson }}\n"
+    "    {%- endfor %}\n"
+    "    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}}\\n</tool_call><|im_end|>\\n\" }}\n"
+    "{%- else %}\n"
+    "    {%- if messages[0]['role'] == 'system' %}\n"
+    "        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n"
+    "    {%- else %}\n"
+    "        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n"
+    "    {%- endif %}\n"
+    "{%- endif %}\n"
+    "{%- for message in messages %}\n"
+    "    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n"
+    "        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n"
+    "    {%- elif message.role == \"assistant\" %}\n"
+    "        {{- '<|im_start|>' + message.role }}\n"
+    "        {%- if message.content %}\n"
+    "            {{- '\\n' + message.content }}\n"
+    "        {%- endif %}\n"
+    "        {%- for tool_call in message.tool_calls %}\n"
+    "            {%- if tool_call.function is defined %}\n"
+    "                {%- set tool_call = tool_call.function %}\n"
+    "            {%- endif %}\n"
+    "            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n"
+    "            {{- tool_call.name }}\n"
+    "            {{- '\", \"arguments\": ' }}\n"
+    "            {{- tool_call.arguments | tojson }}\n"
+    "            {{- '}\\n</tool_call>' }}\n"
+    "        {%- endfor %}\n"
+    "        {{- '<|im_end|>\\n' }}\n"
+    "    {%- elif message.role == \"tool\" %}\n"
+    "        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n"
+    "            {{- '<|im_start|>user' }}\n"
+    "        {%- endif %}\n"
+    "        {{- '\\n<tool_response>\\n' }}\n"
+    "        {{- message.content }}\n"
+    "        {{- '\\n</tool_response>' }}\n"
+    "        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n"
+    "            {{- '<|im_end|>\\n' }}\n"
+    "        {%- endif %}\n"
+    "    {%- endif %}\n"
+    "{%- endfor %}\n"
+    "{%- if add_generation_prompt %}\n"
+    "    {{- '<|im_start|>assistant\\n' }}\n"
+    "{%- endif %}\n"
+)
 
 
 def ref(name, data=b"synthetic"):
@@ -582,6 +642,93 @@ def test_load_requires_prepared_identity_and_exact_props(tmp_path, fault):
         assert adapter.load(prepared) is adapter and adapter._metadata["alias"] == prepared.policy.alias
     assert calls == ([] if fault == "changed_asset" else ["/props"])
     adapter.close()
+
+
+def qwen_template_props(tmp_path):
+    reviewed = binding(p.CANDIDATE)
+    reviewed["template_sha256"] = p.sha(QWEN_RAW_TEMPLATE.encode())
+    reviewed["metadata"][0]["template"] = {
+        "raw_utf8_sha256": reviewed["template_sha256"], "size_bytes": len(QWEN_RAW_TEMPLATE.encode())}
+    policy = p.bind_policy(PUBLIC_PROFILES[p.CANDIDATE], reviewed, runtime())
+    prepared = SimpleNamespace(policy=policy, entry=tmp_path / "public-template-only.gguf")
+    props = {"model_alias": policy.alias, "build_info": "b11429-" + p.RUNTIME_COMMIT[:7],
+        "model_path": str(prepared.entry), "default_generation_settings": {"n_ctx": 6144},
+        "total_slots": 1, "is_sleeping": False, "chat_template": QWEN_RAW_TEMPLATE[:-1]}
+    return prepared, props
+
+
+def test_qwen_public_template_pins_and_source_derived_runtime_bytes(tmp_path):
+    raw = QWEN_RAW_TEMPLATE.encode("utf-8")
+    assert len(raw) == 2509 and p.sha(raw) == "d5495a1e5db0611132a97e46a65dbb64a642a499421228b9c8b93229097fa9a4"
+    assert raw.endswith(b"\n") and b"\r" not in raw and b"\x00" not in raw
+    assert len(raw[:-1]) == 2508 and p.sha(raw[:-1]) == "4e9918361c284a93880606d182d64da6a9fe97cdc1f5c5a78c1c8840444246fc"
+    prepared, props = qwen_template_props(tmp_path)
+    assert validate_props(props, prepared) == {"build": props["build_info"], "context_tokens": 6144, "slots": 1}
+    assert prepared.policy.reviewed["template_sha256"] == p.sha(raw)
+
+
+@pytest.mark.parametrize("change", ["raw", "extra_lf", "crlf", "content", "space", "trailing_space", "none", "bytes", "integer", "object"])
+def test_qwen_runtime_template_rejects_every_unmapped_response(tmp_path, change):
+    prepared, props = qwen_template_props(tmp_path)
+    template = props["chat_template"]
+    props["chat_template"] = {
+        "raw": QWEN_RAW_TEMPLATE, "extra_lf": QWEN_RAW_TEMPLATE + "\n",
+        "crlf": template.replace("\n", "\r\n"), "content": template.replace("Qwen", "Other"),
+        "space": " " + template, "trailing_space": template + " ", "none": None,
+        "bytes": template.encode(), "integer": 2508, "object": {"template": template}}[change]
+    with pytest.raises(ValueError, match="free_qa_runtime_template"):
+        validate_props(props, prepared)
+
+
+@pytest.mark.parametrize("change", ["model", "tag", "commit", "raw_digest", "raw_size"])
+def test_qwen_runtime_template_mapping_requires_exact_admitted_tuple(tmp_path, change):
+    prepared, props = qwen_template_props(tmp_path)
+    policy = prepared.policy
+    if change == "model": policy = replace(policy, model_id=p.BASE)
+    if change in {"tag", "commit"}:
+        rt = p.thaw(policy.runtime)
+        rt[change] = "b99999" if change == "tag" else p.RUNTIME_COMMIT[:7] + "0" * 33
+        policy = replace(policy, runtime=rt)
+        props["build_info"] = rt["tag"] + "-" + rt["commit"][:7]
+    if change in {"raw_digest", "raw_size"}:
+        reviewed = p.thaw(policy.reviewed)
+        if change == "raw_digest":
+            reviewed["template_sha256"] = "0" * 64
+            reviewed["metadata"][0]["template"]["raw_utf8_sha256"] = "0" * 64
+        else: reviewed["metadata"][0]["template"]["size_bytes"] = 2508
+        policy = replace(policy, reviewed=reviewed)
+    prepared.policy = policy
+    with pytest.raises(ValueError, match="free_qa_runtime_template"):
+        validate_props(props, prepared)
+
+
+@pytest.mark.parametrize("fault", [None, "raw", "type"])
+def test_startup_qwen_runtime_template_one_get_zero_generation(tmp_path, fault):
+    from scripts import probe_meeting_free_qa_startup as startup
+
+    prepared, props = qwen_template_props(tmp_path)
+    if fault == "raw": props["chat_template"] = QWEN_RAW_TEMPLATE
+    if fault == "type": props["chat_template"] = {"PRIVATE": "response must not be retained"}
+    sent = []
+    def handler(request):
+        sent.append((request.method, request.url.path))
+        assert sent == [("GET", "/props")]
+        return httpx.Response(200, stream=httpx.ByteStream(p.canonical(props)))
+    metrics = {"props_requests": 0, "props_valid": False, "counts": {"completions": 0, "requested_tokens": 0}}
+    service = SimpleNamespace(url="http://127.0.0.1:54321", token="t" * 40)
+    def fetch():
+        return startup.fetch_props(service, prepared, 120, metrics, lambda: None,
+            clock=Clock(), transport=httpx.MockTransport(handler))
+    if fault:
+        with pytest.raises(ValueError) as caught: fetch()
+        assert r.safe_error(caught.value) == {"code": "free_qa_runtime_template", "type": "ContractError"}
+        assert "PRIVATE" not in str(caught.value)
+    else:
+        assert fetch() is None
+    assert metrics == {"props_requests": 1, "props_valid": fault is None,
+        "counts": {"completions": 0, "requested_tokens": 0}}
+    with pytest.raises(ValueError, match="startup_props_once"): fetch()
+    assert sent == [("GET", "/props")]
 
 
 class FakeProcess:

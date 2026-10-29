@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "head_sha": "2bda334c459b1c2cd89ebcd7026d0529aaac0772",
+  "status": "both_exact_head_workflows_passed",
+  "runs": [
+    {
+      "id": 40814371898,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40814371898",
+      "jobs": {
+        "backend": "success",
+        "java-service": "success",
+        "web": "success"
+      }
+    },
+    {
+      "id": 40814377242,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40814377242",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      }
+    }
+  ],
+  "push_python": {
+    "passed": 5327,
+    "skipped": 21,
+    "warnings": 2,
+    "seconds": 227
+  },
+  "push_browser": {
+    "passed": 158,
+    "failed_tests": 0,
+    "infrastructure_failures": 0,
+    "startup_failures": 0,
+    "missing_reports": 0,
+    "missing_runs": 0,
+    "exit_code": 0
+  },
+  "actual_java_operations": "passed",
+  "watch_sessions": [
+    {
+      "id": 3400,
+      "exit": 0,
+      "closed": true
+    },
+    {
+      "id": 74189,
+      "exit": 0,
+      "closed": true
+    }
+  ],
+  "decoded_logs": "Connector UTF-8 text saved with LF; not original HTTP wire bytes",
+  "model_quality_evaluated": false,
+  "actual_startup_model_executed": false,
+  "human_review": false,
+  "public_service_deployment": false
+}

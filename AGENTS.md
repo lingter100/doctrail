@@ -1,4 +1,14 @@
 # DocTrail project instructions
+- Template independentreview278aaa9f blocker0/advisory0 accepted; adapter15b0377e/test6878f2b6 held,19focused+273combinedPASS30.90s/Ruff. Allownersreturned. Parent batchpublishsource2+actualfailedresults/docs via useridentity/draftPR14 then exactCI. No new actual/registration/once/private6; oldstartupcustodyGAP preserved, goalACTIVE.
+- StartupACTUAL terminal6b74e602 parent48refs: CLI1/wrapper1/29.338s, healthPASS/props1 free_qa_runtime_template/completion0. CustodyGAP conhostpresent+parentplan.md edit preserved. Later check3e4e86e0 parent11refs CLI+conhostNoSuchProcess, closeouta106555c HOLDreleased; oldonceconsumed/no retry. Futurehelddocs alsofreeze.
+- Startup candidates FINALf13f7289/completion65f281d9 parent11outputrefs accepted; regf80d1a06/truste7073e45/once5eab1f28 unreserved. Metadata admissionPASS/source69Git2bda/23small+67declaredassetstat, canonicalnamespaceABSENT/no native/weightreads. ExistingAstraxhigh safe_diagnostics_review owns NEWstartup-candidate-review-v1 readonly; independent review before install. HEAD2bda/source69held, parentdocs, goalACTIVE.
+
+- After exact2bda CI PASS, existing Astrahigh safe_diagnostics_finish now owns NEWstartup-registration-preparation-v1 METADATA CANDIDATES only: registration/lock/current69Git source+publicmodel refs/finite custody. Genuine model-only metadata admission allowed; no canonical namespace/controls/once/output/observer/execution/native/probes/weights/private6/Git/source edits. Independentxhigh review before install. HEAD2bda/source69held; parentdocs, goalACTIVE.
+
+- HEAD2bda334 BOTH40814371898+40814377242 ALL3PASS/watch3400+74189exit0 CLOSED; Python5327pass21skip227.00s/browser158pass0fail0infra0missing/actualJavaopsPASS. CIrecord saved/no doc-onlyrepush; current5Gitexact. Startup candidate preparation is next per acceptedplan, no model/actualcontrols/private6. goalACTIVE.
+
+- Published2bda334/userauthorcommitterlingter100/16Gitworkingexact/PR14drafthead verified. CIpush40814371898+PR40814377242 LIVE samewatch3400/74189; source5 held/no prematurepush. Allownersreturned, actualstartupnamespaceABSENT/no model/private6/trust/registration. ParentCI/docs then candidateprep per acceptedplan; goalACTIVE.
+
 - Startup independentreview FINALbd62041c blocker0/advisory0; parent9refs/source5verified. Shared admission/preparation ASTpreserved and QAonce/terminal unchanged;254synthetic31.90s/Ruff. Allcodeownersreturned; parent publish16files viauseridentity/PR14 then exactCI. Closed6unchanged/newactualnamespaceABSENT; no registration/trust/model/native/private6. goalACTIVE.
 
 - Startup5 FINALf4ab07c7: runner71de7831/adapterd61fdc36/oldtestffdb0582/CLI17348c40/newtest8dac5e06;254synthetic31.90s/RuffPASS, old56+6fixturefailure/62focused preserved. Parent51refs+before3Git verified. ExistingAstraxhigh safe_diagnostics_review now NEWstartup-review-v1 readonly; source5held/no actual registration/trust/model/private6/Git. Parentdocs; goalACTIVE.

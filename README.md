@@ -17,9 +17,9 @@
 | 검색 모델 비교 | BM25·임베딩·혼합·리랭커, 도메인 임베딩 미세조정과 실제 서비스 연결 | 격리 최종 평가와 기본 모델 채택 판단 |
 | AI 요약·질의응답 | 실제 로컬 추론, 출처 검증·답변 보류·오류 복구 | 정보 누락·의미 오류 개선, 독립 품질 평가 |
 
-진단 수정 게시 소스 `3eb727b`의 양쪽 필수 CI가 통과했다. [검사 기록](experiments/results/meetings-safe-diagnostics-ci-v1.json)은 Python 5,262개 통과·21개 제외, 전체 브라우저 158개 통과·실패 0과 실제 Java 운영 검증을 구분한다. 일부 화면 검사는 합성 모델 응답을 사용하므로 실제 AI 품질의 근거로 세지 않는다. 최근 소규모 개발 QA 비교의 내용 수용은0/4였고 실패 후보는 채택하지 않았다. [기능 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)과 [AI 실패 분석](docs/MEETINGS-LOCAL-QA-CONTROL-RESULTS.md)을 구분해 기록한다.
+시작 진단 게시 소스 `2bda334`의 양쪽 필수 CI가 통과했다. [검사 기록](experiments/results/meetings-free-qa-startup-ci-v1.json)은 Python 5,327개 통과·21개 제외, 전체 브라우저 158개 통과·실패 0과 실제 Java 운영 검증을 구분한다. 일부 화면 검사는 합성 모델 응답을 사용하므로 실제 AI 품질의 근거로 세지 않는다. 최근 소규모 개발 QA 비교의 내용 수용은0/4였고 실패 후보는 채택하지 않았다. [기능 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)과 [AI 실패 분석](docs/MEETINGS-LOCAL-QA-CONTROL-RESULTS.md)을 구분해 기록한다.
 
-새 [무료 QA 비교 실행기](docs/MEETINGS-FREE-QA-ADAPTER-VERIFICATION.md)는 합성 회귀·독립 코드 검토·필수 CI를 마쳤다. 새 모델의 [실제 파일 취득](experiments/results/meetings-free-qa-acquisition-v2.json)은 862.985초에 완료했고 전체4.68GB 해시와 종료·기존 자료 보존을 확인했다. [내부 설정 검토](docs/MEETINGS-FREE-QA-METADATA-REVIEW.md) 후 [실제 중립 시험1회](docs/MEETINGS-FREE-QA-NEUTRAL-RESULTS.md)를 실행했으나127.04초에 생성 요청0회 상태로 실패했다. 새6개 품질 비교는 미실행이고 원본 실패·once는 보존한다. 현재는 [기존 실행기의 안전한 진단 정보](docs/MEETINGS-FREE-QA-SAFE-DIAGNOSTICS-PLAN.md)를 보완했고 관련 QA 189개·정적 검사·독립 검토를 통과했다. 해당 게시 소스 CI도 통과했으며, 다음은 [생성 없는 준비 진단](docs/MEETINGS-FREE-QA-STARTUP-DIAGNOSTIC-PLAN.md)을 별도로 구현했고 관련 254개 합성 검사·정적 검사·독립 변경 검토를 마쳤다. 새 진단 소스의 게시 CI와 실제 실행 준비는 별도다.
+새 [무료 QA 비교 실행기](docs/MEETINGS-FREE-QA-ADAPTER-VERIFICATION.md)는 합성 회귀·독립 코드 검토·필수 CI를 마쳤다. 새 모델의 [실제 파일 취득](experiments/results/meetings-free-qa-acquisition-v2.json)은 완료했고 [중립 시험](docs/MEETINGS-FREE-QA-NEUTRAL-RESULTS.md)의 생성 전 실패는 원본으로 보존한다. 이후 [생성 없는 시작 진단](docs/MEETINGS-FREE-QA-STARTUP-RESULTS.md) 1회에서는 서버 준비 확인 뒤 대화 형식 설정 검증이 실패했다. 외부 관측29.338초·생성0이며 정확한 실제 template 값은 미보존이다. 최초 콘솔 프로세스 관찰 공백과 부모 계획 문서 변경에 따른 보존 실패도 남겼다. 나중 알려진 프로세스 부재를 확인했지만 원래 결과를 통과로 바꾸지 않았다. 새6개 품질 비교는 미실행이며 다음은 고정 코드·안전한 메타데이터로 설정 검증 조건을 분석하는 단계다.
 
 [요약 엔진 준비 v3](docs/MEETINGS-SUMMARY-ENGINE-V3-VERIFICATION.md)는 x64 파일 선택·자원 표본 정책과 실제 외부 종료 기록의 결속을 구현했다. 고정 소스554합성 검사와 독립 검토를 마쳤으며 실제 새 취득·빌드·요약 품질은 아직 검증 전이다. 최초 최종화 결함과 수정 중 실패도 보존한다.
 
