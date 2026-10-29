@@ -29,7 +29,7 @@ from tools.free_qa.policy import (
     thaw,
 )
 
-ID = "meeting-free-qa-startup-v1"
+ID = "meeting-free-qa-startup-v2"
 NAMESPACE = ".local/" + ID
 TRUSTED_LOCK_FILE = NAMESPACE + "/trusted-lock.json"
 CODE_FILES = (*r.CODE_FILES, "scripts/probe_meeting_free_qa_startup.py", "tests/test_meeting_free_qa_startup.py")

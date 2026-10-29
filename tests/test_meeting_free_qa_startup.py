@@ -36,6 +36,65 @@ def startup_metadata(tmp_path, monkeypatch):
     return spec, lock, path, save
 
 
+def seed_closed_v1(tmp_path):
+    """Opaque synthetic old controls, including the same token as the v2 fixture."""
+    names = ["registrations/synthetic.json", "trusted-lock.json", "once/token-" + "1" * 64 + ".json",
+             "once/registration-" + "2" * 64 + ".json", "runs/" + "1" * 64 + "/terminal.json"]
+    return [q.put(tmp_path, ".local/meeting-free-qa-startup-v1/" + name,
+                  p.canonical({"diagnostic": "meeting-free-qa-startup-v1", "opaque": name})) for name in names]
+
+
+def assert_closed_v1_unchanged(tmp_path, refs):
+    for row in refs:
+        assert q.ref(row["file"], (tmp_path / row["file"]).read_bytes()) == row
+
+
+def test_v2_fixed_namespace_and_own_once_preserve_closed_v1(tmp_path, monkeypatch):
+    assert s.ID == "meeting-free-qa-startup-v2"
+    assert s.NAMESPACE == ".local/meeting-free-qa-startup-v2"
+    assert s.TRUSTED_LOCK_FILE == s.NAMESPACE + "/trusted-lock.json"
+    old = seed_closed_v1(tmp_path)
+    spec, _, path, save = startup_metadata(tmp_path, monkeypatch)
+    digest = save()
+    leases = []
+    @contextmanager
+    def lease(path):
+        leases.append(path)
+        assert path == tmp_path / ".local/meeting-free-qa-startup.lock"
+        yield
+    monkeypatch.setattr(r, "worker_lease", lease)
+    def forbidden(*a, **k): pytest.fail("metadata-only fixture cannot launch")
+    report = s.run_startup(path, digest, spec["once_sha256"], root=tmp_path, clock=q.Clock(), launcher=forbidden)
+    assert report["diagnostic"] == s.ID and report["status"] == "stopped"
+    assert report["counts"] == {"completions": 0, "requested_tokens": 0}
+    once = tmp_path / s.NAMESPACE / "once"
+    assert {file.name for file in once.iterdir()} == {"registration-" + digest + ".json", "token-" + "1" * 64 + ".json"}
+    for file in once.iterdir(): assert p.parse(file.read_bytes())["diagnostic"] == s.ID
+    assert leases == [tmp_path / ".local/meeting-free-qa-startup.lock"]
+    assert_closed_v1_unchanged(tmp_path, old)
+    with pytest.raises(ValueError):
+        s.run_startup(path, digest, spec["once_sha256"], root=tmp_path, clock=q.Clock(), launcher=forbidden)
+    assert_closed_v1_unchanged(tmp_path, old)
+
+
+@pytest.mark.parametrize("fault", ["v1_path", "v1_diagnostic", "v1_trust", "only_v1_trust"])
+def test_v2_rejects_v1_authority_before_reservation_or_launch(tmp_path, monkeypatch, fault):
+    old = seed_closed_v1(tmp_path)
+    spec, lock, path, save = startup_metadata(tmp_path, monkeypatch)
+    if fault == "v1_diagnostic": spec["diagnostic"] = "meeting-free-qa-startup-v1"
+    if fault == "v1_trust": lock["diagnostic"] = "meeting-free-qa-startup-v1"
+    digest = save()
+    if fault == "v1_path": path = tmp_path / ".local/meeting-free-qa-startup-v1/registrations/synthetic.json"
+    if fault == "only_v1_trust": (tmp_path / s.TRUSTED_LOCK_FILE).unlink()
+    def forbidden(*a, **k): pytest.fail("v1 rejection must precede lease, prepare and launch")
+    monkeypatch.setattr(r, "worker_lease", forbidden)
+    with pytest.raises((ValueError, OSError)):
+        s.run_startup(path, digest, spec["once_sha256"], root=tmp_path, clock=q.Clock(), preparer=forbidden, launcher=forbidden)
+    assert not (tmp_path / s.NAMESPACE / "once").exists()
+    assert not (tmp_path / s.NAMESPACE / "runs").exists()
+    assert_closed_v1_unchanged(tmp_path, old)
+
+
 def test_startup_public_admission_uses_fixed_trust_and_no_qa_reads(tmp_path, monkeypatch):
     spec, _, path, save = startup_metadata(tmp_path, monkeypatch)
     digest = save()

@@ -1,0 +1,84 @@
+{
+  "schema": "doctrail-free-qa-startup-v2-implementation-v1",
+  "date": "2026-10-29",
+  "status": "PUBLIC_SOURCE_REVIEWED_LOCAL_MONITOR_BLOCKED",
+  "base_commit": "df87c709e8b09b240567463c11b832c147f54eb1",
+  "scope": {
+    "tracked_source_files": [
+      "scripts/probe_meeting_free_qa_startup.py",
+      "tests/test_meeting_free_qa_startup.py"
+    ],
+    "core_behavior_change": "ID meeting-free-qa-startup-v1 to meeting-free-qa-startup-v2 only; derived fixed namespace/trust and original shared lease retained",
+    "local_monitor": "After terminal, poll only previously observed PID/create-time identities within original START+300 deadline; unknown errors latch; bounded change events"
+  },
+  "validation": {
+    "new_admission_cases": 5,
+    "new_admission_pytest_seconds": 1.52,
+    "qa_plus_startup_cases": 278,
+    "qa_plus_startup_pytest_seconds": 31.39,
+    "qa_plus_startup_wrapper_seconds": 32.4191191,
+    "new_admission_subset_of_combined": true,
+    "monitor_pure_cases": 14,
+    "monitor_pure_pytest_seconds": 0.71,
+    "monitor_checks_in_ci": false,
+    "ruff": "PASS",
+    "test_failures": 0
+  },
+  "preservation": {
+    "original_v1_controls_once_outputs_unchanged": true,
+    "adapter_mapping_unchanged": true,
+    "original_observer_unchanged": true
+  },
+  "new_canonical_namespace_exists": false,
+  "actual_native_model_calls": 0,
+  "real_process_or_ram_probes": 0,
+  "model_quality_evaluated": false,
+  "human_review_count": 0,
+  "independent_review": {
+    "public_source_status": "PASS",
+    "public_source_blockers": 0,
+    "local_monitor_status": "BLOCKED",
+    "local_monitor_blockers": [
+      {
+        "id": "B1",
+        "reason": "Post-deadline absence can be accepted after oversleep or a slow lookup",
+        "pure_proof_cases": 3
+      }
+    ],
+    "receipt": {
+      "file": ".local/meeting-free-qa-startup-v2-review-v1/FINAL-RECEIPT.json",
+      "sha256": "8ffa7804c1a9f0aae0a59c3c695e3bbb439d055ce0013b69a370808237fc206e",
+      "size_bytes": 4839
+    }
+  },
+  "ci": {
+    "status": "PENDING_FOR_NEW_COMMIT"
+  },
+  "limitations": [
+    "Pure monitor tests do not prove actual process cleanup.",
+    "Sampled discovery may miss short-lived descendants; initial identity failures remain gaps.",
+    "New registration/helper bindings and an explicit execution assignment remain future steps."
+  ],
+  "implementation_receipt": {
+    "file": ".local/meeting-free-qa-startup-v2-implementation-v1/FINAL-RECEIPT.json",
+    "sha256": "774eb2cc60f9c24c8623c249ff496daf8d7e03ad6a02c3c9f788c49dd7afcb86",
+    "size_bytes": 8120
+  },
+  "monitor_receipt": {
+    "file": ".local/meeting-free-qa-startup-recheck-observer-preparation-v1/FINAL-RECEIPT.json",
+    "sha256": "23cb470d5a20e8d174841a9abfc36be9c8c8504fd833b9a9a39a1510973ea061",
+    "size_bytes": 3595
+  },
+  "source_files": [
+    {
+      "file": "scripts/probe_meeting_free_qa_startup.py",
+      "sha256": "59b3d1cec7d5fa04213807599de3bd6d16e81bbfe173f1d0cbf049ebb7ad80f0",
+      "size_bytes": 15522
+    },
+    {
+      "file": "tests/test_meeting_free_qa_startup.py",
+      "sha256": "bee55a03db93660b456a19e16ea7f93c3a52ac6991ee76325da9f1a3f02ee377",
+      "size_bytes": 22566
+    }
+  ]
+}
