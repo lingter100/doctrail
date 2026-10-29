@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "status": "ACCEPTED_B1_CLOSED",
+  "scope": "Local owned-process monitor deadline repair; not model quality and not included in public CI.",
+  "repair": {
+    "receipt_sha256": "b11f393aedec924d566fe78f7d62f4badc5b76f4d8fcadabbde0b951494dc389",
+    "helper_sha256": "f3bd06ed0bc5271b4fb636dd2ecde242f4d6e1d6e920d2365d645afdd9d84f2b",
+    "helper_size_bytes": 5998,
+    "pure_cases": 19,
+    "new_cases": 5,
+    "pytest_seconds": 0.6,
+    "wrapper_elapsed_seconds": 1.8082387,
+    "ruff": "passed",
+    "real_process_calls": 0
+  },
+  "review": {
+    "receipt_sha256": "165ed116143cf56bf3c541b4b561a8f9f9596692e8efe40fec2caea40b417495",
+    "blockers": 0,
+    "advisories": 0,
+    "finite_refs_verified": 19,
+    "checks_rerun": 0,
+    "reviewer": "tool-accepted GPT-6 Astra xhigh",
+    "human_review": false
+  },
+  "behavior": "Check original absolute deadline before and after known identity queries; retain observations and latch deadline errors; any latched error prevents bounded absence acceptance.",
+  "preserved": [
+    "Initial 14 passing pure cases and independent 3 counterexamples",
+    "Original failed/consumed startup v1 controls, outputs and custody gap",
+    "Public source4 and unchanged wrapper; no new model settings"
+  ],
+  "limitations": [
+    "Pure fake checks cannot guarantee timely cleanup on the real machine.",
+    "Existing sampling may miss short-lived descendants.",
+    "Initial identity failure or unavailable process evidence remains a custody gap.",
+    "Candidate preparation still needs independent review, installation and official metadata verification before separate actual assignment."
+  ]
+}
