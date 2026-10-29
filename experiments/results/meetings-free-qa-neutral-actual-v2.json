@@ -1,0 +1,65 @@
+{
+  "schema": "doctrail-public-experiment-record-v1",
+  "experiment": "meeting-free-qa-paired-v2-neutral-first-cli-dispatch",
+  "date": "2026-10-29",
+  "source_commit": "7ca36980555814bc129a71077a739bd21967c3fe",
+  "verification_level": "actual_local_generation_and_full_external_preservation",
+  "status": "neutral_completed_full_custody_accepted",
+  "model": "qwen25-7b-q4km",
+  "data_kind": "one existing public synthetic neutral input; sealed quality cases not opened",
+  "actual": {
+    "cli_dispatches": 1,
+    "cli_exit": 0,
+    "wrapper_exit": 0,
+    "monitor_exit": 0,
+    "strict_custody_seal_exit": 0,
+    "generation_calls": 1,
+    "valid_neutral_cases": 1,
+    "requested_output_token_limit_sum": 256,
+    "adapter_local_http_calls": 4,
+    "runner_elapsed_seconds": 21.031,
+    "wrapper_elapsed_seconds": 22.1700413,
+    "monitor_elapsed_seconds": 35.079,
+    "completion_phase_elapsed_seconds": 2.391,
+    "owned_native_cleanup_seconds": 0.609,
+    "first_failure": null,
+    "secondary_failures": [],
+    "known_owned_identities": 5,
+    "all_known_owned_absent": true,
+    "owned_monitor_errors": [],
+    "once_consumed": true,
+    "retries": 0,
+    "quality_cases_run": 0
+  },
+  "parent_verification": {
+    "direct_refs": 98,
+    "full_preservation_hash_rows": 270,
+    "asset_stat_rows": 74,
+    "exact_copy_pairs": 5,
+    "failures": 0,
+    "old_external_prelaunch_failure_preserved": true,
+    "initial_parser_error_preserved": "Parent initially expected copies; observed comparison schema uses copy_pairs. Corrected metadata reader only; actual evidence unchanged."
+  },
+  "evidence_sha256": {
+    "actual_final": "481e039d5c456123f88234796a55c4280b47926af64eaf8bef7d294f85bab59f",
+    "safe_summary": "239511738ac53ec2e7fb0e097f68077a91389e5fdb2f4021024b0f92e0a0da83",
+    "strict_qa_external_custody": "50b8f8c397ece4796153d6de513e544a0c17cc123914156ea6b390407094a9bf",
+    "strict_terminal": "4f178bcbf302d8c4e9b6590ef339d5b5c2324fbbafbdd96512821ba9bca681ab",
+    "full_preservation_comparison": "10b40d46a6227fd5abdf151bec5dedff06dcee1ef5a77b26bde1509ee8e65485",
+    "parent_closeout": "81ea75804dad8a9fd63dff7fa5ab34a7605374709f7dbe9af70c53653011befd"
+  },
+  "cost": {
+    "paid_api_calls": 0,
+    "paid_api_usage_usd": 0,
+    "local_electricity_hardware_cost": "not measured"
+  },
+  "limits": [
+    "This is one neutral transport/tokenization/generation/schema check, not answer correctness or general model quality.",
+    "Runner timing includes preparation and final preservation work; it is not service response latency or a controlled performance comparison.",
+    "256 is the requested output cap, not a measurement of generated tokens.",
+    "Only observed known process identities were reconciled; very short-lived uncaptured children are outside this claim.",
+    "Sealed six-case comparison, meeting summary quality, real-model Java/React integration and human review remain incomplete.",
+    "No future predecessor trust update, quality registration, public service deployment or model adoption is implied."
+  ],
+  "AI_quality": false
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "source_head": "7ca36980555814bc129a71077a739bd21967c3fe",
+  "scope": "Published paired-v2 fixed trust boundary source and service regression; no fresh contract or model execution.",
+  "runs": [
+    {
+      "id": 40829576314,
+      "event": "push",
+      "conclusion": "success",
+      "jobs": [
+        "backend",
+        "web",
+        "java-service"
+      ],
+      "retained_watch_session": 26424,
+      "watch_exit_code": 0
+    },
+    {
+      "id": 40829585360,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        "backend",
+        "web",
+        "java-service"
+      ],
+      "retained_watch_session": 35086,
+      "watch_exit_code": 0
+    }
+  ],
+  "measured_push": {
+    "python": {
+      "passed": 5360,
+      "skipped": 21,
+      "warnings": 2,
+      "elapsed_seconds": 144.09
+    },
+    "browser": {
+      "passed": 158,
+      "failed_tests": 0,
+      "infrastructure_failures": 0,
+      "startup_failures": 0,
+      "specs_without_reports": 0,
+      "missing_runs": 0,
+      "exit_code": 0
+    },
+    "actual_java_http_and_database_compatibility": "passed",
+    "synthetic_meeting_operations_against_actual_java": "passed",
+    "AI_quality": false
+  },
+  "limitations": [
+    "CI has no new neutral generation or sealed question quality evaluation.",
+    "Passing checks and earlier startup success do not fulfill the QA predecessor contract.",
+    "No user review or public deployment was performed."
+  ],
+  "public_urls": [
+    "https://github.com/lingter100/doctrail/actions/runs/40829576314",
+    "https://github.com/lingter100/doctrail/actions/runs/40829585360"
+  ]
+}
