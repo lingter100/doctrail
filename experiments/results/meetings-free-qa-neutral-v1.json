@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "status": "NEUTRAL_RUNTIME_FAILED_QUALITY_UNEVALUATED",
+  "source_commit": "192a4e32b77315e3d81c229c831bd570b0fd9df2",
+  "comparison_id": "meeting-free-qa-paired-v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct-GGUF",
+  "quantization": "Q4_K_M",
+  "input_kind": "public synthetic neutral only",
+  "actual_cli_count": 1,
+  "actual_cli_exit": 1,
+  "wrapper_exit": 1,
+  "observer_first_fault": null,
+  "runner_elapsed_seconds": 125.625,
+  "observer_elapsed_seconds": 127.0444852,
+  "counts": {
+    "native_process_creation_observed": 1,
+    "completions": 0,
+    "requested_output_tokens": 0,
+    "adapter_http_requests": 0,
+    "quality_cases_executed": 0,
+    "baseline_quality_cases_executed": 0,
+    "candidate_quality_cases_executed": 0
+  },
+  "adapter_http_scope": "Does not count native readiness health polling.",
+  "first_failure": {
+    "type": "ValueError",
+    "code": "free_qa_boundary"
+  },
+  "exact_root_cause": "not retained in safe_error; not established",
+  "model_load_success": "not established",
+  "startup_ram_gate": {
+    "available_bytes": 11539169280,
+    "minimum_bytes": 8589934592,
+    "passed": true
+  },
+  "cleanup": {
+    "runner_verified": true,
+    "runner_seconds": 0.062000000034458935,
+    "within_deadline": true,
+    "known_owned_identities_absent": 5,
+    "external_kills": 0,
+    "unrelated_kills": 0
+  },
+  "preservation": {
+    "small_refs": 154,
+    "asset_file_identities": 79,
+    "parent_direct_refs": 22,
+    "source_files_rechecked": 67,
+    "opaque_input_sidecars_rechecked": 14,
+    "late_invalidation": false,
+    "once_consumed": true
+  },
+  "earlier_preparation_findings": [
+    "Acquisition-owned empty tmp directory archived as the same empty filesystem object; payload files preserved.",
+    "Installer missing-parent guard failure preserved, then only required parent creation and remaining exact copies completed.",
+    "Default process monitor visibility failure preserved; elevated observation captured the native ancestry and known-owned absence."
+  ],
+  "observer_checks": {
+    "harmless_real_child_fixtures": 3,
+    "exact_inference_python_compatibility_fixtures": 1,
+    "model_quality_tests": 0
+  },
+  "AI_quality": false,
+  "human_review_count": 0,
+  "retry_count": 0,
+  "comparison_progression": "stopped; no successful predecessor custody and no baseline/candidate calls authorized",
+  "service_model_adopted": false,
+  "paid_service_calls": 0,
+  "local_energy_or_machine_cost": "not measured",
+  "evidence": {
+    "terminal_receipt_sha256": "ee387901494b0aee72d1533053bfe5275d1c2eeaa3203d4f8593e03b1e892093",
+    "external_custody_sha256": "aceef2eb6f9a172a8295852ac6bfc1cbb21d192d665cae9ce617b9001f89c632",
+    "safe_result_sha256": "5d85dcb6866b1602c0bcb0b3fa9f3bbd13ae147fa868e8278d5a9e50f805619a",
+    "parent_acceptance_sha256": "8f5e26e3096b8f0b7d87f5342cb8dfa339ce9f7e13b8693535ec5c96b83ef982",
+    "parent_direct_check_sha256": "50449bbae222eb1797eeccec21aeb98666357da19e7aa5679ecdabf00a3ad48b",
+    "contract_sha256": "83db2359b3dd4841706e3cb006d3dcb0851bb886d07220284eb52d9c00e81214",
+    "registration_sha256": "9afc57fc5ffa4c39c4999875760b463123e98c833c3921d409cb23cce2cc676d",
+    "once_sha256": "85d154e6f1feadfa69d6cb4304af0dbc235c3d48c09b3c863b7098e388d0a707"
+  },
+  "next": "Implement and independently review bounded safe diagnostics, then exact-source CI. Keep this comparison closed; no model retry authorized.",
+  "diagnosis": {
+    "status": "independent safe-metadata and public-code diagnosis complete",
+    "receipt_sha256": "ef5b00a1e8644f6708e7d244494b326e22cb41c4308d45192bc1f5d469e96266",
+    "parent_acceptance_sha256": "b0edc99b328ddc6657fff7e506ca0db8f20ac31d0c6fbc11d856262782b0245c",
+    "safe_input_refs": 37,
+    "public_code_files_rehashed": 9,
+    "startup_resource_samples": 430,
+    "adapter_load_resources_present": false,
+    "phase_inference": "native startup/readiness or immediately subsequent pre-load setup",
+    "readiness_success": "not established",
+    "recorded_max_native_rss_bytes": 4804755456,
+    "recorded_min_available_ram_bytes": 6536749056,
+    "sample_limits": "Successful point samples only; not peaks or proof about failing samples. VRAM unmeasured.",
+    "demonstrated_gap": "Known plain internal ValueError codes are collapsed; readiness exception versus guard latch, phase timing and pre-cleanup native exit are not retained.",
+    "selected_next_work": "Narrow safe diagnostic fields in existing runner with focused fake-process tests; no replay or automatic future run."
+  }
+}

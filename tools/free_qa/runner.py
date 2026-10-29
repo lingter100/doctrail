@@ -67,6 +67,24 @@ CODE_FILES = (*LEGACY_CODE_FILES, "tools/free_qa/policy.py", "tools/free_qa/adap
     "tools/free_qa/runner.py", "scripts/probe_meeting_free_qa.py", "tests/test_meeting_free_qa.py",
     "tools/free_qa/assets.py", "tools/summary_grammar/runtime.py")
 _PREPARED = object()
+_GUARD_FAILURES = frozenset({"deadline", "resources", "ownership", "sampler_join"})
+
+
+@contextmanager
+def diagnostic_phase(target, name, clock):
+    """Fixed internal phase names only; never include requests or exception text."""
+    started = clock()
+    row = {"phase": name, "entered_at": started, "outcome": "entered"}
+    target.setdefault("phases", []).append(row)
+    try:
+        yield
+    except Exception as error:
+        row.update(outcome="failed", error=safe_error(error))
+        raise
+    else:
+        row["outcome"] = "completed"
+    finally:
+        row["elapsed_seconds"] = clock() - started
 
 
 def remaining(clock, deadline):
@@ -325,7 +343,7 @@ def launch_model(prepared, deadline, metrics, *, clock=time.monotonic):
         metrics["startup_ram_gate"] = {"available_bytes": available, "minimum_bytes": 8 * 1024**3,
                                        "passed": available >= 8 * 1024**3}
         need(metrics["startup_ram_gate"]["passed"], "startup_ram")
-        process = drain = None
+        process = drain = guard = None
         try:
             remaining(clock, deadline)
             metrics["process_creation_attempted"] = True
@@ -335,19 +353,43 @@ def launch_model(prepared, deadline, metrics, *, clock=time.monotonic):
             metrics.update(owned_pid=process.pid, owned_create_time=owned_create_time(process))
             drain = DiscardDrain(process.stdout)
             drain.start()
-            guard = make_resource_guard(process, RSS6_RESOURCES, clock=clock, expected_created=metrics["owned_create_time"])
-            with guard.arm(deadline, metrics.setdefault("startup_resources", {})):
-                wait_ready(process, f"http://127.0.0.1:{port}/health", headers={"Authorization": "Bearer " + token},
-                           timeout=remaining(clock, deadline))
-                remaining(clock, deadline)
+            with diagnostic_phase(metrics, "native_readiness", clock):
+                guard = make_resource_guard(process, RSS6_RESOURCES, clock=clock, expected_created=metrics["owned_create_time"])
+                with guard.arm(deadline, metrics.setdefault("startup_resources", {})):
+                    try:
+                        wait_ready(process, f"http://127.0.0.1:{port}/health", headers={"Authorization": "Bearer " + token},
+                                   timeout=remaining(clock, deadline))
+                        remaining(clock, deadline)
+                    except Exception as error:
+                        # Capture before guard.arm can replace this during unwinding.
+                        metrics["readiness_error"] = safe_error(error)
+                        raise
             yield CompatService(process, f"http://127.0.0.1:{port}", token, prepared.root / prepared.policy.profile_path,
                                 {}, metrics, drain)
         finally:
+            failure = getattr(guard, "failure", None)
+            metrics["readiness_guard_failure"] = (
+                "summary_mode_" + failure if isinstance(failure, str) and failure in _GUARD_FAILURES
+                else "free_qa_boundary" if failure is not None else None)
+            if process is not None:
+                try:
+                    code = process.poll()  # Nonblocking, before cleanup changes the exit state.
+                    metrics["native_poll_observed"] = code is None or type(code) is int
+                    metrics["native_returncode_before_cleanup"] = code if type(code) is int else None
+                except Exception as error:  # noqa: BLE001 - diagnostics must never prevent owned cleanup
+                    metrics["native_poll_observed"] = False
+                    metrics["native_poll_error"] = safe_error(error)
             cleanup_owner(process, drain, metrics, clock=clock)
 
 
 def safe_error(error):
     code = getattr(error, "code", None)
+    if not isinstance(code, str) and len(error.args) == 1 and isinstance(error.args[0], str):
+        message = error.args[0]
+        if ((isinstance(error, ValueError) and message in {"summary_mode_" + item for item in _GUARD_FAILURES})
+                or (isinstance(error, TimeoutError) and message == "service_startup_timeout")
+                or (isinstance(error, RuntimeError) and message == "service_startup_exited")):
+            code = message
     return {"type": type(error).__name__, "code": code if isinstance(code, str) else "free_qa_boundary"}
 
 
@@ -458,18 +500,21 @@ def run_epoch(registration, expected_sha, once_sha, *, trusted_locks=None, root=
             "cases": [{"id": row["id"], "status": "unexecuted"} for row in rows],
             "counts": {"completions": 0, "requested_tokens": 0, "http": 0}, "prior_completions": prior_calls}
         try:
-            prepared = preparer(verified, epoch.model_id, startup_deadline, clock=clock)
+            with diagnostic_phase(report, "asset_preparation", clock):
+                prepared = preparer(verified, epoch.model_id, startup_deadline, clock=clock)
             with launcher(prepared, startup_deadline, metrics, clock=clock) as service:
-                guard = make_resource_guard(service.process, RSS6_RESOURCES, clock=clock,
-                                            expected_created=metrics["owned_create_time"])
-                adapter = adapter_factory(service.url, service.token, policy=prepared.policy, epoch=epoch,
-                    case_ids=tuple(row["id"] for row in rows), resource_check=guard.check, clock=clock, evidence=emit)
+                with diagnostic_phase(report, "adapter_construction", clock):
+                    guard = make_resource_guard(service.process, RSS6_RESOURCES, clock=clock,
+                                                expected_created=metrics["owned_create_time"])
+                    adapter = adapter_factory(service.url, service.token, policy=prepared.policy, epoch=epoch,
+                        case_ids=tuple(row["id"] for row in rows), resource_check=guard.check, clock=clock, evidence=emit)
                 try:
-                    adapter.begin_request(startup_deadline)
-                    with guard.arm(startup_deadline, metrics.setdefault("load_resources", {})):
-                        adapter.load(prepared)
-                        remaining(clock, startup_deadline)
-                    adapter.end_request()
+                    with diagnostic_phase(report, "adapter_load", clock):
+                        adapter.begin_request(startup_deadline)
+                        with guard.arm(startup_deadline, metrics.setdefault("load_resources", {})):
+                            adapter.load(prepared)
+                            remaining(clock, startup_deadline)
+                        adapter.end_request()
                     active_deadline = min(whole_deadline - 5, clock() + epoch.active_seconds)
                     for (row, source, sidecar), result in zip(prepared_cases, report["cases"], strict=True):
                         request_deadline = min(active_deadline, clock() + 60)
@@ -479,7 +524,8 @@ def run_epoch(registration, expected_sha, once_sha, *, trusted_locks=None, root=
                                 remaining(clock, request_deadline)
                                 messages, mapping = prepare_case(row, source, sidecar)
                                 remaining(clock, request_deadline)
-                                generated = adapter.complete_qa(row["id"], messages, request_deadline)
+                                with diagnostic_phase(report, "completion", clock):
+                                    generated = adapter.complete_qa(row["id"], messages, request_deadline)
                                 parsed = grounded_answer_refs(generated.text, mapping)
                                 remaining(clock, request_deadline)
                                 emit("qa", {"case_id": row["id"], "parsed": parsed,
@@ -509,34 +555,35 @@ def run_epoch(registration, expected_sha, once_sha, *, trusted_locks=None, root=
                 report["counts"] = dict(adapter.counts)
             report["cleanup"] = metrics
             try:
-                need(not metrics.get("process_creation_attempted") or metrics.get("within_budget") is True, "cleanup")
-                need(sha(assets.small_bytes(Path(registration), 8 * 1024**2)) == expected_sha, "registration_changed")
-                check_inputs(contract, root)
-                metadata_refs = [item for model in contract["models"] for item in (model["profile"], model["binding"])]
-                metadata_refs += [thaw(policy.reviewed[key]) for policy in verified.policies
-                                  for key in ("metadata_receipt", "review_receipt", "acquisition_gate")]
-                metadata_refs += spec["predecessors"] + [thaw(item) for item in (*verified.custody_refs, *verified.gate_refs)]
-                for item in verified.custody_refs:
-                    if item["file"].endswith("/terminal.json"):
-                        need(not (bound_path(item["file"], root).parent / "late-invalidation.json").exists(), "prior_invalidated")
-                if verified.lock_ref is not None:
-                    metadata_refs.append(thaw(verified.lock_ref))
-                for ref in [*metadata_refs, spec["contract"], *contract["code"], contract["criteria"], contract["packet"], contract["exclusion"], contract["preflight_review"],
-                            *[item for row in rows for item in (row["input"], row["sidecar"])]]:
-                    remaining(clock, whole_deadline)
-                    read_ref(ref, root, metadata=False)
-                    remaining(clock, whole_deadline)
-                if prepared is not None:
-                    check_prepared(prepared, prepared.policy, clock, whole_deadline)
-                    model = next(m for m in contract["models"] if m["id"] == epoch.model_id)
-                    for folder, refs in ((prepared.model_root, model["asset_files"]),
-                                         (prepared.runtime_root, prepared.policy.runtime["files"])):
-                        for ref in refs:
-                            remaining(clock, whole_deadline)
-                            check_ref(thaw(ref), folder)
-                            remaining(clock, whole_deadline)
-                    check_prepared(prepared, prepared.policy, clock, whole_deadline)
-                report["bindings_unchanged"] = True
+                with diagnostic_phase(report, "final_custody", clock):
+                    need(not metrics.get("process_creation_attempted") or metrics.get("within_budget") is True, "cleanup")
+                    need(sha(assets.small_bytes(Path(registration), 8 * 1024**2)) == expected_sha, "registration_changed")
+                    check_inputs(contract, root)
+                    metadata_refs = [item for model in contract["models"] for item in (model["profile"], model["binding"])]
+                    metadata_refs += [thaw(policy.reviewed[key]) for policy in verified.policies
+                                      for key in ("metadata_receipt", "review_receipt", "acquisition_gate")]
+                    metadata_refs += spec["predecessors"] + [thaw(item) for item in (*verified.custody_refs, *verified.gate_refs)]
+                    for item in verified.custody_refs:
+                        if item["file"].endswith("/terminal.json"):
+                            need(not (bound_path(item["file"], root).parent / "late-invalidation.json").exists(), "prior_invalidated")
+                    if verified.lock_ref is not None:
+                        metadata_refs.append(thaw(verified.lock_ref))
+                    for ref in [*metadata_refs, spec["contract"], *contract["code"], contract["criteria"], contract["packet"], contract["exclusion"], contract["preflight_review"],
+                                *[item for row in rows for item in (row["input"], row["sidecar"])]]:
+                        remaining(clock, whole_deadline)
+                        read_ref(ref, root, metadata=False)
+                        remaining(clock, whole_deadline)
+                    if prepared is not None:
+                        check_prepared(prepared, prepared.policy, clock, whole_deadline)
+                        model = next(m for m in contract["models"] if m["id"] == epoch.model_id)
+                        for folder, refs in ((prepared.model_root, model["asset_files"]),
+                                             (prepared.runtime_root, prepared.policy.runtime["files"])):
+                            for ref in refs:
+                                remaining(clock, whole_deadline)
+                                check_ref(thaw(ref), folder)
+                                remaining(clock, whole_deadline)
+                        check_prepared(prepared, prepared.policy, clock, whole_deadline)
+                    report["bindings_unchanged"] = True
             except Exception as error:  # noqa: BLE001 - custody failure cannot promote completion
                 report["secondary_failures"].append(safe_error(error))
                 report["first_failure"] = report["first_failure"] or safe_error(error)

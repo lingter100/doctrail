@@ -601,13 +601,22 @@ class FakeGuard:
         yield
 
 
-@pytest.mark.parametrize("fault", [None, "ram", "identity", "drain"])
+@pytest.mark.parametrize("fault", [None, "ram", "identity", "drain", "ready_timeout", "ready_exit",
+    "guard_deadline", "guard_resources", "guard_ownership", "guard_sampler_join", "dual", "guard_secret", "poll_unavailable"])
 def test_launcher_reuses_leases_guard_and_owned_cleanup_without_live_process(tmp_path, monkeypatch, fault):
     import psutil
     verified, _, _ = tiny_preparation(tmp_path)
     clock = Clock()
     prepared = r.prepare_model(verified, p.BASE, 120, clock=clock)
     calls, leases, policies, process = [], [], [], FakeProcess()
+    if fault == "poll_unavailable":
+        poll = process.poll
+        attempts = []
+        def transient_poll():
+            attempts.append(1)
+            if len(attempts) == 1: raise OSError("PRIVATE poll detail")
+            return poll()
+        process.poll = transient_poll
     @contextmanager
     def lease(path):
         leases.append(path.name)
@@ -637,11 +646,28 @@ def test_launcher_reuses_leases_guard_and_owned_cleanup_without_live_process(tmp
             if fault == "drain": raise OSError("synthetic drain construction")
         def start(self): pass  # Existing cleanup_owner uses its exact handle-only unstarted branch.
     monkeypatch.setattr(r, "DiscardDrain", Drain)
-    monkeypatch.setattr(r, "make_resource_guard", lambda proc, policy, **kw: policies.append(policy) or FakeGuard())
-    monkeypatch.setattr(r, "wait_ready", lambda *a, **k: None)
+    class Guard(FakeGuard):
+        failure = None
+        @contextmanager
+        def arm(self, deadline, target):
+            try:
+                yield
+            finally:
+                if fault == "dual" or (fault or "").startswith("guard_"):
+                    self.failure = "deadline" if fault == "dual" else fault.removeprefix("guard_")
+                    if fault == "guard_secret": self.failure = "PRIVATE bearer synthetic-token"
+                    raise ValueError("summary_mode_" + self.failure)
+    monkeypatch.setattr(r, "make_resource_guard", lambda proc, policy, **kw: policies.append(policy) or Guard())
+    def ready(*args, **kwargs):
+        clock.now += 4
+        if fault in {"ready_timeout", "dual"}: raise TimeoutError("service_startup_timeout")
+        if fault == "ready_exit":
+            process.returncode = 17
+            raise RuntimeError("service_startup_exited")
+    monkeypatch.setattr(r, "wait_ready", ready)
     metrics = {}
-    if fault:
-        with pytest.raises((ValueError, OSError, BoundaryError)), r.launch_model(prepared, 120, metrics, clock=clock):
+    if fault and fault != "poll_unavailable":
+        with pytest.raises((ValueError, OSError, RuntimeError, BoundaryError)), r.launch_model(prepared, 120, metrics, clock=clock):
             pytest.fail("must not yield")
     else:
         with r.launch_model(prepared, 120, metrics, clock=clock) as service:
@@ -652,12 +678,51 @@ def test_launcher_reuses_leases_guard_and_owned_cleanup_without_live_process(tmp
     if fault != "ram":
         assert metrics["process_absence_confirmed"] is True and metrics["within_budget"] is True
         assert metrics["cleanup_deadline"] - metrics["cleanup_started_at"] == 5
-        assert process.terminations == 1 and process.stdout.closed
+        assert process.terminations == (0 if fault == "ready_exit" else 1) and process.stdout.closed
+        if fault == "poll_unavailable":
+            assert metrics["native_poll_observed"] is False
+            assert metrics["native_poll_error"] == {"type": "OSError", "code": "free_qa_boundary"}
+        else:
+            assert metrics["native_poll_observed"] is True
+            assert metrics["native_returncode_before_cleanup"] == (17 if fault == "ready_exit" else None)
         argv, kwargs = calls[0]
         assert argv == r.command(prepared, 54321)
         assert "LLAMA_ARG_MODEL" not in kwargs["env"] and kwargs["env"]["HF_HUB_OFFLINE"] == "1"
         assert "--no-context-shift" in argv and argv[argv.index("--model") + 1] == str(prepared.entry)
-    assert policies == ([legacy.RSS6_RESOURCES] if fault is None else [])
+    reached_readiness = fault not in {"ram", "identity", "drain"}
+    assert policies == ([legacy.RSS6_RESOURCES] if reached_readiness else [])
+    if reached_readiness:
+        phase = metrics["phases"][0]
+        assert phase["phase"] == "native_readiness" and phase["entered_at"] == 0 and phase["elapsed_seconds"] == 4
+        assert phase["outcome"] == ("completed" if fault in {None, "poll_unavailable"} else "failed")
+        if fault in {"ready_timeout", "dual", "ready_exit"}:
+            assert metrics["readiness_error"]["code"] == ("service_startup_exited" if fault == "ready_exit" else "service_startup_timeout")
+        else:
+            assert "readiness_error" not in metrics
+        if fault == "dual" or (fault or "").startswith("guard_"):
+            expected = "summary_mode_deadline" if fault == "dual" else "summary_mode_" + fault.removeprefix("guard_")
+            if fault == "guard_secret": expected = "free_qa_boundary"
+            assert metrics["readiness_guard_failure"] == phase["error"]["code"] == expected
+        else:
+            assert metrics["readiness_guard_failure"] is None
+        assert "PRIVATE" not in p.canonical(metrics).decode() and "synthetic-token" not in p.canonical(metrics).decode()
+
+
+@pytest.mark.parametrize("error,code", [
+    (ValueError("summary_mode_deadline"), "summary_mode_deadline"),
+    (ValueError("summary_mode_resources"), "summary_mode_resources"),
+    (ValueError("summary_mode_ownership"), "summary_mode_ownership"),
+    (ValueError("summary_mode_sampler_join"), "summary_mode_sampler_join"),
+    (TimeoutError("service_startup_timeout"), "service_startup_timeout"),
+    (RuntimeError("service_startup_exited"), "service_startup_exited"),
+    (ValueError("summary_mode_resources PRIVATE bearer synthetic-token"), "free_qa_boundary"),
+    (ValueError({"PRIVATE": "synthetic-token"}), "free_qa_boundary"),
+    (RuntimeError("PRIVATE prompt synthetic-token"), "free_qa_boundary"),
+    (TimeoutError("service_startup_timeout PRIVATE"), "free_qa_boundary"),
+    (GenerationError("generation_backend_unavailable"), "generation_backend_unavailable"),
+])
+def test_diagnostics_safe_errors_are_exact_allowlisted_or_typed(error, code):
+    assert r.safe_error(error) == {"type": type(error).__name__, "code": code}
 
 
 @pytest.mark.parametrize("fault", ["rss", "host", "identity"])
@@ -709,6 +774,9 @@ def synthetic_execution(tmp_path, monkeypatch, *, epoch_name="baseline", fault=N
             metrics.update(within_budget=fault != "cleanup", process_absence_confirmed=fault != "cleanup")
     def guard(process, policy, **kwargs):
         policies.append(policy)
+        if fault == "guard_construction":
+            clock.now += 2
+            raise ValueError("summary_mode_ownership")
         return FakeGuard()
     monkeypatch.setattr(r, "make_resource_guard", guard)
     monkeypatch.setattr(r, "check_prepared", lambda *args: None)
@@ -739,6 +807,9 @@ def synthetic_execution(tmp_path, monkeypatch, *, epoch_name="baseline", fault=N
     class Adapter:
         def __init__(self, *args, **kwargs):
             assert kwargs["epoch"] is epoch and callable(kwargs["resource_check"])
+            if fault == "adapter_construction":
+                clock.now += 2
+                raise ValueError("PRIVATE synthetic token and prompt")
             self.counts = {"completions": 0, "requested_tokens": 0, "http": 0}
             self.halted = False
         def begin_request(self, deadline): assert deadline == 120
@@ -765,6 +836,23 @@ def synthetic_execution(tmp_path, monkeypatch, *, epoch_name="baseline", fault=N
     return run, calls, policies, cleanup, output
 
 
+@pytest.mark.parametrize("fault", ["adapter_construction", "guard_construction"])
+def test_preload_construction_diagnostics_keep_once_cleanup_and_zero_calls(tmp_path, monkeypatch, fault):
+    run, calls, _, cleanup, output = synthetic_execution(tmp_path, monkeypatch, epoch_name="neutral", fault=fault)
+    report = run()
+    assert report["status"] == "stopped" and report["counts"] == {"completions": 0, "requested_tokens": 0, "http": 0}
+    assert report["valid_cases"] == 0 and report["AI_quality"] is False and calls == [] and cleanup == [1]
+    assert [x["phase"] for x in report["phases"]] == ["asset_preparation", "adapter_construction", "final_custody"]
+    assert [x["outcome"] for x in report["phases"]] == ["completed", "failed", "completed"]
+    assert report["first_failure"]["code"] == ("summary_mode_ownership" if fault == "guard_construction" else "free_qa_boundary")
+    assert all(x["elapsed_seconds"] >= 0 for x in report["phases"])
+    assert report["phases"][1]["elapsed_seconds"] == 2 and report["phases"][-1]["entered_at"] == 2
+    assert "PRIVATE" not in (output / "report.json").read_text()
+    assert "load_resources" not in report["cleanup"]
+    with pytest.raises(FileExistsError): run()
+    assert calls == [] and cleanup == [1]
+
+
 @pytest.mark.parametrize("fault", [None, "content", "lost_response", "close_secondary", "parser_late", "evidence_late", "evidence_write", "cleanup", "metadata_changed", "preflight_changed"])
 def test_runner_denominator_stop_and_custody_without_engine(tmp_path, monkeypatch, fault):
     run, calls, policies, cleanup, output = synthetic_execution(tmp_path, monkeypatch, fault=fault)
@@ -781,6 +869,10 @@ def test_runner_denominator_stop_and_custody_without_engine(tmp_path, monkeypatc
         assert report["first_failure"]["code"] == "generation_backend_unavailable"
         assert report["secondary_failures"][0]["type"] == "OSError"
     assert report["AI_quality"] is False and report["retries"] == 0 and cleanup == [1]
+    assert [x["phase"] for x in report["phases"][:3]] == ["asset_preparation", "adapter_construction", "adapter_load"]
+    assert len([x for x in report["phases"] if x["phase"] == "completion"]) == expected_calls
+    assert report["phases"][-1]["phase"] == "final_custody"
+    assert report["phases"][-1]["outcome"] == ("failed" if fault in {"cleanup", "metadata_changed", "preflight_changed"} else "completed")
     assert policies == [legacy.RSS6_RESOURCES]
     assert "PRIVATE" not in p.canonical(report).decode() and "question" not in p.canonical(report).decode()
     terminal = p.parse((output / "terminal.json").read_bytes())

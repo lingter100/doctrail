@@ -1,0 +1,74 @@
+{
+  "schema": "doctrail-free-qa-safe-diagnostics-v1",
+  "date": "2026-10-29",
+  "status": "LOCAL_SYNTHETIC_AND_INDEPENDENT_REVIEW_PASS_CI_PENDING",
+  "changed_source": [
+    {
+      "file": "tools/free_qa/runner.py",
+      "size_bytes": 36677,
+      "sha256": "26de7c6b1ffc7486ff070f1a23b75d66dd04e1ac7a57b4379416e6de258df987"
+    },
+    {
+      "file": "tests/test_meeting_free_qa.py",
+      "size_bytes": 66490,
+      "sha256": "d3d05cee744aad9b51e1befc36704592ca14e970ca7d9615775f6508c99d0deb"
+    }
+  ],
+  "problem": "Neutral startup failed before generation; known internal error codes and readiness-versus-guard errors were lost. Exact historical root cause remains unknown.",
+  "changes": [
+    "Fixed phase entry, elapsed time and outcome in existing report/cleanup metadata",
+    "Exact allowlist for existing untyped internal guard, readiness timeout and native exit errors",
+    "Readiness exception before guard unwind retained separately from guard failure",
+    "Nonblocking native return code before cleanup; diagnostic poll failure cannot prevent cleanup"
+  ],
+  "local_tests": {
+    "scope": "tests/test_meeting_free_qa.py; fake model/processes, no native inference",
+    "passed": 189,
+    "failed": 0,
+    "skipped": 0,
+    "pytest_seconds": 23.86,
+    "junit_seconds": 23.749,
+    "wrapper_seconds": 24.9711316,
+    "ruff": "passed",
+    "execution_environment": "Windows / isolated Python3.12; elevation for synthetic hardlink fixture"
+  },
+  "preserved_prior_results": [
+    {
+      "passed": 188,
+      "failed": 1,
+      "reason": "WinError5 while creating hardlink test fixture; product guard not weakened"
+    },
+    {
+      "status": "interrupted",
+      "scope": "earlier final module attempt; empty logs not counted as success"
+    }
+  ],
+  "implementation_receipt_sha256": "1ad49b1437ad867527b3c5b572e4f2ccd539a570339258e7836df0d7ebc5905c",
+  "reproduction": {
+    "pytest": "python -B -m pytest tests/test_meeting_free_qa.py -q -p no:cacheprovider",
+    "ruff": "ruff check tools/free_qa/runner.py tests/test_meeting_free_qa.py --no-cache",
+    "notes": "Use locked project dependencies. Windows synthetic hardlink fixture needs filesystem permission. This does not execute the closed model comparison."
+  },
+  "preservation": {
+    "archived_source_equal_to_git": "192a4e32b77315e3d81c229c831bd570b0fd9df2",
+    "closed_neutral_controls_unchanged": true,
+    "terminal_schema_settings_caps_inputs_unchanged": true
+  },
+  "AI_quality": false,
+  "model_or_native_runs": 0,
+  "user_review_count": 0,
+  "public_service_deployed": false,
+  "paid_service_calls": 0,
+  "limits": [
+    "Local fake-process tests do not establish actual model readiness or answer quality.",
+    "Failed neutral comparison remains closed and consumed. No replay or future epoch follows from this repair.",
+    "Independent change review passed; exact published-source CI remains required. Results are model-free."
+  ],
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "receipt_sha256": "59d8534ac43423812431ea5029b596a845fdd95b070c7501d5efb098c1c27a3b",
+    "review_test_reruns": 0,
+    "run_epoch_ast_equal_without_diagnostics": true
+  }
+}
