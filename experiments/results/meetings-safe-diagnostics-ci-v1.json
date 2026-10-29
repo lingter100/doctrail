@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "head_sha": "3eb727bcf38a9c089fc698b90de62e1be6e81c54",
+  "status": "both_exact_head_workflows_passed",
+  "runs": [
+    {
+      "id": 40811207314,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40811207314",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      }
+    },
+    {
+      "id": 40811211899,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40811211899",
+      "jobs": {
+        "java-service": "success",
+        "web": "success",
+        "backend": "success"
+      }
+    }
+  ],
+  "push_python": {
+    "passed": 5262,
+    "skipped": 21,
+    "warnings": 2,
+    "seconds": 218.24
+  },
+  "push_browser": {
+    "passed": 158,
+    "failed_tests": 0,
+    "infrastructure_failures": 0,
+    "startup_failures": 0,
+    "missing_reports": 0,
+    "missing_runs": 0,
+    "exit_code": 0
+  },
+  "actual_java_operations": "passed",
+  "watch_sessions": [
+    {
+      "id": 30222,
+      "exit": 0,
+      "closed": true
+    },
+    {
+      "id": 48368,
+      "exit": 0,
+      "closed": true
+    }
+  ],
+  "observation_issue": "After successful watches, gh run view metadata read had a transient network failure. Connector job snapshots verified all six completed jobs. No CI rerun.",
+  "decoded_logs": "Connector UTF-8 text saved with LF; not original HTTP wire bytes",
+  "model_quality_evaluated": false,
+  "human_review": false,
+  "public_service_deployment": false
+}

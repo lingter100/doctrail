@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "status": "IMPLEMENTED_SYNTHETIC_AND_INDEPENDENT_REVIEW_PASS_CI_PENDING",
+  "basis_head": "3eb727bcf38a9c089fc698b90de62e1be6e81c54",
+  "sources": [
+    {
+      "file": "tools/free_qa/runner.py",
+      "sha256": "71de78310ac9a02217e27ec2df629e4bc14e03796712f47ba9598c7f959dd6c8",
+      "size_bytes": 38669
+    },
+    {
+      "file": "tools/free_qa/adapter.py",
+      "sha256": "d61fdc36fcbf5d93b281738488aa3ba5a7190202f0bac9885d0f8c60853f4279",
+      "size_bytes": 7152
+    },
+    {
+      "file": "tests/test_meeting_free_qa.py",
+      "sha256": "ffdb05829425cb646ea25721afb68b1b998f91ba5a39106573777c663210fd15",
+      "size_bytes": 66831
+    },
+    {
+      "file": "scripts/probe_meeting_free_qa_startup.py",
+      "sha256": "17348c40cadb373a2fde2908a0e3d2c4e08a0db775676fe9449b19e2a02e188e",
+      "size_bytes": 15522
+    },
+    {
+      "file": "tests/test_meeting_free_qa_startup.py",
+      "sha256": "8dac5e06b1aa498df8c23852b4df7cf726348f7dec3d483269cbd07175fa7d9b",
+      "size_bytes": 19263
+    }
+  ],
+  "purpose": "Separately verify existing Qwen native health and at most one public props response without QA inputs or generation. Historical failed neutral remains closed.",
+  "changes": [
+    "Genuine model-only admission and common full asset preparation reused by QA and startup",
+    "Pure runtime props identity validator shared with existing adapter",
+    "Separate fixed local trust namespace, registration/source closure and persistent once reservations",
+    "Bounded single loopback GET props, safe failure phases, prelaunch/final bindings and owned cleanup"
+  ],
+  "limits": {
+    "native_launches_max": 1,
+    "startup_seconds": 120,
+    "cleanup_seconds": 5,
+    "whole_seconds": 185,
+    "props_requests_max": 1,
+    "props_response_bytes_max": 1048576,
+    "completions": 0,
+    "requested_output_tokens": 0,
+    "model_settings": "unchanged Qwen candidate only"
+  },
+  "validation": {
+    "scope": "existing QA and startup synthetic tests",
+    "passed": 254,
+    "qa_tests": 189,
+    "startup_tests": 65,
+    "failed": 0,
+    "skipped": 0,
+    "pytest_seconds": 31.9,
+    "junit_seconds": 31.808,
+    "wrapper_seconds": 33.0945188,
+    "ruff": "passed",
+    "actual_model_or_native_runs": 0
+  },
+  "initial_results_preserved": [
+    {
+      "passed": 56,
+      "failed": 6,
+      "scope": "startup synthetic tests",
+      "cause": "HTTP fixtures supplied consumed JSON buffers to raw streaming reader; fixed to real ByteStream doubles, original sources/results retained"
+    },
+    {
+      "passed": 62,
+      "failed": 0,
+      "scope": "focused startup tests after fixture repair; earlier tested version"
+    },
+    {
+      "scope": "first Ruff",
+      "issues": 8,
+      "reason": "imports and unused directives; corrected before final validation"
+    }
+  ],
+  "implementation_receipt_sha256": "f4ab07c744661da5a16df707a5850675aef47d0434522ae96a674b341e851c02",
+  "reproduction": {
+    "pytest": "python -B -m pytest tests/test_meeting_free_qa.py tests/test_meeting_free_qa_startup.py -q -p no:cacheprovider",
+    "ruff": "ruff check tools/free_qa/runner.py tools/free_qa/adapter.py scripts/probe_meeting_free_qa_startup.py tests/test_meeting_free_qa.py tests/test_meeting_free_qa_startup.py --no-cache",
+    "environment": "Use locked dependencies; Windows synthetic hardlink fixture needs filesystem permission."
+  },
+  "execution_state": {
+    "actual_registration_or_trust_created": false,
+    "actual_startup_run": false,
+    "closed_qa_comparison_reopened": false,
+    "fresh_process_preflight": "External assigned-owner prerequisite, not claimed by CLI",
+    "health_poll_count": "not instrumented"
+  },
+  "AI_quality": false,
+  "user_review_count": 0,
+  "paid_service_calls": 0,
+  "public_service_deployed": false,
+  "limitations": [
+    "Synthetic checks do not prove actual native readiness, tokenization, generation or quality.",
+    "Independent source review passed; exact published-source CI remains required.",
+    "No actual execution follows automatically from implementation; separate public admission preparation/review and owned execution assignment remain.",
+    "Deadlines/resource observations are checked and sampled rather than hard OS bounds."
+  ],
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "receipt_sha256": "bd62041c62b4fb968d8181054bd673e8ced6304f494e8949984cb1e850d51ecc",
+    "review_test_reruns": 0,
+    "shared_admission_and_preparation_preserved": true,
+    "qa_execution_once_terminal_unchanged": true
+  }
+}

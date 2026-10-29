@@ -10,6 +10,23 @@ from scripts.probe_meeting_local_candidate import CONTENT_ERRORS, QA_COVERAGE_CO
 from tools.free_qa.policy import EPOCHS, ModelPolicy, need, sha
 
 
+def validate_props(props, prepared):
+    """Pure runtime identity/settings validation; no transport or generation methods."""
+    policy = prepared.policy
+    build = re.fullmatch(r"b([0-9]+)-([a-f0-9]{7,40})", props.get("build_info", ""))
+    need(props.get("model_alias") == policy.alias and build
+         and "b" + build[1] == policy.runtime["tag"]
+         and policy.runtime["commit"].startswith(build[2]), "runtime_identity")
+    need(Path(props["model_path"]).resolve() == prepared.entry.resolve()
+         and props["default_generation_settings"]["n_ctx"] == 6144
+         and type(props["default_generation_settings"]["n_ctx"]) is int
+         and type(props.get("total_slots")) is int and props["total_slots"] == 1
+         and props.get("is_sleeping") is False, "runtime_settings")
+    need(isinstance(props.get("chat_template"), str)
+         and sha(props["chat_template"].encode()) == policy.reviewed["template_sha256"], "runtime_template")
+    return {"build": props["build_info"], "context_tokens": 6144, "slots": 1}
+
+
 class PairedQAAdapter(GGUFGenerator):
     def __init__(self, url, token, *, policy, epoch, case_ids, resource_check, clock, evidence, transport=None):
         need(isinstance(policy, ModelPolicy) and EPOCHS.get(epoch.name) is epoch
@@ -71,17 +88,7 @@ class PairedQAAdapter(GGUFGenerator):
             self._remaining()
             check_prepared(prepared, self.policy, self.clock, self._deadline)
             props = self._request("GET", "/props")
-            build = re.fullmatch(r"b([0-9]+)-([a-f0-9]{7,40})", props.get("build_info", ""))
-            need(props.get("model_alias") == self.policy.alias and build
-                 and "b" + build[1] == self.policy.runtime["tag"]
-                 and self.policy.runtime["commit"].startswith(build[2]), "runtime_identity")
-            need(Path(props["model_path"]).resolve() == prepared.entry.resolve()
-                 and props["default_generation_settings"]["n_ctx"] == 6144
-                 and type(props["default_generation_settings"]["n_ctx"]) is int
-                 and type(props.get("total_slots")) is int and props["total_slots"] == 1
-                 and props.get("is_sleeping") is False, "runtime_settings")
-            need(isinstance(props.get("chat_template"), str)
-                 and sha(props["chat_template"].encode()) == self.policy.reviewed["template_sha256"], "runtime_template")
+            validate_props(props, prepared)
             self._alias = self.policy.alias
             self._metadata = {"model_id": self.policy.model_id, "alias": self.policy.alias,
                 "profile_sha256": self.policy.profile_sha256, "experimental": True,

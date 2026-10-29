@@ -21,13 +21,13 @@
 
 지침의 미세변형 계열은 종료했다. [새 비교 설계](MEETINGS-FREE-QA-NEXT-DECISION.md)에 따라 새 7B 자산과 실제 출처 6계열·10문서, 질문·기준 6개를 준비하고 별도 AI 사전 검토를 마쳤다. [자료 준비](MEETINGS-FREE-QA-SOURCE-PREPARATION.md)는 실제 원문·합성 중립 입력·AI 검토·사용자 검수를 구분한다.
 
-그러나 [새 7B 중립 시험](MEETINGS-FREE-QA-NEUTRAL-RESULTS.md)은 127.044초에 생성 요청 0회 상태로 실패했다. 품질 질문의 모델 비교는 시작하지 않았다. 시작 메모리 검사는 통과했지만 모델 준비 성공은 미확정이며, 누락된 진단 정보 때문에 시간 초과나 메모리 부족으로 단정할 수 없다. 닫힌 시험을 보존하고 [실행기의 안전한 진단 정보](MEETINGS-FREE-QA-SAFE-DIAGNOSTICS-PLAN.md)를 보완했고 관련 QA 189개·정적 검사·독립 검토를 통과했다. 게시 소스 CI는 다음 단계다. 이 수정은 새 모델의 답변 성능 개선이 아니다.
+그러나 [새 7B 중립 시험](MEETINGS-FREE-QA-NEUTRAL-RESULTS.md)은 127.044초에 생성 요청 0회 상태로 실패했다. 품질 질문의 모델 비교는 시작하지 않았다. 시작 메모리 검사는 통과했지만 모델 준비 성공은 미확정이며, 누락된 진단 정보 때문에 시간 초과나 메모리 부족으로 단정할 수 없다. 닫힌 시험을 보존하고 [실행기의 안전한 진단 정보](MEETINGS-FREE-QA-SAFE-DIAGNOSTICS-PLAN.md)를 보완했고 관련 QA 189개·정적 검사·독립 검토를 통과했다. 게시 소스 CI도 통과했고, 다음은 [생성 없는 준비 진단](MEETINGS-FREE-QA-STARTUP-DIAGNOSTIC-PLAN.md)을 별도로 구현하는 단계다. 이 수정은 새 모델의 답변 성능 개선이 아니다.
 
 요약의 [문법 엔진 준비](MEETINGS-SUMMARY-ENGINE-V3-PLAN.md)도 별도 진행 사항이다. 앞선 취득 2회는 시간 한도로 실패했고, 다음 취득의 제어·정리 경로를 수정·검토했다. 실제 v3 취득·컴파일·엔진 검증은 아직 하지 않았다. [실패와 재개 검증](../experiments/results/meetings-summary-engine-v3-resume-v1.json)을 유지한다.
 
 ## 현재 검증 근거
 
-- 게시 소스 `192a4e3`의 [필수 CI](../experiments/results/meetings-source-review-ci-v1.json): 양쪽 실행의 backend/web/java-service 통과. Python 5,240개 통과·21개 제외, 전체 브라우저 158개 통과·실패 0, 실제 Java 운영 검사 통과. **현재 진단 수정 이전 소스의 결과다.**
+- 게시 소스 `3eb727b`의 [필수 CI](../experiments/results/meetings-safe-diagnostics-ci-v1.json): 양쪽 실행의 backend/web/java-service 통과. Python 5,262개 통과·21개 제외, 전체 브라우저 158개 통과·실패 0, 실제 Java 운영 검사 통과. **진단 수정 소스의 결과이며 다음 준비 진단 구현을 검증한 것은 아니다.**
 - [질문 기록·피드백](MEETINGS-KNOWLEDGE-HISTORY-VERIFICATION.md): 현재 권한·문서 버전 재검사와 검색 범위 복원. 최초 실패와 수정 후 검사를 구분했다.
 - [회의 항목 보정](MEETINGS-MANUAL-CORRECTION-VERIFICATION.md): 실제 Java·화면의 항목 추가/삭제/취소·근거 선택·담당자 편집. 합성 AI 응답 검사와 실제 모델 품질은 별도다.
 - [백업·복원](MEETINGS-RESTORE-VERIFICATION.md): 실제 Java의 합성 자료 운영 12항목과 관련 회귀 검사. 공개 배포나 실사용자 부하 검증은 아니다.
@@ -36,7 +36,7 @@
 
 ## 다음 순서
 
-1. 진단 수정의 관련 회귀·독립 검토·게시 소스 CI를 마친다. 닫힌 중립 비교는 재실행하지 않는다. 다음 실제 측정은 남은 원인과 별도 설계에 근거해 정한다.
+1. 같은 모델의 준비와 공개 설정 조회만 분리하는 시작 진단을 구현·검토한다. 생성 요청은 0이며 닫힌 중립 비교와 비공개 질문을 재사용하지 않는다. 실제 측정은 새 구현·검증과 별도 실행 조건 확인 뒤 진행한다.
 2. 무료 로컬 요약·답변이 개발 수용 조건을 충족하도록 진행하고, 그 뒤 격리 validation과 최종 평가를 수행한다. 최종 평가 질문으로 튜닝하지 않는다.
 3. 실제 모델을 포함한 전체 화면·권한·문서 갱신/삭제·백업/복원·새 환경 실행을 확인한다. 외관·사용성 사용자 검수는 별도로 남긴다.
 4. 비교·실패·한계를 정리해 최종 시연, 소개와 면접 설명을 완성한다.

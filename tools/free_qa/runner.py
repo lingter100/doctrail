@@ -46,6 +46,7 @@ from tools.free_qa.policy import (
     CANDIDATE,
     CATALOGS,
     EPOCHS,
+    PROFILE_PINS,
     ComparisonContract,
     bind_policy,
     canonical,
@@ -67,6 +68,7 @@ CODE_FILES = (*LEGACY_CODE_FILES, "tools/free_qa/policy.py", "tools/free_qa/adap
     "tools/free_qa/runner.py", "scripts/probe_meeting_free_qa.py", "tests/test_meeting_free_qa.py",
     "tools/free_qa/assets.py", "tools/summary_grammar/runtime.py")
 _PREPARED = object()
+_ADMITTED = object()
 _GUARD_FAILURES = frozenset({"deadline", "resources", "ownership", "sampler_join"})
 
 
@@ -121,6 +123,7 @@ class VerifiedContract:
     lock_ref: object = None
     custody_refs: tuple = ()
     gate_refs: tuple = ()
+    admitted_models: tuple = ()
 
 
 def check_inputs(contract, root):
@@ -169,48 +172,78 @@ def verify_contract(contract, trusted_locks=None, *, root=ROOT):
     neutral = contract["neutral"]
     need(neutral["id"] not in excluded["ids"] and neutral["content_sha256"] not in excluded["content_hashes"]
          and neutral["question_sha256"] not in excluded["question_hashes"], "excluded_neutral")
-    policies, gate_refs = [], []
-    for model in contract["models"]:
-        _, profile_bytes = read_ref(model["profile"], root)
-        _, binding_bytes = read_ref(model["binding"], root)
-        binding = parse(binding_bytes)
-        policy = bind_policy(profile_bytes, binding, model["runtime"])
-        for key in ("metadata_receipt", "review_receipt", "acquisition_gate"):
-            read_ref(binding[key], root)
-        _, gate_bytes = read_ref(binding["acquisition_gate"], root)
-        gate = parse(gate_bytes)
-        common = "kind status profile_sha256 canonical_root source_commit source custody"
-        if policy.model_id == CANDIDATE:
-            exact(gate, common + " actual_cli_exit final_stdout attempt_token attempt cleanup_verified", "external_gate")
-            need(gate["kind"] == "external_acquire" and type(gate["actual_cli_exit"]) is int and gate["actual_cli_exit"] == 0
-                 and gate["cleanup_verified"] is True and gate["final_stdout"] == {
-                     "status": "ACQUIRED_VERIFIED_METADATA_UNREVIEWED", "execution_approved": False}, "unaccepted_external_gate")
-            attempt_path, attempt_bytes = read_ref(gate["attempt"], root)
-            attempt = parse(attempt_bytes)
-            need(attempt_path == bound_path(model["model_root"], root) / "attempt.json"
-                 and attempt["operation"] == "acquire" and attempt["token"] == gate["attempt_token"]
-                 and isinstance(gate["attempt_token"], str) and gate["attempt_token"]
-                 and Path(attempt["root"]).resolve() == Path(gate["canonical_root"]).resolve()
-                 and attempt["profile_sha256"] == policy.profile_sha256 and attempt["retry"] is False
-                 and attempt["shared_seconds"] == 1800 and attempt["cleanup_reserved_seconds"] == 5
-                 and attempt["transfer_limit"] == 5 * 1024**3 and attempt["disk_limit"] == 6 * 1024**3, "acquisition_attempt")
-            gate_refs.append(gate["attempt"])
-        else:
-            # Existing Ministral acquisition predates the Qwen acquire CLI contract.
-            exact(gate, common + " asset_receipt", "baseline_asset_gate")
-            need(gate["kind"] == "existing_baseline_assets", "baseline_asset_gate")
-            read_ref(gate["asset_receipt"], root, metadata=False)
-            gate_refs.append(gate["asset_receipt"])
-        need(gate["status"] == "accepted" and gate["profile_sha256"] == policy.profile_sha256
-             and Path(gate["canonical_root"]).resolve() == bound_path(model["model_root"], root).resolve()
-             and isinstance(gate["source_commit"], str) and re.fullmatch(r"[0-9a-f]{40}", gate["source_commit"])
-             and isinstance(gate["source"], list) and gate["source"]
-             and len({row["file"].casefold() for row in gate["source"]}) == len(gate["source"]), "unaccepted_external_gate")
-        for item in [gate["custody"], *gate["source"]]:
-            read_ref(item, root, metadata=False)
-            gate_refs.append(item)
-        policies.append(policy)
-    return VerifiedContract(validated, tuple(policies), freeze(trusted_locks), root, freeze(lock_ref), gate_refs=freeze(gate_refs))
+    admitted = tuple(admit_model(model, trusted_locks["reviewed_bindings"][model["id"]],
+                                 trusted_locks["runtime_sha256"], root=root) for model in contract["models"])
+    return VerifiedContract(validated, tuple(item.policy for item in admitted), freeze(trusted_locks), root,
+                            freeze(lock_ref), gate_refs=tuple(ref for item in admitted for ref in item.gate_refs),
+                            admitted_models=admitted)
+
+
+@dataclass(frozen=True)
+class AdmittedModel:
+    descriptor: object
+    policy: object
+    root: Path
+    gate_refs: tuple
+    seal: object
+
+
+def admit_model(model, binding_sha256, runtime_sha256, *, root=ROOT):
+    """Model-only metadata checks; digests must come from a separate trusted boundary."""
+    root = Path(root).resolve()
+    exact(model, "id profile binding runtime model_root asset_files", "model_contract")
+    need(model["id"] in PROFILE_PINS, "model_identity")
+    reference(model["profile"])
+    reference(model["binding"])
+    need((model["profile"]["file"], model["profile"]["sha256"]) == PROFILE_PINS[model["id"]]
+         and model["binding"]["sha256"] == digest_value(binding_sha256)
+         and sha(canonical(model["runtime"])) == digest_value(runtime_sha256), "trusted_model")
+    need(isinstance(model["asset_files"], list) and model["asset_files"]
+         and len({row["file"].casefold() for row in model["asset_files"]}) == len(model["asset_files"]), "asset_set")
+    for row in model["asset_files"]:
+        reference(row)
+    bound_path(model["model_root"], root)
+    gate_refs = []
+    _, profile_bytes = read_ref(model["profile"], root)
+    _, binding_bytes = read_ref(model["binding"], root)
+    binding = parse(binding_bytes)
+    policy = bind_policy(profile_bytes, binding, model["runtime"])
+    for key in ("metadata_receipt", "review_receipt", "acquisition_gate"):
+        read_ref(binding[key], root)
+    _, gate_bytes = read_ref(binding["acquisition_gate"], root)
+    gate = parse(gate_bytes)
+    common = "kind status profile_sha256 canonical_root source_commit source custody"
+    if policy.model_id == CANDIDATE:
+        exact(gate, common + " actual_cli_exit final_stdout attempt_token attempt cleanup_verified", "external_gate")
+        need(gate["kind"] == "external_acquire" and type(gate["actual_cli_exit"]) is int and gate["actual_cli_exit"] == 0
+             and gate["cleanup_verified"] is True and gate["final_stdout"] == {
+                 "status": "ACQUIRED_VERIFIED_METADATA_UNREVIEWED", "execution_approved": False}, "unaccepted_external_gate")
+        attempt_path, attempt_bytes = read_ref(gate["attempt"], root)
+        attempt = parse(attempt_bytes)
+        need(attempt_path == bound_path(model["model_root"], root) / "attempt.json"
+             and attempt["operation"] == "acquire" and attempt["token"] == gate["attempt_token"]
+             and isinstance(gate["attempt_token"], str) and gate["attempt_token"]
+             and Path(attempt["root"]).resolve() == Path(gate["canonical_root"]).resolve()
+             and attempt["profile_sha256"] == policy.profile_sha256 and attempt["retry"] is False
+             and attempt["shared_seconds"] == 1800 and attempt["cleanup_reserved_seconds"] == 5
+             and attempt["transfer_limit"] == 5 * 1024**3 and attempt["disk_limit"] == 6 * 1024**3, "acquisition_attempt")
+        gate_refs.append(gate["attempt"])
+    else:
+        # Existing Ministral acquisition predates the Qwen acquire CLI contract.
+        exact(gate, common + " asset_receipt", "baseline_asset_gate")
+        need(gate["kind"] == "existing_baseline_assets", "baseline_asset_gate")
+        read_ref(gate["asset_receipt"], root, metadata=False)
+        gate_refs.append(gate["asset_receipt"])
+    need(gate["status"] == "accepted" and gate["profile_sha256"] == policy.profile_sha256
+         and Path(gate["canonical_root"]).resolve() == bound_path(model["model_root"], root).resolve()
+         and isinstance(gate["source_commit"], str) and re.fullmatch(r"[0-9a-f]{40}", gate["source_commit"])
+         and isinstance(gate["source"], list) and gate["source"]
+         and len({row["file"].casefold() for row in gate["source"]}) == len(gate["source"]), "unaccepted_external_gate")
+    for item in [gate["custody"], *gate["source"]]:
+        read_ref(item, root, metadata=False)
+        gate_refs.append(item)
+    need(policy.model_id == model["id"], "model_identity")
+    return AdmittedModel(freeze(model), policy, root, freeze(gate_refs), _ADMITTED)
 
 
 def prepare_case(row, data, sidecar):
@@ -280,9 +313,17 @@ def check_prepared(prepared, policy, clock, deadline):
 
 def prepare_model(verified, model_id, deadline, *, clock=time.monotonic):
     need(isinstance(verified, VerifiedContract), "verified_contract_required")
-    model = next(x for x in thaw(verified.contract.data)["models"] if x["id"] == model_id)
-    policy = next(x for x in verified.policies if x.model_id == model_id)
-    root = verified.root
+    admitted = next((item for item in verified.admitted_models if item.policy.model_id == model_id), None)
+    need(admitted is not None and admitted.policy is next((p for p in verified.policies if p.model_id == model_id), None)
+         and canonical(admitted.descriptor) == canonical(next(x for x in verified.contract.data["models"] if x["id"] == model_id)),
+         "admitted_model_connection")
+    return prepare_admitted_model(admitted, deadline, clock=clock)
+
+
+def prepare_admitted_model(admitted, deadline, *, clock=time.monotonic):
+    need(isinstance(admitted, AdmittedModel) and admitted.seal is _ADMITTED, "admitted_model_required")
+    model, policy, root = thaw(admitted.descriptor), admitted.policy, admitted.root
+    model_id = policy.model_id
     model_root = bound_path(model["model_root"], root)
     runtime_root = bound_path(policy.runtime["root"], root)
     need(runtime_path_set(model_root) == frozenset(r["file"] for r in model["asset_files"]), "model_inventory")

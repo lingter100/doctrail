@@ -508,7 +508,9 @@ def tiny_preparation(tmp_path):
     pol = p.ModelPolicy(p.BASE, "synthetic-profile.json", "0" * 64,
         ({"filename": "tiny.gguf", "size_bytes": len(blob), "sha256": p.sha(blob)},), "tiny.gguf", "synthetic-alias", raw, rt)
     contract = p.ComparisonContract({"models": [{"id": p.BASE, "model_root": "synthetic-assets", "asset_files": [model_ref]}]}, "f" * 64)
-    verified = r.VerifiedContract(contract, (pol,), p.freeze({}), tmp_path)
+    # Test-only seal over tiny synthetic assets; production admission is exercised separately.
+    admitted = r.AdmittedModel(contract.data["models"][0], pol, tmp_path, (), r._ADMITTED)
+    verified = r.VerifiedContract(contract, (pol,), p.freeze({}), tmp_path, admitted_models=(admitted,))
     return verified, model_root, rt_root
 
 
@@ -536,7 +538,9 @@ def test_full_preparation_rejects_synthetic_filesystem_and_metadata_faults(tmp_p
         pol = verified.policies[0]
         raw = p.thaw(pol.reviewed); raw["metadata"][0]["tokenizer"] = []
         from dataclasses import replace
-        verified = replace(verified, policies=(replace(pol, reviewed=raw),))
+        changed = replace(pol, reviewed=raw)
+        verified = replace(verified, policies=(changed,),
+                           admitted_models=(replace(verified.admitted_models[0], policy=changed),))
     original = r.check_ref
     def check(row, root):
         original(row, root)
