@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "status": "source_question_criteria_prereview_admitted_runtime_packaging_pending",
+  "evidence_type": "source_preparation_and_pure_format_checks",
+  "real_source_families": 6,
+  "real_source_documents": 10,
+  "synthetic_neutral_cases": 1,
+  "quality_questions": 6,
+  "author_declared_coverage": {
+    "answerable": 4,
+    "insufficient_evidence": 1,
+    "unresolved_conflict": 1,
+    "required_answer_elements": 23,
+    "unit_counts": [152, 51, 110, 116, 88, 76],
+    "languages": ["ko", "en", "mixed"]
+  },
+  "pure_request_checks": {"quality_passed": 6, "unchanged_neutral_passed": 1},
+  "exclusion_exact_matches": 0,
+  "prior_files_preserved": 233,
+  "fixed_controls_preserved": 12,
+  "parent_verified_references": 270,
+  "author_receipt_sha256": "c6cddef0aad26c3392ee951a64c947ced486e9168c36ac319c64aa5dd82ccf1b",
+  "author_pre_output_freeze_sha256": "3c906a0d46efbce11c70630f0ea6a034d6047376145fb4bf3c563a24a2eea310",
+  "parent_custody_receipt_sha256": "f394149e913487ebe90c4e3f340dde0e0acfdf4205ad723b30689051fe76ec2e",
+  "independent_prereview": {
+    "source_question_criteria_cases_admitted": 6,
+    "substantive_blockers": 0,
+    "runtime_packaging_advisories": 2,
+    "whole_documents_checked": 10,
+    "source_units_checked": 593,
+    "criterion_locations_checked": 72,
+    "license_capture_bindings": 7,
+    "inputs_preserved": 91,
+    "safe_review_sha256": "315f8a66a527c8959d3b5b7f4531ba379b92a5b26fdaae9c01e6c6f631d01805",
+    "terminal_receipt_sha256": "0932aef3a2a5197fa7878169ea20e0670003b8d08aaa40cfb053e134f8fbce14",
+    "parent_review_artifact_refs": 17,
+    "parent_receipt_sha256": "512c6b52bf9cff81c85345de44d99937869ba9fa9ad38f849ae7f30452af5765"
+  },
+  "review_states": {
+    "question_and_criteria_author": "AI",
+    "automatic_format_review": "passed",
+    "independent_source_review": "AI_source_only_prerequisite_admitted",
+    "human_reviewed_questions": 0
+  },
+  "model_generations": 0,
+  "tokenizer_calls": 0,
+  "actual_input_fit_measured": false,
+  "trusted_registration": false,
+  "public_dataset_package_complete": false,
+  "service_adoption": false,
+  "limits": [
+    "Exact hashes do not prove universal semantic or translation independence.",
+    "Source prerequisite admission is not model output accuracy or runtime admission.",
+    "Public publisher material is not a claim of human-only authorship or user review.",
+    "Pure request checks are not model quality or operational measurements."
+  ]
+}

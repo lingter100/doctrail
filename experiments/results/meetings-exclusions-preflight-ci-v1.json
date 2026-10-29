@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "status": "EXACT_HEAD_REQUIRED_CI_PASSED",
+  "head_commit": "56bb16f3f08f38b3a83ff163ce3d73fb46c9e91d",
+  "runs": [
+    {
+      "id": 40656839082,
+      "event": "push",
+      "conclusion": "success"
+    },
+    {
+      "id": 40656845468,
+      "event": "pull_request",
+      "conclusion": "success"
+    }
+  ],
+  "required_jobs_per_run": [
+    "backend",
+    "web",
+    "java-service"
+  ],
+  "watchers": {
+    "sessions": [
+      59857,
+      37639
+    ],
+    "exit_codes": [
+      0,
+      0
+    ],
+    "closed": true,
+    "workflow_reruns": 0
+  },
+  "push_observed": {
+    "python": {
+      "passed": 5240,
+      "skipped": 21,
+      "warnings": 2,
+      "seconds": 218.88
+    },
+    "browser": {
+      "passed": 158,
+      "failed": 0,
+      "infrastructure_failures": 0,
+      "missing_reports": 0,
+      "missing_runs": 0
+    },
+    "java_operations": {
+      "status": "passed",
+      "AI_quality": false
+    }
+  },
+  "scope": "Documentation/preparation publication; source unchanged. Synthetic/model-free regression, saved-result replay, actual Java and partly synthetic browser responses, not new model quality.",
+  "human_review": 0,
+  "created_at_utc": "2026-10-28T08:37:02.676885+00:00"
+}
