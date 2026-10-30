@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "EXACT_COMMIT_BOTH_REQUIRED_CI_PASSED",
+  "commit": "4b5be15ff5a1eeded42373ba26b59ace5512c34a",
+  "push_run": 41005718956,
+  "pr_run": 41005725142,
+  "jobs_per_run": {
+    "backend": "success",
+    "web": "success",
+    "java-service": "success"
+  },
+  "watch_sessions": {
+    "push": 30427,
+    "pr": 97246
+  },
+  "watch_exits": {
+    "push": 0,
+    "pr": 0
+  },
+  "python": {
+    "passed": 5475,
+    "skipped": 21,
+    "warnings": 2,
+    "seconds": 223.31,
+    "measurement_log": "push backend"
+  },
+  "browser_each_run": {
+    "passed": 158,
+    "failed": 0,
+    "infrastructure_failures": 0,
+    "missing_reports": 0,
+    "missing_runs": 0
+  },
+  "actual_java_http_and_database_compatibility": "passed",
+  "synthetic_meeting_operations_against_actual_java": "passed",
+  "new_1800s_actual_acquisition_runs": 0,
+  "new_build_native_model_runs": 0,
+  "model_quality_proven": false,
+  "public_deployment": false,
+  "parent_receipt_sha256": "f3ed55b2dcf2a62fedc2dd108780699ec23868d874b46c97c765844cc60c46b3",
+  "limitations": [
+    "No1800s actual acquisition, compiler or native validator execution occurred in CI.",
+    "Closed v4/v5 failures and original600s policy are preserved.",
+    "Historical retrieval metric replay is not fresh model inference or a new quality experiment."
+  ]
+}

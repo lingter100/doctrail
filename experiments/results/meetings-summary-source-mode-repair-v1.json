@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "IMPLEMENTED_FOCUSED_CHECKS_AND_INDEPENDENT_REVIEW_PASSED",
+  "baseline_commit": "4b5be15ff5a1eeded42373ba26b59ace5512c34a",
+  "trigger": "Actual v6 acquisition source_type failure; natural exit1 at955.438s",
+  "diagnosis": {
+    "selected_non_directory_sources": 1687,
+    "regular_100755_entries": 5,
+    "first_rejected": "ggml/src/ggml-cann/CMakeLists.txt",
+    "preceding_saved_source_entries": 53,
+    "tree_sha256": "11d9bbbd5ec89c14ef1fd9865b6a5b5084640b25fce6ff9efb4d09e0170cc518"
+  },
+  "change": "Accept only ordinary Git blob modes100644 and100755, preserving all other acquisition conditions; no execution permission added.",
+  "sources": {
+    "scripts/prepare_summary_grammar_engine.py": "3c72df4b6b272b57478a13ecf25293fd103b2c33b3535faa2c73bcc46f2df91f",
+    "tests/test_summary_grammar_engine.py": "79016e9ac3d447fe1c7ef56fe209390424532dc1233cc96b89447682b6d43eee"
+  },
+  "validation": {
+    "initial_passed": 10,
+    "initial_failed": 12,
+    "initial_failure_reason": "Test fixture patched absent prep.subprocess attribute.",
+    "initial_seconds": 18.28,
+    "failed_only_recheck_passed": 12,
+    "failed_only_recheck_seconds": 2.16,
+    "unique_cases_with_pass_evidence": 22,
+    "passed_initial_cases_repeated": false,
+    "normal_ruff": "passed",
+    "synthetic_fixtures": true,
+    "observed_upstream_path_and_mode_with_synthetic_body": true,
+    "initial_output_decode_error_preserved": true,
+    "initial_error_encoding": "CP949 pytest output was decoded asUTF8 by controller; raw bytes retained."
+  },
+  "preservation": {
+    "original_git_source_copies": 2,
+    "parent_direct_refs": 21,
+    "additional_unchanged_refs": 11,
+    "one_predicate_production_delta": true,
+    "runtime_pins_helpers_once_closed_results_unchanged": true
+  },
+  "implementation_receipt_sha256": "e48c9dd0f56d4b38a99e516001243056a76c8a0da1559988c97fd5e5ba5b5bbb",
+  "parent_receipt_sha256": "e86743e21705ffd1ee54c84af6e89ba07c843284f49d5f827ea0d6263cc9e86e",
+  "new_actual_acquisition_runs": 0,
+  "build_native_model_runs": 0,
+  "actual_success_proven": false,
+  "new_acquisition_authority": false,
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "receipt_sha256": "2c061c1b75a057cfc9109272b4ba68e88cd7e43ecc6950cddfcf53c651106b27",
+    "parent_verified_refs": 6,
+    "no_new_test_runs": true
+  }
+}

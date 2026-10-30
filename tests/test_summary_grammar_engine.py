@@ -411,8 +411,9 @@ def test_build_mocked_only_target2_jobs_and_shared900_seconds(tmp_path, monkeypa
     assert len(calls) == 2
 
 
+@pytest.mark.parametrize("mode", ["100644", "100755"])
 @pytest.mark.parametrize("bad_blob", [False, True])
-def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execution(tmp_path, monkeypatch, bad_blob):
+def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execution(tmp_path, monkeypatch, bad_blob, mode):
     import hashlib
     root = tmp_path / "owned"
     urls, toolpins = {}, []
@@ -432,12 +433,12 @@ def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execut
         toolpins.append({"name": name, "asset": url, "published_sha256": None if name.startswith("ninja") else rt.digest(data.getvalue())})
     monkeypatch.setattr(prep, "pins", lambda: {"tools": toolpins})
     tree = []
-    for name in ["CMakeLists.txt", "LICENSE", "src/llama-grammar.h", "src/llama-grammar.cpp", "src/models/example.cpp"]:
+    for name in ["CMakeLists.txt", "LICENSE", "src/llama-grammar.h", "src/llama-grammar.cpp", "src/models/example.cpp", "ggml/src/ggml-cann/CMakeLists.txt"]:
         body = b"synthetic source " + name.encode()
         url = f"https://raw.githubusercontent.com/ggml-org/llama.cpp/{rt.COMMIT}/{name}"
         urls[url] = body
         blob = hashlib.sha1(b"blob " + str(len(body)).encode() + b"\0" + body).hexdigest()
-        tree.append({"path": name, "type": "blob", "mode": "100644", "size": len(body), "sha": "0" * 40 if bad_blob and name == "LICENSE" else blob})
+        tree.append({"path": name, "type": "blob", "mode": mode, "size": len(body), "sha": "0" * 40 if bad_blob and name == "LICENSE" else blob})
     api = "https://api.github.com/repos/ggml-org/llama.cpp/git/"
     urls[api + "commits/" + rt.COMMIT] = json.dumps({"sha": rt.COMMIT, "tree": {"sha": "a" * 40}}).encode()
     urls[api + "trees/" + "a" * 40 + "?recursive=1"] = json.dumps({"sha": "a" * 40, "truncated": False, "tree": tree}).encode()
@@ -462,7 +463,10 @@ def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execut
         assert result["status"] == "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"
         ninja = next(x for x in result["tools"] if x["name"] == "ninja-win.zip")
         assert ninja["publisher_sha256"] is None and len(ninja["archive_sha256"]) == 64
-        assert result["compiler_native_execution"] == 0 and len(result["source"]) == 5
+        assert result["compiler_native_execution"] == 0 and len(result["source"]) == 6
+        observed_path = "ggml/src/ggml-cann/CMakeLists.txt"
+        assert (root / "source" / observed_path).read_bytes() == b"synthetic source " + observed_path.encode()
+        assert {row["file"] for row in result["source"]} == {row["path"] for row in tree}
         reviewed = rt.digest((root / "acquisition.json").read_bytes())
         assert prep.check_acquired(root, reviewed)["runtime_bindings"] == result["runtime_bindings"]
         with pytest.raises(rt.BoundaryError, match="review_digest_mismatch"):
@@ -2189,3 +2193,39 @@ def test_duration_external_and_internal_profiles_cannot_diverge(tmp_path, durati
     expected = v3_external_fixture(root, profile=other)
     with pytest.raises(rt.BoundaryError, match="acquisition_profile_binding"):
         prep.check_acquired(root, expected)
+
+@pytest.mark.parametrize("entry_type,mode,path,error", [
+    ("blob", "120000", "src/link.h", "source_type"),
+    ("commit", "160000", "src/submodule", "source_type"),
+    ("blob", "160000", "src/invalid.h", "source_type"),
+    ("blob", "100664", "src/invalid.h", "source_type"),
+    ("unknown", "100755", "src/invalid.h", "source_type"),
+    (None, "100755", "src/invalid.h", "source_type"),
+    (["blob"], "100755", "src/invalid.h", "source_type"),
+    ("blob", None, "src/invalid.h", "source_type"),
+    ("blob", 100755, "src/invalid.h", "source_type"),
+    ("blob", ["100755"], "src/invalid.h", "source_type"),
+    ("blob", {"mode": "100755"}, "src/invalid.h", "source_type"),
+    ("blob", "100755", "src/weights.gguf", "source_payload"),
+])
+def test_source_modes_reject_before_entry_fetch(tmp_path, monkeypatch, entry_type, mode, path, error):
+    root = tmp_path / "owned"
+    api = "https://api.github.com/repos/ggml-org/llama.cpp/git/"
+    urls = {
+        api + "commits/" + rt.COMMIT: json.dumps({"sha": rt.COMMIT, "tree": {"sha": "a" * 40}}).encode(),
+        api + "trees/" + "a" * 40 + "?recursive=1": json.dumps({"sha": "a" * 40, "truncated": False,
+            "tree": [{"path": path, "type": entry_type, "mode": mode, "size": 1, "sha": "0" * 40}]}).encode(),
+    }
+    fetched = []
+    def opened(request, **kwargs):
+        fetched.append(request.full_url)
+        assert request.full_url in urls, "invalid entry must be rejected before fetch"
+        return Response(urls[request.full_url])
+    monkeypatch.setattr(prep, "pins", lambda: {"tools": []})
+    monkeypatch.setattr(subprocess, "Popen", lambda *a, **k: pytest.fail("no native execution"))
+    with pytest.raises(rt.BoundaryError, match=error):
+        prep.acquire(root, opener=SimpleNamespace(open=opened), budget_factory=FakeBudget)
+    assert fetched == list(urls)
+    assert not any((root / "source").iterdir())
+    assert rt.load(root / "acquisition-failure.json")["reason"] == error
+    assert not (root / "acquisition.json").exists()

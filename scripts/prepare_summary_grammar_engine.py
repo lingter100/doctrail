@@ -513,7 +513,7 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None, acquisi
                     continue
                 if entry["type"] == "tree":
                     continue
-                require(entry["type"] == "blob" and entry["mode"] == "100644" and selected_source(path), "source_type")
+                require(entry["type"] == "blob" and entry["mode"] in ("100644", "100755") and selected_source(path), "source_type")
                 require(type(entry["size"]) is int and 0 <= entry["size"] <= 16 * 1024**2, "source_size")
                 target = safe_path(source_root, path)
                 target.parent.mkdir(parents=True, exist_ok=True)
