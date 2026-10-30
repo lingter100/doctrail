@@ -17,11 +17,11 @@
 | 검색 모델 비교 | BM25·임베딩·혼합·리랭커, 도메인 임베딩 미세조정과 실제 서비스 연결 | 격리 최종 평가와 기본 모델 채택 판단 |
 | AI 요약·질의응답 | 실제 로컬 추론, 출처 검증·답변 보류·오류 복구 | 정보 누락·의미 오류 개선, 독립 품질 평가 |
 
-게시 소스 `bac908d`의 양쪽 필수 CI가 통과했다. [검사 기록](experiments/results/meetings-summary-shared-headers-ci-v1.json)은 Python 5,387개 통과·21개 제외, 각 전체 브라우저 158개 통과·실패 0과 실제 Java 운영 검증을 구분한다. 일부 화면 검사는 합성 모델 응답을 사용하므로 실제 AI 품질의 근거로 세지 않는다. [기능 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)과 아래의 독립 AI 내용 평가를 구분해 기록한다.
+확인된 게시 소스 `1a0310d`의 양쪽 필수 CI가 통과했다. [검사 기록](experiments/results/meetings-summary-metadata-read-ci-v1.json)은 Python 5,419개 통과·21개 제외, 각 전체 브라우저 158개 통과·실패 0과 실제 Java 운영 검증을 구분한다. 일부 화면 검사는 합성 모델 응답을 사용하므로 실제 AI 품질의 근거로 세지 않는다. [기능 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)과 아래의 독립 AI 내용 평가를 구분해 기록한다.
 
 [무료 로컬 QA 두 모델 실측](docs/MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)을 끝냈다. 같은6개에서 기준3B·후보7B의 형식 유효는3개·4개였지만, 별도 AI의 최종 내용 수용은 모두 **0/6**이었다. 입력 초과와 출력 잘림을 실제 숫자로 확인했고, 원본·실패·판단을 보존한 채 비교를 종료했다. 후보를 서비스에 채택하지 않는다. 이전 [시작 실패와 호환성 수정](docs/MEETINGS-FREE-QA-BASELINE-STARTUP-RESULTS.md), [중립 실행](experiments/results/meetings-free-qa-paired-v3-neutral-v1.json), [현재 소스 CI](experiments/results/meetings-free-qa-paired-v3-ci-v1.json)는 내용 품질과 구분한다.
 
-[요약 엔진 준비 v3](docs/MEETINGS-SUMMARY-ENGINE-V3-VERIFICATION.md)의 [LLVM 필수 경로 오류](experiments/results/meetings-summary-engine-v3-oct30-acquisition-v1.json)를 고친 뒤, [v4 실제 취득](experiments/results/meetings-summary-engine-v4-acquisition-v1.json)은 LLVM·CMake 추출과 목록 확인을 통과했지만 시간 한도로 실패했다. 이어 기존 네 함수의 중복 파일 상태 조회를 줄였고 [관련106개 검사](experiments/results/meetings-summary-metadata-read-repair-v1.json)를 통과했다. 합성 경로의 조회 수 감소이며 실제 시간 단축은 아직 측정하지 않았다. 빌드·문법 엔진·새 요약 품질은 검증 전이고 닫힌 실패는 보존한다.
+[요약 엔진 준비 v3](docs/MEETINGS-SUMMARY-ENGINE-V3-VERIFICATION.md)의 [LLVM 필수 경로 오류](experiments/results/meetings-summary-engine-v3-oct30-acquisition-v1.json)를 고친 뒤, [v4](experiments/results/meetings-summary-engine-v4-acquisition-v1.json)와 중복 조회 수정 후 [v5](experiments/results/meetings-summary-engine-v5-acquisition-v1.json)는 LLVM·CMake 준비를 마쳤지만 전체 취득은 시간 한도로 실패했다. [관련106개 검사](experiments/results/meetings-summary-metadata-read-repair-v1.json)의 조회 수 감소를 실제 전체 속도 개선으로 해석하지 않는다. 두 실측과 남은 작업량을 근거로 [새 취득 전용 30분 상한](docs/MEETINGS-SUMMARY-ACQUISITION-1800.md)을 별도 고정 정책으로 구현·집중 검증했다. 기존 10분 방식·실패는 보존하고, 새 정책도 미래 한 번만 허용하며 자동 연장·재시도를 하지 않는다. 빌드·문법 엔진·새 요약 품질은 검증 전이다.
 
 기능별 상태·남은 순서는 [진행 상황](docs/PROGRESS-OVERVIEW.md), 재현과 한계는 [실험 기록](experiments/README.md), 현재 확인된 경험을 설명하는 자료는 [포트폴리오 초안](docs/PORTFOLIO-DRAFT.md)·[면접 초안](docs/INTERVIEW-DRAFT.md)에 있다. 사용자 직접 검수·시연·설명 연습은 아직 확인하지 않았다. 녹음·STT·외부 회의 연동은2차 범위이며 유료 사용과 공개 서비스 배포는 하지 않았다.
 

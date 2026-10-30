@@ -43,13 +43,19 @@ from tools.summary_grammar.runtime import (
 )
 
 ACQUISITION_PROFILE = "llvm-x64-sampled-50ms-v1"
+ACQUISITION_PROFILE_1800 = "llvm-x64-sampled-50ms-1800s-v1"
 LLVM_PREFIX = "llvm-mingw-20250709-ucrt-x86_64/"
 LLVM_SHA = "82babcd6aae4dc3606e8e0471d816989c384b4bf86a139f184a8b4a1b2c2758d"
 
 
 def validate_acquisition_profile(value):
-    require(value in (None, ACQUISITION_PROFILE), "acquisition_profile")
+    require(value in (None, ACQUISITION_PROFILE, ACQUISITION_PROFILE_1800), "acquisition_profile")
     return value
+
+
+def acquisition_seconds(profile):
+    validate_acquisition_profile(profile)
+    return 1800 if profile == ACQUISITION_PROFILE_1800 else 600
 
 
 def budget_guard(method):
@@ -76,7 +82,8 @@ class Budget:
         self.samples, self.sample_attempts, self.max_sample_gap, self.forced_samples = 0, 0, 0.0, {}
         self.terminal_observation = "not_attempted"
         self.root, self.ps, self.clock = root, ps, clock
-        self.end, self.downloaded = clock() + 600, 0
+        self.seconds = acquisition_seconds(self.profile)
+        self.end, self.downloaded = clock() + self.seconds, 0
         self.written = self.scan_count = self.scan_entries = 0
         self.scan_seconds = 0.0
         self.files = {}
@@ -201,7 +208,7 @@ class Budget:
         require(phase in {"download-llvm", "extract-llvm", "inventory-llvm", "download-cmake", "extract-cmake", "inventory-cmake",
                           "download-ninja", "extract-ninja", "inventory-ninja", "source-metadata", "sources", "licenses", "manifest"}, "phase_name")
         path = self.root / "acquisition-phases.jsonl"
-        data = (json.dumps({"phase": phase, "state": state, "elapsed_seconds": self.clock() - (self.end - 600),
+        data = (json.dumps({"phase": phase, "state": state, "elapsed_seconds": self.clock() - (self.end - self.seconds),
                            "download_body_bytes": self.downloaded, "written_bytes": self.written,
                            "scan_count": self.scan_count, "scan_entries": self.scan_entries,
                            "scan_seconds": self.scan_seconds,
@@ -456,6 +463,8 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None, acquisi
         attempt = load(root / "acquisition-attempt.json")
         require(attempt.get("acquisition_profile") == profile, "worker_profile_binding")
         if profile:
+            require(type(attempt.get("shared_seconds")) is int
+                    and attempt["shared_seconds"] == acquisition_seconds(profile), "worker_duration_binding")
             require(attempt["argv"] == [sys.executable, "-B", str(Path(__file__).resolve()), "_acquire-worker",
                     "--workspace", str(root), "--worker-token", worker_token,
                     "--acquisition-profile", profile], "worker_attempt_binding")
@@ -563,7 +572,8 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None, acquisi
 def acquire_supervised(root, runner=run_owned, clock=time.monotonic, acquisition_profile=None):
     """The supervisor can stop a blocked DNS/socket/extraction worker at the shared deadline."""
     profile = validate_acquisition_profile(acquisition_profile)
-    deadline = clock() + 600
+    seconds = acquisition_seconds(profile)
+    deadline = clock() + seconds
     def checkpoint():
         require(clock() < deadline, "shared_deadline")
     root = Path(root).absolute()
@@ -575,7 +585,7 @@ def acquire_supervised(root, runner=run_owned, clock=time.monotonic, acquisition
     if profile:
         command.extend(["--acquisition-profile", profile])
     write_metadata(root, root / "acquisition-attempt.json", {"worker_token": token, "argv": command,
-          "shared_seconds": 600, "retry": False, **({"acquisition_profile": profile} if profile else {})}, deadline=deadline, clock=clock)
+          "shared_seconds": seconds, "retry": False, **({"acquisition_profile": profile} if profile else {})}, deadline=deadline, clock=clock)
     allowed = [Path(sys.executable), Path(getattr(sys, "_base_executable", sys.executable))]
     if "SystemRoot" in os.environ:
         allowed.append(Path(os.environ["SystemRoot"]) / "System32/conhost.exe")
@@ -686,7 +696,8 @@ def optional_probe_guard(root, binding, env, application_dir):
 
 
 def check_profile_records(root, lock, profile):
-    require(profile == ACQUISITION_PROFILE and lock.get("acquisition_profile") == profile, "acquisition_profile_binding")
+    require(profile in (ACQUISITION_PROFILE, ACQUISITION_PROFILE_1800)
+            and lock.get("acquisition_profile") == profile, "acquisition_profile_binding")
     require(not (root / "acquisition-failure.json").exists(), "acquisition_worker_failed")
     attempt, raw = load(root / "acquisition-attempt.json"), load(root / "raw-acquisition.json")
     supervision = load(root / "acquisition-supervision.json")
@@ -696,7 +707,8 @@ def check_profile_records(root, lock, profile):
     argv = attempt.get("argv", [])
     require(len(argv) == 10 and argv[-2:] == ["--acquisition-profile", profile]
             and argv[3] == "_acquire-worker" and argv[4:8] == ["--workspace", str(root), "--worker-token", attempt.get("worker_token")]
-            and supervision.get("argv") == argv and attempt.get("shared_seconds") == 600
+            and supervision.get("argv") == argv and type(attempt.get("shared_seconds")) is int
+            and attempt["shared_seconds"] == acquisition_seconds(profile)
             and attempt.get("retry") is False, "acquisition_attempt_binding")
     require(supervision.get("status") == "process_exited_zero_not_semantic_success" and supervision.get("exit") == 0
             and supervision.get("within_shared_deadline") is True and supervision.get("failure_latched") is False
@@ -826,13 +838,17 @@ def check_external_acceptance(root, expected):
     seen = set()
     acceptance = external_json(external_read(companion, "acceptance.json", 64 * 1024, seen, expected=expected))
     external_keys(acceptance, "schema profile workspace attempt manifest stdout stderr observer_terminal custody sources")
+    profile = acceptance["profile"]
+    require(profile in (ACQUISITION_PROFILE, ACQUISITION_PROFILE_1800), "external_contract")
+    seconds = acquisition_seconds(profile)
     workspace = str(root.resolve())
     def bound(value, schema):
-        require(value["schema"] == schema and value["profile"] == ACQUISITION_PROFILE
+        require(value["schema"] == schema and value["profile"] == profile
                 and value["workspace"] == workspace, "external_contract")
     bound(acceptance, "engine-v3-external-acceptance-v1")
     manifest = external_json(external_read(root, "acquisition.json", 16 * 1024**2, seen, acceptance["manifest"]))
     attempt = external_json(external_read(root, "acquisition-attempt.json", 16 * 1024, seen, acceptance["attempt"]))
+    require(manifest.get("acquisition_profile") == attempt.get("acquisition_profile") == profile, "acquisition_profile_binding")
     stdout = external_read(companion, "cli.stdout", 4 * 1024, seen, acceptance["stdout"])
     external_read(companion, "cli.stderr", 8 * 1024**2, seen, acceptance["stderr"])
     terminal = external_json(external_read(companion, "observer-terminal.json", 128 * 1024, seen, acceptance["observer_terminal"]))
@@ -862,13 +878,13 @@ def check_external_acceptance(root, expected):
     require(all(type(item) is str for item in prefix) and prefix[1] == "-B"
             and Path(prefix[0]).is_absolute() and Path(prefix[2]).is_absolute()
             and Path(prefix[2]).resolve() == Path(__file__).resolve(), "external_attempt_argv")
-    require(terminal["argv"] == prefix + ["acquire", "--workspace", str(root), "--acquisition-profile", ACQUISITION_PROFILE]
+    require(terminal["argv"] == prefix + ["acquire", "--workspace", str(root), "--acquisition-profile", profile]
             and cli[2] == os.path.normcase(str(Path(prefix[0]).resolve())), "external_cli_argv")
     require(type(terminal["exit_code"]) is int and terminal["exit_code"] == 0
             and terminal["terminal_observed"] is True and terminal["limits_pass"] is True
             and terminal["first_failure"] is None, "external_terminal_failed")
-    require(external_number(terminal["elapsed_seconds"]) <= 600
-            and type(terminal["budget_seconds"]) is int and terminal["budget_seconds"] == 600
+    require(external_number(terminal["elapsed_seconds"]) <= seconds
+            and type(terminal["budget_seconds"]) is int and terminal["budget_seconds"] == seconds
             and type(terminal["cleanup_reserved_seconds"]) is int and terminal["cleanup_reserved_seconds"] == 5,
             "external_time_budget")
     require(stdout in (b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n',
@@ -931,8 +947,10 @@ def check_acquired(root, reviewed_sha):
                        or any("selection" in tool for tool in row.get("tools", [])) for row in records))
     if any(value is not None for value in profiles) or selected:
         require(external, "external_acceptance_missing")
-        require(all(value == ACQUISITION_PROFILE for value in profiles), "acquisition_profile_binding")
-        check_profile_records(root, lock, ACQUISITION_PROFILE)
+        profile = profiles[0]
+        require(profile in (ACQUISITION_PROFILE, ACQUISITION_PROFILE_1800)
+                and all(value == profile for value in profiles), "acquisition_profile_binding")
+        check_profile_records(root, lock, profile)
     else:
         require(not external, "external_profile_missing")
     cleanup = supervision["cleanup"]
@@ -1043,7 +1061,7 @@ def main():
     parser.add_argument("--workspace", type=Path)
     parser.add_argument("--worker-token", help=argparse.SUPPRESS)
     parser.add_argument("--reviewed-acquisition-sha256", help="Externally reviewed artifact SHA256: legacy acquisition.json; v3 sibling external-review/acceptance.json. Supply only after independent CLI-terminal and custody review; hashes do not authenticate self-asserted observations.")
-    parser.add_argument("--acquisition-profile", choices=[ACQUISITION_PROFILE])
+    parser.add_argument("--acquisition-profile", choices=[ACQUISITION_PROFILE, ACQUISITION_PROFILE_1800])
     args = parser.parse_args()
     require(args.acquisition_profile is None or args.operation in {"acquire", "_acquire-worker"}, "acquisition_profile_operation")
     if args.operation == "inspect":

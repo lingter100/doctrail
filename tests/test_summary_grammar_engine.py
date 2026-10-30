@@ -1188,7 +1188,7 @@ def test_late_publication_rollback_error_preserves_timeout_and_rejects_lock(tmp_
         prep.check_acquired(root, rt.digest((root / "acquisition.json").read_bytes()))
 
 # Explicit v3 policy tests use only fake clocks/processes and small synthetic archives.
-def v3_external_fixture(root, mutate=None):
+def v3_external_fixture(root, mutate=None, profile=prep.ACQUISITION_PROFILE):
     """Synthetic tmp-only claims: no observer/session/approval or actual run exists.
 
     Supplying this self-asserted digest is ONLY a test input, never operational
@@ -1208,13 +1208,13 @@ def v3_external_fixture(root, mutate=None):
     python = prep.os.path.normcase(str(Path(prep.sys.executable).resolve()))
     observer = {"pid": 100, "create_time": 1.0, "executable": python, "source_sha256": "1" * 64}
     cli = {"pid": 101, "create_time": 2.0, "executable": python}
-    common = {"profile": prep.ACQUISITION_PROFILE, "workspace": str(root.resolve())}
+    common = {"profile": profile, "workspace": str(root.resolve())}
     terminal = {"schema": "engine-v3-external-terminal-v1", "evidence_kind": "external_actual_cli_observation", **common,
         "attempt_sha256": attempt["sha256"], "manifest_sha256": manifest["sha256"],
         "stdout_sha256": rt.reference(folder / "cli.stdout", folder)["sha256"], "stderr_sha256": rt.reference(folder / "cli.stderr", folder)["sha256"],
-        "argv": rt.load(root / "acquisition-attempt.json")["argv"][:3] + ["acquire", "--workspace", str(root), "--acquisition-profile", prep.ACQUISITION_PROFILE],
+        "argv": rt.load(root / "acquisition-attempt.json")["argv"][:3] + ["acquire", "--workspace", str(root), "--acquisition-profile", profile],
         "observer": observer, "cli": cli, "sources_before": sources, "sources_after": sources,
-        "exit_code": 0, "terminal_observed": True, "elapsed_seconds": 4.0, "budget_seconds": 600,
+        "exit_code": 0, "terminal_observed": True, "elapsed_seconds": 4.0, "budget_seconds": prep.acquisition_seconds(profile),
         "cleanup_reserved_seconds": 5, "limits_pass": True, "first_failure": None}
     custody = {"schema": "engine-v3-external-custody-v1", **common, "attempt_sha256": attempt["sha256"], "manifest_sha256": manifest["sha256"],
         "observer_terminal_sha256": "pending", "identities": [{**cli, "absent": True}, {"pid": 202, "create_time": 2.0, "executable": python, "absent": True}],
@@ -1504,7 +1504,7 @@ def test_v3_worker_attempt_binding_before_budget(tmp_path, monkeypatch, fault):
     root = tmp_path
     token = "synthetic-token"
     argv = [prep.sys.executable, "-B", str(Path(prep.__file__).resolve()), "_acquire-worker", "--workspace", str(root), "--worker-token", token, "--acquisition-profile", prep.ACQUISITION_PROFILE]
-    attempt = {"worker_token": token, "argv": argv, "acquisition_profile": prep.ACQUISITION_PROFILE}
+    attempt = {"worker_token": token, "argv": argv, "acquisition_profile": prep.ACQUISITION_PROFILE, "shared_seconds": 600}
     if fault == "profile": attempt["acquisition_profile"] = "other"
     elif fault == "missing-profile": del attempt["acquisition_profile"]
     elif fault == "token": attempt["worker_token"] = "other"
@@ -1516,7 +1516,7 @@ def test_v3_worker_attempt_binding_before_budget(tmp_path, monkeypatch, fault):
                      budget_factory=lambda *a, **k: pytest.fail("must reject before budget"))
 
 
-def v3_mocked_acquisition(root, monkeypatch, clock=None, runner_fault=None):
+def v3_mocked_acquisition(root, monkeypatch, clock=None, runner_fault=None, profile=prep.ACQUISITION_PROFILE):
     import hashlib
     clock = clock or Clock()
     urls, toolpins = {}, []
@@ -1549,20 +1549,20 @@ def v3_mocked_acquisition(root, monkeypatch, clock=None, runner_fault=None):
     calls = []
     def runner(argv, **kwargs):
         calls.append(argv)
-        assert kwargs["acquisition_profile"] == prep.ACQUISITION_PROFILE
-        assert kwargs["deadline"] == 600 and kwargs["rss"] == 2 * 1024**3
-        assert argv[-2:] == ["--acquisition-profile", prep.ACQUISITION_PROFILE]
+        assert kwargs["acquisition_profile"] == profile
+        assert kwargs["deadline"] == prep.acquisition_seconds(profile) and kwargs["rss"] == 2 * 1024**3
+        assert argv[-2:] == ["--acquisition-profile", profile]
         token = argv[argv.index("--worker-token") + 1]
         monkeypatch.setenv("DOCTRAIL_ACQUIRE_TOKEN", token)
         prep.acquire(root, opener=opener, budget_factory=lambda folder, **options: prep.Budget(folder, ps=FakePS(folder), clock=clock, **options),
-                     worker_token=token, acquisition_profile=prep.ACQUISITION_PROFILE)
-        rt.write(root / "acquisition-supervision.json", {"acquisition_profile": prep.ACQUISITION_PROFILE, "argv": argv,
+                     worker_token=token, acquisition_profile=profile)
+        rt.write(root / "acquisition-supervision.json", {"acquisition_profile": profile, "argv": argv,
                  "status": "process_exited_zero_not_semantic_success", "exit": 0, "within_shared_deadline": True,
                  "failure_latched": False, "cleanup": {"all_absent": True, "errors": [],
                      "identities": [[202, 2.0, prep.os.path.normcase(str(Path(prep.sys.executable).resolve()))]]},
                  "resource_sampling": {"interval_seconds": 0.050, "sample_count": 3, "terminal_observation": "observed"}})
         if runner_fault: runner_fault(root)
-    result = prep.acquire_supervised(root, runner=runner, clock=clock, acquisition_profile=prep.ACQUISITION_PROFILE)
+    result = prep.acquire_supervised(root, runner=runner, clock=clock, acquisition_profile=profile)
     assert len(calls) == 1
     return result
 
@@ -1711,7 +1711,11 @@ def external_template(tmp_path_factory):
 
 @pytest.fixture
 def external_acquisition(external_template, monkeypatch):
-    files, toolpins, llvm_sha = external_template
+    return clone_acquisition_template(external_template, monkeypatch)
+
+
+def clone_acquisition_template(template, monkeypatch):
+    files, toolpins, llvm_sha = template
     monkeypatch.setattr(prep, "pins", lambda: toolpins)
     monkeypatch.setattr(prep, "LLVM_SHA", llvm_sha)
     def clone(root):
@@ -1724,6 +1728,153 @@ def external_acquisition(external_template, monkeypatch):
         (root / "acquisition.json").write_text(json.dumps(lock))
         return lock
     return clone
+
+
+@pytest.fixture(scope="module", params=[prep.ACQUISITION_PROFILE, prep.ACQUISITION_PROFILE_1800])
+def duration_template(tmp_path_factory, request):
+    root = tmp_path_factory.mktemp("duration-template") / "new"
+    with pytest.MonkeyPatch.context() as patch:
+        v3_mocked_acquisition(root, patch, profile=request.param)
+        toolpins, llvm_sha = prep.pins(), prep.LLVM_SHA
+    files = {path.relative_to(root).as_posix(): path.read_bytes() for path in root.rglob("*") if path.is_file()}
+    return request.param, (files, toolpins, llvm_sha)
+
+
+@pytest.fixture
+def duration_acquisition(duration_template, monkeypatch):
+    profile, template = duration_template
+    return profile, clone_acquisition_template(template, monkeypatch)
+
+
+@pytest.mark.parametrize("profile,seconds", [(None, 600), (prep.ACQUISITION_PROFILE, 600), (prep.ACQUISITION_PROFILE_1800, 1800)])
+def test_duration_worker_fixed_origin_phase_and_exact_deadline(tmp_path, profile, seconds):
+    clock = Clock(); clock.now = 11
+    budget = prep.Budget(tmp_path, ps=FakePS(tmp_path), clock=clock, acquisition_profile=profile)
+    assert budget.end == 11 + seconds
+    clock.now = 31
+    with budget.phase("sources"):
+        clock.now = 41
+    events = [json.loads(row) for row in (tmp_path / "acquisition-phases.jsonl").read_text().splitlines()]
+    assert [row["elapsed_seconds"] for row in events] == [20, 30]
+    assert budget.end == 11 + seconds
+    clock.now = budget.end - 0.001; budget.check()
+    clock.now = budget.end
+    with pytest.raises(rt.BoundaryError, match="preparation_budget") as caught: budget.check()
+    if profile:
+        clock.now = 12
+        with pytest.raises(rt.BoundaryError) as repeated: budget.check(force="success-terminal")
+        assert caught.value is repeated.value
+
+
+@pytest.mark.parametrize("profile,seconds", [(None, 600), (prep.ACQUISITION_PROFILE, 600), (prep.ACQUISITION_PROFILE_1800, 1800)])
+def test_duration_supervisor_uses_one_absolute_deadline_and_attempt(tmp_path, profile, seconds):
+    clock = Clock(); clock.now = 17
+    def runner(argv, **kwargs):
+        assert kwargs["deadline"] == 17 + seconds
+        attempt = rt.load(tmp_path / "new/acquisition-attempt.json")
+        assert attempt["shared_seconds"] == seconds
+        assert attempt.get("acquisition_profile") == profile
+        clock.now += 100
+        assert kwargs["deadline"] == 17 + seconds
+        raise RuntimeError("synthetic stop")
+    with pytest.raises(RuntimeError, match="synthetic stop"):
+        prep.acquire_supervised(tmp_path / "new", runner=runner, clock=clock, acquisition_profile=profile)
+
+
+@pytest.mark.parametrize("profile", [prep.ACQUISITION_PROFILE, prep.ACQUISITION_PROFILE_1800])
+def test_duration_supervisor_reserves_last_five_seconds_and_keeps_cleanup(tmp_path, profile):
+    seconds = prep.acquisition_seconds(profile)
+    clock = Clock(); ps = FakePS(tmp_path, "timeout"); process = FakePopen(ps, clock)
+    def jump(duration): clock.now = seconds - 5
+    with pytest.raises(rt.BoundaryError) as caught:
+        rt.run_owned([], cwd=tmp_path, env=rt.clean_environment([], tmp_path, "tmp"), root=tmp_path,
+                     log_prefix=tmp_path / "run", deadline=seconds, rss=100, host=1, start=1,
+                     allowed=[tmp_path / "root.exe", tmp_path / "child.exe"], ps=ps,
+                     popen=lambda *a, **k: process, clock=clock, sleeper=jump, acquisition_profile=profile)
+    record = caught.value.supervision_record
+    assert record["failure_latched"] and record["cleanup"]["all_absent"]
+    assert record["acquisition_profile"] == profile and seconds - 5 <= clock.now <= seconds
+    assert set(ps.killed) <= {10, 20}
+
+
+@pytest.mark.parametrize("profile", ["", "unknown", "llvm-x64-sampled-50ms-1801s-v1", "1800", 1800])
+def test_duration_unknown_profile_rejected_before_creation(tmp_path, profile):
+    with pytest.raises(rt.BoundaryError, match="acquisition_profile"):
+        prep.acquire_supervised(tmp_path / "new", acquisition_profile=profile)
+    assert not (tmp_path / "new").exists()
+
+
+def test_duration_arbitrary_cli_seconds_not_available(tmp_path, monkeypatch):
+    monkeypatch.setattr(prep.sys, "argv", ["prepare", "acquire", "--workspace", str(tmp_path / "new"), "--acquisition-seconds", "1800"])
+    with pytest.raises(SystemExit) as caught: prep.main()
+    assert caught.value.code == 2 and not (tmp_path / "new").exists()
+
+
+@pytest.mark.parametrize("profile", [prep.ACQUISITION_PROFILE, prep.ACQUISITION_PROFILE_1800])
+@pytest.mark.parametrize("fault", ["other-duration", "float-duration"])
+def test_duration_worker_rejects_mixed_attempt_before_budget(tmp_path, monkeypatch, profile, fault):
+    token = "synthetic-token"
+    seconds = prep.acquisition_seconds(profile)
+    invalid = (1800 if seconds == 600 else 600) if fault == "other-duration" else float(seconds)
+    argv = [prep.sys.executable, "-B", str(Path(prep.__file__).resolve()), "_acquire-worker", "--workspace", str(tmp_path), "--worker-token", token, "--acquisition-profile", profile]
+    rt.write(tmp_path / "acquisition-attempt.json", {"worker_token": token, "argv": argv, "acquisition_profile": profile, "shared_seconds": invalid})
+    monkeypatch.setenv("DOCTRAIL_ACQUIRE_TOKEN", token)
+    with pytest.raises(rt.BoundaryError, match="worker_duration_binding"):
+        prep.acquire(tmp_path, worker_token=token, acquisition_profile=profile,
+                     budget_factory=lambda *args, **kwargs: pytest.fail("budget must not start"))
+
+
+def test_duration_complete_lock_and_selection_policy_are_distinct(tmp_path, duration_acquisition):
+    profile, clone = duration_acquisition
+    root = tmp_path / "new"; lock = clone(root)
+    expected = v3_external_fixture(root, profile=profile)
+    assert prep.check_acquired(root, expected) == lock
+    assert lock["acquisition_profile"] == profile
+    assert lock["tools"][0]["selection"]["policy"] == prep.ACQUISITION_PROFILE
+    assert lock["tools"][0]["selection"]["selected_entries"] == 16
+
+
+@pytest.mark.parametrize("fault", ["attempt-seconds", "attempt-float", "attempt-profile", "raw-profile", "manifest-profile", "supervision-profile", "worker-profile", "sampling-profile", "latch"])
+def test_duration_mixed_internal_records_rejected(tmp_path, duration_acquisition, fault):
+    profile, clone = duration_acquisition
+    root = tmp_path / "new"; clone(root)
+    other = prep.ACQUISITION_PROFILE_1800 if profile == prep.ACQUISITION_PROFILE else prep.ACQUISITION_PROFILE
+    def change(name, action):
+        path = root / name; value = rt.load(path); action(value); path.write_text(json.dumps(value))
+    if fault == "attempt-seconds": change("acquisition-attempt.json", lambda row: row.update(shared_seconds=prep.acquisition_seconds(other)))
+    elif fault == "attempt-float": change("acquisition-attempt.json", lambda row: row.update(shared_seconds=float(prep.acquisition_seconds(profile))))
+    elif fault == "attempt-profile": change("acquisition-attempt.json", lambda row: row.update(acquisition_profile=other))
+    elif fault == "raw-profile": change("raw-acquisition.json", lambda row: row.update(acquisition_profile=other))
+    elif fault == "manifest-profile": change("acquisition.json", lambda row: row.update(acquisition_profile=other))
+    elif fault == "supervision-profile": change("acquisition-supervision.json", lambda row: row.update(acquisition_profile=other))
+    elif fault == "worker-profile": change("worker-terminal.json", lambda row: row.update(profile=other))
+    elif fault == "sampling-profile":
+        for name in ("raw-acquisition.json", "acquisition.json"):
+            change(name, lambda row: row["worker_sampling"].update(profile=other))
+    else: change("acquisition-supervision.json", lambda row: row.update(failure_latched=True))
+    change("acquisition.json", lambda row: row.update(acquisition_cleanup=rt.reference(root / "acquisition-supervision.json", root), worker_terminal=rt.reference(root / "worker-terminal.json", root)))
+    with pytest.raises(rt.BoundaryError): prep.check_acquired(root, v3_external_fixture(root, profile=profile))
+
+
+@pytest.mark.parametrize("fault", [None, "late", "other-budget", "float-budget", "acceptance-profile", "terminal-profile", "custody-profile", "not-terminal"])
+def test_duration_external_exact_boundary_and_mixed_policy_rejected(tmp_path, duration_acquisition, fault):
+    profile, clone = duration_acquisition
+    root = tmp_path / "new"; clone(root)
+    seconds = prep.acquisition_seconds(profile)
+    other = prep.ACQUISITION_PROFILE_1800 if profile == prep.ACQUISITION_PROFILE else prep.ACQUISITION_PROFILE
+    def mutate(at, row):
+        if at == "terminal":
+            row["elapsed_seconds"] = seconds
+            if fault == "late": row["elapsed_seconds"] += 0.001
+            elif fault == "other-budget": row["budget_seconds"] = prep.acquisition_seconds(other)
+            elif fault == "float-budget": row["budget_seconds"] = float(seconds)
+            elif fault == "not-terminal": row["terminal_observed"] = False
+        if fault == at + "-profile": row["profile"] = other
+    expected = v3_external_fixture(root, mutate, profile)
+    if fault:
+        with pytest.raises(rt.BoundaryError): prep.check_acquired(root, expected)
+    else:
+        assert prep.check_acquired(root, expected)["acquisition_profile"] == profile
 
 
 @pytest.mark.parametrize("kind,key", [(kind, key) for kind, keys in EXTERNAL_KEYS.items() for key in keys] + [(kind, "extra") for kind in EXTERNAL_KEYS])
@@ -2030,3 +2181,11 @@ def test_external_valid_crlf_boundary_time_and_unprovable_observer_truth(tmp_pat
     # Deliberately synthetic claims can pass structure if a caller supplies their
     # digest. This demonstrates the external-review trust boundary, not approval.
     assert prep.check_acquired(root, expected) == result
+
+def test_duration_external_and_internal_profiles_cannot_diverge(tmp_path, duration_acquisition):
+    profile, clone = duration_acquisition
+    root = tmp_path / "new"; clone(root)
+    other = prep.ACQUISITION_PROFILE_1800 if profile == prep.ACQUISITION_PROFILE else prep.ACQUISITION_PROFILE
+    expected = v3_external_fixture(root, profile=other)
+    with pytest.raises(rt.BoundaryError, match="acquisition_profile_binding"):
+        prep.check_acquired(root, expected)

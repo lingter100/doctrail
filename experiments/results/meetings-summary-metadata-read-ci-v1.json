@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "EXACT_COMMIT_BOTH_REQUIRED_CI_PASSED",
+  "commit": "1a0310d0b86cc9a7fb986c85da6d81434b6578c8",
+  "push_run": 40999640509,
+  "pr_run": 40999649660,
+  "jobs_per_run": {
+    "backend": "success",
+    "web": "success",
+    "java-service": "success"
+  },
+  "watch_sessions": {
+    "push": 2760,
+    "pr": 60864
+  },
+  "watch_exits": {
+    "push": 0,
+    "pr": 0
+  },
+  "python": {
+    "passed": 5419,
+    "skipped": 21,
+    "warnings": 2,
+    "seconds": 149.96,
+    "measurement_log": "PR backend"
+  },
+  "browser_each_run": {
+    "passed": 158,
+    "failed": 0,
+    "infrastructure_failures": 0,
+    "missing_reports": 0,
+    "missing_runs": 0
+  },
+  "actual_java_http_and_database_compatibility": "passed",
+  "synthetic_meeting_operations_against_actual_java": "passed",
+  "new_acquisition_native_model_runs": 0,
+  "real_speedup_proven": false,
+  "model_quality_proven": false,
+  "public_deployment": false,
+  "parent_receipt_sha256": "93424f5dd32fea30fa1b7c4f69decff87404c9e3178070a76de6d1e3d5eef39a",
+  "limitations": [
+    "Synthetic regression and real Java/browser operations do not prove actual acquisition latency or model semantic quality.",
+    "Closed QA0/6both and v4 acquisition failure are preserved."
+  ]
+}

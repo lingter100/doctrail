@@ -21,13 +21,13 @@
 
 [최신 QA 비교](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)는 같은 6개에서 기준 3B와 후보 7B 모두 내용 수용 0/6으로 종료됐다. 입력 한도 초과·출력 잘림뿐 아니라 필수 내용 누락, 선택 근거와 주장의 불일치, 답변 보류 실패가 남았다. 인용 문자열 일치와 충분한 답변은 다르다. 작은 개발 비교이므로 일반 정답률로 확대하지 않으며 같은 질문 재튜닝·자동 다음 모델 탐색은 하지 않는다.
 
-요약의 [문법 엔진 검증](MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md)은 아직 준비 단계다. [실제 LLVM 헤더 배치 오류](MEETINGS-SUMMARY-ENGINE-SHARED-HEADERS.md)를 고친 뒤 v4에서 LLVM·CMake 추출과 목록 확인을 마쳤지만, [전체 취득은 시간 한도로 실패](../experiments/results/meetings-summary-engine-v4-acquisition-v1.json)했다. 현재는 기존 경로·시간·용량 검사를 유지하면서 중복 파일 상태 조회만 줄이는 수정이다. 컴파일·문법 엔진 검사·새 요약 품질 검증은 아직 하지 않았다.
+요약의 [문법 엔진 검증](MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md)은 아직 준비 단계다. [실제 LLVM 헤더 배치 오류](MEETINGS-SUMMARY-ENGINE-SHARED-HEADERS.md)와 중복 파일 조회를 고친 뒤에도 [v5 취득은 시간 한도로 실패](../experiments/results/meetings-summary-engine-v5-acquisition-v1.json)했다. 두 실제 실행에서 전체 13단계 중 6단계만 끝난 점을 근거로, [미래 취득 한 번의 상한을 30분으로 고정하는 별도 정책](MEETINGS-SUMMARY-ACQUISITION-1800.md)을 구현·집중 검증했다. 기존 10분 방식·실패·다른 자원 제한은 유지하며, 30분 내 완료를 보장하거나 자동 연장하지 않는다. 컴파일·문법 엔진 검사·새 요약 품질 검증은 아직 하지 않았다.
 
 준비 작업을 줄이는 것과 완료 기준을 낮추는 것은 구분한다. 실패를 숨기거나 테스트 수를 서비스 품질로 대신하지 않으며, 다음 실측에서 취득 완료 여부와 실제 시간을 확인해야 한다.
 
 ## 현재 검증 근거
 
-- 게시 `bac908d`의 [필수 CI](../experiments/results/meetings-summary-shared-headers-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. Python 5,387개 통과·21개 제외, 각 브라우저 158개 통과·실패 0, 실제 Java HTTP·DB와 합성 회의 운영 검사 통과.
+- 게시 `1a0310d`의 [필수 CI](../experiments/results/meetings-summary-metadata-read-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. Python 5,419개 통과·21개 제외, 각 브라우저 158개 통과·실패 0, 실제 Java HTTP·DB와 합성 회의 운영 검사 통과. 이후 30분 정책의 집중 검사와 새 CI는 별도다.
 - [실제 회의 관리 흐름](MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원](MEETINGS-RESTORE-VERIFICATION.md), [실제 QA 실패와 독립 AI 판정](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)은 서로 다른 증거다. CI 통과가 실제 AI 품질 수용을 뜻하지 않는다.
 - 사용자 직접 검수·공개 서비스 배포는 완료하지 않았다. 실패 후보는 기본 모델로 채택하지 않았다.
 

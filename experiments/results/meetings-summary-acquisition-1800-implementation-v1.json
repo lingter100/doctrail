@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "IMPLEMENTATION_AND_INDEPENDENT_REVIEW_COMPLETED",
+  "source_base": "1a0310d0b86cc9a7fb986c85da6d81434b6578c8",
+  "policy": {
+    "default_and_old_profile_seconds": 600,
+    "new_profile": "llvm-x64-sampled-50ms-1800s-v1",
+    "new_profile_seconds": 1800,
+    "observer_cleanup_start_seconds": 1795,
+    "outer_launcher_wait_ceiling_seconds": 2100,
+    "cleanup_reserved_seconds": 5,
+    "arbitrary_duration_interface": false,
+    "selection_policy_and_sha_unchanged": true,
+    "build900_native60_other_limits_unchanged": true
+  },
+  "focused_validation": {
+    "initial_public": "144 passed, 3 failed in 223.47s; three new fixture phase-name errors preserved",
+    "failed_only_recheck": "3 passed in 0.38s",
+    "helper_focused": "47 passed in 44.27s",
+    "final_cross_profile_with_positive_controls": "4 passed in 20.94s; positive old/new plus crossed old/new",
+    "reuse": "Earlier public 144, fixed 3 and helper 47 retained; only new guard affected 4 rerun. Prior metadata 106 evidence reused through exact unchanged function AST. No whole suite.",
+    "ruff": "Initial combined Ruff exit1 inherited launcher I001 preserved; final public Python3 normal Ruff exit0; helper4 F-only exit0. pins JSON parsed and digest bound."
+  },
+  "recorded_exits": [
+    {
+      "name": "public-focused",
+      "exit_code": 1,
+      "process_seconds": 224.5
+    },
+    {
+      "name": "failed3-recheck",
+      "exit_code": 0,
+      "process_seconds": 1.2809999999590218
+    },
+    {
+      "name": "helper-focused",
+      "exit_code": 0,
+      "process_seconds": 45.28100000007544
+    },
+    {
+      "name": "cross-profile",
+      "exit_code": 0,
+      "process_seconds": 22.15700000000652
+    },
+    {
+      "name": "ruff",
+      "exit_code": 1,
+      "process_seconds": 0.10899999993853271
+    },
+    {
+      "name": "ruff-public",
+      "exit_code": 0,
+      "process_seconds": 0.10999999998603016
+    },
+    {
+      "name": "ruff-helper-F",
+      "exit_code": 0,
+      "process_seconds": 0.09299999999348074
+    }
+  ],
+  "limitations": [
+    "Synthetic clocks/processes/metadata only; no completion or performance success claim.",
+    "Helper copies retain historical namespace and HEAD literals until separately authorized fresh binding; no actual assignment or root created.",
+    "Full combined Ruff did not pass; inherited I001 is explicitly preserved."
+  ],
+  "final_receipt_sha256": "ede4bd43bc9de5d0479b86f7ab4610b977a92a48b9416de4ef51acc2ca21dfc6",
+  "parent_direct_refs_verified": 45,
+  "actual_acquisition_invocations": 0,
+  "native_model_invocations": 0,
+  "public_deployment": false,
+  "paid_service_usage": 0,
+  "reproduction": {
+    "command": "python -B -m pytest -q -p no:cacheprovider --basetemp .local/summary-1800-tests tests/test_summary_grammar_engine.py",
+    "scope": "Full public grammar preparation tests, broader than recorded focused runs; no compiler/model downloads are required. Use a fresh output directory to preserve earlier results.",
+    "notes": "Helper candidates remain local experiment orchestration; public code does not authorize its own external acceptance or build."
+  },
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "final_receipt_sha256": "ac8066347389104f6cfde3cce98068da8635b4d76a941ce6045f018d425fcdd3",
+    "parent_direct_refs_verified": 16
+  },
+  "publication_only_normalization": {
+    "file": "tests/test_summary_grammar_engine.py",
+    "before_sha256": "7df76ff0e7dbf4300ea01dad7e0fb0b04d5415d2bcdc8815f605ff3632478018",
+    "after_sha256": "ebbcc10c2662689529ff2a21daecea6f05502b195407a4a0675e0cf61b21b00a",
+    "removed_bytes": 1,
+    "change": "One final blank line removed; AST equal; tested bytes preserved in implementation tested-source snapshot.",
+    "new_test_replays": 0
+  },
+  "tested_sources": [
+    {
+      "file": "scripts/prepare_summary_grammar_engine.py",
+      "sha256": "6187f0449eefb5f1fca962d0b6384f929b7510e39215fe67bfd63220659001c3",
+      "size_bytes": 60908
+    },
+    {
+      "file": "tools/summary_grammar/runtime.py",
+      "sha256": "325202944205adaab31d0400b4d4f3ca28122ba36ab4e21dd4135da67a0b6e85",
+      "size_bytes": 22939
+    },
+    {
+      "file": "tools/summary_grammar/pins.json",
+      "sha256": "ece8ac449efd1fde96cb959ef8ed78aa620437c9f487c9e0a6fd485af7278f28",
+      "size_bytes": 4044
+    },
+    {
+      "file": "tests/test_summary_grammar_engine.py",
+      "sha256": "7df76ff0e7dbf4300ea01dad7e0fb0b04d5415d2bcdc8815f605ff3632478018",
+      "size_bytes": 124344
+    }
+  ],
+  "published_sources": [
+    {
+      "file": "scripts/prepare_summary_grammar_engine.py",
+      "sha256": "6187f0449eefb5f1fca962d0b6384f929b7510e39215fe67bfd63220659001c3",
+      "size_bytes": 60908
+    },
+    {
+      "file": "tools/summary_grammar/runtime.py",
+      "sha256": "325202944205adaab31d0400b4d4f3ca28122ba36ab4e21dd4135da67a0b6e85",
+      "size_bytes": 22939
+    },
+    {
+      "file": "tools/summary_grammar/pins.json",
+      "sha256": "ece8ac449efd1fde96cb959ef8ed78aa620437c9f487c9e0a6fd485af7278f28",
+      "size_bytes": 4044
+    },
+    {
+      "file": "tests/test_summary_grammar_engine.py",
+      "sha256": "ebbcc10c2662689529ff2a21daecea6f05502b195407a4a0675e0cf61b21b00a",
+      "size_bytes": 124343
+    }
+  ]
+}

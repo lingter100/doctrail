@@ -15,7 +15,7 @@ COMMIT = "d81235049384534c167caea52b85a694f6103d14"
 GRAMMAR_SHA = "e744497da34d0af79e2cc0419de0241d093136ec84b62a51bad905b982f8e290"
 CORPUS_SHA = "722fd6f6ac6ac5c2a39c7ab23efcdc32a79dc8776df638b0a99c28a8c43c65cb"
 EXPECTED_SHA = "9351c131aa3c9c00b06ebf2c7cd3fd1be7aacc9561aa04af0defe5c0688ddc9e"
-PINS_SHA = "4de0a7e547ccdd10a3ac72b6b86d54eea8e63f86dc76e6701d05c4613ea6d6d2"
+PINS_SHA = "ece8ac449efd1fde96cb959ef8ed78aa620437c9f487c9e0a6fd485af7278f28"
 DISK = 4 * 1024**3
 DOWNLOAD = 512 * 1024**2
 
@@ -305,7 +305,7 @@ class OwnedTree:
 def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allowed,
               ps=None, popen=subprocess.Popen, clock=time.monotonic, sleeper=time.sleep,
               acquisition_profile=None):
-    require(acquisition_profile in (None, "llvm-x64-sampled-50ms-v1"), "acquisition_profile")
+    require(acquisition_profile in (None, "llvm-x64-sampled-50ms-v1", "llvm-x64-sampled-50ms-1800s-v1"), "acquisition_profile")
     sampled = acquisition_profile is not None
     first_failure = [None]
     last_sample, last_startup = [None], [None]

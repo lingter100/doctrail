@@ -41,6 +41,12 @@
       "download_bytes": 536870912,
       "total_owned_disk_bytes": 4294967296,
       "acquisition_extract_seconds": 600,
+      "extended_acquisition_profile": {
+        "name": "llvm-x64-sampled-50ms-1800s-v1",
+        "acquisition_extract_seconds": 1800,
+        "cleanup_reserved_inside_acquisition_seconds": 5,
+        "meaning": "Optional fixed single-attempt spending ceiling, not a completion estimate or automatic retry. Default and llvm-x64-sampled-50ms-v1 remain 600 seconds."
+      },
       "configure_build_seconds": 900,
       "parallel_build_jobs": 2,
       "owned_tree_sampled_rss_bytes": 2147483648,
