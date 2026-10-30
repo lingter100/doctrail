@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "SOURCE_REPAIR_AND_INDEPENDENT_REVIEW_PASSED_CI_PENDING",
+  "problem": "Ministral template returned by pinned server differs from raw GGUF template after an upstream conditional replacement and terminal LF removal.",
+  "change": "Add one exact model/runtime/raw-template tuple mapped to the observed server representation. Preserve Qwen mapping and all validation functions.",
+  "source_before_commit": "d982755c55e8bc03733c8edec3a4db4045ec5d69",
+  "sources": [
+    {"file": "tools/free_qa/adapter.py", "sha256": "fc983eee1ee19eff933d337265a8f039235ca46ffb4a20b6fdf9cf2465d2b294", "size_bytes": 8386},
+    {"file": "tests/test_meeting_free_qa.py", "sha256": "d530688b3cd8d58e3bcc9aeb404ff0aad7d7e359dfaf3db4947354d32ec155c4", "size_bytes": 95985}
+  ],
+  "verification": {
+    "focused_pure_passed": 27,
+    "related_first_run_passed": 310,
+    "related_first_run_failed": 1,
+    "related_first_run_seconds": 51.18,
+    "first_failure": "Existing hardlink fixture: os.link WinError5 permission denial.",
+    "same_source_narrow_elevated_recheck_passed": 1,
+    "whole_suite_reruns": 0,
+    "ruff_F": "passed using existing pinned CLI",
+    "initial_ruff_failure_preserved": "Ruff module absent from inference Python; no installation or environment change.",
+    "independent_blockers": 0,
+    "independent_advisories": 0,
+    "original_failure_logs_preserved": true
+  },
+  "model_calls": 0,
+  "control_changes": 0,
+  "private_semantic_reads": 0,
+  "quality_claimed": false,
+  "human_review_count": 0,
+  "evidence": {
+    "author_final_sha256": "cda60e810cfd79d2a14f03104783a20625504987333f9210d2b6c543e7f26a90",
+    "parent_verified_refs": 34,
+    "parent_verification_sha256": "0cb7c77d59d76f946fcd593730dc6fe6a4cbd2cfaa5a2852e769a2efe96fb38a",
+    "independent_final_sha256": "b8165abb0eb7528ac10882f5372978e84ffe12391fd0e4ba2092fd326f123ec7"
+  },
+  "next": "Publish this source and failure evidence together, complete required CI, then decide fresh comparison controls. Consumed v2 is not retried."
+}

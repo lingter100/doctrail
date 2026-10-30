@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "STOPPED_BEFORE_QUALITY_GENERATION",
+  "date": "2026-10-30",
+  "source_head": "d982755c55e8bc03733c8edec3a4db4045ec5d69",
+  "comparison_id": "meeting-free-qa-paired-v2",
+  "epoch": "baseline",
+  "model": "Ministral-3-3B",
+  "actual_dispatches": 1,
+  "completions": 0,
+  "requested_output_tokens": 0,
+  "adapter_http_requests": 1,
+  "denominator": 6,
+  "unexecuted_cases": 6,
+  "failure_phase": "adapter_load",
+  "first_failure": {
+    "type": "ContractError",
+    "code": "free_qa_runtime_template"
+  },
+  "secondary_failures": [],
+  "root_cause_proven": true,
+  "root_cause": "Exact runtime-template mapping omitted Ministral. Pinned server TOOL_CALLS guard replacement and terminal LF removal produce the captured response; raw template hash was incorrectly expected.",
+  "raw_template_bytes": 7753,
+  "observed_runtime_template_bytes": 7554,
+  "observed_runtime_template_sha256": "8a292f27fb149a8699d1f56623407437c6212897b26c96e58c877b29545f6142",
+  "observed_equals_pinned_source_transformation": true,
+  "runner_elapsed_seconds_rounded": 18.156,
+  "cleanup_seconds_rounded": 0.282,
+  "actual_cli_exit": 1,
+  "wrapper_exit": 1,
+  "monitor_exit": 0,
+  "strict_custody_check_exit": 0,
+  "known_owned_processes_absent": 5,
+  "preservation": {
+    "hash_rows_verified_by_parent": 415,
+    "asset_stat_rows_verified_by_parent": 74,
+    "exact_copies_verified_by_parent": 5,
+    "direct_refs_verified_by_parent": 51,
+    "failures": 0
+  },
+  "once_consumed": true,
+  "retry_count": 0,
+  "candidate_started": false,
+  "content_quality_evaluated": false,
+  "human_review_count": 0,
+  "paid_api_calls": 0,
+  "service_deployment": false,
+  "limitations": [
+    "No question received a generated answer; this is an execution failure, not an accuracy score.",
+    "Runner duration includes preparation and custody checks and is not service latency.",
+    "Known owned identities were observed; uncaptured short-lived processes are outside this evidence.",
+    "The failed comparison is preserved and cannot authorize the candidate epoch."
+  ],
+  "evidence": {
+    "actual_final_sha256": "a32a5c8c279f360b2cd8d78606aa43d1b4d0c55131dbd0a03e0495891c231672",
+    "safe_summary_sha256": "8dbcbe9debe6934d071548ec3263fca35cbf90b880fa512f6bfa73800b59f404",
+    "parent_closeout_sha256": "f3e902f132272a28768b2b409cc7211fe2ec56c8d7d42b82664870f97f9a9f33",
+    "diagnosis_final_sha256": "9a11d689a25db53cdd6ee5f4c09fe15d2c875893dcdd7f5b027c796453324577",
+    "parent_diagnosis_acceptance_sha256": "eecfd5d15a1a8b38eafe1a3d89613d6c552588666508f09e5ffe79683563ac01"
+  }
+}

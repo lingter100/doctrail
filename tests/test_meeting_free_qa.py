@@ -86,6 +86,134 @@ QWEN_RAW_TEMPLATE = (
 )
 
 
+# Public Ministral-3-3B-Instruct-2512 GGUF template, Apache-2.0.
+# mistralai/Ministral-3-3B-Instruct-2512-GGUF@fc774f009f0c62a186f48e870fd6295b36f63779
+# Inline public bytes: no local asset, private response, or model dependency.
+MINISTRAL_RAW_TEMPLATE = (
+    "{#- Default system message if no system prompt is passed. #}\n"
+    "{%- set default_system_message = 'You are Ministral-3-3B-Instruct-2512, a Large Language Model (LLM) created by Mistral AI, a French startup headquartered in Paris.\\nYou power an AI assistant called Le Chat.\\nYour knowledge base was last updated on 2023-10-01.\\nThe current date is {today}.\\n\\nWhen you\\'re not sure about some information or when the user\\'s request requires up-to-date or specific data, you must use the available tools to fetch the information. Do not hesitate to use tools whenever they can provide a more accurate or complete response. If no relevant tools are available, then clearly state that you don\\'t have the information and avoid making up anything.\\nIf the user\\'s question is not clear, ambiguous, or does not provide enough context for you to accurately answer the question, you do not try to answer it right away and you rather ask the user to clarify their request (e.g. \"What are some good restaurants around me?\" => \"Where are you?\" or \"When is the next flight to Tokyo\" => \"Where do you travel from?\").\\nYou are always very attentive to dates, in particular you try to resolve dates (e.g. \"yesterday\" is {yesterday}) and when asked about information at specific dates, you discard information that is at another date.\\nYou follow these instructions in all languages, and always respond to the user in the language they use or request.\\nNext sections describe the capabilities that you have.\\n\\n# WEB BROWSING INSTRUCTIONS\\n\\nYou cannot perform any web search or access internet to open URLs, links etc. If it seems like the user is expecting you to do so, you clarify the situation and ask the user to copy paste the text directly in the chat.\\n\\n# MULTI-MODAL INSTRUCTIONS\\n\\nYou have the ability to read images, but you cannot generate images. You also cannot transcribe audio files or videos.\\nYou cannot read nor transcribe audio files or videos.\\n\\n# TOOL CALLING INSTRUCTIONS\\n\\nYou may have access to tools that you can use to fetch information or perform actions. You must use these tools in the following situations:\\n\\n1. When the request requires up-to-date information.\\n2. When the request requires specific data that you do not have in your knowledge base.\\n3. When the request involves actions that you cannot perform without tools.\\n\\nAlways prioritize using tools to provide the most accurate and helpful response. If tools are not available, inform the user that you cannot perform the requested action at the moment.' %}\n"
+    "\n"
+    "{#- Begin of sequence token. #}\n"
+    "{{- bos_token }}\n"
+    "\n"
+    "{#- Handle system prompt if it exists. #}\n"
+    "{#- System prompt supports text content or text chunks. #}\n"
+    "{%- if messages[0]['role'] == 'system' %}\n"
+    "    {{- '[SYSTEM_PROMPT]' -}}\n"
+    "    {%- if messages[0]['content'] is string %}\n"
+    "        {{- messages[0]['content'] -}}\n"
+    "    {%- else %}        \n"
+    "        {%- for block in messages[0]['content'] %}\n"
+    "            {%- if block['type'] == 'text' %}\n"
+    "                {{- block['text'] }}\n"
+    "            {%- else %}\n"
+    "                {{- raise_exception('Only text chunks are supported in system message contents.') }}\n"
+    "            {%- endif %}\n"
+    "        {%- endfor %}\n"
+    "    {%- endif %}\n"
+    "    {{- '[/SYSTEM_PROMPT]' -}}\n"
+    "    {%- set loop_messages = messages[1:] %}\n"
+    "{%- else %}\n"
+    "    {%- set loop_messages = messages %}\n"
+    "    {%- if default_system_message != '' %}\n"
+    "        {{- '[SYSTEM_PROMPT]' + default_system_message + '[/SYSTEM_PROMPT]' }}\n"
+    "    {%- endif %}\n"
+    "{%- endif %}\n"
+    "\n"
+    "\n"
+    "{#- Tools definition #}\n"
+    "{%- set tools_definition = '' %}\n"
+    "{%- set has_tools = false %}\n"
+    "{%- if tools is defined and tools is not none and tools|length > 0 %}\n"
+    "    {%- set has_tools = true %}\n"
+    "    {%- set tools_definition = '[AVAILABLE_TOOLS]' + (tools| tojson) + '[/AVAILABLE_TOOLS]' %}\n"
+    "    {{- tools_definition }}\n"
+    "{%- endif %}\n"
+    "\n"
+    "{#- Checks for alternating user/assistant messages. #}\n"
+    "{%- set ns = namespace(index=0) %}\n"
+    "{%- for message in loop_messages %}\n"
+    "    {%- if message.role == 'user' or (message.role == 'assistant' and (message.tool_calls is not defined or message.tool_calls is none or message.tool_calls | length == 0)) %}\n"
+    "        {%- if (message['role'] == 'user') != (ns.index % 2 == 0) %}\n"
+    "            {{- raise_exception('After the optional system message, conversation roles must alternate user and assistant roles except for tool calls and results.') }}\n"
+    "        {%- endif %}\n"
+    "        {%- set ns.index = ns.index + 1 %}\n"
+    "    {%- endif %}\n"
+    "{%- endfor %}\n"
+    "\n"
+    "{#- Handle conversation messages. #}\n"
+    "{%- for message in loop_messages %}\n"
+    "\n"
+    "    {#- User messages supports text content or text and image chunks. #}\n"
+    "    {%- if message['role'] == 'user' %}\n"
+    "        {%- if message['content'] is string %}\n"
+    "            {{- '[INST]' + message['content'] + '[/INST]' }}\n"
+    "        {%- elif message['content'] | length > 0 %}\n"
+    "            {{- '[INST]' }}\n"
+    "            {%- if message['content'] | length == 2 %}\n"
+    "                {%- set blocks = message['content'] | sort(attribute='type') %}\n"
+    "            {%- else %}\n"
+    "                {%- set blocks = message['content'] %}\n"
+    "            {%- endif %}\n"
+    "            {%- for block in blocks %}\n"
+    "                {%- if block['type'] == 'text' %}\n"
+    "                    {{- block['text'] }}\n"
+    "                {%- elif block['type'] in ['image', 'image_url'] %}\n"
+    "                    {{- '[IMG]' }}\n"
+    "                {%- else %}\n"
+    "                    {{- raise_exception('Only text, image and image_url chunks are supported in user message content.') }}\n"
+    "                {%- endif %}\n"
+    "            {%- endfor %}\n"
+    "            {{- '[/INST]' }}\n"
+    "        {%- else %}\n"
+    "            {{- raise_exception('User message must have a string or a list of chunks in content') }}\n"
+    "        {%- endif %}\n"
+    "\n"
+    "    {#- Assistant messages supports text content or text and image chunks. #}\n"
+    "    {%- elif message['role'] == 'assistant' %}\n"
+    "        {%- if (message['content'] is none or message['content'] == '' or message['content']|length == 0) and (message['tool_calls'] is not defined or message['tool_calls'] is none or message['tool_calls']|length == 0) %}\n"
+    "            {{- raise_exception('Assistant message must have a string or a list of chunks in content or a list of tool calls.') }}\n"
+    "        {%- endif %}\n"
+    "\n"
+    "        {%- if message['content'] is string %}\n"
+    "            {{- message['content'] }}\n"
+    "        {%- elif message['content'] | length > 0 %}\n"
+    "            {%- for block in message['content'] %}\n"
+    "                {%- if block['type'] == 'text' %}\n"
+    "                    {{- block['text'] }}\n"
+    "                {%- else %}\n"
+    "                    {{- raise_exception('Only text chunks are supported in assistant message contents.') }}\n"
+    "                {%- endif %}\n"
+    "            {%- endfor %}\n"
+    "        {%- endif %}\n"
+    "        \n"
+    "        {%- if message['tool_calls'] is defined and message['tool_calls'] is not none and message['tool_calls']|length > 0 %}\n"
+    "            {%- for tool in message['tool_calls'] %}\n"
+    "                {%- set arguments = tool['function']['arguments'] %}\n"
+    "                {%- if arguments is not string %}\n"
+    "                    {%- set arguments = arguments|tojson|safe %}\n"
+    "                {%- elif arguments == '' %}\n"
+    "                    {%- set arguments = '{}' %}\n"
+    "                {%- endif %}\n"
+    "                {{- '[TOOL_CALLS]' + tool['function']['name'] + '[ARGS]' + arguments }}\n"
+    "            {%- endfor %}\n"
+    "        {%- endif %}\n"
+    "\n"
+    "        {#- End of sequence token for each assistant messages. #}\n"
+    "        {{- eos_token }}\n"
+    "\n"
+    "    {#- Tool messages only supports text content. #}\n"
+    "    {%- elif message['role'] == 'tool' %}\n"
+    "        {{- '[TOOL_RESULTS]' + message['content']|string + '[/TOOL_RESULTS]' }}\n"
+    "\n"
+    "    {#- Raise exception for unsupported roles. #}\n"
+    "    {%- else %}\n"
+    "        {{- raise_exception('Only user, assistant and tool roles are supported, got ' + message['role']) }}\n"
+    "    {%- endif %}\n"
+    "{%- endfor %}\n"
+)
+
+
 def ref(name, data=b"synthetic"):
     return {"file": name, "size_bytes": len(data), "sha256": p.sha(data)}
 
@@ -736,6 +864,87 @@ def qwen_template_props(tmp_path):
     return prepared, props
 
 
+def ministral_runtime_template():
+    # llama.cpp d81235049384534c167caea52b85a694f6103d14:
+    # common/chat.cpp TOOL_CALLS patch, then common/jinja/lexer.cpp terminal LF.
+    guard = ("{%- if (message['content'] is none or message['content'] == '' or message['content']|length == 0) "
+             "and (message['tool_calls'] is not defined or message['tool_calls'] is none or message['tool_calls']|length == 0) %}")
+    assert len(guard.encode()) == 213 and MINISTRAL_RAW_TEMPLATE.count(guard) == 1
+    patched = MINISTRAL_RAW_TEMPLATE.replace(guard, "{%- if false %}")
+    assert len(patched.encode()) == 7555 and patched.endswith("\n")
+    return patched[:-1]
+
+
+def ministral_template_props(tmp_path):
+    reviewed = binding(p.BASE)
+    reviewed["template_sha256"] = p.sha(MINISTRAL_RAW_TEMPLATE.encode())
+    reviewed["metadata"][0]["template"] = {
+        "raw_utf8_sha256": reviewed["template_sha256"], "size_bytes": len(MINISTRAL_RAW_TEMPLATE.encode())}
+    policy = p.bind_policy(PUBLIC_PROFILES[p.BASE], reviewed, runtime())
+    prepared = SimpleNamespace(policy=policy, entry=tmp_path / "public-ministral-template-only.gguf")
+    props = {"model_alias": policy.alias, "build_info": "b11429-" + p.RUNTIME_COMMIT[:7],
+        "model_path": str(prepared.entry), "default_generation_settings": {"n_ctx": 6144},
+        "total_slots": 1, "is_sleeping": False, "chat_template": ministral_runtime_template()}
+    return prepared, props
+
+
+def test_ministral_public_template_pins_and_complete_source_transformation(tmp_path):
+    raw = MINISTRAL_RAW_TEMPLATE.encode("utf-8")
+    assert len(raw) == 7753 and p.sha(raw) == "d28d7df94f0fd7e8d0075a22c473333d6e7dd2bc4c36c83e8b975300a0fb94bc"
+    assert raw.endswith(b"\n") and b"\r" not in raw and b"\x00" not in raw
+    assert p.sha(raw[:-1]) == "c4c1b5c9980150eda417c984da7c89c6ac4be0a14ca67028210e9dfc576e20b6"
+    runtime_bytes = ministral_runtime_template().encode("utf-8")
+    assert len(runtime_bytes) == 7554 and p.sha(runtime_bytes) == "8a292f27fb149a8699d1f56623407437c6212897b26c96e58c877b29545f6142"
+    prepared, props = ministral_template_props(tmp_path)
+    assert validate_props(props, prepared) == {"build": props["build_info"], "context_tokens": 6144, "slots": 1}
+    assert prepared.policy.reviewed["template_sha256"] == p.sha(raw)
+
+
+@pytest.mark.parametrize("change", ["raw", "lexer_only", "patch_only", "extra_lf", "crlf", "content", "space", "trailing_space", "none", "bytes", "integer", "object"])
+def test_ministral_runtime_template_rejects_every_unmapped_response(tmp_path, change):
+    prepared, props = ministral_template_props(tmp_path)
+    template = props["chat_template"]
+    props["chat_template"] = {
+        "raw": MINISTRAL_RAW_TEMPLATE, "lexer_only": MINISTRAL_RAW_TEMPLATE[:-1],
+        "patch_only": template + "\n", "extra_lf": template + "\n\n",
+        "crlf": template.replace("\n", "\r\n"), "content": template.replace("Ministral", "Other"),
+        "space": " " + template, "trailing_space": template + " ", "none": None,
+        "bytes": template.encode(), "integer": 7554, "object": {"template": template}}[change]
+    with pytest.raises(ValueError, match="free_qa_runtime_template"):
+        validate_props(props, prepared)
+
+
+@pytest.mark.parametrize("change", ["model", "unknown_model", "tag", "commit", "raw_digest", "raw_size"])
+def test_ministral_runtime_template_mapping_requires_exact_admitted_tuple(tmp_path, change):
+    prepared, props = ministral_template_props(tmp_path)
+    policy = prepared.policy
+    if change in {"model", "unknown_model"}:
+        policy = replace(policy, model_id=p.CANDIDATE if change == "model" else "unknown-model")
+    if change in {"tag", "commit"}:
+        rt = p.thaw(policy.runtime)
+        rt[change] = "b99999" if change == "tag" else p.RUNTIME_COMMIT[:7] + "0" * 33
+        policy = replace(policy, runtime=rt)
+        props["build_info"] = rt["tag"] + "-" + rt["commit"][:7]
+    if change in {"raw_digest", "raw_size"}:
+        reviewed = p.thaw(policy.reviewed)
+        if change == "raw_digest":
+            reviewed["template_sha256"] = "0" * 64
+            reviewed["metadata"][0]["template"]["raw_utf8_sha256"] = "0" * 64
+        else: reviewed["metadata"][0]["template"]["size_bytes"] = 7554
+        policy = replace(policy, reviewed=reviewed)
+    prepared.policy = policy
+    with pytest.raises(ValueError, match="free_qa_runtime_template"):
+        validate_props(props, prepared)
+
+
+@pytest.mark.parametrize("model_id", [p.BASE, p.CANDIDATE])
+def test_public_runtime_templates_cover_both_admitted_policies(tmp_path, model_id):
+    factory = ministral_template_props if model_id == p.BASE else qwen_template_props
+    prepared, props = factory(tmp_path)
+    assert prepared.policy.model_id == model_id
+    assert validate_props(props, prepared)["context_tokens"] == 6144
+
+
 def test_qwen_public_template_pins_and_source_derived_runtime_bytes(tmp_path):
     raw = QWEN_RAW_TEMPLATE.encode("utf-8")
     assert len(raw) == 2509 and p.sha(raw) == "d5495a1e5db0611132a97e46a65dbb64a642a499421228b9c8b93229097fa9a4"
@@ -781,12 +990,14 @@ def test_qwen_runtime_template_mapping_requires_exact_admitted_tuple(tmp_path, c
         validate_props(props, prepared)
 
 
+@pytest.mark.parametrize("model_id", [p.CANDIDATE, p.BASE])
 @pytest.mark.parametrize("fault", [None, "raw", "type"])
-def test_startup_qwen_runtime_template_one_get_zero_generation(tmp_path, fault):
+def test_startup_qwen_runtime_template_one_get_zero_generation(tmp_path, fault, model_id):
     from scripts import probe_meeting_free_qa_startup as startup
 
-    prepared, props = qwen_template_props(tmp_path)
-    if fault == "raw": props["chat_template"] = QWEN_RAW_TEMPLATE
+    factory = ministral_template_props if model_id == p.BASE else qwen_template_props
+    prepared, props = factory(tmp_path)
+    if fault == "raw": props["chat_template"] = MINISTRAL_RAW_TEMPLATE if model_id == p.BASE else QWEN_RAW_TEMPLATE
     if fault == "type": props["chat_template"] = {"PRIVATE": "response must not be retained"}
     sent = []
     def handler(request):

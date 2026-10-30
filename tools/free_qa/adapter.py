@@ -9,9 +9,13 @@ from doctrail.meeting_gguf import GGUFGenerator, _integer
 from scripts.probe_meeting_local_candidate import CONTENT_ERRORS, QA_COVERAGE_CONTROL, QA_GRAMMAR
 from tools.free_qa.policy import EPOCHS, ModelPolicy, need, sha
 
-# Pinned llama.cpp jinja lexer removes one terminal LF from this raw GGUF
-# template. These are source-derived /props bytes, not observed actual props.
+# Pinned llama.cpp removes one terminal LF for both models. Ministral also
+# replaces its TOOL_CALLS guard with false in common/chat.cpp before lexing.
+# Exact source-derived /props pins; Ministral matches captured baseline props.
 _RUNTIME_TEMPLATE_BYTES = {
+    ("ministral3-3b-q5km", "b11429", "d81235049384534c167caea52b85a694f6103d14",
+     "d28d7df94f0fd7e8d0075a22c473333d6e7dd2bc4c36c83e8b975300a0fb94bc", 7753):
+        ("8a292f27fb149a8699d1f56623407437c6212897b26c96e58c877b29545f6142", 7554),
     ("qwen25-7b-q4km", "b11429", "d81235049384534c167caea52b85a694f6103d14",
      "d5495a1e5db0611132a97e46a65dbb64a642a499421228b9c8b93229097fa9a4", 2509):
         ("4e9918361c284a93880606d182d64da6a9fe97cdc1f5c5a78c1c8840444246fc", 2508),
