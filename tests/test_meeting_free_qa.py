@@ -613,34 +613,34 @@ def relock(contract, locks):
     locks["contract_sha256"] = p.sha(p.canonical(contract))
 
 
-def paired_v2_registration(tmp_path, monkeypatch):
+def paired_v3_registration(tmp_path, monkeypatch):
     contract, locks = metadata_tree(tmp_path, monkeypatch)
     old_contract_sha = locks["contract_sha256"]
-    contract["id"] = "meeting-free-qa-paired-v2"
-    contract["preflight_review"] = put(tmp_path, "synthetic/preflight-v2.json", p.canonical(safe_preflight(contract)))
+    contract["id"] = "meeting-free-qa-paired-v3"
+    contract["preflight_review"] = put(tmp_path, "synthetic/preflight-v3.json", p.canonical(safe_preflight(contract)))
     locks["preflight_review"] = contract["preflight_review"]
     locks["predecessors"] = {name: [] for name in p.EPOCHS}
     relock(contract, locks)
-    root = ".local/meeting-free-qa-paired-v2"
+    root = ".local/meeting-free-qa-paired-v3"
     contract_ref = put(tmp_path, root + "/contract.json", p.canonical(contract))
     spec = {"schema_version": 1, "contract": contract_ref, "epoch": "neutral", "output_dir": root + "/neutral",
             "predecessors": []}
     spec["once_sha256"] = p.sha(p.canonical({"contract_sha256": locks["contract_sha256"],
         "epoch": "neutral", "output_dir": spec["output_dir"]}))
     registration = put(tmp_path, root + "/registrations/neutral.json", p.canonical(spec))
-    # Even valid v2 lock bytes in the old path must never supply v2 authority.
-    old = [put(tmp_path, "data/meetings/free-qa-trusted-locks-v1.json", p.canonical(locks)),
-           put(tmp_path, ".local/meeting-free-qa-paired-v1/terminal.json", b"opaque closed v1 failure"),
-           put(tmp_path, ".local/meeting-free-qa-once/" + old_contract_sha + "-neutral.json", b"opaque consumed v1 epoch")]
+    # Even valid v3 lock bytes in the old v2 path must never supply v3 authority.
+    old = [put(tmp_path, "data/meetings/free-qa-trusted-locks-v2.json", p.canonical(locks)),
+           put(tmp_path, ".local/meeting-free-qa-paired-v2/terminal.json", b"opaque closed v2 failure"),
+           put(tmp_path, ".local/meeting-free-qa-once/" + old_contract_sha + "-neutral.json", b"opaque consumed v2 epoch")]
     put(tmp_path, r.TRUSTED_LOCK_FILE, p.canonical(locks))
     return contract, locks, spec, registration, old
 
 
-@pytest.mark.parametrize("fault", [None, "v1_only", "changed_source"])
-def test_paired_v2_uses_fixed_trust_and_current_source_binding(tmp_path, monkeypatch, fault):
-    assert r.TRUSTED_LOCK_FILE == "data/meetings/free-qa-trusted-locks-v2.json"
-    contract, locks, spec, registration, old = paired_v2_registration(tmp_path, monkeypatch)
-    if fault == "v1_only": (tmp_path / r.TRUSTED_LOCK_FILE).unlink()
+@pytest.mark.parametrize("fault", [None, "v2_only", "changed_source"])
+def test_paired_v3_uses_fixed_trust_and_current_source_binding(tmp_path, monkeypatch, fault):
+    assert r.TRUSTED_LOCK_FILE == "data/meetings/free-qa-trusted-locks-v3.json"
+    contract, locks, spec, registration, old = paired_v3_registration(tmp_path, monkeypatch)
+    if fault == "v2_only": (tmp_path / r.TRUSTED_LOCK_FILE).unlink()
     if fault == "changed_source": (tmp_path / contract["code"][0]["file"]).write_bytes(b"changed source")
     def forbidden(*a, **k): pytest.fail("admission rejection must precede lease/preparation/launch")
     monkeypatch.setattr(r, "worker_lease", forbidden)
@@ -650,7 +650,7 @@ def test_paired_v2_uses_fixed_trust_and_current_source_binding(tmp_path, monkeyp
                 root=tmp_path, clock=Clock(), preparer=forbidden, launcher=forbidden)
     else:
         _, verified, epoch, _, prior = r.load_registration(tmp_path / registration["file"], registration["sha256"], root=tmp_path)
-        assert verified.contract.sha256 == locks["contract_sha256"] and verified.contract.data["id"] == "meeting-free-qa-paired-v2"
+        assert verified.contract.sha256 == locks["contract_sha256"] and verified.contract.data["id"] == "meeting-free-qa-paired-v3"
         assert epoch is p.EPOCHS["neutral"] and prior == 0
         assert verified.lock_ref["file"] == r.TRUSTED_LOCK_FILE
     assert not (tmp_path / spec["output_dir"]).exists()
@@ -658,8 +658,8 @@ def test_paired_v2_uses_fixed_trust_and_current_source_binding(tmp_path, monkeyp
     for row in old: assert ref(row["file"], (tmp_path / row["file"]).read_bytes()) == row
 
 
-def test_paired_v2_own_once_preserves_v1_and_blocks_repetition_other_output(tmp_path, monkeypatch):
-    _, locks, spec, registration, old = paired_v2_registration(tmp_path, monkeypatch)
+def test_paired_v3_own_once_preserves_v2_and_blocks_repetition_other_output(tmp_path, monkeypatch):
+    _, locks, spec, registration, old = paired_v3_registration(tmp_path, monkeypatch)
     calls, leases = [], []
     @contextmanager
     def lease(path):
@@ -685,7 +685,7 @@ def test_paired_v2_own_once_preserves_v1_and_blocks_repetition_other_output(tmp_
     alternate["output_dir"] += "-alternate"
     alternate["once_sha256"] = p.sha(p.canonical({"contract_sha256": locks["contract_sha256"],
         "epoch": "neutral", "output_dir": alternate["output_dir"]}))
-    alternate_ref = put(tmp_path, ".local/meeting-free-qa-paired-v2/registrations/alternate.json", p.canonical(alternate))
+    alternate_ref = put(tmp_path, ".local/meeting-free-qa-paired-v3/registrations/alternate.json", p.canonical(alternate))
     with pytest.raises(FileExistsError): run(alternate_ref, alternate)
     assert calls == ["prepare"] and len(leases) == 2
     assert not (once_dir / (alternate["once_sha256"] + ".json")).exists()
@@ -1404,12 +1404,12 @@ def test_epoch_predecessors_require_actual_exit_stdout_custody_and_caps(tmp_path
 
 
 @pytest.mark.parametrize("epoch_name,prior,total", [("neutral", 0, 1), ("baseline", 1, 7), ("candidate", 7, 13)])
-def test_paired_v2_fixed_trust_keeps_neutral_quality_order_and_total_budget(tmp_path, monkeypatch, epoch_name, prior, total):
+def test_paired_v3_fixed_trust_keeps_neutral_quality_order_and_total_budget(tmp_path, monkeypatch, epoch_name, prior, total):
     registration, locks = predecessor_tree(tmp_path, monkeypatch, epoch_name=epoch_name,
-        comparison_id="meeting-free-qa-paired-v2")
+        comparison_id="meeting-free-qa-paired-v3")
     put(tmp_path, r.TRUSTED_LOCK_FILE, p.canonical(locks))
     _, verified, epoch, _, actual_prior = r.load_registration(tmp_path / registration["file"], registration["sha256"], root=tmp_path)
-    assert verified.contract.data["id"] == "meeting-free-qa-paired-v2"
+    assert verified.contract.data["id"] == "meeting-free-qa-paired-v3"
     assert epoch is p.EPOCHS[epoch_name] and actual_prior == prior
     assert prior + epoch.calls == total and total * 256 <= 3328
     assert [p.parse((tmp_path / row["file"]).read_bytes())["epoch"] for row in locks["predecessors"][epoch_name]] == {

@@ -80,7 +80,18 @@ test('synthetic transport + real Java: meeting registration, evidence, user edit
   await expect(page.locator('.decision-link')).toHaveCount(1);
   await page.getByRole('button', { name: '분석 편집', exact: true }).click();
   await page.locator('.item-editor').first().getByRole('textbox', { name: '항목 내용', exact: true }).fill('사용자가 의미를 다시 확인해야 하는 수정 결정');
+  const heldDecisionSave = await delayResponse(page, (url, method) => method === 'PUT' && /\/api\/meetings\/[^/]+\/analysis$/.test(url.pathname));
   await page.getByRole('button', { name: '사용자 수정본 저장' }).click();
+  await heldDecisionSave.captured;
+  // Editing hides decision history even while the real save response is pending.
+  // Its absence cannot certify save completion or release the navigation guard.
+  await expect(editor).toBeVisible();
+  await expect(editor.getByRole('button', { name: '저장 중…', exact: true })).toBeDisabled();
+  await expect(page.locator('.decision-history')).toHaveCount(0);
+  await heldDecisionSave.release();
+  await expect(editor).toHaveCount(0);
+  await expect(page.locator('.analysis-section.decision')).toContainText('사용자가 의미를 다시 확인해야 하는 수정 결정');
+  await expect(page.locator('.decision-history .no-links')).toHaveText('등록된 결정 연결이 없어요.');
   await expect(page.locator('.decision-link')).toHaveCount(0);
   await page.locator('[data-view=knowledge]').click();
   await page.getByRole('textbox', { name: '지식 질문' }).fill('단계별 배포');

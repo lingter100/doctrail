@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "PUSH_BROWSER_FAILURE_PR_PASSED",
+  "source_head": "a8cd66ef3ef6f71a18ab0911b663f68ee1ba5484",
+  "scope": "Exact published Ministral runtime template repair. No actual model quality evaluation in CI.",
+  "runs": [
+    {
+      "id": 40980942562,
+      "event": "push",
+      "conclusion": "failure",
+      "backend": "success",
+      "web": "success",
+      "java_service": "failure",
+      "watch_session": 53847,
+      "watch_exit_code": 1,
+      "browser": {
+        "passed": 157,
+        "failed": 1,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    },
+    {
+      "id": 40980948287,
+      "event": "pull_request",
+      "conclusion": "success",
+      "backend": "success",
+      "web": "success",
+      "java_service": "success",
+      "watch_session": 69201,
+      "watch_exit_code": 0,
+      "browser": {
+        "passed": 158,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    }
+  ],
+  "measured_push": {
+    "python": {
+      "passed": 5384,
+      "skipped": 21,
+      "warnings": 2,
+      "elapsed_seconds": 223.95
+    },
+    "actual_java_http_and_database_compatibility": "passed",
+    "synthetic_meeting_operations_against_actual_java": "passed"
+  },
+  "failure": {
+    "spec": "web/tests/meeting-ready.spec.ts",
+    "line": 86,
+    "operation": "fill knowledge question after save and navigation",
+    "message": "Test timeout 45000ms; waiting for knowledge textbox",
+    "diagnosis": "The preceding decision-link count0 can hold while the analysis editor is still saving. Navigation is then ignored by the busy guard. Deterministic reproduction and focused test repair are in progress.",
+    "product_change": "No product defect established by this CI failure."
+  },
+  "limitations": [
+    "The passing PR run does not erase the failed push run.",
+    "Repair, focused local verification and exact future CI are separate pending evidence.",
+    "No actual AI quality or final service completion claim."
+  ],
+  "public_urls": [
+    "https://github.com/lingter100/doctrail/actions/runs/40980942562",
+    "https://github.com/lingter100/doctrail/actions/runs/40980948287"
+  ]
+}

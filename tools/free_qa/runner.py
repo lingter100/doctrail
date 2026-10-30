@@ -63,7 +63,7 @@ from tools.free_qa.policy import (
 )
 
 ROOT = Path(__file__).resolve().parents[2]
-TRUSTED_LOCK_FILE = "data/meetings/free-qa-trusted-locks-v2.json"
+TRUSTED_LOCK_FILE = "data/meetings/free-qa-trusted-locks-v3.json"
 CODE_FILES = (*LEGACY_CODE_FILES, "tools/free_qa/policy.py", "tools/free_qa/adapter.py",
     "tools/free_qa/runner.py", "scripts/probe_meeting_free_qa.py", "tests/test_meeting_free_qa.py",
     "tools/free_qa/assets.py", "tools/summary_grammar/runtime.py")

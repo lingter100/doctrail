@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "LOCAL_SOURCE_AND_COMBINED_REVIEW_PASSED_CI_PENDING",
+  "source_base": "a8cd66ef3ef6f71a18ab0911b663f68ee1ba5484",
+  "change": "One fixed trust-path literal v2 to v3; existing fixed-path, source-binding, once and order/budget regression fixtures adapted.",
+  "sources": [
+    {
+      "file": "tools/free_qa/runner.py",
+      "sha256": "9fcfc29205ba881adc069d5fbc4979bb3f8eebf46f9e73db7c2fbcaf44613b88",
+      "size_bytes": 38669
+    },
+    {
+      "file": "tests/test_meeting_free_qa.py",
+      "sha256": "40747527c918f4aed4e7f35d5b888dd16b4db3d2a7b978ad1d9b87f11507e4b4",
+      "size_bytes": 95988
+    }
+  ],
+  "validation": {
+    "focused_passed": 7,
+    "deselected": 234,
+    "elapsed_seconds": 3.37,
+    "ruff_F": "passed",
+    "full_suite_reruns": 0
+  },
+  "preserved": [
+    "closed v2 contract, trust, registrations, consumed once files, output and failure records",
+    "model and runtime bindings, prompt, grammar, parser, sealed inputs, original criteria, order and budgets",
+    "separate browser failure reproduction and local6pass results"
+  ],
+  "preparation_instrumentation": "Initial overbroad global AST reversal assertion failed and was preserved. Scope-limited checks of the four affected definitions passed without source changes or test reruns.",
+  "actual_model_calls": 0,
+  "controls_created": 0,
+  "official_verify_calls": 0,
+  "limitations": [
+    "Local checks use fakes; no content-quality claim.",
+    "Fresh v3 controls and actual generation require combined exact published CI success.",
+    "Existing v2 baseline stopped before generating any question; cannot be resumed or used to admit its candidate."
+  ],
+  "independent_AI_review": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "blockers": 0,
+    "advisories": 0,
+    "new_test_runs": 0,
+    "human_review": false
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "LOCAL_TEST_ONLY_FIX_VERIFIED_NEW_CI_PENDING",
+  "original_head": "a8cd66ef3ef6f71a18ab0911b663f68ee1ba5484",
+  "original_ci_failure": {
+    "push_run": 40980942562,
+    "passed": 157,
+    "failed": 1,
+    "spec": "meeting-ready.spec.ts",
+    "line": 86
+  },
+  "diagnosis": "Decision history is hidden while editing, so zero decision links did not prove completion of a pending save; busy navigation guard correctly ignored the sidebar click.",
+  "deterministic_reproduction": {
+    "actual_Java": true,
+    "synthetic_delayed_HTTP_response": true,
+    "editor_count": 1,
+    "decision_link_count": 0,
+    "knowledge_textbox_count": 0,
+    "save_disabled": true,
+    "expected_assertion_failure": true,
+    "server_stopped": true
+  },
+  "change": "Hold and release the actual save response; observe editor removal, saved decision text and resolved empty links before navigation. No product code or timeout changes.",
+  "validation": {
+    "browser_passed": 6,
+    "browser_failed": 0,
+    "infra_failures": 0,
+    "missing_runs": 0,
+    "typecheck": "passed",
+    "web_build": "passed",
+    "java_package": "passed",
+    "all_owned_test_servers_stopped": true
+  },
+  "source": {
+    "file": "web/tests/meeting-ready.spec.ts",
+    "sha256": "286bb146af7da5124551f050e886c1174b8050db598f2e4768b7973d83c1afc2",
+    "size_bytes": 19498
+  },
+  "limitations": [
+    "Synthetic model transport, not LLM or content quality.",
+    "Original failed CI and deterministic failure are preserved.",
+    "Exact combined-source CI remains pending.",
+    "Initial PATH java-version probe was interrupted; explicit pinned JDK package then passed."
+  ]
+}
