@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "status": "COMPARISON_CLOSED_BOTH_FAILED_ORIGINAL_ACCEPTANCE",
+  "date": "2026-10-30",
+  "source_head": "9236b854ed2ab46785868042467251e1c6ef1ca2",
+  "contract_sha256": "50d5fc6034fca689647ed8b665a9e7f276c0f56430567dd5047b6194615a4ae6",
+  "models": {
+    "baseline": "Ministral-3-3B-Instruct-2512-Q5_K_M",
+    "candidate": "Qwen2.5-7B-Instruct-Q4_K_M"
+  },
+  "arms": [
+    {
+      "epoch": "baseline",
+      "scheduled_cases": 6,
+      "automatic_rejections": 3,
+      "input_limit_rejections": 1,
+      "output_limit_rejections": 2,
+      "valid_outputs": 3,
+      "semantic_accepted": 0,
+      "semantic_rejected": 3,
+      "required_gate_pass": false,
+      "answerable_subset": {
+        "scheduled_cases": 4,
+        "valid_outputs": 1,
+        "automatic_rejections": 3,
+        "accepted": 0,
+        "semantic_rejections": 1,
+        "completeness_failed_responses": 1,
+        "completeness_applicable_responses": 1,
+        "required_elements_total": 6,
+        "covered_elements": 1,
+        "partial_elements": 0,
+        "missing_elements": 5,
+        "incorrect_elements": 0
+      },
+      "abstention_subset": {
+        "scheduled_cases": 2,
+        "valid_outputs": 2,
+        "accepted": 0,
+        "status_or_empty_claims_contract_failures": 2,
+        "applicable_responses": 2
+      },
+      "response_axes": {
+        "valid_response_denominator": 3,
+        "full_source_unsupported": 2,
+        "full_source_uncertain": 0,
+        "selected_evidence_unsupported": 2,
+        "selected_evidence_uncertain": 0,
+        "korean_sufficiency_failures": 0
+      },
+      "claim_axes": {
+        "emitted_claim_denominator": 3,
+        "full_source_supported": 1,
+        "full_source_unsupported": 2,
+        "full_source_uncertain": 0,
+        "selected_evidence_supported": 1,
+        "selected_evidence_unsupported": 2,
+        "selected_evidence_uncertain": 0
+      }
+    },
+    {
+      "epoch": "candidate",
+      "scheduled_cases": 6,
+      "automatic_rejections": 2,
+      "input_limit_rejections": 1,
+      "output_limit_rejections": 1,
+      "valid_outputs": 4,
+      "semantic_accepted": 0,
+      "semantic_rejected": 4,
+      "required_gate_pass": false,
+      "answerable_subset": {
+        "scheduled_cases": 4,
+        "valid_outputs": 2,
+        "automatic_rejections": 2,
+        "accepted": 0,
+        "semantic_rejections": 2,
+        "completeness_failed_responses": 2,
+        "completeness_applicable_responses": 2,
+        "required_elements_total": 11,
+        "covered_elements": 2,
+        "partial_elements": 4,
+        "missing_elements": 5,
+        "incorrect_elements": 0
+      },
+      "abstention_subset": {
+        "scheduled_cases": 2,
+        "valid_outputs": 2,
+        "accepted": 0,
+        "status_or_empty_claims_contract_failures": 2,
+        "applicable_responses": 2
+      },
+      "response_axes": {
+        "valid_response_denominator": 4,
+        "full_source_unsupported": 0,
+        "full_source_uncertain": 1,
+        "selected_evidence_unsupported": 3,
+        "selected_evidence_uncertain": 0,
+        "korean_sufficiency_failures": 4
+      },
+      "claim_axes": {
+        "emitted_claim_denominator": 14,
+        "full_source_supported": 11,
+        "full_source_unsupported": 0,
+        "full_source_uncertain": 3,
+        "selected_evidence_supported": 8,
+        "selected_evidence_unsupported": 5,
+        "selected_evidence_uncertain": 1
+      }
+    }
+  ],
+  "totals": {
+    "scheduled_slots": 12,
+    "valid_outputs_judged": 7,
+    "automatic_rejections": 5,
+    "accepted_cases": 0,
+    "semantic_rejections": 7,
+    "claims_assessed": 17,
+    "citation_bindings_verified": 51
+  },
+  "denominator_definitions": {
+    "scheduled_cases": "Original fixed six cases per arm; automatic input/output-limit rejection remains in this denominator.",
+    "semantic_rejection": "Only automatically valid outputs are semantically judged. Automatic limit rejection is not relabeled semantic rejection.",
+    "answerable_subset": "Original four expected-answered cases per arm. Completeness response/element metrics apply only to valid outputs in this subset.",
+    "abstention_subset": "Original two expected-abstained cases per arm. No explanatory answer text is required for a correctly formed abstention.",
+    "claim_axes": "Actual emitted claims in valid outputs only; unsupported and uncertain remain distinct. Different claim counts are not a controlled accuracy comparison.",
+    "language": "All valid responses are the denominator. Counts describe the frozen Korean sufficiency axis; incomplete content is assessed separately.",
+    "overlap": "Failure categories overlap and must not be summed as disjoint failures."
+  },
+  "limitations": [
+    "Six-case paired development diagnostic only; not general accuracy, final test or service admission.",
+    "Independent AI judgment, not human review; prior progress-status exposure was recorded, so not perfectly blind.",
+    "All original judgments were locked before explicit mapping disclosure and were not regraded.",
+    "No model-size, speed, cost or causal-effect estimate is supported by this aggregate.",
+    "Claim-support counts do not override completeness, abstention, selected-evidence or language failures."
+  ],
+  "judgment_lock_sha256": "fa558306d3f83f15560f159af7d1711dbdb960d7425fea5f8a6427d1ab20e715",
+  "mapping_disclosure_sha256": "f75194fad691a8ab71008d00ea57f134a43e2c4f22185694947f612c5a855138",
+  "private_judgments_sha256": "5cebbf9f10ebc5d3037068a20e823ec6e76ff7b8e579240820fdaef6446985b5",
+  "safe_aggregate_sha256": "99563555af9c567be89da3d22345359c46a665a4e6ab3a2008b84d3e18ff71c7",
+  "judge_role": "independent_ai_semantic_judge",
+  "judge_tool_accepted_model": "gpt-6-astra",
+  "judge_tool_accepted_reasoning_effort": "xhigh",
+  "human_reviewed": false,
+  "perfectly_blind": false,
+  "judgments_locked_before_explicit_mapping": true,
+  "judgments_regraded": false,
+  "retry_count": 0,
+  "selected_for_service": null,
+  "paid_service_calls": 0,
+  "public_service_deployment": false,
+  "next": "Preserve closed comparison and original six. No automatic model/prompt search or tuning on these six. Resume previously approved summary engine work; free local general QA remains unresolved."
+}

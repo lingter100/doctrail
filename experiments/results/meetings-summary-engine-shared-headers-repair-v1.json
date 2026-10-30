@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "REPAIRED_REVIEWED_ACTUAL_REACQUISITION_NOT_RUN",
+  "base_head": "9236b854ed2ab46785868042467251e1c6ef1ca2",
+  "problem": "Pinned LLVM archive stores shared headers under include/; the validator required a nonexistent x86_64-w64-mingw32/include/ subtree.",
+  "change": "Require nonempty include/windows.h, include/_mingw.h and include/c++/v1/__config in place of the nonexistent target include subtree; preserve other validation and selection rules.",
+  "source_files": [
+    {
+      "file": "scripts/prepare_summary_grammar_engine.py",
+      "sha256": "b019010f8169225cde25947a28ac5dad47256e78d213d8926691c694557674ff",
+      "size_bytes": 59485
+    },
+    {
+      "file": "tests/test_summary_grammar_engine.py",
+      "sha256": "42053cca943320bde2f1118aae926f9c9ad4c368229c9cda46b192ab373fb8ea",
+      "size_bytes": 109183
+    }
+  ],
+  "focused_checks": {
+    "passed": 302,
+    "failed": 0,
+    "pytest_seconds": 271.75,
+    "process_seconds": 272.655999999959,
+    "type": "synthetic unit and fixture-consumer regressions",
+    "ruff": "pass existing executable"
+  },
+  "archive_metadata_check": {
+    "archive": {
+      "sha256": "82babcd6aae4dc3606e8e0471d816989c384b4bf86a139f184a8b4a1b2c2758d",
+      "size_bytes": 171028561
+    },
+    "entry_count": 9353,
+    "file_count": 9104,
+    "descriptor": {
+      "policy": "llvm-x64-sampled-50ms-v1",
+      "prefix": "llvm-mingw-20250709-ucrt-x86_64/",
+      "selection_sha256": "b284bbfb5719e44fadde25ffdac4cb1f103a294decb686fbb22ffbb41b5f49d6",
+      "selected_entries": 6116,
+      "excluded_entries": 3237,
+      "selected_bytes": 467796597,
+      "excluded_bytes": 203993556
+    },
+    "body_open_count": 0,
+    "extraction_count": 0,
+    "target_include_entries": 0
+  },
+  "initial_failures_preserved": [
+    {
+      "stage": "pytest default temporary directory",
+      "exit_code": 1,
+      "setup_errors": 302,
+      "test_bodies_executed": 0
+    },
+    {
+      "stage": "Ruff unavailable in inference interpreter",
+      "exit_code": 1
+    },
+    {
+      "stage": "temporary path option inserted between -p and its argument",
+      "exit_code": 4,
+      "test_bodies_executed": 0
+    }
+  ],
+  "original_actual_attempt": "failed and consumed; not replayed",
+  "original_acquisition_files_preserved": 8,
+  "new_acquisition_build_native_model_runs": 0,
+  "implementation_receipt_sha256": "350b248d6d4bc4cebabc76c28485485bdada670784f83cdd57c31d8f576f8310",
+  "parent_verification": {
+    "refs_hash_verified": 35,
+    "archive_size_only_rechecked": true,
+    "archive_hash_basis": "executor and independent diagnosis exact pinned archive verification"
+  },
+  "limitations": [
+    "Archive central-directory validation is not extraction or compiler dependency completeness.",
+    "Synthetic regressions and source review are not native grammar-engine or summary semantic quality.",
+    "A new actual attempt needs the corrected source exact CI and fresh orchestration; the closed attempt is preserved."
+  ],
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "receipt_sha256": "2edad33106f372abdf634971fe06710048d0668dc6b33bd4a1532b6d1266a185",
+    "parent_verified_direct_refs": 15
+  }
+}

@@ -1302,7 +1302,8 @@ def llvm_fixture_rows():
     return {prep.LLVM_PREFIX + name: b"synthetic" for name in (
         "bin/clang.exe", "bin/clang++.exe", "bin/clang-20.exe", "bin/helper.dll", "bin/driver-wrapper",
         "include/shared.h", "lib/shared.a", "share/doc/readme.txt", "lib/clang/20/include/resource.h",
-        "x86_64-w64-mingw32/include/windows.h", "x86_64-w64-mingw32/lib/kernel32.a", "LICENSE.TXT",
+        "include/windows.h", "include/_mingw.h", "include/c++/v1/__config",
+        "x86_64-w64-mingw32/lib/kernel32.a", "LICENSE.TXT",
         "i686-w64-mingw32/lib/unused.a", "python/unused.py", "aarch64-w64-mingw32/include/unused.h",
         "armv7-w64-mingw32/COPYING", "python/nested/COPYRIGHT.txt")}
 
@@ -1325,7 +1326,8 @@ def test_v3_selection_retains_licenses_dependencies_and_never_opens_excluded(tmp
     monkeypatch.setattr(zipfile.ZipFile, "open", opening)
     budget = v3_budget(tmp_path)
     summary = prep.extract_llvm_x64(archive, tmp_path / "out", budget)
-    assert summary["excluded_entries"] == 3 and summary["selected_entries"] == 14
+    assert summary["excluded_entries"] == 3 and summary["selected_entries"] == 16
+    assert not (tmp_path / "out" / prep.LLVM_PREFIX / "x86_64-w64-mingw32/include").exists()
     assert set(opened) == {r["file"] for r in rt.inventory(tmp_path / "out")}
     assert (tmp_path / "out" / prep.LLVM_PREFIX / "python/nested/COPYRIGHT.txt").is_file()
     budget.scan()
@@ -1337,13 +1339,21 @@ def test_v3_selection_retains_licenses_dependencies_and_never_opens_excluded(tmp
     assert summary["selection_sha256"] == rt.digest(encoded)
 
 
-@pytest.mark.parametrize("missing", ["bin/clang.exe", "bin/clang++.exe", "bin/clang-20.exe", "lib/clang/20/include/resource.h", "include/shared.h", "share/doc/readme.txt", "x86_64-w64-mingw32/include/windows.h", "x86_64-w64-mingw32/lib/kernel32.a", "LICENSE.TXT"])
+@pytest.mark.parametrize("missing", ["bin/clang.exe", "bin/clang++.exe", "bin/clang-20.exe", "lib/clang/20/include/resource.h", "include/windows.h", "include/_mingw.h", "include/c++/v1/__config", "share/doc/readme.txt", "x86_64-w64-mingw32/lib/kernel32.a", "LICENSE.TXT"])
 @pytest.mark.parametrize("empty", [False, True])
 def test_v3_selection_requires_nonempty_x64_dependencies(tmp_path, missing, empty):
     rows = llvm_fixture_rows()
     if empty: rows[prep.LLVM_PREFIX + missing] = b""
     else: del rows[prep.LLVM_PREFIX + missing]
     with zipfile.ZipFile(llvm_fixture_zip(tmp_path / "llvm.zip", rows)) as archive, pytest.raises(rt.BoundaryError, match="llvm_required"):
+        prep.llvm_selection(archive.infolist(), tmp_path / "out")
+
+
+def test_v3_selection_rejects_target_only_header_witnesses(tmp_path):
+    rows = llvm_fixture_rows()
+    for name in ("include/windows.h", "include/_mingw.h", "include/c++/v1/__config"):
+        rows[prep.LLVM_PREFIX + "x86_64-w64-mingw32/" + name] = rows.pop(prep.LLVM_PREFIX + name)
+    with zipfile.ZipFile(llvm_fixture_zip(tmp_path / "llvm.zip", rows)) as archive, pytest.raises(rt.BoundaryError, match="llvm_required_file"):
         prep.llvm_selection(archive.infolist(), tmp_path / "out")
 
 

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "status": "ACTUAL_NEUTRAL_TRANSPORT_PASSED_QUALITY_NOT_EVALUATED",
+  "source_head": "9236b854ed2ab46785868042467251e1c6ef1ca2",
+  "contract_sha256": "50d5fc6034fca689647ed8b665a9e7f276c0f56430567dd5047b6194615a4ae6",
+  "actual_cli_dispatches": 1,
+  "actual_exits": {
+    "wrapper": 0,
+    "monitor": 0,
+    "seal": 0,
+    "cli": 0
+  },
+  "measured": {
+    "completions": 1,
+    "valid_neutral_outputs": 1,
+    "requested_output_token_limit": 256,
+    "local_HTTP_requests": 4,
+    "runner_elapsed_seconds": 30.31200000003446,
+    "cleanup_seconds": 0.6559999999590218,
+    "known_owned_identities_absent": 5
+  },
+  "custody": {
+    "hash_rows_verified": 538,
+    "asset_stat_only": 74,
+    "exact_copy_pairs": 5,
+    "failure_count": 0,
+    "once_consumed": true,
+    "parent_accepted": true
+  },
+  "quality_cases_executed": 0,
+  "paid_service_calls": 0,
+  "public_service_deployment": false,
+  "human_review": false,
+  "next": "Same locked inputs and settings; baseline6 then candidate6 only after actual predecessor acceptance.",
+  "limitations": [
+    "Single neutral transport/schema run, not answer or summary semantic acceptance.",
+    "Runner wall time includes preparation/startup; not service request latency or a representative performance distribution.",
+    "Requested output cap is not measured generated token usage.",
+    "Known owned process absence does not prove absence of every uncaptured child.",
+    "Local hardware/energy cost is not estimated."
+  ],
+  "preserved_failure": "Prior v2 baseline remains stopped before question generation; original CI failure and corrected browser test evidence remain preserved."
+}

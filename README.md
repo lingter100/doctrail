@@ -19,16 +19,16 @@
 
 새 비교 경로 소스 `7ca3698`의 양쪽 필수 CI가 통과했다. [검사 기록](experiments/results/meetings-free-qa-paired-v2-ci-v1.json)은 Python 5,360개 통과·21개 제외, 전체 브라우저 158개 통과·실패 0과 실제 Java 운영 검증을 구분한다. 일부 화면 검사는 합성 모델 응답을 사용하므로 실제 AI 품질의 근거로 세지 않는다. 최근 소규모 개발 QA 비교의 내용 수용은0/4였고 실패 후보는 채택하지 않았다. [기능 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)과 [AI 실패 분석](docs/MEETINGS-LOCAL-QA-CONTROL-RESULTS.md)을 구분해 기록한다.
 
-새 [무료 QA 비교 실행기](docs/MEETINGS-FREE-QA-ADAPTER-VERIFICATION.md)는 합성 회귀·독립 코드 검토·필수 CI를 마쳤다. 새 모델의 [실제 파일 취득](experiments/results/meetings-free-qa-acquisition-v2.json)은 완료했고 [중립 시험](docs/MEETINGS-FREE-QA-NEUTRAL-RESULTS.md)의 생성 전 실패는 원본으로 보존한다. 이후 [생성 없는 시작 진단](docs/MEETINGS-FREE-QA-STARTUP-RESULTS.md) 1회에서는 서버 준비 확인 뒤 대화 형식 설정 검증이 실패했다. 외부 관측29.338초·생성0이며 정확한 실제 template 값은 미보존이다. 최초 콘솔 프로세스 관찰 공백과 부모 계획 문서 변경에 따른 보존 실패도 남겼다. 나중 알려진 프로세스 부재를 확인했지만 원래 결과를 통과로 바꾸지 않았다. 새6개 품질 비교는 미실행이다. [고정 런타임의 template 표현 차이](docs/MEETINGS-FREE-QA-RUNTIME-TEMPLATE-FIX.md)를 보완하고 관련273개·독립 검토·게시 CI를 통과했다. 이후 [별도 v2 실제 진단](docs/MEETINGS-FREE-QA-STARTUP-V2-RESULTS.md)에서 health·props1회 검증·정상 종료·전체 보존 확인이 통과했다(CLI19.906초·생성0). 시작 오류 수정의 실측이며 생성·답변 품질이나 새6개 평가의 성공은 아니다. 이어 [새 비교의 실제 중립 생성](docs/MEETINGS-FREE-QA-NEUTRAL-V2-RESULTS.md)은 생성1회·유효1개·정상 종료·전체 보존 확인을 통과했다(실행21.031초·정리0.609초). 봉인6개 내용 품질과 실제 모델의 서비스 통합은 아직 미완료다.
+[무료 로컬 QA 두 모델 실측](docs/MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)을 끝냈다. 같은6개에서 기준3B·후보7B의 형식 유효는3개·4개였지만, 별도 AI의 최종 내용 수용은 모두 **0/6**이었다. 입력 초과와 출력 잘림을 실제 숫자로 확인했고, 원본·실패·판단을 보존한 채 비교를 종료했다. 후보를 서비스에 채택하지 않는다. 이전 [시작 실패와 호환성 수정](docs/MEETINGS-FREE-QA-BASELINE-STARTUP-RESULTS.md), [중립 실행](experiments/results/meetings-free-qa-paired-v3-neutral-v1.json), [현재 소스 CI](experiments/results/meetings-free-qa-paired-v3-ci-v1.json)는 내용 품질과 구분한다.
 
-[요약 엔진 준비 v3](docs/MEETINGS-SUMMARY-ENGINE-V3-VERIFICATION.md)는 x64 파일 선택·자원 표본 정책과 실제 외부 종료 기록의 결속을 구현했다. 고정 소스554합성 검사와 독립 검토를 마쳤으며 실제 새 취득·빌드·요약 품질은 아직 검증 전이다. 최초 최종화 결함과 수정 중 실패도 보존한다.
+[요약 엔진 준비 v3](docs/MEETINGS-SUMMARY-ENGINE-V3-VERIFICATION.md)는 x64 파일 선택·자원 표본 정책과 실제 외부 종료 기록의 결속을 구현했다. 고정 소스554합성 검사와 독립 검토를 마쳤으며 실제 새 취득은 [LLVM 필수 경로 검사 실패](experiments/results/meetings-summary-engine-v3-oct30-acquisition-v1.json)로 종료했다. 빌드·요약 품질은 아직 검증 전이다. 최초 최종화 결함과 수정 중 실패도 보존한다.
 
 기능별 상태·남은 순서는 [진행 상황](docs/PROGRESS-OVERVIEW.md), 재현과 한계는 [실험 기록](experiments/README.md), 현재 확인된 경험을 설명하는 자료는 [포트폴리오 초안](docs/PORTFOLIO-DRAFT.md)·[면접 초안](docs/INTERVIEW-DRAFT.md)에 있다. 사용자 직접 검수·시연·설명 연습은 아직 확인하지 않았다. 녹음·STT·외부 회의 연동은2차 범위이며 유료 사용과 공개 서비스 배포는 하지 않았다.
 
 <details>
 <summary>실험별 결과와 실패 기록</summary>
 
-무료 로컬 후보의 [최신 실제 비교](docs/MEETINGS-LOCAL-QA-CONTROL-RESULTS.md)에서 QA 지침을 바꿨지만 별도 AI 내용 수용은0/4로 유지됐다. 인용10/10일치와 충분한 답변은 달랐고 요약4개도 출력·문자 수 조건으로 거부됐다. 237합성검사·독립 코드 검토·CI 성공을 모델 품질로 해석하지 않으며 후보를 서비스에 채택하지 않는다. 사전 계획대로 같은 지침 미세변형은 종료하고 [다음 무료 QA 비교](docs/MEETINGS-FREE-QA-NEXT-DECISION.md)와 [요약 엔진 검증 준비](docs/MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md)를 진행한다.
+무료 로컬 후보의 [이전 지침 비교](docs/MEETINGS-LOCAL-QA-CONTROL-RESULTS.md)에서 QA 지침을 바꿨지만 별도 AI 내용 수용은0/4로 유지됐다. 인용10/10일치와 충분한 답변은 달랐고 요약4개도 출력·문자 수 조건으로 거부됐다. 237합성검사·독립 코드 검토·CI 성공을 모델 품질로 해석하지 않으며 후보를 서비스에 채택하지 않는다. 사전 계획대로 같은 지침 미세변형은 종료하고 두 모델 비교도 종료했으며 [요약 엔진 검증 준비](docs/MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md)를 이어간다.
 
 **문서·회의 관리 기능은 대부분 구현됐으며, 무료 로컬 AI의 내용 품질과 운영 안정성을 검증 중이다.** 기능별 상태와 남은 순서는 [현재 진행 상황](docs/PROGRESS-OVERVIEW.md), 백업·복원의 범위와 재현 방법은 [운영 검증](docs/MEETINGS-RESTORE-VERIFICATION.md)을 참고한다. 회의1차와 전체 포트폴리오는 아직 미완료다.
 

@@ -381,11 +381,12 @@ def llvm_selection(infos, dest, initial=0, checkpoint=lambda: None):
     selected.extend(i for i in infos if i.is_dir() and i.filename.rstrip("/") in parents and i.filename not in selected_names)
     selected.sort(key=lambda i: i.filename)
     files = {i.filename: i for i in selected if not i.is_dir()}
-    for name in ("bin/clang.exe", "bin/clang++.exe", "bin/clang-20.exe", "LICENSE.TXT"):
+    for name in ("bin/clang.exe", "bin/clang++.exe", "bin/clang-20.exe", "LICENSE.TXT",
+                 "include/windows.h", "include/_mingw.h", "include/c++/v1/__config"):
         require(LLVM_PREFIX + name in files and files[LLVM_PREFIX + name].file_size > 0, "llvm_required_file")
     drivers = [name for name in files if re.fullmatch(r"clang-[0-9]+\.exe", Path(name).name)]
     require(drivers == [LLVM_PREFIX + "bin/clang-20.exe"], "llvm_required_driver")
-    for prefix in ("bin/", "include/", "lib/", "share/", "lib/clang/20/include/", "x86_64-w64-mingw32/include/", "x86_64-w64-mingw32/lib/"):
+    for prefix in ("bin/", "include/", "lib/", "share/", "lib/clang/20/include/", "x86_64-w64-mingw32/lib/"):
         require(any(name.startswith(LLVM_PREFIX + prefix) and info.file_size > 0 for name, info in files.items()), "llvm_required_subtree")
     rows = [[i.filename, i.file_size, i.CRC, i.external_attr] for i in selected]
     descriptor = {"policy": ACQUISITION_PROFILE, "prefix": LLVM_PREFIX,

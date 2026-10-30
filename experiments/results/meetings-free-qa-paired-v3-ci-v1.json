@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "source_head": "9236b854ed2ab46785868042467251e1c6ef1ca2",
+  "runs": [
+    {
+      "id": 40983269824,
+      "event": "push",
+      "jobs_all3": "passed",
+      "watch_session": 72302,
+      "watch_exit_code": 0
+    },
+    {
+      "id": 40983275903,
+      "event": "pull_request",
+      "jobs_all3": "passed",
+      "watch_session": 27172,
+      "watch_exit_code": 0
+    }
+  ],
+  "measured_push": {
+    "python_passed": 5384,
+    "python_skipped": 21,
+    "python_warnings": 2,
+    "python_elapsed_seconds": 220.07,
+    "browser_passed": 158,
+    "browser_failed": 0,
+    "browser_infra_failures": 0,
+    "browser_missing_runs": 0,
+    "actual_Java_HTTP_compatibility": "passed",
+    "synthetic_meeting_operations_actual_Java": "passed"
+  },
+  "measured_PR_browser": {
+    "passed": 158,
+    "failed": 0,
+    "infrastructure_failures": 0,
+    "missing_runs": 0
+  },
+  "limits": [
+    "Model quality is not measured by these synthetic/model-free CI checks.",
+    "Prior a8 push failure and its deterministic reproduction remain preserved.",
+    "Fresh v3 packet preparation is next; no actual question generation or final service completion yet."
+  ],
+  "public_urls": [
+    "https://github.com/lingter100/doctrail/actions/runs/40983269824",
+    "https://github.com/lingter100/doctrail/actions/runs/40983275903"
+  ]
+}

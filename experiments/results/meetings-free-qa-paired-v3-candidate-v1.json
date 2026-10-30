@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "status": "CANDIDATE_COMPLETED_WITH_REJECTIONS_SEMANTIC_REVIEW_PENDING",
+  "source_head": "9236b854ed2ab46785868042467251e1c6ef1ca2",
+  "contract_sha256": "50d5fc6034fca689647ed8b665a9e7f276c0f56430567dd5047b6194615a4ae6",
+  "case_denominator": 6,
+  "structurally_valid_cases": 4,
+  "rejected_input_limit": 1,
+  "rejected_output_limit": 1,
+  "cases": [
+    {
+      "id": "FQA01",
+      "status": "rejected",
+      "error": {
+        "code": "generation_input_limit",
+        "type": "GenerationError"
+      }
+    },
+    {
+      "id": "FQA02",
+      "status": "valid",
+      "error": null
+    },
+    {
+      "id": "FQA03",
+      "status": "valid",
+      "error": null
+    },
+    {
+      "id": "FQA04",
+      "status": "rejected",
+      "error": {
+        "code": "generation_output_limit",
+        "type": "WorkerError"
+      }
+    },
+    {
+      "id": "FQA05",
+      "status": "valid",
+      "error": null
+    },
+    {
+      "id": "FQA06",
+      "status": "valid",
+      "error": null
+    }
+  ],
+  "measured": {
+    "model_generations": 5,
+    "requested_output_token_caps_total": 1280,
+    "local_HTTP_requests": 18,
+    "runner_elapsed_seconds": 51.57900000002701,
+    "cleanup_seconds": 0.5309999999590218,
+    "known_owned_absent": 5
+  },
+  "actual_exits": {
+    "wrapper": 0,
+    "monitor": 0,
+    "seal": 0,
+    "cli": 0
+  },
+  "custody": {
+    "hash_rows": 792,
+    "asset_stat_only": 74,
+    "copies": 5,
+    "parent_accepted": true,
+    "once_consumed": true
+  },
+  "retry_count": 0,
+  "semantic_judging_done": false,
+  "paid_service_calls": 0,
+  "public_deployment": false,
+  "limitations": [
+    "Four structurally valid outputs are not four correct answers.",
+    "The input-limited case generated no answer; all six remain in the denominator.",
+    "Output-limited cases remain rejected; no repair, backfill, truncation or budget increase.",
+    "Wall time is one local epoch including preparation/startup, not service latency distribution.",
+    "Actual generated token usage and local hardware cost are not inferred from request caps."
+  ],
+  "next": "Independent original-rubric judging of all valid outputs; both arms already miss the original six-of-six selection gate. No automatic further model or prompt search.",
+  "comparison_totals": {
+    "model_generations_including_neutral": 11,
+    "requested_output_token_caps_total_including_neutral": 2816,
+    "max_generations": 13,
+    "max_requested_output_token_caps_total": 3328
+  }
+}
