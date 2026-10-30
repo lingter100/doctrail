@@ -411,9 +411,10 @@ def test_build_mocked_only_target2_jobs_and_shared900_seconds(tmp_path, monkeypa
     assert len(calls) == 2
 
 
+@pytest.mark.parametrize("source_transport", ["injected", "owned"])
 @pytest.mark.parametrize("mode", ["100644", "100755"])
 @pytest.mark.parametrize("bad_blob", [False, True])
-def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execution(tmp_path, monkeypatch, bad_blob, mode):
+def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execution(tmp_path, monkeypatch, bad_blob, mode, source_transport):
     import hashlib
     root = tmp_path / "owned"
     urls, toolpins = {}, []
@@ -444,14 +445,22 @@ def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execut
     urls[api + "trees/" + "a" * 40 + "?recursive=1"] = json.dumps({"sha": "a" * 40, "truncated": False, "tree": tree}).encode()
     urls["https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/COPYING"] = b"synthetic ninja license"
     calls = []
-    opener = SimpleNamespace(open=lambda request, **k: Response(urls[request.full_url]))
+    ordinary_requests = []
+    def ordinary_open(request, **kwargs):
+        ordinary_requests.append(request.full_url)
+        return Response(urls[request.full_url])
+    opener = SimpleNamespace(open=ordinary_open)
+    source_urls = [f"https://raw.githubusercontent.com/ggml-org/llama.cpp/{rt.COMMIT}/{row['path']}" for row in tree]
+    connections, requests, _ = source_https_connections(monkeypatch, [source_http_wire(urls[url]) for url in source_urls])
+    if source_transport == "owned":
+        monkeypatch.setattr(prep.urllib.request, "build_opener", lambda *args: opener)
     def runner(argv, **kwargs):
         calls.append(argv)
         assert kwargs["deadline"] == 600 and kwargs["rss"] == 2147483648
         assert rt.validate_temporary(root, kwargs["env"]) == root / "acquisition-tmp"
         token = argv[-1]
         monkeypatch.setenv("DOCTRAIL_ACQUIRE_TOKEN", token)
-        prep.acquire(root, opener=opener, budget_factory=FakeBudget, worker_token=token)
+        prep.acquire(root, opener=opener if source_transport == "injected" else None, budget_factory=FakeBudget, worker_token=token)
         rt.write(root / "acquisition-supervision.json", {"cleanup": {"all_absent": True, "errors": [], "identities": []}})
     if bad_blob:
         with pytest.raises(rt.BoundaryError, match="source_blob"):
@@ -476,6 +485,12 @@ def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execut
         with pytest.raises(rt.BoundaryError, match="runtime_bindings_changed"):
             prep.check_acquired(root, rt.digest((root / "acquisition.json").read_bytes()))
     assert len(calls) == 1
+    if source_transport == "owned":
+        assert len(connections) == 1 and connections[0].closed
+        assert len(requests) == (2 if bad_blob else 6)
+        assert all(url not in source_urls for url in ordinary_requests)
+    else:
+        assert not connections and not requests
     with pytest.raises(FileExistsError): prep.acquire_supervised(root, runner=runner, clock=lambda: 0)
 
 
@@ -2229,3 +2244,233 @@ def test_source_modes_reject_before_entry_fetch(tmp_path, monkeypatch, entry_typ
     assert not any((root / "source").iterdir())
     assert rt.load(root / "acquisition-failure.json")["reason"] == error
     assert not (root / "acquisition.json").exists()
+
+# Real stdlib HTTPResponse framing over fake sockets; never contact a server.
+def source_http_wire(body=b"data", status=200, headers=()):
+    values = list(headers)
+    if not any(key.lower() in {"content-length", "transfer-encoding"} for key, _ in values):
+        values.append(("Content-Length", str(len(body))))
+    return (f"HTTP/1.1 {status} synthetic\r\n" + "".join(f"{key}: {value}\r\n" for key, value in values) + "\r\n").encode() + body
+
+
+def source_https_connections(monkeypatch, responses, fault=None):
+    connections, requests, bodies = [], [], []
+    queue = list(responses)
+    class Socket:
+        def __init__(self, stream=None): self.stream, self.timeouts = stream, []
+        def makefile(self, mode): return self.stream
+        def settimeout(self, value): self.timeouts.append(value)
+    class Connection:
+        def __init__(self, host, *, port, timeout):
+            assert port == 443  # No custom TLS context disabling normal verification.
+            self.host, self.timeout, self.closed = host, timeout, False
+            self.sock = Socket(); connections.append(self)
+        def request(self, method, target, *, headers):
+            assert method == "GET" and not self.closed
+            assert not any(key.lower() in {"authorization", "proxy-authorization"} for key in headers)
+            requests.append((self.host, target, self.timeout))
+            if fault == "request": raise OSError("synthetic socket failure")
+        def getresponse(self):
+            if fault == "response": raise prep.http.client.RemoteDisconnected("synthetic disconnect")
+            body = DispatchBody(queue.pop(0)); bodies.append(body)
+            response = prep.http.client.HTTPResponse(Socket(body)); response.begin()
+            if fault == "read":
+                def failed(size): raise OSError("synthetic TLS read failure")
+                response.read = failed
+            return response
+        def close(self): self.closed = True
+    monkeypatch.setattr(prep.http.client, "HTTPSConnection", Connection)
+    return connections, requests, bodies
+
+
+def test_source_https_reuses_one_connection_and_charges_exact_bodies(tmp_path, monkeypatch):
+    import hashlib
+    payloads = [b"a" * 70000, b"second"]
+    connections, requests, bodies = source_https_connections(monkeypatch, [source_http_wire(x) for x in payloads])
+    budget = FakeBudget(tmp_path)
+    with prep.SourceHTTPS() as opener:
+        for index, body in enumerate(payloads):
+            path = tmp_path / str(index)
+            assert prep.fetch(f"https://raw.githubusercontent.com/source/{index}", path, budget,
+                              expected=rt.digest(body), max_bytes=len(body), opener=opener) == rt.digest(body)
+            assert hashlib.sha1(b"blob " + str(len(body)).encode() + b"\0" + path.read_bytes()).digest() == hashlib.sha1(b"blob " + str(len(body)).encode() + b"\0" + body).digest()
+        assert len(connections) == 1 and not connections[0].closed
+    assert connections[0].closed and len(requests) == 2 and budget.downloaded == sum(map(len, payloads))
+    assert all(body.closed and all(0 < size <= 65536 for size in body.reads) for body in bodies)
+
+
+def test_source_https_server_close_reconnects_only_for_next_file(tmp_path, monkeypatch):
+    connections, requests, _ = source_https_connections(monkeypatch, [source_http_wire(headers=[("Connection", "close")]), source_http_wire()])
+    with prep.SourceHTTPS() as opener:
+        for index in range(2): prep.fetch(f"https://github.com/{index}", tmp_path / str(index), FakeBudget(tmp_path), opener=opener)
+    assert len(connections) == len(requests) == 2 and all(c.closed for c in connections)
+    assert [r[1] for r in requests] == ["/0", "/1"]
+
+
+@pytest.mark.parametrize("location,valid", [("https://raw.githubusercontent.com/next", True), ("https://evil.test/next", False),
+    ("http://github.com/next", False), ("https://u@github.com/next", False), ("https://github.com:444/next", False)])
+def test_source_https_redirects_discard_unread_connection(tmp_path, monkeypatch, location, valid):
+    connections, requests, bodies = source_https_connections(monkeypatch, [source_http_wire(b"never consumed", 302, [("Location", location)]), source_http_wire()])
+    budget = FakeBudget(tmp_path)
+    with prep.SourceHTTPS() as opener:
+        if valid: prep.fetch("https://github.com/start", tmp_path / "out", budget, opener=opener)
+        else:
+            with pytest.raises(rt.BoundaryError): prep.fetch("https://github.com/start", tmp_path / "out", budget, opener=opener)
+    assert len(requests) == len(connections) == (2 if valid else 1)
+    assert all(c.closed for c in connections) and bodies[0].reads == [] and bodies[0].closed
+    assert budget.downloaded == (4 if valid else 0)
+
+
+@pytest.mark.parametrize("fault", ["truncated", "malformed-length", "duplicate-length", "ambiguous-framing", "chunked-truncated", "error-status", "oversize", "request", "response", "read"])
+def test_source_https_faults_close_and_never_replay(tmp_path, monkeypatch, fault):
+    wire = source_http_wire()
+    if fault == "truncated": wire = source_http_wire(b"abc", headers=[("Content-Length", "10")])
+    elif fault == "malformed-length": wire = source_http_wire(headers=[("Content-Length", "invalid")])
+    elif fault == "duplicate-length": wire = source_http_wire(headers=[("Content-Length", "4"), ("Content-Length", "4")])
+    elif fault == "ambiguous-framing": wire = source_http_wire(headers=[("Content-Length", "4"), ("Transfer-Encoding", "chunked")])
+    elif fault == "chunked-truncated": wire = source_http_wire(b"3\r\nab", headers=[("Transfer-Encoding", "chunked")])
+    elif fault == "error-status": wire = source_http_wire(b"discarded", 500)
+    connections, requests, bodies = source_https_connections(monkeypatch, [wire], fault)
+    budget = FakeBudget(tmp_path)
+    with prep.SourceHTTPS() as opener:
+        with pytest.raises((rt.BoundaryError, OSError, prep.http.client.HTTPException)):
+            prep.fetch("https://github.com/file", tmp_path / "out", budget, max_bytes=2 if fault == "oversize" else 100, opener=opener)
+        assert opener.connection is None
+    assert len(connections) == len(requests) == 1 and connections[0].closed and all(b.closed for b in bodies)
+    if fault in {"malformed-length", "duplicate-length", "ambiguous-framing", "error-status"}: assert bodies[0].reads == []
+    if fault == "oversize": assert budget.downloaded == 3
+
+
+def test_source_https_early_close_discards_without_drain(tmp_path, monkeypatch):
+    connections, requests, bodies = source_https_connections(monkeypatch, [source_http_wire(b"unread")])
+    with prep.SourceHTTPS() as opener:
+        response = prep.open_download("https://github.com/file", FakeBudget(tmp_path), opener)
+        response.close()
+        assert opener.connection is None
+    assert len(requests) == 1 and connections[0].closed and bodies[0].reads == []
+
+
+def test_source_https_remaining_deadline_updates_reused_socket(tmp_path, monkeypatch):
+    connections, requests, _ = source_https_connections(monkeypatch, [source_http_wire(), source_http_wire()])
+    clock = Clock(); budget = prep.Budget(tmp_path, ps=FakePS(tmp_path), clock=clock)
+    with prep.SourceHTTPS() as opener:
+        clock.now = 597
+        prep.fetch("https://github.com/one", tmp_path / "one", budget, opener=opener)
+        clock.now = 599
+        prep.fetch("https://github.com/two", tmp_path / "two", budget, opener=opener)
+        clock.now = 600
+        with pytest.raises(rt.BoundaryError): prep.fetch("https://github.com/expired", tmp_path / "three", budget, opener=opener)
+    assert len(connections) == 1 and [r[2] for r in requests] == [3, 1]
+    assert connections[0].sock.timeouts == [3, 1] and connections[0].closed
+
+
+def test_source_https_preserves_phase_error_if_close_fails(monkeypatch):
+    opener = prep.SourceHTTPS()
+    monkeypatch.setattr(opener, "close", lambda: (_ for _ in ()).throw(OSError("close failed")))
+    error = rt.BoundaryError("first failure")
+    with pytest.raises(rt.BoundaryError) as caught, opener:
+        raise error
+    assert caught.value is error and error.__notes__ == ["source_https_close_failed:OSError"]
+
+@pytest.mark.parametrize("rejection", ["status", "redirect"])
+@pytest.mark.parametrize("closing", ["raw", "connection"])
+def test_source_https_close_preserves_open_download_rejection(tmp_path, monkeypatch, rejection, closing):
+    wire = source_http_wire(b"unread", 500) if rejection == "status" else source_http_wire(b"unread", 302, [("Location", "https://evil.test/file")])
+    connections, requests, bodies = source_https_connections(monkeypatch, [wire])
+    original_response = prep.http.client.HTTPSConnection.getresponse
+    original_close = prep.http.client.HTTPSConnection.close
+    cleanup_error = OSError("synthetic disposal failure")
+    disposal = []
+    def close_connection(connection):
+        disposal.append("connection"); original_close(connection)
+        if closing == "connection": raise cleanup_error
+    def getresponse(connection):
+        raw = original_response(connection); original = raw.close
+        def close_raw():
+            disposal.append("raw"); original()
+            if closing == "raw": raise cleanup_error
+        raw.close = close_raw
+        return raw
+    monkeypatch.setattr(prep.http.client.HTTPSConnection, "close", close_connection)
+    monkeypatch.setattr(prep.http.client.HTTPSConnection, "getresponse", getresponse)
+    wanted = "http_status" if rejection == "status" else "download_origin"
+    original_require, primary = prep.require, []
+    def require(ok, reason):
+        try: original_require(ok, reason)
+        except rt.BoundaryError as error:
+            if reason == wanted: primary.append(error)
+            raise
+    monkeypatch.setattr(prep, "require", require)
+    with prep.SourceHTTPS() as opener, pytest.raises(rt.BoundaryError, match=wanted) as caught:
+        prep.open_download("https://github.com/start", FakeBudget(tmp_path), opener)
+    assert len(primary) == 1 and caught.value is primary[0]
+    note = "source_https_connection_close_failed:OSError" if closing == "connection" else "source_https_close_failed:OSError"
+    assert note in caught.value.__notes__
+    assert len(requests) == len(connections) == 1 and connections[0].closed
+    assert "connection" in disposal and bodies[0].closed and bodies[0].reads == []
+    assert opener.connection is opener.response is None
+
+
+@pytest.mark.parametrize("has_primary", [False, True])
+@pytest.mark.parametrize("connection_also_fails", [False, True])
+def test_source_https_complete_close_primary_and_cleanup_failures(tmp_path, monkeypatch, has_primary, connection_also_fails):
+    connections, requests, _ = source_https_connections(monkeypatch, [source_http_wire()])
+    with prep.SourceHTTPS() as opener:
+        response = prep.open_download("https://github.com/file", FakeBudget(tmp_path), opener)
+        assert response.read(4) == b"data" and response.read(4) == b"" and response.complete
+        original_raw, original_connection = response.raw.close, connections[0].close
+        primary, raw_error, connection_error = rt.BoundaryError("primary"), OSError("raw close"), RuntimeError("connection close")
+        disposal = []
+        def close_raw():
+            disposal.append("raw"); original_raw(); raise raw_error
+        def close_connection():
+            disposal.append("connection"); original_connection()
+            if connection_also_fails: raise connection_error
+        monkeypatch.setattr(response.raw, "close", close_raw)
+        monkeypatch.setattr(connections[0], "close", close_connection)
+        with pytest.raises(rt.BoundaryError if has_primary else OSError) as caught:
+            if has_primary:
+                try: raise primary
+                except rt.BoundaryError:
+                    response.close()
+                    raise
+            else: response.close()
+        assert caught.value is (primary if has_primary else raw_error)
+        assert "connection" in disposal and connections[0].closed
+        assert opener.connection is opener.response is None and len(requests) == 1
+        if has_primary: assert "source_https_close_failed:OSError" in primary.__notes__
+
+
+@pytest.mark.parametrize("closing", ["raw", "connection"])
+def test_source_https_early_close_without_primary_propagates_cleanup(tmp_path, monkeypatch, closing):
+    connections, requests, bodies = source_https_connections(monkeypatch, [source_http_wire()])
+    with prep.SourceHTTPS() as opener:
+        response = prep.open_download("https://github.com/file", FakeBudget(tmp_path), opener)
+        target = response.raw if closing == "raw" else connections[0]
+        original = target.close; error = OSError("first cleanup failure")
+        def close(): original(); raise error
+        monkeypatch.setattr(target, "close", close)
+        with pytest.raises(OSError) as caught: response.close()
+        assert caught.value is error and opener.connection is opener.response is None
+    assert len(requests) == 1 and connections[0].closed and bodies[0].reads == []
+
+
+def test_source_https_early_close_without_primary_preserves_first_of_two_errors(tmp_path, monkeypatch):
+    connections, requests, bodies = source_https_connections(monkeypatch, [source_http_wire()])
+    with prep.SourceHTTPS() as opener:
+        response = prep.open_download("https://github.com/file", FakeBudget(tmp_path), opener)
+        raw_error, connection_error = OSError("first raw close"), RuntimeError("second connection close")
+        original_raw, original_connection = response.raw.close, connections[0].close
+        attempts = []
+        def close_raw():
+            attempts.append("raw"); original_raw(); raise raw_error
+        def close_connection():
+            attempts.append("connection"); original_connection(); raise connection_error
+        monkeypatch.setattr(response.raw, "close", close_raw)
+        monkeypatch.setattr(connections[0], "close", close_connection)
+        with pytest.raises(OSError) as caught: response.close()
+        assert caught.value is raw_error
+        assert raw_error.__notes__ == ["source_https_connection_close_failed:RuntimeError"]
+        assert attempts == ["raw", "connection"]
+        assert opener.connection is opener.response is opener.origin is None and response.closed
+    assert len(requests) == 1 and connections[0].closed and bodies[0].reads == []

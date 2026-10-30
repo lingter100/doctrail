@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.client
 import json
 import math
 import os
@@ -14,7 +15,7 @@ import time
 import urllib.error
 import urllib.request
 import zipfile
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from functools import wraps
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -279,6 +280,119 @@ class ClosedErrors(urllib.request.HTTPDefaultErrorHandler):
         raise BoundaryError("http_status")
 
 
+class SourceHTTPS:
+    """One owned, verified-TLS connection for serial source GETs; never retry."""
+    def __init__(self):
+        self.connection = self.origin = self.response = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, kind, error, traceback):
+        self.discard(error)
+
+    def close(self):
+        response, connection = self.response, self.connection
+        self.response = self.connection = self.origin = None
+        try:
+            if response is not None:
+                response.closed = True
+                response.raw.close()
+        finally:
+            if connection is not None:
+                primary = sys.exception()
+                try:
+                    connection.close()
+                except Exception as error:
+                    if primary is None:
+                        raise
+                    primary.add_note("source_https_connection_close_failed:" + type(error).__name__)
+
+    def discard(self, error=None):
+        try:
+            self.close()
+        except Exception as closing_error:  # Retain the first request/body/phase failure.
+            if error is None:
+                raise
+            error.add_note("source_https_close_failed:" + type(closing_error).__name__)
+
+    def open(self, request, timeout):
+        try:
+            parts = urlparse(checked_url(request.full_url))
+            require(request.get_method() == "GET", "source_http_method")
+            origin = (parts.hostname, 443)
+            if self.response is not None or self.origin != origin:
+                self.close()
+            if self.connection is None:
+                # HTTPSConnection's default context verifies certificates and hostnames.
+                # No urllib proxy/config handlers, credentials, or retry layer are used.
+                self.connection = http.client.HTTPSConnection(origin[0], port=443, timeout=timeout)
+                self.origin = origin
+            self.connection.timeout = timeout
+            if self.connection.sock is not None:
+                self.connection.sock.settimeout(timeout)
+            self.connection.request("GET", request.selector, headers=dict(request.header_items()))
+            raw = self.connection.getresponse()
+            self.response = SourceResponse(self, raw, request.full_url)
+            if raw.status == 200:
+                lengths = raw.headers.get_all("Content-Length", [])
+                transfers = raw.headers.get_all("Transfer-Encoding", [])
+                require(not lengths or (len(lengths) == 1 and re.fullmatch(r"[0-9]+", lengths[0].strip())), "source_http_framing")
+                require(not transfers or (len(transfers) == 1 and transfers[0].lower().strip() == "chunked" and not lengths), "source_http_framing")
+            return self.response
+        except Exception as error:
+            self.discard(error)
+            raise
+
+
+class SourceResponse:
+    def __init__(self, owner, raw, url):
+        self.owner, self.raw, self.url = owner, raw, url
+        self.status, self.headers = raw.status, raw.headers
+        self.complete = self.closed = False
+
+    def geturl(self):
+        return self.url
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, kind, error, traceback):
+        if error is not None:
+            self.owner.discard(error)
+        else:
+            self.close()
+
+    def read(self, size):
+        try:
+            data = self.raw.read(size)
+            if not data and size != 0:
+                require(self.raw.length in (None, 0), "source_http_truncated")
+                self.complete = True
+            return data
+        except Exception as error:
+            self.owner.discard(error)
+            raise
+
+    def close(self):
+        if self.closed:
+            return
+        primary = sys.exception()
+        try:
+            if not self.complete or self.status != 200 or self.raw.will_close:
+                self.owner.close()
+            else:
+                self.raw.close()
+                self.closed = True
+                self.owner.response = None
+        except Exception as error:
+            if primary is not None:
+                primary.add_note("source_https_close_failed:" + type(error).__name__)
+            self.owner.discard(primary if primary is not None else error)
+            if primary is None:
+                raise
+
+
 def open_download(url, budget, opener):
     seen = set()
     for hop in range(6):
@@ -505,7 +619,7 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None, acquisi
         source_root = root / "source"
         source_root.mkdir()
         sources = []
-        with budget.phase("sources"):
+        with budget.phase("sources"), (nullcontext(opener) if opener is not None else SourceHTTPS()) as source_opener:
             for entry in tree["tree"]:
                 budget.check()
                 path = entry["path"]
@@ -518,7 +632,7 @@ def acquire(root, opener=None, budget_factory=Budget, worker_token=None, acquisi
                 target = safe_path(source_root, path)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 url = f"https://raw.githubusercontent.com/ggml-org/llama.cpp/{COMMIT}/{path}"
-                fetch(url, target, budget, opener=opener, max_bytes=entry["size"])
+                fetch(url, target, budget, opener=source_opener, max_bytes=entry["size"])
                 data = target.read_bytes()
                 require(len(data) == entry["size"] and hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == entry["sha"], "source_blob")
                 sources.append({**reference(target, source_root), "blob_id": entry["sha"], "url": url})
