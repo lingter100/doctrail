@@ -770,7 +770,7 @@ def runtime_bindings(root, lock):
     require(len(modules) == 1, "optional_probe_module")
     module = safe_path(root / cmake["directory"], modules[0]["file"])
     lines = module.read_text(encoding="utf-8").splitlines()
-    require(len(lines) >= 55 and lines[54] == LD_SOURCE and lines.count(LD_SOURCE) == 1, "optional_probe_source")
+    require(len(lines) >= 61 and lines[60] == LD_SOURCE and lines.count(LD_SOURCE) == 1, "optional_probe_source")
     refs = [reference(p, root) for p in [*wrappers, driver, module]]
     # Verify every binding against an archive inventory before recording it.
     for path in [*wrappers, driver, module]:
@@ -779,13 +779,13 @@ def runtime_bindings(root, lock):
         check_refs(root / tool["directory"], [next(r for r in tool["inventory"] if r["file"] == rel)])
     return {"basis": "archive_inventory_and_pinned_source_not_runtime_version_observation",
             "wrapper_driver_edges": [{"wrapper": ref, "driver": refs[2]} for ref in refs[:2]],
-            "optional_ld_query": {"module": refs[3], "line": 55, "args": LD_ARGS}}
+            "optional_ld_query": {"module": refs[3], "line": 61, "args": LD_ARGS}}
 
 
 def optional_probe_guard(root, binding, env, application_dir):
     """No executable permission for ld. Check Windows search locations, never ambient PATH."""
     check_refs(root, [binding["module"]])
-    require(binding["line"] == 55 and binding["args"] == LD_ARGS, "optional_probe_binding")
+    require(binding["line"] == 61 and binding["args"] == LD_ARGS, "optional_probe_binding")
     directories = [Path(application_dir), Path(root), *map(Path, env["PATH"].split(os.pathsep))]
     require(all(p.is_absolute() for p in directories), "optional_probe_relative_search")
     if "SystemRoot" in env:

@@ -116,13 +116,17 @@ comes from that acquired inventory and its resource directory, never the host PA
 or an assumed installed version. Unknown executables remain forbidden.
 
 The CMake 3.31.8 `Windows-GNU.cmake` optional `ld -v` trace is recognized only at
-its exact source line and arguments, with its acquired module hash included in
+its exact source line 61 and arguments, with its acquired module hash included in
 the reviewed lock. Preflight checks the controlled Windows executable search
 locations for ld executable/script aliases, before and after configure. This
 allows an unavailable optional query in the trace; it grants no ld executable
 permission and is not an observation of a successful or failed tool execution.
 Other relative commands, changed modules/arguments, Git, downloads and try_run
-remain rejected. Actual archive layout and Windows execution are still untested.
+remain rejected. The actual pinned module exposed an incorrect line-55 assumption
+during v7 manifest creation. The position was corrected and checked with the
+original module bytes in a synthetic binding environment; no compiler was run.
+The v7 acquisition remains failed, and Windows build/native execution is untested.
+See [the failure and repair](../../docs/MEETINGS-SUMMARY-OPTIONAL-PROBE.md).
 
 Acquisition, build and validator children receive separate fresh TEMP/TMP folders
 inside their owned workspace. Host TEMP/TMP are never inherited or modified.

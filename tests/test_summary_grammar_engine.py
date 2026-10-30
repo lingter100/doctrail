@@ -14,6 +14,21 @@ from scripts import prepare_summary_grammar_engine as prep
 from scripts import verify_summary_grammar_engine as verify
 from tools.summary_grammar import runtime as rt
 
+# Public pinned CMake 3.31.8 Windows-GNU.cmake lines 55-64; source data only.
+WINDOWS_GNU_EXCERPT_55_TO_64 = (
+    '',
+    'set(CMAKE_GNULD_IMAGE_VERSION',
+    '  "-Wl,--major-image-version,<TARGET_VERSION_MAJOR>,--minor-image-version,<TARGET_VERSION_MINOR>")',
+    '',
+    '# Check if GNU ld is too old to support @FILE syntax.',
+    'set(__WINDOWS_GNU_LD_RESPONSE 1)',
+    'execute_process(COMMAND ld -v OUTPUT_VARIABLE _help ERROR_VARIABLE _help)',
+    'if("${_help}" MATCHES "GNU ld .* 2\\\\.1[1-6]")',
+    '  set(__WINDOWS_GNU_LD_RESPONSE 0)',
+    'endif()',
+)
+SYNTHETIC_WINDOWS_GNU = "# synthetic prefix\n" * 54 + "\n".join(WINDOWS_GNU_EXCERPT_55_TO_64) + "\n"
+
 
 def test_public_bundle_preserves_all106_and_prebound_prefix10():
     native, rejected = rt.bundle()
@@ -382,7 +397,7 @@ def test_build_mocked_only_target2_jobs_and_shared900_seconds(tmp_path, monkeypa
         if name == "cmake":
             module = folder / "share/cmake-3.31/Modules/Platform/Windows-GNU.cmake"
             module.parent.mkdir(parents=True)
-            module.write_text("# synthetic\n" * 54 + prep.LD_SOURCE + "\n")
+            module.write_text(SYNTHETIC_WINDOWS_GNU)
         tools.append({"directory": "tools/" + name, "inventory": rt.inventory(folder)})
     lock = {"tools": tools, "bundle": []}
     lock["runtime_bindings"] = prep.runtime_bindings(tmp_path, lock)
@@ -427,7 +442,7 @@ def test_full_acquisition_mocked_tree_blobs_archives_unknown_ninja_and_no_execut
                 z.writestr("bin/clang-20.exe", b"not-executable")
                 z.writestr("lib/clang/20/include/synthetic.h", b"synthetic")
             if name.startswith("cmake"):
-                z.writestr("share/cmake-3.31/Modules/Platform/Windows-GNU.cmake", "# synthetic\n" * 54 + prep.LD_SOURCE + "\n")
+                z.writestr("share/cmake-3.31/Modules/Platform/Windows-GNU.cmake", SYNTHETIC_WINDOWS_GNU)
             if not name.startswith("ninja"): z.writestr("LICENSE", b"synthetic-license")
         url = "https://github.com/synthetic/" + name
         urls[url] = data.getvalue()
@@ -512,7 +527,7 @@ def synthetic_binding_tree(root):
         for file in files:
             path = folder / file
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(("# synthetic\n" * 54 + prep.LD_SOURCE + "\n").encode() if file.endswith(".cmake") else b"not-executable")
+            path.write_bytes((SYNTHETIC_WINDOWS_GNU).encode() if file.endswith(".cmake") else b"not-executable")
         tools.append({"directory": "tools/" + name, "inventory": rt.inventory(folder)})
     lock = {"tools": tools}
     lock["runtime_bindings"] = prep.runtime_bindings(root, lock)
@@ -554,11 +569,11 @@ def test_exact_optional_ld_trace_requires_reviewed_module_position_and_args(tmp_
     env = rt.clean_environment([tmp_path / "tools/llvm/bin"], tmp_path, "tmp")
     env.pop("SystemRoot", None)  # no machine paths in this synthetic test
     guard = prep.optional_probe_guard(tmp_path, binding, env, tmp_path / "tools/cmake/bin")
-    row = {"cmd": "execute_process", "args": list(prep.LD_ARGS), "file": str(module), "line": 55}
+    row = {"cmd": "execute_process", "args": list(prep.LD_ARGS), "file": str(module), "line": 61}
     if fault == "args": row["args"][2] = "--version"
     elif fault == "relative-module": row["file"] = binding["module"]["file"]
     elif fault == "other-module": row["file"] = str(tmp_path / "other.cmake")
-    elif fault == "line": row["line"] = 54
+    elif fault == "line": row["line"] = 55
     elif fault == "module-hash": module.write_bytes(b"changed")
     elif fault == "relative-command": row["args"][1] = "cmake.exe"
     elif fault == "git": row["args"] = ["COMMAND", "git", "--version"]
@@ -1547,7 +1562,7 @@ def v3_mocked_acquisition(root, monkeypatch, clock=None, runner_fault=None, prof
             elif name.startswith("cmake"):
                 archive.writestr("cmake.exe", b"synthetic")
                 archive.writestr("LICENSE", b"synthetic license")
-                archive.writestr("share/cmake-3.31/Modules/Platform/Windows-GNU.cmake", "# synthetic\n" * 54 + prep.LD_SOURCE + "\n")
+                archive.writestr("share/cmake-3.31/Modules/Platform/Windows-GNU.cmake", SYNTHETIC_WINDOWS_GNU)
             else: archive.writestr("ninja.exe", b"synthetic")
         url = "https://github.com/synthetic/" + name
         urls[url] = data.getvalue()
@@ -2474,3 +2489,36 @@ def test_source_https_early_close_without_primary_preserves_first_of_two_errors(
         assert attempts == ["raw", "connection"]
         assert opener.connection is opener.response is opener.origin is None and response.closed
     assert len(requests) == 1 and connections[0].closed and bodies[0].reads == []
+
+@pytest.mark.parametrize("fault", [None, "old55", "shift60", "shift62", "duplicate", "args", "hash", "binding55"])
+def test_optional_probe_fixed61_independent_public_excerpt(tmp_path, fault):
+    lock = synthetic_binding_tree(tmp_path)
+    binding = lock["runtime_bindings"]["optional_ld_query"]
+    module = tmp_path / binding["module"]["file"]
+    lines = module.read_text().splitlines()
+    command = "execute_process(COMMAND ld -v OUTPUT_VARIABLE _help ERROR_VARIABLE _help)"
+    assert lines[54] == "" and lines[60] == command and lines.count(command) == 1
+    assert binding["line"] == 61
+    assert binding["args"] == ["COMMAND", "ld", "-v", "OUTPUT_VARIABLE", "_help", "ERROR_VARIABLE", "_help"]
+    if fault in {"old55", "shift60", "shift62"}:
+        target = {"old55": 54, "shift60": 59, "shift62": 61}[fault]
+        lines[60] = ""; lines[target] = command
+    elif fault == "duplicate": lines.append(command)
+    elif fault == "args": lines[60] = command.replace("ld -v", "ld --version")
+    elif fault == "hash": lines[0] = "# modified despite valid source line"
+    if fault not in {None, "binding55"}:
+        module.write_text("\n".join(lines) + "\n")
+        with pytest.raises(rt.BoundaryError): prep.runtime_bindings(tmp_path, lock)
+        return
+    env = rt.clean_environment([tmp_path / "tools/llvm/bin"], tmp_path, "tmp")
+    env.pop("SystemRoot", None)
+    if fault == "binding55":
+        binding["line"] = 55
+        with pytest.raises(rt.BoundaryError, match="optional_probe_binding"):
+            prep.optional_probe_guard(tmp_path, binding, env, tmp_path / "tools/cmake/bin")
+    else:
+        guard = prep.optional_probe_guard(tmp_path, binding, env, tmp_path / "tools/cmake/bin")
+        trace = tmp_path / "trace"
+        trace.write_text(json.dumps({"cmd": "execute_process", "file": str(module), "line": 61,
+            "args": ["COMMAND", "ld", "-v", "OUTPUT_VARIABLE", "_help", "ERROR_VARIABLE", "_help"]}) + "\n")
+        assert prep.audit_trace(trace, [], guard, tmp_path) == 1

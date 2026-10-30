@@ -2,7 +2,7 @@
 
 기준일: 2026-10-30. **문서·회의 관리와 화면 연결은 구현했으며, 무료 로컬 AI의 답변·요약 품질과 최종 운영 검증이 남아 있다.** 회의 지능형 관리 1차와 전체 포트폴리오 목표는 진행 중이다. 완료율을 숫자로 계산할 근거는 없다.
 
-사용자가 체감하는 핵심 미완료는 “회의를 넣으면 믿을 만한 요약과 답변이 나오는가”다. 관리 기능과 많은 회귀 검사가 있어도 이 부분을 대체하지 못한다. 로컬 모델의 내용 실패와 실행 환경 오류를 해결하는 과정에서 실행 통제·검토 절차도 지나치게 커졌다. 고정6개 질문의 기준/후보 실측은 끝났고 독립 AI 내용 수용은 두 모델 모두0/6으로 끝났다. 후보를 채택하지 않고 비교를 종료했다. 이미 종료한 비교는 반복하지 않는다. [정상 파일 모드 거절 결함](MEETINGS-SUMMARY-SOURCE-MODES.md)의 수정과 필수 CI를 마쳤다. 현재는 소스 다운로드의 [HTTPS 연결 재사용](MEETINGS-SUMMARY-SOURCE-TRANSPORT.md)을 구현·집중 검사·독립 변경 검토를 마쳤고 한 번의 게시와 필수 CI 확인을 진행한다. 일반 자연어 QA의 후속 해결책은 아직 확정되지 않았다.
+사용자가 체감하는 핵심 미완료는 “회의를 넣으면 믿을 만한 요약과 답변이 나오는가”다. 관리 기능과 많은 회귀 검사가 있어도 이 부분을 대체하지 못한다. 로컬 모델의 내용 실패와 실행 환경 오류를 해결하는 과정에서 실행 통제·검토 절차도 지나치게 커졌다. 고정6개 질문의 기준/후보 실측은 끝났고 독립 AI 내용 수용은 두 모델 모두0/6으로 끝났다. 후보를 채택하지 않고 비교를 종료했다. 이미 종료한 비교는 반복하지 않는다. [정상 파일 모드 거절 결함](MEETINGS-SUMMARY-SOURCE-MODES.md)의 수정과 필수 CI를 마쳤다. 현재는 소스 다운로드의 [HTTPS 연결 재사용](MEETINGS-SUMMARY-SOURCE-TRANSPORT.md)을 구현·집중 검사·독립 변경 검토·필수 CI를 마쳤고, 수정 소스의 실제 취득은 소스1,687개와 라이선스 단계를 마친 뒤 마지막 명세 검증에서 실패했다. [v7 결과](../experiments/results/meetings-summary-engine-v7-acquisition-v1.json)의 원본과 보존·종료를 확인했고 잘못된 고정 줄 위치를 실제61행으로 수정했다. 관련40개와 실제11KB 모듈의 메타데이터 검사를 통과했으며 [독립 변경 검토](MEETINGS-SUMMARY-OPTIONAL-PROBE.md)를 통과해 한 번의 게시와 필수 CI를 진행한다. 일반 자연어 QA의 후속 해결책은 아직 확정되지 않았다.
 
 ## 기능별 상태
 
@@ -27,7 +27,7 @@
 
 ## 현재 검증 근거
 
-- 게시 `3aa8dfb`의 [필수 CI](../experiments/results/meetings-summary-source-mode-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. Python 5,489개 통과·21개 제외, 각 브라우저 158개 통과·실패 0, 실제 Java HTTP·DB와 합성 회의 운영 검사 통과. 이 CI는 이후 HTTPS 연결 재사용 변경을 포함하지 않으며 새 변경의 CI를 따로 확인한다. 컴파일·새 요약 품질 검증은 아직 하지 않았다.
+- 게시 `234c363`의 [필수 CI](../experiments/results/meetings-summary-source-https-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. Python 5,524개 통과·21개 제외, 각 브라우저 158개 통과·실패 0, 실제 Java HTTP·DB와 합성 회의 운영 검사 통과. HTTPS 연결 재사용의 실제 원격 전송 시간과 전체 취득·컴파일·새 요약 품질은 아직 검증하지 않았다.
 - [실제 회의 관리 흐름](MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원](MEETINGS-RESTORE-VERIFICATION.md), [실제 QA 실패와 독립 AI 판정](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)은 서로 다른 증거다. CI 통과가 실제 AI 품질 수용을 뜻하지 않는다.
 - 사용자 직접 검수·공개 서비스 배포는 완료하지 않았다. 실패 후보는 기본 모델로 채택하지 않았다.
 

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "FAILED_CONSUMED_PRESERVED",
+  "source_commit": "234c3633f19d1852e570f062218bf3ef86691f4c",
+  "profile": "llvm-x64-sampled-50ms-1800s-v1",
+  "actual_cli_runs": 1,
+  "actual_cli_exit": 1,
+  "natural_cli_terminal_observed": true,
+  "cli_elapsed_seconds": 1555.922,
+  "wrapper_exit": 1,
+  "wrapper_elapsed_seconds": 1571.829,
+  "original_tool_session_closed": true,
+  "failure": {
+    "phase": "manifest",
+    "type": "BoundaryError",
+    "code": "optional_probe_source",
+    "supervisor_code": "tool_exit",
+    "deadline_failure": false,
+    "specific_source_cause": "Pinned CMake module command occurs once at line61; runtime binding incorrectly required empty line55."
+  },
+  "completed_phases": [
+    {
+      "duration_seconds": 27.186999999918044,
+      "end_seconds": 27.233999999938533,
+      "phase": "download-llvm",
+      "start_seconds": 0.0470000000204891
+    },
+    {
+      "duration_seconds": 113.42200000002049,
+      "end_seconds": 140.6720000000205,
+      "phase": "extract-llvm",
+      "start_seconds": 27.25
+    },
+    {
+      "duration_seconds": 22.344000000040978,
+      "end_seconds": 179.5,
+      "phase": "inventory-llvm",
+      "start_seconds": 157.15599999995902
+    },
+    {
+      "duration_seconds": 24.344000000040978,
+      "end_seconds": 220.2029999999795,
+      "phase": "download-cmake",
+      "start_seconds": 195.85899999993853
+    },
+    {
+      "duration_seconds": 124.81199999991804,
+      "end_seconds": 362.35899999993853,
+      "phase": "extract-cmake",
+      "start_seconds": 237.5470000000205
+    },
+    {
+      "duration_seconds": 75.45400000002701,
+      "end_seconds": 486.68799999996554,
+      "phase": "inventory-cmake",
+      "start_seconds": 411.23399999993853
+    },
+    {
+      "duration_seconds": 42.76500000001397,
+      "end_seconds": 570.155999999959,
+      "phase": "download-ninja",
+      "start_seconds": 527.390999999945
+    },
+    {
+      "duration_seconds": 42.01599999994505,
+      "end_seconds": 653.5939999999246,
+      "phase": "extract-ninja",
+      "start_seconds": 611.5779999999795
+    },
+    {
+      "duration_seconds": 38.40600000007544,
+      "end_seconds": 735.375,
+      "phase": "inventory-ninja",
+      "start_seconds": 696.9689999999246
+    },
+    {
+      "duration_seconds": 38.10900000005495,
+      "end_seconds": 812.0470000000205,
+      "phase": "source-metadata",
+      "start_seconds": 773.9379999999655
+    },
+    {
+      "duration_seconds": 530.9689999999246,
+      "end_seconds": 1379.890999999945,
+      "phase": "sources",
+      "start_seconds": 848.9220000000205
+    },
+    {
+      "duration_seconds": 42.96900000004098,
+      "end_seconds": 1466.2029999999795,
+      "phase": "licenses",
+      "start_seconds": 1423.2339999999385
+    }
+  ],
+  "source_stage": {
+    "file_count": 1687,
+    "bytes": 33232611,
+    "phase_seconds": 530.969,
+    "source_of_counts": "preserved inventory",
+    "phase_time_is_not_isolated_network_time": true
+  },
+  "last_recorded_http_body_bytes": 252275373,
+  "last_body_observation": "manifest/start; not independently claimed final total",
+  "preservation": {
+    "frozen_refs_verified": 389,
+    "payload_files": 15675,
+    "payload_bytes": 841755427,
+    "known_outer_identities_absent": 9,
+    "known_inner_identities_absent": 6,
+    "identity_lists_may_overlap": true,
+    "original_failures_and_once_preserved": true,
+    "parent_did_not_repeat_payload_hashing": true,
+    "parent_receipt_sha256": "4c226c0c646adb9c64d7fb6168b074e9a25686598b7175de9dcdda3e334b70ce",
+    "hold_released": true
+  },
+  "retry_count": 0,
+  "companion_created": false,
+  "build_native_model_runs": 0,
+  "AI_quality_evaluated": false,
+  "limitations": [
+    "All source and license stages completed, but acquisition as a whole failed before manifest completion.",
+    "Phase observations are one run; no causal connection-reuse speedup estimate.",
+    "No build, grammar engine, summary content quality or public deployment success."
+  ],
+  "diagnosis": {
+    "module_sha256": "edc2abe122ba69089d9ff23a15916e474e3309bc64d3ccf5f7c04451abe1b7ab",
+    "module_bytes": 11218,
+    "actual_line": 61,
+    "incorrect_expected_line": 55,
+    "exact_command_occurrences": 1,
+    "receipt_sha256": "1ad4e65f23cb0691e2af1bd4fe8d9855e7bb9e3d95113be80440837037a806d3",
+    "parent_receipt_sha256": "a1bb8b1dbd66306614fd27467b3c8989881899dabac9e9127bf8823b59e11e49",
+    "parent_refs_verified": 12,
+    "no_native_execution": true
+  }
+}
