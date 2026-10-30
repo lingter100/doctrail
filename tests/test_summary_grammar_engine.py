@@ -611,6 +611,115 @@ def test_temp_scope_fails_closed_before_any_process(tmp_path, monkeypatch, fault
         with pytest.raises(rt.BoundaryError): rt.validate_temporary(tmp_path, env)
 
 
+@pytest.mark.parametrize("missing", [False, True])
+def test_metadata_safe_path_one_nonfollow_read_per_component_without_cache(tmp_path, monkeypatch, missing):
+    target = tmp_path / "nested" / "leaf"
+    calls, resolves = [], []
+    def snapshot(path):
+        calls.append(path)
+        if missing and path == target: raise FileNotFoundError("not created yet")
+        return SimpleNamespace(st_mode=stat.S_IFREG if path == target else stat.S_IFDIR)
+    def forbidden(*args, **kwargs): raise AssertionError("redundant metadata lookup")
+    def resolve(path):
+        resolves.append(path)
+        return path
+    monkeypatch.setattr(Path, "lstat", snapshot)
+    monkeypatch.setattr(Path, "exists", forbidden)
+    monkeypatch.setattr(Path, "is_symlink", forbidden)
+    monkeypatch.setattr(Path, "resolve", resolve)
+    for _ in range(2): assert rt.safe_path(tmp_path, "nested/leaf") == target
+    assert calls == [tmp_path, target.parent, target] * 2
+    assert resolves == [target, tmp_path] * 2
+
+
+@pytest.mark.parametrize("location", ["root", "ancestor", "leaf"])
+@pytest.mark.parametrize("fault", ["symlink", "reparse", "permission", "io"])
+def test_metadata_safe_path_rechecks_replaced_components_and_propagates_errors(tmp_path, monkeypatch, location, fault):
+    target = tmp_path / "nested" / "leaf"
+    changed = {"root": tmp_path, "ancestor": target.parent, "leaf": target}[location]
+    replaced = False
+    def snapshot(path):
+        if replaced and path == changed:
+            if fault == "permission": raise PermissionError("synthetic")
+            if fault == "io": raise OSError("synthetic")
+            return SimpleNamespace(st_mode=stat.S_IFLNK if fault == "symlink" else stat.S_IFDIR,
+                                   st_file_attributes=1024 if fault == "reparse" else 0)
+        return SimpleNamespace(st_mode=stat.S_IFREG if path == target else stat.S_IFDIR)
+    monkeypatch.setattr(Path, "lstat", snapshot)
+    monkeypatch.setattr(Path, "resolve", lambda path: path)
+    assert rt.safe_path(tmp_path, "nested/leaf") == target
+    replaced = True
+    expected = PermissionError if fault == "permission" else OSError if fault == "io" else rt.BoundaryError
+    with pytest.raises(expected): rt.safe_path(tmp_path, "nested/leaf")
+
+
+@pytest.mark.parametrize("operation", ["disk", "scan", "log"])
+def test_metadata_kind_and_size_share_one_nonfollow_read(tmp_path, monkeypatch, operation):
+    leaf = tmp_path / "acquisition-supervision.stdout"
+    leaf.write_bytes(b"abc")
+    budget = FakeBudget(tmp_path)
+    budget.logs = {leaf.name}
+    snapshots, checked, safe_calls = [], [], []
+    original_stat = Path.stat
+    def snapshot(path, *, follow_symlinks=True):
+        assert follow_symlinks is False
+        snapshots.append(path)
+        return original_stat(path, follow_symlinks=False)
+    def safe(root, name):
+        safe_calls.append(name)
+        return root / name
+    monkeypatch.setattr(Path, "stat", snapshot)
+    monkeypatch.setattr(Path, "rglob", lambda path, pattern: iter([leaf]))
+    monkeypatch.setattr(rt, "safe_path", safe)
+    monkeypatch.setattr(prep, "safe_path", safe)
+    monkeypatch.setattr(budget, "check", lambda: checked.append("check"))
+    if operation == "disk":
+        assert rt.disk_bytes(tmp_path, checked.append) == 3
+        assert checked == ["start", "before_entry", "after_entry", "complete"]
+    elif operation == "scan":
+        assert budget.scan() == 3
+        assert checked == ["check"] * 4
+    else:
+        budget.log_growth()
+        assert budget.total == 3
+    assert snapshots == [leaf] and safe_calls == [leaf.name]
+
+
+@pytest.mark.parametrize("operation", ["disk", "scan", "log"])
+@pytest.mark.parametrize("fault", ["permission", "io", "disappeared", "symlink", "reparse"])
+def test_metadata_entry_replacement_or_loss_after_path_check_fails_closed(tmp_path, monkeypatch, operation, fault):
+    leaf = tmp_path / "acquisition-supervision.stdout"
+    leaf.write_bytes(b"abc")
+    budget = FakeBudget(tmp_path)
+    budget.logs = {leaf.name}
+    original_safe, original_lstat = rt.safe_path, Path.lstat
+    checked = False
+    def safe(root, name):
+        nonlocal checked
+        result = original_safe(root, name)
+        checked = True
+        return result
+    def changed(path):
+        if checked and path == leaf:
+            if fault == "permission": raise PermissionError("synthetic")
+            if fault == "io": raise OSError("synthetic")
+            if fault == "disappeared": raise FileNotFoundError("synthetic")
+            return SimpleNamespace(st_mode=stat.S_IFLNK if fault == "symlink" else stat.S_IFREG,
+                                   st_file_attributes=1024 if fault == "reparse" else 0, st_size=3)
+        return original_lstat(path)
+    monkeypatch.setattr(rt, "safe_path", safe)
+    monkeypatch.setattr(prep, "safe_path", safe)
+    monkeypatch.setattr(Path, "lstat", changed)
+    monkeypatch.setattr(Path, "rglob", lambda path, pattern: iter([leaf]))
+    monkeypatch.setattr(budget, "check", lambda: None)
+    expected = (OSError, rt.BoundaryError)
+    with pytest.raises(expected):
+        if operation == "disk": rt.disk_bytes(tmp_path)
+        elif operation == "scan": budget.scan()
+        else: budget.log_growth()
+    assert checked
+
+
 def test_worker_many_chunk_writes_have_constant_full_scan_count(tmp_path):
     budget = FakeBudget(tmp_path)
     with budget.phase("sources"):

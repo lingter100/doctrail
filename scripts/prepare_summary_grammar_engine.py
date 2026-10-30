@@ -122,11 +122,14 @@ class Budget:
         for name in self.logs:
             path = safe_path(self.root, name)
             try:
-                size = path.stat().st_size
+                attrs = path.lstat()
             except FileNotFoundError:
                 require(name not in self.files, "ledger_file_missing")
                 continue
-            require(path.is_file(), "log_type")
+            require(not stat.S_ISLNK(attrs.st_mode) and not getattr(attrs, "st_file_attributes", 0) & 1024,
+                    "reparse_path")
+            require(stat.S_ISREG(attrs.st_mode), "log_type")
+            size = attrs.st_size
             require(size >= self.files.get(name, 0) and size <= 8 * 1024**2, "log_budget")
             self.total += size - self.files.get(name, 0)
             self.files[name] = size
@@ -143,8 +146,11 @@ class Budget:
                 self.check()
                 name = path.relative_to(self.root).as_posix()
                 safe_path(self.root, name)
-                if path.is_file():
-                    observed[name] = path.stat().st_size
+                attrs = path.lstat()
+                require(not stat.S_ISLNK(attrs.st_mode) and not getattr(attrs, "st_file_attributes", 0) & 1024,
+                        "reparse_path")
+                if stat.S_ISREG(attrs.st_mode):
+                    observed[name] = attrs.st_size
                 self.scan_entries += 1
                 self.check()
             self.check()

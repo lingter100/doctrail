@@ -70,10 +70,12 @@ def safe_path(root, name):
     for part in (None, *rel.parts):
         if part is not None:
             current /= part
-        if current.exists() or current.is_symlink():
+        try:
             attrs = current.lstat()
-            require(not stat.S_ISLNK(attrs.st_mode) and not getattr(attrs, "st_file_attributes", 0) & 1024,
-                    "reparse_path")
+        except FileNotFoundError:
+            continue
+        require(not stat.S_ISLNK(attrs.st_mode) and not getattr(attrs, "st_file_attributes", 0) & 1024,
+                "reparse_path")
     require(current.resolve().is_relative_to(root.resolve()), "path_escape")
     return current
 
@@ -96,8 +98,11 @@ def disk_bytes(root, checkpoint=None):
     for p in Path(root).rglob("*"):
         check("before_entry")
         safe_path(root, p.relative_to(root).as_posix())
-        if p.is_file():
-            total += p.stat().st_size
+        attrs = p.lstat()
+        require(not stat.S_ISLNK(attrs.st_mode) and not getattr(attrs, "st_file_attributes", 0) & 1024,
+                "reparse_path")
+        if stat.S_ISREG(attrs.st_mode):
+            total += attrs.st_size
             require(total <= DISK, "disk_budget")
         check("after_entry")
     check("complete")
