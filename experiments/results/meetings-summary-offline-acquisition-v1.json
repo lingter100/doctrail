@@ -1,0 +1,57 @@
+{
+  "schema": "doctrail-summary-engine-offline-result-v1",
+  "status": "ACTUAL_OFFLINE_VERIFICATION_SUCCEEDED",
+  "evidence_kind": "actual_local_tool_preparation_not_model_quality",
+  "source_commit": "0b27d1fe11802b39af02453b18913623df2deb45",
+  "operation": "verify-closed",
+  "origin": "verified_copy_from_failed_acquisition",
+  "attempts": 1,
+  "result": {
+    "cli_exit_code": 0,
+    "natural_cli_terminal_observed": true,
+    "cli_seconds": 783.453,
+    "wrapper_exit_code": 0,
+    "wrapper_seconds": 800.094,
+    "limits_pass": true,
+    "post_terminal_known_process_identities_absent": 10
+  },
+  "payload": {
+    "input_files": 15675,
+    "input_bytes": 845711438,
+    "copied_files": 15668,
+    "copied_bytes": 841722163,
+    "new_files": 15675,
+    "new_bytes": 856610003,
+    "verification": "Fixed original file set, SHA256, Git blob SHA1 and path/stat identity checks; independent copy; saved final inventory comparison.",
+    "archive_extraction_repeated": false,
+    "parent_repeated_payload_body_hash": false
+  },
+  "preservation": {
+    "old_failed_run_and_consumed_once_unchanged": true,
+    "current_frozen_references_exact": 520,
+    "historical_references_byte_exact": 460,
+    "historical_external_runtime_exception": 1,
+    "exception": "Base Python executable bytes differed from the old record. Current valid signed interpreter was separately bound for this new run; historical binary bytes were unavailable. Other four runtime files matched."
+  },
+  "scope": {
+    "new_network_requests": 0,
+    "new_network_bytes": 0,
+    "build_runs": 0,
+    "native_engine_runs": 0,
+    "model_runs": 0,
+    "paid_service_calls": 0,
+    "human_reviews": 0,
+    "external_acceptance_at_executor_closeout": "pending"
+  },
+  "limits": [
+    "This verifies prepared tool files and successful new CLI completion, not compilation or grammar acceptance.",
+    "No claim of improved summary/answer quality.",
+    "A single different workflow is not a controlled speedup comparison.",
+    "Original payload preservation relies on the bounded worker's checks and read-only behavior plus fixed metadata verification; no duplicate post-terminal full payload rehash."
+  ],
+  "evidence": {
+    "final_sha256": "d2e2cfaf5db59bed755a9841996258a90e787072e3b36b8c595ef6f232ac287f",
+    "parent_closeout_sha256": "2e9708e8437a901db9cb1060141a64b7fddb59688e40bfe16f806630da5f21e4"
+  },
+  "next": "Independent external acceptance, then separately assigned build and model-free grammar validation."
+}

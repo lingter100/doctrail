@@ -1,0 +1,92 @@
+{
+  "schema": "doctrail-summary-build-diagnostics-v1",
+  "date": "2026-10-31",
+  "status": "NON_ASCII_PATH_CONVERSION_FAILURE_REPRODUCED_IN_PINNED_CMAKE",
+  "evidence_type": "actual_local_native_diagnostics_not_model_evaluation",
+  "ninja_version": {
+    "natural_exit": 0,
+    "seconds": 0.109,
+    "stdout": "1.12.1",
+    "werfault_observed": false
+  },
+  "ninja_codepage": {
+    "natural_exit": 0,
+    "seconds": 0.093,
+    "stdout": "Build file encoding: UTF-8",
+    "werfault_observed": false,
+    "raw_version_label_preserved_in_original": true
+  },
+  "minimal_cmake_configure": {
+    "source": "Exact original CMakeLists.txt first11lines through project(C CXX)",
+    "fixed_total_seconds": 30,
+    "cleanup_reserve_seconds": 5,
+    "active_seconds": 0.375,
+    "total_seconds": 0.3910000000614673,
+    "first_error": "BoundaryError:unexpected_child_executable",
+    "werfault_target": "Observed root CMake identity of this diagnostic",
+    "natural_root_exit": null,
+    "cleanup_induced_exit": 15,
+    "known_process_identities_absent": 4,
+    "cleanup_errors": [
+      "BoundaryError"
+    ],
+    "saved_frozen_refs_equal": 600,
+    "compile_link_test_possible_by_design": true,
+    "compiler_process_observed": false,
+    "engine_full_build": false
+  },
+  "interpretation": [
+    "Two successful standalone Ninja commands do not prove original configure behavior.",
+    "The reduced configure fault target is CMake; the original failed build target remains unknown.",
+    "The trace reached compiler-path conversion but buffering and guard cleanup prevent an exact crash-location claim.",
+    "No production fix, engine build, native grammar validation or model quality acceptance follows from these diagnostics.",
+    "With length and separators held equal, ASCII conversion completed while the Hangul conversion entered Windows error reporting. The underlying exception/library cause remains unknown; no repair has yet been executed.",
+    "Legacy slash conversion matched all four exact canonical compiler path strings. A dedicated derived-CMake build driver is being implemented; no new engine build has run."
+  ],
+  "preservation": {
+    "failed_roots_unchanged": true,
+    "original_guard_unchanged": true,
+    "payload_wide_rescan": false
+  },
+  "reviews": {
+    "design": "gpt-6-astra xhigh and one limited gpt-6-astra max comparison",
+    "implementation": "gpt-6-astra high",
+    "human_reviews": 0
+  },
+  "service_adoption": false,
+  "paid_use": false,
+  "public_deployment": false,
+  "path_conversion": {
+    "mode": "One cmake -P process; ASCII control then original Hangul path",
+    "path_characters_each": 124,
+    "only_difference": "Six Hangul characters replaced with six ASCII characters",
+    "same_separators_and_remaining_characters": true,
+    "fixed_total_seconds": 10,
+    "cleanup_reserve_seconds": 5,
+    "total_seconds": 0.281,
+    "ascii_after_marker": true,
+    "hangul_before_marker": true,
+    "hangul_after_marker": false,
+    "werfault_target": "Observed root CMake identity of this diagnostic",
+    "natural_root_exit": null,
+    "cleanup_induced_exit": 15,
+    "known_process_identities_absent": 3,
+    "cleanup_errors": [
+      "BoundaryError"
+    ],
+    "saved_frozen_refs_equal": 581,
+    "compiler_or_engine_execution": false
+  },
+  "legacy_conversion": {
+    "mode": "One cmake -P process; file(TO_CMAKE_PATH) for C/CXX ASCII/Hangul canonical literals",
+    "exact_expected_string_assertions": 4,
+    "natural_exit": 0,
+    "seconds": 0.094,
+    "werfault_observed": false,
+    "known_process_identities_absent": 2,
+    "cleanup_errors": [],
+    "saved_frozen_refs_equal": 581,
+    "general_normalization_equivalence": false,
+    "engine_build_success": false
+  }
+}

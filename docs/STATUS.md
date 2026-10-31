@@ -2,20 +2,33 @@
 
 기준일: 2026-10-31. 사용자 지시 **“완성까지해”**로 재개했으며 goal과 기존 doctrail 자동 후속 실행을 ACTIVE로 확인했다. 2026-10-30의 일시정지는 과거 기록이다. 회의 지능형 관리 1차와 전체 포트폴리오는 미완료다.
 
+**현재 차단점과 진행:** [첫 실제 build](../experiments/results/meetings-summary-engine-build-v1.json)는 구성 단계에서 WerFault.exe 허용 밖 검출로 실패했다. 세션12389 자연 종료1·전체85.266초, 명시적 compile 단계와 build manifest는 없었다. 원래 내부 정리 오류 `[BoundaryError]`와 중간 단계 표시 오류를 보존했다. 이후 [작은 진단](../experiments/results/meetings-summary-build-diagnostics-v1.json)에서 Ninja 두 명령은 통과했지만 최소 CMake 구성은0.391초 뒤 같은 보호 절차로 종료됐다. 이번에는 WerFault 대상이 해당 CMake 자체임을 확인했다. 자연 오류 코드는 없고 정리 후 종료15이며, 알려진4신원 부재·정리 오류 기록은 보존했다. 마지막 trace는 컴파일러 경로 변환까지 도달했다. 다음은 ASCII와 실제 한글 경로 문자열에 같은 변환만 수행하는 단일 작은 스크립트 진단이다. 아직 경로 원인 확정이나 소스 수정·빌드 성공을 주장하지 않는다.
+
+**경로 진단 결과:** 같은124문자 경로에서 한글6글자만 ASCII6글자로 바꾼 대조 문자열은 변환됐고, 실제 한글 경로를 변환할 때 CMake에 오류가 발생했다. 대체 연산은 C/C++ 각각 영문·한글 네 경로에서 기대 문자열과 일치하고 자연 종료0·0.094초였다. [제한된 수정안](MEETINGS-SUMMARY-PATH-COMPATIBILITY.md)을 별도 CMake 사본에 연결하는 전용 실행기를 구현 중이다. 원본 BUNDLE·취득·실패 디렉터리를 바꾸지 않는다. 내부 예외 코드·전체 빌드 성공은 아직 미확인이다.
+
+**QA 개발 자료:** [공개 OpenSearch 자료와 새 사례2개](MEETINGS-FREE-QA-REPRESENTATION-DEVELOPMENT.md)는 독립 Astra xhigh 내용 검토를 통과했다. 사용자 검수는0이다. 고정 참고 답변을 줄이지 않고 현재 tokenizer·prompt에서 길이를 측정하는 별도 실행기를 구현 중이다. 실제 기준 서버를 한 번 로딩하고 템플릿·토큰 처리만7회 하며 답변 생성은 하지 않는 설계다. 아직 토큰 측정은 실행하지 않았다. 검색을 건너뛰는 개발 진단이며 닫힌 기존6질문은 다시 열지 않는다.
+
+**완료한 준비:** 새 오프라인 검증·전체 종료/보존 확인·독립 외부 수용을 마쳤다. [실제 결과](../experiments/results/meetings-summary-offline-acquisition-v1.json)는 CLI783.453초·종료0,15,668파일 검증/복사다. 별도 수용 기록 SHA602340b5…와 실제 acquisition 명세 SHA70cb4210…는 다른 역할이다. 공유 build runner900초·정리5초·병렬2를 유지했고 전체 CLI 시간과 pre/post 검증 범위는 구분한다.
+
 ## 현재 작업
 
-요약 엔진 도구를 매번 다시 다운로드하지 않도록, **실패 원본을 보존한 별도 오프라인 검증 기능 `verify-closed`**를 구현한다. 실패 원본의 고정 목록·해시·blob·라이선스를 새 작업공간에서 검증·복사하고, 새 정상 종료와 별도의 수용 기록을 얻어야 기존 빌드로 연결한다. 실패한 raw 명세를 성공 명세로 바꾸지 않는다.
+새 호환 빌드 실행기와 QA 표현 길이 측정기는 구현·집중 검사·독립 소스 검토를 마쳤다. 호환 실행기는 고유56개, QA 측정기는 고유30개 가상 검사를 여러 실행에서 확인했다. 각각 최종 결과 저장의 용량 경계와 최초 오류 보존 문제를 발견·수정했고 원래 실패도 남겼다. 새 공개 파일4개는 소유권 반환 후 고정했으며 사용자 계정 게시·정확한 필수 CI 다음 실제 실행으로 이어간다. 이 단계에는 실제 새 빌드·토큰 측정·새 모델 생성이 없다.
 
-재개 시 준비 스크립트에는 347줄의 부분 변경이 있었고 검사 파일은 게시 HEAD와 같았다. 현재 구현자는 부분 작업과 기존 원본을 보존한 뒤 CLI·외부 수용·runtime origin 연결을 완성했다. [구현·검사 결과](../experiments/results/meetings-summary-offline-implementation-v1.json)는 81통과 후 Windows hardlink fixture 준비 실패1건을 수정해 해당1개가 통과한 고유82개다. 한 번의82개 전체 통과로 합치지 않는다. Ruff와 독립 Astra xhigh 검토(차단0·권고0)를 마쳤고 세 소스는 검사 사본과 같다. **실제 오프라인 실행·컴파일·모델 품질은 아직 미검증이다.**
+요약 엔진 도구를 매번 다시 다운로드하지 않도록, **실패 원본을 보존한 별도 오프라인 검증 기능 `verify-closed`**를 구현·검토·게시하고 해당 커밋의 필수 CI와 실제 검증을 마쳤다. 실패 원본의 고정 목록·해시·blob·라이선스를 새 작업공간에서 검증·복사한 새 실행이 정상 종료했고, 별도 외부 수용 기록까지 확인해 기존 빌드로 연결한다. 이전 실패 기록은 그대로다.
+
+재개 시 준비 스크립트에는347줄의 부분 변경이 있었으며 원본을 보존하고 CLI·외부 수용·runtime origin 연결을 완성했다. [집중 검사](../experiments/results/meetings-summary-offline-implementation-v1.json)는81통과 후 Windows hardlink fixture 준비 실패1건을 수정해 해당1개가 통과한 고유82개다. 단일82개 전체 통과로 합치지 않는다. Ruff·독립 Astra xhigh 검토·게시 후 필수 CI와 실제 오프라인 검증을 별도로 마쳤다. **컴파일·native 문법 실행·새 생성 요약 품질은 아직 미검증이다.**
 
 - 담당: 도구가 수락한 `gpt-6-astra high` 에이전트 `offline_resume_impl`.
 - 공개 소유 파일: `scripts/prepare_summary_grammar_engine.py`, `tests/test_summary_grammar_engine.py`, `tools/summary_grammar/runtime.py` 세 개. 오프라인 원본과 새 실행 기록의 직접 결합을 위해 runtime의 선택적 origin 전달만 추가 배정했다. 기존 online·legacy·build 동작은 유지한다. 부모는 문서·공개 결과·Git 게시 담당이다.
 - 로컬 구현 기록: `.local/meeting-summary-engine-offline-resume-v1`; 중단 전 사본은 `.local/meeting-summary-engine-offline-implementation-v1`에 보존한다.
 - 수용된 설계: `.local/meeting-summary-engine-after-v8-diagnosis-v1/DIAGNOSIS.md`. 새로운 설계·승인 문서 사슬을 만들지 않고 이 범위에서 마무리한다.
-- 현재 source3는 검토 후 동결했다. 같은 구현자는 별도 `.local/meeting-summary-engine-offline-observer-preparation-v1`에서 기존 외부 관찰 도구의 offline 후보·작은 합성 검사만 준비한다. 미래 실제 참조는 placeholder이며 실제 input binding·WORK·once는 만들지 않는다. 실제 과거 payload 전체 조사·복사, 다운로드, 컴파일, native·모델 실행도 아직 하지 않는다.
-- 다음: 집중 검사·독립 변경 검토 → 검증된 소스와 대기 문서를 한 번에 게시 → 해당 소스의 필수 CI → 별도 실제 오프라인 검증 → 수용 후 빌드·문법 엔진 확인.
+- 현재 source3는 검토·게시 후 동결했다. `.local/meeting-summary-engine-offline-observer-preparation-v1`의 외부 관찰 도구 후보3개는 합성46개·Ruff와 독립 Astra xhigh 검토(차단0·권고0)를 통과했다. import 정렬·설명 수정 후 관련3개만 확인했으며 고유49개로 합산하지 않는다.
+- `.local/meeting-summary-engine-offline-v1-prep`의 참조를 연결한 뒤 새 WORK·OUT에서 실제 검증1회를 수행했다. 원본 실패·once는 유지했고 새 실행의 once는 소모됐다. 기존1800초/정리5초와 자원 한도 안에서 종료했다.
+- 준비 중 base Python 실행 파일1개의 SHA가 과거5640e9be에서 현재f8b45d63으로 달라진 것을 확인했다. 현재 파일은 유효한 OpenAI 서명·동일3.12.14이며 나머지 runtime4개는 같았다. 과거 기대값과 차이를 보존하고 새 실행에 현재값을 명시적으로 연결한다. 교체 원인·시점과 과거 실행 파일 바이트의 보존은 미확정이므로 과거461개 모두가 현재도 동일하다고 주장하지 않는다. 실패 payload·기존 실행 기록은 변경하지 않는다.
+- 최소 입력 연결 FINAL `ecc98914…`·EXECUTION `a161b864…`를 부모가47직접 참조·소스15Git·현재runtime5·목록90·이전461참조의460바이트 일치/외부runtime 예외1로 확인했다. 새 오프라인 실행 **세션33443은 종료0**이며 실제 CLI는 자연 종료0·783.453초, wrapper는800.094초였다. 최종 파일 보존 확인과 별도 Astra xhigh의 외부 수용도 완료했고 부모가 결과를 확인했다. 실패 원본은 보존했다. 뒤이은 첫 빌드는 위에 기록한 별도 실패로 남는다.
+- 다음: 최소 구성 진단으로 빌드 오류 위치 확인 → 근거 있는 수정과 별도 빌드 검증 → native 문법 엔진 검사 → 실제 모델 요약 품질·서비스 연결 확인. QA는 새 개발 자료의 참고 답변 적합성 검토 후 표현 길이를 진단한다. 이미 통과한 집중 검사·CI·오프라인 실행은 반복하지 않는다.
 
-## 마지막 실제 실행과 확인된 원인 범위
+## 보존한 v8 실패와 원인 범위
 
 [v8 실측](../experiments/results/meetings-summary-engine-v8-acquisition-v1.json)은 **전체 취득 실패**다. 소스 1,687개를 준비하고 raw 명세를 썼지만 최종 acquisition.json을 게시하지 못했다. 내부 worker는 정상 종료했고, 외부 CLI는 시간 경계에서 강제 종료15·자연 종료 미관측으로 남았다. 전체 wrapper 시간은1810.985초다.
 
@@ -36,13 +49,17 @@
 
 [최신 QA 비교](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)는 기준·후보 모두 독립 AI 내용 수용 **0/6**으로 종료됐다. 작은 개발 비교이며 일반 정확도나 사람 검수가 아니다. 입력·출력 한도 거절과 정상 종료 후 의미 오류를 분리한다. 원문 중복과 인용문 출력은 이미 줄였으므로 길이 변경만으로 내용 문제가 해결된다고 가정하지 않는다. 같은6개·닫힌C1~C5/v7 재튜닝·자동 모델/프롬프트 탐색을 하지 않는다. 새로운 QA 개입의 근거는 별도로 필요하며 요약 엔진 작업을 기다리게 하지 않는다.
 
+별도 도구가 수락한 Astra xhigh `oct31_phase1_gaps`가 읽기 감사로 필수 관리 화면의 새 누락을 찾지 못했고, 문법 실행과 실제 생성 요약·QA 품질 수용을 분리했다. 현재 엔진과 병행하는 일은 원격 공개 출처 조사뿐이다. 새 개발 자료에서 충분한 답변/정당한 보류를 현재 형식으로 표현할 수 있는지 확인하려는 진단이며 새 합격 평가·모델 후보가 아니다. 최대3계열 조사 중 OpenSearch TSC만 조건부 후보로 남았고, 판본·라이선스·시점 호환·기록된 기존/예약 계열 비중복은 아직 채택 전이다. 미해결 논의를 실제 충돌로 꾸미지 않는다. 실제 자료 작성·토큰 계수·모델 실행은 없으며 tokenizer 확인은 native 서버가 필요한 별도 직렬 작업이다.
+
 ## Git와 검증 상태
 
-마지막 게시 소스는 `0a9819e26f4320dedc76aa3d219b52a23a5936b8`, 브랜치는 `feat/meeting-intelligence`, [PR14](https://github.com/lingter100/doctrail/pull/14)는 마지막 확인 시 draft다. 사용자 `lingter100`의 author/committer로 게시했다. 새 부분 구현은 미커밋이며 이 CI에 포함되지 않는다.
+마지막 게시 소스는 `0b27d1fe11802b39af02453b18913623df2deb45`, 브랜치는 `feat/meeting-intelligence`, [PR14](https://github.com/lingter100/doctrail/pull/14)는 draft다. 원격 author/committer 모두 사용자 `lingter100`을 확인했고 구현·결과·문서15개가 커밋과 같았다.
+
+[현재 필수 CI 기록](../experiments/results/meetings-summary-offline-ci-v1.json): push41170253545·PR41170256330의 backend/web/java-service 모두 통과했다. Python5598통과·21제외(push193.69초/PR265.65초), 각 브라우저158통과·실패/인프라 오류/누락0, 실제 Java HTTP/DB11개와 합성 회의 운영 통과다. 같은 watcher75477·25211이 종료0으로 닫혔다. 실제 오프라인 payload·컴파일·AI 의미 품질의 검증은 아니다.
 
 [0a 필수 CI 기록](../experiments/results/meetings-summary-optional-probe-ci-v1.json): push41021278586·PR41021284378의 backend/web/java-service 모두 통과. Python5532통과·21제외, 각 브라우저158통과, 실제 Java HTTP/DB11개와 합성 회의 운영 검사를 구분한다. 같은 관찰 세션은 종료됐고 통과 검사를 반복하지 않는다. CI 통과는 AI 내용 품질 증명이 아니다.
 
-대기 중인 변경은 현재 구현, v8 실제 실패 결과, 이전 CI 결과, README·시연·진행·결정·기여 문서다. 검증 후 명시한 파일만 묶어 게시한다. `data/meetings/`, `.local`, 모델·DB·개인 자료는 Git에 넣지 않는다. 미검증 회의1차를 main에 통합하지 않는다.
+현재 CI 결과와 이후 진행 기록은 다음 실질 변경과 함께 게시한다. 문서만을 위한 반복 push·CI는 하지 않는다. `data/meetings/`, `.local`, 모델·DB·개인 자료는 Git에 넣지 않는다. 미검증 회의1차를 main에 통합하지 않는다.
 
 ## 실행과 보존 경계
 

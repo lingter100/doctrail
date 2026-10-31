@@ -15,7 +15,7 @@ React·TypeScript·Vite 화면, Java 21·Spring Boot 서비스, Python 데이터
 
 **회의 지능형 관리 1차와 전체 포트폴리오는 미완료다.** 관리·검색 기능의 동작과 AI 내용 품질을 구분한다. 실제 로컬 요약·답변은 연결했지만 정보 누락·근거와 주장의 불일치·잘못된 답변 보류가 남았다. 최근 두 모델의 같은 6문항 개발 비교는 독립 AI 내용 수용이 모두 **0/6**이어서 후보를 채택하지 않았다. 이 작은 비교를 일반 정확도나 사람 평가로 해석하지 않는다.
 
-게시 소스 `0a9819e`의 push·PR 필수 CI가 모두 통과했다. [회귀 기록](experiments/results/meetings-summary-optional-probe-ci-v1.json)은 Python 5,532개 통과·21개 제외, 각 브라우저 158개 통과, 실제 Java HTTP·DB 검사와 합성 회의 운영 검사를 구분한다. 합성 모델 응답을 사용한 화면 검사는 실제 AI 품질의 증거가 아니다.
+게시 소스 `0b27d1f`의 push·PR 필수 CI가 모두 통과했다. [회귀 기록](experiments/results/meetings-summary-offline-ci-v1.json)은 Python 5,598개 통과·21개 제외, 각 브라우저 158개 통과, 실제 Java HTTP·DB 11개와 합성 회의 운영 검사를 구분한다. 합성 모델 응답을 사용한 화면 검사는 실제 AI 품질의 증거가 아니다.
 
 ## 프로젝트에서 설명할 핵심
 
@@ -23,7 +23,7 @@ React·TypeScript·Vite 화면, Java 21·Spring Boot 서비스, Python 데이터
 - **인용 일치와 답변의 충분성을 따로 평가한다.** [최신 로컬 QA 결과](docs/MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)에 자동 거절·내용 실패·평가 분모를 남겼다. 실패한 출력이나 평가 조건을 성공처럼 고치지 않는다.
 - **문서가 바뀌고 권한이 달라져도 근거를 확인한다.** [회의 편집 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원 검증](docs/MEETINGS-RESTORE-VERIFICATION.md)은 실제 저장·권한·충돌 처리와 모델 품질을 구분한다.
 
-현재는 로컬 요약 도구의 실제 실행 환경을 검증하고 있다. [마지막 취득 실패](experiments/results/meetings-summary-engine-v7-acquisition-v1.json)에서 발견한 [고정 CMake 위치 오류](docs/MEETINGS-SUMMARY-OPTIONAL-PROBE.md)는 수정·집중 검사·필수 CI를 마쳤다. 이후 [v8 실행](experiments/results/meetings-summary-engine-v8-acquisition-v1.json)은 내부 명세 작성까지 끝났지만 최종 게시 전 시간 한도로 실패했다. 원본을 보존하고 이미 확보한 파일을 새 작업공간에서 검증하는 [오프라인 경로](experiments/results/meetings-summary-offline-implementation-v1.json)를 구현해 집중 검사와 독립 코드 검토를 마쳤다. 필수 CI와 실제 오프라인 실행은 별도로 확인한다. 전체 도구 준비·컴파일·문법 엔진 검사와 새 요약 품질은 아직 검증 전이다. 이전 시도와 한계는 [실험 기록](experiments/README.md)에 보존한다.
+요약 도구의 [새 오프라인 검증](experiments/results/meetings-summary-offline-acquisition-v1.json)은 실제 CLI 정상 종료0·783.453초로 완료했다. [이전 v8 실패](experiments/results/meetings-summary-engine-v8-acquisition-v1.json)를 보존하면서 이미 확보한 파일15,668개를 다운로드 없이 검증·복사했고 별도 수용도 마쳤다. 이후 빌드 실패를 [한글 경로 처리 문제로 좁혔으며](experiments/results/meetings-summary-build-diagnostics-v1.json) 별도 도구 사본에 제한된 수정안을 연결하는 중이다. 엔진 컴파일 완료나 새 요약·답변 품질의 성공은 아직 아니다. 이전 시도와 한계는 [실험 기록](experiments/README.md)에 보존한다.
 
 기능별 남은 일은 [진행 상황](docs/PROGRESS-OVERVIEW.md), 실행 시연은 [시연 안내](docs/DEMO.md), 확인된 경험의 설명은 [포트폴리오 초안](docs/PORTFOLIO-DRAFT.md)·[면접 초안](docs/INTERVIEW-DRAFT.md)에 있다. 사용자 직접 검수·최종 시연·공개 서비스 배포는 완료하지 않았다. 녹음·STT·외부 회의 연동은 2차 범위다.
 
