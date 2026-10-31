@@ -1,4 +1,4 @@
-"""HTTP-only OPEN development: two auto analyses, then two fixed BM25 answers.
+"""HTTP-only OPEN development: full analysis/QA or explicit two-question QA-only.
 
 Requires an external fresh process/resource gate. Deadlines here bound HTTP and
 acceptance; the external supervisor provides hard whole-process preemption.
@@ -22,7 +22,13 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
 from doctrail.meeting_grounded_summary import validate_summary_analysis
-from doctrail.meeting_structured import PROFILE, STRUCTURED_PROFILES
+from doctrail.meeting_structured import (
+    EVIDENCE_PLAN_QA_CONTRACT,
+    LEGACY_QA_CONTRACT,
+    PROFILE,
+    QA_CONTRACTS,
+    STRUCTURED_PROFILES,
+)
 from scripts.run_meeting_qa_service_development import (
     BUNDLE,
     FailureRecord,
@@ -40,6 +46,10 @@ LIMITS = {"startup_seconds": 120, "active_seconds": 590, "setup_seconds": 30,
           "classification_input_tokens": 4096, "structured_input_tokens": 6144,
           "context_tokens": 8192, "classification_output_tokens": 4,
           "summary_output_tokens": 768, "review_output_tokens": 128, "answer_output_tokens": 768}
+QA_ONLY_LIMITS = {**LIMITS, "active_seconds": 270, "whole_seconds": 395, "external_whole_seconds": 430,
+                  "auto_analyses": 0, "native_completion_ceiling": 2, "requested_output_token_ceiling": 1536}
+EVIDENCE_PLAN_LIMITS = {**QA_ONLY_LIMITS, "native_completion_ceiling": 4,
+                       "plan_output_tokens": 192, "ledger_output_tokens": 576}
 NUMERIC = {"input_tokens", "output_tokens", "output_cap", "input_cap", "completion_calls",
            "label_count", "elapsed_seconds", "elapsed_ms", "http_status", "observed_tokens_predicted",
            "observed_tokens_evaluated"}
@@ -65,9 +75,11 @@ CONTENT_FAILURE_CODES = {
 METADATA_FIELDS = {"meeting_title", "meeting_date", "participants", "purpose"}
 METADATA_REASONS = {"unsupported_source_format", "ambiguous_source_value", "value_out_of_bounds"}
 ENUMS = {"operation": {"qa", "summary", "summary_review", "meeting_qa", "meeting_summary",
-                       "meeting_summary_review", "grammar_constrained_classification"},
+                       "meeting_summary_review", "grammar_constrained_classification",
+                       "qa_obligation_plan", "qa_evidence_ledger"},
          "status": {"failed", "complete"}, "finish_reason": {"eos", "length"},
-         "stage": {"request", "partition", "classification", "metadata", "summary", "review", "assembled", "qa"},
+         "stage": {"request", "partition", "classification", "metadata", "summary", "review", "assembled", "qa",
+                   "qa_obligation_plan", "qa_evidence_ledger"},
          "validation_stage": {"input", "http", "native_metadata", "effective_settings",
                               "token_identity_integrity", "eos", "json", "accepted"},
          "observed_stop_type": {"eos", "limit", "word", "other"},
@@ -130,6 +142,8 @@ def content_failure_completed(services, observation, row, error):
     if (observation.get("runtime_state") != "terminal" or not isinstance(receipt, dict)
             or receipt.get("status") != "failed" or receipt.get("failure_code") not in CONTENT_FAILURE_CODES):
         return False
+    if receipt.get("stage") in {"qa_obligation_plan", "qa_evidence_ledger"}:
+        return False  # Malformed plan/ledger stages are technical failures, never continuable content errors.
     try:
         if services["runtime"].lock.locked() is not False:
             return False
@@ -205,9 +219,9 @@ def check_answer(answer, documents):
                 raise DevelopmentError("citation_binding")
 
 
-def operation_rows(documents, cases):
+def operation_rows(documents, cases, *, qa_only=False):
     return ([{"kind": "analysis", "id": doc["document_id"], "state": "unattempted"}
-             for doc in documents if doc["role"] == "meeting"]
+             for doc in documents if doc["role"] == "meeting" and not qa_only]
             + [{"kind": "answer", "id": case["id"], "state": "unattempted"} for case in cases])
 
 
@@ -224,6 +238,9 @@ class NativeOutputCapture:
         self.closed = False
         self.lock = threading.Lock()
         self.pending = []
+        self.development_runtime = None
+        self.development_pending = []
+        self.development_bytes = 0
         self.client.event_hooks["response"] = [*self.previous, self.hook]
 
     def restore(self):
@@ -233,11 +250,76 @@ class NativeOutputCapture:
             for row in self.rows:
                 if row["state"] == "pending":
                     row["state"] = "unavailable"
+        if self.development_runtime is not None:
+            self.development_runtime.set_development_capture(None)
+
+    def bind_development(self, runtime):
+        self.development_runtime = runtime
+        self.report["development_artifacts"] = []
+        self.report["development_capture_note"] = "Prepared requests/intermediates are not independent proof of dispatch or semantic acceptance."
+        runtime.set_development_capture(self.development_event)
+
+    def development_event(self, event):
+        """Explicit development callback: no production logging and no worker I/O."""
+        if self.closed:
+            return
+        try:
+            kind = event.get("kind")
+            shapes = {"native_request": {"kind", "stage", "body"}, "accepted_plan": {"kind", "plan"},
+                      "compiled_ledger": {"kind", "ledger", "result"}}
+            if kind not in shapes or set(event) != shapes[kind]:
+                raise ValueError("unsupported_development_event")
+            stage = event.get("stage", "qa_obligation_plan" if kind == "accepted_plan" else "qa_evidence_ledger")
+            if stage not in {"qa_obligation_plan", "qa_evidence_ledger"}:
+                raise ValueError("unsupported_development_stage")
+            body_hash = None
+            if kind == "native_request":
+                allowed = {"temperature", "samplers", "seed", "dynatemp_range", "mirostat", "ignore_eos",
+                           "stream", "stop", "logit_bias", "grammar_lazy", "lora", "n_predict", "max_tokens",
+                           "model", "messages", "cache_prompt", "return_tokens", "verbose", "chat_template_kwargs",
+                           "response_format"}
+                if not isinstance(event["body"], dict) or set(event["body"]) - allowed:
+                    raise ValueError("unsupported_development_body")
+                body_hash = hashlib.sha256(json.dumps(event["body"], ensure_ascii=False, allow_nan=False).encode("utf-8")).hexdigest()
+            raw = json.dumps(event, ensure_ascii=False, allow_nan=False).encode("utf-8")
+            with self.lock:
+                if self.closed:
+                    return
+                rows = self.report["development_artifacts"]
+                if len(rows) >= 8:
+                    self.report["development_capture_overflow"] = True
+                    return
+                active = [row for row in self.report["operations"] if row["state"] == "attempted"]
+                row = {"index": len(rows), "kind": kind, "stage": stage,
+                       "operation_id": active[-1]["id"] if len(active) == 1 else None,
+                       "state": "unavailable", "bytes": len(raw), "truncated": False}
+                rows.append(row)
+                if len(raw) > 2 * 1024 * 1024 or self.development_bytes + len(raw) > 8 * 1024 * 1024:
+                    row["truncated"] = True
+                    return
+                self.development_bytes += len(raw)
+                row.update(state="buffered", sha256=hashlib.sha256(raw).hexdigest())
+                if body_hash is not None:
+                    row["request_body_sha256"] = body_hash
+                self.development_pending.append((row, raw))
+        except Exception:  # noqa: BLE001 - capture cannot replace any generation outcome
+            with self.lock:
+                if not self.closed:
+                    self.report["development_capture_error"] = True
 
     def flush(self):
         """Called only by the harness main thread, never by HTTP/worker callbacks."""
         with self.lock:
             pending, self.pending = self.pending, []
+            development_pending, self.development_pending = self.development_pending, []
+        for row, raw in development_pending:
+            try:
+                (self.output / "development-traces").mkdir(exist_ok=True)
+                relative = f"development-traces/{row['index']:03d}-{row['kind']}.json"
+                (self.output / relative).write_bytes(raw)
+                row.update(state="captured", path=relative)
+            except Exception:  # noqa: BLE001 - private trace I/O must not mask model failures
+                row.update(state="unavailable", capture_error=True)
         for row, outputs in pending:
             row["outputs"] = []
             for representation, raw in outputs:
@@ -261,7 +343,7 @@ class NativeOutputCapture:
         with self.lock:
             if self.closed:
                 return
-            if len(self.rows) >= LIMITS["native_completion_ceiling"]:
+            if len(self.rows) >= self.report.get("limits", LIMITS)["native_completion_ceiling"]:
                 self.report["native_capture_call_overflow"] = True
                 return
             active = [row for row in self.report["operations"] if row["state"] == "attempted"]
@@ -345,15 +427,16 @@ class NativeOutputCapture:
 
 
 def run_operations(client, services, documents, cases, report, deadline, save,
-                   *, continue_content_failures=False, clock=time.monotonic, sleep=time.sleep):
+                   *, qa_only=False, continue_content_failures=False, clock=time.monotonic, sleep=time.sleep):
     meetings = [doc for doc in documents if doc["role"] == "meeting"]
     general = [doc for doc in documents if doc["role"] == "general_document"]
     if len(meetings) != 2 or len(general) != 1 or len(cases) != 2:
         raise DevelopmentError("bundle_roles")
-    rows = report["operations"] = operation_rows(documents, cases)
+    rows = report["operations"] = operation_rows(documents, cases, qa_only=qa_only)
+    limits = QA_ONLY_LIMITS if qa_only else LIMITS
     report["documents"] = stored = []
     setup = report["setup"] = {"state": "attempted"}
-    setup_end = min(deadline, clock() + LIMITS["setup_seconds"])
+    setup_end = min(deadline, clock() + limits["setup_seconds"])
     auth = request(client, "POST", "/api/auth/register", setup_end, setup, clock, json={
         "email": f"open-development-{secrets.token_hex(10)}@example.invalid",
         "password": secrets.token_urlsafe(32), "name": "OPEN development", "workspace_name": "OPEN development"})
@@ -366,14 +449,18 @@ def run_operations(client, services, documents, cases, report, deadline, save,
                        files={"file": (Path(source["path"]).name, source["content"], "text/markdown")},
                        data={"title": source["title"], "visibility": "workspace"})
 
-    doc = upload(general[0], False, setup_end, setup)
-    check_document(doc, general[0])
-    stored.append(doc)
-    setup.update(source_id=general[0]["document_id"], document_id=doc["id"])
+    setup["document_bindings"] = []
+    for source in [*general, *(meetings if qa_only else [])]:
+        doc = upload(source, False, setup_end, setup)
+        check_document(doc, source)
+        stored.append(doc)
+        setup["document_bindings"].append({"source_id": source["document_id"], "document_id": doc["id"],
+                                           "registered_as": "ordinary_document"})
+    setup.update(source_id=general[0]["document_id"], document_id=stored[0]["id"])
     setup["state"] = "complete"
     save()
-    for source, row in zip(meetings, rows[:2], strict=True):
-        end = min(deadline, clock() + LIMITS["meeting_seconds"])
+    for source, row in zip(meetings if not qa_only else [], rows[:2] if not qa_only else [], strict=True):
+        end = min(deadline, clock() + limits["meeting_seconds"])
         left(end, clock)
         before = snapshot(services)
         row.update(state="attempted", before=safe_metrics(before[0]), before_structured=safe_metrics(before[1]))
@@ -412,8 +499,8 @@ def run_operations(client, services, documents, cases, report, deadline, save,
         if row["observation"]["runtime_state"] != "terminal" or row["observation"]["runtime"].get("status") != "complete":
             row["state"] = "failed_or_unknown"
             raise DevelopmentError("analysis_receipt_unknown")
-    for case, row in zip(cases, rows[2:], strict=True):
-        end = min(deadline, clock() + LIMITS["answer_seconds"])
+    for case, row in zip(cases, rows if qa_only else rows[2:], strict=True):
+        end = min(deadline, clock() + limits["answer_seconds"])
         left(end, clock)
         before = snapshot(services)
         row.update(state="attempted", before=safe_metrics(before[0]), before_structured=safe_metrics(before[1]))
@@ -440,10 +527,15 @@ def run_operations(client, services, documents, cases, report, deadline, save,
             raise DevelopmentError("answer_receipt_unknown")
 
 
-def execute(jar, jar_sha256, output, *, profile=PROFILE, continue_content_failures=False, bundle=BUNDLE, launcher=start_services,
+def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_CONTRACT, qa_only=False,
+            continue_content_failures=False, bundle=BUNDLE, launcher=start_services,
             client_factory=httpx.Client, clock=time.monotonic, sleep=time.sleep):
     if profile not in STRUCTURED_PROFILES:
         raise DevelopmentError("unknown_profile")
+    if qa_contract not in QA_CONTRACTS:
+        raise DevelopmentError("unknown_qa_contract")
+    if qa_contract == EVIDENCE_PLAN_QA_CONTRACT and not qa_only:
+        raise DevelopmentError("evidence_plan_requires_qa_only")
     jar, output = Path(jar), Path(output)
     # No output or model/service side effects until immutable inputs pass.
     if output.exists() or not output.resolve().is_relative_to((ROOT / ".local").resolve()):
@@ -455,12 +547,17 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, continue_content_failur
             or [doc["role"] for doc in documents].count("general_document") != 1 or len(cases) != 2):
         raise DevelopmentError("bundle_roles")
     output.mkdir(parents=True)
-    report = FailureRecord(first_failure=None, secondary_failures=[], status="running", limits=LIMITS,
+    limits = EVIDENCE_PLAN_LIMITS if qa_contract == EVIDENCE_PLAN_QA_CONTRACT else QA_ONLY_LIMITS if qa_only else LIMITS
+    report = FailureRecord(first_failure=None, secondary_failures=[], status="running", limits=limits,
                            semantic_quality_accepted=False, human_reviews=0, heldout_evaluation=False,
-                           requested_profile=profile,
+                           requested_profile=profile, requested_qa_contract=qa_contract,
+                           mode="qa_only" if qa_only else "full",
                            continue_content_failures=continue_content_failures,
-                           jar_sha256=jar_sha256, operations=operation_rows(documents, cases),
+                           jar_sha256=jar_sha256, operations=operation_rows(documents, cases, qa_only=qa_only),
                            external_fresh_gate_required=True)
+    if qa_only:
+        report["context_comparison"] = {"exact_prior_context_binding_proven": False,
+            "limitation": "Fresh ordinary-document uploads preserve source bytes and order, but prior DB/context identity is not reconstructed."}
     report["sources"] = [{key: doc[key] for key in ("document_id", "role", "path", "raw_sha256", "title")}
                          for doc in documents]
     for doc in documents:
@@ -484,15 +581,17 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, continue_content_failur
             raise DevelopmentError("ports")
         with launcher(jar=jar, database=output / "development.sqlite3", java_port=ports[0],
                       worker_port=ports[1], native_port=ports[2], enable_structured=True,
-                      profile=profile, report=report) as services:
+                      profile=profile, qa_contract=qa_contract, report=report) as services:
             try:
                 capture = NativeOutputCapture(services["generator"], output, report)
-                left(started + LIMITS["startup_seconds"], clock)
-                active = min(started + LIMITS["whole_seconds"] - LIMITS["cleanup_seconds"],
-                             clock() + LIMITS["active_seconds"])
+                if qa_contract == EVIDENCE_PLAN_QA_CONTRACT:
+                    capture.bind_development(services["runtime"])
+                left(started + limits["startup_seconds"], clock)
+                active = min(started + limits["whole_seconds"] - limits["cleanup_seconds"],
+                             clock() + limits["active_seconds"])
                 with client_factory(base_url=services["java_url"], trust_env=False, follow_redirects=False) as client:
                     run_operations(client, services, documents, cases, report, active, save,
-                                   continue_content_failures=continue_content_failures, clock=clock, sleep=sleep)
+                                   qa_only=qa_only, continue_content_failures=continue_content_failures, clock=clock, sleep=sleep)
                 if report.errors:
                     raise report.errors[0]  # Content failures stay failures, also during context cleanup.
             except BaseException as error:
@@ -524,10 +623,13 @@ def main():
     parser.add_argument("--jar-sha256", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--profile", choices=STRUCTURED_PROFILES, default=PROFILE)
+    parser.add_argument("--qa-contract", choices=QA_CONTRACTS, default=LEGACY_QA_CONTRACT)
+    parser.add_argument("--qa-only", action="store_true")
     parser.add_argument("--continue-content-failures", action="store_true")
     args = parser.parse_args()
     try:
         report = execute(args.jar, args.jar_sha256, args.output, profile=args.profile,
+                         qa_contract=args.qa_contract, qa_only=args.qa_only,
                          continue_content_failures=args.continue_content_failures)
     except Exception:  # noqa: BLE001 - never echo private HTTP or environment details
         parser.exit(1, "structured_development_preflight_failed\n")

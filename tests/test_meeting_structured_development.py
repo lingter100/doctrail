@@ -83,12 +83,12 @@ class Scenario:
                               json={"document": document(identity), "meeting": {
                                   "analysis_status": state, "source_revision": 1, "ai_analysis": {"fixture": True}}})
 
-    def run(self, monkeypatch, deadline=590, *, continue_content_failures=False):
+    def run(self, monkeypatch, deadline=590, *, continue_content_failures=False, qa_only=False):
         monkeypatch.setattr(m, "validate_summary_analysis", lambda analysis, content: None)
         with httpx.Client(transport=httpx.MockTransport(self.handler), base_url="http://test") as client:
             m.run_operations(client, self.services, *packet(), self.report, deadline,
                              lambda: self.saves.append(copy.deepcopy(dict(self.report))),
-                             continue_content_failures=continue_content_failures,
+                             continue_content_failures=continue_content_failures, qa_only=qa_only,
                              clock=self.clock, sleep=self.clock.sleep)
 
 
@@ -601,3 +601,327 @@ def test_metadata_warning_receipts_are_finite_bounded_and_text_free():
                 {**warning, "field": "private"}, {**warning, "reason": "source text"}):
         assert m.safe_metrics({"metadata_warnings": [bad]}) == {"metadata_warnings": []}
     assert m.safe_metrics({"metadata_policy": "unrecognized"}) == {}
+
+
+class QaOnlyScenario(Scenario):
+    def __init__(self, fail=None):
+        super().__init__(fail=fail)
+        self.uploads = []
+
+    def receipt(self):
+        super().receipt()
+        self.services["runtime"].last_telemetry["calls"][0]["operation"] = "qa"
+        self.services["generator"].last_call.update(operation="meeting_qa", input_tokens=123)
+
+    def handler(self, request):
+        if request.url.path.endswith("/documents"):
+            identity = ["d3", "d1", "d2"][len(self.uploads)]
+            self.uploads.append(identity)
+            self.calls.append((request.method, request.url.path))
+            assert f'filename="{identity}.md"'.encode() in request.content
+            assert f"source {identity[1:]}".encode() in request.content
+            assert b"source text" in request.content
+            return httpx.Response(201, json=document(identity))
+        return super().handler(request)
+
+
+def test_qa_only_exact_ordinary_upload_order_and_two_unchanged_questions(monkeypatch):
+    s = QaOnlyScenario()
+    original = s.handler
+    questions = []
+
+    def handler(request):
+        if request.url.path.endswith("/answer"):
+            questions.append(json.loads(request.content)["query"])
+        return original(request)
+
+    s.handler = handler
+    s.run(monkeypatch, deadline=270, qa_only=True)
+    assert s.uploads == ["d3", "d1", "d2"]
+    assert s.meetings == 0 and s.answers == 2
+    assert questions == [case["question"] for case in packet()[1]]
+    assert [path.rsplit("/", 1)[-1] for _, path in s.calls] == [
+        "register", "documents", "documents", "documents", "answer", "answer"]
+    assert all(row["kind"] == "answer" and row["state"] == "complete" for row in s.report["operations"])
+    assert [row["source_id"] for row in s.report["setup"]["document_bindings"]] == s.uploads
+    assert all(row["observation"]["structured_call"]["input_tokens"] == 123 for row in s.report["operations"])
+
+
+def test_qa_only_first_answer_failure_preserves_second_unattempted(monkeypatch):
+    s = QaOnlyScenario(fail="answer")
+    with pytest.raises(m.DevelopmentError, match="http_failed"):
+        s.run(monkeypatch, deadline=270, qa_only=True)
+    assert s.meetings == 0 and s.answers == 1 and len(s.uploads) == 3
+    assert [row["state"] for row in s.report["operations"]] == ["failed_or_unknown", "unattempted"]
+
+
+def test_qa_only_all_three_uploads_share_setup_deadline(monkeypatch):
+    s = QaOnlyScenario()
+    original = s.handler
+
+    def handler(request):
+        response = original(request)
+        if request.url.path.endswith("/documents"):
+            s.clock.now += 15
+        return response
+
+    s.handler = handler
+    with pytest.raises(m.DevelopmentError, match="deadline"):
+        s.run(monkeypatch, deadline=270, qa_only=True)
+    assert s.uploads == ["d3", "d1"] and s.answers == 0 and s.meetings == 0
+    assert all(row["state"] == "unattempted" for row in s.report["operations"])
+
+
+@pytest.mark.parametrize("qa_only,active,total,external,native,operations", [
+    (False, 590, 715, 750, 326, 4), (True, 270, 395, 430, 2, 2)])
+def test_qa_only_execute_envelope_and_actual_contract_report(tmp_path, monkeypatch, qa_only, active, total, external, native, operations):
+    monkeypatch.setattr(m, "ROOT", tmp_path)
+    docs, cases = packet()
+    for doc in docs:
+        doc["raw_sha256"] = hashlib.sha256(doc["content"]).hexdigest()
+    monkeypatch.setattr(m, "load_bundle", lambda _: (docs, cases))
+    ports = iter([11001, 11002, 11003])
+    monkeypatch.setattr(m, "unused_port", lambda: next(ports))
+    jar = tmp_path / "fixture.jar"
+    jar.write_bytes(b"fixture")
+    clock = Clock()
+    selected = "requested_facts_v1" if qa_only else m.LEGACY_QA_CONTRACT
+    observed = []
+
+    @contextmanager
+    def launcher(**kwargs):
+        assert kwargs["qa_contract"] == selected
+        kwargs["report"].update(profile=m.PROFILE, qa_contract={"name": selected, "prompt_sha256": "fixture-hash"})
+        clock.now = 119
+        yield {"java_url": "http://test", "generator": SimpleNamespace(_client=SimpleNamespace(event_hooks={"response": []}))}
+
+    def run(client, services, documents, cases, report, deadline, save, **kwargs):
+        observed.append((deadline, kwargs["qa_only"]))
+
+    monkeypatch.setattr(m, "run_operations", run)
+    report = m.execute(jar, hashlib.sha256(b"fixture").hexdigest(), tmp_path / ".local" / "fresh",
+                       qa_only=qa_only, qa_contract=selected, launcher=launcher, clock=clock)
+    assert report["status"] == "completed" and observed == [(119 + active, qa_only)]
+    assert report["limits"]["whole_seconds"] == total
+    assert report["limits"]["external_whole_seconds"] == external
+    assert report["limits"]["native_completion_ceiling"] == native
+    assert len(report["operations"]) == operations
+    assert report["qa_contract"] == {"name": selected, "prompt_sha256": "fixture-hash"}
+    assert report["requested_qa_contract"] == selected
+    if qa_only:
+        assert report["limits"]["auto_analyses"] == 0
+        assert report["limits"]["requested_output_token_ceiling"] == 1536
+        assert report["context_comparison"]["exact_prior_context_binding_proven"] is False
+
+
+def test_qa_only_unknown_contract_rejected_before_side_effects(tmp_path):
+    with pytest.raises(m.DevelopmentError, match="unknown_qa_contract"):
+        m.execute(tmp_path / "missing.jar", "unused", tmp_path / "output", qa_only=True, qa_contract="unsupported")
+    assert not (tmp_path / "output").exists()
+
+
+def test_qa_only_cli_contract_selection_is_explicit_and_default_unchanged(monkeypatch):
+    seen = []
+    monkeypatch.setattr(m, "execute", lambda *args, **kwargs: seen.append(kwargs) or {"status": "completed"})
+    args = ["verifier", "--jar", "fixture", "--jar-sha256", "unused", "--output", ".local/fixture"]
+    monkeypatch.setattr(m.sys, "argv", args)
+    m.main()
+    monkeypatch.setattr(m.sys, "argv", [*args, "--qa-only", "--qa-contract", "requested_facts_v1"])
+    m.main()
+    assert [(row["qa_only"], row["qa_contract"]) for row in seen] == [(False, "legacy"), (True, "requested_facts_v1")]
+
+
+def test_qa_only_capture_honors_two_completion_ceiling(tmp_path):
+    with httpx.Client(transport=httpx.MockTransport(lambda _: httpx.Response(200, stream=httpx.ByteStream(b'{"content":"public"}'))),
+                      base_url="http://test") as client:
+        report = {"operations": [], "limits": m.QA_ONLY_LIMITS}
+        capture = m.NativeOutputCapture(SimpleNamespace(_client=client), tmp_path, report)
+        for _ in range(3):  # synthetic observer boundary only, never an application request plan
+            with client.stream("POST", "/completion") as response:
+                response.read()
+        capture.restore()
+        capture.flush()
+    assert len(report["native_output_artifacts"]) == 2 and report["native_capture_call_overflow"] is True
+
+
+def test_qa_only_content_continuation_still_stops_after_two_answers(monkeypatch):
+    s = QaOnlyScenario()
+    s.services["runtime"].lock = threading.Lock()
+    original = s.handler
+
+    def handler(request):
+        failing = request.url.path.endswith("/answer") and s.answers == 0
+        s.fail = "answer" if failing else None
+        response = original(request)
+        if failing:
+            s.receipt()
+            s.services["runtime"].last_telemetry.update(status="failed", stage="qa",
+                                                      failure_code="generation_invalid_evidence")
+            s.services["generator"].last_call.update(returned=True, finish_reason="eos", validation_stage="accepted")
+        return response
+
+    s.handler = handler
+    s.run(monkeypatch, deadline=270, qa_only=True, continue_content_failures=True)
+    assert s.meetings == 0 and s.answers == 2 and s.uploads == ["d3", "d1", "d2"]
+    assert [row["state"] for row in s.report["operations"]] == ["failed", "complete"]
+    assert s.report["first_failure"] is not None
+
+
+class DevelopmentRuntimeFixture:
+    def __init__(self):
+        self.callback = None
+        self.bindings = []
+
+    def set_development_capture(self, callback):
+        self.callback = callback
+        self.bindings.append(callback)
+
+
+def development_capture(tmp_path):
+    runtime = DevelopmentRuntimeFixture()
+    generator = SimpleNamespace(_client=SimpleNamespace(event_hooks={"response": []}))
+    report = {"operations": [{"kind": "answer", "id": "q1", "state": "attempted"}],
+              "limits": m.EVIDENCE_PLAN_LIMITS}
+    capture = m.NativeOutputCapture(generator, tmp_path, report)
+    capture.bind_development(runtime)
+    return runtime, capture, report
+
+
+def test_evidence_plan_development_capture_preserves_exact_payloads_privately(tmp_path):
+    runtime, capture, report = development_capture(tmp_path)
+    body = {"messages": [{"role": "system", "content": "Generic planner"},
+                         {"role": "user", "content": "Which date is stated? 원문"}],
+            "model": "public-model-id", "max_tokens": 192, "n_predict": 192,
+            "response_format": {"type": "json_schema", "json_schema": {"name": "qa_obligation_plan", "strict": True,
+                                                                        "schema": {"type": "object"}}}}
+    events = [{"kind": "native_request", "stage": "qa_obligation_plan", "body": body},
+              {"kind": "accepted_plan", "plan": {"obligations": [{"id": 0, "fact_kind": "event"}]}},
+              {"kind": "compiled_ledger", "ledger": {"rows": []}, "result": {"status": "abstained", "claims": []}}]
+    for event in events:
+        runtime.callback(event)
+    assert not (tmp_path / "development-traces").exists()
+    capture.restore()
+    capture.flush()
+    assert runtime.callback is None
+    assert [json.loads((tmp_path / row["path"]).read_text(encoding="utf-8")) for row in report["development_artifacts"]] == events
+    assert all(row["operation_id"] == "q1" for row in report["development_artifacts"])
+    assert report["development_artifacts"][0]["request_body_sha256"] == hashlib.sha256(
+        json.dumps(body, ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+    assert "Which date" not in json.dumps(report) and "Generic planner" not in json.dumps(report)
+
+
+def test_evidence_plan_development_capture_rejects_auth_and_bounds_event_bytes(tmp_path):
+    runtime, capture, report = development_capture(tmp_path)
+    runtime.callback({"kind": "native_request", "stage": "qa_obligation_plan", "body": {"headers": {"Authorization": "secret"}}})
+    assert report["development_capture_error"] is True and report["development_artifacts"] == []
+    runtime.callback({"kind": "accepted_plan", "plan": {"oversized": "x" * (2 * 1024 * 1024)}})
+    capture.restore()
+    capture.flush()
+    assert report["development_artifacts"][0]["truncated"] is True
+    assert not (tmp_path / "development-traces").exists()
+    assert "secret" not in json.dumps(report)
+
+
+def test_evidence_plan_capture_max_eight_events_and_no_post_restore_writes(tmp_path):
+    runtime, capture, report = development_capture(tmp_path)
+    callback = runtime.callback
+    event = {"kind": "accepted_plan", "plan": {"obligations": []}}
+    for _ in range(9):
+        callback(event)
+    assert len(report["development_artifacts"]) == 8 and report["development_capture_overflow"] is True
+    capture.restore()
+    callback(event)
+    capture.flush()
+    assert len(list((tmp_path / "development-traces").iterdir())) == 8
+
+
+def test_evidence_plan_capture_restore_during_serialization_blocks_late_publication(tmp_path, monkeypatch):
+    runtime, capture, report = development_capture(tmp_path)
+    entered, resume = threading.Event(), threading.Event()
+    original = json.dumps
+
+    def paused(value, *args, **kwargs):
+        if threading.current_thread().name == "development-capture-race":
+            entered.set()
+            assert resume.wait(2)
+        return original(value, *args, **kwargs)
+
+    monkeypatch.setattr(m.json, "dumps", paused)
+    worker = threading.Thread(target=runtime.callback, args=({"kind": "accepted_plan", "plan": {}},),
+                              name="development-capture-race")
+    worker.start()
+    try:
+        assert entered.wait(2)
+        capture.restore()
+    finally:
+        resume.set()
+        worker.join(2)
+    assert not worker.is_alive()
+    capture.flush()
+    assert report["development_artifacts"] == [] and not (tmp_path / "development-traces").exists()
+
+
+def test_evidence_plan_capture_io_failure_is_safe(tmp_path):
+    runtime, capture, report = development_capture(tmp_path)
+    (tmp_path / "development-traces").write_text("fixture")
+    runtime.callback({"kind": "accepted_plan", "plan": {"obligations": []}})
+    capture.restore()
+    capture.flush()
+    assert report["development_artifacts"][0]["capture_error"] is True
+    assert report["development_artifacts"][0]["state"] == "unavailable"
+
+
+def test_evidence_plan_full_flow_rejected_before_side_effects(tmp_path):
+    with pytest.raises(m.DevelopmentError, match="evidence_plan_requires_qa_only"):
+        m.execute(tmp_path / "missing.jar", "unused", tmp_path / "output", qa_contract=m.EVIDENCE_PLAN_QA_CONTRACT)
+    assert not (tmp_path / "output").exists()
+
+
+def test_evidence_plan_mode_budget_hook_and_old_limits_unchanged(tmp_path, monkeypatch):
+    monkeypatch.setattr(m, "ROOT", tmp_path)
+    docs, cases = packet()
+    for doc in docs:
+        doc["raw_sha256"] = hashlib.sha256(doc["content"]).hexdigest()
+    monkeypatch.setattr(m, "load_bundle", lambda _: (docs, cases))
+    ports = iter([11001, 11002, 11003])
+    monkeypatch.setattr(m, "unused_port", lambda: next(ports))
+    jar = tmp_path / "fixture.jar"
+    jar.write_bytes(b"fixture")
+    runtime = DevelopmentRuntimeFixture()
+
+    @contextmanager
+    def launcher(**kwargs):
+        assert kwargs["qa_contract"] == m.EVIDENCE_PLAN_QA_CONTRACT
+        kwargs["report"]["qa_contract"] = {"name": m.EVIDENCE_PLAN_QA_CONTRACT}
+        yield {"java_url": "http://test", "runtime": runtime,
+               "generator": SimpleNamespace(_client=SimpleNamespace(event_hooks={"response": []}))}
+
+    def run(client, services, documents, cases, report, deadline, save, **kwargs):
+        assert kwargs["qa_only"] is True and runtime.callback is not None
+        report["operations"][0]["state"] = "attempted"
+        runtime.callback({"kind": "accepted_plan", "plan": {"obligations": []}})
+
+    monkeypatch.setattr(m, "run_operations", run)
+    report = m.execute(jar, hashlib.sha256(b"fixture").hexdigest(), tmp_path / ".local" / "fresh",
+                       qa_only=True, qa_contract=m.EVIDENCE_PLAN_QA_CONTRACT, launcher=launcher)
+    assert report["status"] == "completed" and runtime.callback is None
+    assert report["limits"]["native_completion_ceiling"] == 4
+    assert report["limits"]["plan_output_tokens"] + report["limits"]["ledger_output_tokens"] == 768
+    assert report["limits"]["requested_output_token_ceiling"] == 1536
+    assert report["limits"]["whole_seconds"] == 395 and report["limits"]["external_whole_seconds"] == 430
+    assert len(report["operations"]) == 2 and report["limits"]["auto_analyses"] == 0
+    assert report["development_artifacts"][0]["state"] == "captured"
+    assert m.QA_ONLY_LIMITS["native_completion_ceiling"] == 2 and m.LIMITS["native_completion_ceiling"] == 326
+
+
+@pytest.mark.parametrize("stage", ["qa_obligation_plan", "qa_evidence_ledger"])
+def test_evidence_plan_malformed_stage_never_content_continues(stage):
+    services = {"runtime": SimpleNamespace(lock=threading.Lock()), "generator": SimpleNamespace(last_call=None)}
+    observed = {"runtime_state": "terminal", "runtime": {"status": "failed", "stage": stage,
+                 "failure_code": "generation_invalid_schema"}, "structured_call_fresh": True,
+                "structured_call": {"dispatched": True, "returned": True, "accepted": True,
+                                    "finish_reason": "eos", "validation_stage": "accepted"}}
+    assert not m.content_failure_completed(services, observed, {"kind": "answer", "last_http_status": 503},
+                                          m.DevelopmentError("http_failed"))
+    safe = m.safe_metrics({"stage": stage, "calls": [{"operation": stage, "output_cap": 192, "finish_reason": "eos"}]})
+    assert safe["stage"] == stage and safe["calls"][0]["operation"] == stage

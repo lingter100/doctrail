@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "status": "technical_complete_semantic_not_accepted",
+  "scope": "Two public OpenSearch development questions; not held-out evaluation",
+  "profile": "qwen25-7b-q4km-json-schema-grounded-v1",
+  "qa_contract": "requested_facts_v1",
+  "prompt_sha256": "a68f91a97853042901894b41df7f8958d7d6f657e1e62066e8c29ea2864845f8",
+  "result_sha256": "929506028648658821a451010c669e11f614b15fa7216d0622cbe33ec68180de",
+  "final_sha256": "d425b0315a5ae49d49d17f4c0c755779429f1db0e6f4e914840188a223b273ec",
+  "quality_review_sha256": "7d6af16fbad963a0ca47651c2bb49cf0dfa47362b2759a2e6e89df91639dc881",
+  "fixed_cases_sha256": "86826c6f52cb0ac5d63165a9703de05c77136c256b2a92b2979b2c63ec8e24c0",
+  "measurements": {
+    "analyses": 0,
+    "answers": 2,
+    "native_completions": 2,
+    "startup_seconds": 15.141,
+    "helper_seconds": 28.266,
+    "outer_seconds": 30.141,
+    "input_tokens": [3148, 3110],
+    "output_tokens": [93, 149],
+    "finish_reasons": ["eos", "eos"],
+    "owned_peak_rss_bytes": 5361299456,
+    "host_min_available_bytes": 5340446720,
+    "owned_process_cleanup_confirmed": true,
+    "unchanged_references": 78
+  },
+  "quality": {
+    "reviewer": "gpt-6-astra xhigh; independent AI development review, not blind",
+    "accepted": 0,
+    "reviewed": 2,
+    "previous_accepted": 0,
+    "correct_response_language": 2,
+    "previous_correct_response_language": 0,
+    "correct_required_abstentions": 0,
+    "required_abstentions": 1,
+    "exact_citation_occurrences": 9,
+    "findings": [
+      "The first answer omits drafting ownership and required formation governance, and its citation bundle omits the relevant June proposal.",
+      "The second answer fails to abstain and turns an unavailable roster into an unsupported claim that membership was not finalized."
+    ]
+  },
+  "comparison_limits": "Saved ranked contents, order and scores match v3 after identity normalization. Documents were registered as ordinary documents in a fresh database. Complete expanded model-input equivalence was not captured and is not claimed.",
+  "verification": {
+    "core_focused_tests": 18,
+    "verifier_unique_new_tests": 9,
+    "ruff": "passed",
+    "independent_code_review_blockers": 0,
+    "initial_import_format_failure_preserved": true,
+    "prior_ci_does_not_cover_this_change": true
+  },
+  "human_reviews": 0,
+  "service_adopted": false,
+  "public_service_deployed": false,
+  "paid_api_calls": 0,
+  "electricity_cost_measured": false,
+  "general_quality_improvement_established": false
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "experimental_implementation_focused_checks_and_review_passed",
+  "contract": "evidence_plan_v1",
+  "core_report_sha256": "67ce746efa2fb6c845b473aa92e5a92bd55509e2cd1d300222a6d749421c9919",
+  "verifier_report_sha256": "1d02df2603426a8c64fccb55cca71232d3be0f902953ef4580c618488028ff12",
+  "independent_review_sha256": "d02ac01891037e45fe921ad1ef1310df86344de0e4915994b89d65e013525d78",
+  "method": [
+    "Plan up to six immutable factual obligations from the question alone, quoting exact literal question substrings.",
+    "Fill one ledger row per obligation using the unchanged complete authorized source and exact precomputed evidence-span choices.",
+    "Require matching IDs and scopes; abstain on any missing, ambiguous or incompatible declared fact. Compile supported rows directly into existing claims without another generation."
+  ],
+  "limits": {
+    "plan_output_tokens": 192,
+    "ledger_output_tokens": 576,
+    "aggregate_per_request_output_tokens": 768,
+    "shared_request_seconds": 120,
+    "input_tokens": 6144,
+    "context_tokens": 8192,
+    "qa_only_http_requests": 2,
+    "qa_only_native_completion_max": 4,
+    "qa_only_requested_output_tokens_max": 1536,
+    "qa_only_helper_seconds": 395,
+    "qa_only_outer_seconds": 430
+  },
+  "checks": {
+    "core_focused_passed": 49,
+    "core_elapsed_seconds": 1.11,
+    "literal_span_delta_affected_passed": 7,
+    "literal_span_delta_elapsed_seconds": 0.53,
+    "verifier_unique_new_passed": 9,
+    "verifier_elapsed_seconds": 1.5,
+    "overlapping_groups_not_summed": true,
+    "ruff": "passed",
+    "initial_import_format_failure_preserved": true,
+    "independent_review_open_blockers": 0
+  },
+  "reviewed_fix": "Removed unnecessary uniqueness and non-overlap restrictions on literal question quotations. Exact containment, no duplicate entries per obligation and immutable ID/entity/time binding remain. This is a generic interface correction, not a case-specific rule.",
+  "capture": {
+    "scope": "Explicit public-development harness only; production logging unchanged",
+    "events": ["exact_native_request", "accepted_plan", "compiled_ledger"],
+    "max_events": 8,
+    "per_event_max_bytes": 2097152,
+    "total_max_bytes": 8388608,
+    "headers_saved": false,
+    "main_thread_writes_and_callback_restore": true
+  },
+  "unchanged": ["legacy defaults", "requested_facts_v1", "Java and React API", "classification and summary", "model and resource profile", "closed runs and evaluation criteria"],
+  "limits_of_evidence": "Synthetic tests and exact provenance do not establish planner completeness, entailment, output-budget fit or real semantic quality. Actual results are reported separately.",
+  "service_adopted": false,
+  "human_reviews": 0
+}

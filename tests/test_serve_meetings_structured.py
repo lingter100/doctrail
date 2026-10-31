@@ -192,3 +192,19 @@ def test_qwen_launches_first_shard_with_explicit_instance_profile(launcher, monk
         assert not any(call[0] == "prepare" for call in f.calls)
         assert len(calls) == 1 and len(f.leases) == 3
     assert all(child.stopped for child in f.children)
+
+
+
+@pytest.mark.parametrize("contract", m.QA_CONTRACTS)
+def test_launcher_qa_contract_report_matches_actual_runtime(launcher, contract):
+    with run(launcher, qa_contract=contract) as service:
+        assert service["runtime"].qa_contract == contract
+        assert service["report"]["qa_contract"] == service["runtime"].health()["qa_contract"]
+        assert service["report"]["qa_contract"]["name"] == contract
+        assert len(service["report"]["qa_contract"]["prompt_sha256"]) == 64
+
+
+def test_launcher_unknown_qa_contract_rejected_before_owned_side_effects(launcher):
+    with pytest.raises(ValueError, match="unknown_qa_contract"), run(launcher, qa_contract="guessed"):
+        pass
+    assert not launcher.calls and not launcher.leases and not launcher.children
