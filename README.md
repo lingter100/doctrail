@@ -15,7 +15,7 @@ React·TypeScript·Vite 화면, Java 21·Spring Boot 서비스, Python 데이터
 
 **회의 지능형 관리 1차와 전체 포트폴리오는 미완료다.** 관리·검색 기능의 동작과 AI 내용 품질을 구분한다. 실제 로컬 요약·답변은 연결했지만 정보 누락·근거와 주장의 불일치·잘못된 답변 보류가 남았다. 최근 두 모델의 같은 6문항 개발 비교는 독립 AI 내용 수용이 모두 **0/6**이어서 후보를 채택하지 않았다. 이 작은 비교를 일반 정확도나 사람 평가로 해석하지 않는다.
 
-게시 소스 `7099bde`의 push·PR 필수 CI가 모두 통과했다. [회귀 기록](experiments/results/meetings-native-separator-ci-v1.json)은 Python 5,739개 통과·21개 제외, 각 브라우저 158개 통과와 Java·운영 검사를 구분한다. 합성 모델 응답을 사용한 화면 검사는 실제 AI 품질의 증거가 아니다.
+게시 소스 `e3b0eb3`의 push·PR 필수 CI가 모두 통과했다. [회귀 기록](experiments/results/meetings-retrieval-live-scan-ci-v1.json)은 Python5,770개 통과·21개 제외, 각 브라우저158개 통과와 Java·운영 검사를 구분한다. 이후 분석 실패 화면 수정은 [집중 브라우저6개와 실제 화면 확인](experiments/results/meetings-ui-analysis-visibility-v1.json)을 마쳤으며 새 변경의 CI는 별도로 확인한다. 합성 모델 응답을 사용한 화면 검사는 실제 AI 품질의 증거가 아니다.
 
 ## 프로젝트에서 설명할 핵심
 

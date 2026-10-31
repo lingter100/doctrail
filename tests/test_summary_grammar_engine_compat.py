@@ -57,6 +57,12 @@ def fixture(tmp_path, monkeypatch):
     original, output, bundle = tmp_path / "acquired", tmp_path / "compat", tmp_path / "bundle"
     original.mkdir()
     bundle.mkdir()
+    fake_command = tmp_path / "System32" / "cmd.exe"
+    fake_command.parent.mkdir()
+    fake_command.write_bytes(b"fake-command-not-executable")
+    monkeypatch.setattr(compat, "shell_environment", lambda: {
+        "command": str(fake_command), "command_reference": rt.reference(fake_command, fake_command.parent),
+        "autorun": compat.check_autorun(lambda hive: None), "registry_writes": 0})
     for name, data in {"candidate.gbnf": b"root ::= \"a\"\n", "expected.json": b"[]", "prefix-witnesses.json": b"[]"}.items():
         (bundle / name).write_bytes(data)
     monkeypatch.setattr(rt, "BUNDLE", bundle)
@@ -125,6 +131,184 @@ def fixture(tmp_path, monkeypatch):
         return receipt
     return SimpleNamespace(original=original, output=output, bundle=bundle, lock=lock, frozen=frozen,
                            runner=runner, calls=calls, checks=checks, sha="f" * 64, clock=lambda: 0)
+
+
+@pytest.fixture
+def shell_fixture(tmp_path):
+    output = tmp_path / "new-output"
+    cwd = output / "build" / "CMakeFiles" / "CMakeScratch" / "TryCompile-fixed"
+    (cwd / "CMakeFiles").mkdir(parents=True)
+    (cwd / "build.ninja").write_bytes(b"# generated fixed-input build\n")
+    (cwd / "CMakeFiles/rules.ninja").write_bytes(b"# generated link and archive rules\n")
+    command, ninja, cmake = [tmp_path / name for name in ("System32/cmd.exe", "ninja.exe", "cmake.exe")]
+    for path in (command, ninja, cmake):
+        path.parent.mkdir(exist_ok=True)
+        path.write_bytes(b"synthetic-not-executable")
+    environment = {"command": str(command), "command_reference": rt.reference(command, command.parent),
+                   "autorun": compat.check_autorun(lambda hive: None), "registry_writes": 0}
+    source = tmp_path / "trusted-bundle"
+    source.mkdir()
+    policy = compat.NinjaShellPolicy(output, ninja, cmake, environment, source)
+
+    class Process:
+        def __init__(self, pid, exe, parent, args, created):
+            self.pid, self.path, self.parent, self.args, self.created = pid, exe, parent, args, created
+            self.directory, self.running = cwd, True
+        def create_time(self):
+            return self.created
+        def exe(self):
+            return str(self.path)
+        def ppid(self):
+            return self.parent
+        def cmdline(self):
+            return self.args
+        def cwd(self):
+            return str(self.directory)
+        def is_running(self):
+            return self.running
+    root = Process(1, cmake, 0, [str(cmake), "-S", str(source), "-B", str(output / "build")], 1)
+    parent = Process(2, ninja, 1, [str(ninja), "-v", "cmTC_fixed"], 2)
+    child = Process(3, command, 2, ["cmd.exe", "/C", "cd . && R:\\fixed\\clang.exe -v object.obj -o cmTC_fixed.exe && cd ."], 3)
+    processes = {process.pid: process for process in (root, parent, child)}
+    ps = SimpleNamespace(Process=lambda pid: processes[pid])
+    tree = compat.NinjaOwnedTree(None, [cmake, ninja], ps, lambda: 0, shell_policy=policy)
+    tree.capture(root)
+    tree.capture(parent)
+    return SimpleNamespace(policy=policy, tree=tree, child=child, parent=parent, root=root, cwd=cwd, ps=ps,
+                           command=command, ninja=ninja, cmake=cmake, output=output, processes=processes)
+
+
+@pytest.mark.parametrize("phase,body", [
+    ("configure", "cd . && R:\\fixed\\clang.exe -v object.obj -o cmTC_fixed.exe && cd ."),
+    ("compile", "cd . && R:\\fixed\\llvm-ar.exe qc lib.a a.obj b.obj && R:\\fixed\\llvm-ranlib.exe lib.a && cd ."),
+])
+def test_ninja_shell_link_archive_shared_inner_outer(shell_fixture, phase, body):
+    f = shell_fixture
+    if phase == "compile":
+        f.root.args = [str(f.cmake), "--build", str(f.output / "build"), "--target", "summary-grammar-validator"]
+    f.child.args[2] = body
+    f.tree.capture(f.child)
+    f.tree.capture(f.child)
+    assert len(f.policy.accepted) == 1 and f.policy.accepted[0]["phase"] == phase
+    assert len(f.policy.accepted[0]["recipes"]) == 2
+    assert f.policy.command not in f.tree.allowed
+    original = rt.OwnedTree
+    scope = compat.NinjaShellScope(f.policy, phase)
+    def runner(argv):
+        inner = rt.OwnedTree(None, [f.cmake, f.ninja], f.ps, lambda: 0)
+        assert isinstance(inner, compat.NinjaOwnedTree)
+        for process in (f.root, f.parent, f.child):
+            inner.capture(process)
+        assert inner.shell_policy is f.tree.shell_policy
+        return "same-policy"
+    assert scope.run(runner, []) == "same-policy"
+    assert rt.OwnedTree is original and scope.record["restored"]
+
+
+@pytest.mark.parametrize("kind", ["python_parent", "unowned_parent", "reused_parent", "dead_parent", "newer_parent",
+                                  "wrong_exe", "wrong_cwd", "outside_cwd", "bad_argv", "switch", "empty_body",
+                                  "unowned_ancestor", "wrong_phase", "unreadable", "recipe_missing", "recipe_changed", "recipe_link",
+                                  "recipe_override", "recipe_oversize", "recipe_unreadable"])
+def test_ninja_shell_rejects_and_retains_cleanup_identity(shell_fixture, monkeypatch, kind):
+    f = shell_fixture
+    if kind == "python_parent":
+        f.parent.path = f.cmake.parent / "python.exe"
+    elif kind == "unowned_parent":
+        f.tree.seen.pop(f.tree.identity(f.parent))
+    elif kind == "reused_parent":
+        f.parent.created += .5
+    elif kind == "dead_parent":
+        f.parent.running = False
+    elif kind == "newer_parent":
+        f.child.created = 1.5
+    elif kind == "wrong_exe":
+        f.child.path = f.command.parent / "powershell.exe"
+    elif kind == "wrong_cwd":
+        f.child.directory = f.output / "build"
+    elif kind == "outside_cwd":
+        f.child.directory = f.parent.directory = f.output
+    elif kind == "bad_argv":
+        f.child.args.append("extra")
+    elif kind == "switch":
+        f.child.args[1] = "/K"
+    elif kind == "empty_body":
+        f.child.args[2] = ""
+    elif kind == "unowned_ancestor":
+        f.tree.seen.pop(f.tree.identity(f.root))
+    elif kind == "wrong_phase":
+        f.root.args = [str(f.cmake), "--build", str(f.output)]
+    elif kind == "unreadable":
+        monkeypatch.setattr(f.child, "cwd", lambda: (_ for _ in ()).throw(PermissionError("unreadable cwd")))
+    elif kind == "recipe_missing":
+        (f.cwd / "build.ninja").unlink()
+    elif kind == "recipe_changed":
+        f.tree.capture(f.child)
+        (f.cwd / "build.ninja").write_bytes(b"changed recipe")
+    elif kind == "recipe_link":
+        original = Path.lstat
+        def lstat(path, *args, **kw):
+            value = original(path, *args, **kw)
+            return SimpleNamespace(st_mode=stat.S_IFLNK, st_file_attributes=1024) if path == f.cwd / "build.ninja" else value
+        monkeypatch.setattr(Path, "lstat", lstat)
+    elif kind == "recipe_override":
+        f.parent.args += ["-f", "unbound.ninja"]
+    elif kind == "recipe_oversize":
+        monkeypatch.setattr(compat, "RECIPE_LIMIT", 1)
+    elif kind == "recipe_unreadable":
+        original = Path.open
+        def opened(path, *args, **kw):
+            if path == f.cwd / "build.ninja":
+                raise PermissionError("recipe unreadable")
+            return original(path, *args, **kw)
+        monkeypatch.setattr(Path, "open", opened)
+    with pytest.raises((rt.BoundaryError, OSError)):
+        f.tree.capture(f.child)
+    assert f.tree.identity(f.child) in f.tree.seen
+
+
+@pytest.mark.parametrize("value", ["%TEMP%", "a!b", "a&b", "a|b", "a^b", "a(b)", "a>b", 'a"b', "a\nb"])
+def test_ninja_shell_external_paths_reject_expansion_controls(value):
+    with pytest.raises(rt.BoundaryError, match="unsafe_path"):
+        compat.shell_path(value)
+
+
+@pytest.mark.parametrize("value", [None, "", "echo injected", 0])
+def test_ninja_shell_autorun_empty_only(value):
+    if value in (None, ""):
+        assert len(compat.check_autorun(lambda hive: value)) == 2
+    else:
+        with pytest.raises(rt.BoundaryError, match="autorun"):
+            compat.check_autorun(lambda hive: value)
+
+
+def test_ninja_shell_autorun_unreadable_not_absent():
+    with pytest.raises(PermissionError):
+        compat.check_autorun(lambda hive: (_ for _ in ()).throw(PermissionError("registry unreadable")))
+
+
+@pytest.mark.parametrize("primary", [False, True])
+def test_ninja_shell_adapter_restore_and_primary_error(shell_fixture, primary):
+    original = rt.OwnedTree
+    scope = compat.NinjaShellScope(shell_fixture.policy, "configure")
+    error = OSError("first runner failure")
+    def runner(argv):
+        rt.OwnedTree = object
+        if primary:
+            raise error
+    with pytest.raises(OSError if primary else rt.BoundaryError) as caught:
+        scope.run(runner, [])
+    assert rt.OwnedTree is original and scope.record["restored"]
+    if primary:
+        assert caught.value is error and error.__notes__ == ["ninja_shell_adapter_changed_before_restore"]
+
+
+def test_ninja_shell_history_tamper_and_static_scope(fixture):
+    result, _ = built(fixture)
+    assert result["ninja_shell"]["shells"] == []
+    assert rt.OwnedTree is compat.BASE_OWNED_TREE
+    result["ninja_shell"]["phases"][0]["restored"] = False
+    with pytest.raises(rt.BoundaryError, match="ninja_shell_history"):
+        compat.check_shell_history(fixture.output, result)
 
 
 def built(f):

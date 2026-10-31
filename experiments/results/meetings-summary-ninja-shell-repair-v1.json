@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "change": "scoped-windows-ninja-shell-support",
+  "baseline_commit": "e3b0eb32045361c56c22c24b30204850c633f436",
+  "status": "implemented_focused_tests_and_independent_review_passed",
+  "source_files": [
+    {
+      "path": "scripts/build_summary_grammar_engine_compat.py",
+      "sha256": "2558de6e6eb8064f25f8f5ac93c35a70053199253ed570352aceae2954d8eb1d"
+    },
+    {
+      "path": "tests/test_summary_grammar_engine_compat.py",
+      "sha256": "880f0559831f5cc9a6839298eead2741c6f6a60565eef3d16d4cf243b97eabfc"
+    }
+  ],
+  "policy": [
+    "Shared compatibility policy and owned-process class for internal runner and future outer observer; cmd is not on the general executable allowlist.",
+    "Exact System32 command, strict /C argument form, live owned pinned Ninja identity and CMake configure/compile ancestry.",
+    "Matching working directories inside the new build subtree; bounded generated build.ninja and CMakeFiles/rules.ninja references; changed recipes and alternate build-file arguments rejected.",
+    "Fixed trusted sources only; native input paths reject shell control and expansion characters.",
+    "Read-only HKCU/HKLM AutoRun in the native 64-bit view must be absent or empty; no registry settings are modified.",
+    "Rejected identities remain owned for cleanup; original runtime class is restored and primary errors preserved."
+  ],
+  "validation": {
+    "focused_fake_tests": {
+      "passed": 56,
+      "deselected": 83,
+      "seconds": 14.04,
+      "earlier_subset_not_additive": true
+    },
+    "ruff": "passed",
+    "independent_ai_review": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "blockers": 0,
+      "scope": "Source delta and saved evidence only; no test/native replay."
+    }
+  },
+  "preserved": {
+    "runtime_sha256": "b1422ea8466d127b38493d8b05c893483aa8c554d65ed7ffe0d3bb06961009c8",
+    "prepare_sha256": "3684a4fd2bca0c4d8a212ac02b23da50e8495de15d94d3bc44dc34a985256da8",
+    "old_failures_unchanged": true
+  },
+  "actual_registry_queries": 0,
+  "actual_native_runs": 0,
+  "model_calls": 0,
+  "limitations": [
+    "Actual Windows build and generated recipe handling still require verification.",
+    "Future external observer must use the same shared policy and class.",
+    "No model-quality, human-review or public-deployment acceptance."
+  ]
+}

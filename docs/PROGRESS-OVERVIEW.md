@@ -17,19 +17,20 @@
 
 화면 완성도도 완료 기준이다. 실제 Java와 합성 모델 응답을 연결한 화면 검사는 실제 AI의 내용 품질이나 사용자 검수를 대신하지 않는다.
 
-[v8 실제 취득 실패](../experiments/results/meetings-summary-engine-v8-acquisition-v1.json)는 그대로 보존했다. 새 [오프라인 검증](../experiments/results/meetings-summary-offline-acquisition-v1.json)은 다운로드 없이15,668파일을 검증·복사하고 CLI783.453초·wrapper800.094초에 정상 종료했다. 별도 수용도 마쳤다. 뒤이은 첫 빌드는 실패했고, 작은 진단으로 고정 CMake의 한글 경로 변환 실패를 재현했다. 대체 변환은 네 경로에서 통과했으며 이를 별도 사본의 빌드에 연결하는 구현을 진행한다. 엔진 컴파일 완료·문법 실행·새 요약 품질 성공은 아직 아니다.
+[오프라인 도구 준비](../experiments/results/meetings-summary-offline-acquisition-v1.json)는 실제 정상 종료했다. 한글 경로와 임시 파일 삭제 경합을 보정했지만, [v4 빌드](../experiments/results/meetings-summary-compat-build-v4.json)에서 Ninja의 Windows 셸 명령이 실행 제한에 걸렸다. 확인된 빌드 도구·작업 폴더에 한정하는 후속 정책을 구현한다. 엔진 컴파일·문법 실행·새 요약 품질은 아직 미완료이며 실패 원본은 보존한다.
 
 ## 지금 해결하는 문제
 
 [최신 QA 비교](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)는 같은 6개에서 기준 3B와 후보 7B 모두 내용 수용 0/6으로 종료됐다. 입력 한도 초과·출력 잘림뿐 아니라 필수 내용 누락, 선택 근거와 주장의 불일치, 답변 보류 실패가 남았다. 인용 문자열 일치와 충분한 답변은 다르다. 작은 개발 비교이므로 일반 정답률로 확대하지 않으며 같은 질문 재튜닝·자동 다음 모델 탐색은 하지 않는다.
 
-요약의 [문법 엔진 검증](MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md)은 빌드 문제를 해결하는 단계다. [현재 진단](../experiments/results/meetings-summary-build-diagnostics-v1.json)은 영문과 한글만 다른 같은 길이의 경로를 비교했다. 영문은 변환되고 한글에서 CMake 오류가 발생했으며, 다른 변환 방식은 C/C++ 각각 영문·한글 네 경로에서 기대한 결과를 냈다. 원본 도구를 보존하고 CMake 사본의 해당 부분만 바꾸는 방식을 구현한다. 프로젝트 전체를 옮기거나 나머지 도구를 다시 다운로드하지 않는다.
+요약의 [문법 엔진 검증](MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md)은 빌드 문제를 해결하는 단계다. 원본 도구를 보존하는 [Windows 경로 호환·임시 파일 검사 수정](MEETINGS-SUMMARY-PATH-COMPATIBILITY.md)을 구현했다. 다음 실제 빌드가 통과해도 문법 제약의 동작과 생성 요약의 내용 품질을 따로 검증해야 한다.
 
-QA는 고정 공개 회의록과 운영 규칙에서 새 개발 질문·참고 답변2개를 작성하고 독립 AI의 원문 검토를 마쳤다. 충분한 답변과 정당한 보류를 먼저 정했으며, 다음은 현재 입력·출력 표현의 토큰 길이를 측정하는 것이다. 참고 답변을 토큰화하는 일은 모델의 정답 생성이나 검색 성능 검증이 아니다.
+새 공개 개발 자료의 [실제 Java QA](../experiments/results/meetings-qa-service-development-v1.json)는 첫 검색 후 답변 형식 오류로 실패했다. 독립 내용 검토에서도 제안을 확정으로 오해하고 다른 규정을 인용한 오류를 확인했다. 검색된 문서3개 안에 필요한 출범 규정이 빠져 있어, [키워드·임베딩·혼합 검색6회](MEETINGS-QA-RETRIEVAL-DEVELOPMENT.md)를 먼저 비교한다. 두 질문은 공개 개발 자료이며 잠긴 최종 평가가 아니다.
 
 ## 현재 검증 근거
 
-- 게시 `0b27d1f`의 [필수 CI](../experiments/results/meetings-summary-offline-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. Python 5,598개 통과·21개 제외, 각 브라우저 158개 통과·실패 0, 실제 Java HTTP·DB11개와 합성 회의 운영 검사 통과. 현재 작성 중인 새 호환 빌드·토큰 측정 코드는 이 CI 범위에 포함되지 않는다.
+- 게시 `e3b0eb3`의 [필수 CI](../experiments/results/meetings-retrieval-live-scan-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. 각각 Python5,770개 통과·21개 제외, 브라우저158개 통과·실패0과 Java/운영/프런트 빌드를 확인했다. 실제 모델 의미 품질을 증명하는 검사는 아니다.
+- 분석 실패를 AI 초안/추출0개처럼 표현하는 안내 문제와 한국어 조사 오류를 수정했다. 타입 검사·웹 빌드·Java 패키징과 [집중 브라우저6개](../experiments/results/meetings-ui-analysis-visibility-v1.json),1440/390px 실제 실패 화면 확인을 마쳤다. 해당 새 수정의 원격 CI는 대기 중이며 사용자 직접 검수로 계산하지 않는다.
 - [실제 회의 관리 흐름](MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원](MEETINGS-RESTORE-VERIFICATION.md), [실제 QA 실패와 독립 AI 판정](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)은 서로 다른 증거다. CI 통과가 실제 AI 품질 수용을 뜻하지 않는다.
 - 사용자 직접 검수·공개 서비스 배포는 완료하지 않았다. 실패 후보는 기본 모델로 채택하지 않았다.
 

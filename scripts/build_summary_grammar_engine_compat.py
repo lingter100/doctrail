@@ -38,6 +38,182 @@ OWNED_RUN_CODE = rt.run_owned.__code__
 OWNED_SCAN_CODES = [code for code in OWNED_RUN_CODE.co_consts if isinstance(code, CodeType) and code.co_name == "scan_checkpoint"]
 rt.require(len(OWNED_SCAN_CODES) == 1, "live_scan_runtime_code")
 OWNED_SCAN_CODE = OWNED_SCAN_CODES[0]
+BASE_OWNED_TREE = rt.OwnedTree
+NINJA_SHELL_POLICY = "compat-owned-ninja-shell-v1"
+RECIPE_LIMIT = 8 * 1024**2
+
+
+def shell_path(path):
+    value = str(path)
+    rt.require(value and not any(ord(c) < 32 or c in '&|<>^()%!"' for c in value), "ninja_shell_unsafe_path")
+    return Path(path)
+
+
+def check_autorun(reader):
+    rows = []
+    for hive in ("HKCU", "HKLM"):
+        value = reader(hive)
+        rt.require(value is None or value == "", "ninja_shell_autorun")
+        rows.append({"hive": hive, "view": 64, "value": value})
+    return rows
+
+
+def shell_environment():
+    """Read-only native System32/64-bit registry view; never change AutoRun."""
+    rt.require(os.name == "nt" and ctypes.sizeof(ctypes.c_void_p) == 8, "ninja_shell_windows_x64")
+    import winreg
+    api = ctypes.WinDLL("kernel32", use_last_error=True)
+    api.GetSystemDirectoryW.argtypes = [ctypes.c_wchar_p, ctypes.c_uint32]
+    api.GetSystemDirectoryW.restype = ctypes.c_uint32
+    buffer = ctypes.create_unicode_buffer(32768)
+    size = api.GetSystemDirectoryW(buffer, len(buffer))
+    rt.require(0 < size < len(buffer), "ninja_shell_system_directory")
+    command = shell_path(Path(buffer.value) / "cmd.exe").resolve()
+    rt.safe_path(command.parent, command.name)
+    rt.require(command.is_file(), "ninja_shell_system_command")
+
+    def reader(hive):
+        key = winreg.HKEY_CURRENT_USER if hive == "HKCU" else winreg.HKEY_LOCAL_MACHINE
+        try:
+            with winreg.OpenKey(key, r"Software\Microsoft\Command Processor", 0,
+                                winreg.KEY_READ | winreg.KEY_WOW64_64KEY) as handle:
+                value, kind = winreg.QueryValueEx(handle, "AutoRun")
+                rt.require(kind in (winreg.REG_SZ, winreg.REG_EXPAND_SZ), "ninja_shell_autorun_type")
+                return value
+        except FileNotFoundError:
+            return None
+
+    return {"command": str(command), "command_reference": rt.reference(command, command.parent),
+            "autorun": check_autorun(reader), "registry_writes": 0}
+
+
+class NinjaShellPolicy:
+    """Trust only fixed-input Ninja recipes and the live owned process lineage.
+
+    The shell body is recorded, not interpreted as a general Windows language.
+    This exception is unsuitable for builds containing user-controlled recipes.
+    """
+    def __init__(self, output, ninja, cmake, environment, source=None):
+        self.output = shell_path(output).resolve()
+        self.build = self.output / "build"
+        self.ninja, self.cmake = (os.path.normcase(str(shell_path(path).resolve())) for path in (ninja, cmake))
+        self.source = shell_path(rt.BUNDLE if source is None else source).resolve()
+        self.command = os.path.normcase(str(Path(environment["command"]).resolve()))
+        self.environment, self.recipes, self.accepted = environment, {}, []
+        self.ninja_ref = rt.reference(Path(ninja), Path(ninja).parent)
+        self.record = {"policy": NINJA_SHELL_POLICY, "environment": environment, "ninja": str(Path(ninja).resolve()),
+                       "ninja_reference": self.ninja_ref, "cmake": str(Path(cmake).resolve()),
+                       "canonical_output": str(self.output), "shells": self.accepted}
+
+    def phase(self, tree, ninja):
+        process = ninja
+        for _ in range(32):
+            process = tree.ps.Process(process.ppid())
+            identity = tree.identity(process)
+            rt.require(identity in tree.seen and process.is_running(), "ninja_shell_unowned_ancestor")
+            if identity[2] == self.cmake:
+                argv = process.cmdline()
+                rt.require(argv and os.path.normcase(str(Path(argv[0]).resolve())) == self.cmake, "ninja_shell_cmake_argv")
+                if "--build" in argv:
+                    index = argv.index("--build")
+                    rt.require(index + 1 < len(argv) and Path(argv[index + 1]).resolve() == self.build, "ninja_shell_phase")
+                    return "compile"
+                if "-B" in argv and "-S" in argv:
+                    index, source = argv.index("-B"), argv.index("-S")
+                    rt.require(index + 1 < len(argv) and source + 1 < len(argv)
+                               and Path(argv[index + 1]).resolve() == self.build
+                               and Path(argv[source + 1]).resolve() == self.source, "ninja_shell_phase")
+                    return "configure"
+        raise rt.BoundaryError("ninja_shell_phase")
+
+    def recipe_refs(self, cwd):
+        rows = []
+        for name in ("build.ninja", "CMakeFiles/rules.ninja"):
+            path = rt.safe_path(cwd, name)
+            before = path.lstat()
+            rt.require(stat.S_ISREG(before.st_mode) and not getattr(before, "st_file_attributes", 0) & 1024
+                       and before.st_size <= RECIPE_LIMIT, "ninja_shell_recipe")
+            with path.open("rb") as stream:
+                raw = stream.read(RECIPE_LIMIT + 1)
+            after = path.lstat()
+            rt.require(len(raw) == before.st_size <= RECIPE_LIMIT
+                       and (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns)
+                       == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns), "ninja_shell_recipe_changed")
+            rows.append({"file": name, "sha256": rt.digest(raw), "size_bytes": len(raw)})
+        return rows
+
+    def admit(self, tree, process, identity):
+        rt.require(identity[2] == self.command, "unexpected_child_executable")
+        rt.check_refs(Path(self.environment["command"]).parent, [self.environment["command_reference"]])
+        args = process.cmdline()
+        rt.require(len(args) == 3 and args[1] == "/C" and isinstance(args[2], str) and args[2]
+                   and not any(c in args[2] for c in "\x00\r\n")
+                   and (args[0].lower() == "cmd.exe" or os.path.normcase(str(Path(args[0]).resolve())) == self.command),
+                   "ninja_shell_argv")
+        parent = tree.ps.Process(process.ppid())
+        parent_identity = tree.identity(parent)
+        rt.require(parent_identity in tree.seen and parent_identity[2] == self.ninja
+                   and parent_identity[1] <= identity[1] and parent.is_running(), "ninja_shell_parent")
+        parent_args = parent.cmdline()
+        rt.require(parent_args and os.path.normcase(str(Path(parent_args[0]).resolve())) == self.ninja
+                   and not any(arg.startswith(("-f", "--file")) for arg in parent_args[1:]), "ninja_shell_recipe_override")
+        rt.check_refs(Path(self.ninja).parent, [self.ninja_ref])
+        phase = self.phase(tree, parent)
+        cwd, parent_cwd = Path(process.cwd()).resolve(), Path(parent.cwd()).resolve()
+        rt.require(cwd == parent_cwd and cwd.is_relative_to(self.build), "ninja_shell_cwd")
+        rt.safe_path(self.output, cwd.relative_to(self.output).as_posix())
+        refs = self.recipe_refs(cwd)
+        previous = self.recipes.setdefault(parent_identity, {"cwd": str(cwd), "recipes": refs})
+        rt.require(previous == {"cwd": str(cwd), "recipes": refs}, "ninja_shell_recipe_changed")
+        row = {"identity": list(identity), "parent_identity": list(parent_identity), "phase": phase,
+               "cwd": str(cwd), "argv": args, "recipes": refs}
+        previous_shell = next((item for item in self.accepted if item["identity"] == list(identity)), None)
+        rt.require(previous_shell is None or previous_shell == row, "ninja_shell_identity_changed")
+        if previous_shell is None:
+            self.accepted.append(row)
+
+
+class NinjaOwnedTree(BASE_OWNED_TREE):
+    """Shared by inner runner and external observer; cmd is never allowlisted."""
+    def __init__(self, *args, shell_policy, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.shell_policy = shell_policy
+        rt.require(shell_policy.command not in self.allowed, "ninja_shell_general_allowlist")
+
+    def capture(self, process):
+        identity = self.identity(process)
+        self.seen[identity] = process  # Failed admission must still retain cleanup ownership.
+        if identity[2] not in self.allowed:
+            self.shell_policy.admit(self, process, identity)
+
+
+class NinjaShellScope:
+    def __init__(self, policy, phase):
+        self.policy, self.original = policy, rt.OwnedTree
+        self.record = {"phase": phase, "restored": False}
+
+    def run(self, runner, argv, **kwargs):
+        rt.require(rt.OwnedTree is self.original is BASE_OWNED_TREE, "ninja_shell_adapter_changed")
+        policy, error = self.policy, None
+
+        class BoundTree(NinjaOwnedTree):
+            def __init__(self, *args, **kw):
+                super().__init__(*args, shell_policy=policy, **kw)
+
+        rt.OwnedTree = BoundTree
+        try:
+            return runner(argv, **kwargs)
+        except BaseException as exc:
+            error = exc
+            raise
+        finally:
+            changed = rt.OwnedTree is not BoundTree
+            rt.OwnedTree = self.original
+            self.record["restored"] = rt.OwnedTree is self.original
+            if changed:
+                if error is None:
+                    raise rt.BoundaryError("ninja_shell_adapter_changed")
+                error.add_note("ninja_shell_adapter_changed_before_restore")
 
 
 def live_scan_policy():
@@ -462,6 +638,22 @@ def check_live_scan_history(output, manifest):
                    "live_scan_history")
 
 
+def check_shell_history(output, manifest):
+    saved = manifest.get("ninja_shell", {})
+    attempt = rt.load(output / "build-attempt.json").get("ninja_shell", {})
+    rt.require(saved.get("policy") == NINJA_SHELL_POLICY and saved.get("canonical_output") == str(output.resolve())
+               and attempt == {key: value for key, value in saved.items() if key not in ("shells", "phases")}, "ninja_shell_history")
+    rt.require(saved.get("phases") == [{"phase": name, "restored": True} for name in ("configure", "compile")]
+               and saved["environment"]["autorun"] == check_autorun(lambda hive: next(row["value"] for row in saved["environment"]["autorun"] if row["hive"] == hive)),
+               "ninja_shell_history")
+    for row in saved.get("shells", []):
+        rt.require(row["phase"] in ("configure", "compile") and Path(row["cwd"]).is_relative_to(output / "build")
+                   and row["identity"][2] == os.path.normcase(saved["environment"]["command"])
+                   and row["parent_identity"][2] == os.path.normcase(saved["ninja"])
+                   and len(row["argv"]) == 3 and row["argv"][1] == "/C"
+                   and [ref["file"] for ref in row["recipes"]] == ["build.ninja", "CMakeFiles/rules.ninja"], "ninja_shell_history")
+
+
 def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monotonic, native_drive=None, mapping_backend=None):
     original, output = roots(original, output)
     rt.require(not output.exists(), "compat_build_once")
@@ -469,12 +661,19 @@ def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monoto
     record, patched = inputs(original, output, lock, reviewed_sha)
     sources = source_refs()
     scan_policy, scan_phases = live_scan_policy(), []
+    shell_env = shell_environment()
+    for path in (original, output, REPO, rt.BUNDLE):
+        shell_path(path)
+    shell_policy, shell_phases = None, []
     output.mkdir(parents=True)
     rt.write(output / "build-issued.json", {"original_root": str(original), "review_artifact_sha256": reviewed_sha,
              "sources": sources, "retry": False, "shared_runner_seconds": 900, "whole_cli_900_bound": False})
     try:
         copy_cmake(original, output, record, patched)
         cmake, ninja, cc, cxx, allowed = executables(original, output, lock)
+        for path in (cmake, ninja, cc, cxx):
+            shell_path(path)
+        shell_policy = NinjaShellPolicy(output, ninja, cmake, shell_env)
         deadline = clock() + 900
         trace = output / "configure-trace.jsonl"
         with NativeDrive(native_drive, output, "build-native-drive", mapping_backend) as paths:
@@ -487,18 +686,25 @@ def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monoto
                          "-DCMAKE_MAKE_PROGRAM=" + str(paths.path(ninja)), "-DCMAKE_BUILD_TYPE=Release"]
             rt.write(output / "build-attempt.json", {"command": list(map(str, configure)), "inputs": record,
                      "optional_probe_preflight": probe, "deadline_seconds": 900, "retry": False,
-                     "native_drive": paths.record, "live_disk_scan": scan_policy})
+                     "native_drive": paths.record, "live_disk_scan": scan_policy,
+                     "ninja_shell": {key: value for key, value in shell_policy.record.items() if key != "shells"}})
             kwargs = {"cwd": native_output, "env": env, "root": native_output, "deadline": deadline, "rss": 2 * 1024**3,
                       "host": 2 * 1024**3, "start": 4 * 1024**3, "allowed": allowed}
             configure_scan = LiveDiskScan(output, native_output, paths, "configure")
             scan_phases.append(configure_scan.record)
-            paths.run(lambda argv, **kw: configure_scan.run(runner, argv, **kw), configure, log_prefix=paths.path(output / "configure"), **kwargs)
+            configure_shell = NinjaShellScope(shell_policy, "configure")
+            shell_phases.append(configure_shell.record)
+            paths.run(lambda argv, **kw: configure_shell.run(lambda args, **opts: configure_scan.run(runner, args, **opts), argv, **kw),
+                      configure, log_prefix=paths.path(output / "configure"), **kwargs)
             receipt_ok(output, "configure")
             rt.require(probe == prep.optional_probe_guard(native_output, record["optional_ld_query"], env, native_cmake.parent), "optional_probe_changed")
             traced = prep.audit_trace(trace, allowed, probe, output)
             compile_scan = LiveDiskScan(output, native_output, paths, "compile")
             scan_phases.append(compile_scan.record)
-            paths.run(lambda argv, **kw: compile_scan.run(runner, argv, **kw), [native_cmake, "--build", paths.path(output / "build"), "--target", "summary-grammar-validator", "--parallel", "2"],
+            compile_shell = NinjaShellScope(shell_policy, "compile")
+            shell_phases.append(compile_shell.record)
+            paths.run(lambda argv, **kw: compile_shell.run(lambda args, **opts: compile_scan.run(runner, args, **opts), argv, **kw),
+                      [native_cmake, "--build", paths.path(output / "build"), "--target", "summary-grammar-validator", "--parallel", "2"],
                       log_prefix=paths.path(output / "compile"), **kwargs)
             receipt_ok(output, "compile")
         check_inputs(original, output, record, reviewed_sha)
@@ -515,12 +721,14 @@ def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monoto
                   "native_drive": paths.record,
                   "native_drive_receipt": rt.reference(output / "build-native-drive.json", output) if native_drive else None,
                   "live_disk_scan": dict(scan_policy, phases=scan_phases),
+                  "ninja_shell": dict(shell_policy.record, phases=shell_phases),
                   "disk_scope": "4 GiB writable derivative/build/temp output only; original inputs remain separate read-only. No combined peak bound."}
         rt.write_bounded(output, output / "build-manifest.json", result)
         return result
     except Exception as error:
         failure_record(output / "build-failure.json", {"error": type(error).__name__, "reason": str(error), "no_retry": True,
                        "live_disk_scan": dict(scan_policy, phases=scan_phases),
+                       "ninja_shell": dict(shell_policy.record, phases=shell_phases) if shell_policy else {"environment": shell_env},
                        "partial_files_preserved": True, "driver_does_not_write_original_inputs": True,
                        "original_input_preservation": "Not inferred on failure; requires separate closeout."}, error)
         raise
@@ -548,6 +756,7 @@ def check_build(output, build_sha):
         receipt_ok(output, name)
     check_drive_history(output, manifest)
     check_live_scan_history(output, manifest)
+    check_shell_history(output, manifest)
     return manifest
 
 
