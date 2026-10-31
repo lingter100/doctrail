@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_validation_source_manifest",
+  "split": "validation",
+  "status": "prepared_pending_independent_source_review",
+  "author": "/root/service_rag_validation_sources",
+  "registration_commit": "cae10eca65362a5b64526a1484d8a93efa3c682b",
+  "public_repository": "rust-lang/types-team",
+  "public_revision": "cf4adc0044987bceed00d5a8efa225b475e4ad91",
+  "public_family_candidate": 1,
+  "parent_metadata_copies": [
+    {
+      "original_path": ".local/service-rag-validation-v3-reservation/types-team/repository.json",
+      "local_copy": ".local/service-rag-validation-v3/parent-reservation/repository.json",
+      "sha256": "bd90272e6cfdab981b66ec4bef57731661950e7dfdf8a3ab9147804a7fc30209",
+      "bytes": 6516
+    },
+    {
+      "original_path": ".local/service-rag-validation-v3-reservation/types-team/revision.json",
+      "local_copy": ".local/service-rag-validation-v3/parent-reservation/revision.json",
+      "sha256": "9011738cc7d314f31b8b5ec316e493cafbdfe55d8c53051b6552275ddee6d759",
+      "bytes": 347
+    },
+    {
+      "original_path": ".local/service-rag-validation-v3-reservation/types-team/tree.json",
+      "local_copy": ".local/service-rag-validation-v3/parent-reservation/tree.json",
+      "sha256": "410598182b7667e63e21e37c974f79cafad138ed5bb2df94b731cf8117266fe7",
+      "bytes": 18353
+    },
+    {
+      "original_path": ".local/service-rag-validation-v3-reservation/types-team/receipt.json",
+      "local_copy": ".local/service-rag-validation-v3/parent-reservation/receipt.json",
+      "sha256": "91a94231150b992e7fe3544dfc436ecdfc4f5fc40019cad85c088d0ce8ad0fa4",
+      "bytes": 8717
+    }
+  ],
+  "license_evidence": [
+    {
+      "path": ".local/service-rag-validation-v3/raw/LICENSE-APACHE",
+      "bytes": 10847,
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "git_blob_sha1": "16fe87b06e802f094b3fbb0894b137bca2b16ef1",
+      "upstream_path": "LICENSE-APACHE"
+    },
+    {
+      "path": ".local/service-rag-validation-v3/raw/LICENSE-MIT",
+      "bytes": 1023,
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+      "git_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+      "upstream_path": "LICENSE-MIT"
+    }
+  ],
+  "license_scope_assessment": {
+    "basis": "Root LICENSE-MIT expressly includes associated documentation files; root LICENSE-APACHE defines source to include documentation. Repository README describes this repository as containing meeting minutes, sprints and draft documents. No nested license or selected-file-specific conflicting notice was found in the pinned tree/selected documents.",
+    "declared_repository_licenses": [
+      "Apache-2.0",
+      "MIT"
+    ],
+    "public_use_basis": "Repository root terms with complete license copies and original source attribution retained; independently reviewed applicability still pending.",
+    "external_links": "Links and quoted code remain part of unchanged repository documents; linked external destinations were not fetched or treated as extra source documents.",
+    "not_independent_legal_or_human_approval": true
+  },
+  "families": [
+    {
+      "family_id": "V3-PUBLIC-01",
+      "origin": "public",
+      "source_ids": [
+        "V3-P-M1",
+        "V3-P-M2",
+        "V3-P-G1"
+      ],
+      "author_completion_assessment": "Dated files are in the repository minutes directory identified by README as past meetings. First includes named live question/answer discussion after presentation material; second includes explicit discussion conclusions and meeting conclusions, not only a future agenda. Future proposals, uncertainties and planned work remain labeled as such.",
+      "author_relation_assessment": "Both meetings discuss the same formality effort within the types team; README records the team scope, collaboration and design-meeting purpose.",
+      "qualification": "Dated path and published minutes/Q&A support the author classification; independent source reviewer must assess completion and scope."
+    },
+    {
+      "family_id": "V3-SYNTHETIC-01",
+      "origin": "synthetic",
+      "source_ids": [
+        "V3-S-M1",
+        "V3-S-M2",
+        "V3-S-G1"
+      ],
+      "authorship": "New AI-authored fictional sources created during this assignment, not public evidence. Each body states fiction and actor identity.",
+      "source_composition": "Two completed fictional meetings on distinct dates and a related ordinary operating document.",
+      "human_review": false
+    }
+  ],
+  "documents": [
+    {
+      "source_id": "V3-P-M1",
+      "document_id": "V3-P-M1",
+      "family_id": "V3-PUBLIC-01",
+      "origin": "public",
+      "kind": "meeting",
+      "meeting_date": "2022-03-18",
+      "title": "a MIR Formality, goals and the reality",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/public-meeting-01.md",
+      "raw_size_bytes": 42623,
+      "raw_sha256": "accbbd8af950602891a1ed39d79c82f7ce03afe54482de9a737760bb61f787c7",
+      "git_blob_sha1": "aae175476215d49b691446a8db456a96d1c8e907",
+      "upstream_path": "minutes/2022-03-18-mir-formality-goals-and-reality.md",
+      "repository": "rust-lang/types-team",
+      "upstream_revision": "cf4adc0044987bceed00d5a8efa225b475e4ad91",
+      "processed_sha256": "accbbd8af950602891a1ed39d79c82f7ce03afe54482de9a737760bb61f787c7",
+      "processed_codepoints": 42623,
+      "product_upload_filename": "V3-P-M1.md",
+      "chunk_count": 51,
+      "processed_inventory_path": "data/evaluation/meetings-service-rag-validation-v3/source-inventory-v3.json",
+      "source_url": "https://raw.githubusercontent.com/rust-lang/types-team/cf4adc0044987bceed00d5a8efa225b475e4ad91/minutes/2022-03-18-mir-formality-goals-and-reality.md"
+    },
+    {
+      "source_id": "V3-P-M2",
+      "document_id": "V3-P-M2",
+      "family_id": "V3-PUBLIC-01",
+      "origin": "public",
+      "kind": "meeting",
+      "meeting_date": "2022-05-27",
+      "title": "Formality roadmap",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/public-meeting-02.md",
+      "raw_size_bytes": 5941,
+      "raw_sha256": "d2f7f9a0ffe37e89fbb5a9b9b975f10ff032e83f35272f6d2c20440e9cb4a5a1",
+      "git_blob_sha1": "8c662068bcf8f31d207be5511bf1408ad3e19122",
+      "upstream_path": "minutes/2022-05-27-mir-formality-roadmap.md",
+      "repository": "rust-lang/types-team",
+      "upstream_revision": "cf4adc0044987bceed00d5a8efa225b475e4ad91",
+      "processed_sha256": "d2f7f9a0ffe37e89fbb5a9b9b975f10ff032e83f35272f6d2c20440e9cb4a5a1",
+      "processed_codepoints": 5941,
+      "product_upload_filename": "V3-P-M2.md",
+      "chunk_count": 7,
+      "processed_inventory_path": "data/evaluation/meetings-service-rag-validation-v3/source-inventory-v3.json",
+      "source_url": "https://raw.githubusercontent.com/rust-lang/types-team/cf4adc0044987bceed00d5a8efa225b475e4ad91/minutes/2022-05-27-mir-formality-roadmap.md"
+    },
+    {
+      "source_id": "V3-P-G1",
+      "document_id": "V3-P-G1",
+      "family_id": "V3-PUBLIC-01",
+      "origin": "public",
+      "kind": "general",
+      "meeting_date": null,
+      "title": "Types Team",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/README.md",
+      "raw_size_bytes": 1663,
+      "raw_sha256": "e185ce7501d8f5d5ec4337fa8a159ecbd69a07266732bc22eb74f3c5038c71a2",
+      "git_blob_sha1": "8f624fcdc4ab87923dce4d16620da6953d456336",
+      "upstream_path": "README.md",
+      "repository": "rust-lang/types-team",
+      "upstream_revision": "cf4adc0044987bceed00d5a8efa225b475e4ad91",
+      "processed_sha256": "e185ce7501d8f5d5ec4337fa8a159ecbd69a07266732bc22eb74f3c5038c71a2",
+      "processed_codepoints": 1663,
+      "product_upload_filename": "V3-P-G1.md",
+      "chunk_count": 2,
+      "processed_inventory_path": "data/evaluation/meetings-service-rag-validation-v3/source-inventory-v3.json",
+      "source_url": "https://raw.githubusercontent.com/rust-lang/types-team/cf4adc0044987bceed00d5a8efa225b475e4ad91/README.md"
+    },
+    {
+      "source_id": "V3-S-M1",
+      "document_id": "V3-S-M1",
+      "family_id": "V3-SYNTHETIC-01",
+      "origin": "synthetic",
+      "kind": "meeting",
+      "meeting_date": "2026-04-07",
+      "title": "별모래 생활사관 촉각지도 순회함 운영회의",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/synthetic-meeting-01.md",
+      "raw_size_bytes": 3202,
+      "raw_sha256": "fe486eda6e4d6d6b81eaa3506216a5ec8bf420680273eb016623ebbbf07837c1",
+      "git_blob_sha1": "8c93d0f2e38608e96909220bebc40ab9c9710d8c",
+      "upstream_path": null,
+      "repository": null,
+      "upstream_revision": null,
+      "processed_sha256": "fe486eda6e4d6d6b81eaa3506216a5ec8bf420680273eb016623ebbbf07837c1",
+      "processed_codepoints": 1384,
+      "product_upload_filename": "V3-S-M1.md",
+      "chunk_count": 2,
+      "processed_inventory_path": "data/evaluation/meetings-service-rag-validation-v3/source-inventory-v3.json",
+      "source_url": null
+    },
+    {
+      "source_id": "V3-S-M2",
+      "document_id": "V3-S-M2",
+      "family_id": "V3-SYNTHETIC-01",
+      "origin": "synthetic",
+      "kind": "meeting",
+      "meeting_date": "2026-04-24",
+      "title": "별모래 생활사관 촉각지도 순회함 반납 점검회의",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/synthetic-meeting-02.md",
+      "raw_size_bytes": 3240,
+      "raw_sha256": "872bad4471bf206b33472f49227fbb20c4668370e2febdc14f8738e48b7f6815",
+      "git_blob_sha1": "706b91dbd2fc34d23c72b9173ba0a9015885dfd0",
+      "upstream_path": null,
+      "repository": null,
+      "upstream_revision": null,
+      "processed_sha256": "872bad4471bf206b33472f49227fbb20c4668370e2febdc14f8738e48b7f6815",
+      "processed_codepoints": 1404,
+      "product_upload_filename": "V3-S-M2.md",
+      "chunk_count": 2,
+      "processed_inventory_path": "data/evaluation/meetings-service-rag-validation-v3/source-inventory-v3.json",
+      "source_url": null
+    },
+    {
+      "source_id": "V3-S-G1",
+      "document_id": "V3-S-G1",
+      "family_id": "V3-SYNTHETIC-01",
+      "origin": "synthetic",
+      "kind": "general",
+      "meeting_date": null,
+      "title": "별모래 생활사관 촉각지도 순회함 운영 기준 1.0",
+      "revision": 1,
+      "raw_snapshot": ".local/service-rag-validation-v3/raw/synthetic-general-01.md",
+      "raw_size_bytes": 3172,
+      "raw_sha256": "fe5c166ef0450108056880f39312d29636ae5f52229f65fe5fbecff87517ea0c",
+      "git_blob_sha1": "1f1abc2d550d801e4c2112ad0c337185cf950638",
+      "upstream_path": null,
+      "repository": null,
+      "upstream_revision": null,
+      "processed_sha256": "fe5c166ef0450108056880f39312d29636ae5f52229f65fe5fbecff87517ea0c",
+      "processed_codepoints": 1376,
+      "product_upload_filename": "V3-S-G1.md",
+      "chunk_count": 2,
+      "processed_inventory_path": "data/evaluation/meetings-service-rag-validation-v3/source-inventory-v3.json",
+      "source_url": null
+    }
+  ],
+  "processing": {
+    "implementation": "existing doctrail.ingest.extract and doctrail.retrieval.chunk_content",
+    "chunk_codepoints": 1000,
+    "overlap_codepoints": 150,
+    "whole_originals": true,
+    "selected_contexts": 0,
+    "questions": 0
+  },
+  "canonical_inventory_sha256": "b0ecb9a1a56743f74b4379b55bda60d2950964b79095aca1cbffbdd629e61a83",
+  "fingerprints_path": "data/evaluation/meetings-service-rag-validation-v3/source-fingerprints-v3.json",
+  "fingerprint_comparison_path": "data/evaluation/meetings-service-rag-validation-v3/source-fingerprint-comparison-v3.json",
+  "actual_ingestion": {
+    "path": ".local/service-rag-validation-v3/java-ingestion-observation-v3.json",
+    "sha256": "41630dccf819534a9807d353b1150d84e7c55a44db93e3e938cf3fe834dd5e17",
+    "document_uploads": 6,
+    "document_reads": 6,
+    "complete_chunks": 66,
+    "raw_db_identity": true,
+    "canonical_coordinates_identity": true,
+    "analysis_or_answer_execution": false,
+    "meeting_autoanalysis_proven": false
+  },
+  "code_bindings": {
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/main/java/io/doctrail/DocumentService.java": "cf80b13d3eb6c786c8b4633119f790fb39131c0f5f06ce7ec02bcba0a2ad1a0b",
+    "server/src/main/java/io/doctrail/ApiController.java": "896b44d40979a0492fc92dcf5e01d746993bf40650262d810369296b76284517",
+    "server/src/main/java/io/doctrail/Store.java": "932f5949aaa57f6c5121ff6f98422626592b5145639624c3309a5796c58ebdc7",
+    "server/src/main/java/io/doctrail/GenerationClient.java": "5fce2ec0a8e6512cbe3dd4cad8c50c17ff0b7edb347bf7b094d388aa880070a0",
+    "server/src/main/java/io/doctrail/MeetingService.java": "59607dcc54cab3226d5c535b81d1f2b2b85df1d31232dd3169743fe009700780",
+    "server/src/main/resources/application.properties": "81163cde7cfaef6476d0e4c1cd0ace89302ae6aad6a5e4bc4b0f59600bbdfa53",
+    "server/target/doctrail-server-0.1.0.jar": "8476ba7728f392e62aa53a3999de8d2f08982012dc2a345f503bedb59564976b"
+  },
+  "freshness_limits": "Bound historical source fingerprints have incomplete coverage. Exact raw/normalized/long-paragraph matches are zero against recorded hashes; semantic or translation duplication absence is not established. Other-split semantic material was not read.",
+  "independent_source_review": "pending separate registered reviewer",
+  "source_freeze": null,
+  "questions_or_oracles_created": false,
+  "no_c7_admission_or_trimming": true
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "meetings-proof-epoch-ci-v1",
+  "observed_at": "2026-10-20T01:29:10.200701+00:00",
+  "head_sha": "73c36bf1499d2c6cc7721b06a0d1fa54545c24e6",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-proof-epoch-source-freeze-v1.json",
+    "sha256": "261abc74b39862f9768387def7a86629ea6345dd43ccb692f6abed6f2174a4f1"
+  },
+  "fixture_spec": {
+    "file": "data/evaluation/meetings-proof-epoch-fixture-spec-v1.json",
+    "sha256": "1a0e9d794f3e6e5a0e52a4281e01ed2f88d3be4828d28ee540661633c8e3584e"
+  },
+  "runs": [
+    {
+      "run_id": 39353187562,
+      "head_sha": "73c36bf1499d2c6cc7721b06a0d1fa54545c24e6",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39353187562"
+    },
+    {
+      "run_id": 39353192367,
+      "head_sha": "73c36bf1499d2c6cc7721b06a0d1fa54545c24e6",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39353192367"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "claim_scope": "Observed GitHub exact source commit required jobs; offline runner verifies committed observation bytes and Git identities, not GitHub authenticity. No inferred test counts or model quality."
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "reviewed_at_utc": "2026-10-20T03:24:21.358701+00:00",
+  "verdict": "rejected",
+  "accepted_ids": [
+    "C6-VAL-01",
+    "C6-VAL-02",
+    "C6-VAL-03",
+    "C6-VAL-04",
+    "C6-VAL-05",
+    "C6-VAL-06",
+    "C6-VAL-07"
+  ],
+  "rejected_ids": [
+    "C6-VAL-08"
+  ],
+  "author_ids": [
+    "/root/c6_validation_author"
+  ],
+  "reviewer_id": "/root/c6_validation_prereviewer",
+  "human_review_count": 0,
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "all_sufficient_alternatives_complete": false,
+  "semantic_finding_categories": {
+    "missing_sufficient_evidence_alternative": 1
+  },
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "preauthorization_head": "eae71405b679f19ec2f7c53a591bc64052c3de17",
+  "actual_preauthorization": {
+    "file": ".local/meetings-c6-validation-item-review-v1/preauthorization-v1.json",
+    "sha256": "d0d620dd871c263d25156a475781a31152c66d4007b9927e15ea4e2cc9adbccf"
+  },
+  "item_handoff": {
+    "file": ".local/meetings-c6-validation-item-v1/handoff-v1.json",
+    "sha256": "b5176b773ca49aa7b9c63fbc8b508390096ff1d4e1267fbbe9bff1f833d51f5e"
+  },
+  "original_item_hashes": {
+    "data/evaluation/meetings-c6-validation-v1/draft.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft.json": "196ed54abf3709213e7818fecd30b9f746ff30493133f48b5f37320d7c55ba19",
+    "data/evaluation/meetings-c6-validation-v1/context-selection.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c",
+    "data/evaluation/meetings-c6-validation-v1/author-receipt.json": "6c0e19979d53250e4e68881db07f8e906350fce1e405f25c4e702802b510bde0"
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c6-validation-v1/source-freeze.json",
+    "sha256": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625"
+  },
+  "toolchain_freeze": {
+    "file": "data/evaluation/meetings-c6-toolchain-freeze-v1.json",
+    "sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b"
+  },
+  "structural_replay": {
+    "file": ".local/meetings-c6-validation-item-review-v1/structural-replay-v1.json",
+    "sha256": "14c676966202be5f7a1808454c5747fef0e5265a43e58bd6cc1f588fdbf14610"
+  },
+  "semantic_notes": {
+    "file": "data/evaluation/meetings-c6-validation-v1/item-prereview-notes.md",
+    "sha256": "75edb49498c21aa2df2bb29fadcb035fa190b7ce947db4f21c8602b3e4ebb0bf"
+  },
+  "facts_reviewed": 33,
+  "missing_required_facts": 5,
+  "required_item_counts": {
+    "cases": 8,
+    "answered": 4,
+    "abstained": 4,
+    "ko": 4,
+    "en": 4
+  },
+  "accepted_item_count": 7,
+  "rejected_item_count": 1,
+  "item_freeze_created": false,
+  "source_or_item_edits": 0,
+  "same_split_source_item_review_reuse_disclosed": true,
+  "excluded_from_final_output_judging": true,
+  "prior_exposure": {
+    "automatic_AGENTS_memory_and_public_metadata": true,
+    "own_validation_source_prereview": true,
+    "previous_explicit_finalized_calibration_SOURCE_only_freshness_comparison": true,
+    "calibration_source_semantic_rereads_in_this_item_stage": 0,
+    "calibration_item_oracle_selection_reads": 0,
+    "fully_blind_or_pristine_claim": false
+  },
+  "author_sequence_disclosure": {
+    "reference": ".local/meetings-c6-validation-item-v1/sequence-disclosure-v1.json",
+    "sha256": "cda9f41f23d4018fa11cae9652e1aca247e22923a0c49362d43a87acb3eeb470",
+    "prior_authorized_source_memory_theme_planning_while_preauth_pending_preserved": true,
+    "new_source_reread_or_item_artifact_before_proof_claimed_by_author": false,
+    "internal_thought_timing_independently_proven": false
+  },
+  "mechanical_checks": {
+    "validate_draft": "passed",
+    "validate_oracles": "passed",
+    "whole_chunks_coordinates_and_selection": "passed",
+    "all_abstention_family_sources_included": "passed",
+    "structural_success_is_semantic_acceptance": false
+  },
+  "coverage_answered_only": {
+    "general_only": 1,
+    "multiple_meetings": 2,
+    "general_plus_meeting": 1,
+    "all_sufficient_alternatives_require_multiple_documents": 3,
+    "ko_question_en_evidence": true,
+    "en_question_ko_evidence": true
+  },
+  "findings": [
+    {
+      "item_id": "C6-VAL-08",
+      "fact_id": "v08f02",
+      "category": "missing_sufficient_evidence_alternative",
+      "severity": "blocks_item_acceptance",
+      "supported_alternative": {
+        "chunk_id": "c6-v-sodam-0409-r1-c0000",
+        "start_offset": 772,
+        "end_offset": 994,
+        "quote": "입고번호 SD-26-23의 봉투에는 크기와 색이 다른 씨앗이 함께 들어 있다. 기증자 메모에는 같은 밭에서 받았다는 말만 있고 두 형태가 같은 계통인지는 확인되지 않았다. 이번 회의에서는 외형별 사진을 붙여 한 묶음으로 보관하고, 임의의 새 품종명을 붙이거나 다른 입고번호로 나누지 않기로 했다. 오다빈이 기증자에게 채종 경위를 확인한다. 이 묶음의 교환 수량이나 발아검사 일정은 정하지 않았다.\n"
+      },
+      "existing_alternatives": 2,
+      "required_additional_alternatives": 1,
+      "question_fact_source_context_edits_required": false
+    }
+  ],
+  "counts": {
+    "tokenizer_calls": 0,
+    "official_offline_preparations": 0,
+    "native_generations": 0,
+    "product_model_calls": 0,
+    "Maven_or_test_runs": 0,
+    "Git_mutations": 0,
+    "source_edits": 0,
+    "author_item_edits": 0,
+    "old_closed_semantic_reads": 0,
+    "final_judge_contacts_or_reads": 0
+  },
+  "next_gate": "Preserve original rejected item set; parent routes author-safe feedback and registers a new version. No item freeze, offline preparation or model generation until independent acceptance and commit.",
+  "author_safe_feedback": {
+    "file": ".local/meetings-c6-validation-item-review-v1/author-safe-feedback-v1.json",
+    "sha256": "5570b6d4a06f55383f02da20f6a1df2bc911f73302bdc41134d39df8da5ddd3c"
+  },
+  "prereview_gate_check": {
+    "status": "correctly_rejected",
+    "code": "preparation_prereview_not_accepted",
+    "official_preparation_invoked": false
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "CI_regression_expectation_fix",
+  "original_CI_outcome": {
+    "runs": [
+      {
+        "run_id": 39724828993,
+        "url": "https://github.com/lingter100/doctrail/actions/runs/39724828993",
+        "event": "push",
+        "head_sha": "546242f22467095b80d897ad7b773130f1d4a4fb",
+        "status": "completed",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "name": "java-service",
+            "status": "completed",
+            "conclusion": "failure"
+          },
+          {
+            "name": "web",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "backend",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ],
+        "failed_log": {
+          "path": ".local/knowledge-answer-messages-v1/ci-546242f/39724828993-failed.log",
+          "bytes": 41873,
+          "sha256": "f694784343e75d00241e9decc099af0027be43b281eaaa2165e3ccc1c55d161d"
+        }
+      },
+      {
+        "run_id": 39724834172,
+        "url": "https://github.com/lingter100/doctrail/actions/runs/39724834172",
+        "event": "pull_request",
+        "head_sha": "546242f22467095b80d897ad7b773130f1d4a4fb",
+        "status": "completed",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "name": "java-service",
+            "status": "completed",
+            "conclusion": "failure"
+          },
+          {
+            "name": "backend",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "web",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ],
+        "failed_log": {
+          "path": ".local/knowledge-answer-messages-v1/ci-546242f/39724834172-failed.log",
+          "bytes": 41872,
+          "sha256": "75f3cfe24e3ffc6a443e023fad93d88183ae232a0f9da441182fe9301f5291ee"
+        }
+      }
+    ],
+    "observed_failed_check": "meeting-unavailable.spec.ts:31 expects old generation_disabled knowledge text",
+    "whole_browser_batch": {
+      "passed": 86,
+      "failed": 1
+    },
+    "planned_fix_scope": "Knowledge assertion only; shared meeting analysis warning stays unchanged. No test weakening or model/code policy change."
+  },
+  "local_fix_receipt": {
+    "path": ".local/knowledge-answer-messages-ci-fix-v1/receipt.json",
+    "bytes": 6018,
+    "sha256": "9a8bf3344d771ad043353fcfd74115f94da20177134cea2befcd0ef67d71e9ee"
+  },
+  "source_after": {
+    "path": "web/tests/meeting-unavailable.spec.ts",
+    "bytes": 4928,
+    "sha256": "1e42ceb5791484b31395a8fbdcbb227e680da255e29aa7429f935c798503650c"
+  },
+  "change": "Only the knowledge-screen disabled-answer message expectation changes. Meeting-analysis warning expectation and product sources stay unchanged.",
+  "local_checks": {
+    "typecheck": "passed",
+    "real_Java_browser_target": {
+      "passed": 2,
+      "failed": 0,
+      "seconds": 12.9
+    },
+    "full_suite_repeated": false
+  },
+  "reproduction_commands": [
+    "npm.cmd run typecheck",
+    "DOCTRAIL_E2E_SPEC=meeting-unavailable.spec.ts DOCTRAIL_E2E_BATCH_DIRECTORY=.local/knowledge-answer-messages-ci-fix-v1 node scripts/test-java.mjs meeting-unavailable.spec.ts (cwd web)"
+  ],
+  "parent_verification": {
+    "bindings_checked": 24,
+    "exact_one_assertion_replacement": true,
+    "browser_report_read": true,
+    "owned_JVM_absent_now": true,
+    "rebuilds": 0,
+    "native_model_calls": 0
+  },
+  "status": "Local correction verified. Exact new commit CI is pending. Original remote failures are retained.",
+  "human_review": false
+}

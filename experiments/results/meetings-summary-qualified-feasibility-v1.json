@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "status": "source_only_feasibility_complete_candidate_gate_not_met",
+  "decision": "HOLD prospective qualified-summary implementation under the current plan; four-of-four sufficient natural witnesses are not established",
+  "source_set_id": "meeting-summary-qualified-sources-v1",
+  "source_only": true,
+  "source_document_count": 4,
+  "provisional_unit_count": 307,
+  "repository_family_count": 2,
+  "criteria_count": 4,
+  "attempted_witness_count": 8,
+  "attempts_per_source_representation": 1,
+  "aggregate": {
+    "flat": {
+      "possible": 2,
+      "impossible": 0,
+      "unconfirmed": 2
+    },
+    "qualified": {
+      "possible": 1,
+      "impossible": 0,
+      "unconfirmed": 3
+    }
+  },
+  "valid_existence_witnesses_total": 3,
+  "structurally_valid_attempts": 6,
+  "pairwise_aggregate": {
+    "both_possible": 1,
+    "flat_possible_qualified_unconfirmed": 1,
+    "both_unconfirmed": 2,
+    "flat_possible_qualified_proven_impossible": 0,
+    "both_proven_impossible": 0
+  },
+  "constraint_issue_categories": {
+    "claim_evidence_union": 2,
+    "claim_count": 1,
+    "condition_relation_scope": 2,
+    "single_core_event_or_judgment": 1,
+    "whole_claim_support": 1
+  },
+  "generic_findings": [
+    "Some once-authored candidates exceed the common claim count or claim evidence-union limits while preserving all required content. They are rejected as valid witnesses rather than repaired by dropping core content.",
+    "A qualified core can still combine distinct events, and exact joined qualifiers can attach a condition to the wrong event. Valid fields and exact spans alone do not prove semantic adequacy.",
+    "An additional explanatory clause can lack source support even if the required core facts are present.",
+    "These are failures of locked single attempts. No exhaustive impossibility proof for either representation was performed."
+  ],
+  "mechanical_aggregate": {
+    "flat_total_claims": 24,
+    "qualified_total_claims": 25,
+    "max_rendered_claim_codepoints": 132,
+    "max_document_claim_codepoints": 621,
+    "original_span_or_invalid_ID_findings": 0,
+    "text_length_findings": 0,
+    "metadata_or_span_checks_are_not_model_tokenizer_checks": true
+  },
+  "sequence_verified": {
+    "criteria_locked_before_witness_artifact": true,
+    "witnesses_saved_once_before_review": true,
+    "criteria_unchanged": true,
+    "witnesses_unchanged": true,
+    "author35_unchanged": true,
+    "admission14_unchanged": true,
+    "frozen77_unchanged": true,
+    "input54_unchanged": true
+  },
+  "limitations": [
+    "The same source-only AI fixed criteria, authored witnesses and checked them. This is not an independently blinded semantic adjudication or human review.",
+    "Possible means an AI-assessed existence example under the fixed source-only coordinates and criteria. It does not mean the service model can generate it.",
+    "Provisional zero-based unit spans precede tokenizer partition; input4096/template fit, output768 fit, actual runtime IDs, 120-second deadline, memory and latency remain unverified.",
+    "Four sources represent two related project families, not four independent organizations.",
+    "Publisher TLDR is retained but was not promoted to reference truth; no witness is an actual model output or training target.",
+    "Old L2 run-input unknown and all prior failed runs, locks and protected assignments remain unchanged.",
+    "No representation was proven impossible; unconfirmed cases block the plan gate without licensing retries, source replacement, criteria edits, prompt examples or budget increases."
+  ],
+  "counts": {
+    "model_calls": 0,
+    "tokenizer_calls": 0,
+    "native_runs": 0,
+    "java_runs": 0,
+    "network_calls_in_this_phase": 0,
+    "product_or_parser_module_changes": 0,
+    "project_module_imports": 0,
+    "git_operations": 0,
+    "human_reviews": 0,
+    "actual_service_model_outputs": 0,
+    "training_targets": 0,
+    "criteria_edits_after_lock": 0,
+    "witness_edits_after_lock": 0,
+    "witness_retries": 0,
+    "source_replacements": 0
+  },
+  "safe_receipt": {
+    "path": ".local/meeting-summary-qualified-independent-v1/source-only-feasibility-v1/safe-receipt.json",
+    "bytes": 6847,
+    "sha256": "d062c521a6be87620fd2c21bfbb69b9e206d6944d06eba32cbcadbdff18ccfce"
+  },
+  "artifact_index": {
+    "path": ".local/meeting-summary-qualified-independent-v1/source-only-feasibility-v1/artifact-index.json",
+    "bytes": 2727,
+    "sha256": "fedf320ee1fe1ef85d8c71728a2c3df9188cf0d416a86cc3879996107b1f805a"
+  },
+  "criteria_lock": {
+    "path": ".local/meeting-summary-qualified-independent-v1/source-only-feasibility-v1/criteria-lock.json",
+    "bytes": 1279,
+    "sha256": "34b6fe679a12931ee74897e44524b1ddcdc26fac4328352cee0ac22bed290789"
+  },
+  "judgment_lock": {
+    "path": ".local/meeting-summary-qualified-independent-v1/source-only-feasibility-v1/judgment-lock.json",
+    "bytes": 1167,
+    "sha256": "ff48750349e6f0e4aae374fb85fe28f9bf8c2bec6e2d6b5e75d9e1d3ad74d964"
+  },
+  "parent_verification": {
+    "review_output_refs": 11,
+    "fixed_inputs": 54,
+    "frozen77": 77,
+    "private_semantics_read": false
+  },
+  "human_review_count": 0
+}

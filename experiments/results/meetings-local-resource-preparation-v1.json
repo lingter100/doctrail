@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "status": "prepared_pure_verified_actual_execution_separately_assigned",
+  "source_head": "b5cae0d817510ba7b77eedf05ff2a146c038e624",
+  "registration_sha256": "ec9a1b3d74260c19b7921d783a2dfbfdc719f9c065a48685a95bdd0594589b90",
+  "companion_sha256": "a4964e0dd0f221295738b7159747ca0a8638a16c04917bebded30862e737f26e",
+  "resource_policy": "native-rss6-host2-v1",
+  "verification": {
+    "official_calls": 1,
+    "exit_code": 0,
+    "elapsed_seconds": 3.596289,
+    "full_asset_hash_passes": 1,
+    "assets": 62,
+    "runtime_files": 55,
+    "current_code_files": 60,
+    "parent_fixed_refs_verified": 264,
+    "parent_asset_stats_verified": 62
+  },
+  "comparison": {
+    "fixed_development_summaries": 4,
+    "fixed_development_questions": 4,
+    "source_wire_format": "source-parts-compact-v1",
+    "source_question_criteria_profile_assets_order_preserved": true,
+    "input_tokens": 4096,
+    "summary_tokens": 768,
+    "review_tokens": 128,
+    "qa_tokens": 256,
+    "summary_review_shared_seconds": 120,
+    "qa_seconds": 60,
+    "whole_seconds": 1025
+  },
+  "judge": {
+    "source_only_handoff_complete": true,
+    "criteria_changes": 0,
+    "human_review": 0,
+    "complete_blinding": false,
+    "individual_judgments_before_selfreview_and_performance": true
+  },
+  "execution": {
+    "fresh_gate_attempts_allowed": 1,
+    "CLI_calls_if_gate_passes": 1,
+    "startup_available_bytes": 8589934592,
+    "active_available_bytes": 2147483648,
+    "native_rss_bytes": 6442450944,
+    "scope": "sampled stop thresholds; not memory reservation",
+    "automatic_retry_or_fallback": false
+  },
+  "limitations": [
+    "Preparation is not live readiness, generation fit, semantic quality or service adoption.",
+    "Old v1/v2 consumed failures and unconsumed v3 with two gate refusals remain preserved.",
+    "Actual start, outcome and owned-process cleanup require separate execution evidence."
+  ]
+}

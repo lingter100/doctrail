@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "status": "ACQUISITION_VERIFIED_METADATA_REVIEW_PENDING",
+  "source_commit": "0c34174f65c6d415e046925a7b4e2d11495264f7",
+  "acquisition_profile": "data/models/meetings-generation-qwen25-7b-q4km-v1.json",
+  "profile_sha256": "6cb34ab578e55c61e20b7c5d49fc7cbb9086fd06cd57359e6b2ccd1ff67f97c7",
+  "model": "Qwen/Qwen2.5-7B-Instruct-GGUF",
+  "revision": "bb5d59e06d9551d752d08b292a50eb208b07ab1f",
+  "quantization": "Q4_K_M",
+  "asset_root": "models/meetings-qwen25-7b-q4km-v2",
+  "actual_cli_count": 1,
+  "actual_cli_exit": 0,
+  "wrapper_exit": 0,
+  "observer_elapsed_seconds": 862.9850000000442,
+  "transfer_bytes": 4683073632,
+  "complete_shards": 2,
+  "shards": [
+    {
+      "path": "models/meetings-qwen25-7b-q4km-v2/assets/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf",
+      "size": 3993201344,
+      "sha256": "dfce12e3862a5283ccfb88221b48480e58745165de856439950d0f22590580db"
+    },
+    {
+      "path": "models/meetings-qwen25-7b-q4km-v2/assets/qwen2.5-7b-instruct-q4_k_m-00002-of-00002.gguf",
+      "size": 689872288,
+      "sha256": "539cf93f78e887edea1c04e2d7d8cdaca9d01dae9c9025bcb8accbe29df3d72a"
+    }
+  ],
+  "first_failure": null,
+  "secondary_failures": [],
+  "limits": {
+    "shared_seconds": 1800,
+    "cleanup_reserved_seconds": 5,
+    "transfer_bytes": 5368709120,
+    "new_disk_bytes": 6442450944,
+    "metadata_bytes": 33554432
+  },
+  "parent_verification": {
+    "preservation_refs": 5390,
+    "custody_evidence_refs": 11,
+    "source_git_exact": 4,
+    "runtime_refs": 5,
+    "output_files": 17,
+    "unique_owned_identities_absent": 6,
+    "acceptance_sha256": "308e0b166b11cf0abe3163ba16ae12e11dbe2ba3633196f353611104e5508f1b",
+    "custody_receipt_sha256": "af8009ae11ef7aa2c5960b9e047d8104f41be605705252ebcca05ef0c883771d",
+    "safe_summary_sha256": "156f60f8cfd7e9520160fa9283c29b716ba9fce3e3c67ff6d53e195c304f5519",
+    "binding_sha256": "3d5b92363dc72b6cd3263cb0969035e64280379552930698ef68e63ca02fe79a"
+  },
+  "runtime": "Explicit isolated trusted Python3.12.14 with locked psutil7.2.2; original blocked uv environment unchanged. Asset-only compatibility evidence is separate.",
+  "retry": false,
+  "prior_failed_root_preserved": true,
+  "verify_only_rerun": false,
+  "actual_model_tokenizer_native_calls": 0,
+  "metadata_reviewed": false,
+  "human_semantic_review": 0,
+  "service_adopted": false,
+  "quality_claim": "No answer quality, latency, memory suitability or model loading result exists for this new model yet.",
+  "next": "Independent bounded embedded metadata review, explicit inference environment verification, separately sealed new six-case paired development comparison. No automatic rerun or service adoption."
+}

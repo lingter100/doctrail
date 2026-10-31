@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_only_registration",
+  "registered_at": "2026-10-20T07:02:44.192761+00:00",
+  "implementation_commit": "d462903c85cba0f132bbc9d13d6dfac915694805",
+  "bindings": [
+    {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    {
+      "path": "experiments/results/meetings-service-rag-implementation-ci-v1.json",
+      "sha256": "4c6f069fa15cd76cc4e065acd21354e0a3e413916cb8e61ce5629632a7fff06a"
+    },
+    {
+      "path": "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+      "sha256": "26506cbd3c1f49a4b1e6dcb8ce94acd50b410ff34f313d13551342331c3d52b3"
+    },
+    {
+      "path": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+      "sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa"
+    }
+  ],
+  "roles": [
+    {
+      "actor": "/root/service_rag_calibration_sources",
+      "split": "calibration",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "fork_turns": "none",
+      "actual_tool_acceptance": true,
+      "registration_returned": true,
+      "state_at_registration": "registration_only_no_source_access",
+      "allowed_paths": [
+        "data/evaluation/meetings-service-rag-calibration-v1/",
+        ".local/service-rag-calibration-v1/"
+      ],
+      "exposure": "Project instructions, latest status, service RAG plan and historical aggregate/procedure metadata. No actual source/question/oracle/output or other-split semantic material at registration.",
+      "excluded_from_final_answer_judging": true
+    },
+    {
+      "actor": "/root/service_rag_validation_sources",
+      "split": "validation",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "fork_turns": "none",
+      "actual_tool_acceptance": true,
+      "registration_returned": true,
+      "state_at_registration": "registration_only_no_source_access",
+      "allowed_paths": [
+        "data/evaluation/meetings-service-rag-validation-v1/",
+        ".local/service-rag-validation-v1/"
+      ],
+      "exposure": "Project instructions, latest status, service RAG plan and historical aggregate/procedure metadata. No actual source/question/oracle/output or other-split semantic material at registration.",
+      "excluded_from_final_answer_judging": true
+    }
+  ],
+  "dispatch_gate": [
+    "Implementation exact-head push and PR backend/java-service/web passed",
+    "This role and budget registration committed",
+    "Parent explicitly dispatches this source-only assignment",
+    "Reserve each repository and exact revision with parent before opening license or source bodies; repositories must differ between splits"
+  ],
+  "per_split_budget": {
+    "metadata_network_requests": 24,
+    "repositories_considered": 3,
+    "public_family_candidates": 2,
+    "source_body_fetches": 6,
+    "license_body_fetches_per_repository": 2,
+    "active_work_minutes": 30,
+    "excluded_waits": [
+      "parent repository reservation",
+      "exclusive Java/Maven slot"
+    ],
+    "automatic_extension": false,
+    "count_errors_and_failed_requests": true,
+    "scope": "Budgets start on explicit dispatch; source bodies and licenses have their separate caps, not the metadata cap. Record every network access."
+  },
+  "required_corpus": {
+    "documents": 6,
+    "public_families": 1,
+    "new_synthetic_families": 1,
+    "each_family": {
+      "completed_meetings_on_distinct_dates": 2,
+      "related_general_documents": 1
+    },
+    "whole_originals": true,
+    "no_c7_document_family_chunk_byte_admission": true,
+    "no_questions_or_oracles": true
+  },
+  "source_outputs": {
+    "required": [
+      "Original public bytes and applicable license bytes with pinned revision and source URLs",
+      "Clearly marked new AI-authored synthetic source bytes and authorship metadata",
+      "Manifest with identity, provenance, raw and normalized fingerprints, license scope and known limitations",
+      "Actual Java registration and complete indexed chunks, revisions, coordinate/hash checks using an isolated database",
+      "Author receipt, network/discovery log, artifact-index-v1.json and safe-summary-v1.json"
+    ],
+    "safe_summary": "Counts, hashes, repository/revision identities, license/status and failure categories only; no document synopsis, text, questions or oracle.",
+    "independent_source_review_and_freeze": "Pending separate actor registration after sources return; author does not self-accept."
+  },
+  "execution_boundaries": [
+    "Use existing service and parser paths; do not create a new general evaluation toolchain",
+    "Use an isolated local database and ports; never reset user data",
+    "Inference and generation disabled during Java source ingestion; no model/tokenizer/native/download calls",
+    "Serialize Java/Maven through parent; reuse the current verified jar if byte identity is verified",
+    "Do not mutate Git, root docs, frozen77, previous pools, exclusions or other-split files",
+    "Do not open old source bodies to fill historical fingerprint gaps",
+    "Preserve source retrieval failures and incomplete outcomes; no silent source trimming, substitution or budget extension"
+  ],
+  "freshness": "Exclude all 19 repositories plus identities and fingerprints in bound metadata. Historical normalized coverage is incomplete; no complete semantic-duplicate absence is claimed. Semantic review follows separately.",
+  "future_stages": "Independent source review/freeze, then question authorship and independent item review/freeze, then registered actual service run. Locked final test stays closed.",
+  "actual_at_registration": {
+    "source_body_fetches": 0,
+    "license_body_fetches": 0,
+    "new_documents": 0,
+    "questions": 0,
+    "native_calls": 0,
+    "human_review": 0
+  }
+}

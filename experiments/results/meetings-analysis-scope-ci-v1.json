@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "kind": "exact_scope_implementation_ci_and_harness_review",
+  "created_at_utc": "2026-10-22T03:48:04.034576+00:00",
+  "source_commit": "11cdaa7282a86b8a86a2ecb7700f07001a08b23c",
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 39718285606,
+      "event": "push",
+      "headSha": "11cdaa7282a86b8a86a2ecb7700f07001a08b23c",
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39718285606",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 39718289233,
+      "event": "pull_request",
+      "headSha": "11cdaa7282a86b8a86a2ecb7700f07001a08b23c",
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39718289233",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "code_bindings": [
+    {
+      "path": "src/doctrail/meeting_analysis_batch.py",
+      "bytes": 9293,
+      "sha256": "a12f779a27bf96bee02e5a77f14f75770ceac46fa86d4b66df0e961ee53d15c9",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_analysis_batch.py",
+      "bytes": 14642,
+      "sha256": "bc6abc0976111bf0888f4fb7be38e1250a094af942439a9a80db22b5419dee96",
+      "lf": true
+    },
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 17702,
+      "sha256": "9e525114ee4d03a856d54a2dfa3a50233f98e60793edb0825848eeba7fd82978",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 25839,
+      "sha256": "572380e1ddcabf32f9454aedb23489bc3fccea5d312660652282b6a15d4554cf",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 3974,
+      "sha256": "ecc1db7afd87d0231f41b61d6c427c1b7ff61c761f93b06efc02a6f8b96fa7d9",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 4617,
+      "sha256": "dab50a88e4c8d0b76c63579fdec64c021e9c4c4713fab4f0a634697c82ec5e6d",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 21358,
+      "sha256": "582a185375415ba08f8e34fc260317518c96d0df437fac6447fc39dd06e00a24",
+      "lf": true
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 23788,
+      "sha256": "cbf5da78090ba6b7d2a1932789c00ff23a2f11e7ee9f5e45f6faae9cdca460c4",
+      "lf": true
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 37785,
+      "sha256": "249541e0a85e0978d52a94338d3abcaef8be89ef51286be5fb2a758ff05db2d7",
+      "lf": true
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 53936,
+      "sha256": "9739dfbb0e78bbbd08ea1486a82518beef2e94db41d7496c57cb5eefd2ae2e8c",
+      "lf": true
+    }
+  ],
+  "implementation": {
+    "path": "experiments/results/meetings-analysis-scope-implementation-v1.json",
+    "sha256": "82aac4c70a11d1abf4b2e2575890548dc30c19ac59ea6e58c200f79e5d32cd23"
+  },
+  "harness_independent_review": {
+    "kind": "independent-read-only-harness-v2-delta-review",
+    "reviewer_role": "existing source_discovery_decision; prior exposure disclosed; excluded from final judge",
+    "status": "no_blockers_in_reviewed_delta",
+    "blockers": [],
+    "initial_blocker": "original browser accepted only batch-v1 and rejected batch-v2 config",
+    "initial_blocker_resolved": true,
+    "source_bindings": [
+      {
+        "path": ".local/service-rag-batch-development-v1/harness-scope-originals-v2/development-runner-v2.py",
+        "bytes": 22575,
+        "sha256": "ec8191d983a0cfa6f0af142d7cc2b6d533d8b3f9ed99d281927e9737466540f5"
+      },
+      {
+        "path": ".local/service-rag-batch-development-v1/development-runner-v2.py",
+        "bytes": 22581,
+        "sha256": "429219d0d5b740fb5b90a21fa05c98cc0c07ace8902a857773095bc5f952de8f"
+      },
+      {
+        "path": ".local/service-rag-batch-development-v1/development-browser.mjs",
+        "bytes": 36892,
+        "sha256": "b8433f372f89b71270b35ee8fc252b2bc87606af78029d2747361bcdc9bb37e3"
+      },
+      {
+        "path": ".local/service-rag-batch-development-v1/development-browser-v2.mjs",
+        "bytes": 36892,
+        "sha256": "312bdae3dee6bea14aab2b0d58b9733cc9d29ce30f49618463b79b27a04267a5"
+      }
+    ],
+    "before_after_hashes_unchanged": true,
+    "verified": {
+      "runner_exactly_two_companion_filename_replacements": true,
+      "browser_exactly_one_policy_guard_replacement": true,
+      "runtime_binding_and_actual_browser_child_use_same_v2_companion": true,
+      "service_factory_config_and_guard_all_explicit_batch_v2": true,
+      "fixed_run_v2_path_retained": true,
+      "first_failure_owner_cleanup_finalization_seal_time_and_actual_exit_guards_unchanged": true,
+      "old_policy_not_spoofed": true
+    },
+    "read_scope": [
+      "safe harness-scope preparation/receipt/index v3 metadata",
+      "runner changed lines 84 and 260 and generic policy/run entry surroundings",
+      "browser changed line 111 and generic run entry lines 109-116",
+      "whole-byte equality after exactly the stated replacements; unchanged semantic constants not displayed or interpreted"
+    ],
+    "author_reported_checks": {
+      "static_checks": 6,
+      "node_syntax": "passed",
+      "reviewer_reran": false
+    },
+    "limits": [
+      "Read-only source review, not runtime or semantic acceptance",
+      "No actual source/question/oracle/annotation/labels/raw-output reads",
+      "No tests, model, tokenizer, Java, server, browser, network, Git, or product code edits",
+      "No new actual-run authorization; parent exact CI, runtime bindings and explicit once dispatch still required",
+      "Prior disclosed literal exposure and final-judge exclusion remain"
+    ],
+    "review_created_utc": "2026-10-22T03:41:15.9362819Z"
+  },
+  "harness_static_receipt": {
+    "kind": "batch-v2-harness-integration-static-receipt",
+    "status": "prepared_static_only_pending_independent_review",
+    "pre_fix_blocker": "original_browser_batch_v1_guard_rejects_v2_configuration",
+    "pre_fix_receipt_preserved": "harness-scope-receipt-v2.json",
+    "pre_fix_checks_passed": 10,
+    "pre_fix_static_checks_did_not_prove_policy_integration": true,
+    "checks": [
+      "new_runner_syntax",
+      "exact_browser_one_guard_and_runner_two_filename_delta",
+      "finalization_and_first_failure_byte_and_AST_unchanged",
+      "runner_factory_config_and_exact_two_filenames_match_v2",
+      "new_browser_node_syntax",
+      "isolated_actual_browser_guard_accepts_v2_rejects_v1_and_wrongkind"
+    ],
+    "check_count": 6,
+    "isolated_guard_result": {
+      "isolated_actual_guard_checks": 3,
+      "v2_accepted": true,
+      "v1_rejected": true,
+      "wrong_kind_rejected": true,
+      "imports_of_browser_module": 0,
+      "browser_launches": 0
+    },
+    "node_syntax_exit": 0,
+    "node_isolated_guard_exit": 0,
+    "elapsed_seconds": 0.2809999999990396,
+    "exact_diff_counts": {
+      "new_browser_vs_original_guard_lines": 1,
+      "runner_v2_vs_archived_filename_lines": 2
+    },
+    "source_hashes": {
+      "original_runner": "c141e7290b549d9ce20b21b558b64007e2200dce97bd3d1979e1a2636db281b7",
+      "original_browser": "b8433f372f89b71270b35ee8fc252b2bc87606af78029d2747361bcdc9bb37e3",
+      "pre_fix_runner_v2": "ec8191d983a0cfa6f0af142d7cc2b6d533d8b3f9ed99d281927e9737466540f5",
+      "post_fix_runner_v2": "429219d0d5b740fb5b90a21fa05c98cc0c07ace8902a857773095bc5f952de8f",
+      "new_browser_v2": "312bdae3dee6bea14aab2b0d58b9733cc9d29ce30f49618463b79b27a04267a5"
+    },
+    "protected_existing_files_except_intentionally_updated_v2_runner": 485,
+    "all_protected_hashes_unchanged": true,
+    "old16_hashes_unchanged": true,
+    "unchanged_finalization_tests_repeated": 0,
+    "actual_launch_counts": {
+      "service": 0,
+      "native": 0,
+      "Java": 0,
+      "browser": 0,
+      "tokenizer": 0
+    },
+    "run_v2_absent": true,
+    "runtime_bindings_created": 0,
+    "check_commands": [
+      "Python AST compile and exact byte/AST contract assertions only",
+      "node --check .local/service-rag-batch-development-v1/development-browser-v2.mjs",
+      "node --input-type=module - <development-browser-v2.mjs> : isolated actual guard extracted from run(); no browser module import"
+    ],
+    "original_semantic_inputs_or_expected_markers_changed": false
+  },
+  "parent_harness_bindings_verified": 33,
+  "original_inputs_unchanged": 16,
+  "existing_independent_judge_available": true,
+  "judge_exposure": "Prior development37 source/labels and diagnostic exposure disclosed; not fresh heldout or pristine blind. Existing source-only annotation remains locked. Answers judged before performance/diagnostic reveal.",
+  "actual_new_model_runs": 0,
+  "limits": [
+    "CI verifies exact source; ignored local harness was independently read and narrowly checked, not run by CI.",
+    "Local JAR and UI retain previous hashes; not claimed to be downloaded CI binaries.",
+    "No new actual semantic quality or latency result.",
+    "Final pins and separate parent once dispatch required."
+  ]
+}

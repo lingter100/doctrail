@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "pinned_public_source_snapshot_replay",
+  "phase": "calibration",
+  "created_at": "2026-10-14T02:24:01.368158+00:00",
+  "manifest_sha256": "640bc52ca5725a45bf87b4d475ca6c25dae4f853565397b123d9bd8932103e4c",
+  "script_sha256": "f3bc314fdea9fcc670cd795b1b2cf08c3541fe382f0abcac0b23eca14c09a0bf",
+  "download_authorized": true,
+  "verify_remote": true,
+  "network_attempts": 2,
+  "sources": [
+    {
+      "source_id": "c2-cal-f01-governance-charter",
+      "url": "https://raw.githubusercontent.com/open-telemetry/community/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/governance-charter.md",
+      "target": ".local/c2-source-adoption/calibration/raw/governance-charter.md",
+      "raw_sha256": "ccb43c8d7c0b27797c5202f14e7767f692dbf0869f31688cbe5c02a50f0e17de",
+      "git_blob_sha1": "c756e99bdeb90fa21b12af315a820acf865157a7",
+      "raw_size_bytes": 15223,
+      "created": false,
+      "remote_checked": true
+    },
+    {
+      "source_id": "c2-cal-f01-membership",
+      "url": "https://raw.githubusercontent.com/open-telemetry/community/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/guides/contributor/membership.md",
+      "target": ".local/c2-source-adoption/calibration/raw/guides/contributor/membership.md",
+      "raw_sha256": "5a55a6a7a8a83e1c4c1b73fefbf4d71ed7adca400fc3c558c9e342ff6c00042f",
+      "git_blob_sha1": "f18f974f0859d8fe45267e50c571c1a46f121484",
+      "raw_size_bytes": 25854,
+      "created": false,
+      "remote_checked": true
+    }
+  ],
+  "model_calls": 0,
+  "source_normalization": false,
+  "status": "passed"
+}

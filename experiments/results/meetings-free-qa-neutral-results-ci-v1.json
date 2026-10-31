@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "source_head": "d982755c55e8bc03733c8edec3a4db4045ec5d69",
+  "scope": "Published neutral generation results and service regression; CI itself performs no fresh model quality evaluation.",
+  "runs": [
+    {
+      "id": 40838635973,
+      "event": "push",
+      "conclusion": "success",
+      "jobs": [
+        "web",
+        "java-service",
+        "backend"
+      ],
+      "retained_watch_session": 70105,
+      "watch_exit_code": 0
+    },
+    {
+      "id": 40838644283,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        "web",
+        "backend",
+        "java-service"
+      ],
+      "retained_watch_session": 9811,
+      "watch_exit_code": 0
+    }
+  ],
+  "measured_push": {
+    "python": {
+      "passed": 5360,
+      "skipped": 21,
+      "warnings": 2,
+      "elapsed_seconds": 220.42
+    },
+    "browser": {
+      "passed": 158,
+      "failed_tests": 0,
+      "infrastructure_failures": 0,
+      "startup_failures": 0,
+      "specs_without_reports": 0,
+      "missing_runs": 0,
+      "exit_code": 0
+    },
+    "actual_java_http_and_database_compatibility": "passed",
+    "synthetic_meeting_operations_against_actual_java": "passed",
+    "AI_quality": false
+  },
+  "limitations": [
+    "CI and one actual neutral transport success are separate evidence.",
+    "Sealed six-case quality comparison, final real-model service integration and user review remain incomplete.",
+    "No paid service or public service deployment was performed."
+  ],
+  "public_urls": [
+    "https://github.com/lingter100/doctrail/actions/runs/40838635973",
+    "https://github.com/lingter100/doctrail/actions/runs/40838644283"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "status": "saved_public_output_diagnosis_complete_no_regrade",
+  "reviewer": "tool-accepted gpt-6-astra xhigh; independent development diagnosis, not blinded",
+  "full_report_sha256": "c788db6f6869fb105a727a11854b5d1df0df07e35e2db8d43ac537ac0260d5bb",
+  "actual_final_sha256": "cede4b1c203652d52d23a2679e5d2803164ec8fd75d43892c71dc04ce50e6c78",
+  "exact_failure": "The first obligation copied its Korean question clause correctly but regenerated the time field with mixed Korean/Chinese wording. That field was not a literal substring of the selected question span and parse_plan rejected it.",
+  "output_cap_binding": false,
+  "native_output_tokens": 87,
+  "native_output_cap": 192,
+  "finish_reason": "eos",
+  "additional_observations": [
+    "Both high-level branches, progression and formation rules, were present.",
+    "Explicit group scope was absent from both entity fields.",
+    "June and November were bundled rather than represented as separate endpoints."
+  ],
+  "interpretation": "This is a representation-binding failure plus incomplete scope planning, not evidence of invented source facts. Merely allowing the altered spelling would not establish plan completeness. No ledger or answer was generated.",
+  "recommendation": "A future version may use scope references into validated literal question spans or immutable original scope, avoiding duplicated generated entity/time strings. Preserve all factual criteria, original question and independent scope/endpoint completeness review; do not normalize or regrade the failed output.",
+  "new_model_calls": 0,
+  "test_replays": 0,
+  "transfer_gold_used": false,
+  "human_reviews": 0,
+  "service_adopted": false
+}

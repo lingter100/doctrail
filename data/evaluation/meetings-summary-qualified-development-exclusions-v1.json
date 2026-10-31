@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "registry_id": "meetings-summary-qualified-development-exclusions-v1",
+  "status": "development-reserved-prospective-exclusions",
+  "source_set_id": "meeting-summary-qualified-sources-v1",
+  "purpose": "Reserve admitted development source records and entire declared project meeting lineages from future protected evaluation.",
+  "effective_scope": {
+    "future_protected_pools": [
+      "calibration",
+      "validation",
+      "final_test"
+    ],
+    "existing_protected_assignments_modified": false,
+    "unassigned_protected_families_reassigned": false
+  },
+  "authoritative_admission": {
+    "path": "experiments/results/meetings-summary-qualified-source-review-v1.json",
+    "bytes": 4211,
+    "sha256": "acc40bb7688f6a95aa632d68aabb85a90cc94c4e6504fee49af452a701487165"
+  },
+  "independent_requirement_binding": {
+    "path": ".local/meeting-summary-qualified-independent-v1/admission-v1/prospective-exclusion-requirements.json",
+    "bytes": 7987,
+    "sha256": "36ca6310d0d19740e335fa9349f31edc2fe109c67934f12d196ca340144b0623"
+  },
+  "reserved_repository_families": [
+    "zarr-developers/community-calls",
+    "servo/project"
+  ],
+  "reserved_source_count": 4,
+  "reserved_sources": [
+    {
+      "source_id": "qualified-source-01",
+      "repository_family": "zarr-developers/community-calls",
+      "source_url": "https://github.com/zarr-developers/community-calls/blob/463e9964cf941c8e4326b9dd19832d8c40695575/2024/2024-01-10.md",
+      "raw": {
+        "path": "raw/source-01.md",
+        "bytes": 4762,
+        "sha256": "ee16037c22cce7d8ce5b605cc15e2abddf13586c0d875417c1a35d71c31aebab"
+      },
+      "canonical": {
+        "path": "canonical/qualified-source-01.md",
+        "bytes": 4762,
+        "sha256": "ee16037c22cce7d8ce5b605cc15e2abddf13586c0d875417c1a35d71c31aebab"
+      },
+      "fingerprints": {
+        "normalization": "NFC/LF and whitespace collapse, diagnostic only; canonical source untouched",
+        "normalized_sha256": "252892ffc4a205203f5bf7544732c4f71152c81b67e3d2bf37036bfc9c1385c7",
+        "long_paragraph_min_codepoints": 200,
+        "long_paragraph_sha256": [
+          "3185ee4c735cadab562a65a4035bb2fc5be7258efb3a47f8534325f8162add56",
+          "7d7fa42f7c5b3594acddc7bb2163635001f423254f8ad362e47e9a782c505870",
+          "af458dd8fa0b19b6eb20e9065bed72fae2f18a3383b57b636550c7bf9cd8a216"
+        ]
+      },
+      "document_id": "f4d0e573-a614-5a84-926c-eaf615438425"
+    },
+    {
+      "source_id": "qualified-source-02",
+      "repository_family": "zarr-developers/community-calls",
+      "source_url": "https://github.com/zarr-developers/community-calls/blob/463e9964cf941c8e4326b9dd19832d8c40695575/2024/2024-04-03.md",
+      "raw": {
+        "path": "raw/source-02.md",
+        "bytes": 4768,
+        "sha256": "ffe815b36afd8b6c048525a9cbe7107662cc4413d68301922a71d5956df925ac"
+      },
+      "canonical": {
+        "path": "canonical/qualified-source-02.md",
+        "bytes": 4768,
+        "sha256": "ffe815b36afd8b6c048525a9cbe7107662cc4413d68301922a71d5956df925ac"
+      },
+      "fingerprints": {
+        "normalization": "NFC/LF and whitespace collapse, diagnostic only; canonical source untouched",
+        "normalized_sha256": "9c7ea5a411585930fbaa884a9c76f39cedb272cf41b04237dcd9bbf021d660ae",
+        "long_paragraph_min_codepoints": 200,
+        "long_paragraph_sha256": [
+          "400e1694f5521446cc382594d027649e4363830c7d1dad817e6146fb93de5fac",
+          "b8df73a3b67609187ffa4933a2661772ecd7e35fbff9af9b9ce98404113b7d35",
+          "d477927e467a623e76c89c5d1680ee1c0c74b30f0f888814a92774e7cf404bfd"
+        ]
+      },
+      "document_id": "89b18f75-35fd-5006-b0e3-37cbeafc8ac8"
+    },
+    {
+      "source_id": "qualified-source-03",
+      "repository_family": "servo/project",
+      "source_url": "https://github.com/servo/project/blob/3df21b5ac19d6b518db66a50231e439ad0ff56cd/governance/tsc/tsc-2024-01-29.md",
+      "raw": {
+        "path": "raw/source-03.md",
+        "bytes": 8347,
+        "sha256": "6b8fc120db65b144a9fe5fb1938e940cdd2ec65ff480211023816a938ed2d484"
+      },
+      "canonical": {
+        "path": "canonical/qualified-source-03.md",
+        "bytes": 8347,
+        "sha256": "6b8fc120db65b144a9fe5fb1938e940cdd2ec65ff480211023816a938ed2d484"
+      },
+      "fingerprints": {
+        "normalization": "NFC/LF and whitespace collapse, diagnostic only; canonical source untouched",
+        "normalized_sha256": "17383dcd2f50244a5e0d2fda992f4bf84364cbf1859629a4c81af76f1054fd3e",
+        "long_paragraph_min_codepoints": 200,
+        "long_paragraph_sha256": [
+          "0af0088486ca0aa367fbf007048e765545b69108f759221085368841eeac3b51",
+          "3af21e8402604e51ceeb56f5944fa9c905be1f541597d66d0e9d02930ac59e2c",
+          "48213e008fc2e4a55c1e9b619b88ec5a3a738e379f95823608ad08567c444be0",
+          "4a3eb85a19aeef60c8188d7090a5f87a120dcfd8a897c0deb10560c44354e005",
+          "4e9160a5e66152a489d176e6aa6bae1f2a3b2586f7e801cef1adddcef8f5470b",
+          "4fb78bced7fc40cd9d4e96a15f5cb4134f71b7f5f61d694fc49f663085dea600",
+          "5036a03df624ed54b1e0e40a189b4f5a32aa18a4c2733707966c8c97d8635313",
+          "5cf376d1ebc8953b8b330c5641ea544f6ee16e2755e3f450b90e2c5bdcbc052e",
+          "5dc71244e49b59965b6da52b28b5b20fb3ff2c6931692c9ef81a4d75128f3a53",
+          "6088d86eca6e9d76c836b37b4921d3c107c8d3e20d0fb20d9f0a6a6cb3766978",
+          "828b16c0b6f6f3e715ff9fa91239ceb543273796b0e6264690be3efaf1dd0f97",
+          "91201099a510e881db43fe3285c7ef3842d435dd7d11014dfc15f9cedd41d1eb",
+          "aaef12f427deda25bbe283ccab41b763957add594626cb8ceb2379231b78bbb5",
+          "bdd83d1d4128eb9bc26fb25280f8251e89a129420601c546e323d13a02ac047e",
+          "c4e52a55da9d2a0bb01ebf7f18bae5349711d6d2b4409265128e562feb52fef0"
+        ]
+      },
+      "document_id": "92b9584a-08a9-5f20-bf5b-d30ef9268932"
+    },
+    {
+      "source_id": "qualified-source-04",
+      "repository_family": "servo/project",
+      "source_url": "https://github.com/servo/project/blob/3df21b5ac19d6b518db66a50231e439ad0ff56cd/governance/tsc/tsc-2026-09-28.md",
+      "raw": {
+        "path": "raw/source-04.md",
+        "bytes": 7527,
+        "sha256": "9d6d8aa4d1612df3e1e918f58887b2148fbc1efd8f73f3fef8a6a2aacfc00504"
+      },
+      "canonical": {
+        "path": "canonical/qualified-source-04.md",
+        "bytes": 7527,
+        "sha256": "9d6d8aa4d1612df3e1e918f58887b2148fbc1efd8f73f3fef8a6a2aacfc00504"
+      },
+      "fingerprints": {
+        "normalization": "NFC/LF and whitespace collapse, diagnostic only; canonical source untouched",
+        "normalized_sha256": "e7f8ca814afdb0853c4c410784fb88e439261eafdc5d5a3b474e69880b330b41",
+        "long_paragraph_min_codepoints": 200,
+        "long_paragraph_sha256": [
+          "0cab646988a24a6d2796e8273b6dea730c4dbd0dd7eda022e5804aafaa0b6862",
+          "0ed32686f4d848361c326c27eb2958252f8a3a162f89b8694e8d07f8f4b677e4",
+          "16b020f968f61f02661d66ae0f014eaab6e92a1b2105336f05502ca75dd4188b",
+          "3395550b823018c480770040a56f40057c4a06b81d5fa165cdf1fd44f31d67e9",
+          "635a2f2c7c4bfbfefaf761cc9153dd5cce01b18c416656de8781f554e9ae1020",
+          "922cbe2c949756e237239e6c43ea81404c26aca9dfefece01afd2ab29346fac4",
+          "a177003e978313e1559090a64f101d63e4a383041b791e2f5e269017e7b50f9c",
+          "a642a0170274424c9a3e7d828a70e9ef3d4faba5d42ff40a9dda444db9495d2d",
+          "a8f69838362abc88cf28121c9def201c117fa9854e8558caff5daa07c2ebf146",
+          "b9bf70d2227350291e556465c450455ba725d42722567956fbcad08d8609b924",
+          "bb0c454fda1568c15a009c1fe594854377f667d8e89b12a83f62a9ba19b321b7",
+          "c05b4e32ef0de0fc051a8ae682705fc609c92de92a0ed025fff9dc095c86a9ba",
+          "f9b07c3f275e224bd4e626666e3fed824485db1633903777c5bb93ba3a0e7188",
+          "fadb1f1ee02b2e808dd7767489c3f296b62477460dc24b37439888ed6902943d"
+        ]
+      },
+      "document_id": "15026436-fc85-5ab0-a666-3d8e2c24f41e"
+    }
+  ],
+  "matching_rules": [
+    "Exclude these sources and their revisions, translations, paraphrases and same project meeting lineage from future protected calibration, validation and final-test pools.",
+    "Treat each repository/project lineage as one family; two dates do not create two independent families.",
+    "Keep the whole declared old source-family pool and Wikimedia Foundation minutes namespace excluded from this new development set.",
+    "Do not reassign c7-f03/c7-f04 or any other reserved protected family. A future concrete identity conflict must hold admission/use rather than relabel the family.",
+    "Bind this reservation, original source manifest and independent admission before any later actual comparison. Parent must carry the exclusion into its authoritative workflow; this review does not edit a global registry."
+  ],
+  "additional_mechanical_selectors": {
+    "same_source_or_document_ID": "exclude",
+    "same_pinned_revision_or_raw_or_canonical_hash": "exclude",
+    "same_normalized_hash": "exclude",
+    "long_paragraph_hash_intersection": "hold for split review, not proof of exact duplicate",
+    "same_repository_project_meeting_lineage": "exclude revisions, translations, paraphrases and other meeting dates"
+  },
+  "existing_exclusions_preserved": {
+    "path": "data/evaluation/meetings-summary-mode-development-exclusions-v1.json",
+    "sha256": "2febf264bb19bb714a3b1a75c4795bdddc2ed4cd77b273cf69f9682bd9bb7791"
+  },
+  "historical_L2_status": "unknown; unchanged",
+  "future_actual_comparison_requirement": "Bind this registry, original source manifest and independent admission before any later actual comparison; newly discovered protected conflict holds use.",
+  "limits": [
+    "Four documents from two related project families, not four independent organizations.",
+    "Zarr publisher TLDR sections remain in full originals and are not target summaries or ground truth.",
+    "Current separation is limited to the designated31 metadata, represented assignments and declared identifiers; no complete-history or universal registry guarantee.",
+    "Historical L2 run-input unknown remains unchanged.",
+    "Provisional unit coordinates are before tokenizer partition; no model input4096/template/runtime binding verified.",
+    "Old source bodies were not read for semantic near-duplicate matching; whole declared project-family and identifier/hash exclusions provide the permitted comparison.",
+    "Independent AI admission is not human review, Korean readability/summary sufficiency evidence, final evaluation, model quality, service readiness or legal opinion."
+  ],
+  "protected_registry_changes": 0,
+  "human_review_count": 0
+}

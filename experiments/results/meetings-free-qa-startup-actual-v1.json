@@ -1,0 +1,122 @@
+{
+  "schema": "doctrail-meetings-free-qa-startup-actual-v1",
+  "date": "2026-10-29",
+  "measurement_type": "actual_local_startup_diagnostic",
+  "source_commit": "2bda334c459b1c2cd89ebcd7026d0529aaac0772",
+  "status": "CUSTODY_GAP_NO_ACCEPTANCE",
+  "accepted": false,
+  "model": "Qwen2.5-7B-Instruct Q4_K_M",
+  "runtime": "llama.cpp b11429/d812350",
+  "attempts": 1,
+  "automatic_retries": 0,
+  "once_consumed": true,
+  "actual_exits": {
+    "cli": 1,
+    "custodian": 1,
+    "owned_monitor": 0,
+    "wrapper": 1
+  },
+  "health_ready": true,
+  "props_requests": 1,
+  "props_valid": false,
+  "first_failure": {
+    "code": "free_qa_runtime_template",
+    "type": "ContractError"
+  },
+  "secondary_failures": [],
+  "counts": {
+    "completions": 0,
+    "requested_tokens": 0
+  },
+  "timing_seconds": {
+    "wrapper": 29.3384492,
+    "runner": 28.17200000002049,
+    "asset_preparation": 13.047000000020489,
+    "native_readiness": 5.562999999965541,
+    "props": 0.062000000034458935,
+    "native_cleanup": 0.5309999999590218
+  },
+  "resources": {
+    "startup_available_bytes": 10190520320,
+    "startup_minimum_available_bytes": 8589934592,
+    "startup_gate_passed": true,
+    "readiness_guard_failure": null,
+    "props_guard_failure": null,
+    "scope": "sampled native RSS/available RAM, not peaks or VRAM; raw samples retained locally"
+  },
+  "native_cleanup": {
+    "verified_absent": true,
+    "within_budget": true
+  },
+  "custody": {
+    "verified": false,
+    "failures": [
+      "owned_absence_gap",
+      "owned_identity_absence_mismatch",
+      "preservation:docs/MEETINGS-FREE-QA-STARTUP-DIAGNOSTIC-PLAN.md"
+    ],
+    "known_identity_count": 5,
+    "initial_absent_count": 4,
+    "initial_remaining_role": "CLI conhost",
+    "later_observation_utc": "2026-10-29T04:49:02.908254Z",
+    "later_exact_cli_and_conhost_both_absent": true,
+    "later_sample_does_not_replace_original_gap": true,
+    "public_plan_changed_by_parent": true,
+    "public_plan_failure_retained": true,
+    "source_files": 69,
+    "asset_file_identities": 67,
+    "installed_controls": 2,
+    "source_assets_controls_unchanged": true,
+    "hold_released_after_later_known_identity_check": true
+  },
+  "quality": {
+    "evaluated": false,
+    "private_questions_read": 0,
+    "not_a_qa_predecessor": true,
+    "human_review_count": 0
+  },
+  "cost_scope": {
+    "paid_service_calls": 0,
+    "local_energy_cost_measured": false
+  },
+  "historical_neutral_root_cause": "UNKNOWN",
+  "limitations": [
+    "The precise actual runtime template was not retained; the rejection code does not identify the mismatching field or bytes.",
+    "The original descendant monitor observed a conhost still present. Later absence is a separate sample, not retroactive custody acceptance.",
+    "Parent edited a plan document included in the frozen metadata list. That documentation mismatch is preserved; it did not establish a model runtime cause.",
+    "Health success does not establish tokenizer, generation, answer quality or service readiness."
+  ],
+  "evidence": {
+    "actual_final": {
+      "file": ".local/meeting-free-qa-startup-actual-v1/FINAL-RECEIPT.json",
+      "sha256": "6b74e60269d35d17bbc29eace955aa65dea9ffb4f6755041dbf0b428a9a7c8e0",
+      "size_bytes": 11064
+    },
+    "safe_result": {
+      "file": ".local/meeting-free-qa-startup-actual-v1/safe-result.json",
+      "sha256": "8a88ce382fb10ccaf7f26b7af0ae0ec96f0ec467ce9dec20c51d79864e46877a",
+      "size_bytes": 3945
+    },
+    "original_custody": {
+      "file": ".local/meeting-free-qa-startup-actual-v1/external-custody.json",
+      "sha256": "69df6569ac736b2db8f12640e5d0d4e53e69b0948c580db60ae9ada4436a9e09",
+      "size_bytes": 1025
+    },
+    "parent_attribution": {
+      "file": ".local/meeting-free-qa-startup-actual-v1/parent-preservation-attribution.json",
+      "sha256": "567a878b73e08a65017d3a801e88d310ad221c86bdf590adab3d63ef21129a20",
+      "size_bytes": 1679
+    },
+    "later_owned_check": {
+      "file": ".local/meeting-free-qa-startup-postterminal-owned-check-v1/FINAL-RECEIPT.json",
+      "sha256": "3e4e86e082370cde54b40ad78039e1561b4bfeb1efd78f4a87b937bb2b77da3c",
+      "size_bytes": 2243
+    },
+    "parent_closeout": {
+      "file": ".local/meeting-free-qa-startup-parent-closeout-v1/RECEIPT.json",
+      "sha256": "a106555c9ff63a98b198522a7756206c0c9041c956b484904ab35d40588ab824",
+      "size_bytes": 1609
+    }
+  },
+  "next": "Diagnose the strict runtime template check from fixed public code and safe metadata; do not replay this consumed diagnostic."
+}

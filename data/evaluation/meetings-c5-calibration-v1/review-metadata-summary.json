@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "source_review_metadata_summary",
+  "reviewer_id": "/root/c5_calibration_prereviewer",
+  "reviewed_at": "2026-10-19T08:17:02.544542+00:00",
+  "verdict": "accepted",
+  "accepted_count": 6,
+  "rejected_count": 0,
+  "source_changes": 0,
+  "source_documents": 6,
+  "public_documents": 3,
+  "synthetic_documents": 3,
+  "whole_chunks": 15,
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/source-freeze.json",
+    "sha256": "771a3f18f878d476b47b934c83b8c059bbde5710335470cf0f79d5ab1565adf8"
+  },
+  "source_freeze_binding_count": 14,
+  "source_freeze_bound_files": {
+    "data/evaluation/meetings-c5-calibration-source-fingerprints-v1.json": "3f2bc21494bc3bcbe557c43f87df644bfd4b8d4d5b14883a12d92e24c2eee236",
+    "data/evaluation/meetings-c5-calibration-v1/freshness.json": "c06dc862ae39d2350fffcfa4202bb3bc51a95ace4b8de61db5a1cc3f3ee6c8e4",
+    "data/evaluation/meetings-c5-calibration-v1/java-parity.json": "839fd4f3715b6719000fc2a392e553ce20239ff67a16b06bbbc32363946f8bfa",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-meeting-2018-01-11.md": "800eff51ce078f4e54125c9a6f67df0de402ec0be5fc5f7c3de842124f74fe9d",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-meeting-2018-02-08.md": "a6b0fd66e3b435856ec1cabf66ca57a078c4324d652ad087561565381ead7e88",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-mentorship-guide.md": "2729667e4babddba03c5431a12d2872c8d58f6946f6a0ba91a8974c4a4ee1c73",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-meeting-2026-09-09.md": "fd13f819eb8114bbc63289fa83f1dc122c8cda8a0e5db6bf641a34c87db92e81",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-meeting-2026-09-23.md": "5e7227a29450eddb7e5b50173e92310dd55e1372fc448ae37d16690a079cf23b",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-operations.md": "a497525fc06880df3f7a0df61d99459f4ea2c5890f20215f2d709937c1b453b2",
+    "data/evaluation/meetings-c5-calibration-v1/source-inventory.json": "8161641591a9561c8fdd3e2a375ff7b315952061a4abac166ac8b9dbd36be7a8",
+    "data/evaluation/meetings-c5-calibration-v1/source-manifest.json": "916712e5f159e99e8c69d3b9cc67284051abf999d3d34e277628ff3179f3db11",
+    "data/evaluation/meetings-c5-calibration-v1/source-prereview.json": "d2f9b6fb617425ebc30b2c8b05f33be95b4527d58f99ce81b18961cb7b4ddc9c",
+    "data/evaluation/meetings-c5-calibration-v1/source-processing-receipt.json": "c5e96eb8f4a523fd956f3b2fd3a6c98159b4993363e499d15006013ac7b52249",
+    "data/evaluation/meetings-c5-prior-source-fingerprints-v1.json": "dd36b66badd69cc62197dab6927cfea3c221dea8617aad2ea950b58c134df976"
+  },
+  "source_prereview": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/source-prereview.json",
+    "sha256": "d2f9b6fb617425ebc30b2c8b05f33be95b4527d58f99ce81b18961cb7b4ddc9c"
+  },
+  "freshness": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/freshness.json",
+    "sha256": "c06dc862ae39d2350fffcfa4202bb3bc51a95ace4b8de61db5a1cc3f3ee6c8e4"
+  },
+  "notes": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/source-prereview-notes.md",
+    "sha256": "4c63bea72c2da4a65b63a664c47ee344132b18c59f46b72e9075ed35c74f727d"
+  },
+  "preauthorization": {
+    "file": ".local/meetings-c5-calibration-review-v1/preauthorization-v1.json",
+    "sha256": "d13a2fafb266e6edc0c214e03d77b1ec82c9c4055d158e4137d58f669567e7e6"
+  },
+  "mechanical_review": {
+    "file": ".local/meetings-c5-calibration-review-v1/mechanical-review-v1.json",
+    "sha256": "5223d48d54ab9a447b1286d5b51a2b777ffb1849e9986cb574660f58cdd6c48f"
+  },
+  "source_contract_replay_passed": true,
+  "full_item_load_material_executed": false,
+  "item_artifacts_exist": false,
+  "actual_original_java": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reviewer_java_reruns": 0,
+  "historical_rows": 80,
+  "historical_normalized_rows": 12,
+  "historical_gaps": 3,
+  "duplicate_hits": 0,
+  "same_family_long_paragraph_pairs": 0,
+  "complete_near_duplicate_absence_proven": false,
+  "head_before": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+  "head_after": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+  "source_handoff18_unchanged": true,
+  "frozen_code76_unchanged": true,
+  "tokenizer_calls": 0,
+  "native_calls": 0,
+  "human_reviews": 0,
+  "git_mutations": 0,
+  "limits": [
+    "Guide valid only as pinned-revision statements; historical applicability unknown.",
+    "Historical fingerprint coverage incomplete; no total semantic duplicate-absence claim.",
+    "Cross-split semantic comparison is reserved for isolated validation review.",
+    "Source freeze still requires parent commit before item authorship.",
+    "Source contract replay only; no item/offline/native/quality claim."
+  ]
+}

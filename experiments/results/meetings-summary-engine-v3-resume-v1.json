@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "source_commit": "56bb16f3f08f38b3a83ff163ce3d73fb46c9e91d",
+  "status": "repair_reviewed_actual_binding_blocked_before_issue",
+  "evidence_types": ["synthetic_fault_checks", "independent_source_review", "measured_local_process_snapshot"],
+  "resume_preparation": {
+    "focused_synthetic_passed": 38,
+    "deselected": 71,
+    "pytest_seconds": 2.08,
+    "receipt_sha256": "c8d829e9edeb78afc9478616cff132dbda2581308e5d4f77692fa7b4439c3aee"
+  },
+  "initial_independent_review": {
+    "blockers": 1,
+    "finding": "post_spawn_identity_or_record_failure_could_skip_cleanup_and_terminal_evidence",
+    "receipt_sha256": "22da878319e1d429cbb1ad22e418733eb7addd37437d8ee52dc38211fd8fc7ea"
+  },
+  "launcher_repair": {
+    "focused_synthetic_passed": 18,
+    "failed": 0,
+    "junit_suite_seconds": 0.613,
+    "pytest_log_seconds": 0.87,
+    "initial_fixture_failure_preserved": true,
+    "ruff": "pass_with_inherited_import_order_exception_only",
+    "receipt_sha256": "83684b3b4cb0608d0265ea38dda4c21a61c3d078029f8ce848654072cb4015f3",
+    "independent_review_receipt_sha256": "dc1ad8ad40010f2fd4c9ebae4d45491c38bacc81ff6e0bc8adabed9300f9b157",
+    "independent_blockers": 0,
+    "independent_advisories": 0
+  },
+  "parent_preflight": {
+    "reason": "unrelated_local_model_process_running",
+    "tool_exit": 1,
+    "binding_issued": false,
+    "launch_folder_created": false,
+    "actual_work_out_companion_roots_absent": true,
+    "actual_observer_launches": 0,
+    "actual_acquisitions": 0,
+    "once_consumed": false,
+    "unrelated_processes_terminated": 0,
+    "retries": 0,
+    "verified_references": 89,
+    "parent_receipt_sha256": "a038605f6e5c98c3220f654a6b7ad43afc681c1990de789588ebae622bf65b5f"
+  },
+  "limits": [
+    "Mocked fault checks do not prove actual acquisition or model quality.",
+    "A process snapshot does not prove a future globally process-free interval.",
+    "Software cleanup deadlines cannot guarantee bounded blocking OS calls or complete unknown-descendant custody.",
+    "Unrelated project and process details are retained only in local custody evidence."
+  ],
+  "next": "Continue independent source authoring and prereview. Any future acquisition requires fresh orchestration and an elevated launch-time check, without reusing the old binding or stopping unrelated work.",
+  "model_quality_evaluated": false,
+  "paid_usage": 0,
+  "public_service_deployment": false
+}

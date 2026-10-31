@@ -1,0 +1,71 @@
+{
+  "schema": "doctrail-free-qa-runtime-template-repair-v1",
+  "date": "2026-10-29",
+  "status": "SOURCE_CORRECTION_REVIEWED_AWAITING_EXACT_CI",
+  "base_commit": "2bda334c459b1c2cd89ebcd7026d0529aaac0772",
+  "problem": "Pinned runtime returns the lexer-processed template; the old validator compared it to raw GGUF template bytes.",
+  "method": "One exact model/tag/fullcommit/rawdigest/rawsize map to strict runtime digest and byte length; no received-string normalization or dual acceptance; fallback rawdigest behavior unchanged.",
+  "raw_template": {
+    "sha256": "d5495a1e5db0611132a97e46a65dbb64a642a499421228b9c8b93229097fa9a4",
+    "size_bytes": 2509
+  },
+  "source_derived_runtime_template": {
+    "sha256": "4e9918361c284a93880606d182d64da6a9fe97cdc1f5c5a78c1c8840444246fc",
+    "size_bytes": 2508
+  },
+  "actual_props_template_hash": "UNKNOWN",
+  "historical_neutral_root_cause": "UNKNOWN",
+  "source_files": [
+    {
+      "file": "tools/free_qa/adapter.py",
+      "sha256": "15b0377ea113898bbe3169bc4fb68e0f79c2ed488044ebdbc1410579df411ca9",
+      "size_bytes": 8062
+    },
+    {
+      "file": "tests/test_meeting_free_qa.py",
+      "sha256": "6878f2b6e9337a69ae93b9f6141330c17268cd20a84e175f4cf56357631339a0",
+      "size_bytes": 74954
+    }
+  ],
+  "validation": {
+    "focused_new_cases": 19,
+    "focused_pytest_seconds": 1.08,
+    "relevant_combined_cases": 273,
+    "combined_pytest_seconds": 30.9,
+    "combined_wrapper_seconds": 32.1155847,
+    "pytest_failures": 0,
+    "final_ruff": "PASS",
+    "initial_ruff": "I001 one extra blank line; retained original failure and tested source",
+    "final_ast_equals_tested": true,
+    "focus_is_subset_of_combined": true,
+    "real_model_calls": 0
+  },
+  "independent_review": {
+    "status": "PASS",
+    "blockers": 0,
+    "advisories": 0,
+    "receipt": {
+      "file": ".local/meeting-free-qa-runtime-template-review-v1/FINAL-RECEIPT.json",
+      "sha256": "278aaa9f72b242e4c04cc05a69a9c844f45dba8aa6758151fb2cd15b86336040",
+      "size_bytes": 2914
+    }
+  },
+  "ci": {
+    "status": "PENDING_FOR_NEW_COMMIT"
+  },
+  "preserved": {
+    "raw_template_pins": true,
+    "model_runtime_settings": true,
+    "closed_actual_failure": true,
+    "consumed_once": true,
+    "old_controls": true
+  },
+  "public_fixture_origin": "Qwen/Qwen2.5-7B-Instruct-GGUF@bb5d59e06d9551d752d08b292a50eb208b07ab1f; Apache-2.0; archived reviewed raw metadata template embedded inline in existing test file.",
+  "model_quality_evaluated": false,
+  "human_review_count": 0,
+  "implementation_receipt": {
+    "file": ".local/meeting-free-qa-runtime-template-repair-v1/FINAL-RECEIPT.json",
+    "sha256": "d1643442f26a66e30169dfe817242b2c3f49fa7070f576613c8d1250062712df",
+    "size_bytes": 8478
+  }
+}

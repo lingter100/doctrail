@@ -1,0 +1,53 @@
+{
+  "schema_version" : 1,
+  "kind" : "actual_java_python_document_chunk_parity",
+  "inventory_sha256" : "ad2a1c8b4a8abdb9801d76f613634cdfe4a3852f52f1acdb26fe32feeab62095",
+  "java_version" : "21.0.12.1",
+  "bound_files" : {
+    "server/src/main/java/io/doctrail/Ingest.java" : "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java" : "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/test/java/io/doctrail/MeetingSourceParityTest.java" : "04e3371b13c2a8b0c577975fb589a6c9a1999012cc434ab1cf6f3851c093f23f"
+  },
+  "documents" : [ {
+    "codepoints" : 2194,
+    "raw_sha256" : "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+    "chunks" : 3,
+    "processed_sha256" : "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+    "document_id" : "c4-val-pub-meeting-01"
+  }, {
+    "codepoints" : 1113,
+    "raw_sha256" : "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+    "chunks" : 2,
+    "processed_sha256" : "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+    "document_id" : "c4-val-pub-meeting-02"
+  }, {
+    "codepoints" : 6367,
+    "raw_sha256" : "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82",
+    "chunks" : 8,
+    "processed_sha256" : "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82",
+    "document_id" : "c4-val-pub-general"
+  }, {
+    "codepoints" : 2051,
+    "raw_sha256" : "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+    "chunks" : 3,
+    "processed_sha256" : "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+    "document_id" : "c4-val-syn-general"
+  }, {
+    "codepoints" : 1541,
+    "raw_sha256" : "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+    "chunks" : 2,
+    "processed_sha256" : "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+    "document_id" : "c4-val-syn-meeting-01"
+  }, {
+    "codepoints" : 1611,
+    "raw_sha256" : "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796",
+    "chunks" : 2,
+    "processed_sha256" : "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796",
+    "document_id" : "c4-val-syn-meeting-02"
+  } ],
+  "document_count" : 6,
+  "chunk_count" : 20,
+  "exact_content_pages_chunk_text_offsets_ordinals_ids" : true,
+  "model_calls" : 0,
+  "semantic_quality_measured" : false
+}

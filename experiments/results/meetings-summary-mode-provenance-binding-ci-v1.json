@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "source_commit": "207bf0346b875f0929bb15c8f342162544d1c14d",
+  "runs": [
+    {
+      "databaseId": 39914310802,
+      "headSha": "207bf0346b875f0929bb15c8f342162544d1c14d",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39914310802",
+      "jobs": [
+        {
+          "name": "java-service",
+          "conclusion": "failure"
+        },
+        {
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "databaseId": 39914322073,
+      "headSha": "207bf0346b875f0929bb15c8f342162544d1c14d",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39914322073",
+      "jobs": [
+        {
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "all_required_checks_passed_on_both_events": false,
+  "failure": {
+    "stage": "Verify browser workflows against isolated Java service",
+    "message": "Isolated Java server exited before browser checks.",
+    "root_cause": "unknown",
+    "original_exit_code_and_signal": "not recorded",
+    "github_artifacts_count_observed": 0,
+    "browser_report_summary": {
+      "passed": 95,
+      "failed": 0,
+      "limitation": "Only emitted browser reports; excludes pre-browser startup failure."
+    },
+    "original_failure_preserved": true,
+    "rerun_attempted": false
+  },
+  "exact_probe_source": [
+    {
+      "path": "scripts/probe_meeting_summary_mode.py",
+      "bytes": 56152,
+      "sha256": "480ca031a8de1e61c462726b987508bf5b05a784fde76c376ceafc3015b78f30"
+    },
+    {
+      "path": "tests/test_probe_meeting_summary_mode.py",
+      "bytes": 69874,
+      "sha256": "ab3b6fa11331c776fb1790e395715e7734f6c1094d9ba7945ce365d4ba5e1b9e"
+    }
+  ],
+  "evidence": [
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/binding-ci-v1/39914310802-final.json",
+      "bytes": 14225,
+      "sha256": "3681889378b9bf954b4d91fdab910ef9e66a50b07a6dc5b440864f5caa287a43"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/binding-ci-v1/39914322073-final.json",
+      "bytes": 14233,
+      "sha256": "2a0a150ae713b5b001b1480ab929f08b077ddc2d53cf84db7e0cb5e275e42dd1"
+    },
+    {
+      "path": ".local/meeting-summary-mode-parent-v1/binding-ci-v1/push-java-failed-original.log",
+      "bytes": 38598,
+      "sha256": "2845c289d1c1a9237eeb82a734acb130e5757d3b6917784124a8a962752f4d34"
+    }
+  ],
+  "actual_model_runs": 0,
+  "source_admission_claim": false,
+  "model_quality_claim": false
+}

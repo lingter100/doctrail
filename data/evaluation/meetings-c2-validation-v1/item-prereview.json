@@ -1,0 +1,844 @@
+{
+  "schema_version": 1,
+  "review_id": "meetings-c2-validation-independent-item-prereview-v1",
+  "phase": "validation",
+  "recorded_at": "2026-10-14T02:41:33.777690+00:00",
+  "status": "CHANGES_REQUESTED_BEFORE_ITEM_FREEZE",
+  "contains_isolated_validation_semantic_content": true,
+  "parent_safe_metadata_only": false,
+  "custody": "Do not expose this receipt body, case-specific findings or source anchors to the parent/candidate designer. Parent may receive only accepted/rejected/change counts, generic categories, file SHA and ownership state. The isolated author may read this receipt when resumed to make separately versioned corrections.",
+  "reviewer": {
+    "role": "/root/c2_validation_source_review",
+    "actual_tool_accepted_model": "gpt-6-astra",
+    "actual_tool_accepted_reasoning_effort": "xhigh",
+    "fork_turns": "none",
+    "settings_evidence": "Parent confirmed the originally accepted spawn settings and explicitly maintained them for this follow-up.",
+    "ai_reviewer": true,
+    "human_review_count": 0,
+    "question_author": false,
+    "oracle_author": false,
+    "source_author": false,
+    "independent_from_question_author": true,
+    "independent_from_oracle_author": true,
+    "independent_from_source_author": true,
+    "previous_role": "Independent prereviewer of these six source documents; this prior role is disclosed and is not counted as prior item review.",
+    "prior_source_review": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-review.json",
+      "sha256": "9188490bed7bd0fadd3bc771f2e5668013e65a17d19a9ed0486dde2a1bf2d3b5"
+    },
+    "future_independent_output_scoring_eligible": false,
+    "exposure": {
+      "prior_full_validation_sources_read": 6,
+      "current_validation_questions_and_oracles_read": 12,
+      "selection_rationales_and_author_self_review_claims_read": true,
+      "generic_answer_request_oracle_and_coordinate_contract_read": true,
+      "candidate_adapter_prompt_catalog_code_read": false,
+      "candidate_execution": false,
+      "calibration_bodies_questions_or_oracles_read": false,
+      "old_pools_read": false,
+      "service_model_outputs_read": false,
+      "tokenizer_feedback_read": false,
+      "parent_history_or_status_docs_read": false,
+      "model_identity_from_tool_acceptance_not_self_introspection": true
+    }
+  },
+  "bindings": {
+    "draft": {
+      "path": "data/evaluation/meetings-c2-validation-v1/draft.json",
+      "sha256": "c2983dbc4e46a5196049de6f0027e8372812ea6b08082745b76ea6d3b251384f"
+    },
+    "oracle_draft": {
+      "path": "data/evaluation/meetings-c2-validation-v1/oracle-draft.json",
+      "sha256": "2c737009209b197c9b4c1484bc46b190e11c1c04d153cdd85a48b176a99d5aa1"
+    },
+    "context_selection": {
+      "path": "data/evaluation/meetings-c2-validation-v1/context-selection.json",
+      "sha256": "d5afefbdea235d2c6382098ee6317fdc47dbd9247bf95cb52eae98886bd274d4"
+    },
+    "item_authoring_receipt": {
+      "path": "data/evaluation/meetings-c2-validation-v1/item-authoring-receipt.json",
+      "sha256": "9d6a596e4ee6e2d563d5548fbcda04e187001e15f550fb6cffcc883889a7964d"
+    },
+    "source_freeze": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-freeze-v1.json",
+      "sha256": "aa4d95bb6a90edec06a4b02375ac04591cfbdc54f91b068178852ccc1da39c45"
+    },
+    "whole_source_inventory": {
+      "path": ".local/c2-source-inventory-validation-full-v1/inventory.json",
+      "sha256": "49ce4cf4fb20096227064cb7a6108fc1bcf5aa306d8b4d7205eb089af6d7a2e5"
+    },
+    "source_review": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-review.json",
+      "sha256": "9188490bed7bd0fadd3bc771f2e5668013e65a17d19a9ed0486dde2a1bf2d3b5"
+    }
+  },
+  "review_basis": {
+    "complete_family_bodies": "Complete public4 and synthetic2 bodies were read during the immediately preceding source-only review. This item review reused that complete-source reading and checked current hashes for all six raw snapshots and the unchanged full inventory; missing-facet judgments cover the whole relevant family, not only selected contexts.",
+    "sufficiency_rule": "An exact quote is insufficient if a required subject, role, queried identifier, condition or day is unsupported in the supplied request. Shared identifiers already grounded in the selected source context need not be mechanically restated in every fact, but a query-provided identifier must not stand in for evidence of source identity. Each OR alternative must be sufficient as a whole; all spans inside an AND alternative are necessary parts of that alternative.",
+    "source_directives": "Commands, links and markup within sources were treated as text and were not executed or fetched."
+  },
+  "automated_checks": {
+    "answer_request_payloads_valid": 12,
+    "oracle_file_model_validation_passed": true,
+    "validate_oracles_validation_passed": true,
+    "source_freeze_bound_files_passed": 12,
+    "source_raw_hash_bindings_passed": 6,
+    "inventory_hash_binding_passed": true,
+    "whole_original_context_occurrences_passed": 21,
+    "context_minimum": 1,
+    "context_maximum": 4,
+    "context_limit": 10,
+    "contexts_equal_inventory_text_metadata_offsets_and_order": true,
+    "trim_merge_resegmentation": false,
+    "required_facts": 35,
+    "known_facts": 30,
+    "missing_facts": 5,
+    "evidence_alternatives_exact": 31,
+    "evidence_spans_exact": 42,
+    "numeric_multisource_cases": 4,
+    "numeric_multifactual_answered_cases": 8,
+    "numeric_partial_known_missing_cases": 4,
+    "schema_validation_is_not_semantic_acceptance": true,
+    "generic_import_note": "Only the permitted AnswerRequest, OracleFile and validate_oracles path was called. Generic imports define dependencies but no candidate adapter/catalog, tokenizer or inference method was called. Python was run with bytecode writing disabled.",
+    "unicode_replacement_characters_in_inputs": 0,
+    "source_or_draft_mutations": 0
+  },
+  "composition": {
+    "C2-F03": {
+      "items": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2,
+      "accepted": 6,
+      "rejected": 0
+    },
+    "C2-F04": {
+      "items": 6,
+      "ko": 3,
+      "en": 3,
+      "answered": 4,
+      "abstained": 2,
+      "accepted": 4,
+      "rejected": 2
+    }
+  },
+  "items": [
+    {
+      "case_id": "c2-val-01",
+      "family_id": "C2-F03",
+      "language": "ko",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 3,
+      "genuinely_missing_fact_ids": [],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f03",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural contributor-workflow question joining the minor-documentation exception with the ensuing merge workflow.",
+        "fact_scope": "The file limit and word limit are jointly required; passing tests and interested-party approval precede a committer performing a command-line squash merge. No actual PR completion is asserted.",
+        "alternatives": "All three single-span alternatives retain the requested thresholds or the complete conditional merge statement.",
+        "multisource": "Necessary across the whole public family for this requested combination: the minor-update thresholds are in CONTRIBUTING.md, while the merge conditions, actor and method are in overview.rst. This is not caused by excluding a one-document complete answer.",
+        "missing_audit": null
+      }
+    },
+    {
+      "case_id": "c2-val-02",
+      "family_id": "C2-F03",
+      "language": "en",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 4,
+      "known_fact_count": 4,
+      "genuinely_missing_fact_ids": [],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f03",
+          "alternative_index": 0,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f04",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural patch-submission and issue-triage question.",
+        "fact_scope": "Issue-before-PR sequence and the PR-title convention are kept separate from the issue-title convention. The obvious-error exclusion is limited to Critical Fix; Priority: Critical remains a broader category, not an automatic label for every error.",
+        "alternatives": "The Critical Fix label anchor and explanatory exclusion are correctly one conjunctive alternative. The other three alternatives contain their required sequence, title or qualified superset statement.",
+        "multisource": "Necessary: CONTRIBUTING.md supplies the requested submission/title conventions and reviewing.rst supplies the two distinct label meanings.",
+        "missing_audit": null
+      }
+    },
+    {
+      "case_id": "c2-val-03",
+      "family_id": "C2-F03",
+      "language": "ko",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 3,
+      "genuinely_missing_fact_ids": [],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f03",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural release-process question asking connected prerequisites.",
+        "fact_scope": "Maintenance-branch creation, the community-consensus exception for new features, normal bug-fix acceptance and blocker resolution before the first candidate are all preserved.",
+        "alternatives": "The shared complete freeze paragraph supports the first two facts; the final span includes both the blocker requirement and first-candidate boundary.",
+        "multisource": null,
+        "missing_audit": null
+      }
+    },
+    {
+      "case_id": "c2-val-04",
+      "family_id": "C2-F03",
+      "language": "en",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 2,
+      "known_fact_count": 2,
+      "genuinely_missing_fact_ids": [],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural clarification of a documented exception.",
+        "fact_scope": "The ABI-only exclusion is qualified by places with guaranteed ABI compatibility, and experimental APIs are explicitly not exempt.",
+        "alternatives": "Both alternatives use the full labelled paragraph, preserving the C++ subject, ABI guarantee exception and experimental qualification.",
+        "multisource": null,
+        "missing_audit": null
+      }
+    },
+    {
+      "case_id": "c2-val-05",
+      "family_id": "C2-F03",
+      "language": "ko",
+      "expected_status": "abstained",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 2,
+      "genuinely_missing_fact_ids": [
+        "f03"
+      ],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural combined rules-and-actual-event question; it explicitly limits evidence to supplied documents.",
+        "fact_scope": "The known vote threshold and no-veto rule do not identify actual voters in a most-recent completed vote.",
+        "alternatives": "Both known-rule spans are exact and support the stated rule within the supplied Voting and approval context. The actual-voter-list fact correctly has no alternative.",
+        "multisource": null,
+        "missing_audit": "All four complete public bodies were available from the preceding source review and their unchanged hashes were verified here. They contain procedures and illustrative references, not the latest completed release vote plus its supporting PMC list. The missing facet was not omitted by context selection; external links are not source bodies."
+      }
+    },
+    {
+      "case_id": "c2-val-06",
+      "family_id": "C2-F03",
+      "language": "en",
+      "expected_status": "abstained",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 2,
+      "genuinely_missing_fact_ids": [
+        "f03"
+      ],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural role-eligibility, delegation and actual-manager question.",
+        "fact_scope": "Minimum committer status and delegation of marked tasks to a PMC member are distinct from identifying an actual release manager.",
+        "alternatives": "The two known-fact spans preserve the Release Manager antecedent, non-PMC condition and recipient role. The requested real manager remains missing.",
+        "multisource": null,
+        "missing_audit": "The same four unchanged complete public sources do not identify the manager of the latest completed actual release. Named package maintainers and script examples elsewhere cannot supply that identity."
+      }
+    },
+    {
+      "case_id": "c2-val-07",
+      "family_id": "C2-F04",
+      "language": "ko",
+      "expected_status": "answered",
+      "verdict": "CHANGES_REQUESTED",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "CHANGES_REQUESTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 3,
+      "genuinely_missing_fact_ids": [],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "CHANGES_REQUESTED_FOR_REFERENT_OR_ROLE_SUPPORT",
+          "notes": "See item rationale and associated change request."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "CHANGES_REQUESTED_FOR_REFERENT_OR_ROLE_SUPPORT",
+          "notes": "See item rationale and associated change request."
+        },
+        {
+          "fact_id": "f03",
+          "alternative_index": 0,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "CHANGES_REQUESTED_FOR_REFERENT_OR_ROLE_SUPPORT",
+          "notes": "For f03 both variants retain complete date-plus-event conjunctions; requested referent anchors are still missing."
+        },
+        {
+          "fact_id": "f03",
+          "alternative_index": 1,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "CHANGES_REQUESTED_FOR_REFERENT_OR_ROLE_SUPPORT",
+          "notes": "For f03 both variants retain complete date-plus-event conjunctions; requested referent anchors are still missing."
+        }
+      ],
+      "change_request_ids": [
+        "C2-VAL-PREREVIEW-01"
+      ],
+      "isolated_semantic_rationale": {
+        "naturalness": "The workflow question itself is natural and asks a genuinely useful policy-versus-event distinction.",
+        "fact_scope": "Checklist and times are true in the frozen full sources, and the dates in the existing time alternatives are correctly linked. However the selected input omits the role/name mapping and the policy/order identifiers used by the question.",
+        "alternatives": "The f01 span names 서도윤 but does not establish that this person is the production manager. None of the selected policy or order text/title fields supplies MK-QP-01 or MK-418. f02 explicitly attributes its event to MK-418, and both f03 alternatives concern that requested order, without a selected identity anchor. Both f03 date/header variants are otherwise valid conjunctions; a date fragment alone is never sufficient.",
+        "multisource": "The full-source task is genuinely multisource: the complete acceptance checklist is in the policy and actual event times are in the order record. Its current selection lacks necessary referent evidence, so numerical multisource validation does not make this item semantically ready.",
+        "missing_audit": null
+      }
+    },
+    {
+      "case_id": "c2-val-08",
+      "family_id": "C2-F04",
+      "language": "en",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 3,
+      "genuinely_missing_fact_ids": [],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f03",
+          "alternative_index": 0,
+          "span_count": 3,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural policy-and-record comparison about approval authority.",
+        "fact_scope": "Written delegation requires recipient and scope, internal staff cannot replace customer consent, and the recorded absence of a delegation reply is restricted to this meeting stage.",
+        "alternatives": "The policy spans include the customer-approval antecedent. The order fact joins order identity, meeting date and the no-delegation-reply statement as one conjunction; none of these fragments is incorrectly offered alone.",
+        "multisource": "Necessary: the policy establishes general delegation form and substitution limits; the order record establishes its actual recorded delegation status. Both identifying headers are present in the selected inputs.",
+        "missing_audit": null
+      }
+    },
+    {
+      "case_id": "c2-val-09",
+      "family_id": "C2-F04",
+      "language": "ko",
+      "expected_status": "answered",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 3,
+      "genuinely_missing_fact_ids": [],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        },
+        {
+          "fact_id": "f03",
+          "alternative_index": 0,
+          "span_count": 1,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": false,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural meeting follow-up question about two proposals and the replacement reservation.",
+        "fact_scope": "Rejected early printing and an unadopted additional process are distinguished from a conditional next-day slot. Approval and completed handoff are both required reservation conditions.",
+        "alternatives": "Each span contains the complete decision or proposal outcome. The reservation span includes its antecedent time and both conditions; the selected order chunk also contains its identity and meeting date.",
+        "multisource": null,
+        "missing_audit": null
+      }
+    },
+    {
+      "case_id": "c2-val-10",
+      "family_id": "C2-F04",
+      "language": "en",
+      "expected_status": "answered",
+      "verdict": "CHANGES_REQUESTED",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "CHANGES_REQUESTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 3,
+      "genuinely_missing_fact_ids": [],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "CHANGES_REQUESTED_FOR_REFERENT_OR_ROLE_SUPPORT",
+          "notes": "See item rationale and associated change request."
+        },
+        {
+          "fact_id": "f02",
+          "alternative_index": 0,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "CHANGES_REQUESTED_FOR_REFERENT_OR_ROLE_SUPPORT",
+          "notes": "See item rationale and associated change request."
+        },
+        {
+          "fact_id": "f03",
+          "alternative_index": 0,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "CHANGES_REQUESTED_FOR_REFERENT_OR_ROLE_SUPPORT",
+          "notes": "See item rationale and associated change request."
+        }
+      ],
+      "change_request_ids": [
+        "C2-VAL-PREREVIEW-02"
+      ],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural event-timeline question.",
+        "fact_scope": "The April 10 delay, actual start and last recorded in-progress/non-completion states are correctly represented, but the input does not establish that the record belongs to the queried order MK-418.",
+        "alternatives": "All three alternatives correctly conjoin the April 10 heading with their event/status spans. Nevertheless the only selected chunk and its title omit the order identity, so the question-to-source referent is unsupported in this request.",
+        "multisource": null,
+        "missing_audit": null
+      }
+    },
+    {
+      "case_id": "c2-val-11",
+      "family_id": "C2-F04",
+      "language": "ko",
+      "expected_status": "abstained",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 3,
+      "known_fact_count": 1,
+      "genuinely_missing_fact_ids": [
+        "f02",
+        "f03"
+      ],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural order-versus-completion reconciliation question.",
+        "fact_scope": "The ordered quantity is not the final delivered quantity. Neither the actual completion time nor the finalized quantity is recorded after the last in-progress entry.",
+        "alternatives": "The known quantity alternative joins the order-number anchor with the quantity statement. The two genuinely unknown facts have no evidence alternatives.",
+        "multisource": null,
+        "missing_audit": "Both complete synthetic bodies remain unchanged from the prior full-source review. The policy describes how completion should be recorded but does not supply an event; the order record ends during printing. Actual completion time and finalized delivery quantity are absent from the entire family, not merely from the chosen chunks."
+      }
+    },
+    {
+      "case_id": "c2-val-12",
+      "family_id": "C2-F04",
+      "language": "en",
+      "expected_status": "abstained",
+      "verdict": "ACCEPTED_FOR_ITEM_FREEZE",
+      "question_naturalness": "ACCEPTED",
+      "required_fact_truth_in_complete_sources": "ACCEPTED",
+      "input_and_evidence_sufficiency": "ACCEPTED",
+      "independent_from_question_and_oracle_author": true,
+      "human_review_count": 0,
+      "required_fact_count": 2,
+      "known_fact_count": 1,
+      "genuinely_missing_fact_ids": [
+        "f02"
+      ],
+      "evidence_alternatives": [
+        {
+          "fact_id": "f01",
+          "alternative_index": 0,
+          "span_count": 2,
+          "exact_offsets_and_quotes": "PASSED",
+          "and_members_must_be_combined": true,
+          "semantic_sufficiency": "ACCEPTED_WITHIN_IDENTIFIED_SOURCE_CONTEXT",
+          "notes": "The full alternative, not any isolated conjunct, supports this fact with its relevant conditions and temporal scope."
+        }
+      ],
+      "change_request_ids": [],
+      "isolated_semantic_rationale": {
+        "naturalness": "Natural request combining desired receipt date with shipment tracking.",
+        "fact_scope": "The desired date is explicitly tentative; it does not establish a shipment or tracking identifier.",
+        "alternatives": "The known-fact alternative joins the order identity with the requested date and explicit lack of a completed booking record. The tracking-number fact correctly has no alternative.",
+        "multisource": null,
+        "missing_audit": "Neither complete synthetic source supplies a tracking identifier or subsequent shipment confirmation. MK-418 is an order number and cannot substitute for the missing tracking number."
+      }
+    }
+  ],
+  "change_requests": [
+    {
+      "change_id": "C2-VAL-PREREVIEW-01",
+      "case_id": "c2-val-07",
+      "severity": "blocking_before_item_freeze",
+      "categories": [
+        "query_referent_grounding",
+        "required_fact_subject_support"
+      ],
+      "affected_facts": [
+        "f01",
+        "f02",
+        "f03"
+      ],
+      "finding": "The request selects policy chunk c0001 and order chunks c0001/c0002. Their text and title metadata contain neither queried identifier MK-QP-01/MK-418. The only f01 citation says 서도윤, while the explicit production-manager-to-name mapping is outside the selected request. Therefore full-source truth is being used to fill input-level referent gaps.",
+      "verification": "Literal checks over every selected context text and title found no MK-QP-01 or MK-418, and no explicit 생산 책임자 서도윤 mapping. Whole-source reading confirms all three anchors are present in the preserved c0000 chunks; this is not a genuinely unanswerable family.",
+      "source_anchors": [
+        {
+          "document_id": "c2-f04-doc-01",
+          "chunk_id": "c2-f04-doc-01-r1-c0000",
+          "start_offset": 100,
+          "end_offset": 114,
+          "quote": "문서번호: MK-QP-01"
+        },
+        {
+          "document_id": "c2-f04-doc-01",
+          "chunk_id": "c2-f04-doc-01-r1-c0000",
+          "start_offset": 418,
+          "end_offset": 471,
+          "quote": "생산 책임자 서도윤은 인계 자료를 대조한 뒤 접수 여부와 실제 인쇄 착수 여부를 따로 기록한다."
+        },
+        {
+          "document_id": "c2-f04-doc-02",
+          "chunk_id": "c2-f04-doc-02-r1-c0000",
+          "start_offset": 99,
+          "end_offset": 111,
+          "quote": "주문번호: MK-418"
+        }
+      ],
+      "requested_change": "Create a separate, provenance-bound revision of the item/context/oracle artifacts. Supply the missing policy/order identity and role mapping through unchanged complete original chunks, and include the required identity/role anchors in sufficient conjunctive evidence sets. Keep both otherwise-valid f03 date alternatives complete. Preserve the old drafts and all source bodies. A new independent prereview is required before item freeze; do not use tokenizer or output feedback to choose the repair."
+    },
+    {
+      "change_id": "C2-VAL-PREREVIEW-02",
+      "case_id": "c2-val-10",
+      "severity": "blocking_before_item_freeze",
+      "categories": [
+        "query_referent_grounding"
+      ],
+      "affected_facts": [
+        "f01",
+        "f02",
+        "f03"
+      ],
+      "finding": "The question asks specifically about MK-418, but the sole selected order chunk c0002 and its title never identify that order. Its dated events are coherent, yet the query supplies an identity that the current evidence does not verify.",
+      "verification": "The order identifier is absent from every selected context text/title and present at source offsets 99..111 in the preserved c0000 chunk. Date headings already included in the alternatives solve the day boundary, not this order boundary.",
+      "source_anchors": [
+        {
+          "document_id": "c2-f04-doc-02",
+          "chunk_id": "c2-f04-doc-02-r1-c0000",
+          "start_offset": 99,
+          "end_offset": 111,
+          "quote": "주문번호: MK-418"
+        }
+      ],
+      "requested_change": "In a separately versioned item/context/oracle revision, supply the identifying whole original chunk and join its order anchor with the dated event/status evidence where needed. Preserve the original draft and the source bytes. Re-prereview before any item freeze or tokenizer run; do not infer the identity from the question alone."
+    }
+  ],
+  "counts": {
+    "item_reviews_completed": 12,
+    "accepted_items": 10,
+    "rejected_items": 2,
+    "held_items": 0,
+    "change_requests": 2,
+    "broad_issue_categories": 2,
+    "independent_ai_item_prereviews": 12,
+    "human_reviews": 0,
+    "question_naturalness_accepted": 12,
+    "full_source_fact_truth_accepted": 12,
+    "evidence_alternatives_reviewed": 31,
+    "evidence_alternatives_accepted_within_identified_context": 24,
+    "evidence_alternatives_requiring_referent_or_role_support": 7,
+    "whole_family_absence_audits_passed": 4,
+    "missing_facts_confirmed_absent_from_whole_family": 5,
+    "necessary_multisource_tasks_in_whole_sources": 4,
+    "necessary_multisource_items_ready_after_current_prereview": 3,
+    "new_question_authorship": 0,
+    "new_oracle_authorship": 0,
+    "tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "paid_calls": 0,
+    "network_calls": 0,
+    "existing_files_modified": 0
+  },
+  "parent_safe_summary": {
+    "accepted_items": 10,
+    "rejected_items": 2,
+    "change_requests": 2,
+    "broad_categories": [
+      "query_referent_grounding",
+      "required_fact_subject_support"
+    ],
+    "schema_and_exact_coordinate_checks": "PASSED",
+    "existing_source_and_draft_bindings": "UNCHANGED",
+    "ready_for_item_freeze": false
+  },
+  "preserved_author_state": {
+    "authoring_receipt_and_oracle_pending_prereview_statements_unchanged": true,
+    "author_stage_actual_independent_item_prereviews": 0,
+    "this_receipt_separately_records_completed_reviews": 12
+  },
+  "limitations": [
+    "These are AI judgments with no human review and no service-model output evaluation.",
+    "The author self-review and intended expected-status labels were visible; this is independent-of-author prereview, not blind-to-oracle scoring.",
+    "Schema and exact-coordinate success does not resolve the two input-level semantic gaps.",
+    "No official token preparation or generation has occurred in this review; revised contexts must be chosen and independently accepted before token feedback.",
+    "Do not freeze or run this exact draft as fully accepted. Preserve this rejected revision and create a new corrective version with provenance before rereview."
+  ],
+  "ownership_handoff": {
+    "only_new_file": "data/evaluation/meetings-c2-validation-v1/item-prereview.json",
+    "all_existing_sources_drafts_and_receipts_preserved": true,
+    "git_operations": 0,
+    "released_to_parent": true,
+    "next_owner": "Parent may resume the isolated author to read this receipt and create new versions; parent must continue to avoid semantic content."
+  }
+}

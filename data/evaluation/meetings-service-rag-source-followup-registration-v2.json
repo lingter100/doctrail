@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_review_and_validation_followup_registration",
+  "registered_at": "2026-10-20T07:42:40.607871+00:00",
+  "bindings": [
+    {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    {
+      "path": "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+      "sha256": "26506cbd3c1f49a4b1e6dcb8ce94acd50b410ff34f313d13551342331c3d52b3"
+    },
+    {
+      "path": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+      "sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/safe-summary-v3.json",
+      "sha256": "240c57a467eb383888e29d772115c07d37d0556a9897ebd745ecde9f245b70df"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/artifact-index-v3.json",
+      "sha256": "801d902f1317bd037f5074c5b43b952d4a6d4f0fa5dc6d5d20d8a0942c9f830d"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/correction-receipt-v3.json",
+      "sha256": "2b3099bb568045204adc90042f8a4e548d230e982b65ff90e06a845739f931bf"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v1/safe-summary-v1.json",
+      "sha256": "0804bccc4e3ca54a3f797ef93b1015fd1509739abedc00d6a6969d7c4ff55a78"
+    }
+  ],
+  "calibration_review": {
+    "actor": "/root/service_rag_calibration_source_review",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "fork_turns": "none",
+    "tool_spawn_request_accepted": true,
+    "runtime_model_self_verification": false,
+    "registration_returned": true,
+    "pre_dispatch_exposure": "Registration message counts/status only; no source bodies, semantic notes, questions/oracle/model outputs. Parent verified stable index byte/hash bindings without semantic reads.",
+    "read_paths": [
+      "data/evaluation/meetings-service-rag-calibration-v2/",
+      ".local/service-rag-calibration-v2/",
+      "registered plan and fingerprint metadata only"
+    ],
+    "new_output_paths": [
+      "data/evaluation/meetings-service-rag-calibration-v2/source-review-v2.json",
+      "data/evaluation/meetings-service-rag-calibration-v2/source-review-notes-v2.md",
+      "data/evaluation/meetings-service-rag-calibration-v2/source-review-summary-v2.json",
+      "data/evaluation/meetings-service-rag-calibration-v2/source-freeze-v2.json"
+    ],
+    "scope": "Independently review whole public2 completed meetings + related general1, new synthetic2 meetings + general1, applicable license/revision/provenance/actual ingestion and semantic freshness. No author source edits. Freeze only accepted corpus. Return counts/hash/status to parent; semantic notes stay unread by parent.",
+    "historical_fingerprint_gaps_disclosed": true,
+    "excluded_from_final_answer_judging": true
+  },
+  "validation_source_v2": {
+    "actor": "/root/service_rag_validation_sources",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "fork_turns": "none",
+    "previous_tool_acceptance_verified": true,
+    "registration_returned": true,
+    "prior_exposure": "Own closed v1 source body3/license3 including one duplicate and uninspected patch payload1; project aggregate and generic code/plan. No other split semantics/questions/oracle/model outputs.",
+    "allowed_paths": [
+      "data/evaluation/meetings-service-rag-validation-v2/",
+      ".local/service-rag-validation-v2/"
+    ],
+    "preferred_source": "Official W3C project documents with explicit applicable document license; GitHub or official website. No platform-only requirement.",
+    "reserve_before_bodies": "Send metadata-only repository+exact commit or official group+specific URL candidates to parent before license/source body fetch. For official non-versioned pages bind requested/final URL, UTC, content type/charset, raw bytes SHA256 and applicable license snapshot; ETag/LastModified alone is not immutable identity.",
+    "input_formats": "Use existing TXT/Markdown/text-PDF pipeline only. HTML-only material requires a separate implementation decision; do not silently strip markup or create a new parser in this source assignment.",
+    "budget": {
+      "metadata_network_requests": 24,
+      "repositories_or_official_groups": 3,
+      "public_family_candidates": 2,
+      "source_body_fetches": 6,
+      "license_body_fetches_per_repository_or_group": 3,
+      "active_minutes": 30,
+      "excluded_waits": [
+        "parent reservation",
+        "exclusive Java/Maven slot"
+      ],
+      "failures_count": true,
+      "automatic_extension": false
+    },
+    "corpus_target": {
+      "public_completed_meetings_distinct_dates": 2,
+      "public_related_general_documents": 1,
+      "new_synthetic_meetings": 2,
+      "new_synthetic_general_documents": 1,
+      "whole_originals": true,
+      "c7_small_family_limits": false
+    },
+    "extra_excluded_repositories": [
+      "nodejs/TSC",
+      "tc39/notes",
+      "rust-embedded/wg",
+      "rust-lang/wg-async",
+      "cncf/tag-app-delivery"
+    ],
+    "freshness": "Also exclude bound original19 and prior fingerprints; cross-platform mirrors and exact/semantic duplicates still excluded. Do not read past source bodies to fill metadata gaps.",
+    "actual_ingestion": "Parent-serialized Java, isolated database/ports, generation/inference disabled. Reuse verified JAR SHA8476ba7728f392e62aa53a3999de8d2f08982012dc2a345f503bedb59564976b. Source /documents parity is not meeting autoanalysis proof.",
+    "output_contract": "Whole raw/license/provenance, processed/chunk artifacts, manifest/fingerprints, author receipt/network log, artifact-index-v2.json and safe-summary-v2.json. Unlicensed discovery bodies stay local. Parent safe counts/hash/identity only. Exclude ephemeral SQLite -shm/-wal from final durable artifact index; close handles before hashing.",
+    "source_acceptance": "Pending separate independent reviewer; no author self-acceptance.",
+    "excluded_from_final_answer_judging": true
+  },
+  "common_prohibited": [
+    "Git/root-doc/old-attempt/frozen77 edits",
+    "other-split semantic reads",
+    "questions/oracle/model outputs",
+    "model/tokenizer/native/download calls",
+    "source trimming or fabricated public meeting completion",
+    "user approval or human review claims"
+  ],
+  "dispatch_gate": "This registration committed, then explicit parent dispatch for each role. No actual source/review access before it.",
+  "current_actual": {
+    "calibration_artifact_bindings_verified": 57,
+    "original_v2_missing_ephemeral_files": 2,
+    "independent_source_reviews": 0,
+    "validation_v2_sources": 0,
+    "questions": 0,
+    "native_calls": 0,
+    "human_reviews": 0
+  }
+}

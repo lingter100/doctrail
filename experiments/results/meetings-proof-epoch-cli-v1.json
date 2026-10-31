@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "bounded-snapshot-independent-CLI-observation",
+  "head": "64e3454b5dae36b53e8ebd31e6e899292c777cdd",
+  "head_after": "64e3454b5dae36b53e8ebd31e6e899292c777cdd",
+  "cli_exit_code": 0,
+  "observer_timeout": false,
+  "cli_elapsed_seconds": 59.634,
+  "owned_cli_pid": 44500,
+  "owned_cli_exit_observed": true,
+  "terminal_summary": {
+    "boundaries": 4,
+    "first_failure": null,
+    "last_written_receipt_sha256": "92fda0c9a3a065f5dfb4201b4396c563edf899234cb263603634363d9d0b8e46",
+    "later_failures": [],
+    "persistence_meter": {
+      "counts": {
+        "actual_read_returned_bytes": 0,
+        "alias_checks": 0,
+        "ast_parse_calls": 0,
+        "candidate_checks": 0,
+        "close_calls": 0,
+        "fsync_calls": 1,
+        "hash_bytes": 143516,
+        "hash_calls": 1,
+        "head_checks": 0,
+        "json_parse_calls": 0,
+        "open_calls": 0,
+        "path_checks": 0,
+        "read_calls": 0,
+        "replace_calls": 1,
+        "snapshot_calls": 0,
+        "stat_calls": 0,
+        "write_calls": 1,
+        "write_returned_bytes": 143516
+      },
+      "git": [],
+      "read_requested_lengths": {}
+    },
+    "status": "completed",
+    "terminal_persistence_seconds": 0.01600000000325963,
+    "total_through_terminal_persistence_seconds": 58.92199999996228
+  },
+  "receipt_sha256": "92fda0c9a3a065f5dfb4201b4396c563edf899234cb263603634363d9d0b8e46",
+  "source_head_unchanged": true,
+  "source_bytes_unchanged": true,
+  "old_freezes_union_unchanged": true,
+  "passed": true,
+  "native_calls": 0,
+  "tokenizer_calls": 0,
+  "quality_calls": 0,
+  "human_reviews": 0
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "status": "BASELINE_COMPLETED_WITH_REJECTIONS_SEMANTIC_REVIEW_PENDING",
+  "source_head": "9236b854ed2ab46785868042467251e1c6ef1ca2",
+  "contract_sha256": "50d5fc6034fca689647ed8b665a9e7f276c0f56430567dd5047b6194615a4ae6",
+  "case_denominator": 6,
+  "structurally_valid_cases": 3,
+  "rejected_input_limit": 1,
+  "rejected_output_limit": 2,
+  "cases": [
+    {
+      "id": "FQA01",
+      "status": "rejected",
+      "error": {
+        "code": "generation_input_limit",
+        "type": "GenerationError"
+      }
+    },
+    {
+      "id": "FQA02",
+      "status": "valid",
+      "error": null
+    },
+    {
+      "id": "FQA03",
+      "status": "rejected",
+      "error": {
+        "code": "generation_output_limit",
+        "type": "WorkerError"
+      }
+    },
+    {
+      "id": "FQA04",
+      "status": "rejected",
+      "error": {
+        "code": "generation_output_limit",
+        "type": "WorkerError"
+      }
+    },
+    {
+      "id": "FQA05",
+      "status": "valid",
+      "error": null
+    },
+    {
+      "id": "FQA06",
+      "status": "valid",
+      "error": null
+    }
+  ],
+  "measured": {
+    "model_generations": 5,
+    "requested_output_token_caps_total": 1280,
+    "local_HTTP_requests": 18,
+    "runner_elapsed_seconds": 40.21900000004098,
+    "cleanup_seconds": 0.35999999998603016,
+    "known_owned_absent": 5
+  },
+  "actual_exits": {
+    "wrapper": 0,
+    "monitor": 0,
+    "seal": 0,
+    "cli": 0
+  },
+  "custody": {
+    "hash_rows": 656,
+    "asset_stat_only": 74,
+    "copies": 5,
+    "parent_accepted": true,
+    "once_consumed": true
+  },
+  "retry_count": 0,
+  "semantic_judging_done": false,
+  "paid_service_calls": 0,
+  "public_deployment": false,
+  "limitations": [
+    "Three structurally valid outputs are not three correct answers.",
+    "The input-limited case generated no answer; all six remain in the denominator.",
+    "Output-limited cases remain rejected; no repair, backfill, truncation or budget increase.",
+    "Wall time is one local epoch including preparation/startup, not service latency distribution.",
+    "Actual generated token usage and local hardware cost are not inferred from request caps."
+  ],
+  "next": "Run the already registered comparison candidate with unchanged sealed questions, criteria, settings and budgets; then independent judging."
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_validation_v3_source_review_registration",
+  "registered_at": "2026-10-20T08:11:44.131263+00:00",
+  "actor": "/root/service_rag_validation_source_review",
+  "accepted_model": "gpt-6-astra",
+  "accepted_reasoning_effort": "xhigh",
+  "fork_turns": "none",
+  "registration_returned": true,
+  "exposure": "Role instructions and provided aggregate project metadata only; registration had no tool calls or source/question/oracle/output/semantic-note reading. Not claimed pristine.",
+  "source_author": "/root/service_rag_validation_sources",
+  "bindings": [
+    {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "bytes": 19569,
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-next-stage-registration-v3.json",
+      "bytes": 8876,
+      "sha256": "49539ed9e800cb3d56256e280ec5af801b0a0021359deee8dc0363cf9ec72eaa"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/artifact-index-v3.json",
+      "bytes": 10630,
+      "sha256": "875d172f68d7b59a0f6bdb50bb5d08d2ce2243b184daf7a2f283fd8708fc4acc"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/safe-summary-v3.json",
+      "bytes": 2686,
+      "sha256": "2d3a0074fd37e9db4a478defb66fa4bc13350f77a26977de779f5d9026b0e77d"
+    },
+    {
+      "path": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+      "bytes": 49624,
+      "sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa"
+    },
+    {
+      "path": "experiments/results/meetings-service-rag-next-stage-ci-v3.json",
+      "bytes": 2429,
+      "sha256": "725f9cb2a9e64a34af984f5001255d675c65536c35906eed6bf1d0958f8feff1"
+    }
+  ],
+  "parent_verified_source_artifacts": 42,
+  "source_counts": {
+    "public": 3,
+    "new_ai_synthetic": 3,
+    "whole_documents": 6,
+    "chunks": 66
+  },
+  "owned_outputs": [
+    "source-review-v3.json",
+    "source-review-notes-v3.md",
+    "source-review-summary-v3.json",
+    "source-freeze-v3.json"
+  ],
+  "output_root": "data/evaluation/meetings-service-rag-validation-v3/",
+  "read_scope": "Same-split originals, raw/license/processed/source metadata and saved actual Java evidence named by the durable index; generic service acceptance plan and source registration; historical fingerprint metadata only.",
+  "review_requirements": [
+    "Whole original source preservation and license applicability",
+    "Two completed meetings on different dates and related general document per public/synthetic family",
+    "All chunks, raw content, revision, codepoint coordinates and saved Java upload/readback evidence",
+    "Recorded prior exact/normalized/paragraph fingerprints and disclosed metadata coverage gaps",
+    "Own-split semantic duplicates and source suitability; no claim of absence of cross-split semantic duplicates without reading them",
+    "No author-original edits; freeze only after independent acceptance of all source documents"
+  ],
+  "forbidden": [
+    "Other-split or closed source semantics, questions, oracle, model outputs",
+    "Source fetching, Java/Maven, tokenizer, native, retrieval or model execution",
+    "Frozen source/code changes, root docs, Git mutations",
+    "Final answer judging, human review or model quality claims"
+  ],
+  "dispatch_gate": "Registration and prepared source metadata committed, then explicit parent dispatch.",
+  "current_actual": {
+    "independent_review": 0,
+    "source_acceptance": 0,
+    "source_edits": 0,
+    "questions": 0,
+    "native_calls": 0,
+    "human_review": 0
+  }
+}

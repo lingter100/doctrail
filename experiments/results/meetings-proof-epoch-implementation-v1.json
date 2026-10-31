@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "id": "meetings-proof-epoch-implementation-v1",
+  "recorded_at": "2026-10-20T01:22:14.255665+00:00",
+  "design_commit": "6ea47c350fe6d67f03426fc934dceaca517914f5",
+  "python": "3.11.15",
+  "source_files": {
+    "src/doctrail/meeting_bounded_snapshot.py": "a5ceb1101b981c74c8929de982af119110842bf89b00c3903f4e956565924a18",
+    "scripts/probe_meeting_bounded_snapshot.py": "87ae4f260d7a6eb0c30287efa1f1f2f1df8b857cbb7aa6994b064cfc8162e960",
+    "tests/test_meeting_bounded_snapshot.py": "8094271dec189b4c9d837749c5bee04cfa3f723d7c130dae05027ed15670403f",
+    "tests/test_probe_meeting_bounded_snapshot.py": "4ebecab4a7d169082713462939b3b7e6c6e008a5f61efacf3c019144f4693a74"
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-proof-epoch-source-freeze-v1.json",
+    "sha256": "261abc74b39862f9768387def7a86629ea6345dd43ccb692f6abed6f2174a4f1",
+    "bound_files": 27,
+    "code_roster": 23,
+    "candidate_paths": 710
+  },
+  "fixture_spec": {
+    "file": "data/evaluation/meetings-proof-epoch-fixture-spec-v1.json",
+    "sha256": "1a0e9d794f3e6e5a0e52a4281e01ed2f88d3be4828d28ee540661633c8e3584e",
+    "payload_files": 40,
+    "payload_bytes": 393216,
+    "manifest_bytes": 12852,
+    "manifest_sha256": "8548605cad0fac05042b43762589b121e3f0e101a6f37bbb1494c96f8b7c8506"
+  },
+  "checks": {
+    "initial": {
+      "passed": 51,
+      "failed": 1,
+      "skipped": 1,
+      "errors": 2,
+      "seconds": 64.52,
+      "ruff_findings": 11,
+      "status": "preserved_not_final",
+      "causes": [
+        "test_expected_snapshot_count_328_vs_actual_326",
+        "Windows_long_parameter_id_environment_limit"
+      ]
+    },
+    "pre_last_delta": {
+      "passed": 73,
+      "skipped": 1,
+      "seconds": 62.04,
+      "ruff_passed": true,
+      "source_unchanged_during_checks": true,
+      "source_hashes": {
+        "tests/test_meeting_bounded_snapshot.py": "8094271dec189b4c9d837749c5bee04cfa3f723d7c130dae05027ed15670403f",
+        "tests/test_probe_meeting_bounded_snapshot.py": "b4739022a4c60f28f8283c086d6f8ed194b371288b51c6dc6c61362a48d3418e",
+        "src/doctrail/meeting_bounded_snapshot.py": "a5ceb1101b981c74c8929de982af119110842bf89b00c3903f4e956565924a18",
+        "scripts/probe_meeting_bounded_snapshot.py": "2d1a82c5c96bec8af6eabf23d7ca78474cc1bd530489e5b50e839cb6cb5f59ab"
+      }
+    },
+    "last_delta": {
+      "passed": 8,
+      "deselected": 45,
+      "seconds": 11.24,
+      "ruff_passed": true,
+      "source_unchanged_during_checks": true,
+      "source_hashes": {
+        "src/doctrail/meeting_bounded_snapshot.py": "a5ceb1101b981c74c8929de982af119110842bf89b00c3903f4e956565924a18",
+        "scripts/probe_meeting_bounded_snapshot.py": "87ae4f260d7a6eb0c30287efa1f1f2f1df8b857cbb7aa6994b064cfc8162e960",
+        "tests/test_meeting_bounded_snapshot.py": "8094271dec189b4c9d837749c5bee04cfa3f723d7c130dae05027ed15670403f",
+        "tests/test_probe_meeting_bounded_snapshot.py": "4ebecab4a7d169082713462939b3b7e6c6e008a5f61efacf3c019144f4693a74"
+      }
+    },
+    "no_overlap_sum": true,
+    "coverage_limit": "73-case suite preceded final main deadline/meter propagation change; affected 8 checks used final bytes. Exact final commit full CI required. Windows unsupported symlink check skipped."
+  },
+  "review": {
+    "role": "/root/c5_persistence_review",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "original_role_setting_retained": true,
+    "mode": "independent code and synthetic-test read-only",
+    "final_source_hashes": {
+      "src/doctrail/meeting_bounded_snapshot.py": "a5ceb1101b981c74c8929de982af119110842bf89b00c3903f4e956565924a18",
+      "scripts/probe_meeting_bounded_snapshot.py": "87ae4f260d7a6eb0c30287efa1f1f2f1df8b857cbb7aa6994b064cfc8162e960",
+      "tests/test_meeting_bounded_snapshot.py": "8094271dec189b4c9d837749c5bee04cfa3f723d7c130dae05027ed15670403f",
+      "tests/test_probe_meeting_bounded_snapshot.py": "4ebecab4a7d169082713462939b3b7e6c6e008a5f61efacf3c019144f4693a74"
+    },
+    "remaining_blockers": 0,
+    "tests_run_by_reviewer": 0,
+    "human_review": 0,
+    "resolved": [
+      "owned_git_cleanup_and_remaining_deadline",
+      "setup_hash_AST_accounting",
+      "remove_extra_measured_JSON_parsing",
+      "actual_Git_freeze_CI_negative_guard_tests",
+      "share_first_output_path_setup_deadline_and_meter"
+    ]
+  },
+  "implementation_role": {
+    "role": "/root/host_proof_profile",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "original_role_setting_retained": true
+  },
+  "preserved_prior_freezes": {
+    "data/evaluation/meetings-c5-toolchain-freeze-v1.json": {
+      "sha256": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d",
+      "bound_count": 76,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json": {
+      "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78",
+      "bound_count": 85,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-gpu-placement-source-freeze-v1.json": {
+      "sha256": "116b5325b8b9c1de39c27d486b17d614d9bdef49b32274b14d2838c5a4e9cfaf",
+      "bound_count": 59,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-host-proof-profile-source-freeze-v1.json": {
+      "sha256": "1171f14f7cb176838385723a040ded6921409cc1cfb168833d35e4782687f412",
+      "bound_count": 52,
+      "working_bytes_match": true
+    }
+  },
+  "prior_union_unchanged": 106,
+  "local_evidence": {
+    "delta-ruff.txt": {
+      "file": ".local/proof-reader-implementation-v1/delta-ruff.txt",
+      "sha256": "8ec37fc5489f1fef1af0a1317171013bdaef98f5693c63d5709a1cd2fe471f7d",
+      "bytes": 1859
+    },
+    "final-delta-before.json": {
+      "file": ".local/proof-reader-implementation-v1/final-delta-before.json",
+      "sha256": "fb28a36d93d445df58cbf0e4cd637cf3921fb6daa42ac18931c63542c669e614",
+      "bytes": 468
+    },
+    "final-delta-pytest.txt": {
+      "file": ".local/proof-reader-implementation-v1/final-delta-pytest.txt",
+      "sha256": "d6eb0db61f191d30bf917699d6ae9ad0c4bdef70d32dddd8da3cc70779cc23c1",
+      "bytes": 116
+    },
+    "final-delta-receipt.json": {
+      "file": ".local/proof-reader-implementation-v1/final-delta-receipt.json",
+      "sha256": "6c81ac2c3e5e20d5d53731776fd91d41cdf236c831355eb9804031189a7ee9ba",
+      "bytes": 1026
+    },
+    "final-delta-ruff.txt": {
+      "file": ".local/proof-reader-implementation-v1/final-delta-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "final-v1-before.json": {
+      "file": ".local/proof-reader-implementation-v1/final-v1-before.json",
+      "sha256": "dfebe2f9668bc329fd34fc4d9f440bc1ca164dce671c80f9eb778c1908485b94",
+      "bytes": 468
+    },
+    "final-v1-pytest.txt": {
+      "file": ".local/proof-reader-implementation-v1/final-v1-pytest.txt",
+      "sha256": "8e2a113b546d6430d2d24763096e9964b6cfa9ce20a2d08906fb5d86867433ed",
+      "bytes": 204
+    },
+    "final-v1-receipt.json": {
+      "file": ".local/proof-reader-implementation-v1/final-v1-receipt.json",
+      "sha256": "a10c62a1d8c653f9f77a954660263d0499388dd1dee2f38d5909f609ea53ffdc",
+      "bytes": 1026
+    },
+    "final-v1-ruff.txt": {
+      "file": ".local/proof-reader-implementation-v1/final-v1-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "helper-summary-v1.json": {
+      "file": ".local/proof-reader-implementation-v1/helper-summary-v1.json",
+      "sha256": "dacc17d4d1edeb448a7faff632895ba4b1cf48d4c0e88ac25cea170629d289d8",
+      "bytes": 224
+    },
+    "initial-pytest.txt": {
+      "file": ".local/proof-reader-implementation-v1/initial-pytest.txt",
+      "sha256": "dfcb84a03cfce6edc1f199ab4ca6ba49bed98d1d0dff115cfef71938e0d34e84",
+      "bytes": 269851
+    },
+    "initial-ruff.txt": {
+      "file": ".local/proof-reader-implementation-v1/initial-ruff.txt",
+      "sha256": "16c60a28d34a626eb0eada438c7d52a1edcbb6d3f0ac67323578c359f7df944f",
+      "bytes": 5379
+    }
+  },
+  "official_comparison_runs": 0,
+  "native_calls": 0,
+  "tokenizer_calls": 0,
+  "model_transport_HTTP": 0,
+  "old_closed_experiments_rerun": 0,
+  "service_adoption": false,
+  "claim_scope": "Synthetic code checks and read review only; no observed latency benefit, allocator/RSS benefit, C5 causal attribution, answer quality or deployment claim.",
+  "next": "commit implementation/freeze/spec, observe exact push+PR required CI, commit CI receipt, then one exclusive synthetic CLI comparison",
+  "parent_setup_failure": {
+    "file": ".local/proof-reader-parent-freeze-import-failure-v1.txt",
+    "sha256": "63cfa09a19ad127a59717983636404e650ed5c372ae3a7e7bcdba8dcd296bfad",
+    "cause": "local helper lacked repository Python import path; failed before artifact creation; succeeded with explicit PYTHONPATH",
+    "official_comparison_runs": 0
+  }
+}

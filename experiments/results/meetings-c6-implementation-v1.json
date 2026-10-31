@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c6-implementation-v1",
+  "recorded_at": "2026-10-20T02:11:26.361050+00:00",
+  "design_commit": "5657bb1b814be7728c9706723b22be31c732e317",
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "source_files": {
+    "src/doctrail/meeting_c6_review.py": "087addb0edb594955699f1e2f6a0113e572249ba5e3080909b55b1a122e05e34",
+    "scripts/prepare_meeting_c6_inputs.py": "4d2f13bf364cbaf62eff73979a30b5bb79ad4f2e013412036572444278bf48b5",
+    "scripts/probe_meeting_c6_quality.py": "799a78ecb91daa0fc75d8a6557159fcba6adad7316e283bf0def6372ff3372a6",
+    "scripts/audit_meeting_c6_quality.py": "7a11ef4d15202ca3deb3ebe66b489d8ece93b3a0335d1252a61c55a7656ac044",
+    "tests/test_meeting_c6_review.py": "6769b2afc3a9bef5ff8d7d902ec4e6858de3655ebf02ee5e4092771a99213347",
+    "tests/test_prepare_meeting_c6_inputs.py": "e2d649a81d55722e91b89f19215eaaef941a3b864cd58ed97df3ddc16b50af90",
+    "tests/test_probe_meeting_c6_quality.py": "50c88442b73693ce8821337ff4c4ffe19604b323f1da2d76447f429005b82a2e",
+    "tests/test_audit_meeting_c6_quality.py": "1a9d7496934436334cd1162c0090f3dabcaa4dd3e52dd1ec08c73adf071e37b2"
+  },
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c6-toolchain-freeze-v1.json",
+    "sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b",
+    "bound_files": 77,
+    "code_roster": 66,
+    "import_candidates": 1648,
+    "absent_candidates": 1582
+  },
+  "checks": {
+    "local_final_scope_before_lf": "four NEW C6 test modules plus existing policy and adapter modules",
+    "tested_source_files": {
+      "src/doctrail/meeting_c6_review.py": "087addb0edb594955699f1e2f6a0113e572249ba5e3080909b55b1a122e05e34",
+      "scripts/prepare_meeting_c6_inputs.py": "f7d87d7447d209fa7f79288a4bea6b623360fefc6fcbaa9b79d8be317d50245d",
+      "scripts/probe_meeting_c6_quality.py": "799a78ecb91daa0fc75d8a6557159fcba6adad7316e283bf0def6372ff3372a6",
+      "scripts/audit_meeting_c6_quality.py": "3f55b6942ce3eb5e679c7d8d41e2da1e353d5b51ae1182f9f9233c3640c93d0d",
+      "tests/test_meeting_c6_review.py": "6769b2afc3a9bef5ff8d7d902ec4e6858de3655ebf02ee5e4092771a99213347",
+      "tests/test_prepare_meeting_c6_inputs.py": "e2d649a81d55722e91b89f19215eaaef941a3b864cd58ed97df3ddc16b50af90",
+      "tests/test_probe_meeting_c6_quality.py": "65b33f5df833ad73f7b4c6f849655e8f8ea3a3c543bc34a436ac036695eab908",
+      "tests/test_audit_meeting_c6_quality.py": "666b5d7ceb7e3c82e7015b23b0bf6c2972ec274f6a32343a4debf15422f67715"
+    },
+    "passed": 195,
+    "skipped": 1,
+    "seconds": 220.87,
+    "pytest_exit": 0,
+    "ruff_exit": 0,
+    "before_after_same": true,
+    "overlapping_intermediate_scopes_not_added": true,
+    "reused_test_files_unchanged": {
+      "tests/test_meeting_answer_thinking.py": "23586ef43ae03aa23132eacc7ca9d6f43dc8d62c364166049895fc15b4d78cbf",
+      "tests/test_meeting_thinking_quality.py": "f172c70ff3c6be0b7e99c5f94c3db6fbad8149afbd21adf359b1f628bd780b09"
+    },
+    "skip_reason": "Windows symlink creation privilege unavailable; not counted as passed"
+  },
+  "preserved_intermediate_checks": {
+    "first_four_initial": {
+      "passed": 65,
+      "seconds": 9.83,
+      "ruff_findings": 4
+    },
+    "safe_prefix_before_fix": {
+      "failed": 1,
+      "seconds": 1.01
+    },
+    "first_four_reviewed_before_later_delta": {
+      "passed": 71,
+      "seconds": 9.8,
+      "ruff_exit": 0
+    },
+    "whole_before_seed_reader_delta": {
+      "passed": 108,
+      "seconds": 189.72,
+      "ruff_exit": 0
+    },
+    "seed_reader_before_fix": {
+      "failed": 5,
+      "deselected": 27,
+      "seconds": 5.63
+    },
+    "counting_rule": "Distinct source snapshots/scopes; never sum overlapping test counts."
+  },
+  "contract_metadata_repairs_distinct_from_reader_inference_change": [
+    "C6 safe prefix and input-write first failure preservation",
+    "Exact push plus pull_request CI receipt event and completed success enforcement",
+    "Exact 64-byte judge seed requirement",
+    "Trusted bounded reader first-cause codes survive later persistence errors"
+  ],
+  "editing_observations": {
+    "kind": "observed_editing_failures_not_test_results",
+    "events": [
+      {
+        "operation": "namespace-generation patch",
+        "observation": "A patch did not match after broad c5 replacement also changed embedded hash substrings. Before tests, regenerated with targeted namespace replacements and explicit pinned hashes. Frozen files were not edited.",
+        "raw_tool_output_archived": false
+      },
+      {
+        "operation": "remaining synthetic test conversion",
+        "observation": "Python default cp949 decode raised UnicodeDecodeError before the probe-test conversion write. Retried with PYTHONUTF8=1. Prior prepare replacer edit had already completed.",
+        "raw_tool_output_archived": false
+      },
+      {
+        "operation": "status location lookup",
+        "observation": "Root STATUS.md was absent; rg located docs/STATUS.md, which was read.",
+        "raw_tool_output_archived": false
+      }
+    ]
+  },
+  "independent_review": {
+    "role": "/root/c5_persistence_review",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "original_role_setting_retained": true,
+    "new_model_setting_acceptance_claim": false,
+    "mode": "Independent read-only review of code and synthetic tests",
+    "remaining_blockers": 0,
+    "tests_run_by_reviewer": 0,
+    "native_calls": 0,
+    "tokenizer_calls": 0,
+    "human_reviews": 0,
+    "source_files": {
+      "src/doctrail/meeting_c6_review.py": "087addb0edb594955699f1e2f6a0113e572249ba5e3080909b55b1a122e05e34",
+      "scripts/prepare_meeting_c6_inputs.py": "f7d87d7447d209fa7f79288a4bea6b623360fefc6fcbaa9b79d8be317d50245d",
+      "scripts/probe_meeting_c6_quality.py": "799a78ecb91daa0fc75d8a6557159fcba6adad7316e283bf0def6372ff3372a6",
+      "scripts/audit_meeting_c6_quality.py": "3f55b6942ce3eb5e679c7d8d41e2da1e353d5b51ae1182f9f9233c3640c93d0d",
+      "tests/test_meeting_c6_review.py": "6769b2afc3a9bef5ff8d7d902ec4e6858de3655ebf02ee5e4092771a99213347",
+      "tests/test_prepare_meeting_c6_inputs.py": "e2d649a81d55722e91b89f19215eaaef941a3b864cd58ed97df3ddc16b50af90",
+      "tests/test_probe_meeting_c6_quality.py": "65b33f5df833ad73f7b4c6f849655e8f8ea3a3c543bc34a436ac036695eab908",
+      "tests/test_audit_meeting_c6_quality.py": "666b5d7ceb7e3c82e7015b23b0bf6c2972ec274f6a32343a4debf15422f67715"
+    },
+    "source_unchanged_during_read_review": true,
+    "resolved": [
+      "All inner and caller snapshots, unchanged checks, GitProof and committed helper use the bounded reader",
+      "Exact successful push and pull_request CI events and source Git bytes required",
+      "C6 safe error prefix and input write first cause retained",
+      "Actual temporary remote-free Git mismatch regression added",
+      "Exactly 64-byte independent judge seed shape enforced",
+      "Trusted bounded reader PreparationError codes preserved across later save failure"
+    ],
+    "baseline_reproduction_distinction": {
+      "safe_prefix_original_failures_owner_reported": 1,
+      "seed_and_reader_firstcause_original_failures_owner_reported": 5,
+      "other_findings": "Code-read findings and additional post-change regressions; no claim all were baseline-reproduced",
+      "test_results_at_review": "Final suite pending; whole-initial108 precedes last changes"
+    },
+    "limits": [
+      "Recorded CI JSON and Git bytes do not independently authenticate GitHub observations",
+      "Fake-clock regressions do not establish actual native request timing",
+      "Total storage failure requires independent CLI exit, terminal summary and final artifact hash observation",
+      "No answer quality, deployment, service adoption or human review claim"
+    ]
+  },
+  "post_test_normalization": {
+    "schema_version": 1,
+    "id": "c6-lf-normalization-v1",
+    "recorded_at": "2026-10-20T02:10:22.687856+00:00",
+    "before": {
+      "src/doctrail/meeting_c6_review.py": "087addb0edb594955699f1e2f6a0113e572249ba5e3080909b55b1a122e05e34",
+      "scripts/prepare_meeting_c6_inputs.py": "f7d87d7447d209fa7f79288a4bea6b623360fefc6fcbaa9b79d8be317d50245d",
+      "scripts/probe_meeting_c6_quality.py": "799a78ecb91daa0fc75d8a6557159fcba6adad7316e283bf0def6372ff3372a6",
+      "scripts/audit_meeting_c6_quality.py": "3f55b6942ce3eb5e679c7d8d41e2da1e353d5b51ae1182f9f9233c3640c93d0d",
+      "tests/test_meeting_c6_review.py": "6769b2afc3a9bef5ff8d7d902ec4e6858de3655ebf02ee5e4092771a99213347",
+      "tests/test_prepare_meeting_c6_inputs.py": "e2d649a81d55722e91b89f19215eaaef941a3b864cd58ed97df3ddc16b50af90",
+      "tests/test_probe_meeting_c6_quality.py": "65b33f5df833ad73f7b4c6f849655e8f8ea3a3c543bc34a436ac036695eab908",
+      "tests/test_audit_meeting_c6_quality.py": "666b5d7ceb7e3c82e7015b23b0bf6c2972ec274f6a32343a4debf15422f67715"
+    },
+    "after": {
+      "src/doctrail/meeting_c6_review.py": "087addb0edb594955699f1e2f6a0113e572249ba5e3080909b55b1a122e05e34",
+      "scripts/prepare_meeting_c6_inputs.py": "4d2f13bf364cbaf62eff73979a30b5bb79ad4f2e013412036572444278bf48b5",
+      "scripts/probe_meeting_c6_quality.py": "799a78ecb91daa0fc75d8a6557159fcba6adad7316e283bf0def6372ff3372a6",
+      "scripts/audit_meeting_c6_quality.py": "7a11ef4d15202ca3deb3ebe66b489d8ece93b3a0335d1252a61c55a7656ac044",
+      "tests/test_meeting_c6_review.py": "6769b2afc3a9bef5ff8d7d902ec4e6858de3655ebf02ee5e4092771a99213347",
+      "tests/test_prepare_meeting_c6_inputs.py": "e2d649a81d55722e91b89f19215eaaef941a3b864cd58ed97df3ddc16b50af90",
+      "tests/test_probe_meeting_c6_quality.py": "50c88442b73693ce8821337ff4c4ffe19604b323f1da2d76447f429005b82a2e",
+      "tests/test_audit_meeting_c6_quality.py": "1a9d7496934436334cd1162c0090f3dabcaa4dd3e52dd1ec08c73adf071e37b2"
+    },
+    "changed_files": [
+      "scripts/prepare_meeting_c6_inputs.py",
+      "scripts/audit_meeting_c6_quality.py",
+      "tests/test_probe_meeting_c6_quality.py",
+      "tests/test_audit_meeting_c6_quality.py"
+    ],
+    "changed_count": 4,
+    "transform": "CRLF to LF only; all other bytes equal",
+    "ast_including_positions_equal": true,
+    "original_tested_bytes_archive": ".local/c6-normalization-originals-v1",
+    "local_final_test_scope": "195 passed / 1 skipped at pre-normalization hashes; no identical-final-byte claim",
+    "required_final_validation": "Exact normalized source CI before data roles",
+    "model_or_old_experiment_calls": 0
+  },
+  "independent_lf_byte_review": {
+    "role": "/root/c5_persistence_review",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "original_role_setting_retained": true,
+    "scope": "Exact pre-test archive CRLF-to-LF byte transform; no additional semantic/code execution review",
+    "source_files": {
+      "src/doctrail/meeting_c6_review.py": "087addb0edb594955699f1e2f6a0113e572249ba5e3080909b55b1a122e05e34",
+      "scripts/prepare_meeting_c6_inputs.py": "4d2f13bf364cbaf62eff73979a30b5bb79ad4f2e013412036572444278bf48b5",
+      "scripts/probe_meeting_c6_quality.py": "799a78ecb91daa0fc75d8a6557159fcba6adad7316e283bf0def6372ff3372a6",
+      "scripts/audit_meeting_c6_quality.py": "7a11ef4d15202ca3deb3ebe66b489d8ece93b3a0335d1252a61c55a7656ac044",
+      "tests/test_meeting_c6_review.py": "6769b2afc3a9bef5ff8d7d902ec4e6858de3655ebf02ee5e4092771a99213347",
+      "tests/test_prepare_meeting_c6_inputs.py": "e2d649a81d55722e91b89f19215eaaef941a3b864cd58ed97df3ddc16b50af90",
+      "tests/test_probe_meeting_c6_quality.py": "50c88442b73693ce8821337ff4c4ffe19604b323f1da2d76447f429005b82a2e",
+      "tests/test_audit_meeting_c6_quality.py": "1a9d7496934436334cd1162c0090f3dabcaa4dd3e52dd1ec08c73adf071e37b2"
+    },
+    "remaining_blockers": 0,
+    "archive4_sha_equals_original_review": true,
+    "transformed_archive4_equals_current_bytes": true,
+    "unchanged_other4": true,
+    "removed_crlf_pairs": [
+      628,
+      236,
+      514,
+      158
+    ],
+    "tests_run_by_reviewer": 0,
+    "ast_execution_by_reviewer": 0,
+    "model_calls": 0,
+    "final_source_CI_required": true
+  },
+  "normalization_ruff": {
+    "file": ".local/c6-lf-normalization-ruff-v1.txt",
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "exit": 0
+  },
+  "parent_publication_failure": {
+    "file": ".local/c6-parent-freeze-initial-failure-v1.txt",
+    "sha256": "72c64c09815b39fedcad8c8913c9abfd2a17d18b8fc9324a4cfdcea559970dd3",
+    "scope": "LF precondition failed before publication; no test or model execution failure",
+    "record_type": "manual copy of observed tool output, not original redirected log"
+  },
+  "implementation_role": {
+    "role": "/root/host_proof_profile",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "original_role_setting_retained": true,
+    "new_model_setting_acceptance_claim": false
+  },
+  "preserved_prior_freezes": {
+    "data/evaluation/meetings-c5-toolchain-freeze-v1.json": {
+      "sha256": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d",
+      "bound_count": 76,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json": {
+      "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78",
+      "bound_count": 85,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-gpu-placement-source-freeze-v1.json": {
+      "sha256": "116b5325b8b9c1de39c27d486b17d614d9bdef49b32274b14d2838c5a4e9cfaf",
+      "bound_count": 59,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-host-proof-profile-source-freeze-v1.json": {
+      "sha256": "1171f14f7cb176838385723a040ded6921409cc1cfb168833d35e4782687f412",
+      "bound_count": 52,
+      "working_bytes_match": true
+    },
+    "data/evaluation/meetings-proof-epoch-source-freeze-v1.json": {
+      "sha256": "261abc74b39862f9768387def7a86629ea6345dd43ccb692f6abed6f2174a4f1",
+      "bound_count": 27,
+      "working_bytes_match": true
+    }
+  },
+  "prior_frozen_union_unchanged": 112,
+  "local_evidence": {
+    "editing-observations-v1.json": {
+      "file": ".local/c6-implementation-v1/editing-observations-v1.json",
+      "sha256": "ffcb05490e50d99fa0e01ab9582e1ac222d2e2c5d324327cbc69c6e0348a0a44",
+      "bytes": 929
+    },
+    "failure-ledger-v1.json": {
+      "file": ".local/c6-implementation-v1/failure-ledger-v1.json",
+      "sha256": "433696c7baf16659a23d8891c27ffab92c27c125fd611b80cc2ad97f4fac721c",
+      "bytes": 2894
+    },
+    "first4-initial-before.json": {
+      "file": ".local/c6-implementation-v1/first4-initial-before.json",
+      "sha256": "f3d0376c3dd2f86033ee4a582dcbd6a97dd83ec1b272f8538f92e407f5d3ad53",
+      "bytes": 444
+    },
+    "first4-initial-pytest.txt": {
+      "file": ".local/c6-implementation-v1/first4-initial-pytest.txt",
+      "sha256": "942c04718e99ef16e82f99f5ee593814aaf654de4b5541163255cc9995c649e1",
+      "bytes": 101
+    },
+    "first4-initial-receipt.json": {
+      "file": ".local/c6-implementation-v1/first4-initial-receipt.json",
+      "sha256": "e427d922d5e3556b57351d7897cca3b0f82a922df1f60dcf0c39093cf0ff3dc6",
+      "bytes": 978
+    },
+    "first4-initial-ruff.txt": {
+      "file": ".local/c6-implementation-v1/first4-initial-ruff.txt",
+      "sha256": "08277608f99b713fdc51b353b87faeab50e8550a081609877994d65c57ca0a8a",
+      "bytes": 2078
+    },
+    "first4-reviewed-before.json": {
+      "file": ".local/c6-implementation-v1/first4-reviewed-before.json",
+      "sha256": "9e47d280c3a6c8df1c95583a1e8edd2accb7132043fcf1a101390f4b29fe910c",
+      "bytes": 444
+    },
+    "first4-reviewed-pytest.txt": {
+      "file": ".local/c6-implementation-v1/first4-reviewed-pytest.txt",
+      "sha256": "18ac7a598b1badf36af1b30a5759462e0ca3d965daf10c9c06816ec127c696c6",
+      "bytes": 101
+    },
+    "first4-reviewed-receipt.json": {
+      "file": ".local/c6-implementation-v1/first4-reviewed-receipt.json",
+      "sha256": "2befe281186b7d09d392134caa1b7cba49cd8a65903f247f44aeaf5669bed820",
+      "bytes": 978
+    },
+    "first4-reviewed-ruff.txt": {
+      "file": ".local/c6-implementation-v1/first4-reviewed-ruff.txt",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "full-final-before.json": {
+      "file": ".local/c6-implementation-v1/full-final-before.json",
+      "sha256": "2d5ccc5c8ee68d6df41ec533ec7f862641fb26d2d414473f98ff1f52e9e57923",
+      "bytes": 888
+    },
+    "full-final-pytest.txt": {
+      "file": ".local/c6-implementation-v1/full-final-pytest.txt",
+      "sha256": "1b21d3fa1f102953ffbe2657d7ddcf5264c2e98fc6c93120b127482b7d82e62c",
+      "bytes": 287
+    },
+    "full-final-receipt.json": {
+      "file": ".local/c6-implementation-v1/full-final-receipt.json",
+      "sha256": "609327b0fe15d691c8196b50f029bbfa6f6f6fe3bc9196c923a77fc77ded3b46",
+      "bytes": 3639
+    },
+    "full-final-ruff.txt": {
+      "file": ".local/c6-implementation-v1/full-final-ruff.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "handoff-v1.json": {
+      "file": ".local/c6-implementation-v1/handoff-v1.json",
+      "sha256": "8f40eee9f23b9a89aa323a0fa8d53e5bfdd3d0efb6145b3c0e6998fc774227d9",
+      "bytes": 2762
+    },
+    "review-final-checkpoint.json": {
+      "file": ".local/c6-implementation-v1/review-final-checkpoint.json",
+      "sha256": "2d5ccc5c8ee68d6df41ec533ec7f862641fb26d2d414473f98ff1f52e9e57923",
+      "bytes": 888
+    },
+    "review-seed-reader-original-failure-before.json": {
+      "file": ".local/c6-implementation-v1/review-seed-reader-original-failure-before.json",
+      "sha256": "7dc7df8cfff38b95863b4d11ffc8c04632302b4aa39f3f68d8142ad6f91f754c",
+      "bytes": 888
+    },
+    "review-seed-reader-original-failure-pytest.txt": {
+      "file": ".local/c6-implementation-v1/review-seed-reader-original-failure-pytest.txt",
+      "sha256": "289cb0af50f741b437e17b993cef81c87175ce7ef52e9ecbbabaa38eb41397ba",
+      "bytes": 11094
+    },
+    "review-seed-reader-original-failure-receipt.json": {
+      "file": ".local/c6-implementation-v1/review-seed-reader-original-failure-receipt.json",
+      "sha256": "19a133051cade7faaa7475e81a11a60d24f109928affa8fc6a5c340eb093664a",
+      "bytes": 2134
+    },
+    "safe-prefix-original-failure.txt": {
+      "file": ".local/c6-implementation-v1/safe-prefix-original-failure.txt",
+      "sha256": "a08514d0f0634bbd22844f3d0b1c8e5ba40ec546fe5fc9344d377e266f30234a",
+      "bytes": 1292
+    },
+    "whole-initial-before.json": {
+      "file": ".local/c6-implementation-v1/whole-initial-before.json",
+      "sha256": "ed36cd0db11b3de79bfb7de504fd14c166fcfe7ea73604730600dfb268e62f71",
+      "bytes": 888
+    },
+    "whole-initial-pytest.txt": {
+      "file": ".local/c6-implementation-v1/whole-initial-pytest.txt",
+      "sha256": "6a8694291560c67697732adc81098bc0c3276b91197b75dd48a7712a9823572c",
+      "bytes": 195
+    },
+    "whole-initial-receipt.json": {
+      "file": ".local/c6-implementation-v1/whole-initial-receipt.json",
+      "sha256": "e84c8601e2650fab1ea2bf894fb64b4a74ace3731dff8aa687ead41aa17b37fa",
+      "bytes": 2872
+    },
+    "whole-initial-ruff.txt": {
+      "file": ".local/c6-implementation-v1/whole-initial-ruff.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    }
+  },
+  "actual_source_documents": 0,
+  "actual_questions": 0,
+  "tokenizer_calls": 0,
+  "native_calls": 0,
+  "official_profiles": 0,
+  "old_closed_reruns": 0,
+  "human_reviews": 0,
+  "service_adoption": false,
+  "claim_scope": "Synthetic code checks and independent code read only; no new answer quality or service latency result.",
+  "next": "Commit final toolchain freeze/source; observe exact push and PR required CI; commit separate CI receipt before fresh source role registration."
+}

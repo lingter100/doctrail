@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-31",
+  "source_commit": "7099bde0919aa73d627d318a6bed445938c8470e",
+  "status": "closed_failed",
+  "attempt": "compat-build-v3-ascii-drive",
+  "observed": {
+    "whole_cli_seconds": 209.578,
+    "natural_exit": 1,
+    "configure_seconds": 0.594,
+    "configure_error": "FileNotFoundError: temporary CMakeCCompilerId object disappeared during active output scanning",
+    "active_disk_scan": {
+      "count": 1,
+      "entries": 9,
+      "seconds": 0.516
+    },
+    "engine_compile_invoked": false,
+    "build_manifest_present": false,
+    "werfault_observed": false
+  },
+  "cleanup": {
+    "known_processes_including_launcher": 12,
+    "all_absent": true,
+    "inner_errors": [],
+    "outer_errors": [],
+    "native_drive_created": true,
+    "native_drive_removed": true,
+    "independent_query_confirmed_absent": true
+  },
+  "preservation": {
+    "derived_cmake_files": 8032,
+    "derived_inventory_exact": true,
+    "new_output_files": 8045,
+    "new_output_bytes": 126269641,
+    "frozen_refs": 58,
+    "frozen_and_ci_exact": true,
+    "parent_direct_refs_checked": 34,
+    "original_payload_body_rehashes": 0,
+    "original_preservation_scope": "Saved original inventory reused; source/runtime/companion and fixed metadata verified. No new postfailure whole original payload equality claim.",
+    "final_sha256": "c528eaf46cc8c413a8efd077e515a45e233cb3fa7c1cc0d8d10cb02b8023b5a8"
+  },
+  "limitations": [
+    "No engine validator or model execution.",
+    "No full exception traceback was emitted; exact source-line causal attribution remains an inference.",
+    "First closeout compared path ordering against string-key ordering and failed; corrected comparison used the already-saved inventory as path/size/SHA maps without a second scan.",
+    "FINAL closeout_seconds 0.016 is metadata reassembly only, not total closeout time; a separate timing note preserves this correction."
+  ],
+  "retry": false,
+  "model_quality_accepted": false,
+  "human_reviews": 0
+}

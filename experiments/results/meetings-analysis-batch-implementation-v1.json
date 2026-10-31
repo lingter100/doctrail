@@ -1,0 +1,417 @@
+{
+  "schema_version": 1,
+  "kind": "full_coverage_bounded_batch_analysis_implementation",
+  "created_at_utc": "2026-10-22T02:21:41.555826+00:00",
+  "plan": {
+    "path": "docs/MEETINGS-ANALYSIS-BATCH-PLAN.md",
+    "bytes": 13032,
+    "sha256": "f60734fea32122ae351b7dbf0c7f1710f56e9d97355f298555faa66b3a2bd220"
+  },
+  "original_receipts": [
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/receipt.json",
+      "bytes": 13468,
+      "sha256": "6e2c70a09d010cb82dd7334eeb0deb4b4c7a0518e46367cb3436410a29d88703"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/receipt-v2.json",
+      "bytes": 12821,
+      "sha256": "69586459e3c5eb2cbcaeeab618a04089ec2330a48c9e291c4d8e9f66b9ad62e9"
+    }
+  ],
+  "independent_review": {
+    "path": ".local/meeting-analysis-batch-implementation-v1/independent-review-final.json",
+    "bytes": 2503,
+    "sha256": "e1e7db04337520e8855d088e467d23d599e4eeb27e929ac630e1e0ceb52d0686"
+  },
+  "initial_independent_review": {
+    "path": ".local/meeting-analysis-batch-implementation-v1/independent-review-initial.json",
+    "bytes": 2731,
+    "sha256": "d617f0098676b06ee6a52182a862b8a6225ede50bfef3669583201049c867bac"
+  },
+  "code": [
+    {
+      "path": "src/doctrail/meeting_analysis_batch.py",
+      "bytes": 6617,
+      "sha256": "99c2450ebbd4a4f3ef22d6b77fdbc7aae2cfef899fc496319a31f2864bccb0ec",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_analysis_batch.py",
+      "bytes": 7303,
+      "sha256": "2ad67a94c1d938547b58d084e769b9a4965524f3861921165f0112fd79c36601",
+      "lf": true
+    },
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 16895,
+      "sha256": "b69cbfb31ef4e107a871bf17cce9d9b30a1a12122960285b0b7140bfea72b6e7",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 22381,
+      "sha256": "f1adf4cbb19a2d8b26c3fbdcf4bc1f9a02512f18e2863a407c55e4c7facdbcdd",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 3974,
+      "sha256": "ecc1db7afd87d0231f41b61d6c427c1b7ff61c761f93b06efc02a6f8b96fa7d9",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 4593,
+      "sha256": "81a63d1faad7f5bfb7439c226be7441ad9b7ec978cf02610db4e6d2b8c0361bd",
+      "lf": true
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 21358,
+      "sha256": "582a185375415ba08f8e34fc260317518c96d0df437fac6447fc39dd06e00a24",
+      "lf": true
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 23113,
+      "sha256": "67c38b098596e128eacaf492a888924fc5335b3fa56f77c497ce3ed6c3cb9787",
+      "lf": true
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 37785,
+      "sha256": "249541e0a85e0978d52a94338d3abcaef8be89ef51286be5fb2a758ff05db2d7",
+      "lf": true
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 53578,
+      "sha256": "06faa19c54c923f3ff3fa20ac477c49ad9594d58b2b295aab29b81331aaf50f5",
+      "lf": true
+    }
+  ],
+  "implementation": [
+    "BatchedAnalysisGenerator inherits native identity, nonthinking template/tokenization and completion validation. Full canonical TARGET prompts validated before generation; IDs enumerate all units, repeated text retained; consecutive cap8; per-batch4096 token admission and deterministic half splitting; output128 and strict EOS/ordered IDs/integer labels0..9.",
+    "Per-batch admission is not a whole-request zero-native guarantee: earlier successful batches are preserved if a later singleton overflows; whole analysis fails with no partial result/fallback/retry.",
+    "ObservedBatchedAnalysisGenerator uses MRO to wrap the same algorithm without duplicated observer implementation. Outer deadline clamps partition preparation, observer hooks and every transport; existing extraction runtime and quote/offset/summary rules remain imported.",
+    "load_runtime and both service CLIs explicitly select single(default) or batch-v1; health classification metadata binds policy/caps/prompt and grammar hashes; combined launcher requires exact requested metadata and records selection in lifecycle.",
+    "Acceptance plan optional analysis_policy is single when absent. An explicit field requires identical registration.policy.analysis_policy, registered plan hash and CI code equality; batch-v1 additionally requires the new adapter code binding. Official CLI has no policy override."
+  ],
+  "binding_refinements": [
+    "Always require src/doctrail/meeting_analysis_batch.py in CODE, including absent-policy legacy single and explicit single. The dependency is unconditionally imported; exact code/CI bindings must include it for every new invocation.",
+    "Validation calibration gate must carry a known effective analysis_policy identical to the requested plan. Missing gate analysis_policy means single only. Unknown and single/batch mismatches are rejected before any service factory call."
+  ],
+  "final_verification": [
+    {
+      "command": "uv run --no-sync pytest -q tests/test_run_meeting_rag_acceptance.py -k 'every_effective_policy or validation_gate_requires'",
+      "stage": "before fix",
+      "result": "8 failed,9 passed,76 deselected in2.45s",
+      "log": "binding-before-fix.log"
+    },
+    {
+      "command": "uv run --no-sync pytest -q tests/test_meeting_analysis_batch.py tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py",
+      "stage": "after fix",
+      "result": "208 passed in13.63s; existing StarletteDeprecationWarning",
+      "log": "tests-v2-final.log"
+    },
+    {
+      "command": "uv run --no-sync ruff check src/doctrail/meeting_analysis_batch.py tests/test_meeting_analysis_batch.py src/doctrail/meeting_service_rag.py tests/test_meeting_service_rag.py scripts/serve_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py scripts/serve_meeting_rag_service.py tests/test_serve_meeting_rag_service.py scripts/run_meeting_rag_acceptance.py tests/test_run_meeting_rag_acceptance.py",
+      "result": "all checks passed",
+      "log": "ruff-v2-final.log"
+    }
+  ],
+  "prior_verification_not_summed": [
+    {
+      "command": "uv run --no-sync pytest -q tests/test_meeting_analysis_batch.py",
+      "result": "29 passed in 0.48s",
+      "log": "adapter-first.log"
+    },
+    {
+      "command": "uv run --no-sync pytest -q tests/test_meeting_analysis_batch.py tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py",
+      "stage": "first integration",
+      "result": "11 failed,144 passed in8.13s",
+      "reason": "existing test doubles lacked new policy argument/health metadata; preserved",
+      "log": "integration-first.log"
+    },
+    {
+      "command": "uv run --no-sync pytest -q tests/test_meeting_service_rag.py",
+      "result": "31 passed in0.94s",
+      "log": "service-first.log"
+    },
+    {
+      "command": "same five test files",
+      "stage": "second integration",
+      "result": "1 failed,188 passed in11.08s",
+      "reason": "new invalid_analysis_policy was absent from fixed LaunchError allowlist; added and preserved original failure",
+      "log": "integration-second.log"
+    },
+    {
+      "command": "uv run --no-sync pytest -q tests/test_meeting_analysis_batch.py tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py",
+      "stage": "final",
+      "result": "191 passed in10.51s; one existing StarletteDeprecationWarning",
+      "log": "tests-final.log"
+    },
+    {
+      "command": "uv run --no-sync ruff check src/doctrail/meeting_analysis_batch.py tests/test_meeting_analysis_batch.py src/doctrail/meeting_service_rag.py tests/test_meeting_service_rag.py scripts/serve_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py scripts/serve_meeting_rag_service.py tests/test_serve_meeting_rag_service.py scripts/run_meeting_rag_acceptance.py tests/test_run_meeting_rag_acceptance.py",
+      "result": "all checks passed",
+      "log": "ruff-final.log"
+    }
+  ],
+  "coverage": [
+    "1/8/9/160 units and repeated targets",
+    "4096 inclusive, deterministic halves, singleton overflow, later overflow after prior completed batch",
+    "missing/duplicate/reordered IDs, bool/float/out-of-range labels, extra/truncated content, EOS rejection",
+    "shared deadline for template/tokenize/native/observer; cache clearing; archive failure after parsed completion stops later batch",
+    "actual MeetingRuntime with MockTransport preserving original evidence offsets and full Purpose target normalization; extractive summary max4",
+    "normal/observed MRO and load selection; both CLIs; health mismatch and lifecycle; explicit registration and adapter binding; existing answer/ownership/cleanup regressions"
+  ],
+  "guard_regressions": [
+    "Absent policy, explicit single and batch missing/changed adapter bindings reject before service.",
+    "Absent/explicit single gates match effective single plans; explicit batch gate matches batch plan.",
+    "Absent/single versus batch mismatch in both directions and unknown gate policies reject before service."
+  ],
+  "parent_verified_unique_code_evidence_count": 44,
+  "evidence": [
+    {
+      "path": "src/doctrail/meeting_analysis_batch.py",
+      "bytes": 6617,
+      "sha256": "99c2450ebbd4a4f3ef22d6b77fdbc7aae2cfef899fc496319a31f2864bccb0ec"
+    },
+    {
+      "path": "tests/test_meeting_analysis_batch.py",
+      "bytes": 7303,
+      "sha256": "2ad67a94c1d938547b58d084e769b9a4965524f3861921165f0112fd79c36601"
+    },
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 16895,
+      "sha256": "b69cbfb31ef4e107a871bf17cce9d9b30a1a12122960285b0b7140bfea72b6e7"
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 22381,
+      "sha256": "f1adf4cbb19a2d8b26c3fbdcf4bc1f9a02512f18e2863a407c55e4c7facdbcdd"
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 3974,
+      "sha256": "ecc1db7afd87d0231f41b61d6c427c1b7ff61c761f93b06efc02a6f8b96fa7d9"
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 4593,
+      "sha256": "81a63d1faad7f5bfb7439c226be7441ad9b7ec978cf02610db4e6d2b8c0361bd"
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 21358,
+      "sha256": "582a185375415ba08f8e34fc260317518c96d0df437fac6447fc39dd06e00a24"
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 23113,
+      "sha256": "67c38b098596e128eacaf492a888924fc5335b3fa56f77c497ce3ed6c3cb9787"
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 37785,
+      "sha256": "249541e0a85e0978d52a94338d3abcaef8be89ef51286be5fb2a758ff05db2d7"
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 53578,
+      "sha256": "06faa19c54c923f3ff3fa20ac477c49ad9594d58b2b295aab29b81331aaf50f5"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/adapter-first.log",
+      "bytes": 101,
+      "sha256": "b9d221b5bbc2c3ea57fe94a937a61156f5b6d56eb3373a39bd2f3618eaa0c444"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/adapter-ruff-first.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before/meeting_service_rag.py",
+      "bytes": 15964,
+      "sha256": "f12391a210a4929e6c2ff53455ece2d66d2c8ed0ea5dc6910d027686bb270555"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before/run_meeting_rag_acceptance.py",
+      "bytes": 37095,
+      "sha256": "1b6270066e03365104602ec80c8c537e13d24cc01f5ca79d8b7af56eb733df10"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before/serve_meeting_rag_service.py",
+      "bytes": 20735,
+      "sha256": "ca2e1b412924d5790fbf2e41e0567b1155d1395cc7722dfc320c716fdb8e88e8"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before/serve_meeting_service_rag.py",
+      "bytes": 3602,
+      "sha256": "37b6748fd63a85da980148229a2756d0f1413066d0210c03db5ee23d633ed91b"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before/test_meeting_service_rag.py",
+      "bytes": 13560,
+      "sha256": "f320ea3b72cc4e68dc32d8e54149a39dd983d0f4fc8580272dae481c79837150"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before/test_meeting_service_rag_launcher.py",
+      "bytes": 3355,
+      "sha256": "f1777b801688666cce0a760d05c39ef7a8c2961037ac48e147ad8e81fad7dd1e"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before/test_run_meeting_rag_acceptance.py",
+      "bytes": 46938,
+      "sha256": "d2b495664968ce1c752b9515689e334593b967288de20d5797a68c23a1c88710"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before/test_serve_meeting_rag_service.py",
+      "bytes": 20685,
+      "sha256": "efc2e55bfe4dd2ab67fba38ed272ed2fb2fe964794a37cb1646c36b413b222a3"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before-final-check.json",
+      "bytes": 1791,
+      "sha256": "5e563b4054624c373972a082cbd9beabd870396f6dbaf3ccce7a6c7561f79fcf"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/before-final-v2-check.json",
+      "bytes": 1791,
+      "sha256": "845db13f9320970bd3bd3d716336a2cc7da53513bdad0a6e674ac99224f267c3"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/binding-before-fix.log",
+      "bytes": 23019,
+      "sha256": "2de341a31532c542486b908f67db22ad016e1415a926409ef693c71b1467657d"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/independent-review-initial.json",
+      "bytes": 2731,
+      "sha256": "d617f0098676b06ee6a52182a862b8a6225ede50bfef3669583201049c867bac"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/integration-first.log",
+      "bytes": 80781,
+      "sha256": "bb79be37b203c9c325eb534955b8aae705471214eee39e9c97fcaaa39adef09b"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/integration-second.log",
+      "bytes": 3451,
+      "sha256": "953f98bc41bffd7c412c141300abdebc348d01bb6ca7314548dda3a7b74fa64a"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/receipt.json",
+      "bytes": 13468,
+      "sha256": "6e2c70a09d010cb82dd7334eeb0deb4b4c7a0518e46367cb3436410a29d88703"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/ruff-final.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/ruff-first.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/ruff-v2-final.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/service-first.log",
+      "bytes": 600,
+      "sha256": "0384f5e4c5aa90edfc067c2dbd2044c2ffca327573a32c2122e3ffd535c517a2"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/source-before.json",
+      "bytes": 1469,
+      "sha256": "3119e9d8960eec097119b9e365c0b440664072d837116a91c8c2b52d16992fc4"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/tests-final.log",
+      "bytes": 764,
+      "sha256": "8eca9e8d83a66f3f76fa39c797c9128858c96e9131ce28c9869f8023473b6712"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/tests-v2-final.log",
+      "bytes": 764,
+      "sha256": "59052f54bbe493455d343f0e87c04caec113b9b9844d51305d512ef21fc975b9"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/meeting_analysis_batch.py",
+      "bytes": 6617,
+      "sha256": "99c2450ebbd4a4f3ef22d6b77fdbc7aae2cfef899fc496319a31f2864bccb0ec"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/meeting_service_rag.py",
+      "bytes": 16895,
+      "sha256": "b69cbfb31ef4e107a871bf17cce9d9b30a1a12122960285b0b7140bfea72b6e7"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/run_meeting_rag_acceptance.py",
+      "bytes": 37701,
+      "sha256": "84437533bf2f221797f6ec07e4a0b7d70b36bb48ccff50349357cd633e3bfbda"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/serve_meeting_rag_service.py",
+      "bytes": 21358,
+      "sha256": "582a185375415ba08f8e34fc260317518c96d0df437fac6447fc39dd06e00a24"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/serve_meeting_service_rag.py",
+      "bytes": 3974,
+      "sha256": "ecc1db7afd87d0231f41b61d6c427c1b7ff61c761f93b06efc02a6f8b96fa7d9"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/test_meeting_analysis_batch.py",
+      "bytes": 7303,
+      "sha256": "2ad67a94c1d938547b58d084e769b9a4965524f3861921165f0112fd79c36601"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/test_meeting_service_rag.py",
+      "bytes": 22381,
+      "sha256": "f1adf4cbb19a2d8b26c3fbdcf4bc1f9a02512f18e2863a407c55e4c7facdbcdd"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/test_meeting_service_rag_launcher.py",
+      "bytes": 4593,
+      "sha256": "81a63d1faad7f5bfb7439c226be7441ad9b7ec978cf02610db4e6d2b8c0361bd"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/test_run_meeting_rag_acceptance.py",
+      "bytes": 50247,
+      "sha256": "efa6d3170874dddd348cd5e1c830d367f1222bb08fd248278bbf9e4665f46f88"
+    },
+    {
+      "path": ".local/meeting-analysis-batch-implementation-v1/version1-source/test_serve_meeting_rag_service.py",
+      "bytes": 23113,
+      "sha256": "67c38b098596e128eacaf492a888924fc5335b3fa56f77c497ce3ed6c3cb9787"
+    }
+  ],
+  "preservation": "Original191 receipt/logs/checkpoint verified unchanged; all10 v1 sources archived exact. Closed manifests/results never edited or rerun.",
+  "contract_refinement": "All policies now require adapter binding. Missing policy fields remain single only; validation requires the same effective calibration policy. Prior v1 receipt is preserved as historical implementation evidence, not the current binding contract.",
+  "nonexecution": {
+    "actual_native_model_tokenizer_java_browser_service": 0,
+    "evaluation_semantic_reads": 0,
+    "download_network": 0,
+    "official_phase_runs": 0,
+    "git": 0
+  },
+  "limitations": [
+    "Mock transport does not prove native GBNF acceptance or real model semantic quality/latency.",
+    "Classification policy changes explicitly; batch and single are not claimed semantically equivalent.",
+    "Original extraction partitions/unit/item/metadata limits and extractive summary remain. No truncation or fallback.",
+    "Current branch CI predates this new implementation; parent must commit and verify exact-code CI before any explicitly dispatched actual runtime.",
+    "No actual native grammar acceptance, quality or latency evidence.",
+    "New implementation still needs parent exact-code commit/CI and independent delta review; no runtime execution authorization implied."
+  ],
+  "actual_batch_speed_and_semantic_quality_measured": false,
+  "phase1_complete": false,
+  "publication_note": "Parent aggregate LF metadata summary; original local receipts and failures preserved."
+}

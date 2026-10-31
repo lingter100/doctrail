@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "source_first_item_selection",
+  "author": "/root/service_rag_validation_sources",
+  "created_at_utc": "2026-10-20T08:45:05.800994+00:00",
+  "source_freeze_sha256": "3ffde1172db6cd7a6c762084645d2c802882ecd21c2d554237bb093b8652a6b6",
+  "sequence": "Accepted source6/chunks66 and freeze51 verified before authoring. All full contents read; no retrieval/tokenizer/model output informed selection.",
+  "execution_order": [
+    "SRV3-V01",
+    "SRV3-V02",
+    "SRV3-V03",
+    "SRV3-V04",
+    "SRV3-V05",
+    "SRV3-V06",
+    "SRV3-V07",
+    "SRV3-V08"
+  ],
+  "counts": {
+    "items": 8,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "public_items": 4,
+    "synthetic_items": 4,
+    "required_facts": 31,
+    "supported_required_facts": 19,
+    "missing_requested_values": 12,
+    "required_facts_per_case": [
+      4,
+      5,
+      5,
+      5,
+      3,
+      3,
+      3,
+      3
+    ],
+    "general_only_answered": 1,
+    "multiple_meetings_answered": 2,
+    "mixed_meeting_general_answered": 1,
+    "all_sufficient_alternatives_require_multiple_documents_answered": 3,
+    "ko_question_en_evidence_answered": 2,
+    "en_question_ko_evidence_answered": 2,
+    "exact_evidence_spans": 41,
+    "chunk_cover_alternatives": 43,
+    "chunk_quote_bindings": 45
+  },
+  "coverage": [
+    {
+      "id": "SRV3-V01",
+      "language": "ko",
+      "expected_status": "answered",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public",
+      "category": "general_only",
+      "required_fact_count": 4,
+      "all_sufficient_alternatives_require_multiple_documents": false,
+      "source_selection_reason": [
+        "Answer in Korean using the general document. The dated meetings discuss a particular effort but do not replace the complete general charter and meeting-purpose evidence."
+      ]
+    },
+    {
+      "id": "SRV3-V02",
+      "language": "en",
+      "expected_status": "answered",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic",
+      "category": "mixed_meeting_general",
+      "required_fact_count": 5,
+      "all_sufficient_alternatives_require_multiple_documents": true,
+      "source_selection_reason": [
+        "English answer uses Korean documents. Duration/extension conditions require the general source; actual returned-kit state requires the later meeting.",
+        "For F1 both source alternatives are encoded; source recency alone is not why the rule reverts.",
+        "SG-return corroborates the inventory rule but cannot establish the observed one-versus-one state without SM2-return."
+      ]
+    },
+    {
+      "id": "SRV3-V03",
+      "language": "ko",
+      "expected_status": "answered",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public",
+      "category": "multiple_meetings",
+      "required_fact_count": 5,
+      "all_sufficient_alternatives_require_multiple_documents": true,
+      "source_selection_reason": [
+        "Korean answer integrates two dated English meetings. Stated subtyping status changed; recursive-solver equivalence remained unachieved in the May description.",
+        "No project-wide completion follows from one modeled algorithm or the later date.",
+        "No single document supplies both the actual March and May descriptions."
+      ]
+    },
+    {
+      "id": "SRV3-V04",
+      "language": "en",
+      "expected_status": "answered",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic",
+      "category": "multiple_meetings",
+      "required_fact_count": 5,
+      "all_sufficient_alternatives_require_multiple_documents": true,
+      "source_selection_reason": [
+        "English answer integrates two Korean meetings, separating initial approval, observed outcomes and future action.",
+        "The later account names old circular tags but does not establish the complete April 7 approval, outer-handle-only trial and contingent expansion."
+      ]
+    },
+    {
+      "id": "SRV3-V05",
+      "language": "ko",
+      "expected_status": "abstained",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic",
+      "category": "whole_corpus_absence",
+      "required_fact_count": 3,
+      "all_sufficient_alternatives_require_multiple_documents": null,
+      "source_selection_reason": [
+        "Whole-six-document absence review, not just quoted limitations. Replacement deadline is not price.",
+        "Missing amounts are not zero charges or borrower fault."
+      ]
+    },
+    {
+      "id": "SRV3-V06",
+      "language": "en",
+      "expected_status": "abstained",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public",
+      "category": "whole_corpus_absence",
+      "required_fact_count": 3,
+      "all_sufficient_alternatives_require_multiple_documents": null,
+      "source_selection_reason": [
+        "Only infer non-establishment in these records, not that adoption never occurred elsewhere/later.",
+        "May goals do not turn March conditional intention into an official decision."
+      ]
+    },
+    {
+      "id": "SRV3-V07",
+      "language": "ko",
+      "expected_status": "abstained",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public",
+      "category": "whole_corpus_absence",
+      "required_fact_count": 3,
+      "all_sufficient_alternatives_require_multiple_documents": null,
+      "source_selection_reason": [
+        "Korean abstention may explain plans/goals. No linked issue/calendar body was read.",
+        "Do not compute a Wednesday date and call it actual completion."
+      ]
+    },
+    {
+      "id": "SRV3-V08",
+      "language": "en",
+      "expected_status": "abstained",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic",
+      "category": "whole_corpus_absence",
+      "required_fact_count": 3,
+      "all_sufficient_alternatives_require_multiple_documents": null,
+      "source_selection_reason": [
+        "English abstention may explain the draft/review sequence without filling a release date.",
+        "Distinguish missing rollout details from completed delivery and future task deadlines."
+      ]
+    }
+  ],
+  "whole_source_absence_method": "Inspected all six full sources, not retrieved snippets. Each absent value checked against the full related family; other family inspected as unrelated. Context quotes alone do not prove corpus-wide absence.",
+  "alternative_method": "Per-fact independent sufficient passages found in the whole corpus are combined by Cartesian product. All minimal chunk covers, including overlap duplicates, enumerated. Corroborating fragments that cannot establish the whole fact are documented separately. Semantic completeness awaits independent review.",
+  "policies": {
+    "retrieval_kind": "all",
+    "retrieval_mode": "hybrid_rerank",
+    "embedding_profile": "base",
+    "top_k": 5,
+    "context_or_oracle_in_query": false,
+    "retrieval_selection_executed": false,
+    "context_fit_asserted": false,
+    "source_trimming": false,
+    "runtime_uuid_written": false
+  },
+  "not_tuned_to_context": "No context count/length or tokenizer fit used to shorten source, filter evidence or select questions. Alternatives remain regardless of eventual retrieval.",
+  "independent_review_status": "pending",
+  "source_edits": 0,
+  "human_review": false
+}

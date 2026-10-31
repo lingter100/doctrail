@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "source_head": "4998d195be00a7de42ce9d2921d120825b785f83",
+  "runs": [
+    {
+      "run_id": 40425296225,
+      "event": "pull_request",
+      "head_sha": "4998d195be00a7de42ce9d2921d120825b785f83",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40425296225",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 40425289776,
+      "event": "push",
+      "head_sha": "4998d195be00a7de42ce9d2921d120825b785f83",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40425289776",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "watch_sessions": [
+    {
+      "session_id": 75209,
+      "exit_code": 0
+    },
+    {
+      "session_id": 95433,
+      "exit_code": 0
+    }
+  ],
+  "scope": "Exact format implementation source CI; synthetic and service regression checks are not real GBNF or semantic quality evidence."
+}

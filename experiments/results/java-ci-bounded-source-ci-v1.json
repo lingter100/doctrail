@@ -1,0 +1,125 @@
+{
+  "status": "all_required_checks_passed",
+  "source_head": "3e323c98fd6dea78b6eb67983bfeb3209e697b78",
+  "runs": [
+    {
+      "run_id": 40280184264,
+      "jobs": [
+        {
+          "id": 121431559448,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostic_steps": []
+        },
+        {
+          "id": 121431559550,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostic_steps": []
+        },
+        {
+          "id": 121431559727,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostic_steps": [
+            {
+              "name": "Verify Java with bounded Maven and JUnit",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Summarize bounded Maven diagnostics",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve safe Maven diagnostics",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 40280189250,
+      "jobs": [
+        {
+          "id": 121431573464,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostic_steps": []
+        },
+        {
+          "id": 121431573646,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostic_steps": []
+        },
+        {
+          "id": 121431573660,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "diagnostic_steps": [
+            {
+              "name": "Verify Java with bounded Maven and JUnit",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Summarize bounded Maven diagnostics",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve safe Maven diagnostics",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "watch_sessions": [
+    {
+      "session": 9801,
+      "exit": 0
+    },
+    {
+      "session": 74527,
+      "exit": 0
+    }
+  ],
+  "actual_Linux_normal_diagnostics_verified": true,
+  "actual_Linux_hang_enforcement_verified": false,
+  "model_quality_claim": false,
+  "evidence_type": "actual_GitHub_Actions_normal_path_and_artifact_download",
+  "remote_artifact": {
+    "artifact_id": 12632146808,
+    "archive_sha256": "8ba13ee812ffa8d89ebd066b2d3fcb9af4f202b9e92dfc51be1711b2c591d9d5",
+    "file_count": 2,
+    "report_status": "complete",
+    "maven_exit": 0,
+    "observed_seconds": 28.22623085975647,
+    "suites": 11,
+    "tests": 232,
+    "failures": 0,
+    "errors": 0,
+    "actual_Linux_normal_path": true,
+    "actual_Linux_hang_test": false
+  },
+  "safe_report_sha256": "1763291453fc262c8c0fc186bf1c1166ab5c231e177dbae5da5e6063278093b4",
+  "local_CI_receipt_sha256": "0902ef4d9ff3f3f3edad1031c7038735947a36e3cee3e072ae610713589e18d3",
+  "limitations": [
+    "Normal Linux execution and uploaded diagnostics verified; no Linux synthetic hang was run.",
+    "Original remote stall cause remains unknown.",
+    "Synthetic tests and CI are not model quality or user-review evidence."
+  ]
+}

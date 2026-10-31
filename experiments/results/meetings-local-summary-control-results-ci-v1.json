@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-27T02:42:15.541428+00:00",
+  "head": "fbacbc94ef9ddd6b6910da0fdd126d95e61da38c",
+  "scope": "Result and QA-plan publication CI; not schema5 source CI or model quality",
+  "all_required_checks_passed": true,
+  "runs": [
+    {
+      "id": 40438853290,
+      "event": "push",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 121974035346,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 121974035532,
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "id": 121974035648,
+          "name": "backend",
+          "conclusion": "success"
+        }
+      ],
+      "watch_session": 98553,
+      "watch_exit": 0,
+      "watch_closed": true
+    },
+    {
+      "id": 40438861069,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 121974059804,
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "id": 121974059928,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 121974060279,
+          "name": "web",
+          "conclusion": "success"
+        }
+      ],
+      "watch_session": 27815,
+      "watch_exit": 0,
+      "watch_closed": true
+    }
+  ],
+  "reruns": 0,
+  "native_model_calls": 0,
+  "human_review": 0
+}

@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "status": "LOCAL_INTEGRATION_CHECKED_FINAL_SOURCE_CI_PENDING",
+  "date": "2026-10-27",
+  "source_files": [
+    {
+      "file": "web/src/App.tsx",
+      "sha256": "e0f83186b029b8fbceea26edee7657d0c42a761b19821f62a5d5a31fd26dabdf",
+      "size_bytes": 9045
+    },
+    {
+      "file": "web/src/components/MeetingViews.tsx",
+      "sha256": "26e75dbee955cb8e3d09604e8c35eff8a2b8f50a3ed331a74a57b53e05992ca3",
+      "size_bytes": 50966
+    },
+    {
+      "file": "web/src/components/SourceSpanPicker.tsx",
+      "sha256": "6cc0003b622bbe7e7fde48faf1a5ca2b4617a4ed045e5d473b9bb89fdaf27a3e",
+      "size_bytes": 4195
+    },
+    {
+      "file": "web/src/meetings.css",
+      "sha256": "274f9071a8a2d83fd26403874b9dd6065d64627a8a3b44603d34545c97e2f6a7",
+      "size_bytes": 19038
+    },
+    {
+      "file": "web/src/meetings.ts",
+      "sha256": "c1ab2116d48c856d061540da620e1000c189717f11b58f07e3bccc027e93fb3c",
+      "size_bytes": 17753
+    },
+    {
+      "file": "web/src/useDocTrail.ts",
+      "sha256": "fc2b101accba66002754224d18e00b08558b7014673c60e1e64030a8f11ff362",
+      "size_bytes": 25332
+    },
+    {
+      "file": "web/src/useMeetings.ts",
+      "sha256": "60fc44941321856318cdce721261ddeeb8cc7d72fea65a56ff4abceeea5c20a6",
+      "size_bytes": 20613
+    },
+    {
+      "file": "server/src/test/java/io/doctrail/MeetingManualCorrectionTest.java",
+      "sha256": "fb8b82aac01761534689d225921e3c28556459224cb9aad87b3b64370b5635b1",
+      "size_bytes": 10947
+    },
+    {
+      "file": "web/tests/meeting-manual-correction.spec.ts",
+      "sha256": "f5833b29edf3ea27776bca8da3c003cd9c12fb1e43fbac9fa797a03daf4cdad2",
+      "size_bytes": 38592
+    },
+    {
+      "file": "web/tests/meeting-conflict-recovery.spec.ts",
+      "sha256": "ea3376c65be082abbe42536b107086255438c7b6e236daa07b0c8f0d8b5e47b0",
+      "size_bytes": 10230
+    },
+    {
+      "file": "web/tests/meeting-grounded-summary.spec.ts",
+      "sha256": "70d8f51ae41ad2f7b623c39915e1f2580adc87b22f7de2e1d67ef5e2c15f80ac",
+      "size_bytes": 19437
+    },
+    {
+      "file": "web/tests/meeting-ready.spec.ts",
+      "sha256": "1220286070c5a63e272f37dea7c57a4246bd3e7b4807a982d2b6e62ca3cc2405",
+      "size_bytes": 18621
+    },
+    {
+      "file": "web/tests/meeting-source-access.spec.ts",
+      "sha256": "dda94e4315580f9455bf9a3817ced84bbe20c6fa50fa282ea3f9b133388a6351",
+      "size_bytes": 16636
+    },
+    {
+      "file": "web/tests/meeting-save-pending.spec.ts",
+      "sha256": "3b35e615bbf7347de2867caf3cafe31335f40477f607ef11aaca69bb3e3486f7",
+      "size_bytes": 7630
+    },
+    {
+      "file": "web/scripts/test-java.mjs",
+      "sha256": "f000ceb505108d41df42ab253b1a53b995e7ec99bf06ae3bd10c28f455464e37",
+      "size_bytes": 9871
+    },
+    {
+      "file": "web/scripts/meeting-transport-fixture.mjs",
+      "sha256": "fe2de364c7923ebfaf473b4f3397d773c169a299a0c031e8666f73caf7ab3519",
+      "size_bytes": 6029
+    }
+  ],
+  "behavior": [
+    "add stable-ID items and delete/undo unsaved items",
+    "select exact source spans with explicit repeated-occurrence choice",
+    "preserve original source and AI draft while editing manual snapshot",
+    "assignment/status filters, decision reconfirmation, CAS recovery and dirty navigation guards"
+  ],
+  "java": {
+    "passed": 273,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "model_transport": "synthetic",
+    "skip_reason": "existing private-corpus parity optional test"
+  },
+  "browser_runs": [
+    {
+      "scope": "initial full 20 specs",
+      "passed": 156,
+      "failed": 2,
+      "seconds": 421.258,
+      "infra_failures": 0
+    },
+    {
+      "scope": "first targeted ready/save-pending",
+      "passed": 5,
+      "failed": 1,
+      "seconds": 41.228,
+      "infra_failures": 0
+    },
+    {
+      "scope": "ready-only final locator correction",
+      "passed": 4,
+      "failed": 0,
+      "seconds": 22.689,
+      "infra_failures": 0
+    }
+  ],
+  "new_manual_checks": {
+    "actual_java": 3,
+    "pure": 2,
+    "api_mock": 33,
+    "all_passed": 38
+  },
+  "final_typecheck": "passed",
+  "product_review": {
+    "file": ".local/meeting-manual-correction-review-v2/receipt.json",
+    "sha256": "9ac67cb69ec40167568655e150f62b5a65a407bbf532559f0b0901138a1aca4c",
+    "size_bytes": 39277
+  },
+  "final_test_delta_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "receipt": {
+      "file": ".local/meeting-manual-correction-test-review-v1/receipt.json",
+      "sha256": "91a74ec9da4ebce45d122b42b200059b124d0f9d94eee22eb5a553ed2d6c7e09"
+    },
+    "parent_refs_verified": 35
+  },
+  "evidence": [
+    {
+      "file": ".local/meeting-manual-correction-integrated-v1/receipt.json",
+      "sha256": "d353b86e31eca954908387b61a811533b9165722836a953a65b3c51a5f58f9c5",
+      "size_bytes": 91236
+    },
+    {
+      "file": ".local/meeting-manual-correction-test-repair-v1/receipt.json",
+      "sha256": "0b313cfe3659db67a1c8cc67d4f74a55c1f098f19b1756c2d280afc3a7b465e2",
+      "size_bytes": 24847
+    },
+    {
+      "file": ".local/meeting-manual-correction-publication-bytes-v1/receipt.json",
+      "sha256": "41ab375f30138b117bf77ac615ebe2bae8f2bd0c1146f53d562c135d7302a5f9",
+      "size_bytes": 1843
+    }
+  ],
+  "publication_normalization": {
+    "crlf_to_lf_count": 4,
+    "other_character_changes": 0,
+    "typescript": "5.9.3",
+    "emitted_javascript_identical": true,
+    "javascript_sha256": "c9c3841eddd74d5e8785faa528629f53a4746d7384a7c622d17cdde1e518bb50"
+  },
+  "visual_check": {
+    "viewport_widths": [
+      1440,
+      390
+    ],
+    "reviewer": "AI",
+    "physical_device": false
+  },
+  "limitations": [
+    "Do not combine distinct failing full and passing targeted runs into one all-pass full run.",
+    "Public licensed source uses deterministic synthetic model transport; actual generation quality is not assessed.",
+    "Exact source CI, new-environment/load checks, human review and public deployment are not yet proven."
+  ],
+  "actual_model_calls": 0,
+  "human_review": false
+}

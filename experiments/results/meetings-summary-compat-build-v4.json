@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment": "summary-grammar-compat-build-v4",
+  "source_commit": "e3b0eb32045361c56c22c24b30204850c633f436",
+  "status": "failed_preserved",
+  "failure": {
+    "code": "unexpected_child_executable",
+    "executable": "cmd.exe",
+    "parent": "owned pinned Ninja",
+    "observed_operation": "Compiler ABI try-compile link using the pinned clang through cmd /C cd . && ... && cd .",
+    "natural_cli_exit": null,
+    "forced_cleanup_exit": 15,
+    "tool_exit": 1,
+    "whole_cli_and_cleanup_seconds": 215.90599999995902,
+    "configure_terminal_record_present": false,
+    "configure_seconds": null,
+    "engine_compile_invoked": false,
+    "build_manifest_present": false
+  },
+  "preservation": {
+    "derived_cmake_files": 8032,
+    "derived_inventory_exact": true,
+    "new_output_files": 8059,
+    "new_output_bytes": 127969022,
+    "fixed_references": 61,
+    "fixed_references_and_ci_unchanged": true,
+    "original_full_payload_rehashes_at_closeout": 0,
+    "original_inventory_evidence": "Previously saved inventory reused; finite current references checked."
+  },
+  "cleanup": {
+    "known_owned_including_launcher_absent": 27,
+    "outer_errors": [],
+    "native_alias_left_after_forced_cli_exit": true,
+    "separate_owned_alias_cleanup": {
+      "removed": true,
+      "exact_target_and_samefile_verified": true,
+      "query_after": [],
+      "logical_drive_present_after": false,
+      "error": null,
+      "original_failure_unchanged": true
+    }
+  },
+  "provenance": {
+    "final_receipt_sha256": "e2c64d2b10b9e824552757efc21dd072b700f1e1f3bc02461d7cebf2af8ad9d8",
+    "owned_alias_cleanup_sha256": "fcc62045226a8ca59ff572418c1bad6d24480c09686daa966dd5d3f37a48eef3"
+  },
+  "native_grammar_validation_runs": 0,
+  "model_runs": 0,
+  "retry": false,
+  "limitations": [
+    "Configuration did not finish; no claim about full engine compile, grammar execution or semantic model quality.",
+    "Original fixed runtime/source and previous failures are preserved.",
+    "Legitimate Windows Ninja shell invocation needs a separate scoped compatibility policy; this failure is not converted to success."
+  ]
+}

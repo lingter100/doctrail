@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "EXACT_COMMIT_BOTH_REQUIRED_CI_PASSED",
+  "commit": "bac908d9c1d8d3474f797cad94ea26840d38531a",
+  "push_run": 40994498364,
+  "pr_run": 40994504160,
+  "jobs_per_run": {
+    "backend": "success",
+    "web": "success",
+    "java-service": "success"
+  },
+  "watch_sessions": {
+    "push": 39212,
+    "pr": 11874
+  },
+  "watch_exits": {
+    "push": 0,
+    "pr": 0
+  },
+  "python": {
+    "passed": 5387,
+    "skipped": 21,
+    "warnings": 2,
+    "seconds": 140.3,
+    "measurement_log": "push backend"
+  },
+  "browser_each_run": {
+    "passed": 158,
+    "failed": 0,
+    "infrastructure_failures": 0,
+    "missing_reports": 0,
+    "missing_runs": 0
+  },
+  "actual_java_http_and_database_compatibility": "passed",
+  "synthetic_meeting_operations_against_actual_java": "passed",
+  "model_quality_proven": false,
+  "corrected_actual_acquisition_run": false,
+  "public_deployment": false,
+  "limitations": [
+    "CI uses no new local model inference and does not override independent QA acceptance0/6 for both arms.",
+    "Corrected compiler acquisition, build, native engine compatibility and summary quality remain separate."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment": "meeting_structured_service_v2",
+  "status": "failed",
+  "development_only": true,
+  "human_reviews": 0,
+  "base_commit": "8bd4104823c3c32bb267953100260f4b78427354",
+  "working_source_status": "6 changed files passed focused checks and independent review; not yet published or CI tested at execution",
+  "source_review_sha256": "ac85121b6638a2b99d0bc8dc217ef571f830aad5d0e1007721a17f0aa64c2731",
+  "final_receipt_sha256": "4879b0783f21e0101df33681079695a3ba776d7f221f2ed4a762f09be7109a98",
+  "safe_summary_sha256": "85f5778728ff450c98eb2d9111483505f55c84b6a7e60eaeff4df05c1c2ea2b1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "profile": "qwen25-7b-q4km-json-schema-grounded-v1",
+  "gguf_revision": "bb5d59e06d9551d752d08b292a50eb208b07ab1f",
+  "quantization": "Q4_K_M",
+  "conversion_base_commit": null,
+  "native_and_java_startup": "ready",
+  "startup_seconds": 14.859,
+  "helper_seconds": 44.453,
+  "outer_through_cleanup_seconds": 46.407,
+  "natural_cli_exit": 1,
+  "outer_guard_failure": null,
+  "classification": {
+    "captured_native_responses": 46,
+    "protocol_accepted_completions": 46,
+    "input_tokens": 36207,
+    "output_tokens": 92,
+    "seconds": 28.609,
+    "semantic_acceptance": "not_evaluated"
+  },
+  "failure": {
+    "outer_code": "generation_development_analysis_failed",
+    "runtime_stage": "classification",
+    "last_structured_call": null,
+    "exact_internal_code": "not_preserved_by_observation_allowlist",
+    "reason": "pending deterministic diagnosis from saved public classification outputs"
+  },
+  "attempted_analyses": 1,
+  "attempted_answers": 0,
+  "summary_generations": 0,
+  "unattempted_analyses": 1,
+  "unattempted_answers": 2,
+  "cleanup": {
+    "known_children_absent": 9,
+    "launcher_absent": true,
+    "errors": [],
+    "frozen_refs_unchanged": 78
+  },
+  "resources": {
+    "sampled_peak_owned_rss_bytes": 5187526656,
+    "sampled_minimum_host_available_bytes": 6447861760,
+    "numeric_vram_gate": false
+  },
+  "service_adopted": false,
+  "semantic_quality_accepted": false,
+  "automatic_retry": false
+}

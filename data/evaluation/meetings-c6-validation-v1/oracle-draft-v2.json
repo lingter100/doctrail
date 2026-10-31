@@ -1,0 +1,831 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "cases": [
+    {
+      "id": "C6-VAL-01",
+      "family_id": "c6-f03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "v01f01",
+          "text": "저장소 Actions 탭에서 Setup / sync meeting notes를 선택하고 Run workflow를 누른다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-compass-r1-c0000",
+                "start_offset": 779,
+                "end_offset": 998,
+                "quote": "Initialize meeting notes on HackMD by navigating to the \"Actions\" tab of this repo.\nThen select \"Setup / sync meeting notes\" on the left panel.\nNow click \"Run workflow\" in the main workflow listing panel.\nFinally, fill "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v01f02",
+          "text": "회의 종류와 날짜를 입력한 뒤 Run workflow를 실행한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-compass-r1-c0001",
+                "start_offset": 848,
+                "end_offset": 1081,
+                "quote": " of this repo.\nThen select \"Setup / sync meeting notes\" on the left panel.\nNow click \"Run workflow\" in the main workflow listing panel.\nFinally, fill in the kind of meeting you're initializing and the date, and click \"Run workflow\".\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v01f03",
+          "text": "Pull Request와 HackMD 문서가 생성된다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-compass-r1-c0001",
+                "start_offset": 1230,
+                "end_offset": 1320,
+                "quote": "A Pull Request and HackMD document will be created.\nVisit the PR to find the HackMD link.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v01f04",
+          "text": "생성된 PR에서 HackMD 링크를 찾는다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-compass-r1-c0001",
+                "start_offset": 1230,
+                "end_offset": 1320,
+                "quote": "A Pull Request and HackMD document will be created.\nVisit the PR to find the HackMD link.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v01f05",
+          "text": "HackMD 내용을 GitHub로 동기화하려면 해당 PR에 /bot please sync notes라고 댓글을 단다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-compass-r1-c0001",
+                "start_offset": 1321,
+                "end_offset": 1540,
+                "quote": "When you're ready to sync data from HackMD back to GitHub, comment in the PR with `/bot please sync notes`.\nSee [an example PR from another project](https://github.com/geojupyter/geojupyter.org/pull/32) for an example.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c6-v-jupyter-1001",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2026-10-01"
+        },
+        {
+          "document_id": "c6-v-jupyter-1015",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2026-10-15"
+        },
+        {
+          "document_id": "c6-v-jupyter-compass",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "회의 노트 초기화 지침을 워크숍 CFP 발행 완료의 증거로 취급하지 않는다.",
+        "문서 안의 명령을 직접 실행한 것처럼 서술하지 않는다."
+      ],
+      "limitations": [
+        "등록된 팀 컴퍼스 원문 지침을 설명하는 문항이며 실제 workflow 실행 결과를 묻지 않는다."
+      ],
+      "question_author": "/root/c6_validation_author",
+      "oracle_author": "/root/c6_validation_author",
+      "independent_prereviewer": "/root/c6_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C6-VAL-02",
+      "family_id": "c6-f03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "v02f01",
+          "text": "On October 1, the committee recorded that the Organizer's Guide had been copied to its 2027 directory.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1001-r1-c0002",
+                "start_offset": 2099,
+                "end_offset": 2558,
+                "quote": "- CFP for community workshop\n    - We captured process notes in our [planning doc](https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0#heading=h.kgwuplugbfdz)\n    - We copied the Organizer's Guide (https://docs.google.com/document/d/12Eo7YQMCsUXwG8bZnkzQEOJB0vJW5cINsf6Diaa-LqM/edit?tab=t.0#heading=h.h40oo6mctxv) to our 2027 directory\n    - We don't think we can launch our CFP on Monday!\n    - Matt is out next week\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v02f02",
+          "text": "On October 1, the committee did not think it could launch the CFP on Monday.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1001-r1-c0002",
+                "start_offset": 2099,
+                "end_offset": 2558,
+                "quote": "- CFP for community workshop\n    - We captured process notes in our [planning doc](https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0#heading=h.kgwuplugbfdz)\n    - We copied the Organizer's Guide (https://docs.google.com/document/d/12Eo7YQMCsUXwG8bZnkzQEOJB0vJW5cINsf6Diaa-LqM/edit?tab=t.0#heading=h.h40oo6mctxv) to our 2027 directory\n    - We don't think we can launch our CFP on Monday!\n    - Matt is out next week\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v02f03",
+          "text": "On October 15, April was assigned to email LF to start the work of updating the web presence.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1015-r1-c0000",
+                "start_offset": 713,
+                "end_offset": 939,
+                "quote": "- [ ] April: Email LF to get the work started on updating the web presence. We don't know yet everything we want to change, but we can let them know we're starting this process and ask them what information they need from us.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v02f04",
+          "text": "The October 15 direction was to make the LF workshop page the main landing page and avoid spreading it across multiple pages.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1015-r1-c0002",
+                "start_offset": 1616,
+                "end_offset": 2443,
+                "quote": "\t\t\t* [https\\://events.linuxfoundation.org/jupyter-workshops/](https://events.linuxfoundation.org/jupyter-workshops/)\n\t\t\t* [https\\://events.linuxfoundation.org/archive/2026/jupyter-workshops/](https://events.linuxfoundation.org/archive/2026/jupyter-workshops/)\n\t\t        * This should be *the* landing page, avoid diluting across multiple pages!!!!\n\t\t        * There's a subpage that describes how to run a workshop / role of hosts, and that content won't be current because LF is not longer doing some of that work.\n\t\t* Create a Round 6 entry on [https\\://jupyter.org/community\\#calendar](https://jupyter.org/community#calendar)\n\t\t* Trigger marketing promotion (JMS – use Media Playbook Checklist Tier 1): [Media Playbook Checklist](https://docs.google.com/document/d/12xizBPpvWjacJ3lv-T28rGo8rRhg1xBZT2a32T_hyhg/edit?tab=t.0)\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c6-v-jupyter-1001",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2026-10-01"
+        },
+        {
+          "document_id": "c6-v-jupyter-1015",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2026-10-15"
+        },
+        {
+          "document_id": "c6-v-jupyter-compass",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not claim that the CFP was actually published on either meeting date.",
+        "Do not treat April's unchecked action as evidence that an email was sent or answered.",
+        "Do not invent a confirmed launch date from the word Monday."
+      ],
+      "limitations": [
+        "The linked planning documents and external web pages are not imported evidence; only the three registered originals define the source family."
+      ],
+      "question_author": "/root/c6_validation_author",
+      "oracle_author": "/root/c6_validation_author",
+      "independent_prereviewer": "/root/c6_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C6-VAL-03",
+      "family_id": "c6-f03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "v03f01",
+          "text": "April이 연락하도록 맡은 상대는 LF다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1015-r1-c0000",
+                "start_offset": 713,
+                "end_offset": 939,
+                "quote": "- [ ] April: Email LF to get the work started on updating the web presence. We don't know yet everything we want to change, but we can let them know we're starting this process and ask them what information they need from us.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v03f02",
+          "text": "연락 목적은 웹상의 안내를 갱신하는 작업을 시작하는 것이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1015-r1-c0000",
+                "start_offset": 713,
+                "end_offset": 939,
+                "quote": "- [ ] April: Email LF to get the work started on updating the web presence. We don't know yet everything we want to change, but we can let them know we're starting this process and ask them what information they need from us.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v03f03",
+          "text": "LF가 회신한 확정 작업비 금액.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c6-v-jupyter-1001",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2026-10-01"
+        },
+        {
+          "document_id": "c6-v-jupyter-1015",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2026-10-15"
+        },
+        {
+          "document_id": "c6-v-jupyter-compass",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": "등록된 두 회의록과 팀 컴퍼스 전체에는 LF의 회신이나 확정 작업비가 없다. 10월 15일 기록은 연락 과제만 남기므로 금액까지 포함한 요구를 완전히 답할 수 없다.",
+      "forbidden_inferences": [
+        "비용이 기재되지 않았다는 이유로 무료 또는 0원이라고 답하지 않는다.",
+        "April의 연락 과제를 이미 보낸 이메일이나 LF의 회신으로 바꾸지 않는다.",
+        "본문의 외부 링크에 금액이 있을 것이라고 가정하지 않는다."
+      ],
+      "limitations": [
+        "알려진 연락 정보와 필수 금액의 부재를 함께 평가하며, 알려진 부분만으로 answered 처리하지 않는다."
+      ],
+      "question_author": "/root/c6_validation_author",
+      "oracle_author": "/root/c6_validation_author",
+      "independent_prereviewer": "/root/c6_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C6-VAL-04",
+      "family_id": "c6-f03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "v04f01",
+          "text": "The October 1 action list assigns creation of the Round 6 calendar entry to Matt.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1001-r1-c0000",
+                "start_offset": 705,
+                "end_offset": 1000,
+                "quote": "- [ ] Matt: Update \"Round 5 Workshop Submission and List of Workshops\" URL on https://jupyter.org/community#calendar to point directly to archive page instead of the URL for the current year's workshops\n- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1001-r1-c0001",
+                "start_offset": 908,
+                "end_offset": 1848,
+                "quote": "- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write requirements for landing page for LF: https://docs.google.com/document/d/1BAXgH9N3D3DmLRtpJdTAcAPhA2E0gaQyA-K2Q5lNXgg/edit?tab=t.0\n- [ ] ?: Update \"Schedule\" section in Workshop planning doc, flesh out details of each step https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0\n    - [ ] See https://docs.google.com/document/d/1YIcOdHJ3hFWA84e10WQKGdNhiBWnMq6psTh6HWC7BcU/edit?tab=t.0\n- [ ] ?: Figure out what to do with \"Organizer's toolkit\" https://drive.google.com/drive/folders/1mxnSgM8EFBJDNsdOf3GP0sUn6oQ2TTYx\n    - Move it in to our 2027 directory? https://drive.google.com/drive/folders/1Q6eFtHcQgr6EyKGeLHS8lPx3Ze9Ywt6g\n    - Move it in to our team compass? (Matt: yes)\n    - Call this something else. Let's have a little glossary. Should use \"Host\" for individual workshop organizers and \"Organizer\" "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v04f02",
+          "text": "The entry's calendar destination is https://jupyter.org/community#calendar.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1001-r1-c0000",
+                "start_offset": 705,
+                "end_offset": 1000,
+                "quote": "- [ ] Matt: Update \"Round 5 Workshop Submission and List of Workshops\" URL on https://jupyter.org/community#calendar to point directly to archive page instead of the URL for the current year's workshops\n- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1001-r1-c0001",
+                "start_offset": 908,
+                "end_offset": 1848,
+                "quote": "- [ ] Matt: Create a round 6 entry on https://jupyter.org/community#calendar\n- [ ] ?: Write requirements for landing page for LF: https://docs.google.com/document/d/1BAXgH9N3D3DmLRtpJdTAcAPhA2E0gaQyA-K2Q5lNXgg/edit?tab=t.0\n- [ ] ?: Update \"Schedule\" section in Workshop planning doc, flesh out details of each step https://docs.google.com/document/d/1rvHYemI8mgMzkAC7caNV4AeL0bxA4juifycFZSta5uI/edit?tab=t.0\n    - [ ] See https://docs.google.com/document/d/1YIcOdHJ3hFWA84e10WQKGdNhiBWnMq6psTh6HWC7BcU/edit?tab=t.0\n- [ ] ?: Figure out what to do with \"Organizer's toolkit\" https://drive.google.com/drive/folders/1mxnSgM8EFBJDNsdOf3GP0sUn6oQ2TTYx\n    - Move it in to our 2027 directory? https://drive.google.com/drive/folders/1Q6eFtHcQgr6EyKGeLHS8lPx3Ze9Ywt6g\n    - Move it in to our team compass? (Matt: yes)\n    - Call this something else. Let's have a little glossary. Should use \"Host\" for individual workshop organizers and \"Organizer\" "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c6-v-jupyter-1015-r1-c0002",
+                "start_offset": 1616,
+                "end_offset": 2443,
+                "quote": "\t\t\t* [https\\://events.linuxfoundation.org/jupyter-workshops/](https://events.linuxfoundation.org/jupyter-workshops/)\n\t\t\t* [https\\://events.linuxfoundation.org/archive/2026/jupyter-workshops/](https://events.linuxfoundation.org/archive/2026/jupyter-workshops/)\n\t\t        * This should be *the* landing page, avoid diluting across multiple pages!!!!\n\t\t        * There's a subpage that describes how to run a workshop / role of hosts, and that content won't be current because LF is not longer doing some of that work.\n\t\t* Create a Round 6 entry on [https\\://jupyter.org/community\\#calendar](https://jupyter.org/community#calendar)\n\t\t* Trigger marketing promotion (JMS – use Media Playbook Checklist Tier 1): [Media Playbook Checklist](https://docs.google.com/document/d/12xizBPpvWjacJ3lv-T28rGo8rRhg1xBZT2a32T_hyhg/edit?tab=t.0)\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v04f03",
+          "text": "The calendar entry's actual publication timestamp confirmed by October 15.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c6-v-jupyter-1001",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2026-10-01"
+        },
+        {
+          "document_id": "c6-v-jupyter-1015",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2026-10-15"
+        },
+        {
+          "document_id": "c6-v-jupyter-compass",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": "The complete registered family records creation as an action on October 1 and again as a task on October 15, but gives no actual publication timestamp or completion receipt.",
+      "forbidden_inferences": [
+        "Do not substitute either meeting date for an actual publication time.",
+        "Do not infer completion from a repeated task or a destination URL.",
+        "Do not invent a timezone or exact clock time."
+      ],
+      "limitations": [
+        "All family chunks are present. A task assignment establishes the named owner, not actual publication."
+      ],
+      "question_author": "/root/c6_validation_author",
+      "oracle_author": "/root/c6_validation_author",
+      "independent_prereviewer": "/root/c6_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C6-VAL-05",
+      "family_id": "c6-f04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "v05f01",
+          "text": "G1의 A접시 정상 발아 수는 18립이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0409-r1-c0000",
+                "start_offset": 158,
+                "end_offset": 349,
+                "quote": "입고번호 SD-26-17은 기증자가 은점팥이라고 부른 묶음이다. 3월 26일 개봉 때 240립을 세었고, 기준표본 30립을 봉인한 뒤 검사 SD-26-17-G1에 40립을 사용했다. 오늘 14일 관찰 결과는 A접시 정상 발아 18립, B접시 12립이다. 전체로는 30/40이지만 두 접시 각각의 기준을 적용해야 하므로 교환 출고를 보류했다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v05f02",
+          "text": "G1의 B접시 정상 발아 수는 12립이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0409-r1-c0000",
+                "start_offset": 158,
+                "end_offset": 349,
+                "quote": "입고번호 SD-26-17은 기증자가 은점팥이라고 부른 묶음이다. 3월 26일 개봉 때 240립을 세었고, 기준표본 30립을 봉인한 뒤 검사 SD-26-17-G1에 40립을 사용했다. 오늘 14일 관찰 결과는 A접시 정상 발아 18립, B접시 12립이다. 전체로는 30/40이지만 두 접시 각각의 기준을 적용해야 하므로 교환 출고를 보류했다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v05f03",
+          "text": "G1 결과 이후 교환 출고를 보류했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0409-r1-c0000",
+                "start_offset": 158,
+                "end_offset": 349,
+                "quote": "입고번호 SD-26-17은 기증자가 은점팥이라고 부른 묶음이다. 3월 26일 개봉 때 240립을 세었고, 기준표본 30립을 봉인한 뒤 검사 SD-26-17-G1에 40립을 사용했다. 오늘 14일 관찰 결과는 A접시 정상 발아 18립, B접시 12립이다. 전체로는 30/40이지만 두 접시 각각의 기준을 적용해야 하므로 교환 출고를 보류했다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v05f04",
+          "text": "G2의 A접시 정상 발아 수는 17립이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 138,
+                "end_offset": 339,
+                "quote": "검사 SD-26-17-G2의 14일 기록은 A접시 정상 발아 17립, B접시 19립이다. 두 접시는 같은 선반에서 관찰했고 이번에는 위치별 온도 메모에 빠진 날이 없었다. 두 접시 모두 규약의 기준을 충족했다. 다만 G1과 G2 사이의 차이가 난방 배관 하나에서 비롯됐다고 단정하지 않는다. G2 기록에는 환경 배치를 바꿨다는 사실과 그 한계를 함께 적는다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v05f05",
+          "text": "G2의 B접시 정상 발아 수는 19립이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 138,
+                "end_offset": 339,
+                "quote": "검사 SD-26-17-G2의 14일 기록은 A접시 정상 발아 17립, B접시 19립이다. 두 접시는 같은 선반에서 관찰했고 이번에는 위치별 온도 메모에 빠진 날이 없었다. 두 접시 모두 규약의 기준을 충족했다. 다만 G1과 G2 사이의 차이가 난방 배관 하나에서 비롯됐다고 단정하지 않는다. G2 기록에는 환경 배치를 바꿨다는 사실과 그 한계를 함께 적는다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v05f06",
+          "text": "G2는 두 접시 모두 교환 기준을 충족했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 138,
+                "end_offset": 339,
+                "quote": "검사 SD-26-17-G2의 14일 기록은 A접시 정상 발아 17립, B접시 19립이다. 두 접시는 같은 선반에서 관찰했고 이번에는 위치별 온도 메모에 빠진 날이 없었다. 두 접시 모두 규약의 기준을 충족했다. 다만 G1과 G2 사이의 차이가 난방 배관 하나에서 비롯됐다고 단정하지 않는다. G2 기록에는 환경 배치를 바꿨다는 사실과 그 한계를 함께 적는다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c6-v-sodam-standard",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c6-v-sodam-0409",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-09"
+        },
+        {
+          "document_id": "c6-v-sodam-0423",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "G1과 G2 수치를 합쳐 새 발아율이나 판정을 만들지 않는다.",
+        "G2 기준 충족을 이미 전달을 완료했다는 뜻으로 해석하지 않는다.",
+        "난방 배관이 결과 차이의 유일한 원인이라고 단정하지 않는다."
+      ],
+      "limitations": [
+        "가상 기록의 두 검사 결과를 비교하는 문항이며 실제 재배 지침이나 과학적 인과 검증이 아니다."
+      ],
+      "question_author": "/root/c6_validation_author",
+      "oracle_author": "/root/c6_validation_author",
+      "independent_prereviewer": "/root/c6_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C6-VAL-06",
+      "family_id": "c6-f04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "v06f01",
+          "text": "The planned recipient is Morae Village Children's Garden (모래마을 어린이텃밭).",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 340,
+                "end_offset": 583,
+                "quote": "윤가람은 모래마을 어린이텃밭 요청분 60립을 4월 25일 전달하기로 했다. 출고표는 입고번호 SD-26-17과 검사번호 G2를 연결한다. 한서윤이 최초 수량 240립에서 기준표본 30립, G1 사용량 40립, G2 사용량 40립, 이번 출고 60립을 각각 빼면 교환 가능한 잔량은 70립이라고 확인했다. 기준표본 30립은 이 잔량에 포함하지 않는다. 4월 25일 실제 전달 서명은 아직 없으므로 오늘 재고표에는 예정 출고로 표시한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v06f02",
+          "text": "The planned exchange quantity is 60 seeds.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 340,
+                "end_offset": 583,
+                "quote": "윤가람은 모래마을 어린이텃밭 요청분 60립을 4월 25일 전달하기로 했다. 출고표는 입고번호 SD-26-17과 검사번호 G2를 연결한다. 한서윤이 최초 수량 240립에서 기준표본 30립, G1 사용량 40립, G2 사용량 40립, 이번 출고 60립을 각각 빼면 교환 가능한 잔량은 70립이라고 확인했다. 기준표본 30립은 이 잔량에 포함하지 않는다. 4월 25일 실제 전달 서명은 아직 없으므로 오늘 재고표에는 예정 출고로 표시한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v06f03",
+          "text": "A subsequent harvest must receive a new intake number.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-standard-r1-c0000",
+                "start_offset": 89,
+                "end_offset": 288,
+                "quote": "2026년 3월 4일 확정. 기록소는 기증받은 씨앗의 유래와 관찰 이력을 보존하면서 소량의 지역 교환을 운영한다. 입고번호는 처음 받은 묶음의 식별자이며 발아검사나 소분을 거쳐도 바꾸지 않는다. 후속 수확물은 새 입고번호를 받고 원래 묶음을 부모 기록으로 연결한다. 기증자가 부른 이름은 채록명으로 남기며, 공식 품종명으로 확인된 것처럼 표시하지 않는다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v06f04",
+          "text": "The subsequent harvest must link the original lot as its parent record.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-standard-r1-c0000",
+                "start_offset": 89,
+                "end_offset": 288,
+                "quote": "2026년 3월 4일 확정. 기록소는 기증받은 씨앗의 유래와 관찰 이력을 보존하면서 소량의 지역 교환을 운영한다. 입고번호는 처음 받은 묶음의 식별자이며 발아검사나 소분을 거쳐도 바꾸지 않는다. 후속 수확물은 새 입고번호를 받고 원래 묶음을 부모 기록으로 연결한다. 기증자가 부른 이름은 채록명으로 남기며, 공식 품종명으로 확인된 것처럼 표시하지 않는다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v06f05",
+          "text": "The recipient is not required to return a fixed quantity of seeds.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-standard-r1-c0000",
+                "start_offset": 738,
+                "end_offset": 962,
+                "quote": "교환 수령처, 출고 수량, 해당 검사번호는 보관 담당자 윤가람이 출고표에 적고 기록 담당자 한서윤이 재고 산식을 확인한다. 수령처는 다음 수확 때 채종 여부와 혼입 관찰만 회신하며 정해진 수량을 반드시 돌려줄 의무는 없다. 기증자의 실명과 정확한 밭 위치는 원본 동의서에 별도로 보관한다. 공개 목록에는 기증자가 허용한 지역 단위와 채록명만 싣는다. 동의 범위가 확인되지 않은 항목은 공개를 미룬다.\n"
+              }
+            ],
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 601,
+                "end_offset": 799,
+                "quote": "한서윤은 공개 목록의 은점팥 항목에 채록명, 허용된 지역 '남부 들녘', 기록소 입고번호를 적었다. 기증자 실명과 밭 위치는 넣지 않았다. 목록 공개일은 이번 회의에서 확정하지 않았다. 오다빈은 수령처에 채종 여부와 다른 형태의 씨앗이 섞였는지 회신해 달라고 전달한다. 일정 수량의 반환 약속이나 다음 해 수확량을 이번 출고의 조건으로 추가하지 않는다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c6-v-sodam-standard",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c6-v-sodam-0409",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-09"
+        },
+        {
+          "document_id": "c6-v-sodam-0423",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not present the scheduled April 25 handover as completed.",
+        "Do not require reuse of the original intake number for a later harvest.",
+        "Do not invent a fixed return quantity, promised yield, or harvest date."
+      ],
+      "limitations": [
+        "The recipient's Korean name or a faithful English rendering is acceptable; no unique transliteration is required.",
+        "A prior request for 60 seeds alone does not establish the later dated handover plan."
+      ],
+      "question_author": "/root/c6_validation_author",
+      "oracle_author": "/root/c6_validation_author",
+      "independent_prereviewer": "/root/c6_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C6-VAL-07",
+      "family_id": "c6-f04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "v07f01",
+          "text": "작성된 은점팥 공개 목록의 지역은 남부 들녘이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 601,
+                "end_offset": 799,
+                "quote": "한서윤은 공개 목록의 은점팥 항목에 채록명, 허용된 지역 '남부 들녘', 기록소 입고번호를 적었다. 기증자 실명과 밭 위치는 넣지 않았다. 목록 공개일은 이번 회의에서 확정하지 않았다. 오다빈은 수령처에 채종 여부와 다른 형태의 씨앗이 섞였는지 회신해 달라고 전달한다. 일정 수량의 반환 약속이나 다음 해 수확량을 이번 출고의 조건으로 추가하지 않는다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v07f02",
+          "text": "작성된 목록에는 기증자의 실명과 정확한 밭 위치를 넣지 않았다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 601,
+                "end_offset": 799,
+                "quote": "한서윤은 공개 목록의 은점팥 항목에 채록명, 허용된 지역 '남부 들녘', 기록소 입고번호를 적었다. 기증자 실명과 밭 위치는 넣지 않았다. 목록 공개일은 이번 회의에서 확정하지 않았다. 오다빈은 수령처에 채종 여부와 다른 형태의 씨앗이 섞였는지 회신해 달라고 전달한다. 일정 수량의 반환 약속이나 다음 해 수확량을 이번 출고의 조건으로 추가하지 않는다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v07f03",
+          "text": "은점팥 목록이 실제 공개된 확정 날짜.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c6-v-sodam-standard",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c6-v-sodam-0409",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-09"
+        },
+        {
+          "document_id": "c6-v-sodam-0423",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "unanswerable_reason": "세 원문 전체에 실제 공개 날짜가 없다. 4월 23일 회의는 목록에 넣은 내용은 설명하지만 공개일은 확정하지 않았다고 명시하므로 실제 공개일 요구를 충족할 수 없다.",
+      "forbidden_inferences": [
+        "목록 작성일 또는 회의일을 실제 공개일로 바꾸지 않는다.",
+        "별도 동의서에 있는 실명이나 정확한 위치를 추측하지 않는다.",
+        "공개일 미확정을 영구 비공개 결정으로 확대하지 않는다."
+      ],
+      "limitations": [
+        "지역 공개 동의와 실제 목록 작성, 실제 공개 완료를 구분해야 한다."
+      ],
+      "question_author": "/root/c6_validation_author",
+      "oracle_author": "/root/c6_validation_author",
+      "independent_prereviewer": "/root/c6_validation_prereviewer",
+      "human_review_count": 0
+    },
+    {
+      "id": "C6-VAL-08",
+      "family_id": "c6-f04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "v08f01",
+          "text": "The donor said the seeds had been harvested together from two adjacent rows.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 815,
+                "end_offset": 998,
+                "quote": "기증자는 SD-26-23이 인접한 두 줄에서 함께 수확됐으며 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. "
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v08f02",
+          "text": "The existing intake number and mixed state were retained.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0000",
+                "start_offset": 815,
+                "end_offset": 998,
+                "quote": "기증자는 SD-26-23이 인접한 두 줄에서 함께 수확됐으며 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. "
+              }
+            ],
+            [
+              {
+                "chunk_id": "c6-v-sodam-0423-r1-c0001",
+                "start_offset": 848,
+                "end_offset": 1021,
+                "quote": " 어느 줄의 씨앗인지 지금은 가릴 수 없다고 답했다. 두 형태를 별개 계통으로 확정할 근거가 없으므로 기존 입고번호와 혼합 상태를 유지한다. 외형 사진에는 두 줄이 섞여 들어왔다는 설명을 덧붙인다. 관찰용 파종을 검토할 수는 있지만 장소와 수량은 아직 정하지 않았다. 교환 출고와 폐기를 승인한 기록도 없다.\n"
+              }
+            ],
+            [
+              {
+                "chunk_id": "c6-v-sodam-0409-r1-c0000",
+                "start_offset": 772,
+                "end_offset": 994,
+                "quote": "입고번호 SD-26-23의 봉투에는 크기와 색이 다른 씨앗이 함께 들어 있다. 기증자 메모에는 같은 밭에서 받았다는 말만 있고 두 형태가 같은 계통인지는 확인되지 않았다. 이번 회의에서는 외형별 사진을 붙여 한 묶음으로 보관하고, 임의의 새 품종명을 붙이거나 다른 입고번호로 나누지 않기로 했다. 오다빈이 기증자에게 채종 경위를 확인한다. 이 묶음의 교환 수량이나 발아검사 일정은 정하지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "v08f03",
+          "text": "The exact approved observation-planting site.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "v08f04",
+          "text": "The exact approved seed count for observation planting.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c6-v-sodam-standard",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c6-v-sodam-0409",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-09"
+        },
+        {
+          "document_id": "c6-v-sodam-0423",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-04-23"
+        }
+      ],
+      "unanswerable_reason": "Across all three originals, observation planting is only a possibility and its location and quantity remain undecided. No exact site or approved seed count is available.",
+      "forbidden_inferences": [
+        "Do not import the other lot's recipient, exchange quantity, or dates into this lot's planting plan.",
+        "Do not infer two proven lineages from two visible seed forms or two harvesting rows.",
+        "Do not treat an unapproved planting proposal as a completed planting."
+      ],
+      "limitations": [
+        "The retained-identity statement is complete in both overlapping later-meeting chunks; both evidence alternatives are included."
+      ],
+      "question_author": "/root/c6_validation_author",
+      "oracle_author": "/root/c6_validation_author",
+      "independent_prereviewer": "/root/c6_validation_prereviewer",
+      "human_review_count": 0
+    }
+  ]
+}

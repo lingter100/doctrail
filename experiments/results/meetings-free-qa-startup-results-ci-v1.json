@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "source_head": "75b76e139a2d6fbb0c0a01f377ba568ea9c95875",
+  "scope": "Published startup results/docs and unchanged previously validated source; excludes subsequent paired-v2 source working changes.",
+  "runs": [
+    {
+      "id": 40828341703,
+      "event": "push",
+      "conclusion": "success",
+      "jobs": [
+        "backend",
+        "web",
+        "java-service"
+      ],
+      "retained_watch_session": 66517,
+      "watch_exit_code": 0
+    },
+    {
+      "id": 40828348206,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        "backend",
+        "web",
+        "java-service"
+      ],
+      "retained_watch_session": 56854,
+      "watch_exit_code": 0
+    }
+  ],
+  "measured_push": {
+    "python": {
+      "passed": 5351,
+      "skipped": 21,
+      "warnings": 2,
+      "elapsed_seconds": 219.85
+    },
+    "browser": {
+      "passed": 158,
+      "failed_tests": 0,
+      "infrastructure_failures": 0,
+      "startup_failures": 0,
+      "specs_without_reports": 0,
+      "missing_runs": 0,
+      "exit_code": 0
+    },
+    "actual_java_http_and_database_compatibility": "passed",
+    "synthetic_meeting_operations_against_actual_java": "passed",
+    "AI_quality": false
+  },
+  "limitations": [
+    "No new model or quality evaluation took place in CI.",
+    "Working tree paired-v2 runner/test changes are excluded; they require separate source review and published CI.",
+    "CI does not establish user review or deployment."
+  ],
+  "public_urls": [
+    "https://github.com/lingter100/doctrail/actions/runs/40828341703",
+    "https://github.com/lingter100/doctrail/actions/runs/40828348206"
+  ]
+}

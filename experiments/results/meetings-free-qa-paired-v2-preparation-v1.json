@@ -1,0 +1,53 @@
+{
+  "schema": "doctrail-public-experiment-record-v1",
+  "experiment": "meeting-free-qa-paired-v2-preparation-v1",
+  "date": "2026-10-29",
+  "source_commit": "7ca36980555814bc129a71077a739bd21967c3fe",
+  "verification_level": "local_metadata_and_synthetic_checks_with_independent_ai_review",
+  "status": "candidates_accepted_for_separate_installation",
+  "purpose": "Reuse the existing QA runner with the same sealed inputs after successful startup diagnostics; startup success is not a QA predecessor.",
+  "preserved": {
+    "opaque_input_and_sidecar_refs": 14,
+    "quality_cases": 6,
+    "qa_source_files_matching_git": 67,
+    "additional_startup_source_files": 2,
+    "held_file_hashes": 195,
+    "asset_stat_identities": 74,
+    "same_models_settings_limits_order_criteria": true,
+    "preflight_json_delta": "comparison_id only",
+    "initial_predecessor_lists": "all empty"
+  },
+  "observed_preparation_checks": {
+    "model_metadata_admissions": 2,
+    "synthetic_linkage_checks_passed": 38,
+    "synthetic_custody_main_checks_passed": 8,
+    "ruff_select_F": "passed",
+    "parent_direct_refs_checked": 23,
+    "independent_review_direct_refs_checked": 42,
+    "parent_review_refs_checked": 15,
+    "independent_review_blockers": 0,
+    "independent_review_advisories": 0,
+    "actual_model_calls": 0,
+    "private_semantic_reads": 0,
+    "human_reviews": 0
+  },
+  "preserved_preparation_failures": [
+    "Overbroad metadata-read instrumentation initially blocked the required 9182-byte setup receipt; original failure retained and only the exact file/hash exception added.",
+    "Initial synthetic-check generator syntax error retained before repair; no runtime or model attempt occurred."
+  ],
+  "evidence_sha256": {
+    "preparation_final": "55b6f1706d52db42c8579c7970b6a9fa57ff31f8ebb7581999195a8b3f92724b",
+    "parent_preparation_verification": "e768007c505ff67ce447acc2edd4dee9b1aa8d2d974b06933944573f02acfd8f",
+    "independent_review_final": "2041fe1f6d2dbf68c03ba53d8ab23a9bc9db483b89dc6e66e6ec2fecd58d6a5c",
+    "contract_candidate": "b44bc6c35353d907e60f8952b285395d1d5f44b165a073b7d468084eed3c7cb2",
+    "full_hold": "f1fbff6d4ae3d0305ebbdf4709acb720e62711c6b7a044f2cc01be3996fe45cd"
+  },
+  "limits": [
+    "This record covers preparation only; installation, neutral generation and quality comparison have separate evidence.",
+    "Large model/runtime bodies were not rehashed; accepted historical hashes and current stat identities were compared.",
+    "Synthetic checks do not prove generation quality, real process termination or service integration.",
+    "Full local receipts include sealed-input references and remain outside the public source repository.",
+    "The original neutral failure root cause remains UNKNOWN."
+  ],
+  "AI_quality": false
+}

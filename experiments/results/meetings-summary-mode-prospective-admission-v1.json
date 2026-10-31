@@ -1,0 +1,37 @@
+{
+  "new_contract_disposition": "accepted_for_development_diagnostic_only",
+  "parent_acceptance": true,
+  "accepted_sources": 4,
+  "withheld_sources": 0,
+  "source_evidence_inputs_current_exact": 190,
+  "declared_paths_still_absent": 3,
+  "references": [
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/prospective-admission-v1/prospective-source-disposition-lock-v1.json",
+      "bytes": 73287,
+      "sha256": "1881b3d0ef11f60b1f03191dce1a46b5093f5d5e326fdf7ac505eb476791582b"
+    },
+    {
+      "path": ".local/meeting-summary-mode-independent-v1/prospective-admission-v1/safe-prospective-source-disposition-v1.json",
+      "bytes": 18895,
+      "sha256": "95f68f3db0690fc0448696a58ea78d3453f061f2c178501fe8d05b4192782023"
+    },
+    {
+      "path": "data/evaluation/meetings-summary-mode-development-exclusions-v1.json",
+      "bytes": 13451,
+      "sha256": "2febf264bb19bb714a3b1a75c4795bdddc2ed4cd77b273cf69f9682bd9bb7791"
+    }
+  ],
+  "original_L2_preserved": true,
+  "historical_full_nonexposure_claim": false,
+  "official_holdout_or_final_evaluation": false,
+  "human_review_count": 0,
+  "criteria_locked": false,
+  "actual_model_run_authorized": false,
+  "remaining": [
+    "source-only criteria and freeze",
+    "exact source CI",
+    "execution registration and once dispatch",
+    "live resource checks"
+  ]
+}

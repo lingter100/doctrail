@@ -1,0 +1,57 @@
+{
+  "kind": "automated-synthetic-browser-batch",
+  "isolation": "service-and-database-per-spec",
+  "date": "2026-10-14T04:45:33.218Z",
+  "exitCode": 0,
+  "stats": {
+    "expected": 4,
+    "unexpected": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "runs": [
+    {
+      "directory": ".local\\web-e2e-batch-bngzdw\\web-e2e-jsz8PD",
+      "kind": "automated-synthetic-browser-check",
+      "date": "2026-10-14T04:45:33.201Z",
+      "spec": "meeting-unavailable.spec.ts",
+      "exitCode": 0,
+      "serverStopped": true,
+      "packagedUi": true,
+      "browser": "Playwright Chromium",
+      "humanReview": false,
+      "generation": "disabled",
+      "generationCalls": null,
+      "stats": {
+        "startTime": "2026-10-14T04:45:23.507Z",
+        "duration": 9653.94,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "directory": ".local\\web-e2e-batch-bngzdw\\web-e2e-WCcKwF",
+      "kind": "automated-synthetic-browser-check",
+      "date": "2026-10-14T04:45:19.537Z",
+      "spec": "knowledge-recovery.spec.ts",
+      "exitCode": 0,
+      "serverStopped": true,
+      "packagedUi": true,
+      "browser": "Playwright Chromium",
+      "humanReview": false,
+      "generation": "disabled",
+      "generationCalls": null,
+      "stats": {
+        "startTime": "2026-10-14T04:45:14.728Z",
+        "duration": 4760.506,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "humanReview": false
+}

@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "experiment": "meetings-extraction-coverage-implementation-v1",
+  "recorded_at": "2026-10-22T06:03:17.716307+00:00",
+  "status": "local_implementation_verified_exact_source_ci_pending",
+  "evidence_kind": "synthetic_and_mocktransport_implementation_checks",
+  "problem": "Existing summaries can select only actions, and supported title labels can lose their literal value during assembly.",
+  "change": "Explicit batch-v2 plus coverage-v1 assembles diverse extractive summary slots and literal title evidence while preserving classifier outputs, source spans and all content items.",
+  "sources": [
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 19409,
+      "sha256": "fd90fff368a09b81f67e09f4aca21258e324acbee149c8e569d686e88b0c90ef"
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 32430,
+      "sha256": "fb5432abf1c114be7ebc5b4136f125258f102e5293e097fb45c279849359afb1"
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 4300,
+      "sha256": "afa7e6832562469fae4283ff80a8b462f27a6fe37bbc339dbd14a254434d9d97"
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 6166,
+      "sha256": "177a649aa52e70df805e9732669493456dceef8d18fc507dbd53f75bcf49844c"
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 21926,
+      "sha256": "baa5f8f359bec9693a9fc991bb4365c3a21dd4e7a615a605e547d404903d9baf"
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 26566,
+      "sha256": "379c32b124a54209ffba3927705f1c67d5920a22594106b2f775d6f0a12ec96c"
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 38655,
+      "sha256": "a4a426555e7e41259913e9fccb14ca9aa663fc1aed74cba98acbdfb420b73240"
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 60311,
+      "sha256": "e8aba46e25f6e514fbe8bade041311f6a2e7018e9a380fd9dacf98da0a536c5a"
+    },
+    {
+      "path": "src/doctrail/meeting_extraction_coverage.py",
+      "bytes": 6286,
+      "sha256": "45b89d30b851169a25c4b4d55bddba44557c08ca145400b63b50849392c37f8e"
+    },
+    {
+      "path": "tests/test_meeting_extraction_coverage.py",
+      "bytes": 15588,
+      "sha256": "85bc5ca5f5c500d1b3a455aedbc22fac4ebdb0beda298e94762ad29e4edd8622"
+    }
+  ],
+  "contract": {
+    "default": "single plus legacy",
+    "candidate": "explicit batch-v2 plus coverage-v1 only",
+    "service_cli": "--analysis-policy batch-v2 --extraction-assembly coverage-v1",
+    "acceptance_cli_override": false,
+    "manifest": "optional plan.extraction_assembly, omitted means legacy only",
+    "registration": "policy.extraction_assembly effective value equals plan; omitted/explicit legacy equivalent; unknown rejected",
+    "validation_gate": "gate.extraction_assembly known effective value must equal plan plus existing analysis_policy/code/judge gates",
+    "code_binding": "meeting_extraction_coverage.py always required, including legacy",
+    "health": "extraction.assembly",
+    "lifecycle_and_run_receipt": "extraction_assembly",
+    "observer": "separate analyze/assembly event with nested diagnostic; request result/error remains authoritative; no extra native count or HTTP analysis body fields",
+    "busy": "no reset or reemission of prior assembly diagnostics if inherited operation was not entered",
+    "budgets": "startup120/analyze120/answer90/active1500/cleanup5/overall1625 unchanged"
+  },
+  "checks": [
+    {
+      "argv": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_meeting_extraction_coverage.py",
+        "tests/test_meeting_service_rag.py",
+        "tests/test_meeting_service_rag_launcher.py",
+        "tests/test_serve_meeting_rag_service.py",
+        "tests/test_run_meeting_rag_acceptance.py",
+        "tests/test_meeting_analysis_batch.py",
+        "-q"
+      ],
+      "env": {
+        "PYTHONUTF8": "1"
+      },
+      "exit_code": 0,
+      "passed": 452,
+      "seconds": 16.42,
+      "warnings": 1,
+      "warning_kind": "existing Starlette TestClient httpx deprecation",
+      "log": "tests-second.log"
+    },
+    {
+      "argv": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src/doctrail/meeting_service_rag.py",
+        "tests/test_meeting_service_rag.py",
+        "scripts/serve_meeting_service_rag.py",
+        "tests/test_meeting_service_rag_launcher.py",
+        "scripts/serve_meeting_rag_service.py",
+        "tests/test_serve_meeting_rag_service.py",
+        "scripts/run_meeting_rag_acceptance.py",
+        "tests/test_run_meeting_rag_acceptance.py",
+        "src/doctrail/meeting_extraction_coverage.py",
+        "tests/test_meeting_extraction_coverage.py"
+      ],
+      "env": {
+        "PYTHONUTF8": "1"
+      },
+      "exit_code": 0,
+      "log": "ruff-second.log"
+    }
+  ],
+  "initial_new_module_checks": {
+    "passed": 55,
+    "seconds": 0.59
+  },
+  "new_module_review_fix": {
+    "first_new_regressions_failed": 2,
+    "then_passed": 57,
+    "seconds": 0.54,
+    "change": "Allow nonempty whitespace-only spans from the frozen partitioner; keep positional mapping."
+  },
+  "counting_note": "55 and 57 are earlier subsets; do not add them to the final 452 count.",
+  "independent_review": {
+    "schema_version": 1,
+    "kind": "parent-record-of-actual-independent-agent-review",
+    "recorded_at": "2026-10-22T06:03:17.714288+00:00",
+    "reviewer": "/root/source_discovery_decision",
+    "actual_setting": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh"
+    },
+    "scope": "final10 generic source/test read-only review",
+    "remaining_blockers": 0,
+    "read_before_after_exact_bindings": 10,
+    "source_index": {
+      "path": ".local/meeting-extraction-coverage-implementation-v1/integration/review-ready-source.json",
+      "bytes": 1642,
+      "sha256": "14f11c3a16633ee00b2bad0f9eb593d9ca98707a0ea4ec093b3664cc8e81dc14"
+    },
+    "findings": [
+      "Legacy default and explicit compatible candidate selection.",
+      "Normal/observer runtime, health/lifecycle and registered assembly agree.",
+      "Module code bound for all policies.",
+      "Assembly-only diagnostics separate from request result; busy requests do not replay prior diagnostics.",
+      "No additional native call path or weakening of existing deadline, cleanup or failure gates found."
+    ],
+    "limitations": [
+      "Read-only code review; no tests, actual data, runtime, edits or Git by reviewer.",
+      "No semantic quality, human review or production readiness claim."
+    ]
+  },
+  "parent_verification": {
+    "source_and_test_changes_read": 10,
+    "final_source_hashes_verified": 10,
+    "original_baseline_copies": 87,
+    "unchanged_current_baseline_paths": 79,
+    "frozen_files_unchanged": 77,
+    "integration_receipt_bindings": 21,
+    "first_integration_source_copies": 8,
+    "integration_baseline_copies": 8,
+    "new2_prior_archive_files": 15,
+    "logs_read": true
+  },
+  "preserved_failures": {
+    "new_module": [
+      "Initial collection failure before module creation.",
+      "Initial mock readiness setup failure: 51 passed, 1 failed.",
+      "Whitespace-span regressions before fix: 2 failed, 55 deselected."
+    ],
+    "integration": {
+      "pytest": {
+        "failed": 9,
+        "passed": 440,
+        "seconds": 16.73,
+        "log": "tests-first.log",
+        "causes": [
+          "new legacy comparison fixture omitted explicit content labels",
+          "new CLI test omitted contextmanager import"
+        ]
+      },
+      "ruff": {
+        "errors": 2,
+        "log": "ruff-first.log"
+      },
+      "harness": {
+        "record": "first-harness-failure.json",
+        "raw_test_log_preserved": true
+      }
+    }
+  },
+  "receipts": [
+    {
+      "path": ".local/meeting-extraction-coverage-implementation-v1/receipt.json",
+      "bytes": 5772,
+      "sha256": "b224d40ba50336bac2b4c946ed81850189deb474fcf60a419c1d158a84ba6254"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-implementation-v1/receipt-v2.json",
+      "bytes": 2927,
+      "sha256": "68f5b87ace1e6c75f3492be86f889037a67bc20b6b29c67428401cde6fa9348b"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-implementation-v1/independent-new2-review-parent-record.json",
+      "bytes": 1754,
+      "sha256": "134ef1314ccb7f328bc8aaf607c189545fe962b5513e07768721d211ab220381"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-implementation-v1/integration/receipt.json",
+      "bytes": 8041,
+      "sha256": "32cec755e2889d994ba09f2fb59740df72f491e0d23b306a2822c5720e5e8404"
+    },
+    {
+      "path": ".local/meeting-extraction-coverage-implementation-v1/integration/independent-final-review-parent-record.json",
+      "bytes": 1243,
+      "sha256": "d157ee91a1c0922e40ad4284abc6a8c4a6c39a67c27aff4f97ab71cd3e2fff10"
+    }
+  ],
+  "runtime_execution": {
+    "actual_model": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "java": 0,
+    "actual_browser_service": 0,
+    "offline_saved_label_comparison": 0,
+    "human_review": 0
+  },
+  "limitations": [
+    "The final 452 checks use synthetic fixtures, MockTransport and existing Node fake-contract checks; they do not show AI semantic improvement.",
+    "Existing Starlette TestClient httpx deprecation warning retained.",
+    "Summary remains extractive with four slots; round-robin type coverage does not prove core-content sufficiency.",
+    "Classification errors and missed commitments are not fixed by this assembly change.",
+    "Closed runs, model/prompt/grammar, frozen toolchain and held-out evaluation remain unchanged.",
+    "Default remains legacy; new actual service operation and final deployment have not been accepted."
+  ],
+  "next": "Exact source commit CI, then separately dispatched saved-label assembly comparison using unchanged source annotations and custody mappings."
+}

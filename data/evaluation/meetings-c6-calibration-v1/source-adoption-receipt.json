@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "calibration",
+  "source_author_role": "/root/c6_calibration_author",
+  "completed_at_utc": "2026-10-20T02:42:16.324716+00:00",
+  "source_only": true,
+  "questions_or_oracles_authored": 0,
+  "tokenizer_runs": 0,
+  "native_calls": 0,
+  "source_documents": 6,
+  "public_documents": 3,
+  "ai_authored_fictional_documents": 3,
+  "actual_Python_processing": true,
+  "actual_Java_parity": {
+    "status": "passed",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "test_seconds": 0.343,
+    "receipt": {
+      "path": "data/evaluation/meetings-c6-calibration-v1/java-parity.json",
+      "sha256": "db04135999a6334a7b39c5c823d2fc36631b5bea4a0c99063ffe708dc0a56ec7"
+    },
+    "exact_copy_of_actual_Java_receipt": true,
+    "actual_source_and_test_bindings_unchanged": true,
+    "new_owned_Java_processes_remaining": 0,
+    "preexisting_Java_PIDs_preserved": [
+      7024,
+      44504
+    ],
+    "concurrency_note": "Parent granted exclusive DocTrail Maven slot. PID44504 was present before and after this run, with ownership not yet independently established by author; no performance inference is made."
+  },
+  "independent_review": "pending_not_self_reviewed",
+  "source_freeze_created": false,
+  "preauthorization": {
+    "path": ".local/meetings-c6-calibration-source-v1/preauthorization-v1.json",
+    "sha256": "a2bd1a4c1a7464eeaddf34121f8f47f4b2db9c01be1234b907b6723e3f36dcee"
+  },
+  "public_reservation": {
+    "repository": "https://github.com/openjs-foundation/cross-project-council",
+    "parent_acknowledgment": "Reservation accepted: openjs-foundation/cross-project-council exclusively calibration before bodies.",
+    "acknowledgment_recorded_at_utc": "2026-10-20T02:42:16.247154+00:00",
+    "order": "repo metadata only, parent acknowledgment received, then commit/tree/license/source bodies"
+  },
+  "public_commit": "dd739e6e90d8e44e557a561348940991f0da3bb1",
+  "license": {
+    "spdx_id": "MIT",
+    "upstream_path": "LICENSE.md",
+    "immutable_url": "https://github.com/openjs-foundation/cross-project-council/blob/dd739e6e90d8e44e557a561348940991f0da3bb1/LICENSE.md",
+    "git_blob_sha1": "a915e030e38e371b3871d15e2e41c6e92ec35535",
+    "raw_sha256": "5daf0195e02254ad479ed5f964a3006de25b0a37c91825d267bb8104ded51cd9",
+    "text": "MIT License (MIT)\n\nCopyright (c) OpenJS Foundation and contributors. All rights reserved.\nCopyright (c) Node.js contributors. All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\n",
+    "attribution": "OpenJS Foundation and contributors; Node.js contributors",
+    "application": "Repository-level MIT license covers associated documentation; full notice retained here and in the inventory provenance. No external linked content is imported."
+  },
+  "public_raw_exact_tree_blob_and_size_match": true,
+  "public_whitespace_or_spelling_repairs": 0,
+  "public_documents_cut_or_rewritten": 0,
+  "license_failure_candidates": [],
+  "HTTP_failure_candidates": [],
+  "nonadopted_candidates_preserved": [
+    {
+      "local_raw_path": ".local/meetings-c6-calibration-source-v1/public-inspection-v1/meetings__2025__2025-01-21.md",
+      "sha256": "5055210fbc7d64f7e91d68fe927eedb9ef7a8fa9cacac0f806fd1a712d5b4298",
+      "bytes": 3971,
+      "reason": "Not adopted: upstream malformed/corrupted URLs and stray text impair the coherent record. Original bytes preserved; no attempted repair."
+    },
+    {
+      "local_raw_path": ".local/meetings-c6-calibration-source-v1/public-inspection-v1/governance__GITHUB_ORG_MANAGEMENT_POLICY.md",
+      "sha256": "89d9e4d30f9d1217647af33507d45681a63236a4e7aaf765ee700aac2445934d",
+      "bytes": 3680,
+      "reason": "Not adopted: useful full policy but weak thematic fit to the selected meeting sequence. Original bytes preserved."
+    }
+  ],
+  "inspection_errors": [
+    {
+      "kind": "local_path_lookup",
+      "path": "server/src/test/java/io/doctrail/MeetingSourceInventoryParityTest.java",
+      "result": "not_found",
+      "recovery": "Read declared JAVA_PARITY_FILES then correct MeetingSourceParityTest.java; no product change or test failure."
+    },
+    {
+      "kind": "local_path_lookup",
+      "paths": [
+        "server/README.md",
+        "scripts/status.ps1"
+      ],
+      "result": "not_found",
+      "recovery": "Read current versioned wrapper and CI configuration; no source or test change."
+    },
+    {
+      "kind": "console_summary_projection",
+      "result": "PowerShell ordered dictionary piped to Select-Object displayed null fields",
+      "recovery": "Read the saved run-receipt JSON and archived XML/log directly; evidence was intact and Maven was not rerun."
+    }
+  ],
+  "freshness_author_checks": {
+    "comparison": "historical metadata only, no closed bodies",
+    "prior_index_sha256": "659fef38e0e70c066eb38faba3fe1f4f96181525437c4c84561916ddaa0ba0db",
+    "exact_metadata_collisions": [],
+    "semantic_review": "reserved for independent prereviewer",
+    "historical_coverage_gaps_preserved": [
+      "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+      "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+      "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+    ],
+    "complete_near_duplicate_absence_proven": false
+  },
+  "payload_policy": "Full raw and full normalized documents plus all original service chunks retained; no token feedback, truncation or question-first construction.",
+  "source_manifest_sha256": "2a945c9c9ad0dd3191aed9d64e912f31fd0d32243d1d32bee3881c7953ffcf76",
+  "source_inventory_sha256": "90e5cbfb711084704167576b1d139fa8532729a74f51f899d4479d638b6775db",
+  "fingerprints_sha256": "d72c1c7c8c668ef76d956e91e3b7b7650dc18af25da8e3f1208e0a46e316aab1",
+  "finished_at_utc": "2026-10-20T02:45:52.151927+00:00",
+  "author_structural_receipt_validation": "passed actual document_record replay, source document schema, v2 processing receipt and Java receipt exact contracts; not independent semantic review",
+  "within_family_long_paragraph_overlap_metadata": [
+    {
+      "documents": [
+        "c6-cal-doc-01",
+        "c6-cal-doc-02"
+      ],
+      "paragraph_hash_count": 1,
+      "review": "independent_reviewer_must_accept_or_reject"
+    }
+  ],
+  "original_pre_java_adoption_receipt_preserved": {
+    "path": ".local/meetings-c6-calibration-source-v1/source-adoption-pre-java-v1.json",
+    "sha256": "23c4cef1a749a3f8839ca1c7e59eef13e1a82613c3413a190d05cd167fcf4aef"
+  },
+  "source_network_reads": {
+    "repo_commit_tree_metadata": 3,
+    "license_body": 1,
+    "adopted_source_bodies": 3,
+    "nonadopted_source_bodies": 2,
+    "model_downloads": 0,
+    "source_processing_receipt_downloads_zero_scope": "Source processor did not access network; acquisition is recorded separately here."
+  }
+}

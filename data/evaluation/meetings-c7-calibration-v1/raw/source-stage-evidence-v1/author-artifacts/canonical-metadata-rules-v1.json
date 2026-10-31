@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-20T04:58:15.699692+00:00",
+  "phase": "calibration",
+  "repository_reserved": "kubernetes/community",
+  "parent_reservation_acknowledged": true,
+  "body_reads_before_registration": 0,
+  "source_selection": "Two complete dated sig-apps meeting Markdown documents and one complete same-snapshot general document; no linked-page expansion or excerpting",
+  "public_document_ids": "c7-cal-p01, c7-cal-p02, c7-cal-p03 in chronological meetings then general order",
+  "synthetic_document_ids": "c7-cal-s01, c7-cal-s02, c7-cal-s03 in chronological meetings then general order",
+  "source_ids": "equal to document_id",
+  "revision": 1,
+  "page": null,
+  "public_title": "Exact first ATX Markdown heading text with only leading # and surrounding whitespace removed; if absent use exact upstream filename stem; reject overlong title without shortening",
+  "public_meeting_date": "Exact valid YYYY-MM-DD filename date; verify body consistency, reject if inconsistent",
+  "general_meeting_date": null,
+  "raw_paths": "data/evaluation/meetings-c7-calibration-v1/raw/<document_id>.md for first intact candidate; never relocate after admission",
+  "processed_paths": "data/evaluation/meetings-c7-calibration-v1/processed/<document_id>.txt",
+  "synthetic_titles": [
+    "Lumen session 2032-02-03",
+    "Lumen session 2032-02-10",
+    "Lumen handling policy"
+  ],
+  "synthetic_dates": [
+    "2032-02-03",
+    "2032-02-10",
+    null
+  ],
+  "normalization_chunking": "Existing frozen plaintext helper and service extractor/chunker only; no source alterations, added translations, trimming, title shortening, partial adoption or post-reject rescue",
+  "byte_feedback_seen": "Only repository tree raw-file size metadata; no processed source, family envelope, schema/wire, tokenizer or item feedback",
+  "freshness": "Prior committed metadata only; rejected intact families preserved and not transformed/resubmitted"
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "doctrail-public-experiment-record-v1",
+  "experiment": "meeting-free-qa-paired-v2-neutral-external-launch-v1",
+  "date": "2026-10-29",
+  "source_commit": "7ca36980555814bc129a71077a739bd21967c3fe",
+  "verification_level": "actual_local_orchestration_failure_before_cli_dispatch",
+  "status": "prelaunch_executor_argument_error_no_model_result",
+  "cause": "The AI executor passed serialized JSON to a PowerShell parameter that requires a JSON file path. Resolve-Path terminated before Start-Process.",
+  "installation": {
+    "exact_control_files": 3,
+    "official_metadata_verifications": 1,
+    "verify_exit_code": 0,
+    "verify_elapsed_seconds": 1.5402392
+  },
+  "observed": {
+    "fresh_process_gate": "clear",
+    "gate_conflicts": 0,
+    "gate_unreadable_processes": 0,
+    "wrapper_exit_code": 1,
+    "monitor_exit_code": 1,
+    "strict_custody_seal_exit_code": 1,
+    "strict_custody_gaps": 13,
+    "actual_cli_dispatches": 0,
+    "actual_cli_exit_code": null,
+    "generation_calls": 0,
+    "quality_calls": 0,
+    "once_consumed": false,
+    "retries": 0,
+    "full_file_hashes_preserved": 211,
+    "asset_stat_identities_preserved": 74,
+    "parent_direct_refs_verified": 55,
+    "known_owned_absence": "UNKNOWN_NO_CAPTURE"
+  },
+  "no_dispatch_basis": [
+    "The pinned wrapper terminates on errors and resolves ArgvJson before reaching Start-Process.",
+    "The actual terminal tool result records this Resolve-Path error and exit1.",
+    "Observer identity, CLI run output and both epoch/token reservation files remain absent."
+  ],
+  "interpretation": {
+    "model_failure": false,
+    "readiness": "not tested",
+    "runtime_resource_guard": "not entered",
+    "runtime_cleanup": "not entered",
+    "generation_quality": "not evaluated",
+    "successful_qa_predecessor": false,
+    "original_neutral_failure_root_cause": "UNKNOWN"
+  },
+  "evidence_sha256": {
+    "installation_final": "0282b8476ab2c4d88cb77994d96801988435a42e2d4a6ea7afa67cc9a0b16dc1",
+    "external_launch_final": "c51dae704c858b870807cc147de4022aa8e87a68c46888e6ae860b66f119db54",
+    "no_dispatch_check": "c87db2e06fe2e15c02a923f9f90a204dee117ae63ef8dddd62a2272ada30a82b",
+    "strict_terminal": "8b44fa8dcc91511b9f1ec566ebd4cddfae253aea9a4a7504b9cec138fad1412a",
+    "parent_closeout": "94fcdf67c2f6fc0b43357c6ee603e7878ec6dbd6fd05c913e108ead6b4e844a1"
+  },
+  "next_step": "Preserve the failed external launch unchanged. Review the smallest fresh orchestration using the correct argv-file path; do not change the contract, sealed inputs, model settings or unconsumed once token.",
+  "limits": [
+    "File preservation passed; the original strict execution-custody result remains a failure with missing evidence.",
+    "No model performance or response latency was measured.",
+    "A future attempt requires a separate assignment and a fresh process/resource gate; this gate is historical."
+  ],
+  "AI_quality": false
+}

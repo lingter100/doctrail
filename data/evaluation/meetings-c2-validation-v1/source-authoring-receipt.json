@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "kind": "isolated_validation_synthetic_source_authoring_and_full_corpus_processing",
+  "phase": "validation",
+  "recorded_at": "2026-10-14T02:08:52.268739+00:00",
+  "status": "SOURCE_ONLY_COMPLETE_PENDING_INDEPENDENT_SOURCE_REVIEW_AND_NEW_SOURCE_FREEZE",
+  "parent_safe_metadata_only": true,
+  "author_role": "c2_validation_source_b",
+  "development_assistant": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "evidence": "Parent-verified tool-accepted isolated role settings; not self-model introspection."
+  },
+  "prerequisites": {
+    "source_processing_freeze": {
+      "path": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+      "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+      "binding_count": 18,
+      "verified_before_and_after_authoring": true
+    },
+    "comparison_source_freeze": {
+      "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+      "binding_count": 41,
+      "verified_before_and_after_authoring": true
+    },
+    "original_validation_manifest": {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-manifest.json",
+      "sha256": "c4af4a50c530cfc692d0f1a2be1a2920d23e11477b7b9cf09a3504c6154eb49c",
+      "unchanged": true
+    },
+    "public_parity_receipt": {
+      "path": "experiments/results/meetings-c2-source-parity-validation-v2.json",
+      "sha256": "8afb61b45782dcb8f7f58ecb3fa83730451fe5d2c6213c9e1fc5ca2fc0431038",
+      "document_count": 4,
+      "chunk_count": 71
+    }
+  },
+  "artifacts": [
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/source-manifest-full.json",
+      "sha256": "48fd383b1503f071a3fb99801ec34d9de49681544c86b0a33e2e88f611a48938",
+      "bytes": 31503,
+      "contains_isolated_source_content_or_fields": true
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/sources/c2-f04-doc-01.md",
+      "sha256": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de",
+      "bytes": 4923,
+      "contains_isolated_source_content_or_fields": true
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/sources/c2-f04-doc-02.md",
+      "sha256": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311",
+      "bytes": 4719,
+      "contains_isolated_source_content_or_fields": true
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/ATTRIBUTION.md",
+      "sha256": "0ee9556e7635a72ec49915ba2578818b69fcf6c89a69e54511b7452036b5b464",
+      "bytes": 4185,
+      "contains_isolated_source_content_or_fields": false
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/licenses/apache-arrow-LICENSE.txt",
+      "sha256": "cd03925a27219d326d622609fbcae6567279af8b8885c33d5969a9e4ef5d7525",
+      "bytes": 110383,
+      "contains_isolated_source_content_or_fields": false
+    },
+    {
+      "path": "data/evaluation/meetings-c2-validation-v1/licenses/apache-arrow-NOTICE.txt",
+      "sha256": "afd895d61a00101f6d5a41cf518c83865d815e8109e956f512a0ce4ea9738c06",
+      "bytes": 2916,
+      "contains_isolated_source_content_or_fields": false
+    }
+  ],
+  "author_self_review": {
+    "count": 2,
+    "independent": false,
+    "verdict": "ACCEPTED_FOR_SEPARATE_ISOLATED_SOURCE_REVIEW",
+    "check_categories": [
+      "registered_family_and_source_identity",
+      "explicit_ai_and_fictional_notice",
+      "cross_document_role_consistency",
+      "temporal_order",
+      "proposal_decision_execution_distinction",
+      "natural_document_form",
+      "no_question_or_oracle_authorship"
+    ],
+    "semantic_explanations_shared_with_parent": false
+  },
+  "independent_source_review": {
+    "status": "PENDING",
+    "count": 0,
+    "human_review_count": 0
+  },
+  "source_inventory": {
+    "path": ".local/c2-source-inventory-validation-full-v1/inventory.json",
+    "sha256": "49ce4cf4fb20096227064cb7a6108fc1bcf5aa306d8b4d7205eb089af6d7a2e5",
+    "contains_isolated_text": true,
+    "parent_must_not_open": true
+  },
+  "source_inventory_receipt": {
+    "path": ".local/c2-source-inventory-validation-full-v1/receipt.json",
+    "sha256": "d819d64abe014b9fd0e4eaf96fbf114d1a74e2669c6c050b1d5139717f27c060",
+    "source_processing_version": 2,
+    "mode": "adopted-all",
+    "parent_safe_metadata_only": true,
+    "original_bytes_unchanged": true,
+    "java_parity_verified_field_retained_false": true
+  },
+  "java_parity_receipt": {
+    "path": ".local/c2-source-inventory-validation-full-v1/java-parity.json",
+    "sha256": "154409e7bd816fb22849c910a26e9cae4394e0d3b848ad95fc660f13ef95d355",
+    "parent_safe_metadata_only": true,
+    "maven_exit_code": 0,
+    "test_class": "MeetingSourceParityTest",
+    "test_results": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "java_version": "21.0.12.1",
+    "document_count": 6,
+    "chunk_count": 77,
+    "exact_content_pages_chunk_text_offsets_ordinals_ids": true,
+    "shared_maven_target_released_to_parent": true
+  },
+  "counts": {
+    "registered_sources": 6,
+    "public_documents": 4,
+    "synthetic_documents": 2,
+    "synthetic_bodies_authored_in_this_step": 2,
+    "whole_corpus_documents": 6,
+    "whole_corpus_chunks": 77,
+    "excluded_sources": 0,
+    "author_source_self_reviews": 2,
+    "independent_source_reviews": 0,
+    "validation_questions": 0,
+    "validation_oracles": 0,
+    "selected_contexts": 0,
+    "tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "paid_calls": 0,
+    "downloads": 0,
+    "human_reviews": 0
+  },
+  "count_scope_note": "Counts are this isolated validation source stage only. The helper receipt synthetic_bodies_authored=0 means the helper authored no bodies; the source author created two bodies before helper processing. The earlier source manifest and inventory receipt retain their original pre-processing states.",
+  "isolation": {
+    "calibration_bodies_read": false,
+    "candidate_adapters_or_prompts_read_this_step": false,
+    "closed_question_pools_read": false,
+    "parent_status_or_other_agent_transcripts_read": false,
+    "source_text_or_semantic_explanations_reported_to_parent": false,
+    "future_independent_answer_scoring_eligible": false
+  },
+  "limitations": [
+    "Author self-review and exact Java/Python parity do not establish semantic quality or independent source suitability.",
+    "Separate isolated source review and a new source freeze must precede validation question/oracle/context authoring.",
+    "No source was changed after the inventory/chunk observations; any later source repair requires a separate evidence trail before questions.",
+    "Public4/71 and full6/77 receipts are separate preserved runs; the later source-only parity run is not a quality model rerun."
+  ],
+  "ownership_handoff": {
+    "released_by_author": true,
+    "tracked_scope": "Only the six listed artifacts plus this authoring receipt were newly written; original manifests/docs/freezes/results and parent AGENTS were not edited.",
+    "git_operations": 0
+  }
+}

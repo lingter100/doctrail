@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "meeting-detail-recovery-ci-observation",
+  "head_sha": "aed4b465e60b64409c0cd1d1148b09ff66aeba59",
+  "observed_at_utc": "2026-10-16T05:45:22.724885+00:00",
+  "runs": [
+    {
+      "run_id": 38857039481,
+      "event": "push",
+      "head_sha": "aed4b465e60b64409c0cd1d1148b09ff66aeba59",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38857039481",
+      "browser_batches": [
+        {
+          "passed": 67,
+          "failed": 0
+        }
+      ],
+      "python_summary_matches": [
+        "2386 passed, 21 skipped, 1 warning in 95.98s (0:01:35)"
+      ],
+      "log_sha256": "f5e86a73ccea411b1f65a4c49338eda7395a83f221af8a55b64759c66f6876d2",
+      "metadata_sha256": "9cc30a4b5a8c547fdc51535ae64e87d40f757fde76349f610811429de7abe99b"
+    },
+    {
+      "run_id": 38857043510,
+      "event": "pull_request",
+      "head_sha": "aed4b465e60b64409c0cd1d1148b09ff66aeba59",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38857043510",
+      "browser_batches": [
+        {
+          "passed": 67,
+          "failed": 0
+        }
+      ],
+      "python_summary_matches": [
+        "2386 passed, 21 skipped, 1 warning in 80.34s (0:01:20)"
+      ],
+      "log_sha256": "c095fea5635df1314a06bfe08a82da668d9e3e106ec0993ba65a097b455ed7f3",
+      "metadata_sha256": "21f5f71eb4abdc35bd0e932aaa4d404fe8f55471c10ab4a4022cc535a912f620"
+    }
+  ],
+  "unique_bindings_verified": 124,
+  "local_product_receipt": {
+    "file": "experiments/results/meetings-detail-recovery-v1.json",
+    "sha256": "872dcef9a082425ec9d8917bb6774f9aa7a4dbba108670ca917b02052c15c4d8"
+  },
+  "validation_semantics_printed": false,
+  "new_quality_model_calls": 0,
+  "human_reviews": 0,
+  "limits": [
+    "Actual Java and packaged React regression; model transport/errors in selected browser specs remain synthetic.",
+    "CI success is not semantic answer quality or phase-1 completion."
+  ]
+}

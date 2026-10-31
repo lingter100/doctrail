@@ -1,0 +1,469 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_validation_v3_independent_source_review",
+  "split": "validation",
+  "status": "accepted_with_disclosed_limits",
+  "review_completed_at_utc": "2026-10-20T08:19:57.180299+00:00",
+  "reviewer": {
+    "actor": "/root/service_rag_validation_source_review",
+    "accepted_role_model": "gpt-6-astra",
+    "accepted_reasoning_effort": "xhigh",
+    "accepted_fork_turns": "none",
+    "runtime_model_self_verification": false,
+    "distinct_from_source_author": true,
+    "source_author": "/root/service_rag_validation_sources",
+    "final_answer_judge_eligible": false,
+    "human_reviewer": false
+  },
+  "registration": {
+    "path": "data/evaluation/meetings-service-rag-validation-review-registration-v3.json",
+    "bytes": 3634,
+    "sha256": "76896014b1c5aa56044b41af2d03e9b2e0b1f16d03e3b9aeb9223ef137af87f7"
+  },
+  "dispatch_commit_parent_reported": "fbcdcdc89ed19e18540adc720225dee972a6405a",
+  "reviewer_git_commit_verification": false,
+  "counts": {
+    "source_documents": 6,
+    "accepted": 6,
+    "rejected": 0,
+    "author_edits": 0,
+    "public_documents": 3,
+    "new_ai_synthetic_documents": 3,
+    "completed_public_meetings": 2,
+    "fictional_completed_meetings": 2,
+    "related_general_documents": 2,
+    "complete_chunks": 66,
+    "source_artifact_bindings_verified": 42,
+    "registration_bindings_verified": 6,
+    "within_split_document_pairs_reviewed": 15
+  },
+  "document_decisions": [
+    {
+      "source_id": "V3-P-M1",
+      "decision": "accepted",
+      "kind": "completed_public_meeting",
+      "date": "2022-03-18",
+      "date_basis": "Pinned dated minutes path, with repository README explicitly identifying the directory as past meeting minutes. The body has no separate attendance/end-time attestation.",
+      "completion_basis": "The large technical presentation is followed by a Questions section containing named responses to live discussion questions; it is not solely a future agenda. Unfinished examples and future work remain incomplete rather than being promoted to completed actions.",
+      "relation_basis": "The presentation concerns the formality effort and the types team, the same project discussed in the second meeting and covered by the general team document.",
+      "references": [
+        {
+          "source_id": "V3-P-M1",
+          "start_offset": 39934,
+          "end_offset": 39945,
+          "quote": "# Questions"
+        },
+        {
+          "source_id": "V3-P-M1",
+          "start_offset": 40693,
+          "end_offset": 40739,
+          "quote": "nikomatsakis: You're asking the right question"
+        },
+        {
+          "source_id": "V3-P-M1",
+          "start_offset": 2679,
+          "end_offset": 2745,
+          "quote": "I imagine formality being \"owned and maintained\" by the types team"
+        }
+      ]
+    },
+    {
+      "source_id": "V3-P-M2",
+      "decision": "accepted",
+      "kind": "completed_public_meeting",
+      "date": "2022-05-27",
+      "date_basis": "Pinned dated minutes path and the source-embedded dated discussion URL; the link was not opened.",
+      "completion_basis": "Explicit conclusions from a discussion and from the meeting confirm that discussion occurred. The record is incomplete in places and contains tentative conclusions and plans, which remain tentative.",
+      "relation_basis": "It revisits the formality effort with development layers, priorities and scope discussions; it is a later meeting rather than a duplicate presentation.",
+      "references": [
+        {
+          "source_id": "V3-P-M2",
+          "start_offset": 3124,
+          "end_offset": 3204,
+          "quote": "Conclusion from discussion: probably we just want to restart chalk from scratch."
+        },
+        {
+          "source_id": "V3-P-M2",
+          "start_offset": 5744,
+          "end_offset": 5815,
+          "quote": "conclusion from meeting *seemed* to be to keep it out of scope to start"
+        }
+      ]
+    },
+    {
+      "source_id": "V3-P-G1",
+      "decision": "accepted",
+      "kind": "related_public_general_document",
+      "date": null,
+      "completion_basis": "Ordinary repository team guide, not represented as a meeting.",
+      "relation_basis": "States team goals, collaboration, design-meeting purpose, and the relationship between the repository and its past meeting minutes.",
+      "references": [
+        {
+          "source_id": "V3-P-G1",
+          "start_offset": 1117,
+          "end_offset": 1192,
+          "quote": "You'll find minutes from past meetings in [the minutes directory](minutes)."
+        },
+        {
+          "source_id": "V3-P-G1",
+          "start_offset": 1499,
+          "end_offset": 1597,
+          "quote": "This repository contains\nmeeting minutes, past sprints, as well as draft RFCs and other\ndocuments."
+        }
+      ]
+    },
+    {
+      "source_id": "V3-S-M1",
+      "decision": "accepted",
+      "kind": "new_ai_fictional_completed_meeting",
+      "date": "2026-04-07",
+      "date_basis": "Explicit fictional date and start/end time in the body.",
+      "completion_basis": "Participants, recorder, end-of-meeting confirmation, approvals, assignments and unresolved proposals are distinguished. Later delivery, classes and return inspection are explicitly not yet completed.",
+      "relation_basis": "Initial operational decisions use the same fictional service, document identifier and roles as the later meeting and general policy.",
+      "references": [
+        {
+          "source_id": "V3-S-M1",
+          "start_offset": 170,
+          "end_offset": 219,
+          "quote": "회의는 2026년 4월 7일 14시부터 14시 45분까지 생활사관 준비실에서 진행되었다."
+        },
+        {
+          "source_id": "V3-S-M1",
+          "start_offset": 285,
+          "end_offset": 318,
+          "quote": "참석자들은 회의 종료 전 아래 결정과 보류 항목을 확인했다."
+        }
+      ]
+    },
+    {
+      "source_id": "V3-S-M2",
+      "decision": "accepted",
+      "kind": "new_ai_fictional_completed_meeting",
+      "date": "2026-04-24",
+      "date_basis": "Explicit fictional date and start/end time, different from the first meeting.",
+      "completion_basis": "Reports completed events separately from pending inspection, replacement, approval and unconfirmed costs. It contains later decisions with a bounded scope and explicitly preserves the general policy.",
+      "relation_basis": "Chronological follow-up to the first fictional meeting, with new outcomes and changed/pending decisions rather than a paraphrase.",
+      "references": [
+        {
+          "source_id": "V3-S-M2",
+          "start_offset": 173,
+          "end_offset": 223,
+          "quote": "회의는 2026년 4월 24일 10시부터 10시 35분까지 생활사관 준비실에서 진행되었다."
+        },
+        {
+          "source_id": "V3-S-M2",
+          "start_offset": 262,
+          "end_offset": 298,
+          "quote": "회의 말미에 참석자들이 완료 보고와 후속 조치를 구분해 확인했다."
+        }
+      ]
+    },
+    {
+      "source_id": "V3-S-G1",
+      "decision": "accepted",
+      "kind": "new_ai_fictional_related_general_document",
+      "date": null,
+      "completion_basis": "Ordinary fictional operating policy with approval/effective dates, not a third meeting.",
+      "relation_basis": "Defines the baseline scope, lending, inspection, exceptions and decision limits referenced by both fictional meetings.",
+      "references": [
+        {
+          "source_id": "V3-S-G1",
+          "start_offset": 196,
+          "end_offset": 253,
+          "quote": "문서번호는 BM-OPS-14, 승인일은 2026년 4월 2일, 적용 시작일은 2026년 4월 6일이다."
+        },
+        {
+          "source_id": "V3-S-G1",
+          "start_offset": 1063,
+          "end_offset": 1099,
+          "quote": "특정 기관에 승인한 예외가 다른 기관의 규칙까지 바꾸지는 않는다."
+        }
+      ]
+    }
+  ],
+  "license_review": {
+    "status": "accepted_for_registered_repository_snapshot",
+    "root_license_files": 2,
+    "root_license_and_public_source_git_blob_matches": 5,
+    "pinned_tree_truncated": false,
+    "nested_license_or_notice_paths_found": 0,
+    "selected_file_conflicting_notices_found": 0,
+    "license_texts_read_in_full": true,
+    "documentation_scope_supported": true,
+    "unchanged_source_and_license_copies_preserved": true,
+    "external_link_destinations_fetched": 0,
+    "legal_or_human_approval": false
+  },
+  "mechanical_audit": {
+    "read_only": true,
+    "sqlite_uri_mode": "mode=ro&immutable=1",
+    "sqlite_quick_check": "ok",
+    "stored_counts": {
+      "documents": 6,
+      "chunks": 66,
+      "meetings": 0,
+      "meeting_runs": 0,
+      "searches": 0
+    },
+    "document_results": [
+      {
+        "source_id": "V3-P-M1",
+        "raw_sha256": "accbbd8af950602891a1ed39d79c82f7ce03afe54482de9a737760bb61f787c7",
+        "processed_sha256": "accbbd8af950602891a1ed39d79c82f7ce03afe54482de9a737760bb61f787c7",
+        "raw_bytes": 42623,
+        "processed_codepoints": 42623,
+        "chunks": 51,
+        "raw_whole_content_exact": true,
+        "all_chunk_text_hashes_and_codepoint_coordinates_exact": true,
+        "all_upload_and_readback_fields_exact": true,
+        "all_stored_document_source_and_chunk_rows_exact": true,
+        "all_nonwhitespace_source_codepoints_covered": true,
+        "overlap_codepoints": 150,
+        "revision": 1,
+        "mismatches": 0
+      },
+      {
+        "source_id": "V3-P-M2",
+        "raw_sha256": "d2f7f9a0ffe37e89fbb5a9b9b975f10ff032e83f35272f6d2c20440e9cb4a5a1",
+        "processed_sha256": "d2f7f9a0ffe37e89fbb5a9b9b975f10ff032e83f35272f6d2c20440e9cb4a5a1",
+        "raw_bytes": 5941,
+        "processed_codepoints": 5941,
+        "chunks": 7,
+        "raw_whole_content_exact": true,
+        "all_chunk_text_hashes_and_codepoint_coordinates_exact": true,
+        "all_upload_and_readback_fields_exact": true,
+        "all_stored_document_source_and_chunk_rows_exact": true,
+        "all_nonwhitespace_source_codepoints_covered": true,
+        "overlap_codepoints": 150,
+        "revision": 1,
+        "mismatches": 0
+      },
+      {
+        "source_id": "V3-P-G1",
+        "raw_sha256": "e185ce7501d8f5d5ec4337fa8a159ecbd69a07266732bc22eb74f3c5038c71a2",
+        "processed_sha256": "e185ce7501d8f5d5ec4337fa8a159ecbd69a07266732bc22eb74f3c5038c71a2",
+        "raw_bytes": 1663,
+        "processed_codepoints": 1663,
+        "chunks": 2,
+        "raw_whole_content_exact": true,
+        "all_chunk_text_hashes_and_codepoint_coordinates_exact": true,
+        "all_upload_and_readback_fields_exact": true,
+        "all_stored_document_source_and_chunk_rows_exact": true,
+        "all_nonwhitespace_source_codepoints_covered": true,
+        "overlap_codepoints": 150,
+        "revision": 1,
+        "mismatches": 0
+      },
+      {
+        "source_id": "V3-S-M1",
+        "raw_sha256": "fe486eda6e4d6d6b81eaa3506216a5ec8bf420680273eb016623ebbbf07837c1",
+        "processed_sha256": "fe486eda6e4d6d6b81eaa3506216a5ec8bf420680273eb016623ebbbf07837c1",
+        "raw_bytes": 3202,
+        "processed_codepoints": 1384,
+        "chunks": 2,
+        "raw_whole_content_exact": true,
+        "all_chunk_text_hashes_and_codepoint_coordinates_exact": true,
+        "all_upload_and_readback_fields_exact": true,
+        "all_stored_document_source_and_chunk_rows_exact": true,
+        "all_nonwhitespace_source_codepoints_covered": true,
+        "overlap_codepoints": 150,
+        "revision": 1,
+        "mismatches": 0
+      },
+      {
+        "source_id": "V3-S-M2",
+        "raw_sha256": "872bad4471bf206b33472f49227fbb20c4668370e2febdc14f8738e48b7f6815",
+        "processed_sha256": "872bad4471bf206b33472f49227fbb20c4668370e2febdc14f8738e48b7f6815",
+        "raw_bytes": 3240,
+        "processed_codepoints": 1404,
+        "chunks": 2,
+        "raw_whole_content_exact": true,
+        "all_chunk_text_hashes_and_codepoint_coordinates_exact": true,
+        "all_upload_and_readback_fields_exact": true,
+        "all_stored_document_source_and_chunk_rows_exact": true,
+        "all_nonwhitespace_source_codepoints_covered": true,
+        "overlap_codepoints": 150,
+        "revision": 1,
+        "mismatches": 0
+      },
+      {
+        "source_id": "V3-S-G1",
+        "raw_sha256": "fe5c166ef0450108056880f39312d29636ae5f52229f65fe5fbecff87517ea0c",
+        "processed_sha256": "fe5c166ef0450108056880f39312d29636ae5f52229f65fe5fbecff87517ea0c",
+        "raw_bytes": 3172,
+        "processed_codepoints": 1376,
+        "chunks": 2,
+        "raw_whole_content_exact": true,
+        "all_chunk_text_hashes_and_codepoint_coordinates_exact": true,
+        "all_upload_and_readback_fields_exact": true,
+        "all_stored_document_source_and_chunk_rows_exact": true,
+        "all_nonwhitespace_source_codepoints_covered": true,
+        "overlap_codepoints": 150,
+        "revision": 1,
+        "mismatches": 0
+      }
+    ],
+    "current_code10_and_jar_hashes_matched_recorded_observer": true,
+    "processing": {
+      "implementation": "existing doctrail.ingest.extract and doctrail.retrieval.chunk_content",
+      "chunk_codepoints": 1000,
+      "overlap_codepoints": 150,
+      "whole_originals": true,
+      "selected_contexts": 0,
+      "questions": 0
+    },
+    "source_fetch_records": {
+      "public_source_requests": 3,
+      "license_requests": 2,
+      "successful_status_200": 5,
+      "redirects": 0,
+      "reviewer_requests": 0
+    },
+    "saved_java_observation_seconds": 3.922000000020489,
+    "saved_java_uploads": 6,
+    "saved_java_reads": 6,
+    "saved_readiness_failures": [
+      "URLError"
+    ],
+    "saved_owned_java_remaining": 0,
+    "saved_java_exit_code": 1,
+    "saved_shutdown_method": "Windows TerminateProcess",
+    "reviewer_java_runs": 0,
+    "meeting_autoanalysis_proven": false
+  },
+  "freshness": {
+    "prior_index": {
+      "path": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+      "bytes": 49624,
+      "sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa"
+    },
+    "exclusions": {
+      "path": "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+      "bytes": 2865,
+      "sha256": "26506cbd3c1f49a4b1e6dcb8ce94acd50b410ff34f313d13551342331c3d52b3"
+    },
+    "prior_coverage": {
+      "rows": 110,
+      "canonical_unique_rows": 107,
+      "exact_repeated_rows_retained": 3,
+      "inherited_rows": 98,
+      "new_closed_c6_rows": 12,
+      "normalized_document_rows": 42,
+      "long_paragraph_rows": 42
+    },
+    "historical_gaps": [
+      "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+      "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+      "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+    ],
+    "fingerprint_recomputed": true,
+    "prior_comparison": [
+      {
+        "source_id": "V3-P-M1",
+        "raw_match": false,
+        "normalized_match": false,
+        "long_paragraph_matches": 0,
+        "long_paragraphs_checked": 78
+      },
+      {
+        "source_id": "V3-P-M2",
+        "raw_match": false,
+        "normalized_match": false,
+        "long_paragraph_matches": 0,
+        "long_paragraphs_checked": 7
+      },
+      {
+        "source_id": "V3-P-G1",
+        "raw_match": false,
+        "normalized_match": false,
+        "long_paragraph_matches": 0,
+        "long_paragraphs_checked": 2
+      },
+      {
+        "source_id": "V3-S-M1",
+        "raw_match": false,
+        "normalized_match": false,
+        "long_paragraph_matches": 0,
+        "long_paragraphs_checked": 0
+      },
+      {
+        "source_id": "V3-S-M2",
+        "raw_match": false,
+        "normalized_match": false,
+        "long_paragraph_matches": 0,
+        "long_paragraphs_checked": 0
+      },
+      {
+        "source_id": "V3-S-G1",
+        "raw_match": false,
+        "normalized_match": false,
+        "long_paragraph_matches": 0,
+        "long_paragraphs_checked": 0
+      }
+    ],
+    "within_split_exact_document_duplicate_pairs": 0,
+    "within_split_shared_long_paragraph_pairs": 0,
+    "within_split_semantic_duplicate_sources_found": 0,
+    "within_split_shared_fiction_disclosure_boilerplate": true,
+    "historical_or_cross_split_semantic_duplicate_absence_proven": false,
+    "other_split_bodies_read": 0,
+    "closed_bodies_read": 0
+  },
+  "rejections": [],
+  "author_safe_feedback": [],
+  "nonblocking_limits": [
+    "Historical fingerprint index has 110 rows / 107 unique rows, but only 42 normalized-document and 42 paragraph-covered rows; three recorded historical coverage gaps remain.",
+    "The registered prior index and repository exclusions are not an exhaustive fingerprint index for all later exploratory or current other-split materials. No old or other-split bodies were opened to fill gaps.",
+    "Cross-split semantic or translation duplicate absence is unverified. Within-split independent semantic review cannot establish global freshness.",
+    "Synthetic paragraphs do not reach the 200-normalized-character paragraph threshold; zero paragraph matches for those files are not evidence of semantic novelty.",
+    "Public completion is supported by the published dated minutes paths, repository guide and recorded discussion/conclusions; no external attendance, recording or event-completion attestation was fetched.",
+    "Preserved public minutes include unfinished sections, examples, uncertain conclusions and future plans. Source acceptance does not make those statements completed facts or verify the underlying technical claims.",
+    "License assessment concerns the preserved repository source snapshot and root terms. External linked works were not fetched or independently licensed; no legal or human approval is claimed.",
+    "Existing actual Java evidence concerns six document uploads and six reads only. Meeting and meeting-run tables are empty. No meeting autoanalysis, search, answer/model quality, browser acceptance, human review, or Phase1 completion is proved.",
+    "The prior observer preserves one initial readiness connection failure, then successful ingestion. Its 3.922000000020489 seconds is the recorded whole observer elapsed value; Windows TerminateProcess exit code 1 is not graceful shutdown evidence.",
+    "This review does not execute source fetching, Java, Maven, retrieval, tokenizer, native or model workloads and does not independently rerun the historical observation.",
+    "The 51-chunk largest document is retained in full. Source acceptance is not a claim that top-5 retrieval or an actual request context/input budget will succeed."
+  ],
+  "notes": {
+    "path": "data/evaluation/meetings-service-rag-validation-v3/source-review-notes-v3.md",
+    "bytes": 5213,
+    "sha256": "978b68ed2ee8411407469346a204474719f4773791f0b9a1b5756d77996a521b"
+  },
+  "exposure": {
+    "own_split_whole_raw_and_processed_documents": 6,
+    "own_split_chunks_compared": 66,
+    "own_split_licenses": 2,
+    "own_split_saved_java_http_and_database": true,
+    "generic_contract_and_project_aggregate_status": true,
+    "historical_fingerprint_and_exclusion_metadata": true,
+    "other_split_source_semantics": false,
+    "closed_source_semantics": false,
+    "evaluation_questions_or_oracles": false,
+    "model_outputs": false,
+    "other_split_semantic_notes": false,
+    "source_embedded_discussion_questions_read": true,
+    "memory_registry_keyword_search_only": true,
+    "memory_rollouts_or_other_split_bodies_read": false
+  },
+  "execution_exception_preserved": {
+    "system_python_alias_failed_before_script_execution": true,
+    "message": "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases.",
+    "recovery": "Existing .venv/Scripts/python.exe used for read-only artifact audits; no source/runtime workload rerun.",
+    "source_mutations": 0
+  },
+  "reviewer_execution_counts": {
+    "network_requests": 0,
+    "java": 0,
+    "maven": 0,
+    "retrieval": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "model": 0,
+    "model_downloads": 0,
+    "git_commands": 0,
+    "source_edits": 0,
+    "human_review": 0
+  },
+  "parent_read_policy": "Byte/hash only for this review and notes; source-review-summary-v3.json is the safe semantic parent input.",
+  "phase1_or_model_quality_claim": false
+}

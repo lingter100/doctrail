@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "calibration",
+  "role_id": "/root/c6_calibration_author",
+  "author_kind": "AI",
+  "AI_authored_questions_oracles": true,
+  "same_split_source_and_item_author_reuse_disclosed": true,
+  "independent_prereviewer": "/root/c6_calibration_prereviewer",
+  "independent_item_review_status": "pending",
+  "human_review_count": 0,
+  "excluded_from_final_answer_judging": true,
+  "created_at_utc": "2026-10-20T03:14:38.824649+00:00",
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "item_authoring_head": "eae71405b679f19ec2f7c53a591bc64052c3de17",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c6-calibration-v1/source-freeze.json",
+    "sha256": "ecf4a08d8d5edc8598646e3be2d25b0203af633ae39d298014c479befcf49b53"
+  },
+  "preauthorization": {
+    "file": ".local/meetings-c6-calibration-item-v1/preauthorization-v1.json",
+    "sha256": "063650d5feab086764d1b02f4b52aa8706c12e0822f3e541187d1c0f674af1ef"
+  },
+  "source_CI": {
+    "file": "experiments/results/meetings-c6-source-ci-v1.json",
+    "sha256": "f72869873636675ec037b7a73ee13168c22a1ca405d41ac0e824f505b74ccb8e"
+  },
+  "counts": {
+    "cases": 6,
+    "public": 3,
+    "synthetic": 3,
+    "ko": 3,
+    "en": 3,
+    "answered": 4,
+    "abstained": 2,
+    "required_facts": 29,
+    "source_documents": 6,
+    "source_edits": 0,
+    "tokenizer_runs": 0,
+    "native_calls": 0,
+    "Maven_runs": 0,
+    "official_offline_preparations": 0,
+    "human_reviews": 0
+  },
+  "validation": {
+    "schema_version": 1,
+    "started_at_utc": "2026-10-20T03:14:38.798316+00:00",
+    "scope": "pure_item_contract_checks_no_tokenizer_or_native",
+    "status": "passed",
+    "cases": 6,
+    "required_facts": 29,
+    "coverage": [
+      {
+        "id": "C6-CAL-01",
+        "status": "answered",
+        "language": "ko",
+        "required_facts": 5,
+        "contexts": 2,
+        "sufficient_document_sets": [
+          [
+            "c6-cal-doc-01@1",
+            "c6-cal-doc-02@1"
+          ]
+        ],
+        "unavoidably_multiple_documents": true
+      },
+      {
+        "id": "C6-CAL-02",
+        "status": "answered",
+        "language": "en",
+        "required_facts": 5,
+        "contexts": 2,
+        "sufficient_document_sets": [
+          [
+            "c6-cal-doc-03@1"
+          ]
+        ],
+        "unavoidably_multiple_documents": false
+      },
+      {
+        "id": "C6-CAL-03",
+        "status": "abstained",
+        "language": "ko",
+        "required_facts": 4,
+        "contexts": 3,
+        "sufficient_document_sets": [],
+        "unavoidably_multiple_documents": false
+      },
+      {
+        "id": "C6-CAL-04",
+        "status": "answered",
+        "language": "ko",
+        "required_facts": 5,
+        "contexts": 2,
+        "sufficient_document_sets": [
+          [
+            "c6-cal-doc-04@1",
+            "c6-cal-doc-06@1"
+          ]
+        ],
+        "unavoidably_multiple_documents": true
+      },
+      {
+        "id": "C6-CAL-05",
+        "status": "answered",
+        "language": "en",
+        "required_facts": 6,
+        "contexts": 3,
+        "sufficient_document_sets": [
+          [
+            "c6-cal-doc-05@1",
+            "c6-cal-doc-06@1"
+          ]
+        ],
+        "unavoidably_multiple_documents": true
+      },
+      {
+        "id": "C6-CAL-06",
+        "status": "abstained",
+        "language": "en",
+        "required_facts": 4,
+        "contexts": 3,
+        "sufficient_document_sets": [],
+        "unavoidably_multiple_documents": false
+      }
+    ],
+    "whole_immutable_chunks_exact": true,
+    "source_originals_unchanged": 23,
+    "toolchain_unchanged": 77,
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "finished_at_utc": "2026-10-20T03:14:38.823649+00:00"
+  },
+  "authorship_notes": [
+    {
+      "id": "C6-CAL-01",
+      "family_id": "c6-f01",
+      "source_mode": "meetings",
+      "selection_reason": "Two whole chunks contain the contemporaneous infrastructure-process statements from the two dates. Other agenda sections were read but do not supply the requested dated status changes.",
+      "whole_family_documents_reviewed": [
+        "c6-cal-doc-01",
+        "c6-cal-doc-02",
+        "c6-cal-doc-03"
+      ],
+      "all_family_content_read_for_semantic_alternatives": true,
+      "whole_family_absence_check": false,
+      "token_feedback_used": false,
+      "catalog_blocks": 7,
+      "evidence_alternatives_per_fact": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "C6-CAL-02",
+      "family_id": "c6-f01",
+      "source_mode": "general",
+      "selection_reason": "The first two complete immutable guide chunks cover scope, formal request channels and prioritization. Emergency and unique-situation instructions are outside this question; no missing-answer condition is manufactured.",
+      "whole_family_documents_reviewed": [
+        "c6-cal-doc-01",
+        "c6-cal-doc-02",
+        "c6-cal-doc-03"
+      ],
+      "all_family_content_read_for_semantic_alternatives": true,
+      "whole_family_absence_check": false,
+      "token_feedback_used": false,
+      "catalog_blocks": 38,
+      "evidence_alternatives_per_fact": [
+        1,
+        2,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "C6-CAL-03",
+      "family_id": "c6-f01",
+      "source_mode": "partial_missing_family_wide",
+      "selection_reason": "All three guide chunks are retained. Every public-family source was read to check absence; excluded meeting portions contain no response SLA. Thus absence is family-wide rather than created by omission.",
+      "whole_family_documents_reviewed": [
+        "c6-cal-doc-01",
+        "c6-cal-doc-02",
+        "c6-cal-doc-03"
+      ],
+      "all_family_content_read_for_semantic_alternatives": true,
+      "whole_family_absence_check": true,
+      "token_feedback_used": false,
+      "catalog_blocks": 49,
+      "evidence_alternatives_per_fact": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "id": "C6-CAL-04",
+      "family_id": "c6-f02",
+      "source_mode": "mixed",
+      "selection_reason": "One complete guide chunk supplies the time limit and conjunctive next-inspection conditions; the complete later-meeting tail contains the full Jangdaenoin inspection and non-authorization statement. Repeated non-authorization statements in both supplied documents are listed as alternatives.",
+      "whole_family_documents_reviewed": [
+        "c6-cal-doc-04",
+        "c6-cal-doc-05",
+        "c6-cal-doc-06"
+      ],
+      "all_family_content_read_for_semantic_alternatives": true,
+      "whole_family_absence_check": false,
+      "token_feedback_used": false,
+      "catalog_blocks": 28,
+      "evidence_alternatives_per_fact": [
+        1,
+        1,
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "C6-CAL-05",
+      "family_id": "c6-f02",
+      "source_mode": "meetings",
+      "selection_reason": "The earlier meeting's complete concluding paragraph and both later-meeting chunks retain the initial undecided plan, trial observations, original condition, treatment and final demonstration distinction. All six requested facts were checked against every source in the synthetic family.",
+      "whole_family_documents_reviewed": [
+        "c6-cal-doc-04",
+        "c6-cal-doc-05",
+        "c6-cal-doc-06"
+      ],
+      "all_family_content_read_for_semantic_alternatives": true,
+      "whole_family_absence_check": false,
+      "token_feedback_used": false,
+      "catalog_blocks": 29,
+      "evidence_alternatives_per_fact": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "C6-CAL-06",
+      "family_id": "c6-f02",
+      "source_mode": "partial_missing_family_wide",
+      "selection_reason": "The guide's recording paragraph and both later-meeting chunks preserve the replica's year label and the known demonstration/treatment facts. Whole-family review found no original production year, including in the first meeting; selection does not create the absence.",
+      "whole_family_documents_reviewed": [
+        "c6-cal-doc-04",
+        "c6-cal-doc-05",
+        "c6-cal-doc-06"
+      ],
+      "all_family_content_read_for_semantic_alternatives": true,
+      "whole_family_absence_check": true,
+      "token_feedback_used": false,
+      "catalog_blocks": 29,
+      "evidence_alternatives_per_fact": [
+        0,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "all_sufficient_alternatives_including_repeated_passages_author_checked": true,
+  "semantic_independent_review_pending": true,
+  "source_original_hashes": {
+    "data/evaluation/meetings-c6-calibration-v1/java-parity.json": "db04135999a6334a7b39c5c823d2fc36631b5bea4a0c99063ffe708dc0a56ec7",
+    "data/evaluation/meetings-c6-calibration-v1/review-metadata-summary.json": "c576a13bf564a74cd028af363562e1ddd5413d27989bad118917c0b92f7ef91a",
+    "data/evaluation/meetings-c6-calibration-v1/source-adoption-receipt.json": "778eef5d1bcc743892ce0c4472fc2ce6fa2ed2de7a7b5e4436b2f33894e8a4c4",
+    "data/evaluation/meetings-c6-calibration-v1/source-freeze.json": "ecf4a08d8d5edc8598646e3be2d25b0203af633ae39d298014c479befcf49b53",
+    "data/evaluation/meetings-c6-calibration-v1/source-freshness.json": "721db1777bc354567ed70c8ebf4665fea3a8d11b9ab08d6b9916269b17d591dc",
+    "data/evaluation/meetings-c6-calibration-v1/source-inventory.json": "90e5cbfb711084704167576b1d139fa8532729a74f51f899d4479d638b6775db",
+    "data/evaluation/meetings-c6-calibration-v1/source-manifest.json": "2a945c9c9ad0dd3191aed9d64e912f31fd0d32243d1d32bee3881c7953ffcf76",
+    "data/evaluation/meetings-c6-calibration-v1/source-prereview-notes.md": "98cc9bb624b339870b913a719e4f08f65cc85c09afaf57c54baae7a03c68cc04",
+    "data/evaluation/meetings-c6-calibration-v1/source-prereview.json": "09f321d0f3e93fc7c2d10ff3d1f82f599c170804c374948560c45ea3921e7c07",
+    "data/evaluation/meetings-c6-calibration-v1/source-processing-receipt.json": "f668dcc304917073146edf41ca9fcc356ae1cffc7963153bcdc5c7c0062ee867",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-01.txt": "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-02.txt": "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-03.txt": "a052c558a2593cdb67c14819c02aa280cbfa459841a8168eace6c47b425ceecb",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-04.txt": "49e30742d9110056e5c22dac079cfc085c9e061b1b6881953f5dc05a565f0958",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-05.txt": "149fd46ea5b73f72a3c362576087636ab185a0aa9fffc94ab99218c0b9024876",
+    "data/evaluation/meetings-c6-calibration-v1/processed/c6-cal-doc-06.txt": "60c1f41802550dd549078b524f209fbc8c9683af7649f30b589a2fdefe931d3f",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-01.md": "8f464ebc3c8c1cbfaeaaeddb0f2a08af71011a7797d52bd51f0d65c9cf2fcbd9",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-02.md": "b45c521740c3d8e535fda50d5f7114fa29a7279f1704a85ed8afedad9a30a758",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-03.md": "a052c558a2593cdb67c14819c02aa280cbfa459841a8168eace6c47b425ceecb",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-04.md": "49e30742d9110056e5c22dac079cfc085c9e061b1b6881953f5dc05a565f0958",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-05.md": "149fd46ea5b73f72a3c362576087636ab185a0aa9fffc94ab99218c0b9024876",
+    "data/evaluation/meetings-c6-calibration-v1/raw/c6-cal-doc-06.md": "60c1f41802550dd549078b524f209fbc8c9683af7649f30b589a2fdefe931d3f",
+    "data/evaluation/meetings-c6-calibration-source-fingerprints-v1.json": "d72c1c7c8c668ef76d956e91e3b7b7650dc18af25da8e3f1208e0a46e316aab1"
+  },
+  "payload_policy": "Existing whole immutable chunks and coordinates only; no token measurement, source edits, model feedback or post-token selection. Abstention missing facts checked against all whole documents in the family.",
+  "boundary_evidence_policy": "A repeated truncated template clause is not relied on alone: its alternative includes the complete ordinary-request block. Other cited anchors include the complete relevant sentence; extra boundary fragments were not promoted to sufficient evidence.",
+  "tooling_observations": [
+    {
+      "kind": "premature_receipt_hash_lookup",
+      "result": "not_found_while_preauthorization_process_running",
+      "resolution": "Read and hashed the successfully completed original receipt; did not rerun proof."
+    }
+  ],
+  "artifacts": {
+    "draft.json": "aa1957e1086be116cb633b8224ddec8effa91220952be52d5570c5aca4116f21",
+    "oracle-draft.json": "1649e85163a9f368c4f7c8878f31e10ea68b2513106841a0434e2c6972b4f42a",
+    "context-selection.json": "a975274360473f10d3575416be00bd6ccabe505f0bd56a9f22681bde79bf957b"
+  },
+  "next_gate": "Independent item prereview and conditional freeze, then parent commit before any official offline preparation."
+}

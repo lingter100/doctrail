@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "source_authoring_receipt",
+  "authored_at_utc": "2026-10-14T07:21:48.782220+00:00",
+  "author_role": "/root/c2_calibration_source",
+  "adoption_author_role": "/root/c2_calibration_source",
+  "author_status": "AI-authored source-only handoff; separate source prereview pending at author receipt",
+  "setting_evidence": {
+    "parent_report": "Existing gpt-6-astra xhigh role reused.",
+    "new_model_setting_change_claimed": false,
+    "new_spawn_or_setting_tool_acceptance_in_this_task": false
+  },
+  "authorization": {
+    "parent_confirmed_toolchain_commit": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+    "parent_reported_ci": {
+      "push_run": "38526167405",
+      "pr_run": "38526173249",
+      "required_jobs_each": 3,
+      "status": "success"
+    },
+    "remote_ci_independently_queried_by_author": false,
+    "scope": "Fresh calibration source adoption/authorship and whole-corpus processing/parity only; no questions or source-freeze."
+  },
+  "owned_files_without_this_receipt": {
+    "data/evaluation/meetings-c3-calibration-v1/.gitattributes": {
+      "sha256": "5a04a0d4a523a6b2fe45228230e46518e165e8fe078cb072668f49b366339178",
+      "bytes": 106
+    },
+    "data/evaluation/meetings-c3-calibration-v1/ATTRIBUTION.md": {
+      "sha256": "47db1f3cd2d058c3087ca8803a038d07a5dfbed2a6ff8fdf0638029fb6f30200",
+      "bytes": 1649
+    },
+    "data/evaluation/meetings-c3-calibration-v1/licenses/FastAPI-LICENSE": {
+      "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e",
+      "bytes": 1086
+    },
+    "data/evaluation/meetings-c3-calibration-v1/public-fetch-receipt.json": {
+      "sha256": "e3f9e3d921d8105a6ddb1df01813d1ade1c359d82b5463b6eadc1cb13d3bc559",
+      "bytes": 2779
+    },
+    "data/evaluation/meetings-c3-calibration-v1/source-manifest.json": {
+      "sha256": "b5535abe6c1ae844dbeacf29970e26baf717284c8aa00b24575afdc5ee61a147",
+      "bytes": 18830
+    },
+    "data/evaluation/meetings-c3-calibration-v1/inventory.json": {
+      "sha256": "544a6bf6a31e49f94e05c1828d2113d8e1bdd526c2646bfe29cac3cc9e516d0e",
+      "bytes": 60185
+    },
+    "data/evaluation/meetings-c3-calibration-v1/processing-receipt.json": {
+      "sha256": "e2c15dd5ef031ddbaf88da1f765b3a0ebcf56f28b57c46134eb85a2fd60302b8",
+      "bytes": 3989
+    },
+    "data/evaluation/meetings-c3-calibration-v1/java-parity.json": {
+      "sha256": "63740f39a18b9af5fa0b05dc08ff9229097715c4a3823a542b3f0e0a466b04c5",
+      "bytes": 1982
+    },
+    "data/evaluation/meetings-c3-calibration-v1/source-contract-check-receipt.json": {
+      "sha256": "a732529f83c8b05f8f8d4e3939ee3d082897b1bb2e844ff5829e4d032cdbbf8a",
+      "bytes": 2292
+    },
+    "data/evaluation/meetings-c3-calibration-v1/sources/public/fastapi/docs/en/docs/tutorial/background-tasks.md": {
+      "sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+      "bytes": 4786
+    },
+    "data/evaluation/meetings-c3-calibration-v1/sources/public/fastapi/docs/en/docs/advanced/events.md": {
+      "sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+      "bytes": 7985
+    },
+    "data/evaluation/meetings-c3-calibration-v1/sources/synthetic/library-relocation-meeting.md": {
+      "sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+      "bytes": 3279
+    },
+    "data/evaluation/meetings-c3-calibration-v1/sources/synthetic/library-relocation-handover.md": {
+      "sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+      "bytes": 3159
+    },
+    "docs/MEETINGS-C3-CALIBRATION-SOURCES.md": {
+      "sha256": "c16b548ed8060871082197012084daaa3dd07dcacfae5b48b0c6dbe6d77c2806",
+      "bytes": 9302
+    }
+  },
+  "source_rows": [
+    {
+      "source_id": "C3-F01-S01",
+      "document_id": "c3-cal-fastapi-background-tasks",
+      "family_id": "C3-F01",
+      "raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/public/fastapi/docs/en/docs/tutorial/background-tasks.md",
+      "raw_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+      "raw_size_bytes": 4786,
+      "processed_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+      "processed_codepoints": 4786,
+      "chunks": 6
+    },
+    {
+      "source_id": "C3-F01-S02",
+      "document_id": "c3-cal-fastapi-lifespan-events",
+      "family_id": "C3-F01",
+      "raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/public/fastapi/docs/en/docs/advanced/events.md",
+      "raw_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+      "raw_size_bytes": 7985,
+      "processed_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+      "processed_codepoints": 7970,
+      "chunks": 10
+    },
+    {
+      "source_id": "C3-F02-S01",
+      "document_id": "c3-cal-library-relocation-meeting",
+      "family_id": "C3-F02",
+      "raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/synthetic/library-relocation-meeting.md",
+      "raw_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+      "raw_size_bytes": 3279,
+      "processed_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+      "processed_codepoints": 1414,
+      "chunks": 2
+    },
+    {
+      "source_id": "C3-F02-S02",
+      "document_id": "c3-cal-library-relocation-handover",
+      "family_id": "C3-F02",
+      "raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/synthetic/library-relocation-handover.md",
+      "raw_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+      "raw_size_bytes": 3159,
+      "processed_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+      "processed_codepoints": 1392,
+      "chunks": 2
+    }
+  ],
+  "checks": {
+    "pinned_public_blob_and_size": "PASS for both complete registered FastAPI sources.",
+    "pinned_license_blob_size_sha256": "PASS; same exact bytes as registered FastAPI license.",
+    "per_file_and_ancestor_rights": "Complete bodies read; no separate rights notices or separately attributed external code found. Root and all source ancestors checked in complete pinned tree; only root LICENSE found.",
+    "external_include_and_link_policy": "Every marker/link remains literal; no included example or linked documentation body fetched or reconstructed.",
+    "author_coherence_self_check": {
+      "completed": true,
+      "independent": false,
+      "scope": "Synthetic people/roles, dates, approved scope, staff tasks, local adjustment, per-area checks, deferred sign replacement and ongoing trial status agree across the two new documents."
+    },
+    "whole_source_processing": {
+      "mode": "adopted-all",
+      "documents": 4,
+      "chunks": 20,
+      "excluded_sources": 0,
+      "normalization_identity_all_sources": true
+    },
+    "actual_java_parity": {
+      "java_version": "21.0.12.1",
+      "test": "io.doctrail.MeetingSourceParityTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "documents": 4,
+      "chunks": 20,
+      "receipt": "data/evaluation/meetings-c3-calibration-v1/java-parity.json",
+      "receipt_sha256": "63740f39a18b9af5fa0b05dc08ff9229097715c4a3823a542b3f0e0a466b04c5",
+      "command_log_local": ".local/c3-calibration-source-adoption-v1/java-parity-command.log"
+    },
+    "frozen_c3_source_contract": {
+      "passed": true,
+      "receipt": "data/evaluation/meetings-c3-calibration-v1/source-contract-check-receipt.json",
+      "scope": "Source-only validate_inventory and validate_processing_receipts calls; not the full preparation/tokenizer entrypoint."
+    },
+    "artifact_copy_identity": [
+      {
+        "generated_path": ".local/meetings-c3-calibration-source-inventory-v1/inventory.json",
+        "preserved_path": "data/evaluation/meetings-c3-calibration-v1/inventory.json",
+        "sha256": "544a6bf6a31e49f94e05c1828d2113d8e1bdd526c2646bfe29cac3cc9e516d0e",
+        "size_bytes": 60185,
+        "byte_identical": true,
+        "cr_count": 0,
+        "lf_count": 420
+      },
+      {
+        "generated_path": ".local/meetings-c3-calibration-source-inventory-v1/receipt.json",
+        "preserved_path": "data/evaluation/meetings-c3-calibration-v1/processing-receipt.json",
+        "sha256": "e2c15dd5ef031ddbaf88da1f765b3a0ebcf56f28b57c46134eb85a2fd60302b8",
+        "size_bytes": 3989,
+        "byte_identical": true,
+        "cr_count": 0,
+        "lf_count": 94
+      },
+      {
+        "generated_path": ".local/meetings-c3-calibration-source-inventory-v1/java-parity.json",
+        "preserved_path": "data/evaluation/meetings-c3-calibration-v1/java-parity.json",
+        "sha256": "63740f39a18b9af5fa0b05dc08ff9229097715c4a3823a542b3f0e0a466b04c5",
+        "size_bytes": 1982,
+        "byte_identical": true,
+        "cr_count": 40,
+        "lf_count": 40
+      }
+    ],
+    "frozen_bindings_verified_before_and_after": 66,
+    "frozen_files_modified": 0
+  },
+  "counts": {
+    "families": 2,
+    "public_documents": 2,
+    "new_synthetic_documents": 2,
+    "whole_inventory_chunks": 20,
+    "questions": 0,
+    "oracles": 0,
+    "selected_contexts": 0,
+    "official_tokenizer_runs": 0,
+    "service_model_calls": 0,
+    "native_model_calls": 0,
+    "paid_usage": 0,
+    "human_authorship": 0,
+    "human_reviews": 0,
+    "user_reviews": 0,
+    "completed_independent_source_prereviews_recorded_here": 0,
+    "public_http_downloads": 4,
+    "official_web_pages_opened_for_rights_review": 3,
+    "linked_snippet_or_document_bodies_fetched": 0
+  },
+  "processing_receipt_scope": "Original helper synthetic_bodies_authored=0 and java_parity_verified=false remain unchanged because the helper itself authors no bodies and runs no Java. This receipt separately records author-created bodies=2 and the later actual Java check.",
+  "initial_local_error_preserved": {
+    "stage": "temporary manifest builder before manifest creation",
+    "error_type": "ModuleNotFoundError",
+    "message": "No module named 'scripts'",
+    "effect": "No manifest/inventory created by the failed attempt.",
+    "correction": "Set the temporary script import path to repository root. No dependency sync or frozen helper edit.",
+    "subsequent_result": "Manifest builder, original source helper, Java parity and source-only contract check each succeeded."
+  },
+  "exposure": {
+    "role": "/root/c2_calibration_source",
+    "prior_role": "C2 calibration source/question author; closed pools were not reopened or reused for this task.",
+    "current_reads": [
+      "C3 plan including its embedded closed-C2 diagnostic examples",
+      "C3 data registration and family metadata",
+      "Frozen generic source/preparation/parity contracts",
+      "These new calibration sources"
+    ],
+    "limitations": "Not candidate-blind: plan/policy description and prior calibration authorship are known. No current candidate adapter/prompt implementation or generated candidate output was inspected for source design; no validation body/oracle was read.",
+    "excluded_roles": [
+      "independent_final_output_scorer",
+      "validation_author"
+    ]
+  },
+  "independence": {
+    "source_author_and_self_checker_same_role": true,
+    "human_review_count": 0,
+    "independent_source_prereview": "Pending at author receipt; separate reviewer owns its own later result.",
+    "author_excluded_from_independent_final_output_scoring": true,
+    "author_excluded_from_validation_authorship": true,
+    "not_claimed": [
+      "Candidate-blind source design",
+      "Random sampling",
+      "Human approval",
+      "Measured service answer quality"
+    ]
+  },
+  "limits": [
+    "Small purposively registered corpus; public pretraining contamination remains possible.",
+    "Public documents include unresolved example markers; linked target facts are unavailable.",
+    "Fictional documents reflect a single AI author and have no observed operational outcomes.",
+    "No question/oracle suitability review, official input-budget check, inference or product-readiness result exists.",
+    "Separate source prereview and parent source-freeze commit are required before new question authoring."
+  ],
+  "handoff": {
+    "author_owned_files_released_on_completion": true,
+    "source_freeze_created_by_author": false,
+    "source_prereview_files_authored_or_modified": false,
+    "global_status_decisions_contributions_modified": false,
+    "git_operations": 0
+  }
+}

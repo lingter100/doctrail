@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "status": "required_ci_passed",
+  "commit": "8d909e0d4ca38bc45dd181e82cbcc9e2da87f361",
+  "branch": "feat/meeting-intelligence",
+  "pull_request": 14,
+  "events": [
+    {
+      "event": "push",
+      "run_id": 41208835118,
+      "watch_session": 37665,
+      "terminal_chunk": "d42103",
+      "python_seconds": 237.72,
+      "watch_exit_code": 0,
+      "python_passed": 6164,
+      "python_skipped": 21,
+      "python_warnings": 2,
+      "browser_passed": 162,
+      "browser_failed": 0,
+      "browser_infrastructure_failures": 0,
+      "browser_startup_failures": 0,
+      "browser_missing_reports": 0,
+      "browser_missing_runs": 0,
+      "browser_exit": 0,
+      "jobs": [
+        {
+          "id": 124559371267,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124559371429,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124559371464,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "event": "pull_request",
+      "run_id": 41208840503,
+      "watch_session": 33034,
+      "terminal_chunk": "67fc48",
+      "python_seconds": 238.99,
+      "watch_exit_code": 0,
+      "python_passed": 6164,
+      "python_skipped": 21,
+      "python_warnings": 2,
+      "browser_passed": 162,
+      "browser_failed": 0,
+      "browser_infrastructure_failures": 0,
+      "browser_startup_failures": 0,
+      "browser_missing_reports": 0,
+      "browser_missing_runs": 0,
+      "browser_exit": 0,
+      "jobs": [
+        {
+          "id": 124559386769,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124559386921,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124559387031,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "java_http_compatibility_gate": "passed",
+  "synthetic_meeting_edit_restore_gate": "passed",
+  "web_build_gate": "passed",
+  "frozen_evidence_provenance_gates": "passed",
+  "scope": "Exact published agenda and scope-reference commit only. New reasoning-service adapter, launcher, verifier and Java timeout changes are not covered. Synthetic checks/CI do not establish real model quality or human acceptance.",
+  "actual_model_generations_in_ci": 0,
+  "human_reviews": 0,
+  "service_adopted": false,
+  "public_service_deployed": false
+}

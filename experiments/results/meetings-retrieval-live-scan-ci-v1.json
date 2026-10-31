@@ -1,0 +1,91 @@
+{
+  "head": "e3b0eb32045361c56c22c24b30204850c633f436",
+  "status": "CLOSED_ALL_REQUIRED_JOBS_PASSED",
+  "runs": [
+    {
+      "run_id": 41184694917,
+      "event": "push",
+      "jobs": [
+        {
+          "id": 124489107393,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124489107501,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124489107595,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "watch": {
+        "session": 23422,
+        "exit": 0,
+        "chunk": "a4af6e"
+      },
+      "python": {
+        "passed": 5770,
+        "failed": 0,
+        "skipped": 21,
+        "seconds": 139.14
+      },
+      "browser": {
+        "passed": 158,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    },
+    {
+      "run_id": 41184698869,
+      "event": "pull_request",
+      "jobs": [
+        {
+          "id": 124489120596,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124489120728,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124489120770,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "watch": {
+        "session": 29035,
+        "exit": 0,
+        "chunk": "110d0f"
+      },
+      "python": {
+        "passed": 5770,
+        "failed": 0,
+        "skipped": 21,
+        "seconds": 212.48
+      },
+      "browser": {
+        "passed": 158,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    }
+  ],
+  "limitations": [
+    "Synthetic and functional regression, not actual native build or semantic model acceptance."
+  ]
+}

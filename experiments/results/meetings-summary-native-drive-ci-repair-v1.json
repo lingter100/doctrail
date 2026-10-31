@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-31",
+  "status": "implemented_fake_tested_independently_reviewed",
+  "problem": "Native Windows alias PATH serialized and parsed with Linux host delimiter split R: into relative entries, producing nine CI failures.",
+  "change": "Keep host separator for canonical input, use semicolon for Windows alias output and historical validation, and translate fixture back to canonical host paths.",
+  "checks": {
+    "before": "POSIX model: 1 failed; Windows model: 1 passed",
+    "after": "27 passed, 56 deselected in 7.86s",
+    "ruff": "passed",
+    "independent_ai_review": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "blockers": 0,
+      "advisories": 0
+    },
+    "actual_linux_ci": "pending",
+    "actual_native_mapping": false
+  },
+  "source": {
+    "driver": "5e07b053958b6d259a76602ed9fb6c66d509e1cec7b2454a8023655697789c1c",
+    "test": "75a771996cb45a043ddade0b54a9b099f8ae9d004d40bdbd669c9902b7eb0f82"
+  },
+  "implementation_result_sha256": "27b28046d3ba6f4e83b8050dbe44ca1b3ed10658a50f878c7a32379f6ff26c26",
+  "human_reviews": 0
+}

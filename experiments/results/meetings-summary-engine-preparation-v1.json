@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "status": "preparation_tools_implemented_and_statically_reviewed",
+  "scope": "Model-free local grammar-engine acquisition, build and validation tooling; actual toolchain/engine execution has not occurred.",
+  "source_files": [
+    {
+      "file": "tools/summary_grammar/candidate.gbnf",
+      "sha256": "e744497da34d0af79e2cc0419de0241d093136ec84b62a51bad905b982f8e290",
+      "size_bytes": 910051
+    },
+    {
+      "file": "tools/summary_grammar/CMakeLists.txt",
+      "sha256": "4977e0e97d2ee0bdcc074806dbe496f790e77524eb9a7dbfe78b69479d32c9ad",
+      "size_bytes": 2488
+    },
+    {
+      "file": "tools/summary_grammar/corpus.json",
+      "sha256": "722fd6f6ac6ac5c2a39c7ab23efcdc32a79dc8776df638b0a99c28a8c43c65cb",
+      "size_bytes": 131264
+    },
+    {
+      "file": "tools/summary_grammar/expected.json",
+      "sha256": "9351c131aa3c9c00b06ebf2c7cd3fd1be7aacc9561aa04af0defe5c0688ddc9e",
+      "size_bytes": 24058
+    },
+    {
+      "file": "tools/summary_grammar/harness.cpp",
+      "sha256": "f4b47af30e681692a2a84da5cc84f7fe435ac7b33d4424f5f93ba9b69f301b26",
+      "size_bytes": 5900
+    },
+    {
+      "file": "tools/summary_grammar/LICENSE",
+      "sha256": "3b92f2236fdb59bc6129551d4d6228f2dc8c942f1bc058648b10a0369daee975",
+      "size_bytes": 1067
+    },
+    {
+      "file": "tools/summary_grammar/pins.json",
+      "sha256": "4de0a7e547ccdd10a3ac72b6b86d54eea8e63f86dc76e6701d05c4613ea6d6d2",
+      "size_bytes": 3670
+    },
+    {
+      "file": "tools/summary_grammar/prefix-witnesses.json",
+      "sha256": "69ab94fc23b3c05097dedf04be85187e1bcb2fbb15eac485ed1c4f9e85599ae3",
+      "size_bytes": 2584
+    },
+    {
+      "file": "tools/summary_grammar/README.md",
+      "sha256": "144bb865edef5e4ec5ed301eb9c9a707118997177a34883abc67765ae6d5e87e",
+      "size_bytes": 6081
+    },
+    {
+      "file": "tools/summary_grammar/runtime.py",
+      "sha256": "89290635222aebbcbb2a39b839188ab5a712cdac3047fa5df0f0b826abcd6848",
+      "size_bytes": 15118
+    },
+    {
+      "file": "tools/summary_grammar/THIRD_PARTY.md",
+      "sha256": "618cff2d062fbb612c3fae04ca3d7732a41ad562164855c82eede623fad1f1f8",
+      "size_bytes": 1558
+    },
+    {
+      "file": "tools/summary_grammar/witness_pin.py",
+      "sha256": "80ed5cd02dd7ebdda417a3a7ff7cc44cf22e204860f51971c56bca0078c97c6e",
+      "size_bytes": 81
+    },
+    {
+      "file": "scripts/prepare_summary_grammar_engine.py",
+      "sha256": "dcebf7f1ea68c4f9842f015b274f0c8bb8ad7603e7c726c9f3868e43048c5bba",
+      "size_bytes": 23978
+    },
+    {
+      "file": "scripts/verify_summary_grammar_engine.py",
+      "sha256": "f219b3b40fa1c139c6a6f69ca20c1ef877f08b63d6f700703dcc694ea4f26379",
+      "size_bytes": 7307
+    },
+    {
+      "file": "tests/test_summary_grammar_engine.py",
+      "sha256": "eea54ca7e5c3048f55ece0829802d6d422ad4029cef66ad4b88530290454139e",
+      "size_bytes": 32796
+    }
+  ],
+  "implementation": {
+    "original_mocked_cases": 73,
+    "additional_cases": 29,
+    "passed": 102,
+    "seconds": 8.36,
+    "ruff": "passed",
+    "network_process_resource_cases": "mocked; no real helper child",
+    "original_failures_preserved": true
+  },
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "resolved": [
+      "SGE-R1 exact compiler wrapper/driver binding",
+      "SGE-R2 fixed CMake optional linker query audit",
+      "SGE-R3 owned temporary directories"
+    ],
+    "receipt_sha256": "ad44f2b045153d8aef015696ae14ce412adc707b6c6e0342094d931ada33be17",
+    "parent_acceptance_sha256": "be1ce6f86e9de40b61924b2f3a8c1281a569b53bb7571f68ddc2c1532bf87c80"
+  },
+  "fixed_inputs": {
+    "grammar_bytes": 910051,
+    "grammar_rules": 1452,
+    "cases": 106,
+    "carrier_rejections_expected": 1,
+    "engine_cases": 105,
+    "prefix_witnesses": 10
+  },
+  "actual_execution_counts": {
+    "actual_helper_children": 0,
+    "artifact_downloads": 0,
+    "compiler_configure_build": 0,
+    "native_engine": 0,
+    "models_tokenizers": 0,
+    "Java": 0,
+    "live_RAM_process_sampling": 0,
+    "Git_mutations": 0,
+    "global_temp_settings_or_shared_temp_scan_delete": 0
+  },
+  "limitations": [
+    "All process/resource/network cases mocked. No actual archive layout, version output, configure, compile, link or native engine was validated.",
+    "Acquisition manifest including concrete driver links/module hash and Ninja actual digest still requires separate review before any executable use.",
+    "Optional probe records pre/post executable absence and exact source trace only; it is not a measured successful or failed ld invocation. Sampled process limits cannot guarantee instantaneous absence/OS hard bounds.",
+    "Source hashes, plan budgets, grammar/corpus/expected/witness, frozen baseline and consumed v7 remain unchanged. Other owners' Java/React and parent docs/HEAD are outside this ownership."
+  ],
+  "human_review": false,
+  "source_plan": "docs/MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md",
+  "usage": "tools/summary_grammar/README.md",
+  "publication_normalization": {
+    "file": "tools/summary_grammar/pins.json",
+    "before_sha256": "edc98d84c0e0551e84a55761bb7961398b0a45fed1a93b9ec14cc3828fde4365",
+    "after_sha256": "4de0a7e547ccdd10a3ac72b6b86d54eea8e63f86dc76e6701d05c4613ea6d6d2",
+    "change": "CRLF to LF only; parsed JSON equal; prior byte snapshot preserved",
+    "reason": "Git index normalizes line endings; source bytes must match published bytes",
+    "tests_rerun": 0
+  }
+}

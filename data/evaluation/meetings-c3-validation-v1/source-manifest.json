@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "status": "source_adopted_by_author_pending_independent_review_and_java_parity",
+  "created_at": "2026-10-14T07:20:04.049623+00:00",
+  "adoption_author_role": "/root/c2_validation_source_b",
+  "family_registry": {
+    "path": "data/evaluation/meetings-c3-family-registry-v1.json",
+    "sha256": "597db7e4d1792fc6bdc96af21cfc86f767a272b4156dc7607bbd71a077a36682"
+  },
+  "active_comparison_source_freeze": {
+    "path": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+    "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3"
+  },
+  "source_authoring_after_toolchain_commit": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+  "source_authoring_ci_evidence": "Parent reported push38526167405 and PR38526173249 each required backend/java-service/web success before task delegation.",
+  "processing_protocol": {
+    "id": "meetings-c3-validation-whole-plaintext-v2",
+    "source_processing_version": 2,
+    "existing_service_reference_sha256": {
+      "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+      "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+      "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+      "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56"
+    },
+    "normalization": "Decode UTF-8-sig with existing extract(md); CRLF/CR to LF; Unicode NFC. Preserve all other source text, including complete notices and literal markup.",
+    "chunk_algorithm": {
+      "max_codepoints": 1000,
+      "boundary_search_min_codepoints": 500,
+      "overlap_codepoints": 150,
+      "boundary_characters": [
+        "LF",
+        "ASCII SPACE"
+      ]
+    },
+    "chunk_id_format": "{document_id}-r1-c{ordinal:04d}",
+    "whole_source_processing": true,
+    "external_include_expansion": false,
+    "markdown_rendering": false,
+    "source_excerpting": false,
+    "selected_contexts": 0
+  },
+  "families": [
+    {
+      "family_id": "C3-F03",
+      "split": "validation",
+      "origin": "public",
+      "source_language": "en",
+      "topic": "MkDocs documentation authoring and publication procedures",
+      "source_suitability": {
+        "verdict": "ADOPTED",
+        "scope": "Whole-source author suitability assessment only; separate source prereview and actual Java parity pending.",
+        "whole_bodies_read": true,
+        "source_author_role": "/root/c2_validation_source_b",
+        "no_question_or_context_authorship": true,
+        "limitations": [
+          "Pinned general product documentation, not evidence of an actual organization or completed publication.",
+          "External links and illustrative paths remain literal text; linked pages, themes, images and tools are not evidence in this corpus.",
+          "The whole registered Markdown files are retained, with no rendering, include expansion or source excerpts."
+        ]
+      },
+      "sources": [
+        {
+          "source_id": "C3-F03-S01",
+          "document_id": "c3-f03-doc-01",
+          "revision": 1,
+          "registration_ordinal": 0,
+          "origin": "public",
+          "path": "docs/user-guide/writing-your-docs.md",
+          "title": "Writing your docs",
+          "meeting_date": null,
+          "page": null,
+          "adoption_author_role": "/root/c2_validation_source_b",
+          "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+          "local_raw_snapshot": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-01.md",
+          "ingestion_kind": "md",
+          "raw_encoding": "UTF-8",
+          "raw_sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+          "raw_size_bytes": 19342,
+          "git_blob_sha1": "8327b10782d35206deb902ffd0f2be9848991e78",
+          "processed_sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+          "processed_codepoints": 19338,
+          "bom": false,
+          "lf_count": 540,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "immutable_url": "https://github.com/mkdocs/mkdocs/blob/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/writing-your-docs.md",
+          "raw_url": "https://raw.githubusercontent.com/mkdocs/mkdocs/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/writing-your-docs.md",
+          "license_id": "BSD-2-Clause",
+          "rights_audit": {
+            "verdict": "ADOPTED_WITH_BSD_2_CLAUSE_NOTICE_PRESERVATION",
+            "whole_file_read": true,
+            "registered_size_and_blob_match": true,
+            "separate_file_or_ancestor_license_notice_found": false,
+            "external_include_directives_executed": false,
+            "external_assets_fetched": false,
+            "rendering_or_commands_executed": false,
+            "retained_root_license": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-LICENSE.txt",
+            "retained_documentation_license": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-documentation-license.md"
+          }
+        },
+        {
+          "source_id": "C3-F03-S02",
+          "document_id": "c3-f03-doc-02",
+          "revision": 1,
+          "registration_ordinal": 1,
+          "origin": "public",
+          "path": "docs/user-guide/deploying-your-docs.md",
+          "title": "Deploying your docs",
+          "meeting_date": null,
+          "page": null,
+          "adoption_author_role": "/root/c2_validation_source_b",
+          "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+          "local_raw_snapshot": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-02.md",
+          "ingestion_kind": "md",
+          "raw_encoding": "UTF-8",
+          "raw_sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+          "raw_size_bytes": 9434,
+          "git_blob_sha1": "8224cb9ae007ba352435dc319f5a62579552a6f0",
+          "processed_sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+          "processed_codepoints": 9434,
+          "bom": false,
+          "lf_count": 223,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "immutable_url": "https://github.com/mkdocs/mkdocs/blob/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/deploying-your-docs.md",
+          "raw_url": "https://raw.githubusercontent.com/mkdocs/mkdocs/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/deploying-your-docs.md",
+          "license_id": "BSD-2-Clause",
+          "rights_audit": {
+            "verdict": "ADOPTED_WITH_BSD_2_CLAUSE_NOTICE_PRESERVATION",
+            "whole_file_read": true,
+            "registered_size_and_blob_match": true,
+            "separate_file_or_ancestor_license_notice_found": false,
+            "external_include_directives_executed": false,
+            "external_assets_fetched": false,
+            "rendering_or_commands_executed": false,
+            "retained_root_license": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-LICENSE.txt",
+            "retained_documentation_license": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-documentation-license.md"
+          }
+        }
+      ],
+      "repository": "mkdocs/mkdocs",
+      "immutable_commit": "2862536793b3c67d9d83c33e0dd6d50a791928f8",
+      "git_tree_sha1": "cb7bc316a04ef9835d07b7497517eed81914910a",
+      "license": {
+        "path": "LICENSE",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "7bb507395f28850a9b99d7f50c0deb356111960a",
+        "size": 1292,
+        "url": "https://api.github.com/repos/mkdocs/mkdocs/git/blobs/7bb507395f28850a9b99d7f50c0deb356111960a",
+        "sha256": "26041bd625fc39411dc4b32748216236931c904adb90c2b3e0ba697090a5d54e",
+        "pinned_license_checked": true,
+        "immutable_url": "https://github.com/mkdocs/mkdocs/blob/2862536793b3c67d9d83c33e0dd6d50a791928f8/LICENSE",
+        "preserved_file": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-LICENSE.txt",
+        "documentation_license_copy": {
+          "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-documentation-license.md",
+          "sha256": "9263c69ea49f938516831e56f7f62372d67004b1a74648a0b59b13aacf40a701",
+          "size_bytes": 1599
+        },
+        "applies_to_adopted_markdown": true,
+        "file_specific_conflicting_notices_found": false,
+        "notice_file_present_in_pinned_complete_tree": false,
+        "theme_assets_excluded": true
+      }
+    },
+    {
+      "family_id": "C3-F04",
+      "split": "validation",
+      "origin": "synthetic",
+      "source_language": "ko",
+      "topic": "Fictional regional film festival subtitle-file verification",
+      "source_suitability": {
+        "verdict": "ADOPTED",
+        "scope": "Whole-source author suitability assessment only; separate source prereview and actual Java parity pending.",
+        "whole_bodies_read": true,
+        "source_author_role": "/root/c2_validation_source_b",
+        "no_question_or_context_authorship": true,
+        "limitations": [
+          "Explicitly fictional AI-authored operational records, not real film festival data.",
+          "Only the recorded scope and dates establish events; later festival outcomes and other subtitle tracks are not implied."
+        ]
+      },
+      "sources": [
+        {
+          "source_id": "C3-F04-S01",
+          "document_id": "c3-f04-doc-01",
+          "revision": 1,
+          "registration_ordinal": 2,
+          "origin": "synthetic",
+          "path": "sources/c3-f04-doc-01.md",
+          "title": "작은개울 영화제 자막 대조 준비회의",
+          "meeting_date": "2032-05-16",
+          "page": null,
+          "adoption_author_role": "/root/c2_validation_source_b",
+          "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+          "local_raw_snapshot": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-01.md",
+          "ingestion_kind": "md",
+          "raw_encoding": "UTF-8",
+          "raw_sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+          "raw_size_bytes": 3187,
+          "git_blob_sha1": null,
+          "processed_sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+          "processed_codepoints": 1438,
+          "bom": false,
+          "lf_count": 31,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "synthetic_provenance": {
+            "ai_authored": true,
+            "fictional": true,
+            "author_role": "/root/c2_validation_source_b",
+            "notice": "이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.",
+            "created_at": "2026-10-14T07:20:04.049623+00:00",
+            "actual_tool_accepted_model_parent_verified": "gpt-6-astra",
+            "actual_tool_accepted_reasoning_effort_parent_verified": "xhigh",
+            "human_review_count": 0,
+            "newly_composed_for_registered_C3_family": true,
+            "prior_closed_source_content_reopened_or_reused": false,
+            "not_a_translation_paraphrase_or_renaming_of_prior_material": true
+          },
+          "rights_audit": {
+            "verdict": "NEW_AI_FICTION_NO_THIRD_PARTY_SOURCE_MATERIAL",
+            "external_quotes_or_licensed_media_included": false,
+            "notice_preserved": true
+          }
+        },
+        {
+          "source_id": "C3-F04-S02",
+          "document_id": "c3-f04-doc-02",
+          "revision": 1,
+          "registration_ordinal": 3,
+          "origin": "synthetic",
+          "path": "sources/c3-f04-doc-02.md",
+          "title": "작은개울 영화제 RG-06 시험상영 점검표",
+          "meeting_date": "2032-05-17",
+          "page": null,
+          "adoption_author_role": "/root/c2_validation_source_b",
+          "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+          "local_raw_snapshot": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-02.md",
+          "ingestion_kind": "md",
+          "raw_encoding": "UTF-8",
+          "raw_sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+          "raw_size_bytes": 3175,
+          "git_blob_sha1": null,
+          "processed_sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+          "processed_codepoints": 1507,
+          "bom": false,
+          "lf_count": 36,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "synthetic_provenance": {
+            "ai_authored": true,
+            "fictional": true,
+            "author_role": "/root/c2_validation_source_b",
+            "notice": "이 문서는 AI가 새로 작성한 가상 업무 자료입니다. 영화제, 작품, 인물과 모든 기록은 허구이며 실제 상영이나 고객 업무의 기록이 아닙니다.",
+            "created_at": "2026-10-14T07:20:04.049623+00:00",
+            "actual_tool_accepted_model_parent_verified": "gpt-6-astra",
+            "actual_tool_accepted_reasoning_effort_parent_verified": "xhigh",
+            "human_review_count": 0,
+            "newly_composed_for_registered_C3_family": true,
+            "prior_closed_source_content_reopened_or_reused": false,
+            "not_a_translation_paraphrase_or_renaming_of_prior_material": true
+          },
+          "rights_audit": {
+            "verdict": "NEW_AI_FICTION_NO_THIRD_PARTY_SOURCE_MATERIAL",
+            "external_quotes_or_licensed_media_included": false,
+            "notice_preserved": true
+          }
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "families": 2,
+    "public_documents": 2,
+    "synthetic_documents": 2,
+    "documents": 4,
+    "questions": 0,
+    "oracles": 0,
+    "selected_contexts": 0,
+    "official_tokenizer_runs": 0,
+    "model_calls": 0,
+    "native_calls": 0,
+    "human_reviews": 0
+  },
+  "isolation": "Parent/design/implementation may receive path/hash/count/legal-verdict/processing-verdict metadata only; bodies, full manifest, full inventory and semantic audit remain isolated."
+}

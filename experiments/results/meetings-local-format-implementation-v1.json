@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "status": "implemented_synthetic_verified_independent_review_complete_pending_exact_source_ci",
+  "scope": "Offline opt-in JSON grammar candidate; not service adoption or model quality",
+  "policy": {
+    "policy": "claims-json-gbnf-v1",
+    "summary_sha256": "0656e7930a7fd05ce6126bd8138787d824a8f81de2419187d72a952dcb07cb85",
+    "qa_sha256": "ed997a709d82c0b8444820ebf85026ee89e9276d41552a3621601378d566ecaf",
+    "review_sha256": "9964289ac750f5be26b5e84dd78822d76bfb3f28b8103c5f5b6858e02295f118"
+  },
+  "registration_schema": 3,
+  "changes": [
+    "Summary generation uses the existing frozen GENERATION_GRAMMAR",
+    "QA generation uses a static integer evidence-ID grammar",
+    "Registration requires exact policy/grammar hashes and compact wire with the existing explicit resource policy",
+    "Report and terminal include additive response format metadata"
+  ],
+  "preserved": [
+    "Legacy schema1/2 and direct-adapter request defaults",
+    "Full source, questions, original evidence IDs/offsets and strict parsers",
+    "Model, prompts, compact wire, token/time/resource budgets",
+    "EOS requirement and mandatory summary review with shared deadline",
+    "Original v4 failures and frozen modules; no repair, fallback or retry"
+  ],
+  "verification": {
+    "existing_candidate_cases": 105,
+    "new_candidate_cases": 36,
+    "candidate_cases": 141,
+    "selected_frozen_guard_cases": 6,
+    "total_cases": 147,
+    "pytest_seconds": 5.13,
+    "pytest_wrapper_seconds": 7.0310000000172295,
+    "ruff": "passed",
+    "evidence_files_verified": 21,
+    "original_test_functions_retained": 37,
+    "first_failures_preserved": [
+      "Missing schema3 before implementation",
+      "Ruff unused variable before cleanup"
+    ]
+  },
+  "source_files": [
+    {
+      "file": "scripts/probe_meeting_local_candidate.py",
+      "size_bytes": 40940,
+      "sha256": "b873645c03c48027f4f582b056b228fdff1199516e2e0f0125df1caf4fa725bd"
+    },
+    {
+      "file": "tests/test_probe_meeting_local_candidate.py",
+      "size_bytes": 67659,
+      "sha256": "779ce7fc33f21c5b3cebac5fe582381a0547d0235f2a8887574f5a2427e32e29"
+    }
+  ],
+  "implementation_receipt_sha256": "f18209fb8463504339053942198cbb955f64f61c863b5d3c327711bc34aa4581",
+  "independent_review": {
+    "status": "complete",
+    "blockers": 0,
+    "advisories": 0,
+    "receipt_sha256": "64d19236bbc040d2108a14c833c24197c26d5746d895ac91781fb0b25aa44cf7",
+    "inputs_verified": 32,
+    "tests_rerun": false
+  },
+  "runtime": {
+    "native_starts": 0,
+    "GBNF_engine_compilation_or_execution": 0,
+    "tokenizer_calls": 0,
+    "completion_calls": 0,
+    "new_registration_created": false
+  },
+  "limitations": [
+    "Mock HTTP, grammar-string and parser tests do not prove real GBNF execution or semantic quality",
+    "Existing QA parser permits a lone surrogate; subsequent UTF-8 evidence serialization rejects it. The frozen parser is unchanged",
+    "Legacy requests/limits remain compatible; report/terminal bytes gain format metadata",
+    "Source CI and separately registered real execution remain necessary; user review and Phase1 are incomplete"
+  ],
+  "reproduce_command": ".venv/Scripts/python.exe -B -X utf8 -m pytest tests/test_probe_meeting_local_candidate.py tests/test_probe_meeting_summary_mode.py::test_resource_boundary_and_reused_pid_never_killed tests/test_probe_meeting_summary_mode.py::test_resources_fail_closed tests/test_probe_meeting_summary_mode.py::test_resource_error_aborts_remaining_completions tests/test_probe_meeting_summary_mode.py::test_resource_sampler_has_new_721_bound_without_changing_old_sampler tests/test_probe_meeting_summary_mode.py::test_repair_resource_guard_binds_initial_launcher_creation_time -q"
+}

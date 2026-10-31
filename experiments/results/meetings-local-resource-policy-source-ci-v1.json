@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "source_head": "b5cae0d817510ba7b77eedf05ff2a146c038e624",
+  "runs": [
+    {
+      "run_id": 40286444715,
+      "event": "push",
+      "head_sha": "b5cae0d817510ba7b77eedf05ff2a146c038e624",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40286444715",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 40286450943,
+      "event": "pull_request",
+      "head_sha": "b5cae0d817510ba7b77eedf05ff2a146c038e624",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40286450943",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "watch_sessions": [
+    {
+      "session_id": 1775,
+      "exit_code": 0
+    },
+    {
+      "session_id": 89922,
+      "exit_code": 0
+    }
+  ],
+  "scope": "Exact source CI; not live resource enforcement or generation quality evidence"
+}

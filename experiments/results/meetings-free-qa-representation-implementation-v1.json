@@ -1,0 +1,64 @@
+{
+  "schema": "doctrail-qa-representation-implementation-v1",
+  "date": "2026-10-31",
+  "status": "SOURCE_IMPLEMENTED_REVIEWED_NOT_EXECUTED",
+  "fixed_open_development_cases": 2,
+  "fixed_source_units": 133,
+  "source_adequacy_review": "independent AI accepted both for representation diagnosis only",
+  "implementation_model": "gpt-6-astra high",
+  "review_model": "gpt-6-astra xhigh",
+  "source_sha256": "83be14c13f0f29bfa0fcb181dbdc2cab51359f682da2d89df72d54d31a63ccdb",
+  "tests_sha256": "3549bde28b1ad5969e358c02903c7350faa488151c4ea0af5a346b95a6cc886a",
+  "checks": {
+    "all_bound_expected_hashes_match": true,
+    "initial_fake_unique_passes": 29,
+    "initial_outcome": "22 passed,1 assertion failed,6 setup errors",
+    "affected_recheck": "7 passed,22 deselected",
+    "additional_old_subset_recheck": "5 passed,24 deselected",
+    "repair_pre": "1 expected regression failure,29 deselected,0.88s",
+    "repair_post": "6 passed,24 deselected,0.80s",
+    "cumulative_distinct_tests_across_runs": 30,
+    "single_final_whole_suite_claim": false,
+    "ruff": "PASS saved evidence",
+    "pure_input_count": 2,
+    "pure_binding_count": 77,
+    "pure_tokenizer_calls": 0,
+    "pure_model_loads": 0,
+    "pure_serialization_not_rerun_after_error_only_repair": true
+  },
+  "repair": {
+    "original_finding": "A guarded operation error could be replaced by guard-unwind failure.",
+    "change": "Capture first error inside the guard; retain distinct cleanup errors separately.",
+    "initial_failure_preserved": true,
+    "resolved": true
+  },
+  "review": {
+    "blocking_findings": 0,
+    "advisory_findings": 0
+  },
+  "planned_actual_scope": {
+    "baseline": "Ministral3-3B Q5_K_M, llama.cpp b11429",
+    "model_loads": 1,
+    "application_requests": 7,
+    "completion_requests": 0,
+    "startup_seconds": 120,
+    "active_seconds": 60,
+    "cleanup_seconds": 5,
+    "whole_lifecycle_seconds": 185,
+    "metadata_admission_before_lifecycle": true,
+    "external_fresh_process_gate_required": true
+  },
+  "actual": {
+    "model_loads": 0,
+    "tokenizer_calls": 0,
+    "generations": 0
+  },
+  "limitations": [
+    "Current fixed inputs/design/review live in the local evidence store; this is not yet a standalone public input reproduction package.",
+    "Token counts of adequate references do not establish generated answer quality.",
+    "Gold-context retrieval bypass; no retrieval evaluation."
+  ],
+  "human_reviews": 0,
+  "service_adoption": false,
+  "public_deployment": false
+}

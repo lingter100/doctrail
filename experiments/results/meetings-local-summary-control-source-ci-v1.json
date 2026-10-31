@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-27T01:42:58.811898+00:00",
+  "head": "07015e87ba9426139045fd20baf5d79acbd6cace",
+  "scope": "Exact summary-control source CI; not actual model execution or semantic acceptance",
+  "all_required_checks_passed": true,
+  "runs": [
+    {
+      "id": 40432912443,
+      "event": "push",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 121954675254,
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "id": 121954675462,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 121954675568,
+          "name": "backend",
+          "conclusion": "success"
+        }
+      ],
+      "watch_session": 68098,
+      "watch_exit": 0,
+      "watch_closed": true
+    },
+    {
+      "id": 40432916807,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 121954690499,
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "id": 121954690813,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 121954690833,
+          "name": "web",
+          "conclusion": "success"
+        }
+      ],
+      "watch_session": 39993,
+      "watch_exit": 0,
+      "watch_closed": true
+    }
+  ],
+  "reruns": 0,
+  "native_model_calls": 0,
+  "human_review": 0
+}

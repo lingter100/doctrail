@@ -1,0 +1,539 @@
+{
+  "schema_version": 1,
+  "kind": "metadata_only_historical_identity_index",
+  "created_at_utc": "2026-10-19T07:52:21.824064+00:00",
+  "authored_after_toolchain_ci_receipt_commit": "ddc5080dca9b3a06ec09f3e5970789e34b6ef4f0",
+  "toolchain_head": "d084f86d4e4f830eb51cd3dd73f6840a2ad54795",
+  "fingerprint_method_for_newer_rows": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+  "input_metadata_files": {
+    "data/evaluation/meetings-c4-prior-source-fingerprints-v1.json": "757a85b523303aa85255d38887f5d7ea5689907942b887317ad296cc669badf4",
+    "data/evaluation/meetings-c4-calibration-source-fingerprints-v1.json": "0f222307428d124ce268a78aec5bc3798d00f47807d54015095be508ae3baf80",
+    "data/evaluation/meetings-c4-validation-source-fingerprints-v1.json": "b8e6aa5faf7b4bea323eb9adc9ad1a38698312d7fd50729b1e342ca3b7fb94fc"
+  },
+  "inherited_input_metadata_files": {
+    "data/evaluation/m5b-family-registry-v1.json": "b2fb4f0749995a2aa7f87f30a5531e23fb5373f0b42b0b778e0bf7ea7674b4cc",
+    "data/evaluation/meetings-c1-calibration-family-registry-v1.json": "aacd0a4723160515c09fae355407face498a72d26479a5a5a62cc5375851961a",
+    "data/evaluation/meetings-c1-calibration-v1/sources-manifest.json": "4f6f0e6039437ba7926225472c806fc9189afaa6647ac44c8d1cafce243422ef",
+    "data/evaluation/meetings-c2-calibration-v1/source-manifest-full.json": "640bc52ca5725a45bf87b4d475ca6c25dae4f853565397b123d9bd8932103e4c",
+    "data/evaluation/meetings-c2-calibration-v1/source-manifest.json": "cf35a68534eba12602996b67423bcadbc3dff409d58bd724a48178f4d4b516a6",
+    "data/evaluation/meetings-c2-family-registry-v1.json": "0fe710907f10dfc407997970ed176c0a657aa6d1e24a0ca95f4da07f8dd9c76c",
+    "data/evaluation/meetings-c2-validation-v1/source-manifest-full.json": "48fd383b1503f071a3fb99801ec34d9de49681544c86b0a33e2e88f611a48938",
+    "data/evaluation/meetings-c2-validation-v1/source-manifest.json": "c4af4a50c530cfc692d0f1a2be1a2920d23e11477b7b9cf09a3504c6154eb49c",
+    "data/evaluation/meetings-c3-calibration-v1/source-manifest.json": "b5535abe6c1ae844dbeacf29970e26baf717284c8aa00b24575afdc5ee61a147",
+    "data/evaluation/meetings-c3-family-registry-v1.json": "597db7e4d1792fc6bdc96af21cfc86f767a272b4156dc7607bbd71a077a36682",
+    "data/evaluation/meetings-c3-validation-v1/source-manifest.json": "4af98dd1cfc8d026b84ff8d497ceac2ef53ba025214e1bbf49bddc370feb16a0",
+    "data/evaluation/meetings-qwen35-validation-v1/sources-manifest.json": "ae55f5549f34c4c403cad0a53203cf720b079c149472c7a5782c72fd85afdeca"
+  },
+  "documents": [
+    {
+      "family_id": "C1-F01",
+      "raw_sha256": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+      "revision_identity": "54361685ea1af431bb2770926a9f6976db8d90f8",
+      "url": "https://github.com/python/peps/blob/193d435ad52b993d7ab2b133d543dd6b78fbcfbd/peps/pep-0013.rst"
+    },
+    {
+      "family_id": "C1-F01",
+      "raw_sha256": "e3a9cba0eb60610eac8d27a00d9ace467a2f8c4e213b3037d66d1b8d04a00290",
+      "revision_identity": "e90d7ff8787fdfd4ac60d4b749ff712b953723b9",
+      "url": "https://github.com/python/peps/blob/193d435ad52b993d7ab2b133d543dd6b78fbcfbd/peps/pep-0001.rst"
+    },
+    {
+      "family_id": "C1-F01"
+    },
+    {
+      "family_id": "C1-F02",
+      "raw_sha256": "3b6e592a1a26416c159b4ee481f2637cb56a6b258f6f830de984f051fe33e17c",
+      "revision_identity": "1d5831fcc26ed78279f554705e7b6557ff6c4372",
+      "url": "https://github.com/numpy/numpy/blob/90ddce7d8a788d61463acc40049cc570127430c6/doc/neps/nep-0051-scalar-representation.rst"
+    },
+    {
+      "family_id": "C1-F02",
+      "raw_sha256": "9068c2e6ff03105aef9b8347975c9b37abf6d333ecee0f05d100ddfcf67e3fa5",
+      "revision_identity": "974f6691d363fed86973463fba70191ab2eb3cd3",
+      "url": "https://github.com/numpy/numpy/blob/90ddce7d8a788d61463acc40049cc570127430c6/doc/neps/nep-0050-scalar-promotion.rst"
+    },
+    {
+      "family_id": "C1-F02"
+    },
+    {
+      "family_id": "C1-F03",
+      "raw_sha256": "2c36efe2d4d3138f2c5f371288c5453a527c6e477a2d09e07d9053c3f38b732e",
+      "revision_identity": "2c36efe2d4d3138f2c5f371288c5453a527c6e477a2d09e07d9053c3f38b732e"
+    },
+    {
+      "family_id": "C1-F03",
+      "raw_sha256": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+      "revision_identity": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf"
+    },
+    {
+      "family_id": "C1-F03",
+      "raw_sha256": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364",
+      "revision_identity": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364"
+    },
+    {
+      "family_id": "C1-F03"
+    },
+    {
+      "family_id": "C1-F04",
+      "raw_sha256": "63866f69156e5fdbca2d0484f15ed433b6671b907ac64531d3b0379df94059b9",
+      "revision_identity": "63866f69156e5fdbca2d0484f15ed433b6671b907ac64531d3b0379df94059b9"
+    },
+    {
+      "family_id": "C1-F04",
+      "raw_sha256": "6d6237ae185de8c25b622259ed29ea09a1a799007892169ef11d15ec64001642",
+      "revision_identity": "6d6237ae185de8c25b622259ed29ea09a1a799007892169ef11d15ec64001642"
+    },
+    {
+      "family_id": "C1-F04",
+      "raw_sha256": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+      "revision_identity": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126"
+    },
+    {
+      "family_id": "C1-F04"
+    },
+    {
+      "family_id": "C2-F01",
+      "raw_sha256": "5a55a6a7a8a83e1c4c1b73fefbf4d71ed7adca400fc3c558c9e342ff6c00042f",
+      "revision_identity": "f18f974f0859d8fe45267e50c571c1a46f121484",
+      "url": "https://github.com/open-telemetry/community/blob/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/guides/contributor/membership.md"
+    },
+    {
+      "family_id": "C2-F01",
+      "raw_sha256": "ccb43c8d7c0b27797c5202f14e7767f692dbf0869f31688cbe5c02a50f0e17de",
+      "revision_identity": "c756e99bdeb90fa21b12af315a820acf865157a7",
+      "url": "https://github.com/open-telemetry/community/blob/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/governance-charter.md"
+    },
+    {
+      "family_id": "C2-F01"
+    },
+    {
+      "family_id": "C2-F02",
+      "raw_sha256": "4623a011df833e8549550af44548875ac50963d1bc81ef90e40282fa89fc6036",
+      "revision_identity": "4623a011df833e8549550af44548875ac50963d1bc81ef90e40282fa89fc6036"
+    },
+    {
+      "family_id": "C2-F02",
+      "raw_sha256": "686c03c052bdf7131b4ed4b8b8849c12dba8720bfd801d2e1bf1ffcbac879bdc",
+      "revision_identity": "686c03c052bdf7131b4ed4b8b8849c12dba8720bfd801d2e1bf1ffcbac879bdc"
+    },
+    {
+      "family_id": "C2-F02",
+      "raw_sha256": "bc057b615bc3df475adbc8d24a55b44faaf1c439b7e259aa18d1e587cd226d90",
+      "revision_identity": "bc057b615bc3df475adbc8d24a55b44faaf1c439b7e259aa18d1e587cd226d90"
+    },
+    {
+      "family_id": "C2-F02"
+    },
+    {
+      "family_id": "C2-F03",
+      "raw_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19",
+      "revision_identity": "fbce61ae9d174fde3d8451768b3486bbb582fb48",
+      "url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/release.rst"
+    },
+    {
+      "family_id": "C2-F03",
+      "raw_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5",
+      "revision_identity": "c0fcf56155d8e38dfa4f8337e243501608f0269e",
+      "url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/reviewing.rst"
+    },
+    {
+      "family_id": "C2-F03",
+      "raw_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917",
+      "revision_identity": "d9a06e884d22d700841d47f6b3b37feac364cedb",
+      "url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/CONTRIBUTING.md"
+    },
+    {
+      "family_id": "C2-F03",
+      "raw_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb",
+      "revision_identity": "3b8775023236e6ed6dfbde744c8ec09a75eb1507",
+      "url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/overview.rst"
+    },
+    {
+      "family_id": "C2-F03"
+    },
+    {
+      "family_id": "C2-F04",
+      "raw_sha256": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311",
+      "revision_identity": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311"
+    },
+    {
+      "family_id": "C2-F04",
+      "raw_sha256": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de",
+      "revision_identity": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de"
+    },
+    {
+      "family_id": "C2-F04"
+    },
+    {
+      "family_id": "C3-F01",
+      "raw_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+      "revision_identity": "485340afe2067c8ca2a03d70e4830a240ea085f5",
+      "url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/advanced/events.md"
+    },
+    {
+      "family_id": "C3-F01",
+      "raw_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+      "revision_identity": "18c9bb6fe5db9f51769bb771f48b9fee4f4aab13",
+      "url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/tutorial/background-tasks.md"
+    },
+    {
+      "family_id": "C3-F01"
+    },
+    {
+      "family_id": "C3-F02",
+      "raw_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+      "revision_identity": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7"
+    },
+    {
+      "family_id": "C3-F02",
+      "raw_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+      "revision_identity": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac"
+    },
+    {
+      "family_id": "C3-F02"
+    },
+    {
+      "family_id": "C3-F03",
+      "raw_sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+      "revision_identity": "8327b10782d35206deb902ffd0f2be9848991e78",
+      "url": "https://github.com/mkdocs/mkdocs/blob/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/writing-your-docs.md"
+    },
+    {
+      "family_id": "C3-F03",
+      "raw_sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+      "revision_identity": "8224cb9ae007ba352435dc319f5a62579552a6f0",
+      "url": "https://github.com/mkdocs/mkdocs/blob/2862536793b3c67d9d83c33e0dd6d50a791928f8/docs/user-guide/deploying-your-docs.md"
+    },
+    {
+      "family_id": "C3-F03"
+    },
+    {
+      "family_id": "C3-F04",
+      "raw_sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+      "revision_identity": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0"
+    },
+    {
+      "family_id": "C3-F04",
+      "raw_sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+      "revision_identity": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f"
+    },
+    {
+      "family_id": "C3-F04"
+    },
+    {
+      "family_id": "M5B-F01"
+    },
+    {
+      "family_id": "M5B-F02"
+    },
+    {
+      "family_id": "M5B-F03"
+    },
+    {
+      "family_id": "M5B-F04"
+    },
+    {
+      "family_id": "M5B-F05"
+    },
+    {
+      "family_id": "M5B-F06"
+    },
+    {
+      "family_id": "M5B-F07"
+    },
+    {
+      "family_id": "M5B-F08"
+    },
+    {
+      "family_id": "M5B-F09"
+    },
+    {
+      "family_id": "M5B-F10"
+    },
+    {
+      "family_id": "M5B-F11"
+    },
+    {
+      "family_id": "M5B-F12"
+    },
+    {
+      "family_id": "M5B-X01"
+    },
+    {
+      "family_id": "M5B-X02"
+    },
+    {
+      "family_id": "M5B-X03"
+    },
+    {
+      "raw_sha256": "2eb9dbf8e69e07a184dc69d73bb34ae14314aa0330c177c96b14478baf34aae8",
+      "revision_identity": "2eb9dbf8e69e07a184dc69d73bb34ae14314aa0330c177c96b14478baf34aae8"
+    },
+    {
+      "raw_sha256": "47542a2eefbe1fb474737128a1e02ab0baaff7022f9570238b99702559c7e74b",
+      "revision_identity": "47542a2eefbe1fb474737128a1e02ab0baaff7022f9570238b99702559c7e74b",
+      "url": "https://github.com/rust-lang/lang-team/blob/c45345e32e81e273aab6c805b0d3cd7b1a666045/src/meetings/design.md"
+    },
+    {
+      "raw_sha256": "50964b9c2fb85881dcd4800be9cb4d490adcb645d5e27d00ae7080d0d5b32a10",
+      "revision_identity": "50964b9c2fb85881dcd4800be9cb4d490adcb645d5e27d00ae7080d0d5b32a10",
+      "url": "https://github.com/rust-lang/lang-team/blob/c45345e32e81e273aab6c805b0d3cd7b1a666045/src/how_to/design_meeting.md"
+    },
+    {
+      "raw_sha256": "5507e6c472b9092f991458b662b82b446a46cacd96aea51e7c8461884cb30baf",
+      "revision_identity": "5507e6c472b9092f991458b662b82b446a46cacd96aea51e7c8461884cb30baf"
+    },
+    {
+      "raw_sha256": "5d5862835167a2b5d7189bd149c73604701abf85350783a96a08d303acf37e86",
+      "revision_identity": "5d5862835167a2b5d7189bd149c73604701abf85350783a96a08d303acf37e86"
+    },
+    {
+      "raw_sha256": "68b7f640aa22c2f22984e0cc33dbb4ad79f8828e60b927f6cac8a89c5cd7c81b",
+      "revision_identity": "68b7f640aa22c2f22984e0cc33dbb4ad79f8828e60b927f6cac8a89c5cd7c81b",
+      "url": "https://github.com/rust-lang/lang-team/blob/c45345e32e81e273aab6c805b0d3cd7b1a666045/design-meeting-minutes/2022-02-02-planning.md"
+    },
+    {
+      "raw_sha256": "9865797d8081bb3c2f6eba01d6dd2d8cf624c7970c011d72d2d45fcc051bea38",
+      "revision_identity": "9865797d8081bb3c2f6eba01d6dd2d8cf624c7970c011d72d2d45fcc051bea38"
+    },
+    {
+      "raw_sha256": "9df480cbd5723a3de349861733e01090a0bab4eac1ad27f5eb38c5ef0d96bd14",
+      "revision_identity": "9df480cbd5723a3de349861733e01090a0bab4eac1ad27f5eb38c5ef0d96bd14",
+      "url": "https://github.com/rust-lang/lang-team/blob/c45345e32e81e273aab6c805b0d3cd7b1a666045/src/meetings/backlog-bonanza.md"
+    },
+    {
+      "raw_sha256": "d2d297aefd9db5234d540a909099638fd605ee20423aac6b40610e9fdf3c4b20",
+      "revision_identity": "d2d297aefd9db5234d540a909099638fd605ee20423aac6b40610e9fdf3c4b20"
+    },
+    {
+      "raw_sha256": "dfbfb478a6c4f377e606e09eb160c553c3329666beead539507b693570248f06",
+      "revision_identity": "dfbfb478a6c4f377e606e09eb160c553c3329666beead539507b693570248f06",
+      "url": "https://github.com/rust-lang/lang-team/blob/c45345e32e81e273aab6c805b0d3cd7b1a666045/src/meetings.md"
+    },
+    {
+      "raw_sha256": "e73150d52fff408c6b5290760ca4907a84c92511b3fbf625202c745baf362f68",
+      "revision_identity": "e73150d52fff408c6b5290760ca4907a84c92511b3fbf625202c745baf362f68"
+    },
+    {
+      "raw_sha256": "f5fa94fdf0ec333abf196de2ddcebce6d22804a0c977b2857cedf6177142618e",
+      "revision_identity": "f5fa94fdf0ec333abf196de2ddcebce6d22804a0c977b2857cedf6177142618e",
+      "url": "https://github.com/rust-lang/lang-team/blob/c45345e32e81e273aab6c805b0d3cd7b1a666045/src/meetings/triage.md"
+    },
+    {
+      "document_id": "c4-f01-doc01",
+      "family_id": "c4-f01",
+      "url": "https://github.com/scikit-image/skimage-archive/blob/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/2023-06-02_meeting.md",
+      "revision_identity": "3611bdc044f61ca828d717a98ceddd77cfd7d0ce",
+      "raw_sha256": "25a00643398fd75983b66accab256ba551b8c0011c693bb52c601ffd1880b119",
+      "normalized_sha256": "cf99889a3f9b7e440bf749e72bf035ba945d1f37c0165d433afde1eef587eae5",
+      "long_paragraph_sha256": [
+        "32bd6933ee9e5ea013589717aa8b86c6a2f776d753ecdf3df0179d07bfce3aa8",
+        "c84dd6f5761887c6734eb1947fee5e1dae7b257189bd2fed7dc0b49a3c14066e",
+        "e3cf31286c6e055d88ff56dcea1e0734c6e53001cde4a213ddb81cb492277b39"
+      ]
+    },
+    {
+      "document_id": "c4-f01-doc02",
+      "family_id": "c4-f01",
+      "url": "https://github.com/scikit-image/skimage-archive/blob/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/2023-06-09_meeting.md",
+      "revision_identity": "042f62ea49053157968c38bdd9f8cba691b3a00d",
+      "raw_sha256": "b932fa951bc39232a6745980d1f1303376d7f94ae1efd0ffc7a10198530942fe",
+      "normalized_sha256": "bf52e506cab3fcc0bd3ca43342b522366d6c8d162f8e3d75a3ff87fbae00ea9d",
+      "long_paragraph_sha256": [
+        "5d3d3b067311d002744900f91f7faffb9d70a9ae82ee15cde121c2126ddbe3df",
+        "6971ade9b5ef417d1d9a333e60ba4ecf65e7d8b612fbb106210945f0aee6fa6d",
+        "7c3d8b74de955bbe1768b70a3ff70c30e17010fb47a58ba347c1d88c93b0c4b6",
+        "a39d710298ae57bfa97b7c044a3aeb2686f24d7aff6ac6b5f09a4b5bb41b5c1d"
+      ]
+    },
+    {
+      "document_id": "c4-f01-doc03",
+      "family_id": "c4-f01",
+      "url": "https://github.com/scikit-image/skimage-archive/blob/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/Project_TPS_proposal.md",
+      "revision_identity": "22654fc29b03bbb918b3fc8ebfa44bb8f167a790",
+      "raw_sha256": "251e04b1f819e834f7a222ce8620d08530799531ca8deead07117e170c14663a",
+      "normalized_sha256": "1ce1f9dfa13d3facbac98987b95dcb86d2df579a615d14912496f6f265ddf83d",
+      "long_paragraph_sha256": [
+        "02ed88531a7a83f5689709cbfb879f999b02d84c7e77616653b95514f9fb585d",
+        "1511369dd85abb810a533b8983090aca3cff912c590f75eb227beb207903bb70",
+        "22cbe4b8f7abfedc768e599d4e2bb899eb258f7b05a8b49898aba5501bb5fb61",
+        "2e7b2c434a89804352f319542d65e6f632f8eaf0083744b00e467ea7cc89f164",
+        "304c676864e6a7068f6c55dc945dc2eb597a04443e6a1edf561b719ca175b234",
+        "310e9f562d6d5c77f224e8b37b8f4c17d715bb17c3f1c0d519de369d01f98ee6",
+        "36bd0f67fbd7322ea9f454807dc2d69b1949e2091de1dd566bfc371fc770f005",
+        "48eb324532fd7269dc37c0447389c125a7ca0986ce6a96a7449bd604c508a775",
+        "58015a2b67027f3d702b28c612881425f0f19885d4a0334ebe37dcd450cf5236",
+        "60a6c7703cf1bdea0d888a1acc90c5ca6b8063a0e69d335901d1357740d89daa",
+        "62245aa995bed16d03b15924d139bcdb640252d646f39bfcacb84732c62948a5",
+        "82df9c9620ecc3e72bb1da7adf34823c913c498c6982c505902d4aefdb5cc642",
+        "833294336cec713bdd4aaae73f1667b9c59234bb214444d01441ff1167986eee",
+        "927f8e0e58aaab9104a33d6696e65da916a0981c20e2e94d7b7823faddbcc205",
+        "9c7bd068b3c4f8ef9c7b542a8598a9075d780740255aeab6519defc55ad88ecf",
+        "a3d17be406cb823a1ca528edc088558fe870f62331a17a33efd7b20dfa191f15",
+        "aa9a66a81d2e5057f44796b7e5e64d7e3fb25d4fb73743afeeaf23e13c4258ed",
+        "b026b74b155c2e1b96f92af63fee7515e6a58ace44d9477ea2617ba788508988",
+        "b2aeee19d4ba084296237f7c565bb6070c5ded2403a9e3b44bb54306db6baf6a",
+        "c3f458de5969fd111e140b7be56a35ac3960051c3ed6b992c3f036cd6d53aa0f",
+        "d3ba4d7c52a319227e903e64b094c4f9368887e00fdb2e64e3457197fcc52835",
+        "de30325bfe5c068eda9b4612f62c726362b83bca12e30e99417575248a5c6765",
+        "ef38dbaf66acf450bdffd00855b6a05b0f26b63d7c476d0ebb476e37a09cb6a9"
+      ]
+    },
+    {
+      "document_id": "c4-f02-doc01",
+      "family_id": "c4-f02",
+      "url": null,
+      "revision_identity": "dd621d916bf48a71462bbb7be3aa005246bb5cc751365b75ee256c4e36ea1d0e",
+      "raw_sha256": "dd621d916bf48a71462bbb7be3aa005246bb5cc751365b75ee256c4e36ea1d0e",
+      "normalized_sha256": "b2e367d4bf782c1e135929547f12a6d0d146d5d80b39c0b5034a4808d001f736",
+      "long_paragraph_sha256": [
+        "673549016d5672d7431900740774db05f62a9202466087c9a193c4aaa8b90928",
+        "cdf325fe69d6dc396b9fb74f9961c70c0a1fb64e2475c8248b190deb39885680"
+      ]
+    },
+    {
+      "document_id": "c4-f02-doc02",
+      "family_id": "c4-f02",
+      "url": null,
+      "revision_identity": "843ba80a2b51436e86d591a4a72b66ecbb6bbfc237cfc60afb54dad6cb13d75e",
+      "raw_sha256": "843ba80a2b51436e86d591a4a72b66ecbb6bbfc237cfc60afb54dad6cb13d75e",
+      "normalized_sha256": "693243b6d5c88ce189f75d76ea592631461062ce85c9b1f852af69496e8a0017",
+      "long_paragraph_sha256": [
+        "e71ab8f2ec8119b8ee56b2568d867aea4bdfb4a251cc36866d9e9847a0f1baf4"
+      ]
+    },
+    {
+      "document_id": "c4-f02-doc03",
+      "family_id": "c4-f02",
+      "url": null,
+      "revision_identity": "510fa02dbf125d838cabae4e6b5cd6305be2fac985c430546f1e334d3b51b209",
+      "raw_sha256": "510fa02dbf125d838cabae4e6b5cd6305be2fac985c430546f1e334d3b51b209",
+      "normalized_sha256": "2578d282a16a85f4b506fe16b89d96bf83bf4590b7d3d810610eae03135813c4",
+      "long_paragraph_sha256": [
+        "0acd25c8ad369aa201d88df514dd7075f2d2a820d27f848d399856fbc9d9f889",
+        "192ec00341a409f0f3faf01959cc34110e798ac38e02b91dbfb58447beb19875",
+        "7d89f593db0b5547b96831dc1213e0bd5bf04f484da8cb35fd84e2cdb1106a47",
+        "bf2bebaca0951318ba1fad6f09de7483e348207f12b57c4b01b013fd635d7d03",
+        "c208165ebd9ebe49c5323a8229ebd177b96346acb1095d4ae1e180986991d35f",
+        "c258e83bd005843572e21d04cb13f7288ee38453c73d766c2a9792a31420534a",
+        "dcc9bad0e602cdbf033e01e164be670e42a9f9764f16a3a4913c7aa8598de7ed",
+        "ef3bec95147d54b7628c6f03e0ac779cc7e027dc5c4e935a42c5cb01243d7abb",
+        "f7866b1dc2d1d493ededa3578ff9209ee00829bdab714347c551616caaac4a71",
+        "fa39bc74c59537dcd69a23a20a0b9aabc632d8b33412ef68797cc54de4ae528f"
+      ]
+    },
+    {
+      "document_id": "c4-val-pub-meeting-01",
+      "family_id": "c4-f03",
+      "url": "https://github.com/nodejs/diagnostics/blob/3162f5cdfe86a0830d6ce0eb525d9fbe1d0caee6/wg-meetings/2025-05-08.md",
+      "revision_identity": "743c6ad93cde91714fafca0fffb02cc0e880325b",
+      "raw_sha256": "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+      "normalized_sha256": "21feac1e9ec3a8cfc751c0d32c74452acce14f1bdb820c0ff99a5275a3a6f5f5",
+      "long_paragraph_sha256": [
+        "4bad0c2f617ad8102a8f2b27215650de7d4f62cfcc93df2e01f0a77e5ac37b13",
+        "5a56bf6faa2e927ec88cd5d45855d8a3aff36a815570e89e94b9d97a6dda8e50",
+        "c03d5ca4b3dd62c700da744067862ae3feec1a4a05ac882f3fe5ac25032eaa76"
+      ]
+    },
+    {
+      "document_id": "c4-val-pub-meeting-02",
+      "family_id": "c4-f03",
+      "url": "https://github.com/nodejs/diagnostics/blob/3162f5cdfe86a0830d6ce0eb525d9fbe1d0caee6/wg-meetings/2025-05-29.md",
+      "revision_identity": "2485b11c548d23101dc2d87e25fe1cf6a8159a50",
+      "raw_sha256": "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+      "normalized_sha256": "73420c5e1f65afa13c6e20396562ad2b3ce9b8d01d89d5c94a528e21318ca516",
+      "long_paragraph_sha256": [
+        "24f3688f9fccd63b1d4b9023e84ae28af09adc928c8025d86636d3ee7135b28d",
+        "a570279ea657c8a332d910ddcd7a5d4e2992d1265c2fafa398ef161db966fe0e"
+      ]
+    },
+    {
+      "document_id": "c4-val-pub-general",
+      "family_id": "c4-f03",
+      "url": "https://github.com/nodejs/diagnostics/blob/3162f5cdfe86a0830d6ce0eb525d9fbe1d0caee6/README.md",
+      "revision_identity": "6cdf4e59cfa9c8ae36cf8f015f0f5612f7022989",
+      "raw_sha256": "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82",
+      "normalized_sha256": "be940c4fe759dae514b89963ba526aef57c95bfb09ee58e23e8420e1ab1ed267",
+      "long_paragraph_sha256": [
+        "02e96ebf8b4c32573ecf5610c955eeaac8f7b18c1b2d63039e3ddd98d87cfdc4",
+        "1cae1afc85bb7ba2666f3cf38483f60f324d87a8da8dad200152f1bdb0f3829a",
+        "1df49e20c2ad336327f797c6085779558e34e2a89b8d3002c81de64c38c0612d",
+        "2b8546a94fda0bde3cf1f8eb63c7a19bd8ddef71156236708e6d7273ac5ac7d0",
+        "50a9a23649b2e8cc9bbcb7256004160b22179e560768d51a24db695f0407e561",
+        "68ef2164387eab023ab747b3174a3f2e0d27da1b7c448f4102f06e2b7529a62b",
+        "9af6937c9591ec57ca6574467d09ab63e1ad647459c9659a417ca1a399de6bae",
+        "d6cbd4805d7759b1f7c12ecaf32741cc0a27d65a3f4dd5ed00b495a2a7acd5e4",
+        "de33bc291c189783d989097e49da684fe36ef677f4c3fe6475cbfb20758e68ea"
+      ]
+    },
+    {
+      "document_id": "c4-val-syn-general",
+      "family_id": "c4-f04",
+      "url": null,
+      "revision_identity": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+      "raw_sha256": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+      "normalized_sha256": "4aa13fda685470918a1bc15ae8076260b884903ba359e87f4ecdbb6a0ff3b50a",
+      "long_paragraph_sha256": [
+        "214df00e2dba92eb536ff87923fc021419cd03609304116d160bce9046ca5ce7",
+        "25723e34f1d9d17245597f607679d74cc3efdcd7e2f1d07dd39b867c219da5e7",
+        "695314275f6866f3b49c0de284795753f919d2fbf0c65043de66ac187c96a09a",
+        "75f0a9a09aab5c0074afdc9f10dd2d0b31f9bdd38a5493db7140fa2de560107a",
+        "7f4b6410912c31c9fd169f88c33b2bd09763b154aba04006f1bee69cc340616e",
+        "e97ba710c032d7990ceefadc402e8669d768e5c8a88d1f701846da7ee36fcfda"
+      ]
+    },
+    {
+      "document_id": "c4-val-syn-meeting-01",
+      "family_id": "c4-f04",
+      "url": null,
+      "revision_identity": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+      "raw_sha256": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+      "normalized_sha256": "5db28b3d1dfe2f79f96b446f12b6e0571c589d991f767fb84e602974a222de35",
+      "long_paragraph_sha256": [
+        "a16d6aa1db2f8dc871c88a1091c7226fcdd996ef7bb20351c3dd2fed37d4382e",
+        "cddd864a0b211929021ed8da1c784c3be7815a3a93688e8f6b70321e6fd90771",
+        "cef54e28f80dd190b76a24a929775d3fcf163eda6f50d5c0e2a88d03c6d797af",
+        "dd1c48e634563141ca61f048713fd260c14be8bb14cae4b2c16933adf03ad0d5",
+        "ee6d6503e9c23789c4eb5aa24681c60353fb3e7790582d165d92102848aab8e0"
+      ]
+    },
+    {
+      "document_id": "c4-val-syn-meeting-02",
+      "family_id": "c4-f04",
+      "url": null,
+      "revision_identity": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796",
+      "raw_sha256": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796",
+      "normalized_sha256": "baf3d678274d24b8a7527f320cc60b56b48fdce8e66f52444aa9a2b3524ef583",
+      "long_paragraph_sha256": [
+        "1733a5e18eeb0839b52c4a2609567a382ed559a8b388a974ab8557f705c5928e",
+        "8623c51915704ceb7f86e2bdec229f0d265a52cee6ba07e3fa8fa675838d3b49",
+        "ef26a96f86ffcebb6c4e397ea6ea9ff2faac91ccb56e0c0cd877d17e7e5a3c45"
+      ]
+    }
+  ],
+  "excluded_repository_metadata": [
+    "apache/arrow",
+    "fastapi/fastapi",
+    "https://github.com/rust-lang/lang-team",
+    "mkdocs/mkdocs",
+    "nodejs/diagnostics",
+    "numpy/numpy",
+    "open-telemetry/community",
+    "python/peps",
+    "scikit-image/skimage-archive"
+  ],
+  "missing_historical_fingerprints": [
+    "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+    "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+    "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+  ],
+  "coverage": {
+    "rows": 80,
+    "new_c4_rows": 12,
+    "normalized_document_rows": 12,
+    "long_paragraph_rows": 12
+  },
+  "closed_source_bodies_read": 0,
+  "closed_questions_or_oracles_read": 0,
+  "complete_near_duplicate_absence_proven": false
+}

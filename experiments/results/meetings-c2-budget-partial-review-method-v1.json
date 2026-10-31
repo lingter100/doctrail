@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-14T04:35:28.483298+00:00",
+  "timestamp_source": "operator_UTC_clock_at_registration",
+  "exposure_at": null,
+  "disclosure_at": null,
+  "unknown_timestamp_reason": "agent message has no exposed timestamp; not inferred",
+  "reviewer_id": "/root/c2_calibration_judge",
+  "actual_model": "gpt-6-astra",
+  "actual_effort": "xhigh",
+  "settings_evidence": "collaboration.spawn_agent accepted these explicit arguments for this role; parent model unchanged",
+  "exposure_source": "automatic_AGENTS_injection",
+  "reviewer_disclosure_transcription": "판정 전 노출 문제를 보고하고 대기합니다. 이번 followup 직전 사용자 AGENTS가 이 역할에도 직접 주입되었으며, current cal15/14 partial 중단 사유(C2-CAL-08 C2 language mismatch), arm 이름, 기존 C0/C1/M5 결과와 모델명이 포함되어 있습니다. 따라서 최초 요청의 정책·모델·기존평가를 모르는 독립 역할을 사실대로 충족 선언할 수 없습니다. 아직 새 review-input.json은 열지 않았고 mapping/다른 자료도 열지 않았습니다. 저자/설계자 비참여 및 mapping 미열람은 유지됩니다.",
+  "transcription_status": "quotes normalized from actual message; semantic content preserved; not raw message bytes",
+  "original_information_isolation_met": false,
+  "review_mode": "metadata_exposed_label_masked_posthoc_diagnostic",
+  "model_hypothesis_blind": false,
+  "prior_outcome_exposure": true,
+  "pack_seen_before_registration": false,
+  "mapping_seen": false,
+  "seed_seen": false,
+  "judgments_started": false,
+  "state_evidence": "reviewer self-report before pack opening; operator confirmed no judgments file",
+  "independent_role_participation": true,
+  "references": {
+    "initial_exposure": {
+      "file": "experiments/results/meetings-c2-budget-partial-review-exposure-v1.json",
+      "sha256": "759f1b4986bb46c8aeb31a2ec48fd0886ec01558b1ca16a3b56f0223e27df04b",
+      "bytes": 1485
+    },
+    "method_amendment": {
+      "file": "docs/MEETINGS-C2-BUDGET-REVIEW-EXPOSURE.md",
+      "sha256": "327db9117f994759589abb8f67c775e6ec34b43f85bbf504f225af2ac64a9a00",
+      "bytes": 6242
+    },
+    "original_design": {
+      "file": "docs/MEETINGS-C2-BUDGET-PARTIAL-AUDIT.md",
+      "sha256": "28e26e70cf5dc5373290f8ff878ff303ec315ac1335572988f9fca85f9cd12a7",
+      "bytes": 9829
+    },
+    "helper": {
+      "file": "scripts/audit_meeting_budget_partial.py",
+      "sha256": "a18489e03ab85484528046dfc5ff2aad336f9a896878de8d8967a4c47fa465f5",
+      "bytes": 23888
+    },
+    "helper_tests": {
+      "file": "tests/test_audit_meeting_budget_partial.py",
+      "sha256": "0706be8f7b6df3540e52bf646efaf7882dd1ecd6cdf1011dfa146077cdff16fd",
+      "bytes": 15766
+    },
+    "original_receipt": {
+      "file": ".local/c2-budget-partial-audit-v1/receipt.json",
+      "sha256": "07e2fec789f8f6b8822f834d3c8a2c982a001473a8ed49f9906db7ab64a806bc",
+      "bytes": 9212
+    },
+    "review_pack": {
+      "file": ".local/c2-budget-partial-audit-v1/review-input.json",
+      "sha256": "766fff31c98be0ac5e9f53f83ae766c7a129b8a800f29a010e43599ee6c367aa",
+      "bytes": 141670
+    },
+    "report": {
+      "file": "experiments/results/meetings-c2-input-budget-calibration-v1.json",
+      "sha256": "c4acac4ce4c3af9c6a77988e86400ed6f31d7b4b0c7dd59e9d251b8041ab3486",
+      "bytes": 788359
+    },
+    "plan": {
+      "file": "data/evaluation/meetings-c2-input-budget-execution-plan-v1.json",
+      "sha256": "845554b865d6b3fbf362b6834e98b5323cf5c366cc01ea8cf01f3c870bd251db",
+      "bytes": 14759
+    }
+  },
+  "selected": false,
+  "validation_eligible": false,
+  "original_full_gate": "failed",
+  "human_review_count": 0,
+  "model_calls": 0,
+  "publication_rule": "Always bind exposure receipt SHA and original diagnostic-summary SHA in a separate reporting receipt; label metadata exposure in the first result explanation."
+}

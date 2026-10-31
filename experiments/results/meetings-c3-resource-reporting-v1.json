@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "purpose": "c3_actual_neutral_resource_observation_not_quality_score",
+  "plan": {
+    "file": "data/evaluation/meetings-c3-neutral-plan-v1.json",
+    "sha256": "c11b256c75f719b6436b124742866fd326080ae4f207cdbc32860526db6283b8"
+  },
+  "original_report": {
+    "file": ".local/meetings-c3-neutral-v1/report.json",
+    "sha256": "f15669fb55f131e077f7650092a4680c4a80ac65a099b522b78230bfabad0132"
+  },
+  "public_report": {
+    "file": "experiments/results/meetings-c3-resources-v1.json",
+    "sha256": "f15669fb55f131e077f7650092a4680c4a80ac65a099b522b78230bfabad0132"
+  },
+  "original_public_byte_identical": true,
+  "status": "completed",
+  "completed_report_replay_passed": true,
+  "requests": [
+    {
+      "id": "normal",
+      "status": "passed",
+      "elapsed_ms": 8062.999999849126,
+      "error": null,
+      "native_rss_sample_count": 31,
+      "native_rss_max_sample_mib": 6408.61328125,
+      "available_ram_before_bytes": 3415146496,
+      "available_ram_after_bytes": 3146579968,
+      "stage2_readiness": "measured_at_runtime"
+    },
+    {
+      "id": "stress",
+      "status": "passed",
+      "elapsed_ms": 85547.00000002049,
+      "error": null,
+      "native_rss_sample_count": 331,
+      "native_rss_max_sample_mib": 6921.796875,
+      "available_ram_before_bytes": 3147689984,
+      "available_ram_after_bytes": 2652164096,
+      "stage2_readiness": null
+    }
+  ],
+  "calls": [
+    {
+      "case_id": "normal",
+      "stage": 1,
+      "input_tokens": 360,
+      "output_tokens": 32,
+      "stop_type": "eos"
+    },
+    {
+      "case_id": "normal",
+      "stage": 2,
+      "input_tokens": 383,
+      "output_tokens": 24,
+      "stop_type": "eos"
+    },
+    {
+      "case_id": "stress",
+      "stage": 1,
+      "input_tokens": 5081,
+      "output_tokens": 384,
+      "stop_type": "limit"
+    },
+    {
+      "case_id": "stress",
+      "stage": 2,
+      "input_tokens": 5081,
+      "output_tokens": 384,
+      "stop_type": "limit"
+    }
+  ],
+  "actual_native_posts": 4,
+  "operational": {
+    "sources_unchanged": true,
+    "processes_stopped": true,
+    "metadata_recovery": true,
+    "metadata_restart_attempts": 1,
+    "recovery_native_calls": 0,
+    "owned_cleanup_ms": 1015.0000001303852,
+    "recovery_cleanup_ms": 983.9999999385327,
+    "last_request_through_cleanup_ms": 86609.00000017136,
+    "native_log_bytes": 0,
+    "elapsed_seconds": 191.85899999993853,
+    "memory_scope": "sampled_native_rss_and_system_available_ram_endpoints; GPU not measured; not a peak"
+  },
+  "failure": {},
+  "source_exposure": [
+    {
+      "file": "docs/MEETINGS-C3-SOURCE-EXPOSURE.md",
+      "sha256": "ed81354b45befcbbde55773a9c718cdc4db07b18305a305d2e7acb0e3cfeede8"
+    },
+    {
+      "file": "data/evaluation/meetings-c3-source-exposure-v1.json",
+      "sha256": "ca21c3ec5149c71b484382698b943ea200662b5202f650604e16ab716407c6e3"
+    }
+  ],
+  "quality_generation_calls": 0,
+  "quality_score": null,
+  "human_review_count": 0,
+  "paid_calls": 0,
+  "electrical_cost": "not_measured",
+  "stress_second_stage_independent_resource_fixture": true,
+  "gpu_memory_peak_measured": false
+}

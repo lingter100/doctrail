@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "status": "ISOLATED_ASSET_ONLY_RUNTIME_VALIDATED",
+  "original_failure": {
+    "type": "Windows untrusted mount point",
+    "win32_error": 448,
+    "uv_environment_modified": false,
+    "cause_of_new_block_unknown": true
+  },
+  "alternative": {
+    "python": "3.12.14",
+    "psutil": "7.2.2",
+    "explicit_venv": ".local/meeting-qa-python312-v1/venv",
+    "wheel_count": 7,
+    "downloaded_wheel_bytes": 1937015,
+    "exact_existing_lock_hashes_verified": true,
+    "global_install": false,
+    "sanitized_child_import": "passed",
+    "user_site": false,
+    "pythonpath": false
+  },
+  "verification": {
+    "asset_tests": 129,
+    "engine_runtime_tests": 173,
+    "observer_tests": 48,
+    "total_passed": 350,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 31.677950620651245,
+    "source_before_after_unchanged": 12,
+    "parent_verified_control_runtime_refs": 34
+  },
+  "evidence": [
+    {
+      "path": ".local/meeting-python-startup-diagnosis-v1/diagnosis-receipt.json",
+      "sha256": "4b07a7048acd63825039e5a684c0f41e56817989b09a5ba3a4420da8cced6e6b",
+      "size_bytes": 4968
+    },
+    {
+      "path": ".local/meeting-qa-python312-v1/final-receipt.json",
+      "sha256": "d7a2e2c6950a89d22b7d2d138d0094f2b30a54df21cfebca8091ca4d7e895a3f",
+      "size_bytes": 5218
+    },
+    {
+      "path": ".local/meeting-qa-python312-v1/runtime-verification-receipt.json",
+      "sha256": "b19eb1f21dc5691349c90cce2f7d3b6cc557bc49d3e69392521b150f0f6c1f9b",
+      "size_bytes": 5288
+    },
+    {
+      "path": ".local/meeting-free-qa-assets-acquisition-v2-prep-repair-v1/receipt.json",
+      "sha256": "cbf53069a40eb3fd15abaa47b149f03ed8c63765ff39a1f29d6d8a39667f5993",
+      "size_bytes": 46506
+    },
+    {
+      "path": ".local/meeting-free-qa-observer-cap-review-v1/receipt.json",
+      "sha256": "5706f904c53b924cba3a52f61131ebc1bff0889348b679f3b2f2704bc9b6690e",
+      "size_bytes": 46796
+    }
+  ],
+  "limitations": [
+    "This validates an explicit asset preparation environment, not restoration of the original project venv.",
+    "No model inference, engine compilation, Java or complete service validation occurred in this environment.",
+    "Asset acquisition outcome is recorded separately; these regressions are not a download success or model quality result."
+  ],
+  "human_review": 0,
+  "paid_usage": 0
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "status": "ACQUISITION_ONLY_NOT_EXECUTABLE",
+  "engine_commit": "d81235049384534c167caea52b85a694f6103d14",
+  "source_selection": [
+    "CMakeLists.txt",
+    "LICENSE",
+    "cmake/",
+    "include/",
+    "src/",
+    "ggml/",
+    "vendor/"
+  ],
+  "tools": [
+    {
+      "name": "llvm-mingw-20250709-ucrt-x86_64.zip",
+      "release": "https://github.com/mstorsjo/llvm-mingw/releases/tag/20250709",
+      "asset": "https://github.com/mstorsjo/llvm-mingw/releases/download/20250709/llvm-mingw-20250709-ucrt-x86_64.zip",
+      "published_sha256": "82babcd6aae4dc3606e8e0471d816989c384b4bf86a139f184a8b4a1b2c2758d",
+      "downloaded": false
+    },
+    {
+      "name": "cmake-3.31.8-windows-x86_64.zip",
+      "release": "https://github.com/Kitware/CMake/releases/tag/v3.31.8",
+      "asset": "https://github.com/Kitware/CMake/releases/download/v3.31.8/cmake-3.31.8-windows-x86_64.zip",
+      "published_sha256": "81aa9964dbabd71fe02e7ec50472fd3ad56138c49944515ece9001efbff8d719",
+      "downloaded": false
+    },
+    {
+      "name": "ninja-win.zip",
+      "version": "1.12.1",
+      "release": "https://github.com/ninja-build/ninja/releases/tag/v1.12.1",
+      "asset": "https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-win.zip",
+      "published_sha256": null,
+      "sha256_status": "No digest in inspected release asset listing; actual bytes must be hashed and locked before execution during separately assigned preparation.",
+      "downloaded": false
+    }
+  ],
+  "budgets": {
+    "preparation": {
+      "download_bytes": 536870912,
+      "total_owned_disk_bytes": 4294967296,
+      "acquisition_extract_seconds": 600,
+      "extended_acquisition_profile": {
+        "name": "llvm-x64-sampled-50ms-1800s-v1",
+        "acquisition_extract_seconds": 1800,
+        "cleanup_reserved_inside_acquisition_seconds": 5,
+        "meaning": "Optional fixed single-attempt spending ceiling, not a completion estimate or automatic retry. Default and llvm-x64-sampled-50ms-v1 remain 600 seconds."
+      },
+      "configure_build_seconds": 900,
+      "parallel_build_jobs": 2,
+      "owned_tree_sampled_rss_bytes": 2147483648,
+      "host_available_min_bytes": 2147483648,
+      "startup_available_min_bytes": 4294967296,
+      "meaning": "New bounded preparation budgets, not measured requirements or guarantees."
+    },
+    "validator": {
+      "grammar_bytes_max": 2097152,
+      "internal_rules_max": 20000,
+      "shared_batch_seconds": 60,
+      "cleanup_reserved_inside_batch_seconds": 5,
+      "owned_tree_sampled_rss_bytes": 536870912,
+      "host_available_min_bytes": 2147483648,
+      "startup_available_min_bytes": 2684354560,
+      "meaning": "Retains existing grammar/runtime/RSS/host limits; 2.5 GiB start pairs 512 MiB operating budget with 2 GiB reserve. Initialization, clones, all cases, witnesses and cleanup share one deadline."
+    }
+  },
+  "licenses_required": [
+    "llama.cpp LICENSE",
+    "LLVM-MinGW bundled LLVM/mingw-w64 license files",
+    "CMake bundled Copyright.txt and Licenses",
+    "Ninja COPYING or official pinned release source COPYING"
+  ],
+  "primary_source_urls": [
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/tests/test-gbnf-validator.cpp",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/src/llama-grammar.h",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/CMakeLists.txt",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/tests/CMakeLists.txt",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/src/CMakeLists.txt",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/cmake/git-vars.cmake",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/cmake/build-info.cmake",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/ggml/CMakeLists.txt"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "meetings-proof-epoch-results-ci-v1",
+  "head_sha": "b08cd762cbffcb938d157eaf0fd083d983b65771",
+  "observed_at": "2026-10-20T01:38:03.848735+00:00",
+  "runs": [
+    {
+      "run_id": 39354041667,
+      "head_sha": "b08cd762cbffcb938d157eaf0fd083d983b65771",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "java-service": "success",
+        "web": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39354041667"
+    },
+    {
+      "run_id": 39354047589,
+      "head_sha": "b08cd762cbffcb938d157eaf0fd083d983b65771",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "java-service": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39354047589"
+    }
+  ],
+  "author": "lingter100",
+  "committer": "lingter100",
+  "claim_scope": "Exact result archive and metadata CI only; no new official comparison or inferred quality/test counts."
+}

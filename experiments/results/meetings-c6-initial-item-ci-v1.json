@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "head_sha": "09027c9f47927c8480bb65f4fa5eb94900af230e",
+  "observed_at": "2026-10-20T03:31:36.480395+00:00",
+  "observer": "/root using actual gh run view and gh api",
+  "github_author": "lingter100",
+  "github_committer": "lingter100",
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 39364334918,
+      "event": "push",
+      "headSha": "09027c9f47927c8480bb65f4fa5eb94900af230e",
+      "jobs": [
+        {
+          "databaseId": 118437545268,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39364334918/job/118437545268",
+          "startedAt": "2026-10-20T03:26:55Z",
+          "completedAt": "2026-10-20T03:30:36Z"
+        },
+        {
+          "databaseId": 118437545589,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39364334918/job/118437545589",
+          "startedAt": "2026-10-20T03:26:55Z",
+          "completedAt": "2026-10-20T03:31:06Z"
+        },
+        {
+          "databaseId": 118437546111,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39364334918/job/118437546111",
+          "startedAt": "2026-10-20T03:26:56Z",
+          "completedAt": "2026-10-20T03:27:11Z"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39364334918"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 39364339861,
+      "event": "pull_request",
+      "headSha": "09027c9f47927c8480bb65f4fa5eb94900af230e",
+      "jobs": [
+        {
+          "databaseId": 118437561852,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39364339861/job/118437561852",
+          "startedAt": "2026-10-20T03:26:59Z",
+          "completedAt": "2026-10-20T03:30:33Z"
+        },
+        {
+          "databaseId": 118437561947,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39364339861/job/118437561947",
+          "startedAt": "2026-10-20T03:26:59Z",
+          "completedAt": "2026-10-20T03:27:18Z"
+        },
+        {
+          "databaseId": 118437562154,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39364339861/job/118437562154",
+          "startedAt": "2026-10-20T03:26:59Z",
+          "completedAt": "2026-10-20T03:30:48Z"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39364339861"
+    }
+  ],
+  "scope": "CI of preserved initial item/rejection and judge-registration commit. Both initial item sets remain rejected and unfrozen; CI does not overrule independent semantic rejection. No actual tokenizer/native, answer quality or human review claim.",
+  "next": "Narrow original-question/context-preserving v2 oracle corrections by the same isolated authors, then independent prereview."
+}

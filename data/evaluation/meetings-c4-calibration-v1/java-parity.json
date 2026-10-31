@@ -1,0 +1,53 @@
+{
+  "schema_version" : 1,
+  "kind" : "actual_java_python_document_chunk_parity",
+  "inventory_sha256" : "4a6c61735f7ce4b49fe5d5d9d6344ca6055ac6de8aadeca908ed5e432936d932",
+  "java_version" : "21.0.12.1",
+  "bound_files" : {
+    "server/src/main/java/io/doctrail/Ingest.java" : "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java" : "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/test/java/io/doctrail/MeetingSourceParityTest.java" : "04e3371b13c2a8b0c577975fb589a6c9a1999012cc434ab1cf6f3851c093f23f"
+  },
+  "documents" : [ {
+    "chunks" : 2,
+    "processed_sha256" : "25a00643398fd75983b66accab256ba551b8c0011c693bb52c601ffd1880b119",
+    "document_id" : "c4-f01-doc01",
+    "codepoints" : 1608,
+    "raw_sha256" : "25a00643398fd75983b66accab256ba551b8c0011c693bb52c601ffd1880b119"
+  }, {
+    "chunks" : 3,
+    "processed_sha256" : "b932fa951bc39232a6745980d1f1303376d7f94ae1efd0ffc7a10198530942fe",
+    "document_id" : "c4-f01-doc02",
+    "codepoints" : 2250,
+    "raw_sha256" : "b932fa951bc39232a6745980d1f1303376d7f94ae1efd0ffc7a10198530942fe"
+  }, {
+    "chunks" : 17,
+    "processed_sha256" : "251e04b1f819e834f7a222ce8620d08530799531ca8deead07117e170c14663a",
+    "document_id" : "c4-f01-doc03",
+    "codepoints" : 13634,
+    "raw_sha256" : "251e04b1f819e834f7a222ce8620d08530799531ca8deead07117e170c14663a"
+  }, {
+    "chunks" : 2,
+    "processed_sha256" : "dd621d916bf48a71462bbb7be3aa005246bb5cc751365b75ee256c4e36ea1d0e",
+    "document_id" : "c4-f02-doc01",
+    "codepoints" : 1484,
+    "raw_sha256" : "dd621d916bf48a71462bbb7be3aa005246bb5cc751365b75ee256c4e36ea1d0e"
+  }, {
+    "chunks" : 2,
+    "processed_sha256" : "843ba80a2b51436e86d591a4a72b66ecbb6bbfc237cfc60afb54dad6cb13d75e",
+    "document_id" : "c4-f02-doc02",
+    "codepoints" : 1641,
+    "raw_sha256" : "843ba80a2b51436e86d591a4a72b66ecbb6bbfc237cfc60afb54dad6cb13d75e"
+  }, {
+    "chunks" : 6,
+    "processed_sha256" : "510fa02dbf125d838cabae4e6b5cd6305be2fac985c430546f1e334d3b51b209",
+    "document_id" : "c4-f02-doc03",
+    "codepoints" : 4414,
+    "raw_sha256" : "510fa02dbf125d838cabae4e6b5cd6305be2fac985c430546f1e334d3b51b209"
+  } ],
+  "document_count" : 6,
+  "chunk_count" : 32,
+  "exact_content_pages_chunk_text_offsets_ordinals_ids" : true,
+  "model_calls" : 0,
+  "semantic_quality_measured" : false
+}

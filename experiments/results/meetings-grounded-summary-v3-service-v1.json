@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "status": "service_candidate_connected_synthetic_verified_independent_read_reviewed",
+  "candidate": "grounded-summary-v3",
+  "analysis_policy": "batch-v2",
+  "source_files": [
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 21211,
+      "sha256": "2a8aae4ccb8bb4b6147773829bb8c937bd4b9285f82e90ffe24d705d54e1a367"
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 4536,
+      "sha256": "9bdf5f490f777aa9a20db0d21be33b34107f31c1962602c973d71200695b0137"
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 22574,
+      "sha256": "cf282f01118b0968a18edd5f8ab7748496bb1aa2dd980b0ed58e8b462a327d02"
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 38707,
+      "sha256": "83009cce1167fa8798d14ea150d4b5cc92b1228eef13e610abe9f6e10b72a313"
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 50004,
+      "sha256": "8ebf9f5df78227b738265ec39b8e743a974b805dc98660bd1f2f4c734ed92ff8"
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 6768,
+      "sha256": "077008e2d5d8f127f32229e85172261d7f114258db0f78c227a54893cbb3cfe2"
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 33294,
+      "sha256": "c4555e0e442a6a189165677a1a904139b2e7c4765a18d1d7d86478bf62787cfe"
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 64452,
+      "sha256": "76cc6a68c6fef05bd5521b73dba97c5f9d28f543f354d9d2d75b0016d3fd8a0c"
+    }
+  ],
+  "fixed_module2": [
+    {
+      "path": "src/doctrail/meeting_grounded_summary.py",
+      "bytes": 32180,
+      "sha256": "10b24748597a8812d62dcea17807a9e2b22c790102923ac7a0d8efd58b6d6e8d"
+    },
+    {
+      "path": "tests/test_meeting_grounded_summary.py",
+      "bytes": 51533,
+      "sha256": "a9bd565bbfe9f9c8b7a975fe20413b8888c6c04647e8c641c4d0f4208e6e0f12"
+    }
+  ],
+  "changed_integration_paths": [
+    "src/doctrail/meeting_service_rag.py",
+    "tests/test_meeting_service_rag.py",
+    "tests/test_meeting_service_rag_launcher.py",
+    "tests/test_serve_meeting_rag_service.py",
+    "tests/test_run_meeting_rag_acceptance.py"
+  ],
+  "unchanged_launchers_and_driver": [
+    "scripts/serve_meeting_service_rag.py",
+    "scripts/serve_meeting_rag_service.py",
+    "scripts/run_meeting_rag_acceptance.py"
+  ],
+  "checks": {
+    "generic_regression_passed": 849,
+    "elapsed_seconds": 24.91,
+    "module_228_included": true,
+    "integration_tests": 621,
+    "ruff": "passed first attempt",
+    "independent_static_remaining_blockers": 0,
+    "warnings": "Existing Starlette TestClient httpx deprecation; no test failure"
+  },
+  "behavior": [
+    "v3 explicit batch-v2 factory/normal/observed selection",
+    "unchanged launchers import shared allowlist and exact metadata; explicit CLI selects v3 while defaults remain legacy",
+    "HTTP returns rewritten final claims only after mandatory final review",
+    "alignment metadata hash/cap/order changes or omissions reject startup/health/analyze before native transport",
+    "unchanged acceptance driver checks registered assembly, bound module code, gate assembly and records alignment telemetry"
+  ],
+  "bindings": [
+    {
+      "path": ".local/meeting-grounded-summary-v3-service-v1/receipt.json",
+      "bytes": 9237,
+      "sha256": "33cca3f5b3548cde939a43645c702fa7160cbee24378598007c810328a9479e7"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v3-service-v1/independent-review-v1.json",
+      "bytes": 15835,
+      "sha256": "ba00f5741e5ddec5afe8d0724a8eed5dbbc37538a01e9c84196c7caade517ab0"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v3-service-v1/parent-verification-v1.json",
+      "bytes": 2832,
+      "sha256": "e21ae6e796bc31f544b652d558a50db778f57e14a753ba3fe860dc4286b1baf9"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v3-service-v1/attempt-1/pytest.stdout.log",
+      "bytes": 1479,
+      "sha256": "26e97c033a91894ce1691d64306de38ac002a46d603097b71bd27d081a282dfe"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v3-service-v1/attempt-1/pytest.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v3-service-v1/attempt-1/ruff.stdout.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v3-service-v1/attempt-1/ruff.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "experiments/results/meetings-grounded-summary-v3-module-v1.json",
+      "bytes": 3947,
+      "sha256": "fed157725883a4daba566872dae163265ebaa63b10b13f16d9b84cad96be56fc"
+    }
+  ],
+  "preservation": {
+    "fixed_module2": true,
+    "old_v1_v2_contracts": true,
+    "frozen77_verified": 77,
+    "preserved_evidence_files": 4371
+  },
+  "actual_execution": {
+    "real_model": 0,
+    "native": 0,
+    "tokenizer": 0,
+    "java": 0,
+    "browser": 0,
+    "real_service_launch": 0,
+    "quality_replay": 0
+  },
+  "human_reviewed": false,
+  "exact_source_ci": "pending after this source commit",
+  "reproduce_synthetic": "python -X utf8 -m pytest -q tests/test_meeting_grounded_summary.py tests/test_meeting_service_rag.py tests/test_meeting_service_rag_launcher.py tests/test_serve_meeting_rag_service.py tests/test_run_meeting_rag_acceptance.py",
+  "limits": [
+    "Synthetic HTTP and fake launchers only; no new actual model, Java/browser or semantic acceptance.",
+    "Module228 is included in849, not an additional test set.",
+    "Design author reviewed code independently from implementer; not an independent semantic judge or human reviewer.",
+    "A saved implementation receipt survived a later agent capacity error; parent verified source and logs, with no test rerun.",
+    "Exact source CI, prepared harness review, fresh runtime binding and explicit once assignment precede actual comparison."
+  ]
+}

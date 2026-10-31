@@ -1,0 +1,188 @@
+{
+  "calls": [
+    {
+      "dispatch_started": true,
+      "error": null,
+      "has_native_response": true,
+      "id": "normal",
+      "memory": {
+        "memory_scope": "sampled_native_rss_not_peak_not_gpu",
+        "native_rss_max_sample_mib": 6248.88671875,
+        "native_rss_sample_count": 149
+      },
+      "passed": true,
+      "request_seconds": 37.98400000000038,
+      "validated_result": {
+        "elapsed_seconds": 37.95299999999952,
+        "final_retokenized_tokens": 6,
+        "finish_reason": "eos",
+        "input_tokens": 63,
+        "output_tokens": 521,
+        "telemetry": {
+          "final_token_measurement": "retokenized_content_not_generated_segment",
+          "grammar_sha256": "1ba87a6e00cd3300dd3f0752619d3b929892abafc3356c39f6aaaf2b73b001a3",
+          "native_json_framing": "bare",
+          "native_timings": {
+            "cache_n": 0,
+            "predicted_n": 521,
+            "prompt_n": 63
+          },
+          "native_token_ids_count": 521,
+          "reasoning_budget_effective_serialized": false,
+          "reasoning_budget_tokens_requested": 512,
+          "reasoning_split_verified": true
+        }
+      },
+      "watchdog": {
+        "watchdog_fired": false,
+        "watchdog_joined": true
+      }
+    },
+    {
+      "dispatch_started": true,
+      "error": null,
+      "has_native_response": true,
+      "id": "stress",
+      "memory": {
+        "memory_scope": "sampled_native_rss_not_peak_not_gpu",
+        "native_rss_max_sample_mib": 6313.85546875,
+        "native_rss_sample_count": 343
+      },
+      "passed": true,
+      "request_seconds": 88.0,
+      "validated_result": {
+        "elapsed_seconds": 88.0,
+        "final_retokenized_tokens": 414,
+        "finish_reason": "length",
+        "input_tokens": 5048,
+        "output_tokens": 928,
+        "telemetry": {
+          "final_token_measurement": "retokenized_content_not_generated_segment",
+          "grammar_sha256": "a814765fd47d69803490a866798c14f7706dfadc17b1bd19f62a92037a2c4077",
+          "native_json_framing": "bare",
+          "native_timings": {
+            "cache_n": 0,
+            "predicted_n": 928,
+            "prompt_n": 5048
+          },
+          "native_token_ids_count": 928,
+          "reasoning_budget_effective_serialized": false,
+          "reasoning_budget_tokens_requested": 512,
+          "reasoning_split_verified": true
+        }
+      },
+      "watchdog": {
+        "watchdog_fired": false,
+        "watchdog_joined": true
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "cleanup_attempted": true,
+      "cleanup_errors": 0,
+      "drain": {
+        "chunk_bytes": 8192,
+        "emitted_bytes": 0,
+        "eof": true,
+        "join_errors": 0,
+        "joined": true,
+        "raw_content_retained": false,
+        "read_errors": 0,
+        "started": true
+      },
+      "process_started": true,
+      "seconds": 0.9690000000009604,
+      "stopped": true,
+      "within_budget": true
+    },
+    {
+      "cleanup_attempted": true,
+      "cleanup_errors": 0,
+      "drain": {
+        "chunk_bytes": 8192,
+        "emitted_bytes": 0,
+        "eof": true,
+        "join_errors": 0,
+        "joined": true,
+        "raw_content_retained": false,
+        "read_errors": 0,
+        "started": true
+      },
+      "process_started": true,
+      "seconds": 0.875,
+      "stopped": true,
+      "within_budget": true
+    }
+  ],
+  "date_kst": "2026-10-16",
+  "downloads": 0,
+  "elapsed_seconds_including_startup_cleanup_recovery": 245.84399999999914,
+  "error": null,
+  "execution_head_observed_before_publication": "4ba51b9a6eefb1dfd78e2732ee8fe3933fe3bc0c",
+  "followup_id": "meeting-thinking-c4-compat-resource-v1",
+  "generation_protocol": "meeting-single-call-thinking-c4-p0-v1",
+  "human_reviews": 0,
+  "last_request_through_cleanup_seconds": 88.98400000000038,
+  "limitations": [
+    "Synthetic resource inputs are not Q&A quality evidence.",
+    "Final content token counts are retokenizations, not exact generated segment counts.",
+    "RSS is sampled host resident memory, not true peak or GPU memory.",
+    "No retries, cap ladder, old pool reuse or automatic service adoption.",
+    "Full-scope grounded Q&A and fresh calibration6/6 then isolated validation8/8 remain required."
+  ],
+  "metadata_recovery": true,
+  "new_completed_native_responses": 2,
+  "new_contract_passed_calls": 2,
+  "new_dispatch_attempts": 2,
+  "original_closed_report": {
+    "bytes": 130962,
+    "file": "experiments/results/meetings-c4-resources-v1.json",
+    "sha256": "2b66105860e47180dc29ff78213d43ade81ac29ef2f17ba19ba632440e017729"
+  },
+  "original_public_byte_identical": true,
+  "original_report": {
+    "bytes": 199199,
+    "file": ".local/meetings-c4-compat-resources-v1/report.json",
+    "sha256": "4221cf730c348b4ba6d5741f47a818e1c2ee68cdd337e21a05947d5379bd6043"
+  },
+  "original_source_unchanged_flag": true,
+  "paid_services": 0,
+  "plan": {
+    "bytes": 27875,
+    "file": "data/evaluation/meetings-c4-compat-neutral-plan-v1.json",
+    "sha256": "8454ddfe48e6f3f5eaff67a4b5abeedc049c2f608f88c25bc20fd83d64b9ead6"
+  },
+  "preparation": {
+    "bytes": 1101,
+    "file": "data/evaluation/meetings-c4-compat-neutral-plan-v1.preparation.json",
+    "sha256": "3e0f795462aa05bc5138b0e16cb963241a16e35d6764f74f51bc7c8e610674c1"
+  },
+  "public_report": {
+    "bytes": 199199,
+    "file": "experiments/results/meetings-c4-compat-resources-v1.json",
+    "sha256": "4221cf730c348b4ba6d5741f47a818e1c2ee68cdd337e21a05947d5379bd6043"
+  },
+  "purpose": "c4_separate_same_budget_compatibility_resource_result_not_quality",
+  "quality_calls": 0,
+  "replay": {
+    "followup_id": "meeting-thinking-c4-compat-resource-v1",
+    "quality_calls": 0,
+    "replayed": true,
+    "status": "passed_resources_only"
+  },
+  "restarts": 1,
+  "schema_version": 1,
+  "separate_post_run_source_check": {
+    "bindings": 52,
+    "freeze_sha256": "de8bfc6b92603b1cd5d999afb5788222c7b71ccda1e7a9a3c0aa5a7df36ef61e",
+    "passed": true
+  },
+  "service_adoption": false,
+  "source_freeze": {
+    "bytes": 5820,
+    "file": "data/evaluation/meetings-c4-compat-source-freeze-v1.json",
+    "sha256": "de8bfc6b92603b1cd5d999afb5788222c7b71ccda1e7a9a3c0aa5a7df36ef61e"
+  },
+  "status": "passed_resources_only"
+}

@@ -1,0 +1,36 @@
+.. _NEP51:
+
+=====================================================
+NEP 51 — Changing the representation of NumPy scalars
+=====================================================
+:Author: Sebastian Berg
+:Status: Accepted
+:Type: Standards Track
+:Created: 2022-09-13
+:Resolution: https://mail.python.org/archives/list/numpy-discussion@python.org/message/U2A4RCJSXMK7GG23MA5QMRG4KQYFMO2S/
+
+Abstract
+========
+
+NumPy has scalar objects ("NumPy scalar") representing a single value
+corresponding to a NumPy DType.  The representation of these currently
+matches that of the Python builtins, giving::
+
+    >>> np.float32(3.0)
+    3.0
+
+In this NEP we propose to change the representation to include the
+NumPy scalar type information.  Changing the above example to::
+
+    >>> np.float32(3.0)
+    np.float32(3.0)
+
+We expect that this change will help users distinguish the NumPy scalars
+from the Python builtin types and clarify their behavior.
+
+The distinction between NumPy scalars and Python builtins will further become
+more important for users once :ref:`NEP 50 <NEP50>` is adopted.
+
+These changes do lead to smaller incompatible and infrastructure changes
+related to array printing.
+

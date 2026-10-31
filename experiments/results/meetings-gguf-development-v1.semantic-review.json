@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "kind": "independent_ai_semantic_review_of_known_failure_development_candidate",
+  "reviewed_at": "2026-10-13T05:55:42.687785+00:00",
+  "report": {
+    "path": "experiments/results/meetings-gguf-development-v1.json",
+    "sha256": "27d72d3b473b23667c39d968112fd31762998ba6eb8921daec56cd01521662ee",
+    "actual_read_local_copy": ".local/meeting-gguf-candidate-v1/report.json",
+    "copy_byte_identical_verified": true,
+    "status": "completed_not_semantically_verified",
+    "plan_sha256": "43170c6dc4a6bc22efcf08ff84a41c27c78894c2583d7307a693ecd3d882a93b"
+  },
+  "input": {
+    "path": "data/evaluation/meetings-gguf-development-v1.json",
+    "sha256": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+    "kind": "known_failure_development_cases_not_held_out",
+    "question_author": "AI"
+  },
+  "reviewer": {
+    "type": "AI",
+    "agent": "meetings_review",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "setting_evidence": "Parent reports tool-accepted spawn settings; reviewer has no independent runtime model-setting introspection.",
+    "human_review_count": 0,
+    "model_inference_calls_by_reviewer": 0,
+    "test_runs_by_reviewer": 0
+  },
+  "fixture_sha256": {
+    "tests/fixtures/meetings/synthetic-release-followup.md": "0f2e3bf13e65c8a6593b257dda36aed94873d0fdf4a9697380d87325e12c398a",
+    "tests/fixtures/meetings/synthetic-release-planning.md": "606678b791ad6b3e1dde1e1bb0189cf064d8152cbb6ccba405663d36500e5138",
+    "tests/fixtures/meetings/synthetic-runbook.md": "1e95de236f46967b54c8cef312fc305f206f5698ba9d38c288ee37c9b3582d4c",
+    "tests/fixtures/meetings/public/jupyter-february-2025.md": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+    "tests/fixtures/meetings/public/jupyter-host-guide.md": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f",
+    "tests/fixtures/meetings/public/jupyter-june-2025.md": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+    "tests/fixtures/meetings/public/jupyter-license.txt": "1b9f3955dcf9c235b10c168cca09b88c1f2adf992a0dc13120482d93037602ac"
+  },
+  "source_provenance": {
+    "report_sources_unchanged": true,
+    "interpretation": "Run report states bound sources were unchanged during execution. Reviewer independently verified current original fixture bytes and exact context/quote slices; did not reconstruct a pre-run source snapshot or claim all code remains unchanged after the run.",
+    "bound_files_as_recorded": {
+      "data/evaluation/meetings-gguf-development-v1.json": "cc56a7afd2373342346c73ae75b20597db3c3280f005a59429aacca50ca997f6",
+      "data/models/meetings-generation-gguf-v1.json": "ee069d53d3e8c35c44a71a65733e03551be560753ab06962c32ebdbd36cd2d11",
+      "docs/MEETINGS-GGUF-CANDIDATE.md": "8c5f5a55239e724213d40f462efb30941a70dbea4c79b7b7426cf4da6b768cf0",
+      "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+      "scripts/probe_meeting_gguf.py": "beb8de6ad85287deb4f71bc73a2f2eca6455985599dc6f72fee6e038885d884d",
+      "scripts/serve_meetings.py": "9c54905ae01d02e7fbd37b955dd62b6de58952cf4e434a1efa75f9816d33c1d8",
+      "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+      "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+      "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+      "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+      "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+      "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+      "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+      "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+      "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+      "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a"
+    }
+  },
+  "model_runtime_as_recorded": {
+    "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "gguf-sha256:5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+    "original_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "experimental": true,
+    "generation_protocol": "meeting-full-chunk-evidence-v5",
+    "artifact": {
+      "repo_id": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+      "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+      "filename": "Qwen3-4B-Instruct-2507-Q5_K_M.gguf",
+      "sha256": "5bde5e9d883622acb02bf77fe7dcbc56a8b9a9ad4be78a72ca23a532658b4ecb",
+      "size_bytes": 2889514080
+    },
+    "runtime": {
+      "backend": "llama.cpp",
+      "tag": "b11429",
+      "commit": "d81235049384534c167caea52b85a694f6103d14",
+      "observed_build": "b11429-d81235049",
+      "identity_check": "local_gguf_sha256_and_server_alias",
+      "context_tokens": 6144,
+      "max_input_tokens": 4096,
+      "max_new_tokens": 768,
+      "deadline_seconds": 120,
+      "memory_telemetry": "not_measured"
+    }
+  },
+  "execution_accounting": {
+    "top_level_requests": 5,
+    "analysis_requests": 1,
+    "answer_requests": 4,
+    "classification_native_completions": 12,
+    "answer_native_completions": 4,
+    "total_native_completions": 16,
+    "paid_service_calls_as_recorded": 0,
+    "effective_generation": "Recorded temperature 0, samplers [temperature], seed 0; classification digit grammar n_predict 4, answers n_predict 768; cache_prompt requested false and observed cache tokens 0.",
+    "performance_conclusion": "None; timings and readiness do not establish Java service performance or peak memory."
+  },
+  "mechanical_checks": {
+    "structural_passes_as_recorded": 5,
+    "context_slices_verified_against_original_fixtures": 18,
+    "answer_citation_slices_verified": 9,
+    "analysis_item_metadata_summary_slices_verified": 17,
+    "interpretation": "Matching slices only establish quote fidelity, not semantic entailment."
+  },
+  "case_reviews": [
+    {
+      "case_id": "unassigned-action-analysis",
+      "verdict": "pass",
+      "metadata": "Title, date 2026-10-01, three participants and purpose match explicit source fields.",
+      "summary": "Four extractive lines accurately cover both adopted decisions and both tasks; omissions of proposal and open issue from concise summary do not remove their separate items.",
+      "item_checks": [
+        {
+          "index": 0,
+          "type": "topic",
+          "verdict": "correct",
+          "note": "Discussion about displaying title and source evidence is not promoted to a decision or unresolved issue."
+        },
+        {
+          "index": 1,
+          "type": "proposal",
+          "verdict": "correct",
+          "note": "Unapproved 90-day suggestion retains rejection wording and is not treated as the adopted 30-day policy."
+        },
+        {
+          "index": 2,
+          "type": "decision",
+          "verdict": "correct",
+          "note": "Confirmed 30-day retention."
+        },
+        {
+          "index": 3,
+          "type": "decision",
+          "verdict": "correct",
+          "note": "External release follows permission checks; no invented release date."
+        },
+        {
+          "index": 4,
+          "type": "action",
+          "verdict": "correct",
+          "assignee": "민지",
+          "due_date": "2026-10-05",
+          "priority": "high",
+          "note": "All fields explicitly present."
+        },
+        {
+          "index": 5,
+          "type": "action",
+          "verdict": "correct",
+          "assignee": null,
+          "due_date": null,
+          "priority": null,
+          "note": "Concrete evidence-screen review remains a task despite unknown owner and deadline; absent priority remains null."
+        },
+        {
+          "index": 6,
+          "type": "unresolved",
+          "verdict": "correct",
+          "note": "Release quality criteria remain for next meeting."
+        }
+      ],
+      "completeness": "All seven substantive source items preserved. Provenance line excluded appropriately."
+    },
+    {
+      "case_id": "cross-public",
+      "verdict": "fail",
+      "claims": [
+        {
+          "claim_index": 0,
+          "text": "In February, Mike Krassowski announced the JupyterLab 4.4 beta release.",
+          "cited_chunk_ids": [
+            "253afb2e7ea3405286a18555e89e1d50"
+          ],
+          "supported_by_selected_citations": false,
+          "factual_assessment_against_available_sources": "partially_supported_elsewhere_but_status_underspecified",
+          "rationale": "Selected context 2 only mentions a JupyterLab 4.4 demo. Context 3 announces that beta will be released today, which supports a planned beta announcement, not confirmed completion. The answer does not retain planned status.",
+          "supporting_or_corrective_input_context_indices": [
+            3
+          ]
+        },
+        {
+          "claim_index": 1,
+          "text": "In June, JupyterLab 4.4 and Notebook 7.4 were released.",
+          "cited_chunk_ids": [
+            "255945b311e54511b5f7c912c9858340"
+          ],
+          "supported_by_selected_citations": false,
+          "factual_assessment_against_available_sources": "supported_elsewhere_as_reported_available_not_precise_release_date",
+          "rationale": "Selected context 1 is the June heading and attendance list. Context 4 says JupyterLab 4.4 and Notebook 7.4 are out. This supports availability reported at the June call; it does not establish the exact month of release.",
+          "supporting_or_corrective_input_context_indices": [
+            4
+          ]
+        },
+        {
+          "claim_index": 2,
+          "text": "JupyterLab 4.4 was released in both February and June.",
+          "cited_chunk_ids": [
+            "253afb2e7ea3405286a18555e89e1d50",
+            "255945b311e54511b5f7c912c9858340"
+          ],
+          "supported_by_selected_citations": false,
+          "factual_assessment_against_available_sources": "unsupported_completed_release_in_both_months",
+          "rationale": "Neither selected demo/header supports a release. February reports a future beta release and June reports versions already out. Combining them into completed release in both months invents completion and loses beta versus released status.",
+          "supporting_or_corrective_input_context_indices": [
+            3,
+            4
+          ]
+        }
+      ],
+      "completeness": "Fails the planned-beta versus already-released comparison and citation gate. Correct answer should attribute the February planned beta and June availability to their respective announcement passages."
+    },
+    {
+      "case_id": "missing-budget",
+      "verdict": "pass",
+      "model_status": "abstained",
+      "claims": [],
+      "rationale": "Supplied host-guide passages provide no catering budget; empty claims and insufficient_evidence reason are appropriate. This is one known absent-evidence example, not an abstention-rate estimate."
+    },
+    {
+      "case_id": "host-guide",
+      "verdict": "pass_with_completeness_note",
+      "claims": [
+        {
+          "claim_index": 0,
+          "text": "The agenda link should be included in the event’s description in the shared Google Calendar.",
+          "cited_chunk_ids": [
+            "77c1a2849eb74e788dd1b3dc7bb649c8"
+          ],
+          "supported_by_selected_citations": true,
+          "factual_assessment_against_available_sources": "supported",
+          "rationale": "Context 1 explicitly places the agenda link in the shared Google Calendar event description.",
+          "supporting_or_corrective_input_context_indices": [
+            1
+          ]
+        },
+        {
+          "claim_index": 1,
+          "text": "Attendees are encouraged to add discussion points to the agenda.",
+          "cited_chunk_ids": [
+            "af0fa2723026411c86e790b38cbf139c"
+          ],
+          "supported_by_selected_citations": true,
+          "factual_assessment_against_available_sources": "supported",
+          "rationale": "Context 0 explicitly encourages attendees to add agenda discussion points.",
+          "supporting_or_corrective_input_context_indices": [
+            0
+          ]
+        },
+        {
+          "claim_index": 2,
+          "text": "The agenda is a collaboratively created document made by participants.",
+          "cited_chunk_ids": [
+            "3a9c12e39e23449c98136ef1310190f0"
+          ],
+          "supported_by_selected_citations": true,
+          "factual_assessment_against_available_sources": "supported",
+          "rationale": "Context 4 explicitly describes the participant-created collaborative agenda.",
+          "supporting_or_corrective_input_context_indices": [
+            4
+          ]
+        }
+      ],
+      "completeness": "Core calendar-link instruction is answered correctly. The available instruction to share the agenda link in the chat (context 3) is omitted; note this limitation rather than counting the broad question as an exhaustive list requirement. All three stated claims are grounded."
+    },
+    {
+      "case_id": "korean-mixed-full-docs",
+      "verdict": "fail_incomplete",
+      "claims": [
+        {
+          "claim_index": 0,
+          "text": "The log retention period was changed from 30 days to 7 days.",
+          "cited_chunk_ids": [
+            "synthetic-release-followup.md-full"
+          ],
+          "supported_by_selected_citations": true,
+          "factual_assessment_against_available_sources": "supported",
+          "rationale": "Follow-up meeting explicitly replaces the October 1 30-day decision with seven days.",
+          "supporting_or_corrective_input_context_indices": [
+            1
+          ]
+        },
+        {
+          "claim_index": 1,
+          "text": "Original question text should not be written to operational logs.",
+          "cited_chunk_ids": [
+            "synthetic-runbook.md-full"
+          ],
+          "supported_by_selected_citations": true,
+          "factual_assessment_against_available_sources": "supported",
+          "rationale": "English runbook explicitly prohibits raw question text in operational logs.",
+          "supporting_or_corrective_input_context_indices": [
+            2
+          ]
+        }
+      ],
+      "completeness": {
+        "answered": [
+          "30 days changed to 7 days",
+          "Raw question logging is prohibited"
+        ],
+        "missing_required": [
+          "When: change confirmed at the 2026-10-08 follow-up meeting, replacing the 2026-10-01 decision"
+        ],
+        "plan_coverage_note": "The preregistered development checklist additionally names the prohibition on raw document text; that prohibition is also omitted, although the user question explicitly asks only about raw question text.",
+        "language": "Entire answer is English to a Korean question. This is a usability mismatch; the missing requested date independently fails completeness."
+      }
+    }
+  ],
+  "aggregate": {
+    "answer_claims": 8,
+    "answer_claims_supported_by_selected_citations": 5,
+    "answer_claims_not_supported_by_selected_citations": 3,
+    "strict_semantic_case_passes": 2,
+    "case_passes_with_completeness_note": 1,
+    "failed_cases": 2,
+    "gate": "fail",
+    "blocking_case_ids": [
+      "cross-public",
+      "korean-mixed-full-docs"
+    ],
+    "decision": "Do not treat the five structural passes as a passed semantic gate or authorize automatic candidate adoption. Preserve this result; any correction requires separately versioned verification.",
+    "scope_limitations": [
+      "Known previously examined development failures, not held-out evaluation.",
+      "One synthetic analysis and four answers; no general accuracy or abstention claim.",
+      "No new Java/browser operational validation by this reviewer.",
+      "Human review count remains zero.",
+      "No M5-B validation or locked test materials read."
+    ]
+  }
+}

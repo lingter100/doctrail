@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "author_role": "/root/c6_validation_author",
+  "adopted_at_utc": "2026-10-20T02:44:57.469528+00:00",
+  "source_documents": 6,
+  "public_exact_documents": 3,
+  "synthetic_documents_ai_authored": 3,
+  "manifest": {
+    "file": "data/evaluation/meetings-c6-validation-v1/source-manifest.json",
+    "sha256": "153a2a981a07009ea889eccc82005b68e3e40bcab861a342c4386b86a3605d12"
+  },
+  "public_repository": "jupyter/community-committee",
+  "public_revision": "9b0cbee8cd707d6bf2e03e94a855d8c8335c69c6",
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "upstream_path": "LICENSE",
+    "immutable_url": "https://github.com/jupyter/community-committee/blob/9b0cbee8cd707d6bf2e03e94a855d8c8335c69c6/LICENSE",
+    "raw_sha256": "57aa34c7af6959e9df92e14ea01f9c7bf6019b3d3bcf896f324addfc1a30eaa7",
+    "git_blob_sha1": "07353e4ad57798618cadfe6e5df471b333f9634b",
+    "exact_repository_license_text": "CC-BY (https://creativecommons.org/licenses/by/4.0/)\n\nYou are free to:\n\n    Share — copy and redistribute the material in any medium or format for any purpose, even commercially.\n\n    Adapt — remix, transform, and build upon the material for any purpose, even commercially.\n\n    The licensor cannot revoke these freedoms as long as you follow the license terms.\n\nUnder the following terms:\n\n    Attribution — You must give appropriate credit , provide a link to the license, and indicate if changes were made . You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\n\n    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.\n\nNotices:\n\nYou do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation .\n\nNo warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.\n",
+    "scope_observation": "Repository root LICENSE; recursive tree has no nested license overriding these three paths.",
+    "github_metadata_license": "NOASSERTION; not treated as permission by itself",
+    "credit": "Jupyter Community Committee contributors",
+    "changes": "Raw originals copied byte-for-byte. Existing service applies Unicode NFC and CRLF/CR-to-LF normalization only; observations are per source. Markdown and external links remain literal.",
+    "nonendorsement": "Jupyter and its contributors do not endorse this evaluation."
+  },
+  "preauth_head": "0755660866488bb83fb2d7330c008b2ba1da192f",
+  "role_registration_sha256": "bbad1743d2c74a52052c8cb8091e32faf0fea2166666fa742a4b100d4df1b476",
+  "local_evidence": {
+    ".local/meetings-c6-validation-source-v1/preauthorization-v1.json": "3829e1692e4d5f57700e3b39ffdf822c62724fefe6ee758a4acf172755eee883",
+    ".local/meetings-c6-validation-source-v1/repository-reservation-v1.json": "c38e626bb125058771bf7453046ada6f1aa5b3c4d83d17900ec7edf2192a8432",
+    ".local/meetings-c6-validation-source-v1/repository-reservation-v2.json": "59521ecb8598f4b8f9e8001a38ebb206bfbb1ef6a6fe463773b1fd708cd9c2d4",
+    ".local/meetings-c6-validation-source-v1/rejected-jupyter-governance-v1.json": "bd91bb70705135e1905e2dfa249c0ca0cfe4b547aa72ee2a0089a56ae40e5c1d",
+    ".local/meetings-c6-validation-source-v1/repo-jupyter-leadership-rejection-response.json": "4f50e254a719a6b1b06b529bdaa08980e4acf0878aad0090cba7771f6ebdf0b9",
+    ".local/meetings-c6-validation-source-v1/repo-jupyter-community-metadata.json": "425fa385c53e87726d1260d176a6b7b61a9a7b037e079c0bb42583e32c55e221",
+    ".local/meetings-c6-validation-source-v1/community-commit-metadata.json": "650f5447f64b7f2116d23b201667178e5be45d200527df6a161a3570ca940804",
+    ".local/meetings-c6-validation-source-v1/community-tree-metadata.json": "38bdec86dfdfd1af844c9e4513c2d94510213ab041d05e49d530604cb79a1bd8",
+    ".local/meetings-c6-validation-source-v1/community-LICENSE-exact": "57aa34c7af6959e9df92e14ea01f9c7bf6019b3d3bcf896f324addfc1a30eaa7",
+    ".local/meetings-c6-validation-source-v1/synthetic-source-spec-v1.json": "309cc7a043455fe9ae1b9027eb10fe74c7aa3632f441ce464c4fc18f708bcd0e",
+    ".local/meetings-c6-validation-source-v1/author-metadata-fingerprint-check-v1.json": "c6aaf012619b944305441018a494c4fb8f9f0ce3c58bda373cd19c015be66c19"
+  },
+  "rejected_or_nonadopted": [
+    {
+      "repository": "jupyter/governance",
+      "reason": "No two dated meeting files in inspected tree; README page exposure retained."
+    },
+    {
+      "repository": "jupyter/leadership",
+      "reason": "HTTP 404 metadata response preserved."
+    }
+  ],
+  "freshness": "Author exact metadata comparison passed; no independent semantic freshness or crosssplit absence claim.",
+  "source_processing": "Actual frozen Python helper invocation; exact local outputs copied without editing.",
+  "java_parity": "Pending exclusive Maven slot; no success claim at adoption.",
+  "questions": 0,
+  "oracles": 0,
+  "selected_contexts": 0,
+  "tokenizer_calls": 0,
+  "native_calls": 0,
+  "model_downloads": 0,
+  "closed_pool_runs": 0,
+  "human_reviews": 0,
+  "synthetic_authorship_preceded_processing": true,
+  "processing_counter_scope": "Its synthetic_bodies_authored/downloads counters describe the processing invocation, not earlier source authorship/retrieval.",
+  "item_authorship": "Not authorized until independent source acceptance, freeze, commit and new dispatch."
+}

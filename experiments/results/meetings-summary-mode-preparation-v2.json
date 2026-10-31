@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "summary-mode-development-external-attempt-v2-preparation",
+  "status": "prepared_and_independently_reviewed_not_executed",
+  "source_commit": "28ff830890c80a06fcd0f82d4c43687db5bc6d73",
+  "source_ci": {
+    "file": "experiments/results/meetings-summary-mode-entrypoint-repair-ci-v1.json",
+    "size_bytes": 2454,
+    "sha256": "689af5c798bc117b995ad6f1d9846eff69468b1c9024f5f070937a517dc8f380"
+  },
+  "roles": {
+    "file": "data/evaluation/meetings-summary-mode-role-registration-v2.json",
+    "size_bytes": 3506,
+    "sha256": "2d50542cb90f1b8d72374997d21e2c67fa2e7f92a5e4a4901b5bdc72a4759f4a"
+  },
+  "registration": {
+    "file": ".local/meeting-summary-mode-execution-v2/registration-v2.json",
+    "size_bytes": 32515,
+    "sha256": "9fc0be13ad2974d5b92623172d38d1397a36a430b674f3237c4a6b9c43c14c1a"
+  },
+  "companion": {
+    "file": ".local/meeting-summary-mode-execution-v2/preparation-v2/external-companion-v2.json",
+    "size_bytes": 6909,
+    "sha256": "88dc2cdfc56191f3a8e39ad9d38c54ffbdf73a5c69fd50a219bf216fd0c2c489"
+  },
+  "receipt": {
+    "file": ".local/meeting-summary-mode-execution-v2/preparation-v2/receipt-v2.json",
+    "size_bytes": 3727,
+    "sha256": "e1af60e464afa83fc742160cb69f1f409ff6dea7c0e0ef3db552bab1707bbbfe"
+  },
+  "artifact_index": {
+    "file": ".local/meeting-summary-mode-execution-v2/preparation-v2/artifact-index-v2.json",
+    "size_bytes": 3145,
+    "sha256": "c86b8ea0118a36c8e49fd9d258e6c74f5268f0af7d9daead8727719fcf516432"
+  },
+  "recovery_contract": {
+    "file": "docs/MEETINGS-SUMMARY-MODE-ENTRYPOINT-RECOVERY.md",
+    "size_bytes": 6486,
+    "sha256": "e9add1d2542bfd360f23862800999277fc03e8f0b700842db332468827adfe2e"
+  },
+  "original_failed_attempt": {
+    "file": "experiments/results/meetings-summary-mode-development-v1.json",
+    "size_bytes": 3405,
+    "sha256": "645c6825b3cbb4ce18a4e9cd90e9ed5a6c67056b2a0c7d518cde48995465f2d5"
+  },
+  "strict_registration_changed_keys": [
+    "output_dir"
+  ],
+  "official_read_only_verifier": {
+    "invocations": 1,
+    "passed": true,
+    "seconds": 11.703,
+    "code_files": 141,
+    "assets": 61,
+    "documents": 4,
+    "arms": 8,
+    "source_parse": "mechanical only; no semantic review"
+  },
+  "judge_adoption": {
+    "file": ".local/meeting-summary-mode-independent-v2/adoption-receipt-v1.json",
+    "size_bytes": 6323,
+    "sha256": "7db6c09f134df74625cc1f3bf0e61225efca53720d7e1418b06122ebd76e6d86"
+  },
+  "independent_binding_review": {
+    "file": ".local/meeting-summary-mode-v2-binding-review/independent-review-v1.json",
+    "size_bytes": 26212,
+    "sha256": "48cb8eb1516c4706466efa8f52da44a4a35e31b6a3ec8028dbd975ddb16cb88a",
+    "blockers": 0,
+    "advisories": 0,
+    "parent_input_bindings_verified": 37
+  },
+  "parent_verification": {
+    "file": ".local/meeting-summary-mode-parent-v1/v2-final-preparation-verification-v1.json",
+    "size_bytes": 1207,
+    "sha256": "f634ac8c39f7b105ad9ca6fe0270b749adaf2150c869617eeef78301ba310011"
+  },
+  "preservation": {
+    "v1_files_unchanged": 45,
+    "frozen_files_unchanged": 77,
+    "criteria_admission_exclusion_hash_only_refs": 6
+  },
+  "resource_snapshot": {
+    "available_ram_bytes": 12676591616,
+    "required_ram_bytes": 10737418240,
+    "reserved": false,
+    "runtime_candidates": 0,
+    "unresolved_processes": 0,
+    "gpu_compute_app_present": "ChatGPT.exe with N/A process memory; not exclusive GPU",
+    "original_three_leases": "briefly acquired and released; bytes unchanged"
+  },
+  "actual_v2_cli_dispatches": 0,
+  "new_model_completions": 0,
+  "cli_and_run_absent_at_publication": true,
+  "remaining_before_actual_once": [
+    "public preparation commit",
+    "separate explicit executor assignment",
+    "fresh resources, ownership, paths and exact bindings check"
+  ],
+  "limitations": [
+    "Preparation and CI do not demonstrate native compatibility, input token fit, semantic quality or service readiness.",
+    "Successor agents retain fixed source-only criteria and independent-role separation; no predecessor continuity or complete blinding claim.",
+    "Original v1 failed and is consumed; no alternate entry retry or third attempt is authorized."
+  ],
+  "human_review_count": 0,
+  "paid_calls": 0,
+  "public_service_deployments": 0
+}

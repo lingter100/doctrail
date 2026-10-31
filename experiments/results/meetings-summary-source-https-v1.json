@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "INDEPENDENT_REVIEW_PASSED_PENDING_EXACT_CI",
+  "baseline_commit": "3aa8dfb477c35fb9254639b7f037d1050b098445",
+  "scope": "Owned persistent verified-TLS HTTPS connection only during source phase; existing injected opener remains unowned.",
+  "sources": {
+    "scripts/prepare_summary_grammar_engine.py": "2f7ed96bd828f1f6e2d0b5e816064ee1f99cb94cb9ffc83f7c480386a76a7bd5",
+    "tests/test_summary_grammar_engine.py": "4918d8ce2b6dd757fa0743ad76543c33b8029569930f5a926c6e54b6fdd566b5"
+  },
+  "preserved": {
+    "source_files": 1687,
+    "source_bytes": 33232611,
+    "existing_fetch_redirect_status_path_blob_byte_guards": true,
+    "tools_metadata_license_transport": true,
+    "deadlines_and_resource_limits": true,
+    "request_retry_count": 0,
+    "parallel_workers_added": 0
+  },
+  "validation": {
+    "focused_cases_passed": 70,
+    "focused_seconds": 40.18,
+    "initial_functional_failures": 0,
+    "initial_ruff_issues": 2,
+    "initial_lint_output_preserved": true,
+    "post_lint_affected_test_passed": 1,
+    "post_lint_affected_test_seconds": 0.3,
+    "post_lint_case_already_in_focused_set": true,
+    "final_normal_ruff": "passed",
+    "production_post_lint_change": "comment only, AST equal",
+    "transport_fixtures": "real HTTPResponse parser with fake sockets; no network"
+  },
+  "coverage": [
+    "Two sequential source bodies reuse one connection and remain hash/blob/accounting exact.",
+    "Server closure reconnects only for next distinct file; failures never replay.",
+    "Redirect, malformed/truncated framing, oversize, early close and socket errors discard without draining hidden bodies.",
+    "Shared deadline prevents a request and updates timeout on reused sockets.",
+    "Phase success and failure close owned connections while preserving first error.",
+    "Injected opener and legacy URL/status/source-mode/payload guards remain covered."
+  ],
+  "parent_verified_refs": 22,
+  "additional_boundary_refs": 10,
+  "git_original_copies": 2,
+  "implementation_receipt_sha256": "d86ffe9ee499aeacb7325070c1eaf30d88e078144b2ed9729f1192eb88664d70",
+  "parent_receipt_sha256": "ad3c43d02be4548d2ffb1ae1a027c390268167c1511cd9dbdced5b74d9963891",
+  "actual_network_calls": 0,
+  "new_acquisition_runs": 0,
+  "native_model_runs": 0,
+  "speedup": "UNKNOWN",
+  "completion_time": "UNKNOWN",
+  "limitations": [
+    "Connection reuse does not reduce1687GETs or33.2MB selected source bytes.",
+    "Synthetic checks do not establish TLS handshake behavior or real remote connection lifetime.",
+    "Consumedv6 and partial files remain preserved; no new acquisition authority."
+  ],
+  "initial_independent_review": {
+    "blockers": 1,
+    "advisories": 0,
+    "receipt_sha256": "c957f599a5022bed71d9aab77ed4201ae8cafa19e891d6922d00e20762a2eada",
+    "parent_refs_verified": 6,
+    "finding": "Manual response.close during status/redirect rejection can replace primary exception with cleanup error.",
+    "reproduction_not_run_by_reviewer": true
+  },
+  "initial_sources": {
+    "scripts/prepare_summary_grammar_engine.py": "543d5658385af7548196c8beacdb4dfe93eca85c73c5e388808e1457e0e34b34",
+    "tests/test_summary_grammar_engine.py": "e30d90e1d92fe02bcb8fbd52f00e88384ff081953400832f2fac0663fee3bdd7"
+  },
+  "close_repair": {
+    "scope": "SourceResponse.close only; bytes outside method unchanged",
+    "before_fix_failed": 6,
+    "before_fix_passed": 4,
+    "before_fix_seconds": 1.31,
+    "after_fix_passed": 29,
+    "after_fix_seconds": 0.86,
+    "new_cases": 10,
+    "existing_affected_cases": 19,
+    "prior70_repeated": false,
+    "normal_ruff": "passed",
+    "initial_exception_identity_reason_and_notes_retained": true,
+    "no_primary_close_errors_propagated": true,
+    "receipt_sha256": "f98316e75c8a20d2c7281a05fa7629a58dda423bc3ea80c63b3e8f77f000fc9f",
+    "parent_receipt_sha256": "77c48aa7ca01f64519e7e4cb539ce8769ae6102f091a008c2d84cab5d474528b",
+    "parent_direct_refs": 21,
+    "parent_boundary_refs": 13
+  },
+  "second_independent_review": {
+    "same_B1": true,
+    "original_rejection_paths_resolved": true,
+    "remaining": "early/no-primary simultaneous raw and connection disposal failures replace first close error",
+    "blockers": 1,
+    "advisories": 0,
+    "receipt_sha256": "97ce0cdb412c97b62e28559560a9e5000d292e122a2f20e76806c1977871dd69",
+    "fixed_source_snapshots_used": true,
+    "parent_refs_verified": 6
+  },
+  "owner_close_repair": {
+    "scope": "SourceHTTPS.close finally only; previous SourceResponse.close unchanged",
+    "before_fix_failed": 1,
+    "before_fix_seconds": 0.55,
+    "first_matrix_passed": 28,
+    "first_matrix_note_expectation_failures": 2,
+    "failed_note_cases_rechecked_passed": 2,
+    "recheck_pytest_seconds": 0.33,
+    "final_unique_cases_passed": 30,
+    "normal_ruff": "passed",
+    "prior70_repeated": false,
+    "first_error_identity_preserved": true,
+    "secondary_close_error_note_retained": true,
+    "connection_close_always_attempted": true,
+    "receipt_sha256": "2459a510c4da773f9e195cca4eac0b5b8f19a8d13a1ed389cdd0df54cc1caf86",
+    "parent_receipt_sha256": "82a7454536dfc270406b1eae98841b079c1ee27cee24786846ea82f49ea8a09a",
+    "parent_direct_refs": 26,
+    "parent_boundary_refs": 22
+  },
+  "final_independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "B1": "closed including simultaneous close failures",
+    "receipt_sha256": "ee4a6dcb20fd6ba34fd30f2d61bc5f68add41adc4b3bc10f979b903909c3667f",
+    "parent_receipt_sha256": "b2ac696fd81636d117e645574f209423500709317d50e6285be2fd35b3df2cf6",
+    "parent_refs_verified": 9,
+    "new_reviewer_tests": 0
+  }
+}

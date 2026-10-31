@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "locked-independent-judgment-versus-model-self-review",
+  "safe_aggregate": {
+    "drafts_compared": 1,
+    "whole_claims_compared": 5,
+    "model_original_support_labels": {
+      "supported": 5,
+      "unsupported": 0,
+      "uncertain": 0,
+      "other": 0
+    },
+    "full_source_axis": {
+      "exact_label_matches": 1,
+      "model_supported_independent_partial": 4,
+      "model_supported_independent_unsupported": 0,
+      "model_supported_independent_uncertain_or_ambiguous": 0,
+      "disagreeing_claims": 4
+    },
+    "selected_evidence_axis": {
+      "exact_label_matches": 0,
+      "model_supported_independent_partial": 5,
+      "model_supported_independent_unsupported": 0,
+      "model_supported_independent_uncertain_or_ambiguous": 0,
+      "disagreeing_claims": 5
+    },
+    "cross_axis_overlap": {
+      "disagreeing_on_both_axes": 4,
+      "disagreeing_on_at_least_one_axis": 5,
+      "axis_disagreement_counts_not_additive": true
+    },
+    "coverage": {
+      "draft_denominator": 1,
+      "model_sufficient": 1,
+      "independent_insufficient": 1,
+      "exact_label_matches": 0,
+      "disagreements": 1,
+      "not_assessable": 0
+    },
+    "unchanged_independent_semantic_acceptance": {
+      "accepted_candidates": 0,
+      "denominator": 1
+    },
+    "paired_comparison": {
+      "available": false,
+      "performed": false,
+      "reason": "One valid draft only; no paired candidate judgments."
+    },
+    "interpretation": "Independent partial is a non-pass category, not a partial agreement score. These are fixed-label comparisons, not a new evaluation."
+  },
+  "failure_themes": [
+    {
+      "id": "unsupported_relation_or_purpose",
+      "count": 3,
+      "denominator": 5,
+      "unit": "whole claim",
+      "description": "A compound claim adds or changes a purpose, causal link, or other material relationship that its source does not establish.",
+      "basis": "Existing locked full-source and selected-evidence reasons; no new semantic labels."
+    },
+    {
+      "id": "changed_time_status_or_period",
+      "count": 3,
+      "denominator": 5,
+      "unit": "whole claim",
+      "description": "A claim changes an action's progress/commitment status, prospective versus completed state, or bounded time period.",
+      "basis": "Existing locked reasons about status and temporal scope; not a new count of source requirements."
+    },
+    {
+      "id": "selected_evidence_omits_claim_component",
+      "count": 2,
+      "denominator": 5,
+      "unit": "whole claim",
+      "description": "At least one asserted component lies outside the actually selected spans, even though related information exists elsewhere in the full source.",
+      "basis": "A narrower subtype of incomplete selected-evidence support. The five selected-evidence failures also include material relationship/status errors in otherwise relevant exact citations."
+    }
+  ],
+  "overlap_accounting": {
+    "unit": "whole claim",
+    "theme_memberships_total": 8,
+    "distinct_claims_with_at_least_one_listed_theme": 5,
+    "relation_and_time_status_period": 2,
+    "relation_and_selected_component_omission": 1,
+    "time_status_period_and_selected_component_omission": 1,
+    "all_three_themes": 1,
+    "pairwise_intersections_include_the_triple_intersection": true,
+    "counts_are_not_additive": true,
+    "note": "Broad support-axis failures are outcomes, not additional theme counts. Draft-level coverage/readability counts and citation-span counts must not be added to claim counts."
+  },
+  "limitations": {
+    "original_judgments_criteria_gates_and_quality_labels_unchanged": true,
+    "new_evaluations_or_rejudgments": 0,
+    "mode_identity_mapping_received_only_after_individual_and_taxonomy_locks": true,
+    "model_emitted_one_support_label_per_claim": "The same original model label is compared separately to the two locked independent support axes; no claim is made that the model separately assessed both axes.",
+    "self_review_labels_not_independent_quality_acceptance": true,
+    "source_specific_reasons_raw_claims_reference_answers_or_rewrites_included": false,
+    "raw_model_reasoning_or_performance_read": false,
+    "unrelated_run_or_split_files_read": false,
+    "embedded_provenance_reference_files_opened": 0,
+    "historical_aggregate_exposure_disclosed": true,
+    "complete_blinding_claimed": false,
+    "pair_recovery_regression_or_mode_benefit_conclusions_allowed": false,
+    "general_model_quality_or_failure_inference": false,
+    "runtime_or_operational_acceptance_assessed": false,
+    "model_tokenizer_native_java_browser_network_executions": 0,
+    "Git_or_criteria_changes": 0,
+    "actual_execution_authority": false
+  },
+  "safe_receipt_sha256": "1d3bf85c4de36b3688b76e8acdfa36a785677cbd4ab14ec7802a56fe107069cf",
+  "taxonomy_sha256": "3e6aebcce8f338fe68e393238234bc144466ad4f0ab0dac9e50e2d226ce1bc53",
+  "human_review_count": 0
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-development-v2",
+  "date": "2026-10-23",
+  "status": "failed_consumed_once",
+  "source_commit": "23d67b574cff6a4e2c0ab47a3823b2b4f4289fad",
+  "execution_head": "42fb1e06f4789bb88885a99f8ad17e4ecc09cd7f",
+  "candidate": {
+    "analysis_policy": "batch-v2",
+    "extraction_assembly": "grounded-summary-v2"
+  },
+  "data_scope": "Existing exposed synthetic development documents, same original input order and locked source-only criteria; not held-out evaluation or human review.",
+  "outcome": {
+    "cli_exit": 1,
+    "node_exit": 1,
+    "runtime_eligible": false,
+    "browser_first_failure": "analysis_failed",
+    "worker_reason_code": "generation_summary_review_rejected",
+    "failed_analysis_ordinal": 3,
+    "uploads_completed": 5,
+    "analyses_stored": 2,
+    "grounded_ui_confirmed": 2,
+    "answers_completed": 0,
+    "questions_unexecuted": 6,
+    "mechanically_valid_summary_drafts": 3,
+    "summary_quality": "independent_review_in_progress"
+  },
+  "transport": {
+    "completion_attempts": 22,
+    "completion_responses": 22,
+    "attempts_by_stage": {
+      "classification": 16,
+      "generation": 3,
+      "review": 3
+    },
+    "transport_errors": 0,
+    "completion_after_failure": 0,
+    "tokenize_attempts": 138,
+    "template_attempts": 138
+  },
+  "timing": {
+    "startup_seconds": 67.35899999999674,
+    "runner_wall_seconds": 269.8439999999973,
+    "cli_wall_seconds": 271.5625896,
+    "last_seal_elapsed_seconds": 271.07799999999406,
+    "total_acceptance_bound_seconds": 1625,
+    "within_total_bound": true,
+    "hard_preemption_proven": false,
+    "observer_analyze_seconds": [
+      62.09300000000803,
+      68.28099999998813,
+      61.0
+    ],
+    "observer_interval": "analyze started to terminal result/error; includes observer/HTTP boundary",
+    "browser_first_failure_elapsed_ms": 200162.8344,
+    "browser_elapsed_interval": "cumulative from browser run() performance.now() start; NOT an analyze-request latency",
+    "cleanup_seconds": 1.0179894657194382,
+    "not_production_slo_or_latency_benchmark": true
+  },
+  "preservation": {
+    "cleanup_accepted": true,
+    "post_owned_identities_absent": 17,
+    "indexed_run_artifacts": 1293,
+    "run_files_including_index_and_finalization": 1297,
+    "raw_events": 1240,
+    "cli_files": 4,
+    "old_immutable_bindings": 3295,
+    "runtime_dependencies": 91,
+    "frozen_files": 77,
+    "original_input_bindings": 16,
+    "runtime_inputs_and_artifacts_unchanged": true,
+    "new_model_reruns": 0,
+    "extra_kills": 0,
+    "original_failure_preserved": true
+  },
+  "evidence": {
+    "preparation": {
+      "path": "experiments/results/meetings-grounded-summary-development-preparation-v2.json",
+      "bytes": 4297,
+      "sha256": "fb1302d7e503c5ef8614a948356deebc0032d5c047896fabd2135ca5bd176262"
+    },
+    "source_ci": {
+      "path": "experiments/results/meetings-grounded-summary-v2-integration-ci-v1.json",
+      "bytes": 3406,
+      "sha256": "f57852661ed6f8c7343640508874304fb39250249291ec4f4a541b55b7538d47"
+    },
+    "custody_audit": {
+      "path": ".local/meeting-grounded-summary-v2-harness-v1/actual-v2-custody/custody-audit-v1.json",
+      "bytes": 8494,
+      "sha256": "1d684d86d483bb24c90d21442a82dcaa0d739d4f8dec4774afe3c55f1cf68b3c"
+    },
+    "custody_index": {
+      "path": ".local/meeting-grounded-summary-v2-harness-v1/actual-v2-custody/custody-index-v1.json",
+      "bytes": 2116,
+      "sha256": "ac4b69ddf4cf3e20520f061ceb8c7950e1c96a247ef69da0ab3969f045b799bd"
+    },
+    "parent_verification": {
+      "path": ".local/meeting-grounded-summary-v2-harness-v1/parent-actual-v2-verification.json",
+      "bytes": 580,
+      "sha256": "355ca4fb7444a6f09606b3d0f0a8c144e19f8c5180492d0ec7406fe5c253771d"
+    },
+    "summary_only_packet": {
+      "path": ".local/meeting-grounded-summary-v2-harness-v1/actual-v2-custody/summary-candidates-v1.json",
+      "bytes": 8738,
+      "sha256": "a281ac3f0f58325e21d2f136e0fb9a711a46bcac8c92f47d7433250f227f64f8"
+    },
+    "summary_packet_custody": {
+      "path": ".local/meeting-grounded-summary-v2-harness-v1/actual-v2-custody/summary-packet-custody-v1.json",
+      "bytes": 3466,
+      "sha256": "91bbab0a0942b9e161897a00304fcc576b8b51e815918e77ff49fc60ee8e5672"
+    },
+    "source_only_lock": {
+      "path": ".local/meeting-grounded-summary-v2-independent-v1/source-lock.json",
+      "bytes": 11535,
+      "sha256": "be191d0d2784d997dcc56e030e93fe8939d2f4bcb93097965138d404ec4b7d84"
+    }
+  },
+  "next": "Lock independent whole-source support, selected-citation support and core sufficiency for valid drafts before comparing model self-review. No retry or relaxed review gate for this consumed run.",
+  "limitations": [
+    "Two stored summaries do not establish sufficient or accurate content; quality review is pending.",
+    "The third generated draft was not accepted or stored as a successful analysis.",
+    "Existing QA, remaining meeting and full edit/link workflow were not completed in this run.",
+    "The scope is exposed synthetic development data, not public real-meeting acceptance or held-out generalization.",
+    "All model execution was free/local; no paid API, deployment or human review was performed."
+  ]
+}

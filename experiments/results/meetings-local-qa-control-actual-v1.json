@@ -1,0 +1,289 @@
+{
+  "status": "completed_with_rejections",
+  "operational_complete": true,
+  "mechanically_complete": false,
+  "counts": {
+    "http": 25,
+    "qa": 4,
+    "requested_tokens": 4096,
+    "review": 0,
+    "summary": 4
+  },
+  "registration_sha256": "9ed686db70c0383854f002496455d0f011b625528eab7b8bef32d14360ae7cb9",
+  "resource_policy": "native-rss6-host2-v1",
+  "response_format": {
+    "policy": "claims-json-gbnf-v1",
+    "qa_sha256": "ed997a709d82c0b8444820ebf85026ee89e9276d41552a3621601378d566ecaf",
+    "review_sha256": "9964289ac750f5be26b5e84dd78822d76bfb3f28b8103c5f5b6858e02295f118",
+    "summary_sha256": "0656e7930a7fd05ce6126bd8138787d824a8f81de2419187d72a952dcb07cb85"
+  },
+  "summary_control": {
+    "base_prompt_sha256": "ab5982cef5b05121c8fd78aba96baf9b1d86e6250fb2820dac66ab95e4487c02",
+    "effective_system_sha256": "40a1f7772fc5a3bb9b9935b5635db8edfd77f2154852c8a0132798f72b225266",
+    "instruction_sha256": "7300b8053e63b7478fd42f5cf9ce9e7aa1a9c8cdae6cda29f50ce6deb2da0073",
+    "policy": "summary-budget-plan-v1"
+  },
+  "qa_control": {
+    "base_prompt_sha256": "db163498b0a2ffe122a7e695db90a0c0fbb5fe074a1df75aa541f65a22f59a0e",
+    "effective_system_sha256": "7daad39a3afe7be9b4b0b016dc88e798e5f7f7430276ebf9767b7b5bd8838f71",
+    "instruction_sha256": "e73ab738ab7a7409f0bc7e24a6cb617d033171a7429bfb8d85792dd94dfb00d1",
+    "policy": "qa-coverage-plan-v1"
+  },
+  "qa_control_scope": "selected_settings_only_not_execution_or_quality",
+  "source_wire_format": "source-parts-compact-v1",
+  "limits": {
+    "active_available_bytes": 2147483648,
+    "active_seconds": 900,
+    "cleanup_seconds": 5,
+    "completion_calls": 12,
+    "generation_calls": 8,
+    "input_tokens": 4096,
+    "native_rss_bytes": 6442450944,
+    "qa_seconds": 60,
+    "qa_tokens": 256,
+    "requested_tokens": 4608,
+    "review_tokens": 128,
+    "startup_available_bytes": 8589934592,
+    "startup_seconds": 120,
+    "summary_seconds": 120,
+    "summary_tokens": 768,
+    "whole_seconds": 1025
+  },
+  "sampled_max_native_rss_bytes": 2998247424,
+  "sampled_min_available_ram_bytes": 6818394112,
+  "sampled_max_device_vram_mib": 3161.0,
+  "bindings_unchanged": true,
+  "elapsed_seconds": 89.75,
+  "CLI_exit": 1,
+  "outer_wrapper_tool_exit": 0,
+  "CLI_elapsed_seconds": 90.78100000001723,
+  "once_consumed": true,
+  "official_CLI_issues": 1,
+  "retries": 0,
+  "stage_status_counts": {
+    "summary": {
+      "rejected": 4
+    },
+    "review": {
+      "not_applicable": 4
+    },
+    "qa": {
+      "valid": 4
+    }
+  },
+  "rejection_codes": {
+    "summary": {
+      "generation_output_limit": 3,
+      "generation_invalid_schema": 1
+    },
+    "review": {},
+    "qa": {}
+  },
+  "first_failure_code": "generation_output_limit",
+  "stop_reason_code": null,
+  "fresh_gate_RAM": 10843586560,
+  "startup_ram_gate": {
+    "available_bytes": 10848563200,
+    "elapsed_seconds": 4.062999999965541,
+    "minimum_bytes": 8589934592,
+    "passed": true,
+    "stage": "before_native_popen"
+  },
+  "cleanup": {
+    "seconds": 0.4529999999795109,
+    "within_budget": true,
+    "stopped": true,
+    "cleanup_errors": 0,
+    "process_absence_confirmed": true,
+    "owned_process_handle": "closed",
+    "owned_pipes_closed": true,
+    "remaining_drain_thread": false
+  },
+  "late_invalidation_present": false,
+  "terminal_report_consistent": true,
+  "CLI_matches_terminal": true,
+  "schema_version": 1,
+  "source_head": "4df611dc09d1b06de4d42e5174c5aebe8ef5d4c4",
+  "experiment": "qa-coverage-plan-v1 / schema5",
+  "actual_execution_completed": true,
+  "candidate_adopted": false,
+  "QA_semantic_review_status": "individual_judgments_locked_and_parent_metadata_verified",
+  "summary_semantic_judgments": 0,
+  "summary_not_judged": 4,
+  "QA_semantic_accepted": 0,
+  "human_review": 0,
+  "fixed_denominators": {
+    "summary": 4,
+    "qa": 4
+  },
+  "actual_request_checks": {
+    "templates_checked": 8,
+    "systems_match": 8,
+    "completion_config_echo_stop_caps_checked": 8,
+    "all_match": true,
+    "audit_sha256": "53a0a890903acf2c07a8823e809ab8544f9a2401615b4896a086218645519058",
+    "limit": "Recorded requests demonstrate transmission/configuration, not understanding or content sufficiency."
+  },
+  "source_and_output_preservation": {
+    "terminal_custody_sha256": "86e3a8bd5bdcbbdb98d30a9c0e24799f63deb50835d417091b7de326fc67fe15",
+    "parent_acceptance_sha256": "067e58ba186bc43d784c18f123e49ec52ec099cb6c0ea978abca0943377d900b",
+    "parent_hash_refs_verified": 351,
+    "fixed_refs": 257,
+    "code_current_and_Git": 60,
+    "assets_stat_only": 62,
+    "sealed_files": 66,
+    "internal_index_refs": 63,
+    "exact_inventory": true,
+    "owned_original_identities_absent": 13,
+    "leases_released": 3,
+    "HOLD_released": true
+  },
+  "independent_packet": {
+    "status": "all_eligible_outputs_delivered_under_existing_protocol",
+    "eligible_summary": 0,
+    "eligible_qa": 4,
+    "fixed_slots": 8,
+    "safe_manifest_sha256": "2308f6900041c99c728d691cd9e59293baba581f8597da2ffd1898ca5dda709d",
+    "parent_acceptance_sha256": "ffd10d47606c7610f4de8d22ea328451c210af99f4d884be463d4c3a939a92b1",
+    "parent_hash_refs_verified": 353,
+    "parent_mtime_refs_verified": 275,
+    "source_question_evidence_projections_exact": 4,
+    "raw_reparse_or_repair": false,
+    "content_selection": false
+  },
+  "comparison_basis": {
+    "baseline": "experiments/results/meetings-local-summary-control-actual-v1.json",
+    "same_source_question_criteria_model_summary_format_wire_resources_limits": true,
+    "changed": "QA instruction, schema/code binding and new output location only",
+    "no_cross_run_semantic_comparison_before_individual_lock": true,
+    "observed_v6_to_v7": {
+      "accepted": [
+        0,
+        0
+      ],
+      "selected_evidence_supported": [
+        0,
+        0
+      ],
+      "selected_evidence_partial": [
+        3,
+        2
+      ],
+      "selected_evidence_unsupported": [
+        1,
+        2
+      ],
+      "required_covered": [
+        1,
+        1
+      ],
+      "required_partial": [
+        7,
+        4
+      ],
+      "required_missing": [
+        4,
+        6
+      ],
+      "required_incorrect": [
+        1,
+        2
+      ],
+      "exact_selected_citations": [
+        11,
+        10
+      ],
+      "limit": "Fixed-order repeated development n=4, AI-reviewed with prior exposure. No statistical or general-model regression claim."
+    }
+  },
+  "cost": {
+    "external_paid_API_GPU_cloud_used": false,
+    "electricity_and_hardware_cost": "not measured",
+    "requested_generation_token_caps_sum": 4096,
+    "actual_generated_token_total": "not projected in this report; requested caps are not actual tokens"
+  },
+  "limitations": [
+    "Whole-source development pilot, not retrieval/ACL integrated service acceptance.",
+    "Four repeated development questions do not establish generalization or final-test accuracy.",
+    "Summary structural rejection is not a semantic accuracy score.",
+    "Model self-review and isolated code/CI tests do not replace independent content judgment.",
+    "User review remains0; private locked data and local execution bindings are not yet a complete fresh-clone public reproduction package."
+  ],
+  "independent_QA": {
+    "fixed_denominator": 4,
+    "individually_judged": 4,
+    "not_judged": 0,
+    "accepted": 0,
+    "not_accepted": 4,
+    "indeterminate": 0,
+    "sufficient": 0,
+    "insufficient": 4,
+    "answered": 4,
+    "abstained": 0,
+    "claim_count": 4,
+    "whole_source_claim_support": {
+      "supported": 1,
+      "partial": 2,
+      "unsupported": 1,
+      "uncertain": 0
+    },
+    "selected_evidence_claim_support": {
+      "supported": 0,
+      "partial": 2,
+      "unsupported": 2,
+      "uncertain": 0
+    },
+    "required_element_count": 13,
+    "required_elements": {
+      "covered": 1,
+      "partial": 4,
+      "missing": 6,
+      "incorrect": 2,
+      "indeterminate": 0
+    },
+    "Korean_naturalness": {
+      "adequate": 3,
+      "not_fully_natural": 1,
+      "indeterminate": 0
+    }
+  },
+  "independent_summary": {
+    "fixed_denominator": 4,
+    "individually_judged": 0,
+    "not_judged": 4,
+    "accepted": null,
+    "semantic_acceptance_rate": null,
+    "absence_reason": "Not available in this assigned packet; no structural, execution, integrity or service-outcome reason inferred."
+  },
+  "failure_taxonomy": {
+    "unit": "Overlapping item counts; categories are descriptions of applying existing requirements, not new acceptance thresholds.",
+    "counts": {
+      "required_information_missing_or_incomplete": 4,
+      "selected_evidence_incomplete_for_whole_claim": 4,
+      "source_temporal_or_status_contradiction": 1,
+      "added_specificity_or_relation_ambiguity": 2,
+      "naturalness_or_referent_issue": 1
+    }
+  },
+  "selected_citations_exact": 10,
+  "independent_review": {
+    "safe_receipt_sha256": "34d5af660d3515df8efac1d1ce1421488b0e9ccd2ed64961b54966d0e8746570",
+    "individual_lock_sha256": "2b796bb13e1eb5f28bd3c34f6c7e0a41da1beb890bb008417ede1034f53be6e5",
+    "parent_acceptance_sha256": "b5319d7d24565b5de1197e6392d7e32ac20e22727210719088c738b02589cc4f",
+    "parent_referenced_hashes_verified": 28,
+    "parent_private_content_reads": 0,
+    "exposure": {
+      "prior_v5_v6_content_and_judgments_known": true,
+      "automatic_project_context_aggregates_and_candidate_metadata_known": true,
+      "complete_blinding_claimed": false,
+      "new_identity_inference_performed": false,
+      "limit": "Prior familiarity and automatic context exposure persist. This does not claim complete blinding or erase earlier exposure."
+    }
+  },
+  "decision": {
+    "candidate_adopted": false,
+    "QA_instruction_microvariation_family": "closed_after_second_zero_of_four_as_preregistered",
+    "whole_project_goal": "active",
+    "next": "Separate evidence-based free-local QA approach; model-free summary grammar engine validation preparation."
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "FOCUSED_CHECKS_AND_INDEPENDENT_REVIEW_PASSED",
+  "source_base": "bac908d9c1d8d3474f797cad94ea26840d38531a",
+  "scope": [
+    "runtime.safe_path",
+    "runtime.disk_bytes",
+    "Budget.log_growth",
+    "Budget.scan"
+  ],
+  "changed_sources": [
+    {
+      "file": "tools/summary_grammar/runtime.py",
+      "sha256": "1e6b3b652e795e597df9629ca2ce0be5b6807843720680cddd8a0a541fad978e",
+      "size_bytes": 22905
+    },
+    {
+      "file": "scripts/prepare_summary_grammar_engine.py",
+      "sha256": "8415088a80db91753bc59d82a1dee333557234b816b2478627e470eaf9554347",
+      "size_bytes": 59865
+    },
+    {
+      "file": "tests/test_summary_grammar_engine.py",
+      "sha256": "9174840031feb437e402cfa40556d2aff12a059cc234628c2875a5a8e8573d3e",
+      "size_bytes": 114428
+    }
+  ],
+  "focused_tests": {
+    "passed": 106,
+    "new_cases": 32,
+    "existing_cases": 74,
+    "pytest_seconds": 11.64,
+    "process_seconds": 13.23499999998603,
+    "exit_code": 0,
+    "full_suite_run": false,
+    "repeat_count": 0
+  },
+  "ruff": {
+    "exit_code": 0,
+    "seconds": 0.2029999999795109,
+    "existing_tool": true
+  },
+  "synthetic_call_counts": {
+    "safe_path": [
+      4,
+      2
+    ],
+    "disk_bytes": [
+      6,
+      3
+    ],
+    "Budget.log_growth": [
+      6,
+      3
+    ],
+    "Budget.scan": [
+      6,
+      3
+    ]
+  },
+  "call_count_scope": "One synthetic regular leaf and root+leaf checks, same mocked resolve/enumeration; no real latency claim",
+  "preserved_guards": [
+    "ancestor checks per call",
+    "final resolve containment",
+    "before/after checkpoints",
+    "scan frequency",
+    "log limits and ledger",
+    "size and time limits",
+    "cleanup guards",
+    "observer",
+    "pins and selection"
+  ],
+  "new_acquisition_build_native_model_calls": 0,
+  "initial_failures": [],
+  "final_receipt_sha256": "c2ff162ad7e7a98c6633f5497df25c7e277a98b24f0e75d200524e9a37ea4d5f",
+  "limitations": [
+    "No caching or atomic snapshot guarantee; actual acquisition completion and performance remain unverified.",
+    "These synthetic syscall counts are not real acquisition latency or model-quality measurements.",
+    "Closed v4 failure and the original600s cap are preserved."
+  ],
+  "reproduce": {
+    "runner": "python -B -m pytest -q -p no:cacheprovider --basetemp .local/summary-metadata-tests",
+    "selection": "Append tests/test_summary_grammar_engine.py::<function> once for each selected_test_functions entry. Use a fresh basetemp for preserved failure evidence.",
+    "lint": ".venv/Scripts/ruff.exe check --no-cache --select F scripts/prepare_summary_grammar_engine.py tools/summary_grammar/runtime.py tests/test_summary_grammar_engine.py",
+    "dependency_note": "Use an environment with repository test dependencies; the recorded run used the existing isolated Python3.12 environment."
+  },
+  "selected_test_functions": [
+    "test_path_escape_and_windows_alias_rejected",
+    "test_reparse_and_reference_change_are_rejected",
+    "test_owned_temp_rejects_hostile_inheritance_and_counts_retained_bytes",
+    "test_temp_scope_fails_closed_before_any_process",
+    "test_metadata_safe_path_one_nonfollow_read_per_component_without_cache",
+    "test_metadata_safe_path_rechecks_replaced_components_and_propagates_errors",
+    "test_metadata_kind_and_size_share_one_nonfollow_read",
+    "test_metadata_entry_replacement_or_loss_after_path_check_fails_closed",
+    "test_worker_many_chunk_writes_have_constant_full_scan_count",
+    "test_archive_declared_total_is_counted_once_at_exact_disk_boundary",
+    "test_worker_phase_boundary_rejects_unaccounted_files_and_observation_errors",
+    "test_worker_direct_log_growth_is_accounted_without_recursive_scans",
+    "test_worker_short_write_is_reserved_not_refunded_or_reused",
+    "test_worker_all_metadata_bytes_and_bounded_events_count_in_ledger",
+    "test_disk_optional_checkpoint_order_and_original_return_errors",
+    "test_supervisor_scan_checks_mid_traversal_and_preserves_owned_cleanup",
+    "test_startup_scan_deadline_stops_before_launch",
+    "test_v3_worker_interval_forced_phases_and_legacy_per_checkpoint",
+    "test_v3_worker_cheap_limits_and_sticky_failure_between_samples",
+    "test_v3_worker_scheduled_resources_and_post_os_deadline_latch",
+    "test_v3_phase_failure_and_metadata_failure_preserve_original",
+    "test_v3_supervisor_sampling_boundaries_and_no_catchup",
+    "test_v3_supervisor_checkpoint_failures_cleanup_and_first_cause",
+    "test_v3_worker_attempt_binding_before_budget",
+    "test_v3_full_mocked_acquisition_and_exact_lock_verification",
+    "test_v3_worker_write_os_deadline_and_no_refund_latch",
+    "test_v3_phase_reraises_first_latch_after_caught_failure_and_later_error",
+    "test_v3_direct_log_failure_latches_before_restored_state"
+  ],
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "final_receipt_sha256": "ac6aced6e786020335a716c77050b6f27b62cfab2c80d0c2a3381bbc94318161",
+    "parent_direct_refs_verified": 16
+  }
+}

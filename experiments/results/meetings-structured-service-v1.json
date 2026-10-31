@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment": "meeting_structured_service_v1",
+  "status": "failed",
+  "source_commit": "8bd4104823c3c32bb267953100260f4b78427354",
+  "development_only": true,
+  "heldout_evaluation": false,
+  "human_reviews": 0,
+  "final_receipt_sha256": "c429f3b073879ad168ed921d15c1e101daa931612f73664d5c89af5f5793fd4e",
+  "safe_summary_sha256": "8bf76ff6d6175913721e50c1ab8504add1e719a452b94b8345a4ae60f284f7c2",
+  "native_and_java_startup": "ready",
+  "natural_cli_exit": 1,
+  "outer_guard_failure": null,
+  "startup_seconds": 27.156,
+  "helper_elapsed_seconds": 54.641,
+  "outer_through_cleanup_seconds": 57.703,
+  "attempted_analyses": 1,
+  "attempted_answers": 0,
+  "unattempted_analyses": 1,
+  "unattempted_answers": 2,
+  "first_failure": {
+    "type": "DevelopmentError",
+    "code": "generation_development_analysis_failed"
+  },
+  "classification": {
+    "accepted_completions": 46,
+    "reported_input_tokens": 32196,
+    "output_tokens": 92,
+    "elapsed_seconds": 14.312
+  },
+  "summary": {
+    "http_status": 200,
+    "stop_type": "eos",
+    "output_tokens": 564,
+    "local_input_count": 3068,
+    "native_evaluated_count": 3069,
+    "accepted": false,
+    "rejected_at": "token_identity_integrity"
+  },
+  "native_captures": 47,
+  "cleanup": {
+    "known_children_absent": 9,
+    "launcher_absent": true,
+    "errors": [],
+    "frozen_refs": 77,
+    "frozen_unchanged": true
+  },
+  "resources": {
+    "sampled_peak_owned_rss_bytes": 3348160512,
+    "sampled_minimum_host_available_bytes": 7947706368,
+    "numeric_vram_gate": false,
+    "vram_fit_claim": false
+  },
+  "next": "Inspect only the preserved new public-development output and pinned source; distinguish transport/framing failure from semantic defects before selecting a correction.",
+  "semantic_quality_accepted": false,
+  "automatic_retry": false
+}

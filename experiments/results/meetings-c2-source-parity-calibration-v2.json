@@ -1,0 +1,29 @@
+{
+  "schema_version" : 1,
+  "kind" : "actual_java_python_document_chunk_parity",
+  "inventory_sha256" : "d57f17288abbd7c302555ecdb6c04e94b7c6282de0a3005a652871e39cb29316",
+  "java_version" : "21.0.12.1",
+  "bound_files" : {
+    "server/src/main/java/io/doctrail/Ingest.java" : "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java" : "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/test/java/io/doctrail/MeetingSourceParityTest.java" : "04e3371b13c2a8b0c577975fb589a6c9a1999012cc434ab1cf6f3851c093f23f"
+  },
+  "documents" : [ {
+    "codepoints" : 15215,
+    "document_id" : "c2-cal-f01-governance-charter",
+    "processed_sha256" : "ccb43c8d7c0b27797c5202f14e7767f692dbf0869f31688cbe5c02a50f0e17de",
+    "chunks" : 18,
+    "raw_sha256" : "ccb43c8d7c0b27797c5202f14e7767f692dbf0869f31688cbe5c02a50f0e17de"
+  }, {
+    "codepoints" : 25854,
+    "document_id" : "c2-cal-f01-membership",
+    "processed_sha256" : "5a55a6a7a8a83e1c4c1b73fefbf4d71ed7adca400fc3c558c9e342ff6c00042f",
+    "chunks" : 31,
+    "raw_sha256" : "5a55a6a7a8a83e1c4c1b73fefbf4d71ed7adca400fc3c558c9e342ff6c00042f"
+  } ],
+  "document_count" : 2,
+  "chunk_count" : 49,
+  "exact_content_pages_chunk_text_offsets_ordinals_ids" : true,
+  "model_calls" : 0,
+  "semantic_quality_measured" : false
+}

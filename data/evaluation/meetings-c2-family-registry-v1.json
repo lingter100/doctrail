@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "registry_id": "meetings-c2-family-registry-v1",
+  "registration_date": "2026-10-14",
+  "created_at": "2026-10-14T00:22:03.919127+00:00",
+  "status": "metadata_registered_before_question_authoring_pending_parent_commit_and_full_source_freeze",
+  "purpose": "Fresh C2 calibration/isolated validation source-family registration; metadata only",
+  "comparison_plan": "docs/MEETINGS-C2-COMPARISON-PLAN.md",
+  "candidate": "C2-P0",
+  "question_texts_created": 0,
+  "oracle_records_created": 0,
+  "evaluation_contexts_created": 0,
+  "model_calls": 0,
+  "paid_service_calls": 0,
+  "human_review_count": 0,
+  "split_assignment_method": "Purposive project/source-family separation fixed before questions; not random sampling and not proof of statistical independence.",
+  "totals": {
+    "calibration": {
+      "items": 8,
+      "question_language": {
+        "ko": 4,
+        "en": 4
+      },
+      "answerability": {
+        "answerable": 6,
+        "insufficient_evidence": 2
+      }
+    },
+    "validation": {
+      "items": 12,
+      "question_language": {
+        "ko": 6,
+        "en": 6
+      },
+      "answerability": {
+        "answerable": 8,
+        "insufficient_evidence": 4
+      }
+    }
+  },
+  "families": [
+    {
+      "family_id": "C2-F01",
+      "split": "calibration",
+      "origin": "public",
+      "topic": "OpenTelemetry community governance and membership procedures",
+      "family_boundary": "All selected documents from open-telemetry/community, including historical versions and close paraphrases, belong to this calibration family only.",
+      "planned_slots": {
+        "items": 4,
+        "question_language": {
+          "ko": 2,
+          "en": 2
+        },
+        "answerability": {
+          "answerable": 3,
+          "insufficient_evidence": 1
+        }
+      },
+      "source_language": "en",
+      "repository": "open-telemetry/community",
+      "repository_url": "https://github.com/open-telemetry/community",
+      "immutable_commit": "df3343ccbecb84a6e25dcd9610cb9a93ad377a93",
+      "committed_at": "2026-10-13T17:29:25Z",
+      "git_tree_sha1": "53a78862176b9fe860aff208d28f2ab27a3062c4",
+      "tree_listing_truncated": false,
+      "metadata_api_urls": [
+        "https://api.github.com/repos/open-telemetry/community/commits/df3343ccbecb84a6e25dcd9610cb9a93ad377a93",
+        "https://api.github.com/repos/open-telemetry/community/git/trees/df3343ccbecb84a6e25dcd9610cb9a93ad377a93?recursive=1"
+      ],
+      "license": {
+        "repository_spdx": "Apache-2.0",
+        "path": "LICENSE",
+        "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "immutable_url": "https://github.com/open-telemetry/community/blob/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/LICENSE",
+        "raw_url": "https://raw.githubusercontent.com/open-telemetry/community/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/LICENSE",
+        "repository_metadata_and_pinned_license_checked": true,
+        "per_source_header_and_third_party_check": "Pending source-author audit before source adoption; repository license alone is not asserted to override any file-specific exception."
+      },
+      "source_candidates": [
+        {
+          "path": "governance-charter.md",
+          "git_blob_sha1": "c756e99bdeb90fa21b12af315a820acf865157a7",
+          "size_bytes": 15223,
+          "immutable_url": "https://github.com/open-telemetry/community/blob/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/governance-charter.md",
+          "raw_url": "https://raw.githubusercontent.com/open-telemetry/community/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/governance-charter.md",
+          "body_read_by_registry_designer": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "processed_sha256": null
+        },
+        {
+          "path": "guides/contributor/membership.md",
+          "git_blob_sha1": "f18f974f0859d8fe45267e50c571c1a46f121484",
+          "size_bytes": 25854,
+          "immutable_url": "https://github.com/open-telemetry/community/blob/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/guides/contributor/membership.md",
+          "raw_url": "https://raw.githubusercontent.com/open-telemetry/community/df3343ccbecb84a6e25dcd9610cb9a93ad377a93/guides/contributor/membership.md",
+          "body_read_by_registry_designer": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "processed_sha256": null
+        }
+      ],
+      "metadata_suitability": "Paths indicate governance and membership procedures; content, excerpt suitability and answerability have not been read or confirmed by this designer.",
+      "source_adoption_status": "HOLD: pinned repository license metadata is verified; individual source-file license/NOTICE audit and body suitability are unverified and must pass before question authoring."
+    },
+    {
+      "family_id": "C2-F02",
+      "split": "calibration",
+      "origin": "synthetic",
+      "topic": "Fictional indoor ice-rink resurfacing and session coordination",
+      "family_boundary": "One newly invented organization and its synthetic operational documents; no persons, events, wording, numbers or facts reused from previous synthetic pools.",
+      "planned_slots": {
+        "items": 4,
+        "question_language": {
+          "ko": 2,
+          "en": 2
+        },
+        "answerability": {
+          "answerable": 3,
+          "insufficient_evidence": 1
+        }
+      },
+      "source_language": "ko",
+      "source_status": "not_authored",
+      "source_candidates": [],
+      "provenance_requirement": "Future material must be explicitly AI-authored synthetic functional/evaluation data, not a record of a real organization.",
+      "metadata_suitability": "Topic registration only; no scenario events, rules, numerical answers or question wording are specified."
+    },
+    {
+      "family_id": "C2-F03",
+      "split": "validation",
+      "origin": "public",
+      "topic": "Apache Arrow contributor, review and release procedures",
+      "family_boundary": "All selected documents from apache/arrow, including historical versions and close paraphrases, belong to this isolated validation family only.",
+      "planned_slots": {
+        "items": 6,
+        "question_language": {
+          "ko": 3,
+          "en": 3
+        },
+        "answerability": {
+          "answerable": 4,
+          "insufficient_evidence": 2
+        }
+      },
+      "source_language": "en",
+      "repository": "apache/arrow",
+      "repository_url": "https://github.com/apache/arrow",
+      "immutable_commit": "7ee15283bc9fac8b4e523b0b4640439b547ef0ff",
+      "committed_at": "2026-10-13T12:42:53Z",
+      "git_tree_sha1": "ef6e22983889e7e24af5983ca2d641c25c3d58e1",
+      "tree_listing_truncated": false,
+      "metadata_api_urls": [
+        "https://api.github.com/repos/apache/arrow/commits/7ee15283bc9fac8b4e523b0b4640439b547ef0ff",
+        "https://api.github.com/repos/apache/arrow/git/trees/7ee15283bc9fac8b4e523b0b4640439b547ef0ff?recursive=1"
+      ],
+      "license": {
+        "repository_spdx": "Apache-2.0",
+        "path": "LICENSE.txt",
+        "git_blob_sha1": "c6616a5b4501aebf3836cf4e46219aeb236e81c2",
+        "sha256": "cd03925a27219d326d622609fbcae6567279af8b8885c33d5969a9e4ef5d7525",
+        "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/LICENSE.txt",
+        "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/LICENSE.txt",
+        "repository_metadata_and_pinned_license_checked": true,
+        "contains_third_party_notices": true,
+        "notice": {
+          "path": "NOTICE.txt",
+          "git_blob_sha1": "8046f20a0b919dba562dee3d5097fdee7bdd4010",
+          "sha256": "afd895d61a00101f6d5a41cf518c83865d815e8109e956f512a0ce4ea9738c06",
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/NOTICE.txt"
+        },
+        "per_source_header_and_third_party_check": "Pending isolated source-author audit before source adoption; do not extend repository Apache-2.0 metadata to vendored files or ignore file-specific notices."
+      },
+      "source_candidates": [
+        {
+          "path": "CONTRIBUTING.md",
+          "git_blob_sha1": "d9a06e884d22d700841d47f6b3b37feac364cedb",
+          "size_bytes": 3359,
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/CONTRIBUTING.md",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/CONTRIBUTING.md",
+          "body_read_by_registry_designer": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "processed_sha256": null
+        },
+        {
+          "path": "docs/source/developers/overview.rst",
+          "git_blob_sha1": "3b8775023236e6ed6dfbde744c8ec09a75eb1507",
+          "size_bytes": 10468,
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/overview.rst",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/overview.rst",
+          "body_read_by_registry_designer": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "processed_sha256": null
+        },
+        {
+          "path": "docs/source/developers/reviewing.rst",
+          "git_blob_sha1": "c0fcf56155d8e38dfa4f8337e243501608f0269e",
+          "size_bytes": 15187,
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/reviewing.rst",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/reviewing.rst",
+          "body_read_by_registry_designer": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "processed_sha256": null
+        },
+        {
+          "path": "docs/source/developers/release.rst",
+          "git_blob_sha1": "fbce61ae9d174fde3d8451768b3486bbb582fb48",
+          "size_bytes": 29948,
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/release.rst",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/release.rst",
+          "body_read_by_registry_designer": false,
+          "semantic_suitability_verified": false,
+          "raw_sha256": null,
+          "processed_sha256": null
+        }
+      ],
+      "metadata_suitability": "Paths indicate contributor/review/release procedures. No governance content, mandatory rule, date, question or answer is inferred from the filenames.",
+      "isolation": "Only a future isolated validation author/custodian may fetch and read these source bodies and create the validation questions/oracles. Parent/designer may receive metadata and hashes only.",
+      "source_adoption_status": "HOLD: pinned repository license metadata is verified; individual source-file license/NOTICE audit and body suitability are unverified and must pass before question authoring."
+    },
+    {
+      "family_id": "C2-F04",
+      "split": "validation",
+      "origin": "synthetic",
+      "topic": "Fictional print-shop proof approval and production handoff",
+      "family_boundary": "A newly invented print-shop organization and its synthetic documents, disjoint from the ice-rink family and every previous synthetic pool.",
+      "planned_slots": {
+        "items": 6,
+        "question_language": {
+          "ko": 3,
+          "en": 3
+        },
+        "answerability": {
+          "answerable": 4,
+          "insufficient_evidence": 2
+        }
+      },
+      "source_language": "ko",
+      "source_status": "not_authored",
+      "source_candidates": [],
+      "provenance_requirement": "Future material must be explicitly AI-authored synthetic evaluation data; no real customer, employer or private uploaded document.",
+      "metadata_suitability": "Topic registration only; no scenario events, rules, numerical answers or question wording are specified.",
+      "isolation": "Only the future isolated validation author/custodian may create or inspect the scenario bodies, questions and oracles."
+    }
+  ],
+  "exclusions": {
+    "previous_public_or_synthetic_families": [
+      "Kubernetes",
+      "Jupyter",
+      "Rust lang-team",
+      "archive digitization",
+      "Python PEPs",
+      "NumPy NEPs",
+      "coastal bird monitoring",
+      "chess"
+    ],
+    "previous_pools": [
+      "C0 known4",
+      "prepared12",
+      "C1 attempted and unexecuted cases",
+      "M5-B calibration",
+      "M5-B validation",
+      "M5-B examples",
+      "final test"
+    ],
+    "m5b_metadata_source": "data/evaluation/m5b-family-registry-v1.json",
+    "m5b_metadata_source_sha256": "b2fb4f0749995a2aa7f87f30a5531e23fb5373f0b42b0b778e0bf7ea7674b4cc",
+    "m5b_families_and_examples_excluded": [
+      {
+        "family_id": "M5B-F03",
+        "topic": "Fictional sign-language workshop enrollment"
+      },
+      {
+        "family_id": "M5B-F04",
+        "topic": "Fictional neighborhood bakery subscription"
+      },
+      {
+        "family_id": "M5B-F11",
+        "topic": "Fictional audiobook recording sessions"
+      },
+      {
+        "family_id": "M5B-F02",
+        "topic": "Fictional rooftop garden bed rotation"
+      },
+      {
+        "family_id": "M5B-F09",
+        "topic": "Fictional tradefair modular booths"
+      },
+      {
+        "family_id": "M5B-F05",
+        "topic": "Fictional river ferry bicycle boarding"
+      },
+      {
+        "family_id": "M5B-F06",
+        "topic": "Fictional telescope equipment checkout"
+      },
+      {
+        "family_id": "M5B-F12",
+        "topic": "Fictional textile dyehouse batches"
+      },
+      {
+        "family_id": "M5B-F10",
+        "topic": "Fictional repair cafe intake"
+      },
+      {
+        "family_id": "M5B-F07",
+        "topic": "Fictional embroidery thread wholesale"
+      },
+      {
+        "family_id": "M5B-F01",
+        "topic": "Fictional museum artifact transit cases"
+      },
+      {
+        "family_id": "M5B-F08",
+        "topic": "Fictional ceramic glaze specimen testing"
+      },
+      {
+        "family_id": "M5B-X01",
+        "topic": "Fictional wooden puzzle lending desk"
+      },
+      {
+        "family_id": "M5B-X02",
+        "topic": "Fictional climbing shoe cleaning station"
+      },
+      {
+        "family_id": "M5B-X03",
+        "topic": "Fictional fountain pen engraving counter"
+      }
+    ],
+    "metadata_only_read": true,
+    "question_or_oracle_or_validation_body_read": false
+  },
+  "invariants": [
+    "Commit this registry and its SHA before any new source-derived question or oracle is authored; register the frozen candidate/comparator and new runner first.",
+    "Family identity spans the entire project or fictional organization, not a document, paragraph, branch, translation or paraphrase.",
+    "No context or source from one split may be used to author a question, example or synthetic rewrite in the other split.",
+    "Source candidate paths are immutable by commit and blob identity. Raw/processed SHA256 and allowed context boundaries must be bound by the appropriate source author before the first quality call.",
+    "If a candidate source is unsuitable or its license is ambiguous, stop before question authoring and issue a separately versioned metadata change. Do not silently substitute sources or relax counts.",
+    "Source processing must preserve attributable original text and notices; retain processing rules and hashes. No model-output-driven source edits or boundary changes.",
+    "No source or question may be selected to exploit candidate-specific line or block segmentation; mixed syntax and unanswerable facets must be represented according to the comparison plan.",
+    "This registry is not evidence of question quality, source-body suitability, semantic correctness, independent human review or service readiness."
+  ],
+  "exposure_audit": {
+    "registry_designer": "/root/meeting_span_semantic",
+    "actual_tool_accepted_model": "gpt-6-astra",
+    "actual_tool_accepted_reasoning_effort": "xhigh",
+    "prior_c0_c1_review_exposure_preserved": true,
+    "future_independent_semantic_reviewer_eligible": false,
+    "future_isolated_validation_author_eligible": false,
+    "public_candidate_document_bodies_read": false,
+    "metadata_read": [
+      "GitHub repository default branch/license metadata",
+      "fixed commit/tree metadata and path/blob/size listings",
+      "repository LICENSE and Arrow NOTICE text; no candidate source-document body",
+      "M5-B family/exemplar IDs and topic labels"
+    ],
+    "validation_metadata_visible": [
+      "project name",
+      "source paths",
+      "commit/blob IDs",
+      "license/NOTICE metadata",
+      "family topic and planned counts"
+    ],
+    "question_texts_or_oracles_or_old_quality_reports_opened_in_this_registry_task": false,
+    "limitations": "Public source identities and familiar open-source domains are visible. Metadata isolation is not a claim of complete source-family ignorance or freedom from model pretraining knowledge; shared AI author/evaluator bias remains."
+  }
+}

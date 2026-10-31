@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "created_at_utc": "2026-10-16T04:57:18.145832+00:00",
+  "method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+  "prior_metadata_sha256": "757a85b523303aa85255d38887f5d7ea5689907942b887317ad296cc669badf4",
+  "fingerprints_sha256": "b8e6aa5faf7b4bea323eb9adc9ad1a38698312d7fd50729b1e342ca3b7fb94fc",
+  "other_split_sha256": "0f222307428d124ce268a78aec5bc3798d00f47807d54015095be508ae3baf80",
+  "missing_historical_fingerprints": [
+    "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+    "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+    "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+  ],
+  "complete_near_duplicate_absence_proven": false,
+  "reviewer_id": "c4_validation_source_review",
+  "semantic_freshness_verdict": "accepted",
+  "semantic_review_reason": "Independent whole-source review accepted validation-local coherence and source-only suitability. Exact normalized/hash and repository metadata comparisons identified no prohibited reuse. Calibration bodies and historical closed bodies were not read; reported same-repository alternate-source exploration and incomplete historical coverage remain disclosed, without pristine-isolation or zero-impact claims.",
+  "within_family_shared_paragraphs": [],
+  "counts": {
+    "historical_metadata_rows": 68,
+    "historical_identity_comparisons": 408,
+    "within_split_pairs": 15,
+    "cross_split_pairs": 36,
+    "normalized_document_duplicates": 0,
+    "cross_family_or_split_long_paragraph_collisions": 0,
+    "within_family_shared_long_paragraph_groups": 0
+  },
+  "exposure_disclosure": {
+    "reported_by": "parent_from_calibration_source_author",
+    "kind": "same_repository_licensing_and_alternate_source_exploration_before_reservation_resolution",
+    "known_adopted_body_overlap_identified": false,
+    "shared_license_metadata": true,
+    "exact_alternate_2024_paths_and_hashes_verified": false,
+    "pristine_isolation_claim": false,
+    "zero_impact_claim": false,
+    "calibration_item_author_mitigation": "new_author_without_reported_source_exploration_after_source_commit",
+    "source_reselection_or_mutation": false
+  },
+  "closed_source_body_reads": 0,
+  "calibration_body_reads": 0,
+  "question_oracle_reads": 0,
+  "tokenizer_loads": 0,
+  "native_calls": 0,
+  "human_review_count": 0
+}

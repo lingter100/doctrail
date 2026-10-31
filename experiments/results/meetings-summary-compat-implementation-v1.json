@@ -1,0 +1,70 @@
+{
+  "schema": "doctrail-summary-compat-implementation-v1",
+  "date": "2026-10-31",
+  "status": "IMPLEMENTED_SOURCE_REVIEWED_NOT_ACTUALLY_BUILT",
+  "implementation_model": "gpt-6-astra high",
+  "review_model": "gpt-6-astra xhigh",
+  "sources": [
+    {
+      "file": "scripts/build_summary_grammar_engine_compat.py",
+      "size_bytes": 19195,
+      "sha256": "f5eae7a2a50a845af62a38d67360211613beea0426d07096bd9bc0c3981f6eae"
+    },
+    {
+      "file": "tests/test_summary_grammar_engine_compat.py",
+      "size_bytes": 17906,
+      "sha256": "1ccf1638523b7f0e4215efb0e28fff00f572ad50a66483bd500f2403fda85bb5"
+    }
+  ],
+  "behavior": {
+    "original_acquisition_read_only": true,
+    "new_output_once": true,
+    "copied_package": "CMake only, including licenses",
+    "patched_file": "Modules/CMakeDetermineCompiler.cmake",
+    "patched_line": 125,
+    "patch": "Replace one cmake_path(CONVERT ... NORMALIZE) with file(TO_CMAKE_PATH ...) for canonical absolute compiler paths only",
+    "other_tool_and_source_reuse": "Original LLVM, Ninja, llama source and BUNDLE remain unchanged",
+    "original_and_derived_lineage_separate": true,
+    "automatic_followup_native_or_model": false
+  },
+  "validation": {
+    "initial_fakes_passed": 50,
+    "initial_seconds": 15.97,
+    "failure_reporting_change_passed": 6,
+    "new_test_assertion_errors_preserved": 2,
+    "corrected_assertions_passed": 2,
+    "prior_distinct_tests": 52,
+    "publication_boundary_pre_fix_failures": 4,
+    "publication_boundary_post_fix_passes": 8,
+    "publication_boundary_post_fix_seconds": 6.82,
+    "cumulative_distinct_tests": 56,
+    "one_final_whole_suite_claim": false,
+    "ruff": "PASS",
+    "independent_review_open_findings": 0,
+    "saved_source15_runtime5_preservation": true
+  },
+  "limits": {
+    "shared_configure_compile_seconds": 900,
+    "cleanup_reserve_seconds": 5,
+    "parallel_build": 2,
+    "build_owned_rss_gib": 2,
+    "build_start_host_gib": 4,
+    "build_active_host_gib": 2,
+    "disk_gib": 4,
+    "disk_scope": "New writable output; existing read-only acquisition recorded separately, not a combined peak claim",
+    "native_batch_seconds": 60,
+    "native_owned_rss_mib": 512
+  },
+  "actual": {
+    "cmake_package_copies": 0,
+    "native_processes": 0,
+    "model_calls": 0
+  },
+  "limitations": [
+    "Synthetic fixtures and source review do not prove actual configure, compile or native grammar acceptance.",
+    "Legacy path conversion is not generally equivalent to normalization.",
+    "A successful native grammar check would not prove model answer or summary quality."
+  ],
+  "human_reviews": 0,
+  "public_deployment": false
+}

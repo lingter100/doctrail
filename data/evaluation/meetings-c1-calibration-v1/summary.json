@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "dataset_id": "meetings-c1-calibration-v1",
+  "split": "calibration",
+  "candidate_commit": "82b0fff79761c0da86f4d8c5614aa20f9b12e7e5",
+  "source_registry_sha256": "aacd0a4723160515c09fae355407face498a72d26479a5a5a62cc5375851961a",
+  "source_freeze_sha256": "5d536cbbdfdb83a7063bbce93e16da067277bcfbc7ae21ed9326f53e4ab38c6f",
+  "counts": {
+    "authored_questions": 8,
+    "oracles": 8,
+    "public_cases": 4,
+    "synthetic_cases": 4,
+    "answerable": 6,
+    "insufficient_evidence": 2,
+    "question_languages": {
+      "ko": 4,
+      "en": 4
+    },
+    "families": 4,
+    "cases_per_family": 2,
+    "public_sources": 4,
+    "synthetic_sources": 6,
+    "processed_windows": 14,
+    "context_occurrences": 19,
+    "required_facts": 21,
+    "partial_answerable_facts": 2,
+    "exact_support_quotes_including_alternatives": 24,
+    "allowed_alternative_quotes": 1,
+    "ai_author_self_reviews": 8,
+    "independent_prereviews": 0,
+    "human_reviews": 0,
+    "model_calls": 0,
+    "tokenizer_calls": 0,
+    "validation_questions_authored": 0
+  },
+  "provenance": {
+    "ai_authored_questions": true,
+    "public_sources": "Four registered primary documents, pinned bytes with individual public-domain/CC0 notices preserved.",
+    "synthetic_sources": "Six AI-authored fictional meeting/procedure-revision documents within the two registered families.",
+    "authored_after_source_and_family_freeze": true,
+    "old_prepared12_or_m5b_opened_for_this_work": false,
+    "model_outputs_used_for_authoring": false,
+    "tool_accepted_author_model": "gpt-6-astra",
+    "tool_accepted_reasoning_effort": "xhigh",
+    "settings_scope": "Existing accepted custodian role reused; no parent or service model change claimed."
+  },
+  "checks": {
+    "source_freeze_files_verified": 46,
+    "registered_public_raw_hash_size_blob_checks": 4,
+    "public_document_notices_verified": 4,
+    "strict_answer_request_dtos_valid": 8,
+    "exact_context_spans_valid": 19,
+    "exact_oracle_support_spans_valid": 24,
+    "registered_slot_distribution_valid": true,
+    "utf8_lf_no_bom_bound_files": 37,
+    "upstream_refetched_this_check": 0
+  },
+  "input_size_measurement": {
+    "unit_note": "Unicode codepoints and UTF-8 bytes only; not token counts or native prompt measurements. Context text excludes title/metadata; request JSON includes them. No content was truncated to meet a bound.",
+    "cases": [
+      {
+        "id": "C1CAL-01",
+        "query_codepoints": 115,
+        "query_utf8_bytes": 253,
+        "context_count": 2,
+        "context_text_codepoints": 1894,
+        "context_text_utf8_bytes": 1894,
+        "context_title_codepoints": 104,
+        "context_title_utf8_bytes": 108,
+        "request_json_utf8_bytes": 2677,
+        "context_text_sizes": [
+          {
+            "index": 0,
+            "codepoints": 739,
+            "utf8_bytes": 739
+          },
+          {
+            "index": 1,
+            "codepoints": 1155,
+            "utf8_bytes": 1155
+          }
+        ]
+      },
+      {
+        "id": "C1CAL-02",
+        "query_codepoints": 216,
+        "query_utf8_bytes": 216,
+        "context_count": 2,
+        "context_text_codepoints": 1507,
+        "context_text_utf8_bytes": 1507,
+        "context_title_codepoints": 118,
+        "context_title_utf8_bytes": 122,
+        "request_json_utf8_bytes": 2268,
+        "context_text_sizes": [
+          {
+            "index": 0,
+            "codepoints": 521,
+            "utf8_bytes": 521
+          },
+          {
+            "index": 1,
+            "codepoints": 986,
+            "utf8_bytes": 986
+          }
+        ]
+      },
+      {
+        "id": "C1CAL-03",
+        "query_codepoints": 139,
+        "query_utf8_bytes": 279,
+        "context_count": 2,
+        "context_text_codepoints": 2948,
+        "context_text_utf8_bytes": 2950,
+        "context_title_codepoints": 145,
+        "context_title_utf8_bytes": 149,
+        "request_json_utf8_bytes": 3824,
+        "context_text_sizes": [
+          {
+            "index": 0,
+            "codepoints": 953,
+            "utf8_bytes": 953
+          },
+          {
+            "index": 1,
+            "codepoints": 1995,
+            "utf8_bytes": 1997
+          }
+        ]
+      },
+      {
+        "id": "C1CAL-04",
+        "query_codepoints": 180,
+        "query_utf8_bytes": 180,
+        "context_count": 3,
+        "context_text_codepoints": 2933,
+        "context_text_utf8_bytes": 2935,
+        "context_title_codepoints": 222,
+        "context_title_utf8_bytes": 228,
+        "request_json_utf8_bytes": 3970,
+        "context_text_sizes": [
+          {
+            "index": 0,
+            "codepoints": 1175,
+            "utf8_bytes": 1177
+          },
+          {
+            "index": 1,
+            "codepoints": 805,
+            "utf8_bytes": 805
+          },
+          {
+            "index": 2,
+            "codepoints": 953,
+            "utf8_bytes": 953
+          }
+        ]
+      },
+      {
+        "id": "C1CAL-05",
+        "query_codepoints": 104,
+        "query_utf8_bytes": 230,
+        "context_count": 2,
+        "context_text_codepoints": 954,
+        "context_text_utf8_bytes": 2176,
+        "context_title_codepoints": 90,
+        "context_title_utf8_bytes": 144,
+        "request_json_utf8_bytes": 2970,
+        "context_text_sizes": [
+          {
+            "index": 0,
+            "codepoints": 561,
+            "utf8_bytes": 1289
+          },
+          {
+            "index": 1,
+            "codepoints": 393,
+            "utf8_bytes": 887
+          }
+        ]
+      },
+      {
+        "id": "C1CAL-06",
+        "query_codepoints": 193,
+        "query_utf8_bytes": 193,
+        "context_count": 3,
+        "context_text_codepoints": 1273,
+        "context_text_utf8_bytes": 2893,
+        "context_title_codepoints": 139,
+        "context_title_utf8_bytes": 223,
+        "request_json_utf8_bytes": 3915,
+        "context_text_sizes": [
+          {
+            "index": 0,
+            "codepoints": 319,
+            "utf8_bytes": 717
+          },
+          {
+            "index": 1,
+            "codepoints": 393,
+            "utf8_bytes": 887
+          },
+          {
+            "index": 2,
+            "codepoints": 561,
+            "utf8_bytes": 1289
+          }
+        ]
+      },
+      {
+        "id": "C1CAL-07",
+        "query_codepoints": 230,
+        "query_utf8_bytes": 230,
+        "context_count": 3,
+        "context_text_codepoints": 2318,
+        "context_text_utf8_bytes": 2322,
+        "context_title_codepoints": 248,
+        "context_title_utf8_bytes": 258,
+        "request_json_utf8_bytes": 3420,
+        "context_text_sizes": [
+          {
+            "index": 0,
+            "codepoints": 612,
+            "utf8_bytes": 614
+          },
+          {
+            "index": 1,
+            "codepoints": 783,
+            "utf8_bytes": 783
+          },
+          {
+            "index": 2,
+            "codepoints": 923,
+            "utf8_bytes": 925
+          }
+        ]
+      },
+      {
+        "id": "C1CAL-08",
+        "query_codepoints": 75,
+        "query_utf8_bytes": 178,
+        "context_count": 2,
+        "context_text_codepoints": 1706,
+        "context_text_utf8_bytes": 1708,
+        "context_title_codepoints": 156,
+        "context_title_utf8_bytes": 162,
+        "request_json_utf8_bytes": 2469,
+        "context_text_sizes": [
+          {
+            "index": 0,
+            "codepoints": 923,
+            "utf8_bytes": 925
+          },
+          {
+            "index": 1,
+            "codepoints": 783,
+            "utf8_bytes": 783
+          }
+        ]
+      }
+    ],
+    "max_context_text_codepoints": 2948,
+    "max_context_text_utf8_bytes": 2950,
+    "max_request_json_utf8_bytes": 3970,
+    "max_query_codepoints": 230,
+    "max_context_count": 3,
+    "total_context_text_codepoints": 15533
+  },
+  "readiness": {
+    "authoring_and_offline_checks_complete": true,
+    "independent_prereview_complete": false,
+    "all_stage_token_readiness_measured": false,
+    "model_execution_authorized_by_this_summary": false
+  },
+  "bound_files": {
+    ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
+    "author_calibration.py": "aee79dae7a19ba2c0f604d97f7e2aa04c43681f5b1ba6f7120ac3ab1074535b3",
+    "cases.json": "2984eecc5e679c99aa0bd41ada762a45e7350ff3151001c7041b7b6fc7f2dc51",
+    "licenses/C1-NP-NEP50.copyright.rst": "ec73318a79ca7f8e7dddcd42cef46ff2decb53c720ce1ac787a01221e2f20abd",
+    "licenses/C1-NP-NEP51.copyright.rst": "3220a2768766ff967b3d223847c371bcf3c9728d9fcef49b41330368763ddd4d",
+    "licenses/C1-PY-PEP1.copyright.rst": "6cb874758ed947999db32e63e00f8cb418c9603067d115f74ba7c9a2141ac77f",
+    "licenses/C1-PY-PEP13.copyright.rst": "3220a2768766ff967b3d223847c371bcf3c9728d9fcef49b41330368763ddd4d",
+    "materialize_public.py": "3f79c57b9b7d7d8e658a716da1d7cc50f6d7492ad53b3d7d44fa5f5cca53045b",
+    "oracles.json": "b8e3c6a4e5b5e8d5e23b805e8d03a13c71a7d2c4278bcdcab7d8318d50d49849",
+    "README.md": "2b49189a57ba60be739e2f07051a9630775cbca75e76273ac895bd585cd798af",
+    "source-integrity.json": "734adef4d4f11352f0d703e718ab37c33b93ca9c2e7a3775711afdf6ec428673",
+    "sources/processed/C1-BIRD-MEETING-whole.txt": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+    "sources/processed/C1-BIRD-PROTOCOL-V1-whole.txt": "2c36efe2d4d3138f2c5f371288c5453a527c6e477a2d09e07d9053c3f38b732e",
+    "sources/processed/C1-BIRD-PROTOCOL-V2-whole.txt": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364",
+    "sources/processed/C1-CHESS-MEETING-whole.txt": "63866f69156e5fdbca2d0484f15ed433b6671b907ac64531d3b0379df94059b9",
+    "sources/processed/C1-CHESS-PROCEDURE-V1-whole.txt": "6d6237ae185de8c25b622259ed29ea09a1a799007892169ef11d15ec64001642",
+    "sources/processed/C1-CHESS-PROCEDURE-V2-whole.txt": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+    "sources/processed/C1-NP-NEP50-weak.txt": "5543889bcab58b4cfaf8f7121a551fa8fd75e1b69faa9ea0f7c89a391b37a65b",
+    "sources/processed/C1-NP-NEP51-abstract.txt": "d3f56ca894e74951f50da990006ac8089eecd2260650616096cfe114fe8ebff0",
+    "sources/processed/C1-NP-NEP51-backward.txt": "48464a787201cbd989e3c9c429827969437855a5c4a09b65e631839c0cefc4db",
+    "sources/processed/C1-NP-NEP51-scope.txt": "31bd9cb1438775331e9ddc2789093d2cc742ef2c871333ce20c6182e6b40c149",
+    "sources/processed/C1-PY-PEP1-review.txt": "20577109d4ddb29fda80bdd96e91a310967629914aafd9c4346727a288254c09",
+    "sources/processed/C1-PY-PEP13-amendments.txt": "c70ab513c5345f781c3e58cf3e6a0fb30d990a4c163467ce2110fc2f677ead64",
+    "sources/processed/C1-PY-PEP13-confidence.txt": "c5e5b9844fdc0444287882c7631c22087c1d83bef2daaeb3b4c1dab70d158a66",
+    "sources/processed/C1-PY-PEP13-powers.txt": "fcd330ea54e37a7d4a3bf35571467a9151bdb6b4b55da5c7bd4908d00fe8f12c",
+    "sources/public/numpy-nep-0050.raw.rst": "9068c2e6ff03105aef9b8347975c9b37abf6d333ecee0f05d100ddfcf67e3fa5",
+    "sources/public/numpy-nep-0051.raw.rst": "3b6e592a1a26416c159b4ee481f2637cb56a6b258f6f830de984f051fe33e17c",
+    "sources/public/python-pep-0001.raw.rst": "e3a9cba0eb60610eac8d27a00d9ace467a2f8c4e213b3037d66d1b8d04a00290",
+    "sources/public/python-pep-0013.raw.rst": "81c1354403a08382ca183ef068d2cd567f12241e00cfe5b7c72d7def58dd0d79",
+    "sources/synthetic/C1-BIRD-MEETING.md": "62789f410351ebf75a20953ea70b7da13c0d9064190981460ab55a1132aadcdf",
+    "sources/synthetic/C1-BIRD-PROTOCOL-V1.md": "2c36efe2d4d3138f2c5f371288c5453a527c6e477a2d09e07d9053c3f38b732e",
+    "sources/synthetic/C1-BIRD-PROTOCOL-V2.md": "8db660102ab2e71094a481b93a7d92be7ab72786a129015877d8936fa1109364",
+    "sources/synthetic/C1-CHESS-MEETING.md": "63866f69156e5fdbca2d0484f15ed433b6671b907ac64531d3b0379df94059b9",
+    "sources/synthetic/C1-CHESS-PROCEDURE-V1.md": "6d6237ae185de8c25b622259ed29ea09a1a799007892169ef11d15ec64001642",
+    "sources/synthetic/C1-CHESS-PROCEDURE-V2.md": "a97a4096f2ae7296165e80e1fc93878f1620d13e64e854576c04d215469d6126",
+    "sources-manifest.json": "4f6f0e6039437ba7926225472c806fc9189afaa6647ac44c8d1cafce243422ef",
+    "verify.py": "defb2141cc6ee845f21be39b6e9827927cbc93e87c61bd8c995665adcd4f54a7"
+  }
+}

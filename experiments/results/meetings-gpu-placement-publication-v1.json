@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "id": "meetings-gpu-placement-publication-v1",
+  "source_report": {
+    "path": ".local/meetings-gpu-placement-v1/report.json",
+    "sha256": "c24cc320a381fc4eeddcb3ffa78edc0a578a20ba02ec3a0928bc7b03a3523301",
+    "bytes": 33993
+  },
+  "published": {
+    "path": "experiments/results/meetings-gpu-placement-v1.json",
+    "sha256": "63ae6b0483fde0b21eccf2ecee8836ab93ab2a403d7be2d5f707ce0961dda8e4",
+    "bytes": 22460
+  },
+  "cli": {
+    "path": "experiments/results/meetings-gpu-placement-cli-v1.json",
+    "sha256": "6ddc0176d854bb78a07c989fc69309d2b6a274fcf8546f26b5fa7f89662e595d",
+    "bytes": 803,
+    "exact_copy": true
+  },
+  "private_artifacts_verified": [
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-00.json",
+      "bytes": 10401,
+      "kind": "template_response",
+      "ordinal": 0,
+      "sha256": "8f6b38cb57ed818711f4bc1887635aa175385b619140e95d958e2753fd1fa0ad"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-01.json",
+      "bytes": 20374,
+      "kind": "input_tokenize_response",
+      "ordinal": 1,
+      "sha256": "5d942e802fe3338744db23661c6f97e4a4426b75afd423be72ddd44b872ef8b5"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-02.json",
+      "bytes": 295,
+      "kind": "dispatch_reservation",
+      "ordinal": 2,
+      "sha256": "edfadb9dd25c3b2f4e1cf62f12ff75300f7b964c786238e85aa2e468b2f6a1f4"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-03.json",
+      "bytes": 42,
+      "kind": "http_send_attempt",
+      "ordinal": 3,
+      "sha256": "a44eace19cd76e0410072c1eb5d69775d8f2680cf450b7ff0608f8a17d0a8613"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-04.json",
+      "bytes": 42,
+      "kind": "native_http_status",
+      "ordinal": 4,
+      "sha256": "2289ece1f4b8543417f81136f5496852fa5a5c8f2ad1cf2f271cf55648d122ba"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-05.json",
+      "bytes": 21759,
+      "kind": "native_response",
+      "ordinal": 5,
+      "sha256": "6879d1371b6521ce1e1d6bf6b5db8b8876806777e5aa304aa32b2203f23e67a3"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-06.json",
+      "bytes": 21752,
+      "kind": "response",
+      "ordinal": 6,
+      "sha256": "f4d04b747cc74c632598e334c91802464b65c4556a8cf8045df63c0e9f3f8396"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-07.json",
+      "bytes": 85,
+      "kind": "final_tokenize_response",
+      "ordinal": 7,
+      "sha256": "17d31b42b46db98bcb2ca9551c582adcfe69533a952e17b0fabfdae9878521fb"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-08.json",
+      "bytes": 66,
+      "kind": "final_token_ids",
+      "ordinal": 8,
+      "sha256": "0c23826442b39f8303a327c717314b85029d654f3f5ceaf8edbc65e46efee219"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu24-control/observation-09.json",
+      "bytes": 2865,
+      "kind": "result",
+      "ordinal": 9,
+      "sha256": "f86baa1625fed085947e510ef8d6bcdd04483faf7c04a72074180ce9fcea76e1"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-00.json",
+      "bytes": 10401,
+      "kind": "template_response",
+      "ordinal": 0,
+      "sha256": "8f6b38cb57ed818711f4bc1887635aa175385b619140e95d958e2753fd1fa0ad"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-01.json",
+      "bytes": 20374,
+      "kind": "input_tokenize_response",
+      "ordinal": 1,
+      "sha256": "5d942e802fe3338744db23661c6f97e4a4426b75afd423be72ddd44b872ef8b5"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-02.json",
+      "bytes": 295,
+      "kind": "dispatch_reservation",
+      "ordinal": 2,
+      "sha256": "edfadb9dd25c3b2f4e1cf62f12ff75300f7b964c786238e85aa2e468b2f6a1f4"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-03.json",
+      "bytes": 42,
+      "kind": "http_send_attempt",
+      "ordinal": 3,
+      "sha256": "a44eace19cd76e0410072c1eb5d69775d8f2680cf450b7ff0608f8a17d0a8613"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-04.json",
+      "bytes": 42,
+      "kind": "native_http_status",
+      "ordinal": 4,
+      "sha256": "2289ece1f4b8543417f81136f5496852fa5a5c8f2ad1cf2f271cf55648d122ba"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-05.json",
+      "bytes": 21818,
+      "kind": "native_response",
+      "ordinal": 5,
+      "sha256": "cc0dc69dd53c7fce0f716528f1f40e5dff165ef1fd487d3a7644c0d68273f0e0"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-06.json",
+      "bytes": 21811,
+      "kind": "response",
+      "ordinal": 6,
+      "sha256": "4b0fa78b7dc894f05cef00e8816d4fc214fb693e1c88e09c037bd33832c8f35d"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-07.json",
+      "bytes": 85,
+      "kind": "final_tokenize_response",
+      "ordinal": 7,
+      "sha256": "17d31b42b46db98bcb2ca9551c582adcfe69533a952e17b0fabfdae9878521fb"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-08.json",
+      "bytes": 66,
+      "kind": "final_token_ids",
+      "ordinal": 8,
+      "sha256": "0c23826442b39f8303a327c717314b85029d654f3f5ceaf8edbc65e46efee219"
+    },
+    {
+      "path": ".local/meetings-gpu-placement-v1/gpu28-candidate/observation-09.json",
+      "bytes": 2890,
+      "kind": "result",
+      "ordinal": 9,
+      "sha256": "104c87970178821fbe5daca8288d4d11f0cbe61abfa1026ef0def7e59325d13b"
+    }
+  ],
+  "preserved": [
+    {
+      "path": "data/evaluation/meetings-gpu-placement-source-freeze-v1.json",
+      "sha256": "116b5325b8b9c1de39c27d486b17d614d9bdef49b32274b14d2838c5a4e9cfaf",
+      "unchanged_working_and_head": 59
+    },
+    {
+      "path": "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json",
+      "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78",
+      "unchanged_working_and_head": 85
+    },
+    {
+      "path": "data/evaluation/meetings-host-proof-profile-source-freeze-v1.json",
+      "sha256": "1171f14f7cb176838385723a040ded6921409cc1cfb168833d35e4782687f412",
+      "unchanged_working_and_head": 52
+    }
+  ],
+  "owned_pids_absent_after_completion": true,
+  "source_scope": "Frozen code and metadata only; no closed question/answer/validation semantic access",
+  "actual_native_sends": 2,
+  "parsed_native_responses": 2,
+  "resource_accepted": 2,
+  "quality_judgments": 0,
+  "human_review": 0,
+  "service_adoption": false
+}

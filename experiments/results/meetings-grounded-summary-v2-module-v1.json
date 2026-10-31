@@ -1,0 +1,85 @@
+{
+  "status": "module_implemented_synthetic_verified_independent_read_reviewed",
+  "candidate": "grounded-summary-v2",
+  "scope": "Existing module and test only; separate service integration and actual model comparison remain required",
+  "source_files": [
+    {
+      "path": "src/doctrail/meeting_grounded_summary.py",
+      "bytes": 28695,
+      "sha256": "5b765a679ada4b6b4165674573763c2c323e9df813d8c75ba453347421e05423"
+    },
+    {
+      "path": "tests/test_meeting_grounded_summary.py",
+      "bytes": 37066,
+      "sha256": "f99ec890eafc3817763d8d42d6fb6fc527d3417a49136bc05acf52f09de13caa"
+    }
+  ],
+  "changes": [
+    "Explicit relation bundles preceding claims; one-to-one mapping and directional links",
+    "Citations derived once from source-ordered anchor and endpoint union",
+    "Full source and gaps retained; same generation768/review128/input4096/shared120seconds and no repair",
+    "Default v1 and public summary_version2 preserved"
+  ],
+  "checks": {
+    "generic_regression_passed": 257,
+    "elapsed_seconds": 1.56,
+    "ruff": "passed",
+    "independent_static_remaining_blockers": 0,
+    "v1_prompt_grammar_unchanged": 4,
+    "v1_functions_ast_unchanged": 9,
+    "frozen_files_unchanged": 77
+  },
+  "first_failure": {
+    "passed": 148,
+    "failed": 1,
+    "errors": 2,
+    "scope": "Synthetic fixture JSON surrogate serialization and Windows parameter ID length; original code and logs retained"
+  },
+  "bindings": [
+    {
+      "path": ".local/meeting-grounded-summary-v2-implementation-v1/receipt.json",
+      "bytes": 11072,
+      "sha256": "5fcbeb1f51bbce53ea0b4283696b5f77718259c600271e76bb675f8014c5bb13"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v2-implementation-v1/parent-module-verification-v1.json",
+      "bytes": 995,
+      "sha256": "ba2c61cda34d97ae93e339fbafc49956018a2d9ce4f6ec29abb3016ceaac55e1"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v2-implementation-v1/independent-review/read-review-v1.json",
+      "bytes": 7958,
+      "sha256": "03eea08c8c0e280b93dfb5d623746dbe01157293c04ab5762a7184c3150a6b36"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v2-implementation-v1/pytest-regression-v2.log",
+      "bytes": 345,
+      "sha256": "05a599484d13c027639f4d09248175c5fea3af1b718396b2b13e25cbd1b58ac4"
+    },
+    {
+      "path": ".local/meeting-grounded-summary-v2-implementation-v1/ruff-final.log",
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    }
+  ],
+  "actual_execution": {
+    "real_model": 0,
+    "native": 0,
+    "tokenizer": 0,
+    "java": 0,
+    "browser": 0,
+    "service_launch": 0,
+    "downloads": 0,
+    "quality_replay": 0
+  },
+  "review_status": {
+    "ai_implemented": true,
+    "ai_code_reviewed": true,
+    "human_reviewed": false
+  },
+  "limitations": [
+    "Generic synthetic checks and static code review do not demonstrate summary accuracy or sufficiency",
+    "Native grammar execution, actual token cost and real-model service behavior are not measured here",
+    "No deployment or service promotion; old failed runs and judgments remain unchanged"
+  ]
+}

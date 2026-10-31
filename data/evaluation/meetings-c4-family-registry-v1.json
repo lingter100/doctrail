@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c4-v1",
+  "registered_date_kst": "2026-10-16",
+  "state": "structure_only_no_source_or_question_authorship",
+  "families": [
+    {"id": "c4-f01", "split": "calibration", "provenance": "fresh_public_family", "ko_answered": 1, "en_answered": 1, "ko_abstained": 1, "en_abstained": 0},
+    {"id": "c4-f02", "split": "calibration", "provenance": "fresh_explicit_synthetic_organization", "ko_answered": 1, "en_answered": 1, "ko_abstained": 0, "en_abstained": 1},
+    {"id": "c4-f03", "split": "validation", "provenance": "separate_fresh_public_family", "ko_answered": 1, "en_answered": 1, "ko_abstained": 1, "en_abstained": 1},
+    {"id": "c4-f04", "split": "validation", "provenance": "separate_fresh_explicit_synthetic_organization", "ko_answered": 1, "en_answered": 1, "ko_abstained": 1, "en_abstained": 1}
+  ],
+  "per_family_source_structure": {"meeting_documents": 2, "meeting_dates_distinct": true, "related_general_documents": 1, "max_documents": 3},
+  "total_max_documents": 12,
+  "per_split_answerable_coverage": {"general_document_only_min": 1, "multiple_meetings_min": 1, "general_document_plus_meeting_min": 1, "unavoidably_multi_document_min": 2, "ko_query_requiring_english_evidence_min": 1, "en_query_requiring_korean_evidence_min": 1, "required_facts_per_item_min": 3, "required_facts_per_item_max": 6},
+  "multi_document_rule": "Every sufficient evidence alternative requires at least two distinct documents; count split-wide answerable items only.",
+  "abstention_rule": "Known requirements plus at least one missing required fact; absence independently reviewed over the full adopted family, not created by removing an available answer chunk.",
+  "all_quality_items_nonempty_contexts": true,
+  "freshness": {"exclude_prior_family_url_revision_hash_metadata": true, "exact_normalized_duplicate_check": true, "shared_long_block_check_between_new_sources": true, "separate_split_semantic_prereview": true, "read_closed_bodies_for_dedup": false, "old_pool_translation_or_relabeling": false, "record_unavailable_prior_fingerprints_as_limit": true, "claim_complete_near_duplicate_absence_without_evidence": false},
+  "authoring_requires_whole_toolchain_freeze_commit_ci": true,
+  "item_authoring_requires_source_review_parity_freeze_commit": true,
+  "source_adoption_and_license_checks_pending": true,
+  "role_exposure": [{"role": "free_qa_candidate_review", "actual_setting": "existing_gpt_6_astra_xhigh", "purpose": "design_only_excluded_from_output_judging", "exposure": "Public C2 case-ID failure summaries in MEETINGS-C3-PLAN plus aggregate prior-result metadata; no isolated source/question/oracle/validation/test bodies read in this design review.", "reuse_as_examples_or_items": false}],
+  "source_documents": 0,
+  "questions": 0,
+  "oracles": 0,
+  "quality_native_calls": 0,
+  "human_reviews": 0
+}

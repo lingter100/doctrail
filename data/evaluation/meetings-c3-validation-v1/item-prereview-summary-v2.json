@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "phase": "validation",
+  "kind": "parent_safe_item_prereview_summary",
+  "version": 2,
+  "created_at": "2026-10-14T08:09:12.426713+00:00",
+  "parent_safe_metadata_only": true,
+  "reviewer_id": "/root/c2_validation_source_review",
+  "author_ids": [
+    "/root/c2_validation_source_b"
+  ],
+  "actual_parent_verified_settings": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh"
+  },
+  "verdict": "accepted",
+  "accepted_ids": [
+    "C3-VAL-01",
+    "C3-VAL-02",
+    "C3-VAL-03",
+    "C3-VAL-04",
+    "C3-VAL-05",
+    "C3-VAL-06",
+    "C3-VAL-07",
+    "C3-VAL-08"
+  ],
+  "rejected_ids": [],
+  "counts": {
+    "reviewed": 8,
+    "accepted": 8,
+    "rejected": 0,
+    "remaining_change_requests": 0,
+    "original_review_accepted": 7,
+    "original_review_rejected": 1,
+    "corrected_items": 1,
+    "unchanged_other_items": 7,
+    "changed_questions": 0,
+    "changed_context_selections": 0,
+    "ko": 4,
+    "en": 4,
+    "public": 4,
+    "synthetic": 4,
+    "answered": 4,
+    "abstained": 4,
+    "required_facts": 33,
+    "supported_facts": 28,
+    "missing_facts": 5,
+    "answered_facts_min": 5,
+    "answered_facts_max": 5,
+    "necessary_multidocument_answered": 4,
+    "cross_language_answered_en_to_ko": 1,
+    "cross_language_answered_ko_to_en": 1,
+    "partial_known_missing_abstained": 4,
+    "evidence_occurrences": 50,
+    "unique_whole_evidence_units": 24,
+    "selected_context_occurrences": 28,
+    "unique_selected_chunks": 14,
+    "human_reviews": 0
+  },
+  "general_repair_categories_resolved": [
+    "required_fact_completeness",
+    "evidence_sufficiency"
+  ],
+  "remaining_error_categories": [],
+  "artifacts": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-v2.json",
+      "sha256": "190a3029dc73b787d38c50a03377256376c3fcfbea9e158a4b72af117727b33e",
+      "size_bytes": 412
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-notes-v2.md",
+      "sha256": "80d7507ecb099dd883c4f84d5a0edb6dae8f6d342f9c1be1364fdfb2ecf60d7f",
+      "size_bytes": 7445
+    }
+  ],
+  "inputs": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/draft-v2.json",
+      "sha256": "4e1df398d993143568156eb374d8a319b1da3af9235c21d06be51cd4fb29ccdd",
+      "size_bytes": 54549
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/oracle-v2.json",
+      "sha256": "40320e4fbad00a9ebe164bddefdc6dccdebfeec7e314674ef73a0e135621edc3",
+      "size_bytes": 46467
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/context-selection-v2.json",
+      "sha256": "6ddb4c9a743dec332d14c3a1608b0c15306925a6f2fd19840527fbcaa0937735",
+      "size_bytes": 1548
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-correction-receipt-v2.json",
+      "sha256": "8ee596f5e3001759cfae39da9fb752ef46998cf831feeeccb249cfc12faedd4c",
+      "size_bytes": 14739
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-correction-summary-v2.json",
+      "sha256": "80de734d096924353e74a8efacf58a3cad1d25d2d285396afea7975438c1dfa0",
+      "size_bytes": 3897
+    }
+  ],
+  "preserved_prior_review": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview.json",
+      "sha256": "dff1ff302b7efe84674f53f419d1e912a03eb2714dc6771402a3e67d8ce6b3d9",
+      "size_bytes": 12718
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-notes.md",
+      "sha256": "7edce12e5ec614a4c027db8cbfbe574d09ec074b0982e8021571650f0da8d41b",
+      "size_bytes": 10035
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/item-prereview-summary.json",
+      "sha256": "2c1da66c1e962f34618bae1ef2764a72460369bdf39daca78838aae864d2449a",
+      "size_bytes": 3711
+    }
+  ],
+  "source_freeze": {
+    "path": "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json",
+    "sha256": "abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733",
+    "size_bytes": 1838
+  },
+  "source_bindings_match": 9,
+  "toolchain_bindings_match": 66,
+  "all8_contracts_and_whole_contexts_passed": true,
+  "accepted_JSON_uses_only_strict_prereview_fields": true,
+  "draft_and_context_files_exact_original_bytes": true,
+  "other7_oracle_cases_canonical_identical": true,
+  "target_other_facts_and_metadata_canonical_identical": true,
+  "whole_family_absence_checked": true,
+  "registered_parent_source_exposure_remains_disclosed": true,
+  "fully_blind_or_zero_impact_claim": false,
+  "independent_output_judging_eligible": false,
+  "semantic_details_included": false,
+  "official_tokenizer_runs": 0,
+  "model_calls": 0,
+  "native_calls": 0,
+  "network_calls": 0,
+  "human_review_count": 0,
+  "ownership_returned": true
+}

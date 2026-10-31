@@ -1,0 +1,526 @@
+{
+  "repository": "rust-embedded/wg",
+  "time": "2026-10-20T04:57:12.459710+00:00",
+  "body_reads": 0,
+  "license": null,
+  "head": "3491f70af44b5f64cf109f6b7672c2f8ccdd2e1f",
+  "truncated": false,
+  "short_matching_files": 103,
+  "short_files": [
+    {
+      "path": "assets/README.md",
+      "size": 947,
+      "sha": "3723441362e76c760d731de967cab22538ec2d79"
+    },
+    {
+      "path": "minutes/2018-03-20.md",
+      "size": 1276,
+      "sha": "26d51fddc0d391f1a45ea3b75baee64822e4a333"
+    },
+    {
+      "path": "minutes/2018-03-27.md",
+      "size": 249,
+      "sha": "ba94d3a85193f0c7108f7b81f77ecc8d79809e5a"
+    },
+    {
+      "path": "minutes/2018-04-03.md",
+      "size": 1776,
+      "sha": "520a12464e8e44ede9c8eb50a305c88edb61e1a4"
+    },
+    {
+      "path": "minutes/2018-04-17.md",
+      "size": 792,
+      "sha": "6be6a94db7795a5af3efdfc045ea904ab694b927"
+    },
+    {
+      "path": "minutes/2018-08-13.md",
+      "size": 1798,
+      "sha": "b88d7fb100881cc891870d789cd5d77ebe5476c1"
+    },
+    {
+      "path": "minutes/2018-08-28.md",
+      "size": 1771,
+      "sha": "27bfad876ab5e33e02c6a10c54ec1d9a4a057e9d"
+    },
+    {
+      "path": "minutes/2018-11-20.md",
+      "size": 1393,
+      "sha": "25d58d210f81c2606afa9fba5f2c90812c031343"
+    },
+    {
+      "path": "minutes/2019-01-29.md",
+      "size": 825,
+      "sha": "108f4dc7d13abafc33464755c5e11be4d2b601c3"
+    },
+    {
+      "path": "minutes/2019-02-05.md",
+      "size": 895,
+      "sha": "6606afc8deeea2bba2e6e7b442537144412eb11e"
+    },
+    {
+      "path": "minutes/2019-02-19.md",
+      "size": 1446,
+      "sha": "baeb6f466b86d00d87f11d9954b424deb3292229"
+    },
+    {
+      "path": "minutes/2019-02-26.md",
+      "size": 1505,
+      "sha": "ec5005cee8d334a06f95224e16e4aabb092512f1"
+    },
+    {
+      "path": "minutes/2019-03-05.md",
+      "size": 1756,
+      "sha": "8ebc96993fd82b6e84343499db11acea0c5bf963"
+    },
+    {
+      "path": "minutes/2019-03-12.md",
+      "size": 1731,
+      "sha": "87b1e60c3b73ac992310cc2c942bd84c619c2e5d"
+    },
+    {
+      "path": "minutes/2019-03-19.md",
+      "size": 1111,
+      "sha": "50315568d587b391c5b8ab577cc13dc2f0ed3e8a"
+    },
+    {
+      "path": "minutes/2019-03-26.md",
+      "size": 1195,
+      "sha": "607be40f657a4da328ebab517e8d7477539ef866"
+    },
+    {
+      "path": "minutes/2019-04-02.md",
+      "size": 1100,
+      "sha": "44a8d0106ab127f5b30b94866a747d7d458cd198"
+    },
+    {
+      "path": "minutes/2019-06-04.md",
+      "size": 1009,
+      "sha": "52cda08abb773ccd378909f87ac94206a514cd53"
+    },
+    {
+      "path": "minutes/2019-06-18.md",
+      "size": 1129,
+      "sha": "c985e6204998c601c5d0873f0da1053a453d09b4"
+    },
+    {
+      "path": "minutes/2019-10-08.md",
+      "size": 1912,
+      "sha": "974925f3eee7a70c60cdd0be8a112e88224e2cd1"
+    },
+    {
+      "path": "minutes/2020-02-11.md",
+      "size": 931,
+      "sha": "e1d7b8dcd5302a9543fdf9f51605cb946171ce05"
+    },
+    {
+      "path": "minutes/2020-02-18.md",
+      "size": 1655,
+      "sha": "7036e5883f5bab66115d0b325480cddaab24b8bd"
+    },
+    {
+      "path": "minutes/2020-03-03.md",
+      "size": 1749,
+      "sha": "d31858b3c0006d73854ac7025f7b9f23a225d985"
+    },
+    {
+      "path": "minutes/2020-03-10.md",
+      "size": 1962,
+      "sha": "1631703725176f08dac1e26b91e29297753be31a"
+    },
+    {
+      "path": "minutes/2020-03-24.md",
+      "size": 1515,
+      "sha": "ded3c62151dc9cd7d5451b540e73603653cac11b"
+    },
+    {
+      "path": "minutes/2020-03-31.md",
+      "size": 554,
+      "sha": "5a1bf205d0fa5ea9461e70740051815413377265"
+    },
+    {
+      "path": "minutes/2020-04-07.md",
+      "size": 1061,
+      "sha": "171e54b6f836c565828d2fdbe9234cb7e3041091"
+    },
+    {
+      "path": "minutes/2020-04-14.md",
+      "size": 1642,
+      "sha": "a83a3e8ac50b14335f87ecdeebdd030d49a496d9"
+    },
+    {
+      "path": "minutes/2020-04-21.md",
+      "size": 1694,
+      "sha": "cb981dcd8eca411887d8be00d6c09e3a3488ed62"
+    },
+    {
+      "path": "minutes/2020-05-05.md",
+      "size": 1683,
+      "sha": "f1519aea6147064c5775545b0d4e5a3187c0dfb7"
+    },
+    {
+      "path": "minutes/2020-05-12.md",
+      "size": 1633,
+      "sha": "3481069847d5c43e54827d01c1e82a47b4508228"
+    },
+    {
+      "path": "minutes/2020-05-19.md",
+      "size": 1818,
+      "sha": "8f9c4e6a15e352cf20880960f5e5b2296de3f885"
+    },
+    {
+      "path": "minutes/2020-05-26.md",
+      "size": 1360,
+      "sha": "d6a4cb5ce75760fb07018585813dc7406eef865e"
+    },
+    {
+      "path": "minutes/2020-06-16.md",
+      "size": 1266,
+      "sha": "0db2cf7db821beaed486d9068cfd14b76d9df189"
+    },
+    {
+      "path": "minutes/2020-06-23.md",
+      "size": 1509,
+      "sha": "057bc6b2618e7e2c95d2b9438f197ea90603776d"
+    },
+    {
+      "path": "minutes/2020-06-30.md",
+      "size": 1500,
+      "sha": "cca994f69e94a7ebc1bb67b002c1cd32b263eca2"
+    },
+    {
+      "path": "minutes/2020-11-10.md",
+      "size": 1989,
+      "sha": "2f8b599aaf04faddee745a10c9d7027e722142b8"
+    },
+    {
+      "path": "minutes/2020-12-15.md",
+      "size": 1584,
+      "sha": "48337c4f6568a8084f31760e91d8e87e2242588d"
+    },
+    {
+      "path": "minutes/2021-01-05.md",
+      "size": 1183,
+      "sha": "c25bf12bf32eaa11c3c1afcde6c3f184d0cdbe56"
+    },
+    {
+      "path": "minutes/2021-01-12.md",
+      "size": 1074,
+      "sha": "b4eaa98e41cc8b32da1b2b0f8e555466aea00cd7"
+    },
+    {
+      "path": "minutes/2021-01-19.md",
+      "size": 1337,
+      "sha": "4ca37c8c876a1674bf366baab238fd35b22b388a"
+    },
+    {
+      "path": "minutes/2021-01-26.md",
+      "size": 1447,
+      "sha": "95907d3ba75aa53b17b3b2060cb60d79ecabe96e"
+    },
+    {
+      "path": "minutes/2021-02-02.md",
+      "size": 1428,
+      "sha": "d772f269bad1eae4881a4ac7b3900e9a699fb81d"
+    },
+    {
+      "path": "minutes/2021-02-09.md",
+      "size": 1977,
+      "sha": "7b0ac7c11fcb07c28d956dbafdd6dc3ba30d10cc"
+    },
+    {
+      "path": "minutes/2021-02-16.md",
+      "size": 1859,
+      "sha": "89c6535c58b6056f5010e913c4df5eaaebee6682"
+    },
+    {
+      "path": "minutes/2021-02-23.md",
+      "size": 1352,
+      "sha": "c53c090dcf6d2d0f349e4dcfdb08a2873ee6a6ab"
+    },
+    {
+      "path": "minutes/2021-03-02.md",
+      "size": 1534,
+      "sha": "2974da7ffe9e3b5e0177878b70a260b63f218e9d"
+    },
+    {
+      "path": "minutes/2021-04-06.md",
+      "size": 1919,
+      "sha": "f65f501d7c99c06af7151d819413ed9071c3c6c3"
+    },
+    {
+      "path": "minutes/2021-04-13.md",
+      "size": 1584,
+      "sha": "57984be4f59c70c05b56e5e040204943fac25525"
+    },
+    {
+      "path": "minutes/2021-04-20.md",
+      "size": 1845,
+      "sha": "11b6f8f6f600b82fae6f134baed5b1c87199b2b1"
+    },
+    {
+      "path": "minutes/2021-04-27.md",
+      "size": 1312,
+      "sha": "8d197324d450a9a4f46665c7c1e00869f4d8f035"
+    },
+    {
+      "path": "minutes/2021-05-04.md",
+      "size": 1744,
+      "sha": "8d3ae91d1a6c86390cebd97347883706cf701e26"
+    },
+    {
+      "path": "minutes/2021-05-11.md",
+      "size": 1623,
+      "sha": "e2d865e9a49f2c1d1020c272153c901588d4b516"
+    },
+    {
+      "path": "minutes/2021-05-18.md",
+      "size": 1889,
+      "sha": "9e06093643aabb254f9ed73f234fab9b423a20a8"
+    },
+    {
+      "path": "minutes/2021-06-15.md",
+      "size": 1998,
+      "sha": "5e02058415c102580db477b9c2c292fdae6ddf7c"
+    },
+    {
+      "path": "minutes/2021-06-22.md",
+      "size": 1924,
+      "sha": "afb3a527d71668026fece498f932e1bc069fb1b4"
+    },
+    {
+      "path": "minutes/2021-06-29.md",
+      "size": 1383,
+      "sha": "6bd8bd48050c9ff165b61ed85dd06356d37863a7"
+    },
+    {
+      "path": "minutes/2021-07-06.md",
+      "size": 1788,
+      "sha": "47eaea4f9c5b58451d6bff02935c7e24cab88bac"
+    },
+    {
+      "path": "minutes/2021-08-17.md",
+      "size": 1971,
+      "sha": "84253b755ae9b2d1630dc71323f162e7cbc4ea52"
+    },
+    {
+      "path": "minutes/2021-12-07.md",
+      "size": 2040,
+      "sha": "ee05efd9bfdf332c9cef806dac68c599fc7be02f"
+    },
+    {
+      "path": "minutes/2021-12-14.md",
+      "size": 1645,
+      "sha": "5f12c19cc07a540dfbf4189060fb8d9a54eed3f1"
+    },
+    {
+      "path": "minutes/2022-01-18.md",
+      "size": 2007,
+      "sha": "f52f65dac003c357dbb49c80ec61fab07f176b8d"
+    },
+    {
+      "path": "minutes/2022-01-25.md",
+      "size": 1902,
+      "sha": "9ce58912b290eac312ba41b2a16c3e8e2061a6fb"
+    },
+    {
+      "path": "minutes/2022-03-01.md",
+      "size": 1568,
+      "sha": "ee9dde3d06b818548d7554eccd4198e6421a03a7"
+    },
+    {
+      "path": "minutes/2022-03-08.md",
+      "size": 1428,
+      "sha": "1416588cafb8b3fccee536e722737e96facbe274"
+    },
+    {
+      "path": "minutes/2022-03-15.md",
+      "size": 1657,
+      "sha": "6f15479d3f0bad48be3208ab08253c9b64fa0512"
+    },
+    {
+      "path": "minutes/2022-03-22.md",
+      "size": 1701,
+      "sha": "a278b10fd834f81ff14ddf77b22ad4a4de114dec"
+    },
+    {
+      "path": "minutes/2022-03-29.md",
+      "size": 1454,
+      "sha": "3a88e20df5c8db927b20de38fde05474194781cc"
+    },
+    {
+      "path": "minutes/2022-04-05.md",
+      "size": 1582,
+      "sha": "4efb23f4d64cb7540fbc18e2d8ee18b4afa57fde"
+    },
+    {
+      "path": "minutes/2022-04-12.md",
+      "size": 1902,
+      "sha": "9f4ba12dbfb34451d786babeca9a397770e67eb2"
+    },
+    {
+      "path": "minutes/2022-05-24.md",
+      "size": 2016,
+      "sha": "9ed9224e7ffe9bee6422d07f056b89ee2ea6e28d"
+    },
+    {
+      "path": "minutes/2022-05-31.md",
+      "size": 1506,
+      "sha": "28bb242632f611d4a7da28a511f9b39a954de6a5"
+    },
+    {
+      "path": "minutes/2022-06-07.md",
+      "size": 1192,
+      "sha": "3ad53a5ff8e58634235310f7f8d3a52de4c4a0c8"
+    },
+    {
+      "path": "minutes/2022-06-14.md",
+      "size": 1134,
+      "sha": "4aeaddede95708768c82689e1fb8486aa360b386"
+    },
+    {
+      "path": "minutes/2022-06-21.md",
+      "size": 1627,
+      "sha": "380085ffd6143324abaa12d522b77084e19204f0"
+    },
+    {
+      "path": "minutes/2022-07-12.md",
+      "size": 1533,
+      "sha": "683278368b1a5d46daf7146ca7436bac6c25bed2"
+    },
+    {
+      "path": "minutes/2022-07-19.md",
+      "size": 1075,
+      "sha": "03fce54e0033dec957d0c76b3b646e0da9b0ce51"
+    },
+    {
+      "path": "minutes/2022-07-26.md",
+      "size": 1795,
+      "sha": "aaa1d6553d69f5be88c5b860fa6c9c18a77d21c5"
+    },
+    {
+      "path": "minutes/2022-08-23.md",
+      "size": 1984,
+      "sha": "23950f77faba5660a8db07eb0cb1d182cf709ad9"
+    },
+    {
+      "path": "minutes/2022-09-13.md",
+      "size": 1966,
+      "sha": "9ad41d461333afda02b340efb6f868cc528278d7"
+    },
+    {
+      "path": "minutes/2022-09-20.md",
+      "size": 1959,
+      "sha": "13470ca4118f540609febf632faa63341ee0fd95"
+    },
+    {
+      "path": "minutes/2022-10-11.md",
+      "size": 1722,
+      "sha": "9c3e6133f07bf24fd36e480aa11d6ef36ee22a4c"
+    },
+    {
+      "path": "minutes/2022-11-01.md",
+      "size": 2010,
+      "sha": "7c827fb1b023c74eb38a5de73562fc5b6c06bf3f"
+    },
+    {
+      "path": "minutes/2023-01-31.md",
+      "size": 1971,
+      "sha": "3d898c58bdf3b09f3ac57905c1890c609a586fbf"
+    },
+    {
+      "path": "minutes/2023-02-07.md",
+      "size": 1636,
+      "sha": "895c85b8ad003ade72ec92194d246bcce9c583ce"
+    },
+    {
+      "path": "minutes/2023-02-14.md",
+      "size": 1210,
+      "sha": "1b182bf5b0bf160608ebe9bc16ae5e62126611dd"
+    },
+    {
+      "path": "minutes/2023-02-21.md",
+      "size": 1638,
+      "sha": "07447d184b61621a3021e0e1030e26a24fecf7f9"
+    },
+    {
+      "path": "minutes/2023-03-14.md",
+      "size": 2017,
+      "sha": "0109053ce455bc2422005a85b71a89cf2fffa043"
+    },
+    {
+      "path": "minutes/2023-07-25.md",
+      "size": 1917,
+      "sha": "677bdd7a98bba2943e775e9951a178538e30edc5"
+    },
+    {
+      "path": "minutes/2023-08-08.md",
+      "size": 1453,
+      "sha": "1183a74df82bee783038a5948d05e9d8e54484cd"
+    },
+    {
+      "path": "minutes/2023-08-15.md",
+      "size": 1809,
+      "sha": "971143eddc722a2917d83c14160f47e54cef3137"
+    },
+    {
+      "path": "minutes/2023-09-19.md",
+      "size": 1387,
+      "sha": "c1c1963fb090a55b8088772a92aae1ebb6f59906"
+    },
+    {
+      "path": "minutes/2023-09-26.md",
+      "size": 1550,
+      "sha": "7cb1dd70505d589ca523f349cd9632faa7a55b7a"
+    },
+    {
+      "path": "minutes/2024-02-13.md",
+      "size": 1867,
+      "sha": "b55fb449663d5edb180ebbdfd070848a810d2cb0"
+    },
+    {
+      "path": "minutes/2024-02-20.md",
+      "size": 1923,
+      "sha": "52cfa376159bf8dc0537c9a7ba9d53a65f03f4e4"
+    },
+    {
+      "path": "minutes/2024-03-05.md",
+      "size": 1976,
+      "sha": "376964684045b3cb6b16d65cf027ae4d7efb24ca"
+    },
+    {
+      "path": "minutes/2024-03-12.md",
+      "size": 1539,
+      "sha": "5b2e3d0c8e136c77fcf873a7e40a9599004ebb30"
+    },
+    {
+      "path": "minutes/2024-03-19.md",
+      "size": 1500,
+      "sha": "2dd6c75cae4d055fead3eed26cde6fc762617e10"
+    },
+    {
+      "path": "minutes/2024-03-26.md",
+      "size": 1260,
+      "sha": "4b57adb90ff05ee50cb68372342bd378f3972ce1"
+    },
+    {
+      "path": "minutes/2024-04-02.md",
+      "size": 1425,
+      "sha": "a5b8567fed941516f79bfde53548353eca6ecb74"
+    },
+    {
+      "path": "minutes/2024-04-23.md",
+      "size": 1929,
+      "sha": "a69b74d00233da9d31377588753d38450d95f82c"
+    },
+    {
+      "path": "minutes/2024-05-28.md",
+      "size": 1184,
+      "sha": "e4c19df96db0f067b0bed2192fe1f4ddc5de7ff1"
+    },
+    {
+      "path": "ops/README.md",
+      "size": 20,
+      "sha": "9e69cb94b837163983d672f53d00bae45cd6a752"
+    }
+  ]
+}

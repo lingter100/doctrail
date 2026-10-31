@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "change": "meeting-analysis-result-visibility",
+  "status": "passed_focused_local_verification",
+  "source_files": [
+    {
+      "path": "web/src/components/MeetingViews.tsx",
+      "sha256": "b9625c7b0450eb796aa63ee97d831f6ecadbf131ad3844bbf47990490861b5d0"
+    },
+    {
+      "path": "web/tests/meeting-unavailable.spec.ts",
+      "sha256": "61c63cab3dfa2744435a08008b3efa3735da0f303111761589547db554cc5d71"
+    }
+  ],
+  "behavior": [
+    "Never-completed analysis is shown as unavailable rather than an AI draft or an empty extracted result.",
+    "Original source and analysis retry remain accessible.",
+    "Completed empty analysis and retained stale analysis remain visible.",
+    "Meeting list labels missing analysis honestly; corrected Korean topic empty-state text."
+  ],
+  "checks": {
+    "typescript": "passed",
+    "production_web_build": "passed",
+    "java_offline_packaging": "passed_with_tests_skipped",
+    "focused_browser": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "duration_seconds": 11.724324,
+      "real_java_cases": 2,
+      "synthetic_detail_state_cases": 4
+    }
+  },
+  "visual": {
+    "viewports": [
+      1440,
+      390
+    ],
+    "actual_java_failure_screen": true,
+    "review": "AI inspection by implementation agent and parent",
+    "horizontal_overflow_observed": false
+  },
+  "jar_sha256": "35edef10563ce21374c9d1dd7039c4e0fe2ee7e58bfa061e21544f13fddac235",
+  "cleanup": {
+    "owned_server_stopped": true,
+    "known_server_and_runner_absent": true,
+    "unrelated_project_untouched": true
+  },
+  "limitations": [
+    "No actual AI model calls or model quality acceptance.",
+    "Four state-transition display cases use explicit synthetic detail responses.",
+    "Focused local checks do not represent the full browser suite or CI for these changes.",
+    "Human review and public service deployment are not complete."
+  ]
+}

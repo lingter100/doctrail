@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "stage": "item_authoring",
+  "author_role": "/root/c5_calibration_author",
+  "question_author": "/root/c5_calibration_author",
+  "oracle_author": "/root/c5_calibration_author",
+  "assigned_independent_prereviewer": "/root/c5_calibration_prereviewer",
+  "independent_prereview_status": "pending",
+  "tool_requested_model": "gpt-6-astra",
+  "tool_requested_effort": "xhigh",
+  "fork_turns": "none",
+  "settings_provenance": "Original tool-requested and accepted configuration, retained on resumption; no fresh model acceptance or runtime introspection",
+  "same_split_source_item_reuse_disclosed": true,
+  "human_review_count": 0,
+  "started_at": "2026-10-20T00:27:28.330516+00:00",
+  "completed_at": "2026-10-20T00:27:28.376695+00:00",
+  "source_commit": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/source-freeze.json",
+    "sha256": "771a3f18f878d476b47b934c83b8c059bbde5710335470cf0f79d5ab1565adf8"
+  },
+  "toolchain_freeze_sha256": "d76670c9d0515e68f778c4ede3edfbfadd09a8807208e8c6b9eaee1b97a3444d",
+  "ci_release": {
+    "source_commit": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+    "run_ids": [
+      39224530427,
+      39224538908
+    ],
+    "jobs": {
+      "backend": "success",
+      "java-service": "success",
+      "web": "success"
+    },
+    "observation_provenance": "Parent directly observed success and explicitly released item authorship; author did not independently query CI."
+  },
+  "original_preauth_sha256": "ab74302c7f0ce85e831403fc761b1e1f441637a948e41f83bda7c0fbed7a7842",
+  "resumed_preauth": {
+    "file": ".local/meetings-c5-calibration-items-v1/preauth-resume-v2.json",
+    "sha256": "dd1f158086de642d05038dc82ccb21615d5f6830085cf3ad7a0a9e61b0cf0bb2",
+    "git_proof_keys": 171,
+    "captured_files": 94,
+    "head_before": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+    "head_after": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+    "completed_at": "2026-10-20T00:24:17.888968+00:00"
+  },
+  "files": {
+    "data/evaluation/meetings-c5-calibration-v1/draft.json": "e10d680a17133c774edb585297777e30907448194b419bfebed99147447789ee",
+    "data/evaluation/meetings-c5-calibration-v1/oracle-draft.json": "0d93d8ebbb956a2d5f5a6c35f0ca81234dec5fb2cac2f3d79f03475250d55350",
+    "data/evaluation/meetings-c5-calibration-v1/context-selection.json": "0bfec9af2a02876084eb19c0ddbc0dd3b2f6ed1312529a85feb74336d6f9e476"
+  },
+  "counts": {
+    "cases": 6,
+    "languages": {
+      "ko": 3,
+      "en": 3
+    },
+    "statuses": {
+      "answered": 4,
+      "abstained": 2
+    },
+    "required_facts": 29,
+    "supported_required_facts": 25,
+    "missing_required_facts": 4,
+    "evidence_alternatives": 28,
+    "context_placements": 24,
+    "unique_whole_chunks": 15,
+    "source_documents": 6,
+    "necessary_multidocument_answered_cases": 2,
+    "answered_modes": {
+      "general_only": 2,
+      "multiple_meetings": 1,
+      "mixed_general_and_meeting": 1
+    },
+    "cross_language_both_directions": true
+  },
+  "context_selection_basis": "Complete adopted documents selected by the question subject and chronology; every selected chunk is unchanged and whole. No token counts, estimates, native outputs or model feedback were used to choose sources, questions or context.",
+  "author_all_sufficient_alternatives_check": {
+    "status": "completed_by_author_only",
+    "scope": "All supplied structural blocks, including overlaps, were inspected against each required proposition. Alternatives list each independently sufficient block; unnecessary supersets do not form distinct minimal alternatives.",
+    "overlap_cases": [
+      {
+        "case_id": "C5-CAL-02",
+        "fact_id": "c5-cal-02-fact-04",
+        "alternatives": 2,
+        "reason": "Both overlapping February blocks completely state the 47-applicant clause; only the longer block states the full review plan."
+      },
+      {
+        "case_id": "C5-CAL-05",
+        "fact_ids": [
+          "c5-cal-05-fact-01",
+          "c5-cal-05-fact-02"
+        ],
+        "alternatives_each": 2,
+        "reason": "Both overlapping operations blocks completely state collection/privacy and classification; only the longer one completes disposal and subsequent provisions."
+      },
+      {
+        "case_id": "C5-CAL-01",
+        "excluded_as_independently_sufficient": "The overlap tail beginning ore mentees omits the subject, modality and sufficient-time requirement; the complete requirements list is sufficient."
+      }
+    ]
+  },
+  "author_family_absence_review": [
+    {
+      "case_id": "C5-CAL-03",
+      "family_id": "c5-f01",
+      "whole_documents_reviewed": [
+        "c5-cal-doc-01",
+        "c5-cal-doc-02",
+        "c5-cal-doc-03"
+      ],
+      "missing_information": [
+        "Subsequent email-vote final outcome",
+        "Confirmed VM Workshop 2018 sponsorship amount"
+      ],
+      "reason": "January minutes concern earlier internship/project activity; February minutes record a planned email vote; the pinned mentorship guide contains program information, not the subsequent sponsorship outcome or amount.",
+      "context_selection": "All February meeting chunks supplied. The other two whole documents were also reviewed for absence, not withheld despite containing an answer."
+    },
+    {
+      "case_id": "C5-CAL-06",
+      "family_id": "c5-f02",
+      "whole_documents_reviewed": [
+        "c5-cal-doc-04",
+        "c5-cal-doc-05",
+        "c5-cal-doc-06"
+      ],
+      "missing_information": [
+        "Organization funding an additional equipment purchase",
+        "Exact approved purchase-budget amount"
+      ],
+      "reason": "The operating plan has lending and handling rules; the preparation meeting leaves purchases undecided; the result meeting explicitly does not finalize the budget. No source states an approved amount or funder.",
+      "context_selection": "All chunks of all three family documents supplied."
+    }
+  ],
+  "author_checks": {
+    "file": ".local/meetings-c5-calibration-items-v1/structural-checks-v1.json",
+    "sha256": "902ec6866ec0b3195d2c6c6fc704e76110558645f82630f20675884f6fb28641",
+    "status": "passed"
+  },
+  "commands": [
+    "Read-only resumed actual code_contract / role_contract / source-freeze GitProof as recorded in preauth-resume-v2.json",
+    ".venv/Scripts/python.exe .local/meetings-c5-calibration-items-v1/author_items_v1.py"
+  ],
+  "inspection_errors": [
+    {
+      "operation": "rg path lookup",
+      "path": "scripts/review_meeting_c5.py",
+      "exit_code": 2,
+      "error": "Named path does not exist; corrected read used src/doctrail/meeting_c5_review.py. No data or code was modified."
+    }
+  ],
+  "source14_and_toolchain76_before_after": "unchanged",
+  "exposure": [
+    "Own accepted calibration source content and metadata",
+    "Own preauth and local source author history",
+    "Frozen C5 plan, protocol, family registry and pure code contracts",
+    "Auto-injected AGENTS and root STATUS contain prior experiment and other-split aggregate metadata",
+    "No validation source/question/oracle/semantic review body opened",
+    "No old closed semantic pool opened",
+    "No final-judge seed, answer, raw trace or output pack opened"
+  ],
+  "limitations": [
+    "Public mentorship guide is current at its pinned revision and is not backdated to 2018.",
+    "Synthetic source family is AI-authored fiction, not real organizational evidence.",
+    "Author structural checks do not constitute independent prereview, human review, item freeze, tokenizer preparation, native execution or quality acceptance.",
+    "Git proof establishes committed bytes at the recorded observation boundary, not a historical guarantee of file absence."
+  ],
+  "tokenizer_calls": 0,
+  "token_estimates": 0,
+  "native_calls": 0,
+  "maven_runs": 0,
+  "model_downloads": 0,
+  "paid_calls": 0,
+  "git_mutations": 0
+}

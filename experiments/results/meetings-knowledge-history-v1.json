@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "status": "local_behavior_and_independent_review_verified_source_ci_pending",
+  "feature": "Personal unified meeting/document search and QA history, explicit condition restore and per-result feedback",
+  "source_files": [
+    {
+      "file": "server/src/main/java/io/doctrail/Store.java",
+      "sha256": "55032b74b31ebf8c2de0b4ff5a8eefdcafe12867a84c17816dfdd3a2ad63256e"
+    },
+    {
+      "file": "server/src/main/java/io/doctrail/KnowledgeService.java",
+      "sha256": "3e1a6593983ef84320ffd91082106d8f9fd4ae0e77f944b9c10255ce9be75d38"
+    },
+    {
+      "file": "server/src/main/java/io/doctrail/MeetingController.java",
+      "sha256": "8d72af327cc43d50b4aa250b79db22d0d7fd68241dd3a8bb3bbfcc7da44e3007"
+    },
+    {
+      "file": "server/src/main/java/io/doctrail/KnowledgeHistoryService.java",
+      "sha256": "807694601e7535292e957849a6973432db84e8a4fddbd5dec21555feb6e755c9"
+    },
+    {
+      "file": "server/src/test/java/io/doctrail/KnowledgeDeadlineTest.java",
+      "sha256": "98f474d46d34c333548706531a6be45809d23ca5c6667151fbdbfc5faa9edd26"
+    },
+    {
+      "file": "server/src/test/java/io/doctrail/KnowledgeHistoryTest.java",
+      "sha256": "6daee92f19ad2c81acc8dbf399c1cff0e7b488579dad3f7de155303e48bc8209"
+    },
+    {
+      "file": "server/src/test/java/io/doctrail/KnowledgeHistoryHttpTest.java",
+      "sha256": "f3235174e5ff973b03bb7d3c49cd0f18fa89368610646caf21acbb0c36359359"
+    },
+    {
+      "file": "web/src/types.ts",
+      "sha256": "c52c546578d098ed3412b21dcb626677d1641ca90d423f48c5a803bbfafe3e63"
+    },
+    {
+      "file": "web/src/meetings.ts",
+      "sha256": "749f092b3e023b32ab3dc7e8dac0f6377a4a07b90f2de5b2cfbe37de25527a3a"
+    },
+    {
+      "file": "web/src/useDocTrail.ts",
+      "sha256": "b4d7b936703cb43a7a2765b4c8045a77623e90ea645a3e57c916037053f35edb"
+    },
+    {
+      "file": "web/src/App.tsx",
+      "sha256": "66029dee393aafbd59d037fa207165b406d7bd0722f7cc2ce558af4173711091"
+    },
+    {
+      "file": "web/src/components/ContentViews.tsx",
+      "sha256": "054d1d9e99ff106ecb19e90f6056bdc456f553d07b3a23e72292c9c7b0690dca"
+    },
+    {
+      "file": "web/src/components/KnowledgeView.tsx",
+      "sha256": "3b2d04debe9e99fcf7573a52103395c948b8e4f14b65d53a18b0c5690f1c99f7"
+    },
+    {
+      "file": "web/src/meetings.css",
+      "sha256": "3d45ba58a24b8518313a5de2f1249bc52fdb38dbe7cf05164572442bba119b55"
+    },
+    {
+      "file": "web/tests/knowledge-history.spec.ts",
+      "sha256": "10abec70f4eda1d281e271bf603c8c67f1048f23826faaa25182760de6382a79"
+    }
+  ],
+  "backend": {
+    "actual_java_sqlite_http": true,
+    "passed": 255,
+    "skipped": 1,
+    "failures": 0,
+    "skip_reason": "Existing optional private-corpus inventory not supplied",
+    "model_transport": "synthetic",
+    "new_tests": 24,
+    "independent_blockers": 0,
+    "independent_advisories": 1
+  },
+  "frontend": {
+    "initial_mocked": 10,
+    "after_context_repair_mocked": 13,
+    "first_full_browser": {
+      "specs": 19,
+      "passed": 117,
+      "failed": 2,
+      "elapsed_seconds": 339.752,
+      "exit_code": 1
+    },
+    "after_final_repairs_targeted": {
+      "specs": 2,
+      "passed": 22,
+      "failed": 0,
+      "elapsed_seconds": 37.596,
+      "exit_code": 0,
+      "history_mocked_api": 14,
+      "history_actual_java_sqlite": 2,
+      "existing_recovery_actual_only": 3,
+      "existing_recovery_synthetic_or_hybrid": 3
+    }
+  },
+  "fixed_failures": [
+    "History request loading could remain pending after changing legacy search method; independent context token fixes it.",
+    "Synthetic no-evidence query accidentally overlapped actual uploaded content; unique query and actual empty-search prerequisite now establish the intended case.",
+    "Explicit answer-error fallback retained limit5 instead of prior search default10; form and request now use10 while explicit user/restored limits remain honored elsewhere."
+  ],
+  "preservation": {
+    "first_failures_retained": true,
+    "root_copied_files_verified": 97,
+    "original_source_archives_verified": 97,
+    "original_product_jar_unchanged": true,
+    "personal_database_operations": 0,
+    "observed_target_processes_remaining": 0
+  },
+  "preparation_failure": "An intermediate preparation script syntax error left a copied old-dist JAR; log/JAR retained without browser use, then guarded exact-dist copy and offline package succeeded.",
+  "real_llm_calls": 0,
+  "human_review": false,
+  "limits": [
+    "The first whole browser run failed. Only affected specs were rerun locally after repair; no all-pass full-suite claim.",
+    "API/HTTP model fixtures are synthetic and do not establish answer quality.",
+    "History listing reads all personal rows before selecting100 eligible records; growth cost unmeasured.",
+    "Original private corpus-dependent optional Java test remains skipped.",
+    "Actual model service acceptance, user review and public deployment remain incomplete."
+  ],
+  "reproduce": [
+    "See docs/MEETINGS-KNOWLEDGE-HISTORY-VERIFICATION.md",
+    "Existing unmodified npm run test:e2e uses isolated per-spec Java services and synthetic databases."
+  ],
+  "final_delta_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "receipt_sha256": "deda1ea5b29efca7903b32d9293e00800a16658e4e9f6d422e67a48e58376c25",
+    "parent_acceptance_sha256": "5b607c15c065795576f11fac3193b312379896146b99e1edecaaf5c25f67d419"
+  },
+  "test_publication_normalization": {
+    "file": "web/tests/knowledge-history.spec.ts",
+    "before_sha256": "58dc963605149c8b3c698989a25493bebb4b001eb8d3916ecf5224f5d0e00b00",
+    "after_sha256": "10abec70f4eda1d281e271bf603c8c67f1048f23826faaa25182760de6382a79",
+    "change": "CRLF-to-LF only to match Git delivery",
+    "typescript_transpile": {
+      "version": "5.9.3",
+      "identical": true,
+      "compiledSha256": "77ff85cd231a90232fa35025caad4dc65beba628d6fad6c4f7d43beee442627d"
+    },
+    "original_tested_copy_and_failures_preserved": true,
+    "new_browser_runs": 0
+  }
+}

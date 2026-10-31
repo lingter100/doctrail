@@ -1,0 +1,63 @@
+{
+  "schema": "doctrail-summary-engine-build-result-v1",
+  "status": "ACTUAL_BUILD_CONFIGURE_FAILED_PRESERVED",
+  "source_commit": "0b27d1fe11802b39af02453b18913623df2deb45",
+  "attempts": 1,
+  "result": {
+    "cli_natural_terminal": true,
+    "cli_exit_code": 1,
+    "whole_cli_seconds": 85.266,
+    "whole_cli_has_900_second_bound": false,
+    "configure_runner_seconds": 0.406,
+    "first_failure": {
+      "error": "BoundaryError",
+      "reason": "unexpected_child_executable"
+    },
+    "observed_forbidden_executable": "WerFault.exe",
+    "faulting_tool_and_exception_code": "not established",
+    "compile_phase_attempted": false,
+    "build_manifest_present": false
+  },
+  "cleanup": {
+    "inner_all_absent": true,
+    "inner_errors": [
+      "BoundaryError"
+    ],
+    "outer_all_absent": true,
+    "outer_errors": [],
+    "post_terminal_known_identities_absent": 9
+  },
+  "preservation": {
+    "frozen_refs_exact": 535,
+    "original_acquired_files_exact": 15675,
+    "additional_build_files": 8,
+    "final_work_files": 15683,
+    "final_work_bytes": 856641399,
+    "post_failure_full_work_inventory_passes": 1,
+    "parent_duplicate_payload_body_hash": false,
+    "old_v8_payload_body_scan": false
+  },
+  "scope": {
+    "native_validator_runs": 0,
+    "model_runs": 0,
+    "retries": 0,
+    "whitelist_changes": 0,
+    "human_review": false
+  },
+  "correction": "An intermediate launcher label inferred compile from configure.json existence; failure receipt creation also satisfied that heuristic. Original output is preserved with a separate correction. No explicit compile phase occurred.",
+  "review_artifact_sha256": "602340b597d62eb70f185d3340e3a99100b6b792ef6d491b7c9f1407f2903e6d",
+  "actual_acquisition_sha256": "70cb4210a3661678f3032cf624330988368836304cfd187d16225459d8ca6eba",
+  "evidence": {
+    "final_sha256": "c514ed2370b4cd87ee5183b3fcdb1344d3942b4c3df09dd5a1607c2133959fea",
+    "parent_closeout_sha256": "ef8e3d79d137b98b4a7262b8cb7affaaaabda6b1aed49302fff32fc660463bb9"
+  },
+  "diagnosis": {
+    "saved_complete_trace_records": 68,
+    "last_trace_line_truncated": true,
+    "compiler_identity_not_observed": "Does not prove that no short process ran between observations.",
+    "ninja_fault": "leading hypothesis only",
+    "bounded_pe_metadata": "Ninja and CMake are x64; Ninja directly imports KERNEL32.dll only. This does not establish runtime correctness.",
+    "narrow_windows_error_reporting_records_found": 0
+  },
+  "next": "One separately assigned short fixed-Ninja diagnostic to capture natural exit and any owned WerFault target. No full build retry or production fix is justified by current evidence."
+}

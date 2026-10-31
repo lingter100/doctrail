@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "EXACT_COMMIT_BOTH_REQUIRED_CI_PASSED",
+  "commit": "3aa8dfb477c35fb9254639b7f037d1050b098445",
+  "push_run": 41010053005,
+  "pr_run": 41010058520,
+  "jobs_per_run": {
+    "backend": "success",
+    "web": "success",
+    "java-service": "success"
+  },
+  "watch_sessions": {
+    "push": 62960,
+    "pr": 83915
+  },
+  "watch_exits": {
+    "push": 0,
+    "pr": 0
+  },
+  "python": {
+    "passed": 5489,
+    "skipped": 21,
+    "warnings": 2,
+    "seconds": 143.51,
+    "measurement_log": "push backend"
+  },
+  "browser_each_run": {
+    "passed": 158,
+    "failed": 0,
+    "infrastructure_failures": 0,
+    "missing_reports": 0,
+    "missing_runs": 0
+  },
+  "actual_java_http_and_database_compatibility": "passed",
+  "synthetic_meeting_operations_against_actual_java": "passed",
+  "source_mode_repair_actual_acquisition_runs": 0,
+  "build_native_model_runs": 0,
+  "model_quality_proven": false,
+  "public_deployment": false,
+  "parent_receipt_sha256": "8c9200765512cfbe3944d3138d761269bbb4ba2945e1bd84b2f58add0f5ddf8e",
+  "limitations": [
+    "Source-mode repair has mocked acquisition checks and CI, not actual end-to-end acquisition or build verification.",
+    "Consumed v6 and earlier failures remain preserved; no automatic retry.",
+    "Historical retrieval replay is not a fresh quality experiment."
+  ]
+}

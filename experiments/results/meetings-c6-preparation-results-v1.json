@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "status": "closed_at_offline_input_admissibility_gate",
+  "recorded_at_utc": "2026-10-20T03:56:18.732379+00:00",
+  "execution_head": "e8e52979d850199238cd1435fb10380e4d692b89",
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "accepted_item_commit": "769d2cca9e0524cb77f4713f4d0b59dadd9dfae9",
+  "phases": {
+    "calibration": {
+      "status": "passed",
+      "summary": {
+        "planned": 6,
+        "measured": 6,
+        "failed": 0
+      },
+      "official_prepare_entries": 1,
+      "tokenizer_loads": 1,
+      "native_calls": 0,
+      "downloads": 0,
+      "input_tokens_min": 1273,
+      "input_tokens_max": 2192,
+      "input_token_overlimit_count": 0,
+      "request_bytes_max": 14575,
+      "request_byte_overlimit_count": 0,
+      "payloads_preserved": true,
+      "receipt": {
+        "file": ".local/meetings-c6-calibration-prepared-v1/receipt.json",
+        "sha256": "c2d698f06bc0f46cdde51106d849b949005dac297da4a39d95d410500ce5da5e"
+      },
+      "cli_launches": 2,
+      "preserved_pre_entry_failed_cli_launches": 1,
+      "official_cli_exit": 0,
+      "official_cli_wall_seconds": 71.7196731,
+      "input": {
+        "file": "data/evaluation/meetings-c6-calibration-inputs-v1/input.json",
+        "sha256": "deea9af08ab98843d5e8c9a64d73333228eef473771e20f9d596cf71700cd18c"
+      },
+      "public_receipt": {
+        "file": "data/evaluation/meetings-c6-calibration-inputs-v1/receipt.json",
+        "sha256": "c2d698f06bc0f46cdde51106d849b949005dac297da4a39d95d410500ce5da5e"
+      },
+      "handoff": {
+        "file": ".local/meetings-c6-calibration-offline-corrected-invocation-v2/handoff-v2.json",
+        "sha256": "fc9a71e9d0c71d1336c4734f7d31ea6173e61cd6e026de23777edc6663792d2e"
+      },
+      "first_cli_failure": {
+        "file": ".local/meetings-c6-calibration-offline-invocation-v1/failure-metadata-v1.json",
+        "sha256": "bee34b6a69b069070404670c99ecf1d075e4934ac71ad03903a1aab7b0bd3ca9"
+      }
+    },
+    "validation": {
+      "status": "failed",
+      "summary": {
+        "planned": 8,
+        "measured": 8,
+        "failed": 2
+      },
+      "official_prepare_entries": 1,
+      "tokenizer_loads": 1,
+      "native_calls": 0,
+      "downloads": 0,
+      "input_tokens_min": 1784,
+      "input_tokens_max": 5266,
+      "input_token_overlimit_count": 2,
+      "request_bytes_max": 25077,
+      "request_byte_overlimit_count": 0,
+      "payloads_preserved": true,
+      "receipt": {
+        "file": ".local/meetings-c6-validation-prepared-v1/receipt.json",
+        "sha256": "6a3fecee6e722a26bdf21201e6cb339d4d7b03e7abd0db81e317f0317ef13ef5"
+      },
+      "cli_launches": 1,
+      "official_cli_exit": 1,
+      "official_cli_wall_seconds": 47.74140860000625,
+      "input_created": false,
+      "public_failure_receipt": {
+        "file": "experiments/results/meetings-c6-validation-preparation-failure-receipt-v1.json",
+        "sha256": "6a3fecee6e722a26bdf21201e6cb339d4d7b03e7abd0db81e317f0317ef13ef5"
+      },
+      "observer": {
+        "file": ".local/meetings-c6-validation-preparation-observer-v1/result-v1.json",
+        "sha256": "1da33d66c15eae96ad35ea5c007716a0cf6607da4d1fdd977cb93ae1363ee350"
+      },
+      "failure_metadata": {
+        "file": ".local/meetings-c6-validation-preparation-observer-v1/failure-metadata-v1.json",
+        "sha256": "9489876db218e3f74999d659ba9a5a0dca80b5fd22b387a5b7247717baf0ed4a"
+      },
+      "first_failure": {
+        "code": "c6_failed_closed",
+        "type": "ValueError"
+      }
+    }
+  },
+  "preserved_files_verified_unchanged": {
+    "code": 77,
+    "source": 46,
+    "original_items": 14,
+    "accepted_items": 16,
+    "prior": 112
+  },
+  "retries_after_prepare_entry": 0,
+  "payload_edits_after_token_feedback": 0,
+  "native_calls": 0,
+  "answer_judgments": 0,
+  "human_reviews": 0,
+  "service_adopted": false,
+  "phase1_complete": false,
+  "absent_execution_outputs_at_observation": [
+    "data/evaluation/meetings-c6-execution-plan-v1.json",
+    ".local/meetings-c6-validation-prepared-v1/input.json",
+    ".local/meetings-c6-quality-ledger-v1.json",
+    ".local/meetings-c6-quality-calibration-v1",
+    ".local/meetings-c6-quality-validation-v1",
+    ".local/meetings-c6-audit-calibration-v1",
+    ".local/meetings-c6-audit-validation-v1"
+  ],
+  "execution_plan_builder_unused": {
+    "file": ".local/build_c6_execution_plan_v1.py",
+    "sha256": "09fe1ed3ca73c3298013b8f00db5fae249195c942b0643aada3f098b77bc0578"
+  },
+  "documentation_head_ci_observed": [
+    {
+      "conclusion": "success",
+      "databaseId": 39366267902,
+      "event": "push",
+      "headSha": "e8e52979d850199238cd1435fb10380e4d692b89",
+      "jobs": [
+        {
+          "databaseId": 118443725104,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39366267902/job/118443725104"
+        },
+        {
+          "databaseId": 118443725339,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39366267902/job/118443725339"
+        },
+        {
+          "databaseId": 118443725557,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39366267902/job/118443725557"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39366267902"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 39366272729,
+      "event": "pull_request",
+      "headSha": "e8e52979d850199238cd1435fb10380e4d692b89",
+      "jobs": [
+        {
+          "databaseId": 118443739780,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39366272729/job/118443739780"
+        },
+        {
+          "databaseId": 118443739981,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39366272729/job/118443739981"
+        },
+        {
+          "databaseId": 118443740106,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39366272729/job/118443740106"
+        }
+      ],
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39366272729"
+    }
+  ],
+  "failure_interpretation": "Two isolated validation inputs violate the fixed input-token admissibility limit. This closes C6 before an execution plan or native request. It is not model semantic failure and provides no inference latency/reader-effect evidence. Calibration success does not bypass the both-input requirement.",
+  "launch_correction": "The calibration direct-script CLI failed at imports before main/prepare/reservation/tokenizer. The unchanged module CLI corrected path resolution. Two launches but exactly one actual preparation; original error preserved. No count rescue or frozen-code edit.",
+  "future_boundary": "No rerun, truncation, token-limit increase or reuse of these closed items. Next design uses code and safe aggregate metadata only; no held-out item semantics or per-item length tuning."
+}

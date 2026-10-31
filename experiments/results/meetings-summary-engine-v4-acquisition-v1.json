@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "FAILED_EXTERNAL_SCAN_DEADLINE_CLOSED_CONSUMED",
+  "source_head": "bac908d9c1d8d3474f797cad94ea26840d38531a",
+  "failure_origin": "external observer",
+  "failure_code": "external_scan_deadline",
+  "exit_roles": {
+    "actual_CLI_exit_code": 15,
+    "official_CLI_natural_terminal_observed": false,
+    "observer_wrapper_exit_code": 1,
+    "outer_tool_exit_code": 1
+  },
+  "natural_worker_terminal_observed": false,
+  "missing_worker_failure_and_supervision_records_preserved": true,
+  "once_consumed": true,
+  "retry_count": 0,
+  "download_bytes_at_last_phase_start": 217737828,
+  "partial_files": 13981,
+  "partial_bytes": 806902814,
+  "through_cleanup_seconds": 595.015,
+  "wrapper_seconds": 608.688,
+  "completed_phase_durations": [
+    {
+      "phase": "download-llvm",
+      "start_seconds": 0.06299999996554106,
+      "end_seconds": 27.48499999998603,
+      "duration_seconds": 27.42200000002049
+    },
+    {
+      "phase": "extract-llvm",
+      "start_seconds": 27.53200000000652,
+      "end_seconds": 148.0470000000205,
+      "duration_seconds": 120.51500000001397
+    },
+    {
+      "phase": "inventory-llvm",
+      "start_seconds": 164.56299999996554,
+      "end_seconds": 187.0470000000205,
+      "duration_seconds": 22.484000000054948
+    },
+    {
+      "phase": "download-cmake",
+      "start_seconds": 204.21900000004098,
+      "end_seconds": 228.3279999999795,
+      "duration_seconds": 24.108999999938533
+    },
+    {
+      "phase": "extract-cmake",
+      "start_seconds": 246.0,
+      "end_seconds": 383.469000000041,
+      "duration_seconds": 137.46900000004098
+    },
+    {
+      "phase": "inventory-cmake",
+      "start_seconds": 429.75,
+      "end_seconds": 513.3910000000615,
+      "duration_seconds": 83.64100000006147
+    }
+  ],
+  "unfinished_phase": "download-ninja",
+  "unfinished_phase_start_seconds": 558.4220000000205,
+  "last_observed_scan": {
+    "cumulative_seconds": 302.188,
+    "count": 14,
+    "entries": 93930,
+    "origin": "acquisition worker Budget.scan"
+  },
+  "known_owned_absent": {
+    "outer_wrapper": 9,
+    "observer": 6
+  },
+  "custody": {
+    "parent_direct_refs_verified": 31,
+    "frozen_refs_verified": 189,
+    "partial_inventory_hash_verified": true,
+    "payload_verification": "executor verified all13981; parent did not repeat payload scan"
+  },
+  "one_intermediate_poll_unavailable": true,
+  "terminal_directly_observed": true,
+  "build_native_model_runs": 0,
+  "companion_created": false,
+  "paid_service_usage": 0,
+  "public_deployment": false,
+  "final_receipt_sha256": "7a1ccb1cebd6bbccf33469429ddc4386d0649b835da1888efa77525be5adbb2d",
+  "parent_closeout_sha256": "e15e70f48e7d12eb4c4bf970418ecf062d8d4aae5cf1a12265140033e1c3704b",
+  "limitations": [
+    "The previous missing-header condition was passed and LLVM/CMake extraction and inventories completed; overall acquisition failed.",
+    "Worker phases and worker Budget.scan timings overlap; they cannot be added or interpreted as a measured causal speedup.",
+    "CLI15 was forced by the external observer, not a naturally observed worker terminal. Missing worker records are not fabricated.",
+    "Partial preserved files are not an admitted compiler toolchain or successful build.",
+    "No closed-run retry or original cap change was performed."
+  ],
+  "next": "Narrow public-code and saved-metadata diagnosis of repeated scan cost and the observed deadline. No automatic duration increase or replay."
+}

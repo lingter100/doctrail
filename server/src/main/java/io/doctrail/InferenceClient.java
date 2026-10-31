@@ -122,7 +122,7 @@ public class InferenceClient {
         }catch(Exception ignored){/* Malformed error bodies never escape or become browser auth errors. */}
         return new ApiError(503,"inference_unavailable");
     }
-    private static final class BoundedBody implements HttpResponse.BodySubscriber<byte[]> {
+    static final class BoundedBody implements HttpResponse.BodySubscriber<byte[]> {
         final CompletableFuture<byte[]> result=new CompletableFuture<>();final ByteArrayOutputStream bytes=new ByteArrayOutputStream();Flow.Subscription subscription;
         public CompletionStage<byte[]> getBody(){return result;}
         public void onSubscribe(Flow.Subscription subscription){this.subscription=subscription;subscription.request(1);}

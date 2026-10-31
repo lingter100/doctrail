@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-blocks-c2-p0",
+  "limits": {
+    "input_tokens": 4096,
+    "output_tokens": 384,
+    "request_seconds": 90,
+    "cleanup_seconds": 5,
+    "request_and_cleanup_seconds": 120,
+    "native_calls": 2,
+    "warmup_calls": 0,
+    "retries": 0
+  },
+  "bound_files": {
+    "data/models/meetings-generation-qwen35-v1.json": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99",
+    "docs/MEETINGS-C1-FAILURE-FOLLOWUP.md": "00fcd0679906ee349c6415d0aef206bf1b13c3bdafef0000f8a9497c3487b516",
+    "docs/MEETINGS-C2-NEUTRAL-PLAN.md": "67aa3c949313594488a8961c3132ce23515a9afa695ec63dcbe95f9515dacd7a",
+    "pyproject.toml": "db45870df5b6d4fd543e14b9d837d25614033f9049692cead50e1a366a72308d",
+    "scripts/check_meeting_review_token_budget.py": "25d6aa7e53a03ae46213340d48b7d3d2d119e768a870227ad4dc93593481c8cc",
+    "scripts/prepare_meeting_gguf.py": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb",
+    "scripts/probe_meeting_answer_review.py": "6bc1bd5dfa4b9076ee3d50bda4a580ae76d45b9fef03bbaf555728d4ad0facc6",
+    "scripts/probe_meeting_blocks_resources.py": "c724e5c7f8bded015b4ee2cd02ce12503c8ab8cb05551413568e6fdf8c3af1c6",
+    "scripts/serve_meetings.py": "9c54905ae01d02e7fbd37b955dd62b6de58952cf4e434a1efa75f9816d33c1d8",
+    "scripts/serve_meetings_gguf.py": "957b7faa8bb653f0138b4dd4ef66fa500718aa5a5d639d62666b3a283899980b",
+    "scripts/serve_models.py": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d",
+    "scripts/verify_java_service.py": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d",
+    "src/doctrail/generation_runtime.py": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9",
+    "src/doctrail/generation_runtime_v2.py": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117",
+    "src/doctrail/inference.py": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+    "src/doctrail/meeting_answer_blocks.py": "16bccf899000f55b7f12ace2b8103021119d9864973e97aed0d91a4895c7bbbb",
+    "src/doctrail/meeting_answer_grammar.py": "58c2aeaebf203d214ea33a109864c730fb2f9cde2bda0f990309037da1f2d671",
+    "src/doctrail/meeting_answer_review.py": "c2dfc0992b313ad2da69bec4c5c2a19eba2bcab9114fa54ccc46100619adaf22",
+    "src/doctrail/meeting_answer_spans.py": "aa0a7a03991ee1839e71d9fb7756eda58758eafbd7c32bd768cb9c1659382ac2",
+    "src/doctrail/meeting_answer_v2.py": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444",
+    "src/doctrail/meeting_contract.py": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330",
+    "src/doctrail/meeting_gguf.py": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114",
+    "src/doctrail/meeting_qwen35.py": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b",
+    "src/doctrail/meeting_runtime.py": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4",
+    "src/doctrail/meeting_worker.py": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468",
+    "tests/test_meeting_answer_blocks.py": "5f6b0225d45a130fcda812392a39fecb2885f8dc0bb595b477a52bd372b1caa3",
+    "tests/test_meeting_blocks_resources.py": "619902890b32448189a6fcf79113d238d85f8cadf2785114a8403b475f234f77",
+    "uv.lock": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+  },
+  "output_dir": ".local/meeting-blocks-c2-resources-v1",
+  "tokenizer": {
+    "repo_id": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "transformers_version": "4.57.6",
+    "assets_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+      "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003",
+      "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d"
+    },
+    "trust_remote_code": false,
+    "download_authorized": false
+  },
+  "model_calls": 0,
+  "human_review_count": 0,
+  "stress_grammar": "root ::= (\"x \"){500}\n",
+  "cases": [
+    {
+      "id": "normal",
+      "payload": {
+        "schema_version": 1,
+        "query": "What tone label does the neutral sample have?",
+        "contexts": [
+          {
+            "document_id": "synthetic-resource-0",
+            "revision": 1,
+            "chunk_id": "synthetic-resource-0-0",
+            "title": "Synthetic resource fixture",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 7,
+            "end_offset": 53,
+            "text": "The neutral sample has the tone label violet.\n"
+          }
+        ]
+      },
+      "official_input_tokens": 474
+    },
+    {
+      "id": "stress",
+      "payload": {
+        "schema_version": 1,
+        "query": "Repeat the literal marker x with spaces for this resource test.",
+        "contexts": [
+          {
+            "document_id": "synthetic-resource-0",
+            "revision": 1,
+            "chunk_id": "synthetic-resource-0-0",
+            "title": "Synthetic resource fixture",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 7,
+            "end_offset": 2105,
+            "text": "Synthetic resource paragraph 000. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 001. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 002. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 003. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 004. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 005. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 006. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding."
+          },
+          {
+            "document_id": "synthetic-resource-1",
+            "revision": 1,
+            "chunk_id": "synthetic-resource-1-0",
+            "title": "Synthetic resource fixture",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 7,
+            "end_offset": 2105,
+            "text": "Synthetic resource paragraph 007. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 008. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 009. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 010. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 011. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 012. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 013. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding."
+          },
+          {
+            "document_id": "synthetic-resource-2",
+            "revision": 1,
+            "chunk_id": "synthetic-resource-2-0",
+            "title": "Synthetic resource fixture",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 7,
+            "end_offset": 2105,
+            "text": "Synthetic resource paragraph 014. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 015. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 016. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 017. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 018. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 019. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 020. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding."
+          },
+          {
+            "document_id": "synthetic-resource-3",
+            "revision": 1,
+            "chunk_id": "synthetic-resource-3-0",
+            "title": "Synthetic resource fixture",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 7,
+            "end_offset": 2105,
+            "text": "Synthetic resource paragraph 021. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 022. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 023. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 024. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 025. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 026. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 027. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding."
+          },
+          {
+            "document_id": "synthetic-resource-4",
+            "revision": 1,
+            "chunk_id": "synthetic-resource-4-0",
+            "title": "Synthetic resource fixture",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 7,
+            "end_offset": 2105,
+            "text": "Synthetic resource paragraph 028. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 029. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 030. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 031. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 032. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 033. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding.\n\nSynthetic resource paragraph 034. This neutral passage is for measuring input handling and output limits only. It contains no meeting decision, human feedback, personal record or evaluation answer. Its sample markers are cyan, magenta, amber and silver; these repeated words are mechanical padding."
+          }
+        ]
+      },
+      "official_input_tokens": 3881
+    }
+  ]
+}

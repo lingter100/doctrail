@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "id": "meetings-host-proof-profile-v1",
+  "registered_date_kst": "2026-10-16",
+  "state": "design_only_no_implementation_or_profile_execution",
+  "purpose": "Measure bounded synthetic host integrity primitive costs without replaying closed C4 quality work.",
+  "design_document": "docs/MEETINGS-HOST-PROOF-PROFILE-PLAN.md",
+  "observation_basis": {
+    "metadata_file": "experiments/results/meetings-c4-quality-failure-metadata-v1.json",
+    "metadata_sha256": "2bf0362f6d34fccd8458867e1e050c37190483452cafa3b43b38296e30552c8a",
+    "execution_commit": "43139e09f6a0aecfdde1c0c510a563efd348e8d5",
+    "closed_raw_sha256_reference_only": "4c95b97cafb1abaf9655443023ffefdd1a436250d40b5cc3fff84fa0b8c87b91",
+    "first_request_seconds": 86.157,
+    "first_native_prompt_seconds": 3.999651,
+    "first_native_prediction_seconds": 63.402728,
+    "difference_seconds_not_attributed_to_git": 18.754621,
+    "first_margin_to_90_seconds": 3.843,
+    "second_request_seconds_failed": 91.343,
+    "second_native_response_or_timing_available": false,
+    "send_attempts": 2,
+    "archived_parsed_native_responses": 1,
+    "contract_valid_answers": 1,
+    "semantic_quality_judgments": 0,
+    "raw_or_trace_paths_may_be_followed": false
+  },
+  "scope": {
+    "native_calls": 0,
+    "model_calls": 0,
+    "tokenizer_calls": 0,
+    "http_calls": 0,
+    "quality_calls": 0,
+    "downloads": 0,
+    "paid_or_cloud_calls": 0,
+    "closed_artifact_body_reads": 0,
+    "source_or_item_authorship": 0,
+    "frozen_file_edits": 0,
+    "service_integration": false,
+    "optimization_implementation_authorized": false,
+    "current_profile_execution_authorized": false,
+    "once_implementation_freeze_and_ci_pass_execution_already_authorized": true,
+    "existing_quality_entrypoints_may_be_called": false,
+    "allowed_real_repository_reads": [
+      "Explicit precommitted tooling and transport Python code allowlist and code-only import closure for implementation integrity setup only, outside measured passes",
+      "Public design documents explicitly bound in the profile implementation freeze",
+      "data/evaluation/meetings-host-proof-profile-protocol-v1.json"
+    ],
+    "forbidden_inputs": [
+      "Actual quality execution-plan phase references",
+      "Current or historical evaluation source, question, context, oracle, answer, reasoning, raw report or trace values",
+      "Isolated validation or final-test semantics",
+      "Files reached by following the failure metadata artifact index"
+    ],
+    "profile_requires_failure_metadata_read": false
+  },
+  "fixture": {
+    "kind": "mechanically_generated_nonsemantic_python_and_metadata_in_synthetic_git_repository",
+    "root": ".local/meetings-host-proof-profile-v1/fixture",
+    "bound_files": 134,
+    "byte_buckets": [
+      {"kind": "synthetic_python", "files": 13, "bytes_each": 4096},
+      {"kind": "synthetic_json", "files": 72, "bytes_each": 4096},
+      {"kind": "synthetic_json", "files": 49, "bytes_each": 32768}
+    ],
+    "encoding": "UTF-8 ASCII subset, LF, no BOM",
+    "padding": "Deterministic ordinal-based ASCII padding fixed in implementation before execution",
+    "ast": {
+      "root": "Synthetic fixture Git repository only",
+      "synthetic_python_files": 13,
+      "fixed_new_files_seed_paths": 12,
+      "deterministic_helper_files": 1,
+      "synthetic_code_included_in_134": true,
+      "actual_code_allowlist_used_only_for_integrity_setup": true,
+      "actual_repository_ast_scan_or_git_proof_in_measured_pass": false,
+      "positive_and_absent_import_candidates": true,
+      "exact_import_graph_and_candidate_roster_frozen_before_run": true,
+      "complete_source_files_return_value_sealed": true,
+      "absent_constant_path_bodies_read": false,
+      "returned_paths_distinct_from_134_existing_bound_files": true,
+      "read_non_code_paths_returned_by_source_files": false,
+      "execute_code_under_ast_inspection": false,
+      "read_real_dataset_fixtures": false
+    },
+    "metadata_fields": ["schema_version", "ordinal", "padding"],
+    "metadata_fields_apply_only_to_json_files": 121,
+    "forbidden_semantic_fields": ["query", "context", "answer", "reasoning", "oracle"],
+    "manifest_and_exact_generator_frozen_before_run": true,
+    "actual_c4_binding_list_copied": false,
+    "actual_c4_content_or_sizes_copied": false,
+    "git": {
+      "create_fixture_repository": true,
+      "remotes": 0,
+      "byte_proof_scope": "All 134 synthetic bound files and synthetic HEAD only",
+      "synthetic_bound_files_committed_once": true,
+      "init_add_commit_and_local_config_allowed_only_in_setup_inside_exclusive_fixture_root": true,
+      "network_hooks_and_signing_allowed": false,
+      "project_head_index_config_mutation": false,
+      "user_global_git_config_mutation": false,
+      "actual_project_git_commands_read_only": true,
+      "measured_pass_git_commands_read_only": true,
+      "parent_holds_project_head_during_profile": true
+    },
+    "git_internal_manifest_and_output_files_excluded_from_134": true,
+    "setup_measured_separately": true,
+    "separate_preparation_execution": false
+  },
+  "execution": {
+    "official_output": ".local/meetings-host-proof-profile-v1",
+    "exclusive_reservation": true,
+    "existing_output_rejected": true,
+    "resume_or_delete_existing_output": false,
+    "cold_passes": 1,
+    "warm_passes": 6,
+    "total_guard_passes": 7,
+    "cold_definition": "Empty in-process proof cache; OS disk cache is not flushed or claimed cold",
+    "warm_definition": "Same process, proof instance, 134 synthetic fixture files and synthetic HEAD",
+    "extra_warmups": 0,
+    "retries": 0,
+    "reruns": 0,
+    "whole_profile_seconds_including_setup": 300,
+    "profile_limit_changes_service_budget": false,
+    "first_failure_stops_remaining_passes": true,
+    "preserve_partial_results_and_unexecuted_passes": true,
+    "pass_order": [
+      "head",
+      "ast_paths",
+      "snapshot_hash",
+      "metadata_validation",
+      "git_proof",
+      "unchanged",
+      "head_recheck",
+      "archive"
+    ],
+    "archive": {
+      "synthetic_records_per_pass": 17,
+      "bytes_per_record": 4096,
+      "exclusive_write_flush_fsync": true,
+      "outside_fixture_bound_set": true,
+      "native_event_or_send_count": 0
+    }
+  },
+  "measurement": {
+    "clock": "monotonic elapsed nanoseconds",
+    "fields": [
+      "inclusive_elapsed_ns",
+      "exclusive_elapsed_ns",
+      "function_calls",
+      "read_bytes",
+      "written_bytes",
+      "hashed_bytes",
+      "path_checks",
+      "snapshot_reads",
+      "git_subprocess_count_and_command_kind",
+      "fsync_count"
+    ],
+    "nested_time_double_counting": false,
+    "function_counts_distinct_from_os_syscalls": true,
+    "retain_subprocess_stdout_stderr_or_file_content_in_timing_log": false,
+    "report_setup_total_and_individual_passes": true,
+    "setup_real_code_integrity_and_fixture_git_creation_separate_from_synthetic_pass_costs": true,
+    "warm_summary": ["median", "minimum", "maximum"],
+    "performance_success_threshold": null,
+    "no_native_latency_prediction_or_causal_attribution": true
+  },
+  "integrity": {
+    "reuse_frozen_primitives_without_edits": true,
+    "instrumentation_preserves_results_exceptions_and_order": true,
+    "preserve_repeated_reads_for_reference_profile": true,
+    "reference_equivalence_checks": [
+      "Clean synthetic fixture acceptance and identical hash/binding/closure/HEAD results",
+      "Byte drift despite unchanged length or mtime",
+      "HEAD drift and file mutation during snapshot",
+      "Path escape and symlink/reparse/hardlink alias rejection",
+      "Synthetic metadata tamper",
+      "Previously absent import candidate appearing",
+      "Archive failure and first-cause preservation",
+      "Exclusive official output and seven-pass/no-retry enforcement",
+      "Blocked model/tokenizer/HTTP/download and closed-artifact access"
+    ],
+    "unsupported_platform_link_tests_disclosed_as_skips": true,
+    "negative_import_path_checks_required_for_any_future_ast_cache": true,
+    "mtime_only_cache_permitted": false,
+    "pre_dispatch_byte_head_path_checks_may_be_skipped": false,
+    "validation_original_calibration_gate_may_be_weakened": false,
+    "source_authorship_time_proven_by_git_bytes": false
+  },
+  "implementation_handoff": {
+    "role": "Parent-designated actual Astra high implementation role after design commit",
+    "new_owned_files": [
+      "scripts/profile_meeting_host_proof.py",
+      "tests/test_profile_meeting_host_proof.py"
+    ],
+    "interfaces": [
+      "prepare_fixture(root, spec) -> sealed_manifest",
+      "measure_pass(fixture, proof, recorder) -> pass_metadata",
+      "run_profile(root) -> report",
+      "python -m scripts.profile_meeting_host_proof"
+    ],
+    "arbitrary_input_output_phase_path_cli": false,
+    "production_skip_or_bypass_cli": false,
+    "unit_tests_use_separate_temporary_fixtures": true,
+    "execution_prerequisites": [
+      "Parent commits these two design files",
+      "NEW2 implementation and synthetic equivalence tests completed",
+      "Independent code review and exact implementation/dependency/fixture-generator/roster/spec freeze",
+      "Frozen implementation commit and required CI success; this commit is the execution registration",
+      "Confirm official output reservation has never been consumed before once-only cold1 plus warm6"
+    ],
+    "separate_execution_approval_file_or_sequential_commit_required": false,
+    "cli_automatically_records_and_validates": [
+      "Exact implementation commit SHA",
+      "Protocol hash",
+      "Dependency closure and fixture generator/specification/roster hashes"
+    ],
+    "current_design_role_may_implement_profile_or_change_git": false
+  },
+  "subsequent_decision": {
+    "automatic_optimization_or_service_adoption": false,
+    "next_step_requires_separate_registration": true,
+    "use_absolute_ms_counts_bytes_and_limits": true,
+    "closed_c4_pool_reuse_or_continuation": false,
+    "future_quality_scope": [
+      "General documents",
+      "Multiple meetings",
+      "Mixed document and meeting evidence",
+      "KO and EN natural answers",
+      "Complete supported answers, exact citations and appropriate abstention"
+    ],
+    "future_quality_gate": "Fresh source-first calibration6/6 then isolated validation8/8; no automatic adoption",
+    "unchanged_service_limits": {
+      "request_seconds": 90,
+      "total_output_tokens": 928,
+      "requested_reasoning_tokens": 512,
+      "final_json_retokenized_acceptance": 384,
+      "input_tokens": 5120,
+      "context_tokens": 6144,
+      "reasoning_and_final_are_independent_native_hardcaps": false
+    }
+  },
+  "exposure": {
+    "design_role": "/root/free_qa_candidate_review",
+    "actual_model": "gpt-6-astra",
+    "actual_effort": "xhigh",
+    "prior_design_and_code_review_participation": true,
+    "prior_public_c2_case_summary_and_aggregate_exposure": true,
+    "current_c4_timing_only_metadata_exposure": true,
+    "current_task_closed_semantic_body_reads": 0,
+    "excluded_from_future_independent_output_judging": true,
+    "human_review_count": 0
+  },
+  "limitations": [
+    "Synthetic component timings do not reproduce the closed C4 verify workload or explain its deadline failure causally.",
+    "Difference from reported native timing cannot be assigned solely to host or Git cost.",
+    "Second request native completion, output size and content remain unknown.",
+    "OS cache, concurrent load and instrumentation overhead can affect timing.",
+    "A successful profile proves neither answer quality nor a ninety-second native service result.",
+    "Git byte evidence does not prove the historical time at which questions were authored."
+  ]
+}

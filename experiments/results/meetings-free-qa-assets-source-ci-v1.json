@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "source_commit": "2b5b172413f59650d66a0361d6d13fac84c4b6c5",
+  "scope": "Published free QA asset preparation; excludes later uncommitted manual-correction and engine changes.",
+  "runs": [
+    {
+      "id": 40461281042,
+      "event": "push",
+      "head_sha": "2b5b172413f59650d66a0361d6d13fac84c4b6c5",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40461281042",
+      "watch_session": 93180,
+      "watch_exit": 0,
+      "jobs": [
+        {
+          "id": 122046250527,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122046250694,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122046250923,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40461286977,
+      "event": "pull_request",
+      "head_sha": "2b5b172413f59650d66a0361d6d13fac84c4b6c5",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40461286977",
+      "watch_session": 93370,
+      "watch_exit": 0,
+      "jobs": [
+        {
+          "id": 122046269824,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122046270092,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122046270168,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "new_model_acquisitions": 0,
+  "new_model_calls": 0,
+  "human_review": false
+}

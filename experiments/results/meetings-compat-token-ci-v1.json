@@ -1,0 +1,41 @@
+{
+  "schema": "doctrail-ci-result-v1",
+  "commit": "c5c93c31781b561af16880cc299a76d9db8ccfc2",
+  "status": "passed",
+  "runs": [
+    {
+      "event": "push",
+      "id": 41178475492,
+      "url": "https://github.com/lingter100/doctrail/actions/runs/41178475492",
+      "python_passed": 5684,
+      "python_skipped": 21,
+      "python_seconds": 153.56
+    },
+    {
+      "event": "pull_request",
+      "id": 41178478329,
+      "url": "https://github.com/lingter100/doctrail/actions/runs/41178478329",
+      "python_passed": 5684,
+      "python_skipped": 21,
+      "python_seconds": 197.76
+    }
+  ],
+  "each_run": {
+    "jobs": [
+      "backend",
+      "web",
+      "java-service"
+    ],
+    "all_jobs_success": true,
+    "frontend_production_build": true,
+    "java_http_checks": 11,
+    "browser_passed": 158,
+    "browser_failed": 0,
+    "browser_infrastructure_failed": 0,
+    "meeting_operations_passed": true
+  },
+  "limits": [
+    "Synthetic operational scenarios and browser contract fixtures are included; not model semantic quality.",
+    "No user review or deployment."
+  ]
+}

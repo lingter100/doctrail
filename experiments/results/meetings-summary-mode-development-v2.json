@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "actual-local-summary-mode-development-diagnostic",
+  "status": "failed",
+  "once_consumed": true,
+  "retry_count": 0,
+  "scope": "Public-source development diagnostic with cached local model. Not calibration, validation, final test, service acceptance, or human review.",
+  "source_commit": "28ff830890c80a06fcd0f82d4c43687db5bc6d73",
+  "publication_commit": "d249d80bcb81f110c8e571532d3f4932746eaea1",
+  "registration": {
+    "file": ".local/meeting-summary-mode-execution-v2/registration-v2.json",
+    "size_bytes": 32515,
+    "sha256": "9fc0be13ad2974d5b92623172d38d1397a36a430b674f3237c4a6b9c43c14c1a"
+  },
+  "actual_cli_dispatches": 1,
+  "actual_cli_exit_code": 1,
+  "observer_exit_code": 0,
+  "native_processes_started": 1,
+  "completion_counts": {
+    "generation": 2,
+    "review": 1,
+    "total": 3,
+    "after_failure": 0
+  },
+  "remaining_arms_unexecuted": 6,
+  "first_failure": {
+    "document": "summary-mode-source-01",
+    "mode": "B",
+    "code": "generation_invalid_evidence",
+    "type": "WorkerError",
+    "kind": "operational"
+  },
+  "stop_reason": {
+    "document": "summary-mode-source-01",
+    "mode": "B",
+    "code": "generation_invalid_evidence",
+    "type": "WorkerError",
+    "kind": "operational"
+  },
+  "draft_contract_outcomes": [
+    {
+      "mode": "A",
+      "source_id": "summary-mode-source-01",
+      "draft_contract": "accepted",
+      "model_self_review": "accepted",
+      "independent_semantic_review": "pending"
+    },
+    {
+      "mode": "B",
+      "source_id": "summary-mode-source-01",
+      "draft_contract": "failed",
+      "failure_code": "generation_invalid_evidence",
+      "model_self_review": "not_started",
+      "independent_semantic_review": "not_available_as_valid_draft"
+    }
+  ],
+  "native_response_validation_is_not_draft_acceptance": true,
+  "timings_seconds": {
+    "external_cli_observation": 127.798748254776,
+    "whole_after_final_writes": 126.35899999999674,
+    "active_after_final_writes": 88.25,
+    "cleanup": 0.7809999999590218
+  },
+  "custody": {
+    "bound_terminal_valid": true,
+    "posthash_refs_unchanged": 297,
+    "sealed_run_files": 590,
+    "internal_index_rows": 589,
+    "owned_process_identities_absent": 5,
+    "leases_released_unchanged": 3,
+    "parent_verified": {
+      "file": ".local/meeting-summary-mode-parent-v1/v2-terminal-custody-verification-v1.json",
+      "size_bytes": 894,
+      "sha256": "333b18717789743cc518a13f810871c47f6ff87c95aaf685913dc14d88fa6694"
+    },
+    "executor_receipt": {
+      "file": ".local/meeting-summary-mode-execution-v2/custody-v2/receipt-v2.json",
+      "size_bytes": 6212,
+      "sha256": "4c490c787fa92c7e0ff42ec76723984a005b3626b2faeeacc6bc5cfc5c10dfad"
+    },
+    "metadata_audit": {
+      "file": ".local/meeting-summary-mode-execution-v2/custody-v2/metadata-audit-v1.json",
+      "size_bytes": 4486,
+      "sha256": "3d360f7eed8910707226e25d1d674da9661b7d39a60d9ce5e16680a09c4c159e"
+    }
+  },
+  "promotion_eligible": false,
+  "quality_improvement_demonstrated": false,
+  "human_review_count": 0,
+  "paid_api_calls": 0,
+  "public_service_deployed": false,
+  "limitations": [
+    "The comparison stopped on the first source and cannot support a four-source A/B quality conclusion.",
+    "A valid draft and model self-review acceptance do not prove factual support or core coverage.",
+    "B returned a native response but failed the draft evidence contract; no repaired or fabricated candidate is substituted.",
+    "One fixed-order local run does not establish general latency or resource usage.",
+    "The original pre-model v1 entrypoint failure and all frozen evaluation inputs remain preserved.",
+    "The precise mechanical cause and independent content judgment are separate pending analyses."
+  ],
+  "next_actions": [
+    "Preserve the failed attempt and independently assess only the valid returned draft before disclosure of model self-review or performance.",
+    "Inspect the structural evidence failure without silently weakening the evidence contract or retrying the consumed attempt.",
+    "Complete real Java meeting backup/restore and remaining service-quality gates."
+  ]
+}

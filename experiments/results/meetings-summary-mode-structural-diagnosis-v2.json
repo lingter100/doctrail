@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "kind": "read-only-structural-failure-analysis",
+  "status": "completed",
+  "actual_run_result": "meetings-summary-mode-development-v2.json",
+  "failure_code": "generation_invalid_evidence",
+  "observed_cause": {
+    "claim_ordinal": 3,
+    "evidence_ids": [
+      24,
+      25,
+      29,
+      27
+    ],
+    "all_ids_unique_in_range": true,
+    "required_order": "ascending original-source unit IDs",
+    "failed_predicate": "ids != sorted(set(ids))"
+  },
+  "interpretation": "The generated record violates the existing source-order contract. This is not evidence that the parser implemented its contract incorrectly, nor a semantic quality judgment.",
+  "raw_http_and_generation_artifact_same_ids": true,
+  "input_bindings_before_after_unchanged": 13,
+  "parser_replayed": false,
+  "run_repaired_or_retried": false,
+  "independent_semantic_review": "separate_pending",
+  "limitations": [
+    "All other structural predicates being valid does not prove that the generated claims are supported.",
+    "The model reasoning text was not inspected; the reason it chose that order is unknown.",
+    "Reordering a future valid-ID set could be a prospective representation-policy change, but does not change the consumed experiment or demonstrate content-quality improvement."
+  ],
+  "private_safe_evidence": {
+    "file": ".local/meeting-summary-mode-v2-failure-diagnostic-v1/diagnosis-v1.json",
+    "size_bytes": 17147,
+    "sha256": "c8d96874fbfab09c42cb24626184f5d5943f4e9df2b44e00654fa640e9fb56ee"
+  },
+  "human_review_count": 0,
+  "paid_calls": 0
+}

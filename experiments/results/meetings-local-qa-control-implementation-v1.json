@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "implemented_synthetic_verified_independent_review_complete_pending_exact_source_CI",
+  "scope": "Offline QA-only opt-in control; no actual model quality or service adoption",
+  "registration_schema": 5,
+  "policy": {
+    "policy": "qa-coverage-plan-v1",
+    "base_prompt_sha256": "db163498b0a2ffe122a7e695db90a0c0fbb5fe074a1df75aa541f65a22f59a0e",
+    "instruction_sha256": "e73ab738ab7a7409f0bc7e24a6cb617d033171a7429bfb8d85792dd94dfb00d1",
+    "effective_system_sha256": "7daad39a3afe7be9b4b0b016dc88e798e5f7f7430276ebf9767b7b5bd8838f71"
+  },
+  "source_files": [
+    {
+      "file": "scripts/probe_meeting_local_candidate.py",
+      "sha256": "bb24dc620de3e1cbb2d8605287d369f1324f2729a78dfc43c508765110da65a6",
+      "size_bytes": 48913
+    },
+    {
+      "file": "tests/test_probe_meeting_local_candidate.py",
+      "sha256": "cb7c249b2a7dea83cf8a1064ae61ed8bec17b8817622cf27208603db93ba961b",
+      "size_bytes": 97012
+    }
+  ],
+  "changes": [
+    "Trusted immutable QAControl selected only by exact schema5 registration; same schema4 summary policy and format/resource conditions.",
+    "QA system gains the fixed five lines before one compact legend; actual system verified before dispatch.",
+    "Legacy schemas1-4/default request bytes, complete source/question payload, IDs, grammar, summary/review, strict parser, EOS and budgets preserved.",
+    "Report/terminal add explicitly selected-settings-only QA policy metadata; this is not proof of actual transmission or compliance."
+  ],
+  "verification": {
+    "old_cases_retained": 188,
+    "new_cases": 49,
+    "total_cases": 237,
+    "pytest_seconds": 9.19,
+    "wrapper_seconds": 10.172000000020489,
+    "ruff": "passed",
+    "old_test_functions_AST_unchanged": 55,
+    "evidence_refs_verified": 17,
+    "fixed_hash_refs_verified": 150,
+    "before_sources_preserved": 2,
+    "test_helper_change": "Optional qa_control=None forwarding only; remaining AST exact.",
+    "line_endings": "After successful checks, test CRLF normalized toLF with exact byte replacement and AST equality; tested original archived. No test rerun solely for normalization.",
+    "initial_failure_preserved": "234 passed, 1 failed (schema5 malformed registration error-code compatibility); Ruff B023 one new-test loop capture warning; preserved then repaired"
+  },
+  "implementation_receipt_sha256": "da6041177cb60f9548a719a7078b5653ae685ce557a320cf889fd8787aa1f432",
+  "parent_implementation_acceptance_sha256": "276a40614ef66e2a69b220de2cb6af6d2dbf5d6b41b9f29bc5c1a6d8bfedac16",
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "inputs": 20,
+    "parent_refs_verified": 23,
+    "receipt_sha256": "fc0726dfd5b53fec8a28175ea0c5b9fa8896e044efd42b257ef8d5976fae9a81",
+    "parent_acceptance_sha256": "f1a8b248b4d3b7aab4dc649d1e8d6894a5fcceb085c0cc3d550bf67af6d0a3d2",
+    "source_only": true
+  },
+  "actual_runtime": {
+    "model": 0,
+    "native": 0,
+    "tokenizer": 0,
+    "Java": 0,
+    "new_registration": false,
+    "human_review": 0
+  },
+  "limitations": [
+    "Synthetic mocks do not establish model adherence, real token count, completeness or evidence support.",
+    "Exact source CI, a new schema5 registration and separate actual once are still required.",
+    "Fixed development questions have repeated exposure; no final-test or human-review result.",
+    "Same data must be compared with v6; summary policy is not a QA improvement. If acceptance remains0/4, stop microvariations of this instruction family."
+  ],
+  "reproduce_command": ".venv/Scripts/python.exe -B -X utf8 -m pytest tests/test_probe_meeting_local_candidate.py tests/test_probe_meeting_summary_mode.py::test_resource_boundary_and_reused_pid_never_killed tests/test_probe_meeting_summary_mode.py::test_resources_fail_closed tests/test_probe_meeting_summary_mode.py::test_resource_error_aborts_remaining_completions tests/test_probe_meeting_summary_mode.py::test_resource_sampler_has_new_721_bound_without_changing_old_sampler tests/test_probe_meeting_summary_mode.py::test_repair_resource_guard_binds_initial_launcher_creation_time -q -p no:cacheprovider"
+}

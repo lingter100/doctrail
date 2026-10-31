@@ -1,0 +1,1598 @@
+{
+  "schema_version": 1,
+  "kind": "fixed_synthetic_admission_diagnostic_fixtures",
+  "expectation_origin": "Hand expectations transcribed from MEETINGS-ADMISSION-DIAGNOSTIC.md; not measured from the implementation",
+  "fixtures": [
+    {
+      "id": "F01",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "﻿é\r\nx\ry",
+          "expected": {
+            "processed_content": "é\nx\ny",
+            "raw_utf8_bytes": 11,
+            "processed_codepoints": 5,
+            "processed_utf8_bytes": 6,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 5,
+                "block_quotes": [
+                  "é\nx\ny"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 3,
+        "eligible": 3,
+        "whitespace": 0,
+        "processed_utf8_bytes": 8,
+        "emitted_chunk_utf8_bytes": 8,
+        "raw_utf8_bytes": 13,
+        "overlap_codepoints": 0,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F02",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n",
+          "expected": {
+            "processed_content": "# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n",
+            "raw_utf8_bytes": 84,
+            "processed_codepoints": 84,
+            "processed_utf8_bytes": 84,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 84,
+                "block_quotes": [
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 23,
+        "eligible": 23,
+        "whitespace": 0,
+        "processed_utf8_bytes": 86,
+        "emitted_chunk_utf8_bytes": 86,
+        "raw_utf8_bytes": 86,
+        "overlap_codepoints": 0,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F03",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n",
+          "expected": {
+            "processed_content": "# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n",
+            "raw_utf8_bytes": 88,
+            "processed_codepoints": 88,
+            "processed_utf8_bytes": 88,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 88,
+                "block_quotes": [
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 24,
+        "eligible": 24,
+        "whitespace": 0,
+        "processed_utf8_bytes": 90,
+        "emitted_chunk_utf8_bytes": 90,
+        "raw_utf8_bytes": 90,
+        "overlap_codepoints": 0,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F04",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n",
+          "expected": {
+            "processed_content": "# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n# h\n",
+            "raw_utf8_bytes": 92,
+            "processed_codepoints": 92,
+            "processed_utf8_bytes": 92,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 92,
+                "block_quotes": [
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n",
+                  "# h\n"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 25,
+        "eligible": 25,
+        "whitespace": 0,
+        "processed_utf8_bytes": 94,
+        "emitted_chunk_utf8_bytes": 94,
+        "raw_utf8_bytes": 94,
+        "overlap_codepoints": 0,
+        "status": "rejected",
+        "rejection_codes": [
+          "c7_block_bounds"
+        ],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F05",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "p\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np",
+          "expected": {
+            "processed_content": "p\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np",
+            "raw_utf8_bytes": 31,
+            "processed_codepoints": 31,
+            "processed_utf8_bytes": 31,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 31,
+                "block_quotes": [
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 23,
+        "eligible": 13,
+        "whitespace": 10,
+        "processed_utf8_bytes": 33,
+        "emitted_chunk_utf8_bytes": 33,
+        "raw_utf8_bytes": 33,
+        "overlap_codepoints": 0,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F06",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "p\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\n",
+          "expected": {
+            "processed_content": "p\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\n",
+            "raw_utf8_bytes": 33,
+            "processed_codepoints": 33,
+            "processed_utf8_bytes": 33,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 33,
+                "block_quotes": [
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 24,
+        "eligible": 13,
+        "whitespace": 11,
+        "processed_utf8_bytes": 35,
+        "emitted_chunk_utf8_bytes": 35,
+        "raw_utf8_bytes": 35,
+        "overlap_codepoints": 0,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F07",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "p\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np",
+          "expected": {
+            "processed_content": "p\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np\n\np",
+            "raw_utf8_bytes": 34,
+            "processed_codepoints": 34,
+            "processed_utf8_bytes": 34,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 34,
+                "block_quotes": [
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p\n",
+                  "\n",
+                  "p"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 25,
+        "eligible": 14,
+        "whitespace": 11,
+        "processed_utf8_bytes": 36,
+        "emitted_chunk_utf8_bytes": 36,
+        "raw_utf8_bytes": 36,
+        "overlap_codepoints": 0,
+        "status": "rejected",
+        "rejection_codes": [
+          "c7_block_bounds"
+        ],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F08",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "Items:\n\n- a\n- b\n",
+          "expected": {
+            "processed_content": "Items:\n\n- a\n- b\n",
+            "raw_utf8_bytes": 16,
+            "processed_codepoints": 16,
+            "processed_utf8_bytes": 16,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 16,
+                "block_quotes": [
+                  "Items:\n\n- a\n- b\n"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 3,
+        "eligible": 3,
+        "whitespace": 0,
+        "processed_utf8_bytes": 18,
+        "emitted_chunk_utf8_bytes": 18,
+        "raw_utf8_bytes": 18,
+        "overlap_codepoints": 0,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F09",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "```txt\nx\n\n# h\n- a\n```\n",
+          "expected": {
+            "processed_content": "```txt\nx\n\n# h\n- a\n```\n",
+            "raw_utf8_bytes": 22,
+            "processed_codepoints": 22,
+            "processed_utf8_bytes": 22,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 22,
+                "block_quotes": [
+                  "```txt\nx\n\n# h\n- a\n```\n"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 3,
+        "eligible": 3,
+        "whitespace": 0,
+        "processed_utf8_bytes": 24,
+        "emitted_chunk_utf8_bytes": 24,
+        "raw_utf8_bytes": 24,
+        "overlap_codepoints": 0,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F10",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "expected": {
+            "processed_content": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "raw_utf8_bytes": 1100,
+            "processed_codepoints": 1100,
+            "processed_utf8_bytes": 1100,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1000,
+                "block_quotes": [
+                  "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                ]
+              },
+              {
+                "start_offset": 850,
+                "end_offset": 1100,
+                "block_quotes": [
+                  "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 4,
+        "blocks": 4,
+        "eligible": 4,
+        "whitespace": 0,
+        "processed_utf8_bytes": 1102,
+        "emitted_chunk_utf8_bytes": 1252,
+        "raw_utf8_bytes": 1102,
+        "overlap_codepoints": 150,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F11",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "ko",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가ab",
+          "expected": {
+            "processed_content": "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가ab",
+            "raw_utf8_bytes": 2048,
+            "processed_codepoints": 684,
+            "processed_utf8_bytes": 2048,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 684,
+                "block_quotes": [
+                  "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가ab"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 3,
+        "eligible": 3,
+        "whitespace": 0,
+        "processed_utf8_bytes": 2050,
+        "emitted_chunk_utf8_bytes": 2050,
+        "raw_utf8_bytes": 2050,
+        "overlap_codepoints": 0,
+        "status": "passed",
+        "rejection_codes": [],
+        "all_contexts_within_2048_bytes": true,
+        "all_blocks_within_2048_bytes": true,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    },
+    {
+      "id": "F12",
+      "documents": [
+        {
+          "metadata": {
+            "source_id": "diag-a",
+            "document_id": "diag-a",
+            "revision": 1,
+            "title": "A",
+            "kind": "meeting",
+            "language": "ko",
+            "meeting_date": "2040-01-01",
+            "page": null,
+            "registration_ordinal": 0,
+            "family_id": "c7-f01"
+          },
+          "raw": "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가",
+          "expected": {
+            "processed_content": "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가",
+            "raw_utf8_bytes": 2049,
+            "processed_codepoints": 683,
+            "processed_utf8_bytes": 2049,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 683,
+                "block_quotes": [
+                  "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-b",
+            "document_id": "diag-b",
+            "revision": 1,
+            "title": "B",
+            "kind": "meeting",
+            "language": "en",
+            "meeting_date": "2040-01-02",
+            "page": null,
+            "registration_ordinal": 1,
+            "family_id": "c7-f01"
+          },
+          "raw": "b",
+          "expected": {
+            "processed_content": "b",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "b"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "metadata": {
+            "source_id": "diag-c",
+            "document_id": "diag-c",
+            "revision": 1,
+            "title": "C",
+            "kind": "general",
+            "language": "en",
+            "meeting_date": null,
+            "page": null,
+            "registration_ordinal": 2,
+            "family_id": "c7-f01"
+          },
+          "raw": "c",
+          "expected": {
+            "processed_content": "c",
+            "raw_utf8_bytes": 1,
+            "processed_codepoints": 1,
+            "processed_utf8_bytes": 1,
+            "chunks": [
+              {
+                "start_offset": 0,
+                "end_offset": 1,
+                "block_quotes": [
+                  "c"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "chunks": 3,
+        "blocks": 3,
+        "eligible": 3,
+        "whitespace": 0,
+        "processed_utf8_bytes": 2051,
+        "emitted_chunk_utf8_bytes": 2051,
+        "raw_utf8_bytes": 2051,
+        "overlap_codepoints": 0,
+        "status": "rejected",
+        "rejection_codes": [
+          "c7_document_bytes"
+        ],
+        "all_contexts_within_2048_bytes": false,
+        "all_blocks_within_2048_bytes": false,
+        "render_bounds": {
+          "ko": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          },
+          "en": {
+            "envelope": true,
+            "schema": true,
+            "reserved_wire": true
+          }
+        }
+      }
+    }
+  ]
+}

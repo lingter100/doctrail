@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "kind": "independent_service_rag_item_review",
+  "version": 1,
+  "phase": "calibration",
+  "created_at": "2026-10-20T08:29:34.531815+00:00",
+  "actor": "/root/service_rag_calibration_source_review",
+  "registered_model": "gpt-6-astra",
+  "registered_reasoning_effort": "xhigh",
+  "registered_fork_turns": "none",
+  "runtime_model_self_verification": false,
+  "source_author": false,
+  "item_author": false,
+  "prior_same_split_source_reviewer": true,
+  "prior_semantic_exposure": {
+    "whole_sources": 6,
+    "chunks": 32,
+    "source_semantic_review": true
+  },
+  "excluded_from_final_answer_judging": true,
+  "status": "accepted_all_items_source_and_item_stage_only",
+  "item_acceptance": true,
+  "accepted_items": 6,
+  "rejected_items": 0,
+  "blocking_findings": 0,
+  "requested_author_changes": 0,
+  "reviewer_edits_to_author_files": 0,
+  "registration": {
+    "path": "data/evaluation/meetings-service-rag-next-stage-registration-v3.json",
+    "bytes": 8876,
+    "sha256": "49539ed9e800cb3d56256e280ec5af801b0a0021359deee8dc0363cf9ec72eaa"
+  },
+  "plan": {
+    "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+    "bytes": 19569,
+    "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+  },
+  "execution_field_clarification": {
+    "path": "docs/MEETINGS-SERVICE-RAG-EXECUTION.md",
+    "bytes": 19544,
+    "sha256": "e5f3a5001755ec8c25b481a199902c8936375c9a6e0478df09e535e6ef17b5b7"
+  },
+  "source_freeze": {
+    "path": "data/evaluation/meetings-service-rag-calibration-v2/source-freeze-v2.json",
+    "bytes": 35103,
+    "sha256": "423316335a89a55eb3fa052f66dd7b34fb2062072a849f02c97a9134c27799bc"
+  },
+  "dispatch_history_basis": {
+    "reported_commit": "cae10eca65362a5b64526a1484d8a93efa3c682b",
+    "reported_push_run": 39390198016,
+    "reported_pr_run": 39390205423,
+    "reported_required_checks": "all_success",
+    "reviewer_git_network_reverification": false,
+    "basis": "explicit_parent_dispatch"
+  },
+  "input_files": [
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/draft-questions-v1.json",
+      "bytes": 2529,
+      "sha256": "bec375a38be8d2fd81bbce343b2f70f726d441a238d14218125967f41b1946b1"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/draft-oracle-v1.json",
+      "bytes": 67192,
+      "sha256": "fdcfe2e64ca77ddb6f2de037d96f990ebd7fe93105b352bcd05022a7c4a46292"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/item-selection-v1.json",
+      "bytes": 8795,
+      "sha256": "763d4a7d3b717f61c84bcf043bcfafd146ce5c88183aa9361bb0fe574337625e"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/item-author-receipt-v1.json",
+      "bytes": 7239,
+      "sha256": "724162c0ecbf1e8d43ce82ef3d504fd3662d2bd81fb15c7ae1a941fffd26e17f"
+    }
+  ],
+  "semantic_reasoning": {
+    "path": "data/evaluation/meetings-service-rag-calibration-v2/item-review-notes-v1.md",
+    "bytes": 16800,
+    "sha256": "0949c69de275533e56cf1694f1e9f0529beeb97c9f38389af34887de1e3da300"
+  },
+  "parent_read_policy": "Safe summary and hash-only checks; do not read or print notes/question/oracle semantics.",
+  "cases": [
+    {
+      "id": "service-rag-cal-01",
+      "status": "accepted",
+      "language": "ko",
+      "required_fact_count": 4,
+      "question_or_oracle_modified": false,
+      "semantic_completeness": "passed",
+      "sufficient_alternative_review": "passed",
+      "availability_or_absence_review": "passed",
+      "coordinate_and_identity_review": "passed"
+    },
+    {
+      "id": "service-rag-cal-02",
+      "status": "accepted",
+      "language": "en",
+      "required_fact_count": 4,
+      "question_or_oracle_modified": false,
+      "semantic_completeness": "passed",
+      "sufficient_alternative_review": "passed",
+      "availability_or_absence_review": "passed",
+      "coordinate_and_identity_review": "passed"
+    },
+    {
+      "id": "service-rag-cal-03",
+      "status": "accepted",
+      "language": "ko",
+      "required_fact_count": 4,
+      "question_or_oracle_modified": false,
+      "semantic_completeness": "passed",
+      "sufficient_alternative_review": "passed",
+      "availability_or_absence_review": "passed",
+      "coordinate_and_identity_review": "passed"
+    },
+    {
+      "id": "service-rag-cal-04",
+      "status": "accepted",
+      "language": "en",
+      "required_fact_count": 4,
+      "question_or_oracle_modified": false,
+      "semantic_completeness": "passed",
+      "sufficient_alternative_review": "passed",
+      "availability_or_absence_review": "passed",
+      "coordinate_and_identity_review": "passed"
+    },
+    {
+      "id": "service-rag-cal-05",
+      "status": "accepted",
+      "language": "ko",
+      "required_fact_count": 3,
+      "question_or_oracle_modified": false,
+      "semantic_completeness": "passed",
+      "sufficient_alternative_review": "passed",
+      "availability_or_absence_review": "passed",
+      "coordinate_and_identity_review": "passed"
+    },
+    {
+      "id": "service-rag-cal-06",
+      "status": "accepted",
+      "language": "en",
+      "required_fact_count": 3,
+      "question_or_oracle_modified": false,
+      "semantic_completeness": "passed",
+      "sufficient_alternative_review": "passed",
+      "availability_or_absence_review": "passed",
+      "coordinate_and_identity_review": "passed"
+    }
+  ],
+  "independently_verified_coverage": {
+    "items": 6,
+    "ko": 3,
+    "en": 3,
+    "answered": 4,
+    "abstained": 2,
+    "public_items": 3,
+    "synthetic_items": 3,
+    "required_facts_total": 22,
+    "required_fact_counts": [
+      4,
+      4,
+      4,
+      4,
+      3,
+      3
+    ],
+    "present_required_facts": 16,
+    "absent_required_facts": 6,
+    "answered_general_only": 1,
+    "answered_multiple_meetings": 2,
+    "answered_mixed_meeting_general": 1,
+    "answered_all_sufficient_alternatives_require_multiple_documents": 3,
+    "answered_ko_question_en_evidence": 2,
+    "answered_en_question_ko_evidence": 1,
+    "accepted_source_documents": 6,
+    "accepted_source_chunks": 32,
+    "all_six_sources_used_in_positive_evidence": true
+  },
+  "mechanical_checks": {
+    "whole_sources": 6,
+    "accepted_chunks": 32,
+    "exact_source_anchors": 18,
+    "exhaustively_checked_minimal_chunk_covers": 18,
+    "exact_chunk_local_quote_segments": 20,
+    "all_case_ids_and_order": "passed",
+    "query_trim_stability": "passed",
+    "logical_revision_and_chunk_identity": "passed",
+    "positive_evidence_within_case_family": "passed",
+    "whole_source_quote_and_coordinate_matches": "passed",
+    "fact_alternative_combinations_and_minimal_document_sets": "passed"
+  },
+  "author_safe_feedback": {
+    "status": "no_change_requested",
+    "blocking_findings": [],
+    "requested_changes": [],
+    "replacement_items_written": false,
+    "source_changes_requested": false
+  },
+  "preservation": {
+    "source_freeze_bindings_verified": 64,
+    "source_freeze_binding_mismatches": 0,
+    "author_original_files_verified": 4,
+    "author_original_mismatches": 0,
+    "all_originals_unchanged": true,
+    "source_or_item_original_edits": 0,
+    "source_freeze_file_unchanged": true,
+    "pre_return_author_editorial_revision_disclosed": 1,
+    "earlier_author_draft_bytes_independently_checked": false
+  },
+  "reviewer_actions": {
+    "new_files": 4,
+    "retrieval_calls": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "model_calls": 0,
+    "java_runs": 0,
+    "maven_runs": 0,
+    "browser_runs": 0,
+    "network_requests": 0,
+    "git_commands": 0,
+    "sqlite_connections": 0,
+    "new_source_downloads": 0,
+    "other_split_semantic_reads": 0,
+    "closed_source_semantic_reads": 0,
+    "model_output_reads": 0,
+    "failed_commands": 0,
+    "human_reviews": 0
+  },
+  "limits": [
+    "Independent item acceptance is not retrieval or answer quality acceptance.",
+    "The reviewer has prior own-split source-semantic exposure and cannot act as final answer judge.",
+    "Source freshness and chat-record limitations remain unchanged.",
+    "No runtime UUID, workspace/principal mapping, service behavior or native execution is certified.",
+    "All-sufficient-alternative assessment is scoped to the six accepted whole sources."
+  ],
+  "execution_authorized_by_this_review": false,
+  "final_answer_judgment": false,
+  "human_review": false,
+  "phase1_complete": false
+}

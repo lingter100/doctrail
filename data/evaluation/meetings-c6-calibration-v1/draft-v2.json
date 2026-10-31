@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "cases": [
+    {
+      "id": "C6-CAL-01",
+      "payload": {
+        "schema_version": 1,
+        "query": "OpenJS의 인프라 자원 요청 절차 문서 작업은 2025년 1월 7일과 2월 4일 사이 어떻게 진전됐나요? 두 회의의 상태를 비교하고, 2월 4일 종료 제안의 근거와 이후 수정 가능성을 한국어로 설명해 주세요.",
+        "contexts": [
+          {
+            "document_id": "c6-cal-doc-01",
+            "revision": 1,
+            "title": "OpenJS Foundation Cross Project Council Meeting 2025-01-07",
+            "meeting_date": "2025-01-07",
+            "chunk_id": "c6-cal-doc-01-r1-c0002",
+            "text": "(https://github.com/openjs-foundation/cross-project-council/issues/1387)\n  * Tobie to follow-up with TSC\n\n* Adding affiliation clause to NativeScript charter [#1386](https://github.com/openjs-foundation/cross-project-council/issues/1386)\n  * See #1387\n\n* Express graduation to impact project [#1378](https://github.com/openjs-foundation/cross-project-council/issues/1378)\n  * This was already approved.\n  * Needs to update CPC repo too.\n\n* Create process docs to request infrastructure resources through OpenJSF partners [#1367](https://github.com/openjs-foundation/cross-project-council/issues/1367)\n  * New pull request made\n\n* Review `webpack`'s new governance model -- Impact project. [#1363](https://github.com/openjs-foundation/cross-project-council/issues/1363)\n  * Agree to put a deadline to EOD today for any objection, good to go otherwise.\n\n* Code of Conduct Plan of Action [#1122](https://github.com/openjs-foundation/cross-project-council/issues/1122)\n\n### ",
+            "page": null,
+            "start_offset": 1666,
+            "end_offset": 2636
+          },
+          {
+            "document_id": "c6-cal-doc-02",
+            "revision": 1,
+            "title": "OpenJS Foundation Cross Project Council Meeting 2025-02-04",
+            "meeting_date": "2025-02-04",
+            "chunk_id": "c6-cal-doc-02-r1-c0003",
+            "text": "s week\n\n* Audit new project application process and implementation [#1398](https://github.com/openjs-foundation/cross-project-council/issues/1398)\n\n* Health-check on the NativeScript TSC charter [#1387](https://github.com/openjs-foundation/cross-project-council/issues/1387)\n   * moving along; no update\n\n* Adding affiliation clause to NativeScript charter [#1386](https://github.com/openjs-foundation/cross-project-council/issues/1386)\n   * same status as 1387\n\n* Create process docs to request infrastructure resources through OpenJSF partners [#1367](https://github.com/openjs-foundation/cross-project-council/issues/1367)\n   * BS - I suggest we close this out as we have a process defined and rolled out, we can always tweak as needed. \n\n* Code of Conduct Plan of Action [#1122](https://github.com/openjs-foundation/cross-project-council/issues/1122)\n\n* Non-violent communication / strategic workplace conflict resolution training? ",
+            "page": null,
+            "start_offset": 2544,
+            "end_offset": 3480
+          }
+        ]
+      },
+      "response_language": "ko"
+    },
+    {
+      "id": "C6-CAL-02",
+      "payload": {
+        "schema_version": 1,
+        "query": "For an OpenJS project whose service is already supported by LF IT, how should an ordinary support request and a confidential request be submitted, and what determines the order of non-critical work? Answer in English.",
+        "contexts": [
+          {
+            "document_id": "c6-cal-doc-03",
+            "revision": 1,
+            "title": "Requesting Linux Foundation IT Support",
+            "meeting_date": null,
+            "chunk_id": "c6-cal-doc-03-r1-c0000",
+            "text": "# Requesting Linux Foundation IT Support \n\nThis guide explains how to request help from the Linux Foundation IT team.\n\n## Who Is This Document For?\n\nThis document is for OpenJS projects that have formally engaged with LF IT to support one or more of their services. If you have questions about a non-LF supported service, please contact support@openjsf.org.\n\n## How To Contact Linux Foundation IT For Support\n\n### Submit an Issue\n\nThe preferred way to request IT support is by [filling an issue](https://github.com/openjs-foundation/infrastructure/issues/new?template=IT-SUPPORT-REQUEST.yml) in the [infrastucture repository](https://github.com/openjs-foundation/infrastructure). Note:\n\n* This is a public repository, if you wish to file a confidential request please see the below instructions\n* Please use the \"IT Support Request Ticket\" issue template\n\n### Submitting Confidential Requests\n\nPlease submit any confidential requests via [Jira Service ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 952
+          },
+          {
+            "document_id": "c6-cal-doc-03",
+            "revision": 1,
+            "title": "Requesting Linux Foundation IT Support",
+            "meeting_date": null,
+            "chunk_id": "c6-cal-doc-03-r1-c0001",
+            "text": "e use the \"IT Support Request Ticket\" issue template\n\n### Submitting Confidential Requests\n\nPlease submit any confidential requests via [Jira Service Desk](https://jira.linuxfoundation.org/plugins/servlet/desk/portal/2).\n\n### Alternate Contact Method: OpenJS Foundation Slack\n\nFor less formal inquiries you can reach out to the IT Operations team channel (#lf-it-support) in the [OpenJS Foundation Slack instance](https://slack-invite.openjsf.org/).\n\n### How Work Is Prioritized\n\nCritical issues resulting in unplanned downtime will be prioritized over other severity types. Please clearly indicate the urgency of your request in the issue description. Non-critical issues will be addressed according to their severity and order of submission. \n\n### Viewing The Status Of Your Request\n\nAll non-confidential issues are tracked via a public [Github project board](https://github.com/orgs/openjs-foundation/projects/10).\n\n## What To Do In An Emergency\n\nIn the event of an emergency (e.g., a critical ",
+            "page": null,
+            "start_offset": 802,
+            "end_offset": 1799
+          }
+        ]
+      },
+      "response_language": "en"
+    },
+    {
+      "id": "C6-CAL-03",
+      "payload": {
+        "schema_version": 1,
+        "query": "LF IT가 지원하는 서비스에 긴급 장애가 났을 때 어떤 Jira 티켓으로 요청하고 어떤 두 항목을 설정해야 하나요? 또한 접수 후 최초 응답을 몇 분 이내에 보장받는지 한국어로 알려 주세요.",
+        "contexts": [
+          {
+            "document_id": "c6-cal-doc-03",
+            "revision": 1,
+            "title": "Requesting Linux Foundation IT Support",
+            "meeting_date": null,
+            "chunk_id": "c6-cal-doc-03-r1-c0000",
+            "text": "# Requesting Linux Foundation IT Support \n\nThis guide explains how to request help from the Linux Foundation IT team.\n\n## Who Is This Document For?\n\nThis document is for OpenJS projects that have formally engaged with LF IT to support one or more of their services. If you have questions about a non-LF supported service, please contact support@openjsf.org.\n\n## How To Contact Linux Foundation IT For Support\n\n### Submit an Issue\n\nThe preferred way to request IT support is by [filling an issue](https://github.com/openjs-foundation/infrastructure/issues/new?template=IT-SUPPORT-REQUEST.yml) in the [infrastucture repository](https://github.com/openjs-foundation/infrastructure). Note:\n\n* This is a public repository, if you wish to file a confidential request please see the below instructions\n* Please use the \"IT Support Request Ticket\" issue template\n\n### Submitting Confidential Requests\n\nPlease submit any confidential requests via [Jira Service ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 952
+          },
+          {
+            "document_id": "c6-cal-doc-03",
+            "revision": 1,
+            "title": "Requesting Linux Foundation IT Support",
+            "meeting_date": null,
+            "chunk_id": "c6-cal-doc-03-r1-c0001",
+            "text": "e use the \"IT Support Request Ticket\" issue template\n\n### Submitting Confidential Requests\n\nPlease submit any confidential requests via [Jira Service Desk](https://jira.linuxfoundation.org/plugins/servlet/desk/portal/2).\n\n### Alternate Contact Method: OpenJS Foundation Slack\n\nFor less formal inquiries you can reach out to the IT Operations team channel (#lf-it-support) in the [OpenJS Foundation Slack instance](https://slack-invite.openjsf.org/).\n\n### How Work Is Prioritized\n\nCritical issues resulting in unplanned downtime will be prioritized over other severity types. Please clearly indicate the urgency of your request in the issue description. Non-critical issues will be addressed according to their severity and order of submission. \n\n### Viewing The Status Of Your Request\n\nAll non-confidential issues are tracked via a public [Github project board](https://github.com/orgs/openjs-foundation/projects/10).\n\n## What To Do In An Emergency\n\nIn the event of an emergency (e.g., a critical ",
+            "page": null,
+            "start_offset": 802,
+            "end_offset": 1799
+          },
+          {
+            "document_id": "c6-cal-doc-03",
+            "revision": 1,
+            "title": "Requesting Linux Foundation IT Support",
+            "meeting_date": null,
+            "chunk_id": "c6-cal-doc-03-r1-c0002",
+            "text": "project board](https://github.com/orgs/openjs-foundation/projects/10).\n\n## What To Do In An Emergency\n\nIn the event of an emergency (e.g., a critical system is down or there is a security incident), you can use Jira to request priority support 24/7.\n\n1. Please fill out the following ticket in Jira [(Report a serious problem](https://jira.linuxfoundation.org/plugins/servlet/desk/portal/2/create/30))\n2. Set urgency and impact appropriately\n\n## Have A Unique Situation?\n\nFor urgent, unique, or complex issues that require discussion, please contact support@openjsf.org.\n",
+            "page": null,
+            "start_offset": 1649,
+            "end_offset": 2220
+          }
+        ]
+      },
+      "response_language": "ko"
+    },
+    {
+      "id": "C6-CAL-04",
+      "payload": {
+        "schema_version": 1,
+        "query": "돌림빛 지침의 원본 동작 점검 제한시간과 장대노인의 6월 17일 실제 점검시간을 비교해 주세요. 다음 점검을 잡으려면 무엇이 갖춰져야 하며, 이번 점검만으로 반복 공연도 허용되나요? 한국어로 답해 주세요.",
+        "contexts": [
+          {
+            "document_id": "c6-cal-doc-04",
+            "revision": 1,
+            "title": "돌림빛 그림자극 보존모임 — 종이 인형 취급·연습 지침",
+            "meeting_date": null,
+            "chunk_id": "c6-cal-doc-04-r1-c0000",
+            "text": "# 돌림빛 그림자극 보존모임 — 종이 인형 취급·연습 지침\n\n이 문서는 평가용으로 AI가 작성한 허구의 조직 기록이며 실제 단체·인물·작품을 묘사하지 않는다.\n\n문서판: 2026년 6월 1일. 돌림빛은 폐관한 소극장의 종이 그림자 인형과 짧은 공연을 함께 보존하는 자원 모임이다. 오래된 인형을 무대에 다시 세우는 일과 원래 재료를 남기는 일이 충돌하면, 원본을 움직이는 대신 그 동작을 기록하거나 복제 인형을 쓰는 쪽을 먼저 검토한다. 이 지침은 물건의 보존 상태를 다루며 대본의 해석이나 공연 편성은 정하지 않는다.\n\n## 보관과 꺼내기\n\n원본은 중성 종이를 깐 납작한 상자에 한 점씩 눕힌다. 작은 탈락 조각도 버리지 말고 원래 인형과 같은 번호를 적은 봉투에 따로 넣는다. 꺼내기 전에는 앞면과 뒷면, 손잡이 연결부를 촬영한다. 표면을 닦거나 색을 덧칠한 뒤에 사진을 남기면 최초 상태를 복원할 수 없으므로 작업 순서를 바꾸지 않는다. 장식 깃털이 솟은 인형은 뚜껑이 닿지 않도록 받침 높이를 먼저 확인한다.\n\n## 연결부를 손볼 때\n\n찢어진 구멍을 넓혀 새 철사를 끼우는 방식은 금한다. 보존 담당자가 탈착 가능한 종이 경첩을 설계하고, 별도의 연습용 종이에 같은 힘을 가해 움직임을 확인한 다음 원본 적용 여부를 결정한다. 종이 종류나 접착제가 다른 시험 결과를 원본의 안전 증거로 그대로 옮기지 않는다. 움직임이 부드럽더라도 채색층이 들뜨면 작업을 멈추고 해당 부분을 접촉하지 않는 지지대를 검토한다.\n\n## 빛을 쓰는 연습\n\n확산판을 끼운 차가운 LED를 사용하고 광원과 인형 사이에는 60센티미터 이상을 둔다. 한 번의 원본 동작 점검은 8분 이내로 하며 끝나면 상자에 되돌려 놓는다. 이 시간은 공개 공연을 반복해도 된다는 허가가 아니다. 원본의 상태가 안정적이라는 보존 기록과 움직임 담당자의 관찰이 모두 있어야 다음 점검을 잡을 수 있다. 관객 앞 시연은 복제 인형을 기본으로 하고 원본은 정지 전시 여부를 따로 의논한다.\n\n## 작업 기록\n\n기록지에는 작품 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 997
+          },
+          {
+            "document_id": "c6-cal-doc-06",
+            "revision": 1,
+            "title": "돌림빛 작업회의 — 경첩 시험 뒤 원본과 복제의 역할 분리",
+            "meeting_date": "2026-06-17",
+            "chunk_id": "c6-cal-doc-06-r1-c0001",
+            "text": " 표기했다.\n\n장대노인은 받침을 오른쪽으로 옮기자 막대를 펴지 않아도 그림자 높이가 맞았다. 이날 원본 동작 점검은 확산판을 둔 LED에서 6분간 진행했고, 채색층이나 끈의 새 손상은 관찰되지 않았다. 점검 뒤에는 바로 상자에 돌려놓았으며 이것으로 이후 반복 공연까지 허용된 것은 아니라고 여울이 기록했다.\n\n## 상영회 준비의 결론\n\n관객에게 움직임을 보여 줄 바람사슴은 복제 인형으로 정했다. 원본은 사진과 보관 과정을 설명하는 자료로 소개하고 직접 동작시키지 않는다. 장대노인의 관객 시연 여부는 다음 상태 점검 뒤 다시 결정한다. 해솔은 오늘 정한 동작을 짧은 연습 영상으로 남기고, 여울은 안내문에 원본과 복제의 차이를 드러낸다. 공연의 최종 길이와 전체 출연 순서는 오늘 정하지 않았다.\n",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1241
+          }
+        ]
+      },
+      "response_language": "ko"
+    },
+    {
+      "id": "C6-CAL-05",
+      "payload": {
+        "schema_version": 1,
+        "query": "Between the 3 June and 17 June meetings, how did the plan for showing motion with '바람사슴' to an audience develop? Explain the promising wide-hinge result, the remaining condition of the original, and the resulting treatment and demonstration choices. Answer in English.",
+        "contexts": [
+          {
+            "document_id": "c6-cal-doc-05",
+            "revision": 1,
+            "title": "돌림빛 작업회의 — 바람사슴의 목 연결부와 첫 연습",
+            "meeting_date": "2026-06-03",
+            "chunk_id": "c6-cal-doc-05-r1-c0001",
+            "text": "저 확인하고, 원본 점검 시간과 복제 인형 연습 시간을 기록지에서 구분한다.\n\n## 소개 방식과 다음 확인\n\n상영회에서는 움직임이 과장된 새 공연을 만들기보다 짧은 옛 장면을 설명하는 방향에 의견이 모였다. 바람사슴 원본을 관객 앞에서 움직일지는 아직 정하지 않았다. 해솔은 비교용 복제 인형의 윤곽만 먼저 베끼고 원본과 헷갈리지 않게 뒷면에 표시한다. 여울은 이전 공연 사진에서 목의 기울기를 찾아오되 사진 한 장만으로 원래 움직임의 범위를 단정하지 않기로 했다. 다음 모임에는 시험 종이와 사진을 함께 놓고 판단한다.\n",
+            "page": null,
+            "start_offset": 847,
+            "end_offset": 1139
+          },
+          {
+            "document_id": "c6-cal-doc-06",
+            "revision": 1,
+            "title": "돌림빛 작업회의 — 경첩 시험 뒤 원본과 복제의 역할 분리",
+            "meeting_date": "2026-06-17",
+            "chunk_id": "c6-cal-doc-06-r1-c0000",
+            "text": "# 돌림빛 작업회의 — 경첩 시험 뒤 원본과 복제의 역할 분리\n\n이 문서는 평가용으로 AI가 작성한 허구의 조직 기록이며 실제 단체·인물·작품을 묘사하지 않는다.\n\n일시: 2026년 6월 17일, 지하 연습방과 보존실. 참석자는 윤가람, 오해솔, 백여울이며 음향 자원자 문하늬가 후반 연습을 함께 보았다. 지난 모임의 바람사슴 연결부 시험과 장대노인 받침 조정을 검토했다.\n\n## 경첩 시험과 원본 처리\n\n좁은 경첩은 시험 종이에서 고개를 두 번 돌린 뒤 구멍 옆이 희게 접혔다. 넓은 경첩은 좌우 회전 때 목선이 둔해졌지만 고개를 내리는 동작에서는 접힘이 생기지 않았다. 해솔은 넓은 경첩을 쓰고 좌우 회전을 줄이는 쪽이 연습에 맞는다고 보았다. 그러나 가람이 다시 살핀 원본의 붉은 채색층은 여전히 들떠 있었으므로, 어느 경첩도 원본에 붙이지 않았다. 원본은 목 아래를 받치는 중성 종이 지지대 위에 놓아 정지 상태로 보관한다.\n\n시험 종이 두 장과 경첩 네 개는 17-T 봉투에 담았다. 여울은 사진 17-A와 이날의 확대 사진 17-B를 연결해 기록했으며 ‘경첩 시험 통과’를 ‘원본 동작 허용’으로 적지 않았다. 채색층을 눌러 붙이는 추가 처치는 이번 모임의 범위에 넣지 않고, 다음 보존 점검에서 재료 검토를 먼저 하기로 했다.\n\n## 연습에서 바뀐 것\n\n바람사슴의 복제 인형에 넓은 경첩을 붙이고, 고개를 숙인 뒤 잠시 멈추는 동작으로 짧은 장면을 구성했다. 좌우로 고개를 빠르게 흔드는 동작은 사용하지 않는다. 하늬는 오래된 녹음의 잡음을 없애려면 대사 끝 숨소리까지 잘릴 수 있다고 설명했고, 음원을 과하게 손보는 대신 장면 앞에 녹음 상태를 안내하기로 했다. 복제의 등에는 ‘2026 연습용 복제’라고 표기했다.\n\n장대노인은 받침을 오른쪽으로 옮기자 막대를 펴지 않아도 그림자 높이가 맞았다. 이날 원본 동작 점검은 확산판을 둔 LED에서 6분간 진행했고, 채색층이나 끈의 새 손상은 관찰되지 않았다. 점검 뒤에는 바로 상자에 돌려놓았으며 이것으로 이후 반복 공연까지 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c6-cal-doc-06",
+            "revision": 1,
+            "title": "돌림빛 작업회의 — 경첩 시험 뒤 원본과 복제의 역할 분리",
+            "meeting_date": "2026-06-17",
+            "chunk_id": "c6-cal-doc-06-r1-c0001",
+            "text": " 표기했다.\n\n장대노인은 받침을 오른쪽으로 옮기자 막대를 펴지 않아도 그림자 높이가 맞았다. 이날 원본 동작 점검은 확산판을 둔 LED에서 6분간 진행했고, 채색층이나 끈의 새 손상은 관찰되지 않았다. 점검 뒤에는 바로 상자에 돌려놓았으며 이것으로 이후 반복 공연까지 허용된 것은 아니라고 여울이 기록했다.\n\n## 상영회 준비의 결론\n\n관객에게 움직임을 보여 줄 바람사슴은 복제 인형으로 정했다. 원본은 사진과 보관 과정을 설명하는 자료로 소개하고 직접 동작시키지 않는다. 장대노인의 관객 시연 여부는 다음 상태 점검 뒤 다시 결정한다. 해솔은 오늘 정한 동작을 짧은 연습 영상으로 남기고, 여울은 안내문에 원본과 복제의 차이를 드러낸다. 공연의 최종 길이와 전체 출연 순서는 오늘 정하지 않았다.\n",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1241
+          }
+        ]
+      },
+      "response_language": "en"
+    },
+    {
+      "id": "C6-CAL-06",
+      "payload": {
+        "schema_version": 1,
+        "query": "For an archive handover, state the original production year of '바람사슴', identify the version selected to demonstrate movement at the screening, and explain why the successful hinge test did not authorize moving the original. Answer in English.",
+        "contexts": [
+          {
+            "document_id": "c6-cal-doc-04",
+            "revision": 1,
+            "title": "돌림빛 그림자극 보존모임 — 종이 인형 취급·연습 지침",
+            "meeting_date": null,
+            "chunk_id": "c6-cal-doc-04-r1-c0001",
+            "text": "공개 공연을 반복해도 된다는 허가가 아니다. 원본의 상태가 안정적이라는 보존 기록과 움직임 담당자의 관찰이 모두 있어야 다음 점검을 잡을 수 있다. 관객 앞 시연은 복제 인형을 기본으로 하고 원본은 정지 전시 여부를 따로 의논한다.\n\n## 작업 기록\n\n기록지에는 작품 번호, 사용 재료, 촬영 파일 위치, 움직인 사람과 멈춘 이유를 남긴다. 시험 종이와 떼어 낸 경첩은 결과를 판단한 회의가 끝날 때까지 보관한다. 복제 인형의 뒤에는 제작 연도와 복제 표시를 써서 원본 상자에 섞이지 않게 한다. 원본을 직접 만지지 않은 연습도 기록하되 원본 상태를 확인한 것으로 적지 않는다.\n",
+            "page": null,
+            "start_offset": 847,
+            "end_offset": 1171
+          },
+          {
+            "document_id": "c6-cal-doc-06",
+            "revision": 1,
+            "title": "돌림빛 작업회의 — 경첩 시험 뒤 원본과 복제의 역할 분리",
+            "meeting_date": "2026-06-17",
+            "chunk_id": "c6-cal-doc-06-r1-c0000",
+            "text": "# 돌림빛 작업회의 — 경첩 시험 뒤 원본과 복제의 역할 분리\n\n이 문서는 평가용으로 AI가 작성한 허구의 조직 기록이며 실제 단체·인물·작품을 묘사하지 않는다.\n\n일시: 2026년 6월 17일, 지하 연습방과 보존실. 참석자는 윤가람, 오해솔, 백여울이며 음향 자원자 문하늬가 후반 연습을 함께 보았다. 지난 모임의 바람사슴 연결부 시험과 장대노인 받침 조정을 검토했다.\n\n## 경첩 시험과 원본 처리\n\n좁은 경첩은 시험 종이에서 고개를 두 번 돌린 뒤 구멍 옆이 희게 접혔다. 넓은 경첩은 좌우 회전 때 목선이 둔해졌지만 고개를 내리는 동작에서는 접힘이 생기지 않았다. 해솔은 넓은 경첩을 쓰고 좌우 회전을 줄이는 쪽이 연습에 맞는다고 보았다. 그러나 가람이 다시 살핀 원본의 붉은 채색층은 여전히 들떠 있었으므로, 어느 경첩도 원본에 붙이지 않았다. 원본은 목 아래를 받치는 중성 종이 지지대 위에 놓아 정지 상태로 보관한다.\n\n시험 종이 두 장과 경첩 네 개는 17-T 봉투에 담았다. 여울은 사진 17-A와 이날의 확대 사진 17-B를 연결해 기록했으며 ‘경첩 시험 통과’를 ‘원본 동작 허용’으로 적지 않았다. 채색층을 눌러 붙이는 추가 처치는 이번 모임의 범위에 넣지 않고, 다음 보존 점검에서 재료 검토를 먼저 하기로 했다.\n\n## 연습에서 바뀐 것\n\n바람사슴의 복제 인형에 넓은 경첩을 붙이고, 고개를 숙인 뒤 잠시 멈추는 동작으로 짧은 장면을 구성했다. 좌우로 고개를 빠르게 흔드는 동작은 사용하지 않는다. 하늬는 오래된 녹음의 잡음을 없애려면 대사 끝 숨소리까지 잘릴 수 있다고 설명했고, 음원을 과하게 손보는 대신 장면 앞에 녹음 상태를 안내하기로 했다. 복제의 등에는 ‘2026 연습용 복제’라고 표기했다.\n\n장대노인은 받침을 오른쪽으로 옮기자 막대를 펴지 않아도 그림자 높이가 맞았다. 이날 원본 동작 점검은 확산판을 둔 LED에서 6분간 진행했고, 채색층이나 끈의 새 손상은 관찰되지 않았다. 점검 뒤에는 바로 상자에 돌려놓았으며 이것으로 이후 반복 공연까지 ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000
+          },
+          {
+            "document_id": "c6-cal-doc-06",
+            "revision": 1,
+            "title": "돌림빛 작업회의 — 경첩 시험 뒤 원본과 복제의 역할 분리",
+            "meeting_date": "2026-06-17",
+            "chunk_id": "c6-cal-doc-06-r1-c0001",
+            "text": " 표기했다.\n\n장대노인은 받침을 오른쪽으로 옮기자 막대를 펴지 않아도 그림자 높이가 맞았다. 이날 원본 동작 점검은 확산판을 둔 LED에서 6분간 진행했고, 채색층이나 끈의 새 손상은 관찰되지 않았다. 점검 뒤에는 바로 상자에 돌려놓았으며 이것으로 이후 반복 공연까지 허용된 것은 아니라고 여울이 기록했다.\n\n## 상영회 준비의 결론\n\n관객에게 움직임을 보여 줄 바람사슴은 복제 인형으로 정했다. 원본은 사진과 보관 과정을 설명하는 자료로 소개하고 직접 동작시키지 않는다. 장대노인의 관객 시연 여부는 다음 상태 점검 뒤 다시 결정한다. 해솔은 오늘 정한 동작을 짧은 연습 영상으로 남기고, 여울은 안내문에 원본과 복제의 차이를 드러낸다. 공연의 최종 길이와 전체 출연 순서는 오늘 정하지 않았다.\n",
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1241
+          }
+        ]
+      },
+      "response_language": "en"
+    }
+  ]
+}

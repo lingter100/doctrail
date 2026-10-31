@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "status": "STARTUP_VALIDATED_FULL_CUSTODY_VERIFIED",
+  "verification_kind": "actual_local_startup_and_runtime_metadata_only",
+  "source_head": "8846d5da27bc7f92de1a77ce404d5edf0a98cc60",
+  "model_id": "qwen25-7b-q4km",
+  "actual_cli_count": 1,
+  "once_consumed": true,
+  "automatic_retry": false,
+  "health_ready": true,
+  "props_requests": 1,
+  "props_valid": true,
+  "counts": {
+    "completions": 0,
+    "requested_tokens": 0,
+    "quality_cases_evaluated": 0,
+    "paid_api_calls": 0
+  },
+  "actual_exits": {
+    "cli": 0,
+    "wrapper": 0,
+    "owned_monitor": 0,
+    "custodian": 0
+  },
+  "timings_seconds": {
+    "cli": 19.906,
+    "wrapper": 20.9847,
+    "owned_monitor": 33.547,
+    "native_cleanup": 0.578,
+    "asset_preparation": 8.594,
+    "prelaunch_bindings": 0.141,
+    "props": 0.032,
+    "final_custody": 5.281
+  },
+  "custody": {
+    "known_owned_identities": 5,
+    "all_known_owned_absent": true,
+    "monitor_errors": 0,
+    "full_hold_mismatches": 0,
+    "source_files": 69,
+    "current_hash_refs": 118,
+    "asset_stat_identities": 67,
+    "installed_controls": 2,
+    "copied_helpers": 3,
+    "outer_anchors": 7,
+    "parent_direct_refs_verified": 64,
+    "parent_full_hash_rows_verified": 135,
+    "hold_released_after_parent_verification": true
+  },
+  "evidence_sha256": {
+    "executor_final": "1f18caaff56c35fdc7e2a5c96b961f097e1396cf256f9965cb1ba81cdd447749",
+    "strict_seal": "bce99f61e14c5070ac689f876c2ea08f76b50337077b4ce38f7a220ce25a9138",
+    "full_preservation": "23a587ca6dab592be6a1d0a1fb610072d6f28d2952d68555af2e841962bcccd2",
+    "parent_acceptance": "b153d15462cd554e56ecd7f29e7a4ba40eec720cc3b497af710c8039d8469c22"
+  },
+  "interpretation": "Under the fixed model/runtime/settings, readiness and the production props validator succeeded after the exact runtime-template representation fix. This establishes startup metadata compatibility only.",
+  "limits": [
+    "No tokenization, completion, summary or meeting QA quality was evaluated; this result is not a QA predecessor.",
+    "The original neutral failure root cause remains UNKNOWN. Startup v1 failure, consumed once and custody gaps remain preserved.",
+    "Props body was discarded by the production validator; a separately retained actual raw template hash is UNKNOWN.",
+    "Process discovery is sampled and cannot guarantee capture of every short-lived child.",
+    "Single diagnostic timing is not a controlled before/after latency benchmark or service SLA.",
+    "Local hardware/electricity cost was not measured; no paid API was used.",
+    "No external service deployment or user review was performed."
+  ],
+  "roles": {
+    "executor": "existing tool-accepted GPT-6 Astra high",
+    "preparation_review": "existing tool-accepted GPT-6 Astra xhigh",
+    "parent": "checked saved terminal records and finite preservation; no repeated process probe",
+    "human_review": false
+  }
+}

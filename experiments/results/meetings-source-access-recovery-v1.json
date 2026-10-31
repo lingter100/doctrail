@@ -1,0 +1,823 @@
+{
+  "kind": "meeting-source-access-local-verification",
+  "date": "2026-10-16T07:48:31.601387Z",
+  "sources": [
+    {
+      "path": "web/src/useMeetings.ts",
+      "sha256": "bf92224125ffe00d1ace82f26c51361992764dd2b2a8afcbed08709f51518b5c"
+    },
+    {
+      "path": "web/src/components/MeetingViews.tsx",
+      "sha256": "6c76d5c53f407d871add81d621562fb619cb01304cd364848b0636c903224648"
+    },
+    {
+      "path": "web/tests/meeting-source-access.spec.ts",
+      "sha256": "f56f54cfc6a5fe4d9419494832a9f5289a47e42703b3dd80b4ecbdcf6a811ba0"
+    },
+    {
+      "path": "web/scripts/test-java.mjs",
+      "sha256": "2014f474cb2ec149fe3b7b55b4f0fc6b9f1da8d9e67eb157c83fe84e8f5c899b"
+    }
+  ],
+  "sourceHashesUnchangedDuringFinalChecks": true,
+  "final": {
+    "passed": 52.0,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "runs": [
+      {
+        "path": ".local/meetings-source-access-v1/final-v2/web-e2e-2XR1Ip",
+        "spec": "meeting-link-recovery.spec.ts",
+        "stats": {
+          "startTime": "2026-10-16T07:46:33.385Z",
+          "duration": 6484.806,
+          "expected": 4,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "serverStopped": true,
+        "packagedUi": true,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 9,
+          "answer": 0
+        }
+      },
+      {
+        "path": ".local/meetings-source-access-v1/final-v2/web-e2e-4zjsc9",
+        "spec": "meeting-conflict-recovery.spec.ts",
+        "stats": {
+          "startTime": "2026-10-16T07:46:20.685Z",
+          "duration": 7441.492,
+          "expected": 5,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "serverStopped": true,
+        "packagedUi": true,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 5,
+          "answer": 0
+        }
+      },
+      {
+        "path": ".local/meetings-source-access-v1/final-v2/web-e2e-GimocP",
+        "spec": "meeting-list-state.spec.ts",
+        "stats": {
+          "startTime": "2026-10-16T07:46:53.71Z",
+          "duration": 12719.735,
+          "expected": 9,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "serverStopped": true,
+        "packagedUi": true,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 8,
+          "answer": 0
+        }
+      },
+      {
+        "path": ".local/meetings-source-access-v1/final-v2/web-e2e-HOBaf2",
+        "spec": "meeting-save-pending.spec.ts",
+        "stats": {
+          "startTime": "2026-10-16T07:46:45.003Z",
+          "duration": 3752.2080000000005,
+          "expected": 2,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "serverStopped": true,
+        "packagedUi": true,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 2,
+          "answer": 0
+        }
+      },
+      {
+        "path": ".local/meetings-source-access-v1/final-v2/web-e2e-OUWT3d",
+        "spec": "meeting-detail-recovery.spec.ts",
+        "stats": {
+          "startTime": "2026-10-16T07:46:00.303Z",
+          "duration": 14856.802,
+          "expected": 10,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "serverStopped": true,
+        "packagedUi": true,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 16,
+          "answer": 0
+        }
+      },
+      {
+        "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X",
+        "spec": "knowledge-source-recovery.spec.ts",
+        "stats": {
+          "startTime": "2026-10-16T07:47:28.525Z",
+          "duration": 11042.225,
+          "expected": 8,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "serverStopped": true,
+        "packagedUi": true,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 0,
+          "answer": 3
+        }
+      },
+      {
+        "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf",
+        "spec": "meeting-ready.spec.ts",
+        "stats": {
+          "startTime": "2026-10-16T07:47:11.824Z",
+          "duration": 11570.909,
+          "expected": 3,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "serverStopped": true,
+        "packagedUi": true,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 5,
+          "answer": 1
+        }
+      },
+      {
+        "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz",
+        "spec": "meeting-source-access.spec.ts",
+        "stats": {
+          "startTime": "2026-10-16T07:45:38.896Z",
+          "duration": 16451.923,
+          "expected": 11,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "serverStopped": true,
+        "packagedUi": true,
+        "generation": "deterministic-transport-fixture-NOT-LLM",
+        "generationCalls": {
+          "analyze": 17,
+          "answer": 0
+        }
+      }
+    ]
+  },
+  "stages": [
+    {
+      "stage": "original-source-access-defect",
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb",
+      "passed": 0,
+      "failed": 2,
+      "classification": "actual Java privacy change and source 404; meeting detail stayed visible"
+    },
+    {
+      "stage": "test-selector-failure",
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA",
+      "passed": 5,
+      "failed": 4,
+      "classification": "exact getByLabel locator failed; corrected to existing role-based textbox locator"
+    },
+    {
+      "stage": "recovery-cache-defect",
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW",
+      "passed": 0,
+      "failed": 1,
+      "classification": "actual Java source 404 followed by useServer resurrected retained recovery.links"
+    },
+    {
+      "stage": "test-setup-race",
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx",
+      "passed": 10,
+      "failed": 1,
+      "classification": "privacy changed before initial links GET completed; existing detail denial removed button before source click; added initial links 200 wait"
+    }
+  ],
+  "checks": {
+    "typecheck": "npm --prefix web run typecheck",
+    "build": "npm --prefix web run build",
+    "package": "./server/mvnw.cmd -B -q -f server/pom.xml package -DskipTests",
+    "allExitCodes": 0,
+    "javaTestsExecutedByPackage": false,
+    "diffCheck": "passed for owned tracked source files",
+    "runtime": "Java 21.0.12.1; packaged React; Playwright Chromium"
+  },
+  "limitations": [
+    "Synthetic analysis/answer HTTP transport, actual model calls 0",
+    "Synthetic source 403 and 500/503 deliberately injected; privacy-change 404 responses actual Java",
+    "No human review, remote CI, public deployment, or Git commit/push performed",
+    "No frozen experiment/code/data files changed",
+    "Initial two-failure baseline reused the existing packaged UI; runner verified its index matched existing web/dist. Final production source was explicitly rebuilt and repackaged before final checks."
+  ],
+  "artifactBindings": [
+    {
+      "path": ".local/meetings-source-access-v1/baseline-source-hashes.json",
+      "sha256": "4714ea3cc979da533927b43aabb0f48a4d20e778cf0cba1d868fc0287c2bbbe9"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline.log",
+      "sha256": "345245580941d4130ed1aafee2c7df4936decd55929c5ae4529f9077c75d2cce"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/build-final.log",
+      "sha256": "1732e760c32fef90831af4e4444ebbc74bfaf1b96fd74966c324706c65fe213b"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/build-intermediate.log",
+      "sha256": "996458ef7797cc893fc118ebed5754c2bb3e5ff21ad707723154d257545200b5"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/build.log",
+      "sha256": "ede9521f971e083f058bfd9f70013d802d8df661c81842e0a3c6bce2d1a0ba43"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new.log",
+      "sha256": "ca429afa0c4a177061ccd4b0ef475043860ec16b4a7a9c43a81cd82087793180"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-source-before-checks.json",
+      "sha256": "35e2180ca1b00f0c980a0549cf2fdde6ed2c557aa218d6c90531bdd3ff5aee34"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/freeze-path-check.txt",
+      "sha256": "5282ec9f3c5f71cc370a535058fbc422d2f285565a087a66dedb90d3b73ed1b9"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/package-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/package-intermediate.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/package.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/pre-recovery-fix-hashes.json",
+      "sha256": "d50f9afd68ca3768a218485dda991c33acf075272c69ee85526c07726b35c75e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/pre-setup-correction-hashes.json",
+      "sha256": "39630d8faf7f325b2f5bc88a74f4e7f9bc679a763af8145afa1a4bd9f406a38b"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline.log",
+      "sha256": "145c775c86c01e72daa621026e5b3d3d6ad0bf7e6d2255fd8c9edda53805c127"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/selector-failure.spec.ts",
+      "sha256": "d14a7f5020f2c806bcb898d6201aad5221fea594dcb4d4411b0dec6c7d79a1ff"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/setup-race.spec.ts",
+      "sha256": "12c11f5e5a9c2c95404069fd336e67d8ab0152df6a443ca82ab9d7ec46da8d12"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/typecheck-final-v2.log",
+      "sha256": "dfad95ed5f615b6ba38a4c2f7b93a69663a69b192f0819e5486381743b5b2d92"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/typecheck-final.log",
+      "sha256": "dfad95ed5f615b6ba38a4c2f7b93a69663a69b192f0819e5486381743b5b2d92"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/typecheck-intermediate.log",
+      "sha256": "dfad95ed5f615b6ba38a4c2f7b93a69663a69b192f0819e5486381743b5b2d92"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/typecheck.log",
+      "sha256": "dfad95ed5f615b6ba38a4c2f7b93a69663a69b192f0819e5486381743b5b2d92"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/meeting-source-access.spec.ts",
+      "sha256": "2371abd2368152b356160b8cb42ee1edfc8a3e04c5c25d885485beaa1f64b4db"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/MeetingViews.tsx",
+      "sha256": "e4c81d04e56f9b090e7ae86a2377860972e31d178d96961961a9a1ee3c5d4a2d"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/test-java.mjs",
+      "sha256": "15b164eaea5776ff2a1b29d138a2f6c9ae298e1043f031943f4ecbdf47a3d661"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/useMeetings.ts",
+      "sha256": "2185d07e3c648149be3828b3f4da61d8064ca1ce046684646ec0c54736c7b2fa"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/java.log",
+      "sha256": "c0000f99549e68dab75a8589fd844cb77226b5459a42caf93acc15842c0b957f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/report.json",
+      "sha256": "55b6f396996ef904070fc3f6698398e0dae704fcbb7d54d589c943a9a6c82c7d"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/run.json",
+      "sha256": "4ea1db680c24d3a7da27889825c5af66df53715c71331bfd80e809c184271196"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/synthetic.sqlite3",
+      "sha256": "93f3bf8036dcb60564f4962435309d45d6685de3463ccbe0737e3a2cb15a6ec3"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/.last-run.json",
+      "sha256": "0a0eb0e9fd9661639b524b9a27b1f258099241b94c8151cd3d87c41143789b1d"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/meeting-source-access-real-49826-es-cached-meeting-and-tasks/actual-source-404.png",
+      "sha256": "76aef889a50acbbd5ab208942f2038e276c2382b6eab01f7b5b0ee99139591b3"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/meeting-source-access-real-49826-es-cached-meeting-and-tasks/error-context.md",
+      "sha256": "e860d9ec4b8c960e109c09a671b732237f41fb8d17f98e693fbee93f8bdb55dd"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/meeting-source-access-real-49826-es-cached-meeting-and-tasks/test-failed-1.png",
+      "sha256": "fa53fd910a10ea862cb009acb04865e41fa64a78f63822ad55888994b2c9b4cc"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/meeting-source-access-real-49826-es-cached-meeting-and-tasks/trace.zip",
+      "sha256": "715ab6d09e35d4cac47a23e1b8d417b33669d83e37f23ac3da2b9dac03d9497f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/meeting-source-access-real-e423f-es-cached-meeting-and-tasks/actual-source-404.png",
+      "sha256": "30cf2126d8c504a3da2c7eb500569f386a3cf8d390ce7be5dbf3c93db9114a9d"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/meeting-source-access-real-e423f-es-cached-meeting-and-tasks/error-context.md",
+      "sha256": "6ab2c4f064a694ea3a411044930c1cb469b9d292f7ab18f06b9b6d02bf5e7f6e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/meeting-source-access-real-e423f-es-cached-meeting-and-tasks/test-failed-1.png",
+      "sha256": "3b104fedc9d688a52eb7514672555fe09958052352be00078cb2ebaf311ff656"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/baseline/web-e2e-I2f3vb/results/meeting-source-access-real-e423f-es-cached-meeting-and-tasks/trace.zip",
+      "sha256": "d6097cee7a1fd15d2236ae5cf271b84c08550cc0e5e5af6fc4a314c6132340cf"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/meeting-source-access.spec.ts.log",
+      "sha256": "1283dc690bd96fc7c9626c4c490e3a2083bb7f6c547c18fa0d504c3946470040"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/java.log",
+      "sha256": "b31762d2e0b93fae1a4b0da51bb2df8bd0cf94d24b3346dfd08b4f745ddee1de"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/report.json",
+      "sha256": "9ca53f482f3f0faaa8f2e5cfadfdb7c08c2f3615d6964105049e263bbfb26389"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/run.json",
+      "sha256": "79c61182a6166f2e428c6b627a5527f85e3a0340be2a8621b37406ac186b96c0"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/synthetic.sqlite3",
+      "sha256": "4664c19a4f4a2ee1422a5e1b40fdcd8ae58bb4de1ece4de86425f1a3495012dc"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/results/.last-run.json",
+      "sha256": "640061b8e6e258ea4b7c299dd199e9c53733061359e09b6583e955f9b3dbc562"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/results/meeting-source-access-real-2f01f--recovery-snapshot---server/recovery-after-source-denial.png",
+      "sha256": "82fa145a58d02aaed1af757b15a2de87936afd45f6f3404bdab36bf82cfe9d0a"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/results/meeting-source-access-real-49826-es-cached-meeting-and-tasks/actual-source-404.png",
+      "sha256": "202a99b3e9c5525638e9a36dff60c81bc213ce00403b9101808e178b853cb5d8"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/results/meeting-source-access-real-68442--404-cannot-reclaim-meeting/error-context.md",
+      "sha256": "ba6cbe7a4d0581cde7c7040f28f9fddfdd22a286fb3834bca1ae5a600537f6a6"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/results/meeting-source-access-real-68442--404-cannot-reclaim-meeting/test-failed-1.png",
+      "sha256": "6285ea3b2758b9ee6fe3ad90a029752f3e7390a3b2e5d990c9d8f498796f7f89"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/results/meeting-source-access-real-68442--404-cannot-reclaim-meeting/trace.zip",
+      "sha256": "fddc7a4ac5ad214d074ae9e5df5f2f46f9bc7367281f22837403c1028b09dd6a"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/results/meeting-source-access-real-e3ecd-d-recovery-snapshot---local/recovery-after-source-denial.png",
+      "sha256": "ef0e293d3972c3c55a55984113a47358be4ceb4ccf9e8e29ca8ea556a52163db"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final/web-e2e-P8dlUx/results/meeting-source-access-real-e423f-es-cached-meeting-and-tasks/actual-source-404.png",
+      "sha256": "42a79edf5af6e80a479edd896353810ed0c9d024b22b7256dc53f5c117e5d783"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/java.log",
+      "sha256": "0ef1fc845c8f89a48a568c0b040ad2d33b07dc64290d052c447fa0670f20ab83"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/report.json",
+      "sha256": "b385d3c15849a220ef514a2366822f86a9a8e6690ca050972b8e56c647b6b823"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/run.json",
+      "sha256": "92cb898e4d50c43daaa6a0ad0fe9bd16a475326598bf527c038def4b8090c941"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/synthetic.sqlite3",
+      "sha256": "8cc5d6e17ac181c5611cca060a488f27370c9d27a4822b2b104a3f277849bcec"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/.last-run.json",
+      "sha256": "7a2a61a239078c525a88b507e5358cd21187e666629f17fd6dc7fd28c1d9ee1c"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-38c6d-c-source-403-retires-editor/error-context.md",
+      "sha256": "6cc200d26d37597d37ca4061b86a8ae2521f46806fb303da73dcc82566f3ef3b"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-38c6d-c-source-403-retires-editor/test-failed-1.png",
+      "sha256": "bf650f8067951e9574f81720432fe22eca11db8601f09b4eb47f8736253659a3"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-38c6d-c-source-403-retires-editor/trace.zip",
+      "sha256": "9f9a1147e64790170fe445cb0f6d58666847a2b4a1502d8b856e57e18ce89b9d"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-49826-es-cached-meeting-and-tasks/actual-source-404.png",
+      "sha256": "cd67b1125954f9b59af74de103b1ffff09bf63da79bdb613aedaf3e5c85d065f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-57509-editor-and-retry-explicitly/error-context.md",
+      "sha256": "a4c7a59a6a396d5cd49c51f225c451e71a44dbfa8a8c63e6818a4e0f786ade8b"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-57509-editor-and-retry-explicitly/test-failed-1.png",
+      "sha256": "4e47e58df0d1ea648a0b76cb133a70e82cf493b68076bb1974e10e603338b29d"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-57509-editor-and-retry-explicitly/trace.zip",
+      "sha256": "eca4ac833c74985327deddf83bde82ead72725d082569cb9683a1e72532ba3ed"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-68442--404-cannot-reclaim-meeting/error-context.md",
+      "sha256": "d790c9a09b7edfcf6592ec015d7594507f1885ff8e2948f1b96adc9363867f5a"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-68442--404-cannot-reclaim-meeting/test-failed-1.png",
+      "sha256": "9af297f1743b49866d23c4ecb11b3302c380006cf56d2c4c5d73a7861ce643c1"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-68442--404-cannot-reclaim-meeting/trace.zip",
+      "sha256": "95d5ee9cb294b90698ccd0c92f2629cea58361a7d0cab9840be367ff0dc81c2f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-983f0-editor-and-retry-explicitly/error-context.md",
+      "sha256": "bc2816dd8578fb3677f4bb8986536cf7ffa6ac997eb1ccf53f086d3a388a0233"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-983f0-editor-and-retry-explicitly/test-failed-1.png",
+      "sha256": "77c5029745a454bf485bbe04e8850134c7bd4ee6832d8311de41e983f8c9d4c9"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-983f0-editor-and-retry-explicitly/trace.zip",
+      "sha256": "4a700145bbdbc6131b16e1c17effacbda6f054b4c285ed7758017660c6d81dbd"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-new/web-e2e-FIveYA/results/meeting-source-access-real-e423f-es-cached-meeting-and-tasks/actual-source-404.png",
+      "sha256": "db738d641a69d0bbe7ade8658def38d85f43e85b9d18d1458186da4e760f34c5"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/knowledge-source-recovery.spec.ts.log",
+      "sha256": "fd93b18b376f5d06842b241a29f72eb7f035202e169bff0cc25a7dbe1392661e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/meeting-conflict-recovery.spec.ts.log",
+      "sha256": "9374c8ad7f6fbb3ab3f9d22fc599e315f05a760e0e8f9b3e88d9736ceeb5ec5f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/meeting-detail-recovery.spec.ts.log",
+      "sha256": "82c3242bb661a451fdabaa36df8a9389acceb18c912c204f246ef2f885748e5f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/meeting-link-recovery.spec.ts.log",
+      "sha256": "cf330b096eb7c06cfd76004922e45c5a3f353d5d932a41d79a60a32814137402"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/meeting-list-state.spec.ts.log",
+      "sha256": "377c9c9048366a23e7972ed3d79d136cc0b71a825af070ee439d9de43741860e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/meeting-ready.spec.ts.log",
+      "sha256": "85c5e3e01b8ccd53acea26bf60978d991144f9ae8b48c8b9bf9b8795462dcb95"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/meeting-save-pending.spec.ts.log",
+      "sha256": "e395887e1940249f7e2c97042ed254d3746ef36fa713215bb40dfd5a7e55abb1"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/meeting-source-access.spec.ts.log",
+      "sha256": "816c5575c5367df600a004efd0fab96140e8f9f2658f8121f1c660c5bba044f1"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-2XR1Ip/java.log",
+      "sha256": "9a410ec6b3a2103f65ae56124263358ed95fc49bdc8dba034e654d0b285ccb86"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-2XR1Ip/report.json",
+      "sha256": "85591d722b78cc86727b35ea472c2b86a8143bfb3613c9ab39883604aa972163"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-2XR1Ip/run.json",
+      "sha256": "d5455fdee0db0fdda1177de5491d1e165306235d90dd82e47ab7c914c18dec08"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-2XR1Ip/synthetic.sqlite3",
+      "sha256": "9974deeaa23c2b8edb9a4db3a28adab648f75f81722f201a5f240e1843441031"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-2XR1Ip/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-2XR1Ip/results/meeting-link-recovery-real-5e677-d-link-or-hide-the-new-link/link-delete-stale-response.png",
+      "sha256": "32b2a5f84e83e38ca0091c7919687cfd0844e40e27bab9593baa29927052dea9"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-4zjsc9/java.log",
+      "sha256": "21b9d11903353329708b9160cfc97228b00c1b38a3297e7b80715503799acb8f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-4zjsc9/report.json",
+      "sha256": "e96dc316abd09ca85b627b4067cfc583b662b0085a48fc626f7649dfa416fc36"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-4zjsc9/run.json",
+      "sha256": "d88256344ba27f66f8aef4f56d90633592f93e68aa87939c133ae08f339e3e0e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-4zjsc9/synthetic.sqlite3",
+      "sha256": "72889fcec9b98a7e102fcaf6800de69cbea5db85cf439a5f811825c841caefda"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-4zjsc9/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-4zjsc9/results/meeting-conflict-recovery--1c3fa-iberate-fresh-version-retry/conflict-comparison-mobile.png",
+      "sha256": "e52479a18a1279ae0bbe0fdba3b511ffc544baa59da96714feb70055156a3b4c"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-GimocP/java.log",
+      "sha256": "77f749dcb827d08c0bf7fc679acd416d0ff829226692473a7f23172cd1ebb077"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-GimocP/report.json",
+      "sha256": "79c1b2a6c97bc19a6865b7245256f2ef6c4cedf0a6c2c58f9fe4b4f98178f7bd"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-GimocP/run.json",
+      "sha256": "ca06856aef449537bdabc8e5eebab6a1b3dcbd09e0b20b2ecdf32e697a889d0a"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-GimocP/synthetic.sqlite3",
+      "sha256": "e802e5bdd64ffa07f7d8f9e93d03678e4e5c68449a825d64c2eea95f60d060ae"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-GimocP/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-GimocP/results/meeting-list-state-real-Ja-6789d-d-errors-across-detail-save/tasks-stale-list-desktop.png",
+      "sha256": "2d6c95b2cc12505826e1e55d4f07785e7c5e46d36b219b458a42aaf2fc05f5fb"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-GimocP/results/meeting-list-state-real-Ja-a664a-t-retry-confirms-true-empty/meetings-initial-failure-mobile.png",
+      "sha256": "0ba9d3c22cf7552a400ae16794a2f0bb90bd289916e45ee3dac45ac514bf4b5f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-HOBaf2/java.log",
+      "sha256": "98667b0906ebd2bfed762fa45d1484866e5a5e8b7f6dc6dcc21e1457d030ac19"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-HOBaf2/report.json",
+      "sha256": "0bab2c36bd0922c331387265f2ee07e78852e3a6cdb217b9556bf3427ece8a57"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-HOBaf2/run.json",
+      "sha256": "b6e3d5ab79cc7feb3816ddb96c6bfbc3dfbad9c62fc39906dfb4e96f27c1ffd0"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-HOBaf2/synthetic.sqlite3",
+      "sha256": "d27bba6ce1eaaab8bf034911430480599fa7771ecf2c952ee34d0e0e8c66ef84"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-HOBaf2/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-HOBaf2/results/meeting-save-pending-real--a1fcb-ains-the-submitted-snapshot/pending-save-mobile.png",
+      "sha256": "59a0c73f26e31be3ceb3a82b51c2e1d8af67d522804dfdd491d51aeefc89e4ff"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-OUWT3d/java.log",
+      "sha256": "013950307ec955c02ae3729d783ae149f103fcd4a8c91af5e8e7390554a17047"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-OUWT3d/report.json",
+      "sha256": "01dc4bdea28696bb22b671c5eef5ccd777688b5aa12e097f421d195add9197bb"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-OUWT3d/run.json",
+      "sha256": "94418850f2c19bfb25cc4e2ff3c46c7c10ab06d0978c50f87492e9bb2efa0e75"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-OUWT3d/synthetic.sqlite3",
+      "sha256": "93ac89f9344fbfab665e7e8bb26b5622b3397483594827f8ec756f5c74910637"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-OUWT3d/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-OUWT3d/results/meeting-detail-recovery-re-10cd4-ows-explicit-reviewed-retry/explicit-link-review-mobile.png",
+      "sha256": "5aca133de08c9020aa107de737fa49428a5a215c8ba42aa7cc810e42744a9ac3"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-OUWT3d/results/meeting-detail-recovery-re-b72ce-sk-title-assignee-and-count/actual-reader-404.png",
+      "sha256": "0dbe001246194fa2cb1555155613f3c0e1a25307567c4c31495d861b7c3aa2db"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/java.log",
+      "sha256": "111e084945bc53aead893006928a3e220db16b7ff8ee3f513992f14512d8bd0f"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/report.json",
+      "sha256": "9d54fd9033f9f11d08ab59c63b827a7ff13bcfcff6c17fad10e13234ad22f390"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/run.json",
+      "sha256": "b20d8cd7bfb98138e70e97539ed15012ddc290d9e1ed0cfc6cbf5811646263eb"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/synthetic.sqlite3",
+      "sha256": "86a22e289883d77086001829f382d35efe91f2ca0b764ea433f11b4b27d868dc"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/results/knowledge-source-recovery--2136c-etaining-explicit-re-search/reader-404-observed.png",
+      "sha256": "e59d4db0d6e02238db8a48910e6f349bccd2e50aae05e69e439ecac913b73a84"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/results/knowledge-source-recovery--2d728-ms-without-automatic-resend/answer-denied-mobile.png",
+      "sha256": "88299079d4788c2477038c543d60b1f8745725c8acef6088c579c14d389fa661"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/results/knowledge-source-recovery--8bf0a-s-prior-legacy-search-false/stale-knowledge-before-retry.png",
+      "sha256": "b6b812c5a14263386820231618f44ace50d081d155c64d12d5f58f5f0002efb3"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/results/knowledge-source-recovery--9b1d1-rs-prior-legacy-search-true/stale-knowledge-before-retry.png",
+      "sha256": "62794949959d9fde726f1474c60cc49077464dc706ace0a93c066f60a398ec2e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-pDtD5X/results/knowledge-source-recovery--dbaf2-wer-only-on-explicit-action/stale-answer-explicit-retry.png",
+      "sha256": "2ec1a3dbd425c252920ed3462faf02a7cc39676b0c551fc97ffd02de61925307"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/java.log",
+      "sha256": "f301256ac1d3ec937d9633eb089cd96defc4a5933c607d42bf0f72a26454b0f8"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/report.json",
+      "sha256": "7dfbd657210e381a6da95a9ce21955ba0888288d7b940598b9a6027df9b7fdd0"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/run.json",
+      "sha256": "fecc3ec3b7f26a9fe8aa27d166a64e835fbec954b3271e10872c189487c9598e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/synthetic.sqlite3",
+      "sha256": "49cbc79cc00e44bbcb47d01f41b795fcd98fb4c071393ed94a11fdc0852c8ad1"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/results/meeting-ready-synthetic-tr-f937b-swer-and-responsive-layouts/knowledge-answer-evidence-desktop.png",
+      "sha256": "6b8860ef9900c9645bb7b95a8d35a20fdbbf7364509207f48da8408ba3dbfa8d"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/results/meeting-ready-synthetic-tr-f937b-swer-and-responsive-layouts/knowledge-answer-mobile.png",
+      "sha256": "019b51b1cae9a8f62879245d1ba8b209e58982ce2c3bf1e5c8fb4e7cd5099264"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/results/meeting-ready-synthetic-tr-f937b-swer-and-responsive-layouts/meeting-detail-desktop.png",
+      "sha256": "c8ac26ae128897805105045b18c96c52a7c39d048af5b71b49194d00fb8225aa"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-tg4Hbf/results/meeting-ready-synthetic-tr-f937b-swer-and-responsive-layouts/meeting-detail-mobile.png",
+      "sha256": "1114101eb465c0693a5aed6b6e6162bd4ac2bd883d854e7bdd39aa217a7cab92"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/java.log",
+      "sha256": "2c3fd89bfd8c35976d6c0199b9f49b790ec901dc2e25959603372becb16ff92c"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/report.json",
+      "sha256": "c6923d914ce2d8bf0975ce41d17da1c85a6f635df04c9d65cbf7475dad6c504e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/run.json",
+      "sha256": "6da1516c4350c58416169116a79d3765dda419f1b786d9255e3d8aad8deadebe"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/synthetic.sqlite3",
+      "sha256": "923b2e8688b12ba1dd9f93ea27645b474efd6d7cbe6fd8504d6d61c15d345c97"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/results/meeting-source-access-real-2f01f--recovery-snapshot---server/recovery-after-source-denial.png",
+      "sha256": "70455c9bb428d754cc34d826762610edda6245cb567f35ece8ba3f0962f5d74c"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/results/meeting-source-access-real-49826-es-cached-meeting-and-tasks/actual-source-404.png",
+      "sha256": "83a3b8e2b144245404bf458fab3241f80db40dcc2fee4e659ee5787741bf333a"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/results/meeting-source-access-real-e3ecd-d-recovery-snapshot---local/recovery-after-source-denial.png",
+      "sha256": "bc0a269bd199cce54fe0b3b6ba81cccde7b97c36c2eb28fba0c172c7d68cc081"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/final-v2/web-e2e-VnAIUz/results/meeting-source-access-real-e423f-es-cached-meeting-and-tasks/actual-source-404.png",
+      "sha256": "fc4d7dbd4170dd611cf2f4d51e05776fa5ca49ea41b445ac2cd1b25b0e32739b"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/meeting-source-access.spec.ts",
+      "sha256": "ff4d5dbbdf03a26737d509a68ce497735bc341f15fc603b451426568a1fb2a9e"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/useMeetings.ts",
+      "sha256": "0103ff4525d7d25857d584795e30e35686bccda798ccbe277abd67eb7f77f5fc"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/java.log",
+      "sha256": "17e1e6f39ad00e99275cdf506d887b4e1fc15601df9044709361102334c68e4a"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/report.json",
+      "sha256": "74b49dff0fbe726e9e3430f1623dfe4dd11bed704cafb1e596b8eb2a6fe7509c"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/run.json",
+      "sha256": "dc1da10d7de3d41b7eb4b233cdbc534816f5d31fa3a5c9df3a622b8f8803993c"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/synthetic.sqlite3",
+      "sha256": "61ab2e4325c95047ba56a524ae7384f175b375d87b33fb143c7ff4c4b084fd33"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/results/.last-run.json",
+      "sha256": "d1e3abe0c0270f333556940fdea1704d7852dda7392dd3772ba508787e937d9a"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/results/meeting-source-access-real-813bc--retained-recovery-snapshot/error-context.md",
+      "sha256": "32ea777d31c9bf81486ca7dd820b1684bda74b7447b1769b8475144f5fc7bff5"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/results/meeting-source-access-real-813bc--retained-recovery-snapshot/recovery-after-source-denial.png",
+      "sha256": "d18833f12eff30199cf7a65beda3af178b431028ededed579b37817379b08a2d"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/results/meeting-source-access-real-813bc--retained-recovery-snapshot/test-failed-1.png",
+      "sha256": "92d8fcb5ec5ddead535baaaa51cba99732fe4166070f52d11883ed720a085ce9"
+    },
+    {
+      "path": ".local/meetings-source-access-v1/recovery-baseline/web-e2e-2SxxnW/results/meeting-source-access-real-813bc--retained-recovery-snapshot/trace.zip",
+      "sha256": "ac8e2609ff7ecba6e5b06b7337e9fab70b10c6ef924b2dd368de3ed95ba7eb1b"
+    }
+  ]
+}

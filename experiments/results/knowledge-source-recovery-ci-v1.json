@@ -1,0 +1,55 @@
+{
+  "head": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "observed_at_utc": "2026-10-16T05:16:16.684133+00:00",
+  "runs": [
+    {
+      "run_id": 38854480523,
+      "event": "push",
+      "jobs": {
+        "java-service": "success",
+        "backend": "success",
+        "web": "success"
+      },
+      "python_summary_matches": [
+        "2386 passed, 21 skipped, 1 warning in 65.08s (0:01:05)"
+      ],
+      "browser_summary_matches": [],
+      "log_sha256": "0d817d2e93546fd801e42b3ff072ddb337c2e3431c0db06e387396d87e8d9f5b",
+      "metadata_sha256": "3e31912ef08a1e7cadc09218a208459153119206ee8f2ff953b9bda83a082d4e",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38854480523",
+      "observed_browser_batch": {
+        "passed": 57,
+        "failed": 0
+      }
+    },
+    {
+      "run_id": 38854484992,
+      "event": "pull_request",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      },
+      "python_summary_matches": [
+        "2386 passed, 21 skipped, 1 warning in 95.61s (0:01:35)"
+      ],
+      "browser_summary_matches": [],
+      "log_sha256": "ed8f84dadac407af6a0724edbfe17b1c40f79a5c0580bb49bb63de05f5b349e6",
+      "metadata_sha256": "d8022214a63464257ba8410d7ae2ddc6c97f670aab4973e44504d36bb6039120",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/38854484992",
+      "observed_browser_batch": {
+        "passed": 57,
+        "failed": 0
+      }
+    }
+  ],
+  "unique_bindings_verified": 115,
+  "validation_semantics_printed": false,
+  "quality_inference_calls": 0,
+  "kind": "observed_ci_not_cryptographic_attestation",
+  "product_commit": "9b52878c37e46a964b8f813a4999f0e0e88cc7ec",
+  "author_and_committer": "lingter100",
+  "local_browser_passed": 32,
+  "human_reviews": 0,
+  "public_deployment": false
+}

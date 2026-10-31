@@ -1,0 +1,13 @@
+{
+  "stage": "source-access-publication-byte-check",
+  "first_result": "failed",
+  "local_commit_before_repair": "939d21e1f5888f8b447a41d247880a1fe5b6503b",
+  "original_sha256": "dd4aa1ba9debdd8819a4f53864970b4e95a6d92aafd14176b178aca3425777c8",
+  "normalized_git_sha256": "86281f69a41369ce53b60950b11e5ff565873205d71906ec266930b3d7071c37",
+  "cause": "Git text normalization changed CRLF in exact raw receipt. Commit proceeded before parent inspected failed staging assertion.",
+  "correction": "Exact path -text attribute and follow-up commit; original local receipt and failed commit preserved.",
+  "original_preserved": true,
+  "source4_changed": false,
+  "raw_receipt_exact_index_verified": true,
+  "whitespace_exception": "Exact original CRLF receipt only"
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "evidence_type": "synthetic_observer_preparation_and_independent_review",
+  "product_source_commit": "9359a8998bce2a438f4f56c6897ff71fb952a69a",
+  "status": "preparation_verified_actual_execution_separate",
+  "recorded_attempts": [
+    {"stage": "initial", "passed": 55, "failed": 1, "junit_seconds": 47.228},
+    {"stage": "intermediate_frozen", "passed": 89, "failed": 0, "junit_seconds": 58.906},
+    {"stage": "final_frozen", "passed": 92, "failed": 0, "errors": 0, "skipped": 0, "junit_seconds": 55.292, "reported_pytest_seconds": 55.55}
+  ],
+  "ruff_passed": true,
+  "preparation_receipt_sha256": "cfd7134a3225f1b69152fd3f5fb7abbbcf9b7b23b069bf61de611e17a3872454",
+  "observer_sha256": "640e813f450001c46ce2846957b3a8a0046f30a62b7d7a33cbfadfd777ab023c",
+  "mapper_sha256": "6f346aa1f3990843ff2b7b0e303755c770333fdb094ae212fe4a85d1f4d6be97",
+  "test_sha256": "f2e617f124b2147357d9a7832968ba7791f227fec85632e5cbfcfdaaef7f9c5f",
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "unique_inputs_verified": 79,
+    "receipt_sha256": "ac4f6d362bfc84d7113dd258ad020372999b9cc9f97639abd293fa6f95682eb7",
+    "parent_verified_refs": 83
+  },
+  "actual_acquisition_count": 0,
+  "actual_companion_count": 0,
+  "model_calls": 0,
+  "human_review": 0,
+  "limits": {
+    "acquisition_seconds": 600,
+    "cleanup_seconds": 5,
+    "download_bytes": 536870912,
+    "combined_work_out_companion_bytes": 4294967296,
+    "rss_bytes": 2147483648,
+    "host_bytes": 2147483648,
+    "start_bytes": 4294967296
+  },
+  "limitations": [
+    "Fake processes, clocks and streams verify controls, not actual acquisition or compiler compatibility.",
+    "Reserved once attempts and successfully launched CLI processes are counted separately.",
+    "The pure mapper cannot approve or write a real companion; independent real terminal and custody review remains required.",
+    "Resource sampling does not guarantee every transient peak or short-lived process is observed."
+  ]
+}

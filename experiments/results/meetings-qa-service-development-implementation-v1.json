@@ -1,0 +1,50 @@
+{
+  "schema": "doctrail-qa-service-development-implementation-v1",
+  "status": "implemented_fake_tested_reviewed_not_service_executed",
+  "source_sha256": "9797ac139974496792d2ff27f233f9facf03b6e17cb2b5ae5020954377adae48",
+  "test_sha256": "3652750fa7f3a691e97bf3d9f750b50ac1e740117f87670953e9f6c881cb1536",
+  "implementation_model": {
+    "model": "gpt-6-astra",
+    "reasoning": "high"
+  },
+  "independent_review": {
+    "model": "gpt-6-astra",
+    "reasoning": "xhigh",
+    "initial_findings": 2,
+    "resolved": 2,
+    "open_findings": 0
+  },
+  "changes": [
+    "Bind telemetry to each worker invocation; stop subsequent cases after HTTP failure while prior work may remain active.",
+    "Deduplicate same exception object only; preserve distinct errors with the same sanitized code."
+  ],
+  "tests": {
+    "final_passed": 18,
+    "seconds": 1.29,
+    "python": "3.11.15",
+    "ruff": "passed",
+    "synthetic_only": true
+  },
+  "planned_service_policy": {
+    "retrieval": "bm25",
+    "limit": 10,
+    "input_tokens": 4096,
+    "output_tokens": 768,
+    "request_seconds": 120,
+    "generation_attempts": 2,
+    "requested_generation_tokens": 1536,
+    "startup_seconds": 120,
+    "operations_seconds": 240,
+    "cleanup_seconds": 5,
+    "whole_seconds": 365,
+    "compact_256_policy": false
+  },
+  "actual_models": 0,
+  "actual_java_http": 0,
+  "human_reviews": 0,
+  "limits": [
+    "External fresh resource/process supervision is required.",
+    "Three ordinary documents avoid additional automatic meeting analysis; meeting metadata filters are not covered.",
+    "Public development cases are not held-out evaluation or service model adoption."
+  ]
+}

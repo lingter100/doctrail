@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "status": "DIAGNOSED_OPEN_DEVELOPMENT_FAILURE_NOT_REPAIRED",
+  "review_type": "independent_ai_saved_public_output_and_source_review",
+  "human_reviews": 0,
+  "heldout_evaluation": false,
+  "service_quality_accepted": false,
+  "observed_cases": 1,
+  "unattempted_cases": [
+    "opensearch-representation-dev-02"
+  ],
+  "reviewed_case": "opensearch-representation-dev-01",
+  "observed": {
+    "search_chunks": 5,
+    "input_tokens": 2193,
+    "output_tokens": 321,
+    "finish_reason": "eos",
+    "generation_elapsed_seconds": 6.812999999965541,
+    "generation_attempts": 1,
+    "requested_generation_tokens": 768,
+    "first_worker_failure": "generation_invalid_json",
+    "java_status": 503,
+    "raw_output_bytes": 1202,
+    "fence_interior_bytes": 1190
+  },
+  "findings": {
+    "exact_single_json_fence_causes_first_parse_failure": true,
+    "fence_interior_json_parses": true,
+    "interior_passes_current_structure_by_static_inspection": true,
+    "production_parser_reexecuted": false,
+    "valid_reference_ids_do_not_establish_entailment": true,
+    "question_language_violated": true,
+    "prompt_claim_count_and_markdown_violated": true,
+    "completed_rename_decision_not_supported_by_citations": true,
+    "formation_claims_cite_member_removal_passage": true,
+    "required_formation_and_initial_membership_evidence_not_retrieved": true,
+    "appropriate_given_supplied_context": "abstain; still end-to-end retrieval inadequacy",
+    "case_01_adequacy": "rejected_independently_of_representation",
+    "case_02_quality": "not_observed"
+  },
+  "binding_checks": {
+    "source_hashes_match_manifest": 3,
+    "ingested_documents_equal_original_text": 3,
+    "stored_chunks_equal_original_offsets": 13,
+    "search_to_worker_to_prompt_passages_exact": 5,
+    "formation_rule_offsets_not_supplied": [
+      [
+        0,
+        946
+      ],
+      [
+        796,
+        1794
+      ]
+    ],
+    "initial_membership_chunk_offsets_not_supplied": [
+      [
+        2492,
+        3190
+      ]
+    ],
+    "supplied_rules_chunk_offsets": [
+      1644,
+      2642
+    ]
+  },
+  "recommendation": {
+    "next_change": "small retrieval-only experiment assembly reusing existing CPU inference worker and real Java, fresh locked environment/database, default production source unchanged",
+    "comparison": "same two questions times existing bm25/dense/hybrid, profile base and limit10: six search requests, zero answer/analyze/generation",
+    "readiness": "new environment and current model bytes remain to be verified; existing loader eagerly loads E5 and BGE; separately fixed CPU/RSS/time/cleanup envelope and fresh gate required",
+    "semantic_gate": "independent claim/citation/language/coverage review remains required; syntactic success is insufficient",
+    "retrieval_assessment": "compare required-fact coverage and exact chunks, not document hits; no gold offsets, answer injection, retries or learned-failure fallback",
+    "answer_followup": "separate opt-in grammar and explicit language/grounding candidate using existing GGUF completion path and 4096/768/120 limits; strict parser retained; no fence stripping alone",
+    "preserve_original_failure": true,
+    "retry_closed_run": false,
+    "old_six_access": false
+  },
+  "new_execution": {
+    "model": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "services": 0,
+    "tests": 0,
+    "network": 0,
+    "git": 0
+  }
+}

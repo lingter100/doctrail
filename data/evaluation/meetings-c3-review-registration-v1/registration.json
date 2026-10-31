@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "purpose": "c3_independent_judge_reservations_before_native_execution",
+  "registered_at": "2026-10-14T07:52:56.369347+00:00",
+  "excluded_roles": [
+    "/root",
+    "/root/c2_budget_followup",
+    "/root/c2_calibration_source",
+    "/root/c2_comparison_runner",
+    "/root/c2_validation_source_b",
+    "/root/c2_validation_source_review",
+    "/root/c3_calibration_source_review",
+    "/root/knowledge_recovery_review",
+    "/root/meeting_span_semantic",
+    "/root/requirements_candidate"
+  ],
+  "reviewers": [
+    {
+      "phase": "calibration",
+      "reviewer_id": "/root/c2_calibration_judge",
+      "exposure_label": "metadata-exposed, label-masked",
+      "attestation": {
+        "file": ".local/meetings-c3-review-metadata-v1/calibration/attestation.json",
+        "sha256": "ff505e2b7cfbf396efbc74e4ba68cf4429d3e8208e69155c90895cd33a5233a7"
+      },
+      "public_copy": {
+        "file": "data/evaluation/meetings-c3-review-registration-v1/calibration-attestation.json",
+        "sha256": "ff505e2b7cfbf396efbc74e4ba68cf4429d3e8208e69155c90895cd33a5233a7"
+      },
+      "seed": {
+        "file": ".local/meetings-c3-review-metadata-v1/calibration/seed.bin",
+        "sha256": "77ee265e2e5ff7b5c47ccb1a4a0c60a889632bba561212bfc5d3f84b8a1a8322",
+        "bytes": 64
+      }
+    },
+    {
+      "phase": "validation",
+      "reviewer_id": "/root/c3_validation_judge",
+      "exposure_label": "metadata-exposed, label-masked",
+      "attestation": {
+        "file": ".local/meetings-c3-review-metadata-v1/validation/attestation.json",
+        "sha256": "b94fc117151ce827de10bf52e4d94e13dd8bac54331b4e7d6642fd76f7cfc53f"
+      },
+      "public_copy": {
+        "file": "data/evaluation/meetings-c3-review-registration-v1/validation-attestation.json",
+        "sha256": "b94fc117151ce827de10bf52e4d94e13dd8bac54331b4e7d6642fd76f7cfc53f"
+      },
+      "seed": {
+        "file": ".local/meetings-c3-review-metadata-v1/validation/seed.bin",
+        "sha256": "f20eb3d36c7814068ddd81f6331e97d3d293e7488d9a4b6aa4a76fba1bba4fa6",
+        "bytes": 64
+      }
+    }
+  ],
+  "parent_source_exposure": [
+    {
+      "file": "docs/MEETINGS-C3-SOURCE-EXPOSURE.md",
+      "sha256": "ed81354b45befcbbde55773a9c718cdc4db07b18305a305d2e7acb0e3cfeede8"
+    },
+    {
+      "file": "data/evaluation/meetings-c3-source-exposure-v1.json",
+      "sha256": "ca21c3ec5149c71b484382698b943ea200662b5202f650604e16ab716407c6e3"
+    }
+  ],
+  "claim": "self_reported_role_independence_with_disclosed_metadata_exposure_not_fully_blind",
+  "answer_packs_opened": 0,
+  "quality_judgments": 0,
+  "native_calls": 0,
+  "human_review_count": 0,
+  "protocol": "registered_final_answers_locked_before_current_generated_plan_reveal",
+  "quality_plan_not_yet_created": true
+}

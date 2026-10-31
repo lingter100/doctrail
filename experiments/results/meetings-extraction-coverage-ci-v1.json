@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "kind": "exact-source-ci",
+  "verified_at": "2026-10-22T06:11:08.186703+00:00",
+  "commit": "22e945ccfe390a335036e46a703c14041c4038dc",
+  "jobs": {
+    "backend": "success",
+    "java-service": "success",
+    "web": "success"
+  },
+  "runs": [
+    {
+      "id": 39731681044,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39731681044",
+      "head_sha": "22e945ccfe390a335036e46a703c14041c4038dc",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "web": "success",
+        "backend": "success",
+        "java-service": "success"
+      }
+    },
+    {
+      "id": 39731685888,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39731685888",
+      "head_sha": "22e945ccfe390a335036e46a703c14041c4038dc",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "java-service": "success",
+        "web": "success"
+      }
+    }
+  ],
+  "code": [
+    {
+      "path": "src/doctrail/meeting_service_rag.py",
+      "bytes": 19409,
+      "sha256": "fd90fff368a09b81f67e09f4aca21258e324acbee149c8e569d686e88b0c90ef"
+    },
+    {
+      "path": "tests/test_meeting_service_rag.py",
+      "bytes": 32430,
+      "sha256": "fb5432abf1c114be7ebc5b4136f125258f102e5293e097fb45c279849359afb1"
+    },
+    {
+      "path": "scripts/serve_meeting_service_rag.py",
+      "bytes": 4300,
+      "sha256": "afa7e6832562469fae4283ff80a8b462f27a6fe37bbc339dbd14a254434d9d97"
+    },
+    {
+      "path": "tests/test_meeting_service_rag_launcher.py",
+      "bytes": 6166,
+      "sha256": "177a649aa52e70df805e9732669493456dceef8d18fc507dbd53f75bcf49844c"
+    },
+    {
+      "path": "scripts/serve_meeting_rag_service.py",
+      "bytes": 21926,
+      "sha256": "baa5f8f359bec9693a9fc991bb4365c3a21dd4e7a615a605e547d404903d9baf"
+    },
+    {
+      "path": "tests/test_serve_meeting_rag_service.py",
+      "bytes": 26566,
+      "sha256": "379c32b124a54209ffba3927705f1c67d5920a22594106b2f775d6f0a12ec96c"
+    },
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 38655,
+      "sha256": "a4a426555e7e41259913e9fccb14ca9aa663fc1aed74cba98acbdfb420b73240"
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 60311,
+      "sha256": "e8aba46e25f6e514fbe8bade041311f6a2e7018e9a380fd9dacf98da0a536c5a"
+    },
+    {
+      "path": "src/doctrail/meeting_extraction_coverage.py",
+      "bytes": 6286,
+      "sha256": "45b89d30b851169a25c4b4d55bddba44557c08ca145400b63b50849392c37f8e"
+    },
+    {
+      "path": "tests/test_meeting_extraction_coverage.py",
+      "bytes": 15588,
+      "sha256": "85bc5ca5f5c500d1b3a455aedbc22fac4ebdb0beda298e94762ad29e4edd8622"
+    }
+  ],
+  "git_and_working_sources_exact": true,
+  "watch_sessions_terminal_exit_zero": [
+    76304,
+    94289
+  ],
+  "limitations": [
+    "CI checks implementation and regression contracts, not actual model semantic quality.",
+    "No new native runtime, saved-label comparison, human review or public deployment represented."
+  ]
+}

@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, errorMessage } from './api';
 import { profileLabel } from './searchMethods';
-import type { Auth, AuthMode, Capabilities, Detail, Doc, History, Hit, Modal, Search, SearchMethod, View, Workspace } from './types';
+import type { Evidence } from './meetings';
+import type { Auth, AuthMode, Capabilities, Detail, Doc, History, Hit, KnowledgeHistory, Modal, Search, SearchMethod, View, Workspace } from './types';
 
+export type SourceOrigin = {
+  query: string; retryLabel: string; isCurrent: () => boolean;
+  retry: () => void; onDenied?: () => void;
+};
 type State = {
   booting: boolean; auth: Auth | null; authMode: AuthMode; authBusy: boolean; authError: string;
   workspaceId: string; documents: Doc[]; history: History[]; view: View; search: Search | null;
@@ -12,21 +17,29 @@ type State = {
   toast: { id: number; message: string } | null;
   searchMethod: SearchMethod; capabilities: Capabilities | null; capabilitiesBusy: boolean;
   historyNotice: string;
+  knowledgeRestore: KnowledgeHistory | null;
+  viewVersion: number;
+  selectedEvidence: Evidence | null;
+  selectedSourceOrigin: SourceOrigin | null;
 };
 const emptyWorkspace = {
   documents: [] as Doc[], history: [] as History[], view: 'library' as View, search: null,
   selected: null, selectedHit: null, selectedIndex: 0, query: '', filter: '', loading: false, workspaceLoading: false,
   pageError: '', modal: null, modalBusy: false, modalError: '', feedback: {}, retryBusy: false,
-  historyNotice: '',
+  knowledgeRestore: null, viewVersion: 0, historyNotice: '', selectedEvidence: null, selectedSourceOrigin: null,
 };
 const initial: State = { ...emptyWorkspace, booting: true, auth: null, authMode: 'register', authBusy: false, authError: '', workspaceId: '', logoutBusy: false, toast: null, searchMethod: 'bm25', capabilities: null, capabilitiesBusy: false };
 
 export function useDocTrail() {
+  const leaveGuard = useRef<((proceed: () => void) => void) | null>(null);
+  function registerLeaveGuard(guard: (proceed: () => void) => void) { leaveGuard.current = guard; return () => { if (leaveGuard.current === guard) leaveGuard.current = null; }; }
+  function requestLeave(proceed: () => void) { if (leaveGuard.current) leaveGuard.current(proceed); else proceed(); }
   const [state, setState] = useState<State>(initial);
   const live = useRef(state);
-  const tokens = useRef({ epoch: 0, auth: 0, load: 0, search: 0, detail: 0, modal: 0, toast: 0, capabilities: 0 });
+  const tokens = useRef({ epoch: 0, auth: 0, context: 0, load: 0, search: 0, detail: 0, modal: 0, toast: 0, capabilities: 0 });
   const documentVersions = useRef(new Map<string, number>());
   const deletedDocuments = useRef(new Set<string>());
+  const sourceOpener = useRef<{ element: HTMLElement; documentId: string; epoch: number; view: View; workspace: string; origin?: SourceOrigin } | null>(null);
   function update(patch: Partial<State> | ((current: State) => Partial<State>)) {
     live.current = { ...live.current, ...(typeof patch === 'function' ? patch(live.current) : patch) };
     setState(live.current);
@@ -51,6 +64,7 @@ export function useDocTrail() {
     const listedRevision = live.current.documents.find(doc => doc.id === detail.id)?.revision || 0;
     if (deletedDocuments.current.has(detail.id) || detail.revision < Math.max(documentVersions.current.get(detail.id) || 0, listedRevision)) return false;
     documentVersions.current.set(detail.id, detail.revision);
+    if (detail.workspace_id !== live.current.workspaceId) return true;
     update(current => ({ documents: current.documents.some(doc => doc.id === detail.id)
       ? current.documents.map(doc => doc.id === detail.id ? detail : doc) : [detail, ...current.documents] }));
     return true;
@@ -127,15 +141,18 @@ export function useDocTrail() {
   }
   function switchWorkspace(workspaceId: string) {
     if (!live.current.auth?.workspaces.some(workspace => workspace.id === workspaceId)) return;
-    resetWorkspace(); update({ workspaceId }); void loadWorkspace();
+    requestLeave(() => { resetWorkspace(); update({ workspaceId }); void loadWorkspace(); });
   }
   function changeView(view: View) {
+    requestLeave(() => {
     // A search that finishes after navigating away must not reclaim the view.
-    tokens.current.search++; update({ view, pageError: '', historyNotice: '', loading: view === 'search' ? false : live.current.workspaceLoading });
+    tokens.current.context++; tokens.current.search++; tokens.current.detail++; update({ view, viewVersion: live.current.viewVersion + 1, knowledgeRestore: null, selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null, pageError: '', historyNotice: '', loading: view === 'search' ? false : live.current.workspaceLoading });
+    });
   }
   async function logout() {
     if (live.current.logoutBusy) return;
     const session = tokens.current.auth;
+    tokens.current.context++; tokens.current.search++; tokens.current.detail++;
     update({ logoutBusy: true });
     try {
       await api('/auth/logout', { method: 'POST' });
@@ -145,6 +162,20 @@ export function useDocTrail() {
     } catch (error) {
       if (session === tokens.current.auth && !sessionExpired(error)) { update({ logoutBusy: false }); toast(errorMessage(error)); }
     }
+  }
+  // Invalidate component requests synchronously, before React unmount cleanup.
+  // Search-method/request sequencing is separate from component context.
+  // A failed logout still invalidates responses issued before the attempt.
+  function captureContext() {
+    const epoch = tokens.current.epoch, session = tokens.current.auth, context = tokens.current.context;
+    const view = live.current.view, workspace = live.current.workspaceId;
+    return () => epoch === tokens.current.epoch && session === tokens.current.auth && context === tokens.current.context
+      && view === live.current.view && workspace === live.current.workspaceId && !!live.current.auth && !live.current.logoutBusy;
+  }
+  function restoreKnowledgeHistory(item: KnowledgeHistory) {
+    changeView('knowledge');
+    update({ knowledgeRestore: item });
+    requestAnimationFrame(() => document.getElementById('knowledge-query')?.focus());
   }
   function rerunHistory(item: History) {
     const method = item.method || 'bm25';
@@ -163,7 +194,7 @@ export function useDocTrail() {
     const epoch = tokens.current.epoch, request = ++tokens.current.search;
     tokens.current.detail++;
     const valid = () => epoch === tokens.current.epoch && request === tokens.current.search;
-    update({ view: 'search', query, searchMethod: method, selected: null, selectedHit: null, search: null, loading: true, pageError: '', historyNotice: '', feedback: {}, retryBusy: false });
+    update({ view: 'search', query, searchMethod: method, selected: null, selectedHit: null, selectedSourceOrigin: null, search: null, loading: true, pageError: '', historyNotice: '', feedback: {}, retryBusy: false });
     try {
       const guard = method !== 'bm25' && expectedProfile ? `&expected_embedding_profile=${encodeURIComponent(expectedProfile)}` : '';
       const result = await api<Search>(`/workspaces/${id}/search?q=${encodeURIComponent(query)}&limit=10&method=${encodeURIComponent(method)}${guard}`);
@@ -177,25 +208,59 @@ export function useDocTrail() {
       }
     } finally { if (valid()) update({ loading: false }); }
   }
-  async function openDocument(id: string, hit?: Hit, selectedIndex = 0) {
+  async function openDocument(id: string, hit?: Hit, selectedIndex = 0, evidence?: Evidence, origin?: SourceOrigin) {
     const epoch = tokens.current.epoch, request = ++tokens.current.detail;
-    const valid = () => epoch === tokens.current.epoch && request === tokens.current.detail;
+    const active = document.activeElement;
+    const opener = active instanceof HTMLElement && active !== document.body && !active.closest('.source-pane') ? active : null;
+    const view = live.current.view, workspace = live.current.workspaceId;
+    const search = live.current.search, searchRequest = tokens.current.search;
+    // Recovery belongs to the result that opened the source, never whichever
+    // unrelated search happens to remain in global state.
+    const sourceOrigin = origin || (hit && search && live.current.view === 'search' ? {
+      query: search.query, retryLabel: '다시 검색',
+      isCurrent: () => epoch === tokens.current.epoch && searchRequest === tokens.current.search && live.current.view === 'search',
+      retry: () => { void runSearch(search.query, search.method, search.embedding_profile?.id); },
+    } : undefined);
+    const valid = () => epoch === tokens.current.epoch && request === tokens.current.detail && (!sourceOrigin || sourceOrigin.isCurrent());
     try {
       const detail = await api<Detail>(`/documents/${id}`);
       if (!valid()) return;
-      if (replaceDoc(detail)) update({ selected: detail, selectedHit: hit || null, selectedIndex, retryBusy: false });
+      if (replaceDoc(detail)) {
+        sourceOpener.current = opener ? { element: opener, documentId: detail.id, epoch, view, workspace, origin: sourceOrigin } : null;
+        update({ selected: detail, selectedHit: hit || null, selectedEvidence: evidence || null, selectedSourceOrigin: sourceOrigin || null, selectedIndex, retryBusy: false });
+      }
     } catch (error) {
       if (!valid() || sessionExpired(error)) return;
-      update({ selected: null, selectedHit: null });
+      update({ selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null });
       if (error instanceof ApiError && [403, 404].includes(error.status)) {
         // Invalidate an older list as well, so it cannot resurrect a revoked row.
-        tokens.current.load++;
+        tokens.current.load++; tokens.current.search++;
         update(current => ({ loading: false, workspaceLoading: false, documents: current.documents.filter(doc => doc.id !== id), search: current.search && { ...current.search, results: current.search.results.filter(hit => hit.document_id !== id) } }));
+        sourceOrigin?.onDenied?.();
       }
       toast(errorMessage(error));
     }
   }
-  function closeSource() { tokens.current.detail++; update({ selected: null, selectedHit: null, retryBusy: false }); }
+  function closeSource() { sourceOpener.current = null; tokens.current.detail++; update({ selected: null, selectedHit: null, selectedEvidence: null, selectedSourceOrigin: null, retryBusy: false }); }
+  function closeSourceFromUser() {
+    const opener = sourceOpener.current?.documentId === live.current.selected?.id ? sourceOpener.current : null;
+    closeSource();
+    const request = tokens.current.detail;
+    requestAnimationFrame(() => {
+      // Automatic invalidation/navigation never restores focus. Even an explicit
+      // close must not focus a detached result or steal a subsequent interaction.
+      if (!opener || request !== tokens.current.detail || opener.epoch !== tokens.current.epoch
+        || opener.view !== live.current.view || opener.workspace !== live.current.workspaceId
+        || live.current.selected || live.current.modal || !live.current.auth
+        || !opener.element.isConnected || (opener.origin && !opener.origin.isCurrent())
+        || (document.activeElement !== document.body && document.activeElement !== opener.element)) return;
+      opener.element.focus();
+    });
+  }
+  function retrySource() {
+    const origin = live.current.selectedSourceOrigin;
+    if (live.current.selected && origin?.isCurrent()) origin.retry();
+  }
   async function feedback(index: number, relevant: boolean) {
     const search = live.current.search, epoch = tokens.current.epoch;
     if (!search) return;
@@ -214,6 +279,10 @@ export function useDocTrail() {
     }
   }
   function openModal(kind: Modal['kind']) {
+    if (kind === 'workspace') requestLeave(() => showModal(kind));
+    else showModal(kind);
+  }
+  function showModal(kind: Modal['kind']) {
     if (!live.current.auth) return;
     const id = ++tokens.current.modal;
     if (kind === 'edit' || kind === 'delete') {
@@ -268,6 +337,9 @@ export function useDocTrail() {
         invalidateReads();
         update(current => ({ loading: false, workspaceLoading: false, ...(current.selected?.id === detail.id ? { selected: detail, retryBusy: false } : {}) }));
         if (valid()) {
+          // Upload replaces the panel directly; its removed submit button is not
+          // a source opener, and a previous document's row must not inherit it.
+          if (modal.kind === 'upload' || sourceOpener.current?.documentId !== detail.id) sourceOpener.current = null;
           update({ selected: detail, selectedHit: null, search: null, view: 'library', loading: false, retryBusy: false });
           closeModal();
           toast(modal.kind === 'edit' ? `버전 ${detail.revision}으로 저장했어요. 검색에도 반영됐어요.` : detail.status === 'ready' ? '문서를 추가했어요. 이제 키워드로 검색해 보세요.' : '파일을 저장했지만 텍스트 추출에 실패했어요. 원문 패널을 확인해 주세요.');
@@ -304,7 +376,8 @@ export function useDocTrail() {
   }
   return { state, workspace: state.auth?.workspaces.find(workspace => workspace.id === state.workspaceId),
     setQuery: (query: string) => update({ query }), setFilter: (filter: string) => update({ filter }),
-    setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, rerunHistory, loadCapabilities, setSearchMethod,
-    openDocument, closeSource, feedback, openModal, closeModal, submitModal, reprocess };
+    registerLeaveGuard, requestLeave, setAuthMode, authenticate, switchWorkspace, changeView, logout, loadWorkspace, runSearch, rerunHistory, restoreKnowledgeHistory, captureContext, loadCapabilities, setSearchMethod,
+    openDocument, openEvidence: (evidence: Evidence, origin?: SourceOrigin) => openDocument(evidence.document_id, undefined, 0, evidence, origin), sessionExpired,
+    closeSource, closeSourceFromUser, retrySource, feedback, openModal, closeModal, submitModal, reprocess };
 }
 export type DocTrail = ReturnType<typeof useDocTrail>;

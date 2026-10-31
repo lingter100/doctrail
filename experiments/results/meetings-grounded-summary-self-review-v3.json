@@ -1,0 +1,471 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-self-review-comparison-v3",
+  "date": "2026-10-23",
+  "comparison_order": "Individual judgments locked, then stage/pair comparison locked, then same-model final-review values disclosed. All prior judgments remain unchanged.",
+  "aggregate": {
+    "final_alignment_review_count": 3,
+    "claim_count": 18,
+    "model_verdict_counts": {
+      "supported": 16,
+      "unsupported": 1,
+      "uncertain": 1
+    },
+    "primary_selected_citation_cross_tab": [
+      {
+        "locked_status": "supported",
+        "model_supported": 10,
+        "model_unsupported": 0,
+        "model_uncertain": 0,
+        "row_total": 10
+      },
+      {
+        "locked_status": "partial",
+        "model_supported": 5,
+        "model_unsupported": 0,
+        "model_uncertain": 1,
+        "row_total": 6
+      },
+      {
+        "locked_status": "ambiguous",
+        "model_supported": 1,
+        "model_unsupported": 1,
+        "model_uncertain": 0,
+        "row_total": 2
+      },
+      {
+        "locked_status": "unsupported",
+        "model_supported": 0,
+        "model_unsupported": 0,
+        "model_uncertain": 0,
+        "row_total": 0
+      }
+    ],
+    "secondary_full_source_cross_tab": [
+      {
+        "locked_status": "supported",
+        "model_supported": 12,
+        "model_unsupported": 0,
+        "model_uncertain": 1,
+        "row_total": 13
+      },
+      {
+        "locked_status": "partial",
+        "model_supported": 3,
+        "model_unsupported": 0,
+        "model_uncertain": 0,
+        "row_total": 3
+      },
+      {
+        "locked_status": "ambiguous",
+        "model_supported": 1,
+        "model_unsupported": 1,
+        "model_uncertain": 0,
+        "row_total": 2
+      },
+      {
+        "locked_status": "unsupported",
+        "model_supported": 0,
+        "model_unsupported": 0,
+        "model_uncertain": 0,
+        "row_total": 0
+      }
+    ],
+    "model_supported_claims": {
+      "count": 16,
+      "primary_locked_status_counts": {
+        "supported": 10,
+        "partial": 5,
+        "ambiguous": 1,
+        "unsupported": 0
+      },
+      "secondary_locked_status_counts": {
+        "supported": 12,
+        "partial": 3,
+        "ambiguous": 1,
+        "unsupported": 0
+      }
+    },
+    "model_unsupported_claims": {
+      "count": 1,
+      "primary_locked_status_counts": {
+        "supported": 0,
+        "partial": 0,
+        "ambiguous": 1,
+        "unsupported": 0
+      },
+      "secondary_locked_status_counts": {
+        "supported": 0,
+        "partial": 0,
+        "ambiguous": 1,
+        "unsupported": 0
+      }
+    },
+    "model_uncertain_claims": {
+      "count": 1,
+      "primary_locked_status_counts": {
+        "supported": 0,
+        "partial": 1,
+        "ambiguous": 0,
+        "unsupported": 0
+      },
+      "secondary_locked_status_counts": {
+        "supported": 1,
+        "partial": 0,
+        "ambiguous": 0,
+        "unsupported": 0
+      }
+    },
+    "literal_supported_agreement_primary": 10,
+    "literal_supported_agreement_secondary": 12,
+    "literal_unsupported_agreement_primary": 0,
+    "coverage_cross_tab": [
+      {
+        "locked_core_sufficiency": "sufficient",
+        "model_sufficient": 0,
+        "model_insufficient": 0,
+        "model_uncertain": 0,
+        "row_total": 0
+      },
+      {
+        "locked_core_sufficiency": "insufficient",
+        "model_sufficient": 3,
+        "model_insufficient": 0,
+        "model_uncertain": 0,
+        "row_total": 3
+      },
+      {
+        "locked_core_sufficiency": "uncertain",
+        "model_sufficient": 0,
+        "model_insufficient": 0,
+        "model_uncertain": 0,
+        "row_total": 0
+      }
+    ],
+    "model_coverage_counts": {
+      "sufficient": 3,
+      "insufficient": 0,
+      "uncertain": 0
+    },
+    "locked_core_sufficiency_counts": {
+      "sufficient": 0,
+      "insufficient": 3,
+      "uncertain": 0
+    },
+    "coverage_literal_label_agreements": 0,
+    "coverage_literal_label_disagreements": 3,
+    "locked_overall_summary_accepted_count": 0,
+    "new_semantic_judgments": 0,
+    "criteria_changes": 0,
+    "human_reviews": 0,
+    "user_reviews": 0
+  },
+  "pairs": [
+    {
+      "anonymous_pair_number": 1,
+      "claim_summary": {
+        "claim_count": 6,
+        "model_verdict_counts": {
+          "supported": 6,
+          "unsupported": 0,
+          "uncertain": 0
+        },
+        "primary_selected_citation_cross_tab": [
+          {
+            "locked_status": "supported",
+            "model_supported": 2,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 2
+          },
+          {
+            "locked_status": "partial",
+            "model_supported": 4,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 4
+          },
+          {
+            "locked_status": "ambiguous",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          },
+          {
+            "locked_status": "unsupported",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          }
+        ],
+        "secondary_full_source_cross_tab": [
+          {
+            "locked_status": "supported",
+            "model_supported": 4,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 4
+          },
+          {
+            "locked_status": "partial",
+            "model_supported": 2,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 2
+          },
+          {
+            "locked_status": "ambiguous",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          },
+          {
+            "locked_status": "unsupported",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          }
+        ]
+      },
+      "coverage_comparison": {
+        "anonymous_pair_number": 1,
+        "model_coverage": "sufficient",
+        "locked_core_sufficiency": "insufficient",
+        "literal_label_equal": false,
+        "locked_core_item_count": 2,
+        "locked_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 0
+        },
+        "locked_overall_summary_accepted": false
+      }
+    },
+    {
+      "anonymous_pair_number": 2,
+      "claim_summary": {
+        "claim_count": 6,
+        "model_verdict_counts": {
+          "supported": 6,
+          "unsupported": 0,
+          "uncertain": 0
+        },
+        "primary_selected_citation_cross_tab": [
+          {
+            "locked_status": "supported",
+            "model_supported": 4,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 4
+          },
+          {
+            "locked_status": "partial",
+            "model_supported": 1,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 1
+          },
+          {
+            "locked_status": "ambiguous",
+            "model_supported": 1,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 1
+          },
+          {
+            "locked_status": "unsupported",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          }
+        ],
+        "secondary_full_source_cross_tab": [
+          {
+            "locked_status": "supported",
+            "model_supported": 4,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 4
+          },
+          {
+            "locked_status": "partial",
+            "model_supported": 1,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 1
+          },
+          {
+            "locked_status": "ambiguous",
+            "model_supported": 1,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 1
+          },
+          {
+            "locked_status": "unsupported",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          }
+        ]
+      },
+      "coverage_comparison": {
+        "anonymous_pair_number": 2,
+        "model_coverage": "sufficient",
+        "locked_core_sufficiency": "insufficient",
+        "literal_label_equal": false,
+        "locked_core_item_count": 3,
+        "locked_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 1
+        },
+        "locked_overall_summary_accepted": false
+      }
+    },
+    {
+      "anonymous_pair_number": 3,
+      "claim_summary": {
+        "claim_count": 6,
+        "model_verdict_counts": {
+          "supported": 4,
+          "unsupported": 1,
+          "uncertain": 1
+        },
+        "primary_selected_citation_cross_tab": [
+          {
+            "locked_status": "supported",
+            "model_supported": 4,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 4
+          },
+          {
+            "locked_status": "partial",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 1,
+            "row_total": 1
+          },
+          {
+            "locked_status": "ambiguous",
+            "model_supported": 0,
+            "model_unsupported": 1,
+            "model_uncertain": 0,
+            "row_total": 1
+          },
+          {
+            "locked_status": "unsupported",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          }
+        ],
+        "secondary_full_source_cross_tab": [
+          {
+            "locked_status": "supported",
+            "model_supported": 4,
+            "model_unsupported": 0,
+            "model_uncertain": 1,
+            "row_total": 5
+          },
+          {
+            "locked_status": "partial",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          },
+          {
+            "locked_status": "ambiguous",
+            "model_supported": 0,
+            "model_unsupported": 1,
+            "model_uncertain": 0,
+            "row_total": 1
+          },
+          {
+            "locked_status": "unsupported",
+            "model_supported": 0,
+            "model_unsupported": 0,
+            "model_uncertain": 0,
+            "row_total": 0
+          }
+        ]
+      },
+      "coverage_comparison": {
+        "anonymous_pair_number": 3,
+        "model_coverage": "sufficient",
+        "locked_core_sufficiency": "insufficient",
+        "literal_label_equal": false,
+        "locked_core_item_count": 3,
+        "locked_core_coverage_counts": {
+          "covered": 1,
+          "partial": 1,
+          "missing": 1
+        },
+        "locked_overall_summary_accepted": false
+      }
+    }
+  ],
+  "interpretation": [
+    "Primary comparison is selected-citation support. Of 16 model-supported claims, 10 are locked supported, 5 partial and 1 ambiguous. The last six are not full-support agreement; they are not relabelled unsupported.",
+    "The model unsupported verdict corresponds to a locked ambiguous claim. This is a category difference, not established correct rejection or a false negative against binary gold.",
+    "The model uncertain verdict corresponds to locked partial selected-citation support and locked supported whole-source support. Uncertain, partial and ambiguous are retained as distinct labels.",
+    "Secondary whole-source comparison has 12 supported/supported matches; among model-supported claims, 3 are locked partial and 1 ambiguous. It does not replace the primary citation-bound comparison.",
+    "All three recorded model coverage values are sufficient while all three fixed core-sufficiency judgments are insufficient. This records an adequacy-assessment discrepancy under the frozen criteria, not a new judgment.",
+    "The cross-tabs are descriptive agreement/disagreement counts for three supplied final alignment candidates. They are not accuracy, precision, recall, calibration or human-validated error rates.",
+    "No model rejection cause, internal rationale, operational acceptance or runtime failure is inferred from these verdicts. The packet records claim verdicts and coverage, not the model internal reasoning."
+  ],
+  "evidence": {
+    "individual_lock": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/individual-lock-v1.json",
+      "bytes": 8152,
+      "sha256": "63fc9cf443640a196cfb1f264150041fb292c0cef4bd41607534e992f8f49099"
+    },
+    "paired_lock": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/paired-lock-v1.json",
+      "bytes": 8546,
+      "sha256": "a382227d970e6b59e7b0925f836d94a86c1d46763e73134b011b681ad0f2fc61"
+    },
+    "comparison_lock": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/self-review-lock-v1.json",
+      "bytes": 11925,
+      "sha256": "8ffd06eb5d8b5da1c805d85520702fd2fcf79406466721feab6f9c543a01ddde"
+    },
+    "comparison_safe": {
+      "path": ".local/meeting-grounded-summary-v3-independent-v1/self-review-safe-v1.json",
+      "bytes": 13653,
+      "sha256": "00dee809449c0f1cd933ff83cb87bbd0a6b6cd06975efeddae63d7d1abfd76ad"
+    },
+    "packet_custody": {
+      "path": ".local/meeting-grounded-summary-v3-self-review-packets-v1/custody-v1.json",
+      "bytes": 12208,
+      "sha256": "4e651368be60316ae3365b988d1cf4a67daaf03aae493b6e8acc77b2ba8da065"
+    },
+    "packet_parent_verification": {
+      "path": ".local/meeting-grounded-summary-v3-self-review-packets-v1/parent-verification-v1.json",
+      "bytes": 718,
+      "sha256": "69c8f1189ba6f43c5a3a96f657961e24e93ff1ff7ab3b71e288c5ff4c44f922c"
+    },
+    "comparison_parent_verification": {
+      "path": ".local/meeting-grounded-summary-v3-self-review-packets-v1/parent-comparison-verification-v1.json",
+      "bytes": 654,
+      "sha256": "bcdbd0f6a648ad3d4683b3ff1845125dc3d7b43e544804da92a53ff673a30e70"
+    }
+  },
+  "limitations": [
+    "Individual and paired judgments and source criteria were locked before this self-review disclosure and remain byte-identical. No category was collapsed, rescored or rejudged.",
+    "The same-model and final-review provenance is supplied by the parent/custodian; this comparison binds the authorized packet to the anonymous candidates and stage map, without reopening raw runtime files.",
+    "The approved review packet exposes raw-reference paths, byte counts and hashes as metadata. Those referenced files, original private map, audit, timing and performance remain unopened.",
+    "Historical aggregate exposure and earlier possible same-source grouping remain disclosed. Explicit pair/stage information was read only after individual locking; self-review is read only after both locks.",
+    "This is AI comparison using reused posthoc source-grounded judgments, not new gold, human review, user acceptance, general model quality, latency or deployment validation.",
+    "Claims preserve original ids/counts, and model verdict and coverage strings are retained exactly as recorded. Human and user review counts remain zero."
+  ]
+}

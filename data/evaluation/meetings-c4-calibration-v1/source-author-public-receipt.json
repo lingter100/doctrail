@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "kind": "redacted_public_derivative_of_observed_author_receipt",
+  "original_artifact_sha256": "1108ec8e86c5290bb05f2cfe3f19bb144734f484b145589bc31b099447c413ea",
+  "original_artifact_preserved": ".local/c4-calibration-source-publication-v1/source-author-receipt-original.json",
+  "redaction_scope": "Personal absolute command/cwd/runtime environment paths only; no source bodies or metrics changed.",
+  "redacted_field_paths": [
+    "$original.java_parity_invocation.argv[0]",
+    "$original.java_parity_invocation.argv[3]",
+    "$original.java_parity_invocation.argv[5]",
+    "$original.java_parity_invocation.java_home",
+    "$original.java_parity_invocation.cwd"
+  ],
+  "original_receipt_with_path_redactions": {
+    "schema_version": 1,
+    "kind": "source_only_authorship_and_adoption_receipt",
+    "phase": "calibration",
+    "created_at_utc": "2026-10-16T04:48:35.242628+00:00",
+    "author_role": "c4_calibration_source",
+    "actual_model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "excluded_from_independent_final_output_judging": true,
+    "preflight": {
+      "started_at_utc": "2026-10-16T04:45:32.697380+00:00",
+      "preflight_completed_at_utc": "2026-10-16T04:46:11.280961+00:00",
+      "toolchain_bound_count": 85,
+      "toolchain_commit": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+      "toolchain_ci_receipt_commit": "ebc4a86a3137107b3b37c151f250c4efdc2a75e9",
+      "actual_git_code_contract_passed": true,
+      "ci_receipt_git_object_bytes_passed": true,
+      "ci_receipt_commit_is_ancestor": true,
+      "invocation_head": "4ba1fbfd7361b85d8800e453441fee1be49e25d0",
+      "questions_authored": 0,
+      "oracles_authored": 0,
+      "tokenizer_loads": 0,
+      "native_calls": 0
+    },
+    "source_authorship_after_ci_receipt_commit": true,
+    "processing_invocation": {
+      "argv": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "scripts.prepare_meeting_plaintext_source_inventory",
+        "--manifest",
+        "data/evaluation/meetings-c4-calibration-v1/source-manifest.json",
+        "--output",
+        ".local/c4-calibration-source-inventory-v1",
+        "--phase",
+        "calibration",
+        "--mode",
+        "adopted-all"
+      ],
+      "exit_code": 0,
+      "full_document_inventory_replay_passed": true,
+      "frozen_processing_receipts_validator_passed": true
+    },
+    "java_parity_invocation": {
+      "started_at_utc": "2026-10-16T04:46:58.025557+00:00",
+      "completed_at_utc": "2026-10-16T04:47:04.185876+00:00",
+      "seconds": 6.15599999999904,
+      "argv": [
+        "<repository>/server/mvnw.cmd",
+        "-B",
+        "-Dtest=MeetingSourceParityTest",
+        "-Ddoctrail.sourceRoot=<repository>",
+        "-Ddoctrail.sourceInventory=.local/c4-calibration-source-inventory-v1/inventory.json",
+        "-Ddoctrail.sourceParityReceipt=<repository>/.local/c4-calibration-source-parity-v1/java-parity.json",
+        "test"
+      ],
+      "java_home": "<local-environment-path-redacted>",
+      "cwd": "<repository>/server",
+      "exit_code": 0,
+      "stdout": ".local/c4-calibration-source-parity-v1/stdout.log",
+      "stderr": ".local/c4-calibration-source-parity-v1/stderr.log",
+      "actual_java_receipt_exists": true
+    },
+    "java_parity_test_results": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "java_version": "21.0.12.1",
+      "exact_content_pages_chunk_text_offsets_ordinals_ids": true,
+      "stdout_sha256": "ab27444803779ff5bf904ef423e04b81f30de6745eb3ef2fee2d3a6cd805fde3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "public_acquisition": {
+      "schema_version": 1,
+      "records": [
+        {
+          "url": "https://api.github.com/repos/scikit-image/skimage-archive/git/trees/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96?recursive=1",
+          "resolved_url": "https://api.github.com/repos/scikit-image/skimage-archive/git/trees/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96?recursive=1",
+          "status": 200,
+          "sha256": "1bc8a4380a25a71694a6a4adfc596e6d30f41a2c4da182d442ffb05d81f27e2e",
+          "bytes": 28889,
+          "observed_at_utc": "2026-10-16T04:46:11.631503+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/scikit-image/skimage-archive/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/LICENSE.txt",
+          "resolved_url": "https://raw.githubusercontent.com/scikit-image/skimage-archive/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/LICENSE.txt",
+          "status": 200,
+          "sha256": "af7dfc5502813aad2c5ff5ca75aa222080d84d86f9d573d16485595016767857",
+          "bytes": 7137,
+          "observed_at_utc": "2026-10-16T04:46:11.949852+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/scikit-image/skimage-archive/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/2023-06-02_meeting.md",
+          "resolved_url": "https://raw.githubusercontent.com/scikit-image/skimage-archive/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/2023-06-02_meeting.md",
+          "status": 200,
+          "sha256": "25a00643398fd75983b66accab256ba551b8c0011c693bb52c601ffd1880b119",
+          "bytes": 1610,
+          "observed_at_utc": "2026-10-16T04:46:12.031670+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/scikit-image/skimage-archive/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/2023-06-09_meeting.md",
+          "resolved_url": "https://raw.githubusercontent.com/scikit-image/skimage-archive/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/2023-06-09_meeting.md",
+          "status": 200,
+          "sha256": "b932fa951bc39232a6745980d1f1303376d7f94ae1efd0ffc7a10198530942fe",
+          "bytes": 2252,
+          "observed_at_utc": "2026-10-16T04:46:12.101484+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/scikit-image/skimage-archive/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/Project_TPS_proposal.md",
+          "resolved_url": "https://raw.githubusercontent.com/scikit-image/skimage-archive/3bbcc6e8a7bd2c05675b316773796cc7f7fe0a96/internships/Outreachy_2023-05/Project_TPS_proposal.md",
+          "status": 200,
+          "sha256": "251e04b1f819e834f7a222ce8620d08530799531ca8deead07117e170c14663a",
+          "bytes": 13649,
+          "observed_at_utc": "2026-10-16T04:46:12.185719+00:00"
+        }
+      ]
+    },
+    "bound_files": {
+      "data/evaluation/meetings-c4-calibration-v1/java-parity.json": "ccc433369c67f7a9ad2bf69e53cb2e71de203b6ec8e6c69a232f42b77b5bc16f",
+      "data/evaluation/meetings-c4-calibration-v1/licenses/scikit-image-CC0-1.0.txt": "af7dfc5502813aad2c5ff5ca75aa222080d84d86f9d573d16485595016767857",
+      "data/evaluation/meetings-c4-calibration-v1/raw/c4-f01-2023-06-02_meeting.md": "25a00643398fd75983b66accab256ba551b8c0011c693bb52c601ffd1880b119",
+      "data/evaluation/meetings-c4-calibration-v1/raw/c4-f01-2023-06-09_meeting.md": "b932fa951bc39232a6745980d1f1303376d7f94ae1efd0ffc7a10198530942fe",
+      "data/evaluation/meetings-c4-calibration-v1/raw/c4-f01-Project_TPS_proposal.md": "251e04b1f819e834f7a222ce8620d08530799531ca8deead07117e170c14663a",
+      "data/evaluation/meetings-c4-calibration-v1/raw/c4-f02-2026-04-03-operations.md": "dd621d916bf48a71462bbb7be3aa005246bb5cc751365b75ee256c4e36ea1d0e",
+      "data/evaluation/meetings-c4-calibration-v1/raw/c4-f02-2026-04-17-operations.md": "843ba80a2b51436e86d591a4a72b66ecbb6bbfc237cfc60afb54dad6cb13d75e",
+      "data/evaluation/meetings-c4-calibration-v1/raw/c4-f02-operations-handbook-v1.md": "510fa02dbf125d838cabae4e6b5cd6305be2fac985c430546f1e334d3b51b209",
+      "data/evaluation/meetings-c4-calibration-v1/source-author-checks.json": "3e69cb43165dc20788d22e4e4205bd3fd301259692b828242cc4fca2f51a493c",
+      "data/evaluation/meetings-c4-calibration-v1/source-exploration-receipt.json": "5c042a51e0039abfdefb8126c7ba0f4a6d57a4469ab8c7677f5d5eefc502d68a",
+      "data/evaluation/meetings-c4-calibration-v1/source-inventory.json": "4a6c61735f7ce4b49fe5d5d9d6344ca6055ac6de8aadeca908ed5e432936d932",
+      "data/evaluation/meetings-c4-calibration-v1/source-manifest.json": "921bcda0d506c4ae812e44b880a8e2a6492a9c61f4e585f6f7854ac2fa48ae2f",
+      "data/evaluation/meetings-c4-calibration-v1/source-processing-receipt.json": "20fd9d81a1960ad19a2c71b012a08cc12a4a8a3c06fb042dea5793493d0d3b1e",
+      "data/evaluation/meetings-c4-calibration-source-fingerprints-v1.json": "0f222307428d124ce268a78aec5bc3798d00f47807d54015095be508ae3baf80",
+      "data/evaluation/meetings-c4-prior-source-fingerprints-v1.json": "757a85b523303aa85255d38887f5d7ea5689907942b887317ad296cc669badf4"
+    },
+    "counts": {
+      "public_families": 1,
+      "synthetic_families": 1,
+      "public_documents": 3,
+      "synthetic_documents": 3,
+      "meetings": 4,
+      "general_documents": 2,
+      "source_documents": 6,
+      "chunks": 32,
+      "synthetic_bodies_authored_by_this_role": 3,
+      "questions_authored": 0,
+      "oracles_authored": 0,
+      "selected_contexts": 0,
+      "tokenizer_loads": 0,
+      "native_calls": 0,
+      "model_weight_downloads": 0,
+      "paid_api_calls": 0,
+      "human_reviews": 0
+    },
+    "provenance_notes": [
+      "Processing helper synthetic_bodies_authored=0 means the helper authored no bodies; this source role separately authored three fictional bodies before invoking it.",
+      "Actual source download GETs are recorded separately; processing-helper downloads=0 and model-weight downloads=0 do not mean no public HTTP retrieval occurred.",
+      "Raw public bytes were matched to immutable Git blob SHA1 and size; the CC0 Files:* notice is embedded in the manifest and preserved as a separate complete license copy.",
+      "Public meeting links, typos, repeated text and whitespace were retained exactly. Source adoption does not verify or adopt linked external material.",
+      "Two source languages are retained without translations of prior closed items. No source/query/context selection was based on tokenizer or model feedback.",
+      "Author read current frozen implementation contracts, protocol and synthetic helper tests; the author is not an independent output judge.",
+      "The source author knows candidate metadata and previous aggregate results from AGENTS.md. No historical source or question/oracle bodies were opened."
+    ],
+    "independent_source_review": "pending_separate_role",
+    "source_freeze": "not_created_by_author",
+    "next_allowed_step": "Independent source coherence/license/freshness review, including every shared-long-paragraph group; source freeze and commit before item authorship.",
+    "complete_near_duplicate_absence_proven": false,
+    "quality_or_service_adoption": false
+  },
+  "portable_parity_command": "server/mvnw.cmd -q -f server/pom.xml -Dtest=MeetingSourceParityTest -Ddoctrail.sourceRoot=<repository> -Ddoctrail.sourceInventory=<inventory> -Ddoctrail.sourceParityReceipt=<receipt> test",
+  "portable_command_note": "Illustrative placeholders only; exact actual invocation remains in the preserved original and its path-redacted argv above.",
+  "human_review_count": 0,
+  "publication_check_note": "Initial unpublished derivative also matched URL schemes. Original retained URLs were restored from the private original before commit; only five Java runtime path fields are redacted.",
+  "public_derivative_version": 2
+}

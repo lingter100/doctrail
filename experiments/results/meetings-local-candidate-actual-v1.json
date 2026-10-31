@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "experiment": "meetings-local-candidate-development-v1",
+  "date": "2026-10-26",
+  "status": "failed_before_native_start_consumed",
+  "source_commit": "9fdf6ae2a8e3dff0aa071241eb70bb41de72685a",
+  "model_profile": "data/models/meetings-generation-ministral3-v1.json",
+  "protocol": "docs/MEETINGS-SUMMARY-NEXT-DECISION.md",
+  "registration_sha256": "df2e819ec1897d46a63e01c6e2ac67d7af87852b7739a318335c0c91c6c3f180",
+  "provenance_companion_sha256": "4b29ab0d28f4e70236a5be3ae25df4668edf1bffbf45e19fb3b7d8149ff6e768",
+  "actual": {
+    "official_cli_calls": 1,
+    "cli_exit_code": 1,
+    "wrapper_exit_code": 0,
+    "cli_elapsed_seconds": 38.28200000000652,
+    "driver_elapsed_seconds": 37.17200000002049,
+    "first_failure": "local_candidate_startup_ram",
+    "native_process_starts": 0,
+    "tokenizer_calls": 0,
+    "generation_calls": 0,
+    "self_review_calls": 0,
+    "summary": {
+      "denominator": 4,
+      "unexecuted": 4
+    },
+    "qa": {
+      "denominator": 4,
+      "unexecuted": 4
+    },
+    "retries": 0
+  },
+  "resources": {
+    "startup_ram_minimum_bytes": 10737418240,
+    "pre_cli_available_ram_bytes": 11164737536,
+    "available_ram_at_internal_failure": null,
+    "cause_of_ram_change": "unknown; threshold rejection is observed, allocation or external activity cause is not established",
+    "measured_inference_latency": null,
+    "measured_model_memory": null
+  },
+  "preservation": {
+    "sealed_output_files": 4,
+    "terminal_matches_report": true,
+    "late_invalidation": false,
+    "registered_bindings_unchanged": true,
+    "owned_process_identities_absent": 4,
+    "user_review_count": 0
+  },
+  "interpretation": [
+    "This is an operational startup failure, not a model accuracy result.",
+    "The four summaries and four answers remain unexecuted; accuracy and citation-quality rates are not computed.",
+    "Existing service model, frozen evaluation criteria and closed failures were not changed.",
+    "The first observer refused before issuing the CLI because it queried unrelated protected OS processes; that refusal was preserved separately and did not consume a model attempt.",
+    "Code inspection shows launch calls prepare after registration asset verification; prepare stages runtime archives even when a valid runtime exists. This is redundant work, not a proven cause of the observed RAM drop."
+  ],
+  "next_action": "Review separating asset installation from launch and record RAM at the actual gate; preserve current thresholds, source data and consumed run. No automatic rerun.",
+  "evidence": [
+    {
+      "file": ".local/meeting-local-candidate-execution-v1/actual-once-v1/safe-result.json",
+      "size_bytes": 2001,
+      "sha256": "ee99ed0d110eebbe6c3848ecbefa744b4e8831e7a8f89115580927f21f2ec57a"
+    },
+    {
+      "file": ".local/meeting-local-candidate-execution-v1/actual-once-v1/terminal-custody-receipt.json",
+      "size_bytes": 6495,
+      "sha256": "8ee807868c62d81ba490e6478c58967e8f7c56ac86e64f960a517a3d00680cc7"
+    },
+    {
+      "file": ".local/meeting-local-candidate-execution-v1/local-candidate-development-v1/report.json",
+      "size_bytes": 1771,
+      "sha256": "fbce73d55a5c37ca526d049eb72f2bac248b400299dffdc74fef108c9d6aa002"
+    },
+    {
+      "file": ".local/meeting-local-candidate-execution-v1/local-candidate-development-v1/terminal.json",
+      "size_bytes": 386,
+      "sha256": "1a376214f857102bdb7c7fca81a8c66ce67352528268c50ef646f5c0c2ab1395"
+    },
+    {
+      "file": ".local/meeting-summary-mode-parent-v1/local-candidate-actual-v1-acceptance.json",
+      "size_bytes": 1044,
+      "sha256": "9c0f29f8fd637406298186d742710408b193b090e59715dd7d09e374fc327537"
+    }
+  ],
+  "public_service_deployed": false,
+  "phase1_complete": false
+}

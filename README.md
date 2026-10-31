@@ -1,28 +1,31 @@
 # DocTrail
 
-**소규모 개발 조직을 위한 권한 기반 문서 검색과 근거 확인 서비스.**
+**소규모 개발 조직의 문서와 회의에서 정보를 찾고, 원문 근거와 결정 변경을 확인하는 서비스.**
 
-화면은 **React + TypeScript + Vite**, 서비스 백엔드는 **Java 21 + Spring Boot**다. Python은 데이터 준비·학습·오프라인 평가와 선택적 검색 모델 추론에 사용한다. 기존 Python 서비스와 동결 실험은 보존한다. [Java 전환 범위와 검증](docs/JAVA-MIGRATION.md), [React 선택 이유](docs/decisions/0003-react-frontend.md), [화면 구조와 검증 실행법](docs/FRONTEND.md)을 참고한다.
+React·TypeScript·Vite 화면, Java 21·Spring Boot 서비스, Python 데이터·학습·평가·로컬 추론으로 구성한다. Notion·Confluence의 익숙한 문서 탐색 구조를 참고한 개인 AI Engineer 포트폴리오 프로젝트다. 한국어·영어 문서를 다룬다.
 
-새 팀원이 온보딩·운영 문서에서 정보를 찾을 때, 볼 수 있는 문서의 어느 부분이 근거인지 확인하는 흐름을 만든다. 한국어·영어 문서를 대상으로 검색 기준선부터 임베딩·하이브리드·리랭킹·미세조정까지 비교하는 개인 AI Engineer 포트폴리오 프로젝트다.
+## 현재 사용할 수 있는 흐름
 
-## 현재 범위
+| 사용 흐름 | 구현·확인한 범위 |
+| --- | --- |
+| 문서 등록과 검색 | 로그인·작업공간·접근 권한, TXT/Markdown/PDF 등록·수정·삭제·재처리, 검색 결과에서 원문 근거와 버전 확인 |
+| 회의 결정과 작업 관리 | 텍스트 회의 등록, 결정 변경의 명시적 연결, 담당자·기한·상태 편집, 분석 항목과 근거 보정 |
+| 자료를 함께 탐색 | 회의·일반 문서 통합 검색, 질문 기록·피드백, 권한·문서 갱신에 따른 근거 재검사 |
+| AI 실험과 운영 | 검색 기준선·임베딩·혼합·리랭커·도메인 미세조정 비교, 실제 로컬 AI 호출, 오류·재처리·백업·복원 검증 |
 
-문서 등록 → 검색 → 원문 근거 확인을 로컬에서 구현·검증했다. 로그인·작업공간·나만 보기 권한, 수정·삭제·재처리, 검색 기록·피드백도 실제 API에 연결했다. 기본 BM25 외에 E5 의미 검색·혼합·BGE 재정렬을 선택할 수 있으며 실제 로컬 GPU와 Java·React 연결을 합성 자료로 검증했다. 생성형 질의응답·서비스 배포는 후속 단계이며, 검색 임베딩의 제한 미세조정은 실제로 수행했다. [현재 상태](docs/STATUS.md), [모델 서비스 실행·한계](docs/MODEL-SERVING.md).
+**회의 지능형 관리 1차와 전체 포트폴리오는 미완료다.** 관리·검색 기능의 동작과 AI 내용 품질을 구분한다. 실제 로컬 요약·답변은 연결했지만 정보 누락·근거와 주장의 불일치·잘못된 답변 보류가 남았다. 최근 두 모델의 같은 6문항 개발 비교는 독립 AI 내용 수용이 모두 **0/6**이어서 후보를 채택하지 않았다. 이 작은 비교를 일반 정확도나 사람 평가로 해석하지 않는다.
 
-M2에서는 공개 한·영 문서 313개, AI 질문 초안 240개와 리비전 후 활성 질문 239개를 준비했다. 개발용 양성 질문 59개에서 top-5 청크의 필수 근거 완전 회수는 **30/59**, 주석상 교차 언어 질문은 **1/23**이었다. 사용자 검수는 0개이고 test 질문 성능은 열지 않았다. 이 실패를 출발점으로 검색 모델을 비교한다. [실측·실패 분석](experiments/README.md), [데이터 재현](data/README.md), [데이터 카드](docs/DATA-CARD.md)를 제공한다.
+게시 소스 `8bd4104`의 push·PR [필수 CI](experiments/results/meetings-structured-ci-v1.json)는 각각 Python5,922개 통과·21개 제외, 브라우저162개와 Java·운영·동결 파일 검사가 통과했다. 그 뒤 chat 연결·명시적7B 프로필·선택 정보 처리를 [집중 검사와 독립 코드 검토](experiments/results/meetings-structured-chat-profile-implementation-v1.json) 후 로컬에서 검증했다. 이후 변경의 필수 CI는 해당 커밋 결과로 따로 확인해야 한다. 합성 응답 화면 검사나 CI가 실제 AI 품질의 증거는 아니다.
 
-M3 첫 로컬 GPU 비교는 같은 입력에서 **BM25 30/59 → E5 임베딩 29/59 → 혼합 27/59 → 혼합+리랭커 36/59**였다. 나빠진 방법도 보존했다. 이 수치는 동결 Python 오프라인 dev 평가이며 Java 서비스 성능으로 재해석하지 않는다. [실행법](docs/M3-RUNBOOK.md)과 [비교 설계](docs/M3-DESIGN.md)를 참고한다.
+## 프로젝트에서 설명할 핵심
 
-후속 비교에서는 두 검색기의 후보를 같은 깊이로 읽고 중복을 제외해 50개를 채우는 정책을 사전 고정했다. 같은 BGE로 다시 순위를 매긴 결과 **37/59**로 1문항 회복·추가 퇴보 0문항이었다. 후보 자체에 모든 근거가 있는 질문도 38/59에 그쳐 누락 문제가 남았다. 기존 모델 입력의 잘림과 근거 토큰 보존을 따로 검사한 [후속 분석](docs/M3-CANDIDATE-ANALYSIS.md)에 개선·한계·재현 근거를 함께 남겼다. 모두 사용자 검수 전 dev 결과다.
+- **검색을 단계별로 비교한다.** [검색 실험과 실패 분석](docs/M3-ANALYSIS.md), [학습 설계](docs/M4-DESIGN.md)에 데이터 출처·분할·후보 누락·미세조정 선택을 기록한다. 학습 후보의 기본 채택과 격리 최종 평가는 남아 있다.
+- **인용 일치와 답변의 충분성을 따로 평가한다.** [최신 로컬 QA 결과](docs/MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)에 자동 거절·내용 실패·평가 분모를 남겼다. 실패한 출력이나 평가 조건을 성공처럼 고치지 않는다.
+- **문서가 바뀌고 권한이 달라져도 근거를 확인한다.** [회의 편집 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원 검증](docs/MEETINGS-RESTORE-VERIFICATION.md)은 실제 저장·권한·충돌 처리와 모델 품질을 구분한다.
 
-M4에서는 원래 train 안에서 학습64·내부 검증16개의 AI 질문과 독립 검토를 준비했다. 대체 정답·모호한 후보·잘린 입력을 구분해 검토했고, 첫 GPU 수치 실패도 보존했다. 초기 loss scale만 바꾼 후속 probe를 통과한 뒤 E5 전체 가중치를16회 실제 갱신했다. [준비·실행·품질 기록](docs/M4-READINESS-RESULTS.md)과 [재현 실행법](docs/M4-RUNBOOK.md)에 성공·실패·한계를 함께 남긴다. 학습 완료와 검색 개선·서비스 채택은 별개다.
+새 공개 자료의 [키워드·임베딩·혼합 검색6회](experiments/results/meetings-qa-retrieval-development-v6.json)는 모두 완료했지만, [필수6사실의 회수](experiments/results/meetings-qa-retrieval-coverage-v1.json)는3/5/3개였다. 원래 출처를 유지하는 인접 문맥 보충을 연결했다. [구조화 서비스v3](experiments/results/meetings-structured-service-v3.json)는 실제7B로 두 회의 분석과 두 답변을 모두 시도했다. 첫 요약 자체 검토가 거절됐고, 나머지 세 건도 [독립 내용 검토](experiments/results/meetings-structured-v3-quality-review-v1.json)를 통과하지 못해 총0/4였다. [후보 설계](docs/MEETINGS-STRUCTURED-SERVICE.md)와 실패를 보존하며 기본 모델로 채택하지 않았다. 자체 엔진 빌드 실험도 별도로 남아 있다.
 
-별도 사전 고정 dev 비교에서 새 E5 base→학습 저장본의 전체 근거 회수는 **후보50 기준34→47/59, 상위5 기준29→37/59**였다. @5에서14개 회복·6개 퇴보했으며, 다중 문서 질문은1→0/7로 나빠졌다. [사례와 한계](docs/M4-MAIN-DEV-ANALYSIS.md)를 보존했다. 사용자 검수0·test 잠금·서비스 미채택 상태이며, 공개 CI는 가중치 없이 저장 결과를 재생한다.
-
-이 학습 저장본을 명시적 실험 실행기로 연결해 실제 Java·React·로컬 GPU 운영 검사16묶음도 통과했다. 모델별 검색 이력, 권한 회수, 문서 갱신·삭제, worker 장애와 기존 모델 복구를 확인했다. [운영 결과](docs/M4-OPERATIONS-RESULTS.md)를 보존하며 기본 BM25/base는 유지한다. 이 검증은 합성 자료를 사용했으며 새로운 검색 품질 평가나 사용자 검수를 뜻하지 않는다.
-
-M5의 첫 로컬 생성 실험에서는 Qwen3-1.7B로 합성11질문을 실제 처리하고 빈 근거1개를 사전 차단했다. 첫 실행의 라이브러리 설정 덮어쓰기를 발견·보존한 뒤, 새 버전에서 실제 적용된 greedy 설정을 확인했다. **인용 검사를 통과한9답변 중3개는 질문 일부 누락·충돌 무시·모호한 대상 선택 문제**가 있었고 정상 모델 보류는0/4였다. [설정 실패와 답변 분석](docs/M5-GENERATION-ANALYSIS.md)을 공개하며, 이를 Java Q&A 기능 완료나 실사용 품질로 주장하지 않는다. [실행·재생 방법](docs/M5-RUNBOOK.md)을 참고한다.
+기능별 남은 일은 [진행 상황](docs/PROGRESS-OVERVIEW.md), 실행 시연은 [시연 안내](docs/DEMO.md), 확인된 경험의 설명은 [포트폴리오 초안](docs/PORTFOLIO-DRAFT.md)·[면접 초안](docs/INTERVIEW-DRAFT.md)에 있다. 사용자 직접 검수·최종 시연·공개 서비스 배포는 완료하지 않았다. 녹음·STT·외부 회의 연동은 2차 범위다.
 
 ![로컬 검증 화면: 합성 온보딩 문서 검색과 원문 근거](docs/images/m1-desktop.jpg)
 
@@ -44,6 +47,8 @@ java -jar server/target/doctrail-server-0.1.0.jar
 브라우저에서 `http://127.0.0.1:8000`을 열고 계정과 작업공간을 만든다. Markdown, UTF-8 텍스트, 텍스트가 포함된 PDF를 등록하고 검색한다. Java 기본 DB는 `var/doctrail-java.sqlite3`이며 기존 Python DB를 자동으로 옮기거나 덮어쓰지 않는다. 기본 계정이나 고정 비밀번호는 없다. macOS/Linux에서는 위의 `mvnw.cmd` 대신 `mvnw`를 사용한다.
 
 이전 구현은 `./scripts/start.ps1 -Backend Python`으로 실행한다. AI 실험 실행법은 [M3-RUNBOOK](docs/M3-RUNBOOK.md)을 따른다. 두 서비스를 같은 포트·같은 DB에 동시에 실행하지 않는다.
+
+회의 AI와 Q&A는 위 빌드 후 고정 로컬 Qwen 가중치와 retrieval 의존성을 준비하고 `uv run --locked --group retrieval --no-sync python -m scripts.serve_meetings --port 8000`으로 실행한다. `--retrieval`을 추가하면 E5/BGE는 CPU에서 함께 실행한다. 일반 Java 실행만으로는 모델이 연결되지 않으며 AI 실패 상태를 표시한다. 정확한 준비 조건·대안·한도는 [회의 운영 안내](docs/MEETINGS-RUNBOOK.md)를 따른다.
 
 개발 중에는 API 서버와 별도로 `web/`에서 `npm run dev`를 실행한다. 프런트엔드 개발 서버가 `/api`를 로컬 API 서버로 전달한다.
 
@@ -77,6 +82,11 @@ npm run build
 - [M5 답변·보류 설계](docs/M5-DESIGN.md), [생성 실측·실패 분석](docs/M5-GENERATION-ANALYSIS.md), [실행·재생](docs/M5-RUNBOOK.md)
 - [M5-B 새 자료·정책 비교 사전등록](docs/M5-CALIBRATION-PLAN.md), [자료 준비 검증·한계](docs/M5B-PREPARATION.md)
 - [자동 후속 실행과 승인 경계](docs/AUTONOMY.md)
+- [회의 확장 설계](docs/MEETINGS-DESIGN.md), [API·실행·복구](docs/MEETINGS-RUNBOOK.md), [실제 결과·한계](docs/MEETINGS-RESULTS.md)
+- [통합 기록·피드백 검증](docs/MEETINGS-KNOWLEDGE-HISTORY-VERIFICATION.md), [회의 수동 보정 계획](docs/MEETINGS-MANUAL-CORRECTION-PLAN.md), [실제 보정 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md)
+- [요약 엔진 검증 도구](docs/MEETINGS-SUMMARY-ENGINE-PREPARATION.md), [새 무료 QA 준비 계약](docs/MEETINGS-FREE-QA-PREPARATION-PLAN.md)
+
+- [무료 QA 비교 구현 계획](docs/MEETINGS-FREE-QA-ADAPTER-PLAN.md)
 
 ## 라이선스와 사실 구분
 

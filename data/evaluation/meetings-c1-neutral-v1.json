@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "c1_neutral_protocol_controls",
+  "human_review_count": 0,
+  "cases": [
+    {
+      "id": "c1-neutral-supported",
+      "operation": "answer",
+      "provenance": "AI-authored synthetic protocol control; not evaluation data",
+      "payload": {
+        "schema_version": 1,
+        "query": "What colour is the indicator?",
+        "contexts": [
+          {
+            "document_id": "c1-neutral-document-0",
+            "revision": 1,
+            "chunk_id": "c1-neutral-chunk-0",
+            "title": "Synthetic protocol card",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 40,
+            "text": "Instrument card\nThe indicator is amber.\n"
+          }
+        ]
+      },
+      "expected_status": "answered"
+    },
+    {
+      "id": "c1-neutral-insufficient",
+      "operation": "answer",
+      "provenance": "AI-authored synthetic protocol control; not evaluation data",
+      "payload": {
+        "schema_version": 1,
+        "query": "What is the weight of the item in grams?",
+        "contexts": [
+          {
+            "document_id": "c1-neutral-document-1",
+            "revision": 1,
+            "chunk_id": "c1-neutral-chunk-1",
+            "title": "Synthetic protocol card",
+            "meeting_date": null,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 44,
+            "text": "Calibration receipt\nReceipt identifier: N4.\n"
+          }
+        ]
+      },
+      "expected_status": "abstained"
+    }
+  ],
+  "purpose": "Once-only native protocol and output contract check, not semantic-quality evidence. No new calibration or validation item reused.",
+  "expected_controls": {
+    "c1-neutral-supported": {
+      "status": "answered",
+      "supporting_text": "The indicator is amber.\n"
+    },
+    "c1-neutral-insufficient": {
+      "status": "abstained",
+      "reason": "insufficient_evidence"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "status": "FAILED_CONSUMED_NO_RETRY",
+  "source_commit": "017141a824b7b373718cb6c9eef7e044bb83c60b",
+  "actual_cli_count": 1,
+  "actual_cli_exit": 1,
+  "wrapper_exit": 1,
+  "observer_elapsed_seconds": 1.1869999999762513,
+  "first_failure": {
+    "type": "BoundaryError",
+    "code": "download_origin",
+    "file": "tools/free_qa/assets.py",
+    "line": 155,
+    "meaning": "The download URL failed the HTTPS/allowed-origin/port/no-userinfo/no-fragment guard.",
+    "boundary_not_identified": "Saved code does not identify the rejected URL, exact predicate, redirect hop or final-response URL; no additional request made."
+  },
+  "subsequent_failures": [
+    {
+      "type": "BoundaryError",
+      "code": "worker_exit",
+      "file": "tools/free_qa/assets.py",
+      "line": 501
+    },
+    {
+      "type": "ValueError",
+      "code": "external_exit_or_observation"
+    },
+    {
+      "type": "ValueError",
+      "code": "external_gate_not_accepted"
+    }
+  ],
+  "transfer_bytes": 0,
+  "complete_shards": 0,
+  "partial_file_count": 8,
+  "partial_total_bytes": 18025,
+  "owned_identities_absent": 6,
+  "source_preserve_hashes_verified": 5157,
+  "model_tokenizer_native_calls": 0,
+  "human_semantic_review": 0,
+  "followup_observation": {
+    "method": "separate HEAD once",
+    "status": 302,
+    "hostname": "us.aws.cdn.hf.co",
+    "body_bytes_read": 0,
+    "redirect_followed": false,
+    "official_source": "https://huggingface.co/docs/hub/models-downloading",
+    "limitation": "Current HEAD redirect and missing allowlist entry do not reconstruct the historical GET response."
+  },
+  "next": "Review a narrow exact-host allowlist change and negative redirect regression before publishing code and a new separate acquisition attempt. Original root cannot be reused."
+}

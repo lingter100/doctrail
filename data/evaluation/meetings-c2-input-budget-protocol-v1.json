@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "candidate": "meeting-answer-blocks-c2-input-budget-v1",
+  "registered_at": "2026-10-14T03:12:27.036407+00:00",
+  "status": "design_registered_not_implemented_or_executed",
+  "supersedes_for_execution_only": "meeting-answer-blocks-c2-comparison-v1",
+  "previous_status": "preflight_failed_input_budget",
+  "previous_quality_dispatches": 0,
+  "protocol_deviation": "equal_input_cap_4096_to_5120_after_length_metadata",
+  "registered_before_remaining_length_survey": true,
+  "known_length_metadata": {
+    "validation_cases_measured": 7,
+    "validation_cases_unmeasured": 5,
+    "known_over_budget_input": 4572,
+    "previous_input_cap": 4096
+  },
+  "exposure_roles": {
+    "length_metadata_only_designers": [
+      "/root",
+      "/root/c2_budget_followup"
+    ],
+    "validation_semantic_custodians": [
+      "/root/c2_validation_source_b",
+      "/root/c2_validation_source_review"
+    ]
+  },
+  "limits": {
+    "input_tokens_both_arms": 5120,
+    "context_tokens": 6144,
+    "output_tokens": 384,
+    "reserved_context_tokens": 640,
+    "request_seconds": 90,
+    "cleanup_seconds": 5,
+    "request_through_cleanup_seconds": 120,
+    "native_request_bytes": 524288,
+    "native_response_bytes": 2097152,
+    "artifact_bytes": 16777216,
+    "neutral_native_calls": 4,
+    "calibration_native_calls": 16,
+    "validation_native_calls": 12,
+    "new_native_calls": 32,
+    "closed_prior_neutral_calls": 2,
+    "c2_lineage_native_cap": 34,
+    "warmup_calls": 0,
+    "retries": 0
+  },
+  "neutral_order": [
+    "normal:L0",
+    "normal:C2",
+    "stress:C2",
+    "stress:L0"
+  ],
+  "immutable_conditions": [
+    "same_all_8_calibration_and_12_validation_payloads_oracles",
+    "same_prompts_catalogs_grammars_mappers",
+    "same_model_runtime_decoding_settings",
+    "no_question_context_reselection_or_truncation",
+    "no_cap_ladder_or_native_resume",
+    "separate_source_freeze_and_execution_plans_before_generation"
+  ],
+  "stop_if_any_full_survey_input_exceeds_cap": true,
+  "original_protocol_success_claim_allowed": false,
+  "pristine_untouched_validation_claim_allowed": false,
+  "bound_files": {
+    "docs/MEETINGS-C2-INPUT-BUDGET-FOLLOWUP.md": "3b01a509895dcce9593a28de7dcee6abd5df8adf408379926b3dc95b6c624b42",
+    "data/evaluation/meetings-c2-comparison-source-freeze-v2.json": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+    "data/evaluation/meetings-c2-source-processing-freeze-v2.json": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+    "data/evaluation/meetings-c2-calibration-v1/item-freeze-v1.json": "167f44a1c47f4d78e465ed6aae20eec1d0914f4788eeb4551b5b0b8d911d060a",
+    "data/evaluation/meetings-c2-validation-v1/item-freeze-v2.json": "192f15a2ac9b22ace58e86b30446d1758d5f1dab78cf106c8969cb1a7944483a",
+    "data/evaluation/meetings-c2-calibration-v1/draft.json": "88f4ac217db4481ae58e98df24497d6621a24a6c6e806ff314b9814dd87cdab4",
+    "data/evaluation/meetings-c2-calibration-v1/oracle-draft.json": "4d8762a5e1c494f921de8042415e03b1c46db46bcffb1066384600a5e1983ecf",
+    "data/evaluation/meetings-c2-validation-v1/draft-v2.json": "b328037fe138b2d3472eff268f51df5251d7d7ecba190278a42e538a37bd7a5e",
+    "data/evaluation/meetings-c2-validation-v1/oracle-draft-v2.json": "4ace235ba3b639e6252f1848d60ed0e165eb69bbf4d29e2304c914cf83f75916",
+    "experiments/results/meetings-c2-validation-input-failure-original-v1.json": "3eba8bbc83d73d310a8561274bfc87a792ab85cb91a342233152382f0576f83c",
+    "experiments/results/meetings-c2-validation-input-failure-provenance-v1.json": "7cd61594f8da87b535785a0ba68c7add0b44ee74bb38d1f64f04bd09a0e9c2d9"
+  },
+  "service_adoption": false,
+  "human_reviews": 0,
+  "paid_calls": 0,
+  "new_generation_calls": 0
+}

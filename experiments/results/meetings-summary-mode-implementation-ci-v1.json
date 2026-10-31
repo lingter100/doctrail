@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "status": "exact_implementation_ci_passed",
+  "commit": "ac86dd43e4e80a10892fec29c72ec26066ac604b",
+  "observed_at": "2026-10-23T06:13:25.638845+00:00",
+  "user_author_and_committer_login": "lingter100",
+  "pr": {
+    "number": 14,
+    "state": "OPEN",
+    "isDraft": true,
+    "url": "https://github.com/lingter100/doctrail/pull/14"
+  },
+  "runs": [
+    {
+      "id": 39908668533,
+      "event": "push",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39908668533",
+      "head_sha": "ac86dd43e4e80a10892fec29c72ec26066ac604b",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 39908672220,
+      "event": "pull_request",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39908672220",
+      "head_sha": "ac86dd43e4e80a10892fec29c72ec26066ac604b",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "implementation_result": {
+    "path": "experiments/results/meetings-summary-mode-implementation-v1.json",
+    "bytes": 5030,
+    "sha256": "c131e0794af24c5a21b0e8ad7e04352bb484f838d0b366c2361723c79669a3e9"
+  },
+  "source_files": [
+    {
+      "path": "scripts/probe_meeting_summary_mode.py",
+      "bytes": 55769,
+      "sha256": "986130db21ea2786e865d7ad0a309cbb319e71e1fdd2b9c2a18c93364e4ef56b"
+    },
+    {
+      "path": "tests/test_probe_meeting_summary_mode.py",
+      "bytes": 64760,
+      "sha256": "1456d332fa5819f14408d30145add35f36afd26dfeeb7b04dc30c8df4fba3914"
+    }
+  ],
+  "local_verification": {
+    "path": ".local/meeting-summary-mode-parent-v1/implementation-ci-final-v1.json",
+    "bytes": 34904,
+    "sha256": "6c7ee832b2efe572584681b2a89da1f982f3939423a110590e88569212256cd0"
+  },
+  "scope": "Required CI checks and synthetic regressions for exact code; no new actual model run, source admission, semantic quality acceptance, human review or deployment."
+}

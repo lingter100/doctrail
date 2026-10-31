@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment": "meeting-qa-retrieval-development-v1",
+  "source_commit": "e3b0eb32045361c56c22c24b30204850c633f436",
+  "status": "failed_during_startup",
+  "scope": "Actual local Java/CPU retrieval startup on a non-idle host; no completed retrieval comparison.",
+  "failure": {
+    "code": "unexpected_child_executable",
+    "executable": "cmd.exe",
+    "parent": "retrieval worker base Python",
+    "command_arguments_observed": false,
+    "natural_cli_exit": null,
+    "forced_cleanup_exit": 15,
+    "tool_exit": 1,
+    "outer_seconds": 2.827999999979511
+  },
+  "results": {
+    "report_written": false,
+    "rankings_recorded": 0,
+    "actual_search_count": null,
+    "model_loading_completed": null,
+    "generation_policy_max_requests": 0
+  },
+  "cleanup": {
+    "known_owned_and_launcher_absent": 10,
+    "errors": [
+      "BoundaryError"
+    ],
+    "unrelated_application_terminated": false
+  },
+  "provenance": {
+    "final_receipt_sha256": "f5696c29596bf3f97832f73292862ba241d0ca0cdc41d0fa202cdf2d8ffc4cf5",
+    "launcher_sha256": "d43ffc873d621ab22bb1bf04e8b48bc55313d7e3a26a97c1bac8177286cc56bf",
+    "fixed_references_unchanged": 67
+  },
+  "preflight": {
+    "initial_attempt": "blocked before helper dispatch by unrelated Java; original record preserved",
+    "continuation": "Exact independently reviewed process exception; original resource and request limits unchanged"
+  },
+  "limitations": [
+    "No helper report exists; unknown actual load/search counts are not reported as measured zero.",
+    "No search-quality, model-quality, model-speed or isolated-latency conclusion.",
+    "Original failed output and observer are preserved; no retry of this run."
+  ],
+  "next_action": "Identify the worker startup shell dependency from source or a narrowly scoped import diagnostic before changing execution behavior."
+}

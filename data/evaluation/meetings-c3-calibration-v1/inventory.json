@@ -1,0 +1,420 @@
+{
+  "schema_version": 1,
+  "source_processing_version": 2,
+  "phase": "calibration",
+  "mode": "adopted-all",
+  "manifest_sha256": "b5535abe6c1ae844dbeacf29970e26baf717284c8aa00b24575afdc5ee61a147",
+  "documents": [
+    {
+      "source_id": "C3-F01-S01",
+      "document_id": "c3-cal-fastapi-background-tasks",
+      "revision": 1,
+      "registration_ordinal": 0,
+      "family_id": "C3-F01",
+      "title": "FastAPI — Background Tasks",
+      "meeting_date": null,
+      "raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/public/fastapi/docs/en/docs/tutorial/background-tasks.md",
+      "raw_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+      "raw_size_bytes": 4786,
+      "git_blob_sha1": "18c9bb6fe5db9f51769bb771f48b9fee4f4aab13",
+      "processed_sha256": "7a34e7a4a7bd2cb9e0b465588b77cf007b0a5c8bdcf7530ff3619ff6b3642468",
+      "processed_codepoints": 4786,
+      "content": "# Background Tasks { #background-tasks }\n\nYou can define background tasks to be run *after* returning a response.\n\nThis is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n\nThis includes, for example:\n\n* Email notifications sent after performing an action:\n    * As connecting to an email server and sending an email tends to be \"slow\" (several seconds), you can return the response right away and send the email notification in the background.\n* Processing data:\n    * For example, let's say you receive a file that must go through a slow process, you can return a response of \"Accepted\" (HTTP 202) and process the file in the background.\n\n## Using `BackgroundTasks` { #using-backgroundtasks }\n\nFirst, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[1,13] *}\n\n**FastAPI** will create the object of type `BackgroundTasks` for you and pass it as that parameter.\n\n## Create a task function { #create-a-task-function }\n\nCreate a function to be run as the background task.\n\nIt is just a standard function that can receive parameters.\n\nIt can be an `async def` or normal `def` function, **FastAPI** will know how to handle it correctly.\n\nIn this case, the task function will write to a file (simulating sending an email).\n\nAnd as the write operation doesn't use `async` and `await`, we define the function with normal `def`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[6:9] *}\n\n## Add the background task { #add-the-background-task }\n\nInside of your *path operation function*, pass your task function to the *background tasks* object with the method `.add_task()`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[14] *}\n\n`.add_task()` receives as arguments:\n\n* A task function to be run in the background (`write_notification`).\n* Any sequence of arguments that should be passed to the task function in order (`email`).\n* Any keyword arguments that should be passed to the task function (`message=\"some notification\"`).\n\n## Dependency Injection { #dependency-injection }\n\nUsing `BackgroundTasks` also works with the dependency injection system, you can declare a parameter of type `BackgroundTasks` at multiple levels: in a *path operation function*, in a dependency (dependable), in a sub-dependency, etc.\n\n**FastAPI** knows what to do in each case and how to reuse the same object, so that all the background tasks are merged together and are run in the background afterwards:\n\n\n{* ../../docs_src/background_tasks/tutorial002_an_py310.py hl[13,15,22,25] *}\n\n\nIn this example, the messages will be written to the `log.txt` file *after* the response is sent.\n\nIf there was a query in the request, it will be written to the log in a background task.\n\nAnd then another background task generated at the *path operation function* will write a message using the `email` path parameter.\n\n## Technical Details { #technical-details }\n\nThe class `BackgroundTasks` comes directly from [`starlette.background`](https://starlette.dev/background/).\n\nIt is imported/included directly into FastAPI so that you can import it from `fastapi` and avoid accidentally importing the alternative `BackgroundTask` (without the `s` at the end) from `starlette.background`.\n\nBy only using `BackgroundTasks` (and not `BackgroundTask`), it's then possible to use it as a *path operation function* parameter and have **FastAPI** handle the rest for you, just like when using the `Request` object directly.\n\nIt's still possible to use `BackgroundTask` alone in FastAPI, but you have to create the object in your code and return a Starlette `Response` including it.\n\nYou can see more details in [Starlette's official docs for Background Tasks](https://starlette.dev/background/).\n\n## Caveat { #caveat }\n\nIf you need to perform heavy background computation and you don't necessarily need it to be run by the same process (for example, you don't need to share memory, variables, etc), you might benefit from using other bigger tools like [Celery](https://docs.celeryq.dev).\n\nThey tend to require more complex configurations, a message/job queue manager, like RabbitMQ or Redis, but they allow you to run background tasks in multiple processes, and especially, in multiple servers.\n\nBut if you need to access variables and objects from the same **FastAPI** app, or you need to perform small background tasks (like sending an email notification), you can simply just use `BackgroundTasks`.\n\n## Recap { #recap }\n\nImport and use `BackgroundTasks` with parameters in *path operation functions* and dependencies to add background tasks.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 4786,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0000",
+          "text": "# Background Tasks { #background-tasks }\n\nYou can define background tasks to be run *after* returning a response.\n\nThis is useful for operations that need to happen after a request, but that the client doesn't really have to be waiting for the operation to complete before receiving the response.\n\nThis includes, for example:\n\n* Email notifications sent after performing an action:\n    * As connecting to an email server and sending an email tends to be \"slow\" (several seconds), you can return the response right away and send the email notification in the background.\n* Processing data:\n    * For example, let's say you receive a file that must go through a slow process, you can return a response of \"Accepted\" (HTTP 202) and process the file in the background.\n\n## Using `BackgroundTasks` { #using-backgroundtasks }\n\nFirst, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n\n{* ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 960,
+          "ordinal": 0,
+          "text_sha256": "801c84e0161bc48bf58a668c27d8875043bcfc024029f24fc00219b7a24dd40f"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0001",
+          "text": "ndtasks }\n\nFirst, import `BackgroundTasks` and define a parameter in your *path operation function* with a type declaration of `BackgroundTasks`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[1,13] *}\n\n**FastAPI** will create the object of type `BackgroundTasks` for you and pass it as that parameter.\n\n## Create a task function { #create-a-task-function }\n\nCreate a function to be run as the background task.\n\nIt is just a standard function that can receive parameters.\n\nIt can be an `async def` or normal `def` function, **FastAPI** will know how to handle it correctly.\n\nIn this case, the task function will write to a file (simulating sending an email).\n\nAnd as the write operation doesn't use `async` and `await`, we define the function with normal `def`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[6:9] *}\n\n## Add the background task { #add-the-background-task }\n\nInside of your *path operation function*, pass your task function to the *background tasks* object ",
+          "page": null,
+          "start_offset": 810,
+          "end_offset": 1810,
+          "ordinal": 1,
+          "text_sha256": "30e036beac16d64c9ea509257f757333dfc844fc0a3738d0a0e0e48e7ea32231"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0002",
+          "text": " the background task { #add-the-background-task }\n\nInside of your *path operation function*, pass your task function to the *background tasks* object with the method `.add_task()`:\n\n{* ../../docs_src/background_tasks/tutorial001_py310.py hl[14] *}\n\n`.add_task()` receives as arguments:\n\n* A task function to be run in the background (`write_notification`).\n* Any sequence of arguments that should be passed to the task function in order (`email`).\n* Any keyword arguments that should be passed to the task function (`message=\"some notification\"`).\n\n## Dependency Injection { #dependency-injection }\n\nUsing `BackgroundTasks` also works with the dependency injection system, you can declare a parameter of type `BackgroundTasks` at multiple levels: in a *path operation function*, in a dependency (dependable), in a sub-dependency, etc.\n\n**FastAPI** knows what to do in each case and how to reuse the same object, so that all the background tasks are merged together and are run in the background ",
+          "page": null,
+          "start_offset": 1660,
+          "end_offset": 2655,
+          "ordinal": 2,
+          "text_sha256": "85d46e4ab1a1239d724fc7d3ce1b6485c57715effd0be7ead72e7f56f1f25750"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0003",
+          "text": "** knows what to do in each case and how to reuse the same object, so that all the background tasks are merged together and are run in the background afterwards:\n\n\n{* ../../docs_src/background_tasks/tutorial002_an_py310.py hl[13,15,22,25] *}\n\n\nIn this example, the messages will be written to the `log.txt` file *after* the response is sent.\n\nIf there was a query in the request, it will be written to the log in a background task.\n\nAnd then another background task generated at the *path operation function* will write a message using the `email` path parameter.\n\n## Technical Details { #technical-details }\n\nThe class `BackgroundTasks` comes directly from [`starlette.background`](https://starlette.dev/background/).\n\nIt is imported/included directly into FastAPI so that you can import it from `fastapi` and avoid accidentally importing the alternative `BackgroundTask` (without the `s` at the end) from `starlette.background`.\n\nBy only using `BackgroundTasks` (and not `BackgroundTask`), it's ",
+          "page": null,
+          "start_offset": 2505,
+          "end_offset": 3502,
+          "ordinal": 3,
+          "text_sha256": "6df677e4b99c84c82b1417207c3c3693a64353d81ab8cad1fbc776d79015bad8"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0004",
+          "text": "ernative `BackgroundTask` (without the `s` at the end) from `starlette.background`.\n\nBy only using `BackgroundTasks` (and not `BackgroundTask`), it's then possible to use it as a *path operation function* parameter and have **FastAPI** handle the rest for you, just like when using the `Request` object directly.\n\nIt's still possible to use `BackgroundTask` alone in FastAPI, but you have to create the object in your code and return a Starlette `Response` including it.\n\nYou can see more details in [Starlette's official docs for Background Tasks](https://starlette.dev/background/).\n\n## Caveat { #caveat }\n\nIf you need to perform heavy background computation and you don't necessarily need it to be run by the same process (for example, you don't need to share memory, variables, etc), you might benefit from using other bigger tools like [Celery](https://docs.celeryq.dev).\n\nThey tend to require more complex configurations, a message/job queue manager, like RabbitMQ or Redis, but they allow you ",
+          "page": null,
+          "start_offset": 3352,
+          "end_offset": 4352,
+          "ordinal": 4,
+          "text_sha256": "659a60941f3045f5c1acaf047806402a5a2600ce818caca3b3fe565c67380e86"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-background-tasks-r1-c0005",
+          "text": "https://docs.celeryq.dev).\n\nThey tend to require more complex configurations, a message/job queue manager, like RabbitMQ or Redis, but they allow you to run background tasks in multiple processes, and especially, in multiple servers.\n\nBut if you need to access variables and objects from the same **FastAPI** app, or you need to perform small background tasks (like sending an email notification), you can simply just use `BackgroundTasks`.\n\n## Recap { #recap }\n\nImport and use `BackgroundTasks` with parameters in *path operation functions* and dependencies to add background tasks.\n",
+          "page": null,
+          "start_offset": 4202,
+          "end_offset": 4786,
+          "ordinal": 5,
+          "text_sha256": "d03684c2b63127eea325053a9a352d218834632098383e5ad46f67c73f71d629"
+        }
+      ],
+      "provenance": {
+        "origin": "public",
+        "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "scope": "Complete registered Markdown sources, with unresolved includes retained literally.",
+          "semantic_basis": "Complementary request-background work and app-lifecycle guidance. The prose states scope, timing, resource sharing, alternatives and qualifications without requiring linked examples. A coherent comparison can require both independent documents.",
+          "limits": [
+            "Two purposively selected documentation pages, not real meeting records.",
+            "Linked code and external pages are outside the adopted corpus.",
+            "Adoption does not certify future questions, answers or model performance."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "repository": "fastapi/fastapi",
+        "immutable_commit": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+        "upstream_path": "docs/en/docs/tutorial/background-tasks.md",
+        "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/tutorial/background-tasks.md",
+        "license_id": "MIT",
+        "license": {
+          "path": "LICENSE",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+          "size": 1086,
+          "url": "https://api.github.com/repos/fastapi/fastapi/git/blobs/3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+          "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e",
+          "pinned_license_checked": true,
+          "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/LICENSE",
+          "preserved_file": "data/evaluation/meetings-c3-source-licenses/fastapi-LICENSE",
+          "dataset_preserved_file": "data/evaluation/meetings-c3-calibration-v1/licenses/FastAPI-LICENSE"
+        }
+      },
+      "source_path": "docs/en/docs/tutorial/background-tasks.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "C3-F01-S02",
+      "document_id": "c3-cal-fastapi-lifespan-events",
+      "revision": 1,
+      "registration_ordinal": 1,
+      "family_id": "C3-F01",
+      "title": "FastAPI — Lifespan Events",
+      "meeting_date": null,
+      "raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/public/fastapi/docs/en/docs/advanced/events.md",
+      "raw_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+      "raw_size_bytes": 7985,
+      "git_blob_sha1": "485340afe2067c8ca2a03d70e4830a240ea085f5",
+      "processed_sha256": "33de759da943ea437830d8c744d8c0a3887f40c54f738886314575805216afab",
+      "processed_codepoints": 7970,
+      "content": "# Lifespan Events { #lifespan-events }\n\nYou can define logic (code) that should be executed before the application **starts up**. This means that this code will be executed **once**, **before** the application **starts receiving requests**.\n\nThe same way, you can define logic (code) that should be executed when the application is **shutting down**. In this case, this code will be executed **once**, **after** having handled possibly **many requests**.\n\nBecause this code is executed before the application **starts** taking requests, and right after it **finishes** handling requests, it covers the whole application **lifespan** (the word \"lifespan\" will be important in a second 😉).\n\nThis can be very useful for setting up **resources** that you need to use for the whole app, and that are **shared** among requests, and/or that you need to **clean up** afterwards. For example, a database connection pool, or loading a shared machine learning model.\n\n## Use Case { #use-case }\n\nLet's start with an example **use case** and then see how to solve it with this.\n\nLet's imagine that you have some **machine learning models** that you want to use to handle requests. 🤖\n\nThe same models are shared among requests, so, it's not one model per request, or one per user or something similar.\n\nLet's imagine that loading the model can **take quite some time**, because it has to read a lot of **data from disk**. So you don't want to do it for every request.\n\nYou could load it at the top level of the module/file, but that would also mean that it would **load the model** even if you are just running a simple automated test, then that test would be **slow** because it would have to wait for the model to load before being able to run an independent part of the code.\n\nThat's what we'll solve, let's load the model before the requests are handled, but only right before the application starts receiving requests, not while  the code is being loaded.\n\n## Lifespan { #lifespan }\n\nYou can define this *startup* and *shutdown* logic using the `lifespan` parameter of the `FastAPI` app, and a \"context manager\" (I'll show you what that is in a second).\n\nLet's start with an example and then see it in detail.\n\nWe create an async function `lifespan()` with `yield` like this:\n\n{* ../../docs_src/events/tutorial003_py310.py hl[16,19] *}\n\nHere we are simulating the expensive *startup* operation of loading the model by putting the (fake) model function in the dictionary with machine learning models before the `yield`. This code will be executed **before** the application **starts taking requests**, during the *startup*.\n\nAnd then, right after the `yield`, we unload the model. This code will be executed **after** the application **finishes handling requests**, right before the *shutdown*. This could, for example, release resources like memory or a GPU.\n\n/// tip\n\nThe `shutdown` would happen when you are **stopping** the application.\n\nMaybe you need to start a new version, or you just got tired of running it. 🤷\n\n///\n\n### Lifespan function { #lifespan-function }\n\nThe first thing to notice, is that we are defining an async function with `yield`. This is very similar to Dependencies with `yield`.\n\n{* ../../docs_src/events/tutorial003_py310.py hl[14:19] *}\n\nThe first part of the function, before the `yield`, will be executed **before** the application starts.\n\nAnd the part after the `yield` will be executed **after** the application has finished.\n\n### Async Context Manager { #async-context-manager }\n\nIf you check, the function is decorated with an `@asynccontextmanager`.\n\nThat converts the function into something called an \"**async context manager**\".\n\n{* ../../docs_src/events/tutorial003_py310.py hl[1,13] *}\n\nA **context manager** in Python is something that you can use in a `with` statement, for example, `open()` can be used as a context manager:\n\n```Python\nwith open(\"file.txt\") as file:\n    file.read()\n```\n\nIn recent versions of Python, there's also an **async context manager**. You would use it with `async with`:\n\n```Python\nasync with lifespan(app):\n    await do_stuff()\n```\n\nWhen you create a context manager or an async context manager like above, what it does is that, before entering the `with` block, it will execute the code before the `yield`, and after exiting the `with` block, it will execute the code after the `yield`.\n\nIn our code example above, we don't use it directly, but we pass it to FastAPI for it to use it.\n\nThe `lifespan` parameter of the `FastAPI` app takes an **async context manager**, so we can pass our new `lifespan` async context manager to it.\n\n{* ../../docs_src/events/tutorial003_py310.py hl[22] *}\n\n## Alternative Events (deprecated) { #alternative-events-deprecated }\n\n/// warning\n\nThe recommended way to handle the *startup* and *shutdown* is using the `lifespan` parameter of the `FastAPI` app as described above. If you provide a `lifespan` parameter, `startup` and `shutdown` event handlers will no longer be called. It's all `lifespan` or all events, not both.\n\nYou can probably skip this part.\n\n///\n\nThere's an alternative way to define this logic to be executed during *startup* and during *shutdown*.\n\nYou can define event handlers (functions) that need to be executed before the application starts up, or when the application is shutting down.\n\nThese functions can be declared with `async def` or normal `def`.\n\n### `startup` event { #startup-event }\n\nTo add a function that should be run before the application starts, declare it with the event `\"startup\"`:\n\n{* ../../docs_src/events/tutorial001_py310.py hl[8] *}\n\nIn this case, the `startup` event handler function will initialize the items \"database\" (just a `dict`) with some values.\n\nYou can add more than one event handler function.\n\nAnd your application won't start receiving requests until all the `startup` event handlers have completed.\n\n### `shutdown` event { #shutdown-event }\n\nTo add a function that should be run when the application is shutting down, declare it with the event `\"shutdown\"`:\n\n{* ../../docs_src/events/tutorial002_py310.py hl[6] *}\n\nHere, the `shutdown` event handler function will write a text line `\"Application shutdown\"` to a file `log.txt`.\n\n/// note\n\nIn the `open()` function, the `mode=\"a\"` means \"append\", so, the line will be added after whatever is on that file, without overwriting the previous contents.\n\n///\n\n/// tip\n\nNotice that in this case we are using a standard Python `open()` function that interacts with a file.\n\nSo, it involves I/O (input/output), that requires \"waiting\" for things to be written to disk.\n\nBut `open()` doesn't use `async` and `await`.\n\nSo, we declare the event handler function with standard `def` instead of `async def`.\n\n///\n\n### `startup` and `shutdown` together { #startup-and-shutdown-together }\n\nThere's a high chance that the logic for your *startup* and *shutdown* is connected, you might want to start something and then finish it, acquire a resource and then release it, etc.\n\nDoing that in separate functions that don't share logic or variables together is more difficult as you would need to store values in global variables or similar tricks.\n\nBecause of that, it's now recommended to instead use the `lifespan` as explained above.\n\n## Technical Details { #technical-details }\n\nJust a technical detail for the curious nerds. 🤓\n\nUnderneath, in the ASGI technical specification, this is part of the [Lifespan Protocol](https://asgi.readthedocs.io/en/latest/specs/lifespan.html), and it defines events called `startup` and `shutdown`.\n\n/// note\n\nYou can read more about the Starlette `lifespan` handlers in [Starlette's  Lifespan' docs](https://starlette.dev/lifespan/).\n\nIncluding how to handle lifespan state that can be used in other areas of your code.\n\n///\n\n## Sub Applications { #sub-applications }\n\n🚨 Keep in mind that these lifespan events (startup and shutdown) will only be executed for the main application, not for [Sub Applications - Mounts](sub-applications.md).\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 7970,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0000",
+          "text": "# Lifespan Events { #lifespan-events }\n\nYou can define logic (code) that should be executed before the application **starts up**. This means that this code will be executed **once**, **before** the application **starts receiving requests**.\n\nThe same way, you can define logic (code) that should be executed when the application is **shutting down**. In this case, this code will be executed **once**, **after** having handled possibly **many requests**.\n\nBecause this code is executed before the application **starts** taking requests, and right after it **finishes** handling requests, it covers the whole application **lifespan** (the word \"lifespan\" will be important in a second 😉).\n\nThis can be very useful for setting up **resources** that you need to use for the whole app, and that are **shared** among requests, and/or that you need to **clean up** afterwards. For example, a database connection pool, or loading a shared machine learning model.\n\n## Use Case { #use-case }\n\nLet's start ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 996,
+          "ordinal": 0,
+          "text_sha256": "7d4fe6a779ac88f8833e5782298642e60b1fd4926f6d3a81f32c1050202926df"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0001",
+          "text": "**clean up** afterwards. For example, a database connection pool, or loading a shared machine learning model.\n\n## Use Case { #use-case }\n\nLet's start with an example **use case** and then see how to solve it with this.\n\nLet's imagine that you have some **machine learning models** that you want to use to handle requests. 🤖\n\nThe same models are shared among requests, so, it's not one model per request, or one per user or something similar.\n\nLet's imagine that loading the model can **take quite some time**, because it has to read a lot of **data from disk**. So you don't want to do it for every request.\n\nYou could load it at the top level of the module/file, but that would also mean that it would **load the model** even if you are just running a simple automated test, then that test would be **slow** because it would have to wait for the model to load before being able to run an independent part of the code.\n\nThat's what we'll solve, let's load the model before the requests are handled, ",
+          "page": null,
+          "start_offset": 846,
+          "end_offset": 1845,
+          "ordinal": 1,
+          "text_sha256": "2076a1dfb2d433b4aed64b53bb446e667647afac6fb8f18a519d34bbc9490ae9"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0002",
+          "text": "del to load before being able to run an independent part of the code.\n\nThat's what we'll solve, let's load the model before the requests are handled, but only right before the application starts receiving requests, not while  the code is being loaded.\n\n## Lifespan { #lifespan }\n\nYou can define this *startup* and *shutdown* logic using the `lifespan` parameter of the `FastAPI` app, and a \"context manager\" (I'll show you what that is in a second).\n\nLet's start with an example and then see it in detail.\n\nWe create an async function `lifespan()` with `yield` like this:\n\n{* ../../docs_src/events/tutorial003_py310.py hl[16,19] *}\n\nHere we are simulating the expensive *startup* operation of loading the model by putting the (fake) model function in the dictionary with machine learning models before the `yield`. This code will be executed **before** the application **starts taking requests**, during the *startup*.\n\nAnd then, right after the `yield`, we unload the model. This code will be ",
+          "page": null,
+          "start_offset": 1695,
+          "end_offset": 2689,
+          "ordinal": 2,
+          "text_sha256": "8e5228eef75e4992a4a310ebe8b6115041666b3d21ca63b65eb7a349b13024a0"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0003",
+          "text": "before** the application **starts taking requests**, during the *startup*.\n\nAnd then, right after the `yield`, we unload the model. This code will be executed **after** the application **finishes handling requests**, right before the *shutdown*. This could, for example, release resources like memory or a GPU.\n\n/// tip\n\nThe `shutdown` would happen when you are **stopping** the application.\n\nMaybe you need to start a new version, or you just got tired of running it. 🤷\n\n///\n\n### Lifespan function { #lifespan-function }\n\nThe first thing to notice, is that we are defining an async function with `yield`. This is very similar to Dependencies with `yield`.\n\n{* ../../docs_src/events/tutorial003_py310.py hl[14:19] *}\n\nThe first part of the function, before the `yield`, will be executed **before** the application starts.\n\nAnd the part after the `yield` will be executed **after** the application has finished.\n\n### Async Context Manager { #async-context-manager }\n\nIf you check, the function is ",
+          "page": null,
+          "start_offset": 2539,
+          "end_offset": 3535,
+          "ordinal": 3,
+          "text_sha256": "9bccba343f7c3d871cde19ab4bdef75accb3fec750b1763488509e662eb65b8b"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0004",
+          "text": "`yield` will be executed **after** the application has finished.\n\n### Async Context Manager { #async-context-manager }\n\nIf you check, the function is decorated with an `@asynccontextmanager`.\n\nThat converts the function into something called an \"**async context manager**\".\n\n{* ../../docs_src/events/tutorial003_py310.py hl[1,13] *}\n\nA **context manager** in Python is something that you can use in a `with` statement, for example, `open()` can be used as a context manager:\n\n```Python\nwith open(\"file.txt\") as file:\n    file.read()\n```\n\nIn recent versions of Python, there's also an **async context manager**. You would use it with `async with`:\n\n```Python\nasync with lifespan(app):\n    await do_stuff()\n```\n\nWhen you create a context manager or an async context manager like above, what it does is that, before entering the `with` block, it will execute the code before the `yield`, and after exiting the `with` block, it will execute the code after the `yield`.\n\nIn our code example above, we ",
+          "page": null,
+          "start_offset": 3385,
+          "end_offset": 4381,
+          "ordinal": 4,
+          "text_sha256": "9a02e2cd10e75f9fabe913c4b5b9137ecf129e54d8a37945f9b93efeba350454"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0005",
+          "text": "l execute the code before the `yield`, and after exiting the `with` block, it will execute the code after the `yield`.\n\nIn our code example above, we don't use it directly, but we pass it to FastAPI for it to use it.\n\nThe `lifespan` parameter of the `FastAPI` app takes an **async context manager**, so we can pass our new `lifespan` async context manager to it.\n\n{* ../../docs_src/events/tutorial003_py310.py hl[22] *}\n\n## Alternative Events (deprecated) { #alternative-events-deprecated }\n\n/// warning\n\nThe recommended way to handle the *startup* and *shutdown* is using the `lifespan` parameter of the `FastAPI` app as described above. If you provide a `lifespan` parameter, `startup` and `shutdown` event handlers will no longer be called. It's all `lifespan` or all events, not both.\n\nYou can probably skip this part.\n\n///\n\nThere's an alternative way to define this logic to be executed during *startup* and during *shutdown*.\n\nYou can define event handlers (functions) that need to be executed ",
+          "page": null,
+          "start_offset": 4231,
+          "end_offset": 5231,
+          "ordinal": 5,
+          "text_sha256": "505b1e624565aec75a95cb60faf3f5f04aa52bdc4fd24a7d63d0e853fbe16981"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0006",
+          "text": "e way to define this logic to be executed during *startup* and during *shutdown*.\n\nYou can define event handlers (functions) that need to be executed before the application starts up, or when the application is shutting down.\n\nThese functions can be declared with `async def` or normal `def`.\n\n### `startup` event { #startup-event }\n\nTo add a function that should be run before the application starts, declare it with the event `\"startup\"`:\n\n{* ../../docs_src/events/tutorial001_py310.py hl[8] *}\n\nIn this case, the `startup` event handler function will initialize the items \"database\" (just a `dict`) with some values.\n\nYou can add more than one event handler function.\n\nAnd your application won't start receiving requests until all the `startup` event handlers have completed.\n\n### `shutdown` event { #shutdown-event }\n\nTo add a function that should be run when the application is shutting down, declare it with the event `\"shutdown\"`:\n\n{* ../../docs_src/events/tutorial002_py310.py hl[6] *}\n\n",
+          "page": null,
+          "start_offset": 5081,
+          "end_offset": 6076,
+          "ordinal": 6,
+          "text_sha256": "0e2fd32d2df3f476cbb5ce9f31cb61963068b098852bf6f74594761549125177"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0007",
+          "text": "should be run when the application is shutting down, declare it with the event `\"shutdown\"`:\n\n{* ../../docs_src/events/tutorial002_py310.py hl[6] *}\n\nHere, the `shutdown` event handler function will write a text line `\"Application shutdown\"` to a file `log.txt`.\n\n/// note\n\nIn the `open()` function, the `mode=\"a\"` means \"append\", so, the line will be added after whatever is on that file, without overwriting the previous contents.\n\n///\n\n/// tip\n\nNotice that in this case we are using a standard Python `open()` function that interacts with a file.\n\nSo, it involves I/O (input/output), that requires \"waiting\" for things to be written to disk.\n\nBut `open()` doesn't use `async` and `await`.\n\nSo, we declare the event handler function with standard `def` instead of `async def`.\n\n///\n\n### `startup` and `shutdown` together { #startup-and-shutdown-together }\n\nThere's a high chance that the logic for your *startup* and *shutdown* is connected, you might want to start something and then finish it, ",
+          "page": null,
+          "start_offset": 5926,
+          "end_offset": 6924,
+          "ordinal": 7,
+          "text_sha256": "8543e0bf13daf3bd17e38245d9d18ec1ebc75fbc0323aba13e36ca4b686082c2"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0008",
+          "text": "ogether }\n\nThere's a high chance that the logic for your *startup* and *shutdown* is connected, you might want to start something and then finish it, acquire a resource and then release it, etc.\n\nDoing that in separate functions that don't share logic or variables together is more difficult as you would need to store values in global variables or similar tricks.\n\nBecause of that, it's now recommended to instead use the `lifespan` as explained above.\n\n## Technical Details { #technical-details }\n\nJust a technical detail for the curious nerds. 🤓\n\nUnderneath, in the ASGI technical specification, this is part of the [Lifespan Protocol](https://asgi.readthedocs.io/en/latest/specs/lifespan.html), and it defines events called `startup` and `shutdown`.\n\n/// note\n\nYou can read more about the Starlette `lifespan` handlers in [Starlette's  Lifespan' docs](https://starlette.dev/lifespan/).\n\nIncluding how to handle lifespan state that can be used in other areas of your code.\n\n///\n\n## Sub ",
+          "page": null,
+          "start_offset": 6774,
+          "end_offset": 7763,
+          "ordinal": 8,
+          "text_sha256": "1af224ab5f6fb1d81a7633a146e033199480a0981427590335f2d2db77510059"
+        },
+        {
+          "chunk_id": "c3-cal-fastapi-lifespan-events-r1-c0009",
+          "text": " Lifespan' docs](https://starlette.dev/lifespan/).\n\nIncluding how to handle lifespan state that can be used in other areas of your code.\n\n///\n\n## Sub Applications { #sub-applications }\n\n🚨 Keep in mind that these lifespan events (startup and shutdown) will only be executed for the main application, not for [Sub Applications - Mounts](sub-applications.md).\n",
+          "page": null,
+          "start_offset": 7613,
+          "end_offset": 7970,
+          "ordinal": 9,
+          "text_sha256": "86541dacebfe48399a1c2ba41f06b4c3e37c13cc106e0280bce6efb6faff18ce"
+        }
+      ],
+      "provenance": {
+        "origin": "public",
+        "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "scope": "Complete registered Markdown sources, with unresolved includes retained literally.",
+          "semantic_basis": "Complementary request-background work and app-lifecycle guidance. The prose states scope, timing, resource sharing, alternatives and qualifications without requiring linked examples. A coherent comparison can require both independent documents.",
+          "limits": [
+            "Two purposively selected documentation pages, not real meeting records.",
+            "Linked code and external pages are outside the adopted corpus.",
+            "Adoption does not certify future questions, answers or model performance."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "repository": "fastapi/fastapi",
+        "immutable_commit": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+        "upstream_path": "docs/en/docs/advanced/events.md",
+        "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/docs/en/docs/advanced/events.md",
+        "license_id": "MIT",
+        "license": {
+          "path": "LICENSE",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+          "size": 1086,
+          "url": "https://api.github.com/repos/fastapi/fastapi/git/blobs/3e92463e6bd522a2a21e5f0a80d8089d6c4be20d",
+          "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e",
+          "pinned_license_checked": true,
+          "immutable_url": "https://github.com/fastapi/fastapi/blob/f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007/LICENSE",
+          "preserved_file": "data/evaluation/meetings-c3-source-licenses/fastapi-LICENSE",
+          "dataset_preserved_file": "data/evaluation/meetings-c3-calibration-v1/licenses/FastAPI-LICENSE"
+        }
+      },
+      "source_path": "docs/en/docs/advanced/events.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "C3-F02-S01",
+      "document_id": "c3-cal-library-relocation-meeting",
+      "revision": 1,
+      "registration_ordinal": 2,
+      "family_id": "C3-F02",
+      "title": "솔그늘도서관 이동서가 재배치 회의 기록",
+      "meeting_date": "2026-04-07",
+      "raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/synthetic/library-relocation-meeting.md",
+      "raw_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+      "raw_size_bytes": 3279,
+      "git_blob_sha1": null,
+      "processed_sha256": "2eb52a264484587ad92e453b34af9907d908facc5abab5ede54a5dbfb7facdc7",
+      "processed_codepoints": 1414,
+      "content": "# 솔그늘도서관 이동서가 재배치 회의 기록\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n회의일: 2026-04-07\n참석: 관장 차소연, 자료 담당 사서 문다은, 시설 담당 류정호, 이용자 안내 담당 배윤슬\n기록: 문다은\n\n## 재배치 배경과 검토한 안\n\n성인자료실 입구의 반납 도서 대기 카트가 수필 서가 앞에 머무르면서, 책을 고르는 이용자와 반납 정리 담당자의 동선이 겹친다는 의견이 접수되었다. 이번 회의는 서가 수를 늘리거나 장서를 폐기하는 회의가 아니라 기존 가구의 위치를 시험적으로 조정하는 자리였다.\n\n문다은은 수필용 이동서가 두 대를 창가 열람석 쪽으로 옮기고 반납 카트는 직원 작업대 옆에 두자는 안을 설명했다. 배윤슬은 창가 좌석에서 책장이 시야를 가릴 수 있다는 의견을 냈다. 류정호는 북쪽 벽에 두 대를 붙이는 대안을 제시했지만, 그 위치에서는 벽면 점검함을 열기 어려워 채택하지 않았다.\n\n## 확정한 범위와 운영 방식\n\n차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n\n서가를 옮기기 전에는 책을 순서대로 임시 카트에 옮기고 각 칸의 청구기호 범위를 남긴다. 장서의 등록번호와 대출 상태는 바꾸지 않는다. 배치가 끝나면 류정호가 통로와 점검함 접근 상태를 확인하고 문다은이 책의 배열과 위치 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n\n| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 서가 배치표 준비 | 새 서가 위치와 책 배열 대조 결과 |\n| 류정호 | 이동 경로 정리와 가구 상태 확인 | 통로·점검함 접근 확인 결과 |\n| 배윤슬 | 휴관 작업 안내와 임시 대출 안내문 준비 | 개관 후 이용자 의견 기록 |\n\n배윤슬이 제안한 창가 독서모임 좌석 증설은 이번 작업과 함께 진행하지 않는다. 시범 운영 의견을 모은 뒤 별도 안건으로 다룬다. 안내 데스크는 책 위치를 찾기 어려웠다는 의견과 좌석 시야에 대한 의견을 구분해 기록하기로 했다.\n\n## 다음 확인\n\n작업 당일 발견한 문제가 있으면 원래 계획과 실제 조치를 함께 인계장에 적는다. 담당자가 현장에서 가구 위치를 조금 조정한 경우에도 이유와 확인 결과를 남긴다. 문다은은 4월 24일 기록을 취합하고, 차소연은 그 기록을 검토할 다음 회의 일정을 별도로 정한다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1414,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0000",
+          "text": "# 솔그늘도서관 이동서가 재배치 회의 기록\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n회의일: 2026-04-07\n참석: 관장 차소연, 자료 담당 사서 문다은, 시설 담당 류정호, 이용자 안내 담당 배윤슬\n기록: 문다은\n\n## 재배치 배경과 검토한 안\n\n성인자료실 입구의 반납 도서 대기 카트가 수필 서가 앞에 머무르면서, 책을 고르는 이용자와 반납 정리 담당자의 동선이 겹친다는 의견이 접수되었다. 이번 회의는 서가 수를 늘리거나 장서를 폐기하는 회의가 아니라 기존 가구의 위치를 시험적으로 조정하는 자리였다.\n\n문다은은 수필용 이동서가 두 대를 창가 열람석 쪽으로 옮기고 반납 카트는 직원 작업대 옆에 두자는 안을 설명했다. 배윤슬은 창가 좌석에서 책장이 시야를 가릴 수 있다는 의견을 냈다. 류정호는 북쪽 벽에 두 대를 붙이는 대안을 제시했지만, 그 위치에서는 벽면 점검함을 열기 어려워 채택하지 않았다.\n\n## 확정한 범위와 운영 방식\n\n차소연은 이동서가 두 대를 창가 열람석과 평행하게 배치하는 시범 운영을 승인했다. 어린이자료실의 고정 서가와 정기간행물 진열대는 이번 이동 대상에 포함하지 않는다. 4월 13일 정기 휴관일에 작업하고, 다음 개관일부터 4월 24일까지 이용 상황을 기록한 뒤 유지 여부를 다시 논의한다. 이번 승인은 영구 배치 확정이 아니다.\n\n서가를 옮기기 전에는 책을 순서대로 임시 카트에 옮기고 각 칸의 청구기호 범위를 남긴다. 장서의 등록번호와 대출 상태는 바꾸지 않는다. 배치가 끝나면 류정호가 통로와 점검함 접근 상태를 확인하고 문다은이 책의 배열과 위치 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n\n| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998,
+          "ordinal": 0,
+          "text_sha256": "510b531edf6e57c29e26cef476d4659b53661cde9878be51eba4ceda18c543cc"
+        },
+        {
+          "chunk_id": "c3-cal-library-relocation-meeting-r1-c0001",
+          "text": " 안내를 대조한다. 두 확인이 모두 끝난 구역부터 이용을 재개한다. 확인이 남은 구역의 책은 안내 데스크를 통한 직원 대출로 제공한다.\n\n| 담당 | 준비할 일 | 인계할 기록 |\n| --- | --- | --- |\n| 문다은 | 임시 카트의 청구기호 표찰과 이동 전 서가 배치표 준비 | 새 서가 위치와 책 배열 대조 결과 |\n| 류정호 | 이동 경로 정리와 가구 상태 확인 | 통로·점검함 접근 확인 결과 |\n| 배윤슬 | 휴관 작업 안내와 임시 대출 안내문 준비 | 개관 후 이용자 의견 기록 |\n\n배윤슬이 제안한 창가 독서모임 좌석 증설은 이번 작업과 함께 진행하지 않는다. 시범 운영 의견을 모은 뒤 별도 안건으로 다룬다. 안내 데스크는 책 위치를 찾기 어려웠다는 의견과 좌석 시야에 대한 의견을 구분해 기록하기로 했다.\n\n## 다음 확인\n\n작업 당일 발견한 문제가 있으면 원래 계획과 실제 조치를 함께 인계장에 적는다. 담당자가 현장에서 가구 위치를 조금 조정한 경우에도 이유와 확인 결과를 남긴다. 문다은은 4월 24일 기록을 취합하고, 차소연은 그 기록을 검토할 다음 회의 일정을 별도로 정한다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1414,
+          "ordinal": 1,
+          "text_sha256": "372e452799afe96e767a97c445616e195302c9938c9d9f27f6cce6f0b98f081b"
+        }
+      ],
+      "provenance": {
+        "origin": "synthetic",
+        "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "scope": "New Korean fictional meeting and operational handover; two documents total.",
+          "semantic_basis": "The meeting records purpose, scope, decisions and delegated work. The later handover records actions, a local adjustment, checks and remaining trial status. Policy and subsequent execution are complementary rather than duplicate accounts.",
+          "limits": [
+            "AI-authored fictional records with shared-author bias.",
+            "No human/user review or observed library outcomes.",
+            "Source author is excluded from independent output scoring."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "synthetic_provenance": {
+          "ai_authored": true,
+          "fictional": true,
+          "author_role": "/root/c2_calibration_source",
+          "notice": "이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.",
+          "new_original_for_this_family": true,
+          "human_authorship_count": 0,
+          "human_review_count": 0,
+          "prior_pool_bodies_read_or_reused_in_this_task": false,
+          "purpose": "Two internally coherent fictional organizational records; not a service-output demonstration or an oracle.",
+          "document_date": "2026-04-07",
+          "meeting_date_rule": "Only the explicit meeting record has meeting_date; work/report/reference dates do not become meeting metadata."
+        }
+      },
+      "source_path": "sources/synthetic/library-relocation-meeting.md",
+      "ingestion_kind": "md"
+    },
+    {
+      "source_id": "C3-F02-S02",
+      "document_id": "c3-cal-library-relocation-handover",
+      "revision": 1,
+      "registration_ordinal": 3,
+      "family_id": "C3-F02",
+      "title": "솔그늘도서관 서가 이동 작업 및 개관 인계장",
+      "meeting_date": null,
+      "raw_snapshot": "data/evaluation/meetings-c3-calibration-v1/sources/synthetic/library-relocation-handover.md",
+      "raw_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+      "raw_size_bytes": 3159,
+      "git_blob_sha1": null,
+      "processed_sha256": "e81bd1c7f88c61aee8230e701328c7ff8a8a034bb1aa810638536a336c74eeac",
+      "processed_codepoints": 1392,
+      "content": "# 솔그늘도서관 서가 이동 작업 및 개관 인계장\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n\n## 휴관일 작업 기록\n\n문다은은 수필용 이동서가 두 대의 책을 청구기호 구간별로 나누어 임시 카트에 옮겼다. 이동 전 배치표와 각 카트의 표찰을 대조한 뒤 류정호에게 빈 서가를 인계했다. 장서 등록번호와 대출 상태는 이번 작업에서 수정하지 않았다.\n\n류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n\n책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n\n## 4월 14일 개관 인계\n\n| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 다시 대조 |\n| 반납 도서 대기 카트 | 직원 작업대 옆으로 이동 완료 | 반납 정리 담당자가 작업 뒤 같은 자리에 복귀 |\n| 어린이자료실 고정 서가 | 이동하지 않음 | 기존 안내 유지 |\n\n문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n\n오전에는 수필 서가 위치를 묻는 문의가 있었고, 배윤슬은 위치 안내 기록에 남겼다. 창가 좌석 증설은 작업하지 않았다. 이동한 서가의 최종 유지 여부는 아직 결정되지 않았으며, 4월 24일까지 모을 의견과 작업 기록을 다음 논의에 넘긴다.\n",
+      "pages": [
+        {
+          "start_offset": 0,
+          "end_offset": 1392,
+          "page": null
+        }
+      ],
+      "chunks": [
+        {
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0000",
+          "text": "# 솔그늘도서관 서가 이동 작업 및 개관 인계장\n\n이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.\n\n문서 작성일: 2026-04-14\n작성: 자료 담당 사서 문다은\n대상 작업: 2026-04-13 성인자료실 이동서가 재배치\n참조: 2026-04-07 이동서가 재배치 회의 기록\n\n## 휴관일 작업 기록\n\n문다은은 수필용 이동서가 두 대의 책을 청구기호 구간별로 나누어 임시 카트에 옮겼다. 이동 전 배치표와 각 카트의 표찰을 대조한 뒤 류정호에게 빈 서가를 인계했다. 장서 등록번호와 대출 상태는 이번 작업에서 수정하지 않았다.\n\n류정호가 첫 번째 서가를 계획한 위치에 놓고 확인하던 중, 서가 끝이 창가 커튼을 잡아당길 때 손을 넣는 자리를 가리는 것을 발견했다. 두 대를 그대로 맞추어 놓지 않고 첫 번째 서가를 출입구 반대 방향으로 조금 옮긴 뒤 두 번째 서가의 줄을 맞췄다. 창가 열람석과 평행한 배치 방향은 유지했다. 류정호는 조정 이유를 작업 메모에 적었으며, 통로와 북쪽 벽 점검함에 접근할 수 있음을 확인했다. 북쪽 벽에 붙여 놓는 안을 다시 시행한 것은 아니다.\n\n책을 되돌린 뒤 문다은이 배열을 확인했다. 첫 번째 서가에서는 청구기호 순서와 위치 안내가 일치했다. 두 번째 서가의 끝 칸에는 이전 위치를 가리키는 안내 표찰이 남아 있었다. 책 배열에는 문제가 없었으나 안내가 일치하지 않아, 그 칸은 다음 개관 때 바로 개방하지 않도록 표시했다. 배윤슬은 안내 데스크에 해당 구간의 직원 대출 안내문을 놓았다.\n\n## 4월 14일 개관 인계\n\n| 구역 또는 항목 | 개관 시 상태 | 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 ",
+          "page": null,
+          "start_offset": 0,
+          "end_offset": 998,
+          "ordinal": 0,
+          "text_sha256": "b2e541c73f08a04d5789e1b6af57cab0ee035cd54d21fa438f5c96d322d79e7d"
+        },
+        {
+          "chunk_id": "c3-cal-library-relocation-handover-r1-c0001",
+          "text": " 담당자의 후속 처리 |\n| --- | --- | --- |\n| 첫 번째 이동서가 | 통로 확인과 배열·안내 대조 완료, 이용 가능 | 배윤슬이 위치 문의를 기록 |\n| 두 번째 이동서가의 끝 칸 | 기존 안내 표찰이 남아 직원 대출로 제공 | 문다은이 표찰 교체 후 다시 대조 |\n| 반납 도서 대기 카트 | 직원 작업대 옆으로 이동 완료 | 반납 정리 담당자가 작업 뒤 같은 자리에 복귀 |\n| 어린이자료실 고정 서가 | 이동하지 않음 | 기존 안내 유지 |\n\n문다은은 개관 후 두 번째 서가 끝 칸의 표찰을 새 위치에 맞게 교체하고 책 배열과 다시 대조했다. 배윤슬에게 확인 완료를 알린 뒤 그 칸의 직원 대출 안내문을 회수하고 이용을 재개했다. 이는 남아 있던 안내 작업의 완료이며 시범 운영 전체의 종료를 뜻하지 않는다.\n\n오전에는 수필 서가 위치를 묻는 문의가 있었고, 배윤슬은 위치 안내 기록에 남겼다. 창가 좌석 증설은 작업하지 않았다. 이동한 서가의 최종 유지 여부는 아직 결정되지 않았으며, 4월 24일까지 모을 의견과 작업 기록을 다음 논의에 넘긴다.\n",
+          "page": null,
+          "start_offset": 848,
+          "end_offset": 1392,
+          "ordinal": 1,
+          "text_sha256": "a7efba9f4d122e82a24910727e5249a9951ada4695499de4c5f67d2fb904934e"
+        }
+      ],
+      "provenance": {
+        "origin": "synthetic",
+        "adoption_verdict": "ADOPTED_FOR_CALIBRATION_SOURCE_WITH_REGISTERED_CONSTRAINTS",
+        "source_suitability": {
+          "verdict": "ADOPTED",
+          "scope": "New Korean fictional meeting and operational handover; two documents total.",
+          "semantic_basis": "The meeting records purpose, scope, decisions and delegated work. The later handover records actions, a local adjustment, checks and remaining trial status. Policy and subsequent execution are complementary rather than duplicate accounts.",
+          "limits": [
+            "AI-authored fictional records with shared-author bias.",
+            "No human/user review or observed library outcomes.",
+            "Source author is excluded from independent output scoring."
+          ]
+        },
+        "processing_notice": "Full source normalized and chunked with existing service functions; attribution is outside source text.",
+        "synthetic_provenance": {
+          "ai_authored": true,
+          "fictional": true,
+          "author_role": "/root/c2_calibration_source",
+          "notice": "이 문서는 DocTrail 평가 자료를 위해 AI가 새로 작성한 합성 원문입니다. 도서관, 인물, 날짜와 사건은 모두 허구이며 실제 기관의 운영 기록이 아닙니다.",
+          "new_original_for_this_family": true,
+          "human_authorship_count": 0,
+          "human_review_count": 0,
+          "prior_pool_bodies_read_or_reused_in_this_task": false,
+          "purpose": "Two internally coherent fictional organizational records; not a service-output demonstration or an oracle.",
+          "document_date": "2026-04-14",
+          "meeting_date_rule": "Only the explicit meeting record has meeting_date; work/report/reference dates do not become meeting metadata."
+        }
+      },
+      "source_path": "sources/synthetic/library-relocation-handover.md",
+      "ingestion_kind": "md"
+    }
+  ],
+  "excluded_sources": []
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_attempt_v1_and_runtime_preflight",
+  "recorded_at": "2026-10-20T07:17:20.278034+00:00",
+  "source_attempts": [
+    {
+      "split": "calibration",
+      "status": "bounded_incomplete_no_corpus",
+      "summary": {
+        "path": "data/evaluation/meetings-service-rag-calibration-v1/safe-summary-v1.json",
+        "bytes": 2840,
+        "sha256": "4fd53db82c43c703f971110556e29c626e0a1a717be56af6243f4dd25786d160"
+      },
+      "index": {
+        "path": "data/evaluation/meetings-service-rag-calibration-v1/artifact-index-v1.json",
+        "bytes": 6175,
+        "sha256": "a593a419cf09e5838b494a464a03e6b9f0c54e97295e7722618ebb7bf9bff907"
+      },
+      "verified_artifact_bindings": 24,
+      "parent_semantic_source_reads": 0,
+      "complete_public_families": 0,
+      "new_questions": 0,
+      "native_calls": 0
+    },
+    {
+      "split": "validation",
+      "status": "bounded_incomplete_no_adopted_corpus",
+      "summary": {
+        "path": "data/evaluation/meetings-service-rag-validation-v1/safe-summary-v1.json",
+        "bytes": 3171,
+        "sha256": "0804bccc4e3ca54a3f797ef93b1015fd1509739abedc00d6a6969d7c4ff55a78"
+      },
+      "index": {
+        "path": "data/evaluation/meetings-service-rag-validation-v1/artifact-index-v1.json",
+        "bytes": 5010,
+        "sha256": "d97b0be8bc75d6af3405c5690fa299f923c989e51898311e733c77d9eeac6321"
+      },
+      "verified_artifact_bindings": 19,
+      "parent_semantic_source_reads": 0,
+      "complete_public_families": 0,
+      "new_questions": 0,
+      "native_calls": 0
+    }
+  ],
+  "runtime_preflight": {
+    "receipt": {
+      "path": ".local/service-rag-runtime-preflight-v1/receipt.json",
+      "bytes": 49737,
+      "sha256": "6b1c13dd52350175ae4b88acfe9cd5d06c14190407bea4c25ad4b7e1bcd530ee"
+    },
+    "assets_present_size_matched": 70,
+    "small_assets_current_hash_matched": 62,
+    "large_assets_historical_hash_current_size_only": 8,
+    "jar_sha256": "8476ba7728f392e62aa53a3999de8d2f08982012dc2a345f503bedb59564976b",
+    "generic_source_bindings_verified": 13,
+    "findings": [
+      {
+        "id": "orchestration",
+        "severity": "minimal_assembly_required",
+        "evidence": [
+          "scripts/serve_meeting_service_rag.py:start_service",
+          "scripts/serve_models.py:start_services",
+          "scripts/serve_meetings_candidate.py:start_services"
+        ],
+        "detail": "new start_service + uvicorn.Server can compose with existing CPU retrieval/Java start_services; old candidate launcher selects old grammar worker and must not be used unchanged"
+      },
+      {
+        "id": "windows_cleanup",
+        "severity": "execution_blocker_until_assembled",
+        "evidence": [
+          "scripts/serve_models.py:stop_process",
+          "scripts/serve_meeting_service_rag.py:start_service",
+          "src/doctrail/meeting_service_rag.py:close"
+        ],
+        "detail": "Popen.terminate on Windows can bypass Python finally; do not apply generic stop_process to the RAG worker. Prefer in-process uvicorn.Server.should_exit plus awaited thread exit, then owned context exit; or separately verify CTRL_BREAK process-group path. Full worker and native/drain exit within5s still unverified."
+      },
+      {
+        "id": "browser_runner",
+        "severity": "must_use_live_path",
+        "evidence": [
+          "web/scripts/test-java.mjs"
+        ],
+        "detail": "generic e2e runner clears actual retrieval and substitutes generation fixture for selected specs; cannot count it as live native integration. Live browser/API driver must target the explicitly owned real service and registered requests only."
+      },
+      {
+        "id": "startup",
+        "severity": "unverified_acceptance",
+        "detail": "startup120 requires authenticated HTTP readiness, not just native_adapter_startup_seconds. prepare hashes GGUF in download verification and receipt construction; both generator.load calls hash GGUF again. Existing cached receipt cannot replace production hashing. No fullweight rehash performed during preflight."
+      },
+      {
+        "id": "retrieval_selection",
+        "severity": "explicit_selection_required",
+        "evidence": [
+          "web/src/components/KnowledgeView.tsx:46-50",
+          "server/src/main/java/io/doctrail/KnowledgeService.java:28"
+        ],
+        "detail": "Worker availability does not change default bm25; actual acceptance must explicitly select hybrid_rerank and base with answer limit5. CPU retrieval --device cpu is mandatory; CUDA_VISIBLE_DEVICES empty is optional extra isolation only in retrieval child, never in generation parent environment."
+      },
+      {
+        "id": "cache_scope",
+        "severity": "metadata_only",
+        "detail": "70 expected artifact files exist and match size;62 files up to32MiB freshly hashed and match;8 large artifacts use cached expected hashes with current sizes only. Cached records are adequate for this preflight, never a substitute for existing production identity checks."
+      }
+    ],
+    "nonexecution": {
+      "actual_model": 0,
+      "tokenizer": 0,
+      "native_server": 0,
+      "java_server": 0,
+      "retrieval_server": 0,
+      "browser_launch": 0,
+      "downloads": 0,
+      "network": 0,
+      "tests": 0,
+      "secret_values_read_or_output": 0,
+      "source_or_question_data_read": 0,
+      "source_edits": 0
+    },
+    "limitations": [
+      "large cached hash claims are historical receipts plus current existence/size, not current fullhash verification",
+      "driver/CUDA/free GPU RAM and actual model compatibility not checked",
+      "ports are templates and must be allocated at execution",
+      "fresh DB and fresh tokens intentionally not created",
+      "full HTTP/native/CPU retrieval/browser chain and lifecycle acceptance remain unexecuted",
+      "UTF-8 receipt is authoritative; first console rendering of Korean absolute paths was encoding-garbled, no data path change"
+    ]
+  },
+  "interpretation": [
+    "Source attempts did not establish an eligible complete public corpus; they are neither source semantic failures nor model quality runs.",
+    "The parent ended the validation source attempt while meeting-license scope and immutable external revision remained unresolved.",
+    "Runtime assets and code checks are not actual native compatibility or startup/cleanup acceptance.",
+    "Source-independent minimal service orchestration remains necessary; frozen model policies and prior failed experiments are unchanged."
+  ]
+}

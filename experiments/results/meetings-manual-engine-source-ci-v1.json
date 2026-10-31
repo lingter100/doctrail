@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "status": "FAILED",
+  "source_commit": "b16d5edfb3f66a24958350b2322d668130bf2e8e",
+  "runs": [
+    {
+      "id": 40465246850,
+      "event": "push",
+      "jobs": [
+        {
+          "id": 122058948485,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Verify synthetic meeting edits and backup restore against actual Java"
+          ]
+        },
+        {
+          "id": 122058948724,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 122058948751,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        }
+      ]
+    },
+    {
+      "id": 40465253756,
+      "event": "pull_request",
+      "jobs": [
+        {
+          "id": 122058971350,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 122058971558,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 122058971689,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Verify synthetic meeting edits and backup restore against actual Java"
+          ]
+        }
+      ]
+    }
+  ],
+  "watch_sessions": [
+    {
+      "session": 87699,
+      "exit": 1
+    },
+    {
+      "session": 57044,
+      "exit": 1
+    }
+  ],
+  "diagnosis": {
+    "stage": "binding-preflight",
+    "error": "helper_or_fixture_binding",
+    "expected_fixture_sha256": "33ca1bd10a193691b9f6c66684d231561e417ee1d8d1e27e78629b30f7a9cb44",
+    "published_fixture_sha256": "fe2de364c7923ebfaf473b4f3397d773c169a299a0c031e8666f73caf7ab3519",
+    "actual_java_lifecycles_in_failed_operations_step": 0,
+    "actual_model_calls": 0,
+    "restore_failure_proven": false
+  },
+  "next_action": "Preserve both failures; review default synthetic fixture compatibility, update only the stale pin, verify original checks and actual isolated Java operations, then publish a new commit with fresh required CI.",
+  "automatic_rerun": false,
+  "acquisition_started": false,
+  "preserved_evidence": [
+    {
+      "file": ".local/meeting-manual-engine-ci-failure-v1/122058948485-job.log",
+      "sha256": "79334a1222e6f5381cea90a53c687b3b63790179ba0273ce0e8353b429e59701",
+      "size_bytes": 39790
+    },
+    {
+      "file": ".local/meeting-manual-engine-ci-failure-v1/122058971689-job.log",
+      "sha256": "6c0d32ca5e34d82d34eccdf5115be692d5bc6e829781449480002f1e86aa4dda",
+      "size_bytes": 40477
+    },
+    {
+      "file": ".local/meeting-manual-engine-ci-failure-v1/12716173162.zip",
+      "sha256": "c96dcec33f3466f5504fb91f893866746ee510e2d11a06974cd307ccfd273760",
+      "size_bytes": 729
+    },
+    {
+      "file": ".local/meeting-manual-engine-ci-failure-v1/12716261976.zip",
+      "sha256": "38d8bc0ae4729c9d848dd3e30ac140055bf88df2e4fcf9c30c5525c2e5f5d806",
+      "size_bytes": 729
+    },
+    {
+      "file": ".local/meeting-manual-engine-ci-failure-v1/40465246850-report.json",
+      "sha256": "b6a0bb10ccb83e000900856a3d6106424d8ad9d922de7b0b796f6611b499e277",
+      "size_bytes": 1248
+    },
+    {
+      "file": ".local/meeting-manual-engine-ci-failure-v1/40465253756-report.json",
+      "sha256": "b84585f1c52f005eaa6b8ce3b0023621a311cf08650b419d6fcf339638812d87",
+      "size_bytes": 1248
+    },
+    {
+      "file": ".local/meeting-manual-engine-ci-failure-v1/job-log-receipt.json",
+      "sha256": "5816f215833e8df51356f1bbefa5fe2b769b5bc243430c15921dbecea800e048",
+      "size_bytes": 610
+    }
+  ]
+}

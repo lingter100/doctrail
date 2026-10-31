@@ -1,0 +1,27 @@
+# C5 validation NEWv2 source prereview — six accepted
+
+Reviewer `/root/c5_validation_prereviewer` independently reviewed source version2 authored by `/root/c5_validation_author`. This is AI source review, with human review0, before any questions/oracles/tokenizer/native work. Same-split source/item reviewer reuse remains disclosed; future item review is a separate gate. The reviewer neither authored nor repaired sources and remains excluded from final-answer judging.
+
+## Provenance and preservation
+
+Before NEWv2 semantic reads, actual code_contract/GitProof and role_contract passed at030bc1e3ed6fbf2977216d4eb76c64d4281ae793. Frozen toolchain76, author handoff12 and original committed v1 files17 were checked. All remain exact. The original rejected v1 fingerprint7ac383c0 is archived and committed; the active flat fingerprint nowefd95d65 is separately authorized for NEWv2 and has preserved lineage. The three public source raw files, metadata except new local-copy paths, pinned revision/blob identities and full MIT notice are unchanged. Earlier public-source complete review and immutable-license evidence therefore carry forward. No new source download or Java run was performed by this reviewer.
+
+Public3 remain accepted: the whole working-group general page and its two dated meetings are coherent, literal source records. Meeting suggestions stay tentative; status and general-page policy are snapshot statements at the pinned revision, not current facts or proof of policy on either meeting date. Hugo/front matter/links remain literal; external targets and additional meetings listed by links are not adopted documents. Original absent final newlines remain intact. Same rust-lang organization but different prior repository remains disclosed; historical semantic uniqueness is not claimed.
+
+## NEW synthetic3 complete-source coherence
+
+All three sources explicitly state AI authorship and fiction. The general rules precede the March2/March9 meetings, which form a consistent progression from allocation planning to closing actual use and planning a new week. The three named responsibilities remain stable, and general rules distinguish measured storage, confirmed inflow, forecast rainfall, reserve, requested amounts, assigned amounts and actual discharge.
+
+Arithmetic and chronology were checked from the complete documents. First-week available110 equals135 observed storage minus25 reserve; demand130 is reduced to allocations50+35+25=110, satisfying the recorded minimum35. Reported actual48+35+24=107 leaves3, retained rather than redistributed. The second measured stock152 already includes prior remainder and rain, so the separate confirmed18 inflow is added once before subtracting25 reserve, producing145. New requests65+35+40=140 leave5 unassigned. The confirmed inflow is scheduled before the first new watering date. No rainfall volume is invented to explain the later measured stock; the source reports the new measurement. The order change and dates agree with the rule and the explicitly recorded end of the prior date constraint. Future unreported quantities remain unspecified.
+
+The complete-source semantic freshness review accepted the replacement as a substantively different organization/problem/workflow, not a relabeling of the original rejected synthetic source. Detailed cross-split reasoning is confined to the reviewer's local cross-split-semantic-review-v2.md; the validation author need not read it. This acceptance does not supply questions, required facts or evidence selections.
+
+## Whole-document processing and independent freshness
+
+Frozen literal extraction replays all6 documents to inventory14 whole chunks with exact text, Unicode/codepoint offsets, ordinals and IDs. All source hashes, NFC/LF behavior and revision/date/author fields match. Frozen validate_processing_receipts passes both Python evidence and the original actual Java receipt. Observed author Java tests2 passed with failure/error/skip0; receipt913addea is an exact2490-byte copy retaining52CRLF. The reviewer did not rerun Java. The source author reports no remaining new JVM, supported by the preserved process receipt.
+
+The prescribed raw/normalized-document/blank-line paragraph>=200 fingerprints replay exactly. Available historical80 rows have normalized coverage12; known historical identity/paragraph matches0. Cross-split36 document pairs have exact/long-paragraph matches0; within-family shared long paragraphs0. All3 inherited historical coverage gaps are copied verbatim into freshness.json. Calibration source-only comparison was explicitly authorized, with its source snapshot hashes unchanged; no calibration items/oracles were read. No complete historical or universal near-duplicate absence is claimed.
+
+## Acceptance and next gate
+
+Accepted6, rejected0, author changes requested0. Original v1 source/rejection17 files remain unchanged; this is new-version acceptance only. The source-freeze binds exactly the frozen loader-required15-file closure: role files7, raw6 and prior/calibration metadata2. Notes, author adoption history and local evidence are separately hashed in the review metadata rather than added to the strict closure. Only source-stage primitives can be checked now; full load_material requires later independently reviewed item artifacts and a committed source freeze, and has not been run. Parent must commit the accepted source/freeze before authoring items. This result establishes source acceptance, not token fit, inference quality, service readiness or human approval.

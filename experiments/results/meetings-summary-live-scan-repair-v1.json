@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-31",
+  "status": "implemented_fake_tested_independently_reviewed_not_native_verified",
+  "policy": "compat-owned-active-lstat-v1",
+  "problem": "A temporary CMake compiler-identification object disappeared during active output size scanning in compat v3.",
+  "source_attribution": "Missing object and active scan observed; exact runtime.py line inferred because no full traceback was emitted.",
+  "change": "Scoped compat driver adapter for exact pinned active scan callback and output root; per-entry lstat FileNotFoundError only after root/alias identity check, then after_entry checkpoint. Static scans remain strict and original function is restored.",
+  "checks": {
+    "new": 17,
+    "affected": 8,
+    "passed": 25,
+    "seconds": 8.09,
+    "ruff": "passed",
+    "independent_ai_review": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "blockers": 0,
+      "advisories": 0
+    },
+    "actual_native": false
+  },
+  "source": {
+    "driver": "d359ec33454016dccd1d5363d28510104f6a9e2984ebd489054d0bf98ec418a5",
+    "test": "b5d0694e63ee8d9e44352eb5cdd4b67f3d03d02698900e5fe6480121dbace20c",
+    "unchanged_runtime": "b1422ea8466d127b38493d8b05c893483aa8c554d65ed7ffe0d3bb06961009c8"
+  },
+  "implementation_result_sha256": "742b411042307d85071264e63fd6ec010edc5737de69a699081a9c47b026c8ae",
+  "human_reviews": 0,
+  "model_quality_accepted": false
+}

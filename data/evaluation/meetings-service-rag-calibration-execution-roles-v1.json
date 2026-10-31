@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "executor": {
+    "role_id": "/root/service_rag_calibration_sources",
+    "accepted": true,
+    "phase": "calibration",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "exposure": "Same-split source6/32chunks, source preparation, item6/oracle22facts author; earlier calibration-v1 README exploration. Not an independent judge. Registration-only returned with additional reads/execution0."
+  },
+  "final_judge": {
+    "role_id": "/root/service_rag_calibration_final_judge",
+    "accepted": true,
+    "phase": "calibration",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "exposure": "Role instructions and injected project metadata only at registration; no pristine/blind claim. Registration-only; own-split final-answer judgment awaits separate dispatch."
+  },
+  "excluded_final_judges": [
+    "/root",
+    "/root/service_rag_calibration_sources",
+    "/root/service_rag_calibration_source_review",
+    "/root/service_rag_validation_sources",
+    "/root/service_rag_validation_source_review",
+    "/root/service_rag_worker",
+    "/root/source_discovery_decision",
+    "/root/service_rag_ui_smoke"
+  ],
+  "scope": "Own-split metadata and manifest only after explicit dispatch; actual execution needs exact implementation CI and a separate committed execution registration. No new inference, repair, fallback or source/question changes authorized here."
+}

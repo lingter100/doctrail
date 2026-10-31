@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-28",
+  "evidence_type": "measured_local_metadata_preparation",
+  "status": "known_finite_exclusion_preparation_verified",
+  "source_inventory": {
+    "metadata_inputs": 52,
+    "rows_not_unique_documents": 5908,
+    "family_strings_and_aliases": 287,
+    "repository_selectors": 30,
+    "publisher_selectors": 1,
+    "sha256": "b5051bbaae0384c11a9702cf75ae86f9b9b0e815fe28e0b50b0379991e393b87",
+    "receipt_sha256": "c5c55e4acdea80d72204fba9ab18518c293e0ea016043611460e8d1575518619",
+    "parent_verified_refs": 56
+  },
+  "question_projection": {
+    "input_files": 51,
+    "original_and_revised_occurrences": 1118,
+    "unique_question_hashes": 516,
+    "opaque_ids": 525,
+    "duplicate_hash_groups": 405,
+    "repeated_occurrences_beyond_first": 602,
+    "hash_convention": "SHA256(question.encode('utf-8')); no normalization",
+    "inventory_sha256": "c9840e1e3e4834a39e24770a84872fcaee1048997b23f751ef6a4ac579991e88",
+    "fragment_sha256": "9a9b41e40dfa61633101c9cc25e5dd643d200fc60c451b2a270b172e7e67c273",
+    "receipt_sha256": "03c16db87e25ba656b4a321aff00de3e710c62d720f403abc9d9c4583ae16abd",
+    "input_bindings_unchanged": 192,
+    "declared_reference_digest_checks": 90,
+    "reference_mismatches": 0,
+    "deterministic_replay_equal": true,
+    "parent_verified_refs": 205
+  },
+  "original_preoutput_failures_preserved": 2,
+  "source_or_question_semantics_emitted": false,
+  "historical_or_semantic_completeness_claimed": false,
+  "human_review": 0,
+  "model_calls": 0,
+  "trusted_registration_created": false,
+  "limitations": [
+    "Finite recorded scope only; unregistered historical exposure remains unknown.",
+    "Exact UTF-8 hashes do not establish semantic or translation independence.",
+    "Raw document, normalized content and file hashes retain different provenance.",
+    "Protected inputs remain local; public aggregates alone do not reproduce their full contents."
+  ]
+}

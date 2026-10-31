@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "selection_id": "meetings-c2-calibration-context-selection-v1",
+  "phase": "calibration",
+  "status": "AI_DRAFT_PREREVIEW_PENDING",
+  "author_role": "/root/c2_calibration_source",
+  "source_freeze": {
+    "path": "data/evaluation/meetings-c2-calibration-v1/source-freeze-v1.json",
+    "sha256": "a5c0ea0aa89c30b07a10a34bb9fae969871e9b1c6d1be2c4ef5f03699d1213e7",
+    "commit_parent_reported": "65f3358"
+  },
+  "source_inventory": {
+    "path": ".local/c2-source-inventory-calibration-full-v1/inventory.json",
+    "sha256": "84619318a5a7d665739f46da4d468686b62c23b6923f17c0ade00477db74ddc9"
+  },
+  "source_manifest": {
+    "path": "data/evaluation/meetings-c2-calibration-v1/source-manifest-full.json",
+    "sha256": "640bc52ca5725a45bf87b4d475ca6c25dae4f853565397b123d9bd8932103e4c"
+  },
+  "rules": {
+    "unit": "Complete original service chunks only; exact text, IDs, revision, title, meeting date, page and full-document codepoint offsets.",
+    "order": "Registered source ordinal, then original chunk ordinal.",
+    "selection_basis": "Question-relevant policy/event scope and necessary subject, condition, date/status qualifications; selected before any official tokenizer or model output.",
+    "mutations": 0,
+    "cropping_or_merging": false,
+    "resegmentation": false,
+    "context_reselection_after_tokenizer_allowed": false,
+    "candidate_block_or_line_id_catalog_inspected": false,
+    "official_tokenizer_runs": 0,
+    "model_calls": 0,
+    "preparation_failure_policy": "Retain failures; no trimming, replacement, count reduction or adaptive source selection after official preparation."
+  },
+  "publication": {
+    "attribution": "data/evaluation/meetings-c2-calibration-v1/ATTRIBUTION.md",
+    "license": "data/evaluation/meetings-c2-calibration-v1/licenses/OpenTelemetry-LICENSE",
+    "notice": "AI-authored evaluation questions/oracles with verbatim, structurally wrapped excerpts from the pinned Apache-2.0 public sources and explicitly fictional AI-authored Korean sources. Evidence strings are unmodified."
+  },
+  "source_absence_reviews": [
+    {
+      "case_id": "C2-CAL-04",
+      "reviewer_role": "/root/c2_calibration_source",
+      "independent": false,
+      "scope": "Both complete adopted C2-F01 source bodies.",
+      "missing_facet": "Most recent actual regular GC meeting date.",
+      "finding": "Charter provides policy frequency and last-updated month, not actual meeting occurrences; membership provides no such date.",
+      "selected_away_evidence": false
+    },
+    {
+      "case_id": "C2-CAL-08",
+      "reviewer_role": "/root/c2_calibration_source",
+      "independent": false,
+      "scope": "All three complete adopted C2-F02 synthetic source bodies.",
+      "missing_facet": "Actual auxiliary ice-surface availability for the specified operating day.",
+      "finding": "Coordination assigns a check; handoff lacks the result/approval, and operating rules do not establish site-specific availability.",
+      "selected_away_evidence": false
+    }
+  ],
+  "cases": [
+    {
+      "id": "C2-CAL-01",
+      "family_id": "C2-F01",
+      "question_language": "ko",
+      "expected_status": "answered",
+      "semantic_scope": "회원의 코드 기여 승인 역할과 GC의 기술적 책임 분담을 함께 확인한다. Charter의 Mission/Approach 문맥과 membership의 해당 회원 검토·승인 문단을 보존한다.",
+      "selected_contexts": [
+        {
+          "source_id": "c2-cal-f01-governance-charter",
+          "document_id": "c2-cal-f01-governance-charter",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-governance-charter-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 1000,
+          "text_sha256": "72b45d7a841a8517c17f20f98cacb23b562f89ade1d76ad523908d3f53f85947",
+          "selection_reason": "회원의 코드 기여 승인 역할과 GC의 기술적 책임 분담을 함께 확인한다. Charter의 Mission/Approach 문맥과 membership의 해당 회원 검토·승인 문단을 보존한다."
+        },
+        {
+          "source_id": "c2-cal-f01-governance-charter",
+          "document_id": "c2-cal-f01-governance-charter",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-governance-charter-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 850,
+          "end_offset": 1847,
+          "text_sha256": "00fee9e33db1ed9ffe78048834f324effa756c7636cc793911f26b8a8f7a7ef8",
+          "selection_reason": "회원의 코드 기여 승인 역할과 GC의 기술적 책임 분담을 함께 확인한다. Charter의 Mission/Approach 문맥과 membership의 해당 회원 검토·승인 문단을 보존한다."
+        },
+        {
+          "source_id": "c2-cal-f01-membership",
+          "document_id": "c2-cal-f01-membership",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-membership-r1-c0008",
+          "ordinal": 8,
+          "start_offset": 6454,
+          "end_offset": 7454,
+          "text_sha256": "8bdd58f81a4bf57e4473fe951acdbe7744aa4d0bbf2be8f409bc5508d38e2707",
+          "selection_reason": "회원의 코드 기여 승인 역할과 GC의 기술적 책임 분담을 함께 확인한다. Charter의 Mission/Approach 문맥과 membership의 해당 회원 검토·승인 문단을 보존한다."
+        }
+      ]
+    },
+    {
+      "id": "C2-CAL-02",
+      "family_id": "C2-F01",
+      "question_language": "en",
+      "expected_status": "answered",
+      "semantic_scope": "Maximal representation의 한도·기간·불이행 결과를 조건과 함께 보존하고, 해당 절이 가리키는 Special Elections의 후속 절차까지 제공한다.",
+      "selected_contexts": [
+        {
+          "source_id": "c2-cal-f01-governance-charter",
+          "document_id": "c2-cal-f01-governance-charter",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-governance-charter-r1-c0010",
+          "ordinal": 10,
+          "start_offset": 8458,
+          "end_offset": 9449,
+          "text_sha256": "1032a28ce4390d73e5f4c32a8914d7280bf06368e08a240cb646425c020abcbe",
+          "selection_reason": "Maximal representation의 한도·기간·불이행 결과를 조건과 함께 보존하고, 해당 절이 가리키는 Special Elections의 후속 절차까지 제공한다."
+        },
+        {
+          "source_id": "c2-cal-f01-governance-charter",
+          "document_id": "c2-cal-f01-governance-charter",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-governance-charter-r1-c0011",
+          "ordinal": 11,
+          "start_offset": 9299,
+          "end_offset": 10292,
+          "text_sha256": "80b3518b58dbd6e634a64a25821799e11cbd3d333121fd9befd857ef97b6867c",
+          "selection_reason": "Maximal representation의 한도·기간·불이행 결과를 조건과 함께 보존하고, 해당 절이 가리키는 Special Elections의 후속 절차까지 제공한다."
+        }
+      ]
+    },
+    {
+      "id": "C2-CAL-03",
+      "family_id": "C2-F01",
+      "question_language": "ko",
+      "expected_status": "answered",
+      "semantic_scope": "Becoming a Triager의 기본 절차, SIG charter 예외, 후보자 동의·다수 승인·반대 없음·대기 기간과 지위 확정 시점을 함께 제공한다.",
+      "selected_contexts": [
+        {
+          "source_id": "c2-cal-f01-membership",
+          "document_id": "c2-cal-f01-membership",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-membership-r1-c0011",
+          "ordinal": 11,
+          "start_offset": 8996,
+          "end_offset": 9993,
+          "text_sha256": "187de4e76f1bee148e55133753063c202ff220c8143f535c5176a38847791ecc",
+          "selection_reason": "Becoming a Triager의 기본 절차, SIG charter 예외, 후보자 동의·다수 승인·반대 없음·대기 기간과 지위 확정 시점을 함께 제공한다."
+        },
+        {
+          "source_id": "c2-cal-f01-membership",
+          "document_id": "c2-cal-f01-membership",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-membership-r1-c0012",
+          "ordinal": 12,
+          "start_offset": 9843,
+          "end_offset": 10835,
+          "text_sha256": "aaf5bb3a9078af4f6224b83d53317207a518400e1eff7b13b368ef1316494989",
+          "selection_reason": "Becoming a Triager의 기본 절차, SIG charter 예외, 후보자 동의·다수 승인·반대 없음·대기 기간과 지위 확정 시점을 함께 제공한다."
+        }
+      ]
+    },
+    {
+      "id": "C2-CAL-04",
+      "family_id": "C2-F01",
+      "question_language": "en",
+      "expected_status": "abstained",
+      "semantic_scope": "GC Meetings 전체 절의 빈도와 비공개 회의 예외를 보존한다. 최근 실제 개최일은 전체 공개2 원문에 없으며 문서 갱신일로 대체하지 않는다.",
+      "selected_contexts": [
+        {
+          "source_id": "c2-cal-f01-governance-charter",
+          "document_id": "c2-cal-f01-governance-charter",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-governance-charter-r1-c0014",
+          "ordinal": 14,
+          "start_offset": 11838,
+          "end_offset": 12834,
+          "text_sha256": "46b647ef31724f5e6dc8852f55fd2ad41837fd5ca9c05ce89596a654eb4a1a8a",
+          "selection_reason": "GC Meetings 전체 절의 빈도와 비공개 회의 예외를 보존한다. 최근 실제 개최일은 전체 공개2 원문에 없으며 문서 갱신일로 대체하지 않는다."
+        },
+        {
+          "source_id": "c2-cal-f01-governance-charter",
+          "document_id": "c2-cal-f01-governance-charter",
+          "revision": 1,
+          "chunk_id": "c2-cal-f01-governance-charter-r1-c0015",
+          "ordinal": 15,
+          "start_offset": 12684,
+          "end_offset": 13671,
+          "text_sha256": "da9d57835cb7fac91e15e308276acd4df3be2e47f4408d9540fe27e6689cc6bf",
+          "selection_reason": "GC Meetings 전체 절의 빈도와 비공개 회의 예외를 보존한다. 최근 실제 개최일은 전체 공개2 원문에 없으며 문서 갱신일로 대체하지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "C2-CAL-05",
+      "family_id": "C2-F02",
+      "question_language": "ko",
+      "expected_status": "answered",
+      "semantic_scope": "운영 기준의 일정 변경·안내 의무와 회의록의 적용일·확정 시간표를 함께 제공한다. 수행 결과가 아닌 확정 계획과 안내 의무를 묻는다.",
+      "selected_contexts": [
+        {
+          "source_id": "c2-cal-f02-rink-rules",
+          "document_id": "c2-cal-f02-rink-rules",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-rules-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 996,
+          "text_sha256": "323cfea6c4d275e9adf1b0d8331f80873d564d7931855192f86424ff0f903bc0",
+          "selection_reason": "운영 기준의 일정 변경·안내 의무와 회의록의 적용일·확정 시간표를 함께 제공한다. 수행 결과가 아닌 확정 계획과 안내 의무를 묻는다."
+        },
+        {
+          "source_id": "c2-cal-f02-rink-rules",
+          "document_id": "c2-cal-f02-rink-rules",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-rules-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 846,
+          "end_offset": 1373,
+          "text_sha256": "ea7eaff0c0f8b485b8083d34e48af1f0915fa12fd0374bda416f1d8f4f8b3325",
+          "selection_reason": "운영 기준의 일정 변경·안내 의무와 회의록의 적용일·확정 시간표를 함께 제공한다. 수행 결과가 아닌 확정 계획과 안내 의무를 묻는다."
+        },
+        {
+          "source_id": "c2-cal-f02-rink-coordination",
+          "document_id": "c2-cal-f02-rink-coordination",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 1000,
+          "text_sha256": "8c3a90efad8d853e414a58350d8690a8243bbe288ab9f9880c22be351bf8fab3",
+          "selection_reason": "운영 기준의 일정 변경·안내 의무와 회의록의 적용일·확정 시간표를 함께 제공한다. 수행 결과가 아닌 확정 계획과 안내 의무를 묻는다."
+        }
+      ]
+    },
+    {
+      "id": "C2-CAL-06",
+      "family_id": "C2-F02",
+      "question_language": "en",
+      "expected_status": "answered",
+      "semantic_scope": "인계 기록의 확인 기준일/시각과 다음 근무자가 확인할 사항을 함께 제공한다. 수업 종료 기록과 미래 자유연습 상태를 구별한다.",
+      "selected_contexts": [
+        {
+          "source_id": "c2-cal-f02-rink-handoff",
+          "document_id": "c2-cal-f02-rink-handoff",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "02f2cd141f4eaaaea1a19f66a7ea461f9b5f8913448fc31e3722b04bed2f5d7c",
+          "selection_reason": "인계 기록의 확인 기준일/시각과 다음 근무자가 확인할 사항을 함께 제공한다. 수업 종료 기록과 미래 자유연습 상태를 구별한다."
+        },
+        {
+          "source_id": "c2-cal-f02-rink-handoff",
+          "document_id": "c2-cal-f02-rink-handoff",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-handoff-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 847,
+          "end_offset": 1425,
+          "text_sha256": "605c6b11069789ba0b43195455822ea497a79a31b633769264f188507fd181e8",
+          "selection_reason": "인계 기록의 확인 기준일/시각과 다음 근무자가 확인할 사항을 함께 제공한다. 수업 종료 기록과 미래 자유연습 상태를 구별한다."
+        }
+      ]
+    },
+    {
+      "id": "C2-CAL-07",
+      "family_id": "C2-F02",
+      "question_language": "ko",
+      "expected_status": "answered",
+      "semantic_scope": "당일 작업의 실제 시각 표와 상태 확인 기준을 그대로 제공하고, 목표 시각·실제 수행·뒤의 미실행 세션을 구분한다.",
+      "selected_contexts": [
+        {
+          "source_id": "c2-cal-f02-rink-handoff",
+          "document_id": "c2-cal-f02-rink-handoff",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "02f2cd141f4eaaaea1a19f66a7ea461f9b5f8913448fc31e3722b04bed2f5d7c",
+          "selection_reason": "당일 작업의 실제 시각 표와 상태 확인 기준을 그대로 제공하고, 목표 시각·실제 수행·뒤의 미실행 세션을 구분한다."
+        },
+        {
+          "source_id": "c2-cal-f02-rink-handoff",
+          "document_id": "c2-cal-f02-rink-handoff",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-handoff-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 847,
+          "end_offset": 1425,
+          "text_sha256": "605c6b11069789ba0b43195455822ea497a79a31b633769264f188507fd181e8",
+          "selection_reason": "당일 작업의 실제 시각 표와 상태 확인 기준을 그대로 제공하고, 목표 시각·실제 수행·뒤의 미실행 세션을 구분한다."
+        }
+      ]
+    },
+    {
+      "id": "C2-CAL-08",
+      "family_id": "C2-F02",
+      "question_language": "en",
+      "expected_status": "abstained",
+      "semantic_scope": "보조빙면 확인 업무의 적용일·담당자·기한과 후속 인계의 미접수 상태를 모두 제공한다. 실제 사용 가능 여부는 전체 합성3 문서에 없다.",
+      "selected_contexts": [
+        {
+          "source_id": "c2-cal-f02-rink-coordination",
+          "document_id": "c2-cal-f02-rink-coordination",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 1000,
+          "text_sha256": "8c3a90efad8d853e414a58350d8690a8243bbe288ab9f9880c22be351bf8fab3",
+          "selection_reason": "보조빙면 확인 업무의 적용일·담당자·기한과 후속 인계의 미접수 상태를 모두 제공한다. 실제 사용 가능 여부는 전체 합성3 문서에 없다."
+        },
+        {
+          "source_id": "c2-cal-f02-rink-coordination",
+          "document_id": "c2-cal-f02-rink-coordination",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-coordination-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 850,
+          "end_offset": 1627,
+          "text_sha256": "0cabbf0179a35ff74b1f4b92740409a9974749db652ca6082f2700d3e00536e6",
+          "selection_reason": "보조빙면 확인 업무의 적용일·담당자·기한과 후속 인계의 미접수 상태를 모두 제공한다. 실제 사용 가능 여부는 전체 합성3 문서에 없다."
+        },
+        {
+          "source_id": "c2-cal-f02-rink-handoff",
+          "document_id": "c2-cal-f02-rink-handoff",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+          "ordinal": 0,
+          "start_offset": 0,
+          "end_offset": 997,
+          "text_sha256": "02f2cd141f4eaaaea1a19f66a7ea461f9b5f8913448fc31e3722b04bed2f5d7c",
+          "selection_reason": "보조빙면 확인 업무의 적용일·담당자·기한과 후속 인계의 미접수 상태를 모두 제공한다. 실제 사용 가능 여부는 전체 합성3 문서에 없다."
+        },
+        {
+          "source_id": "c2-cal-f02-rink-handoff",
+          "document_id": "c2-cal-f02-rink-handoff",
+          "revision": 1,
+          "chunk_id": "c2-cal-f02-rink-handoff-r1-c0001",
+          "ordinal": 1,
+          "start_offset": 847,
+          "end_offset": 1425,
+          "text_sha256": "605c6b11069789ba0b43195455822ea497a79a31b633769264f188507fd181e8",
+          "selection_reason": "보조빙면 확인 업무의 적용일·담당자·기한과 후속 인계의 미접수 상태를 모두 제공한다. 실제 사용 가능 여부는 전체 합성3 문서에 없다."
+        }
+      ]
+    }
+  ],
+  "review_status": {
+    "planned_independent_prereviewer": "/root",
+    "actual_independent_prereviews": 0,
+    "actual_human_reviews": 0,
+    "source_review_is_not_item_prereview": true,
+    "planned_prereviewer_candidate_implementation_exposure": true
+  },
+  "exposure": {
+    "generic_review_contract_policy_difference_seen_previously_and_again": true,
+    "candidate_adapter_source_opened_for_selection": false,
+    "candidate_output_seen": false,
+    "validation_bodies_or_oracles_seen": false,
+    "prior_question_pools_or_outputs_opened": false,
+    "fully_candidate_blind_authorship_claimed": false,
+    "author_future_independent_semantic_judge_eligible": false
+  }
+}

@@ -21,6 +21,9 @@ import static io.doctrail.Store.*;
     }
     Map<String,Object> serialize(Connection c,Map<String,Object> row,boolean detail) throws Exception {
         Map<String,Object> result=new LinkedHashMap<>(row);
+        // Keep the established ordinary-document DTO byte-for-byte compatible.
+        // Only meeting documents need the additive marker for read-only source UI.
+        if(one(c,"SELECT document_id FROM meetings WHERE document_id=?",row.get("id"))!=null)result.put("document_kind","meeting");
         result.remove("source");
         result.remove("source_kind");
         Object content=result.remove("content");
@@ -33,6 +36,7 @@ import static io.doctrail.Store.*;
         return result;
     }
     void replaceChunks(Connection c,String id,Ingest.Extraction extracted) throws Exception {
+        execute(c,"UPDATE meetings SET analysis_status='stale',analysis_error=NULL,active_run=NULL WHERE document_id=?",id);
         execute(c,"DELETE FROM chunks WHERE document_id=?",id);
         for(Retrieval.Chunk chunk:Retrieval.chunkContent(extracted.content(),extracted.pages())) execute(c,"INSERT INTO chunks VALUES (?,?,?,?,?,?,?)",Auth.uid(),id,chunk.text(),chunk.page(),chunk.startOffset(),chunk.endOffset(),chunk.ordinal());
     }

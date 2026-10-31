@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "phase": "validation",
+  "stage": "item_v2_limited_correction_complete_independent_rereview_pending",
+  "created_at_utc": "2026-10-20T03:33:11.649662+00:00",
+  "question_author": "/root/c6_validation_author",
+  "oracle_author": "/root/c6_validation_author",
+  "independent_prereviewer": "/root/c6_validation_prereviewer",
+  "same_split_source_item_reuse_disclosed": true,
+  "AI_authored": true,
+  "human_review_count": 0,
+  "excluded_final_output_judge": true,
+  "model_effort_provenance": {
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "xhigh",
+    "acceptance_evidence": "Existing parent-observed accepted spawn arguments reused; not runtime introspection."
+  },
+  "preauthorization_head": "09027c9f47927c8480bb65f4fa5eb94900af230e",
+  "source_commit": "887e89f795b22ba043a0f62fa1b65c7d62e8cc75",
+  "source_freeze_sha256": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625",
+  "toolchain_freeze_sha256": "939731a4941a78e5e00b812120b50d8c488b939823c6f5e8df0921986791600b",
+  "actual_preauthorization": {
+    "file": ".local/meetings-c6-validation-item-v2/preauthorization-v1.json",
+    "sha256": "47e11d5fe5e08a7792a0e391a0a662fccfa7b7f3180cf5932ec1486a5e9794a6"
+  },
+  "revision_authorization": {
+    "file": "data/evaluation/meetings-c6-item-revision-authorization-v1.json",
+    "sha256": "c5ec88a471371b073f2113d95395047f343dccb7da9d3b07d9391b73e3c0c6b6",
+    "committed_at": "09027c9f47927c8480bb65f4fa5eb94900af230e"
+  },
+  "original_author_files": {
+    "data/evaluation/meetings-c6-validation-v1/draft.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft.json": "196ed54abf3709213e7818fecd30b9f746ff30493133f48b5f37320d7c55ba19",
+    "data/evaluation/meetings-c6-validation-v1/context-selection.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c",
+    "data/evaluation/meetings-c6-validation-v1/author-receipt.json": "6c0e19979d53250e4e68881db07f8e906350fce1e405f25c4e702802b510bde0"
+  },
+  "original_rejection_review_files_hash_only": {
+    "data/evaluation/meetings-c6-validation-v1/item-prereview.json": "b24d85e24a236ebffbae451e36bad60531d7d3b71a0e81c470392145b71271c2",
+    "data/evaluation/meetings-c6-validation-v1/item-prereview-notes.md": "75edb49498c21aa2df2bb29fadcb035fa190b7ce947db4f21c8602b3e4ebb0bf",
+    "data/evaluation/meetings-c6-validation-v1/item-review-metadata-summary.json": "c4fa9ccb07ca95fae02ba36bc59dbd9ca80c40d425eb1382fcaf3beebafa3eff"
+  },
+  "author_safe_feedback": {
+    "file": ".local/meetings-c6-validation-item-review-v1/author-safe-feedback-v1.json",
+    "sha256": "5570b6d4a06f55383f02da20f6a1df2bc911f73302bdc41134d39df8da5ddd3c"
+  },
+  "original_sequence_disclosure": {
+    "file": ".local/meetings-c6-validation-item-v1/sequence-disclosure-v1.json",
+    "sha256": "cda9f41f23d4018fa11cae9652e1aca247e22923a0c49362d43a87acb3eeb470",
+    "prior_authorized_source_memory_theme_planning_while_proof_pending": true,
+    "new_source_rereads_and_item_artifact_authorship_after_passed_proof": true,
+    "zero_internal_semantic_planning_before_proof_claim": false,
+    "scope": "Initial tentative themes used already-authorized own-source conversation memory while proof subprocess was pending; no new source read or item file existed then. The preserved preauth zero-authorship field concerns artifacts, not all internal planning."
+  },
+  "v2_sequence_disclosure": {
+    "file": ".local/meetings-c6-validation-item-v2/sequence-disclosure-v1.json",
+    "sha256": "1d244834f52993584683462e83ee83f11dac60c7790656d8ba4f0ccdcb258622",
+    "no_internal_thought_timing_proof_claim": true
+  },
+  "limited_diff": {
+    "case_id": "C6-VAL-08",
+    "fact_id": "v08f02",
+    "operation": "append one exact author-safe full catalog-block evidence alternative",
+    "json_pointer": "/cases/7/required_facts/1/evidence_alternatives/2",
+    "added_alternatives": 1,
+    "added_spans": 1,
+    "added_alternative_canonical_sha256": "51ff44190930c1839d8f6afdcd5fb26919f5ecdb616d7d558b29618fc722c567",
+    "existing_alternatives_preserved": true,
+    "other_cases_unchanged": 7,
+    "all_fact_wording_unchanged": true,
+    "all_expected_statuses_unchanged": true,
+    "draft_byte_identical": true,
+    "context_selection_byte_identical": true,
+    "removing_only_added_alternative_reconstructs_original_oracle": true
+  },
+  "counts": {
+    "cases": 8,
+    "required_facts": 33,
+    "answered": 4,
+    "abstained": 4,
+    "ko": 4,
+    "en": 4,
+    "missing_required_facts": 5,
+    "registered_evidence_alternatives": 34
+  },
+  "structural_checks": {
+    "validate_draft": "passed",
+    "validate_oracles": "passed",
+    "whole_immutable_chunks": "passed",
+    "whole_selected_documents": "passed"
+  },
+  "originals_preserved": {
+    "data/evaluation/meetings-c6-validation-source-fingerprints-v1.json": "0f4942f1ffc1ca910dc61a80a24448d3ac10f45cddb4e40a0ffcfbd779d9d8c2",
+    "data/evaluation/meetings-c6-validation-v1/author-receipt.json": "6c0e19979d53250e4e68881db07f8e906350fce1e405f25c4e702802b510bde0",
+    "data/evaluation/meetings-c6-validation-v1/context-selection.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c",
+    "data/evaluation/meetings-c6-validation-v1/draft.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/item-prereview-notes.md": "75edb49498c21aa2df2bb29fadcb035fa190b7ce947db4f21c8602b3e4ebb0bf",
+    "data/evaluation/meetings-c6-validation-v1/item-prereview.json": "b24d85e24a236ebffbae451e36bad60531d7d3b71a0e81c470392145b71271c2",
+    "data/evaluation/meetings-c6-validation-v1/item-review-metadata-summary.json": "c4fa9ccb07ca95fae02ba36bc59dbd9ca80c40d425eb1382fcaf3beebafa3eff",
+    "data/evaluation/meetings-c6-validation-v1/java-parity.json": "e3a4d04b69223490ab8732d46e7c4d779971f13cf31d0f3c9a40b39927c3ab37",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft.json": "196ed54abf3709213e7818fecd30b9f746ff30493133f48b5f37320d7c55ba19",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-2026-10-01.md": "f6ef54ee5490a6629fe57e5f1b9874d215387a61df739395d165f88245cdcbe7",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-2026-10-15.md": "d8be27d6f0c97868122266ae518d04354e05b28bb157cb190a6501e77459b4df",
+    "data/evaluation/meetings-c6-validation-v1/processed/jupyter-team-compass.md": "b1097399f704d32bde0c99b9b2efc1e0e57e189e98120a48e02a10ba0de6cebb",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-2026-04-09.md": "b1efcc40a4a3579f63f27a09825d1e6d1a47a2d489998367201990e43912e48a",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-2026-04-23.md": "e4e00b31504aed5bf005453c4b9e24264b0b4008b5c3459cc5f8a6c1a161f6d0",
+    "data/evaluation/meetings-c6-validation-v1/processed/sodam-seed-record-standard.md": "ad7fc93c10774bb184f05a5c3a77469e09d48125061ef0549e9fb16d3387b599",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-2026-10-01.md": "f6ef54ee5490a6629fe57e5f1b9874d215387a61df739395d165f88245cdcbe7",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-2026-10-15.md": "d8be27d6f0c97868122266ae518d04354e05b28bb157cb190a6501e77459b4df",
+    "data/evaluation/meetings-c6-validation-v1/raw/jupyter-team-compass.md": "b1097399f704d32bde0c99b9b2efc1e0e57e189e98120a48e02a10ba0de6cebb",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-2026-04-09.md": "b1efcc40a4a3579f63f27a09825d1e6d1a47a2d489998367201990e43912e48a",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-2026-04-23.md": "e4e00b31504aed5bf005453c4b9e24264b0b4008b5c3459cc5f8a6c1a161f6d0",
+    "data/evaluation/meetings-c6-validation-v1/raw/sodam-seed-record-standard.md": "ad7fc93c10774bb184f05a5c3a77469e09d48125061ef0549e9fb16d3387b599",
+    "data/evaluation/meetings-c6-validation-v1/review-metadata-summary.json": "dd559e7ff5d0143564186e422aabbf42ef1ca95f231399c9b46bdc61d4123512",
+    "data/evaluation/meetings-c6-validation-v1/source-adoption-receipt.json": "58be2a4d2e9898b96820b25080909585f995d5edc5cb909495db9756678b52e9",
+    "data/evaluation/meetings-c6-validation-v1/source-freeze.json": "1ef3cea7d156fd6b84ae19e188e0930a6b2bb9541292cf31f61603c8dd701625",
+    "data/evaluation/meetings-c6-validation-v1/source-freshness.json": "52250dd05c3d6d828183177f23316949a53c27c9dfcd5b124be98ba50db3c3b5",
+    "data/evaluation/meetings-c6-validation-v1/source-inventory.json": "25adcc975df011a444daa5c5a145f0641f99b0a797683f15ed4651321d38f48b",
+    "data/evaluation/meetings-c6-validation-v1/source-manifest.json": "153a2a981a07009ea889eccc82005b68e3e40bcab861a342c4386b86a3605d12",
+    "data/evaluation/meetings-c6-validation-v1/source-prereview-notes.md": "2f1e78b2f38eab5c44237fda7e16539f38a7f7f1079f88a77976b468f0ccf70d",
+    "data/evaluation/meetings-c6-validation-v1/source-prereview.json": "f9b33ad4dfe62b36fa4b1c0cda6e1031ef5a1db958cc2a963f4a56cd825a32dc",
+    "data/evaluation/meetings-c6-validation-v1/source-processing-receipt.json": "8fd13d9cbb6f9f1bbccae9edce2d534324d56dfdda4b7e412a3e01f9c4fa563b"
+  },
+  "item_files": {
+    "data/evaluation/meetings-c6-validation-v1/draft-v2.json": "5fe5900d63fe15954bfc55bead5417e8b9a5656a2eeb885fbc122176fa0b2619",
+    "data/evaluation/meetings-c6-validation-v1/oracle-draft-v2.json": "8efc42bbc7b9b1862b5d640d6f1afa09f4e93ce759464e18bcd6c70fa47c98ca",
+    "data/evaluation/meetings-c6-validation-v1/context-selection-v2.json": "e9e293c0db177e3eac517509dd8c4461fdf8b904dae2656e8c6403ecb2c9151c"
+  },
+  "local_structural_result": {
+    "file": ".local/meetings-c6-validation-item-v2/candidate-v1/structural-result.json",
+    "sha256": "e40b99446b8f098f85fcf77829261cc78e47256c9bb4606e2d93b95d71031a5d"
+  },
+  "independent_item_acceptance": "pending",
+  "semantic_answer_quality_measured": false,
+  "independent_item_review_performed_by_author": false,
+  "source_edits": 0,
+  "review_or_freeze_edits": 0,
+  "code_edits": 0,
+  "tokenizer_calls": 0,
+  "official_offline_preparations": 0,
+  "native_calls": 0,
+  "Maven_runs": 0,
+  "model_downloads": 0,
+  "Git_mutations": 0,
+  "reviewer_notes_semantic_reads": 0,
+  "crosssplit_source_or_item_semantic_reads": 0,
+  "crosssplit_freshness_reason_reads": 0,
+  "final_judge_data_reads": 0,
+  "next_gate": "Independent v2 item review and accepted freeze/commit before official offline preparation."
+}

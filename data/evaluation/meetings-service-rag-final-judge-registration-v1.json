@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_final_judge_registration",
+  "recorded_at_utc": "2026-10-20T08:41:14.083010+00:00",
+  "bindings": [
+    {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "bytes": 19569,
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    {
+      "path": "docs/MEETINGS-SERVICE-RAG-EXECUTION.md",
+      "bytes": 19544,
+      "sha256": "e5f3a5001755ec8c25b481a199902c8936375c9a6e0478df09e535e6ef17b5b7"
+    }
+  ],
+  "roles": [
+    {
+      "role_id": "/root/service_rag_calibration_final_judge",
+      "phase": "calibration",
+      "accepted_model": "gpt-6-astra",
+      "accepted_reasoning_effort": "xhigh",
+      "fork_turns": "none",
+      "registration_returned": true,
+      "dispatch_status": "registration_only_no_judgment",
+      "exposure": "Role instructions and injected project metadata only at registration; no pristine/blind claim. No source, question, oracle, answer or semantic-note reads and no execution reported.",
+      "excluded_prior_roles": [
+        "source_author",
+        "source_reviewer",
+        "item_author",
+        "item_reviewer",
+        "designer",
+        "implementation_author",
+        "executor"
+      ]
+    },
+    {
+      "role_id": "/root/service_rag_validation_final_judge",
+      "phase": "validation",
+      "accepted_model": "gpt-6-astra",
+      "accepted_reasoning_effort": "xhigh",
+      "fork_turns": "none",
+      "registration_returned": true,
+      "dispatch_status": "registration_only_no_judgment",
+      "exposure": "Role instructions and injected project metadata only at registration; no pristine/blind claim. No source, question, oracle, answer or semantic-note reads and no execution reported.",
+      "excluded_prior_roles": [
+        "source_author",
+        "source_reviewer",
+        "item_author",
+        "item_reviewer",
+        "designer",
+        "implementation_author",
+        "executor"
+      ]
+    }
+  ],
+  "dispatch_gate": "Commit this registration before outputs. Explicit judgment dispatch only after accepted source/items, exact implementation CI and registered actual execution. Validation remains gated on original calibration6/6 and accepted operations/cleanup.",
+  "judgment_order": "Receive own split question, anonymous final answer and citations with custodian-authorized corpus/oracle. Lock final judgments before model identity, timing, tokens, reasoning, retrieval diagnostics, aggregate results or error details. No edits, repairs or reruns.",
+  "execution_custodians": "Not registered by this file. Source/item author permission alone does not authorize native execution.",
+  "limits": [
+    "Registration is not human review or answer-quality evidence.",
+    "No random masking seed requirement is added; metadata removal is not a pristine-blind claim.",
+    "Parent remains metadata/hash-only for evaluation semantics."
+  ],
+  "native_calls_at_registration": 0,
+  "human_reviews": 0
+}

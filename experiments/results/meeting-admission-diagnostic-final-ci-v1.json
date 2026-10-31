@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "normalized_json_projection_of_local_ci_observation",
+  "source_path": ".local/meeting-admission-diagnostic-execution-v1/final-result-ci-v1.json",
+  "source_sha256": "bf79f7a842cb44590f04494b6ab0c36a14aede93da515da2378a6e35f6ca3c5f",
+  "projection": "JSON values unchanged; serialized UTF-8 LF, not an exact-byte copy",
+  "observation": {
+    "observed_at_utc": "2026-10-20T06:05:00.575025+00:00",
+    "head": "7e1a09280cfcce925bc0e7a49e73459bc2838d8f",
+    "runs": [
+      {
+        "run_id": 39377804082,
+        "event": "push",
+        "head_sha": "7e1a09280cfcce925bc0e7a49e73459bc2838d8f",
+        "jobs": {
+          "java-service": "success",
+          "backend": "success",
+          "web": "success"
+        },
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/lingter100/doctrail/actions/runs/39377804082",
+        "observed_metadata_sha256": "c2b56d26839989858c2b11f34df9a923c23aef7c53fadb6a800b8d8a7e98e770"
+      },
+      {
+        "run_id": 39377809991,
+        "event": "pull_request",
+        "head_sha": "7e1a09280cfcce925bc0e7a49e73459bc2838d8f",
+        "jobs": {
+          "backend": "success",
+          "web": "success",
+          "java-service": "success"
+        },
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/lingter100/doctrail/actions/runs/39377809991",
+        "observed_metadata_sha256": "8affe53a29e18ca82d7c42b344a00437f89340b6b6e6084498366e0e1f639513"
+      }
+    ],
+    "git_working_tree": "clean",
+    "goal": "active",
+    "phase1": "incomplete",
+    "pr": {
+      "number": 14,
+      "state": "OPEN",
+      "draft": true
+    },
+    "exact_git_proof": ".local/meeting-admission-diagnostic-execution-v1/final-result-commit-proof.json",
+    "proof_sha256": "cc54f44b591ab78a1c71378b25241648fd49cb25d1bf85d8ca917f4e6cf94c42",
+    "official_diagnostic": "completed once; consumed directory and evidence immutable; never rerun",
+    "next": "Independent bounded source-feasibility review under unchanged rules, not yet assigned. No paid resources or service deployment."
+  }
+}

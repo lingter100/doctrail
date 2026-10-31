@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "scope": "Posthoc structural diagnosis only; not repaired output or semantic quality acceptance",
+  "source_run_registration_sha256": "ec9a1b3d74260c19b7921d783a2dfbfdc719f9c065a48685a95bdd0594589b90",
+  "diagnostic_receipt_sha256": "6e824f305bd028c496da3a9e769cda0f627e44dff4d83874831db27eb25a6dac",
+  "aggregate": {
+    "responses": 8,
+    "summary": 4,
+    "QA": 4,
+    "review": 0,
+    "original_accepted_parsed": 0,
+    "json_code_fence_prefix": 8,
+    "grammar_empty": 8,
+    "limit": {
+      "summary": 3,
+      "QA": 1,
+      "actual_predicted_equals_requested_cap": true,
+      "tokens_array_count_and_timing_match": true,
+      "incomplete_JSON_after_opening_fence_removal": 4
+    },
+    "EOS": {
+      "summary": 1,
+      "QA": 3,
+      "strict_original_JSON": 0,
+      "strict_whole_fence_inner_JSON": 4,
+      "duplicate_or_nonfinite_complete_JSON": 0,
+      "outside_fence_prose_complete_responses": 0
+    },
+    "latent_summary_cardinality": {
+      "complete_summary_count": 1,
+      "claims": 5,
+      "claims_above_evidence_limit": 5,
+      "evidence_count_min": 5,
+      "evidence_count_max": 9,
+      "required_max": 4,
+      "original_error_remains": "generation_invalid_json"
+    },
+    "conditional_QA_source_independent_shape": {
+      "complete_QA_count": 3,
+      "all_inspected_necessary_conditions_pass": true,
+      "claims_total": 10,
+      "full_schema_and_reference_validation": "not performed; original parsed acceptance remains0"
+    },
+    "input_tokens_range": [
+      2275,
+      3184
+    ],
+    "native_metadata_contract_contradictions_observed": 0,
+    "original_rejection_precedence_matches": 8
+  },
+  "method_limits": [
+    "Only exact whole JSON fence removal was evaluated hypothetically; no arbitrary substring extraction, closing-brace repair, evidence changes or output adoption.",
+    "Source-independent necessary shape checks are not full parser/evidence success.",
+    "Raw response prompt and token values were not semantically inspected or decoded; only authorized content format and selected native metadata inspected.",
+    "No private source/question/criteria files or self-review records opened.",
+    "No semantic factuality/coverage/answer-correctness judgment.",
+    "No inference that formatting alone caused every output-cap failure or that constrained decoding will fix fit/quality."
+  ],
+  "original_results_unchanged": true,
+  "sealed_files_preserved": 66,
+  "semantic_evaluation": false,
+  "new_model_execution": 0
+}

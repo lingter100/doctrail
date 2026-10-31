@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_author_receipt",
+  "actor": "/root/service_rag_calibration_sources",
+  "split": "calibration",
+  "model_registration": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "fork_turns": "none",
+    "actual_acceptance_record": "data/evaluation/meetings-service-rag-source-registration-v1.json"
+  },
+  "registration_commit": "982f2bbd15e244e772405fd752a6b0b7c372c421",
+  "implementation_commit": "d462903c85cba0f132bbc9d13d6dfac915694805",
+  "finished_at": "2026-10-20T07:10:27.333456+00:00",
+  "registered_at_used_as_conservative_start": "2026-10-20T07:02:44.192761+00:00",
+  "elapsed_wall_seconds_from_predispatch_registration": 463.140695,
+  "waits_not_subtracted_for_conservative_upper_bound": true,
+  "under_active_30_minute_limit": true,
+  "limits": {
+    "metadata_network_requests": 24,
+    "repositories_considered": 3,
+    "public_family_candidates": 2,
+    "source_body_fetches": 6,
+    "license_body_fetches_per_repository": 2,
+    "active_work_minutes": 30
+  },
+  "counts": {
+    "network_total": 11,
+    "metadata_network_requests": 9,
+    "repositories_considered": 3,
+    "public_family_candidates": 2,
+    "source_body_fetches": 2,
+    "license_discovery_body_fetches": 2,
+    "applicable_license_bodies_obtained": 0,
+    "source_and_license_dual_counted_fetches": 2,
+    "license_fetches_by_repository": {
+      "tc39/notes": 1,
+      "rust-embedded/wg": 1
+    },
+    "network_failures": 0,
+    "public_meeting_bodies": 0,
+    "candidate_readme_bodies": 2,
+    "complete_public_families": 0,
+    "prepared_public_documents": 0,
+    "new_synthetic_documents": 0,
+    "java_ingestion_runs": 0,
+    "indexed_documents": 0,
+    "indexed_chunks": 0,
+    "questions": 0,
+    "oracles": 0,
+    "native_calls": 0,
+    "tokenizer_calls": 0,
+    "model_downloads": 0,
+    "independent_reviews": 0,
+    "human_review": 0
+  },
+  "bindings_verified": [
+    {
+      "path": "docs/MEETINGS-RAG-ACCEPTANCE-PLAN.md",
+      "sha256": "734b02d62e43525e2520f16e0c74b53a9017ab8a6462a0fb3e6fa58bb933d92a"
+    },
+    {
+      "path": "experiments/results/meetings-service-rag-implementation-ci-v1.json",
+      "sha256": "4c6f069fa15cd76cc4e065acd21354e0a3e413916cb8e61ce5629632a7fff06a"
+    },
+    {
+      "path": "data/evaluation/meetings-source-feasibility-exclusions-v1.json",
+      "sha256": "26506cbd3c1f49a4b1e6dcb8ce94acd50b410ff34f313d13551342331c3d52b3"
+    },
+    {
+      "path": "data/evaluation/meetings-c7-prior-source-fingerprints-v1.json",
+      "sha256": "6e72b4e2a7f96f3db7b8535e0afe08953a82218f24a0bd5e52ce1fe20c7a8cfa"
+    }
+  ],
+  "revision_apis": "git/ref only; no commits endpoint, patch or changed source values",
+  "exposure": "Project aggregate/procedure metadata and generic ingestion/API code; own-split rejected repository README bodies only. No completed meeting bodies, other-split source semantics, closed source bodies, questions, oracles, model outputs.",
+  "author_actions": "Kept full discovery response bytes; validated README Git blob identities against complete pinned trees; no service extraction/indexing after applicable license gate unresolved.",
+  "source_stage_status": "incomplete; no adopted or frozen corpus",
+  "independent_final_answer_judge_eligible": false,
+  "filesystem_write_scope": [
+    "data/evaluation/meetings-service-rag-calibration-v1/",
+    ".local/service-rag-calibration-v1/"
+  ],
+  "git_mutations": 0,
+  "root_doc_mutations": 0,
+  "java_slot_requested": false,
+  "owned_processes_remaining": 0,
+  "preserved_local_operation_errors": [
+    {
+      "error": "rg java-service/src/main and java-service/src/test paths not found",
+      "correction": "Located generic Java code under server/src using rg --files",
+      "source_access": false
+    },
+    {
+      "error": "rg server/src/main/java/io/doctrail/Config.java and SecurityConfig.java files not found",
+      "correction": "Read actual application.properties, ApiController.java and Store.java",
+      "source_access": false
+    }
+  ],
+  "helper_decision": "Existing source inventory prepare/classify requires ADOPTED flags; not called because author may not self-accept. No helper modified or new evaluation framework created."
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "independent_source_prereview",
+  "created_at_utc": "2026-10-16T04:57:18.145832+00:00",
+  "verdict": "accepted",
+  "reviewer_id": "c4_validation_source_review",
+  "author_ids": [
+    "c4_validation_source"
+  ],
+  "actual_model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "settings_evidence": "parent_accepted_delegation_record",
+  "human_review_count": 0,
+  "accepted_ids": [
+    "c4-val-pub-meeting-01",
+    "c4-val-pub-meeting-02",
+    "c4-val-pub-general",
+    "c4-val-syn-general",
+    "c4-val-syn-meeting-01",
+    "c4-val-syn-meeting-02"
+  ],
+  "rejected_ids": [],
+  "requested_changes": [],
+  "excluded_from_independent_output_judging": true,
+  "source_only": true,
+  "whole_documents_reviewed": true,
+  "documents": [
+    {
+      "document_id": "c4-val-pub-meeting-01",
+      "raw_sha256": "6a0ab6c68cca93c63334ba42161d8b1f8c47dfb31c18be943d112e02ad1bc4a5",
+      "verdict": "accepted"
+    },
+    {
+      "document_id": "c4-val-pub-meeting-02",
+      "raw_sha256": "7a3378b5ca1c941e804d2b4b0b6c7d3aa4f3ca452848ef12b66a479b0d912576",
+      "verdict": "accepted"
+    },
+    {
+      "document_id": "c4-val-pub-general",
+      "raw_sha256": "ebc325f3364493010832ac606f778ea3f004409ea1c31bda5773a56a86a57d82",
+      "verdict": "accepted"
+    },
+    {
+      "document_id": "c4-val-syn-general",
+      "raw_sha256": "9347ce618f8d03b12f845b9fe4071368a715a9216032d95ef554d96e38969884",
+      "verdict": "accepted"
+    },
+    {
+      "document_id": "c4-val-syn-meeting-01",
+      "raw_sha256": "d7d089930493e4198b717c59d2ac93501aa1bf40b75cd3c3da4ee65b792c37a0",
+      "verdict": "accepted"
+    },
+    {
+      "document_id": "c4-val-syn-meeting-02",
+      "raw_sha256": "868ddcdd44da9397c51ad45c097a253dde434a5aae8ff4230c01aab786497796",
+      "verdict": "accepted"
+    }
+  ],
+  "manifest_sha256": "901f5f5da91ddddd917a4f71e24a54a55c908882fdc9a67494197c904bbad006",
+  "inventory_sha256": "ad2a1c8b4a8abdb9801d76f613634cdfe4a3852f52f1acdb26fe32feeab62095",
+  "java_parity_sha256": "fb731cc378b21788ed679193f06fec04773e519900155faf3e7caa272063ef99",
+  "notes": {
+    "file": "data/evaluation/meetings-c4-validation-v1/source-prereview-notes.md",
+    "sha256": "c1367b3f14a0656aa982b9afe38f5b823da60be9436272fc75bafe85d96d7114"
+  },
+  "supplemental_bindings": {
+    "data/evaluation/meetings-c4-validation-v1/source-author-receipt.json": "0267dcc4a5fdac3ac042775557e3f71cf0f3c90fe4d4fa2f9b1211ebc36774c4",
+    "data/evaluation/meetings-c4-validation-v1/source-integrity-replay.json": "a1a4ef10ba08be3fc68e95bb0c0d8727b3d52552dc0f108a85154bada218a220",
+    "data/evaluation/meetings-c4-validation-v1/licenses/nodejs-diagnostics-LICENSE.md": "2f1fda7b2c2166aa2bece708fdcbbb2ce460a5ba8e702a7b1bae4ad9bfa3c0dd"
+  },
+  "actual_java_evidence": {
+    ".local/c4-validation-source-review-v1/TEST-io.doctrail.MeetingSourceParityTest.xml": {
+      "sha256": "1eb5dca6a0aa39ac0783f08f3be512baaf33a3f23570d97ab1b0560d6886222e",
+      "bytes": 22872
+    },
+    ".local/c4-validation-source-review-v1/io.doctrail.MeetingSourceParityTest.txt": {
+      "sha256": "183c66c4f08177ddf482ab39b46739c7650cc1e7020c10aadd05229d4da47648",
+      "bytes": 324
+    },
+    ".local/c4-validation-source-review-v1/maven.log": {
+      "sha256": "db5dbe448920b05205d85f1c3d5a43c08dc2a9cfce0574d5580d8bf4c5d42f7b",
+      "bytes": 1956
+    },
+    ".local/c4-validation-source-review-v1/parity.json": {
+      "sha256": "fb731cc378b21788ed679193f06fec04773e519900155faf3e7caa272063ef99",
+      "bytes": 2491
+    }
+  },
+  "actual_java_tests": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "inventory_property_verified": true,
+    "copied_parity_bytes_match": true,
+    "rerun_by_reviewer": false
+  },
+  "primary_source_verification": {
+    "public_source_files": 3,
+    "license_files": 1,
+    "fresh_raw_bytes_matched": 4,
+    "git_blob_identities_matched": 4,
+    "commit_tree_entries_matched": true
+  },
+  "checks": {
+    "whole_source_license_provenance": true,
+    "kind_date_language": true,
+    "family_coherence_and_source_suitability": true,
+    "explicit_synthetic_origin": true,
+    "source_only_timing_and_artifacts": true,
+    "inventory_and_existing_processing_parity_receipts": true,
+    "frozen_code_85_hashes": true
+  },
+  "exposure_disclosure": {
+    "reported_by": "parent_from_calibration_source_author",
+    "kind": "same_repository_licensing_and_alternate_source_exploration_before_reservation_resolution",
+    "known_adopted_body_overlap_identified": false,
+    "shared_license_metadata": true,
+    "exact_alternate_2024_paths_and_hashes_verified": false,
+    "pristine_isolation_claim": false,
+    "zero_impact_claim": false,
+    "calibration_item_author_mitigation": "new_author_without_reported_source_exploration_after_source_commit",
+    "source_reselection_or_mutation": false
+  },
+  "preserved_reviewer_verification_failure": {
+    "kind": "commit_ish_tree_sha_assumption",
+    "occurred_before_review_artifact_creation": true,
+    "source_changes": 0,
+    "corrected_primary_commit_tree_and_raw_byte_check_passed": true
+  },
+  "counts": {
+    "families": 2,
+    "documents": 6,
+    "public_documents": 3,
+    "synthetic_documents": 3,
+    "chunks": 20,
+    "questions": 0,
+    "oracles": 0,
+    "selected_contexts": 0,
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "paid_api_calls": 0,
+    "human_reviews": 0
+  },
+  "complete_near_duplicate_absence_proven": false
+}

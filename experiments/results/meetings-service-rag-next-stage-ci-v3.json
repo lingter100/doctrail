@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "observed_ci_receipt",
+  "observed_at_utc": "2026-10-20T08:07:38.0176292Z",
+  "head_sha": "cae10eca65362a5b64526a1484d8a93efa3c682b",
+  "github_identity": {
+    "author": "lingter100",
+    "committer": "lingter100",
+    "sha": "cae10eca65362a5b64526a1484d8a93efa3c682b"
+  },
+  "runs": [
+    {
+      "run_id": 39390198016,
+      "head_sha": "cae10eca65362a5b64526a1484d8a93efa3c682b",
+      "conclusion": "success",
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39390198016",
+      "jobs": [
+        {
+          "name": "web",
+          "conclusion": "success",
+          "status": "completed",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39390198016/job/118519612933"
+        },
+        {
+          "name": "java-service",
+          "conclusion": "success",
+          "status": "completed",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39390198016/job/118519613273"
+        },
+        {
+          "name": "backend",
+          "conclusion": "success",
+          "status": "completed",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39390198016/job/118519613493"
+        }
+      ]
+    },
+    {
+      "run_id": 39390205423,
+      "head_sha": "cae10eca65362a5b64526a1484d8a93efa3c682b",
+      "conclusion": "success",
+      "status": "completed",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39390205423",
+      "jobs": [
+        {
+          "name": "web",
+          "conclusion": "success",
+          "status": "completed",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39390205423/job/118519636529"
+        },
+        {
+          "name": "backend",
+          "conclusion": "success",
+          "status": "completed",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39390205423/job/118519636725"
+        },
+        {
+          "name": "java-service",
+          "conclusion": "success",
+          "status": "completed",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39390205423/job/118519636778"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "CI verifies source and synthetic regression; not actual native integration or model quality.",
+    "Calibration source acceptance and item-author dispatch gate only.",
+    "Human review and public deployment remain unperformed."
+  ]
+}

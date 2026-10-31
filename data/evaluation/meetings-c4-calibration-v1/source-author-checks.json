@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "role": "c4_calibration_source",
+  "kind": "source_author_mechanical_checks_not_independent_review",
+  "method": "nfc-whitespace-document-and-blank-line-paragraph-min200-v1",
+  "prior_metadata_sha256": "757a85b523303aa85255d38887f5d7ea5689907942b887317ad296cc669badf4",
+  "fingerprints_sha256": "0f222307428d124ce268a78aec5bc3798d00f47807d54015095be508ae3baf80",
+  "historical_identity_collision_count": 0,
+  "new_normalized_document_duplicate_count": 0,
+  "cross_family_long_paragraph_duplicate_count": 0,
+  "within_family_shared_paragraphs_pending_independent_review": [],
+  "missing_historical_fingerprints": [
+    "Historical meeting source manifests and family registries do not provide normalized full-document or long-paragraph fingerprints; old raw bodies were not reopened to manufacture them.",
+    "Pre-C1/C0, M5-A and generic synthetic smoke source bodies are not exhaustively covered by the selected source-manifest identities. Existing source-family and URL metadata are a partial exclusion index, not complete duplicate coverage.",
+    "M5-B registry contributes family identities only; its held-out contexts/questions/oracles remain closed. No semantic near-duplicate or translation absence is proved."
+  ],
+  "complete_near_duplicate_absence_proven": false,
+  "semantic_freshness_verdict": "not_independently_reviewed",
+  "validation_body_reads": 0,
+  "old_pool_body_reads": 0,
+  "question_oracle_reads": 0,
+  "human_review_count": 0
+}

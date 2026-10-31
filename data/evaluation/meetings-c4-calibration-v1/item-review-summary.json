@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "metadata_only_independent_item_review_summary",
+  "reviewer_id": "c4_calibration_item_review",
+  "actual_model": "gpt-6-astra",
+  "actual_reasoning_effort": "xhigh",
+  "actual_role_settings_evidence": "Parent tool-accepted role delegation",
+  "reviewed_at_utc": "2026-10-16T05:29:29.604555+00:00",
+  "verdict": "rejected",
+  "accepted_count": 5,
+  "rejected_count": 1,
+  "requested_change_count": 1,
+  "rejected_ids": [
+    "C4-CAL-05"
+  ],
+  "issue_categories": [
+    "sufficient_evidence_alternative_completeness"
+  ],
+  "question_changes_required": false,
+  "source_changes_required": false,
+  "context_changes_required": false,
+  "required_fact_text_changes_required": false,
+  "cases": 6,
+  "required_facts": 24,
+  "source_documents": 6,
+  "source_chunks": 32,
+  "whole_family_absence_reviews": 2,
+  "model_free_structural_checks": "passed",
+  "actual_code_git_bindings": 85,
+  "actual_source_git_bindings": 14,
+  "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "pre_semantic_head": "1b3f3200bef92eb612db01f5dbccac4aa5c7028b",
+  "source_freeze_sha256": "8b1bac818cc1cc786ae75c275c58444ce6928ffb0940f0a4ccfdf229a9f53ce1",
+  "original_author_artifacts_sha256": {
+    "draft.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+    "oracle-draft.json": "68a7a4b37ac6b7badd6b0d12b90fa42ec8f470c1b89c1b30307344f60a743abc",
+    "context-selection.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9",
+    "item-author-receipt.json": "210f4f499bbf616be0dafa344a9354eb500368defb91251ae66276d1fa072a83"
+  },
+  "review_files_sha256": {
+    "item-prereview.json": "84922366bb082f768ad3baaf505dec7f01b1032366884d903c48c96c5a57775f",
+    "item-prereview-notes.md": "c51333c76eabcd5721193454e2a084a648b5778a46758913165b8328571973bf"
+  },
+  "item_freeze_created": false,
+  "next_step": "Author reads independent notes and creates NEW v2 evidence-alternative correction; separate independent re-review before freeze/commit/tokenizer.",
+  "validation_semantics_read": false,
+  "old_closed_pool_semantics_read": false,
+  "fully_blind_claim": false,
+  "eligible_for_final_output_judging": false,
+  "source_author_exposure_limit_preserved": true,
+  "full_load_material_run": false,
+  "actual_git_gate_bypassed": false,
+  "tokenizer_loads": 0,
+  "native_calls": 0,
+  "model_inference_calls": 0,
+  "downloads": 0,
+  "maven_runs": 0,
+  "git_mutations": 0,
+  "human_reviews": 0
+}

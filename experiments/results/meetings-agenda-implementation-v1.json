@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "experimental_implementation_focused_checks_and_review_passed",
+  "analysis_contract": "agenda_extraction_v1",
+  "method": "One full-document structured completion jointly selects summary claims, substantive items and optional metadata. Explicit Markdown agenda/list/Action Items relationships and unchanged raw source spans are preserved. No per-line classification, same-model acceptance review, retry or generated repair occurs in this opt-in mode.",
+  "reports": {
+    "pure_implementation_sha256": "fddaa1bfa3cdd71fe9c33de4c3ea4e4f335df0621c2cdc4928f6637f537e5a46",
+    "field_binding_repair_sha256": "802da31986d9897f7703a6749c5f1fa6a0227255d88b36728b02c48408cefc54",
+    "field_binding_review_sha256": "1e43dfb6c3b36409cb9792f8bdf292fe2fec43c407e841cd53e2eddb8faab048",
+    "runtime_implementation_sha256": "fbb73bc912e242da9b1f612b3d6ad9e40a211e1a06a109557f6216be5216a900",
+    "verifier_implementation_sha256": "f6d1b3b52bac23c5499797f828ca86c023a358f7ecb6fb22d09b81b5b5c01747",
+    "final_integration_review_sha256": "ee66b6b96c1f78da6d45ed5d7f18c7e5ef4bc50bd92504ccc3aa1dd863ee153b"
+  },
+  "checks": [
+    {"scope": "pure module", "unique_generic_passed": 27, "ruff": "passed"},
+    {"scope": "field-binding repair", "old_regressions_demonstrated": 4, "targeted_and_affected_passed": 15, "seconds": 0.78, "ruff": "passed"},
+    {"scope": "runtime and launcher", "unique_affected_passed": 22, "initial_fixture_assertion_failure_preserved": true, "ruff": "passed"},
+    {"scope": "input observation delta", "affected_passed": 4, "seconds": 0.54, "ruff": "passed"},
+    {"scope": "analysis-only verifier", "focused_passed": 14, "new": 12, "affected": 2, "seconds": 1.96, "ruff": "passed"}
+  ],
+  "overlapping_checks_not_summed": true,
+  "independent_review_open_blockers": 0,
+  "review_fixes": [
+    "Owner/date/priority proof comes from the terminal task unit; collective owner inheritance requires an included, active, actual Action Items ancestor. Intervening siblings and expired blocks cannot supply fields. Unsupported non-null values reject rather than silently changing to null.",
+    "Removed a duplicate input-count preflight. The existing generator records the exact development body and measured count, then rejects over 6144 before any completion dispatch."
+  ],
+  "limits": {"input_tokens": 6144, "context_tokens": 8192, "output_tokens_per_analysis": 768, "shared_request_seconds": 120, "analyses": 2, "qa_requests": 0, "native_completion_max": 2, "requested_output_tokens_max": 1536, "helper_seconds": 475, "outer_seconds": 510},
+  "limitations": [
+    "Schema and exact spans do not establish complete or correct summary/action semantics.",
+    "A parent-to-later-child contiguous quote retains intervening sibling text and records that diagnostic.",
+    "Non-Action ancestor field inheritance is conservatively unsupported.",
+    "Actual joint-output fit, latency and quality remain unmeasured by these synthetic checks."
+  ],
+  "defaults_changed": false,
+  "same_model_review_performed": false,
+  "human_reviews": 0,
+  "service_adopted": false
+}

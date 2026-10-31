@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "independent_item_prereview",
+  "created_at_utc": "2026-10-16T05:28:55.487913+00:00",
+  "reviewer_id": "c4_validation_item_review",
+  "actual_model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "fork_turns": "none",
+  "setting_evidence": "Tool-accepted delegation settings reported in the parent assignment.",
+  "author_ids": [
+    "c4_validation_item_author"
+  ],
+  "verdict": "accepted",
+  "accepted_ids": [
+    "C4-VAL-01",
+    "C4-VAL-02",
+    "C4-VAL-03",
+    "C4-VAL-04",
+    "C4-VAL-05",
+    "C4-VAL-06",
+    "C4-VAL-07",
+    "C4-VAL-08"
+  ],
+  "rejected_ids": [],
+  "requested_changes": [],
+  "human_review_count": 0,
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c4-validation-v1/source-freeze-v1.json",
+    "sha256": "b4a132dadd9cef1b5ba5b0c15e2a28024b8fb5141a8200de30afe812c3c52698"
+  },
+  "code_freeze": {
+    "file": "data/evaluation/meetings-c4-quality-toolchain-freeze-v1.json",
+    "sha256": "ecd3d2c6eff1681ce9a30d8756c6e87be72e58828cf1e2e9d0974a3c8218db78"
+  },
+  "reviewed_author_files": {
+    "data/evaluation/meetings-c4-validation-v1/draft.json": "f6f1c5a8ca8584cd8b35d3c2d72659d207fc37a44c0dcdbafce7aaccde728955",
+    "data/evaluation/meetings-c4-validation-v1/oracle-draft.json": "490d6f658b2dc76cabaefc8a0df64ea9c3fbf55b84376cedc64f2514f64b00dc",
+    "data/evaluation/meetings-c4-validation-v1/context-selection.json": "038b1265de10917a463e415c6eb8ca47192f031b1a23476e4cada61fad9217ed",
+    "data/evaluation/meetings-c4-validation-v1/item-author-receipt.json": "ea5996e36a677da6ad3a11877d5891fa7dfb8c1dd485da1e0f0ec29d151402c2"
+  },
+  "pre_semantic_git_proof": {
+    "file": ".local/c4-validation-item-review-v1/preflight.json",
+    "sha256": "39159d3e177a84e9f9292df0ae54207e2cc7e3199d8c8a4f43d52265beb3e6b7"
+  },
+  "model_free_structure_check": {
+    "file": ".local/c4-validation-item-review-v1/structure-check.json",
+    "sha256": "b84d8380fb226562009455c149040e1f676a44c0d0add54b2c1dd84a1a76974b"
+  },
+  "semantic_notes": {
+    "file": "data/evaluation/meetings-c4-validation-v1/item-prereview-notes.md",
+    "sha256": "43871671e4aef4ae0687db4faf552f688c80597a22566e85d9efe79269f480f4"
+  },
+  "decisions": [
+    {
+      "id": "C4-VAL-01",
+      "verdict": "accepted",
+      "required_facts_checked": 5,
+      "category": "multiple_meetings",
+      "question_fact_completeness": true,
+      "subject_date_state_conditions": true,
+      "exact_whole_block_coordinates": true,
+      "whole_chunk_selection": true,
+      "all_sufficient_alternatives_checked": true,
+      "full_adopted_family_read": true,
+      "absence_checked_where_required": true,
+      "rationale": "Different dated discussions preserve preparation versus proposed publication; both meetings are necessary, with Korean response requiring English evidence.",
+      "requested_changes": []
+    },
+    {
+      "id": "C4-VAL-02",
+      "verdict": "accepted",
+      "required_facts_checked": 4,
+      "category": "general_only",
+      "question_fact_completeness": true,
+      "subject_date_state_conditions": true,
+      "exact_whole_block_coordinates": true,
+      "whole_chunk_selection": true,
+      "all_sufficient_alternatives_checked": true,
+      "full_adopted_family_read": true,
+      "absence_checked_where_required": true,
+      "rationale": "Goal and all three work streams retain scope, technical architecture, sponsors and proposed/implemented solutions; the general document alone is sufficient.",
+      "requested_changes": []
+    },
+    {
+      "id": "C4-VAL-03",
+      "verdict": "accepted",
+      "required_facts_checked": 4,
+      "category": "whole_family_absence",
+      "question_fact_completeness": true,
+      "subject_date_state_conditions": true,
+      "exact_whole_block_coordinates": true,
+      "whole_chunk_selection": true,
+      "all_sufficient_alternatives_checked": true,
+      "full_adopted_family_read": true,
+      "absence_checked_where_required": true,
+      "rationale": "Known organization/publisher plan is retained, but actual release date and package version are absent from all three complete family documents.",
+      "requested_changes": []
+    },
+    {
+      "id": "C4-VAL-04",
+      "verdict": "accepted",
+      "required_facts_checked": 4,
+      "category": "whole_family_absence",
+      "question_fact_completeness": true,
+      "subject_date_state_conditions": true,
+      "exact_whole_block_coordinates": true,
+      "whole_chunk_selection": true,
+      "all_sufficient_alternatives_checked": true,
+      "full_adopted_family_read": true,
+      "absence_checked_where_required": true,
+      "rationale": "PR197 target and next action are retained; actual revised-PR merge date/hash are absent. A different issue historical commit is not sufficient.",
+      "requested_changes": []
+    },
+    {
+      "id": "C4-VAL-05",
+      "verdict": "accepted",
+      "required_facts_checked": 5,
+      "category": "mixed",
+      "question_fact_completeness": true,
+      "subject_date_state_conditions": true,
+      "exact_whole_block_coordinates": true,
+      "whole_chunk_selection": true,
+      "all_sufficient_alternatives_checked": true,
+      "full_adopted_family_read": true,
+      "absence_checked_where_required": true,
+      "rationale": "General package/approval prerequisites and a later specific approval/pending-work state are both necessary; overlapping fragments do not replace complete support.",
+      "requested_changes": []
+    },
+    {
+      "id": "C4-VAL-06",
+      "verdict": "accepted",
+      "required_facts_checked": 4,
+      "category": "mixed",
+      "question_fact_completeness": true,
+      "subject_date_state_conditions": true,
+      "exact_whole_block_coordinates": true,
+      "whole_chunk_selection": true,
+      "all_sufficient_alternatives_checked": true,
+      "full_adopted_family_read": true,
+      "absence_checked_where_required": true,
+      "rationale": "Full interpolation rule and completed visit/recovery outcome require general plus meeting; no replacement/completion is inferred, and English response requires Korean passages.",
+      "requested_changes": []
+    },
+    {
+      "id": "C4-VAL-07",
+      "verdict": "accepted",
+      "required_facts_checked": 4,
+      "category": "whole_family_absence",
+      "question_fact_completeness": true,
+      "subject_date_state_conditions": true,
+      "exact_whole_block_coordinates": true,
+      "whole_chunk_selection": true,
+      "all_sufficient_alternatives_checked": true,
+      "full_adopted_family_read": true,
+      "absence_checked_where_required": true,
+      "rationale": "Approved identifier and posting plan are known; actual completion time and public download URL are absent across the full family, including conditional handoff and future records.",
+      "requested_changes": []
+    },
+    {
+      "id": "C4-VAL-08",
+      "verdict": "accepted",
+      "required_facts_checked": 4,
+      "category": "whole_family_absence",
+      "question_fact_completeness": true,
+      "subject_date_state_conditions": true,
+      "exact_whole_block_coordinates": true,
+      "whole_chunk_selection": true,
+      "all_sufficient_alternatives_checked": true,
+      "full_adopted_family_read": true,
+      "absence_checked_where_required": true,
+      "rationale": "Alternative activity, operational-check schedule and added participation option are known; no finalized rain-refund conditions or amount exists in the full family.",
+      "requested_changes": []
+    }
+  ],
+  "counts": {
+    "items": 8,
+    "accepted": 8,
+    "rejected": 0,
+    "requested_changes": 0,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "required_facts": 34,
+    "supported_required_facts": 27,
+    "missing_required_facts": 7,
+    "evidence_span_links": 28,
+    "full_source_documents": 6,
+    "source_chunks": 20
+  },
+  "answerable_coverage": {
+    "general_only": 1,
+    "multiple_meetings": 1,
+    "mixed": 2,
+    "unavoidably_multi_document": 3,
+    "ko_requiring_en": 1,
+    "en_requiring_ko": 1
+  },
+  "exposure": {
+    "source_or_item_authorship_participation": false,
+    "own_validation_source_item_oracle_semantics_read": true,
+    "calibration_source_item_semantics_read": false,
+    "closed_pool_bodies_read": false,
+    "candidate_contract_schema_and_public_prior_aggregate_metadata_seen": true,
+    "author_semantic_notes_seen_but_not_treated_as_independent_votes": true,
+    "original_calibration_source_author_alternate_validation_repository_exposure_disclosed": true,
+    "original_exploration_exact_scope_partly_unverified": true,
+    "this_reviewer_participated_in_original_exploration": false,
+    "pristine_source_isolation_claim": false,
+    "zero_impact_claim": false,
+    "final_output_judge_eligible": false
+  },
+  "limits": [
+    "AI prereview is not output quality, human acceptance, generalization, or service adoption.",
+    "Historical fingerprint gaps and incomplete near-duplicate detection remain disclosed.",
+    "Full load_material requires reviewed item and freeze bytes committed at HEAD; deferred without bypass."
+  ],
+  "activity_counts": {
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "downloads": 0,
+    "maven_runs": 0,
+    "git_writes": 0,
+    "source_edits": 0,
+    "author_file_edits": 0
+  },
+  "prepare_function_or_cli_invoked": false
+}

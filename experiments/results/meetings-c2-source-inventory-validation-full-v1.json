@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "source_processing_version": 2,
+  "phase": "validation",
+  "mode": "adopted-all",
+  "manifest": {
+    "path": "data/evaluation/meetings-c2-validation-v1/source-manifest-full.json",
+    "sha256": "48fd383b1503f071a3fb99801ec34d9de49681544c86b0a33e2e88f611a48938"
+  },
+  "bound_files": {
+    "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+    "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "scripts/prepare_meeting_plaintext_source_inventory.py": "7c18029970b5ffed953b394ec5b33381e688820cad7ff4688663bdeedb3f35f6",
+    "scripts/prepare_meeting_source_inventory.py": "65d095bf89d918b5fcde1c274d6999d7f791eae26c58c6fe8bdc916b29c80079",
+    "tests/test_prepare_meeting_plaintext_source_inventory.py": "3ce4995b783ebc59f26a840cc7eebda672b62278e884866c4d192217bb6a6f9e",
+    "tests/test_prepare_meeting_source_inventory.py": "ab38a37febf242fb00cd69ce9864bf81f366ee02d88f76a5511e492fb4989511"
+  },
+  "references": {
+    "family_registry": {
+      "path": "data/evaluation/meetings-c2-family-registry-v1.json",
+      "sha256": "0fe710907f10dfc407997970ed176c0a657aa6d1e24a0ca95f4da07f8dd9c76c"
+    },
+    "active_comparison_source_freeze": {
+      "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27"
+    }
+  },
+  "inventory_sha256": "49ce4cf4fb20096227064cb7a6108fc1bcf5aa306d8b4d7205eb089af6d7a2e5",
+  "processing_protocol": "c2-validation-whole-source-literal-nfc-v1",
+  "documents": [
+    {
+      "source_id": "C2-F03-S01",
+      "document_id": "c2-f03-doc-01",
+      "revision": 1,
+      "raw_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917",
+      "raw_size_bytes": 3359,
+      "git_blob_sha1": "d9a06e884d22d700841d47f6b3b37feac364cedb",
+      "processed_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917",
+      "processed_codepoints": 3359,
+      "chunks": 4
+    },
+    {
+      "source_id": "C2-F03-S02",
+      "document_id": "c2-f03-doc-02",
+      "revision": 1,
+      "raw_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb",
+      "raw_size_bytes": 10468,
+      "git_blob_sha1": "3b8775023236e6ed6dfbde744c8ec09a75eb1507",
+      "processed_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb",
+      "processed_codepoints": 10466,
+      "chunks": 13
+    },
+    {
+      "source_id": "C2-F03-S03",
+      "document_id": "c2-f03-doc-03",
+      "revision": 1,
+      "raw_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5",
+      "raw_size_bytes": 15187,
+      "git_blob_sha1": "c0fcf56155d8e38dfa4f8337e243501608f0269e",
+      "processed_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5",
+      "processed_codepoints": 15187,
+      "chunks": 18
+    },
+    {
+      "source_id": "C2-F03-S04",
+      "document_id": "c2-f03-doc-04",
+      "revision": 1,
+      "raw_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19",
+      "raw_size_bytes": 29948,
+      "git_blob_sha1": "fbce61ae9d174fde3d8451768b3486bbb582fb48",
+      "processed_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19",
+      "processed_codepoints": 29948,
+      "chunks": 36
+    },
+    {
+      "source_id": "C2-F04-S01",
+      "document_id": "c2-f04-doc-01",
+      "revision": 1,
+      "raw_sha256": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de",
+      "raw_size_bytes": 4923,
+      "git_blob_sha1": null,
+      "processed_sha256": "a901196a16d486b693b7618ce95437b3f9ef12dd54f64b8fe5e90e1b9c6222de",
+      "processed_codepoints": 2064,
+      "chunks": 3
+    },
+    {
+      "source_id": "C2-F04-S02",
+      "document_id": "c2-f04-doc-02",
+      "revision": 1,
+      "raw_sha256": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311",
+      "raw_size_bytes": 4719,
+      "git_blob_sha1": null,
+      "processed_sha256": "1962e069fa66065bf8f2b62d7c76533ee577d20098742df4ec86ffe3f4f34311",
+      "processed_codepoints": 2053,
+      "chunks": 3
+    }
+  ],
+  "excluded_sources": [],
+  "counts": {
+    "registered_sources": 6,
+    "processed_documents": 6,
+    "chunks": 77,
+    "excluded_sources": 0,
+    "selected_contexts": 0,
+    "questions": 0,
+    "oracles": 0,
+    "synthetic_bodies_authored": 0,
+    "tokenizer_runs": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "human_reviews": 0
+  },
+  "java_parity_verified": false
+}

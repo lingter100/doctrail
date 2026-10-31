@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "commit": "2ab48bd34299c090971a50ceac2ec0323cb4c921",
+  "status": "all_required_checks_passed",
+  "runs": [
+    {
+      "id": 40446396846,
+      "event": "push",
+      "head_sha": "2ab48bd34299c090971a50ceac2ec0323cb4c921",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40446396846",
+      "jobs": [
+        {
+          "id": 121998606928,
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "id": 121998607103,
+          "name": "backend",
+          "conclusion": "success"
+        },
+        {
+          "id": 121998607129,
+          "name": "java-service",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40446403395,
+      "event": "pull_request",
+      "head_sha": "2ab48bd34299c090971a50ceac2ec0323cb4c921",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40446403395",
+      "jobs": [
+        {
+          "id": 121998627947,
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "id": 121998628315,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 121998628866,
+          "name": "backend",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "watchers": [
+    {
+      "session": 85764,
+      "exit_code": 0,
+      "closed": true
+    },
+    {
+      "session": 81669,
+      "exit_code": 0,
+      "closed": true
+    }
+  ],
+  "scope": "Published actual QA failure and summary engine preparation design; not model quality or native engine verification",
+  "user_author_committer": "lingter100"
+}

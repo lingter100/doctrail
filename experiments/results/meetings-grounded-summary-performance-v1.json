@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "kind": "grounded-summary-existing-run-token-latency-metadata-v1",
+  "date": "2026-10-23",
+  "status": "observed_failed_development_run",
+  "metadata_receipt": {
+    "path": ".local/meeting-grounded-summary-independent-v1/token-budget-metadata-v1.json",
+    "bytes": 13494,
+    "sha256": "68464d560c8ca5eb6bb2b86763042cfd8a738a057333c0208eb474ce3d7ebeb2"
+  },
+  "reference_bindings_verified": 24,
+  "measurements": [
+    {
+      "analyze_request_ordinal": 1,
+      "observer_analyze_elapsed_seconds": 62.796999999991385,
+      "observer_interval": "Evidence analyze started event to terminal result/error event; includes observer write overhead and worker call boundary",
+      "worker_analyze_elapsed_ms": 62782.0,
+      "worker_interval": "MeetingRuntime._run monotonic start to successful result telemetry construction; excludes final generator.end_request",
+      "summary_calls": [
+        {
+          "operation": "generation",
+          "input_tokens": 2244,
+          "output_tokens": 421,
+          "finish_reason": "eos",
+          "output_cap": 768,
+          "native_prompt_ms": 3720.584,
+          "native_prediction_ms": 23354.325,
+          "native_total_elapsed_seconds": "unavailable",
+          "adapter_complete_elapsed_seconds": 27.360000000000582,
+          "native_transport_observer_elapsed_seconds": 27.218999999997322,
+          "native_transport_observer_interval": "observer transport_started /completion to observer transport_response /completion; includes observer and HTTP overhead"
+        },
+        {
+          "operation": "review",
+          "input_tokens": 2606,
+          "output_tokens": 40,
+          "finish_reason": "eos",
+          "output_cap": 128,
+          "native_prompt_ms": 4345.981,
+          "native_prediction_ms": 2152.775,
+          "native_total_elapsed_seconds": "unavailable",
+          "adapter_complete_elapsed_seconds": 6.6560000000026776,
+          "native_transport_observer_elapsed_seconds": 6.6560000000026776,
+          "native_transport_observer_interval": "observer transport_started /completion to observer transport_response /completion; includes observer and HTTP overhead"
+        }
+      ]
+    },
+    {
+      "analyze_request_ordinal": 2,
+      "observer_analyze_elapsed_seconds": 68.1880000000092,
+      "observer_interval": "Evidence analyze started event to terminal result/error event; includes observer write overhead and worker call boundary",
+      "worker_analyze_elapsed_ms": "unavailable",
+      "worker_interval": "MeetingRuntime._run monotonic start to successful result telemetry construction; excludes final generator.end_request",
+      "summary_calls": [
+        {
+          "operation": "generation",
+          "input_tokens": 2486,
+          "output_tokens": 359,
+          "finish_reason": "eos",
+          "output_cap": 768,
+          "native_prompt_ms": 4648.431,
+          "native_prediction_ms": 23731.033,
+          "native_total_elapsed_seconds": "unavailable",
+          "adapter_complete_elapsed_seconds": "unavailable",
+          "native_transport_observer_elapsed_seconds": 28.53200000000652,
+          "native_transport_observer_interval": "observer transport_started /completion to observer transport_response /completion; includes observer and HTTP overhead"
+        },
+        {
+          "operation": "review",
+          "input_tokens": 2786,
+          "output_tokens": 40,
+          "finish_reason": "eos",
+          "output_cap": 128,
+          "native_prompt_ms": 5303.93,
+          "native_prediction_ms": 2691.896,
+          "native_total_elapsed_seconds": "unavailable",
+          "adapter_complete_elapsed_seconds": "unavailable",
+          "native_transport_observer_elapsed_seconds": 8.218999999997322,
+          "native_transport_observer_interval": "observer transport_started /completion to observer transport_response /completion; includes observer and HTTP overhead"
+        }
+      ]
+    }
+  ],
+  "aggregates": {
+    "analyze_request_count": 2,
+    "summary_completion_count": 4,
+    "generation_completion_count": 2,
+    "review_completion_count": 2,
+    "input_tokens_total": 10122,
+    "output_tokens_total": 860,
+    "generation_input_tokens_total": 4730,
+    "generation_output_tokens_total": 780,
+    "review_input_tokens_total": 5392,
+    "review_output_tokens_total": 80,
+    "worker_analyze_elapsed_available_count": 1,
+    "adapter_complete_elapsed_available_count": 2,
+    "native_total_elapsed_available_count": 0
+  },
+  "service_external_paid_api_calls": 0,
+  "per_request_total_cost": "not_measured",
+  "limitations": [
+    "Two existing synthetic development analyze requests; no new model execution.",
+    "Original run remains failed; descriptive timings are not an SLO or successful end-to-end latency.",
+    "Native prompt and prediction fields are not treated as a directly measured native total.",
+    "Unavailable worker/adapter elapsed for the failed request remains unavailable.",
+    "Observed v1 token usage is not a guarantee that a prospective v2 wire fits the same budgets.",
+    "Hardware, electricity and coding-agent costs are not measured as service request cost."
+  ]
+}

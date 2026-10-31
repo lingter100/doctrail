@@ -1,0 +1,644 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "cases": [
+    {
+      "id": "C2-CAL-01",
+      "family_id": "C2-F01",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "member_approval",
+          "text": "일반 회원의 검토만으로 코드 기여를 수락하거나 PR을 병합할 수 없고, 회원 검토에 더해 적어도 한 approver가 필요하다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-membership-r1-c0008",
+                "start_offset": 6768,
+                "end_offset": 6936,
+                "quote": "- Members can review and approve via the GitHub workflow.  This review work is\n  not sufficient to merge a PR.  There will still need to be a review by an\n  *approver*."
+              }
+            ],
+            [
+              {
+                "chunk_id": "c2-cal-f01-membership-r1-c0008",
+                "start_offset": 7227,
+                "end_offset": 7331,
+                "quote": "Acceptance of code contributions requires at least one\napprover in addition to the reviews by *members.*"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "gc_technical_scope",
+          "text": "GC는 모든 기술적 책임을 TC와 SIG에 위임해야 하며 기술적 의사결정 권한을 자체적으로 보유해서는 안 된다는 지침이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-governance-charter-r1-c0001",
+                "start_offset": 1240,
+                "end_offset": 1383,
+                "quote": "- All technical responsibilities should be delegated to the TC and SIGs; the\n  GC should not retain technical decision-making authority itself."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "일반 회원의 GitHub approve만으로 병합 요건을 충족했다고 하지 않는다.",
+        "GC의 전반적 거버넌스 책임을 직접적인 기술 승인 권한으로 바꾸지 않는다.",
+        "approver 검토가 다른 모든 병합 요건을 자동 충족한다거나 이미 실제 병합됐다고 추론하지 않는다."
+      ],
+      "limitations": [
+        "고정된 프로젝트 정책 문서의 역할 설명이며 특정 PR의 실제 승인·병합 결과를 묻지 않는다.",
+        "Charter와 membership의 서로 다른 사실이 모두 필요하며 한 문서만으로 충분한 대안은 확인하지 못했다."
+      ],
+      "question_author": "/root/c2_calibration_source",
+      "oracle_author": "/root/c2_calibration_source",
+      "independent_prereviewer": "/root",
+      "human_review_count": 0
+    },
+    {
+      "id": "C2-CAL-02",
+      "family_id": "C2-F01",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "corporate_limit",
+          "text": "At most two Governance Committee members may be from one company at any time.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-governance-charter-r1-c0010",
+                "start_offset": 8806,
+                "end_offset": 8922,
+                "quote": "To encourage diversity there will be a maximum of two Governance Committee\nmembers from any one company at any time."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "resignation_window",
+          "text": "If representation changes through job changes, acquisitions or other events, enough committee members must resign within 28 days to restore that maximum.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-governance-charter-r1-c0010",
+                "start_offset": 8924,
+                "end_offset": 9114,
+                "quote": "If representation changes because of job changes, acquisitions, or other events,\nsufficient members of the committee must resign within 28 days until the maximum\nrepresentation is respected."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "removal_after_failure",
+          "text": "If enough members cannot be found to resign after that period, the entire company's representation is removed.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-governance-charter-r1-c0010",
+                "start_offset": 9115,
+                "end_offset": 9243,
+                "quote": "If it is impossible to find sufficient members to\nresign after that period, the entire company’s representation will be removed."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "replacement_election",
+          "text": "A special election is held for the affected positions; the special-election rule calls for it as soon as possible after a resignation or other loss of a member.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-governance-charter-r1-c0010",
+                "start_offset": 9244,
+                "end_offset": 9349,
+                "quote": "In this case a special election will be held for those position, as [outlined\nbelow](#special-elections)."
+              },
+              {
+                "chunk_id": "c2-cal-f01-governance-charter-r1-c0011",
+                "start_offset": 9560,
+                "end_offset": 9708,
+                "quote": "In the event of a resignation or other loss of a governance committee member, a\nspecial election for that position will be held as soon as possible."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not replace the 28-day resignation period with an election date or a fixed calendar deadline.",
+        "Do not say only the excess seats are removed when the charter says the entire company's representation is removed.",
+        "Do not claim a particular company or member actually changed jobs or resigned."
+      ],
+      "limitations": [
+        "The charter gives a conditional procedure, not an account of an actual representation change.",
+        "No exact special-election date is supplied; as soon as possible must not become a fabricated calendar date."
+      ],
+      "question_author": "/root/c2_calibration_source",
+      "oracle_author": "/root/c2_calibration_source",
+      "independent_prereviewer": "/root",
+      "human_review_count": 0
+    },
+    {
+      "id": "C2-CAL-03",
+      "family_id": "C2-F01",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "default_scope",
+          "text": "TC가 비준한 SIG charter에서 달리 정하지 않은 경우에 적용되는 기본 절차이며 기존 SIG maintainers의 투표다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-membership-r1-c0011",
+                "start_offset": 9068,
+                "end_offset": 9218,
+                "quote": "Unless stated otherwise in a SIG charter ratified by the Technical Committee,\na new triager is elected by vote of the existing maintainers of the SIG."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "nominee_acceptance",
+          "text": "후보자가 PR을 승인해 지명을 수락해야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-membership-r1-c0011",
+                "start_offset": 9494,
+                "end_offset": 9580,
+                "quote": "- The person being nominated has accepted the nomination by approving the pull request"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "majority_no_objection",
+          "text": "전원 승인 경로가 아니라면 maintainer 과반이 PR을 승인하고, 어떤 maintainer도 changes 요청으로 반대하지 않아야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-membership-r1-c0011",
+                "start_offset": 9581,
+                "end_offset": 9767,
+                "quote": "- All maintainers have approved the pull request OR a majority of maintainers\n  have approved the pull request and no maintainer has objected by requesting\n  changes on the pull request."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "five_day_window",
+          "text": "전원 승인이 없는 경우 병합 전에 PR을 최소 5일 동안 열어 두도록 안내한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-membership-r1-c0011",
+                "start_offset": 9768,
+                "end_offset": 9901,
+                "quote": "In the case that all maintainers have not given\n  approval, the pull request should stay open for a minimum of 5 days before merging."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "status_after_merge",
+          "text": "후보자는 PR이 병합된 뒤 트리아저로 간주된다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-membership-r1-c0012",
+                "start_offset": 10066,
+                "end_offset": 10135,
+                "quote": "The nominee is considered a triager after the pull request is merged."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "과반 승인만 있으면 반대나 대기 기간에 상관없이 병합할 수 있다고 하지 않는다.",
+        "기존 triager나 approver의 지지 리뷰를 maintainer의 병합 승인으로 바꾸지 않는다.",
+        "후보자 수락이나 PR 생성 시점에 이미 트리아저가 됐다고 하지 않는다.",
+        "TC 비준 SIG charter의 다른 규정을 무시해 모든 SIG에 예외 없이 동일하다고 하지 않는다."
+      ],
+      "limitations": [
+        "일반 절차를 묻는 문항으로 특정 SIG의 별도 charter나 실제 PR 상태는 제공하지 않는다.",
+        "최소 대기 기간의 원문 should를 본문에 없는 별도 자동 병합 명령으로 강화하지 않는다."
+      ],
+      "question_author": "/root/c2_calibration_source",
+      "oracle_author": "/root/c2_calibration_source",
+      "independent_prereviewer": "/root",
+      "human_review_count": 0
+    },
+    {
+      "id": "C2-CAL-04",
+      "family_id": "C2-F01",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "regular_frequency",
+          "text": "Regular governance committee meetings are held at least once per month; closed meetings do not count toward that required frequency.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f01-governance-charter-r1-c0014",
+                "start_offset": 12045,
+                "end_offset": 12121,
+                "quote": "Regular governance committee meetings will be held, at least once per month."
+              },
+              {
+                "chunk_id": "c2-cal-f01-governance-charter-r1-c0015",
+                "start_offset": 12776,
+                "end_offset": 12844,
+                "quote": "closed meetings do not\ncount towards the required meeting frequency."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "latest_actual_meeting_date",
+          "text": "The exact calendar date of the most recent actual regular GC meeting.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "The policy establishes a regular meeting frequency but does not record the latest meeting occurrence or its exact date. That essential requested fact is absent from the whole adopted public source family, so the expected status is abstained.",
+      "forbidden_inferences": [
+        "Do not infer an actual meeting date from the charter's last-updated month, repository commit time or monthly cadence.",
+        "Do not supply a partial answered response with the frequency while the requested actual date is missing.",
+        "Do not count a closed meeting toward the regular meeting frequency."
+      ],
+      "limitations": [
+        "Both complete adopted public documents were checked as source material; neither supplies an actual most-recent GC meeting date.",
+        "Outside calendars, recordings and linked documents are not adopted evidence."
+      ],
+      "question_author": "/root/c2_calibration_source",
+      "oracle_author": "/root/c2_calibration_source",
+      "independent_prereviewer": "/root",
+      "human_review_count": 0
+    },
+    {
+      "id": "C2-CAL-05",
+      "family_id": "C2-F02",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "previous_session_window",
+          "text": "해당 초급 균형반의 종전 안내 시간은 14:00~14:45다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+                "start_offset": 239,
+                "end_offset": 266,
+                "quote": "적용 대상: 2030-02-15 주빙면 오후 세션"
+              },
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+                "start_offset": 605,
+                "end_offset": 682,
+                "quote": "| 세션 | 종전 시각 | 새 확정 시각 |\n|---|---|---|\n| 초급 균형반 | 14:00~14:45 | 14:18~15:03 |"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "new_session_window",
+          "text": "2030-02-15 하루에 적용하는 새 확정 시간은 14:18~15:03이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+                "start_offset": 239,
+                "end_offset": 266,
+                "quote": "적용 대상: 2030-02-15 주빙면 오후 세션"
+              },
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+                "start_offset": 475,
+                "end_offset": 551,
+                "quote": "윤라온이 아래 조정안을 확인했고 남서우가 확정했다. 적용일은 2월 15일 하루이며, 다른 운영일의 정규 시간표를 변경하는 결정은 아니다."
+              },
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+                "start_offset": 605,
+                "end_offset": 682,
+                "quote": "| 세션 | 종전 시각 | 새 확정 시각 |\n|---|---|---|\n| 초급 균형반 | 14:00~14:45 | 14:18~15:03 |"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "required_notification_channels",
+          "text": "확정 시각 변경은 로비 안내판과 해당 세션 등록자 문자에 모두 반영해야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-rules-r1-c0001",
+                "start_offset": 1060,
+                "end_offset": 1104,
+                "quote": "확정된 세션 시각 변경은 로비 안내판과 해당 세션 등록자 문자에 모두 반영한다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "per_channel_records",
+          "text": "접수 담당자는 각 채널에 반영한 내용과 처리 시각을 기록해야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-rules-r1-c0001",
+                "start_offset": 1105,
+                "end_offset": 1138,
+                "quote": "접수 담당자는 채널마다 반영한 내용과 처리 시각을 기록한다."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "회의일인 2월 13일을 세션 운영일로 바꾸거나 변경을 다른 운영일에도 적용하지 않는다.",
+        "안내 의무를 실제 발송·게시 완료나 모든 등록자의 수신 확인으로 바꾸지 않는다.",
+        "초급 균형반과 개인 자유연습의 시간 또는 미채택 연장 제안을 섞지 않는다."
+      ],
+      "limitations": [
+        "새 확정 시간은 계획이며 실제 입장 승인이나 수업 수행 사실까지 묻지 않는다.",
+        "시간표는 회의록, 채널별 안내·기록 의무는 운영 기준에 있어 두 문서가 모두 필요하다."
+      ],
+      "question_author": "/root/c2_calibration_source",
+      "oracle_author": "/root/c2_calibration_source",
+      "independent_prereviewer": "/root",
+      "human_review_count": 0
+    },
+    {
+      "id": "C2-CAL-06",
+      "family_id": "C2-F02",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "not_started",
+          "text": "Personal free practice had not yet started at the 15:10 cutoff on 2030-02-15.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+                "start_offset": 146,
+                "end_offset": 184,
+                "quote": "상태 확인 기준: 2030-02-15 15:10까지 접수한 현장 기록"
+              },
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0001",
+                "start_offset": 1119,
+                "end_offset": 1138,
+                "quote": "개인 자유연습은 아직 시작 전이다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "no_approval_or_start_record",
+          "text": "At 15:10 there was no recorded entry approval or actual start for personal free practice; this is not an assertion that entry was formally denied.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0001",
+                "start_offset": 1181,
+                "end_offset": 1220,
+                "quote": "15:10 기준 개인 자유연습의 입장 승인이나 실제 시작 기록은 없다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "planned_recheck",
+          "text": "Yun Ra-on was to recheck the use area and the preceding cleanup status at 15:15; that check was still planned.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0001",
+                "start_offset": 1139,
+                "end_offset": 1180,
+                "quote": "윤라온이 15:15에 이용 구역과 직전 정리 상태를 다시 확인할 예정이며,"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "next_shift_recording",
+          "text": "The next worker must add the actual approval and progress records; the prior beginner class's approval is not the free-practice approval.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0001",
+                "start_offset": 1221,
+                "end_offset": 1294,
+                "quote": "앞선 초급 균형반의 입장 승인을 자유연습의 승인으로 옮겨 적지 않는다. 다음 근무자는 실제 승인과 진행 결과를 추가 기록해야 한다."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not report the 15:15 check as already completed at the 15:10 cutoff.",
+        "Do not change a missing approval record into a documented denial or a confirmed approval.",
+        "Do not reuse the beginner class's approval/start record as the free-practice event.",
+        "Do not treat the 15:12 document writing time as the 15:10 status cutoff."
+      ],
+      "limitations": [
+        "This is explicitly fictional source material and a record limited to the stated cutoff.",
+        "Reasonable transliterations of 윤라온 are acceptable; a Korean proper name inside an otherwise English answer does not itself fail the language requirement."
+      ],
+      "question_author": "/root/c2_calibration_source",
+      "oracle_author": "/root/c2_calibration_source",
+      "independent_prereviewer": "/root",
+      "human_review_count": 0
+    },
+    {
+      "id": "C2-CAL-07",
+      "family_id": "C2-F02",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "resurfacing_finished",
+          "text": "고해림이 14:03에 제빙 종료를 기록했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+                "start_offset": 146,
+                "end_offset": 184,
+                "quote": "상태 확인 기준: 2030-02-15 15:10까지 접수한 현장 기록"
+              },
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+                "start_offset": 708,
+                "end_offset": 735,
+                "quote": "| 14:03 | 고해림이 제빙 종료를 기록함 |"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "inspection_held",
+          "text": "14:05에 동쪽 펜스 앞 잔수로 빙면 점검 통과를 보류했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+                "start_offset": 736,
+                "end_offset": 773,
+                "quote": "| 14:05 | 동쪽 펜스 앞 잔수로 빙면 점검 통과를 보류함 |"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "reinspection_passed",
+          "text": "잔수를 정리한 뒤 고해림이 14:11에 재점검 통과를 기록했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+                "start_offset": 774,
+                "end_offset": 810,
+                "quote": "| 14:11 | 고해림이 잔수 정리 후 재점검 통과를 기록함 |"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "entry_approved",
+          "text": "윤라온이 14:14에 초급 균형반 입장을 승인했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+                "start_offset": 811,
+                "end_offset": 842,
+                "quote": "| 14:14 | 윤라온이 초급 균형반 입장을 승인함 |"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "actual_lesson_window",
+          "text": "초급 균형반은 실제 14:18에 시작해 15:03에 끝났다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-handoff-r1-c0000",
+                "start_offset": 843,
+                "end_offset": 901,
+                "quote": "| 14:18 | 초급 균형반 수업을 실제 시작함 |\n| 15:03 | 초급 균형반 수업을 실제 마침 |"
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "제빙 종료를 점검 통과나 입장 승인으로 합치지 않는다.",
+        "준비 목표 시각이나 확정 계획 시각을 실제 완료 시각의 근거로 대신 쓰지 않는다.",
+        "잔수 때문에 보류된 동안 이미 입장을 승인했다고 하지 않는다.",
+        "초급 균형반의 실제 수행 기록을 개인 자유연습에 적용하지 않는다."
+      ],
+      "limitations": [
+        "표에 적힌 실제 사건의 순서를 묻는다. 기록에 없는 사고, 지연 보상 또는 원인 분석은 요구하지 않는다.",
+        "겹치는 서비스 청크는 같은 문서의 원문이며 별개의 source로 세지 않는다."
+      ],
+      "question_author": "/root/c2_calibration_source",
+      "oracle_author": "/root/c2_calibration_source",
+      "independent_prereviewer": "/root",
+      "human_review_count": 0
+    },
+    {
+      "id": "C2-CAL-08",
+      "family_id": "C2-F02",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "assigned_checker",
+          "text": "Im Do-gyeom was assigned to check the auxiliary surface's availability and report to Nam Seo-u.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0001",
+                "start_offset": 1112,
+                "end_offset": 1161,
+                "quote": "임도겸이 2월 14일 11:00까지 사용 가능 여부를 확인해 남서우에게 보고하기로 했다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "report_deadline",
+          "text": "The report was due by 11:00 on 2030-02-14, before the 2030-02-15 operation.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+                "start_offset": 125,
+                "end_offset": 140,
+                "quote": "회의일: 2030-02-13"
+              },
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0000",
+                "start_offset": 239,
+                "end_offset": 266,
+                "quote": "적용 대상: 2030-02-15 주빙면 오후 세션"
+              },
+              {
+                "chunk_id": "c2-cal-f02-rink-coordination-r1-c0001",
+                "start_offset": 1112,
+                "end_offset": 1161,
+                "quote": "임도겸이 2월 14일 11:00까지 사용 가능 여부를 확인해 남서우에게 보고하기로 했다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "actual_availability",
+          "text": "Whether the auxiliary ice surface was actually available for use on 2030-02-15.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "The check is assigned with a deadline, but the minutes do not establish actual availability and the handoff explicitly has no received result or substitute-use approval. The full synthetic source family does not supply the requested actual availability, so the expected status is abstained.",
+      "forbidden_inferences": [
+        "Do not infer availability from the assignment, intended use or missing report.",
+        "Do not turn a missing approval into proof that the auxiliary surface was unavailable.",
+        "Do not treat the assigned reporting deadline as the date a report was actually received.",
+        "Do not provide a partial answered response while the actual availability remains unsupported."
+      ],
+      "limitations": [
+        "All three synthetic source bodies were checked: the minutes assign the check, the handoff has no result, and the operating rules supply no site-specific availability result.",
+        "Reasonable transliterations of 임도겸 and 남서우 are acceptable; no actual people are represented."
+      ],
+      "question_author": "/root/c2_calibration_source",
+      "oracle_author": "/root/c2_calibration_source",
+      "independent_prereviewer": "/root",
+      "human_review_count": 0
+    }
+  ]
+}

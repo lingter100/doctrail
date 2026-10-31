@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "exact_commit_observer_repair_ci",
+  "created_at_utc": "2026-10-22T02:09:04.621431+00:00",
+  "commit": "3b623cbd8589074f75951143e8d1e31a63ee3ef5",
+  "author": "lingter100",
+  "committer": "lingter100",
+  "runs": [
+    {
+      "id": 39709145684,
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39709145684",
+      "commit": "3b623cbd8589074f75951143e8d1e31a63ee3ef5",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      }
+    },
+    {
+      "id": 39709151402,
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39709151402",
+      "commit": "3b623cbd8589074f75951143e8d1e31a63ee3ef5",
+      "jobs": {
+        "java-service": "success",
+        "web": "success",
+        "backend": "success"
+      }
+    }
+  ],
+  "git_bindings": [
+    {
+      "path": "scripts/run_meeting_rag_acceptance.py",
+      "bytes": 37095,
+      "sha256": "1b6270066e03365104602ec80c8c537e13d24cc01f5ca79d8b7af56eb733df10"
+    },
+    {
+      "path": "tests/test_run_meeting_rag_acceptance.py",
+      "bytes": 46938,
+      "sha256": "d2b495664968ce1c752b9515689e334593b967288de20d5797a68c23a1c88710"
+    },
+    {
+      "path": "docs/MEETINGS-ANALYSIS-BATCH-PLAN.md",
+      "bytes": 13032,
+      "sha256": "f60734fea32122ae351b7dbf0c7f1710f56e9d97355f298555faa66b3a2bd220"
+    },
+    {
+      "path": "experiments/results/meetings-service-rag-observer-fix-v1.json",
+      "bytes": 8951,
+      "sha256": "6fc4ea1573c2a9678f7c9c7c094917d87fa15a4ff5433bcce4cfef8277ecb36a"
+    },
+    {
+      "path": "experiments/results/meetings-service-rag-analysis-timeout-v2.json",
+      "bytes": 13723,
+      "sha256": "51bf710873dbdcb9c37e8c7e1b65d8a5deef233d592641fea618af38ef4f69a5"
+    }
+  ],
+  "scope": "Exact committed observer repairs and batch design only; uncommitted batch implementation is not covered. Bindings are read from Git, not the now-changing working tree.",
+  "actual_native_executions_by_ci": 0,
+  "model_quality_acceptance": false,
+  "phase1_complete": false
+}

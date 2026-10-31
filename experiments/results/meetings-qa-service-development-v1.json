@@ -1,0 +1,49 @@
+{
+  "experiment": "meeting-qa-service-development-v1",
+  "date": "2026-10-31",
+  "source_commit": "e61166fdcdb6de37009671691099ef8d5a5f242e",
+  "status": "closed_failed",
+  "scope": "open development only, actual Java BM25 search and local Ministral generation; not heldout or human review",
+  "public_bundle": "data/meeting-qa-development/opensearch-v1",
+  "generation_attempts": 1,
+  "requested_output_tokens": 768,
+  "max_planned_attempts": 2,
+  "unattempted_cases": [
+    "opensearch-representation-dev-02"
+  ],
+  "observed": {
+    "search_status": 200,
+    "retrieved_chunks": 5,
+    "input_tokens": 2193,
+    "output_tokens": 321,
+    "finish_reason": "eos",
+    "generation_seconds": 6.813,
+    "answer_status": 503,
+    "error": "generation_invalid_json",
+    "raw_format": "fenced JSON",
+    "helper_seconds": 32.219,
+    "outer_seconds": 33.687,
+    "natural_exit": 1
+  },
+  "limitations": [
+    "Second case was not attempted after the HTTP failure.",
+    "Raw answer and exact search context retained locally for independent development diagnosis.",
+    "No claim of semantic correctness, model adoption, heldout improvement or human review.",
+    "Meeting auto-analysis was not run; source documents were registered through the ordinary document API."
+  ],
+  "cleanup": {
+    "known_processes_absent": 9,
+    "launcher_absent": true,
+    "errors": [],
+    "sampled_peak_owned_rss_bytes": 3320188928
+  },
+  "preservation": {
+    "frozen_before_after": 68,
+    "result_sha256": "7184353c3fe76f7bb6076dfdf459d25daaaae583697f2578fc616fb74502d101",
+    "final_sha256": "33760f1a8546fc6ee0d73608a9e10b5a5220a09d68292d8b449f9d26da663bfc",
+    "parent_checked_direct_refs": 16
+  },
+  "human_reviews": 0,
+  "model_quality_accepted": false,
+  "retry_performed": false
+}

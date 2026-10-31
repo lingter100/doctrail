@@ -1,0 +1,437 @@
+{
+  "schema_version": 1,
+  "kind": "measured_single_development_run_performance",
+  "raw_safe_receipt": {
+    "path": ".local/service-rag-batch-development-v1/performance-v2/safe-performance.json",
+    "bytes": 110957,
+    "sha256": "c70f89df1e2724fb72b8253674262c57d55f3e4a2e11a68681662d183e74eb44"
+  },
+  "run_status": {
+    "CLI_exit_code": 1,
+    "original_failed_run_preserved": true,
+    "quality_judgment": false
+  },
+  "empirical_statistics": {
+    "analysis_worker_observed": {
+      "n": 4,
+      "unit": "ms",
+      "min": 27234.0,
+      "median": 29125.0,
+      "mean": 29331.75,
+      "max": 31843.0,
+      "sum": 117327.0,
+      "population": "Only these requests in this single consumed development run; not an operational SLO or population estimate"
+    },
+    "answer_browser_click_to_response_json": {
+      "n": 6,
+      "unit": "ms",
+      "min": 42973,
+      "median": 53906.0,
+      "mean": 52758,
+      "max": 62573,
+      "sum": 316548,
+      "population": "Only these requests in this single consumed development run; not an operational SLO or population estimate"
+    },
+    "answer_java_service_reported": {
+      "n": 6,
+      "unit": "ms",
+      "min": 42914.55,
+      "median": 53838.44,
+      "mean": 52689.255,
+      "max": 62490.71,
+      "sum": 316135.52999999997,
+      "population": "Only these requests in this single consumed development run; not an operational SLO or population estimate"
+    },
+    "answer_worker_observed": {
+      "n": 6,
+      "unit": "ms",
+      "min": 33875.0,
+      "median": 45609.5,
+      "mean": 44731.833333333336,
+      "max": 54188.0,
+      "sum": 268391.0,
+      "population": "Only these requests in this single consumed development run; not an operational SLO or population estimate"
+    },
+    "answer_native_transport_observed": {
+      "n": 6,
+      "unit": "ms",
+      "min": 33546.0,
+      "median": 45102.0,
+      "mean": 44286.5,
+      "max": 53797.0,
+      "sum": 265719.0,
+      "population": "Only these requests in this single consumed development run; not an operational SLO or population estimate"
+    }
+  },
+  "analysis": [
+    {
+      "ordinal": 1,
+      "unit_count": 37,
+      "batch_count": 5,
+      "worker_observed": {
+        "value_ms": 27281.0,
+        "definition": "analyze started observer to result observer; includes preparation, classification, extraction and archive overhead; excludes final response transmission and result-observer completion",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "ui_upload_to_ready": {
+        "value_ms": null,
+        "availability": "unavailable; no matched upload-start timestamp and first-ready end in one recorded clock domain"
+      },
+      "java_http_analysis": {
+        "value_ms": null,
+        "availability": "unavailable; asynchronous analysis has no preserved matched Java HTTP start/end latency"
+      },
+      "native_engine_processing_sum_ms": 21133.384,
+      "native_transport_observed_sum_ms": 21906.0
+    },
+    {
+      "ordinal": 2,
+      "unit_count": 41,
+      "batch_count": 6,
+      "worker_observed": {
+        "value_ms": 30969.0,
+        "definition": "analyze started observer to result observer; includes preparation, classification, extraction and archive overhead; excludes final response transmission and result-observer completion",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "ui_upload_to_ready": {
+        "value_ms": null,
+        "availability": "unavailable; no matched upload-start timestamp and first-ready end in one recorded clock domain"
+      },
+      "java_http_analysis": {
+        "value_ms": null,
+        "availability": "unavailable; asynchronous analysis has no preserved matched Java HTTP start/end latency"
+      },
+      "native_engine_processing_sum_ms": 23833.05,
+      "native_transport_observed_sum_ms": 24517.0
+    },
+    {
+      "ordinal": 3,
+      "unit_count": 38,
+      "batch_count": 5,
+      "worker_observed": {
+        "value_ms": 27234.0,
+        "definition": "analyze started observer to result observer; includes preparation, classification, extraction and archive overhead; excludes final response transmission and result-observer completion",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "ui_upload_to_ready": {
+        "value_ms": null,
+        "availability": "unavailable; no matched upload-start timestamp and first-ready end in one recorded clock domain"
+      },
+      "java_http_analysis": {
+        "value_ms": null,
+        "availability": "unavailable; asynchronous analysis has no preserved matched Java HTTP start/end latency"
+      },
+      "native_engine_processing_sum_ms": 21097.857,
+      "native_transport_observed_sum_ms": 21657.0
+    },
+    {
+      "ordinal": 4,
+      "unit_count": 43,
+      "batch_count": 6,
+      "worker_observed": {
+        "value_ms": 31843.0,
+        "definition": "analyze started observer to result observer; includes preparation, classification, extraction and archive overhead; excludes final response transmission and result-observer completion",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "ui_upload_to_ready": {
+        "value_ms": null,
+        "availability": "unavailable; no matched upload-start timestamp and first-ready end in one recorded clock domain"
+      },
+      "java_http_analysis": {
+        "value_ms": null,
+        "availability": "unavailable; asynchronous analysis has no preserved matched Java HTTP start/end latency"
+      },
+      "native_engine_processing_sum_ms": 24673.782,
+      "native_transport_observed_sum_ms": 25155.0
+    }
+  ],
+  "answers": [
+    {
+      "ordinal": 1,
+      "http_status": 200,
+      "answer_status": "answered",
+      "citations_opened_and_verified": 5,
+      "browser_click_to_response_json": {
+        "value_ms": 59365,
+        "definition": "Immediately before Playwright click/wait setup through parsed Java response JSON; timestamp taken before evidence file write. Excludes form setup, later UI render verification and citation opening.",
+        "clock_domain": "Browser companion Node Date.now wall clock duration; wall-clock adjustments not independently excluded"
+      },
+      "java_service_reported": {
+        "value_ms": 59292.72,
+        "definition": "Server-reported KnowledgeService elapsed duration including retrieval, generation and final authorization check; not full HTTP/network duration",
+        "clock_domain": "Java-reported elapsed_ms; generic implementation uses System.nanoTime internally"
+      },
+      "worker_observed": {
+        "value_ms": 52578.0,
+        "definition": "answer started observer to worker_response observer; excludes Java retrieval and final HTTP transmission, includes generator preparation/validation and archival overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_transport_observed": {
+        "value_ms": 52141.0,
+        "definition": "Native POST request hook to parsed native_response observer; includes transport and observation overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_engine": {
+        "prompt_processing_ms": 5517.572,
+        "token_prediction_ms": 46341.231,
+        "engine_processing_sum_ms": 51858.803,
+        "prompt_tokens": 3161,
+        "predicted_tokens": 693,
+        "cache_tokens": 0,
+        "clock_domain": "Native llama.cpp internally reported duration fields; no subtraction against another clock"
+      }
+    },
+    {
+      "ordinal": 2,
+      "http_status": 200,
+      "answer_status": "answered",
+      "citations_opened_and_verified": 2,
+      "browser_click_to_response_json": {
+        "value_ms": 51114,
+        "definition": "Immediately before Playwright click/wait setup through parsed Java response JSON; timestamp taken before evidence file write. Excludes form setup, later UI render verification and citation opening.",
+        "clock_domain": "Browser companion Node Date.now wall clock duration; wall-clock adjustments not independently excluded"
+      },
+      "java_service_reported": {
+        "value_ms": 51043.7,
+        "definition": "Server-reported KnowledgeService elapsed duration including retrieval, generation and final authorization check; not full HTTP/network duration",
+        "clock_domain": "Java-reported elapsed_ms; generic implementation uses System.nanoTime internally"
+      },
+      "worker_observed": {
+        "value_ms": 42547.0,
+        "definition": "answer started observer to worker_response observer; excludes Java retrieval and final HTTP transmission, includes generator preparation/validation and archival overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_transport_observed": {
+        "value_ms": 42250.0,
+        "definition": "Native POST request hook to parsed native_response observer; includes transport and observation overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_engine": {
+        "prompt_processing_ms": 5632.771,
+        "token_prediction_ms": 36530.452,
+        "engine_processing_sum_ms": 42163.223,
+        "prompt_tokens": 3158,
+        "predicted_tokens": 646,
+        "cache_tokens": 0,
+        "clock_domain": "Native llama.cpp internally reported duration fields; no subtraction against another clock"
+      }
+    },
+    {
+      "ordinal": 3,
+      "http_status": 200,
+      "answer_status": "answered",
+      "citations_opened_and_verified": 6,
+      "browser_click_to_response_json": {
+        "value_ms": 62573,
+        "definition": "Immediately before Playwright click/wait setup through parsed Java response JSON; timestamp taken before evidence file write. Excludes form setup, later UI render verification and citation opening.",
+        "clock_domain": "Browser companion Node Date.now wall clock duration; wall-clock adjustments not independently excluded"
+      },
+      "java_service_reported": {
+        "value_ms": 62490.71,
+        "definition": "Server-reported KnowledgeService elapsed duration including retrieval, generation and final authorization check; not full HTTP/network duration",
+        "clock_domain": "Java-reported elapsed_ms; generic implementation uses System.nanoTime internally"
+      },
+      "worker_observed": {
+        "value_ms": 54188.0,
+        "definition": "answer started observer to worker_response observer; excludes Java retrieval and final HTTP transmission, includes generator preparation/validation and archival overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_transport_observed": {
+        "value_ms": 53797.0,
+        "definition": "Native POST request hook to parsed native_response observer; includes transport and observation overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_engine": {
+        "prompt_processing_ms": 6956.512,
+        "token_prediction_ms": 46618.376,
+        "engine_processing_sum_ms": 53574.888,
+        "prompt_tokens": 1997,
+        "predicted_tokens": 682,
+        "cache_tokens": 0,
+        "clock_domain": "Native llama.cpp internally reported duration fields; no subtraction against another clock"
+      }
+    },
+    {
+      "ordinal": 4,
+      "http_status": 200,
+      "answer_status": "answered",
+      "citations_opened_and_verified": 4,
+      "browser_click_to_response_json": {
+        "value_ms": 56698,
+        "definition": "Immediately before Playwright click/wait setup through parsed Java response JSON; timestamp taken before evidence file write. Excludes form setup, later UI render verification and citation opening.",
+        "clock_domain": "Browser companion Node Date.now wall clock duration; wall-clock adjustments not independently excluded"
+      },
+      "java_service_reported": {
+        "value_ms": 56633.18,
+        "definition": "Server-reported KnowledgeService elapsed duration including retrieval, generation and final authorization check; not full HTTP/network duration",
+        "clock_domain": "Java-reported elapsed_ms; generic implementation uses System.nanoTime internally"
+      },
+      "worker_observed": {
+        "value_ms": 48672.0,
+        "definition": "answer started observer to worker_response observer; excludes Java retrieval and final HTTP transmission, includes generator preparation/validation and archival overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_transport_observed": {
+        "value_ms": 47954.0,
+        "definition": "Native POST request hook to parsed native_response observer; includes transport and observation overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_engine": {
+        "prompt_processing_ms": 4107.37,
+        "token_prediction_ms": 43741.836,
+        "engine_processing_sum_ms": 47849.206,
+        "prompt_tokens": 2083,
+        "predicted_tokens": 674,
+        "cache_tokens": 0,
+        "clock_domain": "Native llama.cpp internally reported duration fields; no subtraction against another clock"
+      }
+    },
+    {
+      "ordinal": 5,
+      "http_status": 200,
+      "answer_status": "abstained",
+      "citations_opened_and_verified": 0,
+      "browser_click_to_response_json": {
+        "value_ms": 42973,
+        "definition": "Immediately before Playwright click/wait setup through parsed Java response JSON; timestamp taken before evidence file write. Excludes form setup, later UI render verification and citation opening.",
+        "clock_domain": "Browser companion Node Date.now wall clock duration; wall-clock adjustments not independently excluded"
+      },
+      "java_service_reported": {
+        "value_ms": 42914.55,
+        "definition": "Server-reported KnowledgeService elapsed duration including retrieval, generation and final authorization check; not full HTTP/network duration",
+        "clock_domain": "Java-reported elapsed_ms; generic implementation uses System.nanoTime internally"
+      },
+      "worker_observed": {
+        "value_ms": 33875.0,
+        "definition": "answer started observer to worker_response observer; excludes Java retrieval and final HTTP transmission, includes generator preparation/validation and archival overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_transport_observed": {
+        "value_ms": 33546.0,
+        "definition": "Native POST request hook to parsed native_response observer; includes transport and observation overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_engine": {
+        "prompt_processing_ms": 4335.996,
+        "token_prediction_ms": 29073.741,
+        "engine_processing_sum_ms": 33409.737,
+        "prompt_tokens": 2060,
+        "predicted_tokens": 468,
+        "cache_tokens": 0,
+        "clock_domain": "Native llama.cpp internally reported duration fields; no subtraction against another clock"
+      }
+    },
+    {
+      "ordinal": 6,
+      "http_status": 200,
+      "answer_status": "abstained",
+      "citations_opened_and_verified": 0,
+      "browser_click_to_response_json": {
+        "value_ms": 43825,
+        "definition": "Immediately before Playwright click/wait setup through parsed Java response JSON; timestamp taken before evidence file write. Excludes form setup, later UI render verification and citation opening.",
+        "clock_domain": "Browser companion Node Date.now wall clock duration; wall-clock adjustments not independently excluded"
+      },
+      "java_service_reported": {
+        "value_ms": 43760.67,
+        "definition": "Server-reported KnowledgeService elapsed duration including retrieval, generation and final authorization check; not full HTTP/network duration",
+        "clock_domain": "Java-reported elapsed_ms; generic implementation uses System.nanoTime internally"
+      },
+      "worker_observed": {
+        "value_ms": 36531.0,
+        "definition": "answer started observer to worker_response observer; excludes Java retrieval and final HTTP transmission, includes generator preparation/validation and archival overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_transport_observed": {
+        "value_ms": 36031.0,
+        "definition": "Native POST request hook to parsed native_response observer; includes transport and observation overhead",
+        "clock_domain": "Python evidence writer time.monotonic; seconds converted to milliseconds"
+      },
+      "native_engine": {
+        "prompt_processing_ms": 4982.28,
+        "token_prediction_ms": 30958.896,
+        "engine_processing_sum_ms": 35941.176,
+        "prompt_tokens": 2538,
+        "predicted_tokens": 534,
+        "cache_tokens": 0,
+        "clock_domain": "Native llama.cpp internally reported duration fields; no subtraction against another clock"
+      }
+    }
+  ],
+  "whole_run_windows": [
+    {
+      "name": "startup_seconds",
+      "value_seconds": 44.9380000000001,
+      "definition": "Runner entry through full service readiness; not a model-only load benchmark",
+      "clock_domain": "Runner reported duration; startup/active are differences of its own time.monotonic values"
+    },
+    {
+      "name": "active_seconds",
+      "value_seconds": 463.9220000000005,
+      "definition": "Readiness through browser task completion; includes uploads, analyses, questions, screenshots, citations, edits and links",
+      "clock_domain": "Runner reported duration; startup/active are differences of its own time.monotonic values"
+    },
+    {
+      "name": "cleanup_seconds",
+      "value_seconds": 1.0356626510620117,
+      "definition": "Original recorded cleanup measurement; original owned-absence failure remains unchanged",
+      "clock_domain": "Runner reported duration; startup/active are differences of its own time.monotonic values"
+    },
+    {
+      "name": "CLI_wall_seconds",
+      "value_seconds": 510.5,
+      "definition": "Wrapper interval before launching original CLI child through wait, output flushing and exit-record construction",
+      "clock_domain": "Wrapper time.monotonic, distinct process from runner; do not subtract its endpoints from runner or browser timestamps"
+    }
+  ],
+  "denominator_rules": [
+    "Per-request layers overlap and must not be added together.",
+    "Native engine processing is only prompt_ms + predicted_ms, summed over the native calls of that request; it excludes all other work.",
+    "Per-request sums are not active_seconds or CLI_wall_seconds and do not account for all workflow overhead.",
+    "Startup, active and recorded cleanup are distinct measured windows; their rounded sum need not equal the wrapper CLI duration.",
+    "No duration is formed by subtracting timestamps from different clock domains."
+  ],
+  "unavailable_metrics": {
+    "analysis_upload_to_ready_ui_latency": "unavailable",
+    "analysis_java_http_latency": "unavailable",
+    "true_browser_render_complete_latency": "unavailable",
+    "native_GPU_kernel_only_latency": "unavailable",
+    "VRAM_peak": "not measured",
+    "RAM_peak": "not measured",
+    "operational_p95": "unavailable; n4/n6 single-run empirical samples only",
+    "throughput_capacity": "not measured",
+    "electricity_cost": "not measured",
+    "PC_purchase_or_depreciation_cost": "not measured"
+  },
+  "API_cost": {
+    "paid_model_API_calls": 0,
+    "API_usage_fee": 0,
+    "currency": "USD",
+    "scope": "Observed analysis and answer model calls in this local run; no cloud billing statement audit",
+    "electricity_and_PC_costs_included": false
+  },
+  "limits": [
+    "Read-only aggregation of existing records; no retry, benchmark or fresh instrumentation.",
+    "Browser Date.now duration is observed wall time and is not guaranteed monotonic.",
+    "Worker and native transport observations include archive/HTTP overhead; they are not isolated compute benchmarks.",
+    "Java elapsed_ms is an internally reported service duration, not a separate measured full HTTP span.",
+    "No inference about the cause of the original cleanup/owned-absence failure.",
+    "Initial model filename suffix assertion failed before any output: normalized argv intentionally stores <verified-model>. Final local-GGUF basis uses actual native process_started, loopback endpoints and matching worker gguf-sha256 model identities; no model file was opened or rehashed."
+  ],
+  "parent_verification": {
+    "raw_file_bindings": 141,
+    "timer_source_bindings": 3,
+    "five_statistic_groups_recomputed_from_saved_numeric_rows": true,
+    "raw_semantic_content_read": false,
+    "new_execution": false
+  },
+  "not_delivered_to_semantic_judge_before_locks": true,
+  "fresh_heldout_or_operational_SLO": false,
+  "human_review": false,
+  "measured_answer_native_totals": {
+    "prompt_tokens": 14997,
+    "predicted_tokens": 3697,
+    "mean_prompt_processing_ms": 5255.416833333333,
+    "mean_token_prediction_ms": 38877.422,
+    "scope": "Six actual answer calls only; predicted tokens are all native generated tokens, not a final-answer-only count. Native reported durations are not a cross-clock causal decomposition of browser latency."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "ASSET_BINDING_CANDIDATES_REVIEWED_NOT_EXECUTION",
+  "baseline_current_fullhash": {
+    "files": 62,
+    "bytes": 4323975120,
+    "model_bytes": 2474178720,
+    "runtime_files": 55,
+    "runtime_bytes": 1193852701
+  },
+  "qwen_reused_parent_fullhash_shards": 2,
+  "qwen_current_output_identities": 17,
+  "qwen_nonweight_hashes": 15,
+  "runtime_canonical_sha256": "903c8dfe33072043922e42622a407047481c5b1f3a6e89f527a7392d8c3dcec2",
+  "pure_metadata_policy_checks": 2,
+  "pure_gate_schema_checks": 2,
+  "negative_unaccepted_baseline_check": 1,
+  "source_git_archives": 8,
+  "source_commit": "0c34174f65c6d415e046925a7b4e2d11495264f7",
+  "baseline_source_commit_meaning": "Exact public linked/digest verifier source used for CURRENT file validation; not the original setup checkout and not the new local audit wrapper commit.",
+  "historical_baseline_setup_execution_commit": null,
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 1,
+    "advisory": "Historical setup source commit remains unknown; preserve scope of current-verifier provenance.",
+    "receipt_sha256": "1f54a2aa5d5d1dc0948c0e00bf361901688a2c4226f9e31ed491298e1b760d3e",
+    "manifest_sha256": "7b673d121380b6a99c0fd1f04f9464ca03da9d41235eb9061b6888e670faae9e"
+  },
+  "parent_acceptance": {
+    "sha256": "c04610197453487bf33f189279f93bb85d07bbb75afcaf97b81e9d20d089bbc9",
+    "input_refs": 85,
+    "preparation_outputs": 35,
+    "review_outputs": 12,
+    "asset_identities": 79,
+    "git_blobs": 8,
+    "large_content_reread_bytes": 0
+  },
+  "preparation_receipt_sha256": "88aba1f3ebcf69eee66a872cde94a23364cf671205e32acac9e063128167db1c",
+  "candidate_bundle_sha256": "b9b1ffc4616370cc4d3f1f458735cc266db6e4fd760af4e2bb3b22207aba3e1e",
+  "preserved_local_harness_failures": [
+    "Windows stat/fstat ctime mismatch before custody acceptance",
+    "Expected directory set omitted the existing allowed empty tmp directory; first completed full hashes were retained and subsequent identity checks used."
+  ],
+  "model_native_tokenizer_calls": 0,
+  "live_ram_queries": 0,
+  "network_calls": 0,
+  "trusted_locks_created": false,
+  "execution_registered": false,
+  "human_review": 0,
+  "current_engine_wip_admitted": false,
+  "next": "Resolve engine B1, review final code and exact CI; separate new data sealing, trusted locks, execution registration and actual neutral/quality runs."
+}

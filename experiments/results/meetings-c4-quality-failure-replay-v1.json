@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "c4-closed-failure-posthoc-structural-replay",
+  "recorded_at_utc": "2026-10-16T06:11:39.356741+00:00",
+  "raw_report_sha256": "4c95b97cafb1abaf9655443023ffefdd1a436250d40b5cc3fff84fa0b8c87b91",
+  "original_report_not_rewritten": true,
+  "actual_git_material_check": "passed",
+  "first_complete_response_frozen_trace_replay": "passed_not_semantic_judgment",
+  "first_event_count": 17,
+  "failed_request_event_count": 10,
+  "event_references_and_values_verified": 27,
+  "failed_request_event_keys": [
+    "prepared",
+    "apply_template_request",
+    "apply_template_http_status",
+    "apply_template_response",
+    "input_tokenize_request",
+    "input_tokenize_http_status",
+    "input_tokenize_response",
+    "native_request",
+    "native_post_started",
+    "native_error"
+  ],
+  "full_report_replay": "rejected_c4_report_not_complete",
+  "validation_check": "rejected_missing_original_calibration_selection_before_metadata_or_body",
+  "source_snapshots_checked": 115,
+  "native_calls": 0,
+  "tokenizer_loads": 0,
+  "semantic_output": false,
+  "semantic_judgments": 0,
+  "selection_eligible": false,
+  "human_reviews": 0
+}

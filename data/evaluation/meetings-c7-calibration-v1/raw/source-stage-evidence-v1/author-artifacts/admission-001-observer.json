@@ -1,0 +1,704 @@
+{
+  "elapsed_seconds": 43.375563199981116,
+  "ended_at": "2026-10-20T05:02:19.731490+00:00",
+  "entrypoint": "actual default prepare_meeting_c7_inputs.admit_sources",
+  "family_statuses": [
+    {
+      "family_id": "c7-f01",
+      "safe_rejection_codes": [
+        "c7_block_bounds"
+      ],
+      "status": "rejected"
+    },
+    {
+      "family_id": "c7-f02",
+      "safe_rejection_codes": [],
+      "status": "passed"
+    }
+  ],
+  "head_after": "d9066147adeecefd23c014cce59e30ca350b6a74",
+  "head_before": "d9066147adeecefd23c014cce59e30ca350b6a74",
+  "head_unchanged": true,
+  "manifest": {
+    "file": "data/evaluation/meetings-c7-calibration-v1/source-admission-manifest.json",
+    "sha256": "8bebba89f3904f52de6efad449267061fc2ff5683e97fb400df1e3c2a34f0df1"
+  },
+  "no_overrides_or_mocking": true,
+  "observed_subprocess_count": 167,
+  "observed_subprocesses": [
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    },
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:data/evaluation/meetings-c7-family-registry-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:data/evaluation/meetings-c7-protocol-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:data/evaluation/meetings-c7-toolchain-freeze-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:data/models/meetings-generation-qwen35-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:docs/MEETINGS-C7-PLAN.md",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:pyproject.toml",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/audit_meeting_c7_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/backup_db.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/benchmark_api.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/check_meeting_review_token_budget.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/evaluate_dataset.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/prepare_corpus.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/prepare_meeting_budget_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/prepare_meeting_c7_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/prepare_meeting_gguf.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/prepare_meeting_plaintext_source_inventory.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/prepare_meeting_requirements_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/prepare_meeting_source_inventory.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/prepare_meeting_thinking_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/probe_meeting_answer_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/probe_meeting_blocks_resources.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/probe_meeting_c7_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/probe_meeting_gpu_placement.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/probe_meeting_thinking_compat_resources.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/probe_meeting_thinking_resources.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/profile_meeting_host_proof.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/question_dataset.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/serve_meeting_gpu_placement.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/serve_meeting_thinking.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/serve_meeting_thinking_compat.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/serve_meetings.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/serve_meetings_gguf.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/serve_models.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/validate_splits.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:scripts/verify_java_service.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:server/src/main/java/io/doctrail/Ingest.java",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:server/src/main/java/io/doctrail/Retrieval.java",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:server/src/test/java/io/doctrail/MeetingSourceParityTest.java",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/__init__.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/app.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/db.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/generation_runtime.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/generation_runtime_v2.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/inference.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/ingest.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_answer_blocks.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_answer_grammar.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_answer_lines_bounded.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_answer_requirements.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_answer_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_answer_spans.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_answer_thinking.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_answer_v2.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_bounded_snapshot.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_c7_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_comparison_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_contract.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_gguf.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_input_budget.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_qwen35.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_requirements_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_runtime.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_thinking_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_thinking_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_thinking_transport.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/meeting_worker.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/model_retrieval.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:src/doctrail/retrieval.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_audit_meeting_c7_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_meeting_c7_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_meeting_requirements_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_meeting_thinking_compat_resources.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_meeting_thinking_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_prepare_meeting_c7_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_prepare_meeting_plaintext_source_inventory.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_prepare_meeting_source_inventory.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:tests/test_probe_meeting_c7_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show 98882554595626b4a9f69be930cc4cb3aa47eb95:uv.lock",
+      "executable": "None"
+    },
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:data/evaluation/meetings-c7-family-registry-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:data/evaluation/meetings-c7-protocol-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:data/evaluation/meetings-c7-toolchain-ci-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:data/models/meetings-generation-qwen35-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:docs/MEETINGS-C7-PLAN.md",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:pyproject.toml",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/audit_meeting_c7_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/backup_db.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/benchmark_api.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/check_meeting_review_token_budget.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/evaluate_dataset.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/prepare_corpus.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/prepare_meeting_budget_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/prepare_meeting_c7_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/prepare_meeting_gguf.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/prepare_meeting_plaintext_source_inventory.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/prepare_meeting_requirements_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/prepare_meeting_source_inventory.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/prepare_meeting_thinking_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/probe_meeting_answer_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/probe_meeting_blocks_resources.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/probe_meeting_c7_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/probe_meeting_gpu_placement.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/probe_meeting_thinking_compat_resources.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/probe_meeting_thinking_resources.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/profile_meeting_host_proof.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/question_dataset.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/serve_meeting_gpu_placement.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/serve_meeting_thinking.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/serve_meeting_thinking_compat.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/serve_meetings.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/serve_meetings_gguf.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/serve_models.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/validate_splits.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:scripts/verify_java_service.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:server/src/main/java/io/doctrail/Ingest.java",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:server/src/main/java/io/doctrail/Retrieval.java",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:server/src/test/java/io/doctrail/MeetingSourceParityTest.java",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/__init__.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/app.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/db.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/generation_runtime.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/generation_runtime_v2.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/inference.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/ingest.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_answer_blocks.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_answer_grammar.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_answer_lines_bounded.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_answer_requirements.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_answer_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_answer_spans.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_answer_thinking.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_answer_v2.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_bounded_snapshot.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_c7_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_comparison_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_contract.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_gguf.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_input_budget.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_qwen35.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_requirements_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_runtime.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_thinking_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_thinking_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_thinking_transport.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/meeting_worker.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/model_retrieval.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:src/doctrail/retrieval.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_audit_meeting_c7_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_meeting_c7_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_meeting_requirements_review.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_meeting_thinking_compat_resources.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_meeting_thinking_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_prepare_meeting_c7_inputs.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_prepare_meeting_plaintext_source_inventory.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_prepare_meeting_source_inventory.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:tests/test_probe_meeting_c7_quality.py",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:uv.lock",
+      "executable": "None"
+    },
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    },
+    {
+      "argv": "git show HEAD:data/evaluation/meetings-c7-role-registration-v1.json",
+      "executable": "None"
+    },
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    },
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    },
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    },
+    {
+      "argv": "git rev-parse HEAD",
+      "executable": "None"
+    }
+  ],
+  "output": ".local/meetings-c7-calibration-admission-attempts-v1/artifacts/attempt-001/receipt.json",
+  "receipt_sha256": "5100bb987d71b3a98c3132f3c25a0e9e2e3535dbc62cee304428628a8f856f73",
+  "role_id": "/root/c7_calibration_author",
+  "started_at": "2026-10-20T05:01:36.352208+00:00",
+  "status": "rejected",
+  "tokenizer_native_items": 0
+}

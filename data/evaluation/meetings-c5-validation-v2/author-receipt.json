@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c5-v1",
+  "phase": "validation",
+  "stage": "isolated_item_authorship",
+  "source_version": 2,
+  "author_id": "/root/c5_validation_author",
+  "question_author": "/root/c5_validation_author",
+  "oracle_author": "/root/c5_validation_author",
+  "independent_prereviewer": "/root/c5_validation_prereviewer",
+  "started_at": "2026-10-20T00:27:52.969226+00:00",
+  "completed_at": "2026-10-20T00:27:53.488804+00:00",
+  "tool_requested_model": "gpt-6-astra",
+  "tool_requested_effort": "xhigh",
+  "settings_provenance": "Original accepted parent spawn arguments retained across the interrupted turn; no new acceptance or runtime introspection.",
+  "same_split_source_item_reuse_disclosed": true,
+  "source_commit": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+  "source_freeze": {
+    "file": "data/evaluation/meetings-c5-validation-v2/source-freeze.json",
+    "sha256": "141778a085495d296f740ba1e259a71d7f124c5308e714268bda463558d47687"
+  },
+  "source_ci_release": {
+    "source_commit": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+    "push_run_id": 39224530427,
+    "pull_request_run_id": 39224538908,
+    "jobs": [
+      "backend",
+      "java-service",
+      "web"
+    ],
+    "conclusion": "success",
+    "provenance": "Parent directly observed all jobs and explicitly released this item stage."
+  },
+  "original_item_preauthorization": {
+    "file": ".local/meetings-c5-validation-items-v2/preauth-v2.json",
+    "sha256": "2ad3b5670b5b1c70c526b34ddd5ae4b24b9128d1b9feea94eedcc7eb2ef15ace"
+  },
+  "resume_preauthorization": {
+    "file": ".local/meetings-c5-validation-items-v2/preauth-resume-v3.json",
+    "sha256": "6e8e00e612674777248d4722f4bf4125287bc22ae174148b5290dd52672f467a",
+    "toolchain_files": 76,
+    "source_bound_files": 15,
+    "git_proof_bindings": 222,
+    "snapshot_files": 80,
+    "original_v1_committed_files": 17
+  },
+  "artifact_sha256": {
+    "draft.json": "eeb25444db889940a592348e1f29e9de499d5de4789413dc6c8b8e7eb1c76d0f",
+    "oracle-draft.json": "d4ea37af8e8beb6be58feb614081246e4e6966263c9da68c3aa0f0424060d4aa",
+    "context-selection.json": "5aa9059776d92f7f78f1a97173c09575888808ea637be36ed44195b6a33e0523"
+  },
+  "counts": {
+    "case_count": 8,
+    "family_count": 2,
+    "source_document_count": 6,
+    "source_unique_chunks": 14,
+    "required_facts": 31,
+    "required_facts_by_case": [
+      4,
+      5,
+      3,
+      4,
+      5,
+      4,
+      3,
+      3
+    ],
+    "status_counts": {
+      "answered": 4,
+      "abstained": 4
+    },
+    "language_counts": {
+      "ko": 4,
+      "en": 4
+    },
+    "context_references": 44,
+    "evidence_references": 32,
+    "evidence_alternatives_total": 29,
+    "missing_required_facts": 4,
+    "answerable_modes": {
+      "general": 1,
+      "meetings": 2,
+      "mixed": 1
+    },
+    "necessary_multidocument_answered": 3,
+    "crosslanguage_response_languages": [
+      "en",
+      "ko"
+    ],
+    "all_family_absence_items": 4
+  },
+  "structural_check": {
+    "file": ".local/meetings-c5-validation-items-v2/structural-check-v1.json",
+    "sha256": "21e2dd0bb6cd2b7939ceda98b7eef3fce3d5290e21acc355922bafda46dac86e",
+    "status": "passed",
+    "meaning": "Pure schema, exact source/chunk coordinates, quotas and declared evidence-set arithmetic only."
+  },
+  "authoring_method": {
+    "source_first": true,
+    "whole_chunks_only": true,
+    "token_based_selection": false,
+    "all_sufficient_evidence_alternatives_considered": true,
+    "all_family_absence_review_by_author": true,
+    "all_family_contexts_for_abstention": true,
+    "external_browsing_in_item_stage": false,
+    "source_edits": 0
+  },
+  "exposure": {
+    "own_source_authorship": true,
+    "own_v1_rejection_and_author_safe_feedback": true,
+    "own_accepted_v2_source": true,
+    "auto_injected_agents_project_metadata": true,
+    "retained_own_source_and_unmaterialized_item_planning_across_interruption": true,
+    "calibration_semantic_material": false,
+    "detailed_source_review_or_cross_split_notes": false,
+    "closed_pool_semantics": false,
+    "model_outputs_or_token_feedback": false,
+    "final_judge_role": false,
+    "self_prereview": false
+  },
+  "preservation": {
+    "original_v1_files": 17,
+    "accepted_source_bound_files": 15,
+    "frozen_toolchain_files": 76,
+    "original_preauthorization_preserved": true,
+    "source_freeze_unchanged": true,
+    "active_fingerprints_unchanged": true,
+    "head_before": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4",
+    "head_after": "aa7836c49e8c02ec4e63ab85e9a67ba6f24ea4b4"
+  },
+  "tokenizer_calls": 0,
+  "native_calls": 0,
+  "maven_calls": 0,
+  "model_downloads": 0,
+  "git_mutations": 0,
+  "human_review_count": 0,
+  "independent_item_prereview": "pending",
+  "item_freeze_created": false
+}

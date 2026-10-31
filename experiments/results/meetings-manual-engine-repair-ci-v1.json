@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "source_commit": "017141a824b7b373718cb6c9eef7e044bb83c60b",
+  "runs": [
+    {
+      "id": 40467577636,
+      "event": "push",
+      "watch_session": 67323,
+      "watch_exit": 0,
+      "jobs": [
+        {
+          "id": 122066603268,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122066603513,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122066603540,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40467584323,
+      "event": "pull_request",
+      "watch_session": 30840,
+      "watch_exit": 0,
+      "jobs": [
+        {
+          "id": 122066625017,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122066625327,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122066625436,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "push_java_job": {
+    "id": 122066603513,
+    "operations_status": "passed",
+    "browser_batch": {
+      "passed": 158,
+      "failed": 0,
+      "infrastructure_failures": 0,
+      "startup_failures": 0,
+      "specs_without_reports": 0,
+      "missing_runs": 0,
+      "exit": 0
+    }
+  },
+  "preserved_failed_source_ci": "experiments/results/meetings-manual-engine-source-ci-v1.json",
+  "scope": "Published manual correction, engine repair and operations fixture binding. Excludes uncommitted new QA adapter and local observer repairs.",
+  "actual_model_quality": false,
+  "human_review_count": 0
+}

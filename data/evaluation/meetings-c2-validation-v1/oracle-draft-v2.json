@@ -1,0 +1,857 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "cases": [
+    {
+      "id": "c2-val-01",
+      "family_id": "C2-F03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "문서 업데이트가 해당 minor 요건을 충족하면 별도 GitHub 이슈 없이 PR 제목에 MINOR: 접두사를 사용할 수 있다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-01-r1-c0002",
+                "start_offset": 2191,
+                "end_offset": 2527,
+                "quote": "For minor changes that\naffect documentation, you do not need to open up a GitHub issue. Instead you can\nprefix the title of your PR with \"MINOR: \" if meets one of the following:\n\n*  Grammar, usage and spelling fixes that affect no more than 2 files\n*  Documentation updates affecting no more than 2 files and not more\n   than 500 words."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "문서 업데이트의 해당 요건은 수정 파일이 2개 이하이며 분량이 500단어 이하인 것이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-01-r1-c0002",
+                "start_offset": 2440,
+                "end_offset": 2527,
+                "quote": "*  Documentation updates affecting no more than 2 files and not more\n   than 500 words."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "테스트가 통과하고 이해관계자들이 PR을 승인한 뒤 committer가 명령행 도구로 squash merge한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-02-r1-c0006",
+                "start_offset": 5478,
+                "end_offset": 5720,
+                "quote": "When tests are passing and the pull request has been approved by the interested\nparties, a `committer <https://arrow.apache.org/committers/>`_\nwill merge the pull request. This is done with a\n**command-line utility that does a squash merge**."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "기능 변경도 별도 이슈 없이 MINOR로 처리할 수 있다고 확대하지 않는다.",
+        "문서 업데이트 요건의 파일 수 또는 단어 수를 생략하지 않는다.",
+        "문서화된 절차를 실제 특정 PR의 병합 완료 기록으로 바꾸지 않는다."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "Public policy documents are not event logs."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-02",
+      "family_id": "C2-F03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "Create a GitHub issue first, then submit the changes as a GitHub pull request.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-01-r1-c0001",
+                "start_offset": 1656,
+                "end_offset": 1808,
+                "quote": "First create a GitHub issue as described above, selecting **Bug Report** or\n**Enhancement Request**. Then, submit your changes as a GitHub Pull Request."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "Prefix the pull-request title with the GitHub issue number and component name in brackets.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-01-r1-c0002",
+                "start_offset": 1809,
+                "end_offset": 1920,
+                "quote": "We'll ask you to prefix the pull request title with the GitHub issue number\nand the component name in brackets."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "The Critical Fix guidance does not count fixes for bugs that cause obvious errors merely on that basis.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-03-r1-c0014",
+                "start_offset": 12257,
+                "end_offset": 12276,
+                "quote": "* **Critical Fix**:"
+              },
+              {
+                "chunk_id": "c2-f03-doc-03-r1-c0014",
+                "start_offset": 12471,
+                "end_offset": 12660,
+                "quote": "This is intended to mark fixes to issues that may affect users without their\n  knowledge. For this reason, fixing bugs that cause errors don't count, since\n  those bugs are usually obvious."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f04",
+          "text": "Priority: Critical marks high-priority issues and is a superset of Critical Fix; it also includes certain fixes for errors and crashes.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-03-r1-c0016",
+                "start_offset": 14155,
+                "end_offset": 14349,
+                "quote": "* **Priority: Critical**: Indicates issues that are high priority. This is a\n  superset of issues marked \"Critical Fix\", as it also contains certain fixes\n  to issues causing errors and crashes."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not claim that every error-producing bug is a Critical Fix or automatically Priority: Critical.",
+        "Do not replace the distinct issue title convention with the requested pull-request title convention.",
+        "Do not turn reviewer guidance into a report that a specific patch was filed or labelled."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "Public policy documents are not event logs."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-03",
+      "family_id": "C2-F03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "Feature freeze 날짜는 유지보수 브랜치를 만드는 날짜다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-04-r1-c0002",
+                "start_offset": 1848,
+                "end_offset": 2079,
+                "quote": "The feature freeze date is the date the maintenance branch is created and\nfrom that point no new features are allowed to be added to the release, unless there\nis community consensus to allow it, and only bug fixes will be accepted."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "그 뒤에는 새 기능 추가를 허용하는 커뮤니티 합의가 없는 한 새 기능을 넣지 않으며, 버그 수정만 받아들인다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-04-r1-c0002",
+                "start_offset": 1848,
+                "end_offset": 2079,
+                "quote": "The feature freeze date is the date the maintenance branch is created and\nfrom that point no new features are allowed to be added to the release, unless there\nis community consensus to allow it, and only bug fixes will be accepted."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "Feature freeze 이후 blocker 라벨 이슈는 첫 release candidate를 만들기 전에 해결해야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-04-r1-c0002",
+                "start_offset": 2081,
+                "end_offset": 2215,
+                "quote": "Once the feature freeze is in place issues labelled as ``blocker`` must be resolved before\nthe first release candidate can be created."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "커뮤니티 합의라는 예외 조건을 삭제하지 않는다.",
+        "정책 문장을 특정 릴리스의 브랜치 생성 또는 blocker 해결 완료 사실로 해석하지 않는다."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "Public policy documents are not event logs."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-04",
+      "family_id": "C2-F03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "A C++ change that merely breaks ABI compatibility is generally not included, except where ABI compatibility is guaranteed, such as the C Data Interface.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-03-r1-c0015",
+                "start_offset": 12776,
+                "end_offset": 13150,
+                "quote": "* **Breaking Change**: The change breaks backwards compatibility in a public API.\n  For changes in C++, this does not include changes that simply break ABI\n  compatibility, except for the few places where we do guarantee ABI\n  compatibility (such as C Data Interface). Experimental APIs are *not*\n  exempt from this; they are just more likely to be associated with this tag."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "Experimental APIs are not exempt from the Breaking Change label.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-03-r1-c0015",
+                "start_offset": 12776,
+                "end_offset": 13150,
+                "quote": "* **Breaking Change**: The change breaks backwards compatibility in a public API.\n  For changes in C++, this does not include changes that simply break ABI\n  compatibility, except for the few places where we do guarantee ABI\n  compatibility (such as C Data Interface). Experimental APIs are *not*\n  exempt from this; they are just more likely to be associated with this tag."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not say all C++ ABI-only changes are exempt: the guaranteed-ABI exception matters.",
+        "Do not treat experimental status as an exemption."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "Public policy documents are not event logs."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-05",
+      "family_id": "C2-F03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "승인에는 PMC 구성원들의 +1 투표가 순계로 3개 필요하다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-04-r1-c0015",
+                "start_offset": 13292,
+                "end_offset": 13347,
+                "quote": "Approval requires a net of 3 +1 votes from PMC members."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "릴리스에는 거부권을 행사할 수 없다고 지침에 명시돼 있다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-04-r1-c0015",
+                "start_offset": 13348,
+                "end_offset": 13375,
+                "quote": "A release cannot be vetoed."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "이 절차로 가장 최근 완료된 실제 릴리스 투표의 찬성 PMC 구성원 명단.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "전체 C2-F03 원문은 투표 규칙을 설명하지만 가장 최근 실제 투표를 특정하는 결과 기록과 찬성 PMC 명단을 제공하지 않는다. 필수 실제 사건 정보가 없어 규칙만으로 완전 답변할 수 없다.",
+      "forbidden_inferences": [
+        "정족수에서 특정 구성원 이름이나 실제 투표 결과를 추정하지 않는다.",
+        "외부 링크의 미제공 내용을 근거로 보충하지 않는다.",
+        "일부 규칙만 답하고 answered로 처리하지 않는다."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "Public policy documents are not event logs."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-06",
+      "family_id": "C2-F03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "The Release Manager must at least be a committer.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-04-r1-c0001",
+                "start_offset": 1129,
+                "end_offset": 1238,
+                "quote": "The person acting as Release Manager must at least have\ncommitter status in order to perform the tasks below."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "If that committer is not a PMC member, the indicated tasks must be delegated to a PMC member.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f03-doc-04-r1-c0001",
+                "start_offset": 1239,
+                "end_offset": 1398,
+                "quote": "If the Release Manager is\na committer but not a member of the PMC, some tasks will need to be delegated\nto a PMC member and these are marked below accordingly."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "The identity of the actual manager of the most recently completed Arrow release.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "The full C2-F03 family gives role requirements and procedures, not a record identifying the most recently completed release and its actual manager. The requested person cannot be recovered from the known eligibility rules.",
+      "forbidden_inferences": [
+        "Do not infer the actual manager from a named package maintainer, contributor or example in another section.",
+        "Do not substitute a role title for the requested actual person.",
+        "Do not answer only the policy portion while reporting answered."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "Public policy documents are not event logs."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-07",
+      "family_id": "C2-F04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "생산 책임자는 인계 묶음의 파일명과 버전, 작업지시서의 사양, 승인 범위를 대조해야 한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-01-r1-c0000",
+                "start_offset": 100,
+                "end_offset": 114,
+                "quote": "문서번호: MK-QP-01"
+              },
+              {
+                "chunk_id": "c2-f04-doc-01-r1-c0000",
+                "start_offset": 418,
+                "end_offset": 471,
+                "quote": "생산 책임자 서도윤은 인계 자료를 대조한 뒤 접수 여부와 실제 인쇄 착수 여부를 따로 기록한다."
+              },
+              {
+                "chunk_id": "c2-f04-doc-01-r1-c0001",
+                "start_offset": 1300,
+                "end_offset": 1344,
+                "quote": "서도윤은 받은 묶음의 파일명과 버전, 작업지시서의 사양, 승인 범위를 대조한다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "MK-418의 인계 접수는 4월 9일 오후 4시 30분에 완료됐으며 그때 인쇄는 시작하지 않았다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0001",
+                "start_offset": 1419,
+                "end_offset": 1436,
+                "quote": "## 4월 9일 오후 후속 기록"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0001",
+                "start_offset": 1613,
+                "end_offset": 1685,
+                "quote": "서도윤은 오후 4시 30분에 인계 자료를 대조하고 접수를 완료했다. 이 시점에는 자료 접수만 끝났고 실제 인쇄는 시작하지 않았다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "실제 인쇄 착수는 4월 10일 오전 10시 10분이었다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0001",
+                "start_offset": 1737,
+                "end_offset": 1758,
+                "quote": "## 4월 10일 작업 상태 추가 기록"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1817,
+                "end_offset": 1868,
+                "quote": "서도윤은 조정을 마치고 시험지를 확인한 뒤 오전 10시 10분에 인쇄를 시작했다고 기록했다."
+              }
+            ],
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1737,
+                "end_offset": 1758,
+                "quote": "## 4월 10일 작업 상태 추가 기록"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1817,
+                "end_offset": 1868,
+                "quote": "서도윤은 조정을 마치고 시험지를 확인한 뒤 오전 10시 10분에 인쇄를 시작했다고 기록했다."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "인계 접수 시각이나 오전 9시 30분 임시 예약을 실제 인쇄 착수 시각으로 바꾸지 않는다.",
+        "기준의 일반적인 대조 항목과 주문의 실제 이행 기록을 혼동하지 않는다."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "All organizational and order facts are explicitly fictional source data."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-08",
+      "family_id": "C2-F04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "Delegation must be documented in writing with its recipient and scope.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-01-r1-c0000",
+                "start_offset": 613,
+                "end_offset": 699,
+                "quote": "고객의 승인 회신은 그 주문에 등록된 승인권자가 보낸 서면이어야 한다. 승인권자가 다른 사람에게 권한을 넘기려면 위임 대상과 범위를 서면으로 남겨야 한다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "An internal employee may not substitute for the customer approver's consent.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-01-r1-c0000",
+                "start_offset": 472,
+                "end_offset": 536,
+                "quote": "부재 중 대리자는 인계대장에 지정된 업무만 맡을 수 있으며, 내부 직원이 고객 승인권자의 동의를 대신할 수는 없다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "The MK-418 meeting record reports no reply changing the customer approver or delegating that authority.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 114,
+                "end_offset": 130,
+                "quote": "회의일: 2031년 4월 9일"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 584,
+                "end_offset": 612,
+                "quote": "고객 승인권자의 변경이나 권한 위임 회신은 없었다."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not infer that internal staff may approve for the customer merely because they handle the order.",
+        "No recorded delegation at that stage is not a claim that delegation is prohibited forever."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "All organizational and order facts are explicitly fictional source data."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-09",
+      "family_id": "C2-F04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "4월 9일 저녁 선인쇄 제안은 채택하지 않았으며 승인 전에 인쇄하고 회신을 뒤에 보완하는 방식으로 진행하지 않기로 했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 774,
+                "end_offset": 931,
+                "quote": "윤해솔은 고객 희망 일정을 맞추기 위해 4월 9일 저녁에 먼저 인쇄하는 방안을 제안했다. 서도윤은 최종 버전의 전체 승인과 인계 묶음이 아직 없다고 설명했고, 참석자들은 당일 저녁 착수안을 채택하지 않았다. 승인 전에 먼저 인쇄한 뒤 회신을 보완하는 방식으로 진행하지 않기로 했다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "별도 색상 견본은 비용·일정 검토가 필요해 이번 주문 적용을 결정하지 않았고 차기 상담 참고 항목으로 남겨 현재 작업지시서에 추가 공정으로 넣지 않기로 했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0001",
+                "start_offset": 1288,
+                "end_offset": 1417,
+                "quote": "회의 중 백지후가 제안한 별도 색상 견본의 추가 제작은 비용과 일정 검토가 필요해 이번 주문에 적용하기로 결정하지 않았다. 윤해솔이 차기 상담 때 참고할 검토 항목으로 남기되, 이번 작업지시서에 추가 공정으로 기재하지 않기로 했다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "임시 생산 시간은 4월 10일 오전 9시 30분으로 잡았으며 고객 최종 승인과 생산 인계 접수가 끝나야 한다는 조건이 붙었다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0001",
+                "start_offset": 933,
+                "end_offset": 1013,
+                "quote": "대신 4월 10일 오전 9시 30분을 임시 생산 시간으로 잡았다. 이 예약에는 고객 최종 승인과 생산 인계 접수가 끝나야 한다는 조건을 붙였다."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "검토 항목이나 임시 예약을 실행 완료로 서술하지 않는다.",
+        "추가 색상 견본을 이번 주문에 확정된 공정으로 바꾸지 않는다.",
+        "조건부 예약에서 승인·접수 조건을 생략하지 않는다."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "All organizational and order facts are explicitly fictional source data."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-10",
+      "family_id": "C2-F04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "The 09:20 equipment check found that the feeder needed adjustment, so printing could not begin at the reserved time.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1737,
+                "end_offset": 1758,
+                "quote": "## 4월 10일 작업 상태 추가 기록"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1760,
+                "end_offset": 1816,
+                "quote": "오전 9시 20분 장비 점검 중 급지부 조정이 필요해 임시 예약 시각에 바로 작업을 시작하지 못했다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "Printing began at 10:10 after the adjustment and test-sheet check.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1737,
+                "end_offset": 1758,
+                "quote": "## 4월 10일 작업 상태 추가 기록"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1817,
+                "end_offset": 1868,
+                "quote": "서도윤은 조정을 마치고 시험지를 확인한 뒤 오전 10시 10분에 인쇄를 시작했다고 기록했다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f03",
+          "text": "At 11:40 printing was still in progress, and neither production completion nor packing completion had been recorded.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1737,
+                "end_offset": 1758,
+                "quote": "## 4월 10일 작업 상태 추가 기록"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0002",
+                "start_offset": 1914,
+                "end_offset": 1970,
+                "quote": "오전 11시 40분 현재 인쇄는 진행 중이다. 이 기록에는 생산 완료나 포장 완료를 표시하지 않았다."
+              }
+            ]
+          ]
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not report the reserved time as actual start.",
+        "Do not turn an unrecorded completion into completed production or packing."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "All organizational and order facts are explicitly fictional source data."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-11",
+      "family_id": "C2-F04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "기록된 주문 수량은 안내책자 360부다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 288,
+                "end_offset": 320,
+                "quote": "이번 주문은 느린빛 전시기획단의 전시 안내책자 360부다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "MK-418의 실제 생산 완료 시각.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "f03",
+          "text": "생산 완료 후 확인된 최종 납품 수량.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "C2-F04 전체 자료의 마지막 진행 기록은 인쇄 중이며 완료 시각과 완료 후 확정 납품 수량은 없다. 360부는 주문 수량이므로 실제 확정 납품 수량으로 대체할 수 없다.",
+      "forbidden_inferences": [
+        "주문 수량 360부를 실제 확인된 납품 수량으로 바꾸지 않는다.",
+        "인쇄 착수 시각이나 기록 시각을 생산 완료 시각으로 대체하지 않는다.",
+        "시험지 수량을 추정하거나 포함하지 않는다.",
+        "알려진 주문 수량만 답하고 answered로 처리하지 않는다."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "All organizational and order facts are explicitly fictional source data."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "c2-val-12",
+      "family_id": "C2-F04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "f01",
+          "text": "The customer requested receipt on April 12; this was a hoped-for schedule, not a confirmed shipment record.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 99,
+                "end_offset": 111,
+                "quote": "주문번호: MK-418"
+              },
+              {
+                "chunk_id": "c2-f04-doc-02-r1-c0000",
+                "start_offset": 365,
+                "end_offset": 433,
+                "quote": "고객 희망 수령일은 4월 12일이며, 이 날짜는 현재의 희망 일정으로 관리한다. 배송 예약이 완료됐다는 기록은 아직 없다."
+              }
+            ]
+          ]
+        },
+        {
+          "id": "f02",
+          "text": "The confirmed courier tracking number for MK-418.",
+          "evidence_alternatives": []
+        }
+      ],
+      "unanswerable_reason": "Neither full C2-F04 document supplies a courier tracking number or a later shipping confirmation. A requested receipt date does not identify an actual shipment, so the required tracking number remains unavailable.",
+      "forbidden_inferences": [
+        "Do not invent a tracking identifier or substitute the order number.",
+        "Do not describe the requested date as a guaranteed delivery date.",
+        "Do not answer only the requested date while reporting answered."
+      ],
+      "limitations": [
+        "The independent_prereviewer identifies the assigned future reviewer; actual item prereview count is 0 and pending at authoring.",
+        "This is an AI-authored source-grounded evaluation item, not a human-validated benchmark.",
+        "All organizational and order facts are explicitly fictional source data."
+      ],
+      "question_author": "/root/c2_validation_source_b",
+      "oracle_author": "/root/c2_validation_source_b",
+      "independent_prereviewer": "/root/c2_validation_source_review",
+      "human_review_count": 0
+    }
+  ]
+}

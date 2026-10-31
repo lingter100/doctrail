@@ -1,0 +1,44 @@
+{
+  "kind": "parent_official_diagnostic_process_capture",
+  "started_at_utc": "2026-10-20T05:53:24.574909+00:00",
+  "finished_at_utc": "2026-10-20T05:53:55.783940+00:00",
+  "head_before": "b1a965b6188ea2efe10278d7795230780842bb8c",
+  "head_after": "b1a965b6188ea2efe10278d7795230780842bb8c",
+  "command_exit_code": 0,
+  "elapsed_seconds": 31.202442,
+  "input_hashes_before": {
+    "scripts/diagnose_meeting_admission.py": "c7fbe495eaba69ad9670231798677d3a1eb91edca230bd0ef2da9ef777a0a211",
+    "tests/fixtures/meeting-admission-diagnostic-v1.json": "ac7c452afd1fee257cf01e4f0b7752ac17e0636747521ce7025d2016bc09fa48",
+    "tests/test_diagnose_meeting_admission.py": "902a5bbccfdaf5036cc646918f7795275561de66f9c17ed2d71bed19356ca1eb",
+    "docs/MEETINGS-ADMISSION-DIAGNOSTIC.md": "b5d64fa09092982461188cb219035a246407cfabe45bc773a1598f6045faa093",
+    "data/evaluation/meetings-c7-toolchain-freeze-v1.json": "6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca"
+  },
+  "input_hashes_after": {
+    "scripts/diagnose_meeting_admission.py": "c7fbe495eaba69ad9670231798677d3a1eb91edca230bd0ef2da9ef777a0a211",
+    "tests/fixtures/meeting-admission-diagnostic-v1.json": "ac7c452afd1fee257cf01e4f0b7752ac17e0636747521ce7025d2016bc09fa48",
+    "tests/test_diagnose_meeting_admission.py": "902a5bbccfdaf5036cc646918f7795275561de66f9c17ed2d71bed19356ca1eb",
+    "docs/MEETINGS-ADMISSION-DIAGNOSTIC.md": "b5d64fa09092982461188cb219035a246407cfabe45bc773a1598f6045faa093",
+    "data/evaluation/meetings-c7-toolchain-freeze-v1.json": "6f829eeb829b957683fb2a7c4b6182a14aab787d816ede11b1c017bbe69a65ca"
+  },
+  "stdout_sha256": "ef2de51c39b545a2a30e79c52c74407805b6ca6a3484faeb42e4111c6030f260",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "official_artifacts": {
+    "reservation.json": {
+      "sha256": "b37d604d3c1e3ca3c69b968805fff277db55022a5260885a84a9cc472dde1367",
+      "bytes": 8925
+    },
+    "rows.jsonl": {
+      "sha256": "1fd02754a61169500389e3a001a2493fbbd2c941763c650f109f48b7949f527e",
+      "bytes": 136345
+    },
+    "receipt.json": {
+      "sha256": "dfc178687f42b0cadd2df310e8b8c931aec21a1726fd23484854462d53d92b7b",
+      "bytes": 18396
+    },
+    "receipt.pending.json": {
+      "sha256": "dfc178687f42b0cadd2df310e8b8c931aec21a1726fd23484854462d53d92b7b",
+      "bytes": 18396
+    }
+  },
+  "limitations": "Elapsed time includes Git/file verification and diagnostic work, not model latency. No automatic retry."
+}

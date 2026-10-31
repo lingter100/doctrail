@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "status": "SOURCE_AND_OPERATIONAL_DOCUMENTS_ACCEPTED_PENDING_EXACT_CI_AND_ACTUAL_ACQUISITION",
+  "model_candidate": "Qwen/Qwen2.5-7B-Instruct-GGUF Q4_K_M",
+  "pinned_revision": "bb5d59e06d9551d752d08b292a50eb208b07ab1f",
+  "shards": 2,
+  "asset_bytes": 4683073632,
+  "conversion_base_commit": null,
+  "source_files": [
+    {
+      "file": "data/models/meetings-generation-qwen25-7b-q4km-v1.json",
+      "sha256": "6cb34ab578e55c61e20b7c5d49fc7cbb9086fd06cd57359e6b2ccd1ff67f97c7",
+      "size_bytes": 15959
+    },
+    {
+      "file": "scripts/prepare_meeting_free_qa.py",
+      "sha256": "86d144646e91e5eeec7b73be818d29adc7ca8c8d1a1771d8f2397cbe75564bdf",
+      "size_bytes": 2014
+    },
+    {
+      "file": "tools/free_qa/assets.py",
+      "sha256": "c611584fd6c44937cb27fdbdff07abed58a293eeb8882f31c4f4c67adeff8c37",
+      "size_bytes": 27463
+    },
+    {
+      "file": "tools/free_qa/README.md",
+      "sha256": "4c9db50484dc34889ffb5f546709c229620d4e0d0e855917ec0775453b756ef6",
+      "size_bytes": 6909
+    },
+    {
+      "file": "tests/test_prepare_meeting_free_qa.py",
+      "sha256": "10c36332c4aadc9dced92e6c1a4b8e20f4c16a2c7bf0723923c24532c0efbf02",
+      "size_bytes": 31444
+    }
+  ],
+  "runtime_helper_hash_used_in_mocked_implementation": "6a3fb6c02d0996c4e794e940871df21ffb9483c6d2eda88a3e41c757ad90b4ab",
+  "validation": {
+    "final_synthetic_passed": 104,
+    "final_synthetic_seconds": 7.04,
+    "ruff_passed": true,
+    "original_synthetic_cases_preserved": 69,
+    "source_review_blockers": 0,
+    "operational_gate_review_blockers": 0,
+    "actual_inspect_cli_exit": 0,
+    "inspect_assets_read": 0
+  },
+  "repairs": [
+    "Discard redirect response bodies without unsized reads; validate each hop and shared limits.",
+    "Include final I/O in deadline decision and append invalidation on late or failed completion.",
+    "Require bound outer CLI success/stdout/termination custody before actual acceptance, verify-only or registration. CLI does not automatically validate this external operator evidence."
+  ],
+  "prior_failures_preserved": true,
+  "source_review_final_receipt_sha256": "8e33262776a5cf4dada6e86b94272d042a46aed7b728ae8f0d4cfe8701014d01",
+  "operational_gate_review_sha256": "ff64cfb9c113e8eccb82a35e9c3fc17de4556a123d398551b097b13869726c75",
+  "repair_receipt_sha256": "c30c6682ea2b04bcc3581d95e68901cdfdc8e89c11ef65842c04a7ce659f1c20",
+  "actual_downloads": 0,
+  "actual_GGUF_metadata_compatibility_validated": false,
+  "actual_model_or_tokenizer_runs": 0,
+  "service_adoption": false,
+  "human_review": false,
+  "limitations": [
+    "Synthetic transport/process/filesystem checks do not establish actual Windows acquisition, cleanup, split loading, memory fit, latency or semantic quality.",
+    "Original converter base commit is unpublished; repository templates do not prove the embedded template.",
+    "External observer gate must be enforced by the assigned operator, including when invalidation persistence itself fails.",
+    "The independently evolving engine runtime requires its own review and exact combined source CI before a future actual acquisition."
+  ],
+  "next": "Exact source CI and separately assigned actual acquisition with external gate, then embedded metadata review; no automatic model execution.",
+  "combined_runtime_regression": {
+    "runtime_sha256": "ceb660ca31762aab8b2b0b0fd80239a82036fc1798fc303ab696c98a592f88fa",
+    "synthetic_passed": 104,
+    "seconds": 10.18,
+    "ruff_passed": true,
+    "invocations_each": 1,
+    "OwnedTree_AST_unchanged": true,
+    "receipt_sha256": "0d1937c864fc9c081b5ce88217148a1e6e771360b2c2a578f4d10c75bb5ba6b5",
+    "scope": "Separate pure regression against the changed helper. Engine review and exact combined CI still required; no actual assets."
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "kind": "posthoc_development_answer_review",
+  "recorded_at_utc": "2026-10-22T04:20:13.192154+00:00",
+  "source_execution_result": {
+    "path": "experiments/results/meetings-analysis-scope-development-v2.json",
+    "bytes": 10791,
+    "sha256": "214d71c28d4edd31aa12f46410ae06662e87de583d6a0dc43e5309fdbdb266f6"
+  },
+  "original_safe_review": {
+    "path": ".local/service-rag-batch-development-v1/independent-answer-v2/safe-result.json",
+    "bytes": 3647,
+    "sha256": "d933fbb53a0ea81db29c5f1ded43f7085e56f2334b70bb9cc9b4ab221ddf7c4b"
+  },
+  "review_path_normalization": "Public review path strings are repository-relative. Original private safe receipt bytes remain unchanged and are bound above. No private semantic rationales are published.",
+  "review": {
+    "artifact_kind": "safe_posthoc_development_answer_review_aggregate",
+    "version": 1,
+    "status": "locked",
+    "locked_at_utc": "2026-10-22T04:14:48.287Z",
+    "input_bindings": [
+      {
+        "path": ".local/service-rag-batch-development-v1/cli-v2/answer-only-judge-packet.json",
+        "bytes": 206209,
+        "sha256": "b669df1b70fb30a6d839131c5798c78cd9dbc56ffa27f2b4c0184cbbb99fd190"
+      },
+      {
+        "path": ".local/service-rag-batch-development-v1/cli-v2/answer-only-judge-custody.json",
+        "bytes": 1084,
+        "sha256": "917bc373b2fbf327c25b26c932279e097fbabb778ddcdaed2b759d1f1863df4c"
+      }
+    ],
+    "judgment_lock": {
+      "path": ".local/service-rag-batch-development-v1/independent-answer-v2/judgments.json",
+      "bytes": 126886,
+      "sha256": "24e023708b4d5ef3712fe24c7490cd15b231aef02a0c9005ede213c119cb051c"
+    },
+    "aggregate": {
+      "cases_total": 6,
+      "executed_completed": 6,
+      "unexecuted": 0,
+      "scorable": 6,
+      "answered_responses": 4,
+      "abstained_responses": 2,
+      "valid_abstentions": 2,
+      "invalid_abstentions": 0,
+      "verdicts": {
+        "accepted_clean": 5,
+        "supported_with_citation_precision_issue": 1,
+        "rejected": 0,
+        "unscorable": 0
+      },
+      "substantive_answers_with_required_core_coverage": 4,
+      "material_answer_correctness_failures": 0,
+      "required_core_coverage_failures": 0,
+      "generated_claim_count": 10,
+      "collectively_supported_claim_count": 10,
+      "unsupported_generated_claim_count": 0,
+      "citation_occurrences": 17,
+      "citation_semantics": {
+        "full_claim_support": 14,
+        "partial_claim_support_in_supported_combination": 2,
+        "no_substantive_support_extra_citation": 1
+      },
+      "cases_with_citation_precision_finding": 1,
+      "citation_coordinate_or_authorization_membership_failures": 0,
+      "context_occurrences_verified": 29,
+      "context_binding_failures": 0,
+      "retrieval_miss_identified": 0,
+      "unsupported_generation_identified": 0,
+      "numeric_accuracy_or_quality_score_assigned": false
+    },
+    "general_error_categories": [
+      {
+        "category": "non_supporting_extra_citation",
+        "affected_case_count": 1,
+        "citation_occurrence_count": 1,
+        "severity": "citation_precision",
+        "claim_itself_supported_by_other_citation": true,
+        "material_answer_correctness_failure": false
+      }
+    ],
+    "limits": {
+      "posthoc_development_ai_review": true,
+      "official_evaluation": false,
+      "human_review": false,
+      "user_approval": false,
+      "fresh_heldout": false,
+      "pristine_blind": false,
+      "numeric_accuracy_or_quality_score": false,
+      "whole_run_operational_acceptance": false,
+      "other_gates_reclassified": false,
+      "prior_source_label_diagnostic_exposure_disclosed": true,
+      "current_phase_read_scope": "two authorized answer packet/custody inputs only, plus own new output hash readback",
+      "author_oracle_or_markers_read": false,
+      "previous_annotations_read_or_modified": false,
+      "current_performance_or_extraction_diagnostics_read": false,
+      "custody_mapping_independently_replayed": false,
+      "internal_source_context_citation_hashes_and_spans_verified": true,
+      "case_authorization_membership_respected": true,
+      "no_confirmed_retrieval_miss_does_not_prove_general_retrieval_quality": true,
+      "structured_abstention_ui_language_unassessed": true,
+      "coverage_and_wording_interpretation_boundaries_preserved_in_private_rationales": true,
+      "model_service_calls": 0,
+      "tests_run": 0,
+      "git_operations": 0,
+      "input_edits": 0,
+      "source_code_reads": 0
+    }
+  },
+  "parent_verification": {
+    "review_and_input_bindings_verified": 4,
+    "product_source_bindings_unchanged": 10,
+    "frozen_toolchain_bindings_unchanged": 77,
+    "private_judgment_content_read": false,
+    "source_question_answer_content_read": false
+  },
+  "original_operation_gate": {
+    "status": "failed_consumed",
+    "cli_exit_code": 1,
+    "original_failure": "owned_absence_unconfirmed",
+    "original_first_failure": null,
+    "later_absence_does_not_reclassify_failure": true
+  },
+  "result_commit_ci": [
+    {
+      "run_id": 39720754557,
+      "head_sha": "076e1bc27a6b14abb3ffa7abb4593caa6070b262",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39720754557",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 39720758450,
+      "head_sha": "076e1bc27a6b14abb3ffa7abb4593caa6070b262",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39720758450",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "next_steps": [
+    "Review actual meeting extraction separately after this answer judgment lock. Preserve previous source annotations and derive any new source judgments before reading current extraction labels.",
+    "Review the new scratch cleanup runner without authorizing another runtime by this artifact.",
+    "Retain citation precision finding; do not infer general accuracy or fresh heldout acceptance from six synthetic development cases."
+  ],
+  "limits": {
+    "human_review": false,
+    "formal_evaluation": false,
+    "fresh_heldout": false,
+    "whole_phase1_complete": false,
+    "new_actual_execution_authorized": false,
+    "service_paid_usage": false
+  }
+}

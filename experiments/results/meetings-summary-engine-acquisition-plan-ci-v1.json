@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "head": "d95804e39d9ce109ce87e6a9298ef153e6d20d71",
+  "status": "all_required_checks_passed",
+  "runs": [
+    {
+      "id": 40458309346,
+      "event": "push",
+      "watch_session": 97517,
+      "watch_exit_code": 0,
+      "watch_closed": true,
+      "jobs": [
+        {
+          "id": 122036710736,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122036710969,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122036710989,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40458315672,
+      "event": "pull_request",
+      "watch_session": 62075,
+      "watch_exit_code": 0,
+      "watch_closed": true,
+      "jobs": [
+        {
+          "id": 122036729022,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122036729065,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122036729133,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "scope": "Exact published diagnosis and plan commit. Uncommitted manual-correction and asset/engine repair code is not covered. No actual model quality, new tool acquisition or public deployment is established.",
+  "human_review": false
+}

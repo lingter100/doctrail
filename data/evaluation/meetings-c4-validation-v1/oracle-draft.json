@@ -1,0 +1,803 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "cases": [
+    {
+      "id": "C4-VAL-01",
+      "family_id": "c4-f03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "5월 8일에는 orchestrion-js의 API 설계와 모듈을 게시할 수 있는 상태로 만드는 작업에 주력하고 있었다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-01-r1-c0002",
+                "start_offset": 1761,
+                "end_offset": 2028,
+                "quote": "- https://github.com/DataDog/orchestrion-js has some PRs opened by Tim, feel free to go check them out. There are also some open issues that are open to any feedback/thoughts.\n- Mainly looking at API design and getting the module in a state where it can be published\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "5월 29일에는 orchestrion-js PR #12를 병합할 수 있지만 NPM 게시가 필요하다고 했다. 병합이나 게시가 이미 완료됐다는 기록은 아니다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-02-r1-c0000",
+                "start_offset": 482,
+                "end_offset": 788,
+                "quote": "- We can merge in https://github.com/DataDog/orchestrion-js/pull/12, but we need to publish it to NPM\n  - Create a temporary org to publish this\n  - Tim to publish on npm under a namespace\n    - For bundlers we can create an SWC plugin - Sentry to own this\n    - For loaders, we can rely on New Relic help\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "게시용 임시 조직을 만들고 Tim이 namespace 아래 npm에 게시하기로 했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-02-r1-c0000",
+                "start_offset": 482,
+                "end_offset": 788,
+                "quote": "- We can merge in https://github.com/DataDog/orchestrion-js/pull/12, but we need to publish it to NPM\n  - Create a temporary org to publish this\n  - Tim to publish on npm under a namespace\n    - For bundlers we can create an SWC plugin - Sentry to own this\n    - For loaders, we can rely on New Relic help\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "번들러에는 SWC 플러그인을 만들 수 있으며 Sentry가 이를 맡는 방안이 기록됐다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-02-r1-c0000",
+                "start_offset": 482,
+                "end_offset": 788,
+                "quote": "- We can merge in https://github.com/DataDog/orchestrion-js/pull/12, but we need to publish it to NPM\n  - Create a temporary org to publish this\n  - Tim to publish on npm under a namespace\n    - For bundlers we can create an SWC plugin - Sentry to own this\n    - For loaders, we can rely on New Relic help\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F5",
+          "text": "로더에는 New Relic의 도움을 받을 수 있다고 기록했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-02-r1-c0000",
+                "start_offset": 482,
+                "end_offset": 788,
+                "quote": "- We can merge in https://github.com/DataDog/orchestrion-js/pull/12, but we need to publish it to NPM\n  - Create a temporary org to publish this\n  - Tim to publish on npm under a namespace\n    - For bundlers we can create an SWC plugin - Sentry to own this\n    - For loaders, we can rely on New Relic help\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-val-pub-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2025-05-08"
+        },
+        {
+          "document_id": "c4-val-pub-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2025-05-29"
+        },
+        {
+          "document_id": "c4-val-pub-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not turn 'can merge', the publication requirement, or proposed SWC support into completed merge, publication, or implementation.",
+        "Do not infer a causal change solely from the two dates or claim the later meeting replaced an earlier formal decision.",
+        "Do not invent the temporary organization's name, package name, package version, or completion date."
+      ],
+      "limitations": [
+        "AI-authored evaluation item; human review count is zero.",
+        "Independent item prereview is pending. The named prereviewer is prospective, not an approval.",
+        "Evidence alternatives are authored sufficiency judgments, not automatic proof that every semantic alternative was discovered.",
+        "Public historical minutes are used as pinned source evidence, not as current project status; linked pages and recordings are outside the adopted corpus."
+      ],
+      "question_author": "c4_validation_item_author",
+      "oracle_author": "c4_validation_item_author",
+      "independent_prereviewer": "c4_validation_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-VAL-02",
+      "family_id": "c4-f03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "The WG aims for Node to provide comprehensive, documented, extensible diagnostic protocols, formats and APIs so tool vendors can provide reliable diagnostic tools for Node.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-general-r1-c0000",
+                "start_offset": 237,
+                "end_offset": 441,
+                "quote": "The goal of this WG is to ensure Node provides a set of comprehensive, documented, extensible diagnostic protocols, formats, and APIs to enable tool vendors to provide reliable diagnostic tools for Node.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "Collect, understand and document existing diagnostic capabilities and entry points throughout Node, V8 and other components.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-general-r1-c0000",
+                "start_offset": 442,
+                "end_offset": 827,
+                "quote": "Work needed includes:\n- Collect, understand, and document existing diagnostic capabilities and entry-points throughout Node, V8, and other components.\n- Collect and document projects and products providing diagnostics for Node with brief description of their technical architecture and sponsoring organizations.\n- Identify opportunities and gaps, then propose and implement solutions.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "Collect and document projects and products providing diagnostics for Node, with brief descriptions of their technical architecture and sponsoring organizations.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-general-r1-c0000",
+                "start_offset": 442,
+                "end_offset": 827,
+                "quote": "Work needed includes:\n- Collect, understand, and document existing diagnostic capabilities and entry-points throughout Node, V8, and other components.\n- Collect and document projects and products providing diagnostics for Node with brief description of their technical architecture and sponsoring organizations.\n- Identify opportunities and gaps, then propose and implement solutions.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "Identify opportunities and gaps, then propose and implement solutions.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-general-r1-c0000",
+                "start_offset": 442,
+                "end_offset": 827,
+                "quote": "Work needed includes:\n- Collect, understand, and document existing diagnostic capabilities and entry-points throughout Node, V8, and other components.\n- Collect and document projects and products providing diagnostics for Node with brief description of their technical architecture and sponsoring organizations.\n- Identify opportunities and gaps, then propose and implement solutions.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-val-pub-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2025-05-08"
+        },
+        {
+          "document_id": "c4-val-pub-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2025-05-29"
+        },
+        {
+          "document_id": "c4-val-pub-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not replace the stated work streams with the separate initiative/champion table or infer completion of the work."
+      ],
+      "limitations": [
+        "AI-authored evaluation item; human review count is zero.",
+        "Independent item prereview is pending. The named prereviewer is prospective, not an approval.",
+        "Evidence alternatives are authored sufficiency judgments, not automatic proof that every semantic alternative was discovered.",
+        "This question concerns the pinned document's stated purpose and work, not current completion or organizational membership."
+      ],
+      "question_author": "c4_validation_item_author",
+      "oracle_author": "c4_validation_item_author",
+      "independent_prereviewer": "c4_validation_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-VAL-03",
+      "family_id": "c4-f03",
+      "provenance": "public",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "5월 29일에는 게시용 임시 조직을 만들기로 했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-02-r1-c0000",
+                "start_offset": 482,
+                "end_offset": 788,
+                "quote": "- We can merge in https://github.com/DataDog/orchestrion-js/pull/12, but we need to publish it to NPM\n  - Create a temporary org to publish this\n  - Tim to publish on npm under a namespace\n    - For bundlers we can create an SWC plugin - Sentry to own this\n    - For loaders, we can rely on New Relic help\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "Tim이 namespace 아래 npm에 게시하기로 했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-02-r1-c0000",
+                "start_offset": 482,
+                "end_offset": 788,
+                "quote": "- We can merge in https://github.com/DataDog/orchestrion-js/pull/12, but we need to publish it to NPM\n  - Create a temporary org to publish this\n  - Tim to publish on npm under a namespace\n    - For bundlers we can create an SWC plugin - Sentry to own this\n    - For loaders, we can rely on New Relic help\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "orchestrion-js의 실제 npm 게시 완료 날짜가 필요하지만 채택한 family 전체에 기록되어 있지 않다.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "F4",
+          "text": "실제 npm 배포 패키지의 버전이 필요하지만 채택한 family 전체에 기록되어 있지 않다.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-val-pub-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2025-05-08"
+        },
+        {
+          "document_id": "c4-val-pub-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2025-05-29"
+        },
+        {
+          "document_id": "c4-val-pub-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": "임시 조직과 Tim의 namespace 게시 계획은 확인되지만 실제 게시 완료 날짜와 배포 버전은 세 원문 어디에도 없다. 계획만으로 필수 완료 정보를 채울 수 없어 전체 답변을 보류한다.",
+      "forbidden_inferences": [
+        "Do not use May 29, the meeting date, as a publication completion date.",
+        "Do not treat PR12, 'can merge', a publication requirement, or an npm namespace plan as a released package version.",
+        "Do not retrieve or infer information from linked GitHub/NPM pages outside the adopted sources."
+      ],
+      "limitations": [
+        "AI-authored evaluation item; human review count is zero.",
+        "Independent item prereview is pending. The named prereviewer is prospective, not an approval.",
+        "Evidence alternatives are authored sufficiency judgments, not automatic proof that every semantic alternative was discovered."
+      ],
+      "question_author": "c4_validation_item_author",
+      "oracle_author": "c4_validation_item_author",
+      "independent_prereviewer": "c4_validation_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-VAL-04",
+      "family_id": "c4-f03",
+      "provenance": "public",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "PR197 targeted invalid export names.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-02-r1-c0000",
+                "start_offset": 815,
+                "end_offset": 947,
+                "quote": "- [Abhi] https://github.com/nodejs/import-in-the-middle/pull/197\n  - Invalid export names fix\n  - Abhi to redo PR and adjust things\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "Abhi was to redo the PR and adjust things.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-pub-meeting-02-r1-c0000",
+                "start_offset": 815,
+                "end_offset": 947,
+                "quote": "- [Abhi] https://github.com/nodejs/import-in-the-middle/pull/197\n  - Invalid export names fix\n  - Abhi to redo PR and adjust things\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "The actual merge date of the revised PR197 is required but is absent from the adopted family.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "F4",
+          "text": "The actual merge commit hash of the revised PR197 is required but is absent from the adopted family.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-val-pub-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2025-05-08"
+        },
+        {
+          "document_id": "c4-val-pub-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "en",
+          "meeting_date": "2025-05-29"
+        },
+        {
+          "document_id": "c4-val-pub-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "en",
+          "meeting_date": null
+        }
+      ],
+      "unanswerable_reason": "The target and proposed next action are documented, but the complete adopted family gives neither the actual merge date nor a merge commit for the revised PR197; the whole answer must abstain.",
+      "forbidden_inferences": [
+        "Do not conflate import-in-the-middle PR197 with PR115, issue185, issue186, or orchestrion-js PR12.",
+        "Do not reuse the historical c9c56497f0f1af2a9c3d5b39144907c9081fd871 link in the May 8 issue185 discussion as a PR197 merge commit.",
+        "Do not equate a scheduled next action or the May 29 meeting date with a completed merge."
+      ],
+      "limitations": [
+        "AI-authored evaluation item; human review count is zero.",
+        "Independent item prereview is pending. The named prereviewer is prospective, not an approval.",
+        "Evidence alternatives are authored sufficiency judgments, not automatic proof that every semantic alternative was discovered."
+      ],
+      "question_author": "c4_validation_item_author",
+      "oracle_author": "c4_validation_item_author",
+      "independent_prereviewer": "c4_validation_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-VAL-05",
+      "family_id": "c4-f04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "월간 공개 묶음은 품질 검토를 마친 관측 CSV, 측정 위치·단위·시각 기준의 메타데이터, 제외 구간·수정 이력을 설명하는 변경기록으로 구성한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-general-r1-c0000",
+                "start_offset": 552,
+                "end_offset": 853,
+                "quote": "매월 공개 묶음에는 품질 검토를 마친 관측 CSV, 측정 위치·단위·시각 기준을 설명하는 메타데이터, 제외 구간과 수정 이력을 설명하는 변경기록을 포함한다. 시각은 한국 표준시를 쓰고 파일명에는 연월과 관측지 코드를 넣는다. 이용자는 CSV만 받아도 측정 단위와 결측값 표기를 알 수 있도록 각 파일의 첫머리 설명을 유지한다. 공개 자료는 교육·분석에 사용할 수 있지만 검토 전 값과 결측 구간을 연속된 실측값으로 해석해서는 안 된다. 품질 상태가 다른 기간을 합쳐 평균을 낼 때에는 사용한 기간과 제외 조건을 함께 표시하도록 안내한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "관측소장은 공개 후보의 검토 기록과 변경기록이 모두 갖춰진 뒤 게시를 승인한다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-general-r1-c0001",
+                "start_offset": 865,
+                "end_offset": 1123,
+                "quote": "현장담당 박지우는 방문일지와 장비 기록을 대조하고 이상 구간을 표시한다. 자료담당 한서진은 단위·시각·중복 행·결측 표기를 검토하고 공개 후보를 작성한다. 두 사람이 서로의 확인란을 대신 서명하지 않는다. 관측소장은 공개 후보의 검토 기록과 변경기록이 모두 갖춰진 뒤 게시를 승인한다. 월말이라는 이유만으로 미검토 구간을 포함하지 않는다. 이상이 있는 구간은 후보에서 분리하고 이유를 남길 수 있으며, 그 밖의 검토 완료 구간은 별도 묶음으로 승인할 수 있다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "10월 13일 남안 후보는 박지우의 현장 대조와 한서진의 파일 검토 기록을 갖췄으며 윤도현이 남안 9월 묶음 SA-202609-v1의 공개를 승인했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0000",
+                "start_offset": 684,
+                "end_offset": 945,
+                "quote": "남안 9월 자료 후보는 박지우의 현장 대조 확인과 한서진의 파일 검토 기록이 모두 갖춰졌다. 윤도현은 남안 묶음 SA-202609-v1의 공개를 승인했다. 한서진이 10월 14일 게시 작업을 맡고 변경기록에 이번 승인일을 남긴다. 북안 후보는 단위 설명을 수정했지만 현장 대조 확인란의 최종 서명이 남아 있으므로 이번 남안 묶음에 포함하지 않는다. 박지우는 10월 16일까지 북안 확인란을 정리해 자료담당자에게 전달한다. 북안 공개일은 이번 회의에서 정하지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "한서진이 10월 14일 게시 작업을 맡고 변경기록에 10월 13일의 승인일을 남긴다. 회의 시점에는 예정된 작업이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0000",
+                "start_offset": 684,
+                "end_offset": 945,
+                "quote": "남안 9월 자료 후보는 박지우의 현장 대조 확인과 한서진의 파일 검토 기록이 모두 갖춰졌다. 윤도현은 남안 묶음 SA-202609-v1의 공개를 승인했다. 한서진이 10월 14일 게시 작업을 맡고 변경기록에 이번 승인일을 남긴다. 북안 후보는 단위 설명을 수정했지만 현장 대조 확인란의 최종 서명이 남아 있으므로 이번 남안 묶음에 포함하지 않는다. 박지우는 10월 16일까지 북안 확인란을 정리해 자료담당자에게 전달한다. 북안 공개일은 이번 회의에서 정하지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F5",
+          "text": "북안 후보는 단위 설명을 수정했지만 현장 대조 확인란의 최종 서명이 남아 있어 이번 남안 묶음에 포함하지 않는다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0000",
+                "start_offset": 684,
+                "end_offset": 945,
+                "quote": "남안 9월 자료 후보는 박지우의 현장 대조 확인과 한서진의 파일 검토 기록이 모두 갖춰졌다. 윤도현은 남안 묶음 SA-202609-v1의 공개를 승인했다. 한서진이 10월 14일 게시 작업을 맡고 변경기록에 이번 승인일을 남긴다. 북안 후보는 단위 설명을 수정했지만 현장 대조 확인란의 최종 서명이 남아 있으므로 이번 남안 묶음에 포함하지 않는다. 박지우는 10월 16일까지 북안 확인란을 정리해 자료담당자에게 전달한다. 북안 공개일은 이번 회의에서 정하지 않았다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-val-syn-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c4-val-syn-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-10-06"
+        },
+        {
+          "document_id": "c4-val-syn-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-10-13"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not turn the October 13 approval or October 14 planned posting into proof that posting has already completed.",
+        "Do not include the north-bank candidate in SA-202609-v1 or treat the October 16 check-form deadline as its publication date.",
+        "Do not treat the October 9 internal review request or the outside team's October 12 requested deadline as approval."
+      ],
+      "limitations": [
+        "AI-authored evaluation item; human review count is zero.",
+        "Independent item prereview is pending. The named prereviewer is prospective, not an approval.",
+        "Evidence alternatives are authored sufficiency judgments, not automatic proof that every semantic alternative was discovered.",
+        "The station, people and records are explicitly synthetic. No real field observation or human review is claimed."
+      ],
+      "question_author": "c4_validation_item_author",
+      "oracle_author": "c4_validation_item_author",
+      "independent_prereviewer": "c4_validation_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-VAL-06",
+      "family_id": "c4-f04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "answered",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "Communication-outage periods remain missing; neighboring-station values or averages of surrounding times must not be placed in the measured-data column.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-general-r1-c0001",
+                "start_offset": 1138,
+                "end_offset": 1357,
+                "quote": "통신 장애 구간은 결측으로 남긴다. 인접 관측함의 값이나 전후 시점의 평균으로 채운 값은 실측 열에 넣지 않는다. 설명용 보간이 필요하면 별도 파생 파일에 방법과 범위를 적고 원시 측정과 구분한다. 센서를 교체하면 현장담당자가 새 일련번호와 설치 시각을 등록하고, 자료담당자가 교체 전후 구간의 품질 상태를 다시 확인한다. 단순 세척은 교체로 기록하지 않으며 작업 내용만 방문일지에 남긴다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "If explanatory interpolation is needed, it belongs in a separate derived file with its method and range recorded, distinguished from raw measurements.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-general-r1-c0001",
+                "start_offset": 1138,
+                "end_offset": 1357,
+                "quote": "통신 장애 구간은 결측으로 남긴다. 인접 관측함의 값이나 전후 시점의 평균으로 채운 값은 실측 열에 넣지 않는다. 설명용 보간이 필요하면 별도 파생 파일에 방법과 범위를 적고 원시 측정과 구분한다. 센서를 교체하면 현장담당자가 새 일련번호와 설치 시각을 등록하고, 자료담당자가 교체 전후 구간의 품질 상태를 다시 확인한다. 단순 세척은 교체로 기록하지 않으며 작업 내용만 방문일지에 남긴다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "The October 13 meeting reported that no records had been secured to restore the outage-period missing values, so they remained missing.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0000",
+                "start_offset": 252,
+                "end_offset": 492,
+                "quote": "박지우는 10월 8일 현장 방문을 마쳤다. 북안 부두 센서의 일련번호는 기존 장비 대장과 같았으며 케이블 고정 부품을 다시 조였다. 센서를 교체하지는 않았다. 9월 24일 수첩에는 전기전도도 단위가 자동 CSV와 다르게 적혀 있었고, 한서진과 원시 수치를 대조하여 해당 구간의 단위 설명을 수정 후보에 반영했다. 원시 CSV는 변경하지 않았다. 통신 장애 기간의 누락값을 복원할 기록은 확보하지 못했으므로 결측 상태로 유지한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "Park Jiwoo completed the October 8 north-bank visit, found the sensor serial number unchanged from the equipment register, and retightened the cable-fixing parts; the sensor was not replaced.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0000",
+                "start_offset": 252,
+                "end_offset": 492,
+                "quote": "박지우는 10월 8일 현장 방문을 마쳤다. 북안 부두 센서의 일련번호는 기존 장비 대장과 같았으며 케이블 고정 부품을 다시 조였다. 센서를 교체하지는 않았다. 9월 24일 수첩에는 전기전도도 단위가 자동 CSV와 다르게 적혀 있었고, 한서진과 원시 수치를 대조하여 해당 구간의 단위 설명을 수정 후보에 반영했다. 원시 CSV는 변경하지 않았다. 통신 장애 기간의 누락값을 복원할 기록은 확보하지 못했으므로 결측 상태로 유지한다.\n"
+              }
+            ]
+          ]
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-val-syn-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c4-val-syn-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-10-06"
+        },
+        {
+          "document_id": "c4-val-syn-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-10-13"
+        }
+      ],
+      "unanswerable_reason": null,
+      "forbidden_inferences": [
+        "Do not describe interpolation as recovered observed values or replace past missing values with new measurements.",
+        "Do not claim a sensor replacement, completed equipment purchase, or changed raw CSV.",
+        "Do not infer permanent impossibility of future replacement from the deferred budget review."
+      ],
+      "limitations": [
+        "AI-authored evaluation item; human review count is zero.",
+        "Independent item prereview is pending. The named prereviewer is prospective, not an approval.",
+        "Evidence alternatives are authored sufficiency judgments, not automatic proof that every semantic alternative was discovered.",
+        "Required evidence is in Korean passages. The unrelated English partner-handoff section does not answer these requirements; an English answer requires Korean evidence."
+      ],
+      "question_author": "c4_validation_item_author",
+      "oracle_author": "c4_validation_item_author",
+      "independent_prereviewer": "c4_validation_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-VAL-07",
+      "family_id": "c4-f04",
+      "provenance": "synthetic",
+      "language": "ko",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "10월 13일 윤도현이 승인한 남안 9월 묶음의 식별자는 SA-202609-v1이다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0000",
+                "start_offset": 684,
+                "end_offset": 945,
+                "quote": "남안 9월 자료 후보는 박지우의 현장 대조 확인과 한서진의 파일 검토 기록이 모두 갖춰졌다. 윤도현은 남안 묶음 SA-202609-v1의 공개를 승인했다. 한서진이 10월 14일 게시 작업을 맡고 변경기록에 이번 승인일을 남긴다. 북안 후보는 단위 설명을 수정했지만 현장 대조 확인란의 최종 서명이 남아 있으므로 이번 남안 묶음에 포함하지 않는다. 박지우는 10월 16일까지 북안 확인란을 정리해 자료담당자에게 전달한다. 북안 공개일은 이번 회의에서 정하지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "한서진이 10월 14일 게시 작업을 맡기로 했다.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0000",
+                "start_offset": 684,
+                "end_offset": 945,
+                "quote": "남안 9월 자료 후보는 박지우의 현장 대조 확인과 한서진의 파일 검토 기록이 모두 갖춰졌다. 윤도현은 남안 묶음 SA-202609-v1의 공개를 승인했다. 한서진이 10월 14일 게시 작업을 맡고 변경기록에 이번 승인일을 남긴다. 북안 후보는 단위 설명을 수정했지만 현장 대조 확인란의 최종 서명이 남아 있으므로 이번 남안 묶음에 포함하지 않는다. 박지우는 10월 16일까지 북안 확인란을 정리해 자료담당자에게 전달한다. 북안 공개일은 이번 회의에서 정하지 않았다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "실제 게시 완료 시각이 필요하지만 family 전체에 완료 기록이 없다.",
+          "evidence_alternatives": []
+        },
+        {
+          "id": "F4",
+          "text": "다운로드 가능한 정확한 공개 URL이 필요하지만 family 전체에 URL이 제공되지 않았다.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-val-syn-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c4-val-syn-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-10-06"
+        },
+        {
+          "document_id": "c4-val-syn-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-10-13"
+        }
+      ],
+      "unanswerable_reason": "승인된 버전과 게시 계획은 있지만 실제 게시 완료 시각과 정확한 공개 URL은 세 문서 어디에도 없다. 승인 또는 예정일을 완료 증거로 대체할 수 없어 전체 답변을 보류한다.",
+      "forbidden_inferences": [
+        "Do not manufacture a URL from SA-202609-v1 or use an internal working folder as an approved public link.",
+        "Do not infer that the planned October 14 publication occurred or convert the October 13 meeting time to a publication timestamp.",
+        "Do not use instructions to bring a completion record to the next meeting as evidence that completion already occurred."
+      ],
+      "limitations": [
+        "AI-authored evaluation item; human review count is zero.",
+        "Independent item prereview is pending. The named prereviewer is prospective, not an approval.",
+        "Evidence alternatives are authored sufficiency judgments, not automatic proof that every semantic alternative was discovered."
+      ],
+      "question_author": "c4_validation_item_author",
+      "oracle_author": "c4_validation_item_author",
+      "independent_prereviewer": "c4_validation_item_review",
+      "human_review_count": 0
+    },
+    {
+      "id": "C4-VAL-08",
+      "family_id": "c4-f04",
+      "provenance": "synthetic",
+      "language": "en",
+      "expected_status": "abstained",
+      "required_facts": [
+        {
+          "id": "F1",
+          "text": "The October 6 meeting considered CSV-reading practice in the workroom instead of outdoor movement if it rains.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-01-r1-c0001",
+                "start_offset": 1016,
+                "end_offset": 1254,
+                "quote": "정수민은 10월 24일 워크숍의 실내 설명 자료와 현장 동선을 준비 중이다. 일반 참가자에게는 관측함을 직접 열게 하지 않고 시연용 장비를 사용한다. 비가 오면 야외 이동 대신 작업실에서 CSV 읽기 실습을 진행하는 대안을 검토했다. 최종 야외 진행 여부는 행사 이틀 전 운영 확인에서 결정하며, 아직 모집 안내에 우천 시 환불 조건을 확정 문구로 넣지 않는다. 참가자 사진은 별도 동의를 받은 경우에만 기록용으로 촬영한다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F2",
+          "text": "The final outdoor-operation decision is scheduled for an operational check two days before the event; the October 13 meeting maintained that schedule.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-01-r1-c0001",
+                "start_offset": 1016,
+                "end_offset": 1254,
+                "quote": "정수민은 10월 24일 워크숍의 실내 설명 자료와 현장 동선을 준비 중이다. 일반 참가자에게는 관측함을 직접 열게 하지 않고 시연용 장비를 사용한다. 비가 오면 야외 이동 대신 작업실에서 CSV 읽기 실습을 진행하는 대안을 검토했다. 최종 야외 진행 여부는 행사 이틀 전 운영 확인에서 결정하며, 아직 모집 안내에 우천 시 환불 조건을 확정 문구로 넣지 않는다. 참가자 사진은 별도 동의를 받은 경우에만 기록용으로 촬영한다.\n"
+              },
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0001",
+                "start_offset": 1136,
+                "end_offset": 1399,
+                "quote": "정수민이 제시한 안내 초안에는 실내 설명 40분과 현장 이동 30분이 구분되어 있다. 현장 이동 시 관측함 개방은 직원 시연으로 제한한다. 운영팀은 참가자의 이동 부담을 줄이기 위해 실내 활동만 참여하는 선택지를 추가하기로 했다. 신청서에는 야외 참여 여부를 별도 항목으로 둔다. 야외 진행 여부를 행사 이틀 전에 판단하는 일정은 유지하며, 우천 대안의 준비물은 정수민이 다음 주에 확인한다. 오늘 회의는 실제 행사 진행이나 참가자 모집 완료를 보고하는 자리가 아니다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F3",
+          "text": "On October 13 the team decided to add an indoor-only participation option and a separate outdoor-participation field on the application form.",
+          "evidence_alternatives": [
+            [
+              {
+                "chunk_id": "c4-val-syn-meeting-02-r1-c0001",
+                "start_offset": 1136,
+                "end_offset": 1399,
+                "quote": "정수민이 제시한 안내 초안에는 실내 설명 40분과 현장 이동 30분이 구분되어 있다. 현장 이동 시 관측함 개방은 직원 시연으로 제한한다. 운영팀은 참가자의 이동 부담을 줄이기 위해 실내 활동만 참여하는 선택지를 추가하기로 했다. 신청서에는 야외 참여 여부를 별도 항목으로 둔다. 야외 진행 여부를 행사 이틀 전에 판단하는 일정은 유지하며, 우천 대안의 준비물은 정수민이 다음 주에 확인한다. 오늘 회의는 실제 행사 진행이나 참가자 모집 완료를 보고하는 자리가 아니다.\n"
+              }
+            ]
+          ]
+        },
+        {
+          "id": "F4",
+          "text": "Finalized rain-related refund conditions and the refund amount are required, but the adopted family does not record them.",
+          "evidence_alternatives": []
+        }
+      ],
+      "source_documents": [
+        {
+          "document_id": "c4-val-syn-general",
+          "revision": 1,
+          "kind": "general",
+          "language": "ko",
+          "meeting_date": null
+        },
+        {
+          "document_id": "c4-val-syn-meeting-01",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-10-06"
+        },
+        {
+          "document_id": "c4-val-syn-meeting-02",
+          "revision": 1,
+          "kind": "meeting",
+          "language": "ko",
+          "meeting_date": "2026-10-13"
+        }
+      ],
+      "unanswerable_reason": "The alternative activity, decision schedule and participation option are documented. The October 6 minutes explicitly withhold finalized rain-refund wording, and neither the later minutes nor the general policy finalizes a refund rule or amount. This required information remains absent, so the whole answer must abstain.",
+      "forbidden_inferences": [
+        "Do not turn a considered rainy-day alternative into a completed event or finalized cancellation/refund policy.",
+        "Do not invent a full refund, percentage, currency amount, fee, or weather threshold.",
+        "Do not treat an indoor-only option as evidence that the event is already cancelled or all participants have consented."
+      ],
+      "limitations": [
+        "AI-authored evaluation item; human review count is zero.",
+        "Independent item prereview is pending. The named prereviewer is prospective, not an approval.",
+        "Evidence alternatives are authored sufficiency judgments, not automatic proof that every semantic alternative was discovered."
+      ],
+      "question_author": "c4_validation_item_author",
+      "oracle_author": "c4_validation_item_author",
+      "independent_prereviewer": "c4_validation_item_review",
+      "human_review_count": 0
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "kind": "c5-closed-quality-failure-metadata",
+  "recorded_at": "2026-10-20T00:49:48.671792+00:00",
+  "execution_commit": "2f327d3179ad443773b2b1834aa9e00fee9c5e1f",
+  "raw_report": {
+    "file": ".local/meetings-c5-quality-calibration-v1/report.json",
+    "sha256": "5d2da15ac9a9c9bb6f0abb96518e470ea683594e0947814dcacb95f0d63b1edd",
+    "bytes": 656763
+  },
+  "terminal_receipt": {
+    "file": ".local/c5-quality-cli-v1/run-receipt.json",
+    "sha256": "d354c2abc334f3332991ad307bfbd39bdbbdcdd7c84ab2fa3161195b1729e803",
+    "bytes": 7850
+  },
+  "cli_exit_code": 1,
+  "cli_elapsed_seconds": 293.23399999999674,
+  "phase_elapsed_seconds": 232.68699999997625,
+  "status": "failed_closed",
+  "first_failure": {
+    "code": "generation_deadline_exceeded",
+    "type": "GenerationError"
+  },
+  "calls": [
+    {
+      "id": "C5-CAL-01",
+      "passed": true,
+      "http_send_attempts": 1,
+      "request_seconds": 89.85899999999674,
+      "initial_proof_seconds": 19.68699999997625,
+      "input_tokens": 2776,
+      "completion": {
+        "input_tokens": 2776,
+        "output_tokens": 872,
+        "final_retokenized_tokens": 357,
+        "elapsed_seconds": 70.09399999998277,
+        "finish_reason": "eos"
+      },
+      "native_timings": {
+        "prompt_n": 2776,
+        "prompt_ms": 4924.507,
+        "predicted_n": 872,
+        "predicted_ms": 46470.57
+      }
+    },
+    {
+      "id": "C5-CAL-02",
+      "passed": false,
+      "http_send_attempts": 1,
+      "request_seconds": 90.95299999997951,
+      "initial_proof_seconds": 23.09399999998277,
+      "error": {
+        "code": "generation_deadline_exceeded",
+        "type": "GenerationError"
+      },
+      "input_tokens": 5021,
+      "completion": {},
+      "native_timings": {}
+    }
+  ],
+  "http_send_attempts": 2,
+  "parsed_native_responses": 1,
+  "structurally_valid_answers": 1,
+  "unexecuted_calibration": 4,
+  "validation_native_calls": 0,
+  "semantic_judgments": 0,
+  "sources_unchanged_original_flag": false,
+  "metadata_recovery_original_flag": false,
+  "retries": 0,
+  "warmups": 0,
+  "resource_calls": 0,
+  "restarts": 0,
+  "cleanup": [
+    {
+      "stopped": true,
+      "seconds": 0.0,
+      "cleanup_errors": 0,
+      "within_budget": true,
+      "drain": {
+        "emitted_bytes": 0,
+        "eof": true,
+        "read_errors": 0,
+        "join_errors": 0,
+        "started": true,
+        "joined": true,
+        "chunk_bytes": 8192,
+        "raw_content_retained": false
+      }
+    }
+  ],
+  "owned_processes_remaining": 0,
+  "gpu_layers_requested": 28,
+  "gpu_layers_effective": null,
+  "limits": [
+    "No successful full comparison or semantic score; validation remains closed.",
+    "First initial-proof time is directly measured; whole-minus-native is not a causal Git cost measurement.",
+    "Native timing for the failed second request is unavailable; no inferred generation completion.",
+    "Existing false post-success flags are preserved, never replaced by later diagnostic success.",
+    "No C5 retry, missing-item continuation, closed-pool rerun or automatic service adoption."
+  ],
+  "human_reviews": 0,
+  "selected": false
+}

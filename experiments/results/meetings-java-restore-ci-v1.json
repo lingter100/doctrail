@@ -1,0 +1,723 @@
+{
+  "schema_version": 1,
+  "kind": "exact_published_Java_meeting_restore_required_CI",
+  "head": "e8f6730f790f3dccb51d850b6496249f1e28cd7f",
+  "implementation_commit": "d57dbd086497f88ce33deee7a9199ff6e718bf06",
+  "runs": [
+    {
+      "id": 40262506022,
+      "event": "push",
+      "head_sha": "e8f6730f790f3dccb51d850b6496249f1e28cd7f",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40262506022",
+      "run_attempt": 1,
+      "created_at": "2026-10-26T03:07:39Z",
+      "updated_at": "2026-10-26T03:12:14Z",
+      "jobs": [
+        {
+          "id": 121377697133,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Run npm ci && npm run build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run ./server/mvnw -B -q -f server/pom.xml verify",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Run uv sync --frozen --python 3.11",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Verify actual Java HTTP and copied Python database compatibility",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Install hash-pinned lightweight resource test dependency",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Verify synthetic meeting edits and backup restore against actual Java",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Preserve safe synthetic meeting operations report",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Install browser for the packaged React UI",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Verify isolated browser runner diagnostics with Node subprocesses",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Verify browser workflows against isolated Java service",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Preserve isolated browser failure diagnostics",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 16
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 29
+            },
+            {
+              "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 30
+            },
+            {
+              "name": "Post Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 31
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 32
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 33
+            }
+          ]
+        },
+        {
+          "id": 121377697383,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run uv sync --frozen --python 3.11",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run uv run ruff check src tests scripts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Install hash-pinned lightweight resource test dependency",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run uv run --no-sync pytest -q",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Verify licensed meeting fixture provenance without network or models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Verify sealed meeting data preparation without network or models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Verify fresh meeting calibration provenance without network or models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Run uv run python scripts/validate_splits.py data/manifests/kubernetes-pilot.json data/evaluation/pilot-smoke.jsonl",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Replay frozen public corpus and verify candidate provenance",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Replay frozen retrieval results and candidate diagnostics without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Replay train-only pilot and independent AI review receipts without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Replay saved training readiness evidence without model weights or inference",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Replay frozen main-dev ranking and quality decision without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Replay preserved generation failure and corrected greedy artifacts without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Verify isolated answer policy data and preparation bindings without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 35
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 36
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 37
+            }
+          ]
+        },
+        {
+          "id": 121377697400,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run npm ci",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run npm run typecheck",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Run npm run build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40262510225,
+      "event": "pull_request",
+      "head_sha": "e8f6730f790f3dccb51d850b6496249f1e28cd7f",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/lingter100/doctrail/actions/runs/40262510225",
+      "run_attempt": 1,
+      "created_at": "2026-10-26T03:07:42Z",
+      "updated_at": "2026-10-26T03:12:17Z",
+      "jobs": [
+        {
+          "id": 121377709286,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run npm ci",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run npm run typecheck",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Run npm run build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            }
+          ]
+        },
+        {
+          "id": 121377709427,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run uv sync --frozen --python 3.11",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run uv run ruff check src tests scripts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Install hash-pinned lightweight resource test dependency",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run uv run --no-sync pytest -q",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Verify licensed meeting fixture provenance without network or models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Verify sealed meeting data preparation without network or models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Verify fresh meeting calibration provenance without network or models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Run uv run python scripts/validate_splits.py data/manifests/kubernetes-pilot.json data/evaluation/pilot-smoke.jsonl",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Replay frozen public corpus and verify candidate provenance",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Replay frozen retrieval results and candidate diagnostics without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Replay train-only pilot and independent AI review receipts without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Replay saved training readiness evidence without model weights or inference",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Replay frozen main-dev ranking and quality decision without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Replay preserved generation failure and corrected greedy artifacts without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Verify isolated answer policy data and preparation bindings without models",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 35
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 36
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 37
+            }
+          ]
+        },
+        {
+          "id": 121377709527,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Run astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Run npm ci && npm run build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Run ./server/mvnw -B -q -f server/pom.xml verify",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Run uv sync --frozen --python 3.11",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Verify actual Java HTTP and copied Python database compatibility",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Install hash-pinned lightweight resource test dependency",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Verify synthetic meeting edits and backup restore against actual Java",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Preserve safe synthetic meeting operations report",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Install browser for the packaged React UI",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Verify isolated browser runner diagnostics with Node subprocesses",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Verify browser workflows against isolated Java service",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Preserve isolated browser failure diagnostics",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 16
+            },
+            {
+              "name": "Post Run astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 29
+            },
+            {
+              "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 30
+            },
+            {
+              "name": "Post Run actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 31
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 32
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 33
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "watch_exit_codes": {
+    "44159": 0,
+    "62872": 0
+  },
+  "scope": "Java, Python, React regressions and actual Java with synthetic meeting transport backup/restore on GitHub Linux; not actual model quality, human review, load/crash recovery or public deployment.",
+  "downloaded_safe_reports": [
+    {
+      "run_id": 40262506022,
+      "artifact_id": 12625281397,
+      "archive_sha256": "61d087c1c8be8b79efbc5a3bca7ec3397f102bc570bff988d549ac46ec0d01de",
+      "report_sha256": "c662bad9745b2a5a5bcb6351ae9e0b42183ba7ffaf25af95dc161909c03ce0e3",
+      "report_bytes": 7721,
+      "status": "passed",
+      "first_failure": null,
+      "checks_passed": 12,
+      "model_tokenizer_calls": 0
+    },
+    {
+      "run_id": 40262510225,
+      "artifact_id": 12624977037,
+      "archive_sha256": "067059352afb3d6ce7e1bb756ec9b6c8dacf7ad21f0c07c88755005ab345bb11",
+      "report_sha256": "9d0268037d93a02d317c89ab06b39816be94ea70ebb5fb23582b8d383a391806",
+      "report_bytes": 7720,
+      "status": "passed",
+      "first_failure": null,
+      "checks_passed": 12,
+      "model_tokenizer_calls": 0
+    }
+  ]
+}

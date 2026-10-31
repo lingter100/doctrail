@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "evidence_type": "implementation_tests_and_actual_local_synthetic_java",
+  "status": "local_verified_independent_review_passed_remote_CI_pending",
+  "problem": "Maven verification could remain running without bounded diagnostics; the original remote stall root cause is unknown.",
+  "implementation": [
+    {
+      "file": ".github/workflows/ci.yml",
+      "size_bytes": 11154,
+      "sha256": "a8bd748dbf9075eac5749a02293fd2d0c26434a2bbf3cad857def2d33647fc5f"
+    },
+    {
+      "file": "scripts/summarize_java_ci.py",
+      "size_bytes": 13914,
+      "sha256": "bf76d0d79fded80320edd59869370f39efb520e2fecbcf43a2ddc1204f8e4823"
+    },
+    {
+      "file": "tests/test_summarize_java_ci.py",
+      "size_bytes": 10502,
+      "sha256": "cafb593e4757d23c236cd7a60d363526e214268da535fec4227caa47241bfbb2"
+    }
+  ],
+  "limits": {
+    "junit_method_seconds": 120,
+    "surefire_fork_seconds": 300,
+    "maven_step_seconds": 600,
+    "job_seconds": 1800,
+    "diagnostic_step_seconds": 60,
+    "upload_step_seconds": 60,
+    "artifact_retention_days": 3
+  },
+  "verification": {
+    "synthetic_tests_passed": 22,
+    "synthetic_test_elapsed_seconds": 0.5,
+    "ruff": "passed",
+    "independent_review_blockers": 0,
+    "independent_review_advisories": 0,
+    "review_sha256": "0f3364ce95ab56fd78966ee557ca7aa9fb87c83cf315cdb98f21e29a8f5da907",
+    "parent_review_acceptance_sha256": "aeb60829da56e2618c22b185d535f0fb04019a51345c40e004733e3e58c56e55"
+  },
+  "temporary_actual_Java": [
+    {
+      "mode": "normal",
+      "attempts": 1,
+      "actual_Maven_wrapper_exit": 0,
+      "elapsed_seconds": 8.01600000000326,
+      "external_30s_deadline_used": false,
+      "cleanup_actions": [],
+      "owned_identities": 11,
+      "all_owned_absent": true,
+      "safe_status": "complete",
+      "suite_count": 1,
+      "JUnit_dump_threads": 0,
+      "stack_omission_events": 0,
+      "safe_issues": [],
+      "public_bytes": 2184
+    },
+    {
+      "mode": "hang",
+      "attempts": 1,
+      "actual_Maven_wrapper_exit": 1,
+      "elapsed_seconds": 14.655999999959022,
+      "external_30s_deadline_used": false,
+      "cleanup_actions": [],
+      "owned_identities": 9,
+      "all_owned_absent": true,
+      "safe_status": "partial",
+      "suite_count": 0,
+      "JUnit_dump_threads": 7,
+      "stack_omission_events": 21,
+      "safe_issues": [
+        "no_complete_suite_report",
+        "unsupported_stack_frames_or_thread_limit"
+      ],
+      "public_bytes": 13072
+    }
+  ],
+  "temporary_override_seconds": {
+    "JUnit": 2,
+    "Surefire": 10,
+    "external": 30
+  },
+  "actual_model_calls": 0,
+  "product_JAR_rebuilds": 0,
+  "user_review_count": 0,
+  "preserved_failures": [
+    "Initial pure test fixture expectations",
+    "Pre-Maven refusal based on unrelated Java existence",
+    "Initial partial stack projection",
+    "UTF-16 XML entity guard counterexample"
+  ],
+  "limitations": [
+    "Local Windows cached-wrapper validation with synthetic isolated project; does not establish Linux Actions enforcement or always upload reliability",
+    "Original remote Maven stall cause remains unknown",
+    "Hang safe projection is partial: no completed suite XML and unsupported frames omitted; original local raw remains preserved",
+    "Only safe-report.json and safe-thread-stacks.txt are configured for publication; raw logs/temporary project files remain local private",
+    "No model/native AI/tokenizer/download/Git operation or product JAR build performed"
+  ],
+  "evidence_receipt_sha256": "a8eedad04dd8fada80d2ecabaefe89598b66961509c7b76ee4f52379ff5dccda",
+  "publication": "Only safe-report.json and safe-thread-stacks.txt; no raw log uploads."
+}

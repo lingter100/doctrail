@@ -1,0 +1,470 @@
+{
+  "schema_version": 1,
+  "manifest_id": "meetings-c2-validation-source-manifest-v1",
+  "phase": "validation",
+  "created_at": "2026-10-14T01:27:08.513292+00:00",
+  "status": "PUBLIC_SOURCE_ADOPTION_COMPLETE_SYNTHETIC_AND_QUESTION_AUTHORING_NOT_STARTED",
+  "scope": "Metadata, whole-body source license/suitability audit and existing whole-document normalization only. No source excerpts, selected contexts, synthetic bodies, questions, oracles, tokenizer preparation or model calls.",
+  "family_registry": {
+    "path": "data/evaluation/meetings-c2-family-registry-v1.json",
+    "sha256": "0fe710907f10dfc407997970ed176c0a657aa6d1e24a0ca95f4da07f8dd9c76c"
+  },
+  "active_comparison_source_freeze": {
+    "path": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+    "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+    "source_head_reported_by_parent": "8582e60",
+    "modified": false
+  },
+  "references": [
+    {
+      "path": "docs/MEETINGS-C2-COMPARISON-PLAN.md",
+      "sha256": "45bdfda2d931ce8c7caa3e73f67c896997ac789c2a31379e4c2e9118e3aca17d"
+    },
+    {
+      "path": "docs/MEETINGS-C2-REVIEW-CONTRACT.md",
+      "sha256": "da40a446d6d6997353f45ee15a368e3696f95381d98c6fb5333854fe1b6722d8"
+    }
+  ],
+  "provenance": {
+    "author_role": "c2_validation_source_b",
+    "task": "/root/c2_validation_source_b",
+    "development_model": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh",
+      "fork_turns": "none",
+      "evidence": "Parent explicitly verified the tool-accepted spawn settings in a coordination message; not self-model introspection."
+    },
+    "service_model_used": null,
+    "ai_source_suitability_review_count": 4,
+    "independent_ai_source_review_count": 0,
+    "independent_question_prereview_count": 0,
+    "human_review_count": 0,
+    "isolation": {
+      "validation_bodies_read_only_by_isolated_role": true,
+      "parent_received": "Metadata, paths, hashes, counts, licensing and limitations only.",
+      "calibration_bodies_read": false,
+      "old_quality_pools_read": false,
+      "parent_status_or_other_agent_transcripts_read": false,
+      "future_independent_semantic_scoring_eligible": false
+    }
+  },
+  "processing_protocol": {
+    "id": "c2-validation-whole-source-literal-nfc-v1",
+    "existing_service_reference_sha256": {
+      "src/doctrail/ingest.py": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233",
+      "src/doctrail/retrieval.py": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56",
+      "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+      "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a"
+    },
+    "normalization": [
+      "Verify pinned raw byte count, SHA256 and Git blob SHA1 before processing.",
+      "Decode UTF-8 with a leading BOM removed if present, using doctrail.ingest.extract.",
+      "Replace CRLF and CR with LF, then Unicode NFC; retain all other characters including license headers, markup, indentation and final newline.",
+      "Treat .md as md and registered .rst as explicit literal txt. Do not render RST, expand directives, follow references, execute commands or fetch linked source bodies.",
+      "Write the complete normalized document as UTF-8 without BOM; no trimming, reflow, paraphrase, translation or source shortening."
+    ],
+    "rst_helper_requirement": "Before source-helper freeze, support explicit .rst literal-text ingestion while retaining original path/immutable URL. The current .md/.txt-only helper has not been run on these sources.",
+    "document_identity": "One registered source file is one document; revision 1. Commit time is provenance, not meeting_date.",
+    "coordinate_system": "Unicode code points of the complete normalized document; half-open [start, end); page null.",
+    "chunk_algorithm": {
+      "max_codepoints": 1000,
+      "boundary_search_min_codepoints": 500,
+      "overlap_codepoints": 150,
+      "boundary_characters": [
+        "LF",
+        "ASCII SPACE"
+      ],
+      "details": "For each full-document page, tentative end=min(start+1000,page_end). If not final, use the last LF or ASCII SPACE in [start+500,end), including that boundary character. Keep exact nonblank slice. Next start=max(start+1,end-150). No trimming or joining chunks."
+    },
+    "chunk_id_format": "{document_id}-r1-c{ordinal:04d}",
+    "context_selection": "NOT_STARTED; only future exact whole chunks from the frozen full-document inventory may be considered. Register selection before questions; identical strings, metadata, offsets and order for both arms. No block-aware trimming or source reflow.",
+    "full_document_python_chunks_generated": false,
+    "actual_java_python_chunk_parity_verified": false,
+    "source_helper_freeze_verified": false,
+    "stopping_rule": "Do not author synthetic documents, select contexts, author questions/oracles or run tokenizers/models until the new source helper and actual full-document Java/Python parity are verified and frozen. Budget/structure failures remain failures; no silent source edits."
+  },
+  "families": [
+    {
+      "family_id": "C2-F03",
+      "origin": "public",
+      "source_language": "en",
+      "repository": "apache/arrow",
+      "repository_url": "https://github.com/apache/arrow",
+      "immutable_commit": "7ee15283bc9fac8b4e523b0b4640439b547ef0ff",
+      "committed_at": "2026-10-13T12:42:53Z",
+      "git_tree_sha1": "ef6e22983889e7e24af5983ca2d641c25c3d58e1",
+      "family_boundary": "All selected documents from apache/arrow, including historical versions and close paraphrases, belong to this isolated validation family only.",
+      "planned_slots": {
+        "items": 6,
+        "question_language": {
+          "ko": 3,
+          "en": 3
+        },
+        "answerability": {
+          "answerable": 4,
+          "insufficient_evidence": 2
+        }
+      },
+      "license": {
+        "repository_spdx": "Apache-2.0",
+        "path": "LICENSE.txt",
+        "git_blob_sha1": "c6616a5b4501aebf3836cf4e46219aeb236e81c2",
+        "sha256": "cd03925a27219d326d622609fbcae6567279af8b8885c33d5969a9e4ef5d7525",
+        "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/LICENSE.txt",
+        "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/LICENSE.txt",
+        "repository_metadata_and_pinned_license_checked": true,
+        "contains_third_party_notices": true,
+        "notice": {
+          "path": "NOTICE.txt",
+          "git_blob_sha1": "8046f20a0b919dba562dee3d5097fdee7bdd4010",
+          "sha256": "afd895d61a00101f6d5a41cf518c83865d815e8109e956f512a0ce4ea9738c06",
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/NOTICE.txt",
+          "local_snapshot": ".local/c2-source-adoption/validation/raw/NOTICE.txt",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/NOTICE.txt"
+        },
+        "per_source_header_and_third_party_check": "Completed source-only AI audit on the four registered pinned files; no applicable conflicting exception identified. This is not a legal opinion or an audit of linked targets.",
+        "local_snapshot": ".local/c2-source-adoption/validation/raw/LICENSE.txt",
+        "retention_requirement": "Retain each source header, the full pinned LICENSE.txt and NOTICE.txt, and source attribution with any redistributed source/excerpts; separately identify actual processing changes without injecting notices into citation text."
+      },
+      "source_suitability": {
+        "verdict": "ADOPTED",
+        "scope": "Whole pinned files only; case-level answerability, multi-source sufficiency, tokenizer bounds and model quality are untested.",
+        "reviewer_id": "c2_validation_source_b",
+        "source_count": 4
+      },
+      "sources": [
+        {
+          "source_id": "C2-F03-S01",
+          "document_id": "c2-f03-doc-01",
+          "registration_ordinal": 0,
+          "revision": 1,
+          "origin": "public",
+          "title": "C2-F03 source 01: CONTRIBUTING.md",
+          "path": "CONTRIBUTING.md",
+          "upstream_format": "Markdown",
+          "ingestion_kind": "md",
+          "page": null,
+          "meeting_date": null,
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/CONTRIBUTING.md",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/CONTRIBUTING.md",
+          "local_raw_snapshot": ".local/c2-source-adoption/validation/raw/CONTRIBUTING.md",
+          "local_processed_snapshot": ".local/c2-source-adoption/validation/processed/c2-f03-doc-01.txt",
+          "raw_encoding": "UTF-8",
+          "raw_size_bytes": 3359,
+          "raw_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917",
+          "git_blob_sha1": "d9a06e884d22d700841d47f6b3b37feac364cedb",
+          "processed_size_bytes": 3359,
+          "processed_codepoints": 3359,
+          "processed_sha256": "ac458e4903846aef4cbbc13c7289186f3a0bbe0f47dd76afc27fc44a88d9e917",
+          "bom": false,
+          "lf_count": 76,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "license_id": "Apache-2.0",
+          "license_audit": {
+            "reviewer_id": "c2_validation_source_b",
+            "method": "Full source body and file header read; ancestor license/NOTICE paths checked in the complete pinned tree; root license scope declarations and full NOTICE reviewed.",
+            "file_specific_asf_apache2_header": true,
+            "header_line_range": [
+              1,
+              18
+            ],
+            "applicable_conflicting_exception_identified": false,
+            "vendored_source_adopted": false,
+            "linked_or_included_material_fetched_or_incorporated": false,
+            "raw_header_and_full_license_notice_retained": true,
+            "scope_limit": "Applies only to the pinned file, not linked targets, incorporated dependencies or future revisions."
+          },
+          "whole_body_suitability": {
+            "verdict": "ADOPTED",
+            "reviewer_id": "c2_validation_source_b",
+            "body_read": true,
+            "nonempty_supported_utf8_text": true,
+            "substantive_procedural_text_present": true,
+            "literal_markup_preserved": true,
+            "question_or_context_suitability_claimed": false,
+            "rationale_category": "Eligible whole-document procedural source in the registered family; no excerpt or question selected."
+          },
+          "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS"
+        },
+        {
+          "source_id": "C2-F03-S02",
+          "document_id": "c2-f03-doc-02",
+          "registration_ordinal": 1,
+          "revision": 1,
+          "origin": "public",
+          "title": "C2-F03 source 02: docs/source/developers/overview.rst",
+          "path": "docs/source/developers/overview.rst",
+          "upstream_format": "reStructuredText",
+          "ingestion_kind": "txt",
+          "page": null,
+          "meeting_date": null,
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/overview.rst",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/overview.rst",
+          "local_raw_snapshot": ".local/c2-source-adoption/validation/raw/docs/source/developers/overview.rst",
+          "local_processed_snapshot": ".local/c2-source-adoption/validation/processed/c2-f03-doc-02.txt",
+          "raw_encoding": "UTF-8",
+          "raw_size_bytes": 10468,
+          "raw_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb",
+          "git_blob_sha1": "3b8775023236e6ed6dfbde744c8ec09a75eb1507",
+          "processed_size_bytes": 10468,
+          "processed_codepoints": 10466,
+          "processed_sha256": "c5ccc1fe63ddeda50f8a46463aaf769ffd65fb2484216a08b30892ce51edebdb",
+          "bom": false,
+          "lf_count": 246,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "license_id": "Apache-2.0",
+          "license_audit": {
+            "reviewer_id": "c2_validation_source_b",
+            "method": "Full source body and file header read; ancestor license/NOTICE paths checked in the complete pinned tree; root license scope declarations and full NOTICE reviewed.",
+            "file_specific_asf_apache2_header": true,
+            "header_line_range": [
+              1,
+              16
+            ],
+            "applicable_conflicting_exception_identified": false,
+            "vendored_source_adopted": false,
+            "linked_or_included_material_fetched_or_incorporated": false,
+            "raw_header_and_full_license_notice_retained": true,
+            "scope_limit": "Applies only to the pinned file, not linked targets, incorporated dependencies or future revisions."
+          },
+          "whole_body_suitability": {
+            "verdict": "ADOPTED",
+            "reviewer_id": "c2_validation_source_b",
+            "body_read": true,
+            "nonempty_supported_utf8_text": true,
+            "substantive_procedural_text_present": true,
+            "literal_markup_preserved": true,
+            "question_or_context_suitability_claimed": false,
+            "rationale_category": "Eligible whole-document procedural source in the registered family; no excerpt or question selected."
+          },
+          "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS"
+        },
+        {
+          "source_id": "C2-F03-S03",
+          "document_id": "c2-f03-doc-03",
+          "registration_ordinal": 2,
+          "revision": 1,
+          "origin": "public",
+          "title": "C2-F03 source 03: docs/source/developers/reviewing.rst",
+          "path": "docs/source/developers/reviewing.rst",
+          "upstream_format": "reStructuredText",
+          "ingestion_kind": "txt",
+          "page": null,
+          "meeting_date": null,
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/reviewing.rst",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/reviewing.rst",
+          "local_raw_snapshot": ".local/c2-source-adoption/validation/raw/docs/source/developers/reviewing.rst",
+          "local_processed_snapshot": ".local/c2-source-adoption/validation/processed/c2-f03-doc-03.txt",
+          "raw_encoding": "UTF-8",
+          "raw_size_bytes": 15187,
+          "raw_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5",
+          "git_blob_sha1": "c0fcf56155d8e38dfa4f8337e243501608f0269e",
+          "processed_size_bytes": 15187,
+          "processed_codepoints": 15187,
+          "processed_sha256": "a3886eb8d5dbd37c66aa48915a3c82aa0fb13cd6fa810d780030c2971a905ce5",
+          "bom": false,
+          "lf_count": 317,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "license_id": "Apache-2.0",
+          "license_audit": {
+            "reviewer_id": "c2_validation_source_b",
+            "method": "Full source body and file header read; ancestor license/NOTICE paths checked in the complete pinned tree; root license scope declarations and full NOTICE reviewed.",
+            "file_specific_asf_apache2_header": true,
+            "header_line_range": [
+              1,
+              16
+            ],
+            "applicable_conflicting_exception_identified": false,
+            "vendored_source_adopted": false,
+            "linked_or_included_material_fetched_or_incorporated": false,
+            "raw_header_and_full_license_notice_retained": true,
+            "scope_limit": "Applies only to the pinned file, not linked targets, incorporated dependencies or future revisions."
+          },
+          "whole_body_suitability": {
+            "verdict": "ADOPTED",
+            "reviewer_id": "c2_validation_source_b",
+            "body_read": true,
+            "nonempty_supported_utf8_text": true,
+            "substantive_procedural_text_present": true,
+            "literal_markup_preserved": true,
+            "question_or_context_suitability_claimed": false,
+            "rationale_category": "Eligible whole-document procedural source in the registered family; no excerpt or question selected."
+          },
+          "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS"
+        },
+        {
+          "source_id": "C2-F03-S04",
+          "document_id": "c2-f03-doc-04",
+          "registration_ordinal": 3,
+          "revision": 1,
+          "origin": "public",
+          "title": "C2-F03 source 04: docs/source/developers/release.rst",
+          "path": "docs/source/developers/release.rst",
+          "upstream_format": "reStructuredText",
+          "ingestion_kind": "txt",
+          "page": null,
+          "meeting_date": null,
+          "immutable_url": "https://github.com/apache/arrow/blob/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/release.rst",
+          "raw_url": "https://raw.githubusercontent.com/apache/arrow/7ee15283bc9fac8b4e523b0b4640439b547ef0ff/docs/source/developers/release.rst",
+          "local_raw_snapshot": ".local/c2-source-adoption/validation/raw/docs/source/developers/release.rst",
+          "local_processed_snapshot": ".local/c2-source-adoption/validation/processed/c2-f03-doc-04.txt",
+          "raw_encoding": "UTF-8",
+          "raw_size_bytes": 29948,
+          "raw_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19",
+          "git_blob_sha1": "fbce61ae9d174fde3d8451768b3486bbb582fb48",
+          "processed_size_bytes": 29948,
+          "processed_codepoints": 29948,
+          "processed_sha256": "787b8b5cf6a234855aec00ecf34c6854310280cfff0afa41d42be787e47dec19",
+          "bom": false,
+          "lf_count": 737,
+          "cr_count": 0,
+          "trailing_lf": true,
+          "nfc_identity_verified": true,
+          "service_normalization_identity_verified": true,
+          "license_id": "Apache-2.0",
+          "license_audit": {
+            "reviewer_id": "c2_validation_source_b",
+            "method": "Full source body and file header read; ancestor license/NOTICE paths checked in the complete pinned tree; root license scope declarations and full NOTICE reviewed.",
+            "file_specific_asf_apache2_header": true,
+            "header_line_range": [
+              1,
+              16
+            ],
+            "applicable_conflicting_exception_identified": false,
+            "vendored_source_adopted": false,
+            "linked_or_included_material_fetched_or_incorporated": false,
+            "raw_header_and_full_license_notice_retained": true,
+            "scope_limit": "Applies only to the pinned file, not linked targets, incorporated dependencies or future revisions."
+          },
+          "whole_body_suitability": {
+            "verdict": "ADOPTED",
+            "reviewer_id": "c2_validation_source_b",
+            "body_read": true,
+            "nonempty_supported_utf8_text": true,
+            "substantive_procedural_text_present": true,
+            "literal_markup_preserved": true,
+            "question_or_context_suitability_claimed": false,
+            "rationale_category": "Eligible whole-document procedural source in the registered family; no excerpt or question selected."
+          },
+          "adoption_verdict": "ADOPTED_FOR_VALIDATION_SOURCE_WITH_REGISTERED_CONSTRAINTS"
+        }
+      ]
+    },
+    {
+      "family_id": "C2-F04",
+      "origin": "synthetic",
+      "source_language": "ko",
+      "topic": "Fictional print-shop proof approval and production handoff",
+      "family_boundary": "A newly invented print-shop organization and its synthetic documents, disjoint from the ice-rink family and every previous synthetic pool.",
+      "planned_slots": {
+        "items": 6,
+        "question_language": {
+          "ko": 3,
+          "en": 3
+        },
+        "answerability": {
+          "answerable": 4,
+          "insufficient_evidence": 2
+        }
+      },
+      "source_suitability": {
+        "verdict": "NOT_AUTHORED",
+        "scope": "IDs and inherited family constraints only. No organization, persons, events, rules, dates, quantities, answers or body wording created."
+      },
+      "constraints": [
+        "Invent a new fictional print-shop organization only after the source helper/parity freeze.",
+        "Use no real customer/employer/private uploaded source and no old pool facts, names, events, wording or numbers.",
+        "Keep the validation family isolated from calibration and all closed pools.",
+        "Mark all future bodies and questions as AI-authored synthetic evaluation material, not a real meeting record.",
+        "Preserve natural prose and line wrapping; do not tune source boundaries for either candidate.",
+        "Separate source authoring, independent prereview and independent semantic scoring. Human review remains 0 unless actual review occurs."
+      ],
+      "sources": [
+        {
+          "source_id": "C2-F04-S01",
+          "document_id": "c2-f04-doc-01",
+          "registration_ordinal": 4,
+          "revision": 1,
+          "origin": "synthetic",
+          "title": "C2-F04 reserved synthetic document 01",
+          "path": "synthetic/c2-f04-doc-01.md",
+          "source_status": "NOT_AUTHORED",
+          "adoption_verdict": "NOT_AUTHORED",
+          "local_raw_snapshot": null,
+          "raw_sha256": null,
+          "processed_sha256": null,
+          "git_blob_sha1": null
+        },
+        {
+          "source_id": "C2-F04-S02",
+          "document_id": "c2-f04-doc-02",
+          "registration_ordinal": 5,
+          "revision": 1,
+          "origin": "synthetic",
+          "title": "C2-F04 reserved synthetic document 02",
+          "path": "synthetic/c2-f04-doc-02.md",
+          "source_status": "NOT_AUTHORED",
+          "adoption_verdict": "NOT_AUTHORED",
+          "local_raw_snapshot": null,
+          "raw_sha256": null,
+          "processed_sha256": null,
+          "git_blob_sha1": null
+        }
+      ]
+    }
+  ],
+  "receipts": {
+    "fetch": {
+      "path": ".local/c2-source-adoption/validation/fetch-receipt.json",
+      "sha256": "ab25d32af842f608babdbca5fb52769e0cf60b58a0cf59a72aeba4e4a267a48d"
+    },
+    "normalization": {
+      "path": ".local/c2-source-adoption/validation/normalization-receipt.json",
+      "sha256": "3a7118f10c4c8e18c2e9357916b1dc940b582be4470a8278911c4ee4b4ebd2d9"
+    },
+    "pinned_tree": {
+      "path": ".local/c2-source-adoption/validation/tree-by-tree-sha.json",
+      "sha256": "0d90a822c94490e0977ee5dbdacba4162581cb9ddbbdf46114b4a3732278ed83",
+      "entries": 5774,
+      "truncated": false,
+      "ancestor_license_paths": [
+        "LICENSE.txt",
+        "NOTICE.txt"
+      ]
+    }
+  },
+  "counts": {
+    "public_sources_registered": 4,
+    "public_sources_adopted": 4,
+    "license_notice_files_retained": 2,
+    "whole_documents_normalized": 4,
+    "synthetic_source_ids_reserved": 2,
+    "synthetic_bodies_authored": 0,
+    "full_chunk_inventories_created": 0,
+    "selected_contexts": 0,
+    "questions": 0,
+    "oracles": 0,
+    "tokenizer_runs": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "human_reviews": 0
+  },
+  "limitations": [
+    "This is a source adoption record, not input readiness, semantic evaluation, generation readiness or service adoption.",
+    "All four bodies were read by an AI source author; this is neither independent question prereview nor human review.",
+    "Public-document pretraining contamination and purposive source-family bias are unmeasured.",
+    "Literal RST retains unresolved external references/directives and markup; no linked material is part of this source set.",
+    "The helper needs explicit registered RST-as-text support, followed by actual Java/Python full-document parity and freeze before further authoring.",
+    "Validation source bodies and any future item-level explanations must remain unavailable to parent/prompt/structure designers.",
+    "The immutable registry and comparison source41/v2 are preserved; this later manifest records source-only adoption without rewriting their historical HOLD state."
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "purpose": "c3_parent_validation_source_exposure_deviation",
+  "recorded_date": "2026-10-14",
+  "incident_id": "c3-source-exposure-v1",
+  "decision_document": "docs/MEETINGS-C3-SOURCE-EXPOSURE.md",
+  "provenance": {
+    "reporting_role": "/root",
+    "report_type": "parent_self_report_with_explicit_scope_correction",
+    "assessment_role": "/root/c2_budget_followup",
+    "assessment_model": "gpt-6-astra",
+    "assessment_reasoning_effort": "xhigh",
+    "model_settings_evidence": "confirmed_by_parent_for_this_role",
+    "parent_model_changed": false,
+    "raw_incident_output_read_by_assessor": false,
+    "validation_source_content_read_by_assessor": false,
+    "independent_raw_scope_verification": false,
+    "human_review_count": 0
+  },
+  "incident": {
+    "exposed_role": "/root",
+    "mechanism": "direct_tool_output_of_staged_git_whitespace_check",
+    "reported_command": "git -c core.whitespace=cr-at-eol diff --cached --check",
+    "exact_occurrence_timestamp": null,
+    "occurrence_order": "validation_source_freeze_created_before_source_commit_and_before_validation_question_authoring",
+    "source_document_count": 4,
+    "documents_partially_exposed": 3,
+    "reported_exposed_lines": 10,
+    "public_document_count_exposed": 1,
+    "public_body_explanation_lines_exposed": 1,
+    "synthetic_document_count_exposed": 2,
+    "synthetic_header_lines_exposed": 9,
+    "synthetic_header_categories": [
+      "document_number",
+      "meeting_or_record_date",
+      "meeting_time",
+      "program_or_work_title",
+      "linked_document_label",
+      "recording_role_or_person"
+    ],
+    "source_content_exposure": true,
+    "public_semantic_body_exposure": true,
+    "synthetic_discussion_or_decision_body_exposure_reported": false,
+    "metadata_only_exposure_claim_allowed": false,
+    "future_oracle_or_evidence_overlap": "unknown_questions_not_yet_authored",
+    "no_effect_claim_allowed": false,
+    "actual_source_strings_in_this_record": false
+  },
+  "state_at_incident_as_reported": {
+    "toolchain_frozen_before_exposure": true,
+    "toolchain_binding_count": 66,
+    "toolchain_freeze_file": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+    "toolchain_freeze_sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3",
+    "toolchain_commit": "2f3e9e9514de2d0d87935c43d6f1e510575c2e06",
+    "calibration_source_commit": "d02697e171e575533fb81fd651b007a9fc87499b",
+    "calibration_draft_count": 6,
+    "calibration_item_review": "in_progress_separate_role",
+    "validation_source_freeze_file": "data/evaluation/meetings-c3-validation-v1/source-freeze-v1.json",
+    "validation_source_freeze_sha256": "abf06680edb3b9e301b53b82931024f98edf8b521322d4c3e9ce19b8c7b89733",
+    "validation_source_binding_count": 9,
+    "validation_source_commit_completed": false,
+    "validation_source_count": 4,
+    "validation_chunk_count": 38,
+    "validation_source_review_accepted": 4,
+    "validation_source_review_rejected": 0,
+    "validation_source_review_changes_requested": 0,
+    "validation_java_checks_passed": 2,
+    "validation_questions": 0,
+    "validation_oracles": 0,
+    "official_tokenizer_calls": 0,
+    "native_calls": 0,
+    "exposure_driven_model_code_or_data_changes": 0,
+    "exposure_driven_pool_reselection": 0,
+    "freeze_binding_verification_by_assessor": "not_performed_metadata_from_parent_and_status_only"
+  },
+  "assessment": {
+    "original_parent_non_exposure_condition_satisfied": false,
+    "pristine_heldout_claim_allowed": false,
+    "decision": "conditional_continuation_with_disclosed_source_isolation_deviation",
+    "fresh_validation_replacement_required_for_reported_scope": false,
+    "source_replacement_or_question_avoidance_to_erase_exposure_allowed": false,
+    "basis": [
+      "candidate_toolchain_and_scoring_rules_frozen_before_exposure",
+      "parent_already_excluded_from_independent_output_scoring",
+      "validation_question_oracle_and_output_authoring_not_started",
+      "isolated_custodian_author_plus_separate_item_prereviewer_and_output_judge_remain_required",
+      "fixed_source_and_existing_gate_preserved"
+    ],
+    "limitations": [
+      "source_content_was_exposed_to_candidate_designer_parent",
+      "incident_scope_is_parent_self_report_not_independently_verified_from_raw_by_assessor",
+      "header_facts_and_public_body_may_overlap_future_required_facts_or_evidence",
+      "remaining_role_separation_does_not_restore_original_non_exposure_or_prove_zero_bias"
+    ],
+    "source_commit_after_this_registration_allowed": true,
+    "question_authoring_only_after_source_commit": true,
+    "immediate_quality_run_authorized_by_this_record": false,
+    "quality_or_resource_gate_waived": false,
+    "quality_result": "not_observed",
+    "automatic_adoption": false,
+    "human_review_count": 0
+  },
+  "continuation_conditions": [
+    "register_this_record_and_decision_document_before_validation_source_commit_and_questions",
+    "preserve_all_source_bytes_and_existing_freezes_including_66_28_72_41_18",
+    "no_parent_validation_content_selection_or_semantic_feedback",
+    "no_exposure_driven_prompt_candidate_neutral_calibration_or_data_tuning",
+    "use_original_registry_composition_and_separate_item_prereview_without_exposure_avoidance",
+    "retain_original_preparation_resource_calibration_gate_and_once_only_validation_order",
+    "record_actual_split_judge_exposure_before_answer_pack_access",
+    "link_this_record_and_document_hashes_in_execution_reporting_companion_and_final_results",
+    "capture_future_validation_whitespace_or_diff_stdout_and_stderr_locally_and_return_content_free_metadata_only"
+  ],
+  "stop_and_separately_assess_if": [
+    "exposure_is_discovered_to_exceed_reported_scope",
+    "parent_gives_validation_content_or_selection_guidance",
+    "candidate_or_data_is_changed_using_exposed_content",
+    "output_judge_has_forbidden_prelock_plan_or_mapping_exposure_or_author_role_conflict"
+  ],
+  "relationship_to_c2": {
+    "same_incident_as_c2_output_judge_metadata_exposure": false,
+    "c2_posthoc_exception_is_automatic_waiver": false,
+    "this_incident_role": "parent_candidate_designer_source_content_exposure_before_question_authoring",
+    "future_c3_judge_exposure": "must_be_attested_individually_not_inferred_from_parent"
+  },
+  "artifact_policy": {
+    "separate_from_frozen_toolchain": true,
+    "amend_existing_freezes_or_strict_audit_schema": false,
+    "parent_self_report_record_replaces_judge_attestation": false,
+    "new_findings_require_separate_append_record": true,
+    "raw_source_lines_reproduced": false
+  },
+  "assessment_work": {
+    "existing_files_modified": 0,
+    "validation_content_reads": 0,
+    "question_authoring": 0,
+    "tokenizer_calls": 0,
+    "native_calls": 0,
+    "git_commands": 0,
+    "network_calls": 0,
+    "test_runs": 0
+  }
+}

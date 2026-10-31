@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "source_head": "8846d5da27bc7f92de1a77ce404d5edf0a98cc60",
+  "scope": "Published startup v2 fixed namespace source and existing service regression; excludes local observer helpers and real model quality.",
+  "runs": [
+    {
+      "id": 40823942414,
+      "event": "push",
+      "conclusion": "success",
+      "jobs": [
+        "backend",
+        "web",
+        "java-service"
+      ],
+      "retained_watch_session": 78444,
+      "watch_exit_code": 0
+    },
+    {
+      "id": 40823947745,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        "backend",
+        "web",
+        "java-service"
+      ],
+      "retained_watch_session": 11201,
+      "watch_exit_code": 0
+    }
+  ],
+  "measured_push": {
+    "python": {
+      "passed": 5351,
+      "skipped": 21,
+      "warnings": 2,
+      "elapsed_seconds": 223.18
+    },
+    "browser": {
+      "passed": 158,
+      "failed_tests": 0,
+      "infrastructure_failures": 0,
+      "startup_failures": 0,
+      "specs_without_reports": 0,
+      "missing_runs": 0,
+      "exit_code": 0
+    },
+    "actual_java_http_and_database_compatibility": "passed",
+    "synthetic_meeting_operations_against_actual_java": "passed",
+    "AI_quality": false
+  },
+  "limitations": [
+    "CI uses mocks or synthetic inputs for model boundaries; no startup v2 real model measurement or new quality result.",
+    "Local monitor deadline repair is outside public CI; independent local review is separate.",
+    "Passing checks do not establish human usability, model answer correctness, deployment or full phase1 completion."
+  ],
+  "public_urls": [
+    "https://github.com/lingter100/doctrail/actions/runs/40823942414",
+    "https://github.com/lingter100/doctrail/actions/runs/40823947745"
+  ],
+  "review_provenance": "AI executed and verified; user review not performed."
+}

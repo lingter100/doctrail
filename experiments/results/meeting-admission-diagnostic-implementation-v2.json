@@ -1,0 +1,34 @@
+{
+  "kind": "implementation_unit_verification_only",
+  "change": "Only the official-output refusal test now uses monkeypatched isolated temporary ROOT, absent and preexisting cases, preserved contents, and no measurement call",
+  "previous_test_sha256": "469d5748cbe5218c4aca50586553c47ade7446ae835bb2e498198871bbce4d98",
+  "final_hashes": {
+    "tests/fixtures/meeting-admission-diagnostic-v1.json": "ac7c452afd1fee257cf01e4f0b7752ac17e0636747521ce7025d2016bc09fa48",
+    "scripts/diagnose_meeting_admission.py": "c7fbe495eaba69ad9670231798677d3a1eb91edca230bd0ef2da9ef777a0a211",
+    "tests/test_diagnose_meeting_admission.py": "902a5bbccfdaf5036cc646918f7795275561de66f9c17ed2d71bed19356ca1eb",
+    "docs/MEETINGS-ADMISSION-DIAGNOSTIC.md": "b5d64fa09092982461188cb219035a246407cfabe45bc773a1598f6045faa093"
+  },
+  "same_before_after_tests": true,
+  "pytest": {
+    "passed": 12,
+    "seconds": 14.07
+  },
+  "ruff": "passed",
+  "frozen_checked": 77,
+  "frozen_mismatches": [],
+  "logs": {
+    "final-v2-ruff.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "before-final-v2-tests.json": "9c7edb254e1184c97b99771432d89e3c119e25de363245ec21fd5264f3cf375a",
+    "implementation-receipt-v1.json": "862787a9a4f718ba31bdc1926189ccf82beee0c4211b6f878b897cb0f6c5e809",
+    "final-v2-pytest.log": "d23837700e1c1f81ea560d995f27e002b94d825397fb864384390b0f4830b9e4"
+  },
+  "official_execution": 0,
+  "official_directory_access_for_test": "none",
+  "limits": [
+    "unit verification only",
+    "no actual checkout Git mutations",
+    "no script/fixture/design/frozen changes",
+    "initial v1 receipts and logs retained unchanged",
+    "normal CI and official execution belong to parent"
+  ]
+}

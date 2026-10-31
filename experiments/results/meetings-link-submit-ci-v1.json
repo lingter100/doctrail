@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "exact_source_ci_observation",
+  "observed_at_utc": "2026-10-20T05:28:08.413512+00:00",
+  "head_sha": "adbadaa7d4d88cbd34bdf85170ee49950b44b36b",
+  "included_source_outcome_commit": "f136a72163b00406195792e788fb4f38da5d0577",
+  "author": "lingter100",
+  "committer": "lingter100",
+  "runs": [
+    {
+      "run_id": 39374479290,
+      "head_sha": "adbadaa7d4d88cbd34bdf85170ee49950b44b36b",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "backend": "success",
+        "java-service": "success",
+        "web": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39374479290",
+      "metadata_sha256": "7adab977d20fdc6ead354733c3a7180221351c380157282df61749731bf9a862",
+      "log_sha256": "33b5ae757490a70c8a7e31f21ebdf4320cae9dd87122f04d99aabde30f1750ec",
+      "observed_log_count_strings": [
+        "1 passed",
+        "10 passed",
+        "11 passed",
+        "2 passed",
+        "2920 passed, 21 skipped, 1 warning",
+        "3 passed",
+        "4 passed",
+        "5 passed",
+        "8 passed",
+        "82 passed",
+        "9 passed"
+      ]
+    },
+    {
+      "run_id": 39374484761,
+      "head_sha": "adbadaa7d4d88cbd34bdf85170ee49950b44b36b",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": {
+        "java-service": "success",
+        "web": "success",
+        "backend": "success"
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39374484761",
+      "metadata_sha256": "0b0f4b92a9e640223928fb2f9181c7f45e0d13cfa24514f64580d93563197869",
+      "log_sha256": "bde7eae098f041f357b8f47133b77b4a6a3347f77f51b5c3d0e76dcfb0d8a062",
+      "observed_log_count_strings": [
+        "1 passed",
+        "10 passed",
+        "11 passed",
+        "2 passed",
+        "2920 passed, 21 skipped, 1 warning",
+        "3 passed",
+        "4 passed",
+        "5 passed",
+        "8 passed",
+        "82 passed",
+        "9 passed"
+      ]
+    }
+  ],
+  "local_product_receipt": {
+    "file": "experiments/results/meetings-link-submit-recovery-v1.json",
+    "sha256": "87b8399c7486851f4ec0008d8660fb98a8bb4e490c299eda305d0075e0e3195e"
+  },
+  "scope": "Exact-source CI, including Java verify and browser workflows. Separate from local 39-check scope; not summed. Does not retroactively change the local hash-checkpoint timing.",
+  "limitations": [
+    "Recorded JSON is a parent observation, not an independent GitHub attestation.",
+    "No actual model-quality result, human review or public deployment.",
+    "Source outcome commit was included in this HEAD, not observed as its own separate CI run."
+  ]
+}

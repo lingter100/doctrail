@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_source_registration_ci_observation",
+  "observed_at": "2026-10-20T07:19:33.745075+00:00",
+  "commit": "982f2bbd15e244e772405fd752a6b0b7c372c421",
+  "runs": [
+    {
+      "id": 39384093729,
+      "head": "982f2bbd15e244e772405fd752a6b0b7c372c421",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39384093729",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39384093729/job/118499694231"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39384093729/job/118499694347"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39384093729/job/118499694404"
+        }
+      ]
+    },
+    {
+      "id": 39384099224,
+      "head": "982f2bbd15e244e772405fd752a6b0b7c372c421",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39384099224",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39384099224/job/118499712178"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39384099224/job/118499712318"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39384099224/job/118499712492"
+        }
+      ]
+    }
+  ],
+  "scope": "Source-only role registration and previously verified implementation; not source acceptance or model quality.",
+  "actual_native_calls": 0,
+  "human_review": 0
+}

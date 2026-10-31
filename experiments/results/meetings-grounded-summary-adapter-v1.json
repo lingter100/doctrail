@@ -1,0 +1,161 @@
+{
+  "status": "standalone_adapter_implemented_and_synthetic_checked_not_service_connected",
+  "date": "2026-10-22",
+  "baseline_commit": "99dc8663f27a90cc6759cf3625c0fcf4b3703467",
+  "design": {
+    "path": "docs/MEETINGS-GROUNDED-SUMMARY-PLAN.md",
+    "bytes": 21348,
+    "sha256": "ca04c0634bbb71ee9a07667f60837e28bc4e8efdc8ddda28a649067913486aed"
+  },
+  "sources": [
+    {
+      "path": "src/doctrail/meeting_grounded_summary.py",
+      "bytes": 18267,
+      "sha256": "c2a9865871764ec2237719dc77dc03427f5d6c1edab735b44054fa384af0b2c1",
+      "lf": true
+    },
+    {
+      "path": "tests/test_meeting_grounded_summary.py",
+      "bytes": 20813,
+      "sha256": "f3fff0339a95bfc6b1d7546ff852925230892503c4f8ab339c2c7ebb57a8b880",
+      "lf": true
+    }
+  ],
+  "contract": {
+    "assembly": "grounded-summary-v1",
+    "summary_version": 2,
+    "maximum_claims": 6,
+    "maximum_citations_per_claim": 4,
+    "generation_calls": 1,
+    "review_calls": 1,
+    "repair_calls": 0,
+    "full_source_preserved": true,
+    "input_token_cap_per_call": 4096,
+    "shared_analysis_deadline_seconds": 120,
+    "review_input": "full source once plus candidate text and exact whole-unit IDs",
+    "semantic_guarantee": "none; same-model support/coverage judgment is not independent validation"
+  },
+  "checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_meeting_grounded_summary.py",
+      "environment": {
+        "PYTHONUTF8": "1"
+      },
+      "log": {
+        "path": ".local/meeting-grounded-summary-implementation-v1/tests-first.log",
+        "bytes": 101,
+        "sha256": "3afbdd06253ae5502581229afb20d053dc425ac694b9394d2f902c82281b8144"
+      },
+      "passed": 45,
+      "seconds": 0.77,
+      "phase": "initial"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check src/doctrail/meeting_grounded_summary.py tests/test_meeting_grounded_summary.py",
+      "log": {
+        "path": ".local/meeting-grounded-summary-implementation-v1/ruff-first.log",
+        "bytes": 1509,
+        "sha256": "42b613d4e0dddd5b09a2f3a29ebd894b1cd637fa04c0849faf6631e02f7bff5c"
+      },
+      "result": "failed",
+      "failure": "I001 import formatting only; original source/log preserved"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_meeting_grounded_summary.py",
+      "log": {
+        "path": ".local/meeting-grounded-summary-implementation-v1/tests-second.log",
+        "bytes": 101,
+        "sha256": "5885a28532c9a95024ff1055d97caacc5dd464f2516f1fab03aa2b397783e294"
+      },
+      "passed": 50,
+      "seconds": 0.81,
+      "phase": "before review wire update"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check src/doctrail/meeting_grounded_summary.py tests/test_meeting_grounded_summary.py",
+      "log": {
+        "path": ".local/meeting-grounded-summary-implementation-v1/ruff-second.log",
+        "bytes": 20,
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+      },
+      "result": "passed",
+      "phase": "before review wire update"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/test_meeting_grounded_summary.py tests/test_meeting_analysis_batch.py tests/test_meeting_extraction_coverage.py",
+      "environment": {
+        "PYTHONUTF8": "1"
+      },
+      "log": {
+        "path": ".local/meeting-grounded-summary-implementation-v1/tests-final.log",
+        "bytes": 264,
+        "sha256": "4c78216588526b74dc9c75fa8fde4d612218ed3840c338b80155c217416cb84a"
+      },
+      "passed": 162,
+      "seconds": 1.01,
+      "new_tests": 55,
+      "existing_related_tests": 107,
+      "counting": "final run only; earlier reruns not additive"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check src/doctrail/meeting_grounded_summary.py tests/test_meeting_grounded_summary.py",
+      "log": {
+        "path": ".local/meeting-grounded-summary-implementation-v1/ruff-final.log",
+        "bytes": 20,
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+      },
+      "result": "passed"
+    }
+  ],
+  "independent_static_review": {
+    "blockers": 0,
+    "receipt": {
+      "path": ".local/meeting-grounded-summary-implementation-v1/independent-review/review-v1.json",
+      "bytes": 5303,
+      "sha256": "a24cef1e709c95b2cc16a4000d7aaed8d31e121f232d8a292c1f5d5f43bcebe8"
+    }
+  },
+  "parent_verification": {
+    "source_and_tests_read": true,
+    "current_sources": 2,
+    "artifact_bindings_verified": 32,
+    "baseline_exact_archives": 11,
+    "baseline_current_code_unchanged": 10,
+    "frozen_c7_bound_files_unchanged": 77,
+    "logs_read": [
+      "tests-final.log",
+      "ruff-final.log"
+    ],
+    "native_or_quality_reruns": 0
+  },
+  "receipt": {
+    "path": ".local/meeting-grounded-summary-implementation-v1/receipt.json",
+    "bytes": 13137,
+    "sha256": "d3f064f6ec2656baf7a77e55001be7bb4f42caea4b4ea76e054ecc071e34c0a7"
+  },
+  "preserved": [
+    "First45 MockTransport checks and initial import-format lint failure.",
+    "Intermediate50 checks and source before review wire representation change.",
+    "Existing closed experiments, source labels, independent judgments and evaluation criteria."
+  ],
+  "not_executed": {
+    "actual_tokenizer": 0,
+    "actual_model": 0,
+    "native": 0,
+    "java": 0,
+    "browser": 0,
+    "network": 0,
+    "download": 0,
+    "saved_corpus_replay": 0,
+    "git": 0
+  },
+  "limitations": [
+    "MockTransport and synthetic token counts do not validate native GBNF acceptance or real tokenizer/model behavior.",
+    "No actual latency, token saving, semantic equivalence, support/coverage quality, injection resistance, or user acceptance claim.",
+    "Same-model accepted review is not independent semantic validation.",
+    "No service/launcher/HTTP/Java/React integration performed; defaults and existing coverage bytes unchanged.",
+    "Assembly-only telemetry does not establish outer request success; existing lifecycle remains authoritative."
+  ],
+  "next": "Java/React v1-v2 compatibility, then actual Python service/observer selection and exact CI before separately assigned actual model comparison.",
+  "human_review": false
+}

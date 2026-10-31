@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "kind": "synthetic_c3_execution_toolchain_verification",
+  "date": "2026-10-14",
+  "candidate": "meeting-answer-requirement-plan-c3-v1",
+  "implementation_parent": "35900211c2eb30546e666b442271f826854afcf7",
+  "toolchain_freeze": {
+    "file": "data/evaluation/meetings-c3-toolchain-source-freeze-v1.json",
+    "sha256": "0b88ebb62744f0ff0f268aaa4be1d27290e570f98bf5a79b68467f05192dceb3"
+  },
+  "binding_count": 66,
+  "source_sha256": {
+    "scripts/audit_meeting_requirements.py": "7efed7e7962ea5f4ddeb947be46f0ba892aeb198545c3d9182d715434ae56710",
+    "scripts/prepare_meeting_requirements_inputs.py": "3f511177f4b1a71336ee237e8e6eb744dd99fcfa87405e38c3d6c41402ccca71",
+    "scripts/probe_meeting_requirements.py": "09f6bb953f0e5a4a889c7c062b7259d216e5e6af133ebabed77ede2044f1855e",
+    "src/doctrail/meeting_requirements_review.py": "c334bb76e908ffa6ea338789e57bfa3ec1eedb51c5191e149e64c7ffa3b0e4ed",
+    "tests/test_audit_meeting_requirements.py": "f04f7eb50268b100391a564259b2501c1cd1a66d97f82934435320d912136fde",
+    "tests/test_meeting_requirements_review.py": "70bfad5d38c7d28190f4e8803585935a050e6c0a21186cc0e93d952e04470306",
+    "tests/test_prepare_meeting_requirements_inputs.py": "ea2fa81adcae5ec5e990bc0bc69dd3d772007913221ec9e2c7963699ca95b738",
+    "tests/test_probe_meeting_requirements.py": "114faf53948c0090b5736fa77d6f3ef44fb01f0037ce1d3b05785c6540d3880f"
+  },
+  "checks": [
+    {
+      "executor": "c2_comparison_runner",
+      "stage": "before_independent_metadata_fix",
+      "passed": 69,
+      "skipped": 1,
+      "seconds": 324.02
+    },
+    {
+      "executor": "c2_comparison_runner",
+      "stage": "before_independent_metadata_fix_exact_preparation_refs",
+      "passed": 1,
+      "seconds": 8.3
+    },
+    {
+      "executor": "c2_comparison_runner",
+      "stage": "metadata_fix_initial_targeted",
+      "passed": 39,
+      "failed": 2,
+      "seconds": 61.4,
+      "failure": "Synthetic test expected ValueError for malformed JSON; frozen strict_json raises WorkerError"
+    },
+    {
+      "executor": "c2_comparison_runner",
+      "stage": "metadata_fix_exception_expectation_corrected",
+      "passed": 2,
+      "failed": 0,
+      "seconds": 0.88
+    },
+    {
+      "executor": "parent",
+      "stage": "final_combined_after_metadata_fix",
+      "command": "uv run --locked --no-sync pytest -q tests/test_prepare_meeting_requirements_inputs.py tests/test_meeting_requirements_review.py tests/test_probe_meeting_requirements.py tests/test_audit_meeting_requirements.py --durations=8",
+      "passed": 224,
+      "skipped": 2,
+      "seconds": 400.23,
+      "exit_code": 0,
+      "log_sha256": "c594c587e7c200f8249f59087c001fbab20a11a43b5dede8864ee8535ac1512f",
+      "scope": "new C3 preparation/review/probe/audit synthetic tests after metadata fix"
+    }
+  ],
+  "earlier_full_suite": {
+    "stage": "pre_review_fix_baseline",
+    "command": "uv run --locked --no-sync pytest -q --durations=8",
+    "exit_code": 0,
+    "passed": 2126,
+    "skipped": 8,
+    "warnings": 1,
+    "elapsed_seconds": 646.97,
+    "log_sha256": "72c48e0dc195cf928688cbf7050efd2256e0fcff4f5f63308c161fa76b064e79",
+    "warning": "Existing Starlette/httpx TestClient deprecation",
+    "does_not_include_later_seed_attestation_fix": true,
+    "new_c3_model_calls": 0,
+    "new_c3_official_tokenizer_calls": 0
+  },
+  "ruff": {
+    "command": "uv run --locked --no-sync ruff check src tests scripts",
+    "exit_code": 0
+  },
+  "cli_help_checks_passed": 2,
+  "independent_review": {
+    "role": "knowledge_recovery_review",
+    "actual_model": "gpt-6-astra",
+    "actual_effort": "high",
+    "finding": "Seed and attestation content was first verified during audit, allowing invalid review metadata before dispatch",
+    "resolution": "Both metadata namespaces precede reads; actual hashes, seed length, attestation roles/exposure/UTC validated at preflight and every dispatch; original snapshots retain all four refs",
+    "final_recheck": "Independent read review and same synthetic reproduction now reject with c3_hash_changed before semantic reads",
+    "initial_reproduction_sha256": "7a4993e7d0200508ae8b3ad353ccb4c00f2ad2a9101628153ef618146d5aab2e",
+    "fixed_reproduction_sha256": "81eabbf0a6d42287a886a9ac7ab0d49ab29b405e688d63e921824f0b2b49a985",
+    "unresolved_confirmed_findings": 0,
+    "real_model_calls": 0
+  },
+  "design_clarification": {
+    "file": "docs/MEETINGS-C3-EXECUTION-CLARIFICATIONS.md",
+    "sha256": "32fe70d00c701370b53064ac8a4dc0deee27e6b91682b5505991cd3200c41dc4",
+    "role": "c2_budget_followup",
+    "actual_model": "gpt-6-astra",
+    "actual_effort": "xhigh",
+    "original_contract_changed": false
+  },
+  "preserved_freezes": [
+    {
+      "file": "data/evaluation/meetings-c3-candidate-source-freeze-v1.json",
+      "sha256": "6ce55cb17d264f8da7c587c685947da8d95ff1199ef65f7f34de7d1a275798c6",
+      "binding_count": 28,
+      "mismatches": []
+    },
+    {
+      "file": "data/evaluation/meetings-c2-input-budget-source-freeze-v1.json",
+      "sha256": "fe8307dfef4e0d4933dd5f894918303980e291a0b7f2a518a71a7e9484b61a99",
+      "binding_count": 72,
+      "mismatches": []
+    },
+    {
+      "file": "data/evaluation/meetings-c2-comparison-source-freeze-v2.json",
+      "sha256": "49a9c4a6e0ea6ca6652873fec1f2cc297ad4a269dcfc894d65a95e8095346a27",
+      "binding_count": 41,
+      "mismatches": []
+    },
+    {
+      "file": "data/evaluation/meetings-c2-source-processing-freeze-v2.json",
+      "sha256": "0b3b5be684138314382ef18ecf4c586d94898648ddd089644b4cf3470c6ad1ad",
+      "binding_count": 18,
+      "mismatches": []
+    }
+  ],
+  "boundaries": {
+    "actual_new_c3_source_bodies": 0,
+    "actual_new_c3_questions": 0,
+    "actual_c3_official_tokenizer_calls": 0,
+    "actual_c3_native_calls": 0,
+    "test_network_calls": 0,
+    "human_review_count": 0,
+    "service_adopted": false,
+    "model_quality_measured": false,
+    "entire_phase1_complete": false,
+    "toolchain_freeze_created": true,
+    "remote_ci": "pending new commit; not inferred from local tests",
+    "parent_model_changed": false
+  },
+  "next": "Commit freeze and pass required CI before fresh split-specific source adoption; review/freeze sources before questions."
+}

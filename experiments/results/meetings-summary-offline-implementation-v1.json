@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "IMPLEMENTATION_FOCUSED_CHECKS_AND_REVIEW_COMPLETE_ACTUAL_OFFLINE_PENDING",
+  "base_commit": "0a9819e26f4320dedc76aa3d219b52a23a5936b8",
+  "source_files": [
+    {
+      "file": "scripts/prepare_summary_grammar_engine.py",
+      "size_bytes": 93595,
+      "sha256": "3684a4fd2bca0c4d8a212ac02b23da50e8495de15d94d3bc44dc34a985256da8"
+    },
+    {
+      "file": "tools/summary_grammar/runtime.py",
+      "size_bytes": 24125,
+      "sha256": "b1422ea8466d127b38493d8b05c893483aa8c554d65ed7ffe0d3bb06961009c8"
+    },
+    {
+      "file": "tests/test_summary_grammar_engine.py",
+      "size_bytes": 162918,
+      "sha256": "ba9aa25733cefff129b812c650bee86d93a21e513060f05bc1e4bf20783d0e0b"
+    }
+  ],
+  "purpose": "Verify and independently copy fixed payload from a preserved failed acquisition into a new workspace without retrying downloads or relabeling the failed origin as successful.",
+  "focused_checks": {
+    "focused_v2": {
+      "session": 90705,
+      "exit": 1,
+      "passed": 81,
+      "failed": 1,
+      "deselected": 686,
+      "seconds": 128.34,
+      "failure": "fixture os.link Windows WinError5 before product boundary check"
+    },
+    "alias_fix": {
+      "exit": 0,
+      "passed": 1,
+      "seconds": 0.42,
+      "mechanism": "fake identical st_dev/st_ino, no hardlink privilege needed"
+    },
+    "unique_focused_passed_after_repair": 82,
+    "new_closed_checks": 66,
+    "existing_affected_checks": 16,
+    "ruff": "PASS",
+    "public_implementation_bytes_unchanged_during_final_v2_and_fix": true,
+    "post_v2_test_definition_delta": [
+      "test_closed_file_set_alias_and_path_rejection"
+    ],
+    "preexisting_test_definitions_ast_unchanged": true
+  },
+  "initial_attempts": [
+    {
+      "kind": "synthetic_test_source_drift",
+      "passed": 45,
+      "failed": 1,
+      "note": "Implementation was edited during an initial source-binding check; original log preserved."
+    },
+    {
+      "kind": "synthetic_clock_fixture_loop",
+      "manually_stopped": true,
+      "pass_count": null,
+      "note": "Fake clock advanced in tiny steps; stopped the owned test session and repaired the fixture. Not product latency or an actual acquisition failure."
+    }
+  ],
+  "test_scope_limits": [
+    "81 passed plus one fixture repair recheck passed; not one all-82-pass invocation.",
+    "Hardlink rejection uses injected identical file identity; native Windows hardlink creation was not verified.",
+    "The pre-alias-fix test copy was explicitly reverse-patch reconstructed, not contemporaneously captured."
+  ],
+  "parent_verification": {
+    "direct_refs": 13,
+    "current_three_equal_tested_copies": true,
+    "preexisting_test_definitions_ast_equal_to_base": 135,
+    "reconstructed_alias_fix_only_ast_delta": true,
+    "new_tests_run_by_parent": 0
+  },
+  "independent_review": {
+    "role": "independent_ai_code_review",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "blockers": 0,
+    "advisories": 0,
+    "source_changed": false,
+    "tests_rerun": false,
+    "closed_metadata_shape_checked": true,
+    "review_sha256": "85e7985e8b859e5a579838587bd408c5338fb3e4eed4dce6b27770e8b9481d39"
+  },
+  "input_schema": {
+    "schema": "engine-verify-closed-input-v1",
+    "keys": [
+      "schema",
+      "source_root",
+      "raw",
+      "inventory",
+      "failed_terminal",
+      "parent_closeout",
+      "closed_final",
+      "source_files",
+      "bundle"
+    ],
+    "reference_fields": [
+      "path",
+      "size_bytes",
+      "sha256"
+    ],
+    "source_files": "exact current prepare/runtime/pins references",
+    "bundle": "exact current bundle references, distinct from original raw bundle"
+  },
+  "external_protocol": {
+    "schemas": [
+      "engine-verify-closed-external-acceptance-v1",
+      "engine-verify-closed-external-terminal-v1",
+      "engine-verify-closed-external-custody-v1"
+    ],
+    "origin": "direct identical origin in attempt/raw/worker-terminal/supervision/companion",
+    "stdout_status": "VERIFIED_COPY_UNREVIEWED_DO_NOT_EXECUTE"
+  },
+  "cli_template": [
+    "python",
+    "-B",
+    "scripts/prepare_summary_grammar_engine.py",
+    "verify-closed",
+    "--workspace",
+    "<NEW_WORK>",
+    "--closed-input",
+    "<PARENT_FIXED_INPUT_JSON>",
+    "--closed-input-sha256",
+    "<SEPARATELY_FIXED_INPUT_SHA256>",
+    "--acquisition-profile",
+    "llvm-x64-sampled-50ms-1800s-v1"
+  ],
+  "boundaries": {
+    "old_failed_roots_modified": false,
+    "old_once_replayed": false,
+    "actual_payload_bodies_read_or_copied": 0,
+    "network_calls": 0,
+    "native_or_model_runs": 0,
+    "actual_offline_run": false,
+    "public_service_deployed": false,
+    "human_reviewed": false,
+    "existing_online_legacy_build_preserved": true,
+    "bounds_extended": false
+  },
+  "evidence_sha256": {
+    "implementation_result": "b00a6570bba786de922d63a85eb658b8ba0fbff549576e8033c66e89e0ffa6ed",
+    "pytest-final-v2.txt": "27444793c319ea54956000015ca8b8e81329d409550b5ba786e4544fd6884fa3",
+    "pytest-alias-fix.txt": "e64ae3031d2b910768f85d84a46254915b77ba6d3082e50d4ced7f7eda507862",
+    "ruff-final.txt": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "first-attempt.txt": "b5562d2cf40ca52460b229773fb96d03700f4f1a0a18c44fc25266a1c5c199b6",
+    "second-attempt.txt": "1dbad229f23905ad6c91766484e26eb7159aea326cee9fd3cc77cb28a0884eab",
+    "preservation.json": "cb084a905fa2e12367a07e35bb1892aa5bb7dc1459fd70d02808e3c3bcd8456a",
+    "pytest-v2-test-reconstructed-before-alias-fix.py": "f410b1f749debe365303d04aa0b106ad151afdd15461b9a156a18c13d737a6a4"
+  },
+  "next": "Publish the verified source and documentation together, pass required CI for the exact commit, complete external helper binding, then separately run the bounded offline verification. Build/native/model success remains unverified."
+}

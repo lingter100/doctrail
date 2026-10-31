@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "role": "c4_calibration_source",
+  "candidate_exploration_before_adoption": [
+    {
+      "repository": "nodejs/TSC",
+      "disposition": "not_adopted",
+      "reason": "No explicit license path found in repository tree; did not infer permission from public visibility."
+    },
+    {
+      "repository": "nodejs/diagnostics",
+      "revision": "3162f5cdfe86a0830d6ce0eb525d9fbe1d0caee6",
+      "disposition": "not_adopted_for_calibration",
+      "reason": "Parent resolved independent split repository collision in favor of the validation role before raw adoption or any questions/tokenizer feedback.",
+      "reads": "Public metadata, LICENSE.md, March and May 2024 minutes and GOVERNANCE.md were viewed for source suitability. No calibration snapshots or manifest were created for them."
+    }
+  ],
+  "additional_metadata_only_repository_probes": [
+    "dask/community",
+    "python/steering-council",
+    "jupyter/team-compass",
+    "kubernetes/community",
+    "jupyterhub/team-compass",
+    "babel/notes",
+    "eslint/tsc-meetings",
+    "rust-lang/compiler-team"
+  ],
+  "minor_exploration_error": "Initial console print of a public Unicode document failed under cp949; reread used UTF-8 console. No source bytes or artifact were changed.",
+  "old_pool_bodies_read": 0,
+  "questions_authored": 0,
+  "oracles_authored": 0,
+  "tokenizer_loads": 0,
+  "native_calls": 0
+}

@@ -1,0 +1,53 @@
+# 무료 로컬 회의 생성 후보 실행 안내
+
+이 경로는 기존 서비스 기본 모델을 바꾸지 않는 개발 실험이다. [선택 이유](MEETINGS-SUMMARY-NEXT-DECISION.md), [준비 기록](../experiments/results/meetings-local-candidate-preparation-v1.json)을 함께 읽는다. 첫 공식 실행의 시작RAM 실패를 보존했다. 보완 후 새 등록에서는 native가 시작됐지만8입력이4096토큰을 넘어 생성0이었다. 실제 생성 품질·추론 속도·생성 중 메모리 결과는 아직 없다.
+
+## 모델 파일 준비
+
+공식 Ministral 3 3B Instruct Q5_K_M의 revision·크기·SHA와 Apache-2.0 선언은 `data/models/meetings-generation-ministral3-v1.json`에 고정했다. 기존 Qwen 폴더를 덮어쓰지 않는다. 프로젝트 루트에서 실행한다.
+
+```powershell
+$env:PYTHONUTF8 = '1'
+& .venv/Scripts/python.exe -B -X utf8 -m scripts.prepare_meeting_gguf `
+  --manifest data/models/meetings-generation-ministral3-v1.json `
+  --root models/meetings-ministral3-v1 --download
+```
+
+`--download`를 빼면 현재 파일을 검증하는 경로다. 첫 준비는 모델 약2.47GB와 런타임 압축파일 약656MB를 받을 수 있다. 이번 작업에서는 기존 고정 런타임 압축파일2개를 검증해 새 폴더로 복사했으므로 실제 새 대형 다운로드는 모델1개였다. 가중치·런타임·라이선스는 Git에서 제외하고 프로필과 코드만 공개한다. 준비 성공은 실제 모델 로딩 성공을 뜻하지 않는다.
+
+## 고정 개발 입력과 역할
+
+- 원문은 기존 공개 프로젝트2계열의 전체 회의록4개이며, 원문·제목·UUID와 upstream revision을 보존한다. 로컬 문서 revision=1은 새 최초 반입 버전이다.
+- 원문당 답할 수 있는 한국어 질문1개를 별도 AI 작성자가 작성했다. 다른 Astra xhigh 담당자가 질문4개·정확 근거16구간·필수 의미13개를 수용했다. 사용자 검수는0이다.
+- 실행 입력은 `.local/meeting-local-candidate-questions-v1/pilot-input.json`으로 잠갔다. 질문은 모델에 주지만 비공개 정답 기준과 기존 witness는 주지 않는다. 이 입력은 보호된 최종 평가가 아닌 개발 자료다.
+- 기존 flat 요약 기준과 QA 기준의 해시·출처 제외 목록·코드·모델 자산을 실행 등록에 연결한다. 기준·질문·프롬프트를 출력에 맞춰 바꾸지 않는다.
+- 최종 판정자는 익명 출력의 개별 내용 판단을 먼저 잠근 뒤에만 자기검토·모델 대응·성능을 비교한다. AI 검토를 사람의 확인으로 기록하지 않는다.
+
+## 실행 예산과 실패 처리
+
+요약은 원문당 생성768토큰과 유효 초안에 대한 자체 검토128토큰을 합쳐120초다. QA는256토큰/60초다. 모든 요청은 실제 template까지 포함해 입력4096토큰 이하여야 한다. 전체 문맥6144·parallel1·FP16 KV·greedy·전체GPU offload 요청99를 고정하며 실제 배치와 자원 관측을 별도로 남긴다. CPU 자동 대체·내용 축약·자료 교체·재생성은 하지 않는다.
+
+원문4개의 순서로 요약→해당 요약 검토→질문 답변을 진행한다. 생성은 최대8회, 요약 자체검토는 최대4회이며 요청한 최대 출력토큰 합계는4608이다. 시작120초·활성측정900초·정리5초, 전체1025초를 상한으로 둔다. 시작 가용RAM10GiB·활성 가용RAM2GiB·native RSS8GiB 조건과 단독 모델 소유 상태를 실행 직전에 확인한다. 이 수치는 관측 후 바꾸는 합격 기준이 아니다. 파일 I/O를 포함한 강제 실시간 선점 보장은 아니며 실제 초과는 실패로 기록한다.
+
+기계적 형식·내용 거부는 원본을 보존하고 다음 고정 항목으로 간다. 자원·프로토콜·실행 안전 실패에서는 남은 항목을 미실행으로 남긴다. 모델 내부 검토 통과는 독립 내용 통과를 대신하지 않는다. 고정 분모는 요약4·답변4이며 무효·보류·미실행을 숨기지 않는다.
+
+## 시작 경로 보완
+
+[후속 설계](MEETINGS-LOCAL-CANDIDATE-STARTUP-NEXT.md)에 따라 현재 등록에서 전체 검증한62자산을 준비 완료 연결값으로 launch에 전달한다. 실행 중 prepare·압축해제·다운로드는 하지 않는다. runtime파일집합·등록 메타데이터·경로 안전성·native신원·사후hash는 유지한다. 실제Popen직전RAM단일sample과10GiB판정을report/terminal에남기며 미달이면재샘플대기없이거부한다.58합성검사와독립검토·63c6fdc의필수CI를통과했다. 이후새등록에서실제RAM조건과native시작·template/tokenize까지확인했으나completion은입력한도로실행되지않았다. [구현 기록](../experiments/results/meetings-local-candidate-startup-repair-v1.json).
+
+## 입력 한도 후속 변경
+
+[실제 v2 기록](../experiments/results/meetings-local-candidate-actual-v2.json)의 summary/QA 입력은4,570~5,771토큰이다. [설계](MEETINGS-LOCAL-CANDIDATE-INPUT-NEXT.md)는 원문을 보존하고 unit을 `[id,text]`, gap을 원래 문자열로 전송하는 명시적 선택형식을 제안한다. 서버의 원래 위치 map과 검토 연결을 유지하는 구현을 마쳤고82합성검사·독립검토를 통과했다. [구현 기록](../experiments/results/meetings-local-candidate-compact-v1.json)은 실제 토큰 적합성이나 내용 품질 검증을 뜻하지 않는다. 새 등록은 `source_wire_format`을 고정하고 기존 등록을 수정하지 않는다.4096·mandatory review·실행예산은 불변이다.
+
+## 실제 실행 기록
+
+새 코드의43합성검사·독립 검토와9fdf6ae2의필수CI를 통과한 뒤 등록df2e819e로 공식CLI를1회 실행했다. 결과는38.282초/exit1, local_candidate_startup_ram이며 native/생성/토큰화0이다. 원본 실행은 소비됐고 같은 등록·출력경로로 다시 실행하지 않는다. [안전 결과](../experiments/results/meetings-local-candidate-actual-v1.json)에 미실행과 관측 한계를 남겼다. 보완 소스63c6fdc의 새 등록3630a9ff도 실제1회로 소비됐고 모든8항목이 입력 한도로 거부됐다. 아래는 향후 별도 검증된 새 등록에만 사용하는 명령 형식이다. 자리표시자를 임의 값으로 채워 실행하지 않는다.
+
+```powershell
+& .venv/Scripts/python.exe -B -X utf8 -m scripts.probe_meeting_local_candidate `
+  --registration <검증된_등록파일> --execute-once-sha256 <그_파일의_SHA256>
+```
+
+CLI 종료값·원래 report·terminal 및 늦은 무효화 기록이 있으면 모두 확인한다. 기록 쓰기 후 시간 초과가 생긴 경우 앞서 저장한 성공 필드 하나만 보고 통과 처리하지 않는다. 같은 실행을 다시 시작하거나 실패 결과를 덮어쓰지 않는다.
+
+전체 원문을 제공하는 이번 QA 측정은 검색·권한·문서 갱신·실제 서비스 RAG 통과의 증거가 아니다. 기존9B와 입력이 달라 A/B 개선율도 계산하지 않는다. 내용과 자원을 만족하면 기존 서비스 연결을 다음으로 검토하며, 녹음/STT·유료API·외부 서비스 배포는 범위 밖이다.

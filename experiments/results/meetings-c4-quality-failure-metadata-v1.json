@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "kind": "c4-quality-closed-deadline-metadata",
+  "observed_at_utc": "2026-10-16T06:07:47.795515+00:00",
+  "execution_commit": "43139e09f6a0aecfdde1c0c510a563efd348e8d5",
+  "raw_report": {
+    "file": ".local/meetings-c4-quality-calibration-v1/report.json",
+    "sha256": "4c95b97cafb1abaf9655443023ffefdd1a436250d40b5cc3fff84fa0b8c87b91",
+    "bytes": 352062
+  },
+  "plan": {
+    "file": "data/evaluation/meetings-c4-quality-execution-plan-v1.json",
+    "sha256": "ca2c21eb5e039dc230193513d990a23545659147173d1bbe065995edcaa5034d",
+    "bytes": 14887
+  },
+  "status": "failed_closed",
+  "first_failure": {
+    "code": "generation_deadline_exceeded",
+    "type": "GenerationError"
+  },
+  "send_attempts": 2,
+  "native_responses_received": 1,
+  "contract_valid_answers": 1,
+  "unexecuted_calibration": 4,
+  "validation_native_calls": 0,
+  "elapsed_seconds": 261.6399999999994,
+  "calls": [
+    {
+      "id": "C4-CAL-01",
+      "passed": true,
+      "dispatch_started": true,
+      "completion_attempts": 1,
+      "http_send_attempts": 1,
+      "request_seconds": 86.15699999999924,
+      "watchdog": {
+        "watchdog_fired": false,
+        "watchdog_joined": true
+      },
+      "memory": {
+        "native_rss_sample_count": 333,
+        "native_rss_max_sample_mib": 6319.80078125,
+        "memory_scope": "sampled_native_rss_not_peak_not_gpu"
+      },
+      "native_timing_metadata": {
+        "cache_n": 0,
+        "prompt_n": 1255,
+        "prompt_ms": 3999.651,
+        "prompt_per_token_ms": 3.186972908366534,
+        "prompt_per_second": 313.7773770761499,
+        "predicted_n": 812,
+        "predicted_ms": 63402.728,
+        "predicted_per_token_ms": 78.1784562268804,
+        "predicted_per_second": 12.791247720445087
+      },
+      "completion_measurements": {
+        "input_tokens": 1255,
+        "output_tokens": 812,
+        "final_retokenized_tokens": 297,
+        "elapsed_seconds": 86.125,
+        "finish_reason": "eos"
+      },
+      "trace_event_metadata": [
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000001.json",
+          "sha256": "8b83545e50de50587bc21ac4464ce19247ae257599cd0d6ab4b464ae56d56913"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000002.json",
+          "sha256": "c0a58b37d5a73003388fe055beeb2430a0494c2fcb670ac66977e19e0928897c"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000003.json",
+          "sha256": "8929e93f7667126d86a13fc7c771cf59cf1759b295b13646268c0bf8e00a8e27"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000004.json",
+          "sha256": "a7b0ae7a26e30c59cf892ebd3739cee294bd8270ad0779c85867995a8e0db497"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000005.json",
+          "sha256": "b84cd523fd4e53dad178cba8dd28837e32dbb894012508484ce64d85fa279e52"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000006.json",
+          "sha256": "6e606803074496aadd03f53adca254d0731ce284088c63c910dbb3d9e7425371"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000007.json",
+          "sha256": "09bc14b30917aecf6ba35da8e2bfe244aef4192fe7641453219c9b7f02efb175"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000008.json",
+          "sha256": "1f37a8406064ff3b0ed40ab34b4e88755224e66b7f99d6248cb8934e703ea1b7"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000009.json",
+          "sha256": "e88721b12157a8a42db636e94f59743bbd060498de1efe4479558f9ea909e0db"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000010.json",
+          "sha256": "84c41c588fd9e93f50efd1ee840d6ed8bb00aff505effbfc21f1c2315384bd0b"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000011.json",
+          "sha256": "6ca30ac6f9bd6dbf38040b7b9e16a67763117d92bc09ef7b88b00a1a4c0a60eb"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000012.json",
+          "sha256": "f4a3079252c558c964f269403c8ecd9ca9937d697c0aa7290474b9cf043daa05"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000013.json",
+          "sha256": "4b1737b4fdff79666d6376697c384eb1d607fae1efc040f1d0e97a01c133820e"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000014.json",
+          "sha256": "2b80d63c141e15d2682bd135037555e5de9c16c4e6cf4cf2830d0e8f0bd608f4"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000015.json",
+          "sha256": "d8bc2798db55426c53b268f997b5d644fbecbde1b336e3263bb6ff07db436d44"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000016.json",
+          "sha256": "f6c8ca08471846dcef894d4dec912a60d033ff6b4beda0bdbcef84756dbb9551"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000017.json",
+          "sha256": "597626a73b3bb04165c2c03ce8aedb4132c64e561ebe5026a5e0533001623178"
+        }
+      ]
+    },
+    {
+      "id": "C4-CAL-02",
+      "passed": false,
+      "dispatch_started": true,
+      "completion_attempts": 1,
+      "http_send_attempts": 1,
+      "request_seconds": 91.34299999999712,
+      "error": {
+        "code": "generation_deadline_exceeded",
+        "type": "GenerationError"
+      },
+      "watchdog": {
+        "watchdog_fired": true,
+        "watchdog_joined": true
+      },
+      "memory": {
+        "native_rss_sample_count": 352,
+        "native_rss_max_sample_mib": 6348.53125,
+        "memory_scope": "sampled_native_rss_not_peak_not_gpu"
+      },
+      "native_timing_metadata": {},
+      "completion_measurements": {},
+      "trace_event_metadata": [
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000018.json",
+          "sha256": "edf9fdb8b57fd56f7bded6d966e211a7d2e098ce0bfd3c6024fd484ead81fc88"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000019.json",
+          "sha256": "fe37413253cc4b3310955338eae11d2e6b7fe17fc0aea06f98446612dcaf5756"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000020.json",
+          "sha256": "7bd163f32cd38b0364333731cb3f711c4322f8843766a728aba37a990bc25e51"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000021.json",
+          "sha256": "707e6f417d29c4cb803ab91fdd47b89b736b78a1fd22d00a2775df4a1909bba4"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000022.json",
+          "sha256": "4bd90ba1b4e406c192d12a6f0cf46723956ae8ae32c26c1d28f253796a849e5c"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000023.json",
+          "sha256": "581fb4c886a5eabd6c16e62c376190bcbc979ddfcfe1857b7d2241c1e524e8cf"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000024.json",
+          "sha256": "de87beeff3770a5cc6f6cfbcad5523b6e4604e174c7008e9e0e5a3ed58088ec3"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000025.json",
+          "sha256": "ed7f7dcbbc4b67f512fbb2cc704d3b0cedbf3c1995fb46838051c42b4be733eb"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000026.json",
+          "sha256": "2f66603b5b0746aa694e6dca6c70b386a0a5c343e4f6e29fca64606aefcb0268"
+        },
+        {
+          "file": ".local/meetings-c4-quality-calibration-v1/trace/000027.json",
+          "sha256": "157db63282266b963b5369f651661307760243f9920768d89dd675424250742b"
+        }
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "process_started": true,
+      "cleanup_attempted": true,
+      "drain": {
+        "emitted_bytes": 0,
+        "eof": true,
+        "read_errors": 0,
+        "join_errors": 0,
+        "started": true,
+        "joined": true,
+        "chunk_bytes": 8192,
+        "raw_content_retained": false
+      },
+      "seconds": 0.0,
+      "stopped": true,
+      "cleanup_errors": 0,
+      "within_budget": true
+    }
+  ],
+  "metadata_recovery": false,
+  "restarts": 0,
+  "original_success_flag_sources_unchanged": false,
+  "separate_postfailure_binding_check": {
+    "passed": true,
+    "unique_bindings": 134,
+    "original_flags_rewritten": false
+  },
+  "semantic_quality_judgments": 0,
+  "human_reviews": 0,
+  "selection_eligible": false,
+  "retry_performed": false,
+  "limitations": [
+    "Client observed sends do not prove two completed generations.",
+    "Only one parsed native response; no inference about second output tokens or content.",
+    "Structural accepted answer is not a semantic quality pass.",
+    "Request timing includes host validation; native timings are reported separately.",
+    "Timing-only diagnostic; no question, evidence text, reasoning, claims, or oracle semantics included."
+  ],
+  "artifact_index": [
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/report.json",
+      "sha256": "4c95b97cafb1abaf9655443023ffefdd1a436250d40b5cc3fff84fa0b8c87b91",
+      "bytes": 352062
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000001.json",
+      "sha256": "8b83545e50de50587bc21ac4464ce19247ae257599cd0d6ab4b464ae56d56913",
+      "bytes": 7204
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000002.json",
+      "sha256": "c0a58b37d5a73003388fe055beeb2430a0494c2fcb670ac66977e19e0928897c",
+      "bytes": 6027
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000003.json",
+      "sha256": "8929e93f7667126d86a13fc7c771cf59cf1759b295b13646268c0bf8e00a8e27",
+      "bytes": 96
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000004.json",
+      "sha256": "a7b0ae7a26e30c59cf892ebd3739cee294bd8270ad0779c85867995a8e0db497",
+      "bytes": 5921
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000005.json",
+      "sha256": "b84cd523fd4e53dad178cba8dd28837e32dbb894012508484ce64d85fa279e52",
+      "bytes": 6000
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000006.json",
+      "sha256": "6e606803074496aadd03f53adca254d0731ce284088c63c910dbb3d9e7425371",
+      "bytes": 96
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000007.json",
+      "sha256": "09bc14b30917aecf6ba35da8e2bfe244aef4192fe7641453219c9b7f02efb175",
+      "bytes": 14725
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000008.json",
+      "sha256": "1f37a8406064ff3b0ed40ab34b4e88755224e66b7f99d6248cb8934e703ea1b7",
+      "bytes": 8203
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000009.json",
+      "sha256": "e88721b12157a8a42db636e94f59743bbd060498de1efe4479558f9ea909e0db",
+      "bytes": 90
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000010.json",
+      "sha256": "84c41c588fd9e93f50efd1ee840d6ed8bb00aff505effbfc21f1c2315384bd0b",
+      "bytes": 89
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000011.json",
+      "sha256": "6ca30ac6f9bd6dbf38040b7b9e16a67763117d92bc09ef7b88b00a1a4c0a60eb",
+      "bytes": 30800
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000012.json",
+      "sha256": "f4a3079252c558c964f269403c8ecd9ca9937d697c0aa7290474b9cf043daa05",
+      "bytes": 30793
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000013.json",
+      "sha256": "4b1737b4fdff79666d6376697c384eb1d607fae1efc040f1d0e97a01c133820e",
+      "bytes": 1436
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000014.json",
+      "sha256": "2b80d63c141e15d2682bd135037555e5de9c16c4e6cf4cf2830d0e8f0bd608f4",
+      "bytes": 97
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000015.json",
+      "sha256": "d8bc2798db55426c53b268f997b5d644fbecbde1b336e3263bb6ff07db436d44",
+      "bytes": 3766
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000016.json",
+      "sha256": "f6c8ca08471846dcef894d4dec912a60d033ff6b4beda0bdbcef84756dbb9551",
+      "bytes": 3142
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000017.json",
+      "sha256": "597626a73b3bb04165c2c03ce8aedb4132c64e561ebe5026a5e0533001623178",
+      "bytes": 8379
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000018.json",
+      "sha256": "edf9fdb8b57fd56f7bded6d966e211a7d2e098ce0bfd3c6024fd484ead81fc88",
+      "bytes": 12231
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000019.json",
+      "sha256": "fe37413253cc4b3310955338eae11d2e6b7fe17fc0aea06f98446612dcaf5756",
+      "bytes": 10670
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000020.json",
+      "sha256": "7bd163f32cd38b0364333731cb3f711c4322f8843766a728aba37a990bc25e51",
+      "bytes": 97
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000021.json",
+      "sha256": "707e6f417d29c4cb803ab91fdd47b89b736b78a1fd22d00a2775df4a1909bba4",
+      "bytes": 10564
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000022.json",
+      "sha256": "4bd90ba1b4e406c192d12a6f0cf46723956ae8ae32c26c1d28f253796a849e5c",
+      "bytes": 10643
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000023.json",
+      "sha256": "581fb4c886a5eabd6c16e62c376190bcbc979ddfcfe1857b7d2241c1e524e8cf",
+      "bytes": 97
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000024.json",
+      "sha256": "de87beeff3770a5cc6f6cfbcad5523b6e4604e174c7008e9e0e5a3ed58088ec3",
+      "bytes": 30684
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000025.json",
+      "sha256": "ed7f7dcbbc4b67f512fbb2cc704d3b0cedbf3c1995fb46838051c42b4be733eb",
+      "bytes": 13294
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000026.json",
+      "sha256": "2f66603b5b0746aa694e6dca6c70b386a0a5c343e4f6e29fca64606aefcb0268",
+      "bytes": 91
+    },
+    {
+      "file": ".local/meetings-c4-quality-calibration-v1/trace/000027.json",
+      "sha256": "157db63282266b963b5369f651661307760243f9920768d89dd675424250742b",
+      "bytes": 182
+    },
+    {
+      "file": ".local/meetings-c4-quality-ledger-v1.json",
+      "sha256": "ca6b33e9ab89a2fa1ece632f8f72070c9d8794c29c93bdcd8b5ced33a0d462d5",
+      "bytes": 301
+    },
+    {
+      "file": ".local/c4-quality-execution-observer-v1/check.log",
+      "sha256": "0471c09ddc6e9fa7a9d55fe0f86c57bfa215eec3f93dd5475975f7b7e7da9d48",
+      "bytes": 23
+    },
+    {
+      "file": ".local/c4-quality-execution-observer-v1/run.log",
+      "sha256": "0e154216aca730d7304a76ab78b5415ddb8c94549ddd876072495e7320041e31",
+      "bytes": 29
+    }
+  ]
+}

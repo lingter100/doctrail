@@ -1,0 +1,33 @@
+{
+  "head": "7ac7513c2fb969b0f0e794c3d61e6e82b2ddfcb2",
+  "mode": "run",
+  "exit_code": 0,
+  "wall_seconds": 266.9840000000004,
+  "stdout": {
+    "sha256": "9769db908d8582adeb412037e7c43682dda39195045cd5d706dd337f87ce1506",
+    "bytes": 294
+  },
+  "stderr": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "terminal_summary": {
+    "status": "completed_pair",
+    "error": null,
+    "persistence_error": null,
+    "terminal_success": true,
+    "pair_execution_completed": true,
+    "resources_all_passed": true,
+    "arms": [
+      {
+        "id": "gpu24-control",
+        "status": "passed_resources_only"
+      },
+      {
+        "id": "gpu28-candidate",
+        "status": "passed_resources_only"
+      }
+    ]
+  },
+  "head_unchanged": true
+}

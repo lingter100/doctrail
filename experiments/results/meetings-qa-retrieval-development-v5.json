@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment": "meeting_qa_retrieval_development_v5",
+  "status": "closed_failed",
+  "source_commit": "6ac0e788cda14df5e81f42edbb1bae8c847dfae8",
+  "development_only": true,
+  "heldout_evaluation": false,
+  "human_reviews": 0,
+  "final_receipt_sha256": "708206cb75f65fb1247433f6db3b28d50fa052137efaa353930a243dd439072e",
+  "result_sha256": "9629452810caee4233280e21e1f18215290fc1296d7fdf51a2de0f42f8abc827",
+  "phase": "worker_ready_check",
+  "worker_exit_before_cleanup": 2,
+  "natural_cli_exit": 1,
+  "helper_elapsed_seconds": 25.14,
+  "outer_elapsed_seconds": 26.546,
+  "search_attempts": 0,
+  "generation_requests": 0,
+  "analysis_requests": 0,
+  "unattempted_searches": 6,
+  "rankings": 0,
+  "known_processes_absent": 9,
+  "cleanup_errors": [],
+  "frozen_refs": 72,
+  "frozen_unchanged": true,
+  "diagnosis": {
+    "observed": "Bounded startup stderr captured ModuleNotFoundError at getpass.getuser line168 through torch cache initialization.",
+    "source_inspection": "Windows getpass falls back to importing pwd when LOGNAME, USER, LNAME and USERNAME are absent. The cleaned launcher environment omitted all four.",
+    "correction": "A separate new launcher preserves only nonempty parent USERNAME in the child environment; no raw account value is logged.",
+    "limitation": "No successful model readiness, search result or quality evidence."
+  },
+  "unrelated_jobis_untouched": true,
+  "automatic_retry": false
+}

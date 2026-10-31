@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "kind": "knowledge_answer_recovery_messages_implementation",
+  "status": "local targeted verification and independent read review complete; exact source CI pending",
+  "changes": [
+    "Distinguish four normal abstention reasons without displaying worker codes.",
+    "Separate timeout, unavailable, malformed output, limits and unknown HTTP failures; retain question, filters and explicit retry/search recovery.",
+    "Reject unknown worker abstention reasons with existing generation_invalid_response instead of silently asserting insufficient evidence."
+  ],
+  "source_files": [
+    {
+      "path": "web/src/meetings.ts",
+      "bytes": 9655,
+      "sha256": "727f321eaebfd9ef9db102738ef20b8b929634111d90278a5fec8582fe9d5e66",
+      "lf": true
+    },
+    {
+      "path": "web/src/components/KnowledgeView.tsx",
+      "bytes": 11755,
+      "sha256": "54f050cd059978de825b560e08e8b885146b7c5baaeaa54b2804219f01bcc9fa",
+      "lf": true
+    },
+    {
+      "path": "web/tests/knowledge-recovery.spec.ts",
+      "bytes": 11309,
+      "sha256": "56d7e0ee1f22a00c69839fd3dce0011b090d2f0365529c94a48c30bf07316c72",
+      "lf": true
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/KnowledgeService.java",
+      "bytes": 12918,
+      "sha256": "aca9f628fa4007249f761c8dc8f2bf8f58ab56f74e0f8537d8f72cd2caa330b8",
+      "lf": true
+    },
+    {
+      "path": "server/src/test/java/io/doctrail/KnowledgeDeadlineTest.java",
+      "bytes": 15084,
+      "sha256": "e3f5b4ba3a50bef6fc020741685c3b4e5b6c139c2c72778ed29fa300bf586c3d",
+      "lf": true
+    }
+  ],
+  "receipts": [
+    {
+      "path": ".local/knowledge-answer-messages-v1/receipt-v1.json",
+      "bytes": 22288,
+      "sha256": "dea4a08713add24e274f0a012fb6e236ed705fe55aa029aa83d092f8c28f1fad"
+    },
+    {
+      "path": ".local/knowledge-answer-messages-v1/receipt-v2.json",
+      "bytes": 9150,
+      "sha256": "1588d9b0b8a18e0347b4d7e961f2b5a2839eedaf63aeb555c57a29e2119ced54"
+    },
+    {
+      "path": ".local/knowledge-answer-messages-v1/independent-review-final-parent-record.json",
+      "bytes": 1573,
+      "sha256": "538218671f32f4f172bd8f1ff2ecd4bc56db0ccb79f1741bbd96421e6524c0da"
+    }
+  ],
+  "local_checks": {
+    "java_v1": [
+      {
+        "name": "io.doctrail.GenerationClientTest",
+        "tests": "20",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "time": "1.02"
+      },
+      {
+        "name": "io.doctrail.GenerationLanguageBoundaryTest",
+        "tests": "4",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "time": "0.132"
+      },
+      {
+        "name": "io.doctrail.KnowledgeDeadlineTest",
+        "tests": "26",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "time": "5.032"
+      }
+    ],
+    "browser_runs": [
+      {
+        "report": {
+          "path": ".local/knowledge-answer-messages-v1/final-browser/web-e2e-1OV53o/report.json",
+          "bytes": 9605,
+          "sha256": "ccddb4d6ed1610d7d74ba5b335c212867537a8614b64a319306bf82840f6c021"
+        },
+        "stats": {
+          "startTime": "2026-10-22T04:40:02.315Z",
+          "duration": 11040.416000000001,
+          "expected": 6,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        }
+      },
+      {
+        "report": {
+          "path": ".local/knowledge-answer-messages-v1/final-browser/web-e2e-31pc5A/report.json",
+          "bytes": 11899,
+          "sha256": "f6f64d3c2a911e28589d2416f73eb5b68813a5dacb40bf22946c80d33f2074f9"
+        },
+        "stats": {
+          "startTime": "2026-10-22T04:40:37.898Z",
+          "duration": 14652.93,
+          "expected": 8,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        }
+      },
+      {
+        "report": {
+          "path": ".local/knowledge-answer-messages-v1/delta-browser-v2/web-e2e-SSdTR9/report.json",
+          "bytes": 4262,
+          "sha256": "ec12f3c42ad8b8f86f3f417df917e2db89222c97c6dcd3754520b5b42d3b9e9a"
+        },
+        "stats": {
+          "startTime": "2026-10-22T04:43:25.910Z",
+          "duration": 7098.447999999999,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        }
+      }
+    ],
+    "unique_browser_tests": 14,
+    "v2_repeated_affected_test": 1,
+    "matrix_v2_error_rows": 27,
+    "typecheck_build_package_v2": "passed; package skipped unchanged Java tests",
+    "commands_v1": [
+      "node scripts/test-java.mjs knowledge-recovery.spec.ts --grep synthetic-abstention-or-HTTP (original failure)",
+      "mvnw.cmd -o -Dtest=KnowledgeDeadlineTest#workerAbstentionReasonIsPreservedOrRejectedWithoutRetry test (original failure)",
+      "npm.cmd run typecheck",
+      "npm.cmd run build",
+      "mvnw.cmd -o -Dtest=KnowledgeDeadlineTest,GenerationClientTest,GenerationLanguageBoundaryTest package",
+      "node scripts/test-java.mjs knowledge-recovery.spec.ts",
+      "node scripts/test-java.mjs knowledge-source-recovery.spec.ts"
+    ],
+    "commands_v2": [
+      "npm.cmd run typecheck",
+      "npm.cmd run build",
+      "server/mvnw.cmd -o -DskipTests package",
+      "DOCTRAIL_E2E_SPEC=knowledge-recovery.spec.ts DOCTRAIL_E2E_BATCH_DIRECTORY=.local/knowledge-answer-messages-v1/delta-browser-v2 node web/scripts/test-java.mjs knowledge-recovery.spec.ts --grep \"synthetic HTTP failures\""
+    ],
+    "v1_command_clarification": "The v1 receipt abbreviated the grep label. Exact original browser invocation was node scripts/test-java.mjs knowledge-recovery.spec.ts --grep \"synthetic abstention|synthetic HTTP\", working directory web."
+  },
+  "independent_review": {
+    "kind": "parent_record_of_returned_independent_read_review",
+    "reviewer": "/root/source_discovery_decision",
+    "actual_tool_accepted_model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "initial_finding": "generation_invalid_request was incorrectly grouped with size limits",
+    "resolution": "Removed only that code from size-limit mapping and added one HTTP 422 regression row. Neutral fallback is used.",
+    "final_blockers": 0,
+    "final_sources": [
+      {
+        "path": "web/src/meetings.ts",
+        "bytes": 9655,
+        "sha256": "727f321eaebfd9ef9db102738ef20b8b929634111d90278a5fec8582fe9d5e66",
+        "lf": true
+      },
+      {
+        "path": "web/src/components/KnowledgeView.tsx",
+        "bytes": 11755,
+        "sha256": "54f050cd059978de825b560e08e8b885146b7c5baaeaa54b2804219f01bcc9fa",
+        "lf": true
+      },
+      {
+        "path": "web/tests/knowledge-recovery.spec.ts",
+        "bytes": 11309,
+        "sha256": "56d7e0ee1f22a00c69839fd3dce0011b090d2f0365529c94a48c30bf07316c72",
+        "lf": true
+      },
+      {
+        "path": "server/src/main/java/io/doctrail/KnowledgeService.java",
+        "bytes": 12918,
+        "sha256": "aca9f628fa4007249f761c8dc8f2bf8f58ab56f74e0f8537d8f72cd2caa330b8",
+        "lf": true
+      },
+      {
+        "path": "server/src/test/java/io/doctrail/KnowledgeDeadlineTest.java",
+        "bytes": 15084,
+        "sha256": "e3f5b4ba3a50bef6fc020741685c3b4e5b6c139c2c72778ed29fa300bf586c3d",
+        "lf": true
+      }
+    ],
+    "tests_or_runtime_by_reviewer": 0,
+    "semantic_evaluation_material_read": false,
+    "original_receipt_pending_status_preserved": true
+  },
+  "preserved_failures": {
+    "browser": 2,
+    "Java": 1,
+    "Java_known_reasons_passed": 4,
+    "initial_tool_script_syntax_error_no_changes": true
+  },
+  "runtime_binaries": [
+    {
+      "path": "server/target/doctrail-server-0.1.0.jar",
+      "bytes": 49512970,
+      "sha256": "341807094808242be3b8a72d7196f6501fabff696c6b2c0fb55378ec4e0dc38c"
+    },
+    {
+      "path": "web/dist/assets/index-BW7d8xM4.js",
+      "bytes": 297814,
+      "sha256": "b36e748f2b012082fe1b053e065295b2f52d8be6d5724bfba1c8b1826efc138f"
+    },
+    {
+      "path": "web/dist/assets/index-C9z3P3GC.css",
+      "bytes": 47132,
+      "sha256": "35d97dac2cda032c0b8a67208254f9bd49e5107cf8da43ea7c8c689acd3345b9"
+    },
+    {
+      "path": "web/dist/favicon.svg",
+      "bytes": 276,
+      "sha256": "fa0d5fc5405923ccd729a6b711036dce29bc09cb35492ac94d01aef6e057067c"
+    },
+    {
+      "path": "web/dist/index.html",
+      "bytes": 708,
+      "sha256": "267cede7710131305e6fba3086e37094988b7cabf35bf545cccd20e2d0a62d6a"
+    }
+  ],
+  "parent_verification": {
+    "original_evidence_bindings": 82,
+    "additional_evidence_bindings": 14,
+    "baseline_source_and_binaries": 13,
+    "checkpoint_v1_source_and_binary_bindings": 10,
+    "current_source_and_binary_bindings": 10,
+    "frozen_C7_files": 77,
+    "unchanged_Python_product_files": 10,
+    "packaged_UI_matches_dist": true,
+    "owned_test_JVM_count": 4,
+    "owned_test_JVMs_absent_now": true,
+    "source_diff_read": 5,
+    "generic_synthetic_UI_screenshots_read": 2
+  },
+  "actual_model_calls": 0,
+  "GPU_calls": 0,
+  "human_review": false,
+  "public_service_deployment": false,
+  "limits": [
+    "Browser uses isolated synthetic DB plus explicit response injection or deterministic transport; not LLM quality or human acceptance.",
+    "Generic shared meeting error helper remains unchanged; only KnowledgeView uses the new knowledge-specific messages.",
+    "No operating performance or model quality assertion.",
+    "v1 Java50/browser14 apply to their preserved source/binary snapshot; v2 only changes one message mapping and adds its matrix row, with type/build/package and that affected browser check rerun.",
+    "UI screenshots are synthetic transport fixtures. A model_called fixture flag is not proof of actual model inference.",
+    "Exact CI for this source change is pending; no full model quality or end-to-end operation acceptance claim.",
+    "Old scope-v2 runtime bindings stay immutable; original JAR/UI bytes are archived in baseline, while current binaries were intentionally rebuilt."
+  ]
+}

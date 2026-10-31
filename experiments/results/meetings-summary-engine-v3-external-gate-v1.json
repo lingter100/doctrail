@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "status": "SYNTHETIC_PASS_INDEPENDENT_REVIEW_ACCEPTED_EXACT_CI_PENDING",
+  "base_commit": "0c34174f65c6d415e046925a7b4e2d11495264f7",
+  "problem": "An orphaned final manifest from failed acquisition finalization must not authorize v3 build.",
+  "change": "v3 reviewed SHA binds an externally reviewed acceptance companion with actual terminal, exact artifacts and custody; legacy reviewed SHA remains the manifest SHA.",
+  "source_hashes": {
+    "scripts/prepare_summary_grammar_engine.py": "67bf1d5541ad65d4e8da816748410b18989dbbbfe43e1e3c7fd36df9a55449cb",
+    "tests/test_summary_grammar_engine.py": "26dc209b30d1098d947ce83174b6353c43921b22d98b72f1f2deecfebe870d44",
+    "tools/summary_grammar/runtime.py": "b71ff813604b0a80985f84a5666b1669c7de8512a6f66c06af37c31a691f331f"
+  },
+  "tests": {
+    "passed": 554,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "legacy": 173,
+    "prior_v3": 112,
+    "new_external": 269,
+    "pytest_seconds": 429.84,
+    "junit_seconds": 429.433,
+    "launch_and_terminal_source_bytes_equal": true
+  },
+  "ruff": "passed",
+  "preserved_failures": [
+    {
+      "stage": "initial",
+      "passed": 267,
+      "failed": 18,
+      "exact_final_source": false,
+      "note": "Exploratory: source edits overlapped active collection/execution; not exact-source validation. 18 Windows stat/fstat ctime cross-API mismatches retained."
+    },
+    {
+      "stage": "targeted",
+      "passed": 30,
+      "failed": 0,
+      "exact_final_source": false,
+      "note": "30 targeted cases passed after ctime compatibility correction. Held during run but no launch snapshot; superseded by exact final run."
+    },
+    {
+      "stage": "external",
+      "passed": 269,
+      "failed": 1,
+      "exact_final_source": false,
+      "note": "269 passed; one test setup failed because Windows denied creating a hardlink. Original failure retained; replaced with explicit filesystem-identity simulation, not a skip."
+    }
+  ],
+  "protected": {
+    "runtime_whole_bytes": true,
+    "prepare_build_raw_and_ast": true,
+    "legacy_definitions_raw_and_ast": 58
+  },
+  "implementation_receipt_sha256": "b2572e845c8bfcd3716c6168f7d9e8d25effa0d63dd796acc531ca03f76d812f",
+  "parent_evidence_acceptance_sha256": "54288d7b7cf353a8385f9f0cc312b9c0a0da4961905574f88a061ab41a1d3d9d",
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "receipt_sha256": "e6450adda47c6a8dc88e5b29bf3428d5e9f32614fda10f844d8efeca84259880",
+    "review_sha256": "c5ad19604165a9b700ce5fca44f15a20cec4f726b69be959990fdb6d76ddd3fe",
+    "parent_acceptance_sha256": "2aa6040cd9a721c4d4ab774b869629c511527ce0b6b0cbf72717e0c0608344fb",
+    "prior_B1": "closed_for_v3_external_gate",
+    "product_tests_rerun": 0
+  },
+  "limitations": [
+    "External expected SHA must be supplied only after separate actual terminal/session, observer source/identity and custody review; self-asserted hashes cannot establish truth.",
+    "All companion examples are temporary synthetic fixtures, never operational receipts or approvals.",
+    "Hardlink alias and reparse negatives use modeled filesystem observations; native link creation was denied and that setup failure is retained.",
+    "Current WORK may gain build files; only acquisition evidence and immutable external companion are bound. The unchanged build deadline does not newly cover verifier overhead.",
+    "No acquisition timing, real compiler compatibility, model quality or production readiness claim. Existing original285/combined296 and original orphan evidence remain unchanged.",
+    "New external-control reads are bounded, but inherited reference/load helpers reread internal files; no atomic whole-workspace snapshot or end-to-end bounded-I/O guarantee against concurrent mutation."
+  ],
+  "actual_acquisition_build_native_model_runs": 0,
+  "user_review": 0,
+  "new_model_quality_verified": false,
+  "accepted_for_execution": false,
+  "next": "Publish reviewed source and verify exact head CI before a separately assigned actual acquisition and observation.",
+  "publication_only_change": {
+    "schema": "publication-newline-only-v1",
+    "created_at_utc": "2026-10-28T07:16:38.976460+00:00",
+    "path": "tests/test_summary_grammar_engine.py",
+    "tested_sha256": "26dc209b30d1098d947ce83174b6353c43921b22d98b72f1f2deecfebe870d44",
+    "published_sha256": "f39e586956094e734e70a9fac97294ae845fca4ec8a2439264633c6cf74f51e4",
+    "change": "Remove exactly one redundant final LF after all original bytes; AST unchanged.",
+    "original_snapshot": ".local/meeting-summary-engine-v3-external-gate-repair-v1/final-tests.py",
+    "local_test_rerun": false,
+    "exact_ci_pending": true,
+    "receipt_sha256": "3e91afa35a55bfc7f1390bd9aea68d774aec16bde3789d995d266a01153d9b16"
+  },
+  "published_source_hashes": {
+    "scripts/prepare_summary_grammar_engine.py": "67bf1d5541ad65d4e8da816748410b18989dbbbfe43e1e3c7fd36df9a55449cb",
+    "tests/test_summary_grammar_engine.py": "f39e586956094e734e70a9fac97294ae845fca4ec8a2439264633c6cf74f51e4",
+    "tools/summary_grammar/runtime.py": "b71ff813604b0a80985f84a5666b1669c7de8512a6f66c06af37c31a691f331f"
+  }
+}

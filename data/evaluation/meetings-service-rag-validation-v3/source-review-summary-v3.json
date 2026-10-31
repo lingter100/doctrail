@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_validation_v3_source_review_safe_summary",
+  "split": "validation",
+  "status": "accepted_with_disclosed_limits",
+  "reviewer": "/root/service_rag_validation_source_review",
+  "source_author_distinct": true,
+  "review_completed_at_utc": "2026-10-20T08:19:57.180299+00:00",
+  "counts": {
+    "source_documents": 6,
+    "accepted": 6,
+    "rejected": 0,
+    "author_edits": 0,
+    "public_documents": 3,
+    "new_ai_synthetic_documents": 3,
+    "completed_public_meetings": 2,
+    "fictional_completed_meetings": 2,
+    "related_general_documents": 2,
+    "complete_chunks": 66,
+    "source_artifact_bindings_verified": 42,
+    "registration_bindings_verified": 6,
+    "within_split_document_pairs_reviewed": 15
+  },
+  "source_freeze_bindings": 51,
+  "source_freeze": {
+    "path": "data/evaluation/meetings-service-rag-validation-v3/source-freeze-v3.json",
+    "bytes": 35587,
+    "sha256": "3ffde1172db6cd7a6c762084645d2c802882ecd21c2d554237bb093b8652a6b6"
+  },
+  "review": {
+    "path": "data/evaluation/meetings-service-rag-validation-v3/source-review-v3.json",
+    "bytes": 20823,
+    "sha256": "76d966420d23da285fbbc7dea6364ddc21927b2375c5c1f79dd135cf4c2443f7"
+  },
+  "notes": {
+    "path": "data/evaluation/meetings-service-rag-validation-v3/source-review-notes-v3.md",
+    "bytes": 5213,
+    "sha256": "978b68ed2ee8411407469346a204474719f4773791f0b9a1b5756d77996a521b"
+  },
+  "registration": {
+    "path": "data/evaluation/meetings-service-rag-validation-review-registration-v3.json",
+    "bytes": 3634,
+    "sha256": "76896014b1c5aa56044b41af2d03e9b2e0b1f16d03e3b9aeb9223ef137af87f7"
+  },
+  "source_artifact_index": {
+    "path": "data/evaluation/meetings-service-rag-validation-v3/artifact-index-v3.json",
+    "bytes": 10630,
+    "sha256": "875d172f68d7b59a0f6bdb50bb5d08d2ce2243b184daf7a2f283fd8708fc4acc"
+  },
+  "mechanical_status": {
+    "all_raw_processed_chunks_coordinates_upload_readback_stored_rows_match": true,
+    "sqlite_readonly_integrity_ok": true,
+    "original42_artifacts_unchanged": true,
+    "stored_documents": 6,
+    "stored_chunks": 66,
+    "stored_meetings": 0,
+    "stored_meeting_runs": 0,
+    "stored_searches": 0,
+    "saved_actual_java_uploads": 6,
+    "saved_actual_java_reads": 6,
+    "saved_observation_seconds": 3.922000000020489,
+    "saved_initial_readiness_failures": 1,
+    "saved_owned_java_remaining": 0,
+    "reviewer_java_reruns": 0
+  },
+  "freshness_status": {
+    "within_split_semantic_review_completed": true,
+    "within_split_duplicate_sources_found": 0,
+    "recorded_prior_exact_normalized_paragraph_matches": 0,
+    "historical_metadata_gaps": 3,
+    "prior_metadata_coverage_complete": false,
+    "cross_split_semantic_or_translation_duplicate_absence_verified": false,
+    "other_split_semantic_reads": 0
+  },
+  "license_status": "Preserved root terms and pinned source scope accepted for registered source use; no legal or human approval claimed.",
+  "exposure": "Generic contract/project aggregate metadata, own split whole source/license/processed/saved Java evidence, historical fingerprint/exclusion metadata; no other-split or closed bodies, evaluation questions/oracle/model outputs. Registry keyword lookup only, no memory rollout content.",
+  "limits": [
+    "Historical fingerprint index has 110 rows / 107 unique rows, but only 42 normalized-document and 42 paragraph-covered rows; three recorded historical coverage gaps remain.",
+    "The registered prior index and repository exclusions are not an exhaustive fingerprint index for all later exploratory or current other-split materials. No old or other-split bodies were opened to fill gaps.",
+    "Cross-split semantic or translation duplicate absence is unverified. Within-split independent semantic review cannot establish global freshness.",
+    "Synthetic paragraphs do not reach the 200-normalized-character paragraph threshold; zero paragraph matches for those files are not evidence of semantic novelty.",
+    "Public completion is supported by the published dated minutes paths, repository guide and recorded discussion/conclusions; no external attendance, recording or event-completion attestation was fetched.",
+    "Preserved public minutes include unfinished sections, examples, uncertain conclusions and future plans. Source acceptance does not make those statements completed facts or verify the underlying technical claims.",
+    "License assessment concerns the preserved repository source snapshot and root terms. External linked works were not fetched or independently licensed; no legal or human approval is claimed.",
+    "Existing actual Java evidence concerns six document uploads and six reads only. Meeting and meeting-run tables are empty. No meeting autoanalysis, search, answer/model quality, browser acceptance, human review, or Phase1 completion is proved.",
+    "The prior observer preserves one initial readiness connection failure, then successful ingestion. Its 3.922000000020489 seconds is the recorded whole observer elapsed value; Windows TerminateProcess exit code 1 is not graceful shutdown evidence.",
+    "This review does not execute source fetching, Java, Maven, retrieval, tokenizer, native or model workloads and does not independently rerun the historical observation.",
+    "The 51-chunk largest document is retained in full. Source acceptance is not a claim that top-5 retrieval or an actual request context/input budget will succeed."
+  ],
+  "reviewer_execution_counts": {
+    "network_requests": 0,
+    "java": 0,
+    "maven": 0,
+    "retrieval": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "model": 0,
+    "model_downloads": 0,
+    "git_commands": 0,
+    "source_edits": 0,
+    "human_review": 0
+  },
+  "rejections": 0,
+  "author_change_requests": 0,
+  "final_answer_judge_eligible": false,
+  "meeting_autoanalysis_proven": false,
+  "question_or_oracle_acceptance": false,
+  "model_quality_acceptance": false,
+  "human_review": false,
+  "phase1_complete": false,
+  "parent_read_policy": "Safe counts/status/hashes/exposure/limits only; no source or semantic review notes."
+}

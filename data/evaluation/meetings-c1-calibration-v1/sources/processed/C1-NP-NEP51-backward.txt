@@ -1,0 +1,20 @@
+Backward compatibility
+======================
+
+We expect that most workflows will not be affected as only printing
+changes.  In general we believe that informing users about the type
+they are working with outweighs the need for adapting printing in
+some instances.
+
+The NumPy test suite includes code such as ``decimal.Decimal(repr(scalar))``.
+This code needs to be modified to use the ``str()``.
+
+An exception to this are downstream libraries with documentation and
+especially documentation testing.
+Since the representation of many values will change, in many cases
+the documentation will have to be updated.
+This is expected to require larger documentation fixups in the mid-term.
+
+It may be necessary to adopt tools for doctest testing to
+allow approximate value checking for the new representation.
+

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "commit": "ff879a00a814b1510ddff28548433158c14ac564",
+  "status": "CLOSED_PASS",
+  "runs": {
+    "push": 41201778897,
+    "pull_request": 41201783981
+  },
+  "watch_terminals": [
+    {
+      "session": 69524,
+      "chunk": "a6c503",
+      "exit_code": 0
+    },
+    {
+      "session": 85183,
+      "chunk": "1a317b",
+      "exit_code": 0
+    }
+  ],
+  "jobs": {
+    "push": [
+      {
+        "id": 124538829698,
+        "name": "web",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124538829793,
+        "name": "java-service",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124538829892,
+        "name": "backend",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "pr": [
+      {
+        "id": 124538843614,
+        "name": "backend",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124538843710,
+        "name": "java-service",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 124538843775,
+        "name": "web",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "summary": {
+    "backend-push": {
+      "passed": 6001,
+      "skipped": 21,
+      "warnings": 2,
+      "seconds": 239.14
+    },
+    "backend-pr": {
+      "passed": 6001,
+      "skipped": 21,
+      "warnings": 2,
+      "seconds": 144.69
+    },
+    "java-push": {
+      "passed": 162,
+      "failed": 0,
+      "infrastructure": 0,
+      "startup": 0,
+      "without_reports": 0,
+      "missing": 0,
+      "exit": 0
+    },
+    "java-pr": {
+      "passed": 162,
+      "failed": 0,
+      "infrastructure": 0,
+      "startup": 0,
+      "without_reports": 0,
+      "missing": 0,
+      "exit": 0
+    }
+  },
+  "limitations": [
+    "CI validates the published ff879a00 snapshot, not subsequent working QA-contract changes.",
+    "No new real model inference or human review occurs in CI. Actual v3 semantic acceptance remains 0/4."
+  ]
+}

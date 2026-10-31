@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "BOTH_REQUIRED_CI_PASSED",
+  "commit": "234c3633f19d1852e570f062218bf3ef86691f4c",
+  "runs": {
+    "push": 41014303878,
+    "pull_request": 41014308869
+  },
+  "required_jobs": [
+    "backend",
+    "web",
+    "java-service"
+  ],
+  "all_required_jobs_passed": true,
+  "watchers_closed_exit0": true,
+  "python": {
+    "passed": 5524,
+    "skipped": 21,
+    "warnings": 2,
+    "seconds": 230.23,
+    "measurement_job": 123927025146,
+    "scope": "push backend; no weights or new inference"
+  },
+  "browser_each_run": {
+    "passed": 158,
+    "failed": 0,
+    "infra_failures": 0,
+    "startup_failures": 0,
+    "missing_specs": 0,
+    "missing_runs": 0,
+    "exit_code": 0
+  },
+  "java_http_copied_database_checks_each_run": 11,
+  "synthetic_meeting_operations": "passed against actual Java",
+  "actual_AI_quality_evaluated": false,
+  "new_acquisition_build_native_model_runs": 0,
+  "parent_receipt_sha256": "57b41b449fd2f9fb1fd22903f6e00e27ab7c32885699953448d6ff187b4ff381",
+  "limitations": [
+    "Synthetic transport responses and saved-result replay do not prove actual model quality.",
+    "Persistent HTTPS transport actual remote latency and full acquisition remain unmeasured.",
+    "No public service deployment or human review."
+  ]
+}

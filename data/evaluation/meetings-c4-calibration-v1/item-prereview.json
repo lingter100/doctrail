@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "kind": "independent_item_prereview_not_final_answer_judgment",
+  "reviewed_at_utc": "2026-10-16T05:29:29.604555+00:00",
+  "verdict": "rejected",
+  "accepted_ids": [
+    "C4-CAL-01",
+    "C4-CAL-02",
+    "C4-CAL-03",
+    "C4-CAL-04",
+    "C4-CAL-06"
+  ],
+  "rejected_ids": [
+    "C4-CAL-05"
+  ],
+  "author_ids": [
+    "c4_calibration_item_author"
+  ],
+  "reviewer_id": "c4_calibration_item_review",
+  "actual_model": "gpt-6-astra",
+  "actual_reasoning_effort": "xhigh",
+  "actual_role_settings_evidence": "Parent delegation reports a new tool-accepted Astra xhigh independent review role; this record does not claim to change the parent model.",
+  "human_review_count": 0,
+  "reviewer_eligible_for_final_output_judging": false,
+  "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+  "semantic_read_preconditions": {
+    "schema_version": 1,
+    "role": "c4_calibration_item_review",
+    "phase": "calibration",
+    "pre_semantic_git_proof_passed": true,
+    "head": "1b3f3200bef92eb612db01f5dbccac4aa5c7028b",
+    "source_commit": "9a72a3333c4655e4b6bd729d23bc709de9a0525e",
+    "toolchain_commit": "6754435c3780a3ee33d46750a69ef35ff44acd3f",
+    "code_bindings": 85,
+    "source_bindings": 14,
+    "source_freeze_sha256": "8b1bac818cc1cc786ae75c275c58444ce6928ffb0940f0a4ccfdf229a9f53ce1",
+    "native_calls": 0,
+    "tokenizer_loads": 0,
+    "semantic_files_parsed_before_proof": 0
+  },
+  "reviewed_original_files_sha256": {
+    "draft.json": "b667288b60a4f93760737411106cb5b704f4794def881d8df7517a287d072098",
+    "oracle-draft.json": "68a7a4b37ac6b7badd6b0d12b90fa42ec8f470c1b89c1b30307344f60a743abc",
+    "context-selection.json": "49cc8c92e6eb6d4b11d2b55883772e4f2c4f51d218159d775a6c1733e9f382f9",
+    "item-author-receipt.json": "210f4f499bbf616be0dafa344a9354eb500368defb91251ae66276d1fa072a83"
+  },
+  "whole_family_absence_checked": true,
+  "all_sufficient_alternatives_including_repeated_passages_checked": true,
+  "all_sufficient_alternatives_accepted": false,
+  "all_sources_read_in_full": [
+    "c4-f01-doc01",
+    "c4-f01-doc02",
+    "c4-f01-doc03",
+    "c4-f02-doc01",
+    "c4-f02-doc02",
+    "c4-f02-doc03"
+  ],
+  "source_chunks_reviewed": 32,
+  "structural_verification": {
+    "draft_schema": "passed",
+    "oracle_schema_quotes_offsets_coverage": "passed",
+    "whole_source_inventory_replay": "passed",
+    "freshness_replay": "passed",
+    "existing_processing_java_receipts": "passed",
+    "whole_chunk_identity": "passed",
+    "source_metadata_identity": "passed",
+    "context_selection_identity": "passed",
+    "source_documents": 6,
+    "source_chunks": 32,
+    "cases": 6,
+    "facts": 24,
+    "tokenizer_loads": 0,
+    "native_calls": 0,
+    "semantic_acceptance_by_script": false,
+    "full_load_material": "not_run_uncommitted_item_gate_preserved"
+  },
+  "checks_distinct_from_semantic_acceptance": true,
+  "items": [
+    {
+      "id": "C4-CAL-01",
+      "verdict": "accepted",
+      "facts_checked": 4,
+      "known_facts": 4,
+      "missing_facts": 0,
+      "reason": "Question requirements, conditional work status, prototype starting point, API consistency and testing are covered. The complete relevant sentences survive the unchanged boundary-fragment catalog unit. Other full-family passages do not supply a separate sufficient route for these facts.",
+      "minimal_sufficient_document_count": 1
+    },
+    {
+      "id": "C4-CAL-02",
+      "verdict": "accepted",
+      "facts_checked": 5,
+      "known_facts": 5,
+      "missing_facts": 0,
+      "reason": "The recurring schedule and June 2 undetermined office-hour time require the June 2 record; the June 9 office-hour observation and notebook plan require June 9. Both overlapping units for the June 9 office-hour fact are enumerated. The unchecked repository task is not converted to completion.",
+      "minimal_sufficient_document_count": 2
+    },
+    {
+      "id": "C4-CAL-03",
+      "verdict": "accepted",
+      "facts_checked": 3,
+      "known_facts": 2,
+      "missing_facts": 1,
+      "reason": "Full-family review finds no confirmed URL of the dedicated notebook repository. Main-project, archive, TPS-prototype, and Jupytext links identify different resources. All June 9 chunks are supplied; absence is not produced by removing an available answer chunk.",
+      "minimal_sufficient_document_count": null
+    },
+    {
+      "id": "C4-CAL-04",
+      "verdict": "accepted",
+      "facts_checked": 4,
+      "known_facts": 4,
+      "missing_facts": 0,
+      "reason": "The particular returned driver and its unapproved reloan state are separated from the initial opening holds. The handbook independently supplies inspection and financial-rule conditions, while the meeting records no new charge decision. Both meeting and general document are necessary.",
+      "minimal_sufficient_document_count": 2
+    },
+    {
+      "id": "C4-CAL-05",
+      "verdict": "rejected",
+      "facts_checked": 4,
+      "known_facts": 4,
+      "missing_facts": 0,
+      "reason": "Required-fact content and existing registered evidence are supported, but F4 omits an already supplied sufficient single-block alternative. The explicit April-18-only decision at c4-f02-doc02-r1-c0000 offsets 638..853 is sufficient for the date-limited, nonautomatic-extension fact; every current F4 alternative unnecessarily pairs that block with another block. The frozen contract requires review of all sufficient alternatives, so the oracle inventory is incomplete.",
+      "issue_category": "sufficient_evidence_alternative_completeness",
+      "affected_fact_ids": [
+        "F4"
+      ],
+      "minimal_sufficient_document_count_after_considering_omission": 2,
+      "changes_required": "In NEW v2 artifacts, add the existing complete 638..853 block alone as an F4 evidence alternative. Preserve question, fact text, context bytes, original files, and the other five cases; seek separate re-review before freeze."
+    },
+    {
+      "id": "C4-CAL-06",
+      "verdict": "accepted",
+      "facts_checked": 4,
+      "known_facts": 2,
+      "missing_facts": 2,
+      "reason": "The proposal and Nari's prerequisite/planning step are explicit. The complete family contains no confirmed gathering date or signup capacity; the April 17 note expressly leaves both unset. Trial dates, hourly handover caps and the April 24 operations review are different subjects.",
+      "minimal_sufficient_document_count": null
+    }
+  ],
+  "coverage_after_independent_full_family_review": {
+    "ko": 3,
+    "en": 3,
+    "answered": 4,
+    "abstained": 2,
+    "required_facts": 24,
+    "general_only_answered": 1,
+    "multiple_meeting_only_answered": 1,
+    "mixed_required_answered": 1,
+    "unavoidably_multi_document_answered": 3,
+    "ko_requires_english_answered": 2,
+    "en_requires_korean_answered": 1,
+    "counts_include_rejected_item_for_composition_only": true,
+    "coverage_does_not_override_rejection": true
+  },
+  "exposure": {
+    "independent_of_item_authorship": true,
+    "candidate_protocol_contract_schema_metadata_seen": true,
+    "automatic_agents_prior_result_metadata_seen": true,
+    "calibration_sources_items_oracles_and_author_receipt_seen": true,
+    "validation_semantic_files_read": false,
+    "old_closed_pool_semantic_files_read": false,
+    "validation_filenames_seen_only": true,
+    "source_author_alternative_validation_repository_public_body_exploration": "Disclosed by parent; exact original exploration scope is partly unknown. This new reviewer did not access those bodies. Overall source workflow is not claimed pristine.",
+    "fully_blind_claim": false
+  },
+  "limitations": [
+    "AI independent prereview with human review zero; no final model outputs exist in this task.",
+    "Historical fingerprints are incomplete and complete near-duplicate absence is not proven. No old semantic pools were opened for deduplication.",
+    "Existing Java parity receipts were replayed structurally; no new Maven or runtime test was run.",
+    "Full load_material was not invoked because its real HEAD Git gate correctly requires committed item artifacts. No gate was bypassed and official prepare/CLI was not invoked.",
+    "Whole catalog units may contain existing source-chunk boundary fragments; this review judged complete relevant clauses, not a false claim that all source paragraphs were physically uncut."
+  ],
+  "preserved_review_diagnostics": [
+    "Initial source display failed on Windows cp949 U+2013 encoding; rerun used UTF-8 stdout. No item artifacts were written by that display.",
+    "First compact item display used nonexistent payload.question instead of payload.query; corrected read-only display, with no data edits.",
+    "Initial structural helper import named AnswerContext instead of the actual Context class; import failed before checks; corrected helper passed all recorded model-free checks."
+  ],
+  "item_freeze_created": false,
+  "tokenizer_loads": 0,
+  "native_calls": 0,
+  "model_inference_calls": 0,
+  "downloads": 0,
+  "maven_runs": 0,
+  "git_mutations": 0
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "INDEPENDENT_REVIEW_PASSED_PENDING_EXACT_CI",
+  "baseline_commit": "234c3633f19d1852e570f062218bf3ef86691f4c",
+  "scope": "Exactly three pinned source-position literals; no additional execution permission",
+  "source_hashes": {
+    "scripts/prepare_summary_grammar_engine.py": "f0ed8a4c6768567f2cfb794b6ba78817ab53a910db07e1b7f8a7fdaa2cfdb117",
+    "tests/test_summary_grammar_engine.py": "5200a9bf19132c25dbf13e08036baa4075f444487d4c49eb1c839cb4b45a638f"
+  },
+  "fixed_line": 61,
+  "previous_incorrect_line": 55,
+  "validation": {
+    "focused_passed": 40,
+    "reported_seconds": 88.47,
+    "initial_functional_failures": 0,
+    "actual_module_metadata_checks": 1,
+    "actual_module_bytes": 11218,
+    "actual_module_sha256": "edc2abe122ba69089d9ff23a15916e474e3309bc64d3ccf5f7c04451abe1b7ab",
+    "actual_module_check": "Copied original module bytes into existing synthetic binding environment; runtime_bindings, optional_probe_guard and audit_trace passed",
+    "other_tool_files_in_actual_module_check": "synthetic non-executable bytes",
+    "initial_ruff": "I001 preserved",
+    "final_ruff": "passed",
+    "post_test_change": "one blank line removed after imports; AST equal; no test logic rerun needed"
+  },
+  "coverage": [
+    "valid61 binding/trace from independent observed excerpt",
+    "old55, shifted and duplicate command, changed arguments rejected",
+    "old binding/trace, module hash mutation, ld presence/unreadability and unexpected child remain rejected"
+  ],
+  "implementation_receipt_sha256": "fb86636c7b4618c5eb8d273e179ea85e3653a73b8f5ca0c0fca077356591d83d",
+  "parent_receipt_sha256": "a80f52fa15263f9330a6345326e550a3ca84bd5527bb021342c5e814fa3a7c1d",
+  "parent_refs_verified": 27,
+  "git_original_copies_verified": 2,
+  "whole_v7_payload_rehashes": 0,
+  "network_native_acquisition_model_runs": 0,
+  "limitations": [
+    "Real module bytes were read and copied; no compiler or native engine was executed.",
+    "v7 remains failed and consumed.",
+    "Fixed-position repair does not prove complete acquisition, build or summary quality."
+  ],
+  "independent_review": {
+    "blockers": 0,
+    "advisories": 0,
+    "receipt_sha256": "a75a4eaa47a3ee6aaf94d238a3bd3587f20f63d43a70ee8bd1bb8a0cbcb2ab4c",
+    "parent_receipt_sha256": "7ff7c32746c4dcca0483c65df0855100c2af3680391e84a1108eff8f5a2b5a0d",
+    "parent_refs_verified": 10,
+    "new_reviewer_tests": 0,
+    "actual_excerpt_matched_real_module_bytes": true
+  }
+}

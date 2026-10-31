@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_validation_v3_independent_item_review",
+  "phase": "validation",
+  "status": "rejected_incomplete_sufficient_alternatives",
+  "review_completed_at_utc": "2026-10-20T08:54:42.288505+00:00",
+  "reviewer": {
+    "actor": "/root/service_rag_validation_source_review",
+    "registered_model": "gpt-6-astra",
+    "registered_reasoning_effort": "xhigh",
+    "registered_fork_turns": "none",
+    "runtime_model_self_verified": false,
+    "same_split_source_reviewer_reused": true,
+    "distinct_from_source_and_item_author": true,
+    "source_and_item_author": "/root/service_rag_validation_sources",
+    "final_answer_judge_eligible": false,
+    "human_reviewer": false
+  },
+  "registration": {
+    "path": "data/evaluation/meetings-service-rag-validation-items-registration-v3.json",
+    "bytes": 4835,
+    "sha256": "460e5ed23408adc469193221cbd94b9ce895728928139e415232b34ca0690057"
+  },
+  "parent_reported_required_ci_gate": "accepted 3bb8dd4 push and PR required checks passed; supplied by parent, no reviewer Git/network verification",
+  "source_freeze": {
+    "path": "data/evaluation/meetings-service-rag-validation-v3/source-freeze-v3.json",
+    "bytes": 35587,
+    "sha256": "3ffde1172db6cd7a6c762084645d2c802882ecd21c2d554237bb093b8652a6b6"
+  },
+  "author_originals": [
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/draft-questions-v1.json",
+      "bytes": 2891,
+      "sha256": "1f0c77627c8ee6facc39d388b2e7208cb635882d01dd1274e9dfc57fa73ea9f4"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/draft-oracle-v1.json",
+      "bytes": 93902,
+      "sha256": "37af4be7a1a83f2bb7479e56ee16cd870f632622d8d055285a7cd92667907227"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/item-selection-v1.json",
+      "bytes": 7287,
+      "sha256": "8167e71f30096aa3071d780c9589ebb76fe9a361412205081e6b4cc368b18d39"
+    },
+    {
+      "path": "data/evaluation/meetings-service-rag-validation-v3/item-author-receipt-v1.json",
+      "bytes": 5788,
+      "sha256": "81588dfa82ff0dd70c206c6c2db963fe226975e2ea714519c237bbaa804193ba"
+    }
+  ],
+  "counts": {
+    "reviewed_items": 8,
+    "accepted_items": 7,
+    "rejected_items": 1,
+    "original_items": 8,
+    "original_ko": 4,
+    "original_en": 4,
+    "original_answered": 4,
+    "original_abstained": 4,
+    "accepted_answered": 3,
+    "accepted_abstained": 4,
+    "accepted_ko": 3,
+    "accepted_en": 4,
+    "required_facts": 31,
+    "supported_required_facts": 19,
+    "absent_requested_values": 12,
+    "facts_with_incomplete_alternatives": 1,
+    "missing_alternative_locations": 2,
+    "existing_exact_evidence_spans": 41,
+    "existing_chunk_cover_alternatives": 43,
+    "existing_chunk_quote_bindings": 45,
+    "coordinate_failures": 0,
+    "author_edits": 0,
+    "source_edits": 0,
+    "source_freeze_bindings_verified": 51,
+    "registration_bindings_verified": 6,
+    "new_review_files": 3,
+    "item_freezes_created": 0
+  },
+  "case_decisions": [
+    {
+      "id": "SRV3-V01",
+      "decision": "accepted",
+      "expected_status": "answered",
+      "answer_language": "ko",
+      "required_fact_count": 4,
+      "whole_six_document_review": true,
+      "required_statements_and_qualifications": "pass",
+      "question_clarity_and_language": "pass",
+      "availability_or_absence": "pass",
+      "existing_quote_and_coordinate_bindings": "pass",
+      "all_sufficient_semantic_alternatives": "pass",
+      "finding_ids": [],
+      "rationale": "Four facts match the full general source: team purpose/collaboration, three connected goals, transition with targeted fixes, and weekly design/knowledge-sharing meetings. Related project minutes do not independently supply the complete charter and meeting-purpose facts. Korean wording is natural and requires English-source interpretation."
+    },
+    {
+      "id": "SRV3-V02",
+      "decision": "accepted",
+      "expected_status": "answered",
+      "answer_language": "en",
+      "required_fact_count": 5,
+      "whole_six_document_review": true,
+      "required_statements_and_qualifications": "pass",
+      "question_clarity_and_language": "pass",
+      "availability_or_absence": "pass",
+      "existing_quote_and_coordinate_bindings": "pass",
+      "all_sufficient_semantic_alternatives": "pass",
+      "finding_ids": [],
+      "rationale": "Five facts distinguish expiry of the bounded exception, normal duration, extension conditions and validity, and the actual one-ready/one-pending returned-kit state. Both alternative sources for the reversion fact are retained. Numeric rules require the general document and the observed return state requires the later meeting, so every full sufficient alternative needs multiple documents. English wording refers unambiguously to the fictional institution."
+    },
+    {
+      "id": "SRV3-V03",
+      "decision": "rejected",
+      "expected_status": "answered",
+      "answer_language": "ko",
+      "required_fact_count": 5,
+      "whole_six_document_review": true,
+      "required_statements_and_qualifications": "pass",
+      "question_clarity_and_language": "pass",
+      "availability_or_absence": "pass",
+      "existing_quote_and_coordinate_bindings": "pass",
+      "all_sufficient_semantic_alternatives": "fail",
+      "finding_ids": [
+        "VAL-ITEM-V1-001"
+      ],
+      "rationale": "The five required statements and their temporal qualifications are supported, and both dated meetings are necessary. However V03-F2 omits two independent sufficient locations from the same later source. Reject this item for alternative completeness only; truth, language, query wording, status and existing coordinate bindings pass."
+    },
+    {
+      "id": "SRV3-V04",
+      "decision": "accepted",
+      "expected_status": "answered",
+      "answer_language": "en",
+      "required_fact_count": 5,
+      "whole_six_document_review": true,
+      "required_statements_and_qualifications": "pass",
+      "question_clarity_and_language": "pass",
+      "availability_or_absence": "pass",
+      "existing_quote_and_coordinate_bindings": "pass",
+      "all_sufficient_semantic_alternatives": "pass",
+      "finding_ids": [],
+      "rationale": "The five facts correctly separate initial two-bag trial approval, observed attachment/confusion, later future replacement with owner/deadline, scope for other bags, and kit-content limits. Both dated meetings are required for the complete chronology. Romanization variants for the named fictional assignee are allowed."
+    },
+    {
+      "id": "SRV3-V05",
+      "decision": "accepted",
+      "expected_status": "abstained",
+      "answer_language": "ko",
+      "required_fact_count": 3,
+      "whole_six_document_review": true,
+      "required_statements_and_qualifications": "pass",
+      "question_clarity_and_language": "pass",
+      "availability_or_absence": "pass",
+      "existing_quote_and_coordinate_bindings": "pass",
+      "all_sufficient_semantic_alternatives": "pass",
+      "finding_ids": [],
+      "rationale": "All three requested amounts are absent from the full corpus. Later replacement-cost uncertainty and the general exclusion of prices/compensation/travel amounts support the boundary; no unrelated source supplies amounts. Optional context is not required, and unknown does not mean zero or borrower fault."
+    },
+    {
+      "id": "SRV3-V06",
+      "decision": "accepted",
+      "expected_status": "abstained",
+      "answer_language": "en",
+      "required_fact_count": 3,
+      "whole_six_document_review": true,
+      "required_statements_and_qualifications": "pass",
+      "question_clarity_and_language": "pass",
+      "availability_or_absence": "pass",
+      "existing_quote_and_coordinate_bindings": "pass",
+      "all_sufficient_semantic_alternatives": "pass",
+      "finding_ids": [],
+      "rationale": "The full public family contains a conditional future official-model intention but no adopted release, actual adoption date or approved RFC number. Unrelated fictional sources supply none. Abstention is limited to these records and does not claim that adoption never occurred externally."
+    },
+    {
+      "id": "SRV3-V07",
+      "decision": "accepted",
+      "expected_status": "abstained",
+      "answer_language": "ko",
+      "required_fact_count": 3,
+      "whole_six_document_review": true,
+      "required_statements_and_qualifications": "pass",
+      "question_clarity_and_language": "pass",
+      "availability_or_absence": "pass",
+      "existing_quote_and_coordinate_bindings": "pass",
+      "all_sufficient_semantic_alternatives": "pass",
+      "finding_ids": [],
+      "rationale": "The full sources show a proposed driver, a separate implementation intention and goals for portions of a test suite. They give no final driver assignee, actual introduction date or measured entire-suite pass rate. Issue numbers, a planned Wednesday and stated intentions are not substituted for the requested outcomes."
+    },
+    {
+      "id": "SRV3-V08",
+      "decision": "accepted",
+      "expected_status": "abstained",
+      "answer_language": "en",
+      "required_fact_count": 3,
+      "whole_six_document_review": true,
+      "required_statements_and_qualifications": "pass",
+      "question_clarity_and_language": "pass",
+      "availability_or_absence": "pass",
+      "existing_quote_and_coordinate_bindings": "pass",
+      "all_sufficient_semantic_alternatives": "pass",
+      "finding_ids": [],
+      "rationale": "The later fictional meeting defers guide release until approval and defers the next institution/dispatch until reservations are settled. Earlier shipment and draft/tag deadlines do not supply those missing values. A concise English abstention covering all three requested slots is sufficient."
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "VAL-ITEM-V1-001",
+      "severity": "blocking_for_item_acceptance",
+      "case_id": "SRV3-V03",
+      "fact_id": "V03-F2",
+      "category": "incomplete_sufficient_evidence_alternatives",
+      "oracle_pointer": "/cases/2/required_facts/1/evidence_alternatives",
+      "status": "unresolved_no_author_file_edited",
+      "current_alternatives": [
+        [
+          "PM2-subtyping"
+        ]
+      ],
+      "missing_independent_source_locations": [
+        {
+          "review_evidence_id": "REVIEW-V03-F2-LAYERS",
+          "source_id": "V3-P-M2",
+          "source_revision": 1,
+          "source_start_offset": 1045,
+          "source_end_offset": 1139,
+          "quote": "* *Built-in Rust rules:* The **ty layer** implements various built-in relations like subtyping",
+          "chunk_cover_alternatives": [
+            [
+              {
+                "source_id": "V3-P-M2",
+                "source_revision": 1,
+                "chunk_id": "V3-P-M2-r1-c0001",
+                "chunk_text_sha256": "33d152e71f92a47fa800cd559309f66c29058c525fb6012aa2d91381d71dede0",
+                "page": null,
+                "ordinal": 1,
+                "source_start_offset": 1045,
+                "source_end_offset": 1139,
+                "chunk_start_offset": 198,
+                "chunk_end_offset": 292,
+                "quote": "* *Built-in Rust rules:* The **ty layer** implements various built-in relations like subtyping"
+              }
+            ]
+          ],
+          "role": "Independent whole-source semantic finding; not an authored oracle addition."
+        },
+        {
+          "review_evidence_id": "REVIEW-V03-F2-TABLE",
+          "source_id": "V3-P-M2",
+          "source_revision": 1,
+          "source_start_offset": 4978,
+          "source_end_offset": 5057,
+          "quote": "| Rust subtyping | :heavy_check_mark: | modeled by the ty layer and also decl |",
+          "chunk_cover_alternatives": [
+            [
+              {
+                "source_id": "V3-P-M2",
+                "source_revision": 1,
+                "chunk_id": "V3-P-M2-r1-c0005",
+                "chunk_text_sha256": "3e2e8024b15b6ff1bed4fa39c83c9b513389e40c2e86319a514a58308295ee45",
+                "page": null,
+                "ordinal": 5,
+                "source_start_offset": 4978,
+                "source_end_offset": 5057,
+                "chunk_start_offset": 759,
+                "chunk_end_offset": 838,
+                "quote": "| Rust subtyping | :heavy_check_mark: | modeled by the ty layer and also decl |"
+              }
+            ]
+          ],
+          "role": "Independent whole-source semantic finding; not an authored oracle addition."
+        }
+      ],
+      "reason": "The May source independently states in its layers description that the types layer implements subtyping, and in its static-check table that Rust subtyping is modeled by the types and declaration layers. Both passages support the bounded required fact that the May model includes subtyping. The oracle lists only the earlier Current status bullet and records fact_alternative_counts[1]=1. The two distinct locations are absent from evidence_spans and the fact alternatives.",
+      "table_interpretation_limit": "The table checkmark means part of the first goal and is not alone treated as proof of completion. Sufficiency here relies on the explicit How text modeled by the ty layer and also decl, consistent with the present-tense layer description. Neither passage proves complete coverage, production deployment or correctness.",
+      "impact": "The per-fact evidence/citation alternatives are incomplete and could reject a supported citation to either distinct location. This is not an observed model failure. For the whole case, the current evidence for a different fact still requires the original first May chunk; therefore no changed minimal whole-case retrieval coverage or source-set requirement is claimed solely from this finding.",
+      "required_action": "In a separately authorized new revision, retain original questions, expected status, required statement and other facts/cases; encode both additional independently sufficient passages as OR alternatives for V03-F2, preserve exact source/chunk coordinates and update derived alternative counts. Do not overwrite v1 originals or alter the accepted sources."
+    }
+  ],
+  "author_safe_feedback": {
+    "audience": "Same validation item author only; parent must not read semantic details.",
+    "format": "Separate structured feedback metadata within this immutable review, distinct from the author originals and safe parent summary.",
+    "items": [
+      {
+        "finding_id": "VAL-ITEM-V1-001",
+        "case_id": "SRV3-V03",
+        "fact_id": "V03-F2",
+        "allowed_proposed_scope": "Two sufficient evidence alternatives and derived bookkeeping only in a prospectively authorized new oracle version. No change to original queries, statuses, source corpus, required fact meanings or unaffected cases.",
+        "source_locations": [
+          {
+            "review_evidence_id": "REVIEW-V03-F2-LAYERS",
+            "source_id": "V3-P-M2",
+            "start_offset": 1045,
+            "end_offset": 1139,
+            "chunk_ids": [
+              "V3-P-M2-r1-c0001"
+            ]
+          },
+          {
+            "review_evidence_id": "REVIEW-V03-F2-TABLE",
+            "source_id": "V3-P-M2",
+            "start_offset": 4978,
+            "end_offset": 5057,
+            "chunk_ids": [
+              "V3-P-M2-r1-c0005"
+            ]
+          }
+        ],
+        "acceptance_check": "A new independent review must confirm both OR alternatives, exact quotes/offsets, factorized counts and unchanged v1/source bindings before any item freeze."
+      }
+    ],
+    "new_revision_authorized_by_this_review": false
+  },
+  "mechanical_review": {
+    "questions_exact_contract": true,
+    "question_trim_stable": true,
+    "ids_unique_and_order_matches": true,
+    "logical_source_ids_no_runtime_uuid": true,
+    "source_identities_revisions_raw_and_processed_hashes": true,
+    "original_language_status_counts": true,
+    "required_fact_count_between_3_and_6": true,
+    "all_existing_source_quotes_exact": true,
+    "all_existing_chunk_quotes_hashes_coordinates_exact": true,
+    "all_minimal_chunk_covers_for_recorded_spans_enumerated": true,
+    "factorized_alternative_counts_and_source_sets_match_authored_references": true,
+    "no_original_coordinate_mismatches": true,
+    "no_retrieval_or_tokenizer_used": true,
+    "new_framework_or_helper_files_created": false,
+    "unit_test_suite_run": false
+  },
+  "coverage_review": {
+    "general_only_original": 1,
+    "multiple_meetings_original": 2,
+    "mixed_meeting_general_original": 1,
+    "all_sufficient_alternatives_require_multiple_documents_original": 3,
+    "ko_query_en_evidence_answered_original": 2,
+    "en_query_ko_evidence_answered_original": 2,
+    "coverage_requirements_structurally_met": true,
+    "semantic_coverage_accepted_for_7_only": true,
+    "validation8_all_accepted": false
+  },
+  "preservation": {
+    "before_review_author_files_verified": 4,
+    "after_review_author_files_verified": 4,
+    "before_review_source_freeze_bindings_verified": 51,
+    "after_review_source_freeze_bindings_verified": 51,
+    "author_original_edits": 0,
+    "accepted_source_edits": 0,
+    "prior_source_review_edits": 0,
+    "item_freeze_absent": true
+  },
+  "prior_failure_provenance": {
+    "author_initial_blocked_dispatch_preserved_in_unchanged_receipt": true,
+    "parent_reported_oracle_hash_return_transcription_typo": {
+      "characters_reported": 65,
+      "initial_parent_assertion_failed": true,
+      "file_bytes_unchanged": true,
+      "correct_file_sha256": "37af4be7a1a83f2bb7479e56ee16cd870f632622d8d055285a7cd92667907227",
+      "reviewer_observed_original_failed_parent_call": false
+    },
+    "reviewer_item_review_failed_commands": 0
+  },
+  "exposure": {
+    "previous_own_split_source_review": true,
+    "current_own_split_all_six_sources_and_66_chunks": true,
+    "current_own_split_draft_questions_oracle_selection_receipt": true,
+    "generic_registered_contract_and_project_status_metadata": true,
+    "other_split_source_question_oracle_semantics": false,
+    "closed_evaluation_questions_oracles": false,
+    "model_outputs": false,
+    "other_split_semantic_notes": false,
+    "fresh_memory_lookup_this_item_task": false,
+    "pristine_or_blind_claim": false
+  },
+  "execution_counts": {
+    "network": 0,
+    "retrieval": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "model": 0,
+    "model_downloads": 0,
+    "java": 0,
+    "maven": 0,
+    "git": 0,
+    "browser": 0,
+    "human_review": 0
+  },
+  "notes": {
+    "path": "data/evaluation/meetings-service-rag-validation-v3/item-review-notes-v1.md",
+    "bytes": 6223,
+    "sha256": "83217cea4540cf7b1897ea07fbd14337201c412b9e745167f50e635c247e12b9"
+  },
+  "limits": [
+    "Seven accepted items do not satisfy the required complete validation8 acceptance gate; no item freeze is created.",
+    "Existing coordinate and payload checks are mechanical evidence; one semantic alternative-completeness blocker remains.",
+    "Whole-corpus absence is judged only within the six accepted sources; external linked material is not part of the corpus.",
+    "Historical fingerprint metadata gaps and cross-split semantic/translation duplicate uncertainty remain.",
+    "No actual retrieval, tokenizer, context budget, native/model, Java, browser or final answer evaluation was executed.",
+    "The same independent source reviewer is reused; source/item authorship remains separate and final answer judging is excluded."
+  ],
+  "parent_read_policy": "Byte/hash only for review/notes; read item-review-summary-v1.json for safe counts/status/hash/exposure/limits.",
+  "human_review": false,
+  "phase1_complete": false
+}

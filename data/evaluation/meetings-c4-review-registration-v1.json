@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "c4-independent-final-answer-review-registration",
+  "registered_at_utc": "2026-10-16T05:44:53.728006+00:00",
+  "judges": {
+    "calibration": {
+      "reviewer_id": "/root/c4_calibration_final_judge",
+      "attestation": {
+        "file": "data/evaluation/meetings-c4-review-metadata-v1/calibration/attestation.json",
+        "sha256": "670935d04e98e6cec5f9a3f9250a17248495f330eb229176d6710be4285d3070"
+      },
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "exposure": "metadata-exposed, label-masked",
+      "output_pack_opened": false,
+      "seed": {
+        "file": "data/evaluation/meetings-c4-review-metadata-v1/calibration/seed.bin",
+        "sha256": "d25c023273003bb718c07e5e565ed7970049973a84ec0846580d5ef88bdbe223",
+        "bytes": 64,
+        "encoding": "ASCII hexadecimal; 256-bit random entropy; no newline"
+      }
+    },
+    "validation": {
+      "reviewer_id": "/root/c4_validation_final_judge",
+      "attestation": {
+        "file": "data/evaluation/meetings-c4-review-metadata-v1/validation/attestation.json",
+        "sha256": "b6bc646dbdfc337a696e87b6d0a53012ca26afd4ed7330c38249186f584ee5e2"
+      },
+      "actual_model": "gpt-6-astra",
+      "actual_effort": "xhigh",
+      "fork_turns": "none",
+      "exposure": "metadata-exposed, label-masked",
+      "output_pack_opened": false,
+      "seed": {
+        "file": "data/evaluation/meetings-c4-review-metadata-v1/validation/seed.bin",
+        "sha256": "f562fb21e38508360c4e47b3c8a01e5ce8801c2ab4b286632fe6154975d72111",
+        "bytes": 64,
+        "encoding": "ASCII hexadecimal; 256-bit random entropy; no newline"
+      }
+    }
+  },
+  "quality_native_calls_at_registration": 0,
+  "human_reviews": 0,
+  "judgment_order": "Anonymous final answers only; lock judgment SHA before mapping/reasoning disclosure.",
+  "validation_condition": "Only after original calibration 6/6 and operational integrity gate; registration does not open validation."
+}

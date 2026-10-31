@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "candidate_id": "meeting-answer-single-thinking-c6-v1",
+  "kind": "prospective_item_revision_path_authorization",
+  "registered_at": "2026-10-20T03:22:43.558943+00:00",
+  "prior_registration": {
+    "file": "data/evaluation/meetings-c6-role-registration-v1.json",
+    "sha256": "bbad1743d2c74a52052c8cb8091e32faf0fea2166666fa742a4b100d4df1b476",
+    "committed_at": "0755660866488bb83fb2d7330c008b2ba1da192f"
+  },
+  "parent_head": "eae71405b679f19ec2f7c53a591bc64052c3de17",
+  "reason": "Each independent split prereviewer reports one missing sufficient evidence alternative. Preserve both original author4 and review3 sets. The same isolated split author may correct only the specified oracle fact in NEW v2 after the original/rejection and this authorization are committed. No tokenizer/native input exists.",
+  "extensions": [
+    {
+      "role_id": "/root/c6_calibration_author",
+      "phase": "calibration",
+      "new_paths": [
+        "data/evaluation/meetings-c6-calibration-v1/draft-v2.json",
+        "data/evaluation/meetings-c6-calibration-v1/oracle-draft-v2.json",
+        "data/evaluation/meetings-c6-calibration-v1/context-selection-v2.json",
+        "data/evaluation/meetings-c6-calibration-v1/author-receipt-v2.json"
+      ]
+    },
+    {
+      "role_id": "/root/c6_calibration_prereviewer",
+      "phase": "calibration",
+      "new_paths": [
+        "data/evaluation/meetings-c6-calibration-v1/item-prereview-v2.json",
+        "data/evaluation/meetings-c6-calibration-v1/item-prereview-notes-v2.md",
+        "data/evaluation/meetings-c6-calibration-v1/item-review-metadata-summary-v2.json",
+        "data/evaluation/meetings-c6-calibration-v1/item-freeze-v2.json"
+      ]
+    },
+    {
+      "role_id": "/root/c6_validation_author",
+      "phase": "validation",
+      "new_paths": [
+        "data/evaluation/meetings-c6-validation-v1/draft-v2.json",
+        "data/evaluation/meetings-c6-validation-v1/oracle-draft-v2.json",
+        "data/evaluation/meetings-c6-validation-v1/context-selection-v2.json",
+        "data/evaluation/meetings-c6-validation-v1/author-receipt-v2.json"
+      ]
+    },
+    {
+      "role_id": "/root/c6_validation_prereviewer",
+      "phase": "validation",
+      "new_paths": [
+        "data/evaluation/meetings-c6-validation-v1/item-prereview-v2.json",
+        "data/evaluation/meetings-c6-validation-v1/item-prereview-notes-v2.md",
+        "data/evaluation/meetings-c6-validation-v1/item-review-metadata-summary-v2.json",
+        "data/evaluation/meetings-c6-validation-v1/item-freeze-v2.json"
+      ]
+    }
+  ],
+  "limits": [
+    "Read only the author-safe correction, never reviewer notes, other split semantics or final judge data.",
+    "Keep question/context and unchanged cases byte/canonical-equivalent; only the explicitly reviewed evidence-alternative gap may change.",
+    "Actual new HEAD/source/code/role proof before new source reads or v2 artifact writing; preserve original proof/author timing disclosure.",
+    "No source edits, old-pool reruns, tokenizer/native, changing budgets, or automatic freeze."
+  ],
+  "role_id_model_effort_acceptance_unchanged": true,
+  "new_role_acceptance_claimed": false,
+  "v2_artifacts_created_at_registration": 0,
+  "semantic_reads_by_parent": 0,
+  "updated_at_before_v2": "2026-10-20T03:25:07.553606+00:00",
+  "safe_feedback_files": {
+    "calibration": ".local/meetings-c6-calibration-item-review-v1/author-safe-correction-v1.json",
+    "validation": ".local/meetings-c6-validation-item-review-v1/author-safe-feedback-v1.json"
+  },
+  "local_prepublication_calibration_only_draft": {
+    "file": ".local/c6-calibration-only-revision-authorization-draft-v1.json",
+    "sha256": "95ca9bd69e18504d3419c4cf26a8ce4a78fa78972448119c8b28333b47b7986d",
+    "used_for_v2_authorship": false
+  }
+}

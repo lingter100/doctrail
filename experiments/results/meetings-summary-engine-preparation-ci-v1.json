@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-27",
+  "head": "9a6ba117de8bdb6752d0b083cce07eb7e2eb3487",
+  "status": "failed_preserved_not_retried",
+  "runs": [
+    {
+      "id": 40452226824,
+      "event": "push",
+      "watch_session": 92377,
+      "watch_exit_code": 1,
+      "watch_closed": true,
+      "jobs": [
+        {
+          "id": 122017359827,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122017360054,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 122017360102,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40452231318,
+      "event": "pull_request",
+      "watch_session": 5685,
+      "watch_exit_code": 1,
+      "watch_closed": true,
+      "jobs": [
+        {
+          "id": 122017374176,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 122017374366,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122017374385,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "diagnosis": {
+    "test": "test_ninja_unknown_pin_is_not_an_executable_lock",
+    "error": "BoundaryError: pins_changed",
+    "cause": "Parent publication normalized pins.json CRLF to LF but left runtime.PINS_SHA bound to the old raw bytes; JSON semantic identity did not preserve the byte contract.",
+    "scope": "Publication binding mismatch, not observed compiler/native engine failure.",
+    "next": "Preserve failed run and original bytes; bind the LF manifest hash exactly and verify before a new source commit."
+  },
+  "actual_acquisition_build_native": 0,
+  "scope": "Remote CI of this exact source; uncommitted Java/React history is excluded."
+}

@@ -1,0 +1,44 @@
+{
+  "kind": "implementation_unit_verification_only",
+  "owned_files": {
+    "tests/fixtures/meeting-admission-diagnostic-v1.json": "ac7c452afd1fee257cf01e4f0b7752ac17e0636747521ce7025d2016bc09fa48",
+    "scripts/diagnose_meeting_admission.py": "c7fbe495eaba69ad9670231798677d3a1eb91edca230bd0ef2da9ef777a0a211",
+    "tests/test_diagnose_meeting_admission.py": "469d5748cbe5218c4aca50586553c47ade7446ae835bb2e498198871bbce4d98"
+  },
+  "same_before_final_tests_and_after": true,
+  "frozen_bound_files_checked": 77,
+  "frozen_mismatches": [],
+  "official_directory_exists": false,
+  "initial_tests": {
+    "seconds": 10.55,
+    "passed": 11
+  },
+  "initial_ruff": {
+    "findings": 7,
+    "preserved": true
+  },
+  "final_tests": {
+    "seconds": 13.82,
+    "passed": 11
+  },
+  "final_ruff": "passed",
+  "log_hashes": {
+    "final-pytest.log": "1852979c205aa4dbe547d72f807195c03feb748038c1173037e314b13837387b",
+    "initial-ruff.log": "a9c279ade1454b867356ba321ebf10cdd1881dc5cbe3128f504c48da53f39d4e",
+    "before-final-boundary.json": "25f763c1b12f33a49e7dee9228d92ed1b626e55f7cdbdbe6f096ac8059e5d559",
+    "before-initial-tests.json": "936ffea22e3797939350c323a0d87e216f9b26645badc83d0b2751bf2a1950d1",
+    "initial-pytest.log": "b7df015ed05e081d3847345d1fffe7b8e203f02d3005c82c92bda82db2fc181d",
+    "before-final-tests.json": "fa7e7ccbefd00c4baa871edca74a530678632c87de53d524a0e59cdfec478a15",
+    "final-ruff.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+  },
+  "observer_caveat": "before-final-boundary.json checked field accidentally contains 77 individual counts of 1; final count corrected here without editing original evidence",
+  "limits": [
+    "temporary synthetic unit repositories only",
+    "official diagnostic runs 0",
+    "no official CLI execution",
+    "no actual source or pool semantic reads",
+    "no network/tokenizer/native/Maven/model calls",
+    "no Git mutation of actual checkout",
+    "normal CI and official committed binding remain parent work"
+  ]
+}

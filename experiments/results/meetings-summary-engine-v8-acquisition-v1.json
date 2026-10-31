@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "ACTUAL_ACQUISITION_FAILED_EXTERNAL_DEADLINE",
+  "source_head": "0a9819e26f4320dedc76aa3d219b52a23a5936b8",
+  "profile": "llvm-x64-sampled-50ms-1800s-v1",
+  "actual_cli_count": 1,
+  "once_consumed": true,
+  "retry_count": 0,
+  "limits_extended": false,
+  "cli_exit_code": 15,
+  "natural_cli_terminal_observed": false,
+  "natural_cli_elapsed_seconds": null,
+  "wrapper_exit_code": 1,
+  "wrapper_elapsed_seconds": 1810.985,
+  "cleanup_started_seconds": 1795.015,
+  "first_failure": "observer:RuntimeError:external_scan_deadline",
+  "worker_phase_end_count": 13,
+  "worker_phases": [
+    {
+      "duration_seconds": 27.422,
+      "end_seconds": 27.469,
+      "phase": "download-llvm",
+      "start_seconds": 0.047
+    },
+    {
+      "duration_seconds": 119.781,
+      "end_seconds": 147.281,
+      "phase": "extract-llvm",
+      "start_seconds": 27.5
+    },
+    {
+      "duration_seconds": 39.656,
+      "end_seconds": 205.719,
+      "phase": "inventory-llvm",
+      "start_seconds": 166.063
+    },
+    {
+      "duration_seconds": 21.969,
+      "end_seconds": 243.891,
+      "phase": "download-cmake",
+      "start_seconds": 221.922
+    },
+    {
+      "duration_seconds": 98.343,
+      "end_seconds": 357.781,
+      "phase": "extract-cmake",
+      "start_seconds": 259.438
+    },
+    {
+      "duration_seconds": 44.812,
+      "end_seconds": 440.453,
+      "phase": "inventory-cmake",
+      "start_seconds": 395.641
+    },
+    {
+      "duration_seconds": 46.0,
+      "end_seconds": 525.438,
+      "phase": "download-ninja",
+      "start_seconds": 479.438
+    },
+    {
+      "duration_seconds": 83.797,
+      "end_seconds": 680.578,
+      "phase": "extract-ninja",
+      "start_seconds": 596.781
+    },
+    {
+      "duration_seconds": 66.36,
+      "end_seconds": 836.219,
+      "phase": "inventory-ninja",
+      "start_seconds": 769.859
+    },
+    {
+      "duration_seconds": 72.625,
+      "end_seconds": 956.766,
+      "phase": "source-metadata",
+      "start_seconds": 884.141
+    },
+    {
+      "duration_seconds": 533.469,
+      "end_seconds": 1564.172,
+      "phase": "sources",
+      "start_seconds": 1030.703
+    },
+    {
+      "duration_seconds": 42.437,
+      "end_seconds": 1650.406,
+      "phase": "licenses",
+      "start_seconds": 1607.969
+    },
+    {
+      "duration_seconds": 42.656,
+      "end_seconds": 1733.469,
+      "phase": "manifest",
+      "start_seconds": 1690.813
+    }
+  ],
+  "last_worker_checkpoint": {
+    "phase": "manifest",
+    "state": "end",
+    "elapsed_seconds": 1733.469,
+    "download_body_bytes_recorded": 252275373,
+    "worker_scan_count": 27,
+    "worker_scan_entries": 288533,
+    "worker_scan_cumulative_seconds": 1018.424,
+    "scope": "Saved worker checkpoint before forced cleanup; scan timing is not external observer timing or causal speedup."
+  },
+  "preservation": {
+    "frozen_rows_verified": 461,
+    "source_files_git_exact": 15,
+    "preserved_payload_files": 15675,
+    "preserved_payload_bytes": 845711438,
+    "known_outer_identities_absent": 9,
+    "known_inner_identities_absent": 6,
+    "identity_sets_may_overlap": true,
+    "initial_runtime_path_comparison_false_rows": 4,
+    "correction": "Only relative versus absolute file spelling; resolved path, SHA256 and byte size equal. Initial comparison and FINAL retained.",
+    "parent_repeated_payload_body_hashing": false
+  },
+  "evidence_sha256": {
+    "final": "e2591278e6ab6cf82a910f5cc4e68d2d07b5a8b38d9223f08ccce114faeee7e3",
+    "addendum": "48c4038626d25c8322f59cba029021d918d00547883d768c4f0589bb99c273bc",
+    "parent_closeout": "aca783e9afb2e154c62f07409fb39923f446d464ca7b1c02dd613d9ba8fc3ff9",
+    "phase_telemetry": "81562af278e6c1ddad7da3399fd6e5b877e33b68b0fb4749ba28c939c42a1221",
+    "preserved_inventory": "5ac909df2d1c768d44811b37e22479fc6889717b815f17f1c37bac1dad747799"
+  },
+  "build_runs": 0,
+  "native_grammar_runs": 0,
+  "model_runs": 0,
+  "companion_acceptance_created": false,
+  "human_reviewed": false,
+  "limitations": [
+    "13 worker phase end records do not establish full acquisition success or natural CLI completion.",
+    "The missing final acquisition.json and external deadline remain failures. Raw metadata permits a static binding inference but is not natural outer CLI completion, executable acceptance or native probe success.",
+    "Observed sampled process cleanup is not a whole-machine process audit.",
+    "No causal speedup or service/AI quality claim is supported."
+  ],
+  "next": "Inspect public finalization code and preserved metadata to choose a minimal separate verification route; no automatic full download retry, budget increase, build or model run.",
+  "final_acquisition_manifest_published": false,
+  "optional_probe_source_actual_pass_at_initial_closeout": "UNKNOWN_NO_DEDICATED_SUCCESS_RECORD",
+  "post_closeout_source_flow_review": {
+    "raw_manifest_written": true,
+    "raw_manifest_is_not_accepted_acquisition": true,
+    "source_files": 1687,
+    "source_bytes": 33232611,
+    "worker_reported_success_terminal": true,
+    "inner_supervision_status": "process_exited_zero_not_semantic_success",
+    "inner_supervision_elapsed_seconds": 1783.172,
+    "inner_supervision_within_shared_deadline": true,
+    "optional_probe_static_binding": "PASS_INFERRED_FROM_FIXED_SOURCE_AND_RAW_MANIFEST",
+    "optional_probe_native_execution": false,
+    "basis": "raw runtime_bindings records exact module SHA and line61; fixed acquire code calls runtime_bindings before raw write. Worker terminal and phase end corroborate. Not an executed ld/native probe.",
+    "exact_interrupted_line": "UNKNOWN_WITHIN_OUTER_FINALIZATION",
+    "metadata_sha256": {
+      "raw-acquisition.json": "c7c3d55048f04bade2e46c49bb3dee4a67c486a2fc1cd46d06da04221aafffac",
+      "worker-terminal.json": "30b7d2d5350e78677dff79226b14ed3199ece523d65dfda4bacd5569d580f802",
+      "acquisition-supervision.json": "cce0fe8d0590e5be3eb67c3a79894ce022ed5f676f256b16da892d767cdb1321"
+    }
+  }
+}

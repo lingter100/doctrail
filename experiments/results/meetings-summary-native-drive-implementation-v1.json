@@ -1,0 +1,33 @@
+{
+  "schema": "doctrail-summary-native-drive-implementation-v1",
+  "status": "implemented_fake_tested_reviewed_not_native_executed",
+  "baseline": "c5c93c31781b561af16880cc299a76d9db8ccfc2",
+  "source_sha256": "f52df84f89b1418c5fa44672bc1a73e8b3027ed91299c785b8e06c11dc69b32a",
+  "test_sha256": "15f6094fa9437cb220bcdc2c764716df1d8e2f097527edba87ce95769b219df4",
+  "tests": {
+    "cumulative_unique_passed": 81,
+    "initial": {
+      "passed": 72,
+      "failed": 5,
+      "reason": "two native invocations reused one exclusive attempt record"
+    },
+    "after_fix_drive_tests": 21,
+    "final_affected_passed": 31,
+    "final_affected_seconds": 14.68,
+    "ruff": "passed"
+  },
+  "independent_review": {
+    "model": "gpt-6-astra",
+    "reasoning": "xhigh",
+    "open_findings": 0,
+    "scope": "source_delta_only"
+  },
+  "actual_drive_mappings": 0,
+  "actual_native_runs": 0,
+  "limits": [
+    "The Windows unused-drive check and creation are not atomic. Changed mappings are never removed.",
+    "Actual Windows API and path resolution remain unverified.",
+    "Input canonical identities and original guards are unchanged; alias argv/cwd/environment/root are recorded separately."
+  ],
+  "human_reviews": 0
+}

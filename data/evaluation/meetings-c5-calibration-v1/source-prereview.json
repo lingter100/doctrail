@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "candidate_id": "meeting-answer-single-thinking-c5-v1",
+  "kind": "source_prereview",
+  "verdict": "accepted",
+  "reviewer_id": "/root/c5_calibration_prereviewer",
+  "author_ids": [
+    "/root/c5_calibration_author"
+  ],
+  "accepted_ids": [
+    "c5-cal-doc-01",
+    "c5-cal-doc-02",
+    "c5-cal-doc-03",
+    "c5-cal-doc-04",
+    "c5-cal-doc-05",
+    "c5-cal-doc-06"
+  ],
+  "rejected_ids": [],
+  "human_review_count": 0,
+  "reviewed_at": "2026-10-19T08:17:02.544542+00:00",
+  "actual_model": "gpt-6-astra",
+  "actual_effort": "xhigh",
+  "settings_provenance": "Parent tool-requested and accepted spawn settings, not runtime introspection.",
+  "same_split_source_item_reviewer_reuse_disclosed": true,
+  "excluded_from_final_answer_judging": true,
+  "author_source_changes": 0,
+  "whole_source_read": true,
+  "whole_family_coherence_checked": true,
+  "licensing_provenance_checked": true,
+  "temporal_applicability_checked": true,
+  "public_guide_historical_2018_applicability": "not_established_do_not_infer",
+  "per_document": [
+    {
+      "document_id": "c5-cal-doc-01",
+      "raw_sha256": "800eff51ce078f4e54125c9a6f67df0de402ec0be5fc5f7c3de842124f74fe9d",
+      "verdict": "accepted",
+      "reason": "Complete dated January meeting accepted; proposals and plans are not completed outcomes."
+    },
+    {
+      "document_id": "c5-cal-doc-02",
+      "raw_sha256": "a6b0fd66e3b435856ec1cabf66ca57a078c4324d652ad087561565381ead7e88",
+      "verdict": "accepted",
+      "reason": "Complete February continuation accepted; lack of quorum and intended email vote do not establish approval."
+    },
+    {
+      "document_id": "c5-cal-doc-03",
+      "raw_sha256": "2729667e4babddba03c5431a12d2872c8d58f6946f6a0ba91a8974c4a4ee1c73",
+      "verdict": "accepted",
+      "reason": "Whole mentorship guide accepted only at the pinned revision; historical 2018 applicability is unproved and must not be inferred."
+    },
+    {
+      "document_id": "c5-cal-doc-04",
+      "raw_sha256": "a497525fc06880df3f7a0df61d99459f4ea2c5890f20215f2d709937c1b453b2",
+      "verdict": "accepted",
+      "reason": "Explicit fictional operating guidance accepted; roles, September scope, safety and privacy rules are coherent."
+    },
+    {
+      "document_id": "c5-cal-doc-05",
+      "raw_sha256": "fd13f819eb8114bbc63289fa83f1dc122c8cda8a0e5db6bf641a34c87db92e81",
+      "verdict": "accepted",
+      "reason": "Explicit fictional preparation meeting accepted; equipment states, inclusive loan interval and pending work are coherent."
+    },
+    {
+      "document_id": "c5-cal-doc-06",
+      "raw_sha256": "5e7227a29450eddb7e5b50173e92310dd55e1372fc448ae37d16690a079cf23b",
+      "verdict": "accepted",
+      "reason": "Explicit fictional result meeting accepted; repairs, reserve state and conditional later trial preserve the chronology."
+    }
+  ],
+  "preauthorization": {
+    "file": ".local/meetings-c5-calibration-review-v1/preauthorization-v1.json",
+    "sha256": "d13a2fafb266e6edc0c214e03d77b1ec82c9c4055d158e4137d58f669567e7e6"
+  },
+  "mechanical_review": {
+    "file": ".local/meetings-c5-calibration-review-v1/mechanical-review-v1.json",
+    "sha256": "5223d48d54ab9a447b1286d5b51a2b777ffb1849e9986cb574660f58cdd6c48f"
+  },
+  "notes": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/source-prereview-notes.md",
+    "sha256": "4c63bea72c2da4a65b63a664c47ee344132b18c59f46b72e9075ed35c74f727d"
+  },
+  "author_handoff": {
+    "file": ".local/meetings-c5-calibration-source-v1/handoff-v1.json",
+    "sha256": "3ad6c76d626417654d1dd9bef2797e3eb56e30d95786a75ed52d43766aca7e59"
+  },
+  "author_adoption_receipt": {
+    "file": "data/evaluation/meetings-c5-calibration-v1/source-adoption-receipt.json",
+    "sha256": "a10a033ba990ea017f47e65c6385d75c912ea75de06d9686999f6d8972959188"
+  },
+  "source_hashes_reviewed": {
+    "data/evaluation/meetings-c5-calibration-v1/java-parity.json": "839fd4f3715b6719000fc2a392e553ce20239ff67a16b06bbbc32363946f8bfa",
+    "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-01.txt": "800eff51ce078f4e54125c9a6f67df0de402ec0be5fc5f7c3de842124f74fe9d",
+    "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-02.txt": "a6b0fd66e3b435856ec1cabf66ca57a078c4324d652ad087561565381ead7e88",
+    "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-03.txt": "2729667e4babddba03c5431a12d2872c8d58f6946f6a0ba91a8974c4a4ee1c73",
+    "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-04.txt": "a497525fc06880df3f7a0df61d99459f4ea2c5890f20215f2d709937c1b453b2",
+    "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-05.txt": "fd13f819eb8114bbc63289fa83f1dc122c8cda8a0e5db6bf641a34c87db92e81",
+    "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-06.txt": "5e7227a29450eddb7e5b50173e92310dd55e1372fc448ae37d16690a079cf23b",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-meeting-2018-01-11.md": "800eff51ce078f4e54125c9a6f67df0de402ec0be5fc5f7c3de842124f74fe9d",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-meeting-2018-02-08.md": "a6b0fd66e3b435856ec1cabf66ca57a078c4324d652ad087561565381ead7e88",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-mentorship-guide.md": "2729667e4babddba03c5431a12d2872c8d58f6946f6a0ba91a8974c4a4ee1c73",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-meeting-2026-09-09.md": "fd13f819eb8114bbc63289fa83f1dc122c8cda8a0e5db6bf641a34c87db92e81",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-meeting-2026-09-23.md": "5e7227a29450eddb7e5b50173e92310dd55e1372fc448ae37d16690a079cf23b",
+    "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-operations.md": "a497525fc06880df3f7a0df61d99459f4ea2c5890f20215f2d709937c1b453b2",
+    "data/evaluation/meetings-c5-calibration-v1/source-adoption-receipt.json": "a10a033ba990ea017f47e65c6385d75c912ea75de06d9686999f6d8972959188",
+    "data/evaluation/meetings-c5-calibration-v1/source-inventory.json": "8161641591a9561c8fdd3e2a375ff7b315952061a4abac166ac8b9dbd36be7a8",
+    "data/evaluation/meetings-c5-calibration-v1/source-manifest.json": "916712e5f159e99e8c69d3b9cc67284051abf999d3d34e277628ff3179f3db11",
+    "data/evaluation/meetings-c5-calibration-v1/source-processing-receipt.json": "c5e96eb8f4a523fd956f3b2fd3a6c98159b4993363e499d15006013ac7b52249",
+    "data/evaluation/meetings-c5-calibration-source-fingerprints-v1.json": "3f2bc21494bc3bcbe557c43f87df644bfd4b8d4d5b14883a12d92e24c2eee236"
+  },
+  "exposure": [
+    "Auto-injected AGENTS, memory summary, historical aggregates and candidate hypotheses.",
+    "Current STATUS, C5 governance documents, static registry and metadata-only MEMORY.md lookup.",
+    "Whole calibration source corpus and author provenance; calibration raw and inventory content.",
+    "No validation or closed-pool semantic material, questions, oracles, model outputs, reasoning or mapping opened."
+  ],
+  "reviewer_counts": {
+    "tokenizer": 0,
+    "native": 0,
+    "java_reruns": 0,
+    "network": 0,
+    "source_repairs": 0,
+    "items_authored": 0,
+    "git_mutations": 0
+  },
+  "limits": [
+    "Public guide effective date unknown; no retrospective policy application to 2018.",
+    "Original external links and literal markup remain outside imported semantic evidence.",
+    "Historical normalized coverage only12/80 with3 inherited gaps; complete near-duplicate absence unproved.",
+    "Cross-split semantic freshness remains isolated validation reviewer responsibility.",
+    "Source acceptance does not accept future items, model quality, service integration or human use."
+  ]
+}

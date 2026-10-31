@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "source_first_item_selection",
+  "author": "/root/service_rag_validation_sources",
+  "created_at_utc": "2026-10-20T08:59:43.415696+00:00",
+  "source_freeze_sha256": "3ffde1172db6cd7a6c762084645d2c802882ecd21c2d554237bb093b8652a6b6",
+  "sequence": "Accepted source6/chunks66 and freeze51 verified before authoring. All full contents read; no retrieval/tokenizer/model output informed selection.",
+  "execution_order": [
+    "SRV3-V01",
+    "SRV3-V02",
+    "SRV3-V03",
+    "SRV3-V04",
+    "SRV3-V05",
+    "SRV3-V06",
+    "SRV3-V07",
+    "SRV3-V08"
+  ],
+  "counts": {
+    "items": 8,
+    "ko": 4,
+    "en": 4,
+    "answered": 4,
+    "abstained": 4,
+    "public_items": 4,
+    "synthetic_items": 4,
+    "required_facts": 31,
+    "supported_required_facts": 19,
+    "missing_requested_values": 12,
+    "required_facts_per_case": [
+      4,
+      5,
+      5,
+      5,
+      3,
+      3,
+      3,
+      3
+    ],
+    "general_only_answered": 1,
+    "multiple_meetings_answered": 2,
+    "mixed_meeting_general_answered": 1,
+    "all_sufficient_alternatives_require_multiple_documents_answered": 3,
+    "ko_question_en_evidence_answered": 2,
+    "en_question_ko_evidence_answered": 2,
+    "exact_evidence_spans": 43,
+    "chunk_cover_alternatives": 45,
+    "chunk_quote_bindings": 47
+  },
+  "coverage": [
+    {
+      "id": "SRV3-V01",
+      "language": "ko",
+      "expected_status": "answered",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public",
+      "category": "general_only",
+      "required_fact_count": 4,
+      "all_sufficient_alternatives_require_multiple_documents": false,
+      "source_selection_reason": [
+        "Answer in Korean using the general document. The dated meetings discuss a particular effort but do not replace the complete general charter and meeting-purpose evidence."
+      ]
+    },
+    {
+      "id": "SRV3-V02",
+      "language": "en",
+      "expected_status": "answered",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic",
+      "category": "mixed_meeting_general",
+      "required_fact_count": 5,
+      "all_sufficient_alternatives_require_multiple_documents": true,
+      "source_selection_reason": [
+        "English answer uses Korean documents. Duration/extension conditions require the general source; actual returned-kit state requires the later meeting.",
+        "For F1 both source alternatives are encoded; source recency alone is not why the rule reverts.",
+        "SG-return corroborates the inventory rule but cannot establish the observed one-versus-one state without SM2-return."
+      ]
+    },
+    {
+      "id": "SRV3-V03",
+      "language": "ko",
+      "expected_status": "answered",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public",
+      "category": "multiple_meetings",
+      "required_fact_count": 5,
+      "all_sufficient_alternatives_require_multiple_documents": true,
+      "source_selection_reason": [
+        "Korean answer integrates two dated English meetings. Stated subtyping status changed; recursive-solver equivalence remained unachieved in the May description.",
+        "No project-wide completion follows from one modeled algorithm or the later date.",
+        "No single document supplies both the actual March and May descriptions."
+      ]
+    },
+    {
+      "id": "SRV3-V04",
+      "language": "en",
+      "expected_status": "answered",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic",
+      "category": "multiple_meetings",
+      "required_fact_count": 5,
+      "all_sufficient_alternatives_require_multiple_documents": true,
+      "source_selection_reason": [
+        "English answer integrates two Korean meetings, separating initial approval, observed outcomes and future action.",
+        "The later account names old circular tags but does not establish the complete April 7 approval, outer-handle-only trial and contingent expansion."
+      ]
+    },
+    {
+      "id": "SRV3-V05",
+      "language": "ko",
+      "expected_status": "abstained",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic",
+      "category": "whole_corpus_absence",
+      "required_fact_count": 3,
+      "all_sufficient_alternatives_require_multiple_documents": null,
+      "source_selection_reason": [
+        "Whole-six-document absence review, not just quoted limitations. Replacement deadline is not price.",
+        "Missing amounts are not zero charges or borrower fault."
+      ]
+    },
+    {
+      "id": "SRV3-V06",
+      "language": "en",
+      "expected_status": "abstained",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public",
+      "category": "whole_corpus_absence",
+      "required_fact_count": 3,
+      "all_sufficient_alternatives_require_multiple_documents": null,
+      "source_selection_reason": [
+        "Only infer non-establishment in these records, not that adoption never occurred elsewhere/later.",
+        "May goals do not turn March conditional intention into an official decision."
+      ]
+    },
+    {
+      "id": "SRV3-V07",
+      "language": "ko",
+      "expected_status": "abstained",
+      "family_id": "V3-PUBLIC-01",
+      "source_kind": "public",
+      "category": "whole_corpus_absence",
+      "required_fact_count": 3,
+      "all_sufficient_alternatives_require_multiple_documents": null,
+      "source_selection_reason": [
+        "Korean abstention may explain plans/goals. No linked issue/calendar body was read.",
+        "Do not compute a Wednesday date and call it actual completion."
+      ]
+    },
+    {
+      "id": "SRV3-V08",
+      "language": "en",
+      "expected_status": "abstained",
+      "family_id": "V3-SYNTHETIC-01",
+      "source_kind": "synthetic",
+      "category": "whole_corpus_absence",
+      "required_fact_count": 3,
+      "all_sufficient_alternatives_require_multiple_documents": null,
+      "source_selection_reason": [
+        "English abstention may explain the draft/review sequence without filling a release date.",
+        "Distinguish missing rollout details from completed delivery and future task deadlines."
+      ]
+    }
+  ],
+  "whole_source_absence_method": "Inspected all six full sources, not retrieved snippets. Each absent value checked against the full related family; other family inspected as unrelated. Context quotes alone do not prove corpus-wide absence.",
+  "alternative_method": "Per-fact independent sufficient passages found in the whole corpus are combined by Cartesian product. All minimal chunk covers, including overlap duplicates, enumerated. Corroborating fragments that cannot establish the whole fact are documented separately. Semantic completeness awaits independent review.",
+  "policies": {
+    "retrieval_kind": "all",
+    "retrieval_mode": "hybrid_rerank",
+    "embedding_profile": "base",
+    "top_k": 5,
+    "context_or_oracle_in_query": false,
+    "retrieval_selection_executed": false,
+    "context_fit_asserted": false,
+    "source_trimming": false,
+    "runtime_uuid_written": false
+  },
+  "not_tuned_to_context": "No context count/length or tokenizer fit used to shorten source, filter evidence or select questions. Alternatives remain regardless of eventual retrieval.",
+  "independent_review_status": "pending",
+  "source_edits": 0,
+  "human_review": false,
+  "revision_tracking": {
+    "version": 2,
+    "reason": "Only two missing sufficient evidence alternatives identified by independent review; required meanings and queries are unchanged.",
+    "parent_authorization": "Explicit same-author NEW v2 dispatch after parent-reported commit/push b3301c7; review feedback alone did not authorize writing.",
+    "feedback_path": "data/evaluation/meetings-service-rag-validation-v3/item-review-v1.json",
+    "feedback_json_pointer": "/author_safe_feedback",
+    "feedback_canonical_sha256": "26dcdeb4fc5363c82c5f319b6a0e20cfbbaf8deaee552cf12a9c2094ccc0f885",
+    "finding_id": "VAL-ITEM-V1-001",
+    "affected_case_id": "SRV3-V03",
+    "affected_fact_id": "V03-F2",
+    "appended_evidence_ids": [
+      "PM2-subtyping-layers",
+      "PM2-subtyping-table"
+    ],
+    "fact_alternative_count_before": 1,
+    "fact_alternative_count_after": 3,
+    "original_bindings": [
+      {
+        "path": "data/evaluation/meetings-service-rag-validation-v3/draft-questions-v1.json",
+        "bytes": 2891,
+        "sha256": "1f0c77627c8ee6facc39d388b2e7208cb635882d01dd1274e9dfc57fa73ea9f4"
+      },
+      {
+        "path": "data/evaluation/meetings-service-rag-validation-v3/draft-oracle-v1.json",
+        "bytes": 93902,
+        "sha256": "37af4be7a1a83f2bb7479e56ee16cd870f632622d8d055285a7cd92667907227"
+      },
+      {
+        "path": "data/evaluation/meetings-service-rag-validation-v3/item-selection-v1.json",
+        "bytes": 7287,
+        "sha256": "8167e71f30096aa3071d780c9589ebb76fe9a361412205081e6b4cc368b18d39"
+      },
+      {
+        "path": "data/evaluation/meetings-service-rag-validation-v3/item-author-receipt-v1.json",
+        "bytes": 5788,
+        "sha256": "81588dfa82ff0dd70c206c6c2db963fe226975e2ea714519c237bbaa804193ba"
+      },
+      {
+        "path": "data/evaluation/meetings-service-rag-validation-v3/item-review-v1.json",
+        "bytes": 19665,
+        "sha256": "6ba8184a61f9cca942a68f1fbb4ae4862c93a699b66879695a18d46793012496"
+      },
+      {
+        "path": "data/evaluation/meetings-service-rag-validation-v3/item-review-notes-v1.md",
+        "bytes": 6223,
+        "sha256": "83217cea4540cf7b1897ea07fbd14337201c412b9e745167f50e635c247e12b9"
+      },
+      {
+        "path": "data/evaluation/meetings-service-rag-validation-v3/item-review-summary-v1.json",
+        "bytes": 5223,
+        "sha256": "cbfd8f5d7b4a859a44bb953037dabd8bd65e92b07fe1a7511382d0b690c69585"
+      }
+    ],
+    "question_bytes_exact_copy": true,
+    "other_seven_cases_canonical_unchanged": [
+      {
+        "case_id": "SRV3-V01",
+        "canonical_sha256": "c5b2f1229d6daa58ee65b79c8d264e418acbdde72c2f5782ddc02768febcad53"
+      },
+      {
+        "case_id": "SRV3-V02",
+        "canonical_sha256": "58476be3023fa032d9c3c319a55cf7ecf52df9241be97352d62bfe565ab0ccd2"
+      },
+      {
+        "case_id": "SRV3-V04",
+        "canonical_sha256": "5872a7d5079721cad7a1c36a97b6a4e2901f7cad001bec3bc0ba62f85d1ff11e"
+      },
+      {
+        "case_id": "SRV3-V05",
+        "canonical_sha256": "d3e8cf76bcb7ab6baa7bdf3f88916e21379b002726b854341f7f7cd18e8461be"
+      },
+      {
+        "case_id": "SRV3-V06",
+        "canonical_sha256": "43f5a681c85eb6ae16279071550312e01ea161b5fd0f6cce79ed6652b5022b72"
+      },
+      {
+        "case_id": "SRV3-V07",
+        "canonical_sha256": "ad96dfeafc3f9148fea4a7c914ef5bba054ccde97add35be398247ccbaaa79d4"
+      },
+      {
+        "case_id": "SRV3-V08",
+        "canonical_sha256": "7621fee67e6f80d429084cb3bae6ef13221354aa0121e912e9c6a38a310413e8"
+      }
+    ],
+    "all_required_fact_meanings_and_counts_unchanged": true,
+    "coverage_conditions_unchanged": true,
+    "source_edits": 0,
+    "independent_review_status": "pending"
+  }
+}

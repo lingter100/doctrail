@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "ACTUAL_ACQUISITION_FAILED_CONSUMED",
+  "source_commit": "4b5be15ff5a1eeded42373ba26b59ace5512c34a",
+  "profile": "llvm-x64-sampled-50ms-1800s-v1",
+  "failure": {
+    "phase": "sources",
+    "exception": "BoundaryError",
+    "code": "source_type",
+    "supervisor_code": "tool_exit",
+    "timeout": false,
+    "specific_source_entry": "not yet diagnosed"
+  },
+  "execution": {
+    "actual_calls": 1,
+    "official_cli_terminal_observed": true,
+    "cli_exit": 1,
+    "observer_wrapper_exit": 1,
+    "outer_tool_exit": 1,
+    "cli_seconds": 955.438,
+    "wrapper_seconds": 983.094,
+    "cleanup_complete_by_seconds": 955.469,
+    "intermediate_poll_missing": false,
+    "once_consumed": true,
+    "retries": 0
+  },
+  "progress": {
+    "completed_phases": 10,
+    "total_planned_phases": 13,
+    "all_three_tool_preparations": "completed",
+    "source_metadata": "completed",
+    "sources": "failed",
+    "last_recorded_download_bytes_at_sources_start": 219031404,
+    "last_recorded_worker_scan_seconds": 626.624,
+    "last_recorded_worker_scans": 22,
+    "timing_caveat": "Worker scan durations overlap phases and are not external observer timing or causal speedup."
+  },
+  "custody": {
+    "known_wrapper_identities_absent": 9,
+    "known_observer_identities_absent": 6,
+    "counts_overlap": true,
+    "partial_files": 14040,
+    "partial_bytes": 809119185,
+    "executor_payload_hash_and_file_set": "passed",
+    "parent_verified_frozen_rows": 326,
+    "parent_rehashed_payload_files": 0,
+    "parent_verified_payload_inventory_artifact_hash": true,
+    "hold_released": true
+  },
+  "build_native_model_runs": 0,
+  "companion_created": false,
+  "AI_quality_proven": false,
+  "public_deployment": false,
+  "next_action": "Diagnose saved public source metadata and source_type check; no automatic extension or retry.",
+  "parent_closeout_sha256": "7a6e7534b3f967c251dd3d4cd8ccfc84a15d3d3b8313f68743abd42bf51d4630",
+  "final_receipt_sha256": "affd0433713461f117355e21e9f65151b794fefe536c91333c82f7ff90dd0e2f",
+  "limitations": [
+    "Acquisition failure is not a model-quality result.",
+    "Earlier 600s failures and partial artifacts remain preserved.",
+    "Natural failure before 1800s does not establish successful completion within that budget."
+  ]
+}

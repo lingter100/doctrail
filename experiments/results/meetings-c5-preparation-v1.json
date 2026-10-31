@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-preparation-v1",
+  "recorded_at": "2026-10-20T00:40:55.493891+00:00",
+  "item_commit": "cefbfeebf4cfecf0226fb8c7f9a7eac98fbe6d7d",
+  "plan": {
+    "file": "data/evaluation/meetings-c5-execution-plan-v1.json",
+    "sha256": "5450de67255b151519b9443306f43466a65b8269dae3c2264da8eca38341df1a"
+  },
+  "phases": {
+    "calibration": {
+      "status": "passed",
+      "cases": 6,
+      "input_tokens_min": 1570,
+      "input_tokens_max": 5021,
+      "tokenizer_loads": 1,
+      "native_calls": 0,
+      "payloads_preserved": true,
+      "input": {
+        "file": "data/evaluation/meetings-c5-calibration-inputs-v1/input.json",
+        "sha256": "b66d9a65ef70cc7ea3bfe0f7cdbbda2f6f8e74ee5d928c31ee5b84b5cf8b6a9d"
+      },
+      "preparation_receipt": {
+        "file": "data/evaluation/meetings-c5-calibration-inputs-v1/receipt.json",
+        "sha256": "68ab88d242dfdbb6ae9bf90b4bd5fb7822a20f1ca9bb031d40d9b9759956681e"
+      }
+    },
+    "validation": {
+      "status": "passed",
+      "cases": 8,
+      "input_tokens_min": 2575,
+      "input_tokens_max": 4999,
+      "tokenizer_loads": 1,
+      "native_calls": 0,
+      "payloads_preserved": true,
+      "input": {
+        "file": "data/evaluation/meetings-c5-validation-inputs-v1/input.json",
+        "sha256": "8702b554392efb687aa108e61db88e0bb7725ee60d57a47576b0ec4c64f2674d"
+      },
+      "preparation_receipt": {
+        "file": "data/evaluation/meetings-c5-validation-inputs-v1/receipt.json",
+        "sha256": "e56939f19491c84f4f3e8cc990541da267ba7560d445ecd7d6e2f0bce560f98a"
+      }
+    }
+  },
+  "public_exact_copies": {
+    "data/evaluation/meetings-c5-calibration-inputs-v1/input.json": "b66d9a65ef70cc7ea3bfe0f7cdbbda2f6f8e74ee5d928c31ee5b84b5cf8b6a9d",
+    "data/evaluation/meetings-c5-calibration-inputs-v1/receipt.json": "68ab88d242dfdbb6ae9bf90b4bd5fb7822a20f1ca9bb031d40d9b9759956681e",
+    "data/evaluation/meetings-c5-validation-inputs-v1/input.json": "8702b554392efb687aa108e61db88e0bb7725ee60d57a47576b0ec4c64f2674d",
+    "data/evaluation/meetings-c5-validation-inputs-v1/receipt.json": "e56939f19491c84f4f3e8cc990541da267ba7560d445ecd7d6e2f0bce560f98a"
+  },
+  "source_bindings_preserved": [
+    14,
+    15
+  ],
+  "code_bindings_preserved": 76,
+  "parent_semantic_reads": 0,
+  "full_material_proofs": {
+    ".local/meetings-c5-calibration-offline-v1/full-material-proof-v1.json": "02236efdef5b7b0c0230190330062b07e658b727dd99f273b5a209f2234bb795",
+    ".local/meetings-c5-validation-offline-v1/full-material-proof-v1.json": "c9f6199d415e5d3ec0c4261618e849a139c6784b295a149fc5f043f5906169f7"
+  },
+  "terminal_receipts": [
+    {
+      "file": ".local/meetings-c5-calibration-offline-v1/official-cli-terminal-receipt-v1.json",
+      "sha256": "0eef9075b0845523115e8478389642b405c0dff17db86004da7b0545d5657bc6"
+    },
+    {
+      "file": ".local/meetings-c5-validation-offline-v1/official-cli-result-v1.json",
+      "sha256": "974fe50377d9f902472847e4261fd9468e3bad439f4fbcd4962e2ef3f3aa79c1"
+    }
+  ],
+  "offline_cli_elapsed_seconds": {
+    "calibration": 92.21900000004098,
+    "validation": 75.203
+  },
+  "cli_exit_codes": {
+    "calibration": 0,
+    "validation": 0
+  },
+  "owned_processes_remaining": 0,
+  "item_commit_ci": {
+    "file": "experiments/results/meetings-c5-items-ci-v1.json",
+    "sha256": "3a2709f0648e9a12fd4e702562393e91556585d6874b85544406784535e0a494"
+  },
+  "limitations": [
+    "Offline input counts do not measure model answer quality or service latency.",
+    "Validation preparation does not open the validation model gate.",
+    "Final judges are metadata-exposed and label-masked, not fully blind.",
+    "Public copies are exact original bytes; no personal filesystem paths detected by the stated literal path scan."
+  ]
+}

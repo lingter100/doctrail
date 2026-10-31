@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "service_rag_launcher_exact_commit_ci",
+  "observed_at": "2026-10-20T07:57:30.257297+00:00",
+  "commit": "ae6f8daddd3115b797bb9f6aecb5e7a17d3a1008",
+  "runs": [
+    {
+      "id": 39389175319,
+      "head": "ae6f8daddd3115b797bb9f6aecb5e7a17d3a1008",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39389175319/job/118516266014"
+        },
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39389175319/job/118516266096"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39389175319/job/118516266759"
+        }
+      ],
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39389175319"
+    },
+    {
+      "id": 39389181734,
+      "head": "ae6f8daddd3115b797bb9f6aecb5e7a17d3a1008",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39389181734/job/118516287242"
+        },
+        {
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39389181734/job/118516287419"
+        },
+        {
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/lingter100/doctrail/actions/runs/39389181734/job/118516287422"
+        }
+      ],
+      "url": "https://github.com/lingter100/doctrail/actions/runs/39389181734"
+    }
+  ],
+  "prior_registration_commit": "5a1b11e523e29806c0a1a299d26f0b6881ae75a8",
+  "prior_registration_runs": [
+    39388563975,
+    39388570323
+  ],
+  "prior_registration_observed_conclusion": "success",
+  "scope": "Required code CI only; actual native service and semantic answer quality unexecuted.",
+  "github_author": "lingter100",
+  "github_committer": "lingter100"
+}

@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "id": "meetings-c5-source-review-v1",
+  "recorded_at": "2026-10-19T08:19:19.325930+00:00",
+  "head_before_source_commit": "cb389a7a5763c5ef2760ac347083c102a2e2a9e2",
+  "calibration": {
+    "source_documents": 6,
+    "chunks": 15,
+    "accepted": 6,
+    "rejected": 0,
+    "source_changes": 0,
+    "source_freeze": {
+      "file": "data/evaluation/meetings-c5-calibration-v1/source-freeze.json",
+      "sha256": "771a3f18f878d476b47b934c83b8c059bbde5710335470cf0f79d5ab1565adf8",
+      "bound_files": 14
+    },
+    "reviewer": "/root/c5_calibration_prereviewer",
+    "actual_model": "gpt-6-astra",
+    "effort": "xhigh",
+    "java_tests": 2,
+    "java_failures": 0,
+    "original_author_hashes_verified": 18
+  },
+  "validation_original": {
+    "source_documents": 6,
+    "chunks": 14,
+    "accepted": 3,
+    "rejected": 3,
+    "source_changes": 0,
+    "source_freeze_created": false,
+    "rejection_category": "cross_split_semantic_freshness",
+    "exact_cross_split_matches": 0,
+    "paragraph_matches": 0,
+    "reviewer": "/root/c5_validation_prereviewer",
+    "actual_model": "gpt-6-astra",
+    "effort": "xhigh",
+    "java_tests": 2,
+    "java_failures": 0,
+    "original_author_hashes_verified": 12,
+    "active_fingerprint_original_sha256": "7ac383c0bcca56b29951226716e2267fe75c4d96e45cfe43e95b164a5314b84d",
+    "original_fingerprint_archive": "data/evaluation/meetings-c5-validation-v1/source-fingerprints-original-v1.json",
+    "preparation_gate_rejects_original": true
+  },
+  "public_files": [
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/freshness.json",
+      "sha256": "c06dc862ae39d2350fffcfa4202bb3bc51a95ace4b8de61db5a1cc3f3ee6c8e4",
+      "bytes": 2677
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/java-parity.json",
+      "sha256": "839fd4f3715b6719000fc2a392e553ce20239ff67a16b06bbbc32363946f8bfa",
+      "bytes": 2447
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-01.txt",
+      "sha256": "800eff51ce078f4e54125c9a6f67df0de402ec0be5fc5f7c3de842124f74fe9d",
+      "bytes": 2494
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-02.txt",
+      "sha256": "a6b0fd66e3b435856ec1cabf66ca57a078c4324d652ad087561565381ead7e88",
+      "bytes": 3056
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-03.txt",
+      "sha256": "2729667e4babddba03c5431a12d2872c8d58f6946f6a0ba91a8974c4a4ee1c73",
+      "bytes": 3450
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-04.txt",
+      "sha256": "a497525fc06880df3f7a0df61d99459f4ea2c5890f20215f2d709937c1b453b2",
+      "bytes": 2608
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-05.txt",
+      "sha256": "fd13f819eb8114bbc63289fa83f1dc122c8cda8a0e5db6bf641a34c87db92e81",
+      "bytes": 2021
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-06.txt",
+      "sha256": "5e7227a29450eddb7e5b50173e92310dd55e1372fc448ae37d16690a079cf23b",
+      "bytes": 2101
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-meeting-2018-01-11.md",
+      "sha256": "800eff51ce078f4e54125c9a6f67df0de402ec0be5fc5f7c3de842124f74fe9d",
+      "bytes": 2494
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-meeting-2018-02-08.md",
+      "sha256": "a6b0fd66e3b435856ec1cabf66ca57a078c4324d652ad087561565381ead7e88",
+      "bytes": 3056
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-mentorship-guide.md",
+      "sha256": "2729667e4babddba03c5431a12d2872c8d58f6946f6a0ba91a8974c4a4ee1c73",
+      "bytes": 3450
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-meeting-2026-09-09.md",
+      "sha256": "fd13f819eb8114bbc63289fa83f1dc122c8cda8a0e5db6bf641a34c87db92e81",
+      "bytes": 2021
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-meeting-2026-09-23.md",
+      "sha256": "5e7227a29450eddb7e5b50173e92310dd55e1372fc448ae37d16690a079cf23b",
+      "bytes": 2101
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-synthetic-operations.md",
+      "sha256": "a497525fc06880df3f7a0df61d99459f4ea2c5890f20215f2d709937c1b453b2",
+      "bytes": 2608
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/review-metadata-summary.json",
+      "sha256": "e26f7d9276efd51e742fad0613e715456f449cfbb8c2f98a891977443b8c0430",
+      "bytes": 4815
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/source-adoption-receipt.json",
+      "sha256": "a10a033ba990ea017f47e65c6385d75c912ea75de06d9686999f6d8972959188",
+      "bytes": 7209
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/source-freeze.json",
+      "sha256": "771a3f18f878d476b47b934c83b8c059bbde5710335470cf0f79d5ab1565adf8",
+      "bytes": 2903
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/source-inventory.json",
+      "sha256": "8161641591a9561c8fdd3e2a375ff7b315952061a4abac166ac8b9dbd36be7a8",
+      "bytes": 108251
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/source-manifest.json",
+      "sha256": "916712e5f159e99e8c69d3b9cc67284051abf999d3d34e277628ff3179f3db11",
+      "bytes": 32069
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/source-prereview-notes.md",
+      "sha256": "4c63bea72c2da4a65b63a664c47ee344132b18c59f46b72e9075ed35c74f727d",
+      "bytes": 9593
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/source-prereview.json",
+      "sha256": "d2f9b6fb617425ebc30b2c8b05f33be95b4527d58f99ce81b18961cb7b4ddc9c",
+      "bytes": 7659
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-v1/source-processing-receipt.json",
+      "sha256": "c5e96eb8f4a523fd956f3b2fd3a6c98159b4993363e499d15006013ac7b52249",
+      "bytes": 4760
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/freshness.json",
+      "sha256": "54cc1a1cc710cd7fdda648c6216ede92de42f7713175602220de6f4ff127a910",
+      "bytes": 1879
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/java-parity.json",
+      "sha256": "e4038320492b5e605c9deb9181e50036464967223eb5766a4d5bad18089c47cb",
+      "bytes": 2490
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-pub-general.md",
+      "sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+      "bytes": 3192
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-pub-meeting-01.md",
+      "sha256": "f3e9a2340a385e1232a296d3c4d226a56d4fe4ea8d131da7a1a8fc23a4ed79cf",
+      "bytes": 1915
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-pub-meeting-02.md",
+      "sha256": "000a15674ac56f752a084dbae1ce1714412782ab4f03564db5e0ed2ac0245240",
+      "bytes": 1123
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-syn-general.md",
+      "sha256": "9f67d83dbf21728e19f41ca738c5e94a25731c6421314985b5afd0e3b41840da",
+      "bytes": 2842
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-syn-meeting-01.md",
+      "sha256": "cd34a9317af111fe83bf226051e85ffdd5cd3d1b996e0d4a85db238ac1e26720",
+      "bytes": 2185
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-syn-meeting-02.md",
+      "sha256": "f813c88857ac05189086419486d26efeaba8c815eb85254d4631173cb8a9163f",
+      "bytes": 2420
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/review-metadata-summary.json",
+      "sha256": "e5274538cb1d80624c63acbe9505da3d5edae24c49af5ecf1e4ffbf3b57fdf92",
+      "bytes": 2287
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-adoption-receipt.json",
+      "sha256": "ff8ab6099d96e5fff8abccf8726365cc3debe8059a4bcf9589a3a8dfd356bfbb",
+      "bytes": 6900
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-fingerprints-original-v1.json",
+      "sha256": "7ac383c0bcca56b29951226716e2267fe75c4d96e45cfe43e95b164a5314b84d",
+      "bytes": 4197
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-inventory.json",
+      "sha256": "e96fbc214ed0099adffda5b8d00de3162851c948e5514ff457e73931e1a2b69c",
+      "bytes": 52507
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-manifest.json",
+      "sha256": "b0b08a41b6a738c9d6fe7721a8ac1bbb794ffe1c11eb8fa27d0be03c0f9733fe",
+      "bytes": 14571
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-prereview-notes.md",
+      "sha256": "aa5ee03996dff60b3f371b0acf6ccee39ebac7d685bbe88109bc32ad7583b9bb",
+      "bytes": 7248
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-prereview.json",
+      "sha256": "36b02a7f032e195491e050ac925ae039ae63f02f797373d794f8f73e3377a4ec",
+      "bytes": 1381
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-processing-receipt.json",
+      "sha256": "ba5660bd8453b14fd24fbaae6571b7916b8c0576adcd017c56b3f9c66adad6ea",
+      "bytes": 4841
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-v1/source-revision-feedback-v1.json",
+      "sha256": "d3f548c5272c7d8ff4c1ab58dbe29c62b5919dd9ba2dc82ad593e94114d042b1",
+      "bytes": 3908
+    },
+    {
+      "file": "data/evaluation/meetings-c5-calibration-source-fingerprints-v1.json",
+      "sha256": "3f2bc21494bc3bcbe557c43f87df644bfd4b8d4d5b14883a12d92e24c2eee236",
+      "bytes": 4347
+    },
+    {
+      "file": "data/evaluation/meetings-c5-validation-source-fingerprints-v1.json",
+      "sha256": "7ac383c0bcca56b29951226716e2267fe75c4d96e45cfe43e95b164a5314b84d",
+      "bytes": 4197
+    }
+  ],
+  "actual": {
+    "items": 0,
+    "oracles": 0,
+    "tokenizer": 0,
+    "native": 0,
+    "human_review": 0
+  },
+  "limitations": [
+    "AI source review is not human acceptance or model quality.",
+    "Only12 of prior80 metadata rows have normalized fingerprints; inherited3 coverage gaps remain.",
+    "Public calibration guide is accepted at pinned revision only, not backdated to2018.",
+    "Validation author receives own-source feedback only; parent did not read validation source/review semantics.",
+    "Original validation source v1 is rejected; only explicit NEWv2 repair may progress, never items from rejected data."
+  ],
+  "publication_whitespace": {
+    "initial_check_exit": 1,
+    "log_sha256": "9692e9b0ff8d3d571a0f4e541099e9087e043dad680f7f602fbbfa827cd9c62b",
+    "preserved_source_findings": [
+      {
+        "file": "data/evaluation/meetings-c5-calibration-v1/processed/c5-cal-doc-03.txt",
+        "line": 65,
+        "type": "new blank line at EOF.",
+        "sha256": "2729667e4babddba03c5431a12d2872c8d58f6946f6a0ba91a8974c4a4ee1c73",
+        "reason": "Preserve reviewed whole upstream source or exact processed source bytes; no formatting mutation."
+      },
+      {
+        "file": "data/evaluation/meetings-c5-calibration-v1/raw/c5-cal-public-mentorship-guide.md",
+        "line": 65,
+        "type": "new blank line at EOF.",
+        "sha256": "2729667e4babddba03c5431a12d2872c8d58f6946f6a0ba91a8974c4a4ee1c73",
+        "reason": "Preserve reviewed whole upstream source or exact processed source bytes; no formatting mutation."
+      },
+      {
+        "file": "data/evaluation/meetings-c5-validation-v1/raw/c5-val-pub-general.md",
+        "line": 11,
+        "type": "trailing whitespace.",
+        "sha256": "3dfc56c00fda978a5eca195577833bbd1eee3e2fc43b0d987ddf3597b0c2b296",
+        "reason": "Preserve reviewed whole upstream source or exact processed source bytes; no formatting mutation."
+      }
+    ],
+    "exact_java_crlf_exceptions": 2,
+    "source_bytes_changed": 0
+  }
+}

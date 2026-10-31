@@ -1,0 +1,49 @@
+{
+  "schema": "doctrail-ci-result-v1",
+  "head": "0b27d1fe11802b39af02453b18913623df2deb45",
+  "status": "ALL_REQUIRED_JOBS_PASSED",
+  "runs": [
+    {
+      "event": "push",
+      "id": 41170253545,
+      "url": "https://github.com/lingter100/doctrail/actions/runs/41170253545",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      }
+    },
+    {
+      "event": "pull_request",
+      "id": 41170256330,
+      "url": "https://github.com/lingter100/doctrail/actions/runs/41170256330",
+      "jobs": {
+        "backend": "success",
+        "web": "success",
+        "java-service": "success"
+      }
+    }
+  ],
+  "python": {
+    "passed": 5598,
+    "skipped": 21,
+    "warnings": 2,
+    "push_seconds": 193.69,
+    "pr_seconds": 265.65
+  },
+  "browser_each": {
+    "passed": 158,
+    "failed": 0,
+    "infrastructure_failures": 0,
+    "without_reports": 0,
+    "missing": 0
+  },
+  "actual_java_http_db_checks_each": 11,
+  "synthetic_meeting_operations_each": "PASS",
+  "limits": [
+    "CI does not measure model semantic quality.",
+    "Actual offline payload verification, build and native execution remain pending.",
+    "This result covers this exact commit."
+  ],
+  "source_publication_author_committer": "lingter100"
+}

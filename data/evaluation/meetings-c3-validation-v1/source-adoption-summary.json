@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "phase": "validation",
+  "kind": "parent_safe_source_adoption_summary",
+  "created_at": "2026-10-14T07:24:36.792078+00:00",
+  "artifacts": [
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/.gitattributes",
+      "sha256": "daa3fbd3add46395a26c3686200a199def24f2994501ed2e7feb7dd782ca92aa",
+      "size_bytes": 76
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/ATTRIBUTION.md",
+      "sha256": "96d74311a09eb91481851f07f7fc94dd8d91d90352b66d9fee434796090fe609",
+      "size_bytes": 2593
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/inventory.json",
+      "sha256": "407d8c66c842936e988c9e47e4172e44e84f0c748a22005a44fb20e64b3fb75c",
+      "size_bytes": 101281
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/java-parity.json",
+      "sha256": "4adb208ee1581b78f8a2d783af636055b861c3530c8ae7ab5f2777d0f2937242",
+      "size_bytes": 1908
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-documentation-license.md",
+      "sha256": "9263c69ea49f938516831e56f7f62372d67004b1a74648a0b59b13aacf40a701",
+      "size_bytes": 1599
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/licenses/mkdocs-LICENSE.txt",
+      "sha256": "26041bd625fc39411dc4b32748216236931c904adb90c2b3e0ba697090a5d54e",
+      "size_bytes": 1292
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/processing-receipt.json",
+      "sha256": "b7a69e6fc3a75ba2098daa3fe456069f02b1a6b7a10cafcfa088ddfe9f7e6c73",
+      "size_bytes": 3906
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-authoring-receipt.json",
+      "sha256": "dd0b7706ebd808dde7e4f8018d6f4470eb4faac182258f32d4a44626dc9c756f",
+      "size_bytes": 8022
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/source-manifest.json",
+      "sha256": "4af98dd1cfc8d026b84ff8d497ceac2ef53ba025214e1bbf49bddc370feb16a0",
+      "size_bytes": 14709
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-01.md",
+      "sha256": "a6b69d1318ae84455bae021b6655b71274f29c19ba43d021d872d100b7b38cba",
+      "size_bytes": 19342
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f03-doc-02.md",
+      "sha256": "f18c58d56a1e4b0cf5ebf5b6d55f4985af544b63803deae305a5f8ba1fffb390",
+      "size_bytes": 9434
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-01.md",
+      "sha256": "23ded1bb19aab287b8615917d1f03d4673649296e3fc0d8157429e872274a1b0",
+      "size_bytes": 3187
+    },
+    {
+      "path": "data/evaluation/meetings-c3-validation-v1/sources/c3-f04-doc-02.md",
+      "sha256": "acec657fb73177fc9ba6659cae23389a644009c119331f6f2e2c016b3ae0a30f",
+      "size_bytes": 3175
+    }
+  ],
+  "counts": {
+    "families": 2,
+    "public_documents": 2,
+    "synthetic_documents": 2,
+    "documents": 4,
+    "whole_chunks": 38,
+    "excluded_sources": 0
+  },
+  "rights_verdicts_passed": 4,
+  "full_plaintext_v2_processing_passed": true,
+  "frozen_preparation_inventory_and_receipt_contract_passed": true,
+  "actual_java_parity": {
+    "documents": 4,
+    "chunks": 38,
+    "final_tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "maven_invocations": 3,
+    "pre_final_invocation_failures": 2,
+    "safe_categories": [
+      "missing_maven_lifecycle_goal",
+      "receipt_path_guard_before_source_read"
+    ],
+    "initial_failures_preserved_separately": true
+  },
+  "frozen_group_counts_unchanged": [
+    66,
+    28,
+    72,
+    41,
+    18
+  ],
+  "source_prereview_pending": true,
+  "source_freeze_created": false,
+  "question_oracle_context_tokenizer_native_paid_human_counts": 0,
+  "raw_receipts_unchanged": true,
+  "semantic_content_included": false,
+  "shared_java_target_returned": true,
+  "owned_files_released": true
+}

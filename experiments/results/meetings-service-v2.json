@@ -1,0 +1,3155 @@
+{
+  "schema_version": 1,
+  "kind": "meeting_development_operations",
+  "started_at": "2026-10-13T05:12:25.461137+00:00",
+  "git_head": "f920d83ede917c47598cec9903f4403c605b272e",
+  "working_tree_dirty": true,
+  "human_review_count": 0,
+  "semantic_review": "pending",
+  "external_deployment": false,
+  "paid_service_calls": 0,
+  "checks": [
+    {
+      "name": "automatic_analysis_jupyter-february-2025",
+      "passed": true
+    },
+    {
+      "name": "analysis_source_spans",
+      "passed": true
+    },
+    {
+      "name": "automatic_analysis_jupyter-june-2025",
+      "passed": true
+    },
+    {
+      "name": "analysis_source_spans",
+      "passed": true
+    },
+    {
+      "name": "real_meetings_are_distinct",
+      "passed": true
+    },
+    {
+      "name": "ordinary_and_meeting_results",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "real_document_answer_generated",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "multiple_meetings_cited",
+      "passed": true
+    },
+    {
+      "name": "missing_evidence_abstention",
+      "passed": true
+    },
+    {
+      "name": "model_abstains_with_irrelevant_candidates",
+      "passed": true
+    },
+    {
+      "name": "outsider_search_empty",
+      "passed": true
+    },
+    {
+      "name": "automatic_analysis_synthetic-release-planning",
+      "passed": true
+    },
+    {
+      "name": "analysis_source_spans",
+      "passed": true
+    },
+    {
+      "name": "automatic_analysis_synthetic-release-followup",
+      "passed": true
+    },
+    {
+      "name": "analysis_source_spans",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "answer_current_source_citation",
+      "passed": true
+    },
+    {
+      "name": "synthetic_meeting_dates",
+      "passed": true
+    },
+    {
+      "name": "proposal_not_confirmed",
+      "passed": true
+    },
+    {
+      "name": "assigned_and_unassigned_actions",
+      "passed": false
+    }
+  ],
+  "analyses": [
+    {
+      "fixture": "tests/fixtures/meetings/public/jupyter-february-2025.md",
+      "document_id": "7a480d811162407abf1571e1863e648d",
+      "java_roundtrip_ms": 13677.138,
+      "meeting": {
+        "document_id": "7a480d811162407abf1571e1863e648d",
+        "analysis_status": "ready",
+        "analysis_error": null,
+        "source_revision": 1,
+        "version": 1,
+        "ai_analysis": {
+          "meeting_title": "February 2025: Jupyter Community Call",
+          "meeting_date": "2025-02-19",
+          "participants": [
+            "Jordan Bradford",
+            "Kyle Smith",
+            "David Qiu",
+            "Arjun Verma",
+            "Rosio Reyes",
+            "Rick Wagner",
+            "Wayne Decatur",
+            "Matt Fisher",
+            "Ana Ruvalcaba",
+            "Johanna Bayer",
+            "Mike Krassowski",
+            "Michael Chin",
+            "Kirstie Whitaker",
+            "Chris Holdgraf",
+            "Jeremy Tuloup",
+            "Keerthi Swarna",
+            "Dan Yeaw",
+            "Pranav Khandelwal",
+            "Afshin T. Darian",
+            "Nicolas Brichet",
+            "Florence Haudin",
+            "Brian Granger",
+            "Sylvain Corlay"
+          ],
+          "purpose": "Think of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+          "summary": "* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.\n* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:\n* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/\n* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/",
+          "summary_evidence": [
+            {
+              "quote": "* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.",
+              "start_offset": 2951,
+              "end_offset": 3396
+            },
+            {
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:",
+              "start_offset": 3397,
+              "end_offset": 3479
+            },
+            {
+              "quote": "* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/",
+              "start_offset": 3481,
+              "end_offset": 3593
+            },
+            {
+              "quote": "* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/",
+              "start_offset": 3594,
+              "end_offset": 3721
+            }
+          ],
+          "items": [
+            {
+              "quote": "**Discourse:** https://discourse.jupyter.org/t/jupyter-community-calls/668/101?u=ruv7",
+              "start_offset": 215,
+              "end_offset": 300,
+              "id": "a1451742108a489f808c6188832ad17a",
+              "type": "topic",
+              "text": "**Discourse:** https://discourse.jupyter.org/t/jupyter-community-calls/668/101?u=ruv7",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)",
+              "start_offset": 320,
+              "end_offset": 454,
+              "id": "4b7f8c7411be4c56841c87fa6c2444b5",
+              "type": "topic",
+              "text": "- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)",
+              "start_offset": 455,
+              "end_offset": 587,
+              "id": "7cbe731912fc4c4488262c8a9e697711",
+              "type": "topic",
+              "text": "- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.",
+              "start_offset": 2951,
+              "end_offset": 3396,
+              "id": "e06dfbc121fb488b8a6fc26ff0ee8a35",
+              "type": "topic",
+              "text": "* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:",
+              "start_offset": 3397,
+              "end_offset": 3479,
+              "id": "b9bc07c2f75543e1b9e427f959ad5402",
+              "type": "topic",
+              "text": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/",
+              "start_offset": 3481,
+              "end_offset": 3593,
+              "id": "e8cb4f7845234edeb4d0764774016865",
+              "type": "topic",
+              "text": "* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/",
+              "start_offset": 3594,
+              "end_offset": 3721,
+              "id": "a2caf795313a4ffeb66fd60965772305",
+              "type": "topic",
+              "text": "* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Ana Ruvalcaba** Public meetings are announced on Jupyter Community Calendar: https://jupyter.org/community#calendar",
+              "start_offset": 3722,
+              "end_offset": 3841,
+              "id": "0affd24d423944b68266d992ffc754c4",
+              "type": "topic",
+              "text": "* **Ana Ruvalcaba** Public meetings are announced on Jupyter Community Calendar: https://jupyter.org/community#calendar",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Ana Ruvalcaba** Jupyter Governance Check In: Executive Council update",
+              "start_offset": 3979,
+              "end_offset": 4052,
+              "id": "e55a820d79104a21bc3e7f03ae2a4e65",
+              "type": "topic",
+              "text": "* **Ana Ruvalcaba** Jupyter Governance Check In: Executive Council update",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Project Jupyter governance overview https://jupyter.org/governance/overview.html",
+              "start_offset": 4057,
+              "end_offset": 4139,
+              "id": "65bfccbf2e084a0f910fd06909e2e27f",
+              "type": "topic",
+              "text": "* Project Jupyter governance overview https://jupyter.org/governance/overview.html",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Executive Council introductions, we've recently conducted elections, Rick Wagner, Afshin Darian and Chris Holdgraf were elected. Thanks you to Brian Granger (Jupyter cofounder)who will remain on the Jupyter Foundation governing board.",
+              "start_offset": 4144,
+              "end_offset": 4380,
+              "id": "9814405359c147019c4d72774c272111",
+              "type": "topic",
+              "text": "* Executive Council introductions, we've recently conducted elections, Rick Wagner, Afshin Darian and Chris Holdgraf were elected. Thanks you to Brian Granger (Jupyter cofounder)who will remain on the Jupyter Foundation governing board.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Jupyter Foundation governing board activities https://github.com/jupyter-governance/jupyter-foundation-governing-board/issues",
+              "start_offset": 4385,
+              "end_offset": 4512,
+              "id": "eba669dd2b1a419b8f30ab33d6bbb855",
+              "type": "topic",
+              "text": "* Jupyter Foundation governing board activities https://github.com/jupyter-governance/jupyter-foundation-governing-board/issues",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Jupyter Foundation website https://jupyterfoundation.org/",
+              "start_offset": 4517,
+              "end_offset": 4576,
+              "id": "e9cabee671f64a8b9f84fd2e2d948e94",
+              "type": "topic",
+              "text": "* Jupyter Foundation website https://jupyterfoundation.org/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Mehmet Bektas**: [Notebook Intelligence](https://github.com/notebook-intelligence/notebook-intelligence)",
+              "start_offset": 4577,
+              "end_offset": 4685,
+              "id": "0b3c0e621f1a44f28c52c791e4c2537c",
+              "type": "topic",
+              "text": "* **Mehmet Bektas**: [Notebook Intelligence](https://github.com/notebook-intelligence/notebook-intelligence)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Kyle Smith**: On building a notebook review tool",
+              "start_offset": 4686,
+              "end_offset": 4738,
+              "id": "c1a6d88c313a45c8970c1ca019e84582",
+              "type": "topic",
+              "text": "* **Kyle Smith**: On building a notebook review tool",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Arjun Verma**: JupyterCAD - Collaborative CAD in JupyterLab",
+              "start_offset": 4739,
+              "end_offset": 4802,
+              "id": "6f3041be9c4b436f9f7eea3b247e4b93",
+              "type": "topic",
+              "text": "* **Arjun Verma**: JupyterCAD - Collaborative CAD in JupyterLab",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Try in browser with JupyterLite: https://jupytercad.github.io/JupyterCAD/",
+              "start_offset": 4807,
+              "end_offset": 4882,
+              "id": "0a2b47e6444643eba7d307bd63decbb9",
+              "type": "topic",
+              "text": "* Try in browser with JupyterLite: https://jupytercad.github.io/JupyterCAD/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 demo",
+              "start_offset": 4883,
+              "end_offset": 4924,
+              "id": "1be71e6c1b624fba9f77a3d7137285cd",
+              "type": "topic",
+              "text": "* **Mike Krassowski** JupyterLab 4.4 demo",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "Fragment Identification Syntax for Jupyter: https://github.com/jupyter/nbformat/issues/317",
+              "start_offset": 4950,
+              "end_offset": 5040,
+              "id": "b291116d39f145fb8f2dc97115509c82",
+              "type": "topic",
+              "text": "Fragment Identification Syntax for Jupyter: https://github.com/jupyter/nbformat/issues/317",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            }
+          ],
+          "metadata_evidence": [
+            {
+              "quote": "# February 2025: Jupyter Community Call",
+              "start_offset": 0,
+              "end_offset": 39,
+              "field": "meeting_title"
+            },
+            {
+              "quote": "**Date:** February 19, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-02-19/09:00/Jupyter%20Community%20Call))",
+              "start_offset": 41,
+              "end_offset": 212,
+              "field": "meeting_date"
+            },
+            {
+              "quote": "| Jordan Bradford | Boston College | [jrdnbradford](https://github.com/jrdnbradford)",
+              "start_offset": 975,
+              "end_offset": 1059,
+              "field": "participants"
+            },
+            {
+              "quote": "| Kyle Smith | GitNotebooks | [smith-kyle](https://github.com/smith-kyle)|",
+              "start_offset": 1060,
+              "end_offset": 1134,
+              "field": "participants"
+            },
+            {
+              "quote": "| David Qiu | AWS | @dlqqq |",
+              "start_offset": 1135,
+              "end_offset": 1163,
+              "field": "participants"
+            },
+            {
+              "quote": "| Arjun Verma     |   QuantStack | [arjxn-py](https://github.com/arjxn-py)|",
+              "start_offset": 1164,
+              "end_offset": 1239,
+              "field": "participants"
+            },
+            {
+              "quote": "| Rosio Reyes | Anaconda | @RRosio |",
+              "start_offset": 1240,
+              "end_offset": 1276,
+              "field": "participants"
+            },
+            {
+              "quote": "| Rick Wagner | San Diego Supercomputer Center | @rpwagner |",
+              "start_offset": 1277,
+              "end_offset": 1337,
+              "field": "participants"
+            },
+            {
+              "quote": "| Wayne Decatur | Upstate Medical Univeristy | [@fomightez](https://github.com/fomightez) |",
+              "start_offset": 1338,
+              "end_offset": 1429,
+              "field": "participants"
+            },
+            {
+              "quote": "| Matt Fisher | Schmidt center for Data Science & Environment @ UC Berkeley | [@mfisher87](https://github.com/mfisher87/) |",
+              "start_offset": 1430,
+              "end_offset": 1553,
+              "field": "participants"
+            },
+            {
+              "quote": "| Ana Ruvalcaba | Cal Poly State University | @Ruv7  |",
+              "start_offset": 1554,
+              "end_offset": 1608,
+              "field": "participants"
+            },
+            {
+              "quote": "|Johanna Bayer | Donders Institute for Brain Cognition and Behaviour (Netherlands) | [@likeajumprope](https://github.com/likeajumprope) |",
+              "start_offset": 1609,
+              "end_offset": 1746,
+              "field": "participants"
+            },
+            {
+              "quote": "| Mike Krassowski | Quansight | @krassowski |",
+              "start_offset": 1747,
+              "end_offset": 1792,
+              "field": "participants"
+            },
+            {
+              "quote": "| Michael Chin | AWS | [@michaelnchin](https://github.com/michaelnchin) |",
+              "start_offset": 1793,
+              "end_offset": 1866,
+              "field": "participants"
+            },
+            {
+              "quote": "| Kirstie Whitaker | Berkeley Institute for Data Science (California, USA) | @KirstieJane |",
+              "start_offset": 1867,
+              "end_offset": 1958,
+              "field": "participants"
+            },
+            {
+              "quote": "| Chris Holdgraf | [2i2c](https://2i2c.org) | [@choldgraf](https://github.com/choldgraf) |",
+              "start_offset": 1959,
+              "end_offset": 2049,
+              "field": "participants"
+            },
+            {
+              "quote": "| Jeremy Tuloup | QuantStack | @jtpio |",
+              "start_offset": 2050,
+              "end_offset": 2089,
+              "field": "participants"
+            },
+            {
+              "quote": "| Keerthi Swarna| AWS |[@keerthi-swarna](https://github.com/keerthi-swarna) |",
+              "start_offset": 2090,
+              "end_offset": 2167,
+              "field": "participants"
+            },
+            {
+              "quote": "| Dan Yeaw | Anaconda | [@danyeaw](https://github.com/danyeaw) |",
+              "start_offset": 2168,
+              "end_offset": 2232,
+              "field": "participants"
+            },
+            {
+              "quote": "|Pranav Khandelwal | AWS | [@pranavkhandelwal](https://github.com/pranavkhandelwal) |",
+              "start_offset": 2233,
+              "end_offset": 2318,
+              "field": "participants"
+            },
+            {
+              "quote": "| Afshin T. Darian | QuantStack | @afshin |",
+              "start_offset": 2319,
+              "end_offset": 2362,
+              "field": "participants"
+            },
+            {
+              "quote": "|Nicolas Brichet | QuantStack | @brichet |",
+              "start_offset": 2363,
+              "end_offset": 2405,
+              "field": "participants"
+            },
+            {
+              "quote": "|Florence Haudin | QuantStack | @HaudinFlorence |",
+              "start_offset": 2406,
+              "end_offset": 2455,
+              "field": "participants"
+            },
+            {
+              "quote": "|Brian Granger | AWS | @ellisonbg |",
+              "start_offset": 2456,
+              "end_offset": 2491,
+              "field": "participants"
+            },
+            {
+              "quote": "|Sylvain Corlay | QuantStack | @SylvainCorlay |",
+              "start_offset": 2492,
+              "end_offset": 2539,
+              "field": "participants"
+            },
+            {
+              "quote": "## Purpose\n\nThink of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+              "start_offset": 2541,
+              "end_offset": 2680,
+              "field": "purpose"
+            }
+          ]
+        },
+        "analysis": {
+          "meeting_title": "February 2025: Jupyter Community Call",
+          "meeting_date": "2025-02-19",
+          "participants": [
+            "Jordan Bradford",
+            "Kyle Smith",
+            "David Qiu",
+            "Arjun Verma",
+            "Rosio Reyes",
+            "Rick Wagner",
+            "Wayne Decatur",
+            "Matt Fisher",
+            "Ana Ruvalcaba",
+            "Johanna Bayer",
+            "Mike Krassowski",
+            "Michael Chin",
+            "Kirstie Whitaker",
+            "Chris Holdgraf",
+            "Jeremy Tuloup",
+            "Keerthi Swarna",
+            "Dan Yeaw",
+            "Pranav Khandelwal",
+            "Afshin T. Darian",
+            "Nicolas Brichet",
+            "Florence Haudin",
+            "Brian Granger",
+            "Sylvain Corlay"
+          ],
+          "purpose": "Think of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+          "summary": "* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.\n* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:\n* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/\n* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/",
+          "summary_evidence": [
+            {
+              "quote": "* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.",
+              "start_offset": 2951,
+              "end_offset": 3396
+            },
+            {
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:",
+              "start_offset": 3397,
+              "end_offset": 3479
+            },
+            {
+              "quote": "* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/",
+              "start_offset": 3481,
+              "end_offset": 3593
+            },
+            {
+              "quote": "* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/",
+              "start_offset": 3594,
+              "end_offset": 3721
+            }
+          ],
+          "items": [
+            {
+              "quote": "**Discourse:** https://discourse.jupyter.org/t/jupyter-community-calls/668/101?u=ruv7",
+              "start_offset": 215,
+              "end_offset": 300,
+              "id": "a1451742108a489f808c6188832ad17a",
+              "type": "topic",
+              "text": "**Discourse:** https://discourse.jupyter.org/t/jupyter-community-calls/668/101?u=ruv7",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)",
+              "start_offset": 320,
+              "end_offset": 454,
+              "id": "4b7f8c7411be4c56841c87fa6c2444b5",
+              "type": "topic",
+              "text": "- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)",
+              "start_offset": 455,
+              "end_offset": 587,
+              "id": "7cbe731912fc4c4488262c8a9e697711",
+              "type": "topic",
+              "text": "- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.",
+              "start_offset": 2951,
+              "end_offset": 3396,
+              "id": "e06dfbc121fb488b8a6fc26ff0ee8a35",
+              "type": "topic",
+              "text": "* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:",
+              "start_offset": 3397,
+              "end_offset": 3479,
+              "id": "b9bc07c2f75543e1b9e427f959ad5402",
+              "type": "topic",
+              "text": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/",
+              "start_offset": 3481,
+              "end_offset": 3593,
+              "id": "e8cb4f7845234edeb4d0764774016865",
+              "type": "topic",
+              "text": "* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/",
+              "start_offset": 3594,
+              "end_offset": 3721,
+              "id": "a2caf795313a4ffeb66fd60965772305",
+              "type": "topic",
+              "text": "* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Ana Ruvalcaba** Public meetings are announced on Jupyter Community Calendar: https://jupyter.org/community#calendar",
+              "start_offset": 3722,
+              "end_offset": 3841,
+              "id": "0affd24d423944b68266d992ffc754c4",
+              "type": "topic",
+              "text": "* **Ana Ruvalcaba** Public meetings are announced on Jupyter Community Calendar: https://jupyter.org/community#calendar",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Ana Ruvalcaba** Jupyter Governance Check In: Executive Council update",
+              "start_offset": 3979,
+              "end_offset": 4052,
+              "id": "e55a820d79104a21bc3e7f03ae2a4e65",
+              "type": "topic",
+              "text": "* **Ana Ruvalcaba** Jupyter Governance Check In: Executive Council update",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Project Jupyter governance overview https://jupyter.org/governance/overview.html",
+              "start_offset": 4057,
+              "end_offset": 4139,
+              "id": "65bfccbf2e084a0f910fd06909e2e27f",
+              "type": "topic",
+              "text": "* Project Jupyter governance overview https://jupyter.org/governance/overview.html",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Executive Council introductions, we've recently conducted elections, Rick Wagner, Afshin Darian and Chris Holdgraf were elected. Thanks you to Brian Granger (Jupyter cofounder)who will remain on the Jupyter Foundation governing board.",
+              "start_offset": 4144,
+              "end_offset": 4380,
+              "id": "9814405359c147019c4d72774c272111",
+              "type": "topic",
+              "text": "* Executive Council introductions, we've recently conducted elections, Rick Wagner, Afshin Darian and Chris Holdgraf were elected. Thanks you to Brian Granger (Jupyter cofounder)who will remain on the Jupyter Foundation governing board.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Jupyter Foundation governing board activities https://github.com/jupyter-governance/jupyter-foundation-governing-board/issues",
+              "start_offset": 4385,
+              "end_offset": 4512,
+              "id": "eba669dd2b1a419b8f30ab33d6bbb855",
+              "type": "topic",
+              "text": "* Jupyter Foundation governing board activities https://github.com/jupyter-governance/jupyter-foundation-governing-board/issues",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Jupyter Foundation website https://jupyterfoundation.org/",
+              "start_offset": 4517,
+              "end_offset": 4576,
+              "id": "e9cabee671f64a8b9f84fd2e2d948e94",
+              "type": "topic",
+              "text": "* Jupyter Foundation website https://jupyterfoundation.org/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Mehmet Bektas**: [Notebook Intelligence](https://github.com/notebook-intelligence/notebook-intelligence)",
+              "start_offset": 4577,
+              "end_offset": 4685,
+              "id": "0b3c0e621f1a44f28c52c791e4c2537c",
+              "type": "topic",
+              "text": "* **Mehmet Bektas**: [Notebook Intelligence](https://github.com/notebook-intelligence/notebook-intelligence)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Kyle Smith**: On building a notebook review tool",
+              "start_offset": 4686,
+              "end_offset": 4738,
+              "id": "c1a6d88c313a45c8970c1ca019e84582",
+              "type": "topic",
+              "text": "* **Kyle Smith**: On building a notebook review tool",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Arjun Verma**: JupyterCAD - Collaborative CAD in JupyterLab",
+              "start_offset": 4739,
+              "end_offset": 4802,
+              "id": "6f3041be9c4b436f9f7eea3b247e4b93",
+              "type": "topic",
+              "text": "* **Arjun Verma**: JupyterCAD - Collaborative CAD in JupyterLab",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Try in browser with JupyterLite: https://jupytercad.github.io/JupyterCAD/",
+              "start_offset": 4807,
+              "end_offset": 4882,
+              "id": "0a2b47e6444643eba7d307bd63decbb9",
+              "type": "topic",
+              "text": "* Try in browser with JupyterLite: https://jupytercad.github.io/JupyterCAD/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* **Mike Krassowski** JupyterLab 4.4 demo",
+              "start_offset": 4883,
+              "end_offset": 4924,
+              "id": "1be71e6c1b624fba9f77a3d7137285cd",
+              "type": "topic",
+              "text": "* **Mike Krassowski** JupyterLab 4.4 demo",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "Fragment Identification Syntax for Jupyter: https://github.com/jupyter/nbformat/issues/317",
+              "start_offset": 4950,
+              "end_offset": 5040,
+              "id": "b291116d39f145fb8f2dc97115509c82",
+              "type": "topic",
+              "text": "Fragment Identification Syntax for Jupyter: https://github.com/jupyter/nbformat/issues/317",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            }
+          ],
+          "metadata_evidence": [
+            {
+              "quote": "# February 2025: Jupyter Community Call",
+              "start_offset": 0,
+              "end_offset": 39,
+              "field": "meeting_title"
+            },
+            {
+              "quote": "**Date:** February 19, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-02-19/09:00/Jupyter%20Community%20Call))",
+              "start_offset": 41,
+              "end_offset": 212,
+              "field": "meeting_date"
+            },
+            {
+              "quote": "| Jordan Bradford | Boston College | [jrdnbradford](https://github.com/jrdnbradford)",
+              "start_offset": 975,
+              "end_offset": 1059,
+              "field": "participants"
+            },
+            {
+              "quote": "| Kyle Smith | GitNotebooks | [smith-kyle](https://github.com/smith-kyle)|",
+              "start_offset": 1060,
+              "end_offset": 1134,
+              "field": "participants"
+            },
+            {
+              "quote": "| David Qiu | AWS | @dlqqq |",
+              "start_offset": 1135,
+              "end_offset": 1163,
+              "field": "participants"
+            },
+            {
+              "quote": "| Arjun Verma     |   QuantStack | [arjxn-py](https://github.com/arjxn-py)|",
+              "start_offset": 1164,
+              "end_offset": 1239,
+              "field": "participants"
+            },
+            {
+              "quote": "| Rosio Reyes | Anaconda | @RRosio |",
+              "start_offset": 1240,
+              "end_offset": 1276,
+              "field": "participants"
+            },
+            {
+              "quote": "| Rick Wagner | San Diego Supercomputer Center | @rpwagner |",
+              "start_offset": 1277,
+              "end_offset": 1337,
+              "field": "participants"
+            },
+            {
+              "quote": "| Wayne Decatur | Upstate Medical Univeristy | [@fomightez](https://github.com/fomightez) |",
+              "start_offset": 1338,
+              "end_offset": 1429,
+              "field": "participants"
+            },
+            {
+              "quote": "| Matt Fisher | Schmidt center for Data Science & Environment @ UC Berkeley | [@mfisher87](https://github.com/mfisher87/) |",
+              "start_offset": 1430,
+              "end_offset": 1553,
+              "field": "participants"
+            },
+            {
+              "quote": "| Ana Ruvalcaba | Cal Poly State University | @Ruv7  |",
+              "start_offset": 1554,
+              "end_offset": 1608,
+              "field": "participants"
+            },
+            {
+              "quote": "|Johanna Bayer | Donders Institute for Brain Cognition and Behaviour (Netherlands) | [@likeajumprope](https://github.com/likeajumprope) |",
+              "start_offset": 1609,
+              "end_offset": 1746,
+              "field": "participants"
+            },
+            {
+              "quote": "| Mike Krassowski | Quansight | @krassowski |",
+              "start_offset": 1747,
+              "end_offset": 1792,
+              "field": "participants"
+            },
+            {
+              "quote": "| Michael Chin | AWS | [@michaelnchin](https://github.com/michaelnchin) |",
+              "start_offset": 1793,
+              "end_offset": 1866,
+              "field": "participants"
+            },
+            {
+              "quote": "| Kirstie Whitaker | Berkeley Institute for Data Science (California, USA) | @KirstieJane |",
+              "start_offset": 1867,
+              "end_offset": 1958,
+              "field": "participants"
+            },
+            {
+              "quote": "| Chris Holdgraf | [2i2c](https://2i2c.org) | [@choldgraf](https://github.com/choldgraf) |",
+              "start_offset": 1959,
+              "end_offset": 2049,
+              "field": "participants"
+            },
+            {
+              "quote": "| Jeremy Tuloup | QuantStack | @jtpio |",
+              "start_offset": 2050,
+              "end_offset": 2089,
+              "field": "participants"
+            },
+            {
+              "quote": "| Keerthi Swarna| AWS |[@keerthi-swarna](https://github.com/keerthi-swarna) |",
+              "start_offset": 2090,
+              "end_offset": 2167,
+              "field": "participants"
+            },
+            {
+              "quote": "| Dan Yeaw | Anaconda | [@danyeaw](https://github.com/danyeaw) |",
+              "start_offset": 2168,
+              "end_offset": 2232,
+              "field": "participants"
+            },
+            {
+              "quote": "|Pranav Khandelwal | AWS | [@pranavkhandelwal](https://github.com/pranavkhandelwal) |",
+              "start_offset": 2233,
+              "end_offset": 2318,
+              "field": "participants"
+            },
+            {
+              "quote": "| Afshin T. Darian | QuantStack | @afshin |",
+              "start_offset": 2319,
+              "end_offset": 2362,
+              "field": "participants"
+            },
+            {
+              "quote": "|Nicolas Brichet | QuantStack | @brichet |",
+              "start_offset": 2363,
+              "end_offset": 2405,
+              "field": "participants"
+            },
+            {
+              "quote": "|Florence Haudin | QuantStack | @HaudinFlorence |",
+              "start_offset": 2406,
+              "end_offset": 2455,
+              "field": "participants"
+            },
+            {
+              "quote": "|Brian Granger | AWS | @ellisonbg |",
+              "start_offset": 2456,
+              "end_offset": 2491,
+              "field": "participants"
+            },
+            {
+              "quote": "|Sylvain Corlay | QuantStack | @SylvainCorlay |",
+              "start_offset": 2492,
+              "end_offset": 2539,
+              "field": "participants"
+            },
+            {
+              "quote": "## Purpose\n\nThink of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+              "start_offset": 2541,
+              "end_offset": 2680,
+              "field": "purpose"
+            }
+          ]
+        },
+        "provenance": "ai",
+        "meeting_date": "2025-02-19",
+        "participants": [
+          "Jordan Bradford",
+          "Kyle Smith",
+          "David Qiu",
+          "Arjun Verma",
+          "Rosio Reyes",
+          "Rick Wagner",
+          "Wayne Decatur",
+          "Matt Fisher",
+          "Ana Ruvalcaba",
+          "Johanna Bayer",
+          "Mike Krassowski",
+          "Michael Chin",
+          "Kirstie Whitaker",
+          "Chris Holdgraf",
+          "Jeremy Tuloup",
+          "Keerthi Swarna",
+          "Dan Yeaw",
+          "Pranav Khandelwal",
+          "Afshin T. Darian",
+          "Nicolas Brichet",
+          "Florence Haudin",
+          "Brian Granger",
+          "Sylvain Corlay"
+        ]
+      }
+    },
+    {
+      "fixture": "tests/fixtures/meetings/public/jupyter-june-2025.md",
+      "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+      "java_roundtrip_ms": 12333.749,
+      "meeting": {
+        "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+        "analysis_status": "ready",
+        "analysis_error": null,
+        "source_revision": 1,
+        "version": 1,
+        "ai_analysis": {
+          "meeting_title": "June 2025: Jupyter Community Call",
+          "meeting_date": "2025-06-11",
+          "participants": [
+            "Mike Krassowski",
+            "Rosio Reyes",
+            "Kirstie Whitaker",
+            "Ana Ruvalcaba",
+            "Eric Gentry",
+            "Maryam Vareth",
+            "Nicolas Brichet",
+            "David Qiu",
+            "Lahari Chowtoori",
+            "Jason Grout",
+            "Serena Bonaretti",
+            "Drake Aiman",
+            "Matt Fisher",
+            "Jeremy Tuloup",
+            "R Ely",
+            "Martha Cryan"
+          ],
+          "purpose": "Think of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+          "summary": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out\n* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of August. Sign up [here](https://forms.gle/qZv69ut26J8AjxVa6)\n* (7 minutes) Bradley Voytek - Update on Jupyter's global user and developer conference: [JupyterCon 2025](https://jupytercon.com)! November 3 - 6, San Diego California\n* (5 minutes) Ana Ruvalcaba - Jupyter Workshops announcement",
+          "summary_evidence": [
+            {
+              "quote": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out",
+              "start_offset": 2056,
+              "end_offset": 2280
+            },
+            {
+              "quote": "* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of August. Sign up [here](https://forms.gle/qZv69ut26J8AjxVa6)",
+              "start_offset": 2430,
+              "end_offset": 2757
+            },
+            {
+              "quote": "* (7 minutes) Bradley Voytek - Update on Jupyter's global user and developer conference: [JupyterCon 2025](https://jupytercon.com)! November 3 - 6, San Diego California",
+              "start_offset": 2758,
+              "end_offset": 2926
+            },
+            {
+              "quote": "* (5 minutes) Ana Ruvalcaba - Jupyter Workshops announcement",
+              "start_offset": 2927,
+              "end_offset": 2987
+            }
+          ],
+          "items": [
+            {
+              "quote": "- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)",
+              "start_offset": 309,
+              "end_offset": 443,
+              "id": "ddd93886219f447290fcba1ddc51d8c7",
+              "type": "topic",
+              "text": "- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)",
+              "start_offset": 444,
+              "end_offset": 576,
+              "id": "beead3ba608d4f2fbf0fdc392317c32e",
+              "type": "topic",
+              "text": "- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out",
+              "start_offset": 2056,
+              "end_offset": 2280,
+              "id": "8b58792f20ae4ad8a27ebf69a18e7cb0",
+              "type": "topic",
+              "text": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of August. Sign up [here](https://forms.gle/qZv69ut26J8AjxVa6)",
+              "start_offset": 2430,
+              "end_offset": 2757,
+              "id": "bba5bf56aecd450f8640208d8ba309b8",
+              "type": "topic",
+              "text": "* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of August. Sign up [here](https://forms.gle/qZv69ut26J8AjxVa6)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (7 minutes) Bradley Voytek - Update on Jupyter's global user and developer conference: [JupyterCon 2025](https://jupytercon.com)! November 3 - 6, San Diego California",
+              "start_offset": 2758,
+              "end_offset": 2926,
+              "id": "b9cd18d6817441d09a361efbf7009603",
+              "type": "topic",
+              "text": "* (7 minutes) Bradley Voytek - Update on Jupyter's global user and developer conference: [JupyterCon 2025](https://jupytercon.com)! November 3 - 6, San Diego California",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 minutes) Ana Ruvalcaba - Jupyter Workshops announcement",
+              "start_offset": 2927,
+              "end_offset": 2987,
+              "id": "d8b0e7c2320446dea51f3586358ed98f",
+              "type": "topic",
+              "text": "* (5 minutes) Ana Ruvalcaba - Jupyter Workshops announcement",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Call for Proposals coming soon!",
+              "start_offset": 2992,
+              "end_offset": 3025,
+              "id": "00808ebd0c5847a5bd6d710d64ff602d",
+              "type": "topic",
+              "text": "* Call for Proposals coming soon!",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Previous events: https://jupyter.org/community#round-1-2018",
+              "start_offset": 3030,
+              "end_offset": 3091,
+              "id": "eff274bf3cb54fb294b06814270842f6",
+              "type": "topic",
+              "text": "* Previous events: https://jupyter.org/community#round-1-2018",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Likely going live around the end of June, possible 4-6 weeks to deadline for applications. Stay tuned to blog for more news.",
+              "start_offset": 3096,
+              "end_offset": 3222,
+              "id": "05d7c5db916d42b6b27b0a465b7cd43c",
+              "type": "topic",
+              "text": "* Likely going live around the end of June, possible 4-6 weeks to deadline for applications. Stay tuned to blog for more news.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 minutes) Matt Fisher - [GeoJupyter](https://geojupyter.org) updates! [Join us on Jupyter Zulip](https://jupyter.zulipchat.com/#narrow/channel/471314-geojupyter), [try JupyterGIS](https://jupytergis.readthedocs.io/en/latest/), [see our community calendar](https://geojupyter.org/calendar). [JupyterGIS STAC browser WIP](https://github.com/geojupyter/jupytergis/pull/737), [team compass WIP](https://compass.geojupyter.org), potential Summer hackathon in Berkeley (watch Zulip for announcement), AGU 2025 workshop, looking for community use-case leads!",
+              "start_offset": 3223,
+              "end_offset": 3778,
+              "id": "50f4001d0285436db6759d7f17e2d08a",
+              "type": "topic",
+              "text": "* (5 minutes) Matt Fisher - [GeoJupyter](https://geojupyter.org) updates! [Join us on Jupyter Zulip](https://jupyter.zulipchat.com/#narrow/channel/471314-geojupyter), [try JupyterGIS](https://jupytergis.readthedocs.io/en/latest/), [see our community calendar](https://geojupyter.org/calendar). [JupyterGIS STAC browser WIP](https://github.com/geojupyter/jupytergis/pull/737), [team compass WIP](https://compass.geojupyter.org), potential Summer hackathon in Berkeley (watch Zulip for announcement), AGU 2025 workshop, looking for community use-case leads!",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Recent blog post: [The \"GIS Bounce\"](https://geojupyter.org/blog/20250410-community-insight-gis-bounce/index.html)",
+              "start_offset": 3783,
+              "end_offset": 3899,
+              "id": "277e8880d2cc4b6d9f3212d8885bef38",
+              "type": "topic",
+              "text": "* Recent blog post: [The \"GIS Bounce\"](https://geojupyter.org/blog/20250410-community-insight-gis-bounce/index.html)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 mins) Kirstie Whitaker - JupyterHub Leadership Retreat reflections (Held in Berkeley, CA 4-5 June 2025)",
+              "start_offset": 3900,
+              "end_offset": 4008,
+              "id": "9360b1875bcf43efa36756497e04a5e3",
+              "type": "topic",
+              "text": "* (5 mins) Kirstie Whitaker - JupyterHub Leadership Retreat reflections (Held in Berkeley, CA 4-5 June 2025)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 minutes) Maryam Vareth - [JupyterHealth](https://jupyterhealth.org/) quick intro, a new subproject of JupyterHub.",
+              "start_offset": 4009,
+              "end_offset": 4127,
+              "id": "34ad63bc660c4237ab530226da6bb72d",
+              "type": "topic",
+              "text": "* (5 minutes) Maryam Vareth - [JupyterHealth](https://jupyterhealth.org/) quick intro, a new subproject of JupyterHub.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (7 minutes) tonyfast - [notebooks as a stage](https://nbviewer.org/github/tonyfast/tonyfast/blob/07d9736fb23e2dd68176caedd2d2e6309bcb7f6b/tonyfast/xxiv/2025-06-11-present.ipynb)",
+              "start_offset": 4128,
+              "end_offset": 4307,
+              "id": "c176763839ed4b289256717124dacc1e",
+              "type": "topic",
+              "text": "* (7 minutes) tonyfast - [notebooks as a stage](https://nbviewer.org/github/tonyfast/tonyfast/blob/07d9736fb23e2dd68176caedd2d2e6309bcb7f6b/tonyfast/xxiv/2025-06-11-present.ipynb)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 minutes) Jeremy Tuloup - JupyterLite 0.6 release",
+              "start_offset": 4308,
+              "end_offset": 4361,
+              "id": "5b2855aadfac486abd059480ea730655",
+              "type": "topic",
+              "text": "* (5 minutes) Jeremy Tuloup - JupyterLite 0.6 release",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (2 minutes) Rosio Reyes - Security Training Recap",
+              "start_offset": 4362,
+              "end_offset": 4413,
+              "id": "b8bde746116a45118875770d6848a9c4",
+              "type": "topic",
+              "text": "* (2 minutes) Rosio Reyes - Security Training Recap",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Community Calendar: https://docs.jupyter.org/en/latest/community/content-community.html#jupyter-community-meetings",
+              "start_offset": 4439,
+              "end_offset": 4555,
+              "id": "b358346d65a547e8b3363ab7a74de525",
+              "type": "topic",
+              "text": "* Community Calendar: https://docs.jupyter.org/en/latest/community/content-community.html#jupyter-community-meetings",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* https://best.openssf.org/Concise-Guide-for-Developing-More-Secure-Software",
+              "start_offset": 4734,
+              "end_offset": 4810,
+              "id": "df668a3f66ae4b0f9987e0342a603138",
+              "type": "topic",
+              "text": "* https://best.openssf.org/Concise-Guide-for-Developing-More-Secure-Software",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* https://openssf.org/training/securing-projects-with-openssf-scorecard-course/",
+              "start_offset": 4815,
+              "end_offset": 4894,
+              "id": "f8e72c299d4245c89e50370ee1aabb7c",
+              "type": "topic",
+              "text": "* https://openssf.org/training/securing-projects-with-openssf-scorecard-course/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            }
+          ],
+          "metadata_evidence": [
+            {
+              "quote": "# June 2025: Jupyter Community Call",
+              "start_offset": 0,
+              "end_offset": 35,
+              "field": "meeting_title"
+            },
+            {
+              "quote": "**Date:** June 11, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-06-11/09:00/Jupyter%20Community%20Call))",
+              "start_offset": 37,
+              "end_offset": 204,
+              "field": "meeting_date"
+            },
+            {
+              "quote": "| Mike Krassowski | Quansight/OpenTeams | @krassowski |",
+              "start_offset": 892,
+              "end_offset": 947,
+              "field": "participants"
+            },
+            {
+              "quote": "|  Rosio Reyes  | Anaconda   |  @RRosio |",
+              "start_offset": 948,
+              "end_offset": 989,
+              "field": "participants"
+            },
+            {
+              "quote": "| Kirstie Whitaker | Berkeley Institute for Data Science | @KirstieJane              |",
+              "start_offset": 990,
+              "end_offset": 1076,
+              "field": "participants"
+            },
+            {
+              "quote": "|  Ana Ruvalcaba    |       Independent      |     @Ruv7    |",
+              "start_offset": 1077,
+              "end_offset": 1138,
+              "field": "participants"
+            },
+            {
+              "quote": "| Eric Gentry | Anaconda | @ericsnekbytes |",
+              "start_offset": 1140,
+              "end_offset": 1183,
+              "field": "participants"
+            },
+            {
+              "quote": "| Maryam Vareth | Berkeley Institutes for Data Science | @maryamv",
+              "start_offset": 1184,
+              "end_offset": 1249,
+              "field": "participants"
+            },
+            {
+              "quote": "| Nicolas Brichet | QuantStack | @brichet |",
+              "start_offset": 1250,
+              "end_offset": 1293,
+              "field": "participants"
+            },
+            {
+              "quote": "| David Qiu | AWS | @dlqqq |",
+              "start_offset": 1294,
+              "end_offset": 1322,
+              "field": "participants"
+            },
+            {
+              "quote": "|Lahari Chowtoori|AWS|@LahariChowtoori|",
+              "start_offset": 1323,
+              "end_offset": 1362,
+              "field": "participants"
+            },
+            {
+              "quote": "| Jason Grout | Databricks | @jasongrout |",
+              "start_offset": 1363,
+              "end_offset": 1405,
+              "field": "participants"
+            },
+            {
+              "quote": "|Serena Bonaretti| Independent | @sbonaretti|",
+              "start_offset": 1406,
+              "end_offset": 1451,
+              "field": "participants"
+            },
+            {
+              "quote": "| Drake Aiman | Google | @wh1ter4bb1t-js |",
+              "start_offset": 1452,
+              "end_offset": 1494,
+              "field": "participants"
+            },
+            {
+              "quote": "| Matt Fisher | Schmidt DSE | @mfisher |",
+              "start_offset": 1495,
+              "end_offset": 1535,
+              "field": "participants"
+            },
+            {
+              "quote": "| Jeremy Tuloup | QuantStack | @jtpio |",
+              "start_offset": 1536,
+              "end_offset": 1575,
+              "field": "participants"
+            },
+            {
+              "quote": "| R Ely | Bloomberg | @ohrely |",
+              "start_offset": 1576,
+              "end_offset": 1607,
+              "field": "participants"
+            },
+            {
+              "quote": "| Martha Cryan | Plotly | @marthacryan |",
+              "start_offset": 1608,
+              "end_offset": 1648,
+              "field": "participants"
+            },
+            {
+              "quote": "## Purpose\n\nThink of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+              "start_offset": 1650,
+              "end_offset": 1789,
+              "field": "purpose"
+            }
+          ]
+        },
+        "analysis": {
+          "meeting_title": "June 2025: Jupyter Community Call",
+          "meeting_date": "2025-06-11",
+          "participants": [
+            "Mike Krassowski",
+            "Rosio Reyes",
+            "Kirstie Whitaker",
+            "Ana Ruvalcaba",
+            "Eric Gentry",
+            "Maryam Vareth",
+            "Nicolas Brichet",
+            "David Qiu",
+            "Lahari Chowtoori",
+            "Jason Grout",
+            "Serena Bonaretti",
+            "Drake Aiman",
+            "Matt Fisher",
+            "Jeremy Tuloup",
+            "R Ely",
+            "Martha Cryan"
+          ],
+          "purpose": "Think of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+          "summary": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out\n* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of August. Sign up [here](https://forms.gle/qZv69ut26J8AjxVa6)\n* (7 minutes) Bradley Voytek - Update on Jupyter's global user and developer conference: [JupyterCon 2025](https://jupytercon.com)! November 3 - 6, San Diego California\n* (5 minutes) Ana Ruvalcaba - Jupyter Workshops announcement",
+          "summary_evidence": [
+            {
+              "quote": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out",
+              "start_offset": 2056,
+              "end_offset": 2280
+            },
+            {
+              "quote": "* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of August. Sign up [here](https://forms.gle/qZv69ut26J8AjxVa6)",
+              "start_offset": 2430,
+              "end_offset": 2757
+            },
+            {
+              "quote": "* (7 minutes) Bradley Voytek - Update on Jupyter's global user and developer conference: [JupyterCon 2025](https://jupytercon.com)! November 3 - 6, San Diego California",
+              "start_offset": 2758,
+              "end_offset": 2926
+            },
+            {
+              "quote": "* (5 minutes) Ana Ruvalcaba - Jupyter Workshops announcement",
+              "start_offset": 2927,
+              "end_offset": 2987
+            }
+          ],
+          "items": [
+            {
+              "quote": "- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)",
+              "start_offset": 309,
+              "end_offset": 443,
+              "id": "ddd93886219f447290fcba1ddc51d8c7",
+              "type": "topic",
+              "text": "- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)",
+              "start_offset": 444,
+              "end_offset": 576,
+              "id": "beead3ba608d4f2fbf0fdc392317c32e",
+              "type": "topic",
+              "text": "- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out",
+              "start_offset": 2056,
+              "end_offset": 2280,
+              "id": "8b58792f20ae4ad8a27ebf69a18e7cb0",
+              "type": "topic",
+              "text": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of August. Sign up [here](https://forms.gle/qZv69ut26J8AjxVa6)",
+              "start_offset": 2430,
+              "end_offset": 2757,
+              "id": "bba5bf56aecd450f8640208d8ba309b8",
+              "type": "topic",
+              "text": "* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of August. Sign up [here](https://forms.gle/qZv69ut26J8AjxVa6)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (7 minutes) Bradley Voytek - Update on Jupyter's global user and developer conference: [JupyterCon 2025](https://jupytercon.com)! November 3 - 6, San Diego California",
+              "start_offset": 2758,
+              "end_offset": 2926,
+              "id": "b9cd18d6817441d09a361efbf7009603",
+              "type": "topic",
+              "text": "* (7 minutes) Bradley Voytek - Update on Jupyter's global user and developer conference: [JupyterCon 2025](https://jupytercon.com)! November 3 - 6, San Diego California",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 minutes) Ana Ruvalcaba - Jupyter Workshops announcement",
+              "start_offset": 2927,
+              "end_offset": 2987,
+              "id": "d8b0e7c2320446dea51f3586358ed98f",
+              "type": "topic",
+              "text": "* (5 minutes) Ana Ruvalcaba - Jupyter Workshops announcement",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Call for Proposals coming soon!",
+              "start_offset": 2992,
+              "end_offset": 3025,
+              "id": "00808ebd0c5847a5bd6d710d64ff602d",
+              "type": "topic",
+              "text": "* Call for Proposals coming soon!",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Previous events: https://jupyter.org/community#round-1-2018",
+              "start_offset": 3030,
+              "end_offset": 3091,
+              "id": "eff274bf3cb54fb294b06814270842f6",
+              "type": "topic",
+              "text": "* Previous events: https://jupyter.org/community#round-1-2018",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Likely going live around the end of June, possible 4-6 weeks to deadline for applications. Stay tuned to blog for more news.",
+              "start_offset": 3096,
+              "end_offset": 3222,
+              "id": "05d7c5db916d42b6b27b0a465b7cd43c",
+              "type": "topic",
+              "text": "* Likely going live around the end of June, possible 4-6 weeks to deadline for applications. Stay tuned to blog for more news.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 minutes) Matt Fisher - [GeoJupyter](https://geojupyter.org) updates! [Join us on Jupyter Zulip](https://jupyter.zulipchat.com/#narrow/channel/471314-geojupyter), [try JupyterGIS](https://jupytergis.readthedocs.io/en/latest/), [see our community calendar](https://geojupyter.org/calendar). [JupyterGIS STAC browser WIP](https://github.com/geojupyter/jupytergis/pull/737), [team compass WIP](https://compass.geojupyter.org), potential Summer hackathon in Berkeley (watch Zulip for announcement), AGU 2025 workshop, looking for community use-case leads!",
+              "start_offset": 3223,
+              "end_offset": 3778,
+              "id": "50f4001d0285436db6759d7f17e2d08a",
+              "type": "topic",
+              "text": "* (5 minutes) Matt Fisher - [GeoJupyter](https://geojupyter.org) updates! [Join us on Jupyter Zulip](https://jupyter.zulipchat.com/#narrow/channel/471314-geojupyter), [try JupyterGIS](https://jupytergis.readthedocs.io/en/latest/), [see our community calendar](https://geojupyter.org/calendar). [JupyterGIS STAC browser WIP](https://github.com/geojupyter/jupytergis/pull/737), [team compass WIP](https://compass.geojupyter.org), potential Summer hackathon in Berkeley (watch Zulip for announcement), AGU 2025 workshop, looking for community use-case leads!",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Recent blog post: [The \"GIS Bounce\"](https://geojupyter.org/blog/20250410-community-insight-gis-bounce/index.html)",
+              "start_offset": 3783,
+              "end_offset": 3899,
+              "id": "277e8880d2cc4b6d9f3212d8885bef38",
+              "type": "topic",
+              "text": "* Recent blog post: [The \"GIS Bounce\"](https://geojupyter.org/blog/20250410-community-insight-gis-bounce/index.html)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 mins) Kirstie Whitaker - JupyterHub Leadership Retreat reflections (Held in Berkeley, CA 4-5 June 2025)",
+              "start_offset": 3900,
+              "end_offset": 4008,
+              "id": "9360b1875bcf43efa36756497e04a5e3",
+              "type": "topic",
+              "text": "* (5 mins) Kirstie Whitaker - JupyterHub Leadership Retreat reflections (Held in Berkeley, CA 4-5 June 2025)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 minutes) Maryam Vareth - [JupyterHealth](https://jupyterhealth.org/) quick intro, a new subproject of JupyterHub.",
+              "start_offset": 4009,
+              "end_offset": 4127,
+              "id": "34ad63bc660c4237ab530226da6bb72d",
+              "type": "topic",
+              "text": "* (5 minutes) Maryam Vareth - [JupyterHealth](https://jupyterhealth.org/) quick intro, a new subproject of JupyterHub.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (7 minutes) tonyfast - [notebooks as a stage](https://nbviewer.org/github/tonyfast/tonyfast/blob/07d9736fb23e2dd68176caedd2d2e6309bcb7f6b/tonyfast/xxiv/2025-06-11-present.ipynb)",
+              "start_offset": 4128,
+              "end_offset": 4307,
+              "id": "c176763839ed4b289256717124dacc1e",
+              "type": "topic",
+              "text": "* (7 minutes) tonyfast - [notebooks as a stage](https://nbviewer.org/github/tonyfast/tonyfast/blob/07d9736fb23e2dd68176caedd2d2e6309bcb7f6b/tonyfast/xxiv/2025-06-11-present.ipynb)",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (5 minutes) Jeremy Tuloup - JupyterLite 0.6 release",
+              "start_offset": 4308,
+              "end_offset": 4361,
+              "id": "5b2855aadfac486abd059480ea730655",
+              "type": "topic",
+              "text": "* (5 minutes) Jeremy Tuloup - JupyterLite 0.6 release",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* (2 minutes) Rosio Reyes - Security Training Recap",
+              "start_offset": 4362,
+              "end_offset": 4413,
+              "id": "b8bde746116a45118875770d6848a9c4",
+              "type": "topic",
+              "text": "* (2 minutes) Rosio Reyes - Security Training Recap",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* Community Calendar: https://docs.jupyter.org/en/latest/community/content-community.html#jupyter-community-meetings",
+              "start_offset": 4439,
+              "end_offset": 4555,
+              "id": "b358346d65a547e8b3363ab7a74de525",
+              "type": "topic",
+              "text": "* Community Calendar: https://docs.jupyter.org/en/latest/community/content-community.html#jupyter-community-meetings",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* https://best.openssf.org/Concise-Guide-for-Developing-More-Secure-Software",
+              "start_offset": 4734,
+              "end_offset": 4810,
+              "id": "df668a3f66ae4b0f9987e0342a603138",
+              "type": "topic",
+              "text": "* https://best.openssf.org/Concise-Guide-for-Developing-More-Secure-Software",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "* https://openssf.org/training/securing-projects-with-openssf-scorecard-course/",
+              "start_offset": 4815,
+              "end_offset": 4894,
+              "id": "f8e72c299d4245c89e50370ee1aabb7c",
+              "type": "topic",
+              "text": "* https://openssf.org/training/securing-projects-with-openssf-scorecard-course/",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            }
+          ],
+          "metadata_evidence": [
+            {
+              "quote": "# June 2025: Jupyter Community Call",
+              "start_offset": 0,
+              "end_offset": 35,
+              "field": "meeting_title"
+            },
+            {
+              "quote": "**Date:** June 11, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-06-11/09:00/Jupyter%20Community%20Call))",
+              "start_offset": 37,
+              "end_offset": 204,
+              "field": "meeting_date"
+            },
+            {
+              "quote": "| Mike Krassowski | Quansight/OpenTeams | @krassowski |",
+              "start_offset": 892,
+              "end_offset": 947,
+              "field": "participants"
+            },
+            {
+              "quote": "|  Rosio Reyes  | Anaconda   |  @RRosio |",
+              "start_offset": 948,
+              "end_offset": 989,
+              "field": "participants"
+            },
+            {
+              "quote": "| Kirstie Whitaker | Berkeley Institute for Data Science | @KirstieJane              |",
+              "start_offset": 990,
+              "end_offset": 1076,
+              "field": "participants"
+            },
+            {
+              "quote": "|  Ana Ruvalcaba    |       Independent      |     @Ruv7    |",
+              "start_offset": 1077,
+              "end_offset": 1138,
+              "field": "participants"
+            },
+            {
+              "quote": "| Eric Gentry | Anaconda | @ericsnekbytes |",
+              "start_offset": 1140,
+              "end_offset": 1183,
+              "field": "participants"
+            },
+            {
+              "quote": "| Maryam Vareth | Berkeley Institutes for Data Science | @maryamv",
+              "start_offset": 1184,
+              "end_offset": 1249,
+              "field": "participants"
+            },
+            {
+              "quote": "| Nicolas Brichet | QuantStack | @brichet |",
+              "start_offset": 1250,
+              "end_offset": 1293,
+              "field": "participants"
+            },
+            {
+              "quote": "| David Qiu | AWS | @dlqqq |",
+              "start_offset": 1294,
+              "end_offset": 1322,
+              "field": "participants"
+            },
+            {
+              "quote": "|Lahari Chowtoori|AWS|@LahariChowtoori|",
+              "start_offset": 1323,
+              "end_offset": 1362,
+              "field": "participants"
+            },
+            {
+              "quote": "| Jason Grout | Databricks | @jasongrout |",
+              "start_offset": 1363,
+              "end_offset": 1405,
+              "field": "participants"
+            },
+            {
+              "quote": "|Serena Bonaretti| Independent | @sbonaretti|",
+              "start_offset": 1406,
+              "end_offset": 1451,
+              "field": "participants"
+            },
+            {
+              "quote": "| Drake Aiman | Google | @wh1ter4bb1t-js |",
+              "start_offset": 1452,
+              "end_offset": 1494,
+              "field": "participants"
+            },
+            {
+              "quote": "| Matt Fisher | Schmidt DSE | @mfisher |",
+              "start_offset": 1495,
+              "end_offset": 1535,
+              "field": "participants"
+            },
+            {
+              "quote": "| Jeremy Tuloup | QuantStack | @jtpio |",
+              "start_offset": 1536,
+              "end_offset": 1575,
+              "field": "participants"
+            },
+            {
+              "quote": "| R Ely | Bloomberg | @ohrely |",
+              "start_offset": 1576,
+              "end_offset": 1607,
+              "field": "participants"
+            },
+            {
+              "quote": "| Martha Cryan | Plotly | @marthacryan |",
+              "start_offset": 1608,
+              "end_offset": 1648,
+              "field": "participants"
+            },
+            {
+              "quote": "## Purpose\n\nThink of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.",
+              "start_offset": 1650,
+              "end_offset": 1789,
+              "field": "purpose"
+            }
+          ]
+        },
+        "provenance": "ai",
+        "meeting_date": "2025-06-11",
+        "participants": [
+          "Mike Krassowski",
+          "Rosio Reyes",
+          "Kirstie Whitaker",
+          "Ana Ruvalcaba",
+          "Eric Gentry",
+          "Maryam Vareth",
+          "Nicolas Brichet",
+          "David Qiu",
+          "Lahari Chowtoori",
+          "Jason Grout",
+          "Serena Bonaretti",
+          "Drake Aiman",
+          "Matt Fisher",
+          "Jeremy Tuloup",
+          "R Ely",
+          "Martha Cryan"
+        ]
+      }
+    },
+    {
+      "fixture": "tests/fixtures/meetings/synthetic-release-planning.md",
+      "document_id": "b8370d1ea3dc47d6bd25cb322d88cd7d",
+      "java_roundtrip_ms": 2967.585,
+      "meeting": {
+        "document_id": "b8370d1ea3dc47d6bd25cb322d88cd7d",
+        "analysis_status": "ready",
+        "analysis_error": null,
+        "source_revision": 1,
+        "version": 1,
+        "ai_analysis": {
+          "meeting_title": "합성 자료: 검색 서비스 출시 회의",
+          "meeting_date": "2026-10-01",
+          "participants": [
+            "민지",
+            "준호",
+            "서연"
+          ],
+          "purpose": "검색 서비스의 로그 보관 정책과 출시 준비를 정한다.",
+          "summary": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.\n결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.\n작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.\n작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+          "summary_evidence": [
+            {
+              "quote": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.",
+              "start_offset": 173,
+              "end_offset": 203
+            },
+            {
+              "quote": "결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.",
+              "start_offset": 204,
+              "end_offset": 233
+            },
+            {
+              "quote": "작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.",
+              "start_offset": 234,
+              "end_offset": 281
+            },
+            {
+              "quote": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+              "start_offset": 282,
+              "end_offset": 322
+            }
+          ],
+          "items": [
+            {
+              "quote": "논의: 검색 결과에는 문서 제목과 원문 근거를 함께 표시한다.",
+              "start_offset": 88,
+              "end_offset": 122,
+              "id": "21311287a5274d81a8dcf18518776331",
+              "type": "topic",
+              "text": "논의: 검색 결과에는 문서 제목과 원문 근거를 함께 표시한다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "제안: 준호는 로그 보관 기간을 90일로 늘리자고 제안했다. 이 제안은 승인하지 않았다.",
+              "start_offset": 123,
+              "end_offset": 172,
+              "id": "4bd5138f10c2400fa2bb63b0dfc3507c",
+              "type": "proposal",
+              "text": "제안: 준호는 로그 보관 기간을 90일로 늘리자고 제안했다. 이 제안은 승인하지 않았다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.",
+              "start_offset": 173,
+              "end_offset": 203,
+              "id": "9fe06bd897fa4a8c824e3fb3c7c38a33",
+              "type": "decision",
+              "text": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.",
+              "start_offset": 204,
+              "end_offset": 233,
+              "id": "d8320d02532d49c4a663fdfd1faec86c",
+              "type": "decision",
+              "text": "결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.",
+              "start_offset": 234,
+              "end_offset": 281,
+              "id": "5a4fd5151f9a4eb481f89f67140719d7",
+              "type": "action",
+              "text": "작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.",
+              "assignee": "민지",
+              "due_date": "2026-10-05",
+              "priority": "high",
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+              "start_offset": 282,
+              "end_offset": 322,
+              "id": "2a5ef7eafe994d87948aa4f35d0a311d",
+              "type": "unresolved",
+              "text": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "미결: 검색 품질의 출시 기준은 다음 회의에서 결정한다.",
+              "start_offset": 323,
+              "end_offset": 354,
+              "id": "0a6a66ad6ee04fe29cade115e2eab5f4",
+              "type": "unresolved",
+              "text": "미결: 검색 품질의 출시 기준은 다음 회의에서 결정한다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            }
+          ],
+          "metadata_evidence": [
+            {
+              "quote": "# 합성 자료: 검색 서비스 출시 회의",
+              "start_offset": 0,
+              "end_offset": 21,
+              "field": "meeting_title"
+            },
+            {
+              "quote": "날짜: 2026-10-01",
+              "start_offset": 22,
+              "end_offset": 36,
+              "field": "meeting_date"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "목적: 검색 서비스의 로그 보관 정책과 출시 준비를 정한다.",
+              "start_offset": 53,
+              "end_offset": 86,
+              "field": "purpose"
+            }
+          ]
+        },
+        "analysis": {
+          "meeting_title": "합성 자료: 검색 서비스 출시 회의",
+          "meeting_date": "2026-10-01",
+          "participants": [
+            "민지",
+            "준호",
+            "서연"
+          ],
+          "purpose": "검색 서비스의 로그 보관 정책과 출시 준비를 정한다.",
+          "summary": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.\n결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.\n작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.\n작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+          "summary_evidence": [
+            {
+              "quote": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.",
+              "start_offset": 173,
+              "end_offset": 203
+            },
+            {
+              "quote": "결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.",
+              "start_offset": 204,
+              "end_offset": 233
+            },
+            {
+              "quote": "작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.",
+              "start_offset": 234,
+              "end_offset": 281
+            },
+            {
+              "quote": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+              "start_offset": 282,
+              "end_offset": 322
+            }
+          ],
+          "items": [
+            {
+              "quote": "논의: 검색 결과에는 문서 제목과 원문 근거를 함께 표시한다.",
+              "start_offset": 88,
+              "end_offset": 122,
+              "id": "21311287a5274d81a8dcf18518776331",
+              "type": "topic",
+              "text": "논의: 검색 결과에는 문서 제목과 원문 근거를 함께 표시한다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "제안: 준호는 로그 보관 기간을 90일로 늘리자고 제안했다. 이 제안은 승인하지 않았다.",
+              "start_offset": 123,
+              "end_offset": 172,
+              "id": "4bd5138f10c2400fa2bb63b0dfc3507c",
+              "type": "proposal",
+              "text": "제안: 준호는 로그 보관 기간을 90일로 늘리자고 제안했다. 이 제안은 승인하지 않았다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.",
+              "start_offset": 173,
+              "end_offset": 203,
+              "id": "9fe06bd897fa4a8c824e3fb3c7c38a33",
+              "type": "decision",
+              "text": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.",
+              "start_offset": 204,
+              "end_offset": 233,
+              "id": "d8320d02532d49c4a663fdfd1faec86c",
+              "type": "decision",
+              "text": "결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.",
+              "start_offset": 234,
+              "end_offset": 281,
+              "id": "5a4fd5151f9a4eb481f89f67140719d7",
+              "type": "action",
+              "text": "작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.",
+              "assignee": "민지",
+              "due_date": "2026-10-05",
+              "priority": "high",
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+              "start_offset": 282,
+              "end_offset": 322,
+              "id": "2a5ef7eafe994d87948aa4f35d0a311d",
+              "type": "unresolved",
+              "text": "작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "미결: 검색 품질의 출시 기준은 다음 회의에서 결정한다.",
+              "start_offset": 323,
+              "end_offset": 354,
+              "id": "0a6a66ad6ee04fe29cade115e2eab5f4",
+              "type": "unresolved",
+              "text": "미결: 검색 품질의 출시 기준은 다음 회의에서 결정한다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            }
+          ],
+          "metadata_evidence": [
+            {
+              "quote": "# 합성 자료: 검색 서비스 출시 회의",
+              "start_offset": 0,
+              "end_offset": 21,
+              "field": "meeting_title"
+            },
+            {
+              "quote": "날짜: 2026-10-01",
+              "start_offset": 22,
+              "end_offset": 36,
+              "field": "meeting_date"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "목적: 검색 서비스의 로그 보관 정책과 출시 준비를 정한다.",
+              "start_offset": 53,
+              "end_offset": 86,
+              "field": "purpose"
+            }
+          ]
+        },
+        "provenance": "ai",
+        "meeting_date": "2026-10-01",
+        "participants": [
+          "민지",
+          "준호",
+          "서연"
+        ]
+      }
+    },
+    {
+      "fixture": "tests/fixtures/meetings/synthetic-release-followup.md",
+      "document_id": "c06afa3f0d64497386350c925c90081d",
+      "java_roundtrip_ms": 2172.797,
+      "meeting": {
+        "document_id": "c06afa3f0d64497386350c925c90081d",
+        "analysis_status": "ready",
+        "analysis_error": null,
+        "source_revision": 1,
+        "version": 1,
+        "ai_analysis": {
+          "meeting_title": "합성 자료: 검색 서비스 후속 회의",
+          "meeting_date": "2026-10-08",
+          "participants": [
+            "민지",
+            "준호",
+            "서연"
+          ],
+          "purpose": "로그 보관 정책과 출시 준비를 재검토한다.",
+          "summary": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.\n논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.\n작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.\n미결: 외부 공개 날짜는 아직 확정하지 않았다.",
+          "summary_evidence": [
+            {
+              "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+              "start_offset": 82,
+              "end_offset": 146
+            },
+            {
+              "quote": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.",
+              "start_offset": 147,
+              "end_offset": 181
+            },
+            {
+              "quote": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.",
+              "start_offset": 182,
+              "end_offset": 228
+            },
+            {
+              "quote": "미결: 외부 공개 날짜는 아직 확정하지 않았다.",
+              "start_offset": 229,
+              "end_offset": 255
+            }
+          ],
+          "items": [
+            {
+              "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+              "start_offset": 82,
+              "end_offset": 146,
+              "id": "321edfca619b4cbbb6a95bd79b6827c9",
+              "type": "decision",
+              "text": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.",
+              "start_offset": 147,
+              "end_offset": 181,
+              "id": "f86e9b806c6d4b6db68f7e384c021b4c",
+              "type": "topic",
+              "text": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.",
+              "start_offset": 182,
+              "end_offset": 228,
+              "id": "80666ec97a484ce3822677df2d4a18bc",
+              "type": "action",
+              "text": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.",
+              "assignee": "준호",
+              "due_date": "2026-10-12",
+              "priority": "high",
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "미결: 외부 공개 날짜는 아직 확정하지 않았다.",
+              "start_offset": 229,
+              "end_offset": 255,
+              "id": "cd222daa94a440a091309dd12f7f330a",
+              "type": "unresolved",
+              "text": "미결: 외부 공개 날짜는 아직 확정하지 않았다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            }
+          ],
+          "metadata_evidence": [
+            {
+              "quote": "# 합성 자료: 검색 서비스 후속 회의",
+              "start_offset": 0,
+              "end_offset": 21,
+              "field": "meeting_title"
+            },
+            {
+              "quote": "날짜: 2026-10-08",
+              "start_offset": 22,
+              "end_offset": 36,
+              "field": "meeting_date"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "목적: 로그 보관 정책과 출시 준비를 재검토한다.",
+              "start_offset": 53,
+              "end_offset": 80,
+              "field": "purpose"
+            }
+          ]
+        },
+        "analysis": {
+          "meeting_title": "합성 자료: 검색 서비스 후속 회의",
+          "meeting_date": "2026-10-08",
+          "participants": [
+            "민지",
+            "준호",
+            "서연"
+          ],
+          "purpose": "로그 보관 정책과 출시 준비를 재검토한다.",
+          "summary": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.\n논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.\n작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.\n미결: 외부 공개 날짜는 아직 확정하지 않았다.",
+          "summary_evidence": [
+            {
+              "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+              "start_offset": 82,
+              "end_offset": 146
+            },
+            {
+              "quote": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.",
+              "start_offset": 147,
+              "end_offset": 181
+            },
+            {
+              "quote": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.",
+              "start_offset": 182,
+              "end_offset": 228
+            },
+            {
+              "quote": "미결: 외부 공개 날짜는 아직 확정하지 않았다.",
+              "start_offset": 229,
+              "end_offset": 255
+            }
+          ],
+          "items": [
+            {
+              "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+              "start_offset": 82,
+              "end_offset": 146,
+              "id": "321edfca619b4cbbb6a95bd79b6827c9",
+              "type": "decision",
+              "text": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.",
+              "start_offset": 147,
+              "end_offset": 181,
+              "id": "f86e9b806c6d4b6db68f7e384c021b4c",
+              "type": "topic",
+              "text": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.",
+              "start_offset": 182,
+              "end_offset": 228,
+              "id": "80666ec97a484ce3822677df2d4a18bc",
+              "type": "action",
+              "text": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.",
+              "assignee": "준호",
+              "due_date": "2026-10-12",
+              "priority": "high",
+              "status": "needs_confirmation"
+            },
+            {
+              "quote": "미결: 외부 공개 날짜는 아직 확정하지 않았다.",
+              "start_offset": 229,
+              "end_offset": 255,
+              "id": "cd222daa94a440a091309dd12f7f330a",
+              "type": "unresolved",
+              "text": "미결: 외부 공개 날짜는 아직 확정하지 않았다.",
+              "assignee": null,
+              "due_date": null,
+              "priority": null,
+              "status": "needs_confirmation"
+            }
+          ],
+          "metadata_evidence": [
+            {
+              "quote": "# 합성 자료: 검색 서비스 후속 회의",
+              "start_offset": 0,
+              "end_offset": 21,
+              "field": "meeting_title"
+            },
+            {
+              "quote": "날짜: 2026-10-08",
+              "start_offset": 22,
+              "end_offset": 36,
+              "field": "meeting_date"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "참석자: 민지, 준호, 서연",
+              "start_offset": 37,
+              "end_offset": 52,
+              "field": "participants"
+            },
+            {
+              "quote": "목적: 로그 보관 정책과 출시 준비를 재검토한다.",
+              "start_offset": 53,
+              "end_offset": 80,
+              "field": "purpose"
+            }
+          ]
+        },
+        "provenance": "ai",
+        "meeting_date": "2026-10-08",
+        "participants": [
+          "민지",
+          "준호",
+          "서연"
+        ]
+      }
+    }
+  ],
+  "answers": [
+    {
+      "query": "What does the host guide say about the agenda link?",
+      "filters": {
+        "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+        "kind": "document"
+      },
+      "response": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "citations": [
+              {
+                "document_id": "46ec95ae06d84d9eaf2414d76895c138",
+                "revision": 1,
+                "chunk_id": "0e41c9adefde4206925a70688db1fa71",
+                "title": "Host guide",
+                "meeting_date": null,
+                "page": null,
+                "start_offset": 737,
+                "end_offset": 918,
+                "quote": "Each meeting should have a collaborative public agenda document (for example on HackMD). The agenda link should be included in the event’s description in the shared Google Calendar."
+              }
+            ],
+            "text": "The agenda link should be included in the event’s description in the shared Google Calendar."
+          },
+          {
+            "citations": [
+              {
+                "document_id": "46ec95ae06d84d9eaf2414d76895c138",
+                "revision": 1,
+                "chunk_id": "034eb255d98d4946a9eeb58ca74a889e",
+                "title": "Host guide",
+                "meeting_date": null,
+                "page": null,
+                "start_offset": 8675,
+                "end_offset": 8780,
+                "quote": "> If you have a topic you’d like to discuss, please add it to the agenda. (Share agenda link in the chat)"
+              }
+            ],
+            "text": "The agenda link should be shared in the chat."
+          },
+          {
+            "citations": [
+              {
+                "document_id": "46ec95ae06d84d9eaf2414d76895c138",
+                "revision": 1,
+                "chunk_id": "3bf890394cf742a481f3fd8d963be912",
+                "title": "Host guide",
+                "meeting_date": null,
+                "page": null,
+                "start_offset": 6727,
+                "end_offset": 7020,
+                "quote": "* *The agenda is a collaboratively created document made by the participants.Ensure a section for today’s meeting is created, with today’s date and a table for participants to record their names (which can be copied/pasted from lower entries). The agenda will also be used as meeting minutes.*"
+              }
+            ],
+            "text": "The agenda is a collaboratively created document made by the participants."
+          }
+        ],
+        "model": "Qwen/Qwen3-1.7B",
+        "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "experimental": true,
+        "query": "What does the host guide say about the agenda link?",
+        "method": "bm25",
+        "results": [
+          {
+            "document_id": "46ec95ae06d84d9eaf2414d76895c138",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Host guide",
+            "filename": "jupyter-host-guide.md",
+            "revision": 1,
+            "chunk_id": "b8969e60537e4070a393133aede9b29d",
+            "text": "conduct: [jupyter.org/conduct](http://jupyter.org/conduct) (send link to chat)  \n* Encourage attendees to add discussion points to the agenda\n\nSample script\n\nBefore we start the recording, does anyone have anything they’d like to say off the record? (Remember to say “We will now begin recording/The recording has ended” before starting/stopping recording :)\n\n > Hello and welcome to our \\[full date\\] Jupyter Community call. I’m \\[host name\\] and I’ll be your host today. This is a place for all contributors to connect with each other and the community about any exciting work happening in the Jupyter Community. A special highlight and welcome to all first time participants\\! We want all newcomers to feel welcome, we invite you to join in on discussions, introduce yourself, or add items to the agenda. \n\n> Please keep in mind that this call will be recorded and posted to YouTube for the community to view. This call is a part of the Jupyter community; we follow the Jupyter Code of Conduct, ",
+            "page": null,
+            "start_offset": 7568,
+            "end_offset": 8566,
+            "document_kind": "document",
+            "meeting_date": null,
+            "score": 7.12699137
+          },
+          {
+            "document_id": "46ec95ae06d84d9eaf2414d76895c138",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Host guide",
+            "filename": "jupyter-host-guide.md",
+            "revision": 1,
+            "chunk_id": "0e41c9adefde4206925a70688db1fa71",
+            "text": "# **Host Guide**\n\nWelcome to the Host Guide, a place for call hosts to get help, info, advice and best practices for conducting engaging and effective meetings.\n\nCheck the [Suggested Meeting Script section](#meeting-script-and-checklist) if you want more info for running a great meeting, and peruse the other sections for basic info and additional context. This documentation can be used as a template, the host can duplicate the guide and update the links to reflect their individual meeting or simply use it as a reference point in planning. \n\n## &#x23F0; Basic Meeting Event Info \n\nYou can check the [Jupyter Community Meetings calendar](https://jupyter.org/community#calendar) for the exact time of each meeting in your time zone.\n\nEach meeting should have a collaborative public agenda document (for example on HackMD). The agenda link should be included in the event’s description in the shared Google Calendar.\n\n## &#x1F3AF; Meeting Purpose/Goals\n\nMeetings are a way to connect members of ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 997,
+            "document_kind": "document",
+            "meeting_date": null,
+            "score": 6.44293097
+          },
+          {
+            "document_id": "46ec95ae06d84d9eaf2414d76895c138",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Host guide",
+            "filename": "jupyter-host-guide.md",
+            "revision": 1,
+            "chunk_id": "30998c9361584c3db841c6a0fcb7ddad",
+            "text": "g/community#calendar)   \n* Encourage people to reach out if they want to host  \n* After ending the recording, ask if anyone wants to say anything off the record\n\nSample Script\n\n> Thank you to everyone for joining\\! I’m happy to have you all as a part of the Jupyter community. If you have any feedback, please direct it to [Discourse](https://discourse.jupyter.org/t/jupyter-community-calls/668/103). We’d love to hear what you think about the call or how to improve future meetings. Our next call will be \\[day, month\\]. Check out the [Jupyter community calendar](https://jupyter.org/community#calendar) to see what other types of meetings are happening in between. \n\nThe following message is recommended for Community Calls or similar events that engage with the broader contributor community:\n\n> If you have any interest in sharing in future \\[title\\] calls, please do\\! It doesn’t have to be a big share, a polished share, or a technical share, just show off what you do with Jupyter that ",
+            "page": null,
+            "start_offset": 9263,
+            "end_offset": 10256,
+            "document_kind": "document",
+            "meeting_date": null,
+            "score": 5.78903765
+          },
+          {
+            "document_id": "46ec95ae06d84d9eaf2414d76895c138",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Host guide",
+            "filename": "jupyter-host-guide.md",
+            "revision": 1,
+            "chunk_id": "034eb255d98d4946a9eeb58ca74a889e",
+            "text": "ill be recorded and posted to YouTube for the community to view. This call is a part of the Jupyter community; we follow the Jupyter Code of Conduct, which you can read about at jupyter.org/conduct\\[Meeting host insert link in the meeting minutes template\\]\n\n> If you have a topic you’d like to discuss, please add it to the agenda. (Share agenda link in the chat)\n\n### &#x1F3BA; Closing message \n\nCreate a script from these talking points *or* use the script below if you want\\! \n\n* Thank attendees for joining  \n* Ask for feedback on running the call to be posted to [Discourse](https://discourse.jupyter.org/t/jupyter-community-calls/668/101)  \n* Announce date of next call and send link to Hackmd to submit topics  \n* The community is welcome to join public meetings\\! Send link to meeting chat: [Jupyter community calendar](https://jupyter.org/community#calendar)   \n* Encourage people to reach out if they want to host  \n* After ending the recording, ask if anyone wants to say anything off ",
+            "page": null,
+            "start_offset": 8416,
+            "end_offset": 9413,
+            "document_kind": "document",
+            "meeting_date": null,
+            "score": 5.39107257
+          },
+          {
+            "document_id": "46ec95ae06d84d9eaf2414d76895c138",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Host guide",
+            "filename": "jupyter-host-guide.md",
+            "revision": 1,
+            "chunk_id": "3bf890394cf742a481f3fd8d963be912",
+            "text": ")  \n  * *The agenda is a collaboratively created document made by the participants.Ensure a section for today’s meeting is created, with today’s date and a table for participants to record their names (which can be copied/pasted from lower entries). The agenda will also be used as meeting minutes.*\n\n### &#x1F517; *Links to copy/paste into the meeting chat:*\n\n* Weekly Meeting Notes: \\[Insert HackMD here\\]  \n* Jupyter Code of Conduct: [https://jupyter.org/governance/conduct/code\\_of\\_conduct.html](https://jupyter.org/governance/conduct/code_of_conduct.html) \n\n### &#x1F399; Start the Meeting! \n\nCreate a script from these talking points *or* use the script below if you want\\! \n\n* Inform people when you’re about to start recording  \n* Introduce yourself  \n* Describe what the call is  \n* Welcome all newcomers  \n* Point people to the code of conduct: [jupyter.org/conduct](http://jupyter.org/conduct) (send link to chat)  \n* Encourage attendees to add discussion points to the agenda\n\nSample ",
+            "page": null,
+            "start_offset": 6721,
+            "end_offset": 7718,
+            "document_kind": "document",
+            "meeting_date": null,
+            "score": 4.67160698
+          }
+        ],
+        "model_called": true,
+        "elapsed_ms": 6539.28
+      },
+      "java_roundtrip_ms": 6554.672
+    },
+    {
+      "query": "What was reported about JupyterLab 4.4 in February and June?",
+      "filters": {
+        "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+        "kind": "meeting"
+      },
+      "response": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "citations": [
+              {
+                "document_id": "7a480d811162407abf1571e1863e648d",
+                "revision": 1,
+                "chunk_id": "3760d8bce8654d3c9a97e597d15f81a7",
+                "title": "Jupyter February",
+                "meeting_date": "2025-02-19",
+                "page": null,
+                "start_offset": 4883,
+                "end_offset": 4924,
+                "quote": "* **Mike Krassowski** JupyterLab 4.4 demo"
+              }
+            ],
+            "text": "JupyterLab 4.4 demo was announced in February 2025."
+          },
+          {
+            "citations": [
+              {
+                "document_id": "7a480d811162407abf1571e1863e648d",
+                "revision": 1,
+                "chunk_id": "7e44d18b779141f8885334a2a92f1c84",
+                "title": "Jupyter February",
+                "meeting_date": "2025-02-19",
+                "page": null,
+                "start_offset": 3397,
+                "end_offset": 3479,
+                "quote": "* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers:"
+              }
+            ],
+            "text": "JupyterLab 4.4 beta was announced in February 2025."
+          },
+          {
+            "citations": [
+              {
+                "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+                "revision": 1,
+                "chunk_id": "4cc9c1b99d1a47a2ab8f4360bc919c27",
+                "title": "Jupyter June",
+                "meeting_date": "2025-06-11",
+                "page": null,
+                "start_offset": 2056,
+                "end_offset": 2280,
+                "quote": "* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out"
+              }
+            ],
+            "text": "JupyterLab 4.4 was announced in June 2025."
+          }
+        ],
+        "model": "Qwen/Qwen3-1.7B",
+        "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "experimental": true,
+        "query": "What was reported about JupyterLab 4.4 in February and June?",
+        "method": "bm25",
+        "results": [
+          {
+            "document_id": "7a480d811162407abf1571e1863e648d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter February",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "02fb1532dbe94a3ebe0f01190b00bca2",
+            "text": "# February 2025: Jupyter Community Call\n\n**Date:** February 19, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-02-19/09:00/Jupyter%20Community%20Call))\n\n\n**Discourse:** https://discourse.jupyter.org/t/jupyter-community-calls/668/101?u=ruv7\n\n\n**Please note:**\n- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)\n- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)\n- Everyone present is held to the [Jupyter Code of Conduct](https://jupyter.org/conduct)\n\n**Welcome!**\n\nIf you are joining the Jupyter Community Call, sign in below so we know who was here.\n\n|   Name          |           Institution     | GitHub Handle                                   |\n|-----------------|---------------------------|-------------------------------------------------|\n| Jordan Bradford | ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 995,
+            "document_kind": "meeting",
+            "meeting_date": "2025-02-19",
+            "score": 5.44729854
+          },
+          {
+            "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter June",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "16e02e610d97463d86b5b9f0b1019217",
+            "text": "# June 2025: Jupyter Community Call\n\n**Date:** June 11, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-06-11/09:00/Jupyter%20Community%20Call))\n\n\n**Feedback or questions?** You can either post publicly on the following thread on \n\n**Please note:**\n- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)\n- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)\n- Everyone present is held to the [Jupyter Code of Conduct](https://jupyter.org/conduct)\n\n**Welcome!**\n\nIf you are joining the Jupyter Community Call, we ask that you sign in below at the start of the call so that we know who was here.\n\n| Name | Institution | GitHub Handle |\n| ---- | ----------- | ------------- |\n| Mike Krassowski | Quansight/OpenTeams | @krassowski |\n|  Rosio Reyes  | Anaconda   |  @RRosio |\n| Kirstie ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000,
+            "document_kind": "meeting",
+            "meeting_date": "2025-06-11",
+            "score": 3.98613319
+          },
+          {
+            "document_id": "7a480d811162407abf1571e1863e648d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter February",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "3760d8bce8654d3c9a97e597d15f81a7",
+            "text": " elections, Rick Wagner, Afshin Darian and Chris Holdgraf were elected. Thanks you to Brian Granger (Jupyter cofounder)who will remain on the Jupyter Foundation governing board.\n    * Jupyter Foundation governing board activities https://github.com/jupyter-governance/jupyter-foundation-governing-board/issues\n    * Jupyter Foundation website https://jupyterfoundation.org/\n* **Mehmet Bektas**: [Notebook Intelligence](https://github.com/notebook-intelligence/notebook-intelligence)\n* **Kyle Smith**: On building a notebook review tool\n* **Arjun Verma**: JupyterCAD - Collaborative CAD in JupyterLab\n    * Try in browser with JupyterLite: https://jupytercad.github.io/JupyterCAD/\n* **Mike Krassowski** JupyterLab 4.4 demo\n\n\n## Other Links Shared\n\nFragment Identification Syntax for Jupyter: https://github.com/jupyter/nbformat/issues/317\n",
+            "page": null,
+            "start_offset": 4203,
+            "end_offset": 5041,
+            "document_kind": "meeting",
+            "meeting_date": "2025-02-19",
+            "score": 3.3689221
+          },
+          {
+            "document_id": "7a480d811162407abf1571e1863e648d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter February",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "7e44d18b779141f8885334a2a92f1c84",
+            "text": "antStack | @SylvainCorlay |\n\n## Purpose\n\nThink of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.\n\nFor more discussion on the format of these calls, see the thread [here](https://discourse.jupyter.org/t/jupyter-community-calls/668/101?u=ruv7).\n\n## Short reports, celebrations, shout-outs\n\nThis is a place to make short announcements (without a need for discussion). \n\n* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.\n* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers: \n* **Chris Holdgraf** the ",
+            "page": null,
+            "start_offset": 2512,
+            "end_offset": 3506,
+            "document_kind": "meeting",
+            "meeting_date": "2025-02-19",
+            "score": 3.13209569
+          },
+          {
+            "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter June",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "4cc9c1b99d1a47a2ab8f4360bc919c27",
+            "text": "yterCon. It’s a place to announce and share fun things happening in the Jupyter community.\n\nFor more discussion on the format of these calls, see the thread [here](https://discourse.jupyter.org/t/jupyter-community-calls/668/103).\n\n## Short reports, celebrations, shout-outs\n\nThis is a place to make community announcements (without a need for discussion).\n\n* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out\n\n\n## Agenda Items\n\nAdd agenda items here **before** the meeting. The event host will reorganize the agenda so that it fits in the 60m meeting slot.\n\n* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of ",
+            "page": null,
+            "start_offset": 1699,
+            "end_offset": 2698,
+            "document_kind": "meeting",
+            "meeting_date": "2025-06-11",
+            "score": 2.69047138
+          }
+        ],
+        "model_called": true,
+        "elapsed_ms": 8495.84
+      },
+      "java_roundtrip_ms": 8506.895
+    },
+    {
+      "query": "누가 회사 비밀 프로젝트의 예산을 승인했나요?",
+      "filters": {
+        "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac"
+      },
+      "response": {
+        "status": "abstained",
+        "reason": "no_evidence",
+        "claims": [],
+        "model": null,
+        "experimental": true,
+        "query": "누가 회사 비밀 프로젝트의 예산을 승인했나요?",
+        "method": "bm25",
+        "results": [],
+        "model_called": false,
+        "elapsed_ms": 15.13
+      },
+      "java_roundtrip_ms": 31.619
+    },
+    {
+      "query": "What is the Jupyter community meeting catering budget?",
+      "filters": {
+        "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+        "kind": "meeting"
+      },
+      "response": {
+        "status": "abstained",
+        "reason": "insufficient_evidence",
+        "claims": [],
+        "model": "Qwen/Qwen3-1.7B",
+        "experimental": true,
+        "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "query": "What is the Jupyter community meeting catering budget?",
+        "method": "bm25",
+        "results": [
+          {
+            "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter June",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "4cc9c1b99d1a47a2ab8f4360bc919c27",
+            "text": "yterCon. It’s a place to announce and share fun things happening in the Jupyter community.\n\nFor more discussion on the format of these calls, see the thread [here](https://discourse.jupyter.org/t/jupyter-community-calls/668/103).\n\n## Short reports, celebrations, shout-outs\n\nThis is a place to make community announcements (without a need for discussion).\n\n* [Mike] `jupyter-core` 5.8.1 with security patch, Windows users please update [`GHSA-33p9-3p43-82vq`](https://github.com/jupyter/jupyter_core/security/advisories/GHSA-33p9-3p43-82vq); JupyterLab 4.4 and Notebook 7.4 are out\n\n\n## Agenda Items\n\nAdd agenda items here **before** the meeting. The event host will reorganize the agenda so that it fits in the 60m meeting slot.\n\n* (2 minutes) Rosio Reyes - Please checkout the improved [Community Call Host guide](https://docs.jupyter.org/en/latest/community/host-guide.html). Feel welcome to give us feedback on the guide, or step up to host our next call, currently planned for the last week of ",
+            "page": null,
+            "start_offset": 1699,
+            "end_offset": 2698,
+            "document_kind": "meeting",
+            "meeting_date": "2025-06-11",
+            "score": 4.71974727
+          },
+          {
+            "document_id": "7a480d811162407abf1571e1863e648d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter February",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "a77bca687009456a996a9837d5f671df",
+            "text": " an official Project Jupyter subproject.\n* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers: \n* **Chris Holdgraf** the Turing Way just upgraded their book to Jupyter Book 2! https://book.the-turing-way.org/\n* **Chris Holdgraf** we figured out a way to run mybinder.org nodes much cheaper! https://2i2c.org/blog/2025/binder-singlenode/\n* **Ana Ruvalcaba** Public meetings are announced on Jupyter Community Calendar: https://jupyter.org/community#calendar\n\n\n## Agenda Items\n\nAdd agenda items here **before** the meeting. We will reorganize the agenda so that it fits in the 60m meeting slot.\n\n* **Ana Ruvalcaba** Jupyter Governance Check In: Executive Council update\n    * Project Jupyter governance overview https://jupyter.org/governance/overview.html\n    * Executive Council introductions, we've recently conducted elections, Rick Wagner, Afshin Darian and Chris Holdgraf were elected. Thanks you to Brian Granger (Jupyter cofounder)who will remain on the Jupyter ",
+            "page": null,
+            "start_offset": 3356,
+            "end_offset": 4353,
+            "document_kind": "meeting",
+            "meeting_date": "2025-02-19",
+            "score": 3.76903
+          },
+          {
+            "document_id": "7a480d811162407abf1571e1863e648d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter February",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "7e44d18b779141f8885334a2a92f1c84",
+            "text": "antStack | @SylvainCorlay |\n\n## Purpose\n\nThink of it as a monthly, virtual JupyterCon. It’s a place to announce and share fun things happening in the Jupyter community.\n\nFor more discussion on the format of these calls, see the thread [here](https://discourse.jupyter.org/t/jupyter-community-calls/668/101?u=ruv7).\n\n## Short reports, celebrations, shout-outs\n\nThis is a place to make short announcements (without a need for discussion). \n\n* **Matt Fisher** The [GeoJupyter](https://geojupyter.org) open source community recently [announced its launch](https://geojupyter.org/blog/20250108-introducing-geojupyter/) and [started bi-weekly hackathons](https://geojupyter.org/blog/20250129-announcing-geojupyter-hackathons/). Hope you can join us to enable more people to confidently engage with geospatial data in JupyterLab! GeoJupyter is **NOT** an official Project Jupyter subproject.\n* **Mike Krassowski** JupyterLab 4.4 beta will be released today :crossed_fingers: \n* **Chris Holdgraf** the ",
+            "page": null,
+            "start_offset": 2512,
+            "end_offset": 3506,
+            "document_kind": "meeting",
+            "meeting_date": "2025-02-19",
+            "score": 2.92126339
+          },
+          {
+            "document_id": "7a480d811162407abf1571e1863e648d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter February",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "02fb1532dbe94a3ebe0f01190b00bca2",
+            "text": "# February 2025: Jupyter Community Call\n\n**Date:** February 19, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-02-19/09:00/Jupyter%20Community%20Call))\n\n\n**Discourse:** https://discourse.jupyter.org/t/jupyter-community-calls/668/101?u=ruv7\n\n\n**Please note:**\n- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)\n- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)\n- Everyone present is held to the [Jupyter Code of Conduct](https://jupyter.org/conduct)\n\n**Welcome!**\n\nIf you are joining the Jupyter Community Call, sign in below so we know who was here.\n\n|   Name          |           Institution     | GitHub Handle                                   |\n|-----------------|---------------------------|-------------------------------------------------|\n| Jordan Bradford | ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 995,
+            "document_kind": "meeting",
+            "meeting_date": "2025-02-19",
+            "score": 2.68956559
+          },
+          {
+            "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter June",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "16e02e610d97463d86b5b9f0b1019217",
+            "text": "# June 2025: Jupyter Community Call\n\n**Date:** June 11, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-06-11/09:00/Jupyter%20Community%20Call))\n\n\n**Feedback or questions?** You can either post publicly on the following thread on \n\n**Please note:**\n- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)\n- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)\n- Everyone present is held to the [Jupyter Code of Conduct](https://jupyter.org/conduct)\n\n**Welcome!**\n\nIf you are joining the Jupyter Community Call, we ask that you sign in below at the start of the call so that we know who was here.\n\n| Name | Institution | GitHub Handle |\n| ---- | ----------- | ------------- |\n| Mike Krassowski | Quansight/OpenTeams | @krassowski |\n|  Rosio Reyes  | Anaconda   |  @RRosio |\n| Kirstie ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000,
+            "document_kind": "meeting",
+            "meeting_date": "2025-06-11",
+            "score": 2.62824245
+          }
+        ],
+        "model_called": true,
+        "elapsed_ms": 1365.0
+      },
+      "java_roundtrip_ms": 1378.936
+    },
+    {
+      "query": "로그 보관 기간은 언제 어떻게 변경됐고 원문 질문을 운영 로그에 남겨도 되나요?",
+      "filters": {
+        "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+        "method": "hybrid"
+      },
+      "response": {
+        "status": "answered",
+        "reason": null,
+        "claims": [
+          {
+            "citations": [
+              {
+                "document_id": "c06afa3f0d64497386350c925c90081d",
+                "revision": 1,
+                "chunk_id": "5b75d0581e844a31afb39ede25aa9171",
+                "title": "후속 회의",
+                "meeting_date": "2026-10-08",
+                "page": null,
+                "start_offset": 82,
+                "end_offset": 146,
+                "quote": "결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다."
+              }
+            ],
+            "text": "검색 로그 보관 기간을 30일로 확정했다."
+          },
+          {
+            "citations": [
+              {
+                "document_id": "b8370d1ea3dc47d6bd25cb322d88cd7d",
+                "revision": 1,
+                "chunk_id": "0bd63533979b4026aae9572d6463d895",
+                "title": "출시 회의",
+                "meeting_date": "2026-10-01",
+                "page": null,
+                "start_offset": 173,
+                "end_offset": 203,
+                "quote": "결정: 팀은 검색 로그 보관 기간을 30일로 확정했다."
+              }
+            ],
+            "text": "로그 보관 기간을 7일로 변경하기로 확정했다."
+          },
+          {
+            "citations": [
+              {
+                "document_id": "c06afa3f0d64497386350c925c90081d",
+                "revision": 1,
+                "chunk_id": "5b75d0581e844a31afb39ede25aa9171",
+                "title": "후속 회의",
+                "meeting_date": "2026-10-08",
+                "page": null,
+                "start_offset": 182,
+                "end_offset": 228,
+                "quote": "작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음."
+              }
+            ],
+            "text": "로그 삭제 작업은 2026-10-12까지 구현한다."
+          },
+          {
+            "citations": [
+              {
+                "document_id": "c06afa3f0d64497386350c925c90081d",
+                "revision": 1,
+                "chunk_id": "5b75d0581e844a31afb39ede25aa9171",
+                "title": "후속 회의",
+                "meeting_date": "2026-10-08",
+                "page": null,
+                "start_offset": 53,
+                "end_offset": 80,
+                "quote": "목적: 로그 보관 정책과 출시 준비를 재검토한다."
+              }
+            ],
+            "text": "로그 보관 정책과 출시 준비를 재검토한다."
+          },
+          {
+            "citations": [
+              {
+                "document_id": "c06afa3f0d64497386350c925c90081d",
+                "revision": 1,
+                "chunk_id": "5b75d0581e844a31afb39ede25aa9171",
+                "title": "후속 회의",
+                "meeting_date": "2026-10-08",
+                "page": null,
+                "start_offset": 147,
+                "end_offset": 181,
+                "quote": "논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다."
+              }
+            ],
+            "text": "개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다."
+          }
+        ],
+        "model": "Qwen/Qwen3-1.7B",
+        "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "experimental": true,
+        "query": "로그 보관 기간은 언제 어떻게 변경됐고 원문 질문을 운영 로그에 남겨도 되나요?",
+        "method": "hybrid",
+        "results": [
+          {
+            "document_id": "c06afa3f0d64497386350c925c90081d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "후속 회의",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "5b75d0581e844a31afb39ede25aa9171",
+            "text": "# 합성 자료: 검색 서비스 후속 회의\n날짜: 2026-10-08\n참석자: 민지, 준호, 서연\n목적: 로그 보관 정책과 출시 준비를 재검토한다.\n\n결정 변경: 2026-10-01 회의에서 확정한 검색 로그 보관 기간 30일을 폐기하고 7일로 변경하기로 확정했다.\n논의: 개인정보 노출 범위를 줄이기 위해 보관 기간을 줄였다.\n작업: 준호는 2026-10-12까지 로그 삭제 작업을 구현한다. 우선순위: 높음.\n미결: 외부 공개 날짜는 아직 확정하지 않았다.\n기록: 이 문서는 AI가 작성한 기능 검증용 합성 회의록이며 실제 조직의 회의가 아니다.\n",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 306,
+            "document_kind": "meeting",
+            "meeting_date": "2026-10-08",
+            "score": 0.03278688524590164
+          },
+          {
+            "document_id": "b8370d1ea3dc47d6bd25cb322d88cd7d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "출시 회의",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "0bd63533979b4026aae9572d6463d895",
+            "text": "# 합성 자료: 검색 서비스 출시 회의\n날짜: 2026-10-01\n참석자: 민지, 준호, 서연\n목적: 검색 서비스의 로그 보관 정책과 출시 준비를 정한다.\n\n논의: 검색 결과에는 문서 제목과 원문 근거를 함께 표시한다.\n제안: 준호는 로그 보관 기간을 90일로 늘리자고 제안했다. 이 제안은 승인하지 않았다.\n결정: 팀은 검색 로그 보관 기간을 30일로 확정했다.\n결정: 외부 공개는 권한 검사를 마친 뒤에 진행한다.\n작업: 민지는 2026-10-05까지 권한 회귀 테스트를 작성한다. 우선순위: 높음.\n작업: 원문 근거 화면을 점검한다. 담당자와 기한은 아직 정하지 않았다.\n미결: 검색 품질의 출시 기준은 다음 회의에서 결정한다.\n기록: 이 문서는 AI가 작성한 기능 검증용 합성 회의록이며 실제 조직의 회의가 아니다.\n",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 405,
+            "document_kind": "meeting",
+            "meeting_date": "2026-10-01",
+            "score": 0.03225806451612903
+          },
+          {
+            "document_id": "87580b4ea0484a498559e19a0776e0d0",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Search operations",
+            "filename": "synthetic-runbook.md",
+            "revision": 1,
+            "chunk_id": "2f1259f83ee74b4caa8ec84e30b84669",
+            "text": "# Synthetic search operations runbook\nThis document was authored by AI for functional testing. It is not a real organization's policy.\n\nSearch logs contain request IDs and safe error codes. Raw question text and document text must not be written to operational logs.\nTo verify log deletion, inspect the scheduled deletion job and the retained timestamp range.\nThe retention period is determined by the confirmed release meeting decision; this runbook does not define a number of days.\nThe release requires access-control regression tests and source-citation checks.\n",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 566,
+            "document_kind": "document",
+            "meeting_date": null,
+            "score": 0.015873015873015872
+          },
+          {
+            "document_id": "7a480d811162407abf1571e1863e648d",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter February",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "f8b2b7a835cc41528393fa481b815348",
+            "text": "                              |\n|-----------------|---------------------------|-------------------------------------------------|\n| Jordan Bradford | Boston College | [jrdnbradford](https://github.com/jrdnbradford)\n| Kyle Smith | GitNotebooks | [smith-kyle](https://github.com/smith-kyle)|\n| David Qiu | AWS | @dlqqq |\n| Arjun Verma     |   QuantStack | [arjxn-py](https://github.com/arjxn-py)|\n| Rosio Reyes | Anaconda | @RRosio |\n| Rick Wagner | San Diego Supercomputer Center | @rpwagner |\n| Wayne Decatur | Upstate Medical Univeristy | [@fomightez](https://github.com/fomightez) |\n| Matt Fisher | Schmidt center for Data Science & Environment @ UC Berkeley | [@mfisher87](https://github.com/mfisher87/) |\n| Ana Ruvalcaba | Cal Poly State University | @Ruv7  |\n|Johanna Bayer | Donders Institute for Brain Cognition and Behaviour (Netherlands) | [@likeajumprope](https://github.com/likeajumprope) |\n| Mike Krassowski | Quansight | @krassowski |\n| Michael Chin | AWS | ",
+            "page": null,
+            "start_offset": 845,
+            "end_offset": 1816,
+            "document_kind": "meeting",
+            "meeting_date": "2025-02-19",
+            "score": 0.015625
+          },
+          {
+            "document_id": "d9b51806258e47fb9d20c9d9df9dd033",
+            "workspace_id": "fab04cb939ce42b5bb8ec230dd0711ac",
+            "title": "Jupyter June",
+            "filename": "meeting.txt",
+            "revision": 1,
+            "chunk_id": "16e02e610d97463d86b5b9f0b1019217",
+            "text": "# June 2025: Jupyter Community Call\n\n**Date:** June 11, 2025, at 9am PST / 17:00 UTC; your timezone ([your timezone](https://arewemeetingyet.com/Los%20Angeles/2025-06-11/09:00/Jupyter%20Community%20Call))\n\n\n**Feedback or questions?** You can either post publicly on the following thread on \n\n**Please note:**\n- Community calls are recorded and posted to this [playlist](https://www.youtube.com/playlist?list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP)\n- These notes will be recorded and posted [here](https://jupyter.readthedocs.io/en/latest/community/community-call-notes/index.html)\n- Everyone present is held to the [Jupyter Code of Conduct](https://jupyter.org/conduct)\n\n**Welcome!**\n\nIf you are joining the Jupyter Community Call, we ask that you sign in below at the start of the call so that we know who was here.\n\n| Name | Institution | GitHub Handle |\n| ---- | ----------- | ------------- |\n| Mike Krassowski | Quansight/OpenTeams | @krassowski |\n|  Rosio Reyes  | Anaconda   |  @RRosio |\n| Kirstie ",
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000,
+            "document_kind": "meeting",
+            "meeting_date": "2025-06-11",
+            "score": 0.015384615384615385
+          }
+        ],
+        "model_called": true,
+        "elapsed_ms": 8806.79
+      },
+      "java_roundtrip_ms": 8814.974
+    }
+  ],
+  "source_hashes": {
+    "src/doctrail/meeting_contract.py": "e6208677d5d7fdd4323e803d3f669e7b03b20af858b9e3bd43d794decc9a0591",
+    "src/doctrail/meeting_runtime.py": "9bb4ffb22ad62d01f5dbcd1b35b6669a26bfa463882d8c6000c1ab192deefefe",
+    "src/doctrail/meeting_worker.py": "b58860895ff31e0de90b9977f0fa8860812195d913120ba7deb437586a16d6eb",
+    "server/src/main/java/io/doctrail/ApiController.java": "896b44d40979a0492fc92dcf5e01d746993bf40650262d810369296b76284517",
+    "server/src/main/java/io/doctrail/ApiError.java": "0fc30aa8140a6b28b44a8a8986aa7e4f243cde6971e134298612dab4afb2f103",
+    "server/src/main/java/io/doctrail/ApiErrors.java": "2d25063362709c8aec8ed0ed03c69193c36b54f3126b47beec416d38099763eb",
+    "server/src/main/java/io/doctrail/Auth.java": "4595bd0dfb079c792fc836032291edcbb1605952ec4f5a60806b11927b923ab8",
+    "server/src/main/java/io/doctrail/DocTrailApplication.java": "9c0a201ca1230abc169c7fc49754360847db0d8ec77e017b41c5fa7d57f6c226",
+    "server/src/main/java/io/doctrail/DocumentService.java": "cf80b13d3eb6c786c8b4633119f790fb39131c0f5f06ce7ec02bcba0a2ad1a0b",
+    "server/src/main/java/io/doctrail/FrontendController.java": "c675845e45482abd99c91e375b471bb96228661f6a239f4ff90fec3cefd8cd76",
+    "server/src/main/java/io/doctrail/GenerationClient.java": "c9e2ecf27609655d62af0b927e71f9323829273ac739266119a9c48ad1ff3666",
+    "server/src/main/java/io/doctrail/InferenceClient.java": "a7d3dc950b2d39c1893c739687a81b47916f800f3c6152adba049a40db5abed0",
+    "server/src/main/java/io/doctrail/Ingest.java": "c838a980747fdc450c3f57642acec9234f4385fa4773769e84de3cc7ec1d140f",
+    "server/src/main/java/io/doctrail/KnowledgeService.java": "8c1484e5c5acb24624b6217b0d28f73461bf198eefa3a61cfdc2284815ee9832",
+    "server/src/main/java/io/doctrail/LearnedSearch.java": "b20c5cdc2ca4645e30043d27d76e9e86c61d73709e3c5ac06eee9675b2221bf0",
+    "server/src/main/java/io/doctrail/MeetingAnalysis.java": "afe7fb53fdfcdd2a651f9aaf1c570b938d6735c8c997619deba7b17e60a480f5",
+    "server/src/main/java/io/doctrail/MeetingController.java": "514269c3feb0602eb8a878fd18bc4e5b1baa0ed0ba5d116ac642a935a1319ccf",
+    "server/src/main/java/io/doctrail/MeetingService.java": "59607dcc54cab3226d5c535b81d1f2b2b85df1d31232dd3169743fe009700780",
+    "server/src/main/java/io/doctrail/RequestGuard.java": "bc025143500ff8a4f9a5707b0e90c4ef60bcb024fac19b6cc49e0220f24dad98",
+    "server/src/main/java/io/doctrail/Retrieval.java": "cf19f9c46ac5317601f9556dc4edebabbee65002b74ba039de078cac8cac263a",
+    "server/src/main/java/io/doctrail/Store.java": "932f5949aaa57f6c5121ff6f98422626592b5145639624c3309a5796c58ebdc7",
+    "scripts/verify_meeting_service.py": "18188f90da111377744931409126558c0875b8e78fd9745dd3a935e0fa698cd8"
+  },
+  "fixtures": {
+    "tests/fixtures/meetings/synthetic-release-followup.md": "0f2e3bf13e65c8a6593b257dda36aed94873d0fdf4a9697380d87325e12c398a",
+    "tests/fixtures/meetings/synthetic-release-planning.md": "606678b791ad6b3e1dde1e1bb0189cf064d8152cbb6ccba405663d36500e5138",
+    "tests/fixtures/meetings/synthetic-runbook.md": "1e95de236f46967b54c8cef312fc305f206f5698ba9d38c288ee37c9b3582d4c",
+    "tests/fixtures/meetings/public/jupyter-february-2025.md": "7127001fde5d5e90bae66c3f5c7dcc16fa01e36a9ef9c05f12822d680420edf4",
+    "tests/fixtures/meetings/public/jupyter-host-guide.md": "34f99ef12119e23a3e5d16ee815b899a6dc0af22717fcce2635a9c4cb96aca8f",
+    "tests/fixtures/meetings/public/jupyter-june-2025.md": "483d17aaba1d763242bafda11daf1572ca46e1ca489c67a3335302000359ed2a",
+    "tests/fixtures/meetings/public/jupyter-license.txt": "1b9f3955dcf9c235b10c168cca09b88c1f2adf992a0dc13120482d93037602ac"
+  },
+  "status": "failed",
+  "failure": "assigned_and_unassigned_actions",
+  "health": {
+    "schema_version": 1,
+    "status": "ready",
+    "model": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "experimental": true,
+    "protocol": "meeting-classifier-evidence-v4",
+    "limits": {
+      "input_tokens": 4096,
+      "output_tokens": 768,
+      "partitions": 6,
+      "deadline_seconds": 120
+    },
+    "runtime": {
+      "repo_id": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "license": "Apache-2.0",
+      "runtime": {
+        "device": "cuda",
+        "dtype": "bfloat16",
+        "attention_implementation": "eager",
+        "max_input_tokens": 4096,
+        "max_new_tokens": 768,
+        "do_sample": false,
+        "enable_thinking": false,
+        "seed": 42,
+        "max_reserved_mib": 5376,
+        "deadline_seconds": 120
+      },
+      "experimental": true,
+      "measurement_scope": "python_local_generation",
+      "generation_protocol": "meeting-classifier-evidence-v4",
+      "use_model_defaults": false,
+      "effective_config_verified": true,
+      "effective_generation_config": {
+        "max_new_tokens": 768,
+        "do_sample": false,
+        "num_beams": 1,
+        "num_return_sequences": 1,
+        "temperature": 1.0,
+        "top_k": 50,
+        "top_p": 1.0,
+        "typical_p": 1.0,
+        "repetition_penalty": 1.0,
+        "length_penalty": 1.0,
+        "use_cache": true,
+        "bos_token_id": 151643,
+        "eos_token_id": [
+          151645,
+          151643
+        ],
+        "pad_token_id": 151643,
+        "generation_mode": "greedy_search",
+        "use_model_defaults": false
+      }
+    }
+  },
+  "startup_ms": 42764.917,
+  "completed_at": "2026-10-13T05:13:23.064574+00:00",
+  "prelaunch_artifact_hashes": {
+    "src/doctrail/meeting_contract.py": "e6208677d5d7fdd4323e803d3f669e7b03b20af858b9e3bd43d794decc9a0591",
+    "src/doctrail/meeting_runtime.py": "9bb4ffb22ad62d01f5dbcd1b35b6669a26bfa463882d8c6000c1ab192deefefe",
+    "src/doctrail/meeting_worker.py": "b58860895ff31e0de90b9977f0fa8860812195d913120ba7deb437586a16d6eb",
+    "scripts/serve_meetings.py": "9f136c3720f3d51e15f1b401dea662df7dc8121be6358bd375a40507b328e496",
+    "scripts/verify_meeting_service.py": "18188f90da111377744931409126558c0875b8e78fd9745dd3a935e0fa698cd8",
+    "server/target/doctrail-server-0.1.0.jar": "4813d86d80c3143873c453cc8f3075011923380fc700d27bce8ba3b319717cc7",
+    "web/dist/assets/index-Cg9NvQLO.js": "522f60aac39dcb85a262ca4d8537474fca294e9530507b166d431bc6f75c8deb",
+    "web/dist/assets/index-Du-A5LDn.css": "8ff4cc26a870bff6c0f4fd2c25bde18dd42f2a0b1c47f22d6ef46d3289a29e6b"
+  },
+  "loaded_sources_unchanged_during_run": true
+}

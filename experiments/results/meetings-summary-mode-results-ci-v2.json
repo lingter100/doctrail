@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "exact-published-result-commit-required-ci",
+  "head": "2076d8c6aa17c5e57a287e154c0e43c147543f49",
+  "runs": [
+    {
+      "id": 40252655396,
+      "event": "pull_request",
+      "head": "2076d8c6aa17c5e57a287e154c0e43c147543f49",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40252655396",
+      "jobs": [
+        {
+          "id": 121347706969,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 121347707163,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 121347707194,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "author": {
+        "name": "lingter100",
+        "email": "132806801+lingter100@users.noreply.github.com"
+      },
+      "committer": {
+        "name": "lingter100",
+        "email": "132806801+lingter100@users.noreply.github.com"
+      }
+    },
+    {
+      "id": 40252651226,
+      "event": "push",
+      "head": "2076d8c6aa17c5e57a287e154c0e43c147543f49",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/lingter100/doctrail/actions/runs/40252651226",
+      "jobs": [
+        {
+          "id": 121347694652,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 121347694757,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 121347694794,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "author": {
+        "name": "lingter100",
+        "email": "132806801+lingter100@users.noreply.github.com"
+      },
+      "committer": {
+        "name": "lingter100",
+        "email": "132806801+lingter100@users.noreply.github.com"
+      }
+    }
+  ],
+  "scope": "Documentation/result publication and unchanged runtime; not model-quality acceptance."
+}

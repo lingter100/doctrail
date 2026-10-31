@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "role": "c4_calibration_source",
+  "created_at_utc": "2026-10-16T04:49:21.632436+00:00",
+  "timing_field_clarification": "The source_authorship_started_at_utc field in source-manifest.json and preflight.started_at_utc denote the recorded adoption-script invocation. Synthetic text was drafted in that new local script earlier in this same source-role turn, after the committed CI-receipt authorization. These fields do not measure the earliest model drafting instant.",
+  "adoption_script": ".local/c4-calibration-source-adopt-v1.py",
+  "adoption_script_sha256": "922db22d2bd605891e51cea116e8e866b193a09c8b1811ec46487a1785b435a7",
+  "ci_receipt_commit_before_role_assignment": "ebc4a86a3137107b3b37c151f250c4efdc2a75e9",
+  "literal_source_snapshot_writing_after_actual_git_preflight": true,
+  "independent_source_review_still_pending": true,
+  "questions_authored": 0,
+  "oracles_authored": 0,
+  "tokenizer_loads": 0,
+  "native_calls": 0,
+  "human_reviews": 0
+}

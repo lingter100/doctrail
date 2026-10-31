@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "SYNTHETIC_PASS_WITH_INDEPENDENT_FINALIZATION_BLOCKER",
+  "base_commit": "0c34174f65c6d415e046925a7b4e2d11495264f7",
+  "source_hashes": {
+    "scripts/prepare_summary_grammar_engine.py": "a70805dbec946cf9b24c10c05085550c24bd15b910f256245b3e16517b7da8ba",
+    "tools/summary_grammar/runtime.py": "b71ff813604b0a80985f84a5666b1669c7de8512a6f66c06af37c31a691f331f",
+    "tests/test_summary_grammar_engine.py": "4484e9f74f51ed46a17b5634001bf9c015b787e075d9f7719ec5138404c95daf"
+  },
+  "engine_synthetic_tests": {
+    "passed": 285,
+    "failed": 0,
+    "skipped": 0,
+    "existing": 173,
+    "new": 112,
+    "pytest_seconds": 109.32
+  },
+  "qa_asset_compatibility": {
+    "passed": 296,
+    "failed": 0,
+    "skipped": 0,
+    "qa": 167,
+    "assets": 129,
+    "seconds": 26.687,
+    "receipt_sha256": "42ba119de222d96f70f86ae62dd53cf03a3c47949c823da1bc0ca9e23aa49ff1",
+    "parent_acceptance_sha256": "49bad7080555924b18e34ca99ef8900aba96419af4c0a9353fe271b8387b0d66",
+    "preflight_failure": "Path separator notation mismatch before pytest; original retained, narrow new verifier normalized slash notation only."
+  },
+  "protected_bodies_unchanged": 5,
+  "legacy_definitions_unchanged": 58,
+  "ruff_final": "passed",
+  "ruff_first_findings_preserved": 5,
+  "independent_review": {
+    "blockers": 1,
+    "advisories": 0,
+    "id": "B1",
+    "inherited": true,
+    "failure": "Late publication plus failed rollback plus failed failure-marker creation leaves a final lock accepted by check_acquired.",
+    "reproducer": "Actual AST-extracted functions with virtual paths/records; no filesystem writes or native calls.",
+    "receipt_sha256": "9261db972a0979a157c69ba5a6d34aa190f21f84624a0b89ef5bdadbfc1bdf45",
+    "reproducer_sha256": "b8340be3a03a80ef1a21d25f49f5f4f047083a18605206008d2ad91aefe31fa5",
+    "parent_acceptance_sha256": "e7d5650a294c018bef2b56dcf4152f4a94ac02a240b83d6012cc145aa81b245a"
+  },
+  "actual_acquisition_build_native_model_calls": 0,
+  "accepted_for_execution": false,
+  "next": "Explicit v3 external-terminal admission contract and narrow prepare/test correction, then independent delta review and exact CI."
+}

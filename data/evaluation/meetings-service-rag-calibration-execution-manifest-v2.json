@@ -1,0 +1,678 @@
+{
+  "schema_version": 1,
+  "phase": "calibration",
+  "registration": {
+    "path": "data/evaluation/meetings-service-rag-calibration-execution-registration-v2.json",
+    "bytes": 10964,
+    "sha256": "37200145c5c6b737b31c31b877a4f6cbbc7ada2f6cfef763576511cd1c68583e"
+  },
+  "plan": {
+    "questions": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/draft-questions-v1.json",
+      "bytes": 2529,
+      "sha256": "bec375a38be8d2fd81bbce343b2f70f726d441a238d14218125967f41b1946b1"
+    },
+    "sources": [
+      {
+        "source_id": "cal-v2-p1",
+        "family_id": "cal-v2-public-gitops",
+        "title": "cal-v2-p1",
+        "kind": "meeting",
+        "visibility": "workspace",
+        "revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+        "prepared_document_id": "0e68e36f19014892945f7cc0408b4b3d",
+        "raw": {
+          "path": ".local/service-rag-calibration-v2/originals/2021-04-05-chat.txt",
+          "bytes": 4990,
+          "sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd"
+        },
+        "content_sha256": "50d6a114cf74b23389bcb12d740650f18fed97a7228af3b945e1b7b240c9cfcd",
+        "chunks": [
+          {
+            "id": "f4d18fd2802a43499f7de2cf10425315",
+            "ordinal": 0,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 1000,
+            "sha256": "cef75482d1210176c614778f203bcd96834e00bc51cf0fdcf0c47658445ca84e"
+          },
+          {
+            "id": "4c600a8a547f4878822561b4a1a6b888",
+            "ordinal": 1,
+            "page": null,
+            "start_offset": 850,
+            "end_offset": 1844,
+            "sha256": "5038ac2e67db8bbe41cb95cfc2b53cd7d9be347f4c50d6d704f6f0cdc86a8bdc"
+          },
+          {
+            "id": "754727cbe6694e7f8df70af768e2c763",
+            "ordinal": 2,
+            "page": null,
+            "start_offset": 1694,
+            "end_offset": 2693,
+            "sha256": "553d8d70683c530db3b0a31f53cf3de1c6f554f0f7efd71133afebfad2eee0a8"
+          },
+          {
+            "id": "e2ce880043bb472583de162bfe3dc603",
+            "ordinal": 3,
+            "page": null,
+            "start_offset": 2543,
+            "end_offset": 3535,
+            "sha256": "8d79d224eb6992c8a30f600e29d253a10a6821d756b3396e3c18a80342f5086e"
+          },
+          {
+            "id": "50d1d74dd579498599dcfd2a1fc40c98",
+            "ordinal": 4,
+            "page": null,
+            "start_offset": 3385,
+            "end_offset": 4373,
+            "sha256": "096a6db78e871d076d8831c5b69d4fb68083be93a7b845c3646e34ab007cfaa7"
+          },
+          {
+            "id": "78768f63e0734953a5783e99c79729bf",
+            "ordinal": 5,
+            "page": null,
+            "start_offset": 4223,
+            "end_offset": 4938,
+            "sha256": "71b26a18498ead5f24478494514733ec3bda5e0cab748e4b2d75e2ca063afd90"
+          }
+        ]
+      },
+      {
+        "source_id": "cal-v2-p2",
+        "family_id": "cal-v2-public-gitops",
+        "title": "cal-v2-p2",
+        "kind": "meeting",
+        "visibility": "workspace",
+        "revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+        "prepared_document_id": "e932bb1001b6462883578347c37fb011",
+        "raw": {
+          "path": ".local/service-rag-calibration-v2/originals/2021-04-14-chat.txt",
+          "bytes": 8257,
+          "sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95"
+        },
+        "content_sha256": "849a113bc63c76a46a52986ba0f6347c7a662962452a6420b4fdabe78cd7ba95",
+        "chunks": [
+          {
+            "id": "5634398877ef4703ae003935cd792d49",
+            "ordinal": 0,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 999,
+            "sha256": "5afea8ab8c75c0833932799f085a7bfcf5bfdf3c455639fcb6109cd349a2e51c"
+          },
+          {
+            "id": "04efc49b9e294577b8a51b7db1ee47b3",
+            "ordinal": 1,
+            "page": null,
+            "start_offset": 849,
+            "end_offset": 1848,
+            "sha256": "fb44ed417385e87b7c32ea05949d56bac6894058cfc2a4d82ef3ea46aca45f85"
+          },
+          {
+            "id": "835af913ad1a46d8889c938e4c9b6507",
+            "ordinal": 2,
+            "page": null,
+            "start_offset": 1698,
+            "end_offset": 2695,
+            "sha256": "d7c63d30fe3ca61cd46e56863d517ff93b959b2b0df9a8806952bd9d67e9ed99"
+          },
+          {
+            "id": "e1c98da70a4346819a2dacc9ca6064f1",
+            "ordinal": 3,
+            "page": null,
+            "start_offset": 2545,
+            "end_offset": 3544,
+            "sha256": "3d812ff114384c2b3f2ecd15943ce8a38810d12bff764a299bb78c8f72e43d4d"
+          },
+          {
+            "id": "14c4141e44a14cf3aa7b984aaafc24bd",
+            "ordinal": 4,
+            "page": null,
+            "start_offset": 3394,
+            "end_offset": 4391,
+            "sha256": "b70abffe5274adc5c87e643378d51cf569b2295bbb38da506ac9bf9733eb3d5f"
+          },
+          {
+            "id": "5f0089acebc3430187006a9089d85844",
+            "ordinal": 5,
+            "page": null,
+            "start_offset": 4241,
+            "end_offset": 5238,
+            "sha256": "0a03a3c465a0b64f81b0ccbce13773bc599289c60007b67202f3838fb0f968fb"
+          },
+          {
+            "id": "72d6add440924b31961de7c6a683d404",
+            "ordinal": 6,
+            "page": null,
+            "start_offset": 5088,
+            "end_offset": 6086,
+            "sha256": "73fb3705338746276ccc6336398a8e4b15f8beca1168349d2975d0b65b1d1381"
+          },
+          {
+            "id": "640850966afa448ba0b4a79a68c7d6db",
+            "ordinal": 7,
+            "page": null,
+            "start_offset": 5936,
+            "end_offset": 6932,
+            "sha256": "aa1f5e2040fe1cc6dbf4d435d96bb5fed799bf8ac73a2a66a62b3e13eb36e104"
+          },
+          {
+            "id": "9667c63c38ce4544b41a4b11c75ccc9f",
+            "ordinal": 8,
+            "page": null,
+            "start_offset": 6782,
+            "end_offset": 7777,
+            "sha256": "269a9504d281d2678ca79f7b507457fd273273c923e4e4aa35651a6f675539c3"
+          },
+          {
+            "id": "b2eddbd90f8b42e19fbc3c78ae776e49",
+            "ordinal": 9,
+            "page": null,
+            "start_offset": 7627,
+            "end_offset": 8227,
+            "sha256": "a036176a6e40a2464a9d475dbf0a6b9db5650bd2fd1a9add3dd9f47c7f10bfc2"
+          }
+        ]
+      },
+      {
+        "source_id": "cal-v2-p3",
+        "family_id": "cal-v2-public-gitops",
+        "title": "cal-v2-p3",
+        "kind": "document",
+        "visibility": "private",
+        "revision": "cadc7760e7e55a8c9a26c58c53d9d567fd6dcb9d",
+        "prepared_document_id": "aed66f2c71664eb7aa14ebd186543f2f",
+        "raw": {
+          "path": ".local/service-rag-calibration-v2/originals/charter.md",
+          "bytes": 3296,
+          "sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff"
+        },
+        "content_sha256": "8e53eb89c78cb68ed7dc9d813995a41628f6cf77ed8f2d6468104ab405b689ff",
+        "chunks": [
+          {
+            "id": "e37a379a2c8a4721b5756a0e69130634",
+            "ordinal": 0,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 992,
+            "sha256": "24fb940804bf9b9086f947459fb9bf6ae1beecefe908f3cc65dd8b09bce6376e"
+          },
+          {
+            "id": "9225a35c7e714d969f86464a2d6cedcd",
+            "ordinal": 1,
+            "page": null,
+            "start_offset": 842,
+            "end_offset": 1833,
+            "sha256": "f765e7a02d96a37448bb7f6bdb585ada16a6beec468d7204dfcc074a6bb153fa"
+          },
+          {
+            "id": "6c792f644fc64c97987fa69bfa2d16e1",
+            "ordinal": 2,
+            "page": null,
+            "start_offset": 1683,
+            "end_offset": 2682,
+            "sha256": "2d0417f48c1c54ba83c1b76122cac6e3b09698d339d747ad0185dadd3f4d8ccf"
+          },
+          {
+            "id": "c843c9d3ae064f0bbfbb59a0f7599d38",
+            "ordinal": 3,
+            "page": null,
+            "start_offset": 2532,
+            "end_offset": 3292,
+            "sha256": "bf90090191407ce37fdc54f8552ae748307e5ca197b04e164c9dc2cb28f7b8f0"
+          }
+        ]
+      },
+      {
+        "source_id": "cal-v2-s1",
+        "family_id": "cal-v2-synthetic-garam-sound",
+        "title": "cal-v2-s1",
+        "kind": "document",
+        "visibility": "private",
+        "revision": "sha256:413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+        "prepared_document_id": "a4c3fe56463c42fc86b59396d9992b6f",
+        "raw": {
+          "path": ".local/service-rag-calibration-v2/originals/synthetic-field-guide.md",
+          "bytes": 4046,
+          "sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436"
+        },
+        "content_sha256": "413b5d3830765a39cd2a6b09903dfa473c51fc4aac5cd0a796671f1632474436",
+        "chunks": [
+          {
+            "id": "418dc66b705240769c2374dfd1e24b90",
+            "ordinal": 0,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 997,
+            "sha256": "013b859f7472b01018970bb5f6b5120db5d6b64d477f7be71b329aac0c43c244"
+          },
+          {
+            "id": "496e4c7ba0d549918a6f248544e399d2",
+            "ordinal": 1,
+            "page": null,
+            "start_offset": 847,
+            "end_offset": 1842,
+            "sha256": "801aa7a60e4384a43971a8346f5700d67bea61e52b21037da82acc99b8e74c7a"
+          },
+          {
+            "id": "ebe09566b6844698b2d6ee5246e956a7",
+            "ordinal": 2,
+            "page": null,
+            "start_offset": 1692,
+            "end_offset": 2686,
+            "sha256": "4a7658a008f555dc405e0e803f72f0b4d36c46da953b0d00741eb90ad44f58ba"
+          },
+          {
+            "id": "7ed6e7edae8b4968bb263a503fa788d6",
+            "ordinal": 3,
+            "page": null,
+            "start_offset": 2536,
+            "end_offset": 3533,
+            "sha256": "e3e5fd4efeb6d4bb254cd62fce1b33be691dea0f17eb5d99f10cc1f14e03b513"
+          },
+          {
+            "id": "3374f35bb05e4145bd8b6cd807214e84",
+            "ordinal": 4,
+            "page": null,
+            "start_offset": 3383,
+            "end_offset": 4044,
+            "sha256": "0adf684f6438bd5794ea1458851ce91332a69439185b62ceb01754ca4cc49db2"
+          }
+        ]
+      },
+      {
+        "source_id": "cal-v2-s2",
+        "family_id": "cal-v2-synthetic-garam-sound",
+        "title": "cal-v2-s2",
+        "kind": "meeting",
+        "visibility": "workspace",
+        "revision": "sha256:eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+        "prepared_document_id": "95b2bebc6bfe4507ad8a0266d51b5a5d",
+        "raw": {
+          "path": ".local/service-rag-calibration-v2/originals/synthetic-meeting-2026-03-04.md",
+          "bytes": 3332,
+          "sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4"
+        },
+        "content_sha256": "eac91db5f39130e5238bbff9750fc90391cfb42b20a9e04bb29d19fd2e63bec4",
+        "chunks": [
+          {
+            "id": "65f41db9ca604601820f532f5fd355ed",
+            "ordinal": 0,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 998,
+            "sha256": "d46b4c9315532ffaf16c9a5d1af6067ee6aba4efcb4f4c6d920b320cde721dbc"
+          },
+          {
+            "id": "9ba31ed1e6ef4c03bc8d2126f377e93c",
+            "ordinal": 1,
+            "page": null,
+            "start_offset": 848,
+            "end_offset": 1534,
+            "sha256": "e81815ecc53bad0e936fb33704bf7d38d3ef53ab7e98a40bfb4260beff1621ed"
+          }
+        ]
+      },
+      {
+        "source_id": "cal-v2-s3",
+        "family_id": "cal-v2-synthetic-garam-sound",
+        "title": "cal-v2-s3",
+        "kind": "meeting",
+        "visibility": "workspace",
+        "revision": "sha256:eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+        "prepared_document_id": "14826bac3357471fa25a5d03bd9071b0",
+        "raw": {
+          "path": ".local/service-rag-calibration-v2/originals/synthetic-meeting-2026-03-11.md",
+          "bytes": 3573,
+          "sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241"
+        },
+        "content_sha256": "eb648d3f1c6b6cc8f33afa8ee79e7cd284d1baba70d132a16d97d4ce7de6d241",
+        "chunks": [
+          {
+            "id": "ff9dca20b71445aab5c5aae70e748dff",
+            "ordinal": 0,
+            "page": null,
+            "start_offset": 0,
+            "end_offset": 995,
+            "sha256": "301d1eccee7bb5e2b7e482ff0e663e21012d02814b127d1485335490bc0921f7"
+          },
+          {
+            "id": "b7c1316815c34026a85a6e5e7bad4903",
+            "ordinal": 1,
+            "page": null,
+            "start_offset": 845,
+            "end_offset": 1835,
+            "sha256": "89cf26a8a077925ea12e0ff3aeb9a33c1e5a7a171ffc4d5e1e3fb0aa59f6028f"
+          },
+          {
+            "id": "9d4c2bb57d6c43d98f474e3db0a5406c",
+            "ordinal": 2,
+            "page": null,
+            "start_offset": 1685,
+            "end_offset": 2683,
+            "sha256": "f24826eef21187291ea22400d615cf4fa87f8a7e4fe1f5a7924ccde54f23dce3"
+          },
+          {
+            "id": "cc835411442149a6a6f8eb97a4cf7186",
+            "ordinal": 3,
+            "page": null,
+            "start_offset": 2533,
+            "end_offset": 3532,
+            "sha256": "49c428036db5329e78588dd21b5f1f91b2146854126f9b1307179af8be1a1124"
+          },
+          {
+            "id": "c55867c810904b9fbdc91e3ddeaa72cb",
+            "ordinal": 4,
+            "page": null,
+            "start_offset": 3382,
+            "end_offset": 3565,
+            "sha256": "3f9f605fb5211cf841bfda98fb1f28bf5d19b6d3f7e6294ebaa7b94e5e128dda"
+          }
+        ]
+      }
+    ],
+    "families": [
+      {
+        "id": "cal-v2-public-gitops",
+        "principal": "actor1",
+        "source_kind": "public"
+      },
+      {
+        "id": "cal-v2-synthetic-garam-sound",
+        "principal": "actor2",
+        "source_kind": "synthetic"
+      }
+    ],
+    "code": [
+      {
+        "path": "data/models/m3-models.json",
+        "bytes": 2532,
+        "sha256": "9140036af43711a12702ee6cf12d0ce2073acf7d9ef3269c3c297ad1dbe065a1"
+      },
+      {
+        "path": "data/models/meetings-generation-qwen35-v1.json",
+        "bytes": 2553,
+        "sha256": "c03d394c9a2e6c94654dc49047c8c851f46b5498871afbbd6d0e5b0b4f042c99"
+      },
+      {
+        "path": "pyproject.toml",
+        "bytes": 1053,
+        "sha256": "db45870df5b6d4fd543e14b9d837d25614033f9049692cead50e1a366a72308d"
+      },
+      {
+        "path": "scripts/backup_db.py",
+        "bytes": 1389,
+        "sha256": "93eb767a0969a4999a8e33ee465cfed2f82c13d7c8b96eeecd092669dbb29a6a"
+      },
+      {
+        "path": "scripts/benchmark_api.py",
+        "bytes": 15453,
+        "sha256": "488d36d124cd7cf8ec53c2bce42a17912717ec8787c97d814b1488c8d8192f0f"
+      },
+      {
+        "path": "scripts/evaluate_dataset.py",
+        "bytes": 16308,
+        "sha256": "4de523c5b46415e6ec105e102efa30ee9146b4ec0ed0f2c18705f3c9f00c40fe"
+      },
+      {
+        "path": "scripts/java_runtime.py",
+        "bytes": 2989,
+        "sha256": "0eac896345bf38c760b86a0f61e0a537d7fdc2d3f95712a8fe8c4e0a5d46e137"
+      },
+      {
+        "path": "scripts/prepare_corpus.py",
+        "bytes": 28340,
+        "sha256": "181de3ed388f76ec66e13d851b267ddf7dded0046829a816cf03b8afc28bce57"
+      },
+      {
+        "path": "scripts/prepare_meeting_gguf.py",
+        "bytes": 9370,
+        "sha256": "68fbef8d8df5004d3bf3d0e8da915480831934fcc3b31fecabe80723d9fff0fb"
+      },
+      {
+        "path": "scripts/question_dataset.py",
+        "bytes": 10152,
+        "sha256": "37806c6c0a33cbfd057a5ead3209e331ee5d8478703e5d4d456d5722f92f855b"
+      },
+      {
+        "path": "scripts/run_meeting_rag_acceptance.py",
+        "bytes": 35497,
+        "sha256": "01e5eb1e3e23c0ab0443b684556225cc56ff278f05ab443b36d205b5a3b9ba8f"
+      },
+      {
+        "path": "scripts/serve_meeting_gpu_placement.py",
+        "bytes": 4910,
+        "sha256": "083474393f80d0386edcb1cad6efe9ee644655671efa75b8cd921e76a9e23bf5"
+      },
+      {
+        "path": "scripts/serve_meeting_rag_service.py",
+        "bytes": 20735,
+        "sha256": "ca2e1b412924d5790fbf2e41e0567b1155d1395cc7722dfc320c716fdb8e88e8"
+      },
+      {
+        "path": "scripts/serve_meeting_service_rag.py",
+        "bytes": 3602,
+        "sha256": "37b6748fd63a85da980148229a2756d0f1413066d0210c03db5ee23d633ed91b"
+      },
+      {
+        "path": "scripts/serve_meeting_thinking.py",
+        "bytes": 5578,
+        "sha256": "540f9d3c970997ef2ad9c0f13f793503b778fa6d7157bdc3d416a4afd0b61ffb"
+      },
+      {
+        "path": "scripts/serve_meeting_thinking_compat.py",
+        "bytes": 7051,
+        "sha256": "3a3dbe8302c1793b1b3766d7276f0408eba66cb48f81ecde10ba52e0e746c73e"
+      },
+      {
+        "path": "scripts/serve_models.py",
+        "bytes": 5955,
+        "sha256": "d678ce76f35ecc5daa214dfef9d103e5ea390d6810b5dbf75cd4c669bf10423d"
+      },
+      {
+        "path": "scripts/validate_splits.py",
+        "bytes": 3175,
+        "sha256": "81fa8bfb482c6a149a7e6445e81319d7069b270b745ed4c7b0a35c7f2233a3ce"
+      },
+      {
+        "path": "scripts/verify_java_service.py",
+        "bytes": 16328,
+        "sha256": "e632b1a3082637c8cd8ce7aad7654b0264367dc2f0a390429c75dd9b9a15a68d"
+      },
+      {
+        "path": "src/doctrail/__init__.py",
+        "bytes": 87,
+        "sha256": "5a97f0d9f1932ccb8226c49ad4b84ea55503300b360c040fbd60d381877370cc"
+      },
+      {
+        "path": "src/doctrail/app.py",
+        "bytes": 26822,
+        "sha256": "1bf911ccd79458c06e9cc4090f295ce83e6afd5c4b327ff2e9652844d356d224"
+      },
+      {
+        "path": "src/doctrail/db.py",
+        "bytes": 3445,
+        "sha256": "34cd843011b93219d0a7c46727082cf81254eba6a4d8428d334ba6b918532961"
+      },
+      {
+        "path": "src/doctrail/generation_runtime.py",
+        "bytes": 14958,
+        "sha256": "5bb8009f25bcebb992a3b2d82e744494f891b7d319b68f7214e67f95610fbcc9"
+      },
+      {
+        "path": "src/doctrail/generation_runtime_v2.py",
+        "bytes": 8389,
+        "sha256": "0cc17d082519d7be9882e91f9ed45fa4f95072ff488779e069a934b74c1e7117"
+      },
+      {
+        "path": "src/doctrail/inference.py",
+        "bytes": 14169,
+        "sha256": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a"
+      },
+      {
+        "path": "src/doctrail/ingest.py",
+        "bytes": 2407,
+        "sha256": "7b1510f343d770fc4a5f37567092e47d1110223e17545611ba19727dbc751233"
+      },
+      {
+        "path": "src/doctrail/meeting_answer_blocks.py",
+        "bytes": 24200,
+        "sha256": "16bccf899000f55b7f12ace2b8103021119d9864973e97aed0d91a4895c7bbbb"
+      },
+      {
+        "path": "src/doctrail/meeting_answer_grammar.py",
+        "bytes": 1929,
+        "sha256": "58c2aeaebf203d214ea33a109864c730fb2f9cde2bda0f990309037da1f2d671"
+      },
+      {
+        "path": "src/doctrail/meeting_answer_spans.py",
+        "bytes": 13398,
+        "sha256": "aa0a7a03991ee1839e71d9fb7756eda58758eafbd7c32bd768cb9c1659382ac2"
+      },
+      {
+        "path": "src/doctrail/meeting_answer_thinking.py",
+        "bytes": 5621,
+        "sha256": "2ef811fd35847dc9dfa9a15654e312e81c53c2d449b5ef7f674bc634526b78f4"
+      },
+      {
+        "path": "src/doctrail/meeting_answer_v2.py",
+        "bytes": 6956,
+        "sha256": "915cb0b818bdb4814a336034a0cb849e257f587ae686c19523bfefc526100444"
+      },
+      {
+        "path": "src/doctrail/meeting_contract.py",
+        "bytes": 15298,
+        "sha256": "3bfe4cc6d4b67c4b07ee5494a2bfdac62280d5eaa18ad0dd8d942becf07a0330"
+      },
+      {
+        "path": "src/doctrail/meeting_gguf.py",
+        "bytes": 13558,
+        "sha256": "e0e8748a00359ae34533b10052219fcbdfb65a5dd2f8b7e3167d778f37ff1114"
+      },
+      {
+        "path": "src/doctrail/meeting_qwen35.py",
+        "bytes": 3814,
+        "sha256": "4475452a3c1ec3cc5ac543d987e85600cd43fdf7d540f89a84a5e07e56dc3b9b"
+      },
+      {
+        "path": "src/doctrail/meeting_runtime.py",
+        "bytes": 9508,
+        "sha256": "1f67c2c0c35ec4dc73023208fb856884fcedc54f7797cc277bd33a20bfc10ed4"
+      },
+      {
+        "path": "src/doctrail/meeting_service_rag.py",
+        "bytes": 15964,
+        "sha256": "f12391a210a4929e6c2ff53455ece2d66d2c8ed0ea5dc6910d027686bb270555"
+      },
+      {
+        "path": "src/doctrail/meeting_thinking_quality.py",
+        "bytes": 11025,
+        "sha256": "a4838c76ef5d243dc82d00b2feae05e8dca31548cd000941ebfa74588881ccdd"
+      },
+      {
+        "path": "src/doctrail/meeting_thinking_transport.py",
+        "bytes": 11405,
+        "sha256": "cd0c47eccc408296667c0d7708d018955107bbb16b4a5311f7eebef1d1abaec4"
+      },
+      {
+        "path": "src/doctrail/meeting_worker.py",
+        "bytes": 23275,
+        "sha256": "dac1519d7905c1b1f5f8841428712093a0fa63465b7f1d9e1a21cabe28c53468"
+      },
+      {
+        "path": "src/doctrail/model_retrieval.py",
+        "bytes": 10589,
+        "sha256": "0b1f60e3f38daa8f6dc85642c17832a82c6ea32ec87f3733aa8aa3fbc63dd5b4"
+      },
+      {
+        "path": "src/doctrail/retrieval.py",
+        "bytes": 2844,
+        "sha256": "eace0db47744662a6a48e606578654da6be915ce4f3fd2b516368aa156f55f56"
+      },
+      {
+        "path": "tests/test_java_runtime.py",
+        "bytes": 3343,
+        "sha256": "732c2deb66ce2575dccdff204d687c18f926a7b164c58f4892425e477ccff63c"
+      },
+      {
+        "path": "tests/test_run_meeting_rag_acceptance.py",
+        "bytes": 40027,
+        "sha256": "ab6344add0622ed2460daf0a171a1da4cdd1a10678e8be437017121395c071ec"
+      },
+      {
+        "path": "tests/test_serve_meeting_rag_service.py",
+        "bytes": 20685,
+        "sha256": "efc2e55bfe4dd2ab67fba38ed272ed2fb2fe964794a37cb1646c36b413b222a3"
+      },
+      {
+        "path": "uv.lock",
+        "bytes": 144347,
+        "sha256": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499"
+      },
+      {
+        "path": "web/package-lock.json",
+        "bytes": 63984,
+        "sha256": "a1f39601f87b499e11c98577909a8c34068f0199d9b4c99401a74e651dc04ff2"
+      },
+      {
+        "path": "web/package.json",
+        "bytes": 612,
+        "sha256": "e5325a51fabed68935ca48fa317bb5b2f45cca26c182219132a18c946498a22b"
+      },
+      {
+        "path": "web/scripts/run-meeting-rag-acceptance.mjs",
+        "bytes": 26651,
+        "sha256": "52732498fe856a1b2d01aad6a6f5ab8e032b585c5cc8a8e1125a819ee06ab86d"
+      }
+    ],
+    "jar": {
+      "path": "server/target/doctrail-server-0.1.0.jar",
+      "bytes": 49334048,
+      "sha256": "8476ba7728f392e62aa53a3999de8d2f08982012dc2a345f503bedb59564976b"
+    },
+    "ui": [
+      {
+        "url": "/favicon.svg",
+        "sha256": "fa0d5fc5405923ccd729a6b711036dce29bc09cb35492ac94d01aef6e057067c",
+        "path": "C:\\Users\\SSAFY\\개인프로젝트\\web\\dist\\favicon.svg"
+      },
+      {
+        "url": "/",
+        "sha256": "9279b15835a2e2493c4fddb3caf36cfa001cb2440cc89c64bc803e48ef5f826b",
+        "path": "C:\\Users\\SSAFY\\개인프로젝트\\web\\dist\\index.html"
+      },
+      {
+        "url": "/assets/index-C9z3P3GC.css",
+        "sha256": "35d97dac2cda032c0b8a67208254f9bd49e5107cf8da43ea7c8c689acd3345b9",
+        "path": "C:\\Users\\SSAFY\\개인프로젝트\\web\\dist\\assets\\index-C9z3P3GC.css"
+      },
+      {
+        "url": "/assets/index-Dz0VrtQf.js",
+        "sha256": "fa5733a1655ec34f238259af74d01c1ae34f8872edac5d7f5a43492f758c1555",
+        "path": "C:\\Users\\SSAFY\\개인프로젝트\\web\\dist\\assets\\index-Dz0VrtQf.js"
+      }
+    ],
+    "source_freeze": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/source-freeze-v2.json",
+      "bytes": 35103,
+      "sha256": "423316335a89a55eb3fa052f66dd7b34fb2062072a849f02c97a9134c27799bc"
+    },
+    "item_freeze": {
+      "path": "data/evaluation/meetings-service-rag-calibration-v2/item-freeze-v1.json",
+      "bytes": 6963,
+      "sha256": "acb3c65ebdd309fa3f778724134250335acaea9a8b71c228e9a0a46792b2251e"
+    },
+    "ci": {
+      "path": "experiments/results/meetings-service-rag-startup-repair-ci-v1.json",
+      "bytes": 10785,
+      "sha256": "389d7a6816300f125efc5723372ef22135eac9eef6134f55c58fffcbc3d61ac0"
+    },
+    "roles": {
+      "path": "data/evaluation/meetings-service-rag-calibration-execution-roles-v1.json",
+      "bytes": 1442,
+      "sha256": "a988425badb5c71ae2eacf249556213115cafb9fc5d7de44cc7ce29f921ecfe5"
+    },
+    "gate": null
+  }
+}
