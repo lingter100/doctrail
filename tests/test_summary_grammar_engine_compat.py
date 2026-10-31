@@ -2,8 +2,9 @@
 import copy
 import json
 import os
+import stat
 from pathlib import Path, PurePosixPath, PureWindowsPath
-from types import SimpleNamespace
+from types import FunctionType, SimpleNamespace
 
 import pytest
 
@@ -570,4 +571,133 @@ def test_native_drive_history_cannot_drop_mapping(drive_fixture):
     manifest["native_drive"] = manifest["native_drive_receipt"] = None
     (f.output / "build-manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(rt.BoundaryError, match="native_drive_history"):
+        compat.check_build(f.output, rt.digest((f.output / "build-manifest.json").read_bytes()))
+
+
+def active_scan_checkpoint(events, resource=None):
+    """Use the unchanged runner's actual nested code, with tiny sampled fake cells."""
+    def cell(value):
+        return (lambda: value).__closure__[0]
+    values = {"sampled": True, "record": {"active_disk_scans": {"entries": 0}},
+              "resource_checkpoint": resource or events.append}
+    closure = tuple(cell(values.get(name)) for name in compat.OWNED_SCAN_CODE.co_freevars)
+    return FunctionType(compat.OWNED_SCAN_CODE, rt.run_owned.__globals__, closure=closure)
+
+
+@pytest.mark.parametrize("mode", ["vanish", "permission", "oserror", "rootgone", "aliasgone", "link", "budget", "deadline_after_skip"])
+def test_live_scan_entry_race_preserves_guards_and_checkpoints(tmp_path, monkeypatch, mode):
+    entry = tmp_path / "object.o"
+    entry.write_bytes(b"object")
+    paths = compat.NativeDrive(None, tmp_path, "unused")
+    scanner = compat.LiveDiskScan(tmp_path, tmp_path, paths, "configure")
+    original, lstat = rt.disk_bytes, Path.lstat
+    calls, events = [0], []
+    def attrs(path, *args, **kwargs):
+        if path == entry:
+            calls[0] += 1
+            if calls[0] == 2:  # safe_path succeeds; only the scanner's lstat races unlink.
+                if mode == "permission":
+                    raise PermissionError("denied")
+                if mode == "oserror":
+                    raise OSError("io failure")
+                if mode == "link":
+                    return SimpleNamespace(st_mode=stat.S_IFLNK, st_file_attributes=0)
+                if mode != "budget":
+                    raise FileNotFoundError("compiler removed object")
+        if path == tmp_path and mode == "rootgone" and calls[0] >= 2:
+            raise FileNotFoundError("output root gone")
+        return lstat(path, *args, **kwargs)
+    monkeypatch.setattr(Path, "lstat", attrs)
+    def alias_check():
+        if mode == "aliasgone" and calls[0] >= 2:
+            raise rt.BoundaryError("native_drive_changed")
+    monkeypatch.setattr(paths, "check", alias_check)
+    if mode == "budget":
+        monkeypatch.setattr(rt, "DISK", 1)
+    def checkpoint(event):
+        events.append(event)
+        if mode == "deadline_after_skip" and events.count(None) == 2:
+            raise rt.BoundaryError("shared_deadline")
+    active = active_scan_checkpoint(events, checkpoint)
+    run = lambda *a, **kw: rt.disk_bytes(tmp_path, checkpoint=active)
+    if mode == "vanish":
+        assert scanner.run(run, []) == 0
+        assert events == ["scan_start", None, None, "scan_complete"]
+        assert scanner.record["disappeared_entries"] == 1
+    else:
+        with pytest.raises((OSError, rt.BoundaryError)):
+            scanner.run(run, [])
+    assert rt.disk_bytes is original and scanner.record["restored"] is True
+
+
+@pytest.mark.parametrize("mode", ["static", "same_name", "wrong_root", "write_bounded", "safe_path", "iteration", "checkpoint"])
+def test_live_scan_only_exact_active_code_and_entry_lstat_are_tolerated(tmp_path, monkeypatch, mode):
+    entry = tmp_path / "object.o"
+    entry.write_bytes(b"object")
+    scanner = compat.LiveDiskScan(tmp_path, tmp_path, compat.NativeDrive(None, tmp_path, "unused"), "configure")
+    original, lstat, safe = rt.disk_bytes, Path.lstat, rt.safe_path
+    calls = [0]
+    def attrs(path, *args, **kwargs):
+        if path == entry:
+            calls[0] += 1
+            if calls[0] == 2:
+                raise FileNotFoundError("entry")
+        return lstat(path, *args, **kwargs)
+    monkeypatch.setattr(Path, "lstat", attrs)
+    callback = active_scan_checkpoint([])
+    if mode == "static":
+        callback = None
+    elif mode == "same_name":
+        def scan_checkpoint(event):
+            pass
+        callback = scan_checkpoint
+    elif mode == "wrong_root":
+        scanner.root = tmp_path / "another"
+    elif mode == "safe_path":
+        def guard(root, name):
+            if name == "object.o":
+                raise FileNotFoundError("safe_path failure")
+            return safe(root, name)
+        monkeypatch.setattr(rt, "safe_path", guard)
+    elif mode == "iteration":
+        monkeypatch.setattr(Path, "rglob", lambda *a: (_ for _ in ()).throw(FileNotFoundError("whole iteration")))
+    elif mode == "checkpoint":
+        callback = active_scan_checkpoint([], lambda event: (_ for _ in ()).throw(FileNotFoundError("checkpoint")))
+    def runner(*args, **kwargs):
+        if mode == "write_bounded":
+            return rt.write_bounded(tmp_path, tmp_path / "receipt.json", {})
+        return rt.disk_bytes(tmp_path, checkpoint=callback)
+    with pytest.raises(FileNotFoundError):
+        scanner.run(runner, [])
+    assert rt.disk_bytes is original and scanner.record["restored"] and scanner.record["disappeared_entries"] == 0
+
+
+def test_live_scan_restores_after_primary_failure_even_if_replacement_changes(tmp_path):
+    scanner = compat.LiveDiskScan(tmp_path, tmp_path, compat.NativeDrive(None, tmp_path, "unused"), "configure")
+    original = rt.disk_bytes
+    def fail(*args, **kwargs):
+        rt.disk_bytes = lambda *a, **kw: 0
+        raise ValueError("primary")
+    with pytest.raises(ValueError, match="primary") as caught:
+        scanner.run(fail, [])
+    assert rt.disk_bytes is original and scanner.record["restored"]
+    assert caught.value.__notes__ == ["live_scan_adapter_changed_before_restore"]
+
+
+def test_live_scan_build_records_policy_counts_and_rejects_tampered_history(fixture):
+    f, original = fixture, rt.disk_bytes
+    def runner(argv, **kwargs):
+        assert rt.disk_bytes is not original
+        rt.disk_bytes(f.output, checkpoint=active_scan_checkpoint([]))
+        return f.runner(argv, **kwargs)
+    manifest = compat.build(f.original, f.output, f.sha, runner=runner, clock=f.clock)
+    assert rt.disk_bytes is original and rt.inventory(f.original) == f.frozen
+    phases = manifest["live_disk_scan"]["phases"]
+    assert [p["phase"] for p in phases] == ["configure", "compile"]
+    assert all(p["active_scans"] == 1 and p["disappeared_entries"] == 0 and p["restored"] for p in phases)
+    sha = rt.digest((f.output / "build-manifest.json").read_bytes())
+    assert compat.check_build(f.output, sha) == manifest
+    phases[0]["restored"] = False
+    (f.output / "build-manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(rt.BoundaryError, match="live_scan_history"):
         compat.check_build(f.output, rt.digest((f.output / "build-manifest.json").read_bytes()))

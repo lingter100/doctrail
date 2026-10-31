@@ -1,0 +1,92 @@
+{
+  "head": "7099bde0919aa73d627d318a6bed445938c8470e",
+  "status": "CLOSED_ALL_REQUIRED_JOBS_PASSED",
+  "runs": [
+    {
+      "run_id": 41182685807,
+      "event": "push",
+      "jobs": [
+        {
+          "id": 124483161722,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124483161881,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124483162002,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "watch": {
+        "session": 79411,
+        "exit": 0,
+        "chunk": "129a74"
+      },
+      "python": {
+        "passed": 5739,
+        "skipped": 21,
+        "failed": 0,
+        "seconds": 154.01
+      },
+      "browser": {
+        "passed": 158,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    },
+    {
+      "run_id": 41182689052,
+      "event": "pull_request",
+      "jobs": [
+        {
+          "id": 124483171532,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124483171746,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124483171793,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "watch": {
+        "session": 48912,
+        "exit": 0,
+        "chunk": "2f62cf"
+      },
+      "python": {
+        "passed": 5739,
+        "skipped": 21,
+        "failed": 0,
+        "seconds": 149.53
+      },
+      "browser": {
+        "passed": 158,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    }
+  ],
+  "limits": [
+    "CI includes synthetic regression, not local native build or semantic model quality.",
+    "Prior e611 failed runs preserved; current commit is the separator repair."
+  ]
+}

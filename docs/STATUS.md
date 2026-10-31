@@ -2,6 +2,16 @@
 
 ## 최신 확인: 실제 서비스 QA 실패 원인과 CI 경로 오류 수정 중
 
+임시 파일 경합 보정은25개 가상 검사·Ruff·독립 Astra xhigh 변경 검토 지적0으로 마쳤다. [보정 기록](../experiments/results/meetings-summary-live-scan-repair-v1.json). 검색 비교 실행기와 함께 게시·필수 CI를 확인한 뒤, 실제 검색 비교를 먼저 실행한다. 새 모델 적재/검색과 수정 후 빌드는 아직 하지 않았다.
+
+ASCII 경로 v3 빌드는209.578초 후 실패로 종료됐다. 구성 단계의 동작 중 디스크 검사가 사라진 임시 객체 파일을 읽다가 중단됐으며 엔진 컴파일은 시작되지 않았다. 프로세스12개 종료·드라이브 해제를 확인했다. [v3 실패](../experiments/results/meetings-summary-compat-build-v3.json)는 보존하고 파일 삭제 경합을 처리하는 최소 수정안을 검토한다. 원래 입력 검증은 완화하지 않는다. 검색 비교는 독립 검토를 마쳤으며 별도 실제 실행 준비를 계속한다. 아래 실행 중 문구는 이전 상태다.
+
+새 ASCII 경로를 사용하는 요약 엔진 빌드가 실제로 시작됐다. 기존 원본과 실패 폴더는 그대로이며 새 폴더에서만 진행한다. 현재는 실행 중이므로 성공을 주장하지 않는다. 검색 비교 실행기는14개 개별 검사·Ruff·독립 Astra xhigh 검토 지적0을 마쳤다. [구현/환경 기록](../experiments/results/meetings-qa-retrieval-development-implementation-v1.json). 두 작업을 동시에 실행하지 않으며 실제 검색은 빌드 종료 후 진행한다.
+
+7099bde 경로 수정의 push·PR 필수 CI가 모두 종료·통과했다. 각각 Python5,739개·브라우저158개와 Java/운영/프런트 빌드를 확인했다. [새 CI 기록](../experiments/results/meetings-native-separator-ci-v1.json). 별도 검색 환경은 기존 캐시48패키지 설치와 CPU 모듈 가져오기를 마쳤다. 실제 검색 모델 적재0이며 새 검색 실행기14개 검사는 독립 검토 중이다.
+
+독립 AI 진단은 형식 외에도 제안의 확정 오인·다른 절차의 인용·필수 출범 규정 누락을 확인했다. [내용 진단](../experiments/results/meetings-qa-service-diagnosis-v1.json)을 보존하며, 다음은 새 공개 질문2개 × 기존 검색3방식의 [생성 없는 비교](MEETINGS-QA-RETRIEVAL-DEVELOPMENT.md)다. 새 격리 환경과 실행기만 준비 중이며 아직 검색 모델을 실행하지 않았다.
+
 CI 경로 수정은 Windows PATH의 `;`와 호스트 경로 구분자를 분리하는 두 변경으로 끝냈다. 수정 전 POSIX 모형 실패1개를 재현했고 영향27개·Ruff·별도 Astra xhigh 검토를 통과했다. [수정 결과](../experiments/results/meetings-summary-native-drive-ci-repair-v1.json). 게시 후 Linux CI로 확인하며 실제 드라이브 연결/엔진 빌드는 아직 미실행이다.
 
 e61166f의 실제 Java 검색은 첫 질문에서5개 청크를 반환했고, Ministral 입력2,193·출력321토큰/EOS·생성6.813초를 측정했다. 답변은 코드 블록으로 감싼 JSON이어서503 `generation_invalid_json`으로 실패했다. 전체33.687초·자연 종료1이며 두 번째 질문은 미실행이다. 원문 출력과 검색 근거를 보존하고 별도 AI 검토로 형식·근거 누락·의미 오류를 구분한다. 단순 형식 복구를 품질 수용으로 취급하지 않는다. [실제 결과](../experiments/results/meetings-qa-service-development-v1.json).

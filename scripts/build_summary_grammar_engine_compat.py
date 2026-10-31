@@ -11,9 +11,11 @@ import argparse
 import ctypes
 import os
 import re
+import stat
 import sys
 import time
 from pathlib import Path, PureWindowsPath
+from types import CodeType
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts import prepare_summary_grammar_engine as prep
@@ -30,6 +32,86 @@ TOOLS = {"cmake.exe", "ninja.exe", "clang.exe", "clang++.exe", "ld.lld.exe", "ll
          "llvm-ar.exe", "llvm-ranlib.exe", "llvm-rc.exe", "llvm-mt.exe"}
 SOURCES = ("scripts/build_summary_grammar_engine_compat.py", "scripts/prepare_summary_grammar_engine.py",
            "scripts/verify_summary_grammar_engine.py", "tools/summary_grammar/runtime.py")
+LIVE_SCAN_POLICY = "compat-owned-active-lstat-v1"
+RUNTIME_SHA256 = "b1422ea8466d127b38493d8b05c893483aa8c554d65ed7ffe0d3bb06961009c8"
+OWNED_RUN_CODE = rt.run_owned.__code__
+OWNED_SCAN_CODES = [code for code in OWNED_RUN_CODE.co_consts if isinstance(code, CodeType) and code.co_name == "scan_checkpoint"]
+rt.require(len(OWNED_SCAN_CODES) == 1, "live_scan_runtime_code")
+OWNED_SCAN_CODE = OWNED_SCAN_CODES[0]
+
+
+def live_scan_policy():
+    path = Path(rt.__file__).resolve()
+    reference = rt.reference(path, path.parents[2])
+    rt.require(reference["sha256"] == RUNTIME_SHA256 and rt.run_owned.__code__ is OWNED_RUN_CODE, "live_scan_runtime_changed")
+    return {"policy": LIVE_SCAN_POLICY, "original_runtime": reference,
+            "scope": "Exact run_owned scan_checkpoint code object and designated native output root only; all other scans strict."}
+
+
+class LiveDiskScan:
+    """Serial per-run adapter; never installed during input checks or publication."""
+    def __init__(self, output, native_root, paths, phase):
+        self.output, self.root, self.paths = Path(output).resolve(), Path(native_root), paths
+        self.original = rt.disk_bytes
+        self.identity = (self.output.stat().st_dev, self.output.stat().st_ino)
+        self.record = {"phase": phase, "canonical_root": str(self.output), "native_root": str(native_root),
+                       "active_scans": 0, "disappeared_entries": 0, "restored": False}
+
+    def valid_root(self):
+        self.paths.check()
+        rt.safe_path(self.output, "live-scan-root-check")
+        attrs = self.output.lstat()
+        rt.require(stat.S_ISDIR(attrs.st_mode) and not stat.S_ISLNK(attrs.st_mode)
+                   and not getattr(attrs, "st_file_attributes", 0) & 1024
+                   and (attrs.st_dev, attrs.st_ino) == self.identity, "live_scan_root_changed")
+        rt.require(str(self.paths.path(self.output)) == str(self.root)
+                   and self.root.resolve() == self.output and self.root.samefile(self.output), "live_scan_root_changed")
+
+    def dispatch(self, root, checkpoint=None):
+        if getattr(checkpoint, "__code__", None) is not OWNED_SCAN_CODE or str(root) != str(self.root):
+            return self.original(root, checkpoint=checkpoint)
+        checkpoint("start")
+        self.valid_root()
+        self.record["active_scans"] += 1
+        total = 0
+        for path in Path(root).rglob("*"):
+            checkpoint("before_entry")
+            rt.safe_path(root, path.relative_to(root).as_posix())
+            try:
+                attrs = path.lstat()
+            except FileNotFoundError:
+                # Only this entry's lstat may race a compiler unlink. Root/alias loss is fatal.
+                self.valid_root()
+                self.record["disappeared_entries"] += 1
+                checkpoint("after_entry")
+                continue
+            rt.require(not stat.S_ISLNK(attrs.st_mode) and not getattr(attrs, "st_file_attributes", 0) & 1024, "reparse_path")
+            if stat.S_ISREG(attrs.st_mode):
+                total += attrs.st_size
+                rt.require(total <= rt.DISK, "disk_budget")
+            checkpoint("after_entry")
+        self.valid_root()
+        checkpoint("complete")
+        return total
+
+    def run(self, runner, argv, **kwargs):
+        live_scan_policy()
+        rt.require(rt.disk_bytes is self.original, "live_scan_adapter_changed")
+        replacement, error = self.dispatch, None
+        rt.disk_bytes = replacement
+        try:
+            return runner(argv, **kwargs)
+        except BaseException as exc:
+            error = exc
+            raise
+        finally:
+            changed = rt.disk_bytes is not replacement
+            rt.disk_bytes = self.original
+            self.record["restored"] = rt.disk_bytes is self.original
+            if changed:
+                if error is None:
+                    raise rt.BoundaryError("live_scan_adapter_changed")
+                error.add_note("live_scan_adapter_changed_before_restore")
 
 
 class DosDevices:
@@ -362,12 +444,31 @@ def check_drive_history(output, manifest):
     rt.require(invocations[0]["argv"] == attempt["command"], "native_drive_history_invocations")
 
 
+def check_live_scan_history(output, manifest):
+    policy = live_scan_policy()
+    attempt = rt.load(output / "build-attempt.json")
+    saved = manifest.get("live_disk_scan", {})
+    rt.require(attempt.get("live_disk_scan") == policy
+               and {key: saved.get(key) for key in policy} == policy, "live_scan_history")
+    phases = saved.get("phases", [])
+    drive = manifest.get("native_drive")
+    native_root = str(PureWindowsPath(drive["drive"] + "\\") / output.resolve().relative_to(REPO.resolve())) if drive else str(output)
+    rt.require(len(phases) == 2, "live_scan_history")
+    for name, row in zip(("configure", "compile"), phases, strict=True):
+        rt.require(row.get("phase") == name and row.get("restored") is True
+                   and row.get("canonical_root") == str(output.resolve()) and row.get("native_root") == native_root
+                   and type(row.get("active_scans")) is int and row["active_scans"] >= 0
+                   and type(row.get("disappeared_entries")) is int and row["disappeared_entries"] >= 0,
+                   "live_scan_history")
+
+
 def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monotonic, native_drive=None, mapping_backend=None):
     original, output = roots(original, output)
     rt.require(not output.exists(), "compat_build_once")
     lock = prep.check_acquired(original, reviewed_sha)
     record, patched = inputs(original, output, lock, reviewed_sha)
     sources = source_refs()
+    scan_policy, scan_phases = live_scan_policy(), []
     output.mkdir(parents=True)
     rt.write(output / "build-issued.json", {"original_root": str(original), "review_artifact_sha256": reviewed_sha,
              "sources": sources, "retry": False, "shared_runner_seconds": 900, "whole_cli_900_bound": False})
@@ -386,14 +487,18 @@ def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monoto
                          "-DCMAKE_MAKE_PROGRAM=" + str(paths.path(ninja)), "-DCMAKE_BUILD_TYPE=Release"]
             rt.write(output / "build-attempt.json", {"command": list(map(str, configure)), "inputs": record,
                      "optional_probe_preflight": probe, "deadline_seconds": 900, "retry": False,
-                     "native_drive": paths.record})
+                     "native_drive": paths.record, "live_disk_scan": scan_policy})
             kwargs = {"cwd": native_output, "env": env, "root": native_output, "deadline": deadline, "rss": 2 * 1024**3,
                       "host": 2 * 1024**3, "start": 4 * 1024**3, "allowed": allowed}
-            paths.run(runner, configure, log_prefix=paths.path(output / "configure"), **kwargs)
+            configure_scan = LiveDiskScan(output, native_output, paths, "configure")
+            scan_phases.append(configure_scan.record)
+            paths.run(lambda argv, **kw: configure_scan.run(runner, argv, **kw), configure, log_prefix=paths.path(output / "configure"), **kwargs)
             receipt_ok(output, "configure")
             rt.require(probe == prep.optional_probe_guard(native_output, record["optional_ld_query"], env, native_cmake.parent), "optional_probe_changed")
             traced = prep.audit_trace(trace, allowed, probe, output)
-            paths.run(runner, [native_cmake, "--build", paths.path(output / "build"), "--target", "summary-grammar-validator", "--parallel", "2"],
+            compile_scan = LiveDiskScan(output, native_output, paths, "compile")
+            scan_phases.append(compile_scan.record)
+            paths.run(lambda argv, **kw: compile_scan.run(runner, argv, **kw), [native_cmake, "--build", paths.path(output / "build"), "--target", "summary-grammar-validator", "--parallel", "2"],
                       log_prefix=paths.path(output / "compile"), **kwargs)
             receipt_ok(output, "compile")
         check_inputs(original, output, record, reviewed_sha)
@@ -409,11 +514,13 @@ def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monoto
                   "native_batch_runs": 0, "disk_bytes": rt.disk_bytes(output), "whole_cli_900_bound": False,
                   "native_drive": paths.record,
                   "native_drive_receipt": rt.reference(output / "build-native-drive.json", output) if native_drive else None,
+                  "live_disk_scan": dict(scan_policy, phases=scan_phases),
                   "disk_scope": "4 GiB writable derivative/build/temp output only; original inputs remain separate read-only. No combined peak bound."}
         rt.write_bounded(output, output / "build-manifest.json", result)
         return result
     except Exception as error:
         failure_record(output / "build-failure.json", {"error": type(error).__name__, "reason": str(error), "no_retry": True,
+                       "live_disk_scan": dict(scan_policy, phases=scan_phases),
                        "partial_files_preserved": True, "driver_does_not_write_original_inputs": True,
                        "original_input_preservation": "Not inferred on failure; requires separate closeout."}, error)
         raise
@@ -440,6 +547,7 @@ def check_build(output, build_sha):
     for name in ("configure", "compile"):
         receipt_ok(output, name)
     check_drive_history(output, manifest)
+    check_live_scan_history(output, manifest)
     return manifest
 
 
