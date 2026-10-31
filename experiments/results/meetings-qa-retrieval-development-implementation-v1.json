@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-31",
+  "status": "implementation_ready_actual_retrieval_not_run",
+  "implementation": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "files": [
+      "scripts/run_meeting_qa_retrieval_development.py",
+      "tests/test_meeting_qa_retrieval_development.py"
+    ],
+    "sha256": [
+      "2ac47ad2ced9f028605b31b89c6750fa6d29aa73de37f5f5d2c3b403751b0f67",
+      "6dc7c3facacce1290deaa6af5be1651aa5b8fa99f0367854d9a42c0daf99d89e"
+    ]
+  },
+  "checks": {
+    "initial": "13 passed, 1 report tuple/list mismatch failed in 1.68s",
+    "repair": "Use JSON-native methods list; the failed check passed in 1.15s",
+    "distinct_passed": 14,
+    "ruff": "passed",
+    "single_whole_14_pass_run": false
+  },
+  "review": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "xhigh",
+    "blockers": 0,
+    "material_advisories": 0,
+    "result_sha256": "c47f717ee75c6c446ae38c858f9daf3d0420353f7bab36ce6ce29a6e9b06d9b7"
+  },
+  "environment": {
+    "status": "isolated_imports_only",
+    "python": "3.11.15",
+    "torch": "2.10.0+cu128",
+    "transformers": "4.57.6",
+    "psutil": "7.2.2",
+    "packages_installed_from_existing_cache": 48,
+    "offline_sync_seconds": 89.797,
+    "isolated_import_seconds": 26.375,
+    "device_selected": "cpu",
+    "cuda_initialized": false,
+    "uv_lock_sha256": "a226a23939e13dca873131fc0f908d52d46ab00a98efd5510f1967d255bcb499",
+    "record_sha256": "542005f8eab7180c53df74301e5e91d384634446db9c228fe92a3d1f795077c9"
+  },
+  "actual_search_requests": 0,
+  "actual_model_loads": 0,
+  "generation_requests": 0,
+  "human_reviews": 0,
+  "model_quality_accepted": false
+}
