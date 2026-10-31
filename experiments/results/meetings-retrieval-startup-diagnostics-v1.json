@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "implemented_focused_checks_and_independent_review_passed",
+  "problem": "The development runner discarded worker startup output, and the worker intentionally hid its preloading exception; v3's internal failure could not be recovered",
+  "behavior": {
+    "private_startup_logs": "Immediately drain worker and Java binary stdout/stderr; retain at most 1 MiB per stream in the fresh local output",
+    "ready_cutoff": "Atomically disable retention before document upload or search; continue draining and discarding later output",
+    "safe_report": "Role, phase, pre-cleanup child exit, relative private log reference, size, hash, truncation and drain state; no raw log text",
+    "worker_opt_in": "DOCTRAIL_STARTUP_DIAGNOSTICS=1 only on the development worker's copied environment; Java and parent unchanged",
+    "worker_details": "Startup stage and at most four exception classes with eight sanitized basename/function/line frames each; no exception message, source lines, locals or environment values",
+    "default_compatibility": "Without the opt-in flag the original stderr message and exit code 2 remain exact; HTTP and post-ready behavior unchanged",
+    "failure_preservation": "Original startup failure survives logging, drain and diagnostic-emission failures",
+    "cleanup": "Drainer joins share the existing cleanup deadline; no additional five-second window",
+    "unchanged": "Worker argv/bootstrap, models, public questions/documents, six-search cap, zero generation, CPU/RSS/startup/time limits"
+  },
+  "source": {
+    "before_commit": "724eb9078c7ac5ad45d93902d9272d2fa3e0dded",
+    "scripts/run_meeting_qa_retrieval_development.py": "bf109d6e56c3506e640f8c51ae28dcfe1734015c00b1b4c247984cabacd6b054",
+    "tests/test_meeting_qa_retrieval_development.py": "2d54e61e8f6da1e9602de5374ab6b98af14057b76134315444caf02a2b2b0292",
+    "src/doctrail/inference.py": "8d55187a9d8f7d437101c61233956ee7268b942e2873ef057dcc168618abc6c1",
+    "tests/test_inference.py": "25e04058e0753277d627cecbc33c7ec11ff9a93cf1e3e5ff35dfb06e46004d68",
+    "originals_and_intermediate_snapshot_preserved": true
+  },
+  "validation": {
+    "logger": "19 unique fake cases passed across initial, affected recheck and drain-error delta; initial seven temporary-directory setup errors preserved",
+    "worker_opt_in": "5 focused synthetic cases passed in 0.78s",
+    "affected_runner": "3 affected cases passed in 1.17s",
+    "ruff": "All four files passed",
+    "independent_model": "gpt-6-astra",
+    "independent_effort": "xhigh",
+    "required_fixes_remaining": 0,
+    "reviewer_reran_tests": false,
+    "initial_full_inference_attempt": "Interrupted and unverified: no collected count or active node retained; at least 30.04s of tool waits plus unmeasured interaction elapsed. Original record preserved.",
+    "separate_first_case_diagnostic": "Collected one synthetic case, blocked before its body in TestClient fixture / Windows asyncio internal socketpair; stack saved at 15s, terminated at 45.015s, both known processes subsequently absent",
+    "full_inference_context_comparison": "Unchanged source/runtime in an escalated local execution context: all 48 synthetic cases passed, one existing Starlette warning, pytest 0.96s / whole child 1.922s / exit0, no timeout or kill, known process absent",
+    "context_interpretation": "Supports a restricted Windows test-environment effect; does not establish the actual retrieval worker's failure cause",
+    "implementation_result_sha256": "ee1da3ef4a70d06ae77fdd70ee3b642d064c23b072f11c9396c181ea6879ed34"
+  },
+  "limits": [
+    "Startup bytes still unread at READY may be discarded; omissions and truncation do not prove successful loading",
+    "The original v3 exception remains unrecoverable; adding diagnostics does not establish its cause",
+    "No actual model startup, retrieval ranking or content-quality result is established by these checks"
+  ],
+  "actual_model_runs": 0,
+  "human_review": false,
+  "paid_service": false,
+  "public_service_deployment": false,
+  "prior_failures_preserved": true
+}

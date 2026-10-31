@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "closed_failed_before_retrieval_results",
+  "source_commit": "724eb9078c7ac5ad45d93902d9272d2fa3e0dded",
+  "scope": "New open development data only; not held-out or closed paired QA",
+  "conditions_changed": "Prospective startup observer correction only; same two questions, source documents, search methods, models and budgets",
+  "preflight": {
+    "status": "blocked_before_dispatch",
+    "reason": "Different Java identity than the prior exact unrelated-process exception",
+    "independent_readonly_reconciliation": "Confirmed unrelated Jobis application; process left untouched",
+    "continuation": "Only exact process identity, command hash and fresh observer output path rebound; reverse-literal equality verified",
+    "model_loads": 0,
+    "search_requests": 0,
+    "generation_requests": 0
+  },
+  "actual": {
+    "fresh_gate": "passed",
+    "failure": "GuardError:python_argv_unreadable_or_wrong",
+    "outer_seconds": 0.282,
+    "tool_wall_seconds": 1.107,
+    "tool_exit_code": 1,
+    "natural_cli_exit_code": null,
+    "cli_exit_after_cleanup": 15,
+    "helper_result_present": false,
+    "recorded_rankings": 0,
+    "observed_processes": ["helper Python", "console host", "base Python"],
+    "worker_java_or_cmd_observed": false,
+    "actual_model_load_count": null,
+    "actual_search_request_count": null,
+    "generation_requests_configured": 0
+  },
+  "cleanup": {
+    "known_owned_processes_absent": 3,
+    "launcher_absent": true,
+    "errors_preserved": ["GuardError"],
+    "unrelated_process_not_modified": true,
+    "fixed_references_unchanged": 70
+  },
+  "diagnosis": {
+    "confirmed": "The virtual environment's configured base home alias resolves to the pinned base Python path, while the pure observer normalizer does not resolve filesystem aliases",
+    "hypothesis": "A forwarded argv[0] may use that alias and fail strict lexical matching",
+    "limitation": "The exact rejected argument vector was not saved, so this is not a confirmed attribution for the failed process",
+    "next": "Narrow source review before a prospective observer correction; no retry of the closed output"
+  },
+  "evidence": {
+    "preflight_final_sha256": "a70c26e3fac5e22987d41301bd963b141c3862fddeb641ac62783992437efd59",
+    "continuation_launcher_sha256": "7d38cf3eddaed44867d2e97829fb5c6cb58f407984ef83b1e30a4272958889b5",
+    "actual_final_sha256": "a11367ea843e83426446c06fd3e772ca63e3e948a75d3c2a0516b73a3e75afcc",
+    "actual_tool_receipt_sha256": "5cc5024686e3fef0ecb6917e3b0d14e38d16a5ddab0c6cf0ea19aa9125ba9245"
+  },
+  "quality_claim": "No retrieval comparison, model quality or performance improvement is established",
+  "human_review": false,
+  "paid_service": false,
+  "public_service_deployment": false,
+  "closed_originals_preserved": true
+}

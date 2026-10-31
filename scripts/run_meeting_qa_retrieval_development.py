@@ -13,6 +13,7 @@ import os
 import secrets
 import subprocess
 import sys
+import threading
 import time
 from contextlib import contextmanager
 from pathlib import Path
@@ -47,6 +48,71 @@ WORKER_BOOTSTRAP = (
     "import runpy,torch;torch.set_num_threads(2);torch.set_num_interop_threads(2);"
     "runpy.run_module('doctrail.inference',run_name='__main__')"
 )
+STARTUP_STREAM_BYTES = 1024 * 1024
+
+
+class StartupDiagnostics:
+    """Private bounded startup bytes; keep draining, but never capture ready traffic."""
+
+    def __init__(self, output, report):
+        self.output, self.report = output, report
+        self.streams = []
+        self.deadline = None
+        self.close_error = None
+        report["startup_diagnostics"] = []
+
+    def attach(self, role, process):
+        row = {"role": role, "phase": "waiting_ready", "pid": process.pid,
+               "exit_before_cleanup": None, "code": "not_ready", "streams": []}
+        self.report["startup_diagnostics"].append(row)
+        for name in ("stdout", "stderr"):
+            state = {"pipe": getattr(process, name), "data": bytearray(), "capture": True,
+                     "truncated": False, "error": None, "lock": threading.Lock()}
+            state["thread"] = threading.Thread(target=self._drain, args=(state,), daemon=True)
+            self.streams.append((row, name, state))
+            state["thread"].start()
+        return row
+
+    @staticmethod
+    def _drain(state):
+        try:
+            with state["pipe"] as pipe:
+                while chunk := pipe.read1(8192):
+                    with state["lock"]:
+                        if state["capture"]:
+                            room = STARTUP_STREAM_BYTES - len(state["data"])
+                            state["data"].extend(chunk[:room])
+                            state["truncated"] |= len(chunk) > room
+        except Exception as error:  # noqa: BLE001 - only safe error metadata reaches report
+            state["error"] = error
+
+    def ready(self, row):
+        for owner, _, state in self.streams:
+            if owner is row:
+                with state["lock"]:
+                    state["capture"] = False
+        row.update(phase="ready", code="ready")
+
+    def close(self):
+        # Called inside cleanup_owned's existing five-second allowance.
+        for row, name, state in self.streams:
+            state["thread"].join(timeout=max(0, self.deadline - time.monotonic()))
+            complete = not state["thread"].is_alive()
+            with state["lock"]:
+                state["capture"] = False
+                data = bytes(state["data"])
+            if not complete:
+                self.close_error = self.close_error or TimeoutError()
+            if state["error"] is not None:
+                record_error(self.report, state["error"])
+            path = self.output / f"startup-{row['role']}-{name}.log"
+            with path.open("xb") as stream:
+                stream.write(data)
+            row["streams"].append({"stream": name, "path": path.name,
+                "size_bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(),
+                "truncated": state["truncated"], "drain_complete": complete,
+                "read_error": None if state["error"] is None else type(state["error"]).__name__,
+                "capture_scope": "startup_before_ready_only", "private": True})
 
 
 def environment(database, worker_url, token):
@@ -67,6 +133,8 @@ def environment(database, worker_url, token):
 def start_services(jar, output, report, startup):
     """Only owned worker/Java children, one shared startup and cleanup budget."""
     processes = []
+    diagnostics = StartupDiagnostics(output, report)
+    current = current_row = None
     try:
         worker_port, java_port = unused_port(), unused_port()
         if worker_port == java_port:
@@ -75,38 +143,62 @@ def start_services(jar, output, report, startup):
         token = secrets.token_urlsafe(48)
         env = environment(output / "retrieval.sqlite3", worker_url, token)
         specs = load_model_manifest(MANIFEST)["models"]
+        report["startup_phase"] = "java_validation"
         java = java_executable()
         remaining(startup)
+        report["startup_phase"] = "worker_launch"
+        worker_env = {**env, "DOCTRAIL_STARTUP_DIAGNOSTICS": "1"}
         worker = subprocess.Popen([sys.executable, "-B", "-c", WORKER_BOOTSTRAP,
             "--device", "cpu", "--model-root", str(ROOT / "models"), "--port", str(worker_port)],
-            cwd=ROOT, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            cwd=ROOT, env=worker_env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         processes.append(worker)
         report["owned_pids"] = [worker.pid]
+        current, current_row = worker, diagnostics.attach("worker", worker)
+        report["startup_phase"] = "worker_ready_check"
         health = wait_ready(worker, worker_url + "/health",
             headers={"Authorization": "Bearer " + token}, timeout=remaining(startup))
         remaining(startup)
+        current_row["phase"] = "health_validation"
         check_retrieval(health, specs)
+        diagnostics.ready(current_row)
         report["retrieval_health"] = health
+        current = current_row = None
+        report["startup_phase"] = "java_launch"
         backend = subprocess.Popen([str(java), "-jar", str(jar.resolve()),
             "--server.address=127.0.0.1", f"--server.port={java_port}",
             "--doctrail.embedding-profile=base", "--doctrail.rag-answer-enabled=false",
             "--doctrail.generation-url=", "--doctrail.generation-token="],
-            cwd=ROOT, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         processes.append(backend)
         report["owned_pids"].append(backend.pid)
+        current, current_row = backend, diagnostics.attach("java", backend)
+        report["startup_phase"] = "java_ready_check"
         java_health = wait_ready(backend, java_url + "/api/health", timeout=remaining(startup))
         remaining(startup)
+        current_row["phase"] = "health_validation"
         if java_health.get("status") != "ok" or java_health.get("version") != "0.1.0":
             raise ValueError("java_health_identity")
         report["java_health"] = java_health
+        diagnostics.ready(current_row)
+        current = current_row = None
+        report["startup_phase"] = "ready"
         yield java_url
     except BaseException as error:
         record_error(report, error)
+        if current_row is not None:
+            try:
+                code = current.poll()
+                current_row["exit_before_cleanup"] = code
+                current_row["code"] = "exited_before_ready" if code is not None else "startup_failed"
+            except Exception as observation:  # noqa: BLE001 - preserve original error
+                current_row["code"] = "exit_unreadable"
+                record_error(report, observation)
         raise
     finally:
-        cleanup_owned(processes, None, None, report)
+        diagnostics.deadline = time.monotonic() + 5
+        cleanup_owned(processes, None, None, report, observer=diagnostics)
 
 
 def plan(cases):

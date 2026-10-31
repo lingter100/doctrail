@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "closed_failed_at_worker_startup",
+  "source_commit": "724eb9078c7ac5ad45d93902d9272d2fa3e0dded",
+  "scope": "Same two open development questions and six planned BM25/dense/hybrid searches; no held-out or closed QA reuse",
+  "actual": {
+    "fresh_gate": "passed",
+    "helper_failure_type": "RuntimeError",
+    "saved_failure_code": "development_failed",
+    "helper_seconds": 11.734,
+    "outer_seconds": 13.25,
+    "natural_cli_exit_code": 1,
+    "tool_exit_code": 1,
+    "outer_error": null,
+    "search_attempts": 0,
+    "unattempted_searches": 6,
+    "recorded_rankings": 0,
+    "generation_requests": 0,
+    "analysis_requests": 0,
+    "model_loading_completed": null,
+    "captured_cmd_events": 0
+  },
+  "cleanup": {
+    "known_owned_processes_absent": 8,
+    "launcher_absent": true,
+    "errors": [],
+    "fixed_references_unchanged": 70
+  },
+  "source_diagnosis": {
+    "narrowed_failure": "Retrieval worker exited before readiness; wait_ready raises service_startup_exited on child termination",
+    "root_cause": null,
+    "missing_evidence": "The helper directed worker and Java stdout/stderr to DEVNULL and sanitized the RuntimeError message; the worker's internal exception was not retained",
+    "backend_java_started": false,
+    "earlier_java_observation": "Executable version check only",
+    "autorun_relation": "Unconfirmed hypothesis; no cmd event was captured",
+    "next": "Preserve bounded startup-only private logs and safe phase/child-exit diagnostics before another prospective actual attempt"
+  },
+  "evidence": {
+    "issued_launcher_sha256": "0ef3a5abb8b359c4c8febed833d04701ecddb5432d9053aa93afa98017f4561e",
+    "result_sha256": "424a2fbe9da0a573e2280f449c785b59b1102d6b0e32e3cb509942e95c012c87",
+    "final_sha256": "2ec9be2b8b8a3d25993a47ec8dd022937e2e11fdb585046ca20afecba63a4215",
+    "tool_terminal_chunk": "7feab4"
+  },
+  "retrieval_or_model_quality_claim": false,
+  "prior_failures_preserved": true,
+  "human_review": false,
+  "paid_service": false,
+  "public_service_deployment": false
+}

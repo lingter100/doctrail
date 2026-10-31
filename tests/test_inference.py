@@ -7,6 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 import pytest
 from fastapi.testclient import TestClient
 
+from doctrail import inference
 from doctrail.inference import (
     DIMENSION,
     MAX_BODY_BYTES,
@@ -288,3 +289,79 @@ def test_raw_json_float_version_not_coerced(worker):
     payload["schema_version"] = 1.0
     response = client.post("/embed", content=json.dumps(payload), headers=HEADERS)
     assert response.status_code == 422
+
+
+def startup_failure_fixture(monkeypatch, flag):
+    monkeypatch.setattr(inference.sys, "argv", ["inference", "--device", "cpu"])
+    monkeypatch.setenv("DOCTRAIL_INFERENCE_TOKEN", TOKEN)
+    if flag is None:
+        monkeypatch.delenv("DOCTRAIL_STARTUP_DIAGNOSTICS", raising=False)
+    else:
+        monkeypatch.setenv("DOCTRAIL_STARTUP_DIAGNOSTICS", flag)
+    def fail(*args):
+        try:
+            raise OSError("PRIVATE C:\\secret\\weights TOKEN question document")
+        except OSError as cause:
+            raise ValueError("PRIVATE secret model details") from cause
+    monkeypatch.setattr(InferenceRuntime, "load", fail)
+
+
+@pytest.mark.parametrize("flag", [None, "0"])
+def test_startup_diagnostics_default_keeps_exact_stderr_and_exit(monkeypatch, capsys, flag):
+    startup_failure_fixture(monkeypatch, flag)
+    with pytest.raises(SystemExit) as error:
+        inference.main()
+    assert error.value.code == 2
+    captured = capsys.readouterr()
+    assert captured.err == "inference_startup_failed\n" and captured.out == ""
+
+
+def test_startup_opt_in_reports_safe_chain_locations_without_messages(monkeypatch, capsys):
+    startup_failure_fixture(monkeypatch, "1")
+    with pytest.raises(SystemExit) as error:
+        inference.main()
+    assert error.value.code == 2
+    text = capsys.readouterr().err
+    structured, normal = text.splitlines()
+    payload = json.loads(structured)
+    assert normal == "inference_startup_failed"
+    assert payload["stage"] == "model_load"
+    assert [row["type"] for row in payload["exceptions"]] == ["ValueError", "OSError"]
+    frames = [frame for row in payload["exceptions"] for frame in row["frames"]]
+    assert any(frame["file"] == "test_inference.py" and frame["function"] == "fail" for frame in frames)
+    assert all(set(frame) == {"file", "function", "line"} and frame["line"] > 0 for frame in frames)
+    assert not any(value in text for value in ("PRIVATE", "secret", TOKEN, "weights", "document"))
+
+
+def test_startup_chain_and_trace_are_bounded_and_cycles_terminate():
+    def fail(depth):
+        if depth:
+            return fail(depth - 1)
+        raise ValueError("PRIVATE")
+    previous = None
+    for _ in range(6):
+        try:
+            fail(70)
+        except ValueError as error:
+            error.__cause__ = previous
+            previous = error
+    payload = inference._startup_diagnostic(previous, "model_load")
+    assert len(payload["exceptions"]) == 4 and payload["chain_truncated"]
+    assert all(len(row["frames"]) == 8 and row["frames_truncated"] for row in payload["exceptions"])
+    assert len(json.dumps(payload).encode()) < 16384
+    previous.__cause__ = previous
+    assert len(inference._startup_diagnostic(previous, "model_load")["exceptions"]) == 1
+
+
+def test_startup_diagnostic_write_failure_does_not_replace_exit(monkeypatch, capsys):
+    startup_failure_fixture(monkeypatch, "1")
+    original_write = inference.sys.stderr.write
+    def write(text):
+        if text.startswith("{"):
+            raise OSError("PRIVATE emission failure")
+        return original_write(text)
+    monkeypatch.setattr(inference.sys.stderr, "write", write)
+    with pytest.raises(SystemExit) as error:
+        inference.main()
+    assert error.value.code == 2
+    assert capsys.readouterr().err == "inference_startup_failed\n"
