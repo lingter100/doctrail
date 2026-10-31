@@ -14,6 +14,176 @@ import pytest
 from scripts import run_meeting_structured_development as m
 
 
+def reasoning_options():
+    return {"profile": m.REASONING_PROFILE, "qa_only": True, "qa_contract": "requested_facts_v1",
+            "externally_supervised": True, "startup_run_id": "a" * 32}
+
+
+@pytest.mark.parametrize("change", [
+    {"qa_only": False}, {"analysis_only": True}, {"qa_contract": "legacy"},
+    {"qa_contract": "evidence_plan_v1"}, {"externally_supervised": False},
+    {"startup_run_id": None}, {"startup_run_id": "secret/path"},
+])
+def test_reasoning_rejects_conflicts_before_any_service_or_output(tmp_path, change):
+    with pytest.raises(m.DevelopmentError, match="reasoning_requires"):
+        m.execute(tmp_path / "missing.jar", "unused", tmp_path / "absent", **(reasoning_options() | change))
+    assert not (tmp_path / "absent").exists()
+
+
+def test_reasoning_envelope_startup_handoff_and_actual_profile(tmp_path, monkeypatch):
+    monkeypatch.setattr(m, "ROOT", tmp_path)
+    docs, cases = packet()
+    for doc in docs:
+        doc["raw_sha256"] = hashlib.sha256(doc["content"]).hexdigest()
+    monkeypatch.setattr(m, "load_bundle", lambda _: (docs, cases))
+    ports = iter([11001, 11002, 11003])
+    monkeypatch.setattr(m, "unused_port", lambda: next(ports))
+    jar = tmp_path / "fixture.jar"
+    jar.write_bytes(b"fixture")
+    output, clock = tmp_path / ".local" / "fresh", Clock()
+    seen = []
+
+    @contextmanager
+    def launch(**kwargs):
+        assert kwargs["startup_run_id"] == "a" * 32
+        assert kwargs["externally_supervised"] is True
+        assert kwargs["startup_marker"] == output / "startup-state.json"
+        initial = json.loads((output / "result.json").read_text(encoding="utf-8"))
+        assert initial["limits"]["owned_rss_bytes"] == 8 * 1024**3
+        assert initial["startup_supervision"]["owner"] == "external"
+        kwargs["report"].update(profile=m.REASONING_PROFILE, qa_contract={"name": "requested_facts_v1"})
+        clock.now = 119
+        yield {"java_url": "http://test", "runtime": SimpleNamespace(set_development_capture=lambda callback: None),
+               "generator": SimpleNamespace(profile=m.REASONING_PROFILE,
+               _client=SimpleNamespace(event_hooks={"response": []}))}
+
+    def run(*args, **kwargs):
+        seen.append((args[5], kwargs["reasoning_qa"], kwargs["qa_only"]))
+
+    monkeypatch.setattr(m, "run_operations", run)
+    result = m.execute(jar, hashlib.sha256(b"fixture").hexdigest(), output,
+                       **reasoning_options(), launcher=launch, clock=clock)
+    assert result["status"] == "completed" and seen == [(449, True, True)]
+    assert result["profile"] == m.REASONING_PROFILE and result["mode"] == "qa_only"
+    assert result["limits"]["whole_seconds"] == 455 and result["limits"]["external_whole_seconds"] == 490
+    assert result["limits"]["requested_output_token_ceiling"] == 2624
+    assert result["limits"]["native_completion_ceiling"] == 2 and result["limits"]["auto_analyses"] == 0
+    assert result["reasoning_policy"]["reasoning_segment_hard_cap_verified"] is False
+    assert (m.LIMITS["whole_seconds"], m.QA_ONLY_LIMITS["whole_seconds"], m.ANALYSIS_ONLY_LIMITS["whole_seconds"]) == (715, 395, 475)
+
+
+def test_reasoning_two_fixed_qa_windows_share_deadline_and_keep_source_order():
+    scenario = QaOnlyScenario()
+    original = scenario.handler
+    answer_timeouts, questions = [], []
+
+    def handler(request):
+        if request.url.path.endswith("/answer"):
+            answer_timeouts.append(request.extensions["timeout"]["read"])
+            questions.append(json.loads(request.content)["query"])
+            scenario.clock.now += 149
+        return original(request)
+
+    with (httpx.Client(transport=httpx.MockTransport(handler), base_url="http://test") as client,
+          pytest.raises(m.DevelopmentError, match="deadline")):
+        m.run_operations(client, scenario.services, *packet(), scenario.report, 280, lambda: None,
+                         qa_only=True, reasoning_qa=True, clock=scenario.clock, sleep=scenario.clock.sleep)
+    assert scenario.uploads == ["d3", "d1", "d2"] and scenario.answers == 2 and scenario.meetings == 0
+    assert answer_timeouts == [150, 131] and questions == [case["question"] for case in packet()[1]]
+    assert scenario.report["operations"][1]["state"] == "failed_or_unknown"
+
+
+def test_reasoning_observation_fresh_idle_terminal_and_safe_split_metrics():
+    runtime = SimpleNamespace(last_telemetry={}, lock=threading.Lock())
+    generator = SimpleNamespace(profile=m.REASONING_PROFILE, last_call=None)
+    services = {"runtime": runtime, "generator": generator}
+    before = m.snapshot(services)
+    generator.last_call = {"stage": "completed", "output_tokens": 900, "final_retokenized_tokens": 300,
+                           "accepted": True, "returned": True, "dispatch_intent": True, "reasoning_content": "SECRET"}
+    runtime.last_telemetry = {"service_accepted": True, "cleanup_failed": False, "request_stage": "completed",
+        "native_call": generator.last_call, "calls": [{"reasoning_budget_tokens_requested": 512,
+        "reasoning_budget_effective_serialized": False, "final_token_measurement": "retokenized_content_not_generated_segment"}]}
+    observed = m.observe(services, before)
+    assert observed["runtime"]["status"] == "complete"
+    assert observed["runtime"]["native_call"]["final_retokenized_tokens"] == 300
+    assert "SECRET" not in json.dumps(observed)
+    assert m.observe(services, m.snapshot(services))["runtime_state"] == "unknown_or_inflight"
+    with runtime.lock:
+        assert m.observe(services, before)["runtime_state"] == "unknown_or_inflight"
+    runtime.last_telemetry = {**runtime.last_telemetry, "service_accepted": False,
+                              "request_stage": "final_validation", "failure_code": "generation_final_content_limit"}
+    assert m.observe(services, before)["runtime"]["failure_code"] == "generation_final_content_limit"
+    assert m.observe(services, before)["runtime"]["status"] == "failed"
+
+
+@pytest.mark.parametrize("validated", [True, False])
+def test_reasoning_capture_keeps_final_only_never_thinking(tmp_path, validated):
+    body = {"choices": [{"message": {"content": '{"status":"abstained"}', "reasoning_content": "SECRET_THINKING"}}],
+            "__verbose": {"content": 'SECRET_THINKING</think>{"status":"abstained"}', "tokens_predicted": 900},
+            "usage": {"completion_tokens": 900}}
+    with httpx.Client(transport=httpx.MockTransport(lambda _: httpx.Response(
+            200, stream=httpx.ByteStream(json.dumps(body).encode()))), base_url="http://test") as client:
+        report = {"operations": [{"id": "q1", "state": "attempted"}], "limits": m.REASONING_QA_LIMITS}
+        call = {"stage": "native_http"}
+        generator = SimpleNamespace(_client=client, profile=m.REASONING_PROFILE, last_call=call)
+        capture = m.NativeOutputCapture(generator, tmp_path, report)
+        assert client.post("/v1/chat/completions").json() == body
+        call["stage"] = "final_validation" if validated else "native_validation"
+        capture.restore()
+        capture.flush()
+    row = report["native_output_artifacts"][0]
+    if validated:
+        assert [output["representation"] for output in row["outputs"]] == ["message"]
+        assert (tmp_path / row["path"]).read_text() == '{"status":"abstained"}'
+    else:
+        assert row["state"] == "unavailable" and not list(tmp_path.rglob("*.txt"))
+    assert row["observed"]["completion_tokens"] == 900
+    assert "SECRET_THINKING" not in json.dumps(report)
+    assert all(b"SECRET_THINKING" not in path.read_bytes() for path in tmp_path.rglob("*") if path.is_file())
+
+
+def test_reasoning_cli_explicit_profile_and_supervision(monkeypatch):
+    seen = []
+    monkeypatch.setattr(m, "execute", lambda *args, **kwargs: seen.append(kwargs) or {"status": "completed"})
+    monkeypatch.setattr(m.sys, "argv", ["run", "--jar", "fixture.jar", "--jar-sha256", "unused", "--output", "new",
+        "--profile", m.REASONING_PROFILE, "--qa-only", "--qa-contract", "requested_facts_v1",
+        "--externally-supervised", "--startup-run-id", "a" * 32])
+    m.main()
+    assert seen[0]["externally_supervised"] and seen[0]["startup_run_id"] == "a" * 32
+    assert seen[0]["profile"] == m.REASONING_PROFILE and seen[0]["qa_only"]
+
+
+def test_reasoning_public_request_capture_drops_native_response_and_keeps_exact_body(tmp_path):
+    from doctrail.meeting_reasoning_service import reasoning_body
+
+    body = reasoning_body([{"role": "user", "content": "PUBLIC fixture source and question"}])
+    report = {"operations": [{"id": "q1", "state": "attempted"}]}
+    generator = SimpleNamespace(profile=m.REASONING_PROFILE, _client=SimpleNamespace(event_hooks={"response": []}))
+    capture = m.NativeOutputCapture(generator, tmp_path, report)
+    capture.bind_development(SimpleNamespace(set_development_capture=lambda callback: None))
+    capture.development_event({"kind": "native_request", "stage": "qa", "body": body})
+    capture.development_event({"kind": "native_response", "stage": "qa", "body": {"reasoning_content": "SECRET_THINKING"}})
+    capture.restore()
+    capture.flush()
+    assert len(report["development_artifacts"]) == 1
+    saved = tmp_path / report["development_artifacts"][0]["path"]
+    assert json.loads(saved.read_text(encoding="utf-8"))["body"] == body
+    assert "SECRET_THINKING" not in saved.read_text(encoding="utf-8") + json.dumps(report)
+
+
+def test_reasoning_unseparated_content_is_never_written_even_with_later_stage(tmp_path):
+    body = {"choices": [{"message": {"content": "<think>SECRET_THINKING</think>final"}}]}
+    with httpx.Client(transport=httpx.MockTransport(lambda _: httpx.Response(
+            200, stream=httpx.ByteStream(json.dumps(body).encode()))), base_url="http://test") as client:
+        report = {"operations": [{"id": "q1", "state": "attempted"}]}
+        generator = SimpleNamespace(_client=client, profile=m.REASONING_PROFILE, last_call={"stage": "completed"})
+        capture = m.NativeOutputCapture(generator, tmp_path, report)
+        client.post("/v1/chat/completions")
+        capture.restore()
+        capture.flush()
+    assert not list(tmp_path.rglob("*.txt")) and "SECRET_THINKING" not in json.dumps(report)
+
+
 class Clock:
     now = 0.0
 

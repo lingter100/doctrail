@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "status": "PREFLIGHT_BLOCKED_NO_MODEL_EXECUTION",
+  "date": "2026-10-31",
+  "candidate": "qwen35-9b-direct-reasoning-service-v1",
+  "source_base_commit": "8d909e0d4ca38bc45dd181e82cbcc9e2da87f361",
+  "code_review": "Independent AI integration review: no confirmed blockers",
+  "source_state": "Reviewed working source10 and rebuilt Java JAR; earlier base CI does not cover these changes",
+  "failure": "fresh_gate_blocked",
+  "preflight": {
+    "available_bytes": 9991061504,
+    "required_available_bytes": 10737418240,
+    "unknown_java_processes": 1,
+    "unreadable_processes": 0,
+    "ownership_followup": "Process and parent belong to another project; no DocTrail ownership evidence",
+    "followup_available_bytes": 9435377664
+  },
+  "execution": {
+    "actual_cli_started": false,
+    "native_model_calls": 0,
+    "http_qa_attempts": 0,
+    "once_marker_absent": true,
+    "output_absent": true,
+    "launcher_absent": true,
+    "unrelated_processes_terminated": 0,
+    "fixed_refs_unchanged": 93,
+    "automatic_retry": false,
+    "limits_changed": false,
+    "semantic_judgments": 0,
+    "service_adopted": false
+  },
+  "receipts": {
+    "closeout_sha256": "2ca7867a995cc72a6231de17e31b58914daa6b4e0a50ca9d5fe8f03b0dd0a04f",
+    "ownership_check_sha256": "f94834ab66b617911de7353b70da6f40760699059dbc029ebc575b9b9390cf8f",
+    "integration_review_sha256": "3422c6aa5e73179470edfa96269fd9c09999d04c9d52bfe2a26d806dd57a1320",
+    "unchanged_open_criteria_sha256": "82b6987126102dad223d1bf83d10dd11359b0e5d55974fc09179ab4049ab4532"
+  },
+  "interpretation": "Host admission failure, not a failed model answer or a measured0/2 semantic score. Actual fit, latency and quality remain unmeasured.",
+  "next": "Publish reviewed implementation and run required CI independently. Attempt the same unchanged candidate only after real host admission changes, using a fresh namespace and preserved original blocked record.",
+  "human_reviews": 0,
+  "paid_service_calls": 0,
+  "public_service_deployments": 0
+}

@@ -23,6 +23,21 @@ class GenerationClientTest {
     @ParameterizedTest @ValueSource(strings={"{}","[]","{\"schema_version\":1,\"schema_version\":1,\"model\":\"fake\",\"revision\":\"fixture\"}","{\"schema_version\":1,\"model\":\"fake\",\"revision\":\"fixture\"} {}","{\"schema_version\":4294967297,\"model\":\"fake\",\"revision\":\"fixture\"}"}) void malformedResponsesFailClosedWithoutBody(String body){response=body;assertThatThrownBy(()->client(2000).call("/answer",Map.of())).isInstanceOf(ApiError.class).hasMessageNotContaining(body);}
     @Test void limitsTimeoutAndUnknownErrors(){response="x".repeat(InferenceClient.MAX_RESPONSE+1);assertThatThrownBy(()->client(2000).call("/analyze",Map.of())).isInstanceOf(ApiError.class);response="PRIVATE SOURCE CONTENT";status=500;assertThatThrownBy(()->client(2000).call("/analyze",Map.of())).hasMessage("generation_unavailable");status=200;delay=300;assertThatThrownBy(()->client(50).call("/analyze",Map.of())).hasMessage("generation_timeout");}
     @Test void disabledDoesNotCallWorker(){assertThatThrownBy(()->new GenerationClient("","",1000,new ObjectMapper()).call("/analyze",Map.of())).hasMessage("generation_disabled");assertThat(authorization).isNull();}
+    @Test void reasoningTimeoutRequiresExplicitProfileAndDoesNotChangeLegacyConstructor(){
+        assertThatThrownBy(()->client(120001)).hasMessage("invalid_generation_configuration");
+        assertThatThrownBy(()->new GenerationClient("","",150000,new ObjectMapper(),"legacy")).hasMessage("invalid_generation_configuration");
+        assertThat(new GenerationClient("","",120000,new ObjectMapper()).enabled()).isFalse();
+        assertThat(new GenerationClient("","",150000,new ObjectMapper(),GenerationClient.REASONING_TIMEOUT_PROFILE).enabled()).isFalse();
+        assertThatThrownBy(()->new GenerationClient("","",150001,new ObjectMapper(),GenerationClient.REASONING_TIMEOUT_PROFILE)).hasMessage("invalid_generation_configuration");
+        for(String profile:new String[]{"other","",null})assertThatThrownBy(()->new GenerationClient("","",1000,new ObjectMapper(),profile)).hasMessage("invalid_generation_configuration");
+    }
+    @Test void reasoningDirectTransportKeepsOldRagBudgetSeparate(){
+        var client=new GenerationClient("http://127.0.0.1:"+worker.getAddress().getPort(),token,150000,new ObjectMapper(),GenerationClient.REASONING_TIMEOUT_PROFILE);
+        assertThat(client.call("/answer",Map.of()).path("model").asText()).isEqualTo("fake");
+        assertThat(budgetHeader).isNull();
+        assertThatThrownBy(()->client.call("/answer",Map.of(),new AnswerDeadline(System.nanoTime()-TimeUnit.SECONDS.toNanos(90)))).hasMessage("generation_timeout");
+        assertThat(requests).hasValue(1);
+    }
     @Test void legacyAnswerAndAnalysisDoNotSendBudgetHeader(){
         var client=client(2000);
         client.call("/answer",Map.of());assertThat(budgetHeader).isNull();

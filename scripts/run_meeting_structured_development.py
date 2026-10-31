@@ -27,7 +27,8 @@ from doctrail.meeting_structured import (
     LEGACY_QA_CONTRACT,
     PROFILE,
     QA_CONTRACTS,
-    STRUCTURED_PROFILES,
+    REQUESTED_FACTS_QA_CONTRACT,
+    STRUCTURED_PROFILES,  # noqa: F401 - retained verifier export for existing callers
 )
 from scripts.run_meeting_qa_service_development import (
     BUNDLE,
@@ -39,6 +40,8 @@ from scripts.serve_meetings_structured import (
     AGENDA_ANALYSIS_CONTRACT,
     ANALYSIS_CONTRACTS,
     LEGACY_ANALYSIS_CONTRACT,
+    REASONING_PROFILE,
+    SERVICE_PROFILES,
     start_services,
 )
 from scripts.serve_models import unused_port
@@ -55,6 +58,12 @@ LIMITS = {"startup_seconds": 120, "active_seconds": 590, "setup_seconds": 30,
           "summary_output_tokens": 768, "review_output_tokens": 128, "answer_output_tokens": 768}
 QA_ONLY_LIMITS = {**LIMITS, "active_seconds": 270, "whole_seconds": 395, "external_whole_seconds": 430,
                   "auto_analyses": 0, "native_completion_ceiling": 2, "requested_output_token_ceiling": 1536}
+REASONING_QA_LIMITS = {**QA_ONLY_LIMITS, "active_seconds": 330, "answer_seconds": 150,
+                       "whole_seconds": 455, "external_whole_seconds": 490,
+                       "requested_output_token_ceiling": 2624, "answer_output_tokens": 1312,
+                       "final_retokenized_tokens": 768, "reasoning_tokens_requested": 512,
+                       "owned_rss_bytes": 8 * 1024**3, "start_available_ram_bytes": 10 * 1024**3,
+                       "active_available_ram_bytes": 2 * 1024**3, "gpu_layers": 28, "cpu_threads": 2}
 EVIDENCE_PLAN_LIMITS = {**QA_ONLY_LIMITS, "native_completion_ceiling": 4,
                        "plan_output_tokens": 192, "ledger_output_tokens": 576}
 ANALYSIS_ONLY_LIMITS = {**LIMITS, "active_seconds": 350, "whole_seconds": 475, "external_whole_seconds": 510,
@@ -63,8 +72,11 @@ ANALYSIS_ONLY_LIMITS = {**LIMITS, "active_seconds": 350, "whole_seconds": 475, "
                         "review_output_tokens": 0, "answer_output_tokens": 0, "joint_analysis_output_tokens": 768}
 NUMERIC = {"input_tokens", "output_tokens", "output_cap", "input_cap", "completion_calls",
            "label_count", "elapsed_seconds", "elapsed_ms", "http_status", "observed_tokens_predicted",
-           "observed_tokens_evaluated", "native_calls_budget"}
-BOOLEAN = {"dispatched", "returned", "accepted", "review_performed", "semantic_quality_accepted"}
+           "observed_tokens_evaluated", "native_calls_budget", "observed_input_tokens", "observed_output_tokens",
+           "final_retokenized_tokens", "reasoning_budget_tokens_requested", "native_token_ids_count"}
+BOOLEAN = {"dispatched", "returned", "accepted", "review_performed", "semantic_quality_accepted",
+           "dispatch_intent", "service_accepted", "cleanup_failed", "reasoning_budget_effective_serialized",
+           "reasoning_split_verified", "semantic_support_verified", "question_completeness_verified"}
 # Literal codes raised by the structured/GGUF worker and its source-contract helpers.
 # Never accept an arbitrary generation_* suffix: it can contain private text.
 SAFE_ERROR_CODES = {
@@ -77,6 +89,9 @@ SAFE_ERROR_CODES = {
     "generation_summary_review_rejected", "generation_conflicting_metadata", "generation_partition_limit",
     "generation_metadata_limit", "generation_item_limit", "generation_empty_summary",
     "generation_duplicate_item", "generation_unsupported_field", "generation_worker_already_running",
+    "generation_cleanup_failed", "generation_final_content_limit", "generation_reasoning_split_mismatch",
+    "generation_request_lifecycle", "generation_thinking_template_mismatch",
+    "generation_resource_limit", "generation_startup_timeout", "generation_startup_identity", "generation_startup_failed",
 }
 CONTENT_FAILURE_CODES = {
     "generation_summary_review_rejected", "generation_summary_insufficient", "generation_language_mismatch",
@@ -85,12 +100,19 @@ CONTENT_FAILURE_CODES = {
 }
 METADATA_FIELDS = {"meeting_title", "meeting_date", "participants", "purpose"}
 METADATA_REASONS = {"unsupported_source_format", "ambiguous_source_value", "value_out_of_bounds"}
+REASONING_STAGES = {"request_start", "evidence_mapping", "generation", "citation_projection",
+                    "response_validation", "cleanup", "request_capture", "template", "input_count",
+                    "native_http", "response_capture", "native_validation", "final_tokenize",
+                    "final_validation", "completed"}
 ENUMS = {"operation": {"qa", "summary", "summary_review", "meeting_qa", "meeting_summary",
                        "meeting_summary_review", "grammar_constrained_classification",
                        "qa_obligation_plan", "qa_evidence_ledger", "agenda_extraction"},
          "status": {"failed", "complete"}, "finish_reason": {"eos", "length"},
          "stage": {"request", "partition", "classification", "metadata", "summary", "review", "assembled", "qa",
-                   "qa_obligation_plan", "qa_evidence_ledger", "agenda_extraction", "agenda_assembly"},
+                   "qa_obligation_plan", "qa_evidence_ledger", "agenda_extraction", "agenda_assembly"} | REASONING_STAGES,
+         "request_stage": REASONING_STAGES,
+         "profile": {REASONING_PROFILE}, "native_json_framing": {"fenced", "bare"},
+         "final_token_measurement": {"retokenized_content_not_generated_segment"},
          "validation_stage": {"input", "http", "native_metadata", "effective_settings",
                               "token_identity_integrity", "eos", "json", "accepted"},
          "observed_stop_type": {"eos", "limit", "word", "other"},
@@ -117,7 +139,7 @@ def safe_metrics(value):
             out[key] = item
         elif key == "calls" and isinstance(item, list):
             out[key] = [safe_metrics(row) for row in item[:162]]
-        elif key == "last_structured_call":
+        elif key in {"last_structured_call", "native_call"}:
             out[key] = safe_metrics(item)
         elif key == "metadata_warnings" and isinstance(item, list):
             out[key] = [{field: row[field] for field in ("field", "unit_index", "reason")}
@@ -140,8 +162,21 @@ def snapshot(services):
 def observe(services, before):
     receipt, call = snapshot(services)
     terminal = receipt is not before[0] and isinstance(receipt, dict) and receipt.get("status") in {"complete", "failed"}
+    reasoning_terminal = False
+    if (getattr(services["generator"], "profile", None) == REASONING_PROFILE
+            and receipt is not before[0] and isinstance(receipt, dict)
+            and type(receipt.get("service_accepted")) is bool and type(receipt.get("cleanup_failed")) is bool
+            and receipt.get("request_stage") in REASONING_STAGES):
+        try:
+            reasoning_terminal = services["runtime"].lock.locked() is False
+        except Exception:  # noqa: BLE001 - unknown lifecycle remains unknown
+            reasoning_terminal = False
+    observed = safe_metrics(receipt) if terminal or reasoning_terminal else None
+    if reasoning_terminal:
+        observed["status"] = "complete" if receipt["service_accepted"] and not receipt["cleanup_failed"] else "failed"
+        terminal = True
     return {"runtime_state": "terminal" if terminal else "unknown_or_inflight",
-            "runtime": safe_metrics(receipt) if terminal else None,
+            "runtime": observed,
             "structured_call": safe_metrics(call) if call is not before[1] else None,
             "structured_call_fresh": call is not before[1]}
 
@@ -250,6 +285,9 @@ class NativeOutputCapture:
 
     def __init__(self, generator, output, report):
         self.client, self.output, self.report = generator._client, output, report
+        self.reasoning = getattr(generator, "profile", None) == REASONING_PROFILE
+        self.generator = generator
+        self.reasoning_calls = {}
         self.previous = list(self.client.event_hooks["response"])
         self.rows = report["native_output_artifacts"] = []
         self.buffered = 0
@@ -285,12 +323,15 @@ class NativeOutputCapture:
             return
         try:
             kind = event.get("kind")
+            if self.reasoning and kind == "native_response":
+                return  # Contains private thinking; never serialize or persist this event.
             shapes = {"native_request": {"kind", "stage", "body"}, "accepted_plan": {"kind", "plan"},
                       "compiled_ledger": {"kind", "ledger", "result"}}
             if kind not in shapes or set(event) != shapes[kind]:
                 raise ValueError("unsupported_development_event")
             stage = event.get("stage", "qa_obligation_plan" if kind == "accepted_plan" else "qa_evidence_ledger")
-            if stage not in {"qa_obligation_plan", "qa_evidence_ledger", "agenda_extraction"}:
+            if stage not in {"qa_obligation_plan", "qa_evidence_ledger", "agenda_extraction"} and not (
+                    self.reasoning and kind == "native_request" and stage == "qa"):
                 raise ValueError("unsupported_development_stage")
             body_hash = None
             if kind == "native_request":
@@ -298,6 +339,8 @@ class NativeOutputCapture:
                            "stream", "stop", "logit_bias", "grammar_lazy", "lora", "n_predict", "max_tokens",
                            "model", "messages", "cache_prompt", "return_tokens", "verbose", "chat_template_kwargs",
                            "response_format"}
+                if self.reasoning:
+                    allowed |= {"reasoning_format", "reasoning_budget_tokens", "reasoning_control", "grammar_triggers"}
                 if not isinstance(event["body"], dict) or set(event["body"]) - allowed:
                     raise ValueError("unsupported_development_body")
                 body_hash = hashlib.sha256(json.dumps(event["body"], ensure_ascii=False, allow_nan=False).encode("utf-8")).hexdigest()
@@ -341,6 +384,12 @@ class NativeOutputCapture:
             except Exception:  # noqa: BLE001 - private trace I/O must not mask model failures
                 row.update(state="unavailable", capture_error=True)
         for row, outputs in pending:
+            if self.reasoning:
+                call = self.reasoning_calls.pop(row["index"], None)
+                if not isinstance(call, dict) or call.get("stage") not in {"final_tokenize", "final_validation", "completed"}:
+                    row.update(state="unavailable", final_split_validated=False)
+                    continue
+                row["final_split_validated"] = True
             row["outputs"] = []
             for representation, raw in outputs:
                 try:
@@ -370,6 +419,8 @@ class NativeOutputCapture:
             row = {"index": len(self.rows), "operation_id": active[-1]["id"] if active else None,
                    "route": path, "http_status": response.status_code, "state": "pending", "truncated": False}
             self.rows.append(row)
+            if self.reasoning:
+                self.reasoning_calls[row["index"]] = self.generator.last_call
         owner = self
         original = response.stream
 
@@ -385,6 +436,8 @@ class NativeOutputCapture:
                 self.done = True
                 metadata = {"buffered_response_bytes": len(self.data), "stream_complete": complete,
                             "state": "unavailable", "truncated": self.truncated}
+                if owner.reasoning:
+                    metadata["observed_response_sha256"] = hashlib.sha256(self.data).hexdigest()
                 outputs = []
                 try:
                     if owner.closed or not complete or self.truncated:
@@ -411,6 +464,10 @@ class NativeOutputCapture:
                         message = choices[0].get("message", {}) if isinstance(choices, list) and choices and isinstance(choices[0], dict) else {}
                         texts = [("message", message.get("content") if isinstance(message, dict) else None),
                                  ("native", native.get("content") if isinstance(native, dict) else None)]
+                    if owner.reasoning:
+                        # The native representation includes thinking text. Never persist it.
+                        texts = [(name, text) for name, text in texts if name == "message"
+                                 and isinstance(text, str) and "<think>" not in text and "</think>" not in text]
                     outputs = [(name, text.encode("utf-8")) for name, text in texts if isinstance(text, str)]
                 except Exception:  # noqa: BLE001 - diagnostics must never replace a generation failure
                     metadata["capture_error"] = True
@@ -447,15 +504,18 @@ class NativeOutputCapture:
 
 
 def run_operations(client, services, documents, cases, report, deadline, save,
-                   *, qa_only=False, analysis_only=False, continue_content_failures=False, clock=time.monotonic, sleep=time.sleep):
+                   *, qa_only=False, analysis_only=False, reasoning_qa=False,
+                   continue_content_failures=False, clock=time.monotonic, sleep=time.sleep):
     if qa_only and analysis_only:
         raise DevelopmentError("component_mode_conflict")
+    if reasoning_qa and (not qa_only or analysis_only):
+        raise DevelopmentError("reasoning_requires_qa_only")
     meetings = [doc for doc in documents if doc["role"] == "meeting"]
     general = [doc for doc in documents if doc["role"] == "general_document"]
     if len(meetings) != 2 or len(general) != 1 or len(cases) != 2:
         raise DevelopmentError("bundle_roles")
     rows = report["operations"] = operation_rows(documents, cases, qa_only=qa_only, analysis_only=analysis_only)
-    limits = ANALYSIS_ONLY_LIMITS if analysis_only else QA_ONLY_LIMITS if qa_only else LIMITS
+    limits = REASONING_QA_LIMITS if reasoning_qa else ANALYSIS_ONLY_LIMITS if analysis_only else QA_ONLY_LIMITS if qa_only else LIMITS
     report["documents"] = stored = []
     setup = report["setup"] = {"state": "attempted"}
     setup_end = min(deadline, clock() + limits["setup_seconds"])
@@ -552,10 +612,18 @@ def run_operations(client, services, documents, cases, report, deadline, save,
 
 def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_CONTRACT, qa_only=False,
             analysis_contract=LEGACY_ANALYSIS_CONTRACT, analysis_only=False,
+            externally_supervised=False, startup_run_id=None,
             continue_content_failures=False, bundle=BUNDLE, launcher=start_services,
             client_factory=httpx.Client, clock=time.monotonic, sleep=time.sleep):
-    if profile not in STRUCTURED_PROFILES:
+    if profile not in SERVICE_PROFILES:
         raise DevelopmentError("unknown_profile")
+    reasoning_qa = profile == REASONING_PROFILE
+    if reasoning_qa:
+        if not qa_only or analysis_only or qa_contract != REQUESTED_FACTS_QA_CONTRACT or analysis_contract != LEGACY_ANALYSIS_CONTRACT:
+            raise DevelopmentError("reasoning_requires_qa_only_requested_facts")
+        if (externally_supervised is not True or not isinstance(startup_run_id, str)
+                or len(startup_run_id) != 32 or any(character not in "0123456789abcdef" for character in startup_run_id)):
+            raise DevelopmentError("reasoning_requires_external_startup_supervision")
     if qa_contract not in QA_CONTRACTS:
         raise DevelopmentError("unknown_qa_contract")
     if analysis_contract not in ANALYSIS_CONTRACTS:
@@ -579,7 +647,7 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_C
             or [doc["role"] for doc in documents].count("general_document") != 1 or len(cases) != 2):
         raise DevelopmentError("bundle_roles")
     output.mkdir(parents=True)
-    limits = (ANALYSIS_ONLY_LIMITS if analysis_only else EVIDENCE_PLAN_LIMITS
+    limits = (REASONING_QA_LIMITS if reasoning_qa else ANALYSIS_ONLY_LIMITS if analysis_only else EVIDENCE_PLAN_LIMITS
               if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS else QA_ONLY_LIMITS if qa_only else LIMITS)
     report = FailureRecord(first_failure=None, secondary_failures=[], status="running", limits=limits,
                            semantic_quality_accepted=False, human_reviews=0, heldout_evaluation=False,
@@ -589,6 +657,18 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_C
                            continue_content_failures=continue_content_failures,
                            jar_sha256=jar_sha256, operations=operation_rows(documents, cases, qa_only=qa_only, analysis_only=analysis_only),
                            external_fresh_gate_required=True)
+    launcher_options = {}
+    if reasoning_qa:
+        launcher_options = {"startup_marker": output / "startup-state.json", "startup_run_id": startup_run_id,
+                            "externally_supervised": True}
+        report["startup_supervision"] = {"owner": "external", "required": True, "run_id": startup_run_id,
+            "marker": "startup-state.json", "hard_deadline_seconds": 120,
+            "marker_is_not_enforcement": True}
+        report["reasoning_policy"] = {"thinking_enabled": True, "reasoning_format": "deepseek",
+            "requested_reasoning_tokens": 512, "total_generated_hard_cap": 1312,
+            "final_retokenized_cap": 768, "reasoning_segment_hard_cap_verified": False,
+            "final_measurement": "retokenized_content_not_generated_segment", "raw_thinking_saved": False,
+            "capture_scope": "Public request body, split-validated final content and safe metadata/hash; no raw native/reasoning stream"}
     if qa_only:
         report["context_comparison"] = {"exact_prior_context_binding_proven": False,
             "limitation": "Fresh ordinary-document uploads preserve source bytes and order, but prior DB/context identity is not reconstructed."}
@@ -611,22 +691,26 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_C
         (output / "result.json").write_text(serialized + "\n", encoding="utf-8")
 
     try:
+        save()  # Publish this run's envelope before any synchronous service preparation.
         ports = [unused_port() for _ in range(3)]
         if len(set(ports)) != 3:
             raise DevelopmentError("ports")
         with launcher(jar=jar, database=output / "development.sqlite3", java_port=ports[0],
                       worker_port=ports[1], native_port=ports[2], enable_structured=True,
-                      profile=profile, qa_contract=qa_contract, analysis_contract=analysis_contract, report=report) as services:
+                      profile=profile, qa_contract=qa_contract, analysis_contract=analysis_contract,
+                      report=report, **launcher_options) as services:
             try:
+                if reasoning_qa and getattr(services["generator"], "profile", None) != REASONING_PROFILE:
+                    raise DevelopmentError("reasoning_profile_binding")
                 capture = NativeOutputCapture(services["generator"], output, report)
-                if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS or analysis_contract == AGENDA_ANALYSIS_CONTRACT:
+                if reasoning_qa or qa_contract in EVIDENCE_PLAN_QA_CONTRACTS or analysis_contract == AGENDA_ANALYSIS_CONTRACT:
                     capture.bind_development(services["runtime"])
                 left(started + limits["startup_seconds"], clock)
                 active = min(started + limits["whole_seconds"] - limits["cleanup_seconds"],
                              clock() + limits["active_seconds"])
                 with client_factory(base_url=services["java_url"], trust_env=False, follow_redirects=False) as client:
                     run_operations(client, services, documents, cases, report, active, save,
-                                   qa_only=qa_only, analysis_only=analysis_only,
+                                   qa_only=qa_only, analysis_only=analysis_only, reasoning_qa=reasoning_qa,
                                    continue_content_failures=continue_content_failures, clock=clock, sleep=sleep)
                 if report.errors:
                     raise report.errors[0]  # Content failures stay failures, also during context cleanup.
@@ -658,7 +742,9 @@ def main():
     parser.add_argument("--jar", type=Path, required=True)
     parser.add_argument("--jar-sha256", required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--profile", choices=STRUCTURED_PROFILES, default=PROFILE)
+    parser.add_argument("--profile", choices=SERVICE_PROFILES, default=PROFILE)
+    parser.add_argument("--externally-supervised", action="store_true")
+    parser.add_argument("--startup-run-id")
     parser.add_argument("--qa-contract", choices=QA_CONTRACTS, default=LEGACY_QA_CONTRACT)
     parser.add_argument("--analysis-contract", choices=ANALYSIS_CONTRACTS, default=LEGACY_ANALYSIS_CONTRACT)
     modes = parser.add_mutually_exclusive_group()
@@ -670,6 +756,7 @@ def main():
         report = execute(args.jar, args.jar_sha256, args.output, profile=args.profile,
                          qa_contract=args.qa_contract, qa_only=args.qa_only,
                          analysis_contract=args.analysis_contract, analysis_only=args.analysis_only,
+                         externally_supervised=args.externally_supervised, startup_run_id=args.startup_run_id,
                          continue_content_failures=args.continue_content_failures)
     except Exception:  # noqa: BLE001 - never echo private HTTP or environment details
         parser.exit(1, "structured_development_preflight_failed\n")

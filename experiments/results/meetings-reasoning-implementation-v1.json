@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "status": "FOCUSED_IMPLEMENTATION_AND_INDEPENDENT_INTEGRATION_REVIEW_PASSED",
+  "date": "2026-10-31",
+  "candidate": "qwen35-9b-direct-reasoning-service-v1",
+  "source_base_commit": "8d909e0d4ca38bc45dd181e82cbcc9e2da87f361",
+  "source_state": "working sources not covered by base CI",
+  "sources": [
+    {
+      "path": "scripts/serve_meetings_structured.py",
+      "sha256": "aec1e51e4f3e9d027d7397d7598300671627403f4e80f699c07645754f4c1c2d"
+    },
+    {
+      "path": "tests/test_serve_meetings_structured.py",
+      "sha256": "7b03994e66857d2886d417f5cca918ba3026f13610f6b24e079eff6e2c65c8d4"
+    },
+    {
+      "path": "scripts/meeting_reasoning_launch.py",
+      "sha256": "d186f86b6db6d6b9f768d28e0903c1d1a2d9efee46e9339f0bed91a3d8961e2b"
+    },
+    {
+      "path": "tests/test_meeting_reasoning_launch.py",
+      "sha256": "e50fe0bdfcd042e7184d58e6c7d9ed12e849cf4ef6968d16814edecf3857944f"
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/GenerationClient.java",
+      "sha256": "7f8a432645c92a77abdedb88e90ffeef0cd4d2d78464e8281ec849ca7484ce5b"
+    },
+    {
+      "path": "server/src/test/java/io/doctrail/GenerationClientTest.java",
+      "sha256": "9964bd9124eda01252425174d4a74b8f83ea41376d1d1f36bf963350731fef05"
+    },
+    {
+      "path": "src/doctrail/meeting_reasoning_service.py",
+      "sha256": "3d8944ef0b949eb24c6044d65c87905ba744dd6d61f385801986227f38ae26a8"
+    },
+    {
+      "path": "tests/test_meeting_reasoning_service.py",
+      "sha256": "a4af3ede1e31712a7c2e6553dcf7bcba2a224058ca08c7de9749de7390f9c610"
+    },
+    {
+      "path": "scripts/run_meeting_structured_development.py",
+      "sha256": "5eea805ba315b0ba3950932e2c0d5c7eeeb06d67bf19d0c2db0feebb9b90f2c2"
+    },
+    {
+      "path": "tests/test_meeting_structured_development.py",
+      "sha256": "6f402bdcfafac87a5925baa0077e58507439fa62d00fcddef6011f2a35079363"
+    }
+  ],
+  "limits": {
+    "profile": "qwen35-9b-direct-reasoning-service-v1",
+    "context": 8192,
+    "input": 6144,
+    "total_output": 1312,
+    "requested_reasoning": 512,
+    "final_retokenized": 768,
+    "request_seconds": 150,
+    "startup_seconds": 120,
+    "gpu_layers": 28,
+    "cpu_threads": 2,
+    "parallel": 1,
+    "rss_bytes": 8589934592,
+    "start_available_bytes": 10737418240,
+    "active_available_bytes": 2147483648,
+    "cleanup_seconds": 5
+  },
+  "qa_only": true,
+  "java": {
+    "new_profile_max_milliseconds": 150000,
+    "legacy_max_milliseconds": 120000,
+    "old_rag_deadline_milliseconds": 90000,
+    "old_rag_enabled_in_launcher": false,
+    "jar_sha256": "3fb8d99f688509f95c2c9f856eaa585ac5fc9844e3815a56abf5a4a275a17991",
+    "preserved_previous_jar_sha256": "da49cfcaebc65ed3e02bcd432f19c5bff47896784f512627c721b3360e697522"
+  },
+  "checks": {
+    "adapter_base": "40 fake checks passed",
+    "adapter_failure_delta": "5 new regressions failed before;8 affected passed after,37 deselected",
+    "verifier": "20 unique focused checks passed",
+    "launcher": "47 focused checks passed;26 overlapping affected rechecks passed",
+    "java": "48 passed,0failed,0errors after original loopback permission errors preserved",
+    "package": "Java21 pinned Maven offline package passed",
+    "ruff": "passed for implementation groups",
+    "parent": "10 working source hashes match owner receipts",
+    "counting": "Overlapping check groups are not summed",
+    "outer_wiring": "4 unique fakes passed; original33-character run-id fake failure preserved and corrected to32"
+  },
+  "review": {
+    "adapter_failure_record_issue": "B1 closed",
+    "adapter_and_verifier_blockers": 0,
+    "review_receipt_sha256": "f13ae3389ce2d97e69d85453ae1cc48f08aa8bd2479fab9019d82bcf3c10d65a",
+    "reviewer": "AI Astra xhigh; participated in profile design; not blind",
+    "integration": "No confirmed blockers; exact source10, JAR and external startup cleanup wiring reviewed",
+    "integration_receipt_sha256": "3422c6aa5e73179470edfa96269fd9c09999d04c9d52bfe2a26d806dd57a1320"
+  },
+  "capture": "Full authorized public requests and split/EOS/JSON-validated final content plus safe telemetry only; raw native output and reasoning text are not retained",
+  "execution": {
+    "native_model_calls": 0,
+    "actual_quality_verified": false,
+    "human_reviews": 0,
+    "paid_service_calls": 0,
+    "public_service_deployments": 0,
+    "service_adopted": false
+  },
+  "limitations": [
+    "Hard startup120 needs external owned-tree observer; marker alone is not enforcement.",
+    "Java transport, worker request and harness deadline origins differ; no whole-API common deadline origin claim.",
+    "Thinking512 is requested; total1312 hard cap and final retokenized768 are distinct.",
+    "Focused fakes, package and CI do not prove actual model fit, latency or semantic correctness.",
+    "No old candidate limits, frozen experiments or locked test data changed."
+  ]
+}

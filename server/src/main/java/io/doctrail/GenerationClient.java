@@ -1,6 +1,7 @@
 package io.doctrail;
 
 import com.fasterxml.jackson.databind.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import java.net.*;
@@ -12,11 +13,15 @@ import java.util.concurrent.*;
 /** Separate local generation boundary; no model downloads or subprocesses in Java. */
 @Component
 public class GenerationClient {
+    static final String REASONING_TIMEOUT_PROFILE="qwen35-9b-direct-reasoning-service-v1";
     private final URI base; private final String token; private final long timeout; private final ObjectMapper json;
     private final HttpClient http=HttpClient.newBuilder().proxy(ProxySelector.of(null)).connectTimeout(Duration.ofSeconds(2)).followRedirects(HttpClient.Redirect.NEVER).build();
-    public GenerationClient(@Value("${doctrail.generation-url:}") String url,@Value("${doctrail.generation-token:}") String token,@Value("${doctrail.generation-timeout-ms:120000}") long timeout,ObjectMapper json){
+    public GenerationClient(String url,String token,long timeout,ObjectMapper json){this(url,token,timeout,json,"legacy");}
+    @Autowired
+    public GenerationClient(@Value("${doctrail.generation-url:}") String url,@Value("${doctrail.generation-token:}") String token,@Value("${doctrail.generation-timeout-ms:120000}") long timeout,ObjectMapper json,@Value("${doctrail.generation-timeout-profile:legacy}") String timeoutProfile){
         this.token=token;this.timeout=timeout;this.json=json.copy().enable(com.fasterxml.jackson.core.JsonParser.Feature.STRICT_DUPLICATE_DETECTION).enable(DeserializationFeature.FAIL_ON_TRAILING_TOKENS);
-        if(timeout<1||timeout>120000)throw new IllegalArgumentException("invalid_generation_configuration");
+        long maximum="legacy".equals(timeoutProfile)?120000:REASONING_TIMEOUT_PROFILE.equals(timeoutProfile)?150000:0;
+        if(timeout<1||timeout>maximum)throw new IllegalArgumentException("invalid_generation_configuration");
         if(url.isBlank()){base=null;return;}
         try{base=URI.create(url);if(!"http".equals(base.getScheme())||!"127.0.0.1".equals(base.getHost())||base.getPort()<1||base.getPort()>65535||base.getUserInfo()!=null||base.getQuery()!=null||base.getFragment()!=null||!(base.getPath().isEmpty()||base.getPath().equals("/"))||token.length()<32||token.chars().anyMatch(c->c<33||c>126))throw new IllegalArgumentException();}catch(Exception e){throw new IllegalArgumentException("invalid_generation_configuration");}
     }

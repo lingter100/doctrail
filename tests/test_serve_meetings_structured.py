@@ -247,3 +247,92 @@ def test_analysis_contract_cli_default_and_explicit_option(monkeypatch, value):
     monkeypatch.setattr(sys, "argv", args)
     m.main()
     assert seen[0]["analysis_contract"] == (value or m.LEGACY_ANALYSIS_CONTRACT)
+
+
+@pytest.mark.parametrize("options,error", [
+    ({}, "qa_only_contract"),
+    ({"qa_contract": m.REQUESTED_FACTS_QA_CONTRACT}, "external_startup_supervision"),
+    ({"qa_contract": m.REQUESTED_FACTS_QA_CONTRACT, "analysis_contract": m.AGENDA_ANALYSIS_CONTRACT}, "qa_only_contract"),
+])
+def test_reasoning_requires_explicit_contract_and_supervision(launcher, options, error):
+    with pytest.raises(ValueError, match=error), run(launcher, profile=m.REASONING_PROFILE, **options):
+        pass
+    assert not launcher.children and not launcher.leases
+
+
+@pytest.fixture
+def reasoning_launcher(launcher, monkeypatch):
+    f = launcher
+    root = f.jar.parent / "reasoning"
+    root.mkdir()
+    f.manifest.write_text(json.dumps({"gguf": {"sha256": "a" * 64}}))
+    monkeypatch.setattr(m, "REASONING_MODEL", root)
+    monkeypatch.setattr(m, "REASONING_MANIFEST", f.manifest)
+    def assets(*args):
+        f.calls.append(("readonly_assets",))
+        if f.state.fail == "assets":
+            raise ValueError("identity")
+        return {"server_path": "runtime/llama-server.exe", "model": {"path": "model.gguf"}}
+    monkeypatch.setattr(m, "verify_existing_assets", assets)
+    class Guard:
+        def __init__(self, allowed, processes, report):
+            self.stop = SimpleNamespace(set=lambda: f.calls.append(("guard_stop",)))
+        def start(self):
+            f.calls.append(("guard_start",))
+        def check(self):
+            pass
+        def close(self, *, timeout):
+            assert 0 <= timeout <= 5
+            f.calls.append(("guard_close",))
+    monkeypatch.setattr(m, "ReasoningResourceGuard", Guard)
+    class Generator:
+        close_error = None
+        def __init__(self, *args):
+            pass
+        def load(self, *, deadline):
+            f.calls.append(("reasoning_load", deadline))
+        def close(self):
+            pass
+    monkeypatch.setattr(m, "ReasoningServiceGenerator", Generator)
+    monkeypatch.setattr(m, "ReasoningMeetingRuntime", lambda g: SimpleNamespace(
+        generator=g, health=lambda: {"runtime": {"profile": m.REASONING_PROFILE}}))
+    monkeypatch.setattr(m, "create_app", lambda *args: object())
+    # Real marker serialization with fake process identity: no process probes.
+    from scripts.meeting_reasoning_launch import StartupMarker
+    monkeypatch.setattr(m, "StartupMarker", lambda path, run_id: StartupMarker(
+        path, run_id, process=SimpleNamespace(pid=50, create_time=lambda: 20.0)))
+    f.options = {"profile": m.REASONING_PROFILE, "qa_contract": m.REQUESTED_FACTS_QA_CONTRACT,
+                 "externally_supervised": True, "startup_marker": f.jar.parent / "startup.json",
+                 "startup_run_id": "a" * 32}
+    return f
+
+
+def test_reasoning_exact_native_java_settings_and_ready_cleanup(reasoning_launcher):
+    f = reasoning_launcher
+    with run(f, **f.options) as service:
+        native, java = f.children
+        for flag, value in (("--n-gpu-layers", "28"), ("--ctx-size", "8192"), ("--threads", "2"),
+                            ("--parallel", "1"), ("--reasoning-budget", "512"), ("--reasoning", "on"),
+                            ("--reasoning-format", "deepseek"), ("--cache-ram", "0")):
+            assert native.argv[native.argv.index(flag) + 1] == value
+        assert "--doctrail.generation-timeout-ms=150000" in java.argv
+        assert "--doctrail.generation-timeout-profile=" + m.REASONING_PROFILE in java.argv
+        assert "--doctrail.rag-answer-enabled=false" in java.argv
+        assert json.loads(f.options["startup_marker"].read_bytes())["phase"] == "ready"
+        assert service["report"]["hard_startup_guard_owner"] == "external_owned_tree"
+        assert service["report"]["capabilities"] == {"qa": True, "analysis": False}
+        assert not service["report"]["qa_contract"]["whole_api_shared_clock"]
+        assert not any(call[0] == "prepare" for call in f.calls)
+    assert all(child.stopped for child in f.children)
+    assert ("guard_close",) in f.calls and len(f.leases) == 6
+
+
+@pytest.mark.parametrize("failure,count", [("assets", 0), ("ready", 1), ("java", 1)])
+def test_reasoning_failure_marks_failed_and_preserves_primary(reasoning_launcher, failure, count):
+    f = reasoning_launcher
+    f.state.fail = failure
+    with pytest.raises((ValueError, TimeoutError, OSError)), run(f, **f.options):
+        pass
+    assert len(f.children) == count and all(child.stopped for child in f.children)
+    assert json.loads(f.options["startup_marker"].read_bytes())["phase"] == "failed"
+    assert ("guard_close",) in f.calls
