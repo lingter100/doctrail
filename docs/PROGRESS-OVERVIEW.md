@@ -17,7 +17,7 @@
 
 화면 완성도도 완료 기준이다. 실제 Java와 합성 모델 응답을 연결한 화면 검사는 실제 AI의 내용 품질이나 사용자 검수를 대신하지 않는다.
 
-[오프라인 도구 준비](../experiments/results/meetings-summary-offline-acquisition-v1.json)는 실제 정상 종료했다. 한글 경로와 임시 파일 삭제 경합을 보정했지만, [v4 빌드](../experiments/results/meetings-summary-compat-build-v4.json)에서 Ninja의 Windows 셸 명령이 실행 제한에 걸렸다. 확인된 빌드 도구·작업 폴더에 한정하는 후속 정책을 구현한다. 엔진 컴파일·문법 실행·새 요약 품질은 아직 미완료이며 실패 원본은 보존한다.
+[오프라인 도구 준비](../experiments/results/meetings-summary-offline-acquisition-v1.json)는 실제 정상 종료했다. 한글 경로와 임시 파일 삭제 경합을 보정했지만, [v4 빌드](../experiments/results/meetings-summary-compat-build-v4.json)에서 Ninja의 Windows 셸 명령이 실행 제한에 걸렸다. 확인된 빌드 도구·작업 폴더에 한정한 후속 정책의 구현·집중 검사·독립 검토·게시와 필수 CI를 마쳤다. 새 실제 빌드가 남아 있다. 엔진 컴파일·문법 실행·새 요약 품질은 아직 미완료이며 실패 원본은 보존한다.
 
 ## 지금 해결하는 문제
 
@@ -29,8 +29,8 @@
 
 ## 현재 검증 근거
 
-- 게시 `e3b0eb3`의 [필수 CI](../experiments/results/meetings-retrieval-live-scan-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. 각각 Python5,770개 통과·21개 제외, 브라우저158개 통과·실패0과 Java/운영/프런트 빌드를 확인했다. 실제 모델 의미 품질을 증명하는 검사는 아니다.
-- 분석 실패를 AI 초안/추출0개처럼 표현하는 안내 문제와 한국어 조사 오류를 수정했다. 타입 검사·웹 빌드·Java 패키징과 [집중 브라우저6개](../experiments/results/meetings-ui-analysis-visibility-v1.json),1440/390px 실제 실패 화면 확인을 마쳤다. 해당 새 수정의 원격 CI는 대기 중이며 사용자 직접 검수로 계산하지 않는다.
+- 게시 `724eb907`의 [필수 CI](../experiments/results/meetings-ninja-ui-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. 각각 Python5,809개 통과·21개 제외, 브라우저162개 통과·실패0과 Java/운영/프런트 빌드를 확인했다. 실제 모델 의미 품질을 증명하는 검사는 아니다.
+- 분석 실패를 AI 초안/추출0개처럼 표현하는 안내 문제와 한국어 조사 오류를 수정했다. 타입 검사·웹 빌드·Java 패키징과 [집중 브라우저6개](../experiments/results/meetings-ui-analysis-visibility-v1.json),1440/390px 실제 실패 화면 확인을 마쳤다. 이 수정은 게시 후 필수 CI도 통과했으며 사용자 직접 검수로 계산하지 않는다.
 - [실제 회의 관리 흐름](MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원](MEETINGS-RESTORE-VERIFICATION.md), [실제 QA 실패와 독립 AI 판정](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)은 서로 다른 증거다. CI 통과가 실제 AI 품질 수용을 뜻하지 않는다.
 - 사용자 직접 검수·공개 서비스 배포는 완료하지 않았다. 실패 후보는 기본 모델로 채택하지 않았다.
 

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "source_commit": "724eb9078c7ac5ad45d93902d9272d2fa3e0dded",
+  "status": "CLOSED_ALL_REQUIRED_JOBS_PASSED",
+  "runs": [
+    {
+      "run_id": 41188422593,
+      "event": "push",
+      "jobs": [
+        {
+          "id": 124499986937,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124499987132,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124499987141,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5809,
+        "failed": 0,
+        "skipped": 21,
+        "warnings": 2,
+        "seconds": 195.08
+      },
+      "browser": {
+        "passed": 162,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/41188422593"
+    },
+    {
+      "run_id": 41188426123,
+      "event": "pull_request",
+      "jobs": [
+        {
+          "id": 124499997428,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124499997528,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124499997607,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5809,
+        "failed": 0,
+        "skipped": 21,
+        "warnings": 2,
+        "seconds": 202.05
+      },
+      "browser": {
+        "passed": 162,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      },
+      "url": "https://github.com/lingter100/doctrail/actions/runs/41188426123"
+    }
+  ],
+  "scope": [
+    "Java HTTP and synthetic meeting operations",
+    "React production build and browser regression",
+    "Python tests, lints and saved experiment provenance replay; no actual model rerun"
+  ],
+  "limitations": [
+    "Functional and synthetic regression, not actual native build or semantic AI quality."
+  ]
+}
