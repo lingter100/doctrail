@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from doctrail.meeting_grounded_summary import validate_summary_analysis
 from doctrail.meeting_structured import (
-    EVIDENCE_PLAN_QA_CONTRACT,
+    EVIDENCE_PLAN_QA_CONTRACTS,
     LEGACY_QA_CONTRACT,
     PROFILE,
     QA_CONTRACTS,
@@ -37,6 +37,8 @@ from scripts.run_meeting_qa_service_development import (
 )
 from scripts.serve_meetings_structured import start_services
 from scripts.serve_models import unused_port
+
+EVIDENCE_PLAN_QA_CONTRACT = EVIDENCE_PLAN_QA_CONTRACTS[0]  # Preserve the existing verifier export.
 
 LIMITS = {"startup_seconds": 120, "active_seconds": 590, "setup_seconds": 30,
           "meeting_seconds": 160, "answer_seconds": 120, "cleanup_seconds": 5,
@@ -534,7 +536,7 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_C
         raise DevelopmentError("unknown_profile")
     if qa_contract not in QA_CONTRACTS:
         raise DevelopmentError("unknown_qa_contract")
-    if qa_contract == EVIDENCE_PLAN_QA_CONTRACT and not qa_only:
+    if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS and not qa_only:
         raise DevelopmentError("evidence_plan_requires_qa_only")
     jar, output = Path(jar), Path(output)
     # No output or model/service side effects until immutable inputs pass.
@@ -547,7 +549,7 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_C
             or [doc["role"] for doc in documents].count("general_document") != 1 or len(cases) != 2):
         raise DevelopmentError("bundle_roles")
     output.mkdir(parents=True)
-    limits = EVIDENCE_PLAN_LIMITS if qa_contract == EVIDENCE_PLAN_QA_CONTRACT else QA_ONLY_LIMITS if qa_only else LIMITS
+    limits = EVIDENCE_PLAN_LIMITS if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS else QA_ONLY_LIMITS if qa_only else LIMITS
     report = FailureRecord(first_failure=None, secondary_failures=[], status="running", limits=limits,
                            semantic_quality_accepted=False, human_reviews=0, heldout_evaluation=False,
                            requested_profile=profile, requested_qa_contract=qa_contract,
@@ -584,7 +586,7 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_C
                       profile=profile, qa_contract=qa_contract, report=report) as services:
             try:
                 capture = NativeOutputCapture(services["generator"], output, report)
-                if qa_contract == EVIDENCE_PLAN_QA_CONTRACT:
+                if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS:
                     capture.bind_development(services["runtime"])
                 left(started + limits["startup_seconds"], clock)
                 active = min(started + limits["whole_seconds"] - limits["cleanup_seconds"],

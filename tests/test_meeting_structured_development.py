@@ -871,13 +871,15 @@ def test_evidence_plan_capture_io_failure_is_safe(tmp_path):
     assert report["development_artifacts"][0]["state"] == "unavailable"
 
 
-def test_evidence_plan_full_flow_rejected_before_side_effects(tmp_path):
+@pytest.mark.parametrize("contract", m.EVIDENCE_PLAN_QA_CONTRACTS)
+def test_evidence_plan_full_flow_rejected_before_side_effects(tmp_path, contract):
     with pytest.raises(m.DevelopmentError, match="evidence_plan_requires_qa_only"):
-        m.execute(tmp_path / "missing.jar", "unused", tmp_path / "output", qa_contract=m.EVIDENCE_PLAN_QA_CONTRACT)
+        m.execute(tmp_path / "missing.jar", "unused", tmp_path / "output", qa_contract=contract)
     assert not (tmp_path / "output").exists()
 
 
-def test_evidence_plan_mode_budget_hook_and_old_limits_unchanged(tmp_path, monkeypatch):
+@pytest.mark.parametrize("contract", m.EVIDENCE_PLAN_QA_CONTRACTS)
+def test_evidence_plan_mode_budget_hook_and_old_limits_unchanged(tmp_path, monkeypatch, contract):
     monkeypatch.setattr(m, "ROOT", tmp_path)
     docs, cases = packet()
     for doc in docs:
@@ -891,8 +893,8 @@ def test_evidence_plan_mode_budget_hook_and_old_limits_unchanged(tmp_path, monke
 
     @contextmanager
     def launcher(**kwargs):
-        assert kwargs["qa_contract"] == m.EVIDENCE_PLAN_QA_CONTRACT
-        kwargs["report"]["qa_contract"] = {"name": m.EVIDENCE_PLAN_QA_CONTRACT}
+        assert kwargs["qa_contract"] == contract
+        kwargs["report"]["qa_contract"] = {"name": contract}
         yield {"java_url": "http://test", "runtime": runtime,
                "generator": SimpleNamespace(_client=SimpleNamespace(event_hooks={"response": []}))}
 
@@ -903,7 +905,7 @@ def test_evidence_plan_mode_budget_hook_and_old_limits_unchanged(tmp_path, monke
 
     monkeypatch.setattr(m, "run_operations", run)
     report = m.execute(jar, hashlib.sha256(b"fixture").hexdigest(), tmp_path / ".local" / "fresh",
-                       qa_only=True, qa_contract=m.EVIDENCE_PLAN_QA_CONTRACT, launcher=launcher)
+                       qa_only=True, qa_contract=contract, launcher=launcher)
     assert report["status"] == "completed" and runtime.callback is None
     assert report["limits"]["native_completion_ceiling"] == 4
     assert report["limits"]["plan_output_tokens"] + report["limits"]["ledger_output_tokens"] == 768

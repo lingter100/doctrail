@@ -2,11 +2,11 @@
 
 기준일: 2026-10-31. 사용자의 **“완성까지해”** 지시로 재개했으며 goal과 자동 후속 실행은 ACTIVE다. **문서·회의 관리와 화면은 연결했지만, 로컬 AI 요약·답변 품질 및 최종 운영 검증이 남아 있다.** 전체 목표는 미완료다.
 
-**게시:** 사용자 계정 `lingter100`의 작성자·커미터로 `ff879a00`을 기능 브랜치에 push하고 [PR14](https://github.com/lingter100/doctrail/pull/14)에 연결했다. 게시 순간22파일의 작업본과 Git 바이트 일치를 확인했다. [해당 push·PR 필수 CI](../experiments/results/meetings-structured-profile-ci-v1.json)는 모두 성공했다. 각각 Python6,001개·21제외·브라우저162개(실패/인프라 오류/누락0), Java/운영/웹·동결 파일 검사가 통과했다. 통합/모델 채택은 하지 않았다. 다음 QA 계약·QA-only 수집 변경은 집중18+9검사·독립 코드 검토를 마친 별도 미게시 작업이며 이 CI에 포함되지 않는다.
+**게시:** 사용자 계정 `lingter100`의 작성자·커미터로 `48448bb`를 기능 브랜치에 push하고 [PR14](https://github.com/lingter100/doctrail/pull/14)에 연결했다. 게시 순간20파일의 작업본/Git 바이트와 원격 계정 연결을 확인했다. [정확한 push·PR 필수 CI](../experiments/results/meetings-evidence-plan-ci-v1.json)는 모두 성공했다. 각각 Python6,065개·21제외·브라우저162개(실패/인프라 오류/누락0)와 Java HTTP/운영/웹·동결 파일 검사가 통과했다. 새 질문 범위 참조·안건 추출 작업은 이 CI에 포함되지 않는 미게시 변경이다. PR은 draft이며 모델 채택·통합하지 않았다.
 
 **새 후보 실측:** 사용자 명의 `8bd4104`의 [필수 CI](../experiments/results/meetings-structured-ci-v1.json)는 모두 통과했지만, [첫 실제 회의 분석](../experiments/results/meetings-structured-service-v1.json)은 실패했다. 모델/Java는 준비됐고 분류46회 다음 요약564토큰을 생성했으나 입력 계산3,068/3,069 불일치로 거절됐다. 뒤의 분석1회·답변2회는 실행하지 않았다. 실패·원본 출력·정리·77고정 참조를 보존했으며 원인을 독립 검토한다. [PR14](https://github.com/lingter100/doctrail/pull/14)는 draft다. CI는 각각 Python5,922개·브라우저162개와 Java/운영/웹/동결 파일 검사가 통과한 결과이며 실제 AI 품질 성공으로 해석하지 않는다.
 
-**현재 단계:** [QA 요청 조건 비교](../experiments/results/meetings-qa-request-contract-v1.json)는 기술2/2 완료, 독립 내용 수용0/2로 닫혔다. 다음 [두 단계 근거 계획 구현](../experiments/results/meetings-evidence-plan-implementation-v1.json)은 집중 검사·독립 코드 검토를 마쳤으나 [실제 첫 계획 검증](../experiments/results/meetings-evidence-plan-service-v1.json)에서 실패했다. 정상 종료된87토큰 출력의 시점 표현이 원래 질문 구절과 맞지 않았다. 답변 생성 전의 기술 실패이며 두 번째 질문과 별도 전이6문항은 미실행이다. 원본을 보존해 표현 방식의 원인을 진단하고, 별도로 회의 전체의 의제·작업 관계를 함께 읽는 요약 추출을 구현한다. 사용자 검수0·기본 모델 미채택이다.
+**현재 단계:** [요청 계약 비교](../experiments/results/meetings-qa-request-contract-v1.json)는 기술2/2·내용0/2, [근거 계획v1](../experiments/results/meetings-evidence-plan-service-v1.json)은 질문 구절 검증 실패로 닫혔다. [범위 참조v2](../experiments/results/meetings-evidence-scope-service-v1.json)는 계획 형식은 통과했지만 의무3개/근거2행으로 실패했다. 독립 진단에서도 계획의 범위·시점·종류와 두 주장의 근거가 잘못돼 구조만 고쳐 자동 반복하지 않는다. 두 번째 질문·전이6문항은 미실행이다. 다음 QA 접근의 근거를 검토하면서, 별도 회의 전체 요약/작업 모듈의 집중 검사·귀속 오류 수정·독립 코드 검토를 마치고 실제 연결을 준비한다. 사용자 검수0·기본 모델 미채택이다.
 
 **보존한 실패:** [5d164212 CI](../experiments/results/meetings-startup-source-ci-v1.json)의 동결 추론 파일 충돌은 원본 복원과 별도 개발 진입점으로 해결했다. [실제 검색v5](../experiments/results/meetings-qa-retrieval-development-v5.json)의 시작 실패는 Windows 사용자 이름 변수를 보존해 해결했다. 과거 기준·검증기·실패 결과를 수정하지 않았다.
 

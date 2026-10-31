@@ -695,3 +695,50 @@ def test_explicit_development_capture_has_exact_request_without_credentials(nati
     assert events[0]["body"]["max_tokens"] == 192
     runtime.set_development_capture(None)
     assert g.development_capture is None
+
+
+@pytest.mark.parametrize("failure", [None, "invalid_plan", "length", "deadline"])
+def test_scope_refs_runtime_two_stage_budget_capture_and_failure_boundary(failure, monkeypatch):
+    generator, events = FakeGenerator(), []
+    request = answer_request()
+    parsed = {"spans": [{"text": request.query, "occurrence": 0}], "obligations": [
+        {"question_refs": [0], "entity_refs": [], "time_ref": None, "fact_kind": "established_outcome"}]}
+    now = [1.0]
+    monkeypatch.setattr(m, "time", SimpleNamespace(monotonic=lambda: now[0]))
+    def structured(messages, deadline, name, schema, cap):
+        generator.calls.append((name, messages, cap, schema))
+        generator.deadlines.append(deadline)
+        if name == "qa_obligation_plan":
+            data = copy.deepcopy(parsed)
+            if failure == "invalid_plan":
+                data["obligations"][0]["time_ref"] = 99
+            if failure == "deadline":
+                now[0] = 122.0
+        else:
+            data = {"rows": [{"id": 0, "status": "missing", "observed_modality": "unknown", "evidence": [], "text": ""}]}
+        return GGUFResult(json.dumps(data), "length" if failure == "length" else "eos", 100, cap, .1, {})
+    generator.structured = structured
+    runtime = m.StructuredMeetingRuntime(generator, qa_contract=m.EVIDENCE_SCOPE_QA_CONTRACT)
+    runtime.set_development_capture(events.append)
+    if failure:
+        with pytest.raises(WorkerError):
+            runtime.answer(request)
+        assert len(generator.calls) == 2 and events == []
+        assert runtime.last_telemetry["stage"] == "qa_obligation_plan"
+    else:
+        result = runtime.answer(request)
+        assert result["status"] == "abstained" and result["claims"] == []
+        assert [row[2] for row in generator.calls[:-1]] == [192, 576]
+        assert sum(row["output_tokens"] for row in result["telemetry"]["calls"]) == 768
+        assert json.loads(generator.calls[0][1][1]["content"]) == {"question": request.query}
+        assert generator.calls[0][3] == m.evidence_scope_refs.PLAN_SCHEMA
+        assert generator.calls[1][3] == m.evidence_scope_refs.LEDGER_SCHEMA
+        assert events[0]["plan"]["question"] == request.query
+        assert events[0]["plan"]["spans"][0]["end"] == len(request.query)
+        assert [e["kind"] for e in events] == ["accepted_plan", "compiled_ledger"]
+        assert request.query not in json.dumps(result["telemetry"], ensure_ascii=False)
+        health = runtime.health()["qa_contract"]
+        assert health["name"] == "evidence_plan_v2_scope_refs" and health["native_calls_per_answer"] == 2
+        assert health["prompt_sha256"] != m.qa_contract_metadata(m.EVIDENCE_PLAN_QA_CONTRACT)["prompt_sha256"]
+    assert not runtime.lock.locked() and generator.calls[-1] == "end"
+    assert len(set(generator.deadlines)) == 1

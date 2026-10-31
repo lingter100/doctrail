@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "status": "required_ci_passed",
+  "commit": "48448bb2d76ccc80dee489e92e4294e96a258a39",
+  "branch": "feat/meeting-intelligence",
+  "pull_request": 14,
+  "events": [
+    {
+      "event": "push",
+      "run_id": 41205337117,
+      "watch_session": 44029,
+      "terminal_chunk": "0dde73",
+      "watch_exit_code": 0,
+      "python_passed": 6065,
+      "python_skipped": 21,
+      "python_warnings": 2,
+      "python_seconds": 239.16,
+      "browser_passed": 162,
+      "browser_failed": 0,
+      "browser_infrastructure_failures": 0,
+      "browser_startup_failures": 0,
+      "browser_missing_reports": 0,
+      "browser_missing_runs": 0,
+      "browser_exit": 0,
+      "jobs": [
+        {
+          "id": 124549146140,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124549146332,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124549146373,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "event": "pull_request",
+      "run_id": 41205341387,
+      "watch_session": 52115,
+      "terminal_chunk": "31a6e8",
+      "watch_exit_code": 0,
+      "python_passed": 6065,
+      "python_skipped": 21,
+      "python_warnings": 2,
+      "python_seconds": 243.28,
+      "browser_passed": 162,
+      "browser_failed": 0,
+      "browser_infrastructure_failures": 0,
+      "browser_startup_failures": 0,
+      "browser_missing_reports": 0,
+      "browser_missing_runs": 0,
+      "browser_exit": 0,
+      "jobs": [
+        {
+          "id": 124549158632,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124549158865,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124549158870,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "java_http_compatibility_gate": "passed",
+  "synthetic_meeting_edit_restore_gate": "passed",
+  "web_build_gate": "passed",
+  "frozen_evidence_provenance_gates": "passed",
+  "scope": "Exact published v1 commit only; later scope-reference and agenda working changes are not covered. Tests/CI do not establish actual model quality, human acceptance or public readiness.",
+  "actual_model_generations_in_ci": 0,
+  "human_reviews": 0,
+  "service_adopted": false,
+  "public_service_deployed": false
+}

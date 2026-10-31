@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "experimental_implementation_focused_checks_and_review_passed",
+  "contract": "evidence_plan_v2_scope_refs",
+  "implementation_report_sha256": "fa840548ae423e6c3442bfe1dd84be2ead38511a0012aba244cc62184df4e50c",
+  "independent_review_sha256": "0610890c51ed2d623107768ba57500c4142d01799d91d561caadc29ade848f01",
+  "change": "Replace duplicated generated entity/time strings with references into one exact literal question-span pool. Host code resolves occurrence identities and freezes the unchanged whole question. Ledger rows refer only to immutable obligation IDs; the compiler resolves scopes and fact kinds from the plan.",
+  "checks": {
+    "focused_passed": 44,
+    "deselected": 193,
+    "seconds": 2.21,
+    "ruff": "passed",
+    "final_legacy_export_check": "passed",
+    "intermediate_alias_lint_failure_preserved": true,
+    "independent_review_open_blockers": 0,
+    "v1_pure_module_and_tests_byte_unchanged": true
+  },
+  "limits": {
+    "plan_output_tokens": 192,
+    "ledger_output_tokens": 576,
+    "aggregate_output_tokens_per_answer": 768,
+    "shared_request_seconds": 120,
+    "input_tokens": 6144,
+    "context_tokens": 8192,
+    "qa_only_http_requests": 2,
+    "qa_only_native_completions_max": 4,
+    "qa_only_requested_output_tokens_max": 1536,
+    "qa_only_helper_seconds": 395,
+    "qa_only_outer_seconds": 430
+  },
+  "unchanged": ["model and resource profile", "legacy defaults", "v1 pure implementation", "classification and summary", "original question and complete authorized source", "full abstention and exact evidence rules", "closed failures and semantic criteria"],
+  "limitations": "Exact references do not prove correct entity coverage, separate temporal endpoints, complete obligations or entailment. Real output-budget fit and quality require actual execution and independent review. No v1 output normalization or regrading is performed.",
+  "service_adopted": false,
+  "human_reviews": 0
+}
