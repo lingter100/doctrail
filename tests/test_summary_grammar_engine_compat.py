@@ -2,7 +2,7 @@
 import copy
 import json
 import os
-from pathlib import Path, PureWindowsPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from types import SimpleNamespace
 
 import pytest
@@ -378,6 +378,25 @@ class FakeDosDevices:
         return self.same_ok and self.canonical(alias) == canonical
 
 
+@pytest.mark.parametrize("host_separator", [";", ":"])
+def test_native_drive_windows_path_list_independent_of_fake_host(tmp_path, monkeypatch, host_separator):
+    # Model CI's POSIX fixture paths on either host without creating a DOS mapping.
+    root = PurePosixPath("/repo")
+    directories = [root / name for name in ("llvm/bin", "cmake/bin", "ninja")]
+    lease = compat.NativeDrive(None, tmp_path, "unused")
+    lease.drive = "R:"
+    lease.path = lambda p: PureWindowsPath("R:/") / PurePosixPath(p).relative_to(root)
+    monkeypatch.setattr(compat, "os", SimpleNamespace(pathsep=host_separator))
+    actual = lease.environment({"PATH": host_separator.join(map(str, directories)), "TEMP": "/repo/tmp", "TMP": "/repo/tmp"})
+    expected = r"R:\llvm\bin;R:\cmake\bin;R:\ninja"
+    assert actual["PATH"] == expected
+    # Splitting at POSIX ':' destroys the drive prefix and reproduces the CI guard's relative search entries.
+    assert not all(PureWindowsPath(p).is_absolute() for p in expected.split(":"))
+    backend = FakeDosDevices(root)
+    canonical = [backend.canonical(p) for p in actual["PATH"].split(";")]
+    assert canonical == directories and all(p.is_absolute() for p in canonical)
+
+
 @pytest.fixture
 def drive_fixture(fixture, monkeypatch):
     f = fixture
@@ -395,7 +414,7 @@ def drive_fixture(fixture, monkeypatch):
     backend = FakeDosDevices(f.original.parent.resolve())
     probe = prep.optional_probe_guard
     def canonical_env(env):
-        return dict(env, PATH=os.pathsep.join(str(backend.canonical(p)) for p in env["PATH"].split(os.pathsep)),
+        return dict(env, PATH=os.pathsep.join(str(backend.canonical(p)) for p in env["PATH"].split(";")),
                     TEMP=str(backend.canonical(env["TEMP"])), TMP=str(backend.canonical(env["TMP"])))
     def fake_probe(root, binding, env, app):
         return probe(backend.canonical(root), binding, canonical_env(env), backend.canonical(app))

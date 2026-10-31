@@ -1,6 +1,12 @@
 # 진행 상태
 
-## 최신 확인: 필수 CI와 실제 토큰 측정 완료
+## 최신 확인: 실제 서비스 QA 실패 원인과 CI 경로 오류 수정 중
+
+CI 경로 수정은 Windows PATH의 `;`와 호스트 경로 구분자를 분리하는 두 변경으로 끝냈다. 수정 전 POSIX 모형 실패1개를 재현했고 영향27개·Ruff·별도 Astra xhigh 검토를 통과했다. [수정 결과](../experiments/results/meetings-summary-native-drive-ci-repair-v1.json). 게시 후 Linux CI로 확인하며 실제 드라이브 연결/엔진 빌드는 아직 미실행이다.
+
+e61166f의 실제 Java 검색은 첫 질문에서5개 청크를 반환했고, Ministral 입력2,193·출력321토큰/EOS·생성6.813초를 측정했다. 답변은 코드 블록으로 감싼 JSON이어서503 `generation_invalid_json`으로 실패했다. 전체33.687초·자연 종료1이며 두 번째 질문은 미실행이다. 원문 출력과 검색 근거를 보존하고 별도 AI 검토로 형식·근거 누락·의미 오류를 구분한다. 단순 형식 복구를 품질 수용으로 취급하지 않는다. [실제 결과](../experiments/results/meetings-qa-service-development-v1.json).
+
+같은 커밋의 push·PR CI는 모두 종료됐으며 Java·브라우저158개·프런트 빌드는 통과했다. Python은 각각5,728통과·9실패·21건너뜀이다. 새 Windows 드라이브 경로의 PATH 구분자를 Linux 호스트 구분자로 처리한 오류를 수정 중이다. 이전 통과 CI로 이번 실패를 대체하지 않는다. [CI 결과](../experiments/results/meetings-native-service-ci-v1.json). 아래 준비·실행 전 문구는 당시 체크포인트이며 최신 상태는 이 문단이다.
 
 **후속 준비 완료:** 공개 개발 자료는 개인 경로 없이 입력2개·근거133개를 동일 바이트로 재현한다. 실제 Java QA 관찰기는 독립 검토의 두 오류를 수정해18개 가상 검사·재검토를 통과했다. ASCII 경로 어댑터는 마지막 영향31개·독립 검토를 통과했다. 두 실제 실행은 아직 하지 않았다. [서비스 QA 범위](MEETINGS-QA-SERVICE-DEVELOPMENT.md). 현재 검증된 변경을 사용자 계정으로 게시하고 실제 서비스 QA2회와 별도의 후속 엔진 빌드를 순차 수행할 준비다.
 

@@ -129,7 +129,7 @@ class NativeDrive:
         if self.drive is None:
             return env
         mapped = dict(env)
-        mapped["PATH"] = os.pathsep.join(str(self.path(p)) for p in env["PATH"].split(os.pathsep))
+        mapped["PATH"] = ";".join(str(self.path(p)) for p in env["PATH"].split(os.pathsep))
         for name in ("TEMP", "TMP"):
             mapped[name] = str(self.path(env[name]))
         rt.require(all(str(value).isascii() for value in mapped.values()), "native_drive_environment_not_ascii")
@@ -357,7 +357,7 @@ def check_drive_history(output, manifest):
                    and invocation["cwd"] == alias(output) and invocation["log_prefix"] == alias(output / name)
                    and invocation["env"]["TEMP"] == invocation["env"]["TMP"] == alias(output / "build-tmp")
                    and saved["temporary_directory"] == invocation["env"]["TEMP"]
-                   and all(PureWindowsPath(p).is_relative_to(record["drive"] + "\\") for p in invocation["env"]["PATH"].split(os.pathsep))
+                   and all(PureWindowsPath(p).is_relative_to(record["drive"] + "\\") for p in invocation["env"]["PATH"].split(";"))
                    and all(value.isascii() for value in invocation["env"].values()), "native_drive_history_invocations")
     rt.require(invocations[0]["argv"] == attempt["command"], "native_drive_history_invocations")
 

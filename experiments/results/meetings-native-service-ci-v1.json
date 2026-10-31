@@ -1,0 +1,85 @@
+{
+  "commit": "e61166fdcdb6de37009671691099ef8d5a5f242e",
+  "status": "closed_failed",
+  "watchers": [
+    {
+      "session": 28730,
+      "exit": 1,
+      "chunk": "bea8ad"
+    },
+    {
+      "session": 15261,
+      "exit": 1,
+      "chunk": "978be8"
+    }
+  ],
+  "runs": [
+    {
+      "id": 41181812821,
+      "event": "push",
+      "jobs": [
+        {
+          "id": 124480594803,
+          "name": "backend",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124480594853,
+          "name": "web",
+          "conclusion": "success"
+        },
+        {
+          "id": 124480594944,
+          "name": "java-service",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5728,
+        "failed": 9,
+        "skipped": 21,
+        "seconds": 237.75
+      },
+      "browser": {
+        "passed": 158,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    },
+    {
+      "id": 41181816012,
+      "event": "pull_request",
+      "jobs": [
+        {
+          "id": 124480604115,
+          "name": "backend",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124480604230,
+          "name": "java-service",
+          "conclusion": "success"
+        },
+        {
+          "id": 124480604255,
+          "name": "web",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5728,
+        "failed": 9,
+        "skipped": 21,
+        "seconds": 241
+      },
+      "browser": {
+        "passed": 158,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    }
+  ],
+  "cause": "Native drive alias PATH uses host delimiter on POSIX; repair pending. CI failure preserved; no unchanged rerun."
+}
