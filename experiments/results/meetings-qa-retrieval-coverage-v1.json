@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "status": "independent_open_development_source_review",
+  "review_kind": "independent_AI",
+  "reviewer_model": "gpt-6-astra",
+  "reviewer_reasoning": "xhigh",
+  "human_reviews": 0,
+  "heldout_evaluation": false,
+  "generation_requests": 0,
+  "actual_result_sha256": "35136181369e52556fc55ab0187ce6038fc30195b734a6cf330c7939e0f509da",
+  "review_sha256": "1e7c249736cb421346c7977dc3cf25dd16bbbd0614f725388a2dcd86ea7a9542",
+  "source_span_checks": {
+    "returned_hits": 55,
+    "unique_chunks": 13,
+    "mismatches": 0
+  },
+  "case_01_required_facts": [
+    "June Search SIG proposal",
+    "June proposal/charter drafting action",
+    "November unresolved Search scope",
+    "TSC vote for formation",
+    "Charter registration after successful vote",
+    "Initial membership in voted proposal"
+  ],
+  "case_01_actual_coverage": [
+    {
+      "method": "bm25",
+      "supported_facts": 3,
+      "required_facts": 6,
+      "context_sufficient": false
+    },
+    {
+      "method": "dense",
+      "supported_facts": 5,
+      "required_facts": 6,
+      "context_sufficient": false
+    },
+    {
+      "method": "hybrid",
+      "supported_facts": 3,
+      "required_facts": 6,
+      "context_sufficient": false
+    }
+  ],
+  "case_02": {
+    "expected": "abstain",
+    "reason": "The full source does not establish a final approved Search scope or confirmed initial roster.",
+    "bm25_and_hybrid": "Include direct November unresolved scope and membership-policy evidence.",
+    "dense": "Omits the actual November unresolved Search discussion."
+  },
+  "next_candidate": {
+    "policy": "ranked-neighbors-v1",
+    "default_enabled": false,
+    "source": "already_authorized_snapshot",
+    "limit": 10,
+    "ordering": "Keep anchors; only if underfilled, append immediate previous then next neighbors for original anchors in rank order, same document/revision/page; deduplicate original chunk IDs.",
+    "offline_prediction": {
+      "case_01_bm25_supported_facts": 6,
+      "required_facts": 6,
+      "selected_chunks": 10,
+      "case_02_unchanged": true
+    },
+    "actual_context_or_generation_verified": false
+  },
+  "limitations": [
+    "Development-informed policy choice on two public questions, not a general retrieval improvement estimate.",
+    "Exact source spans do not prove a generated claim is supported.",
+    "Existing hybrid_rerank remains an alternative; no additional reranker run occurred."
+  ]
+}

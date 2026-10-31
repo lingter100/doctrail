@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "status": "implemented_and_locally_checked_pending_actual_quality",
+  "sources": [
+    {
+      "path": "src/doctrail/meeting_structured.py",
+      "sha256": "2c180dfb570a6ebcf51d11d6f392bd3c9f14a7e6ee463b61c5c02c0f586e3c24"
+    },
+    {
+      "path": "scripts/serve_meetings_structured.py",
+      "sha256": "a1be602293af18349d405edc4dc1f263a022974ff0110ccfb751ef01d178a41b"
+    },
+    {
+      "path": "tests/test_meeting_structured.py",
+      "sha256": "fd41d3eb9e0b72085a667005132369ce826501c540afd1bdbd802a83946b08d5"
+    },
+    {
+      "path": "tests/test_serve_meetings_structured.py",
+      "sha256": "53a0fd230bab9cedfa0c915f4ebac74a9ab0d7532212f08525ceeba2a6c626d1"
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/AnswerContextSelector.java",
+      "sha256": "fe15a61ce93951f76f31ad9dcf228fe21ea8716ac954cd318f3586545d7ac28b"
+    },
+    {
+      "path": "server/src/main/java/io/doctrail/KnowledgeService.java",
+      "sha256": "4c93f53b98b2847818826a6357285f250771e3f02d9c0cbc9006e2227e969020"
+    },
+    {
+      "path": "server/src/test/java/io/doctrail/AnswerContextSelectorTest.java",
+      "sha256": "7f777069eb6a45ef1f16da80d8befcd7d65a413b63d147651ca63d28f37ab37f"
+    },
+    {
+      "path": "server/src/test/java/io/doctrail/AnswerNeighborsTest.java",
+      "sha256": "efb8a1714b74af9a476790667881675f86bce23f048755d3d1de48786cda6af6"
+    },
+    {
+      "path": "scripts/run_meeting_structured_development.py",
+      "sha256": "f21d705659b39912bddf81402264362bee840b4ccdc0801379fd6c6806447a14"
+    },
+    {
+      "path": "tests/test_meeting_structured_development.py",
+      "sha256": "07b1cb425a71daf1ba87024d527452fe30003e819a79026f6dad7a1519699457"
+    }
+  ],
+  "validation": {
+    "structured_python_unique_synthetic_passed": 49,
+    "java_unique_focused_passed": 68,
+    "verifier_unique_synthetic_passed": 22,
+    "verifier_count_explanation": "14 unaffected prior cases plus 8 affected capture cases; not a repeated full run.",
+    "ruff": "passed",
+    "frontend_production_build": "passed",
+    "java_package": "passed_with_tests_skipped_after_focused_68",
+    "jar_sha256": "da49cfcaebc65ed3e02bcd432f19c5bff47896784f512627c721b3360e697522"
+  },
+  "independent_AI_reviews": {
+    "source8_sha256": "976e86e2aeb49a345e3d38d04adfe4ad037aae8f44a42ca46d6ced74511a7f5f",
+    "verifier2_sha256": "4da8f11ae5a259ae3b3e17e7e1f47d2fc985890ffae46cea0b6bbac744729994",
+    "remaining_confirmed_blockers": 0,
+    "resolved": [
+      "Capture callbacks no longer write after lifecycle closure; main-thread flush owns private artifact writes.",
+      "Distinct native/chat output strings are preserved for rejected response analysis."
+    ]
+  },
+  "policy": {
+    "input_tokens": 6144,
+    "native_context_tokens": 8192,
+    "answer_output_tokens": 768,
+    "summary_output_tokens": 768,
+    "review_output_tokens": 128,
+    "shared_request_seconds": 120,
+    "classification_input_tokens": 4096,
+    "classification_output_tokens": 4,
+    "neighbors_default": false,
+    "neighbors_candidate_enabled": true,
+    "numeric_vram_gate": false
+  },
+  "actual_new_candidate_model_runs": 0,
+  "human_reviews": 0,
+  "semantic_quality_accepted": false,
+  "public_deployment": false,
+  "limitations": [
+    "Synthetic checks and source review do not prove real schema support or semantic quality.",
+    "Existing GPU ownership locks and resource observation do not establish VRAM fit.",
+    "Original closed experiments and their limits remain unchanged."
+  ]
+}

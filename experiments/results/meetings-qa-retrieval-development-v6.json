@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment": "meeting_qa_retrieval_development_v6",
+  "status": "completed_retrieval_observation",
+  "development_only": true,
+  "heldout_evaluation": false,
+  "human_reviews": 0,
+  "source_commit": "6ac0e788cda14df5e81f42edbb1bae8c847dfae8",
+  "source_manifest_sha256": "b92fdeb5850e5491c48effb86f4a92bcdb190e58f476ebed84db5932e188799e",
+  "cases_sha256": "86826c6f52cb0ac5d63165a9703de05c77136c256b2a92b2979b2c63ec8e24c0",
+  "final_receipt_sha256": "2f9d2882ac4a8a90739dcfc3555d7d71f2b367b418a29f460678cd7383407a8b",
+  "full_result_sha256": "35136181369e52556fc55ab0187ce6038fc30195b734a6cf330c7939e0f509da",
+  "natural_cli_exit": 0,
+  "helper_elapsed_seconds": 20.281,
+  "outer_elapsed_seconds": 21.781,
+  "uploaded_documents": 3,
+  "uploaded_chunks": 13,
+  "search_attempts": 6,
+  "successful_searches": 6,
+  "generation_requests": 0,
+  "analysis_requests": 0,
+  "settings": {
+    "profile": "base",
+    "limit": 10,
+    "device": "cpu",
+    "dtype": "float32",
+    "cpu_threads": 2,
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "embedding_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "reranker_model": "BAAI/bge-reranker-v2-m3",
+    "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "reranker_loaded": true,
+    "reranker_used": false
+  },
+  "searches": [
+    {
+      "case_id": "opensearch-representation-dev-01",
+      "method": "bm25",
+      "ranked_count": 5,
+      "http_elapsed_seconds": 0.047,
+      "http_status": 200
+    },
+    {
+      "case_id": "opensearch-representation-dev-01",
+      "method": "dense",
+      "ranked_count": 10,
+      "http_elapsed_seconds": 1.406,
+      "http_status": 200
+    },
+    {
+      "case_id": "opensearch-representation-dev-01",
+      "method": "hybrid",
+      "ranked_count": 10,
+      "http_elapsed_seconds": 0.109,
+      "http_status": 200
+    },
+    {
+      "case_id": "opensearch-representation-dev-02",
+      "method": "bm25",
+      "ranked_count": 10,
+      "http_elapsed_seconds": 0.032,
+      "http_status": 200
+    },
+    {
+      "case_id": "opensearch-representation-dev-02",
+      "method": "dense",
+      "ranked_count": 10,
+      "http_elapsed_seconds": 0.078,
+      "http_status": 200
+    },
+    {
+      "case_id": "opensearch-representation-dev-02",
+      "method": "hybrid",
+      "ranked_count": 10,
+      "http_elapsed_seconds": 0.062,
+      "http_status": 200
+    }
+  ],
+  "cleanup": {
+    "known_processes_absent": 11,
+    "errors": [],
+    "frozen_refs": 72,
+    "frozen_unchanged": true,
+    "unrelated_jobis_untouched": true
+  },
+  "limitations": [
+    "Two public development questions; not held-out evaluation or a general quality estimate.",
+    "Fixed serial order shares passage cache and host with an unrelated Java project; timings are observations, not an isolated speed comparison.",
+    "Generation and meeting analysis were not invoked; search response success is not answer correctness."
+  ],
+  "quality_accepted": false
+}

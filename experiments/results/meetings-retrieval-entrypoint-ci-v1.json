@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "head": "6ac0e788cda14df5e81f42edbb1bae8c847dfae8",
+  "status": "CLOSED_PASSED",
+  "runs": [
+    {
+      "event": "push",
+      "run_id": 41193383794,
+      "watch_session": 56324,
+      "watch_exit": 0,
+      "tool_chunk": "d370ab",
+      "jobs": [
+        {
+          "id": 124514546976,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514547019,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514547032,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5851,
+        "skipped": 21,
+        "warnings": 2,
+        "seconds": 171.72
+      },
+      "browser": {
+        "passed": 162,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0,
+        "exit": 0
+      }
+    },
+    {
+      "event": "pull_request",
+      "run_id": 41193388577,
+      "watch_session": 25362,
+      "watch_exit": 0,
+      "tool_chunk": "2bd58d",
+      "jobs": [
+        {
+          "id": 124514560281,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514560441,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124514560625,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5851,
+        "skipped": 21,
+        "warnings": 2,
+        "seconds": 237.42
+      },
+      "browser": {
+        "passed": 162,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0,
+        "exit": 0
+      }
+    }
+  ],
+  "scope": "Exact published source CI; synthetic fixtures and real Java/browser operations, no fresh model-quality evidence",
+  "previous_failed_head": "5d164212e1a6e938d5a3535a5ef87aadeaf4c919",
+  "frozen_verifiers_unchanged": true
+}

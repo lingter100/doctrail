@@ -16,10 +16,12 @@ public class KnowledgeService {
     final Store store;final Auth auth;final DocumentService docs;final MeetingService meetings;final LearnedSearch learned;final InferenceClient inference;final GenerationClient generation;final ObjectMapper json;
     private final Semaphore active=new Semaphore(1);
     private final boolean ragAnswerEnabled;
+    private final boolean answerNeighborsEnabled;
     final KnowledgeHistoryService history;
     KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json){this(store,auth,docs,meetings,learned,inference,generation,json,false);}
+    KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json,boolean ragAnswerEnabled){this(store,auth,docs,meetings,learned,inference,generation,json,ragAnswerEnabled,false);}
     @Autowired
-    KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json,@Value("${doctrail.rag-answer-enabled:false}") boolean ragAnswerEnabled){this.store=store;this.auth=auth;this.docs=docs;this.meetings=meetings;this.learned=learned;this.inference=inference;this.generation=generation;this.json=json;this.ragAnswerEnabled=ragAnswerEnabled;this.history=new KnowledgeHistoryService(store,auth,docs,meetings,json);}
+    KnowledgeService(Store store,Auth auth,DocumentService docs,MeetingService meetings,LearnedSearch learned,InferenceClient inference,GenerationClient generation,ObjectMapper json,@Value("${doctrail.rag-answer-enabled:false}") boolean ragAnswerEnabled,@Value("${doctrail.answer-neighbors-enabled:false}") boolean answerNeighborsEnabled){this.store=store;this.auth=auth;this.docs=docs;this.meetings=meetings;this.learned=learned;this.inference=inference;this.generation=generation;this.json=json;this.ragAnswerEnabled=ragAnswerEnabled;this.answerNeighborsEnabled=answerNeighborsEnabled;this.history=new KnowledgeHistoryService(store,auth,docs,meetings,json);}
     AnswerDeadline answerDeadline(long started){return new AnswerDeadline(started);}
     private static void check(AnswerDeadline deadline){if(deadline!=null)deadline.check();}
     record Filter(String query,String workspace,String kind,String meeting,String from,String to,String participant,String assignee,String itemType,String method,int limit,String profile){}
@@ -62,7 +64,8 @@ public class KnowledgeService {
                 // to a second model, even though the final response is also revalidated below.
                 store.read(c->{Snapshot current=snapshot(c,request,f);if(!token.equals(Auth.token(request))||!before.equals(current))throw new ApiError(409,"search_context_changed");return null;});
                 check(budget);
-                List<Map<String,Object>> contexts=results.stream().map(row->{Map<String,Object> v=new LinkedHashMap<>();for(String key:List.of("document_id","revision","chunk_id","title","meeting_date","page","start_offset","end_offset","text"))v.put(key,row.get(key));return v;}).toList();
+                List<Map<String,Object>> evidence=answerNeighborsEnabled?AnswerContextSelector.select(before.corpus,ranked):results;
+                List<Map<String,Object>> contexts=evidence.stream().map(row->{Map<String,Object> v=new LinkedHashMap<>();for(String key:List.of("document_id","revision","chunk_id","title","meeting_date","page","start_offset","end_offset","text"))v.put(key,row.get(key));return v;}).toList();
                 check(budget);
                 var payload=Map.of("schema_version",1,"query",f.query,"contexts",contexts);
                 JsonNode output=budget==null?generation.call("/answer",payload):generation.call("/answer",payload,budget);check(budget);response=validateAnswer(output,contexts);check(budget);
