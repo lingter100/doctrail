@@ -2,6 +2,8 @@
 
 기준일: 2026-10-31. 사용자의 **“완성까지해”** 지시로 재개했으며 goal과 자동 후속 실행은 ACTIVE다. **문서·회의 관리와 화면은 연결했지만, 로컬 AI 요약·답변 품질 및 최종 운영 검증이 남아 있다.** 전체 목표는 미완료다.
 
+**최신 게시와 실패:** 사용자 author/committer를 확인한5f07e218·a7ee15f7·5d164212로19파일을 게시했다. [5d164212의 push·PR](../experiments/results/meetings-startup-source-ci-v1.json)은 각각 Python5,848개·브라우저162개와 Java/웹 검사가 통과했지만 동결 파일 확인에서 실패로 종료했다. 불일치는 새 진단을 넣은 추론 파일1개였다. 원본 복원과 별도 개발 진입점 분리는70개 가상 검사·고정 해시46/46·독립 검토를 마쳤다. 동결 기준·검증기·과거 결과를 바꾸지 않으며 복구 변경의 게시·필수 CI 다음 실제 검색과 빌드를 진행한다.
+
 ## 현재 검증된 결과
 
 - 사용자 계정 `lingter100`의 `3efa1d12`·`724eb907`을 `feat/meeting-intelligence`에 게시했다. author/committer와19파일의 Git 일치를 확인했다. [PR14](https://github.com/lingter100/doctrail/pull/14)는 draft다.

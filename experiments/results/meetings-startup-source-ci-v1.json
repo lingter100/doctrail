@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "head": "5d164212e1a6e938d5a3535a5ef87aadeaf4c919",
+  "status": "CLOSED_FAILED",
+  "runs": [
+    {
+      "event": "push",
+      "run_id": 41192397784,
+      "watch_session": 80969,
+      "watch_exit": 1,
+      "tool_chunk": "e06703",
+      "jobs": [
+        {
+          "id": 124511648033,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124511648191,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124511648241,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5848,
+        "skipped": 21,
+        "warnings": 2,
+        "seconds": 242.23
+      },
+      "browser": {
+        "passed": 162,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    },
+    {
+      "event": "pull_request",
+      "run_id": 41192401136,
+      "watch_session": 56680,
+      "watch_exit": 1,
+      "tool_chunk": "38f74c",
+      "jobs": [
+        {
+          "id": 124511657408,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 124511657537,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124511657878,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5848,
+        "skipped": 21,
+        "warnings": 2,
+        "seconds": 238.73
+      },
+      "browser": {
+        "passed": 162,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0
+      }
+    }
+  ],
+  "failure": {
+    "step": "Verify fresh meeting calibration provenance without network or models",
+    "exception": "AssertionError: Frozen dependency changed",
+    "mismatched_file": "src/doctrail/inference.py",
+    "expected_sha256": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+    "observed_sha256": "8d55187a9d8f7d437101c61233956ee7268b942e2873ef057dcc168618abc6c1",
+    "opaque_dependency_hashes_checked": 46,
+    "mismatches": 1,
+    "private_semantic_data_read": false
+  },
+  "other_checks": "Java HTTP/database compatibility, synthetic meeting edits/backup restore, browser workflows and web production build passed",
+  "replay_or_retry": false,
+  "model_quality_claim": false,
+  "human_review": false,
+  "public_service_deployment": false,
+  "diagnosis_and_next": "New development diagnostics modified one frozen inference file. Restore that original byte-for-byte and delegate from a separate development entrypoint; do not update frozen metadata, verifier or historical results. Passing unit tests does not replace this failed provenance gate."
+}
+

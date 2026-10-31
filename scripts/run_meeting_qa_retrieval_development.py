@@ -46,7 +46,7 @@ LIMITS = {"startup_seconds": 240, "operations_seconds": 360, "cleanup_seconds": 
 # This sets the existing worker's thread settings before its normal eager load.
 WORKER_BOOTSTRAP = (
     "import runpy,torch;torch.set_num_threads(2);torch.set_num_interop_threads(2);"
-    "runpy.run_module('doctrail.inference',run_name='__main__')"
+    "runpy.run_module('scripts.meeting_qa_retrieval_worker',run_name='__main__')"
 )
 STARTUP_STREAM_BYTES = 1024 * 1024
 

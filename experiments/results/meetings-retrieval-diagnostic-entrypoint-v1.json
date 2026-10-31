@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "implemented_focused_checks_and_independent_review_passed",
+  "problem": "The prior opt-in diagnostic changed a file bound by a closed calibration's provenance check; exact 5d164212 CI failed despite passing unit tests",
+  "repair": {
+    "frozen_file": "src/doctrail/inference.py",
+    "restored_sha256": "b7fa5a61dea8dc79b2d0583074e5a214314b741425717a33a33b02b9524e108a",
+    "restored_existing_test_sha256": "eca938d1b9f7347fd5801eb862d2e2b0f30daac5a23965858273c389ff8e5bcf",
+    "new_entrypoint": "scripts.meeting_qa_retrieval_worker",
+    "delegation": "Call the unchanged inference.main exactly once; on SystemExit inspect its actual retained exception context, optionally emit bounded safe diagnostic metadata, and re-raise the same exit",
+    "reported_stage": "worker_entrypoint; not an inferred model-loading phase",
+    "unchanged": "Loading, validation and HTTP implementation; frozen metadata/verifiers/questions/criteria/results; model settings and resource limits",
+    "no_runtime_monkeypatch_or_startup_logic_copy": true,
+    "bootstrap": "Only the runpy module target changes prospectively; old actual runs and guards remain preserved"
+  },
+  "source": {
+    "scripts/run_meeting_qa_retrieval_development.py": "a9137db75b48bb7dc4a8638bc9fe419d4cb91092370ef21e0c5da10da594f943",
+    "scripts/meeting_qa_retrieval_worker.py": "b3b2f75ea51aefde65acae2d90bea3b9a454a104fa77f03e3ad5aebff7704857",
+    "tests/test_meeting_qa_retrieval_worker.py": "af4484b0c3ba642ce4822cdc735080eaae9ef2096ba66067721536b8b0cf27ce",
+    "prior_5d_sources_preserved": true
+  },
+  "validation": {
+    "synthetic_tests_passed": 70,
+    "breakdown": {"restored_inference_contract": 43, "new_delegating_entrypoint": 8, "development_runner": 19},
+    "pytest_seconds": 3.22,
+    "whole_child_seconds": 5.375,
+    "exit_code": 0,
+    "known_owned_process_absent": true,
+    "execution_context": "Escalated local synthetic TestClient; no model or Java service",
+    "ruff": "passed",
+    "frozen_dependency_hashes_checked": 46,
+    "frozen_dependency_mismatches": 0,
+    "private_semantic_data_read": false,
+    "independent_review_model": "gpt-6-astra",
+    "independent_review_effort": "xhigh",
+    "independent_review_required_fixes": 0,
+    "reviewer_reran_tests": false,
+    "implementation_result_sha256": "6c62b30599773fa6dd8c4c745fd078a7dcaf052e98eae70747212940bc9a1e16",
+    "opaque_frozen_check_sha256": "b1dcef3ee1a92fe9ad73e25385768af8cde961e7f41084fd14a72f7fc71d137a"
+  },
+  "remaining": "Publish and close exact new CI; bind the new bootstrap in a fresh prospective observer before actual execution",
+  "actual_model_runs": 0,
+  "model_quality_claim": false,
+  "human_review": false,
+  "paid_service": false,
+  "public_service_deployment": false
+}

@@ -11,14 +11,11 @@ import hashlib
 import hmac
 import json
 import math
-import ntpath
 import os
-import re
-import sys
 import threading
 import time
 import uuid
-from collections import OrderedDict, deque
+from collections import OrderedDict
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Annotated, Literal
@@ -345,29 +342,6 @@ def create_app(token: str, runtime_factory):
     return app
 
 
-def _startup_diagnostic(error, stage):
-    """Bounded code locations only: never exception text, locals or source lines."""
-    def label(value):
-        return re.sub(r"[^a-zA-Z0-9_.<>-]", "_", value[:80])
-
-    chain, seen = [], set()
-    while error is not None and id(error) not in seen and len(chain) < 4:
-        seen.add(id(error))
-        frames = deque(maxlen=8)
-        trace, visited = error.__traceback__, 0
-        while trace is not None and visited < 64:
-            code = trace.tb_frame.f_code
-            frames.append({"file": label(ntpath.basename(code.co_filename)),
-                           "function": label(code.co_name), "line": trace.tb_lineno})
-            trace, visited = trace.tb_next, visited + 1
-        chain.append({"type": label(type(error).__name__), "frames": list(frames),
-                      "frames_truncated": visited > 8 or trace is not None})
-        error = error.__cause__ if error.__cause__ is not None else (
-            None if error.__suppress_context__ else error.__context__)
-    return {"code": "inference_startup_diagnostic", "stage": stage,
-            "exceptions": chain, "chain_truncated": error is not None}
-
-
 def main():
     parser = argparse.ArgumentParser(description="Start the loopback DocTrail model worker")
     parser.add_argument("--device", choices=("cpu", "cuda"), required=True)
@@ -376,22 +350,13 @@ def main():
     args = parser.parse_args()
     if not 1 <= args.port <= 65535:
         parser.exit(2, "invalid_port\n")
-    stage = "token_validation"
     try:
         # Preload before server startup so readiness cannot race model loading.
         token = os.environ.get("DOCTRAIL_INFERENCE_TOKEN", "")
         _validate_token(token)
-        stage = "model_load"
         runtime = InferenceRuntime.load(args.model_root, args.device)
-        stage = "application_setup"
         app = create_app(token, lambda: runtime)
-    except Exception as error:  # noqa: BLE001 - startup failures must not disclose paths/tokens
-        if os.environ.get("DOCTRAIL_STARTUP_DIAGNOSTICS") == "1":
-            try:
-                sys.stderr.write(json.dumps(_startup_diagnostic(error, stage),
-                                            ensure_ascii=True, separators=(",", ":")) + "\n")
-            except Exception:  # noqa: BLE001, S110 - preserve exit; recursive error logging is unsafe
-                pass
+    except Exception:  # noqa: BLE001 - startup failures must not disclose local paths or tokens
         parser.exit(2, "inference_startup_failed\n")
     import uvicorn
 

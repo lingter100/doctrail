@@ -29,6 +29,7 @@
 
 ## 현재 검증 근거
 
+- 새5d164212의 [필수 CI](../experiments/results/meetings-startup-source-ci-v1.json)는 단위 검사5,848개·브라우저162개·Java/웹 검사 통과와 별개로, 과거 실험의 고정 파일 충돌 때문에 실패로 종료했다. 원본 복원과 [개발 진입점 분리](../experiments/results/meetings-retrieval-diagnostic-entrypoint-v1.json)는70개 가상 검사·고정 해시46/46·독립 검토를 마쳤으며 새 CI가 남았다. 실패한 CI를 통과로 바꾸지 않는다.
 - 게시 `724eb907`의 [필수 CI](../experiments/results/meetings-ninja-ui-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. 각각 Python5,809개 통과·21개 제외, 브라우저162개 통과·실패0과 Java/운영/프런트 빌드를 확인했다. 실제 모델 의미 품질을 증명하는 검사는 아니다.
 - 분석 실패를 AI 초안/추출0개처럼 표현하는 안내 문제와 한국어 조사 오류를 수정했다. 타입 검사·웹 빌드·Java 패키징과 [집중 브라우저6개](../experiments/results/meetings-ui-analysis-visibility-v1.json),1440/390px 실제 실패 화면 확인을 마쳤다. 이 수정은 게시 후 필수 CI도 통과했으며 사용자 직접 검수로 계산하지 않는다.
 - [실제 회의 관리 흐름](MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원](MEETINGS-RESTORE-VERIFICATION.md), [실제 QA 실패와 독립 AI 판정](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)은 서로 다른 증거다. CI 통과가 실제 AI 품질 수용을 뜻하지 않는다.
