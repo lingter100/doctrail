@@ -1,0 +1,61 @@
+{
+  "schema": "doctrail-qa-representation-measurement-v1",
+  "source_commit": "c5c93c31781b561af16880cc299a76d9db8ccfc2",
+  "status": "completed",
+  "kind": "actual_local_token_measurement_not_generation",
+  "model": "Ministral-3-3B-Instruct-2512-Q5_K_M",
+  "cases": [
+    {
+      "id": "opensearch-representation-dev-01",
+      "input_tokens": 4471,
+      "input_excess": 375,
+      "serialized_reference_content_tokens": 173,
+      "reference_content_excess": 0,
+      "one_eog_allowance": 1,
+      "reference_content_plus_eog_convention": 174,
+      "reference_plus_eog_excess": 0,
+      "observed_generation_accounting": false
+    },
+    {
+      "id": "opensearch-representation-dev-02",
+      "input_tokens": 4470,
+      "input_excess": 374,
+      "serialized_reference_content_tokens": 12,
+      "reference_content_excess": 0,
+      "one_eog_allowance": 1,
+      "reference_content_plus_eog_convention": 13,
+      "reference_plus_eog_excess": 0,
+      "observed_generation_accounting": false
+    }
+  ],
+  "limits": {
+    "startup_seconds": 120,
+    "active_seconds": 60,
+    "cleanup_seconds": 5,
+    "whole_seconds": 185,
+    "input_tokens": 4096,
+    "reference_content_tokens": 256,
+    "eog_allowance": 1,
+    "application_requests": 7,
+    "completions": 0
+  },
+  "requests": {
+    "props": 1,
+    "apply_template": 2,
+    "tokenize": 4,
+    "completion": 0
+  },
+  "helper_seconds": 13.563000000081956,
+  "outer_cli_through_cleanup_seconds": 14.437000000034459,
+  "natural_cli_exit": 0,
+  "cleanup_all_absent": true,
+  "cleanup_errors": 0,
+  "source_preservation": "90 fixed metadata/source/runtime refs unchanged",
+  "report_sha256": "e72f646e554912f4039f26be196dce82bb90008dcb8b73a7e5e6f06dbf3dc409",
+  "final_sha256": "128780a284bd707768e3d18565ed7c4c8bd40ddb2a9b8d6cdc6f53135a5ec11d",
+  "AI_quality": false,
+  "human_reviews": 0,
+  "heldout_evaluation": false,
+  "gold_context_retrieval_bypass": true,
+  "interpretation": "Both unchanged full inputs exceed current4096 cap. Fixed reference contents fit256 including separate one-EOG convention. No generated answer, semantic quality, held-out accuracy, or proof about all adequate phrasings follows. No truncation or retry."
+}
