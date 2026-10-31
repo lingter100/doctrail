@@ -208,3 +208,42 @@ def test_launcher_unknown_qa_contract_rejected_before_owned_side_effects(launche
     with pytest.raises(ValueError, match="unknown_qa_contract"), run(launcher, qa_contract="guessed"):
         pass
     assert not launcher.calls and not launcher.leases and not launcher.children
+
+
+@pytest.mark.parametrize("contract", m.ANALYSIS_CONTRACTS)
+def test_launcher_analysis_contract_opt_in_and_report(launcher, contract):
+    with run(launcher, analysis_contract=contract) as service:
+        runtime = service["runtime"]
+        if contract == m.AGENDA_ANALYSIS_CONTRACT:
+            assert type(runtime) is m.AgendaMeetingRuntime
+            assert service["report"]["analysis_contract"] == runtime.health()["analysis_contract"]
+            assert service["report"]["analysis_contract"]["review_performed"] is False
+            assert service["report"]["analysis_contract"]["native_calls_per_analysis"] == 1
+        else:
+            assert type(runtime) is m.StructuredMeetingRuntime
+        assert service["report"]["analysis_contract"]["name"] == contract
+        assert runtime.qa_contract == m.LEGACY_QA_CONTRACT
+    assert all(child.stopped for child in launcher.children)
+
+
+def test_launcher_unknown_analysis_contract_rejected_before_side_effects(launcher):
+    with pytest.raises(ValueError, match="unknown_analysis_contract"), run(launcher, analysis_contract="other"):
+        pass
+    assert not launcher.calls and not launcher.leases and not launcher.children
+
+
+@pytest.mark.parametrize("value", [None, "agenda_extraction_v1"])
+def test_analysis_contract_cli_default_and_explicit_option(monkeypatch, value):
+    seen = []
+    @contextmanager
+    def services(**kwargs):
+        seen.append(kwargs)
+        raise KeyboardInterrupt
+        yield  # pragma: no cover - context manager signature only
+    args = ["serve", "--enable-structured", "--jar", "fake.jar", "--database", "fake.sqlite3"]
+    if value is not None:
+        args += ["--analysis-contract", value]
+    monkeypatch.setattr(m, "start_services", services)
+    monkeypatch.setattr(sys, "argv", args)
+    m.main()
+    assert seen[0]["analysis_contract"] == (value or m.LEGACY_ANALYSIS_CONTRACT)

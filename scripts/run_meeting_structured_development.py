@@ -35,7 +35,12 @@ from scripts.run_meeting_qa_service_development import (
     load_bundle,
     record_error,
 )
-from scripts.serve_meetings_structured import start_services
+from scripts.serve_meetings_structured import (
+    AGENDA_ANALYSIS_CONTRACT,
+    ANALYSIS_CONTRACTS,
+    LEGACY_ANALYSIS_CONTRACT,
+    start_services,
+)
 from scripts.serve_models import unused_port
 
 EVIDENCE_PLAN_QA_CONTRACT = EVIDENCE_PLAN_QA_CONTRACTS[0]  # Preserve the existing verifier export.
@@ -52,10 +57,14 @@ QA_ONLY_LIMITS = {**LIMITS, "active_seconds": 270, "whole_seconds": 395, "extern
                   "auto_analyses": 0, "native_completion_ceiling": 2, "requested_output_token_ceiling": 1536}
 EVIDENCE_PLAN_LIMITS = {**QA_ONLY_LIMITS, "native_completion_ceiling": 4,
                        "plan_output_tokens": 192, "ledger_output_tokens": 576}
+ANALYSIS_ONLY_LIMITS = {**LIMITS, "active_seconds": 350, "whole_seconds": 475, "external_whole_seconds": 510,
+                        "answer_requests": 0, "native_completion_ceiling": 2, "requested_output_token_ceiling": 1536,
+                        "classification_units_per_meeting": 0, "classification_output_tokens": 0,
+                        "review_output_tokens": 0, "answer_output_tokens": 0, "joint_analysis_output_tokens": 768}
 NUMERIC = {"input_tokens", "output_tokens", "output_cap", "input_cap", "completion_calls",
            "label_count", "elapsed_seconds", "elapsed_ms", "http_status", "observed_tokens_predicted",
-           "observed_tokens_evaluated"}
-BOOLEAN = {"dispatched", "returned", "accepted"}
+           "observed_tokens_evaluated", "native_calls_budget"}
+BOOLEAN = {"dispatched", "returned", "accepted", "review_performed", "semantic_quality_accepted"}
 # Literal codes raised by the structured/GGUF worker and its source-contract helpers.
 # Never accept an arbitrary generation_* suffix: it can contain private text.
 SAFE_ERROR_CODES = {
@@ -78,15 +87,16 @@ METADATA_FIELDS = {"meeting_title", "meeting_date", "participants", "purpose"}
 METADATA_REASONS = {"unsupported_source_format", "ambiguous_source_value", "value_out_of_bounds"}
 ENUMS = {"operation": {"qa", "summary", "summary_review", "meeting_qa", "meeting_summary",
                        "meeting_summary_review", "grammar_constrained_classification",
-                       "qa_obligation_plan", "qa_evidence_ledger"},
+                       "qa_obligation_plan", "qa_evidence_ledger", "agenda_extraction"},
          "status": {"failed", "complete"}, "finish_reason": {"eos", "length"},
          "stage": {"request", "partition", "classification", "metadata", "summary", "review", "assembled", "qa",
-                   "qa_obligation_plan", "qa_evidence_ledger"},
+                   "qa_obligation_plan", "qa_evidence_ledger", "agenda_extraction", "agenda_assembly"},
          "validation_stage": {"input", "http", "native_metadata", "effective_settings",
                               "token_identity_integrity", "eos", "json", "accepted"},
          "observed_stop_type": {"eos", "limit", "word", "other"},
          "failure_code": SAFE_ERROR_CODES, "error_code": SAFE_ERROR_CODES,
-         "metadata_policy": {"literal_optional_v1"}}
+         "metadata_policy": {"literal_optional_v1"}, "analysis_mode": {"agenda_extraction_v1"},
+         "item_field_policy": {"terminal_task_and_enclosing_action_owner_v1"}}
 
 
 class DevelopmentError(RuntimeError):
@@ -115,6 +125,11 @@ def safe_metrics(value):
                         and isinstance(row.get("field"), str) and row["field"] in METADATA_FIELDS
                         and type(row.get("unit_index")) is int and 0 <= row["unit_index"] <= 159
                         and isinstance(row.get("reason"), str) and row["reason"] in METADATA_REASONS]
+        elif key == "item_ranges_including_intervening_units" and isinstance(item, list):
+            out[key] = [{field: row[field] for field in ("item_index", "first_unit", "last_unit")}
+                        for row in item[:150] if isinstance(row, dict)
+                        and all(type(row.get(field)) is int for field in ("item_index", "first_unit", "last_unit"))
+                        and 0 <= row["item_index"] < 150 and 0 <= row["first_unit"] <= row["last_unit"] < 160]
     return out
 
 
@@ -146,6 +161,9 @@ def content_failure_completed(services, observation, row, error):
         return False
     if receipt.get("stage") in {"qa_obligation_plan", "qa_evidence_ledger"}:
         return False  # Malformed plan/ledger stages are technical failures, never continuable content errors.
+    if receipt.get("stage") == "agenda_assembly" and receipt.get("failure_code") not in {
+            "generation_summary_insufficient", "generation_language_mismatch"}:
+        return False  # Only completed content outcomes, not malformed item/span contracts, may continue.
     try:
         if services["runtime"].lock.locked() is not False:
             return False
@@ -221,10 +239,10 @@ def check_answer(answer, documents):
                 raise DevelopmentError("citation_binding")
 
 
-def operation_rows(documents, cases, *, qa_only=False):
+def operation_rows(documents, cases, *, qa_only=False, analysis_only=False):
     return ([{"kind": "analysis", "id": doc["document_id"], "state": "unattempted"}
              for doc in documents if doc["role"] == "meeting" and not qa_only]
-            + [{"kind": "answer", "id": case["id"], "state": "unattempted"} for case in cases])
+            + [{"kind": "answer", "id": case["id"], "state": "unattempted"} for case in cases if not analysis_only])
 
 
 class NativeOutputCapture:
@@ -272,7 +290,7 @@ class NativeOutputCapture:
             if kind not in shapes or set(event) != shapes[kind]:
                 raise ValueError("unsupported_development_event")
             stage = event.get("stage", "qa_obligation_plan" if kind == "accepted_plan" else "qa_evidence_ledger")
-            if stage not in {"qa_obligation_plan", "qa_evidence_ledger"}:
+            if stage not in {"qa_obligation_plan", "qa_evidence_ledger", "agenda_extraction"}:
                 raise ValueError("unsupported_development_stage")
             body_hash = None
             if kind == "native_request":
@@ -429,13 +447,15 @@ class NativeOutputCapture:
 
 
 def run_operations(client, services, documents, cases, report, deadline, save,
-                   *, qa_only=False, continue_content_failures=False, clock=time.monotonic, sleep=time.sleep):
+                   *, qa_only=False, analysis_only=False, continue_content_failures=False, clock=time.monotonic, sleep=time.sleep):
+    if qa_only and analysis_only:
+        raise DevelopmentError("component_mode_conflict")
     meetings = [doc for doc in documents if doc["role"] == "meeting"]
     general = [doc for doc in documents if doc["role"] == "general_document"]
     if len(meetings) != 2 or len(general) != 1 or len(cases) != 2:
         raise DevelopmentError("bundle_roles")
-    rows = report["operations"] = operation_rows(documents, cases, qa_only=qa_only)
-    limits = QA_ONLY_LIMITS if qa_only else LIMITS
+    rows = report["operations"] = operation_rows(documents, cases, qa_only=qa_only, analysis_only=analysis_only)
+    limits = ANALYSIS_ONLY_LIMITS if analysis_only else QA_ONLY_LIMITS if qa_only else LIMITS
     report["documents"] = stored = []
     setup = report["setup"] = {"state": "attempted"}
     setup_end = min(deadline, clock() + limits["setup_seconds"])
@@ -452,13 +472,14 @@ def run_operations(client, services, documents, cases, report, deadline, save,
                        data={"title": source["title"], "visibility": "workspace"})
 
     setup["document_bindings"] = []
-    for source in [*general, *(meetings if qa_only else [])]:
+    for source in ([] if analysis_only else [*general, *(meetings if qa_only else [])]):
         doc = upload(source, False, setup_end, setup)
         check_document(doc, source)
         stored.append(doc)
         setup["document_bindings"].append({"source_id": source["document_id"], "document_id": doc["id"],
                                            "registered_as": "ordinary_document"})
-    setup.update(source_id=general[0]["document_id"], document_id=stored[0]["id"])
+    if not analysis_only:
+        setup.update(source_id=general[0]["document_id"], document_id=stored[0]["id"])
     setup["state"] = "complete"
     save()
     for source, row in zip(meetings if not qa_only else [], rows[:2] if not qa_only else [], strict=True):
@@ -501,7 +522,7 @@ def run_operations(client, services, documents, cases, report, deadline, save,
         if row["observation"]["runtime_state"] != "terminal" or row["observation"]["runtime"].get("status") != "complete":
             row["state"] = "failed_or_unknown"
             raise DevelopmentError("analysis_receipt_unknown")
-    for case, row in zip(cases, rows if qa_only else rows[2:], strict=True):
+    for case, row in zip([] if analysis_only else cases, rows if qa_only else rows[2:], strict=True):
         end = min(deadline, clock() + limits["answer_seconds"])
         left(end, clock)
         before = snapshot(services)
@@ -530,12 +551,21 @@ def run_operations(client, services, documents, cases, report, deadline, save,
 
 
 def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_CONTRACT, qa_only=False,
+            analysis_contract=LEGACY_ANALYSIS_CONTRACT, analysis_only=False,
             continue_content_failures=False, bundle=BUNDLE, launcher=start_services,
             client_factory=httpx.Client, clock=time.monotonic, sleep=time.sleep):
     if profile not in STRUCTURED_PROFILES:
         raise DevelopmentError("unknown_profile")
     if qa_contract not in QA_CONTRACTS:
         raise DevelopmentError("unknown_qa_contract")
+    if analysis_contract not in ANALYSIS_CONTRACTS:
+        raise DevelopmentError("unknown_analysis_contract")
+    if qa_only and analysis_only:
+        raise DevelopmentError("component_mode_conflict")
+    if analysis_only and (analysis_contract != AGENDA_ANALYSIS_CONTRACT or qa_contract != LEGACY_QA_CONTRACT):
+        raise DevelopmentError("analysis_only_contract_conflict")
+    if analysis_contract == AGENDA_ANALYSIS_CONTRACT and not analysis_only:
+        raise DevelopmentError("agenda_requires_analysis_only")
     if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS and not qa_only:
         raise DevelopmentError("evidence_plan_requires_qa_only")
     jar, output = Path(jar), Path(output)
@@ -549,22 +579,25 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_C
             or [doc["role"] for doc in documents].count("general_document") != 1 or len(cases) != 2):
         raise DevelopmentError("bundle_roles")
     output.mkdir(parents=True)
-    limits = EVIDENCE_PLAN_LIMITS if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS else QA_ONLY_LIMITS if qa_only else LIMITS
+    limits = (ANALYSIS_ONLY_LIMITS if analysis_only else EVIDENCE_PLAN_LIMITS
+              if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS else QA_ONLY_LIMITS if qa_only else LIMITS)
     report = FailureRecord(first_failure=None, secondary_failures=[], status="running", limits=limits,
                            semantic_quality_accepted=False, human_reviews=0, heldout_evaluation=False,
                            requested_profile=profile, requested_qa_contract=qa_contract,
-                           mode="qa_only" if qa_only else "full",
+                           requested_analysis_contract=analysis_contract,
+                           mode="analysis_only" if analysis_only else "qa_only" if qa_only else "full",
                            continue_content_failures=continue_content_failures,
-                           jar_sha256=jar_sha256, operations=operation_rows(documents, cases, qa_only=qa_only),
+                           jar_sha256=jar_sha256, operations=operation_rows(documents, cases, qa_only=qa_only, analysis_only=analysis_only),
                            external_fresh_gate_required=True)
     if qa_only:
         report["context_comparison"] = {"exact_prior_context_binding_proven": False,
             "limitation": "Fresh ordinary-document uploads preserve source bytes and order, but prior DB/context identity is not reconstructed."}
+    selected_sources = [doc for doc in documents if not analysis_only or doc["role"] == "meeting"]
     report["sources"] = [{key: doc[key] for key in ("document_id", "role", "path", "raw_sha256", "title")}
-                         for doc in documents]
-    for doc in documents:
+                         for doc in selected_sources]
+    for doc in selected_sources:
         (output / (doc["document_id"] + ".txt")).write_bytes(doc["content"])
-    report["cases"] = cases
+    report["cases"] = [] if analysis_only else cases
     started = clock()
     capture = None
 
@@ -583,17 +616,18 @@ def execute(jar, jar_sha256, output, *, profile=PROFILE, qa_contract=LEGACY_QA_C
             raise DevelopmentError("ports")
         with launcher(jar=jar, database=output / "development.sqlite3", java_port=ports[0],
                       worker_port=ports[1], native_port=ports[2], enable_structured=True,
-                      profile=profile, qa_contract=qa_contract, report=report) as services:
+                      profile=profile, qa_contract=qa_contract, analysis_contract=analysis_contract, report=report) as services:
             try:
                 capture = NativeOutputCapture(services["generator"], output, report)
-                if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS:
+                if qa_contract in EVIDENCE_PLAN_QA_CONTRACTS or analysis_contract == AGENDA_ANALYSIS_CONTRACT:
                     capture.bind_development(services["runtime"])
                 left(started + limits["startup_seconds"], clock)
                 active = min(started + limits["whole_seconds"] - limits["cleanup_seconds"],
                              clock() + limits["active_seconds"])
                 with client_factory(base_url=services["java_url"], trust_env=False, follow_redirects=False) as client:
                     run_operations(client, services, documents, cases, report, active, save,
-                                   qa_only=qa_only, continue_content_failures=continue_content_failures, clock=clock, sleep=sleep)
+                                   qa_only=qa_only, analysis_only=analysis_only,
+                                   continue_content_failures=continue_content_failures, clock=clock, sleep=sleep)
                 if report.errors:
                     raise report.errors[0]  # Content failures stay failures, also during context cleanup.
             except BaseException as error:
@@ -626,12 +660,16 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--profile", choices=STRUCTURED_PROFILES, default=PROFILE)
     parser.add_argument("--qa-contract", choices=QA_CONTRACTS, default=LEGACY_QA_CONTRACT)
-    parser.add_argument("--qa-only", action="store_true")
+    parser.add_argument("--analysis-contract", choices=ANALYSIS_CONTRACTS, default=LEGACY_ANALYSIS_CONTRACT)
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--qa-only", action="store_true")
+    modes.add_argument("--analysis-only", action="store_true")
     parser.add_argument("--continue-content-failures", action="store_true")
     args = parser.parse_args()
     try:
         report = execute(args.jar, args.jar_sha256, args.output, profile=args.profile,
                          qa_contract=args.qa_contract, qa_only=args.qa_only,
+                         analysis_contract=args.analysis_contract, analysis_only=args.analysis_only,
                          continue_content_failures=args.continue_content_failures)
     except Exception:  # noqa: BLE001 - never echo private HTTP or environment details
         parser.exit(1, "structured_development_preflight_failed\n")

@@ -83,12 +83,12 @@ class Scenario:
                               json={"document": document(identity), "meeting": {
                                   "analysis_status": state, "source_revision": 1, "ai_analysis": {"fixture": True}}})
 
-    def run(self, monkeypatch, deadline=590, *, continue_content_failures=False, qa_only=False):
+    def run(self, monkeypatch, deadline=590, *, continue_content_failures=False, qa_only=False, analysis_only=False):
         monkeypatch.setattr(m, "validate_summary_analysis", lambda analysis, content: None)
         with httpx.Client(transport=httpx.MockTransport(self.handler), base_url="http://test") as client:
             m.run_operations(client, self.services, *packet(), self.report, deadline,
                              lambda: self.saves.append(copy.deepcopy(dict(self.report))),
-                             continue_content_failures=continue_content_failures, qa_only=qa_only,
+                             continue_content_failures=continue_content_failures, qa_only=qa_only, analysis_only=analysis_only,
                              clock=self.clock, sleep=self.clock.sleep)
 
 
@@ -927,3 +927,155 @@ def test_evidence_plan_malformed_stage_never_content_continues(stage):
                                           m.DevelopmentError("http_failed"))
     safe = m.safe_metrics({"stage": stage, "calls": [{"operation": stage, "output_cap": 192, "finish_reason": "eos"}]})
     assert safe["stage"] == stage and safe["calls"][0]["operation"] == stage
+
+
+class AgendaScenario(Scenario):
+    def receipt(self):
+        super().receipt()
+        self.services["runtime"].last_telemetry.update(stage="agenda_assembly", calls=[
+            {"operation": "agenda_extraction", "input_tokens": 77, "output_tokens": 25, "output_cap": 768,
+             "finish_reason": "eos"}, {"review_performed": False, "analysis_mode": "agenda_extraction_v1"}])
+        self.services["generator"].last_call.update(operation="agenda_extraction", returned=True,
+                                                    finish_reason="eos", validation_stage="accepted")
+
+
+def test_analysis_only_two_original_meetings_and_no_qa_or_general_upload(monkeypatch):
+    s = AgendaScenario()
+    s.run(monkeypatch, deadline=350, analysis_only=True)
+    assert s.meetings == 2 and s.answers == 0
+    assert [path.rsplit("/", 1)[-1] for _, path in s.calls] == ["register", "meetings", "meetings"]
+    assert [row["id"] for row in s.report["operations"]] == ["d1", "d2"]
+    assert [doc["id"] for doc in s.report["documents"]] == ["d1", "d2"]
+    assert s.report["setup"]["document_bindings"] == []
+    assert all(row["result"]["meeting"]["ai_analysis"] == {"fixture": True} for row in s.report["operations"])
+    assert all(row["observation"]["runtime"]["calls"][0]["input_tokens"] == 77 for row in s.report["operations"])
+    assert all(row["observation"]["runtime"]["calls"][1]["review_performed"] is False for row in s.report["operations"])
+
+
+def test_analysis_only_poll_deadline_and_source_mismatch_halt(monkeypatch):
+    queued = AgendaScenario(queued=True)
+    with pytest.raises(m.DevelopmentError, match="deadline"):
+        queued.run(monkeypatch, deadline=350, analysis_only=True)
+    assert queued.clock.now == pytest.approx(160) and queued.meetings == 1 and queued.answers == 0
+    assert queued.report["operations"][1]["state"] == "unattempted"
+    changed = AgendaScenario()
+    original = changed.handler
+
+    def handler(request):
+        response = original(request)
+        if request.url.path.endswith("/meetings"):
+            body = response.json()
+            body["document"]["content"] = "changed source"
+            return httpx.Response(response.status_code, json=body)
+        return response
+
+    changed.handler = handler
+    with pytest.raises(m.DevelopmentError, match="document_binding"):
+        changed.run(monkeypatch, deadline=350, analysis_only=True)
+    assert changed.meetings == 1 and changed.answers == 0
+
+
+@pytest.mark.parametrize("failure,continues", [("generation_summary_insufficient", True),
+                                              ("generation_invalid_evidence", False)])
+def test_analysis_only_content_continuation_keeps_technical_errors_fail_stop(monkeypatch, failure, continues):
+    s = AgendaScenario()
+    s.services["runtime"].lock = threading.Lock()
+    original = s.handler
+
+    def handler(request):
+        failing = request.url.path.endswith("/meetings") and s.meetings == 0
+        s.fail = "analysis" if failing else None
+        response = original(request)
+        if failing:
+            s.services["runtime"].last_telemetry.update(status="failed", failure_code=failure)
+        return response
+
+    s.handler = handler
+    if continues:
+        s.run(monkeypatch, deadline=350, analysis_only=True, continue_content_failures=True)
+        assert [row["state"] for row in s.report["operations"]] == ["failed", "complete"]
+        assert s.report["first_failure"] is not None
+    else:
+        with pytest.raises(m.DevelopmentError):
+            s.run(monkeypatch, deadline=350, analysis_only=True, continue_content_failures=True)
+        assert s.meetings == 1 and s.report["operations"][1]["state"] == "unattempted"
+    assert s.answers == 0
+
+
+@pytest.mark.parametrize("options", [
+    {"analysis_only": True, "qa_only": True}, {"analysis_only": True},
+    {"analysis_only": True, "analysis_contract": "agenda_extraction_v1", "qa_contract": "requested_facts_v1"},
+    {"analysis_contract": "agenda_extraction_v1"}, {"analysis_contract": "unknown"}])
+def test_analysis_only_invalid_mode_contracts_reject_before_side_effects(tmp_path, options):
+    with pytest.raises(m.DevelopmentError):
+        m.execute(tmp_path / "missing.jar", "unused", tmp_path / "output", **options)
+    assert not (tmp_path / "output").exists()
+
+
+def test_analysis_only_execute_tighter_envelope_and_actual_contract(tmp_path, monkeypatch):
+    monkeypatch.setattr(m, "ROOT", tmp_path)
+    docs, cases = packet()
+    for doc in docs:
+        doc["raw_sha256"] = hashlib.sha256(doc["content"]).hexdigest()
+    monkeypatch.setattr(m, "load_bundle", lambda _: (docs, cases))
+    ports = iter([11001, 11002, 11003])
+    monkeypatch.setattr(m, "unused_port", lambda: next(ports))
+    jar = tmp_path / "fixture.jar"
+    jar.write_bytes(b"fixture")
+    clock, runtime = Clock(), DevelopmentRuntimeFixture()
+    observed = []
+
+    @contextmanager
+    def launcher(**kwargs):
+        assert kwargs["analysis_contract"] == m.AGENDA_ANALYSIS_CONTRACT
+        kwargs["report"]["analysis_contract"] = {"name": m.AGENDA_ANALYSIS_CONTRACT, "review_performed": False}
+        clock.now = 119
+        yield {"java_url": "http://test", "runtime": runtime,
+               "generator": SimpleNamespace(_client=SimpleNamespace(event_hooks={"response": []}))}
+
+    def run(client, services, documents, cases, report, deadline, save, **kwargs):
+        observed.append((deadline, kwargs["analysis_only"], kwargs["qa_only"]))
+        report["operations"][0]["state"] = "attempted"
+        runtime.callback({"kind": "native_request", "stage": "agenda_extraction", "body": {"messages": []}})
+
+    monkeypatch.setattr(m, "run_operations", run)
+    output = tmp_path / ".local" / "fresh"
+    report = m.execute(jar, hashlib.sha256(b"fixture").hexdigest(), output, analysis_only=True,
+                       analysis_contract=m.AGENDA_ANALYSIS_CONTRACT, launcher=launcher, clock=clock)
+    assert report["status"] == "completed" and observed == [(469, True, False)]
+    assert report["mode"] == "analysis_only" and report["cases"] == []
+    assert len(report["operations"]) == 2 and report["limits"]["answer_requests"] == 0
+    assert report["limits"]["whole_seconds"] == 120 + 30 + 2 * 160 + 5 == 475
+    assert report["limits"]["external_whole_seconds"] == 510
+    assert report["limits"]["native_completion_ceiling"] == 2
+    assert report["limits"]["requested_output_token_ceiling"] == 1536
+    assert [doc["document_id"] for doc in report["sources"]] == ["d1", "d2"]
+    assert (output / "d1.txt").read_bytes() == docs[0]["content"] and not (output / "d3.txt").exists()
+    assert report["analysis_contract"]["review_performed"] is False and runtime.callback is None
+    assert report["development_artifacts"][0]["stage"] == "agenda_extraction"
+    assert m.LIMITS["whole_seconds"] == 715 and m.QA_ONLY_LIMITS["whole_seconds"] == 395
+
+
+def test_analysis_only_cli_is_explicit_and_modes_conflict(monkeypatch):
+    seen = []
+    monkeypatch.setattr(m, "execute", lambda *args, **kwargs: seen.append(kwargs) or {"status": "completed"})
+    args = ["verifier", "--jar", "fixture", "--jar-sha256", "unused", "--output", ".local/fixture"]
+    monkeypatch.setattr(m.sys, "argv", args)
+    m.main()
+    monkeypatch.setattr(m.sys, "argv", [*args, "--analysis-only", "--analysis-contract", "agenda_extraction_v1"])
+    m.main()
+    assert [(row["analysis_only"], row["analysis_contract"]) for row in seen] == [(False, "legacy"), (True, "agenda_extraction_v1")]
+    monkeypatch.setattr(m.sys, "argv", [*args, "--analysis-only", "--qa-only"])
+    with pytest.raises(SystemExit) as error:
+        m.main()
+    assert error.value.code == 2 and len(seen) == 2
+
+
+def test_analysis_only_safe_diagnostics_keep_only_finite_range_fields():
+    value = {"analysis_mode": "agenda_extraction_v1", "review_performed": False,
+             "item_field_policy": "terminal_task_and_enclosing_action_owner_v1",
+             "item_ranges_including_intervening_units": [{"item_index": 0, "first_unit": 2, "last_unit": 4, "text": "private"},
+                                                         {"item_index": True, "first_unit": 1, "last_unit": 3}]}
+    safe = m.safe_metrics(value)
+    assert safe["item_ranges_including_intervening_units"] == [{"item_index": 0, "first_unit": 2, "last_unit": 4}]
+    assert safe["review_performed"] is False and "private" not in json.dumps(safe)

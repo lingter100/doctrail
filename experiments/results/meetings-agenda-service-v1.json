@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "closed_technical_failure_with_semantic_defects",
+  "analysis_contract": "agenda_extraction_v1",
+  "profile": "qwen25-7b-q4km-json-schema-grounded-v1",
+  "final_sha256": "c308d0070190100f9cb6d0eaf0ba3eb18f994743d6fcb1ce4e1084668b3660f7",
+  "independent_diagnosis_sha256": "2af87c7f1940a34f61dd2aa9bb44b67ef8a7603f09f187026321c4410eb50306",
+  "attempted": {"analyses": 1, "second_meeting": "not_attempted", "qa_requests": 0, "native_completions": 1, "classifier_calls": 0, "review_calls": 0},
+  "generation": {"input_tokens": 4969, "output_tokens": 433, "output_cap": 768, "finish_reason": "eos", "seconds": 17.484, "native_protocol_accepted": true},
+  "failure": {
+    "stage": "agenda_assembly",
+    "code": "generation_invalid_evidence",
+    "first_condition": "The first summary range [62,92] exceeds the 46-unit view (IDs 0 through 45). Those numbers exactly match the date unit's character offsets, demonstrating mixed coordinate systems.",
+    "output_cap_binding": false,
+    "summary_claims_in_wrong_language": 6,
+    "summary_claims_total": 6,
+    "additional_findings": [
+      "All six summary claims are Chinese despite the Korean output contract.",
+      "The first three ranges have invalid bounds or order; the last three cross agenda boundaries.",
+      "A claim upgrades needed Observability approval into establishment; actor and coverage errors remain.",
+      "Three action items select headings instead of task children; a funding proposal has an unsupported assignee.",
+      "One exporter assignment is substantively grounded, but the conservative owner grammar does not recognize its instruction wording.",
+      "A metadata tuple supplies a string where a unit ID is required."
+    ]
+  },
+  "measurements": {
+    "startup_seconds": 15.110,
+    "helper_seconds": 33.313,
+    "outer_seconds": 35.140,
+    "natural_cli_exit": 1,
+    "outer_error": null,
+    "peak_owned_rss_bytes": 5192028160,
+    "host_min_available_bytes": 4836528128,
+    "known_owned_processes_and_launcher_absent": true,
+    "cleanup_errors": 0,
+    "unchanged_fixed_references": 87,
+    "output_files_preserved": 7,
+    "output_bytes_preserved": 272582
+  },
+  "interpretation": "One native call produced output but no accepted analysis. Reduced calls are not quality acceptance or a paired latency benchmark. Hiding character offsets from a future model payload may reduce coordinate confusion but cannot fix the observed language and semantic defects by itself.",
+  "review_scope": "Independent AI development diagnosis of new public source and preserved output; no remapping, normalization or regrading. The second meeting and final evaluation remain unmeasured.",
+  "retries": 0,
+  "human_reviews": 0,
+  "service_adopted": false,
+  "paid_api_calls": 0,
+  "public_service_deployed": false
+}

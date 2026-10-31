@@ -19,6 +19,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
+from doctrail.meeting_agenda_runtime import (
+    AGENDA_ANALYSIS_CONTRACT,
+    ANALYSIS_CONTRACTS,
+    LEGACY_ANALYSIS_CONTRACT,
+    AgendaMeetingRuntime,
+    analysis_contract_metadata,
+)
 from doctrail.meeting_structured import (
     CONTEXT_TOKENS,
     LEGACY_QA_CONTRACT,
@@ -53,7 +60,8 @@ QWEN_ASSETS = ROOT / "models/meetings-qwen25-7b-q4km-v2/assets"
 
 @contextmanager
 def start_services(*, jar, database, java_port=8000, worker_port=8092, native_port=8093,
-                   enable_structured=False, report=None, profile=PROFILE, qa_contract=LEGACY_QA_CONTRACT):
+                   enable_structured=False, report=None, profile=PROFILE, qa_contract=LEGACY_QA_CONTRACT,
+                   analysis_contract=LEGACY_ANALYSIS_CONTRACT):
     """One native child, one Java child and one authenticated worker thread."""
     if not enable_structured:
         raise ValueError("structured_candidate_requires_explicit_opt_in")
@@ -61,6 +69,7 @@ def start_services(*, jar, database, java_port=8000, worker_port=8092, native_po
         raise ValueError("unknown_structured_profile")
     if qa_contract not in QA_CONTRACTS:
         raise ValueError("unknown_qa_contract")
+    analysis_info = analysis_contract_metadata(analysis_contract)
     ports = [java_port, worker_port, native_port]
     if len(set(ports)) != 3 or any(type(port) is not int or not 1 <= port <= 65535 for port in ports):
         raise ValueError("invalid_distinct_ports")
@@ -112,7 +121,8 @@ def start_services(*, jar, database, java_port=8000, worker_port=8092, native_po
                 generator.load()
             finally:
                 generator.end_request()
-            runtime = StructuredMeetingRuntime(generator, qa_contract=qa_contract)
+            runtime_class = AgendaMeetingRuntime if analysis_contract == AGENDA_ANALYSIS_CONTRACT else StructuredMeetingRuntime
+            runtime = runtime_class(generator, qa_contract=qa_contract)
             server = make_server(create_app(worker_token, lambda: runtime), worker_port)
             thread = threading.Thread(target=server.run, daemon=True, name="structured-meetings-http")
             thread.start()
@@ -129,7 +139,8 @@ def start_services(*, jar, database, java_port=8000, worker_port=8092, native_po
             java_url = f"http://127.0.0.1:{java_port}"
             wait_ready(java, java_url + "/api/health", timeout=remaining(startup))
             remaining(startup)
-            report.update(profile=profile, model=generator.public_metadata(), qa_contract=dict(runtime.qa_contract_info),
+            report.update(profile=profile, model=runtime.health()["runtime"], qa_contract=dict(runtime.qa_contract_info),
+                          analysis_contract=analysis_info,
                           startup_seconds=time.monotonic() - started,
                           startup_stage="ready",
                           native_settings={"gpu_layers": 99, "cpu_threads": 2, "context_tokens": CONTEXT_TOKENS,
@@ -164,13 +175,15 @@ def main():
     parser.add_argument("--native-port", type=int, default=8093)
     parser.add_argument("--profile", choices=STRUCTURED_PROFILES, default=PROFILE)
     parser.add_argument("--qa-contract", choices=QA_CONTRACTS, default=LEGACY_QA_CONTRACT)
+    parser.add_argument("--analysis-contract", choices=ANALYSIS_CONTRACTS, default=LEGACY_ANALYSIS_CONTRACT)
     args = parser.parse_args()
     if not args.enable_structured:
         parser.error("structured_candidate_requires_explicit_opt_in")
     try:
         with start_services(jar=args.jar, database=args.database, java_port=args.port,
                             worker_port=args.worker_port, native_port=args.native_port, enable_structured=True,
-                            profile=args.profile, qa_contract=args.qa_contract) as services:
+                            profile=args.profile, qa_contract=args.qa_contract,
+                            analysis_contract=args.analysis_contract) as services:
             print("DocTrail opt-in structured candidate ready: " + services["java_url"], flush=True)
             while all(process.poll() is None for process in services["processes"]) and services["thread"].is_alive():
                 time.sleep(0.5)
