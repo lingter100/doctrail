@@ -1,4 +1,4 @@
-"""Explicit local Ministral structured-output candidate; not semantic acceptance.
+"""Explicit pinned local structured-output candidates; not semantic acceptance.
 
 Uses the installed pinned prebuilt server, no downloads/builds. Actual native GPU
 resource admission and experiment observation remain the caller's separate gate.
@@ -24,8 +24,11 @@ from doctrail.meeting_structured import (
     MODEL_ID,
     MODEL_SHA256,
     PROFILE,
+    QWEN_PROFILE,
+    STRUCTURED_PROFILES,
     StructuredGenerator,
     StructuredMeetingRuntime,
+    prepare_qwen_assets,
 )
 from doctrail.meeting_worker import create_app, worker_lease
 from scripts.run_meeting_qa_service_development import (
@@ -42,13 +45,18 @@ from scripts.run_meeting_qa_service_development import (
     wait_ready,
 )
 
+QWEN_MANIFEST = ROOT / "data/models/meetings-generation-qwen25-7b-q4km-v1.json"
+QWEN_ASSETS = ROOT / "models/meetings-qwen25-7b-q4km-v2/assets"
+
 
 @contextmanager
 def start_services(*, jar, database, java_port=8000, worker_port=8092, native_port=8093,
-                   enable_structured=False, report=None):
+                   enable_structured=False, report=None, profile=PROFILE):
     """One native child, one Java child and one authenticated worker thread."""
     if not enable_structured:
         raise ValueError("structured_candidate_requires_explicit_opt_in")
+    if profile not in STRUCTURED_PROFILES:
+        raise ValueError("unknown_structured_profile")
     ports = [java_port, worker_port, native_port]
     if len(set(ports)) != 3 or any(type(port) is not int or not 1 <= port <= 65535 for port in ports):
         raise ValueError("invalid_distinct_ports")
@@ -66,17 +74,24 @@ def start_services(*, jar, database, java_port=8000, worker_port=8092, native_po
         try:
             report["startup_stage"] = "preparation"
             import uvicorn  # noqa: F401 - resolve required HTTP dependency before native dispatch
-            receipt = prepare(MANIFEST, MODEL, allow_download=False)
-            identity = json.loads(MANIFEST.read_text(encoding="utf-8"))
-            if identity["model"] != MODEL_ID or identity["gguf"]["sha256"] != MODEL_SHA256:
-                raise ValueError("structured_model_identity")
+            qwen_assets = None
+            if profile == QWEN_PROFILE:
+                qwen_assets = prepare_qwen_assets(QWEN_MANIFEST, QWEN_ASSETS, MODEL / "runtime", startup)
+                binary, model_path, alias = (qwen_assets[key] for key in ("binary", "entry", "alias"))
+                manifest = QWEN_MANIFEST
+            else:
+                receipt = prepare(MANIFEST, MODEL, allow_download=False)
+                identity = json.loads(MANIFEST.read_text(encoding="utf-8"))
+                if identity["model"] != MODEL_ID or identity["gguf"]["sha256"] != MODEL_SHA256:
+                    raise ValueError("structured_model_identity")
+                binary = (MODEL / receipt["server_path"]).resolve()
+                model_path, alias, manifest = (MODEL / receipt["model"]["path"]).resolve(), MODEL_SHA256, MANIFEST
             remaining(startup)
             native_token, worker_token = secrets.token_urlsafe(48), secrets.token_urlsafe(48)
             native_url, worker_url = f"http://127.0.0.1:{native_port}", f"http://127.0.0.1:{worker_port}"
             env = java_environment(database, worker_url, worker_token)
-            binary = (MODEL / receipt["server_path"]).resolve()
-            argv = [str(binary), "--model", str((MODEL / receipt["model"]["path"]).resolve()),
-                    "--host", "127.0.0.1", "--port", str(native_port), "--alias", MODEL_SHA256,
+            argv = [str(binary), "--model", str(model_path),
+                    "--host", "127.0.0.1", "--port", str(native_port), "--alias", alias,
                     "--ctx-size", str(CONTEXT_TOKENS), "--parallel", "1", "--n-gpu-layers", "99",
                     "--threads", "2", "--threads-batch", "2", "--batch-size", "512", "--ubatch-size", "128",
                     "--fit", "off", "--no-context-shift", "--no-webui", "--log-disable", "--no-warmup"]
@@ -86,7 +101,7 @@ def start_services(*, jar, database, java_port=8000, worker_port=8092, native_po
             processes.append(native)
             report["startup_stage"] = "native_health"
             wait_ready(native, native_url + "/health", headers={"Authorization": "Bearer " + native_token}, timeout=remaining(startup))
-            generator = StructuredGenerator(native_url, native_token, MANIFEST)
+            generator = StructuredGenerator(native_url, native_token, manifest, profile=profile, qwen_assets=qwen_assets)
             report["startup_stage"] = "native_identity"
             generator.begin_request(startup)
             try:
@@ -110,7 +125,7 @@ def start_services(*, jar, database, java_port=8000, worker_port=8092, native_po
             java_url = f"http://127.0.0.1:{java_port}"
             wait_ready(java, java_url + "/api/health", timeout=remaining(startup))
             remaining(startup)
-            report.update(profile=PROFILE, model=generator.public_metadata(), startup_seconds=time.monotonic() - started,
+            report.update(profile=profile, model=generator.public_metadata(), startup_seconds=time.monotonic() - started,
                           startup_stage="ready",
                           native_settings={"gpu_layers": 99, "cpu_threads": 2, "context_tokens": CONTEXT_TOKENS,
                               "parallel": 1, "resource_fit": "not_proven_by_startup", "external_fresh_gate_required": True},
@@ -142,12 +157,14 @@ def main():
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--worker-port", type=int, default=8092)
     parser.add_argument("--native-port", type=int, default=8093)
+    parser.add_argument("--profile", choices=STRUCTURED_PROFILES, default=PROFILE)
     args = parser.parse_args()
     if not args.enable_structured:
         parser.error("structured_candidate_requires_explicit_opt_in")
     try:
         with start_services(jar=args.jar, database=args.database, java_port=args.port,
-                            worker_port=args.worker_port, native_port=args.native_port, enable_structured=True) as services:
+                            worker_port=args.worker_port, native_port=args.native_port, enable_structured=True,
+                            profile=args.profile) as services:
             print("DocTrail opt-in structured candidate ready: " + services["java_url"], flush=True)
             while all(process.poll() is None for process in services["processes"]) and services["thread"].is_alive():
                 time.sleep(0.5)

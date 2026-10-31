@@ -1,4 +1,4 @@
-"""Opt-in Ministral JSON-schema transport and grounded summary assembly.
+"""Explicit pinned local JSON-schema profiles and grounded summary assembly.
 
 Schema compliance and same-model review are not semantic acceptance. Existing
 generic QA citations, native identity verification and classification are reused.
@@ -9,11 +9,15 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
+import stat
 import time
+from pathlib import Path
 
 from doctrail.generation_runtime import GenerationError
 from doctrail.inference import WorkerError
-from doctrail.meeting_contract import strict_json
+from doctrail.meeting_contract import metadata_values, strict_json
+from doctrail.meeting_extraction_coverage import _validate
 from doctrail.meeting_gguf import GREEDY, GGUFGenerator, GGUFResult, _fail, _integer, _same_setting
 from doctrail.meeting_grounded_summary import (
     classified_analysis,
@@ -24,17 +28,135 @@ from doctrail.meeting_grounded_summary import (
     summary_projection,
     validate_summary_analysis,
 )
-from doctrail.meeting_runtime import DEADLINE_SECONDS, MAX_NEW_TOKENS
+from doctrail.meeting_runtime import DEADLINE_SECONDS, MAX_NEW_TOKENS, PROTOCOL
 from doctrail.meeting_runtime import MAX_INPUT_TOKENS as CLASSIFICATION_INPUT_TOKENS
-from doctrail.meeting_worker import MeetingRuntime, classification_messages, partitions
+from doctrail.meeting_worker import LABELS, MeetingRuntime, classification_messages, partitions
 
 PROFILE = "ministral3-json-schema-grounded-v1"
+QWEN_PROFILE = "qwen25-7b-q4km-json-schema-grounded-v1"
+STRUCTURED_PROFILES = (PROFILE, QWEN_PROFILE)
+QWEN_MANIFEST_SHA256 = "6cb34ab578e55c61e20b7c5d49fc7cbb9086fd06cd57359e6b2ccd1ff67f97c7"
 INPUT_TOKENS = 6144
 CONTEXT_TOKENS = 8192
 SUMMARY_TOKENS = 768
 REVIEW_TOKENS = 128
 MODEL_ID = "mistralai/Ministral-3-3B-Instruct-2512"
 MODEL_SHA256 = "e23dd88b0e0951d3f5784d6d4092210cda2b006b251f33b226b283a6c9d1f6bb"
+METADATA_POLICY = "literal_optional_v1"
+
+
+def literal_optional_analysis(units, labels):
+    """Project optional literal metadata; original model labels are not corrected."""
+    _validate(units, labels)
+    fields = {"meeting_title", "meeting_date", "participants", "purpose"}
+    selected = [(index, LABELS[row["label"]]) for index, row in enumerate(labels)
+                if LABELS[row["label"]] in fields]
+    if len(selected) > 30:
+        raise WorkerError("generation_metadata_limit", 422)
+    # The unchanged helper still validates and constructs every nonmetadata item.
+    analysis = classified_analysis(units, [
+        {"label": 0} if LABELS[row["label"]] in fields else dict(row) for row in labels])
+    supported = {field: [] for field in fields}
+    warnings = {}
+    participants_out_of_bounds = False
+    def warn(index, field, reason):
+        warnings[index] = {"field": field, "unit_index": index, "reason": reason}
+    for index, field in selected:
+        quote = units[index]["quote"]
+        eligible = True
+        if field == "meeting_date":
+            eligible = bool(re.fullmatch(r"(?:#{1,6}[ \t]+)?\d{4}-\d{2}-\d{2}", quote)
+                or re.match(r"(?:\*\*)?(?:date|meeting[ \t]+date|날짜|회의[ \t]*날짜)(?:\*\*)?\s*[:：]", quote, re.IGNORECASE))
+        elif field == "participants":
+            # No generic table first-cell inference. Attendance-table provenance
+            # is not established by the classifier label alone.
+            eligible = not quote.startswith("|") and "\n" not in quote
+        elif field == "meeting_title":
+            eligible = "\n" not in quote and "\r" not in quote
+        values = metadata_values(field, quote) if eligible else []
+        if not values:
+            warn(index, field, "unsupported_source_format")
+            continue
+        cap = 2000 if field == "purpose" else 200
+        if (any(not value.strip() or len(value) > cap or value not in quote for value in values)
+                or field == "participants" and len(set(values)) > 100):
+            warn(index, field, "value_out_of_bounds")
+            participants_out_of_bounds |= field == "participants"
+            continue
+        supported[field].append((index, values))
+    for field, candidates in supported.items():
+        distinct = list(dict.fromkeys(value for _, values in candidates for value in values))
+        if field == "participants":
+            if participants_out_of_bounds or len(distinct) > 100:
+                for index, _ in candidates:
+                    warn(index, field, "value_out_of_bounds")
+                continue
+            analysis[field] = distinct
+        elif len(distinct) > 1:
+            for index, _ in candidates:
+                warn(index, field, "ambiguous_source_value")
+            continue
+        elif distinct:
+            analysis[field] = distinct[0]
+        for index, _ in candidates:
+            analysis["metadata_evidence"].append({**units[index], "field": field})
+    analysis["metadata_evidence"].sort(key=lambda row: row["start_offset"])
+    return analysis, {"metadata_policy": METADATA_POLICY,
+                      "metadata_warnings": [warnings[index] for index in sorted(warnings)]}
+
+
+def _asset_stamp(path):
+    path = Path(path)
+    for parent in (path, *path.parents):
+        info = parent.lstat()
+        if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & 1024:
+            _fail("generation_identity_mismatch")
+    info = path.stat()
+    if not stat.S_ISREG(info.st_mode):
+        _fail("generation_identity_mismatch")
+    return (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns)
+
+
+def prepare_qwen_assets(manifest_path, model_root, runtime_root, deadline):
+    """Read-only startup verification of the pinned split model and reused runtime."""
+    def remaining():
+        if time.monotonic() >= deadline:
+            _fail("generation_deadline_exceeded")
+    def verify(path, expected):
+        remaining()
+        before = _asset_stamp(path)
+        if before[2] != expected["size_bytes"]:
+            _fail("generation_identity_mismatch")
+        digest = hashlib.sha256()
+        with path.open("rb") as stream:
+            while chunk := stream.read(8 * 1024**2):
+                remaining()
+                digest.update(chunk)
+        remaining()
+        if digest.hexdigest() != expected["sha256"] or _asset_stamp(path) != before:
+            _fail("generation_identity_mismatch")
+        return path, before
+    manifest_path, model_root, runtime_root = map(Path, (manifest_path, model_root, runtime_root))
+    remaining()
+    if _asset_stamp(manifest_path)[2] > 65536:
+        _fail("generation_identity_mismatch")
+    raw = manifest_path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != QWEN_MANIFEST_SHA256:
+        _fail("generation_identity_mismatch")
+    manifest = json.loads(raw)
+    gguf, runtime = manifest["gguf"], manifest["runtime_reuse"]
+    stamps = [(manifest_path, _asset_stamp(manifest_path))]
+    if {p.name for p in model_root.iterdir()} != {shard["filename"] for shard in gguf["shards"]}:
+        _fail("generation_identity_mismatch")
+    for shard in gguf["shards"]:
+        stamps.append(verify(model_root / shard["filename"], shard))
+    if {p.name for p in runtime_root.iterdir()} != set(runtime["runtime_files"]):
+        _fail("generation_identity_mismatch")
+    for name, expected in runtime["runtime_files"].items():
+        stamps.append(verify(runtime_root / name, expected))
+    return {"manifest": manifest, "manifest_path": manifest_path.resolve(), "stamps": stamps,
+            "entry": (model_root / gguf["entry_filename"]).resolve(),
+            "binary": (runtime_root / "llama-server.exe").resolve(), "alias": gguf["shards"][0]["sha256"]}
 
 
 def claims_schema(status, text_limit):
@@ -58,9 +180,23 @@ REVIEW_SCHEMA = {"type": "object", "additionalProperties": False, "required": ["
         "coverage": {"type": "string", "enum": ["sufficient", "insufficient", "uncertain"]}}}
 
 
+def chat_content_matches(native, content):
+    """Pinned d812 auto-parser framing, not output repair or JSON extraction."""
+    if not isinstance(native, str) or not isinstance(content, str):
+        return False
+    if max(len(native.encode("utf-8")), len(content.encode("utf-8"))) > 65536:
+        return False
+    space = r"[ \t\r\n]*"
+    exact = re.escape(content)
+    return bool(re.fullmatch(space + "(?:" + exact + "|```json" + space + exact + space + "```)" + space, native))
+
+
 class StructuredGenerator(GGUFGenerator):
-    """The installed model's template and verified identity, never a Qwen preamble."""
-    def __init__(self, *args, **kwargs):
+    """The selected artifact's embedded template; no external template override."""
+    def __init__(self, *args, profile=PROFILE, qwen_assets=None, **kwargs):
+        if profile not in STRUCTURED_PROFILES:
+            raise ValueError("unknown_structured_profile")
+        self.profile, self.qwen_assets = profile, qwen_assets
         super().__init__(*args, **kwargs)
         self._prompts = {}
         self.close_error = None
@@ -73,6 +209,15 @@ class StructuredGenerator(GGUFGenerator):
             self.last_call["http_status"] = response.status_code
 
     def load(self):
+        if self.profile == QWEN_PROFILE:
+            try:
+                return self._load_qwen()
+            except GenerationError:
+                self.close()
+                raise
+            except (OSError, KeyError, TypeError, ValueError):
+                self.close()
+                _fail("generation_identity_mismatch")
         super().load()
         if (self._metadata["repo_id"] != MODEL_ID or self._alias != MODEL_SHA256
                 or self._metadata["runtime"]["context_tokens"] != CONTEXT_TOKENS):
@@ -80,11 +225,49 @@ class StructuredGenerator(GGUFGenerator):
             _fail("generation_identity_mismatch")
         return self
 
+    def _load_qwen(self):
+        assets = self.qwen_assets
+        if assets is None or self.manifest_path.resolve() != assets["manifest_path"]:
+            _fail("generation_identity_mismatch")
+        for path, expected in assets["stamps"]:
+            self._remaining()
+            if _asset_stamp(path) != expected:
+                _fail("generation_identity_mismatch")
+        manifest = assets["manifest"]
+        gguf, runtime = manifest["gguf"], manifest["runtime_reuse"]
+        props = self._request("GET", "/props")
+        build = re.fullmatch(r"b([0-9]+)-([a-f0-9]{7,40})", props.get("build_info", ""))
+        settings = props["default_generation_settings"]
+        if (props.get("model_alias") != assets["alias"] or not build
+                or "b" + build[1] != runtime["tag"] or not runtime["commit"].startswith(build[2])
+                or Path(props["model_path"]).resolve() != assets["entry"]
+                or not _same_setting(settings.get("n_ctx"), CONTEXT_TOKENS)
+                or type(props.get("total_slots")) is not int or props["total_slots"] != 1
+                or props.get("is_sleeping") is not False):
+            _fail("generation_identity_mismatch")
+        self._alias = assets["alias"]
+        self._metadata = {"repo_id": manifest["provenance"]["base_model_name"],
+            "revision": "gguf-revision:" + gguf["revision"], "original_revision": None,
+            "conversion_base_commit": None, "experimental": True,
+            "generation_protocol": PROTOCOL, "server_alias_kind": "entry_shard_sha256",
+            "artifact": {"repo_id": gguf["repo_id"], "revision": gguf["revision"],
+                "quantization": gguf["quantization"], "entry_filename": gguf["entry_filename"],
+                "shards": [{key: shard[key] for key in ("filename", "sha256", "size_bytes")} for shard in gguf["shards"]]},
+            "runtime": {"backend": "llama.cpp", "tag": runtime["tag"], "commit": runtime["commit"],
+                "observed_build": props["build_info"], "identity_check": "two_shard_sha256_runtime_files_and_server_props",
+                "context_tokens": settings["n_ctx"], "max_input_tokens": INPUT_TOKENS,
+                "max_new_tokens": MAX_NEW_TOKENS, "deadline_seconds": DEADLINE_SECONDS,
+                "memory_telemetry": "not_measured"}}
+        return self
+
     def public_metadata(self):
         metadata = super().public_metadata()
         metadata["runtime"]["max_input_tokens"] = INPUT_TOKENS
-        metadata["structured_output"] = {"profile": PROFILE, "opt_in": True,
+        metadata["structured_output"] = {"profile": self.profile, "opt_in": True,
+            "metadata_policy": METADATA_POLICY,
             "endpoint": "/v1/chat/completions", "format": "json_schema", "qa_tokens": MAX_NEW_TOKENS,
+            "input_count_endpoint": "/v1/chat/completions/input_tokens",
+            "content_framing": "pinned_d812_json_schema_autoparser",
             "summary_tokens": SUMMARY_TOKENS, "review_tokens": REVIEW_TOKENS,
             "input_tokens": INPUT_TOKENS, "native_context_tokens": CONTEXT_TOKENS,
             "classification_input_tokens": CLASSIFICATION_INPUT_TOKENS, "shared_request_seconds": DEADLINE_SECONDS,
@@ -100,26 +283,36 @@ class StructuredGenerator(GGUFGenerator):
         self._prompts.clear()
         super().end_request()
 
-    def _prepare(self, messages, deadline=None):
+    def _chat_body(self, messages, name, schema, cap):
+        return {**GREEDY, "n_predict": cap, "max_tokens": cap, "model": self._alias,
+                "messages": copy.deepcopy(messages), "cache_prompt": False,
+                "return_tokens": True, "verbose": True,
+                "chat_template_kwargs": {"enable_thinking": False},
+                "response_format": {"type": "json_schema", "json_schema": {
+                    "name": name, "strict": True, "schema": copy.deepcopy(schema)}}}
+
+    def _prepare_chat(self, body, deadline=None):
+        # Classification keeps GGUFGenerator._prepare and its token-array protocol.
+        # Both chat endpoints run the pinned server's OAI parser on this full body.
         self._remaining(deadline)
-        key = json.dumps(messages, ensure_ascii=False, separators=(",", ":"))
-        if key in self._cache:
-            self._cache.move_to_end(key)
-            return self._cache[key]
-        response = self._request("POST", "/apply-template", {"messages": messages,
-            "chat_template_kwargs": {"enable_thinking": False}}, deadline)
+        key = json.dumps(body, ensure_ascii=False, separators=(",", ":"))
+        if key in self._prompts:
+            return self._prompts[key]
+        response = self._request("POST", "/apply-template", body, deadline)
         prompt = response.get("prompt")
         if not isinstance(prompt, str) or not prompt:
             _fail()
-        tokens = self._request("POST", "/tokenize", {"content": prompt, "add_special": False,
-            "parse_special": True, "with_pieces": False}, deadline).get("tokens")
-        if not isinstance(tokens, list) or not tokens or not all(_integer(token) for token in tokens):
+        counted = self._request("POST", "/v1/chat/completions/input_tokens", body, deadline)
+        count = counted.get("input_tokens")
+        if counted.get("object") != "response.input_tokens" or not _integer(count, 1):
             _fail()
-        self._cache[key], self._prompts[key] = tokens, prompt
-        while len(self._cache) > 8:
-            old, _ = self._cache.popitem(last=False)
-            self._prompts.pop(old, None)
-        return tokens
+        self._prompts[key] = prompt, count
+        while len(self._prompts) > 8:
+            self._prompts.pop(next(iter(self._prompts)))
+        return prompt, count
+
+    def count_structured_tokens(self, messages, name, schema, cap):
+        return self._prepare_chat(self._chat_body(messages, name, schema, cap))[1]
 
     def structured(self, messages, deadline, name, schema, cap):
         try:
@@ -134,17 +327,12 @@ class StructuredGenerator(GGUFGenerator):
         self.last_effective_config = None
         self.last_call = {"operation": name, "output_cap": cap, "input_cap": INPUT_TOKENS,
                           "dispatched": False, "returned": False, "accepted": False, "validation_stage": "input"}
-        tokens = self._prepare(messages, deadline)
-        self.last_call["input_tokens"] = len(tokens)
-        if len(tokens) > INPUT_TOKENS:
+        body = self._chat_body(messages, name, schema, cap)
+        prompt, input_tokens = self._prepare_chat(body, deadline)
+        self.last_call["input_tokens"] = input_tokens
+        if input_tokens > INPUT_TOKENS:
             _fail("generation_input_limit")
-        prompt = self._prompts[json.dumps(messages, ensure_ascii=False, separators=(",", ":"))]
         expected = {**GREEDY, "n_predict": cap}
-        body = {**expected, "max_tokens": cap, "model": self._alias, "messages": copy.deepcopy(messages),
-                "cache_prompt": False, "return_tokens": True, "verbose": True,
-                "chat_template_kwargs": {"enable_thinking": False},
-                "response_format": {"type": "json_schema", "json_schema": {
-                    "name": name, "strict": True, "schema": copy.deepcopy(schema)}}}
         self.last_call["dispatched"] = True
         self.last_call["validation_stage"] = "http"
         response = self._request("POST", "/v1/chat/completions", body, deadline)
@@ -174,17 +362,17 @@ class StructuredGenerator(GGUFGenerator):
                     or native.get("truncated") is not False or native.get("stop") is not True
                     or not _integer(count, 1) or count > cap or not isinstance(generated, list)
                     or len(generated) != count or not all(_integer(token) for token in generated)
-                    or not _same_setting(native.get("tokens_evaluated"), len(tokens))
-                    or not _same_setting(timing.get("prompt_n"), len(tokens))
+                    or not _same_setting(native.get("tokens_evaluated"), input_tokens)
+                    or not _same_setting(timing.get("prompt_n"), input_tokens)
                     or not _same_setting(timing.get("predicted_n"), count)
                     or not _same_setting(timing.get("cache_n"), 0)
-                    or not _same_setting(usage.get("prompt_tokens"), len(tokens))
+                    or not _same_setting(usage.get("prompt_tokens"), input_tokens)
                     or not _same_setting(usage.get("completion_tokens"), count)
-                    or not _same_setting(usage.get("total_tokens"), len(tokens) + count)
+                    or not _same_setting(usage.get("total_tokens"), input_tokens + count)
                     or not _same_setting(usage.get("prompt_tokens_details", {}).get("cached_tokens"), 0)
                     or message.get("role") != "assistant" or message.get("tool_calls")
                     or message.get("reasoning_content") not in (None, "")
-                    or not isinstance(message.get("content"), str) or message["content"] != native.get("content")):
+                    or not chat_content_matches(native.get("content"), message.get("content"))):
                 _fail()
             self.last_call["validation_stage"] = "eos"
             if native.get("stop_type") != "eos" or choices[0].get("finish_reason") != "stop":
@@ -196,11 +384,11 @@ class StructuredGenerator(GGUFGenerator):
             _fail()
         self._remaining(deadline)
         schema_sha = hashlib.sha256(json.dumps(schema, sort_keys=True).encode()).hexdigest()
-        self.last_effective_config = {"backend": "llama.cpp", "profile": PROFILE, **expected,
+        self.last_effective_config = {"backend": "llama.cpp", "profile": self.profile, **expected,
             "schema_sha256": schema_sha, "observed_grammar_sha256": hashlib.sha256(settings["grammar"].encode()).hexdigest(),
             "cache_prompt_requested": False, "observed_cache_tokens": 0}
         self.last_call.update(accepted=True, output_tokens=count, finish_reason="eos", validation_stage="accepted")
-        return GGUFResult(message["content"], "eos", len(tokens), count, time.monotonic() - started,
+        return GGUFResult(message["content"], "eos", input_tokens, count, time.monotonic() - started,
                           {"backend": "llama.cpp", "operation": name, "schema_sha256": schema_sha})
 
     def generate_bounded(self, messages, deadline):
@@ -230,12 +418,12 @@ class StructuredMeetingRuntime(MeetingRuntime):
         result = super().health()
         result["limits"]["input_tokens"] = INPUT_TOKENS
         result["limits"]["native_context_tokens"] = CONTEXT_TOKENS
-        result["structured_profile"] = PROFILE
+        result["structured_profile"] = getattr(self.generator, "profile", PROFILE)
         return result
 
     def _generate(self, prompt, deadline, telemetry):
         self.last_stage = "qa"
-        if self.generator.count_tokens(prompt) > INPUT_TOKENS:
+        if self.generator.count_structured_tokens(prompt, "meeting_qa", QA_SCHEMA, MAX_NEW_TOKENS) > INPUT_TOKENS:
             raise WorkerError("generation_input_limit", 422)
         output = self.generator.generate_bounded(prompt, deadline)
         telemetry.append({"operation": "qa", "input_tokens": output.input_tokens,
@@ -298,13 +486,15 @@ class StructuredMeetingRuntime(MeetingRuntime):
             units = [unit for group in partitions(request.content, self.generator) for unit in group]
             source = source_payload(request.title, request.content, units)
             draft_messages = summary_messages(source)
-            if self.generator.count_tokens(draft_messages) > INPUT_TOKENS:
+            if self.generator.count_structured_tokens(draft_messages, "meeting_summary", DRAFT_SCHEMA, SUMMARY_TOKENS) > INPUT_TOKENS:
                 raise WorkerError("generation_input_limit", 422)
             check_time()
             self.last_stage = "classification"
             labels, metrics = self.generator.classify_bounded([classification_messages(unit) for unit in units], deadline)
             telemetry.append(metrics)
-            analysis = classified_analysis(units, labels)
+            self.last_stage = "metadata"
+            analysis, metadata_diagnostics = literal_optional_analysis(units, labels)
+            telemetry.append(metadata_diagnostics)
             check_time()
             self.last_stage = "summary"
             draft = self.generator.summary_bounded(draft_messages, deadline)

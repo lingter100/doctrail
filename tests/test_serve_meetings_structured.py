@@ -60,8 +60,10 @@ def launcher(tmp_path, monkeypatch):
             return self.live
     class Generator:
         close_error = None
-        def __init__(self, *args):
+        def __init__(self, *args, **kwargs):
             calls.append(("generator", args))
+            calls.append(("generator_options", kwargs))
+            self.profile = kwargs["profile"]
         def begin_request(self, deadline):
             calls.append(("begin", deadline))
         def end_request(self):
@@ -163,3 +165,30 @@ def test_other_identity_rejected_before_native_dispatch(launcher):
     with pytest.raises(ValueError, match="identity"), run(launcher):
         pass
     assert not launcher.children
+
+
+
+def test_unknown_profile_rejected_before_owned_side_effects(launcher):
+    with pytest.raises(ValueError, match="unknown_structured_profile"), run(launcher, profile="other"):
+        pass
+    assert not launcher.calls and not launcher.leases and not launcher.children
+
+
+def test_qwen_launches_first_shard_with_explicit_instance_profile(launcher, monkeypatch):
+    f = launcher
+    binding = {"binary": f.jar.parent / "shared-runtime/llama-server.exe",
+               "entry": f.jar.parent / "00001.gguf", "alias": "a" * 64}
+    calls = []
+    def prepare(manifest, assets, runtime, deadline):
+        calls.append((manifest, assets, runtime, deadline))
+        return binding
+    monkeypatch.setattr(m, "prepare_qwen_assets", prepare)
+    with run(f, profile=m.QWEN_PROFILE) as service:
+        argv = f.children[0].argv
+        assert argv[argv.index("--model") + 1] == str(binding["entry"])
+        assert argv[argv.index("--alias") + 1] == binding["alias"]
+        assert service["report"]["profile"] == m.QWEN_PROFILE
+        assert ("generator_options", {"profile": m.QWEN_PROFILE, "qwen_assets": binding}) in f.calls
+        assert not any(call[0] == "prepare" for call in f.calls)
+        assert len(calls) == 1 and len(f.leases) == 3
+    assert all(child.stopped for child in f.children)

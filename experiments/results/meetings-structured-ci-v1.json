@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "head": "8bd4104823c3c32bb267953100260f4b78427354",
+  "status": "CLOSED_PASSED",
+  "runs": [
+    {
+      "event": "push",
+      "run_id": 41197232659,
+      "watch_session": 53891,
+      "watch_exit": 0,
+      "tool_chunk": "3fd944",
+      "jobs": [
+        {
+          "id": 124525755455,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124525755560,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124525755668,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5922,
+        "skipped": 21,
+        "warnings": 2,
+        "seconds": 245.72
+      },
+      "browser": {
+        "passed": 162,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0,
+        "exit": 0
+      }
+    },
+    {
+      "event": "pull_request",
+      "run_id": 41197236479,
+      "watch_session": 21425,
+      "watch_exit": 0,
+      "tool_chunk": "cc592c",
+      "jobs": [
+        {
+          "id": 124525766070,
+          "name": "java-service",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124525766078,
+          "name": "web",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 124525766088,
+          "name": "backend",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "python": {
+        "passed": 5922,
+        "skipped": 21,
+        "warnings": 2,
+        "seconds": 168.11
+      },
+      "browser": {
+        "passed": 162,
+        "failed": 0,
+        "infrastructure_failures": 0,
+        "missing_runs": 0,
+        "exit": 0
+      }
+    }
+  ],
+  "scope": "Exact published structured candidate source CI; no fresh model-quality evidence.",
+  "human_reviews": 0
+}

@@ -2,13 +2,15 @@
 
 기준일: 2026-10-31. 사용자의 **“완성까지해”** 지시로 재개했으며 goal과 자동 후속 실행은 ACTIVE다. **문서·회의 관리와 화면은 연결했지만, 로컬 AI 요약·답변 품질 및 최종 운영 검증이 남아 있다.** 전체 목표는 미완료다.
 
-**현재 단계:** 실제 검색6회는 완료했고 필요한 사실이 빠지는 문제를 확인했다. 원래 청크 ID를 유지하는 인접 문맥 보충과 기존 로컬 실행기의 구조화 요약·답변을 연결한다. 자체 엔진 빌드 실험은 별도로 보존한다. [정확한6ac0e788 push·PR 필수 CI](../experiments/results/meetings-retrieval-entrypoint-ci-v1.json)는 각각 Python5,851개·브라우저162개와 Java/웹·동결 파일 검사가 통과했다. 이후 새 후보 구현의 검증은 별도로 기록한다.
+**새 후보 실측:** 사용자 명의 `8bd4104`의 [필수 CI](../experiments/results/meetings-structured-ci-v1.json)는 모두 통과했지만, [첫 실제 회의 분석](../experiments/results/meetings-structured-service-v1.json)은 실패했다. 모델/Java는 준비됐고 분류46회 다음 요약564토큰을 생성했으나 입력 계산3,068/3,069 불일치로 거절됐다. 뒤의 분석1회·답변2회는 실행하지 않았다. 실패·원본 출력·정리·77고정 참조를 보존했으며 원인을 독립 검토한다. [PR14](https://github.com/lingter100/doctrail/pull/14)는 draft다. CI는 각각 Python5,922개·브라우저162개와 Java/운영/웹/동결 파일 검사가 통과한 결과이며 실제 AI 품질 성공으로 해석하지 않는다.
+
+**현재 단계:** chat 연결·명시적7B 프로필·선택 정보/실패 기록을 보완한 [실제v3](../experiments/results/meetings-structured-service-v3.json)에서 두 분석·두 답변을 모두 시도했다. 첫 요약 자체 검토가 거절됐으며 [독립 내용 검토](../experiments/results/meetings-structured-v3-quality-review-v1.json)는0/4였다. 두 번째 요약은 저장됐지만 필수 근거와 작업이 빠졌고, QA는 언어·질문 전체 충족·보류 조건을 어겼다. 사용자 검수0·기본 모델 미채택이다. 다음은 같은7B/자료/질문의 QA 두 건만 대상으로 요청 조건을 명확히 하는 새 개발 비교다. 요약 안건/담당자와 작업 분류 문제는 별도 미완료로 남긴다.
 
 **보존한 실패:** [5d164212 CI](../experiments/results/meetings-startup-source-ci-v1.json)의 동결 추론 파일 충돌은 원본 복원과 별도 개발 진입점으로 해결했다. [실제 검색v5](../experiments/results/meetings-qa-retrieval-development-v5.json)의 시작 실패는 Windows 사용자 이름 변수를 보존해 해결했다. 과거 기준·검증기·실패 결과를 수정하지 않았다.
 
 ## 현재 검증된 결과
 
-- [새 구조화 후보와 인접 문맥 구현](../experiments/results/meetings-structured-implementation-v1.json): Python 가상49개·Java 집중68개·HTTP 검증기22개와 Ruff, 독립 코드 검토를 마쳤다. 화면 빌드와 새 Java 패키징도 통과했다. 실제 모델 실행·내용 품질은 아직 검증하지 않았으며, 검증된 소스 게시·필수 CI 다음 고정 공개 자료 흐름을 실행한다.
+- [새 구조화 후보와 인접 문맥 구현](../experiments/results/meetings-structured-implementation-v1.json): Python 가상49개·Java 집중68개·HTTP 검증기22개와 Ruff, 독립 코드 검토·화면 빌드·새 Java 패키징을 마쳤다. 게시8bd4104의 필수 CI는 성공했지만 이후 실제 첫 요약은 실패했다. 검사 통과와 모델 내용 품질을 구분한다.
 
 - [실제 검색v6](../experiments/results/meetings-qa-retrieval-development-v6.json): 공개 문서3개·청크13개를 등록하고 두 질문의 BM25/dense/hybrid 총6요청이 모두200으로 완료됐다. 로컬 E5/BGE 준비와 Java 연결, 관련11프로세스 종료를 확인했다. 전체21.781초이며 공유 캐시·다른 프로젝트가 실행 중인 호스트의 관측이다. 생성/분석0회로, 내용 품질을 증명하지 않는다. 독립 AI가 필수 사실의 회수 여부를 검토하며 새 구조화 요약/답변 후보를 구현한다.
 

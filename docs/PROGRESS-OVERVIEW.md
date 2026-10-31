@@ -25,10 +25,11 @@
 
 새 요약 후보는 기존 Java/React와 로컬 모델 실행기를 유지한다. 원문 근거를 가진 자연어 요약·메타데이터·작업 추출을 실제 모델로 연결하고, 누락·제안의 확정 오인·담당자와 날짜·한국어·답변 보류를 확인한다. 기존 [문법 엔진 검증](MEETINGS-LOCAL-SUMMARY-ENGINE-VALIDATION-PLAN.md)은 별도 미완료 실험으로 남는다.
 
-새 공개 개발 자료의 [실제 Java QA](../experiments/results/meetings-qa-service-development-v1.json)는 답변 형식과 내용에서 실패했다. 이후 [키워드·임베딩·혼합 검색6회](../experiments/results/meetings-qa-retrieval-development-v6.json)가 모두 응답했다. 검색 성공과 필요한 출범 규정의 회수는 다르므로 독립 내용 검토를 진행한다. 두 질문은 공개 개발 자료이며 잠긴 최종 평가가 아니다.
+새 공개 개발 자료의 검색과 인접 문맥 보충을 연결하고 chat 입력/출력 검증과7B 프로필을 구현했다. [실제v3](../experiments/results/meetings-structured-service-v3.json)는 두 회의와 두 질문을 모두 시도했지만 [독립 내용 수용은0/4](../experiments/results/meetings-structured-v3-quality-review-v1.json)였다. 기술 연결 문제는 줄었고 이제 언어·질문 전체 충족·답변 보류, 요약 안건·담당자·작업 누락이 확인된 핵심 문제다. 다음은 QA 요청 조건만 바꾸는 두 건의 개발 비교이며 같은 모델/자료/한도를 유지한다. 요약·작업 품질은 별도 남아 있다. 잠긴 최종 평가로 튜닝하지 않는다.
 
 ## 현재 검증 근거
 
+- 게시8bd4104의 [필수 CI](../experiments/results/meetings-structured-ci-v1.json)는 push·PR 모두 성공했다. 각각 Python5,922개·브라우저162개와 Java/운영/웹·동결 파일 검사가 통과했다. 이어진 실제 요약 실패를 성공으로 바꾸지 않는다.
 - 복구6ac0e788의 [필수 CI](../experiments/results/meetings-retrieval-entrypoint-ci-v1.json)는 push·PR 모두 성공했다. 각각 Python5,851개·브라우저162개와 Java/웹·동결 파일 검사가 통과했다. 이전5d164212의 고정 파일 충돌 실패는 그대로 보존한다.
 - 게시 `724eb907`의 [필수 CI](../experiments/results/meetings-ninja-ui-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. 각각 Python5,809개 통과·21개 제외, 브라우저162개 통과·실패0과 Java/운영/프런트 빌드를 확인했다. 실제 모델 의미 품질을 증명하는 검사는 아니다.
 - 분석 실패를 AI 초안/추출0개처럼 표현하는 안내 문제와 한국어 조사 오류를 수정했다. 타입 검사·웹 빌드·Java 패키징과 [집중 브라우저6개](../experiments/results/meetings-ui-analysis-visibility-v1.json),1440/390px 실제 실패 화면 확인을 마쳤다. 이 수정은 게시 후 필수 CI도 통과했으며 사용자 직접 검수로 계산하지 않는다.

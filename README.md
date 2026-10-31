@@ -15,7 +15,7 @@ React·TypeScript·Vite 화면, Java 21·Spring Boot 서비스, Python 데이터
 
 **회의 지능형 관리 1차와 전체 포트폴리오는 미완료다.** 관리·검색 기능의 동작과 AI 내용 품질을 구분한다. 실제 로컬 요약·답변은 연결했지만 정보 누락·근거와 주장의 불일치·잘못된 답변 보류가 남았다. 최근 두 모델의 같은 6문항 개발 비교는 독립 AI 내용 수용이 모두 **0/6**이어서 후보를 채택하지 않았다. 이 작은 비교를 일반 정확도나 사람 평가로 해석하지 않는다.
 
-게시 소스 `6ac0e788`의 push·PR 필수 CI가 모두 통과했다. [회귀 기록](experiments/results/meetings-retrieval-entrypoint-ci-v1.json)은 각각 Python5,851개 통과·21개 제외, 브라우저162개 통과와 Java·운영·동결 파일 검사를 구분한다. 분석 실패 화면은 [집중 브라우저6개와 실제 화면 확인](experiments/results/meetings-ui-analysis-visibility-v1.json)도 마쳤다. 이후 새 후보의 검증은 별도로 기록하며, 합성 모델 응답을 사용한 화면 검사는 실제 AI 품질의 증거가 아니다.
+게시 소스 `8bd4104`의 push·PR [필수 CI](experiments/results/meetings-structured-ci-v1.json)는 각각 Python5,922개 통과·21개 제외, 브라우저162개와 Java·운영·동결 파일 검사가 통과했다. 그 뒤 chat 연결·명시적7B 프로필·선택 정보 처리를 [집중 검사와 독립 코드 검토](experiments/results/meetings-structured-chat-profile-implementation-v1.json) 후 로컬에서 검증했다. 이후 변경의 필수 CI는 해당 커밋 결과로 따로 확인해야 한다. 합성 응답 화면 검사나 CI가 실제 AI 품질의 증거는 아니다.
 
 ## 프로젝트에서 설명할 핵심
 
@@ -23,7 +23,7 @@ React·TypeScript·Vite 화면, Java 21·Spring Boot 서비스, Python 데이터
 - **인용 일치와 답변의 충분성을 따로 평가한다.** [최신 로컬 QA 결과](docs/MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)에 자동 거절·내용 실패·평가 분모를 남겼다. 실패한 출력이나 평가 조건을 성공처럼 고치지 않는다.
 - **문서가 바뀌고 권한이 달라져도 근거를 확인한다.** [회의 편집 검증](docs/MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원 검증](docs/MEETINGS-RESTORE-VERIFICATION.md)은 실제 저장·권한·충돌 처리와 모델 품질을 구분한다.
 
-새 공개 회의 자료를 실제 Java 서비스에 넣은 [개발 QA](experiments/results/meetings-qa-service-development-v1.json)는 답변 형식과 내용에서 실패했다. 이후 [키워드·임베딩·혼합 검색6회](experiments/results/meetings-qa-retrieval-development-v6.json)는 모두 완료했지만, [독립 근거 검토](experiments/results/meetings-qa-retrieval-coverage-v1.json)에서는 첫 질문의 필수6사실 중3/5/3개만 포함했다. 현재 원래 출처를 유지하는 인접 문맥 보충과 [로컬 구조화 요약·답변 후보](docs/MEETINGS-STRUCTURED-SERVICE.md)를 연결한다. 자체 엔진 빌드 실험은 별도로 보존하며 새 후보의 실제 내용 품질은 아직 미검증이다. 이전 실패와 한계는 [실험 기록](experiments/README.md)에 남긴다.
+새 공개 자료의 [키워드·임베딩·혼합 검색6회](experiments/results/meetings-qa-retrieval-development-v6.json)는 모두 완료했지만, [필수6사실의 회수](experiments/results/meetings-qa-retrieval-coverage-v1.json)는3/5/3개였다. 원래 출처를 유지하는 인접 문맥 보충을 연결했다. [구조화 서비스v3](experiments/results/meetings-structured-service-v3.json)는 실제7B로 두 회의 분석과 두 답변을 모두 시도했다. 첫 요약 자체 검토가 거절됐고, 나머지 세 건도 [독립 내용 검토](experiments/results/meetings-structured-v3-quality-review-v1.json)를 통과하지 못해 총0/4였다. [후보 설계](docs/MEETINGS-STRUCTURED-SERVICE.md)와 실패를 보존하며 기본 모델로 채택하지 않았다. 자체 엔진 빌드 실험도 별도로 남아 있다.
 
 기능별 남은 일은 [진행 상황](docs/PROGRESS-OVERVIEW.md), 실행 시연은 [시연 안내](docs/DEMO.md), 확인된 경험의 설명은 [포트폴리오 초안](docs/PORTFOLIO-DRAFT.md)·[면접 초안](docs/INTERVIEW-DRAFT.md)에 있다. 사용자 직접 검수·최종 시연·공개 서비스 배포는 완료하지 않았다. 녹음·STT·외부 회의 연동은 2차 범위다.
 

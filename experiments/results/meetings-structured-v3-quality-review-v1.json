@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "independent_new_open_review_not_accepted",
+  "reviewer": "independent AI, tool-accepted gpt-6-astra xhigh",
+  "human_reviews": 0,
+  "blinded": false,
+  "disclosure": "Reviewer knew prior OPEN failures and had reviewed design/code. This is development diagnosis, not blinded held-out evaluation.",
+  "full_report_sha256": "4d8a8879e0158d061934f3536bed0e62286dedf1911e74b5b88fcba4dfbf5811",
+  "actual_result_sha256": "e6a8ed60de175c715e902b3694a63405b7dd699d9a945d09ba73356d39ef7434",
+  "fixed_cases_sha256": "86826c6f52cb0ac5d63165a9703de05c77136c256b2a92b2979b2c63ec8e24c0",
+  "aggregate": {
+    "independent_accepted": 0,
+    "reviewed": 4,
+    "summary_accepted": 0,
+    "summary_reviewed": 2,
+    "qa_accepted": 0,
+    "qa_reviewed": 2,
+    "correct_required_abstentions": 0,
+    "required_abstentions": 1,
+    "observed_same_model_false_acceptances": 1
+  },
+  "findings": [
+    {"case": "june_summary", "accepted": false, "details": "Three of four claims cross agenda boundaries or misattribute owners/speakers. Essential action coverage is missing. Whole-summary self-review rejection was appropriate, but one unsupported claim was marked supported."},
+    {"case": "november_summary", "accepted": false, "details": "Three of four citation bundles are incomplete and release, roadmap and onboarding actions are omitted. The same-model all-supported/sufficient verdict is a false acceptance."},
+    {"case": "qa_1", "accepted": false, "details": "English output despite Korean query; omits drafting ownership and approved-charter registration although required evidence is present in actual cited chunks. Related amendment rules do not replace the requested formation procedure."},
+    {"case": "qa_2", "accepted": false, "details": "Returns a supported generic membership rule instead of abstaining from the unavailable confirmed scope/roster. No roster was fabricated, but the response fails the original answerability criterion."}
+  ],
+  "provenance_checks": {"valid_summary_reference_occurrences": 32, "exact_qa_citation_occurrences": 11, "proves_semantic_correctness": false},
+  "metadata_and_items": {
+    "warnings": [5, 7],
+    "november_items": 33,
+    "november_action_items": 3,
+    "all_assignees_null": true,
+    "all_due_dates_null": true,
+    "limitations": "Literal projection avoids invented metadata but misses dates/attendance outside its grammar. Action/proposal classification and owner extraction still lose agenda context. No fresh browser inspection."
+  },
+  "next_hypothesis": "QA-only profile-local request contract: explicit target language, every requested fact and full abstention when established outcomes are unavailable. Same model/schema/caps/public questions and source order; no OPEN-specific answer hints or summary reruns.",
+  "output_caps_binding": false,
+  "model_executions_by_reviewer": 0,
+  "private_closed_qa_read": false,
+  "service_adopted": false
+}

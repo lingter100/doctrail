@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "experiment": "meeting_structured_service_v2_deterministic_diagnosis",
+  "status": "reproduced_saved_output_assembly_failure",
+  "development_only": true,
+  "human_reviews": 0,
+  "reviewer": "AI, tool-accepted gpt-6-astra xhigh",
+  "report_sha256": "a8b46ec2e2871fc643fef75962e70282d597bbb15ad7dc8031d8797d95304b58",
+  "method": "Replay only the deterministic assembly function using 46 saved public source units and already-generated digit labels. No model or tokenizer call.",
+  "reproduced_code": "generation_unsupported_field",
+  "cause": "Unit 9, a previous May 14 meeting link, was classified as this meeting title. Legacy arbitrary-line title projection had 222 characters and exceeded its 200-character guard.",
+  "observed_original_error_code": "not_recorded; deterministic reproduction is separate evidence",
+  "other_observed_classification_defects": [
+    "A bare vote heading was classified as unresolved; an actual scope uncertainty was skipped.",
+    "An explicit Kris action was classified as a proposal.",
+    "Present, absent and guest distinctions were conflated."
+  ],
+  "summary_quality_inference": false,
+  "new_prospective_policy": "For optional metadata, require explicit source grammar and unique supported scalar values. Unsupported or conflicting values remain null with bounded safe warnings. Preserve the original full source, non-metadata items and frozen strict helpers.",
+  "new_collection_policy": "Explicit opt-in may continue to independent operations after positively terminal content-validation failure only. Failed operations remain failed; no retries or larger request/time budgets. Unknown, inflight, transport, protocol-integrity, resource and cleanup errors still stop collection.",
+  "old_run_repeated": false,
+  "source_modified_by_reviewer": false,
+  "model_executions": 0
+}

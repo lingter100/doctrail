@@ -35,6 +35,8 @@ class Native:
             return httpx.Response(200, json={"prompt": prompt})
         if request.url.path == "/tokenize":
             return httpx.Response(200, json={"tokens": [10] * self.inputs})
+        if request.url.path == "/v1/chat/completions/input_tokens":
+            return httpx.Response(200, json={"object": "response.input_tokens", "input_tokens": self.inputs})
         assert request.url.path == "/v1/chat/completions"
         assert "generation_prompt" not in body and "reasoning_budget_tokens" not in body
         assert body["response_format"]["type"] == "json_schema"
@@ -116,7 +118,7 @@ def test_structured_rejects_malformed_native_evidence(native, kind):
         elif kind == "reasoning":
             response["choices"][0]["message"]["reasoning_content"] = "hidden reasoning"
         elif kind == "content_split":
-            n["content"] = "```json\n" + native.text + "\n```"
+            n["content"] = "untrusted prose\n```json\n" + native.text + "\n```"
         else:
             response["choices"][0]["message"]["tool_calls"] = [{"name": "unexpected"}]
         return response
@@ -209,6 +211,8 @@ class FakeGenerator:
         if self.fail_end:
             raise RuntimeError("private cleanup failure")
     def count_tokens(self, messages):
+        return self.size
+    def count_structured_tokens(self, messages, name, schema, cap):
         return self.size
     def classify_bounded(self, prompts, deadline):
         self.deadlines.append(deadline)
@@ -322,3 +326,282 @@ def test_empty_qa_uses_same_lock_and_fresh_zero_generation_metrics():
     result = runtime.answer(AnswerRequest(schema_version=1, query="근거가 있나요?", contexts=[]))
     assert result["status"] == "abstained" and result["telemetry"]["calls"] == []
     assert "qa" not in generator.calls and not runtime.lock.locked()
+
+
+@pytest.mark.parametrize("frame", ["{}", " \n{}\t", "```json\n{}\n```", " \n```json\t{}\r\n```\t"])
+def test_pinned_chat_framing_preserves_message_content(native, frame):
+    def change(value):
+        value["__verbose"]["content"] = frame.format(native.text)
+        return value
+    native.change = change
+    messages = [{"role": "user", "content": "synthetic"}]
+    result = native.generator.summary_bounded(messages, time.monotonic() + 10)
+    assert result.text == native.text
+    bodies = [body for path, body in native.requests]
+    assert [path for path, _ in native.requests] == [
+        "/apply-template", "/v1/chat/completions/input_tokens", "/v1/chat/completions"]
+    assert bodies[0] == bodies[1] == bodies[2]
+
+
+@pytest.mark.parametrize("raw", ["prose{}", "{}tail", "```JSON\n{}\n```", "```\n{}\n```",
+                                 "```json\n{}\n```tail", "```json\n{}\n```\n```", "\u00a0{}"])
+def test_unknown_chat_framing_rejected_without_repair(native, raw):
+    native.change = lambda value: {**value, "__verbose": {
+        **value["__verbose"], "content": raw.format(native.text)}}
+    with pytest.raises(GenerationError):
+        native.generator.summary_bounded([], time.monotonic() + 10)
+    assert native.generator.last_call["accepted"] is False
+
+
+@pytest.mark.parametrize("value", [True, 0, -1, 3.0, "30", None])
+def test_chat_count_requires_positive_integer_before_generation(native, value):
+    original = native.generator._request
+    def request(method, path, body=None, deadline=None):
+        if path.endswith("/input_tokens"):
+            return {"object": "response.input_tokens", "input_tokens": value}
+        return original(method, path, body, deadline)
+    native.generator._request = request
+    with pytest.raises(GenerationError):
+        native.generator.summary_bounded([], time.monotonic() + 10)
+    assert not any(path == "/v1/chat/completions" for path, _ in native.requests)
+
+
+def test_full_schema_body_is_cache_key_and_chat_count_has_no_plus_one_tolerance(native):
+    g = native.generator
+    g.begin_request(time.monotonic() + 10)
+    messages = [{"role": "user", "content": "same input"}]
+    assert g.count_structured_tokens(messages, "meeting_summary", m.DRAFT_SCHEMA, 768) == 30
+    g.summary_bounded(messages, g._deadline)
+    assert len([path for path, _ in native.requests if path.endswith("input_tokens")]) == 1
+    g.review_bounded(messages, g._deadline)
+    assert len([path for path, _ in native.requests if path.endswith("input_tokens")]) == 2
+    def changed(value):
+        value["__verbose"]["tokens_evaluated"] += 1
+        return value
+    native.change = changed
+    with pytest.raises(GenerationError):
+        g.summary_bounded(messages, g._deadline)
+    g.end_request()
+    assert not g._prompts and not g._cache
+
+
+def test_classification_retains_original_token_array_and_tokenizer(native):
+    g = native.generator
+    calls = []
+    def request(method, path, body=None, deadline=None):
+        calls.append((path, body))
+        if path == "/apply-template":
+            return {"prompt": "synthetic classifier"}
+        if path == "/tokenize":
+            assert body == {"content": "synthetic classifier", "add_special": False,
+                            "parse_special": True, "with_pieces": False}
+            return {"tokens": [11, 12]}
+        assert path == "/completion" and body["prompt"] == [11, 12]
+        return {"model": m.MODEL_SHA256, "truncated": False, "stop": True,
+                "generation_settings": {key: body[key] for key in (*m.GREEDY, "n_predict", "grammar")},
+                "timings": {"cache_n": 0, "prompt_n": 2}, "tokens_evaluated": 2,
+                "tokens_predicted": 2, "content": "1", "stop_type": "eos"}
+    g._request = request
+    assert type(g)._prepare is GGUFGenerator._prepare
+    labels, receipt = g.classify_bounded([[{"role": "user", "content": "fixture"}]], time.monotonic() + 10)
+    assert labels == [{"label": 1}] and receipt["completion_calls"] == 1
+    assert [path for path, _ in calls] == ["/apply-template", "/tokenize", "/completion"]
+
+
+@pytest.fixture
+def qwen_files(tmp_path, monkeypatch):
+    import hashlib
+    model, runtime = tmp_path / "assets", tmp_path / "runtime"
+    model.mkdir()
+    runtime.mkdir()
+    def artifact(folder, name, content):
+        (folder / name).write_bytes(content)
+        return {"filename": name, "size_bytes": len(content), "sha256": hashlib.sha256(content).hexdigest()}
+    shards = [artifact(model, "00001.gguf", b"first shard fixture"),
+              artifact(model, "00002.gguf", b"second shard fixture")]
+    executable = artifact(runtime, "llama-server.exe", b"never executable")
+    manifest = {"gguf": {"repo_id": "Qwen/Qwen2.5-7B-Instruct-GGUF", "revision": "b" * 40,
+        "quantization": "Q4_K_M", "entry_filename": shards[0]["filename"], "shards": shards},
+        "runtime_reuse": {"tag": "b11429", "commit": "d81235049384534c167caea52b85a694f6103d14",
+                          "runtime_files": {"llama-server.exe": executable}},
+        "provenance": {"base_model_name": "Qwen/Qwen2.5-7B-Instruct", "conversion_base_commit": None}}
+    path = tmp_path / "fixture-profile.json"
+    raw = json.dumps(manifest).encode()
+    path.write_bytes(raw)
+    monkeypatch.setattr(m, "QWEN_MANIFEST_SHA256", hashlib.sha256(raw).hexdigest())
+    return SimpleNamespace(path=path, model=model, runtime=runtime, manifest=manifest)
+
+
+def qwen_generator(f):
+    assets = m.prepare_qwen_assets(f.path, f.model, f.runtime, time.monotonic() + 10)
+    props = {"model_alias": assets["alias"], "model_path": str(assets["entry"]),
+             "build_info": "b11429-d81235049", "default_generation_settings": {"n_ctx": 8192},
+             "total_slots": 1, "is_sleeping": False}
+    g = m.StructuredGenerator("http://127.0.0.1:19003", "x" * 48, f.path, profile=m.QWEN_PROFILE,
+                             qwen_assets=assets, transport=httpx.MockTransport(lambda request: httpx.Response(200, json=props)))
+    return g, props
+
+
+def test_qwen_identity_instance_bound_two_shards_unknown_conversion(qwen_files, native):
+    g, _ = qwen_generator(qwen_files)
+    try:
+        g.load()
+        metadata = g.public_metadata()
+        assert metadata["repo_id"] == "Qwen/Qwen2.5-7B-Instruct"
+        assert metadata["original_revision"] is None and metadata["conversion_base_commit"] is None
+        assert len(metadata["artifact"]["shards"]) == 2
+        assert metadata["server_alias_kind"] == "entry_shard_sha256"
+        assert metadata["structured_output"]["profile"] == m.QWEN_PROFILE
+        assert m.StructuredMeetingRuntime(g).health()["structured_profile"] == m.QWEN_PROFILE
+        assert native.generator.profile == m.PROFILE
+    finally:
+        g.close()
+
+
+@pytest.mark.parametrize("kind", ["manifest", "first", "second", "runtime", "extra_runtime", "extra_shard"])
+def test_qwen_prestart_rejects_changed_artifacts(qwen_files, kind):
+    f = qwen_files
+    path = {"manifest": f.path, "first": f.model / "00001.gguf", "second": f.model / "00002.gguf",
+            "runtime": f.runtime / "llama-server.exe", "extra_runtime": f.runtime / "unexpected.dll",
+            "extra_shard": f.model / "extra.gguf"}[kind]
+    path.write_bytes(b"changed")
+    with pytest.raises(GenerationError, match="identity"):
+        m.prepare_qwen_assets(f.path, f.model, f.runtime, time.monotonic() + 10)
+
+
+@pytest.mark.parametrize("field,value", [("model_alias", "wrong"), ("build_info", "b1-d81235049"),
+    ("model_path", "wrong-shard.gguf"), ("total_slots", True), ("is_sleeping", True),
+    ("default_generation_settings", {"n_ctx": 6144})])
+def test_qwen_native_props_reject_wrong_identity(qwen_files, field, value):
+    g, props = qwen_generator(qwen_files)
+    props[field] = value
+    with pytest.raises(GenerationError, match="identity"):
+        g.load()
+    assert g._closed
+
+
+def test_qwen_changed_after_prestart_verification_rejected(qwen_files):
+    g, _ = qwen_generator(qwen_files)
+    (qwen_files.model / "00002.gguf").write_bytes(b"changed after verification")
+    with pytest.raises(GenerationError, match="identity"):
+        g.load()
+
+
+def test_qwen_startup_deadline_checked_before_read(qwen_files):
+    with pytest.raises(GenerationError, match="deadline"):
+        m.prepare_qwen_assets(qwen_files.path, qwen_files.model, qwen_files.runtime, time.monotonic() - 1)
+
+
+def test_unknown_structured_profile_rejected_before_client_creation():
+    with pytest.raises(ValueError, match="unknown_structured_profile"):
+        m.StructuredGenerator("not-a-url", "invalid", "missing", profile="other")
+
+
+
+def metadata_fixture(rows):
+    source = "\n".join(text for text, _ in rows)
+    units, labels, offset = [], [], 0
+    for text, label in rows:
+        units.append({"quote": text, "start_offset": offset, "end_offset": offset + len(text)})
+        labels.append({"label": label})
+        offset += len(text) + 1
+    return source, units, labels
+
+
+def test_optional_metadata_rejects_previous_minutes_link_without_source_or_label_change():
+    previous_minutes = "[Previous May 14 minutes](https://example.invalid/" + "long-path/" * 25 + "2025-05-14.md)"
+    source, units, labels = metadata_fixture([(previous_minutes, 1), ("결정: 검토를 계속한다.", 7)])
+    before = copy.deepcopy((units, labels))
+    with pytest.raises(WorkerError, match="generation_unsupported_field"):
+        m.classified_analysis(units, labels)
+    analysis, receipt = m.literal_optional_analysis(units, labels)
+    assert analysis["meeting_title"] is None and analysis["metadata_evidence"] == []
+    assert analysis["items"][0]["quote"] == units[1]["quote"]
+    assert receipt == {"metadata_policy": "literal_optional_v1", "metadata_warnings": [
+        {"field": "meeting_title", "unit_index": 0, "reason": "unsupported_source_format"}]}
+    assert (units, labels) == before and source[units[0]["start_offset"]:units[0]["end_offset"]] == previous_minutes
+    assert previous_minutes not in json.dumps(receipt)
+
+
+@pytest.mark.parametrize("rows,expected,warnings", [
+    ([("회의 제목: 정책 검토", 1), ("unlabelled link", 1)], "정책 검토", [1]),
+    ([("# Current Meeting", 1), ("제목: Other Meeting", 1)], None, [0, 1]),
+    ([("제목: Same", 1), ("# Same", 1)], "Same", []),
+    ([("제목: " + "x" * 201, 1)], None, [0]),
+])
+def test_optional_scalar_unique_supported_or_conflict_null(rows, expected, warnings):
+    _, units, labels = metadata_fixture(rows)
+    analysis, receipt = m.literal_optional_analysis(units, labels)
+    assert analysis["meeting_title"] == expected
+    assert [row["unit_index"] for row in receipt["metadata_warnings"]] == warnings
+    if expected is None:
+        assert analysis["metadata_evidence"] == []
+
+
+@pytest.mark.parametrize("text,expected", [("2026-10-31", "2026-10-31"),
+    ("## 2026-10-31", "2026-10-31"), ("Meeting date: 2026-10-31", "2026-10-31"),
+    ("회의 날짜: 2026-10-31", "2026-10-31"), ("[Previous](2026-10-31.md)", None),
+    ("The proposal expires 2026-10-31.", None), ("Date: 2026-02-30", None)])
+def test_optional_date_requires_explicit_date_grammar(text, expected):
+    _, units, labels = metadata_fixture([(text, 2)])
+    analysis, receipt = m.literal_optional_analysis(units, labels)
+    assert analysis["meeting_date"] == expected
+    assert bool(receipt["metadata_warnings"]) == (expected is None)
+
+
+def test_optional_participants_explicit_lists_union_but_no_generic_table_or_category():
+    _, units, labels = metadata_fixture([("Participants: Alice, Bob", 3), ("참석자: Bob、Carol", 3),
+        ("| Present |", 3), ("| Absent |", 3), ("Guests", 3), ("| Alice |", 3)])
+    analysis, receipt = m.literal_optional_analysis(units, labels)
+    assert analysis["participants"] == ["Alice", "Bob", "Carol"]
+    assert [x["start_offset"] for x in analysis["metadata_evidence"]] == [units[0]["start_offset"], units[1]["start_offset"]]
+    assert [row["unit_index"] for row in receipt["metadata_warnings"]] == [2, 3, 4, 5]
+
+
+def test_optional_participants_over_cap_is_empty_not_truncated():
+    names = ["person" + str(i) for i in range(101)]
+    _, units, labels = metadata_fixture([("Participants: " + ",".join(names), 3), ("Participants: Valid", 3)])
+    analysis, receipt = m.literal_optional_analysis(units, labels)
+    assert analysis["participants"] == [] and analysis["metadata_evidence"] == []
+    assert len(receipt["metadata_warnings"]) == 2
+    assert {row["reason"] for row in receipt["metadata_warnings"]} == {"value_out_of_bounds"}
+
+
+def test_optional_purpose_conflict_and_no_selected_metadata():
+    _, units, labels = metadata_fixture([("Purpose: Assess policy", 4), ("목적: Review budget", 4)])
+    analysis, receipt = m.literal_optional_analysis(units, labels)
+    assert analysis["purpose"] is None and len(receipt["metadata_warnings"]) == 2
+    analysis, receipt = m.literal_optional_analysis(units, [{"label": 5}, {"label": 5}])
+    assert len(analysis["items"]) == 2 and receipt["metadata_warnings"] == []
+
+
+@pytest.mark.parametrize("kind", ["label", "span", "metadata_limit"])
+def test_optional_metadata_does_not_bypass_original_contract(kind):
+    _, units, labels = metadata_fixture([("Title: Valid", 1)])
+    if kind == "label":
+        labels[0]["label"] = True
+    elif kind == "span":
+        units[0]["end_offset"] += 1
+    else:
+        _, units, labels = metadata_fixture([("Title: Valid", 1)] * 31)
+    with pytest.raises(WorkerError):
+        m.literal_optional_analysis(units, labels)
+
+
+def test_optional_metadata_stage_failure_and_later_full_source_summary(monkeypatch):
+    generator = FakeGenerator()
+    runtime = m.StructuredMeetingRuntime(generator)
+    actual = m.literal_optional_analysis
+    def fail(units, labels):
+        raise WorkerError("generation_invalid_evidence", 502)
+    monkeypatch.setattr(m, "literal_optional_analysis", fail)
+    with pytest.raises(WorkerError, match="invalid_evidence"):
+        runtime.analyze(analysis_request())
+    assert runtime.last_telemetry["stage"] == "metadata" and "summary" not in generator.calls
+    monkeypatch.setattr(m, "literal_optional_analysis", actual)
+    generator.calls.clear()
+    result = runtime.analyze(analysis_request())
+    assert result["analysis"]["summary"] == "현행 정책을 유지하기로 결정했다."
+    receipt = next(row for row in result["telemetry"]["calls"] if "metadata_policy" in row)
+    assert receipt == {"metadata_policy": "literal_optional_v1", "metadata_warnings": []}
+    assert generator.calls == ["classify", "summary", "review", "end"]

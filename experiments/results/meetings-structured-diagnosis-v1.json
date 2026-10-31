@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment": "meeting_structured_service_v1_diagnosis",
+  "status": "protocol_rejected_and_semantically_unacceptable_draft",
+  "development_only": true,
+  "human_reviews": 0,
+  "independent_review": "AI, tool-accepted gpt-6-astra xhigh",
+  "review_receipt_sha256": "7a4251ed50b7687ba7cc47299b4e14c6350732f7795bbab50d924fa0c315fd59",
+  "actual_result_sha256": "b5565bcef8ba8e63505009c81458e2a72b8fba6b1dce521afa92059f8f6bf9dc",
+  "confirmed_protocol_findings": [
+    "Local preflight tokenized a rendered prompt with add_special=false; the pinned server string chat path uses true. Exact extra-token identity was not captured.",
+    "Pinned schema parser supports fenced or bare JSON and returns inner content. Actual native/message strings differ by exactly a 12-byte JSON fence."
+  ],
+  "pinned_primary_sources": [
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/tools/server/server-common.cpp#L957",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/tools/server/server-context.cpp#L4222",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/tools/server/server-context.cpp#L5417",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049384534c167caea52b85a694f6103d14/common/chat-auto-parser-generator.cpp#L105"
+  ],
+  "semantic_findings": {
+    "scope": "First OPEN June meeting only; 5 claim bundles inspected against full source and cited units",
+    "acceptable_claim_bundles": 0,
+    "defects": [
+      "Plans or need for a group were promoted to confirmed decisions or creation approval.",
+      "Action ownership changed, photos already available were described as future, and unsupported details were added.",
+      "Required supporting units and documentation funding follow-up were omitted despite full-source input.",
+      "One claim ended mid-sentence at 240 characters; Korean wording included mistranslation and mixed-script fragments."
+    ],
+    "same_model_review": "not_attempted",
+    "population_accuracy_claim": false
+  },
+  "correction": "Same full body for template, native chat input-count endpoint and generation; exact counts/caps and strict supported framing relationship; unchanged chat JSON content parsed without repair.",
+  "next_hypothesis": "Explicit cached Qwen2.5-7B Q4_K_M development profile with unchanged public data, questions, prompt, output limits and acceptance criteria. Capacity improvement is unproven.",
+  "old_run_repeated": false,
+  "private_closed_qa_read": false,
+  "service_adopted": false
+}

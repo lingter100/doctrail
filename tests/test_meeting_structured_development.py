@@ -83,11 +83,12 @@ class Scenario:
                               json={"document": document(identity), "meeting": {
                                   "analysis_status": state, "source_revision": 1, "ai_analysis": {"fixture": True}}})
 
-    def run(self, monkeypatch, deadline=590):
+    def run(self, monkeypatch, deadline=590, *, continue_content_failures=False):
         monkeypatch.setattr(m, "validate_summary_analysis", lambda analysis, content: None)
         with httpx.Client(transport=httpx.MockTransport(self.handler), base_url="http://test") as client:
             m.run_operations(client, self.services, *packet(), self.report, deadline,
                              lambda: self.saves.append(copy.deepcopy(dict(self.report))),
+                             continue_content_failures=continue_content_failures,
                              clock=self.clock, sleep=self.clock.sleep)
 
 
@@ -385,3 +386,218 @@ def test_capture_restore_during_finish_prevents_late_publication_and_write(tmp_p
     assert capture.pending == []
     assert report["native_output_artifacts"][0]["state"] == "unavailable"
     assert not (tmp_path / "native-outputs").exists()
+
+
+@pytest.mark.parametrize("profile", m.STRUCTURED_PROFILES)
+def test_profile_passed_to_service_and_actual_report_retained(tmp_path, monkeypatch, profile):
+    monkeypatch.setattr(m, "ROOT", tmp_path)
+    docs, cases = packet()
+    for doc in docs:
+        doc["raw_sha256"] = hashlib.sha256(doc["content"]).hexdigest()
+    monkeypatch.setattr(m, "load_bundle", lambda _: (docs, cases))
+    monkeypatch.setattr(m, "run_operations", lambda *args, **kwargs: None)
+    ports = iter([11001, 11002, 11003])
+    monkeypatch.setattr(m, "unused_port", lambda: next(ports))
+    jar = tmp_path / "synthetic.jar"
+    jar.write_bytes(b"fixture")
+    observed = []
+
+    @contextmanager
+    def launcher(**kwargs):
+        observed.append(kwargs["profile"])
+        kwargs["report"].update(profile=profile, model={"profile": profile, "fixture": True})
+        yield {"java_url": "http://test", "generator": SimpleNamespace(_client=SimpleNamespace(event_hooks={"response": []}))}
+
+    report = m.execute(jar, hashlib.sha256(b"fixture").hexdigest(), tmp_path / ".local" / "fresh",
+                       profile=profile, launcher=launcher)
+    assert observed == [profile]
+    assert report["status"] == "completed"
+    assert report["requested_profile"] == report["profile"] == report["model"]["profile"] == profile
+
+
+def test_unknown_profile_rejected_before_input_or_service_side_effects(tmp_path):
+    with pytest.raises(m.DevelopmentError, match="unknown_profile"):
+        m.execute(tmp_path / "nonexistent.jar", "unused", tmp_path / "output", profile="unsupported")
+    assert not (tmp_path / "output").exists()
+
+
+@pytest.mark.parametrize("selected", [None, m.STRUCTURED_PROFILES[1]])
+def test_profile_cli_default_and_explicit_selection(monkeypatch, selected):
+    seen = []
+    monkeypatch.setattr(m, "execute", lambda *args, **kwargs: seen.append(kwargs["profile"]) or {"status": "completed"})
+    argv = ["verifier", "--jar", "fixture.jar", "--jar-sha256", "unused", "--output", ".local/fixture"]
+    if selected is not None:
+        argv.extend(["--profile", selected])
+    monkeypatch.setattr(m.sys, "argv", argv)
+    m.main()
+    assert seen == [selected or m.PROFILE]
+
+
+def test_safe_error_observation_preserves_known_nested_codes():
+    receipt = {"status": "failed", "failure_code": "generation_conflicting_metadata",
+               "last_structured_call": {"error_code": "generation_effective_config_mismatch"},
+               "calls": [{"error_code": "generation_invalid_evidence"}]}
+    assert m.safe_metrics(receipt) == receipt
+
+
+def test_safe_error_observation_drops_unknown_and_source_looking_values():
+    for value in ("unknown_error", "generation_private_meeting_text", "C:\\private\\source.txt",
+                  "token=secret", "회의 원문", {"message": "private"}, None):
+        assert m.safe_metrics({"failure_code": value, "error_code": value,
+                               "last_structured_call": {"error_code": value}}) == {"last_structured_call": {}}
+
+
+def test_safe_error_observation_only_attributes_fresh_terminal_failure():
+    services = {"runtime": SimpleNamespace(last_telemetry={}), "generator": SimpleNamespace(last_call=None)}
+    before = m.snapshot(services)
+    services["runtime"].last_telemetry = {"status": "failed", "stage": "metadata",
+                                          "failure_code": "generation_conflicting_metadata"}
+    assert m.observe(services, before)["runtime"]["failure_code"] == "generation_conflicting_metadata"
+    assert m.observe(services, before)["runtime"]["stage"] == "metadata"
+    assert m.observe(services, m.snapshot(services))["runtime"] is None
+
+
+class ContentFailureScenario(Scenario):
+    def __init__(self, failure_kind="analysis"):
+        super().__init__()
+        self.failure_kind = failure_kind
+        self.services["runtime"].lock = threading.Lock()
+
+    def receipt(self):
+        super().receipt()
+        self.services["generator"].last_call.update(returned=True, finish_reason="eos", validation_stage="accepted")
+
+    def handler(self, request):
+        failing = (self.failure_kind == "analysis" and request.url.path.endswith("/meetings") and self.meetings == 0
+                   or self.failure_kind == "answer" and request.url.path.endswith("/answer") and self.answers == 0)
+        self.fail = self.failure_kind if failing else None
+        response = super().handler(request)
+        if failing:
+            self.receipt()
+            self.services["runtime"].last_telemetry.update(status="failed", stage="review",
+                failure_code="generation_summary_review_rejected")
+        return response
+
+
+def test_content_continuation_default_remains_fail_fast(monkeypatch):
+    s = ContentFailureScenario()
+    with pytest.raises(m.DevelopmentError, match="analysis_failed"):
+        s.run(monkeypatch)
+    assert s.meetings == 1 and s.answers == 0
+    assert [row["state"] for row in s.report["operations"]][1:] == ["unattempted"] * 3
+
+
+@pytest.mark.parametrize("kind", ["analysis", "answer"])
+def test_content_continuation_optin_preserves_failure_without_retry(monkeypatch, kind):
+    s = ContentFailureScenario(kind)
+    s.run(monkeypatch, continue_content_failures=True)
+    assert s.meetings == s.answers == 2
+    assert len(s.report["documents"]) == 3
+    failed = [row for row in s.report["operations"] if row["state"] == "failed"]
+    assert len(failed) == 1 and failed[0]["kind"] == kind
+    assert failed[0]["observation"]["runtime"]["failure_code"] == "generation_summary_review_rejected"
+    assert s.report["first_failure"] is not None
+
+
+@pytest.mark.parametrize("unsafe", ["timeout", "protocol", "settings", "unknown", "busy", "stale", "unaccepted", "no_eos"])
+def test_content_continuation_unsafe_failure_halts(monkeypatch, unsafe):
+    s = ContentFailureScenario()
+    original = s.handler
+
+    def handler(request):
+        response = original(request)
+        if request.url.path.endswith("/meetings"):
+            receipt = s.services["runtime"].last_telemetry
+            if unsafe in {"timeout", "protocol", "settings", "unknown"}:
+                receipt["failure_code"] = {"timeout": "generation_deadline_exceeded", "protocol": "generation_backend_protocol",
+                    "settings": "generation_effective_config_mismatch", "unknown": "generation_arbitrary"}[unsafe]
+            elif unsafe == "busy":
+                s.services["runtime"].lock.acquire()
+            elif unsafe == "stale":
+                s.services["runtime"].last_telemetry = s.initial_receipt
+            elif unsafe == "unaccepted":
+                s.services["generator"].last_call["accepted"] = False
+            elif unsafe == "no_eos":
+                s.services["generator"].last_call.pop("finish_reason")
+        return response
+
+    s.initial_receipt = s.services["runtime"].last_telemetry
+    s.handler = handler
+    with pytest.raises(m.DevelopmentError):
+        s.run(monkeypatch, continue_content_failures=True)
+    assert s.meetings == 1 and s.answers == 0
+    if s.services["runtime"].lock.locked():
+        s.services["runtime"].lock.release()
+
+
+def test_content_continuation_metadata_requires_completed_classification():
+    services = {"runtime": SimpleNamespace(lock=threading.Lock()), "generator": SimpleNamespace(last_call=None)}
+    receipt = {"status": "failed", "stage": "metadata", "failure_code": "generation_conflicting_metadata",
+               "calls": [{"operation": "grammar_constrained_classification", "completion_calls": 3,
+                          "input_tokens": 200, "output_tokens": 3}]}
+    observed = {"runtime_state": "terminal", "runtime": receipt, "structured_call": None}
+    row = {"kind": "analysis", "analysis_status": "failed"}
+    error = m.DevelopmentError("analysis_failed")
+    assert m.content_failure_completed(services, observed, row, error)
+    receipt["calls"][0]["completion_calls"] = 0
+    assert not m.content_failure_completed(services, observed, row, error)
+    receipt["calls"][0]["completion_calls"] = 3
+    assert not m.content_failure_completed(services, observed, row, httpx.ReadTimeout("private"))
+
+
+def test_content_continuation_exit_stays_failed_and_cleanup_sees_first_error(tmp_path, monkeypatch):
+    monkeypatch.setattr(m, "ROOT", tmp_path)
+    docs, cases = packet()
+    for doc in docs:
+        doc["raw_sha256"] = hashlib.sha256(doc["content"]).hexdigest()
+    monkeypatch.setattr(m, "load_bundle", lambda _: (docs, cases))
+    ports = iter([11001, 11002, 11003])
+    monkeypatch.setattr(m, "unused_port", lambda: next(ports))
+    jar = tmp_path / "fixture.jar"
+    jar.write_bytes(b"fixture")
+    failure = m.DevelopmentError("analysis_failed")
+    cleaned = []
+
+    def operations(client, services, documents, cases, report, *args, **kwargs):
+        assert kwargs["continue_content_failures"] is True
+        report["operations"][0]["state"] = "failed"
+        m.record_error(report, failure)
+
+    @contextmanager
+    def launcher(**kwargs):
+        try:
+            yield {"java_url": "http://test", "generator": SimpleNamespace(_client=SimpleNamespace(event_hooks={"response": []}))}
+        except m.DevelopmentError as error:
+            assert error is failure
+            raise
+        finally:
+            cleaned.append(True)
+
+    monkeypatch.setattr(m, "run_operations", operations)
+    report = m.execute(jar, hashlib.sha256(b"fixture").hexdigest(), tmp_path / ".local" / "fresh",
+                       continue_content_failures=True, launcher=launcher)
+    assert cleaned == [True] and report["status"] == "failed"
+    assert report["first_failure"]["code"] == failure.code and report["secondary_failures"] == []
+
+
+def test_content_continuation_cli_is_explicit(monkeypatch):
+    seen = []
+    monkeypatch.setattr(m, "execute", lambda *args, **kwargs: seen.append(kwargs["continue_content_failures"]) or {"status": "completed"})
+    args = ["verifier", "--jar", "fixture", "--jar-sha256", "unused", "--output", ".local/fixture"]
+    monkeypatch.setattr(m.sys, "argv", args)
+    m.main()
+    monkeypatch.setattr(m.sys, "argv", [*args, "--continue-content-failures"])
+    m.main()
+    assert seen == [False, True]
+
+
+def test_metadata_warning_receipts_are_finite_bounded_and_text_free():
+    warning = {"field": "meeting_date", "unit_index": 7, "reason": "ambiguous_source_value", "value": "private"}
+    receipt = {"metadata_policy": "literal_optional_v1", "metadata_warnings": [warning] * 161}
+    safe = m.safe_metrics(receipt)
+    assert safe["metadata_policy"] == "literal_optional_v1" and len(safe["metadata_warnings"]) == 160
+    assert "private" not in json.dumps(safe)
+    for bad in ({**warning, "unit_index": True}, {**warning, "unit_index": 160},
+                {**warning, "field": "private"}, {**warning, "reason": "source text"}):
+        assert m.safe_metrics({"metadata_warnings": [bad]}) == {"metadata_warnings": []}
+    assert m.safe_metrics({"metadata_policy": "unrecognized"}) == {}

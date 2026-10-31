@@ -22,6 +22,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
 from doctrail.meeting_grounded_summary import validate_summary_analysis
+from doctrail.meeting_structured import PROFILE, STRUCTURED_PROFILES
 from scripts.run_meeting_qa_service_development import (
     BUNDLE,
     FailureRecord,
@@ -43,13 +44,35 @@ NUMERIC = {"input_tokens", "output_tokens", "output_cap", "input_cap", "completi
            "label_count", "elapsed_seconds", "elapsed_ms", "http_status", "observed_tokens_predicted",
            "observed_tokens_evaluated"}
 BOOLEAN = {"dispatched", "returned", "accepted"}
+# Literal codes raised by the structured/GGUF worker and its source-contract helpers.
+# Never accept an arbitrary generation_* suffix: it can contain private text.
+SAFE_ERROR_CODES = {
+    "model_busy", "generation_failed", "generation_backend_protocol", "generation_backend_url",
+    "generation_backend_token", "generation_backend_unavailable", "generation_backend_response_limit",
+    "generation_deadline_exceeded", "generation_input_limit", "generation_identity_mismatch",
+    "generation_not_ready", "generation_effective_config_mismatch", "generation_invalid_label",
+    "generation_output_truncated", "generation_invalid_schema", "generation_invalid_json",
+    "generation_invalid_evidence", "generation_language_mismatch", "generation_summary_insufficient",
+    "generation_summary_review_rejected", "generation_conflicting_metadata", "generation_partition_limit",
+    "generation_metadata_limit", "generation_item_limit", "generation_empty_summary",
+    "generation_duplicate_item", "generation_unsupported_field", "generation_worker_already_running",
+}
+CONTENT_FAILURE_CODES = {
+    "generation_summary_review_rejected", "generation_summary_insufficient", "generation_language_mismatch",
+    "generation_invalid_evidence", "generation_invalid_schema", "generation_conflicting_metadata",
+    "generation_empty_summary",
+}
+METADATA_FIELDS = {"meeting_title", "meeting_date", "participants", "purpose"}
+METADATA_REASONS = {"unsupported_source_format", "ambiguous_source_value", "value_out_of_bounds"}
 ENUMS = {"operation": {"qa", "summary", "summary_review", "meeting_qa", "meeting_summary",
                        "meeting_summary_review", "grammar_constrained_classification"},
          "status": {"failed", "complete"}, "finish_reason": {"eos", "length"},
-         "stage": {"request", "partition", "classification", "summary", "review", "assembled", "qa"},
+         "stage": {"request", "partition", "classification", "metadata", "summary", "review", "assembled", "qa"},
          "validation_stage": {"input", "http", "native_metadata", "effective_settings",
                               "token_identity_integrity", "eos", "json", "accepted"},
-         "observed_stop_type": {"eos", "limit", "word", "other"}}
+         "observed_stop_type": {"eos", "limit", "word", "other"},
+         "failure_code": SAFE_ERROR_CODES, "error_code": SAFE_ERROR_CODES,
+         "metadata_policy": {"literal_optional_v1"}}
 
 
 class DevelopmentError(RuntimeError):
@@ -72,6 +95,12 @@ def safe_metrics(value):
             out[key] = [safe_metrics(row) for row in item[:162]]
         elif key == "last_structured_call":
             out[key] = safe_metrics(item)
+        elif key == "metadata_warnings" and isinstance(item, list):
+            out[key] = [{field: row[field] for field in ("field", "unit_index", "reason")}
+                        for row in item[:160] if isinstance(row, dict)
+                        and isinstance(row.get("field"), str) and row["field"] in METADATA_FIELDS
+                        and type(row.get("unit_index")) is int and 0 <= row["unit_index"] <= 159
+                        and isinstance(row.get("reason"), str) and row["reason"] in METADATA_REASONS]
     return out
 
 
@@ -86,6 +115,41 @@ def observe(services, before):
             "runtime": safe_metrics(receipt) if terminal else None,
             "structured_call": safe_metrics(call) if call is not before[1] else None,
             "structured_call_fresh": call is not before[1]}
+
+
+def content_failure_completed(services, observation, row, error):
+    """Positive completion evidence only; never relax any transport or integrity check."""
+    if not isinstance(error, DevelopmentError):
+        return False
+    if row["kind"] == "analysis":
+        if error.code != "generation_development_analysis_failed" or row.get("analysis_status") != "failed":
+            return False
+    elif error.code != "generation_development_http_failed" or row.get("last_http_status") not in {502, 503}:
+        return False
+    receipt = observation.get("runtime")
+    if (observation.get("runtime_state") != "terminal" or not isinstance(receipt, dict)
+            or receipt.get("status") != "failed" or receipt.get("failure_code") not in CONTENT_FAILURE_CODES):
+        return False
+    try:
+        if services["runtime"].lock.locked() is not False:
+            return False
+    except Exception:  # noqa: BLE001 - unreadable idle state must remain fail-closed
+        return False
+    call = observation.get("structured_call")
+    if (observation.get("structured_call_fresh") is True and isinstance(call, dict)
+            and all(call.get(key) is True for key in ("dispatched", "returned", "accepted"))
+            and call.get("finish_reason") == "eos" and call.get("validation_stage") == "accepted"):
+        return True
+    # This aggregate exists only after every bounded classification has returned.
+    if receipt.get("stage") != "metadata" or services["generator"].last_call is not None:
+        return False
+    classification = [item for item in receipt.get("calls", [])
+                      if item.get("operation") == "grammar_constrained_classification"]
+    return (len(classification) == 1
+            and type(classification[0].get("completion_calls")) is int
+            and 1 <= classification[0]["completion_calls"] <= LIMITS["classification_units_per_meeting"]
+            and all(type(classification[0].get(key)) is int and classification[0][key] > 0
+                    for key in ("input_tokens", "output_tokens")))
 
 
 def left(deadline, clock):
@@ -281,7 +345,7 @@ class NativeOutputCapture:
 
 
 def run_operations(client, services, documents, cases, report, deadline, save,
-                   *, clock=time.monotonic, sleep=time.sleep):
+                   *, continue_content_failures=False, clock=time.monotonic, sleep=time.sleep):
     meetings = [doc for doc in documents if doc["role"] == "meeting"]
     general = [doc for doc in documents if doc["role"] == "general_document"]
     if len(meetings) != 2 or len(general) != 1 or len(cases) != 2:
@@ -334,10 +398,17 @@ def run_operations(client, services, documents, cases, report, deadline, save,
         except BaseException as error:
             row["state"] = "failed_or_unknown"
             record_error(report, error)
-            raise
+            observation = observe(services, before)
+            if not continue_content_failures or not content_failure_completed(services, observation, row, error):
+                raise
+            check_document(row["result"]["document"], source)
+            stored.append(row["result"]["document"])
+            row.update(state="failed", continuation="next_independent_operation_only")
         finally:
             row["observation"] = observe(services, before)
             save()
+        if row["state"] == "failed":
+            continue
         if row["observation"]["runtime_state"] != "terminal" or row["observation"]["runtime"].get("status") != "complete":
             row["state"] = "failed_or_unknown"
             raise DevelopmentError("analysis_receipt_unknown")
@@ -355,18 +426,24 @@ def run_operations(client, services, documents, cases, report, deadline, save,
         except BaseException as error:
             row["state"] = "failed_or_unknown"
             record_error(report, error)
-            raise
+            if not continue_content_failures or not content_failure_completed(services, observe(services, before), row, error):
+                raise
+            row.update(state="failed", continuation="next_independent_operation_only")
         finally:
             row["observation"] = observe(services, before)
             save()
+        if row["state"] == "failed":
+            continue
         if answer.get("model_called") is not False and (row["observation"]["runtime_state"] != "terminal"
                 or row["observation"]["runtime"].get("status") != "complete"):
             row["state"] = "failed_or_unknown"
             raise DevelopmentError("answer_receipt_unknown")
 
 
-def execute(jar, jar_sha256, output, *, bundle=BUNDLE, launcher=start_services,
+def execute(jar, jar_sha256, output, *, profile=PROFILE, continue_content_failures=False, bundle=BUNDLE, launcher=start_services,
             client_factory=httpx.Client, clock=time.monotonic, sleep=time.sleep):
+    if profile not in STRUCTURED_PROFILES:
+        raise DevelopmentError("unknown_profile")
     jar, output = Path(jar), Path(output)
     # No output or model/service side effects until immutable inputs pass.
     if output.exists() or not output.resolve().is_relative_to((ROOT / ".local").resolve()):
@@ -380,6 +457,8 @@ def execute(jar, jar_sha256, output, *, bundle=BUNDLE, launcher=start_services,
     output.mkdir(parents=True)
     report = FailureRecord(first_failure=None, secondary_failures=[], status="running", limits=LIMITS,
                            semantic_quality_accepted=False, human_reviews=0, heldout_evaluation=False,
+                           requested_profile=profile,
+                           continue_content_failures=continue_content_failures,
                            jar_sha256=jar_sha256, operations=operation_rows(documents, cases),
                            external_fresh_gate_required=True)
     report["sources"] = [{key: doc[key] for key in ("document_id", "role", "path", "raw_sha256", "title")}
@@ -404,14 +483,18 @@ def execute(jar, jar_sha256, output, *, bundle=BUNDLE, launcher=start_services,
         if len(set(ports)) != 3:
             raise DevelopmentError("ports")
         with launcher(jar=jar, database=output / "development.sqlite3", java_port=ports[0],
-                      worker_port=ports[1], native_port=ports[2], enable_structured=True, report=report) as services:
+                      worker_port=ports[1], native_port=ports[2], enable_structured=True,
+                      profile=profile, report=report) as services:
             try:
                 capture = NativeOutputCapture(services["generator"], output, report)
                 left(started + LIMITS["startup_seconds"], clock)
                 active = min(started + LIMITS["whole_seconds"] - LIMITS["cleanup_seconds"],
                              clock() + LIMITS["active_seconds"])
                 with client_factory(base_url=services["java_url"], trust_env=False, follow_redirects=False) as client:
-                    run_operations(client, services, documents, cases, report, active, save, clock=clock, sleep=sleep)
+                    run_operations(client, services, documents, cases, report, active, save,
+                                   continue_content_failures=continue_content_failures, clock=clock, sleep=sleep)
+                if report.errors:
+                    raise report.errors[0]  # Content failures stay failures, also during context cleanup.
             except BaseException as error:
                 record_error(report, error)  # Preserve first failure before context unwinding.
                 raise
@@ -440,9 +523,12 @@ def main():
     parser.add_argument("--jar", type=Path, required=True)
     parser.add_argument("--jar-sha256", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--profile", choices=STRUCTURED_PROFILES, default=PROFILE)
+    parser.add_argument("--continue-content-failures", action="store_true")
     args = parser.parse_args()
     try:
-        report = execute(args.jar, args.jar_sha256, args.output)
+        report = execute(args.jar, args.jar_sha256, args.output, profile=args.profile,
+                         continue_content_failures=args.continue_content_failures)
     except Exception:  # noqa: BLE001 - never echo private HTTP or environment details
         parser.exit(1, "structured_development_preflight_failed\n")
     if report["status"] != "completed":
