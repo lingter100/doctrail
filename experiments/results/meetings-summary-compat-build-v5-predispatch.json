@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "closed_blocked_before_dispatch",
+  "source_commit": "724eb9078c7ac5ad45d93902d9272d2fa3e0dded",
+  "failure": "BoundaryError:ninja_shell_autorun",
+  "tool_exit_code": 1,
+  "tool_wall_seconds": 0.6235,
+  "stage": "shell environment validation before fresh resource gate and build CLI launch",
+  "fixed_reference_assertions_passed": 62,
+  "outputs_absent": ["work directory", "issued-once", "preflight", "CLI start", "terminal", "CLI stdout", "CLI stderr", "owned events"],
+  "build_cli_launches": 0,
+  "native_drive_mappings": 0,
+  "native_runs": 0,
+  "model_runs": 0,
+  "registry_writes": 0,
+  "cleanup": "Tool returned; child launch was not reached. This does not claim global process absence.",
+  "diagnosis": {
+    "original_exception_detail": "The original exception did not retain the hive or value",
+    "subsequent_readonly_check": "HKCU Command Processor AutoRun contains a conditional invocation of the installed Miniforge conda_hook.bat; HKLM AutoRun property is absent",
+    "restricted_read_limitation": "The first restricted HKCU read was denied and did not establish absence; a subsequent authorized read supplied the value",
+    "system_settings_changed": false,
+    "next": "Inspect the exact hook and choose a prospective child-local compatibility change; do not weaken the general child executable guard or edit global registry settings"
+  },
+  "evidence": {
+    "issued_launcher_sha256": "291b6e58bcf771a8f7741d1e57c5120527bd18bc38a7c8e61dc5c46184212579",
+    "issued_binding_sha256": "7be390d5fba7032ea8f97c13906a1e93d538a275393b91e4bb17e1f54cff581f",
+    "predispatch_final_sha256": "b328d2c13c188d25891ee230aec4e3b8eb40b734b5af0ed058b55d8dca47f18d",
+    "original_tool_completion": "482e43",
+    "readonly_registry_check": "164473",
+    "original_trace_preserved_in_tool_transcript": true,
+    "separate_byte_exact_stderr_file": false
+  },
+  "prior_failures_preserved": true,
+  "build_or_quality_success_claim": false,
+  "human_review": false,
+  "paid_service": false,
+  "public_service_deployment": false
+}

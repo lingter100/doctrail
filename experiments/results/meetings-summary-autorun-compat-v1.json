@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-31",
+  "status": "implemented_focused_checks_and_independent_source_review_passed",
+  "problem": "The host's Miniforge Command Processor AutoRun blocked native preparation before dispatch",
+  "policy": {
+    "hive": "HKCU only; HKLM AutoRun must remain absent or empty",
+    "value": "Strict conditional invocation containing the same literal absolute condabin/conda_hook.bat path twice",
+    "hook": "Regular non-reparse file with exact reviewed hash and first guard statement",
+    "hook_sha256": "6b9042735e64563efdeaeefe2f4f6b599094f3cc67b7d11c8f91a5e1cfe03a7e7",
+    "guard": "@IF DEFINED CONDA_SHLVL GOTO :EOF",
+    "extensions": "Read-only effective command extensions check: HKCU overrides HKLM; missing values default on; disabled or unreadable rejected",
+    "child_environment": "Copy environment and force CONDA_SHLVL=0 after clean_environment, shared by configure and compile",
+    "observed_environment": "Owned Ninja and cmd must retain the required variable",
+    "history": "Saved-only policy and provenance validation; no live registry or installed hook dependency for historical checks",
+    "global_environment_or_registry_mutation": false,
+    "unknown_autorun_or_changed_hook_allowed": false,
+    "general_cmd_allowlist_expanded": false
+  },
+  "source": {
+    "before_commit": "724eb9078c7ac5ad45d93902d9272d2fa3e0dded",
+    "driver": "scripts/build_summary_grammar_engine_compat.py",
+    "driver_sha256": "0f72c78c4ada1dcc6e75f3f1d47cc2b5ed6a59112999d53967b415a57ea47ef1",
+    "test": "tests/test_summary_grammar_engine_compat.py",
+    "test_sha256": "e9e0531f05ad6d3fb091f29c623fbcb8de42c00170ff54ebc5b5011f509d0328",
+    "originals_preserved": true,
+    "original_runtime_and_prepare_unchanged": true
+  },
+  "validation": {
+    "focused_passed": 39,
+    "new_cases": 29,
+    "affected_existing_cases": 10,
+    "deselected": 129,
+    "seconds": 5.94,
+    "ruff": "passed",
+    "independent_review_model": "gpt-6-astra",
+    "independent_review_effort": "xhigh",
+    "independent_review_required_fixes": 0,
+    "reviewer_reran_tests": false,
+    "reviewed_current_hashes_match_tested_sources": true,
+    "implementation_result_sha256": "8a77988d55aa1499fed0ce27f5d34e72fe74c207884b1de45b5fdea84e0bbad9"
+  },
+  "remaining": [
+    "Publish verified source under the user's identity and close exact required CI",
+    "Pass shell_child_environment to the outer build CLI Popen in a fresh observer",
+    "Run the bounded actual native build and separate grammar validation",
+    "Evaluate actual summary content quality independently"
+  ],
+  "actual_hook_or_native_executions_in_these_checks": 0,
+  "separate_parent_readonly_host_check": {
+    "tool_chunk": "01924b",
+    "hkcu_enable_extensions": "absent",
+    "hklm_enable_extensions": 1,
+    "effective_extensions": "enabled at read time",
+    "settings_changed": false,
+    "native_execution": false
+  },
+  "actual_model_executions_in_these_checks": 0,
+  "human_review": false,
+  "paid_service": false,
+  "public_service_deployment": false,
+  "prior_failures_unchanged": true
+}

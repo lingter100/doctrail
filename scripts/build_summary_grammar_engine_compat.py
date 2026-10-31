@@ -41,6 +41,8 @@ OWNED_SCAN_CODE = OWNED_SCAN_CODES[0]
 BASE_OWNED_TREE = rt.OwnedTree
 NINJA_SHELL_POLICY = "compat-owned-ninja-shell-v1"
 RECIPE_LIMIT = 8 * 1024**2
+CONDA_HOOK_SHA256 = "6b9042735e64563efdeaeefe2f4f6b599094f3cc67b7d11c8f91a5e1cfe03a7e7"
+CONDA_HOOK_GUARD = "@IF DEFINED CONDA_SHLVL GOTO :EOF"
 
 
 def shell_path(path):
@@ -49,13 +51,60 @@ def shell_path(path):
     return Path(path)
 
 
-def check_autorun(reader):
+def autorun_hook_reference(value):
+    path = Path(value)
+    rt.safe_path(path.parent, path.name)
+    attrs = path.lstat()
+    rt.require(stat.S_ISREG(attrs.st_mode) and not getattr(attrs, "st_file_attributes", 0) & 1024
+               and attrs.st_size <= 64 * 1024 and str(path.resolve()) == str(path), "ninja_shell_hook_file")
+    with path.open("rb") as stream:
+        raw = stream.read(64 * 1024 + 1)
+    rt.require(len(raw) == attrs.st_size <= 64 * 1024, "ninja_shell_hook_file")
+    lines = [line.strip() for line in raw.decode("utf-8").splitlines()
+             if line.strip() and not line.lstrip().startswith("::")]
+    return {"path": str(path), "size_bytes": len(raw), "sha256": rt.digest(raw),
+            "first_statement": lines[0] if lines else None}
+
+
+def check_autorun(reader, hook_reader=autorun_hook_reference):
     rows = []
     for hive in ("HKCU", "HKLM"):
         value = reader(hive)
-        rt.require(value is None or value == "", "ninja_shell_autorun")
-        rows.append({"hive": hive, "view": 64, "value": value})
+        row = {"hive": hive, "view": 64, "value": value}
+        if value is not None and value != "":
+            rt.require(hive == "HKCU" and type(value) is str, "ninja_shell_autorun")
+            match = re.fullmatch(r'if exist "([^"\r\n]+)" "\1"', value)
+            rt.require(match is not None, "ninja_shell_autorun")
+            path = canonical_compiler(match[1])
+            rt.require(PureWindowsPath(path).parts[-2:] == ("condabin", "conda_hook.bat"), "ninja_shell_hook_path")
+            shell_path(path)
+            hook = hook_reader(path)
+            rt.require(hook.get("path") == path and hook.get("sha256") == CONDA_HOOK_SHA256
+                       and hook.get("first_statement") == CONDA_HOOK_GUARD
+                       and type(hook.get("size_bytes")) is int and 0 < hook["size_bytes"] <= 64 * 1024,
+                       "ninja_shell_hook_binding")
+            row["hook"] = hook
+        rows.append(row)
     return rows
+
+
+def check_extensions(reader):
+    values = {hive: reader(hive) for hive in ("HKCU", "HKLM")}
+    rt.require(all(value is None or type(value) is int and value in (0, 1) for value in values.values()), "ninja_shell_extensions_type")
+    effective = values["HKCU"] if values["HKCU"] is not None else values["HKLM"]
+    rt.require(effective in (None, 1), "ninja_shell_extensions_disabled")
+    return {"view": 64, "values": values, "effective_enabled": True}
+
+
+def shell_child_environment(env, environment):
+    """Copy only: clean_environment strips CONDA variables, so apply afterwards."""
+    result = dict(env)
+    expected = {"CONDA_SHLVL": "0"} if any("hook" in row for row in environment["autorun"]) else {}
+    rt.require(environment.get("child_env", {}) == expected, "ninja_shell_child_env_policy")
+    if expected:
+        rt.require(environment.get("extensions", {}).get("effective_enabled") is True, "ninja_shell_extensions_disabled")
+    result.update(expected)
+    return result
 
 
 def shell_environment():
@@ -72,19 +121,23 @@ def shell_environment():
     rt.safe_path(command.parent, command.name)
     rt.require(command.is_file(), "ninja_shell_system_command")
 
-    def reader(hive):
+    def reader(hive, name="AutoRun"):
         key = winreg.HKEY_CURRENT_USER if hive == "HKCU" else winreg.HKEY_LOCAL_MACHINE
         try:
             with winreg.OpenKey(key, r"Software\Microsoft\Command Processor", 0,
                                 winreg.KEY_READ | winreg.KEY_WOW64_64KEY) as handle:
-                value, kind = winreg.QueryValueEx(handle, "AutoRun")
-                rt.require(kind in (winreg.REG_SZ, winreg.REG_EXPAND_SZ), "ninja_shell_autorun_type")
+                value, kind = winreg.QueryValueEx(handle, name)
+                rt.require(kind in (winreg.REG_SZ, winreg.REG_EXPAND_SZ) if name == "AutoRun" else kind == winreg.REG_DWORD,
+                           "ninja_shell_registry_type")
                 return value
         except FileNotFoundError:
             return None
 
+    autorun = check_autorun(reader)
+    child_env = {"CONDA_SHLVL": "0"} if any("hook" in row for row in autorun) else {}
     return {"command": str(command), "command_reference": rt.reference(command, command.parent),
-            "autorun": check_autorun(reader), "registry_writes": 0}
+            "autorun": autorun, "extensions": check_extensions(lambda hive: reader(hive, "EnableExtensions")),
+            "child_env": child_env, "registry_writes": 0}
 
 
 class NinjaShellPolicy:
@@ -99,6 +152,7 @@ class NinjaShellPolicy:
         self.ninja, self.cmake = (os.path.normcase(str(shell_path(path).resolve())) for path in (ninja, cmake))
         self.source = shell_path(rt.BUNDLE if source is None else source).resolve()
         self.command = os.path.normcase(str(Path(environment["command"]).resolve()))
+        shell_child_environment({}, environment)
         self.environment, self.recipes, self.accepted = environment, {}, []
         self.ninja_ref = rt.reference(Path(ninja), Path(ninja).parent)
         self.record = {"policy": NINJA_SHELL_POLICY, "environment": environment, "ninja": str(Path(ninja).resolve()),
@@ -154,6 +208,8 @@ class NinjaShellPolicy:
         parent_identity = tree.identity(parent)
         rt.require(parent_identity in tree.seen and parent_identity[2] == self.ninja
                    and parent_identity[1] <= identity[1] and parent.is_running(), "ninja_shell_parent")
+        for name, value in self.environment.get("child_env", {}).items():
+            rt.require(process.environ().get(name) == value and parent.environ().get(name) == value, "ninja_shell_child_env")
         parent_args = parent.cmdline()
         rt.require(parent_args and os.path.normcase(str(Path(parent_args[0]).resolve())) == self.ninja
                    and not any(arg.startswith(("-f", "--file")) for arg in parent_args[1:]), "ninja_shell_recipe_override")
@@ -643,9 +699,18 @@ def check_shell_history(output, manifest):
     attempt = rt.load(output / "build-attempt.json").get("ninja_shell", {})
     rt.require(saved.get("policy") == NINJA_SHELL_POLICY and saved.get("canonical_output") == str(output.resolve())
                and attempt == {key: value for key, value in saved.items() if key not in ("shells", "phases")}, "ninja_shell_history")
-    rt.require(saved.get("phases") == [{"phase": name, "restored": True} for name in ("configure", "compile")]
-               and saved["environment"]["autorun"] == check_autorun(lambda hive: next(row["value"] for row in saved["environment"]["autorun"] if row["hive"] == hive)),
-               "ninja_shell_history")
+    environment = saved["environment"]
+    autorun = environment["autorun"]
+    hooks = [row["hook"] for row in autorun if "hook" in row]
+    rt.require(autorun == check_autorun(lambda hive: next(row["value"] for row in autorun if row["hive"] == hive),
+                                      hook_reader=lambda path: next(row for row in hooks if row["path"] == path)), "ninja_shell_history")
+    if "extensions" in environment:
+        rt.require(environment["extensions"] == check_extensions(lambda hive: environment["extensions"]["values"][hive]), "ninja_shell_history")
+    child_env = shell_child_environment({}, environment)
+    rt.require(saved.get("phases") == [{"phase": name, "restored": True} for name in ("configure", "compile")], "ninja_shell_history")
+    if child_env and manifest.get("native_drive"):
+        rt.require(all(all(invocation["env"].get(key) == value for key, value in child_env.items())
+                       for invocation in manifest["native_drive"]["invocations"]), "ninja_shell_child_env_history")
     for row in saved.get("shells", []):
         rt.require(row["phase"] in ("configure", "compile") and Path(row["cwd"]).is_relative_to(output / "build")
                    and row["identity"][2] == os.path.normcase(saved["environment"]["command"])
@@ -677,7 +742,8 @@ def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monoto
         deadline = clock() + 900
         trace = output / "configure-trace.jsonl"
         with NativeDrive(native_drive, output, "build-native-drive", mapping_backend) as paths:
-            env = paths.environment(rt.clean_environment([cc.parent, cmake.parent, ninja.parent], output, "build-tmp"))
+            env = paths.environment(shell_child_environment(
+                rt.clean_environment([cc.parent, cmake.parent, ninja.parent], output, "build-tmp"), shell_env))
             native_output, native_cmake = paths.path(output), paths.path(cmake)
             probe = prep.optional_probe_guard(native_output, record["optional_ld_query"], env, native_cmake.parent)
             configure = [native_cmake, "-S", paths.path(rt.BUNDLE), "-B", paths.path(output / "build"), "-G", "Ninja", "--trace-expand",

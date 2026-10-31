@@ -286,6 +286,127 @@ def test_ninja_shell_autorun_unreadable_not_absent():
         compat.check_autorun(lambda hive: (_ for _ in ()).throw(PermissionError("registry unreadable")))
 
 
+def autorun_fixture_value(path=r"C:\synthetic-install\condabin\conda_hook.bat"):
+    # Pure expected metadata fixture, not a hash claim about a real installed hook.
+    value = f'if exist "{path}" "{path}"'
+    hook = {"path": path, "size_bytes": 100, "sha256": compat.CONDA_HOOK_SHA256,
+            "first_statement": compat.CONDA_HOOK_GUARD}
+    return value, hook
+
+
+@pytest.mark.parametrize("path", [r"C:\synthetic-install\condabin\conda_hook.bat", r"D:\another install\condabin\conda_hook.bat"])
+def test_autorun_compat_exact_hook_and_child_local_environment(path, monkeypatch):
+    value, hook = autorun_fixture_value(path)
+    rows = compat.check_autorun(lambda hive: value if hive == "HKCU" else None, hook_reader=lambda observed: dict(hook))
+    assert rows[0]["hook"] == hook and rows[0]["value"] == value
+    environment = {"autorun": rows, "child_env": {"CONDA_SHLVL": "0"},
+                   "extensions": compat.check_extensions(lambda hive: None)}
+    monkeypatch.setenv("CONDA_SHLVL", "9")
+    supplied = {"PATH": "fixed", "CONDA_SHLVL": "7"}
+    child = compat.shell_child_environment(supplied, environment)
+    assert child == {"PATH": "fixed", "CONDA_SHLVL": "0"}
+    assert supplied["CONDA_SHLVL"] == "7" and os.environ["CONDA_SHLVL"] == "9"
+
+
+@pytest.mark.parametrize("kind", ["different_second_path", "other_statement", "upper_if", "extra_command", "relative", "other_name",
+                                  "expansion", "hash_changed", "first_statement_changed", "reference_path_changed", "hklm", "nonstring", "unreadable"])
+def test_autorun_compat_rejects_unknown_or_changed_hook(kind):
+    value, hook = autorun_fixture_value()
+    if kind == "different_second_path":
+        value = value.rsplit('"', 2)[0] + r'"C:\other\condabin\conda_hook.bat"'
+    elif kind == "other_statement":
+        value = "echo anything"
+    elif kind == "upper_if":
+        value = value.replace("if exist", "IF EXIST")
+    elif kind == "extra_command":
+        value += " & echo extra"
+    elif kind == "relative":
+        value = 'if exist "condabin\\conda_hook.bat" "condabin\\conda_hook.bat"'
+    elif kind == "other_name":
+        value = value.replace("conda_hook.bat", "other.bat")
+    elif kind == "expansion":
+        value = value.replace("synthetic-install", "%INSTALL%")
+    elif kind == "hash_changed":
+        hook["sha256"] = "0" * 64
+    elif kind == "first_statement_changed":
+        hook["first_statement"] = "@echo changed"
+    elif kind == "reference_path_changed":
+        hook["path"] = r"C:\other\condabin\conda_hook.bat"
+    elif kind == "nonstring":
+        value = 1
+    def reader(hive):
+        if kind == "unreadable":
+            raise PermissionError("registry denied")
+        return value if hive == ("HKLM" if kind == "hklm" else "HKCU") else None
+    with pytest.raises((rt.BoundaryError, PermissionError)):
+        compat.check_autorun(reader, hook_reader=lambda path: hook)
+
+
+@pytest.mark.parametrize("user,machine,accepted", [(None, None, True), (None, 1, True), (1, 0, True),
+                                                    (0, 1, False), (None, 0, False), ("1", None, False), (True, None, False)])
+def test_autorun_compat_extensions_effective_value(user, machine, accepted):
+    reader = lambda hive: user if hive == "HKCU" else machine
+    if accepted:
+        assert compat.check_extensions(reader)["effective_enabled"]
+    else:
+        with pytest.raises(rt.BoundaryError, match="extensions"):
+            compat.check_extensions(reader)
+
+
+def test_autorun_compat_extensions_unreadable():
+    with pytest.raises(PermissionError):
+        compat.check_extensions(lambda hive: (_ for _ in ()).throw(PermissionError("registry denied")))
+
+
+def test_autorun_compat_reads_only_tiny_fake_hook(tmp_path):
+    path = tmp_path / "conda_hook.bat"
+    body = b":: fake fixture\r\n\r\n" + compat.CONDA_HOOK_GUARD.encode() + b"\r\n@echo unreachable fake\r\n"
+    path.write_bytes(body)
+    observed = compat.autorun_hook_reference(str(path))
+    assert observed["first_statement"] == compat.CONDA_HOOK_GUARD
+    assert observed["sha256"] == rt.digest(body) and observed["size_bytes"] == len(body)
+    assert observed["sha256"] != compat.CONDA_HOOK_SHA256  # Does not fabricate installed-hook byte verification.
+
+
+@pytest.mark.parametrize("setting", ["0", "1", None, "unreadable"])
+def test_autorun_compat_shared_policy_checks_child_and_ninja_environment(shell_fixture, monkeypatch, setting):
+    f = shell_fixture
+    value, hook = autorun_fixture_value()
+    f.policy.environment.update(autorun=compat.check_autorun(lambda hive: value if hive == "HKCU" else None, hook_reader=lambda path: hook),
+                                child_env={"CONDA_SHLVL": "0"}, extensions=compat.check_extensions(lambda hive: None))
+    monkeypatch.setattr(f.parent, "environ", lambda: {"CONDA_SHLVL": "0"}, raising=False)
+    def child_environment():
+        if setting == "unreadable":
+            raise PermissionError("child environment denied")
+        return {} if setting is None else {"CONDA_SHLVL": setting}
+    monkeypatch.setattr(f.child, "environ", child_environment, raising=False)
+    if setting == "0":
+        f.tree.capture(f.child)
+        assert len(f.policy.accepted) == 1
+    else:
+        with pytest.raises((rt.BoundaryError, PermissionError)):
+            f.tree.capture(f.child)
+        assert f.tree.identity(f.child) in f.tree.seen
+
+
+def test_autorun_compat_build_applies_after_clean_environment_and_records_history(fixture, monkeypatch):
+    f = fixture
+    environment = compat.shell_environment()
+    value, hook = autorun_fixture_value()
+    environment.update(autorun=compat.check_autorun(lambda hive: value if hive == "HKCU" else None, hook_reader=lambda path: hook),
+                       child_env={"CONDA_SHLVL": "0"}, extensions=compat.check_extensions(lambda hive: None))
+    monkeypatch.setattr(compat, "shell_environment", lambda: environment)
+    monkeypatch.setenv("CONDA_SHLVL", "9")
+    result, sha = built(f)
+    assert [call[1]["env"]["CONDA_SHLVL"] for call in f.calls] == ["0", "0"]
+    assert os.environ["CONDA_SHLVL"] == "9"
+    assert result["ninja_shell"]["environment"] == environment
+    assert compat.check_build(f.output, sha) == result
+    result["ninja_shell"]["environment"]["child_env"]["CONDA_SHLVL"] = ""
+    with pytest.raises(rt.BoundaryError):
+        compat.check_shell_history(f.output, result)
+
+
 @pytest.mark.parametrize("primary", [False, True])
 def test_ninja_shell_adapter_restore_and_primary_error(shell_fixture, primary):
     original = rt.OwnedTree
