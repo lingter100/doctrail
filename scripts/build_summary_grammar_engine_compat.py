@@ -8,6 +8,7 @@ Native verification remains a separately reviewed, model-free, one-shot batch.
 from __future__ import annotations
 
 import argparse
+import ctypes
 import os
 import re
 import sys
@@ -29,6 +30,158 @@ TOOLS = {"cmake.exe", "ninja.exe", "clang.exe", "clang++.exe", "ld.lld.exe", "ll
          "llvm-ar.exe", "llvm-ranlib.exe", "llvm-rc.exe", "llvm-mt.exe"}
 SOURCES = ("scripts/build_summary_grammar_engine_compat.py", "scripts/prepare_summary_grammar_engine.py",
            "scripts/verify_summary_grammar_engine.py", "tools/summary_grammar/runtime.py")
+
+
+class DosDevices:
+    """Current Windows DOS namespace only; no subprocess or persistent settings."""
+    def __init__(self):
+        rt.require(os.name == "nt", "native_drive_windows_only")
+        self.api = ctypes.WinDLL("kernel32", use_last_error=True)
+        self.api.QueryDosDeviceW.argtypes = [ctypes.c_wchar_p, ctypes.c_wchar_p, ctypes.c_uint32]
+        self.api.QueryDosDeviceW.restype = ctypes.c_uint32
+        self.api.DefineDosDeviceW.argtypes = [ctypes.c_uint32, ctypes.c_wchar_p, ctypes.c_wchar_p]
+        self.api.DefineDosDeviceW.restype = ctypes.c_int
+        self.api.GetLogicalDrives.restype = ctypes.c_uint32
+
+    def query(self, drive):
+        buffer = ctypes.create_unicode_buffer(32768)
+        size = self.api.QueryDosDeviceW(drive, buffer, len(buffer))
+        if not size:
+            code = ctypes.get_last_error()
+            if code == 2:  # ERROR_FILE_NOT_FOUND is the only accepted absence.
+                return []
+            raise ctypes.WinError(code)
+        return buffer[:size].rstrip("\0").split("\0")
+
+    def occupied(self, drive):
+        mask = self.api.GetLogicalDrives()
+        if not mask:
+            raise ctypes.WinError(ctypes.get_last_error())
+        return bool(mask & (1 << (ord(drive[0]) - ord("A"))))
+
+    def create(self, drive, target):
+        if not self.api.DefineDosDeviceW(0x1 | 0x8, drive, target):
+            raise ctypes.WinError(ctypes.get_last_error())
+
+    def remove(self, drive, target):
+        # RAW_TARGET_PATH | REMOVE_DEFINITION | EXACT_MATCH_ON_REMOVE | NO_BROADCAST_SYSTEM
+        if not self.api.DefineDosDeviceW(0x1 | 0x2 | 0x4 | 0x8, drive, target):
+            raise ctypes.WinError(ctypes.get_last_error())
+
+    def same(self, alias, canonical):
+        alias = Path(alias)
+        return alias.resolve() == canonical.resolve() and alias.samefile(canonical)
+
+
+class NativeDrive:
+    """One opt-in lease. Canonical input checks never use its aliases."""
+    def __init__(self, drive, output, receipt, backend=None):
+        rt.require(drive is None or isinstance(drive, str) and re.fullmatch(r"[D-Z]:", drive), "native_drive_letter")
+        self.drive, self.output, self.receipt = drive, output, receipt
+        self.backend = backend
+        self.target = REPO.resolve()
+        self.raw_target = "\\??\\" + str(self.target)
+        self.owned, self.children_closed = False, True
+        self.record = None
+
+    def __enter__(self):
+        if self.drive is None:
+            return self
+        self.backend = self.backend or DosDevices()
+        self.record = {"drive": self.drive, "canonical_repository": str(self.target), "raw_target": self.raw_target,
+                       "prior_absent": False, "created": False, "paths": [], "invocations": [], "cleanup": None}
+        try:
+            rt.require(not self.backend.query(self.drive) and not self.backend.occupied(self.drive), "native_drive_occupied")
+            self.record["prior_absent"] = True
+            self.backend.create(self.drive, self.raw_target)
+            self.owned = self.record["created"] = True
+            self.check()
+            self.path(self.target)
+            return self
+        except Exception as error:
+            self.__exit__(type(error), error, error.__traceback__)
+            raise
+
+    def check(self):
+        if self.drive:
+            rt.require(self.owned and self.backend.query(self.drive) == [self.raw_target], "native_drive_changed")
+
+    def path(self, path):
+        path = Path(path)
+        if self.drive is None:
+            return path
+        self.check()
+        canonical = path.resolve()
+        rt.require(canonical.is_relative_to(self.target), "native_drive_outside_repository")
+        alias = PureWindowsPath(self.drive + "\\") / canonical.relative_to(self.target)
+        rt.require(str(alias).isascii(), "native_drive_non_ascii_suffix")
+        # For outputs not yet created, bind their nearest existing ancestor.
+        ancestor, alias_ancestor = canonical, alias
+        while not ancestor.exists():
+            ancestor, alias_ancestor = ancestor.parent, alias_ancestor.parent
+        rt.require(self.backend.same(alias_ancestor, ancestor), "native_drive_identity")
+        row = {"canonical": str(canonical), "alias": str(alias)}
+        if row not in self.record["paths"]:
+            self.record["paths"].append(row)
+        return alias
+
+    def environment(self, env):
+        if self.drive is None:
+            return env
+        mapped = dict(env)
+        mapped["PATH"] = os.pathsep.join(str(self.path(p)) for p in env["PATH"].split(os.pathsep))
+        for name in ("TEMP", "TMP"):
+            mapped[name] = str(self.path(env[name]))
+        rt.require(all(str(value).isascii() for value in mapped.values()), "native_drive_environment_not_ascii")
+        return mapped
+
+    def run(self, runner, argv, **kwargs):
+        if self.drive is None:
+            return runner(argv, **kwargs)
+        self.check()
+        self.record["invocations"].append({"argv": list(map(str, argv)),
+            **{name: str(kwargs[name]) for name in ("cwd", "root", "log_prefix")}, "env": kwargs["env"]})
+        rt.write_bounded(self.output, self.output / (self.receipt + f"-attempt-{len(self.record['invocations'])}.json"), self.record)
+        self.children_closed = False
+        try:
+            result = runner(argv, **kwargs)
+        except Exception as error:
+            receipt = getattr(error, "supervision_record", {})
+            self.children_closed = receipt.get("cleanup", {}).get("all_absent") is True
+            raise
+        else:
+            self.children_closed = result.get("cleanup", {}).get("all_absent") is True
+            self.check()
+            return result
+
+    def __exit__(self, kind, error, traceback):
+        if self.drive is None:
+            return False
+        cleanup_error = None
+        self.record["cleanup"] = {"children_closed": self.children_closed, "removed": False}
+        try:
+            if self.owned:
+                rt.require(self.children_closed, "native_drive_children_unconfirmed")
+                self.check()
+                self.backend.remove(self.drive, self.raw_target)
+                self.owned = False
+                rt.require(not self.backend.query(self.drive), "native_drive_cleanup_changed")
+                self.record["cleanup"]["removed"] = True
+        except Exception as exc:  # noqa: BLE001 - cleanup must never replace the primary native failure
+            cleanup_error = exc
+            self.record["cleanup"]["error"] = type(exc).__name__ + ":" + str(exc)
+        try:
+            rt.write_bounded(self.output, self.output / (self.receipt + ".json"), self.record)
+        except Exception as exc:  # noqa: BLE001 - retain mapping cleanup and original failure
+            if cleanup_error is None:
+                cleanup_error = exc
+            else:
+                cleanup_error.add_note("native_drive_receipt_failed:" + type(exc).__name__)
+        if cleanup_error is not None:
+            if error is None:
+                raise cleanup_error
+            error.add_note("native_drive_cleanup_failed:" + str(cleanup_error))
+        return False
 
 
 def canonical_compiler(value):
@@ -170,7 +323,46 @@ def failure_record(path, data, error):
         error.add_note("compat_failure_record_failed:" + type(reporting_error).__name__)
 
 
-def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monotonic):
+def check_drive_history(output, manifest):
+    """Validate saved canonical bindings without reopening an expired drive lease."""
+    record = manifest.get("native_drive")
+    receipt = manifest.get("native_drive_receipt")
+    attempt = rt.load(output / "build-attempt.json")
+    if record is None:
+        rt.require(receipt is None and attempt.get("native_drive") is None, "native_drive_history")
+        return
+    rt.require(isinstance(record, dict) and re.fullmatch(r"[D-Z]:", record.get("drive", ""))
+               and record.get("canonical_repository") == str(REPO.resolve())
+               and record.get("raw_target") == "\\??\\" + str(REPO.resolve())
+               and record.get("prior_absent") is True and record.get("created") is True
+               and record.get("cleanup") == {"children_closed": True, "removed": True}
+               and isinstance(receipt, dict) and receipt.get("file") == "build-native-drive.json", "native_drive_history")
+    rt.check_refs(output, [receipt])
+    rt.require(rt.load(output / receipt["file"]) == record, "native_drive_history")
+    def alias(path):
+        canonical = Path(path).resolve()
+        rt.require(canonical.is_relative_to(REPO.resolve()), "native_drive_history_path")
+        return str(PureWindowsPath(record["drive"] + "\\") / canonical.relative_to(REPO.resolve()))
+    rt.require(record.get("paths") and all(row == {"canonical": str(Path(row["canonical"]).resolve()), "alias": alias(row["canonical"])}
+                                          and row["alias"].isascii() for row in record["paths"]), "native_drive_history_path")
+    invocations = record.get("invocations", [])
+    rt.require(len(invocations) == 2, "native_drive_history_invocations")
+    planned = attempt.get("native_drive", {})
+    rt.require(all(planned.get(name) == record[name] for name in ("drive", "canonical_repository", "raw_target", "prior_absent", "created"))
+               and planned.get("cleanup") is None and planned.get("invocations") == []
+               and all(row in record["paths"] for row in planned.get("paths", [])), "native_drive_history")
+    for name, invocation in zip(("configure", "compile"), invocations, strict=True):
+        saved = rt.load(output / (name + ".json"))
+        rt.require(invocation["argv"] == saved["argv"] and invocation["root"] == alias(output)
+                   and invocation["cwd"] == alias(output) and invocation["log_prefix"] == alias(output / name)
+                   and invocation["env"]["TEMP"] == invocation["env"]["TMP"] == alias(output / "build-tmp")
+                   and saved["temporary_directory"] == invocation["env"]["TEMP"]
+                   and all(PureWindowsPath(p).is_relative_to(record["drive"] + "\\") for p in invocation["env"]["PATH"].split(os.pathsep))
+                   and all(value.isascii() for value in invocation["env"].values()), "native_drive_history_invocations")
+    rt.require(invocations[0]["argv"] == attempt["command"], "native_drive_history_invocations")
+
+
+def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monotonic, native_drive=None, mapping_backend=None):
     original, output = roots(original, output)
     rt.require(not output.exists(), "compat_build_once")
     lock = prep.check_acquired(original, reviewed_sha)
@@ -183,24 +375,27 @@ def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monoto
         copy_cmake(original, output, record, patched)
         cmake, ninja, cc, cxx, allowed = executables(original, output, lock)
         deadline = clock() + 900
-        env = rt.clean_environment([cc.parent, cmake.parent, ninja.parent], output, "build-tmp")
-        probe = prep.optional_probe_guard(output, record["optional_ld_query"], env, cmake.parent)
         trace = output / "configure-trace.jsonl"
-        configure = [cmake, "-S", rt.BUNDLE, "-B", output / "build", "-G", "Ninja", "--trace-expand",
-                     "--trace-format=json-v1", "--trace-redirect=" + str(trace), "-DLLAMA_SOURCE=" + str(original / "source"),
-                     "-DCMAKE_C_COMPILER=" + str(cc), "-DCMAKE_CXX_COMPILER=" + str(cxx),
-                     "-DCMAKE_MAKE_PROGRAM=" + str(ninja), "-DCMAKE_BUILD_TYPE=Release"]
-        rt.write(output / "build-attempt.json", {"command": list(map(str, configure)), "inputs": record,
-                 "optional_probe_preflight": probe, "deadline_seconds": 900, "retry": False})
-        kwargs = {"cwd": output, "env": env, "root": output, "deadline": deadline, "rss": 2 * 1024**3,
-                  "host": 2 * 1024**3, "start": 4 * 1024**3, "allowed": allowed}
-        runner(configure, log_prefix=output / "configure", **kwargs)
-        receipt_ok(output, "configure")
-        rt.require(probe == prep.optional_probe_guard(output, record["optional_ld_query"], env, cmake.parent), "optional_probe_changed")
-        traced = prep.audit_trace(trace, allowed, probe, output)
-        runner([cmake, "--build", output / "build", "--target", "summary-grammar-validator", "--parallel", "2"],
-               log_prefix=output / "compile", **kwargs)
-        receipt_ok(output, "compile")
+        with NativeDrive(native_drive, output, "build-native-drive", mapping_backend) as paths:
+            env = paths.environment(rt.clean_environment([cc.parent, cmake.parent, ninja.parent], output, "build-tmp"))
+            native_output, native_cmake = paths.path(output), paths.path(cmake)
+            probe = prep.optional_probe_guard(native_output, record["optional_ld_query"], env, native_cmake.parent)
+            configure = [native_cmake, "-S", paths.path(rt.BUNDLE), "-B", paths.path(output / "build"), "-G", "Ninja", "--trace-expand",
+                         "--trace-format=json-v1", "--trace-redirect=" + str(paths.path(trace)), "-DLLAMA_SOURCE=" + str(paths.path(original / "source")),
+                         "-DCMAKE_C_COMPILER=" + str(paths.path(cc)), "-DCMAKE_CXX_COMPILER=" + str(paths.path(cxx)),
+                         "-DCMAKE_MAKE_PROGRAM=" + str(paths.path(ninja)), "-DCMAKE_BUILD_TYPE=Release"]
+            rt.write(output / "build-attempt.json", {"command": list(map(str, configure)), "inputs": record,
+                     "optional_probe_preflight": probe, "deadline_seconds": 900, "retry": False,
+                     "native_drive": paths.record})
+            kwargs = {"cwd": native_output, "env": env, "root": native_output, "deadline": deadline, "rss": 2 * 1024**3,
+                      "host": 2 * 1024**3, "start": 4 * 1024**3, "allowed": allowed}
+            paths.run(runner, configure, log_prefix=paths.path(output / "configure"), **kwargs)
+            receipt_ok(output, "configure")
+            rt.require(probe == prep.optional_probe_guard(native_output, record["optional_ld_query"], env, native_cmake.parent), "optional_probe_changed")
+            traced = prep.audit_trace(trace, allowed, probe, output)
+            paths.run(runner, [native_cmake, "--build", paths.path(output / "build"), "--target", "summary-grammar-validator", "--parallel", "2"],
+                      log_prefix=paths.path(output / "compile"), **kwargs)
+            receipt_ok(output, "compile")
         check_inputs(original, output, record, reviewed_sha)
         rt.check_refs(REPO, sources)
         exe = rt.safe_path(output, "build/bin/summary-grammar-validator.exe")
@@ -212,6 +407,8 @@ def build(original, output, reviewed_sha, runner=rt.run_owned, clock=time.monoto
                   "cleanup_receipts": [rt.reference(output / (name + ".json"), output) for name in ("configure", "compile")],
                   "build_logs": [rt.reference(output / (name + ext), output) for name in ("configure", "compile") for ext in (".stdout", ".stderr")],
                   "native_batch_runs": 0, "disk_bytes": rt.disk_bytes(output), "whole_cli_900_bound": False,
+                  "native_drive": paths.record,
+                  "native_drive_receipt": rt.reference(output / "build-native-drive.json", output) if native_drive else None,
                   "disk_scope": "4 GiB writable derivative/build/temp output only; original inputs remain separate read-only. No combined peak bound."}
         rt.write_bounded(output, output / "build-manifest.json", result)
         return result
@@ -242,10 +439,12 @@ def check_build(output, build_sha):
                           *manifest["cleanup_receipts"], *manifest["build_logs"]])
     for name in ("configure", "compile"):
         receipt_ok(output, name)
+    check_drive_history(output, manifest)
     return manifest
 
 
-def verify(output, build_sha, result_name="engine-check", runner=rt.run_owned, ps=None, clock=time.monotonic):
+def verify(output, build_sha, result_name="engine-check", runner=rt.run_owned, ps=None, clock=time.monotonic,
+           native_drive=None, mapping_backend=None):
     output = Path(output).absolute()
     rt.require(isinstance(result_name, str) and "/" not in result_name
                and result_name not in {"cmake", "build", "build-tmp"}, "compat_result_directory")
@@ -271,11 +470,12 @@ def verify(output, build_sha, result_name="engine-check", runner=rt.run_owned, p
         allowed = [executable]
         if "SystemRoot" in os.environ:
             allowed.append(Path(os.environ["SystemRoot"]) / "System32/conhost.exe")
-        process = runner([executable, result / "grammar.gbnf", result / "batch.bin"], cwd=result,
-                         env=rt.clean_environment([executable.parent], output, result_name + "/tmp"), root=output,
-                         log_prefix=result / "engine", deadline=deadline, rss=512 * 1024**2,
-                         host=2 * 1024**3, start=5 * 1024**3 // 2, allowed=allowed, ps=ps, clock=clock)
-        receipt_ok(result, "engine")
+        with NativeDrive(native_drive, output, "verify-native-drive", mapping_backend) as paths:
+            process = paths.run(runner, [paths.path(executable), paths.path(result / "grammar.gbnf"), paths.path(result / "batch.bin")],
+                                cwd=paths.path(result), env=paths.environment(rt.clean_environment([executable.parent], output, result_name + "/tmp")),
+                                root=paths.path(output), log_prefix=paths.path(result / "engine"), deadline=deadline, rss=512 * 1024**2,
+                                host=2 * 1024**3, start=5 * 1024**3 // 2, allowed=allowed, ps=ps, clock=clock)
+            receipt_ok(result, "engine")
         parsed = native.protocol((result / "engine.stdout").read_bytes(), rows)
         rt.require(clock() <= deadline, "whole_batch_deadline")
         rt.require((result / "batch.bin").read_bytes() == batch and (result / "grammar.gbnf").read_bytes() == grammar, "batch_input_changed")
@@ -288,6 +488,8 @@ def verify(output, build_sha, result_name="engine-check", runner=rt.run_owned, p
                 "review_artifact_sha256": manifest["inputs"]["review_artifact_sha256"],
                 "actual_acquisition": manifest["inputs"]["actual_acquisition"], "model_tokenizer_calls": 0,
                 "semantics_verified": False, "all_strings_equivalent": False,
+                "native_drive": paths.record,
+                "native_drive_receipt": rt.reference(output / "verify-native-drive.json", output) if native_drive else None,
                 "limit_scope": "sampled stop thresholds; not OS hard peak bounds"}
         rt.write_bounded(output, result / "result.json", data)
         return data
@@ -306,13 +508,14 @@ def main():
     parser.add_argument("--reviewed-acquisition-sha256")
     parser.add_argument("--reviewed-build-sha256")
     parser.add_argument("--result-name", default="engine-check")
+    parser.add_argument("--native-drive", help="Opt-in unused D: through Z: alias for this repository; removed only after owned children close.")
     args = parser.parse_args()
     if args.operation == "build":
         rt.require(args.acquisition_workspace is not None and args.reviewed_build_sha256 is None, "compat_build_arguments")
-        result = build(args.acquisition_workspace, args.workspace, args.reviewed_acquisition_sha256)
+        result = build(args.acquisition_workspace, args.workspace, args.reviewed_acquisition_sha256, native_drive=args.native_drive)
     else:
         rt.require(args.acquisition_workspace is None and args.reviewed_acquisition_sha256 is None, "compat_verify_arguments")
-        result = verify(args.workspace, args.reviewed_build_sha256, args.result_name)
+        result = verify(args.workspace, args.reviewed_build_sha256, args.result_name, native_drive=args.native_drive)
     print(result["status"])
 
 

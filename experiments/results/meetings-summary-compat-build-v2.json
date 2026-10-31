@@ -1,0 +1,63 @@
+{
+  "schema": "doctrail-summary-compat-build-result-v2",
+  "source_commit": "c5c93c31781b561af16880cc299a76d9db8ccfc2",
+  "summary": {
+    "status": "COMPAT_BUILD_V2_CONFIGURE_FAILED_PRESERVED",
+    "session_id": 18214,
+    "terminal_chunk": "df94ca",
+    "tool_exit": 1,
+    "natural_cli_exit": 1,
+    "whole_cli_and_cleanup_seconds": 171.03099999995902,
+    "failure": "BoundaryError: unexpected_child_executable",
+    "configure_seconds": 1.3910000000614673,
+    "configure_status": "failed",
+    "compile_invoked": false,
+    "build_manifest_present": false,
+    "inner_cleanup_all_absent": true,
+    "inner_cleanup_errors": [
+      "BoundaryError"
+    ],
+    "outer_cleanup_errors": [],
+    "known_including_launcher": 21,
+    "all_known_absent": true,
+    "werfault": {
+      "pid": 18480,
+      "create_time": 1793431281.6186264,
+      "observed_in": "inner configure cleanup identities",
+      "target_pid": null,
+      "outer_capture": false
+    },
+    "derived_cmake_files": 8032,
+    "derived_inventory_exact": true,
+    "new_output_files": 8046,
+    "new_output_bytes": 127353093,
+    "frozen_direct_refs": 55,
+    "frozen_and_ci_exact": true,
+    "original_full_body_rehashes_closeout": 0,
+    "original_preservation_scope": "Original saved inventory reused; source19/runtime5/companion5 and fixed original metadata checked. No new full original postfailure payload equality claim.",
+    "saved_original_inventory": {
+      "size_bytes": 3478049,
+      "sha256": "3ff7e5ddc04aeed0841970a2be48004e801d80cc8a87714b6510cd38d4f5726d"
+    },
+    "native_validator_runs": 0,
+    "model_runs": 0,
+    "once_consumed": true,
+    "retry": false,
+    "closeout_seconds": 3.797000000020489
+  },
+  "limits": {
+    "whole_cli_and_cleanup_seconds": 1200,
+    "outer_active_seconds": 1195,
+    "cleanup_seconds": 5,
+    "internal_configure_compile_seconds": 900,
+    "parallel": 2,
+    "rss_bytes": 2147483648,
+    "host_bytes": 2147483648,
+    "startup_host_bytes": 4294967296,
+    "output_disk_bytes": 4294967296,
+    "cli_log_bytes_each": 8388608
+  },
+  "final_sha256": "38fabac481b727ccd42a98ba86eab977d6f3b16cbf32306a153a4f1cd850bdbf",
+  "human_reviews": 0,
+  "AI_quality": false
+}

@@ -2,7 +2,7 @@
 import copy
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from types import SimpleNamespace
 
 import pytest
@@ -342,3 +342,213 @@ def test_native_result_cannot_modify_build_inputs(fixture, name):
     with pytest.raises(rt.BoundaryError, match="compat_result_directory"):
         compat.verify(f.output, sha, name, runner=f.runner, ps=SimpleNamespace())
     assert len(f.calls) == 2 and not (f.output / "native-issued.json").exists()
+
+
+class FakeDosDevices:
+    """No Windows calls/mappings. Translate fake aliases only inside fake I/O."""
+    def __init__(self, target):
+        self.target = target
+        self.definitions = []
+        self.logical_occupied = False
+        self.created = []
+        self.removed = []
+        self.same_ok = True
+
+    def query(self, drive):
+        return self.definitions[:]
+
+    def occupied(self, drive):
+        return self.logical_occupied
+
+    def create(self, drive, target):
+        self.created.append((drive, target))
+        self.definitions = [target]
+
+    def remove(self, drive, target):
+        self.removed.append((drive, target))
+        self.definitions = []
+
+    def canonical(self, value):
+        value = str(value)
+        if value.startswith("R:\\"):
+            return self.target.joinpath(*PureWindowsPath(value).parts[1:])
+        return Path(value)
+
+    def same(self, alias, canonical):
+        return self.same_ok and self.canonical(alias) == canonical
+
+
+@pytest.fixture
+def drive_fixture(fixture, monkeypatch):
+    f = fixture
+    sources = compat.source_refs()
+    monkeypatch.setattr(compat, "REPO", f.original.parent)
+    monkeypatch.setattr(compat, "source_refs", lambda: sources)
+    # Preserve real source validation through the already captured dependency refs.
+    check_refs = rt.check_refs
+    real_repo = Path(__file__).resolve().parents[1]
+    def checked(root, refs, *args, **kwargs):
+        if root == f.original.parent and refs == sources:
+            root = real_repo
+        return check_refs(root, refs, *args, **kwargs)
+    monkeypatch.setattr(rt, "check_refs", checked)
+    backend = FakeDosDevices(f.original.parent.resolve())
+    probe = prep.optional_probe_guard
+    def canonical_env(env):
+        return dict(env, PATH=os.pathsep.join(str(backend.canonical(p)) for p in env["PATH"].split(os.pathsep)),
+                    TEMP=str(backend.canonical(env["TEMP"])), TMP=str(backend.canonical(env["TMP"])))
+    def fake_probe(root, binding, env, app):
+        return probe(backend.canonical(root), binding, canonical_env(env), backend.canonical(app))
+    monkeypatch.setattr(prep, "optional_probe_guard", fake_probe)
+    calls = []
+    def runner(argv, **kwargs):
+        calls.append((list(map(str, argv)), dict(kwargs)))
+        assert all(str(value).isascii() for value in argv)
+        root, temporary = PureWindowsPath(str(kwargs["root"])), PureWindowsPath(kwargs["env"]["TEMP"])
+        assert temporary.is_relative_to(root) and temporary != root
+        translated = dict(kwargs)
+        for name in ("cwd", "root", "log_prefix"):
+            translated[name] = backend.canonical(kwargs[name])
+        translated["env"] = canonical_env(kwargs["env"])
+        rt.validate_temporary(translated["root"], translated["env"])
+        receipt = f.runner(argv, **translated)
+        receipt["argv"] = list(map(str, argv))
+        receipt["temporary_directory"] = kwargs["env"]["TEMP"]
+        Path(str(translated["log_prefix"]) + ".json").write_text(json.dumps(receipt), encoding="utf-8")
+        return receipt
+    return f, backend, runner, calls
+
+
+@pytest.mark.parametrize("occupied", ["query", "logical"])
+def test_native_drive_never_replaces_occupied_drive(tmp_path, monkeypatch, occupied):
+    monkeypatch.setattr(compat, "REPO", tmp_path)
+    backend = FakeDosDevices(tmp_path)
+    backend.definitions = ["other"] if occupied == "query" else []
+    backend.logical_occupied = occupied == "logical"
+    with pytest.raises(rt.BoundaryError, match="native_drive_occupied"), compat.NativeDrive("R:", tmp_path, "lease", backend):
+        pytest.fail("occupied drive entered")
+    assert backend.created == backend.removed == []
+
+
+@pytest.mark.parametrize("value", ["r:", "C:", "R", "R:\\", "R:evil", "AA:", "한:"])
+def test_native_drive_requires_explicit_safe_letter(tmp_path, value):
+    with pytest.raises(rt.BoundaryError, match="native_drive_letter"):
+        compat.NativeDrive(value, tmp_path, "lease", FakeDosDevices(tmp_path))
+
+
+@pytest.mark.parametrize("failure", ["changed", "identity", "children", "remove"])
+def test_native_drive_cleanup_retains_primary_and_never_removes_changed_mapping(tmp_path, monkeypatch, failure):
+    monkeypatch.setattr(compat, "REPO", tmp_path)
+    backend = FakeDosDevices(tmp_path)
+    with pytest.raises(ValueError, match="first failure") as caught, compat.NativeDrive("R:", tmp_path, "lease", backend) as lease:
+        if failure == "changed":
+            backend.definitions = ["someone-else"]
+        elif failure == "children":
+            lease.children_closed = False
+        elif failure == "remove":
+            monkeypatch.setattr(backend, "remove", lambda *args: (_ for _ in ()).throw(OSError("remove failure")))
+        else:
+            backend.same_ok = False
+            with pytest.raises(rt.BoundaryError, match="native_drive_identity"):
+                lease.path(tmp_path)
+        raise ValueError("first failure")
+    if failure == "identity":
+        assert len(backend.removed) == 1  # Same mapping, no child launched.
+    else:
+        assert backend.removed == []
+        assert caught.value.__notes__[0].startswith("native_drive_cleanup_failed:")
+
+
+def test_native_drive_maps_long_paths_without_short_names_and_rejects_suffix_escape(tmp_path, monkeypatch):
+    monkeypatch.setattr(compat, "REPO", tmp_path)
+    backend = FakeDosDevices(tmp_path)
+    with compat.NativeDrive("R:", tmp_path, "lease", backend) as lease:
+        long_path = tmp_path / ("ascii" * 30) / ("name" * 35) / "tool.exe"
+        alias = lease.path(long_path)
+        assert str(alias).isascii() and len(str(alias)) > 260 and backend.canonical(alias) == long_path
+        with pytest.raises(rt.BoundaryError, match="outside_repository"):
+            lease.path(tmp_path.parent / "outside")
+        with pytest.raises(rt.BoundaryError, match="non_ascii_suffix"):
+            lease.path(tmp_path / "남은한글")
+    assert backend.definitions == []
+
+
+def test_native_drive_build_actual_alias_argv_environment_and_historical_verification(drive_fixture):
+    f, backend, runner, calls = drive_fixture
+    manifest = compat.build(f.original, f.output, f.sha, runner=runner, clock=f.clock, native_drive="R:", mapping_backend=backend)
+    assert len(calls) == 2 and len(backend.created) == len(backend.removed) == 1 and backend.definitions == []
+    for argv, kwargs in calls:
+        assert argv[0].startswith("R:\\") and all(str(kwargs[k]).startswith("R:\\") for k in ("cwd", "root", "log_prefix"))
+        assert kwargs["deadline"] == 900 and kwargs["allowed"][0].is_relative_to(f.output)
+        assert kwargs["env"]["TEMP"] == kwargs["env"]["TMP"] and kwargs["env"]["PATH"].startswith("R:\\")
+    assert manifest["native_drive"]["cleanup"] == {"children_closed": True, "removed": True}
+    sha = rt.digest((f.output / "build-manifest.json").read_bytes())
+    assert compat.check_build(f.output, sha) == manifest  # No live mapping/query required.
+    result = compat.verify(f.output, sha, runner=runner, ps=SimpleNamespace(), clock=f.clock,
+                           native_drive="R:", mapping_backend=backend)
+    assert len(backend.created) == len(backend.removed) == 2 and len(calls) == 3
+    assert result["native_drive"]["cleanup"]["removed"] and calls[-1][1]["deadline"] == 60
+    assert rt.inventory(f.original) == f.frozen
+
+
+@pytest.mark.parametrize("cleanup_known", [False, True])
+def test_native_drive_failed_runner_only_removes_after_confirmed_owned_cleanup(drive_fixture, cleanup_known):
+    f, backend, _, _ = drive_fixture
+    def fail(*args, **kwargs):
+        error = rt.BoundaryError("native primary")
+        if cleanup_known:
+            error.supervision_record = {"cleanup": {"all_absent": True, "errors": ["BoundaryError"]}}
+        raise error
+    with pytest.raises(rt.BoundaryError, match="native primary"):
+        compat.build(f.original, f.output, f.sha, runner=fail, clock=f.clock, native_drive="R:", mapping_backend=backend)
+    assert bool(backend.removed) == cleanup_known
+    assert not (f.output / "build-manifest.json").exists()
+    assert rt.load(f.output / "build-failure.json")["reason"] == "native primary"
+
+
+@pytest.mark.parametrize("field", ["canonical_repository", "cleanup", "paths", "invocations"])
+def test_native_drive_historical_tampering_rejected(drive_fixture, field):
+    f, backend, runner, _ = drive_fixture
+    manifest = compat.build(f.original, f.output, f.sha, runner=runner, clock=f.clock, native_drive="R:", mapping_backend=backend)
+    manifest["native_drive"][field] = {"cleanup": {"removed": False}, "paths": [], "invocations": [], "canonical_repository": "wrong"}[field]
+    (f.output / "build-manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(rt.BoundaryError, match="native_drive_history"):
+        compat.check_build(f.output, rt.digest((f.output / "build-manifest.json").read_bytes()))
+
+
+def test_native_drive_cleanup_failure_blocks_success(drive_fixture, monkeypatch):
+    f, backend, runner, _ = drive_fixture
+    monkeypatch.setattr(backend, "remove", lambda *args: (_ for _ in ()).throw(OSError("remove failed")))
+    with pytest.raises(OSError, match="remove failed"):
+        compat.build(f.original, f.output, f.sha, runner=runner, clock=f.clock, native_drive="R:", mapping_backend=backend)
+    assert not (f.output / "build-manifest.json").exists()
+    assert backend.definitions and rt.load(f.output / "build-native-drive.json")["cleanup"]["removed"] is False
+
+
+def test_native_drive_creation_race_retains_changed_mapping(tmp_path, monkeypatch):
+    monkeypatch.setattr(compat, "REPO", tmp_path)
+    backend = FakeDosDevices(tmp_path)
+    def race(drive, target):
+        backend.definitions = [target, "concurrent-other-definition"]
+    monkeypatch.setattr(backend, "create", race)
+    with pytest.raises(rt.BoundaryError, match="native_drive_changed"), compat.NativeDrive("R:", tmp_path, "lease", backend):
+        pytest.fail("raced mapping admitted")
+    assert backend.removed == [] and len(backend.definitions) == 2
+
+
+def test_native_drive_receipt_error_does_not_mask_primary(tmp_path, monkeypatch):
+    monkeypatch.setattr(compat, "REPO", tmp_path)
+    backend = FakeDosDevices(tmp_path)
+    monkeypatch.setattr(rt, "write_bounded", lambda *args: (_ for _ in ()).throw(OSError("receipt failed")))
+    with pytest.raises(ValueError, match="primary") as caught, compat.NativeDrive("R:", tmp_path, "lease", backend):
+        raise ValueError("primary")
+    assert backend.definitions == [] and caught.value.__notes__ == ["native_drive_cleanup_failed:receipt failed"]
+
+
+def test_native_drive_history_cannot_drop_mapping(drive_fixture):
+    f, backend, runner, _ = drive_fixture
+    manifest = compat.build(f.original, f.output, f.sha, runner=runner, clock=f.clock, native_drive="R:", mapping_backend=backend)
+    manifest["native_drive"] = manifest["native_drive_receipt"] = None
+    (f.output / "build-manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(rt.BoundaryError, match="native_drive_history"):
+        compat.check_build(f.output, rt.digest((f.output / "build-manifest.json").read_bytes()))
