@@ -741,6 +741,383 @@ def acquire_supervised(root, runner=run_owned, clock=time.monotonic, acquisition
         raise
 
 
+# This is one fixed closed-acquisition verification path, not an import registry.
+CLOSED_KIND = "verified_copy_from_failed_acquisition"
+CLOSED_STATUS = "VERIFIED_COPY_UNREVIEWED_DO_NOT_EXECUTE"
+CLOSED_TREE = "a47b4d437e9769fc34c0116371412b5af5de67d1"
+CLOSED_NINJA_SHA = "f550fec705b6d6ff58f2db3c374c2277a37691678d6aba463adcbb129108467a"
+CLOSED_SOURCE_COMMIT = "0a9819e26f4320dedc76aa3d219b52a23a5936b8"
+CLOSED_SOURCE_FILES = ("scripts/prepare_summary_grammar_engine.py", "tools/summary_grammar/runtime.py", "tools/summary_grammar/pins.json")
+
+
+def closed_source_refs():
+    repo = Path(__file__).resolve().parents[1]
+    return [reference(repo / name, repo) for name in CLOSED_SOURCE_FILES]
+
+
+def closed_absolute_ref(path):
+    path = Path(path).absolute()
+    return {"path": str(path), **{k: v for k, v in reference(path, path.parent).items() if k != "file"}}
+
+
+def closed_read(ref, checkpoint, cap=16 * 1024**2):
+    external_keys(ref, "path size_bytes sha256")
+    require(type(ref["path"]) is str and Path(ref["path"]).is_absolute(), "closed_absolute_reference")
+    path = Path(ref["path"])
+    checkpoint()
+    root = external_root(path.parent)
+    data = external_read(root, path.name, cap, set(), {"file": path.name, "size_bytes": ref["size_bytes"], "sha256": ref["sha256"]})
+    checkpoint()
+    return data
+
+
+def closed_rows(root, rows):
+    require(type(rows) is list and 0 < len(rows) <= 20000, "closed_file_count")
+    names = {}
+    for row in rows:
+        external_keys(row, "file size_bytes sha256")
+        safe_path(root, row["file"])
+        require(type(row["size_bytes"]) is int and 0 <= row["size_bytes"] <= DOWNLOAD, "closed_file_size")
+        external_sha(row["sha256"])
+        require(row["file"].casefold() not in names, "closed_duplicate_path")
+        names[row["file"].casefold()] = row
+    require(sum(r["size_bytes"] for r in rows) <= DISK, "closed_input_bytes")
+    return {r["file"]: r for r in rows}
+
+
+def closed_inputs(root, path, expected, checkpoint):
+    """The expected binding digest is supplied by the separate outer assignment."""
+    external_sha(expected)
+    path = Path(path).absolute()
+    root = Path(root).absolute()
+    require(not path.is_relative_to(root), "closed_input_in_destination")
+    checkpoint()
+    raw_binding = external_read(external_root(path.parent), path.name, 1024**2, set(), expected=expected)
+    checkpoint()
+    binding = external_json(raw_binding)
+    external_keys(binding, "schema source_root raw inventory failed_terminal parent_closeout closed_final source_files bundle")
+    require(binding["schema"] == "engine-verify-closed-input-v1", "closed_input_schema")
+    require(type(binding["source_root"]) is str and Path(binding["source_root"]).is_absolute(), "closed_source_root")
+    source = external_root(binding["source_root"])
+    require(not root.resolve().is_relative_to(source.resolve()) and not source.resolve().is_relative_to(root.resolve()), "closed_disjoint_workspace")
+    require(not path.is_relative_to(source), "closed_input_in_source")
+    require(binding["source_files"] == closed_source_refs(), "closed_current_source_binding")
+    check_refs(BUNDLE, binding["bundle"], exact=True)
+    checkpoint()
+    docs = {key: external_json(closed_read(binding[key], checkpoint))
+            for key in ("raw", "inventory", "failed_terminal", "parent_closeout", "closed_final")}
+    require(Path(binding["raw"]["path"]) == source / "raw-acquisition.json", "closed_raw_path")
+    raw, failure, custody, final = (docs[k] for k in ("raw", "failed_terminal", "parent_closeout", "closed_final"))
+    require(raw.get("schema_version") == 2 and raw.get("status") == "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"
+            and raw.get("acquisition_profile") == ACQUISITION_PROFILE_1800 and "origin" not in raw
+            and raw.get("engine_commit") == COMMIT and raw.get("tree_id") == CLOSED_TREE, "closed_raw_contract")
+    require(failure.get("schema") == "engine-v3-observer-receipt-v1" and failure.get("status") == "FAILED_OR_UNKNOWN_CONSUMED"
+            and failure.get("workspace") == str(source) and failure.get("source_commit") == CLOSED_SOURCE_COMMIT
+            and failure.get("actual_cli_count") == failure.get("issued_once_count") == 1
+            and failure.get("limits_pass") is False and failure.get("all_absent") is True
+            and type(failure.get("exit_code")) is int and failure["exit_code"] != 0, "closed_failure_required")
+    require(custody.get("status") == "FAILED_ACTUAL_CLOSEOUT_ACCEPTED_HOLD_RELEASED"
+            and custody.get("head") == CLOSED_SOURCE_COMMIT and custody.get("whole_acquisition_success") is False,
+            "closed_parent_custody")
+    require(final.get("status") == "ACQUISITION_FAILED_CONSUMED_FULL_CUSTODY_VERIFIED"
+            and final.get("head") == CLOSED_SOURCE_COMMIT and final.get("once_consumed") is True
+            and final.get("all_known_owned_absent") is True and final.get("preservation_and_custody_failures") == [], "closed_final_contract")
+    repo = Path(__file__).resolve().parents[1]
+    for claimed, key in ((custody["final"], "closed_final"), (final["observer_receipt"], "failed_terminal"),
+                         (final["observer_inventory"], "inventory"), (failure["final_inventory"], "inventory")):
+        require((repo / claimed["file"]).resolve() == Path(binding[key]["path"]).resolve()
+                and all(claimed[k] == binding[key][k] for k in ("sha256", "size_bytes")), "closed_evidence_link")
+    inv = docs["inventory"]
+    rows = closed_rows(source, inv["files"])
+    require(type(inv["file_count"]) is int and inv["file_count"] == len(rows)
+            and type(inv["total_bytes"]) is int and inv["total_bytes"] == sum(r["size_bytes"] for r in rows.values()), "closed_inventory_totals")
+    require(rows.get("raw-acquisition.json") == {"file": "raw-acquisition.json", **{k: binding["raw"][k] for k in ("sha256", "size_bytes")}}, "closed_raw_inventory")
+    origin = {"kind": CLOSED_KIND, "input": {"path": str(path), "size_bytes": len(raw_binding), "sha256": expected},
+              "source_root": str(source), **{k: binding[k] for k in ("raw", "failed_terminal", "parent_closeout", "closed_final", "inventory", "source_files", "bundle")},
+              "source_was_failed": True, "source_once_consumed": True, "original_download_bytes": raw["download_bytes"]}
+    checkpoint()
+    return binding, raw, rows, origin
+
+
+def closed_payload(raw, rows, source):
+    payload = {}
+    def add(row):
+        require(row["file"] not in payload and rows.get(row["file"]) == row, "closed_payload_inventory")
+        payload[row["file"]] = row
+    for name in ("commit.json", "tree.json", "ninja-COPYING"):
+        require(name in rows, "closed_payload_missing")
+        add(rows[name])
+    configured = pins()["tools"]
+    require([t["name"] for t in raw["tools"]] == [t["name"] for t in configured], "closed_tool_set")
+    for tool, pin, directory in zip(raw["tools"], configured, ("llvm", "cmake", "ninja"), strict=True):
+        require(tool["directory"] == "tools/" + directory and tool["url"] == pin["asset"]
+                and tool["publisher_sha256"] == pin["published_sha256"]
+                and tool["archive_sha256"] == (CLOSED_NINJA_SHA if directory == "ninja" else pin["published_sha256"]), "closed_archive_pin")
+        archive = rows.get("archives/" + tool["name"])
+        require(archive is not None and archive["sha256"] == tool["archive_sha256"], "closed_archive_inventory")
+        add(archive)
+        closed_rows(source / tool["directory"], tool["inventory"])
+        for row in tool["inventory"]:
+            add({**row, "file": tool["directory"] + "/" + row["file"]})
+    source_refs = [{k: row[k] for k in ("file", "size_bytes", "sha256")} for row in raw["source"]]
+    closed_rows(source / "source", source_refs)
+    for row in source_refs: add({**row, "file": "source/" + row["file"]})
+    for row in raw["licenses"]:
+        require(payload.get(row["file"]) == row, "closed_license_payload")
+    expected = {name for name in rows if name.startswith(("archives/", "tools/", "source/"))}
+    require(expected == {name for name in payload if name.startswith(("archives/", "tools/", "source/"))}, "closed_payload_set")
+    return payload
+
+
+def closed_scan(source, rows, checkpoint):
+    observed, identities = {}, set()
+    for path in source.rglob("*"):
+        checkpoint()
+        name = path.relative_to(source).as_posix()
+        safe_path(source, name)
+        attrs = path.lstat()
+        require(stat.S_ISREG(attrs.st_mode) or stat.S_ISDIR(attrs.st_mode), "closed_file_type")
+        if stat.S_ISREG(attrs.st_mode):
+            require(name in rows and attrs.st_size == rows[name]["size_bytes"], "closed_file_set")
+            require((attrs.st_dev, attrs.st_ino) not in identities, "closed_file_alias")
+            identities.add((attrs.st_dev, attrs.st_ino))
+            observed[name] = (attrs.st_dev, attrs.st_ino, attrs.st_size, attrs.st_mtime_ns, attrs.st_ctime_ns)
+    require(set(observed) == set(rows), "closed_file_set")
+    checkpoint()
+    return observed
+
+
+def closed_copy_file(source, root, row, copy_file, budget):
+    path = safe_path(source, row["file"])
+    before = path.stat()
+    def stamp(s): return s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, getattr(s, "st_birthtime_ns", None)
+    target = safe_path(root, row["file"]) if copy_file else None
+    if target is not None: target.parent.mkdir(parents=True, exist_ok=True)
+    h, total = hashlib.sha256(), 0
+    with path.open("rb") as stream, (target.open("xb") if target is not None else nullcontext()) as out:
+        opened = os.fstat(stream.fileno())
+        require(stamp(before) == stamp(opened), "closed_file_changed")
+        if out is not None:
+            attrs = os.fstat(out.fileno())
+            require((attrs.st_dev, attrs.st_ino) != (opened.st_dev, opened.st_ino) and attrs.st_nlink == 1, "closed_copy_alias")
+        while True:
+            budget.check()
+            block = stream.read(min(65536, row["size_bytes"] - total + 1))
+            if not block: break
+            total += len(block)
+            require(total <= row["size_bytes"], "closed_file_changed")
+            h.update(block)
+            if out is not None: budget.write_chunk(out, block)
+            budget.check()
+        closed = os.fstat(stream.fileno())
+        require(stamp(opened) == stamp(closed) and opened.st_ctime_ns == closed.st_ctime_ns, "closed_file_changed")
+    after = safe_path(source, row["file"]).stat()
+    require(stamp(before) == stamp(after) and before.st_ctime_ns == after.st_ctime_ns
+            and total == row["size_bytes"] and h.hexdigest() == row["sha256"], "closed_file_changed")
+    if target is not None:
+        require(target.stat().st_size == total, "closed_copy_size")
+        if total == 0: budget.files[row["file"]] = 0
+        copied_hash = hashlib.sha256()
+        with target.open("rb") as copied:
+            while block := copied.read(65536):
+                budget.check()
+                copied_hash.update(block)
+        require(copied_hash.hexdigest() == row["sha256"], "closed_copy_sha256")
+    budget.check()
+
+
+def check_closed_payload(root, raw, checkpoint):
+    commit, tree = load(root / "commit.json"), load(root / "tree.json")
+    require(commit.get("sha") == COMMIT and commit.get("tree", {}).get("sha") == CLOSED_TREE
+            and tree.get("sha") == CLOSED_TREE and tree.get("truncated") is False
+            and type(tree.get("tree")) is list and len(tree["tree"]) <= 50000, "closed_commit_tree")
+    selected, case_names = {}, set()
+    for entry in tree["tree"]:
+        checkpoint()
+        name = entry["path"]
+        safe_path(root / "source", name)
+        require(name.casefold() not in case_names, "closed_tree_duplicate")
+        case_names.add(name.casefold())
+        if not (name in {"CMakeLists.txt", "LICENSE"} or name.split("/")[0] in {"cmake", "include", "src", "ggml", "vendor"}): continue
+        if entry["type"] == "tree": continue
+        require(entry["type"] == "blob" and entry["mode"] in ("100644", "100755") and selected_source(name), "closed_source_type")
+        require(type(entry["size"]) is int and 0 <= entry["size"] <= 16 * 1024**2, "closed_source_size")
+        selected[name] = entry
+    require(set(selected) == {r["file"] for r in raw["source"]}
+            and {"CMakeLists.txt", "LICENSE", "src/llama-grammar.cpp", "src/llama-grammar.h"} <= set(selected), "closed_source_set")
+    for row in raw["source"]:
+        checkpoint()
+        entry = selected[row["file"]]
+        data = safe_path(root / "source", row["file"]).read_bytes()
+        require(len(data) == entry["size"] and row["blob_id"] == entry["sha"]
+                and row["url"] == f"https://raw.githubusercontent.com/ggml-org/llama.cpp/{COMMIT}/{row['file']}"
+                and hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == entry["sha"], "closed_source_blob")
+        checkpoint()
+    expected_licenses = [reference(root / "ninja-COPYING", root), reference(root / "source/LICENSE", root)]
+    for tool in raw["tools"]:
+        checkpoint()
+        found = [r for r in tool["inventory"] if any(x in Path(r["file"]).name.lower() for x in ("license", "copying", "copyright"))]
+        require(found or tool["directory"] == "tools/ninja", "tool_license_missing")
+        expected_licenses.extend(reference(root / tool["directory"] / r["file"], root) for r in found)
+        if tool["directory"] == "tools/llvm":
+            require(tool["archive_sha256"] == LLVM_SHA, "llvm_archive_pin")
+            with zipfile.ZipFile(root / "archives" / tool["name"]) as archive:
+                infos, selection = llvm_selection(archive.infolist(), root / tool["directory"])
+            require(tool.get("selection") == selection and {(r["file"], r["size_bytes"]) for r in tool["inventory"]}
+                    == {(i.filename, i.file_size) for i in infos if not i.is_dir()}, "closed_llvm_selection")
+        checkpoint()
+    require(raw["licenses"] == expected_licenses, "closed_license_set")
+    require(raw["runtime_bindings"] == runtime_bindings(root, raw), "closed_runtime_binding")
+    checkpoint()
+
+
+def closed_command(root, path, expected, token=None, prefix=None):
+    args = ["verify-closed" if token is None else "_verify-closed-worker", "--workspace", str(root),
+            "--closed-input", str(path), "--closed-input-sha256", expected]
+    if token is not None: args += ["--worker-token", token]
+    return (prefix or [sys.executable, "-B", str(Path(__file__).resolve())]) + args + ["--acquisition-profile", ACQUISITION_PROFILE_1800]
+
+
+def verify_closed_worker(root, path, expected, token, budget_factory=Budget):
+    root, path = Path(root).absolute(), Path(path).absolute()
+    attempt = load(root / "acquisition-attempt.json")
+    require(os.environ.get("DOCTRAIL_ACQUIRE_TOKEN") == token == attempt.get("worker_token")
+            and attempt.get("argv") == closed_command(root, path, expected, token)
+            and attempt.get("shared_seconds") == 1800 and attempt.get("acquisition_profile") == ACQUISITION_PROFILE_1800, "closed_worker_binding")
+    budget = None
+    try:
+        budget = budget_factory(root, acquisition_profile=ACQUISITION_PROFILE_1800)
+        budget.end = min(budget.end, attempt["deadline"])
+        _, raw, rows, origin = closed_inputs(root, path, expected, budget.check)
+        require(origin == attempt.get("origin"), "closed_origin_binding")
+        source = Path(origin["source_root"])
+        payload = closed_payload(raw, rows, source)
+        before = closed_scan(source, rows, budget.check)
+        for name, row in rows.items():
+            closed_copy_file(source, root, row, name in payload, budget)
+        require(closed_scan(source, rows, budget.check) == before, "closed_original_changed")
+        check_closed_payload(root, raw, budget.check)
+        require(origin["source_files"] == closed_source_refs(), "closed_current_source_binding")
+        budget.scan()
+        check_refs(BUNDLE, origin["bundle"], exact=True)
+        result = {**raw, "status": CLOSED_STATUS, "origin": origin, "bundle": origin["bundle"],
+                  "network_requests": 0, "network_bytes": 0, "download_bytes": 0,
+                  "payload": list(payload.values()), "disk_bytes": budget.check(),
+                  "verification": {"input_files": len(rows), "input_bytes": sum(r["size_bytes"] for r in rows.values()),
+                                   "copied_files": len(payload), "copied_bytes": sum(r["size_bytes"] for r in payload.values()),
+                                   "archive_extraction": "not_repeated_fixed_archive_and_raw_provenance",
+                                   "source_blob_validation": "git_blob_sha1_and_raw_sha256"},
+                  "worker_sampling": budget.sampling("closed_manifest_before_raw_write")}
+        budget.write_json(root / "raw-acquisition.json", result)
+        budget.scan()
+        budget.check(force="success-terminal")
+        budget.terminal_observation = "observed_success_terminal"
+        budget.write_json(root / "worker-terminal.json", {**budget.sampling("success_terminal_before_receipt_write"), "origin": origin, "argv": attempt["argv"]})
+        budget.check()
+        return result
+    except Exception as error:
+        if budget is not None:
+            budget.failure = budget.failure or error; budget.failure_terminal(); error = budget.failure
+        try:
+            write_metadata(root, root / "acquisition-failure.json", {"error": type(error).__name__, "reason": str(error)[:4000],
+                           "partial_files_preserved": True, "execution": 0, "origin": attempt.get("origin")})
+        except Exception as reporting_error:  # noqa: BLE001 - retain first failure while preserving bounded diagnostics
+            error.add_note("failure_metadata_failed:" + type(reporting_error).__name__)
+        raise error  # noqa: TRY201 - error can be the earlier latched failure
+
+
+def verify_closed_supervised(root, path, expected, runner=run_owned, clock=time.monotonic):
+    deadline = clock() + 1800
+    def checkpoint(): require(clock() < deadline, "shared_deadline")
+    root, path = Path(root).absolute(), Path(path).absolute()
+    safe_path(Path(root.anchor), root.relative_to(root.anchor).as_posix())
+    require(not root.exists(), "closed_new_workspace")
+    _, _, _, origin = closed_inputs(root, path, expected, checkpoint)
+    root.mkdir(exist_ok=False)
+    token = secrets.token_hex(24)
+    command = closed_command(root, path, expected, token)
+    try:
+        write_metadata(root, root / "acquisition-attempt.json", {"worker_token": token, "argv": command, "shared_seconds": 1800,
+                       "deadline": deadline, "retry": False, "acquisition_profile": ACQUISITION_PROFILE_1800, "origin": origin}, deadline=deadline, clock=clock)
+        allowed = [Path(sys.executable), Path(getattr(sys, "_base_executable", sys.executable))]
+        if "SystemRoot" in os.environ: allowed.append(Path(os.environ["SystemRoot"]) / "System32/conhost.exe")
+        env = clean_environment([Path(sys.executable).parent], root, "acquisition-tmp")
+        env["DOCTRAIL_ACQUIRE_TOKEN"] = token
+        runner(command, cwd=root, env=env, root=root, log_prefix=root / "acquisition-supervision", deadline=deadline,
+               rss=2 * 1024**3, host=2 * 1024**3, start=4 * 1024**3, allowed=allowed, clock=clock,
+               acquisition_profile=ACQUISITION_PROFILE_1800, acquisition_origin=origin)
+        checkpoint()
+        result = load(root / "raw-acquisition.json")
+        require(result.get("origin") == origin, "closed_origin_binding")
+        check_closed_records(root, result, checkpoint)
+        result["worker_terminal"] = reference(root / "worker-terminal.json", root)
+        result["acquisition_cleanup"] = reference(root / "acquisition-supervision.json", root)
+        candidate = root / "acquisition-pending.json"
+        write_metadata(root, candidate, result, deadline=deadline, clock=clock)
+        checkpoint(); candidate.rename(root / "acquisition.json")
+        try: checkpoint()
+        except Exception:
+            (root / "acquisition.json").rename(candidate)
+            raise
+        return result
+    except Exception as error:
+        try:
+            write_metadata(root, root / "acquisition-supervision-failure.json", {"error": type(error).__name__,
+                           "reason": str(error)[:4000], "partial_files_preserved": True, "no_retry": True, "origin": origin})
+        except Exception as reporting_error:  # noqa: BLE001 - retain original supervision failure
+            error.add_note("supervision_metadata_failed:" + type(reporting_error).__name__)
+        raise
+
+
+def check_closed_records(root, lock, checkpoint=lambda: None):
+    require(lock.get("status") == CLOSED_STATUS and lock.get("acquisition_profile") == ACQUISITION_PROFILE_1800
+            and lock.get("schema_version") == 2
+            and all(type(lock.get(k)) is int and lock[k] == 0 for k in ("network_requests", "network_bytes", "download_bytes", "compiler_native_execution")),
+            "closed_manifest_contract")
+    require(not (root / "acquisition-failure.json").exists(), "acquisition_worker_failed")
+    attempt, raw, supervision, terminal = [load(root / name) for name in
+        ("acquisition-attempt.json", "raw-acquisition.json", "acquisition-supervision.json", "worker-terminal.json")]
+    origin = lock.get("origin")
+    require(type(origin) is dict and origin.get("kind") == CLOSED_KIND and origin.get("source_was_failed") is True
+            and origin.get("source_once_consumed") is True and origin.get("source_files") == closed_source_refs(), "closed_origin_contract")
+    external_keys(origin, "kind input source_root raw failed_terminal parent_closeout closed_final inventory source_files bundle source_was_failed source_once_consumed original_download_bytes")
+    _, original, rows, expected_origin = closed_inputs(root, origin["input"]["path"], origin["input"]["sha256"], checkpoint)
+    require(origin == expected_origin and lock.get("bundle") == origin["bundle"], "closed_origin_binding")
+    payload = closed_payload(original, rows, Path(origin["source_root"]))
+    require(lock.get("payload") == list(payload.values()), "closed_payload_binding")
+    require(lock.get("verification") == {"input_files": len(rows), "input_bytes": sum(r["size_bytes"] for r in rows.values()),
+        "copied_files": len(payload), "copied_bytes": sum(r["size_bytes"] for r in payload.values()),
+        "archive_extraction": "not_repeated_fixed_archive_and_raw_provenance", "source_blob_validation": "git_blob_sha1_and_raw_sha256"},
+        "closed_verification_binding")
+    for key in ("engine_commit", "tree_id", "tools", "source", "licenses", "runtime_bindings"):
+        require(lock.get(key) == original[key], "closed_original_manifest_binding")
+    require(attempt.get("origin") == raw.get("origin") == terminal.get("origin") == supervision.get("origin") == origin, "closed_origin_binding")
+    require(raw == {k: v for k, v in lock.items() if k not in {"acquisition_cleanup", "worker_terminal"}}, "raw_acquisition_changed")
+    argv = attempt.get("argv")
+    require(type(argv) is list and len(argv) >= 3 and all(type(v) is str for v in argv)
+            and argv[1] == "-B" and Path(argv[0]).is_absolute() and Path(argv[2]).is_absolute()
+            and Path(argv[2]).resolve() == Path(__file__).resolve()
+            and type(attempt.get("worker_token")) is str and bool(attempt["worker_token"]), "closed_attempt_binding")
+    command = closed_command(root, origin["input"]["path"], origin["input"]["sha256"], attempt.get("worker_token"), attempt.get("argv", [])[:3])
+    require(attempt.get("argv") == supervision.get("argv") == terminal.get("argv") == command
+            and attempt.get("retry") is False and type(attempt.get("shared_seconds")) is int and attempt["shared_seconds"] == 1800
+            and all(row.get("acquisition_profile") == ACQUISITION_PROFILE_1800 for row in (attempt, supervision)), "closed_attempt_binding")
+    require(supervision.get("status") == "process_exited_zero_not_semantic_success" and supervision.get("exit") == 0
+            and supervision.get("within_shared_deadline") is True and supervision.get("failure_latched") is False
+            and not supervision.get("error") and supervision.get("cleanup", {}).get("all_absent") is True
+            and supervision["cleanup"].get("errors") == [], "acquisition_supervision_failed")
+    sample = supervision.get("resource_sampling", {})
+    require(sample.get("interval_seconds") == .050 and sample.get("sample_count", 0) > 0 and sample.get("terminal_observation") == "observed", "acquisition_sampling_binding")
+    require(terminal.get("profile") == ACQUISITION_PROFILE_1800 and terminal.get("interval_seconds") == .050
+            and terminal.get("failure_latched") is False and terminal.get("terminal_observation") == "observed_success_terminal"
+            and terminal.get("forced_reasons", {}).get("success-terminal") == 1, "worker_terminal_binding")
+    require(raw.get("worker_sampling", {}).get("profile") == ACQUISITION_PROFILE_1800
+            and raw["worker_sampling"].get("failure_latched") is False, "worker_sampling_binding")
+    if "acquisition_cleanup" in lock:
+        require(lock.get("worker_terminal", {}).get("file") == "worker-terminal.json", "worker_terminal_binding")
+        check_refs(root, [lock["worker_terminal"]])
+
+
 def executable(root, lock, tool, basename):
     row = next(x for x in lock["tools"] if x["directory"] == "tools/" + tool)
     matches = [x for x in row["inventory"] if Path(x["file"]).name.lower() == basename]
@@ -951,7 +1328,9 @@ def check_external_acceptance(root, expected):
     require(observed == names, "external_companion_files")
     seen = set()
     acceptance = external_json(external_read(companion, "acceptance.json", 64 * 1024, seen, expected=expected))
-    external_keys(acceptance, "schema profile workspace attempt manifest stdout stderr observer_terminal custody sources")
+    offline = acceptance.get("schema") == "engine-verify-closed-external-acceptance-v1"
+    extra = " origin" if offline else ""
+    external_keys(acceptance, "schema profile workspace attempt manifest stdout stderr observer_terminal custody sources" + extra)
     profile = acceptance["profile"]
     require(profile in (ACQUISITION_PROFILE, ACQUISITION_PROFILE_1800), "external_contract")
     seconds = acquisition_seconds(profile)
@@ -959,10 +1338,16 @@ def check_external_acceptance(root, expected):
     def bound(value, schema):
         require(value["schema"] == schema and value["profile"] == profile
                 and value["workspace"] == workspace, "external_contract")
-    bound(acceptance, "engine-v3-external-acceptance-v1")
+    bound(acceptance, "engine-verify-closed-external-acceptance-v1" if offline else "engine-v3-external-acceptance-v1")
     manifest = external_json(external_read(root, "acquisition.json", 16 * 1024**2, seen, acceptance["manifest"]))
     attempt = external_json(external_read(root, "acquisition-attempt.json", 16 * 1024, seen, acceptance["attempt"]))
     require(manifest.get("acquisition_profile") == attempt.get("acquisition_profile") == profile, "acquisition_profile_binding")
+    if offline:
+        require(profile == ACQUISITION_PROFILE_1800 and manifest.get("status") == CLOSED_STATUS
+                and acceptance.get("origin") == manifest.get("origin") == attempt.get("origin"), "closed_external_origin")
+    else:
+        require("origin" not in manifest and "origin" not in attempt
+                and manifest.get("status") == "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE", "external_online_origin")
     stdout = external_read(companion, "cli.stdout", 4 * 1024, seen, acceptance["stdout"])
     external_read(companion, "cli.stderr", 8 * 1024**2, seen, acceptance["stderr"])
     terminal = external_json(external_read(companion, "observer-terminal.json", 128 * 1024, seen, acceptance["observer_terminal"]))
@@ -973,8 +1358,8 @@ def check_external_acceptance(root, expected):
     for ref, name, limit in zip(sources, ("scripts/prepare_summary_grammar_engine.py", "tools/summary_grammar/runtime.py", "tools/summary_grammar/pins.json"),
                                 (256 * 1024, 128 * 1024, 32 * 1024), strict=True):
         external_read(repo, name, limit, seen, ref)
-    external_keys(terminal, "schema evidence_kind profile workspace attempt_sha256 manifest_sha256 stdout_sha256 stderr_sha256 argv observer cli sources_before sources_after exit_code terminal_observed elapsed_seconds budget_seconds cleanup_reserved_seconds limits_pass first_failure")
-    bound(terminal, "engine-v3-external-terminal-v1")
+    external_keys(terminal, "schema evidence_kind profile workspace attempt_sha256 manifest_sha256 stdout_sha256 stderr_sha256 argv observer cli sources_before sources_after exit_code terminal_observed elapsed_seconds budget_seconds cleanup_reserved_seconds limits_pass first_failure" + extra)
+    bound(terminal, "engine-verify-closed-external-terminal-v1" if offline else "engine-v3-external-terminal-v1")
     require(terminal["evidence_kind"] == "external_actual_cli_observation", "external_evidence_kind")
     for key in ("attempt", "manifest", "stdout", "stderr"):
         require(terminal[key + "_sha256"] == acceptance[key]["sha256"], "external_terminal_binding")
@@ -992,7 +1377,9 @@ def check_external_acceptance(root, expected):
     require(all(type(item) is str for item in prefix) and prefix[1] == "-B"
             and Path(prefix[0]).is_absolute() and Path(prefix[2]).is_absolute()
             and Path(prefix[2]).resolve() == Path(__file__).resolve(), "external_attempt_argv")
-    require(terminal["argv"] == prefix + ["acquire", "--workspace", str(root), "--acquisition-profile", profile]
+    cli_command = (closed_command(root, acceptance["origin"]["input"]["path"], acceptance["origin"]["input"]["sha256"], prefix=prefix)
+                   if offline else prefix + ["acquire", "--workspace", str(root), "--acquisition-profile", profile])
+    require(terminal["argv"] == cli_command
             and cli[2] == os.path.normcase(str(Path(prefix[0]).resolve())), "external_cli_argv")
     require(type(terminal["exit_code"]) is int and terminal["exit_code"] == 0
             and terminal["terminal_observed"] is True and terminal["limits_pass"] is True
@@ -1001,10 +1388,12 @@ def check_external_acceptance(root, expected):
             and type(terminal["budget_seconds"]) is int and terminal["budget_seconds"] == seconds
             and type(terminal["cleanup_reserved_seconds"]) is int and terminal["cleanup_reserved_seconds"] == 5,
             "external_time_budget")
-    require(stdout in (b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n',
-                       b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\r\n'), "external_stdout_protocol")
-    external_keys(custody, "schema profile workspace attempt_sha256 manifest_sha256 observer_terminal_sha256 identities all_absent errors")
-    bound(custody, "engine-v3-external-custody-v1")
+    expected_stdout = json.dumps({"status": CLOSED_STATUS if offline else "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}).encode()
+    require(stdout in (expected_stdout + b"\n", expected_stdout + b"\r\n"), "external_stdout_protocol")
+    external_keys(custody, "schema profile workspace attempt_sha256 manifest_sha256 observer_terminal_sha256 identities all_absent errors" + extra)
+    bound(custody, "engine-verify-closed-external-custody-v1" if offline else "engine-v3-external-custody-v1")
+    if offline:
+        require(terminal["origin"] == custody["origin"] == acceptance["origin"], "closed_external_origin")
     for key in ("attempt", "manifest", "observer_terminal"):
         require(custody[key + "_sha256"] == acceptance[key]["sha256"], "external_custody_binding")
     require(custody["all_absent"] is True and custody["errors"] == [], "external_custody_failed")
@@ -1045,7 +1434,12 @@ def check_acquired(root, reviewed_sha):
         raw = external_read(external_root(root), "acquisition.json", 16 * 1024**2, set())
         require(digest(raw) == reviewed_sha, "review_digest_mismatch")
         lock = external_json(raw)
-    require(lock["status"] == "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE" and lock["engine_commit"] == COMMIT, "acquisition_contract")
+    offline = "origin" in lock or lock.get("status") == CLOSED_STATUS
+    require(lock["status"] == (CLOSED_STATUS if offline else "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE")
+            and lock["engine_commit"] == COMMIT, "acquisition_contract")
+    if offline:
+        require(external, "external_acceptance_missing")
+        check_closed_records(root, lock)
     check_refs(root, [lock["acquisition_cleanup"]])
     supervision = load(root / lock["acquisition_cleanup"]["file"])
     records = [lock, supervision]
@@ -1064,7 +1458,9 @@ def check_acquired(root, reviewed_sha):
         profile = profiles[0]
         require(profile in (ACQUISITION_PROFILE, ACQUISITION_PROFILE_1800)
                 and all(value == profile for value in profiles), "acquisition_profile_binding")
-        check_profile_records(root, lock, profile)
+        if not offline:
+            require(all("origin" not in row for row in records), "external_online_origin")
+            check_profile_records(root, lock, profile)
     else:
         require(not external, "external_profile_missing")
     cleanup = supervision["cleanup"]
@@ -1090,6 +1486,9 @@ def check_acquired(root, reviewed_sha):
                     == {(i.filename, i.file_size) for i in infos if not i.is_dir()}, "llvm_selection_inventory")
     check_refs(root, lock["licenses"])
     require(lock["runtime_bindings"] == runtime_bindings(root, lock), "runtime_bindings_changed")
+    if offline:
+        check_refs(root, [r for r in lock["payload"] if r["file"] in {"commit.json", "tree.json", "ninja-COPYING"}])
+        check_closed_payload(root, lock, lambda: None)
     return lock
 
 
@@ -1171,18 +1570,31 @@ def build(root, reviewed_sha, runner=run_owned, clock=time.monotonic):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("operation", choices=["inspect", "acquire", "build", "_acquire-worker"])
+    parser.add_argument("operation", choices=["inspect", "acquire", "build", "_acquire-worker", "verify-closed", "_verify-closed-worker"])
     parser.add_argument("--workspace", type=Path)
     parser.add_argument("--worker-token", help=argparse.SUPPRESS)
     parser.add_argument("--reviewed-acquisition-sha256", help="Externally reviewed artifact SHA256: legacy acquisition.json; v3 sibling external-review/acceptance.json. Supply only after independent CLI-terminal and custody review; hashes do not authenticate self-asserted observations.")
     parser.add_argument("--acquisition-profile", choices=[ACQUISITION_PROFILE, ACQUISITION_PROFILE_1800])
+    parser.add_argument("--closed-input", type=Path, help="Separately fixed failed-acquisition input binding; never an approval of the failed lock.")
+    parser.add_argument("--closed-input-sha256", help="Expected input-binding SHA256 supplied by the separate outer assignment.")
     args = parser.parse_args()
-    require(args.acquisition_profile is None or args.operation in {"acquire", "_acquire-worker"}, "acquisition_profile_operation")
+    offline = args.operation in {"verify-closed", "_verify-closed-worker"}
+    require(args.acquisition_profile is None or args.operation in {"acquire", "_acquire-worker"} or offline, "acquisition_profile_operation")
+    require(offline or (args.closed_input is None and args.closed_input_sha256 is None), "closed_input_operation")
+    if offline:
+        require(args.acquisition_profile == ACQUISITION_PROFILE_1800 and args.closed_input is not None
+                and args.closed_input_sha256 is not None, "closed_cli_contract")
     if args.operation == "inspect":
         print(json.dumps({"pins": pins(), "executable_ready": False}))
     else:
         require(args.workspace is not None, "workspace_required")
-        if args.operation == "_acquire-worker":
+        if offline:
+            if args.operation == "_verify-closed-worker":
+                require(args.worker_token is not None, "worker_token_required")
+                result = verify_closed_worker(args.workspace, args.closed_input, args.closed_input_sha256, args.worker_token)
+            else:
+                result = verify_closed_supervised(args.workspace, args.closed_input, args.closed_input_sha256)
+        elif args.operation == "_acquire-worker":
             require(args.worker_token is not None, "worker_token_required")
             result = acquire(args.workspace, worker_token=args.worker_token, acquisition_profile=args.acquisition_profile)
         elif args.operation == "acquire":

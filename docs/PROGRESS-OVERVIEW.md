@@ -2,7 +2,7 @@
 
 기준일: 2026-10-30. **문서·회의 관리와 화면 연결은 구현했으며, 무료 로컬 AI의 답변·요약 품질과 최종 운영 검증이 남아 있다.** 회의 지능형 관리 1차와 전체 포트폴리오 목표는 진행 중이다. 완료율을 숫자로 계산할 근거는 없다.
 
-사용자가 체감하는 핵심 미완료는 “회의를 넣으면 믿을 만한 요약과 답변이 나오는가”다. 관리 기능과 많은 회귀 검사가 있어도 이 부분을 대체하지 못한다. 로컬 모델의 내용 실패와 실행 환경 오류를 해결하는 과정에서 실행 통제·검토 절차도 지나치게 커졌다. 고정6개 질문의 기준/후보 실측은 끝났고 독립 AI 내용 수용은 두 모델 모두0/6으로 끝났다. 후보를 채택하지 않고 비교를 종료했다. 이미 종료한 비교는 반복하지 않는다. [정상 파일 모드 거절 결함](MEETINGS-SUMMARY-SOURCE-MODES.md)의 수정과 필수 CI를 마쳤다. 현재는 소스 다운로드의 [HTTPS 연결 재사용](MEETINGS-SUMMARY-SOURCE-TRANSPORT.md)을 구현·집중 검사·독립 변경 검토·필수 CI를 마쳤고, 수정 소스의 실제 취득은 소스1,687개와 라이선스 단계를 마친 뒤 마지막 명세 검증에서 실패했다. [v7 결과](../experiments/results/meetings-summary-engine-v7-acquisition-v1.json)의 원본과 보존·종료를 확인했고 잘못된 고정 줄 위치를 실제61행으로 수정했다. 관련40개와 실제11KB 모듈의 메타데이터 검사를 통과했으며 [독립 변경 검토](MEETINGS-SUMMARY-OPTIONAL-PROBE.md)를 통과해 한 번의 게시와 필수 CI를 진행한다. 일반 자연어 QA의 후속 해결책은 아직 확정되지 않았다.
+사용자가 체감하는 핵심 미완료는 “회의를 넣으면 믿을 만한 요약과 답변이 나오는가”다. 관리 기능과 많은 회귀 검사가 있어도 이 부분을 대체하지 못한다. 로컬 모델의 내용 실패와 실행 환경 오류를 해결하는 과정에서 실행 통제·검토 절차도 지나치게 커졌다. 고정6개 질문의 기준/후보 실측은 끝났고 독립 AI 내용 수용은 두 모델 모두0/6으로 끝났다. 후보를 채택하지 않고 비교를 종료했다. 이미 종료한 비교는 반복하지 않는다. [정상 파일 모드 거절 결함](MEETINGS-SUMMARY-SOURCE-MODES.md)의 수정과 필수 CI를 마쳤다. 현재는 소스 다운로드의 [HTTPS 연결 재사용](MEETINGS-SUMMARY-SOURCE-TRANSPORT.md)을 구현·집중 검사·독립 변경 검토·필수 CI를 마쳤고, 수정 소스의 실제 취득은 소스1,687개와 라이선스 단계를 마친 뒤 마지막 명세 검증에서 실패했다. [v7 결과](../experiments/results/meetings-summary-engine-v7-acquisition-v1.json)의 원본과 보존·종료를 확인했고 잘못된 고정 줄 위치를 실제61행으로 수정했다. 관련40개와 실제11KB 모듈의 메타데이터 검사를 통과했으며 [독립 변경 검토](MEETINGS-SUMMARY-OPTIONAL-PROBE.md)와 필수 CI를 통과했다. 기존 실행 도구를 재사용한 다음 실제 취득의 최소 준비를 진행한다. 일반 자연어 QA의 후속 해결책은 아직 확정되지 않았다.
 
 ## 기능별 상태
 
@@ -17,6 +17,8 @@
 
 화면 완성도도 완료 기준이다. 실제 Java와 합성 모델 응답을 연결한 화면 검사는 실제 AI의 내용 품질이나 사용자 검수를 대신하지 않는다.
 
+수정된 도구의 [v8 실제 취득](../experiments/results/meetings-summary-engine-v8-acquisition-v1.json)은 내부 명세 작성까지 마친 뒤 최종 게시 전 시간 한도로 종료됐다. 실패와 파일 보존을 확인했고, 시간을 늘리거나 다시 다운로드하지 않도록 별도 [오프라인 검증 경로](../experiments/results/meetings-summary-offline-implementation-v1.json)를 구현했다. 집중 검사 고유82개와 독립 코드 검토를 마쳤으며 필수 CI와 실제 오프라인 실행은 남아 있다. 컴파일·새 요약 품질은 여전히 미검증이다.
+
 ## 지금 해결하는 문제
 
 [최신 QA 비교](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)는 같은 6개에서 기준 3B와 후보 7B 모두 내용 수용 0/6으로 종료됐다. 입력 한도 초과·출력 잘림뿐 아니라 필수 내용 누락, 선택 근거와 주장의 불일치, 답변 보류 실패가 남았다. 인용 문자열 일치와 충분한 답변은 다르다. 작은 개발 비교이므로 일반 정답률로 확대하지 않으며 같은 질문 재튜닝·자동 다음 모델 탐색은 하지 않는다.
@@ -27,7 +29,7 @@
 
 ## 현재 검증 근거
 
-- 게시 `234c363`의 [필수 CI](../experiments/results/meetings-summary-source-https-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. Python 5,524개 통과·21개 제외, 각 브라우저 158개 통과·실패 0, 실제 Java HTTP·DB와 합성 회의 운영 검사 통과. HTTPS 연결 재사용의 실제 원격 전송 시간과 전체 취득·컴파일·새 요약 품질은 아직 검증하지 않았다.
+- 게시 `0a9819e`의 [필수 CI](../experiments/results/meetings-summary-optional-probe-ci-v1.json): push·PR의 backend/web/java-service 모두 통과. Python 5,532개 통과·21개 제외, 각 브라우저 158개 통과·실패 0, 실제 Java HTTP·DB와 합성 회의 운영 검사 통과. v7 소스 단계는530.969초에 완료됐지만 마지막 명세에서 실패했다. 이 시간은 단일 단계 관측이며 인과적 속도 향상이나 전체 취득·컴파일·새 요약 품질의 성공을 뜻하지 않는다.
 - [실제 회의 관리 흐름](MEETINGS-MANUAL-CORRECTION-VERIFICATION.md), [백업·복원](MEETINGS-RESTORE-VERIFICATION.md), [실제 QA 실패와 독립 AI 판정](MEETINGS-FREE-QA-PAIRED-V3-RESULTS.md)은 서로 다른 증거다. CI 통과가 실제 AI 품질 수용을 뜻하지 않는다.
 - 사용자 직접 검수·공개 서비스 배포는 완료하지 않았다. 실패 후보는 기본 모델로 채택하지 않았다.
 

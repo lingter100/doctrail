@@ -304,8 +304,21 @@ class OwnedTree:
 
 def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allowed,
               ps=None, popen=subprocess.Popen, clock=time.monotonic, sleeper=time.sleep,
-              acquisition_profile=None):
+              acquisition_profile=None, acquisition_origin=None):
     require(acquisition_profile in (None, "llvm-x64-sampled-50ms-v1", "llvm-x64-sampled-50ms-1800s-v1"), "acquisition_profile")
+    if acquisition_origin is not None:
+        require(acquisition_profile == "llvm-x64-sampled-50ms-1800s-v1"
+                and type(acquisition_origin) is dict
+                and acquisition_origin.get("kind") == "verified_copy_from_failed_acquisition", "acquisition_origin")
+        acquisition_origin = parse_json(json.dumps(acquisition_origin, allow_nan=False))
+        binding = acquisition_origin.get("input", {})
+        require(type(binding.get("path")) is str and Path(binding["path"]).is_absolute()
+                and type(binding.get("sha256")) is str and len(binding["sha256"]) == 64
+                and all(c in "0123456789abcdef" for c in binding["sha256"])
+                and type(env.get("DOCTRAIL_ACQUIRE_TOKEN")) is str
+                and list(argv[3:]) == ["_verify-closed-worker", "--workspace", str(root), "--closed-input", binding["path"],
+                    "--closed-input-sha256", binding["sha256"], "--worker-token", env["DOCTRAIL_ACQUIRE_TOKEN"],
+                    "--acquisition-profile", acquisition_profile], "acquisition_origin_argv")
     sampled = acquisition_profile is not None
     first_failure = [None]
     last_sample, last_startup = [None], [None]
@@ -358,6 +371,8 @@ def run_owned(argv, cwd, env, root, log_prefix, deadline, rss, host, start, allo
               "active_disk_scans": {"count": 0, "entries": 0, "seconds": 0.0}}
     if sampled:
         record.update(acquisition_profile=acquisition_profile, resource_sampling=sampling, failure_latched=False)
+    if acquisition_origin is not None:
+        record["origin"] = acquisition_origin
     process, tree = None, None
     error = None
     try:

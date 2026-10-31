@@ -585,6 +585,7 @@ def test_exact_optional_ld_trace_requires_reviewed_module_position_and_args(tmp_
         with pytest.raises(rt.BoundaryError): prep.audit_trace(trace, [tmp_path / "tools/cmake/bin/cmake.exe"], guard, tmp_path)
     else:
         assert prep.audit_trace(trace, [], guard, tmp_path) == 1
+
         assert "not_an_execution_result" in guard["scope"]
         tree = rt.OwnedTree(None, [], None, lambda: 0)
         with pytest.raises(rt.BoundaryError, match="unexpected_child"):
@@ -2522,3 +2523,295 @@ def test_optional_probe_fixed61_independent_public_excerpt(tmp_path, fault):
         trace.write_text(json.dumps({"cmd": "execute_process", "file": str(module), "line": 61,
             "args": ["COMMAND", "ld", "-v", "OUTPUT_VARIABLE", "_help", "ERROR_VARIABLE", "_help"]}) + "\n")
         assert prep.audit_trace(trace, [], guard, tmp_path) == 1
+
+
+@pytest.fixture(scope="module")
+def closed_template(tmp_path_factory):
+    """Small synthetic failed source. Never consult the preserved actual payload."""
+    root = tmp_path_factory.mktemp("closed-template") / "work"
+    with pytest.MonkeyPatch.context() as patch:
+        result = v3_mocked_acquisition(root, patch, profile=prep.ACQUISITION_PROFILE_1800)
+        configured, llvm_sha = prep.pins(), prep.LLVM_SHA
+    return ({p.relative_to(root).as_posix(): p.read_bytes() for p in root.rglob("*")
+             if p.is_file() and p.name != "acquisition.json"}, configured, llvm_sha, result["tree_id"])
+
+
+def closed_binding(source, evidence):
+    evidence.mkdir()
+    def put(name, row):
+        path = evidence / name; rt.write(path, row)
+        return prep.closed_absolute_ref(path)
+    def relative(ref):
+        return {"file": ref["path"], "sha256": ref["sha256"], "size_bytes": ref["size_bytes"]}
+    rows = rt.inventory(source)
+    inv = put("inventory.json", {"files": rows, "file_count": len(rows), "total_bytes": sum(r["size_bytes"] for r in rows)})
+    failed = put("failed.json", {"schema": "engine-v3-observer-receipt-v1", "status": "FAILED_OR_UNKNOWN_CONSUMED",
+        "workspace": str(source), "source_commit": prep.CLOSED_SOURCE_COMMIT, "actual_cli_count": 1, "issued_once_count": 1,
+        "limits_pass": False, "all_absent": True, "exit_code": 15, "final_inventory": relative(inv)})
+    final = put("final.json", {"status": "ACQUISITION_FAILED_CONSUMED_FULL_CUSTODY_VERIFIED", "head": prep.CLOSED_SOURCE_COMMIT,
+        "once_consumed": True, "all_known_owned_absent": True, "preservation_and_custody_failures": [],
+        "observer_receipt": relative(failed), "observer_inventory": relative(inv)})
+    parent = put("parent.json", {"status": "FAILED_ACTUAL_CLOSEOUT_ACCEPTED_HOLD_RELEASED", "head": prep.CLOSED_SOURCE_COMMIT,
+        "whole_acquisition_success": False, "final": relative(final)})
+    binding = {"schema": "engine-verify-closed-input-v1", "source_root": str(source),
+        "raw": prep.closed_absolute_ref(source / "raw-acquisition.json"), "inventory": inv, "failed_terminal": failed,
+        "parent_closeout": parent, "closed_final": final, "source_files": prep.closed_source_refs(), "bundle": rt.inventory(rt.BUNDLE)}
+    ref = put("input.json", binding)
+    return Path(ref["path"]), ref["sha256"]
+
+
+@pytest.fixture
+def closed_fixture(tmp_path, monkeypatch, closed_template):
+    files, configured, llvm_sha, tree = closed_template
+    monkeypatch.setattr(prep, "pins", lambda: configured)
+    monkeypatch.setattr(prep, "LLVM_SHA", llvm_sha)
+    monkeypatch.setattr(prep, "CLOSED_TREE", tree)
+    source = tmp_path / "failed-source"; source.mkdir()
+    for name, data in files.items():
+        path = source / name; path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(data)
+    raw = rt.load(source / "raw-acquisition.json")
+    monkeypatch.setattr(prep, "CLOSED_NINJA_SHA", raw["tools"][2]["archive_sha256"])
+    def forbidden(*args, **kwargs): pytest.fail("offline called a network/native/online acquisition entry point")
+    for name in ("fetch", "open_download", "SourceHTTPS", "acquire", "extract_zip", "extract_llvm_x64"):
+        monkeypatch.setattr(prep, name, forbidden)
+    monkeypatch.setattr(prep.urllib.request, "build_opener", forbidden)
+    monkeypatch.setattr(prep.http.client, "HTTPSConnection", forbidden)
+    binding, expected = closed_binding(source, tmp_path / "evidence")
+    return SimpleNamespace(source=source, root=tmp_path / "new", binding=binding, expected=expected, raw=raw)
+
+
+def closed_run(f, monkeypatch, clock=None, runner_fault=None, budget_factory=None):
+    clock = clock or Clock()
+    def runner(argv, **kwargs):
+        assert kwargs["deadline"] == 1800 and kwargs["acquisition_profile"] == prep.ACQUISITION_PROFILE_1800
+        assert (kwargs["rss"], kwargs["host"], kwargs["start"]) == (2 * 1024**3, 2 * 1024**3, 4 * 1024**3)
+        token = argv[argv.index("--worker-token") + 1]
+        monkeypatch.setenv("DOCTRAIL_ACQUIRE_TOKEN", token)
+        prep.verify_closed_worker(f.root, f.binding, f.expected, token,
+            budget_factory=budget_factory or (lambda folder, **options: prep.Budget(folder, ps=FakePS(folder), clock=clock, **options)))
+        rt.write(f.root / "acquisition-supervision.json", {"acquisition_profile": prep.ACQUISITION_PROFILE_1800,
+            "origin": kwargs["acquisition_origin"], "argv": argv, "status": "process_exited_zero_not_semantic_success",
+            "exit": 0, "within_shared_deadline": True, "failure_latched": False,
+            "cleanup": {"all_absent": True, "errors": [], "identities": [[202, 2.0, prep.os.path.normcase(str(Path(prep.sys.executable).resolve()))]]},
+            "resource_sampling": {"interval_seconds": .050, "sample_count": 3, "terminal_observation": "observed"}})
+        if runner_fault: runner_fault(f.root)
+    return prep.verify_closed_supervised(f.root, f.binding, f.expected, runner=runner, clock=clock)
+
+
+def closed_external_fixture(root, mutate=None):
+    lock = rt.load(root / "acquisition.json")
+    folder = root.with_name(root.name + ".external-review")
+    origin = lock["origin"]
+    def change(kind, row):
+        row["schema"] = "engine-verify-closed-external-" + kind + "-v1"
+        row["origin"] = origin
+        if kind == "terminal":
+            (folder / "cli.stdout").write_bytes((json.dumps({"status": prep.CLOSED_STATUS}) + "\n").encode())
+            row["stdout_sha256"] = rt.reference(folder / "cli.stdout", folder)["sha256"]
+            row["argv"] = prep.closed_command(root, origin["input"]["path"], origin["input"]["sha256"])
+        if kind == "acceptance": row["stdout"] = rt.reference(folder / "cli.stdout", folder)
+        if mutate: mutate(kind, row)
+    return v3_external_fixture(root, change, prep.ACQUISITION_PROFILE_1800)
+
+
+def test_closed_full_copy_and_external_admission_leave_failed_source_unchanged(closed_fixture, monkeypatch):
+    f = closed_fixture; before = rt.inventory(f.source)
+    result = closed_run(f, monkeypatch)
+    assert result["status"] == prep.CLOSED_STATUS
+    assert result["network_requests"] == result["network_bytes"] == result["download_bytes"] == 0
+    assert result["origin"]["original_download_bytes"] > 0
+    assert result["verification"]["input_files"] == len(before)
+    assert result["origin"]["source_was_failed"] and result["origin"]["source_once_consumed"]
+    assert rt.inventory(f.source) == before
+    for row in result["payload"]:
+        a, b = f.source / row["file"], f.root / row["file"]
+        assert a.read_bytes() == b.read_bytes() and a.stat().st_ino != b.stat().st_ino
+    assert rt.load(f.root / "worker-terminal.json") != rt.load(f.source / "worker-terminal.json")
+    with pytest.raises(rt.BoundaryError, match="external_acceptance_missing"):
+        prep.check_acquired(f.root, rt.digest((f.root / "acquisition.json").read_bytes()))
+    assert prep.check_acquired(f.root, closed_external_fixture(f.root)) == result
+
+
+@pytest.mark.parametrize("fault", ["digest", "overlap", "ancestor", "existing", "binding-in-new", "changed", "missing", "extra", "reparse", "source-ref", "bundle", "failure", "closeout-link"])
+def test_closed_input_faults_never_publish(closed_fixture, monkeypatch, fault):
+    f = closed_fixture
+    if fault == "digest": f.expected = "0" * 64
+    elif fault == "overlap": f.root = f.source / "new"
+    elif fault == "ancestor": f.root = f.source.parent
+    elif fault == "existing": f.root.mkdir()
+    elif fault == "binding-in-new": f.root = f.binding.parent
+    elif fault == "changed": (f.source / "source/LICENSE").write_bytes(b"X" * (f.source / "source/LICENSE").stat().st_size)
+    elif fault == "missing": (f.source / "source/LICENSE").unlink()
+    elif fault == "extra": (f.source / "surprise").write_bytes(b"extra")
+    elif fault == "reparse":
+        original = Path.lstat
+        def reparse(path):
+            s = original(path)
+            return SimpleNamespace(st_mode=s.st_mode, st_file_attributes=1024) if path == f.source / "source/LICENSE" else s
+        monkeypatch.setattr(Path, "lstat", reparse)
+    else:
+        row = rt.load(f.binding)
+        if fault == "source-ref": row["source_files"][0]["sha256"] = "0" * 64
+        elif fault == "bundle": row["bundle"][0]["sha256"] = "0" * 64
+        elif fault == "failure": row["failed_terminal"] = row["parent_closeout"]
+        else: row["closed_final"] = row["parent_closeout"]
+        f.binding.write_text(json.dumps(row)); f.expected = rt.digest(f.binding.read_bytes())
+    with pytest.raises((rt.BoundaryError, OSError)):
+        closed_run(f, monkeypatch)
+    assert not (f.root / "acquisition.json").exists()
+
+
+@pytest.mark.parametrize("fault", ["case", "duplicate", "archive", "ninja", "tool-extra", "license", "runtime", "blob", "tree-mode", "tree-set", "llvm-selection", "ninja-path"])
+def test_closed_semantic_payload_faults_with_fixed_fixture_binding(closed_fixture, monkeypatch, fault):
+    f = closed_fixture
+    raw = f.raw
+    if fault == "case": raw["source"].append({**raw["source"][0], "file": raw["source"][0]["file"].upper()})
+    elif fault == "duplicate": raw["source"].append(raw["source"][0])
+    elif fault == "archive": raw["tools"][0]["archive_sha256"] = "0" * 64
+    elif fault == "ninja": raw["tools"][2]["archive_sha256"] = "0" * 64
+    elif fault == "tool-extra": (f.source / "tools/ninja/unexpected.exe").write_bytes(b"unexpected")
+    elif fault == "license": raw["licenses"] = raw["licenses"][:-1]
+    elif fault == "runtime": raw["runtime_bindings"]["optional_ld_query"]["line"] = 55
+    elif fault == "blob": raw["source"][0]["blob_id"] = "0" * 40
+    elif fault in {"tree-mode", "tree-set"}:
+        path = f.source / "tree.json"; tree = rt.load(path)
+        if fault == "tree-mode": tree["tree"][0]["mode"] = "120000"
+        else: tree["tree"].pop()
+        path.write_text(json.dumps(tree))
+    elif fault == "llvm-selection": raw["tools"][0]["selection"]["excluded_entries"] += 1
+    else: raw["tools"][2]["directory"] = "tools/NINJA"
+    (f.source / "raw-acquisition.json").write_text(json.dumps(raw))
+    f.binding, f.expected = closed_binding(f.source, f.source.parent / "altered-fixed-fixture")
+    before = rt.inventory(f.source)
+    with pytest.raises(rt.BoundaryError): closed_run(f, monkeypatch)
+    assert not (f.root / "acquisition.json").exists()
+    assert rt.inventory(f.source) == before
+
+
+@pytest.mark.parametrize("fault", ["worker-old", "worker-argv", "supervision-origin", "supervision-argv", "raw-network", "raw-network-bool", "raw-payload"])
+def test_closed_new_records_reject_mixing(closed_fixture, monkeypatch, fault):
+    f = closed_fixture
+    def corrupt(root):
+        name = "worker-terminal.json" if fault.startswith("worker") else "acquisition-supervision.json" if fault.startswith("supervision") else "raw-acquisition.json"
+        path = root / name; row = rt.load(path)
+        if fault == "worker-old": row = rt.load(f.source / name)
+        elif fault.endswith("argv"): row["argv"][3] = "_acquire-worker"
+        elif fault.endswith("origin"): row["origin"]["input"]["sha256"] = "0" * 64
+        elif fault == "raw-network": row["network_requests"] = 1
+        elif fault == "raw-network-bool": row["network_requests"] = False
+        else: row["payload"].pop()
+        path.write_text(json.dumps(row))
+    with pytest.raises(rt.BoundaryError): closed_run(f, monkeypatch, runner_fault=corrupt)
+    assert not (f.root / "acquisition.json").exists()
+
+
+@pytest.mark.parametrize("fault", ["old-acceptance", "old-terminal", "old-custody", "origin", "argv", "stdout", "exit", "terminal", "deadline", "source"])
+def test_closed_external_mixed_old_or_failed_cli_rejected(closed_fixture, monkeypatch, fault):
+    f = closed_fixture; closed_run(f, monkeypatch)
+    def corrupt(kind, row):
+        if fault == "old-" + kind:
+            row["schema"] = "engine-v3-external-" + kind + "-v1"; row.pop("origin")
+        if kind != "terminal": return
+        if fault == "origin": row["origin"] = {**row["origin"], "source_root": str(f.root)}
+        elif fault == "argv": row["argv"][3] = "acquire"
+        elif fault == "stdout":
+            folder = f.root.with_name(f.root.name + ".external-review")
+            (folder / "cli.stdout").write_bytes(b'{"status": "ACQUIRED_UNREVIEWED_DO_NOT_EXECUTE"}\n')
+            row["stdout_sha256"] = rt.reference(folder / "cli.stdout", folder)["sha256"]
+        elif fault == "exit": row["exit_code"] = 15
+        elif fault == "terminal": row["terminal_observed"] = False
+        elif fault == "deadline": row["elapsed_seconds"] = 1800.001
+        elif fault == "source": row["sources_after"] = []
+    expected = closed_external_fixture(f.root, corrupt)
+    with pytest.raises(rt.BoundaryError): prep.check_acquired(f.root, expected)
+
+
+@pytest.mark.parametrize("fault", ["copy-write", "copy-corruption", "copy-deadline", "pending-write", "publish-deadline"])
+def test_closed_copy_or_publication_failure_never_admitted(closed_fixture, monkeypatch, fault):
+    f = closed_fixture; clock = Clock(); before = rt.inventory(f.source)
+    original_write, original_rename = prep.Budget.write_chunk, Path.rename
+    def write_chunk(self, out, data, **kwargs):
+        is_payload = str(out.name).endswith("commit.json")
+        if is_payload and fault == "copy-write": raise OSError("synthetic copy write failure")
+        result = original_write(self, out, b"X" * len(data) if is_payload and fault == "copy-corruption" else data, **kwargs)
+        if is_payload and fault == "copy-deadline": clock.now = 1801
+        return result
+    monkeypatch.setattr(prep.Budget, "write_chunk", write_chunk)
+    if fault == "pending-write": metadata_stream_fault(monkeypatch, "acquisition-pending.json", "write", clock)
+    def rename(path, target):
+        result = original_rename(path, target)
+        if fault == "publish-deadline" and path.name == "acquisition-pending.json": clock.now = 1801
+        return result
+    monkeypatch.setattr(Path, "rename", rename)
+    with pytest.raises((rt.BoundaryError, OSError)): closed_run(f, monkeypatch, clock)
+    assert not (f.root / "acquisition.json").exists()
+    assert (f.root / "acquisition-supervision-failure.json").exists()
+    assert rt.inventory(f.source) == before
+
+
+@pytest.mark.parametrize("fault", [None, "profile", "kind", "input", "argv", "worker-failure"])
+def test_closed_runtime_origin_is_bound_and_preserved_on_failure(tmp_path, fault):
+    clock = Clock(); ps = FakePS(tmp_path, "timeout" if fault == "worker-failure" else None); process = FakePopen(ps, clock)
+    origin = {"kind": prep.CLOSED_KIND, "input": {"path": str(tmp_path / "input.json"), "sha256": "1" * 64}}
+    env = rt.clean_environment([], tmp_path, "tmp"); env["DOCTRAIL_ACQUIRE_TOKEN"] = "synthetic"
+    argv = prep.closed_command(tmp_path, origin["input"]["path"], origin["input"]["sha256"], "synthetic")
+    profile = prep.ACQUISITION_PROFILE_1800
+    if fault == "profile": profile = prep.ACQUISITION_PROFILE
+    elif fault == "kind": origin["kind"] = "online"
+    elif fault == "input": origin["input"]["sha256"] = "2" * 64
+    elif fault == "argv": argv[3] = "_acquire-worker"
+    def sleep(seconds):
+        if fault == "worker-failure": clock.now = 1795
+        else: clock.sleep(seconds)
+    def run():
+        return rt.run_owned(argv, cwd=tmp_path, env=env, root=tmp_path, log_prefix=tmp_path / "run",
+            deadline=1800, rss=100, host=1, start=1, allowed=[tmp_path / "root.exe", tmp_path / "child.exe"], ps=ps,
+            popen=lambda *a, **k: process, clock=clock, sleeper=sleep, acquisition_profile=profile, acquisition_origin=origin)
+    if fault:
+        with pytest.raises(rt.BoundaryError): run()
+        if fault == "worker-failure":
+            record = rt.load(tmp_path / "run.json")
+            assert record["origin"] == origin and record["failure_latched"] is True
+        else: assert not (tmp_path / "run.json").exists()
+    else:
+        assert run()["origin"] == origin
+        assert rt.load(tmp_path / "run.json")["argv"] == argv
+
+
+@pytest.mark.parametrize("operation", ["verify-closed", "_verify-closed-worker"])
+@pytest.mark.parametrize("fault", [None, "profile", "missing-input", "missing-sha"])
+def test_closed_cli_dispatch_and_required_fixed_binding(tmp_path, monkeypatch, capsys, operation, fault):
+    argv = prep.closed_command(tmp_path / "new", tmp_path / "input.json", "1" * 64,
+        "token" if operation.startswith("_") else None)[2:]
+    if fault == "profile": argv[-1] = prep.ACQUISITION_PROFILE
+    if fault in {"missing-input", "missing-sha"}:
+        flag = "--closed-input" if fault == "missing-input" else "--closed-input-sha256"
+        index = argv.index(flag); del argv[index:index + 2]
+    seen = []
+    def called(*args): seen.append(args); return {"status": prep.CLOSED_STATUS}
+    monkeypatch.setattr(prep.sys, "argv", argv)
+    monkeypatch.setattr(prep, "verify_closed_worker", called)
+    monkeypatch.setattr(prep, "verify_closed_supervised", called)
+    if fault:
+        with pytest.raises(rt.BoundaryError): prep.main()
+        assert not seen
+    else:
+        prep.main()
+        assert seen == [(tmp_path / "new", tmp_path / "input.json", "1" * 64, "token") if operation.startswith("_")
+                        else (tmp_path / "new", tmp_path / "input.json", "1" * 64)]
+        assert json.loads(capsys.readouterr().out)["status"] == prep.CLOSED_STATUS
+
+
+@pytest.mark.parametrize("fault", ["hardlink", "case", "unsafe", "oversize"])
+def test_closed_file_set_alias_and_path_rejection(tmp_path, monkeypatch, fault):
+    (tmp_path / "a").write_bytes(b"data")
+    rows = [rt.reference(tmp_path / "a", tmp_path)]
+    if fault == "hardlink":
+        (tmp_path / "b").write_bytes(b"data"); rows.append(rt.reference(tmp_path / "b", tmp_path))
+        # Simulate identical file identities without requesting host hardlink privileges.
+        original = Path.lstat
+        monkeypatch.setattr(Path, "lstat", lambda p: original(tmp_path / "a") if p == tmp_path / "b" else original(p))
+    elif fault == "case": rows.append({**rows[0], "file": "A"})
+    elif fault == "unsafe": rows[0]["file"] = "../outside"
+    else: rows[0]["size_bytes"] = rt.DOWNLOAD + 1
+    with pytest.raises(rt.BoundaryError): prep.closed_scan(tmp_path, prep.closed_rows(tmp_path, rows), lambda: None)

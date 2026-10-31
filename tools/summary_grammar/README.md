@@ -51,6 +51,46 @@ hash of self-asserted JSON is not an observation. Synthetic test fixtures do not
 authorize execution. Legacy acquisition still uses the reviewed `acquisition.json`
 SHA. Internal success files alone do not establish successful v3 completion.
 
+## Explicit offline verification of a closed failed acquisition
+
+`verify-closed` verifies a separately fixed failed-origin input and copies its
+allowed payload into a new, disjoint workspace. It never resumes or changes the
+failed workspace, reuses an old success terminal, or downloads missing files.
+The implementation has focused synthetic checks and independent code review;
+actual offline execution and executable acceptance remain unverified.
+See the [implementation evidence](../../experiments/results/meetings-summary-offline-implementation-v1.json).
+
+```
+python -B scripts/prepare_summary_grammar_engine.py verify-closed --workspace _grammar-engine-offline-work --closed-input fixed-closed-input.json --closed-input-sha256 SEPARATELY_FIXED_INPUT_SHA256 --acquisition-profile llvm-x64-sampled-50ms-1800s-v1
+```
+
+This is an operator command template, not a ready-made input or execution approval.
+The input schema is `engine-verify-closed-input-v1`: `source_root`, `raw`,
+`inventory`, `failed_terminal`, `parent_closeout`, `closed_final`, `source_files`
+and `bundle`. Evidence references contain `path`, `size_bytes` and `sha256`.
+The expected input digest must be fixed separately before the run, not derived
+from an unchecked file and treated as its own approval. Current prepare/runtime/pins
+and bundle references are distinct from the failed origin's historical versions.
+
+The worker checks file sets, paths and identities, archive pins, source blobs,
+licenses and runtime bindings. LLVM/CMake publisher pins remain distinct from
+Ninja's fixed observed archive digest. Tools are copied and verified against the
+fixed inventory; this operation does not claim a fresh archive extraction.
+Network requests and new download bytes are zero; old transfer totals are origin
+metadata. The original failure, consumed once and files remain unchanged.
+
+The operation retains the 1800-second shared deadline, five-second cleanup reserve,
+4 GiB workspace limit and existing memory bounds. New worker/supervision records,
+exact argv and input digest bind the same `verified_copy_from_failed_acquisition`
+origin. Offline acceptance/terminal/custody use the distinct
+`engine-verify-closed-external-{acceptance,terminal,custody}-v1` schemas.
+`VERIFIED_COPY_UNREVIEWED_DO_NOT_EXECUTE` is not executable approval: build still
+requires the SHA of an independently reviewed external `acceptance.json` with
+successful new CLI completion, limits and custody evidence. A failed or incomplete
+offline run cannot be promoted through the legacy/online acceptance path.
+
+## Build and native validation
+
 ```
 python -B -m scripts.prepare_summary_grammar_engine build --workspace _grammar-engine-work --reviewed-acquisition-sha256 REVIEWED_SHA256
 ```

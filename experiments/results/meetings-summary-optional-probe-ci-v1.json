@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "status": "BOTH_REQUIRED_CI_PASSED",
+  "commit": "0a9819e26f4320dedc76aa3d219b52a23a5936b8",
+  "runs": {
+    "push": 41021278586,
+    "pull_request": 41021284378
+  },
+  "required_jobs": [
+    "backend",
+    "web",
+    "java-service"
+  ],
+  "all_required_jobs_passed": true,
+  "watchers_closed_exit0": true,
+  "python": {
+    "passed": 5532,
+    "skipped": 21,
+    "warnings": 2,
+    "seconds": 232.68,
+    "measurement_job": 123948926434,
+    "scope": "push backend; no new inference or weights"
+  },
+  "browser_each_run": {
+    "passed": 158,
+    "failed": 0,
+    "infra_failures": 0,
+    "startup_failures": 0,
+    "missing_specs": 0,
+    "missing_runs": 0,
+    "exit_code": 0
+  },
+  "java_http_copied_database_checks_each_run": 11,
+  "synthetic_meeting_operations": "passed against actual Java",
+  "actual_AI_quality_evaluated": false,
+  "new_acquisition_build_native_model_runs": 0,
+  "parent_receipt_sha256": "7d69b103cd4a80971aa8ec949d26a6aca89363c76edbc307d55f12ce238c073d",
+  "limitations": [
+    "CI verifies code and synthetic flows, not actual acquisition completion or AI content quality.",
+    "Actual-module metadata check remains separate local evidence.",
+    "No user review or public service deployment."
+  ]
+}
